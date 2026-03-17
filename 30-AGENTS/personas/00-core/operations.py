@@ -11,7 +11,7 @@ import sys
 import json
 from datetime import datetime
 
-class OperatorAgent:
+class OperationsAgent:
     """运营者子代理"""
     
     def __init__(self):
@@ -19,7 +19,7 @@ class OperatorAgent:
         self.role = "日常运营、监控、报告生成"
         self.model = "qwen3.5-plus"
         self.weight = 1.0
-        self.agent_id = f"operator-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        self.agent_id = f"operations-{datetime.now().strftime('%Y%m%d%H%M%S')}"
     
     def process(self, task: str, context: dict) -> dict:
         """
