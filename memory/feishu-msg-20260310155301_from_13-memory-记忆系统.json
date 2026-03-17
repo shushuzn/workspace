@@ -1,6 +1,0 @@
-{
-  "action": "send",
-  "channel": "feishu",
-  "message": "# 📊 每日简报 | 2026-03-09\n\n**生成时间:** 2026-03-10 15:50  \n**数据周期:** 2026-03-09 00:00 - 2026-03-09 23:59\n\n---\n\n## 🎯 核心指标\n\n| 指标 | 数值 | 状态 |\n|------|------|------|\n| arXiv 收集 | 0 篇 | ⚠️ |\n| 高优先级论文 | 0 篇 | -  |\n| Medium 分析 | 0 篇 | ⚠️ |\n| 深度解析 | 0 篇 | -  |\n| GitHub 提交 | 0 次 | ⚠️ |\n| 同步状态 | ❌ 检查失败：'NoneType' object has no attribute 'strip' | ⚠️ |\n\n---\n\n## 🏆 领域段位 Top 3\n\n- **#1 DeepLearning:** 黑铁 717 级\n- **#2 LLM:** 黑铁 659 级\n- **#3 mRNA:** 黑铁 658 级\n\n---\n\n## 🔥 高优先级内容\n\n- 无高优先级内容\n\n---\n\n## ⚠️ 待处理事项\n\n- 待解析论文：0 篇\n- Git 待提交：7 个文件\n\n---\n\n## 📋 详细数据\n\n- arXiv 目录：`D:\\OpenClaw\\workspace/40-arxiv/papers/2026-03-09`\n- Medium 目录：`D:\\OpenClaw\\workspace/41-medium/analyzed/2026-03-09`\n- 简报存档：`D:\\OpenClaw\\workspace\\21-reports\\daily-briefs`\n\n---\n\n*自动生成 by daily-brief.py | OpenClaw Workspace*\n",
-  "filePath": "D:\\OpenClaw\\workspace\\21-reports\\daily-briefs\\brief-2026-03-09.md"
-}

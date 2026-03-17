@@ -15,16 +15,19 @@
   3. 扫描大文件 (>50MB)
   4. 扫描敏感信息
   5. 扫描旧文件 (>90 天)
+  6. 扫描重复文件 (基于 SHA256 哈希)
 """
 
 import os
 import sys
 import io
 import json
+import hashlib
 import argparse
 import shutil
 from datetime import datetime, timedelta
 from pathlib import Path
+from collections import defaultdict
 
 # 修复 Windows 编码问题
 if sys.platform == 'win32':
@@ -264,7 +267,85 @@ def scan_sensitive_info(workspace=None):
     return sensitive_files
 
 
-def print_scan_report(empty_dirs, cache_files, large_files, old_files, sensitive_files):
+def scan_duplicate_files(workspace=None):
+    """扫描重复文件（基于文件内容哈希）"""
+    if workspace is None:
+        workspace = get_workspace()
+    
+    # 文件大小 -> 文件列表
+    size_map = defaultdict(list)
+    # 文件哈希 -> 文件列表
+    hash_map = defaultdict(list)
+    
+    print("正在计算文件哈希...")
+    
+    # 第一步：按文件大小分组
+    for root, dirs, files in os.walk(workspace):
+        # 跳过排除目录
+        rel_path = os.path.relpath(root, workspace)
+        if any(exclude in rel_path for exclude in EXCLUDE_DIRS):
+            continue
+        
+        # 跳过备份目录
+        if 'backups' in rel_path or 'backup' in rel_path:
+            continue
+        
+        for file in files:
+            file_path = os.path.join(root, file)
+            try:
+                size = os.path.getsize(file_path)
+                # 只检查 >0 的文件，跳过空文件和超大文件 (>100MB)
+                if size > 0 and size < 100 * 1024 * 1024:
+                    size_map[size].append(file_path)
+            except (OSError, IOError):
+                continue
+    
+    # 第二步：对相同大小的文件计算哈希
+    duplicate_groups = []
+    
+    for size, files in size_map.items():
+        if len(files) < 2:
+            continue
+        
+        # 这些文件大小相同，计算哈希
+        for file_path in files:
+            try:
+                file_hash = calculate_file_hash(file_path)
+                hash_map[file_hash].append({
+                    'path': file_path,
+                    'size': size,
+                    'size_mb': round(size / 1024 / 1024, 2)
+                })
+            except Exception as e:
+                continue
+    
+    # 第三步：收集重复文件组
+    for file_hash, files in hash_map.items():
+        if len(files) >= 2:
+            duplicate_groups.append({
+                'hash': file_hash,
+                'size': files[0]['size'],
+                'size_mb': files[0]['size_mb'],
+                'count': len(files),
+                'files': files
+            })
+    
+    # 按重复文件数量排序
+    duplicate_groups.sort(key=lambda x: x['count'], reverse=True)
+    
+    return duplicate_groups
+
+
+def calculate_file_hash(file_path, chunk_size=8192):
+    """计算文件 SHA256 哈希"""
+    sha256 = hashlib.sha256()
+    with open(file_path, 'rb') as f:
+        while chunk := f.read(chunk_size):
+            sha256.update(chunk)
+    return sha256.hexdigest()[:16]  # 返回前 16 位
+
+
+def print_scan_report(empty_dirs, cache_files, large_files, old_files, sensitive_files, duplicate_groups=None):
     """打印扫描报告"""
     print()
     print("=" * 70)
@@ -311,9 +392,25 @@ def print_scan_report(empty_dirs, cache_files, large_files, old_files, sensitive
     # 敏感文件
     print(f"🔒 敏感文件：{len(sensitive_files)} 个")
     if sensitive_files:
-        for f in sensitive_files:
+        for f in sensitive_files[:10]:
             print(f"   - {f['path']}")
+        if len(sensitive_files) > 10:
+            print(f"   ... 还有 {len(sensitive_files) - 10} 个")
     print()
+    
+    # 重复文件
+    if duplicate_groups:
+        total_waste = sum(g['size'] * (g['count'] - 1) for g in duplicate_groups)
+        print(f"🔄 重复文件：{len(duplicate_groups)} 组 (浪费 {round(total_waste/1024/1024, 2)} MB)")
+        for g in duplicate_groups[:10]:
+            print(f"   - {g['count']} 个相同文件 ({g['size_mb']} MB each)")
+            for f in g['files'][:3]:
+                print(f"     • {f['path']}")
+            if g['count'] > 3:
+                print(f"     ... 还有 {g['count'] - 3} 个")
+        if len(duplicate_groups) > 10:
+            print(f"   ... 还有 {len(duplicate_groups) - 10} 组")
+        print()
     
     print("=" * 70)
 
@@ -336,9 +433,10 @@ def main():
     large_files = scan_large_files()
     old_files = scan_old_files()
     sensitive_files = scan_sensitive_info()
+    duplicate_files = scan_duplicate_files()
     
     # 打印报告
-    print_scan_report(empty_dirs, cache_files, large_files, old_files, sensitive_files)
+    print_scan_report(empty_dirs, cache_files, large_files, old_files, sensitive_files, duplicate_files)
     
     # 清理模式
     if args.clean:
@@ -377,6 +475,21 @@ def main():
                     print(f"❌ 删除失败 {f['path']}: {e}")
             
             print(f"✅ 已删除 {deleted} 个缓存文件")
+            
+            # 删除重复文件 (保留每组第一个)
+            deleted = 0
+            saved_mb = 0
+            for group in duplicate_files:
+                # 保留第一个，删除其余
+                for f in group['files'][1:]:
+                    try:
+                        os.remove(f['path'])
+                        deleted += 1
+                        saved_mb += f['size_mb']
+                    except Exception as e:
+                        print(f"❌ 删除失败 {f['path']}: {e}")
+            
+            print(f"✅ 已删除 {deleted} 个重复文件 (节省 {round(saved_mb, 2)} MB)")
         else:
             print("❌ 取消清理")
     

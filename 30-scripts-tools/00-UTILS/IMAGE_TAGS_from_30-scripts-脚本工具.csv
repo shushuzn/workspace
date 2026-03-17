@@ -1,7 +1,0 @@
-FilePath,Tags,ParentTags,Description,Project,Date
-11-research/figures/GP_feature_importance.png,"特征重要性;模型分析",GP;结果，LIG 项目特征重要性分析图，LIG,2026-03-06
-11-research/figures/GP_prediction.png,"预测图;结果",GP;结果，LIG 项目 GP 模型预测结果图，LIG,2026-03-06
-11-research/figures/GP_residuals.png,"残差图;结果",GP;结果，LIG 项目 GP 模型残差分析图，LIG,2026-03-06
-11-research/cnt-research/figures/cnt_shap_feature_importance.png,"特征重要性;模型分析",SHAP;结果，CNT 项目 SHAP 特征重要性图，CNT,2026-03-06
-11-research/cnt-research/figures/cnt_shap_force_plot.png,"力图;解释",SHAP;结果，CNT 项目 SHAP 力图解释，CNT,2026-03-06
-11-research/cnt-research/figures/active_learning_r2_improvement.png,"R2 改进;主动学习",主动学习;结果，CNT 项目主动学习 R2 改进图，CNT,2026-03-06
