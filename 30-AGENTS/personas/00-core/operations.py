@@ -12,7 +12,14 @@ import json
 from datetime import datetime
 
 class OperationsAgent:
-    """运营者子代理"""
+    """运营者子代理
+    
+    核心原则:
+    1. 先询问，后执行 (除非明确授权)
+    2. 只输出必要信息 (不自动生成文件)
+    3. 拦截风险操作 (git 提交、文件写入需确认)
+    4. 最小化干扰 (用户明确需要时才行动)
+    """
     
     def __init__(self):
         self.name = "运营者"
@@ -20,6 +27,8 @@ class OperationsAgent:
         self.model = "qwen3.5-plus"
         self.weight = 1.0
         self.agent_id = f"operations-{datetime.now().strftime('%Y%m%d%H%M%S')}"
+        self.auto_write = False  # 默认不自动写文件
+        self.auto_commit = False  # 默认不自动 git 提交
     
     def process(self, task: str, context: dict) -> dict:
         """
