@@ -1,8 +1,0 @@
-{
-  "app_id": "cli_a93a6936eff81bcd",
-  "app_secret": "vWIWGFZPYBi6clKb1IV5JfDGnWrT1bra",
-  "receive_id_type": "open_id",
-  "default_receive_id": "ou_72a847b95fc25870dcdd8ce56d929252",
-  "token_cache_file": "feishu-token-cache.json",
-  "token_refresh_before_expiry": 300
-}
