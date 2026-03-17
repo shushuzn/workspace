@@ -3,9 +3,9 @@
     "aliyun-codingplan:qwen3.5-plus": {
       "provider_id": "aliyun-codingplan",
       "model_name": "qwen3.5-plus",
-      "prompt_tokens": 13079220,
-      "completion_tokens": 107264,
-      "call_count": 225
+      "prompt_tokens": 13276905,
+      "completion_tokens": 107984,
+      "call_count": 232
     }
   }
 }

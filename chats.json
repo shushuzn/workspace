@@ -19,6 +19,16 @@
       "session_id": "1773759636466",
       "updated_at": "2026-03-17T15:10:18.764224Z",
       "user_id": "default"
+    },
+    {
+      "channel": "console",
+      "created_at": "2026-03-17T15:17:13.231199Z",
+      "id": "859874d2-96b2-49cd-a288-767c7c293152",
+      "meta": {},
+      "name": "你的工作站在哪",
+      "session_id": "1773760627969",
+      "updated_at": "2026-03-17T15:17:17.461488Z",
+      "user_id": "default"
     }
   ],
   "version": 1
