@@ -1,0 +1,14 @@
+{
+  "name": "Feishu-UI-Sync",
+  "description": "飞书 ↔ Control UI 消息同步",
+  "schedule": {
+    "kind": "every",
+    "everyMs": 30000
+  },
+  "payload": {
+    "kind": "systemEvent",
+    "text": "feishu-ui-sync: 执行消息同步"
+  },
+  "sessionTarget": "main",
+  "enabled": true
+}

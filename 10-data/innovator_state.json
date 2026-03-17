@@ -1,0 +1,32 @@
+{
+  "total_innovations": 0,
+  "breakthrough_count": 0,
+  "major_count": 0,
+  "minor_count": 0,
+  "auto_executed": 0,
+  "manual_approved": 0,
+  "rejected": 0,
+  "average_impact": 0.0,
+  "average_roi": 0.0,
+  "last_scan": "2026-03-16T12:23:20.562892",
+  "opportunities_queue": [
+    {
+      "id": "OPP-001",
+      "title": "超大规模工具整合",
+      "description": "检测到 137 个工具！建议创建分层编排系统",
+      "type": "breakthrough",
+      "impact_score": 95,
+      "confidence": 0.95,
+      "effort_hours": 8.0,
+      "roi_score": 100,
+      "patterns_matched": [
+        "INNOVATOR-092",
+        "NEW-PATTERN"
+      ],
+      "files_affected": [],
+      "detected_at": "2026-03-16T12:23:20.555025",
+      "status": "detected"
+    }
+  ],
+  "active_patterns": []
+}

@@ -1,0 +1,53 @@
+{
+  "relationships": [
+    {
+      "source": "A",
+      "target": "B",
+      "type": "related_to",
+      "strength": 0.9,
+      "evidence": "observation",
+      "timestamp": "2026-03-16T01:59:41.924435"
+    },
+    {
+      "source": "B",
+      "target": "C",
+      "type": "related_to",
+      "strength": 0.8,
+      "evidence": "observation",
+      "timestamp": "2026-03-16T01:59:41.924435"
+    },
+    {
+      "source": "A",
+      "target": "D",
+      "type": "influences",
+      "strength": 0.7,
+      "evidence": "study",
+      "timestamp": "2026-03-16T01:59:41.924435"
+    },
+    {
+      "source": "X",
+      "target": "Y",
+      "type": "collaborates_with",
+      "strength": 0.95,
+      "evidence": "paper",
+      "timestamp": "2026-03-16T01:59:41.924435"
+    },
+    {
+      "source": "P",
+      "target": "Q",
+      "type": "causes",
+      "strength": 0.8,
+      "evidence": "study1",
+      "timestamp": "2026-03-16T01:59:41.924435"
+    },
+    {
+      "source": "P",
+      "target": "Q",
+      "type": "prevents",
+      "strength": 0.6,
+      "evidence": "study2",
+      "timestamp": "2026-03-16T01:59:41.924435"
+    }
+  ],
+  "last_updated": "2026-03-16T01:59:41.933652"
+}

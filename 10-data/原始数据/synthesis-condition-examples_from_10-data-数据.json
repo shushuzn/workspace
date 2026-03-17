@@ -1,0 +1,134 @@
+[
+  {
+    "material_name": "LiFePO4",
+    "target_formula": "LiFePO4",
+    "method": "solid-state reaction (固相反应)",
+    "precursors": [],
+    "steps": [
+      {
+        "step_number": 1,
+        "operation": "mix",
+        "temperature": 2.0,
+        "time": 12.0,
+        "atmosphere": null,
+        "atmosphere_type": null,
+        "pressure": null,
+        "heating_rate": null,
+        "cooling_method": null,
+        "description": "The precursors Li2CO3, FeC2O4·2H2O, and NH4H2PO4 were mixed and ball-milled for 12 hours"
+      },
+      {
+        "step_number": 2,
+        "operation": "mix",
+        "temperature": 700.0,
+        "time": 12.0,
+        "atmosphere": "argon",
+        "atmosphere_type": "inert",
+        "pressure": null,
+        "heating_rate": null,
+        "cooling_method": null,
+        "description": "The mixture was heated to 700°C for 12 hours in argon atmosphere, then furnace-cooled to room temperature"
+      }
+    ],
+    "total_time": 24.0,
+    "max_temperature": 700.0,
+    "yield_percent": null,
+    "notes": null
+  },
+  {
+    "material_name": "TiO2",
+    "target_formula": "TiO2",
+    "method": "hydrothermal (水热法)",
+    "precursors": [],
+    "steps": [
+      {
+        "step_number": 1,
+        "operation": "mix",
+        "temperature": null,
+        "time": 2.0,
+        "atmosphere": null,
+        "atmosphere_type": null,
+        "pressure": null,
+        "heating_rate": null,
+        "cooling_method": null,
+        "description": "Titanium isopropoxide was dissolved in ethanol and stirred for 2 hours"
+      },
+      {
+        "step_number": 2,
+        "operation": "heat",
+        "temperature": 180.0,
+        "time": 24.0,
+        "atmosphere": null,
+        "atmosphere_type": null,
+        "pressure": null,
+        "heating_rate": null,
+        "cooling_method": null,
+        "description": "The solution was heated at 180°C for 24 hours in a Teflon-lined autoclave"
+      }
+    ],
+    "total_time": 26.0,
+    "max_temperature": 180.0,
+    "yield_percent": null,
+    "notes": null
+  },
+  {
+    "material_name": "BaTiO3",
+    "target_formula": "BaTiO3",
+    "method": "sol-gel (溶胶 - 凝胶)",
+    "precursors": [],
+    "steps": [
+      {
+        "step_number": 1,
+        "operation": "mix",
+        "temperature": null,
+        "time": null,
+        "atmosphere": null,
+        "atmosphere_type": null,
+        "pressure": null,
+        "heating_rate": null,
+        "cooling_method": null,
+        "description": "Barium acetate and titanium isopropoxide were mixed with molar ratio 1:1"
+      },
+      {
+        "step_number": 2,
+        "operation": "heat",
+        "temperature": 80.0,
+        "time": 4.0,
+        "atmosphere": "air",
+        "atmosphere_type": "air",
+        "pressure": null,
+        "heating_rate": null,
+        "cooling_method": null,
+        "description": "The gel was dried at 80°C and calcined at 800°C for 4 hours in air"
+      }
+    ],
+    "total_time": 4.0,
+    "max_temperature": 80.0,
+    "yield_percent": null,
+    "notes": null
+  },
+  {
+    "material_name": "LiCoO2",
+    "target_formula": "LiCoO2",
+    "method": "solid-state reaction (固相反应)",
+    "precursors": [],
+    "steps": [
+      {
+        "step_number": 1,
+        "operation": "mix",
+        "temperature": 2.0,
+        "time": null,
+        "atmosphere": null,
+        "atmosphere_type": null,
+        "pressure": null,
+        "heating_rate": null,
+        "cooling_method": null,
+        "description": "将 Li2CO3 和 Co3O4 按化学计量比混合，在 900°C 下烧结 24 小时，气氛为氧气"
+      }
+    ],
+    "total_time": null,
+    "max_temperature": 2.0,
+    "yield_percent": null,
+    "notes": null
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "DefaultLocation": "Beijing",
+  "DefaultFormat": "0",
+  "DefaultLanguage": "zh",
+  "CacheTTL": 1800,
+  "Timeout": 10,
+  "MaxRetries": 3,
+  "AutoDetect": true
+}

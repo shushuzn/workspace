@@ -1,0 +1,5002 @@
+[
+  {
+    "id": "hw_eq_000",
+    "latex": "V = IR",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_000.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574893"
+  },
+  {
+    "id": "hw_eq_001",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_001.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574924"
+  },
+  {
+    "id": "hw_eq_002",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_002.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574928"
+  },
+  {
+    "id": "hw_eq_003",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_003.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574933"
+  },
+  {
+    "id": "hw_eq_004",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_004.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574935"
+  },
+  {
+    "id": "hw_eq_005",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_005.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574937"
+  },
+  {
+    "id": "hw_eq_006",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_006.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574939"
+  },
+  {
+    "id": "hw_eq_007",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_007.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574941"
+  },
+  {
+    "id": "hw_eq_008",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_008.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574943"
+  },
+  {
+    "id": "hw_eq_009",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_009.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574945"
+  },
+  {
+    "id": "hw_eq_010",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_010.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574947"
+  },
+  {
+    "id": "hw_eq_011",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_011.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574949"
+  },
+  {
+    "id": "hw_eq_012",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_012.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574951"
+  },
+  {
+    "id": "hw_eq_013",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_013.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574953"
+  },
+  {
+    "id": "hw_eq_014",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_014.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574956"
+  },
+  {
+    "id": "hw_eq_015",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_015.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574958"
+  },
+  {
+    "id": "hw_eq_016",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_016.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574960"
+  },
+  {
+    "id": "hw_eq_017",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_017.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574962"
+  },
+  {
+    "id": "hw_eq_018",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_018.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574965"
+  },
+  {
+    "id": "hw_eq_019",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_019.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574967"
+  },
+  {
+    "id": "hw_eq_020",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_020.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574969"
+  },
+  {
+    "id": "hw_eq_021",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_021.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574971"
+  },
+  {
+    "id": "hw_eq_022",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_022.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574973"
+  },
+  {
+    "id": "hw_eq_023",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_023.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574974"
+  },
+  {
+    "id": "hw_eq_024",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_024.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574976"
+  },
+  {
+    "id": "hw_eq_025",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_025.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574979"
+  },
+  {
+    "id": "hw_eq_026",
+    "latex": "V = IR",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_026.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574980"
+  },
+  {
+    "id": "hw_eq_027",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_027.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574982"
+  },
+  {
+    "id": "hw_eq_028",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_028.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574984"
+  },
+  {
+    "id": "hw_eq_029",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_029.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574986"
+  },
+  {
+    "id": "hw_eq_030",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_030.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574988"
+  },
+  {
+    "id": "hw_eq_031",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_031.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574990"
+  },
+  {
+    "id": "hw_eq_032",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_032.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574992"
+  },
+  {
+    "id": "hw_eq_033",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_033.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574994"
+  },
+  {
+    "id": "hw_eq_034",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_034.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574995"
+  },
+  {
+    "id": "hw_eq_035",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_035.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.574998"
+  },
+  {
+    "id": "hw_eq_036",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_036.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575000"
+  },
+  {
+    "id": "hw_eq_037",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_037.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575002"
+  },
+  {
+    "id": "hw_eq_038",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_038.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575005"
+  },
+  {
+    "id": "hw_eq_039",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_039.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575007"
+  },
+  {
+    "id": "hw_eq_040",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_040.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575009"
+  },
+  {
+    "id": "hw_eq_041",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_041.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575011"
+  },
+  {
+    "id": "hw_eq_042",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_042.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575013"
+  },
+  {
+    "id": "hw_eq_043",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_043.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575015"
+  },
+  {
+    "id": "hw_eq_044",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_044.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575017"
+  },
+  {
+    "id": "hw_eq_045",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_045.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575018"
+  },
+  {
+    "id": "hw_eq_046",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_046.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575020"
+  },
+  {
+    "id": "hw_eq_047",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_047.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575022"
+  },
+  {
+    "id": "hw_eq_048",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_048.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575024"
+  },
+  {
+    "id": "hw_eq_049",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_049.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575026"
+  },
+  {
+    "id": "hw_eq_050",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_050.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575028"
+  },
+  {
+    "id": "hw_eq_051",
+    "latex": "V = IR",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_051.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575029"
+  },
+  {
+    "id": "hw_eq_052",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_052.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575031"
+  },
+  {
+    "id": "hw_eq_053",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_053.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575033"
+  },
+  {
+    "id": "hw_eq_054",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_054.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575036"
+  },
+  {
+    "id": "hw_eq_055",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_055.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575038"
+  },
+  {
+    "id": "hw_eq_056",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_056.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575040"
+  },
+  {
+    "id": "hw_eq_057",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_057.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575044"
+  },
+  {
+    "id": "hw_eq_058",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_058.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575046"
+  },
+  {
+    "id": "hw_eq_059",
+    "latex": "V = IR",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_059.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575048"
+  },
+  {
+    "id": "hw_eq_060",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_060.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575049"
+  },
+  {
+    "id": "hw_eq_061",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_061.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575051"
+  },
+  {
+    "id": "hw_eq_062",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_062.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575053"
+  },
+  {
+    "id": "hw_eq_063",
+    "latex": "V = IR",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_063.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575055"
+  },
+  {
+    "id": "hw_eq_064",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_064.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575057"
+  },
+  {
+    "id": "hw_eq_065",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_065.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575059"
+  },
+  {
+    "id": "hw_eq_066",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_066.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575061"
+  },
+  {
+    "id": "hw_eq_067",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_067.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575063"
+  },
+  {
+    "id": "hw_eq_068",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_068.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575065"
+  },
+  {
+    "id": "hw_eq_069",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_069.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575067"
+  },
+  {
+    "id": "hw_eq_070",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_070.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575069"
+  },
+  {
+    "id": "hw_eq_071",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_071.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575070"
+  },
+  {
+    "id": "hw_eq_072",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_072.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575072"
+  },
+  {
+    "id": "hw_eq_073",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_073.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575074"
+  },
+  {
+    "id": "hw_eq_074",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_074.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575076"
+  },
+  {
+    "id": "hw_eq_075",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_075.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575078"
+  },
+  {
+    "id": "hw_eq_076",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_076.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575080"
+  },
+  {
+    "id": "hw_eq_077",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_077.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575084"
+  },
+  {
+    "id": "hw_eq_078",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_078.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575087"
+  },
+  {
+    "id": "hw_eq_079",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_079.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575089"
+  },
+  {
+    "id": "hw_eq_080",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_080.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575091"
+  },
+  {
+    "id": "hw_eq_081",
+    "latex": "V = IR",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_081.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575093"
+  },
+  {
+    "id": "hw_eq_082",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_082.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575095"
+  },
+  {
+    "id": "hw_eq_083",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_083.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575097"
+  },
+  {
+    "id": "hw_eq_084",
+    "latex": "R = \\rho \\frac{L}{A}",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_084.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575099"
+  },
+  {
+    "id": "hw_eq_085",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_085.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575101"
+  },
+  {
+    "id": "hw_eq_086",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_086.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575102"
+  },
+  {
+    "id": "hw_eq_087",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_087.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575104"
+  },
+  {
+    "id": "hw_eq_088",
+    "latex": "P = VI",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_088.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575106"
+  },
+  {
+    "id": "hw_eq_089",
+    "latex": "L = \\mu \\frac{N^2 A}{l}",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_089.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575108"
+  },
+  {
+    "id": "hw_eq_090",
+    "latex": "V = IR",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_090.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575110"
+  },
+  {
+    "id": "hw_eq_091",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_091.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575112"
+  },
+  {
+    "id": "hw_eq_092",
+    "latex": "V = IR",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_092.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575114"
+  },
+  {
+    "id": "hw_eq_093",
+    "latex": "J = \\sigma E",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_093.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575116"
+  },
+  {
+    "id": "hw_eq_094",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_094.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575118"
+  },
+  {
+    "id": "hw_eq_095",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_095.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575120"
+  },
+  {
+    "id": "hw_eq_096",
+    "latex": "V = IR",
+    "category": "physics",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_096.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575123"
+  },
+  {
+    "id": "hw_eq_097",
+    "latex": "F = ma",
+    "category": "physics",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_097.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575125"
+  },
+  {
+    "id": "hw_eq_098",
+    "latex": "E = mc^2",
+    "category": "physics",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_098.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575127"
+  },
+  {
+    "id": "hw_eq_099",
+    "latex": "C = \\varepsilon \\frac{A}{d}",
+    "category": "physics",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_099.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575130"
+  },
+  {
+    "id": "hw_eq_100",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_100.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575133"
+  },
+  {
+    "id": "hw_eq_101",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_101.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575135"
+  },
+  {
+    "id": "hw_eq_102",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_102.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575137"
+  },
+  {
+    "id": "hw_eq_103",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_103.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575139"
+  },
+  {
+    "id": "hw_eq_104",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_104.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575141"
+  },
+  {
+    "id": "hw_eq_105",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_105.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575143"
+  },
+  {
+    "id": "hw_eq_106",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_106.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575146"
+  },
+  {
+    "id": "hw_eq_107",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_107.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575149"
+  },
+  {
+    "id": "hw_eq_108",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_108.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575151"
+  },
+  {
+    "id": "hw_eq_109",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_109.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575154"
+  },
+  {
+    "id": "hw_eq_110",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_110.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575156"
+  },
+  {
+    "id": "hw_eq_111",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_111.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575158"
+  },
+  {
+    "id": "hw_eq_112",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_112.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575160"
+  },
+  {
+    "id": "hw_eq_113",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_113.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575161"
+  },
+  {
+    "id": "hw_eq_114",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_114.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575163"
+  },
+  {
+    "id": "hw_eq_115",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_115.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575165"
+  },
+  {
+    "id": "hw_eq_116",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_116.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575169"
+  },
+  {
+    "id": "hw_eq_117",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_117.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575171"
+  },
+  {
+    "id": "hw_eq_118",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_118.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575173"
+  },
+  {
+    "id": "hw_eq_119",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_119.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575174"
+  },
+  {
+    "id": "hw_eq_120",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_120.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575177"
+  },
+  {
+    "id": "hw_eq_121",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_121.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575179"
+  },
+  {
+    "id": "hw_eq_122",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_122.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575181"
+  },
+  {
+    "id": "hw_eq_123",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_123.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575183"
+  },
+  {
+    "id": "hw_eq_124",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_124.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575185"
+  },
+  {
+    "id": "hw_eq_125",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_125.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575187"
+  },
+  {
+    "id": "hw_eq_126",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_126.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575189"
+  },
+  {
+    "id": "hw_eq_127",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_127.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575191"
+  },
+  {
+    "id": "hw_eq_128",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_128.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575192"
+  },
+  {
+    "id": "hw_eq_129",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_129.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575195"
+  },
+  {
+    "id": "hw_eq_130",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_130.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575197"
+  },
+  {
+    "id": "hw_eq_131",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_131.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575199"
+  },
+  {
+    "id": "hw_eq_132",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_132.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575201"
+  },
+  {
+    "id": "hw_eq_133",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_133.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575202"
+  },
+  {
+    "id": "hw_eq_134",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_134.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575204"
+  },
+  {
+    "id": "hw_eq_135",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_135.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575207"
+  },
+  {
+    "id": "hw_eq_136",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_136.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575209"
+  },
+  {
+    "id": "hw_eq_137",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_137.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575211"
+  },
+  {
+    "id": "hw_eq_138",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_138.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575213"
+  },
+  {
+    "id": "hw_eq_139",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_139.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575215"
+  },
+  {
+    "id": "hw_eq_140",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_140.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575217"
+  },
+  {
+    "id": "hw_eq_141",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_141.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575219"
+  },
+  {
+    "id": "hw_eq_142",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_142.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575222"
+  },
+  {
+    "id": "hw_eq_143",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_143.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575224"
+  },
+  {
+    "id": "hw_eq_144",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_144.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575225"
+  },
+  {
+    "id": "hw_eq_145",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_145.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575227"
+  },
+  {
+    "id": "hw_eq_146",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_146.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575229"
+  },
+  {
+    "id": "hw_eq_147",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_147.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575231"
+  },
+  {
+    "id": "hw_eq_148",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_148.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575233"
+  },
+  {
+    "id": "hw_eq_149",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_149.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575235"
+  },
+  {
+    "id": "hw_eq_150",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_150.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575237"
+  },
+  {
+    "id": "hw_eq_151",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_151.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575239"
+  },
+  {
+    "id": "hw_eq_152",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_152.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575240"
+  },
+  {
+    "id": "hw_eq_153",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_153.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575242"
+  },
+  {
+    "id": "hw_eq_154",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_154.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575244"
+  },
+  {
+    "id": "hw_eq_155",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_155.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575247"
+  },
+  {
+    "id": "hw_eq_156",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_156.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575250"
+  },
+  {
+    "id": "hw_eq_157",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_157.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575252"
+  },
+  {
+    "id": "hw_eq_158",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_158.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575254"
+  },
+  {
+    "id": "hw_eq_159",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_159.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575256"
+  },
+  {
+    "id": "hw_eq_160",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_160.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575257"
+  },
+  {
+    "id": "hw_eq_161",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_161.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575259"
+  },
+  {
+    "id": "hw_eq_162",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_162.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575261"
+  },
+  {
+    "id": "hw_eq_163",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_163.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575264"
+  },
+  {
+    "id": "hw_eq_164",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_164.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575266"
+  },
+  {
+    "id": "hw_eq_165",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_165.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575268"
+  },
+  {
+    "id": "hw_eq_166",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_166.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575270"
+  },
+  {
+    "id": "hw_eq_167",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_167.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575272"
+  },
+  {
+    "id": "hw_eq_168",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_168.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575274"
+  },
+  {
+    "id": "hw_eq_169",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_169.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575276"
+  },
+  {
+    "id": "hw_eq_170",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_170.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575278"
+  },
+  {
+    "id": "hw_eq_171",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_171.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575280"
+  },
+  {
+    "id": "hw_eq_172",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_172.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575282"
+  },
+  {
+    "id": "hw_eq_173",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_173.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575284"
+  },
+  {
+    "id": "hw_eq_174",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_174.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575286"
+  },
+  {
+    "id": "hw_eq_175",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_175.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575289"
+  },
+  {
+    "id": "hw_eq_176",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_176.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575290"
+  },
+  {
+    "id": "hw_eq_177",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_177.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575292"
+  },
+  {
+    "id": "hw_eq_178",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_178.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575294"
+  },
+  {
+    "id": "hw_eq_179",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_179.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575296"
+  },
+  {
+    "id": "hw_eq_180",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_180.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575298"
+  },
+  {
+    "id": "hw_eq_181",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_181.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575300"
+  },
+  {
+    "id": "hw_eq_182",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_182.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575302"
+  },
+  {
+    "id": "hw_eq_183",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_183.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575304"
+  },
+  {
+    "id": "hw_eq_184",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_184.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575307"
+  },
+  {
+    "id": "hw_eq_185",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_185.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575309"
+  },
+  {
+    "id": "hw_eq_186",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_186.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575311"
+  },
+  {
+    "id": "hw_eq_187",
+    "latex": "pH = -\\log[H^+]",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_187.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575313"
+  },
+  {
+    "id": "hw_eq_188",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_188.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575315"
+  },
+  {
+    "id": "hw_eq_189",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_189.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575317"
+  },
+  {
+    "id": "hw_eq_190",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_190.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575319"
+  },
+  {
+    "id": "hw_eq_191",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_191.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575321"
+  },
+  {
+    "id": "hw_eq_192",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_192.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575323"
+  },
+  {
+    "id": "hw_eq_193",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_193.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575324"
+  },
+  {
+    "id": "hw_eq_194",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_194.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575327"
+  },
+  {
+    "id": "hw_eq_195",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_195.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575504"
+  },
+  {
+    "id": "hw_eq_196",
+    "latex": "PV = nRT",
+    "category": "chemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_196.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575507"
+  },
+  {
+    "id": "hw_eq_197",
+    "latex": "\\Delta G = \\Delta H - T\\Delta S",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_197.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575509"
+  },
+  {
+    "id": "hw_eq_198",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_198.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575511"
+  },
+  {
+    "id": "hw_eq_199",
+    "latex": "K_{eq} = \\frac{[C]^c[D]^d}{[A]^a[B]^b}",
+    "category": "chemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_199.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575513"
+  },
+  {
+    "id": "hw_eq_200",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_200.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575516"
+  },
+  {
+    "id": "hw_eq_201",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_201.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575519"
+  },
+  {
+    "id": "hw_eq_202",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_202.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575521"
+  },
+  {
+    "id": "hw_eq_203",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_203.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575523"
+  },
+  {
+    "id": "hw_eq_204",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_204.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575525"
+  },
+  {
+    "id": "hw_eq_205",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_205.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575528"
+  },
+  {
+    "id": "hw_eq_206",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_206.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575530"
+  },
+  {
+    "id": "hw_eq_207",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_207.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575533"
+  },
+  {
+    "id": "hw_eq_208",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_208.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575535"
+  },
+  {
+    "id": "hw_eq_209",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_209.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575537"
+  },
+  {
+    "id": "hw_eq_210",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_210.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575539"
+  },
+  {
+    "id": "hw_eq_211",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_211.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575541"
+  },
+  {
+    "id": "hw_eq_212",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_212.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575543"
+  },
+  {
+    "id": "hw_eq_213",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_213.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575546"
+  },
+  {
+    "id": "hw_eq_214",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_214.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575548"
+  },
+  {
+    "id": "hw_eq_215",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_215.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575550"
+  },
+  {
+    "id": "hw_eq_216",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_216.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575551"
+  },
+  {
+    "id": "hw_eq_217",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_217.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575553"
+  },
+  {
+    "id": "hw_eq_218",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_218.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575555"
+  },
+  {
+    "id": "hw_eq_219",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_219.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575557"
+  },
+  {
+    "id": "hw_eq_220",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_220.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575559"
+  },
+  {
+    "id": "hw_eq_221",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_221.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575561"
+  },
+  {
+    "id": "hw_eq_222",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_222.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575563"
+  },
+  {
+    "id": "hw_eq_223",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_223.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575565"
+  },
+  {
+    "id": "hw_eq_224",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_224.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575566"
+  },
+  {
+    "id": "hw_eq_225",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_225.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575568"
+  },
+  {
+    "id": "hw_eq_226",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_226.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575570"
+  },
+  {
+    "id": "hw_eq_227",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_227.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575573"
+  },
+  {
+    "id": "hw_eq_228",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_228.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575575"
+  },
+  {
+    "id": "hw_eq_229",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_229.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575577"
+  },
+  {
+    "id": "hw_eq_230",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_230.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575579"
+  },
+  {
+    "id": "hw_eq_231",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_231.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575581"
+  },
+  {
+    "id": "hw_eq_232",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_232.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575583"
+  },
+  {
+    "id": "hw_eq_233",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_233.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575587"
+  },
+  {
+    "id": "hw_eq_234",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_234.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575589"
+  },
+  {
+    "id": "hw_eq_235",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_235.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575590"
+  },
+  {
+    "id": "hw_eq_236",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_236.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575592"
+  },
+  {
+    "id": "hw_eq_237",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_237.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575594"
+  },
+  {
+    "id": "hw_eq_238",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_238.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575596"
+  },
+  {
+    "id": "hw_eq_239",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_239.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575598"
+  },
+  {
+    "id": "hw_eq_240",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_240.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575600"
+  },
+  {
+    "id": "hw_eq_241",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_241.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575602"
+  },
+  {
+    "id": "hw_eq_242",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_242.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575604"
+  },
+  {
+    "id": "hw_eq_243",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_243.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575606"
+  },
+  {
+    "id": "hw_eq_244",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_244.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575608"
+  },
+  {
+    "id": "hw_eq_245",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_245.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575610"
+  },
+  {
+    "id": "hw_eq_246",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_246.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575612"
+  },
+  {
+    "id": "hw_eq_247",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_247.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575613"
+  },
+  {
+    "id": "hw_eq_248",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_248.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575617"
+  },
+  {
+    "id": "hw_eq_249",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_249.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575619"
+  },
+  {
+    "id": "hw_eq_250",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_250.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575621"
+  },
+  {
+    "id": "hw_eq_251",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_251.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575623"
+  },
+  {
+    "id": "hw_eq_252",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_252.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575626"
+  },
+  {
+    "id": "hw_eq_253",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_253.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575628"
+  },
+  {
+    "id": "hw_eq_254",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_254.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575630"
+  },
+  {
+    "id": "hw_eq_255",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_255.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575632"
+  },
+  {
+    "id": "hw_eq_256",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_256.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575634"
+  },
+  {
+    "id": "hw_eq_257",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_257.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575636"
+  },
+  {
+    "id": "hw_eq_258",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_258.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575639"
+  },
+  {
+    "id": "hw_eq_259",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_259.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575641"
+  },
+  {
+    "id": "hw_eq_260",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_260.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575643"
+  },
+  {
+    "id": "hw_eq_261",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_261.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575645"
+  },
+  {
+    "id": "hw_eq_262",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_262.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575647"
+  },
+  {
+    "id": "hw_eq_263",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_263.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575649"
+  },
+  {
+    "id": "hw_eq_264",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_264.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575651"
+  },
+  {
+    "id": "hw_eq_265",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_265.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575653"
+  },
+  {
+    "id": "hw_eq_266",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_266.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575655"
+  },
+  {
+    "id": "hw_eq_267",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_267.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575657"
+  },
+  {
+    "id": "hw_eq_268",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_268.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575658"
+  },
+  {
+    "id": "hw_eq_269",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_269.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575662"
+  },
+  {
+    "id": "hw_eq_270",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_270.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575664"
+  },
+  {
+    "id": "hw_eq_271",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_271.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575666"
+  },
+  {
+    "id": "hw_eq_272",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_272.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575669"
+  },
+  {
+    "id": "hw_eq_273",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_273.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575671"
+  },
+  {
+    "id": "hw_eq_274",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_274.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575673"
+  },
+  {
+    "id": "hw_eq_275",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_275.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575675"
+  },
+  {
+    "id": "hw_eq_276",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_276.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575677"
+  },
+  {
+    "id": "hw_eq_277",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_277.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575679"
+  },
+  {
+    "id": "hw_eq_278",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_278.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575681"
+  },
+  {
+    "id": "hw_eq_279",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_279.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575683"
+  },
+  {
+    "id": "hw_eq_280",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_280.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575685"
+  },
+  {
+    "id": "hw_eq_281",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_281.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575687"
+  },
+  {
+    "id": "hw_eq_282",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_282.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575689"
+  },
+  {
+    "id": "hw_eq_283",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_283.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575691"
+  },
+  {
+    "id": "hw_eq_284",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_284.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575693"
+  },
+  {
+    "id": "hw_eq_285",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_285.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575695"
+  },
+  {
+    "id": "hw_eq_286",
+    "latex": "\\sum_{i=1}^n i = \\frac{n(n+1)}{2}",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_286.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575697"
+  },
+  {
+    "id": "hw_eq_287",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_287.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575699"
+  },
+  {
+    "id": "hw_eq_288",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_288.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575700"
+  },
+  {
+    "id": "hw_eq_289",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_289.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575702"
+  },
+  {
+    "id": "hw_eq_290",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_290.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575705"
+  },
+  {
+    "id": "hw_eq_291",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_291.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575709"
+  },
+  {
+    "id": "hw_eq_292",
+    "latex": "\\int_a^b f(x)dx",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_292.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575711"
+  },
+  {
+    "id": "hw_eq_293",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_293.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575713"
+  },
+  {
+    "id": "hw_eq_294",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_294.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575715"
+  },
+  {
+    "id": "hw_eq_295",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_295.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575717"
+  },
+  {
+    "id": "hw_eq_296",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_296.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575718"
+  },
+  {
+    "id": "hw_eq_297",
+    "latex": "\\frac{d}{dx}x^n = nx^{n-1}",
+    "category": "math",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_297.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575720"
+  },
+  {
+    "id": "hw_eq_298",
+    "latex": "\\sin^2\\theta + \\cos^2\\theta = 1",
+    "category": "math",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_298.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575724"
+  },
+  {
+    "id": "hw_eq_299",
+    "latex": "e^{i\\pi} + 1 = 0",
+    "category": "math",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_299.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575726"
+  },
+  {
+    "id": "hw_eq_300",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_300.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575728"
+  },
+  {
+    "id": "hw_eq_301",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_301.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575729"
+  },
+  {
+    "id": "hw_eq_302",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_302.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575731"
+  },
+  {
+    "id": "hw_eq_303",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_303.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575733"
+  },
+  {
+    "id": "hw_eq_304",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_304.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575735"
+  },
+  {
+    "id": "hw_eq_305",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_305.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575737"
+  },
+  {
+    "id": "hw_eq_306",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_306.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575739"
+  },
+  {
+    "id": "hw_eq_307",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_307.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575741"
+  },
+  {
+    "id": "hw_eq_308",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_308.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575743"
+  },
+  {
+    "id": "hw_eq_309",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_309.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575745"
+  },
+  {
+    "id": "hw_eq_310",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_310.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575748"
+  },
+  {
+    "id": "hw_eq_311",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_311.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575752"
+  },
+  {
+    "id": "hw_eq_312",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_312.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575754"
+  },
+  {
+    "id": "hw_eq_313",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_313.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575757"
+  },
+  {
+    "id": "hw_eq_314",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_314.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575759"
+  },
+  {
+    "id": "hw_eq_315",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_315.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575761"
+  },
+  {
+    "id": "hw_eq_316",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_316.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575762"
+  },
+  {
+    "id": "hw_eq_317",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_317.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575764"
+  },
+  {
+    "id": "hw_eq_318",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_318.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575766"
+  },
+  {
+    "id": "hw_eq_319",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_319.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575768"
+  },
+  {
+    "id": "hw_eq_320",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_320.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575770"
+  },
+  {
+    "id": "hw_eq_321",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_321.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575772"
+  },
+  {
+    "id": "hw_eq_322",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_322.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575774"
+  },
+  {
+    "id": "hw_eq_323",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_323.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575775"
+  },
+  {
+    "id": "hw_eq_324",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_324.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575777"
+  },
+  {
+    "id": "hw_eq_325",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_325.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575779"
+  },
+  {
+    "id": "hw_eq_326",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_326.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575781"
+  },
+  {
+    "id": "hw_eq_327",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_327.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575783"
+  },
+  {
+    "id": "hw_eq_328",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_328.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575785"
+  },
+  {
+    "id": "hw_eq_329",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_329.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575786"
+  },
+  {
+    "id": "hw_eq_330",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_330.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575789"
+  },
+  {
+    "id": "hw_eq_331",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_331.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575791"
+  },
+  {
+    "id": "hw_eq_332",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_332.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575793"
+  },
+  {
+    "id": "hw_eq_333",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_333.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575796"
+  },
+  {
+    "id": "hw_eq_334",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_334.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575798"
+  },
+  {
+    "id": "hw_eq_335",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_335.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575800"
+  },
+  {
+    "id": "hw_eq_336",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_336.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575802"
+  },
+  {
+    "id": "hw_eq_337",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_337.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575804"
+  },
+  {
+    "id": "hw_eq_338",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_338.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575805"
+  },
+  {
+    "id": "hw_eq_339",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_339.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575807"
+  },
+  {
+    "id": "hw_eq_340",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_340.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575809"
+  },
+  {
+    "id": "hw_eq_341",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_341.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575811"
+  },
+  {
+    "id": "hw_eq_342",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_342.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575813"
+  },
+  {
+    "id": "hw_eq_343",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_343.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575815"
+  },
+  {
+    "id": "hw_eq_344",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_344.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575816"
+  },
+  {
+    "id": "hw_eq_345",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_345.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575818"
+  },
+  {
+    "id": "hw_eq_346",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_346.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575820"
+  },
+  {
+    "id": "hw_eq_347",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_347.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575822"
+  },
+  {
+    "id": "hw_eq_348",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_348.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575824"
+  },
+  {
+    "id": "hw_eq_349",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_349.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575826"
+  },
+  {
+    "id": "hw_eq_350",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_350.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575829"
+  },
+  {
+    "id": "hw_eq_351",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_351.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575831"
+  },
+  {
+    "id": "hw_eq_352",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_352.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575832"
+  },
+  {
+    "id": "hw_eq_353",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_353.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575835"
+  },
+  {
+    "id": "hw_eq_354",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_354.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575838"
+  },
+  {
+    "id": "hw_eq_355",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_355.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575839"
+  },
+  {
+    "id": "hw_eq_356",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_356.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575841"
+  },
+  {
+    "id": "hw_eq_357",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_357.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575843"
+  },
+  {
+    "id": "hw_eq_358",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_358.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575845"
+  },
+  {
+    "id": "hw_eq_359",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_359.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575847"
+  },
+  {
+    "id": "hw_eq_360",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_360.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575850"
+  },
+  {
+    "id": "hw_eq_361",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_361.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575852"
+  },
+  {
+    "id": "hw_eq_362",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_362.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575855"
+  },
+  {
+    "id": "hw_eq_363",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_363.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575856"
+  },
+  {
+    "id": "hw_eq_364",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_364.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575858"
+  },
+  {
+    "id": "hw_eq_365",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_365.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575860"
+  },
+  {
+    "id": "hw_eq_366",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_366.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575862"
+  },
+  {
+    "id": "hw_eq_367",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_367.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575864"
+  },
+  {
+    "id": "hw_eq_368",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_368.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575866"
+  },
+  {
+    "id": "hw_eq_369",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_369.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575869"
+  },
+  {
+    "id": "hw_eq_370",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_370.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575871"
+  },
+  {
+    "id": "hw_eq_371",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_371.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575873"
+  },
+  {
+    "id": "hw_eq_372",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_372.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575875"
+  },
+  {
+    "id": "hw_eq_373",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_373.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575877"
+  },
+  {
+    "id": "hw_eq_374",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_374.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575879"
+  },
+  {
+    "id": "hw_eq_375",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_375.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575882"
+  },
+  {
+    "id": "hw_eq_376",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_376.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575883"
+  },
+  {
+    "id": "hw_eq_377",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_377.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575885"
+  },
+  {
+    "id": "hw_eq_378",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_378.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575887"
+  },
+  {
+    "id": "hw_eq_379",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_379.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575889"
+  },
+  {
+    "id": "hw_eq_380",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_380.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575891"
+  },
+  {
+    "id": "hw_eq_381",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_381.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575893"
+  },
+  {
+    "id": "hw_eq_382",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_382.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575895"
+  },
+  {
+    "id": "hw_eq_383",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_383.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575897"
+  },
+  {
+    "id": "hw_eq_384",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_384.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575899"
+  },
+  {
+    "id": "hw_eq_385",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_385.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575901"
+  },
+  {
+    "id": "hw_eq_386",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_386.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575903"
+  },
+  {
+    "id": "hw_eq_387",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_387.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575904"
+  },
+  {
+    "id": "hw_eq_388",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_388.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575906"
+  },
+  {
+    "id": "hw_eq_389",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_389.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575909"
+  },
+  {
+    "id": "hw_eq_390",
+    "latex": "E = E^0 - \\frac{RT}{nF}\\ln Q",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_390.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575911"
+  },
+  {
+    "id": "hw_eq_391",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_391.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575913"
+  },
+  {
+    "id": "hw_eq_392",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_392.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575915"
+  },
+  {
+    "id": "hw_eq_393",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_393.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575917"
+  },
+  {
+    "id": "hw_eq_394",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_394.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575919"
+  },
+  {
+    "id": "hw_eq_395",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_395.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575921"
+  },
+  {
+    "id": "hw_eq_396",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_396.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575922"
+  },
+  {
+    "id": "hw_eq_397",
+    "latex": "i = nFAkC",
+    "category": "electrochemistry",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_397.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575925"
+  },
+  {
+    "id": "hw_eq_398",
+    "latex": "J = nFkC",
+    "category": "electrochemistry",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_398.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575927"
+  },
+  {
+    "id": "hw_eq_399",
+    "latex": "\\eta = \\frac{P_{out}}{P_{in}}",
+    "category": "electrochemistry",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_399.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575929"
+  },
+  {
+    "id": "hw_eq_400",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_400.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575931"
+  },
+  {
+    "id": "hw_eq_401",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_401.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575933"
+  },
+  {
+    "id": "hw_eq_402",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_402.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575935"
+  },
+  {
+    "id": "hw_eq_403",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_403.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575937"
+  },
+  {
+    "id": "hw_eq_404",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_404.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575939"
+  },
+  {
+    "id": "hw_eq_405",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_405.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575940"
+  },
+  {
+    "id": "hw_eq_406",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_406.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575942"
+  },
+  {
+    "id": "hw_eq_407",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_407.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575944"
+  },
+  {
+    "id": "hw_eq_408",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_408.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575947"
+  },
+  {
+    "id": "hw_eq_409",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_409.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575949"
+  },
+  {
+    "id": "hw_eq_410",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_410.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575951"
+  },
+  {
+    "id": "hw_eq_411",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_411.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575954"
+  },
+  {
+    "id": "hw_eq_412",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_412.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575956"
+  },
+  {
+    "id": "hw_eq_413",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_413.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575957"
+  },
+  {
+    "id": "hw_eq_414",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_414.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575959"
+  },
+  {
+    "id": "hw_eq_415",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_415.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575961"
+  },
+  {
+    "id": "hw_eq_416",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_416.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575963"
+  },
+  {
+    "id": "hw_eq_417",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_417.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575965"
+  },
+  {
+    "id": "hw_eq_418",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_418.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575968"
+  },
+  {
+    "id": "hw_eq_419",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_419.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575970"
+  },
+  {
+    "id": "hw_eq_420",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_420.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575972"
+  },
+  {
+    "id": "hw_eq_421",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_421.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575974"
+  },
+  {
+    "id": "hw_eq_422",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_422.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575976"
+  },
+  {
+    "id": "hw_eq_423",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_423.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575978"
+  },
+  {
+    "id": "hw_eq_424",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_424.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575980"
+  },
+  {
+    "id": "hw_eq_425",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_425.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575981"
+  },
+  {
+    "id": "hw_eq_426",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_426.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575983"
+  },
+  {
+    "id": "hw_eq_427",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_427.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575985"
+  },
+  {
+    "id": "hw_eq_428",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_428.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575988"
+  },
+  {
+    "id": "hw_eq_429",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_429.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575990"
+  },
+  {
+    "id": "hw_eq_430",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_430.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575992"
+  },
+  {
+    "id": "hw_eq_431",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_431.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575994"
+  },
+  {
+    "id": "hw_eq_432",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_432.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575996"
+  },
+  {
+    "id": "hw_eq_433",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_433.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575998"
+  },
+  {
+    "id": "hw_eq_434",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_434.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.575999"
+  },
+  {
+    "id": "hw_eq_435",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_435.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576001"
+  },
+  {
+    "id": "hw_eq_436",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_436.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576003"
+  },
+  {
+    "id": "hw_eq_437",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_437.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576005"
+  },
+  {
+    "id": "hw_eq_438",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_438.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576007"
+  },
+  {
+    "id": "hw_eq_439",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_439.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576010"
+  },
+  {
+    "id": "hw_eq_440",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_440.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576012"
+  },
+  {
+    "id": "hw_eq_441",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_441.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576013"
+  },
+  {
+    "id": "hw_eq_442",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_442.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576015"
+  },
+  {
+    "id": "hw_eq_443",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_443.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576017"
+  },
+  {
+    "id": "hw_eq_444",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_444.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576019"
+  },
+  {
+    "id": "hw_eq_445",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_445.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576020"
+  },
+  {
+    "id": "hw_eq_446",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_446.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576022"
+  },
+  {
+    "id": "hw_eq_447",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_447.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576026"
+  },
+  {
+    "id": "hw_eq_448",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_448.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576027"
+  },
+  {
+    "id": "hw_eq_449",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_449.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576029"
+  },
+  {
+    "id": "hw_eq_450",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_450.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576031"
+  },
+  {
+    "id": "hw_eq_451",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_451.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576033"
+  },
+  {
+    "id": "hw_eq_452",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_452.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576035"
+  },
+  {
+    "id": "hw_eq_453",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_453.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576037"
+  },
+  {
+    "id": "hw_eq_454",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_454.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576039"
+  },
+  {
+    "id": "hw_eq_455",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_455.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576041"
+  },
+  {
+    "id": "hw_eq_456",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_456.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576043"
+  },
+  {
+    "id": "hw_eq_457",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_457.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576045"
+  },
+  {
+    "id": "hw_eq_458",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_458.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576047"
+  },
+  {
+    "id": "hw_eq_459",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_459.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576049"
+  },
+  {
+    "id": "hw_eq_460",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_460.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576052"
+  },
+  {
+    "id": "hw_eq_461",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_461.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576054"
+  },
+  {
+    "id": "hw_eq_462",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_462.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576057"
+  },
+  {
+    "id": "hw_eq_463",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_463.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576059"
+  },
+  {
+    "id": "hw_eq_464",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_464.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576061"
+  },
+  {
+    "id": "hw_eq_465",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_465.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576063"
+  },
+  {
+    "id": "hw_eq_466",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_466.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576065"
+  },
+  {
+    "id": "hw_eq_467",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_467.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576068"
+  },
+  {
+    "id": "hw_eq_468",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_468.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576071"
+  },
+  {
+    "id": "hw_eq_469",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_469.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576073"
+  },
+  {
+    "id": "hw_eq_470",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_470.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576075"
+  },
+  {
+    "id": "hw_eq_471",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_471.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576077"
+  },
+  {
+    "id": "hw_eq_472",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_472.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576078"
+  },
+  {
+    "id": "hw_eq_473",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_473.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576080"
+  },
+  {
+    "id": "hw_eq_474",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_474.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576082"
+  },
+  {
+    "id": "hw_eq_475",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_475.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576084"
+  },
+  {
+    "id": "hw_eq_476",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_476.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576086"
+  },
+  {
+    "id": "hw_eq_477",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_477.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576088"
+  },
+  {
+    "id": "hw_eq_478",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_478.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576090"
+  },
+  {
+    "id": "hw_eq_479",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_479.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576092"
+  },
+  {
+    "id": "hw_eq_480",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_480.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576094"
+  },
+  {
+    "id": "hw_eq_481",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_481.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576096"
+  },
+  {
+    "id": "hw_eq_482",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_482.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576099"
+  },
+  {
+    "id": "hw_eq_483",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_483.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576101"
+  },
+  {
+    "id": "hw_eq_484",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_484.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576104"
+  },
+  {
+    "id": "hw_eq_485",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_485.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576106"
+  },
+  {
+    "id": "hw_eq_486",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_486.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576109"
+  },
+  {
+    "id": "hw_eq_487",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_487.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576111"
+  },
+  {
+    "id": "hw_eq_488",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_488.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576113"
+  },
+  {
+    "id": "hw_eq_489",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_489.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576115"
+  },
+  {
+    "id": "hw_eq_490",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_490.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576117"
+  },
+  {
+    "id": "hw_eq_491",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_491.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576119"
+  },
+  {
+    "id": "hw_eq_492",
+    "latex": "\\varepsilon = \\frac{\\Delta L}{L}",
+    "category": "materials",
+    "variation": "fast",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_492.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576121"
+  },
+  {
+    "id": "hw_eq_493",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_493.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576123"
+  },
+  {
+    "id": "hw_eq_494",
+    "latex": "E = \\frac{\\sigma}{\\varepsilon}",
+    "category": "materials",
+    "variation": "normal",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_494.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576125"
+  },
+  {
+    "id": "hw_eq_495",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_495.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576127"
+  },
+  {
+    "id": "hw_eq_496",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "sloped",
+    "complexity": "simple",
+    "image_path": "images/hw_eq_496.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576129"
+  },
+  {
+    "id": "hw_eq_497",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_497.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576130"
+  },
+  {
+    "id": "hw_eq_498",
+    "latex": "\\rho = \\frac{m}{V}",
+    "category": "materials",
+    "variation": "large",
+    "complexity": "medium",
+    "image_path": "images/hw_eq_498.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576132"
+  },
+  {
+    "id": "hw_eq_499",
+    "latex": "\\sigma = \\frac{F}{A}",
+    "category": "materials",
+    "variation": "small",
+    "complexity": "complex",
+    "image_path": "images/hw_eq_499.png",
+    "style": "handwritten",
+    "created_at": "2026-03-09T19:44:05.576134"
+  }
+]

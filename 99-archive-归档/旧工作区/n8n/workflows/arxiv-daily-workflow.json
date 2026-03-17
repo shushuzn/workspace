@@ -1,0 +1,187 @@
+{
+  "name": "arXiv 每日收集工作流",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "id": "daily-trigger",
+      "name": "Daily Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\arxiv-daily\\scripts\\arxiv-daily.py --categories cs.AI,cs.LG,cs.CL --output D:\\OpenClaw\\workspace\\Medium\\Raw\\ --days 1",
+        "options": {
+          "cwd": "D:\\OpenClaw\\workspace"
+        }
+      },
+      "id": "arxiv-collect",
+      "name": "arXiv Collect",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const output = $input.first().json.stdout;\nconst match = output.match(/New papers: (\\d+)/);\nconst newPapers = match ? parseInt(match[1]) : 0;\n\nreturn {\n  newPapers: newPapers,\n  shouldParse: newPapers >= 5,\n  message: `今日收集 ${newPapers} 篇新论文`\n};"
+      },
+      "id": "parse-output",
+      "name": "Parse Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "valueA": "={{ $json.shouldParse }}",
+              "valueB": true
+            }
+          ]
+        }
+      },
+      "id": "check-threshold",
+      "name": "Check Threshold",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [660, 0]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\batch-processor\\scripts\\batch-processor.py --auto --max-concurrent 4",
+        "options": {
+          "cwd": "D:\\OpenClaw\\workspace"
+        }
+      },
+      "id": "batch-parse",
+      "name": "Batch Parse",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [880, -100]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\knowledge-graph\\scripts\\kg-builder.py --input D:\\OpenClaw\\workspace\\memory --output D:\\OpenClaw\\workspace\\knowledge-graph\\daily\\graph --format all",
+        "options": {
+          "cwd": "D:\\OpenClaw\\workspace"
+        }
+      },
+      "id": "knowledge-graph",
+      "name": "Knowledge Graph",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [1100, 0]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openclaw.ai/sessions/send",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "={{ JSON.stringify({ action: 'daily_complete', papers: $input.first().json.newPapers, graph_entities: $input.last().json.entities }) }}"
+            }
+          ]
+        }
+      },
+      "id": "notify-complete",
+      "name": "Notify Complete",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [1320, 0]
+    }
+  ],
+  "connections": {
+    "Daily Trigger": {
+      "main": [
+        [
+          {
+            "node": "arXiv Collect",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "arXiv Collect": {
+      "main": [
+        [
+          {
+            "node": "Parse Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse Output": {
+      "main": [
+        [
+          {
+            "node": "Check Threshold",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Threshold": {
+      "main": [
+        [
+          {
+            "node": "Batch Parse",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Knowledge Graph",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Batch Parse": {
+      "main": [
+        [
+          {
+            "node": "Knowledge Graph",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Knowledge Graph": {
+      "main": [
+        [
+          {
+            "node": "Notify Complete",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  }
+}

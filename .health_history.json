@@ -1,0 +1,11 @@
+[
+  {
+    "persona": "planner",
+    "health_score": 85,
+    "metrics": {
+      "task_load": 0.7,
+      "success_rate": 0.95
+    },
+    "timestamp": "2026-03-15T00:40:43.080051"
+  }
+]

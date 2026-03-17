@@ -1,0 +1,30 @@
+{
+  "inferred": [
+    {
+      "source": "A",
+      "target": "C",
+      "type": "related_to",
+      "strength": 0.58,
+      "inference_rule": "transitive",
+      "confidence": 57.6,
+      "path": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "source": "Y",
+      "target": "X",
+      "type": "collaborates_with",
+      "strength": 0.95,
+      "inference_rule": "symmetry",
+      "confidence": 95.0,
+      "path": [
+        "Y",
+        "X"
+      ]
+    }
+  ],
+  "last_updated": "2026-03-16T01:59:41.935168"
+}

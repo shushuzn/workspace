@@ -1,0 +1,131 @@
+[
+  {
+    "material_name": "O4 ",
+    "material_formula": null,
+    "method": "solid-state",
+    "steps": [
+      {
+        "step_number": 1,
+        "description": "前驱体准备",
+        "method": "unknown",
+        "temperature": null,
+        "time": null,
+        "atmosphere": null,
+        "precursors": [
+          {
+            "name": "Sigma-Aldrich",
+            "formula": null,
+            "amount": null,
+            "unit": null,
+            "molar_ratio": null,
+            "supplier": "Sigma-Aldrich",
+            "purity": "99.9%"
+          }
+        ],
+        "products": [],
+        "notes": null
+      },
+      {
+        "step_number": 2,
+        "description": "合成反应",
+        "method": "unknown",
+        "temperature": {
+          "value": 800.0,
+          "unit": "°C",
+          "stage": null,
+          "ramp_rate": null,
+          "holding_time": 720.0
+        },
+        "time": {
+          "value": 12.0,
+          "unit": "h",
+          "stage": null
+        },
+        "atmosphere": {
+          "gas": "Ar",
+          "flow_rate": null,
+          "pressure": null,
+          "purity": null
+        },
+        "precursors": [],
+        "products": [],
+        "notes": null
+      },
+      {
+        "step_number": 3,
+        "description": "LiFePO4 was synthesized by solid-state reaction",
+        "method": "unknown",
+        "temperature": null,
+        "time": null,
+        "atmosphere": null,
+        "precursors": [],
+        "products": [],
+        "notes": null
+      }
+    ],
+    "overall_conditions": {},
+    "yield_": null,
+    "purity": null,
+    "reference": null
+  },
+  {
+    "material_name": "Unknown",
+    "material_formula": null,
+    "method": "sol-gel",
+    "steps": [
+      {
+        "step_number": 1,
+        "description": "合成反应",
+        "method": "unknown",
+        "temperature": {
+          "value": 500.0,
+          "unit": "°C",
+          "stage": null,
+          "ramp_rate": null,
+          "holding_time": null
+        },
+        "time": null,
+        "atmosphere": null,
+        "precursors": [],
+        "products": [],
+        "notes": null
+      }
+    ],
+    "overall_conditions": {},
+    "yield_": null,
+    "purity": null,
+    "reference": null
+  },
+  {
+    "material_name": "Unknown",
+    "material_formula": null,
+    "method": "hydrothermal",
+    "steps": [
+      {
+        "step_number": 1,
+        "description": "合成反应",
+        "method": "unknown",
+        "temperature": {
+          "value": 90.0,
+          "unit": "°C",
+          "stage": null,
+          "ramp_rate": null,
+          "holding_time": 360.0
+        },
+        "time": {
+          "value": 6.0,
+          "unit": "h",
+          "stage": null
+        },
+        "atmosphere": null,
+        "precursors": [],
+        "products": [],
+        "notes": null
+      }
+    ],
+    "overall_conditions": {},
+    "yield_": null,
+    "purity": null,
+    "reference": null
+  }
+]

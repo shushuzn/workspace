@@ -1,0 +1,49 @@
+{
+  "pending": [
+    {
+      "id": "ba76ed2949db",
+      "timestamp": "2026-03-16T01:59:27.774991",
+      "task": "data_collection",
+      "description": "Collect arXiv papers (50 limit)",
+      "confidence": 80.0,
+      "level": "fast",
+      "action": "Collect latest 50 papers",
+      "status": "pending",
+      "reasoning": [
+        "Confidence: 80.0%",
+        "Category: data_collection",
+        "Risk: low",
+        "Data quality: medium"
+      ],
+      "alternatives": [
+        "Do nothing",
+        "Manual review"
+      ],
+      "outcome": null,
+      "user_review": null
+    },
+    {
+      "id": "e2667381df71",
+      "timestamp": "2026-03-16T01:59:27.780035",
+      "task": "model_update",
+      "description": "Update local LLM to new version",
+      "confidence": 50.0,
+      "level": "full",
+      "action": "Download and install new model",
+      "status": "pending",
+      "reasoning": [
+        "Confidence: 50.0%",
+        "Category: model_update",
+        "Risk: medium",
+        "Data quality: medium"
+      ],
+      "alternatives": [
+        "Keep current version",
+        "Test in sandbox first"
+      ],
+      "outcome": null,
+      "user_review": null
+    }
+  ],
+  "last_updated": "2026-03-16T01:59:27.783974"
+}

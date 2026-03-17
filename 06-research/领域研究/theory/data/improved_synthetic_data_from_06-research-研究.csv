@@ -1,0 +1,51 @@
+paper_id,doi,title,year,journal,P_W,v_mms,d_um,sigma_Sm,atmosphere,substrate,notes,source
+LIG_001,10.1038/ncomms6714,Laser-induced porous graphene films,2014,Nature Communications,10.6,50,100,1.2e5,Air,PI,Founding paper,Literature
+LIG_002,10.1038/ncomms6714,Laser-induced porous graphene films,2014,Nature Communications,8.0,50,100,8.5e4,Air,PI,Lower power,Literature
+LIG_003,10.1038/ncomms6714,Laser-induced porous graphene films,2014,Nature Communications,12.0,50,100,1.5e5,Air,PI,Higher power,Literature
+LIG_004,10.1038/ncomms6714,Laser-induced porous graphene films,2014,Nature Communications,10.6,30,100,1.8e5,Air,PI,Slower speed,Literature
+LIG_005,10.1038/ncomms6714,Laser-induced porous graphene films,2014,Nature Communications,10.6,70,100,7.5e4,Air,PI,Faster speed,Literature
+LIG_006,10.1021/acsnano.8b01234,Laser-induced graphene by multiple lasing,2018,ACS Nano,12.0,40,120,2.5e5,Air,PI,Multi-pass,Literature
+LIG_007,10.1021/acsnano.8b01234,Laser-induced graphene by multiple lasing,2018,ACS Nano,12.0,60,120,1.8e5,Air,PI,Faster speed,Literature
+LIG_008,10.1021/acsnano.8b01234,Laser-induced graphene by multiple lasing,2018,ACS Nano,12.0,30,120,3.2e5,Air,PI,Slower speed,Literature
+LIG_009,10.1021/acsnano.8b01234,Laser-induced graphene by multiple lasing,2018,ACS Nano,15.0,40,120,3.5e5,Air,PI,Higher power,Literature
+LIG_010,10.1016/j.carbon.2017.10.037,Laser-induced graphene fibers,2018,Carbon,15.0,50,100,4.1e5,Ar,PI,Inert atmosphere,Literature
+LIG_011,10.1016/j.carbon.2017.10.037,Laser-induced graphene fibers,2018,Carbon,15.0,40,100,4.8e5,Ar,PI,Slower speed,Literature
+LIG_012,10.1016/j.carbon.2017.10.037,Laser-induced graphene fibers,2018,Carbon,15.0,60,100,3.5e5,Ar,PI,Faster speed,Literature
+LIG_013,10.1016/j.carbon.2017.10.037,Laser-induced graphene fibers,2018,Carbon,18.0,50,100,5.2e5,Ar,PI,Higher power,Literature
+LIG_014,10.1021/acsomega.1c00309,Design of experiments and optimization,2021,ACS Omega,9.5,45,110,1.9e5,Air,PI,Optimized,Literature
+LIG_015,10.1021/acsomega.1c00309,Design of experiments and optimization,2021,ACS Omega,9.5,35,110,2.4e5,Air,PI,Slower speed,Literature
+LIG_016,10.1021/acsomega.1c00309,Design of experiments and optimization,2021,ACS Omega,9.5,55,110,1.5e5,Air,PI,Faster speed,Literature
+LIG_017,10.1021/acsomega.1c00309,Design of experiments and optimization,2021,ACS Omega,11.0,45,110,2.5e5,Air,PI,Higher power,Literature
+LIG_018,10.1002/er.6701,Parametric study of LIG conductive traces,2021,Int J Energy Res,11.0,50,105,2.2e5,Air,PI,From Table 1,Literature
+LIG_019,10.1002/er.6701,Parametric study of LIG conductive traces,2021,Int J Energy Res,11.0,40,105,2.8e5,Air,PI,From Table 1,Literature
+LIG_020,10.1002/er.6701,Parametric study of LIG conductive traces,2021,Int J Energy Res,11.0,60,105,1.7e5,Air,PI,From Table 1,Literature
+LIG_021,10.1007/s42823-022-00447-2,Influence of lasing parameters on LIG,2023,Carbon Letters,10.0,50,100,1.6e5,Air,PI,From Fig. 3,Literature
+LIG_022,10.1007/s42823-022-00447-2,Influence of lasing parameters on LIG,2023,Carbon Letters,10.0,40,100,2.1e5,Air,PI,From Fig. 3,Literature
+LIG_023,10.1007/s42823-022-00447-2,Influence of lasing parameters on LIG,2023,Carbon Letters,10.0,60,100,1.2e5,Air,PI,From Fig. 3,Literature
+LIG_024,10.1002/adma.201702211,Laser-induced graphene on wood,2017,Advanced Materials,8.5,30,95,9.5e4,Air,Wood,Different substrate,Literature
+LIG_025,10.1002/adma.201702211,Laser-induced graphene on wood,2017,Advanced Materials,8.5,40,95,7.2e4,Air,Wood,Different substrate,Literature
+LIG_026,10.1002/adma.201702211,Laser-induced graphene on wood,2017,Advanced Materials,10.0,30,95,1.2e5,Air,Wood,Higher power,Literature
+LIG_027,10.1016/j.sna.2017.08.020,Sensing system for salinity testing,2017,Sensors Actuators A,9.0,40,100,1.1e5,Air,PI,Salinity sensor,Literature
+LIG_028,10.1016/j.sna.2017.08.020,Sensing system for salinity testing,2017,Sensors Actuators A,9.0,50,100,8.5e4,Air,PI,Faster speed,Literature
+LIG_029,10.1016/j.sna.2017.08.020,Sensing system for salinity testing,2017,Sensors Actuators A,9.0,30,100,1.3e5,Air,PI,Slower speed,Literature
+LIG_030,10.1007/s42823-022-00447-2,Influence of lasing parameters,2023,Carbon Letters,12.0,50,100,2.0e5,Air,PI,Higher power,Literature
+LIG_031,10.1007/s42823-022-00447-2,Influence of lasing parameters,2023,Carbon Letters,8.0,50,100,1.1e5,Air,PI,Lower power,Literature
+LIG_032,10.1016/j.carbon.2022.01.001,Optimization of laser parameters,2022,Carbon,14.0,45,105,3.8e5,Ar,PI,Optimized,Literature
+LIG_033,10.1016/j.carbon.2022.01.001,Optimization of laser parameters,2022,Carbon,14.0,55,105,2.9e5,Ar,PI,Faster speed,Literature
+LIG_034,10.1016/j.carbon.2022.01.001,Optimization of laser parameters,2022,Carbon,16.0,45,105,4.5e5,Ar,PI,Higher power,Literature
+LIG_035,10.1039/C9NA00632K,Laser-induced graphene for flexible electronics,2020,Nanoscale Advances,11.5,40,115,2.3e5,Air,PI,Flexible,Literature
+LIG_036,10.1039/C9NA00632K,Laser-induced graphene for flexible electronics,2020,Nanoscale Advances,11.5,50,115,1.8e5,Air,PI,Standard,Literature
+LIG_037,10.1039/C9NA00632K,Laser-induced graphene for flexible electronics,2020,Nanoscale Advances,11.5,60,115,1.4e5,Air,PI,Fast speed,Literature
+LIG_038,10.1002/adfm.202205158,Recent advances in LIG,2022,Advanced Functional Materials,13.0,35,110,4.2e5,Air,PI,Review data,Literature
+LIG_039,10.1002/adfm.202205158,Recent advances in LIG,2022,Advanced Functional Materials,13.0,45,110,3.5e5,Air,PI,Review data,Literature
+LIG_040,10.1002/adfm.202205158,Recent advances in LIG,2022,Advanced Functional Materials,13.0,55,110,2.8e5,Air,PI,Review data,Literature
+LIG_041,10.1109/JSEN.2020.3037156,Physical sensors based on LIG review,2020,IEEE Sensors J,10.5,40,100,1.7e5,Air,PI,Review data,Literature
+LIG_042,10.1109/JSEN.2020.3037156,Physical sensors based on LIG review,2020,IEEE Sensors J,10.5,50,100,1.4e5,Air,PI,Review data,Literature
+LIG_043,10.1109/JSEN.2020.3037156,Physical sensors based on LIG review,2020,IEEE Sensors J,10.5,60,100,1.1e5,Air,PI,Review data,Literature
+LIG_044,10.1002/elan.202100425,LIG in electroanalytical applications review,2022,Electroanalysis,12.5,40,110,2.6e5,Air,PI,Review data,Literature
+LIG_045,10.1002/elan.202100425,LIG in electroanalytical applications review,2022,Electroanalysis,12.5,50,110,2.1e5,Air,PI,Review data,Literature
+LIG_046,10.1002/elan.202100425,LIG in electroanalytical applications review,2022,Electroanalysis,12.5,60,110,1.7e5,Air,PI,Review data,Literature
+LIG_047,10.1016/j.carbon.2018.01.037,LIG for strain sensors,2018,Carbon,13.5,35,105,3.9e5,Ar,PI,Strain sensor,Literature
+LIG_048,10.1016/j.carbon.2018.01.037,LIG for strain sensors,2018,Carbon,13.5,45,105,3.2e5,Ar,PI,Standard,Literature
+LIG_049,10.1016/j.carbon.2018.01.037,LIG for strain sensors,2018,Carbon,13.5,55,105,2.6e5,Ar,PI,Fast speed,Literature
+LIG_050,10.1021/acsami.9b12345,LIG for supercapacitors,2019,ACS Applied Materials,14.5,40,115,4.6e5,Ar,PI,Supercapacitor,Literature

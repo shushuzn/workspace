@@ -1,0 +1,166 @@
+{
+  "processed_at": "2026-03-16T11:27:04.748836",
+  "stats": {
+    "total": 20,
+    "successful": 18,
+    "failed": 2
+  },
+  "results": [
+    {
+      "id": "task_2",
+      "success": true,
+      "result": 4,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_1",
+      "success": true,
+      "result": 2,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_3",
+      "success": true,
+      "result": 6,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_4",
+      "success": true,
+      "result": 8,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_5",
+      "success": true,
+      "result": 10,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_6",
+      "success": true,
+      "result": 12,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_9",
+      "success": true,
+      "result": 18,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_8",
+      "success": true,
+      "result": 16,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_7",
+      "success": true,
+      "result": 14,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_0",
+      "success": false,
+      "result": null,
+      "attempts": 2,
+      "error": "Simulated error for 0"
+    },
+    {
+      "id": "task_12",
+      "success": true,
+      "result": 24,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_11",
+      "success": true,
+      "result": 22,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_13",
+      "success": true,
+      "result": 26,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_14",
+      "success": true,
+      "result": 28,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_15",
+      "success": true,
+      "result": 30,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_16",
+      "success": true,
+      "result": 32,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_17",
+      "success": true,
+      "result": 34,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_18",
+      "success": true,
+      "result": 36,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_19",
+      "success": true,
+      "result": 38,
+      "attempts": 1,
+      "error": null
+    },
+    {
+      "id": "task_10",
+      "success": false,
+      "result": null,
+      "attempts": 2,
+      "error": "Simulated error for 10"
+    }
+  ],
+  "errors": [
+    {
+      "id": "task_0",
+      "success": false,
+      "result": null,
+      "attempts": 2,
+      "error": "Simulated error for 0"
+    },
+    {
+      "id": "task_10",
+      "success": false,
+      "result": null,
+      "attempts": 2,
+      "error": "Simulated error for 10"
+    }
+  ]
+}

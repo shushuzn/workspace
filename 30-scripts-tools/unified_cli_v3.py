@@ -1,0 +1,381 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Unified CLI v3 - Central command-line interface for all tools
+
+Features:
+- Natural language commands
+- Tool discovery and execution
+- Workflow orchestration
+- Interactive mode
+- Command history
+- Auto-completion support
+"""
+
+import os
+import sys
+import json
+import subprocess
+import shlex
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Optional, Any
+import re
+
+# UTF-8 for Windows
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
+
+# Workspace setup
+WORKSPACE = Path(__file__).parent.parent
+TOOLS_DIR = WORKSPACE / '30-scripts-tools'
+
+# Command aliases (natural language → tool command)
+COMMAND_ALIASES = {
+    # Registry commands
+    'scan tools': 'tool_registry.py --scan',
+    'list tools': 'tool_registry.py --list',
+    'tool stats': 'tool_registry.py --stats',
+    'tool health': 'tool_registry.py --health',
+    'search tool': 'tool_registry.py --search',
+    
+    # Analytics commands
+    'analyze tools': 'tool_analytics.py --analyze',
+    'tool report': 'tool_analytics.py --report',
+    'tool dashboard': 'tool_analytics.py --dashboard',
+    
+    # Orchestrator commands
+    'run workflow': 'tool_orchestrator.py --execute',
+    'list workflows': 'tool_orchestrator.py --list',
+    'create workflow': 'tool_orchestrator.py --create',
+    
+    # Memory search
+    'search memory': 'ultimate_memory_search_v3.py --search',
+    'memory search': 'ultimate_memory_search_v3.py --search',
+    
+    # Cache management
+    'cache stats': 'cache_observability.py --stats',
+    'cache dashboard': 'cache_observability.py --dashboard',
+    
+    # Workflow
+    'workflow visualizer': 'workflow_visualizer.py',
+    'workflow engine': 'workflow_engine.py --demo',
+    
+    # Knowledge graph
+    'knowledge graph': 'knowledge_graph_enhanced.py --visualize',
+    'kg update': 'knowledge_graph_enhanced.py --update',
+    
+    # System
+    'system health': 'health_checker.py',
+    'deploy': 'auto_deployer.py',
+    'performance': 'performance_monitor.py --report',
+}
+
+# Command categories
+COMMAND_CATEGORIES = {
+    'registry': ['scan', 'list', 'stats', 'health', 'search'],
+    'analytics': ['analyze', 'report', 'dashboard'],
+    'orchestrator': ['workflow', 'run', 'create'],
+    'memory': ['memory', 'search'],
+    'cache': ['cache'],
+    'workflow': ['workflow', 'visualizer', 'engine'],
+    'knowledge': ['knowledge', 'kg'],
+    'system': ['system', 'health', 'deploy', 'performance'],
+}
+
+
+class UnifiedCLI:
+    """
+    Unified command-line interface
+    
+    Features:
+    - Natural language parsing
+    - Tool execution
+    - Command history
+    - Auto-suggestions
+    """
+    
+    def __init__(self):
+        self.history: List[Dict] = []
+        self.history_file = WORKSPACE / 'data' / 'cli' / 'history.json'
+        self.history_file.parent.mkdir(parents=True, exist_ok=True)
+        
+        # Load history
+        self._load_history()
+    
+    def _load_history(self):
+        """Load command history"""
+        if self.history_file.exists():
+            with open(self.history_file, 'r', encoding='utf-8') as f:
+                self.history = json.load(f)
+    
+    def _save_history(self):
+        """Save command history"""
+        with open(self.history_file, 'w', encoding='utf-8') as f:
+            json.dump(self.history[-100:], f, indent=2)  # Keep last 100
+    
+    def parse_command(self, user_input: str) -> Optional[str]:
+        """
+        Parse natural language input to tool command
+        
+        Args:
+            user_input: User's natural language input
+        
+        Returns:
+            Tool command string or None
+        """
+        input_lower = user_input.lower().strip()
+        
+        # Direct alias match
+        if input_lower in COMMAND_ALIASES:
+            return COMMAND_ALIASES[input_lower]
+        
+        # Partial match
+        for alias, command in COMMAND_ALIASES.items():
+            if alias in input_lower or input_lower in alias:
+                return command
+        
+        # Try to detect tool name
+        tool_match = re.search(r'(\w+(?:_\w+)*)\.py', input_lower)
+        if tool_match:
+            tool_name = tool_match.group(1)
+            tool_path = TOOLS_DIR / f"{tool_name}.py"
+            if tool_path.exists():
+                # Extract arguments
+                args = input_lower.replace(f"{tool_name}.py", "").strip()
+                return f"{tool_name}.py {args}".strip()
+        
+        # Category-based suggestion
+        for category, keywords in COMMAND_CATEGORIES.items():
+            if any(kw in input_lower for kw in keywords):
+                # Return category help
+                return f"help {category}"
+        
+        return None
+    
+    def execute(self, command: str, args: List[str] = None) -> Dict:
+        """
+        Execute a tool command
+        
+        Args:
+            command: Tool command
+            args: Additional arguments
+        
+        Returns:
+            Execution result
+        """
+        start_time = datetime.now()
+        
+        # Build full command
+        if command.endswith('.py'):
+            tool_path = TOOLS_DIR / command
+            if not tool_path.exists():
+                return {
+                    'success': False,
+                    'error': f'Tool not found: {command}',
+                }
+            
+            full_cmd = [sys.executable, str(tool_path)] + (args or [])
+        else:
+            # Shell command
+            full_cmd = command.split() + (args or [])
+        
+        try:
+            # Execute
+            result = subprocess.run(
+                full_cmd,
+                capture_output=True,
+                text=True,
+                timeout=300,
+                encoding='utf-8',
+                cwd=str(WORKSPACE),
+            )
+            
+            end_time = datetime.now()
+            duration = (end_time - start_time).total_seconds()
+            
+            # Record history
+            self.history.append({
+                'command': command,
+                'args': args,
+                'timestamp': start_time.isoformat(),
+                'duration_seconds': duration,
+                'exit_code': result.returncode,
+                'success': result.returncode == 0,
+            })
+            self._save_history()
+            
+            return {
+                'success': result.returncode == 0,
+                'stdout': result.stdout,
+                'stderr': result.stderr,
+                'exit_code': result.returncode,
+                'duration_seconds': duration,
+            }
+        
+        except subprocess.TimeoutExpired:
+            return {
+                'success': False,
+                'error': f'Timeout after 300s',
+            }
+        
+        except Exception as e:
+            return {
+                'success': False,
+                'error': str(e),
+            }
+    
+    def suggest(self, partial: str) -> List[str]:
+        """Get command suggestions"""
+        suggestions = []
+        partial_lower = partial.lower()
+        
+        # Match aliases
+        for alias in COMMAND_ALIASES.keys():
+            if partial_lower in alias:
+                suggestions.append(f"{alias} → {COMMAND_ALIASES[alias]}")
+        
+        # Match tool files
+        for tool_file in TOOLS_DIR.glob('*.py'):
+            if partial_lower in tool_file.stem.lower():
+                suggestions.append(tool_file.name)
+        
+        return suggestions[:10]
+    
+    def get_help(self, category: str = None) -> str:
+        """Get help text"""
+        if category:
+            # Category-specific help
+            commands = [
+                (alias, cmd) for alias, cmd in COMMAND_ALIASES.items()
+                if any(kw in alias for kw in COMMAND_CATEGORIES.get(category, []))
+            ]
+            
+            help_text = f"\n📚 {category.upper()} Commands\n"
+            help_text += "=" * 60 + "\n\n"
+            
+            for alias, cmd in commands[:10]:
+                help_text += f"  {alias}\n"
+                help_text += f"    → {cmd}\n\n"
+            
+            return help_text
+        
+        # General help
+        help_text = "\n🎯 Unified CLI v3 - Available Commands\n"
+        help_text += "=" * 60 + "\n\n"
+        
+        help_text += "Usage:\n"
+        help_text += "  python unified_cli_v3.py <command> [args]\n\n"
+        
+        help_text += "Examples:\n"
+        help_text += "  python unified_cli_v3.py \"scan tools\"\n"
+        help_text += "  python unified_cli_v3.py \"analyze tools\"\n"
+        help_text += "  python unified_cli_v3.py \"search memory query\"\n\n"
+        
+        help_text += "Categories:\n"
+        for category in COMMAND_CATEGORIES.keys():
+            help_text += f"  {category}\n"
+        
+        help_text += "\nUse 'help <category>' for category-specific commands.\n"
+        
+        return help_text
+    
+    def interactive_mode(self):
+        """Run interactive mode"""
+        print("\n🎯 Unified CLI v3 - Interactive Mode")
+        print("=" * 60)
+        print("Type commands or 'quit' to exit")
+        print("Use 'help' for available commands\n")
+        
+        while True:
+            try:
+                user_input = input("claw> ").strip()
+                
+                if not user_input:
+                    continue
+                
+                if user_input.lower() in ['quit', 'exit', 'q']:
+                    print("\n👋 Goodbye!\n")
+                    break
+                
+                if user_input.lower() == 'help':
+                    print(self.get_help())
+                    continue
+                
+                if user_input.lower().startswith('help '):
+                    category = user_input.split(' ', 1)[1]
+                    print(self.get_help(category))
+                    continue
+                
+                # Parse command
+                command = self.parse_command(user_input)
+                
+                if not command:
+                    print(f"⚠️  Unknown command: {user_input}")
+                    print("   Try 'help' for available commands\n")
+                    continue
+                
+                print(f"\n▶️  Executing: {command}\n")
+                
+                # Execute
+                result = self.execute(command)
+                
+                if result['success']:
+                    print(result.get('stdout', ''))
+                else:
+                    print(f"❌ Error: {result.get('error', result.get('stderr', 'Unknown error'))}")
+                
+                print(f"\n⏱️  Duration: {result.get('duration_seconds', 0):.2f}s\n")
+            
+            except KeyboardInterrupt:
+                print("\n\n👋 Goodbye!\n")
+                break
+            
+            except Exception as e:
+                print(f"\n❌ Error: {e}\n")
+
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Unified CLI v3")
+    parser.add_argument('command', nargs='?', help='Command to execute')
+    parser.add_argument('args', nargs='*', help='Additional arguments')
+    parser.add_argument('--interactive', '-i', action='store_true', help='Interactive mode')
+    parser.add_argument('--suggest', type=str, help='Get suggestions')
+    args = parser.parse_args()
+    
+    cli = UnifiedCLI()
+    
+    if args.interactive:
+        cli.interactive_mode()
+    
+    elif args.suggest:
+        suggestions = cli.suggest(args.suggest)
+        print(f"\n💡 Suggestions for '{args.suggest}':\n")
+        for s in suggestions:
+            print(f"  {s}")
+    
+    elif args.command:
+        command = cli.parse_command(args.command)
+        
+        if not command:
+            print(f"⚠️  Unknown command: {args.command}")
+            print("\nTry 'python unified_cli_v3.py --help' for usage")
+            sys.exit(1)
+        
+        print(f"▶️  Executing: {command}\n")
+        
+        result = cli.execute(command, args.args)
+        
+        if result['success']:
+            print(result.get('stdout', ''))
+            sys.exit(0)
+        else:
+            print(f"❌ Error: {result.get('error', result.get('stderr', 'Unknown error'))}")
+            sys.exit(1)
+    
+    else:
+        print(cli.get_help())
+
+if __name__ == "__main__":
+    main()

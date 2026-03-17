@@ -1,0 +1,27 @@
+{
+  "last_run": "2026-03-17T18:20:03.678647",
+  "total_runs": 5,
+  "reports_generated": 11,
+  "last_cleanliness_score": 20,
+  "last_product_analysis": {
+    "tools_analyzed": 3480,
+    "high_value": 10,
+    "medium_value": 0,
+    "low_value": 0
+  },
+  "pending_actions": [
+    {
+      "priority": "P0",
+      "action": "合并重复文件夹",
+      "count": 40
+    },
+    {
+      "priority": "P1",
+      "action": "统一命名规范"
+    },
+    {
+      "priority": "P1",
+      "action": "整理散落文件"
+    }
+  ]
+}

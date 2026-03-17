@@ -1,0 +1,255 @@
+{
+  "rounds": [
+    {
+      "round_id": 1,
+      "participating_clients": [
+        "client_7",
+        "client_1",
+        "client_0",
+        "client_6",
+        "client_3"
+      ],
+      "aggregated_model": {
+        "weight_0": -0.052629,
+        "weight_1": 0.138993,
+        "weight_2": -0.011366,
+        "weight_3": -0.017898,
+        "weight_4": 0.045729,
+        "weight_5": 0.008962,
+        "weight_6": 0.017022,
+        "weight_7": 0.01456,
+        "weight_8": 0.020569,
+        "weight_9": -0.038829
+      },
+      "global_loss": 1.0023,
+      "global_accuracy": 0.5,
+      "timestamp": "2026-03-16T09:42:07.027714"
+    },
+    {
+      "round_id": 2,
+      "participating_clients": [
+        "client_5",
+        "client_6",
+        "client_9",
+        "client_1",
+        "client_0"
+      ],
+      "aggregated_model": {
+        "weight_0": -0.014647,
+        "weight_1": 0.120547,
+        "weight_2": 0.029637,
+        "weight_3": -0.047917,
+        "weight_4": 0.039483,
+        "weight_5": 0.017396,
+        "weight_6": 0.006678,
+        "weight_7": 0.03755,
+        "weight_8": -0.021176,
+        "weight_9": -0.077996
+      },
+      "global_loss": 0.9402,
+      "global_accuracy": 0.5377,
+      "timestamp": "2026-03-16T09:42:07.029474"
+    },
+    {
+      "round_id": 3,
+      "participating_clients": [
+        "client_9",
+        "client_2",
+        "client_7",
+        "client_1",
+        "client_4"
+      ],
+      "aggregated_model": {
+        "weight_0": 0.01967,
+        "weight_1": 0.146823,
+        "weight_2": 0.091024,
+        "weight_3": 0.008826,
+        "weight_4": 0.127176,
+        "weight_5": 0.013187,
+        "weight_6": 0.095065,
+        "weight_7": -0.018521,
+        "weight_8": 0.06445,
+        "weight_9": 0.012898
+      },
+      "global_loss": 0.8398,
+      "global_accuracy": 0.5575,
+      "timestamp": "2026-03-16T09:42:07.029474"
+    },
+    {
+      "round_id": 4,
+      "participating_clients": [
+        "client_9",
+        "client_0",
+        "client_8",
+        "client_1",
+        "client_4"
+      ],
+      "aggregated_model": {
+        "weight_0": 0.01115,
+        "weight_1": 0.011691,
+        "weight_2": 0.078022,
+        "weight_3": 0.142555,
+        "weight_4": -0.047879,
+        "weight_5": -0.073726,
+        "weight_6": -0.042461,
+        "weight_7": -0.112423,
+        "weight_8": 0.041692,
+        "weight_9": 0.112422
+      },
+      "global_loss": 0.7961,
+      "global_accuracy": 0.5878,
+      "timestamp": "2026-03-16T09:42:07.029474"
+    },
+    {
+      "round_id": 5,
+      "participating_clients": [
+        "client_8",
+        "client_4",
+        "client_9",
+        "client_6",
+        "client_2"
+      ],
+      "aggregated_model": {
+        "weight_0": -0.122715,
+        "weight_1": 0.008308,
+        "weight_2": -0.086044,
+        "weight_3": -0.089421,
+        "weight_4": 0.009106,
+        "weight_5": 0.015231,
+        "weight_6": -0.055065,
+        "weight_7": 0.068463,
+        "weight_8": -0.02674,
+        "weight_9": 0.067166
+      },
+      "global_loss": 0.689,
+      "global_accuracy": 0.6185,
+      "timestamp": "2026-03-16T09:42:07.029474"
+    },
+    {
+      "round_id": 6,
+      "participating_clients": [
+        "client_4",
+        "client_0",
+        "client_6",
+        "client_7",
+        "client_3"
+      ],
+      "aggregated_model": {
+        "weight_0": -0.041167,
+        "weight_1": 0.009833,
+        "weight_2": 0.027783,
+        "weight_3": 0.128466,
+        "weight_4": -0.064093,
+        "weight_5": -0.115358,
+        "weight_6": -0.028221,
+        "weight_7": 0.018518,
+        "weight_8": 0.005455,
+        "weight_9": 0.22729
+      },
+      "global_loss": 0.7481,
+      "global_accuracy": 0.6432,
+      "timestamp": "2026-03-16T09:42:07.029474"
+    },
+    {
+      "round_id": 7,
+      "participating_clients": [
+        "client_7",
+        "client_8",
+        "client_1",
+        "client_4",
+        "client_6"
+      ],
+      "aggregated_model": {
+        "weight_0": 0.065164,
+        "weight_1": -0.024713,
+        "weight_2": -0.022915,
+        "weight_3": -0.006393,
+        "weight_4": 0.110298,
+        "weight_5": 0.086526,
+        "weight_6": 0.000815,
+        "weight_7": -0.064264,
+        "weight_8": -0.024028,
+        "weight_9": -0.052228
+      },
+      "global_loss": 0.6325,
+      "global_accuracy": 0.6995,
+      "timestamp": "2026-03-16T09:42:07.029474"
+    },
+    {
+      "round_id": 8,
+      "participating_clients": [
+        "client_9",
+        "client_8",
+        "client_7",
+        "client_0",
+        "client_2"
+      ],
+      "aggregated_model": {
+        "weight_0": -0.005144,
+        "weight_1": -0.033589,
+        "weight_2": -0.009903,
+        "weight_3": -0.033531,
+        "weight_4": 0.016223,
+        "weight_5": 0.00971,
+        "weight_6": 0.030765,
+        "weight_7": -0.096805,
+        "weight_8": 0.130382,
+        "weight_9": -0.007705
+      },
+      "global_loss": 0.5675,
+      "global_accuracy": 0.6998,
+      "timestamp": "2026-03-16T09:42:07.029474"
+    },
+    {
+      "round_id": 9,
+      "participating_clients": [
+        "client_4",
+        "client_8",
+        "client_2",
+        "client_5",
+        "client_0"
+      ],
+      "aggregated_model": {
+        "weight_0": -0.1396,
+        "weight_1": 0.046086,
+        "weight_2": -0.061268,
+        "weight_3": -0.051771,
+        "weight_4": 0.037401,
+        "weight_5": 0.167518,
+        "weight_6": 0.018402,
+        "weight_7": -0.031349,
+        "weight_8": 0.064721,
+        "weight_9": 0.125462
+      },
+      "global_loss": 0.6344,
+      "global_accuracy": 0.7323,
+      "timestamp": "2026-03-16T09:42:07.030487"
+    },
+    {
+      "round_id": 10,
+      "participating_clients": [
+        "client_1",
+        "client_9",
+        "client_0",
+        "client_5",
+        "client_6"
+      ],
+      "aggregated_model": {
+        "weight_0": 0.015845,
+        "weight_1": -0.009296,
+        "weight_2": -0.052052,
+        "weight_3": 0.014505,
+        "weight_4": -0.050485,
+        "weight_5": 0.045033,
+        "weight_6": -0.053067,
+        "weight_7": -0.052078,
+        "weight_8": 0.088033,
+        "weight_9": -0.062812
+      },
+      "global_loss": 0.6132,
+      "global_accuracy": 0.7555,
+      "timestamp": "2026-03-16T09:42:07.030487"
+    }
+  ],
+  "last_updated": "2026-03-16T09:42:07.031487"
+}

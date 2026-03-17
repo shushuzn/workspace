@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Innovator Dashboard v3.0 - 7-Persona System</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+        
+        .last-update {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        
+        /* Stats Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-card .label {
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.95em;
+        }
+        
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h2 .icon {
+            font-size: 1.3em;
+        }
+        
+        /* Session List */
+        .session-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .session-item {
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            transition: background 0.2s;
+        }
+        
+        .session-item:hover {
+            background: #e9ecef;
+        }
+        
+        .session-item .session-id {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9em;
+        }
+        
+        .session-item .session-time {
+            color: #888;
+            font-size: 0.85em;
+            margin: 5px 0;
+        }
+        
+        .session-item .session-stats {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85em;
+            color: #555;
+        }
+        
+        .session-item .session-stats span {
+            background: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+        }
+        
+        /* Innovation Table */
+        .innovation-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .innovation-table th,
+        .innovation-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .innovation-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #555;
+        }
+        
+        .innovation-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .status-badge {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        .status-implemented {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status-in_progress {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-pending {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .impact-badge {
+            padding: 4px 8px;
+            border-radius: 8px;
+            font-size: 0.8em;
+        }
+        
+        .impact-high {
+            background: #ffc107;
+            color: #000;
+        }
+        
+        .impact-medium {
+            background: #17a2b8;
+            color: #fff;
+        }
+        
+        /* Memory Progress */
+        .memory-stats {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .memory-stat {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .memory-stat .value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .memory-stat .label {
+            color: #666;
+            font-size: 0.9em;
+            margin-top: 5px;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 15px 0;
+        }
+        
+        .progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 0.85em;
+            font-weight: 600;
+        }
+        
+        /* Git Stats */
+        .git-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .git-stat {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .git-stat .value {
+            font-size: 2em;
+            font-weight: bold;
+        }
+        
+        .git-stat .label {
+            font-size: 0.85em;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+        
+        .commit-list {
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .commit-item {
+            padding: 10px;
+            border-left: 3px solid #667eea;
+            background: #f8f9fa;
+            margin-bottom: 8px;
+            border-radius: 5px;
+            font-size: 0.85em;
+        }
+        
+        .commit-item .commit-hash {
+            font-family: monospace;
+            color: #667eea;
+            font-size: 0.8em;
+        }
+        
+        .commit-item .commit-message {
+            color: #333;
+            margin-top: 3px;
+        }
+        
+        /* Health Indicators */
+        .health-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+        
+        .health-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+        }
+        
+        .health-item .label {
+            font-size: 0.9em;
+            color: #666;
+            margin-bottom: 8px;
+        }
+        
+        .health-item .bar-container {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 12px;
+            overflow: hidden;
+        }
+        
+        .health-item .bar {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease;
+        }
+        
+        .bar-healthy {
+            background: #28a745;
+        }
+        
+        .bar-warning {
+            background: #ffc107;
+        }
+        
+        .bar-critical {
+            background: #dc3545;
+        }
+        
+        .health-item .percentage {
+            text-align: right;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+        
+        .service-status {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+            background: #f8f9fa;
+            margin-bottom: 8px;
+            border-radius: 8px;
+        }
+        
+        .service-status .name {
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .service-status .port {
+            color: #888;
+            font-size: 0.85em;
+        }
+        
+        .service-status .status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 600;
+        }
+        
+        .status-unknown {
+            background: #e9ecef;
+            color: #666;
+        }
+        
+        /* Persona Chart */
+        .chart-container {
+            position: relative;
+            height: 300px;
+        }
+        
+        /* Loading State */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #667eea;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s linear infinite;
+            margin-left: 10px;
+            vertical-align: middle;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            header h1 {
+                font-size: 1.8em;
+            }
+        }
+        
+        /* Refresh Button */
+        .refresh-btn {
+            background: white;
+            color: #667eea;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        .refresh-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎭 Innovator Dashboard v3.0</h1>
+            <p>7-Persona System Real-time Monitoring</p>
+            <div class="last-update" id="last-update">Loading...</div>
+            <button class="refresh-btn" onclick="loadDashboard()">🔄 Refresh Data</button>
+        </header>
+        
+        <!-- Stats Overview -->
+        <div class="stats-grid" id="stats-grid">
+            <div class="stat-card">
+                <div class="icon">📝</div>
+                <div class="value" id="stat-sessions">-</div>
+                <div class="label">Total Sessions</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">💡</div>
+                <div class="value" id="stat-innovations">-</div>
+                <div class="label">Innovations</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">🧠</div>
+                <div class="value" id="stat-memory">-</div>
+                <div class="label">Memory Notes</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">📊</div>
+                <div class="value" id="stat-commits">-</div>
+                <div class="label">Git Commits</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">⚡</div>
+                <div class="value" id="stat-health">-</div>
+                <div class="label">System Health</div>
+            </div>
+        </div>
+        
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Session History -->
+            <div class="card">
+                <h2><span class="icon">📝</span> Session History</h2>
+                <div class="session-list" id="session-list">
+                    <div class="loading">Loading sessions</div>
+                </div>
+            </div>
+            
+            <!-- Innovation Database -->
+            <div class="card">
+                <h2><span class="icon">💡</span> Innovation Database</h2>
+                <table class="innovation-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Impact</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="innovation-list">
+                        <tr><td colspan="4" class="loading">Loading innovations</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Memory Distillation -->
+            <div class="card">
+                <h2><span class="icon">🧠</span> Memory Distillation</h2>
+                <div class="memory-stats">
+                    <div class="memory-stat">
+                        <div class="value" id="memory-notes">-</div>
+                        <div class="label">Daily Notes</div>
+                    </div>
+                    <div class="memory-stat">
+                        <div class="value" id="memory-size">-</div>
+                        <div class="label">MEMORY.md (KB)</div>
+                    </div>
+                </div>
+                <div class="label">Weekly Progress</div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="memory-progress" style="width: 0%">0%</div>
+                </div>
+                <div id="recent-insights"></div>
+            </div>
+            
+            <!-- Git Statistics -->
+            <div class="card">
+                <h2><span class="icon">📊</span> Git Statistics</h2>
+                <div class="git-stats">
+                    <div class="git-stat">
+                        <div class="value" id="git-today">-</div>
+                        <div class="label">Today</div>
+                    </div>
+                    <div class="git-stat">
+                        <div class="value" id="git-week">-</div>
+                        <div class="label">This Week</div>
+                    </div>
+                    <div class="git-stat">
+                        <div class="value" id="git-total">-</div>
+                        <div class="label">Total</div>
+                    </div>
+                </div>
+                <div class="label">Recent Commits</div>
+                <div class="commit-list" id="commit-list">
+                    <div class="loading">Loading commits</div>
+                </div>
+            </div>
+            
+            <!-- System Health -->
+            <div class="card">
+                <h2><span class="icon">⚡</span> System Health</h2>
+                <div class="health-grid" id="health-grid">
+                    <div class="loading">Loading health data</div>
+                </div>
+                <h3 style="margin-top: 20px; margin-bottom: 10px; font-size: 1.1em;">🖥️ Cloud Services</h3>
+                <div id="service-list">
+                    <div class="loading">Loading services</div>
+                </div>
+            </div>
+            
+            <!-- Persona Scores -->
+            <div class="card">
+                <h2><span class="icon">🎭</span> 7-Persona Scores</h2>
+                <div class="chart-container">
+                    <canvas id="persona-chart"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // API Base URL
+        const API_BASE = window.location.origin;
+        
+        // Chart instance
+        let personaChart = null;
+        
+        // Update timestamp
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('last-update').textContent = 
+                'Last Update: ' + now.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit', 
+                    second: '2-digit' 
+                });
+        }
+        
+        // Load dashboard data
+        async function loadDashboard() {
+            try {
+                const response = await fetch(`${API_BASE}/api/dashboard`);
+                const data = await response.json();
+                
+                // Update stats
+                document.getElementById('stat-sessions').textContent = data.sessions.total || 0;
+                document.getElementById('stat-innovations').textContent = data.innovations.total || 0;
+                document.getElementById('stat-memory').textContent = data.memory.daily_notes || 0;
+                document.getElementById('stat-commits').textContent = data.git.total_commits || 0;
+                document.getElementById('stat-health').textContent = 
+                    data.health.local.status === 'healthy' ? '✅' : '⚠️';
+                
+                // Update sessions
+                updateSessions(data.sessions.sessions || []);
+                
+                // Update innovations
+                updateInnovations(data.innovations.innovations || []);
+                
+                // Update memory
+                updateMemory(data.memory);
+                
+                // Update git
+                updateGit(data.git);
+                
+                // Update health
+                updateHealth(data.health);
+                
+                // Update personas
+                updatePersonas(data.personas);
+                
+                updateTime();
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                document.querySelectorAll('.loading').forEach(el => {
+                    el.textContent = 'Error loading data. Is API server running?';
+                });
+            }
+        }
+        
+        function updateSessions(sessions) {
+            const container = document.getElementById('session-list');
+            if (sessions.length === 0) {
+                container.innerHTML = '<p style="text-align:center;color:#888;">No sessions found</p>';
+                return;
+            }
+            
+            container.innerHTML = sessions.map(s => `
+                <div class="session-item">
+                    <div class="session-id">📝 ${s.id}</div>
+                    <div class="session-time">⏰ ${s.timestamp}</div>
+                    <div class="session-stats">
+                        <span>📋 ${s.tasks_completed} tasks</span>
+                        <span>💡 ${s.innovations} innovations</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function updateInnovations(innovations) {
+            const tbody = document.getElementById('innovation-list');
+            if (innovations.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4" style="text-align:center;color:#888;">No innovations</td></tr>';
+                return;
+            }
+            
+            tbody.innerHTML = innovations.map(i => `
+                <tr>
+                    <td><code>${i.id}</code></td>
+                    <td>${i.title}</td>
+                    <td><span class="impact-badge impact-${i.impact}">${i.impact}</span></td>
+                    <td><span class="status-badge status-${i.status}">${i.status.replace('_', ' ')}</span></td>
+                </tr>
+            `).join('');
+        }
+        
+        function updateMemory(memory) {
+            document.getElementById('memory-notes').textContent = memory.daily_notes || 0;
+            document.getElementById('memory-size').textContent = (memory.memory_file_size || 0) + ' KB';
+            
+            const progress = memory.weekly_progress || 0;
+            const progressBar = document.getElementById('memory-progress');
+            progressBar.style.width = progress + '%';
+            progressBar.textContent = progress + '%';
+            
+            const insights = document.getElementById('recent-insights');
+            if (memory.recent_insights && memory.recent_insights.length > 0) {
+                insights.innerHTML = `
+                    <div class="label" style="margin-top:15px;">Recent Notes</div>
+                    ${memory.recent_insights.map(i => `
+                        <div style="padding:8px;background:#f8f9fa;margin:5px 0;border-radius:5px;font-size:0.85em;">
+                            📄 ${i.date}
+                        </div>
+                    `).join('')}
+                `;
+            }
+        }
+        
+        function updateGit(git) {
+            document.getElementById('git-today').textContent = git.today_commits || 0;
+            document.getElementById('git-week').textContent = git.week_commits || 0;
+            document.getElementById('git-total').textContent = git.total_commits || 0;
+            
+            const commits = document.getElementById('commit-list');
+            if (git.recent_commits && git.recent_commits.length > 0) {
+                commits.innerHTML = git.recent_commits.map(c => `
+                    <div class="commit-item">
+                        <div class="commit-hash">🔗 ${c.hash}</div>
+                        <div class="commit-message">${c.message}</div>
+                    </div>
+                `).join('');
+            } else {
+                commits.innerHTML = '<p style="text-align:center;color:#888;">No commits found</p>';
+            }
+        }
+        
+        function updateHealth(health) {
+            const grid = document.getElementById('health-grid');
+            const local = health.local || {};
+            
+            grid.innerHTML = `
+                <div class="health-item">
+                    <div class="label">CPU Usage</div>
+                    <div class="bar-container">
+                        <div class="bar ${getHealthClass(local.cpu_percent)}" 
+                             style="width: ${local.cpu_percent || 0}%"></div>
+                    </div>
+                    <div class="percentage">${(local.cpu_percent || 0).toFixed(1)}%</div>
+                </div>
+                <div class="health-item">
+                    <div class="label">Memory Usage</div>
+                    <div class="bar-container">
+                        <div class="bar ${getHealthClass(local.memory_percent)}" 
+                             style="width: ${local.memory_percent || 0}%"></div>
+                    </div>
+                    <div class="percentage">${(local.memory_percent || 0).toFixed(1)}%</div>
+                </div>
+                <div class="health-item">
+                    <div class="label">Disk Usage</div>
+                    <div class="bar-container">
+                        <div class="bar ${getHealthClass(local.disk_percent)}" 
+                             style="width: ${local.disk_percent || 0}%"></div>
+                    </div>
+                    <div class="percentage">${(local.disk_percent || 0).toFixed(1)}%</div>
+                </div>
+                <div class="health-item">
+                    <div class="label">Status</div>
+                    <div style="font-size:1.5em;text-align:center;margin-top:10px;">
+                        ${local.status === 'healthy' ? '✅' : local.status === 'warning' ? '⚠️' : '🔴'}
+                    </div>
+                </div>
+            `;
+            
+            // Services
+            const services = document.getElementById('service-list');
+            if (health.services && health.services.length > 0) {
+                services.innerHTML = health.services.map(s => `
+                    <div class="service-status">
+                        <div>
+                            <div class="name">${s.name}</div>
+                            <div class="port">Port ${s.port}</div>
+                        </div>
+                        <div class="status status-${s.status}">${s.status}</div>
+                    </div>
+                `).join('');
+            }
+        }
+        
+        function getHealthClass(value) {
+            if (value < 70) return 'bar-healthy';
+            if (value < 90) return 'bar-warning';
+            return 'bar-critical';
+        }
+        
+        function updatePersonas(personas) {
+            const ctx = document.getElementById('persona-chart').getContext('2d');
+            
+            if (personaChart) {
+                personaChart.destroy();
+            }
+            
+            const history = personas.history || [];
+            const labels = history.map(h => h.date).reverse();
+            
+            const datasets = [
+                { label: 'Planner', data: history.map(h => h.scores.planner).reverse(), borderColor: '#667eea', fill: false },
+                { label: 'Executor', data: history.map(h => h.scores.executor).reverse(), borderColor: '#764ba2', fill: false },
+                { label: 'Critic', data: history.map(h => h.scores.critic).reverse(), borderColor: '#f093fb', fill: false },
+                { label: 'Learner', data: history.map(h => h.scores.learner).reverse(), borderColor: '#f5576c', fill: false },
+                { label: 'Coordinator', data: history.map(h => h.scores.coordinator).reverse(), borderColor: '#4facfe', fill: false },
+                { label: 'Innovator', data: history.map(h => h.scores.innovator).reverse(), borderColor: '#43e97b', fill: false },
+                { label: 'Metacognition', data: history.map(h => h.scores.metacognition).reverse(), borderColor: '#fa709a', fill: false }
+            ];
+            
+            personaChart = new Chart(ctx, {
+                type: 'line',
+                data: { labels, datasets },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'bottom',
+                            labels: { boxWidth: 12, font: { size: 10 } }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 70,
+                            max: 100
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Auto-refresh every 5 minutes
+        setTimeout(() => location.reload(), 300000);
+        
+        // Initial load
+        loadDashboard();
+        
+        // Update time every second
+        setInterval(updateTime, 1000);
+    </script>
+</body>
+</html>

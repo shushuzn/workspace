@@ -1,0 +1,38 @@
+{
+  "code": {
+    "type": "code",
+    "directory": "D:\\OpenClaw\\workspace\\30-scripts-tools",
+    "file_count": 965,
+    "scores": {
+      "syntax": 90,
+      "documentation": 73,
+      "maintainability": 85,
+      "efficiency": 100,
+      "testing": 50,
+      "style": 100
+    },
+    "weighted_score": 82.1,
+    "grade": "B (Good)",
+    "scored_at": "2026-03-15T09:56:08.049015"
+  },
+  "paper": {
+    "type": "paper",
+    "directory": "D:\\OpenClaw\\workspace\\06-research",
+    "file_count": 317,
+    "scores": {
+      "clarity": 0,
+      "completeness": 10.0,
+      "rigor": 0,
+      "reproducibility": 23,
+      "significance": 4
+    },
+    "weighted_score": 6.5,
+    "grade": "F (Poor)",
+    "scored_at": "2026-03-15T09:56:08.624657"
+  },
+  "overall": {
+    "score": 44.3,
+    "grade": "F (Poor)"
+  },
+  "scored_at": "2026-03-15T09:56:08.624657"
+}

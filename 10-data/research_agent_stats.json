@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-03-16T18:12:20.581201",
+  "insights": {
+    "total": 9,
+    "by_type": {
+      "method": 5,
+      "opportunity": 4
+    },
+    "avg_confidence": 0.8722222222222222,
+    "avg_relevance": 88.11111111111111
+  },
+  "actions": {
+    "total": 9,
+    "by_priority": {
+      "high": 6,
+      "medium": 1,
+      "critical": 2
+    },
+    "by_status": {
+      "pending": 9
+    },
+    "pending": 9
+  },
+  "sessions": {
+    "total": 1,
+    "completed": 1,
+    "failed": 0,
+    "avg_papers_scanned": 5.0,
+    "avg_insights": 9.0
+  }
+}

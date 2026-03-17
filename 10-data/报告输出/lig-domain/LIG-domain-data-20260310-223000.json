@@ -1,0 +1,105 @@
+{
+  "domain": "LIG",
+  "collected_at": "2026-03-10T22:30:00.751720",
+  "impact": {
+    "papers_count": 336,
+    "annual_papers": 174,
+    "papers_by_year": {
+      "unknown": 31,
+      "null": 32,
+      "2026": 174,
+      "2025": 16
+    },
+    "estimated_citations": 6720,
+    "xp": 415,
+    "source": "arxiv_pubmed_json_and_literature_csv"
+  },
+  "talent": {
+    "authors_count": 543,
+    "research_groups": 54,
+    "institutions": [],
+    "xp": 594,
+    "source": "author_network_files"
+  },
+  "application": {
+    "application_fields": [
+      "Neural Recording",
+      "Gas Detection",
+      "Health Monitoring",
+      "Cancer Therapy"
+    ],
+    "products_count": 32,
+    "xp": 2000,
+    "source": "knowledge_graph_and_industry_reports"
+  },
+  "open_source": {
+    "python_scripts": 1,
+    "powershell_scripts": 9,
+    "js_tools": 6,
+    "html_tools": 20,
+    "xp": 2800,
+    "source": "local_script_files"
+  },
+  "industry": {
+    "companies_count": 28,
+    "cases_count": 32,
+    "patents_count": 52,
+    "xp": 586,
+    "source": "industry_and_patent_reports"
+  },
+  "education": {
+    "m_notes": 2,
+    "p_notes": 3,
+    "t_notes": 1,
+    "total_notes": 6,
+    "xp": 300,
+    "source": "research_notes_as_educational_content"
+  },
+  "technology": {
+    "trl_level": 5.0,
+    "patents_count": 52,
+    "xp": 505,
+    "source": "trl_assessment_and_patents"
+  },
+  "theory": {
+    "theory_documents": 12,
+    "xp": 600,
+    "source": "theory_documents"
+  },
+  "innovation": {
+    "innovation_points": 17,
+    "xp": 850,
+    "source": "opportunity_library"
+  },
+  "collaboration": {
+    "institutions_count": 2,
+    "institutions": [
+      "City University of Hong Kong",
+      "Rice University"
+    ],
+    "authors_count": 543,
+    "international_collaborations": 1,
+    "xp": 45,
+    "source": "team_monitor_file_analysis"
+  },
+  "funding": {
+    "estimated_funding_usd": 540.0,
+    "research_groups": 54,
+    "institutions_count": 2,
+    "xp": 5,
+    "source": "estimated_from_research_groups_and_institutions"
+  },
+  "xp_scores": {
+    "theory_xp": 600,
+    "technology_xp": 505,
+    "impact_xp": 415,
+    "application_xp": 2000,
+    "talent_xp": 594,
+    "funding_xp": 5,
+    "innovation_xp": 850,
+    "collaboration_xp": 45,
+    "education_xp": 300,
+    "open_source_xp": 2800,
+    "industry_xp": 586
+  }
+}

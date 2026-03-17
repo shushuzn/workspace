@@ -1,0 +1,19 @@
+{
+  "keywords": [
+    "graph neural network molecular",
+    "transformer drug discovery",
+    "machine learning conductivity prediction",
+    "deep learning materials science",
+    "neural network property prediction"
+  ],
+  "categories": [
+    "cs.LG",
+    "cs.AI",
+    "physics.chem-ph",
+    "cond-mat.mtrl-sci"
+  ],
+  "maxResults": 50,
+  "sortBy": "submittedDate",
+  "sortOrder": "descending",
+  "dataDir": "./data/papers"
+}

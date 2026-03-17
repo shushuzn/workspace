@@ -1,0 +1,69 @@
+{
+  "workflow_name": "7-Persona Auto-Workflow",
+  "version": "3.0",
+  "interval_minutes": 30,
+  "enabled_personas": [
+    "metacognition",
+    "planner",
+    "critic",
+    "coordinator",
+    "innovator",
+    "executor",
+    "learner"
+  ],
+  "tools": {
+    "metacognition": "dashboard_integration.py",
+    "planner": "task_priority_scorer.py",
+    "critic": "critic_auto_fix.py",
+    "coordinator": "load_balancer.py",
+    "innovator": "innovation_pattern_matcher.py",
+    "executor": "parallel_executor.py",
+    "learner": "auto_distill.py"
+  },
+  "widgets": {
+    "health": "dashboard_health_widget.py",
+    "decisions": "dashboard_decision_timeline.py",
+    "anomalies": "dashboard_anomaly_alerts.py"
+  },
+  "collectors": {
+    "arxiv": "arxiv_collector.py",
+    "github": "github_trending_collector.py",
+    "medium": "medium_article_collector.py"
+  },
+  "reviewers": {
+    "code": "code_reviewer.py",
+    "paper": "paper_summarizer.py",
+    "quality": "quality_scorer.py"
+  },
+  "knowledge": {
+    "graph_updater": "knowledge_graph_updater.py",
+    "graph_builder": "knowledge-graph-builder.py"
+  },
+  "notifications": {
+    "enabled": true,
+    "channel": "feishu",
+    "on_complete": true,
+    "on_error": true,
+    "quiet_hours": {
+      "enabled": false,
+      "start": "23:00",
+      "end": "07:00"
+    }
+  },
+  "auto_execute": {
+    "low_risk_only": true,
+    "max_risk_score": 40,
+    "require_confirmation_above": 60
+  },
+  "schedule": {
+    "enabled": true,
+    "cron_expression": "*/30 * * * *",
+    "timezone": "Asia/Hong_Kong"
+  },
+  "reporting": {
+    "generate_summary": true,
+    "save_to_file": true,
+    "file_prefix": "heartbeat-report",
+    "retention_days": 7
+  }
+}

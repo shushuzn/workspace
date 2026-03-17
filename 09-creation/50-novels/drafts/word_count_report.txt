@@ -1,0 +1,202 @@
+Chapter Word Count Report
+============================================================
+Time: 2026-03-11 00:46:04
+Target: 3000 words/chapter
+============================================================
+
+第 84-88 章_第一卷大结局_原始设定.md: 2552 words [FAIL]
+  Gap: 448 words
+第 1 章_v3.0 审核优化版.md: 2672 words [FAIL]
+  Gap: 328 words
+第 1 章_v3.0 重写版.md: 1867 words [FAIL]
+  Gap: 1133 words
+第 1 章_去 AI 化重写版.md: 3095 words [PASS]
+第 1 章_深度去 AI 化版.md: 3488 words [PASS]
+第 1 章_终极去 AI 化版.md: 3381 words [PASS]
+第 1 章_高中设定版_5000 字.md: 4086 words [PASS]
+第 2 章_v3.0 重写版.md: 2057 words [FAIL]
+  Gap: 943 words
+第 2 章_高中设定版.md: 3170 words [PASS]
+第 2 章_高中设定版_5000 字.md: 3633 words [PASS]
+第 3 章_v3.0 重写版.md: 1956 words [FAIL]
+  Gap: 1044 words
+第 3 章_高中设定版.md: 3264 words [PASS]
+第 3 章_高中设定版_5000 字.md: 3350 words [PASS]
+第 4 章_v3.0 重写版.md: 2068 words [FAIL]
+  Gap: 932 words
+第 4 章_第一次心流_人工优化版.md: 1868 words [FAIL]
+  Gap: 1132 words
+第 4 章_第一次心流_原始设定.md: 2240 words [FAIL]
+  Gap: 760 words
+第 5 章_江越的秘密_原始设定.md: 3031 words [PASS]
+第 6 章_母亲的发现_原始设定.md: 3170 words [PASS]
+第 7 章_第一次月考复盘_人工优化版.md: 2389 words [FAIL]
+  Gap: 611 words
+第 7 章_第一次月考复盘_原始设定.md: 2454 words [FAIL]
+  Gap: 546 words
+第 8 章_费曼技巧_人工优化版.md: 1739 words [FAIL]
+  Gap: 1261 words
+第 8 章_费曼技巧_原始设定.md: 2055 words [FAIL]
+  Gap: 945 words
+第 9 章_专注力危机_原始设定.md: 2266 words [FAIL]
+  Gap: 734 words
+第 10 章_第一次小测_原始设定.md: 2077 words [FAIL]
+  Gap: 923 words
+第 11 章_家长会前夕_原始设定.md: 2084 words [FAIL]
+  Gap: 916 words
+第 12 章_家长会_原始设定.md: 2341 words [FAIL]
+  Gap: 659 words
+第 13 章_寒假计划启动_原始设定.md: 2158 words [FAIL]
+  Gap: 842 words
+第 14 章_春节拜年_原始设定.md: 2616 words [FAIL]
+  Gap: 384 words
+第 15 章_江越竞赛获奖_原始设定.md: 2664 words [FAIL]
+  Gap: 336 words
+第 16 章_寒假中期检查_原始设定.md: 1936 words [FAIL]
+  Gap: 1064 words
+第 17 章_江越的烦恼_原始设定.md: 1960 words [FAIL]
+  Gap: 1040 words
+第 18 章_元宵节_原始设定.md: 1962 words [FAIL]
+  Gap: 1038 words
+第 19 章_寒假收尾_原始设定.md: 2177 words [FAIL]
+  Gap: 823 words
+第 20 章_新学期开始_原始设定.md: 2619 words [FAIL]
+  Gap: 381 words
+第 21 章_王雨薇的邀请_原始设定.md: 2049 words [FAIL]
+  Gap: 951 words
+第 22 章_班级前十目标_原始设定.md: 1894 words [FAIL]
+  Gap: 1106 words
+第 23 章_学习小组磨合_原始设定.md: 1874 words [FAIL]
+  Gap: 1126 words
+第 24 章_第一次月考_原始设定.md: 1757 words [FAIL]
+  Gap: 1243 words
+第 25 章_月考 95 分_原始设定.md: 2007 words [FAIL]
+  Gap: 993 words
+第 26 章_寒假计划复盘_原始设定.md: 1295 words [FAIL]
+  Gap: 1705 words
+第 27 章_江越的竞赛准备_原始设定.md: 1427 words [FAIL]
+  Gap: 1573 words
+第 28 章_王雨薇的秘密_原始设定.md: 1260 words [FAIL]
+  Gap: 1740 words
+第 29 章_期末考试目标_原始设定.md: 1221 words [FAIL]
+  Gap: 1779 words
+第 30 章_第一卷中期总结_原始设定.md: 1777 words [FAIL]
+  Gap: 1223 words
+第 31 章_英语补强计划启动_原始设定.md: 1447 words [FAIL]
+  Gap: 1553 words
+第 32 章_王雨薇的英语辅导_原始设定.md: 1511 words [FAIL]
+  Gap: 1489 words
+第 33 章_第一次英语小测_原始设定.md: 1416 words [FAIL]
+  Gap: 1584 words
+第 34 章_进步与挫折_原始设定.md: 1241 words [FAIL]
+  Gap: 1759 words
+第 35 章_坚持的力量_原始设定.md: 1363 words [FAIL]
+  Gap: 1637 words
+第 36 章_江越的竞赛初赛_原始设定.md: 1243 words [FAIL]
+  Gap: 1757 words
+第 37 章_竞赛结果公布_原始设定.md: 1214 words [FAIL]
+  Gap: 1786 words
+第 38 章_王雨薇的生日_原始设定.md: 1142 words [FAIL]
+  Gap: 1858 words
+第 39 章_期中考试动员_原始设定.md: 1241 words [FAIL]
+  Gap: 1759 words
+第 40 章_期中复习计划_原始设定.md: 2413 words [FAIL]
+  Gap: 587 words
+第 41 章_期中考试第一天_原始设定.md: 1226 words [FAIL]
+  Gap: 1774 words
+第 42 章_数学考试突破_原始设定.md: 1253 words [FAIL]
+  Gap: 1747 words
+第 43 章_英语考试挑战_原始设定.md: 1181 words [FAIL]
+  Gap: 1819 words
+第 44 章_成绩公布前夕_原始设定.md: 1075 words [FAIL]
+  Gap: 1925 words
+第 45 章_期中 105 分班级第 8_原始设定.md: 2005 words [FAIL]
+  Gap: 995 words
+第 46 章_学习小组庆祝_原始设定.md: 932 words [FAIL]
+  Gap: 2068 words
+第 47 章_期末目标 120 分_原始设定.md: 1209 words [FAIL]
+  Gap: 1791 words
+第 48 章_王雨薇的秘密_原始设定.md: 1027 words [FAIL]
+  Gap: 1973 words
+第 49 章_江越的决赛准备_原始设定.md: 1021 words [FAIL]
+  Gap: 1979 words
+第 50 章_第一卷 50 章总结_原始设定.md: 1960 words [FAIL]
+  Gap: 1040 words
+第 51 章_期末复习启动_原始设定.md: 1173 words [FAIL]
+  Gap: 1827 words
+第 52 章_王雨薇的额外辅导_原始设定.md: 1150 words [FAIL]
+  Gap: 1850 words
+第 53 章_江越决赛归来_原始设定.md: 1149 words [FAIL]
+  Gap: 1851 words
+第 54 章_学习小组分工_原始设定.md: 1007 words [FAIL]
+  Gap: 1993 words
+第 55 章_第一次模拟考_原始设定.md: 1214 words [FAIL]
+  Gap: 1786 words
+第 56 章_模拟考成绩公布_原始设定.md: 1250 words [FAIL]
+  Gap: 1750 words
+第 57 章_王雨薇的情感变化_原始设定.md: 1230 words [FAIL]
+  Gap: 1770 words
+第 58 章_江越的清华自主招生_原始设定.md: 1106 words [FAIL]
+  Gap: 1894 words
+第 59 章_学习小组的约定_原始设定.md: 946 words [FAIL]
+  Gap: 2054 words
+第 60 章_第二周复习总结_原始设定.md: 2083 words [FAIL]
+  Gap: 917 words
+第 61 章_第三周复习启动_原始设定.md: 1187 words [FAIL]
+  Gap: 1813 words
+第 62 章_专注力训练方法_原始设定.md: 1118 words [FAIL]
+  Gap: 1882 words
+第 63 章_王雨薇的发现_原始设定.md: 1328 words [FAIL]
+  Gap: 1672 words
+第 64 章_江越的决赛准备_原始设定.md: 1029 words [FAIL]
+  Gap: 1971 words
+第 65 章_第二次模拟考_原始设定.md: 1478 words [FAIL]
+  Gap: 1522 words
+第 66 章_模拟考成绩公布_原始设定.md: 1273 words [FAIL]
+  Gap: 1727 words
+第 67 章_王雨薇的情感深化_原始设定.md: 1301 words [FAIL]
+  Gap: 1699 words
+第 68 章_江越的决赛结果_原始设定.md: 1152 words [FAIL]
+  Gap: 1848 words
+第 69 章_学习小组的进步_原始设定.md: 1258 words [FAIL]
+  Gap: 1742 words
+第 70 章_第四周复习启动_原始设定.md: 2049 words [FAIL]
+  Gap: 951 words
+第 71 章_王雨薇的表白_原始设定.md: 1325 words [FAIL]
+  Gap: 1675 words
+第 72 章_林砚的回应_原始设定.md: 1333 words [FAIL]
+  Gap: 1667 words
+第 73 章_江越的感受_原始设定.md: 1097 words [FAIL]
+  Gap: 1903 words
+第 74 章_学习小组的支持_原始设定.md: 1260 words [FAIL]
+  Gap: 1740 words
+第 75 章_专注力 LV.MAX 完成_原始设定.md: 2087 words [FAIL]
+  Gap: 913 words
+第 76 章_期末复习第五周_原始设定.md: 1196 words [FAIL]
+  Gap: 1804 words
+第 77 章_王雨薇的等待_原始设定.md: 1061 words [FAIL]
+  Gap: 1939 words
+第 78 章_江越的决赛准备_原始设定.md: 1032 words [FAIL]
+  Gap: 1968 words
+第 79 章_学习小组的冲刺_原始设定.md: 1265 words [FAIL]
+  Gap: 1735 words
+第 80 章_第二层突破准备_原始设定.md: 2080 words [FAIL]
+  Gap: 920 words
+第 81 章_陈舟转学_原始设定.md: 1510 words [FAIL]
+  Gap: 1490 words
+第 82 章_陈舟帮助解题_原始设定.md: 1278 words [FAIL]
+  Gap: 1722 words
+第 83 章_志同道合_原始设定.md: 1180 words [FAIL]
+  Gap: 1820 words
+第 101 章_高三开学_原始设定.md: 1046 words [FAIL]
+  Gap: 1954 words
+第 102 章_陈舟的约定_原始设定.md: 1203 words [FAIL]
+  Gap: 1797 words
+第 103 章_第一轮复习_原始设定.md: 1376 words [FAIL]
+  Gap: 1624 words
+第 104 章_学习小组重聚_原始设定.md: 1316 words [FAIL]
+  Gap: 1684 words
+第 105 章_第一次月考_原始设定.md: 1275 words [FAIL]
+  Gap: 1725 words
+
+============================================================

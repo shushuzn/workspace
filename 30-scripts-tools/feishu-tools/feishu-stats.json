@@ -1,0 +1,30 @@
+{
+  "total_sent": 3,
+  "total_failed": 0,
+  "total_latency_ms": 2702,
+  "last_reset": "2026-03-14T15:50:06.854229",
+  "by_type": {
+    "text": {
+      "sent": 3,
+      "failed": 0
+    },
+    "card": {
+      "sent": 0,
+      "failed": 0
+    },
+    "image": {
+      "sent": 0,
+      "failed": 0
+    },
+    "file": {
+      "sent": 0,
+      "failed": 0
+    }
+  },
+  "hourly": {
+    "2026-03-14 15:00": {
+      "sent": 3,
+      "failed": 0
+    }
+  }
+}

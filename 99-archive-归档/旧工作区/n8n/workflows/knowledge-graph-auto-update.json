@@ -1,0 +1,168 @@
+{
+  "name": "知识图谱自动更新",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 6 * * *"
+          }
+        }
+      },
+      "id": "daily-6am",
+      "name": "Daily 6AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\knowledge-graph\\scripts\\kg-builder.py --input D:\\OpenClaw\\workspace\\memory D:\\OpenClaw\\workspace\\Medium --output D:\\OpenClaw\\workspace\\knowledge-graph\\auto\\graph --format all",
+        "options": {}
+      },
+      "id": "build-graph",
+      "name": "Build Knowledge Graph",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\OpenClaw\\workspace\\knowledge-graph\\extract-summaries.py",
+        "options": {}
+      },
+      "id": "extract-summaries",
+      "name": "Extract Summaries",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\OpenClaw\\workspace\\knowledge-graph\\enhance-relations.py",
+        "options": {}
+      },
+      "id": "enhance-relations",
+      "name": "Enhance Relations",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [660, 0]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\OpenClaw\\workspace\\knowledge-graph\\merge-and-enhance.py",
+        "options": {}
+      },
+      "id": "merge-graph",
+      "name": "Merge & Enhance",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [880, 0]
+    },
+    {
+      "parameters": {
+        "command": "cd D:\\obsidian\\Vault && git add knowledge-graph/ && git commit -m \"[auto] 知识图谱更新 $(Get-Date -Format 'yyyy-MM-dd')\" && git push",
+        "options": {}
+      },
+      "id": "git-commit",
+      "name": "Git Commit",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [1100, 0]
+    },
+    {
+      "parameters": {
+        "jsCode": "const output = $input.first().json.stdout || '';\nconst success = output.includes('[OK]') || output.includes('完成');\n\nreturn {\n  success: success,\n  message: output.substring(0, 500),\n  timestamp: new Date().toISOString()\n};",
+        "options": {}
+      },
+      "id": "check-result",
+      "name": "Check Result",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [1320, 0]
+    }
+  ],
+  "connections": {
+    "Daily 6AM": {
+      "main": [
+        [
+          {
+            "node": "Build Knowledge Graph",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Build Knowledge Graph": {
+      "main": [
+        [
+          {
+            "node": "Extract Summaries",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Summaries": {
+      "main": [
+        [
+          {
+            "node": "Enhance Relations",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enhance Relations": {
+      "main": [
+        [
+          {
+            "node": "Merge & Enhance",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Merge & Enhance": {
+      "main": [
+        [
+          {
+            "node": "Git Commit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Git Commit": {
+      "main": [
+        [
+          {
+            "node": "Check Result",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "OpenClaw"
+    },
+    {
+      "name": "Knowledge Graph"
+    },
+    {
+      "name": "Automation"
+    }
+  ]
+}

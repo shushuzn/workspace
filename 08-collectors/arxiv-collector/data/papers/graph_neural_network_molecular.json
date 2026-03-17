@@ -1,0 +1,939 @@
+{
+  "keyword": "graph neural network molecular",
+  "lastUpdated": "2026-03-13T14:15:39.414Z",
+  "totalPapers": 50,
+  "newPapers": 50,
+  "papers": [
+    {
+      "id": "http://arxiv.org/abs/2603.12262v1",
+      "title": "Video Streaming Thinking: VideoLLMs Can Watch and Think Simultaneously",
+      "summary": "Online Video Large Language Models (VideoLLMs) play a critical role in supporting responsive, real-time interaction. Existing methods focus on streaming perception, lacking a synchronized logical reasoning stream. However, directly applying test-time scaling methods incurs unacceptable response latency. To address this trade-off, we propose Video Streaming Thinking (VST), a novel paradigm for streaming video understanding. It supports a thinking while watching mechanism, which activates reasoning over incoming video clips during streaming. This design improves timely comprehension and coherent cognition while preserving real-time responsiveness by amortizing LLM reasoning latency over video playback. Furthermore, we introduce a comprehensive post-training pipeline that integrates VST-SFT, which structurally adapts the offline VideoLLM to causal streaming reasoning, and VST-RL, which provides end-to-end improvement through self-exploration in a multi-turn video interaction environment. Additionally, we devise an automated training-data synthesis pipeline that uses video knowledge graphs to generate high-quality streaming QA pairs, with an entity-relation grounded streaming Chain-of-Thought to enforce multi-evidence reasoning and sustained attention to the video stream. Extensive evaluations show that VST-7B performs strongly on online benchmarks, e.g. 79.5% on StreamingBench and 59.3% on OVO-Bench. Meanwhile, VST remains competitive on offline long-form or reasoning benchmarks. Compared with Video-R1, VST responds 15.7 times faster and achieves +5.4% improvement on VideoHolmes, demonstrating higher efficiency and strong generalization across diverse video understanding tasks. Code, data, and models will be released at https://github.com/1ranGuan/VST.",
+      "authors": [
+        "Yiran Guan",
+        "Liang Yin",
+        "Dingkang Liang",
+        "Jianzhong Ju",
+        "Zhenbo Luo",
+        "Jian Luan",
+        "Yuliang Liu",
+        "Xiang Bai"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T17:59:51Z",
+      "updated": "2026-03-12T17:59:51Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12258v1",
+      "title": "Stable Topology in Exactly Flat Bands",
+      "summary": "Topological flat bands (FBs) offer an ideal platform for realizing exotic topological phases, such as fractional Chern insulators, yet their realization with both exact flatness and stable topology in local lattice models has been long hindered by fundamental no-go theorems. Here, we overcome this barrier by demonstrating the existence of critical topological FBs (CTFBs) in finite-range hopping models. They saturate the no-go theorems via a unique structure of Bloch wavefunctions: While continuous over the whole Brillouin zone, the wavefunctions are non-analytic at isolated band touching points, thereby relaxing the inherent restrictions on the coexistence of exact flatness and stable topology. We establish a general principle to construct CTFBs, as well as their parent Hamiltonians, that carry desired topological invariants in given space groups. Explicit examples exhibiting Chern numbers, strong $\\mathbb{Z}_2$ index, and crystalline-symmetry-protected invariants in two and three dimensions are provided. Furthermore, an automated algorithm identifies more than 50,000 robust, symmetry-indicated CTFBs. Filling such CTFBs yields short-range entangled topological states that exhibit power-law correlations. Crucially, all filled CTFB states admit exact tensor-network representations with finite bond dimensions, providing a tractable starting point for exploring strongly correlated topological matter.",
+      "authors": [
+        "Yan-Qi Li",
+        "Yi-Jie Wang",
+        "Pei-Han Lin",
+        "Bin Wang",
+        "Zhi-Da Song"
+      ],
+      "categories": [
+        "cond-mat.str-el"
+      ],
+      "published": "2026-03-12T17:59:21Z",
+      "updated": "2026-03-12T17:59:21Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12244v1",
+      "title": "Separable neural architectures as a primitive for unified predictive and generative intelligence",
+      "summary": "Intelligent systems across physics, language and perception often exhibit factorisable structure, yet are typically modelled by monolithic neural architectures that do not explicitly exploit this structure. The separable neural architecture (SNA) addresses this by formalising a representational class that unifies additive, quadratic and tensor-decomposed neural models. By constraining interaction order and tensor rank, SNAs impose a structural inductive bias that factorises high-dimensional mappings into low-arity components. Separability need not be a property of the system itself: it often emerges in the coordinates or representations through which the system is expressed. Crucially, this coordinate-aware formulation reveals a structural analogy between chaotic spatiotemporal dynamics and linguistic autoregression. By treating continuous physical states as smooth, separable embeddings, SNAs enable distributional modelling of chaotic systems. This approach mitigates the nonphysical drift characteristics of deterministic operators whilst remaining applicable to discrete sequences. The compositional versatility of this approach is demonstrated across four domains: autonomous waypoint navigation via reinforcement learning, inverse generation of multifunctional microstructures, distributional modelling of turbulent flow and neural language modelling. These results establish the separable neural architecture as a domain-agnostic primitive for predictive and generative intelligence, capable of unifying both deterministic and distributional representations.",
+      "authors": [
+        "Reza T. Batley",
+        "Apurba Sarker",
+        "Rajib Mostakim",
+        "Andrew Klichine",
+        "Sourav Saha"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T17:56:54Z",
+      "updated": "2026-03-12T17:56:54Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12236v1",
+      "title": "Onset of Ergodicity Across Scales on a Digital Quantum Processor",
+      "summary": "Understanding how isolated quantum many-body systems thermalize remains a central question in modern physics. We study the onset of ergodicity in a two-dimensional disordered Heisenberg Floquet model using digital quantum simulation on IBM's Nighthawk superconducting processor, reaching system sizes of up to $10\\times10$ qubits. We probe ergodicity across different length scales by coarse-graining the system into spatial patches of varying sizes and introducing a measure based on the collision entropy of each patch, enabling a detailed study of when ergodic behavior emerges across scales. The high sampling rate of superconducting quantum processing units, together with an optimal sample estimator, allow us to access patches of sizes up to $3\\times3$. We observe that as the Heisenberg coupling $J$ increases, the noiseless system undergoes a smooth crossover from subergodic to ergodic behavior, with smaller patches approaching their random-matrix-theory values first, thereby revealing a hierarchy across scales. In the region of parameter space where classical tensor-network simulations are reliable, small patches or small values of $J$, we find excellent agreement with the error-mitigated quantum simulation. Beyond this regime, volume-law entanglement and contraction complexity growth causes the cost of classical methods to rise sharply. Our results open new directions for the use of quantum computers in the study of quantum thermalization.",
+      "authors": [
+        "Faisal Alam",
+        "Marcos Crichigno",
+        "Elizabeth Crosson",
+        "Steven T. Flammia",
+        "Filippo Maria Gambetta",
+        "Max Hunter Gordon",
+        "Michael Kreshchuk",
+        "Ashley Montanaro",
+        "Alberto Nocera",
+        "Raul A. Santos"
+      ],
+      "categories": [
+        "quant-ph",
+        "cond-mat.dis-nn"
+      ],
+      "published": "2026-03-12T17:54:17Z",
+      "updated": "2026-03-12T17:54:17Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12235v1",
+      "title": "Transition from Statistical to Hardware-Limited Scaling in Photonic Quantum State Reconstruction",
+      "summary": "The theoretical efficiency of classical shadow tomography is predicated on a perfect Haar-random unitary ensemble, yet this mathematical ideal remains physically unattainable in near-term hardware. Here, we report the experimental discovery of a fundamental accuracy bound on integrated photonic processors: a ``Hardware Horizon'' where the reconstruction error undergoes a sharp phase transition. While the error initially obeys the predicted statistical scaling $\\mathcal{O}(M^{-1/2})$, it abruptly saturates at a floor determined by the spectral distortions of the realized unitary group. By deriving a phenomenological error model, we decouple the competing mechanisms of static coherent spectral distortion and dynamic decoherence, demonstrating that this intrinsic noise floor imposes a hard bound that statistical accumulation cannot overcome. These findings establish that the utility of shadow tomography on NISQ (noisy intermediate-scale quantum) hardware is defined by a specific scaling law involving hardware parameters, necessitating active compensation strategies to bridge the gap between theoretical purity and the noisy reality of integrated photonics.",
+      "authors": [
+        "Attila Baumann",
+        "Zsolt Kis",
+        "János Koltai",
+        "Gábor Vattay"
+      ],
+      "categories": [
+        "quant-ph",
+        "cond-mat.dis-nn",
+        "cs.ET",
+        "physics.optics"
+      ],
+      "published": "2026-03-12T17:53:33Z",
+      "updated": "2026-03-12T17:53:33Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12233v1",
+      "title": "Permutation invariant multi-scale full quantum neural network wavefunction",
+      "summary": "Solving the intricate quantum behavior of interacting particles is key to unlocking the mysteries of condensed matter, but capturing their complex correlations across different scales remains a monumental challenge. We introduce a neural network framework that overcomes this barrier by modeling the full quantum wavefunction of a system, including electrons, nuclei and muons, directly capturing the full quantum effects beyond the Born-Oppenheimer approximation. The neural network approximates joint wavefunction of different interacting particles with a rigorous handling of permutation invariance, enabling simultaneous treatment of nuclear quantum effects and electron-nucleus-muon couplings without explicit excited states. Validated on molecular systems, this approach offers a computationally feasible way to model full quantum phenomena in complex many-body systems, establishing a direct connection between fundamental particle properties and emergent material behavior.",
+      "authors": [
+        "Pengzhen Cai",
+        "Yubing Qian",
+        "Li Deng",
+        "Weizhong Fu",
+        "Lei Yang",
+        "Zhiyu Sun",
+        "Xin-Zheng Li",
+        "En-Ge Wang",
+        "Liangwen Chen",
+        "Weiluo Ren",
+        "Ji Chen"
+      ],
+      "categories": [
+        "physics.chem-ph"
+      ],
+      "published": "2026-03-12T17:52:15Z",
+      "updated": "2026-03-12T17:52:15Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12234v1",
+      "title": "Thermalisation as Diffusion in Hilbert Space",
+      "summary": "We develop a microscopic theory of thermalisation for a thermometer coupled to a many-body bath beyond standard Markovian and Fermi-golden-rule assumptions. By modeling interaction matrix elements in the non-interacting basis as independent random variables, we derive a diffusion-propagator expression for the reduced dynamics and show that relaxation is controlled by the distribution of interaction-induced level broadenings. The theory predicts a thermalisation timescale set by the inverse typical broadening and yields a non-Markovian generalization of global balance. Exact-diagonalization tests for heavy-tailed L{é}vy couplings, an all-to-all transverse-field Ising model, and the one-dimensional Imbrie model show good agreement with these predictions.",
+      "authors": [
+        "Aleksey Lunkin"
+      ],
+      "categories": [
+        "cond-mat.dis-nn",
+        "cond-mat.stat-mech",
+        "quant-ph"
+      ],
+      "published": "2026-03-12T17:52:15Z",
+      "updated": "2026-03-12T17:52:15Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12232v1",
+      "title": "Incremental Neural Network Verification via Learned Conflicts",
+      "summary": "Neural network verification is often used as a core component within larger analysis procedures, which generate sequences of closely related verification queries over the same network. In existing neural network verifiers, each query is typically solved independently, and information learned during previous runs is discarded, leading to repeated exploration of the same infeasible regions of the search space. In this work, we aim to expedite verification by reducing this redundancy. We propose an incremental verification technique that reuses learned conflicts across related verification queries. The technique can be added on top of any branch-and-bound-based neural network verifier. During verification, the verifier records conflicts corresponding to learned infeasible combinations of activation phases, and retains them across runs. We formalize a refinement relation between verification queries and show that conflicts learned for a query remain valid under refinement, enabling sound conflict inheritance. Inherited conflicts are handled using a SAT solver to perform consistency checks and propagation, allowing infeasible subproblems to be detected and pruned early during search. We implement the proposed technique in the Marabou verifier and evaluate it on three verification tasks: local robustness radius determination, verification with input splitting, and minimal sufficient feature set extraction. Our experiments show that incremental conflict reuse reduces verification effort and yields speedups of up to $1.9\\times$ over a non-incremental baseline.",
+      "authors": [
+        "Raya Elsaleh",
+        "Liam Davis",
+        "Haoze Wu",
+        "Guy Katz"
+      ],
+      "categories": [
+        "cs.LO",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T17:52:12Z",
+      "updated": "2026-03-12T17:52:12Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12228v1",
+      "title": "Neural Thickets: Diverse Task Experts Are Dense Around Pretrained Weights",
+      "summary": "Pretraining produces a learned parameter vector that is typically treated as a starting point for further iterative adaptation. In this work, we instead view the outcome of pretraining as a distribution over parameter vectors, whose support already contains task-specific experts. We show that in small models such expert solutions occupy a negligible fraction of the volume of this distribution, making their discovery reliant on structured optimization methods such as gradient descent. In contrast, in large, well-pretrained models the density of task-experts increases dramatically, so that diverse, task-improving specialists populate a substantial fraction of the neighborhood around the pretrained weights. Motivated by this perspective, we explore a simple, fully parallel post-training method that samples $N$ parameter perturbations at random, selects the top $K$, and ensembles predictions via majority vote. Despite its simplicity, this approach is competitive with standard post-training methods such as PPO, GRPO, and ES for contemporary large-scale models.",
+      "authors": [
+        "Yulu Gan",
+        "Phillip Isola"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T17:49:30Z",
+      "updated": "2026-03-12T17:49:30Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12222v1",
+      "title": "HiAP: A Multi-Granular Stochastic Auto-Pruning Framework for Vision Transformers",
+      "summary": "Vision Transformers require significant computational resources and memory bandwidth, severely limiting their deployment on edge devices. While recent structured pruning methods successfully reduce theoretical FLOPs, they typically operate at a single structural granularity and rely on complex, multi-stage pipelines with post-hoc thresholding to satisfy sparsity budgets. In this paper, we propose Hierarchical Auto-Pruning (HiAP), a continuous relaxation framework that discovers optimal sub-networks in a single end-to-end training phase without requiring manual importance heuristics or predefined per-layer sparsity targets. HiAP introduces stochastic Gumbel-Sigmoid gates at multiple granularities: macro-gates to prune entire attention heads and FFN blocks, and micro-gates to selectively prune intra-head dimensions and FFN neurons. By optimizing both levels simultaneously, HiAP addresses both the memory-bound overhead of loading large matrices and the compute-bound mathematical operations. HiAP naturally converges to stable sub-networks using a loss function that incorporates both structural feasibility penalties and analytical FLOPs. Extensive experiments on ImageNet demonstrate that HiAP organically discovers highly efficient architectures, and achieves a competitive accuracy-efficiency Pareto frontier for models like DeiT-Small, matching the performance of sophisticated multi-stage methods while significantly simplifying the deployment pipeline.",
+      "authors": [
+        "Andy Li",
+        "Aiden Durrant",
+        "Milan Markovic",
+        "Georgios Leontidis"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-03-12T17:45:38Z",
+      "updated": "2026-03-12T17:45:38Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12215v1",
+      "title": "RDNet: Region Proportion-Aware Dynamic Adaptive Salient Object Detection Network in Optical Remote Sensing Images",
+      "summary": "Salient object detection (SOD) in remote sensing images faces significant challenges due to large variations in object sizes, the computational cost of self-attention mechanisms, and the limitations of CNN-based extractors in capturing global context and long-range dependencies. Existing methods that rely on fixed convolution kernels often struggle to adapt to diverse object scales, leading to detail loss or irrelevant feature aggregation. To address these issues, this work aims to enhance robustness to scale variations and achieve precise object localization. We propose the Region Proportion-Aware Dynamic Adaptive Salient Object Detection Network (RDNet), which replaces the CNN backbone with the SwinTransformer for global context modeling and introduces three key modules: (1) the Dynamic Adaptive Detail-aware (DAD) module, which applies varied convolution kernels guided by object region proportions; (2) the Frequency-matching Context Enhancement (FCE) module, which enriches contextual information through wavelet interactions and attention; and (3) the Region Proportion-aware Localization (RPL) module, which employs cross-attention to highlight semantic details and integrates a Proportion Guidance (PG) block to assist the DAD module. By combining these modules, RDNet achieves robustness against scale variations and accurate localization, delivering superior detection performance compared with state-of-the-art methods.",
+      "authors": [
+        "Bin Wan",
+        "Runmin Cong",
+        "Xiaofei Zhou",
+        "Hao Fang",
+        "Yaoqi Sun",
+        "Sam Kwong"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T17:34:29Z",
+      "updated": "2026-03-12T17:34:29Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12214v1",
+      "title": "WORKSWORLD: A Domain for Integrated Numeric Planning and Scheduling of Distributed Pipelined Workflows",
+      "summary": "This work pursues automated planning and scheduling of distributed data pipelines, or workflows. We develop a general workflow and resource graph representation that includes both data processing and sharing components with corresponding network interfaces for scheduling. Leveraging these graphs, we introduce WORKSWORLD, a new domain for numeric domain-independent planners designed for permanently scheduled workflows, like ingest pipelines. Our framework permits users to define data sources, available workflow components, and desired data destinations and formats without explicitly declaring the entire workflow graph as a goal. The planner solves a joint planning and scheduling problem, producing a plan that both builds the workflow graph and schedules its components on the resource graph. We empirically show that a state-of-the-art numeric planner running on commodity hardware with one hour of CPU time and 30GB of memory can solve linear-chain workflows of up to 14 components across eight sites.",
+      "authors": [
+        "Taylor Paul",
+        "William Regli"
+      ],
+      "categories": [
+        "cs.DC",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T17:34:04Z",
+      "updated": "2026-03-12T17:34:04Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12212v1",
+      "title": "Comparing the $M_{gas}-N_{yso}$ Relation inside a Giant Molecular Cloud",
+      "summary": "In this paper we present a simple analysis around scaling relations derived from the Schmidt conjecture for star-forming molecular clouds, at the intra-cloud scale. Using a hierarchical tree (dendrograms) above a constant threshold ($A_V$ = 7 mag), we separate individual gas structures in a column density map of the nearby Giant Molecular Cloud Orion A, constructed from Herschel far-infrared maps. These structures define regions of dense molecular gas that can actively form stars. We also estimate their current embedded population using a list of known young stars. From the combined analysis of the column density map and the young star catalog, we construct a series of plots that show the intra-cloud level behavior of three well-known scaling relations: $N_{yso}$ vs. $M_{gas}$, $Σ_{SFR}$ vs. $Σ_{gas}$ and $R_{eq}$ vs. $M_{gas}$. Our dataset, along with other sets from literature, show the validity of a linear relation for $N_{yso}$ vs. $M_{gas}$, from intra-cloud to inter-cloud scales, over three orders of magnitude. We also especulate on the possibility that the relation could be valid over an even larger scale range. Additionally, our data are consistent with the $R_{eq}$ vs. $M_{gas}$ discussed in previous studies. However, our data is not quite in agreement with previously proposed fits for the $Σ_{SFR}$ vs. $Σ_{gas}$ relation, and we discuss the implications of using the free-fall timescale as the main parameter defining the star-forming efficiency in dense gas regions.",
+      "authors": [
+        "Carlos G. Román-Zúñiga",
+        "Aina Palau",
+        "Javier Ballesteros-Paredes",
+        "Manuel Zamora-Avilés",
+        "Joshua Peltonen",
+        "Karla Gutiérrez-Davila"
+      ],
+      "categories": [
+        "astro-ph.GA"
+      ],
+      "published": "2026-03-12T17:33:03Z",
+      "updated": "2026-03-12T17:33:03Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12209v1",
+      "title": "Dictionary-Restricted First-Order Descent Methods: Bounds and Convergence Rates",
+      "summary": "This paper develops a general theory for first-order descent methods whose search directions are restricted to a prescribed dictionary in a reflexive Banach space. Instead of assuming that the linear span of the dictionary is dense, as in the classical Proper Generalized Decomposition framework of Falcó and Nouy or in the universality approach of Berná and Falcó, we introduce a geometric condition based on norming sets that guarantees density through a duality argument. This makes it possible to treat dictionaries arising from tensor formats, neural network units, and other nonlinear or parameterized approximation families within a unified setting. On the algorithmic side, we analyze a simple greedy update rule in which each iterate is obtained by minimizing the energy functional along one direction from the dictionary. Under mild differentiability, Lipschitz continuity, and ellipticity assumptions on the objective, we derive explicit quantitative descent bounds and sharp convergence rates. These include algebraic rates that improve those of classical steepest-descent schemes in Banach spaces, as well as arbitrarily high polynomial rates and exponential convergence in a critical regime. The results apply broadly to convex variational problems, high-dimensional approximation, and structured optimization methods that rely on restricted or compressed search directions.",
+      "authors": [
+        "Miguel Berasategui",
+        "Pablo M. Berná",
+        "Antonio Falcó"
+      ],
+      "categories": [
+        "math.OC"
+      ],
+      "published": "2026-03-12T17:30:53Z",
+      "updated": "2026-03-12T17:30:53Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12202v1",
+      "title": "Technology configurations for decarbonizing residential heat supply through district heating and implications for the electricity network",
+      "summary": "District heating networks (DHNs) have significant potential to decarbonize residential heating and accelerate the energy transition. However, designing carbon-neutral DHNs requires balancing several objectives, including economic costs, social acceptance, long-term uncertainties, and grid-integration challenges from electrification. By combining modeling-to-generate-alternatives with power flow simulation techniques, we develop a decision-support method for designing carbon-neutral DHNs that are cost-effective, socially acceptable, robust to future risks, and impose minimal impacts on the electricity grid. Applying our method to a Dutch case, we find substantial diversity in how carbon-neutral DHNs can be designed. The flexibility in technology choice, sizing, and location enables accommodating different real-world needs and achieving high electrification levels without increasing grid loading. For instance, intelligently located heat pumps and thermal storage can limit grid stress even when renewable baseload heat sources and green-fuel boilers are scarce. Using our method, planners can explore diverse carbon-neutral DHN designs and identify the design that best balances stakeholders' preferences.",
+      "authors": [
+        "Christian Doh Dinga",
+        "Francesco Lombardi",
+        "Roald Arkesteijn",
+        "Arjan van Voorden",
+        "Sander van Rijn",
+        "Laurens James de Vries",
+        "Milos Cvetkovic"
+      ],
+      "categories": [
+        "eess.SY"
+      ],
+      "published": "2026-03-12T17:27:21Z",
+      "updated": "2026-03-12T17:27:21Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12200v1",
+      "title": "GATOS N: The first direct kinematic evidence of dusty outflows from AGN via PAH kinematics of local Seyfert galaxies with JWST",
+      "summary": "We present the first spatially resolved kinematic evidence for dust in the outflows of Active Galactic Nuclei (AGN). We utilise observations from JWST with NIRSpec IFU and MIRI MRS data of 10 local Seyferts and use Principal Component Analysis (PCA) tomography to extract the kinematics of Polycyclic Aromatic Hydrocarbon (PAH) features. PAHs comprise the smallest carbonaceous dust molecules in the Interstellar Medium (ISM), and produce emission features in the infrared providing the potential to measure kinematics. This is however challenging due to their broad shapes and variations in their intrinsic profile, prompting the need for techniques such as PCA tomography. We find that the velocity of the PAHs is similar to the molecular gas as traced by the rotational transitions of H$_2$, where for NGC 5728 and NGC 7582, both disk and outflow are present. We detect the outflow in the kinematics of large and neutral PAHs, namely the 11.3 $μ$m and 17 $μ$m PAH features, where after subtracting the disk, the velocity field matches that of high-ionisation potential lines such as [NeVI] (7.65 $μ$m, IP = 158 eV). Finally, we fail to detect kinematics of the 6.2 $μ$m PAH due to an altered intrinsic profile while the the 3.3 $μ$m PAH kinematics purely trace the circumnuclear disk. This suggests the PAHs in the outflow are more neutral and larger than in star-forming regions, consistent with PAH band ratios in previous studies of AGN.",
+      "authors": [
+        "Fergus R. Donnan",
+        "Ismael García-Bernete",
+        "Dimitra Rigopoulou",
+        "Almudena Alonso-Herrero",
+        "Anelise Audibert",
+        "Enrica Bellocchi",
+        "Andrew Bunker",
+        "Steph Campbell",
+        "Françoise Combes",
+        "Richard Davies",
+        "Tanio Díaz-Santos",
+        "Juan A. Fernández-Ontiveros",
+        "Poshak Gandhi",
+        "Santiago García-Burillo",
+        "O. González-Martín",
+        "Erin K. S. Hicks",
+        "Laura Hermosa Muñoz",
+        "Sebastian F. Hoenig",
+        "Masatoshi Imanishi",
+        "Alvaro Labiano",
+        "Nancy A. Levenson",
+        "Miguel Pereira-Santaella",
+        "Cristina Ramos Almeida",
+        "Claudio Ricci",
+        "Rogemar A. Riffel",
+        "Daniel Rouan",
+        "David Rosario",
+        "Karin Sandstrom",
+        "T. Taro Shimizu",
+        "Marko Stalevski",
+        "Niranjan Thatte",
+        "Oscar Veenema",
+        "Lulu Zhang"
+      ],
+      "categories": [
+        "astro-ph.GA"
+      ],
+      "published": "2026-03-12T17:27:13Z",
+      "updated": "2026-03-12T17:27:13Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12176v1",
+      "title": "BehaviorVLM: Unified Finetuning-Free Behavioral Understanding with Vision-Language Reasoning",
+      "summary": "Understanding freely moving animal behavior is central to neuroscience, where pose estimation and behavioral understanding form the foundation for linking neural activity to natural actions. Yet both tasks still depend heavily on human annotation or unstable unsupervised pipelines, limiting scalability and reproducibility. We present BehaviorVLM, a unified vision-language framework for pose estimation and behavioral understanding that requires no task-specific finetuning and minimal human labeling by guiding pretrained Vision-Language Models (VLMs) through detailed, explicit, and verifiable reasoning steps. For pose estimation, we leverage quantum-dot-grounded behavioral data and propose a multi-stage pipeline that integrates temporal, spatial, and cross-view reasoning. This design greatly reduces human annotation effort, exposes low-confidence labels through geometric checks such as reprojection error, and produces labels that can later be filtered, corrected, or used to fine-tune downstream pose models. For behavioral understanding, we propose a pipeline that integrates deep embedded clustering for over-segmented behavior discovery, VLM-based per-clip video captioning, and LLM-based reasoning to merge and semantically label behavioral segments. The behavioral pipeline can operate directly from visual information and does not require keypoints to segment behavior. Together, these components enable scalable, interpretable, and label-light analysis of multi-animal behavior.",
+      "authors": [
+        "Jingyang Ke",
+        "Weihan Li",
+        "Amartya Pradhan",
+        "Jeffrey Markowitz",
+        "Anqi Wu"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T17:09:20Z",
+      "updated": "2026-03-12T17:09:20Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12172v1",
+      "title": "Simultaneous Multi-Modal Covert Communications: Analysis and Optimization",
+      "summary": "This paper investigates the problem of covert communications in a heterogeneous wireless network where multiple communication modalities are used simultaneously. In this setup, a legitimate transmitter sends confidential data to its receiver by selecting multiple modalities with the goal of maximizing communication covertness against a passive adversary (Willie) while satisfying a transmission rate requirement. We analyze two distinct scenarios for a given observation time by Willie. The two scenarios are: (i) Willie knows the modalities selected by the friendly transmitter, and (ii) Willie is unaware of the selected modalities. We first derive the optimal detector for Willie that minimizes the detection error probability (DEP) in both cases. For the first scenario, we derive an exact expression for the DEP and provide a computationally efficient approximation. For the second scenario, we introduce the DEP expressions in the low-signal-to-noise ratio (SNR) regime at Willie. Building on this analysis, we propose a novel low-complexity modality set selection technique designed to maximize the DEP subject to a rate constraint. Numerical simulations validate the derived analytical expressions and demonstrate that the proposed modality set selection technique achieves near-optimal performance, outperforming benchmark schemes.",
+      "authors": [
+        "Justin H. Kong",
+        "Terrence J. Moore",
+        "Fikadu T. Dagefu"
+      ],
+      "categories": [
+        "eess.SP"
+      ],
+      "published": "2026-03-12T17:04:58Z",
+      "updated": "2026-03-12T17:04:58Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12160v1",
+      "title": "Raman relaxation in Yb(III) molecular qubits: non-trivial correlations between spin-phonon coupling and molecular structure",
+      "summary": "The coordination complexes of Yb(III) exhibit some of the longest spin coherence times among 4f compounds, making them a promising platform for molecular quantum technologies. While spin-phonon relaxation remains a limiting factor for coherence times even at low temperature, its control through chemical design has the potential to push these spin qubits prototypes beyond current limits. With the aim of providing insights on how to chemically control spin-phonon relaxation, we here present a full ab initio study of spin-phonon dynamics for three Yb(III) molecules exhibiting minimal chemical differences, yet quantitatively different spin relaxation times. Results show that low-temperature relaxation is governed by Raman processes triggered by a small group of largely delocalized low-energy phonons. The analysis of these contributions highlights that the modulation of spin-phonon coupling by molecular structure modifications beyond the first coordination shell are highly non-trivial in nature and hard to rationalize in simple chemical terms. These findings call for a conceptual step change from the attempt to use simple magneto-structural correlations to interpret the effect of molecular structural modifications on spin-phonon relaxation, and present predictive first-principles frameworks as a potential driving force of future chemical design strategies",
+      "authors": [
+        "Giacomo Sansone",
+        "Lorenzo A. Mariano",
+        "Stefano Carretta",
+        "Paolo Santini",
+        "Alessandro Lunghi"
+      ],
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.chem-ph",
+        "quant-ph"
+      ],
+      "published": "2026-03-12T16:58:51Z",
+      "updated": "2026-03-12T16:58:51Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12156v1",
+      "title": "Time, Message and Memory-Optimal Distributed Minimum Spanning Tree and Partwise Aggregation",
+      "summary": "Memory-(in)efficiency is a crucial consideration that oftentimes prevents deployment of state-of-the-art distributed algorithms in real-life modern networks. In the context of the MST problem, roughly speaking, there are three types of algorithms. The algorithm of Gallager-Humblet-Spira and its versions are memory- and message- efficient, but their running time is at least linear in the number of vertices $n$, even when the unweighted diameter $D$ is much smaller than $n$. The algorithm of Garay-Kutten-Peleg and its versions are time-efficient, but not message- or memory-efficient. The more recent algorithms of are time- and message-efficient, but are not memory-efficient. As a result, GHS-type algorithms are much more prominent in real-life applications than time-efficient ones. In this paper we develop a deterministic time-, message- and memory-efficient algorithm for the MST problem. It is also applicable to the more general partwise aggregation problem. We believe that our techniques will be useful for devising memory-efficient versions for many other distributed problems.",
+      "authors": [
+        "Michael Elkin Tanya Goldenfeld"
+      ],
+      "categories": [
+        "cs.DS"
+      ],
+      "published": "2026-03-12T16:53:09Z",
+      "updated": "2026-03-12T16:53:09Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12141v1",
+      "title": "ChemSICal-Net: Timing-Controlled Chemical Reaction Network for Successive Interference Cancellation in Molecular Multiple Access",
+      "summary": "MC networks are envisioned to enable synthetic information exchange between nanoscale biological entities. For many algorithm proposals in the MC research field, the question of implementation at nanoscales and in biological environments remains open. Chemical reaction networks (CRNs) provide a natural framework to model computing processes in biological systems, while detailed simulations capture realistic stochastic effects. In this work, we present ChemSICal-Net, a comprehensive CRN simulation model of a chemical receiver implementing successive interference cancellation (SIC) to differentiate messages from multiple transmitters. We present the structure of the SIC algorithm in the form of basic chemical building blocks and incorporate clocked timing control by a chemical oscillator. We propose an adaptive Bayesian optimization (BO) scheme with a Gaussian process surrogate to find appropriate values for the reaction rate constants and the initial concentrations and show that it outperforms baseline methods from related work based on a fair computational cost metric. Then, the performance of the ChemSICal-Net framework is evaluated stochastically across a range of clock speeds and in different configurations focusing on communication system metrics such as detection accuracy and decision time. Our results highlight that the timing via a chemical clock can improve the detection accuracy by a factor of 2 in scenarios with shorter decision times, which underlines how the trade-off between decision time and detection probability can shape CRN design choices. The BO scheme is shown to reliably optimize parameters for different configurations by approximately one order of magnitude compared to the non-optimized case. Our system reveals the need for a multi-scale approach with external BO and stochastic simulation of molecular reaction dynamics for communication-metric-focused system design.",
+      "authors": [
+        "Alexander Wietfeld",
+        "Oguz Turgut",
+        "Eneritz Somoza Rodríguez",
+        "Wolfgang Kellerer"
+      ],
+      "categories": [
+        "cs.ET"
+      ],
+      "published": "2026-03-12T16:43:38Z",
+      "updated": "2026-03-12T16:43:38Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12137v1",
+      "title": "Opinion Dynamics in Learning Systems",
+      "summary": "We propose and analyze a unified framework that interleaves peer-to-peer opinion dynamics with performative effects of learning systems. While network theory studies how opinions evolve via social connections, and performative prediction examines how learning systems interplay with individuals' opinions, neither captures the emergent dynamics when these forces co-evolve. We model this interplay as a recursive feedback loop: a platform's predictions influence individual opinions, which then evolve through social interactions before forming the training data for the next platform model update. We demonstrate that this co-evolution induces a novel equilibrium that qualitatively differs from standard network equilibria. Specifically, we show that standard predictive objectives act as a ``homogenizing force\" driving networks toward consensus even under conditions where classical opinion-dynamics models lead to disagreement. Further, we demonstrate how learning under partial observations creates spillover effects among individuals, even if individuals are not susceptible to peer-influence. Finally, we study a platform that systematically deviates from standard predictive objectives, and demonstrate how classical opinion-dynamics models underestimate the equilibrium response to node-level interventions. We complement our theoretical findings with semi-synthetic simulations on social network data. Combined, our results illuminate performativity as an important, so far neglected, qualifying factor in social networks.",
+      "authors": [
+        "Jiduan Wu",
+        "Rediet Abebe",
+        "Celestine Mendler-Dünner"
+      ],
+      "categories": [
+        "cs.SI"
+      ],
+      "published": "2026-03-12T16:40:56Z",
+      "updated": "2026-03-12T16:40:56Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12128v1",
+      "title": "How Vulnerable is India's Economy to Foreign Sanctions?",
+      "summary": "This paper develops a simple model of the world supply chain to estimate the effects of sanctions that restrict the flow of inputs from one country to another. Such restrictions operate through changes in the weights of the global production network: the sanctioning country ceases supplying certain inputs to the target country and reallocates its production to other destinations. Using the OECD Inter-Country Input--Output tables, we calibrate the model to assess the vulnerability of the Indian economy. We consider two classes of counterfactuals: restrictions on a single sector of a foreign country supplying India, and restrictions on all sectors of a foreign country supplying India. We then rank foreign countries and foreign country-sectors by the risk that their supply restrictions pose to economic activity in India. Our results show that India's greatest country-level vulnerability is to Saudi Arabia, followed by the United Arab Emirates, China, Singapore, the United States, and Russia.",
+      "authors": [
+        "Vipin P. Veetil"
+      ],
+      "categories": [
+        "econ.GN",
+        "cs.SI"
+      ],
+      "published": "2026-03-12T16:30:34Z",
+      "updated": "2026-03-12T16:30:34Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12124v1",
+      "title": "Arrested coalescence drives helical coiling and networking of filamentous smectic condensates",
+      "summary": "Liquid-liquid crystal phase separation (LLCPS) occurs in many industrial and biological settings. To date the states of the separated condensed liquid crystals have been found to be nematic, columnar, or smectic phases. Interestingly, when smectic phases condense out of the liquid, they can form filamentous condensates that spontaneously assemble into sparse networks with rich life-like dynamics. Here, we study the underlying process of filament linking and conformational changes that mediates formation of these unique networks. Microscopy reveals that new linkages between filaments are initiated by an adhesive interaction between straight filaments; the filaments snap into contact and then rapidly wind into helical coils, despite the absence of molecular chirality or transitions between mesophases. Using polarized optical microscopy, theoretical modeling, and simulation, we show that filament linking into ribbon structures is driven by arrested coalescence that depends on both interfacial energy minimization and the constraints of smectic order. The linked filaments spontaneously coil into double helices to reduce interfacial area and smectic distortion, thus driving compaction into networks. We propose a microstructure consistent with this interpretation, which quantitatively predicts the extent of arrested coalescence. In total, these findings suggest a generic pathway for network formation in liquid crystals that provides insight about the formation of condensate networks in other engineered or biological materials.",
+      "authors": [
+        "Christopher A. Browne",
+        "Paul G. Severino",
+        "Yvonne Zagzag",
+        "Jacob Z. Cloutier",
+        "Aaron C. Boyd",
+        "Yihao Chen",
+        "Arjun G. Yodh",
+        "Chinedum O. Osuji"
+      ],
+      "categories": [
+        "cond-mat.soft"
+      ],
+      "published": "2026-03-12T16:27:07Z",
+      "updated": "2026-03-12T16:27:07Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12122v1",
+      "title": "Why urban heterogeneity limits the 15-minute city",
+      "summary": "The `15-minute city' has emerged as a central paradigm in urban planning, promoting universal access to work and essential services within short travel times. Its feasibility-particularly for commuting to work-has however rarely been examined quantitatively. Here, we show that proximity to employment is fundamentally constrained by the internal structure of urban economies. Combining urban geometry with empirically observed firm-size distributions, we derive a lower bound on commuting times that holds independently of planning choices or transport technologies. This bound reveals a sharp transition: when employment is sufficiently concentrated, no spatial rearrangement of workplaces can ensure uniformly short commutes, even under optimal placement. Applied to Paris and its near suburbs, we find that achieving universal 15-minute commutes would require substantial economic restructuring or differentiated mobility strategies. The relevant question is therefore not whether an $x$-minute city is achievable, but what the minimal feasible $x$ is given a city's economic structure and spatial scale.",
+      "authors": [
+        "Marc Barthelemy"
+      ],
+      "categories": [
+        "physics.soc-ph",
+        "cond-mat.dis-nn"
+      ],
+      "published": "2026-03-12T16:24:28Z",
+      "updated": "2026-03-12T16:24:28Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12118v1",
+      "title": "Cornserve: A Distributed Serving System for Any-to-Any Multimodal Models",
+      "summary": "Any-to-Any models are an emerging class of multimodal models that accept combinations of multimodal data (e.g., text, image, video, audio) as input and generate them as output. Serving these models are challenging; different requests with different input and output modalities traverse different paths through the model computation graph, and each component of the model have different scaling characteristics.   We present Cornserve, a distributed serving system for generic Any-to-Any models. Cornserve provides a flexible task abstraction for expressing Any-to-Any model computation graphs, enabling component disaggregation and independent scaling. The distributed runtime dispatches compute to the data plane via an efficient record-and-replay execution model that keeps track of data dependencies, and forwards tensor data between components directly from the producer to the consumer. Built on Kubernetes with approximately 23K new lines of Python, Cornserve supports diverse Any-to-Any models and delivers up to 3.81$\\times$ higher throughput and 5.79$\\times$ lower tail latency. Cornserve is open-source, and the demo video is available on YouTube.",
+      "authors": [
+        "Jae-Won Chung",
+        "Jeff J. Ma",
+        "Jisang Ahn",
+        "Yizhuo Liang",
+        "Akshay Jajoo",
+        "Myungjin Lee",
+        "Mosharaf Chowdhury"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.DC"
+      ],
+      "published": "2026-03-12T16:20:35Z",
+      "updated": "2026-03-12T16:20:35Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12098v1",
+      "title": "Maximum-Entropy Random Walks on Hypergraphs",
+      "summary": "Random walks are fundamental tools for analyzing complex networked systems, including social networks, biological systems, and communication infrastructures. While classical random walks focus on pairwise interactions, many real-world systems exhibit higher-order interactions naturally modeled by hypergraphs. Existing random walk models on hypergraphs often focus on undirected structures or do not incorporate entropy-based inference, limiting their ability to capture directional flows, uncertainty, or information diffusion in complex systems. In this article, we develop a maximum-entropy random walk framework on directed hypergraphs with two interaction mechanisms: broadcasting where a pivot node activates multiple receiver nodes and merging where multiple pivot nodes jointly influence a receiver node. We infer a transition kernel via a Kullback--Leibler divergence projection onto constraints enforcing stochasticity and stationarity. The resulting optimality conditions yield a multiplicative scaling form, implemented using Sinkhorn--Schrödinger-type iterations with tensor contractions. We further analyze ergodicity, including projected linear kernels for broadcasting and tensor spectral criteria for polynomial dynamics in merging. The effectiveness of our framework is demonstrated with both synthetic and real-world examples.",
+      "authors": [
+        "Anqi Dong",
+        "Anzhi Sheng",
+        "Xin Mao",
+        "Can Chen"
+      ],
+      "categories": [
+        "eess.SY",
+        "math.CO",
+        "math.OC"
+      ],
+      "published": "2026-03-12T16:03:30Z",
+      "updated": "2026-03-12T16:03:30Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12093v1",
+      "title": "A Complete Graphic Statics for Rigid-Jointed 3D Frames. Part 2: Homology of loops",
+      "summary": "This paper extends graphic statics by describing the forces and moments in any 3D rigid-jointed frame structure in terms of cell complexes using homology theory of algebraic topology. Graphic statics provides a highly geometric way to represent the equilibrium in bar structures. Unlike traditional matrix-based linear structural analysis which represents a structure as a set of nodes connected by bars, graphic statics imagines that the bar network defines a variety of higher-dimensional objects (polygonal faces, polyhedral cells, polytopes). These objects are related to piecewise-linear stress functions, the liftings of Maxwell, Rankine or Cremona. The requirement for such stress-functions to be plane-faced places a major limitation on the set of structures that can be analysed, as in many structures the spaces between bars do not correspond to flat polygonal regions. The CW-complexes of cellular homology provide a far-reaching generalisation of geometric notions such as polygons, polyhedra and polytopes, and their use here removes the requirement that spaces between bars must be flat. Here we demonstrate how any frame structure with bar-like members can be decomposed into a union of closed loops, each consisting of a closed circuit of bars. For general structures these loops are general closed space curves which cannot be spanned by flat polygons. Using chains of CW-complexes makes the new theory applicable to a much richer set of structural geometries. Unlike most descriptions of graphic statics, this approach is not restricted to purely axial forces. Shear forces, bending moments and torsional moments are included naturally, as described in Part 1 of this sequence of papers. Later papers will extend the approach to displacements, rotations and Virtual Work, and will give greater detail on how the loop formalism may be lifted toinvolve higher dimensional CW-complexes.",
+      "authors": [
+        "Allan McRobie"
+      ],
+      "categories": [
+        "math.MG"
+      ],
+      "published": "2026-03-12T16:00:51Z",
+      "updated": "2026-03-12T16:00:51Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12091v1",
+      "title": "Resource-Efficient Iterative LLM-Based NAS with Feedback Memory",
+      "summary": "Neural Architecture Search (NAS) automates network design, but conventional methods demand substantial computational resources. We propose a closed-loop pipeline leveraging large language models (LLMs) to iteratively generate, evaluate, and refine convolutional neural network architectures for image classification on a single consumer-grade GPU without LLM fine-tuning. Central to our approach is a historical feedback memory inspired by Markov chains: a sliding window of $K{=}5$ recent improvement attempts keeps context size constant while providing sufficient signal for iterative learning. Unlike prior LLM optimizers that discard failure trajectories, each history entry is a structured diagnostic triple -- recording the identified problem, suggested modification, and resulting outcome -- treating code execution failures as first-class learning signals. A dual-LLM specialization reduces per-call cognitive load: a Code Generator produces executable PyTorch architectures while a Prompt Improver handles diagnostic reasoning. Since both the LLM and architecture training share limited VRAM, the search implicitly favors compact, hardware-efficient models suited to edge deployment. We evaluate three frozen instruction-tuned LLMs (${\\leq}7$B parameters) across up to 2000 iterations in an unconstrained open code space, using one-epoch proxy accuracy on CIFAR-10, CIFAR-100, and ImageNette as a fast ranking signal. On CIFAR-10, DeepSeek-Coder-6.7B improves from 28.2% to 69.2%, Qwen2.5-7B from 50.0% to 71.5%, and GLM-5 from 43.2% to 62.0%. A full 2000-iteration search completes in ${\\approx}18$ GPU hours on a single RTX~4090, establishing a low-budget, reproducible, and hardware-aware paradigm for LLM-driven NAS without cloud infrastructure.",
+      "authors": [
+        "Xiaojie Gu",
+        "Dmitry Ignatov",
+        "Radu Timofte"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T16:00:22Z",
+      "updated": "2026-03-12T16:00:22Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12086v1",
+      "title": "Intelligent 6G Edge Connectivity: A Knowledge Driven Optimization Framework for Small Cell Selection",
+      "summary": "Sixth-generation (6G) wireless networks are expected to support immersive and mission-critical applications requiring ultra-reliable communication, sub-second responsiveness, and multi-Gbps data rates. Dense small-cell deployments are a key enabler of these capabilities; however, the large number of candidate cells available to mobile users makes efficient user-cell association increasingly complex. Conventional signal-strength-based or heuristic approaches often lead to load imbalance, increased latency, packet loss, and inefficient utilization of radio resources. To address these challenges, this paper proposes a Knowledge-Defined Networking (KDN) framework for intelligent user association in dense 6G small-cell environments. The proposed architecture integrates the knowledge, control, and data planes to enable adaptive, data-driven decision-making. Small-cell conditions are modeled using queueing-theoretic indicators that capture traffic load and waiting-time dynamics. Based on these indicators, a joint optimization objective reflecting latency and packet loss is formulated and solved via Lagrangian relaxation to obtain globally guided association policies. These optimization outcomes are then used to supervise a lightweight Learning Vector Quantization (LVQ) model, enabling fast and scalable inference at the network edge. Extensive NS-3 simulations under varying mobility, traffic load, packet size, and network density demonstrate that the proposed approach consistently outperforms conventional baselines. The framework reduces average latency by 30-45% in high-mobility and heavy-traffic scenarios and decreases packet loss by more than 35% under congestion. The results confirm that combining optimization-driven knowledge with lightweight learning enables scalable, QoS-aware user association for future dense 6G networks.",
+      "authors": [
+        "Tuğçe Bilen",
+        "Ian F. Akyildiz"
+      ],
+      "categories": [
+        "cs.NI"
+      ],
+      "published": "2026-03-12T15:54:31Z",
+      "updated": "2026-03-12T15:54:31Z",
+      "collectedAt": "2026-03-13T14:15:39.412Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12085v1",
+      "title": "Emergent criticality in the Aubry-André model with periodic modulation",
+      "summary": "The Aubry-André model describes a system with quasiperiodic lattice modulation. In one dimension the AAH model is known to exhibit a sharp metal to insulator transition at a self-dual critical point at which all the states in the spectrum are critical or multifractal in nature. While such criticality is immediately destroyed by an additional onsite periodic modulation, we show an emergent criticality in the limit of strong periodic modulation strength under proper conditions. The resulting strong-modulation critical phase exhibits multifractal eigenstates and singular continuous spectra, belonging to the universality class of the critical Harper model. Moreover, we reveal that additional periodic potential of period N in the quasiperiodic chain folds the spectrum into N bands with quasiperiodicity being enhanced by a factor of N, producing N numbers of Hofstadter butterflies in each band. Our results reveal a general mechanism for engineering robust criticality and spectral replication in quasiperiodic systems.",
+      "authors": [
+        "Sitaram Maity",
+        "Nilanjan Roy",
+        "Tapan Mishra"
+      ],
+      "categories": [
+        "cond-mat.dis-nn",
+        "cond-mat.other",
+        "cond-mat.quant-gas"
+      ],
+      "published": "2026-03-12T15:53:44Z",
+      "updated": "2026-03-12T15:53:44Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12083v1",
+      "title": "Towards Universal Computational Aberration Correction in Photographic Cameras: A Comprehensive Benchmark Analysis",
+      "summary": "Prevalent Computational Aberration Correction (CAC) methods are typically tailored to specific optical systems, leading to poor generalization and labor-intensive re-training for new lenses. Developing CAC paradigms capable of generalizing across diverse photographic lenses offers a promising solution to these challenges. However, efforts to achieve such cross-lens universality within consumer photography are still in their early stages due to the lack of a comprehensive benchmark that encompasses a sufficiently wide range of optical aberrations. Furthermore, it remains unclear which specific factors influence existing CAC methods and how these factors affect their performance. In this paper, we present comprehensive experiments and evaluations involving 24 image restoration and CAC algorithms, utilizing our newly proposed UniCAC, a large-scale benchmark for photographic cameras constructed via automatic optical design. The Optical Degradation Evaluator (ODE) is introduced as a novel framework to objectively assess the difficulty of CAC tasks, offering credible quantification of optical aberrations and enabling reliable evaluation. Drawing on our comparative analysis, we identify three key factors -- prior utilization, network architecture, and training strategy -- that most significantly influence CAC performance, and further investigate their respective effects. We believe that our benchmark, dataset, and observations contribute foundational insights to related areas and lay the groundwork for future investigations. Benchmarks, codes, and Zemax files will be available at https://github.com/XiaolongQian/UniCAC.",
+      "authors": [
+        "Xiaolong Qian",
+        "Qi Jiang",
+        "Yao Gao",
+        "Lei Sun",
+        "Zhonghua Yi",
+        "Kailun Yang",
+        "Luc Van Gool",
+        "Kaiwei Wang"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.RO",
+        "eess.IV",
+        "physics.optics"
+      ],
+      "published": "2026-03-12T15:53:02Z",
+      "updated": "2026-03-12T15:53:02Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12079v1",
+      "title": "Spatiotemporal crystallization of an active fluid",
+      "summary": "The emergence of long-range spatiotemporal order from intrinsic chaos is a central challenge in far-from-equilibrium physics. In active fluids, such as cytoskeletal networks driving cellular motion, self-generated flows typically produce \"active turbulence\", lacking translational symmetry. Here we show that a chaotic active nematic can self-organize into a spatiotemporal crystal, forming a regular lattice of density, orientation, and vorticity that breaks both spatial and temporal translational symmetry. Using a microtubule/kinesin active nematic interfaced with a lamellar liquid crystal and confined in microfluidic channels, we observe robust spatiotemporal lattices without external forcing. The ordering emerges from spontaneous synchronization of intrinsic flow instabilities, mediated by confinement and feedback between the active layer and the passive anisotropic interface. Continuum nematohydrodynamics simulations support our interpretation, highlighting how intrinsic length and time scales shape the active crystals. These results reconcile chaos and crystallinity in active matter and provide a strategy for engineering order in self-driven, far-from-equilibrium soft materials.",
+      "authors": [
+        "Olga Bantysh",
+        "Ramon Reigada",
+        "Rodrigo C. V. Coelho",
+        "Pau Guillamat",
+        "Jordi Ignés-Mullol",
+        "Francesc Sagués"
+      ],
+      "categories": [
+        "cond-mat.soft"
+      ],
+      "published": "2026-03-12T15:48:52Z",
+      "updated": "2026-03-12T15:48:52Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12078v1",
+      "title": "Node-RF: Learning Generalized Continuous Space-Time Scene Dynamics with Neural ODE-based NeRFs",
+      "summary": "Predicting scene dynamics from visual observations is challenging. Existing methods capture dynamics only within observed boundaries failing to extrapolate far beyond the training sequence. Node-RF (Neural ODE-based NeRF) overcomes this limitation by integrating Neural Ordinary Differential Equations (NODEs) with dynamic Neural Radiance Fields (NeRFs), enabling a continuous-time, spatiotemporal representation that generalizes beyond observed trajectories at constant memory cost. From visual input, Node-RF learns an implicit scene state that evolves over time via an ODE solver, propagating feature embeddings via differential calculus. A NeRF-based renderer interprets calculated embeddings to synthesize arbitrary views for long-range extrapolation. Training on multiple motion sequences with shared dynamics allows for generalization to unseen conditions. Our experiments demonstrate that Node-RF can characterize abstract system behavior without explicit model to identify critical points for future predictions.",
+      "authors": [
+        "Hiran Sarkar",
+        "Liming Kuang",
+        "Yordanka Velikova",
+        "Benjamin Busam"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T15:48:12Z",
+      "updated": "2026-03-12T15:48:12Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12076v1",
+      "title": "Operationalism, Causality, and Quantum Theory: a mostly time symmetric perspective",
+      "summary": "This is a book about operational probabilistic theories. The standard approach in such theories is from a time forward perspective. In this book we mostly take a time symmetric perspective. This presents a branding problem. Is this a niche book merely about time symmetry? No. This is a comprehensive book about operational probabilistic theories, but mostly from a time symmetric perspective. In fact, this book consists of (1) a simple book about simple operations having simple causal structure (where all the inputs are before all the outputs), and (2) a complex book about complex operations that can have complicated causal structure (a complex operation is equipped with a causal diagram). For the simple case we are able to show that the time symmetric perspective is equivalent to the time forward perspective. In each book we set up (A) operational probabilistic theories (OPTs) in terms of operations, (B) Operational Quantum Theory (OQT) in terms of operator tensors which correspond to operations, and (C) the theory of Hilbert objects which can be doubled up to give operator tensors. Operations are required to be physical which guarantees that circuits built out of operations have probabilities between 0 and 1 and that certain causality conditions are met. We prove that when we wire together operations the resulting networks are also physical. We model Sorkin's impossible measurements with complex operations and show that physicality prevents anomalous signalling. We develop diagrammatic notation for Hilbert objects. This includes mirrors for doubling up and mirror theorems. We use this framework to prove time symmetric causal dilation theorems for various causal diagrams.",
+      "authors": [
+        "Lucien Hardy"
+      ],
+      "categories": [
+        "quant-ph",
+        "gr-qc",
+        "hep-th",
+        "math-ph"
+      ],
+      "published": "2026-03-12T15:44:17Z",
+      "updated": "2026-03-12T15:44:17Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12073v1",
+      "title": "A Multi-Label Temporal Convolutional Framework for Transcription Factor Binding Characterization",
+      "summary": "Transcription factors (TFs) regulate gene expression through complex and co-operative mechanisms. While many TFs act together, the logic underlying TFs binding and their interactions is not fully understood yet. Most current approaches for TF binding site prediction focus on individual TFs and binary classification tasks, without a full analysis of the possible interactions among various TFs. In this paper we investigate DNA TF binding site recognition as a multi-label classification problem, achieving reliable predictions for multiple TFs on DNA sequences retrieved in public repositories. Our deep learning models are based on Temporal Convolutional Networks (TCNs), which are able to predict multiple TF binding profiles, capturing correlations among TFs andtheir cooperative regulatory mechanisms. Our results suggest that multi-label learning leading to reliable predictive performances can reveal biologically meaningful motifs and co-binding patterns consistent with known TF interactions, while also suggesting novel relationships and cooperation among TFs.",
+      "authors": [
+        "Pietro Demurtas",
+        "Ferdinando Zanchetta",
+        "Giovanni Perini",
+        "Rita Fioresi"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "q-bio.GN"
+      ],
+      "published": "2026-03-12T15:42:37Z",
+      "updated": "2026-03-12T15:42:37Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12067v1",
+      "title": "Beyond Convolution: A Taxonomy of Structured Operators for Learning-Based Image Processing",
+      "summary": "The convolution operator is the fundamental building block of modern convolutional neural networks (CNNs), owing to its simplicity, translational equivariance, and efficient implementation. However, its structure as a fixed, linear, locally-averaging operator limits its ability to capture structured signal properties such as low-rank decompositions, adaptive basis representations, and non-uniform spatial dependencies. This paper presents a systematic taxonomy of operators that extend or replace the standard convolution in learning-based image processing pipelines. We organise the landscape of alternative operators into five families: (i) decomposition-based operators, which separate structural and noise components through singular value or tensor decompositions; (ii) adaptive weighted operators, which modulate kernel contributions as a function of spatial position or signal content; (iii) basis-adaptive operators, which optimise the analysis bases together with the network weights; (iv) integral and kernel operators, which generalise the convolution to position-dependent and non-linear kernels; and (v) attention-based operators, which relax the locality assumption entirely. For each family, we provide a formal definition, a discussion of its structural properties with respect to the convolution, and a critical analysis of the tasks for which the operator is most appropriate. We further provide a comparative analysis of all families across relevant dimensions -- linearity, locality, equivariance, computational cost, and suitability for image-to-image and image-to-label tasks -- and outline the open challenges and future directions of this research area.",
+      "authors": [
+        "Simone Cammarasana"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T15:35:15Z",
+      "updated": "2026-03-12T15:35:15Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12064v1",
+      "title": "Dense Dynamic Scene Reconstruction and Camera Pose Estimation from Multi-View Videos",
+      "summary": "We address the challenging problem of dense dynamic scene reconstruction and camera pose estimation from multiple freely moving cameras -- a setting that arises naturally when multiple observers capture a shared event. Prior approaches either handle only single-camera input or require rigidly mounted, pre-calibrated camera rigs, limiting their practical applicability. We propose a two-stage optimization framework that decouples the task into robust camera tracking and dense depth refinement. In the first stage, we extend single-camera visual SLAM to the multi-camera setting by constructing a spatiotemporal connection graph that exploits both intra-camera temporal continuity and inter-camera spatial overlap, enabling consistent scale and robust tracking. To ensure robustness under limited overlap, we introduce a wide-baseline initialization strategy using feed-forward reconstruction models. In the second stage, we refine depth and camera poses by optimizing dense inter- and intra-camera consistency using wide-baseline optical flow. Additionally, we introduce MultiCamRobolab, a new real-world dataset with ground-truth poses from a motion capture system. Finally, we demonstrate that our method significantly outperforms state-of-the-art feed-forward models on both synthetic and real-world benchmarks, while requiring less memory.",
+      "authors": [
+        "Shuo Sun",
+        "Unal Artan",
+        "Malcolm Mielle",
+        "Achim J. Lilienthaland",
+        "Martin Magnusson"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T15:31:32Z",
+      "updated": "2026-03-12T15:31:32Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12063v1",
+      "title": "NBAvatar: Neural Billboards Avatars with Realistic Hand-Face Interaction",
+      "summary": "We present NBAvatar - a method for realistic rendering of head avatars handling non-rigid deformations caused by hand-face interaction. We introduce a novel representation for animated avatars by combining the training of oriented planar primitives with neural rendering. Such a combination of explicit and implicit representations enables NBAvatar to handle temporally and pose-consistent geometry, along with fine-grained appearance details provided by the neural rendering technique. In our experiments, we demonstrate that NBAvatar implicitly learns color transformations caused by face-hand interactions and surpasses existing approaches in terms of novel-view and novel-pose rendering quality. Specifically, NBAvatar achieves up to 30% LPIPS reduction under high-resolution megapixel rendering compared to Gaussian-based avatar methods, while also improving PSNR and SSIM, and achieves higher structural similarity compared to the state-of-the-art hand-face interaction method InteractAvatar.",
+      "authors": [
+        "David Svitov",
+        "Mahtab Dahaghin"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T15:31:00Z",
+      "updated": "2026-03-12T15:31:00Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12060v1",
+      "title": "Chemical Reaction Networks Learn Better than Spiking Neural Networks",
+      "summary": "We mathematically prove that chemical reaction networks without hidden layers can solve tasks for which spiking neural networks require hidden layers. Our proof uses the deterministic mass-action kinetics formulation of chemical reaction networks. Specifically, we prove that a certain reaction network without hidden layers can learn a classification task previously proved to be achievable by a spiking neural network with hidden layers. We provide analytical regret bounds for the global behavior of the network and analyze its asymptotic behavior and Vapnik-Chervonenkis dimension. In a numerical experiment, we confirm the learning capacity of the proposed chemical reaction network for classifying handwritten digits in pixel images, and we show that it solves the task more accurately and efficiently than a spiking neural network with hidden layers. This provides a motivation for machine learning in chemical computers and a mathematical explanation for how biological cells might exhibit more efficient learning behavior within biochemical reaction networks than neuronal networks.",
+      "authors": [
+        "Sophie Jaffard",
+        "Ivo F. Sbalzarini"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "math.ST",
+        "stat.ML"
+      ],
+      "published": "2026-03-12T15:27:33Z",
+      "updated": "2026-03-12T15:27:33Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12058v1",
+      "title": "Low-Rank and Sparse Drift Estimation for High-Dimensional Lévy-Driven Ornstein--Uhlenbeck Processes",
+      "summary": "We study high-dimensional Ornstein--Uhlenbeck processes driven by Lévy noise and consider drift matrices that decompose into a low-rank plus sparse component, capturing a few latent factors together with a sparse network of direct interactions. For discrete-time observations under the localized, truncated contrast of Dexheimer and Jeszka, we analyze a convex estimator that minimizes this contrast with a combined nuclear-norm and $\\ell_1$-penalty on the low-rank and sparse parts, respectively. Under a restricted strong convexity condition, a rank--sparsity incoherence assumption, and regime-specific choices of truncation level, horizon, and sampling mesh for the background driving Lévy process, we derive a non-asymptotic oracle inequality for the Frobenius risk of the estimator. The bound separates a discretization bias term of order $d^2Δ_n^2$ from a stochastic term of order $γ(Δ_n)T^{-1}(r \\log d + s \\log d)$, thereby showing that the low-rank-plus-sparse structure improves the dependence on the ambient dimension relative to purely sparse estimators while retaining the same discretization and truncation behavior across the four Lévy regimes.",
+      "authors": [
+        "Marina Palaisti"
+      ],
+      "categories": [
+        "math.PR",
+        "math.ST",
+        "stat.ME"
+      ],
+      "published": "2026-03-12T15:26:35Z",
+      "updated": "2026-03-12T15:26:35Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12052v1",
+      "title": "Pivot based correlation clustering in the presence of good clusters",
+      "summary": "The classic pivot based clustering algorithm of Ailon, Charikar and Chawla [JACM'08] is factor 3, but all concrete examples showing that it is no better than 3 are based on some very good clusters, e.g., a complete graph minus a matching. By removing all good clusters before we make each pivot step, we show that this improves the approximation ratio to $2.9991$. To aid in this, we also show how our proposed algorithm performs on synthetic datasets, where the algorithm performs remarkably well, and shows improvements over both the algorithm for locating good clusters and the classic pivot algorithm.",
+      "authors": [
+        "David Rasmussen Lolck",
+        "Mikkel Thorup",
+        "Shuyi Yan"
+      ],
+      "categories": [
+        "cs.DS"
+      ],
+      "published": "2026-03-12T15:24:31Z",
+      "updated": "2026-03-12T15:24:31Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12047v1",
+      "title": "A Cloudy Fit to the Atmosphere of WASP-107 b",
+      "summary": "Context. WASP-107 b has been observed comprehensively by JWST in the near- and mid-IR bands, making it an ideal planet to probe the composition and internal dynamics. Recent analysis reveals a 8-10 um silicate feature, but it still remains uncertain how silicate clouds form on this planet. Aims. We aim at fitting the complete JWST spectrum of WASP-107 b, from 0.9 um to 12 um with a physically motivated cloud model and self-consistent temperature profile. Methods. Two-stream radiative transfer is coupled to a cloud formation model until convergence between cloud and temperature profiles is reached. We search a model grid spanning metallicity, turbulent diffusivity, internal heat flux and nucleation parameters to find the best fit model. Results. The silicate cloud feature at 10 um and the near-IR molecular band strength can be simultaneously and naturally explained without assuming a parametrized temperature profile. A moderate vertical diffusivity of Kzz = 10^9 cm^2 s^-1 is needed to bring the cloud particles to the upper atmosphere of WASP-107 b. This Kzz is favored by the joint fitting of the near-IR water feature and mid-IR silicate feature -- both sensitive to clouds. From the strength of H2O and CO2 bands, our model suggests a metallicity 17 times solar. Conclusions. Even in warm planets such as WASP-107 b, silicate clouds can form in the relatively cool upper atmosphere because turbulence uplifts vapor and cloud particles. Despite having considerably fewer degrees of freedom, the self-consistent modeling approach successfully fits WASP-107 b's multi-wavelength data, instilling confidence in the derived physical parameters.",
+      "authors": [
+        "Helong Huang",
+        "Michiel Min",
+        "Chris W. Ormel",
+        "Achrène Dyrek",
+        "Nicolas Crouzet"
+      ],
+      "categories": [
+        "astro-ph.EP"
+      ],
+      "published": "2026-03-12T15:22:29Z",
+      "updated": "2026-03-12T15:22:29Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12044v1",
+      "title": "HPC Containers for EBRAINS: Towards Portable Cross-Domain Software Environment",
+      "summary": "Deploying complex, distributed scientific workflows across diverse HPC sites is often hindered by site-specific dependencies and complex build environments. This paper investigates the design and performance of portable HPC container images capable of encapsulating MPI- and CUDA-enabled software stacks without sacrificing bare-metal performance. This work is part of recent work performed within the EBRAINS Research Infrastructure, to evaluate the implementation of portable HPC (Apptainer-based) container images targeting the EBRAINS Software Distribution (ESD) -- a Spack-based software ecosystem comprising approximately 80 top-level packages (and 800 dependencies). We evaluate a hybrid, PMIx-based containerization strategy using Apptainer that seamlessly bypasses the need for site-specific builds by dynamically leveraging host-level specialized hardware, such as network interfaces and GPUs, on two production HPC clusters: Karolina and Jureca-DC. We demonstrate the feasibility of building portable, MPI- and CUDA-enabled scientific software into container images that correctly leverage site-installed drivers and hardware to reproduce bare-metal communication behavior. Using communication microbenchmarks (e.g., OSU and NCCL) alongside performance metrics of applications from neuroscience, we measure and verify their performance against bare-metal deployments. Crucially, our verification approach extends beyond top-level runtime measurements; we highlight the analysis of underlying debug logs to actively detect misbehavior and misconfigurations, such as suboptimal transport pathways. Ultimately, this investigation demonstrates the feasibility of a simple and reproducible methodology for decoupling software environments from underlying infrastructures, paving the way for automated pipelines that ensure optimized, performance-verified execution across varied HPC architectures.",
+      "authors": [
+        "Krishna Kant Singh",
+        "Eric Müller",
+        "Eleni Mathioulaki",
+        "Wouter Klijn",
+        "Lena Oden"
+      ],
+      "categories": [
+        "cs.DC"
+      ],
+      "published": "2026-03-12T15:19:45Z",
+      "updated": "2026-03-12T15:19:45Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12037v1",
+      "title": "Frequentist Consistency of Prior-Data Fitted Networks for Causal Inference",
+      "summary": "Foundation models based on prior-data fitted networks (PFNs) have shown strong empirical performance in causal inference by framing the task as an in-context learning problem.However, it is unclear whether PFN-based causal estimators provide uncertainty quantification that is consistent with classical frequentist estimators. In this work, we address this gap by analyzing the frequentist consistency of PFN-based estimators for the average treatment effect (ATE). (1) We show that existing PFNs, when interpreted as Bayesian ATE estimators, can exhibit prior-induced confounding bias: the prior is not asymptotically overwritten by data, which, in turn, prevents frequentist consistency. (2) As a remedy, we suggest employing a calibration procedure based on a one-step posterior correction (OSPC). We show that the OSPC helps to restore frequentist consistency and can yield a semi-parametric Bernstein-von Mises theorem for calibrated PFNs (i.e., both the calibrated PFN-based estimators and the classical semi-parametric efficient estimators converge in distribution with growing data size). (3) Finally, we implement OSPC through tailoring martingale posteriors on top of the PFNs. In this way, we are able to recover functional nuisance posteriors from PFNs, required by the OSPC. In multiple (semi-)synthetic experiments, PFNs calibrated with our martingale posterior OSPC produce ATE uncertainty that (i) asymptotically matches frequentist uncertainty and (ii) is well calibrated in finite samples in comparison to other Bayesian ATE estimators.",
+      "authors": [
+        "Valentyn Melnychuk",
+        "Vahid Balazadeh",
+        "Stefan Feuerriegel",
+        "Rahul G. Krishnan"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-12T15:14:35Z",
+      "updated": "2026-03-12T15:14:35Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12036v1",
+      "title": "Single Pixel Image Classification using an Ultrafast Digital Light Projector",
+      "summary": "Pattern recognition and image classification are essential tasks in machine vision. Autonomous vehicles, for example, require being able to collect the complex information contained in a changing environment and classify it in real time. Here, we experimentally demonstrate image classification at multi-kHz frame rates combining the technique of single pixel imaging (SPI) with a low complexity machine learning model. The use of a microLED-on-CMOS digital light projector for SPI enables ultrafast pattern generation for sub-ms image encoding. We investigate the classification accuracy of our experimental system against the broadly accepted benchmarking task of the MNIST digits classification. We compare the classification performance of two machine learning models: An extreme learning machine (ELM) and a backpropagation trained deep neural network. The complexity of both models is kept low so the overhead added to the inference time is comparable to the image generation time. Crucially, our single pixel image classification approach is based on a spatiotemporal transformation of the information, entirely bypassing the need for image reconstruction. By exploring the performance of our SPI based ELM as binary classifier we demonstrate its potential for efficient anomaly detection in ultrafast imaging scenarios.",
+      "authors": [
+        "Aisha Kanwal",
+        "Graeme E. Johnstone",
+        "Fahimeh Dehkhoda",
+        "Johannes H. Herrnsdorf",
+        "Robert K. Henderson",
+        "Martin D. Dawson",
+        "Xavier Porte",
+        "Michael J. Strain"
+      ],
+      "categories": [
+        "cs.CV",
+        "physics.optics"
+      ],
+      "published": "2026-03-12T15:12:34Z",
+      "updated": "2026-03-12T15:12:34Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12032v1",
+      "title": "Assessing the robustness of amortized simulation-based inference to transient noise in gravitational-wave ringdowns",
+      "summary": "Gravitational waves (GW) emitted by binary systems allow us to perform precision tests of general relativity in the strong field regime. Ringdown signals allow for probing black hole mass and spin with high precision in GW astronomy. With improvements in current and next-generation GW detectors, developing likelihood-free parameter inference methods is crucial. This is especially important when facing challenges such as non-standard noise, partial data, or incomplete signal models that prevent the use of analytical likelihood functions. In this work, we propose an amortized simulation-based inference strategy to estimate ringdown parameters directly. Specifically, our method is based on amortized neural posterior estimation, which trains a neural density estimator of the posterior for all data segments within the prior range. The results show that our trained amortized network achieves statistically consistent parameter estimates with valid confidence coverage compared to established Markov-chain methods, while offering inference speeds that are orders of magnitude faster. Furthermore, we evaluate the robustness of the method against transient noise contamination. Our analysis reveals that the timing of glitch injection has a decisive impact on estimation bias, particularly during the tail of a signal with sparse information. Glitch strength is positively correlated with estimation error, but has limited effect at low signal-to-noise ratios. Mass and spin parameters are most sensitive to noise. This study not only provides an efficient and accurate inference framework for ringdown analysis but also lays a foundation for developing robust data-processing pipelines for future GW astronomy in realistic noise environments.",
+      "authors": [
+        "Song-Tao Liu",
+        "Tian-Yang Sun",
+        "Yu-Xin Wang",
+        "Yong-Xin Zhang",
+        "Shang-Jie Jin",
+        "Jing-Fei Zhang",
+        "Xin Zhang"
+      ],
+      "categories": [
+        "gr-qc",
+        "astro-ph.CO",
+        "astro-ph.IM",
+        "hep-ph"
+      ],
+      "published": "2026-03-12T15:10:53Z",
+      "updated": "2026-03-12T15:10:53Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12031v1",
+      "title": "AGMARL-DKS: An Adaptive Graph-Enhanced Multi-Agent Reinforcement Learning for Dynamic Kubernetes Scheduling",
+      "summary": "State-of-the-art cloud-native applications require intelligent schedulers that can effectively balance system stability, resource utilisation, and associated costs. While Kubernetes provides feasibility-based placement by default, recent research efforts have explored the use of reinforcement learning (RL) for more intelligent scheduling decisions. However, current RL-based schedulers have three major limitations. First, most of these schedulers use monolithic centralised agents, which are non-scalable for large heterogeneous clusters. Second, the ones that use multi-objective reward functions assume simple, static, linear combinations of the objectives. Third, no previous work has produced a stress-aware scheduler that can react adaptively to dynamic conditions. To address these gaps in current research, we propose the Adaptive Graph-enhanced Multi-Agent Reinforcement Learning Dynamic Kubernetes Scheduler (AGMARL-DKS). AGMARL-DKS addresses these gaps by introducing three major innovations. First, we construct a scalable solution by treating the scheduling challenge as a cooperative multi-agent problem, where every cluster node operates as an agent, employing centralised training methods before decentralised execution. Second, to be context-aware and yet decentralised, we use a Graph Neural Network (GNN) to build a state representation of the global cluster context at each agent. This represents an improvement over methods that rely solely on local observations. Finally, to make trade-offs between these objectives, we use a stress-aware lexicographical ordering policy instead of a simple, static linear weighting of these objectives. The evaluations in Google Kubernetes Engine (GKE) reveal that AGMARL-DKS significantly outperforms the default scheduler in terms of fault tolerance, utilisation, and cost, especially in scheduling batch and mission-critical workloads.",
+      "authors": [
+        "Hamed Hamzeh"
+      ],
+      "categories": [
+        "cs.DC",
+        "cs.LG",
+        "cs.MA"
+      ],
+      "published": "2026-03-12T15:09:48Z",
+      "updated": "2026-03-12T15:09:48Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12026v1",
+      "title": "Efficient Generative Modeling with Unitary Matrix Product States Using Riemannian Optimization",
+      "summary": "Tensor networks, which are originally developed for characterizing complex quantum many-body systems, have recently emerged as a powerful framework for capturing high-dimensional probability distributions with strong physical interpretability. This paper systematically studies matrix product states (MPS) for generative modeling and shows that unitary MPS, which is a tensor-network architecture that is both simple and expressive, offers clear benefits for unsupervised learning by reducing ambiguity in parameter updates and improving efficiency. To overcome the inefficiency of standard gradient-based MPS training, we develop a Riemannian optimization approach that casts probabilistic modeling as an optimization problem with manifold constraints, and further derive an efficient space-decoupling algorithm. Experiments on Bars-and-Stripes and EMNIST datasets demonstrate fast adaptation to data structure, stable updates, and strong performance while maintaining the efficiency and expressive power of MPS.",
+      "authors": [
+        "Haotong Duan",
+        "Zhongming Chen",
+        "Ngai Wong"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-12T15:05:03Z",
+      "updated": "2026-03-12T15:05:03Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12017v1",
+      "title": "Thermodynamic Descriptors from Molecular Dynamics as Machine Learning Features for Extrapolable Property Prediction",
+      "summary": "Machine learning (ML) models which rely on molecular structure excel at predicting properties for well-represented organic compounds, however their limited ability to extrapolate to chemotypes outside their training domain, remains a critical bottleneck in chemical discovery. This challenge is particularly acute in industrial discovery, where navigating uncharted chemical space to generate new intellectual property is a primary objective. Normal boiling points serve as a key benchmark for testing the extrapolative power of ML algorithms. A major limitation is that group-contribution methods are by design unable to generate predictions for molecules containing unparameterized fragments. Here, we demonstrate that this limitation can be overcome by replacing structural descriptors with thermodynamic properties computed directly from molecular dynamics simulations. We introduce a physics-augmented framework where a CatBoost regression model learns directly from ensemble-averaged cohesive energies, heats of vaporization, and densities extracted from atomistic liquid-phase simulations. Benchmark comparisons reveal that while both our physics-augmented model and conventional structure-based models perform comparably well on standard organic compounds, only the former maintains controlled error growth when extrapolating to structurally dissimilar chemical space. Our model successfully predicts boiling points for chemical classes entirely absent from training -- including inorganic compounds, salts, and molecules with elements like Si, B, and Te -- where structure-based models are fundamentally inapplicable. By encoding the intermolecular forces governing phase behavior, our framework establishes a generalizable strategy for property prediction beyond the structural boundaries of the existing methods.",
+      "authors": [
+        "Nuria H. Espejo",
+        "Pablo Llombart",
+        "Andrés González de Castilla",
+        "Jorge Ramirez",
+        "Jorge R. Espinosa",
+        "Adiran Garaizar"
+      ],
+      "categories": [
+        "physics.chem-ph"
+      ],
+      "published": "2026-03-12T14:59:42Z",
+      "updated": "2026-03-12T14:59:42Z",
+      "collectedAt": "2026-03-13T14:15:39.413Z"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+{
+  "total_samples": 220,
+  "breakdown": {
+    "existing": 120,
+    "synthetic_physics": 50,
+    "active_learning": 30,
+    "augmented": 20
+  },
+  "expansion_factor": 1.8333333333333333,
+  "parameter_ranges": {
+    "P_W": [
+      0.1,
+      1.0
+    ],
+    "v_mms": [
+      12.0,
+      90.0
+    ],
+    "E_Jcm2": [
+      0.18,
+      8.333333333333334
+    ],
+    "co_ratio": [
+      0.9,
+      3.3
+    ]
+  },
+  "performance_ranges": {
+    "sigma_Sm": [
+      50.0,
+      4500.0
+    ],
+    "ssa_m2g": [
+      175.1,
+      2808.782400890497
+    ],
+    "id_ig": [
+      0.46,
+      2.75
+    ]
+  }
+}

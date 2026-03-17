@@ -1,0 +1,41 @@
+{
+  "total_samples": 120,
+  "breakdown": {
+    "existing": 30,
+    "literature": 40,
+    "synthetic": 30,
+    "augmented": 20
+  },
+  "parameter_ranges": {
+    "P_W": [
+      0.1,
+      1.0
+    ],
+    "v_mms": [
+      12.0,
+      83.1
+    ],
+    "E_Jcm2": [
+      0.18,
+      8.333333333333334
+    ],
+    "co_ratio": [
+      0.9,
+      3.3
+    ]
+  },
+  "performance_ranges": {
+    "sigma_Sm": [
+      50.0,
+      4500.0
+    ],
+    "ssa_m2g": [
+      175.1,
+      2808.7824008904972
+    ],
+    "id_ig": [
+      0.46,
+      2.68
+    ]
+  }
+}

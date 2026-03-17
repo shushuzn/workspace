@@ -1,0 +1,1724 @@
+{
+  "entities": [
+    {
+      "id": "author_monthly_whos_hiring",
+      "type": "Author",
+      "properties": {
+        "name": "Monthly Whos Hiring",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-02-index.md"
+      }
+    },
+    {
+      "id": "author_who",
+      "type": "Author",
+      "properties": {
+        "name": "Who",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-02-index.md"
+      }
+    },
+    {
+      "id": "concept__0001",
+      "type": "Concept",
+      "properties": {
+        "name": "2026-03-02 16:40 - 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "concept__0002",
+      "type": "Concept",
+      "properties": {
+        "name": "2026-03-02 16:45 - 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "concept__0003",
+      "type": "Concept",
+      "properties": {
+        "name": "2026-03-02 17:20 - 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "concept__0004",
+      "type": "Concept",
+      "properties": {
+        "name": "2026-03-02 23:16 - AI Research OS 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "org_future_of_life_institute",
+      "type": "Organization",
+      "properties": {
+        "name": "Future of Life Institute",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "org_stanford",
+      "type": "Organization",
+      "properties": {
+        "name": "Stanford",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "org_mit",
+      "type": "Organization",
+      "properties": {
+        "name": "MIT",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "paper_2602_23681",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2602.23681",
+        "year": "2002",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-03.md"
+      }
+    },
+    {
+      "id": "paper_2501_12345",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2501.12345",
+        "year": "2001",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-03.md"
+      }
+    },
+    {
+      "id": "paper_2502_67890",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2502.67890",
+        "year": "2002",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-03.md"
+      }
+    },
+    {
+      "id": "paper_2603_00001",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2603.00001",
+        "year": "2003",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-03.md"
+      }
+    },
+    {
+      "id": "paper_2601_02163",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2601.02163",
+        "year": "2001",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-03.md"
+      }
+    },
+    {
+      "id": "concept__0005",
+      "type": "Concept",
+      "properties": {
+        "name": "TEN Framework",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-04-evermemos-research.md"
+      }
+    },
+    {
+      "id": "concept__0006",
+      "type": "Concept",
+      "properties": {
+        "name": "⚙️ 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-04-summary.md"
+      }
+    },
+    {
+      "id": "concept__0007",
+      "type": "Concept",
+      "properties": {
+        "name": "📊 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\2026-03-04-summary.md"
+      }
+    },
+    {
+      "id": "author_muhibuddin12",
+      "type": "Author",
+      "properties": {
+        "name": "muhibuddin12",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\C-2026-03-04-Medium-HighQuality-Articles.md"
+      }
+    },
+    {
+      "id": "author_meryemmsakinn",
+      "type": "Author",
+      "properties": {
+        "name": "meryemmsakinn",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\C-2026-03-04-Medium-HighQuality-Articles.md"
+      }
+    },
+    {
+      "id": "concept__0008",
+      "type": "Concept",
+      "properties": {
+        "name": "🔧 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\COLLECTION-SUMMARY-2026-03-04-2053.md"
+      }
+    },
+    {
+      "id": "concept__0009",
+      "type": "Concept",
+      "properties": {
+        "name": "🔧 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\COLLECTION-SUMMARY-2026-03-04-FINAL.md"
+      }
+    },
+    {
+      "id": "author_sanbuphy",
+      "type": "Author",
+      "properties": {
+        "name": "sanbuphy",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\learning-notes-2026-03-04.md"
+      }
+    },
+    {
+      "id": "paper_2602_23720",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2602.23720",
+        "year": "2002",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\MEMORY.md"
+      }
+    },
+    {
+      "id": "paper_2603_03024",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2603.03024",
+        "year": "2003",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\MEMORY.md"
+      }
+    },
+    {
+      "id": "paper_2603_03018",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2603.03018",
+        "year": "2003",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\MEMORY.md"
+      }
+    },
+    {
+      "id": "paper_2602_23701",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2602.23701",
+        "year": "2002",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\MEMORY.md"
+      }
+    },
+    {
+      "id": "paper_2602_23668",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2602.23668",
+        "year": "2002",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\MEMORY.md"
+      }
+    },
+    {
+      "id": "paper_2602_23716",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2602.23716",
+        "year": "2002",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\MEMORY.md"
+      }
+    },
+    {
+      "id": "paper_2602_23367",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2602.23367",
+        "year": "2002",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\MEMORY.md"
+      }
+    },
+    {
+      "id": "concept__0010",
+      "type": "Concept",
+      "properties": {
+        "name": "🌙 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\system-ready-2026-03-04-1915.md"
+      }
+    },
+    {
+      "id": "concept__0011",
+      "type": "Concept",
+      "properties": {
+        "name": "🎯 系统",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\system-ready-2026-03-04-1915.md"
+      }
+    },
+    {
+      "id": "concept__0012",
+      "type": "Concept",
+      "properties": {
+        "name": "Observation Agent",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+      }
+    },
+    {
+      "id": "concept__0013",
+      "type": "Concept",
+      "properties": {
+        "name": "Planning Agent",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+      }
+    },
+    {
+      "id": "concept__0014",
+      "type": "Concept",
+      "properties": {
+        "name": "Execution Agent",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+      }
+    },
+    {
+      "id": "concept__0015",
+      "type": "Concept",
+      "properties": {
+        "name": "Memory Agent",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+      }
+    },
+    {
+      "id": "author_ling_luo",
+      "type": "Author",
+      "properties": {
+        "name": "Ling Luo",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+      }
+    },
+    {
+      "id": "author_hierarchical_collaboration",
+      "type": "Author",
+      "properties": {
+        "name": "Hierarchical Collaboration",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+      }
+    },
+    {
+      "id": "author_dual",
+      "type": "Author",
+      "properties": {
+        "name": "Dual",
+        "source_file": "D:\\OpenClaw\\workspace\\memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+      }
+    }
+  ],
+  "relations": [
+    {
+      "source": "author_monthly_whos_hiring",
+      "target": "author_who",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "org_mit",
+      "target": "org_mit",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23681",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2501_12345",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2502_67890",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2603_00001",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2501_12345",
+      "target": "paper_2502_67890",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2501_12345",
+      "target": "paper_2603_00001",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2502_67890",
+      "target": "paper_2603_00001",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23681",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2501_12345",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2502_67890",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2603_00001",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2601_02163",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2501_12345",
+      "target": "paper_2502_67890",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2501_12345",
+      "target": "paper_2603_00001",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2501_12345",
+      "target": "paper_2601_02163",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2502_67890",
+      "target": "paper_2603_00001",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2502_67890",
+      "target": "paper_2601_02163",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_00001",
+      "target": "paper_2601_02163",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23681",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2502_67890",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2501_12345",
+      "target": "paper_2601_02163",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2001",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "org_future_of_life_institute",
+      "target": "org_stanford",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "org_future_of_life_institute",
+      "target": "org_mit",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "org_stanford",
+      "target": "org_mit",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23720",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23701",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23668",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23720",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23367",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23681",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23367",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23681",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23367",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23701",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23668",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23668",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23681",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23681",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23701",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23720",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2603_03024",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2603_03018",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23701",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23668",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23716",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23367",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2603_03024",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2603_03018",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23701",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23668",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23681",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23716",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23720",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23367",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "paper_2603_03018",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "paper_2602_23701",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "paper_2602_23668",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "paper_2602_23681",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "paper_2602_23716",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "paper_2602_23720",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "paper_2602_23367",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03018",
+      "target": "paper_2602_23701",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03018",
+      "target": "paper_2602_23668",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03018",
+      "target": "paper_2602_23681",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03018",
+      "target": "paper_2602_23716",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03018",
+      "target": "paper_2602_23720",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2603_03018",
+      "target": "paper_2602_23367",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23668",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23681",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23716",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23720",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23367",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23701",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23681",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23716",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23720",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23367",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23668",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23701",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23720",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23367",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23681",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23668",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23701",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23681",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23668",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23701",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23367",
+      "type": "related_work",
+      "confidence": 0.9,
+      "properties": {
+        "context": "same_paper_citation",
+        "extraction_method": "arxiv_co_citation"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23720",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23701",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23668",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23716",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23681",
+      "target": "paper_2602_23367",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23701",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23668",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23681",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23716",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23720",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23720",
+      "target": "paper_2602_23367",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23668",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23681",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23716",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23720",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23367",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23701",
+      "target": "paper_2602_23701",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23681",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23716",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23720",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23367",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23668",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23668",
+      "target": "paper_2602_23701",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23720",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23367",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23681",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23668",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23716",
+      "target": "paper_2602_23701",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23681",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23668",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23701",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2602_23367",
+      "target": "paper_2602_23367",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2002",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "paper_2603_03018",
+      "type": "contemporary",
+      "confidence": 0.8,
+      "properties": {
+        "year": "2003",
+        "context": "same_year_publication",
+        "extraction_method": "temporal_analysis"
+      }
+    },
+    {
+      "source": "author_sanbuphy",
+      "target": "author_sanbuphy",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "author_ling_luo",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "author_hierarchical_collaboration",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "paper_2603_03024",
+      "target": "author_dual",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "author_ling_luo",
+      "target": "author_hierarchical_collaboration",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "author_ling_luo",
+      "target": "author_dual",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "author_hierarchical_collaboration",
+      "target": "author_dual",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "concept__0012",
+      "target": "concept__0013",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "concept__0012",
+      "target": "concept__0014",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "concept__0012",
+      "target": "concept__0015",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "concept__0013",
+      "target": "concept__0014",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "concept__0013",
+      "target": "concept__0015",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "concept__0014",
+      "target": "concept__0015",
+      "type": "co_occurrence",
+      "confidence": 0.5,
+      "properties": {
+        "context": "paragraph"
+      }
+    },
+    {
+      "source": "author_ling_luo",
+      "target": "paper_2603_03024",
+      "type": "writes",
+      "confidence": 0.7,
+      "properties": {
+        "context": "author_paper_co_occurrence",
+        "extraction_method": "author_paper_link"
+      }
+    },
+    {
+      "source": "author_hierarchical_collaboration",
+      "target": "paper_2603_03024",
+      "type": "writes",
+      "confidence": 0.7,
+      "properties": {
+        "context": "author_paper_co_occurrence",
+        "extraction_method": "author_paper_link"
+      }
+    },
+    {
+      "source": "author_dual",
+      "target": "paper_2603_03024",
+      "type": "writes",
+      "confidence": 0.7,
+      "properties": {
+        "context": "author_paper_co_occurrence",
+        "extraction_method": "author_paper_link"
+      }
+    }
+  ],
+  "stats": {
+    "total_entities": 38,
+    "total_relations": 139,
+    "entity_types": {
+      "Author": 8,
+      "Concept": 15,
+      "Organization": 3,
+      "Paper": 12
+    },
+    "relation_types": {
+      "co_occurrence": 40,
+      "related_work": 60,
+      "contemporary": 36,
+      "writes": 3
+    }
+  }
+}

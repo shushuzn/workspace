@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lucas Prieto , Edward Stevinson , Melih Barsbey , Tolga Birdal ∗, Pedro A.M. Mediano∗</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .header {
+            border-bottom: 3px solid #4a9eff;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .meta {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .abstract {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #4a9eff;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        .section h3 {
+            color: #4a9eff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .section .content {
+            color: #333;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+        .references {
+            margin-top: 30px;
+        }
+        .reference {
+            padding: 12px;
+            margin: 10px 0;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .reference.unverified {
+            border-left: 3px solid #ff9800;
+            background: #fff8e1;
+        }
+        .reference.verified {
+            border-left: 3px solid #4caf50;
+            background: #e8f5e9;
+        }
+        .reference.manual {
+            border-left: 3px solid #2196f3;
+            background: #e3f2fd;
+        }
+        .ref-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .ref-id {
+            font-weight: bold;
+            color: #4a9eff;
+            margin-right: 8px;
+        }
+        .ref-status {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #f0f0f0;
+        }
+        .ref-content {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .ref-details {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .ref-details div {
+            margin: 4px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #4a9eff;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .integrity-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1>Lucas Prieto , Edward Stevinson , Melih Barsbey , Tolga Birdal ∗, Pedro A.M. Mediano∗</h1>
+            <div class="meta">作者：Lucas Prieto, Edward Stevinson, Melih Barsbey, Tolga Birdal, Pedro A. M. Mediano</div>
+            <div class="meta">年份：未知</div>
+            <div class="meta">arXiv: <span class="badge">2603.09972</span></div>
+        </div>
+        
+        <div class="abstract">
+            <strong>📖 摘要</strong>
+            <p style="margin-top: 10px;">A central idea in mechanistic interpretability is that neural networks represent more
+features than they have dimensions, arranging them in superposition to form an
+over-complete basis. This framing has been influential, motivating dictionary learn-
+ing approaches such as sparse autoencoders. However, superposition has mostly
+been studied in idealized settings where features are sparse and uncorrelated. In
+these settings, superposition is typically understood as introducing interference
+that must be minimized geometrically and filtered out by non-linearities such
+as ReLUs, yielding local structures like regular polytopes. We show that this
+account is incomplete for realistic data by introducing Bag-of-Words Superposi-
+tion (BOWS), a controlled setting to encode binary bag-of-words representations
+of internet text in superposition. Using BOWS, we find that when features are
+correlated, interference can be constructive rather than just noise to be filtered
+out. This is achieved by arranging features according to their co-activation pat-
+terns, making interference between active features constructive, while still using
+ReLUs to avoid false positives. We show that this kind of arrangement is more
+prevalent in models trained with weight decay and naturally gives rise to seman-
+tic clusters and cyclical structures which have been observed in real language
+models yet were not explained by the standard picture of superposition. Code
+for this paper can be found at: https://github.com/LucasPrietoAl/
+correlations-feature-geometry.</p>
+        </div>
+        
+        <div class="integrity-notice">
+            <strong>🔒 学术诚信声明：</strong>
+            本卡片内容由 AI 辅助生成，所有参考文献需人工核实真实性。
+            请勿直接引用未验证的文献信息。
+        </div>
+        
+        <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📑 核心章节</h2>
+        
+            <div class="section">
+                <h3>Introduction</h3>
+                <p class="content">Published as a conference paper at ICLR 2026
+FROM DATA STATISTICS TO FEATURE GEOMETRY:
+HOW CORRELATIONS SHAPE SUPERPOSITION
+Lucas Prieto , Edward Stevinson , Melih Barsbey , Tolga Birdal ∗, Pedro A.M. Mediano∗
+Imperial College London
+ABSTRACT
+A central idea in mechanistic interpretability is that neural networks represent more
+features than they have dimensions, arranging them in superposition to form an
+over-complete basis. This framing has been influential, motivating dictionary learn-
+ing app...</p>
+            </div>
+            
+            <div class="section">
+                <h3>INTRODUCTION</h3>
+                <p class="content">The field of mechanistic interpretability (MI) aims to understand deep learning models by decom-
+posing them into interpretable components such as features or circuits, and understanding how these
+interact (Olah et al., 2020). A central idea in this field is that models represent more features than they
+have dimensions, arranging them in superposition to form an overcomplete basis (Elhage et al., 2022),
+at the cost of allowing interference between features. This framing has been influential, mot...</p>
+            </div>
+            
+            <div class="section">
+                <h3>(W, ψ) = 1 −EDf</h3>
+                <p class="content">(fi −ψ(Wf)i)2
+VarDf [fi]
+Definition 1 (Superposition). A set of features F ⊆[d] is represented in superposition if:...</p>
+            </div>
+            
+            <div class="section">
+                <h3>(Interference) For every i ∈F, there exists j ∈F with j ̸= i such that ⟨wi, wj⟩̸= 0.</h3>
+                <p class="content">Published as a conference paper at ICLR 2026...</p>
+            </div>
+            
+            <div class="section">
+                <h3>∈F.</h3>
+                <p class="content">Definition 2 (Linear Superposition). Let F be a set of features in superposition. A feature i ∈F is in
+linear superposition if there exists a linear decoder ψlin : Rm →Rd such that R2...</p>
+            </div>
+            
+        
+        <div class="references">
+            <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📚 参考文献</h2>
+            <p style="color: #999;">未检测到参考文献</p>
+        </div>
+        
+        <div class="footer">
+            <p>生成时间：2026-03-12 08:59:44</p>
+            <p>知识卡片生成器 v1.0 | AI Research OS</p>
+            <p style="margin-top: 10px; color: #ff9800;">
+                ⚠️ 所有参考文献必须人工核实真实性 - 严禁虚构文献信息
+            </p>
+        </div>
+    </div>
+</body>
+</html>

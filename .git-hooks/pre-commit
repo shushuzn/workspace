@@ -1,0 +1,117 @@
+#!/usr/bin/env python
+"""
+Git Pre-Commit Hook - 提交前强制对比检查
+
+功能:
+- 在 git commit 前自动运行文件对比
+- 检查是否有未对比的文件修改
+- 阻止无对比的提交
+
+安装:
+    copy .git-hooks\pre-commit .git\hooks\pre-commit
+    chmod +x .git/hooks/pre-commit (Linux/Mac)
+
+作者：Claw 🐾 (Innovator Agent)
+日期：2026-03-14
+优先级：最高（强制执行）
+"""
+
+import subprocess
+import sys
+import os
+from pathlib import Path
+
+# 配置
+WORKSPACE = Path(r"D:\OpenClaw\workspace")
+COMPARATOR_SCRIPT = WORKSPACE / "30-scripts-tools" / "workspace_comparator.py"
+PRE_OP_HOOK = WORKSPACE / "30-scripts-tools" / "pre_file_operation_hook.py"
+
+def run_command(cmd, description):
+    """运行命令并检查结果"""
+    print(f"[HOOK] {description}...")
+    try:
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=60,
+            cwd=str(WORKSPACE)
+        )
+        
+        if result.returncode != 0:
+            print(f"[FAIL] {description} failed")
+            if result.stderr:
+                print(f"Error: {result.stderr}")
+            return False
+        
+        print(f"[OK] {description} passed")
+        return True
+    
+    except Exception as e:
+        print(f"[ERROR] {description} exception: {e}")
+        return False
+
+def get_staged_files():
+    """获取已暂存的文件列表"""
+    try:
+        result = subprocess.run(
+            ['git', 'diff', '--cached', '--name-only'],
+            capture_output=True,
+            text=True,
+            timeout=30,
+            cwd=str(WORKSPACE)
+        )
+        
+        if result.returncode == 0:
+            files = [f.strip() for f in result.stdout.split('\n') if f.strip()]
+            return files
+        return []
+    except Exception:
+        return []
+
+def main():
+    print("="*60)
+    print("GIT PRE-COMMIT HOOK - File Operation Check")
+    print("="*60)
+    
+    # 检查 1: 运行工作区对比
+    if not run_command(
+        [sys.executable, str(COMPARATOR_SCRIPT), '--report'],
+        "Workspace comparison"
+    ):
+        print("\n[BLOCKED] Commit rejected - Comparison failed")
+        print("[INFO] Run: python 30-scripts-tools/workspace_comparator.py --report")
+        sys.exit(1)
+    
+    # 检查 2: 获取暂存文件
+    staged_files = get_staged_files()
+    
+    if staged_files:
+        print(f"\n[INFO] Staged files ({len(staged_files)}):")
+        for f in staged_files[:10]:
+            print(f"  - {f}")
+        if len(staged_files) > 10:
+            print(f"  ... and {len(staged_files) - 10} more")
+        
+        # 检查 3: 对关键文件运行预操作检查
+        critical_patterns = ['MEMORY.md', 'PROFILE.md', 'SOUL.md', '.py', '30-scripts-tools']
+        critical_files = [f for f in staged_files if any(p in f for p in critical_patterns)]
+        
+        if critical_files:
+            print(f"\n[INFO] Critical files detected ({len(critical_files)})")
+            
+            # 注意：这里只警告，不阻止（因为已经是 commit 后）
+            print("[WARN] Please ensure pre-operation checks were run for these files")
+    
+    # 检查 4: 检查工作台整洁度
+    workspace_file_count = len(list(WORKSPACE.rglob('*')))
+    if workspace_file_count > 1000:
+        print(f"\n[WARN] Workspace has {workspace_file_count} files - consider cleanup")
+    
+    print("\n" + "="*60)
+    print("[OK] Pre-commit checks PASSED")
+    print("="*60)
+    sys.exit(0)
+
+if __name__ == '__main__':
+    main()

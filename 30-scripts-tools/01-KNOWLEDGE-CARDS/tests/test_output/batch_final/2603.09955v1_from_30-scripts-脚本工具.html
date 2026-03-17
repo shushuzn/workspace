@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wenzhao Xiang, Yue Wu, Hongyang Yu, Feng Gao, Fan Yang, Xilin Chen</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .header {
+            border-bottom: 3px solid #4a9eff;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .meta {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .abstract {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #4a9eff;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        .section h3 {
+            color: #4a9eff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .section .content {
+            color: #333;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+        .references {
+            margin-top: 30px;
+        }
+        .reference {
+            padding: 12px;
+            margin: 10px 0;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .reference.unverified {
+            border-left: 3px solid #ff9800;
+            background: #fff8e1;
+        }
+        .reference.verified {
+            border-left: 3px solid #4caf50;
+            background: #e8f5e9;
+        }
+        .reference.manual {
+            border-left: 3px solid #2196f3;
+            background: #e3f2fd;
+        }
+        .ref-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .ref-id {
+            font-weight: bold;
+            color: #4a9eff;
+            margin-right: 8px;
+        }
+        .ref-status {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #f0f0f0;
+        }
+        .ref-content {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .ref-details {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .ref-details div {
+            margin: 4px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #4a9eff;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .integrity-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1>Wenzhao Xiang, Yue Wu, Hongyang Yu, Feng Gao, Fan Yang, Xilin Chen</h1>
+            <div class="meta">作者：Wenzhao Xiang, Yue Wu, Hongyang Yu, Feng Gao, Fan Yang, Xilin Chen</div>
+            <div class="meta">年份：未知</div>
+            <div class="meta">arXiv: <span class="badge">2603.09955</span></div>
+        </div>
+        
+        <div class="abstract">
+            <strong>📖 摘要</strong>
+            <p style="margin-top: 10px;">herent tension: contrastive learning (CL) captures global semantics
+but loses fine-grained detail, while masked image modeling (MIM)
+preserves local textures but suffers from “attention drift” due to
+semantically-agnostic random masking. We propose C2FMAE,
+a coarse-to-fine masked autoencoder that resolves this tension
+by explicitly learning hierarchical visual representations across
+three data granularities: semantic masks (scene-level), instance
+masks (object-level), and RGB images (pixel-level). Two synergistic
+innovations enforce a strict top-down learning principle. First, a
+cascaded decoder sequentially reconstructs from scene semantics
+to object instances to pixel details, establishing explicit cross-
+granularity dependencies that parallel decoders cannot capture.
+Second, a progressive masking curriculum dynamically shifts
+the training focus from semantic-guided to instance-guided and
+finally to random masking, creating a structured learning path
+from global context to local features. To support this framework,
+we construct a large-scale multi-granular dataset with high-
+quality pseudo-labels for all 1.28M ImageNet-1K images. Extensive
+experiments show that C2FMAE achieves significant performance
+gains on image classification, object detection, and semantic
+segmentation, validating the effectiveness of our hierarchical
+design in learning more robust and generalizable representations.
+Index Terms—Self-supervised learning, masked image modeling,
+hierarchical visual understanding, coarse-to-fine, multi-granular
+pre-training.
+I. INTRODUCTION
+Among the diverse paradigms in computer vision pre-
+training, contrastive-based [1]–[3] and reconstruction-based [4]–
+[6] self-supervised learning have been particularly influential.
+Despite their tremendous success, both paradigms exhibit
+inherent, almost opposing, limitations that curtail their ability to
+learn truly comprehensive and universal visual representations.
+Contrastive learning (CL), which pulls together global
+features from different views of an image, excels at learning
+high-level semantic representations. This makes it highly
+effective for image-level tasks like classification and produces
+clean, object-centric attention maps as shown for DINO [3] in
+Figure 1. However, this strong focus on high-level semantics
+inherently limits the capture of fine-grained spatial information.
+The loss of low-level detail can limit its performance on
+dense prediction tasks that require precise localization and</p>
+        </div>
+        
+        <div class="integrity-notice">
+            <strong>🔒 学术诚信声明：</strong>
+            本卡片内容由 AI 辅助生成，所有参考文献需人工核实真实性。
+            请勿直接引用未验证的文献信息。
+        </div>
+        
+        <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📑 核心章节</h2>
+        
+            <div class="section">
+                <h3>Introduction</h3>
+                <p class="content">UNDER REVIEW
+From Semantics to Pixels: Coarse-to-Fine Masked Autoencoders for
+Hierarchical Visual Understanding
+Wenzhao Xiang, Yue Wu, Hongyang Yu, Feng Gao, Fan Yang, Xilin Chen
+Abstract—Self-supervised visual pre-training methods face an in-
+herent tension: contrastive learning (CL) captures global semantics
+but loses fine-grained detail, while masked image modeling (MIM)
+preserves local textures but suffers from “attention drift” due to
+semantically-agnostic random masking. We propose C2FMAE,...</p>
+            </div>
+            
+            <div class="section">
+                <h3>INTRODUCTION</h3>
+                <p class="content">Among the diverse paradigms in computer vision pre-
+training, contrastive-based [1]–[3] and reconstruction-based [4]–
+[6] self-supervised learning have been particularly influential.
+Despite their tremendous success, both paradigms exhibit
+inherent, almost opposing, limitations that curtail their ability to
+learn truly comprehensive and universal visual representations.
+Contrastive learning (CL), which pulls together global
+features from different views of an image, excels at learning
+high-level...</p>
+            </div>
+            
+            <div class="section">
+                <h3>RELATED WORK</h3>
+                <p class="content">A. Masked Image Modeling
+Masked Image Modeling (MIM) has evolved rapidly as
+a dominant paradigm in self-supervised vision learning. We
+categorize existing approaches into three streams: foundational
+reconstruction frameworks, structured masking strategies, and
+multi-modal pre-training.
+Foundational MIM Frameworks. Inspired by BERT in
+NLP, BEiT [4] pioneered the prediction of discrete visual
+tokens from masked image patches. Following this, MAE [5]
+established a scalable baseline by reconstructin...</p>
+            </div>
+            
+            <div class="section">
+                <h3>METHOD</h3>
+                <p class="content">This section details the proposed C2FMAE framework. We
+first describe the construction of our multi-granular dataset in
+Section III-A, which provides the foundation for hierarchical
+learning. As illustrated in Figure 2, the C2FMAE architecture
+consists of three core components: a shared encoder that pro-
+cesses multi-granular inputs into a unified representation (Sec-
+tion III-B), a cascaded decoder that sequentially reconstructs
+from coarse semantics to fine-grained pixels (Section III-C),
+and ...</p>
+            </div>
+            
+            <div class="section">
+                <h3>= fins(Iins, rm, α) ∈{0, 1}N,</h3>
+                <p class="content">where fins is our instance-guided masking function, and
+α controls the distribution of masks between object and
+background regions. Specifically, fins includes: 1) identifying
+complete object instances from Iins; 2) selecting all or a subset
+of instances based on their size and spatial significance; 3)
+generating masks by randomly and separately selecting masked
+patches in object and background regions according to the ratio
+α, which means...</p>
+            </div>
+            
+        
+        <div class="references">
+            <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📚 参考文献</h2>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[1]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">K. He, H. Fan, Y. Wu, S. Xie, and R. Girshick, “Momentum contrast</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[2]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">T. Chen, S. Kornblith, M. Norouzi, and G. Hinton, “A simple framework</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[3]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">M. Caron, H. Touvron, I. Misra, H. J´egou, J. Mairal, P. Bojanowski, and</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[4]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">H. Bao, L. Dong, S. Piao, and F. Wei, “Beit: Bert pre-training of image</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[5]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">K. He, X. Chen, S. Xie, Y. Li, P. Doll´ar, and R. Girshick, “Masked</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[6]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Z. Xie, Z. Zhang, Y. Cao, Y. Lin, J. Bao, Z. Yao, Q. Dai, and</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[7]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">C.-L. Zhang, Y.-H. Cao, and J. Wu, “Rethinking the route towards</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[8]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">D. Mahajan, R. Girshick, V. Ramanathan, K. He, M. Paluri, Y. Li,</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[9]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">I. Kakogeorgiou, S. Gidaris, B. Psomas, Y. Avrithis, A. Bursuc,</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[10]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">G. Li, H. Zheng, D. Liu, C. Wang, B. Su, and C. Zheng, “Semmae:</div>
+                
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p>生成时间：2026-03-12 11:08:41</p>
+            <p>知识卡片生成器 v1.0 | AI Research OS</p>
+            <p style="margin-top: 10px; color: #ff9800;">
+                ⚠️ 所有参考文献必须人工核实真实性 - 严禁虚构文献信息
+            </p>
+        </div>
+    </div>
+</body>
+</html>

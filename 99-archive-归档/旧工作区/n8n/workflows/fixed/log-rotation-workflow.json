@@ -1,0 +1,112 @@
+{
+  "name": "日志轮转流程",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 0 * * *"
+          }
+        }
+      },
+      "id": 1000,
+      "name": "Daily Midnight",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "command": "$logPath = \"D:\\npm-global\\node_modules\\openclaw\\tmp\\openclaw\"; Get-ChildItem -Path $logPath -Filter \"*.log\" | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-7) } | ForEach-Object { Compress-Archive -Path $_.FullName -DestinationPath \"$logPath\\archive\\$($_.Name).zip\" -Force; Remove-Item $_.FullName }",
+        "options": {}
+      },
+      "id": 1001,
+      "name": "Archive Old Logs",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "command": "$logPath = \"D:\\npm-global\\node_modules\\openclaw\\tmp\\openclaw\\archive\"; Get-ChildItem -Path $logPath -Filter \"*.zip\" | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-30) } | Remove-Item -Force",
+        "options": {}
+      },
+      "id": 1002,
+      "name": "Cleanup Archive",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        440,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "command": "Get-ChildItem -Path \"D:\\npm-global\\node_modules\\openclaw\\tmp\\openclaw\" -Filter \"*.log\" | Measure-Object -Property Length -Sum | Select-Object Count, @{Name=\"SizeMB\";Expression={[math]::Round($_.Sum/1MB, 2)}}",
+        "options": {}
+      },
+      "id": 1003,
+      "name": "Log Statistics",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        660,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Daily Midnight": {
+      "main": [
+        [
+          {
+            "node": "Archive Old Logs",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Archive Old Logs": {
+      "main": [
+        [
+          {
+            "node": "Cleanup Archive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Cleanup Archive": {
+      "main": [
+        [
+          {
+            "node": "Log Statistics",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "OpenClaw"
+    },
+    {
+      "name": "Logs"
+    }
+  ],
+  "id": "c954f67d-5d88-4f8b-89dc-6cac7342a992"
+}

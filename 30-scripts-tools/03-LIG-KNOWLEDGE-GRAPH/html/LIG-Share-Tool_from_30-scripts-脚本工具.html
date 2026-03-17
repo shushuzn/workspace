@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIG 知识图谱 - 分享功能</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px}
+        .container{max-width:1000px;margin:0 auto;background:rgba(255,255,255,0.95);border-radius:12px;padding:30px;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
+        h1{font-size:24px;color:#333;margin-bottom:20px;border-bottom:3px solid #667eea;padding-bottom:10px}
+        .intro{font-size:14px;color:#666;margin-bottom:20px;line-height:1.6}
+        .share-panel{background:#f5f5f5;padding:20px;border-radius:8px;margin-bottom:20px}
+        .share-panel h2{font-size:16px;margin-bottom:15px;color:#333}
+        .control-group{margin-bottom:15px}
+        .control-group label{display:block;font-size:13px;margin-bottom:5px;color:#555}
+        .control-group input[type="text"],.control-group select{width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;font-size:13px}
+        .control-group input[type="checkbox"]{margin-right:8px}
+        button{background:#667eea;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:14px;margin-right:10px;margin-bottom:10px;transition:background 0.3s}
+        button:hover{background:#5568d3}button:disabled{background:#ccc;cursor:not-allowed}
+        .status{padding:10px;background:#e3f2fd;border-radius:6px;margin-bottom:15px;font-size:13px;color:#1565c0;display:none}
+        .link-preview{background:#fff;border:2px dashed #667eea;border-radius:8px;padding:20px;margin-top:20px;text-align:center}
+        .link-preview h3{font-size:15px;margin-bottom:10px;color:#333}
+        .share-link{background:#f8f9fa;padding:15px;border-radius:4px;font-family:monospace;font-size:12px;word-break:break-all;margin-bottom:15px}
+        .qr-container{display:inline-block;background:white;padding:10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1)}
+        .action-buttons{margin-top:20px}
+        .checkbox-group{display:flex;flex-wrap:wrap;gap:15px;margin-top:10px}
+        .checkbox-group label{display:flex;align-items:center;font-size:13px;color:#555;cursor:pointer}
+        .stats{background:#e8f5e9;padding:15px;border-radius:6px;margin-top:20px}
+        .stats h3{font-size:14px;margin-bottom:10px;color:#2e7d32}
+        .stat-item{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #c8e6c9;font-size:13px}
+        .stat-item:last-child{border-bottom:none}
+        .stat-label{color:#666}
+        .stat-value{font-weight:bold;color:#2e7d32}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔗 LIG 知识图谱 - 分享功能</h1>
+        <p class="intro">生成可分享的图谱链接，支持 QR 码、短链接和一键复制。无需服务器，数据编码在链接中。</p>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="share-panel">
+            <h2>📤 创建分享链接</h2>
+            
+            <div class="control-group">
+                <label>分享标题</label>
+                <input type="text" id="shareTitle" value="我的 LIG 知识图谱" placeholder="分享标题">
+            </div>
+            
+            <div class="control-group">
+                <label>链接类型</label>
+                <select id="linkType">
+                    <option value="full">完整链接 (包含所有数据)</option>
+                    <option value="short">短链接 (仅 ID，需配合文件)</option>
+                    <option value="view">只读链接 (不可编辑)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>选项</label>
+                <div class="checkbox-group">
+                    <label><input type="checkbox" id="includeNodes" checked> 包含节点</label>
+                    <label><input type="checkbox" id="includeLinks" checked> 包含关系</label>
+                    <label><input type="checkbox" id="includeStyles" checked> 包含样式</label>
+                    <label><input type="checkbox" id="compressData" checked> 压缩数据</label>
+                </div>
+            </div>
+            
+            <div class="action-buttons">
+                <button onclick="generateShareLink()" id="generateBtn">🔗 生成分享链接</button>
+                <button onclick="copyLink()" id="copyBtn">📋 复制链接</button>
+                <button onclick="downloadQR()" id="qrBtn">🖼️ 下载 QR 码</button>
+                <button onclick="loadSample()" id="loadBtn">📊 加载示例</button>
+            </div>
+        </div>
+        
+        <div class="link-preview" id="linkPreview" style="display:none">
+            <h3>📎 分享链接预览</h3>
+            <div class="share-link" id="shareLink"></div>
+            <div class="qr-container" id="qrContainer"></div>
+        </div>
+        
+        <div class="stats" id="stats" style="display:none">
+            <h3>📊 链接统计</h3>
+            <div class="stat-item">
+                <span class="stat-label">链接长度</span>
+                <span class="stat-value" id="linkLength">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">节点数</span>
+                <span class="stat-value" id="nodeCount">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">关系数</span>
+                <span class="stat-value" id="linkCount">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">压缩率</span>
+                <span class="stat-value" id="compressionRatio">-</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">有效期</span>
+                <span class="stat-value" id="expiryDate">永久</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.1/build/qrcode.min.js"></script>
+    <script>
+        let currentShareLink = '';
+        let graphData = null;
+        
+        // 示例数据
+        const sampleData = {
+            title: "LIG 生物医学应用",
+            nodes: [
+                {id:"LIG",label:"LIG",type:"Material",size:40},
+                {id:"PI",label:"PI",type:"Material",size:20},
+                {id:"PDMS",label:"PDMS",type:"Material",size:20},
+                {id:"CuO",label:"CuO",type:"Material",size:22},
+                {id:"Gas_Sensor",label:"气体传感器",type:"Device",size:25},
+                {id:"Neural_Probe",label:"神经探针",type:"Device",size:25},
+                {id:"Tumor_Patch",label:"肿瘤贴片",type:"Device",size:25},
+                {id:"Cu2+",label:"Cu²⁺",type:"Signal",size:20},
+                {id:"ROS",label:"ROS",type:"Signal",size:20},
+                {id:"Health",label:"健康监控",type:"Application",size:24}
+            ],
+            links: [
+                {source:"PI",target:"LIG",value:3},
+                {source:"PDMS",target:"LIG",value:2},
+                {source:"CuO",target:"LIG",value:2},
+                {source:"LIG",target:"Gas_Sensor",value:3},
+                {source:"LIG",target:"Neural_Probe",value:3},
+                {source:"LIG",target:"Tumor_Patch",value:3},
+                {source:"CuO",target:"Cu2+",value:2},
+                {source:"Cu2+",target:"ROS",value:2},
+                {source:"Tumor_Patch",target:"Health",value:2}
+            ],
+            styles: {
+                Material: {color:"#FF6B6B"},
+                Device: {color:"#4ECDC4"},
+                Signal: {color:"#45B7D1"},
+                Application: {color:"#98D8C8"}
+            }
+        };
+        
+        function loadSample() {
+            graphData = JSON.parse(JSON.stringify(sampleData));
+            document.getElementById('shareTitle').value = graphData.title;
+            showStatus('✅ 示例数据已加载');
+        }
+        
+        function generateShareLink() {
+            if (!graphData) {
+                showStatus('❌ 请先加载数据!');
+                return;
+            }
+            
+            const title = document.getElementById('shareTitle').value;
+            const linkType = document.getElementById('linkType').value;
+            const includeNodes = document.getElementById('includeNodes').checked;
+            const includeLinks = document.getElementById('includeLinks').checked;
+            const includeStyles = document.getElementById('includeStyles').checked;
+            const compressData = document.getElementById('compressData').checked;
+            
+            showStatus('🔄 正在生成分享链接...');
+            
+            // 准备分享数据
+            const shareData = {
+                v: 1,
+                t: title,
+                g: new Date().toISOString(),
+                type: linkType
+            };
+            
+            if (includeNodes) shareData.nodes = graphData.nodes;
+            if (includeLinks) shareData.links = graphData.links;
+            if (includeStyles) shareData.styles = graphData.styles;
+            
+            // 生成唯一 ID
+            shareData.id = generateUniqueId();
+            
+            // 序列化数据
+            let jsonString = JSON.stringify(shareData);
+            const originalSize = jsonString.length;
+            
+            // 压缩 (使用 LZ-String 或 Base64)
+            if (compressData) {
+                jsonString = btoa(unescape(encodeURIComponent(jsonString)));
+            }
+            
+            // 生成链接
+            const baseUrl = window.location.origin + window.location.pathname.replace(/[^/]*$/, '') + 'LIG-Knowledge-Graph-v6.html';
+            const hash = `#share=${encodeURIComponent(jsonString)}`;
+            
+            currentShareLink = baseUrl + hash;
+            
+            // 显示链接
+            document.getElementById('linkPreview').style.display = 'block';
+            document.getElementById('shareLink').textContent = currentShareLink;
+            
+            // 生成 QR 码
+            generateQRCode(currentShareLink);
+            
+            // 更新统计
+            updateStats(originalSize, jsonString.length);
+            
+            showStatus('✅ 分享链接已生成!');
+        }
+        
+        function generateUniqueId() {
+            return 'lig-' + Date.now().toString(36) + '-' + Math.random().toString(36).substr(2, 9);
+        }
+        
+        function generateQRCode(text) {
+            const container = document.getElementById('qrContainer');
+            container.innerHTML = '';
+            
+            QRCode.toCanvas(text, {
+                width: 200,
+                margin: 2,
+                color: {
+                    dark: '#667eea',
+                    light: '#ffffff'
+                }
+            }, function (error, canvas) {
+                if (error) {
+                    console.error('QR 码生成失败:', error);
+                    return;
+                }
+                container.appendChild(canvas);
+            });
+        }
+        
+        function copyLink() {
+            if (!currentShareLink) {
+                showStatus('❌ 请先生成链接!');
+                return;
+            }
+            
+            navigator.clipboard.writeText(currentShareLink).then(() => {
+                showStatus('✅ 链接已复制到剪贴板!');
+            }).catch(err => {
+                // 降级方案
+                const textarea = document.createElement('textarea');
+                textarea.value = currentShareLink;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                showStatus('✅ 链接已复制到剪贴板!');
+            });
+        }
+        
+        function downloadQR() {
+            const canvas = document.querySelector('#qrContainer canvas');
+            if (!canvas) {
+                showStatus('❌ 请先生成 QR 码!');
+                return;
+            }
+            
+            const link = document.createElement('a');
+            link.download = 'LIG-Knowledge-Graph-QR.png';
+            link.href = canvas.toDataURL('image/png');
+            link.click();
+            
+            showStatus('✅ QR 码已下载!');
+        }
+        
+        function updateStats(originalSize, compressedSize) {
+            document.getElementById('stats').style.display = 'block';
+            document.getElementById('linkLength').textContent = currentShareLink.length + ' 字符';
+            document.getElementById('nodeCount').textContent = graphData.nodes.length;
+            document.getElementById('linkCount').textContent = graphData.links.length;
+            
+            const ratio = (originalSize / compressedSize).toFixed(2);
+            document.getElementById('compressionRatio').textContent = ratio + 'x';
+            document.getElementById('expiryDate').textContent = '永久';
+        }
+        
+        function showStatus(message) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+        
+        // 检查是否有分享数据
+        function checkShareData() {
+            const hash = window.location.hash;
+            if (hash.startsWith('#share=')) {
+                const shareData = hash.substring(7);
+                try {
+                    const decoded = decodeURIComponent(shareData);
+                    const json = decodeURIComponent(escape(atob(decoded)));
+                    const data = JSON.parse(json);
+                    
+                    graphData = {
+                        nodes: data.nodes || [],
+                        links: data.links || [],
+                        styles: data.styles || {}
+                    };
+                    
+                    document.getElementById('shareTitle').value = data.t || '分享的图谱';
+                    showStatus(`✅ 已加载分享数据：${data.t}`);
+                } catch (error) {
+                    console.error('解析分享数据失败:', error);
+                    showStatus('❌ 分享数据解析失败');
+                }
+            }
+        }
+        
+        // 页面加载时检查
+        window.addEventListener('load', () => {
+            checkShareData();
+        });
+    </script>
+</body>
+</html>

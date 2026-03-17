@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIG 知识图谱 - 搜索过滤</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px}
+        .container{max-width:1600px;margin:0 auto;background:rgba(255,255,255,0.95);border-radius:12px;padding:30px;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
+        h1{font-size:24px;color:#333;margin-bottom:20px;border-bottom:3px solid #667eea;padding-bottom:10px}
+        .intro{font-size:14px;color:#666;margin-bottom:20px;line-height:1.6}
+        .search-panel{background:#f5f5f5;padding:20px;border-radius:8px;margin-bottom:20px}
+        .search-row{display:flex;gap:15px;flex-wrap:wrap;align-items:center;margin-bottom:15px}
+        .search-row:last-child{margin-bottom:0}
+        .search-input{flex:1;min-width:250px;position:relative}
+        .search-input input{width:100%;padding:12px 40px 12px 15px;border:2px solid #ddd;border-radius:8px;font-size:14px;transition:border-color 0.3s}
+        .search-input input:focus{outline:none;border-color:#667eea}
+        .search-input .icon{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:#999;font-size:18px}
+        .filter-group{display:flex;gap:10px;flex-wrap:wrap}
+        .filter-btn{padding:8px 16px;border:2px solid #ddd;background:white;border-radius:6px;cursor:pointer;font-size:13px;transition:all 0.3s}
+        .filter-btn:hover{border-color:#667eea}
+        .filter-btn.active{background:#667eea;color:white;border-color:#667eea}
+        .filter-btn .count{background:rgba(0,0,0,0.1);padding:2px 6px;border-radius:10px;font-size:11px;margin-left:5px}
+        button.action-btn{background:#667eea;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:13px;transition:background 0.3s}
+        button.action-btn:hover{background:#5568d3}
+        button.action-btn.delete{background:#f44336}button.action-btn.delete:hover{background:#e53935}
+        .results-panel{display:grid;grid-template-columns:1fr 350px;gap:20px}
+        .canvas-container{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:15px;min-height:500px;position:relative}
+        .canvas-container h3{font-size:15px;margin-bottom:10px;color:#333}
+        #graphCanvas{width:100%;height:450px;background:white;border-radius:4px;overflow:hidden}
+        .side-panel{background:white;border:1px solid #e0e0e0;border-radius:8px;padding:15px;max-height:500px;overflow-y:auto}
+        .side-panel h3{font-size:15px;margin-bottom:15px;color:#333;border-bottom:2px solid #e0e0e0;padding-bottom:8px}
+        .result-item{padding:12px;margin-bottom:10px;background:#f8f9fa;border-radius:6px;cursor:pointer;transition:all 0.2s;border-left:4px solid transparent}
+        .result-item:hover{background:#e8f0fe;border-left-color:#667eea}
+        .result-item.highlight{background:#fff3e0;border-left-color:#ff9800;animation:pulse 1s infinite}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
+        .result-item .title{font-weight:bold;color:#333;margin-bottom:5px}
+        .result-item .meta{font-size:11px;color:#666;display:flex;gap:10px}
+        .result-item .match{background:#ffeb3b;padding:0 4px;border-radius:2px}
+        .filter-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+        .tag{background:#e8f0fe;color:#667eea;padding:4px 10px;border-radius:12px;font-size:11px;display:flex;align-items:center;gap:5px}
+        .tag .remove{cursor:pointer;font-weight:bold}
+        .tag .remove:hover{color:#f44336}
+        .stats-bar{background:#e8f5e9;padding:10px 15px;border-radius:6px;margin-bottom:15px;display:flex;justify-content:space-between;align-items:center;font-size:13px}
+        .stats-bar .count{font-weight:bold;color:#2e7d32}
+        .quick-actions{display:flex;gap:10px;margin-top:15px}
+        .quick-actions button{flex:1}
+        .no-results{text-align:center;padding:40px;color:#999}
+        .no-results .icon{font-size:48px;margin-bottom:15px}
+        .status{padding:10px;background:#e3f2fd;border-radius:6px;margin-bottom:15px;font-size:13px;color:#1565c0;display:none}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 LIG 知识图谱 - 搜索过滤工具</h1>
+        <p class="intro">全文搜索节点和关系，按类型过滤，高亮显示搜索结果，快速定位目标。</p>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="search-panel">
+            <div class="search-row">
+                <div class="search-input">
+                    <input type="text" id="searchInput" placeholder="🔍 搜索节点 ID、标签、类型..." oninput="searchGraph()" onkeyup="if(event.key==='Enter') focusFirstResult()">
+                    <span class="icon">🔍</span>
+                </div>
+                <button class="action-btn" onclick="clearSearch()">❌ 清除搜索</button>
+                <button class="action-btn" onclick="focusFirstResult()">📍 定位首个</button>
+            </div>
+            <div class="search-row">
+                <span style="font-size:13px;color:#666">类型过滤:</span>
+                <div class="filter-group" id="typeFilters"></div>
+            </div>
+            <div class="search-row">
+                <span style="font-size:13px;color:#666">显示选项:</span>
+                <label style="font-size:13px;color:#555"><input type="checkbox" id="showLinks" checked> 显示关系</label>
+                <label style="font-size:13px;color:#555"><input type="checkbox" id="highlightMatches" checked> 高亮匹配</label>
+                <label style="font-size:13px;color:#555"><input type="checkbox" id="autoZoom"> 自动缩放</label>
+            </div>
+            <div class="filter-tags" id="filterTags"></div>
+        </div>
+        
+        <div class="results-panel">
+            <div class="canvas-container">
+                <h3>📊 图谱预览</h3>
+                <svg id="graphCanvas"></svg>
+            </div>
+            <div class="side-panel">
+                <h3>📋 搜索结果</h3>
+                <div class="stats-bar" id="statsBar" style="display:none">
+                    <span>找到 <span class="count" id="resultCount">0</span> 个匹配项</span>
+                    <span id="filterInfo"></span>
+                </div>
+                <div id="searchResults"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        let graphData = null;
+        let filteredData = null;
+        let searchResults = [];
+        let selectedNode = null;
+        let simulation = null;
+        
+        const colorMap = {
+            "Material":"#FF6B6B",
+            "Device":"#4ECDC4",
+            "Signal":"#45B7D1",
+            "Technology":"#FFA07A",
+            "Application":"#98D8C8",
+            "Challenge":"#F7DC6F",
+            "Pathway":"#BB8FCE"
+        };
+        
+        const sampleData = {
+            nodes: [
+                {id:"LIG",label:"LIG",type:"Material",size:40},
+                {id:"PI",label:"PI",type:"Material",size:20},
+                {id:"PDMS",label:"PDMS",type:"Material",size:20},
+                {id:"CuO",label:"CuO",type:"Material",size:22},
+                {id:"Gas_Sensor",label:"气体传感器",type:"Device",size:25},
+                {id:"Neural_Probe",label:"神经探针",type:"Device",size:25},
+                {id:"Tumor_Patch",label:"肿瘤贴片",type:"Device",size:25},
+                {id:"Cu2+",label:"Cu²⁺",type:"Signal",size:20},
+                {id:"ROS",label:"ROS",type:"Signal",size:20},
+                {id:"Health",label:"健康监控",type:"Application",size:24}
+            ],
+            links: [
+                {source:"PI",target:"LIG",value:3},
+                {source:"PDMS",target:"LIG",value:2},
+                {source:"CuO",target:"LIG",value:2},
+                {source:"LIG",target:"Gas_Sensor",value:3},
+                {source:"LIG",target:"Neural_Probe",value:3},
+                {source:"LIG",target:"Tumor_Patch",value:3},
+                {source:"CuO",target:"Cu2+",value:2},
+                {source:"Cu2+",target:"ROS",value:2},
+                {source:"Tumor_Patch",target:"Health",value:2}
+            ]
+        };
+        
+        function loadSample() {
+            graphData = JSON.parse(JSON.stringify(sampleData));
+            initTypeFilters();
+            applyFilters();
+            showStatus('✅ 示例已加载');
+        }
+        
+        function initTypeFilters() {
+            const typeMap = new Map();
+            graphData.nodes.forEach(node => {
+                const count = typeMap.get(node.type) || 0;
+                typeMap.set(node.type, count + 1);
+            });
+            
+            const container = document.getElementById('typeFilters');
+            container.innerHTML = '';
+            
+            typeMap.forEach((count, type) => {
+                const btn = document.createElement('button');
+                btn.className = 'filter-btn active';
+                btn.dataset.type = type;
+                btn.innerHTML = `${type} <span class="count">${count}</span>`;
+                btn.style.borderColor = colorMap[type];
+                btn.onclick = () => toggleTypeFilter(type);
+                container.appendChild(btn);
+            });
+        }
+        
+        function toggleTypeFilter(type) {
+            const btn = document.querySelector(`[data-type="${type}"]`);
+            btn.classList.toggle('active');
+            updateFilterTags();
+            applyFilters();
+        }
+        
+        function updateFilterTags() {
+            const container = document.getElementById('filterTags');
+            container.innerHTML = '';
+            
+            const activeTypes = Array.from(document.querySelectorAll('.filter-btn.active')).map(b => b.dataset.type);
+            const inactiveTypes = Array.from(document.querySelectorAll('.filter-btn:not(.active)')).map(b => b.dataset.type);
+            
+            inactiveTypes.forEach(type => {
+                const tag = document.createElement('div');
+                tag.className = 'tag';
+                tag.innerHTML = `${type} <span class="remove" onclick="toggleTypeFilter('${type}')">✕</span>`;
+                container.appendChild(tag);
+            });
+        }
+        
+        function searchGraph() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            
+            if (!query) {
+                searchResults = [];
+                document.getElementById('searchResults').innerHTML = '<div class="no-results"><div class="icon">🔍</div><p>输入关键词开始搜索</p></div>';
+                document.getElementById('statsBar').style.display = 'none';
+                applyFilters();
+                return;
+            }
+            
+            // 搜索节点
+            searchResults = graphData.nodes.filter(node => {
+                return node.id.toLowerCase().includes(query) ||
+                       node.label.toLowerCase().includes(query) ||
+                       node.type.toLowerCase().includes(query);
+            });
+            
+            // 搜索关系
+            const linkResults = graphData.links.filter(link => {
+                return link.source.toLowerCase().includes(query) ||
+                       link.target.toLowerCase().includes(query);
+            });
+            
+            // 更新结果列表
+            updateResultsList(query);
+            
+            // 高亮显示
+            if (document.getElementById('highlightMatches').checked) {
+                highlightNodes(searchResults.map(n => n.id));
+            }
+            
+            applyFilters();
+            
+            showStatus(`🔍 找到 ${searchResults.length} 个节点 + ${linkResults.length} 个关系`);
+        }
+        
+        function updateResultsList(query) {
+            const container = document.getElementById('searchResults');
+            const statsBar = document.getElementById('statsBar');
+            
+            if (searchResults.length === 0) {
+                container.innerHTML = '<div class="no-results"><div class="icon">😕</div><p>未找到匹配项</p></div>';
+                statsBar.style.display = 'none';
+                return;
+            }
+            
+            statsBar.style.display = 'flex';
+            document.getElementById('resultCount').textContent = searchResults.length;
+            
+            container.innerHTML = searchResults.map(node => {
+                const highlight = (text) => {
+                    if (!document.getElementById('highlightMatches').checked) return text;
+                    const regex = new RegExp(`(${query})`, 'gi');
+                    return text.replace(regex, '<span class="match">$1</span>');
+                };
+                
+                return `
+                    <div class="result-item" data-nodeid="${node.id}" onclick="selectNode('${node.id}')">
+                        <div class="title">${highlight(node.label)} <span style="color:#999;font-size:11px">(${node.id})</span></div>
+                        <div class="meta">
+                            <span>🏷️ ${highlight(node.type)}</span>
+                            <span>📊 大小：${node.size}</span>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+        
+        function focusFirstResult() {
+            if (searchResults.length > 0) {
+                selectNode(searchResults[0].id);
+            }
+        }
+        
+        function selectNode(nodeId) {
+            selectedNode = nodeId;
+            
+            // 移除之前的高亮
+            document.querySelectorAll('.result-item').forEach(el => el.classList.remove('highlight'));
+            
+            // 高亮当前选中
+            const item = document.querySelector(`[data-nodeid="${nodeId}"]`);
+            if (item) {
+                item.classList.add('highlight');
+                item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+            
+            // 在图谱中高亮
+            highlightNodes([nodeId]);
+            
+            showStatus(`📍 已定位：${nodeId}`);
+        }
+        
+        function highlightNodes(nodeIds) {
+            if (!filteredData) return;
+            
+            const svg = d3.select("#graphCanvas");
+            
+            svg.selectAll("circle")
+                .attr("stroke", d => nodeIds.includes(d.id) ? "#ff9800" : "#fff")
+                .attr("stroke-width", d => nodeIds.includes(d.id) ? 4 : 2)
+                .attr("opacity", d => nodeIds.length > 0 && !nodeIds.includes(d.id) ? 0.3 : 1);
+            
+            svg.selectAll("text")
+                .attr("opacity", d => nodeIds.length > 0 && !nodeIds.includes(d.id) ? 0.3 : 1);
+        }
+        
+        function applyFilters() {
+            if (!graphData) return;
+            
+            const activeTypes = Array.from(document.querySelectorAll('.filter-btn.active')).map(b => b.dataset.type);
+            const showLinks = document.getElementById('showLinks').checked;
+            
+            // 过滤节点
+            let filteredNodes = graphData.nodes.filter(node => activeTypes.includes(node.type));
+            
+            // 如果有搜索，进一步过滤
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            if (query && searchResults.length > 0) {
+                const searchIds = new Set(searchResults.map(n => n.id));
+                filteredNodes = filteredNodes.filter(node => searchIds.has(node.id));
+            }
+            
+            // 过滤关系
+            let filteredLinks = [];
+            if (showLinks) {
+                const nodeIds = new Set(filteredNodes.map(n => n.id));
+                filteredLinks = graphData.links.filter(link => 
+                    nodeIds.has(link.source) && nodeIds.has(link.target)
+                );
+            }
+            
+            filteredData = { nodes: filteredNodes, links: filteredLinks };
+            
+            renderGraph();
+            updateStats(filteredNodes.length, filteredLinks.length);
+        }
+        
+        function updateStats(nodeCount, linkCount) {
+            const info = document.getElementById('filterInfo');
+            info.textContent = `显示 ${nodeCount} 节点 / ${linkCount} 关系`;
+        }
+        
+        function renderGraph() {
+            if (!filteredData) return;
+            
+            const svg = d3.select("#graphCanvas");
+            svg.selectAll("*").remove();
+            
+            const width = svg.node().clientWidth;
+            const height = svg.node().clientHeight;
+            
+            svg.append("defs").selectAll("marker")
+                .data(["end"])
+                .enter().append("marker")
+                .attr("id", "arrowhead")
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 25)
+                .attr("refY", 0)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 6)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("fill", "#999")
+                .attr("d", "M0,-5L10,0L0,5");
+            
+            simulation = d3.forceSimulation(filteredData.nodes)
+                .force("link", d3.forceLink(filteredData.links).id(d => d.id).distance(150))
+                .force("charge", d3.forceManyBody().strength(-500))
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collide", d3.forceCollide().radius(d => d.size + 5));
+            
+            const links = svg.append("g")
+                .selectAll("line")
+                .data(filteredData.links)
+                .enter().append("line")
+                .attr("stroke", "#999")
+                .attr("stroke-width", d => Math.sqrt(d.value) * 2)
+                .attr("stroke-opacity", 0.6)
+                .attr("marker-end", "url(#arrowhead)");
+            
+            const nodes = svg.append("g")
+                .selectAll("circle")
+                .data(filteredData.nodes)
+                .enter().append("circle")
+                .attr("r", d => d.size)
+                .attr("fill", d => colorMap[d.type] || "#999")
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .on("click", (e, d) => selectNode(d.id))
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+            
+            const labels = svg.append("g")
+                .selectAll("text")
+                .data(filteredData.nodes)
+                .enter().append("text")
+                .attr("dy", d => d.size + 15)
+                .attr("text-anchor", "middle")
+                .attr("fill", "#333")
+                .attr("font-size", "12px")
+                .attr("font-weight", "bold")
+                .text(d => d.label);
+            
+            simulation.on("tick", () => {
+                links
+                    .attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+                
+                nodes
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y);
+                
+                labels
+                    .attr("x", d => d.x)
+                    .attr("y", d => d.y);
+            });
+        }
+        
+        function dragstarted(event, d) {
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        function dragended(event, d) {
+            d.fx = null;
+            d.fy = null;
+        }
+        
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchResults = [];
+            document.getElementById('searchResults').innerHTML = '<div class="no-results"><div class="icon">🔍</div><p>输入关键词开始搜索</p></div>';
+            document.getElementById('statsBar').style.display = 'none';
+            document.getElementById('filterTags').innerHTML = '';
+            document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.add('active'));
+            applyFilters();
+            showStatus('🗑️ 已清除搜索');
+        }
+        
+        function showStatus(message) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+        
+        // 初始化
+        window.addEventListener('load', () => {
+            document.getElementById('searchResults').innerHTML = '<div class="no-results"><div class="icon">🔍</div><p>输入关键词开始搜索</p></div>';
+            setTimeout(loadSample, 500);
+        });
+    </script>
+</body>
+</html>

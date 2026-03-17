@@ -1,0 +1,126 @@
+{
+  "explanations": [
+    {
+      "id": "3fd0e309",
+      "method": "shap",
+      "instance_id": "3a107dff",
+      "prediction": 0.4967255333272921,
+      "explanation_data": {
+        "base_value": 0.526,
+        "prediction": 0.4967,
+        "shap_values": {
+          "feature_0": 0.0091,
+          "feature_1": 0.0067,
+          "feature_2": 0.0007,
+          "feature_3": -0.009,
+          "feature_4": 0.0037
+        },
+        "top_features": [
+          [
+            "feature_0",
+            0.009123557091540061
+          ],
+          [
+            "feature_3",
+            -0.00901427223739253
+          ],
+          [
+            "feature_1",
+            0.006712957694917798
+          ],
+          [
+            "feature_4",
+            0.0037261426270558283
+          ],
+          [
+            "feature_2",
+            0.0006871637588440069
+          ]
+        ],
+        "force_plot_data": {
+          "base_value": 0.5259896267370423,
+          "prediction": 0.4967255333272921,
+          "features": [
+            [
+              "feature_0",
+              0.009123557091540061
+            ],
+            [
+              "feature_3",
+              -0.00901427223739253
+            ],
+            [
+              "feature_1",
+              0.006712957694917798
+            ],
+            [
+              "feature_4",
+              0.0037261426270558283
+            ],
+            [
+              "feature_2",
+              0.0006871637588440069
+            ]
+          ]
+        }
+      },
+      "timestamp": "2026-03-16T09:41:46.479560",
+      "quality_score": 0.8483829313736925
+    },
+    {
+      "id": "735a67ca",
+      "method": "lime",
+      "instance_id": "8d8469eb",
+      "prediction": 0.4967255333272921,
+      "explanation_data": {
+        "local_model": "linear",
+        "local_r_squared": 0.914,
+        "feature_weights": {
+          "feature_0": 1.0,
+          "feature_1": 0.7451,
+          "feature_2": 0.8779,
+          "feature_3": 0.5624,
+          "feature_4": 0.4394
+        },
+        "neighborhood_size": 1000
+      },
+      "timestamp": "2026-03-16T09:41:46.488290",
+      "quality_score": 0.7733068833214021
+    },
+    {
+      "id": "7049d743",
+      "method": "counterfactual",
+      "instance_id": "1caa0f17",
+      "prediction": 0.4967255333272921,
+      "explanation_data": {
+        "original_input": {
+          "feature_0": -0.14409032957792836,
+          "feature_1": -0.1729036003315193,
+          "feature_2": -0.11131586156766246,
+          "feature_3": 0.7019837250988631,
+          "feature_4": -0.12758828378288709
+        },
+        "counterfactual_input": {
+          "feature_0": 2.1559,
+          "feature_1": 2.1271,
+          "feature_2": 2.1887,
+          "feature_3": 3.002,
+          "feature_4": 2.1724
+        },
+        "original_prediction": 0.4967,
+        "counterfactual_prediction": 0.9078,
+        "changes": [
+          "feature_0: +0.1",
+          "feature_1: +0.1",
+          "feature_2: +0.1",
+          "feature_3: +0.1",
+          "feature_4: +0.1"
+        ],
+        "proximity": 0.163
+      },
+      "timestamp": "2026-03-16T09:41:46.488290",
+      "quality_score": 0.8572067448272284
+    }
+  ],
+  "last_updated": "2026-03-16T09:41:46.490287"
+}

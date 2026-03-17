@@ -1,0 +1,59 @@
+{
+  "AI-Technical": [
+    "ai",
+    "llm",
+    "machine-learning",
+    "deep-learning",
+    "nlp",
+    "transformer",
+    "model",
+    "neural-network",
+    "gpt",
+    "bert"
+  ],
+  "AI-Application": [
+    "application",
+    "tool",
+    "product",
+    "business",
+    "startup",
+    "saas",
+    "platform"
+  ],
+  "Programming": [
+    "code",
+    "programming",
+    "python",
+    "javascript",
+    "software",
+    "developer",
+    "web",
+    "api",
+    "database"
+  ],
+  "Data-Science": [
+    "data",
+    "analytics",
+    "visualization",
+    "statistics",
+    "big-data",
+    "dashboard"
+  ],
+  "Cloud-Computing": [
+    "cloud",
+    "aws",
+    "azure",
+    "gcp",
+    "kubernetes",
+    "docker",
+    "devops"
+  ],
+  "Cybersecurity": [
+    "security",
+    "hacking",
+    "privacy",
+    "encryption",
+    "vulnerability"
+  ],
+  "Other": []
+}

@@ -1,0 +1,34 @@
+{
+  "services": [
+    {
+      "name": "memory_distillation",
+      "schedule": "daily",
+      "time": "06:00",
+      "script": "memory_distillation_runner.py",
+      "args": "--daily-run"
+    },
+    {
+      "name": "self_improvement",
+      "schedule": "continuous",
+      "interval": "30min",
+      "script": "memory_self_improving_engine.py",
+      "args": "--auto-execute"
+    },
+    {
+      "name": "evolution_engine",
+      "schedule": "weekly",
+      "day": "Sunday",
+      "time": "05:00",
+      "script": "memory_evolutionary_algorithms.py",
+      "args": "--evolve 10"
+    },
+    {
+      "name": "dashboard",
+      "schedule": "on-demand",
+      "port": 8080,
+      "script": "memory_dashboard_v2.py",
+      "args": "--serve"
+    }
+  ],
+  "deployment_id": "deploy-20260317-123212"
+}

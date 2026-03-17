@@ -1,0 +1,3803 @@
+﻿[
+    {
+        "name":  "Liu C",
+        "paper_count":  4,
+        "collaborator_count":  24,
+        "avg_collaborations":  2.83,
+        "total_collaborations":  68
+    },
+    {
+        "name":  "Banks M",
+        "paper_count":  3,
+        "collaborator_count":  14,
+        "avg_collaborations":  2,
+        "total_collaborations":  28
+    },
+    {
+        "name":  "Soleimani A",
+        "paper_count":  3,
+        "collaborator_count":  14,
+        "avg_collaborations":  2,
+        "total_collaborations":  28
+    },
+    {
+        "name":  "Ma H",
+        "paper_count":  3,
+        "collaborator_count":  14,
+        "avg_collaborations":  2,
+        "total_collaborations":  28
+    },
+    {
+        "name":  "Jiang J",
+        "paper_count":  3,
+        "collaborator_count":  30,
+        "avg_collaborations":  1.4,
+        "total_collaborations":  42
+    },
+    {
+        "name":  "Bedewy M",
+        "paper_count":  3,
+        "collaborator_count":  12,
+        "avg_collaborations":  1.25,
+        "total_collaborations":  15
+    },
+    {
+        "name":  "Mohamed MA",
+        "paper_count":  3,
+        "collaborator_count":  14,
+        "avg_collaborations":  2,
+        "total_collaborations":  28
+    },
+    {
+        "name":  "Chen S",
+        "paper_count":  3,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.62,
+        "total_collaborations":  34
+    },
+    {
+        "name":  "Mousavi MPS",
+        "paper_count":  3,
+        "collaborator_count":  14,
+        "avg_collaborations":  2,
+        "total_collaborations":  28
+    },
+    {
+        "name":  "Li Z",
+        "paper_count":  3,
+        "collaborator_count":  19,
+        "avg_collaborations":  1.68,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Al-Shami A",
+        "paper_count":  3,
+        "collaborator_count":  14,
+        "avg_collaborations":  2,
+        "total_collaborations":  28
+    },
+    {
+        "name":  "Sahaluddin M",
+        "paper_count":  3,
+        "collaborator_count":  12,
+        "avg_collaborations":  1.25,
+        "total_collaborations":  15
+    },
+    {
+        "name":  "Wei Y",
+        "paper_count":  2,
+        "collaborator_count":  16,
+        "avg_collaborations":  1,
+        "total_collaborations":  16
+    },
+    {
+        "name":  "Tasso A",
+        "paper_count":  2,
+        "collaborator_count":  13,
+        "avg_collaborations":  1.54,
+        "total_collaborations":  20
+    },
+    {
+        "name":  "Li B",
+        "paper_count":  2,
+        "collaborator_count":  32,
+        "avg_collaborations":  1.09,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Camilla Coletti",
+        "paper_count":  2,
+        "collaborator_count":  24,
+        "avg_collaborations":  1,
+        "total_collaborations":  24
+    },
+    {
+        "name":  "Liu X",
+        "paper_count":  2,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Qiao Y",
+        "paper_count":  2,
+        "collaborator_count":  23,
+        "avg_collaborations":  1.52,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Xiao Li",
+        "paper_count":  2,
+        "collaborator_count":  37,
+        "avg_collaborations":  1,
+        "total_collaborations":  37
+    },
+    {
+        "name":  "Nejad SK",
+        "paper_count":  2,
+        "collaborator_count":  12,
+        "avg_collaborations":  1.5,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Yan B",
+        "paper_count":  2,
+        "collaborator_count":  23,
+        "avg_collaborations":  1.52,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Deng Z",
+        "paper_count":  2,
+        "collaborator_count":  23,
+        "avg_collaborations":  1.52,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Wang X",
+        "paper_count":  2,
+        "collaborator_count":  14,
+        "avg_collaborations":  1.14,
+        "total_collaborations":  16
+    },
+    {
+        "name":  "Zhou J",
+        "paper_count":  2,
+        "collaborator_count":  23,
+        "avg_collaborations":  1.52,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Rong D",
+        "paper_count":  2,
+        "collaborator_count":  23,
+        "avg_collaborations":  1.52,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Zhou Q",
+        "paper_count":  2,
+        "collaborator_count":  23,
+        "avg_collaborations":  1.52,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Amirghasemi F",
+        "paper_count":  2,
+        "collaborator_count":  13,
+        "avg_collaborations":  1.54,
+        "total_collaborations":  20
+    },
+    {
+        "name":  "Ong V",
+        "paper_count":  2,
+        "collaborator_count":  12,
+        "avg_collaborations":  1.5,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Ghosh S",
+        "paper_count":  2,
+        "collaborator_count":  9,
+        "avg_collaborations":  1.22,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Wu J",
+        "paper_count":  2,
+        "collaborator_count":  23,
+        "avg_collaborations":  1.52,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Zhang J",
+        "paper_count":  2,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Luo J",
+        "paper_count":  2,
+        "collaborator_count":  23,
+        "avg_collaborations":  1.52,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Ran Y",
+        "paper_count":  2,
+        "collaborator_count":  23,
+        "avg_collaborations":  1.52,
+        "total_collaborations":  35
+    },
+    {
+        "name":  "Zhang W",
+        "paper_count":  2,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Singh SP",
+        "paper_count":  2,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Tai Nam Yip",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Kleinberg MN",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Zrida H",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Kanwar B",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Deshmukh S",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Nikita Zhadnov",
+        "paper_count":  1,
+        "collaborator_count":  1,
+        "avg_collaborations":  1,
+        "total_collaborations":  1
+    },
+    {
+        "name":  "Gok BD",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Asgharian H",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Munshe F",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Yang T",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Yong Hou",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Scroccarello A",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Sun M",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Bani Mustafa D",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Koichi Ueda",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Sun LP",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Ryogo Okubo",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Ahmad A",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Pumera M",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Bertran-Serra E",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Ryu YK",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Alexandra B. Artusio-Glimpse",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Sahmani S",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Notarstefano V",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "A. A. Wood",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Ye R",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1.18,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Romain Letrun",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Inoque NIG",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "A. Sobolev",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Katerina Doerner",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Isabelle Staude",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Gu SJ",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Da Silva MVCO",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Ren TL",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Samuel Jeong",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Kaprov S",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Karikalan N",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Song J",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Alfredo Raya",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Feng X",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Giancarlo Soavi",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Xu B",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Vinicius Alves Bastos",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Wei X",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Li X",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1.18,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Ebrahimi A",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Hernández-Cubas LL",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Tong Zhou",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Fernandes AJS",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Zhichao Zhou",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Noah Schlossberger",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Winandar FG",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Juncheng E",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Marcin Sikorski",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Nateqi M",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Kiliç HŞ",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Garcia D",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Franz Herling",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Tao J",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Christophe De Beule",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Li M",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Shubhadeep Biswas",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Mark Petersen",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Alice Ruini",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "A. Titchenko",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Dimitre Dimitrov",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Yu Q",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Xian-Zhang Wu",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Kabakci YG",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Christoph Tegenkamp",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Mahbub H",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Lorenzo Camosi",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Thomas Seyller",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Alexey Russkikh",
+        "paper_count":  1,
+        "collaborator_count":  1,
+        "avg_collaborations":  1,
+        "total_collaborations":  1
+    },
+    {
+        "name":  "Benjamin T. Dewes",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Louis Gaudreau",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Miliao GL",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Ma N",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Yaseen AA",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Fulvio Paleari",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Maier-Kiener V",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Samuel Lara-Avila",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Sheng Wang",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Kothuru A",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Otyepka M",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Arnusch CJ",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Alexei Zakharov",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Brea Núñez N",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Huang L",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Lee TY",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Ping Koy Lam",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Sezer M",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Zhou Y",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1.18,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Liubov Zhemchuzhna",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Rajasekhar Medapalli",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Trupthi Devaiah C",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Jia M",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Shin\u0027ichiro Ando",
+        "paper_count":  1,
+        "collaborator_count":  0,
+        "avg_collaborations":  0,
+        "total_collaborations":  0
+    },
+    {
+        "name":  "Kadian S",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Yi Jiao",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Huu Thoai Ngo",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Ferreira AS",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Jan Čechal",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "I. Gayduchenko",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Hongyi Yu",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Kumar P",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Jiang L",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Han J",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Oleg V. Kolosov",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "George D. Tsibidis",
+        "paper_count":  1,
+        "collaborator_count":  0,
+        "avg_collaborations":  0,
+        "total_collaborations":  0
+    },
+    {
+        "name":  "Liu Q",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Eun J",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Veronika Stará",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Zou J",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "A. M. Martin",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Xi Zhang",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "M. Titova",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Annica M. Black-Schaffer",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Sergio O. Valenzuela",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Shiyu Guo",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Assavalapsakul W",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Wang S",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Tomaraei GN",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Lu L",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Rodriguez RD",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Yonatan Betancur-Ocampo",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Danhong Huang",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Richard Bean",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Gleirscher M",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Jiří Novák",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Paucar YI",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Dutta A",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Thakur AK",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Bicong Wang",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Yaser Silani",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Della Pelle F",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Kim G",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Germino JC",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Haghgoo M",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Hayato Sueyoshi",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Klaus Richter",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Zhu F",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Sun Q",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Guan BO",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Sonigara KK",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Zhang S",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Kritikos I",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Guido Burkard",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Amit Agarwal",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "L. Elesin",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Tonatiuh Gómez-Ramírez",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Edgardo Marin-Colli",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Jian Kang",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Moraila-Martínez CL",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Nathan D. Cottam",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Haj Said A",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Sánchez F",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Gu M",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1.18,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Wang L",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Li W",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "T. Xie",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Oleg Dogadov",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Yao H",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Min X",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Fu L",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "T. Delord",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Cao Y",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Yuerui Lu",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Peng-Pei Xie",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Niclas Tilgner",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Zhiqin Chu",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Justin Boddison-Chouinard",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Yang G",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Torsi L",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Chan Kim",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Yuan Lin",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Wu Z",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Gan N",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Sunit Das",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Tan K",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Zeiler S",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Yan-Fei Li",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Song X",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Puthongkham P",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Lee S",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "El Sachat A",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Neha",
+        "paper_count":  1,
+        "collaborator_count":  1,
+        "avg_collaborations":  1,
+        "total_collaborations":  1
+    },
+    {
+        "name":  "A. Kuksov",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Xingyi Wang",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Baptista-Pires L",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Capasso A",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Joana Valerio",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Wirojsaengthong S",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Qi Q",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1.08,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Xu X",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1.18,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Basyooni-M Kabatas MA",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Luo G",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Yu S",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "D. A. Bandurin",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Gomes CL",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Leu PW",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Yu Xing",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Jie Zhao",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Gómez-Mancebo MB",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Castagnola E",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Su W",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Leung EH",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Jack Tavakley",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Hsin-You Wu",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Cui H",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Ma J",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Bramini M",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Kawashima K",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Josef Světlík",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Zergioti I",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Xuezhi Ma",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Sundaresan P",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Greco F",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Li F",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Miao C",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Huai-Hang Song",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Nils Dessmann",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "G. Goltsman",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Xie L",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Shukla S",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Yu Z",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Mikhlin Y",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "K. Shein",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Yoshikazu Ito",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Klaus Ensslin",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "R. M. Goldblatt",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Jan Kunc",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Wenjing Yan",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Qavi I",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Naveen Shetty",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Pei J",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Bollella P",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Zhu H",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Sheremet E",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Cheliotis I",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Huiyuan Zheng",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Ghosh A",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Berkmen A",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "M. Kashchenko",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Cai N",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Vyacheslav M. Silkin",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Diogo V. M. Melo",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Yang H",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Sánchez-Moreno P",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Denis Kochan",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Miyazako H",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Qu X",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Nossol E",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Konstantin S. Denisov",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Zhao J",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Martin Rejhon",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "De Andrés A",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Jan Wilhelm",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "D. S. Rice",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Luo F",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Kenji Watanabe",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Naveh D",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Britta Redlich",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Lopez-Lopez MT",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Fatkullin M",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Rostislav V. Mikhaylovskiy",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Fukawa E",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Costa FM",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Wang Yao",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Jin Z",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Linjie Ma",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "D. A. Svintsov",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Yu Zhao",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Sergey Kafanov",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Cirik H",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Kim Y",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Khongchareonporn N",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Artem Denisov",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Jayanath C. P. Koliyadu",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Thomas Ihn",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Shin H",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Joseph Falson",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Skorda S",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Ge L",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Yin K",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Da-Lin Wang",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Ke Wang",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Claussen JC",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Yin B",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "K. S. Novoselov",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "E. I. Titova",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Pola CC",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Giulio Cerullo",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Bent Weber",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Lu Y",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Moreno K",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Tokushi Sato",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Bing-Jun Li",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Siqueira GP",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Oliveira ACM",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Das S",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Jeongsoo Park",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Christopher L. Holloway",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Poplinger M",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Sai Mu",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Samuel Berweger",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "He J",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Zhang M",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Patric Holmvall",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Chintapitaksakul L",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Rui-Qi Qin",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Dong P",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Mayank Joshi",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Yi Zhang",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Mengting Jiang",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Kuan Eng Johnson Goh",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Zurutuza A",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Li Y",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Devanshu Varshney",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Nie S",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Alina Mreńca-Kolasińska",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Rocha RG",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Nie W",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Austin Stone",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Saeedi F",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Simone Garnero",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Abdulhafez M",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Lucas Baldo",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Zhuo L",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Yoichi Tanabe",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Borlaf F",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Kyle L. Seyler",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Kun Jiang",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Biswas MAS",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Kong D",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Francesco Gucci",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Zacharatos F",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Takashi Taniguchi",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Philippe Roelli",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Parlanti P",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Xie H",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Rakesh Choubisa",
+        "paper_count":  1,
+        "collaborator_count":  1,
+        "avg_collaborations":  1,
+        "total_collaborations":  1
+    },
+    {
+        "name":  "Vera Marinova",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Thippeswamy P",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Mykhailo Shestopalov",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Ethan R. Hansen",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Stiven Forti",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Pinzhuo Li",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Ghosh D",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Abdullah AM",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Stefano Dal Conte",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Silveri F",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Sahoo SS",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Weilun Qin",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Bai J",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Mikhail M. Glazov",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Joshi A",
+        "paper_count":  1,
+        "collaborator_count":  1,
+        "avg_collaborations":  1,
+        "total_collaborations":  1
+    },
+    {
+        "name":  "Jiang-Tao Han",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Ioannis Paradisanos",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Cheshev D",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Eleonora Luppi",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Kayahan E",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Baglieri G",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Daewang N",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Lasse Vines",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Agnieszka Wrona",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Zhou L",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1.18,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Konstantin Kharitonov",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Zhong X",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Syed M Assad",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Juan F. Sierra",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Nikunjkumar Prajapati",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Marco Kloos",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Li D",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Cui XT",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Gai P",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Chen X",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Langer R",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Daffan G",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Averkiev A",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Liu T",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1.18,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Rodríguez N",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Wei Ren",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Kryštof Matějka",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Tan M",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Zheng T",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Godfrey Gumbs",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Levi A",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Bandl C",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Huang T",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Angsujinda K",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Han L",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Compagnone D",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Huijong Han",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Daochen Long",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Andrii Iurov",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Cheng L",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1.18,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Suzuki Y",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Aitor Garcia-Ruiz",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Malmali M",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Sun T",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Brazovskiy K",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Rei Kurita",
+        "paper_count":  1,
+        "collaborator_count":  1,
+        "avg_collaborations":  1,
+        "total_collaborations":  1
+    },
+    {
+        "name":  "Rositsa Yakimova",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "G. Hétet",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Ziqiang Wang",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Pope MA",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Crapnell RD",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Tan G",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Sowa K",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Bohdan Morzhuk",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Toumia H",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Han R",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Igor Žutić",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Cai M",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Chen L",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Zarei M",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Matthew Yankowitz",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Shojiro Kimura",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Chuenchom W",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Chou N",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Sibylle Gemming",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Zohra FT",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Kodai Matsuoka",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Pantoja-Suárez F",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Kojiro Imai",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Di Cristoforo IV",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Weldengus NK",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Wu H",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "F. H. Cassells",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "O-Excell Gutierrez",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Soares AR",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Weihang Liu",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Samuel P. Jarvis",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Patolsky F",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Ulrich Starke",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Cui F",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Kol S",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Liang G",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Sogabe M",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Duan JA",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Wang J",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Zamin Mamiyev",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Zlata Fedorova",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Suea-Ngam A",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Dacen Waters",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Xu K",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Yujiro Furuta",
+        "paper_count":  1,
+        "collaborator_count":  1,
+        "avg_collaborations":  1,
+        "total_collaborations":  1
+    },
+    {
+        "name":  "Muñoz RAA",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Andrei Bylinkin",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Huang W",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Nair AM",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Cammy Peterson",
+        "paper_count":  1,
+        "collaborator_count":  2,
+        "avg_collaborations":  1,
+        "total_collaborations":  2
+    },
+    {
+        "name":  "Pereira SO",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Su H",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Sheng Q",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Pan J",
+        "paper_count":  1,
+        "collaborator_count":  21,
+        "avg_collaborations":  1.05,
+        "total_collaborations":  22
+    },
+    {
+        "name":  "Li J",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Marco Gibertini",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Huang Z",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Cheng H",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Rainer Hillenbrand",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Ming-Hao Liu",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Abhisakh Sarma",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Ting Cao",
+        "paper_count":  1,
+        "collaborator_count":  32,
+        "avg_collaborations":  1,
+        "total_collaborations":  32
+    },
+    {
+        "name":  "Ramos DV",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "M. Kravtsov",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Li Q",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Khazaee Nejad S",
+        "paper_count":  1,
+        "collaborator_count":  10,
+        "avg_collaborations":  1,
+        "total_collaborations":  10
+    },
+    {
+        "name":  "Ansari R",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Andres David Pena Unigarro",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Young-Wook Cho",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Twitto A",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Santos NF",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Schlögl S",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Martinez J",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Richter EM",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Oral AY",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Pralay K. Santra",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Moltó-Ramírez A",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Amalia Patanè",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Chris G. Van de Walle",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Tang Y",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Vaidotas Mišeikis",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Erik M. J. Johansson",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    },
+    {
+        "name":  "Pang G",
+        "paper_count":  1,
+        "collaborator_count":  13,
+        "avg_collaborations":  1,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Kenji Inami",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Narayan RJ",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Williams Savero Torres",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Xiao J",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Kai-Mei C. Fu",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Kabil FK",
+        "paper_count":  1,
+        "collaborator_count":  4,
+        "avg_collaborations":  1,
+        "total_collaborations":  4
+    },
+    {
+        "name":  "Kammarchedu V",
+        "paper_count":  1,
+        "collaborator_count":  3,
+        "avg_collaborations":  1,
+        "total_collaborations":  3
+    },
+    {
+        "name":  "Jeong Rae Kim",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Erik Díaz-Bautista",
+        "paper_count":  1,
+        "collaborator_count":  5,
+        "avg_collaborations":  1,
+        "total_collaborations":  5
+    },
+    {
+        "name":  "Zhang Y",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Pesquera A",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1,
+        "total_collaborations":  12
+    },
+    {
+        "name":  "Banks CE",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Sergio Gonzalez-Munoz",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Khushboo Agarwal",
+        "paper_count":  1,
+        "collaborator_count":  14,
+        "avg_collaborations":  1,
+        "total_collaborations":  14
+    },
+    {
+        "name":  "Paolini D",
+        "paper_count":  1,
+        "collaborator_count":  11,
+        "avg_collaborations":  1,
+        "total_collaborations":  11
+    },
+    {
+        "name":  "Wang Z",
+        "paper_count":  1,
+        "collaborator_count":  6,
+        "avg_collaborations":  1,
+        "total_collaborations":  6
+    },
+    {
+        "name":  "Wang Y",
+        "paper_count":  1,
+        "collaborator_count":  7,
+        "avg_collaborations":  1,
+        "total_collaborations":  7
+    },
+    {
+        "name":  "Peng S",
+        "paper_count":  1,
+        "collaborator_count":  12,
+        "avg_collaborations":  1.08,
+        "total_collaborations":  13
+    },
+    {
+        "name":  "Wu S",
+        "paper_count":  1,
+        "collaborator_count":  9,
+        "avg_collaborations":  1,
+        "total_collaborations":  9
+    },
+    {
+        "name":  "Ma Y",
+        "paper_count":  1,
+        "collaborator_count":  8,
+        "avg_collaborations":  1,
+        "total_collaborations":  8
+    },
+    {
+        "name":  "Slaughter G",
+        "paper_count":  1,
+        "collaborator_count":  1,
+        "avg_collaborations":  1,
+        "total_collaborations":  1
+    },
+    {
+        "name":  "Egor Sobolev",
+        "paper_count":  1,
+        "collaborator_count":  18,
+        "avg_collaborations":  1,
+        "total_collaborations":  18
+    }
+]

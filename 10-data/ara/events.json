@@ -1,0 +1,122 @@
+{
+  "events": [
+    {
+      "id": "072167be",
+      "type": "decision",
+      "source": "autonomous_decision",
+      "data": {
+        "task": "Collect arXiv papers",
+        "confidence": 0.8999999999999999,
+        "level": "quick"
+      },
+      "timestamp": "2026-03-16T09:48:15.883740",
+      "severity": "info"
+    },
+    {
+      "id": "c2a57018",
+      "type": "decision",
+      "source": "autonomous_decision",
+      "data": {
+        "task": "Analyze paper quality",
+        "confidence": 0.8999999999999999,
+        "level": "quick"
+      },
+      "timestamp": "2026-03-16T09:48:15.883740",
+      "severity": "info"
+    },
+    {
+      "id": "b9a44e52",
+      "type": "decision",
+      "source": "autonomous_decision",
+      "data": {
+        "task": "Deploy to production",
+        "confidence": 0.7499999999999999,
+        "level": "quick"
+      },
+      "timestamp": "2026-03-16T09:48:15.883740",
+      "severity": "info"
+    },
+    {
+      "id": "294566b7",
+      "type": "task_start",
+      "source": "autonomous_decision",
+      "data": {
+        "task": "Test task for autonomous_decision",
+        "input": {
+          "test": true
+        }
+      },
+      "timestamp": "2026-03-16T09:48:15.883740",
+      "severity": "info"
+    },
+    {
+      "id": "25a030fb",
+      "type": "task_complete",
+      "source": "autonomous_decision",
+      "data": {
+        "success": true,
+        "capability": "autonomous_decision",
+        "task": "Test task for autonomous_decision",
+        "output": "Processed by Autonomous Decision Engine",
+        "latency_ms": 100.74591636657715
+      },
+      "timestamp": "2026-03-16T09:48:15.984486",
+      "severity": "info"
+    },
+    {
+      "id": "f73c9792",
+      "type": "task_start",
+      "source": "predictive_healing",
+      "data": {
+        "task": "Test task for predictive_healing",
+        "input": {
+          "test": true
+        }
+      },
+      "timestamp": "2026-03-16T09:48:15.984486",
+      "severity": "info"
+    },
+    {
+      "id": "c744b885",
+      "type": "task_complete",
+      "source": "predictive_healing",
+      "data": {
+        "success": true,
+        "capability": "predictive_healing",
+        "task": "Test task for predictive_healing",
+        "output": "Processed by Predictive Self-Healing",
+        "latency_ms": 101.05323791503906
+      },
+      "timestamp": "2026-03-16T09:48:16.085539",
+      "severity": "info"
+    },
+    {
+      "id": "46538a26",
+      "type": "task_start",
+      "source": "kg_reasoner",
+      "data": {
+        "task": "Test task for kg_reasoner",
+        "input": {
+          "test": true
+        }
+      },
+      "timestamp": "2026-03-16T09:48:16.085539",
+      "severity": "info"
+    },
+    {
+      "id": "9f64c2bd",
+      "type": "task_complete",
+      "source": "kg_reasoner",
+      "data": {
+        "success": true,
+        "capability": "kg_reasoner",
+        "task": "Test task for kg_reasoner",
+        "output": "Processed by Knowledge Graph Reasoner",
+        "latency_ms": 100.87966918945312
+      },
+      "timestamp": "2026-03-16T09:48:16.186419",
+      "severity": "info"
+    }
+  ],
+  "last_updated": "2026-03-16T09:48:16.192497"
+}

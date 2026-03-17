@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complex Dynamics of Wave-Character Transitions in Radially</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .header {
+            border-bottom: 3px solid #4a9eff;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .meta {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .abstract {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #4a9eff;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        .section h3 {
+            color: #4a9eff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .section .content {
+            color: #333;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+        .references {
+            margin-top: 30px;
+        }
+        .reference {
+            padding: 12px;
+            margin: 10px 0;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .reference.unverified {
+            border-left: 3px solid #ff9800;
+            background: #fff8e1;
+        }
+        .reference.verified {
+            border-left: 3px solid #4caf50;
+            background: #e8f5e9;
+        }
+        .reference.manual {
+            border-left: 3px solid #2196f3;
+            background: #e3f2fd;
+        }
+        .ref-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .ref-id {
+            font-weight: bold;
+            color: #4a9eff;
+            margin-right: 8px;
+        }
+        .ref-status {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #f0f0f0;
+        }
+        .ref-content {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .ref-details {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .ref-details div {
+            margin: 4px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #4a9eff;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .integrity-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1>Complex Dynamics of Wave-Character Transitions in Radially</h1>
+            <div class="meta">作者：Eduardo Abreu, Geng Chen, Faris El-Katri, Erivaldo Lima</div>
+            <div class="meta">年份：未知</div>
+            <div class="meta">arXiv: <span class="badge">2603.09929</span></div>
+        </div>
+        
+        <div class="abstract">
+            <strong>📖 摘要</strong>
+            <p style="margin-top: 10px;">We investigate the qualitative dynamics of smooth solutions to the radially symmetric
+isentropic compressible Euler equations, focusing specifically on the evolution of rarefac-
+tive and compressive wave characters across three distinct configurations: the outward su-
+personic, subsonic, and inward supersonic regimes. For each case, we establish structural
+restrictions on wave-character transitions and identify invariant sign domains for gradient
+variables under specific initial data conditions. While our findings refine existing invariance
+properties in the outward supersonic regime, they reveal novel asymmetric transition mech-
+anisms in the subsonic and inward regimes that are absent in purely supersonic expanding
+cases. Consequently, we derive suﬀicient conditions for finite-time singularity formation. To
+complement the analytical results where closed-form solutions are unavailable, we provide nu-
+merical experiments using a Semi-Discrete Lagrangian-Eulerian (SDLE) formulation. These
+simulations reproduce the predicted wave-character dynamics and offer qualitative evidence
+that supports our theoretical findings, providing a unified description of wave transitions in
+radially symmetric isentropic gas dynamics.
+Keywords: Compressible Euler equations; Radial symmetry; Wave-character transitions;
+Rarefaction and compression; Gradient variables; Characteristic analysis; Invariant domains;
+Shock formation; Singularity formation; Semi-Discrete Lagrangian-Eulerian (SDLE) scheme.
+Mathematics Subject Classification: 35L65 · 35L67 · 76N15 · 65M08.</p>
+        </div>
+        
+        <div class="integrity-notice">
+            <strong>🔒 学术诚信声明：</strong>
+            本卡片内容由 AI 辅助生成，所有参考文献需人工核实真实性。
+            请勿直接引用未验证的文献信息。
+        </div>
+        
+        <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📑 核心章节</h2>
+        
+            <div class="section">
+                <h3>Introduction</h3>
+                <p class="content">Complex Dynamics of Wave-Character Transitions in Radially
+Symmetric Isentropic Euler Flows: Theory and Numerics
+Eduardo Abreu∗
+Geng Chen†
+Faris El-Katri‡
+Erivaldo Lima§
+Abstract
+We investigate the qualitative dynamics of smooth solutions to the radially symmetric
+isentropic compressible Euler equations, focusing specifically on the evolution of rarefac-
+tive and compressive wave characters across three distinct configurations: the outward su-
+personic, subsonic, and inward supersonic regimes. F...</p>
+            </div>
+            
+            <div class="section">
+                <h3>Introduction</h3>
+                <p class="content">The compressible Euler equations constitute a canonical class of nonlinear hyperbolic sys-
+tems of conservation laws.
+A defining feature of these systems is their capacity to develop
+singularities in finite time, even when initialized from smooth data. The mechanisms precipi-
+tating gradient blow-up and subsequent shock formation have remained a central inquiry since
+the foundational developments of hyperbolic theory. For one-dimensional Cartesian flows, the
+criteria for singularity formation ar...</p>
+            </div>
+            
+            <div class="section">
+                <h3>Analytical Extension: We refine the analysis of wave-character transitions across the</h3>
+                <p class="content">three fundamental regimes. We establish structural constraints on the evolution of rarefac-
+tion and compression, proving invariant-sign results for α and β within specific domains
+of influence. This offers a unified perspective that clarifies how the interaction between
+characteristic families is modulated by subsonic and inward supersonic geometries....</p>
+            </div>
+            
+            <div class="section">
+                <h3>Numerical Synthesis: Motivated by the gradient-variable framework, we perform a</h3>
+                <p class="content">series of numerical experiments using a Semi-Discrete Lagrangian-Eulerian (SDLE) for-
+mulation [1]. This scheme, based on a space-time control-volume approach with no-flow
+curves, allows for the robust capture of nonlinear wave propagation. In the absence of
+closed-form solutions, our study focuses on identifying observable signatures consistent
+with the theoretical predictions, specifically the localized concentration of gradients and
+the spatio-temporal evolution of wave characters.
+The paper ...</p>
+            </div>
+            
+            <div class="section">
+                <h3>References</h3>
+                <p class="content">[1] Eduardo Abreu, Jean François, Wanderson Lambert, and John Pérez.
+A semi-discrete
+lagrangian–eulerian scheme for hyperbolic-transport models.
+Journal of Computational
+and Applied Mathematics, 406:114011, 2022.
+[2] S. Alinhac. Blowup for Nonlinear Hyperbolic Equations. Progress in Nonlinear Differential
+Equations and Their Applications. Birkhäuser Boston, 1995.
+[3] Tristan Buckmaster, Theodore Drivas, Steve Shkoller, and Vlad Vicol. Simultaneous devel-
+opment of shocks and cusps for 2d euler w...</p>
+            </div>
+            
+        
+        <div class="references">
+            <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📚 参考文献</h2>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[1]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Eduardo Abreu, Jean François, Wanderson Lambert, and John Pérez.</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[2]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">S. Alinhac. Blowup for Nonlinear Hyperbolic Equations. Progress in Nonlinear Differential</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[3]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Tristan Buckmaster, Theodore Drivas, Steve Shkoller, and Vlad Vicol. Simultaneous devel-</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[4]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Tristan Buckmaster, Steve Shkoller, and Vlad Vicol.</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[5]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Tristan Buckmaster, Steve Shkoller, and Vlad Vicol. Formation of shocks for 2d isentropic</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[6]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Tristan Buckmaster, Steve Shkoller, and Vlad Vicol. Shock formation and vorticity creation</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[7]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Hong Cai, Geng Chen, and Tian-Yi Wang. Singularity formation for radially symmetric</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[8]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Geng Chen. Optimal time-dependent lower bound on density for classical solutions of 1-d</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[9]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Geng Chen.</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[10]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">Geng Chen, Gui-Qiang Chen, and Shengguo Zhu. Formation of singularities and existence</div>
+                
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p>生成时间：2026-03-12 08:59:35</p>
+            <p>知识卡片生成器 v1.0 | AI Research OS</p>
+            <p style="margin-top: 10px; color: #ff9800;">
+                ⚠️ 所有参考文献必须人工核实真实性 - 严禁虚构文献信息
+            </p>
+        </div>
+    </div>
+</body>
+</html>

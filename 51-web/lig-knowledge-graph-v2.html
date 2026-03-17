@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIG 知识图谱 v2.0 - 2026-03-13 更新</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1400px; margin: 0 auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #333; border-bottom: 2px solid #4CAF50; padding-bottom: 10px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin: 20px 0; }
+        .stat-card { background: #f9f9f9; padding: 15px; border-radius: 8px; text-align: center; }
+        .stat-number { font-size: 2em; color: #4CAF50; font-weight: bold; }
+        .stat-label { color: #666; margin-top: 5px; }
+        #graph { width: 100%; height: 600px; border: 1px solid #ddd; border-radius: 8px; }
+        .legend { display: flex; gap: 20px; margin: 20px 0; flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 8px; }
+        .legend-color { width: 20px; height: 20px; border-radius: 50%; }
+        .node-label { font-size: 12px; pointer-events: none; }
+        .link { stroke: #999; stroke-opacity: 0.6; }
+        .tooltip { position: absolute; background: rgba(0,0,0,0.8); color: white; padding: 10px; border-radius: 4px; font-size: 12px; pointer-events: none; opacity: 0; transition: opacity 0.3s; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 LIG 知识图谱 v2.0</h1>
+        <p><strong>更新日期:</strong> 2026-03-13 | <strong>数据来源:</strong> PubMed (1,003 篇论文)</p>
+        
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-number">34</div>
+                <div class="stat-label">总实体数</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24</div>
+                <div class="stat-label">论文实体</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">机构实体</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">5</div>
+                <div class="stat-label">技术实体</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">12</div>
+                <div class="stat-label">关系数</div>
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #FF6B6B;"></div>
+                <span>论文 (Paper)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #4ECDC4;"></div>
+                <span>机构 (Institution)</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #45B7D1;"></div>
+                <span>技术 (Technology)</span>
+            </div>
+        </div>
+
+        <div id="graph"></div>
+    </div>
+
+    <div class="tooltip" id="tooltip"></div>
+
+    <script>
+        // LIG 知识图谱数据 (2026-03-13 更新)
+        const data = {
+            nodes: [
+                // 论文实体 (24 个 - 显示 7 个 2026 年)
+                { id: "P-Lactate", label: "乳酸传感器", type: "paper", journal: "ACS Sensors", year: 2026 },
+                { id: "P-Potassium", label: "钾离子传感器", type: "paper", journal: "Biosens Bioelectron", year: 2026 },
+                { id: "P-HPV", label: "HPV 检测", type: "paper", journal: "Microsyst Nanoeng", year: 2026 },
+                { id: "P-Solar", label: "太阳能海水淡化", type: "paper", journal: "Nature Comm", year: 2026 },
+                { id: "P-Neural", label: "神经探针", type: "paper", journal: "ACS Chem Neuro", year: 2026 },
+                { id: "P-Tumor", label: "肿瘤贴片", type: "paper", year: 2026 },
+                { id: "P-Surge", label: "PubMed 爆发", type: "paper", year: 2026 },
+                
+                // 机构实体 (5 个)
+                { id: "INST-Harvard", label: "哈佛大学", type: "institution", country: "美国" },
+                { id: "INST-Kim", label: "韩国团队", type: "institution", country: "韩国" },
+                { id: "INST-ACS", label: "ACS Sensors", type: "institution" },
+                { id: "INST-Nature", label: "Nature Comm", type: "institution" },
+                { id: "INST-Micro", label: "Microsyst Nanoeng", type: "institution" },
+                
+                // 技术实体 (5 个)
+                { id: "TECH-Enzyme", label: "酶级联 PK/POx", type: "technology" },
+                { id: "TECH-CRISPR", label: "CRISPR-CASTSA", type: "technology" },
+                { id: "TECH-Photothermal", label: "LIG 光热层", type: "technology" },
+                { id: "TECH-Stretchable", label: "全拉伸电极", type: "technology" },
+                { id: "TECH-Multimodal", label: "多模态集成", type: "technology" }
+            ],
+            links: [
+                // 论文→机构
+                { source: "P-Lactate", target: "INST-ACS", value: 1 },
+                { source: "P-Potassium", target: "INST-Kim", value: 1 },
+                { source: "P-HPV", target: "INST-Micro", value: 1 },
+                { source: "P-Solar", target: "INST-Nature", value: 1 },
+                { source: "P-Neural", target: "INST-Harvard", value: 1 },
+                
+                // 论文→技术
+                { source: "P-Potassium", target: "TECH-Enzyme", value: 1 },
+                { source: "P-HPV", target: "TECH-CRISPR", value: 1 },
+                { source: "P-Solar", target: "TECH-Photothermal", value: 1 },
+                { source: "P-Lactate", target: "TECH-Stretchable", value: 1 },
+                { source: "P-Neural", target: "TECH-Multimodal", value: 1 },
+                
+                // 机构→技术
+                { source: "INST-Kim", target: "TECH-Enzyme", value: 1 },
+                { source: "INST-Harvard", target: "TECH-Multimodal", value: 1 }
+            ]
+        };
+
+        // 颜色配置
+        const colorScheme = {
+            paper: "#FF6B6B",
+            institution: "#4ECDC4",
+            technology: "#45B7D1"
+        };
+
+        // 创建力导向图
+        const width = document.getElementById('graph').clientWidth;
+        const height = 600;
+
+        const svg = d3.select("#graph")
+            .append("svg")
+            .attr("width", width)
+            .attr("height", height)
+            .call(d3.zoom().on("zoom", (event) => {
+                g.attr("transform", event.transform);
+            }));
+
+        const g = svg.append("g");
+
+        // 力导向模拟
+        const simulation = d3.forceSimulation(data.nodes)
+            .force("link", d3.forceLink(data.links).id(d => d.id).distance(150))
+            .force("charge", d3.forceManyBody().strength(-500))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collide", d3.forceCollide(30));
+
+        // 绘制连线
+        const links = g.append("g")
+            .selectAll("line")
+            .data(data.links)
+            .join("line")
+            .attr("class", "link")
+            .attr("stroke-width", 2);
+
+        // 绘制节点
+        const nodes = g.append("g")
+            .selectAll("circle")
+            .data(data.nodes)
+            .join("circle")
+            .attr("r", d => d.type === "paper" ? 15 : 20)
+            .attr("fill", d => colorScheme[d.type])
+            .attr("stroke", "#fff")
+            .attr("stroke-width", 2)
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended));
+
+        // 添加标签
+        const labels = g.append("g")
+            .selectAll("text")
+            .data(data.nodes)
+            .join("text")
+            .attr("class", "node-label")
+            .attr("dx", 25)
+            .attr("dy", 5)
+            .text(d => d.label);
+
+        // 工具提示
+        const tooltip = d3.select("#tooltip");
+
+        nodes.on("mouseover", (event, d) => {
+            tooltip.style("opacity", 1)
+                .html(`
+                    <strong>${d.label}</strong><br>
+                    类型：${d.type}<br>
+                    ${d.journal ? `期刊：${d.journal}<br>` : ''}
+                    ${d.year ? `年份：${d.year}<br>` : ''}
+                    ${d.country ? `国家：${d.country}<br>` : ''}
+                `)
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 10) + "px");
+        }).on("mouseout", () => {
+            tooltip.style("opacity", 0);
+        });
+
+        // 更新位置
+        simulation.on("tick", () => {
+            links
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            nodes
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+
+            labels
+                .attr("x", d => d.x)
+                .attr("y", d => d.y);
+        });
+
+        // 拖拽功能
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+    </script>
+</body>
+</html>

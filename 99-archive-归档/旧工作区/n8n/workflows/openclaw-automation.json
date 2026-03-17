@@ -1,0 +1,158 @@
+{
+  "name": "OpenClaw 自动化工作流",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Schedule Trigger",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"D:\\OpenClaw\\workspace\\scripts\\obsidian-auto-sync.ps1\"",
+        "options": {
+          "cwd": "D:\\OpenClaw\\workspace"
+        }
+      },
+      "id": "obsidian-sync",
+      "name": "Obsidian Sync",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "valueA": "={{ $json.code }}",
+              "valueB": 0
+            }
+          ]
+        }
+      },
+      "id": "check-sync-success",
+      "name": "Check Sync Success",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "command": "cd D:\\obsidian\\Vault && git add -A && git commit -m \"[auto-sync] {{ $now.format('yyyy-MM-dd HH:mm') }}\" && git push",
+        "options": {
+          "cwd": "D:\\obsidian\\Vault"
+        }
+      },
+      "id": "git-commit",
+      "name": "Git Commit",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [660, -100]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.openclaw.ai/sessions/send",
+        "authentication": "genericCredentialType",
+        "genericAuthType": "httpHeaderAuth",
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "message",
+              "value": "={{ JSON.stringify({ action: 'heartbeat', status: 'sync_complete', files: $json.stdout }) }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "notify-openclaw",
+      "name": "Notify OpenClaw",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [880, 0]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Obsidian Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Obsidian Sync": {
+      "main": [
+        [
+          {
+            "node": "Check Sync Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Sync Success": {
+      "main": [
+        [
+          {
+            "node": "Git Commit",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Notify OpenClaw",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Git Commit": {
+      "main": [
+        [
+          {
+            "node": "Notify OpenClaw",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "openclaw-automation-v1",
+  "meta": {
+    "instanceId": "openclaw-local"
+  },
+  "tags": [
+    {
+      "name": "OpenClaw"
+    },
+    {
+      "name": "Automation"
+    }
+  ]
+}

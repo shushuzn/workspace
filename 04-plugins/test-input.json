@@ -1,0 +1,6 @@
+{
+  "task": "测试完整多子代理协同",
+  "context": {
+    "continuous_work_minutes": 60
+  }
+}
