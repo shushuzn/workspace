@@ -1,0 +1,78 @@
+# 记忆检索优化配置
+# 策略：先向量相似度筛选，再 LLM 总结
+
+[retrieval]
+# 两阶段检索
+stages = ["vector_filter", "llm_summary"]
+
+# 第一阶段：向量检索
+vector_search:
+  top_k: 20              # 初始检索数量
+  similarity_threshold: 0.7  # 相似度阈值
+  max_context_length: 5000  # 最大上下文长度
+
+# 第二阶段：LLM 总结
+llm_summary:
+  enabled: true
+  model: "bailian/MiniMax-M2.5"  # 使用轻量模型
+  max_tokens: 2048
+  temperature: 0.3
+  
+  # 总结提示词模板
+  prompt_template: |
+    请根据以下检索到的记忆片段，简洁地回答用户问题。
+    
+    要求:
+    1. 只基于提供的记忆片段回答
+    2. 如果记忆片段中没有相关信息，明确说明
+    3. 保持简洁，避免冗余
+    4. 引用关键信息来源
+    
+    记忆片段:
+    {context}
+    
+    用户问题:
+    {query}
+    
+    回答:
+
+[caching]
+# 检索结果缓存
+enabled: true
+ttl_seconds: 1800  # 30 分钟
+max_entries: 100
+
+# 缓存键策略
+cache_key_strategy: "semantic_hash"
+
+[optimization]
+# 优化策略
+strategies:
+  # 查询重写
+  query_rewrite:
+    enabled: true
+    expand_synonyms: true
+    remove_stopwords: true
+  
+  # 结果重排序
+  reranking:
+    enabled: true
+    model: "cross-encoder"  # 使用轻量重排序模型
+    top_k: 10
+  
+  # 上下文压缩
+  context_compression:
+    enabled: true
+    max_length: 3000
+    preserve_entities: true
+
+[metrics]
+# 指标收集
+collect_metrics: true
+log_file: "logs/memory-retrieval-metrics.json"
+
+track:
+  - retrieval_latency
+  - cache_hit_rate
+  - llm_token_usage
+  - answer_quality_score

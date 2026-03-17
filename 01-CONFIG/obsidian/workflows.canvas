@@ -1,0 +1,356 @@
+{
+  "nodes": [
+    {
+      "id": "title",
+      "x": 400,
+      "y": 50,
+      "width": 400,
+      "height": 100,
+      "type": "text",
+      "text": "# OpenClaw Workflows\n\nAutomation Pipeline",
+      "color": 1
+    },
+    {
+      "id": "wf-0",
+      "x": 400,
+      "y": 200,
+      "width": 350,
+      "height": 100,
+      "type": "text",
+      "text": "## Heartbeat Workflow\n\n3 steps",
+      "color": 3
+    },
+    {
+      "id": "step-0-0",
+      "x": 200,
+      "y": 350,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 1**\nStep 1...",
+      "color": 4
+    },
+    {
+      "id": "step-0-1",
+      "x": 300,
+      "y": 350,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 2**\nStep 2...",
+      "color": 4
+    },
+    {
+      "id": "step-0-2",
+      "x": 400,
+      "y": 350,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 3**\nStep 3...",
+      "color": 4
+    },
+    {
+      "id": "wf-1",
+      "x": 400,
+      "y": 500,
+      "width": 350,
+      "height": 100,
+      "type": "text",
+      "text": "## Workflow Analyzer\n\n3 steps",
+      "color": 3
+    },
+    {
+      "id": "step-1-0",
+      "x": 200,
+      "y": 650,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 1**\nStep 1...",
+      "color": 4
+    },
+    {
+      "id": "step-1-1",
+      "x": 300,
+      "y": 650,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 2**\nStep 2...",
+      "color": 4
+    },
+    {
+      "id": "step-1-2",
+      "x": 400,
+      "y": 650,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 3**\nStep 3...",
+      "color": 4
+    },
+    {
+      "id": "wf-2",
+      "x": 400,
+      "y": 800,
+      "width": 350,
+      "height": 100,
+      "type": "text",
+      "text": "## Workflow Engine\n\n3 steps",
+      "color": 3
+    },
+    {
+      "id": "step-2-0",
+      "x": 200,
+      "y": 950,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 1**\nStep 1...",
+      "color": 4
+    },
+    {
+      "id": "step-2-1",
+      "x": 300,
+      "y": 950,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 2**\nStep 2...",
+      "color": 4
+    },
+    {
+      "id": "step-2-2",
+      "x": 400,
+      "y": 950,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 3**\nStep 3...",
+      "color": 4
+    },
+    {
+      "id": "wf-3",
+      "x": 400,
+      "y": 1100,
+      "width": 350,
+      "height": 100,
+      "type": "text",
+      "text": "## Workflow Engine V2\n\n3 steps",
+      "color": 3
+    },
+    {
+      "id": "step-3-0",
+      "x": 200,
+      "y": 1250,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 1**\nStep 1...",
+      "color": 4
+    },
+    {
+      "id": "step-3-1",
+      "x": 300,
+      "y": 1250,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 2**\nStep 2...",
+      "color": 4
+    },
+    {
+      "id": "step-3-2",
+      "x": 400,
+      "y": 1250,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 3**\nStep 3...",
+      "color": 4
+    },
+    {
+      "id": "wf-4",
+      "x": 400,
+      "y": 1400,
+      "width": 350,
+      "height": 100,
+      "type": "text",
+      "text": "## Workflow Enhancer\n\n3 steps",
+      "color": 3
+    },
+    {
+      "id": "step-4-0",
+      "x": 200,
+      "y": 1550,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 1**\nStep 1...",
+      "color": 4
+    },
+    {
+      "id": "step-4-1",
+      "x": 300,
+      "y": 1550,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 2**\nStep 2...",
+      "color": 4
+    },
+    {
+      "id": "step-4-2",
+      "x": 400,
+      "y": 1550,
+      "width": 150,
+      "height": 80,
+      "type": "text",
+      "text": "**Step 3**\nStep 3...",
+      "color": 4
+    }
+  ],
+  "edges": [
+    {
+      "id": "edge-title-wf-0",
+      "fromNode": "title",
+      "toNode": "wf-0",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-0-step-0-0",
+      "fromNode": "wf-0",
+      "toNode": "step-0-0",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-0-step-0-1",
+      "fromNode": "wf-0",
+      "toNode": "step-0-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-0-step-0-2",
+      "fromNode": "wf-0",
+      "toNode": "step-0-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-title-wf-1",
+      "fromNode": "title",
+      "toNode": "wf-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-1-step-1-0",
+      "fromNode": "wf-1",
+      "toNode": "step-1-0",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-1-step-1-1",
+      "fromNode": "wf-1",
+      "toNode": "step-1-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-1-step-1-2",
+      "fromNode": "wf-1",
+      "toNode": "step-1-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-title-wf-2",
+      "fromNode": "title",
+      "toNode": "wf-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-2-step-2-0",
+      "fromNode": "wf-2",
+      "toNode": "step-2-0",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-2-step-2-1",
+      "fromNode": "wf-2",
+      "toNode": "step-2-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-2-step-2-2",
+      "fromNode": "wf-2",
+      "toNode": "step-2-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-title-wf-3",
+      "fromNode": "title",
+      "toNode": "wf-3",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-3-step-3-0",
+      "fromNode": "wf-3",
+      "toNode": "step-3-0",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-3-step-3-1",
+      "fromNode": "wf-3",
+      "toNode": "step-3-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-3-step-3-2",
+      "fromNode": "wf-3",
+      "toNode": "step-3-2",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-title-wf-4",
+      "fromNode": "title",
+      "toNode": "wf-4",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-4-step-4-0",
+      "fromNode": "wf-4",
+      "toNode": "step-4-0",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-4-step-4-1",
+      "fromNode": "wf-4",
+      "toNode": "step-4-1",
+      "fromSide": "right",
+      "toSide": "left"
+    },
+    {
+      "id": "edge-wf-4-step-4-2",
+      "fromNode": "wf-4",
+      "toNode": "step-4-2",
+      "fromSide": "right",
+      "toSide": "left"
+    }
+  ]
+}

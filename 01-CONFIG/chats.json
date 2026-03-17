@@ -1,0 +1,15 @@
+{
+  "chats": [
+    {
+      "channel": "console",
+      "created_at": "2026-03-17T13:19:18.125259Z",
+      "id": "8e6fcb9f-e5d6-4189-8a81-fc4e1d9a42de",
+      "meta": {},
+      "name": "你和openclaw",
+      "session_id": "1773753555778",
+      "updated_at": "2026-03-17T13:20:51.768764Z",
+      "user_id": "default"
+    }
+  ],
+  "version": 1
+}

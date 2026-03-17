@@ -1,0 +1,80 @@
+# 难度评估器配置
+# 用于自适应路由 - 根据问题难度分配模型
+
+[evaluator]
+# 评估维度
+dimensions = ["complexity", "domain_knowledge", "reasoning_depth", "context_length"]
+
+# 权重
+complexity_weight = 0.3
+domain_knowledge_weight = 0.25
+reasoning_depth_weight = 0.3
+context_length_weight = 0.15
+
+# 阈值
+easy_threshold = 0.3      # ≤0.3: 简单问题
+medium_threshold = 0.6    # 0.3-0.6: 中等难度
+hard_threshold = 1.0      # >0.6: 困难问题
+
+[models]
+# 简单问题模型 (快速/低成本)
+easy_model = "bailian/MiniMax-M2.5"
+easy_model_max_tokens = 8192
+easy_model_temperature = 0.7
+
+# 中等难度模型 (平衡)
+medium_model = "bailian/qwen3.5-plus"
+medium_model_max_tokens = 32768
+medium_model_temperature = 0.5
+
+# 困难问题模型 (最强推理)
+hard_model = "bailian/qwen3-max-2026-01-23"
+hard_model_max_tokens = 65536
+hard_model_temperature = 0.3
+
+[routing_rules]
+# 自动路由规则
+# 简单问题：事实查询、简单计算、定义解释
+easy_patterns = [
+    "什么是",
+    "如何",
+    "计算",
+    "翻译",
+    "总结",
+    "列出",
+    "定义"
+]
+
+# 困难问题：多步推理、代码生成、复杂分析
+hard_patterns = [
+    "证明",
+    "推导",
+    "分析.*并",
+    "比较.*差异",
+    "设计.*系统",
+    "优化.*性能",
+    "调试",
+    "重构"
+]
+
+[cache]
+# 缓存配置
+enabled = true
+ttl_seconds = 3600  # 1 小时
+max_size_mb = 100
+
+# 缓存键生成策略
+cache_key_strategy = "semantic_hash"  # semantic_hash | exact_match
+
+[metrics]
+# 指标收集
+collect_metrics = true
+log_file = "logs/router-metrics.json"
+
+# 跟踪的指标
+track = [
+    "routing_decisions",
+    "model_usage",
+    "cost_savings",
+    "accuracy_by_difficulty"
+]

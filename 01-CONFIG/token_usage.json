@@ -1,0 +1,11 @@
+{
+  "2026-03-17": {
+    "aliyun-codingplan:qwen3.5-plus": {
+      "provider_id": "aliyun-codingplan",
+      "model_name": "qwen3.5-plus",
+      "prompt_tokens": 17328386,
+      "completion_tokens": 196043,
+      "call_count": 354
+    }
+  }
+}

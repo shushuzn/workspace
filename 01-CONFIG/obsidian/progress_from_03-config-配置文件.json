@@ -1,0 +1,142 @@
+{
+<<<<<<< Updated upstream
+  "batch_id": "batch-20260304-144910",
+  "started_at": "2026-03-04T14:49:10.053786",
+  "completed_at": null,
+  "total_papers": 3,
+  "completed": 0,
+=======
+  "batch_id": "batch-20260304-202719",
+  "started_at": "2026-03-04T20:27:19.969557",
+  "completed_at": "2026-03-04T20:28:02.810065",
+  "total_papers": 8,
+  "completed": 8,
+>>>>>>> Stashed changes
+  "failed": 0,
+  "running": 0,
+  "progress": 0.0,
+  "papers": [
+    {
+<<<<<<< Updated upstream
+      "id": "2602.23668",
+      "title": "",
+      "priority": 0,
+      "status": "pending",
+      "output": null,
+      "error": null,
+      "retries": 0,
+      "duration_seconds": null,
+      "session_id": null
+    },
+    {
+      "id": "2602.23681",
+      "title": "",
+      "priority": 0,
+      "status": "pending",
+      "output": null,
+      "error": null,
+      "retries": 0,
+      "duration_seconds": null,
+      "session_id": null
+    },
+    {
+      "id": "2602.23701",
+      "title": "",
+      "priority": 0,
+      "status": "pending",
+      "output": null,
+      "error": null,
+      "retries": 0,
+      "duration_seconds": null,
+      "session_id": null
+=======
+      "id": "2603.03202",
+      "title": "",
+      "priority": 0,
+      "status": "completed",
+      "output": "D:\\OpenClaw\\workspace\\Medium\\P-Note\\P-2026-Paper-2603.03202.md",
+      "error": null,
+      "retries": 0,
+      "duration_seconds": 5.006174802780151,
+      "session_id": "session-2603.03202"
+    },
+    {
+      "id": "2603.02909",
+      "title": "",
+      "priority": 0,
+      "status": "completed",
+      "output": "D:\\OpenClaw\\workspace\\Medium\\P-Note\\P-2026-Paper-2603.02909.md",
+      "error": null,
+      "retries": 0,
+      "duration_seconds": 10.017380714416504,
+      "session_id": "session-2603.02909"
+    },
+    {
+      "id": "2603.0276",
+      "title": "",
+      "priority": 0,
+      "status": "completed",
+      "output": "D:\\OpenClaw\\workspace\\Medium\\P-Note\\P-2026-Paper-2603.0276.md",
+      "error": null,
+      "retries": 0,
+      "duration_seconds": 15.10252571105957,
+      "session_id": "session-2603.0276"
+    },
+    {
+      "id": "2603.02556",
+      "title": "",
+      "priority": 0,
+      "status": "completed",
+      "output": "D:\\OpenClaw\\workspace\\Medium\\P-Note\\P-2026-Paper-2603.02556.md",
+      "error": null,
+      "retries": 0,
+      "duration_seconds": 20.13995361328125,
+      "session_id": "session-2603.02556"
+    },
+    {
+      "id": "2603.03194",
+      "title": "",
+      "priority": 0,
+      "status": "completed",
+      "output": "D:\\OpenClaw\\workspace\\Medium\\P-Note\\P-2026-Paper-2603.03194.md",
+      "error": null,
+      "retries": 0,
+      "duration_seconds": 5.032407760620117,
+      "session_id": "session-2603.03194"
+    },
+    {
+      "id": "2603.03001",
+      "title": "",
+      "priority": 0,
+      "status": "completed",
+      "output": "D:\\OpenClaw\\workspace\\Medium\\P-Note\\P-2026-Paper-2603.03001.md",
+      "error": null,
+      "retries": 0,
+      "duration_seconds": 10.320780515670776,
+      "session_id": "session-2603.03001"
+    },
+    {
+      "id": "2603.02983",
+      "title": "",
+      "priority": 0,
+      "status": "completed",
+      "output": "D:\\OpenClaw\\workspace\\Medium\\P-Note\\P-2026-Paper-2603.02983.md",
+      "error": null,
+      "retries": 0,
+      "duration_seconds": 15.46077847480774,
+      "session_id": "session-2603.02983"
+    },
+    {
+      "id": "2603.02798",
+      "title": "",
+      "priority": 0,
+      "status": "completed",
+      "output": "D:\\OpenClaw\\workspace\\Medium\\P-Note\\P-2026-Paper-2603.02798.md",
+      "error": null,
+      "retries": 0,
+      "duration_seconds": 20.467073917388916,
+      "session_id": "session-2603.02798"
+>>>>>>> Stashed changes
+    }
+  ]
+}
