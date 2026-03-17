@@ -49,3 +49,10 @@ models/
 "data/papers/"  
 security_backups/  
 .env.auto  
+
+# 实时会话数据 (不提交)
+token_usage.json
+chats.json
+config.json
+sessions/
+*.session.json
