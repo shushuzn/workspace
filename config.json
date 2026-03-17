@@ -245,8 +245,8 @@
     }
   },
   "last_api": {
-    "host": null,
-    "port": null
+    "host": "127.0.0.1",
+    "port": 8088
   },
   "agents": {
     "defaults": {
