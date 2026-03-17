@@ -1,33 +1,23 @@
 {
   "chats": [
     {
-      "channel": "feishu",
-      "created_at": "2026-03-17T10:02:39.288002Z",
-      "id": "ae0c05cf-7c0c-4cea-b029-f9cf5da8ed82",
-      "meta": {},
-      "name": "你是谁",
-      "session_id": "6d929252",
-      "updated_at": "2026-03-17T11:48:34.983639Z",
-      "user_id": "ou_72a847b95fc25870dcdd8ce56d929252"
-    },
-    {
-      "channel": "console",
-      "created_at": "2026-03-17T11:48:59.770178Z",
-      "id": "97afdbfa-cea3-455b-8f77-397b959663a3",
-      "meta": {},
-      "name": "开启新回话",
-      "session_id": "1773748137253",
-      "updated_at": "2026-03-17T11:53:20.450300Z",
-      "user_id": "default"
-    },
-    {
       "channel": "console",
       "created_at": "2026-03-17T13:19:18.125259Z",
       "id": "8e6fcb9f-e5d6-4189-8a81-fc4e1d9a42de",
       "meta": {},
       "name": "你和openclaw",
       "session_id": "1773753555778",
-      "updated_at": "2026-03-17T14:41:50.125761Z",
+      "updated_at": "2026-03-17T14:57:45.053456Z",
+      "user_id": "default"
+    },
+    {
+      "channel": "console",
+      "created_at": "2026-03-17T15:00:39.041284Z",
+      "id": "fb21b500-5a88-4cbd-a221-bf357d4e4ac9",
+      "meta": {},
+      "name": "远程仓库更改为htt",
+      "session_id": "1773759636466",
+      "updated_at": "2026-03-17T15:00:56.745629Z",
       "user_id": "default"
     }
   ],
