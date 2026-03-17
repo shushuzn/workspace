@@ -1,0 +1,47 @@
+{
+  "timestamp": "2026-03-16T17:33:18.780256",
+  "optimization_result": {
+    "status": "completed",
+    "optimization": {
+      "model": "Llama-2-7B-Edge",
+      "quantization": {
+        "method": "INT4",
+        "compression_ratio": 8.0,
+        "accuracy_drop": 0.015,
+        "speedup": 4.0,
+        "energy_reduction": 0.7,
+        "quantization_time_ms": 2855.8953263754383
+      },
+      "pruning": {
+        "method": "structured",
+        "sparsity": 0.6,
+        "accuracy_drop": 0.012,
+        "speedup": 1.9,
+        "energy_reduction": 0.42,
+        "pruning_time_ms": 2491.0608398390277
+      },
+      "dvfs_state": "performance",
+      "combined_speedup": 7.6,
+      "combined_accuracy_drop": 0.026820000000000066,
+      "combined_energy_reduction": 0.826,
+      "energy_report": {
+        "total_energy_j": 17.400000000000006,
+        "avg_power_w": 17.400000000000006,
+        "inference_count": 10,
+        "energy_per_inference_j": 1.7400000000000007,
+        "carbon_footprint_g": 0.0024166666666666677,
+        "efficiency_score": 1.0
+      },
+      "targets_met": false
+    },
+    "success": false
+  },
+  "system_stats": {
+    "optimizations_completed": 1,
+    "avg_speedup": 7.6,
+    "avg_energy_reduction": 0.826,
+    "success_rate": 0.0,
+    "quantizations": 1,
+    "prunings": 1
+  }
+}

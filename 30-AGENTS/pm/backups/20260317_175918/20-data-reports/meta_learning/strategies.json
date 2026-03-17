@@ -1,0 +1,54 @@
+{
+  "strategies": {
+    "epsilon_greedy": {
+      "id": "epsilon_greedy",
+      "name": "Epsilon-Greedy",
+      "type": "epsilon_greedy",
+      "parameters": {
+        "epsilon": 0.1
+      },
+      "total_trials": 1000,
+      "total_reward": 560.0,
+      "avg_reward": 0.56,
+      "regret": 34.562647754137174
+    },
+    "ucb1": {
+      "id": "ucb1",
+      "name": "UCB1",
+      "type": "ucb",
+      "parameters": {
+        "c": 2.0
+      },
+      "total_trials": 1000,
+      "total_reward": 480.0,
+      "avg_reward": 0.48,
+      "regret": 103.87395736793326
+    },
+    "thompson": {
+      "id": "thompson",
+      "name": "Thompson Sampling",
+      "type": "thompson",
+      "parameters": {
+        "alpha_prior": 1,
+        "beta_prior": 1
+      },
+      "total_trials": 1000,
+      "total_reward": 618.0,
+      "avg_reward": 0.618,
+      "regret": -17.711399711399736
+    },
+    "exp3": {
+      "id": "exp3",
+      "name": "EXP3",
+      "type": "exp3",
+      "parameters": {
+        "gamma": 0.1
+      },
+      "total_trials": 1000,
+      "total_reward": 538.0,
+      "avg_reward": 0.538,
+      "regret": 64.66091334052498
+    }
+  },
+  "last_updated": "2026-03-16T02:11:12.414668"
+}

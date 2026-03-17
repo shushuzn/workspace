@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIG 知识图谱 - 图谱编辑器</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px}
+        .container{max-width:1600px;margin:0 auto;background:rgba(255,255,255,0.95);border-radius:12px;padding:30px;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
+        h1{font-size:24px;color:#333;margin-bottom:20px;border-bottom:3px solid #667eea;padding-bottom:10px}
+        .intro{font-size:14px;color:#666;margin-bottom:20px;line-height:1.6}
+        .editor-container{display:grid;grid-template-columns:1fr 350px;gap:20px}
+        .canvas-panel{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:15px;min-height:600px;position:relative}
+        .canvas-panel h3{font-size:15px;margin-bottom:10px;color:#333}
+        #graphCanvas{width:100%;height:550px;background:white;border-radius:4px;overflow:hidden}
+        .toolbar{position:absolute;top:20px;right:20px;background:white;padding:10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:100}
+        .toolbar button{margin:5px 0;padding:8px 12px;font-size:12px;width:100%}
+        .side-panel{background:white;border:1px solid #e0e0e0;border-radius:8px;padding:15px}
+        .side-panel h3{font-size:15px;margin-bottom:15px;color:#333;border-bottom:2px solid #e0e0e0;padding-bottom:8px}
+        .form-group{margin-bottom:15px}
+        .form-group label{display:block;font-size:13px;margin-bottom:5px;color:#555;font-weight:500}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;font-size:13px}
+        .form-group textarea{min-height:80px;resize:vertical}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        .btn-group{display:flex;gap:10px;margin-top:15px}
+        .btn-group button{flex:1}
+        button{background:#667eea;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:13px;transition:background 0.3s}
+        button:hover{background:#5568d3}button:disabled{background:#ccc;cursor:not-allowed}
+        button.add{background:#4caf50}button.add:hover{background:#45a049}
+        button.delete{background:#f44336}button.delete:hover{background:#e53935}
+        button.save{background:#2196f3}button.save:hover{background:#1976d2}
+        .status{padding:10px;background:#e3f2fd;border-radius:6px;margin-bottom:15px;font-size:13px;color:#1565c0;display:none}
+        .node-list{max-height:300px;overflow-y:auto;margin-top:10px}
+        .node-item{padding:8px;margin-bottom:8px;background:#f8f9fa;border-radius:4px;cursor:pointer;transition:background 0.2s;font-size:13px}
+        .node-item:hover{background:#e8f0fe}
+        .node-item.selected{background:#667eea;color:white}
+        .node-item .name{font-weight:bold}
+        .node-item .type{font-size:11px;color:#999;margin-left:8px}
+        .node-item.selected .type{color:#ddd}
+        .color-picker{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
+        .color-option{width:24px;height:24px;border-radius:4px;cursor:pointer;border:2px solid transparent;transition:border-color 0.2s}
+        .color-option:hover{border-color:#667eea}
+        .color-option.selected{border-color:#333}
+        .stats{background:#f8f9fa;padding:10px;border-radius:4px;margin-top:15px}
+        .stats .stat{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e0e0e0;font-size:12px}
+        .stats .stat:last-child{border-bottom:none}
+        .help-text{font-size:11px;color:#999;margin-top:5px}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✏️ LIG 知识图谱 - 图谱编辑器</h1>
+        <p class="intro">可视化编辑图谱，支持添加/删除节点和关系，编辑节点属性，拖拽调整位置。</p>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="editor-container">
+            <div class="canvas-panel">
+                <h3>📊 图谱画布</h3>
+                <svg id="graphCanvas"></svg>
+                <div class="toolbar">
+                    <button onclick="addNode()" class="add">➕ 添加节点</button>
+                    <button onclick="addLink()">🔗 添加关系</button>
+                    <button onclick="deleteSelected()" class="delete">🗑️ 删除选中</button>
+                    <button onclick="autoLayout()">🔄 自动布局</button>
+                    <button onclick="loadSample()">📋 加载示例</button>
+                    <button onclick="saveGraph()" class="save">💾 保存图谱</button>
+                </div>
+            </div>
+            
+            <div class="side-panel">
+                <h3>📝 节点列表</h3>
+                <div class="node-list" id="nodeList"></div>
+                <div class="stats" id="stats">
+                    <div class="stat"><span>节点数:</span><span id="nodeCount">0</span></div>
+                    <div class="stat"><span>关系数:</span><span id="linkCount">0</span></div>
+                </div>
+                
+                <h3 style="margin-top:20px">✏️ 编辑节点</h3>
+                <div class="form-group">
+                    <label>ID *</label>
+                    <input type="text" id="editId" placeholder="节点 ID">
+                </div>
+                <div class="form-group">
+                    <label>标签</label>
+                    <input type="text" id="editLabel" placeholder="显示标签">
+                </div>
+                <div class="form-group">
+                    <label>类型</label>
+                    <select id="editType">
+                        <option value="Material">Material (材料)</option>
+                        <option value="Device">Device (设备)</option>
+                        <option value="Signal">Signal (信号)</option>
+                        <option value="Technology">Technology (技术)</option>
+                        <option value="Application">Application (应用)</option>
+                        <option value="Challenge">Challenge (挑战)</option>
+                        <option value="Pathway">Pathway (通路)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>大小</label>
+                    <input type="range" id="editSize" min="15" max="50" value="25">
+                    <div class="help-text">当前：<span id="sizeValue">25</span></div>
+                </div>
+                <div class="form-group">
+                    <label>颜色</label>
+                    <div class="color-picker" id="colorPicker"></div>
+                </div>
+                <div class="btn-group">
+                    <button onclick="updateNode()" class="save">✅ 更新</button>
+                    <button onclick="clearSelection()">❌ 取消</button>
+                </div>
+                
+                <h3 style="margin-top:20px">🔗 添加关系</h3>
+                <div class="form-group">
+                    <label>源节点</label>
+                    <select id="linkSource"></select>
+                </div>
+                <div class="form-group">
+                    <label>目标节点</label>
+                    <select id="linkTarget"></select>
+                </div>
+                <div class="form-group">
+                    <label>权重</label>
+                    <input type="number" id="linkWeight" min="1" max="10" value="3">
+                </div>
+                <button onclick="createLink()" class="add" style="width:100%">➕ 创建关系</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        let graphData = { nodes: [], links: [] };
+        let selectedNode = null;
+        let simulation = null;
+        
+        const colorMap = {
+            "Material":"#FF6B6B",
+            "Device":"#4ECDC4",
+            "Signal":"#45B7D1",
+            "Technology":"#FFA07A",
+            "Application":"#98D8C8",
+            "Challenge":"#F7DC6F",
+            "Pathway":"#BB8FCE"
+        };
+        
+        // 示例数据
+        const sampleData = {
+            nodes: [
+                {id:"LIG",label:"LIG",type:"Material",size:40,x:400,y:275},
+                {id:"PI",label:"PI",type:"Material",size:20,x:200,y:200},
+                {id:"PDMS",label:"PDMS",type:"Material",size:20,x:200,y:350},
+                {id:"Gas_Sensor",label:"气体传感器",type:"Device",size:25,x:600,y:200},
+                {id:"Neural_Probe",label:"神经探针",type:"Device",size:25,x:600,y:350}
+            ],
+            links: [
+                {source:"PI",target:"LIG",value:3},
+                {source:"PDMS",target:"LIG",value:2},
+                {source:"LIG",target:"Gas_Sensor",value:3},
+                {source:"LIG",target:"Neural_Probe",value:3}
+            ]
+        };
+        
+        function initColorPicker() {
+            const picker = document.getElementById('colorPicker');
+            picker.innerHTML = '';
+            Object.entries(colorMap).forEach(([type, color]) => {
+                const div = document.createElement('div');
+                div.className = 'color-option';
+                div.style.background = color;
+                div.title = type;
+                div.onclick = () => selectColor(color, div);
+                picker.appendChild(div);
+            });
+        }
+        
+        function selectColor(color, element) {
+            document.querySelectorAll('.color-option').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            document.getElementById('editColor').value = color;
+        }
+        
+        function loadSample() {
+            graphData = JSON.parse(JSON.stringify(sampleData));
+            initGraph();
+            updateNodeList();
+            updateStats();
+            updateLinkSelects();
+            showStatus('✅ 示例已加载');
+        }
+        
+        function initGraph() {
+            const svg = d3.select("#graphCanvas");
+            svg.selectAll("*").remove();
+            
+            const width = svg.node().clientWidth;
+            const height = svg.node().clientHeight;
+            
+            // 箭头定义
+            svg.append("defs").selectAll("marker")
+                .data(["end"])
+                .enter().append("marker")
+                .attr("id", "arrowhead")
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", d => graphData.nodes.find(n=>n.id===d.target)?.size || 25)
+                .attr("refY", 0)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 6)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("fill", "#999")
+                .attr("d", "M0,-5L10,0L0,5");
+            
+            simulation = d3.forceSimulation(graphData.nodes)
+                .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))
+                .force("charge", d3.forceManyBody().strength(-500))
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collide", d3.forceCollide().radius(d => d.size + 5));
+            
+            // 绘制连线
+            const links = svg.append("g")
+                .selectAll("line")
+                .data(graphData.links)
+                .enter().append("line")
+                .attr("stroke", "#999")
+                .attr("stroke-width", d => Math.sqrt(d.value) * 2)
+                .attr("stroke-opacity", 0.6)
+                .attr("marker-end", "url(#arrowhead)");
+            
+            // 绘制节点
+            const nodes = svg.append("g")
+                .selectAll("circle")
+                .data(graphData.nodes)
+                .enter().append("circle")
+                .attr("r", d => d.size)
+                .attr("fill", d => colorMap[d.type] || "#999")
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 2)
+                .style("cursor", "pointer")
+                .on("click", selectNode)
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+            
+            // 添加标签
+            const labels = svg.append("g")
+                .selectAll("text")
+                .data(graphData.nodes)
+                .enter().append("text")
+                .attr("dy", d => d.size + 15)
+                .attr("text-anchor", "middle")
+                .attr("fill", "#333")
+                .attr("font-size", "12px")
+                .attr("font-weight", "bold")
+                .text(d => d.label);
+            
+            simulation.on("tick", () => {
+                links
+                    .attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+                
+                nodes
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y);
+                
+                labels
+                    .attr("x", d => d.x)
+                    .attr("y", d => d.y);
+            });
+        }
+        
+        function dragstarted(event, d) {
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        function dragended(event, d) {
+            d.fx = null;
+            d.fy = null;
+        }
+        
+        function selectNode(event, d) {
+            selectedNode = d;
+            document.querySelectorAll('.node-item').forEach(el => el.classList.remove('selected'));
+            const item = document.getElementById(`node-${d.id}`);
+            if (item) item.classList.add('selected');
+            
+            // 填充编辑表单
+            document.getElementById('editId').value = d.id;
+            document.getElementById('editLabel').value = d.label;
+            document.getElementById('editType').value = d.type;
+            document.getElementById('editSize').value = d.size;
+            document.getElementById('sizeValue').textContent = d.size;
+            document.getElementById('editColor').value = colorMap[d.type];
+            
+            // 高亮选中颜色
+            document.querySelectorAll('.color-option').forEach(el => {
+                el.classList.toggle('selected', el.style.background === colorMap[d.type]);
+            });
+            
+            updateLinkSelects();
+        }
+        
+        function updateNodeList() {
+            const list = document.getElementById('nodeList');
+            list.innerHTML = '';
+            graphData.nodes.forEach(node => {
+                const div = document.createElement('div');
+                div.className = 'node-item';
+                div.id = `node-${node.id}`;
+                div.innerHTML = `<span class="name">${node.label}</span><span class="type">${node.type}</span>`;
+                div.onclick = () => {
+                    const event = { target: { __data__: node } };
+                    selectNode(event, node);
+                };
+                list.appendChild(div);
+            });
+        }
+        
+        function updateStats() {
+            document.getElementById('nodeCount').textContent = graphData.nodes.length;
+            document.getElementById('linkCount').textContent = graphData.links.length;
+        }
+        
+        function updateLinkSelects() {
+            const source = document.getElementById('linkSource');
+            const target = document.getElementById('linkTarget');
+            source.innerHTML = '';
+            target.innerHTML = '';
+            graphData.nodes.forEach(node => {
+                const option1 = document.createElement('option');
+                option1.value = node.id;
+                option1.textContent = node.label;
+                source.appendChild(option1);
+                const option2 = document.createElement('option');
+                option2.value = node.id;
+                option2.textContent = node.label;
+                target.appendChild(option2);
+            });
+        }
+        
+        function addNode() {
+            const id = 'Node_' + Date.now();
+            const newNode = {
+                id: id,
+                label: id,
+                type: 'Material',
+                size: 25,
+                x: 400 + Math.random() * 100,
+                y: 275 + Math.random() * 100
+            };
+            graphData.nodes.push(newNode);
+            initGraph();
+            updateNodeList();
+            updateStats();
+            updateLinkSelects();
+            showStatus(`✅ 已添加节点：${id}`);
+        }
+        
+        function addLink() {
+            if (graphData.nodes.length < 2) {
+                showStatus('❌ 至少需要 2 个节点才能创建关系!');
+                return;
+            }
+            createLink();
+        }
+        
+        function createLink() {
+            const source = document.getElementById('linkSource').value;
+            const target = document.getElementById('linkTarget').value;
+            const weight = parseInt(document.getElementById('linkWeight').value);
+            
+            if (source === target) {
+                showStatus('❌ 源节点和目标节点不能相同!');
+                return;
+            }
+            
+            const exists = graphData.links.some(l => l.source === source && l.target === target);
+            if (exists) {
+                showStatus('❌ 关系已存在!');
+                return;
+            }
+            
+            graphData.links.push({ source, target, value: weight });
+            initGraph();
+            updateStats();
+            showStatus(`✅ 已添加关系：${source} → ${target}`);
+        }
+        
+        function deleteSelected() {
+            if (!selectedNode) {
+                showStatus('❌ 请先选择要删除的节点!');
+                return;
+            }
+            
+            if (!confirm(`确定要删除节点 "${selectedNode.label}" 及其所有关系吗？`)) return;
+            
+            graphData.nodes = graphData.nodes.filter(n => n.id !== selectedNode.id);
+            graphData.links = graphData.links.filter(l => l.source !== selectedNode.id && l.target !== selectedNode.id);
+            
+            selectedNode = null;
+            initGraph();
+            updateNodeList();
+            updateStats();
+            updateLinkSelects();
+            clearSelection();
+            showStatus('🗑️ 节点已删除');
+        }
+        
+        function updateNode() {
+            if (!selectedNode) {
+                showStatus('❌ 请先选择要更新的节点!');
+                return;
+            }
+            
+            const id = document.getElementById('editId').value;
+            const label = document.getElementById('editLabel').value;
+            const type = document.getElementById('editType').value;
+            const size = parseInt(document.getElementById('editSize').value);
+            
+            // 检查 ID 冲突
+            if (id !== selectedNode.id && graphData.nodes.some(n => n.id === id)) {
+                showStatus('❌ ID 已存在!');
+                return;
+            }
+            
+            selectedNode.id = id;
+            selectedNode.label = label;
+            selectedNode.type = type;
+            selectedNode.size = size;
+            
+            // 更新关系中的引用
+            graphData.links.forEach(l => {
+                if (l.source === selectedNode.id) l.source = id;
+                if (l.target === selectedNode.id) l.target = id;
+            });
+            
+            initGraph();
+            updateNodeList();
+            updateLinkSelects();
+            showStatus('✅ 节点已更新');
+        }
+        
+        function clearSelection() {
+            selectedNode = null;
+            document.querySelectorAll('.node-item').forEach(el => el.classList.remove('selected'));
+            document.getElementById('editId').value = '';
+            document.getElementById('editLabel').value = '';
+            document.getElementById('editSize').value = 25;
+            document.getElementById('sizeValue').textContent = '25';
+        }
+        
+        function autoLayout() {
+            const svg = d3.select("#graphCanvas");
+            const width = svg.node().clientWidth;
+            const height = svg.node().clientHeight;
+            
+            graphData.nodes.forEach((node, i) => {
+                const angle = (2 * Math.PI * i) / graphData.nodes.length;
+                const radius = Math.min(width, height) * 0.35;
+                node.x = width / 2 + radius * Math.cos(angle);
+                node.y = height / 2 + radius * Math.sin(angle);
+            });
+            
+            initGraph();
+            showStatus('🔄 已自动布局');
+        }
+        
+        function saveGraph() {
+            const json = JSON.stringify(graphData, null, 2);
+            const blob = new Blob([json], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `LIG-Graph-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showStatus('💾 图谱已保存');
+        }
+        
+        function showStatus(message) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+        
+        // 滑块更新
+        document.getElementById('editSize').addEventListener('input', function() {
+            document.getElementById('sizeValue').textContent = this.value;
+        });
+        
+        // 初始化
+        window.addEventListener('load', () => {
+            initColorPicker();
+            setTimeout(loadSample, 500);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,177 @@
+{
+  "timestamp": "2026-03-15T23:56:37.367508",
+  "overall_status": "warning",
+  "checks": {
+    "tools": {
+      "total": 78,
+      "healthy": 30,
+      "warnings": 0,
+      "errors": 0,
+      "details": [
+        {
+          "name": "active-learning-trigger.py",
+          "status": "ok",
+          "response_time_ms": 149.74499999999998
+        },
+        {
+          "name": "anomaly_detector.py",
+          "status": "ok",
+          "response_time_ms": 164.199
+        },
+        {
+          "name": "async_executor.py",
+          "status": "ok",
+          "response_time_ms": 680.9
+        },
+        {
+          "name": "automation_orchestrator.py",
+          "status": "ok",
+          "response_time_ms": 245.218
+        },
+        {
+          "name": "autonomous_decision.py",
+          "status": "ok",
+          "response_time_ms": 274.90799999999996
+        },
+        {
+          "name": "auto_data_cleaner.py",
+          "status": "ok",
+          "response_time_ms": 281.36100000000005
+        },
+        {
+          "name": "auto_deployer.py",
+          "status": "ok",
+          "response_time_ms": 186.556
+        },
+        {
+          "name": "auto_distill.py",
+          "status": "ok",
+          "response_time_ms": 270.46500000000003
+        },
+        {
+          "name": "auto_signal_extractor.py",
+          "status": "ok",
+          "response_time_ms": 148.71300000000002
+        },
+        {
+          "name": "auto_test_generator.py",
+          "status": "ok",
+          "response_time_ms": 176.76
+        },
+        {
+          "name": "auto_test_runner.py",
+          "status": "ok",
+          "response_time_ms": 404.873
+        },
+        {
+          "name": "batch_card_generator.py",
+          "status": "ok",
+          "response_time_ms": 259.394
+        },
+        {
+          "name": "cache_manager.py",
+          "status": "ok",
+          "response_time_ms": 177.07999999999998
+        },
+        {
+          "name": "code_quality_reviewer.py",
+          "status": "ok",
+          "response_time_ms": 243.839
+        },
+        {
+          "name": "code_reviewer.py",
+          "status": "ok",
+          "response_time_ms": 278.211
+        },
+        {
+          "name": "config_manager.py",
+          "status": "ok",
+          "response_time_ms": 176.101
+        },
+        {
+          "name": "critic_auto_fix.py",
+          "status": "ok",
+          "response_time_ms": 239.484
+        },
+        {
+          "name": "cron_manager.py",
+          "status": "ok",
+          "response_time_ms": 154.526
+        },
+        {
+          "name": "daily_brief_generator.py",
+          "status": "ok",
+          "response_time_ms": 160.399
+        },
+        {
+          "name": "dashboard_anomaly_alerts.py",
+          "status": "ok",
+          "response_time_ms": 173.68800000000002
+        },
+        {
+          "name": "dashboard_decision_timeline.py",
+          "status": "ok",
+          "response_time_ms": 176.386
+        },
+        {
+          "name": "dashboard_health_widget.py",
+          "status": "ok",
+          "response_time_ms": 209.274
+        },
+        {
+          "name": "dashboard_integration.py",
+          "status": "ok",
+          "response_time_ms": 122.15299999999999
+        },
+        {
+          "name": "decision_optimizer.py",
+          "status": "ok",
+          "response_time_ms": 197.51
+        },
+        {
+          "name": "dialog_integrator.py",
+          "status": "ok",
+          "response_time_ms": 249.554
+        },
+        {
+          "name": "download_qwen_model.py",
+          "status": "ok",
+          "response_time_ms": 152.439
+        },
+        {
+          "name": "effect_tracker.py",
+          "status": "ok",
+          "response_time_ms": 162.495
+        },
+        {
+          "name": "error_analyzer.py",
+          "status": "ok",
+          "response_time_ms": 184.287
+        },
+        {
+          "name": "feishu_notification.py",
+          "status": "ok",
+          "response_time_ms": 132.708
+        },
+        {
+          "name": "feishu_report_generator.py",
+          "status": "ok",
+          "response_time_ms": 188.625
+        }
+      ]
+    },
+    "git": {
+      "status": "warning",
+      "branch": "master",
+      "commits_behind": 0,
+      "uncommitted_changes": 6
+    },
+    "disk": {
+      "status": "ok",
+      "total_gb": 731.66,
+      "used_gb": 376.41,
+      "free_gb": 355.25,
+      "percent_used": 51.4
+    }
+  }
+}

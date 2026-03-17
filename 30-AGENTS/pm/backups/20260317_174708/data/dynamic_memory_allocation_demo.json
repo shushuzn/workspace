@@ -1,0 +1,25 @@
+{
+  "timestamp": "2026-03-16T17:47:00.950351",
+  "configuration": {
+    "total_capacity_mb": 512,
+    "l1_ratio": 0.6,
+    "l2_ratio": 0.3,
+    "l3_ratio": 0.1
+  },
+  "statistics": {
+    "total_capacity_bytes": 536870912,
+    "used_bytes": 518587,
+    "available_bytes": 536352325,
+    "utilization": 0.0009659435600042343,
+    "l1_usage": 0.0016099059343399518,
+    "l2_usage": 0.0,
+    "l3_usage": 0.0,
+    "allocation_count": 20,
+    "deallocation_count": 0,
+    "gc_count": 3,
+    "avg_access_time_ms": 0.6309093592361262,
+    "hit_rate": 1.0
+  },
+  "allocations": 20,
+  "memory_reduction": 0.0
+}

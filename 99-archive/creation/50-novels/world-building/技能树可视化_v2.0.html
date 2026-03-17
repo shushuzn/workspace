@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>林砚的认知技能树 - 第 7 章</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Microsoft YaHei'; background: linear-gradient(135deg, #1a1a2e, #16213e); min-height: 100vh; padding: 40px 20px; color: #fff; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        h1 { text-align: center; font-size: 2.5em; margin-bottom: 10px; background: linear-gradient(45deg, #00d9ff, #00ff88); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { text-align: center; color: #888; margin-bottom: 40px; }
+        .progress-bar { background: rgba(255,255,255,0.1); border-radius: 10px; padding: 20px; margin-bottom: 40px; }
+        .progress-track { background: rgba(255,255,255,0.1); border-radius: 5px; height: 20px; overflow: hidden; }
+        .progress-fill { background: linear-gradient(90deg, #00d9ff, #00ff88); height: 100%; border-radius: 5px; width: 13.9%; }
+        .skill-tree { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; }
+        .skill-layer { background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.1); border-radius: 15px; padding: 25px; }
+        .skill-layer.completed { border-color: #00ff88; }
+        .skill-layer.in-progress { border-color: #ffd700; }
+        .layer-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .status { padding: 5px 12px; border-radius: 20px; font-size: 0.85em; }
+        .status-completed { background: #00ff88; color: #000; }
+        .status-progress { background: #ffd700; color: #000; }
+        .status-locked { background: rgba(255,255,255,0.2); color: #888; }
+        .skill-node { background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px; margin-bottom: 10px; }
+        .skill-name { color: #00d9ff; margin-bottom: 8px; }
+        .skill-desc { color: #aaa; font-size: 0.9em; line-height: 1.6; margin-bottom: 10px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin-top: 40px; }
+        .stat { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 10px; text-align: center; }
+        .stat-value { font-size: 2em; color: #00d9ff; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎮 林砚的认知技能树</h1>
+        <p class="subtitle">《学渣逆袭：从月考垫底到行业领军》</p>
+        
+        <div class="progress-bar">
+            <div>总进度：13.9%</div>
+            <div class="progress-track"><div class="progress-fill"></div></div>
+        </div>
+        
+        <div class="skill-tree">
+            <div class="skill-layer completed">
+                <div class="layer-header">
+                    <span>第一层 · 蒙昧</span>
+                    <span class="status status-completed">✅ 已突破</span>
+                </div>
+                <div class="skill-node">
+                    <div class="skill-name">【自我认知】LV.3</div>
+                    <div class="skill-desc">能识别自己的情绪、状态、能力边界。不再抱怨环境，开始问"我能做什么"。</div>
+                    <div style="background:rgba(255,255,255,0.1);border-radius:5px;height:8px;"><div style="background:linear-gradient(90deg,#00d9ff,#00ff88);height:100%;border-radius:5px;width:50%;"></div></div>
+                    <div style="font-size:0.85em;color:#888;margin-top:5px;">50/100 XP</div>
+                </div>
+            </div>
+            
+            <div class="skill-layer in-progress">
+                <div class="layer-header">
+                    <span>第二层 · 觉醒</span>
+                    <span class="status status-progress">🔄 突破中</span>
+                </div>
+                <div class="skill-node">
+                    <div class="skill-name">【专注力】LV.1</div>
+                    <div class="skill-desc">屏蔽干扰，效率×3。学习时自动屏蔽手机/噪音。</div>
+                    <div style="background:rgba(255,255,255,0.1);border-radius:5px;height:8px;"><div style="background:linear-gradient(90deg,#00d9ff,#00ff88);height:100%;border-radius:5px;width:15%;"></div></div>
+                    <div style="font-size:0.85em;color:#888;margin-top:5px;">15/100 XP</div>
+                </div>
+            </div>
+            
+            <div class="skill-layer">
+                <div class="layer-header">
+                    <span>第三层 · 精通</span>
+                    <span class="status status-locked">⬜ 未解锁</span>
+                </div>
+                <div class="skill-node">
+                    <div class="skill-name">【学习力】⬜</div>
+                    <div class="skill-desc">快速理解新概念，效率×5。能识别题目背后的核心模型。</div>
+                    <div style="background:rgba(255,255,255,0.1);border-radius:5px;height:8px;"><div style="background:linear-gradient(90deg,#00d9ff,#00ff88);height:100%;border-radius:5px;width:15%;"></div></div>
+                    <div style="font-size:0.85em;color:#888;margin-top:5px;">15/100 XP (费曼技巧)</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="stats">
+            <div class="stat"><div class="stat-value">7</div><div>当前章节</div></div>
+            <div class="stat"><div class="stat-value">1/9</div><div>已突破层数</div></div>
+            <div class="stat"><div class="stat-value">LV.3</div><div>自我认知等级</div></div>
+            <div class="stat"><div class="stat-value">13.9%</div><div>总进度</div></div>
+        </div>
+        
+        <p style="text-align:center;margin-top:40px;color:#888">更新时间：2026-03-10 09:30</p>
+    </div>
+</body>
+</html>

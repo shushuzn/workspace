@@ -1,0 +1,54 @@
+# GitHub Sync 配置文件
+
+# 仓库配置
+repo:
+  path: D:\OpenClaw\workspace  # 本地仓库路径
+  remote: https://github.com/shushuzn/obsidian-sync.git  # 远程仓库
+  branch: main  # 目标分支
+
+# 同步配置
+sync:
+  interval_minutes: 15  # 同步间隔
+  auto_push: true  # 自动推送
+  auto_pull: true  # 同步前先拉取
+  on_file_change: true  # 文件变化时立即同步
+
+# 文件监听
+watch:
+  patterns:
+    - "*.md"
+    - "*.json"
+    - "*.yaml"
+    - "*.yml"
+  ignore:
+    - "*.log"
+    - "*.tmp"
+    - ".git/"
+    - "node_modules/"
+    - "_archive/"
+    - "Archive/"
+
+# 提交配置
+commit:
+  prefix: "[auto-sync]"
+  author_name: "AI Assistant"
+  author_email: "assistant@local"
+  include_file_list: true  # 提交信息包含文件列表
+
+# 通知配置
+notify:
+  on_success: false  # 成功时不通知
+  on_failure: true  # 失败时通知
+  on_conflict: true  # 冲突时通知
+
+# 冲突处理
+conflict:
+  auto_resolve: false  # 不自动解决冲突
+  backup_local: true  # 保留本地版本备份
+  notify_user: true  # 通知用户手动处理
+
+# 定时任务
+schedule:
+  enabled: true
+  cron: "0 */2 * * *"  # 每 2 小时执行一次
+  timezone: "Asia/Shanghai"

@@ -1,0 +1,43 @@
+# 数据湖配置
+data_lake:
+  # 数据湖目录
+  base_dir: "D:\\OpenClaw\\workspace\\data-lake"
+  
+  # 分层配置
+  layers:
+    raw:
+      enabled: true
+      source: "obsidian-vault/Arxiv/daily/{date}/raw/papers.json"
+    processed:
+      enabled: true
+      sources:
+        - "obsidian-vault/Arxiv/daily/{date}/classified/all_classified.json"
+        - "obsidian-vault/Arxiv/daily/{date}/trends/trends.json"
+        - "obsidian-vault/Arxiv/daily/{date}/clusters/clusters.json"
+    curated:
+      enabled: true
+      sources:
+        - "reports/AUTO-RESEARCH-REPORT-{date}.md"
+        - "knowledge-graph/materials-kg.json"
+    analytics:
+      enabled: true
+      auto_generate: true
+  
+  # 数据保留
+  retention:
+    raw_days: 90
+    processed_days: 180
+    curated_days: 365
+    analytics_days: 730
+  
+  # 运行时间
+  schedule:
+    enabled: true
+    cron: "0 6 * * *"  # 每日 06:00
+  
+  # 日志配置
+  logging:
+    level: INFO
+    file: logs/data-lake.log
+    max_size: 10MB
+    backup_count: 7

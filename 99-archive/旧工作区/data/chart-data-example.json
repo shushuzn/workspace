@@ -1,0 +1,52 @@
+{
+  "figure_id": "Figure 1",
+  "page_number": 3,
+  "metadata": {
+    "chart_type": "line",
+    "title": null,
+    "x_axis_label": "Temperature",
+    "y_axis_label": "Conductivity",
+    "x_axis_unit": "K",
+    "y_axis_unit": "S/m",
+    "x_range": [
+      0,
+      100
+    ],
+    "y_range": [
+      0,
+      1000
+    ],
+    "num_series": 1,
+    "series_names": null
+  },
+  "data_points": [
+    [
+      {
+        "x": 16.6667,
+        "y": 222.2222,
+        "series": null
+      },
+      {
+        "x": 33.3333,
+        "y": 333.3333,
+        "series": null
+      },
+      {
+        "x": 50.0,
+        "y": 444.4444,
+        "series": null
+      },
+      {
+        "x": 66.6667,
+        "y": 555.5556,
+        "series": null
+      },
+      {
+        "x": 83.3333,
+        "y": 666.6667,
+        "series": null
+      }
+    ]
+  ],
+  "confidence": 0.85
+}

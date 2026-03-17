@@ -1,0 +1,17 @@
+{
+  "widget": "decision_timeline",
+  "version": "1.0",
+  "updated_at": "2026-03-15T09:44:05.346574",
+  "summary": {
+    "total_decisions": 0,
+    "approval_rate": "0%",
+    "auto_rate": "0%"
+  },
+  "outcomes": {
+    "approved": 0,
+    "rejected": 0,
+    "pending": 0
+  },
+  "recent_decisions": [],
+  "trend": "stable"
+}

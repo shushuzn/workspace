@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIG 知识图谱 - 智能布局</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px}
+        .container{max-width:1400px;margin:0 auto;background:rgba(255,255,255,0.95);border-radius:12px;padding:30px;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
+        h1{font-size:24px;color:#333;margin-bottom:20px;border-bottom:3px solid #667eea;padding-bottom:10px}
+        .intro{font-size:14px;color:#666;margin-bottom:20px;line-height:1.6}
+        .layout-panel{background:#f5f5f5;padding:20px;border-radius:8px;margin-bottom:20px}
+        .layout-panel h2{font-size:16px;margin-bottom:15px;color:#333}
+        .layout-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:15px}
+        .layout-card{background:white;border:2px solid #e0e0e0;border-radius:8px;padding:15px;cursor:pointer;transition:border-color 0.3s,box-shadow 0.3s}
+        .layout-card:hover{border-color:#667eea;box-shadow:0 4px 12px rgba(102,126,234,0.2)}
+        .layout-card.active{border-color:#667eea;background:#e8f0fe}
+        .layout-card .icon{font-size:32px;margin-bottom:10px}
+        .layout-card h3{font-size:14px;margin-bottom:5px;color:#333}
+        .layout-card p{font-size:11px;color:#666;line-height:1.4}
+        .control-bar{background:#fff3e0;padding:15px;border-radius:8px;margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+        .control-group{display:flex;align-items:center;gap:8px}
+        .control-group label{font-size:13px;color:#555}
+        .control-group input[type="range"]{width:100px}
+        .control-group select{padding:6px;border:1px solid #ddd;border-radius:4px;font-size:13px}
+        button{background:#667eea;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:14px;transition:background 0.3s}
+        button:hover{background:#5568d3}button:disabled{background:#ccc;cursor:not-allowed}
+        .preview-container{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+        .graph-preview{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:15px;min-height:400px}
+        .graph-preview h3{font-size:15px;margin-bottom:10px;color:#333}
+        #graphCanvas{width:100%;height:350px;background:white;border-radius:4px;overflow:hidden}
+        .layout-info{background:white;border:1px solid #e0e0e0;border-radius:8px;padding:15px}
+        .layout-info h3{font-size:15px;margin-bottom:10px;color:#333}
+        .info-item{padding:8px 0;border-bottom:1px solid #f0f0f0;font-size:13px}
+        .info-item:last-child{border-bottom:none}
+        .info-label{color:#666;margin-right:10px}
+        .info-value{font-weight:bold;color:#667eea}
+        .status{padding:10px;background:#e3f2fd;border-radius:6px;margin-bottom:15px;font-size:13px;color:#1565c0;display:none}
+        .checkbox-group{display:flex;flex-wrap:wrap;gap:15px;margin-top:10px}
+        .checkbox-group label{display:flex;align-items:center;font-size:13px;color:#555;cursor:pointer}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔀 LIG 知识图谱 - 智能布局切换</h1>
+        <p class="intro">支持多种布局算法，一键切换图谱布局，包括力导向、层次、环形、圆形等布局方式。</p>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="layout-panel">
+            <h2>📐 选择布局算法</h2>
+            <div class="layout-grid" id="layoutGrid"></div>
+        </div>
+        
+        <div class="control-bar">
+            <div class="control-group">
+                <label>动画速度:</label>
+                <input type="range" id="animSpeed" min="100" max="2000" step="100" value="500">
+                <span id="speedDisplay">500ms</span>
+            </div>
+            <div class="control-group">
+                <label>节点间距:</label>
+                <input type="range" id="nodeSpacing" min="50" max="300" step="10" value="150">
+                <span id="spacingDisplay">150</span>
+            </div>
+            <div class="control-group">
+                <label><input type="checkbox" id="savePreference" checked> 保存偏好</label>
+            </div>
+            <button onclick="applyLayout()">✅ 应用布局</button>
+            <button onclick="resetLayout()">🔄 重置</button>
+            <button onclick="loadSample()">📊 加载示例</button>
+        </div>
+        
+        <div class="preview-container">
+            <div class="graph-preview">
+                <h3>📊 布局预览</h3>
+                <svg id="graphCanvas"></svg>
+            </div>
+            <div class="layout-info">
+                <h3>📝 布局信息</h3>
+                <div class="info-item">
+                    <span class="info-label">当前布局:</span>
+                    <span class="info-value" id="currentLayout">-</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">节点数:</span>
+                    <span class="info-value" id="nodeCount">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">关系数:</span>
+                    <span class="info-value" id="linkCount">0</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">动画:</span>
+                    <span class="info-value" id="animEnabled">启用</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">偏好:</span>
+                    <span class="info-value" id="preferenceStatus">已保存</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        // 布局算法定义
+        const layouts = {
+            force: {
+                name: '力导向布局',
+                icon: '🕸️',
+                desc: '基于物理模拟，节点相互排斥，边产生吸引力',
+                desc2: '适合：一般图谱，自然分布',
+                config: { charge: -300, distance: 150, strength: 0.1 }
+            },
+            hierarchical: {
+                name: '层次布局',
+                icon: '📊',
+                desc: '按层级排列，从上到下或从左到右',
+                desc2: '适合：组织结构，流程图',
+                config: { direction: 'TB', spacing: 100 }
+            },
+            circular: {
+                name: '圆形布局',
+                icon: '⭕',
+                desc: '所有节点排列在圆形上',
+                desc2: '适合：循环关系，对等网络',
+                config: { radius: 150 }
+            },
+            radial: {
+                name: '辐射布局',
+                icon: '🎯',
+                desc: '从中心向外辐射排列',
+                desc2: '适合：核心 - 边缘结构',
+                config: { startRadius: 50, endRadius: 200 }
+            },
+            grid: {
+                name: '网格布局',
+                icon: '📐',
+                desc: '节点按网格排列',
+                desc2: '适合：大量节点，整齐排列',
+                config: { rows: 0, cols: 0 }
+            },
+            cluster: {
+                name: '聚类布局',
+                icon: '🔮',
+                desc: '按类型分组聚类',
+                desc2: '适合：分类明显的图谱',
+                config: { clusterSpacing: 200 }
+            }
+        };
+        
+        let currentLayout = 'force';
+        let graphData = null;
+        let simulation = null;
+        
+        // 示例数据
+        const sampleData = {
+            nodes: [
+                {id:"LIG",label:"LIG",type:"Material",size:40},
+                {id:"PI",label:"PI",type:"Material",size:20},
+                {id:"PDMS",label:"PDMS",type:"Material",size:20},
+                {id:"CuO",label:"CuO",type:"Material",size:22},
+                {id:"Gas_Sensor",label:"气体传感器",type:"Device",size:25},
+                {id:"Neural_Probe",label:"神经探针",type:"Device",size:25},
+                {id:"Tumor_Patch",label:"肿瘤贴片",type:"Device",size:25},
+                {id:"Cu2+",label:"Cu²⁺",type:"Signal",size:20},
+                {id:"ROS",label:"ROS",type:"Signal",size:20},
+                {id:"Health",label:"健康监控",type:"Application",size:24}
+            ],
+            links: [
+                {source:"PI",target:"LIG",value:3},
+                {source:"PDMS",target:"LIG",value:2},
+                {source:"CuO",target:"LIG",value:2},
+                {source:"LIG",target:"Gas_Sensor",value:3},
+                {source:"LIG",target:"Neural_Probe",value:3},
+                {source:"LIG",target:"Tumor_Patch",value:3},
+                {source:"CuO",target:"Cu2+",value:2},
+                {source:"Cu2+",target:"ROS",value:2},
+                {source:"Tumor_Patch",target:"Health",value:2}
+            ]
+        };
+        
+        const colorMap = {
+            "Material":"#FF6B6B",
+            "Device":"#4ECDC4",
+            "Signal":"#45B7D1",
+            "Application":"#98D8C8"
+        };
+        
+        function initLayoutCards() {
+            const grid = document.getElementById('layoutGrid');
+            grid.innerHTML = '';
+            
+            Object.entries(layouts).forEach(([key, layout]) => {
+                const card = document.createElement('div');
+                card.className = `layout-card${key === currentLayout ? ' active' : ''}`;
+                card.onclick = () => selectLayout(key);
+                card.innerHTML = `
+                    <div class="icon">${layout.icon}</div>
+                    <h3>${layout.name}</h3>
+                    <p>${layout.desc}</p>
+                    <p>${layout.desc2}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+        
+        function selectLayout(layoutKey) {
+            currentLayout = layoutKey;
+            document.querySelectorAll('.layout-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            event.currentTarget.classList.add('active');
+            document.getElementById('currentLayout').textContent = layouts[layoutKey].name;
+            
+            if (graphData) {
+                applyLayout();
+            }
+        }
+        
+        function loadSample() {
+            graphData = JSON.parse(JSON.stringify(sampleData));
+            updateInfo();
+            applyLayout();
+            showStatus('✅ 示例数据已加载');
+        }
+        
+        function updateInfo() {
+            if (!graphData) return;
+            document.getElementById('nodeCount').textContent = graphData.nodes.length;
+            document.getElementById('linkCount').textContent = graphData.links.length;
+        }
+        
+        function applyLayout() {
+            if (!graphData) {
+                showStatus('❌ 请先加载数据!');
+                return;
+            }
+            
+            const svg = d3.select("#graphCanvas");
+            svg.selectAll("*").remove();
+            
+            const width = svg.node().clientWidth;
+            const height = svg.node().clientHeight;
+            const animSpeed = parseInt(document.getElementById('animSpeed').value);
+            
+            // 根据布局类型创建不同的力导向
+            switch(currentLayout) {
+                case 'force':
+                    createForceLayout(svg, width, height, animSpeed);
+                    break;
+                case 'hierarchical':
+                    createHierarchicalLayout(svg, width, height, animSpeed);
+                    break;
+                case 'circular':
+                    createCircularLayout(svg, width, height, animSpeed);
+                    break;
+                case 'radial':
+                    createRadialLayout(svg, width, height, animSpeed);
+                    break;
+                case 'grid':
+                    createGridLayout(svg, width, height, animSpeed);
+                    break;
+                case 'cluster':
+                    createClusterLayout(svg, width, height, animSpeed);
+                    break;
+            }
+            
+            // 保存偏好
+            if (document.getElementById('savePreference').checked) {
+                localStorage.setItem('lig-layout-preference', JSON.stringify({
+                    layout: currentLayout,
+                    animSpeed: animSpeed,
+                    nodeSpacing: parseInt(document.getElementById('nodeSpacing').value)
+                }));
+                document.getElementById('preferenceStatus').textContent = '已保存';
+            }
+            
+            showStatus(`✅ 已应用 ${layouts[currentLayout].name}`);
+        }
+        
+        function createForceLayout(svg, width, height, duration) {
+            const charge = -300;
+            const distance = parseInt(document.getElementById('nodeSpacing').value);
+            
+            simulation = d3.forceSimulation(graphData.nodes)
+                .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(distance))
+                .force("charge", d3.forceManyBody().strength(charge))
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collide", d3.forceCollide().radius(d => d.size + 5));
+            
+            drawGraph(svg, duration);
+            
+            simulation.on("tick", () => {
+                updatePositions(svg);
+            });
+        }
+        
+        function createHierarchicalLayout(svg, width, height, duration) {
+            // 简单层次布局 - 按类型分组
+            const types = [...new Set(graphData.nodes.map(n => n.type))];
+            const typeHeight = height / (types.length + 1);
+            
+            graphData.nodes.forEach((node, i) => {
+                const typeIndex = types.indexOf(node.type);
+                node.x = width / 2 + (Math.random() - 0.5) * width * 0.6;
+                node.y = typeHeight * (typeIndex + 1);
+                node.fx = node.x;
+                node.fy = node.y;
+            });
+            
+            drawGraph(svg, duration);
+        }
+        
+        function createCircularLayout(svg, width, height, duration) {
+            const radius = Math.min(width, height) * 0.35;
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const angleStep = (2 * Math.PI) / graphData.nodes.length;
+            
+            graphData.nodes.forEach((node, i) => {
+                const angle = i * angleStep;
+                node.x = centerX + radius * Math.cos(angle);
+                node.y = centerY + radius * Math.sin(angle);
+                node.fx = node.x;
+                node.fy = node.y;
+            });
+            
+            drawGraph(svg, duration);
+        }
+        
+        function createRadialLayout(svg, width, height, duration) {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const startRadius = 50;
+            const endRadius = Math.min(width, height) * 0.4;
+            
+            // 中心节点 (LIG)
+            const centerNode = graphData.nodes.find(n => n.id === "LIG");
+            if (centerNode) {
+                centerNode.x = centerX;
+                centerNode.y = centerY;
+                centerNode.fx = centerX;
+                centerNode.fy = centerY;
+            }
+            
+            // 其他节点辐射排列
+            const otherNodes = graphData.nodes.filter(n => n.id !== "LIG");
+            const angleStep = (2 * Math.PI) / otherNodes.length;
+            
+            otherNodes.forEach((node, i) => {
+                const angle = i * angleStep;
+                const radius = startRadius + (endRadius - startRadius) * Math.random();
+                node.x = centerX + radius * Math.cos(angle);
+                node.y = centerY + radius * Math.sin(angle);
+                node.fx = node.x;
+                node.fy = node.y;
+            });
+            
+            drawGraph(svg, duration);
+        }
+        
+        function createGridLayout(svg, width, height, duration) {
+            const nodeCount = graphData.nodes.length;
+            const cols = Math.ceil(Math.sqrt(nodeCount));
+            const rows = Math.ceil(nodeCount / cols);
+            const cellWidth = width / cols;
+            const cellHeight = height / rows;
+            
+            graphData.nodes.forEach((node, i) => {
+                const col = i % cols;
+                const row = Math.floor(i / cols);
+                node.x = cellWidth * (col + 0.5);
+                node.y = cellHeight * (row + 0.5);
+                node.fx = node.x;
+                node.fy = node.y;
+            });
+            
+            drawGraph(svg, duration);
+        }
+        
+        function createClusterLayout(svg, width, height, duration) {
+            const types = [...new Set(graphData.nodes.map(n => n.type))];
+            const clusterRadius = Math.min(width, height) * 0.25;
+            const clusterSpacing = Math.min(width, height) * 0.35;
+            
+            // 为每个类型分配一个聚类中心
+            const clusterCenters = {};
+            types.forEach((type, i) => {
+                const angle = (2 * Math.PI * i) / types.length;
+                clusterCenters[type] = {
+                    x: width / 2 + clusterSpacing * Math.cos(angle),
+                    y: height / 2 + clusterSpacing * Math.sin(angle)
+                };
+            });
+            
+            // 将节点分配到聚类中心附近
+            graphData.nodes.forEach(node => {
+                const center = clusterCenters[node.type];
+                const angle = Math.random() * 2 * Math.PI;
+                const radius = Math.random() * clusterRadius;
+                node.x = center.x + radius * Math.cos(angle);
+                node.y = center.y + radius * Math.sin(angle);
+                node.fx = node.x;
+                node.fy = node.y;
+            });
+            
+            drawGraph(svg, duration);
+        }
+        
+        function drawGraph(svg, duration) {
+            // 绘制连线
+            const links = svg.append("g")
+                .selectAll("line")
+                .data(graphData.links)
+                .enter().append("line")
+                .attr("stroke", "#999")
+                .attr("stroke-width", d => Math.sqrt(d.value) * 2)
+                .attr("stroke-opacity", 0.6);
+            
+            // 绘制节点
+            const nodes = svg.append("g")
+                .selectAll("circle")
+                .data(graphData.nodes)
+                .enter().append("circle")
+                .attr("r", d => d.size)
+                .attr("fill", d => colorMap[d.type] || "#999")
+                .attr("stroke", "#fff")
+                .attr("stroke-width", 2)
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+            
+            // 添加标签
+            const labels = svg.append("g")
+                .selectAll("text")
+                .data(graphData.nodes)
+                .enter().append("text")
+                .attr("dy", d => d.size + 15)
+                .attr("text-anchor", "middle")
+                .attr("fill", "#333")
+                .attr("font-size", "12px")
+                .text(d => d.label);
+            
+            // 动画过渡
+            if (duration > 0) {
+                links.transition().duration(duration);
+                nodes.transition().duration(duration);
+                labels.transition().duration(duration);
+            }
+        }
+        
+        function updatePositions(svg) {
+            svg.selectAll("line")
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+            
+            svg.selectAll("circle")
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+            
+            svg.selectAll("text")
+                .attr("x", d => d.x)
+                .attr("y", d => d.y);
+        }
+        
+        function dragstarted(event, d) {
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        function dragended(event, d) {
+            d.fx = null;
+            d.fy = null;
+        }
+        
+        function resetLayout() {
+            currentLayout = 'force';
+            initLayoutCards();
+            document.getElementById('animSpeed').value = 500;
+            document.getElementById('speedDisplay').textContent = '500ms';
+            document.getElementById('nodeSpacing').value = 150;
+            document.getElementById('spacingDisplay').textContent = '150';
+            
+            if (graphData) {
+                applyLayout();
+            }
+            showStatus('🔄 布局已重置');
+        }
+        
+        function showStatus(message) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+        
+        // 更新滑块显示
+        document.getElementById('animSpeed').addEventListener('input', function() {
+            document.getElementById('speedDisplay').textContent = this.value + 'ms';
+        });
+        
+        document.getElementById('nodeSpacing').addEventListener('input', function() {
+            document.getElementById('spacingDisplay').textContent = this.value;
+        });
+        
+        // 加载保存的偏好
+        function loadPreference() {
+            const pref = JSON.parse(localStorage.getItem('lig-layout-preference'));
+            if (pref) {
+                currentLayout = pref.layout;
+                document.getElementById('animSpeed').value = pref.animSpeed;
+                document.getElementById('speedDisplay').textContent = pref.animSpeed + 'ms';
+                document.getElementById('nodeSpacing').value = pref.nodeSpacing;
+                document.getElementById('spacingDisplay').textContent = pref.nodeSpacing;
+                initLayoutCards();
+                document.getElementById('currentLayout').textContent = layouts[currentLayout].name;
+            }
+        }
+        
+        // 初始化
+        window.addEventListener('load', () => {
+            initLayoutCards();
+            loadPreference();
+            setTimeout(loadSample, 500);
+        });
+    </script>
+</body>
+</html>

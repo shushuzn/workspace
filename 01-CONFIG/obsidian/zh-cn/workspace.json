@@ -1,0 +1,220 @@
+{
+  "main": {
+    "id": "c9a5fe6573a2d323",
+    "type": "split",
+    "children": [
+      {
+        "id": "cc81dd8abe816147",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "814da0d86f02f272",
+            "type": "leaf",
+            "state": {
+              "type": "graph",
+              "state": {},
+              "icon": "lucide-git-fork",
+              "title": "关系图谱"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "a43daf1866888688",
+    "type": "split",
+    "children": [
+      {
+        "id": "3596f6e3bed7ae18",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b8fa064c1cbe3e3f",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "c55591c7b4cc222a",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "12583a09158bd3d7",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "528a026f17349211",
+    "type": "split",
+    "children": [
+      {
+        "id": "b6841463e884169f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "a7e2469d4304476b",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "656808cd97f65d6e",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "7b85d0d1b23258f3",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "a374d6a51736e327",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "bf6cbe5a9c322670",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false,
+      "random-note:开始漫游笔记": false,
+      "markdown-importer:打开 Markdown 格式转换器": false
+    }
+  },
+  "active": "814da0d86f02f272",
+  "lastOpenFiles": [
+    "Medium/20260302-224155-youre-not-rewiring-your-brain-but-you-are-changing.md",
+    "Medium/Archive/2026-03/20260302-225533-69baef1361fd.md",
+    "Medium/20260302-172813-无标题.md",
+    "Medium/20260302-172810-无标题.md",
+    "Medium/20260302-172807-无标题.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23359v1_SeeThrough3D Occlusion Aware 3D Control in Text-t.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23359v1_SeeThrough3D-Occlusion-Aware-3D-Control-in-Text-to-1.md",
+    "Medium/Archive/AI-ML/2026-02-25_2602.21761v1_Survey-on-Neural-Routing-Solvers.md",
+    "Medium/Archive/Vision/2026-02-26_2602.23357v1_Sensor-Generalization-for-Adaptive-Sensing-in-Even.md",
+    "Medium/Archive/INDEX.md",
+    "Medium/Archive/AI-ML/2026-02-25_2602.21761v1_Survey-on-Neural-Routing-Solvers-1.md",
+    "Medium/Senior Developers The World Owes You an Apology.md",
+    "Medium/How AI Changed the Way I Engineer Software.md",
+    "Medium/I Just Watch AI Write Code All Day.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23360v1_Model Agreement via Anchoring.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23341v1_Mean-Estimation-from-Coarse-Data-Characterizations-1.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23336v1_Differentiable-Zero-One-Loss-via-Hypersimplex-Proj-1.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23329v1_LLM-Novice-Uplift-on-Dual-Use-In-Silico-Biology-Ta.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23335v1_Understanding-Usage-and-Engagement-in-AI-Powered-S-1.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23286v1_SPARTA-Scalable-and-Principled-Benchmark-of-Tree-S-1.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23116v1_Regularized-Online-RLHF-with-Generalized-Bilinear-1.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23023v1_Low-degree-Lower-bounds-for-clustering-in-moderate.md",
+    "Medium/Archive/AI-ML/2026-02-25_2602.21995v1_Outpatient-Appointment-Scheduling-Optimization-wit-1.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23197v1_Fine-Tuning-Without-Forgetting-In-Context-Learning.md",
+    "Medium/Archive/AI-ML/2026-02-26_2602.23116v1_Regularized-Online-RLHF-with-Generalized-Bilinear.md",
+    "Medium/Archive/AI-ML/2026-02-25_2602.21995v1_Outpatient-Appointment-Scheduling-Optimization-wit.md",
+    "Medium/upload-to-github.py",
+    "Medium/sync-to-flomo.py",
+    "Medium/Archive/Vision",
+    "Medium/Archive/Reports",
+    "Medium/Archive/NLP",
+    "Medium/Archive/Medium-Articles",
+    "Medium/Archive/GitHub-Repos",
+    "Medium/Archive/General",
+    "Medium/Archive/Data-Science",
+    "Medium/Archive/Computer-Vision"
+  ]
+}

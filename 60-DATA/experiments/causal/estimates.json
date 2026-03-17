@@ -1,0 +1,1066 @@
+{
+  "estimates": [
+    {
+      "method": "difference_in_differences",
+      "effect_size": 1.7453,
+      "standard_error": 0.3699,
+      "t_statistic": 4.718,
+      "p_value": 0.0,
+      "confidence_interval": [
+        1.0203,
+        2.4703
+      ],
+      "assumptions": [
+        "Parallel trends assumption",
+        "No spillover effects",
+        "SUTVA (Stable Unit Treatment Value Assumption)",
+        "No time-varying confounders"
+      ],
+      "validity_score": 0.965,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***)",
+      "sample_size": 0,
+      "model_specification": "",
+      "se_calculation": "",
+      "assumption_tests": {},
+      "robustness_checks": [],
+      "risk_warnings": [],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "instrumental_variables",
+      "effect_size": 0.5894,
+      "standard_error": 0.1001,
+      "t_statistic": 5.887,
+      "p_value": 0.0,
+      "confidence_interval": [
+        0.3932,
+        0.7857
+      ],
+      "assumptions": [
+        "Relevance: Instrument affects treatment",
+        "Exclusion: Instrument only affects outcome through treatment",
+        "Exogeneity: Instrument is uncorrelated with error term",
+        "First-stage F-statistic: 99.75 (need >10)"
+      ],
+      "validity_score": 1.0,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***)",
+      "sample_size": 0,
+      "model_specification": "",
+      "se_calculation": "",
+      "assumption_tests": {},
+      "robustness_checks": [],
+      "risk_warnings": [],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "regression_discontinuity",
+      "effect_size": 10.223,
+      "standard_error": 1.2114,
+      "t_statistic": 8.439,
+      "p_value": 0.0,
+      "confidence_interval": [
+        7.8486,
+        12.5974
+      ],
+      "assumptions": [
+        "No manipulation of running variable",
+        "Continuity of potential outcomes at cutoff",
+        "Bandwidth: 1.736",
+        "Observations: 16 left, 12 right",
+        "Density ratio: 0.75 ✅"
+      ],
+      "validity_score": 0.448,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***)",
+      "sample_size": 0,
+      "model_specification": "",
+      "se_calculation": "",
+      "assumption_tests": {},
+      "robustness_checks": [],
+      "risk_warnings": [],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "difference_in_differences",
+      "effect_size": 1.7453,
+      "standard_error": 0.5231,
+      "t_statistic": 3.336,
+      "p_value": 0.0008,
+      "confidence_interval": [
+        0.72,
+        2.7707
+      ],
+      "assumptions": [
+        "Parallel trends assumption",
+        "No spillover effects",
+        "SUTVA (Stable Unit Treatment Value Assumption)",
+        "No time-varying confounders"
+      ],
+      "validity_score": 1.0,
+      "interpretation": "Statistically significant positive effect (large, p=0.001 ***) | Validity: STRONG ✅",
+      "sample_size": 200,
+      "model_specification": "DID: Y = β₀ + β₁·Post + β₂·Treatment + β₃·(Post×Treatment) + ε",
+      "se_calculation": "Heteroskedasticity-robust (White)",
+      "assumption_tests": {
+        "parallel_trends": {
+          "test": "Pre-treatment trend difference",
+          "statistic": 0.035,
+          "threshold": 0.2,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.4
+        },
+        "placebo_test": {
+          "test": "Placebo (fake treatment)",
+          "statistic": "p-value",
+          "threshold": 0.1,
+          "p_value": 0.929,
+          "passed": true,
+          "weight": 0.3
+        },
+        "sample_size": {
+          "test": "Minimum group size",
+          "statistic": 50,
+          "threshold": 30,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.15
+        },
+        "balance": {
+          "test": "Pre-treatment balance",
+          "statistic": 0.035,
+          "threshold": 0.2,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.15
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "90% CI",
+          "effect_size": 1.7453,
+          "ci": [
+            0.8848,
+            2.6059
+          ],
+          "significant": true
+        },
+        {
+          "specification": "95% CI",
+          "effect_size": 1.7453,
+          "ci": [
+            0.72,
+            2.7707
+          ],
+          "significant": true
+        },
+        {
+          "specification": "99% CI",
+          "effect_size": 1.7453,
+          "ci": [
+            0.3977,
+            3.0929
+          ],
+          "significant": true
+        },
+        {
+          "specification": "Subsample: First half",
+          "effect_size": 2.5688,
+          "n": 25
+        },
+        {
+          "specification": "Subsample: Second half",
+          "effect_size": 2.3608,
+          "n": 25
+        }
+      ],
+      "risk_warnings": [],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "instrumental_variables",
+      "effect_size": 0.5894,
+      "standard_error": 0.1001,
+      "t_statistic": 5.887,
+      "p_value": 0.0,
+      "confidence_interval": [
+        0.3932,
+        0.7857
+      ],
+      "assumptions": [
+        "Relevance: Instrument affects treatment",
+        "Exclusion: Instrument only affects outcome through treatment",
+        "Exogeneity: Instrument is uncorrelated with error term",
+        "First-stage F-statistic: 99.75 (need >10)"
+      ],
+      "validity_score": 1.0,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***) | Validity: STRONG ✅",
+      "sample_size": 100,
+      "model_specification": "2SLS: Stage1 X=π₀+π₁Z+ν | Stage2 Y=β₀+β₁X̂+ε",
+      "se_calculation": "2SLS asymptotic SE",
+      "assumption_tests": {
+        "first_stage": {
+          "test": "First-stage F-statistic",
+          "statistic": 99.75,
+          "threshold": 10,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.5
+        },
+        "sample_size": {
+          "test": "Sample size",
+          "statistic": 100,
+          "threshold": 50,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.2
+        },
+        "first_stage_r2": {
+          "test": "First-stage R²",
+          "statistic": 0.606,
+          "threshold": 0.1,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.3
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "OLS (naive)",
+          "effect_size": 0.6722,
+          "note": "Bias: 0.0828"
+        }
+      ],
+      "risk_warnings": [],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "regression_discontinuity",
+      "effect_size": 10.223,
+      "standard_error": 1.2114,
+      "t_statistic": 8.439,
+      "p_value": 0.0,
+      "confidence_interval": [
+        7.8486,
+        12.5974
+      ],
+      "assumptions": [
+        "No manipulation of running variable",
+        "Continuity of potential outcomes at cutoff",
+        "Bandwidth: 1.736",
+        "Observations: 16 left, 12 right",
+        "Density ratio: 0.75 ✅"
+      ],
+      "validity_score": 0.7,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***) | Validity: MODERATE ⚠️",
+      "sample_size": 28,
+      "model_specification": "RD: Y = β₀ + β₁·Treatment(RV≥cutoff) + ε",
+      "se_calculation": "Heteroskedasticity-robust (local)",
+      "assumption_tests": {
+        "no_manipulation": {
+          "test": "McCrary density test (simplified)",
+          "statistic": "Left=16, Right=12",
+          "threshold": "Density ratio ≈ 1",
+          "p_value": null,
+          "passed": true,
+          "weight": 0.4
+        },
+        "sample_size": {
+          "test": "Effective sample size",
+          "statistic": 28,
+          "threshold": 50,
+          "p_value": null,
+          "passed": false,
+          "weight": 0.3
+        },
+        "bandwidth_robustness": {
+          "test": "Bandwidth sensitivity",
+          "statistic": "CV = 0.074",
+          "threshold": "CV < 0.5",
+          "p_value": null,
+          "passed": true,
+          "weight": 0.3
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "Bandwidth ×0.5 (n=14)",
+          "effect_size": 10.2306
+        },
+        {
+          "specification": "Bandwidth ×0.75 (n=23)",
+          "effect_size": 9.6329
+        },
+        {
+          "specification": "Bandwidth ×1.0 (n=28)",
+          "effect_size": 10.223
+        },
+        {
+          "specification": "Bandwidth ×1.25 (n=39)",
+          "effect_size": 11.1478
+        },
+        {
+          "specification": "Bandwidth ×1.5 (n=43)",
+          "effect_size": 11.3178
+        }
+      ],
+      "risk_warnings": [
+        "⚠️  Small effective sample: n = 28 (low power)"
+      ],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "difference_in_differences",
+      "effect_size": 1.7453,
+      "standard_error": 0.5231,
+      "t_statistic": 3.336,
+      "p_value": 0.0008,
+      "confidence_interval": [
+        0.72,
+        2.7707
+      ],
+      "assumptions": [
+        "Parallel trends assumption",
+        "No spillover effects",
+        "SUTVA (Stable Unit Treatment Value Assumption)",
+        "No time-varying confounders"
+      ],
+      "validity_score": 1.0,
+      "interpretation": "Statistically significant positive effect (large, p=0.001 ***) | Validity: STRONG ✅",
+      "sample_size": 200,
+      "model_specification": "DID: Y = β₀ + β₁·Post + β₂·Treatment + β₃·(Post×Treatment) + ε",
+      "se_calculation": "Heteroskedasticity-robust (White)",
+      "assumption_tests": {
+        "parallel_trends": {
+          "test": "Pre-treatment trend difference",
+          "statistic": 0.035,
+          "threshold": 0.2,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.4
+        },
+        "placebo_test": {
+          "test": "Placebo (fake treatment)",
+          "statistic": "p-value",
+          "threshold": 0.1,
+          "p_value": 0.929,
+          "passed": true,
+          "weight": 0.3
+        },
+        "sample_size": {
+          "test": "Minimum group size",
+          "statistic": 50,
+          "threshold": 30,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.15
+        },
+        "balance": {
+          "test": "Pre-treatment balance",
+          "statistic": 0.035,
+          "threshold": 0.2,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.15
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "90% CI",
+          "effect_size": 1.7453,
+          "ci": [
+            0.8848,
+            2.6059
+          ],
+          "significant": true
+        },
+        {
+          "specification": "95% CI",
+          "effect_size": 1.7453,
+          "ci": [
+            0.72,
+            2.7707
+          ],
+          "significant": true
+        },
+        {
+          "specification": "99% CI",
+          "effect_size": 1.7453,
+          "ci": [
+            0.3977,
+            3.0929
+          ],
+          "significant": true
+        },
+        {
+          "specification": "Subsample: First half",
+          "effect_size": 2.5688,
+          "n": 25
+        },
+        {
+          "specification": "Subsample: Second half",
+          "effect_size": 2.3608,
+          "n": 25
+        }
+      ],
+      "risk_warnings": [],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "instrumental_variables",
+      "effect_size": 0.5894,
+      "standard_error": 0.1001,
+      "t_statistic": 5.887,
+      "p_value": 0.0,
+      "confidence_interval": [
+        0.3932,
+        0.7857
+      ],
+      "assumptions": [
+        "Relevance: Instrument affects treatment",
+        "Exclusion: Instrument only affects outcome through treatment",
+        "Exogeneity: Instrument is uncorrelated with error term",
+        "First-stage F-statistic: 99.75 (need >10)"
+      ],
+      "validity_score": 1.0,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***) | Validity: STRONG ✅",
+      "sample_size": 100,
+      "model_specification": "2SLS: Stage1 X=π₀+π₁Z+ν | Stage2 Y=β₀+β₁X̂+ε",
+      "se_calculation": "2SLS asymptotic SE",
+      "assumption_tests": {
+        "first_stage": {
+          "test": "First-stage F-statistic",
+          "statistic": 99.75,
+          "threshold": 10,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.5
+        },
+        "sample_size": {
+          "test": "Sample size",
+          "statistic": 100,
+          "threshold": 50,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.2
+        },
+        "first_stage_r2": {
+          "test": "First-stage R²",
+          "statistic": 0.606,
+          "threshold": 0.1,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.3
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "OLS (naive)",
+          "effect_size": 0.6722,
+          "note": "Bias: 0.0828"
+        }
+      ],
+      "risk_warnings": [],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "regression_discontinuity",
+      "effect_size": 10.223,
+      "standard_error": 1.2114,
+      "t_statistic": 8.439,
+      "p_value": 0.0,
+      "confidence_interval": [
+        7.8486,
+        12.5974
+      ],
+      "assumptions": [
+        "No manipulation of running variable",
+        "Continuity of potential outcomes at cutoff",
+        "Bandwidth: 1.736",
+        "Observations: 16 left, 12 right",
+        "Density ratio: 0.75 ✅"
+      ],
+      "validity_score": 0.7,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***) | Validity: MODERATE ⚠️",
+      "sample_size": 28,
+      "model_specification": "RD: Y = β₀ + β₁·Treatment(RV≥cutoff) + ε",
+      "se_calculation": "Heteroskedasticity-robust (local)",
+      "assumption_tests": {
+        "no_manipulation": {
+          "test": "McCrary density test (simplified)",
+          "statistic": "Left=16, Right=12",
+          "threshold": "Density ratio ≈ 1",
+          "p_value": null,
+          "passed": true,
+          "weight": 0.4
+        },
+        "sample_size": {
+          "test": "Effective sample size",
+          "statistic": 28,
+          "threshold": 50,
+          "p_value": null,
+          "passed": false,
+          "weight": 0.3
+        },
+        "bandwidth_robustness": {
+          "test": "Bandwidth sensitivity",
+          "statistic": "CV = 0.074",
+          "threshold": "CV < 0.5",
+          "p_value": null,
+          "passed": true,
+          "weight": 0.3
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "Bandwidth ×0.5 (n=14)",
+          "effect_size": 10.2306
+        },
+        {
+          "specification": "Bandwidth ×0.75 (n=23)",
+          "effect_size": 9.6329
+        },
+        {
+          "specification": "Bandwidth ×1.0 (n=28)",
+          "effect_size": 10.223
+        },
+        {
+          "specification": "Bandwidth ×1.25 (n=39)",
+          "effect_size": 11.1478
+        },
+        {
+          "specification": "Bandwidth ×1.5 (n=43)",
+          "effect_size": 11.3178
+        }
+      ],
+      "risk_warnings": [
+        "⚠️  Small effective sample: n = 28 (low power)"
+      ],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "propensity_score_matching",
+      "effect_size": 5.3526,
+      "standard_error": 0.5789,
+      "t_statistic": 9.246,
+      "p_value": 0.0,
+      "confidence_interval": [
+        4.2179,
+        6.4873
+      ],
+      "assumptions": [
+        "Unconfoundedness (selection on observables)",
+        "Common support (overlap)",
+        "Matched pairs: 72",
+        "Caliper: 0.10",
+        "Balance improvement: 85.0%"
+      ],
+      "validity_score": 0.963,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***) | Validity: STRONG ✅",
+      "sample_size": 72,
+      "model_specification": "PSM: ATT = E[Y(1)-Y(0)|T=1, matched on e(X)]",
+      "se_calculation": "Paired t-test SE",
+      "assumption_tests": {
+        "overlap": {
+          "test": "Common support (overlap)",
+          "statistic": "72/72 treated matched",
+          "threshold": "≥80%",
+          "passed": true
+        },
+        "balance": {
+          "test": "Covariate balance",
+          "statistic": "85.0% improvement",
+          "threshold": "≥70%",
+          "passed": true
+        },
+        "caliper": {
+          "test": "Caliper width",
+          "statistic": "0.10",
+          "threshold": "≤0.10",
+          "passed": true
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "Caliper 0.05",
+          "effect_size": 5.3794
+        },
+        {
+          "specification": "Caliper 0.10",
+          "effect_size": 5.3526
+        },
+        {
+          "specification": "Caliper 0.20",
+          "effect_size": 5.2991
+        }
+      ],
+      "risk_warnings": [],
+      "cohens_d": 1.1,
+      "effect_magnitude": "large",
+      "statistical_power": 1.0,
+      "min_detectable_effect": 1.621,
+      "plot_data": {}
+    },
+    {
+      "method": "difference_in_differences",
+      "effect_size": 1.7453,
+      "standard_error": 0.5231,
+      "t_statistic": 3.336,
+      "p_value": 0.0008,
+      "confidence_interval": [
+        0.72,
+        2.7707
+      ],
+      "assumptions": [
+        "Parallel trends assumption",
+        "No spillover effects",
+        "SUTVA (Stable Unit Treatment Value Assumption)",
+        "No time-varying confounders"
+      ],
+      "validity_score": 1.0,
+      "interpretation": "Statistically significant positive effect (large, p=0.001 ***) | Validity: STRONG ✅",
+      "sample_size": 200,
+      "model_specification": "DID: Y = β₀ + β₁·Post + β₂·Treatment + β₃·(Post×Treatment) + ε",
+      "se_calculation": "Heteroskedasticity-robust (White)",
+      "assumption_tests": {
+        "parallel_trends": {
+          "test": "Pre-treatment trend difference",
+          "statistic": 0.035,
+          "threshold": 0.2,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.4
+        },
+        "placebo_test": {
+          "test": "Placebo (fake treatment)",
+          "statistic": "p-value",
+          "threshold": 0.1,
+          "p_value": 0.929,
+          "passed": true,
+          "weight": 0.3
+        },
+        "sample_size": {
+          "test": "Minimum group size",
+          "statistic": 50,
+          "threshold": 30,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.15
+        },
+        "balance": {
+          "test": "Pre-treatment balance",
+          "statistic": 0.035,
+          "threshold": 0.2,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.15
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "90% CI",
+          "effect_size": 1.7453,
+          "ci": [
+            0.8848,
+            2.6059
+          ],
+          "significant": true
+        },
+        {
+          "specification": "95% CI",
+          "effect_size": 1.7453,
+          "ci": [
+            0.72,
+            2.7707
+          ],
+          "significant": true
+        },
+        {
+          "specification": "99% CI",
+          "effect_size": 1.7453,
+          "ci": [
+            0.3977,
+            3.0929
+          ],
+          "significant": true
+        },
+        {
+          "specification": "Subsample: First half",
+          "effect_size": 2.5688,
+          "n": 25
+        },
+        {
+          "specification": "Subsample: Second half",
+          "effect_size": 2.3608,
+          "n": 25
+        }
+      ],
+      "risk_warnings": [],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "instrumental_variables",
+      "effect_size": 0.5894,
+      "standard_error": 0.1001,
+      "t_statistic": 5.887,
+      "p_value": 0.0,
+      "confidence_interval": [
+        0.3932,
+        0.7857
+      ],
+      "assumptions": [
+        "Relevance: Instrument affects treatment",
+        "Exclusion: Instrument only affects outcome through treatment",
+        "Exogeneity: Instrument is uncorrelated with error term",
+        "First-stage F-statistic: 99.75 (need >10)"
+      ],
+      "validity_score": 1.0,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***) | Validity: STRONG ✅",
+      "sample_size": 100,
+      "model_specification": "2SLS: Stage1 X=π₀+π₁Z+ν | Stage2 Y=β₀+β₁X̂+ε",
+      "se_calculation": "2SLS asymptotic SE",
+      "assumption_tests": {
+        "first_stage": {
+          "test": "First-stage F-statistic",
+          "statistic": 99.75,
+          "threshold": 10,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.5
+        },
+        "sample_size": {
+          "test": "Sample size",
+          "statistic": 100,
+          "threshold": 50,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.2
+        },
+        "first_stage_r2": {
+          "test": "First-stage R²",
+          "statistic": 0.606,
+          "threshold": 0.1,
+          "p_value": null,
+          "passed": true,
+          "weight": 0.3
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "OLS (naive)",
+          "effect_size": 0.6722,
+          "note": "Bias: 0.0828"
+        }
+      ],
+      "risk_warnings": [],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "regression_discontinuity",
+      "effect_size": 10.223,
+      "standard_error": 1.2114,
+      "t_statistic": 8.439,
+      "p_value": 0.0,
+      "confidence_interval": [
+        7.8486,
+        12.5974
+      ],
+      "assumptions": [
+        "No manipulation of running variable",
+        "Continuity of potential outcomes at cutoff",
+        "Bandwidth: 1.736",
+        "Observations: 16 left, 12 right",
+        "Density ratio: 0.75 ✅"
+      ],
+      "validity_score": 0.7,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***) | Validity: MODERATE ⚠️",
+      "sample_size": 28,
+      "model_specification": "RD: Y = β₀ + β₁·Treatment(RV≥cutoff) + ε",
+      "se_calculation": "Heteroskedasticity-robust (local)",
+      "assumption_tests": {
+        "no_manipulation": {
+          "test": "McCrary density test (simplified)",
+          "statistic": "Left=16, Right=12",
+          "threshold": "Density ratio ≈ 1",
+          "p_value": null,
+          "passed": true,
+          "weight": 0.4
+        },
+        "sample_size": {
+          "test": "Effective sample size",
+          "statistic": 28,
+          "threshold": 50,
+          "p_value": null,
+          "passed": false,
+          "weight": 0.3
+        },
+        "bandwidth_robustness": {
+          "test": "Bandwidth sensitivity",
+          "statistic": "CV = 0.074",
+          "threshold": "CV < 0.5",
+          "p_value": null,
+          "passed": true,
+          "weight": 0.3
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "Bandwidth ×0.5 (n=14)",
+          "effect_size": 10.2306
+        },
+        {
+          "specification": "Bandwidth ×0.75 (n=23)",
+          "effect_size": 9.6329
+        },
+        {
+          "specification": "Bandwidth ×1.0 (n=28)",
+          "effect_size": 10.223
+        },
+        {
+          "specification": "Bandwidth ×1.25 (n=39)",
+          "effect_size": 11.1478
+        },
+        {
+          "specification": "Bandwidth ×1.5 (n=43)",
+          "effect_size": 11.3178
+        }
+      ],
+      "risk_warnings": [
+        "⚠️  Small effective sample: n = 28 (low power)"
+      ],
+      "cohens_d": 0.0,
+      "effect_magnitude": "",
+      "statistical_power": 0.0,
+      "min_detectable_effect": 0.0,
+      "plot_data": {}
+    },
+    {
+      "method": "propensity_score_matching",
+      "effect_size": 5.3526,
+      "standard_error": 0.5789,
+      "t_statistic": 9.246,
+      "p_value": 0.0,
+      "confidence_interval": [
+        4.2179,
+        6.4873
+      ],
+      "assumptions": [
+        "Unconfoundedness (selection on observables)",
+        "Common support (overlap)",
+        "Matched pairs: 72",
+        "Caliper: 0.10",
+        "Balance improvement: 85.0%"
+      ],
+      "validity_score": 0.963,
+      "interpretation": "Statistically significant positive effect (large, p=0.000 ***) | Validity: STRONG ✅",
+      "sample_size": 72,
+      "model_specification": "PSM: ATT = E[Y(1)-Y(0)|T=1, matched on e(X)]",
+      "se_calculation": "Paired t-test SE",
+      "assumption_tests": {
+        "overlap": {
+          "test": "Common support (overlap)",
+          "statistic": "72/72 treated matched",
+          "threshold": "≥80%",
+          "passed": true
+        },
+        "balance": {
+          "test": "Covariate balance",
+          "statistic": "85.0% improvement",
+          "threshold": "≥70%",
+          "passed": true
+        },
+        "caliper": {
+          "test": "Caliper width",
+          "statistic": "0.10",
+          "threshold": "≤0.10",
+          "passed": true
+        }
+      },
+      "robustness_checks": [
+        {
+          "specification": "Caliper 0.05",
+          "effect_size": 5.3794
+        },
+        {
+          "specification": "Caliper 0.10",
+          "effect_size": 5.3526
+        },
+        {
+          "specification": "Caliper 0.20",
+          "effect_size": 5.2991
+        }
+      ],
+      "risk_warnings": [],
+      "cohens_d": 1.1,
+      "effect_magnitude": "large",
+      "statistical_power": 1.0,
+      "min_detectable_effect": 1.621,
+      "plot_data": {}
+    },
+    {
+      "method": "synthetic_control",
+      "effect_size": -2.9389,
+      "standard_error": 0.7261,
+      "t_statistic": -4.048,
+      "p_value": 0.0001,
+      "confidence_interval": [
+        -4.362,
+        -1.5158
+      ],
+      "assumptions": [
+        "Pre-treatment periods: 15",
+        "Post-treatment periods: 10",
+        "Donor pool: 5 units",
+        "RMSPE: 1.471",
+        "Weights: [0.2, 0.2, 0.2, 0.2, 0.2]"
+      ],
+      "validity_score": 0.85,
+      "interpretation": "Statistically significant negative effect (large, p=0.000 ***) | Validity: STRONG ✅",
+      "sample_size": 25,
+      "model_specification": "SCM: Y_t(0) = Σ w_j·Y_jt (j in donor pool)",
+      "se_calculation": "Post-treatment variation SE",
+      "assumption_tests": {
+        "pre_fit": {
+          "test": "Pre-treatment fit (RMSPE)",
+          "statistic": "1.471",
+          "threshold": "< 2.0",
+          "passed": true
+        },
+        "donor_pool": {
+          "test": "Donor pool size",
+          "statistic": "5 units",
+          "threshold": "≥ 3",
+          "passed": true
+        },
+        "post_periods": {
+          "test": "Post-treatment periods",
+          "statistic": "10 periods",
+          "threshold": "≥ 3",
+          "passed": true
+        }
+      },
+      "robustness_checks": [],
+      "risk_warnings": [],
+      "cohens_d": -0.512,
+      "effect_magnitude": "medium",
+      "statistical_power": 0.982,
+      "min_detectable_effect": 2.033,
+      "plot_data": {
+        "treatment_pre": [
+          101.21268529967399,
+          102.41403417794491,
+          102.80424583251919,
+          106.78824396707981,
+          108.68065964598411,
+          109.51326307413007,
+          109.37356811003852,
+          113.39205969106561,
+          117.05876428069949,
+          116.58220372974505,
+          118.59134166539873,
+          124.30793428013463,
+          124.00527115049792,
+          126.17339931992214,
+          126.81691063812504
+        ],
+        "treatment_post": [
+          130.50074752492242,
+          130.06618125302404,
+          131.34282895284008,
+          131.6918630768519,
+          136.99916680519766,
+          136.09672228631285,
+          135.25867731631783,
+          140.3226862477594,
+          142.13008168311987,
+          145.5424329262351
+        ],
+        "synthetic_pre": [
+          99.99842640393045,
+          100.88195372936958,
+          103.46783541371428,
+          107.01116507813533,
+          108.35332752087177,
+          109.48449230891838,
+          113.29172323855917,
+          114.56879015409454,
+          115.28969486350991,
+          116.54862170874333,
+          120.08196411457104,
+          122.01573838286386,
+          124.42405947860671,
+          125.46026748078636,
+          126.89213163293992
+        ],
+        "synthetic_post": [
+          130.09116309305944,
+          131.40841831551924,
+          133.90833158174044,
+          136.37614159584427,
+          136.7259635863528,
+          141.81729125103104,
+          140.8793776195288,
+          145.2762823558695,
+          145.41329411661727,
+          147.4441864390108
+        ],
+        "effects": [
+          0.40958443186298155,
+          -1.342237062495201,
+          -2.5655026289003615,
+          -4.684278518992386,
+          0.27320321884485566,
+          -5.720568964718183,
+          -5.620700303210981,
+          -4.953596108110105,
+          -3.283212433497397,
+          -1.9017535127756844
+        ]
+      }
+    }
+  ],
+  "last_updated": "2026-03-16T10:22:22.375582"
+}

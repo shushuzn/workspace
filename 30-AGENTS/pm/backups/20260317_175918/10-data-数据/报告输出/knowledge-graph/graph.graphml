@@ -1,0 +1,35 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d4" for="edge" attr.name="source_file" attr.type="string"/>
+<key id="d3" for="edge" attr.name="label" attr.type="string"/>
+<key id="d2" for="node" attr.name="source" attr.type="string"/>
+<key id="d1" for="node" attr.name="type" attr.type="string"/>
+<key id="d0" for="node" attr.name="label" attr.type="string"/>
+<graph edgedefault="directed"><node id="p-2026-ma-conav_-_master-slave_multi-agent_framewo">
+  <data key="d0">P-2026-MA-CoNav - Master-Slave Multi-Agent Framework for VLN</data>
+  <data key="d1">concept</data>
+  <data key="d2">memory\P-Notes\P-2026-MA-CoNav-Multi-Agent-VLN.md</data>
+</node>
+<node id="p-2026-ma-conav_-_master-slave_multi-agent_framewo_time">
+  <data key="d0">2026</data>
+  <data key="d1">time</data>
+  <data key="d2">memory\P-Notes\P-2026-MA-CoNav-Multi-Agent-VLN.md</data>
+</node>
+<node id="p-2026-regal_-_registry-driven_architecture_for_en">
+  <data key="d0">P-2026-REGAL - Registry-Driven Architecture for Enterprise Agentic AI</data>
+  <data key="d1">concept</data>
+  <data key="d2">memory\P-Notes\P-2026-REGAL-Enterprise-Agentic-AI.md</data>
+</node>
+<node id="p-2026-regal_-_registry-driven_architecture_for_en_time">
+  <data key="d0">2026</data>
+  <data key="d1">time</data>
+  <data key="d2">memory\P-Notes\P-2026-REGAL-Enterprise-Agentic-AI.md</data>
+</node>
+<edge source="p-2026-ma-conav_-_master-slave_multi-agent_framewo" target="p-2026-ma-conav_-_master-slave_multi-agent_framewo_time">
+  <data key="d3">occurred_in</data>
+  <data key="d4">memory\P-Notes\P-2026-MA-CoNav-Multi-Agent-VLN.md</data>
+</edge>
+<edge source="p-2026-regal_-_registry-driven_architecture_for_en" target="p-2026-regal_-_registry-driven_architecture_for_en_time">
+  <data key="d3">occurred_in</data>
+  <data key="d4">memory\P-Notes\P-2026-REGAL-Enterprise-Agentic-AI.md</data>
+</edge>
+</graph></graphml>

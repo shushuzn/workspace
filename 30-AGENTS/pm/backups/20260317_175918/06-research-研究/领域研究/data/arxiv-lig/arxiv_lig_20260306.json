@@ -1,0 +1,327 @@
+{
+  "search_query": "laser-induced graphene",
+  "search_date": "2026-03-06T02:15:57.273930",
+  "n_results": 20,
+  "papers": [
+    {
+      "title": "Sub-wavelength mid-infrared imaging of locally driven photocurrents using diamond campanile probes",
+      "authors": [
+        "Rajasekhar Medapalli",
+        "Nathan D. Cottam",
+        "Khushboo Agarwal",
+        "Benjamin T. Dewes",
+        "Nils Dessmann",
+        "Sergio Gonzalez-Munoz",
+        "Wenjing Yan",
+        "Vaidotas Mišeikis",
+        "Sergey Kafanov",
+        "Rostislav V. Mikhaylovskiy",
+        "Samuel P. Jarvis",
+        "Camilla Coletti",
+        "Britta Redlich",
+        "Amalia Patanè",
+        "Oleg V. Kolosov"
+      ],
+      "published": "2026-03-04",
+      "arxiv_id": "2603.04318v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.04318v1",
+      "abstract": "Precise and high efficiency concentration of mid-infrared (mid-IR) light into sub wavelength volumes is essential for probing low-energy excitations and achieving strong field enhancements, which can ..."
+    },
+    {
+      "title": "Hanle lineshapes and spin-rotation signatures from in-plane anisotropic spin relaxation in heterogeneous spin devices",
+      "authors": [
+        "Josef Světlík",
+        "Juan F. Sierra",
+        "Lorenzo Camosi",
+        "Williams Savero Torres",
+        "Franz Herling",
+        "Vera Marinova",
+        "Dimitre Dimitrov",
+        "Sergio O. Valenzuela"
+      ],
+      "published": "2026-03-04",
+      "arxiv_id": "2603.04297v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.04297v1",
+      "abstract": "Spin precession experiments in lateral spin devices are a powerful tool for probing the spin transport properties of materials. These experiments can be quantitatively described using the Bloch diffus..."
+    },
+    {
+      "title": "Ab initio study of saddle-point excitons in monolayer SnS2",
+      "authors": [
+        "Vinicius Alves Bastos",
+        "Fulvio Paleari",
+        "Eleonora Luppi",
+        "Marco Gibertini",
+        "Alice Ruini"
+      ],
+      "published": "2026-03-04",
+      "arxiv_id": "2603.04294v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.04294v1",
+      "abstract": "Monolayer SnS2 has emerged as a promising visible-light photocatalyst for photoelectrochemical applications, owing to its strong optical absorption in the visible range and excellent chemical stabilit..."
+    },
+    {
+      "title": "Wave-Optics Imprints of Dark Matter Subhalos on Strongly Lensed Gravitational Waves",
+      "authors": [
+        "Shin'ichiro Ando"
+      ],
+      "published": "2026-03-04",
+      "arxiv_id": "2603.04267v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.04267v1",
+      "abstract": "Wave-optics effects in strongly lensed gravitational waves (GWs) provide a new interferometric probe of dark matter substructure. We compute the full diffraction integral for GWs propagating through s..."
+    },
+    {
+      "title": "Air-stable bright entangled photon-pair source from graphene-encapsulated van der Waals ferroelectric NbOI2",
+      "authors": [
+        "Mayank Joshi",
+        "Mengting Jiang",
+        "Yu Xing",
+        "Yuerui Lu",
+        "Jie Zhao",
+        "Ping Koy Lam",
+        "Syed M Assad",
+        "Xuezhi Ma",
+        "Young-Wook Cho"
+      ],
+      "published": "2026-03-04",
+      "arxiv_id": "2603.04082v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.04082v1",
+      "abstract": "Van der Waals (vdW) ferroelectrics are emerging nonlinear photonic materials that combine large second-order susceptibility \\c{hi}(2) with heterostructure compatibility, offering an attractive route t..."
+    },
+    {
+      "title": "Influence of Inter-Pulse Delay and Geometric Constraints on Damage and Optical Characteristics in thin Metal Targets Irradiated by Double Ultrashort Laser Pulses",
+      "authors": [
+        "George D. Tsibidis"
+      ],
+      "published": "2026-03-04",
+      "arxiv_id": "2603.03840v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.03840v1",
+      "abstract": "Femtosecond pulsed laser systems constitute powerful tools for the high-precision structuring of materials at micro/nano-scale resolutions. A critical parameter influencing the efficacy of ultrafast l..."
+    },
+    {
+      "title": "Contribution of remote bands to orbital magnetization in twisted bilayer graphene",
+      "authors": [
+        "Pinzhuo Li",
+        "Kun Jiang",
+        "Ziqiang Wang",
+        "Jian Kang",
+        "Yi Zhang"
+      ],
+      "published": "2026-03-04",
+      "arxiv_id": "2603.03702v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.03702v1",
+      "abstract": "Motivated by recent theoretical and experimental works on orbital magnetization $M_{\\mathrm{orb}}$ for the interacting system, we develop a gauge-invariant framework to compute $M_{\\mathrm{orb}}$ for ..."
+    },
+    {
+      "title": "Graphene Zero-Bias Sub-Terahertz Turnkey Detector with Above 43 GHz Bandwidth",
+      "authors": [
+        "E. I. Titova",
+        "A. Titchenko",
+        "M. Titova",
+        "K. Shein",
+        "A. Kuksov",
+        "A. Sobolev",
+        "M. Kashchenko",
+        "M. Kravtsov",
+        "L. Elesin",
+        "K. S. Novoselov",
+        "G. Goltsman",
+        "D. A. Svintsov",
+        "I. Gayduchenko",
+        "D. A. Bandurin"
+      ],
+      "published": "2026-03-03",
+      "arxiv_id": "2603.03554v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.03554v1",
+      "abstract": "High-frequency terahertz (THz) detectors are vital for next-generation high-speed wireless communication systems. Graphene, with its high carrier mobility, broadband absorption, and weak electron-phon..."
+    },
+    {
+      "title": "Anomalous Klein tunnelling with magnetic barriers in strained graphene",
+      "authors": [
+        "Edgardo Marin-Colli",
+        "Tonatiuh Gómez-Ramírez",
+        "O-Excell Gutierrez",
+        "Yonatan Betancur-Ocampo",
+        "Alfredo Raya",
+        "Erik Díaz-Bautista"
+      ],
+      "published": "2026-03-03",
+      "arxiv_id": "2603.03240v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.03240v1",
+      "abstract": "We study electron transport in a strained graphene sheet subjected to a sequence of $N$ electrostatic and magnetic barriers. Employing a modified and improved transfer-matrix framework, we examine how..."
+    },
+    {
+      "title": "Polarization Effects in Laser-Assisted (e,2e) Collision on H-atom by Twisted Electrons",
+      "authors": [
+        "Neha",
+        "Rakesh Choubisa"
+      ],
+      "published": "2026-03-03",
+      "arxiv_id": "2603.02894v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.02894v1",
+      "abstract": "The dynamics of fast (e, 2e) collisions, induced by the impact of twisted electron beams, on atomic hydrogen, is analyzed in the presence of a laser field with circular and linear polarization. For th..."
+    },
+    {
+      "title": "Exploring stable long-lifetime plasmon excitations in the Lieb lattice",
+      "authors": [
+        "Andrii Iurov",
+        "Liubov Zhemchuzhna",
+        "Godfrey Gumbs",
+        "Danhong Huang"
+      ],
+      "published": "2026-03-03",
+      "arxiv_id": "2603.02523v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.02523v1",
+      "abstract": "The subject of the present paper is a thorough numerical investigation of plasmon expectations, their dispersions and damping within a Lieb lattice. The Lieb lattice is known for its unique low-energy..."
+    },
+    {
+      "title": "Measurement of a quantum system using spin-mechanical conversion",
+      "authors": [
+        "A. A. Wood",
+        "D. S. Rice",
+        "T. Xie",
+        "F. H. Cassells",
+        "R. M. Goldblatt",
+        "T. Delord",
+        "G. Hétet",
+        "A. M. Martin"
+      ],
+      "published": "2026-03-03",
+      "arxiv_id": "2603.02507v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.02507v1",
+      "abstract": "Levitated macroscopic particles exhibiting quantum mechanical effects are garnering increased attention as a means for precision sensing and testing quantum mechanics. Defects in diamond, such as the ..."
+    },
+    {
+      "title": "Graphene-capped bismuthene on SiC as a platform for correlated quantum spin Hall edge states",
+      "authors": [
+        "Huu Thoai Ngo",
+        "Zamin Mamiyev",
+        "Niclas Tilgner",
+        "Andres David Pena Unigarro",
+        "Sibylle Gemming",
+        "Thomas Seyller",
+        "Christoph Tegenkamp"
+      ],
+      "published": "2026-03-02",
+      "arxiv_id": "2603.02397v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.02397v1",
+      "abstract": "Epitaxial bismuthene on SiC(0001) hosts symmetry-protected metallic edge states within a large bulk band gap, establishing it as a promising two-dimensional topological insulator for hightemperature q..."
+    },
+    {
+      "title": "Unveiling Davydov-Split Excitons in a Template-Engineered Molecular-Graphene Heterostructure",
+      "authors": [
+        "Jan Kunc",
+        "Bohdan Morzhuk",
+        "Veronika Stará",
+        "Devanshu Varshney",
+        "Mykhailo Shestopalov",
+        "Kryštof Matějka",
+        "Martin Rejhon",
+        "Jiří Novák",
+        "Jan Čechal"
+      ],
+      "published": "2026-03-02",
+      "arxiv_id": "2603.02301v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.02301v1",
+      "abstract": "The realization of high-fidelity organic-inorganic quantum emulators is frequently hindered by the interfacial imperfections introduced during device fabrication. Here, we demonstrate a robust nanofab..."
+    },
+    {
+      "title": "Real-Time Thermal-Inertial Odometry on Embedded Hardware for High-Speed GPS-Denied Flight",
+      "authors": [
+        "Austin Stone",
+        "Mark Petersen",
+        "Cammy Peterson"
+      ],
+      "published": "2026-03-02",
+      "arxiv_id": "2603.02114v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.02114v1",
+      "abstract": "We present a real-time monocular thermal-inertial odometry system designed for high-velocity, GPS-denied flight on embedded hardware. The system fuses measurements from a FLIR Boson+ 640 longwave infr..."
+    },
+    {
+      "title": "Scalable tight-binding model for strained graphene",
+      "authors": [
+        "Ming-Hao Liu",
+        "Christophe De Beule",
+        "Alina Mreńca-Kolasińska",
+        "Hsin-You Wu",
+        "Aitor Garcia-Ruiz",
+        "Denis Kochan",
+        "Klaus Richter"
+      ],
+      "published": "2026-03-02",
+      "arxiv_id": "2603.02077v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.02077v1",
+      "abstract": "We generalize the scalable tight-binding model for graphene, which allows for efficient quantum transport simulations in the Dirac regime, to account for elastic strain. We show that the original scal..."
+    },
+    {
+      "title": "Layer-polarized Transport via Gate-defined 1D and 0D PN Junctions in Double Bilayer Graphene",
+      "authors": [
+        "Wei Ren",
+        "Xi Zhang",
+        "Shiyu Guo",
+        "Jeongsoo Park",
+        "Jack Tavakley",
+        "Daochen Long",
+        "Kenji Watanabe",
+        "Takashi Taniguchi",
+        "Ke Wang"
+      ],
+      "published": "2026-03-02",
+      "arxiv_id": "2603.01963v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.01963v1",
+      "abstract": "We fabricate twisted double bilayer graphene devices with zero twist angle and a set of local top and bottom gates aligned perpendicularly to each other. A 1D PN junction can be electrostatically defi..."
+    },
+    {
+      "title": "Time Resolved Study of Laser Induced Ultrafast Alloying Processes in Au/Pd Core Shell Nanorods",
+      "authors": [
+        "Abhisakh Sarma",
+        "Jayanath C. P. Koliyadu",
+        "Romain Letrun",
+        "Egor Sobolev",
+        "Trupthi Devaiah C",
+        "Agnieszka Wrona",
+        "Katerina Doerner",
+        "Diogo V. M. Melo",
+        "Marco Kloos",
+        "Huijong Han",
+        "Marcin Sikorski",
+        "Konstantin Kharitonov",
+        "Juncheng E",
+        "Joana Valerio",
+        "Pralay K. Santra",
+        "Erik M. J. Johansson",
+        "Richard Bean",
+        "Chan Kim",
+        "Tokushi Sato"
+      ],
+      "published": "2026-03-02",
+      "arxiv_id": "2603.01597v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.01597v1",
+      "abstract": "Femtosecond laser-induced alloying presents a novel approach to modifying bimetallic systems. Visualizing ultrafast processes during laser-induced alloying is essential to uncover fundamental mechanis..."
+    },
+    {
+      "title": "Insulating Electronic States Near the Dirac Point Arising from Twisted Stacking and Curvature in 3D Nanoporous Graphene",
+      "authors": [
+        "Yoichi Tanabe",
+        "Hayato Sueyoshi",
+        "Samuel Jeong",
+        "Kojiro Imai",
+        "Shojiro Kimura",
+        "Yoshikazu Ito"
+      ],
+      "published": "2026-03-02",
+      "arxiv_id": "2603.01522v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.01522v1",
+      "abstract": "Twist-stacked graphene with a twist angle $θ$ of $\\sim 5^\\circ$--$30^\\circ$ retains two-dimensional monolayer graphene-like Dirac states near the Dirac point. In three-dimensional nanoporous graphene ..."
+    },
+    {
+      "title": "Curing-induced filler aggregation in epoxy-amine systems",
+      "authors": [
+        "Yujiro Furuta",
+        "Rei Kurita"
+      ],
+      "published": "2026-03-02",
+      "arxiv_id": "2603.01451v1",
+      "pdf_url": "https://arxiv.org/pdf/2603.01451v1",
+      "abstract": "Hypothesis: The macroscopic properties of polymer composites are governed by the dispersion and aggregation states of filler particles within a crosslinking matrix. Although curing transforms a liquid..."
+    }
+  ]
+}

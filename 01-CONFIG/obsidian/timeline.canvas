@@ -1,0 +1,795 @@
+{
+  "nodes": [
+    {
+      "id": "title",
+      "type": "text",
+      "text": "# Research Timeline\n121 lessons over 6 periods",
+      "x": 0,
+      "y": 0,
+      "width": 400,
+      "height": 100
+    },
+    {
+      "id": "timeline_SYS",
+      "type": "text",
+      "text": "## SYS Timeline\n2 milestones",
+      "x": -200,
+      "y": 150,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "SYS-016",
+      "type": "text",
+      "text": "**SYS-016**\nWindows 控制台需 UTF-8 编码修复 (emoji 输出)...",
+      "x": -400,
+      "y": 250,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "SYS-010",
+      "type": "text",
+      "text": "**SYS-010**\n工作站位置 |...",
+      "x": -180,
+      "y": 250,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_DEPLOY",
+      "type": "text",
+      "text": "## DEPLOY Timeline\n3 milestones",
+      "x": -200,
+      "y": 450,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "DEPLOY-001",
+      "type": "text",
+      "text": "**DEPLOY-001**\nSSH public key auth required on production servers...",
+      "x": -400,
+      "y": 550,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "DEPLOY-002",
+      "type": "text",
+      "text": "**DEPLOY-002**\nWindows SSH automation needs paramiko or PowerShell SSH module...",
+      "x": -180,
+      "y": 550,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "DEPLOY-003",
+      "type": "text",
+      "text": "**DEPLOY-003**\nPrepare fallback manual deployment scripts...",
+      "x": 40,
+      "y": 550,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_MULTI",
+      "type": "text",
+      "text": "## MULTI Timeline\n18 milestones",
+      "x": -200,
+      "y": 750,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "MULTI-031",
+      "type": "text",
+      "text": "**MULTI-031**\n7 人格增强 Phase 1 完成 (2026-03-14)...",
+      "x": -400,
+      "y": 850,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MULTI-032",
+      "type": "text",
+      "text": "**MULTI-032**\n7 人格增强 Phase 2 完成 (2026-03-14)...",
+      "x": -180,
+      "y": 850,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MULTI-033",
+      "type": "text",
+      "text": "**MULTI-033**\nPhase 1+2 总计：5 个工具，~2100 行代码，测试覆盖 100%...",
+      "x": 40,
+      "y": 850,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MULTI-034",
+      "type": "text",
+      "text": "**MULTI-034**\n7 人格增强 Phase 3 完成 (2026-03-14)...",
+      "x": 260,
+      "y": 850,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MULTI-035",
+      "type": "text",
+      "text": "**MULTI-035**\nPhase 1+2+3 总计：7 个工具，~3600 行代码，测试覆盖 100%...",
+      "x": -400,
+      "y": 970,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MULTI-036",
+      "type": "text",
+      "text": "**MULTI-036**\n7 人格增强系统 100% 完成 (7/7 组件全部实施)...",
+      "x": -180,
+      "y": 970,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MULTI-037",
+      "type": "text",
+      "text": "**MULTI-037**\n7 人格增强 Phase 4 完成 (2026-03-14)...",
+      "x": 40,
+      "y": 970,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MULTI-038",
+      "type": "text",
+      "text": "**MULTI-038**\nPhase 1-4 总计：8 个工具，~4,200 行代码，测试覆盖 100%...",
+      "x": 260,
+      "y": 970,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_MEM",
+      "type": "text",
+      "text": "## MEM Timeline\n6 milestones",
+      "x": -200,
+      "y": 1050,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "MEM-011",
+      "type": "text",
+      "text": "**MEM-011**\nDashboard 聚焦原则 |...",
+      "x": -400,
+      "y": 1150,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MEM-001",
+      "type": "text",
+      "text": "**MEM-001**\n** 记忆质量 > 数量 - 264 行精简版优于 1236 行重复版...",
+      "x": -180,
+      "y": 1150,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MEM-005",
+      "type": "text",
+      "text": "**MEM-005**\n** 7 人格各自贡献 - 不是单一步骤，是 7 个独立子代理...",
+      "x": 40,
+      "y": 1150,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MEM-006",
+      "type": "text",
+      "text": "**MEM-006**\n** 自动化优先 - 每周日 5AM 自动蒸馏，无需人工...",
+      "x": 260,
+      "y": 1150,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MEM-007",
+      "type": "text",
+      "text": "**MEM-007**\n** 批量更新策略 - 日常笔记实时记录，MEMORY.md 周批量更新...",
+      "x": -400,
+      "y": 1270,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "MEM-010",
+      "type": "text",
+      "text": "**MEM-010**\n** Dashboard 聚焦原则 - 只显示未完成/进行中内容，已完成不占用注意力...",
+      "x": -180,
+      "y": 1270,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_FEISHU",
+      "type": "text",
+      "text": "## FEISHU Timeline\n1 milestones",
+      "x": -200,
+      "y": 1350,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "FEISHU-013",
+      "type": "text",
+      "text": "**FEISHU-013**\n@提及语法 |...",
+      "x": -400,
+      "y": 1450,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_SEC",
+      "type": "text",
+      "text": "## SEC Timeline\n1 milestones",
+      "x": -200,
+      "y": 1650,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "SEC-019",
+      "type": "text",
+      "text": "**SEC-019**\nDashboard 集成 |...",
+      "x": -400,
+      "y": 1750,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_TOOL",
+      "type": "text",
+      "text": "## TOOL Timeline\n1 milestones",
+      "x": -200,
+      "y": 1950,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "TOOL-001",
+      "type": "text",
+      "text": "**TOOL-001**\n** 记忆蒸馏工具 - memory-distiller.py + memory-maintenance.py 自动化质量检查...",
+      "x": -400,
+      "y": 2050,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_FEASIBILITY",
+      "type": "text",
+      "text": "## FEASIBILITY Timeline\n5 milestones",
+      "x": -200,
+      "y": 2250,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "FEASIBILITY-001",
+      "type": "text",
+      "text": "**FEASIBILITY-001**\n** 任务制定前必须进行可行性分析...",
+      "x": -400,
+      "y": 2350,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "FEASIBILITY-002",
+      "type": "text",
+      "text": "**FEASIBILITY-002**\n** 现状分析是基础，不能跳过...",
+      "x": -180,
+      "y": 2350,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "FEASIBILITY-003",
+      "type": "text",
+      "text": "**FEASIBILITY-003**\n** 核心资产识别防止误删...",
+      "x": 40,
+      "y": 2350,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "FEASIBILITY-004",
+      "type": "text",
+      "text": "**FEASIBILITY-004**\n** 价值评估避免盲目追求数字...",
+      "x": 260,
+      "y": 2350,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "FEASIBILITY-005",
+      "type": "text",
+      "text": "**FEASIBILITY-005**\n** 六维度分析框架确保全面性...",
+      "x": -400,
+      "y": 2470,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_LOCAL",
+      "type": "text",
+      "text": "## LOCAL Timeline\n6 milestones",
+      "x": -200,
+      "y": 2550,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "LOCAL-001",
+      "type": "text",
+      "text": "**LOCAL-001**\n** 敏感内容 100% 本地处理，零云调用...",
+      "x": -400,
+      "y": 2650,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "LOCAL-002",
+      "type": "text",
+      "text": "**LOCAL-002**\n** Qwen2.5-0.5B-Instruct GGUF 格式最优...",
+      "x": -180,
+      "y": 2650,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "LOCAL-003",
+      "type": "text",
+      "text": "**LOCAL-003**\n** llama-cpp-python 推理引擎...",
+      "x": 40,
+      "y": 2650,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "LOCAL-004",
+      "type": "text",
+      "text": "**LOCAL-004**\n** 自动路由基于敏感度评分 (≥0.2 本地)...",
+      "x": 260,
+      "y": 2650,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "LOCAL-005",
+      "type": "text",
+      "text": "**LOCAL-005**\n** 6 大敏感类别 (认证/个人/财务/医疗/生物/API)...",
+      "x": -400,
+      "y": 2770,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "LOCAL-006",
+      "type": "text",
+      "text": "**LOCAL-006**\n** 处理日志确保合规验证...",
+      "x": -180,
+      "y": 2770,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_INNOVATOR",
+      "type": "text",
+      "text": "## INNOVATOR Timeline\n56 milestones",
+      "x": -200,
+      "y": 2850,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "INNOVATOR-046",
+      "type": "text",
+      "text": "**INNOVATOR-046**\n** 自主迭代模式 - 不等待用户确认，直接执行优化（9 工具/1 小时）...",
+      "x": -400,
+      "y": 2950,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "INNOVATOR-047",
+      "type": "text",
+      "text": "**INNOVATOR-047**\n** 健康监控优先 - 先监控再优化，数据驱动决策...",
+      "x": -180,
+      "y": 2950,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "INNOVATOR-048",
+      "type": "text",
+      "text": "**INNOVATOR-048**\n** 仪表板 UI > CLI - 实时 HTML 仪表板提升可见性...",
+      "x": 40,
+      "y": 2950,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "INNOVATOR-049",
+      "type": "text",
+      "text": "**INNOVATOR-049**\n** Nginx 优化 40% 提升 - Gzip+ 缓存立竿见影...",
+      "x": 260,
+      "y": 2950,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "INNOVATOR-050",
+      "type": "text",
+      "text": "**INNOVATOR-050**\n** 模块化监控工具 - 监控/分析/告警/仪表板分离...",
+      "x": -400,
+      "y": 3070,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "INNOVATOR-051",
+      "type": "text",
+      "text": "**INNOVATOR-051**\n** SSH 诊断自动化 - 4x 快于手动检查...",
+      "x": -180,
+      "y": 3070,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "INNOVATOR-052",
+      "type": "text",
+      "text": "**INNOVATOR-052**\n** 服务自动重启模式 - 所有服务可复用...",
+      "x": 40,
+      "y": 3070,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "INNOVATOR-053",
+      "type": "text",
+      "text": "**INNOVATOR-053**\n** 模块化 SSH 脚本 - 一个脚本修复一个服务...",
+      "x": 260,
+      "y": 3070,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "timeline_OBSIDIAN",
+      "type": "text",
+      "text": "## OBSIDIAN Timeline\n22 milestones",
+      "x": -200,
+      "y": 3150,
+      "width": 400,
+      "height": 80
+    },
+    {
+      "id": "OBSIDIAN-001",
+      "type": "text",
+      "text": "**OBSIDIAN-001**\n** Defuddle 节省 90% token 在网页提取...",
+      "x": -400,
+      "y": 3250,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "OBSIDIAN-002",
+      "type": "text",
+      "text": "**OBSIDIAN-002**\n** JSON Canvas 实现可视化知识图谱...",
+      "x": -180,
+      "y": 3250,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "OBSIDIAN-003",
+      "type": "text",
+      "text": "**OBSIDIAN-003**\n** Skills 仓库 = 即插即用自动化...",
+      "x": 40,
+      "y": 3250,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "OBSIDIAN-004",
+      "type": "text",
+      "text": "**OBSIDIAN-004**\n** 颜色编码提高 Canvas 可读性...",
+      "x": 260,
+      "y": 3250,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "OBSIDIAN-005",
+      "type": "text",
+      "text": "**OBSIDIAN-005**\n** 自动生成保持 Canvas 实时更新...",
+      "x": -400,
+      "y": 3370,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "OBSIDIAN-006",
+      "type": "text",
+      "text": "**OBSIDIAN-006**\n智能缓存防止重复提取...",
+      "x": -180,
+      "y": 3370,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "OBSIDIAN-007",
+      "type": "text",
+      "text": "**OBSIDIAN-007**\n变更检测减少不必要更新...",
+      "x": 40,
+      "y": 3370,
+      "width": 200,
+      "height": 100
+    },
+    {
+      "id": "OBSIDIAN-008",
+      "type": "text",
+      "text": "**OBSIDIAN-008**\nHEARTBEAT 集成实现自动化...",
+      "x": 260,
+      "y": 3370,
+      "width": 200,
+      "height": 100
+    }
+  ],
+  "edges": [
+    {
+      "fromNode": "title",
+      "toNode": "timeline_SYS"
+    },
+    {
+      "fromNode": "timeline_SYS",
+      "toNode": "SYS-016"
+    },
+    {
+      "fromNode": "timeline_SYS",
+      "toNode": "SYS-010"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_DEPLOY"
+    },
+    {
+      "fromNode": "timeline_DEPLOY",
+      "toNode": "DEPLOY-001"
+    },
+    {
+      "fromNode": "timeline_DEPLOY",
+      "toNode": "DEPLOY-002"
+    },
+    {
+      "fromNode": "timeline_DEPLOY",
+      "toNode": "DEPLOY-003"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_MULTI"
+    },
+    {
+      "fromNode": "timeline_MULTI",
+      "toNode": "MULTI-031"
+    },
+    {
+      "fromNode": "timeline_MULTI",
+      "toNode": "MULTI-032"
+    },
+    {
+      "fromNode": "timeline_MULTI",
+      "toNode": "MULTI-033"
+    },
+    {
+      "fromNode": "timeline_MULTI",
+      "toNode": "MULTI-034"
+    },
+    {
+      "fromNode": "timeline_MULTI",
+      "toNode": "MULTI-035"
+    },
+    {
+      "fromNode": "timeline_MULTI",
+      "toNode": "MULTI-036"
+    },
+    {
+      "fromNode": "timeline_MULTI",
+      "toNode": "MULTI-037"
+    },
+    {
+      "fromNode": "timeline_MULTI",
+      "toNode": "MULTI-038"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_MEM"
+    },
+    {
+      "fromNode": "timeline_MEM",
+      "toNode": "MEM-011"
+    },
+    {
+      "fromNode": "timeline_MEM",
+      "toNode": "MEM-001"
+    },
+    {
+      "fromNode": "timeline_MEM",
+      "toNode": "MEM-005"
+    },
+    {
+      "fromNode": "timeline_MEM",
+      "toNode": "MEM-006"
+    },
+    {
+      "fromNode": "timeline_MEM",
+      "toNode": "MEM-007"
+    },
+    {
+      "fromNode": "timeline_MEM",
+      "toNode": "MEM-010"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_FEISHU"
+    },
+    {
+      "fromNode": "timeline_FEISHU",
+      "toNode": "FEISHU-013"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_SEC"
+    },
+    {
+      "fromNode": "timeline_SEC",
+      "toNode": "SEC-019"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_TOOL"
+    },
+    {
+      "fromNode": "timeline_TOOL",
+      "toNode": "TOOL-001"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_FEASIBILITY"
+    },
+    {
+      "fromNode": "timeline_FEASIBILITY",
+      "toNode": "FEASIBILITY-001"
+    },
+    {
+      "fromNode": "timeline_FEASIBILITY",
+      "toNode": "FEASIBILITY-002"
+    },
+    {
+      "fromNode": "timeline_FEASIBILITY",
+      "toNode": "FEASIBILITY-003"
+    },
+    {
+      "fromNode": "timeline_FEASIBILITY",
+      "toNode": "FEASIBILITY-004"
+    },
+    {
+      "fromNode": "timeline_FEASIBILITY",
+      "toNode": "FEASIBILITY-005"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_LOCAL"
+    },
+    {
+      "fromNode": "timeline_LOCAL",
+      "toNode": "LOCAL-001"
+    },
+    {
+      "fromNode": "timeline_LOCAL",
+      "toNode": "LOCAL-002"
+    },
+    {
+      "fromNode": "timeline_LOCAL",
+      "toNode": "LOCAL-003"
+    },
+    {
+      "fromNode": "timeline_LOCAL",
+      "toNode": "LOCAL-004"
+    },
+    {
+      "fromNode": "timeline_LOCAL",
+      "toNode": "LOCAL-005"
+    },
+    {
+      "fromNode": "timeline_LOCAL",
+      "toNode": "LOCAL-006"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_INNOVATOR"
+    },
+    {
+      "fromNode": "timeline_INNOVATOR",
+      "toNode": "INNOVATOR-046"
+    },
+    {
+      "fromNode": "timeline_INNOVATOR",
+      "toNode": "INNOVATOR-047"
+    },
+    {
+      "fromNode": "timeline_INNOVATOR",
+      "toNode": "INNOVATOR-048"
+    },
+    {
+      "fromNode": "timeline_INNOVATOR",
+      "toNode": "INNOVATOR-049"
+    },
+    {
+      "fromNode": "timeline_INNOVATOR",
+      "toNode": "INNOVATOR-050"
+    },
+    {
+      "fromNode": "timeline_INNOVATOR",
+      "toNode": "INNOVATOR-051"
+    },
+    {
+      "fromNode": "timeline_INNOVATOR",
+      "toNode": "INNOVATOR-052"
+    },
+    {
+      "fromNode": "timeline_INNOVATOR",
+      "toNode": "INNOVATOR-053"
+    },
+    {
+      "fromNode": "title",
+      "toNode": "timeline_OBSIDIAN"
+    },
+    {
+      "fromNode": "timeline_OBSIDIAN",
+      "toNode": "OBSIDIAN-001"
+    },
+    {
+      "fromNode": "timeline_OBSIDIAN",
+      "toNode": "OBSIDIAN-002"
+    },
+    {
+      "fromNode": "timeline_OBSIDIAN",
+      "toNode": "OBSIDIAN-003"
+    },
+    {
+      "fromNode": "timeline_OBSIDIAN",
+      "toNode": "OBSIDIAN-004"
+    },
+    {
+      "fromNode": "timeline_OBSIDIAN",
+      "toNode": "OBSIDIAN-005"
+    },
+    {
+      "fromNode": "timeline_OBSIDIAN",
+      "toNode": "OBSIDIAN-006"
+    },
+    {
+      "fromNode": "timeline_OBSIDIAN",
+      "toNode": "OBSIDIAN-007"
+    },
+    {
+      "fromNode": "timeline_OBSIDIAN",
+      "toNode": "OBSIDIAN-008"
+    }
+  ]
+}

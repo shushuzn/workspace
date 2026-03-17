@@ -1,0 +1,93 @@
+{
+  "timestamp": "2026-03-17T17:47:56.636392",
+  "backup_location": "D:\\OpenClaw\\workspace\\agent-pm\\backups\\20260317_174756",
+  "operations": [
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\08-collectors",
+      "merge": "D:\\OpenClaw\\workspace\\40-collectors",
+      "status": "completed",
+      "files_counted": 16,
+      "bytes_counted": 2767893,
+      "errors": [],
+      "files_moved": 16
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\10-data",
+      "merge": "D:\\OpenClaw\\workspace\\data",
+      "status": "completed",
+      "files_counted": 129,
+      "bytes_counted": 7457086,
+      "errors": [],
+      "files_moved": 129
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\32-workflows",
+      "merge": "D:\\OpenClaw\\workspace\\40-workflows",
+      "status": "completed",
+      "files_counted": 0,
+      "bytes_counted": 0,
+      "errors": []
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\32-workflows",
+      "merge": "D:\\OpenClaw\\workspace\\workflows",
+      "status": "skipped",
+      "files_counted": 0,
+      "bytes_counted": 0,
+      "errors": [
+        "源文件夹不存在：D:\\OpenClaw\\workspace\\workflows"
+      ]
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\50-cache",
+      "merge": "D:\\OpenClaw\\workspace\\cache",
+      "status": "completed",
+      "files_counted": 1,
+      "bytes_counted": 90,
+      "errors": [],
+      "files_moved": 1
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\logs",
+      "merge": "D:\\OpenClaw\\workspace\\91-logs",
+      "status": "completed",
+      "files_counted": 0,
+      "bytes_counted": 0,
+      "errors": []
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\dashboard-data",
+      "merge": "D:\\OpenClaw\\workspace\\dashboard-tasks",
+      "status": "skipped",
+      "files_counted": 0,
+      "bytes_counted": 0,
+      "errors": [
+        "源文件夹不存在：D:\\OpenClaw\\workspace\\dashboard-tasks"
+      ]
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\memory",
+      "merge": "D:\\OpenClaw\\workspace\\13-memory",
+      "status": "completed",
+      "files_counted": 0,
+      "bytes_counted": 0,
+      "errors": []
+    }
+  ],
+  "stats": {
+    "folders_merged": 6,
+    "files_moved": 146,
+    "bytes_moved": 10225069,
+    "folders_deleted": 6,
+    "errors": 0,
+    "skipped": 2
+  }
+}

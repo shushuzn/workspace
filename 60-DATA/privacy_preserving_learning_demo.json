@@ -1,0 +1,68 @@
+{
+  "timestamp": "2026-03-16T17:36:48.820264",
+  "collaboration_result": {
+    "status": "completed",
+    "results": [
+      {
+        "round_number": 1,
+        "participating_parties": 3,
+        "aggregated_accuracy": 0.7346296801703849,
+        "privacy_cost": 0.1,
+        "communication_overhead_mb": 1.5,
+        "total_time_ms": 300
+      },
+      {
+        "round_number": 2,
+        "participating_parties": 3,
+        "aggregated_accuracy": 0.7872771939444333,
+        "privacy_cost": 0.1,
+        "communication_overhead_mb": 1.5,
+        "total_time_ms": 300
+      },
+      {
+        "round_number": 3,
+        "participating_parties": 3,
+        "aggregated_accuracy": 0.8582254489726291,
+        "privacy_cost": 0.1,
+        "communication_overhead_mb": 1.5,
+        "total_time_ms": 300
+      },
+      {
+        "round_number": 4,
+        "participating_parties": 3,
+        "aggregated_accuracy": 0.9065208775064815,
+        "privacy_cost": 0.1,
+        "communication_overhead_mb": 1.5,
+        "total_time_ms": 300
+      },
+      {
+        "round_number": 5,
+        "participating_parties": 3,
+        "aggregated_accuracy": 0.9486635112184231,
+        "privacy_cost": 0.1,
+        "communication_overhead_mb": 1.5,
+        "total_time_ms": 300
+      }
+    ],
+    "audit": {
+      "differential_privacy": true,
+      "epsilon_total": 1.0,
+      "epsilon_remaining": 0.5,
+      "mpc_rounds": 5,
+      "encryption_strength": "2048-bit RSA equivalent",
+      "privacy_guarantee": 0.99,
+      "audit_passed": true
+    },
+    "final_accuracy": 0.9486635112184231,
+    "privacy_guarantee": 0.99,
+    "audit_passed": true
+  },
+  "system_stats": {
+    "collaborations": 5,
+    "avg_accuracy": 0.8470633423624705,
+    "total_privacy_cost": 0.5,
+    "privacy_remaining": 0.5,
+    "mpc_rounds": 5,
+    "encryptions": 15
+  }
+}

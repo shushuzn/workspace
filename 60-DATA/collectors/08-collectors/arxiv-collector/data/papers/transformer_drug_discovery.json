@@ -1,0 +1,950 @@
+{
+  "keyword": "transformer drug discovery",
+  "lastUpdated": "2026-03-13T14:15:45.047Z",
+  "totalPapers": 50,
+  "newPapers": 50,
+  "papers": [
+    {
+      "id": "http://arxiv.org/abs/2603.12254v1",
+      "title": "Attend Before Attention: Efficient and Scalable Video Understanding via Autoregressive Gazing",
+      "summary": "Multi-modal large language models (MLLMs) have advanced general-purpose video understanding but struggle with long, high-resolution videos -- they process every pixel equally in their vision transformers (ViTs) or LLMs despite significant spatiotemporal redundancy. We introduce AutoGaze, a lightweight module that removes redundant patches before processed by a ViT or an MLLM. Trained with next-token prediction and reinforcement learning, AutoGaze autoregressively selects a minimal set of multi-scale patches that can reconstruct the video within a user-specified error threshold, eliminating redundancy while preserving information. Empirically, AutoGaze reduces visual tokens by 4x-100x and accelerates ViTs and MLLMs by up to 19x, enabling scaling MLLMs to 1K-frame 4K-resolution videos and achieving superior results on video benchmarks (e.g., 67.0% on VideoMME). Furthermore, we introduce HLVid: the first high-resolution, long-form video QA benchmark with 5-minute 4K-resolution videos, where an MLLM scaled with AutoGaze improves over the baseline by 10.1% and outperforms the previous best MLLM by 4.5%. Project page: https://autogaze.github.io/.",
+      "authors": [
+        "Baifeng Shi",
+        "Stephanie Fu",
+        "Long Lian",
+        "Hanrong Ye",
+        "David Eigen",
+        "Aaron Reite",
+        "Boyi Li",
+        "Jan Kautz",
+        "Song Han",
+        "David M. Chan",
+        "Pavlo Molchanov",
+        "Trevor Darrell",
+        "Hongxu Yin"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T17:58:52Z",
+      "updated": "2026-03-12T17:58:52Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12245v1",
+      "title": "One Model, Many Budgets: Elastic Latent Interfaces for Diffusion Transformers",
+      "summary": "Diffusion transformers (DiTs) achieve high generative quality but lock FLOPs to image resolution, limiting principled latency-quality trade-offs, and allocate computation uniformly across input spatial tokens, wasting resource allocation to unimportant regions. We introduce Elastic Latent Interface Transformer (ELIT), a drop-in, DiT-compatible mechanism that decouples input image size from compute. Our approach inserts a latent interface, a learnable variable-length token sequence on which standard transformer blocks can operate. Lightweight Read and Write cross-attention layers move information between spatial tokens and latents and prioritize important input regions. By training with random dropping of tail latents, ELIT learns to produce importance-ordered representations with earlier latents capturing global structure while later ones contain information to refine details. At inference, the number of latents can be dynamically adjusted to match compute constraints. ELIT is deliberately minimal, adding two cross-attention layers while leaving the rectified flow objective and the DiT stack unchanged. Across datasets and architectures (DiT, U-ViT, HDiT, MM-DiT), ELIT delivers consistent gains. On ImageNet-1K 512px, ELIT delivers an average gain of $35.3\\%$ and $39.6\\%$ in FID and FDD scores. Project page: https://snap-research.github.io/elit/",
+      "authors": [
+        "Moayed Haji-Ali",
+        "Willi Menapace",
+        "Ivan Skorokhodov",
+        "Dogyun Park",
+        "Anil Kag",
+        "Michael Vasilkovsky",
+        "Sergey Tulyakov",
+        "Vicente Ordonez",
+        "Aliaksandr Siarohin"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T17:57:04Z",
+      "updated": "2026-03-12T17:57:04Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12239v1",
+      "title": "Hidden polar phase in the quantum paraelectric SrTiO3",
+      "summary": "Hidden phases of quantum materials are collective states that exist outside the equilibrium phase diagram and can host exotic properties with transformative potential. However, because they can often mimic known states, identifying them remains challenging. Strontium titanate (SrTiO3) epitomizes this challenge: upon cooling, it displays signatures of ferroelectricity yet never develops this order. We combined mechanical strain with ultrafast laser pulses and x-ray scattering to discover a new polar state in SrTiO3 that is distinct from ferroelectricity. Its signature are distinctive polar vibrations with nanometer wavelengths. This reveals that strain stabilizes a hidden state characterized by a nanoscale polarization modulation rather than conventional homogeneous ferroelectricity. Our findings may offer an alternative explanation for quantum paraelectricity and demonstrate that probing collective excitations at finite momentum is essential for identifying hidden phases in quantum materials.",
+      "authors": [
+        "Huaiyu Hugo Wang",
+        "Ernesto Flores",
+        "Jade Stanton",
+        "Gal Orenstein",
+        "Peter R. Miedaner",
+        "Laura Foglia",
+        "Maya Martinez",
+        "David A. Reis",
+        "Roman Mankowsky",
+        "Mathias Sander",
+        "Henrik Lemke",
+        "Serhane Zerdane",
+        "Keith A. Nelson",
+        "Mariano Trigo"
+      ],
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall"
+      ],
+      "published": "2026-03-12T17:55:33Z",
+      "updated": "2026-03-12T17:55:33Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12235v1",
+      "title": "Transition from Statistical to Hardware-Limited Scaling in Photonic Quantum State Reconstruction",
+      "summary": "The theoretical efficiency of classical shadow tomography is predicated on a perfect Haar-random unitary ensemble, yet this mathematical ideal remains physically unattainable in near-term hardware. Here, we report the experimental discovery of a fundamental accuracy bound on integrated photonic processors: a ``Hardware Horizon'' where the reconstruction error undergoes a sharp phase transition. While the error initially obeys the predicted statistical scaling $\\mathcal{O}(M^{-1/2})$, it abruptly saturates at a floor determined by the spectral distortions of the realized unitary group. By deriving a phenomenological error model, we decouple the competing mechanisms of static coherent spectral distortion and dynamic decoherence, demonstrating that this intrinsic noise floor imposes a hard bound that statistical accumulation cannot overcome. These findings establish that the utility of shadow tomography on NISQ (noisy intermediate-scale quantum) hardware is defined by a specific scaling law involving hardware parameters, necessitating active compensation strategies to bridge the gap between theoretical purity and the noisy reality of integrated photonics.",
+      "authors": [
+        "Attila Baumann",
+        "Zsolt Kis",
+        "János Koltai",
+        "Gábor Vattay"
+      ],
+      "categories": [
+        "quant-ph",
+        "cond-mat.dis-nn",
+        "cs.ET",
+        "physics.optics"
+      ],
+      "published": "2026-03-12T17:53:33Z",
+      "updated": "2026-03-12T17:53:33Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12228v1",
+      "title": "Neural Thickets: Diverse Task Experts Are Dense Around Pretrained Weights",
+      "summary": "Pretraining produces a learned parameter vector that is typically treated as a starting point for further iterative adaptation. In this work, we instead view the outcome of pretraining as a distribution over parameter vectors, whose support already contains task-specific experts. We show that in small models such expert solutions occupy a negligible fraction of the volume of this distribution, making their discovery reliant on structured optimization methods such as gradient descent. In contrast, in large, well-pretrained models the density of task-experts increases dramatically, so that diverse, task-improving specialists populate a substantial fraction of the neighborhood around the pretrained weights. Motivated by this perspective, we explore a simple, fully parallel post-training method that samples $N$ parameter perturbations at random, selects the top $K$, and ensembles predictions via majority vote. Despite its simplicity, this approach is competitive with standard post-training methods such as PPO, GRPO, and ES for contemporary large-scale models.",
+      "authors": [
+        "Yulu Gan",
+        "Phillip Isola"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T17:49:30Z",
+      "updated": "2026-03-12T17:49:30Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12226v1",
+      "title": "Sparking Scientific Creativity via LLM-Driven Interdisciplinary Inspiration",
+      "summary": "Despite interdisciplinary research leading to larger and longer-term impact, most work remains confined to single-domain academic silos. Recent AI-based approaches to scientific discovery show promise for interdisciplinary research, but many prioritize rapidly designing experiments and solutions, bypassing the exploratory, collaborative reasoning processes that drive creative interdisciplinary breakthroughs. As a result, prior efforts largely prioritize automating scientific discovery rather than augmenting the reasoning processes that underlie scientific disruption. We present Idea-Catalyst, a novel framework that systematically identifies interdisciplinary insights to support creative reasoning in both humans and large language models. Starting from an abstract research goal, Idea-Catalyst is designed to assist the brainstorming stage, explicitly avoiding premature anchoring on specific solutions. The framework embodies key metacognitive features of interdisciplinary reasoning: (a) defining and assessing research goals, (b) awareness of a domain's opportunities and unresolved challenges, and (c) strategic exploration of interdisciplinary ideas based on impact potential. Concretely, Idea-Catalyst decomposes an abstract goal (e.g., improving human-AI collaboration) into core target-domain research questions that guide the analysis of progress and open challenges within that domain. These challenges are reformulated as domain-agnostic conceptual problems, enabling retrieval from external disciplines (e.g., Psychology, Sociology) that address analogous issues. By synthesizing and recontextualizing insights from these domains back into the target domain, Idea-Catalyst ranks source domains by their interdisciplinary potential. Empirically, this targeted integration improves average novelty by 21% and insightfulness by 16%, while remaining grounded in the original research problem.",
+      "authors": [
+        "Priyanka Kargupta",
+        "Shuhaib Mehri",
+        "Dilek Hakkani-Tur",
+        "Jiawei Han"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T17:48:34Z",
+      "updated": "2026-03-12T17:48:34Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12222v1",
+      "title": "HiAP: A Multi-Granular Stochastic Auto-Pruning Framework for Vision Transformers",
+      "summary": "Vision Transformers require significant computational resources and memory bandwidth, severely limiting their deployment on edge devices. While recent structured pruning methods successfully reduce theoretical FLOPs, they typically operate at a single structural granularity and rely on complex, multi-stage pipelines with post-hoc thresholding to satisfy sparsity budgets. In this paper, we propose Hierarchical Auto-Pruning (HiAP), a continuous relaxation framework that discovers optimal sub-networks in a single end-to-end training phase without requiring manual importance heuristics or predefined per-layer sparsity targets. HiAP introduces stochastic Gumbel-Sigmoid gates at multiple granularities: macro-gates to prune entire attention heads and FFN blocks, and micro-gates to selectively prune intra-head dimensions and FFN neurons. By optimizing both levels simultaneously, HiAP addresses both the memory-bound overhead of loading large matrices and the compute-bound mathematical operations. HiAP naturally converges to stable sub-networks using a loss function that incorporates both structural feasibility penalties and analytical FLOPs. Extensive experiments on ImageNet demonstrate that HiAP organically discovers highly efficient architectures, and achieves a competitive accuracy-efficiency Pareto frontier for models like DeiT-Small, matching the performance of sophisticated multi-stage methods while significantly simplifying the deployment pipeline.",
+      "authors": [
+        "Andy Li",
+        "Aiden Durrant",
+        "Milan Markovic",
+        "Georgios Leontidis"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-03-12T17:45:38Z",
+      "updated": "2026-03-12T17:45:38Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12206v1",
+      "title": "CLASP: Defending Hybrid Large Language Models Against Hidden State Poisoning Attacks",
+      "summary": "State space models (SSMs) like Mamba have gained significant traction as efficient alternatives to Transformers, achieving linear complexity while maintaining competitive performance. However, Hidden State Poisoning Attacks (HiSPAs), a recently discovered vulnerability that corrupts SSM memory through adversarial strings, pose a critical threat to these architectures and their hybrid variants. Framing the HiSPA mitigation task as a binary classification problem at the token level, we introduce the CLASP model to defend against this threat. CLASP exploits distinct patterns in Mamba's block output embeddings (BOEs) and uses an XGBoost classifier to identify malicious tokens with minimal computational overhead. We consider a realistic scenario in which both SSMs and HiSPAs are likely to be used: an LLM screening résumés to identify the best candidates for a role. Evaluated on a corpus of 2,483 résumés totaling 9.5M tokens with controlled injections, CLASP achieves 95.9% token-level F1 score and 99.3% document-level F1 score on malicious tokens detection. Crucially, the model generalizes to unseen attack patterns: under leave-one-out cross-validation, performance remains high (96.9% document-level F1), while under clustered cross-validation with structurally novel triggers, it maintains useful detection capability (91.6% average document-level F1). Operating independently of any downstream model, CLASP processes 1,032 tokens per second with under 4GB VRAM consumption, potentially making it suitable for real-world deployment as a lightweight front-line defense for SSM-based and hybrid architectures. All code and detailed results are available at https://anonymous.4open.science/r/hispikes-91C0.",
+      "authors": [
+        "Alexandre Le Mercier",
+        "Thomas Demeester",
+        "Chris Develder"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-03-12T17:29:55Z",
+      "updated": "2026-03-12T17:29:55Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12183v1",
+      "title": "Proof-Carrying Materials: Falsifiable Safety Certificates for Machine-Learned Interatomic Potentials",
+      "summary": "Machine-learned interatomic potentials (MLIPs) are deployed for high-throughput materials screening without formal reliability guarantees. We show that a single MLIP used as a stability filter misses 93% of density functional theory (DFT)-stable materials (recall 0.07) on a 25,000-material benchmark. Proof-Carrying Materials (PCM) closes this gap through three stages: adversarial falsification across compositional space, bootstrap envelope refinement with 95% confidence intervals, and Lean 4 formal certification. Auditing CHGNet, TensorNet and MACE reveals architecture-specific blind spots with near-zero pairwise error correlations (r &lt;= 0.13; n = 5,000), confirmed by independent Quantum ESPRESSO validation (20/20 converged; median DFT/CHGNet force ratio 12x). A risk model trained on PCM-discovered features predicts failures on unseen materials (AUC-ROC = 0.938 +/- 0.004) and transfers across architectures (cross-MLIP AUC-ROC ~ 0.70; feature importance r = 0.877). In a thermoelectric screening case study, PCM-audited protocols discover 62 additional stable materials missed by single-MLIP screening - a 25% improvement in discovery yield.",
+      "authors": [
+        "Abhinaba Basu",
+        "Pavan Chakraborty"
+      ],
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cs.AI",
+        "cs.LG",
+        "physics.comp-ph"
+      ],
+      "published": "2026-03-12T17:13:25Z",
+      "updated": "2026-03-12T17:13:25Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12176v1",
+      "title": "BehaviorVLM: Unified Finetuning-Free Behavioral Understanding with Vision-Language Reasoning",
+      "summary": "Understanding freely moving animal behavior is central to neuroscience, where pose estimation and behavioral understanding form the foundation for linking neural activity to natural actions. Yet both tasks still depend heavily on human annotation or unstable unsupervised pipelines, limiting scalability and reproducibility. We present BehaviorVLM, a unified vision-language framework for pose estimation and behavioral understanding that requires no task-specific finetuning and minimal human labeling by guiding pretrained Vision-Language Models (VLMs) through detailed, explicit, and verifiable reasoning steps. For pose estimation, we leverage quantum-dot-grounded behavioral data and propose a multi-stage pipeline that integrates temporal, spatial, and cross-view reasoning. This design greatly reduces human annotation effort, exposes low-confidence labels through geometric checks such as reprojection error, and produces labels that can later be filtered, corrected, or used to fine-tune downstream pose models. For behavioral understanding, we propose a pipeline that integrates deep embedded clustering for over-segmented behavior discovery, VLM-based per-clip video captioning, and LLM-based reasoning to merge and semantically label behavioral segments. The behavioral pipeline can operate directly from visual information and does not require keypoints to segment behavior. Together, these components enable scalable, interpretable, and label-light analysis of multi-animal behavior.",
+      "authors": [
+        "Jingyang Ke",
+        "Weihan Li",
+        "Amartya Pradhan",
+        "Jeffrey Markowitz",
+        "Anqi Wu"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T17:09:20Z",
+      "updated": "2026-03-12T17:09:20Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12164v1",
+      "title": "Le Roy, Lerch and Legendre chi functions and generalised Borel-Le Roy transform",
+      "summary": "The Le Roy function has been the focus of intensive research in recent years, owing both to its relevance in analysis and its versatility in applications involving fractional differential operators. Other special functions - such as the Lerch transcendent and the Legendre chi function - have found applications ranging from Bose-Einstein and Fermi-Dirac statistics in physics to pure mathematical investigations involving polylogarithms and Dirichlet L-series. In this article, we present a unified framework based on a recent reformulation of Indicial Umbral Theory (IUT) grounded in the formal theory of power series. Within this setting, we study the properties and generalisations of these special functions. In particular, we build upon the revised formulation of IUT to incorporate the role of the Borel-Le Roy transform, and to explore the extension of the formalism to divergent series via appropriate resummation techniques.",
+      "authors": [
+        "Giuseppe Dattoli",
+        "Roberto Ricci"
+      ],
+      "categories": [
+        "math.CA",
+        "math-ph"
+      ],
+      "published": "2026-03-12T17:00:57Z",
+      "updated": "2026-03-12T17:00:57Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12157v1",
+      "title": "Compactness in Dimension Five and Equivariant Noncompactness for the CR Yamabe Problem",
+      "summary": "We study compactness and noncompactness phenomena for the CR Yamabe equation on compact strictly pseudoconvex CR manifolds. First, in dimension five we establish uniform \\emph{a priori} estimates for families of positive solutions of subcritical equations for the conformal CR sub-Laplacian \\[ L_{J}u = u^{p}, \\] with $p$ bounded away from the critical exponent, assuming positivity of the CR Yamabe constant and positivity of the $p$-mass at every point. As a consequence, the corresponding set of solutions is precompact in Hölder topologies. Secondly, we consider the equivariant CR Yamabe problem for a compact subgroup $G$ of pseudo-Hermitian transformations. We construct a $G$-invariant CR structure on $S^{3}$, not equivalent to the standard one, for which the associated CR Yamabe equation admits a sequence of $G$-invariant solutions whose maxima diverge, thereby proving noncompactness in the equivariant setting. The arguments combine a Pohozaev-type identity in pseudohermitian normal coordinates with a blow-up analysis and Liouville-type classification results on the Heisenberg group.",
+      "authors": [
+        "Claudio Afeltra",
+        "Andrea Pinamonti",
+        "Pak Tung Ho"
+      ],
+      "categories": [
+        "math.AP"
+      ],
+      "published": "2026-03-12T16:53:22Z",
+      "updated": "2026-03-12T16:53:22Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12127v1",
+      "title": "The Geometry of Clifford Algorithms: Bernstein-Vazirani as Classical Computation in a Rotated Basis",
+      "summary": "The Bernstein-Vazirani (BV) algorithm is frequently taught as a canonical example of quantum parallelism, yet the standard interference-based explanation often obscures its underlying simplicity. We present a geometric reframing in which the Hadamard gate \"wrapping\" acts as a global basis rotation rather than a generator of computational complexity. This perspective reveals that the algorithm is effectively a classical linear computation over GF(2) performed in the conjugate Fourier basis, with the apparent parallelism arising from coordinate transformation. Building on Mermin's earlier pedagogical shortcut, which presented a 'classical' circuit equivalent but stopped short of explicitly labeling it as such, we elevate this to a formal geometric framework. In the extension, we distinguish between globally rotated circuits--which we reveal as classical linear computations--and topologically twisted circuits that generate quantum entanglement. We introduce a pedagogical taxonomy distinguishing (1) pure computational-basis circuits, (2) globally rotated circuits (exemplified by Bernstein-Vazirani), and (3) topologically twisted circuits involving non-aligned subsystem bases. This framework allows viewing the Gottesman-Knill theorem from a new angle, extends students' understanding of phase kickback and the 'Ricochet Property'. Furthermore, it provides a more intuitive starting point for explaining Bell-pair extensions through concrete circuit derivations and Qiskit simulations suitable for undergraduate quantum information courses. The outlook explores how this geometric view paves the way for understanding entanglement as topological twists.",
+      "authors": [
+        "Bartosz Chmura"
+      ],
+      "categories": [
+        "quant-ph",
+        "physics.ed-ph"
+      ],
+      "published": "2026-03-12T16:29:39Z",
+      "updated": "2026-03-12T16:29:39Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12075v1",
+      "title": "Decentralized Cooperative Localization for Multi-Robot Systems with Asynchronous Sensor Fusion",
+      "summary": "Decentralized cooperative localization (DCL) is a promising approach for nonholonomic mobile robots operating in GPS-denied environments with limited communication infrastructure. This paper presents a DCL framework in which each robot performs localization locally using an Extended Kalman Filter, while sharing measurement information during update stages only when communication links are available and companion robots are successfully detected by LiDAR. The framework preserves cross-correlation consistency among robot state estimates while handling asynchronous sensor data with heterogeneous sampling rates and accommodating accelerations during dynamic maneuvers. Unlike methods that require pre-aligned coordinate systems, the proposed approach allows robots to initialize with arbitrary reference-frame orientations and achieves automatic alignment through transformation matrices in both the prediction and update stages. To improve robustness in feature-sparse environments, we introduce a dual-landmark evaluation framework that exploits both static environmental features and mobile robots as dynamic landmarks. The proposed framework enables reliable detection and feature extraction during sharp turns, while prediction accuracy is improved through information sharing from mutual observations. Experimental results in both Gazebo simulation and real-world basement environments show that DCL outperforms centralized cooperative localization (CCL), achieving a 34% reduction in RMSE, while the dual-landmark variant yields an improvement of 56%. These results demonstrate the applicability of DCL to challenging domains such as enclosed spaces, underwater environments, and feature-sparse terrains where conventional localization methods are ineffective.",
+      "authors": [
+        "Nivand Khosravi",
+        "Niusha Khosravi",
+        "Mohammad Bozorg",
+        "Masoud S. Bahraini"
+      ],
+      "categories": [
+        "cs.RO",
+        "eess.SY"
+      ],
+      "published": "2026-03-12T15:42:59Z",
+      "updated": "2026-03-12T15:42:59Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12063v1",
+      "title": "NBAvatar: Neural Billboards Avatars with Realistic Hand-Face Interaction",
+      "summary": "We present NBAvatar - a method for realistic rendering of head avatars handling non-rigid deformations caused by hand-face interaction. We introduce a novel representation for animated avatars by combining the training of oriented planar primitives with neural rendering. Such a combination of explicit and implicit representations enables NBAvatar to handle temporally and pose-consistent geometry, along with fine-grained appearance details provided by the neural rendering technique. In our experiments, we demonstrate that NBAvatar implicitly learns color transformations caused by face-hand interactions and surpasses existing approaches in terms of novel-view and novel-pose rendering quality. Specifically, NBAvatar achieves up to 30% LPIPS reduction under high-resolution megapixel rendering compared to Gaussian-based avatar methods, while also improving PSNR and SSIM, and achieves higher structural similarity compared to the state-of-the-art hand-face interaction method InteractAvatar.",
+      "authors": [
+        "David Svitov",
+        "Mahtab Dahaghin"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T15:31:00Z",
+      "updated": "2026-03-12T15:31:00Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12057v1",
+      "title": "Coarse-Guided Visual Generation via Weighted h-Transform Sampling",
+      "summary": "Coarse-guided visual generation, which synthesizes fine visual samples from degraded or low-fidelity coarse references, is essential for various real-world applications. While training-based approaches are effective, they are inherently limited by high training costs and restricted generalization due to paired data collection. Accordingly, recent training-free works propose to leverage pretrained diffusion models and incorporate guidance during the sampling process. However, these training-free methods either require knowing the forward (fine-to-coarse) transformation operator, e.g., bicubic downsampling, or are difficult to balance between guidance and synthetic quality. To address these challenges, we propose a novel guided method by using the h-transform, a tool that can constrain stochastic processes (e.g., sampling process) under desired conditions. Specifically, we modify the transition probability at each sampling timestep by adding to the original differential equation with a drift function, which approximately steers the generation toward the ideal fine sample. To address unavoidable approximation errors, we introduce a noise-level-aware schedule that gradually de-weights the term as the error increases, ensuring both guidance adherence and high-quality synthesis. Extensive experiments across diverse image and video generation tasks demonstrate the effectiveness and generalization of our method.",
+      "authors": [
+        "Yanghao Wang",
+        "Ziqi Jiang",
+        "Zhen Wang",
+        "Long Chen"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T15:26:19Z",
+      "updated": "2026-03-12T15:26:19Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12048v1",
+      "title": "Detection of a weak magnetic field in the Balmer emission line white dwarf WDJ1653-1001",
+      "summary": "The small DAHe and DAe spectral classes comprise isolated, hydrogen-dominated atmosphere white dwarfs that exhibit variable photometric flux and Balmer line emission. These mysterious systems offer unique insight into the complex interplay between magnetic fields, stellar rotation and atmospheric activity in single white dwarfs. DAHe stars have detectable magnetic fields through Zeeman-split spectral lines, whereas DAe stars lack such splitting. We report the first discovery and characterisation of magnetism in the DAe white dwarf WDJ165335.21-100116.33 with new time-resolved spectropolarimetry from FORS2. We detect a weak but variable longitudinal magnetic field with values $\\langle B_z \\rangle &gt; -9.2 \\pm 2.4$ kG and $\\langle B_z \\rangle &lt; -2.2 \\pm 1.0$ kG. Independent ZTF and ATLAS photometry reveal a consistent period of P = 80.3070 $\\pm$ 0.0007 h. Time-resolved optical spectroscopy obtained with six ground-based instruments demonstrates strong modulation in the strength of the H$α$ and H$β$ Balmer line emission with P = 80.2922 $\\pm$ 0.0108 h. The photometric flux and Balmer emission strength vary in antiphase, with the strongest magnetic detections coinciding with phases of low photometric flux and strong line emission. These characteristics support the theory that a magnetically active, temperature-inverted spot/region is producing an optically thin chromospheric emission region. Comparison with other DAe and DAHe white dwarfs reveals all systems have a strikingly similar antiphase phenomenology, reinforcing the theory that they are subject to a unified physical mechanism. With the detection of a weak magnetic field, we reclassify WDJ165335.21-100116.33 as a low-field DAHe white dwarf.",
+      "authors": [
+        "Abbigail Elms",
+        "Stefano Bagnulo",
+        "Pier-Emmanuel Tremblay",
+        "Tim Cunningham",
+        "James Munday",
+        "John Landstreet",
+        "Kareem El-Badry",
+        "Ilaria Caiazzo",
+        "Carl Melis",
+        "Viktoria Pinter",
+        "Alycia Weinberger"
+      ],
+      "categories": [
+        "astro-ph.SR"
+      ],
+      "published": "2026-03-12T15:23:10Z",
+      "updated": "2026-03-12T15:23:10Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12036v1",
+      "title": "Single Pixel Image Classification using an Ultrafast Digital Light Projector",
+      "summary": "Pattern recognition and image classification are essential tasks in machine vision. Autonomous vehicles, for example, require being able to collect the complex information contained in a changing environment and classify it in real time. Here, we experimentally demonstrate image classification at multi-kHz frame rates combining the technique of single pixel imaging (SPI) with a low complexity machine learning model. The use of a microLED-on-CMOS digital light projector for SPI enables ultrafast pattern generation for sub-ms image encoding. We investigate the classification accuracy of our experimental system against the broadly accepted benchmarking task of the MNIST digits classification. We compare the classification performance of two machine learning models: An extreme learning machine (ELM) and a backpropagation trained deep neural network. The complexity of both models is kept low so the overhead added to the inference time is comparable to the image generation time. Crucially, our single pixel image classification approach is based on a spatiotemporal transformation of the information, entirely bypassing the need for image reconstruction. By exploring the performance of our SPI based ELM as binary classifier we demonstrate its potential for efficient anomaly detection in ultrafast imaging scenarios.",
+      "authors": [
+        "Aisha Kanwal",
+        "Graeme E. Johnstone",
+        "Fahimeh Dehkhoda",
+        "Johannes H. Herrnsdorf",
+        "Robert K. Henderson",
+        "Martin D. Dawson",
+        "Xavier Porte",
+        "Michael J. Strain"
+      ],
+      "categories": [
+        "cs.CV",
+        "physics.optics"
+      ],
+      "published": "2026-03-12T15:12:34Z",
+      "updated": "2026-03-12T15:12:34Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12017v1",
+      "title": "Thermodynamic Descriptors from Molecular Dynamics as Machine Learning Features for Extrapolable Property Prediction",
+      "summary": "Machine learning (ML) models which rely on molecular structure excel at predicting properties for well-represented organic compounds, however their limited ability to extrapolate to chemotypes outside their training domain, remains a critical bottleneck in chemical discovery. This challenge is particularly acute in industrial discovery, where navigating uncharted chemical space to generate new intellectual property is a primary objective. Normal boiling points serve as a key benchmark for testing the extrapolative power of ML algorithms. A major limitation is that group-contribution methods are by design unable to generate predictions for molecules containing unparameterized fragments. Here, we demonstrate that this limitation can be overcome by replacing structural descriptors with thermodynamic properties computed directly from molecular dynamics simulations. We introduce a physics-augmented framework where a CatBoost regression model learns directly from ensemble-averaged cohesive energies, heats of vaporization, and densities extracted from atomistic liquid-phase simulations. Benchmark comparisons reveal that while both our physics-augmented model and conventional structure-based models perform comparably well on standard organic compounds, only the former maintains controlled error growth when extrapolating to structurally dissimilar chemical space. Our model successfully predicts boiling points for chemical classes entirely absent from training -- including inorganic compounds, salts, and molecules with elements like Si, B, and Te -- where structure-based models are fundamentally inapplicable. By encoding the intermolecular forces governing phase behavior, our framework establishes a generalizable strategy for property prediction beyond the structural boundaries of the existing methods.",
+      "authors": [
+        "Nuria H. Espejo",
+        "Pablo Llombart",
+        "Andrés González de Castilla",
+        "Jorge Ramirez",
+        "Jorge R. Espinosa",
+        "Adiran Garaizar"
+      ],
+      "categories": [
+        "physics.chem-ph"
+      ],
+      "published": "2026-03-12T14:59:42Z",
+      "updated": "2026-03-12T14:59:42Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.12013v1",
+      "title": "Pano360: Perspective to Panoramic Vision with Geometric Consistency",
+      "summary": "Prior panorama stitching approaches heavily rely on pairwise feature correspondences and are unable to leverage geometric consistency across multiple views. This leads to severe distortion and misalignment, especially in challenging scenes with weak textures, large parallax, and repetitive patterns. Given that multi-view geometric correspondences can be directly constructed in 3D space, making them more accurate and globally consistent, we extend the 2D alignment task to the 3D photogrammetric space. We adopt a novel transformer-based architecture to achieve 3D awareness and aggregate global information across all views. It directly utilizes camera poses to guide image warping for global alignment in 3D space and employs a multi-feature joint optimization strategy to compute the seams. Additionally, to establish an evaluation benchmark and train our network, we constructed a large-scale dataset of real-world scenes. Extensive experiments show that our method significantly outperforms existing alternatives in alignment accuracy and perceptual quality.",
+      "authors": [
+        "Zhengdong Zhu",
+        "Weiyi Xue",
+        "Zuyuan Yang",
+        "Wenlve Zhou",
+        "Zhiheng Zhou"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T14:56:14Z",
+      "updated": "2026-03-12T14:56:14Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11998v1",
+      "title": "Quantum simulation of Liouville equation in geometrical optics with partial transmission and reflection via Schrödingerization",
+      "summary": "This paper investigates quantum simulation algorithms for the Liouville equation in geometrical optics with partial transmission and reflection at sharp interfaces, based on the Schrödingerization method. By means of a warped phase transformation in one higher dimension, the Schrödingerization method converts linear partial differential equations into a system of Schrödinger-type equations with unitary evolution, thereby rendering them suitable for quantum simulation. In this work, the Schrödingerization method is combined with a Hamiltonian-preserving scheme that incorporates partial transmission and reflection into the numerical flux. A main difficulty is that the interface treatment in the classical scheme relies on threshold-dependent \"if/else\" procedures, making it highly nontrivial to reformulate the method in a matrix form suitable for quantum simulation. To overcome this difficulty, we encode the interface conditions into a partial transmission and reflection matrix prepared a priori, rather than during the time evolution. We present detailed constructions of the resulting quantum algorithms and show through complexity analysis that the proposed methods achieve polynomial quantum advantage in the precision parameter $ε$ over their classical counterparts.",
+      "authors": [
+        "Shi Jin",
+        "Shuyi Zhang"
+      ],
+      "categories": [
+        "quant-ph"
+      ],
+      "published": "2026-03-12T14:47:16Z",
+      "updated": "2026-03-12T14:47:16Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11990v1",
+      "title": "On the Coalescence Time Distribution in Multi-type Supercritical Branching Processes",
+      "summary": "Consider a population evolving as a discrete-time supercritical multi-type Galton--Watson process. Suppose we run the process for $T$ generations, then sample $k$ individuals uniformly at generation $T$ and trace their genealogy backwards in time. In the limiting regime as $T \\rightarrow \\infty$, the expected behaviour of the sample's ancestry has been analysed extensively in the single-type case and, more recently, for multi-type processes in the critical case. In this paper, we present a formula for the distribution function of the generation $t$ of the most recent common ancestor in terms of the limiting distribution of the normalised population size. In addition, we provide effective bounds for the decay of this distribution function to 1 in terms of the harmonic moments of the population size at generation $t$. In order to better understand the behaviour of these harmonic moments, we use a multi-type generalisation of the Harris--Sevastyanov transformation to express harmonic moments at generation $t$ in terms of moments of the transformed process at the first generation. We present numerical results demonstrating that it is possible to approximate the coalescence time distribution effectively in practical settings.",
+      "authors": [
+        "Janique Krasnowska",
+        "Paul Jenkins",
+        "Adam Johansen"
+      ],
+      "categories": [
+        "math.PR"
+      ],
+      "published": "2026-03-12T14:42:14Z",
+      "updated": "2026-03-12T14:42:14Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11988v1",
+      "title": "ConvScale: Conversational Interviews for Scale-Aligned Measurement",
+      "summary": "Conversational interviews are commonly used to complement structured surveys by eliciting rich and contextualized responses, which are typically analyzed qualitatively. However, their potential contribution to quantitative measurement remains underexplored. In this paper, we introduce ConvScale, an AI-supported approach that transforms psychometric scales into natural conversational interviews while preserving the original measurement structure. Based on interview data, ConvScale predicts item-level scores and aggregates them to derive scale-based assessments. In a within-subjects study with 18 participants, our results show that ConvScale-derived scores align closely with participants' self-report scores at both the item and construct levels, while maintaining moderate internal reliability; however, the structural validity was inadequate. In light of this, we discussed the potential of supporting quantitative measurement through interviews and proposed implications for future designs.",
+      "authors": [
+        "Peinuan Qin",
+        "Jingzhu Chen",
+        "Yitian Yang",
+        "Han Meng",
+        "Zicheng Zhu",
+        "Yi-Chieh Lee"
+      ],
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-03-12T14:39:44Z",
+      "updated": "2026-03-12T14:39:44Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11970v1",
+      "title": "Statistical and structural identifiability in representation learning",
+      "summary": "Representation learning models exhibit a surprising stability in their internal representations. Whereas most prior work treats this stability as a single property, we formalize it as two distinct concepts: statistical identifiability (consistency of representations across runs) and structural identifiability (alignment of representations with some unobserved ground truth). Recognizing that perfect pointwise identifiability is generally unrealistic for modern representation learning models, we propose new model-agnostic definitions of statistical and structural near-identifiability of representations up to some error tolerance $ε$. Leveraging these definitions, we prove a statistical $ε$-near-identifiability result for the representations of models with nonlinear decoders, generalizing existing identifiability theory beyond last-layer representations in e.g. generative pre-trained transformers (GPTs) to near-identifiability of the intermediate representations of a broad class of models including (masked) autoencoders (MAEs) and supervised learners. Although these weaker assumptions confer weaker identifiability, we show that independent components analysis (ICA) can resolve much of the remaining linear ambiguity for this class of models, and validate and measure our near-identifiability claims empirically. With additional assumptions on the data-generating process, statistical identifiability extends to structural identifiability, yielding a simple and practical recipe for disentanglement: ICA post-processing of latent representations. On synthetic benchmarks, this approach achieves state-of-the-art disentanglement using a vanilla autoencoder. With a foundation model-scale MAE for cell microscopy, it disentangles biological variation from technical batch effects, substantially improving downstream generalization.",
+      "authors": [
+        "Walter Nelson",
+        "Marco Fumero",
+        "Theofanis Karaletsos",
+        "Francesco Locatello"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-12T14:19:58Z",
+      "updated": "2026-03-12T14:19:58Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11959v1",
+      "title": "Near-Field Multiuser Beam Training for XL-MIMO: An End-to-End Interference-Aware Approach with Pilot Limitations",
+      "summary": "Near-field propagation in extremely large-scale MIMO (XL-MIMO) enlarges the beam training (BT) search space by introducing an additional range dimension, which makes conventional codebook-based beam sweeping prohibitively expensive under limited pilot resources, especially for multiuser sub-connected hybrid architectures. This letter proposes a deep-learning-based interference-aware multiuser BT framework (DL-IABT) that directly predicts analog beam indices from a small number of uplink sensing measurements. By exploiting a subarray-level approximation, a far-field codebook is adopted to represent each subarray response with negligible mismatch. To enable end-to-end (E2E) learning, we derive a variant-MSE surrogate loss by eliminating the digital precoder through a closed-form MMSE solution from KKT conditions, which implicitly accounts for multiuser interference (MUI). The proposed network integrates a complex-valued sensing front-end, a shared complex-valued encoder, a Transformer-based multiuser predictor, and a scalable Gumbel--Softmax beam selection head. Simulation results show that DL-IABT achieves near-optimal sum-rate performance while providing markedly higher effective throughput under pilot overhead constraints.",
+      "authors": [
+        "Xinyang Li",
+        "Songjie Yang",
+        "Xiang Ling",
+        "Jianhui Song",
+        "Yibo Wang",
+        "Hua Chen"
+      ],
+      "categories": [
+        "eess.SP"
+      ],
+      "published": "2026-03-12T14:06:20Z",
+      "updated": "2026-03-12T14:06:20Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11945v1",
+      "title": "Identifying highly magnetized white dwarfs: A dimensionality reduction framework for estimating magnetic fields",
+      "summary": "Magnetic fields play a crucial role in compact object physics, particularly in white dwarfs (WDs), where high densities can sustain strong magnetic fields. Observations have revealed magnetized WDs (MWDs) with surface fields reaching approximately $10^9\\rm\\,G$, although high-field MWDs are fewer in number in current catalogs owing to their intrinsic faintness and limitations in conventional electromagnetic surveys. In this study, we apply unsupervised machine learning (ML) techniques to systematically analyze a sample of hydrogen-atmosphere (DA) WDs. Using Uniform Manifold Approximation and Projection (UMAP) for dimensionality reduction and Density-Based Spatial Clustering of Applications with Noise (DBSCAN) for cluster identification, we classify distinct subpopulations within the DA WD sample. Each cluster exhibits unique intrinsic properties such as mass, surface gravity, temperature, and age. Our analysis further reveals that these subgroups effectively differentiate MWDs from non-magnetic or weakly magnetic counterparts. Moreover, utilizing a set of previously confirmed MWDs, we estimate the field strengths of all other MWDs lacking magnetic field measurements. This study underscores the effectiveness of ML-based approaches in astrophysical discovery, particularly detecting magnetized compact objects when direct measurements are unavailable.",
+      "authors": [
+        "Surajit Kalita",
+        "Akhil Uniyal",
+        "Tomasz Bulik",
+        "Yosuke Mizuno"
+      ],
+      "categories": [
+        "astro-ph.SR",
+        "astro-ph.HE",
+        "astro-ph.IM"
+      ],
+      "published": "2026-03-12T13:56:03Z",
+      "updated": "2026-03-12T13:56:03Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11940v1",
+      "title": "Exhaustive Circuit Mapping of a Single-Cell Foundation Model Reveals Massive Redundancy, Heavy-Tailed Hub Architecture, and Layer-Dependent Differentiation Control",
+      "summary": "Mechanistic interpretability of biological foundation models has relied on selective feature sampling, pairwise interaction testing, and observational trajectory analysis. Each of these can introduce systematic bias. Here we present three experiments that address these limitations through exhaustive circuit tracing, higher order combinatorial ablation, and causal trajectory steering in Geneformer, a transformer based single cell foundation model. First, exhaustive tracing of all 4065 active sparse autoencoder features at layer 5 yields 1393850 significant downstream edges, a 27 fold expansion over selective sampling. This reveals a heavy tailed hub distribution in which 1.8 percent of features account for disproportionate connectivity and 40 percent of the top 20 hubs lack biological annotation. These results indicate systematic annotation bias in prior selective analyses. Second, three way combinatorial ablation across 8 feature triplets shows that redundancy deepens monotonically with interaction order, with a three way ratio of 0.59 versus a pairwise ratio of 0.74, and with zero synergy. This confirms that the model architecture is subadditive at all tested orders. Third, trajectory guided feature steering establishes a causal link between layer position and differentiation directionality. Late layer features at L17 consistently push cell states toward maturity, with fraction positive equal to 1.0. Early and mid layer features at L0 and L11 mostly push away from maturity, with fraction positive ranging from 0.00 to 0.58. Together these results move from correlation toward causal evidence for layer dependent control of cell state.",
+      "authors": [
+        "Ihor Kendiukhov"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-12T13:53:20Z",
+      "updated": "2026-03-12T13:53:20Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11927v1",
+      "title": "CogSearch: A Cognitive-Aligned Multi-Agent Framework for Proactive Decision Support in E-Commerce Search",
+      "summary": "Modern e-commerce search engines, largely rooted in passive retrieval-and-ranking models, frequently fail to support complex decision-making, leaving users overwhelmed by cognitive friction. In this paper, we introduce CogSearch, a novel cognitive-oriented multi-agent framework that reimagines e-commerce search as a proactive decision support system. By synergizing four specialized agents, CogSearch mimics human cognitive workflows: it decomposes intricate user intents, fuses heterogeneous knowledge across internal and external sources, and delivers highly actionable insights. Our offline benchmarks validate CogSearch's excellence in consultative and complex search scenarios. Extensive online A/B testing on JD.com demonstrates the system's transformative impact: it reduced decision costs by 5% and achieved a 0.41% increase in overall UCVR, with a remarkable 30% surge in conversion for decision-heavy queries. CogSearch represents a fundamental shift in information retrieval, moving beyond traditional relevance-centric paradigms toward a future of holistic, collaborative decision intelligence.",
+      "authors": [
+        "Zhouwei Zhai",
+        "Mengxiang Chen",
+        "Haoyun Xia",
+        "Jin Li",
+        "Renquan Zhou",
+        "Min Yang"
+      ],
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-03-12T13:39:20Z",
+      "updated": "2026-03-12T13:39:20Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11911v1",
+      "title": "InSpatio-WorldFM: An Open-Source Real-Time Generative Frame Model",
+      "summary": "We present InSpatio-WorldFM, an open-source real-time frame model for spatial intelligence. Unlike video-based world models that rely on sequential frame generation and incur substantial latency due to window-level processing, InSpatio-WorldFM adopts a frame-based paradigm that generates each frame independently, enabling low-latency real-time spatial inference. By enforcing multi-view spatial consistency through explicit 3D anchors and implicit spatial memory, the model preserves global scene geometry while maintaining fine-grained visual details across viewpoint changes. We further introduce a progressive three-stage training pipeline that transforms a pretrained image diffusion model into a controllable frame model and finally into a real-time generator through few-step distillation. Experimental results show that InSpatio-WorldFM achieves strong multi-view consistency while supporting interactive exploration on consumer-grade GPUs, providing an efficient alternative to traditional video-based world models for real-time world simulation.",
+      "authors": [
+        "InSpatio Team",
+        "Xiaoyu Zhang",
+        "Weihong Pan",
+        "Zhichao Ye",
+        "Jialin Liu",
+        "Yipeng Chen",
+        "Nan Wang",
+        "Xiaojun Xiang",
+        "Weijian Xie",
+        "Yifu Wang",
+        "Haoyu Ji",
+        "Siji Pan",
+        "Zhewen Le",
+        "Jing Guo",
+        "Xianbin Liu",
+        "Donghui Shen",
+        "Ziqiang Zhao",
+        "Haomin Liu",
+        "Guofeng Zhang"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T13:28:50Z",
+      "updated": "2026-03-12T13:28:50Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11909v1",
+      "title": "EnTransformer: A Deep Generative Transformer for Multivariate Probabilistic Forecasting",
+      "summary": "Reliable uncertainty quantification is critical in multivariate time series forecasting problems arising in domains such as energy systems and transportation networks, among many others. Although Transformer-based architectures have recently achieved strong performance for sequence modeling, most probabilistic forecasting approaches rely on restrictive parametric likelihoods or quantile-based objectives. They can struggle to capture complex joint predictive distributions across multiple correlated time series. This work proposes EnTransformer, a deep generative forecasting framework that integrates engression, a stochastic learning paradigm for modeling conditional distributions, with the expressive sequence modeling capabilities of Transformers. The proposed approach injects stochastic noise into the model representation and optimizes an energy-based scoring objective to directly learn the conditional predictive distribution without imposing parametric assumptions. This design enables EnTransformer to generate coherent multivariate forecast trajectories while preserving Transformers' capacity to effectively model long-range temporal dependencies and cross-series interactions. We evaluate our proposed EnTransformer on several widely used benchmarks for multivariate probabilistic forecasting, including Electricity, Traffic, Solar, Taxi, KDD-cup, and Wikipedia datasets. Experimental results demonstrate that EnTransformer produces well-calibrated probabilistic forecasts and consistently outperforms the benchmark models.",
+      "authors": [
+        "Rajdeep Pathak",
+        "Rahul Goswami",
+        "Madhurima Panja",
+        "Palash Ghosh",
+        "Tanujit Chakraborty"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "stat.ML"
+      ],
+      "published": "2026-03-12T13:25:21Z",
+      "updated": "2026-03-12T13:25:21Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11905v1",
+      "title": "Risk-Based Dynamic Thermal Rating in Distribution Transformers via Probabilistic Forecasting",
+      "summary": "Low voltage (LV) distribution transformers face accelerating demand growth while replacement lead times and costs continue to rise, making improved utilisation of existing assets essential. Static and conservative protection devices (PDs) in distribution transformers are inflexible and limit the available headroom of the transformer. This paper presents a probabilistic framework for dynamically forecasting optimal thermal protection settings. The proposed approach directly predicts the day-ahead scale factor which maximises the dynamic thermal rating of the transformer from historical load, temperature, and metadata using clustered quantile regression models trained on 644 UK LV transformers. Probabilistic forecasting quantifies overheating risk directly through the prediction percentile, enabling risk-informed operational decisions. Results show a 10--12\\% additional capacity gain compared to static settings, with hotspot temperature risk matching the selected percentile, including under realistic temperature forecast errors. These results demonstrate a practical approach for distribution network operators to take advantage of PDs with adaptive settings to maximise capacity and manage risk on operational time scales.",
+      "authors": [
+        "Scott Angus",
+        "Jethro Browell",
+        "David Greenwood",
+        "Matthew Deakin"
+      ],
+      "categories": [
+        "eess.SY"
+      ],
+      "published": "2026-03-12T13:19:01Z",
+      "updated": "2026-03-12T13:19:01Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11898v1",
+      "title": "On strictly output sensitive color frequency reporting",
+      "summary": "Given a set of $n$ colored points $P \\subset \\mathbb{R}^d$ we wish to store $P$ such that, given some query region $Q$, we can efficiently report the colors of the points appearing in the query region, along with their frequencies. This is the \\emph{color frequency reporting} problem. We study the case where query regions $Q$ are axis-aligned boxes or dominance ranges. If $Q$ contains $k$ colors, the main goal is to achieve ``strictly output sensitive'' query time $O(f(n) + k)$. Firstly, we show that, for every $s \\in \\{ 2, \\dots, n \\}$, there exists a simple $O(ns\\log_s n)$ size data structure for points in $\\mathbb{R}^2$ that allows frequency reporting queries in $O(\\log n + k\\log_s n)$ time. Secondly, we give a lower bound for the weighted version of the problem in the arithmetic model of computation, proving that with $O(m)$ space one can not achieve query times better than $Ω\\left(φ\\frac{\\log (n / φ)}{\\log (m / n)}\\right)$, where $φ$ is the number of possible colors. This means that our data structure is near-optimal. We extend these results to higher dimensions as well. Thirdly, we present a transformation that allows us to reduce the space usage of the aforementioned datastructure to $O(n(s φ)^\\varepsilon \\log_s n)$. Finally, we give an $O(n^{1+\\varepsilon} + m \\log n + K)$-time algorithm that can answer $m$ dominance queries $\\mathbb{R}^2$ with total output complexity $K$, while using only linear working space.",
+      "authors": [
+        "Erwin Glazenburg",
+        "Frank Staals"
+      ],
+      "categories": [
+        "cs.CG"
+      ],
+      "published": "2026-03-12T13:14:21Z",
+      "updated": "2026-03-12T13:14:21Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11893v1",
+      "title": "Accurate prediction of K-edge excitation energies using state-specific self-consistent perturbation theory",
+      "summary": "We present the application of the recently developed one-body Møller--Plesset perturbation theory (OBMP2) to the prediction of K-edge excited states. OBMP2 is a self-consistent perturbation theory in which a canonical transformation followed by a cumulant approximation yields an effective one-body Hamiltonian. This resulting operator augments the standard Fock operator with a one-body correlation potential containing double-excitation MP2 amplitudes, allowing molecular orbitals and orbital energies to be optimized in the presence of correlation. This self-consistent framework mitigates convergence and accuracy issues often encountered in standard non-iterative MP2 for open-shell systems and bond-stretching regimes. In this work, we evaluate the performance of an OBMP2-based approach for the calculation of K-edge excitations. Utilizing benchmark test sets of both closed-shell and open-shell molecules, we demonstrate that our method outperforms established standard techniques, including $Δ$DFT, EOM-CCSD, and USTEOM-CCSD. Our findings establish the OBMP2-based $Δ$SCF protocol as a robust and accurate new computational method for the treatment of K-edge excited states.",
+      "authors": [
+        "Lan Nguyen Tran"
+      ],
+      "categories": [
+        "physics.chem-ph"
+      ],
+      "published": "2026-03-12T13:06:00Z",
+      "updated": "2026-03-12T13:06:00Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11890v1",
+      "title": "QUARE: Multi-Agent Negotiation for Balancing Quality Attributes in Requirements Engineering",
+      "summary": "Requirements engineering (RE) is critical to software success, yet automating it remains challenging because multiple, often conflicting quality attributes must be balanced while preserving stakeholder intent. Existing Large-Language-Model (LLM) approaches predominantly rely on monolithic reasoning or implicit aggregation, limiting their ability to systematically surface and resolve cross-quality conflicts. We present QUARE (Quality-Aware Requirements Engineering), a multi-agent framework that formulates requirements analysis as structured negotiation among five quality-specialized agents (Safety, Efficiency, Green, Trustworthiness, and Responsibility), coordinated by a dedicated orchestrator. QUARE introduces a dialectical negotiation protocol that explicitly exposes inter-quality conflicts and resolves them through iterative proposal, critique, and synthesis. Negotiated outcomes are transformed into structurally sound KAOS goal models via topology validation and verified against industry standards through retrieval-augmented generation (RAG). We evaluate QUARE on five case studies drawn from established RE benchmarks (MARE, iReDev) and an industrial autonomous-driving specification, spanning safety-critical, financial, and information-system domains. Results show that QUARE achieves 98.2% compliance coverage (+105% over both baselines), 94.9% semantic preservation (+2.3 percentage points over the best baseline), and high verifiability (4.96/5.0), while generating 25-43% more requirements than existing multi-agent RE frameworks. These findings suggest that effective RE automation depends less on model scale than on principled architectural decomposition, explicit interaction protocols, and automated verification.",
+      "authors": [
+        "Haowei Cheng",
+        "Milhan Kim",
+        "Foutse Khomh",
+        "Teeradaj Racharak",
+        "Nobukazu Yoshioka",
+        "Naoyasu Ubayashi",
+        "Hironori Washizaki"
+      ],
+      "categories": [
+        "cs.SE"
+      ],
+      "published": "2026-03-12T13:03:01Z",
+      "updated": "2026-03-12T13:03:01Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11877v1",
+      "title": "Silent Speech Interfaces in the Era of Large Language Models: A Comprehensive Taxonomy and Systematic Review",
+      "summary": "Human-computer interaction has traditionally relied on the acoustic channel, a dependency that introduces systemic vulnerabilities to environmental noise, privacy constraints, and physiological speech impairments. Silent Speech Interfaces (SSIs) emerge as a transformative paradigm that bypasses the acoustic stage by decoding linguistic intent directly from the neuro-muscular-articulatory continuum. This review provides a high-level synthesis of the SSI landscape, transitioning from traditional transducer-centric analysis to a holistic intent-to-execution taxonomy. We systematically evaluate sensing modalities across four critical physiological interception points: neural oscillations, neuromuscular activation, articulatory kinematics (ultrasound/magnetometry), and pervasive active probing via acoustic or radio-frequency sensing. Critically, we analyze the current paradigm shift from heuristic signal processing to Latent Semantic Alignment. In this new era, Large Language Models (LLMs) and deep generative architectures serve as high-level linguistic priors to resolve the ``informational sparsity'' and non-stationarity of biosignals. By mapping fragmented physiological gestures into structured semantic latent spaces, modern SSI frameworks have, for the first time, approached the Word Error Rate usability threshold required for real-world deployment. We further examine the transition of SSIs from bulky laboratory instrumentation to ``invisible interfaces'' integrated into commodity-grade wearables, such as earables and smart glasses. Finally, we outline a strategic roadmap addressing the ``user-dependency paradox'' through self-supervised foundation models and define the ethical boundaries of ``neuro-security'' to protect cognitive liberty in an increasingly interfaced world.",
+      "authors": [
+        "Kele Xu",
+        "Yifan Wang",
+        "Ming Feng",
+        "Qisheng Xu",
+        "Wuyang Chen",
+        "Yutao Dou",
+        "Cheng Yang",
+        "Huaimin Wang"
+      ],
+      "categories": [
+        "eess.AS"
+      ],
+      "published": "2026-03-12T12:52:53Z",
+      "updated": "2026-03-12T12:52:53Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11872v1",
+      "title": "ELISA: An Interpretable Hybrid Generative AI Agent for Expression-Grounded Discovery in Single-Cell Genomics",
+      "summary": "Translating single-cell RNA sequencing (scRNA-seq) data into mechanistic biological hypotheses remains a critical bottleneck, as agentic AI systems lack direct access to transcriptomic representations while expression foundation models remain opaque to natural language. Here we introduce ELISA (Embedding-Linked Interactive Single-cell Agent), an interpretable framework that unifies scGPT expression embeddings with BioBERT-based semantic retrieval and LLM-mediated interpretation for interactive single-cell discovery. An automatic query classifier routes inputs to gene marker scoring, semantic matching, or reciprocal rank fusion pipelines depending on whether the query is a gene signature, natural language concept, or mixture of both. Integrated analytical modules perform pathway activity scoringacross 60+ gene sets, ligand--receptor interaction prediction using 280+ curated pairs, condition-aware comparative analysis, and cell-type proportion estimation all operating directly on embedded data without access to the original count matrix. Benchmarked across six diverse scRNA-seq datasets spanning inflammatory lung disease, pediatric and adult cancers, organoid models, healthy tissue, and neurodevelopment, ELISA significantly outperforms CellWhisperer in cell type retrieval (combined permutation test, $p &lt; 0.001$), with particularly large gains on gene-signature queries (Cohen's $d = 5.98$ for MRR). ELISA replicates published biological findings (mean composite score 0.90) with near-perfect pathway alignment and theme coverage (0.98 each), and generates candidate hypotheses through grounded LLM reasoning, bridging the gap between transcriptomic data exploration and biological discovery. Code available at: https://github.com/omaruno/ELISA-An-AI-Agent-for-Expression-Grounded-Discovery-in-Single-Cell-Genomics.git (If you use ELISA in your research, please cite this work).",
+      "authors": [
+        "Omar Coser"
+      ],
+      "categories": [
+        "q-bio.GN",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T12:46:22Z",
+      "updated": "2026-03-12T12:46:22Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11871v1",
+      "title": "An error control framework for computing the exponential of matrices arising from the finite element discretization",
+      "summary": "Several methods for computing the action of the matrix exponential $\\mathrm{e}^{\\boldsymbol{A}} \\boldsymbol{b}$ are expressed by substituting $\\boldsymbol{A}$ into a rational approximation of the scalar exponential function. The error of such methods can be estimated using the numerical range of $\\boldsymbol{A}$, which enables the computation of $\\mathrm{e}^{\\boldsymbol{A}}\\boldsymbol{b}$ with a prescribed accuracy. However, when the input matrix has the structure $\\boldsymbol{A} = τ\\boldsymbol{M}^{-1} \\boldsymbol{K}$, this approach is challenging because computing the bounding box of numerical range is difficult and the numerical range may be too large to construct rational approximations on it. In this paper, focusing on the case where $\\boldsymbol{M}$ is a well-conditioned symmetric positive definite matrix, we propose considering the numerical range of a similarity transformed matrix of $\\boldsymbol{A}$. The numerical range of transformed matrix is not only numerically computable but can also be theoretically bounded depending on properties of $\\boldsymbol{K}$. Numerical experiments confirm that the computations can be performed within the prescribed error tolerance.",
+      "authors": [
+        "Fuminori Tatsuoka",
+        "Yuto Miyatake",
+        "Tomohiro Sogabe"
+      ],
+      "categories": [
+        "math.NA"
+      ],
+      "published": "2026-03-12T12:45:27Z",
+      "updated": "2026-03-12T12:45:27Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11842v1",
+      "title": "The Landscape of Generative AI in Information Systems: A Synthesis of Secondary Reviews and Research Agendas",
+      "summary": "As organizations grapple with the rapid adoption of Generative AI (GenAI), this study synthesizes the state of knowledge through a systematic literature review of secondary studies and research agendas. Analyzing 28 papers published since 2023, we find that while GenAI offers transformative potential for productivity and innovation, its adoption is constrained by multiple interrelated challenges, including technical unreliability (hallucinations, performance drift), societal-ethical risks (bias, misuse, skill erosion), and a systemic governance vacuum (privacy, accountability, intellectual property). Interpreted through a socio-technical lens, these findings reveal a persistent misalignment between GenAI's fast-evolving technical subsystem and the slower-adapting social subsystem, positioning IS research as critical for achieving joint optimization. To bridge this gap, we discuss a research agenda that reorients IS scholarship from analyzing impacts toward actively shaping the co-evolution of technical capabilities with organizational procedures, societal values, and regulatory institutions--emphasizing hybrid human--AI ensembles, situated validation, design principles for probabilistic systems, and adaptive governance.",
+      "authors": [
+        "Aleksander Jarzębowicz",
+        "Adam Przybyłek",
+        "Jacinto Estima",
+        "Yen Ying Ng",
+        "Jakub Swacha",
+        "Beata Zielosko",
+        "Lech Madeyski",
+        "Noel Carroll",
+        "Kai-Kristian Kemell",
+        "Bartosz Marcinkowski",
+        "Alberto Rodrigues da Silva",
+        "Viktoria Stray",
+        "Netta Iivari",
+        "Anh Nguyen-Duc",
+        "Jorge Melegati",
+        "Boris Delibašić",
+        "Emilio Insfran"
+      ],
+      "categories": [
+        "cs.CY",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T12:06:25Z",
+      "updated": "2026-03-12T12:06:25Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11839v1",
+      "title": "Strong optical nonreciprocity in a photonic crystal composed of spinning cylinders",
+      "summary": "Moving media break time-reversal symmetry and exhibit intriguing optical nonreciprocity. This nonreciprocity is usually weak due to the much lower moving speed of media relative to the speed of light. We demonstrate that strong optical nonreciprocity can emerge in a two-dimensional photonic crystal composed of spinning dielectric cylinders. The photonic crystal supports two types of chiral modes at the Brillouin zone center: hybridized multipole modes and symmetry-protected bound states in the continuum (BICs), both of which carry intrinsic spin angular momentum. For finite wavevectors near the zone center, the BICs transform into quasi-bound states in the continuum (QBICs). Under oblique incidence of circularly polarized plane waves, the photonic crystal exhibits nonreciprocal transmission and absorption that are significantly enhanced at the frequencies of these hybridized multipole modes and QBICs. Furthermore, the high quality factors of the QBICs enable sharp transitions in nonreciprocity. Our work uncovers strong chiral light-matter interactions in periodic moving structures, with potential applications in nonreciprocal light manipulation. The mechanism may also be generalized to other classical wave systems, such as phononic crystals.",
+      "authors": [
+        "Hengzhi Li",
+        "Wanyue Xiao",
+        "Junho Jung",
+        "Hao Pan",
+        "Shubo Wang"
+      ],
+      "categories": [
+        "physics.optics"
+      ],
+      "published": "2026-03-12T12:04:52Z",
+      "updated": "2026-03-12T12:04:52Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11836v1",
+      "title": "A Decade of Generative Adversarial Networks for Porous Material Reconstruction",
+      "summary": "Digital reconstruction of porous materials has become increasingly critical for applications ranging from geological reservoir characterization to tissue engineering and electrochemical device design. While traditional methods such as micro-computed tomography and statistical reconstruction approaches have established foundations in this field, the emergence of deep learning techniques, particularly Generative Adversarial Networks (GANs), has revolutionized porous media reconstruction capabilities. This review systematically analyzes 96 peer-reviewed articles published from 2017 to early 2026, examining the evolution and applications of GAN-based approaches for porous material image reconstruction. We categorize GAN architectures into six distinct classes, namely Vanilla GANs, Multi-Scale GANs, Conditional GANs, Attention-Enhanced GANs, Style-based GANs, and Hybrid Architecture GANs. Our analysis reveals substantial progress including improvements in porosity accuracy (within 1% of original samples), permeability prediction (up to 79% reduction in mean relative errors), and achievable reconstruction volumes (from initial $64^3$ to current $2{,}200^3$ voxels). Despite these advances, persistent challenges remain in computational efficiency, memory constraints for large-scale reconstruction, and maintaining structural continuity in 2D-to-3D transformations. This systematic analysis provides a comprehensive framework for selecting appropriate GAN architectures based on specific application requirements.",
+      "authors": [
+        "Ali Sadeghkhani",
+        "Brandon Bennett",
+        "Masoud Babaei",
+        "Arash Rabbani"
+      ],
+      "categories": [
+        "cs.CV",
+        "cond-mat.mtrl-sci",
+        "physics.geo-ph"
+      ],
+      "published": "2026-03-12T12:02:36Z",
+      "updated": "2026-03-12T12:02:36Z",
+      "collectedAt": "2026-03-13T14:15:45.045Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11832v1",
+      "title": "Phase Retrieval using Nonlinear Curvature Sensing within Convergent Beams",
+      "summary": "Path-length diversity methods may be used for adaptive optics (AO) systems to retrieve phase and amplitude information by measuring intensity across multiple planes. Observations that rely on free-space propagation, such as the nonlinear curvature wavefront sensor (WFS), have been shown to offer excellent sensitivity and robustness to scintillation. However, the default design results in a large opto-mechanical footprint due to unavoidable geometric-optics and wave-optics effects. Measurements recorded in a convergent beam would improve instrument compactness, while concentrating light into smaller detector regions of interest, improving signal-to-noise ratio and possibly wavefront reconstruction speed. In this paper, we study path-length diversity wavefront sensing using four planes of contemporaneous intensity measurements made in a convergent beam. We develop a physical optics propagation model and validate the model by performing wavefront reconstructions in both simulations and lab experiments. The manuscripts core contribution is a practical, intensity-domain, Fourier-transform-based recipe to use a conventional multi-plane Gerchberg-Saxton (or comparable) reconstruction pipeline with convergent-beam measurements, enabling a compact optical layout. We find that this approach offers practical benefits over an equivalent free-space wavefront sensor, in particular reducing size, weight, complexity and cost.",
+      "authors": [
+        "Justin R. Crepp",
+        "Caleb G. Abbott",
+        "James Smous",
+        "Matthew Engstrom",
+        "Brian Sands"
+      ],
+      "categories": [
+        "physics.optics",
+        "astro-ph.IM"
+      ],
+      "published": "2026-03-12T11:57:12Z",
+      "updated": "2026-03-12T11:57:12Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11831v1",
+      "title": "Towards High-Fidelity CAD Generation via LLM-Driven Program Generation and Text-Based B-Rep Primitive Grounding",
+      "summary": "The field of Computer-Aided Design (CAD) generation has made significant progress in recent years. Existing methods typically fall into two separate categorie: parametric CAD modeling and direct boundary representation (B-Rep) synthesis. In modern feature-based CAD systems, parametric modeling and B-Rep are inherently intertwined, as advanced parametric operations (e.g., fillet and chamfer) require explicit selection of B-Rep geometric primitives, and the B-Rep itself is derived from parametric operations. Consequently, this paradigm gap remains a critical factor limiting AI-driven CAD modeling for complex industrial product design. This paper present FutureCAD, a novel text-to-CAD framework that leverages large language models (LLMs) and a B-Rep grounding transformer (BRepGround) for high-fidelity CAD generation. Our method generates executable CadQuery scripts, and introduces a text-based query mechanism that enables the LLM to specify geometric selections via natural language, which BRepGround then grounds to the target primitives. To train our framework, we construct a new dataset comprising real-world CAD models. For the LLM, we apply supervised fine-tuning (SFT) to establish fundamental CAD generation capabilities, followed by reinforcement learning (RL) to improve generalization. Experiments show that FutureCAD achieves state-of-the-art CAD generation performance.",
+      "authors": [
+        "Jiahao Li",
+        "Qingwang Zhang",
+        "Qiuyu Chen",
+        "Guozhan Qiu",
+        "Yunzhong Lou",
+        "Xiangdong Zhou"
+      ],
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-12T11:54:29Z",
+      "updated": "2026-03-12T11:54:29Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11818v1",
+      "title": "Automated Detection of Malignant Lesions in the Ovary Using Deep Learning Models and XAI",
+      "summary": "The unrestrained proliferation of cells that are malignant in nature is cancer. In recent times, medical professionals are constantly acquiring enhanced diagnostic and treatment abilities by implementing deep learning models to analyze medical data for better clinical decision, disease diagnosis and drug discovery. A majority of cancers are studied and treated by incorporating these technologies. However, ovarian cancer remains a dilemma as it has inaccurate non-invasive detection procedures and a time consuming, invasive procedure for accurate detection. Thus, in this research, several Convolutional Neural Networks such as LeNet-5, ResNet, VGGNet and GoogLeNet/Inception have been utilized to develop 15 variants and choose a model that accurately detects and identifies ovarian cancer. For effective model training, the dataset OvarianCancer&amp;SubtypesDatasetHistopathology from Mendeley has been used. After constructing a model, we utilized Explainable Artificial Intelligence (XAI) models such as LIME, Integrated Gradients and SHAP to explain the black box outcome of the selected model. For evaluating the performance of the model, Accuracy, Precision, Recall, F1-Score, ROC Curve and AUC have been used. From the evaluation, it was seen that the slightly compact InceptionV3 model with ReLu had the overall best result achieving an average score of 94% across all the performance metrics in the augmented dataset. Lastly for XAI, the three aforementioned XAI have been used for an overall comparative analysis. It is the aim of this research that the contributions of the study will help in achieving a better detection method for ovarian cancer.",
+      "authors": [
+        "Md. Hasin Sarwar Ifty",
+        "Nisharga Nirjan",
+        "Labib Islam",
+        "M. A. Diganta",
+        "Reeyad Ahmed Ornate",
+        "Anika Tasnim",
+        "Md. Saiful Islam"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-03-12T11:26:29Z",
+      "updated": "2026-03-12T11:26:29Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11812v1",
+      "title": "Uniqueness of imaginarity-assisted transformation from computationally universal to strictly universal quantum computation",
+      "summary": "The computational universality with an elementary gate set $\\{H,CCZ\\}$ can be transformed to the strict universality by using a maximally imaginary state $|+i\\rangle$ and some non-imaginary ancillary qubits. From the viewpoint of operational resource theory, it would be intriguing to elucidate a resource for the universality transformation. In this paper, we explore a necessary and sufficient condition for resource states to realize the universality transformation under free real operations. We show that $|+i\\rangle$ is a unique resource state up to the free operations. Moreover, we obtain a stronger conclusion. If a given resource state cannot be used for the universality transformation, then realizable quantum gates are restricted to real orthogonal matrices. Therefore, we can tell that $|+i\\rangle$ is unique (up to the free operations) not only as a state whose resource measure of imaginarity is maximal, but also as a state which empowers real operations with the ability to apply at least one non-real quantum gate (regardless of the magnitudes of its imaginary parts).",
+      "authors": [
+        "Yasuaki Nakayama",
+        "Yuki Takeuchi",
+        "Seiseki Akibue"
+      ],
+      "categories": [
+        "quant-ph"
+      ],
+      "published": "2026-03-12T11:19:20Z",
+      "updated": "2026-03-12T11:19:20Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11811v1",
+      "title": "RADAR: Closed-Loop Robotic Data Generation via Semantic Planning and Autonomous Causal Environment Reset",
+      "summary": "The acquisition of large-scale physical interaction data, a critical prerequisite for modern robot learning, is severely bottlenecked by the prohibitive cost and scalability limits of human-in-the-loop collection paradigms. To break this barrier, we introduce Robust Autonomous Data Acquisition for Robotics (RADAR), a fully autonomous, closed-loop data generation engine that completely removes human intervention from the collection cycle. RADAR elegantly divides the cognitive load into a four-module pipeline. Anchored by 2-5 3D human demonstrations as geometric priors, a Vision-Language Model first orchestrates scene-relevant task generation via precise semantic object grounding and skill retrieval. Next, a Graph Neural Network policy translates these subtasks into physical actions via in-context imitation learning. Following execution, the VLM performs automated success evaluation using a structured Visual Question Answering pipeline. Finally, to shatter the bottleneck of manual resets, a Finite State Machine orchestrates an autonomous environment reset and asymmetric data routing mechanism. Driven by simultaneous forward-reverse planning with a strict Last-In, First-Out causal sequence, the system seamlessly restores unstructured workspaces and robustly recovers from execution failures. This continuous brain-cerebellum synergy transforms data collection into a self-sustaining process. Extensive evaluations highlight RADAR's exceptional versatility. In simulation, our framework achieves up to 90% success rates on complex, long-horizon tasks, effortlessly solving challenges where traditional baselines plummet to near-zero performance. In real-world deployments, the system reliably executes diverse, contact-rich skills (e.g., deformable object manipulation) via few-shot adaptation without domain-specific fine-tuning, providing a highly scalable paradigm for robotic data acquisition.",
+      "authors": [
+        "Yongzhong Wang",
+        "Keyu Zhu",
+        "Yong Zhong",
+        "Liqiong Wang",
+        "Jinyu Yang",
+        "Feng Zheng"
+      ],
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-03-12T11:18:52Z",
+      "updated": "2026-03-12T11:18:52Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11798v1",
+      "title": "DocSage: An Information Structuring Agent for Multi-Doc Multi-Entity Question Answering",
+      "summary": "Multi-document Multi-entity Question Answering inherently demands models to track implicit logic between multiple entities across scattered documents. However, existing Large Language Models (LLMs) and Retrieval-Augmented Generation (RAG) frameworks suffer from critical limitations: standard RAG's vector similarity-based coarse-grained retrieval often omits critical facts, graph-based RAG fails to efficiently integrate fragmented complex relationship networks, and both lack schema awareness, leading to inadequate cross-document evidence chain construction and inaccurate entity relationship deduction. To address these challenges, we propose DocSage, an end-to-end agentic framework that integrates dynamic schema discovery, structured information extraction, and schema-aware relational reasoning with error guarantees. DocSage operates through three core modules: (1) A schema discovery module dynamically infers query-specific minimal joinable schemas to capture essential entities and relationships; (2) An extraction module transforms unstructured text into semantically coherent relational tables, enhanced by error-aware correction mechanisms to reduce extraction errors; (3) A reasoning module performs multi-hop relational reasoning over structured tables, leveraging schema awareness to efficiently align cross-document entities and aggregate evidence. This agentic design offers three key advantages: precise fact localization via SQL-powered indexing, natural support for cross-document entity joins through relational tables, and mitigated LLM attention diffusion via structured representation. Evaluations on two MDMEQA benchmarks demonstrate that DocSage significantly outperforms state-of-the-art long-context LLMs and RAG systems, achieving more than 27% accuracy improvements respectively.",
+      "authors": [
+        "Teng Lin",
+        "Yizhang Zhu",
+        "Zhengxuan Zhang",
+        "Yuyu Luo",
+        "Nan Tang"
+      ],
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-12T11:00:09Z",
+      "updated": "2026-03-12T11:00:09Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11793v1",
+      "title": "Locating Demographic Bias at the Attention-Head Level in CLIP's Vision Encoder",
+      "summary": "Standard fairness audits of foundation models quantify that a model is biased, but not where inside the network the bias resides. We propose a mechanistic fairness audit that combines projected residual-stream decomposition, zero-shot Concept Activation Vectors, and bias-augmented TextSpan analysis to locate demographic bias at the level of individual attention heads in vision transformers. As a feasibility case study, we apply this pipeline to the CLIP ViT-L-14 encoder on 42 profession classes of the FACET benchmark, auditing both gender and age bias. For gender, the pipeline identifies four terminal-layer heads whose ablation reduces global bias (Cramer's V: 0.381 -&gt; 0.362) while marginally improving accuracy (+0.42%); a layer-matched random control confirms that this effect is specific to the identified heads. A single head in the final layer contributes to the majority of the reduction in the most stereotyped classes, and class-level analysis shows that corrected predictions shift toward the correct occupation. For age, the same pipeline identifies candidate heads, but ablation produces weaker and less consistent effects, suggesting that age bias is encoded more diffusely than gender bias in this model. These results provide preliminary evidence that head-level bias localisation is feasible for discriminative vision encoders and that the degree of localisability may vary across protected attributes.   keywords: Bias . CLIP . Mechanistic Interpretability . Vision Transformer . Fairness",
+      "authors": [
+        "Alaa Yasser",
+        "Kittipat Phunjanna",
+        "Marcos Escudero Viñolo",
+        "Catarina Barata",
+        "Jenny Benois-Pineau"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CY"
+      ],
+      "published": "2026-03-12T10:54:26Z",
+      "updated": "2026-03-12T10:54:26Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11790v1",
+      "title": "Disentangled Representation Learning through Unsupervised Symmetry Group Discovery",
+      "summary": "Symmetry-based disentangled representation learning leverages the group structure of environment transformations to uncover the latent factors of variation. Prior approaches to symmetry-based disentanglement have required strong prior knowledge of the symmetry group's structure, or restrictive assumptions about the subgroup properties. In this work, we remove these constraints by proposing a method whereby an embodied agent autonomously discovers the group structure of its action space through unsupervised interaction with the environment. We prove the identifiability of the true symmetry group decomposition under minimal assumptions, and derive two algorithms: one for discovering the group decomposition from interaction data, and another for learning Linear Symmetry-Based Disentangled (LSBD) representations without assuming specific subgroup properties. Our method is validated on three environments exhibiting different group decompositions, where it outperforms existing LSBD approaches.",
+      "authors": [
+        "Dang-Nhu Barthélémy",
+        "Annabi Louis",
+        "Argentieri Sylvain"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-12T10:51:39Z",
+      "updated": "2026-03-12T10:51:39Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11783v1",
+      "title": "HELM: Hierarchical and Explicit Label Modeling with Graph Learning for Multi-Label Image Classification",
+      "summary": "Hierarchical multi-label classification (HMLC) is essential for modeling complex label dependencies in remote sensing. Existing methods, however, struggle with multi-path hierarchies where instances belong to multiple branches, and they rarely exploit unlabeled data. We introduce HELM (\\textit{Hierarchical and Explicit Label Modeling}), a novel framework that overcomes these limitations. HELM: (i) uses hierarchy-specific class tokens within a Vision Transformer to capture nuanced label interactions; (ii) employs graph convolutional networks to explicitly encode the hierarchical structure and generate hierarchy-aware embeddings; and (iii) integrates a self-supervised branch to effectively leverage unlabeled imagery. We perform a comprehensive evaluation on four remote sensing image (RSI) datasets (UCM, AID, DFC-15, MLRSNet). HELM achieves state-of-the-art performance, consistently outperforming strong baselines in both supervised and semi-supervised settings, demonstrating particular strength in low-label scenarios.",
+      "authors": [
+        "Marjan Stoimchev",
+        "Boshko Koloski",
+        "Jurica Levatić",
+        "Dragi Kocev",
+        "Sašo Džeroski"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T10:41:17Z",
+      "updated": "2026-03-12T10:41:17Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.11780v1",
+      "title": "Large Language Models for Biomedical Article Classification",
+      "summary": "This work presents a systematic and in-depth investigation of the utility of large language models as text classifiers for biomedical article classification. The study uses several small and mid-size open source models, as well as selected closed source ones, and is more comprehensive than most prior work with respect to the scope of evaluated configurations: different types of prompts, output processing methods for generating both class and class probability predictions, as well as few-shot example counts and selection methods. The performance of the most successful configurations is compared to that of conventional classification algorithms. The obtained average PR AUC over 15 challenging datasets above 0.4 for zero-shot prompting and nearly 0.5 for few-shot prompting comes close to that of the naïve Bayes classifier (0.5), the random forest algorithm (0.5 with default settings or 0.55 with hyperparameter tuning) and fine-tuned transformer models (0.5). These results confirm the utility of large language models as text classifiers for non-trivial domains and provide practical recommendations of the most promising setups, including in particular using output token probabilities for class probability prediction.",
+      "authors": [
+        "Jakub Proboszcz",
+        "Paweł Cichosz"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "published": "2026-03-12T10:39:10Z",
+      "updated": "2026-03-12T10:39:10Z",
+      "collectedAt": "2026-03-13T14:15:45.046Z"
+    }
+  ]
+}

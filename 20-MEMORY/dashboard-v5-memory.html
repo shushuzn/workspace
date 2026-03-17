@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard v5.0 - 记忆系统集成</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        header .version {
+            background: rgba(255,255,255,0.2);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card .icon {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .stat-card .value {
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .stat-card .label {
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.95em;
+        }
+        
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        
+        .card h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .card h2 .icon {
+            font-size: 1.3em;
+        }
+        
+        /* Memory Content */
+        .memory-content {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            max-height: 500px;
+            overflow-y: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+            line-height: 1.6;
+        }
+        
+        .memory-content pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+        
+        /* Daily Notes */
+        .daily-notes-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .note-item {
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            background: #f8f9fa;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .note-item:hover {
+            background: #e9ecef;
+        }
+        
+        .note-item .note-date {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.95em;
+        }
+        
+        .note-item .note-size {
+            color: #888;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+        
+        .note-item.exists {
+            border-left-color: #28a745;
+        }
+        
+        .note-item.not-exists {
+            border-left-color: #dc3545;
+            opacity: 0.6;
+        }
+        
+        /* Search Box */
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .search-box button {
+            padding: 12px 24px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+            transition: background 0.2s;
+        }
+        
+        .search-box button:hover {
+            background: #5568d3;
+        }
+        
+        /* Search Results */
+        .search-results {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .search-result-item {
+            padding: 15px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+        
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        
+        .search-result-item .source {
+            font-weight: bold;
+            color: #667eea;
+            font-size: 0.9em;
+        }
+        
+        .search-result-item .content {
+            color: #333;
+            margin: 8px 0;
+            font-size: 0.95em;
+        }
+        
+        .search-result-item .context {
+            color: #666;
+            font-size: 0.85em;
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 8px;
+        }
+        
+        /* Persona Grid */
+        .persona-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        
+        .persona-card {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            background: #f8f9fa;
+            transition: transform 0.2s;
+        }
+        
+        .persona-card:hover {
+            transform: translateY(-3px);
+        }
+        
+        .persona-card .emoji {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+        
+        .persona-card .name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .persona-card .role {
+            color: #666;
+            font-size: 0.85em;
+        }
+        
+        .persona-card .status {
+            margin-top: 10px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            display: inline-block;
+        }
+        
+        .persona-card .status.idle {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .persona-card .status.busy {
+            background: #fff3cd;
+            color: #856404;
+        }
+        
+        .persona-card .status.waiting {
+            background: #cce5ff;
+            color: #004085;
+        }
+        
+        /* Write Note Form */
+        .write-note-form {
+            margin-top: 20px;
+        }
+        
+        .write-note-form textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1em;
+            resize: vertical;
+        }
+        
+        .write-note-form textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .write-note-form button {
+            margin-top: 10px;
+            padding: 12px 24px;
+            background: #28a745;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .write-note-form button:hover {
+            background: #218838;
+        }
+        
+        /* Loading */
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+        
+        .loading-spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 10px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            border-radius: 8px 8px 0 0;
+            transition: background 0.2s;
+        }
+        
+        .tab:hover {
+            background: #f8f9fa;
+        }
+        
+        .tab.active {
+            background: #667eea;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Memory Stats */
+        .memory-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .memory-stat-item {
+            text-align: center;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .memory-stat-item .value {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #667eea;
+        }
+        
+        .memory-stat-item .label {
+            color: #666;
+            font-size: 0.85em;
+            margin-top: 5px;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Dashboard v5.0 - Memory Integrated</h1>
+            <p>7-Persona + 记忆系统深度集成</p>
+            <div class="version" id="lastUpdate">Last Update: --</div>
+        </header>
+        
+        <!-- Stats Grid -->
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="icon">🧠</div>
+                <div class="value" id="memorySize">--</div>
+                <div class="label">Memory Size</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">📝</div>
+                <div class="value" id="dailyNotesCount">--</div>
+                <div class="label">Daily Notes</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">👥</div>
+                <div class="value" id="personasCount">7</div>
+                <div class="label">Personas</div>
+            </div>
+            <div class="stat-card">
+                <div class="icon">⚡</div>
+                <div class="value" id="cpuUsage">--</div>
+                <div class="label">CPU Usage</div>
+            </div>
+        </div>
+        
+        <!-- Main Grid -->
+        <div class="main-grid">
+            <!-- Memory System Card -->
+            <div class="card">
+                <h2><span class="icon">🧠</span> Memory System</h2>
+                
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('memory-md')">MEMORY.md</div>
+                    <div class="tab" onclick="switchTab('daily-notes')">Daily Notes</div>
+                    <div class="tab" onclick="switchTab('search')">Search</div>
+                    <div class="tab" onclick="switchTab('write')">Write</div>
+                </div>
+                
+                <!-- MEMORY.md Tab -->
+                <div id="memory-md" class="tab-content active">
+                    <div class="memory-stats-grid" id="memoryStats">
+                        <div class="memory-stat-item">
+                            <div class="value" id="mdSize">--</div>
+                            <div class="label">Size (KB)</div>
+                        </div>
+                        <div class="memory-stat-item">
+                            <div class="value" id="mdLines">--</div>
+                            <div class="label">Lines</div>
+                        </div>
+                        <div class="memory-stat-item">
+                            <div class="value" id="mdUpdated">--</div>
+                            <div class="label">Last Updated</div>
+                        </div>
+                    </div>
+                    <div class="memory-content" id="memoryContent">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            Loading MEMORY.md...
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Daily Notes Tab -->
+                <div id="daily-notes" class="tab-content">
+                    <div class="daily-notes-list" id="dailyNotesList">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            Loading daily notes...
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Search Tab -->
+                <div id="search" class="tab-content">
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search memory..." onkeypress="if(event.key==='Enter') searchMemory()">
+                        <button onclick="searchMemory()">🔍 Search</button>
+                    </div>
+                    <div class="search-results" id="searchResults">
+                        <p style="color: #666; text-align: center;">Enter a search term to find memories</p>
+                    </div>
+                </div>
+                
+                <!-- Write Tab -->
+                <div id="write" class="tab-content">
+                    <div class="write-note-form">
+                        <textarea id="noteContent" placeholder="Write your daily note here...
+
+## 🎯 Achievements
+- 
+
+## 💡 Insights
+- 
+
+## 📋 TODO
+- [ ] "></textarea>
+                        <button onclick="writeNote()">💾 Save to Today's Note</button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Personas Card -->
+            <div class="card">
+                <h2><span class="icon">👥</span> 7-Persona System</h2>
+                <div class="persona-grid" id="personaGrid">
+                    <div class="loading">
+                        <div class="loading-spinner"></div>
+                        Loading personas...
+                    </div>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <h3 style="margin-bottom: 15px; color: #333;">📊 Statistics</h3>
+                    <div id="personaStats">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            Loading statistics...
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        const API_BASE = 'http://localhost:8448';
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboard();
+            setInterval(loadDashboard, 30000); // Refresh every 30s
+        });
+        
+        // Load Dashboard Data
+        async function loadDashboard() {
+            try {
+                const response = await fetch(`${API_BASE}/api/dashboard`);
+                const data = await response.json();
+                
+                updateStats(data);
+                updatePersonas(data.personas, data.statistics);
+                updateMemory(data.memory);
+                
+                document.getElementById('lastUpdate').textContent = 
+                    `Last Update: ${new Date(data.timestamp).toLocaleString()}`;
+            } catch (error) {
+                console.error('Failed to load dashboard:', error);
+            }
+        }
+        
+        // Update Stats
+        function updateStats(data) {
+            if (data.memory && data.memory.stats) {
+                document.getElementById('memorySize').textContent = 
+                    data.memory.stats.total_memory_size_kb + ' KB';
+                document.getElementById('dailyNotesCount').textContent = 
+                    data.memory.stats.daily_notes.count;
+            }
+            
+            if (data.system) {
+                document.getElementById('cpuUsage').textContent = 
+                    data.system.cpu_percent.toFixed(1) + '%';
+            }
+        }
+        
+        // Update Personas
+        function updatePersonas(personas, statistics) {
+            const grid = document.getElementById('personaGrid');
+            grid.innerHTML = '';
+            
+            for (const [key, persona] of Object.entries(personas)) {
+                const card = document.createElement('div');
+                card.className = 'persona-card';
+                card.innerHTML = `
+                    <div class="emoji">${persona.color}</div>
+                    <div class="name">${key}</div>
+                    <div class="role">${persona.role}</div>
+                    <div class="status ${persona.status}">${persona.status}</div>
+                `;
+                grid.appendChild(card);
+            }
+            
+            // Update statistics
+            const statsDiv = document.getElementById('personaStats');
+            statsDiv.innerHTML = `
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                    <div style="text-align: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #28a745;">${statistics.total_tasks_completed}</div>
+                        <div style="font-size: 0.85em; color: #666;">Completed</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #dc3545;">${statistics.total_tasks_failed}</div>
+                        <div style="font-size: 0.85em; color: #666;">Failed</div>
+                    </div>
+                    <div style="text-align: center; padding: 10px; background: #f8f9fa; border-radius: 8px;">
+                        <div style="font-size: 1.5em; font-weight: bold; color: #667eea;">${(statistics.success_rate * 100).toFixed(1)}%</div>
+                        <div style="font-size: 0.85em; color: #666;">Success Rate</div>
+                    </div>
+                </div>
+            `;
+        }
+        
+        // Update Memory
+        function updateMemory(memory) {
+            // MEMORY.md stats
+            if (memory.summary) {
+                document.getElementById('mdSize').textContent = memory.summary.file_size_kb || '--';
+                document.getElementById('mdLines').textContent = memory.summary.total_lines || '--';
+                document.getElementById('mdUpdated').textContent = memory.summary.last_updated || '--';
+                
+                // Content
+                document.getElementById('memoryContent').innerHTML = 
+                    `<pre>${escapeHtml(memory.summary.content)}</pre>`;
+            }
+            
+            // Daily notes
+            if (memory.recent_notes) {
+                const list = document.getElementById('dailyNotesList');
+                list.innerHTML = '';
+                
+                memory.recent_notes.forEach(note => {
+                    const item = document.createElement('div');
+                    item.className = `note-item ${note.exists ? 'exists' : 'not-exists'}`;
+                    item.onclick = () => loadDailyNote(note.date);
+                    item.innerHTML = `
+                        <div class="note-date">${note.date}</div>
+                        <div class="note-size">${note.exists ? note.size_kb + ' KB' : 'No note'}</div>
+                    `;
+                    list.appendChild(item);
+                });
+            }
+        }
+        
+        // Load Daily Note
+        async function loadDailyNote(date) {
+            try {
+                const response = await fetch(`${API_BASE}/api/memory/daily/${date}`);
+                const data = await response.json();
+                
+                if (data.exists && data.content) {
+                    alert(`Daily Note for ${date}:\n\n${data.content.substring(0, 500)}${data.content.length > 500 ? '...' : ''}`);
+                } else {
+                    alert(`No note found for ${date}`);
+                }
+            } catch (error) {
+                console.error('Failed to load daily note:', error);
+                alert('Failed to load daily note');
+            }
+        }
+        
+        // Search Memory
+        async function searchMemory() {
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) {
+                alert('Please enter a search term');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('searchResults');
+            resultsDiv.innerHTML = '<div class="loading"><div class="loading-spinner"></div>Searching...</div>';
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/memory/search?q=${encodeURIComponent(query)}`);
+                const data = await response.json();
+                
+                if (data.total_results === 0) {
+                    resultsDiv.innerHTML = '<p style="color: #666; text-align: center;">No results found</p>';
+                    return;
+                }
+                
+                resultsDiv.innerHTML = '';
+                data.results.forEach(result => {
+                    const item = document.createElement('div');
+                    item.className = 'search-result-item';
+                    item.innerHTML = `
+                        <div class="source">📄 ${result.source} (Line ${result.line_number})</div>
+                        <div class="content">${escapeHtml(result.content)}</div>
+                        <div class="context">${escapeHtml(result.context)}</div>
+                    `;
+                    resultsDiv.appendChild(item);
+                });
+            } catch (error) {
+                console.error('Search failed:', error);
+                resultsDiv.innerHTML = '<p style="color: #dc3545; text-align: center;">Search failed</p>';
+            }
+        }
+        
+        // Write Note
+        async function writeNote() {
+            const content = document.getElementById('noteContent').value.trim();
+            if (!content) {
+                alert('Please enter some content');
+                return;
+            }
+            
+            try {
+                const response = await fetch(`${API_BASE}/api/memory/daily/write`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ content })
+                });
+                
+                const data = await response.json();
+                
+                if (data.success) {
+                    alert('Note saved successfully!');
+                    document.getElementById('noteContent').value = '';
+                    loadDashboard(); // Refresh
+                } else {
+                    alert('Failed to save note: ' + (data.error || 'Unknown error'));
+                }
+            } catch (error) {
+                console.error('Write failed:', error);
+                alert('Failed to save note');
+            }
+        }
+        
+        // Switch Tab
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            
+            document.querySelector(`[onclick="switchTab('${tabId}')"]`).classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+        
+        // Escape HTML
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+    </script>
+</body>
+</html>

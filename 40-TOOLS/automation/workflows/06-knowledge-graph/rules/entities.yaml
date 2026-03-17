@@ -1,0 +1,19 @@
+# 实体提取规则
+entities:
+  material:
+    pattern: "^(mat_|paper_)"
+    fields:
+      - arxiv_id
+      - category
+      - title
+  
+  category:
+    pattern: "^cat_"
+    fields:
+      - name
+  
+  author:
+    pattern: "^author_"
+    fields:
+      - name
+      - affiliation

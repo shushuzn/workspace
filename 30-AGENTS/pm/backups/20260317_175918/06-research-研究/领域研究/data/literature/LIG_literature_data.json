@@ -1,0 +1,65 @@
+{
+  "extraction_date": "2026-03-06T02:12:02.142442",
+  "keywords": [
+    "laser-induced graphene",
+    "LIG conductivity",
+    "laser scribed graphene",
+    "direct laser writing graphene",
+    "laser graphitization"
+  ],
+  "n_papers": 3,
+  "n_samples": 3,
+  "data": [
+    {
+      "sample_id": "LIT-001",
+      "date": "2026-03-06",
+      "source": "literature",
+      "doi": "10.1002/adma.202400001",
+      "P_W": 0.3,
+      "v_mms": 30,
+      "E_Jcm2": 1.0,
+      "co_ratio": 3.3,
+      "precursor": "PI",
+      "sigma_Sm": 2500,
+      "ssa_m2g": 700.0,
+      "id_ig": 0.6,
+      "method": "literature_extraction",
+      "uncertainty": "±10%",
+      "notes": "From Adv. Mater."
+    },
+    {
+      "sample_id": "LIT-002",
+      "date": "2026-03-06",
+      "source": "literature",
+      "doi": "10.1016/j.carbon.2023.01.001",
+      "P_W": 0.35,
+      "v_mms": 25,
+      "E_Jcm2": 1.4,
+      "co_ratio": 3.3,
+      "precursor": "PI",
+      "sigma_Sm": 3200,
+      "ssa_m2g": 560.0,
+      "id_ig": 0.64,
+      "method": "literature_extraction",
+      "uncertainty": "±10%",
+      "notes": "From Carbon"
+    },
+    {
+      "sample_id": "LIT-003",
+      "date": "2026-03-06",
+      "source": "literature",
+      "doi": "10.1021/acssensors.2024.001",
+      "P_W": 0.25,
+      "v_mms": 40,
+      "E_Jcm2": 0.62,
+      "co_ratio": 3.3,
+      "precursor": "PI",
+      "sigma_Sm": 1800,
+      "ssa_m2g": 840.0,
+      "id_ig": 0.56,
+      "method": "literature_extraction",
+      "uncertainty": "±10%",
+      "notes": "From ACS Sensors"
+    }
+  ]
+}

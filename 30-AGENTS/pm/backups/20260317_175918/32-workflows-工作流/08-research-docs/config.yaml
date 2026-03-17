@@ -1,0 +1,54 @@
+# 研究文档自动化配置
+research:
+  # 研究文件
+  main_file: research/SOLID-STATE-BATTERY-RESEARCH.md
+  
+  # 输出目录
+  output_dir: workflows/research-docs/outputs/
+  
+  # arXiv 同步
+  arxiv_sync:
+    enabled: true
+    keywords:
+      - solid-state battery
+      - solid electrolyte
+      - composite electrolyte
+      - interface engineering
+      - LiNbO3 coating
+      - Li3N buffer layer
+    max_papers: 10
+  
+  # 周报配置
+  weekly_report:
+    enabled: true
+    auto_generate: true
+    day: Monday
+    time: "09:00"
+    template: templates/weekly-report.md
+  
+  # 实验数据导入
+  data_import:
+    enabled: true
+    source_dir: "D:\\lab-data\\"
+    formats:
+      - xrd
+      - sem
+      - tem
+      - electrochemical
+  
+  # 进度更新
+  progress_update:
+    enabled: true
+    auto_calculate: true
+  
+  # 统计报告
+  stats:
+    enabled: true
+    output_file: outputs/stats/research-stats.json
+  
+  # 日志配置
+  logging:
+    level: INFO
+    file: logs/research.log
+    max_size: 10MB
+    backup_count: 7

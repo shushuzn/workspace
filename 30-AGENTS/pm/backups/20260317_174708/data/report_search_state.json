@@ -1,0 +1,179 @@
+{
+  "last_index": "2026-03-17T16:17:17.993197",
+  "index": [
+    {
+      "file": "21-reports\\00-CURRENT-RESEARCH-EVALUATION-20260313.md",
+      "title": "当前研究评估报告",
+      "date": null,
+      "tags": [
+        "research",
+        "report"
+      ],
+      "word_count": 1210,
+      "content_preview": "当前研究评估报告\n\n评估日期: 2026-03-13 17:57  \n评估者: 7 人格多子代理系统\n\n---\n\n 📊 研究领域分布\n\n| 领域 | 文件数 | 状态 | 评分 |\n|------|--------|------|------|\n| LIG 激光诱导石墨烯 | 52 个 MD | 🔬 深入研究中 | 85/100 |\n| CNT 碳纳米管 | 0 个 | ⏳ 计划中 | - |\n| 其他领域 | 0 个 | ❌ 未开始 | - |\n\n综合评分: 75/100 研究领域过于集中\n\n---\n\n ✅ LIG 研究状态\n\n 研究深度\n\n| 指标 | 数值 | 状态 |\n|------|------|------|\n| Markdown 文件 | 52 个 | ✅ 深入 |\n| 分析维度 | 10+ | ✅ 全面 |\n| 段位提升 | 473→805 级 | ✅ 显著 |\n\n 主要成果\n\n1. ✅ LIG 100 篇论文分析\n2. ✅ 产业转化分析 +2000 XP\n3. ✅ 人才储备分析 +1000 XP\n4. ✅ 国际合作分析 +1000 XP\n5. ✅ 科普卡片创建 2 篇",
+      "indexed_at": "2026-03-17T16:17:17.988057"
+    },
+    {
+      "file": "21-reports\\00-HEALTH-MONITORING-SYSTEM-DESIGN-20260313.md",
+      "title": "健康监控系统设计方案",
+      "date": null,
+      "tags": [],
+      "word_count": 1357,
+      "content_preview": "健康监控系统设计方案\n\n创建日期: 2026-03-13 17:48  \n创建者: 7 人格多子代理系统 头脑风暴  \n背景: 连续工作 410 分钟，多次建议休息被忽略\n\n---\n\n 🎯 系统目标\n\n建立强制健康保护机制，平衡工作效率与健康保护。\n\n---\n\n 📊 核心功能\n\n 1. 工作时长监控\n\n| 功能 | 频率 | 说明 |\n|------|------|------|\n| 实时记录 | 持续 | 记录连续工作时长 |\n| 休息检测 | 自动 | 检测休息开始/结束 |\n| 累计统计 | 每日 | 统计每日工作时长 |\n\n---\n\n 2. 分级休息提醒\n\n| 时长 | 级别 | 动作 |\n|------|------|------|\n| 60 分钟 | 🟡 注意 | 建议休息 5 分钟 |\n| 90 分钟 | 🟠 警告 | 建议休息 10 分钟 |\n| 120 分钟 | 🔴 严重 | 建议休息 20 分钟 |\n| 180 分钟 | 🔴 强制 | 强制休息 30 分钟 可豁免 1 次/日 |\n\n---\n\n 3. 健康风险显示\n\n每次任务开始时显示:\n\n\n⚠️ 健康警告\n连续工作",
+      "indexed_at": "2026-03-17T16:17:17.988057"
+    },
+    {
+      "file": "21-reports\\00-MARKDOWN-FILES-CLEANUP-REPORT-20260313.md",
+      "title": "Markdown 文件清理报告",
+      "date": null,
+      "tags": [
+        "report"
+      ],
+      "word_count": 1024,
+      "content_preview": "Markdown 文件清理报告\n\n检查日期: 2026-03-13 17:32  \n检查者: 7 人格多子代理系统\n\n---\n\n 📊 文件分布统计\n\n| 指标 | 数值 |\n|------|------|\n| 总 Markdown 文件 | 3021 个 |\n| 收集器内容 reddit/twitter/medium | 2300 个 |\n| 核心研究文档 06-research | 324 个 |\n| 记忆系统 13-memory | 25 个 |\n| 创作内容 09-creation | 185 个 |\n\n---\n\n ✅ 核心工作区状态\n\n13-memory-记忆系统: 25 个 Markdown 文件 ✅ 精简合理  \n06-research-研究: 324 个 Markdown 文件 ✅ 合理  \n04-plugins-插件: 50 个 Markdown 文件 ✅ 合理\n\n结论: 核心工作区文件数量合理，无需清理\n\n---\n\n 📦 收集器内容\n\n08-collectors-收集:\n- reddit 每日收集：235 个 2026-03-02\n- twitter 每日收集：106",
+      "indexed_at": "2026-03-17T16:17:17.988057"
+    },
+    {
+      "file": "21-reports\\00-PROJECT-HEALTH-CHECK-20260313.md",
+      "title": "项目健康检查报告",
+      "date": null,
+      "tags": [
+        "report"
+      ],
+      "word_count": 1316,
+      "content_preview": "项目健康检查报告\n\n检查日期: 2026-03-13 17:14  \n检查者: 7 人格多子代理系统\n\n---\n\n 📊 项目概览\n\n| 指标 | 数值 | 状态 |\n|------|------|------|\n| Python 文件 | 2552 个 | ⚠️ 偏多 |\n| Markdown 文件 | 3021 个 | ⚠️ 偏多 |\n| Git 待提交 | 2 个 | ✅ 良好 |\n| 今日提交 | 7 次 | ⚠️ 偏频繁 |\n| 连续工作 | 380 分钟 | 🔴 严重超时 |\n\n---\n\n ⚠️ 发现的问题\n\n 问题 1: Python 文件过多 2552 个\n\n影响: 代码冗余，维护困难  \n建议: \n- 识别并删除未使用的脚本\n- 合并相似功能的模块\n- 建立代码归档机制\n\n优先级: 🔴 高\n\n---\n\n 问题 2: Markdown 文件过多 3021 个\n\n影响: 文档分散，查找困难  \n建议:\n- 合并相关文档\n- 建立文档索引\n- 定期归档旧文档\n\n优先级: 🟡 中\n\n---\n\n 问题 3: Git 待提交变更 2 个\n\n影响: 代码未同步  \n建议:\n- 立即提",
+      "indexed_at": "2026-03-17T16:17:17.988057"
+    },
+    {
+      "file": "21-reports\\00-PROJECT-HEALTH-FINAL-SUMMARY-20260313.md",
+      "title": "项目健康检查最终总结",
+      "date": null,
+      "tags": [
+        "summary"
+      ],
+      "word_count": 1491,
+      "content_preview": "项目健康检查最终总结\n\n检查日期: 2026-03-13 17:37  \n检查者: 7 人格多子代理系统  \n连续工作: 400 分钟 6 小时 40 分钟 🔴\n\n---\n\n 📊 检查概览\n\n| 检查项 | 文件数 | 评分 | 状态 |\n|--------|--------|------|------|\n| Python 文件 | 2552 个 | 90/100 | ✅ 优秀 |\n| Markdown 文件 | 3021 个 | 90/100 | ✅ 优秀 |\n| Git 管理 | 2 待提交 | 80/100 | ⚠️ 良好 |\n| 健康状态 | 400 分钟 | 30/100 | 🔴 严重 |\n\n综合评分: 73/100 及格\n\n---\n\n ✅ 核心工作区状态\n\n| 区域 | 文件数 | 状态 |\n|------|--------|------|\n| 04-plugins-插件 | 9 py + 50 md | ✅ 合理 |\n| 30-scripts-脚本工具 | 5 py + 50 md | ✅ 合理 |\n| 13-memory-记忆系统 | 25 md | ✅ 精简 |\n| ",
+      "indexed_at": "2026-03-17T16:17:17.989056"
+    },
+    {
+      "file": "21-reports\\00-PYTHON-FILES-CLEANUP-REPORT-20260313.md",
+      "title": "Python 文件清理报告",
+      "date": null,
+      "tags": [
+        "report"
+      ],
+      "word_count": 1029,
+      "content_preview": "Python 文件清理报告\n\n检查日期: 2026-03-13 17:26  \n检查者: 7 人格多子代理系统\n\n---\n\n 📊 文件分布统计\n\n| 指标 | 数值 |\n|------|------|\n| 总 Python 文件 | 2552 个 |\n| 核心工作区 04-plugins | 9 个 |\n| 核心工作区 30-scripts | 5 个 |\n| 研究领域 | 150 个 |\n| 归档目录 | 1500 个 |\n\n---\n\n ✅ 核心工作区状态\n\n04-plugins-插件: 9 个 Python 文件 ✅ 合理  \n30-scripts-脚本工具: 5 个 Python 文件 ✅ 合理\n\n结论: 核心工作区文件数量合理，无需清理\n\n---\n\n ⚠️ 归档目录状态\n\n99-archive-归档: 1500 个 Python 文件\n\n主要分布:\n- 旧工作区/research/scripts: 43 个\n- 旧工作区/scripts/materials: 40 个\n- 旧工作区/scripts: 22 个\n- 旧工作区/scripts/ai-analysis: 24 个\n\n",
+      "indexed_at": "2026-03-17T16:17:17.989056"
+    },
+    {
+      "file": "21-reports\\AUTONOMOUS-SESSION-FINAL-REPORT.md",
+      "title": "🤖 Autonomous Work Session - Final Report",
+      "date": null,
+      "tags": [
+        "report"
+      ],
+      "word_count": 6825,
+      "content_preview": "🤖 Autonomous Work Session - Final Report\n\nSession: 2026-03-13 22:00 - 23:30  \nDuration: 90 minutes  \nStatus: ✅ Complete\n\n---\n\n 🎯 Executive Summary\n\nCompleted comprehensive workspace standardization and enhancement:\n\n1. ✅ Security - Desensitized all sensitive data\n2. ✅ Standardization - 100% English compliance\n3. ✅ Enhancement - arXiv collector 16x improvement\n4. ✅ Automation - Scheduled tasks + integration\n5. ✅ Documentation - 40+ English files\n\n---\n\n 📊 Work Breakdown\n\n Phase 1: Security 15 min ",
+      "indexed_at": "2026-03-17T16:17:17.989056"
+    },
+    {
+      "file": "21-reports\\AUTONOMOUS-WORK-SUMMARY.md",
+      "title": "✅ Autonomous Work Summary",
+      "date": null,
+      "tags": [
+        "summary"
+      ],
+      "word_count": 3754,
+      "content_preview": "✅ Autonomous Work Summary\n\nDate: 2026-03-13 23:00  \nStatus: ✅ Complete\n\n---\n\n 🎯 Decisions Made\n\n 1. Security Desensitization Priority 🔴\n- ✅ Renamed .env → .env.local.backup\n- ✅ Updated .gitignore to include backup files\n- ✅ Created SECURITY.md guidelines\n- ✅ Created desensitize.bat script\n- ✅ All sensitive data protected\n\nResult: ✅ Safe to push to GitHub\n\n 2. arXiv Collector Enhancement Priority 🟡\n- ✅ Created arxiv-collector-v2.py English version\n- ✅ Multi-category support 3 categories\n- ✅ Multi",
+      "indexed_at": "2026-03-17T16:17:17.990056"
+    },
+    {
+      "file": "21-reports\\REPORT-INDEX.md",
+      "title": "REPORT-INDEX.md",
+      "date": null,
+      "tags": [],
+      "word_count": 8603,
+      "content_preview": "﻿ 📊 报告系统索引 Report Index\n\n创建日期: 2026-03-17  \n最后更新: 2026-03-17  \n维护者: Claw  \n总报告数: 180+\n\n---\n\n 📋 目录\n\n1. 报告分类报告分类\n2. 重要报告重要报告\n3. 项目报告项目报告\n4. 系统报告系统报告\n5. 研究报告研究报告\n6. 测试报告测试报告\n7. 日报/周报日报周报\n8. 归档报告归档报告\n\n---\n\n 报告分类\n\n 按重要性\n\n| 级别 | 数量 | 说明 |\n|------|------|------|\n| 🔴 核心 | 20 | 系统级重要报告 |\n| 🟡 项目 | 50 | 项目完成报告 |\n| 🟢 常规 | 80 | 日常任务报告 |\n| ⚪ 测试 | 30 | 测试验证报告 |\n\n 按类型\n\n| 类型 | 前缀 | 数量 |\n|------|------|------|\n| 完成报告 | -COMPLETE, -FINAL | 40 |\n| 验证报告 | -VERIFICATION, -TEST | 30 |\n| 进度报告 | -PROGRESS, WEEKLY | 25 |",
+      "indexed_at": "2026-03-17T16:17:17.990056"
+    },
+    {
+      "file": "21-reports\\WEEKLY-REPORT-W11-20260313-PREVIEW.md",
+      "title": "W11 周报告预览 (2026-03-10 ~ 2026-03-16)",
+      "date": null,
+      "tags": [
+        "report"
+      ],
+      "word_count": 1440,
+      "content_preview": "W11 周报告预览 2026-03-10  2026-03-16\n\n创建日期: 2026-03-13 15:17  \n创建者: 规划者人格 自主执行  \n挑战: 1 小时自我进化 继续中\n\n---\n\n 📊 本周概览 截至 15:17\n\n时间: 第 4 天/7 天 57% 完成\n\n| 指标 | 数值 | 目标 | 进度 |\n|------|------|------|------|\n| Git 提交 | 33 次 | 50 次 | 66% |\n| 文件创建 | 77+ | 100 | 77% |\n| 研究内容 | 128KB | 150KB | 85% |\n| 任务完成 | 27+ | 30 | 90% |\n| 测试覆盖 | 100% | 100% | 100% |\n\n---\n\n 🎯 主要成就\n\n 1. 批判者 v5.0 修复 100% 完成\n- 初始评分：0/100\n- 最终评分：88/100\n- 修复项目：10/10\n\n 2. 7 人格系统配置 100% 完成\n- 配置文件：7 个\n- 测试覆盖：100% 36/36\n- 系统健康：77/100\n\n 3. MEMORY 整合 100%",
+      "indexed_at": "2026-03-17T16:17:17.991056"
+    },
+    {
+      "file": "21-reports\\WORKSPACE-STANDARDIZATION-COMPLETE.md",
+      "title": "🎉 Workspace Standardization Complete",
+      "date": null,
+      "tags": [
+        "complete"
+      ],
+      "word_count": 6509,
+      "content_preview": "🎉 Workspace Standardization Complete\n\nDate: 2026-03-13 23:15  \nStatus: ✅ All English\n\n---\n\n ✅ Completed Tasks\n\n 1. Directory Renaming\n\n| Old Name | New Name | Status |\n|----------|----------|--------|\n| 30-scripts-脚本工具 | 30-scripts-tools | ✅ |\n| 40-collectors-收集 | 40-collectors | ✅ |\n| 04-COLLECTORS | 04-collectors | ✅ |\n| 00-clawhub-技能中心 | 00-clawhub-skill-center | ✅ |\n| 00-人格系统 | 00-persona-system | ✅ |\n| 01-obsidian-笔记配置 | 01-obsidian-config | ✅ |\n| 02-openclaw-系统配置 | 02-openclaw-system | ✅ |",
+      "indexed_at": "2026-03-17T16:17:17.991056"
+    },
+    {
+      "file": "21-reports\\lig-risk\\lig-risk-report-20260313.md",
+      "title": "LIG Risk Monitor Report",
+      "date": null,
+      "tags": [
+        "report"
+      ],
+      "word_count": 822,
+      "content_preview": "LIG Risk Monitor Report\n\nDate: 2026-03-13 12:02  \nPeriod: Weekly past 7 days\n\n---\n\n Risk Assessment\n\nRisk Level: HIGH\n\nLIG research activity异常 high, possible tech breakthrough\n\n---\n\n Metrics\n\n| Metric | Value | Threshold | Status |\n|--------|-------|-----------|--------|\n| PubMed Papers/Week | 100 | 10 | WARNING |\n| Patent Applications | N/A | 5 | Pending |\n| Major Company Activity | N/A | 3 | Pending |\n\n---\n\n Analysis\n\n PubMed Trend\n- Papers this week: 100\n- Threshold: 10 papers/week\n- Status: ",
+      "indexed_at": "2026-03-17T16:17:17.992180"
+    },
+    {
+      "file": "21-reports\\lig-risk\\lig-risk-report-20260315.md",
+      "title": "LIG Risk Monitor Report",
+      "date": null,
+      "tags": [
+        "report"
+      ],
+      "word_count": 822,
+      "content_preview": "LIG Risk Monitor Report\n\nDate: 2026-03-15 07:00  \nPeriod: Weekly past 7 days\n\n---\n\n Risk Assessment\n\nRisk Level: HIGH\n\nLIG research activity异常 high, possible tech breakthrough\n\n---\n\n Metrics\n\n| Metric | Value | Threshold | Status |\n|--------|-------|-----------|--------|\n| PubMed Papers/Week | 100 | 10 | WARNING |\n| Patent Applications | N/A | 5 | Pending |\n| Major Company Activity | N/A | 3 | Pending |\n\n---\n\n Analysis\n\n PubMed Trend\n- Papers this week: 100\n- Threshold: 10 papers/week\n- Status: ",
+      "indexed_at": "2026-03-17T16:17:17.992180"
+    },
+    {
+      "file": "21-reports\\lig-risk\\lig-risk-report-20260316.md",
+      "title": "LIG Risk Monitor Report",
+      "date": null,
+      "tags": [
+        "report"
+      ],
+      "word_count": 822,
+      "content_preview": "LIG Risk Monitor Report\n\nDate: 2026-03-16 07:00  \nPeriod: Weekly past 7 days\n\n---\n\n Risk Assessment\n\nRisk Level: HIGH\n\nLIG research activity异常 high, possible tech breakthrough\n\n---\n\n Metrics\n\n| Metric | Value | Threshold | Status |\n|--------|-------|-----------|--------|\n| PubMed Papers/Week | 100 | 10 | WARNING |\n| Patent Applications | N/A | 5 | Pending |\n| Major Company Activity | N/A | 3 | Pending |\n\n---\n\n Analysis\n\n PubMed Trend\n- Papers this week: 100\n- Threshold: 10 papers/week\n- Status: ",
+      "indexed_at": "2026-03-17T16:17:17.993197"
+    },
+    {
+      "file": "21-reports\\lig-risk\\lig-risk-report-20260317.md",
+      "title": "LIG Risk Monitor Report",
+      "date": null,
+      "tags": [
+        "report"
+      ],
+      "word_count": 822,
+      "content_preview": "LIG Risk Monitor Report\n\nDate: 2026-03-17 08:12  \nPeriod: Weekly past 7 days\n\n---\n\n Risk Assessment\n\nRisk Level: HIGH\n\nLIG research activity异常 high, possible tech breakthrough\n\n---\n\n Metrics\n\n| Metric | Value | Threshold | Status |\n|--------|-------|-----------|--------|\n| PubMed Papers/Week | 100 | 10 | WARNING |\n| Patent Applications | N/A | 5 | Pending |\n| Major Company Activity | N/A | 3 | Pending |\n\n---\n\n Analysis\n\n PubMed Trend\n- Papers this week: 100\n- Threshold: 10 papers/week\n- Status: ",
+      "indexed_at": "2026-03-17T16:17:17.993197"
+    },
+    {
+      "file": "21-reports\\quality-reports\\quality-report-20260317-161050.md",
+      "title": "报告质量评估报告",
+      "date": null,
+      "tags": [
+        "quality",
+        "report"
+      ],
+      "word_count": 3021,
+      "content_preview": "报告质量评估报告\n\n生成日期: 2026-03-17 16:10\n评估报告数: 15\n平均质量分: 43.4%\n\n 质量分布\n\n| 等级 | 数量 | 占比 |\n|------|------|------|\n| 不合格 | 11 | 73.3% |\n| 需改进 | 4 | 26.7% |\n\n 低质量报告 需要改进\n\n共 15 个报告质量分<70%\n\n 21-reports\\00-CURRENT-RESEARCH-EVALUATION-20260313.md\n\n- 得分: 39.0%\n- 等级: 不合格\n- 主要问题:\n  - has_title: 标题过短\n  - has_executive_summary: 缺少执行摘要\n  - has_conclusions: 缺少明确结论\n  - has_metadata: 找到 2 个元数据字段, 缺少：author, type, tags\n  - min_length: 过短 433 字，建议500\n  - has_checklist: 有部分清单\n\n 21-reports\\00-HEALTH-MONITORING-SYSTEM-DESIGN",
+      "indexed_at": "2026-03-17T16:17:17.993197"
+    }
+  ]
+}

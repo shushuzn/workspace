@@ -1,0 +1,82 @@
+[
+  {
+    "question": "固相反应方法能否用于合成SiO2以降低成本?",
+    "category": "合成方法",
+    "priority": "高",
+    "feasibility": "高",
+    "expected_impact": "重大突破",
+    "related_work": [
+      "相关工作4"
+    ]
+  },
+  {
+    "question": "带隙与热导率之间是否存在关联？",
+    "category": "基础机理",
+    "priority": "中",
+    "feasibility": "低",
+    "expected_impact": "显著改进",
+    "related_work": [
+      "相关工作1"
+    ]
+  },
+  {
+    "question": "如何优化LiCoO2的热导率以提高催化性能？",
+    "category": "材料优化",
+    "priority": "中",
+    "feasibility": "中",
+    "expected_impact": "显著改进",
+    "related_work": [
+      "相关工作2"
+    ]
+  },
+  {
+    "question": "体积模量与电导率之间是否存在关联？",
+    "category": "基础机理",
+    "priority": "低",
+    "feasibility": "高",
+    "expected_impact": "渐进式改进",
+    "related_work": [
+      "相关工作3"
+    ]
+  },
+  {
+    "question": "溶胶 - 凝胶方法能否用于合成LiFePO4以降低成本?",
+    "category": "合成方法",
+    "priority": "低",
+    "feasibility": "高",
+    "expected_impact": "渐进式改进",
+    "related_work": [
+      "相关工作5"
+    ]
+  },
+  {
+    "question": "固相反应方法能否用于合成LiFePO4以降低成本?",
+    "category": "合成方法",
+    "priority": "低",
+    "feasibility": "中",
+    "expected_impact": "渐进式改进",
+    "related_work": [
+      "相关工作6"
+    ]
+  },
+  {
+    "question": "如何优化LiCoO2的带隙以提高电池性能？",
+    "category": "材料优化",
+    "priority": "低",
+    "feasibility": "中",
+    "expected_impact": "渐进式改进",
+    "related_work": [
+      "相关工作7"
+    ]
+  },
+  {
+    "question": "如何优化LiNiO2的体积模量以提高电池性能？",
+    "category": "材料优化",
+    "priority": "低",
+    "feasibility": "低",
+    "expected_impact": "渐进式改进",
+    "related_work": [
+      "相关工作8"
+    ]
+  }
+]

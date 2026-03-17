@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Abstract. We consider the singular elliptic problem of the form</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .header {
+            border-bottom: 3px solid #4a9eff;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .meta {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .abstract {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #4a9eff;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        .section h3 {
+            color: #4a9eff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .section .content {
+            color: #333;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+        .references {
+            margin-top: 30px;
+        }
+        .reference {
+            padding: 12px;
+            margin: 10px 0;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .reference.unverified {
+            border-left: 3px solid #ff9800;
+            background: #fff8e1;
+        }
+        .reference.verified {
+            border-left: 3px solid #4caf50;
+            background: #e8f5e9;
+        }
+        .reference.manual {
+            border-left: 3px solid #2196f3;
+            background: #e3f2fd;
+        }
+        .ref-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .ref-id {
+            font-weight: bold;
+            color: #4a9eff;
+            margin-right: 8px;
+        }
+        .ref-status {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #f0f0f0;
+        }
+        .ref-content {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .ref-details {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .ref-details div {
+            margin: 4px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #4a9eff;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .integrity-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1>Abstract. We consider the singular elliptic problem of the form</h1>
+            <div class="meta">作者：Bartosz Bieganowski, Pietro d'Avenia, Jacopo Schino</div>
+            <div class="meta">年份：未知</div>
+            <div class="meta">arXiv: <span class="badge">2603.09889</span></div>
+        </div>
+        
+        <div class="abstract">
+            <strong>📖 摘要</strong>
+            <p style="margin-top: 10px;">−∆u + V (x)u = B(x)|u|2∗−2u + A(x)
+|u|2∗u,
+u ∈H1(M),
+where the coefficients are allowed to have low regularity. Under natural spectral assumptions on −∆+ V ,
+geometric assumptions on the manifold M ensuring the Sobolev embedding H1(M) ,→L2∗(M), and a
+suitable global integrability/smallness condition involving A, B, and a function ψ ∈H1(M), we prove the
+existence of a nonnegative finite-energy supersolution. If, in addition, the Ricci curvature is nonnegative
+and B ≥0, we obtain a positive finite-energy solution.
+The proof relies on a family of ε-regularized
+problems, mountain pass arguments, and a limiting procedure in which Harnack’s inequality plays a
+crucial role in handling the singular term on noncompact manifolds. We also prove a nonexistence result
+showing that the global integrability condition on A is, in a precise sense, necessary for the existence of
+nonnegative supersolutions.
+1. Introduction
+The Einstein field equations, introduced by A. Einstein (in their original form) in 1915 (see [12,13]),
+describe the relation between the geometry of spacetime and the distribution of matter in this spacetime.
+Einstein-scalar field theories have seen significant developments in recent years, including attempts to
+explain the acceleration of the expansion of the universe (see [24,25]).
+The initial data in the analysis of the Einstein-scalar field equations, whose solutions describe the
+dynamics of the spacetime, must satisfy certain constraint conditions, which are the Gauss and Codazzi
+equations. More precisely, let (M, eg) be a Riemannian manifold of dimension N ≥3 without boundary.
+The Gauss and Codazzi equations read as
+Scaleg −|K|2
+eg + (TregK)2 −2ρ = 0,
+∇eg · K −∇egTregK −J = 0,
+where K is the second fundamental form, Scaleg denotes the scalar curvature, ρ ∈R, and J is a vector
+field on M. Using the conformal method (see [18]), i.e., changing the metric eg = u</p>
+        </div>
+        
+        <div class="integrity-notice">
+            <strong>🔒 学术诚信声明：</strong>
+            本卡片内容由 AI 辅助生成，所有参考文献需人工核实真实性。
+            请勿直接引用未验证的文献信息。
+        </div>
+        
+        <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📑 核心章节</h2>
+        
+            <div class="section">
+                <h3>Introduction</h3>
+                <p class="content">FINITE-ENERGY SOLUTIONS TO EINSTEIN-SCALAR FIELD LICHNEROWICZ
+EQUATIONS ON COMPLETE RIEMANNIAN MANIFOLDS
+BARTOSZ BIEGANOWSKI, PIETRO D’AVENIA, AND JACOPO SCHINO
+Abstract. We consider the singular elliptic problem of the form
+−∆u + V (x)u = B(x)|u|2∗−2u + A(x)
+|u|2∗u,
+u ∈H1(M),
+where the coefficients are allowed to have low regularity. Under natural spectral assumptions on −∆+ V ,
+geometric assumptions on the manifold M ensuring the Sobolev embedding H1(M) ,→L2∗(M), and a
+suitable global integrab...</p>
+            </div>
+            
+            <div class="section">
+                <h3>Introduction</h3>
+                <p class="content">The Einstein field equations, introduced by A. Einstein (in their original form) in 1915 (see [12,13]),
+describe the relation between the geometry of spacetime and the distribution of matter in this spacetime.
+Einstein-scalar field theories have seen significant developments in recent years, including attempts to
+explain the acceleration of the expansion of the universe (see [24,25]).
+The initial data in the analysis of the Einstein-scalar field equations, whose solutions describe the
+dynamics o...</p>
+            </div>
+            
+            <div class="section">
+                <h3>Preliminaries</h3>
+                <p class="content">In this section, we first introduce the Sobolev space H1(M) and provide some general and useful
+properties about it. Then, we present some qualitative aspects of supersolutions to (1.2).
+2.1. Sobolev spaces on manifolds. We introduce the space H1(M) as the completion of C∞
+0 (M), the
+space of C∞functions with compact support in M, with respect to the norm
+∥u∥H1 :=
+|∇u|2 + u2 dvg
+It is a Hilbert space [15, Proposition 2.2] with respect to the scalar product
+⟨u, v⟩H1 :=
+∇u∇v + uv dvg.
+In view of (...</p>
+            </div>
+            
+            <div class="section">
+                <h3>ε-approximations</h3>
+                <p class="content">In this section, in addition to (V), we consider the following stronger variants of (A) and (B):
+(A1) A ∈L1(M) ∩L2N/(N+2)(M), A ≥0, and A ̸= 0;
+(B1) B ∈L∞(M) and B+ ̸= 0.
+This section aims to prove the following weaker version of Theorem 1.2. Then, in the next section,
+we will exploit the fact that A and B given in (A) and (B) can be approximated by functions satisfying
+(A1) and (B1).
+BARTOSZ BIEGANOWSKI, PIETRO D’AVENIA, AND JACOPO SCHINO
+Proposition 3.1. Assume that the Ricci curvature of (M, ...</p>
+            </div>
+            
+            <div class="section">
+                <h3>Proof of the main results</h3>
+                <p class="content">We begin by proving the existence of a finite-energy solution to (1.2) under the weaker assumptions
+(A) and (B).
+Proof of Theorem 1.2. Let (An)n ⊂L1(M) ∩L2N/(2+N)(M) and (Bn)n ⊂L∞(M) such that An ≥0,
+An ≤An+1, Bn,+ ≤Bn+1,+, Bn,−≤Bn+1,−, where Bn,+ := max{0, Bn} and Bn,−:= max{0, −Bn}, and
+An →A in L1
+loc(M)
+Bn →B in L2∗
+loc(M)
+as n →+∞.
+Observe that, for An and Bn, (1.8) holds for all n and (1.7) holds for every sufficiently large n. If B−= 0
+in supp ψ, then (1.9) does not depend on Bn or B. If,...</p>
+            </div>
+            
+        
+        <div class="references">
+            <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📚 参考文献</h2>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[1]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">G. Albanese and M. Rigoli. Lichnerowicz-type equations on complete manifolds. Adv. Nonlinear Anal., 5(3):223–250,</div>
+                
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p>生成时间：2026-03-12 11:08:40</p>
+            <p>知识卡片生成器 v1.0 | AI Research OS</p>
+            <p style="margin-top: 10px; color: #ff9800;">
+                ⚠️ 所有参考文献必须人工核实真实性 - 严禁虚构文献信息
+            </p>
+        </div>
+    </div>
+</body>
+</html>

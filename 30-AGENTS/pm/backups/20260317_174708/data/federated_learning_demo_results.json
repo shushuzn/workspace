@@ -1,0 +1,70 @@
+{
+  "timestamp": "2026-03-16T17:14:23.667196",
+  "fedavg_stats": {
+    "total_rounds": 5,
+    "initial_accuracy": 0.850717968289191,
+    "final_accuracy": 0.8643863004162505,
+    "accuracy_improvement": 0.013668332127059535,
+    "initial_loss": 0.3317819678121546,
+    "final_loss": 0.32814239762985253,
+    "loss_reduction": 0.003639570182302043,
+    "convergence_rate": 0.002733666425411907,
+    "aggregation_method": "fedavg",
+    "privacy_epsilon": 0.0,
+    "privacy_report": null,
+    "client_stats": {
+      "num_clients": 4,
+      "total_samples": 5429,
+      "avg_compute_power": 0.8722709148183856,
+      "data_distribution": "non-IID",
+      "privacy_preserved": false
+    }
+  },
+  "dp_stats": {
+    "total_rounds": 5,
+    "initial_accuracy": 0.8831078940671562,
+    "final_accuracy": 0.8841016752168287,
+    "accuracy_improvement": 0.0009937811496725235,
+    "initial_loss": 0.3271000821367493,
+    "final_loss": 0.31205617437461575,
+    "loss_reduction": 0.015043907762133546,
+    "convergence_rate": 0.0001987562299345047,
+    "aggregation_method": "fedavg",
+    "privacy_epsilon": 1.0,
+    "privacy_report": {
+      "differential_privacy": true,
+      "epsilon": 1.0,
+      "delta": 1e-05,
+      "noise_scale": 4.844805262605389,
+      "privacy_budget_remaining": 0,
+      "privacy_guarantee": "Moderate privacy (1 ≤ ε < 5)"
+    },
+    "client_stats": {
+      "num_clients": 4,
+      "total_samples": 4588,
+      "avg_compute_power": 0.8404352784298736,
+      "data_distribution": "non-IID",
+      "privacy_preserved": true
+    }
+  },
+  "qfedavg_stats": {
+    "total_rounds": 5,
+    "initial_accuracy": 0.8335723355947033,
+    "final_accuracy": 0.8519427742893213,
+    "accuracy_improvement": 0.018370438694617963,
+    "initial_loss": 0.34511604885743946,
+    "final_loss": 0.35061398039721847,
+    "loss_reduction": -0.005497931539779011,
+    "convergence_rate": 0.003674087738923593,
+    "aggregation_method": "qfedavg",
+    "privacy_epsilon": 0.0,
+    "privacy_report": null,
+    "client_stats": {
+      "num_clients": 4,
+      "total_samples": 4397,
+      "avg_compute_power": 0.7931305150294576,
+      "data_distribution": "non-IID",
+      "privacy_preserved": false
+    }
+  }
+}

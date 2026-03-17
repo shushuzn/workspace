@@ -1,0 +1,3106 @@
+[
+  {
+    "source": "LESSON-SYS-016",
+    "target": "CATEGORY-SYS",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-SYS-010",
+    "target": "CATEGORY-SYS",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-DEPLOY-001",
+    "target": "CATEGORY-DEPLOY",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-DEPLOY-002",
+    "target": "CATEGORY-DEPLOY",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-DEPLOY-003",
+    "target": "CATEGORY-DEPLOY",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-031",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-032",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-033",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-034",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-035",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-036",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-037",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-038",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-039",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-001",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-010",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-024",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-025",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-026",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-027",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-028",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-029",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-030",
+    "target": "CATEGORY-MULTI",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MEM-011",
+    "target": "CATEGORY-MEM",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MEM-001",
+    "target": "CATEGORY-MEM",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MEM-005",
+    "target": "CATEGORY-MEM",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MEM-006",
+    "target": "CATEGORY-MEM",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MEM-007",
+    "target": "CATEGORY-MEM",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MEM-010",
+    "target": "CATEGORY-MEM",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-FEISHU-013",
+    "target": "CATEGORY-FEISHU",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-SEC-019",
+    "target": "CATEGORY-SEC",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-TOOL-001",
+    "target": "CATEGORY-TOOL",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-FEASIBILITY-001",
+    "target": "CATEGORY-FEASIBILITY",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-FEASIBILITY-002",
+    "target": "CATEGORY-FEASIBILITY",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-FEASIBILITY-003",
+    "target": "CATEGORY-FEASIBILITY",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-FEASIBILITY-004",
+    "target": "CATEGORY-FEASIBILITY",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-FEASIBILITY-005",
+    "target": "CATEGORY-FEASIBILITY",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-LOCAL-001",
+    "target": "CATEGORY-LOCAL",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-LOCAL-002",
+    "target": "CATEGORY-LOCAL",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-LOCAL-003",
+    "target": "CATEGORY-LOCAL",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-LOCAL-004",
+    "target": "CATEGORY-LOCAL",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-LOCAL-005",
+    "target": "CATEGORY-LOCAL",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-LOCAL-006",
+    "target": "CATEGORY-LOCAL",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-055",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-056",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-057",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-058",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-059",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-060",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-061",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-062",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-063",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-064",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-065",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-066",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-067",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-068",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-069",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-070",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-071",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-072",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-073",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-074",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-075",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-076",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-077",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-078",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-079",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-080",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-081",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-082",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-083",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-084",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-085",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-086",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-087",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-088",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-089",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-090",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-091",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-092",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-093",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-094",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-095",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-096",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-097",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-098",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-099",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-100",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-101",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-102",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-103",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-104",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-105",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-106",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-107",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-108",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-109",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-110",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-111",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-112",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-113",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-114",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-115",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-116",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-117",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-118",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-119",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-120",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-121",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-122",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-123",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-124",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-125",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-126",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-127",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-128",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-129",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-130",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-131",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-132",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-133",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-134",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-135",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-136",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-137",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-138",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-139",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-140",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-141",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-142",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-143",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-144",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-145",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-146",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-147",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-148",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-149",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-150",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-151",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-152",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-153",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-154",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-155",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-125",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-126",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-127",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-128",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-129",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-130",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-131",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-132",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-133",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-134",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-135",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-136",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-137",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-138",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-139",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-140",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-141",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-142",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-143",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-144",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-145",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-073",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-074",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-075",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-076",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-077",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-046",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-047",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-048",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-049",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-050",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-051",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-052",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-053",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-054",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-055",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-056",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-057",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-058",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-059",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-060",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-061",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-062",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-063",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-064",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-065",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-066",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-067",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-068",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-069",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-070",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-071",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-072",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-073",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-074",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-075",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-076",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-077",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-078",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-079",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-080",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-081",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-082",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-083",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-084",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-085",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-086",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-087",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-088",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-089",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-090",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-091",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-092",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-093",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-094",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-095",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-096",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-097",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-098",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-099",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-100",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-101",
+    "target": "CATEGORY-INNOVATOR",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-001",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-002",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-003",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-004",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-005",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-006",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-007",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-008",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-009",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-010",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-011",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-012",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-013",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-014",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-015",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-016",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-017",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-018",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-019",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-020",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-021",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-021",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-022",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-023",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-024",
+    "target": "CATEGORY-OBSIDIAN",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-GIT-001",
+    "target": "CATEGORY-GIT",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-GIT-002",
+    "target": "CATEGORY-GIT",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-GIT-003",
+    "target": "CATEGORY-GIT",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-GIT-004",
+    "target": "CATEGORY-GIT",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-001",
+    "target": "CATEGORY-WORKFLOW",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-002",
+    "target": "CATEGORY-WORKFLOW",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-003",
+    "target": "CATEGORY-WORKFLOW",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-004",
+    "target": "CATEGORY-WORKFLOW",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-005",
+    "target": "CATEGORY-WORKFLOW",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-006",
+    "target": "CATEGORY-WORKFLOW",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-007",
+    "target": "CATEGORY-WORKFLOW",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-008",
+    "target": "CATEGORY-WORKFLOW",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-009",
+    "target": "CATEGORY-WORKFLOW",
+    "type": "BELONGS_TO",
+    "properties": {
+      "weight": 1.0
+    }
+  },
+  {
+    "source": "LESSON-MULTI-033",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-MULTI-035",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-MULTI-038",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-MEM-011",
+    "target": "TAG-Dashboard",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-SEC-019",
+    "target": "TAG-Dashboard",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-SEC-019",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-MEM-006",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-MEM-010",
+    "target": "TAG-Dashboard",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-TOOL-001",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-MULTI-025",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-LOCAL-005",
+    "target": "TAG-API",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-056",
+    "target": "TAG-部署",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-057",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-060",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-060",
+    "target": "TAG-Git",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-063",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-065",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-066",
+    "target": "TAG-安全",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-066",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-067",
+    "target": "TAG-安全",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-070",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-073",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-076",
+    "target": "TAG-Ollama",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-077",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-079",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-081",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-083",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-085",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-087",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-092",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-092",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-094",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-096",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-097",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-101",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-102",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-105",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-106",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-111",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-116",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-116",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-119",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-119",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-122",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-124",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-131",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-133",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-134",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-135",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-136",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-136",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-137",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-138",
+    "target": "TAG-性能",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-139",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-139",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-140",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-148",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-148",
+    "target": "TAG-性能",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-149",
+    "target": "TAG-部署",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-125",
+    "target": "TAG-LLM",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-125",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-125",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-128",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-129",
+    "target": "TAG-安全",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-131",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-134",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-137",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-137",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-138",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-138",
+    "target": "TAG-性能",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-139",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-140",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-140",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-143",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-144",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-144",
+    "target": "TAG-性能",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-073",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-074",
+    "target": "TAG-arXiv",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-046",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-047",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-047",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-048",
+    "target": "TAG-CLI",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-049",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-050",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-051",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-054",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-059",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-059",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-061",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-064",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-064",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-065",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-066",
+    "target": "TAG-性能",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-067",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-072",
+    "target": "TAG-部署",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-075",
+    "target": "TAG-安全",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-077",
+    "target": "TAG-部署",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-077",
+    "target": "TAG-Git",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-078",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-003",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-008",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-008",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-010",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-011",
+    "target": "TAG-CLI",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-013",
+    "target": "TAG-LLM",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-018",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-020",
+    "target": "TAG-CLI",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-021",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-021",
+    "target": "TAG-Git",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-022",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-OBSIDIAN-023",
+    "target": "TAG-优化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-003",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-004",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-081",
+    "target": "TAG-监控",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-081",
+    "target": "TAG-集成",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-084",
+    "target": "TAG-部署",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-085",
+    "target": "TAG-部署",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-087",
+    "target": "TAG-性能",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-090",
+    "target": "TAG-部署",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-090",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-093",
+    "target": "TAG-部署",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-093",
+    "target": "TAG-测试",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-INNOVATOR-094",
+    "target": "TAG-部署",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  },
+  {
+    "source": "LESSON-WORKFLOW-007",
+    "target": "TAG-自动化",
+    "type": "TAGGED_WITH",
+    "properties": {
+      "weight": 0.8
+    }
+  }
+]

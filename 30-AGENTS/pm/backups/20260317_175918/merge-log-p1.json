@@ -1,0 +1,325 @@
+{
+  "timestamp": "2026-03-17T17:59:32.780824",
+  "backup_location": "D:\\OpenClaw\\workspace\\agent-pm\\backups\\20260317_175918",
+  "operations": [
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\00-config",
+      "merge": "D:\\OpenClaw\\workspace\\00-09-core-config",
+      "status": "completed",
+      "files_counted": 2,
+      "bytes_counted": 3142,
+      "errors": [],
+      "files_moved": 2
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\00-config",
+      "merge": "D:\\OpenClaw\\workspace\\03-config-files",
+      "status": "completed",
+      "files_counted": 17,
+      "bytes_counted": 16693,
+      "errors": [],
+      "files_moved": 17
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\00-config",
+      "merge": "D:\\OpenClaw\\workspace\\03-config-配置文件",
+      "status": "completed",
+      "files_counted": 16,
+      "bytes_counted": 16303,
+      "errors": [],
+      "files_moved": 16
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\01-obsidian-config",
+      "merge": "D:\\OpenClaw\\workspace\\00-config",
+      "status": "completed",
+      "files_counted": 40,
+      "bytes_counted": 84650,
+      "errors": [],
+      "files_moved": 40
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\15-docs",
+      "merge": "D:\\OpenClaw\\workspace\\00-root-docs",
+      "status": "completed",
+      "files_counted": 6,
+      "bytes_counted": 77965,
+      "errors": [],
+      "files_moved": 6
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\04-plugins",
+      "merge": "D:\\OpenClaw\\workspace\\31-skills-plugins",
+      "status": "error",
+      "files_counted": 88,
+      "bytes_counted": 540218,
+      "errors": [
+        "[WinError 5] 拒绝访问。: 'D:\\\\OpenClaw\\\\workspace\\\\31-skills-plugins\\\\binance\\\\.git\\\\objects\\\\pack\\\\pack-5c7c706fb187aa8fc14ae49ee2c36a492c8d4a51.idx'"
+      ]
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\05-templates",
+      "merge": "D:\\OpenClaw\\workspace\\05-templates-模板",
+      "status": "completed",
+      "files_counted": 9,
+      "bytes_counted": 18917,
+      "errors": [],
+      "files_moved": 9
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\06-research",
+      "merge": "D:\\OpenClaw\\workspace\\06-research-研究",
+      "status": "completed",
+      "files_counted": 550,
+      "bytes_counted": 26031559,
+      "errors": [],
+      "files_moved": 550
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\07-knowledge",
+      "merge": "D:\\OpenClaw\\workspace\\07-knowledge-知识",
+      "status": "completed",
+      "files_counted": 49,
+      "bytes_counted": 408941,
+      "errors": [],
+      "files_moved": 49
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\07-knowledge",
+      "merge": "D:\\OpenClaw\\workspace\\60-knowledge-cards",
+      "status": "completed",
+      "files_counted": 2,
+      "bytes_counted": 5981,
+      "errors": [],
+      "files_moved": 2
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\08-collectors",
+      "merge": "D:\\OpenClaw\\workspace\\08-collectors-收集",
+      "status": "completed",
+      "files_counted": 879,
+      "bytes_counted": 3250756,
+      "errors": [],
+      "files_moved": 879
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\09-creation",
+      "merge": "D:\\OpenClaw\\workspace\\09-creation-创作",
+      "status": "completed",
+      "files_counted": 228,
+      "bytes_counted": 1388097,
+      "errors": [],
+      "files_moved": 228
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\10-data",
+      "merge": "D:\\OpenClaw\\workspace\\10-data-数据",
+      "status": "completed",
+      "files_counted": 111,
+      "bytes_counted": 2493054,
+      "errors": [],
+      "files_moved": 111
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\10-data",
+      "merge": "D:\\OpenClaw\\workspace\\20-data-reports",
+      "status": "completed",
+      "files_counted": 55,
+      "bytes_counted": 1259520,
+      "errors": [],
+      "files_moved": 55
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\10-data",
+      "merge": "D:\\OpenClaw\\workspace\\dashboard-data",
+      "status": "completed",
+      "files_counted": 2,
+      "bytes_counted": 9093,
+      "errors": [],
+      "files_moved": 2
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\memory",
+      "merge": "D:\\OpenClaw\\workspace\\13-memory-system",
+      "status": "completed",
+      "files_counted": 90,
+      "bytes_counted": 512226,
+      "errors": [],
+      "files_moved": 90
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\memory",
+      "merge": "D:\\OpenClaw\\workspace\\13-memory-记忆系统",
+      "status": "completed",
+      "files_counted": 95,
+      "bytes_counted": 697771,
+      "errors": [],
+      "files_moved": 95
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\14-notes",
+      "merge": "D:\\OpenClaw\\workspace\\14-notes-笔记",
+      "status": "completed",
+      "files_counted": 1,
+      "bytes_counted": 6648,
+      "errors": [],
+      "files_moved": 1
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\15-docs-standard",
+      "merge": "D:\\OpenClaw\\workspace\\15-docs-文档规范",
+      "status": "completed",
+      "files_counted": 90,
+      "bytes_counted": 473248,
+      "errors": [],
+      "files_moved": 90
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\30-scripts-tools",
+      "merge": "D:\\OpenClaw\\workspace\\30-scripts-脚本工具",
+      "status": "completed",
+      "files_counted": 644,
+      "bytes_counted": 106444778,
+      "errors": [],
+      "files_moved": 644
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\31-skills-plugins",
+      "merge": "D:\\OpenClaw\\workspace\\31-skills-技能插件",
+      "status": "completed",
+      "files_counted": 49,
+      "bytes_counted": 182472,
+      "errors": [],
+      "files_moved": 49
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\32-workflows",
+      "merge": "D:\\OpenClaw\\workspace\\32-workflows-工作流",
+      "status": "completed",
+      "files_counted": 61,
+      "bytes_counted": 172676,
+      "errors": [],
+      "files_moved": 61
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\33-dashboard",
+      "merge": "D:\\OpenClaw\\workspace\\33-dashboard-仪表板",
+      "status": "completed",
+      "files_counted": 2,
+      "bytes_counted": 11442,
+      "errors": [],
+      "files_moved": 2
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\00-persona-system",
+      "merge": "D:\\OpenClaw\\workspace\\00-人格系统",
+      "status": "completed",
+      "files_counted": 20,
+      "bytes_counted": 262052,
+      "errors": [],
+      "files_moved": 20
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\02-openclaw-system",
+      "merge": "D:\\OpenClaw\\workspace\\02-openclaw-系统配置",
+      "status": "completed",
+      "files_counted": 19,
+      "bytes_counted": 32089,
+      "errors": [],
+      "files_moved": 19
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\50-projects-项目",
+      "merge": "D:\\OpenClaw\\workspace\\projects",
+      "status": "completed",
+      "files_counted": 1,
+      "bytes_counted": 777,
+      "errors": [],
+      "files_moved": 1
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\51-web",
+      "merge": "D:\\OpenClaw\\workspace\\51-web-网页",
+      "status": "completed",
+      "files_counted": 12,
+      "bytes_counted": 72458,
+      "errors": [],
+      "files_moved": 12
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\92-tests",
+      "merge": "D:\\OpenClaw\\workspace\\92-tests-测试",
+      "status": "completed",
+      "files_counted": 22,
+      "bytes_counted": 293732,
+      "errors": [],
+      "files_moved": 22
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\99-archive-归档",
+      "merge": "D:\\OpenClaw\\workspace\\99-archive-old",
+      "status": "completed",
+      "files_counted": 53,
+      "bytes_counted": 28205091,
+      "errors": [],
+      "files_moved": 53
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\99-archive-归档",
+      "merge": "D:\\OpenClaw\\workspace\\99-archive",
+      "status": "completed",
+      "files_counted": 19,
+      "bytes_counted": 143658,
+      "errors": [],
+      "files_moved": 19
+    },
+    {
+      "action": "MERGE",
+      "keep": "D:\\OpenClaw\\workspace\\logs",
+      "merge": "D:\\OpenClaw\\workspace\\91-logs-日志",
+      "status": "completed",
+      "files_counted": 1,
+      "bytes_counted": 1453,
+      "errors": [],
+      "files_moved": 1
+    }
+  ],
+  "stats": {
+    "folders_merged": 30,
+    "files_moved": 3145,
+    "bytes_moved": 172577242,
+    "folders_deleted": 30,
+    "errors": 1,
+    "skipped": 0
+  }
+}

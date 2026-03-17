@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns">
+  <graph id="knowledge-graph" edgedefault="directed">
+    <node id="concept__0001">
+      <data key="type">Concept</data>
+      <data key="name">2026-03-02 16:40 - 系统</data>
+      <data key="source_file">memory\2026-03-02.md</data>
+    </node>
+    <node id="concept__0002">
+      <data key="type">Concept</data>
+      <data key="name">2026-03-02 16:45 - 系统</data>
+      <data key="source_file">memory\2026-03-02.md</data>
+    </node>
+    <node id="concept__0003">
+      <data key="type">Concept</data>
+      <data key="name">2026-03-02 17:20 - 系统</data>
+      <data key="source_file">memory\2026-03-02.md</data>
+    </node>
+    <node id="concept__0004">
+      <data key="type">Concept</data>
+      <data key="name">2026-03-02 23:16 - AI Research OS 系统</data>
+      <data key="source_file">memory\2026-03-02.md</data>
+    </node>
+    <node id="paper_2602_23681">
+      <data key="type">Paper</data>
+      <data key="arxiv_id">2602.23681</data>
+      <data key="source_file">memory\2026-03-03.md</data>
+    </node>
+    <node id="paper_2501_12345">
+      <data key="type">Paper</data>
+      <data key="arxiv_id">2501.12345</data>
+      <data key="source_file">memory\2026-03-03.md</data>
+    </node>
+    <node id="paper_2502_67890">
+      <data key="type">Paper</data>
+      <data key="arxiv_id">2502.67890</data>
+      <data key="source_file">memory\2026-03-03.md</data>
+    </node>
+    <node id="paper_2603_00001">
+      <data key="type">Paper</data>
+      <data key="arxiv_id">2603.00001</data>
+      <data key="source_file">memory\2026-03-03.md</data>
+    </node>
+    <node id="paper_2601_02163">
+      <data key="type">Paper</data>
+      <data key="arxiv_id">2601.02163</data>
+      <data key="source_file">memory\2026-03-03.md</data>
+    </node>
+    <node id="paper_2602_23720">
+      <data key="type">Paper</data>
+      <data key="arxiv_id">2602.23720</data>
+      <data key="source_file">topics\agentic-ai.md</data>
+    </node>
+    <node id="paper_2602_23367">
+      <data key="type">Paper</data>
+      <data key="arxiv_id">2602.23367</data>
+      <data key="source_file">topics\agentic-ai.md</data>
+    </node>
+  </graph>
+</graphml>

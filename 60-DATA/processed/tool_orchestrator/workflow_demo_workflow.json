@@ -1,0 +1,23 @@
+{
+  "name": "demo_workflow",
+  "description": "Demo workflow for testing",
+  "created": "2026-03-16T22:01:59.238262",
+  "status": "draft",
+  "steps": {
+    "scan_tools": {
+      "name": "scan_tools",
+      "tool": "tool_registry.py",
+      "args": [
+        "--stats"
+      ],
+      "depends_on": [],
+      "timeout": 60,
+      "status": "pending",
+      "start_time": null,
+      "end_time": null,
+      "output": null,
+      "error": null,
+      "exit_code": null
+    }
+  }
+}

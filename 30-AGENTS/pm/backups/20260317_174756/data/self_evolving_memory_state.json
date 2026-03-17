@@ -1,0 +1,158 @@
+{
+  "timestamp": "2026-03-16T16:45:40.808383",
+  "stats": {
+    "total_memories": 8,
+    "by_stage": {
+      "distilled": 7,
+      "evolved": 1
+    },
+    "by_tier": {
+      "valuable": 2,
+      "essential": 2,
+      "useful": 3,
+      "temporary": 1
+    },
+    "avg_quality": 0.825,
+    "total_evolutions": 1,
+    "total_accesses": 25,
+    "avg_accesses": 3.1
+  },
+  "memories": [
+    {
+      "id": "117fb41c33d7",
+      "original_content": "CNT conductivity analysis with PSM method achieved 92/100 quality",
+      "distilled_content": "CNT+PSM→92/100",
+      "stage": "distilled",
+      "quality_tier": "valuable",
+      "created_at": "2026-03-16T16:45:40.806643",
+      "last_evolved": "2026-03-16T16:45:40.806644",
+      "access_count": 5,
+      "success_count": 4,
+      "failure_count": 1,
+      "related_memories": [],
+      "evolution_history": [],
+      "quality_score": 0.8
+    },
+    {
+      "id": "40fe9cc7da31",
+      "original_content": "Quality > Quantity: 194 high-quality samples preferred over 511 mixed",
+      "distilled_content": "Quality>Quantity: 194>511",
+      "stage": "distilled",
+      "quality_tier": "essential",
+      "created_at": "2026-03-16T16:45:40.806656",
+      "last_evolved": "2026-03-16T16:45:40.806657",
+      "access_count": 5,
+      "success_count": 5,
+      "failure_count": 0,
+      "related_memories": [],
+      "evolution_history": [],
+      "quality_score": 1.0
+    },
+    {
+      "id": "892dc23a55e5",
+      "original_content": "Stock Phase 3 complete: 7/7 innovations, 123 KB code",
+      "distilled_content": "[Improved] Stock P3: 7/7✅, 123KB",
+      "stage": "evolved",
+      "quality_tier": "useful",
+      "created_at": "2026-03-16T16:45:40.806665",
+      "last_evolved": "2026-03-16T16:45:40.806705",
+      "access_count": 5,
+      "success_count": 2,
+      "failure_count": 3,
+      "related_memories": [],
+      "evolution_history": [
+        {
+          "timestamp": "2026-03-16T16:45:40.806704",
+          "old_content": "Stock P3: 7/7✅, 123KB",
+          "new_content": "[Improved] Stock P3: 7/7✅, 123KB",
+          "reason": "Low quality score",
+          "quality_score": 0.4
+        }
+      ],
+      "quality_score": 0.4
+    },
+    {
+      "id": "4e1629e2de60",
+      "original_content": "Memory distillation 5.6x compression with Ollama Qwen2.5",
+      "distilled_content": "Distill: 5.6x, Qwen2.5",
+      "stage": "distilled",
+      "quality_tier": "valuable",
+      "created_at": "2026-03-16T16:45:40.806670",
+      "last_evolved": "2026-03-16T16:45:40.806670",
+      "access_count": 5,
+      "success_count": 5,
+      "failure_count": 0,
+      "related_memories": [],
+      "evolution_history": [],
+      "quality_score": 1.0
+    },
+    {
+      "id": "0c127592d579",
+      "original_content": "7-Persona system: 96/100 avg score, 7 agents collaborative",
+      "distilled_content": "7-Persona: 96/100",
+      "stage": "distilled",
+      "quality_tier": "essential",
+      "created_at": "2026-03-16T16:45:40.806674",
+      "last_evolved": "2026-03-16T16:45:40.806675",
+      "access_count": 0,
+      "success_count": 0,
+      "failure_count": 0,
+      "related_memories": [],
+      "evolution_history": [],
+      "quality_score": 0.8
+    },
+    {
+      "id": "268c05891cf3",
+      "original_content": "Multi-Agent Memory: consensus building, 7-agent voting",
+      "distilled_content": "MAM: 7-agent vote",
+      "stage": "distilled",
+      "quality_tier": "useful",
+      "created_at": "2026-03-16T16:45:40.806678",
+      "last_evolved": "2026-03-16T16:45:40.806679",
+      "access_count": 0,
+      "success_count": 0,
+      "failure_count": 0,
+      "related_memories": [],
+      "evolution_history": [],
+      "quality_score": 0.8
+    },
+    {
+      "id": "fc73f50780d1",
+      "original_content": "Federated Memory: privacy-preserving, gradient aggregation",
+      "distilled_content": "FedMem: privacy+grad",
+      "stage": "distilled",
+      "quality_tier": "useful",
+      "created_at": "2026-03-16T16:45:40.806682",
+      "last_evolved": "2026-03-16T16:45:40.806683",
+      "access_count": 5,
+      "success_count": 5,
+      "failure_count": 0,
+      "related_memories": [],
+      "evolution_history": [],
+      "quality_score": 1.0
+    },
+    {
+      "id": "40cab101af53",
+      "original_content": "Temporary debug info for session 2026-03-16",
+      "distilled_content": "Debug: 2026-03-16",
+      "stage": "distilled",
+      "quality_tier": "temporary",
+      "created_at": "2026-03-16T16:45:40.806686",
+      "last_evolved": "2026-03-16T16:45:40.806687",
+      "access_count": 0,
+      "success_count": 0,
+      "failure_count": 0,
+      "related_memories": [],
+      "evolution_history": [],
+      "quality_score": 0.8
+    }
+  ],
+  "evolution_log": [
+    {
+      "timestamp": "2026-03-16T16:45:40.806707",
+      "memory_id": "892dc23a55e5",
+      "reason": "Low quality score",
+      "new_quality": 0.4
+    }
+  ]
+}

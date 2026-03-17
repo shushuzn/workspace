@@ -1,0 +1,194 @@
+
+================================================================================
+🔍 安全扫描 - 秘密检测
+================================================================================
+  ⚠️  30-scripts-tools\auto_deploy.py: 2 个问题
+  ⚠️  30-scripts-tools\auto_deployer.py: 3 个问题
+  ⚠️  30-scripts-tools\code_reviewer.py: 1 个问题
+  ⚠️  30-scripts-tools\complete_path_fixer.py: 6 个问题
+  ⚠️  30-scripts-tools\config_manager.py: 1 个问题
+  ⚠️  30-scripts-tools\dashboard_anomaly_alerts.py: 2 个问题
+  ⚠️  30-scripts-tools\dashboard_decision_timeline.py: 2 个问题
+  ⚠️  30-scripts-tools\dashboard_health_widget.py: 3 个问题
+  ⚠️  30-scripts-tools\defuddle_integration.py: 2 个问题
+  ⚠️  30-scripts-tools\doc_generator.py: 1 个问题
+  ⚠️  30-scripts-tools\fix_workspace_paths.py: 10 个问题
+  ⚠️  30-scripts-tools\git_workflow.py: 2 个问题
+  ⚠️  30-scripts-tools\innovation_pattern_matcher.py: 1 个问题
+  ⚠️  30-scripts-tools\knowledge_graph_updater.py: 3 个问题
+  ⚠️  30-scripts-tools\memory-dashboard.py: 3 个问题
+  ⚠️  30-scripts-tools\memory-quality-assessor.py: 1 个问题
+  ⚠️  30-scripts-tools\memory-search-v2.py: 2 个问题
+  ⚠️  30-scripts-tools\memory_auto_fix.py: 7 个问题
+  ⚠️  30-scripts-tools\memory_health_monitor.py: 6 个问题
+  ⚠️  30-scripts-tools\ollama_qwen_test.py: 2 个问题
+  ⚠️  30-scripts-tools\path_interceptor.py: 4 个问题
+  ⚠️  30-scripts-tools\pre_file_operation_hook.py: 3 个问题
+  ⚠️  30-scripts-tools\quality_scorer.py: 1 个问题
+  ⚠️  30-scripts-tools\safedir.py: 2 个问题
+  ⚠️  30-scripts-tools\safe_write.py: 4 个问题
+  ⚠️  30-scripts-tools\security_validator.py: 1 个问题
+  ⚠️  30-scripts-tools\self_healing.py: 2 个问题
+  ⚠️  30-scripts-tools\session-check.py: 1 个问题
+  ⚠️  30-scripts-tools\smart_doc_generator.py: 1 个问题
+  ⚠️  30-scripts-tools\workspace.py: 5 个问题
+  ⚠️  30-scripts-tools\workspace_comparator.py: 1 个问题
+  ⚠️  30-scripts-tools\workspace_init.py: 2 个问题
+  ⚠️  30-scripts-tools\00-UTILS\check_bom.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\check_line220.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\debug_line220.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\emergency_fix.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\find_all_bad.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\find_bad_char.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\fix_watcher.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\fix_watcher2.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\fix_watcher3.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\remove_bom.py: 1 个问题
+  ⚠️  30-scripts-tools\00-UTILS\test_compile.py: 1 个问题
+  ⚠️  30-scripts-tools\01-SETUP\setup-aliyun-ecs.py: 3 个问题
+  ⚠️  30-scripts-tools\04-collectors\arxiv-collector-v2.py: 2 个问题
+  ⚠️  30-scripts-tools\04-collectors\arxiv-collector.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\arxiv-migrate-recovery.py: 2 个问题
+  ⚠️  30-scripts-tools\04-collectors\arxiv-migrate.py: 6 个问题
+  ⚠️  30-scripts-tools\04-collectors\arxiv-sync-github.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\arxiv-to-openclaw-integration.py: 3 个问题
+  ⚠️  30-scripts-tools\04-collectors\detect_sensitive_content.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\github-link-extractor.py: 2 个问题
+  ⚠️  30-scripts-tools\04-collectors\github-repo-reorganize-phase2.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\github-repo-reorganize-phase3.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\github-repo-reorganize-phase4.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\github-repo-reorganize.py: 2 个问题
+  ⚠️  30-scripts-tools\04-collectors\hackernews-collector.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\hn-watcher.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\medium-rss-collector-jina.py: 4 个问题
+  ⚠️  30-scripts-tools\04-collectors\reddit-monitor.py: 3 个问题
+  ⚠️  30-scripts-tools\04-collectors\reddit-watcher-mock.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\reddit-watcher.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\twitter-watcher.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\ai-contribution-extractor.py: 3 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\auto-report-generator.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\auto-survey-generator.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\collaboration-network.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\collaboration-recommender.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\data-quality-checker.py: 3 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\generate-stats.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\knowledge-qa-system.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\paper-classifier.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\paper-quality-scorer.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\pdf-downloader.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\pdf-metadata-extractor.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\performance-optimizer.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\pnote-auto-fill.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\research-doc-generator.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\research-question-discovery.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\research-stats.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\sync-arxiv-papers.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\task-monitor.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\tech-trend-predictor.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\topic-clusterer.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\trend-analyzer.py: 2 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\update-progress.py: 1 个问题
+  ⚠️  30-scripts-tools\06-MONITORING\monitoring-system.py: 4 个问题
+  ⚠️  30-scripts-tools\07-DATA\automated-research-workflow.py: 2 个问题
+  ⚠️  30-scripts-tools\07-DATA\materials-cli.py: 1 个问题
+  ⚠️  30-scripts-tools\07-DATA\materials-collector.py: 1 个问题
+  ⚠️  30-scripts-tools\07-DATA\materials-deep-research.py: 4 个问题
+  ⚠️  30-scripts-tools\07-DATA\materials-system-integration.py: 1 个问题
+  ⚠️  30-scripts-tools\07-DATA\materials-web-dashboard.py: 1 个问题
+  ⚠️  30-scripts-tools\09-TESTS\test-mcp-tools.py: 4 个问题
+  ⚠️  30-scripts-tools\99-ARCHIVE\feedback-loop.py: 2 个问题
+  ⚠️  30-scripts-tools\99-ARCHIVE\quality-controller.py: 2 个问题
+  ⚠️  30-scripts-tools\feedback\feedback-loop.py: 2 个问题
+  ⚠️  30-scripts-tools\feishu-tools\daily-report.py: 2 个问题
+  ⚠️  30-scripts-tools\feishu-tools\examples.py: 2 个问题
+  ⚠️  30-scripts-tools\feishu-tools\notify-integration.py: 3 个问题
+  ⚠️  30-scripts-tools\feishu-tools\notify-security.py: 1 个问题
+  ⚠️  30-scripts-tools\level-0\quality-controller.py: 2 个问题
+  ⚠️  30-scripts-tools\utils\check_bom.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\check_line220.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\debug_line220.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\emergency_fix.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\find_all_bad.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\find_bad_char.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\fix_watcher.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\fix_watcher2.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\fix_watcher3.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\remove_bom.py: 1 个问题
+  ⚠️  30-scripts-tools\utils\test_compile.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\app\api.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\app\autonomous.py: 2 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\app\scheduler.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\intentkit\__init__.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\scripts\check_heartbeat.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\scripts\fix_invalid_wallets.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\tests\bdd\conftest.py: 5 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\tests\manual\verify_redundant_fields.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\tests\utils\test_random.py: 2 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\intentkit\config\config.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\intentkit\config\db.py: 2 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\intentkit\config\redis.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\intentkit\utils\alert_handler.py: 2 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\intentkit\wallets\privy_safe.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\intentkit\wallets\privy_utils.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\intentkit\skills\nation\nft_check.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\intentkit\skills\web_scraper\utils.py: 2 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\app\entrypoints\discord.py: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\app\entrypoints\tg.py: 1 个问题
+  ⚠️  30-scripts-tools\11-NOVEL-WRITING\analysis\check_word_count.py: 1 个问题
+  ⚠️  30-scripts-tools\11-NOVEL-WRITING\analysis\detect_ai_style.py: 1 个问题
+  ⚠️  30-scripts-tools\11-NOVEL-WRITING\analysis\track_writing_progress.py: 2 个问题
+  ⚠️  30-scripts-tools\11-NOVEL-WRITING\chapters\manage_chapters.py: 2 个问题
+  ⚠️  30-scripts-tools\11-NOVEL-WRITING\foreshadowing\track_foreshadowing.py: 2 个问题
+  ⚠️  30-scripts-tools\09-TESTS\scripts\check_classical_ratio.py: 1 个问题
+  ⚠️  30-scripts-tools\08-AUTOMATION\github-sync\github-repo-reorganize-phase2.py: 1 个问题
+  ⚠️  30-scripts-tools\08-AUTOMATION\github-sync\github-repo-reorganize-phase3.py: 1 个问题
+  ⚠️  30-scripts-tools\08-AUTOMATION\github-sync\github-repo-reorganize-phase4.py: 1 个问题
+  ⚠️  30-scripts-tools\08-AUTOMATION\github-sync\github-repo-reorganize.py: 2 个问题
+  ⚠️  30-scripts-tools\08-AUTOMATION\scripts\organize_workspace.py: 3 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\integration\integrate-collectors.py: 1 个问题
+  ⚠️  30-scripts-tools\05-AI-RESEARCH\multi-agent\multi-agent-executors.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\hn\hn-comment-analyzer.py: 1 个问题
+  ⚠️  30-scripts-tools\04-collectors\x-twitter\x-twitter-monitor.py: 5 个问题
+  ⚠️  30-scripts-tools\00-UTILS\current-files-full.json: 438 个问题
+  ⚠️  30-scripts-tools\feishu-tools\card-template.json: 1 个问题
+  ⚠️  30-scripts-tools\feishu-tools\cron-daily-report.json: 1 个问题
+  ⚠️  30-scripts-tools\feishu-tools\cron-job-example.json: 1 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\docs\hugo.yaml: 2 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\docker-compose.yml: 5 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\docs\deployment\docker-compose.yml: 4 个问题
+  ⚠️  30-scripts-tools\intent-belief-integration\test_intentkit\intentkit\pyproject.toml: 1 个问题
+
+  扫描完成：1139 文件，224774 行
+  发现问题：726 个
+
+================================================================================
+📊 安全扫描摘要
+================================================================================
+
+  扫描范围:
+    文件数：1139
+    代码行数：224774
+
+  发现问题:
+    总计：726 个
+
+  按严重程度:
+    🔴 CRITICAL: 36 个
+    🟠 HIGH: 1 个
+    🟡 MEDIUM: 669 个
+    🟢 LOW: 20 个
+
+  按类型:
+    hardcoded_path: 669 个
+    password: 32 个
+    ip_address: 16 个
+    email: 4 个
+    secret: 3 个
+    database_url: 1 个
+    private_key: 1 个
+
+================================================================================
+
+🚨 发现严重安全问题！请立即处理！
+
+================================================================================

@@ -1,0 +1,92 @@
+{
+  "timestamp": "2026-03-16T13:23:52.182195",
+  "total_mentions": 3,
+  "mentions": [
+    {
+      "platform": "reddit",
+      "title": "NVDA to the moon!",
+      "content": "AI boom continues",
+      "url": "url",
+      "author": "user1",
+      "upvotes": 100,
+      "comments": 50,
+      "timestamp": "2026-03-16T13:23:52.182195",
+      "sentiment_score": 0.8,
+      "sentiment_label": "positive",
+      "tickers": [
+        "NVDA"
+      ]
+    },
+    {
+      "platform": "reddit",
+      "title": "TSLA overvalued",
+      "content": "EV competition heating up",
+      "url": "url",
+      "author": "user2",
+      "upvotes": 80,
+      "comments": 40,
+      "timestamp": "2026-03-16T13:23:52.182195",
+      "sentiment_score": -0.6,
+      "sentiment_label": "negative",
+      "tickers": [
+        "TSLA"
+      ]
+    },
+    {
+      "platform": "reddit",
+      "title": "AAPL steady growth",
+      "content": "iPhone sales strong",
+      "url": "url",
+      "author": "user3",
+      "upvotes": 60,
+      "comments": 30,
+      "timestamp": "2026-03-16T13:23:52.182195",
+      "sentiment_score": 0.3,
+      "sentiment_label": "positive",
+      "tickers": [
+        "AAPL"
+      ]
+    }
+  ],
+  "ticker_sentiment": {
+    "NVDA": {
+      "avg_sentiment": 0.8,
+      "mention_count": 1,
+      "label": "bullish",
+      "confidence": 0.1
+    },
+    "TSLA": {
+      "avg_sentiment": -0.6,
+      "mention_count": 1,
+      "label": "bearish",
+      "confidence": 0.1
+    },
+    "AAPL": {
+      "avg_sentiment": 0.3,
+      "mention_count": 1,
+      "label": "bullish",
+      "confidence": 0.1
+    }
+  },
+  "trending": [
+    {
+      "ticker": "NVDA",
+      "mentions": 1,
+      "sentiment": 0.8,
+      "label": "bullish"
+    },
+    {
+      "ticker": "TSLA",
+      "mentions": 1,
+      "sentiment": -0.6,
+      "label": "bearish"
+    },
+    {
+      "ticker": "AAPL",
+      "mentions": 1,
+      "sentiment": 0.3,
+      "label": "bullish"
+    }
+  ],
+  "spikes": []
+}

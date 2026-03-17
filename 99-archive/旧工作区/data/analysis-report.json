@@ -1,0 +1,22 @@
+{
+  "n_samples": 20,
+  "mean_values": {
+    "band_gap": 2.9481352612943077,
+    "formation_energy": -3.4823813122259444,
+    "bulk_modulus": 153.79731683774494
+  },
+  "std_values": {
+    "band_gap": 0.7156535123391049,
+    "formation_energy": 0.8877018956800011,
+    "bulk_modulus": 29.39462577739925
+  },
+  "trends": {
+    "band_gap": "上升趋势",
+    "formation_energy": "稳定",
+    "bulk_modulus": "波动"
+  },
+  "outliers": [],
+  "recommendations": [
+    "建议进行更多实验验证"
+  ]
+}

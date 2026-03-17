@@ -1,0 +1,39 @@
+# 知识图谱更新配置 (Level 6)
+knowledge_graph:
+  # Level 4 集成 ✨
+  level4_integration: true
+  clusters_file: "D:\\obsidian\\Vault\\Arxiv\\daily\\{date}\\clusters\\clusters.json"
+  classified_file: "D:\\obsidian\\Vault\\Arxiv\\daily\\{date}\\classified\\all_classified.json"
+  
+  # 输出文件
+  output_file: outputs/materials-kg.json
+  network_file: outputs/research-network.json
+  
+  # 实体提取规则 (从 Level 4 聚类)
+  entities:
+    enabled: true
+    from_clusters: true  # 从聚类提取 ✨
+    from_classified: true  # 从分类提取 ✨
+    types:
+      - cluster
+      - material
+      - category
+      - author
+      - keyword
+  
+  # 关系提取规则 (基于聚类网络)
+  relations:
+    enabled: true
+    from_network: true  # 从 Level 4 网络提取 ✨
+    types:
+      - belongs_to
+      - related_to
+      - cites
+      - co_occurs
+  
+  # 日志配置
+  logging:
+    level: INFO
+    file: logs/kg.log
+    max_size: 10MB
+    backup_count: 7

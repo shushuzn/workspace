@@ -1,0 +1,65 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+logs/
+
+# 测试输出
+tests/test_output/
+
+# 大文件
+*.pdf
+*.zip
+*.tar.gz
+*.mp4
+*.mov
+
+# 临时文件
+*.tmp
+*.bak
+
+# 环境变量 (敏感信息)
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# 实时会话数据 (不提交)
+token_usage.json
+chats.json
+config.json
+sessions/
+*.session.json
+
+# 缓存
+data/cache/
+embedding_cache/
+file_store/
+50-cache/
+
+# 模型文件
+models/
+
+# 备份
+security_backups/
+99-backups/

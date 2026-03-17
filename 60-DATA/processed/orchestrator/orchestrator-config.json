@@ -1,0 +1,80 @@
+{
+  "version": "2.0",
+  "tasks": {
+    "heartbeat": {
+      "script": "30-scripts-tools/heartbeat_workflow.py",
+      "interval_minutes": 30,
+      "priority": 1,
+      "timeout_seconds": 300,
+      "retry_count": 3,
+      "enabled": true
+    },
+    "health_check": {
+      "script": "30-scripts-tools/dashboard_health_widget.py",
+      "interval_minutes": 60,
+      "priority": 2,
+      "timeout_seconds": 120,
+      "retry_count": 2,
+      "enabled": true
+    },
+    "data_collection": {
+      "script": "30-scripts-tools/collect_all_sources.py",
+      "interval_minutes": 1440,
+      "priority": 3,
+      "timeout_seconds": 600,
+      "retry_count": 2,
+      "enabled": true
+    },
+    "memory_maintenance": {
+      "script": "30-scripts-tools/memory_health_monitor.py",
+      "interval_minutes": 1440,
+      "priority": 4,
+      "timeout_seconds": 300,
+      "retry_count": 1,
+      "enabled": true
+    },
+    "knowledge_graph_update": {
+      "script": "30-scripts-tools/knowledge_graph_builder.py",
+      "interval_minutes": 1440,
+      "priority": 5,
+      "timeout_seconds": 120,
+      "retry_count": 1,
+      "enabled": true,
+      "args": [
+        "--incremental"
+      ]
+    },
+    "self_healing_scan": {
+      "script": "30-scripts-tools/self_healing.py",
+      "interval_minutes": 30,
+      "priority": 1,
+      "timeout_seconds": 180,
+      "retry_count": 1,
+      "enabled": true,
+      "args": [
+        "--auto"
+      ]
+    },
+    "cache_stats": {
+      "script": "30-scripts-tools/cache_manager.py",
+      "interval_minutes": 60,
+      "priority": 6,
+      "timeout_seconds": 60,
+      "retry_count": 1,
+      "enabled": true,
+      "args": [
+        "--stats"
+      ]
+    }
+  },
+  "resource_limits": {
+    "max_concurrent_tasks": 3,
+    "max_cpu_percent": 80,
+    "max_memory_mb": 2048
+  },
+  "notifications": {
+    "on_failure": true,
+    "on_success": false,
+    "channel": "feishu"
+  }
+}

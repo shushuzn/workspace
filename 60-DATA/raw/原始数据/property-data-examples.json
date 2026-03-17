@@ -1,0 +1,13 @@
+[
+  {
+    "material": "LiFePO4",
+    "property_name": "band gap",
+    "property_name_cn": "带隙",
+    "value": 3.2,
+    "unit": "eV",
+    "unit_standardized": "eV",
+    "method": null,
+    "temperature": null,
+    "reference": null
+  }
+]

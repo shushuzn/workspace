@@ -1,0 +1,22 @@
+{
+  "timestamp": "2026-03-16T17:24:29.609624",
+  "workflow_result": {
+    "project_id": "bffb2384597f",
+    "title": "AI Agents for Automated Scientific Discovery",
+    "status": "completed",
+    "phases_completed": 6,
+    "total_tasks": 25,
+    "literature_papers": 50,
+    "dataset_samples": 172,
+    "models_tested": 3,
+    "paper_words": 10250,
+    "quality_score": 0.866,
+    "recommendation": "Accept"
+  },
+  "system_stats": {
+    "workflows_completed": 1,
+    "avg_quality_score": 0.866,
+    "avg_paper_words": 10250.0,
+    "success_rate": 1.0
+  }
+}

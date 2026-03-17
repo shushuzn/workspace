@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEVERAGING WHOLE SLIDE DIFFICULTY IN MULTIPLE INSTANCE LEARNING TO</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .header {
+            border-bottom: 3px solid #4a9eff;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .meta {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .abstract {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #4a9eff;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        .section h3 {
+            color: #4a9eff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .section .content {
+            color: #333;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+        .references {
+            margin-top: 30px;
+        }
+        .reference {
+            padding: 12px;
+            margin: 10px 0;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .reference.unverified {
+            border-left: 3px solid #ff9800;
+            background: #fff8e1;
+        }
+        .reference.verified {
+            border-left: 3px solid #4caf50;
+            background: #e8f5e9;
+        }
+        .reference.manual {
+            border-left: 3px solid #2196f3;
+            background: #e3f2fd;
+        }
+        .ref-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .ref-id {
+            font-weight: bold;
+            color: #4a9eff;
+            margin-right: 8px;
+        }
+        .ref-status {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #f0f0f0;
+        }
+        .ref-content {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .ref-details {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .ref-details div {
+            margin: 4px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #4a9eff;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .integrity-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1>LEVERAGING WHOLE SLIDE DIFFICULTY IN MULTIPLE INSTANCE LEARNING TO</h1>
+            <div class="meta">作者：Marie Arrivat, Rémy Peyret, Elsa Angelini, Pietro Gori</div>
+            <div class="meta">年份：未知</div>
+            <div class="meta">arXiv: <span class="badge">2603.09953</span></div>
+        </div>
+        
+        <div class="abstract">
+            <strong>📖 摘要</strong>
+            <p style="margin-top: 10px;">Multiple Instance Learning (MIL) has been widely applied in
+histopathology to classify Whole Slide Images (WSIs) with
+slide-level diagnoses. While the ground truth is established
+by expert pathologists, the slides can be difficult to diagnose
+for non-experts and lead to disagreements between the anno-
+tators. In this paper, we introduce the notion of Whole Slide
+Difficulty (WSD), based on the disagreement between an ex-
+pert and a non-expert pathologist. We propose two differ-
+ent methods to leverage WSD, a multi-task approach and a
+weighted classification loss approach, and we apply them to
+Gleason grading of prostate cancer slides. Results show that
+integrating WSD during training consistently improves the
+classification performance across different feature encoders
+and MIL methods, particularly for higher Gleason grades (i.e.,
+worse diagnosis).
+Index Terms— Digital Pathology, Whole Slide Images,
+Multiple Instance Learning, Gleason Grading
+1. INTRODUCTION
+Prostate Cancer is one of the most frequent cancers among</p>
+        </div>
+        
+        <div class="integrity-notice">
+            <strong>🔒 学术诚信声明：</strong>
+            本卡片内容由 AI 辅助生成，所有参考文献需人工核实真实性。
+            请勿直接引用未验证的文献信息。
+        </div>
+        
+        <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📑 核心章节</h2>
+        
+            <div class="section">
+                <h3>Introduction</h3>
+                <p class="content">LEVERAGING WHOLE SLIDE DIFFICULTY IN MULTIPLE INSTANCE LEARNING TO
+IMPROVE PROSTATE CANCER GRADING
+Marie Arrivat⋆†
+R´emy Peyret⋆
+Elsa Angelini†
+Pietro Gori†
+⋆Primaa, Paris, France
+† LTCI, Telecom Paris, Institut Polytechnique de Paris, France
+ABSTRACT
+Multiple Instance Learning (MIL) has been widely applied in
+histopathology to classify Whole Slide Images (WSIs) with
+slide-level diagnoses. While the ground truth is established
+by expert pathologists, the slides can be difficult to diagnose
+for n...</p>
+            </div>
+            
+            <div class="section">
+                <h3>INTRODUCTION</h3>
+                <p class="content">Prostate Cancer is one of the most frequent cancers among
+The examination of Whole Slide Images (WSIs) of
+prostate biopsies by pathologists and their Gleason grading
+is crucial for orienting the treatment of patients.
+Deep Learning applied to histopathology has been very
+successful in cancer diagnosis and detection, especially for
+fully supervised tasks, such as patch classification or segmen-
+tation. However, gathering both qualitative and quantitative
+patch-level or pixel-level labels on WSIs ...</p>
+            </div>
+            
+            <div class="section">
+                <h3>METHODS</h3>
+                <p class="content">Gleason Grades
+When inspecting prostate slides, patholo-
+gists look for Gleason patterns, also called Gleason grades of
+the prostate glands. Tumourous glands degenerate from Glea-
+son Grade 3 to Gleason Grade 5, while Gleason Grades 1 and
+2 are benign. From these observations, pathologists assign a
+Gleason Score to the slide, which consists of the pair of the
+most frequently occuring grade and of the highest secondary
+grade, e.g., 3+5 [13]. For prostate cancer, most papers fo-
+cus on Gleason gra...</p>
+            </div>
+            
+            <div class="section">
+                <h3>RESULTS AND DISCUSSION</h3>
+                <p class="content">Results of the multi-task learning and the weighted classifi-
+cation loss methods compared with the classification baseline
+using CTransPath and UNI2-h as feature extractors and five
+Table 1. Results of different methods using CTransPath as feature extractor and five MIL backbones. Values are mean over two
+random seeds (95% CI), where ∗indicates p-value < 0.05. Improvements compared to the baseline are highlighted in bold.
+MaxMIL
+TransMIL...</p>
+            </div>
+            
+            <div class="section">
+                <h3>Methods</h3>
+                <p class="content">Bal. Acc.
+W. F1-Score
+Bal. Acc.
+W. F1-Score
+Bal. Acc.
+W. F1-Score
+Bal. Acc.
+W. F1-Score
+Bal. Acc.
+W. F1-Score
+Classification baseline
+Multi-task learning
+67.8 (-0.7, +0.7)
+75.2 (-0.7, +0.6)
+73.2 (-1.5, +1.4)
+80.1 (-1.7, +1.5)
+70.2 (-2.4, +2.4)
+78.7 (-2.3, +2.5)
+72.1 (-2.5, +2.3)
+79.7 (-2.6, +2.3)
+70.5 (-1.0, +0.8)
+81.7 (-1.1, +0.8)
+Weighted classification loss
+68.5 (-1.7, +1.4)
+75.0 (-1.8, +1.3)
+75.6 (-1.4, +1.9) ∗
+81.6 (-1.4, +2.1)
+74.6 (-1.9, +1.9) ∗
+80.0 (-1.9, +2.0) ∗
+69.7 (-2.0, +1.8)
+78.1 ...</p>
+            </div>
+            
+        
+        <div class="references">
+            <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📚 参考文献</h2>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[1]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">A. Mammadov, L. L. Folgoc, J. Adam, et al.,</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[2]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">D. Shao, R. J. Chen, A. H. Song, et al., “Do multiple</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[3]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">M. Ilse, J. M. Tomczak, and M. Welling, “Attention-</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[4]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">H. S. Seung, M. Opper, and H. Sompolinsky, “Query by</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[5]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">D. Karimi, H. Dou, S. K. Warfield, and A. Gholipour,</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[6]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">X. Zhang, Y. Xu, and X. Liu, “Multiple instance learn-</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[7]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">C. Northcutt, L. Jiang, and I. Chuang, “Confident learn-</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[8]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">R. D. Amor, J. Silva-Rodr´ıguez, and V. Naranjo, “La-</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[9]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">M. Herde, D. Huseljic, and B. Sick, “Multi-annotator</div>
+                
+            </div>
+            
+            <div class="reference unverified">
+                <div class="ref-header">
+                    <span class="ref-id">[10]</span>
+                    <span class="ref-status">⚠️ 待验证</span>
+                </div>
+                <div class="ref-content">M. L´opez-P´erez, A. Morquecho, A. Schmidt, et al.,</div>
+                
+            </div>
+            
+        </div>
+        
+        <div class="footer">
+            <p>生成时间：2026-03-12 11:08:41</p>
+            <p>知识卡片生成器 v1.0 | AI Research OS</p>
+            <p style="margin-top: 10px; color: #ff9800;">
+                ⚠️ 所有参考文献必须人工核实真实性 - 严禁虚构文献信息
+            </p>
+        </div>
+    </div>
+</body>
+</html>

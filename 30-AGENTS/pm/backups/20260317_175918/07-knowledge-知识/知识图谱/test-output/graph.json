@@ -1,0 +1,32 @@
+{
+  "metadata": {
+    "created": "2026-03-04T15:02:00.929680",
+    "entity_count": 2,
+    "relation_count": 1,
+    "config": {
+      "source": "markdown"
+    }
+  },
+  "entities": [
+    {
+      "id": "the_auton_agentic_ai_framework",
+      "type": "concept",
+      "name": "The Auton Agentic AI Framework",
+      "source": "P-20260302-The Auton Agentic AI Framework.md"
+    },
+    {
+      "id": "the_auton_agentic_ai_framework_time",
+      "type": "time",
+      "name": "2028",
+      "source": "P-20260302-The Auton Agentic AI Framework.md"
+    }
+  ],
+  "relations": [
+    {
+      "source": "the_auton_agentic_ai_framework",
+      "target": "the_auton_agentic_ai_framework_time",
+      "type": "occurred_in",
+      "source_file": "P-20260302-The Auton Agentic AI Framework.md"
+    }
+  ]
+}

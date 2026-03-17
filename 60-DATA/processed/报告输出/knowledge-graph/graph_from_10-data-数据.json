@@ -1,0 +1,50 @@
+{
+  "metadata": {
+    "created": "2026-03-04T18:48:54.475177",
+    "entity_count": 4,
+    "relation_count": 2,
+    "config": {
+      "source": "mixed"
+    }
+  },
+  "entities": [
+    {
+      "id": "p-2026-ma-conav_-_master-slave_multi-agent_framewo",
+      "type": "concept",
+      "name": "P-2026-MA-CoNav - Master-Slave Multi-Agent Framework for VLN",
+      "source": "memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+    },
+    {
+      "id": "p-2026-ma-conav_-_master-slave_multi-agent_framewo_time",
+      "type": "time",
+      "name": "2026",
+      "source": "memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+    },
+    {
+      "id": "p-2026-regal_-_registry-driven_architecture_for_en",
+      "type": "concept",
+      "name": "P-2026-REGAL - Registry-Driven Architecture for Enterprise Agentic AI",
+      "source": "memory\\P-Notes\\P-2026-REGAL-Enterprise-Agentic-AI.md"
+    },
+    {
+      "id": "p-2026-regal_-_registry-driven_architecture_for_en_time",
+      "type": "time",
+      "name": "2026",
+      "source": "memory\\P-Notes\\P-2026-REGAL-Enterprise-Agentic-AI.md"
+    }
+  ],
+  "relations": [
+    {
+      "source": "p-2026-ma-conav_-_master-slave_multi-agent_framewo",
+      "target": "p-2026-ma-conav_-_master-slave_multi-agent_framewo_time",
+      "type": "occurred_in",
+      "source_file": "memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"
+    },
+    {
+      "source": "p-2026-regal_-_registry-driven_architecture_for_en",
+      "target": "p-2026-regal_-_registry-driven_architecture_for_en_time",
+      "type": "occurred_in",
+      "source_file": "memory\\P-Notes\\P-2026-REGAL-Enterprise-Agentic-AI.md"
+    }
+  ]
+}

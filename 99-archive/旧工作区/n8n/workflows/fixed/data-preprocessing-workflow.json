@@ -1,0 +1,87 @@
+{
+  "name": "数据预处理流程",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 */30 * * * *"
+          }
+        }
+      },
+      "id": 1000,
+      "name": "Every 30 Minutes",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "command": "Get-ChildItem -Path \"D:\\OpenClaw\\workspace\\Medium\\Raw\" -Filter \"*.json\" | ForEach-Object { $data = Get-Content $_.FullName | ConvertFrom-Json; if ($data.articles) { $data.articles | ForEach-Object { [PSCustomObject]@{ title=$_.title; url=$_.url; author=$_.author; date=$_.published } } | Export-Csv -Path \"D:\\OpenClaw\\workspace\\Medium\\Raw\\articles.csv\" -Append -NoTypeInformation } }",
+        "options": {}
+      },
+      "id": 1001,
+      "name": "Extract Metadata",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "command": "Get-ChildItem -Path \"D:\\OpenClaw\\workspace\\Medium\\Raw\" -Filter \"articles.csv\" | Select-Object -First 1 | Measure-Object -Property Length -Sum | Select-Object @{Name=\"SizeKB\";Expression={[math]::Round($_.Sum/1KB, 2)}}",
+        "options": {}
+      },
+      "id": 1002,
+      "name": "Check CSV Size",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        440,
+        0
+      ]
+    }
+  ],
+  "connections": {
+    "Every 30 Minutes": {
+      "main": [
+        [
+          {
+            "node": "Extract Metadata",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Metadata": {
+      "main": [
+        [
+          {
+            "node": "Check CSV Size",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "OpenClaw"
+    },
+    {
+      "name": "Data"
+    }
+  ],
+  "id": "8da87cd6-aa5f-428a-9a60-c736d799941e"
+}

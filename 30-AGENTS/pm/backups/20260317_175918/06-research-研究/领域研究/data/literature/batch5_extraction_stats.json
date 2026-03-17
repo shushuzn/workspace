@@ -1,0 +1,24 @@
+{
+  "batch": 5,
+  "extraction_date": "2026-03-06T02:38:57.134358",
+  "n_samples": 20,
+  "sigma_range": [
+    1950.0,
+    5200.0
+  ],
+  "power_range": [
+    0.33,
+    0.6
+  ],
+  "speed_range": [
+    12.0,
+    36.0
+  ],
+  "precursors": {
+    "PI": 16,
+    "PET": 1,
+    "Wood": 1,
+    "Bamboo": 1,
+    "Paper": 1
+  }
+}

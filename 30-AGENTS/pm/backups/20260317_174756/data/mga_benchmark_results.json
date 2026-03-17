@@ -1,0 +1,123 @@
+{
+  "timestamp": "2026-03-16T17:00:58.276423",
+  "benchmark_results": [
+    {
+      "query_id": "9ee9602e917c",
+      "context_length": 500,
+      "memory_slots_used": 5,
+      "attention_weights": {
+        "2b829ec8858a": 0.1922,
+        "c1cfd2ec54d8": 0.16055555555555553,
+        "764b54f2c08e": 0.18000000000000002,
+        "6a5665d31fb8": 0.1682,
+        "ea6c8a7998e2": 0.20055555555555554
+      },
+      "memory_contribution": 0.9015111111111112,
+      "output_quality": 98.0,
+      "computational_cost": 0.54,
+      "latency_ms": 2.7
+    },
+    {
+      "query_id": "a13d48456f00",
+      "context_length": 1000,
+      "memory_slots_used": 10,
+      "attention_weights": {
+        "2b829ec8858a": 0.10062282516691667,
+        "c1cfd2ec54d8": 0.0870459784580165,
+        "764b54f2c08e": 0.09423267406327422,
+        "6a5665d31fb8": 0.08988645372953366,
+        "ea6c8a7998e2": 0.10170439442341468,
+        "464fb936fbdd": 0.09208451534586756,
+        "94dba796031e": 0.08812435896757173,
+        "82db0b630271": 0.0842512389931945,
+        "2cd89b63b274": 0.07860475228897602,
+        "408210a9ed3f": 0.07315409749357435
+      },
+      "memory_contribution": 0.8897112889303399,
+      "output_quality": 98.0,
+      "computational_cost": 0.48,
+      "latency_ms": 4.8
+    },
+    {
+      "query_id": "0c86047efb8f",
+      "context_length": 2000,
+      "memory_slots_used": 10,
+      "attention_weights": {
+        "2b829ec8858a": 0.09680234941476736,
+        "c1cfd2ec54d8": 0.08747198106412496,
+        "764b54f2c08e": 0.09243611422428269,
+        "6a5665d31fb8": 0.08944119439409527,
+        "ea6c8a7998e2": 0.09753724683521352,
+        "464fb936fbdd": 0.09364834369003909,
+        "94dba796031e": 0.08905914978294302,
+        "82db0b630271": 0.08630997079384092,
+        "2cd89b63b274": 0.08226701524239821,
+        "408210a9ed3f": 0.07832103520960802
+      },
+      "memory_contribution": 0.893294400651313,
+      "output_quality": 98.0,
+      "computational_cost": 0.48,
+      "latency_ms": 9.6
+    },
+    {
+      "query_id": "69a1a491fc10",
+      "context_length": 4000,
+      "memory_slots_used": 10,
+      "attention_weights": {
+        "2b829ec8858a": 0.09461166025242346,
+        "c1cfd2ec54d8": 0.08813615840335877,
+        "764b54f2c08e": 0.09159363464109442,
+        "6a5665d31fb8": 0.08951116675065904,
+        "464fb936fbdd": 0.09430035296752927,
+        "ea6c8a7998e2": 0.09511762877711333,
+        "94dba796031e": 0.08927946237387142,
+        "82db0b630271": 0.0873457397606508,
+        "2cd89b63b274": 0.08448485213510866,
+        "408210a9ed3f": 0.08167160006271316
+      },
+      "memory_contribution": 0.8960522561245223,
+      "output_quality": 98.0,
+      "computational_cost": 0.48,
+      "latency_ms": 19.2
+    },
+    {
+      "query_id": "838fe88a8dfc",
+      "context_length": 8000,
+      "memory_slots_used": 10,
+      "attention_weights": {
+        "2b829ec8858a": 0.09290614639109972,
+        "c1cfd2ec54d8": 0.08840992010909952,
+        "764b54f2c08e": 0.09081654509706584,
+        "6a5665d31fb8": 0.08936869203532315,
+        "ea6c8a7998e2": 0.10072172685810639,
+        "464fb936fbdd": 0.092562999809705,
+        "94dba796031e": 0.08907097166414868,
+        "82db0b630271": 0.08771830905450571,
+        "2cd89b63b274": 0.0857087209006808,
+        "408210a9ed3f": 0.08372241965962324
+      },
+      "memory_contribution": 0.9010064515793581,
+      "output_quality": 98.0,
+      "computational_cost": 0.48,
+      "latency_ms": 38.4
+    }
+  ],
+  "system_stats": {
+    "queries_processed": 5,
+    "avg_quality": 98.0,
+    "avg_cost": 0.492,
+    "quality_improvement": 30.666666666666664,
+    "cost_reduction": 50.8,
+    "memory_stats": {
+      "total_slots": 10,
+      "capacity": 500,
+      "utilization": 0.02,
+      "avg_importance": 0.902141495093676,
+      "total_accesses": 45,
+      "avg_accesses_per_slot": 4.5
+    },
+    "allocations": 5,
+    "integrations": 5,
+    "updates": 45
+  }
+}

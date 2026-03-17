@@ -1,0 +1,78 @@
+{
+  "current_chapter": 7,
+  "total_progress": 13.9,
+  "layers": [
+    {
+      "name": "蒙昧",
+      "status": "completed",
+      "skill": "自我认知",
+      "level": 3,
+      "xp": 60,
+      "max_xp": 100
+    },
+    {
+      "name": "觉醒",
+      "status": "in-progress",
+      "skill": "专注力",
+      "level": 1,
+      "xp": 15,
+      "max_xp": 100
+    },
+    {
+      "name": "精通",
+      "status": "locked",
+      "skill": "学习力",
+      "level": 0,
+      "xp": 0,
+      "max_xp": 100
+    },
+    {
+      "name": "系统",
+      "status": "locked",
+      "skill": "系统思维",
+      "level": 0,
+      "xp": 0,
+      "max_xp": 100
+    },
+    {
+      "name": "人性",
+      "status": "locked",
+      "skill": "领导力",
+      "level": 0,
+      "xp": 0,
+      "max_xp": 100
+    },
+    {
+      "name": "格局",
+      "status": "locked",
+      "skill": "整合力",
+      "level": 0,
+      "xp": 0,
+      "max_xp": 100
+    },
+    {
+      "name": "远见",
+      "status": "locked",
+      "skill": "洞察力",
+      "level": 0,
+      "xp": 0,
+      "max_xp": 100
+    },
+    {
+      "name": "自由",
+      "status": "locked",
+      "skill": "三重自由",
+      "level": 0,
+      "xp": 0,
+      "max_xp": 100
+    },
+    {
+      "name": "传承",
+      "status": "locked",
+      "skill": "知识传承",
+      "level": 0,
+      "xp": 0,
+      "max_xp": 100
+    }
+  ]
+}

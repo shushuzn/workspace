@@ -1,0 +1,454 @@
+{
+  "name": "OpenClaw 主工作流 - 统一调度中心",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 1
+            }
+          ]
+        }
+      },
+      "id": 0,
+      "name": "Hourly Sync",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"D:\\OpenClaw\\workspace\\scripts\\obsidian-auto-sync.ps1\"",
+        "options": {}
+      },
+      "id": 1,
+      "name": "Obsidian Sync",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        220,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 2 * * *"
+          }
+        }
+      },
+      "id": 2,
+      "name": "Daily 2AM - arXiv",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\arxiv-daily\\scripts\\arxiv-daily.py --categories cs.AI,cs.LG,cs.CL --output D:\\OpenClaw\\workspace\\Medium\\Raw\\ --days 1",
+        "options": {}
+      },
+      "id": 3,
+      "name": "arXiv Collect",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        220,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const output = $input.first().json.stdout || '';\nconst match = output.match(/New papers: (\\d+)/);\nconst newPapers = match ? parseInt(match[1]) : 0;\nconst highPriority = output.match(/High priority papers: (\\d+)/);\nconst highPriorityCount = highPriority ? parseInt(highPriority[1]) : 0;\n\nreturn {\n  newPapers,\n  highPriorityCount,\n  shouldParse: highPriorityCount >= 3,\n  message: `收集 ${newPapers} 篇，高优先级 ${highPriorityCount} 篇`\n};"
+      },
+      "id": 4,
+      "name": "Parse arXiv Output",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        440,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "number": [
+            {
+              "valueA": "={{ $json.highPriorityCount }}",
+              "valueB": 3,
+              "operation": "largerEqual"
+            }
+          ]
+        }
+      },
+      "id": 5,
+      "name": "Check Parse Threshold",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        660,
+        200
+      ]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\batch-processor\\scripts\\batch-processor.py --auto --max-concurrent 4",
+        "options": {}
+      },
+      "id": 6,
+      "name": "Batch Parse",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        880,
+        150
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 3 * * *"
+          }
+        }
+      },
+      "id": 7,
+      "name": "Daily 3AM - Security",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"D:\\OpenClaw\\workspace\\nightly-security-audit.ps1\"",
+        "options": {}
+      },
+      "id": 8,
+      "name": "Security Audit",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        220,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 4 * * *"
+          }
+        }
+      },
+      "id": 9,
+      "name": "Daily 4AM - Medium",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\medium-watcher\\scripts\\medium-watcher.py --tags ai,llm,mcp --output D:\\OpenClaw\\workspace\\Medium\\Raw\\ --min-score 3",
+        "options": {}
+      },
+      "id": 10,
+      "name": "Medium Collect",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        220,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\medium-watcher\\scripts\\medium-analyzer.py --input D:\\OpenClaw\\workspace\\Medium\\Raw\\ --output D:\\OpenClaw\\workspace\\Medium\\Analysis\\",
+        "options": {}
+      },
+      "id": 11,
+      "name": "Medium Analyze",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        440,
+        600
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 9 * * *"
+          }
+        }
+      },
+      "id": 12,
+      "name": "Daily 9AM - Collect",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "command": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File \"D:\\OpenClaw\\workspace\\scripts\\obsidian-auto-sync.ps1\" -Verbose",
+        "options": {}
+      },
+      "id": 13,
+      "name": "Morning Sync",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        220,
+        800
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 5 * * 0"
+          }
+        }
+      },
+      "id": 14,
+      "name": "Weekly 5AM Sun - Distill",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\memory-distiller\\scripts\\memory-distiller.py --input D:\\OpenClaw\\workspace\\memory --output D:\\OpenClaw\\workspace\\MEMORY.md --period weekly",
+        "options": {}
+      },
+      "id": 15,
+      "name": "Memory Distill",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        220,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "command": "py D:\\npm-global\\node_modules\\openclaw\\skills\\knowledge-graph\\scripts\\kg-builder.py --input D:\\OpenClaw\\workspace\\memory --output D:\\OpenClaw\\workspace\\knowledge-graph\\weekly\\graph --format all",
+        "options": {}
+      },
+      "id": 16,
+      "name": "Weekly Graph",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [
+        440,
+        1000
+      ]
+    },
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 10 * * 1"
+          }
+        }
+      },
+      "id": 17,
+      "name": "Weekly 10AM Mon - Report",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        1200
+      ]
+    },
+    {
+      "parameters": {
+        "jsCode": "const now = new Date();\nconst lastWeek = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);\n\nreturn {\n  weekStart: lastWeek.toISOString().split('T')[0],\n  weekEnd: now.toISOString().split('T')[0],\n  message: `生成周报：${lastWeek.toISOString().split('T')[0]} ~ ${now.toISOString().split('T')[0]}`\n};"
+      },
+      "id": 18,
+      "name": "Generate Report",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        220,
+        1200
+      ]
+    }
+  ],
+  "connections": {
+    "Hourly Sync": {
+      "main": [
+        [
+          {
+            "node": "Obsidian Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily 2AM - arXiv": {
+      "main": [
+        [
+          {
+            "node": "arXiv Collect",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "arXiv Collect": {
+      "main": [
+        [
+          {
+            "node": "Parse arXiv Output",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Parse arXiv Output": {
+      "main": [
+        [
+          {
+            "node": "Check Parse Threshold",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Parse Threshold": {
+      "main": [
+        [
+          {
+            "node": "Batch Parse",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily 3AM - Security": {
+      "main": [
+        [
+          {
+            "node": "Security Audit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily 4AM - Medium": {
+      "main": [
+        [
+          {
+            "node": "Medium Collect",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Medium Collect": {
+      "main": [
+        [
+          {
+            "node": "Medium Analyze",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Daily 9AM - Collect": {
+      "main": [
+        [
+          {
+            "node": "Morning Sync",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weekly 5AM Sun - Distill": {
+      "main": [
+        [
+          {
+            "node": "Memory Distill",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Memory Distill": {
+      "main": [
+        [
+          {
+            "node": "Weekly Graph",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Weekly 10AM Mon - Report": {
+      "main": [
+        [
+          {
+            "node": "Generate Report",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "openclaw-master-v1",
+  "meta": {
+    "instanceId": "openclaw-local"
+  },
+  "tags": [
+    {
+      "name": "OpenClaw"
+    },
+    {
+      "name": "Master"
+    },
+    {
+      "name": "Automation"
+    }
+  ],
+  "id": "85fc70a4-15fd-46b2-beac-e6e2c8c9d05d"
+}

@@ -1,0 +1,74 @@
+{
+  "tasks": [
+    {
+      "name": "arxiv-daily",
+      "description": "每日 arXiv 论文收集",
+      "schedule": "0 2 * * *",
+      "command": "py D:\\OpenClaw\\workspace\\skills\\arxiv-daily\\scripts\\arxiv-daily.py --config D:\\OpenClaw\\workspace\\Arxiv\\config.yaml",
+      "enabled": true
+    },
+    {
+      "name": "batch-processor",
+      "description": "批量论文解析",
+      "schedule": "30 2 * * *",
+      "command": "py D:\\OpenClaw\\workspace\\skills\\batch-processor\\scripts\\batch-processor.py --config D:\\OpenClaw\\workspace\\Arxiv\\batch-config.yaml",
+      "enabled": true
+    },
+    {
+      "name": "healthcheck",
+      "description": "每周安全审计",
+      "schedule": "0 3 * * 0",
+      "command": "openclaw security audit --deep",
+      "enabled": true
+    },
+    {
+      "name": "citation-tracker",
+      "description": "每周引用关系追踪",
+      "schedule": "0 4 * * 1",
+      "command": "py D:\\OpenClaw\\workspace\\skills\\citation-tracker\\scripts\\citation-tracker.py --input D:\\OpenClaw\\workspace\\Medium --output D:\\OpenClaw\\workspace\\knowledge-graph\\citations",
+      "enabled": true
+    },
+    {
+      "name": "pdf-extractor",
+      "description": "每日 PDF 解析",
+      "schedule": "0 5 * * *",
+      "command": "py D:\\OpenClaw\\workspace\\skills\\pdf-extractor\\scripts\\pdf-extractor.py --config D:\\OpenClaw\\workspace\\Arxiv\\pdf-extractor-config.yaml",
+      "enabled": true
+    },
+    {
+      "name": "medium-watcher",
+      "description": "每日 Medium 文章收集",
+      "schedule": "0 8 * * *",
+      "command": "py D:\\OpenClaw\\workspace\\skills\\medium-watcher\\scripts\\medium-watcher.py --config D:\\OpenClaw\\workspace\\Medium\\config.yaml",
+      "enabled": true
+    },
+    {
+      "name": "blogwatcher-scan",
+      "description": "博客扫描 (每 6 小时)",
+      "schedule": "0 */6 * * *",
+      "command": "blogwatcher scan --config D:\\OpenClaw\\workspace\\.openclaw\\blogwatcher-config.yaml",
+      "enabled": true
+    },
+    {
+      "name": "github-sync",
+      "description": "GitHub 自动同步",
+      "schedule": "0 */2 * * *",
+      "command": "py D:\\OpenClaw\\workspace\\skills\\github-sync\\scripts\\github-sync.py --config D:\\OpenClaw\\workspace\\.openclaw\\github-sync-config.yaml",
+      "enabled": true
+    },
+    {
+      "name": "session-logs",
+      "description": "每日会话日志分析",
+      "schedule": "30 23 * * *",
+      "command": "py D:\\OpenClaw\\workspace\\skills\\session-logs\\scripts\\session-logs.py --config D:\\OpenClaw\\workspace\\.openclaw\\session-logs-config.yaml",
+      "enabled": true
+    },
+    {
+      "name": "memory-distiller",
+      "description": "每周知识蒸馏",
+      "schedule": "0 23 * * 0",
+      "command": "py D:\\OpenClaw\\workspace\\skills\\memory-distiller\\scripts\\memory-distiller.py --config D:\\OpenClaw\\workspace\\memory\\distiller-config.yaml",
+      "enabled": true
+    }
+  ]
+}

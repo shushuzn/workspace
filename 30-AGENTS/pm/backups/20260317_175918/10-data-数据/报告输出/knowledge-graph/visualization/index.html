@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>知识图谱可视化</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; padding: 20px; }
+        #graph { width: 100%; height: 800px; border: 1px solid #ccc; }
+        .node circle { stroke: #fff; stroke-width: 2px; }
+        .link { stroke: #999; stroke-opacity: 0.6; }
+        .label { font-size: 12px; fill: #333; }
+        #info { position: fixed; top: 20px; right: 20px; background: white; 
+                padding: 15px; border: 1px solid #ccc; max-width: 300px; 
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1); display: none; }
+    </style>
+</head>
+<body>
+    <h1>知识图谱可视化</h1>
+    <div id="stats">
+        实体：4 | 
+        关系：2 |
+        创建：2026-03-04T18:48:54.478755
+    </div>
+    <div id="graph"></div>
+    <div id="info">
+        <h3 id="info-title"></h3>
+        <p id="info-type"></p>
+        <p id="info-details"></p>
+    </div>
+    
+    <script>
+        const graphData = {"metadata": {"created": "2026-03-04T18:48:54.478755", "entity_count": 4, "relation_count": 2, "config": {"source": "mixed"}}, "entities": [{"id": "p-2026-ma-conav_-_master-slave_multi-agent_framewo", "type": "concept", "name": "P-2026-MA-CoNav - Master-Slave Multi-Agent Framework for VLN", "source": "memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"}, {"id": "p-2026-ma-conav_-_master-slave_multi-agent_framewo_time", "type": "time", "name": "2026", "source": "memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"}, {"id": "p-2026-regal_-_registry-driven_architecture_for_en", "type": "concept", "name": "P-2026-REGAL - Registry-Driven Architecture for Enterprise Agentic AI", "source": "memory\\P-Notes\\P-2026-REGAL-Enterprise-Agentic-AI.md"}, {"id": "p-2026-regal_-_registry-driven_architecture_for_en_time", "type": "time", "name": "2026", "source": "memory\\P-Notes\\P-2026-REGAL-Enterprise-Agentic-AI.md"}], "relations": [{"source": "p-2026-ma-conav_-_master-slave_multi-agent_framewo", "target": "p-2026-ma-conav_-_master-slave_multi-agent_framewo_time", "type": "occurred_in", "source_file": "memory\\P-Notes\\P-2026-MA-CoNav-Multi-Agent-VLN.md"}, {"source": "p-2026-regal_-_registry-driven_architecture_for_en", "target": "p-2026-regal_-_registry-driven_architecture_for_en_time", "type": "occurred_in", "source_file": "memory\\P-Notes\\P-2026-REGAL-Enterprise-Agentic-AI.md"}]};
+        
+        // 颜色映射
+        const colorMap = {
+            'concept': '#4CAF50',
+            'paper': '#2196F3',
+            'author': '#FF9800',
+            'time': '#9C27B0',
+            'organization': '#F44336'
+        };
+        
+        // 创建力导向图
+        const width = document.getElementById('graph').clientWidth;
+        const height = 800;
+        
+        const simulation = d3.forceSimulation(graphData.entities)
+            .force('link', d3.forceLink(graphData.relations).id(d => d.id).distance(100))
+            .force('charge', d3.forceManyBody().strength(-300))
+            .force('center', d3.forceCenter(width / 2, height / 2))
+            .force('collide', d3.forceCollide().radius(30));
+        
+        const svg = d3.select('#graph')
+            .append('svg')
+            .attr('width', width)
+            .attr('height', height)
+            .call(d3.zoom().on('zoom', (event) => {
+                g.attr('transform', event.transform);
+            }))
+            .append('g');
+        
+        const g = svg.append('g');
+        
+        // 绘制连线
+        const links = g.append('g')
+            .selectAll('line')
+            .data(graphData.relations)
+            .join('line')
+            .attr('class', 'link');
+        
+        // 绘制节点
+        const nodes = g.append('g')
+            .selectAll('g')
+            .data(graphData.entities)
+            .join('g')
+            .call(d3.drag()
+                .on('start', dragstarted)
+                .on('drag', dragged)
+                .on('end', dragended));
+        
+        nodes.append('circle')
+            .attr('r', 15)
+            .attr('fill', d => colorMap[d.type] || '#999');
+        
+        nodes.append('text')
+            .attr('class', 'label')
+            .attr('dx', 18)
+            .attr('dy', 5)
+            .text(d => d.name.length > 20 ? d.name.substring(0, 20) + '...' : d.name);
+        
+        // 节点点击事件
+        nodes.on('click', (event, d) => {
+            document.getElementById('info').style.display = 'block';
+            document.getElementById('info-title').textContent = d.name;
+            document.getElementById('info-type').textContent = '类型：' + d.type;
+            document.getElementById('info-details').textContent = 'ID: ' + d.id;
+        });
+        
+        // 更新位置
+        simulation.on('tick', () => {
+            links
+                .attr('x1', d => d.source.x)
+                .attr('y1', d => d.source.y)
+                .attr('x2', d => d.target.x)
+                .attr('y2', d => d.target.y);
+            
+            nodes.attr('transform', d => `translate(${d.x},${d.y})`);
+        });
+        
+        // 拖拽函数
+        function dragstarted(event, d) {
+            simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        function dragended(event, d) {
+            simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+    </script>
+</body>
+</html>

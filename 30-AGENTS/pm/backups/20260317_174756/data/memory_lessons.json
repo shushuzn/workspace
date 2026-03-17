@@ -1,0 +1,2866 @@
+[
+  {
+    "id": "SYS-016",
+    "content": "Windows 控制台需 UTF-8 编码修复 (emoji 输出)",
+    "category": "SYS",
+    "source": "MEMORY.md",
+    "line_number": 59,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.706862",
+    "tags": []
+  },
+  {
+    "id": "DEPLOY-001",
+    "content": "SSH public key auth required on production servers",
+    "category": "DEPLOY",
+    "source": "MEMORY.md",
+    "line_number": 117,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.706897",
+    "tags": []
+  },
+  {
+    "id": "DEPLOY-002",
+    "content": "Windows SSH automation needs paramiko or PowerShell SSH module",
+    "category": "DEPLOY",
+    "source": "MEMORY.md",
+    "line_number": 118,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.706904",
+    "tags": []
+  },
+  {
+    "id": "DEPLOY-003",
+    "content": "Prepare fallback manual deployment scripts",
+    "category": "DEPLOY",
+    "source": "MEMORY.md",
+    "line_number": 119,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.706909",
+    "tags": []
+  },
+  {
+    "id": "MULTI-031",
+    "content": "7 人格增强 Phase 1 完成 (2026-03-14)",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 219,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.706939",
+    "tags": []
+  },
+  {
+    "id": "MULTI-032",
+    "content": "7 人格增强 Phase 2 完成 (2026-03-14)",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 224,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.706945",
+    "tags": []
+  },
+  {
+    "id": "MULTI-033",
+    "content": "Phase 1+2 总计：5 个工具，~2100 行代码，测试覆盖 100%",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 228,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.706951",
+    "tags": [
+      "测试"
+    ]
+  },
+  {
+    "id": "MULTI-034",
+    "content": "7 人格增强 Phase 3 完成 (2026-03-14)",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 229,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.706955",
+    "tags": []
+  },
+  {
+    "id": "MULTI-035",
+    "content": "Phase 1+2+3 总计：7 个工具，~3600 行代码，测试覆盖 100%",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 233,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.706961",
+    "tags": [
+      "测试"
+    ]
+  },
+  {
+    "id": "MULTI-036",
+    "content": "7 人格增强系统 100% 完成 (7/7 组件全部实施)",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 234,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.706965",
+    "tags": []
+  },
+  {
+    "id": "MULTI-037",
+    "content": "7 人格增强 Phase 4 完成 (2026-03-14)",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 235,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.706969",
+    "tags": []
+  },
+  {
+    "id": "MULTI-038",
+    "content": "Phase 1-4 总计：8 个工具，~4,200 行代码，测试覆盖 100%",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 239,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.706974",
+    "tags": [
+      "测试"
+    ]
+  },
+  {
+    "id": "MULTI-039",
+    "content": "7 人格增强系统 v7.0 完成（8 工具完整生态）",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 240,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.706978",
+    "tags": []
+  },
+  {
+    "id": "SYS-010",
+    "content": "工作站位置 |",
+    "category": "SYS",
+    "source": "MEMORY.md",
+    "line_number": 406,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707025",
+    "tags": []
+  },
+  {
+    "id": "MULTI-001",
+    "content": "独立子代理 |",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 407,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707029",
+    "tags": []
+  },
+  {
+    "id": "MEM-011",
+    "content": "Dashboard 聚焦原则 |",
+    "category": "MEM",
+    "source": "MEMORY.md",
+    "line_number": 408,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707033",
+    "tags": [
+      "Dashboard"
+    ]
+  },
+  {
+    "id": "FEISHU-013",
+    "content": "@提及语法 |",
+    "category": "FEISHU",
+    "source": "MEMORY.md",
+    "line_number": 409,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707037",
+    "tags": []
+  },
+  {
+    "id": "SEC-019",
+    "content": "Dashboard 集成 |",
+    "category": "SEC",
+    "source": "MEMORY.md",
+    "line_number": 410,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707041",
+    "tags": [
+      "Dashboard",
+      "集成"
+    ]
+  },
+  {
+    "id": "MEM-001",
+    "content": "** 记忆质量 > 数量 - 264 行精简版优于 1236 行重复版",
+    "category": "MEM",
+    "source": "MEMORY.md",
+    "line_number": 429,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707050",
+    "tags": []
+  },
+  {
+    "id": "MEM-005",
+    "content": "** 7 人格各自贡献 - 不是单一步骤，是 7 个独立子代理",
+    "category": "MEM",
+    "source": "MEMORY.md",
+    "line_number": 430,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707056",
+    "tags": []
+  },
+  {
+    "id": "MEM-006",
+    "content": "** 自动化优先 - 每周日 5AM 自动蒸馏，无需人工",
+    "category": "MEM",
+    "source": "MEMORY.md",
+    "line_number": 431,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707060",
+    "tags": [
+      "自动化"
+    ]
+  },
+  {
+    "id": "MEM-007",
+    "content": "** 批量更新策略 - 日常笔记实时记录，MEMORY.md 周批量更新",
+    "category": "MEM",
+    "source": "MEMORY.md",
+    "line_number": 432,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707064",
+    "tags": []
+  },
+  {
+    "id": "MEM-010",
+    "content": "** Dashboard 聚焦原则 - 只显示未完成/进行中内容，已完成不占用注意力",
+    "category": "MEM",
+    "source": "MEMORY.md",
+    "line_number": 433,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707069",
+    "tags": [
+      "Dashboard"
+    ]
+  },
+  {
+    "id": "MULTI-010",
+    "content": "** 进化引擎实现 - 7 人格自动协作更新记忆，无需人工干预",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 434,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707073",
+    "tags": []
+  },
+  {
+    "id": "TOOL-001",
+    "content": "** 记忆蒸馏工具 - memory-distiller.py + memory-maintenance.py 自动化质量检查",
+    "category": "TOOL",
+    "source": "MEMORY.md",
+    "line_number": 435,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707079",
+    "tags": [
+      "自动化"
+    ]
+  },
+  {
+    "id": "MULTI-024",
+    "content": "** 报告精简原则 - 用户只需 1 个总结，内部流程不生成多余文档",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 436,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707083",
+    "tags": []
+  },
+  {
+    "id": "MULTI-025",
+    "content": "** 批判者优化 - 4 维度评分 + 问题分级 + 修复建议",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 437,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707087",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "MULTI-026",
+    "content": "** 元认知代理独立运行 - 不是简单函数，是独立子代理",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 438,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707091",
+    "tags": []
+  },
+  {
+    "id": "MULTI-027",
+    "content": "** 健康指标需明确阈值 - normal/warning/danger 三级警戒线",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 439,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707096",
+    "tags": []
+  },
+  {
+    "id": "MULTI-028",
+    "content": "** 仲裁规则预定义 - 常见人格冲突需提前定义仲裁原则",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 440,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707100",
+    "tags": []
+  },
+  {
+    "id": "MULTI-029",
+    "content": "** 风险预警即时行动 - 预警必须附带具体干预建议",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 441,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707103",
+    "tags": []
+  },
+  {
+    "id": "MULTI-030",
+    "content": "** 下次检查时间动态 - 根据风险级别自动计算 (15min/30min/2h)",
+    "category": "MULTI",
+    "source": "MEMORY.md",
+    "line_number": 442,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707108",
+    "tags": []
+  },
+  {
+    "id": "FEASIBILITY-001",
+    "content": "** 任务制定前必须进行可行性分析",
+    "category": "FEASIBILITY",
+    "source": "MEMORY.md",
+    "line_number": 443,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707112",
+    "tags": []
+  },
+  {
+    "id": "FEASIBILITY-002",
+    "content": "** 现状分析是基础，不能跳过",
+    "category": "FEASIBILITY",
+    "source": "MEMORY.md",
+    "line_number": 444,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707117",
+    "tags": []
+  },
+  {
+    "id": "FEASIBILITY-003",
+    "content": "** 核心资产识别防止误删",
+    "category": "FEASIBILITY",
+    "source": "MEMORY.md",
+    "line_number": 445,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707121",
+    "tags": []
+  },
+  {
+    "id": "FEASIBILITY-004",
+    "content": "** 价值评估避免盲目追求数字",
+    "category": "FEASIBILITY",
+    "source": "MEMORY.md",
+    "line_number": 446,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707125",
+    "tags": []
+  },
+  {
+    "id": "FEASIBILITY-005",
+    "content": "** 六维度分析框架确保全面性",
+    "category": "FEASIBILITY",
+    "source": "MEMORY.md",
+    "line_number": 447,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707130",
+    "tags": []
+  },
+  {
+    "id": "LOCAL-001",
+    "content": "** 敏感内容 100% 本地处理，零云调用",
+    "category": "LOCAL",
+    "source": "MEMORY.md",
+    "line_number": 448,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707136",
+    "tags": []
+  },
+  {
+    "id": "LOCAL-002",
+    "content": "** Qwen2.5-0.5B-Instruct GGUF 格式最优",
+    "category": "LOCAL",
+    "source": "MEMORY.md",
+    "line_number": 449,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707142",
+    "tags": []
+  },
+  {
+    "id": "LOCAL-003",
+    "content": "** llama-cpp-python 推理引擎",
+    "category": "LOCAL",
+    "source": "MEMORY.md",
+    "line_number": 450,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707147",
+    "tags": []
+  },
+  {
+    "id": "LOCAL-004",
+    "content": "** 自动路由基于敏感度评分 (≥0.2 本地)",
+    "category": "LOCAL",
+    "source": "MEMORY.md",
+    "line_number": 451,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707151",
+    "tags": []
+  },
+  {
+    "id": "LOCAL-005",
+    "content": "** 6 大敏感类别 (认证/个人/财务/医疗/生物/API)",
+    "category": "LOCAL",
+    "source": "MEMORY.md",
+    "line_number": 452,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707155",
+    "tags": [
+      "API"
+    ]
+  },
+  {
+    "id": "LOCAL-006",
+    "content": "** 处理日志确保合规验证",
+    "category": "LOCAL",
+    "source": "MEMORY.md",
+    "line_number": 453,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707159",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-055",
+    "content": "快速操作按钮 - 表格内一键设置预警",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 493,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707173",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-056",
+    "content": "本地验证优先于远程部署",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 494,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707177",
+    "tags": [
+      "部署"
+    ]
+  },
+  {
+    "id": "INNOVATOR-057",
+    "content": "Demo 页面测试可提前发现问题",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 495,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707181",
+    "tags": [
+      "测试"
+    ]
+  },
+  {
+    "id": "INNOVATOR-058",
+    "content": "统一导航提升用户体验",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 496,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707185",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-059",
+    "content": "版本追踪增加透明度",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 497,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707188",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-060",
+    "content": "外部灵感驱动创新 - GitHub Trending/arXiv 扫描",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 498,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707193",
+    "tags": [
+      "arXiv",
+      "Git"
+    ]
+  },
+  {
+    "id": "INNOVATOR-061",
+    "content": "创新新颖性 +29% (70→90/100) 通过外部灵感",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 499,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707197",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-062",
+    "content": "ContextDB 原型 - 142 工具统一管理",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 500,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707201",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-063",
+    "content": "Memory Distillation - 11x token 压缩 (arXiv 2603.13017)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 501,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707206",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-064",
+    "content": "3 级上下文层级 (task/session/project)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 502,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707211",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-065",
+    "content": "自进化机制 - 使用分析 + 优化建议",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 503,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707215",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-066",
+    "content": "Memory Governance (SSGM) - arXiv 2603.11768 安全 + 稳定治理",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 504,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707220",
+    "tags": [
+      "安全",
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-067",
+    "content": "安全验证 - 危险关键词检测 (weapon/attack/harm)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 505,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707224",
+    "tags": [
+      "安全"
+    ]
+  },
+  {
+    "id": "INNOVATOR-068",
+    "content": "稳定性检查 - 记忆一致性≥70% 阈值",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 506,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707229",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-069",
+    "content": "审计追踪 - 完整治理日志",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 507,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707233",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-070",
+    "content": "Trajectory Memory - arXiv 2603.10600 执行轨迹学习",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 508,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707238",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-071",
+    "content": "自动教训提取 - 从成功/失败模式中学习",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 509,
+    "confidence": 0.7,
+    "created_at": "2026-03-16T18:25:42.707242",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-072",
+    "content": "效率分析 - 平均执行时间 + 成功率追踪",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 510,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707245",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-073",
+    "content": "KG-RAG Integration - arXiv 2603.10700 知识图谱增强检索",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 511,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707250",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-074",
+    "content": "实体提取 + 关系映射 - 22 实体 84 关系",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 512,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707254",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-075",
+    "content": "图搜索 + 混合搜索 - KG+ 向量结合",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 513,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707258",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-076",
+    "content": "Ollama 本地蒸馏 - qwen2.5:1.5b (Q4_K_M, 986 MB)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 514,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707264",
+    "tags": [
+      "Ollama"
+    ]
+  },
+  {
+    "id": "INNOVATOR-077",
+    "content": "5.6x 平均压缩率 - ULTRA-CONCISE 提示词优化",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 515,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707269",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-078",
+    "content": "每项目≤3 词，每部分≤3 项 - 最佳压缩配置",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 516,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707273",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-079",
+    "content": "Multi-Agent Memory - arXiv 2603.12631 多代理协作记忆",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 517,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707277",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-080",
+    "content": "共识构建机制 - 7 人格投票 + 冲突解决",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 518,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707281",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-081",
+    "content": "Federated Memory - arXiv 2603.09845 隐私保护分布式学习",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 519,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707285",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-082",
+    "content": "梯度聚合 - 本地数据不出域，知识共享",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 520,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707289",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-083",
+    "content": "Self-Evolving Memory - 4 论文集成自动进化",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 521,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707293",
+    "tags": [
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-084",
+    "content": "质量驱动保留 - Essential/Valuable/Useful/Temporary 分级",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 522,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707298",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-085",
+    "content": "arXiv Scanner v2.0 - 优先级评分 + Canvas 导出",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 523,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707303",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-086",
+    "content": "每日 7AM 自动扫描 - Impact(40%)+Novelty(35%)+Feasibility(25%)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 524,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707308",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-087",
+    "content": "arXiv 深度研究 - 5 论文分析 + 5 趋势识别",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 525,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707313",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-088",
+    "content": "Multi-Agent Scientific Discovery - 98/100 相关性，Priority #1",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 526,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707318",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-089",
+    "content": "Memory-Guided Attention - 95/100 相关性，Q2 2026 高优先级",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 527,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707325",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-090",
+    "content": "Self-Healing Code Systems - 92/100 相关性，Phase 3 增强",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 528,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707330",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-091",
+    "content": "KG-RAG+ Factual Consistency - 90/100 相关性，事实核查",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 529,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707335",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-092",
+    "content": "SciAgents 实施完成 - 5 代理科研自动化 (arXiv 2603.15002)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 530,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707340",
+    "tags": [
+      "自动化",
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-093",
+    "content": "5 代理协作 - Planner/Experimenter/Analyst/Critic/Writer",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 531,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707344",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-094",
+    "content": "端到端研究流程 - 5 阶段自动化 (Planning→Reporting)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 532,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707349",
+    "tags": [
+      "自动化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-095",
+    "content": "质量审查机制 - Critic 代理 100/100 评分通过",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 533,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707353",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-096",
+    "content": "MGA 实施完成 - Memory-Guided Attention (arXiv 2603.15001)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 534,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707361",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-097",
+    "content": "长上下文优化 - 30.7% 质量提升 (论文 23%)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 535,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707365",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-098",
+    "content": "计算成本降低 - 51% 减少 (论文 40%)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 536,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707369",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-099",
+    "content": "动态内存分配 - 500-8000 上下文自适应",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 537,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707373",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-100",
+    "content": "梯度高效更新 - 累积更新策略",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 538,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707377",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-101",
+    "content": "Self-Healing Code 实施完成 - 15 错误模式 + 20 恢复策略 (arXiv 2603.15004)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 539,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707384",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-102",
+    "content": "自动化错误检测 - KeyError/FileNotFound/Unicode 等 15 模式",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 540,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707389",
+    "tags": [
+      "自动化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-103",
+    "content": "根因分析引擎 - 预定义诊断模板 + 动态生成",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 541,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707393",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-104",
+    "content": "恢复策略选择 - 基于置信度/严重性自动选择",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 542,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707397",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-105",
+    "content": "自动修复生成 - 100% 测试成功率，学习循环",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 543,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707402",
+    "tags": [
+      "测试"
+    ]
+  },
+  {
+    "id": "INNOVATOR-106",
+    "content": "KG-RAG+ 实施完成 - 知识图谱增强检索 (arXiv 2603.15005)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 544,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707406",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-107",
+    "content": "幻觉减少 46% - 接近论文 58% 目标",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 545,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707410",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-108",
+    "content": "多跳推理 - 3 跳 KG 遍历",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 546,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707415",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-109",
+    "content": "事实一致性验证 - 50% 验证通过率，73% 平均置信度",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 547,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707419",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-110",
+    "content": "置信度评分 - 实体覆盖 + 路径支持 + 检索置信度",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 548,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707424",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-111",
+    "content": "Federated Learning 实施完成 - 隐私保护分布式学习 (arXiv 2603.15003)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 549,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707429",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-112",
+    "content": "3 种聚合方法 - FedAvg/DP-FedAvg/QFedAvg",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 550,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707433",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-113",
+    "content": "差分隐私 - ε=1.0 中等隐私保护",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 551,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707437",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-114",
+    "content": "4 节点异构模拟 - 非 IID 数据分布",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 552,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707441",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-115",
+    "content": "本地数据不出域 - 隐私保护梯度聚合",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 553,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707445",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-116",
+    "content": "Adaptive Context Compression 实施 - 长上下文代理优化 (arXiv 2603.14001)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 554,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707450",
+    "tags": [
+      "arXiv",
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-117",
+    "content": "层次化分段 - key_info/supporting/detail/redundant 4 级",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 555,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707455",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-118",
+    "content": "任务感知压缩 - 根据复杂度自适应调整",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 556,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707458",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-119",
+    "content": "Automated Research Workflow 实施 - 端到端研究自动化 (arXiv 2603.14004)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 557,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707465",
+    "tags": [
+      "自动化",
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-120",
+    "content": "6 阶段工作流 - planning→literature→data→analysis→writing→review",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 558,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707470",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-121",
+    "content": "5 专业 AI 代理 - planner/literature/data/analysis/writing/quality",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 559,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707475",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-122",
+    "content": "Self-Correcting Code 实施 - 多通道代码修正 (arXiv 2603.14002)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 560,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707480",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-123",
+    "content": "3 通道修正流程 - generate→detect→correct",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 561,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707485",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-124",
+    "content": "100% 错误减少 - 自动测试生成 + 质量评估",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 562,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707489",
+    "tags": [
+      "测试"
+    ]
+  },
+  {
+    "id": "INNOVATOR-125",
+    "content": "Dynamic Memory Allocation 实施 - 3 层记忆层级系统",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 563,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707493",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-126",
+    "content": "L1/L2/L3 缓存 - 60/30/10 容量分配，0.63ms 访问延迟",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 564,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707498",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-127",
+    "content": "优先级感知分配 - CRITICAL/HIGH/MEDIUM/LOW 4 级",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 565,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707503",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-128",
+    "content": "LRU+ 优先级混合淘汰 - 优于纯 LRU 或纯优先级",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 566,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707507",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-129",
+    "content": "模式预测预取 - 学习访问模式，提升命中率 20-30%",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 567,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707511",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-130",
+    "content": "自动垃圾回收 - 防止内存耗尽，无需人工干预",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 568,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707515",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-131",
+    "content": "Memory Integration Layer 实施 - 6 系统集成点",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 569,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707521",
+    "tags": [
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-132",
+    "content": "8 工作流配置文件 - 任务特定内存分配",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 570,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707525",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-133",
+    "content": "ContextDB 集成 - 实体/关系/上下文分层存储",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 571,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707529",
+    "tags": [
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-134",
+    "content": "Memory Distillation 集成 - 3 阶段压缩 (raw/distilled/insights)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 572,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707534",
+    "tags": [
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-135",
+    "content": "7-Persona 集成 - 独立人格记忆分区",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 573,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707538",
+    "tags": [
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-136",
+    "content": "HEARTBEAT 集成 - 每 30 分钟自动优化",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 574,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707542",
+    "tags": [
+      "集成",
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-137",
+    "content": "测试覆盖率 100% - 19 测试全部通过",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 575,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707546",
+    "tags": [
+      "测试"
+    ]
+  },
+  {
+    "id": "INNOVATOR-138",
+    "content": "性能基准 - 214K 分配/sec, 653K 访问/sec",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 576,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707550",
+    "tags": [
+      "性能"
+    ]
+  },
+  {
+    "id": "INNOVATOR-139",
+    "content": "HEARTBEAT Memory 集成 - 每 30 分钟自动优化",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 577,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707555",
+    "tags": [
+      "集成",
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-140",
+    "content": "8 工作流自动优化 - 任务特定内存管理",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 578,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707560",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-141",
+    "content": "健康检查系统 - 3 级警戒 (healthy/warning/critical)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 579,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707565",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-142",
+    "content": "状态持久化 - 13-memory/heartbeat-memory-state.json",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 580,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707571",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-143",
+    "content": "头脑风暴#3 完成 - 8 创新机会识别 (2026-03-16 18:00)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 581,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707575",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-144",
+    "content": "自主研究代理 - 96/100 分，最高优先级 (INN-023)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 582,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707581",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-145",
+    "content": "记忆进化引擎 2.0 - 93/100 分，核心能力 (INN-024)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 583,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707585",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-146",
+    "content": "7 人格自主协作 - 92/100 分，系统智能化 (INN-025)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 584,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707589",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-147",
+    "content": "知识图谱自动构建 - 88/100 分，快速胜利 (INN-026)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 585,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707594",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-148",
+    "content": "性能监控仪表板 - 85/100 分，运营必需 (INN-027)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 586,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707599",
+    "tags": [
+      "监控",
+      "性能"
+    ]
+  },
+  {
+    "id": "INNOVATOR-149",
+    "content": "自动部署管道 - 82/100 分，中优先 (INN-028)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 587,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707604",
+    "tags": [
+      "部署"
+    ]
+  },
+  {
+    "id": "INNOVATOR-150",
+    "content": "自我进化系统 - 98/100 分，长期愿景 (INN-029)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 588,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707608",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-151",
+    "content": "联邦记忆网络 - 95/100 分，前沿研究 (INN-030)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 589,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707616",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-152",
+    "content": "INN-023 自主研究代理完成 - 原型 1.5 小时 (2026-03-16 18:15)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 590,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707620",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-153",
+    "content": "自主研究代理架构 - 扫描/分析/洞察/行动四阶段",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 591,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707624",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-154",
+    "content": "研究成果 - 5 论文→9 洞察→9 行动→9 TODO 自动添加",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 592,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707628",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-155",
+    "content": "仪表板可视化 - Chart.js 实时展示 (30s 刷新)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 593,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707632",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-125",
+    "content": "Energy-Efficient LLM 实施 - 边缘设备优化 (arXiv 2603.14003)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 594,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707637",
+    "tags": [
+      "LLM",
+      "arXiv",
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-126",
+    "content": "INT4 量化 - 8x 加速，85% 能耗降低",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 595,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707641",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-127",
+    "content": "结构化剪枝 - 60% 稀疏度，<2% 精度损失",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 596,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707646",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-128",
+    "content": "Privacy-Preserving Learning 实施 - 隐私保护协作 (arXiv 2603.14005)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 597,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707651",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-129",
+    "content": "安全多方计算 - 99% 隐私保证",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 598,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707654",
+    "tags": [
+      "安全"
+    ]
+  },
+  {
+    "id": "INNOVATOR-130",
+    "content": "同态加密 - 梯度加密传输",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 599,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707658",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-131",
+    "content": "Dynamic Memory Allocation 实施 - 动态内存分配 (arXiv 2603.14006)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 600,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707663",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-132",
+    "content": "优先级内存保留 - 重要性评分机制",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 601,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707667",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-133",
+    "content": "自适应窗口 - 40% 效率提升",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 602,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707670",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-134",
+    "content": "Multi-Modal RAG 实施 - 多模态检索 (arXiv 2603.14007)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 603,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707674",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-135",
+    "content": "跨模态注意力 - text/image/code 统一嵌入",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 604,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707678",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-136",
+    "content": "3 跳推理 - 65% 检索准确率提升",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 605,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707682",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-137",
+    "content": "Automated Prompt Optimization 实施 - 自动提示优化 (arXiv 2603.14008)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 606,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707687",
+    "tags": [
+      "arXiv",
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-138",
+    "content": "A/B 测试框架 - prompt 性能对比",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 607,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707691",
+    "tags": [
+      "测试",
+      "性能"
+    ]
+  },
+  {
+    "id": "INNOVATOR-139",
+    "content": "迭代优化 - 45% 响应质量提升",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 608,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707695",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-140",
+    "content": "arXiv 集成层创建 - 所有创新连接到工作流",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 609,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707700",
+    "tags": [
+      "arXiv",
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-141",
+    "content": "每日自动执行 - 5 个创新日常使用",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 610,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707703",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-142",
+    "content": "每周执行 - 2 个创新周常使用",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 611,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707707",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-143",
+    "content": "HEARTBEAT 集成 - 创新使用指标追踪",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 612,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707710",
+    "tags": [
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-144",
+    "content": "性能监控 - 69% 平均性能增益",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 613,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707714",
+    "tags": [
+      "监控",
+      "性能"
+    ]
+  },
+  {
+    "id": "INNOVATOR-145",
+    "content": "采用率追踪 - 85%+ 采用率目标",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 614,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707718",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-073",
+    "content": "优化建议生成 - 基于重复错误检测",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 615,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707721",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-074",
+    "content": "KG-RAG Integration - arXiv 2603.10700 知识图谱增强检索",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 616,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707727",
+    "tags": [
+      "arXiv"
+    ]
+  },
+  {
+    "id": "INNOVATOR-075",
+    "content": "实体提取 - 自动分类 (TOOL/PERSON/PAPER/CONCEPT)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 617,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707731",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-076",
+    "content": "关系映射 - 基于共现自动推断 (BASED_ON/IMPLEMENTS/USES)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 618,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707735",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-077",
+    "content": "混合搜索 - 图遍历 + 关键词匹配 + 实体评分",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 619,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707739",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-046",
+    "content": "** 自主迭代模式 - 不等待用户确认，直接执行优化（9 工具/1 小时）",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 650,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707752",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-047",
+    "content": "** 健康监控优先 - 先监控再优化，数据驱动决策",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 651,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707756",
+    "tags": [
+      "监控",
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-048",
+    "content": "** 仪表板 UI > CLI - 实时 HTML 仪表板提升可见性",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 652,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707761",
+    "tags": [
+      "CLI"
+    ]
+  },
+  {
+    "id": "INNOVATOR-049",
+    "content": "** Nginx 优化 40% 提升 - Gzip+ 缓存立竿见影",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 653,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707765",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-050",
+    "content": "** 模块化监控工具 - 监控/分析/告警/仪表板分离",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 654,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707769",
+    "tags": [
+      "监控"
+    ]
+  },
+  {
+    "id": "INNOVATOR-051",
+    "content": "** SSH 诊断自动化 - 4x 快于手动检查",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 655,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707773",
+    "tags": [
+      "自动化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-052",
+    "content": "** 服务自动重启模式 - 所有服务可复用",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 656,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707776",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-053",
+    "content": "** 模块化 SSH 脚本 - 一个脚本修复一个服务",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 657,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707780",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-054",
+    "content": "** 健康驱动迭代 - 基于监控数据修复",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 658,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707784",
+    "tags": [
+      "监控"
+    ]
+  },
+  {
+    "id": "INNOVATOR-055",
+    "content": "** 100% 健康达成 - Phase 2 三网站全部正常",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 659,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707789",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-056",
+    "content": "** 统一入口优先 - 多服务时 Portal 是必需的",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 660,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707793",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-057",
+    "content": "** 用户体验驱动 - 从用户痛点出发设计",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 661,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707796",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-058",
+    "content": "** 卡片式导航 - 直观展示所有服务",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 662,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707799",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-059",
+    "content": "** 实时状态集成 - 健康监控嵌入 Portal",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 663,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707803",
+    "tags": [
+      "监控",
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-060",
+    "content": "** Nginx 代理模式 - 统一端口访问后端服务",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 664,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707807",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-061",
+    "content": "** 渐进式优化 - 先简单后复杂，避免配置错误",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 665,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707811",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-062",
+    "content": "** 备份优先 - 每次修改前自动备份",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 666,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707815",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-063",
+    "content": "** 紧急修复脚本 - 快速回滚能力",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 667,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707819",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-064",
+    "content": "** 自动化监控 - 5 分钟检查 + 自动重启",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 668,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707823",
+    "tags": [
+      "监控",
+      "自动化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-065",
+    "content": "** Windows 定时任务 - schtasks 集成",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 669,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707827",
+    "tags": [
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-066",
+    "content": "** 服务器性能边界 - 2 vCPU/2GiB 限制响应时间",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 670,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707831",
+    "tags": [
+      "性能"
+    ]
+  },
+  {
+    "id": "INNOVATOR-067",
+    "content": "** Gzip 效果验证 - 必须测试确认启用",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 671,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707836",
+    "tags": [
+      "测试"
+    ]
+  },
+  {
+    "id": "INNOVATOR-068",
+    "content": "** 简单优先 - 静态 HTML 优于动态 JS",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 672,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707839",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-069",
+    "content": "** 零依赖设计 - 减少外部请求失败风险",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 673,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707843",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-070",
+    "content": "** 紧急修复模式 - 快速响应优于完美方案",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 674,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707847",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-071",
+    "content": "** 用户体验第一 - 响应时间<50ms 是必须的",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 675,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707851",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-072",
+    "content": "** 备份优先 - 每次部署前自动备份",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 676,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707854",
+    "tags": [
+      "部署"
+    ]
+  },
+  {
+    "id": "INNOVATOR-073",
+    "content": "** CDN 优先策略 - 全球 200+ 节点加速是质的飞跃",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 677,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707858",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-074",
+    "content": "** Brotli 压缩 - 优于 Gzip 15-20%，现代浏览器标配",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 678,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707862",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-075",
+    "content": "** 全服务 HTTPS - 安全性 A+ 评级，SEO 提升",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 679,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707866",
+    "tags": [
+      "安全"
+    ]
+  },
+  {
+    "id": "INNOVATOR-076",
+    "content": "** 飞书实时告警 - 5 分钟自动报告，紧急告警即时通知",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 680,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707871",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-077",
+    "content": "** Git 自动部署 - push 即上线，部署时间 -90%",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 681,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707875",
+    "tags": [
+      "部署",
+      "Git"
+    ]
+  },
+  {
+    "id": "INNOVATOR-078",
+    "content": "** 缓存策略优化 - 4 小时 TTL + 激进缓存，命中率>80%",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 682,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707879",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-079",
+    "content": "** Rocket Loader - JS 异步加载，首屏速度 +50%",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 683,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.707883",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-001",
+    "content": "** Defuddle 节省 90% token 在网页提取",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 758,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707906",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-002",
+    "content": "** JSON Canvas 实现可视化知识图谱",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 759,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707910",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-003",
+    "content": "** Skills 仓库 = 即插即用自动化",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 760,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707914",
+    "tags": [
+      "自动化"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-004",
+    "content": "** 颜色编码提高 Canvas 可读性",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 761,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707917",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-005",
+    "content": "** 自动生成保持 Canvas 实时更新",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 762,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707921",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-006",
+    "content": "智能缓存防止重复提取",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 785,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707930",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-007",
+    "content": "变更检测减少不必要更新",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 786,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707934",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-008",
+    "content": "HEARTBEAT 集成实现自动化",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 787,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707938",
+    "tags": [
+      "自动化",
+      "集成"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-009",
+    "content": "批量处理提高效率",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 788,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707941",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-010",
+    "content": "状态追踪实现进度监控",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 789,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707945",
+    "tags": [
+      "监控"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-011",
+    "content": "统一 CLI 减少认知负荷",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 812,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707955",
+    "tags": [
+      "CLI"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-012",
+    "content": "多类型 Canvas 增强可视化",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 813,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707958",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-013",
+    "content": "本地 LLM 保护隐私",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 814,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707962",
+    "tags": [
+      "LLM"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-014",
+    "content": "结构化摘要便于检索",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 815,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707966",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-015",
+    "content": "状态仪表板提高可见性",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 816,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707969",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-016",
+    "content": "并行处理提升效率 (+100%)",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 839,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707979",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-017",
+    "content": "进度条改善用户体验",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 840,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707982",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-018",
+    "content": "指数退避优化重试",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 841,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707987",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-019",
+    "content": "时间线可视化增强理解",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 842,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707990",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-020",
+    "content": "CLI 扩展保持简洁",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 843,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.707993",
+    "tags": [
+      "CLI"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-021",
+    "content": ":**",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 863,
+    "confidence": 0.7,
+    "created_at": "2026-03-16T18:25:42.708002",
+    "tags": []
+  },
+  {
+    "id": "OBSIDIAN-021",
+    "content": "Git 流程自动化减少重复提交",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 864,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708006",
+    "tags": [
+      "自动化",
+      "Git"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-022",
+    "content": "HEARTBEAT 自动化消除手动更新 (48 次/天)",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 892,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708017",
+    "tags": [
+      "自动化"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-023",
+    "content": "优先级缓存优化 TTL 策略 (5 级别)",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 893,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708023",
+    "tags": [
+      "优化"
+    ]
+  },
+  {
+    "id": "OBSIDIAN-024",
+    "content": "LRU 驱逐最大化缓存利用率",
+    "category": "OBSIDIAN",
+    "source": "MEMORY.md",
+    "line_number": 894,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708028",
+    "tags": []
+  },
+  {
+    "id": "GIT-001",
+    "content": "单次提交原则 - 完整迭代 = 1 次提交",
+    "category": "GIT",
+    "source": "MEMORY.md",
+    "line_number": 922,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708039",
+    "tags": []
+  },
+  {
+    "id": "GIT-002",
+    "content": "--complete 参数 - 自动检测所有文件",
+    "category": "GIT",
+    "source": "MEMORY.md",
+    "line_number": 923,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708043",
+    "tags": []
+  },
+  {
+    "id": "GIT-003",
+    "content": "工作流程分阶段 - 开发/文档/验证/提交",
+    "category": "GIT",
+    "source": "MEMORY.md",
+    "line_number": 924,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708047",
+    "tags": []
+  },
+  {
+    "id": "GIT-004",
+    "content": "禁止中途提交 - 所有工作完成后一次性提交",
+    "category": "GIT",
+    "source": "MEMORY.md",
+    "line_number": 925,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708051",
+    "tags": []
+  },
+  {
+    "id": "WORKFLOW-001",
+    "content": "单次提交原则 - 完整迭代=1 次提交",
+    "category": "WORKFLOW",
+    "source": "MEMORY.md",
+    "line_number": 959,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708064",
+    "tags": []
+  },
+  {
+    "id": "WORKFLOW-002",
+    "content": "四阶段流程 - 开发/文档/验证/提交",
+    "category": "WORKFLOW",
+    "source": "MEMORY.md",
+    "line_number": 960,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708068",
+    "tags": []
+  },
+  {
+    "id": "WORKFLOW-003",
+    "content": "自动化检查 - 预提交钩子强制合规",
+    "category": "WORKFLOW",
+    "source": "MEMORY.md",
+    "line_number": 961,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708072",
+    "tags": [
+      "自动化"
+    ]
+  },
+  {
+    "id": "WORKFLOW-004",
+    "content": "状态追踪 - 实时进度监控",
+    "category": "WORKFLOW",
+    "source": "MEMORY.md",
+    "line_number": 962,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708076",
+    "tags": [
+      "监控"
+    ]
+  },
+  {
+    "id": "WORKFLOW-005",
+    "content": "模板生成 - 标准化迭代计划",
+    "category": "WORKFLOW",
+    "source": "MEMORY.md",
+    "line_number": 963,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708079",
+    "tags": []
+  },
+  {
+    "id": "WORKFLOW-006",
+    "content": "自动提交 - 一键完成所有步骤",
+    "category": "WORKFLOW",
+    "source": "MEMORY.md",
+    "line_number": 964,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708082",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-080",
+    "content": "** HSTS 预加载 - 强制 HTTPS，防止降级攻击",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 979,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708090",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-081",
+    "content": "** 监控 v2 集成 - 健康检查 + 飞书告警一体化",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 980,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708094",
+    "tags": [
+      "监控",
+      "集成"
+    ]
+  },
+  {
+    "id": "INNOVATOR-082",
+    "content": "** 告警冷却机制 - 防止告警风暴 (5 分钟间隔)",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 981,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708098",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-083",
+    "content": "** 用户 ID 自动发现 - 避免硬编码配置错误",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 982,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708101",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-084",
+    "content": "** 部署流水线 - Push 即上线，部署时间 -95%",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 983,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708105",
+    "tags": [
+      "部署"
+    ]
+  },
+  {
+    "id": "INNOVATOR-085",
+    "content": "** 备份优先 - 部署前自动备份，零风险部署",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 984,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708110",
+    "tags": [
+      "部署"
+    ]
+  },
+  {
+    "id": "INNOVATOR-086",
+    "content": "** 一键回滚 - 出现问题立即恢复，MTTR<1 分钟",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 985,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708115",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-087",
+    "content": "** 性能仪表板 - 可视化优于数字，Chart.js 轻量强大",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 986,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.708119",
+    "tags": [
+      "性能"
+    ]
+  },
+  {
+    "id": "INNOVATOR-088",
+    "content": "** 瓶颈自动识别 - 算法识别 > 人工检查",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 987,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708124",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-089",
+    "content": "** 瓶颈分级 - CRITICAL/HIGH/MEDIUM 优先级",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 988,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.708128",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-090",
+    "content": "** 部署报告自动化 - 每次部署自动生成报告",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 989,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708132",
+    "tags": [
+      "部署",
+      "自动化"
+    ]
+  },
+  {
+    "id": "INNOVATOR-091",
+    "content": "** 统一入口命令 - 复杂流程简单化",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 990,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708136",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-092",
+    "content": "** 编排器模式 - 工具整合 > 单一工具",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 991,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708139",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-093",
+    "content": "** 快速部署模式 - 测试场景无需备份",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 992,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708143",
+    "tags": [
+      "部署",
+      "测试"
+    ]
+  },
+  {
+    "id": "INNOVATOR-094",
+    "content": "** 部署日志追踪 - 完整审计日志",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 993,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708146",
+    "tags": [
+      "部署"
+    ]
+  },
+  {
+    "id": "INNOVATOR-095",
+    "content": "** 编码问题根本原因 - Windows 控制台默认 GBK，非 UTF-8",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 994,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.708151",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-096",
+    "content": "** 3 层防护策略 - 工具头部 + 文件读写 + 批量修复",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 995,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708154",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-097",
+    "content": "** reconfigure 优于 chcp - Python 原生方案更可靠",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 996,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.708159",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-098",
+    "content": "** emoji 替换为 ASCII - Windows 兼容性最佳实践",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 997,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.708163",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-099",
+    "content": "** 批量修复工具 - 一次性修复所有文件",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 998,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708166",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-100",
+    "content": "** 新工具模板 - 标准化编码修复头部",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 999,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708170",
+    "tags": []
+  },
+  {
+    "id": "INNOVATOR-101",
+    "content": "** 文件读写规范 - 始终指定 encoding='utf-8'",
+    "category": "INNOVATOR",
+    "source": "MEMORY.md",
+    "line_number": 1000,
+    "confidence": 0.6,
+    "created_at": "2026-03-16T18:25:42.708173",
+    "tags": []
+  },
+  {
+    "id": "WORKFLOW-007",
+    "content": "演示迭代验证工作流自动化\"",
+    "category": "WORKFLOW",
+    "source": "MEMORY.md",
+    "line_number": 1467,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708307",
+    "tags": [
+      "自动化"
+    ]
+  },
+  {
+    "id": "WORKFLOW-008",
+    "content": "模板生成节省规划时间\"",
+    "category": "WORKFLOW",
+    "source": "MEMORY.md",
+    "line_number": 1468,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708311",
+    "tags": []
+  },
+  {
+    "id": "WORKFLOW-009",
+    "content": "状态追踪确保合规性\"",
+    "category": "WORKFLOW",
+    "source": "MEMORY.md",
+    "line_number": 1469,
+    "confidence": 0.5,
+    "created_at": "2026-03-16T18:25:42.708314",
+    "tags": []
+  }
+]

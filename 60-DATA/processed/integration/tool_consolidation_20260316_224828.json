@@ -1,0 +1,640 @@
+{
+  "timestamp": "2026-03-16T22:48:28.190225",
+  "summary": {
+    "total_tools": 195,
+    "total_size_kb": 2695.56,
+    "total_lines": 76650,
+    "avg_tool_size_kb": 13.82,
+    "cli_tools": 164,
+    "cli_percentage": 84.1
+  },
+  "duplicates": [
+    {
+      "type": "similar_functionality",
+      "tools": [
+        "ultimate_memory_search_v2",
+        "ultimate_memory_search_v3"
+      ],
+      "base_name": "ultimate_memory_search_v",
+      "severity": "medium",
+      "recommendation": "Consider merging or versioning"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "active-learning-trigger",
+        "auto_signal_extractor",
+        "effect_tracker",
+        "smart-review-reminder"
+      ],
+      "shared_imports": [
+        "datetime",
+        "json",
+        "pathlib",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "adaptive_ttl_cache",
+        "automation_enhancer",
+        "auto_tuner",
+        "cache_observability",
+        "heartbeat_integration"
+      ],
+      "shared_imports": [
+        "datetime",
+        "json",
+        "sys",
+        "time",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "advanced_report_gen",
+        "context_compressor",
+        "context_db",
+        "context_search",
+        "iteration_manager"
+      ],
+      "shared_imports": [
+        "dataclasses",
+        "datetime",
+        "json",
+        "sys",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "anomaly_detector",
+        "cron_manager",
+        "daily_brief_generator",
+        "dashboard_health_widget",
+        "feishu_report_generator"
+      ],
+      "shared_imports": [
+        "datetime",
+        "json",
+        "pathlib",
+        "sys"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "arxiv_collector_v2",
+        "auto_deployer",
+        "distributed_cache",
+        "incremental_indexer",
+        "intent_predictor"
+      ],
+      "shared_imports": [
+        "datetime",
+        "hashlib",
+        "json",
+        "time",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "autonomous_research_assistant",
+        "causal_inference_engine",
+        "experiment_platform",
+        "explainable_ai",
+        "federated_learning"
+      ],
+      "shared_imports": [
+        "dataclasses",
+        "datetime",
+        "math",
+        "typing",
+        "uuid"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "auto_distill",
+        "dashboard_integration",
+        "load_balancer",
+        "parallel_executor",
+        "workspace_comparator"
+      ],
+      "shared_imports": [
+        "argparse",
+        "dataclasses",
+        "datetime",
+        "hashlib",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "code_quality_reviewer",
+        "config_center",
+        "dashboard_anomaly_alerts",
+        "dashboard_decision_timeline",
+        "error_analyzer"
+      ],
+      "shared_imports": [
+        "argparse",
+        "datetime",
+        "json",
+        "sys",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "code_reviewer",
+        "enhanced_canvas_generator",
+        "json_canvas_generator",
+        "knowledge_graph_updater",
+        "memory_indexer"
+      ],
+      "shared_imports": [
+        "datetime",
+        "json",
+        "re",
+        "sys",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "config_center_v2",
+        "context_cache_manager",
+        "memory_evolution_engine",
+        "security_auditor"
+      ],
+      "shared_imports": [
+        "dataclasses",
+        "datetime",
+        "hashlib",
+        "json",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "context_cli",
+        "coordinator_balancer",
+        "innovator_auto_executor",
+        "master_orchestrator",
+        "quality_scorer"
+      ],
+      "shared_imports": [
+        "datetime",
+        "json",
+        "pathlib",
+        "sys",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "defuddle_integration",
+        "memory_auto_fix",
+        "pre_file_operation_hook",
+        "unified_cli_v3"
+      ],
+      "shared_imports": [
+        "datetime",
+        "json",
+        "subprocess",
+        "sys",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "resource_monitor",
+        "smart_notification",
+        "tool_integration",
+        "workflow_analyzer"
+      ],
+      "shared_imports": [
+        "argparse",
+        "datetime",
+        "json",
+        "time",
+        "typing"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    },
+    {
+      "type": "shared_dependencies",
+      "tools": [
+        "safedir",
+        "safe_write",
+        "session-check",
+        "workspace",
+        "workspace_init"
+      ],
+      "shared_imports": [
+        "os",
+        "pathlib",
+        "sys"
+      ],
+      "severity": "low",
+      "recommendation": "Review for potential consolidation"
+    }
+  ],
+  "categories": {
+    "other": [
+      "active-learning-trigger",
+      "batch_card_generator",
+      "batch_processor_v2",
+      "batch_security_fixer",
+      "causal_inference_engine",
+      "cluster_manager",
+      "code_reviewer",
+      "complete_path_fixer",
+      "context_cli",
+      "context_compressor",
+      "context_search",
+      "daily_brief_generator",
+      "download_qwen_model",
+      "effect_tracker",
+      "evolution_engine",
+      "federated_learning",
+      "fix_workspace_paths",
+      "graded_fallback",
+      "hybrid_search",
+      "incremental_indexer",
+      "innovation_pattern_matcher",
+      "install_requirements",
+      "json_canvas_generator",
+      "knowledge-graph-builder",
+      "knowledge_graph_builder",
+      "knowledge_graph_updater",
+      "learner-assistant-v2",
+      "learning-quality-assessor",
+      "load_balancer",
+      "local_qwen_inference",
+      "master_orchestrator",
+      "memory-distiller",
+      "memory-maintenance",
+      "memory-ops",
+      "memory-quality-assessor",
+      "memory-search-v2",
+      "memory_conflict_detector",
+      "memory_evolution_engine",
+      "memory_indexer",
+      "memory_quality_scorer",
+      "meta_learning",
+      "multi_agent_network",
+      "neural_embedding",
+      "notification_center",
+      "notification_router",
+      "obsidian_tools",
+      "ollama_qwen_test",
+      "openclaw",
+      "paper_summarizer",
+      "parallel_executor",
+      "path_interceptor",
+      "path_security_fixer",
+      "performance_profiler",
+      "plan-quality-assessor",
+      "planner-assistant-v2",
+      "pre_file_operation_hook",
+      "quality_scorer",
+      "quick_security_fix",
+      "safedir",
+      "safe_write",
+      "self_healing",
+      "self_iteration",
+      "self_iter_cli",
+      "sensitive_content_router",
+      "smart-review-reminder",
+      "smart_doc_generator",
+      "smart_notification",
+      "smart_recommendations",
+      "system_orchestrator",
+      "task_priority_scorer",
+      "tool_registry",
+      "unified_cli_v3",
+      "unified_doc_generator",
+      "vector_search",
+      "workspace",
+      "workspace_comparator",
+      "workspace_init"
+    ],
+    "data": [
+      "adaptive_ttl_cache",
+      "cache_manager",
+      "context_aware_cache",
+      "context_cache_manager",
+      "context_db",
+      "data_sync_enhancer",
+      "distributed_cache",
+      "distributed_search",
+      "memory_search_cached",
+      "redis_integration",
+      "semantic_cache",
+      "smart_cache_v2",
+      "tiered_cache"
+    ],
+    "analysis": [
+      "advanced_report_gen",
+      "error_analyzer",
+      "feishu_report_generator",
+      "health_predictor",
+      "insight_generator",
+      "intent_predictor",
+      "memory_performance_profiler",
+      "performance_analyzer",
+      "predictive_analytics",
+      "predictive_healing",
+      "query_predictor",
+      "security_reporter",
+      "smart_report_generator",
+      "tool_analytics",
+      "workflow_analyzer"
+    ],
+    "automation": [
+      "ai_task_scheduler",
+      "anomaly_detector",
+      "arxiv_workflow",
+      "automation_enhancer",
+      "automation_orchestrator",
+      "autonomous_research_assistant",
+      "auto_data_cleaner",
+      "auto_distill",
+      "auto_optimizer",
+      "auto_signal_extractor",
+      "auto_test_generator",
+      "auto_test_runner",
+      "auto_tuner",
+      "canvas_auto_updater",
+      "code_quality_reviewer",
+      "coordinator_balancer",
+      "critic_auto_fix",
+      "cron_manager",
+      "demo_tool",
+      "doc_generator",
+      "experiment_platform",
+      "git_workflow",
+      "heartbeat_integration",
+      "heartbeat_workflow",
+      "innovator_auto_executor",
+      "innovator_engine",
+      "iteration_manager",
+      "kg_integrator",
+      "kg_reasoner",
+      "memory_auto_fix",
+      "plan-auto-optimizer",
+      "pre_commit_hook",
+      "security_auditor",
+      "security_auto_fixer",
+      "smart_scheduler",
+      "smart_workflow_optimizer",
+      "test_enhancer",
+      "tool_orchestrator",
+      "ultimate_memory_search_v2",
+      "windows_task_scheduler",
+      "workflow_engine_v2",
+      "workflow_enhancer",
+      "workflow_manager",
+      "workflow_server",
+      "workflow_template_gen",
+      "workflow_visualizer_web"
+    ],
+    "integration": [
+      "api_gateway",
+      "arxiv_collector_v2",
+      "async_executor",
+      "core_system_test",
+      "defuddle_integration",
+      "dialog_integrator",
+      "memory_prefetcher",
+      "tool_consolidator",
+      "tool_integration",
+      "ultimate_memory_search_v3",
+      "unified_api"
+    ],
+    "deployment": [
+      "autonomous_decision",
+      "auto_deploy",
+      "auto_deployer",
+      "ci_cd_pipeline",
+      "dashboard_decision_timeline",
+      "decision_optimizer",
+      "explainable_ai",
+      "memory_association"
+    ],
+    "monitoring": [
+      "cache_observability",
+      "dashboard_anomaly_alerts",
+      "dashboard_health_widget",
+      "dashboard_integration",
+      "memory-dashboard",
+      "memory_health_monitor",
+      "meta_cognition_monitor",
+      "perf_dashboard",
+      "phase4_dashboard",
+      "real_time_monitor",
+      "resource_monitor",
+      "self_iter_dashboard",
+      "session-check",
+      "system_health_checker",
+      "unified_monitor"
+    ],
+    "utility": [
+      "config_center",
+      "config_center_v2",
+      "config_manager",
+      "security_validator"
+    ],
+    "optimization": [
+      "enhanced_canvas_generator",
+      "kg_enhancer",
+      "meta_learning_optimizer",
+      "rl_ttl_optimizer",
+      "ultimate_memory_search",
+      "ultra_fast_memory_search"
+    ]
+  },
+  "integration_suggestions": [
+    {
+      "type": "merge_small_tools",
+      "category": "other",
+      "tools": [
+        "active-learning-trigger",
+        "batch_card_generator",
+        "batch_processor_v2",
+        "batch_security_fixer",
+        "complete_path_fixer",
+        "context_cli",
+        "context_compressor",
+        "daily_brief_generator",
+        "download_qwen_model",
+        "effect_tracker",
+        "fix_workspace_paths",
+        "install_requirements",
+        "knowledge-graph-builder",
+        "learning-quality-assessor",
+        "local_qwen_inference",
+        "master_orchestrator",
+        "memory-distiller",
+        "memory-maintenance",
+        "memory-ops",
+        "memory-quality-assessor",
+        "memory-search-v2",
+        "notification_router",
+        "ollama_qwen_test",
+        "path_interceptor",
+        "path_security_fixer",
+        "plan-quality-assessor",
+        "quick_security_fix",
+        "safedir",
+        "safe_write",
+        "sensitive_content_router",
+        "smart-review-reminder",
+        "task_priority_scorer",
+        "workspace",
+        "workspace_init"
+      ],
+      "impact": "medium",
+      "effort": "medium",
+      "description": "Merge 34 small other tools"
+    },
+    {
+      "type": "merge_small_tools",
+      "category": "data",
+      "tools": [
+        "memory_search_cached",
+        "semantic_cache"
+      ],
+      "impact": "medium",
+      "effort": "medium",
+      "description": "Merge 2 small data tools"
+    },
+    {
+      "type": "merge_small_tools",
+      "category": "analysis",
+      "tools": [
+        "feishu_report_generator",
+        "health_predictor",
+        "memory_performance_profiler",
+        "security_reporter"
+      ],
+      "impact": "medium",
+      "effort": "medium",
+      "description": "Merge 4 small analysis tools"
+    },
+    {
+      "type": "merge_small_tools",
+      "category": "automation",
+      "tools": [
+        "auto_signal_extractor",
+        "cron_manager",
+        "demo_tool",
+        "git_workflow",
+        "heartbeat_workflow",
+        "plan-auto-optimizer",
+        "pre_commit_hook",
+        "workflow_server"
+      ],
+      "impact": "medium",
+      "effort": "medium",
+      "description": "Merge 8 small automation tools"
+    },
+    {
+      "type": "merge_small_tools",
+      "category": "integration",
+      "tools": [
+        "async_executor",
+        "dialog_integrator",
+        "memory_prefetcher"
+      ],
+      "impact": "medium",
+      "effort": "medium",
+      "description": "Merge 3 small integration tools"
+    },
+    {
+      "type": "merge_small_tools",
+      "category": "deployment",
+      "tools": [
+        "dashboard_decision_timeline",
+        "decision_optimizer"
+      ],
+      "impact": "medium",
+      "effort": "medium",
+      "description": "Merge 2 small deployment tools"
+    },
+    {
+      "type": "merge_small_tools",
+      "category": "monitoring",
+      "tools": [
+        "dashboard_anomaly_alerts",
+        "dashboard_health_widget",
+        "phase4_dashboard",
+        "session-check"
+      ],
+      "impact": "medium",
+      "effort": "medium",
+      "description": "Merge 4 small monitoring tools"
+    },
+    {
+      "type": "add_cli_interface",
+      "tools": [
+        "active-learning-trigger",
+        "async_executor",
+        "auto_signal_extractor",
+        "batch_security_fixer",
+        "demo_tool",
+        "dialog_integrator",
+        "effect_tracker",
+        "fix_workspace_paths",
+        "knowledge-graph-builder",
+        "learner-assistant-v2"
+      ],
+      "impact": "medium",
+      "effort": "low",
+      "description": "Add CLI interface to 30 tools"
+    }
+  ],
+  "top_dependencies": {
+    "paramiko": 1,
+    "requests": 1
+  }
+}

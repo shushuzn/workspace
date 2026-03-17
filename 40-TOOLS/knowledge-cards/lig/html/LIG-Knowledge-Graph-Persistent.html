@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIG 知识图谱 (持久化)</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);overflow:hidden}
+        .container{width:100vw;height:100vh;position:relative}#graph{width:100%;height:100%}
+        .header{position:absolute;top:20px;left:20px;background:rgba(255,255,255,0.95);padding:20px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:100;max-width:480px;max-height:90vh;overflow-y:auto}
+        .header h1{font-size:18px;color:#333;margin-bottom:10px;border-bottom:3px solid #667eea;padding-bottom:10px}
+        .header p{font-size:12px;color:#666;line-height:1.5}
+        .legend{position:absolute;bottom:20px;left:20px;background:rgba(255,255,255,0.95);padding:15px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:100;max-height:350px;overflow-y:auto}
+        .legend h3{font-size:13px;color:#333;margin-bottom:8px}
+        .legend-item{display:flex;align-items:center;margin:6px 0;font-size:11px;cursor:pointer}
+        .legend-color{width:14px;height:14px;border-radius:50%;margin-right:8px}
+        .controls{position:absolute;top:20px;right:20px;background:rgba(255,255,255,0.95);padding:12px;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.2);z-index:100;min-width:210px;max-height:80vh;overflow-y:auto}
+        .controls button{display:block;width:100%;padding:6px 12px;margin:4px 0;background:#667eea;color:white;border:none;border-radius:5px;cursor:pointer;font-size:12px;transition:background 0.3s}
+        .controls button:hover{background:#5568d3}.controls button:disabled{background:#ccc;cursor:not-allowed}
+        .tooltip{position:absolute;background:rgba(0,0,0,0.9);color:white;padding:10px 14px;border-radius:6px;font-size:12px;pointer-events:none;opacity:0;transition:opacity 0.3s;z-index:1000;max-width:280px;line-height:1.4}
+        .node{cursor:pointer;transition:opacity 0.3s}.label{font-size:10px;font-weight:500;pointer-events:none;text-anchor:middle;fill:white;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
+        .stats{margin-top:12px;padding-top:12px;border-top:1px solid #ddd}
+        .stat-item{display:flex;justify-content:space-between;margin:4px 0;font-size:11px}
+        .stat-value{font-weight:bold;color:#667eea}
+        .slider-control{margin-top:8px;padding-top:8px;border-top:1px solid #eee}
+        .slider-control label{font-size:11px;display:block;margin-bottom:4px}
+        .slider-control input[type="range"]{width:100%}.slider-value{font-size:10px;color:#667eea;text-align:right}
+        .status-bar{margin-top:8px;padding:6px;background:#f0f4ff;border-radius:4px;font-size:11px}
+        .status-indicator{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+        .status-idle{background:#4CAF50}.status-running{background:#FF9800;animation:pulse 1s infinite}.status-done{background:#2196F3}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+        .progress-bar{width:100%;height:4px;background:#e0e0e0;border-radius:2px;margin-top:4px;overflow:hidden}
+        .progress-fill{height:100%;background:linear-gradient(90deg,#667eea,#764ba2);width:0%;transition:width 0.3s}
+        .perf-stats{margin-top:8px;padding:6px;background:#e8f5e9;border-radius:4px;font-size:10px}
+        .perf-item{display:flex;justify-content:space-between;margin:2px 0}
+        .perf-label{color:#666}.perf-value{font-weight:bold;color:#2e7d32}
+        .mode-badge{display:inline-block;padding:2px 6px;background:#667eea;color:white;border-radius:3px;font-size:10px;margin-left:6px}
+        .chart-container{margin-top:12px;padding:10px;background:#f5f5f5;border-radius:6px}
+        .chart-title{font-size:11px;font-weight:bold;margin-bottom:8px;color:#333}
+        .chart{width:100%;height:100px;background:white;border-radius:4px;position:relative}
+        .chart-line{position:absolute;bottom:0;left:0;width:100%;height:100%;pointer-events:none}
+        .storage-panel{margin-top:12px;padding:10px;background:#fff3e0;border-radius:6px;font-size:10px}
+        .storage-title{font-size:11px;font-weight:bold;margin-bottom:6px;color:#e65100}
+        .storage-item{display:flex;justify-content:space-between;margin:3px 0}
+        .benchmark-btn{background:#ff5722!important}
+        .export-btn{background:#009688!important}
+        .import-btn{background:#795548!important}
+        .adaptive-badge{display:inline-block;padding:2px 6px;background:#4caf50;color:white;border-radius:3px;font-size:9px;margin-left:4px}
+        #fileInput{display:none}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔬 LIG 知识图谱 <span class="mode-badge">持久化</span><span class="adaptive-badge" id="persistBadge">已保存</span></h1>
+            <p><strong>localStorage 持久化学习样本</strong></p>
+            <p style="margin-top:8px;font-size:11px;color:#888;">刷新页面不丢失历史数据</p>
+            <div class="stats">
+                <div class="stat-item"><span>节点:</span><span class="stat-value" id="nodeCount">0</span></div>
+                <div class="stat-item"><span>边:</span><span class="stat-value" id="linkCount">0</span></div>
+                <div class="stat-item"><span>FPS:</span><span class="stat-value" id="fpsCount">0</span></div>
+                <div class="stat-item"><span>当前阈值:</span><span class="stat-value" id="currentThreshold">-</span></div>
+                <div class="stat-item"><span>学习样本:</span><span class="stat-value" id="sampleCount">0</span></div>
+                <div class="stat-item"><span>推荐模式:</span><span class="stat-value" id="recommendedMode">-</span></div>
+            </div>
+            <div class="status-bar">
+                <div><span class="status-indicator status-idle" id="statusIndicator"></span><span id="statusText">就绪</span></div>
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+            </div>
+            <div class="perf-stats" id="perfStats" style="display:none">
+                <div class="perf-item"><span class="perf-label">Standard:</span><span class="perf-value" id="stdTime">-</span></div>
+                <div class="perf-item"><span class="perf-label">Transferable:</span><span class="perf-value" id="transTime">-</span></div>
+                <div class="perf-item"><span class="perf-label">最优:</span><span class="perf-value" id="bestMode">-</span></div>
+            </div>
+            <div class="chart-container">
+                <div class="chart-title">📊 阈值学习历史</div>
+                <div class="chart"><svg class="chart-line" id="thresholdChart"></svg></div>
+            </div>
+            <div class="storage-panel">
+                <div class="storage-title">💾 存储状态</div>
+                <div class="storage-item"><span>样本数:</span><span class="stat-value" id="storageSamples">0</span></div>
+                <div class="storage-item"><span>存储大小:</span><span class="stat-value" id="storageSize">0 B</span></div>
+                <div class="storage-item"><span>最后更新:</span><span class="stat-value" id="lastUpdate">-</span></div>
+            </div>
+        </div>
+        
+        <div class="legend">
+            <h3>📍 节点类型 (点击筛选)</h3>
+            <div class="legend-item" onclick="toggleType('Material')"><div class="legend-color" style="background:#FF6B6B" id="legend-Material"></div><span>Material</span></div>
+            <div class="legend-item" onclick="toggleType('Device')"><div class="legend-color" style="background:#4ECDC4" id="legend-Device"></div><span>Device</span></div>
+            <div class="legend-item" onclick="toggleType('Signal')"><div class="legend-color" style="background:#45B7D1" id="legend-Signal"></div><span>Signal</span></div>
+            <div class="legend-item" onclick="toggleType('Technology')"><div class="legend-color" style="background:#FFA07A" id="legend-Technology"></div><span>Technology</span></div>
+            <div class="legend-item" onclick="toggleType('Application')"><div class="legend-color" style="background:#98D8C8" id="legend-Application"></div><span>Application</span></div>
+            <div class="legend-item" onclick="toggleType('Challenge')"><div class="legend-color" style="background:#F7DC6F" id="legend-Challenge"></div><span>Challenge</span></div>
+            <div class="legend-item" onclick="toggleType('Pathway')"><div class="legend-color" style="background:#BB8FCE" id="legend-Pathway"></div><span>Pathway</span></div>
+            <div style="margin-top:8px;text-align:center"><button onclick="showAllTypes()" style="padding:4px 8px;font-size:11px;cursor:pointer">显示全部</button></div>
+        </div>
+        
+        <div class="controls">
+            <button onclick="zoomIn()">🔍 放大</button>
+            <button onclick="zoomOut()">🔎 缩小</button>
+            <button onclick="resetZoom()">🔄 重置</button>
+            <button onclick="toggleLabels()">🏷️ 标签</button>
+            <button onclick="highlightLIG()">✨ 聚焦 LIG</button>
+            <button onclick="runBenchmark()" id="benchmarkBtn" class="benchmark-btn">🧪 运行基准测试</button>
+            <button onclick="runFDEB()" id="runBtn">📦 运行 FDEB</button>
+            <button onclick="stopFDEB()" id="stopBtn" disabled>⏹️ 停止</button>
+            <button onclick="exportSamples()" id="exportBtn" class="export-btn">📤 导出样本</button>
+            <button onclick="importSamples()" id="importBtn" class="import-btn">📥 导入样本</button>
+            <button onclick="resetSamples()" id="resetBtn" style="background:#f44336">🗑️ 清除存储</button>
+            <button onclick="togglePersist()" id="persistBtn" style="background:#4caf50">💾 持久化：ON</button>
+            <button onclick="toggleDebug()" id="debugBtn" style="background:#9c27b0">🐛 调试</button>
+            <input type="file" id="fileInput" accept=".json" onchange="handleFileImport(event)">
+            <div class="slider-control">
+                <label>📊 最小阈值</label>
+                <input type="range" min="10" max="100" step="5" value="20" oninput="updateMinThreshold(this.value)">
+                <div class="slider-value" id="minThresholdValue">20</div>
+            </div>
+            <div class="slider-control">
+                <label>📊 最大阈值</label>
+                <input type="range" min="100" max="500" step="10" value="200" oninput="updateMaxThreshold(this.value)">
+                <div class="slider-value" id="maxThresholdValue">200</div>
+            </div>
+            <div class="slider-control">
+                <label>📦 Bundling 强度</label>
+                <input type="range" min="0" max="1" step="0.1" value="0.6" oninput="updateBundling(this.value)">
+                <div class="slider-value" id="bundlingValue">0.6</div>
+            </div>
+            <div class="slider-control">
+                <label>✂️ 分割段数</label>
+                <input type="range" min="3" max="10" step="1" value="5" oninput="updateDivisions(this.value)">
+                <div class="slider-value" id="divisionsValue">5</div>
+            </div>
+            <div class="slider-control">
+                <label>🔄 迭代次数</label>
+                <input type="range" min="5" max="30" step="5" value="15" oninput="updateIterations(this.value)">
+                <div class="slider-value" id="iterationsValue">15</div>
+            </div>
+        </div>
+        
+        <div id="graph"></div>
+        <div class="tooltip" id="tooltip"></div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        const graphData = {
+            nodes: [
+                {id:"LIG",type:"Material",label:"LIG",desc:"3D 多孔石墨烯",size:35},
+                {id:"PI",type:"Material",label:"PI",desc:"聚酰亚胺前驱体",size:18},
+                {id:"PDMS",type:"Material",label:"PDMS",desc:"柔性基底",size:18},
+                {id:"CuO",type:"Material",label:"CuO",desc:"氧化铜",size:20},
+                {id:"TMD",type:"Material",label:"TMD",desc:"过渡金属二硫化物",size:18},
+                {id:"GOx",type:"Material",label:"GOx",desc:"葡萄糖氧化酶",size:16},
+                {id:"Pt_Black",type:"Material",label:"黑铂",desc:"低阻抗涂层",size:16},
+                {id:"Gas_Sensor",type:"Device",label:"气体传感器",desc:"呼出气检测",size:23},
+                {id:"Neural_Probe",type:"Device",label:"神经探针",desc:"多模态记录",size:23},
+                {id:"Tumor_Patch",type:"Device",label:"肿瘤贴片",desc:"光热治疗",size:23},
+                {id:"Biosensor",type:"Device",label:"生物传感器",desc:"酶基传感",size:23},
+                {id:"Wearable",type:"Device",label:"可穿戴",desc:"健康监控",size:22},
+                {id:"Cu2+",type:"Signal",label:"Cu²⁺",desc:"铜离子",size:18},
+                {id:"ROS",type:"Signal",label:"ROS",desc:"活性氧",size:18},
+                {id:"Glucose",type:"Signal",label:"葡萄糖",desc:"代谢标志物",size:18},
+                {id:"Neural_Spike",type:"Signal",label:"神经尖峰",desc:"动作电位",size:16},
+                {id:"ECG",type:"Signal",label:"ECG",desc:"心电图",size:16},
+                {id:"EMG",type:"Signal",label:"EMG",desc:"肌电",size:16},
+                {id:"Gas_Biomarker",type:"Signal",label:"气体标志物",desc:"呼出气标志物",size:18},
+                {id:"Laser_Writing",type:"Technology",label:"激光直写",desc:"CO₂/UV 激光",size:22},
+                {id:"Nano_Composite",type:"Technology",label:"纳米复合",desc:"掺杂改性",size:18},
+                {id:"Encapsulation",type:"Technology",label:"封装",desc:"半透膜",size:18},
+                {id:"Wireless",type:"Technology",label:"无线",desc:"BLE/NFC",size:18},
+                {id:"Three_Phase",type:"Technology",label:"三相界面",desc:"大气氧 + 液体",size:18},
+                {id:"R2R",type:"Technology",label:"卷对卷",desc:"大规模制造",size:16},
+                {id:"Health_Monitoring",type:"Application",label:"健康监控",desc:"实时监测",size:22},
+                {id:"Disease_Diagnosis",type:"Application",label:"疾病诊断",desc:"早期检测",size:20},
+                {id:"Photothermal",type:"Application",label:"光热治疗",desc:"低温光疗",size:20},
+                {id:"Neural_Recording",type:"Application",label:"神经记录",desc:"脑内信号",size:20},
+                {id:"Environmental",type:"Application",label:"环境传感",desc:"空气质量",size:18},
+                {id:"Melanoma",type:"Application",label:"黑色素瘤",desc:"皮肤癌",size:18},
+                {id:"Neuro_Disorder",type:"Application",label:"神经疾病",desc:"癫痫/帕金森",size:18},
+                {id:"Stability",type:"Challenge",label:"稳定性",desc:">30 天数据缺失",size:20},
+                {id:"Scalability",type:"Challenge",label:"量产",desc:"直写速度慢",size:18},
+                {id:"Humidity",type:"Challenge",label:"湿度",desc:"需封装",size:18},
+                {id:"Selectivity",type:"Challenge",label:"选择性",desc:"多信号区分",size:18},
+                {id:"Standardization",type:"Challenge",label:"标准化",desc:"统一标准",size:16},
+                {id:"Cuproptosis",type:"Pathway",label:"铜死亡",desc:"铜诱导死亡",size:20},
+                {id:"Apoptosis",type:"Pathway",label:"凋亡",desc:"程序性死亡",size:18},
+                {id:"Ferroptosis",type:"Pathway",label:"铁死亡",desc:"铁依赖死亡",size:18},
+                {id:"Gas_Adsorption",type:"Pathway",label:"气体吸附",desc:"表面吸附",size:18},
+                {id:"Enzyme_Reaction",type:"Pathway",label:"酶反应",desc:"催化反应",size:18}
+            ],
+            links: [
+                {source:"PI",target:"LIG",value:3},{source:"Laser_Writing",target:"LIG",value:3},
+                {source:"TMD",target:"LIG",value:2},{source:"Nano_Composite",target:"LIG",value:2},
+                {source:"PDMS",target:"LIG",value:2},{source:"LIG",target:"Gas_Sensor",value:3},
+                {source:"LIG",target:"Neural_Probe",value:3},{source:"LIG",target:"Tumor_Patch",value:3},
+                {source:"LIG",target:"Biosensor",value:3},{source:"LIG",target:"Wearable",value:2},
+                {source:"GOx",target:"Neural_Probe",value:2},{source:"Pt_Black",target:"Neural_Probe",value:2},
+                {source:"Neural_Probe",target:"Glucose",value:2},{source:"Neural_Probe",target:"Neural_Spike",value:2},
+                {source:"CuO",target:"Tumor_Patch",value:3},{source:"Tumor_Patch",target:"Cu2+",value:3},
+                {source:"Cu2+",target:"ROS",value:2},{source:"ROS",target:"Cuproptosis",value:2},
+                {source:"ROS",target:"Apoptosis",value:2},{source:"ROS",target:"Ferroptosis",value:2},
+                {source:"Tumor_Patch",target:"Melanoma",value:3},{source:"Tumor_Patch",target:"Photothermal",value:2},
+                {source:"Gas_Sensor",target:"Gas_Biomarker",value:2},{source:"Gas_Adsorption",target:"Gas_Sensor",value:2},
+                {source:"Encapsulation",target:"Gas_Sensor",value:2},{source:"Three_Phase",target:"Biosensor",value:2},
+                {source:"Enzyme_Reaction",target:"Biosensor",value:2},{source:"Wearable",target:"ECG",value:2},
+                {source:"Wearable",target:"EMG",value:2},{source:"Wireless",target:"Wearable",value:2},
+                {source:"Gas_Sensor",target:"Health_Monitoring",value:2},{source:"Gas_Sensor",target:"Disease_Diagnosis",value:2},
+                {source:"Neural_Probe",target:"Neural_Recording",value:2},{source:"Neural_Probe",target:"Neuro_Disorder",value:2},
+                {source:"Wearable",target:"Health_Monitoring",value:2},{source:"Gas_Sensor",target:"Environmental",value:1},
+                {source:"Stability",target:"LIG",value:2},{source:"Scalability",target:"Laser_Writing",value:2},
+                {source:"Humidity",target:"Gas_Sensor",value:2},{source:"Selectivity",target:"Gas_Sensor",value:2},
+                {source:"Standardization",target:"Wearable",value:1},{source:"R2R",target:"Scalability",value:2},
+                {source:"Encapsulation",target:"Humidity",value:2},{source:"Nano_Composite",target:"Selectivity",value:2}
+            ]
+        };
+        
+        const colorMap = {"Material":"#FF6B6B","Device":"#4ECDC4","Signal":"#45B7D1","Technology":"#FFA07A","Application":"#98D8C8","Challenge":"#F7DC6F","Pathway":"#BB8FCE"};
+        const clusterConfig = {"Material":{x:-180,y:-130},"Device":{x:180,y:-130},"Signal":{x:-180,y:130},"Technology":{x:180,y:130},"Application":{x:0,y:-220},"Challenge":{x:0,y:220},"Pathway":{x:270,y:0}};
+        
+        let worker, workerReady = false, persistMode = true;
+        let currentThreshold = 50, minThreshold = 20, maxThreshold = 200;
+        let performanceSamples = [], workerEdges = [], isRunning = false;
+        let bundlingStrength = 0.6, divisions = 5, iterations = 15, configDebug = false;
+        
+        function initWorker() {
+            try {
+                worker = new Worker('lig-worker-persistent.js');
+                worker.onmessage = handleWorkerMessage;
+                worker.onerror = function(e) {
+                    console.error('[Main] Worker error:', e);
+                    setWorkerStatus('idle', 'Worker 错误');
+                    document.getElementById('runBtn').disabled = false;
+                    document.getElementById('stopBtn').disabled = true;
+                    isRunning = false;
+                };
+            } catch (error) {
+                console.error('[Main] Worker init failed:', error);
+                worker = null;
+            }
+        }
+        
+        function handleWorkerMessage(e) {
+            const {type, progress, edges, controlPointsBuffer, pointCount, edgeCount, config, message, perfStats, results, adaptation, threshold, samples, version, loadedSamples, storageStats, loaded, json, success, error, count} = e.data;
+            
+            if (type === 'READY') {
+                workerReady = true;
+                console.log('[Main] Worker ready:', version, '- Loaded samples:', loadedSamples);
+                currentThreshold = threshold;
+                updateThresholdDisplay();
+                if (storageStats) updateStorageDisplay(storageStats);
+                setWorkerStatus('idle', '就绪');
+                setTimeout(runBenchmark, 500);
+            } else if (type === 'BENCHMARK_COMPLETE') {
+                showBenchmarkResults(results, adaptation);
+                currentThreshold = threshold;
+                performanceSamples = samples || [];
+                updateThresholdDisplay();
+                if (storageStats) updateStorageDisplay(storageStats);
+                drawThresholdChart();
+                document.getElementById('benchmarkBtn').disabled = false;
+                document.getElementById('benchmarkBtn').textContent = '🧪 重新测试';
+            } else if (type === 'PROGRESS') {
+                document.getElementById('progressFill').style.width = progress + '%';
+                document.getElementById('statusText').textContent = `FDEB 计算中... ${Math.round(progress)}%`;
+                workerEdges = controlPointsBuffer ? parseControlPoints(controlPointsBuffer, edgeCount) : edges;
+            } else if (type === 'COMPLETE') {
+                workerEdges = controlPointsBuffer ? parseControlPoints(controlPointsBuffer, edgeCount) : edges;
+                updateLinkPaths();
+                setWorkerStatus('done', 'FDEB 完成');
+                if (perfStats) showPerfStats(perfStats);
+                document.getElementById('runBtn').disabled = false;
+                document.getElementById('stopBtn').disabled = true;
+                isRunning = false;
+            } else if (type === 'STOPPED') {
+                setWorkerStatus('idle', '已停止');
+                document.getElementById('runBtn').disabled = false;
+                document.getElementById('stopBtn').disabled = true;
+                isRunning = false;
+            } else if (type === 'CONFIG_UPDATED') {
+                if (config.persistSamples !== undefined) {
+                    persistMode = config.persistSamples;
+                    updatePersistButton();
+                }
+                if (config.transferableThreshold !== undefined) {
+                    currentThreshold = config.transferableThreshold;
+                    updateThresholdDisplay();
+                }
+                if (config.storageStats) {
+                    updateStorageDisplay(config.storageStats);
+                }
+            } else if (type === 'SAMPLES') {
+                performanceSamples = samples || [];
+                drawThresholdChart();
+                if (storageStats) updateStorageDisplay(storageStats);
+            } else if (type === 'SAMPLES_RESET') {
+                performanceSamples = [];
+                drawThresholdChart();
+                if (storageStats) updateStorageDisplay(storageStats);
+            } else if (type === 'SAMPLES_LOADED') {
+                if (loaded) {
+                    performanceSamples = loaded.samples || [];
+                    currentThreshold = loaded.threshold || currentThreshold;
+                    updateThresholdDisplay();
+                    drawThresholdChart();
+                    console.log('[Main] Loaded', performanceSamples.length, 'samples from storage');
+                }
+            } else if (type === 'EXPORT_DATA') {
+                downloadJSON(json, 'lig-fdeb-samples.json');
+                document.getElementById('exportBtn').disabled = false;
+            } else if (type === 'IMPORT_RESULT') {
+                if (success) {
+                    performanceSamples = samples || [];
+                    updateThresholdDisplay();
+                    drawThresholdChart();
+                    alert(`✅ 成功导入 ${count} 个样本`);
+                } else {
+                    alert(`❌ 导入失败：${error}`);
+                }
+                document.getElementById('importBtn').disabled = false;
+            } else if (type === 'STORAGE_STATS') {
+                updateStorageDisplay(stats);
+            } else if (type === 'ERROR') {
+                setWorkerStatus('idle', '错误');
+                document.getElementById('runBtn').disabled = false;
+                isRunning = false;
+            }
+        }
+        
+        function parseControlPoints(buffer, edgeCount) {
+            const view = new DataView(buffer);
+            const edges = [];
+            let offset = 0;
+            for (let i = 0; i < edgeCount; i++) {
+                const cpCount = view.getUint32(offset, true); offset += 4;
+                const controlPoints = [];
+                for (let j = 0; j < cpCount; j++) {
+                    const x = view.getFloat32(offset, true); offset += 4;
+                    const y = view.getFloat32(offset, true); offset += 4;
+                    controlPoints.push({x, y});
+                }
+                edges.push({id: i, controlPoints});
+            }
+            return edges;
+        }
+        
+        function serializeNodes(nodes) {
+            const encoder = new TextEncoder();
+            let size = 4;
+            nodes.forEach(n => { const b = encoder.encode(n.id); size += 1 + b.length + 8; });
+            const buffer = new ArrayBuffer(size);
+            const view = new DataView(buffer);
+            let offset = 0;
+            view.setUint32(offset, nodes.length, true); offset += 4;
+            nodes.forEach(n => {
+                const b = encoder.encode(n.id);
+                view.setUint8(offset, b.length); offset++;
+                new Uint8Array(buffer, offset, b.length).set(b); offset += b.length;
+                view.setFloat32(offset, n.x, true); offset += 4;
+                view.setFloat32(offset, n.y, true); offset += 4;
+            });
+            return buffer;
+        }
+        
+        function serializeEdges(links, nodes) {
+            const buffer = new ArrayBuffer(4 + links.length * 8);
+            const view = new DataView(buffer);
+            let offset = 4;
+            view.setUint32(0, links.length, true);
+            links.forEach(link => {
+                const srcIdx = nodes.findIndex(n => n.id === link.source);
+                const tgtIdx = nodes.findIndex(n => n.id === link.target);
+                view.setUint16(offset, srcIdx, true); offset += 2;
+                view.setUint16(offset, tgtIdx, true); offset += 2;
+                view.setFloat32(offset, link.value, true); offset += 4;
+            });
+            return buffer;
+        }
+        
+        function setWorkerStatus(status, text) {
+            const indicator = document.getElementById('statusIndicator');
+            indicator.className = `status-indicator status-${status}`;
+            document.getElementById('statusText').textContent = text;
+        }
+        
+        function runBenchmark() {
+            if (!workerReady) return;
+            document.getElementById('benchmarkBtn').disabled = true;
+            document.getElementById('benchmarkBtn').textContent = '🧪 测试中...';
+            setWorkerStatus('running', '基准测试中...');
+            worker.postMessage({
+                type: 'RUN_BENCHMARK',
+                data: { nodes: graphData.nodes.map(n=>({id:n.id,x:n.x,y:n.y})), links: graphData.links }
+            });
+        }
+        
+        function showBenchmarkResults(results, adaptation) {
+            document.getElementById('perfStats').style.display = 'block';
+            document.getElementById('stdTime').textContent = results.standardTime.toFixed(2) + 'ms';
+            document.getElementById('transTime').textContent = results.transferableTime.toFixed(2) + 'ms';
+            document.getElementById('bestMode').textContent = results.recommended;
+            document.getElementById('recommendedMode').textContent = results.recommended;
+        }
+        
+        function showPerfStats(stats) {
+            document.getElementById('perfStats').style.display = 'block';
+            document.getElementById('stdTime').textContent = stats.transferTime.toFixed(2) + 'ms';
+            document.getElementById('transTime').textContent = stats.computeTime.toFixed(2) + 'ms';
+        }
+        
+        function updateThresholdDisplay() {
+            document.getElementById('currentThreshold').textContent = currentThreshold;
+            document.getElementById('sampleCount').textContent = performanceSamples.length;
+        }
+        
+        function updateStorageDisplay(stats) {
+            document.getElementById('storageSamples').textContent = stats.samplesCount || 0;
+            document.getElementById('storageSize').textContent = formatSize(stats.storageSize || 0);
+            document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+        }
+        
+        function formatSize(bytes) {
+            if (bytes < 1024) return bytes + ' B';
+            if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+            return (bytes/1024/1024).toFixed(1) + ' MB';
+        }
+        
+        function drawThresholdChart() {
+            const svg = document.getElementById('thresholdChart');
+            svg.innerHTML = '';
+            if (performanceSamples.length < 2) return;
+            
+            const width = svg.clientWidth || 300;
+            const height = svg.clientHeight || 100;
+            const padding = 10;
+            
+            const maxTime = Math.max(...performanceSamples.map(s => Math.max(s.stdTime, s.transTime)));
+            const minTime = Math.min(...performanceSamples.map(s => Math.min(s.stdTime, s.transTime)));
+            const timeRange = maxTime - minTime || 1;
+            
+            let stdPath = '', transPath = '';
+            performanceSamples.forEach((s, i) => {
+                const x = padding + (i / (performanceSamples.length - 1)) * (width - padding * 2);
+                const stdY = height - padding - ((s.stdTime - minTime) / timeRange) * (height - padding * 2);
+                const transY = height - padding - ((s.transTime - minTime) / timeRange) * (height - padding * 2);
+                if (i === 0) { stdPath = `M${x},${stdY}`; transPath = `M${x},${transY}`; }
+                else { stdPath += ` L${x},${stdY}`; transPath += ` L${x},${transY}`; }
+            });
+            
+            const stdLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            stdLine.setAttribute('d', stdPath);
+            stdLine.setAttribute('fill', 'none');
+            stdLine.setAttribute('stroke', '#2196f3');
+            stdLine.setAttribute('stroke-width', '2');
+            svg.appendChild(stdLine);
+            
+            const transLine = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+            transLine.setAttribute('d', transPath);
+            transLine.setAttribute('fill', 'none');
+            transLine.setAttribute('stroke', '#ff5722');
+            transLine.setAttribute('stroke-width', '2');
+            svg.appendChild(transLine);
+        }
+        
+        function downloadJSON(json, filename) {
+            const blob = new Blob([json], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function exportSamples() {
+            document.getElementById('exportBtn').disabled = true;
+            worker.postMessage({type: 'EXPORT_SAMPLES'});
+        }
+        
+        function importSamples() {
+            document.getElementById('fileInput').click();
+        }
+        
+        function handleFileImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('importBtn').disabled = true;
+                worker.postMessage({type: 'IMPORT_SAMPLES', data: {json: e.target.result}});
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+        
+        function resetSamples() {
+            if (!confirm('确定要清除所有存储的样本吗？此操作不可恢复。')) return;
+            worker.postMessage({type: 'RESET_SAMPLES'});
+        }
+        
+        function togglePersist() {
+            persistMode = !persistMode;
+            updatePersistButton();
+            worker.postMessage({type: 'CONFIG', data: {persistSamples: persistMode}});
+        }
+        
+        function updatePersistButton() {
+            const btn = document.getElementById('persistBtn');
+            btn.textContent = `💾 持久化：${persistMode?'ON':'OFF'}`;
+            btn.style.background = persistMode ? '#4caf50' : '#9e9e9e';
+            document.getElementById('persistBadge').textContent = persistMode ? '已保存' : '临时';
+            document.getElementById('persistBadge').style.background = persistMode ? '#4caf50' : '#9e9e9e';
+        }
+        
+        const width = window.innerWidth, height = window.innerHeight;
+        const svg = d3.select("#graph").append("svg").attr("width",width).attr("height",height).attr("viewBox",[-width/2,-height/2,width,height]);
+        svg.append("defs").selectAll("marker").data(["end"]).enter().append("marker")
+            .attr("id","arrowhead").attr("viewBox","0 -5 10 10").attr("refX",24).attr("refY",0)
+            .attr("markerWidth",5).attr("markerHeight",5).attr("orient","auto")
+            .append("path").attr("fill","#999").attr("d","M0,-5L10,0L0,5");
+        
+        const g = svg.append("g");
+        const clusterBg = g.append("g");
+        Object.entries(clusterConfig).forEach(([type,c]) => {
+            clusterBg.append("ellipse").attr("cx",c.x).attr("cy",c.y).attr("rx",120).attr("ry",85)
+                .attr("fill",colorMap[type]).attr("opacity",0.08).attr("stroke",colorMap[type]).attr("stroke-width",1).attr("stroke-dasharray","5,5");
+        });
+        
+        const linkPath = g.append("g").selectAll("path").data(graphData.links).enter().append("path")
+            .attr("class","link").attr("fill","none").attr("stroke","#999")
+            .attr("stroke-width",d=>Math.sqrt(d.value)*2).attr("stroke-opacity",0.6).attr("marker-end","url(#arrowhead)");
+        
+        const node = g.append("g").selectAll("circle").data(graphData.nodes).enter().append("circle")
+            .attr("class","node").attr("r",d=>d.size).attr("fill",d=>colorMap[d.type])
+            .attr("stroke","#fff").attr("stroke-width",2)
+            .call(d3.drag().on("start",dragstarted).on("drag",dragged).on("end",dragended));
+        
+        const labels = g.append("g").selectAll("text").data(graphData.nodes).enter().append("text")
+            .attr("class","label").attr("dy",d=>d.size+12).text(d=>d.label).style("display","none");
+        
+        const tooltip = d3.select("#tooltip");
+        node.on("mouseover",e=>{tooltip.style("opacity",1).html(`<strong>${e.target.__data__.label}</strong><br/>${e.target.__data__.desc}`);})
+            .on("mousemove",e=>{tooltip.style("left",(e.pageX+12)+"px").style("top",(e.pageY-8)+"px");})
+            .on("mouseout",()=>tooltip.style("opacity",0));
+        
+        const simulation = d3.forceSimulation(graphData.nodes)
+            .force("link",d3.forceLink(graphData.links).id(d=>d.id).distance(90))
+            .force("charge",d3.forceManyBody().strength(-500))
+            .force("center",d3.forceCenter(0,0).strength(0.05))
+            .force("collide",d3.forceCollide().radius(d=>d.size+6).strength(0.5))
+            .force("x",d3.forceX(d=>clusterConfig[d.type].x).strength(1.8))
+            .force("y",d3.forceY(d=>clusterConfig[d.type].y).strength(1.8));
+        
+        simulation.on("tick",()=>{
+            node.attr("cx",d=>d.x).attr("cy",d=>d.y);
+            labels.attr("x",d=>d.x).attr("y",d=>d.y+d.size+12);
+            if(!isRunning&&workerEdges.length===0){
+                linkPath.attr("d",d=>`M${graphData.nodes.find(n=>n.id===d.source).x},${graphData.nodes.find(n=>n.id===d.source).y}L${graphData.nodes.find(n=>n.id===d.target).x},${graphData.nodes.find(n=>n.id===d.target).y}`);
+            }
+        });
+        
+        function updateLinkPaths(){
+            linkPath.attr("d",d=>{
+                const edge=workerEdges[d.index];
+                if(!edge||!edge.controlPoints||!edge.controlPoints.length)
+                    return `M${graphData.nodes.find(n=>n.id===d.source.id).x},${graphData.nodes.find(n=>n.id===d.source.id).y}L${graphData.nodes.find(n=>n.id===d.target.id).x},${graphData.nodes.find(n=>n.id===d.target.id).y}`;
+                const src=graphData.nodes[d.source], tgt=graphData.nodes[d.target];
+                const points=[src,...edge.controlPoints,tgt];
+                let path=`M${points[0].x},${points[0].y}`;
+                for(let i=1;i<points.length-1;i++){const xc=(points[i].x+points[i+1].x)/2,yc=(points[i].y+points[i+1].y)/2;path+=` Q${points[i].x},${points[i].y} ${xc},${yc}`;}
+                return path+`L${tgt.x},${tgt.y}`;
+            });
+        }
+        
+        function dragstarted(e,d){if(!e.active)simulation.alphaTarget(0.3).restart();d.fx=d.x;d.fy=d.y;}
+        function dragged(e,d){d.fx=e.x;d.fy=e.y;}
+        function dragended(e,d){if(!e.active)simulation.alphaTarget(0);d.fx=null;d.fy=null;}
+        
+        let currentScale=1;
+        function zoomIn(){currentScale*=1.3;g.transition().duration(300).attr("transform",`scale(${currentScale})`);}
+        function zoomOut(){currentScale/=1.3;g.transition().duration(300).attr("transform",`scale(${currentScale})`);}
+        function resetZoom(){currentScale=1;g.transition().duration(300).attr("transform","scale(1)");simulation.alpha(0.3).restart();}
+        let labelsVisible=false;
+        function toggleLabels(){labelsVisible=!labelsVisible;labels.style("display",labelsVisible?"block":"none");}
+        function highlightLIG(){node.transition().duration(300).attr("opacity",d=>d.id==="LIG"?1:0.3);linkPath.transition().duration(300).attr("opacity",d=>d.source.id==="LIG"||d.target.id==="LIG"?1:0.1);}
+        
+        function runFDEB(){
+            if(isRunning||!workerReady)return;
+            isRunning=true;
+            workerEdges=[];
+            setWorkerStatus('running','FDEB 计算中...');
+            document.getElementById('progressFill').style.width='0%';
+            document.getElementById('runBtn').disabled=true;
+            document.getElementById('stopBtn').disabled=false;
+            document.getElementById('perfStats').style.display='none';
+            
+            const useT = graphData.nodes.length >= currentThreshold;
+            console.log(`[Main] Running FDEB: ${useT?'Transferable':'Standard'} (threshold=${currentThreshold}, nodes=${graphData.nodes.length})`);
+            
+            if (useT) {
+                const nodesBuffer = serializeNodes(graphData.nodes.map(n=>({id:n.id,x:n.x,y:n.y})));
+                const edgesBuffer = serializeEdges(graphData.links, graphData.nodes);
+                worker.postMessage({type:'RUN_FDEB_HYBRID',nodes:graphData.nodes.map(n=>({id:n.id,x:n.x,y:n.y})),links:graphData.links,useTransferable:true},[nodesBuffer,edgesBuffer]);
+            } else {
+                worker.postMessage({type:'RUN_FDEB_HYBRID',nodes:graphData.nodes.map(n=>({id:n.id,x:n.x,y:n.y})),links:graphData.links,useTransferable:false});
+            }
+        }
+        
+        function stopFDEB(){if(!isRunning)return;worker.postMessage({type:'STOP'});}
+        
+        let activeTypes=new Set(Object.keys(colorMap));
+        function toggleType(type){if(activeTypes.has(type)){activeTypes.delete(type);document.getElementById(`legend-${type}`).style.opacity="0.3";}else{activeTypes.add(type);document.getElementById(`legend-${type}`).style.opacity="1";}updateVisibility();}
+        function showAllTypes(){activeTypes=new Set(Object.keys(colorMap));Object.keys(colorMap).forEach(t=>document.getElementById(`legend-${t}`).style.opacity="1");updateVisibility();}
+        function updateVisibility(){node.transition().duration(300).attr("opacity",d=>activeTypes.has(d.type)?1:0.1);linkPath.transition().duration(300).attr("opacity",d=>activeTypes.has(graphData.nodes.find(n=>n.id===d.source.id)?.type)&&activeTypes.has(graphData.nodes.find(n=>n.id===d.target.id)?.type)?0.6:0.1);}
+        
+        function updateBundling(v){bundlingStrength=parseFloat(v);document.getElementById("bundlingValue").textContent=v;worker.postMessage({type:'CONFIG',data:{bundlingStrength}});}
+        function updateDivisions(v){divisions=parseInt(v);document.getElementById("divisionsValue").textContent=v;worker.postMessage({type:'CONFIG',data:{divisions}});}
+        function updateIterations(v){iterations=parseInt(v);document.getElementById("iterationsValue").textContent=v;worker.postMessage({type:'CONFIG',data:{iterations}});}
+        function updateMinThreshold(v){minThreshold=parseInt(v);document.getElementById("minThresholdValue").textContent=v;worker.postMessage({type:'CONFIG',data:{minThreshold}});}
+        function updateMaxThreshold(v){maxThreshold=parseInt(v);document.getElementById("maxThresholdValue").textContent=v;worker.postMessage({type:'CONFIG',data:{maxThreshold}});}
+        function toggleDebug(){configDebug=!configDebug;worker.postMessage({type:'DEBUG',data:{enabled:configDebug}});console.log('[Main] Debug:',configDebug?'ON':'OFF');}
+        
+        let frameCount=0,lastTime=performance.now();
+        function countFPS(){frameCount++;const now=performance.now();if(now-lastTime>=1000){document.getElementById('fpsCount').textContent=frameCount;frameCount=0;lastTime=now;}requestAnimationFrame(countFPS);}
+        countFPS();
+        
+        svg.on("wheel",function(e){e.preventDefault();const delta=e.deltaY>0?0.9:1.1;currentScale*=delta;currentScale=Math.max(0.3,Math.min(3,currentScale));g.transition().duration(100).attr("transform",`scale(${currentScale})`);});
+        
+        document.getElementById("nodeCount").textContent=graphData.nodes.length;
+        document.getElementById("linkCount").textContent=graphData.links.length;
+        initWorker();
+    </script>
+</body>
+</html>

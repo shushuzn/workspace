@@ -1,0 +1,229 @@
+{
+  "timestamp": "2026-03-16T18:03:24.143708",
+  "system_stats": {
+    "sessions": 4,
+    "verified_claims": 2,
+    "verification_rate": 0.5,
+    "avg_confidence": 0.7322222222222223,
+    "avg_hallucination_score": 0.2677777777777777,
+    "hallucination_reduction": 46.44444444444446,
+    "kg_stats": {
+      "total_entities": 10,
+      "total_relations": 9,
+      "avg_relations_per_entity": 0.9,
+      "entity_types": {
+        "method": 5,
+        "research": 1,
+        "application": 1,
+        "system": 1,
+        "infrastructure": 1,
+        "tool": 1
+      },
+      "relation_types": {
+        "used_by": 1,
+        "inspired": 1,
+        "improves": 1,
+        "integrated": 1,
+        "supports": 1,
+        "analyzed_by": 1,
+        "uses": 1,
+        "complements": 1,
+        "populates": 1
+      }
+    }
+  },
+  "sessions": [
+    {
+      "id": "0a24a3d335ed",
+      "timestamp": "2026-03-16T18:03:24.142700",
+      "query": "Memory Distillation improves 7-Persona System efficiency",
+      "retrieval": {
+        "query": "Memory Distillation improves 7-Persona System efficiency",
+        "entities_found": [
+          "54fca890682c",
+          "bc0933e6bb96",
+          "3df526425ac8"
+        ],
+        "relations_traversed": [
+          "inspired",
+          "used_by",
+          "improves"
+        ],
+        "evidence_paths": [
+          [
+            "3df526425ac8",
+            "54fca890682c",
+            "bc0933e6bb96",
+            "c39adaf5be08"
+          ]
+        ],
+        "confidence": 0.7000000000000001,
+        "hops": 3
+      },
+      "verification": {
+        "id": "c6875ef00bd9",
+        "claim": "Memory Distillation improves 7-Persona System efficiency",
+        "entities": [
+          "54fca890682c",
+          "bc0933e6bb96",
+          "3df526425ac8"
+        ],
+        "relations": [
+          "inspired",
+          "used_by",
+          "improves"
+        ],
+        "verified": true,
+        "confidence": 0.9400000000000001,
+        "evidence_path": [
+          "['54fca890682c', 'bc0933e6bb96']"
+        ],
+        "hallucination_score": 0.05999999999999994,
+        "verified_at": "2026-03-16T18:03:24.142686"
+      },
+      "response": {
+        "query": "Memory Distillation improves 7-Persona System efficiency",
+        "response_type": "verified",
+        "confidence": "High confidence (94%)",
+        "entities_referenced": 3,
+        "evidence_paths": 1,
+        "hallucination_risk": "6%",
+        "generated_at": "2026-03-16T18:03:24.142694"
+      }
+    },
+    {
+      "id": "171caa7c6e42",
+      "timestamp": "2026-03-16T18:03:24.142769",
+      "query": "Self-Healing Code integrates with Stock Analysis",
+      "retrieval": {
+        "query": "Self-Healing Code integrates with Stock Analysis",
+        "entities_found": [
+          "62716bfe863f",
+          "4633e857e9f2"
+        ],
+        "relations_traversed": [],
+        "evidence_paths": [],
+        "confidence": 0.4,
+        "hops": 3
+      },
+      "verification": {
+        "id": "881965d6f74e",
+        "claim": "Self-Healing Code integrates with Stock Analysis",
+        "entities": [
+          "62716bfe863f",
+          "4633e857e9f2"
+        ],
+        "relations": [],
+        "verified": false,
+        "confidence": 0.5244444444444445,
+        "evidence_path": [],
+        "hallucination_score": 0.4755555555555555,
+        "verified_at": "2026-03-16T18:03:24.142757"
+      },
+      "response": {
+        "query": "Self-Healing Code integrates with Stock Analysis",
+        "response_type": "partially_verified",
+        "confidence": "Medium confidence (52%)",
+        "entities_referenced": 2,
+        "evidence_paths": 0,
+        "hallucination_risk": "48%",
+        "generated_at": "2026-03-16T18:03:24.142764"
+      }
+    },
+    {
+      "id": "1a1216637bed",
+      "timestamp": "2026-03-16T18:03:24.142827",
+      "query": "Knowledge Graph supports Memory Distillation",
+      "retrieval": {
+        "query": "Knowledge Graph supports Memory Distillation",
+        "entities_found": [
+          "54fca890682c",
+          "3df526425ac8",
+          "7c9d0136f446"
+        ],
+        "relations_traversed": [
+          "inspired",
+          "used_by",
+          "improves"
+        ],
+        "evidence_paths": [
+          [
+            "3df526425ac8",
+            "54fca890682c",
+            "bc0933e6bb96",
+            "c39adaf5be08"
+          ]
+        ],
+        "confidence": 0.7000000000000001,
+        "hops": 3
+      },
+      "verification": {
+        "id": "35946961f701",
+        "claim": "Knowledge Graph supports Memory Distillation",
+        "entities": [
+          "54fca890682c",
+          "3df526425ac8",
+          "7c9d0136f446"
+        ],
+        "relations": [
+          "inspired",
+          "used_by",
+          "improves"
+        ],
+        "verified": true,
+        "confidence": 0.9400000000000001,
+        "evidence_path": [],
+        "hallucination_score": 0.05999999999999994,
+        "verified_at": "2026-03-16T18:03:24.142817"
+      },
+      "response": {
+        "query": "Knowledge Graph supports Memory Distillation",
+        "response_type": "verified",
+        "confidence": "High confidence (94%)",
+        "entities_referenced": 3,
+        "evidence_paths": 0,
+        "hallucination_risk": "6%",
+        "generated_at": "2026-03-16T18:03:24.142822"
+      }
+    },
+    {
+      "id": "d479fec9452a",
+      "timestamp": "2026-03-16T18:03:24.142875",
+      "query": "arXiv Scanner populates Knowledge Graph daily",
+      "retrieval": {
+        "query": "arXiv Scanner populates Knowledge Graph daily",
+        "entities_found": [
+          "7c9d0136f446",
+          "18030d3616a4"
+        ],
+        "relations_traversed": [],
+        "evidence_paths": [],
+        "confidence": 0.4,
+        "hops": 3
+      },
+      "verification": {
+        "id": "181ac6b49632",
+        "claim": "arXiv Scanner populates Knowledge Graph daily",
+        "entities": [
+          "7c9d0136f446",
+          "18030d3616a4"
+        ],
+        "relations": [],
+        "verified": false,
+        "confidence": 0.5244444444444445,
+        "evidence_path": [],
+        "hallucination_score": 0.4755555555555555,
+        "verified_at": "2026-03-16T18:03:24.142866"
+      },
+      "response": {
+        "query": "arXiv Scanner populates Knowledge Graph daily",
+        "response_type": "partially_verified",
+        "confidence": "Medium confidence (52%)",
+        "entities_referenced": 2,
+        "evidence_paths": 0,
+        "hallucination_risk": "48%",
+        "generated_at": "2026-03-16T18:03:24.142871"
+      }
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "models": {
+    "classifier_v1": {
+      "id": "classifier_v1",
+      "type": "neural_network",
+      "feature_names": [
+        "feature_0",
+        "feature_1",
+        "feature_2",
+        "feature_3",
+        "feature_4"
+      ],
+      "registered_at": "2026-03-16T09:41:46.478555"
+    }
+  },
+  "last_updated": "2026-03-16T09:41:46.490287"
+}

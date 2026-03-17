@@ -1,0 +1,3077 @@
+{
+  "reviews": [
+    {
+      "timestamp": "2026-03-15T23:29:46.884239",
+      "directory": "30-scripts-tools",
+      "file_count": 66,
+      "results": [
+        {
+          "file": "30-scripts-tools\\active-learning-trigger.py",
+          "timestamp": "2026-03-15T23:29:46.773281",
+          "metrics": {
+            "lines_of_code": 210,
+            "total_lines": 266,
+            "complexity": 74,
+            "documentation_ratio": 0.18,
+            "function_count": 16,
+            "class_count": 1,
+            "import_count": 6
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 11 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 19 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 74)",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 84,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\anomaly_detector.py",
+          "timestamp": "2026-03-15T23:29:46.773917",
+          "metrics": {
+            "lines_of_code": 234,
+            "total_lines": 318,
+            "complexity": 58,
+            "documentation_ratio": 0.21,
+            "function_count": 16,
+            "class_count": 3,
+            "import_count": 7
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 82,
+              "message": "Line 82 exceeds 120 characters (123 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 252,
+              "message": "Function at line 252 is 67 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 11 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 10 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 58)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 80,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\async_executor.py",
+          "timestamp": "2026-03-15T23:29:46.777231",
+          "metrics": {
+            "lines_of_code": 182,
+            "total_lines": 256,
+            "complexity": 38,
+            "documentation_ratio": 0.18,
+            "function_count": 16,
+            "class_count": 2,
+            "import_count": 12
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 9 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 7 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 38)",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 84,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\automation_orchestrator.py",
+          "timestamp": "2026-03-15T23:29:46.779239",
+          "metrics": {
+            "lines_of_code": 343,
+            "total_lines": 429,
+            "complexity": 81,
+            "documentation_ratio": 0.11,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 10
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 44,
+              "message": "Function at line 44 is 87 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 143,
+              "message": "Function at line 143 is 73 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 216,
+              "message": "Function at line 216 is 68 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 44 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 48 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 81)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\autonomous_decision.py",
+          "timestamp": "2026-03-15T23:29:46.780249",
+          "metrics": {
+            "lines_of_code": 634,
+            "total_lines": 780,
+            "complexity": 60,
+            "documentation_ratio": 0.13,
+            "function_count": 17,
+            "class_count": 7,
+            "import_count": 11
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 671,
+              "message": "Line 671 exceeds 120 characters (132 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 485,
+              "message": "Function at line 485 is 58 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 675,
+              "message": "Function at line 675 is 106 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 52 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 35 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 60)",
+            "Consider splitting this file (634 LOC)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 72,
+          "grade": "C"
+        },
+        {
+          "file": "30-scripts-tools\\auto_distill.py",
+          "timestamp": "2026-03-15T23:29:46.783424",
+          "metrics": {
+            "lines_of_code": 446,
+            "total_lines": 571,
+            "complexity": 114,
+            "documentation_ratio": 0.13,
+            "function_count": 16,
+            "class_count": 3,
+            "import_count": 11
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 260,
+              "message": "Function at line 260 is 60 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 453,
+              "message": "Function at line 453 is 119 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 26 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 27 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 114)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\auto_signal_extractor.py",
+          "timestamp": "2026-03-15T23:29:46.787075",
+          "metrics": {
+            "lines_of_code": 145,
+            "total_lines": 204,
+            "complexity": 43,
+            "documentation_ratio": 0.23,
+            "function_count": 10,
+            "class_count": 1,
+            "import_count": 4
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 36,
+              "message": "Function at line 36 is 75 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 17 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 43)",
+            "Break into smaller functions",
+            "Use logging module instead of print"
+          ],
+          "score": 89,
+          "grade": "B+"
+        },
+        {
+          "file": "30-scripts-tools\\batch_card_generator.py",
+          "timestamp": "2026-03-15T23:29:46.787075",
+          "metrics": {
+            "lines_of_code": 147,
+            "total_lines": 197,
+            "complexity": 23,
+            "documentation_ratio": 0.26,
+            "function_count": 7,
+            "class_count": 2,
+            "import_count": 6
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 57,
+              "message": "Function at line 57 is 51 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 147,
+              "message": "Function at line 147 is 51 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 6 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 15 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 23)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 88,
+          "grade": "B+"
+        },
+        {
+          "file": "30-scripts-tools\\cache_manager.py",
+          "timestamp": "2026-03-15T23:29:46.787075",
+          "metrics": {
+            "lines_of_code": 265,
+            "total_lines": 360,
+            "complexity": 71,
+            "documentation_ratio": 0.24,
+            "function_count": 17,
+            "class_count": 1,
+            "import_count": 11
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 98,
+              "message": "Function at line 98 is 61 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 285,
+              "message": "Function at line 285 is 76 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 23 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 16 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 71)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 80,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\code_quality_reviewer.py",
+          "timestamp": "2026-03-15T23:29:46.791680",
+          "metrics": {
+            "lines_of_code": 372,
+            "total_lines": 517,
+            "complexity": 161,
+            "documentation_ratio": 0.25,
+            "function_count": 18,
+            "class_count": 2,
+            "import_count": 9
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 54,
+              "message": "Function at line 54 is 64 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 157,
+              "message": "Function at line 157 is 89 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 351,
+              "message": "Function at line 351 is 68 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 454,
+              "message": "Function at line 454 is 64 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 51 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 32 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 161)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 74,
+          "grade": "C"
+        },
+        {
+          "file": "30-scripts-tools\\code_reviewer.py",
+          "timestamp": "2026-03-15T23:29:46.794676",
+          "metrics": {
+            "lines_of_code": 379,
+            "total_lines": 484,
+            "complexity": 131,
+            "documentation_ratio": 0.12,
+            "function_count": 18,
+            "class_count": 2,
+            "import_count": 9
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 24 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 9 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 131)",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 84,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\critic_auto_fix.py",
+          "timestamp": "2026-03-15T23:29:46.794676",
+          "metrics": {
+            "lines_of_code": 345,
+            "total_lines": 413,
+            "complexity": 49,
+            "documentation_ratio": 0.1,
+            "function_count": 7,
+            "class_count": 2,
+            "import_count": 9
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 309,
+              "message": "Function at line 309 is 105 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 38 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 30 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 49)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 78,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\cron_manager.py",
+          "timestamp": "2026-03-15T23:29:46.794676",
+          "metrics": {
+            "lines_of_code": 179,
+            "total_lines": 238,
+            "complexity": 64,
+            "documentation_ratio": 0.16,
+            "function_count": 10,
+            "class_count": 2,
+            "import_count": 6
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 171,
+              "message": "Function at line 171 is 68 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 13 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 64)",
+            "Break into smaller functions",
+            "Use logging module instead of print"
+          ],
+          "score": 84,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\daily_brief_generator.py",
+          "timestamp": "2026-03-15T23:29:46.799865",
+          "metrics": {
+            "lines_of_code": 130,
+            "total_lines": 182,
+            "complexity": 30,
+            "documentation_ratio": 0.23,
+            "function_count": 7,
+            "class_count": 2,
+            "import_count": 7
+          },
+          "issues": [
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 9 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 30)",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 94,
+          "grade": "A"
+        },
+        {
+          "file": "30-scripts-tools\\dashboard_anomaly_alerts.py",
+          "timestamp": "2026-03-15T23:29:46.800875",
+          "metrics": {
+            "lines_of_code": 197,
+            "total_lines": 253,
+            "complexity": 62,
+            "documentation_ratio": 0.15,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 205,
+              "message": "Line 205 exceeds 120 characters (125 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 113,
+              "message": "Function at line 113 is 53 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 14 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 9 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 62)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\dashboard_decision_timeline.py",
+          "timestamp": "2026-03-15T23:29:46.800875",
+          "metrics": {
+            "lines_of_code": 152,
+            "total_lines": 201,
+            "complexity": 47,
+            "documentation_ratio": 0.17,
+            "function_count": 10,
+            "class_count": 1,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 99,
+              "message": "Line 99 exceeds 120 characters (128 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 15 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 8 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 47)",
+            "Break into multiple lines",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 81,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\dashboard_health_widget.py",
+          "timestamp": "2026-03-15T23:29:46.803685",
+          "metrics": {
+            "lines_of_code": 130,
+            "total_lines": 171,
+            "complexity": 19,
+            "documentation_ratio": 0.22,
+            "function_count": 7,
+            "class_count": 0,
+            "import_count": 7
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 15 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 15 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 99,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\dashboard_integration.py",
+          "timestamp": "2026-03-15T23:29:46.805697",
+          "metrics": {
+            "lines_of_code": 424,
+            "total_lines": 538,
+            "complexity": 87,
+            "documentation_ratio": 0.13,
+            "function_count": 13,
+            "class_count": 3,
+            "import_count": 15
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 283,
+              "message": "Function at line 283 is 73 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 443,
+              "message": "Function at line 443 is 96 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 53 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 41 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 87)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\decision_optimizer.py",
+          "timestamp": "2026-03-15T23:29:46.807708",
+          "metrics": {
+            "lines_of_code": 194,
+            "total_lines": 261,
+            "complexity": 45,
+            "documentation_ratio": 0.18,
+            "function_count": 16,
+            "class_count": 3,
+            "import_count": 6
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 87,
+              "message": "Line 87 exceeds 120 characters (121 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 199,
+              "message": "Function at line 199 is 63 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 11 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 17 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 45)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\dialog_integrator.py",
+          "timestamp": "2026-03-15T23:29:46.807708",
+          "metrics": {
+            "lines_of_code": 121,
+            "total_lines": 182,
+            "complexity": 27,
+            "documentation_ratio": 0.32,
+            "function_count": 10,
+            "class_count": 1,
+            "import_count": 3
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 129,
+              "message": "Function at line 129 is 54 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 12 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 27)",
+            "Break into smaller functions",
+            "Use logging module instead of print"
+          ],
+          "score": 94,
+          "grade": "A"
+        },
+        {
+          "file": "30-scripts-tools\\download_qwen_model.py",
+          "timestamp": "2026-03-15T23:29:46.807708",
+          "metrics": {
+            "lines_of_code": 148,
+            "total_lines": 193,
+            "complexity": 23,
+            "documentation_ratio": 0.15,
+            "function_count": 5,
+            "class_count": 0,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 58,
+              "message": "Function at line 58 is 67 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 11 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 42 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 23)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 86,
+          "grade": "B+"
+        },
+        {
+          "file": "30-scripts-tools\\effect_tracker.py",
+          "timestamp": "2026-03-15T23:29:46.807708",
+          "metrics": {
+            "lines_of_code": 136,
+            "total_lines": 192,
+            "complexity": 25,
+            "documentation_ratio": 0.2,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 4
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 142,
+              "message": "Function at line 142 is 51 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 14 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 25)",
+            "Break into smaller functions",
+            "Use logging module instead of print"
+          ],
+          "score": 89,
+          "grade": "B+"
+        },
+        {
+          "file": "30-scripts-tools\\feishu_notification.py",
+          "timestamp": "2026-03-15T23:29:46.813634",
+          "metrics": {
+            "lines_of_code": 466,
+            "total_lines": 552,
+            "complexity": 59,
+            "documentation_ratio": 0.11,
+            "function_count": 13,
+            "class_count": 1,
+            "import_count": 13
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 434,
+              "message": "Line 434 exceeds 120 characters (137 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 179,
+              "message": "Function at line 179 is 201 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 10 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 10 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 59)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 78,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\feishu_report_generator.py",
+          "timestamp": "2026-03-15T23:29:46.815512",
+          "metrics": {
+            "lines_of_code": 106,
+            "total_lines": 147,
+            "complexity": 28,
+            "documentation_ratio": 0.27,
+            "function_count": 6,
+            "class_count": 1,
+            "import_count": 7
+          },
+          "issues": [],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 28)"
+          ],
+          "score": 100,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\health_predictor.py",
+          "timestamp": "2026-03-15T23:29:46.818313",
+          "metrics": {
+            "lines_of_code": 197,
+            "total_lines": 265,
+            "complexity": 63,
+            "documentation_ratio": 0.15,
+            "function_count": 10,
+            "class_count": 3,
+            "import_count": 5
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 24,
+              "message": "Line 24 exceeds 120 characters (121 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 194,
+              "message": "Function at line 194 is 72 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 11 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 13 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 63)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\heartbeat_workflow.py",
+          "timestamp": "2026-03-15T23:29:46.818313",
+          "metrics": {
+            "lines_of_code": 191,
+            "total_lines": 244,
+            "complexity": 38,
+            "documentation_ratio": 0.11,
+            "function_count": 8,
+            "class_count": 1,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 190,
+              "message": "Line 190 exceeds 120 characters (129 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 114,
+              "message": "Function at line 114 is 57 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 12 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 12 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 38)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 78,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\innovation_pattern_matcher.py",
+          "timestamp": "2026-03-15T23:29:46.821501",
+          "metrics": {
+            "lines_of_code": 426,
+            "total_lines": 515,
+            "complexity": 58,
+            "documentation_ratio": 0.1,
+            "function_count": 9,
+            "class_count": 3,
+            "import_count": 10
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 53,
+              "message": "Function at line 53 is 228 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 415,
+              "message": "Function at line 415 is 101 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 55 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 26 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 58)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\install_requirements.py",
+          "timestamp": "2026-03-15T23:29:46.823769",
+          "metrics": {
+            "lines_of_code": 28,
+            "total_lines": 39,
+            "complexity": 5,
+            "documentation_ratio": 0.1,
+            "function_count": 0,
+            "class_count": 0,
+            "import_count": 3
+          },
+          "issues": [
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 12 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Use logging module instead of print"
+          ],
+          "score": 97,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\knowledge-graph-builder.py",
+          "timestamp": "2026-03-15T23:29:46.823769",
+          "metrics": {
+            "lines_of_code": 198,
+            "total_lines": 255,
+            "complexity": 48,
+            "documentation_ratio": 0.16,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 3
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 192,
+              "message": "Function at line 192 is 64 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 30 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 22 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 48)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 81,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\knowledge_graph_builder.py",
+          "timestamp": "2026-03-15T23:29:46.823769",
+          "metrics": {
+            "lines_of_code": 298,
+            "total_lines": 388,
+            "complexity": 102,
+            "documentation_ratio": 0.15,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 47,
+              "message": "Function at line 47 is 61 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 108,
+              "message": "Function at line 108 is 72 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 220,
+              "message": "Function at line 220 is 79 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 14 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 26 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 102)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 72,
+          "grade": "C"
+        },
+        {
+          "file": "30-scripts-tools\\knowledge_graph_updater.py",
+          "timestamp": "2026-03-15T23:29:46.823769",
+          "metrics": {
+            "lines_of_code": 295,
+            "total_lines": 404,
+            "complexity": 70,
+            "documentation_ratio": 0.15,
+            "function_count": 14,
+            "class_count": 1,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 340,
+              "message": "Function at line 340 is 65 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 10 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 18 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 70)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 78,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\learner-assistant-v2.py",
+          "timestamp": "2026-03-15T23:29:46.829932",
+          "metrics": {
+            "lines_of_code": 234,
+            "total_lines": 318,
+            "complexity": 71,
+            "documentation_ratio": 0.24,
+            "function_count": 14,
+            "class_count": 1,
+            "import_count": 4
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 43 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 22 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 71)",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 89,
+          "grade": "B+"
+        },
+        {
+          "file": "30-scripts-tools\\learning-quality-assessor.py",
+          "timestamp": "2026-03-15T23:29:46.831982",
+          "metrics": {
+            "lines_of_code": 139,
+            "total_lines": 204,
+            "complexity": 41,
+            "documentation_ratio": 0.18,
+            "function_count": 9,
+            "class_count": 1,
+            "import_count": 2
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 32 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 11 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 41)",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 84,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\load_balancer.py",
+          "timestamp": "2026-03-15T23:29:46.831982",
+          "metrics": {
+            "lines_of_code": 414,
+            "total_lines": 515,
+            "complexity": 94,
+            "documentation_ratio": 0.11,
+            "function_count": 12,
+            "class_count": 3,
+            "import_count": 10
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 156,
+              "message": "Function at line 156 is 118 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 397,
+              "message": "Function at line 397 is 119 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 29 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 40 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 94)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 78,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\local_qwen_inference.py",
+          "timestamp": "2026-03-15T23:29:46.835507",
+          "metrics": {
+            "lines_of_code": 167,
+            "total_lines": 217,
+            "complexity": 37,
+            "documentation_ratio": 0.14,
+            "function_count": 7,
+            "class_count": 1,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 90,
+              "message": "Line 90 exceeds 120 characters (135 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 103,
+              "message": "Line 103 exceeds 120 characters (154 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 15 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 27 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 37)",
+            "Break into multiple lines",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 78,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\memory-dashboard.py",
+          "timestamp": "2026-03-15T23:29:46.837425",
+          "metrics": {
+            "lines_of_code": 205,
+            "total_lines": 315,
+            "complexity": 50,
+            "documentation_ratio": 0.39,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 32,
+              "message": "Function at line 32 is 80 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 112,
+              "message": "Function at line 112 is 84 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 30 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 50)",
+            "Break into smaller functions",
+            "Define constants for magic numbers"
+          ],
+          "score": 86,
+          "grade": "B+"
+        },
+        {
+          "file": "30-scripts-tools\\memory-distiller.py",
+          "timestamp": "2026-03-15T23:29:46.837425",
+          "metrics": {
+            "lines_of_code": 19,
+            "total_lines": 24,
+            "complexity": 2,
+            "documentation_ratio": 0.17,
+            "function_count": 1,
+            "class_count": 0,
+            "import_count": 2
+          },
+          "issues": [
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 10 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Use logging module instead of print"
+          ],
+          "score": 97,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\memory-maintenance.py",
+          "timestamp": "2026-03-15T23:29:46.837425",
+          "metrics": {
+            "lines_of_code": 19,
+            "total_lines": 24,
+            "complexity": 2,
+            "documentation_ratio": 0.17,
+            "function_count": 1,
+            "class_count": 0,
+            "import_count": 2
+          },
+          "issues": [
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 10 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Use logging module instead of print"
+          ],
+          "score": 97,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\memory-ops.py",
+          "timestamp": "2026-03-15T23:29:46.840025",
+          "metrics": {
+            "lines_of_code": 190,
+            "total_lines": 253,
+            "complexity": 24,
+            "documentation_ratio": 0.26,
+            "function_count": 8,
+            "class_count": 0,
+            "import_count": 4
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 189,
+              "message": "Function at line 189 is 65 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 33 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 44 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 24)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 91,
+          "grade": "A"
+        },
+        {
+          "file": "30-scripts-tools\\memory-quality-assessor.py",
+          "timestamp": "2026-03-15T23:29:46.840779",
+          "metrics": {
+            "lines_of_code": 169,
+            "total_lines": 256,
+            "complexity": 66,
+            "documentation_ratio": 0.18,
+            "function_count": 10,
+            "class_count": 1,
+            "import_count": 4
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 16 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 18 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 66)",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 84,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\memory-search-v2.py",
+          "timestamp": "2026-03-15T23:29:46.840779",
+          "metrics": {
+            "lines_of_code": 177,
+            "total_lines": 266,
+            "complexity": 44,
+            "documentation_ratio": 0.23,
+            "function_count": 10,
+            "class_count": 1,
+            "import_count": 6
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 14 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 11 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 44)",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 89,
+          "grade": "B+"
+        },
+        {
+          "file": "30-scripts-tools\\memory_auto_fix.py",
+          "timestamp": "2026-03-15T23:29:46.843639",
+          "metrics": {
+            "lines_of_code": 352,
+            "total_lines": 453,
+            "complexity": 61,
+            "documentation_ratio": 0.19,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 10
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 73,
+              "message": "Function at line 73 is 69 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 201,
+              "message": "Function at line 201 is 67 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 396,
+              "message": "Function at line 396 is 58 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 27 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 31 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 61)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\memory_health_monitor.py",
+          "timestamp": "2026-03-15T23:29:46.844043",
+          "metrics": {
+            "lines_of_code": 296,
+            "total_lines": 399,
+            "complexity": 61,
+            "documentation_ratio": 0.17,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 10
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 286,
+              "message": "Line 286 exceeds 120 characters (131 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 293,
+              "message": "Line 293 exceeds 120 characters (163 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 294,
+              "message": "Line 294 exceeds 120 characters (167 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 311,
+              "message": "Line 311 exceeds 120 characters (149 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 312,
+              "message": "Line 312 exceeds 120 characters (148 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 127,
+              "message": "Function at line 127 is 68 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 278,
+              "message": "Function at line 278 is 69 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 18 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 8 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 61)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 63,
+          "grade": "D"
+        },
+        {
+          "file": "30-scripts-tools\\notification_router.py",
+          "timestamp": "2026-03-15T23:29:46.844043",
+          "metrics": {
+            "lines_of_code": 212,
+            "total_lines": 286,
+            "complexity": 43,
+            "documentation_ratio": 0.19,
+            "function_count": 18,
+            "class_count": 3,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 232,
+              "message": "Function at line 232 is 55 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 13 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 7 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 43)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 81,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\ollama_qwen_test.py",
+          "timestamp": "2026-03-15T23:29:46.848131",
+          "metrics": {
+            "lines_of_code": 79,
+            "total_lines": 102,
+            "complexity": 17,
+            "documentation_ratio": 0.16,
+            "function_count": 4,
+            "class_count": 0,
+            "import_count": 4
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 8 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 18 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 94,
+          "grade": "A"
+        },
+        {
+          "file": "30-scripts-tools\\openclaw.py",
+          "timestamp": "2026-03-15T23:29:46.849642",
+          "metrics": {
+            "lines_of_code": 144,
+            "total_lines": 195,
+            "complexity": 23,
+            "documentation_ratio": 0.25,
+            "function_count": 12,
+            "class_count": 1,
+            "import_count": 12
+          },
+          "issues": [
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 12 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 23)",
+            "Use logging module instead of print"
+          ],
+          "score": 97,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\paper_summarizer.py",
+          "timestamp": "2026-03-15T23:29:46.850734",
+          "metrics": {
+            "lines_of_code": 197,
+            "total_lines": 279,
+            "complexity": 63,
+            "documentation_ratio": 0.16,
+            "function_count": 10,
+            "class_count": 1,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 38 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 11 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 63)",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 84,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\parallel_executor.py",
+          "timestamp": "2026-03-15T23:29:46.851662",
+          "metrics": {
+            "lines_of_code": 390,
+            "total_lines": 503,
+            "complexity": 95,
+            "documentation_ratio": 0.14,
+            "function_count": 13,
+            "class_count": 3,
+            "import_count": 13
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 117,
+              "message": "Function at line 117 is 66 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 233,
+              "message": "Function at line 233 is 53 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 286,
+              "message": "Function at line 286 is 67 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 415,
+              "message": "Function at line 415 is 89 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 21 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 41 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 95)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 69,
+          "grade": "D+"
+        },
+        {
+          "file": "30-scripts-tools\\path_interceptor.py",
+          "timestamp": "2026-03-15T23:29:46.854325",
+          "metrics": {
+            "lines_of_code": 79,
+            "total_lines": 110,
+            "complexity": 12,
+            "documentation_ratio": 0.29,
+            "function_count": 4,
+            "class_count": 1,
+            "import_count": 4
+          },
+          "issues": [
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 16 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Use logging module instead of print"
+          ],
+          "score": 100,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\plan-auto-optimizer.py",
+          "timestamp": "2026-03-15T23:29:46.856336",
+          "metrics": {
+            "lines_of_code": 106,
+            "total_lines": 156,
+            "complexity": 18,
+            "documentation_ratio": 0.21,
+            "function_count": 4,
+            "class_count": 1,
+            "import_count": 5
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 31,
+              "message": "Function at line 31 is 54 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 10 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 28 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 96,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\plan-quality-assessor.py",
+          "timestamp": "2026-03-15T23:29:46.856336",
+          "metrics": {
+            "lines_of_code": 161,
+            "total_lines": 232,
+            "complexity": 52,
+            "documentation_ratio": 0.17,
+            "function_count": 10,
+            "class_count": 1,
+            "import_count": 2
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 181,
+              "message": "Function at line 181 is 52 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 24 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 11 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 52)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 81,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\planner-assistant-v2.py",
+          "timestamp": "2026-03-15T23:29:46.856336",
+          "metrics": {
+            "lines_of_code": 240,
+            "total_lines": 317,
+            "complexity": 49,
+            "documentation_ratio": 0.17,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 3
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 20 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 23 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 49)",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 84,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\pre_file_operation_hook.py",
+          "timestamp": "2026-03-15T23:29:46.856336",
+          "metrics": {
+            "lines_of_code": 284,
+            "total_lines": 394,
+            "complexity": 62,
+            "documentation_ratio": 0.19,
+            "function_count": 9,
+            "class_count": 1,
+            "import_count": 9
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 114,
+              "message": "Function at line 114 is 75 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 287,
+              "message": "Function at line 287 is 55 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 342,
+              "message": "Function at line 342 is 53 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 17 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 36 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 62)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\quality_scorer.py",
+          "timestamp": "2026-03-15T23:29:46.856336",
+          "metrics": {
+            "lines_of_code": 435,
+            "total_lines": 582,
+            "complexity": 165,
+            "documentation_ratio": 0.12,
+            "function_count": 20,
+            "class_count": 1,
+            "import_count": 12
+          },
+          "issues": [
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 73 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 13 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 165)",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 81,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\safedir.py",
+          "timestamp": "2026-03-15T23:29:46.863999",
+          "metrics": {
+            "lines_of_code": 70,
+            "total_lines": 97,
+            "complexity": 10,
+            "documentation_ratio": 0.18,
+            "function_count": 2,
+            "class_count": 0,
+            "import_count": 4
+          },
+          "issues": [
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 17 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Use logging module instead of print"
+          ],
+          "score": 97,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\safe_write.py",
+          "timestamp": "2026-03-15T23:29:46.865089",
+          "metrics": {
+            "lines_of_code": 98,
+            "total_lines": 145,
+            "complexity": 10,
+            "documentation_ratio": 0.32,
+            "function_count": 3,
+            "class_count": 0,
+            "import_count": 3
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 88,
+              "message": "Function at line 88 is 58 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 26 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Break into smaller functions",
+            "Use logging module instead of print"
+          ],
+          "score": 99,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\self_healing.py",
+          "timestamp": "2026-03-15T23:29:46.865089",
+          "metrics": {
+            "lines_of_code": 545,
+            "total_lines": 662,
+            "complexity": 150,
+            "documentation_ratio": 0.13,
+            "function_count": 24,
+            "class_count": 3,
+            "import_count": 17
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 80,
+              "message": "Function at line 80 is 99 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 576,
+              "message": "Function at line 576 is 87 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 17 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 26 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 150)",
+            "Consider splitting this file (545 LOC)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 78,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\sensitive_content_router.py",
+          "timestamp": "2026-03-15T23:29:46.867964",
+          "metrics": {
+            "lines_of_code": 201,
+            "total_lines": 265,
+            "complexity": 25,
+            "documentation_ratio": 0.14,
+            "function_count": 6,
+            "class_count": 1,
+            "import_count": 9
+          },
+          "issues": [
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 7 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 25)",
+            "Use logging module instead of print"
+          ],
+          "score": 92,
+          "grade": "A"
+        },
+        {
+          "file": "30-scripts-tools\\session-check.py",
+          "timestamp": "2026-03-15T23:29:46.871449",
+          "metrics": {
+            "lines_of_code": 59,
+            "total_lines": 81,
+            "complexity": 9,
+            "documentation_ratio": 0.16,
+            "function_count": 1,
+            "class_count": 0,
+            "import_count": 5
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 14,
+              "message": "Function at line 14 is 68 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 22 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Break into smaller functions",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 91,
+          "grade": "A"
+        },
+        {
+          "file": "30-scripts-tools\\smart-review-reminder.py",
+          "timestamp": "2026-03-15T23:29:46.872513",
+          "metrics": {
+            "lines_of_code": 135,
+            "total_lines": 182,
+            "complexity": 33,
+            "documentation_ratio": 0.16,
+            "function_count": 9,
+            "class_count": 1,
+            "import_count": 4
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 115,
+              "message": "Line 115 exceeds 120 characters (130 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 18 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 22 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 33)",
+            "Break into multiple lines",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 81,
+          "grade": "B"
+        },
+        {
+          "file": "30-scripts-tools\\smart_notification.py",
+          "timestamp": "2026-03-15T23:29:46.872513",
+          "metrics": {
+            "lines_of_code": 400,
+            "total_lines": 515,
+            "complexity": 98,
+            "documentation_ratio": 0.15,
+            "function_count": 18,
+            "class_count": 1,
+            "import_count": 11
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 454,
+              "message": "Line 454 exceeds 120 characters (126 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 44,
+              "message": "Function at line 44 is 57 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 172,
+              "message": "Function at line 172 is 86 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 360,
+              "message": "Function at line 360 is 58 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 27 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 33 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 98)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 72,
+          "grade": "C"
+        },
+        {
+          "file": "30-scripts-tools\\task_priority_scorer.py",
+          "timestamp": "2026-03-15T23:29:46.874525",
+          "metrics": {
+            "lines_of_code": 243,
+            "total_lines": 307,
+            "complexity": 53,
+            "documentation_ratio": 0.16,
+            "function_count": 11,
+            "class_count": 2,
+            "import_count": 9
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 116,
+              "message": "Function at line 116 is 54 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 216,
+              "message": "Function at line 216 is 92 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 58 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "bare_except",
+              "severity": "high",
+              "line": 0,
+              "message": "Found bare except: clause",
+              "suggestion": "Use except Exception: or specific exception types"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 22 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 53)",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use except Exception: or specific exception types",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\windows_task_scheduler.py",
+          "timestamp": "2026-03-15T23:29:46.877864",
+          "metrics": {
+            "lines_of_code": 340,
+            "total_lines": 421,
+            "complexity": 77,
+            "documentation_ratio": 0.1,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 8
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 214,
+              "message": "Line 214 exceeds 120 characters (137 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 42,
+              "message": "Function at line 42 is 80 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 122,
+              "message": "Function at line 122 is 59 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 29 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 28 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 77)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 75,
+          "grade": "C+"
+        },
+        {
+          "file": "30-scripts-tools\\workspace.py",
+          "timestamp": "2026-03-15T23:29:46.878714",
+          "metrics": {
+            "lines_of_code": 155,
+            "total_lines": 208,
+            "complexity": 17,
+            "documentation_ratio": 0.31,
+            "function_count": 11,
+            "class_count": 1,
+            "import_count": 3
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 145,
+              "message": "Function at line 145 is 64 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 29 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Break into smaller functions",
+            "Use logging module instead of print"
+          ],
+          "score": 99,
+          "grade": "A+"
+        },
+        {
+          "file": "30-scripts-tools\\workspace_comparator.py",
+          "timestamp": "2026-03-15T23:29:46.880720",
+          "metrics": {
+            "lines_of_code": 429,
+            "total_lines": 554,
+            "complexity": 104,
+            "documentation_ratio": 0.17,
+            "function_count": 16,
+            "class_count": 3,
+            "import_count": 11
+          },
+          "issues": [
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 437,
+              "message": "Line 437 exceeds 120 characters (123 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 451,
+              "message": "Line 451 exceeds 120 characters (127 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_line",
+              "severity": "low",
+              "line": 471,
+              "message": "Line 471 exceeds 120 characters (140 chars)",
+              "suggestion": "Break into multiple lines"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 243,
+              "message": "Function at line 243 is 86 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 356,
+              "message": "Function at line 356 is 112 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 32 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 28 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Consider refactoring to reduce complexity (current: 104)",
+            "Break into multiple lines",
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 69,
+          "grade": "D+"
+        },
+        {
+          "file": "30-scripts-tools\\workspace_init.py",
+          "timestamp": "2026-03-15T23:29:46.884239",
+          "metrics": {
+            "lines_of_code": 62,
+            "total_lines": 87,
+            "complexity": 8,
+            "documentation_ratio": 0.22,
+            "function_count": 3,
+            "class_count": 0,
+            "import_count": 3
+          },
+          "issues": [
+            {
+              "type": "long_function",
+              "severity": "medium",
+              "line": 17,
+              "message": "Function at line 17 is 54 lines long",
+              "suggestion": "Break into smaller functions"
+            },
+            {
+              "type": "magic_numbers",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 8 magic numbers",
+              "suggestion": "Define constants for magic numbers"
+            },
+            {
+              "type": "too_many_prints",
+              "severity": "low",
+              "line": 0,
+              "message": "Found 22 print statements",
+              "suggestion": "Use logging module instead of print"
+            }
+          ],
+          "suggestions": [
+            "Break into smaller functions",
+            "Define constants for magic numbers",
+            "Use logging module instead of print"
+          ],
+          "score": 96,
+          "grade": "A+"
+        }
+      ]
+    }
+  ],
+  "trends": {}
+}

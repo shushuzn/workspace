@@ -1,0 +1,14 @@
+{
+  "last_check": "2026-03-16T12:37:47.262482",
+  "checks_today": 1,
+  "total_alerts": 0,
+  "persona_scores": {
+    "planner": 95.0,
+    "executor": 95.0,
+    "critic": 95.0,
+    "learner": 95.0,
+    "coordinator": 95.0,
+    "innovator": 95.0,
+    "meta_cognition": 95.0
+  }
+}

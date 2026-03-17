@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "opensea": {
+      "url": "https://mcp.opensea.io/mcp",
+      "headers": {
+        "Authorization": "Bearer 043YNIvCADXDtxSyxQDQSYyXUrULyo1GJSJ0yhDueQaMR2cq"
+      }
+    }
+  }
+}

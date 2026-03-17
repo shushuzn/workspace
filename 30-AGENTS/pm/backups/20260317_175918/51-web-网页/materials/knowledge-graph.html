@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Knowledge Graph - 知识图谱可视化</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { color: #333; margin-bottom: 20px; }
+        .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        #graph-container { width: 100%; height: 600px; background: #fafafa; border-radius: 8px; }
+        .controls { display: flex; gap: 10px; margin-top: 15px; }
+        .btn { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; }
+        .info-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .stat { text-align: center; padding: 15px; background: #f8f9fa; border-radius: 4px; }
+        .stat-value { font-size: 24px; font-weight: bold; color: #007bff; }
+        .stat-label { font-size: 12px; color: #666; margin-top: 5px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🕸️ 材料知识图谱</h1>
+        
+        <div class="card">
+            <div class="info-panel">
+                <div class="stat">
+                    <div class="stat-value" id="entity-count">0</div>
+                    <div class="stat-label">实体数</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="relation-count">0</div>
+                    <div class="stat-label">关系数</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="material-count">0</div>
+                    <div class="stat-label">材料数</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="element-count">0</div>
+                    <div class="stat-label">元素数</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>图谱可视化</h2>
+            <div id="graph-container"></div>
+            <div class="controls">
+                <button class="btn" onclick="loadGraph()">加载图谱</button>
+                <button class="btn" onclick="zoomIn()">放大</button>
+                <button class="btn" onclick="zoomOut()">缩小</button>
+                <button class="btn" onclick="resetView()">重置视图</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 模拟图谱数据
+        const graphData = {
+            entities: [
+                { id: "mat_LiCoO2", type: "Material", name: "LiCoO₂" },
+                { id: "elem_Li", type: "Element", name: "Li" },
+                { id: "elem_Co", type: "Element", name: "Co" },
+                { id: "elem_O", type: "Element", name: "O" },
+                { id: "prop_bandgap", type: "Property", name: "带隙" }
+            ],
+            relations: [
+                { source: "mat_LiCoO2", target: "elem_Li", type: "contains" },
+                { source: "mat_LiCoO2", target: "elem_Co", type: "contains" },
+                { source: "mat_LiCoO2", target: "elem_O", type: "contains" },
+                { source: "mat_LiCoO2", target: "prop_bandgap", type: "has_property" }
+            ]
+        };
+        
+        function loadGraph() {
+            // 更新统计
+            document.getElementById('entity-count').textContent = graphData.entities.length;
+            document.getElementById('relation-count').textContent = graphData.relations.length;
+            document.getElementById('material-count').textContent = graphData.entities.filter(e => e.type === 'Material').length;
+            document.getElementById('element-count').textContent = graphData.entities.filter(e => e.type === 'Element').length;
+            
+            // TODO: 实现图谱可视化 (使用 D3.js 或类似库)
+            console.log('Graph loaded:', graphData);
+        }
+        
+        function zoomIn() { console.log('Zoom in'); }
+        function zoomOut() { console.log('Zoom out'); }
+        function resetView() { console.log('Reset view'); }
+        
+        // 页面加载时加载图谱
+        window.onload = loadGraph;
+    </script>
+</body>
+</html>

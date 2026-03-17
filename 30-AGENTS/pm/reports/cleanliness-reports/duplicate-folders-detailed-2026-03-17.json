@@ -1,0 +1,977 @@
+{
+  "timestamp": "2026-03-17T17:44:35.912991",
+  "workspace": "D:\\OpenClaw\\workspace",
+  "statistics": {
+    "total_folders": 84,
+    "duplicate_pairs": 80,
+    "naming_patterns": {
+      "english": 59,
+      "chinese": 0,
+      "bilingual": 25
+    }
+  },
+  "duplicate_pairs": [
+    {
+      "folder1": "08-collectors",
+      "folder2": "40-collectors",
+      "similarity": 1.0,
+      "reason": "完全匹配（仅前缀不同）"
+    },
+    {
+      "folder1": "10-data",
+      "folder2": "data",
+      "similarity": 1.0,
+      "reason": "完全匹配（仅前缀不同）"
+    },
+    {
+      "folder1": "13-memory",
+      "folder2": "memory",
+      "similarity": 1.0,
+      "reason": "完全匹配（仅前缀不同）"
+    },
+    {
+      "folder1": "32-workflows",
+      "folder2": "40-workflows",
+      "similarity": 1.0,
+      "reason": "完全匹配（仅前缀不同）"
+    },
+    {
+      "folder1": "32-workflows",
+      "folder2": "workflows",
+      "similarity": 1.0,
+      "reason": "完全匹配（仅前缀不同）"
+    },
+    {
+      "folder1": "40-workflows",
+      "folder2": "workflows",
+      "similarity": 1.0,
+      "reason": "完全匹配（仅前缀不同）"
+    },
+    {
+      "folder1": "50-cache",
+      "folder2": "cache",
+      "similarity": 1.0,
+      "reason": "完全匹配（仅前缀不同）"
+    },
+    {
+      "folder1": "91-logs",
+      "folder2": "logs",
+      "similarity": 1.0,
+      "reason": "完全匹配（仅前缀不同）"
+    },
+    {
+      "folder1": "dashboard-data",
+      "folder2": "dashboard-tasks",
+      "similarity": 0.8148148148148148,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "00-09-core-config",
+      "folder2": "00-config",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "00-config",
+      "folder2": "01-obsidian-config",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "00-config",
+      "folder2": "03-config-files",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "00-config",
+      "folder2": "03-config-配置文件",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "00-root-docs",
+      "folder2": "15-docs",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "04-plugins",
+      "folder2": "31-skills-plugins",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "05-templates",
+      "folder2": "05-templates-模板",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "06-research",
+      "folder2": "06-research-研究",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "07-knowledge",
+      "folder2": "07-knowledge-知识",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "07-knowledge",
+      "folder2": "60-knowledge-cards",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "07-knowledge",
+      "folder2": "knowledge-card-android",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "07-knowledge",
+      "folder2": "knowledge-card-package",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "08-collectors",
+      "folder2": "08-collectors-收集",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "08-collectors-收集",
+      "folder2": "40-collectors",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "09-creation",
+      "folder2": "09-creation-创作",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "10-data",
+      "folder2": "10-data-数据",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "10-data",
+      "folder2": "20-data-reports",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "10-data",
+      "folder2": "dashboard-data",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "10-data-数据",
+      "folder2": "data",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "13-memory",
+      "folder2": "13-memory-system",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "13-memory",
+      "folder2": "13-memory-记忆系统",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "13-memory-system",
+      "folder2": "memory",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "13-memory-记忆系统",
+      "folder2": "memory",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "14-notes",
+      "folder2": "14-notes-笔记",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "15-docs",
+      "folder2": "15-docs-standard",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "15-docs",
+      "folder2": "15-docs-文档规范",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "20-data-reports",
+      "folder2": "21-reports",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "20-data-reports",
+      "folder2": "data",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "32-workflows",
+      "folder2": "32-workflows-工作流",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "32-workflows-工作流",
+      "folder2": "40-workflows",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "32-workflows-工作流",
+      "folder2": "workflows",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "33-dashboard",
+      "folder2": "33-dashboard-仪表板",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "33-dashboard",
+      "folder2": "dashboard-data",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "33-dashboard",
+      "folder2": "dashboard-tasks",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "40-arxiv-papers",
+      "folder2": "arxiv",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "40-arxiv-论文收集",
+      "folder2": "arxiv",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "41-arxiv-collector",
+      "folder2": "arxiv",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "50-cache",
+      "folder2": "__pycache__",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "50-projects-项目",
+      "folder2": "projects",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "51-web",
+      "folder2": "51-web-网页",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "91-logs",
+      "folder2": "91-logs-日志",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "91-logs-日志",
+      "folder2": "logs",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "92-tests",
+      "folder2": "92-tests-测试",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "99-archive",
+      "folder2": "99-archive-old",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "99-archive",
+      "folder2": "99-archive-归档",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "99-backups",
+      "folder2": "backup",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "99-backups",
+      "folder2": "security_backups",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "backup",
+      "folder2": "security_backups",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "cache",
+      "folder2": "__pycache__",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "dashboard-data",
+      "folder2": "data",
+      "similarity": 0.8,
+      "reason": "包含关系或高度相似"
+    },
+    {
+      "folder1": "60-knowledge-cards",
+      "folder2": "knowledge-card-android",
+      "similarity": 0.7647058823529411,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "60-knowledge-cards",
+      "folder2": "knowledge-card-package",
+      "similarity": 0.7647058823529411,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "08-collectors",
+      "folder2": "41-arxiv-collector",
+      "similarity": 0.75,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "40-collectors",
+      "folder2": "41-arxiv-collector",
+      "similarity": 0.75,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "00-persona-system",
+      "folder2": "02-openclaw-system",
+      "similarity": 0.7407407407407407,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "99-archive-old",
+      "folder2": "99-archive-归档",
+      "similarity": 0.7368421052631579,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "02-openclaw-系统配置",
+      "folder2": "OpenClaw-RL",
+      "similarity": 0.7272727272727273,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "07-knowledge-知识",
+      "folder2": "60-knowledge-cards",
+      "similarity": 0.72,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "33-dashboard-仪表板",
+      "folder2": "dashboard-data",
+      "similarity": 0.72,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "knowledge-card-android",
+      "folder2": "knowledge-card-package",
+      "similarity": 0.7,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "08-collectors-收集",
+      "folder2": "41-arxiv-collector",
+      "similarity": 0.6923076923076923,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "33-dashboard-仪表板",
+      "folder2": "dashboard-tasks",
+      "similarity": 0.6923076923076923,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "02-openclaw-system",
+      "folder2": "OpenClaw-RL",
+      "similarity": 0.6666666666666666,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "50-cache",
+      "folder2": "99-archive",
+      "similarity": 0.6666666666666666,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "99-archive",
+      "folder2": "arxiv",
+      "similarity": 0.6666666666666666,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "99-archive",
+      "folder2": "cache",
+      "similarity": 0.6666666666666666,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "00-persona-system",
+      "folder2": "13-memory-system",
+      "similarity": 0.64,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "01-obsidian-config",
+      "folder2": "01-obsidian-笔记配置",
+      "similarity": 0.6153846153846154,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "02-openclaw-system",
+      "folder2": "02-openclaw-系统配置",
+      "similarity": 0.6153846153846154,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "30-scripts-tools",
+      "folder2": "30-scripts-脚本工具",
+      "similarity": 0.6086956521739131,
+      "reason": "部分相似"
+    },
+    {
+      "folder1": "14-notes",
+      "folder2": "92-tests",
+      "similarity": 0.6,
+      "reason": "部分相似"
+    }
+  ],
+  "recommendations": [
+    {
+      "keep": "08-collectors",
+      "merge": "40-collectors",
+      "files_to_move": 17,
+      "size_mb": 2.6473207473754883
+    },
+    {
+      "keep": "10-data",
+      "merge": "data",
+      "files_to_move": 130,
+      "size_mb": 7.114523887634277
+    },
+    {
+      "keep": "memory",
+      "merge": "13-memory",
+      "files_to_move": 1,
+      "size_mb": 0.0021877288818359375
+    },
+    {
+      "keep": "32-workflows",
+      "merge": "40-workflows",
+      "files_to_move": 1,
+      "size_mb": 0.001003265380859375
+    },
+    {
+      "keep": "32-workflows",
+      "merge": "workflows",
+      "files_to_move": 0,
+      "size_mb": 0.0
+    },
+    {
+      "keep": "40-workflows",
+      "merge": "workflows",
+      "files_to_move": 0,
+      "size_mb": 0.0
+    },
+    {
+      "keep": "50-cache",
+      "merge": "cache",
+      "files_to_move": 2,
+      "size_mb": 0.000179290771484375
+    },
+    {
+      "keep": "logs",
+      "merge": "91-logs",
+      "files_to_move": 1,
+      "size_mb": 0.0013856887817382812
+    },
+    {
+      "keep": "dashboard-data",
+      "merge": "dashboard-tasks",
+      "files_to_move": 0,
+      "size_mb": 0.0
+    },
+    {
+      "keep": "00-config",
+      "merge": "00-09-core-config",
+      "files_to_move": 2,
+      "size_mb": 0.0029964447021484375
+    },
+    {
+      "keep": "01-obsidian-config",
+      "merge": "00-config",
+      "files_to_move": 5,
+      "size_mb": 0.0462646484375
+    },
+    {
+      "keep": "03-config-files",
+      "merge": "00-config",
+      "files_to_move": 5,
+      "size_mb": 0.0462646484375
+    },
+    {
+      "keep": "00-config",
+      "merge": "03-config-配置文件",
+      "files_to_move": 16,
+      "size_mb": 0.015547752380371094
+    },
+    {
+      "keep": "15-docs",
+      "merge": "00-root-docs",
+      "files_to_move": 6,
+      "size_mb": 0.07435321807861328
+    },
+    {
+      "keep": "31-skills-plugins",
+      "merge": "04-plugins",
+      "files_to_move": 17,
+      "size_mb": 0.07399272918701172
+    },
+    {
+      "keep": "05-templates",
+      "merge": "05-templates-模板",
+      "files_to_move": 9,
+      "size_mb": 0.01804065704345703
+    },
+    {
+      "keep": "06-research",
+      "merge": "06-research-研究",
+      "files_to_move": 550,
+      "size_mb": 24.825629234313965
+    },
+    {
+      "keep": "07-knowledge",
+      "merge": "07-knowledge-知识",
+      "files_to_move": 49,
+      "size_mb": 0.3899965286254883
+    },
+    {
+      "keep": "07-knowledge",
+      "merge": "60-knowledge-cards",
+      "files_to_move": 2,
+      "size_mb": 0.005703926086425781
+    },
+    {
+      "keep": "07-knowledge",
+      "merge": "knowledge-card-android",
+      "files_to_move": 14,
+      "size_mb": 0.3150806427001953
+    },
+    {
+      "keep": "knowledge-card-package",
+      "merge": "07-knowledge",
+      "files_to_move": 49,
+      "size_mb": 0.3899965286254883
+    },
+    {
+      "keep": "08-collectors",
+      "merge": "08-collectors-收集",
+      "files_to_move": 879,
+      "size_mb": 3.1001625061035156
+    },
+    {
+      "keep": "08-collectors-收集",
+      "merge": "40-collectors",
+      "files_to_move": 17,
+      "size_mb": 2.6473207473754883
+    },
+    {
+      "keep": "09-creation",
+      "merge": "09-creation-创作",
+      "files_to_move": 228,
+      "size_mb": 1.3237924575805664
+    },
+    {
+      "keep": "10-data",
+      "merge": "10-data-数据",
+      "files_to_move": 111,
+      "size_mb": 2.377561569213867
+    },
+    {
+      "keep": "10-data",
+      "merge": "20-data-reports",
+      "files_to_move": 55,
+      "size_mb": 1.201171875
+    },
+    {
+      "keep": "10-data",
+      "merge": "dashboard-data",
+      "files_to_move": 2,
+      "size_mb": 0.008671760559082031
+    },
+    {
+      "keep": "data",
+      "merge": "10-data-数据",
+      "files_to_move": 111,
+      "size_mb": 2.377561569213867
+    },
+    {
+      "keep": "13-memory-system",
+      "merge": "13-memory",
+      "files_to_move": 1,
+      "size_mb": 0.0021877288818359375
+    },
+    {
+      "keep": "13-memory",
+      "merge": "13-memory-记忆系统",
+      "files_to_move": 95,
+      "size_mb": 0.6654462814331055
+    },
+    {
+      "keep": "13-memory-system",
+      "merge": "memory",
+      "files_to_move": 5,
+      "size_mb": 0.01514434814453125
+    },
+    {
+      "keep": "memory",
+      "merge": "13-memory-记忆系统",
+      "files_to_move": 95,
+      "size_mb": 0.6654462814331055
+    },
+    {
+      "keep": "14-notes",
+      "merge": "14-notes-笔记",
+      "files_to_move": 1,
+      "size_mb": 0.00634002685546875
+    },
+    {
+      "keep": "15-docs-standard",
+      "merge": "15-docs",
+      "files_to_move": 13,
+      "size_mb": 0.05415058135986328
+    },
+    {
+      "keep": "15-docs",
+      "merge": "15-docs-文档规范",
+      "files_to_move": 90,
+      "size_mb": 0.451324462890625
+    },
+    {
+      "keep": "20-data-reports",
+      "merge": "21-reports",
+      "files_to_move": 18,
+      "size_mb": 0.05442333221435547
+    },
+    {
+      "keep": "data",
+      "merge": "20-data-reports",
+      "files_to_move": 55,
+      "size_mb": 1.201171875
+    },
+    {
+      "keep": "32-workflows",
+      "merge": "32-workflows-工作流",
+      "files_to_move": 61,
+      "size_mb": 0.16467666625976562
+    },
+    {
+      "keep": "40-workflows",
+      "merge": "32-workflows-工作流",
+      "files_to_move": 61,
+      "size_mb": 0.16467666625976562
+    },
+    {
+      "keep": "workflows",
+      "merge": "32-workflows-工作流",
+      "files_to_move": 61,
+      "size_mb": 0.16467666625976562
+    },
+    {
+      "keep": "33-dashboard",
+      "merge": "33-dashboard-仪表板",
+      "files_to_move": 2,
+      "size_mb": 0.010911941528320312
+    },
+    {
+      "keep": "dashboard-data",
+      "merge": "33-dashboard",
+      "files_to_move": 2,
+      "size_mb": 0.010911941528320312
+    },
+    {
+      "keep": "33-dashboard",
+      "merge": "dashboard-tasks",
+      "files_to_move": 0,
+      "size_mb": 0.0
+    },
+    {
+      "keep": "arxiv",
+      "merge": "40-arxiv-papers",
+      "files_to_move": 2,
+      "size_mb": 0.006190299987792969
+    },
+    {
+      "keep": "arxiv",
+      "merge": "40-arxiv-论文收集",
+      "files_to_move": 2,
+      "size_mb": 0.006190299987792969
+    },
+    {
+      "keep": "41-arxiv-collector",
+      "merge": "arxiv",
+      "files_to_move": 13,
+      "size_mb": 0.00439453125
+    },
+    {
+      "keep": "__pycache__",
+      "merge": "50-cache",
+      "files_to_move": 3,
+      "size_mb": 0.00042724609375
+    },
+    {
+      "keep": "50-projects-项目",
+      "merge": "projects",
+      "files_to_move": 1,
+      "size_mb": 0.0007410049438476562
+    },
+    {
+      "keep": "51-web",
+      "merge": "51-web-网页",
+      "files_to_move": 12,
+      "size_mb": 0.06910133361816406
+    },
+    {
+      "keep": "91-logs",
+      "merge": "91-logs-日志",
+      "files_to_move": 1,
+      "size_mb": 0.0013856887817382812
+    },
+    {
+      "keep": "logs",
+      "merge": "91-logs-日志",
+      "files_to_move": 1,
+      "size_mb": 0.0013856887817382812
+    },
+    {
+      "keep": "92-tests",
+      "merge": "92-tests-测试",
+      "files_to_move": 22,
+      "size_mb": 0.2801246643066406
+    },
+    {
+      "keep": "99-archive-old",
+      "merge": "99-archive",
+      "files_to_move": 19,
+      "size_mb": 0.13700294494628906
+    },
+    {
+      "keep": "99-archive-归档",
+      "merge": "99-archive",
+      "files_to_move": 19,
+      "size_mb": 0.13700294494628906
+    },
+    {
+      "keep": "backup",
+      "merge": "99-backups",
+      "files_to_move": 1,
+      "size_mb": 1504.1264562606812
+    },
+    {
+      "keep": "security_backups",
+      "merge": "99-backups",
+      "files_to_move": 1,
+      "size_mb": 1504.1264562606812
+    },
+    {
+      "keep": "backup",
+      "merge": "security_backups",
+      "files_to_move": 132,
+      "size_mb": 1.8509187698364258
+    },
+    {
+      "keep": "__pycache__",
+      "merge": "cache",
+      "files_to_move": 2,
+      "size_mb": 0.000179290771484375
+    },
+    {
+      "keep": "data",
+      "merge": "dashboard-data",
+      "files_to_move": 2,
+      "size_mb": 0.008671760559082031
+    },
+    {
+      "keep": "knowledge-card-android",
+      "merge": "60-knowledge-cards",
+      "files_to_move": 2,
+      "size_mb": 0.005703926086425781
+    },
+    {
+      "keep": "knowledge-card-package",
+      "merge": "60-knowledge-cards",
+      "files_to_move": 2,
+      "size_mb": 0.005703926086425781
+    },
+    {
+      "keep": "08-collectors",
+      "merge": "41-arxiv-collector",
+      "files_to_move": 97,
+      "size_mb": 4.443153381347656
+    },
+    {
+      "keep": "41-arxiv-collector",
+      "merge": "40-collectors",
+      "files_to_move": 17,
+      "size_mb": 2.6473207473754883
+    },
+    {
+      "keep": "02-openclaw-system",
+      "merge": "00-persona-system",
+      "files_to_move": 16,
+      "size_mb": 0.12930583953857422
+    },
+    {
+      "keep": "99-archive-归档",
+      "merge": "99-archive-old",
+      "files_to_move": 53,
+      "size_mb": 26.898470878601074
+    },
+    {
+      "keep": "OpenClaw-RL",
+      "merge": "02-openclaw-系统配置",
+      "files_to_move": 19,
+      "size_mb": 0.030602455139160156
+    },
+    {
+      "keep": "60-knowledge-cards",
+      "merge": "07-knowledge-知识",
+      "files_to_move": 49,
+      "size_mb": 0.3899965286254883
+    },
+    {
+      "keep": "dashboard-data",
+      "merge": "33-dashboard-仪表板",
+      "files_to_move": 2,
+      "size_mb": 0.010911941528320312
+    },
+    {
+      "keep": "knowledge-card-package",
+      "merge": "knowledge-card-android",
+      "files_to_move": 14,
+      "size_mb": 0.3150806427001953
+    },
+    {
+      "keep": "08-collectors-收集",
+      "merge": "41-arxiv-collector",
+      "files_to_move": 97,
+      "size_mb": 4.443153381347656
+    },
+    {
+      "keep": "dashboard-tasks",
+      "merge": "33-dashboard-仪表板",
+      "files_to_move": 2,
+      "size_mb": 0.010911941528320312
+    },
+    {
+      "keep": "OpenClaw-RL",
+      "merge": "02-openclaw-system",
+      "files_to_move": 25,
+      "size_mb": 0.07955169677734375
+    },
+    {
+      "keep": "99-archive",
+      "merge": "50-cache",
+      "files_to_move": 3,
+      "size_mb": 0.00042724609375
+    },
+    {
+      "keep": "99-archive",
+      "merge": "arxiv",
+      "files_to_move": 13,
+      "size_mb": 0.00439453125
+    },
+    {
+      "keep": "99-archive",
+      "merge": "cache",
+      "files_to_move": 2,
+      "size_mb": 0.000179290771484375
+    },
+    {
+      "keep": "13-memory-system",
+      "merge": "00-persona-system",
+      "files_to_move": 16,
+      "size_mb": 0.12930583953857422
+    },
+    {
+      "keep": "01-obsidian-config",
+      "merge": "01-obsidian-笔记配置",
+      "files_to_move": 10,
+      "size_mb": 2.4743242263793945
+    },
+    {
+      "keep": "02-openclaw-system",
+      "merge": "02-openclaw-系统配置",
+      "files_to_move": 19,
+      "size_mb": 0.030602455139160156
+    },
+    {
+      "keep": "30-scripts-tools",
+      "merge": "30-scripts-脚本工具",
+      "files_to_move": 644,
+      "size_mb": 101.51365089416504
+    },
+    {
+      "keep": "92-tests",
+      "merge": "14-notes",
+      "files_to_move": 1,
+      "size_mb": 0.00634002685546875
+    }
+  ]
+}

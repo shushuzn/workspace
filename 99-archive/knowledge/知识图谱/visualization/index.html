@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenClaw 知识图谱可视化</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        
+        .stats {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .stat-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 8px;
+            min-width: 150px;
+        }
+        
+        .stat-value {
+            font-size: 28px;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 12px;
+            opacity: 0.9;
+        }
+        
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 300px;
+            gap: 20px;
+        }
+        
+        #graph-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+            height: 600px;
+            position: relative;
+        }
+        
+        #sidebar {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        
+        .control-group {
+            margin-bottom: 20px;
+        }
+        
+        .control-group h3 {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-right: 5px;
+            margin-bottom: 5px;
+            transition: transform 0.2s;
+        }
+        
+        button:hover {
+            transform: translateY(-2px);
+        }
+        
+        button.active {
+            background: #764ba2;
+        }
+        
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+        
+        .entity-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .entity-item {
+            padding: 10px;
+            border-bottom: 1px solid #eee;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .entity-item:hover {
+            background: #f5f5f5;
+        }
+        
+        .entity-item.selected {
+            background: #e3f2fd;
+        }
+        
+        .entity-type {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 3px;
+            font-size: 10px;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        .type-Paper {
+            background: #e3f2fd;
+            color: #1976d2;
+        }
+        
+        .type-Concept {
+            background: #f3e5f5;
+            color: #7b1fa2;
+        }
+        
+        .type-Author {
+            background: #e8f5e9;
+            color: #388e3c;
+        }
+        
+        .type-Organization {
+            background: #fff3e0;
+            color: #f57c00;
+        }
+        
+        #tooltip {
+            position: absolute;
+            background: rgba(0,0,0,0.8);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            pointer-events: none;
+            max-width: 300px;
+            display: none;
+        }
+        
+        .legend {
+            margin-top: 20px;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 5px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🕸️ OpenClaw 知识图谱可视化</h1>
+            <div class="stats" id="stats">
+                <!-- 统计信息将在这里 -->
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <div id="graph-container">
+                <div id="tooltip"></div>
+            </div>
+            
+            <div id="sidebar">
+                <div class="control-group">
+                    <h3>🔍 搜索</h3>
+                    <input type="text" id="search-input" placeholder="搜索实体...">
+                </div>
+                
+                <div class="control-group">
+                    <h3>📊 过滤器</h3>
+                    <button class="filter-btn active" data-type="all">全部</button>
+                    <button class="filter-btn" data-type="Paper">📄 论文</button>
+                    <button class="filter-btn" data-type="Concept">💡 概念</button>
+                    <button class="filter-btn" data-type="Author">👤 作者</button>
+                    <button class="filter-btn" data-type="Organization">🏢 机构</button>
+                </div>
+                
+                <div class="control-group">
+                    <h3>🎨 布局</h3>
+                    <button onclick="restartSimulation()">力导向</button>
+                    <button onclick="toggleLabels()">标签</button>
+                </div>
+                
+                <div class="control-group">
+                    <h3>📋 实体列表</h3>
+                    <div class="entity-list" id="entity-list">
+                        <!-- 实体列表将在这里 -->
+                    </div>
+                </div>
+                
+                <div class="control-group legend">
+                    <h3>图例</h3>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #1976d2;"></div>
+                        <span>论文 (Paper)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #7b1fa2;"></div>
+                        <span>概念 (Concept)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #388e3c;"></div>
+                        <span>作者 (Author)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: #f57c00;"></div>
+                        <span>机构 (Organization)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 全局变量
+        let graphData = { nodes: [], links: [] };
+        let simulation;
+        let svg;
+        let selectedEntity = null;
+        
+        // 颜色映射
+        const colorMap = {
+            'Paper': '#1976d2',
+            'Concept': '#7b1fa2',
+            'Author': '#388e3c',
+            'Organization': '#f57c00'
+        };
+        
+        // 加载图谱数据
+        async function loadGraph() {
+            try {
+                const response = await fetch('../enhanced-graph.json');
+                graphData = await response.json();
+                
+                // 转换数据格式
+                const nodes = graphData.entities.map(e => ({
+                    id: e.id,
+                    type: e.type,
+                    properties: e.properties
+                }));
+                
+                const links = graphData.relations.map(r => ({
+                    source: r.source,
+                    target: r.target,
+                    type: r.type
+                }));
+                
+                graphData = { nodes, links };
+                
+                updateStats();
+                renderGraph();
+                renderEntityList();
+            } catch (error) {
+                console.error('加载图谱失败:', error);
+                document.getElementById('stats').innerHTML = 
+                    '<p style="color: red;">加载失败，请确保 enhanced-graph.json 文件存在</p>';
+            }
+        }
+        
+        // 更新统计信息
+        function updateStats() {
+            const stats = graphData.stats || {
+                total_entities: graphData.nodes.length,
+                total_relations: graphData.links.length,
+                entity_types: {}
+            };
+            
+            const typeCounts = {};
+            graphData.nodes.forEach(n => {
+                typeCounts[n.type] = (typeCounts[n.type] || 0) + 1;
+            });
+            
+            document.getElementById('stats').innerHTML = `
+                <div class="stat-card">
+                    <div class="stat-value">${stats.total_entities || graphData.nodes.length}</div>
+                    <div class="stat-label">总实体</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${stats.total_relations || graphData.links.length}</div>
+                    <div class="stat-label">总关系</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value">${Object.keys(typeCounts).length}</div>
+                    <div class="stat-label">实体类型</div>
+                </div>
+            `;
+        }
+        
+        // 渲染图谱
+        function renderGraph() {
+            const container = document.getElementById('graph-container');
+            const width = container.clientWidth;
+            const height = 600;
+            
+            // 清空容器
+            d3.select('#graph-container').selectAll('svg').remove();
+            
+            // 创建 SVG
+            svg = d3.select('#graph-container')
+                .append('svg')
+                .attr('width', width)
+                .attr('height', height)
+                .call(d3.zoom().on('zoom', (event) => {
+                    g.attr('transform', event.transform);
+                }));
+            
+            const g = svg.append('g');
+            
+            // 创建力导向模拟
+            simulation = d3.forceSimulation(graphData.nodes)
+                .force('charge', d3.forceManyBody().strength(-300))
+                .force('center', d3.forceCenter(width / 2, height / 2))
+                .force('link', d3.forceLink(graphData.links).id(d => d.id).distance(150))
+                .force('collide', d3.forceCollide().radius(30));
+            
+            // 绘制连线
+            const links = g.append('g')
+                .selectAll('line')
+                .data(graphData.links)
+                .enter()
+                .append('line')
+                .attr('stroke', '#999')
+                .attr('stroke-opacity', 0.6)
+                .attr('stroke-width', 2);
+            
+            // 绘制节点
+            const nodes = g.append('g')
+                .selectAll('circle')
+                .data(graphData.nodes)
+                .enter()
+                .append('circle')
+                .attr('r', 20)
+                .attr('fill', d => colorMap[d.type] || '#999')
+                .attr('stroke', '#fff')
+                .attr('stroke-width', 2)
+                .call(d3.drag()
+                    .on('start', dragstarted)
+                    .on('drag', dragged)
+                    .on('end', dragended))
+                .on('click', (event, d) => showEntityDetails(d))
+                .on('mouseover', (event, d) => showTooltip(event, d))
+                .on('mouseout', hideTooltip);
+            
+            // 更新节点位置
+            simulation.on('tick', () => {
+                links
+                    .attr('x1', d => d.source.x)
+                    .attr('y1', d => d.source.y)
+                    .attr('x2', d => d.target.x)
+                    .attr('y2', d => d.target.y);
+                
+                nodes
+                    .attr('cx', d => d.x)
+                    .attr('cy', d => d.y);
+            });
+        }
+        
+        // 显示实体详情
+        function showEntityDetails(d) {
+            selectedEntity = d;
+            
+            // 高亮选中的节点
+            d3.selectAll('circle')
+                .attr('stroke-width', 2)
+                .attr('stroke', '#fff');
+            
+            d3.select(event.target)
+                .attr('stroke-width', 4)
+                .attr('stroke', '#ff5722');
+            
+            // 更新实体列表高亮
+            d3.selectAll('.entity-item')
+                .classed('selected', false);
+            
+            d3.select(`.entity-item[data-id="${d.id}"]`)
+                .classed('selected', true);
+        }
+        
+        // 显示提示框
+        function showTooltip(event, d) {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.style.display = 'block';
+            tooltip.style.left = (event.pageX + 10) + 'px';
+            tooltip.style.top = (event.pageY - 10) + 'px';
+            tooltip.innerHTML = `
+                <strong>${d.properties.title || d.properties.name || d.id}</strong><br>
+                <small>${d.type}</small><br>
+                ${d.properties.arxiv_id ? `arXiv: ${d.properties.arxiv_id}<br>` : ''}
+            `;
+        }
+        
+        // 隐藏提示框
+        function hideTooltip() {
+            document.getElementById('tooltip').style.display = 'none';
+        }
+        
+        // 拖拽功能
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+        
+        // 重启模拟
+        function restartSimulation() {
+            simulation.alpha(1).restart();
+        }
+        
+        // 切换标签
+        function toggleLabels() {
+            // TODO: 实现标签显示/隐藏
+            alert('标签功能开发中...');
+        }
+        
+        // 渲染实体列表
+        function renderEntityList() {
+            const list = document.getElementById('entity-list');
+            list.innerHTML = '';
+            
+            graphData.nodes.forEach(node => {
+                const item = document.createElement('div');
+                item.className = 'entity-item';
+                item.dataset.id = node.id;
+                
+                const title = node.properties.title || node.properties.name || node.id;
+                const shortTitle = title.length > 40 ? title.substring(0, 40) + '...' : title;
+                
+                item.innerHTML = `
+                    <span class="entity-type type-${node.type}">${node.type}</span>
+                    ${shortTitle}
+                `;
+                
+                item.onclick = () => {
+                    showEntityDetails(node);
+                    // 滚动到节点
+                    const circle = d3.select(`circle[data-id="${node.id}"]`);
+                    if (!circle.empty()) {
+                        const transform = d3.zoomTransform(svg.node());
+                        svg.transition().duration(750).call(
+                            d3.zoom().translateTo,
+                            node.x,
+                            node.y
+                        );
+                    }
+                };
+                
+                list.appendChild(item);
+            });
+        }
+        
+        // 搜索功能
+        document.getElementById('search-input').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            
+            d3.selectAll('.entity-item').each(function() {
+                const text = this.textContent.toLowerCase();
+                this.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        });
+        
+        // 过滤器功能
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                const type = btn.dataset.type;
+                
+                d3.selectAll('circle').attr('opacity', d => {
+                    if (type === 'all' || d.type === type) return 1;
+                    return 0.1;
+                });
+            });
+        });
+        
+        // 初始化
+        loadGraph();
+    </script>
+</body>
+</html>

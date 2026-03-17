@@ -1,0 +1,39 @@
+{
+  "deployment_id": "access-20260317-163000",
+  "enabled": true,
+  "script": "report_access.py",
+  "features": {
+    "access_control": true,
+    "sensitive_classification": true,
+    "access_logging": true,
+    "permission_audit": true,
+    "encryption_advisory": false
+  },
+  "access_config": {
+    "default_level": "public",
+    "auto_classify": true,
+    "log_access": true,
+    "log_retention_days": 90,
+    "sensitive_patterns": ["SECURITY", "PASSWORD", "SECRET", "PRIVATE"],
+    "confidential_patterns": ["FINANCIAL", "LEGAL", "HR", "PERSONNEL"],
+    "restricted_patterns": ["ADMIN", "ROOT", "SYSTEM", "BACKUP"]
+  },
+  "users": {
+    "default": {
+      "role": "user",
+      "access_levels": ["public", "internal"]
+    },
+    "admin": {
+      "role": "admin",
+      "access_levels": ["public", "internal", "confidential", "restricted"]
+    }
+  },
+  "timestamp": "2026-03-17T16:30:00",
+  "status": "production_ready",
+  "baseline_stats": {
+    "protected_reports": 2,
+    "confidential": 1,
+    "restricted": 1,
+    "public": 14
+  }
+}

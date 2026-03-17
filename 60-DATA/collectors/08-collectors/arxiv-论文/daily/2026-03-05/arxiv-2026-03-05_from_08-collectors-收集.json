@@ -1,0 +1,92 @@
+﻿[
+    {
+        "title":  "RoboPocket: Improve Robot Policies Instantly with Your Phone",
+        "category":  "cs.AI",
+        "id":  "http://arxiv.org/abs/2603.05504v1",
+        "published":  "2026-03-05T18:59:38Z"
+    },
+    {
+        "title":  "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+        "category":  "cs.AI",
+        "id":  "http://arxiv.org/abs/2603.05500v1",
+        "published":  "2026-03-05T18:59:23Z"
+    },
+    {
+        "title":  "The Spike, the Sparse and the Sink: Anatomy of Massive Activations and Attention Sinks",
+        "category":  "cs.AI",
+        "id":  "http://arxiv.org/abs/2603.05498v1",
+        "published":  "2026-03-05T18:59:04Z"
+    },
+    {
+        "title":  "Censored LLMs as a Natural Testbed for Secret Knowledge Elicitation",
+        "category":  "cs.AI",
+        "id":  "http://arxiv.org/abs/2603.05494v1",
+        "published":  "2026-03-05T18:58:14Z"
+    },
+    {
+        "title":  "Reasoning Theater: Disentangling Model Beliefs from Chain-of-Thought",
+        "category":  "cs.AI",
+        "id":  "http://arxiv.org/abs/2603.05488v1",
+        "published":  "2026-03-05T18:55:16Z"
+    },
+    {
+        "title":  "RoboPocket: Improve Robot Policies Instantly with Your Phone",
+        "category":  "cs.LG",
+        "id":  "http://arxiv.org/abs/2603.05504v1",
+        "published":  "2026-03-05T18:59:38Z"
+    },
+    {
+        "title":  "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+        "category":  "cs.LG",
+        "id":  "http://arxiv.org/abs/2603.05500v1",
+        "published":  "2026-03-05T18:59:23Z"
+    },
+    {
+        "title":  "Cheap Thrills: Effective Amortized Optimization Using Inexpensive Labels",
+        "category":  "cs.LG",
+        "id":  "http://arxiv.org/abs/2603.05495v1",
+        "published":  "2026-03-05T18:58:39Z"
+    },
+    {
+        "title":  "Censored LLMs as a Natural Testbed for Secret Knowledge Elicitation",
+        "category":  "cs.LG",
+        "id":  "http://arxiv.org/abs/2603.05494v1",
+        "published":  "2026-03-05T18:58:14Z"
+    },
+    {
+        "title":  "Reasoning Theater: Disentangling Model Beliefs from Chain-of-Thought",
+        "category":  "cs.LG",
+        "id":  "http://arxiv.org/abs/2603.05488v1",
+        "published":  "2026-03-05T18:55:16Z"
+    },
+    {
+        "title":  "POET-X: Memory-efficient LLM Training by Scaling Orthogonal Transformation",
+        "category":  "cs.CL",
+        "id":  "http://arxiv.org/abs/2603.05500v1",
+        "published":  "2026-03-05T18:59:23Z"
+    },
+    {
+        "title":  "The Spike, the Sparse and the Sink: Anatomy of Massive Activations and Attention Sinks",
+        "category":  "cs.CL",
+        "id":  "http://arxiv.org/abs/2603.05498v1",
+        "published":  "2026-03-05T18:59:04Z"
+    },
+    {
+        "title":  "Censored LLMs as a Natural Testbed for Secret Knowledge Elicitation",
+        "category":  "cs.CL",
+        "id":  "http://arxiv.org/abs/2603.05494v1",
+        "published":  "2026-03-05T18:58:14Z"
+    },
+    {
+        "title":  "Reasoning Theater: Disentangling Model Beliefs from Chain-of-Thought",
+        "category":  "cs.CL",
+        "id":  "http://arxiv.org/abs/2603.05488v1",
+        "published":  "2026-03-05T18:55:16Z"
+    },
+    {
+        "title":  "Leveraging LLM Parametric Knowledge for Fact Checking without Retrieval",
+        "category":  "cs.CL",
+        "id":  "http://arxiv.org/abs/2603.05471v1",
+        "published":  "2026-03-05T18:42:51Z"
+    }
+]

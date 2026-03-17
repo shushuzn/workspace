@@ -1,0 +1,86 @@
+{
+  "config": {
+    "use_ollama": false,
+    "model": "qwen2.5:1.5b",
+    "history_size": 50
+  },
+  "stats": {
+    "total_predictions": 5,
+    "accurate_predictions": 0,
+    "prefetch_hits": 0,
+    "prefetch_misses": 0
+  },
+  "intent_patterns": {
+    "information_retrieval": 2,
+    "recommendation": 1,
+    "comparison": 1,
+    "problem_solving": 1
+  },
+  "recent_history": [
+    {
+      "intent": "information_retrieval",
+      "confidence": 0.6,
+      "next_topic": "performance",
+      "keywords": [
+        "memory",
+        "optimization"
+      ],
+      "query": "what is memory optimization?",
+      "topic": "memory",
+      "timestamp": "2026-03-16T21:40:17.800968"
+    },
+    {
+      "intent": "information_retrieval",
+      "confidence": 0.6,
+      "next_topic": "general",
+      "keywords": [
+        "implement",
+        "caching"
+      ],
+      "query": "how to implement caching?",
+      "topic": "general",
+      "timestamp": "2026-03-16T21:40:17.801028"
+    },
+    {
+      "intent": "recommendation",
+      "confidence": 0.6,
+      "next_topic": "infrastructure",
+      "keywords": [
+        "security",
+        "best",
+        "practices"
+      ],
+      "query": "security best practices",
+      "topic": "security",
+      "timestamp": "2026-03-16T21:40:17.801053"
+    },
+    {
+      "intent": "comparison",
+      "confidence": 0.7,
+      "next_topic": "performance",
+      "keywords": [
+        "compare",
+        "neural",
+        "search"
+      ],
+      "query": "compare BM25 vs neural search",
+      "topic": "ml",
+      "timestamp": "2026-03-16T21:40:17.801078"
+    },
+    {
+      "intent": "problem_solving",
+      "confidence": 0.7,
+      "next_topic": "performance",
+      "keywords": [
+        "cache",
+        "miss",
+        "issue"
+      ],
+      "query": "fix cache miss issue",
+      "topic": "memory",
+      "timestamp": "2026-03-16T21:40:17.801099"
+    }
+  ],
+  "prefetch_cache": {},
+  "created_at": "2026-03-16T21:40:17.801151"
+}

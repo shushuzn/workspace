@@ -1,0 +1,87 @@
+# LIG 知识图谱自动化更新配置
+
+# 数据源配置
+sources:
+  pubmed:
+    enabled: true
+    api_key: ""  # 可选，无 key 时通过网页抓取
+    query: "laser-induced graphene OR LIG graphene OR laser scribed graphene"
+    max_results: 50
+    days_back: 7
+    
+  arxiv:
+    enabled: true
+    categories:
+      - cond-mat.mtrl-sci  # 材料科学
+      - physics.app-ph     # 应用物理
+      - eess.sp            # 信号处理 (传感器)
+      - q-bio.TO           # 其他定量生物学 (生物医学应用)
+    query: "laser-induced graphene OR LIG graphene OR laser scribed graphene"
+    max_results: 30
+    days_back: 7
+
+# 实体提取配置
+extraction:
+  entity_types:
+    - Material
+    - Device
+    - Signal
+    - Technology
+    - Application
+    - Challenge
+    - Pathway
+    - Author
+    - Institution
+    
+  relation_types:
+    - USED_IN
+    - DETECTS
+    - IMPROVES
+    - ENABLES
+    - APPLIED_TO
+    - COLLABORATED_WITH
+    - PUBLISHED
+    - CHALLENGES
+    - SOLVES
+    
+  confidence_threshold: 0.75  # 最低置信度
+
+# 图谱更新配置
+graph:
+  data_file: "12-knowledge-graph/lig-graph.json"
+  backup_enabled: true
+  backup_dir: "12-knowledge-graph/backups"
+  max_backups: 5
+  merge_strategy: "union"  # union / replace
+  
+# 去重配置
+deduplication:
+  enabled: true
+  check_fields:
+    - title
+    - doi
+    - pmid
+    - arxiv_id
+  similarity_threshold: 0.95  # 标题相似度阈值
+
+# 日志配置
+logging:
+  enabled: true
+  log_file: "12-knowledge-graph/lig-update-log.md"
+  level: "info"  # debug / info / warning / error
+  include_stats: true
+
+# 定时任务配置
+schedule:
+  enabled: true
+  frequency: "weekly"  # daily / weekly / monthly
+  day_of_week: "Monday"
+  time: "03:00"
+  timezone: "Asia/Hong_Kong"
+
+# 通知配置
+notification:
+  enabled: false
+  on_success: true
+  on_error: true
+  channel: "feishu"  # feishu / discord / email

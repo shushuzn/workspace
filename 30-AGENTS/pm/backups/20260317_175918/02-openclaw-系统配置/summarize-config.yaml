@@ -1,0 +1,62 @@
+# Summarize 配置文件
+
+# CLI 配置
+cli:
+  name: summarize
+  version: latest
+  install_method: manual  # manual, brew, go
+  binary_path: ""  # 留空则使用 PATH 中的命令
+
+# API 配置
+api:
+  default_model: google/gemini-3-flash-preview
+  keys:
+    openai: OPENAI_API_KEY
+    anthropic: ANTHROPIC_API_KEY
+    google: GOOGLE_API_KEY
+
+# 功能配置
+features:
+  url_summary: true  # URL 摘要
+  pdf_summary: true  # PDF 摘要
+  youtube:
+    enabled: true
+    extract_transcript: true  # 提取字幕
+    auto_summarize: true  # 自动摘要
+    max_duration_minutes: 60  # 最大时长
+
+# 输出配置
+output:
+  dir: Medium/Raw
+  format: markdown
+  include_metadata: true  # 包含标题/作者/日期
+  include_original_url: true
+  auto_tag: true  # 自动添加标签
+
+# 标签配置
+tags:
+  auto_generate: true
+  source_based:
+    youtube: ["video", "transcript"]
+    pdf: ["paper", "document"]
+    url: ["article", "web"]
+  custom: []
+
+# 性能配置
+performance:
+  timeout_seconds: 60
+  retry_count: 2
+  cache:
+    enabled: true
+    ttl_hours: 24
+
+# 与 AI Research OS 集成
+ai_research_os:
+  auto_trigger: false  # 不自动触发深度分析
+  pass_to_pnote: false  # 不自动创建 P-Note
+
+# 定时任务 (可选)
+schedule:
+  enabled: false
+  process_queue: false
+  queue_file: summarize-queue.txt

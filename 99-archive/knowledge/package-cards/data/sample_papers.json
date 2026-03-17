@@ -1,0 +1,51 @@
+{
+  "papers": [
+    {
+      "id": 1,
+      "title": "Attention Is All You Need",
+      "doi": "10.48550/arXiv.1706.03762",
+      "year": 2017,
+      "keywords": ["transformer", "attention mechanism", "neural network", "deep learning"],
+      "references": [
+        {"title": "Deep Residual Learning for Image Recognition", "doi": "10.48550/arXiv.1512.03385"}
+      ]
+    },
+    {
+      "id": 2,
+      "title": "BERT: Pre-training of Deep Bidirectional Transformers",
+      "doi": "10.48550/arXiv.1810.04805",
+      "year": 2018,
+      "keywords": ["BERT", "pre-training", "transformer", "NLP", "language model"],
+      "references": [
+        {"title": "Attention Is All You Need", "doi": "10.48550/arXiv.1706.03762"}
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Deep Residual Learning for Image Recognition",
+      "doi": "10.48550/arXiv.1512.03385",
+      "year": 2015,
+      "keywords": ["ResNet", "CNN", "deep learning", "image recognition"],
+      "references": []
+    },
+    {
+      "id": 4,
+      "title": "ImageNet Classification with Deep Convolutional Neural Networks",
+      "doi": "10.1145/3065386",
+      "year": 2012,
+      "keywords": ["AlexNet", "CNN", "ImageNet", "deep learning"],
+      "references": []
+    },
+    {
+      "id": 5,
+      "title": "Generative Adversarial Nets",
+      "doi": "10.48550/arXiv.1406.2661",
+      "year": 2014,
+      "keywords": ["GAN", "generative model", "adversarial training", "deep learning"],
+      "references": [
+        {"title": "ImageNet Classification with Deep Convolutional Neural Networks", "doi": "10.1145/3065386"}
+      ]
+    }
+  ],
+  "description": "5 篇经典深度学习论文示例，包含引用关系"
+}

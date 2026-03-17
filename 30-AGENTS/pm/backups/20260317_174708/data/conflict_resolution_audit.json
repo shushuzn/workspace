@@ -1,0 +1,22 @@
+{
+  "resolutions": [
+    {
+      "conflict_id": "CONFLICT-001",
+      "type": "duplicate",
+      "method": "keep_newer",
+      "timestamp": "2026-03-17T10:27:21.584597",
+      "action": "Keep file2.md, mark file1.md as duplicate",
+      "result": "auto_resolved",
+      "kept": {
+        "file": "file2.md",
+        "content": "Statement 2",
+        "line_num": 1
+      },
+      "marked": {
+        "file": "file1.md",
+        "content": "Statement 1",
+        "line_num": 1
+      }
+    }
+  ]
+}

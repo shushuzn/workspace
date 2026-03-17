@@ -1,0 +1,23 @@
+{
+  "conflicts": [
+    {
+      "entity1": "P",
+      "entity2": "Q",
+      "relationship1": "causes (strength: 0.8)",
+      "relationship2": "prevents (strength: 0.6)",
+      "conflict_type": "contradictory_relationships",
+      "severity": "high",
+      "resolution": "requires_manual_review"
+    },
+    {
+      "entity1": "P",
+      "entity2": "Q",
+      "relationship1": "prevents (strength: 0.6)",
+      "relationship2": "causes (strength: 0.8)",
+      "conflict_type": "contradictory_relationships",
+      "severity": "high",
+      "resolution": "requires_manual_review"
+    }
+  ],
+  "last_updated": "2026-03-16T01:59:41.936907"
+}

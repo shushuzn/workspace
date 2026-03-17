@@ -1,0 +1,26 @@
+{
+  "protected": [
+    {
+      "file": "21-reports\\00-HEALTH-MONITORING-SYSTEM-DESIGN-20260313.md",
+      "level": "restricted",
+      "authorized_users": [
+        "admin"
+      ],
+      "protected_at": "2026-03-17T16:26:33.820786",
+      "protected_by": "default"
+    },
+    {
+      "file": "21-reports\\WEEKLY-REPORT-W11-20260313-PREVIEW.md",
+      "level": "confidential",
+      "authorized_users": [
+        "admin"
+      ],
+      "protected_at": "2026-03-17T16:26:33.826260",
+      "protected_by": "default"
+    }
+  ],
+  "classifications": {
+    "21-reports\\00-HEALTH-MONITORING-SYSTEM-DESIGN-20260313.md": "restricted",
+    "21-reports\\WEEKLY-REPORT-W11-20260313-PREVIEW.md": "confidential"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "deployment_id": "search-engine-20260317-161717",
+  "enabled": true,
+  "script": "report_search.py",
+  "features": {
+    "semantic_search": true,
+    "tag_system": true,
+    "advanced_filtering": true,
+    "smart_sorting": true,
+    "citation_tracking": true
+  },
+  "search_fields": ["title", "content", "tags", "metadata"],
+  "min_similarity": 0.3,
+  "max_results": 20,
+  "auto_tag": true,
+  "tag_sources": ["title", "headings", "keywords"],
+  "index_frequency": "daily",
+  "timestamp": "2026-03-17T16:17:17",
+  "status": "production_ready",
+  "baseline_stats": {
+    "total_reports": 16,
+    "total_tags": 5,
+    "average_word_count": 2554,
+    "top_tags": ["report", "summary", "research", "complete", "quality"]
+  }
+}

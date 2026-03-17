@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Dashboard - OpenClaw</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card.critical { border-left: 5px solid #dc3545; }
+        .stat-card.high { border-left: 5px solid #fd7e14; }
+        .stat-card.medium { border-left: 5px solid #ffc107; }
+        .stat-card.low { border-left: 5px solid #28a745; }
+        
+        .stat-value {
+            font-size: 36px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+        
+        .stat-label {
+            color: #666;
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .chart-card h3 {
+            margin-bottom: 20px;
+            color: #667eea;
+        }
+        
+        .files-table {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        th {
+            background: #f8f9fa;
+            font-weight: 600;
+            color: #667eea;
+        }
+        
+        tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .severity-badge {
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        
+        .severity-critical { background: #dc3545; color: white; }
+        .severity-high { background: #fd7e14; color: white; }
+        .severity-medium { background: #ffc107; color: #333; }
+        .severity-low { background: #28a745; color: white; }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 20px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            transition: width 0.5s ease;
+        }
+        
+        .remediation-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .remediation-item {
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin: 15px 0;
+            background: #f8f9fa;
+            border-radius: 0 10px 10px 0;
+        }
+        
+        .remediation-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+        
+        .remediation-steps {
+            list-style: none;
+            margin-top: 10px;
+        }
+        
+        .remediation-steps li {
+            padding: 5px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        
+        .remediation-steps li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .risk-indicator {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .risk-critical { background: #dc3545; color: white; }
+        .risk-high { background: #fd7e14; color: white; }
+        .risk-medium { background: #ffc107; color: #333; }
+        .risk-low { background: #28a745; color: white; }
+        
+        .auto-refresh {
+            text-align: right;
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid, .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🛡️ Security Dashboard</h1>
+            <p class="subtitle">Real-time vulnerability monitoring and remediation tracking</p>
+            <div id="risk-level" style="margin-top: 15px;"></div>
+            <div class="auto-refresh">Auto-refresh: <span id="countdown">30</span>s</div>
+        </header>
+        
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card critical">
+                <div class="stat-value" id="total-vulns">0</div>
+                <div class="stat-label">Total Vulnerabilities</div>
+            </div>
+            <div class="stat-card critical">
+                <div class="stat-value" id="critical-count">0</div>
+                <div class="stat-label">Critical</div>
+            </div>
+            <div class="stat-card high">
+                <div class="stat-value" id="high-count">0</div>
+                <div class="stat-label">High</div>
+            </div>
+            <div class="stat-card medium">
+                <div class="stat-value" id="medium-count">0</div>
+                <div class="stat-label">Medium</div>
+            </div>
+            <div class="stat-card low">
+                <div class="stat-value" id="low-count">0</div>
+                <div class="stat-label">Low</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="files-affected">0</div>
+                <div class="stat-label">Files Affected</div>
+            </div>
+        </div>
+        
+        <!-- Charts -->
+        <div class="charts-grid">
+            <div class="chart-card">
+                <h3>📊 Vulnerability Distribution</h3>
+                <canvas id="severityChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>🎯 Top Vulnerability Types</h3>
+                <canvas id="typesChart"></canvas>
+            </div>
+        </div>
+        
+        <!-- Affected Files Table -->
+        <div class="files-table">
+            <h3>📁 Most Affected Files (Top 20)</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>File Path</th>
+                        <th>Vulnerabilities</th>
+                        <th>Severity</th>
+                    </tr>
+                </thead>
+                <tbody id="files-table-body">
+                </tbody>
+            </table>
+        </div>
+        
+        <!-- Remediation Plan -->
+        <div class="remediation-section">
+            <h3>🔧 Priority Remediation Plan</h3>
+            
+            <div class="remediation-item">
+                <h4>CRITICAL: Hardcoded Secrets (2143 occurrences)</h4>
+                <p><strong>Estimated Time:</strong> 4-8 hours</p>
+                <ul class="remediation-steps">
+                    <li>Identify all hardcoded secrets in source code</li>
+                    <li>Create .env file with secret values</li>
+                    <li>Update code to use os.getenv() or python-dotenv</li>
+                    <li>Add .env to .gitignore</li>
+                    <li>Rotate all exposed secrets immediately</li>
+                    <li>Use secrets management tool</li>
+                </ul>
+            </div>
+            
+            <div class="remediation-item">
+                <h4>HIGH: Missing Input Validation (261 occurrences)</h4>
+                <p><strong>Estimated Time:</strong> 6-12 hours</p>
+                <ul class="remediation-steps">
+                    <li>Identify all user input points</li>
+                    <li>Add input validation using pydantic</li>
+                    <li>Implement allowlist validation</li>
+                    <li>Add sanitization for XSS/SQL injection</li>
+                    <li>Add unit tests for validation logic</li>
+                </ul>
+            </div>
+            
+            <div class="remediation-item">
+                <h4>HIGH: Weak Cryptography (104 occurrences)</h4>
+                <p><strong>Estimated Time:</strong> 3-6 hours</p>
+                <ul class="remediation-steps">
+                    <li>Replace MD5/SHA1 with SHA-256</li>
+                    <li>Replace DES/3DES with AES-256</li>
+                    <li>Use cryptography library</li>
+                    <li>Implement proper key management</li>
+                </ul>
+            </div>
+            
+            <div class="remediation-item">
+                <h4>MEDIUM: Insecure Deserialization (15 occurrences)</h4>
+                <p><strong>Estimated Time:</strong> 2-4 hours</p>
+                <ul class="remediation-steps">
+                    <li>Replace pickle with JSON</li>
+                    <li>Validate data source</li>
+                    <li>Implement signature verification</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Global variables
+        let scanData = null;
+        let severityChart = null;
+        let typesChart = null;
+        
+        // Load scan data
+        async function loadScanData() {
+            try {
+                const response = await fetch('data/vulnerability_report.json');
+                scanData = await response.json();
+                updateDashboard();
+            } catch (error) {
+                console.error('Error loading scan data:', error);
+                // Use sample data for demo
+                loadSampleData();
+            }
+        }
+        
+        // Load sample data for demo
+        function loadSampleData() {
+            scanData = {
+                "scan_date": "2026-03-16T18:53:00",
+                "files": {}
+            };
+            
+            // Generate sample data
+            const sampleFiles = [
+                { path: "30-scripts-tools/feishu-tools/feishu_api.py", vulns: 24, severity: "CRITICAL" },
+                { path: "30-scripts-tools/feishu-tools/feishu_api_enhanced.py", vulns: 25, severity: "CRITICAL" },
+                { path: "intentkit/skills/dexscreener/get_tokens_info.py", vulns: 23, severity: "CRITICAL" },
+                { path: "intentkit/skills/moralis/fetch_chain_portfolio.py", vulns: 25, severity: "CRITICAL" },
+                { path: "intentkit/skills/enso/tokens.py", vulns: 38, severity: "CRITICAL" },
+                { path: "intentkit/config/config.py", vulns: 39, severity: "CRITICAL" },
+                { path: "intentkit/skills/li-fi/utils.py", vulns: 24, severity: "CRITICAL" },
+                { path: "intentkit/skills/moralis/fetch_wallet_portfolio.py", vulns: 25, severity: "CRITICAL" },
+                { path: "intentkit/skills/moralis/fetch_solana_portfolio.py", vulns: 22, severity: "CRITICAL" },
+                { path: "intentkit/skills/pancakeswap/constants.py", vulns: 22, severity: "CRITICAL" }
+            ];
+            
+            sampleFiles.forEach(file => {
+                scanData.files[file.path] = Array(file.vulns).fill({
+                    type: "HARDCODED_SECRET",
+                    severity: "CRITICAL"
+                });
+            });
+            
+            updateDashboard();
+        }
+        
+        // Update dashboard
+        function updateDashboard() {
+            const stats = calculateStats();
+            updateStatsCards(stats);
+            updateCharts(stats);
+            updateFilesTable(stats);
+            updateRiskLevel(stats);
+        }
+        
+        // Calculate statistics
+        function calculateStats() {
+            const stats = {
+                total: 0,
+                critical: 0,
+                high: 0,
+                medium: 0,
+                low: 0,
+                files_affected: 0,
+                types: {},
+                files: []
+            };
+            
+            for (const [filePath, vulns] of Object.entries(scanData.files || {})) {
+                stats.files_affected++;
+                const fileVulns = vulns.length;
+                const maxSeverity = vulns.some(v => v.severity === 'CRITICAL') ? 'CRITICAL' :
+                                   vulns.some(v => v.severity === 'HIGH') ? 'HIGH' :
+                                   vulns.some(v => v.severity === 'MEDIUM') ? 'MEDIUM' : 'LOW';
+                
+                stats.files.push({ path: filePath, vulns: fileVulns, severity: maxSeverity });
+                
+                vulns.forEach(vuln => {
+                    stats.total++;
+                    const severity = vuln.severity.toUpperCase();
+                    if (severity === 'CRITICAL') stats.critical++;
+                    else if (severity === 'HIGH') stats.high++;
+                    else if (severity === 'MEDIUM') stats.medium++;
+                    else stats.low++;
+                    
+                    const type = vuln.type || 'UNKNOWN';
+                    stats.types[type] = (stats.types[type] || 0) + 1;
+                });
+            }
+            
+            stats.files.sort((a, b) => b.vulns - a.vulns);
+            return stats;
+        }
+        
+        // Update stats cards
+        function updateStatsCards(stats) {
+            document.getElementById('total-vulns').textContent = stats.total.toLocaleString();
+            document.getElementById('critical-count').textContent = stats.critical.toLocaleString();
+            document.getElementById('high-count').textContent = stats.high.toLocaleString();
+            document.getElementById('medium-count').textContent = stats.medium.toLocaleString();
+            document.getElementById('low-count').textContent = stats.low.toLocaleString();
+            document.getElementById('files-affected').textContent = stats.files_affected.toLocaleString();
+        }
+        
+        // Update charts
+        function updateCharts(stats) {
+            // Severity Chart
+            const severityCtx = document.getElementById('severityChart').getContext('2d');
+            
+            if (severityChart) {
+                severityChart.destroy();
+            }
+            
+            severityChart = new Chart(severityCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['Critical', 'High', 'Medium', 'Low'],
+                    datasets: [{
+                        data: [stats.critical, stats.high, stats.medium, stats.low],
+                        backgroundColor: [
+                            '#dc3545',
+                            '#fd7e14',
+                            '#ffc107',
+                            '#28a745'
+                        ]
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true
+                }
+            });
+            
+            // Types Chart
+            const typesCtx = document.getElementById('typesChart').getContext('2d');
+            
+            if (typesChart) {
+                typesChart.destroy();
+            }
+            
+            const topTypes = Object.entries(stats.types)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+            
+            typesChart = new Chart(typesCtx, {
+                type: 'bar',
+                data: {
+                    labels: topTypes.map(t => t[0]),
+                    datasets: [{
+                        label: 'Occurrences',
+                        data: topTypes.map(t => t[1]),
+                        backgroundColor: '#667eea'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+        }
+        
+        // Update files table
+        function updateFilesTable(stats) {
+            const tbody = document.getElementById('files-table-body');
+            tbody.innerHTML = '';
+            
+            stats.files.slice(0, 20).forEach((file, index) => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td style="font-family: monospace; font-size: 12px;">${file.path}</td>
+                    <td>${file.vulns}</td>
+                    <td><span class="severity-badge severity-${file.severity.toLowerCase()}">${file.severity}</span></td>
+                `;
+                tbody.appendChild(row);
+            });
+        }
+        
+        // Update risk level
+        function updateRiskLevel(stats) {
+            const riskDiv = document.getElementById('risk-level');
+            let riskLevel, riskClass;
+            
+            if (stats.critical > 100) {
+                riskLevel = "CRITICAL";
+                riskClass = "risk-critical";
+            } else if (stats.critical > 10) {
+                riskLevel = "HIGH";
+                riskClass = "risk-high";
+            } else if (stats.critical > 0) {
+                riskLevel = "MEDIUM";
+                riskClass = "risk-medium";
+            } else {
+                riskLevel = "LOW";
+                riskClass = "risk-low";
+            }
+            
+            riskDiv.innerHTML = `<span class="risk-indicator ${riskClass}">Risk Level: ${riskLevel}</span>`;
+        }
+        
+        // Auto-refresh countdown
+        let countdown = 30;
+        setInterval(() => {
+            countdown--;
+            document.getElementById('countdown').textContent = countdown;
+            
+            if (countdown <= 0) {
+                loadScanData();
+                countdown = 30;
+            }
+        }, 1000);
+        
+        // Initialize
+        loadScanData();
+    </script>
+</body>
+</html>
