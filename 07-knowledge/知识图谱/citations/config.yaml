@@ -1,0 +1,50 @@
+# Citation Tracker 配置文件
+
+# 输出配置
+output:
+  dir: knowledge-graph/citations
+  format: json  # json, graphml, mermaid, all
+  visualize: true
+
+# API 配置
+api:
+  semantic_scholar:
+    enabled: true
+    timeout: 10
+    rate_limit: 100  # 请求/分钟
+  arxiv:
+    timeout: 30
+
+# 引用追踪配置
+tracking:
+  max_depth: 1  # 引用深度 (0=仅直接引用)
+  min_citations: 0  # 最小引用数过滤
+  offline: false  # 仅本地引用模式
+
+# 批量处理配置
+batch:
+  enabled: true
+  input_dir: Medium  # P-Note 目录
+  pattern: "P-*.md"  # 文件匹配模式
+  max_concurrent: 3  # 最大并发数
+  retry_count: 3  # 失败重试次数
+
+# 缓存配置
+cache:
+  enabled: true
+  file: citation_cache.json
+  ttl_days: 7  # 缓存有效期
+
+# 可视化配置
+visualization:
+  graphml: true  # Gephi 格式
+  mermaid: true  # Markdown 格式
+  highlight_top_n: 10  # 高亮 Top N 影响力论文
+
+# 定时任务
+schedule:
+  enabled: true
+  frequency: weekly  # daily, weekly, monthly
+  day_of_week: "Monday"
+  time: "04:00"
+  timezone: "Asia/Shanghai"

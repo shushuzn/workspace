@@ -1,0 +1,24 @@
+{
+  "name": "7AM Risk Warning with Feishu Notification",
+  "schedule": "0 7 * * *",
+  "type": "agent",
+  "channel": "console",
+  "enabled": true,
+  "description": "Daily 7AM risk warning scan with automatic Feishu notification",
+  "command": {
+    "task": "Run 7AM risk warning scan",
+    "notification": {
+      "script": "python D:\\OpenClaw\\workspace\\30-scripts-tools\\feishu-tools\\cron_notification.py",
+      "args_success": [
+        "7AM Risk Warning",
+        "success",
+        "Scan completed - {summary}"
+      ],
+      "args_failed": [
+        "7AM Risk Warning",
+        "failed",
+        "Scan failed - {error}"
+      ]
+    }
+  }
+}

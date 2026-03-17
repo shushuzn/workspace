@@ -1,0 +1,45 @@
+{
+  "workspace": "D:\\OpenClaw\\workspace",
+  "agent_name": "ProductManager-Agent",
+  "version": "3.0-Full",
+  
+  "cleanliness": {
+    "max_folders": 50,
+    "max_depth": 5,
+    "auto_clean": false,
+    "naming_convention": "english",
+    "check_duplicates": true
+  },
+  
+  "product": {
+    "min_roi_threshold": 0.5,
+    "auto_decide": false,
+    "require_user_confirmation": true,
+    "value_weights": {
+      "usage_frequency": 0.4,
+      "dependencies": 0.3,
+      "code_quality": 0.2,
+      "maintenance_cost": 0.1
+    }
+  },
+  
+  "schedule": {
+    "daily_check": true,
+    "weekly_audit": true,
+    "daily_time": "09:00",
+    "weekly_day": "Monday"
+  },
+  
+  "reports": {
+    "auto_generate": true,
+    "format": "markdown",
+    "include_recommendations": true,
+    "include_history": true
+  },
+  
+  "executor": {
+    "auto_execute_low_risk": true,
+    "require_confirmation_for": ["delete", "merge", "rename"],
+    "backup_before_changes": true
+  }
+}

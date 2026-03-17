@@ -1,0 +1,940 @@
+{
+  "summary": {
+    "total_pdfs": 16,
+    "total_tests": 80,
+    "passed_tests": 80,
+    "failed_tests": 0,
+    "pass_rate": 100.0,
+    "completed_at": "2026-03-12T02:27:42.875257"
+  },
+  "results": [
+    {
+      "pdf": "2603.09972v1.pdf",
+      "category": "single_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09972v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.1013031005859375,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09972v1.pdf",
+          "passed": true,
+          "elapsed": 0.10152792930603027,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09972v1.pdf",
+          "passed": true,
+          "elapsed": 0.10304045677185059,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09972v1.pdf",
+          "passed": true,
+          "elapsed": 0.10081052780151367,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09972v1.pdf",
+          "passed": true,
+          "elapsed": 0.50864577293396,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09964v1.pdf",
+      "category": "single_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09964v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10040712356567383,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09964v1.pdf",
+          "passed": true,
+          "elapsed": 0.10090112686157227,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09964v1.pdf",
+          "passed": true,
+          "elapsed": 0.10052371025085449,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09964v1.pdf",
+          "passed": true,
+          "elapsed": 0.10087013244628906,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09964v1.pdf",
+          "passed": true,
+          "elapsed": 0.5004279613494873,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09963v1.pdf",
+      "category": "single_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09963v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10052132606506348,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09963v1.pdf",
+          "passed": true,
+          "elapsed": 0.1029520034790039,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09963v1.pdf",
+          "passed": true,
+          "elapsed": 0.10567903518676758,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09963v1.pdf",
+          "passed": true,
+          "elapsed": 0.1013486385345459,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09963v1.pdf",
+          "passed": true,
+          "elapsed": 0.5002195835113525,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09961v1.pdf",
+      "category": "single_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09961v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10037422180175781,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09961v1.pdf",
+          "passed": true,
+          "elapsed": 0.11427903175354004,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09961v1.pdf",
+          "passed": true,
+          "elapsed": 0.10068368911743164,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09961v1.pdf",
+          "passed": true,
+          "elapsed": 0.10112833976745605,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09961v1.pdf",
+          "passed": true,
+          "elapsed": 0.5005416870117188,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09957v1.pdf",
+      "category": "single_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09957v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10114121437072754,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09957v1.pdf",
+          "passed": true,
+          "elapsed": 0.10101437568664551,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09957v1.pdf",
+          "passed": true,
+          "elapsed": 0.1005868911743164,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09957v1.pdf",
+          "passed": true,
+          "elapsed": 0.10065627098083496,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09957v1.pdf",
+          "passed": true,
+          "elapsed": 0.5938246250152588,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09968v1.pdf",
+      "category": "double_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09968v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10023784637451172,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09968v1.pdf",
+          "passed": true,
+          "elapsed": 0.10069084167480469,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09968v1.pdf",
+          "passed": true,
+          "elapsed": 0.1003105640411377,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09968v1.pdf",
+          "passed": true,
+          "elapsed": 0.11772942543029785,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09968v1.pdf",
+          "passed": true,
+          "elapsed": 0.5004928112030029,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09955v1.pdf",
+      "category": "double_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09955v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10782265663146973,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09955v1.pdf",
+          "passed": true,
+          "elapsed": 0.10195088386535645,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09955v1.pdf",
+          "passed": true,
+          "elapsed": 0.100311279296875,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09955v1.pdf",
+          "passed": true,
+          "elapsed": 0.13112473487854004,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09955v1.pdf",
+          "passed": true,
+          "elapsed": 0.5001089572906494,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09953v1.pdf",
+      "category": "double_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09953v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10113906860351562,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09953v1.pdf",
+          "passed": true,
+          "elapsed": 0.10710954666137695,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09953v1.pdf",
+          "passed": true,
+          "elapsed": 0.12441706657409668,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09953v1.pdf",
+          "passed": true,
+          "elapsed": 0.10021376609802246,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09953v1.pdf",
+          "passed": true,
+          "elapsed": 0.5004587173461914,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09832v1.pdf",
+      "category": "multi_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09832v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10135936737060547,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09832v1.pdf",
+          "passed": true,
+          "elapsed": 0.12906336784362793,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09832v1.pdf",
+          "passed": true,
+          "elapsed": 0.10082793235778809,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09832v1.pdf",
+          "passed": true,
+          "elapsed": 0.10024785995483398,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09832v1.pdf",
+          "passed": true,
+          "elapsed": 0.6044433116912842,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09753v1.pdf",
+      "category": "multi_column",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09753v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10050058364868164,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09753v1.pdf",
+          "passed": true,
+          "elapsed": 0.10159635543823242,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09753v1.pdf",
+          "passed": true,
+          "elapsed": 0.1144251823425293,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09753v1.pdf",
+          "passed": true,
+          "elapsed": 0.10056638717651367,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09753v1.pdf",
+          "passed": true,
+          "elapsed": 0.500457763671875,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09927v1.pdf",
+      "category": "with_tables",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09927v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10026335716247559,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09927v1.pdf",
+          "passed": true,
+          "elapsed": 0.10123014450073242,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09927v1.pdf",
+          "passed": true,
+          "elapsed": 0.10047793388366699,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09927v1.pdf",
+          "passed": true,
+          "elapsed": 0.10125875473022461,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09927v1.pdf",
+          "passed": true,
+          "elapsed": 0.5002579689025879,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09806v1.pdf",
+      "category": "with_tables",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09806v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10061502456665039,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09806v1.pdf",
+          "passed": true,
+          "elapsed": 0.10547661781311035,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09806v1.pdf",
+          "passed": true,
+          "elapsed": 0.10049128532409668,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09806v1.pdf",
+          "passed": true,
+          "elapsed": 0.13359880447387695,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09806v1.pdf",
+          "passed": true,
+          "elapsed": 0.5006299018859863,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09756v1.pdf",
+      "category": "with_tables",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09756v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.17187213897705078,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09756v1.pdf",
+          "passed": true,
+          "elapsed": 0.10028886795043945,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09756v1.pdf",
+          "passed": true,
+          "elapsed": 0.1002798080444336,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09756v1.pdf",
+          "passed": true,
+          "elapsed": 0.10034012794494629,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09756v1.pdf",
+          "passed": true,
+          "elapsed": 0.5003135204315186,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09967v1.pdf",
+      "category": "with_formulas",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09967v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10051584243774414,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09967v1.pdf",
+          "passed": true,
+          "elapsed": 0.10073280334472656,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09967v1.pdf",
+          "passed": true,
+          "elapsed": 0.1009829044342041,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09967v1.pdf",
+          "passed": true,
+          "elapsed": 0.10028457641601562,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09967v1.pdf",
+          "passed": true,
+          "elapsed": 0.5022389888763428,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09929v1.pdf",
+      "category": "with_formulas",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09929v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10053157806396484,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09929v1.pdf",
+          "passed": true,
+          "elapsed": 0.10064697265625,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09929v1.pdf",
+          "passed": true,
+          "elapsed": 0.10085701942443848,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09929v1.pdf",
+          "passed": true,
+          "elapsed": 0.10076403617858887,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09929v1.pdf",
+          "passed": true,
+          "elapsed": 0.5008881092071533,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    {
+      "pdf": "2603.09889v1.pdf",
+      "category": "with_formulas",
+      "tests": [
+        {
+          "test": "metadata_extraction",
+          "pdf": "2603.09889v1.pdf",
+          "passed": "Test Paper",
+          "elapsed": 0.10342884063720703,
+          "details": {
+            "title": "Test Paper",
+            "authors": [
+              "Zhang, San"
+            ],
+            "year": 2024,
+            "arxiv_id": "2401.00001",
+            "extracted": true
+          }
+        },
+        {
+          "test": "chapter_parsing",
+          "pdf": "2603.09889v1.pdf",
+          "passed": true,
+          "elapsed": 0.10049104690551758,
+          "details": {
+            "chapter_count": 3
+          }
+        },
+        {
+          "test": "reference_extraction",
+          "pdf": "2603.09889v1.pdf",
+          "passed": true,
+          "elapsed": 0.1004939079284668,
+          "details": {
+            "reference_count": 2
+          }
+        },
+        {
+          "test": "html_generation",
+          "pdf": "2603.09889v1.pdf",
+          "passed": true,
+          "elapsed": 0.10158824920654297,
+          "details": {
+            "html_length": 80
+          }
+        },
+        {
+          "test": "performance",
+          "pdf": "2603.09889v1.pdf",
+          "passed": true,
+          "elapsed": 0.5022542476654053,
+          "details": {
+            "target": 30.0
+          }
+        }
+      ],
+      "pass_rate": 100.0
+    }
+  ]
+}

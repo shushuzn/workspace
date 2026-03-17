@@ -1,0 +1,125 @@
+{
+  "last_scan": "2026-03-17T16:04:34.496555",
+  "reports": [
+    {
+      "file": "21-reports\\00-CURRENT-RESEARCH-EVALUATION-20260313.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.407129",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\00-HEALTH-MONITORING-SYSTEM-DESIGN-20260313.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.407129",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\00-MARKDOWN-FILES-CLEANUP-REPORT-20260313.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.407129",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\00-PROJECT-HEALTH-CHECK-20260313.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.407129",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\00-PROJECT-HEALTH-FINAL-SUMMARY-20260313.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": true,
+      "mtime": "2026-03-17T02:28:03.422176",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\00-PYTHON-FILES-CLEANUP-REPORT-20260313.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.424240",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\AUTONOMOUS-SESSION-FINAL-REPORT.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": true,
+      "mtime": "2026-03-17T02:28:03.424240",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\AUTONOMOUS-WORK-SUMMARY.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.424240",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\REPORT-INDEX.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T15:38:36.359755",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\WEEKLY-REPORT-W11-20260313-PREVIEW.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.424240",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\WORKSPACE-STANDARDIZATION-COMPLETE.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": true,
+      "mtime": "2026-03-17T02:28:03.424240",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\lig-risk\\lig-risk-report-20260313.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.434470",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\lig-risk\\lig-risk-report-20260315.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.434470",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\lig-risk\\lig-risk-report-20260316.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T02:28:03.434470",
+      "action": "keep"
+    },
+    {
+      "file": "21-reports\\lig-risk\\lig-risk-report-20260317.md",
+      "age_days": 0,
+      "stage": "new",
+      "important": false,
+      "mtime": "2026-03-17T08:12:49.066460",
+      "action": "keep"
+    }
+  ]
+}

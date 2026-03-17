@@ -1,0 +1,121 @@
+{
+  "name": "文件自动归档流程",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "cron": {
+            "expression": "0 5 * * *"
+          }
+        }
+      },
+      "id": "daily-5am",
+      "name": "Daily 5AM",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "command": "Get-ChildItem -Path \"D:\\OpenClaw\\workspace\\Medium\\Raw\" -Filter \"*.md\" | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-7) } | Move-Item -Destination \"D:\\OpenClaw\\workspace\\Medium\\Archive\\$((Get-Date).ToString('yyyy-MM'))\" -Force",
+        "options": {}
+      },
+      "id": "archive-old-files",
+      "name": "Archive Old Files",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "command": "Get-ChildItem -Path \"D:\\OpenClaw\\workspace\" -Recurse -Directory -Filter \"__pycache__\" | Remove-Item -Recurse -Force",
+        "options": {}
+      },
+      "id": "clean-pycache",
+      "name": "Clean __pycache__",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "command": "Get-ChildItem -Path \"$env:TEMP\" -Filter \"*.tmp\" | Where-Object { $_.LastWriteTime -lt (Get-Date).AddDays(-1) } | Remove-Item -Force",
+        "options": {}
+      },
+      "id": "clean-temp",
+      "name": "Clean Temp Files",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [660, 0]
+    },
+    {
+      "parameters": {
+        "command": "$disk = Get-PSDrive C; $free = [math]::Round($disk.Free/1GB, 2); Write-Host \"C 盘剩余：$free GB\"",
+        "options": {}
+      },
+      "id": "check-disk",
+      "name": "Check Disk Space",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1.0,
+      "position": [880, 0]
+    }
+  ],
+  "connections": {
+    "Daily 5AM": {
+      "main": [
+        [
+          {
+            "node": "Archive Old Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Archive Old Files": {
+      "main": [
+        [
+          {
+            "node": "Clean __pycache__",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean __pycache__": {
+      "main": [
+        [
+          {
+            "node": "Clean Temp Files",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Clean Temp Files": {
+      "main": [
+        [
+          {
+            "node": "Check Disk Space",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "tags": [
+    {
+      "name": "OpenClaw"
+    },
+    {
+      "name": "Maintenance"
+    }
+  ]
+}

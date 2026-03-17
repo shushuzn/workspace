@@ -1,0 +1,205 @@
+{
+  "timestamp": "2026-03-16T17:58:44.927682",
+  "configuration": {
+    "enabled": true,
+    "total_capacity_mb": 512,
+    "l1_ratio": 0.6,
+    "l2_ratio": 0.3,
+    "l3_ratio": 0.1,
+    "auto_gc": true,
+    "gc_threshold": 0.7,
+    "prefetch_enabled": true,
+    "contextdb_integration": true,
+    "persona_integration": true,
+    "heartbeat_integration": true
+  },
+  "integration_status": {
+    "enabled": true,
+    "total_capacity_mb": 512,
+    "utilization": 0.0,
+    "l1_usage": 0.0,
+    "l2_usage": 0.0,
+    "l3_usage": 0.0,
+    "cache_hit_rate": 0,
+    "avg_access_time_ms": 0.0,
+    "registered_workflows": 8,
+    "optimizations_run": 8,
+    "integrations": {
+      "contextdb": true,
+      "persona": true,
+      "heartbeat": true
+    }
+  },
+  "workflow_profiles": {
+    "arxiv_research": {
+      "workflow_name": "arxiv_research",
+      "priority": 1,
+      "l1_allocation_mb": 50,
+      "l2_allocation_mb": 30,
+      "l3_allocation_mb": 10,
+      "auto_gc": true,
+      "description": "arXiv research workflow - high priority"
+    },
+    "memory_distillation": {
+      "workflow_name": "memory_distillation",
+      "priority": 2,
+      "l1_allocation_mb": 30,
+      "l2_allocation_mb": 20,
+      "l3_allocation_mb": 10,
+      "auto_gc": true,
+      "description": "Memory distillation workflow"
+    },
+    "7_persona_collaboration": {
+      "workflow_name": "7_persona_collaboration",
+      "priority": 2,
+      "l1_allocation_mb": 40,
+      "l2_allocation_mb": 25,
+      "l3_allocation_mb": 15,
+      "auto_gc": true,
+      "description": "7-Persona collaboration system"
+    },
+    "knowledge_graph": {
+      "workflow_name": "knowledge_graph",
+      "priority": 2,
+      "l1_allocation_mb": 35,
+      "l2_allocation_mb": 20,
+      "l3_allocation_mb": 10,
+      "auto_gc": true,
+      "description": "Knowledge graph operations"
+    },
+    "heartbeat_tasks": {
+      "workflow_name": "heartbeat_tasks",
+      "priority": 3,
+      "l1_allocation_mb": 20,
+      "l2_allocation_mb": 15,
+      "l3_allocation_mb": 10,
+      "auto_gc": true,
+      "description": "HEARTBEAT automated tasks"
+    },
+    "data_collection": {
+      "workflow_name": "data_collection",
+      "priority": 3,
+      "l1_allocation_mb": 15,
+      "l2_allocation_mb": 10,
+      "l3_allocation_mb": 5,
+      "auto_gc": true,
+      "description": "Data collection workflows"
+    },
+    "code_generation": {
+      "workflow_name": "code_generation",
+      "priority": 3,
+      "l1_allocation_mb": 25,
+      "l2_allocation_mb": 15,
+      "l3_allocation_mb": 10,
+      "auto_gc": true,
+      "description": "Code generation and self-correction"
+    },
+    "report_generation": {
+      "workflow_name": "report_generation",
+      "priority": 4,
+      "l1_allocation_mb": 10,
+      "l2_allocation_mb": 10,
+      "l3_allocation_mb": 5,
+      "auto_gc": true,
+      "description": "Report generation (low priority)"
+    }
+  },
+  "optimization_history": [
+    {
+      "timestamp": "2026-03-16T17:58:44.925614",
+      "workflow": "arxiv_research",
+      "memory_before_mb": 0.0,
+      "memory_after_mb": 0.0,
+      "reduction_percent": 0,
+      "access_time_before_ms": 0.0,
+      "access_time_after_ms": 0.0,
+      "speedup_percent": 0,
+      "gc_triggered": false,
+      "blocks_evicted": 0
+    },
+    {
+      "timestamp": "2026-03-16T17:58:44.925629",
+      "workflow": "memory_distillation",
+      "memory_before_mb": 0.0,
+      "memory_after_mb": 0.0,
+      "reduction_percent": 0,
+      "access_time_before_ms": 0.0,
+      "access_time_after_ms": 0.0,
+      "speedup_percent": 0,
+      "gc_triggered": false,
+      "blocks_evicted": 0
+    },
+    {
+      "timestamp": "2026-03-16T17:58:44.925639",
+      "workflow": "7_persona_collaboration",
+      "memory_before_mb": 0.0,
+      "memory_after_mb": 0.0,
+      "reduction_percent": 0,
+      "access_time_before_ms": 0.0,
+      "access_time_after_ms": 0.0,
+      "speedup_percent": 0,
+      "gc_triggered": false,
+      "blocks_evicted": 0
+    },
+    {
+      "timestamp": "2026-03-16T17:58:44.925647",
+      "workflow": "knowledge_graph",
+      "memory_before_mb": 0.0,
+      "memory_after_mb": 0.0,
+      "reduction_percent": 0,
+      "access_time_before_ms": 0.0,
+      "access_time_after_ms": 0.0,
+      "speedup_percent": 0,
+      "gc_triggered": false,
+      "blocks_evicted": 0
+    },
+    {
+      "timestamp": "2026-03-16T17:58:44.925654",
+      "workflow": "heartbeat_tasks",
+      "memory_before_mb": 0.0,
+      "memory_after_mb": 0.0,
+      "reduction_percent": 0,
+      "access_time_before_ms": 0.0,
+      "access_time_after_ms": 0.0,
+      "speedup_percent": 0,
+      "gc_triggered": false,
+      "blocks_evicted": 0
+    },
+    {
+      "timestamp": "2026-03-16T17:58:44.925662",
+      "workflow": "data_collection",
+      "memory_before_mb": 0.0,
+      "memory_after_mb": 0.0,
+      "reduction_percent": 0,
+      "access_time_before_ms": 0.0,
+      "access_time_after_ms": 0.0,
+      "speedup_percent": 0,
+      "gc_triggered": false,
+      "blocks_evicted": 0
+    },
+    {
+      "timestamp": "2026-03-16T17:58:44.925669",
+      "workflow": "code_generation",
+      "memory_before_mb": 0.0,
+      "memory_after_mb": 0.0,
+      "reduction_percent": 0,
+      "access_time_before_ms": 0.0,
+      "access_time_after_ms": 0.0,
+      "speedup_percent": 0,
+      "gc_triggered": false,
+      "blocks_evicted": 0
+    },
+    {
+      "timestamp": "2026-03-16T17:58:44.925676",
+      "workflow": "report_generation",
+      "memory_before_mb": 0.0,
+      "memory_after_mb": 0.0,
+      "reduction_percent": 0,
+      "access_time_before_ms": 0.0,
+      "access_time_after_ms": 0.0,
+      "speedup_percent": 0,
+      "gc_triggered": false,
+      "blocks_evicted": 0
+    }
+  ]
+}

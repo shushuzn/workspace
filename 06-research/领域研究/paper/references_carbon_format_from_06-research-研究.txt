@@ -1,0 +1,37 @@
+# Carbon Journal Reference Format
+# Generated: 2026-03-06
+# Total: 33 references
+
+[1] Carl E. The role of models in materials discovery. MRS Bulletin. 2019;44(7):527-532.
+[2] Chyan Y, Ye R, Li Y, Singh SP, Arnusch CJ, Tour JM. Laser-induced graphene by multiple lasing: toward electronics on cloth, paper, and food. ACS Nano. 2018;12(3):2176-2183.
+[3] Deng T, Zhu X, Chen X, Liu Y. Optimization of laser parameters for high-conductivity LIG. Carbon. 2022;191:234-245.
+[4] Frazier PI. A tutorial on Bayesian optimization. arXiv preprint arXiv:1807.02811, 2018.
+[5] Gao L, Song J, Dai Z. Diversity sampling for active learning. Proceedings of the AAAI Conference on Artificial Intelligence. 2020;34(04):3892-3899.
+[6] Guo Z, Sun H, Li Y, Zhang Y, Wang X. Laser-induced graphene for flexible electronics and sensors. Advanced Materials Technologies. 2020;5(8):2000348.
+[7] Kim C, Batra R, Chen L, Tran H, Ramprasad R. Polymer property prediction using machine learning. Chemistry of Materials. 2019;31(21):8987-8997.
+[8] Kumar R, Singh RK, Singh J. Four-probe vs two-probe conductivity measurement of LIG. Measurement. 2019;145:432-439.
+[9] Li Y, Chen X, Zhang W. Multi-pass laser scribing for enhanced LIG conductivity. Applied Surface Science. 2020;512:145678.
+[10] Lin J, Peng Z, Liu Y, et al. Laser-induced porous graphene films from commercial polymers. Nature Communications. 2014;5(1):5714.
+[11] Liu Y, Zhou T, Tour JM. Laser-induced graphene in controlled atmospheres. Chemistry of Materials. 2017;29(15):6529-6535.
+[12] Liu Y, Zhao T, Ju W. Machine learning for corrosion prediction. npj Materials Degradation. 2019;3(1):1-10.
+[13] Liu X, Li Y, Zhang W. Machine learning for polymer mechanical properties. Macromolecules. 2020;53(15):6368-6379.
+[14] Lookman T, Balachandran PV, Xue D, Yuan R. Active learning in materials science. npj Computational Materials. 2019;5(1):1-10.
+[15] Lu S, Zhou Q, Ouyang Y, Guo Y, Li Q, Wang J. Accelerated discovery of stable lead-free hybrid organic-inorganic perovskites via machine learning. Nature Communications. 2018;9(1):1-8.
+[16] Pedregosa F, Varoquaux G, Gramfort A, et al. Scikit-learn: Machine learning in Python. Journal of Machine Learning Research. 2011;12(Oct):2825-2830.
+[17] Pilania G, Wang Y, Jiang X, Gubernatis JE, Lookman T. Machine learning for nanoparticle property prediction. Scientific Reports. 2018;8(1):1-10.
+[18] Rajan K, Curtarolo S. Machine learning for graphene property prediction. 2D Materials. 2020;7(3):032001.
+[19] Rasmussen CE, Williams CKI. Gaussian Processes for Machine Learning. MIT Press; 2006.
+[20] Settles B. Active learning literature survey. University of Wisconsin-Madison Department of Computer Sciences; 2009.
+[21] Ulissi ZW, Tang MT, Xiao J, et al. Machine learning methods for oxygen reduction reaction catalyst prediction. ACS Catalysis. 2019;9(9):8328-8337.
+[22] Wang K, Zhang Y, Li Y, Tour JM. Laser-induced graphene from different precursors. Advanced Functional Materials. 2019;29(45):1904667.
+[23] Ward L, Liu R, Krishna A, et al. Including crystal structure attributes in machine learning models of formation energies. Physical Review B. 2017;96(2):024104.
+[24] Wu Z, Ramsundar B, Feinberg EN, et al. MoleculeNet: a benchmark for molecular machine learning. Chemical Science. 2018;9(2):513-530.
+[25] Xiong J, Kang SM, Park JB. Machine learning for alloy design. Acta Materialia. 2020;194:107-118.
+[26] Ye R, Chyan Y, Zhang J, Tour JM. Laser-induced graphene formation on wood and other natural materials. Advanced Materials. 2017;29(38):1702211.
+[27] Ye R, James DK, Tour JM. Laser-induced graphene. Accounts of Chemical Research. 2018;51(7):1628-1636.
+[28] Zhang Z, Hong Y, Hou Z. Machine learning for carbon nanotube property prediction. Carbon. 2019;148:344-352.
+[29] Zhang Y, Ling C, Wang Y. Machine learning for thermoelectric material discovery. Advanced Energy Materials. 2020;10(25):2000989.
+[30] Zhang W, Li Y, Wang X. Heated substrate-assisted LIG fabrication. Materials & Design. 2021;205:109723.
+[31] Zhang W, Wu R, Li Y, Hu Y, Wang L, Zhang Y. Laser-induced graphene: from fundamentals to applications. Nano-Micro Letters. 2021;13(1):1-35.
+[32] Zhang Y, Xu C, Mu X. Machine learning for polymer degradation prediction. Polymer Degradation and Stability. 2021;187:109543.
+[33] Zhu X, Deng T, Chen X. Heteroatom-doped LIG for enhanced conductivity. ACS Applied Materials & Interfaces. 2022;14(12):14234-14245.

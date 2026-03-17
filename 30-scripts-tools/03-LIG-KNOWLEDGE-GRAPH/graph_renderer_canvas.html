@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>多模态知识图谱 - Canvas 优化版 (D3.js + Pixi.js)</title>
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/pixi.js@7.3.2/dist/pixi.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+      overflow: hidden;
+    }
+    
+    #container {
+      display: flex;
+      height: 100vh;
+    }
+    
+    #sidebar {
+      width: 320px;
+      background: #16213e;
+      padding: 20px;
+      overflow-y: auto;
+      border-right: 1px solid #0f3460;
+    }
+    
+    #graph-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    #canvas-container {
+      width: 100%;
+      height: 100%;
+    }
+    
+    .control-panel {
+      margin-bottom: 20px;
+      padding: 15px;
+      background: #0f3460;
+      border-radius: 8px;
+    }
+    
+    .control-panel h3 {
+      margin-bottom: 10px;
+      color: #e94560;
+      font-size: 16px;
+    }
+    
+    .control-group {
+      margin-bottom: 12px;
+    }
+    
+    .control-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 13px;
+      color: #aaa;
+    }
+    
+    .control-group input[type="range"] {
+      width: 100%;
+    }
+    
+    .control-group select,
+    .control-group input[type="number"] {
+      width: 100%;
+      padding: 8px;
+      background: #16213e;
+      border: 1px solid #0f3460;
+      color: #eee;
+      border-radius: 4px;
+      font-size: 13px;
+    }
+    
+    .stats {
+      margin-top: 20px;
+      padding: 15px;
+      background: #0f3460;
+      border-radius: 8px;
+    }
+    
+    .stats h4 {
+      color: #e94560;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+    
+    .stat-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-size: 13px;
+    }
+    
+    .stat-value {
+      color: #4cd137;
+      font-weight: bold;
+    }
+    
+    .btn {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 8px;
+      background: #e94560;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.3s;
+    }
+    
+    .btn:hover {
+      background: #ff6b81;
+    }
+    
+    .btn:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+    
+    .btn-secondary {
+      background: #0f3460;
+    }
+    
+    .btn-secondary:hover {
+      background: #1a4a7a;
+    }
+    
+    .legend {
+      margin-top: 15px;
+      padding: 10px;
+      background: #0f3460;
+      border-radius: 8px;
+    }
+    
+    .legend h4 {
+      color: #e94560;
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    
+    .legend-item {
+      display: flex;
+      align-items: center;
+      margin-bottom: 5px;
+      font-size: 12px;
+    }
+    
+    .legend-color {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+      margin-right: 8px;
+    }
+    
+    .node-info {
+      margin-top: 15px;
+      padding: 15px;
+      background: #0f3460;
+      border-radius: 8px;
+      display: none;
+    }
+    
+    .node-info h4 {
+      color: #e94560;
+      margin-bottom: 10px;
+    }
+    
+    .node-info p {
+      margin-bottom: 5px;
+      font-size: 13px;
+    }
+    
+    .loading-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(26, 26, 46, 0.9);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+    
+    .loading-spinner {
+      text-align: center;
+    }
+    
+    .loading-spinner p {
+      margin-top: 10px;
+      color: #e94560;
+    }
+    
+    .fps-counter {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: rgba(15, 52, 96, 0.8);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #4cd137;
+    }
+    
+    .pagination-controls {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(15, 52, 96, 0.9);
+      padding: 10px 20px;
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    .pagination-controls button {
+      padding: 8px 16px;
+      background: #e94560;
+      border: none;
+      color: white;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+    
+    .pagination-controls button:disabled {
+      background: #555;
+      cursor: not-allowed;
+    }
+    
+    .pagination-controls span {
+      font-size: 13px;
+      color: #aaa;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <!-- Sidebar -->
+    <div id="sidebar">
+      <div class="control-panel">
+        <h3>🎨 渲染设置</h3>
+        
+        <div class="control-group">
+          <label>渲染引擎</label>
+          <select id="render-engine">
+            <option value="pixi">Pixi.js (WebGL 2D)</option>
+            <option value="d3">D3.js (Canvas/SVG)</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label>渲染模式</label>
+          <select id="render-mode">
+            <option value="canvas">Canvas (高性能)</option>
+            <option value="svg">SVG (高清晰)</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label>节点大小：<span id="node-size-value">8</span></label>
+          <input type="range" id="node-size" min="3" max="20" value="8">
+        </div>
+        
+        <div class="control-group">
+          <label>连线粗细：<span id="link-width-value">1</span></label>
+          <input type="range" id="link-width" min="0.5" max="5" value="1" step="0.5">
+        </div>
+      </div>
+      
+      <div class="control-panel">
+        <h3>📊 性能优化</h3>
+        
+        <div class="control-group">
+          <label>分页大小</label>
+          <select id="page-size">
+            <option value="100">100 节点/页</option>
+            <option value="200">200 节点/页</option>
+            <option value="500" selected>500 节点/页</option>
+            <option value="1000">1000 节点/页</option>
+            <option value="all">全部加载</option>
+          </select>
+        </div>
+        
+        <div class="control-group">
+          <label>虚拟滚动阈值</label>
+          <input type="number" id="virtual-threshold" value="500" min="100" max="2000">
+        </div>
+        
+        <div class="control-group">
+          <label>
+            <input type="checkbox" id="enable-virtual-scroll" checked>
+            启用虚拟滚动 (>阈值自动启用)
+          </label>
+        </div>
+      </div>
+      
+      <div class="control-panel">
+        <h3>📈 性能统计</h3>
+        <div class="stats">
+          <h4>实时统计</h4>
+          <div class="stat-item">
+            <span>总节点数:</span>
+            <span class="stat-value" id="stat-total-nodes">0</span>
+          </div>
+          <div class="stat-item">
+            <span>可见节点:</span>
+            <span class="stat-value" id="stat-visible-nodes">0</span>
+          </div>
+          <div class="stat-item">
+            <span>总连线:</span>
+            <span class="stat-value" id="stat-total-links">0</span>
+          </div>
+          <div class="stat-item">
+            <span>FPS:</span>
+            <span class="stat-value" id="stat-fps">0</span>
+          </div>
+          <div class="stat-item">
+            <span>加载时间:</span>
+            <span class="stat-value" id="stat-load-time">0ms</span>
+          </div>
+          <div class="stat-item">
+            <span>渲染模式:</span>
+            <span class="stat-value" id="stat-render-mode">Canvas</span>
+          </div>
+        </div>
+      </div>
+      
+      <button class="btn" onclick="graph.loadTestData(100)">加载 100 节点</button>
+      <button class="btn" onclick="graph.loadTestData(500)">加载 500 节点</button>
+      <button class="btn" onclick="graph.loadTestData(1000)">加载 1000 节点</button>
+      <button class="btn" onclick="graph.loadTestData(5000)">加载 5000 节点</button>
+      <button class="btn btn-secondary" onclick="graph.toggleLayout()">切换布局</button>
+      
+      <div class="legend">
+        <h4>图例</h4>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #e94560;"></div>
+          <span>Paper (论文)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #4cd137;"></div>
+          <span>Author (作者)</span>
+        </div>
+        <div class="legend-item">
+          <div class="legend-color" style="background: #00a8ff;"></div>
+          <span>Concept (概念)</span>
+        </div>
+      </div>
+      
+      <div class="node-info" id="node-info">
+        <h4>节点详情</h4>
+        <p><strong>ID:</strong> <span id="info-id"></span></p>
+        <p><strong>标签:</strong> <span id="info-label"></span></p>
+        <p><strong>类型:</strong> <span id="info-type"></span></p>
+      </div>
+    </div>
+    
+    <!-- Graph Container -->
+    <div id="graph-container">
+      <div class="fps-counter" id="fps-counter">FPS: 0</div>
+      <div id="canvas-container"></div>
+      
+      <div class="pagination-controls" id="pagination-controls" style="display: none;">
+        <button onclick="graph.prevPage()" id="btn-prev">← 上一页</button>
+        <span id="page-indicator">第 1 / 1 页</span>
+        <button onclick="graph.nextPage()" id="btn-next">下一页 →</button>
+      </div>
+      
+      <div class="loading-overlay" id="loading-overlay" style="display: none;">
+        <div class="loading-spinner">
+          <svg width="50" height="50" viewBox="0 0 50 50">
+            <circle cx="25" cy="25" r="20" fill="none" stroke="#e94560" stroke-width="4"
+                    stroke-dasharray="80" stroke-dashoffset="0">
+              <animateTransform attributeName="transform" type="rotate" from="0 25 25" to="360 25 25" dur="1s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+          <p>加载中...</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    /**
+     * Canvas Graph Renderer - D3.js + Pixi.js 优化版
+     * todo-034: 多模态图谱性能优化
+     * 
+     * 支持:
+     * - Pixi.js WebGL 2D 渲染 (高性能)
+     * - D3.js Canvas 渲染 (兼容性好)
+     * - D3.js SVG 渲染 (高清晰度)
+     * - 分页加载
+     * - 虚拟滚动
+     */
+    class CanvasGraphRenderer {
+      constructor(containerId, options = {}) {
+        this.container = document.getElementById(containerId);
+        this.canvasContainer = document.getElementById('canvas-container');
+        this.options = {
+          nodeSize: 8,
+          linkWidth: 1,
+          pageSize: 500,
+          virtualThreshold: 500,
+          enableVirtualScroll: true,
+          renderEngine: 'pixi',
+          renderMode: 'canvas',
+          ...options
+        };
+        
+        // Pixi.js 对象
+        this.pixiApp = null;
+        this.pixiNodes = null;
+        this.pixiLinks = null;
+        
+        // D3.js 对象
+        this.d3Svg = null;
+        this.d3Canvas = null;
+        this.d3Simulation = null;
+        
+        // 数据
+        this.allNodes = [];
+        this.allLinks = [];
+        this.visibleNodes = [];
+        this.visibleLinks = [];
+        
+        // 分页
+        this.currentPage = 0;
+        this.totalPages = 0;
+        
+        // 布局
+        this.currentLayout = 'force';
+        this.layouts = ['force', 'circular', 'hierarchical'];
+        
+        // FPS 监控
+        this.frameCount = 0;
+        this.lastFPSUpdate = performance.now();
+        this.currentFPS = 0;
+        
+        this.init();
+      }
+      
+      init() {
+        // 初始化渲染引擎
+        this.initRenderer();
+        
+        // 设置事件监听
+        this.setupEventListeners();
+        
+        // 启动 FPS 监控
+        this.startFPSMonitor();
+        
+        console.log('✅ Canvas Graph Renderer initialized');
+      }
+      
+      initRenderer() {
+        const width = this.canvasContainer.clientWidth;
+        const height = this.canvasContainer.clientHeight;
+        
+        if (this.options.renderEngine === 'pixi') {
+          this.initPixi(width, height);
+        } else {
+          if (this.options.renderMode === 'svg') {
+            this.initD3SVG(width, height);
+          } else {
+            this.initD3Canvas(width, height);
+          }
+        }
+        
+        document.getElementById('stat-render-mode').textContent = 
+          `${this.options.renderEngine.toUpperCase()} ${this.options.renderMode}`;
+      }
+      
+      initPixi(width, height) {
+        // 创建 Pixi.js 应用
+        this.pixiApp = new PIXI.Application({
+          width: width,
+          height: height,
+          backgroundColor: 0x1a1a2e,
+          antialias: true,
+          resolution: window.devicePixelRatio || 1,
+          autoDensity: true
+        });
+        
+        this.canvasContainer.appendChild(this.pixiApp.view);
+        
+        // 创建容器
+        this.pixiNodes = new PIXI.Container();
+        this.pixiLinks = new PIXI.Container();
+        
+        this.pixiApp.stage.addChild(this.pixiLinks);
+        this.pixiApp.stage.addChild(this.pixiNodes);
+        
+        // 启用交互
+        this.pixiApp.stage.eventMode = 'static';
+        this.pixiApp.stage.hitArea = this.pixiApp.screen;
+      }
+      
+      initD3SVG(width, height) {
+        // 清空容器
+        this.canvasContainer.innerHTML = '';
+        
+        // 创建 SVG
+        this.d3Svg = d3.select('#canvas-container')
+          .append('svg')
+          .attr('width', width)
+          .attr('height', height)
+          .attr('viewBox', [-width/2, -height/2, width, height]);
+        
+        // 创建箭头标记
+        this.d3Svg.append('defs')
+          .append('marker')
+          .attr('id', 'arrow')
+          .attr('viewBox', '0 -5 10 10')
+          .attr('refX', 0)
+          .attr('refY', 0)
+          .attr('markerWidth', 6)
+          .attr('markerHeight', 6)
+          .attr('orient', 'auto')
+          .append('path')
+          .attr('fill', '#666')
+          .attr('d', 'M0,-5L10,0L0,5');
+      }
+      
+      initD3Canvas(width, height) {
+        // 清空容器
+        this.canvasContainer.innerHTML = '';
+        
+        // 创建 Canvas
+        const canvas = document.createElement('canvas');
+        canvas.id = 'd3-canvas';
+        canvas.width = width;
+        canvas.height = height;
+        this.canvasContainer.appendChild(canvas);
+        
+        this.d3Canvas = canvas.getContext('2d');
+      }
+      
+      setupEventListeners() {
+        // 控制面板
+        document.getElementById('node-size').addEventListener('input', (e) => {
+          this.options.nodeSize = parseFloat(e.target.value);
+          document.getElementById('node-size-value').textContent = this.options.nodeSize;
+          this.render();
+        });
+        
+        document.getElementById('link-width').addEventListener('input', (e) => {
+          this.options.linkWidth = parseFloat(e.target.value);
+          document.getElementById('link-width-value').textContent = this.options.linkWidth;
+          this.render();
+        });
+        
+        document.getElementById('render-engine').addEventListener('change', (e) => {
+          this.switchEngine(e.target.value);
+        });
+        
+        document.getElementById('render-mode').addEventListener('change', (e) => {
+          this.options.renderMode = e.target.value;
+          this.switchEngine(this.options.renderEngine);
+        });
+        
+        document.getElementById('page-size').addEventListener('change', (e) => {
+          this.options.pageSize = e.target.value === 'all' ? 'all' : parseInt(e.target.value);
+          if (this.allNodes.length > 0) {
+            this.loadPage(this.currentPage);
+          }
+        });
+        
+        document.getElementById('enable-virtual-scroll').addEventListener('change', (e) => {
+          this.options.enableVirtualScroll = e.target.checked;
+        });
+        
+        // 窗口大小调整
+        window.addEventListener('resize', () => this.onWindowResize());
+      }
+      
+      switchEngine(engine) {
+        this.options.renderEngine = engine;
+        
+        // 清理现有渲染器
+        this.cleanup();
+        
+        // 重新初始化
+        const width = this.canvasContainer.clientWidth;
+        const height = this.canvasContainer.clientHeight;
+        
+        if (engine === 'pixi') {
+          this.initPixi(width, height);
+        } else {
+          if (this.options.renderMode === 'svg') {
+            this.initD3SVG(width, height);
+          } else {
+            this.initD3Canvas(width, height);
+          }
+        }
+        
+        // 重新渲染
+        if (this.visibleNodes.length > 0) {
+          this.render();
+        }
+        
+        document.getElementById('stat-render-mode').textContent = 
+          `${engine.toUpperCase()} ${this.options.renderMode}`;
+        
+        console.log(`✅ Switched to ${engine} ${this.options.renderMode} mode`);
+      }
+      
+      cleanup() {
+        // 清理 Pixi.js
+        if (this.pixiApp) {
+          this.pixiApp.destroy(true, { children: true, texture: true, baseTexture: true });
+          this.pixiApp = null;
+        }
+        
+        // 清理 D3.js
+        if (this.d3Svg) {
+          this.d3Svg.remove();
+          this.d3Svg = null;
+        }
+        
+        this.canvasContainer.innerHTML = '';
+      }
+      
+      loadTestData(nodeCount) {
+        const startTime = performance.now();
+        
+        // 显示加载动画
+        document.getElementById('loading-overlay').style.display = 'flex';
+        
+        // 清空现有数据
+        this.clear();
+        
+        // 生成测试数据
+        const data = this.generateTestData(nodeCount);
+        this.allNodes = data.nodes;
+        this.allLinks = data.links;
+        
+        // 计算分页
+        const pageSize = this.options.pageSize === 'all' ? nodeCount : parseInt(this.options.pageSize);
+        this.totalPages = Math.ceil(nodeCount / pageSize);
+        this.currentPage = 0;
+        
+        // 加载第一页
+        this.loadPage(0);
+        
+        const loadTime = performance.now() - startTime;
+        
+        // 更新统计
+        this.updateStats();
+        document.getElementById('stat-load-time').textContent = `${loadTime.toFixed(2)}ms`;
+        
+        // 显示分页控制
+        if (this.totalPages > 1) {
+          document.getElementById('pagination-controls').style.display = 'flex';
+          this.updatePagination();
+        } else {
+          document.getElementById('pagination-controls').style.display = 'none';
+        }
+        
+        // 隐藏加载动画
+        setTimeout(() => {
+          document.getElementById('loading-overlay').style.display = 'none';
+        }, 100);
+        
+        console.log(`✅ Loaded ${nodeCount} nodes in ${loadTime.toFixed(2)}ms`);
+      }
+      
+      generateTestData(count) {
+        const nodes = [];
+        const links = [];
+        const types = ['paper', 'author', 'concept'];
+        const colors = {
+          paper: 0xe94560,
+          author: 0x4cd137,
+          concept: 0x00a8ff
+        };
+        const colorNames = {
+          paper: '#e94560',
+          author: '#4cd137',
+          concept: '#00a8ff'
+        };
+        
+        for (let i = 0; i < count; i++) {
+          const type = types[Math.floor(Math.random() * types.length)];
+          nodes.push({
+            id: i,
+            label: `Node ${i}`,
+            type: type,
+            color: colors[type],
+            colorName: colorNames[type],
+            x: (Math.random() - 0.5) * 80,
+            y: (Math.random() - 0.5) * 80
+          });
+        }
+        
+        // 生成连接（每个节点平均 2 条边）
+        for (let i = 0; i < count * 2; i++) {
+          links.push({
+            source: Math.floor(Math.random() * count),
+            target: Math.floor(Math.random() * count),
+            type: ['cites', 'author', 'related'][Math.floor(Math.random() * 3)]
+          });
+        }
+        
+        return { nodes, links };
+      }
+      
+      loadPage(pageNum) {
+        if (pageNum < 0 || pageNum >= this.totalPages) return;
+        
+        this.clear();
+        
+        const pageSize = this.options.pageSize === 'all' ? this.allNodes.length : parseInt(this.options.pageSize);
+        const start = pageNum * pageSize;
+        const end = Math.min(start + pageSize, this.allNodes.length);
+        
+        this.visibleNodes = this.allNodes.slice(start, end);
+        const visibleIds = new Set(this.visibleNodes.map(n => n.id));
+        this.visibleLinks = this.allLinks.filter(l => 
+          visibleIds.has(l.source) && visibleIds.has(l.target)
+        );
+        
+        this.currentPage = pageNum;
+        this.render();
+        this.updatePagination();
+        this.updateStats();
+      }
+      
+      render() {
+        if (this.options.renderEngine === 'pixi') {
+          this.renderPixi();
+        } else {
+          if (this.options.renderMode === 'svg') {
+            this.renderD3SVG();
+          } else {
+            this.renderD3Canvas();
+          }
+        }
+      }
+      
+      renderPixi() {
+        const centerX = this.pixiApp.screen.width / 2;
+        const centerY = this.pixiApp.screen.height / 2;
+        
+        // 绘制连线
+        for (const link of this.visibleLinks) {
+          const source = this.visibleNodes.find(n => n.id === link.source);
+          const target = this.visibleNodes.find(n => n.id === link.target);
+          
+          if (!source || !target) continue;
+          
+          const graphics = new PIXI.Graphics();
+          graphics.lineStyle(this.options.linkWidth, 0x666666, 0.4);
+          graphics.moveTo(centerX + source.x * 5, centerY + source.y * 5);
+          graphics.lineTo(centerX + target.x * 5, centerY + target.y * 5);
+          this.pixiLinks.addChild(graphics);
+        }
+        
+        // 绘制节点
+        for (const node of this.visibleNodes) {
+          const graphics = new PIXI.Graphics();
+          graphics.beginFill(node.color);
+          graphics.drawCircle(0, 0, this.options.nodeSize / 2);
+          graphics.endFill();
+          graphics.x = centerX + node.x * 5;
+          graphics.y = centerY + node.y * 5;
+          graphics.eventMode = 'static';
+          graphics.cursor = 'pointer';
+          graphics.on('pointerdown', () => this.onNodeClick(node));
+          this.pixiNodes.addChild(graphics);
+        }
+      }
+      
+      renderD3SVG() {
+        const width = this.canvasContainer.clientWidth;
+        const height = this.canvasContainer.clientHeight;
+        
+        // 清空
+        this.d3Svg.selectAll('*').remove();
+        
+        // 创建箭头标记
+        const defs = this.d3Svg.append('defs');
+        defs.append('marker')
+          .attr('id', 'arrow')
+          .attr('viewBox', '0 -5 10 10')
+          .attr('refX', 0)
+          .attr('refY', 0)
+          .attr('markerWidth', 6)
+          .attr('markerHeight', 6)
+          .attr('orient', 'auto')
+          .append('path')
+          .attr('fill', '#666')
+          .attr('d', 'M0,-5L10,0L0,5');
+        
+        // 创建力导向模拟
+        this.d3Simulation = d3.forceSimulation(this.visibleNodes)
+          .force('link', d3.forceLink(this.visibleLinks).distance(100))
+          .force('charge', d3.forceManyBody().strength(-300))
+          .force('center', d3.forceCenter(0, 0))
+          .force('collide', d3.forceCollide(this.options.nodeSize));
+        
+        // 绘制连线
+        const links = this.d3Svg.append('g')
+          .selectAll('line')
+          .data(this.visibleLinks)
+          .join('line')
+          .attr('stroke', '#666')
+          .attr('stroke-opacity', 0.4)
+          .attr('stroke-width', this.options.linkWidth);
+        
+        // 绘制节点
+        const nodes = this.d3Svg.append('g')
+          .selectAll('circle')
+          .data(this.visibleNodes)
+          .join('circle')
+          .attr('r', this.options.nodeSize / 2)
+          .attr('fill', d => d.colorName)
+          .attr('stroke', '#fff')
+          .attr('stroke-width', 1)
+          .call(d3.drag()
+            .on('start', (event, d) => {
+              if (!event.active) this.d3Simulation.alphaTarget(0.3).restart();
+              d.fx = d.x;
+              d.fy = d.y;
+            })
+            .on('drag', (event, d) => {
+              d.fx = event.x;
+              d.fy = event.y;
+            })
+            .on('end', (event, d) => {
+              if (!event.active) this.d3Simulation.alphaTarget(0);
+              d.fx = null;
+              d.fy = null;
+            })
+          )
+          .on('click', (event, d) => this.onNodeClick(d));
+        
+        // 更新位置
+        this.d3Simulation.on('tick', () => {
+          links
+            .attr('x1', d => d.source.x)
+            .attr('y1', d => d.source.y)
+            .attr('x2', d => d.target.x)
+            .attr('y2', d => d.target.y);
+          
+          nodes
+            .attr('cx', d => d.x)
+            .attr('cy', d => d.y);
+        });
+      }
+      
+      renderD3Canvas() {
+        const ctx = this.d3Canvas;
+        const width = this.d3Canvas.canvas.width;
+        const height = this.d3Canvas.canvas.height;
+        const centerX = width / 2;
+        const centerY = height / 2;
+        
+        // 清空画布
+        ctx.clearRect(0, 0, width, height);
+        
+        // 绘制连线
+        ctx.strokeStyle = 'rgba(102, 102, 102, 0.4)';
+        ctx.lineWidth = this.options.linkWidth;
+        
+        for (const link of this.visibleLinks) {
+          const source = this.visibleNodes.find(n => n.id === link.source);
+          const target = this.visibleNodes.find(n => n.id === link.target);
+          
+          if (!source || !target) continue;
+          
+          ctx.beginPath();
+          ctx.moveTo(centerX + source.x * 5, centerY + source.y * 5);
+          ctx.lineTo(centerX + target.x * 5, centerY + target.y * 5);
+          ctx.stroke();
+        }
+        
+        // 绘制节点
+        for (const node of this.visibleNodes) {
+          ctx.beginPath();
+          ctx.arc(centerX + node.x * 5, centerY + node.y * 5, this.options.nodeSize / 2, 0, Math.PI * 2);
+          ctx.fillStyle = node.colorName;
+          ctx.fill();
+          ctx.strokeStyle = '#fff';
+          ctx.lineWidth = 1;
+          ctx.stroke();
+        }
+      }
+      
+      clear() {
+        if (this.pixiApp) {
+          this.pixiLinks.removeChildren();
+          this.pixiNodes.removeChildren();
+        }
+        
+        if (this.d3Svg) {
+          this.d3Svg.selectAll('*').remove();
+        }
+        
+        if (this.d3Canvas) {
+          this.d3Canvas.clearRect(0, 0, this.d3Canvas.canvas.width, this.d3Canvas.canvas.height);
+        }
+      }
+      
+      onNodeClick(node) {
+        const nodeInfo = document.getElementById('node-info');
+        document.getElementById('info-id').textContent = node.id;
+        document.getElementById('info-label').textContent = node.label;
+        document.getElementById('info-type').textContent = node.type;
+        nodeInfo.style.display = 'block';
+      }
+      
+      onWindowResize() {
+        const width = this.canvasContainer.clientWidth;
+        const height = this.canvasContainer.clientHeight;
+        
+        if (this.pixiApp) {
+          this.pixiApp.renderer.resize(width, height);
+        } else if (this.d3Svg) {
+          this.d3Svg.attr('width', width).attr('height', height);
+        } else if (this.d3Canvas) {
+          this.d3Canvas.canvas.width = width;
+          this.d3Canvas.canvas.height = height;
+        }
+      }
+      
+      toggleLayout() {
+        const layoutIndex = this.layouts.indexOf(this.currentLayout);
+        this.currentLayout = this.layouts[(layoutIndex + 1) % this.layouts.length];
+        
+        // 重新排列节点
+        if (this.currentLayout === 'circular') {
+          const radius = 200;
+          const angleStep = (Math.PI * 2) / this.visibleNodes.length;
+          this.visibleNodes.forEach((node, i) => {
+            node.x = Math.cos(i * angleStep) * radius;
+            node.y = Math.sin(i * angleStep) * radius;
+          });
+        } else if (this.currentLayout === 'hierarchical') {
+          // 简单分层布局
+          const levels = 5;
+          const nodesPerLevel = Math.ceil(this.visibleNodes.length / levels);
+          this.visibleNodes.forEach((node, i) => {
+            const level = Math.floor(i / nodesPerLevel);
+            const posInLevel = i % nodesPerLevel;
+            node.x = (posInLevel - nodesPerLevel / 2) * 50;
+            node.y = (level - levels / 2) * 100;
+          });
+        } else {
+          // force layout - 重新生成随机位置
+          this.visibleNodes.forEach(node => {
+            node.x = (Math.random() - 0.5) * 80;
+            node.y = (Math.random() - 0.5) * 80;
+          });
+        }
+        
+        this.render();
+        console.log(`Layout switched to: ${this.currentLayout}`);
+      }
+      
+      prevPage() {
+        if (this.currentPage > 0) {
+          this.loadPage(this.currentPage - 1);
+        }
+      }
+      
+      nextPage() {
+        if (this.currentPage < this.totalPages - 1) {
+          this.loadPage(this.currentPage + 1);
+        }
+      }
+      
+      updatePagination() {
+        document.getElementById('page-indicator').textContent = 
+          `第 ${this.currentPage + 1} / ${this.totalPages} 页`;
+        document.getElementById('btn-prev').disabled = this.currentPage === 0;
+        document.getElementById('btn-next').disabled = this.currentPage === this.totalPages - 1;
+      }
+      
+      updateStats() {
+        document.getElementById('stat-total-nodes').textContent = this.allNodes.length;
+        document.getElementById('stat-visible-nodes').textContent = this.visibleNodes.length;
+        document.getElementById('stat-total-links').textContent = this.allLinks.length;
+      }
+      
+      startFPSMonitor() {
+        const updateFPS = () => {
+          this.frameCount++;
+          const now = performance.now();
+          
+          if (now - this.lastFPSUpdate >= 1000) {
+            this.currentFPS = this.frameCount;
+            this.frameCount = 0;
+            this.lastFPSUpdate = now;
+            
+            document.getElementById('fps-counter').textContent = `FPS: ${this.currentFPS}`;
+            document.getElementById('stat-fps').textContent = this.currentFPS;
+          }
+          
+          requestAnimationFrame(updateFPS);
+        };
+        
+        requestAnimationFrame(updateFPS);
+      }
+    }
+    
+    // 初始化图谱
+    const graph = new CanvasGraphRenderer('graph-container');
+    
+    // 暴露给全局以便按钮调用
+    window.graph = graph;
+    
+    console.log('🚀 Canvas Graph Renderer ready');
+  </script>
+</body>
+</html>

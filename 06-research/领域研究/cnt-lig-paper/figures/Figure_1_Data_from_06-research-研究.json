@@ -1,0 +1,149 @@
+{
+  "figure_info": {
+    "title": "Machine Learning-Guided Design of Multi-Component CNT-LIG Composites",
+    "subtitle": "Complete Closed-Loop Research Framework",
+    "type": "Graphical Abstract",
+    "dimensions": "1200x800 px",
+    "resolution": "300 dpi",
+    "format": "TIFF + SVG"
+  },
+  
+  "layout": {
+    "style": "circular_flow",
+    "sections": 4,
+    "color_scheme": {
+      "primary": "#2E86AB",
+      "secondary": "#A23B72",
+      "accent": "#F18F01",
+      "background": "#FFFFFF",
+      "text": "#333333"
+    }
+  },
+  
+  "research_pathway": {
+    "phase_1": {
+      "title": "基础预测",
+      "time": "12:17-12:30",
+      "color": "#2E86AB",
+      "steps": [
+        {"name": "CNT 预测", "result": "R²=0.799"},
+        {"name": "CNT vs LIG", "result": "11 维度对比"}
+      ]
+    },
+    "phase_2": {
+      "title": "知识图谱",
+      "time": "12:30-12:45",
+      "color": "#A23B72",
+      "steps": [
+        {"name": "LIG 图谱 v2", "result": "26 实体/360 关系"}
+      ]
+    },
+    "phase_3": {
+      "title": "复合材料",
+      "time": "12:45-13:22",
+      "color": "#F18F01",
+      "steps": [
+        {"name": "二元", "result": "1.29×"},
+        {"name": "三元", "result": "1.67×"},
+        {"name": "四元 ⭐", "result": "2.40×"},
+        {"name": "五元", "result": "1.78×"}
+      ]
+    },
+    "phase_4": {
+      "title": "智能设计",
+      "time": "13:22-13:50",
+      "color": "#2E86AB",
+      "steps": [
+        {"name": "逆向设计", "result": "407 样本"},
+        {"name": "主动学习", "result": "1000 候选"}
+      ]
+    },
+    "phase_5": {
+      "title": "产品部署",
+      "time": "13:50-14:05",
+      "color": "#A23B72",
+      "steps": [
+        {"name": "知识蒸馏", "result": "100x 加速"},
+        {"name": "Python 包", "result": "cnt-materials-ml"}
+      ]
+    },
+    "phase_6": {
+      "title": "实验验证",
+      "time": "14:05-14:23",
+      "color": "#F18F01",
+      "steps": [
+        {"name": "3 个 SOP", "result": "标准化"},
+        {"name": "自动反馈", "result": "闭环优化"}
+      ]
+    }
+  },
+  
+  "key_metrics": {
+    "samples": "1000+",
+    "models": "10 个",
+    "r2_range": "0.75-0.90+",
+    "peak_synergy": "2.40×",
+    "max_conductivity": "8.61×10⁵ S/m",
+    "code_lines": "3500+",
+    "m_notes": "12 篇",
+    "time_total": "~2 小时"
+  },
+  
+  "closed_loop_arrows": [
+    {
+      "from": "预测",
+      "to": "实验",
+      "label": "正向设计",
+      "style": "solid"
+    },
+    {
+      "from": "实验",
+      "to": "预测",
+      "label": "数据反馈 + 模型更新",
+      "style": "dashed"
+    }
+  ],
+  
+  "text_elements": {
+    "main_title": {
+      "text": "Machine Learning-Guided Design of CNT-LIG Composites",
+      "font": "Arial",
+      "size": 18,
+      "weight": "bold",
+      "position": "top_center"
+    },
+    "highlight_box": {
+      "text": "Peak Synergistic Enhancement: 2.40×\nQuaternary System: CNT-LIG-Graphene-MXene",
+      "font": "Arial",
+      "size": 12,
+      "weight": "bold",
+      "color": "#F18F01",
+      "position": "center"
+    },
+    "footer": {
+      "text": "Complete Closed-Loop: Prediction → Design → Screening → Deployment → Validation → Feedback",
+      "font": "Arial",
+      "size": 10,
+      "style": "italic",
+      "position": "bottom_center"
+    }
+  },
+  
+  "icons": {
+    "prediction": "📊",
+    "comparison": "⚖️",
+    "knowledge_graph": "🕸️",
+    "composite": "🔬",
+    "inverse_design": "🔄",
+    "active_learning": "🎯",
+    "deployment": "📦",
+    "experimental": "⚗️"
+  },
+  
+  "export_formats": [
+    "TIFF (300 dpi)",
+    "SVG (vector)",
+    "PNG (web preview)",
+    "PDF (submission)"
+  ]
+}

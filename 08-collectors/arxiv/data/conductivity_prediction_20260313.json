@@ -1,0 +1,849 @@
+{
+  "source": "conductivity prediction",
+  "collectedAt": "2026-03-13T22:24:05.181445",
+  "totalPapers": 50,
+  "papers": [
+    {
+      "id": "http://arxiv.org/abs/2211.05409v1",
+      "title": "Radiomics-enhanced Deep Multi-task Learning for Outcome Prediction in Head and Neck Cancer",
+      "link": "https://arxiv.org/abs/2211.05409v1",
+      "summary": "Outcome prediction is crucial for head and neck cancer patients as it can provide prognostic information for early treatment planning. Radiomics methods have been widely used for outcome prediction from medical images. However, these methods are limited by their reliance on intractable manual segmentation of tumor regions. Recently, deep learning methods have been proposed to perform end-to-end outcome prediction so as to remove the reliance on manual segmentation. Unfortunately, without segmentation masks, these methods will take the whole image as input, such that makes them difficult to focus on tumor regions and potentially unable to fully leverage the prognostic information within the tumor regions. In this study, we propose a radiomics-enhanced deep multi-task framework for outcome prediction from PET/CT images, in the context of HEad and neCK TumOR segmentation and outcome prediction challenge (HECKTOR 2022). In our framework, our novelty is to incorporate radiomics as an enhancement to our recently proposed Deep Multi-task Survival model (DeepMTS). The DeepMTS jointly learns to predict the survival risk scores of patients and the segmentation masks of tumor regions. Radiomics features are extracted from the predicted tumor regions and combined with the predicted survival risk scores for final outcome prediction, through which the prognostic information in tumor regions can be further leveraged. Our method achieved a C-index of 0.681 on the testing set, placing the 2nd on the leaderboard with only 0.00068 lower in C-index than the 1st place.",
+      "published": "2022-11-10T08:28:56Z",
+      "authors": [
+        "Mingyuan Meng",
+        "Lei Bi",
+        "Dagan Feng",
+        "Jinman Kim"
+      ],
+      "categories": [
+        "eess.IV",
+        "cs.CV",
+        "cs.LG"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1910.07640v1",
+      "title": "A Combined Deep Learning-Gradient Boosting Machine Framework for Fluid Intelligence Prediction",
+      "link": "https://arxiv.org/abs/1910.07640v1",
+      "summary": "The ABCD Neurocognitive Prediction Challenge is a community driven competition asking competitors to develop algorithms to predict fluid intelligence score from T1-w MRIs. In this work, we propose a deep learning combined with gradient boosting machine framework to solve this task. We train a convolutional neural network to compress the high dimensional MRI data and learn meaningful image features by predicting the 123 continuous-valued derived data provided with each MRI. These extracted features are then used to train a gradient boosting machine that predicts the residualized fluid intelligence score. Our approach achieved mean square error (MSE) scores of 18.4374, 68.7868, and 96.1806 for the training, validation, and test set respectively.",
+      "published": "2019-10-16T22:32:13Z",
+      "authors": [
+        "Yeeleng S. Vang",
+        "Yingxin Cao",
+        "Xiaohui Xie"
+      ],
+      "categories": [
+        "cs.CV",
+        "q-bio.NC"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1008.2944v3",
+      "title": "Universal thermal and electrical conductivity from holography",
+      "link": "https://arxiv.org/abs/1008.2944v3",
+      "summary": "It is known from earlier work of Iqbal, Liu (arXiv:0809.3808) that the boundary transport coefficients such as electrical conductivity (at vanishing chemical potential), shear viscosity etc. at low frequency and finite temperature can be expressed in terms of geometrical quantities evaluated at the horizon. In the case of electrical conductivity, at zero chemical potential gauge field fluctuation and metric fluctuation decouples, resulting in a trivial flow from horizon to boundary. In the presence of chemical potential, the story becomes complicated due to the fact that gauge field and metric fluctuation can no longer be decoupled. This results in a nontrivial flow from horizon to boundary. Though horizon conductivity can be expressed in terms of geometrical quantities evaluated at the horizon, there exist no such neat result for electrical conductivity at the boundary. In this paper we propose an expression for boundary conductivity expressed in terms of geometrical quantities evaluated at the horizon and thermodynamical quantities. We also consider the theory at finite cutoff outside the horizon (arXiv:1006.1902) and give an expression for cutoff dependent electrical conductivity, which interpolates smoothly between horizon conductivity and boundary conductivity . Using the results about the electrical conductivity we gain much insight into the universality of thermal conductivity to viscosity ratio proposed in arXiv:0912.2719.",
+      "published": "2010-08-17T17:56:36Z",
+      "authors": [
+        "Sachin Jain"
+      ],
+      "categories": [
+        "hep-th"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2211.05761v3",
+      "title": "Geometrical interpretation of Hall conductivity in metals",
+      "link": "https://arxiv.org/abs/2211.05761v3",
+      "summary": "The weak-field Hall conductivity in metals is interpreted in terms of the curvature of the Fermi surface in the main part. In the appendix the orbital magnetic-susceptibility and the magneto-conductivity in metals are discussed focusing on Peierls' area factor.",
+      "published": "2022-11-08T02:55:42Z",
+      "authors": [
+        "Osamu Narikiyo"
+      ],
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1707.07143v2",
+      "title": "A relation on the effective conductivity of composites",
+      "link": "https://arxiv.org/abs/1707.07143v2",
+      "summary": "Consider a 2D composites with non-overlapping equal inclusions imbedded in a host material of the normalized unit conductivity. The conductivity of inclusions takes two values $σ_1$ and $σ_2$ with the probabilities $p$ and $1-p$, respectively. We prove that the effective conductivity tensor of the considered three-phase random composite is equal to the effective conductivity tensor of the two-phase deterministic composite with the same inclusions of the conductivity $σ=[p(σ_1~-~σ_2)+~σ_2+σ_1σ_2] [1+σ_1-p(σ_1-σ_2)]^{-1}$.",
+      "published": "2017-07-22T11:55:55Z",
+      "authors": [
+        "Vladimir Mityushev"
+      ],
+      "categories": [
+        "math-ph"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1307.6763v3",
+      "title": "Electrical conductivity of the quark-gluon plasma across the deconfinement transition",
+      "link": "https://arxiv.org/abs/1307.6763v3",
+      "summary": "A lattice calculation is presented for the electrical conductivity of the QCD plasma with 2+1 dynamical flavours at nonzero temperature. We employ the conserved lattice current on anisotropic lattices using a tadpole-improved clover action and study the behaviour of the conductivity over a wide range of temperatures, both below and above the deconfining transition. The conductivity is extracted from a spectral-function analysis using the Maximal Entropy Method and a discussion of its systematics is provided.",
+      "published": "2013-07-25T14:53:15Z",
+      "authors": [
+        "Alessandro Amato",
+        "Gert Aarts",
+        "Chris Allton",
+        "Pietro Giudice",
+        "Simon Hands",
+        "Jon-Ivar Skullerud"
+      ],
+      "categories": [
+        "hep-lat",
+        "hep-ph",
+        "nucl-th"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1301.6146v3",
+      "title": "Majorana fermions on the Abrikosov flux lattice in a $p_x+ip_y$ superconductor and thermal conductivity in superclean regime",
+      "link": "https://arxiv.org/abs/1301.6146v3",
+      "summary": "We show that periodic lattice of Abrikosov vortices in chiral $p$ wave superconductor in general supports fermionic states with zero energy provided the intervortex distance is smaller than the critical one. The zero modes appear at the intersection with the Fermi level of electronic magnetic Bloch bands formed by the overlapping vortex core states. The Bloch bands are robust against lattice disorder induced by fluctuations of vortex positions and can transmit the energy flow across the lattice. The hallmark of zero modes on Bloch bands in electronic heat conductivity is discussed.",
+      "published": "2013-01-25T19:55:42Z",
+      "authors": [
+        "M. A. Silaev"
+      ],
+      "categories": [
+        "cond-mat.supr-con"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1002.1144v1",
+      "title": "A CHAID Based Performance Prediction Model in Educational Data Mining",
+      "link": "https://arxiv.org/abs/1002.1144v1",
+      "summary": "The performance in higher secondary school education in India is a turning point in the academic lives of all students. As this academic performance is influenced by many factors, it is essential to develop predictive data mining model for students' performance so as to identify the slow learners and study the influence of the dominant factors on their academic performance. In the present investigation, a survey cum experimental methodology was adopted to generate a database and it was constructed from a primary and a secondary source. While the primary data was collected from the regular students, the secondary data was gathered from the school and office of the Chief Educational Officer (CEO). A total of 1000 datasets of the year 2006 from five different schools in three different districts of Tamilnadu were collected. The raw data was preprocessed in terms of filling up missing values, transforming values in one form into another and relevant attribute/ variable selection. As a result, we had 772 student records, which were used for CHAID prediction model construction. A set of prediction rules were extracted from CHIAD prediction model and the efficiency of the generated CHIAD prediction model was found. The accuracy of the present model was compared with other model and it has been found to be satisfactory.",
+      "published": "2010-02-05T08:27:17Z",
+      "authors": [
+        "M. Ramaswami",
+        "R. Bhaskaran"
+      ],
+      "categories": [
+        "cs.LG"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1508.02156v3",
+      "title": "Low lattice thermal conductivity of stanene",
+      "link": "https://arxiv.org/abs/1508.02156v3",
+      "summary": "A fundamental understanding of phonon transport in stanene is crucial to predict the thermal performance in potential stanene-based devices. By combining first-principle calculation and phonon Boltzmann transport equation, we obtain the lattice thermal conductivity of stanene. A much lower thermal conductivity (11.6 W/mK) is observed in stanene, which indicates higher thermoelectric efficiency over other 2D materials. The contributions of acoustic and optical phonons to the lattice thermal conductivity are evaluated. Detailed analysis of phase space for three-phonon processes shows that phonon scattering channels LA+LA/TA/ZA$\\leftrightarrow$TA/ZA are restricted, leading to the dominant contributions of high-group-velocity LA phonons to the thermal conductivity. The size dependence of thermal conductivity is investigated as well for the purpose of the design of thermoelectric nanostructures.",
+      "published": "2015-08-10T07:55:50Z",
+      "authors": [
+        "Bo Peng",
+        "Hao Zhang",
+        "Hezhu Shao",
+        "Yuchen Xu",
+        "Xiangchao Zhang",
+        "Heyuan Zhu"
+      ],
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "physics.comp-ph"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1605.01471v2",
+      "title": "The unexpected thermal conductivity from graphene disk, carbon nanocone to carbon nanotube",
+      "link": "https://arxiv.org/abs/1605.01471v2",
+      "summary": "Graphene and single-wall carbon nanotube (SWCNT) have attracted great attention because of their ultra-high thermal conductivity. However, there are few works exploring the relations of their thermal conductivity quantitatively. The carbon nanocone (CNC) is a graded structure fall in between graphene disk (GD) and SWCNT. We perform non-equilibrium molecular dynamics (NEMD) simulation to study the thermal conductivity of CNC with different apex angles, and then compare them with that of GD and SWCNT. Our results show that, different from the homogeneous thermal conductivity in SWCNT, the CNC also has a natural graded thermal conductivity which is similar to the GD. Unexpectedly, the graded rate keeps almost the same when the apex angle decreases from 180° (GD) to 19°, but then suddenly declines to zero when the apex angle decreases from 19° to 0° (SWCNT). What is more interesting, the graded effect is not diminished when the interatomic force constant is weakened and mean free path is shorten. That is, besides nanoscale, the graded effect can be observed in macroscale graphene or CNC structures.",
+      "published": "2016-05-05T01:47:59Z",
+      "authors": [
+        "Dengke Ma",
+        "Han Meng",
+        "Xiaoman Wang",
+        "Nuo Yang",
+        "Xing Zhang"
+      ],
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1212.6653v2",
+      "title": "Theory of the random potential and conductivity at the surface of a topological insulator",
+      "link": "https://arxiv.org/abs/1212.6653v2",
+      "summary": "We study the disorder potential induced by random Coulomb impurities at the surface of a topological insulator (TI). We use a simple model in which positive and negative impurities are distributed uniformly throughout the bulk of the TI, and we derive the magnitude of the disorder potential at the TI surface using a self-consistent theory based on the Thomas-Fermi approximation for screening by the Dirac mode. Simple formulas are presented for the mean squared potential both at the Dirac point and far from it, as well as for the characteristic size of electron/hole puddles at the Dirac point and the total concentration of electrons/holes that they contain. We also derive an expression for the autocorrelation function for the potential at the surface and show that it has an unusually slow decay, which can be used to verify the bulk origin of disorder. The implications of our model for the electron conductivity of the surface are also presented.",
+      "published": "2012-12-29T18:19:24Z",
+      "authors": [
+        "Brian Skinner",
+        "B. I. Shklovskii"
+      ],
+      "categories": [
+        "cond-mat.mes-hall",
+        "cond-mat.dis-nn"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1803.00840v2",
+      "title": "Linear-in-frequency optical conductivity in GdPtBi due to transitions near the triple points",
+      "link": "https://arxiv.org/abs/1803.00840v2",
+      "summary": "The complex optical conductivity of the half-Heusler compound GdPtBi is measured in a frequency range from 20 to 22 000 cm$^{-1}$ (2.5 meV - 2.73 eV) at temperatures down to 10 K in zero magnetic field. We find the real part of the conductivity, $σ_{1}(ω)$, to be almost perfectly linear in frequency over a broad range from 50 to 800 cm$^{-1}$ ($\\sim$ 6 - 100 meV) for $T \\leq 50$ K. This linearity strongly suggests the presence of three-dimensional linear electronic bands with band crossings (nodes) near the chemical potential. Band-structure calculations show the presence of triple points, where one doubly degenerate and one nondegenerate band cross each other in close vicinity of the chemical potential. From a comparison of our data with the optical conductivity computed from the band structure, we conclude that the observed nearly linear $σ_{1}(ω)$ originates as a cumulative effect from all the transitions near the triple points.",
+      "published": "2018-03-02T13:30:23Z",
+      "authors": [
+        "F. Hütt",
+        "A. Yaresko",
+        "M. B. Schilling",
+        "C. Shekhar",
+        "C. Felser",
+        "M. Dressel",
+        "A. V. Pronin"
+      ],
+      "categories": [
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci",
+        "cond-mat.str-el"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1606.03457v2",
+      "title": "Nonlinear conductivity and the ringdown of currents in metallic holography",
+      "link": "https://arxiv.org/abs/1606.03457v2",
+      "summary": "We study the electric and heat current response resulting from an electric field quench in a holographic model of momentum relaxation at nonzero charge density. After turning the electric field off, currents return to equilibrium as governed by the vector quasi-normal modes of the dual black brane, whose spectrum depends qualitatively on a parameter controlling the strength of inhomogeneity. We explore the dynamical phase diagram as a function of this parameter, showing that signatures of incoherent transport become identifiable as an oscillatory ringdown of the heat current. We also study nonlinear conductivity by holding the electric field constant. For small electric fields a balance is reached between the driving electric field and the momentum sink -- a steady state described by DC linear response. For large electric fields Joule heating becomes important and the black branes exhibit significant time dependence. In a regime where the rate of temperature increase is small, the nonlinear electrical conductivity is well approximated by the DC linear response calculation at an appropriate effective temperature.",
+      "published": "2016-06-10T20:00:10Z",
+      "authors": [
+        "Benjamin Withers"
+      ],
+      "categories": [
+        "hep-th",
+        "cond-mat.str-el",
+        "gr-qc"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1804.07293v4",
+      "title": "Anisotropy of the DC conductivity due to orbital-selective spin fluctuations in the nematic phase of iron superconductors",
+      "link": "https://arxiv.org/abs/1804.07293v4",
+      "summary": "We study the dc conductivity of iron-based superconductors within the orbital-selective spin fluctuation scenario. Within this approach, the anisotropy of spin fluctuations below the spin-nematic transition at T$_S$ is also responsible for the orbital ordering, induced by nematic self-energy corrections to the quasiparticle dispersion. As a consequence, the anisotropy of the dc conductivity below T$_S$ is determined not only by the anisotropy of the scattering rates as expected within a spin-nematic scenario, but also by the modification of the Fermi velocity due to the orbital reconstruction. More interestingly, it turns out that these two effects contribute to the dc-conductivity anisotropy with opposite signs. By using realistic band-structure parameters we compute the conductivity anisotropy for both 122 and FeSe compounds, discussing the possible origin of the different dc-conductivity anisotropy observed experimentally in these two families of iron-based superconductors.",
+      "published": "2018-04-19T17:58:28Z",
+      "authors": [
+        "Raquel Fernandez-Martin",
+        "Laura Fanfarillo",
+        "Lara Benfatto",
+        "Belen Valenzuela"
+      ],
+      "categories": [
+        "cond-mat.supr-con"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1811.00620v1",
+      "title": "Efficient Online Hyperparameter Optimization for Kernel Ridge Regression with Applications to Traffic Time Series Prediction",
+      "link": "https://arxiv.org/abs/1811.00620v1",
+      "summary": "Computational efficiency is an important consideration for deploying machine learning models for time series prediction in an online setting. Machine learning algorithms adjust model parameters automatically based on the data, but often require users to set additional parameters, known as hyperparameters. Hyperparameters can significantly impact prediction accuracy. Traffic measurements, typically collected online by sensors, are serially correlated. Moreover, the data distribution may change gradually. A typical adaptation strategy is periodically re-tuning the model hyperparameters, at the cost of computational burden. In this work, we present an efficient and principled online hyperparameter optimization algorithm for Kernel Ridge regression applied to traffic prediction problems. In tests with real traffic measurement data, our approach requires as little as one-seventh of the computation time of other tuning methods, while achieving better or similar prediction accuracy.",
+      "published": "2018-11-01T20:14:49Z",
+      "authors": [
+        "Hongyuan Zhan",
+        "Gabriel Gomes",
+        "Xiaoye S. Li",
+        "Kamesh Madduri",
+        "Kesheng Wu"
+      ],
+      "categories": [
+        "cs.LG",
+        "stat.ML"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1605.08252v1",
+      "title": "Design of ternary alkaline-earth metal Sn(II) oxides with potential good p-type conductivity",
+      "link": "https://arxiv.org/abs/1605.08252v1",
+      "summary": "Oxides with good p-type conductivity have been long sought after to achieve high performance all-oxide optoelectronic devices. Divalent Sn(II) based oxides are promising candidates because of their rather dispersive upper valence bands caused by the Sn-5s/O-2p anti-bonding hybridization. There are so far few known Sn(II) oxides being p-type conductive suitable for device applications. Here, we present via first-principles global optimization structure searches a material design study for a hitherto unexplored Sn(II)-based system, ternary alkaline-earth metal Sn(II) oxides in the stoichiometry of MSn2O3 (M = Mg, Ca, Sr, Ba). We identify two stable compounds of SrSn2O3 and BaSn2O3, which can be stabilized by Sn-rich conditions in phase stability diagrams. Their structures follow the Zintl behaviour and consist of basic structural motifs of SnO3 tetrahedra. Unexpectedly they show distinct electronic properties with band gaps ranging from 1.90 (BaSn2O3) to 3.15 (SrSn2O3) eV, and hole effective masses ranging from 0.87 (BaSn2O3) to above 6.0 (SrSn2O3) m0. Further exploration of metastable phases indicates a wide tunability of electronic properties controlled by the details of the bonding between the basic structural motifs. This suggests further exploration of alkaline-earth metal Sn(II) oxides for potential applications requiring good p-type conductivity such as transparent conductors and photovoltaic absorbers.",
+      "published": "2016-05-26T12:15:31Z",
+      "authors": [
+        "Yuwei Li",
+        "David J. Singh",
+        "Mao-Hua Du",
+        "Qiaoling Xu",
+        "Lijun Zhang",
+        "Weitao Zhengd",
+        "Yanming Ma"
+      ],
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1611.02837v1",
+      "title": "Importance of strain reduction in improvement of optical transmission and conductance in Si4+ doped ZnO: a probable new moisture resistant Transparent Conductive Oxide",
+      "link": "https://arxiv.org/abs/1611.02837v1",
+      "summary": "Si doped ZnO has been reported to be a better conductor than pure ZnO. It is reported that carrier density increases and hence conductivity increases. However, the effect on optical transmission is yet not clear until our recent report [1]. Zn1-xSixO for x= 0, 0.013, 0.020 and 0.027 have been synthesized using sol-gel method (a citric acid-glycerol route) followed by solid state sintering. We found that there is a decrease in defect states due to Si doping. The correlation of strain to the decrement in vacancy sites is discussed in this report. In modern electronics and solar cell fabrication, transparent conductive oxides (TCOs) are important components which conduct electrically without absorbing visible light. Known TCOs are extremely costly and are composed of non-abundant elements. Search for new ecofriendly, cheap and sustainable TCOs has been a recent research of attraction. Keeping in mind that most solar cells are exposed to natural conditions, the humidity tolerance becomes a determining factor. We report that sensitivity to moisture decreases drastically while the conductivity and optical transparency increases with doping. The reduction of strain and improvement of transport properties results in increased conductivity of Si doped ZnO pellets, tempting us to envisage this material as a probable alternate TCO.",
+      "published": "2016-11-09T07:08:02Z",
+      "authors": [
+        "Tulika Srivastava",
+        "Aswin Sadanandan",
+        "Gaurav Bajpai",
+        "Saurabh Tiwari",
+        "Ruhul Amin",
+        "Mohd. Nasir",
+        "Sunil Kumar",
+        "Parasharam M. Shirage",
+        "Sajal Biring",
+        "Somaditya Sen"
+      ],
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1602.08476v2",
+      "title": "Holographic Conductivity for Logarithmic Charged Dilaton-Lifshitz Solutions",
+      "link": "https://arxiv.org/abs/1602.08476v2",
+      "summary": "We disclose the effects of the logarithmic nonlinear electrodynamics on the holographic conductivity of Lifshitz dilaton black holes/branes. We analyze thermodynamics of these solutions as a necessary requirement for applying gauge/gravity duality, by calculating conserved and thermodynamic quantities such as the temperature, entropy, electric potential and mass of the black holes/branes. We calculate the holographic conductivity for a $(2+1)$-dimensional brane boundary and study its behavior in terms of the frequency per temperature. Interestingly enough, we find out that, in contrast to the Lifshitz-Maxwell-dilaton black branes which has conductivity for all $z$, here in the presence of nonlinear gauge field, the holographic conductivity do exist provided $z\\leq3$ and vanishes for $z>3$. It is shown that independent of the nonlinear parameter $β$, the real part of the conductivity is the same for a specific value of frequency per temperature in both AdS and Lifshitz cases. Besides, the behavior of real part of conductivity for large frequencies has a positive slope with respect to large frequencies for a system with Lifshitz symmetry whereas it tends to a constant for a system with AdS symmetry. This behavior may be interpreted as existence of an additional charge carrier rather than the AdS case, and is due to the presence of the scalar dilaton field in model. Similar behavior for optical conductivity of single-layer graphene induced by mild oxygen plasma exposure has been reported.",
+      "published": "2016-02-26T20:48:16Z",
+      "authors": [
+        "A. Dehyadegari",
+        "A. Sheykhi",
+        "M. Kord Zangeneh"
+      ],
+      "categories": [
+        "hep-th"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/cond-mat/0405339v2",
+      "title": "Vanishing Spin-Hall Conductivity in 2D disordered Rashba electron gas",
+      "link": "https://arxiv.org/abs/cond-mat/0405339v2",
+      "summary": "For the two-dimensional ideal electron gas with the Rashba spin-orbit interaction and in the presence of non-magnetic short-ranged potential impurities the spin-Hall conductivity $σ_{sH}$ is found by direct microscopic calculation. Within the semiclassical approximation $\\hbar/τ\\ll ε_F$ and $Δ\\ll ε_F$ the value of $σ_{sH}$ is zero for arbitrary ratio of the spin-orbit splitting $Δ$ and the inverse elastic scattering time $1/τ$.",
+      "published": "2004-05-17T17:10:53Z",
+      "authors": [
+        "Ol'ga V. Dimitrova"
+      ],
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1507.04881v2",
+      "title": "Woptic: optical conductivity with Wannier functions and adaptive k-mesh refinement",
+      "link": "https://arxiv.org/abs/1507.04881v2",
+      "summary": "We present an algorithm for the adaptive tetrahedral integration over the Brillouin zone of crystalline materials, and apply it to compute the optical conductivity, dc conductivity, and thermopower. For these quantities, whose contributions are often localized in small portions of the Brillouin zone, adaptive integration is especially relevant. Our implementation, the woptic package, is tied into the wien2wannier framework and allows including a many-body self energy, e.g. from dynamical mean-field theory (DMFT). Wannier functions and dipole matrix elements are computed with the DFT package Wien2k and Wannier90. For illustration, we show DFT results for fcc-Al and DMFT results for the correlated metal SrVO$_3$.",
+      "published": "2015-07-17T08:49:41Z",
+      "authors": [
+        "E. Assmann",
+        "P. Wissgott",
+        "J. Kuneš",
+        "A. Toschi",
+        "P. Blaha",
+        "K. Held"
+      ],
+      "categories": [
+        "physics.comp-ph",
+        "cond-mat.mtrl-sci",
+        "cond-mat.str-el"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2305.18310v2",
+      "title": "Motion-Scenario Decoupling for Rat-Aware Video Position Prediction: Strategy and Benchmark",
+      "link": "https://arxiv.org/abs/2305.18310v2",
+      "summary": "Recently significant progress has been made in human action recognition and behavior prediction using deep learning techniques, leading to improved vision-based semantic understanding. However, there is still a lack of high-quality motion datasets for small bio-robotics, which presents more challenging scenarios for long-term movement prediction and behavior control based on third-person observation. In this study, we introduce RatPose, a bio-robot motion prediction dataset constructed by considering the influence factors of individuals and environments based on predefined annotation rules. To enhance the robustness of motion prediction against these factors, we propose a Dual-stream Motion-Scenario Decoupling (\\textit{DMSD}) framework that effectively separates scenario-oriented and motion-oriented features and designs a scenario contrast loss and motion clustering loss for overall training. With such distinctive architecture, the dual-branch feature flow information is interacted and compensated in a decomposition-then-fusion manner. Moreover, we demonstrate significant performance improvements of the proposed \\textit{DMSD} framework on different difficulty-level tasks. We also implement long-term discretized trajectory prediction tasks to verify the generalization ability of the proposed dataset.",
+      "published": "2023-05-17T14:14:31Z",
+      "authors": [
+        "Xiaofeng Liu",
+        "Jiaxin Gao",
+        "Yaohua Liu",
+        "Risheng Liu",
+        "Nenggan Zheng"
+      ],
+      "categories": [
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/cond-mat/9807315v2",
+      "title": "c-axis conductivity in the normal state of cuprate superconductors",
+      "link": "https://arxiv.org/abs/cond-mat/9807315v2",
+      "summary": "The c-axis optical conductivity and d.c. resistivity are calculated within the t-J model assuming that the interlayer hopping is incoherent. Use is made of numerical results for spectral functions recently obtained with the finite-temperature Lanczos method for finite two-dimensional systems. In the optimally doped regime we find an anomalous relaxation rate, suggesting a common relaxation mechanism for intra- and interlayer transport. At low doping a pseudo-gap opening in the density of states appears to be responsible for a semimetallic-like behavior of d.c. resistivity.",
+      "published": "1998-07-23T10:32:50Z",
+      "authors": [
+        "P. Prelovsek",
+        "A. Ramsak",
+        "I. Sega"
+      ],
+      "categories": [
+        "cond-mat.str-el"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1511.04616v1",
+      "title": "Multi-state and non-volatile control of graphene conductivity with surface electric fields",
+      "link": "https://arxiv.org/abs/1511.04616v1",
+      "summary": "Planar electrodes patterned on a ferroelectric substrate are shown to provide lateral control of the conductive state of a two-terminal graphene stripe. A multi-level and on-demand memory control of the graphene resistance state is demonstrated under low sub-coercive electric fields, with a susceptibility exceeding by more than two orders of magnitude those reported in a vertical gating geometry. Our example of reversible and low-power lateral control over 11 memory states in the graphene conductivity illustrates the possibility of multimemory and multifunctional applications, as top and bottom inputs remain accessible.",
+      "published": "2015-11-14T21:00:40Z",
+      "authors": [
+        "V. Iurchuk",
+        "H. Majjad",
+        "F. Chevrier",
+        "D. Kundys",
+        "B. Leconte",
+        "B. Doudin",
+        "B. Kundys"
+      ],
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1803.07767v2",
+      "title": "Composite fermion Hall conductivity and the half-filled Landau level",
+      "link": "https://arxiv.org/abs/1803.07767v2",
+      "summary": "We consider the Hall conductivity of composite fermions in the theory of Halperin, Lee, and Read (HLR). We present a fully quantum mechanical numerical calculation that shows, under suitable conditions, the HLR theory exhibits a particle-hole symmetric dc electrical Hall response in the presence of quenched disorder. Remarkably, this response of the HLR theory remains robust even when the disorder range is of the order of the Fermi wavelength. We find that deviations from particle-hole symmetric response can appear in the ac Hall conductivity at frequencies sufficiently large compared to the inverse system size. Our results agree with a recent semi-classical analysis by Wang et al., Phys. Rev. X 7, 031029 (2017) and complement the arguments based on the fully quantum-mechanical model by Kumar et al., Phys. Rev. B 98, 11505 (2018). These results provide further evidence that the HLR theory is compatible with an emergent particle-hole symmetry.",
+      "published": "2018-03-21T06:43:57Z",
+      "authors": [
+        "Prashant Kumar",
+        "Srinivas Raghu",
+        "Michael Mulligan"
+      ],
+      "categories": [
+        "cond-mat.str-el"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1311.1790v2",
+      "title": "Anisotropic AC conductivity of strained graphene",
+      "link": "https://arxiv.org/abs/1311.1790v2",
+      "summary": "The density of states and the AC conductivity of graphene under uniform strain are calculated using a new Dirac Hamiltonian that takes into account the main three ingredients that change the electronic properties of strained graphene: the real displacement of the Fermi energy, the reciprocal lattice strain and the changes in the overlap of atomic orbitals. Our simple analytical expressions of the density of states and the AC conductivity generalizes previous expressions only available for uniaxial strain. The results suggest a way to measure the Gruneisen parameter that appears in any calculation of strained graphene, as well as the emergence of a sort of Hall effect due to shear strain.",
+      "published": "2013-11-07T19:41:26Z",
+      "authors": [
+        "M. Oliva-Leyva",
+        "Gerardo G. Naumis"
+      ],
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2112.13757v3",
+      "title": "Abnormally High Thermal Conductivity in Fivefold Twinned Diamond Nanowires",
+      "link": "https://arxiv.org/abs/2112.13757v3",
+      "summary": "Fivefold twins (5FTs), discovered nearly 200 years ago, are a common multiply twinned structure that usually dramatically deteriorate the thermal transport properties of nanomaterials. Here, we report the anomalous thermal conductivity ($κ$) in a novel fivefold twinned diamond nanowires (5FT-DNWs). The $κ$ of 5FT-DNWs is effectively enhanced by the defects of 5FT boundaries, and non-monotonically changes with the cross-sectional area ($\\textit{S}$). Above the critical $\\textit{S}$ = 7.1 nm$^{2}$, 5FT-DNWs show a constant value of $κ$, whereas below it, there appears a sharp increase in $κ$ with decreasing $\\textit{S}$. More importantly, 5FT-DNWs with minimal $\\textit{S}$ show a superior $κ$ over the bulk diamond. By confirming the Normal-process-dominated scattering event, it is demonstrated that the phonon hydrodynamic behavior plays a determinative role in abnormally high $κ$ of 5FT-DNWs with small $\\textit{S}$. The super-transported phonon hydrodynamic phenomenon unveiled in the twinned diamond nanowires may provide a new route for pursuing highly thermally conductive nanomaterials.",
+      "published": "2021-12-27T16:11:41Z",
+      "authors": [
+        "Ting Liang",
+        "Ke Xu",
+        "Meng Han",
+        "Yimin Yao",
+        "Zhisen Zhang",
+        "Xiaoliang Zeng",
+        "Jianbin Xu",
+        "Jianyang Wu"
+      ],
+      "categories": [
+        "physics.comp-ph",
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2401.13744v3",
+      "title": "Conformal Prediction Sets Improve Human Decision Making",
+      "link": "https://arxiv.org/abs/2401.13744v3",
+      "summary": "In response to everyday queries, humans explicitly signal uncertainty and offer alternative answers when they are unsure. Machine learning models that output calibrated prediction sets through conformal prediction mimic this human behaviour; larger sets signal greater uncertainty while providing alternatives. In this work, we study the usefulness of conformal prediction sets as an aid for human decision making by conducting a pre-registered randomized controlled trial with conformal prediction sets provided to human subjects. With statistical significance, we find that when humans are given conformal prediction sets their accuracy on tasks improves compared to fixed-size prediction sets with the same coverage guarantee. The results show that quantifying model uncertainty with conformal prediction is helpful for human-in-the-loop decision making and human-AI teams.",
+      "published": "2024-01-24T19:01:22Z",
+      "authors": [
+        "Jesse C. Cresswell",
+        "Yi Sui",
+        "Bhargava Kumar",
+        "Noël Vouitsis"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.HC",
+        "stat.ML"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1407.7431v2",
+      "title": "Thermal conductivity due to phonons in the core of superfluid neutron stars",
+      "link": "https://arxiv.org/abs/1407.7431v2",
+      "summary": "We compute the contribution of phonons to the thermal conductivity in the core of superfluid neutron stars. We use effective field theory techniques to extract the phonon scattering rates, written as a function of the equation of state of the system. We also calculate the phonon dispersion law beyond linear order, which depends on the gap of superfluid neutron matter. With all these ingredients, we solve the Boltzmann equation numerically using a variational approach. We find that the thermal conductivity $κ$ is dominated by combined small and large angle binary collisions. As in the color-flavor-locked superfluid, we find that our result can be well approximated by $κ\\propto 1/ Δ^6$, where $Δ$ is the neutron gap, the constant of proportionality depending on the density. We further comment on the possible relevance of electron and superfluid phonon collisions in obtaining the total contribution to the thermal conductivity in the core of superfluid neutron stars.",
+      "published": "2014-07-28T14:36:51Z",
+      "authors": [
+        "Cristina Manuel",
+        "Sreemoyee Sarkar",
+        "Laura Tolos"
+      ],
+      "categories": [
+        "astro-ph.SR",
+        "hep-ph",
+        "nucl-th"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2205.14230v2",
+      "title": "Semi-supervised Semantics-guided Adversarial Training for Trajectory Prediction",
+      "link": "https://arxiv.org/abs/2205.14230v2",
+      "summary": "Predicting the trajectories of surrounding objects is a critical task for self-driving vehicles and many other autonomous systems. Recent works demonstrate that adversarial attacks on trajectory prediction, where small crafted perturbations are introduced to history trajectories, may significantly mislead the prediction of future trajectories and induce unsafe planning. However, few works have addressed enhancing the robustness of this important safety-critical task.In this paper, we present a novel adversarial training method for trajectory prediction. Compared with typical adversarial training on image tasks, our work is challenged by more random input with rich context and a lack of class labels. To address these challenges, we propose a method based on a semi-supervised adversarial autoencoder, which models disentangled semantic features with domain knowledge and provides additional latent labels for the adversarial training. Extensive experiments with different types of attacks demonstrate that our Semisupervised Semantics-guided Adversarial Training (SSAT) method can effectively mitigate the impact of adversarial attacks by up to 73% and outperform other popular defense methods. In addition, experiments show that our method can significantly improve the system's robust generalization to unseen patterns of attacks. We believe that such semantics-guided architecture and advancement on robust generalization is an important step for developing robust prediction models and enabling safe decision-making.",
+      "published": "2022-05-27T20:50:36Z",
+      "authors": [
+        "Ruochen Jiao",
+        "Xiangguo Liu",
+        "Takami Sato",
+        "Qi Alfred Chen",
+        "Qi Zhu"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.CV",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1801.04284v3",
+      "title": "Thermoelectric DC conductivities in hyperscaling violating Lifshitz theories",
+      "link": "https://arxiv.org/abs/1801.04284v3",
+      "summary": "We analytically compute the thermoelectric conductivities at zero frequency (DC) in the holographic dual of a four dimensional Einstein-Maxwell-Axion-Dilaton theory that admits a class of asymptotically hyperscaling violating Lifshitz backgrounds with a dynamical exponent $z$ and hyperscaling violating parameter $θ$. We show that the heat current in the dual Lifshitz theory involves the energy flux, which is an irrelevant operator for $z>1$. The linearized fluctuations relevant for computing the thermoelectric conductivities turn on a source for this irrelevant operator, leading to several novel and non-trivial aspects in the holographic renormalization procedure and the identification of the physical observables in the dual theory. Moreover, imposing Dirichlet or Neumann boundary conditions on the spatial components of one of the two Maxwell fields present leads to different thermoelectric conductivities. Dirichlet boundary conditions reproduce the thermoelectric DC conductivities obtained from the near horizon analysis of Donos and Gauntlett, while Neumann boundary conditions result in a new set of DC conductivities. We make preliminary analytical estimates for the temperature behavior of the thermoelectric matrix in appropriate regions of parameter space. In particular, at large temperatures we find that the only case which could lead to a linear resistivity $ρ\\sim T$ corresponds to $z=4/3$.",
+      "published": "2018-01-12T19:00:27Z",
+      "authors": [
+        "Sera Cremonini",
+        "Mirjam Cvetič",
+        "Ioannis Papadimitriou"
+      ],
+      "categories": [
+        "hep-th"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2410.01898v1",
+      "title": "Latency Reduction in CloudVR: Cloud Prediction, Edge Correction",
+      "link": "https://arxiv.org/abs/2410.01898v1",
+      "summary": "Current virtual reality (VR) headsets encounter a trade-off between high processing power and affordability. Consequently, offloading 3D rendering to remote servers helps reduce costs, battery usage, and headset weight. Maintaining network latency below 20ms is crucial to achieving this goal. Predicting future movement and prerendering are beneficial in meeting this tight latency bound. This paper proposes a method that utilizes the low-latency property of edge servers and the high resources available in cloud servers simultaneously to achieve cost-efficient, high-quality VR. In this method, head movement is predicted on the cloud server, and frames are rendered there and transmitted to the edge server. If the prediction error surpasses a threshold, the frame is re-rendered on the edge server. Results demonstrate that using this method, each edge server can efficiently serve up to 23 users concurrently, compared to a maximum of 5 users when rendering the frame entirely on the edge server. Furthermore, this paper shows that employing the Mean Absolute Error loss function and predicting acceleration rather than velocity significantly enhances prediction accuracy. Additionally, it is shown that normalizing individual data using its mean and standard deviation does not yield improvements in prediction accuracy. These findings provide insights into optimizing VR headset performance through cloud-edge collaboration.",
+      "published": "2024-10-02T18:00:42Z",
+      "authors": [
+        "Ali Majlesi Kopaee",
+        "Seyed Amir Hajseyedtaghia",
+        "Hossein Chitsaz"
+      ],
+      "categories": [
+        "eess.SY"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/0709.4245v3",
+      "title": "Minimal conductivity in graphene: interaction corrections and ultraviolet anomaly",
+      "link": "https://arxiv.org/abs/0709.4245v3",
+      "summary": "Conductivity of a disorder-free intrinsic graphene is studied to the first order in the long-range Coulomb interaction and is found to be σ=σ_0(1+0.01 g), where 'g' is the dimensionless (\"fine structure\") coupling constant. The calculations are performed using three different methods: i) electron polarization function, ii) Kubo formula for the conductivity, iii) quantum transport equation. Surprisingly, these methods yield different results unless a proper ultraviolet cut-off procedure is implemented, which requires that the interaction potential in the effective Dirac Hamiltonian is cut-off at small distances (large momenta).",
+      "published": "2007-09-27T17:56:41Z",
+      "authors": [
+        "E. G. Mishchenko"
+      ],
+      "categories": [
+        "cond-mat.mes-hall"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2201.09309v1",
+      "title": "COVID-19 mortality prediction: A case study for İstanbul",
+      "link": "https://arxiv.org/abs/2201.09309v1",
+      "summary": "In this paper, we use SEIR equations to make predictions for the number of mortality due to COVID-19 in İstanbul. Using excess mortality method, we find the number of mortality for the previous three waves in 2020 and 2021. We show that the predictions of our model is consistent with number of moralities for each wave. Furthermore, we predict the number of mortality for the second wave of 2021. We also extend our analysis for Germany, Italy and Turkey to compare the basic reproduction number $R_0$ for Istanbul. Finally, we calculate the number of infected people in Istanbul for herd immunity.",
+      "published": "2022-01-23T16:45:22Z",
+      "authors": [
+        "Erkan Yilmaz",
+        "Ozgur Oku",
+        "Ekrem Aydiner"
+      ],
+      "categories": [
+        "stat.AP",
+        "q-bio.PE"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2407.00556v1",
+      "title": "Revisiting Vision-Language Features Adaptation and Inconsistency for Social Media Popularity Prediction",
+      "link": "https://arxiv.org/abs/2407.00556v1",
+      "summary": "Social media popularity (SMP) prediction is a complex task involving multi-modal data integration. While pre-trained vision-language models (VLMs) like CLIP have been widely adopted for this task, their effectiveness in capturing the unique characteristics of social media content remains unexplored. This paper critically examines the applicability of CLIP-based features in SMP prediction, focusing on the overlooked phenomenon of semantic inconsistency between images and text in social media posts. Through extensive analysis, we demonstrate that this inconsistency increases with post popularity, challenging the conventional use of VLM features. We provide a comprehensive investigation of semantic inconsistency across different popularity intervals and analyze the impact of VLM feature adaptation on SMP tasks. Our experiments reveal that incorporating inconsistency measures and adapted text features significantly improves model performance, achieving an SRC of 0.729 and an MAE of 1.227. These findings not only enhance SMP prediction accuracy but also provide crucial insights for developing more targeted approaches in social media analysis.",
+      "published": "2024-06-30T01:18:37Z",
+      "authors": [
+        "Chih-Chung Hsu",
+        "Chia-Ming Lee",
+        "Yu-Fan Lin",
+        "Yi-Shiuan Chou",
+        "Chih-Yu Jian",
+        "Chi-Han Tsai"
+      ],
+      "categories": [
+        "cs.MM"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2510.08900v1",
+      "title": "Few-shot Molecular Property Prediction: A Survey",
+      "link": "https://arxiv.org/abs/2510.08900v1",
+      "summary": "AI-assisted molecular property prediction has become a promising technique in early-stage drug discovery and materials design in recent years. However, due to high-cost and complex wet-lab experiments, real-world molecules usually experience the issue of scarce annotations, leading to limited labeled data for effective supervised AI model learning. In light of this, few-shot molecular property prediction (FSMPP) has emerged as an expressive paradigm that enables learning from only a few labeled examples. Despite rapidly growing attention, existing FSMPP studies remain fragmented, without a coherent framework to capture methodological advances and domain-specific challenges. In this work, we present the first comprehensive and systematic survey of few-shot molecular property prediction. We begin by analyzing the few-shot phenomenon in molecular datasets and highlighting two core challenges: (1) cross-property generalization under distribution shifts, where each task corresponding to each property, may follow a different data distribution or even be inherently weakly related to others from a biochemical perspective, requiring the model to transfer knowledge across heterogeneous prediction tasks, and (2) cross-molecule generalization under structural heterogeneity, where molecules involved in different or same properties may exhibit significant structural diversity, making model difficult to achieve generalization. Then, we introduce a unified taxonomy that organizes existing methods into data, model, and learning paradigm levels, reflecting their strategies for extracting knowledge from scarce supervision in few-shot molecular property prediction. Next, we compare representative methods, summarize benchmark datasets and evaluation protocols. In the end, we identify key trends and future directions for advancing the continued research on FSMPP.",
+      "published": "2025-10-10T01:24:54Z",
+      "authors": [
+        "Zeyu Wang",
+        "Tianyi Jiang",
+        "Huanchang Ma",
+        "Yao Lu",
+        "Xiaoze Bao",
+        "Shanqing Yu",
+        "Qi Xuan",
+        "Shirui Pan",
+        "Xin Zheng"
+      ],
+      "categories": [
+        "cs.CE"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2302.03103v1",
+      "title": "Error-rate Prediction for Mouse-based Rectangular-target Pointing with no Knowledge of Movement Angles",
+      "link": "https://arxiv.org/abs/2302.03103v1",
+      "summary": "In rectangular-target pointing, movement angles towards targets are known to affect error rates. When designers determine target sizes, however, they would not know the frequencies of cursor-approaching directions for each target. Thus, assuming that there are unbiasedly various angles, we derived models to predict error rates depending only on the target width and height. We conducted two crowdsourced experiments: a cyclic pointing task with a predefined movement angle and a multi-directional pointing task. The shuffle-split cross-validation with 60% training data showed R^2 > 0.81, MAE < 1.3%, and RMSE < 2.1%, suggesting good prediction accuracy even for predicting untested target sizes when designers newly set UI elements.",
+      "published": "2023-02-06T20:03:00Z",
+      "authors": [
+        "Shota Yamanaka"
+      ],
+      "categories": [
+        "cs.HC"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1910.05126v2",
+      "title": "Prediction-based Resource Allocation using Bayesian Neural Networks and Minimum Cost and Maximum Flow Algorithm",
+      "link": "https://arxiv.org/abs/1910.05126v2",
+      "summary": "Predictive business process monitoring aims at providing predictions about running instances by analyzing logs of completed cases in a business process. Recently, a lot of research focuses on increasing productivity and efficiency in a business process by forecasting potential problems during its executions. However, most of the studies lack suggesting concrete actions to improve the process. They leave it up to the subjective judgment of a user. In this paper, we propose a novel method to connect the results from predictive business process monitoring to actual business process improvements. More in detail, we optimize the resource allocation in a non-clairvoyant online environment, where we have limited information required for scheduling, by exploiting the predictions. The proposed method integrates the offline prediction model construction that predicts the processing time and the next activity of an ongoing instance using Bayesian Neural Networks (BNNs) with the online resource allocation that is extended from the minimum cost and maximum flow algorithm. To validate the proposed method, we performed experiments using an artificial event log and a real-life event log from a global financial organization.",
+      "published": "2019-10-11T12:35:12Z",
+      "authors": [
+        "Gyunam Park",
+        "Minseok Song"
+      ],
+      "categories": [
+        "cs.AI"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2506.03408v2",
+      "title": "Trajectory Prediction Meets Large Language Models: A Survey",
+      "link": "https://arxiv.org/abs/2506.03408v2",
+      "summary": "Recent advances in large language models (LLMs) have sparked growing interest in integrating language-driven techniques into trajectory prediction. By leveraging their semantic and reasoning capabilities, LLMs are reshaping how autonomous systems perceive, model, and predict trajectories. This survey provides a comprehensive overview of this emerging field, categorizing recent work into five directions: (1) Trajectory prediction via language modeling paradigms, (2) Direct trajectory prediction with pretrained language models, (3) Language-guided scene understanding for trajectory prediction, (4) Language-driven data generation for trajectory prediction, (5) Language-based reasoning and interpretability for trajectory prediction. For each, we analyze representative methods, highlight core design choices, and identify open challenges. This survey bridges natural language processing and trajectory prediction, offering a unified perspective on how language can enrich trajectory prediction.",
+      "published": "2025-06-03T21:36:56Z",
+      "authors": [
+        "Yi Xu",
+        "Ruining Yang",
+        "Yitian Zhang",
+        "Jianglin Lu",
+        "Mingyuan Zhang",
+        "Yizhou Wang",
+        "Lili Su",
+        "Yun Fu"
+      ],
+      "categories": [
+        "cs.CL",
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1204.6441v1",
+      "title": "\"I Wanted to Predict Elections with Twitter and all I got was this Lousy Paper\" -- A Balanced Survey on Election Prediction using Twitter Data",
+      "link": "https://arxiv.org/abs/1204.6441v1",
+      "summary": "Predicting X from Twitter is a popular fad within the Twitter research subculture. It seems both appealing and relatively easy. Among such kind of studies, electoral prediction is maybe the most attractive, and at this moment there is a growing body of literature on such a topic. This is not only an interesting research problem but, above all, it is extremely difficult. However, most of the authors seem to be more interested in claiming positive results than in providing sound and reproducible methods. It is also especially worrisome that many recent papers seem to only acknowledge those studies supporting the idea of Twitter predicting elections, instead of conducting a balanced literature review showing both sides of the matter. After reading many of such papers I have decided to write such a survey myself. Hence, in this paper, every study relevant to the matter of electoral prediction using social media is commented. From this review it can be concluded that the predictive power of Twitter regarding elections has been greatly exaggerated, and that hard research problems still lie ahead.",
+      "published": "2012-04-28T22:18:06Z",
+      "authors": [
+        "Daniel Gayo-Avello"
+      ],
+      "categories": [
+        "cs.CY",
+        "cs.CL",
+        "cs.SI",
+        "physics.soc-ph"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2112.04768v2",
+      "title": "Quantum Link Prediction in Complex Networks",
+      "link": "https://arxiv.org/abs/2112.04768v2",
+      "summary": "Predicting new links in physical, biological, social, or technological networks has a significant scientific and societal impact. Path-based link prediction methods utilize explicit counting of even and odd-length paths between nodes to quantify a score function and infer new or unobserved links. Here, we propose a quantum algorithm for path-based link prediction, QLP, using a controlled continuous-time quantum walk to encode even and odd path-based prediction scores. Through classical simulations on a few real networks, we confirm that the quantum walk scoring function performs similarly to other path-based link predictors. In a brief complexity analysis we identify the potential of our approach in uncovering a quantum speedup for path-based link prediction.",
+      "published": "2021-12-09T08:58:31Z",
+      "authors": [
+        "João P. Moutinho",
+        "André Melo",
+        "Bruno Coutinho",
+        "István A. Kovács",
+        "Yasser Omar"
+      ],
+      "categories": [
+        "quant-ph",
+        "cond-mat.dis-nn",
+        "cs.SI",
+        "physics.bio-ph"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2402.18140v1",
+      "title": "OccTransformer: Improving BEVFormer for 3D camera-only occupancy prediction",
+      "link": "https://arxiv.org/abs/2402.18140v1",
+      "summary": "This technical report presents our solution, \"occTransformer\" for the 3D occupancy prediction track in the autonomous driving challenge at CVPR 2023. Our method builds upon the strong baseline BEVFormer and improves its performance through several simple yet effective techniques. Firstly, we employed data augmentation to increase the diversity of the training data and improve the model's generalization ability. Secondly, we used a strong image backbone to extract more informative features from the input data. Thirdly, we incorporated a 3D unet head to better capture the spatial information of the scene. Fourthly, we added more loss functions to better optimize the model. Additionally, we used an ensemble approach with the occ model BevDet and SurroundOcc to further improve the performance. Most importantly, we integrated 3D detection model StreamPETR to enhance the model's ability to detect objects in the scene. Using these methods, our solution achieved 49.23 miou on the 3D occupancy prediction track in the autonomous driving challenge.",
+      "published": "2024-02-28T08:03:34Z",
+      "authors": [
+        "Jian Liu",
+        "Sipeng Zhang",
+        "Chuixin Kong",
+        "Wenyuan Zhang",
+        "Yuhang Wu",
+        "Yikang Ding",
+        "Borun Xu",
+        "Ruibo Ming",
+        "Donglai Wei",
+        "Xianming Liu"
+      ],
+      "categories": [
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2212.09277v1",
+      "title": "Building Height Prediction with Instance Segmentation",
+      "link": "https://arxiv.org/abs/2212.09277v1",
+      "summary": "Extracting building heights from satellite images is an active research area used in many fields such as telecommunications, city planning, etc. Many studies utilize DSM (Digital Surface Models) generated with lidars or stereo images for this purpose. Predicting the height of the buildings using only RGB images is challenging due to the insufficient amount of data, low data quality, variations of building types, different angles of light and shadow, etc. In this study, we present an instance segmentation-based building height extraction method to predict building masks with their respective heights from a single RGB satellite image. We used satellite images with building height annotations of certain cities along with an open-source satellite dataset with the transfer learning approach. We reached, the bounding box mAP 59, the mask mAP 52.6, and the average accuracy value of 70% for buildings belonging to each height class in our test set.",
+      "published": "2022-12-19T07:12:49Z",
+      "authors": [
+        "Furkan Burak Bagci",
+        "Ahmet Alp Kindriroglu",
+        "Metehan Yalcin",
+        "Ufuk Uyan",
+        "Mahiye Uluyagmur Ozturk"
+      ],
+      "categories": [
+        "cs.CV"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2308.00065v1",
+      "title": "FinPT: Financial Risk Prediction with Profile Tuning on Pretrained Foundation Models",
+      "link": "https://arxiv.org/abs/2308.00065v1",
+      "summary": "Financial risk prediction plays a crucial role in the financial sector. Machine learning methods have been widely applied for automatically detecting potential risks and thus saving the cost of labor. However, the development in this field is lagging behind in recent years by the following two facts: 1) the algorithms used are somewhat outdated, especially in the context of the fast advance of generative AI and large language models (LLMs); 2) the lack of a unified and open-sourced financial benchmark has impeded the related research for years. To tackle these issues, we propose FinPT and FinBench: the former is a novel approach for financial risk prediction that conduct Profile Tuning on large pretrained foundation models, and the latter is a set of high-quality datasets on financial risks such as default, fraud, and churn. In FinPT, we fill the financial tabular data into the pre-defined instruction template, obtain natural-language customer profiles by prompting LLMs, and fine-tune large foundation models with the profile text to make predictions. We demonstrate the effectiveness of the proposed FinPT by experimenting with a range of representative strong baselines on FinBench. The analytical studies further deepen the understanding of LLMs for financial risk prediction.",
+      "published": "2023-07-22T09:27:05Z",
+      "authors": [
+        "Yuwei Yin",
+        "Yazheng Yang",
+        "Jian Yang",
+        "Qi Liu"
+      ],
+      "categories": [
+        "q-fin.RM",
+        "cs.CE",
+        "cs.CL",
+        "cs.LG",
+        "q-fin.ST"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2205.09570v1",
+      "title": "Approaching Reflex Predictions as a Classification Problem Using Extended Phonological Alignments",
+      "link": "https://arxiv.org/abs/2205.09570v1",
+      "summary": "This work describes an implementation of the \"extended alignment\" (or \"multitiers\") approach for cognate reflex prediction, submitted to \"Prediction of Cognate Reflexes\" shared task. Similarly to List2022d, the technique involves an automatic extension of sequence alignments with multilayered vectors that encode informational tiers on both site-specific traits, such as sound classes and distinctive features, as well as contextual and suprasegmental ones, conveyed by cross-site referrals and replication. The method allows to generalize the problem of cognate reflex prediction as a classification problem, with models trained using a parallel corpus of cognate sets. A model using random forests is trained and evaluated on the shared task for reflex prediction, and the experimental results are presented and discussed along with some differences to other implementations.",
+      "published": "2022-05-19T14:00:42Z",
+      "authors": [
+        "Tiago Tresoldi"
+      ],
+      "categories": [
+        "cs.CL"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2104.09369v1",
+      "title": "Adversarial Diffusion Attacks on Graph-based Traffic Prediction Models",
+      "link": "https://arxiv.org/abs/2104.09369v1",
+      "summary": "Real-time traffic prediction models play a pivotal role in smart mobility systems and have been widely used in route guidance, emerging mobility services, and advanced traffic management systems. With the availability of massive traffic data, neural network-based deep learning methods, especially the graph convolutional networks (GCN) have demonstrated outstanding performance in mining spatio-temporal information and achieving high prediction accuracy. Recent studies reveal the vulnerability of GCN under adversarial attacks, while there is a lack of studies to understand the vulnerability issues of the GCN-based traffic prediction models. Given this, this paper proposes a new task -- diffusion attack, to study the robustness of GCN-based traffic prediction models. The diffusion attack aims to select and attack a small set of nodes to degrade the performance of the entire prediction model. To conduct the diffusion attack, we propose a novel attack algorithm, which consists of two major components: 1) approximating the gradient of the black-box prediction model with Simultaneous Perturbation Stochastic Approximation (SPSA); 2) adapting the knapsack greedy algorithm to select the attack nodes. The proposed algorithm is examined with three GCN-based traffic prediction models: St-Gcn, T-Gcn, and A3t-Gcn on two cities. The proposed algorithm demonstrates high efficiency in the adversarial attack tasks under various scenarios, and it can still generate adversarial samples under the drop regularization such as DropOut, DropNode, and DropEdge. The research outcomes could help to improve the robustness of the GCN-based traffic prediction models and better protect the smart mobility systems. Our code is available at https://github.com/LYZ98/Adversarial-Diffusion-Attacks-on-Graph-based-Traffic-Prediction-Models",
+      "published": "2021-04-19T14:57:25Z",
+      "authors": [
+        "Lyuyi Zhu",
+        "Kairui Feng",
+        "Ziyuan Pu",
+        "Wei Ma"
+      ],
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2309.07188v1",
+      "title": "Predicting Survival Time of Ball Bearings in the Presence of Censoring",
+      "link": "https://arxiv.org/abs/2309.07188v1",
+      "summary": "Ball bearings find widespread use in various manufacturing and mechanical domains, and methods based on machine learning have been widely adopted in the field to monitor wear and spot defects before they lead to failures. Few studies, however, have addressed the problem of censored data, in which failure is not observed. In this paper, we propose a novel approach to predict the time to failure in ball bearings using survival analysis. First, we analyze bearing data in the frequency domain and annotate when a bearing fails by comparing the Kullback-Leibler divergence and the standard deviation between its break-in frequency bins and its break-out frequency bins. Second, we train several survival models to estimate the time to failure based on the annotated data and covariates extracted from the time domain, such as skewness, kurtosis and entropy. The models give a probabilistic prediction of risk over time and allow us to compare the survival function between groups of bearings. We demonstrate our approach on the XJTU and PRONOSTIA datasets. On XJTU, the best result is a 0.70 concordance-index and 0.21 integrated Brier score. On PRONOSTIA, the best is a 0.76 concordance-index and 0.19 integrated Brier score. Our work motivates further work on incorporating censored data in models for predictive maintenance.",
+      "published": "2023-09-13T08:30:31Z",
+      "authors": [
+        "Christian Marius Lillelund",
+        "Fernando Pannullo",
+        "Morten Opprud Jakobsen",
+        "Christian Fischer Pedersen"
+      ],
+      "categories": [
+        "eess.SP",
+        "cs.AI",
+        "cs.LG"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1904.07328v2",
+      "title": "How Widely Can Prediction Models be Generalized? Performance Prediction in Blended Courses",
+      "link": "https://arxiv.org/abs/1904.07328v2",
+      "summary": "Blended courses that mix in-person instruction with online platforms are increasingly popular in secondary education. These tools record a rich amount of data on students' study habits and social interactions. Prior research has shown that these metrics are correlated with students' performance in face to face classes. However, predictive models for blended courses are still limited and have not yet succeeded at early prediction or cross-class predictions even for repeated offerings of the same course.\n  In this work, we use data from two offerings of two different undergraduate courses to train and evaluate predictive models on student performance based upon persistent student characteristics including study habits and social interactions. We analyze the performance of these models on the same offering, on different offerings of the same course, and across courses to see how well they generalize. We also evaluate the models on different segments of the courses to determine how early reliable predictions can be made. This work tells us in part how much data is required to make robust predictions and how cross-class data may be used, or not, to boost model performance. The results of this study will help us better understand how similar the study habits, social activities, and the teamwork styles are across semesters for students in each performance category. These trained models also provide an avenue to improve our existing support platforms to better support struggling students early in the semester with the goal of providing timely intervention.",
+      "published": "2019-04-15T20:50:46Z",
+      "authors": [
+        "Niki Gitinabard",
+        "Yiqiao Xu",
+        "Sarah Heckman",
+        "Tiffany Barnes",
+        "Collin F. Lynch"
+      ],
+      "categories": [
+        "cs.CY",
+        "cs.LG",
+        "stat.ML"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/1306.1271v1",
+      "title": "Predictability of social interactions",
+      "link": "https://arxiv.org/abs/1306.1271v1",
+      "summary": "The ability to predict social interactions between people has profound applications including targeted marketing and prediction of information diffusion and disease propagation. Previous work has shown that the location of an individual at any given time is highly predictable. This study examines the predictability of social interactions between people to determine whether interaction patterns are similarly predictable. I find that the locations and times of interactions for an individual are highly predictable; however, the other person the individual interacts with is less predictable. Furthermore, I show that knowledge of the locations and times of interactions has almost no effect on the predictability of the other person. Finally I demonstrate that a simple Markov chain model is able to achieve close to the upper bound in terms of predicting the next person with whom a given individual will interact.",
+      "published": "2013-06-06T00:40:55Z",
+      "authors": [
+        "Kevin S. Xu"
+      ],
+      "categories": [
+        "cs.SI",
+        "cs.CY",
+        "physics.soc-ph",
+        "stat.AP"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2407.01436v1",
+      "title": "AdaOcc: Adaptive Forward View Transformation and Flow Modeling for 3D Occupancy and Flow Prediction",
+      "link": "https://arxiv.org/abs/2407.01436v1",
+      "summary": "In this technical report, we present our solution for the Vision-Centric 3D Occupancy and Flow Prediction track in the nuScenes Open-Occ Dataset Challenge at CVPR 2024. Our innovative approach involves a dual-stage framework that enhances 3D occupancy and flow predictions by incorporating adaptive forward view transformation and flow modeling. Initially, we independently train the occupancy model, followed by flow prediction using sequential frame integration. Our method combines regression with classification to address scale variations in different scenes, and leverages predicted flow to warp current voxel features to future frames, guided by future frame ground truth. Experimental results on the nuScenes dataset demonstrate significant improvements in accuracy and robustness, showcasing the effectiveness of our approach in real-world scenarios. Our single model based on Swin-Base ranks second on the public leaderboard, validating the potential of our method in advancing autonomous car perception systems.",
+      "published": "2024-07-01T16:32:15Z",
+      "authors": [
+        "Dubing Chen",
+        "Wencheng Han",
+        "Jin Fang",
+        "Jianbing Shen"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/abs/2206.02163v1",
+      "title": "MotionCNN: A Strong Baseline for Motion Prediction in Autonomous Driving",
+      "link": "https://arxiv.org/abs/2206.02163v1",
+      "summary": "To plan a safe and efficient route, an autonomous vehicle should anticipate future motions of other agents around it. Motion prediction is an extremely challenging task that recently gained significant attention within the research community. In this work, we present a simple and yet very strong baseline for multimodal motion prediction based purely on Convolutional Neural Networks. While being easy-to-implement, the proposed approach achieves competitive performance compared to the state-of-the-art methods and ranks 3rd on the 2021 Waymo Open Dataset Motion Prediction Challenge. Our source code is publicly available at GitHub",
+      "published": "2022-06-05T12:31:58Z",
+      "authors": [
+        "Stepan Konev",
+        "Kirill Brodt",
+        "Artsiom Sanakoyeu"
+      ],
+      "categories": [
+        "cs.CV"
+      ]
+    }
+  ]
+}

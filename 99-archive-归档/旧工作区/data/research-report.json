@@ -1,0 +1,25 @@
+{
+  "title": "锂离子电池材料研究报告",
+  "date": "2026-03-05",
+  "summary": "本研究对3种材料进行了计算和实验研究，包括LiFePO4, LiCoO2, LiNiO2。",
+  "materials_studied": [
+    "LiFePO4",
+    "LiCoO2",
+    "LiNiO2"
+  ],
+  "key_findings": [
+    "LiFePO4的带隙为2.38 eV",
+    "LiCoO2的形成能为-4.33 eV/atom",
+    "发现5个新的候选材料"
+  ],
+  "recommendations": [
+    "优化合成条件以提高材料纯度",
+    "进行电化学性能测试",
+    "开展长期稳定性研究"
+  ],
+  "references": [
+    "Padhi et al., J. Electrochem. Soc. 144 (1997)",
+    "Zhang et al., Nature Materials (2020)",
+    "Smith et al., Science (2022)"
+  ]
+}

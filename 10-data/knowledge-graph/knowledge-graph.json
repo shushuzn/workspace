@@ -1,0 +1,4874 @@
+{
+  "metadata": {
+    "version": "1.0",
+    "builder": "knowledge_graph_builder.py",
+    "workspace": "D:\\OpenClaw\\workspace"
+  },
+  "statistics": {
+    "entities": 426,
+    "relations": 52,
+    "sources": 241,
+    "last_updated": "2026-03-16T18:03:17.797617",
+    "build_time_seconds": 0.34,
+    "entity_types": {
+      "tool": 214,
+      "url": 61,
+      "model": 6,
+      "lesson": 110,
+      "commit": 35
+    }
+  },
+  "entities": [
+    {
+      "id": "anomaly_detector.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\anomaly_detector.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\anomaly_detector.py",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz/api/health',",
+      "type": "url",
+      "source": "30-scripts-tools\\anomaly_detector.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\anomaly_detector.py"
+      ]
+    },
+    {
+      "id": "automation_orchestrator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\automation_orchestrator.py",
+        "30-scripts-tools\\windows_task_scheduler.py",
+        "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md",
+        "30-scripts-tools\\arxiv_workflow.py",
+        "30-scripts-tools\\auto_deployer.py",
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\smart_doc_generator.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "arxiv_collector.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\cron_tasks.json",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\automation_orchestrator.py",
+        "30-scripts-tools\\auto_deployer.py",
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "30-scripts-tools\\workflow_engine_v2.py",
+        "30-scripts-tools\\workflow_enhancer.py",
+        "30-scripts-tools\\workflow_template_gen.py",
+        "20-data-reports\\evolution_state.json"
+      ]
+    },
+    {
+      "id": "github_trending_collector.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\heartbeat_config.json",
+        "20-data-reports\\CLI_USAGE_GUIDE.md",
+        "30-scripts-tools\\automation_orchestrator.py",
+        "20-data-reports\\evolution_state.json"
+      ]
+    },
+    {
+      "id": "medium_article_collector.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\automation_orchestrator.py",
+        "20-data-reports\\evolution_state.json"
+      ]
+    },
+    {
+      "id": "daily_brief_generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\daily_brief_generator.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\cron_tasks.json",
+        "30-scripts-tools\\automation_orchestrator.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "30-scripts-tools\\workflow_engine_v2.py",
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "maintenance.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\memory-ops.py",
+        "30-scripts-tools\\windows_task_scheduler.py",
+        "30-scripts-tools\\cron_tasks.json",
+        "20-data-reports\\CLI_USAGE_GUIDE.md",
+        "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md",
+        "30-scripts-tools\\automation_orchestrator.py",
+        "30-scripts-tools\\openclaw.py"
+      ]
+    },
+    {
+      "id": "knowledge_graph_updater.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\knowledge_graph_updater.py",
+        "30-scripts-tools\\windows_task_scheduler.py",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\automation_orchestrator.py",
+        "30-scripts-tools\\openclaw.py"
+      ]
+    },
+    {
+      "id": "dashboard_health_widget.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\dashboard_health_widget.py",
+        "30-scripts-tools\\dashboard_integration.py",
+        "30-scripts-tools\\windows_task_scheduler.py",
+        "30-scripts-tools\\heartbeat_config.json",
+        "20-data-reports\\CLI_USAGE_GUIDE.md",
+        "30-scripts-tools\\automation_orchestrator.py"
+      ]
+    },
+    {
+      "id": "dashboard_integration.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\dashboard_integration.py",
+        "30-scripts-tools\\heartbeat_workflow.py",
+        "30-scripts-tools\\ENH-PHASE2-README.md",
+        "30-scripts-tools\\ENH-PHASE3-README.md",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\automation_orchestrator.py"
+      ]
+    },
+    {
+      "id": "heartbeat_workflow.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\heartbeat_workflow.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\windows_task_scheduler.py",
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\cron_tasks.json",
+        "30-scripts-tools\\automation_orchestrator.py"
+      ]
+    },
+    {
+      "id": "quality_scorer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\quality_scorer.py",
+        "30-scripts-tools\\windows_task_scheduler.py",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\automation_orchestrator.py"
+      ]
+    },
+    {
+      "id": "dashboard_anomaly_alerts.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\dashboard_anomaly_alerts.py",
+        "30-scripts-tools\\dashboard_integration.py",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\automation_orchestrator.py"
+      ]
+    },
+    {
+      "id": "autonomous_decision.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\autonomous_decision.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\autonomous_decision.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md",
+        "30-scripts-tools\\ENH-PHASE4-README.md",
+        "30-scripts-tools\\autonomous_research_assistant.py",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "auto_distill.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_distill.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_distill.py",
+        "30-scripts-tools\\heartbeat_workflow.py",
+        "30-scripts-tools\\ENH-PHASE3-README.md",
+        "30-scripts-tools\\heartbeat_config.json",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "distiller.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_distill.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\memory-dashboard.py",
+        "30-scripts-tools\\memory-ops.py",
+        "30-scripts-tools\\memory_health_monitor.py",
+        "30-scripts-tools\\windows_task_scheduler.py",
+        "30-scripts-tools\\cron_tasks.json",
+        "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md",
+        "30-scripts-tools\\auto_distill.py",
+        "30-scripts-tools\\openclaw.py"
+      ]
+    },
+    {
+      "id": "batch_card_generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\batch_card_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\batch_card_generator.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz\"",
+      "type": "url",
+      "source": "30-scripts-tools\\batch_card_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\batch_card_generator.py"
+      ]
+    },
+    {
+      "id": "code_reviewer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\code_reviewer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\code_reviewer.py",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\workflow_engine_v2.py",
+        "30-scripts-tools\\workflow_enhancer.py",
+        "30-scripts-tools\\workflow_template_gen.py",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "critic_auto_fix.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\critic_auto_fix.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\critic_auto_fix.py",
+        "30-scripts-tools\\heartbeat_workflow.py",
+        "30-scripts-tools\\ENH-PHASE1-README.md",
+        "30-scripts-tools\\ENH-PHASE3-README.md",
+        "30-scripts-tools\\heartbeat_config.json",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "memory_auto_fix.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\critic_auto_fix.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\critic_auto_fix.py",
+        "30-scripts-tools\\memory-ops.py",
+        "30-scripts-tools\\memory_auto_fix.py",
+        "30-scripts-tools\\ENH-PHASE1-README.md",
+        "20-data-reports\\CLI_USAGE_GUIDE.md"
+      ]
+    },
+    {
+      "id": "workspace_comparator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\critic_auto_fix.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\critic_auto_fix.py",
+        "30-scripts-tools\\memory_auto_fix.py",
+        "30-scripts-tools\\memory_health_monitor.py",
+        "30-scripts-tools\\pre_file_operation_hook.py",
+        "30-scripts-tools\\workspace_comparator.py",
+        "30-scripts-tools\\feasibility-analysis-framework.md"
+      ]
+    },
+    {
+      "id": "memory_search.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\critic_auto_fix.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\critic_auto_fix.py"
+      ]
+    },
+    {
+      "id": "pre_file_operation_hook.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\critic_auto_fix.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\critic_auto_fix.py",
+        "30-scripts-tools\\pre_file_operation_hook.py"
+      ]
+    },
+    {
+      "id": "critic_review.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\critic_auto_fix.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\critic_auto_fix.py"
+      ]
+    },
+    {
+      "id": "security_scanner.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\critic_auto_fix.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\critic_auto_fix.py"
+      ]
+    },
+    {
+      "id": "cron_manager.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\cron_manager.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\cron_manager.py",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz/api/anomalies\"",
+      "type": "url",
+      "source": "30-scripts-tools\\dashboard_anomaly_alerts.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\dashboard_anomaly_alerts.py"
+      ]
+    },
+    {
+      "id": "dashboard_decision_timeline.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\dashboard_decision_timeline.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\dashboard_decision_timeline.py",
+        "30-scripts-tools\\dashboard_integration.py",
+        "30-scripts-tools\\heartbeat_config.json"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz/api/decisions\"",
+      "type": "url",
+      "source": "30-scripts-tools\\dashboard_decision_timeline.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\dashboard_decision_timeline.py"
+      ]
+    },
+    {
+      "id": "memory_health_monitor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\dashboard_health_widget.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\dashboard_health_widget.py",
+        "30-scripts-tools\\memory-ops.py",
+        "30-scripts-tools\\memory_auto_fix.py",
+        "30-scripts-tools\\memory_health_monitor.py",
+        "30-scripts-tools\\automation_orchestrator.py"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz/api/health\"",
+      "type": "url",
+      "source": "30-scripts-tools\\dashboard_health_widget.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\dashboard_health_widget.py"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz',",
+      "type": "url",
+      "source": "30-scripts-tools\\dashboard_integration.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\dashboard_integration.py"
+      ]
+    },
+    {
+      "id": "decision_optimizer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\decision_optimizer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\decision_optimizer.py"
+      ]
+    },
+    {
+      "id": "download_qwen_model.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\download_qwen_model.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\local_qwen_inference.py",
+        "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md",
+        "30-scripts-tools\\download_qwen_model.py"
+      ]
+    },
+    {
+      "id": "local_qwen_inference.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\download_qwen_model.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\local_qwen_inference.py",
+        "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md",
+        "30-scripts-tools\\download_qwen_model.py",
+        "30-scripts-tools\\smart_doc_generator.py"
+      ]
+    },
+    {
+      "id": "Qwen2.5-0",
+      "type": "model",
+      "source": "30-scripts-tools\\download_qwen_model.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\local_qwen_inference.py",
+        "30-scripts-tools\\sensitive_content_router.py",
+        "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md",
+        "30-scripts-tools\\download_qwen_model.py"
+      ]
+    },
+    {
+      "id": "Qwen2.5-1",
+      "type": "model",
+      "source": "30-scripts-tools\\download_qwen_model.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\knowledge_graph_builder.py",
+        "30-scripts-tools\\local_qwen_inference.py",
+        "30-scripts-tools\\download_qwen_model.py",
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\paper_summarizer.py"
+      ]
+    },
+    {
+      "id": "Qwen3-0",
+      "type": "model",
+      "source": "30-scripts-tools\\download_qwen_model.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\download_qwen_model.py"
+      ]
+    },
+    {
+      "id": "Qwen3.5-0",
+      "type": "model",
+      "source": "30-scripts-tools\\download_qwen_model.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\download_qwen_model.py",
+        "30-scripts-tools\\local_qwen_inference.py"
+      ]
+    },
+    {
+      "id": "https://hf-mirror.com'",
+      "type": "url",
+      "source": "30-scripts-tools\\download_qwen_model.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\download_qwen_model.py"
+      ]
+    },
+    {
+      "id": "https://huggingface.co/{model_config['repo']}\"",
+      "type": "url",
+      "source": "30-scripts-tools\\download_qwen_model.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\download_qwen_model.py"
+      ]
+    },
+    {
+      "id": "feishu_notification.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\feishu_notification.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\feishu_notification.py",
+        "30-scripts-tools\\self_healing.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\smart_notification.py"
+      ]
+    },
+    {
+      "id": "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal'",
+      "type": "url",
+      "source": "30-scripts-tools\\feishu_notification.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\feishu_notification.py"
+      ]
+    },
+    {
+      "id": "https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=user_id'",
+      "type": "url",
+      "source": "30-scripts-tools\\feishu_notification.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\feishu_notification.py"
+      ]
+    },
+    {
+      "id": "feishu_report_generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\feishu_report_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\feishu_report_generator.py"
+      ]
+    },
+    {
+      "id": "health_predictor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\health_predictor.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\health_predictor.py"
+      ]
+    },
+    {
+      "id": "task_priority_scorer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\heartbeat_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\task_priority_scorer.py",
+        "30-scripts-tools\\ENH-PHASE1-README.md",
+        "30-scripts-tools\\ENH-PHASE3-README.md",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\heartbeat_workflow.py"
+      ]
+    },
+    {
+      "id": "load_balancer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\heartbeat_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\load_balancer.py",
+        "30-scripts-tools\\ENH-PHASE2-README.md",
+        "30-scripts-tools\\ENH-PHASE3-README.md",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\heartbeat_workflow.py"
+      ]
+    },
+    {
+      "id": "innovation_pattern_matcher.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\heartbeat_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\innovation_pattern_matcher.py",
+        "30-scripts-tools\\ENH-PHASE1-README.md",
+        "30-scripts-tools\\ENH-PHASE3-README.md",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\heartbeat_workflow.py"
+      ]
+    },
+    {
+      "id": "parallel_executor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\heartbeat_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\parallel_executor.py",
+        "30-scripts-tools\\ENH-PHASE3-README.md",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\heartbeat_workflow.py"
+      ]
+    },
+    {
+      "id": "convert_to_openvino.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\install_requirements.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\README.md",
+        "30-scripts-tools\\README_GPU.md",
+        "13-memory-记忆系统\\2026-03-13-plan.md",
+        "30-scripts-tools\\install_requirements.py"
+      ]
+    },
+    {
+      "id": "Qwen3.5-2B",
+      "type": "model",
+      "source": "30-scripts-tools\\install_requirements.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\README_GPU.md",
+        "30-scripts-tools\\install_requirements.py"
+      ]
+    },
+    {
+      "id": "SYS-019",
+      "type": "lesson",
+      "source": "30-scripts-tools\\knowledge-graph-builder.py",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "30-scripts-tools\\knowledge-graph-builder.py",
+        "30-scripts-tools\\learning-quality-assessor.py",
+        "30-scripts-tools\\smart-review-reminder.py",
+        "30-scripts-tools\\review-schedule.json",
+        "00-人格系统\\LEARNER-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "SYS-020",
+      "type": "lesson",
+      "source": "30-scripts-tools\\knowledge-graph-builder.py",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "30-scripts-tools\\learning-quality-assessor.py",
+        "00-人格系统\\LEARNER-PERSONA-v2.md",
+        "30-scripts-tools\\knowledge-graph-builder.py"
+      ]
+    },
+    {
+      "id": "MULTI-021",
+      "type": "lesson",
+      "source": "30-scripts-tools\\knowledge-graph-builder.py",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "30-scripts-tools\\smart-review-reminder.py",
+        "30-scripts-tools\\review-schedule.json",
+        "00-人格系统\\LEARNER-PERSONA-v2.md",
+        "30-scripts-tools\\knowledge-graph-builder.py"
+      ]
+    },
+    {
+      "id": "MEM-011",
+      "type": "lesson",
+      "source": "30-scripts-tools\\knowledge-graph-builder.py",
+      "metadata": {
+        "category": "MEM"
+      },
+      "sources": [
+        "30-scripts-tools\\smart-review-reminder.py",
+        "30-scripts-tools\\review-schedule.json",
+        "00-人格系统\\LEARNER-PERSONA-v2.md",
+        "30-scripts-tools\\knowledge-graph-builder.py"
+      ]
+    },
+    {
+      "id": "SYS-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\knowledge_graph_builder.py",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md",
+        "30-scripts-tools\\knowledge_graph_builder.py"
+      ]
+    },
+    {
+      "id": "INNOV-005",
+      "type": "lesson",
+      "source": "30-scripts-tools\\knowledge_graph_builder.py",
+      "metadata": {
+        "category": "INNOV"
+      },
+      "sources": [
+        "30-scripts-tools\\knowledge_graph_builder.py"
+      ]
+    },
+    {
+      "id": "knowledge_graph_builder.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\knowledge_graph_builder.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\knowledge_graph_builder.py",
+        "30-scripts-tools\\automation_orchestrator.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\tool_integration.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "30-scripts-tools\\workflow_engine_v2.py",
+        "30-scripts-tools\\workflow_template_gen.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "cache_manager.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\knowledge_graph_builder.py",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\CLI_USAGE_GUIDE.md",
+        "30-scripts-tools\\knowledge_graph_builder.py",
+        "30-scripts-tools\\automation_orchestrator.py",
+        "30-scripts-tools\\auto_optimizer.py",
+        "30-scripts-tools\\cache_manager.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\self_healing.py",
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\system_orchestrator.py",
+        "30-scripts-tools\\tool_integration.py",
+        "30-scripts-tools\\unified_monitor.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "30-scripts-tools\\workflow_engine_v2.py",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "Qwen2.5",
+      "type": "model",
+      "source": "30-scripts-tools\\local_qwen_inference.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\local_qwen_inference.py",
+        "30-scripts-tools\\ollama_qwen_test.py"
+      ]
+    },
+    {
+      "id": "https://abetlen.github.io/llama-cpp-python/whl/cpu\"",
+      "type": "url",
+      "source": "30-scripts-tools\\local_qwen_inference.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\local_qwen_inference.py"
+      ]
+    },
+    {
+      "id": "assessor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\memory-dashboard.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\memory-dashboard.py",
+        "30-scripts-tools\\memory-ops.py",
+        "00-人格系统\\LEARNER-PERSONA-v2.md",
+        "00-人格系统\\PLANNER-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "dashboard.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\memory-dashboard.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\memory-ops.py",
+        "30-scripts-tools\\memory-dashboard.py"
+      ]
+    },
+    {
+      "id": "INNOVATOR-026",
+      "type": "lesson",
+      "source": "30-scripts-tools\\memory-ops.py",
+      "metadata": {
+        "category": "INNOVATOR"
+      },
+      "sources": [
+        "30-scripts-tools\\memory-ops.py"
+      ]
+    },
+    {
+      "id": "INNOVATOR-027",
+      "type": "lesson",
+      "source": "30-scripts-tools\\memory-ops.py",
+      "metadata": {
+        "category": "INNOVATOR"
+      },
+      "sources": [
+        "30-scripts-tools\\memory-ops.py"
+      ]
+    },
+    {
+      "id": "ops.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\memory-ops.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\memory-ops.py"
+      ]
+    },
+    {
+      "id": "http://localhost:8444/health\"",
+      "type": "url",
+      "source": "30-scripts-tools\\memory_health_monitor.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\memory_health_monitor.py"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz/health\"",
+      "type": "url",
+      "source": "30-scripts-tools\\memory_health_monitor.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\memory_health_monitor.py"
+      ]
+    },
+    {
+      "id": "notification_router.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\notification_router.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\notification_router.py",
+        "30-scripts-tools\\openclaw.py"
+      ]
+    },
+    {
+      "id": "ollama_qwen_test.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\ollama_qwen_test.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\ollama_qwen_test.py"
+      ]
+    },
+    {
+      "id": "paper_summarizer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\paper_summarizer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\paper_summarizer.py",
+        "30-scripts-tools\\heartbeat_config.json",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\workflow_engine.py"
+      ]
+    },
+    {
+      "id": "1000000",
+      "type": "commit",
+      "source": "30-scripts-tools\\parallel_executor.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\parallel_executor.py"
+      ]
+    },
+    {
+      "id": "FILE-006",
+      "type": "lesson",
+      "source": "30-scripts-tools\\pre_file_operation_hook.py",
+      "metadata": {
+        "category": "FILE"
+      },
+      "sources": [
+        "30-scripts-tools\\pre_file_operation_hook.py",
+        "30-scripts-tools\\workspace_comparator.py"
+      ]
+    },
+    {
+      "id": "_test.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\quality_scorer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\quality_scorer.py"
+      ]
+    },
+    {
+      "id": "safedir.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\safedir.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\safedir.py"
+      ]
+    },
+    {
+      "id": "self_healing.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\self_healing.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\self_healing.py",
+        "30-scripts-tools\\automation_orchestrator.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\system_orchestrator.py",
+        "30-scripts-tools\\unified_monitor.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "30-scripts-tools\\workflow_engine_v2.py"
+      ]
+    },
+    {
+      "id": "sensitive_content_router.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\sensitive_content_router.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\sensitive_content_router.py",
+        "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md"
+      ]
+    },
+    {
+      "id": "windows_task_scheduler.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\windows_task_scheduler.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\windows_task_scheduler.py"
+      ]
+    },
+    {
+      "id": "test.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workspace.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workspace.py",
+        "30-scripts-tools\\core_system_test.py"
+      ]
+    },
+    {
+      "id": "async_executor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\async_executor_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\async_executor_README.md",
+        "30-scripts-tools\\README.md",
+        "13-memory-记忆系统\\2026-03-13-plan.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "dialog_integrator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\async_executor_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_signal_extractor_README.md",
+        "30-scripts-tools\\dialog_integrator_README.md",
+        "30-scripts-tools\\README.md",
+        "13-memory-记忆系统\\2026-03-13-plan.md",
+        "30-scripts-tools\\async_executor_README.md"
+      ]
+    },
+    {
+      "id": "effect_tracker.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\async_executor_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_signal_extractor_README.md",
+        "30-scripts-tools\\effect_tracker_README.md",
+        "30-scripts-tools\\README.md",
+        "13-memory-记忆系统\\2026-03-13-plan.md",
+        "30-scripts-tools\\async_executor_README.md"
+      ]
+    },
+    {
+      "id": "test_async_executor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\async_executor_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\async_executor_README.md"
+      ]
+    },
+    {
+      "id": "https://api.example.com/data\",",
+      "type": "url",
+      "source": "30-scripts-tools\\async_executor_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\async_executor_README.md"
+      ]
+    },
+    {
+      "id": "auto_signal_extractor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_signal_extractor_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_signal_extractor_README.md",
+        "30-scripts-tools\\README.md",
+        "30-scripts-tools\\README_GPU.md",
+        "13-memory-记忆系统\\2026-03-13-plan.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "test_signal_extractor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_signal_extractor_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_signal_extractor_README.md"
+      ]
+    },
+    {
+      "id": "https://api.example.com/data",
+      "type": "url",
+      "source": "30-scripts-tools\\auto_signal_extractor_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_signal_extractor_README.md"
+      ]
+    },
+    {
+      "id": "OPT-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md",
+      "metadata": {
+        "category": "OPT"
+      },
+      "sources": [
+        "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md"
+      ]
+    },
+    {
+      "id": "OPT-002",
+      "type": "lesson",
+      "source": "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md",
+      "metadata": {
+        "category": "OPT"
+      },
+      "sources": [
+        "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md"
+      ]
+    },
+    {
+      "id": "OPT-003",
+      "type": "lesson",
+      "source": "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md",
+      "metadata": {
+        "category": "OPT"
+      },
+      "sources": [
+        "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md"
+      ]
+    },
+    {
+      "id": "OPT-004",
+      "type": "lesson",
+      "source": "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md",
+      "metadata": {
+        "category": "OPT"
+      },
+      "sources": [
+        "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md"
+      ]
+    },
+    {
+      "id": "OPT-005",
+      "type": "lesson",
+      "source": "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md",
+      "metadata": {
+        "category": "OPT"
+      },
+      "sources": [
+        "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md"
+      ]
+    },
+    {
+      "id": "OPT-006",
+      "type": "lesson",
+      "source": "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md",
+      "metadata": {
+        "category": "OPT"
+      },
+      "sources": [
+        "30-scripts-tools\\DECISION-RULES-OPTIMIZATION.md"
+      ]
+    },
+    {
+      "id": "ENH-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE1-README.md",
+      "metadata": {
+        "category": "ENH"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE1-README.md"
+      ]
+    },
+    {
+      "id": "ENH-003",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE1-README.md",
+      "metadata": {
+        "category": "ENH"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE1-README.md"
+      ]
+    },
+    {
+      "id": "ENH-006",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE1-README.md",
+      "metadata": {
+        "category": "ENH"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE1-README.md"
+      ]
+    },
+    {
+      "id": "SYS-016",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE1-README.md",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE1-README.md"
+      ]
+    },
+    {
+      "id": "ENH-005",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE2-README.md",
+      "metadata": {
+        "category": "ENH"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE2-README.md"
+      ]
+    },
+    {
+      "id": "ENH-007",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE2-README.md",
+      "metadata": {
+        "category": "ENH"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE2-README.md"
+      ]
+    },
+    {
+      "id": "SYS-017",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE2-README.md",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE2-README.md"
+      ]
+    },
+    {
+      "id": "RISK-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE2-README.md",
+      "metadata": {
+        "category": "RISK"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE2-README.md"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz/api/health`",
+      "type": "url",
+      "source": "30-scripts-tools\\ENH-PHASE2-README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE2-README.md"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz/api/health",
+      "type": "url",
+      "source": "30-scripts-tools\\ENH-PHASE2-README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE2-README.md"
+      ]
+    },
+    {
+      "id": "ENH-002",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE3-README.md",
+      "metadata": {
+        "category": "ENH"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE3-README.md"
+      ]
+    },
+    {
+      "id": "ENH-004",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE3-README.md",
+      "metadata": {
+        "category": "ENH"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE3-README.md"
+      ]
+    },
+    {
+      "id": "PARALLEL-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE3-README.md",
+      "metadata": {
+        "category": "PARALLEL"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE3-README.md"
+      ]
+    },
+    {
+      "id": "DISTILL-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE3-README.md",
+      "metadata": {
+        "category": "DISTILL"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE3-README.md"
+      ]
+    },
+    {
+      "id": "COMPLETE-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE3-README.md",
+      "metadata": {
+        "category": "COMPLETE"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE3-README.md"
+      ]
+    },
+    {
+      "id": "ENH-008",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE4-README.md",
+      "metadata": {
+        "category": "ENH"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE4-README.md"
+      ]
+    },
+    {
+      "id": "COMPLETE-002",
+      "type": "lesson",
+      "source": "30-scripts-tools\\ENH-PHASE4-README.md",
+      "metadata": {
+        "category": "COMPLETE"
+      },
+      "sources": [
+        "30-scripts-tools\\ENH-PHASE4-README.md"
+      ]
+    },
+    {
+      "id": "FEASIBILITY-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\feasibility-analysis-framework.md",
+      "metadata": {
+        "category": "FEASIBILITY"
+      },
+      "sources": [
+        "30-scripts-tools\\feasibility-analysis-framework.md"
+      ]
+    },
+    {
+      "id": "FEASIBILITY-002",
+      "type": "lesson",
+      "source": "30-scripts-tools\\feasibility-analysis-framework.md",
+      "metadata": {
+        "category": "FEASIBILITY"
+      },
+      "sources": [
+        "30-scripts-tools\\feasibility-analysis-framework.md"
+      ]
+    },
+    {
+      "id": "FEASIBILITY-003",
+      "type": "lesson",
+      "source": "30-scripts-tools\\feasibility-analysis-framework.md",
+      "metadata": {
+        "category": "FEASIBILITY"
+      },
+      "sources": [
+        "30-scripts-tools\\feasibility-analysis-framework.md"
+      ]
+    },
+    {
+      "id": "FEASIBILITY-004",
+      "type": "lesson",
+      "source": "30-scripts-tools\\feasibility-analysis-framework.md",
+      "metadata": {
+        "category": "FEASIBILITY"
+      },
+      "sources": [
+        "30-scripts-tools\\feasibility-analysis-framework.md"
+      ]
+    },
+    {
+      "id": "FEASIBILITY-005",
+      "type": "lesson",
+      "source": "30-scripts-tools\\feasibility-analysis-framework.md",
+      "metadata": {
+        "category": "FEASIBILITY"
+      },
+      "sources": [
+        "30-scripts-tools\\feasibility-analysis-framework.md"
+      ]
+    },
+    {
+      "id": "INN-025",
+      "type": "lesson",
+      "source": "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+      "metadata": {
+        "category": "INN"
+      },
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md"
+      ]
+    },
+    {
+      "id": "INN-026",
+      "type": "lesson",
+      "source": "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+      "metadata": {
+        "category": "INN"
+      },
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md"
+      ]
+    },
+    {
+      "id": "INN-027",
+      "type": "lesson",
+      "source": "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+      "metadata": {
+        "category": "INN"
+      },
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md"
+      ]
+    },
+    {
+      "id": "INN-028",
+      "type": "lesson",
+      "source": "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+      "metadata": {
+        "category": "INN"
+      },
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md"
+      ]
+    },
+    {
+      "id": "INN-029",
+      "type": "lesson",
+      "source": "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+      "metadata": {
+        "category": "INN"
+      },
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md"
+      ]
+    },
+    {
+      "id": "INN-030",
+      "type": "lesson",
+      "source": "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+      "metadata": {
+        "category": "INN"
+      },
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md"
+      ]
+    },
+    {
+      "id": "openclaw.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\INNOVATION-IMPLEMENTATION-COMPLETE.md",
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "install_requirements.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\install_requirements_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\install_requirements_README.md",
+        "30-scripts-tools\\README.md",
+        "30-scripts-tools\\README_GPU.md",
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "https://pypi.tuna.tsinghua.edu.cn/simple`",
+      "type": "url",
+      "source": "30-scripts-tools\\install_requirements_README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\install_requirements_README.md"
+      ]
+    },
+    {
+      "id": "script.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\knowledge-template-library.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\README.md",
+        "30-scripts-tools\\knowledge-template-library.md",
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\performance_profiler.py"
+      ]
+    },
+    {
+      "id": "https://abetlen.github.io/llama-cpp-python/whl/cpu",
+      "type": "url",
+      "source": "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md"
+      ]
+    },
+    {
+      "id": "https://huggingface.co/Qwen/Qwen2.5-0.5B-Instruct-GGUF",
+      "type": "url",
+      "source": "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md"
+      ]
+    },
+    {
+      "id": "https://github.com/abetlen/llama-cpp-python",
+      "type": "url",
+      "source": "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md"
+      ]
+    },
+    {
+      "id": "https://github.com/ggerganov/ggml/blob/master/docs/gguf.md",
+      "type": "url",
+      "source": "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md"
+      ]
+    },
+    {
+      "id": "brief.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\PROJECT-INDEX.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\QUICK-FIND-GUIDE.md",
+        "30-scripts-tools\\REORGANIZATION-COMPLETE.md",
+        "13-memory-记忆系统\\feishu-msg-20260310155301.json",
+        "13-memory-记忆系统\\feishu-queue.json",
+        "30-scripts-tools\\PROJECT-INDEX.md"
+      ]
+    },
+    {
+      "id": "dcbe342",
+      "type": "commit",
+      "source": "30-scripts-tools\\PROJECT-INDEX.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\PROJECT-INDEX.md"
+      ]
+    },
+    {
+      "id": "generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\QUICK-FIND-GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\QUICK-FIND-GUIDE.md",
+        "30-scripts-tools\\REORGANIZATION-COMPLETE.md",
+        "13-memory-记忆系统\\2026-03-11.md",
+        "20-data-reports\\evolution_state.json"
+      ]
+    },
+    {
+      "id": "webui.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\QUICK-FIND-GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\QUICK-FIND-GUIDE.md",
+        "30-scripts-tools\\REORGANIZATION-COMPLETE.md",
+        "13-memory-记忆系统\\2026-03-11.md"
+      ]
+    },
+    {
+      "id": "collector.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\QUICK-FIND-GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\QUICK-FIND-GUIDE.md"
+      ]
+    },
+    {
+      "id": "detect_ai_style.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\QUICK-FIND-GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-10.md",
+        "30-scripts-tools\\QUICK-FIND-GUIDE.md"
+      ]
+    },
+    {
+      "id": "check_word_count.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\QUICK-FIND-GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-10.md",
+        "30-scripts-tools\\QUICK-FIND-GUIDE.md"
+      ]
+    },
+    {
+      "id": "daily.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\QUICK-FIND-GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\QUICK-FIND-GUIDE.md"
+      ]
+    },
+    {
+      "id": "run_qwen_gpu.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\README_GPU.md",
+        "13-memory-记忆系统\\2026-03-13-plan.md",
+        "30-scripts-tools\\README.md"
+      ]
+    },
+    {
+      "id": "quick_benchmark.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\README.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md",
+        "30-scripts-tools\\README.md"
+      ]
+    },
+    {
+      "id": "test_async_prm.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\README.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md",
+        "30-scripts-tools\\README.md"
+      ]
+    },
+    {
+      "id": "test_npu_vs_gpu.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\README.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md",
+        "30-scripts-tools\\README.md"
+      ]
+    },
+    {
+      "id": "related_script.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\README.md"
+      ]
+    },
+    {
+      "id": "test_script.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\README.md",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\README.md"
+      ]
+    },
+    {
+      "id": "builder.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\heartbeat_config.json",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\LEARNER-PERSONA-v2.md",
+        "30-scripts-tools\\heartbeat_config.json"
+      ]
+    },
+    {
+      "id": "CLI-001",
+      "type": "lesson",
+      "source": "20-data-reports\\CLI_USAGE_GUIDE.md",
+      "metadata": {
+        "category": "CLI"
+      },
+      "sources": [
+        "20-data-reports\\CLI_USAGE_GUIDE.md"
+      ]
+    },
+    {
+      "id": "CLI-002",
+      "type": "lesson",
+      "source": "20-data-reports\\CLI_USAGE_GUIDE.md",
+      "metadata": {
+        "category": "CLI"
+      },
+      "sources": [
+        "20-data-reports\\CLI_USAGE_GUIDE.md"
+      ]
+    },
+    {
+      "id": "CLI-003",
+      "type": "lesson",
+      "source": "20-data-reports\\CLI_USAGE_GUIDE.md",
+      "metadata": {
+        "category": "CLI"
+      },
+      "sources": [
+        "20-data-reports\\CLI_USAGE_GUIDE.md"
+      ]
+    },
+    {
+      "id": "CLI-004",
+      "type": "lesson",
+      "source": "20-data-reports\\CLI_USAGE_GUIDE.md",
+      "metadata": {
+        "category": "CLI"
+      },
+      "sources": [
+        "20-data-reports\\CLI_USAGE_GUIDE.md"
+      ]
+    },
+    {
+      "id": "CLI-005",
+      "type": "lesson",
+      "source": "20-data-reports\\CLI_USAGE_GUIDE.md",
+      "metadata": {
+        "category": "CLI"
+      },
+      "sources": [
+        "20-data-reports\\CLI_USAGE_GUIDE.md"
+      ]
+    },
+    {
+      "id": "cli.py",
+      "type": "tool",
+      "source": "20-data-reports\\CLI_USAGE_GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\CLI_USAGE_GUIDE.md",
+        "30-scripts-tools\\smart_doc_generator.py"
+      ]
+    },
+    {
+      "id": "FORMAT-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\2026-03-07.md",
+      "metadata": {
+        "category": "FORMAT"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md",
+        "13-memory-记忆系统\\2026-03-07.md"
+      ]
+    },
+    {
+      "id": "ARCHIVE-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\2026-03-07.md",
+      "metadata": {
+        "category": "ARCHIVE"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md",
+        "13-memory-记忆系统\\2026-03-07.md"
+      ]
+    },
+    {
+      "id": "VERIFY-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\2026-03-07.md",
+      "metadata": {
+        "category": "VERIFY"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md",
+        "13-memory-记忆系统\\2026-03-07.md"
+      ]
+    },
+    {
+      "id": "update_skill_tree.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-10.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-10.md"
+      ]
+    },
+    {
+      "id": "http://127.0.0.1:5000",
+      "type": "url",
+      "source": "13-memory-记忆系统\\2026-03-11.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-11.md"
+      ]
+    },
+    {
+      "id": "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js\"></script>",
+      "type": "url",
+      "source": "13-memory-记忆系统\\2026-03-11.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-11.md"
+      ]
+    },
+    {
+      "id": "ae257c5",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\2026-03-12.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-12.md"
+      ]
+    },
+    {
+      "id": "d67e90d",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\2026-03-12.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-12.md"
+      ]
+    },
+    {
+      "id": "dbce93b",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\2026-03-12.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-12.md"
+      ]
+    },
+    {
+      "id": "756602f",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\2026-03-12.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-12.md"
+      ]
+    },
+    {
+      "id": "apply_to_self.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "convert_ov_fix.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "convert_ov_simple.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "download_qwen_small.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "intel_gpu_inference.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "test_qwen_cpu.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "simple_benchmark.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "behavior_updater.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "next_state_learner.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "workflow_prm.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13-plan.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13-plan.md"
+      ]
+    },
+    {
+      "id": "monitor.py",
+      "type": "tool",
+      "source": "13-memory-记忆系统\\2026-03-13.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13.md"
+      ]
+    },
+    {
+      "id": "8e38811",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\2026-03-13.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\task-completion-20260313-w11-day1.md",
+        "13-memory-记忆系统\\2026-03-13.md"
+      ]
+    },
+    {
+      "id": "99ccecd",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\2026-03-13.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13.md"
+      ]
+    },
+    {
+      "id": "8b66735",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\2026-03-13.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13.md"
+      ]
+    },
+    {
+      "id": "e4f900c",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\2026-03-13.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13.md"
+      ]
+    },
+    {
+      "id": "8787251",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\2026-03-13.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\2026-03-13.md"
+      ]
+    },
+    {
+      "id": "AUTO-003",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\LEARNER-EXPANSION-20260313.md",
+      "metadata": {
+        "category": "AUTO"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+        "13-memory-记忆系统\\LEARNER-EXPANSION-20260313.md"
+      ]
+    },
+    {
+      "id": "AUTO-004",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\LEARNER-EXPANSION-20260313.md",
+      "metadata": {
+        "category": "AUTO"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+        "13-memory-记忆系统\\LEARNER-EXPANSION-20260313.md"
+      ]
+    },
+    {
+      "id": "9d210fc",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\LEARNER-EXPANSION-20260313.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-SUMMARY.md",
+        "13-memory-记忆系统\\LEARNER-EXPANSION-20260313.md"
+      ]
+    },
+    {
+      "id": "6d96cae",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\LEARNER-EXPANSION-20260313.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-SUMMARY.md",
+        "13-memory-记忆系统\\LEARNER-EXPANSION-20260313.md"
+      ]
+    },
+    {
+      "id": "CR-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "CR"
+      },
+      "sources": [
+        "00-人格系统\\LEARNER-PERSONA-v2.md",
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "LR-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "LR"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "CO-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "CO"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "EX-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "EX"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "PS-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "PS"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "AUTO-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "AUTO"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md",
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "AUTO-002",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "AUTO"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "CHALLENGE-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "CHALLENGE"
+      },
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-SUMMARY.md",
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "CHALLENGE-002",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "CHALLENGE"
+      },
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "CHALLENGE-003",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "CHALLENGE"
+      },
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-COMPLETE-1606.md",
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "CHALLENGE-004",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "CHALLENGE"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "CHALLENGE-005",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "CHALLENGE"
+      },
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-TRULY-FINAL-1606.md",
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "CHALLENGE-006",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "CHALLENGE"
+      },
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-FINAL-1606-TRULY.md",
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "TIME-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "TIME"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "PERF-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "PERF"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "DOC-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "DOC"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md",
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "VALIDATION-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md",
+      "metadata": {
+        "category": "VALIDATION"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY-SUMMARY-20260313.md"
+      ]
+    },
+    {
+      "id": "AG-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "AG"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "MCP-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "MCP"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "MCP-005",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "MCP"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "TC-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "TC"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "TC-002",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "TC"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "PLAN-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "PLAN"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "MAS-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "MAS"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "PAT-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "PAT"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "PAT-002",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "PAT"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "DATA-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "DATA"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "SYS-002",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "GAME-001",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "GAME"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "SYS-003",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "SYS-004",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "TMP-20260304202908",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "TMP"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "SYS-005",
+      "type": "lesson",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "https://cdn.syndication.twimg.com/tweet-result?id={TWEET_ID}&token=1",
+      "type": "url",
+      "source": "13-memory-记忆系统\\MEMORY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\MEMORY.md"
+      ]
+    },
+    {
+      "id": "74fefc9",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-SUMMARY.md",
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "e4e23a8",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-SUMMARY.md",
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "b3785e9",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "7501f8f",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "9d1e21a",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "428414e",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "60e59ac",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "b6df256",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "ca97f3f",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "6a48784",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "19a2e04",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "cbee007",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "c366ebd",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "b159cea",
+      "type": "commit",
+      "source": "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md",
+      "metadata": {},
+      "sources": [
+        "13-memory-记忆系统\\SELF-EVOLUTION-1HOUR-CHALLENGE-FINAL-SUMMARY.md"
+      ]
+    },
+    {
+      "id": "SYS-010",
+      "type": "lesson",
+      "source": "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md",
+      "metadata": {
+        "category": "SYS"
+      },
+      "sources": [
+        "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md"
+      ]
+    },
+    {
+      "id": "MULTI-001",
+      "type": "lesson",
+      "source": "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md",
+        "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md"
+      ]
+    },
+    {
+      "id": "MEM-001",
+      "type": "lesson",
+      "source": "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md",
+      "metadata": {
+        "category": "MEM"
+      },
+      "sources": [
+        "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md"
+      ]
+    },
+    {
+      "id": "FEISHU-013",
+      "type": "lesson",
+      "source": "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md",
+      "metadata": {
+        "category": "FEISHU"
+      },
+      "sources": [
+        "00-人格系统\\LEARNER-PERSONA-v2.md",
+        "00-人格系统\\7-PERSONA-EVOLUTION-ENGINE.md"
+      ]
+    },
+    {
+      "id": "coordinator.py",
+      "type": "tool",
+      "source": "00-人格系统\\COORDINATOR-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\COORDINATOR-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "MULTI-025",
+      "type": "lesson",
+      "source": "00-人格系统\\CRITIC-PERSONA-v2.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md",
+        "00-人格系统\\CRITIC-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "critic.py",
+      "type": "tool",
+      "source": "00-人格系统\\CRITIC-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\CRITIC-PERSONA-v2.md",
+        "00-人格系统\\CRITIC-PERSONA-v3.md"
+      ]
+    },
+    {
+      "id": "executor.py",
+      "type": "tool",
+      "source": "00-人格系统\\EXECUTOR-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\EXECUTOR-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "innovator.py",
+      "type": "tool",
+      "source": "00-人格系统\\INNOVATOR-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\INNOVATOR-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "MULTI-022",
+      "type": "lesson",
+      "source": "00-人格系统\\LEARNER-PERSONA-v2.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\LEARNER-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "SEC-019",
+      "type": "lesson",
+      "source": "00-人格系统\\LEARNER-PERSONA-v2.md",
+      "metadata": {
+        "category": "SEC"
+      },
+      "sources": [
+        "00-人格系统\\LEARNER-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "PROJ-001",
+      "type": "lesson",
+      "source": "00-人格系统\\LEARNER-PERSONA-v2.md",
+      "metadata": {
+        "category": "PROJ"
+      },
+      "sources": [
+        "00-人格系统\\LEARNER-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "learner.py",
+      "type": "tool",
+      "source": "00-人格系统\\LEARNER-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\LEARNER-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "reminder.py",
+      "type": "tool",
+      "source": "00-人格系统\\LEARNER-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\LEARNER-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "trigger.py",
+      "type": "tool",
+      "source": "00-人格系统\\LEARNER-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\LEARNER-PERSONA-v2.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "MULTI-026",
+      "type": "lesson",
+      "source": "00-人格系统\\METACOGNITIVE-PERSONA-v2.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md",
+        "00-人格系统\\METACOGNITIVE-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "MULTI-027",
+      "type": "lesson",
+      "source": "00-人格系统\\METACOGNITIVE-PERSONA-v2.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md",
+        "00-人格系统\\METACOGNITIVE-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "MULTI-028",
+      "type": "lesson",
+      "source": "00-人格系统\\METACOGNITIVE-PERSONA-v2.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md",
+        "00-人格系统\\METACOGNITIVE-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "MULTI-029",
+      "type": "lesson",
+      "source": "00-人格系统\\METACOGNITIVE-PERSONA-v2.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md",
+        "00-人格系统\\METACOGNITIVE-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "MULTI-030",
+      "type": "lesson",
+      "source": "00-人格系统\\METACOGNITIVE-PERSONA-v2.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md",
+        "00-人格系统\\METACOGNITIVE-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "metacognitive.py",
+      "type": "tool",
+      "source": "00-人格系统\\METACOGNITIVE-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\METACOGNITIVE-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "planner.py",
+      "type": "tool",
+      "source": "00-人格系统\\PLANNER-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\PLANNER-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "optimizer.py",
+      "type": "tool",
+      "source": "00-人格系统\\PLANNER-PERSONA-v2.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\PLANNER-PERSONA-v2.md"
+      ]
+    },
+    {
+      "id": "MULTI-017",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "MULTI-010",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "MEM-006",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MEM"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "MULTI-024",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "MULTI-032",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "MULTI-033",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "MULTI-034",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "MULTI-035",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "MULTI-036",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "MULTI-037",
+      "type": "lesson",
+      "source": "00-人格系统\\README.md",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "optimized_script.py",
+      "type": "tool",
+      "source": "00-人格系统\\README.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\README.md"
+      ]
+    },
+    {
+      "id": "advanced_report_gen.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\advanced_report_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\advanced_report_gen.py",
+        "30-scripts-tools\\workflow_enhancer.py"
+      ]
+    },
+    {
+      "id": "api_gateway.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\api_gateway.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\api_gateway.py"
+      ]
+    },
+    {
+      "id": "http://localhost:8080",
+      "type": "url",
+      "source": "30-scripts-tools\\api_gateway.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\api_gateway.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.port}\"",
+      "type": "url",
+      "source": "30-scripts-tools\\api_gateway.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\perf_dashboard.py",
+        "30-scripts-tools\\unified_api.py",
+        "30-scripts-tools\\unified_monitor.py",
+        "00-人格系统\\persona_api.py",
+        "30-scripts-tools\\api_gateway.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.port}/api/v1/docs\\n\"",
+      "type": "url",
+      "source": "30-scripts-tools\\api_gateway.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\api_gateway.py"
+      ]
+    },
+    {
+      "id": "http://export.arxiv.org/api/query'",
+      "type": "url",
+      "source": "30-scripts-tools\\arxiv_collector_v2.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\arxiv_collector_v2.py"
+      ]
+    },
+    {
+      "id": "http://www.w3.org/2005/Atom',",
+      "type": "url",
+      "source": "30-scripts-tools\\arxiv_collector_v2.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\arxiv_collector_v2.py"
+      ]
+    },
+    {
+      "id": "http://arxiv.org/schemas/atom'}",
+      "type": "url",
+      "source": "30-scripts-tools\\arxiv_collector_v2.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\arxiv_collector_v2.py"
+      ]
+    },
+    {
+      "id": "arxiv_workflow.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\arxiv_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\arxiv_workflow.py"
+      ]
+    },
+    {
+      "id": "memory_distiller.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\arxiv_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\arxiv_workflow.py"
+      ]
+    },
+    {
+      "id": "local_llm_analyzer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\arxiv_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\arxiv_workflow.py"
+      ]
+    },
+    {
+      "id": "contextdb.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\arxiv_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\arxiv_workflow.py"
+      ]
+    },
+    {
+      "id": "kg_rag_plus.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\arxiv_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\arxiv_workflow.py"
+      ]
+    },
+    {
+      "id": "federated_learning.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\arxiv_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\autonomous_research_assistant.py",
+        "30-scripts-tools\\federated_learning.py",
+        "30-scripts-tools\\arxiv_workflow.py"
+      ]
+    },
+    {
+      "id": "automated_prompt_optimization.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\arxiv_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\arxiv_workflow.py"
+      ]
+    },
+    {
+      "id": "self_correcting_code.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\arxiv_workflow.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\arxiv_workflow.py"
+      ]
+    },
+    {
+      "id": "collect_all_sources.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\automation_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\automation_orchestrator.py"
+      ]
+    },
+    {
+      "id": "autonomous_research_assistant.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\autonomous_research_assistant.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\autonomous_research_assistant.py"
+      ]
+    },
+    {
+      "id": "predictive_healing.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\autonomous_research_assistant.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\predictive_healing.py",
+        "30-scripts-tools\\autonomous_research_assistant.py"
+      ]
+    },
+    {
+      "id": "kg_reasoner.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\autonomous_research_assistant.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\kg_reasoner.py",
+        "30-scripts-tools\\autonomous_research_assistant.py"
+      ]
+    },
+    {
+      "id": "multi_agent_network.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\autonomous_research_assistant.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\multi_agent_network.py",
+        "30-scripts-tools\\autonomous_research_assistant.py"
+      ]
+    },
+    {
+      "id": "experiment_platform.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\autonomous_research_assistant.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\experiment_platform.py",
+        "30-scripts-tools\\autonomous_research_assistant.py"
+      ]
+    },
+    {
+      "id": "meta_learning_optimizer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\autonomous_research_assistant.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\meta_learning_optimizer.py",
+        "30-scripts-tools\\autonomous_research_assistant.py"
+      ]
+    },
+    {
+      "id": "causal_inference_engine.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\autonomous_research_assistant.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\causal_inference_engine.py",
+        "30-scripts-tools\\autonomous_research_assistant.py"
+      ]
+    },
+    {
+      "id": "explainable_ai.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\autonomous_research_assistant.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\explainable_ai.py",
+        "30-scripts-tools\\autonomous_research_assistant.py"
+      ]
+    },
+    {
+      "id": "auto_data_cleaner.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_data_cleaner.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_data_cleaner.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "auto_deploy.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_deploy.py"
+      ]
+    },
+    {
+      "id": "self_iteration.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\self_iteration.py",
+        "30-scripts-tools\\self_iter_cli.py",
+        "30-scripts-tools\\workflow_enhancer.py",
+        "30-scripts-tools\\auto_deploy.py"
+      ]
+    },
+    {
+      "id": "meta_learning.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\meta_learning.py",
+        "30-scripts-tools\\self_iter_cli.py",
+        "30-scripts-tools\\system_orchestrator.py",
+        "30-scripts-tools\\workflow_enhancer.py",
+        "30-scripts-tools\\auto_deploy.py"
+      ]
+    },
+    {
+      "id": "evolution_engine.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\evolution_engine.py",
+        "30-scripts-tools\\self_iter_cli.py",
+        "30-scripts-tools\\system_orchestrator.py",
+        "30-scripts-tools\\auto_deploy.py"
+      ]
+    },
+    {
+      "id": "self_iter_cli.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\self_iter_cli.py",
+        "30-scripts-tools\\system_orchestrator.py",
+        "30-scripts-tools\\unified_monitor.py",
+        "30-scripts-tools\\auto_deploy.py"
+      ]
+    },
+    {
+      "id": "heartbeat_integration.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\system_orchestrator.py",
+        "30-scripts-tools\\auto_deploy.py"
+      ]
+    },
+    {
+      "id": "self_iter_dashboard.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_deploy.py",
+        "30-scripts-tools\\self_iter_dashboard.py",
+        "30-scripts-tools\\system_orchestrator.py",
+        "30-scripts-tools\\unified_monitor.py"
+      ]
+    },
+    {
+      "id": "smart_recommendations.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\smart_recommendations.py",
+        "30-scripts-tools\\system_orchestrator.py",
+        "30-scripts-tools\\auto_deploy.py"
+      ]
+    },
+    {
+      "id": "system_orchestrator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_deploy.py",
+        "30-scripts-tools\\system_orchestrator.py",
+        "30-scripts-tools\\unified_monitor.py"
+      ]
+    },
+    {
+      "id": "http://{self.config['host']}:{self.config['dashboard_port']}\"",
+      "type": "url",
+      "source": "30-scripts-tools\\auto_deploy.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_deploy.py"
+      ]
+    },
+    {
+      "id": "auto_deployer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deployer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_deployer.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "tool.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deployer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\workflow_manager.py",
+        "30-scripts-tools\\auto_deployer.py"
+      ]
+    },
+    {
+      "id": "github_collector.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deployer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "30-scripts-tools\\workflow_engine_v2.py",
+        "30-scripts-tools\\workflow_enhancer.py",
+        "30-scripts-tools\\workflow_template_gen.py",
+        "30-scripts-tools\\auto_deployer.py"
+      ]
+    },
+    {
+      "id": "medium_collector.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deployer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "30-scripts-tools\\workflow_engine_v2.py",
+        "30-scripts-tools\\workflow_enhancer.py",
+        "30-scripts-tools\\workflow_template_gen.py",
+        "30-scripts-tools\\auto_deployer.py"
+      ]
+    },
+    {
+      "id": "code_quality_reviewer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deployer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\code_quality_reviewer.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\tool_integration.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json",
+        "20-data-reports\\phase4-metrics.json",
+        "30-scripts-tools\\auto_deployer.py"
+      ]
+    },
+    {
+      "id": "paper_reviewer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deployer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_engine_v2.py",
+        "30-scripts-tools\\workflow_template_gen.py",
+        "30-scripts-tools\\auto_deployer.py"
+      ]
+    },
+    {
+      "id": "health_monitor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deployer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\auto_deployer.py"
+      ]
+    },
+    {
+      "id": "resource_monitor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deployer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\resource_monitor.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\phase4-metrics.json",
+        "30-scripts-tools\\auto_deployer.py"
+      ]
+    },
+    {
+      "id": "smart_scheduler.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_deployer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\smart_scheduler.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\phase4-metrics.json",
+        "30-scripts-tools\\auto_deployer.py"
+      ]
+    },
+    {
+      "id": "auto_optimizer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_optimizer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_optimizer.py",
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "performance_analyzer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_optimizer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\performance_analyzer.py",
+        "30-scripts-tools\\auto_optimizer.py"
+      ]
+    },
+    {
+      "id": "auto_test_generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_test_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_test_generator.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\tool_integration.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "file.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_test_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\code_quality_reviewer.py",
+        "30-scripts-tools\\pre_commit_hook.py",
+        "30-scripts-tools\\workflow_manager.py",
+        "30-scripts-tools\\auto_test_generator.py"
+      ]
+    },
+    {
+      "id": "auto_test_runner.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\auto_test_runner.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\auto_test_runner.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "config_center.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\config_center.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\config_center.py",
+        "30-scripts-tools\\config_center_v2.py",
+        "30-scripts-tools\\workflow_engine_v2.py",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "http://localhost:11434'",
+      "type": "url",
+      "source": "30-scripts-tools\\config_center_v2.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\config_center_v2.py"
+      ]
+    },
+    {
+      "id": "config_manager.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\config_manager.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\config_manager.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "http://localhost:11434\",",
+      "type": "url",
+      "source": "30-scripts-tools\\config_manager.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\config_manager.py"
+      ]
+    },
+    {
+      "id": "https://github.com/volcengine/OpenViking",
+      "type": "url",
+      "source": "30-scripts-tools\\context_db.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\context_db.py"
+      ]
+    },
+    {
+      "id": "core_system_test.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\core_system_test.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\core_system_test.py",
+        "20-data-reports\\evolution_state.json",
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "data_sync_enhancer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\data_sync_enhancer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\data_sync_enhancer.py"
+      ]
+    },
+    {
+      "id": "https://arxiv.org/abs/{arxiv_id}\"",
+      "type": "url",
+      "source": "30-scripts-tools\\defuddle_integration.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\defuddle_integration.py"
+      ]
+    },
+    {
+      "id": "https://arxiv.org/pdf/{arxiv_id}\",",
+      "type": "url",
+      "source": "30-scripts-tools\\defuddle_integration.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\defuddle_integration.py"
+      ]
+    },
+    {
+      "id": "https://arxiv.org/abs/2301.07041\"",
+      "type": "url",
+      "source": "30-scripts-tools\\defuddle_integration.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\defuddle_integration.py"
+      ]
+    },
+    {
+      "id": "doc_generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "rss_collector.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "paper_analyzer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_enhancer.py",
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "sentiment_analyzer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "workflow_engine.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\unified_api.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "workflow_enhancer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\workflow_enhancer.py"
+      ]
+    },
+    {
+      "id": "kg_builder.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "kg_enhancer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\kg_enhancer.py",
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "memory_maintenance.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "test_enhancer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\test_enhancer.py"
+      ]
+    },
+    {
+      "id": "security_auditor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py",
+        "30-scripts-tools\\security_auditor.py",
+        "30-scripts-tools\\workflow_enhancer.py"
+      ]
+    },
+    {
+      "id": "unified_monitor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\unified_monitor.py",
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "https://github.com/shushuzn/obsidian-sync.git",
+      "type": "url",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "http://localhost:8088",
+      "type": "url",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "https://github.com/shushuzn/obsidian-sync",
+      "type": "url",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "https://felixxii.xyz",
+      "type": "url",
+      "source": "30-scripts-tools\\doc_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\doc_generator.py"
+      ]
+    },
+    {
+      "id": "XXX-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\enhanced_canvas_generator.py",
+      "metadata": {
+        "category": "XXX"
+      },
+      "sources": [
+        "30-scripts-tools\\kg_integrator.py",
+        "30-scripts-tools\\enhanced_canvas_generator.py"
+      ]
+    },
+    {
+      "id": "error_analyzer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\error_analyzer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\error_analyzer.py",
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\tool_integration.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "master_orchestrator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\innovator_auto_executor.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\innovator_auto_executor.py"
+      ]
+    },
+    {
+      "id": "FILE-001",
+      "type": "lesson",
+      "source": "30-scripts-tools\\json_canvas_generator.py",
+      "metadata": {
+        "category": "FILE"
+      },
+      "sources": [
+        "30-scripts-tools\\json_canvas_generator.py"
+      ]
+    },
+    {
+      "id": "MULTI-002",
+      "type": "lesson",
+      "source": "30-scripts-tools\\json_canvas_generator.py",
+      "metadata": {
+        "category": "MULTI"
+      },
+      "sources": [
+        "30-scripts-tools\\json_canvas_generator.py"
+      ]
+    },
+    {
+      "id": "kg_integrator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\kg_integrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\kg_integrator.py"
+      ]
+    },
+    {
+      "id": "feishu_api.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\meta_cognition_monitor.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\meta_cognition_monitor.py"
+      ]
+    },
+    {
+      "id": "notification_center.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\notification_center.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\notification_center.py"
+      ]
+    },
+    {
+      "id": "defuddle_integration.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\obsidian_tools.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\obsidian_tools.py"
+      ]
+    },
+    {
+      "id": "json_canvas_generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\obsidian_tools.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\obsidian_tools.py"
+      ]
+    },
+    {
+      "id": "canvas_auto_updater.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\obsidian_tools.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\obsidian_tools.py"
+      ]
+    },
+    {
+      "id": "https://arxiv.org/abs/2301.07041",
+      "type": "url",
+      "source": "30-scripts-tools\\obsidian_tools.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\obsidian_tools.py"
+      ]
+    },
+    {
+      "id": "smart_notification.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\openclaw.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\smart_notification.py",
+        "30-scripts-tools\\tool_integration.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\phase4-metrics.json",
+        "30-scripts-tools\\openclaw.py"
+      ]
+    },
+    {
+      "id": "smart_doc_generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\openclaw.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "30-scripts-tools\\smart_doc_generator.py",
+        "30-scripts-tools\\tool_integration.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "performance_profiler.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\openclaw.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py",
+        "30-scripts-tools\\performance_profiler.py",
+        "30-scripts-tools\\phase4_dashboard.py",
+        "20-data-reports\\PHASE4-SUMMARY.md",
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "my_tool.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\openclaw.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\openclaw.py"
+      ]
+    },
+    {
+      "id": "perf_dashboard.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\perf_dashboard.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\perf_dashboard.py"
+      ]
+    },
+    {
+      "id": "https://cdn.jsdelivr.net/npm/chart.js\"></script>",
+      "type": "url",
+      "source": "30-scripts-tools\\perf_dashboard.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\self_iter_dashboard.py",
+        "30-scripts-tools\\unified_monitor.py",
+        "30-scripts-tools\\workflow_visualizer_web.py",
+        "00-人格系统\\persona_dashboard.py",
+        "30-scripts-tools\\perf_dashboard.py"
+      ]
+    },
+    {
+      "id": "_dashboard.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\phase4_dashboard.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\phase4_dashboard.py"
+      ]
+    },
+    {
+      "id": "real_time_monitor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\real_time_monitor.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\real_time_monitor.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{args.port}\"",
+      "type": "url",
+      "source": "30-scripts-tools\\real_time_monitor.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_server.py",
+        "30-scripts-tools\\workflow_visualizer_web.py",
+        "00-人格系统\\persona_dashboard.py",
+        "30-scripts-tools\\real_time_monitor.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{port}\"",
+      "type": "url",
+      "source": "30-scripts-tools\\self_iter_dashboard.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\self_iter_dashboard.py",
+        "30-scripts-tools\\workflow_server.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{port}/api/data\"",
+      "type": "url",
+      "source": "30-scripts-tools\\self_iter_dashboard.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\self_iter_dashboard.py"
+      ]
+    },
+    {
+      "id": "smart_report_generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\smart_report_generator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\smart_report_generator.py",
+        "30-scripts-tools\\workflow_engine_v2.py"
+      ]
+    },
+    {
+      "id": "system_health_checker.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\system_health_checker.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\system_health_checker.py",
+        "30-scripts-tools\\tool_integration.py",
+        "30-scripts-tools\\workflow_engine.py",
+        "30-scripts-tools\\workflow_engine_v2.py"
+      ]
+    },
+    {
+      "id": "persona_cli.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\system_orchestrator.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\unified_monitor.py",
+        "20-data-reports\\evolution_state.json",
+        "00-人格系统\\persona_cli.py",
+        "30-scripts-tools\\system_orchestrator.py"
+      ]
+    },
+    {
+      "id": "tool_integration.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\tool_integration.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\tool_integration.py"
+      ]
+    },
+    {
+      "id": "example.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\tool_integration.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\tool_integration.py"
+      ]
+    },
+    {
+      "id": "unified_api.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\unified_api.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\unified_api.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.port}/health\"",
+      "type": "url",
+      "source": "30-scripts-tools\\unified_api.py",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_api.py",
+        "30-scripts-tools\\unified_api.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.port}/tools\"",
+      "type": "url",
+      "source": "30-scripts-tools\\unified_api.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\unified_api.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.port}/workflows\"",
+      "type": "url",
+      "source": "30-scripts-tools\\unified_api.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\unified_api.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.port}/execute\"",
+      "type": "url",
+      "source": "30-scripts-tools\\unified_api.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\unified_api.py"
+      ]
+    },
+    {
+      "id": "http://localhost:8080\"",
+      "type": "url",
+      "source": "30-scripts-tools\\unified_api.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\unified_api.py"
+      ]
+    },
+    {
+      "id": "persona_dashboard.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\unified_monitor.py",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\evolution_state.json",
+        "00-人格系统\\persona_cli.py",
+        "00-人格系统\\persona_dashboard.py",
+        "00-人格系统\\PERSONA-COLLABORATION-GUIDE.md",
+        "30-scripts-tools\\unified_monitor.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.port}/api/data\\n\"",
+      "type": "url",
+      "source": "30-scripts-tools\\unified_monitor.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\unified_monitor.py"
+      ]
+    },
+    {
+      "id": "workflow_analyzer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_analyzer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_analyzer.py"
+      ]
+    },
+    {
+      "id": "paper_filter.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_engine.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_engine.py"
+      ]
+    },
+    {
+      "id": "tool_name.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_engine.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_engine.py"
+      ]
+    },
+    {
+      "id": "data_merger.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_engine_v2.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_engine_v2.py"
+      ]
+    },
+    {
+      "id": "brief_generator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_enhancer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_enhancer.py"
+      ]
+    },
+    {
+      "id": "dashboard_updater.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_enhancer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_enhancer.py"
+      ]
+    },
+    {
+      "id": "cleanup.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_enhancer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_enhancer.py"
+      ]
+    },
+    {
+      "id": "metrics_collector.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_enhancer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_enhancer.py"
+      ]
+    },
+    {
+      "id": "health_checker.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_enhancer.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_enhancer.py"
+      ]
+    },
+    {
+      "id": "workflow_server.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_server.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_server.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{port}'",
+      "type": "url",
+      "source": "30-scripts-tools\\workflow_server.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_server.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{port}/api/status\"",
+      "type": "url",
+      "source": "30-scripts-tools\\workflow_server.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_server.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{args.port}/api/status\"",
+      "type": "url",
+      "source": "30-scripts-tools\\workflow_server.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_server.py"
+      ]
+    },
+    {
+      "id": "workflow_template_gen.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "your_tool.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "another_tool.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "tool_a.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "tool_b.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "merger.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "checker.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "action_true.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "action_false.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "extractor.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "transformer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "validator.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "loader.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "linter.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "tester.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "reviewer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "deployer.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_template_gen.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_template_gen.py"
+      ]
+    },
+    {
+      "id": "workflow_visualizer_web.py",
+      "type": "tool",
+      "source": "30-scripts-tools\\workflow_visualizer_web.py",
+      "metadata": {},
+      "sources": [
+        "30-scripts-tools\\workflow_visualizer_web.py"
+      ]
+    },
+    {
+      "id": "persona_analyzer.py",
+      "type": "tool",
+      "source": "20-data-reports\\evolution_state.json",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_analyzer.py",
+        "20-data-reports\\evolution_state.json"
+      ]
+    },
+    {
+      "id": "persona_api.py",
+      "type": "tool",
+      "source": "20-data-reports\\evolution_state.json",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_api.py",
+        "00-人格系统\\persona_cli.py",
+        "20-data-reports\\evolution_state.json"
+      ]
+    },
+    {
+      "id": "persona_collaboration.py",
+      "type": "tool",
+      "source": "20-data-reports\\evolution_state.json",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_collaboration.py",
+        "00-人格系统\\PERSONA-COLLABORATION-GUIDE.md",
+        "20-data-reports\\evolution_state.json"
+      ]
+    },
+    {
+      "id": "persona_orchestrator.py",
+      "type": "tool",
+      "source": "20-data-reports\\evolution_state.json",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_orchestrator.py",
+        "20-data-reports\\evolution_state.json"
+      ]
+    },
+    {
+      "id": "persona_tester.py",
+      "type": "tool",
+      "source": "20-data-reports\\evolution_state.json",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_cli.py",
+        "00-人格系统\\persona_tester.py",
+        "00-人格系统\\PERSONA-COLLABORATION-GUIDE.md",
+        "20-data-reports\\evolution_state.json"
+      ]
+    },
+    {
+      "id": "1953125",
+      "type": "commit",
+      "source": "20-data-reports\\meta_learning_state.json",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "6796875",
+      "type": "commit",
+      "source": "20-data-reports\\meta_learning_state.json",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\meta_learning_state.json"
+      ]
+    },
+    {
+      "id": "a97adf1",
+      "type": "commit",
+      "source": "20-data-reports\\phase4-metrics.json",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "066f169",
+      "type": "commit",
+      "source": "20-data-reports\\phase4-metrics.json",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "28b709d",
+      "type": "commit",
+      "source": "20-data-reports\\phase4-metrics.json",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "e16f710",
+      "type": "commit",
+      "source": "20-data-reports\\phase4-metrics.json",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "1754613",
+      "type": "commit",
+      "source": "20-data-reports\\phase4-metrics.json",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "df22937",
+      "type": "commit",
+      "source": "20-data-reports\\phase4-metrics.json",
+      "metadata": {},
+      "sources": [
+        "20-data-reports\\phase4-metrics.json"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.port}/api\"",
+      "type": "url",
+      "source": "00-人格系统\\persona_api.py",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_api.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.dashboard_port}\"",
+      "type": "url",
+      "source": "00-人格系统\\persona_cli.py",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_cli.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.api_port}\"",
+      "type": "url",
+      "source": "00-人格系统\\persona_cli.py",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_cli.py"
+      ]
+    },
+    {
+      "id": "http://localhost:{self.api_port}/api\"",
+      "type": "url",
+      "source": "00-人格系统\\persona_cli.py",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\persona_cli.py"
+      ]
+    },
+    {
+      "id": "http://localhost:8083",
+      "type": "url",
+      "source": "00-人格系统\\PERSONA-COLLABORATION-GUIDE.md",
+      "metadata": {},
+      "sources": [
+        "00-人格系统\\PERSONA-COLLABORATION-GUIDE.md"
+      ]
+    }
+  ],
+  "relations": [
+    {
+      "source": "download_qwen_model.py",
+      "target": "Qwen2.5-0",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\download_qwen_model.py"
+    },
+    {
+      "source": "local_qwen_inference.py",
+      "target": "Qwen2.5-0",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\download_qwen_model.py"
+    },
+    {
+      "source": "download_qwen_model.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\download_qwen_model.py"
+    },
+    {
+      "source": "local_qwen_inference.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\download_qwen_model.py"
+    },
+    {
+      "source": "download_qwen_model.py",
+      "target": "Qwen3-0",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\download_qwen_model.py"
+    },
+    {
+      "source": "local_qwen_inference.py",
+      "target": "Qwen3-0",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\download_qwen_model.py"
+    },
+    {
+      "source": "download_qwen_model.py",
+      "target": "Qwen3.5-0",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\download_qwen_model.py"
+    },
+    {
+      "source": "local_qwen_inference.py",
+      "target": "Qwen3.5-0",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\download_qwen_model.py"
+    },
+    {
+      "source": "convert_to_openvino.py",
+      "target": "Qwen3.5-2B",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\install_requirements.py"
+    },
+    {
+      "source": "knowledge_graph_builder.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\knowledge_graph_builder.py"
+    },
+    {
+      "source": "cache_manager.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\knowledge_graph_builder.py"
+    },
+    {
+      "source": "local_qwen_inference.py",
+      "target": "Qwen2.5",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\local_qwen_inference.py"
+    },
+    {
+      "source": "download_qwen_model.py",
+      "target": "Qwen2.5",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\local_qwen_inference.py"
+    },
+    {
+      "source": "ollama_qwen_test.py",
+      "target": "Qwen2.5",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\ollama_qwen_test.py"
+    },
+    {
+      "source": "sensitive_content_router.py",
+      "target": "Qwen2.5-0",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\sensitive_content_router.py"
+    },
+    {
+      "source": "task_priority_scorer.py",
+      "target": "ENH-001",
+      "type": "implements",
+      "source_file": "30-scripts-tools\\ENH-PHASE1-README.md"
+    },
+    {
+      "source": "critic_auto_fix.py",
+      "target": "ENH-003",
+      "type": "implements",
+      "source_file": "30-scripts-tools\\ENH-PHASE1-README.md"
+    },
+    {
+      "source": "innovation_pattern_matcher.py",
+      "target": "ENH-006",
+      "type": "implements",
+      "source_file": "30-scripts-tools\\ENH-PHASE1-README.md"
+    },
+    {
+      "source": "load_balancer.py",
+      "target": "ENH-005",
+      "type": "implements",
+      "source_file": "30-scripts-tools\\ENH-PHASE2-README.md"
+    },
+    {
+      "source": "dashboard_integration.py",
+      "target": "ENH-007",
+      "type": "implements",
+      "source_file": "30-scripts-tools\\ENH-PHASE2-README.md"
+    },
+    {
+      "source": "parallel_executor.py",
+      "target": "ENH-002",
+      "type": "implements",
+      "source_file": "30-scripts-tools\\ENH-PHASE3-README.md"
+    },
+    {
+      "source": "auto_distill.py",
+      "target": "ENH-004",
+      "type": "implements",
+      "source_file": "30-scripts-tools\\ENH-PHASE3-README.md"
+    },
+    {
+      "source": "autonomous_decision.py",
+      "target": "ENH-008",
+      "type": "implements",
+      "source_file": "30-scripts-tools\\ENH-PHASE4-README.md"
+    },
+    {
+      "source": "automation_orchestrator.py",
+      "target": "Qwen2.5-0",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\LOCAL_PROCESSING_GUIDE.md"
+    },
+    {
+      "source": "install_requirements.py",
+      "target": "Qwen3.5-2B",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\README_GPU.md"
+    },
+    {
+      "source": "run_qwen_gpu.py",
+      "target": "Qwen3.5-2B",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\README_GPU.md"
+    },
+    {
+      "source": "auto_signal_extractor.py",
+      "target": "Qwen3.5-2B",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\README_GPU.md"
+    },
+    {
+      "source": "doc_generator.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "openclaw.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "arxiv_collector.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "github_collector.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "medium_collector.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "rss_collector.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "local_llm_analyzer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "paper_analyzer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "code_reviewer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "sentiment_analyzer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "workflow_engine.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "workflow_enhancer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "automation_orchestrator.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "kg_builder.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "kg_enhancer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "memory_maintenance.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "self_iteration.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "test_enhancer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "auto_optimizer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "security_auditor.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "unified_monitor.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "performance_analyzer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "script.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "self_iter_cli.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\doc_generator.py"
+    },
+    {
+      "source": "paper_summarizer.py",
+      "target": "Qwen2.5-1",
+      "type": "uses_model",
+      "source_file": "30-scripts-tools\\paper_summarizer.py"
+    }
+  ]
+}

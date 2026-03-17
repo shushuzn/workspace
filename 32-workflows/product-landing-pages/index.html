@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>知识卡片生成器 - 从 PDF 到知识卡片，一键生成</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Hero */
+        .hero { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 100px 0; text-align: center; }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero p { font-size: 1.3rem; margin-bottom: 30px; opacity: 0.9; }
+        .cta-button { display: inline-block; background: white; color: #667eea; padding: 15px 40px; border-radius: 30px; text-decoration: none; font-weight: bold; font-size: 1.1rem; transition: transform 0.2s; }
+        .cta-button:hover { transform: translateY(-2px); }
+        .trust-badges { margin-top: 30px; font-size: 0.9rem; opacity: 0.8; }
+        
+        /* Features */
+        .features { padding: 80px 0; }
+        .features h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
+        .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 40px; }
+        .feature-card { text-align: center; padding: 30px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .feature-icon { font-size: 3rem; margin-bottom: 20px; }
+        .feature-card h3 { margin-bottom: 15px; color: #667eea; }
+        
+        /* Pricing */
+        .pricing { background: #f8f9fa; padding: 80px 0; }
+        .pricing h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .pricing-card { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.1); text-align: center; }
+        .pricing-card.popular { border: 3px solid #667eea; transform: scale(1.05); }
+        .price { font-size: 3rem; color: #667eea; font-weight: bold; }
+        .price span { font-size: 1rem; color: #666; }
+        .pricing-features { list-style: none; margin: 30px 0; text-align: left; }
+        .pricing-features li { padding: 10px 0; border-bottom: 1px solid #eee; }
+        .pricing-features li:last-child { border-bottom: none; }
+        
+        /* Testimonials */
+        .testimonials { padding: 80px 0; }
+        .testimonial { max-width: 600px; margin: 0 auto 40px; text-align: center; font-style: italic; }
+        .testimonial p { font-size: 1.2rem; margin-bottom: 15px; }
+        .testimonial cite { color: #666; }
+        
+        /* FAQ */
+        .faq { background: #f8f9fa; padding: 80px 0; }
+        .faq h2 { text-align: center; font-size: 2.5rem; margin-bottom: 60px; }
+        .faq-item { max-width: 800px; margin: 0 auto 30px; background: white; padding: 25px; border-radius: 10px; }
+        .faq-item h3 { color: #667eea; margin-bottom: 10px; }
+        
+        /* Final CTA */
+        .final-cta { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 80px 0; text-align: center; }
+        .final-cta h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .final-cta p { font-size: 1.3rem; margin-bottom: 30px; opacity: 0.9; }
+        
+        /* Footer */
+        footer { background: #333; color: white; padding: 40px 0; text-align: center; }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .hero p { font-size: 1.1rem; }
+            .pricing-card.popular { transform: none; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>从 PDF 到知识卡片，一键生成</h1>
+            <p>自动提取、结构化、验证参考文献。节省 80% 文献整理时间。</p>
+            <a href="#pricing" class="cta-button">免费试用 - 5 张卡片/月</a>
+            <div class="trust-badges">
+                ✅ 无需信用卡 &nbsp;•&nbsp; ✅ 30 秒上手 &nbsp;•&nbsp; ✅ 已帮助 1000+ 研究人员
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2>核心功能</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">📤</div>
+                    <h3>智能提取</h3>
+                    <p>元数据、章节结构、关键概念、公式表格自动识别</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">✅</div>
+                    <h3>参考文献验证</h3>
+                    <p>自动连接 CrossRef API，验证引用真实性，准确率 95%+</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📦</div>
+                    <h3>批量处理</h3>
+                    <p>一次上传 100+ 篇 PDF，后台并发处理，进度实时追踪</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📥</div>
+                    <h3>多种导出</h3>
+                    <p>HTML 卡片、BibTeX 参考文献、Zip 打包、Markdown 笔记</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <div class="container">
+            <div class="testimonial">
+                <p>"每周读 20 篇论文，现在 1 小时搞定整理"</p>
+                <cite>— 博士生，MIT</cite>
+            </div>
+            <div class="testimonial">
+                <p>"写论文时直接导出 BibTeX，不再手动整理"</p>
+                <cite>— 研究员，Stanford</cite>
+            </div>
+            <div class="testimonial">
+                <p>"全组 10 人共享知识库，不再重复读论文"</p>
+                <cite>— 教授，ETH Zurich</cite>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing -->
+    <section class="pricing" id="pricing">
+        <div class="container">
+            <h2>定价</h2>
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Free</h3>
+                    <div class="price">$0<span>/月</span></div>
+                    <ul class="pricing-features">
+                        <li>✅ 5 张卡片/月</li>
+                        <li>✅ 基础提取功能</li>
+                        <li>✅ HTML 导出</li>
+                        <li>适合：学生/个人试用</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="background: #667eea; color: white;">免费开始</a>
+                </div>
+                <div class="pricing-card popular">
+                    <div style="background: #667eea; color: white; padding: 5px; border-radius: 5px; margin-bottom: 15px; font-size: 0.9rem;">⭐ 最受欢迎</div>
+                    <h3>Pro</h3>
+                    <div class="price">$9<span>/月</span></div>
+                    <ul class="pricing-features">
+                        <li>✅ 无限卡片</li>
+                        <li>✅ 参考文献验证</li>
+                        <li>✅ 批量处理 (100 篇/次)</li>
+                        <li>✅ BibTeX 导出</li>
+                        <li>适合：研究人员/博士生</li>
+                    </ul>
+                    <a href="#" class="cta-button">14 天免费试用</a>
+                </div>
+                <div class="pricing-card">
+                    <h3>Team</h3>
+                    <div class="price">$49<span>/月</span></div>
+                    <ul class="pricing-features">
+                        <li>✅ 5 个用户</li>
+                        <li>✅ 团队协作</li>
+                        <li>✅ 共享知识库</li>
+                        <li>✅ API 访问</li>
+                        <li>适合：实验室/研究组</li>
+                    </ul>
+                    <a href="#" class="cta-button" style="background: #667eea; color: white;">联系销售</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2>常见问题</h2>
+            <div class="faq-item">
+                <h3>Q: 支持哪些格式？</h3>
+                <p>A: PDF 格式。支持双栏/单栏论文。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 参考文献验证准确率？</h3>
+                <p>A: 95%+。未验证的会标记需人工审核。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 可以取消吗？</h3>
+                <p>A: 随时取消，无隐藏费用。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 数据安全吗？</h3>
+                <p>A: PDF 仅用于处理，不存储，不分享。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 有学生优惠吗？</h3>
+                <p>A: 有！用.edu 邮箱注册享 50% 折扣。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>开始整理你的知识库</h2>
+            <p>🔥 内测招募中 - 前 100 名终身 50% 折扣</p>
+            <form id="waitlist-form" style="max-width: 400px; margin: 30px auto; display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
+                <input type="email" id="email" placeholder="输入邮箱，获得内测资格" 
+                    style="flex: 1; min-width: 250px; padding: 15px; border-radius: 30px; border: none; font-size: 1rem;" required>
+                <button type="submit" style="padding: 15px 30px; border-radius: 30px; border: none; background: #1a1a1a; color: white; font-weight: bold; cursor: pointer; font-size: 1rem;">
+                    申请内测
+                </button>
+            </form>
+            <p style="font-size: 0.9rem; opacity: 0.8;">📧 内测名额有限，先到先得</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 知识卡片生成器。All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // 内测申请表单处理
+        document.getElementById('waitlist-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            
+            // 显示成功消息
+            alert('感谢申请！我们会通过邮件联系你。\n\n(演示版本：实际部署时连接后端 API)');
+            
+            // TODO: 实际部署时替换为真实 API 调用
+            // fetch('/api/waitlist', {
+            //     method: 'POST',
+            //     headers: {'Content-Type': 'application/json'},
+            //     body: JSON.stringify({email})
+            // });
+            
+            document.getElementById('email').value = '';
+        });
+    </script>
+</body>
+</html>

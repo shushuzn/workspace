@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "proactive-agent-lite": {
+      "version": "1.0.0",
+      "installedAt": 1772779502255
+    },
+    "nano-pdf": {
+      "version": "1.0.0",
+      "installedAt": 1772805616497
+    }
+  }
+}

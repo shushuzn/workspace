@@ -1,0 +1,54 @@
+# Batch Processor 配置文件
+
+# 子代理池配置
+agent_pool:
+  max_concurrent: 4  # 最大并发子代理数
+  min_concurrent: 2  # 最小子代理数
+  idle_timeout: 300  # 空闲超时 (秒)
+  max_tasks_per_agent: 10  # 每子代理最大任务数
+
+# 任务配置
+tasks:
+  template: p-note  # p-note, c-note, m-note
+  model: bailian/qwen3.5-plus  # 默认模型
+  timeout_seconds: 600  # 单任务超时
+  retry_count: 2  # 失败重试次数
+
+# 输入配置
+input:
+  source: arxiv-daily  # arxiv-daily, manual, json
+  arxiv_daily_dir: Arxiv/collected
+  manual_list: []  # 手动指定的 arXiv ID 列表
+  json_file: papers.json
+
+# 输出配置
+output:
+  dir: Medium
+  format: markdown
+  include_metadata: true
+  auto_commit: true  # 自动提交到 Git
+
+# 进度追踪
+progress:
+  enabled: true
+  report_interval: 5  # 每 N 个任务报告一次
+  save_checkpoint: true  # 保存进度断点
+  checkpoint_file: batch_checkpoint.json
+
+# 错误处理
+error_handling:
+  on_failure: retry  # retry, skip, abort
+  log_errors: true
+  error_log: batch_errors.log
+
+# 性能优化
+performance:
+  prefetch: true  # 预取论文元数据
+  cache_metadata: true  # 缓存元数据
+  parallel_io: true  # 并行 I/O
+
+# 定时任务
+schedule:
+  enabled: true
+  trigger: after_arxiv_daily  # 在 arxiv-daily 完成后触发
+  delay_minutes: 30  # 延迟执行时间

@@ -1,0 +1,16 @@
+{
+  "test_key": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_test_key.pkl",
+  "expire_test": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_expire_test.pkl",
+  "memory_search:memory evolution engine": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_memory_search:memory evolution engine.pkl",
+  "memory_search:security configuration": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_memory_search:security configuration.pkl",
+  "semantic:memory evolution engine": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_semantic:memory evolution engine.pkl",
+  "semantic:security configuration": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_semantic:security configuration.pkl",
+  "semantic:workflow automation": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_semantic:workflow automation.pkl",
+  "adaptive:memory evolution engine": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_adaptive:memory evolution engine.pkl",
+  "adaptive:memory evolution": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_adaptive:memory evolution.pkl",
+  "adaptive:security configuration": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_adaptive:security configuration.pkl",
+  "adaptive:security config": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_adaptive:security config.pkl",
+  "adaptive:workflow automation": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_adaptive:workflow automation.pkl",
+  "adaptive:query prediction": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_adaptive:query prediction.pkl",
+  "adaptive:vector search": "D:\\OpenClaw\\workspace\\data\\context_cache\\l2_adaptive:vector search.pkl"
+}

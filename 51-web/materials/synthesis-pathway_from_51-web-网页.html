@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Synthesis Pathway - 合成路径推荐</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1000px; margin: 0 auto; }
+        h1 { color: #333; margin-bottom: 20px; }
+        .card { background: white; border-radius: 8px; padding: 20px; margin-bottom: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .input-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: 600; }
+        input, select { width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px; font-size: 16px; }
+        .btn { background: #007bff; color: white; border: none; padding: 12px 24px; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        .pathway { border: 1px solid #e0e0e0; border-radius: 8px; padding: 15px; margin: 10px 0; }
+        .pathway-header { font-size: 18px; font-weight: bold; margin-bottom: 10px; }
+        .pathway-details { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .metric { background: #f8f9fa; padding: 10px; border-radius: 4px; }
+        .metric-label { font-size: 12px; color: #666; }
+        .metric-value { font-size: 18px; font-weight: bold; color: #333; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 合成路径推荐</h1>
+        
+        <div class="card">
+            <div class="input-group">
+                <label>目标材料</label>
+                <input type="text" id="target" placeholder="输入化学式 (如 LiCoO2)" value="LiCoO2">
+            </div>
+            <div class="input-group">
+                <label>优化目标</label>
+                <select id="optimize">
+                    <option value="cost">成本最低</option>
+                    <option value="safety">最安全</option>
+                    <option value="yield">产率最高</option>
+                </select>
+            </div>
+            <button class="btn" onclick="recommend()">推荐路径</button>
+        </div>
+        
+        <div class="card" id="results" style="display: none;">
+            <h2>推荐路径</h2>
+            <div id="pathways"></div>
+        </div>
+    </div>
+
+    <script>
+        function recommend() {
+            const target = document.getElementById('target').value;
+            const optimize = document.getElementById('optimize').value;
+            
+            // 模拟推荐结果
+            const pathways = [
+                {
+                    reactants: ['Li2CO3', 'CoCO3'],
+                    conditions: { temperature: 900, time: 12, atmosphere: 'air' },
+                    cost: 50.0,
+                    safety: 85,
+                    yield: 0.95
+                }
+            ];
+            
+            const resultsDiv = document.getElementById('results');
+            const pathwaysDiv = document.getElementById('pathways');
+            
+            pathwaysDiv.innerHTML = pathways.map((p, i) => `
+                <div class="pathway">
+                    <div class="pathway-header">路径 ${i + 1}</div>
+                    <div class="pathway-details">
+                        <div>
+                            <strong>反应物:</strong><br>
+                            ${p.reactants.join(' + ')}
+                        </div>
+                        <div>
+                            <strong>条件:</strong><br>
+                            ${p.conditions.temperature}°C, ${p.conditions.time}h, ${p.conditions.atmosphere}
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">成本</div>
+                            <div class="metric-value">¥${p.cost}/g</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">安全性</div>
+                            <div class="metric-value">${p.safety}</div>
+                        </div>
+                        <div class="metric">
+                            <div class="metric-label">产率</div>
+                            <div class="metric-value">${(p.yield * 100).toFixed(1)}%</div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+            
+            resultsDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

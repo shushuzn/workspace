@@ -1,0 +1,166 @@
+# Data Availability Statement
+
+**Manuscript:** Machine Learning-Guided Design of Multi-Component CNT-LIG Composites with Synergistic Enhancement up to 2.4×
+
+**Journal:** Nature Communications (submitted)
+
+---
+
+## Data Availability
+
+All datasets generated and analyzed during this study are publicly available through the following repositories:
+
+### 1. GitHub Repository
+
+- **URL:** https://github.com/your-org/cnt-materials-ml
+- **Contents:** 
+  - Raw experimental data (6 datasets, 1000+ samples)
+  - Processed datasets for ML models
+  - Analysis scripts (Python)
+  - Figure generation scripts
+- **License:** CC BY 4.0 (data), MIT (code)
+- **Access:** Open access, no restrictions
+
+### 2. Zenodo Repository
+
+- **DOI:** [DOI pending - will be added before submission]
+- **Contents:** 
+  - Final publication-ready datasets
+  - Supplementary data tables
+  - Metadata files
+- **License:** CC BY 4.0
+- **Access:** Open access, citable via DOI
+
+### 3. Python Package (PyPI)
+
+- **Package:** cnt-materials-ml
+- **URL:** https://pypi.org/project/cnt-materials-ml/
+- **Installation:** `pip install cnt-materials-ml`
+- **Version:** v1.0.0
+- **Contents:** 
+  - Pre-trained ML models
+  - Prediction functions
+  - Inverse design algorithms
+  - Documentation
+
+### 4. Documentation
+
+- **ReadTheDocs:** https://cnt-materials-ml.readthedocs.io/
+- **Contents:** 
+  - Installation guide
+  - API reference
+  - Usage examples
+  - Tutorials
+
+---
+
+## Specific Datasets
+
+### Dataset 1: CNT Original Data
+
+- **Samples:** 533
+- **Location:** `11-research/cnt-research/data/cnt_dataset_v4_real.csv`
+- **Description:** CNT conductivity data from meta-analysis
+- **Variables:** diameter, length, layers, method, temperature, conductivity, etc.
+
+### Dataset 2: LIG Original Data
+
+- **Samples:** 200
+- **Location:** `11-research/data/lig_dataset_200.csv`
+- **Description:** LIG conductivity data from literature
+- **Variables:** precursor, laser power, scan speed, conductivity, etc.
+
+### Dataset 3: Binary Composite (CNT-LIG)
+
+- **Samples:** 135
+- **Location:** `11-research/cnt-lig-composite/data/cnt_lig_composite_dataset.csv`
+- **Description:** Binary composite experimental data
+- **Variables:** cnt_ratio, lig_ratio, conductivity, synergy_factor
+
+### Dataset 4: Ternary Composite (CNT-LIG-Graphene)
+
+- **Samples:** 153
+- **Location:** `11-research/cnt-lig-graphene-ternary/data/ternary_composite_dataset.csv`
+- **Description:** Ternary composite experimental data
+- **Variables:** cnt_ratio, lig_ratio, graphene_ratio, conductivity, synergy
+
+### Dataset 5: Quaternary Composite (CNT-LIG-Graphene-MXene)
+
+- **Samples:** 84
+- **Location:** `11-research/cnt-lig-graphene-mxene-quaternary/data/quaternary_composite_dataset.csv`
+- **Description:** Quaternary composite experimental data (peak performance)
+- **Variables:** cnt_ratio, lig_ratio, graphene_ratio, mxene_ratio, conductivity, synergy
+
+### Dataset 6: Quinary Composite (CNT-LIG-Graphene-MXene-PEDOT)
+
+- **Samples:** 35
+- **Location:** `11-research/cnt-lig-graphene-mxene-pedot-quinary/data/quinary_composite_dataset.csv`
+- **Description:** Quinary composite experimental data
+- **Variables:** cnt_ratio, lig_ratio, graphene_ratio, mxene_ratio, pedot_ratio, conductivity
+
+---
+
+## Data Types
+
+- **Numerical data:** CSV format
+- **Categorical data:** CSV format
+- **Images:** PNG, TIFF, SVG (300 dpi for publication)
+- **Models:** Pickle format (.pkl)
+- **Scripts:** Python (.py)
+- **Documentation:** Markdown (.md), PDF
+
+---
+
+## Access Conditions
+
+- **Embargo period:** None (immediate open access)
+- **Access requirements:** None (fully open)
+- **Registration required:** No
+- **Cost:** Free
+
+---
+
+## Contact Information
+
+**For data inquiries:**
+
+- **Corresponding Author:** [Your Name]
+- **Email:** [your.email@institution.edu]
+- **Institution:** [Your Institution]
+
+**For technical support:**
+
+- **GitHub Issues:** https://github.com/your-org/cnt-materials-ml/issues
+- **Documentation:** https://cnt-materials-ml.readthedocs.io/
+
+---
+
+## Data Citation
+
+**Recommended citation for datasets:**
+
+```
+[Your Name], AI Research Lab. (2026). CNT-LIG Composite Materials Dataset 
+[Data set]. Zenodo. https://doi.org/[DOI pending]
+```
+
+**Recommended citation for software:**
+
+```
+[Your Name], AI Research Lab. (2026). cnt-materials-ml v1.0.0 
+[Software]. PyPI. https://pypi.org/project/cnt-materials-ml/
+```
+
+---
+
+## License
+
+- **Data:** Creative Commons Attribution 4.0 International (CC BY 4.0)
+- **Code:** MIT License
+- **Documentation:** Creative Commons Attribution 4.0 International (CC BY 4.0)
+
+---
+
+*Created: March 11, 2026*  
+*Status: Ready for Submission*  
+*Version: 1.0*

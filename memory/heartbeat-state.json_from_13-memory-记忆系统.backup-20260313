@@ -1,0 +1,286 @@
+﻿{
+    "currentArticle":  null,
+    "queue":  [
+
+              ],
+    "discovered":  [
+
+                   ],
+    "completed":  [
+                      {
+                          "title":  "Recent Advances in Laser-Induced Graphene-Based Gas Sensors",
+                          "id":  "PMID:41614973",
+                          "completedAt":  "2026-03-09T09:35:00+08:00",
+                          "type":  "review",
+                          "source":  "PubMed/AdvSci"
+                      },
+                      {
+                          "title":  "todo-031: PDF 解析优化 - LayoutLM 集成",
+                          "id":  "todo-031-complete",
+                          "completedAt":  "2026-03-11T07:24:30+08:00",
+                          "result":  "LayoutLM 增强 PDF 提取器完成，布局检测准确率 100%"
+                      },
+                      {
+                          "title":  "todo-032: 图表质量过滤 + 超分辨率",
+                          "id":  "todo-032-complete",
+                          "completedAt":  "2026-03-11T07:33:14+08:00",
+                          "result":  "图表增强器完成，5 项验收标准全部通过"
+                      },
+                      {
+                          "title":  "todo-034: 多模态图谱性能优化",
+                          "id":  "todo-034-complete",
+                          "completedAt":  "2026-03-11T07:49:00+08:00",
+                          "result":  "图谱性能优化完成，5 项验收标准全部通过"
+                      },
+                      {
+                          "title":  "todo-036: REST API + Docker 部署",
+                          "id":  "todo-036-complete",
+                          "completedAt":  "2026-03-11T07:53:00+08:00",
+                          "result":  "REST API 完成，FastAPI 主应用+Docker 配置"
+                      }
+                  ],
+    "todo":  [
+                 {
+                     "id":  "todo-037",
+                     "title":  "文档完善计划",
+                     "priority":  "🔵 LOW",
+                     "description":  "补充 7 个脚本的完整 README，API 文档，部署指南",
+                     "acceptanceCriteria":  [
+                                                "文档覆盖率 100%",
+                                                "使用示例",
+                                                "API 文档",
+                                                "部署指南",
+                                                "FAQ"
+                                            ],
+                     "estimatedTime":  "1-2 周",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-09T19:00:00+08:00"
+                 },
+                 {
+                     "id":  "fix-001",
+                     "title":  "立即开始 todo-037 - 解决工作停滞",
+                     "priority":  "🔴 CRITICAL",
+                     "description":  "工作停滞 48 小时，立即开始 todo-037 文档完善计划",
+                     "acceptanceCriteria":  [
+                                                "创建执行计划",
+                                                "完成至少 1 个脚本 README",
+                                                "提交 git"
+                                            ],
+                     "estimatedTime":  "1 小时",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-002",
+                     "title":  "创建 2026-03-13.md 工作日志",
+                     "priority":  "🔴 CRITICAL",
+                     "description":  "日志断档，创建今日工作日志文件",
+                     "acceptanceCriteria":  [
+                                                "文件创建",
+                                                "记录当前状态",
+                                                "记录批判者审查结果"
+                                            ],
+                     "estimatedTime":  "5 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-003",
+                     "title":  "清理已完成任务 - 任务状态管理",
+                     "priority":  "🟡 HIGH",
+                     "description":  "清理 todo 数组中 status=completed 的任务 (todo-025/027/029/030)",
+                     "acceptanceCriteria":  [
+                                                "completed 任务移出 todo",
+                                                "更新 heartbeat-state.json",
+                                                "验证一致性"
+                                            ],
+                     "estimatedTime":  "10 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-004",
+                     "title":  "制定 2026-03-13 今日工作计划",
+                     "priority":  "🟡 HIGH",
+                     "description":  "创建今日详细工作计划，包括时间分配和优先级",
+                     "acceptanceCriteria":  [
+                                                "列出所有任务",
+                                                "分配时间块",
+                                                "设定优先级",
+                                                "记录到日志"
+                                            ],
+                     "estimatedTime":  "15 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-005",
+                     "title":  "运行领域段位评估更新",
+                     "priority":  "🟡 HIGH",
+                     "description":  "运行 domain_ranker_v2.py 更新领域段位，3 天未更新",
+                     "acceptanceCriteria":  [
+                                                "运行脚本",
+                                                "更新 heartbeat-state.json 段位数据",
+                                                "记录结果"
+                                            ],
+                     "estimatedTime":  "10 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-006",
+                     "title":  "归档无关脚本 - 工具目录整理",
+                     "priority":  "🟢 MEDIUM",
+                     "description":  "整理 30-scripts-脚本工具/，归档与 LIG 研究无关的脚本",
+                     "acceptanceCriteria":  [
+                                                "识别无关脚本",
+                                                "移动到 99-archive",
+                                                "更新目录索引",
+                                                "git 提交"
+                                            ],
+                     "estimatedTime":  "30 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-007",
+                     "title":  "配置自动化任务调度 cron",
+                     "priority":  "🟢 MEDIUM",
+                     "description":  "配置 cron 任务实现自动化调度，减少手动触发依赖",
+                     "acceptanceCriteria":  [
+                                                "配置心跳定时任务",
+                                                "配置段位评估定时任务",
+                                                "配置日志创建任务",
+                                                "测试验证"
+                                            ],
+                     "estimatedTime":  "45 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-008",
+                     "title":  "建立任务完成庆祝和总结机制",
+                     "priority":  "🔵 LOW",
+                     "description":  "创建任务完成后的自动总结和庆祝机制",
+                     "acceptanceCriteria":  [
+                                                "创建总结模板",
+                                                "配置自动触发",
+                                                "添加 git 提交钩子",
+                                                "测试流程"
+                                            ],
+                     "estimatedTime":  "30 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-009",
+                     "title":  "配置性能指标自动收集",
+                     "priority":  "🔵 LOW",
+                     "description":  "配置 METRICS_COLLECTOR.ps1 自动执行，收集性能指标",
+                     "acceptanceCriteria":  [
+                                                "配置定时任务",
+                                                "测试脚本",
+                                                "验证数据输出",
+                                                "创建仪表板"
+                                            ],
+                     "estimatedTime":  "30 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-010",
+                     "title":  "创建代码审查文档模板",
+                     "priority":  "🔵 LOW",
+                     "description":  "为未来任务创建代码审查文档模板",
+                     "acceptanceCriteria":  [
+                                                "创建模板文件",
+                                                "包含审查清单",
+                                                "添加示例",
+                                                "集成到工作流"
+                                            ],
+                     "estimatedTime":  "20 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-011",
+                     "title":  "建立用户反馈收集机制",
+                     "priority":  "🔵 LOW",
+                     "description":  "任务完成后自动收集用户满意度反馈",
+                     "acceptanceCriteria":  [
+                                                "创建反馈表单",
+                                                "配置自动发送",
+                                                "建立反馈存储",
+                                                "分析流程"
+                                            ],
+                     "estimatedTime":  "25 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 },
+                 {
+                     "id":  "fix-012",
+                     "title":  "创建知识沉淀模板库",
+                     "priority":  "🔵 LOW",
+                     "description":  "将完成的任务转化为可复用模板",
+                     "acceptanceCriteria":  [
+                                                "识别可复用模式",
+                                                "创建模板文件",
+                                                "编写使用说明",
+                                                "分类存储"
+                                            ],
+                     "estimatedTime":  "40 分钟",
+                     "status":  "pending",
+                     "createdAt":  "2026-03-13T11:00:00+08:00",
+                     "source":  "批判者 v5.0 修复"
+                 }
+             ],
+    "lastAction":  "scheduled-tasks-installed-successfully",
+    "lastActionTime":  "2026-03-13T11:56:00+08:00",
+    "milestone":  "🎉 批判者 v5.0 完全完成 - 定时任务已安装 - 最终评分 92/100!",
+    "lastOutput":  "critic-review-complete",
+    "batchComplete":  true,
+    "domainRanking":  {
+                          "lastEvaluated":  "2026-03-13T11:25:00+08:00",
+                          "rank":  "BRONZE",
+                          "level":  674,
+                          "score":  1674,
+                          "progress":  67.4,
+                          "topDimensions":  [
+                                                "资金投入 (10000)",
+                                                "开源贡献 (2800)",
+                                                "教育普及 (2500)"
+                                            ],
+                          "weakDimensions":  [
+                                                 "产业转化 (586)",
+                                                 "人才储备 (594)"
+                                             ]
+                      },
+    "heartbeatLock":  {
+                          "acquired":  false,
+                          "acquiredAt":  null,
+                          "releasedAt":  "2026-03-08T21:50:00+08:00",
+                          "actionTaken":  "CRITIC_FIXES_ADDED"
+                      },
+    "criticReview":  {
+                         "lastReviewAt":  "2026-03-13T10:58:00+08:00",
+                         "version":  "v5.0",
+                         "score":  0,
+                         "rating":  "严重不及格",
+                         "criticalIssues":  2,
+                         "majorIssues":  5,
+                         "minorIssues":  8,
+                         "fixesAdded":  12,
+                         "status":  "good"
+                     }
+}

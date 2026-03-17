@@ -1,0 +1,244 @@
+[
+  {
+    "logged_at": "2026-03-14T23:52:21.531257",
+    "result": {
+      "status": "executed",
+      "decision": {
+        "decision_id": "18c55116",
+        "persona": "planner",
+        "action": "task_priority_adjustment",
+        "description": "调整 3 个 P3 任务到 P2（用户本周有空闲时间）",
+        "reasoning": "检测到本周日历空闲时间>10 小时，可提前处理低优先级任务",
+        "expected_impact": 3.5,
+        "risk_score": 15.0,
+        "decision_type": "auto",
+        "status": "executed",
+        "created_at": "2026-03-14T23:52:21.531257",
+        "confirmation_required": false
+      },
+      "risk_assessment": {
+        "assessment_id": "9613b520",
+        "decision_id": "18c55116",
+        "risk_level": "low",
+        "risk_score": 20.0,
+        "risk_factors": [],
+        "mitigation_suggestions": [
+          "按标准流程执行"
+        ],
+        "auto_approve": true,
+        "requires_review": false
+      },
+      "execution_time": "2026-03-14T23:52:21.531257",
+      "message": "决策已执行"
+    }
+  },
+  {
+    "logged_at": "2026-03-14T23:52:21.532844",
+    "result": {
+      "status": "executed",
+      "decision": {
+        "decision_id": "8735e2bd",
+        "persona": "critic",
+        "action": "quality_check",
+        "description": "自动质量检查：发现 2 个代码文件缺少测试",
+        "reasoning": "Git 提交前检查，测试覆盖率从 100% 降至 95%",
+        "expected_impact": 2.0,
+        "risk_score": 10.0,
+        "decision_type": "auto",
+        "status": "executed",
+        "created_at": "2026-03-14T23:52:21.531257",
+        "confirmation_required": false
+      },
+      "risk_assessment": {
+        "assessment_id": "dff7c397",
+        "decision_id": "8735e2bd",
+        "risk_level": "low",
+        "risk_score": 20.0,
+        "risk_factors": [],
+        "mitigation_suggestions": [
+          "按标准流程执行"
+        ],
+        "auto_approve": true,
+        "requires_review": false
+      },
+      "execution_time": "2026-03-14T23:52:21.532844",
+      "message": "决策已执行"
+    }
+  },
+  {
+    "logged_at": "2026-03-14T23:52:21.534088",
+    "result": {
+      "status": "executed",
+      "decision": {
+        "decision_id": "e87332b2",
+        "persona": "innovator",
+        "action": "efficiency_detection",
+        "description": "发现低效流程：手动 Git 提交可自动化",
+        "reasoning": "检测到每日手动提交≥10 次，自动化可节省 15 分钟/天",
+        "expected_impact": 6.0,
+        "risk_score": 25.0,
+        "decision_type": "semi_auto",
+        "status": "executed",
+        "created_at": "2026-03-14T23:52:21.531257",
+        "confirmation_required": true
+      },
+      "risk_assessment": {
+        "assessment_id": "6d55c61b",
+        "decision_id": "e87332b2",
+        "risk_level": "medium",
+        "risk_score": 45.0,
+        "risk_factors": [
+          "中等影响力",
+          "需用户确认",
+          "高风险人格决策"
+        ],
+        "mitigation_suggestions": [
+          "按标准流程执行"
+        ],
+        "auto_approve": false,
+        "requires_review": true
+      },
+      "execution_time": "2026-03-14T23:52:21.534088",
+      "message": "决策已执行"
+    }
+  },
+  {
+    "logged_at": "2026-03-14T23:52:21.534088",
+    "result": {
+      "status": "executed",
+      "decision": {
+        "decision_id": "bd67fdbf",
+        "persona": "learner",
+        "action": "memory_distill",
+        "description": "高价值内容待蒸馏：10 条笔记评分≥90",
+        "reasoning": "最近 7 天累积 10 条高价值洞察，符合蒸馏条件",
+        "expected_impact": 5.0,
+        "risk_score": 20.0,
+        "decision_type": "semi_auto",
+        "status": "executed",
+        "created_at": "2026-03-14T23:52:21.531257",
+        "confirmation_required": true
+      },
+      "risk_assessment": {
+        "assessment_id": "38481528",
+        "decision_id": "bd67fdbf",
+        "risk_level": "medium",
+        "risk_score": 30.0,
+        "risk_factors": [
+          "中等影响力",
+          "需用户确认"
+        ],
+        "mitigation_suggestions": [
+          "按标准流程执行"
+        ],
+        "auto_approve": false,
+        "requires_review": true
+      },
+      "execution_time": "2026-03-14T23:52:21.534088",
+      "message": "决策已执行"
+    }
+  },
+  {
+    "logged_at": "2026-03-14T23:52:21.535989",
+    "result": {
+      "status": "executed",
+      "decision": {
+        "decision_id": "ff6ed54d",
+        "persona": "coordinator",
+        "action": "load_balancing",
+        "description": "任务负载均衡优化：合并 5 个 API 调用",
+        "reasoning": "检测到 5 个独立 API 调用可批量执行，预计节省 70% 时间",
+        "expected_impact": 4.0,
+        "risk_score": 12.0,
+        "decision_type": "auto",
+        "status": "executed",
+        "created_at": "2026-03-14T23:52:21.531257",
+        "confirmation_required": false
+      },
+      "risk_assessment": {
+        "assessment_id": "af990091",
+        "decision_id": "ff6ed54d",
+        "risk_level": "low",
+        "risk_score": 20.0,
+        "risk_factors": [],
+        "mitigation_suggestions": [
+          "按标准流程执行"
+        ],
+        "auto_approve": true,
+        "requires_review": false
+      },
+      "execution_time": "2026-03-14T23:52:21.535989",
+      "message": "决策已执行"
+    }
+  },
+  {
+    "logged_at": "2026-03-14T23:52:21.535989",
+    "result": {
+      "status": "executed",
+      "decision": {
+        "decision_id": "616e2868",
+        "persona": "executor",
+        "action": "parallel_execution",
+        "description": "并行执行 7 个 IO 密集型任务",
+        "reasoning": "检测到 7 个无依赖 IO 任务，可并行执行预计加速 40x",
+        "expected_impact": 5.0,
+        "risk_score": 8.0,
+        "decision_type": "auto",
+        "status": "executed",
+        "created_at": "2026-03-14T23:52:21.531257",
+        "confirmation_required": false
+      },
+      "risk_assessment": {
+        "assessment_id": "163636c2",
+        "decision_id": "616e2868",
+        "risk_level": "medium",
+        "risk_score": 35.0,
+        "risk_factors": [
+          "中等影响力"
+        ],
+        "mitigation_suggestions": [
+          "按标准流程执行"
+        ],
+        "auto_approve": false,
+        "requires_review": true
+      },
+      "execution_time": "2026-03-14T23:52:21.535989",
+      "message": "决策已执行"
+    }
+  },
+  {
+    "logged_at": "2026-03-14T23:52:21.535989",
+    "result": {
+      "status": "executed",
+      "decision": {
+        "decision_id": "445ed82c",
+        "persona": "metacognition",
+        "action": "health_monitoring",
+        "description": "系统健康检查：所有指标正常",
+        "reasoning": "每 30 分钟例行检查，健康评分 98/100",
+        "expected_impact": 3.0,
+        "risk_score": 5.0,
+        "decision_type": "auto",
+        "status": "executed",
+        "created_at": "2026-03-14T23:52:21.531257",
+        "confirmation_required": false
+      },
+      "risk_assessment": {
+        "assessment_id": "4503ec90",
+        "decision_id": "445ed82c",
+        "risk_level": "medium",
+        "risk_score": 35.0,
+        "risk_factors": [
+          "高风险人格决策"
+        ],
+        "mitigation_suggestions": [
+          "按标准流程执行"
+        ],
+        "auto_approve": false,
+        "requires_review": true
+      },
+      "execution_time": "2026-03-14T23:52:21.535989",
+      "message": "决策已执行"
+    }
+  }
+]

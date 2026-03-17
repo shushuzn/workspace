@@ -1,0 +1,581 @@
+{
+  "keyword": "quantum computing",
+  "last_updated": "2026-03-16T11:10:36.383119",
+  "total_papers": 20,
+  "new_papers": 20,
+  "papers": [
+    {
+      "id": "http://arxiv.org/abs/2603.13225v1",
+      "title": "Sizes of Pre-Images of the Minimal Euclidean Function on the Gaussian Integers",
+      "summary": "In 2023, the author presented the first computable minimal Euclidean function for a non-trivial number field. Along with a formula for $φ_{\\mathbb{Z}[i]}$, the minimal Euclidean function on the Gaussian inteers, the same paper introduced a geometric description for $φ_{\\mathbb{Z}[i]}^{-1}([0,n])$. This paper uses that construction to prove formulas for the size of the function's pre-images, or $|φ_{\\mathbb{Z}[i]}^{-1}([0,n])|$.",
+      "authors": [
+        "Hester Graves"
+      ],
+      "categories": [
+        "math.NT"
+      ],
+      "published": "2026-03-13T17:58:49Z",
+      "updated": "2026-03-13T17:58:49Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "**arXiv:2603.13225v1** (math)\n\n\\[Submitted on 13 Mar 2026\\]\n\n## Title:Sizes of Pre-Images of the Minimal Euclidean Function on the Gaussian Integers\n\nAuthors:[Hester Graves](https://arxiv.org/search/math?searchtype=author&query=Graves,+H)\n\n[View PDF](http://arxiv.org/pdf/2603.13225v1) [HTML (experimental)](https://arxiv.org/html/2603.13225v1)\n\n> Abstract:In 2023, the author presented the first computable minimal Euclidean function for a non-trivial number field. Along with a formula for $\\\\phi\\_{\\\\mathbb{Z}\\[i\\]}$, the minimal Euclidean function on the Gaussian inteers, the same paper introduced a geometric description for $\\\\phi\\_{\\\\mathbb{Z}\\[i\\]}^{-1}(\\[0,n\\])$. This paper uses that construction to prove formulas for the size of the function's pre-images, or $|\\\\phi\\_{\\\\mathbb{Z}\\[i\\]}^{-1}(\\[0,n\\])|$.\n\n| Comments: | 7 pages, six illustrations (but only 4 figures) |\n| --- | --- |\n| Subjects: | Number Theory (math.NT) |\n| MSC classes: | 11R11, 11R04, 11A05 |\n| Cite as: |  |\n|  | (or [arXiv:2603.13225v1](https://arxiv.org/abs/2603.13225v1) \\[math.NT\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13225](https://doi.org/10.48550/arXiv.2603.13225)  arXiv-issued DOI via DataCite (pending registration) |\n\n## Submission history\n\nFrom: Hester Graves \\[[view email](http://arxiv.org/show-email/a9df1e40/2603.13225)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:58:49 UTC (191 KB)  \n\n## Bibliographic and Citation Tools\n\nBibliographic Explorer *([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))*\n\nConnected Papers *([What is Connected Papers?](https://www.connectedpapers.com/about))*\n\nLitmaps *([What is Litmaps?](https://www.litmaps.co/))*\n\nscite Smart Citations *([What are Smart Citations?](https://www.scite.ai/))*\n\n## Code, Data and Media Associated with this Article\n\nalphaXiv *([What is alphaXiv?](https://alphaxiv.org/))*\n\nCatalyzeX Code Finder for Papers *([What is CatalyzeX?](https://www.catalyzex.com/))*\n\nDagsHub *([What is DagsHub?](https://dagshub.com/))*\n\nGotit.pub *([What is GotitPub?](http://gotit.pub/faq))*\n\nHugging Face *([What is Huggingface?](https://huggingface.co/huggingface))*\n\nPapers with Code *([What is Papers with Code?](https://paperswithcode.com/))*\n\nScienceCast *([What is ScienceCast?](https://sciencecast.org/welcome))*\n\n## Demos\n\nReplicate *([What is Replicate?](https://replicate.com/docs/arxiv/about))*\n\nHugging Face Spaces *([What is Spaces?](https://huggingface.co/docs/hub/spaces))*\n\nTXYZ.AI *([What is TXYZ.AI?](https://txyz.ai/))*\n\n## Recommenders and Search Tools\n\nInfluence Flower *([What are Influence Flowers?](https://influencemap.cmlab.dev/))*\n\nCORE Recommender *([What is CORE?](https://core.ac.uk/services/recommender))*\n\n## arXivLabs: experimental projects with community collaborators\n\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\n\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\n\nHave an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).\n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13225) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Sizes of Pre-Images of the Minimal Euclidean Function on the Gaussian Integers",
+        "description": "Abstract page for arXiv paper 2603.13225v1: Sizes of Pre-Images of the Minimal Euclidean Function on the Gaussian Integers",
+        "domain": "arxiv.org",
+        "author": "Hester Graves",
+        "url": "http://arxiv.org/abs/2603.13225v1",
+        "extracted_at": "2026-03-16T11:09:42.174151"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13222v1",
+      "title": "Two-channel physics in a lightly doped antiferromagnetic Mott insulator revealed by two-hole spectroscopy",
+      "summary": "Understanding pairing in the strong-coupling regime of doped Mott insulators remains an open problem in the context of cuprate superconductors. We perform ultra-high resolution numerical simulations of spectral functions in the highly underdoped $t-J$ model and discover two coupled branches of hole pairs emerging at low energies in the largely unexplored two-particle spectrum. As spin anisotropy is tuned from the Ising limit to the $SU(2)$-symmetric Heisenberg regime, the lowest $d$-wave pair evolves from a single bipolaronic branch into two hybridized branches separated by an avoided crossing. We explain this behaviour using an effective two-channel model involving a tightly bound bipolaronic state and a second channel associated with two magnetic polarons. The model reproduces the qualitative low-energy spectra and implies near-resonant $d$-wave interactions in the $SU(2)$-symmetric $t-J$ model, consistent with proximity to an emergent Feshbach-type resonance. To probe these predictions experimentally, we propose a Raman spectroscopy scheme for the attractive Hubbard model that can be directly implemented using ultracold atoms in optical lattices. Our work establishes two-particle spectroscopy, beyond single-particle Green's functions, as a powerful tool for revealing the microscopic origins of unconventional superconductivity.",
+      "authors": [
+        "Pit Bermes",
+        "Sebastian Paeckel",
+        "Annabelle Bohrdt",
+        "Lukas Homeier",
+        "Fabian Grusdt"
+      ],
+      "categories": [
+        "cond-mat.str-el",
+        "cond-mat.quant-gas",
+        "quant-ph"
+      ],
+      "published": "2026-03-13T17:57:02Z",
+      "updated": "2026-03-13T17:57:02Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Two-channel physics in a lightly doped antiferromagnetic Mott insulator revealed by two-hole spectroscopy\n\n[View PDF](http://arxiv.org/pdf/2603.13222v1) [HTML (experimental)](https://arxiv.org/html/2603.13222v1)\n\n> Abstract:Understanding pairing in the strong-coupling regime of doped Mott insulators remains an open problem in the context of cuprate superconductors. We perform ultra-high resolution numerical simulations of spectral functions in the highly underdoped $t-J$ model and discover two coupled branches of hole pairs emerging at low energies in the largely unexplored two-particle spectrum. As spin anisotropy is tuned from the Ising limit to the $SU(2)$-symmetric Heisenberg regime, the lowest $d$-wave pair evolves from a single bipolaronic branch into two hybridized branches separated by an avoided crossing. We explain this behaviour using an effective two-channel model involving a tightly bound bipolaronic state and a second channel associated with two magnetic polarons. The model reproduces the qualitative low-energy spectra and implies near-resonant $d$-wave interactions in the $SU(2)$-symmetric $t-J$ model, consistent with proximity to an emergent Feshbach-type resonance. To probe these predictions experimentally, we propose a Raman spectroscopy scheme for the attractive Hubbard model that can be directly implemented using ultracold atoms in optical lattices. Our work establishes two-particle spectroscopy, beyond single-particle Green's functions, as a powerful tool for revealing the microscopic origins of unconventional superconductivity.\n\n| Comments: |\n| --- |\n| Subjects: | Strongly Correlated Electrons (cond-mat.str-el); Quantum Gases (cond-mat.quant-gas); Quantum Physics (quant-ph) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13222v1](https://arxiv.org/abs/2603.13222v1) \\[cond-mat.str-el\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13222](https://doi.org/10.48550/arXiv.2603.13222) |\n\n## Submission history\n\nFrom: Pit Bermes \\[[view email](http://arxiv.org/show-email/e039070d/2603.13222)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:57:02 UTC (4,421 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13222) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Two-channel physics in a lightly doped antiferromagnetic Mott insulator revealed by two-hole spectroscopy",
+        "description": "Abstract page for arXiv paper 2603.13222v1: Two-channel physics in a lightly doped antiferromagnetic Mott insulator revealed by two-hole spectroscopy",
+        "domain": "arxiv.org",
+        "author": "Pit Bermes, Sebastian Paeckel, Annabelle Bohrdt, Lukas Homeier, Fabian Grusdt",
+        "url": "http://arxiv.org/abs/2603.13222v1",
+        "extracted_at": "2026-03-16T11:09:45.634459"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13221v1",
+      "title": "Electromechanical Hysteresis in Phase Change Material Sb2S3",
+      "summary": "Antimony sulfide is an emerging phase change material for optical and electrical memory and computation elements. It has additionally been reported as a ferroelectric, with recent evidence from hysteresis in piezoresponse force microscopy. Here, we complete a rigorous set of piezoresponse force microscopy experiments on a congruently crystallized Sb2S3 glass-ceramic, where piezoelectric coupling should be forbidden in glassy Sb2S3. We replicate previous results and reveal that the behavior is absent in glassy Sb2S3 but show that the response originates primarily from non-piezoelectric contributions to the signal caused by an applied voltage. This hysteretic behavior in piezoresponse force microscopy is quite similar to some electrochemically active non-ferroelectric oxides, but uniquely, it appears here with a very clear spatial contrast that is decoupled from surface topography. This shows that the electromechanical signal reflects bulk-like properties and reveals differences in electrical behavior of crystalline and amorphous phases of Sb2S3.",
+      "authors": [
+        "Jack Kaman",
+        "Evan Musterman",
+        "Kyle P. Kelley",
+        "Neus Domingo-Marimon",
+        "Volkmar Dierolf",
+        "Himanshu Jain"
+      ],
+      "categories": [
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-03-13T17:56:45Z",
+      "updated": "2026-03-13T17:56:45Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Electromechanical Hysteresis in Phase Change Material Sb2S3\n\n[View PDF](http://arxiv.org/pdf/2603.13221v1)\n\n> Abstract:Antimony sulfide is an emerging phase change material for optical and electrical memory and computation elements. It has additionally been reported as a ferroelectric, with recent evidence from hysteresis in piezoresponse force microscopy. Here, we complete a rigorous set of piezoresponse force microscopy experiments on a congruently crystallized Sb2S3 glass-ceramic, where piezoelectric coupling should be forbidden in glassy Sb2S3. We replicate previous results and reveal that the behavior is absent in glassy Sb2S3 but show that the response originates primarily from non-piezoelectric contributions to the signal caused by an applied voltage. This hysteretic behavior in piezoresponse force microscopy is quite similar to some electrochemically active non-ferroelectric oxides, but uniquely, it appears here with a very clear spatial contrast that is decoupled from surface topography. This shows that the electromechanical signal reflects bulk-like properties and reveals differences in electrical behavior of crystalline and amorphous phases of Sb2S3.\n\n| Comments: |\n| --- |\n| Subjects: | Materials Science (cond-mat.mtrl-sci) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13221v1](https://arxiv.org/abs/2603.13221v1) \\[cond-mat.mtrl-sci\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13221](https://doi.org/10.48550/arXiv.2603.13221) |\n\n## Submission history\n\nFrom: Himanshu Jain \\[[view email](http://arxiv.org/show-email/bd523f67/2603.13221)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:56:45 UTC (1,445 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13221) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Electromechanical Hysteresis in Phase Change Material Sb2S3",
+        "description": "Abstract page for arXiv paper 2603.13221v1: Electromechanical Hysteresis in Phase Change Material Sb2S3",
+        "domain": "arxiv.org",
+        "author": "Jack Kaman, Evan Musterman, Kyle P. Kelley, Neus Domingo-Marimon, Volkmar Dierolf, Himanshu Jain",
+        "url": "http://arxiv.org/abs/2603.13221v1",
+        "extracted_at": "2026-03-16T11:09:49.048993"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13220v1",
+      "title": "A Generative Model of Conspicuous Consumption and Status Signaling",
+      "summary": "Status signaling drives human behavior and the allocation of scarce resources such as mating opportunities, yet the generative mechanisms governing how specific goods, signals, or behaviors acquire prestige remain a puzzle. Classical frameworks, such as Costly Signaling Theory, treat preferences as fixed and struggle to explain how semiotic meaning changes based on context or drifts dynamically over time, occasionally reaching tipping points. In this work, we propose a computational theory of status grounded in the theory of appropriateness, positing that status symbols emerge endogenously through a feedback loop of social observation and predictive pattern completion. We validate this theory using simulations of groups of Large Language Model (LLM)-based agents in the Concordia framework. By experimentally manipulating social visibility within naturalistic agent daily routines, we demonstrate that social interactions transform functional demand into status-seeking behavior. We observe the emergence of price run-ups and positive price elasticity (Veblen effects) for both real-world luxury items and procedurally generated synthetic goods, ruling out pretraining bias as the sole driver. Furthermore, we demonstrate that \"influencer\" agents can drive the endogenous formation of distinct subcultures through targeted sanctioning, and find that similar social influence effects generalize to non-monetary signaling behaviors. This work provides a generative bridge between micro-level cognition and macro-level economic and sociological phenomena, offering a new methodology for forecasting how cultural conventions emerge from interaction.",
+      "authors": [
+        "Logan Cross",
+        "Jordi Grau-Moya",
+        "William A. Cunningham",
+        "Alexander Sasha Vezhnevets",
+        "Joel Z. Leibo"
+      ],
+      "categories": [
+        "cs.MA"
+      ],
+      "published": "2026-03-13T17:56:28Z",
+      "updated": "2026-03-13T17:56:28Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:A Generative Model of Conspicuous Consumption and Status Signaling\n\n[View PDF](http://arxiv.org/pdf/2603.13220v1) [HTML (experimental)](https://arxiv.org/html/2603.13220v1)\n\n> Abstract:Status signaling drives human behavior and the allocation of scarce resources such as mating opportunities, yet the generative mechanisms governing how specific goods, signals, or behaviors acquire prestige remain a puzzle. Classical frameworks, such as Costly Signaling Theory, treat preferences as fixed and struggle to explain how semiotic meaning changes based on context or drifts dynamically over time, occasionally reaching tipping points. In this work, we propose a computational theory of status grounded in the theory of appropriateness, positing that status symbols emerge endogenously through a feedback loop of social observation and predictive pattern completion. We validate this theory using simulations of groups of Large Language Model (LLM)-based agents in the Concordia framework. By experimentally manipulating social visibility within naturalistic agent daily routines, we demonstrate that social interactions transform functional demand into status-seeking behavior. We observe the emergence of price run-ups and positive price elasticity (Veblen effects) for both real-world luxury items and procedurally generated synthetic goods, ruling out pretraining bias as the sole driver. Furthermore, we demonstrate that \"influencer\" agents can drive the endogenous formation of distinct subcultures through targeted sanctioning, and find that similar social influence effects generalize to non-monetary signaling behaviors. This work provides a generative bridge between micro-level cognition and macro-level economic and sociological phenomena, offering a new methodology for forecasting how cultural conventions emerge from interaction.\n\n| Comments: |\n| --- |\n| Subjects: | Multiagent Systems (cs.MA) |\n| ACM classes: | I.2.11 |\n| Cite as: |  |\n|  | (or [arXiv:2603.13220v1](https://arxiv.org/abs/2603.13220v1) \\[cs.MA\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13220](https://doi.org/10.48550/arXiv.2603.13220) |\n\n## Submission history\n\nFrom: Logan Cross \\[[view email](http://arxiv.org/show-email/29b06305/2603.13220)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:56:28 UTC (5,482 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13220) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "A Generative Model of Conspicuous Consumption and Status Signaling",
+        "description": "Abstract page for arXiv paper 2603.13220v1: A Generative Model of Conspicuous Consumption and Status Signaling",
+        "domain": "arxiv.org",
+        "author": "Logan Cross, Jordi Grau-Moya, William A. Cunningham, Alexander Sasha Vezhnevets, Joel Z. Leibo",
+        "url": "http://arxiv.org/abs/2603.13220v1",
+        "extracted_at": "2026-03-16T11:09:52.340347"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13219v1",
+      "title": "First-principles predictions of band alignment in strained Si/Si1-xGex and Ge/Si1-xGex heterostructures",
+      "summary": "Accurate band offsets are essential for predictive continuum modeling of nanostructures such as quantum wells and quantum dots formed in strained Si/Si1-xGex and Ge/Si1-xGex heterostructures. Experimental offset data for these systems remain sparse away from endpoint compositions, making composition-dependent design difficult. We use atomistic first-principles density functional theory to compute valence- and conduction-band offsets across the full range 0 <= x <= 1. Random alloying is treated with special quasirandom structures, interface lineup terms are extracted from macroscopically averaged local Kohn-Sham potentials in thick periodic superlattices, valence-band spin-orbit coupling is included through species-resolved Mulliken weights, and conduction-band edges are refined using the screened hybrid Heyd-Scuseria-Ernzerhof functional. The resulting offsets show pronounced composition nonlinearity beyond the linear models explored in previous works, agree with experimental benchmarks, and reproduce the high-Ge slope change in the relaxed-alloy band gap. Analytic fitting expressions are provided for direct use in simulations, facilitating practical design of modern quantum technology devices.",
+      "authors": [
+        "Nathaniel M. Vegh",
+        "Pericles Philippopoulos",
+        "Raphaël J. Prentki",
+        "Wanting Zhang",
+        "Yu Zhu",
+        "Félix Beaudoin",
+        "Hong Guo"
+      ],
+      "categories": [
+        "cond-mat.mes-hall",
+        "cond-mat.mtrl-sci",
+        "quant-ph"
+      ],
+      "published": "2026-03-13T17:55:48Z",
+      "updated": "2026-03-13T17:55:48Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:First-principles predictions of band alignment in strained Si/Si1-xGex and Ge/Si1-xGex heterostructures\n\n[View PDF](http://arxiv.org/pdf/2603.13219v1) [HTML (experimental)](https://arxiv.org/html/2603.13219v1)\n\n> Abstract:Accurate band offsets are essential for predictive continuum modeling of nanostructures such as quantum wells and quantum dots formed in strained Si/Si1-xGex and Ge/Si1-xGex heterostructures. Experimental offset data for these systems remain sparse away from endpoint compositions, making composition-dependent design difficult. We use atomistic first-principles density functional theory to compute valence- and conduction-band offsets across the full range 0 <= x <= 1. Random alloying is treated with special quasirandom structures, interface lineup terms are extracted from macroscopically averaged local Kohn-Sham potentials in thick periodic superlattices, valence-band spin-orbit coupling is included through species-resolved Mulliken weights, and conduction-band edges are refined using the screened hybrid Heyd-Scuseria-Ernzerhof functional. The resulting offsets show pronounced composition nonlinearity beyond the linear models explored in previous works, agree with experimental benchmarks, and reproduce the high-Ge slope change in the relaxed-alloy band gap. Analytic fitting expressions are provided for direct use in simulations, facilitating practical design of modern quantum technology devices.\n\n| Comments: |\n| --- |\n| Subjects: | Mesoscale and Nanoscale Physics (cond-mat.mes-hall); Materials Science (cond-mat.mtrl-sci); Quantum Physics (quant-ph) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13219v1](https://arxiv.org/abs/2603.13219v1) \\[cond-mat.mes-hall\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13219](https://doi.org/10.48550/arXiv.2603.13219) |\n\n## Submission history\n\nFrom: Nathaniel Vegh \\[[view email](http://arxiv.org/show-email/c660f379/2603.13219)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:55:48 UTC (624 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13219) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "First-principles predictions of band alignment in strained Si/Si1-xGex and Ge/Si1-xGex heterostructures",
+        "description": "Abstract page for arXiv paper 2603.13219v1: First-principles predictions of band alignment in strained Si/Si1-xGex and Ge/Si1-xGex heterostructures",
+        "domain": "arxiv.org",
+        "author": "Nathaniel M. Vegh, Pericles Philippopoulos, Raphaël J. Prentki, Wanting Zhang, Yu Zhu, Félix Beaudoin, Hong Guo",
+        "url": "http://arxiv.org/abs/2603.13219v1",
+        "extracted_at": "2026-03-16T11:09:55.740509"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13214v1",
+      "title": "Investigating mixed-integer programming approaches for the $p$-$α$-closest-center problem",
+      "summary": "In this work, we introduce and study the $p$-$α$-closest-center problem ($pα$CCP), which generalizes the $p$-second-center problem, a recently emerged variant of the classical $p$-center problem. In the $pα$CCP, we are given sets of customers and potential facility locations, distances between each customer and potential facility location as well as two integers $p$ and $α$. The goal is to open facilities at $p$ of the potential facility locations, such that the maximum $α$-distance between each customer and the open facilities is minimized. The $α$-distance of a customer is defined as the sum of distances from the customer to its $α$ closest open facilities. If $α$ is one, the $pα$CCP is the $p$-center problem, and for $α$ being two, the $p$-second-center problem is obtained, for which the only existing algorithm in literature is a variable neighborhood search (VNS).   We present four mixed-integer programming (MIP) formulations for the $pα$CCP, strengthen them by adding valid and optimality-preserving inequalities and conduct a polyhedral study to prove relationships between their linear programming relaxations. Moreover, we present iterative procedures for lifting some valid inequalities to improve initial lower bounds on the optimal objective function value of the $pα$CCP and characterize the best lower bounds obtainable by this iterative lifting approach.   Based on our theoretical findings, we develop a branch-and-cut algorithm (B&C) to solve the $pα$CCP exactly. We improve its performance by a starting and a primal heuristic, variable fixings and separating inequalities. In our computational study, we investigate the effect of the various ingredients of our B&C on benchmark instances from related literature. Our B&C is able to prove optimality for 17 of the 40 instances from the work on the VNS heuristic.",
+      "authors": [
+        "Elisabeth Gaar",
+        "Sara Joosten",
+        "Markus Sinnl"
+      ],
+      "categories": [
+        "math.OC",
+        "cs.DM"
+      ],
+      "published": "2026-03-13T17:50:20Z",
+      "updated": "2026-03-13T17:50:20Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Investigating mixed-integer programming approaches for the $p$-$α$-closest-center problem\n\nAuthors:[Elisabeth Gaar](https://arxiv.org/search/math?searchtype=author&query=Gaar,+E), [Sara Joosten](https://arxiv.org/search/math?searchtype=author&query=Joosten,+S), [Markus Sinnl](https://arxiv.org/search/math?searchtype=author&query=Sinnl,+M)\n\n[View PDF](http://arxiv.org/pdf/2603.13214v1) [HTML (experimental)](https://arxiv.org/html/2603.13214v1)\n\n> Abstract:In this work, we introduce and study the $p$-$\\\\alpha$-closest-center problem ($p\\\\alpha$CCP), which generalizes the $p$-second-center problem, a recently emerged variant of the classical $p$-center problem. In the $p\\\\alpha$CCP, we are given sets of customers and potential facility locations, distances between each customer and potential facility location as well as two integers $p$ and $\\\\alpha$. The goal is to open facilities at $p$ of the potential facility locations, such that the maximum $\\\\alpha$-distance between each customer and the open facilities is minimized. The $\\\\alpha$-distance of a customer is defined as the sum of distances from the customer to its $\\\\alpha$ closest open facilities. If $\\\\alpha$ is one, the $p\\\\alpha$CCP is the $p$-center problem, and for $\\\\alpha$ being two, the $p$-second-center problem is obtained, for which the only existing algorithm in literature is a variable neighborhood search (VNS).  \n> We present four mixed-integer programming (MIP) formulations for the $p\\\\alpha$CCP, strengthen them by adding valid and optimality-preserving inequalities and conduct a polyhedral study to prove relationships between their linear programming relaxations. Moreover, we present iterative procedures for lifting some valid inequalities to improve initial lower bounds on the optimal objective function value of the $p\\\\alpha$CCP and characterize the best lower bounds obtainable by this iterative lifting approach.  \n> Based on our theoretical findings, we develop a branch-and-cut algorithm (B&C) to solve the $p\\\\alpha$CCP exactly. We improve its performance by a starting and a primal heuristic, variable fixings and separating inequalities. In our computational study, we investigate the effect of the various ingredients of our B&C on benchmark instances from related literature. Our B&C is able to prove optimality for 17 of the 40 instances from the work on the VNS heuristic.\n\n| Subjects: | Optimization and Control (math.OC); Discrete Mathematics (cs.DM) |\n| --- | --- |\n| MSC classes: | 90B80, 90C11 |\n| Cite as: |  |\n|  | (or [arXiv:2603.13214v1](https://arxiv.org/abs/2603.13214v1) \\[math.OC\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13214](https://doi.org/10.48550/arXiv.2603.13214) |\n\n## Submission history\n\nFrom: Sara Joosten \\[[view email](http://arxiv.org/show-email/82e6984b/2603.13214)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:50:20 UTC (474 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13214) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Investigating mixed-integer programming approaches for the $p$-$α$-closest-center problem",
+        "description": "Abstract page for arXiv paper 2603.13214v1: Investigating mixed-integer programming approaches for the $p$-$α$-closest-center problem",
+        "domain": "arxiv.org",
+        "author": "Elisabeth Gaar, Sara Joosten, Markus Sinnl",
+        "url": "http://arxiv.org/abs/2603.13214v1",
+        "extracted_at": "2026-03-16T11:09:58.917423"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13213v1",
+      "title": "MoEKD: Mixture-of-Experts Knowledge Distillation for Robust and High-Performing Compressed Code Models",
+      "summary": "Large language models for code have achieved strong performance across diverse software analytics tasks, yet their real-world adoption remains limited by high computational demands, slow inference speeds, significant energy consumption, and environmental impact. Knowledge distillation (KD) offers a practical solution by transferring knowledge from a large model to a smaller and more efficient model. Despite its effectiveness, recent studies show that models distilled from a single source often exhibit degraded adversarial robustness, even when robustness-aware distillation techniques are employed. These observations suggest a fundamental limitation of single-source distillation in simultaneously transferring high-quality and robust knowledge. To overcome this limitation, we propose Mixture of Experts Knowledge Distillation (MoEKD), a KD framework that leverages a Mixture of Experts (MoE) architecture to enable more effective and robust knowledge transfer from multiple specialized experts into a compact model. MoEKD decomposes the distillation process into expert and router training, aggregation of expert knowledge through a learned routing mechanism, and distillation from the aggregated knowledge. We evaluate MoEKD on the vulnerability detection task using CodeBERT and GraphCodeBERT models. Experimental results show that MoEKD not only improves adversarial robustness by up to 35.8%, but also enhances predictive performance by up to 13%, compared to state-of-the-art KD baselines, including Compressor and AVATAR. Furthermore, an ablation study demonstrates that aggregating expert knowledge enables ultra-compact models to maintain competitive performance even when their size is reduced by approximately half. Overall, these results highlight the effectiveness of multi-expert knowledge aggregation in addressing key limitations of existing single-source KD approaches.",
+      "authors": [
+        "Md. Abdul Awal",
+        "Mrigank Rochan",
+        "Chanchal K. Roy"
+      ],
+      "categories": [
+        "cs.SE"
+      ],
+      "published": "2026-03-13T17:49:01Z",
+      "updated": "2026-03-13T17:49:01Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:MoEKD: Mixture-of-Experts Knowledge Distillation for Robust and High-Performing Compressed Code Models\n\nAuthors:[Md. Abdul Awal](https://arxiv.org/search/cs?searchtype=author&query=Awal,+M+A), [Mrigank Rochan](https://arxiv.org/search/cs?searchtype=author&query=Rochan,+M), [Chanchal K. Roy](https://arxiv.org/search/cs?searchtype=author&query=Roy,+C+K)\n\n[View PDF](http://arxiv.org/pdf/2603.13213v1) [HTML (experimental)](https://arxiv.org/html/2603.13213v1)\n\n> Abstract:Large language models for code have achieved strong performance across diverse software analytics tasks, yet their real-world adoption remains limited by high computational demands, slow inference speeds, significant energy consumption, and environmental impact. Knowledge distillation (KD) offers a practical solution by transferring knowledge from a large model to a smaller and more efficient model. Despite its effectiveness, recent studies show that models distilled from a single source often exhibit degraded adversarial robustness, even when robustness-aware distillation techniques are employed. These observations suggest a fundamental limitation of single-source distillation in simultaneously transferring high-quality and robust knowledge. To overcome this limitation, we propose Mixture of Experts Knowledge Distillation (MoEKD), a KD framework that leverages a Mixture of Experts (MoE) architecture to enable more effective and robust knowledge transfer from multiple specialized experts into a compact model. MoEKD decomposes the distillation process into expert and router training, aggregation of expert knowledge through a learned routing mechanism, and distillation from the aggregated knowledge. We evaluate MoEKD on the vulnerability detection task using CodeBERT and GraphCodeBERT models. Experimental results show that MoEKD not only improves adversarial robustness by up to 35.8%, but also enhances predictive performance by up to 13%, compared to state-of-the-art KD baselines, including Compressor and AVATAR. Furthermore, an ablation study demonstrates that aggregating expert knowledge enables ultra-compact models to maintain competitive performance even when their size is reduced by approximately half. Overall, these results highlight the effectiveness of multi-expert knowledge aggregation in addressing key limitations of existing single-source KD approaches.\n\n| Comments: |\n| --- |\n| Subjects: | Software Engineering (cs.SE) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13213v1](https://arxiv.org/abs/2603.13213v1) \\[cs.SE\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13213](https://doi.org/10.48550/arXiv.2603.13213) |\n\n## Submission history\n\nFrom: Md Abdul Awal \\[[view email](http://arxiv.org/show-email/a7990cab/2603.13213)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:49:01 UTC (849 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13213) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "MoEKD: Mixture-of-Experts Knowledge Distillation for Robust and High-Performing Compressed Code Models",
+        "description": "Abstract page for arXiv paper 2603.13213v1: MoEKD: Mixture-of-Experts Knowledge Distillation for Robust and High-Performing Compressed Code Models",
+        "domain": "arxiv.org",
+        "author": "Md. Abdul Awal, Mrigank Rochan, Chanchal K. Roy",
+        "url": "http://arxiv.org/abs/2603.13213v1",
+        "extracted_at": "2026-03-16T11:10:01.395526"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13212v1",
+      "title": "Robust symmetry breaking in gapless quantum magnets",
+      "summary": "We prove the existence of spontaneous symmetry breaking in suitably low-energy eigenstates of certain gapless and frustrated many-body quantum systems, namely symmetric quantum perturbations to classical models which exhibit spontaneous symmetry breaking of a finite group at some positive temperature. Additionally, the classical model need not be local in space, as long as it satisfies a quantum analogue of the Peierls condition. As an example of our technique, we establish robust ferromagnetism in random-bond Ising models in $d= 2$ dimensions with sufficiently biased random couplings, with weak transverse field. Our mathematical technique is based on establishing quantum bottlenecks, similar to a \"many-body WKB\" method for evaluating tunneling rates. Using these same methods, we provide new proofs of metastability and the slow decay of the false vacuum, applicable to gapless metastable states. Our work represents a first step towards a rigorous classification of stable gapless quantum phases.",
+      "authors": [
+        "Chao Yin",
+        "Andrew Lucas"
+      ],
+      "categories": [
+        "math-ph",
+        "cond-mat.dis-nn",
+        "cond-mat.stat-mech",
+        "quant-ph"
+      ],
+      "published": "2026-03-13T17:48:27Z",
+      "updated": "2026-03-13T17:48:27Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Robust symmetry breaking in gapless quantum magnets\n\nAuthors:[Chao Yin](https://arxiv.org/search/math-ph?searchtype=author&query=Yin,+C), [Andrew Lucas](https://arxiv.org/search/math-ph?searchtype=author&query=Lucas,+A)\n\n[View PDF](http://arxiv.org/pdf/2603.13212v1) [HTML (experimental)](https://arxiv.org/html/2603.13212v1)\n\n> Abstract:We prove the existence of spontaneous symmetry breaking in suitably low-energy eigenstates of certain gapless and frustrated many-body quantum systems, namely symmetric quantum perturbations to classical models which exhibit spontaneous symmetry breaking of a finite group at some positive temperature. Additionally, the classical model need not be local in space, as long as it satisfies a quantum analogue of the Peierls condition. As an example of our technique, we establish robust ferromagnetism in random-bond Ising models in $d= 2$ dimensions with sufficiently biased random couplings, with weak transverse field. Our mathematical technique is based on establishing quantum bottlenecks, similar to a \"many-body WKB\" method for evaluating tunneling rates. Using these same methods, we provide new proofs of metastability and the slow decay of the false vacuum, applicable to gapless metastable states. Our work represents a first step towards a rigorous classification of stable gapless quantum phases.\n\n| Comments: |\n| --- |\n| Subjects: | Mathematical Physics (math-ph); Disordered Systems and Neural Networks (cond-mat.dis-nn); Statistical Mechanics (cond-mat.stat-mech); Quantum Physics (quant-ph) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13212v1](https://arxiv.org/abs/2603.13212v1) \\[math-ph\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13212](https://doi.org/10.48550/arXiv.2603.13212) |\n\n## Submission history\n\nFrom: Chao Yin \\[[view email](http://arxiv.org/show-email/6bcefbbc/2603.13212)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:48:27 UTC (120 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13212) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Robust symmetry breaking in gapless quantum magnets",
+        "description": "Abstract page for arXiv paper 2603.13212v1: Robust symmetry breaking in gapless quantum magnets",
+        "domain": "arxiv.org",
+        "author": "Chao Yin, Andrew Lucas",
+        "url": "http://arxiv.org/abs/2603.13212v1",
+        "extracted_at": "2026-03-16T11:10:04.121987"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13210v1",
+      "title": "Challenging the Weak Cosmic Censorship with Phantom Fields",
+      "summary": "Penrose's weak cosmic censorship conjecture asserts that spacetime singularities produced by gravitational collapse are generically hidden behind event horizons, thus preventing them from causally influencing distant observers and preserving the predictability of the exterior region. In this work, we probe this conjecture in a setup that deliberately violates one of its central assumptions - the dominant energy condition - by considering the spherical collapse of a phantom scalar field with negative energy density. In principle, such a field could produce a Schwarzschild geometry with negative mass and therefore no event horizon. Our aim is to assess whether, once the dominant energy condition is abandoned, the fully coupled evolution of matter and geometry can dynamically generate or expose naked singularities, thereby probing the robustness of cosmic censorship. To this end, we perform high-accuracy numerical relativity simulations based on fourth-order finite-difference schemes. Starting from smooth, asymptotically flat initial data representing regular phantom scalar wave packets, we follow their fully nonlinear evolution through collapse or dispersion. While an ordinary (positive-energy) scalar field exhibits the standard Choptuik critical behavior at the threshold of black-hole formation, the phantom field displays qualitatively different dynamics. For all amplitudes considered, we find no evidence for trapped surfaces, naked singularities, or alternative stationary end states. Instead, the phantom scalar field always disperses, suggesting that cosmic censorship remains dynamically preserved even in the presence of negative-energy matter.",
+      "authors": [
+        "Giovanni Caridi",
+        "Fabrizio Corelli",
+        "Paolo Pani"
+      ],
+      "categories": [
+        "gr-qc",
+        "astro-ph.HE",
+        "hep-ph",
+        "hep-th"
+      ],
+      "published": "2026-03-13T17:46:09Z",
+      "updated": "2026-03-13T17:46:09Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Challenging the Weak Cosmic Censorship with Phantom Fields\n\nAuthors:[Giovanni Caridi](https://arxiv.org/search/gr-qc?searchtype=author&query=Caridi,+G), [Fabrizio Corelli](https://arxiv.org/search/gr-qc?searchtype=author&query=Corelli,+F), [Paolo Pani](https://arxiv.org/search/gr-qc?searchtype=author&query=Pani,+P)\n\n[View PDF](http://arxiv.org/pdf/2603.13210v1) [HTML (experimental)](https://arxiv.org/html/2603.13210v1)\n\n> Abstract:Penrose's weak cosmic censorship conjecture asserts that spacetime singularities produced by gravitational collapse are generically hidden behind event horizons, thus preventing them from causally influencing distant observers and preserving the predictability of the exterior region. In this work, we probe this conjecture in a setup that deliberately violates one of its central assumptions - the dominant energy condition - by considering the spherical collapse of a phantom scalar field with negative energy density. In principle, such a field could produce a Schwarzschild geometry with negative mass and therefore no event horizon. Our aim is to assess whether, once the dominant energy condition is abandoned, the fully coupled evolution of matter and geometry can dynamically generate or expose naked singularities, thereby probing the robustness of cosmic censorship. To this end, we perform high-accuracy numerical relativity simulations based on fourth-order finite-difference schemes. Starting from smooth, asymptotically flat initial data representing regular phantom scalar wave packets, we follow their fully nonlinear evolution through collapse or dispersion. While an ordinary (positive-energy) scalar field exhibits the standard Choptuik critical behavior at the threshold of black-hole formation, the phantom field displays qualitatively different dynamics. For all amplitudes considered, we find no evidence for trapped surfaces, naked singularities, or alternative stationary end states. Instead, the phantom scalar field always disperses, suggesting that cosmic censorship remains dynamically preserved even in the presence of negative-energy matter.\n\n| Comments: |\n| --- |\n| Subjects: | General Relativity and Quantum Cosmology (gr-qc); High Energy Astrophysical Phenomena (astro-ph.HE); High Energy Physics - Phenomenology (hep-ph); High Energy Physics - Theory (hep-th) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13210v1](https://arxiv.org/abs/2603.13210v1) \\[gr-qc\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13210](https://doi.org/10.48550/arXiv.2603.13210) |\n\n## Submission history\n\nFrom: Fabrizio Corelli \\[[view email](http://arxiv.org/show-email/818572e8/2603.13210)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:46:09 UTC (7,644 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13210) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Challenging the Weak Cosmic Censorship with Phantom Fields",
+        "description": "Abstract page for arXiv paper 2603.13210v1: Challenging the Weak Cosmic Censorship with Phantom Fields",
+        "domain": "arxiv.org",
+        "author": "Giovanni Caridi, Fabrizio Corelli, Paolo Pani",
+        "url": "http://arxiv.org/abs/2603.13210v1",
+        "extracted_at": "2026-03-16T11:10:06.852498"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13209v1",
+      "title": "Superposed quantum evolutions across chaotic and regular regimes",
+      "summary": "While the superposition of quantum evolutions is known to produce interference effects, the interference between evolutions with regular and chaotic classical limits remains largely unexplored. Here, we use a Mach-Zehnder interferometer to investigate the superposition of two quantum evolutions, implemented via post-selection, and to compare it with the corresponding classical mixture. The quantum kicked top provides a natural platform for this study, as its classical dynamics ranges from regular to mixed to fully chaotic depending on the Hamiltonian parameters. We show that when a regular evolution is superposed with a chaotic one, the resulting subsystem entropy can exceed that of the classical mixture, provided the contribution of the chaotic branch dominates in the superposed quantum evolution. We further demonstrate that entropy production in such superpositions is strongly influenced by the structure of the underlying classical phase space. We further show that increased entropy generation can occur for purely regular dynamics at small values of the chaos parameter, given an appropriate choice of post-selection. These results reveal a nontrivial interplay between classical chaos and quantum interference in superposed quantum dynamics",
+      "authors": [
+        "Amit Anand",
+        "Anne-Catherine de la Hamette",
+        "Robert Mann",
+        "Shohini Ghose"
+      ],
+      "categories": [
+        "quant-ph",
+        "nlin.CD"
+      ],
+      "published": "2026-03-13T17:45:30Z",
+      "updated": "2026-03-13T17:45:30Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Superposed quantum evolutions across chaotic and regular regimes\n\n[View PDF](http://arxiv.org/pdf/2603.13209v1) [HTML (experimental)](https://arxiv.org/html/2603.13209v1)\n\n> Abstract:While the superposition of quantum evolutions is known to produce interference effects, the interference between evolutions with regular and chaotic classical limits remains largely unexplored. Here, we use a Mach-Zehnder interferometer to investigate the superposition of two quantum evolutions, implemented via post-selection, and to compare it with the corresponding classical mixture. The quantum kicked top provides a natural platform for this study, as its classical dynamics ranges from regular to mixed to fully chaotic depending on the Hamiltonian parameters. We show that when a regular evolution is superposed with a chaotic one, the resulting subsystem entropy can exceed that of the classical mixture, provided the contribution of the chaotic branch dominates in the superposed quantum evolution. We further demonstrate that entropy production in such superpositions is strongly influenced by the structure of the underlying classical phase space. We further show that increased entropy generation can occur for purely regular dynamics at small values of the chaos parameter, given an appropriate choice of post-selection. These results reveal a nontrivial interplay between classical chaos and quantum interference in superposed quantum dynamics\n\n| Subjects: | Quantum Physics (quant-ph); Chaotic Dynamics (nlin.CD) |\n| --- | --- |\n| Cite as: |  |\n|  | (or [arXiv:2603.13209v1](https://arxiv.org/abs/2603.13209v1) \\[quant-ph\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13209](https://doi.org/10.48550/arXiv.2603.13209) |\n\n## Submission history\n\nFrom: Amit Anand \\[[view email](http://arxiv.org/show-email/b9aeb1d9/2603.13209)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:45:30 UTC (1,712 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13209) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Superposed quantum evolutions across chaotic and regular regimes",
+        "description": "Abstract page for arXiv paper 2603.13209v1: Superposed quantum evolutions across chaotic and regular regimes",
+        "domain": "arxiv.org",
+        "author": "Amit Anand, Anne-Catherine de la Hamette, Robert Mann, Shohini Ghose",
+        "url": "http://arxiv.org/abs/2603.13209v1",
+        "extracted_at": "2026-03-16T11:10:09.691898"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13208v1",
+      "title": "Negative Masses and Spatial Curvature: Alleviating Neutrino Mass Tensions in LambdaCDM and Extended Cosmologies",
+      "summary": "We investigate the impact of spatial curvature, $Ω_k$, and dynamical dark energy on the cosmological constraints of the neutrino mass sum, $\\sum m_ν$. Using a joint analysis of the latest CMB (Planck and ACT DR6), BAO (DESI DR2) and SNe Ia (DESY5 and DES-Dovekie) datasets, we perform an exploration of the neutrino mass parameter space. To mitigate prior-driven biases near the physical boundary, we implement a symmetric extension wrapper that allows for effective negative masses. We find that the inclusion of spatial curvature significantly modifies the posterior distributions, exhibiting a smooth transition across the $\\sum m_ν= 0$ threshold. In the $Λ$CDM + $Ω_k$ + $\\sum m_{ν,\\mathrm{eff}}$ framework, we obtain $\\sum m_{ν,\\mathrm{eff}} = -0.011^{+0.052}_{-0.050}$, reducing the tension with the terrestrial lower limit of 0.06 eV from $2.59σ$ for the $Λ$CDM + $\\sum m_{ν,\\mathrm{eff}}$ model to $1.17σ$. For the most flexible scenario $w_0 w_a$CDM + $Ω_k$ + $\\sum m_{ν,\\mathrm{eff}}$, we find $\\sum m_{ν,\\mathrm{eff}} = -0.07 \\pm 0.11$ with a tension of $1.13σ$, illustrating how the increased parameter freedom notably degrades the precision of the mass estimate compared to simpler extensions. Our results demonstrate that current cosmological bounds on $\\sum m_ν$ are heavily influenced by boundary effects and geometric degeneracies.",
+      "authors": [
+        "Hayyim Pulido-Hernández",
+        "Jorge L. Cervantes-Cota"
+      ],
+      "categories": [
+        "astro-ph.CO",
+        "gr-qc",
+        "hep-th"
+      ],
+      "published": "2026-03-13T17:44:39Z",
+      "updated": "2026-03-13T17:44:39Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Negative Masses and Spatial Curvature: Alleviating Neutrino Mass Tensions in LambdaCDM and Extended Cosmologies\n\n[View PDF](http://arxiv.org/pdf/2603.13208v1) [HTML (experimental)](https://arxiv.org/html/2603.13208v1)\n\n> Abstract:We investigate the impact of spatial curvature, $\\\\Omega\\_k$, and dynamical dark energy on the cosmological constraints of the neutrino mass sum, $\\\\sum m\\_\\\\nu$. Using a joint analysis of the latest CMB (Planck and ACT DR6), BAO (DESI DR2) and SNe Ia (DESY5 and DES-Dovekie) datasets, we perform an exploration of the neutrino mass parameter space. To mitigate prior-driven biases near the physical boundary, we implement a symmetric extension wrapper that allows for effective negative masses. We find that the inclusion of spatial curvature significantly modifies the posterior distributions, exhibiting a smooth transition across the $\\\\sum m\\_\\\\nu = 0$ threshold. In the $\\\\Lambda$CDM + $\\\\Omega\\_k$ + $\\\\sum m\\_{\\\\nu,\\\\mathrm{eff}}$ framework, we obtain $\\\\sum m\\_{\\\\nu,\\\\mathrm{eff}} = -0.011^{+0.052}\\_{-0.050}$, reducing the tension with the terrestrial lower limit of 0.06 eV from $2.59\\\\sigma$ for the $\\\\Lambda$CDM + $\\\\sum m\\_{\\\\nu,\\\\mathrm{eff}}$ model to $1.17\\\\sigma$. For the most flexible scenario $w\\_0 w\\_a$CDM + $\\\\Omega\\_k$ + $\\\\sum m\\_{\\\\nu,\\\\mathrm{eff}}$, we find $\\\\sum m\\_{\\\\nu,\\\\mathrm{eff}} = -0.07 \\\\pm 0.11$ with a tension of $1.13\\\\sigma$, illustrating how the increased parameter freedom notably degrades the precision of the mass estimate compared to simpler extensions. Our results demonstrate that current cosmological bounds on $\\\\sum m\\_\\\\nu$ are heavily influenced by boundary effects and geometric degeneracies.\n\n| Comments: |\n| --- |\n| Subjects: | Cosmology and Nongalactic Astrophysics (astro-ph.CO); General Relativity and Quantum Cosmology (gr-qc); High Energy Physics - Theory (hep-th) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13208v1](https://arxiv.org/abs/2603.13208v1) \\[astro-ph.CO\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13208](https://doi.org/10.48550/arXiv.2603.13208) |\n\n## Submission history\n\nFrom: Hayyim Pulido-Hernández \\[[view email](http://arxiv.org/show-email/0d3f5df5/2603.13208)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:44:39 UTC (1,037 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13208) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Negative Masses and Spatial Curvature: Alleviating Neutrino Mass Tensions in LambdaCDM and Extended Cosmologies",
+        "description": "Abstract page for arXiv paper 2603.13208v1: Negative Masses and Spatial Curvature: Alleviating Neutrino Mass Tensions in LambdaCDM and Extended Cosmologies",
+        "domain": "arxiv.org",
+        "author": "Hayyim Pulido-Hernández, Jorge L. Cervantes-Cota",
+        "url": "http://arxiv.org/abs/2603.13208v1",
+        "extracted_at": "2026-03-16T11:10:12.436739"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13206v1",
+      "title": "A Spatial Localizer for Electrons in Insulators",
+      "summary": "The location of electrons governs phenomena ranging from chemical bonding and electric polarization to the topological classification of band insulators and the emergence of correlated states in quantum matter. While a prescription exists for finding local state representations of electrons in one-dimensional insulators, no comparably general theory exists in higher dimensions. Here, we introduce a general framework for finding the location of electrons in insulators in two and three dimensions based on the spectral properties of quantum-mechanical operators that we term Spatial Localizers. This framework naturally extends the notion of Wannier centers to insulators with boundaries, defects, and disorder, which we use to establish a position-space formulation of the bulk-defect correspondence for electronic charge. This framework also yields maximally localized electronic states. As two representative examples, we show that these states reduce to maximally localized Wannier functions in atomic insulators, whereas in Chern insulators they form coherent states that mirror the coherent-state structure of Landau levels in the quantum Hall effect.",
+      "authors": [
+        "Haylen Gerhard",
+        "Yifan Wang",
+        "Alexander Cerjan",
+        "Wladimir A. Benalcazar"
+      ],
+      "categories": [
+        "cond-mat.mtrl-sci",
+        "cond-mat.mes-hall"
+      ],
+      "published": "2026-03-13T17:42:11Z",
+      "updated": "2026-03-13T17:42:11Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:A Spatial Localizer for Electrons in Insulators\n\n[View PDF](http://arxiv.org/pdf/2603.13206v1) [HTML (experimental)](https://arxiv.org/html/2603.13206v1)\n\n> Abstract:The location of electrons governs phenomena ranging from chemical bonding and electric polarization to the topological classification of band insulators and the emergence of correlated states in quantum matter. While a prescription exists for finding local state representations of electrons in one-dimensional insulators, no comparably general theory exists in higher dimensions. Here, we introduce a general framework for finding the location of electrons in insulators in two and three dimensions based on the spectral properties of quantum-mechanical operators that we term Spatial Localizers. This framework naturally extends the notion of Wannier centers to insulators with boundaries, defects, and disorder, which we use to establish a position-space formulation of the bulk-defect correspondence for electronic charge. This framework also yields maximally localized electronic states. As two representative examples, we show that these states reduce to maximally localized Wannier functions in atomic insulators, whereas in Chern insulators they form coherent states that mirror the coherent-state structure of Landau levels in the quantum Hall effect.\n\n| Subjects: | Materials Science (cond-mat.mtrl-sci); Mesoscale and Nanoscale Physics (cond-mat.mes-hall) |\n| --- | --- |\n| Cite as: |  |\n|  | (or [arXiv:2603.13206v1](https://arxiv.org/abs/2603.13206v1) \\[cond-mat.mtrl-sci\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13206](https://doi.org/10.48550/arXiv.2603.13206) |\n\n## Submission history\n\nFrom: Haylen Gerhard \\[[view email](http://arxiv.org/show-email/52231724/2603.13206)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:42:11 UTC (7,883 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13206) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "A Spatial Localizer for Electrons in Insulators",
+        "description": "Abstract page for arXiv paper 2603.13206v1: A Spatial Localizer for Electrons in Insulators",
+        "domain": "arxiv.org",
+        "author": "Haylen Gerhard, Yifan Wang, Alexander Cerjan, Wladimir A. Benalcazar",
+        "url": "http://arxiv.org/abs/2603.13206v1",
+        "extracted_at": "2026-03-16T11:10:15.136997"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13200v1",
+      "title": "Navig-AI-tion: Navigation by Contextual AI and Spatial Audio",
+      "summary": "Audio-only walking navigation can leave users disoriented, relying on vague cardinal directions and lacking real-time environmental context, leading to frequent errors. To address this, we present a novel system that integrates a Vision Language Model (VLM) with a spatial audio cue. Our system extracts environmental landmarks to anchor navigation instructions and, crucially, provides a directional spatial audio signal when the user faces the wrong direction, indicating the precise turn direction. In a user study (n=12), the spatial audio cue with VLM reduced route deviations compared to both VLM-only and Google Maps (audio-only) baseline systems. Users reported that the spatial audio cue effectively supported orientation and that landmark-anchored instructions provided a better navigation experience over audio-only Google Maps. This work serves as an initial look at the utility of future audio-only navigation systems for incorporating directional cues, especially real-time corrective spatial audio.",
+      "authors": [
+        "Mathias N. Lystbæk",
+        "Haley Adams",
+        "Ranjith Kagathi Ananda",
+        "Eric J Gonzalez",
+        "Luca Ballan",
+        "Qiuxuan Wu",
+        "Andrea Colaço",
+        "Peter Tan",
+        "Mar Gonzalez-Franco"
+      ],
+      "categories": [
+        "cs.HC"
+      ],
+      "published": "2026-03-13T17:38:10Z",
+      "updated": "2026-03-13T17:38:10Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Navig-AI-tion: Navigation by Contextual AI and Spatial Audio\n\n[View PDF](http://arxiv.org/pdf/2603.13200v1) [HTML (experimental)](https://arxiv.org/html/2603.13200v1)\n\n> Abstract:Audio-only walking navigation can leave users disoriented, relying on vague cardinal directions and lacking real-time environmental context, leading to frequent errors. To address this, we present a novel system that integrates a Vision Language Model (VLM) with a spatial audio cue. Our system extracts environmental landmarks to anchor navigation instructions and, crucially, provides a directional spatial audio signal when the user faces the wrong direction, indicating the precise turn direction. In a user study (n=12), the spatial audio cue with VLM reduced route deviations compared to both VLM-only and Google Maps (audio-only) baseline systems. Users reported that the spatial audio cue effectively supported orientation and that landmark-anchored instructions provided a better navigation experience over audio-only Google Maps. This work serves as an initial look at the utility of future audio-only navigation systems for incorporating directional cues, especially real-time corrective spatial audio.\n\n| Comments: |\n| --- |\n| Subjects: | Human-Computer Interaction (cs.HC) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13200v1](https://arxiv.org/abs/2603.13200v1) \\[cs.HC\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13200](https://doi.org/10.48550/arXiv.2603.13200) |\n| Related DOI: | [https://doi.org/10.1145/3772363.3799295](https://doi.org/10.1145/3772363.3799295) |\n\n## Submission history\n\nFrom: Mathias Lystbæk \\[[view email](http://arxiv.org/show-email/446606b5/2603.13200)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:38:10 UTC (2,284 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13200) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Navig-AI-tion: Navigation by Contextual AI and Spatial Audio",
+        "description": "Abstract page for arXiv paper 2603.13200v1: Navig-AI-tion: Navigation by Contextual AI and Spatial Audio",
+        "domain": "arxiv.org",
+        "author": "Mathias N. Lystbæk, Haley Adams, Ranjith Kagathi Ananda, Eric J Gonzalez, Luca Ballan, Qiuxuan Wu, Andrea Colaço, Peter Tan, Mar Gonzalez-Franco",
+        "url": "http://arxiv.org/abs/2603.13200v1",
+        "extracted_at": "2026-03-16T11:10:17.775490"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13197v1",
+      "title": "Randomness compression in communication networks",
+      "summary": "Given a correlation generated by a (possibly quantum) communication network, we study the amount of shared randomness required to generate it. We develop a novel upper bound for approximating distributions generated by arbitrary networks and showcase instances where it significantly outperforms the best-known upper bounds for the exact case. This demonstrates that one can have substantial savings in resources if small perturbations are acceptable. We derive our bound using Hoeffding's inequality and apply it to various commonly-used communication networks such as the Bell scenario and triangle scenario.",
+      "authors": [
+        "Yukari Uchibori",
+        "Alice Zheng",
+        "Anurag Anshu",
+        "Jamie Sikora"
+      ],
+      "categories": [
+        "quant-ph"
+      ],
+      "published": "2026-03-13T17:36:16Z",
+      "updated": "2026-03-13T17:36:16Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Quantum Physics\n\n**arXiv:2603.13197v1** (quant-ph)\n\n\\[Submitted on 13 Mar 2026\\]\n\n## Title:Randomness compression in communication networks\n\nAuthors:[Yukari Uchibori](https://arxiv.org/search/quant-ph?searchtype=author&query=Uchibori,+Y), [Alice Zheng](https://arxiv.org/search/quant-ph?searchtype=author&query=Zheng,+A), [Anurag Anshu](https://arxiv.org/search/quant-ph?searchtype=author&query=Anshu,+A), [Jamie Sikora](https://arxiv.org/search/quant-ph?searchtype=author&query=Sikora,+J)\n\n[View PDF](http://arxiv.org/pdf/2603.13197v1) [HTML (experimental)](https://arxiv.org/html/2603.13197v1)\n\n> Abstract:Given a correlation generated by a (possibly quantum) communication network, we study the amount of shared randomness required to generate it. We develop a novel upper bound for approximating distributions generated by arbitrary networks and showcase instances where it significantly outperforms the best-known upper bounds for the exact case. This demonstrates that one can have substantial savings in resources if small perturbations are acceptable. We derive our bound using Hoeffding's inequality and apply it to various commonly-used communication networks such as the Bell scenario and triangle scenario.\n\n| Comments: | 8 pages, 5 figures. Comments welcome |\n| --- | --- |\n| Subjects: | Quantum Physics (quant-ph) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13197v1](https://arxiv.org/abs/2603.13197v1) \\[quant-ph\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13197](https://doi.org/10.48550/arXiv.2603.13197)  arXiv-issued DOI via DataCite (pending registration) |\n\n## Submission history\n\nFrom: Alice Zheng \\[[view email](http://arxiv.org/show-email/e6297d68/2603.13197)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:36:16 UTC (19 KB)  \n\n## Bibliographic and Citation Tools\n\nBibliographic Explorer *([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))*\n\nConnected Papers *([What is Connected Papers?](https://www.connectedpapers.com/about))*\n\nLitmaps *([What is Litmaps?](https://www.litmaps.co/))*\n\nscite Smart Citations *([What are Smart Citations?](https://www.scite.ai/))*\n\n## Code, Data and Media Associated with this Article\n\nalphaXiv *([What is alphaXiv?](https://alphaxiv.org/))*\n\nCatalyzeX Code Finder for Papers *([What is CatalyzeX?](https://www.catalyzex.com/))*\n\nDagsHub *([What is DagsHub?](https://dagshub.com/))*\n\nGotit.pub *([What is GotitPub?](http://gotit.pub/faq))*\n\nHugging Face *([What is Huggingface?](https://huggingface.co/huggingface))*\n\nPapers with Code *([What is Papers with Code?](https://paperswithcode.com/))*\n\nScienceCast *([What is ScienceCast?](https://sciencecast.org/welcome))*\n\n## Demos\n\nReplicate *([What is Replicate?](https://replicate.com/docs/arxiv/about))*\n\nHugging Face Spaces *([What is Spaces?](https://huggingface.co/docs/hub/spaces))*\n\nTXYZ.AI *([What is TXYZ.AI?](https://txyz.ai/))*\n\n## Recommenders and Search Tools\n\nInfluence Flower *([What are Influence Flowers?](https://influencemap.cmlab.dev/))*\n\nCORE Recommender *([What is CORE?](https://core.ac.uk/services/recommender))*\n\n## arXivLabs: experimental projects with community collaborators\n\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\n\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\n\nHave an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).\n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13197) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Randomness compression in communication networks",
+        "description": "Abstract page for arXiv paper 2603.13197v1: Randomness compression in communication networks",
+        "domain": "arxiv.org",
+        "author": "Yukari Uchibori, Alice Zheng, Anurag Anshu, Jamie Sikora",
+        "url": "http://arxiv.org/abs/2603.13197v1",
+        "extracted_at": "2026-03-16T11:10:20.607220"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13193v1",
+      "title": "Rigorous foundations of adaptive mode tracking in single-parametric Hermitian eigenvalue problems: existence theorems, error indicators, and application to SAFE dispersion analysis",
+      "summary": "The Semi-Analytical Finite Element (SAFE) method is widely used for computing guided wave dispersion curves in waveguides of arbitrary cross-section. Accurate mode tracking across consecutive wavenumber steps remains challenging, particularly in mode veering regions where eigenvalues become nearly degenerate and eigenvectors vary rapidly. This work establishes a rigorous theoretical framework for mode tracking in single-parameter Hermitian eigenvalue problems arising from SAFE formulations. We derive an explicit expression for the eigenvector derivative, revealing its inverse dependence on the eigenvalue gap, and prove that for any wavenumber and mode there exists a sufficiently small step ensuring unambiguous identification via the Modal Assurance Criterion. For symmetry-protected crossings, the Wigner-von Neumann non-crossing rule guarantees bounded eigenvector derivatives and reliable tracking even with coarse sampling. For continuous symmetries leading to degenerate subspaces, we introduce a rotation-invariant subspace MAC that treats each degenerate pair as a single entity. Based on these insights, we propose an adaptive wavenumber sampling algorithm that automatically refines the discretization where the MAC separation falls below a tolerance, using a novel error indicator to quantify tracking confidence. Validation on symmetric and unsymmetric laminates, an L-shaped bar, and a steel pipe demonstrates robust tracking in veering regions with substantially fewer points than uniform sampling or continuation-based approaches, while comparisons with open-source codes SAFEDC and Dispersion Calculator confirm accuracy and efficiency. The framework provides both theoretical guarantees and practical tools for reliable dispersion curve computation.",
+      "authors": [
+        "Dong Xiao",
+        "Zahra Sharif-Khodaei",
+        "M. H. Aliabadi"
+      ],
+      "categories": [
+        "math.NA",
+        "physics.comp-ph"
+      ],
+      "published": "2026-03-13T17:31:09Z",
+      "updated": "2026-03-13T17:31:09Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Rigorous foundations of adaptive mode tracking in single-parametric Hermitian eigenvalue problems: existence theorems, error indicators, and application to SAFE dispersion analysis\n\nAuthors:[Dong Xiao](https://arxiv.org/search/math?searchtype=author&query=Xiao,+D), [Zahra Sharif-Khodaei](https://arxiv.org/search/math?searchtype=author&query=Sharif-Khodaei,+Z), [M.H. Aliabadi](https://arxiv.org/search/math?searchtype=author&query=Aliabadi,+M)\n\n[View PDF](http://arxiv.org/pdf/2603.13193v1) [HTML (experimental)](https://arxiv.org/html/2603.13193v1)\n\n> Abstract:The Semi-Analytical Finite Element (SAFE) method is widely used for computing guided wave dispersion curves in waveguides of arbitrary cross-section. Accurate mode tracking across consecutive wavenumber steps remains challenging, particularly in mode veering regions where eigenvalues become nearly degenerate and eigenvectors vary rapidly. This work establishes a rigorous theoretical framework for mode tracking in single-parameter Hermitian eigenvalue problems arising from SAFE formulations. We derive an explicit expression for the eigenvector derivative, revealing its inverse dependence on the eigenvalue gap, and prove that for any wavenumber and mode there exists a sufficiently small step ensuring unambiguous identification via the Modal Assurance Criterion. For symmetry-protected crossings, the Wigner-von Neumann non-crossing rule guarantees bounded eigenvector derivatives and reliable tracking even with coarse sampling. For continuous symmetries leading to degenerate subspaces, we introduce a rotation-invariant subspace MAC that treats each degenerate pair as a single entity. Based on these insights, we propose an adaptive wavenumber sampling algorithm that automatically refines the discretization where the MAC separation falls below a tolerance, using a novel error indicator to quantify tracking confidence. Validation on symmetric and unsymmetric laminates, an L-shaped bar, and a steel pipe demonstrates robust tracking in veering regions with substantially fewer points than uniform sampling or continuation-based approaches, while comparisons with open-source codes SAFEDC and Dispersion Calculator confirm accuracy and efficiency. The framework provides both theoretical guarantees and practical tools for reliable dispersion curve computation.\n\n| Comments: |\n| --- |\n| Subjects: | Numerical Analysis (math.NA); Computational Physics (physics.comp-ph) |\n| MSC classes: | 65F15 (Primary) 65N30, 74J20, 74S05, 35P05 (Secondary) |\n| ACM classes: | G.1.3; G.1.8; G.4; J.2 |\n| Cite as: |  |\n|  | (or [arXiv:2603.13193v1](https://arxiv.org/abs/2603.13193v1) \\[math.NA\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13193](https://doi.org/10.48550/arXiv.2603.13193) |\n\n## Submission history\n\nFrom: Dong Xiao \\[[view email](http://arxiv.org/show-email/6c8e3101/2603.13193)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:31:09 UTC (6,497 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13193) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Rigorous foundations of adaptive mode tracking in single-parametric Hermitian eigenvalue problems: existence theorems, error indicators, and application to SAFE dispersion analysis",
+        "description": "Abstract page for arXiv paper 2603.13193v1: Rigorous foundations of adaptive mode tracking in single-parametric Hermitian eigenvalue problems: existence theorems, error indicators, and application to SAFE dispersion analysis",
+        "domain": "arxiv.org",
+        "author": "Dong Xiao, Zahra Sharif-Khodaei, M. H. Aliabadi",
+        "url": "http://arxiv.org/abs/2603.13193v1",
+        "extracted_at": "2026-03-16T11:10:23.375860"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13192v1",
+      "title": "Cops and Robbers: A $\\times$-homotopy Invariant Variant",
+      "summary": "Cops and Robbers is a pursuit-evasion game played on graphs, of which many variants have been developed and studied. We introduce a variant of this game, \"Sneaky-Active Cops and Robbers\", where all cops and robber must move on their turn, and where the robber is allowed to move onto a cop position without being captured. We show that for reflexive graphs, this game is equivalent to the classical cops and robbers and that the cop number for a graph is invariant under $\\times$-homotopy equivalence. We then develop further properties of this game, computing cop numbers for a number of graph families and developing results about the behavior of categorical and box products of graphs.",
+      "authors": [
+        "Tien Chih",
+        "Laura Scull"
+      ],
+      "categories": [
+        "math.CO"
+      ],
+      "published": "2026-03-13T17:28:47Z",
+      "updated": "2026-03-13T17:28:47Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "**arXiv:2603.13192v1** (math)\n\n\\[Submitted on 13 Mar 2026\\]\n\n## Title:Cops and Robbers: A $\\\\times$-homotopy Invariant Variant\n\nAuthors:[Tien Chih](https://arxiv.org/search/math?searchtype=author&query=Chih,+T), [Laura Scull](https://arxiv.org/search/math?searchtype=author&query=Scull,+L)\n\n[View PDF](http://arxiv.org/pdf/2603.13192v1)\n\n> Abstract:Cops and Robbers is a pursuit-evasion game played on graphs, of which many variants have been developed and studied. We introduce a variant of this game, \"Sneaky-Active Cops and Robbers\", where all cops and robber must move on their turn, and where the robber is allowed to move onto a cop position without being captured. We show that for reflexive graphs, this game is equivalent to the classical cops and robbers and that the cop number for a graph is invariant under $\\\\times$-homotopy equivalence. We then develop further properties of this game, computing cop numbers for a number of graph families and developing results about the behavior of categorical and box products of graphs.\n\n| Subjects: | Combinatorics (math.CO) |\n| --- | --- |\n| MSC classes: | 05C57, 05C60, 05C76, 05C75 |\n| Cite as: |  |\n|  | (or [arXiv:2603.13192v1](https://arxiv.org/abs/2603.13192v1) \\[math.CO\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13192](https://doi.org/10.48550/arXiv.2603.13192)  arXiv-issued DOI via DataCite (pending registration) |\n\n## Submission history\n\nFrom: Tien Chih Ph.D. \\[[view email](http://arxiv.org/show-email/a4267a11/2603.13192)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:28:47 UTC (23 KB)  \n\n## Bibliographic and Citation Tools\n\nBibliographic Explorer *([What is the Explorer?](https://info.arxiv.org/labs/showcase.html#arxiv-bibliographic-explorer))*\n\nConnected Papers *([What is Connected Papers?](https://www.connectedpapers.com/about))*\n\nLitmaps *([What is Litmaps?](https://www.litmaps.co/))*\n\nscite Smart Citations *([What are Smart Citations?](https://www.scite.ai/))*\n\n## Code, Data and Media Associated with this Article\n\nalphaXiv *([What is alphaXiv?](https://alphaxiv.org/))*\n\nCatalyzeX Code Finder for Papers *([What is CatalyzeX?](https://www.catalyzex.com/))*\n\nDagsHub *([What is DagsHub?](https://dagshub.com/))*\n\nGotit.pub *([What is GotitPub?](http://gotit.pub/faq))*\n\nHugging Face *([What is Huggingface?](https://huggingface.co/huggingface))*\n\nPapers with Code *([What is Papers with Code?](https://paperswithcode.com/))*\n\nScienceCast *([What is ScienceCast?](https://sciencecast.org/welcome))*\n\n## Demos\n\nReplicate *([What is Replicate?](https://replicate.com/docs/arxiv/about))*\n\nHugging Face Spaces *([What is Spaces?](https://huggingface.co/docs/hub/spaces))*\n\nTXYZ.AI *([What is TXYZ.AI?](https://txyz.ai/))*\n\n## Recommenders and Search Tools\n\nInfluence Flower *([What are Influence Flowers?](https://influencemap.cmlab.dev/))*\n\nCORE Recommender *([What is CORE?](https://core.ac.uk/services/recommender))*\n\n## arXivLabs: experimental projects with community collaborators\n\narXivLabs is a framework that allows collaborators to develop and share new arXiv features directly on our website.\n\nBoth individuals and organizations that work with arXivLabs have embraced and accepted our values of openness, community, excellence, and user data privacy. arXiv is committed to these values and only works with partners that adhere to them.\n\nHave an idea for a project that will add value for arXiv's community? [**Learn more about arXivLabs**](https://info.arxiv.org/labs/index.html).\n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13192) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Cops and Robbers: A $\\times$-homotopy Invariant Variant",
+        "description": "Abstract page for arXiv paper 2603.13192v1: Cops and Robbers: A $\\times$-homotopy Invariant Variant",
+        "domain": "arxiv.org",
+        "author": "Tien Chih, Laura Scull",
+        "url": "http://arxiv.org/abs/2603.13192v1",
+        "extracted_at": "2026-03-16T11:10:25.886773"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13191v1",
+      "title": "From Experiments to Expertise: Scientific Knowledge Consolidation for AI-Driven Computational Research",
+      "summary": "While large language models (LLMs) have transformed AI agents into proficient executors of computational materials science, performing a hundred simulations does not make a researcher. What distinguishes research from routine execution is the progressive accumulation of knowledge -- learning which approaches fail, recognizing patterns across systems, and applying understanding to new problems. However, the prevailing paradigm in AI-driven computational science treats each execution in isolation, largely discarding hard-won insights between runs. Here we present QMatSuite, an open-source platform closing this gap. Agents record findings with full provenance, retrieve knowledge before new calculations, and in dedicated reflection sessions correct erroneous findings and synthesize observations into cross-compound patterns. In benchmarks on a six-step quantum-mechanical simulation workflow, accumulated knowledge reduces reasoning overhead by 67% and improves accuracy from 47% to 3% deviation from literature -- and when transferred to an unfamiliar material, achieves 1% deviation with zero pipeline failures.",
+      "authors": [
+        "Haonan Huang"
+      ],
+      "categories": [
+        "physics.comp-ph",
+        "cond-mat.mtrl-sci",
+        "cs.AI"
+      ],
+      "published": "2026-03-13T17:25:47Z",
+      "updated": "2026-03-13T17:25:47Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:From Experiments to Expertise: Scientific Knowledge Consolidation for AI-Driven Computational Research\n\nAuthors:[Haonan Huang](https://arxiv.org/search/physics?searchtype=author&query=Huang,+H)\n\n[View PDF](http://arxiv.org/pdf/2603.13191v1) [HTML (experimental)](https://arxiv.org/html/2603.13191v1)\n\n> Abstract:While large language models (LLMs) have transformed AI agents into proficient executors of computational materials science, performing a hundred simulations does not make a researcher. What distinguishes research from routine execution is the progressive accumulation of knowledge -- learning which approaches fail, recognizing patterns across systems, and applying understanding to new problems. However, the prevailing paradigm in AI-driven computational science treats each execution in isolation, largely discarding hard-won insights between runs. Here we present QMatSuite, an open-source platform closing this gap. Agents record findings with full provenance, retrieve knowledge before new calculations, and in dedicated reflection sessions correct erroneous findings and synthesize observations into cross-compound patterns. In benchmarks on a six-step quantum-mechanical simulation workflow, accumulated knowledge reduces reasoning overhead by 67% and improves accuracy from 47% to 3% deviation from literature -- and when transferred to an unfamiliar material, achieves 1% deviation with zero pipeline failures.\n\n| Subjects: | Computational Physics (physics.comp-ph); Materials Science (cond-mat.mtrl-sci); Artificial Intelligence (cs.AI) |\n| --- | --- |\n| Cite as: |  |\n|  | (or [arXiv:2603.13191v1](https://arxiv.org/abs/2603.13191v1) \\[physics.comp-ph\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13191](https://doi.org/10.48550/arXiv.2603.13191) |\n\n## Submission history\n\nFrom: Haonan Huang \\[[view email](http://arxiv.org/show-email/ba54fbf9/2603.13191)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:25:47 UTC (1,152 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13191) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "From Experiments to Expertise: Scientific Knowledge Consolidation for AI-Driven Computational Research",
+        "description": "Abstract page for arXiv paper 2603.13191v1: From Experiments to Expertise: Scientific Knowledge Consolidation for AI-Driven Computational Research",
+        "domain": "arxiv.org",
+        "author": "Haonan Huang",
+        "url": "http://arxiv.org/abs/2603.13191v1",
+        "extracted_at": "2026-03-16T11:10:28.140025"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13190v1",
+      "title": "Lattice Discrete Particle Model (LDPM): Comparison of Various Time Integration Solvers and Implementations",
+      "summary": "This article presents a comparison of various implementations of the Lattice Discrete Particle Model (LDPM) for the numerical simulation of concrete and other heterogeneous quasibrittle materials. The comparison involves the use of transient implicit and explicit solvers and steady-state (static) solvers and implementations for Central Processing Unit (CPU) as well as Graphics Processing Unit (GPU). The various implementations are compared on the basis of a set of benchmarks tests describing behaviors of increasing computational complexity. They include elastic vibrations, confined strain-hardening compressive response, tensile fracture, and unconfined strain-softening compressive response. Metrics of interest extracted from the simulations include macroscopic stress versus strain responses, computational times, number of iterations, and energy balance error. Pairwise comparison of final crack patterns is provided through the correlation coefficient and normalized root mean square error of the crack opening vectors. Moreover, for the most numerically challenging case of unconfined compression with sliding boundary conditions, the stability of the strain-softening response is tested by perturbing the solutions as well as changing the convergence criteria and time step size. Attached to this paper is the complete input data of the benchmark tests; this will allow researchers to run the examples and compare them with their own implementations. In addition, most of the reported implementations are publicly available in open source packages.",
+      "authors": [
+        "Erol Lale",
+        "Jan Eliáš",
+        "Ke Yu",
+        "Matthew Troemner",
+        "Monika Středulová",
+        "Julien Khoury",
+        "Tianju Xue",
+        "Ioannis Koutromanos",
+        "Alessandro Fascetti",
+        "Bahar Ayhan",
+        "Baixi Chen",
+        "Giovanni Di Luzio",
+        "Yuhui Lyu",
+        "Madura Pathirage",
+        "Gilles Pijaudier-Cabot",
+        "Lei Shen",
+        "Alessandro Tasora",
+        "Lifu Yang",
+        "Jiawei Zhong",
+        "Gianluca Cusatis"
+      ],
+      "categories": [
+        "cs.CE",
+        "cond-mat.mtrl-sci"
+      ],
+      "published": "2026-03-13T17:24:51Z",
+      "updated": "2026-03-13T17:24:51Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Lattice Discrete Particle Model (LDPM): Comparison of Various Time Integration Solvers and Implementations\n\nAuthors:[Erol Lale](https://arxiv.org/search/cs?searchtype=author&query=Lale,+E), [Jan Eliáš](https://arxiv.org/search/cs?searchtype=author&query=Eli%C3%A1%C5%A1,+J), [Ke Yu](https://arxiv.org/search/cs?searchtype=author&query=Yu,+K), [Matthew Troemner](https://arxiv.org/search/cs?searchtype=author&query=Troemner,+M), [Monika Středulová](https://arxiv.org/search/cs?searchtype=author&query=St%C5%99edulov%C3%A1,+M), [Julien Khoury](https://arxiv.org/search/cs?searchtype=author&query=Khoury,+J), [Tianju Xue](https://arxiv.org/search/cs?searchtype=author&query=Xue,+T), [Ioannis Koutromanos](https://arxiv.org/search/cs?searchtype=author&query=Koutromanos,+I), [Alessandro Fascetti](https://arxiv.org/search/cs?searchtype=author&query=Fascetti,+A), [Bahar Ayhan](https://arxiv.org/search/cs?searchtype=author&query=Ayhan,+B), [Baixi Chen](https://arxiv.org/search/cs?searchtype=author&query=Chen,+B), [Giovanni Di Luzio](https://arxiv.org/search/cs?searchtype=author&query=Di+Luzio,+G), [Yuhui Lyu](https://arxiv.org/search/cs?searchtype=author&query=Lyu,+Y), [Madura Pathirage](https://arxiv.org/search/cs?searchtype=author&query=Pathirage,+M), [Gilles Pijaudier-Cabot](https://arxiv.org/search/cs?searchtype=author&query=Pijaudier-Cabot,+G), [Lei Shen](https://arxiv.org/search/cs?searchtype=author&query=Shen,+L), [Alessandro Tasora](https://arxiv.org/search/cs?searchtype=author&query=Tasora,+A), [Lifu Yang](https://arxiv.org/search/cs?searchtype=author&query=Yang,+L), [Jiawei Zhong](https://arxiv.org/search/cs?searchtype=author&query=Zhong,+J), [Gianluca Cusatis](https://arxiv.org/search/cs?searchtype=author&query=Cusatis,+G)\n\n[View PDF](http://arxiv.org/pdf/2603.13190v1) [HTML (experimental)](https://arxiv.org/html/2603.13190v1)\n\n> Abstract:This article presents a comparison of various implementations of the Lattice Discrete Particle Model (LDPM) for the numerical simulation of concrete and other heterogeneous quasibrittle materials. The comparison involves the use of transient implicit and explicit solvers and steady-state (static) solvers and implementations for Central Processing Unit (CPU) as well as Graphics Processing Unit (GPU). The various implementations are compared on the basis of a set of benchmarks tests describing behaviors of increasing computational complexity. They include elastic vibrations, confined strain-hardening compressive response, tensile fracture, and unconfined strain-softening compressive response. Metrics of interest extracted from the simulations include macroscopic stress versus strain responses, computational times, number of iterations, and energy balance error. Pairwise comparison of final crack patterns is provided through the correlation coefficient and normalized root mean square error of the crack opening vectors. Moreover, for the most numerically challenging case of unconfined compression with sliding boundary conditions, the stability of the strain-softening response is tested by perturbing the solutions as well as changing the convergence criteria and time step size. Attached to this paper is the complete input data of the benchmark tests; this will allow researchers to run the examples and compare them with their own implementations. In addition, most of the reported implementations are publicly available in open source packages.\n\n| Comments: |\n| --- |\n| Subjects: | Computational Engineering, Finance, and Science (cs.CE); Materials Science (cond-mat.mtrl-sci) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13190v1](https://arxiv.org/abs/2603.13190v1) \\[cs.CE\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13190](https://doi.org/10.48550/arXiv.2603.13190) |\n| Journal reference: | International Journal for Numerical and Analytical Methods in Geomechanics, 2026 |\n| Related DOI: | [https://doi.org/10.1002/nag.70286](https://doi.org/10.1002/nag.70286) |\n\n## Submission history\n\nFrom: Jan Eliáš \\[[view email](http://arxiv.org/show-email/c28fb970/2603.13190)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:24:51 UTC (8,491 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13190) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Lattice Discrete Particle Model (LDPM): Comparison of Various Time Integration Solvers and Implementations",
+        "description": "Abstract page for arXiv paper 2603.13190v1: Lattice Discrete Particle Model (LDPM): Comparison of Various Time Integration Solvers and Implementations",
+        "domain": "arxiv.org",
+        "author": "Erol Lale, Jan Eliáš, Ke Yu, Matthew Troemner, Monika Středulová, Julien Khoury, Tianju Xue, Ioannis Koutromanos, Alessandro Fascetti, Bahar Ayhan, Baixi Chen, Giovanni Di Luzio, Yuhui Lyu, Madura Pathirage, Gilles Pijaudier-Cabot, Lei Shen, Alessandro Tasora, Lifu Yang, Jiawei Zhong, Gianluca Cusatis",
+        "url": "http://arxiv.org/abs/2603.13190v1",
+        "extracted_at": "2026-03-16T11:10:30.905893"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13188v1",
+      "title": "CANOE: Classically Assisted Non-Orthogonal Eigensolver",
+      "summary": "In the early fault-tolerant regime, where quantum resources remain limited, hybrid quantum-classical strategies offer one possible route toward quantum advantage. We introduce CANOE, the Classically Assisted Non-Orthogonal Eigensolver, as such an approach, distributing Rayleigh-Ritz basis states between quantum and classical hardware. This approach leverages the expressive power of quantum states, which are costly to reproduce classically, while augmenting them with a large pool of classically generated basis states that can be incorporated at negligible computational cost. We validate this through numerical simulations of a 76-qubit chromium atom system, quantifying how each additional quantum basis state enhances ground-state representability and how the inclusion of classical states further amplifies this improvement. Such a hybrid basis framework necessarily requires an efficient protocol on quantum hardware for evaluating overlaps between quantum and classical states in the resulting generalized eigenvalue formulation. We address this by introducing a histogram-based protocol and demonstrate through numerical simulations that it can approach chemical accuracy at moderate sampling cost. To solve the resulting generalized eigenvalue problem stably, CANOE incorporates a Schur-complement-based stabilization procedure that mitigates ill-conditioning caused by linear dependencies in the hybrid basis. Taken together, these results position CANOE as a practical framework for combining limited quantum resources with expansive classical resources for early fault-tolerant quantum simulations.",
+      "authors": [
+        "Jihyeon Park",
+        "Collin C. D. Frink",
+        "Matthew Otten"
+      ],
+      "categories": [
+        "quant-ph"
+      ],
+      "published": "2026-03-13T17:21:14Z",
+      "updated": "2026-03-13T17:21:14Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:CANOE: Classically Assisted Non-Orthogonal Eigensolver\n\nAuthors:[Jihyeon Park](https://arxiv.org/search/quant-ph?searchtype=author&query=Park,+J), [Collin C. D. Frink](https://arxiv.org/search/quant-ph?searchtype=author&query=Frink,+C+C+D), [Matthew Otten](https://arxiv.org/search/quant-ph?searchtype=author&query=Otten,+M)\n\n[View PDF](http://arxiv.org/pdf/2603.13188v1) [HTML (experimental)](https://arxiv.org/html/2603.13188v1)\n\n> Abstract:In the early fault-tolerant regime, where quantum resources remain limited, hybrid quantum-classical strategies offer one possible route toward quantum advantage. We introduce CANOE, the Classically Assisted Non-Orthogonal Eigensolver, as such an approach, distributing Rayleigh-Ritz basis states between quantum and classical hardware. This approach leverages the expressive power of quantum states, which are costly to reproduce classically, while augmenting them with a large pool of classically generated basis states that can be incorporated at negligible computational cost. We validate this through numerical simulations of a 76-qubit chromium atom system, quantifying how each additional quantum basis state enhances ground-state representability and how the inclusion of classical states further amplifies this improvement. Such a hybrid basis framework necessarily requires an efficient protocol on quantum hardware for evaluating overlaps between quantum and classical states in the resulting generalized eigenvalue formulation. We address this by introducing a histogram-based protocol and demonstrate through numerical simulations that it can approach chemical accuracy at moderate sampling cost. To solve the resulting generalized eigenvalue problem stably, CANOE incorporates a Schur-complement-based stabilization procedure that mitigates ill-conditioning caused by linear dependencies in the hybrid basis. Taken together, these results position CANOE as a practical framework for combining limited quantum resources with expansive classical resources for early fault-tolerant quantum simulations.\n\n| Subjects: | Quantum Physics (quant-ph) |\n| --- | --- |\n| Cite as: |  |\n|  | (or [arXiv:2603.13188v1](https://arxiv.org/abs/2603.13188v1) \\[quant-ph\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13188](https://doi.org/10.48550/arXiv.2603.13188) |\n\n## Submission history\n\nFrom: Matthew Otten \\[[view email](http://arxiv.org/show-email/faee50d1/2603.13188)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:21:14 UTC (4,271 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13188) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "CANOE: Classically Assisted Non-Orthogonal Eigensolver",
+        "description": "Abstract page for arXiv paper 2603.13188v1: CANOE: Classically Assisted Non-Orthogonal Eigensolver",
+        "domain": "arxiv.org",
+        "author": "Jihyeon Park, Collin C. D. Frink, Matthew Otten",
+        "url": "http://arxiv.org/abs/2603.13188v1",
+        "extracted_at": "2026-03-16T11:10:33.858548"
+      },
+      "token_savings_percent": 90.0
+    },
+    {
+      "id": "http://arxiv.org/abs/2603.13187v1",
+      "title": "Inverse Faraday Effect in Rashba two-dimensional electron systems: interplay of spin and orbital effects",
+      "summary": "The inverse Faraday effect (IFE) refers to the generation of a DC magnetization by circularly polarized light through the transfer of optical angular momentum to electronic degrees of freedom. In conducting systems, this response can arise from two microscopic channels - spin polarization of itinerant electrons and orbital magnetization generated by circulating charge currents. However, the orbital contribution to the inverse Faraday effect in spin-orbit-coupled conducting systems remains largely unexplored. We present a theoretical analysis of the IFE in disordered two-dimensional electron systems with Rashba spin-orbit coupling using both the quantum kinetic equation and Green's-function diagrammatics. We find that in a noninteracting Rashba metal the orbital magnetization is strongly modified by spin-orbit coupling and can become comparable to, or exceed, the spin magnetization for realistic parameter regimes. When the radiation frequency approaches the Rashba spin splitting, both spin and orbital magnetizations exhibit resonant enhancement. These results clarify the microscopic origin of light-induced magnetization and highlight the interplay of spin and orbital mechanisms in optically driven magnetization dynamics in low-dimensional electronic systems.",
+      "authors": [
+        "Jaglul Hasan",
+        "Chandan Setty"
+      ],
+      "categories": [
+        "cond-mat.mes-hall",
+        "physics.optics"
+      ],
+      "published": "2026-03-13T17:20:45Z",
+      "updated": "2026-03-13T17:20:45Z",
+      "collected_at": "2026-03-16T11:09:38.725506",
+      "markdown": "## Title:Inverse Faraday Effect in Rashba two-dimensional electron systems: interplay of spin and orbital effects\n\nAuthors:[Jaglul Hasan](https://arxiv.org/search/cond-mat?searchtype=author&query=Hasan,+J), [Chandan Setty](https://arxiv.org/search/cond-mat?searchtype=author&query=Setty,+C)\n\n[View PDF](http://arxiv.org/pdf/2603.13187v1) [HTML (experimental)](https://arxiv.org/html/2603.13187v1)\n\n> Abstract:The inverse Faraday effect (IFE) refers to the generation of a DC magnetization by circularly polarized light through the transfer of optical angular momentum to electronic degrees of freedom. In conducting systems, this response can arise from two microscopic channels - spin polarization of itinerant electrons and orbital magnetization generated by circulating charge currents. However, the orbital contribution to the inverse Faraday effect in spin-orbit-coupled conducting systems remains largely unexplored. We present a theoretical analysis of the IFE in disordered two-dimensional electron systems with Rashba spin-orbit coupling using both the quantum kinetic equation and Green's-function diagrammatics. We find that in a noninteracting Rashba metal the orbital magnetization is strongly modified by spin-orbit coupling and can become comparable to, or exceed, the spin magnetization for realistic parameter regimes. When the radiation frequency approaches the Rashba spin splitting, both spin and orbital magnetizations exhibit resonant enhancement. These results clarify the microscopic origin of light-induced magnetization and highlight the interplay of spin and orbital mechanisms in optically driven magnetization dynamics in low-dimensional electronic systems.\n\n| Comments: |\n| --- |\n| Subjects: | Mesoscale and Nanoscale Physics (cond-mat.mes-hall); Optics (physics.optics) |\n| Cite as: |  |\n|  | (or [arXiv:2603.13187v1](https://arxiv.org/abs/2603.13187v1) \\[cond-mat.mes-hall\\] for this version) |\n|  | [https://doi.org/10.48550/arXiv.2603.13187](https://doi.org/10.48550/arXiv.2603.13187) |\n\n## Submission history\n\nFrom: Jaglul Hasan \\[[view email](http://arxiv.org/show-email/50219ce7/2603.13187)\\]  \n**\\[v1\\]** Fri, 13 Mar 2026 17:20:45 UTC (1,302 KB)  \n\n[Which authors of this paper are endorsers?](http://arxiv.org/auth/show-endorsers/2603.13187) | Disable MathJax ([What is MathJax?](https://info.arxiv.org/help/mathjax.html))\n",
+      "markdown_metadata": {
+        "title": "Inverse Faraday Effect in Rashba two-dimensional electron systems: interplay of spin and orbital effects",
+        "description": "Abstract page for arXiv paper 2603.13187v1: Inverse Faraday Effect in Rashba two-dimensional electron systems: interplay of spin and orbital effects",
+        "domain": "arxiv.org",
+        "author": "Jaglul Hasan, Chandan Setty",
+        "url": "http://arxiv.org/abs/2603.13187v1",
+        "extracted_at": "2026-03-16T11:10:36.381117"
+      },
+      "token_savings_percent": 90.0
+    }
+  ],
+  "cache_stats": {
+    "hits": 0,
+    "misses": 20
+  }
+}

@@ -1,0 +1,139 @@
+{
+  "tests": [
+    {
+      "entities": [
+        "The",
+        "Lesson",
+        "Memory",
+        "Use",
+        "Fact",
+        "Windows",
+        "Decision",
+        "Always",
+        "Important",
+        "Key"
+      ],
+      "actions": [
+        "We implemented the ContextDB system based on arXiv paper 2603",
+        "13017 about memory distillation",
+        "The team decided to use a 3-level hierarchy for context management: task, session, and project levels",
+        "We added MemoryDistiller class that extracts entities, actions, decisions, and facts from conversations",
+        "The system achieves significant token reduction by storing only distilled information instead of full conversations"
+      ],
+      "decisions": [
+        "We implemented the ContextDB system based on arXiv paper 2603",
+        "13017 about memory distillation",
+        "The team decided to use a 3-level hierarchy for context management: task, session, and project levels"
+      ],
+      "key_facts": [
+        "We implemented the ContextDB system based on arXiv paper 2603",
+        "13017 about memory distillation",
+        "The team decided to use a 3-level hierarchy for context management: task, session, and project levels",
+        "We added MemoryDistiller class that extracts entities, actions, decisions, and facts from conversations",
+        "The system achieves significant token reduction by storing only distilled information instead of full conversations"
+      ],
+      "lessons": [
+        "We implemented the ContextDB system based on arXiv paper 2603",
+        "13017 about memory distillation",
+        "The team decided to use a 3-level hierarchy for context management: task, session, and project levels"
+      ],
+      "original_tokens": 107,
+      "distilled_tokens": 186,
+      "reduction_ratio": 0.5752688172043011
+    },
+    {
+      "entities": [
+        "User",
+        "The",
+        "Tools",
+        "Cognition",
+        "Third",
+        "Coordinator",
+        "Second",
+        "Innovator",
+        "First",
+        "Lessons",
+        "Persona",
+        "Today",
+        "Meta"
+      ],
+      "actions": [
+        "Today we optimized the 7-Persona system with three major improvements",
+        "First, we adjusted the Coordinator role to remove mandatory rest suggestions per user preference",
+        "Second, we established confidence thresholds for Innovator auto-execution: >=90% auto, 70-89% quick confirm, <70% full review",
+        "Third, we implemented Meta-Cognition real-time monitoring every 30 minutes with automatic alerts",
+        "Tools created: meta_cognition_monitor"
+      ],
+      "decisions": [
+        "Today we optimized the 7-Persona system with three major improvements",
+        "First, we adjusted the Coordinator role to remove mandatory rest suggestions per user preference",
+        "Second, we established confidence thresholds for Innovator auto-execution: >=90% auto, 70-89% quick confirm, <70% full review"
+      ],
+      "key_facts": [
+        "Today we optimized the 7-Persona system with three major improvements",
+        "First, we adjusted the Coordinator role to remove mandatory rest suggestions per user preference",
+        "Second, we established confidence thresholds for Innovator auto-execution: >=90% auto, 70-89% quick confirm, <70% full review",
+        "Third, we implemented Meta-Cognition real-time monitoring every 30 minutes with automatic alerts",
+        "Tools created: meta_cognition_monitor"
+      ],
+      "lessons": [
+        "Today we optimized the 7-Persona system with three major improvements",
+        "First, we adjusted the Coordinator role to remove mandatory rest suggestions per user preference",
+        "Second, we established confidence thresholds for Innovator auto-execution: >=90% auto, 70-89% quick confirm, <70% full review"
+      ],
+      "original_tokens": 93,
+      "distilled_tokens": 203,
+      "reduction_ratio": 0.458128078817734
+    },
+    {
+      "entities": [
+        "Score",
+        "Combined",
+        "Lesson",
+        "Altman",
+        "Critical",
+        "Phase",
+        "Beneish",
+        "Stock",
+        "Piotroski",
+        "Testing",
+        "Safe",
+        "Feishu",
+        "Decision",
+        "Fact",
+        "Analyzer",
+        "Multi",
+        "Integrate",
+        "Danger"
+      ],
+      "actions": [
+        "Stock Analyzer Phase 3 implementation completed with financial fraud detection and risk monitoring",
+        "fraud_detector",
+        "py implements three classic models: Beneish M-Score (8 variables), Altman Z-Score (5 variables), Piotroski F-Score (9 variables)",
+        "risk_monitor",
+        "py tracks four risk dimensions: volatility (30% weight), correlation (25%), liquidity (20%), valuation (25%)"
+      ],
+      "decisions": [
+        "Stock Analyzer Phase 3 implementation completed with financial fraud detection and risk monitoring",
+        "fraud_detector",
+        "py implements three classic models: Beneish M-Score (8 variables), Altman Z-Score (5 variables), Piotroski F-Score (9 variables)"
+      ],
+      "key_facts": [
+        "Stock Analyzer Phase 3 implementation completed with financial fraud detection and risk monitoring",
+        "fraud_detector",
+        "py implements three classic models: Beneish M-Score (8 variables), Altman Z-Score (5 variables), Piotroski F-Score (9 variables)",
+        "risk_monitor",
+        "py tracks four risk dimensions: volatility (30% weight), correlation (25%), liquidity (20%), valuation (25%)"
+      ],
+      "lessons": [
+        "Stock Analyzer Phase 3 implementation completed with financial fraud detection and risk monitoring",
+        "fraud_detector",
+        "py implements three classic models: Beneish M-Score (8 variables), Altman Z-Score (5 variables), Piotroski F-Score (9 variables)"
+      ],
+      "original_tokens": 98,
+      "distilled_tokens": 172,
+      "reduction_ratio": 0.5697674418604651
+    }
+  ],
+  "average_reduction": 0.5343881126275001
+}

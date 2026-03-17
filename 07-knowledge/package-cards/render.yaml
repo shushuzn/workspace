@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: knowledge-card-generator
+    env: python
+    region: singapore
+    plan: free
+    buildCommand: "pip install --upgrade pip && pip install -r requirements.txt"
+    startCommand: "python core/knowledge-card-webui.py"
+    healthCheckPath: /
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: PORT
+        value: 10000

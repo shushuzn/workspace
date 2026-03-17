@@ -1,0 +1,51 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+env/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 测试文件
+tests/test_output/
+*.log
+
+# 大文件
+*.pdf
+*.zip
+*.tar.gz
+OpenClaw-RL/
+knowledge-card-android/
+*.mp4
+*.mov
+
+# 临时文件
+*.tmp
+*.bak
+
+# 环境变量 (敏感信息)
+.env
+.env.local
+.env.*.local
+!.env.example
+!.env.opensea
+models/  
+"data/cache/"  
+"data/papers/"  
+security_backups/  
+.env.auto  

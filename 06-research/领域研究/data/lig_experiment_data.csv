@@ -1,0 +1,4 @@
+sample_id,date,P_W,v_mms,E_Jcm2,co_ratio,precursor,sigma_Sm,sigma_std,method,uncertainty,notes,source
+EXP-001,2026-03-10,0.30,30,10.0,3.3,PI,2520,25,4-probe,±2%,good quality,experiment
+EXP-002,2026-03-10,0.35,25,14.0,3.3,PI,3180,30,4-probe,±2%,high conductivity,experiment
+EXP-003,2026-03-11,0.40,20,20.0,3.3,PI,3850,40,4-probe,±2%,very high power,experiment

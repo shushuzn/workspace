@@ -1,0 +1,16 @@
+# 关系提取规则
+relations:
+  belongs_to:
+    source_type: material
+    target_type: category
+    rule: "paper.category == category.name"
+  
+  authored_by:
+    source_type: material
+    target_type: author
+    rule: "paper.author in author.name"
+  
+  cites:
+    source_type: material
+    target_type: material
+    rule: "paper.cites in material.arxiv_id"

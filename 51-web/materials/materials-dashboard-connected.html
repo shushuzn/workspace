@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materials Dashboard - 材料科学仪表板</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #f5f5f5; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        h1 { color: #333; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .card { background: white; border-radius: 8px; padding: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        .card h2 { color: #666; font-size: 14px; margin-bottom: 10px; }
+        .card .value { font-size: 32px; font-weight: bold; color: #333; }
+        .card .desc { color: #999; font-size: 12px; margin-top: 5px; }
+        .status { display: inline-block; padding: 4px 12px; border-radius: 12px; font-size: 12px; margin-top: 10px; }
+        .status.good { background: #d4edda; color: #155724; }
+        .actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        .btn { background: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px; cursor: pointer; text-decoration: none; display: inline-block; }
+        .btn:hover { background: #0056b3; }
+        .btn-secondary { background: #6c757d; }
+        .btn-success { background: #28a745; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; font-weight: 600; }
+        .loading { text-align: center; padding: 40px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔬 Materials Dashboard - 材料科学仪表板</h1>
+        
+        <!-- 关键指标 -->
+        <div class="grid">
+            <div class="card">
+                <h2>📊 材料总数</h2>
+                <div class="value" id="material-count">-</div>
+                <div class="desc">从 API 获取</div>
+                <span class="status good" id="api-status">连接中...</span>
+            </div>
+            <div class="card">
+                <h2>🧠 知识观点</h2>
+                <div class="value">185+</div>
+                <div class="desc">MEMORY.md</div>
+                <span class="status good">✅ 正常</span>
+            </div>
+            <div class="card">
+                <h2>📁 交付文档</h2>
+                <div class="value">88</div>
+                <div class="desc">脚本 + 文档</div>
+                <span class="status good">✅ 正常</span>
+            </div>
+            <div class="card">
+                <h2>⚙️ 系统状态</h2>
+                <div class="value" id="system-status">-</div>
+                <div class="desc">API 健康检查</div>
+                <span class="status good" id="health-status">检查中...</span>
+            </div>
+        </div>
+
+        <!-- 快捷操作 -->
+        <div class="card" style="margin-bottom: 20px;">
+            <h2>⚡ 快捷操作</h2>
+            <div class="actions" style="margin-top: 15px;">
+                <a href="crystal-viewer.html" class="btn">🔮 晶体结构</a>
+                <a href="materials-search.html" class="btn">🔍 材料搜索</a>
+                <a href="synthesis-pathway.html" class="btn">🧪 合成路径</a>
+                <a href="knowledge-graph.html" class="btn">🕸️ 知识图谱</a>
+                <a href="http://localhost:8000/docs" class="btn btn-secondary" target="_blank">📡 API 文档</a>
+            </div>
+        </div>
+
+        <!-- 最近材料 -->
+        <div class="card">
+            <h2>📄 最近材料</h2>
+            <div id="materials-list" class="loading">正在加载...</div>
+        </div>
+
+        <div style="margin-top: 20px; text-align: center; color: #999; font-size: 12px;">
+            Materials Dashboard v2.0 | 最后更新：<span id="last-update">-</span>
+        </div>
+    </div>
+
+    <script>
+        const API_BASE = 'http://localhost:8000';
+        
+        // 检查 API 健康
+        async function checkHealth() {
+            try {
+                const response = await fetch(`${API_BASE}/health`);
+                const data = await response.json();
+                document.getElementById('system-status').textContent = '🟢';
+                document.getElementById('health-status').textContent = '正常';
+                document.getElementById('health-status').className = 'status good';
+                return true;
+            } catch (error) {
+                document.getElementById('system-status').textContent = '🔴';
+                document.getElementById('health-status').textContent = 'API 未连接';
+                document.getElementById('health-status').className = 'status';
+                document.getElementById('health-status').style.background = '#f8d7da';
+                document.getElementById('health-status').style.color = '#721c24';
+                return false;
+            }
+        }
+        
+        // 加载材料统计
+        async function loadMaterialsStats() {
+            try {
+                const response = await fetch(`${API_BASE}/materials/stats`);
+                const data = await response.json();
+                document.getElementById('material-count').textContent = data.total || 0;
+                document.getElementById('api-status').textContent = '✅ 已连接';
+            } catch (error) {
+                document.getElementById('material-count').textContent = '0';
+                document.getElementById('api-status').textContent = '❌ 未连接';
+                document.getElementById('api-status').className = 'status';
+                document.getElementById('api-status').style.background = '#f8d7da';
+                document.getElementById('api-status').style.color = '#721c24';
+            }
+        }
+        
+        // 加载材料列表
+        async function loadMaterialsList() {
+            try {
+                const response = await fetch(`${API_BASE}/materials?limit=5`);
+                const materials = await response.json();
+                
+                const container = document.getElementById('materials-list');
+                if (materials.length === 0) {
+                    container.innerHTML = '<div class="loading">暂无材料数据</div>';
+                    return;
+                }
+                
+                let html = '<table><thead><tr><th>ID</th><th>化学式</th><th>带隙 (eV)</th><th>形成能 (eV/atom)</th></tr></thead><tbody>';
+                materials.forEach(mat => {
+                    html += `<tr>
+                        <td>${mat.id || '-'}</td>
+                        <td>${mat.formula || '-'}</td>
+                        <td>${mat.band_gap !== undefined ? mat.band_gap : '-'}</td>
+                        <td>${mat.formation_energy !== undefined ? mat.formation_energy : '-'}</td>
+                    </tr>`;
+                });
+                html += '</tbody></table>';
+                
+                container.innerHTML = html;
+            } catch (error) {
+                document.getElementById('materials-list').innerHTML = '<div class="loading">加载失败，请检查 API 服务</div>';
+            }
+        }
+        
+        // 页面加载时执行
+        window.onload = async function() {
+            document.getElementById('last-update').textContent = new Date().toLocaleString('zh-CN');
+            
+            const apiHealthy = await checkHealth();
+            if (apiHealthy) {
+                await loadMaterialsStats();
+                await loadMaterialsList();
+            }
+        };
+    </script>
+</body>
+</html>

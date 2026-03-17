@@ -1,0 +1,62 @@
+# 监控与告警配置
+monitoring:
+  # 监控目录
+  workflows_dir: "D:\\OpenClaw\\workspace\\workflows"
+  logs_dir: "D:\\OpenClaw\\workspace\\workflows\\logs"
+  
+  # 输出文件
+  output_dir: "D:\\OpenClaw\\workspace\\monitoring"
+  metrics_file: metrics.json
+  alerts_file: alerts.json
+  
+  # 告警阈值
+  thresholds:
+    processing_time_minutes: 30
+    pass_rate: 0.80
+    error_rate: 0.10
+  
+  # 告警级别
+  alert_levels:
+    critical:
+      - low_success_rate
+      - quality_gate_failed
+      - data_loss
+    error:
+      - workflow_failed
+      - high_error_rate
+      - anomaly_detected
+    warning:
+      - slow_processing
+      - high_resource_usage
+      - config_changed
+  
+  # 通知配置
+  notifications:
+    console: true
+    log_file: true
+    email: false
+    slack: false
+    sms: false
+    
+    email_config:
+      smtp_server: smtp.example.com
+      smtp_port: 587
+      from: monitoring@example.com
+      to:
+        - admin@example.com
+    
+    slack_config:
+      webhook_url: https://hooks.slack.com/services/xxx
+      channel: "#alerts"
+  
+  # 数据保留
+  retention:
+    metrics_days: 30
+    alerts_days: 90
+  
+  # 日志配置
+  logging:
+    level: INFO
+    file: logs/monitoring.log
+    max_size: 10MB
+    backup_count: 7

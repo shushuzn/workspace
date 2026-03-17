@@ -1,0 +1,118 @@
+{
+  "metadata": {
+    "created": "2026-03-05T00:11:18.421992",
+    "version": "2.0-enhanced",
+    "source": "OpenClaw Knowledge Graph"
+  },
+  "stats": {
+    "total_entities": 11,
+    "total_relations": 0,
+    "entity_types": {
+      "Concept": 4,
+      "Paper": 7
+    },
+    "relation_types": {},
+    "papers_with_summaries": 4
+  },
+  "entities": [
+    {
+      "id": "concept__0001",
+      "type": "Concept",
+      "properties": {
+        "name": "2026-03-02 16:40 - 系统",
+        "source_file": "memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "concept__0002",
+      "type": "Concept",
+      "properties": {
+        "name": "2026-03-02 16:45 - 系统",
+        "source_file": "memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "concept__0003",
+      "type": "Concept",
+      "properties": {
+        "name": "2026-03-02 17:20 - 系统",
+        "source_file": "memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "concept__0004",
+      "type": "Concept",
+      "properties": {
+        "name": "2026-03-02 23:16 - AI Research OS 系统",
+        "source_file": "memory\\2026-03-02.md"
+      }
+    },
+    {
+      "id": "paper_2602_23681",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2602.23681",
+        "source_file": "memory\\2026-03-03.md",
+        "title": "",
+        "authors": "",
+        "key_findings": [],
+        "methods": [],
+        "confidence": 0.3
+      }
+    },
+    {
+      "id": "paper_2501_12345",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2501.12345",
+        "source_file": "memory\\2026-03-03.md"
+      }
+    },
+    {
+      "id": "paper_2502_67890",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2502.67890",
+        "source_file": "memory\\2026-03-03.md"
+      }
+    },
+    {
+      "id": "paper_2603_00001",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2603.00001",
+        "source_file": "memory\\2026-03-03.md"
+      }
+    },
+    {
+      "id": "paper_2601_02163",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2601.02163",
+        "source_file": "memory\\2026-03-03.md"
+      }
+    },
+    {
+      "id": "paper_2602_23720",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2602.23720",
+        "source_file": "topics\\agentic-ai.md",
+        "title": "The Auton Agentic AI Framework",
+        "authors": "",
+        "key_findings": [],
+        "methods": [],
+        "confidence": 0.6
+      }
+    },
+    {
+      "id": "paper_2602_23367",
+      "type": "Paper",
+      "properties": {
+        "arxiv_id": "2602.23367",
+        "source_file": "topics\\agentic-ai.md"
+      }
+    }
+  ],
+  "relations": []
+}

@@ -1,0 +1,15 @@
+{
+  "tools": {
+    "auto_deploy": {
+      "count": 1,
+      "last_used": "2026-03-16T23:04:17.140942",
+      "queries": [
+        {
+          "query": "deploy website",
+          "timestamp": "2026-03-16T23:04:17.140944"
+        }
+      ]
+    }
+  },
+  "queries": []
+}

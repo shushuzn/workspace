@@ -1,0 +1,18 @@
+# arXiv/PubMed Daily — 2026-03-10
+
+**收集时间:** 2026-03-10 05:55  
+**数据源:** arXiv (11) | PubMed (0)  
+**类别:** cond-mat.mtrl-sci, cs.CV, cs.RO, physics.chem-ph, cs.SD, cs.LG, cs.CE, q-bio.QM, eess.SP, q-bio.NC, cs.CL, cs.AI  
+**总数:** 11 篇  
+**高优先级:** 2 篇 (≥3.0分)
+
+## 高优先级论文
+
+| 评分 | 来源 | 标题 | 作者 |
+|------|------|------|------|
+| 3.0 | arXiv | [BEVLM: Distilling Semantic Knowledge from LLMs int...](http://arxiv.org/abs/2603.06576v1) | Thomas Monninger et al. |
+| 3.0 | arXiv | [SUREON: A Benchmark and Vision-Language-Model for ...](http://arxiv.org/abs/2603.06570v1) | Alejandra Perez et al. |
+
+## 完整列表
+
+见 `arxiv-2026-03-10.json`

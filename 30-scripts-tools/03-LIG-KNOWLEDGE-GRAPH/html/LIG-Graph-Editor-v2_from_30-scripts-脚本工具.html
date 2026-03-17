@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIG 知识图谱 - 增强编辑器</title>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',Arial,sans-serif;background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);padding:20px}
+        .container{max-width:1800px;margin:0 auto;background:rgba(255,255,255,0.95);border-radius:12px;padding:30px;box-shadow:0 4px 20px rgba(0,0,0,0.2)}
+        h1{font-size:24px;color:#333;margin-bottom:20px;border-bottom:3px solid #667eea;padding-bottom:10px}
+        .intro{font-size:14px;color:#666;margin-bottom:20px;line-height:1.6}
+        .top-toolbar{background:#f5f5f5;padding:15px;border-radius:8px;margin-bottom:20px;display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+        .search-box{display:flex;gap:8px;align-items:center}
+        .search-box input{padding:8px 12px;border:1px solid #ddd;border-radius:4px;font-size:13px;width:200px}
+        .editor-container{display:grid;grid-template-columns:1fr 380px;gap:20px}
+        .canvas-panel{background:#fafafa;border:1px solid #e0e0e0;border-radius:8px;padding:15px;min-height:600px;position:relative}
+        .canvas-panel h3{font-size:15px;margin-bottom:10px;color:#333}
+        #graphCanvas{width:100%;height:550px;background:white;border-radius:4px;overflow:hidden}
+        .toolbar{position:absolute;top:20px;right:20px;background:white;padding:10px;border-radius:8px;box-shadow:0 2px 8px rgba(0,0,0,0.1);z-index:100}
+        .toolbar button{margin:5px 0;padding:8px 12px;font-size:12px;width:100%}
+        .side-panel{background:white;border:1px solid #e0e0e0;border-radius:8px;padding:15px;max-height:800px;overflow-y:auto}
+        .side-panel h3{font-size:15px;margin-bottom:15px;color:#333;border-bottom:2px solid #e0e0e0;padding-bottom:8px}
+        .tabs{display:flex;gap:5px;margin-bottom:15px;border-bottom:2px solid #e0e0e0}
+        .tab{padding:8px 12px;background:#f5f5f5;border:none;border-radius:4px 4px 0 0;cursor:pointer;font-size:12px}
+        .tab.active{background:#667eea;color:white}
+        .tab-content{display:none}
+        .tab-content.active{display:block}
+        .form-group{margin-bottom:15px}
+        .form-group label{display:block;font-size:13px;margin-bottom:5px;color:#555;font-weight:500}
+        .form-group input,.form-group select,.form-group textarea{width:100%;padding:8px;border:1px solid #ddd;border-radius:4px;font-size:13px}
+        .form-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+        button{background:#667eea;color:white;border:none;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:13px;transition:background 0.3s}
+        button:hover{background:#5568d3}button:disabled{background:#ccc;cursor:not-allowed}
+        button.add{background:#4caf50}button.add:hover{background:#45a049}
+        button.delete{background:#f44336}button.delete:hover{background:#e53935}
+        button.save{background:#2196f3}button.save:hover{background:#1976d2}
+        button.undo{background:#ff9800}button.undo:hover{background:#f57c00}
+        .status{padding:10px;background:#e3f2fd;border-radius:6px;margin-bottom:15px;font-size:13px;color:#1565c0;display:none}
+        .node-list{max-height:250px;overflow-y:auto;margin-top:10px}
+        .node-item{padding:8px;margin-bottom:8px;background:#f8f9fa;border-radius:4px;cursor:pointer;transition:background 0.2s;font-size:13px;display:flex;align-items:center;gap:8px}
+        .node-item:hover{background:#e8f0fe}
+        .node-item.selected{background:#667eea;color:white}
+        .node-item input[type="checkbox"]{margin:0}
+        .history-list{max-height:200px;overflow-y:auto;margin-top:10px}
+        .history-item{padding:6px;margin-bottom:4px;background:#f8f9fa;border-radius:4px;font-size:11px;color:#666}
+        .history-item .time{color:#999;font-size:10px}
+        .stats{background:#f8f9fa;padding:10px;border-radius:4px;margin-top:15px}
+        .stats .stat{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid #e0e0e0;font-size:12px}
+        .stats .stat:last-child{border-bottom:none}
+        .help-text{font-size:11px;color:#999;margin-top:5px}
+        .batch-actions{background:#fff3e0;padding:10px;border-radius:4px;margin-top:10px}
+        .batch-actions h4{font-size:12px;margin-bottom:8px;color:#e65100}
+        .selection-info{background:#e8f5e9;padding:10px;border-radius:4px;margin-bottom:15px}
+        .selection-info .count{font-weight:bold;color:#2e7d32}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>✏️ LIG 知识图谱 - 增强编辑器</h1>
+        <p class="intro">支持撤销/重做、批量操作、搜索、导入导出等高级功能。</p>
+        
+        <div class="status" id="status"></div>
+        
+        <div class="top-toolbar">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="🔍 搜索节点..." oninput="searchNodes()">
+                <button onclick="clearSearch()">❌ 清除</button>
+            </div>
+            <button onclick="undo()" class="undo" id="undoBtn" disabled>↩️ 撤销</button>
+            <button onclick="redo()" class="undo" id="redoBtn" disabled>↪️ 重做</button>
+            <button onclick="selectAll()">✅ 全选</button>
+            <button onclick="deleteSelected()" class="delete">🗑️ 批量删除</button>
+            <button onclick="importGraph()" class="save">📥 导入</button>
+            <button onclick="saveGraph()" class="save">💾 保存</button>
+            <input type="file" id="importFile" accept=".json" style="display:none" onchange="handleImport(event)">
+        </div>
+        
+        <div class="editor-container">
+            <div class="canvas-panel">
+                <h3>📊 图谱画布</h3>
+                <svg id="graphCanvas"></svg>
+                <div class="toolbar">
+                    <button onclick="addNode()" class="add">➕ 添加节点</button>
+                    <button onclick="addLink()">🔗 添加关系</button>
+                    <button onclick="autoLayout()">🔄 自动布局</button>
+                    <button onclick="loadSample()">📋 加载示例</button>
+                </div>
+            </div>
+            
+            <div class="side-panel">
+                <div class="tabs">
+                    <div class="tab active" onclick="switchTab('nodes')">📝 节点</div>
+                    <div class="tab" onclick="switchTab('edit')">✏️ 编辑</div>
+                    <div class="tab" onclick="switchTab('history')">📜 历史</div>
+                </div>
+                
+                <div class="tab-content active" id="nodes-tab">
+                    <div class="selection-info" id="selectionInfo" style="display:none">
+                        已选择 <span class="count" id="selectedCount">0</span> 个节点
+                    </div>
+                    <div class="node-list" id="nodeList"></div>
+                    <div class="stats" id="stats">
+                        <div class="stat"><span>节点数:</span><span id="nodeCount">0</span></div>
+                        <div class="stat"><span>关系数:</span><span id="linkCount">0</span></div>
+                        <div class="stat"><span>已选择:</span><span id="selectedCount2">0</span></div>
+                    </div>
+                    <div class="batch-actions" id="batchActions" style="display:none">
+                        <h4>批量操作</h4>
+                        <button onclick="batchChangeType()" style="width:100%;margin-bottom:5px">🔄 批量修改类型</button>
+                        <button onclick="clearSelection()" style="width:100%">❌ 取消选择</button>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="edit-tab">
+                    <div class="form-group">
+                        <label>ID *</label>
+                        <input type="text" id="editId" placeholder="节点 ID">
+                    </div>
+                    <div class="form-group">
+                        <label>标签</label>
+                        <input type="text" id="editLabel" placeholder="显示标签">
+                    </div>
+                    <div class="form-group">
+                        <label>类型</label>
+                        <select id="editType">
+                            <option value="Material">Material (材料)</option>
+                            <option value="Device">Device (设备)</option>
+                            <option value="Signal">Signal (信号)</option>
+                            <option value="Technology">Technology (技术)</option>
+                            <option value="Application">Application (应用)</option>
+                            <option value="Challenge">Challenge (挑战)</option>
+                            <option value="Pathway">Pathway (通路)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>大小</label>
+                        <input type="range" id="editSize" min="15" max="50" value="25">
+                        <div class="help-text">当前：<span id="sizeValue">25</span></div>
+                    </div>
+                    <div class="form-row">
+                        <button onclick="updateNode()" class="save">✅ 更新</button>
+                        <button onclick="clearSelection()">❌ 取消</button>
+                    </div>
+                    
+                    <h3 style="margin-top:20px">🔗 添加关系</h3>
+                    <div class="form-group">
+                        <label>源节点</label>
+                        <select id="linkSource"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>目标节点</label>
+                        <select id="linkTarget"></select>
+                    </div>
+                    <div class="form-group">
+                        <label>权重</label>
+                        <input type="number" id="linkWeight" min="1" max="10" value="3">
+                    </div>
+                    <button onclick="createLink()" class="add" style="width:100%">➕ 创建关系</button>
+                </div>
+                
+                <div class="tab-content" id="history-tab">
+                    <div class="history-list" id="historyList"></div>
+                    <div class="form-row" style="margin-top:15px">
+                        <button onclick="clearHistory()" class="delete">🗑️ 清空历史</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script>
+        let graphData = { nodes: [], links: [] };
+        let selectedNodes = new Set();
+        let simulation = null;
+        let history = [];
+        let historyIndex = -1;
+        let maxHistory = 50;
+        
+        const colorMap = {
+            "Material":"#FF6B6B",
+            "Device":"#4ECDC4",
+            "Signal":"#45B7D1",
+            "Technology":"#FFA07A",
+            "Application":"#98D8C8",
+            "Challenge":"#F7DC6F",
+            "Pathway":"#BB8FCE"
+        };
+        
+        const sampleData = {
+            nodes: [
+                {id:"LIG",label:"LIG",type:"Material",size:40,x:400,y:275},
+                {id:"PI",label:"PI",type:"Material",size:20,x:200,y:200},
+                {id:"PDMS",label:"PDMS",type:"Material",size:20,x:200,y:350},
+                {id:"Gas_Sensor",label:"气体传感器",type:"Device",size:25,x:600,y:200},
+                {id:"Neural_Probe",label:"神经探针",type:"Device",size:25,x:600,y:350}
+            ],
+            links: [
+                {source:"PI",target:"LIG",value:3},
+                {source:"PDMS",target:"LIG",value:2},
+                {source:"LIG",target:"Gas_Sensor",value:3},
+                {source:"LIG",target:"Neural_Probe",value:3}
+            ]
+        };
+        
+        function saveState() {
+            // 保存当前状态到历史
+            const state = {
+                nodes: JSON.parse(JSON.stringify(graphData.nodes)),
+                links: JSON.parse(JSON.stringify(graphData.links)),
+                timestamp: new Date().toISOString()
+            };
+            
+            // 删除当前索引之后的历史
+            history = history.slice(0, historyIndex + 1);
+            
+            // 添加新状态
+            history.push(state);
+            
+            // 限制历史长度
+            if (history.length > maxHistory) {
+                history.shift();
+            } else {
+                historyIndex++;
+            }
+            
+            updateHistoryUI();
+            updateUndoRedoButtons();
+        }
+        
+        function undo() {
+            if (historyIndex <= 0) return;
+            historyIndex--;
+            restoreState(history[historyIndex]);
+            showStatus('↩️ 已撤销');
+        }
+        
+        function redo() {
+            if (historyIndex >= history.length - 1) return;
+            historyIndex++;
+            restoreState(history[historyIndex]);
+            showStatus('↪️ 已重做');
+        }
+        
+        function restoreState(state) {
+            graphData = {
+                nodes: JSON.parse(JSON.stringify(state.nodes)),
+                links: JSON.parse(JSON.stringify(state.links))
+            };
+            selectedNodes.clear();
+            initGraph();
+            updateNodeList();
+            updateStats();
+            updateLinkSelects();
+            updateUndoRedoButtons();
+        }
+        
+        function updateUndoRedoButtons() {
+            document.getElementById('undoBtn').disabled = historyIndex <= 0;
+            document.getElementById('redoBtn').disabled = historyIndex >= history.length - 1;
+        }
+        
+        function updateHistoryUI() {
+            const list = document.getElementById('historyList');
+            list.innerHTML = '';
+            history.slice().reverse().forEach((state, i) => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                const time = new Date(state.timestamp).toLocaleTimeString();
+                div.innerHTML = `<div>状态 #${history.length - i}</div><div class="time">${time} - ${state.nodes.length}节点/${state.links.length}关系</div>`;
+                list.appendChild(div);
+            });
+        }
+        
+        function clearHistory() {
+            if (!confirm('确定要清空操作历史吗？')) return;
+            history = [];
+            historyIndex = -1;
+            updateHistoryUI();
+            updateUndoRedoButtons();
+            showStatus('🗑️ 历史已清空');
+        }
+        
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+        }
+        
+        function loadSample() {
+            saveState();
+            graphData = JSON.parse(JSON.stringify(sampleData));
+            initGraph();
+            updateNodeList();
+            updateStats();
+            updateLinkSelects();
+            showStatus('✅ 示例已加载');
+        }
+        
+        function initGraph() {
+            const svg = d3.select("#graphCanvas");
+            svg.selectAll("*").remove();
+            
+            const width = svg.node().clientWidth;
+            const height = svg.node().clientHeight;
+            
+            svg.append("defs").selectAll("marker")
+                .data(["end"])
+                .enter().append("marker")
+                .attr("id", "arrowhead")
+                .attr("viewBox", "0 -5 10 10")
+                .attr("refX", 25)
+                .attr("refY", 0)
+                .attr("markerWidth", 6)
+                .attr("markerHeight", 6)
+                .attr("orient", "auto")
+                .append("path")
+                .attr("fill", "#999")
+                .attr("d", "M0,-5L10,0L0,5");
+            
+            simulation = d3.forceSimulation(graphData.nodes)
+                .force("link", d3.forceLink(graphData.links).id(d => d.id).distance(150))
+                .force("charge", d3.forceManyBody().strength(-500))
+                .force("center", d3.forceCenter(width / 2, height / 2))
+                .force("collide", d3.forceCollide().radius(d => d.size + 5));
+            
+            const links = svg.append("g")
+                .selectAll("line")
+                .data(graphData.links)
+                .enter().append("line")
+                .attr("stroke", "#999")
+                .attr("stroke-width", d => Math.sqrt(d.value) * 2)
+                .attr("stroke-opacity", 0.6)
+                .attr("marker-end", "url(#arrowhead)");
+            
+            const nodes = svg.append("g")
+                .selectAll("circle")
+                .data(graphData.nodes)
+                .enter().append("circle")
+                .attr("r", d => d.size)
+                .attr("fill", d => colorMap[d.type] || "#999")
+                .attr("stroke", d => selectedNodes.has(d) ? "#ff9800" : "#fff")
+                .attr("stroke-width", d => selectedNodes.has(d) ? 4 : 2)
+                .style("cursor", "pointer")
+                .on("click", selectNode)
+                .call(d3.drag()
+                    .on("start", dragstarted)
+                    .on("drag", dragged)
+                    .on("end", dragended));
+            
+            const labels = svg.append("g")
+                .selectAll("text")
+                .data(graphData.nodes)
+                .enter().append("text")
+                .attr("dy", d => d.size + 15)
+                .attr("text-anchor", "middle")
+                .attr("fill", "#333")
+                .attr("font-size", "12px")
+                .attr("font-weight", "bold")
+                .text(d => d.label);
+            
+            simulation.on("tick", () => {
+                links
+                    .attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+                
+                nodes
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y)
+                    .attr("stroke", d => selectedNodes.has(d) ? "#ff9800" : "#fff");
+                
+                labels
+                    .attr("x", d => d.x)
+                    .attr("y", d => d.y);
+            });
+        }
+        
+        function dragstarted(event, d) {
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+        
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+        
+        function dragended(event, d) {
+            d.fx = null;
+            d.fy = null;
+        }
+        
+        function selectNode(event, d) {
+            if (event.ctrlKey || event.metaKey) {
+                // 多选
+                if (selectedNodes.has(d)) {
+                    selectedNodes.delete(d);
+                } else {
+                    selectedNodes.add(d);
+                }
+            } else {
+                // 单选
+                selectedNodes.clear();
+                selectedNodes.add(d);
+            }
+            
+            updateNodeList();
+            updateSelectionInfo();
+            
+            if (selectedNodes.size === 1) {
+                const node = Array.from(selectedNodes)[0];
+                fillEditForm(node);
+            }
+            
+            initGraph();
+        }
+        
+        function fillEditForm(node) {
+            document.getElementById('editId').value = node.id;
+            document.getElementById('editLabel').value = node.label;
+            document.getElementById('editType').value = node.type;
+            document.getElementById('editSize').value = node.size;
+            document.getElementById('sizeValue').textContent = node.size;
+        }
+        
+        function updateNodeList() {
+            const list = document.getElementById('nodeList');
+            list.innerHTML = '';
+            graphData.nodes.forEach(node => {
+                const div = document.createElement('div');
+                div.className = 'node-item';
+                if (selectedNodes.has(node)) div.classList.add('selected');
+                div.innerHTML = `
+                    <input type="checkbox" ${selectedNodes.has(node) ? 'checked' : ''} onclick="event.stopPropagation();toggleNodeSelection('${node.id}')">
+                    <span class="name">${node.label}</span>
+                    <span class="type">${node.type}</span>
+                `;
+                div.onclick = (e) => {
+                    if (e.target.type !== 'checkbox') {
+                        const event = { target: { __data__: node }, ctrlKey: false };
+                        selectNode(event, node);
+                    }
+                };
+                list.appendChild(div);
+            });
+        }
+        
+        function toggleNodeSelection(id) {
+            const node = graphData.nodes.find(n => n.id === id);
+            if (!node) return;
+            
+            if (selectedNodes.has(node)) {
+                selectedNodes.delete(node);
+            } else {
+                selectedNodes.add(node);
+            }
+            
+            updateNodeList();
+            updateSelectionInfo();
+            initGraph();
+        }
+        
+        function updateSelectionInfo() {
+            const info = document.getElementById('selectionInfo');
+            const batch = document.getElementById('batchActions');
+            const count = selectedNodes.size;
+            
+            document.getElementById('selectedCount').textContent = count;
+            document.getElementById('selectedCount2').textContent = count;
+            
+            info.style.display = count > 0 ? 'block' : 'none';
+            batch.style.display = count > 1 ? 'block' : 'none';
+        }
+        
+        function updateStats() {
+            document.getElementById('nodeCount').textContent = graphData.nodes.length;
+            document.getElementById('linkCount').textContent = graphData.links.length;
+        }
+        
+        function updateLinkSelects() {
+            const source = document.getElementById('linkSource');
+            const target = document.getElementById('linkTarget');
+            source.innerHTML = '';
+            target.innerHTML = '';
+            graphData.nodes.forEach(node => {
+                const option1 = document.createElement('option');
+                option1.value = node.id;
+                option1.textContent = node.label;
+                source.appendChild(option1);
+                const option2 = document.createElement('option');
+                option2.value = node.id;
+                option2.textContent = node.label;
+                target.appendChild(option2);
+            });
+        }
+        
+        function searchNodes() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            const items = document.querySelectorAll('.node-item');
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(query) ? 'flex' : 'none';
+            });
+        }
+        
+        function clearSearch() {
+            document.getElementById('searchInput').value = '';
+            searchNodes();
+        }
+        
+        function selectAll() {
+            graphData.nodes.forEach(node => selectedNodes.add(node));
+            updateNodeList();
+            updateSelectionInfo();
+            initGraph();
+            showStatus(`✅ 已选择 ${selectedNodes.size} 个节点`);
+        }
+        
+        function clearSelection() {
+            selectedNodes.clear();
+            updateNodeList();
+            updateSelectionInfo();
+            document.getElementById('editId').value = '';
+            document.getElementById('editLabel').value = '';
+            initGraph();
+        }
+        
+        function addNode() {
+            saveState();
+            const id = 'Node_' + Date.now();
+            const newNode = {
+                id: id,
+                label: id,
+                type: 'Material',
+                size: 25,
+                x: 400 + Math.random() * 100,
+                y: 275 + Math.random() * 100
+            };
+            graphData.nodes.push(newNode);
+            initGraph();
+            updateNodeList();
+            updateStats();
+            updateLinkSelects();
+            showStatus(`✅ 已添加节点：${id}`);
+        }
+        
+        function addLink() {
+            if (graphData.nodes.length < 2) {
+                showStatus('❌ 至少需要 2 个节点才能创建关系!');
+                return;
+            }
+            createLink();
+        }
+        
+        function createLink() {
+            saveState();
+            const source = document.getElementById('linkSource').value;
+            const target = document.getElementById('linkTarget').value;
+            const weight = parseInt(document.getElementById('linkWeight').value);
+            
+            if (source === target) {
+                showStatus('❌ 源节点和目标节点不能相同!');
+                return;
+            }
+            
+            const exists = graphData.links.some(l => l.source === source && l.target === target);
+            if (exists) {
+                showStatus('❌ 关系已存在!');
+                return;
+            }
+            
+            graphData.links.push({ source, target, value: weight });
+            initGraph();
+            updateStats();
+            showStatus(`✅ 已添加关系：${source} → ${target}`);
+        }
+        
+        function deleteSelected() {
+            if (selectedNodes.size === 0) {
+                showStatus('❌ 请先选择要删除的节点!');
+                return;
+            }
+            
+            if (!confirm(`确定要删除选中的 ${selectedNodes.size} 个节点及其所有关系吗？`)) return;
+            
+            saveState();
+            const idsToDelete = new Set(Array.from(selectedNodes).map(n => n.id));
+            
+            graphData.nodes = graphData.nodes.filter(n => !idsToDelete.has(n.id));
+            graphData.links = graphData.links.filter(l => !idsToDelete.has(l.source) && !idsToDelete.has(l.target));
+            
+            selectedNodes.clear();
+            initGraph();
+            updateNodeList();
+            updateStats();
+            updateLinkSelects();
+            updateSelectionInfo();
+            showStatus(`🗑️ 已删除 ${idsToDelete.size} 个节点`);
+        }
+        
+        function updateNode() {
+            if (selectedNodes.size !== 1) {
+                showStatus('❌ 请选择一个节点进行更新!');
+                return;
+            }
+            
+            saveState();
+            const node = Array.from(selectedNodes)[0];
+            const id = document.getElementById('editId').value;
+            const label = document.getElementById('editLabel').value;
+            const type = document.getElementById('editType').value;
+            const size = parseInt(document.getElementById('editSize').value);
+            
+            if (id !== node.id && graphData.nodes.some(n => n.id === id)) {
+                showStatus('❌ ID 已存在!');
+                return;
+            }
+            
+            node.id = id;
+            node.label = label;
+            node.type = type;
+            node.size = size;
+            
+            graphData.links.forEach(l => {
+                if (l.source === node.id) l.source = id;
+                if (l.target === node.id) l.target = id;
+            });
+            
+            selectedNodes.clear();
+            selectedNodes.add(node);
+            
+            initGraph();
+            updateNodeList();
+            updateLinkSelects();
+            showStatus('✅ 节点已更新');
+        }
+        
+        function batchChangeType() {
+            if (selectedNodes.size === 0) return;
+            
+            const newType = prompt('输入新类型 (Material/Device/Signal/Technology/Application/Challenge/Pathway):');
+            if (!newType || !colorMap[newType]) {
+                showStatus('❌ 无效的类型!');
+                return;
+            }
+            
+            saveState();
+            selectedNodes.forEach(node => {
+                node.type = newType;
+            });
+            
+            initGraph();
+            updateNodeList();
+            showStatus(`✅ 已批量修改 ${selectedNodes.size} 个节点的类型`);
+        }
+        
+        function autoLayout() {
+            saveState();
+            const svg = d3.select("#graphCanvas");
+            const width = svg.node().clientWidth;
+            const height = svg.node().clientHeight;
+            
+            graphData.nodes.forEach((node, i) => {
+                const angle = (2 * Math.PI * i) / graphData.nodes.length;
+                const radius = Math.min(width, height) * 0.35;
+                node.x = width / 2 + radius * Math.cos(angle);
+                node.y = height / 2 + radius * Math.sin(angle);
+            });
+            
+            initGraph();
+            showStatus('🔄 已自动布局');
+        }
+        
+        function saveGraph() {
+            const json = JSON.stringify(graphData, null, 2);
+            const blob = new Blob([json], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `LIG-Graph-${new Date().toISOString().split('T')[0]}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            showStatus('💾 图谱已保存');
+        }
+        
+        function importGraph() {
+            document.getElementById('importFile').click();
+        }
+        
+        function handleImport(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+            
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                try {
+                    saveState();
+                    const data = JSON.parse(e.target.result);
+                    graphData = data;
+                    selectedNodes.clear();
+                    initGraph();
+                    updateNodeList();
+                    updateStats();
+                    updateLinkSelects();
+                    showStatus(`✅ 已导入 ${file.name}`);
+                } catch (error) {
+                    showStatus(`❌ 导入失败：${error.message}`);
+                }
+            };
+            reader.readAsText(file);
+            event.target.value = '';
+        }
+        
+        function showStatus(message) {
+            const status = document.getElementById('status');
+            status.textContent = message;
+            status.style.display = 'block';
+            setTimeout(() => {
+                status.style.display = 'none';
+            }, 3000);
+        }
+        
+        document.getElementById('editSize').addEventListener('input', function() {
+            document.getElementById('sizeValue').textContent = this.value;
+        });
+        
+        window.addEventListener('load', () => {
+            saveState(); // 保存初始状态
+            setTimeout(loadSample, 500);
+        });
+        
+        // 键盘快捷键
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                if (e.key === 'z') {
+                    e.preventDefault();
+                    if (e.shiftKey) {
+                        redo();
+                    } else {
+                        undo();
+                    }
+                } else if (e.key === 'a') {
+                    e.preventDefault();
+                    selectAll();
+                } else if (e.key === 's') {
+                    e.preventDefault();
+                    saveGraph();
+                }
+            } else if (e.key === 'Delete') {
+                deleteSelected();
+            }
+        });
+    </script>
+</body>
+</html>

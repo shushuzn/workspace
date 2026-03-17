@@ -1,0 +1,104 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-03-10",
+  "riskDimensions": {
+    "technicalCompetition": {
+      "enabled": true,
+      "priority": "CRITICAL",
+      "dataSources": ["PubMed", "arXiv"],
+      "thresholds": {
+        "papersPerWeek": 10,
+        "highImpactTeam": 3,
+        "citationsPerMonth": 10
+      },
+      "alerts": {
+        "red": "单一团队周产出≥3 篇 + 月引用≥10 次",
+        "yellow": "领域周论文≥10 篇",
+        "green": "正常"
+      }
+    },
+    "patentBarrier": {
+      "enabled": true,
+      "priority": "HIGH",
+      "dataSources": ["Google Patents", "USPTO", "WIPO"],
+      "thresholds": {
+        "corePatentsCovered": 5,
+        "majorCompanyPatents": 3
+      },
+      "alerts": {
+        "red": "核心方法被≥3 家大公司专利覆盖",
+        "yellow": "核心专利被垄断≥5 项",
+        "green": "正常"
+      }
+    },
+    "fundingFlow": {
+      "enabled": true,
+      "priority": "MEDIUM",
+      "dataSources": ["Crunchbase", "TechCrunch", "Google News"],
+      "thresholds": {
+        "competitorFunding": 5000000,
+        "acquisitionDeal": 1
+      },
+      "alerts": {
+        "red": "竞品融资≥$5M 或被大厂收购",
+        "yellow": "竞品融资≥$1M",
+        "green": "正常"
+      }
+    },
+    "talentFlow": {
+      "enabled": true,
+      "priority": "LOW",
+      "dataSources": ["PubMed Authors", "LinkedIn", "Google Scholar"],
+      "keyResearchers": [
+        "James M. Tour",
+        "Jong Min Kim",
+        "Chenglin Yan",
+        "Yilun Wang"
+      ],
+      "thresholds": {
+        "keyResearcherMove": 1,
+        "teamMigration": 3
+      },
+      "alerts": {
+        "red": "核心作者加入竞品公司",
+        "yellow": "≥3 人团队集体跳槽",
+        "green": "正常"
+      }
+    },
+    "policyChange": {
+      "enabled": true,
+      "priority": "CRITICAL",
+      "dataSources": ["Government Websites", "Trade Policy DB"],
+      "keywords": [
+        "graphene export control",
+        "nanomaterial restriction",
+        "LIG manufacturing ban",
+        "石墨烯出口管制",
+        "纳米材料限制"
+      ],
+      "thresholds": {
+        "policyAnnouncement": 1
+      },
+      "alerts": {
+        "red": "出口管制/制造限制政策发布",
+        "yellow": "政策征求意见/提案",
+        "green": "正常"
+      }
+    }
+  },
+  "reportSettings": {
+    "outputDir": "D:\\OpenClaw\\workspace\\21-reports\\lig-risk",
+    "formats": ["markdown", "html"],
+    "schedule": "daily",
+    "time": "07:00",
+    "emailNotification": false,
+    "includeRecommendations": true
+  },
+  "monitoringSchedule": {
+    "PubMed": "daily",
+    "arXiv": "daily",
+    "Google Patents": "weekly",
+    "Crunchbase": "weekly",
+    "Policy Watch": "daily"
+  }
+}

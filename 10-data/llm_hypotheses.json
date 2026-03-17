@@ -1,0 +1,76 @@
+{
+  "hypotheses": [
+    {
+      "title": "Enhanced autonomy Detection",
+      "description": "Improve detection accuracy for autonomy using advanced pattern matching",
+      "predicted_impact": 0.3,
+      "implementation_effort": "Medium",
+      "estimated_time": "4 hours",
+      "related_patterns": [
+        "Integration Pattern"
+      ],
+      "confidence": 0.7,
+      "priority": "P2",
+      "id": "HYP-TPL-001",
+      "generated_at": "2026-03-17T12:15:33.086083",
+      "method": "template",
+      "gap_id": "GAP-002",
+      "status": "pending"
+    },
+    {
+      "title": "Enhanced synthesis Detection",
+      "description": "Improve detection accuracy for synthesis using advanced pattern matching",
+      "predicted_impact": 0.3,
+      "implementation_effort": "Medium",
+      "estimated_time": "4 hours",
+      "related_patterns": [
+        "Integration Pattern"
+      ],
+      "confidence": 0.7,
+      "priority": "P2",
+      "id": "HYP-TPL-002",
+      "generated_at": "2026-03-17T12:15:39.245685",
+      "method": "template",
+      "gap_id": "GAP-003",
+      "status": "pending"
+    },
+    {
+      "title": "Enhanced autonomy Detection",
+      "description": "Improve detection accuracy for autonomy using advanced pattern matching",
+      "predicted_impact": 0.3,
+      "implementation_effort": "Medium",
+      "estimated_time": "4 hours",
+      "related_patterns": [
+        "Integration Pattern"
+      ],
+      "confidence": 0.7,
+      "priority": "P2",
+      "id": "HYP-TPL-003",
+      "generated_at": "2026-03-17T12:34:52.078536",
+      "method": "template",
+      "gap_id": "GAP-002",
+      "status": "pending"
+    },
+    {
+      "title": "Enhanced synthesis Detection",
+      "description": "Improve detection accuracy for synthesis using advanced pattern matching",
+      "predicted_impact": 0.3,
+      "implementation_effort": "Medium",
+      "estimated_time": "4 hours",
+      "related_patterns": [
+        "Integration Pattern"
+      ],
+      "confidence": 0.7,
+      "priority": "P2",
+      "id": "HYP-TPL-004",
+      "generated_at": "2026-03-17T12:34:58.223595",
+      "method": "template",
+      "gap_id": "GAP-003",
+      "status": "pending"
+    }
+  ],
+  "total_generated": 4,
+  "total_deployed": 0,
+  "last_generation": "2026-03-17T12:34:58.223607",
+  "model_used": "qwen2.5:1.5b"
+}

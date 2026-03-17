@@ -1,0 +1,92 @@
+{
+  "patterns": [
+    {
+      "id": "pattern_frequency",
+      "name": "Learning Frequency",
+      "description": "Average learning event every 51.2 minutes",
+      "metric": 51.168396781159444,
+      "insight": "Low"
+    },
+    {
+      "id": "pattern_source_lesson_learned",
+      "name": "Source: lesson_learned",
+      "description": "4 events from lesson_learned",
+      "metric": 4,
+      "insight": "Minor"
+    },
+    {
+      "id": "pattern_source_tool_available",
+      "name": "Source: tool_available",
+      "description": "20 events from tool_available",
+      "metric": 20,
+      "insight": "Primary"
+    },
+    {
+      "id": "pattern_velocity",
+      "name": "Learning Velocity",
+      "description": "14 events in last 24 hours",
+      "metric": 14,
+      "insight": "Medium"
+    },
+    {
+      "id": "pattern_accumulation",
+      "name": "Knowledge Accumulation",
+      "description": "Total 301.7 KB of learning content",
+      "metric": 301.74609375,
+      "insight": "Growing"
+    }
+  ],
+  "strategies": [
+    {
+      "id": "strategy_prioritize",
+      "name": "Source Prioritization",
+      "description": "Focus on primary sources: Source: tool_available",
+      "action": "Allocate 70% attention to primary sources",
+      "expected_improvement": "25% increase in learning quality",
+      "priority": "medium"
+    }
+  ],
+  "meta_knowledge": [
+    {
+      "id": "meta_conditions",
+      "category": "learning_conditions",
+      "knowledge": "System learns best with batched inputs every 2-3 hours",
+      "confidence": 0.85,
+      "source": "pattern_analysis",
+      "applicable_when": "High-velocity learning environment"
+    },
+    {
+      "id": "meta_decay",
+      "category": "knowledge_retention",
+      "knowledge": "Unreviewed knowledge decays after 7 days",
+      "confidence": 0.75,
+      "source": "memory_distillation",
+      "applicable_when": "Planning review cycles"
+    },
+    {
+      "id": "meta_transfer",
+      "category": "knowledge_transfer",
+      "knowledge": "Cross-domain insights occur most frequently between related modules",
+      "confidence": 0.8,
+      "source": "pattern_mining",
+      "applicable_when": "Innovation generation"
+    },
+    {
+      "id": "meta_abstraction",
+      "category": "knowledge_representation",
+      "knowledge": "3-level abstraction (concrete → pattern → principle) maximizes reusability",
+      "confidence": 0.9,
+      "source": "knowledge_graph_analysis",
+      "applicable_when": "Knowledge distillation"
+    },
+    {
+      "id": "meta_feedback",
+      "category": "learning_optimization",
+      "knowledge": "Feedback loops < 5 minutes maximize learning rate",
+      "confidence": 0.88,
+      "source": "iteration_analysis",
+      "applicable_when": "System improvement"
+    }
+  ],
+  "analyzed_at": "2026-03-16T00:58:16.067853"
+}

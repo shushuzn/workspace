@@ -1,0 +1,51 @@
+{
+  "reportSettings": {
+    "outputDir": "D:/OpenClaw/workspace/21-reports/lig-risk",
+    "format": ["markdown", "html"],
+    "schedule": "daily_7am"
+  },
+  "riskDimensions": {
+    "technicalCompetition": {
+      "enabled": true,
+      "thresholds": {
+        "papersPerWeek": 10
+      },
+      "sources": ["PubMed", "arXiv"]
+    },
+    "patentBarrier": {
+      "enabled": true,
+      "thresholds": {
+        "majorCompanyPatents": 5
+      },
+      "targetCompanies": ["Samsung", "BASF", "3M", "LG", "Huawei", "Sony", "Panasonic"]
+    },
+    "fundingFlow": {
+      "enabled": true,
+      "thresholds": {
+        "majorFundingRound": 10000000
+      },
+      "sources": ["Crunchbase", "PitchBook"]
+    },
+    "talentFlow": {
+      "enabled": true,
+      "keyResearchers": [
+        "James Tour",
+        "Yonghao Lin",
+        "Cheng Zhu",
+        "Jiawei Zhang",
+        "Li Liu"
+      ],
+      "trackingInterval": "weekly"
+    },
+    "policyChange": {
+      "enabled": true,
+      "sources": ["government_rss", "regulatory_filings"],
+      "regions": ["US", "EU", "CN"]
+    }
+  },
+  "alerts": {
+    "email": false,
+    "feishu": true,
+    "threshold": "YELLOW"
+  }
+}
