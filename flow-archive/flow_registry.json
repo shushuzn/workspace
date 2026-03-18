@@ -9,7 +9,16 @@
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-flow-isolation-001",
       "last_updated": "2026-03-18T22:12:24.562174",
       "archived_at": "2026-03-18T22:15:46.600321"
+    },
+    "20260318-test-usage-001": {
+      "business_name": "test-usage",
+      "description": "",
+      "created_at": "2026-03-18T22:20:55.814096",
+      "status": "archived",
+      "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-test-usage-001",
+      "last_updated": "2026-03-18T22:20:55.816064",
+      "archived_at": "2026-03-18T22:21:08.640735"
     }
   },
-  "last_updated": "2026-03-18T22:15:46.601098"
+  "last_updated": "2026-03-18T22:21:08.642218"
 }
