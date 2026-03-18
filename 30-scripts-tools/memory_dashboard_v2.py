@@ -38,7 +38,6 @@ if sys.platform == 'win32':
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-
 # ============================================================================
 # Configuration
 # ============================================================================
@@ -49,16 +48,15 @@ WORKSPACE = Path(r'D:\OpenClaw\workspace')
 DATA_DIR = WORKSPACE / 'data'
 REPORTS_DIR = WORKSPACE / '30-scripts-tools' / 'reports'
 
-
 # ============================================================================
 # Mock Data Generator (for demo)
 # ============================================================================
 
 def generate_mock_data() -> Dict[str, Any]:
     """Generate realistic mock data for dashboard"""
-    
+
     now = datetime.now()
-    
+
     # System health
     health = {
         'status': 'healthy',
@@ -68,7 +66,7 @@ def generate_mock_data() -> Dict[str, Any]:
         'total_runs': 1247,
         'success_rate': 94.2
     }
-    
+
     # Evolution metrics
     evolution = {
         'quality_score': 0.82,
@@ -77,7 +75,7 @@ def generate_mock_data() -> Dict[str, Any]:
         'conflicts_resolved': 23,
         'memories_distilled': 89
     }
-    
+
     # Phase metrics
     phases = {
         'P0': {
@@ -107,7 +105,7 @@ def generate_mock_data() -> Dict[str, Any]:
             'self_awareness': 0.85
         }
     }
-    
+
     # Trends (7 days)
     trends = {
         'dates': [(now - timedelta(days=i)).strftime('%Y-%m-%d') for i in range(7)][::-1],
@@ -115,7 +113,7 @@ def generate_mock_data() -> Dict[str, Any]:
         'associations': [120, 128, 135, 142, 148, 153, 156],
         'conflicts': [5, 3, 7, 4, 6, 2, 3]
     }
-    
+
     # Tool status
     tools = {
         'evolution': {'status': 'ready', 'last_run': '2h ago'},
@@ -125,14 +123,14 @@ def generate_mock_data() -> Dict[str, Any]:
         'dark_matter': {'status': 'scanning', 'last_run': '4h ago'},
         'consciousness': {'status': 'active', 'last_run': '15m ago'}
     }
-    
+
     # Alerts
     alerts = [
         {'level': 'info', 'message': 'Daily distillation completed', 'time': '6:00 AM'},
         {'level': 'success', 'message': 'Quality score improved to 0.82', 'time': '5:30 AM'},
         {'level': 'warning', 'message': '3 conflicts detected in P1 memories', 'time': 'Yesterday'}
     ]
-    
+
     return {
         'health': health,
         'evolution': evolution,
@@ -143,21 +141,20 @@ def generate_mock_data() -> Dict[str, Any]:
         'timestamp': now.isoformat()
     }
 
-
 # ============================================================================
 # HTTP Request Handler
 # ============================================================================
 
 class DashboardHandler(SimpleHTTPRequestHandler):
     """Custom HTTP handler for dashboard"""
-    
+
     def __init__(self, *args, **kwargs):
         self.mock_data = generate_mock_data()
         super().__init__(*args, **kwargs)
-    
+
     def do_GET(self):
         """Handle GET requests"""
-        
+
         if self.path == '/':
             self.send_html(DASHBOARD_HTML)
         elif self.path == '/api/data':
@@ -170,7 +167,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
             self.send_json({'status': 'healthy', 'timestamp': datetime.now().isoformat()})
         else:
             super().do_GET()
-    
+
     def send_json(self, data: Dict):
         """Send JSON response"""
         self.send_response(200)
@@ -178,7 +175,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         self.wfile.write(json.dumps(data, indent=2).encode('utf-8'))
-    
+
     def send_html(self, html: str):
         """Send HTML response"""
         self.send_response(200)
@@ -186,11 +183,10 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         self.wfile.write(html.encode('utf-8'))
-    
+
     def log_message(self, format, *args):
         """Custom log format"""
         logger.info(f"Dashboard: {args[0]}")
-
 
 # ============================================================================
 # Dashboard HTML (Inline for single-file deployment)
@@ -237,7 +233,9 @@ DASHBOARD_HTML = """
         .tab-btn.active { background: white; color: #667eea; font-weight: bold; }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit,
+            minmax(300px,
+            1fr)); gap: 20px; margin-bottom: 20px; }
         .card {
             background: white;
             padding: 20px;
@@ -263,7 +261,10 @@ DASHBOARD_HTML = """
         .phase-p1 { border-left-color: #17a2b8; }
         .phase-p2 { border-left-color: #6f42c1; }
         .phase-p3 { border-left-color: #e83e8c; }
-        .refresh-timer { position: fixed; bottom: 20px; right: 20px; background: white; padding: 10px 20px; border-radius: 20px; box-shadow: 0 2px 4px rgba(0,0,0,0.2); font-size: 14px; }
+        .refresh-timer { position: fixed; bottom: 20px; right: 20px; background: white; padding: 10px 20px; border-radius: 20px; box-shadow: 0 2px 4px rgba(0,
+            0,
+            0,
+            0.2); font-size: 14px; }
         .export-btn { background: #667eea; color: white; border: none; padding: 8px 16px; border-radius: 5px; cursor: pointer; margin-left: 10px; }
     </style>
 </head>
@@ -277,7 +278,7 @@ DASHBOARD_HTML = """
                 <button class="export-btn" onclick="exportData()">📊 Export JSON</button>
             </div>
         </div>
-        
+
         <div class="tabs">
             <button class="tab-btn active" onclick="showTab('overview')">Overview</button>
             <button class="tab-btn" onclick="showTab('evolution')">Evolution</button>
@@ -288,7 +289,7 @@ DASHBOARD_HTML = """
             <button class="tab-btn" onclick="showTab('trends')">Trends</button>
             <button class="tab-btn" onclick="showTab('settings')">Settings</button>
         </div>
-        
+
         <!-- Overview Tab -->
         <div id="overview" class="tab-content active">
             <div class="grid">
@@ -313,7 +314,7 @@ DASHBOARD_HTML = """
                     <div class="metric-label">Last: <span id="last-run">-</span></div>
                 </div>
             </div>
-            
+
             <div class="grid">
                 <div class="card">
                     <h3>Recent Alerts</h3>
@@ -325,7 +326,7 @@ DASHBOARD_HTML = """
                 </div>
             </div>
         </div>
-        
+
         <!-- Evolution Tab -->
         <div id="evolution" class="tab-content">
             <div class="grid">
@@ -353,7 +354,7 @@ DASHBOARD_HTML = """
                 </div>
             </div>
         </div>
-        
+
         <!-- P0 Tab -->
         <div id="p0" class="tab-content">
             <div class="grid">
@@ -371,7 +372,7 @@ DASHBOARD_HTML = """
                 </div>
             </div>
         </div>
-        
+
         <!-- P1 Tab -->
         <div id="p1" class="tab-content">
             <div class="grid">
@@ -402,7 +403,7 @@ DASHBOARD_HTML = """
                 </div>
             </div>
         </div>
-        
+
         <!-- P2 Tab -->
         <div id="p2" class="tab-content">
             <div class="grid">
@@ -420,7 +421,7 @@ DASHBOARD_HTML = """
                 </div>
             </div>
         </div>
-        
+
         <!-- P3 Tab -->
         <div id="p3" class="tab-content">
             <div class="grid">
@@ -451,7 +452,7 @@ DASHBOARD_HTML = """
                 </div>
             </div>
         </div>
-        
+
         <!-- Trends Tab -->
         <div id="trends" class="tab-content">
             <div class="grid">
@@ -475,7 +476,7 @@ DASHBOARD_HTML = """
                 </div>
             </div>
         </div>
-        
+
         <!-- Settings Tab -->
         <div id="settings" class="tab-content">
             <div class="card">
@@ -497,17 +498,17 @@ DASHBOARD_HTML = """
             </div>
         </div>
     </div>
-    
+
     <div class="refresh-timer">
         Auto-refresh in: <span id="countdown">10</span>s
     </div>
-    
+
     <script>
         let dashboardData = null;
         let refreshInterval = 10;
         let countdown = refreshInterval;
         let charts = {};
-        
+
         // Tab switching
         function showTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
@@ -515,7 +516,7 @@ DASHBOARD_HTML = """
             document.getElementById(tabId).classList.add('active');
             event.target.classList.add('active');
         }
-        
+
         // Fetch data
         async function fetchData() {
             try {
@@ -526,13 +527,13 @@ DASHBOARD_HTML = """
                 console.error('Error fetching data:', error);
             }
         }
-        
+
         // Update dashboard
         function updateDashboard() {
             if (!dashboardData) return;
-            
+
             const { health, evolution, phases, trends, tools, alerts } = dashboardData;
-            
+
             // Overview
             document.getElementById('health-status').textContent = health.status.toUpperCase();
             document.getElementById('uptime').textContent = health.uptime;
@@ -541,47 +542,47 @@ DASHBOARD_HTML = """
             document.getElementById('quality-score').textContent = evolution.quality_score.toFixed(2);
             document.getElementById('next-run').textContent = new Date(health.next_run).toLocaleTimeString();
             document.getElementById('last-run').textContent = new Date(health.last_run).toLocaleTimeString();
-            
+
             // Alerts
             const alertsContainer = document.getElementById('alerts-container');
-            alertsContainer.innerHTML = alerts.map(alert => 
+            alertsContainer.innerHTML = alerts.map(alert =>
                 `<div class="alert alert-${alert.level}">${alert.message} <small>(${alert.time})</small></div>`
             ).join('');
-            
+
             // Tools
             const toolsContainer = document.getElementById('tools-container');
-            toolsContainer.innerHTML = Object.entries(tools).map(([id, info]) => 
+            toolsContainer.innerHTML = Object.entries(tools).map(([id, info]) =>
                 `<div class="tool-status">
                     <strong>${id}</strong>
                     <span class="status-badge status-${info.status}">${info.status}</span>
                 </div>`
             ).join('');
-            
+
             // Evolution
             document.getElementById('evo-quality').textContent = evolution.quality_score.toFixed(2);
             document.getElementById('evo-associations').textContent = evolution.associations.toLocaleString();
             document.getElementById('evo-conflicts').textContent = evolution.conflicts_resolved.toLocaleString();
             document.getElementById('evo-distilled').textContent = evolution.memories_distilled.toLocaleString();
-            
+
             // P0
             document.getElementById('p0-threats').textContent = phases.P0.immune_threats.toLocaleString();
             document.getElementById('p0-neutralized').textContent = phases.P0.immune_neutralized.toLocaleString();
             document.getElementById('p0-connections').textContent = phases.P0.neural_connections.toLocaleString();
             document.getElementById('p0-strength').textContent = phases.P0.synaptic_strength.toFixed(2);
-            
+
             // P1
             document.getElementById('p1-dark-matter').textContent = phases.P1.dark_matter_found.toLocaleString();
             document.getElementById('p1-topology').textContent = phases.P1.topological_features.toLocaleString();
             document.getElementById('p1-entropy').textContent = phases.P1.entropy_level.toFixed(2);
             document.getElementById('p1-fractal').textContent = phases.P1.fractal_dimension.toFixed(2);
             document.getElementById('p1-causal').textContent = phases.P1.causal_links.toLocaleString();
-            
+
             // P2
             document.getElementById('p2-entangled').textContent = phases.P2.entangled_pairs.toLocaleString();
             document.getElementById('p2-bell').textContent = phases.P2.bell_violation.toFixed(2);
             document.getElementById('p2-phase').textContent = phases.P2.time_crystal_phase.toUpperCase();
             document.getElementById('p2-coherence').textContent = phases.P2.coherence_time.toFixed(2);
-            
+
             // P3
             document.getElementById('p3-consciousness').textContent = phases.P3.consciousness_level.toFixed(2);
             document.getElementById('p3-phi').textContent = phases.P3.phi_value.toFixed(3);
@@ -589,11 +590,11 @@ DASHBOARD_HTML = """
             document.getElementById('p3-hot').textContent = phases.P3.hot_levels;
             document.getElementById('p3-emergent').textContent = phases.P3.emergent_properties;
             document.getElementById('p3-self').textContent = phases.P3.self_awareness.toFixed(2);
-            
+
             // Charts
             updateCharts(trends, evolution);
         }
-        
+
         function getPhiGrade(phi) {
             if (phi >= 0.5) return 'A';
             if (phi >= 0.4) return 'B';
@@ -601,7 +602,7 @@ DASHBOARD_HTML = """
             if (phi >= 0.2) return 'C';
             return 'D';
         }
-        
+
         // Update charts
         function updateCharts(trends, evolution) {
             // Forgetting curve
@@ -626,7 +627,7 @@ DASHBOARD_HTML = """
                     options: { responsive: true, maintainAspectRatio: false }
                 });
             }
-            
+
             // Quality trend
             if (charts.quality) {
                 charts.quality.data.datasets[0].data = trends.quality;
@@ -649,7 +650,7 @@ DASHBOARD_HTML = """
                     options: { responsive: true, maintainAspectRatio: false }
                 });
             }
-            
+
             // Associations
             if (charts.associations) {
                 charts.associations.data.datasets[0].data = trends.associations;
@@ -669,7 +670,7 @@ DASHBOARD_HTML = """
                     options: { responsive: true, maintainAspectRatio: false }
                 });
             }
-            
+
             // Conflicts
             if (charts.conflicts) {
                 charts.conflicts.data.datasets[0].data = trends.conflicts;
@@ -690,7 +691,7 @@ DASHBOARD_HTML = """
                 });
             }
         }
-        
+
         // Export data
         function exportData() {
             if (!dashboardData) return;
@@ -702,7 +703,7 @@ DASHBOARD_HTML = """
             a.click();
             URL.revokeObjectURL(url);
         }
-        
+
         // Update refresh interval
         function updateRefresh() {
             refreshInterval = parseInt(document.getElementById('refresh-interval').value);
@@ -711,7 +712,7 @@ DASHBOARD_HTML = """
                 startCountdown();
             }
         }
-        
+
         // Countdown timer
         function startCountdown() {
             setInterval(() => {
@@ -724,7 +725,7 @@ DASHBOARD_HTML = """
                 }
             }, 1000);
         }
-        
+
         // Initialize
         fetchData();
         startCountdown();
@@ -733,14 +734,13 @@ DASHBOARD_HTML = """
 </html>
 """
 
-
 # ============================================================================
 # Main Entry Point
 # ============================================================================
 
 def start_dashboard():
     """Start the dashboard server"""
-    
+
     print("\n" + "=" * 60)
     print("🧠 Memory Evolution Dashboard v2")
     print("=" * 60)
@@ -748,19 +748,18 @@ def start_dashboard():
     print(f"Auto-refresh: {AUTO_REFRESH_SECONDS} seconds")
     print(f"Workspace: {WORKSPACE}")
     print("\nPress Ctrl+C to stop\n")
-    
+
     # Open browser
     threading.Timer(1.5, lambda: webbrowser.open(f'http://localhost:{PORT}')).start()
-    
+
     # Start server
     server = HTTPServer(('localhost', PORT), DashboardHandler)
-    
+
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         print("\n\nShutting down dashboard...")
         server.shutdown()
-
 
 if __name__ == '__main__':
     start_dashboard()

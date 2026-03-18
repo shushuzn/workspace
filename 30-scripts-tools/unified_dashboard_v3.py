@@ -57,11 +57,11 @@ WORKSPACE = Path(__file__).parent.parent
 
 class UnifiedDashboardData:
     """Collect data from all dashboard sources"""
-    
+
     def __init__(self):
         self.data = {}
         self.last_update = None
-    
+
     def collect_all(self):
         """Collect all metrics"""
         self.data = {
@@ -77,7 +77,7 @@ class UnifiedDashboardData:
         }
         self.last_update = datetime.now()
         return self.data
-    
+
     def _collect_system_health(self):
         """System health metrics"""
         try:
@@ -85,13 +85,13 @@ class UnifiedDashboardData:
             cpu = psutil.cpu_percent(interval=0.5)
             mem = psutil.virtual_memory().percent
             disk = psutil.disk_usage(str(WORKSPACE)).percent
-            
+
             # Health score
             score = 100
             if cpu > 80: score -= 20
             if mem > 80: score -= 20
             if disk > 90: score -= 20
-            
+
             return {
                 'cpu_percent': cpu,
                 'memory_percent': mem,
@@ -107,13 +107,13 @@ class UnifiedDashboardData:
                 'health_score': 100,
                 'status': 'unknown'
             }
-    
+
     def _collect_memory_system(self):
         """Memory system metrics"""
         memory_file = WORKSPACE / "MEMORY.md"
         search_index = WORKSPACE / "data" / "memory_search_index.json"
         memory_dir = WORKSPACE / "memory"
-        
+
         # MEMORY.md stats
         if memory_file.exists():
             with open(memory_file, 'r', encoding='utf-8') as f:
@@ -123,19 +123,19 @@ class UnifiedDashboardData:
             mtime = datetime.fromtimestamp(memory_file.stat().st_mtime)
         else:
             size_kb, lines, mtime = 0, 0, None
-        
+
         # Search index
         search_sections = 0
         if search_index.exists():
             with open(search_index, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 search_sections = data.get('total_sections', 0)
-        
+
         # Memory file count
         mem_count = 0
         if memory_dir.exists():
             mem_count = len([f for f in memory_dir.iterdir() if f.suffix == '.md' and not f.name.startswith('_')])
-        
+
         return {
             'file_size_kb': size_kb,
             'lines': lines,
@@ -144,12 +144,12 @@ class UnifiedDashboardData:
             'memory_files': mem_count,
             'quality_score': 100 if size_kb > 0 else 0
         }
-    
+
     def _collect_persona_system(self):
         """7-Persona system metrics"""
         dashboard_api = WORKSPACE / "dashboard-api-v4-persona.py"
         start_script = WORKSPACE / "start-dashboard-v4-persona.bat"
-        
+
         return {
             'personas': ['Planner', 'Executor', 'Critic', 'Learner', 'Coordinator', 'Innovator', 'Metacognition'],
             'count': 7,
@@ -158,29 +158,29 @@ class UnifiedDashboardData:
             'dashboard': 'v4.1-Persona',
             'port': 8448
         }
-    
+
     def _collect_innovation(self):
         """Innovation tracking metrics"""
         tools_dir = WORKSPACE / "30-scripts-tools"
-        
+
         py_files = 0
         if tools_dir.exists():
             py_files = len([f for f in tools_dir.iterdir() if f.suffix == '.py' and not f.name.startswith('_')])
-        
+
         # Innovation score from MEMORY.md
         innovation_score = 119.8  # Current from session
-        
+
         return {
             'python_files': py_files,
             'innovation_score': innovation_score,
             'phase': 'Phase 5: Access Tracking',
             'last_milestone': 'Context Compression (-53% memory files)'
         }
-    
+
     def _collect_production(self):
         """Production monitor metrics"""
         state_file = WORKSPACE / "20-data-reports" / "production_monitor_state.json"
-        
+
         systems = {
             'memory_core': {'status': 'unknown', 'health': 0},
             'autonomous_engine': {'status': 'unknown', 'health': 0},
@@ -189,7 +189,7 @@ class UnifiedDashboardData:
             'arxiv_collector': {'status': 'unknown', 'health': 0},
             'distillation_system': {'status': 'unknown', 'health': 0}
         }
-        
+
         if state_file.exists():
             try:
                 with open(state_file, 'r', encoding='utf-8') as f:
@@ -197,22 +197,22 @@ class UnifiedDashboardData:
                     systems = data.get('systems', systems)
             except:
                 pass
-        
+
         # Calculate overall health
         health_scores = [s.get('health', 0) for s in systems.values()]
         avg_health = sum(health_scores) / len(health_scores) if health_scores else 0
-        
+
         return {
             'systems': systems,
             'system_count': len(systems),
             'avg_health': round(avg_health, 1),
             'status': 'healthy' if avg_health >= 80 else 'warning' if avg_health >= 60 else 'critical'
         }
-    
+
     def _collect_tasks(self):
         """Task manager metrics"""
         task_file = WORKSPACE / "TODO.md"
-        
+
         tasks = {'todo': 0, 'doing': 0, 'done': 0}
         if task_file.exists():
             with open(task_file, 'r', encoding='utf-8') as f:
@@ -220,10 +220,10 @@ class UnifiedDashboardData:
                 tasks['todo'] = content.count('[ ]')
                 tasks['doing'] = content.count('[~]')
                 tasks['done'] = content.count('[x]')
-        
+
         total = tasks['todo'] + tasks['doing'] + tasks['done']
         completion = round(tasks['done'] / total * 100, 1) if total > 0 else 0
-        
+
         return {
             'todo': tasks['todo'],
             'doing': tasks['doing'],
@@ -231,15 +231,15 @@ class UnifiedDashboardData:
             'total': total,
             'completion_rate': completion
         }
-    
+
     def _collect_heartbeat(self):
         """HEARTBEAT automation metrics"""
         state_file = WORKSPACE / "memory" / "heartbeat-state.json"
         heartbeat_md = WORKSPACE / "HEARTBEAT.md"
-        
+
         last_check = 'Never'
         checks_today = 0
-        
+
         if state_file.exists():
             try:
                 with open(state_file, 'r', encoding='utf-8') as f:
@@ -250,7 +250,7 @@ class UnifiedDashboardData:
                         last_check = datetime.fromtimestamp(latest).strftime('%Y-%m-%d %H:%M')
             except:
                 pass
-        
+
         return {
             'status': 'active' if heartbeat_md.exists() else 'inactive',
             'last_check': last_check,
@@ -258,7 +258,7 @@ class UnifiedDashboardData:
             'interval': '30 minutes',
             'next_check': 'Auto'
         }
-    
+
     def _generate_summary(self):
         """Generate executive summary"""
         return {
@@ -276,7 +276,6 @@ class UnifiedDashboardData:
             ]
         }
 
-
 # ============================================================================
 # HTTP Server
 # ============================================================================
@@ -285,7 +284,7 @@ dashboard_data = UnifiedDashboardData()
 
 class DashboardHandler(SimpleHTTPRequestHandler):
     """HTTP request handler"""
-    
+
     def do_GET(self):
         """Handle GET requests"""
         if self.path == '/api/data':
@@ -294,7 +293,7 @@ class DashboardHandler(SimpleHTTPRequestHandler):
             self.send_json({'status': 'ok', 'timestamp': datetime.now().isoformat()})
         else:
             self.send_html(get_dashboard_html())
-    
+
     def send_json(self, data):
         """Send JSON response"""
         self.send_response(200)
@@ -302,14 +301,13 @@ class DashboardHandler(SimpleHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         self.wfile.write(json.dumps(data, ensure_ascii=False).encode('utf-8'))
-    
+
     def send_html(self, html):
         """Send HTML response"""
         self.send_response(200)
         self.send_header('Content-Type', 'text/html; charset=utf-8')
         self.end_headers()
         self.wfile.write(html.encode('utf-8'))
-
 
 def get_dashboard_html():
     """Generate dashboard HTML"""
@@ -447,7 +445,7 @@ def get_dashboard_html():
             <button class="refresh-btn" onclick="refreshData()" style="margin-left: 12px;">Refresh</button>
         </div>
     </div>
-    
+
     <div class="tabs">
         <button class="tab active" onclick="switchTab('overview')">Overview</button>
         <button class="tab" onclick="switchTab('system')">System Health</button>
@@ -458,7 +456,7 @@ def get_dashboard_html():
         <button class="tab" onclick="switchTab('tasks')">Tasks</button>
         <button class="tab" onclick="switchTab('heartbeat')">HEARTBEAT</button>
     </div>
-    
+
     <div class="content">
         <!-- Overview Tab -->
         <div id="overview" class="tab-content active">
@@ -505,7 +503,7 @@ def get_dashboard_html():
                 </div>
             </div>
         </div>
-        
+
         <!-- System Health Tab -->
         <div id="system" class="tab-content">
             <div class="grid">
@@ -531,7 +529,7 @@ def get_dashboard_html():
                 </div>
             </div>
         </div>
-        
+
         <!-- Memory System Tab -->
         <div id="memory" class="tab-content">
             <div class="grid">
@@ -549,7 +547,7 @@ def get_dashboard_html():
                 </div>
             </div>
         </div>
-        
+
         <!-- 7-Persona Tab -->
         <div id="persona" class="tab-content">
             <div class="grid">
@@ -566,7 +564,7 @@ def get_dashboard_html():
                 </div>
             </div>
         </div>
-        
+
         <!-- Innovation Tab -->
         <div id="innovation" class="tab-content">
             <div class="grid">
@@ -579,12 +577,12 @@ def get_dashboard_html():
                 </div>
             </div>
         </div>
-        
+
         <!-- Production Tab -->
         <div id="production" class="tab-content">
             <div class="grid" id="production-systems"></div>
         </div>
-        
+
         <!-- Tasks Tab -->
         <div id="tasks" class="tab-content">
             <div class="grid">
@@ -597,7 +595,7 @@ def get_dashboard_html():
                 </div>
             </div>
         </div>
-        
+
         <!-- HEARTBEAT Tab -->
         <div id="heartbeat" class="tab-content">
             <div class="grid">
@@ -610,17 +608,17 @@ def get_dashboard_html():
             </div>
         </div>
     </div>
-    
+
     <script>
         let data = null;
-        
+
         function switchTab(tabId) {
             document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
             document.getElementById(tabId).classList.add('active');
             event.target.classList.add('active');
         }
-        
+
         async function refreshData() {
             try {
                 const response = await fetch('/api/data');
@@ -630,18 +628,18 @@ def get_dashboard_html():
                 console.error('Failed to fetch data:', e);
             }
         }
-        
+
         function updateUI(data) {
             // Timestamp
             document.getElementById('timestamp').textContent = new Date(data.timestamp).toLocaleString();
-            
+
             // Overview
             document.getElementById('north-star').textContent = data.summary.north_star.toFixed(1);
             document.getElementById('overall-status').innerHTML = '<span class="status ' + data.summary.overall_status + '">' + data.summary.overall_status.charAt(0).toUpperCase() + data.summary.overall_status.slice(1) + '</span>';
-            
+
             const highlights = data.summary.key_highlights.map(h => '<div style="margin-top: 8px; font-size: 13px;">• ' + h + '</div>').join('');
             document.getElementById('highlights').innerHTML = highlights;
-            
+
             // System Health
             const sh = data.system_health;
             document.getElementById('cpu').textContent = sh.cpu_percent.toFixed(1) + '%';
@@ -655,7 +653,7 @@ def get_dashboard_html():
             document.getElementById('disk-bar').style.width = sh.disk_percent + '%';
             document.getElementById('health-score').textContent = sh.health_score.toFixed(0);
             document.getElementById('health-status').innerHTML = '<span class="status ' + sh.status + '">' + sh.status.charAt(0).toUpperCase() + sh.status.slice(1) + '</span>';
-            
+
             // Memory
             const ms = data.memory_system;
             document.getElementById('memory-size').textContent = ms.file_size_kb + ' KB';
@@ -667,61 +665,63 @@ def get_dashboard_html():
             document.getElementById('mem-search').textContent = ms.search_sections;
             document.getElementById('mem-count').textContent = ms.memory_files;
             document.getElementById('mem-quality').textContent = ms.quality_score + '/100';
-            
+
             // Persona
             const ps = data.persona_system;
             document.getElementById('persona-status').innerHTML = '<span class="status ' + ps.status + '">' + ps.status + '</span>';
             document.getElementById('persona-count').textContent = ps.count + ' personas';
             document.getElementById('persona-score').textContent = ps.execution_score + '/100';
             document.getElementById('persona-dash').textContent = ps.dashboard;
-            document.getElementById('persona-list').innerHTML = ps.personas.map(p => '<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.1);">• ' + p + '</div>').join('');
-            
+            document.getElementById('persona-list').innerHTML = ps.personas.map(p => '<div style="padding: 8px 0; border-bottom: 1px solid rgba(255,
+                255,
+                255,
+                0.1);">• ' + p + '</div>').join('');
+
             // Innovation
             const inv = data.innovation;
             document.getElementById('innov-score').textContent = inv.innovation_score.toFixed(1) + '/100';
             document.getElementById('innov-files').textContent = inv.python_files;
             document.getElementById('innov-phase').textContent = inv.phase;
             document.getElementById('innov-milestone').textContent = inv.last_milestone;
-            
+
             // Production
             const prod = data.production;
-            const prodHtml = Object.entries(prod.systems).map(([name, sys]) => 
+            const prodHtml = Object.entries(prod.systems).map(([name, sys]) =>
                 '<div class="card"><h3>' + name.replace('_', ' ').toUpperCase() + '</h3>' +
                 '<div style="font-size: 24px; margin-bottom: 8px;"><span class="status ' + sys.status + '">' + sys.status + '</span></div>' +
                 '<div class="progress-bar"><div class="progress-fill" style="width: ' + sys.health + '%"></div></div>' +
                 '<div style="margin-top: 8px; opacity: 0.7;">Health: ' + sys.health + '%</div></div>'
             ).join('');
             document.getElementById('production-systems').innerHTML = prodHtml;
-            
+
             // Tasks
             const tasks = data.tasks;
             document.getElementById('task-todo').textContent = tasks.todo;
             document.getElementById('task-doing').textContent = tasks.doing;
             document.getElementById('task-done').textContent = tasks.done;
             document.getElementById('task-rate').textContent = tasks.completion_rate + '%';
-            
+
             // HEARTBEAT
             const hb = data.heartbeat;
             document.getElementById('hb-status').innerHTML = '<span class="status ' + hb.status + '">' + hb.status + '</span>';
             document.getElementById('hb-last').textContent = hb.last_check;
             document.getElementById('hb-interval').textContent = hb.interval;
         }
-        
+
         // Initial load
         refreshData();
-        
+
         // Auto-refresh every 10 seconds
         setInterval(refreshData, 10000);
     </script>
 </body>
 </html>'''
 
-
 def run_server():
     """Run dashboard server"""
     server = socketserver.TCPServer(("", PORT), DashboardHandler)
     server.allow_reuse_address = True
-    
+
     print("=" * 60)
     print(f"🎯 Unified Dashboard v3.0")
     print("=" * 60)
@@ -730,16 +730,15 @@ def run_server():
     print(f"⚡ Refresh: {REFRESH_INTERVAL}s")
     print(f"🛑 Stop: Ctrl+C")
     print("=" * 60)
-    
+
     # Open browser
     threading.Thread(target=lambda: webbrowser.open(f"http://localhost:{PORT}"), daemon=True).start()
-    
+
     try:
         server.serve_forever()
     except KeyboardInterrupt:
         print("\n👋 Dashboard stopped")
         server.shutdown()
-
 
 if __name__ == "__main__":
     import argparse
@@ -747,9 +746,9 @@ if __name__ == "__main__":
     parser.add_argument('--start', action='store_true', help='Start dashboard server')
     parser.add_argument('--status', action='store_true', help='Show current status')
     parser.add_argument('--demo', action='store_true', help='Run demo mode')
-    
+
     args = parser.parse_args()
-    
+
     if args.start:
         run_server()
     elif args.status:
