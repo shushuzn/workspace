@@ -1,0 +1,31 @@
+{
+  "timestamp": "2026-03-18T17:54:11.276578",
+  "checks": [
+    {
+      "check": "Entry Count",
+      "passed": false
+    },
+    {
+      "check": "Tag Statistics",
+      "passed": true
+    },
+    {
+      "check": "Broken Links",
+      "passed": true
+    },
+    {
+      "check": "Duplicates",
+      "passed": true
+    },
+    {
+      "check": "Orphaned Entries",
+      "passed": false
+    }
+  ],
+  "summary": {
+    "total": 5,
+    "passed": 3,
+    "failed": 2,
+    "status": "FAIL"
+  }
+}
