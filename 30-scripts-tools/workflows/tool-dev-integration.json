@@ -1,0 +1,120 @@
+{
+  "workflow_id": "tool-dev-integration",
+  "name": "Tool Development & Integration Workflow",
+  "description": "工具开发与集成工作流 - 从创建到部署全流程自动化",
+  "version": "1.0",
+  "last_updated": "2026-03-18",
+  "principles": [
+    "所有工具开发必须通过此工作流",
+    "禁止手动修改 tools_registry.json",
+    "禁止手动修改 workflows/*.json",
+    "工具创建→测试→注册→集成→验证 全流程自动化"
+  ],
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "Tool Creation",
+      "description": "创建工具脚本文件",
+      "tool_id": "file-creator",
+      "stage": "development",
+      "parameters": {
+        "path": "${tool_path}",
+        "content": "${tool_content}"
+      },
+      "blocking": true,
+      "timeout_seconds": 30,
+      "note": "工具文件必须创建在 30-scripts-tools/"
+    },
+    {
+      "step_id": 2,
+      "name": "Tool Definition",
+      "description": "创建工具定义 JSON",
+      "tool_id": "file-creator",
+      "stage": "development",
+      "parameters": {
+        "path": "${tool_def_path}",
+        "content": "${tool_def_json}"
+      },
+      "blocking": true,
+      "timeout_seconds": 10,
+      "note": "工具定义包含 tool_id, command, parameters, validation"
+    },
+    {
+      "step_id": 3,
+      "name": "Tool Testing",
+      "description": "测试工具功能",
+      "tool_id": "tool-tester",
+      "stage": "development",
+      "parameters": {
+        "tool_id": "${tool_id}",
+        "test_args": "${test_args}"
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "note": "工具必须通过测试才能注册"
+    },
+    {
+      "step_id": 4,
+      "name": "Registry Registration",
+      "description": "注册到工具注册表",
+      "tool_id": "tool-registry-manager",
+      "stage": "integration",
+      "parameters": {
+        "action": "register",
+        "tool_def_file": "${tool_def_path}"
+      },
+      "blocking": true,
+      "timeout_seconds": 10,
+      "note": "自动更新 registry version"
+    },
+    {
+      "step_id": 5,
+      "name": "Workflow Integration",
+      "description": "集成到目标工作流",
+      "tool_id": "workflow-integrator",
+      "stage": "integration",
+      "parameters": {
+        "workflow_id": "${target_workflow}",
+        "tool_id": "${tool_id}",
+        "step_position": "${step_position}",
+        "step_config": "${step_config}"
+      },
+      "blocking": true,
+      "timeout_seconds": 30,
+      "note": "自动更新工作流版本和步骤"
+    },
+    {
+      "step_id": 6,
+      "name": "Registry Verification",
+      "description": "验证注册表完整性",
+      "tool_id": "tool-registry-manager",
+      "stage": "verification",
+      "parameters": {
+        "action": "verify"
+      },
+      "blocking": true,
+      "timeout_seconds": 30,
+      "note": "检查工具 ID 唯一性、文件存在性、必需字段"
+    },
+    {
+      "step_id": 7,
+      "name": "Git Commit",
+      "description": "提交更改到 Git",
+      "tool_id": "git-commit-push",
+      "stage": "deployment",
+      "parameters": {
+        "message": "${commit_message}"
+      },
+      "blocking": true,
+      "timeout_seconds": 30,
+      "note": "工具开发完成必须提交"
+    }
+  ],
+  "execution_order": "sequential",
+  "stop_on_blocking_failure": true,
+  "output": {
+    "format": "console",
+    "log_file": "30-scripts-tools/tool-dev-workflow-log.json",
+    "summary": true
+  }
+}

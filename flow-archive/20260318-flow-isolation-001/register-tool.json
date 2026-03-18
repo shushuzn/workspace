@@ -1,0 +1,5 @@
+{
+  "action": "register",
+  "tool_id": "flow-manager",
+  "tool_def_file": "30-scripts-tools/tools/flow-manager.json"
+}

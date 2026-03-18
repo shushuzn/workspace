@@ -356,13 +356,14 @@ class ToolExecutor:
             "returncode": result.returncode
         }
     
-    def execute_workflow(self, workflow_id: str, context: Dict = None) -> Dict:
+    def execute_workflow(self, workflow_id: str, context: Dict = None, flow_id: str = None) -> Dict:
         """
         执行工作流（只引用 tool_id，不硬编码）
         
         Args:
             workflow_id: 工作流唯一标识
             context: 上下文参数（如 commit_message）
+            flow_id: Flow ID for isolation (optional)
         
         Returns:
             工作流执行结果：{
@@ -375,6 +376,7 @@ class ToolExecutor:
             }
         """
         start_time = datetime.now()
+        self.flow_id = flow_id  # 保存 Flow ID 用于日志隔离
         
         workflow_file = WORKFLOWS_DIR / f"{workflow_id}.json"
         
@@ -462,6 +464,18 @@ class ToolExecutor:
         print_info(f"Passed: {summary['passed_steps']}")
         print_info(f"Execution time: {execution_time:.0f}ms")
         print_success("Workflow PASSED") if all_passed else print_error("Workflow FAILED")
+        
+        # Flow ID 隔离：专属日志保存
+        if self.flow_id:
+            log_dir = WORKSPACE / "flow-archive" / self.flow_id
+            log_dir.mkdir(parents=True, exist_ok=True)
+            log_file = log_dir / "execution-log.json"
+        else:
+            log_file = SCRIPTS_DIR / "workflow-execution-log.json"
+        
+        with open(log_file, 'w', encoding='utf-8') as f:
+            json.dump(summary, f, indent=2, ensure_ascii=False)
+        print_info(f"Log saved to: {log_file}")
         
         return summary
     
@@ -553,6 +567,7 @@ Examples:
     parser.add_argument("--task", type=str, help="Task name (for auto-critic)")
     parser.add_argument("--phase", type=str, help="Phase: start/mid/final")
     parser.add_argument("--context", type=str, help="Context JSON (for workflows)")
+    parser.add_argument("--flow_id", type=str, help="Flow ID for isolation")  # Flow ID 支持
     parser.add_argument("--validate-compliance", action="store_true", help="Validate compliance rules")
     parser.add_argument("--output-json", action="store_true", help="Output result as JSON")
     
@@ -577,7 +592,7 @@ Examples:
         
         if args.workflow:
             context = json.loads(args.context) if args.context else {}
-            result = executor.execute_workflow(args.workflow, context)
+            result = executor.execute_workflow(args.workflow, context, args.flow_id)
             if args.output_json:
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             sys.exit(0 if result["success"] else 1)

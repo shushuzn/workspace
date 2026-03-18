@@ -1,0 +1,64 @@
+{
+  "tool_id": "flow-manager",
+  "command": "py 30-scripts-tools/flow_manager.py ${args}",
+  "description": "Flow ID 管理器 - 创建/快照/恢复/归档工作流",
+  "version": "1.0.0",
+  "created_at": "2026-03-18",
+  "parameters": {
+    "create": {
+      "type": "string",
+      "description": "业务名称，用于生成 Flow ID",
+      "required": false
+    },
+    "description": {
+      "type": "string",
+      "description": "工作流描述",
+      "required": false
+    },
+    "snapshot": {
+      "type": "string",
+      "description": "Flow ID，保存状态快照",
+      "required": false
+    },
+    "restore": {
+      "type": "string",
+      "description": "Flow ID，恢复状态",
+      "required": false
+    },
+    "archive": {
+      "type": "string",
+      "description": "Flow ID，归档工作流",
+      "required": false
+    },
+    "list": {
+      "type": "boolean",
+      "description": "列出所有工作流",
+      "required": false
+    },
+    "variables": {
+      "type": "string",
+      "description": "变量 (JSON 格式)",
+      "required": false
+    },
+    "context": {
+      "type": "string",
+      "description": "上下文 (JSON 格式)",
+      "required": false
+    }
+  },
+  "examples": [
+    "py 30-scripts-tools/flow_manager.py --create memory-search --description '优化记忆搜索性能'",
+    "py 30-scripts-tools/flow_manager.py --snapshot 20260318-memory-search-001 --variables '{\"step\": 3}'",
+    "py 30-scripts-tools/flow_manager.py --restore 20260318-memory-search-001",
+    "py 30-scripts-tools/flow_manager.py --list",
+    "py 30-scripts-tools/flow_manager.py --archive 20260318-memory-search-001"
+  ],
+  "validation": {
+    "workspace_check": true,
+    "flow_archive_exists": true
+  },
+  "output": {
+    "format": "console",
+    "log_to_flow": true
+  }
+}

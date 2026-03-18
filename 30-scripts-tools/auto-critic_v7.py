@@ -547,6 +547,7 @@ def main():
                        choices=['start', 'mid', 'final'], help='审查阶段')
     parser.add_argument('--create-remediation', action='store_true', 
                        help='创建整改任务')
+    parser.add_argument('--flow_id', type=str, help='工作流唯一 ID')  # Flow ID 支持
     
     args = parser.parse_args()
     
@@ -566,7 +567,13 @@ def main():
     
     # 保存结果 (清理任务名中的特殊字符)
     safe_task_name = re.sub(r'[^\w\s-]', '', args.task).strip().replace(' ', '-')
-    output_file = SCRIPTS_DIR / f"critic-auto-{safe_task_name}-v7.json"
+    # Flow ID 隔离：专属目录保存审查结果
+    if args.flow_id:
+        output_dir = WORKSPACE / "flow-archive" / args.flow_id
+        output_dir.mkdir(parents=True, exist_ok=True)
+        output_file = output_dir / "review.json"
+    else:
+        output_file = SCRIPTS_DIR / f"critic-auto-{safe_task_name}-v7.json"
     output_file.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding='utf-8')
     print(f"\nReview saved to: {output_file}")
     
