@@ -161,99 +161,38 @@ Feedback Loop
 
 ## Tools & Infrastructure
 
-### Memory Distiller v2.0
-**Location:** `30-scripts-tools/memory_distiller_v2.py`
-- Quality-driven distillation (threshold ≥0.90)
-- Ebbinghaus forgetting curve
-- Conflict auto-resolution (80%+ rate)
-- Audit logging with rollback
+### Core Memory System
+- **Memory Utils** (`memory_utils.py`) - Health check, audit, indexer (58→46 tools consolidated)
+- **Git Pre-Check** (`git-precheck.py`) - 7 checks before commit (18K files in 30s)
+- **Memory Distiller v2** (`memory_distiller_v2.py`) - Quality-driven (≥0.90 threshold)
 
-### Autonomous Decision Engine
-**Location:** `30-scripts-tools/memory_engine_autonomous.py`
-- TaskPriority: CRITICAL/HIGH/MEDIUM/LOW/DEFERRED
-- DecisionMode: AUTONOMOUS/SEMI_AUTONOMOUS/MANUAL/EMERGENCY
-- Schedule: Every 30min (HEARTBEAT) + daily 06:00 + weekly Sunday 05:00 + monthly 1st 07:00
+### 7-Persona & Autonomy
+- **7-Persona Agent** (`memory_persona.py`) - 7 agents, collective decision making
+- **Autonomous Engine** (`memory_engine_autonomous.py`) - CRITICAL/HIGH/MEDIUM/LOW/DEFERRED
+- **Predictive Coding** (`memory_predictive_coding.py`) - 5-level hierarchical model
 
-### 7-Persona Agent System
-**Location:** `30-scripts-tools/memory_persona.py`
-- 7 independent agents with 10 message types
-- Collective decision making (proposal/voting)
-- Shared memory + collaboration loop
+### Monitoring & Operations
+- **Production Monitor v2** (`production_monitor_v2.py`) - Unified dashboard (localhost:8080)
+- **HEARTBEAT** (`heartbeat_production_check.py`) - 6 checks every 30min
+- **Git Pre-Check** (`git-precheck.py`) - Prevents 211+ submission errors
 
-### Predictive Coding Engine
-**Location:** `30-scripts-tools/memory_predictive_coding.py`
-- 5-level hierarchical generative model
-- 3 prediction types
-- Error-driven learning
-- State persistence
-
-### Production Monitor v2
-**Location:** `30-scripts-tools/production_monitor_v2.py`
-- Unified dashboard (localhost:8080)
-- 10-second auto-refresh
-- Chart.js visualization
-- Monitors 6 systems
-
-### HEARTBEAT Automation
-**Location:** `30-scripts-tools/heartbeat_production_check.py`
-- 6 automated checks every 30min
-- Health score ≥90% target
-- Alert thresholds: CPU<70%, Memory<75%, Error rate<5%
-
-### Knowledge Card Generator v2.5
-**Location:** `30-scripts/knowledge-card-generator.py`
-- PDF → structured HTML cards
-- Reference validation (CrossRef + arXiv API)
-- Web UI with Flask + Tailwind
-- API quota monitoring
-- LaTeX formula rendering
-
-### Git Pre-Check Tool (2026-03-18) ✨ NEW
-**Location:** `30-scripts-tools/git-precheck.py`
-- 7 checks: encoding, sensitive files, reports, large files, nested backups, duplicates, Chinese filenames
-- Performance: 18,346 files scanned in ~30s (quick mode)
-- CLI integration: 4 aliases (precheck, git check, git precheck, check before commit)
-- Value: Prevents 211+ submission errors, protects repository cleanliness
-
-### Memory Utils (2026-03-18) ✨ NEW
-**Location:** `30-scripts-tools/memory_utils.py`
-- Consolidated from 3 tools (audit, health, indexer)
-- Memory health scoring (target ≥90/100)
-- Audit reports with encoding validation
-- File count: 58 → 46 (-20.7% consolidation)
+*Full tool inventory: `30-scripts-tools/TOOLS-INVENTORY.md` (302 tools)*
 
 ---
 
 ## Innovation Milestones
 
-### Phase 1-2: Memory Cleanup (2026-03-17)
-- Batch distillation: 7 files, 354 insights, 100% success
-- Forgetting analysis: 8 files retained (0.90-1.00 quality)
-- **Innovation Score: 118.0/100** 🎯
-
-### Phase 6: Autonomy (2026-03-17)
-- Autonomous Decision Engine + 7-Persona Agents
-- 23 tests (95%+ pass rate)
-- Merged to master ✅
-- **Innovation Score: 105.0/100**
-
-### Phase 7: Predictive Coding (2026-03-17)
-- 5-level hierarchical model
-- 19/19 tests (100% pass)
-- **Innovation Score: 110.0/100**
+### Phase 10: Git Safety Tools (2026-03-18) ✨ LATEST
+- Git Pre-Check tool (7 checks, prevents 211+ errors)
+- Memory tools consolidation (58→46 files, -20.7%)
+- **Innovation Score: 120.0/100**
 
 ### Phase 9: Production Optimization (2026-03-17)
-- Memory Core v2.0 (4338.8 memories/second)
-- Unified monitoring dashboard
+- Memory Core v2.0 (4338.8 memories/sec)
 - HEARTBEAT automation (6/6 tests pass)
 - **Innovation Score: 117.0/100**
 
-### Phase 10: Git Safety Tools (2026-03-18) ✨ NEW
-- Git Pre-Check tool implemented (7 checks)
-- Prevents 211+ submission errors
-- CLI integration (4 aliases)
-- Memory tools consolidation (58→46 files, -20.7%)
-- **Innovation Score: 120.0/100**
+*Older milestones archived in daily notes*
 
 ---
 
@@ -262,76 +201,46 @@ Feedback Loop
 | Metric | Value | Date |
 |--------|-------|------|
 | Innovation Score | 120.0/100 | 2026-03-18 |
-| Test Coverage | 85% | 2026-03-17 |
-| Automation Level | 95% | 2026-03-17 |
-| Tool Count | 302 Python files | 2026-03-18 |
-| Memory Tools | 46 files (58→46, -20.7%) | 2026-03-18 |
 | Memory Health | 100/100 | 2026-03-18 |
-| Search Latency | 35.9ms avg | 2026-03-18 |
+| Tool Count | 302 files (46 memory tools) | 2026-03-18 |
+| Search Latency | 35.9ms | 2026-03-18 |
 | 7-Persona Execution | 96/100 | 2026-03-17 |
 
 ---
 
 ## Active Projects
 
-### 1. Git Security Cleanup ✅
-- Removed all .env files from history (1149 commits rewritten)
-- Git Firewall Proxy deployed (12/12 tests pass)
-- Token rotation pending (user action required)
-- Default branch changed to master
-
-### 2. Feishu Integration ✅
-- Message queue with priority (P0/P1/P2)
-- Card templates (6 types)
-- Approval workflow with escalation
-- Analytics dashboard (localhost:8080)
-- 23/23 tests pass (v1.0), 19/19 tests pass (v2.0)
-
-### 3. Tool Intelligence System 📋 (Proposed)
+### 1. Tool Intelligence System 📋 (Proposed)
 - Tool registry center
 - Similarity engine
 - Auto-integrator
 - Target: +8.0 innovation score
 
+*Completed projects archived in daily notes*
+
 ---
 
 ## Lessons Learned
 
-### Encoding Issues (2026-03-17)
-**Problem:** MEMORY.md had mixed UTF-8/GBK encoding
-**Symptom:** Chinese characters displayed as garbled text
-**Solution:** Manual recreation with pure UTF-8
-**Lesson:** Always verify encoding when creating/editing files
+### Memory Tool Consolidation (2026-03-18) ✨ LATEST
+**Problem:** 58 memory tools with duplicates (v1/v2/v3)  
+**Solution:** Consolidated to 46 tools (-20.7%)  
+**Lesson:** Regular consolidation reduces confusion
 
-### Git Permissions (2026-03-17)
-**Problem:** `[WinError 5] Access denied` when deleting folders
-**Cause:** Folder locked by system/antivirus
-**Solution:** Manual `rmdir /s /q` or reboot
-**Lesson:** Check for locks before file operations
+### Git Pre-Check Necessity (2026-03-18) ✨ LATEST
+**Problem:** 211 submission errors in workspace scan  
+**Solution:** Git Pre-Check tool with 7 checks  
+**Lesson:** Prevention > Correction (30s saves 30min)
 
-### File Naming Consistency
-**Problem:** Renamed files not updated in all references
-**Impact:** CI/CD pipeline failures
-**Solution:** Search and update all references before committing
-**Lesson:** Consistency checks before git commit
-
-### Testing Edge Cases
-**Problem:** 60% false positive rate in broken link detection
-**Cause:** Edge cases not considered
-**Solution:** Add boundary condition tests
+### Testing Edge Cases (2026-03-17)
+**Problem:** 60% false positive in broken link detection  
 **Lesson:** Test with edge cases before deployment
 
-### Git Pre-Check Necessity (2026-03-18) ✨ NEW
-**Problem:** 211 submission errors found in full workspace scan
-**Cause:** No pre-commit validation tool
-**Solution:** Git Pre-Check tool with 7 checks
-**Lesson:** Prevention > Correction (30s checking saves 30min fixing)
+### Encoding Issues (2026-03-17)
+**Problem:** MEMORY.md had mixed UTF-8/GBK encoding  
+**Lesson:** Always verify encoding when creating/editing files
 
-### Memory Tool Consolidation (2026-03-18) ✨ NEW
-**Problem:** 58 memory tools with duplicates (v1/v2/v3)
-**Cause:** Iterative development without cleanup
-**Solution:** Consolidated to 46 tools (-12, -20.7%)
-**Lesson:** Regular consolidation reduces confusion
+*Older lessons archived in daily notes*
 
 ---
 
