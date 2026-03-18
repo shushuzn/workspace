@@ -27,6 +27,7 @@ import sys
 import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional
+import subprocess
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -35,7 +36,7 @@ if sys.platform == 'win32':
     try:
         sys.stdout.reconfigure(encoding='utf-8')
     except:
-        os.system('chcp 65001 >nul')
+        subprocess.run(['chcp', '65001'], capture_output=True, shell=True)
 
 
 @dataclass

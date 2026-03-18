@@ -27,6 +27,7 @@ Commands:
 [INNOVATOR-027] 统一接口简化调用
 """
 
+import subprocess
 import sys
 import os
 import argparse
@@ -46,7 +47,7 @@ def cmd_dashboard(args):
     # 调用原 memory-dashboard.py
     dashboard_script = WORKSPACE / '30-scripts-tools' / 'memory-dashboard.py'
     if dashboard_script.exists():
-        os.system(f'python "{dashboard_script}"')
+        subprocess.run([sys.executable, str(dashboard_script)])
     else:
         print("[WARN] memory-dashboard.py not found")
         print("Showing basic stats...")
@@ -68,10 +69,10 @@ def cmd_distill(args):
     # 调用原 memory-distiller.py
     distill_script = WORKSPACE / '30-scripts-tools' / 'memory-distiller.py'
     if distill_script.exists():
-        cmd = f'python "{distill_script}"'
+        cmd = [sys.executable, str(distill_script)]
         if args.weekly:
-            cmd += ' --weekly'
-        os.system(cmd)
+            cmd.append('--weekly')
+        subprocess.run(cmd)
     else:
         print("[WARN] memory-distiller.py not found")
         print("Manual distillation required")
@@ -87,12 +88,12 @@ def cmd_maintain(args):
     # 调用原 memory-maintenance.py
     maintain_script = WORKSPACE / '30-scripts-tools' / 'memory-maintenance.py'
     if maintain_script.exists():
-        cmd = f'python "{maintain_script}"'
+        cmd = [sys.executable, str(maintain_script)]
         if args.daily:
-            cmd += ' --daily'
+            cmd.append('--daily')
         if args.weekly:
-            cmd += ' --weekly'
-        os.system(cmd)
+            cmd.append('--weekly')
+        subprocess.run(cmd)
     else:
         print("[WARN] memory-maintenance.py not found")
     
@@ -113,8 +114,8 @@ def cmd_assess(args):
     # 优先使用 memory_auto_fix.py (严格模式)
     fix_script = WORKSPACE / '30-scripts-tools' / 'memory_auto_fix.py'
     if fix_script.exists():
-        cmd = f'python "{fix_script}" --strict "{target}"'
-        os.system(cmd)
+        cmd = [sys.executable, str(fix_script), '--strict', target]
+        subprocess.run(cmd)
     else:
         print("[WARN] memory_auto_fix.py not found")
     
@@ -129,10 +130,10 @@ def cmd_search(args):
     # 调用原 memory-search-v2.py
     search_script = WORKSPACE / '30-scripts-tools' / 'memory-search-v2.py'
     if search_script.exists():
-        cmd = f'python "{search_script}"'
+        cmd = [sys.executable, str(search_script)]
         if args.query:
-            cmd += f' "{args.query}"'
-        os.system(cmd)
+            cmd.append(args.query)
+        subprocess.run(cmd)
     else:
         print("[WARN] memory-search-v2.py not found")
         print("Manual search required")
@@ -148,12 +149,12 @@ def cmd_fix(args):
     # 调用原 memory_auto_fix.py
     fix_script = WORKSPACE / '30-scripts-tools' / 'memory_auto_fix.py'
     if fix_script.exists():
-        cmd = f'python "{fix_script}"'
+        cmd = [sys.executable, str(fix_script)]
         if args.strict:
-            cmd += ' --strict'
+            cmd.append('--strict')
         if args.file:
-            cmd += f' "{args.file}"'
-        os.system(cmd)
+            cmd.append(args.file)
+        subprocess.run(cmd)
     else:
         print("[WARN] memory_auto_fix.py not found")
     
@@ -168,7 +169,7 @@ def cmd_health(args):
     # 调用原 memory_health_monitor.py
     health_script = WORKSPACE / '30-scripts-tools' / 'memory_health_monitor.py'
     if health_script.exists():
-        os.system(f'python "{health_script}"')
+        subprocess.run([sys.executable, str(health_script)])
     else:
         print("[WARN] memory_health_monitor.py not found")
         print("Basic health check...")

@@ -13,6 +13,7 @@ Usage:
 """
 
 import os
+import subprocess
 import sys
 import json
 import time
@@ -320,7 +321,7 @@ wshShell.Popup "{message}", 5, "OpenClaw Notification", 64
             with open(vbs_path, 'w', encoding='utf-8') as f:
                 f.write(vbs_content)
             
-            os.system(f'wscript "{vbs_path}"')
+            subprocess.run(['wscript', str(vbs_path)], capture_output=True)
             
             return {
                 'success': True,

@@ -1,12 +1,14 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "last_updated": "2026-03-18",
   "changes": [
     "Added auto-critic-v7 with issue detection and remediation tracking",
     "Added issue-scanner for comprehensive code scanning",
     "Added critical-issue-detector for high-risk issue detection",
     "Added remediation-tracker for FAIL item tracking",
-    "Added quality-gate for code quality checks"
+    "Added quality-gate for code quality checks",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement"
   ],
   "description": "唯一工具库 - 全系统唯一真值来源",
   "principles": [
@@ -32,7 +34,11 @@
           "type": "string",
           "required": true,
           "description": "审查阶段",
-          "enum": ["start", "mid", "final"],
+          "enum": [
+            "start",
+            "mid",
+            "final"
+          ],
           "default": "final"
         }
       },
@@ -49,7 +55,10 @@
           "检查项必须有证据"
         ]
       },
-      "triggers": ["session_end", "task_complete"],
+      "triggers": [
+        "session_end",
+        "task_complete"
+      ],
       "review_required": true,
       "blocking": false,
       "timeout_seconds": 60
@@ -66,7 +75,9 @@
         "daily_note_lines_limit": 100,
         "verify_with": "fast_load.py"
       },
-      "triggers": ["session_end"],
+      "triggers": [
+        "session_end"
+      ],
       "review_required": true,
       "blocking": true,
       "timeout_seconds": 30
@@ -90,7 +101,10 @@
           "13-memory/YYYY-MM-DD.md"
         ]
       },
-      "triggers": ["session_start", "session_end"],
+      "triggers": [
+        "session_start",
+        "session_end"
+      ],
       "review_required": true,
       "blocking": true,
       "timeout_seconds": 10
@@ -106,7 +120,9 @@
         "report_file": "30-scripts-tools/consistency_check_report.json",
         "consistency_threshold": 0.95
       },
-      "triggers": ["session_end"],
+      "triggers": [
+        "session_end"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 30
@@ -128,7 +144,9 @@
         },
         "schedule": "weekly_monday"
       },
-      "triggers": ["session_end"],
+      "triggers": [
+        "session_end"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 60,
@@ -162,7 +180,9 @@
         "min_results": 1,
         "index_file": "13-memory/memory_index.json"
       },
-      "triggers": ["session_end"],
+      "triggers": [
+        "session_end"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 10
@@ -178,7 +198,9 @@
         "index_file": "13-memory/memory_index.json",
         "min_entries": 10
       },
-      "triggers": ["session_compress"],
+      "triggers": [
+        "session_compress"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 30
@@ -202,9 +224,17 @@
       "validation": {
         "quality_threshold": 0.7,
         "importance_threshold": 0.5,
-        "strategies": ["distill_to_memory", "tiered_light", "tiered_standard", "tiered_heavy", "archive"]
+        "strategies": [
+          "distill_to_memory",
+          "tiered_light",
+          "tiered_standard",
+          "tiered_heavy",
+          "archive"
+        ]
       },
-      "triggers": ["weekly_sunday"],
+      "triggers": [
+        "weekly_sunday"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 60
@@ -226,11 +256,25 @@
         }
       },
       "validation": {
-        "grade_levels": ["A", "B", "C", "D", "F"],
-        "dimensions": ["completeness", "structure", "density", "actionability", "uniqueness"],
+        "grade_levels": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "F"
+        ],
+        "dimensions": [
+          "completeness",
+          "structure",
+          "density",
+          "actionability",
+          "uniqueness"
+        ],
         "total_score_max": 100
       },
-      "triggers": ["weekly_sunday"],
+      "triggers": [
+        "weekly_sunday"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 30
@@ -260,10 +304,19 @@
         }
       },
       "validation": {
-        "similarity_algorithm": ["jaccard", "sequence"],
-        "duplicate_types": ["exact", "near_duplicate", "partial"]
+        "similarity_algorithm": [
+          "jaccard",
+          "sequence"
+        ],
+        "duplicate_types": [
+          "exact",
+          "near_duplicate",
+          "partial"
+        ]
       },
-      "triggers": ["weekly_sunday"],
+      "triggers": [
+        "weekly_sunday"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 30
@@ -282,9 +335,15 @@
         }
       },
       "validation": {
-        "dimensions": ["actionability", "uniqueness", "recency", "impact", "connectedness"],
+        "dimensions": [
+          "actionability",
+          "uniqueness",
+          "recency",
+          "impact",
+          "connectedness"
+        ],
         "weights": {
-          "actionability": 0.20,
+          "actionability": 0.2,
           "uniqueness": 0.25,
           "recency": 0.15,
           "impact": 0.25,
@@ -292,7 +351,9 @@
         },
         "total_score_max": 1.0
       },
-      "triggers": ["session_compress"],
+      "triggers": [
+        "session_compress"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 10
@@ -317,7 +378,9 @@
         "algorithm": "LCS",
         "redundancy_threshold": 0.3
       },
-      "triggers": ["weekly_sunday"],
+      "triggers": [
+        "weekly_sunday"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 30
@@ -339,7 +402,11 @@
           "type": "string",
           "required": true,
           "description": "审查阶段",
-          "enum": ["start", "mid", "final"],
+          "enum": [
+            "start",
+            "mid",
+            "final"
+          ],
           "default": "final"
         }
       },
@@ -364,11 +431,19 @@
           "安全检查"
         ]
       },
-      "triggers": ["session_end", "task_complete"],
+      "triggers": [
+        "session_end",
+        "task_complete"
+      ],
       "review_required": true,
       "blocking": true,
       "timeout_seconds": 120,
-      "components": ["issue_scanner", "critical_issue_detector", "remediation_tracker", "quality_gate"]
+      "components": [
+        "issue_scanner",
+        "critical_issue_detector",
+        "remediation_tracker",
+        "quality_gate"
+      ]
     },
     "issue-scanner": {
       "tool_id": "issue-scanner",
@@ -387,15 +462,33 @@
           "type": "string",
           "required": false,
           "description": "输出格式",
-          "enum": ["text", "json"],
+          "enum": [
+            "text",
+            "json"
+          ],
           "default": "text"
         }
       },
       "validation": {
-        "categories": ["pylint", "flake8", "security", "complexity", "todo", "code_smell"],
-        "severity_levels": ["critical", "high", "medium", "low", "info"]
+        "categories": [
+          "pylint",
+          "flake8",
+          "security",
+          "complexity",
+          "todo",
+          "code_smell"
+        ],
+        "severity_levels": [
+          "critical",
+          "high",
+          "medium",
+          "low",
+          "info"
+        ]
       },
-      "triggers": ["auto_critic_v7"],
+      "triggers": [
+        "auto_critic_v7"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 60
@@ -415,10 +508,22 @@
         }
       },
       "validation": {
-        "risk_levels": ["critical", "high", "medium", "low"],
-        "categories": ["data_loss", "core_change", "security", "exception_stack"]
+        "risk_levels": [
+          "critical",
+          "high",
+          "medium",
+          "low"
+        ],
+        "categories": [
+          "data_loss",
+          "core_change",
+          "security",
+          "exception_stack"
+        ]
       },
-      "triggers": ["auto_critic_v7"],
+      "triggers": [
+        "auto_critic_v7"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 60
@@ -447,10 +552,23 @@
         }
       },
       "validation": {
-        "task_status": ["open", "in_progress", "resolved", "verified", "closed", "overdue"],
-        "severity_levels": ["blocker", "warning", "info"]
+        "task_status": [
+          "open",
+          "in_progress",
+          "resolved",
+          "verified",
+          "closed",
+          "overdue"
+        ],
+        "severity_levels": [
+          "blocker",
+          "warning",
+          "info"
+        ]
       },
-      "triggers": ["auto_critic_v7_fail"],
+      "triggers": [
+        "auto_critic_v7_fail"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 30
@@ -479,12 +597,48 @@
       },
       "validation": {
         "min_passing_score": 80,
-        "checks": ["pylint", "flake8", "security", "complexity", "test_coverage", "documentation"]
+        "checks": [
+          "pylint",
+          "flake8",
+          "security",
+          "complexity",
+          "test_coverage",
+          "documentation"
+        ]
       },
-      "triggers": ["auto_critic_v7"],
+      "triggers": [
+        "auto_critic_v7"
+      ],
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 60
+    },
+    "p1-issue-fixer": {
+      "tool_id": "p1-issue-fixer",
+      "name": "P1 Issue Auto-Fixer",
+      "description": "自动修复 P1 优先级问题（os.system/eval/exec 替换）",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\p1_issue_fixer.py --{action}",
+      "parameters": {
+        "action": {
+          "type": "string",
+          "required": true,
+          "description": "操作类型",
+          "enum": [
+            "scan",
+            "fix",
+            "verify"
+          ],
+          "default": "fix"
+        }
+      },
+      "validation": {
+        "os_system_remaining": 0,
+        "eval_exec_remaining": 0
+      },
+      "category": "code-quality",
+      "priority": "P1",
+      "auto_run": true
     }
   },
   "workflows": {

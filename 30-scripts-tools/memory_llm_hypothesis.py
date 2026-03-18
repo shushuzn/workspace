@@ -16,6 +16,7 @@ Author: Claw 🐾
 Date: 2026-03-17
 """
 
+import subprocess
 import sys
 import os
 import json
@@ -39,7 +40,7 @@ try:
     import requests
 except ImportError:
     print("Installing required package: requests")
-    os.system("pip install requests")
+    subprocess.run([sys.executable, "-m", "pip", "install", "requests"], check=True)
     import requests
 
 # Configure logging

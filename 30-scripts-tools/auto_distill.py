@@ -27,6 +27,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from collections import defaultdict
 import hashlib
+import subprocess
 import re
 
 # Windows 控制台编码修复
@@ -34,7 +35,7 @@ if sys.platform == 'win32':
     try:
         sys.stdout.reconfigure(encoding='utf-8')
     except:
-        os.system('chcp 65001 >nul')
+        subprocess.run(['chcp', '65001'], capture_output=True, shell=True)
 
 
 @dataclass

@@ -33,12 +33,14 @@ from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 from pathlib import Path
 
+import subprocess
+
 # Windows 控制台编码修复
 if sys.platform == 'win32':
     try:
         sys.stdout.reconfigure(encoding='utf-8')
     except:
-        os.system('chcp 65001 >nul')
+        subprocess.run(['chcp', '65001'], capture_output=True, shell=True)
 
 
 @dataclass

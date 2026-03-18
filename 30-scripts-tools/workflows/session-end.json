@@ -1,8 +1,8 @@
 {
   "workflow_id": "session-end",
   "name": "Session End Workflow",
-  "description": "会话结束工作流 - 13 步自动化流程（含 v7.0 工具）",
-  "version": "3.0",
+  "description": "会话结束工作流 - 16 步自动化流程（含 P1 修复）",
+  "version": "3.1",
   "last_updated": "2026-03-18",
   "principles": [
     "只引用 tool_id，禁止硬编码命令",
@@ -191,6 +191,19 @@
     },
     {
       "step_id": 15,
+      "name": "P1 Issue Auto-Fix",
+      "description": "自动修复 P1 优先级问题（os.system/eval/exec 替换）",
+      "tool_id": "p1-issue-fixer",
+      "stage": "pre-commit",
+      "parameters": {
+        "action": "fix"
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "note": "P1 优先级修复：自动替换危险调用为安全替代方案"
+    },
+    {
+      "step_id": 16,
       "name": "Issue Scanner",
       "description": "全面问题扫描（日志/静态分析/TODO/代码异味）",
       "tool_id": "issue-scanner",
