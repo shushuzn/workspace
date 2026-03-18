@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:35:50.288066
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 680-720 of 784)
+        "variables": {
+          "type": "string",
+          "description": "变量 (JSON 格式)",
+          "required": false
+        },
+        "context": {
+          "type": "string",
+          "description": "上下文 (JSON 格式)",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/flow_manager.py --create memory-search --description '优化记忆搜索性能'",
+        "py 30-scripts-tools/flow_manager.py --snapshot 20260318-memory-search-001 --variables '{\"step\": 3}'",
+        "py 30-scripts-tools/flow_manager.py --restore 20260318-memory-search-001",
+        "py 30-scripts-tools/flow_manager.py --list",
+        "py 30-scripts-tools/flow_manager.py --archive 20260318-memory-search-001"
+      ],
+      "validation": {
+        "workspace_check": true,
+        "flow_archive_exists": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      }
+    }
+  },
+  "workflows": {
+    "session-end": {
+      "workflow_id": "session-end",
+      "description": "会话结束工作流 - 8 步自动化流程"
+    },
+    "task-complete": {
+      "workflow_id": "task-complete",
+      "description": "任务完成工作流 - 待创建"
+    }
+  },
+  "compliance_rules": {
+    "zero_score_items": [
+      {
+
+[64 more lines. Use start_line=721 to continue.]

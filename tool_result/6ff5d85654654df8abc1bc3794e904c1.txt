@@ -1,0 +1,71 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:36:10.684923
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 720-784 of 823)
+        "tool": {
+          "type": "string",
+          "required": false,
+          "description": "检查特定工具注册"
+        },
+        "file": {
+          "type": "string",
+          "required": false,
+          "description": "检查特定文件编码"
+        }
+      },
+      "validation": {
+        "critical_001": "创建的工具必须在 tools_registry.json 注册",
+        "critical_002": "中文必须用 UTF-8 编码",
+        "penalty": "零分"
+      },
+      "triggers": [
+        "session_end",
+        "tool_created"
+      ],
+      "review_required": true,
+      "blocking": true,
+      "timeout_seconds": 30,
+      "category": "quality-gate",
+      "priority": "P0"
+    }
+  },
+  "workflows": {
+    "session-end": {
+      "workflow_id": "session-end",
+      "description": "会话结束工作流 - 8 步自动化流程"
+    },
+    "task-complete": {
+      "workflow_id": "task-complete",
+      "description": "任务完成工作流 - 待创建"
+    }
+  },
+  "compliance_rules": {
+    "zero_score_items": [
+      {
+        "id": "ZS-001",
+        "rule": "禁止为任何工具创建多份定义、副本、冗余内容",
+        "check": "grep 重复 tool_id",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-002",
+        "rule": "禁止在工作流中硬编码工具的执行逻辑、完整命令",
+        "check": "grep 'py 30-scripts' in workflow files",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-003",
+        "rule": "禁止修改工具引用时私自变更工具的核心逻辑",
+        "check": "对比工具定义与工作流参数",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-004",
+        "rule": "禁止绕过唯一工具库直接创建、执行未注册的工具",
+        "check": "检查执行日志中的 tool_id",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-005",
+
+[39 more lines. Use start_line=785 to continue.]

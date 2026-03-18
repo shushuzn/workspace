@@ -703,6 +703,45 @@
         "format": "console",
         "log_to_flow": true
       }
+    },
+    "critical-checks": {
+      "tool_id": "critical-checks",
+      "name": "Critical Checks Verifier",
+      "description": "关键审查项验证 - 工具注册 +UTF-8 编码",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\critical_checks.py --verify",
+      "parameters": {
+        "verify": {
+          "type": "boolean",
+          "required": false,
+          "description": "执行验证",
+          "default": true
+        },
+        "tool": {
+          "type": "string",
+          "required": false,
+          "description": "检查特定工具注册"
+        },
+        "file": {
+          "type": "string",
+          "required": false,
+          "description": "检查特定文件编码"
+        }
+      },
+      "validation": {
+        "critical_001": "创建的工具必须在 tools_registry.json 注册",
+        "critical_002": "中文必须用 UTF-8 编码",
+        "penalty": "零分"
+      },
+      "triggers": [
+        "session_end",
+        "tool_created"
+      ],
+      "review_required": true,
+      "blocking": true,
+      "timeout_seconds": 30,
+      "category": "quality-gate",
+      "priority": "P0"
     }
   },
   "workflows": {
@@ -758,6 +797,20 @@
         "rule": "工具修改后必须自动触发变更标记和合规重审",
         "check": "检查变更日志和审查记录",
         "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "CRITICAL-001",
+        "rule": "创建的工具必须在 tools_registry.json 注册",
+        "check": "critical_checks.py --verify",
+        "consequence": "0 分 + 阻断",
+        "enforcement": "blocker-007"
+      },
+      {
+        "id": "CRITICAL-002",
+        "rule": "中文必须用 UTF-8 编码",
+        "check": "critical_checks.py --verify",
+        "consequence": "0 分 + 阻断",
+        "enforcement": "blocker-008"
       }
     ],
     "review_checkpoints": {
