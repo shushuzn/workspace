@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "created_at": "2026-03-18T22:01:50.091545",
-  "last_updated": "2026-03-18T22:03:25.540864",
+  "created_at": "2026-03-18T22:04:47.147029",
+  "last_updated": "2026-03-18T22:04:47.147030",
   "tasks": {
     "REM-20260318-E32C84": {
       "task_id": "REM-20260318-E32C84",
@@ -846,18 +846,120 @@
       "reminder_count": 0,
       "last_reminder": null,
       "notes": []
+    },
+    "REM-20260318-8C2733": {
+      "task_id": "REM-20260318-8C2733",
+      "fail_item_id": "blocker-001",
+      "source": "critic-P1-Fix-Complete-Report-Added",
+      "title": "致命问题 0 个",
+      "description": "FAIL",
+      "severity": "blocker",
+      "created_at": "2026-03-18T22:04:47.146918",
+      "deadline": "2026-03-19T22:04:47.146909",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-1B0B01": {
+      "task_id": "REM-20260318-1B0B01",
+      "fail_item_id": "blocker-003",
+      "source": "critic-P1-Fix-Complete-Report-Added",
+      "title": "代码/文档已提交 Git",
+      "description": "FAIL",
+      "severity": "blocker",
+      "created_at": "2026-03-18T22:04:47.146942",
+      "deadline": "2026-03-19T22:04:47.146940",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-A7E3EB": {
+      "task_id": "REM-20260318-A7E3EB",
+      "fail_item_id": "warning-001",
+      "source": "critic-P1-Fix-Complete-Report-Added",
+      "title": "严重问题≤2 个",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T22:04:47.146956",
+      "deadline": "2026-03-25T22:04:47.146955",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-A59E16": {
+      "task_id": "REM-20260318-A59E16",
+      "fail_item_id": "warning-002",
+      "source": "critic-P1-Fix-Complete-Report-Added",
+      "title": "一般问题≤10 个",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T22:04:47.146965",
+      "deadline": "2026-03-25T22:04:47.146964",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-3C8013": {
+      "task_id": "REM-20260318-3C8013",
+      "fail_item_id": "warning-005",
+      "source": "critic-P1-Fix-Complete-Report-Added",
+      "title": "【ZS-006】工具有效使用 (新增工具)",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T22:04:47.146974",
+      "deadline": "2026-03-25T22:04:47.146973",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-4B8320": {
+      "task_id": "REM-20260318-4B8320",
+      "fail_item_id": "warning-007",
+      "source": "critic-P1-Fix-Complete-Report-Added",
+      "title": "安全检查 (无高危漏洞)",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T22:04:47.146983",
+      "deadline": "2026-03-25T22:04:47.146982",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
     }
   },
   "statistics": {
-    "total_tasks": 47,
+    "total_tasks": 53,
     "by_status": {
       "deferred": 5,
-      "resolved": 8,
-      "open": 34
+      "resolved": 15,
+      "open": 33
     },
     "by_severity": {
-      "blocker": 20,
-      "warning": 27
+      "blocker": 22,
+      "warning": 31
     },
     "overdue_count": 0,
     "completion_rate": 0.0
