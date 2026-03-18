@@ -1,8 +1,9 @@
 {
-  "version": "1.5.0",
-  "last_updated": "2026-03-19T01:00:00+08:00",
+  "version": "1.6.0",
+  "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
-    "Added workflow-research sub-workflow tool (research-001)",
+    "Added workflow-enforcer tool for mandatory workflow compliance",
+    "v1.5.0: Added workflow-research sub-workflow tool (research-001)",
     "Added workflow-project sub-workflow tool (project-001)",
     "Updated workflows section with research-001 and project-001",
     "v1.4.0: Added auto-critic-v7 with issue detection and remediation tracking",
@@ -918,6 +919,38 @@
       "review_required": false,
       "blocking": true,
       "timeout_seconds": 1800
+    },
+    "workflow-enforcer": {
+      "tool_id": "workflow-enforcer",
+      "name": "Workflow Enforcement Tool",
+      "description": "工作流强制遵守工具 - 确保 12 步骤全部执行",
+      "version": "1.0.0",
+      "command": "py 30-scripts-tools\\workflow_enforcer.py",
+      "parameters": {
+        "action": {
+          "type": "string",
+          "required": true,
+          "description": "操作类型",
+          "enum": ["start", "check-step", "complete-step", "validate", "status"]
+        },
+        "step": {
+          "type": "integer",
+          "required": false,
+          "description": "步骤编号"
+        }
+      },
+      "validation": {
+        "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json",
+        "enforcement_log": "flow-archive/20260318-universal-workflow-001/enforcement-log.json"
+      },
+      "triggers": [
+        "workflow_start",
+        "step_execution",
+        "workflow_complete"
+      ],
+      "review_required": false,
+      "blocking": true,
+      "timeout_seconds": 60
     }
   },
   "workflows": {
