@@ -70,8 +70,8 @@ def load_critic_template() -> dict:
             "【USER-004】检查项必须有证据 (无证据=0 分)"
         ],
         "post_task_tool": [
-            "工具已创建并在实际工作流中使用",
-            "使用次数≥1 次 (有证据证明)",
+            "工具已创建并在实际工作流中使用 (session_end.py, post_session_compress.py 等)",
+            "使用方式：工作流集成 (手动调用 = 设计失败)",
             "价值已量化 (时间节省/效率提升)",
             "使用案例已文档化",
             "工具文档完整 (README/使用说明)",
@@ -455,20 +455,21 @@ def auto_verify_item(item: str, task: str, context: dict = None) -> tuple:
         
         # 深度验证：只检查工作流集成
         # 核心原则：所有工具都应该是自动调用的，不应该依赖手动调用
+        # 手动调用 = 工具设计失败，不检查手动使用证据
         evidence = verify_tool_usage(task)
         
         if evidence["file_exists"] and evidence["workflow_integrated"]:
             workflow_list = ", ".join(evidence["workflow_files"])
             return (
                 True,
-                f"工具已集成到工作流：{workflow_list}",
+                f"✅ 工具已集成到工作流：{workflow_list}",
                 f"File: {SCRIPTS_DIR}/{evidence['file_size']} bytes | Integrated in: {workflow_list} | Evidence: {'; '.join(evidence['integration_evidence'][:3])}"
             )
         elif evidence["file_exists"] and not evidence["workflow_integrated"]:
             return (
                 False,
                 f"⚠️ 工具已创建但未集成到工作流 - 需要集成到 session_end.py 或其他自动化脚本",
-                f"❌ File exists but NOT in any workflow - Must integrate into session_end.py, post_session_compress.py, or similar (manual usage is NOT acceptable)"
+                f"❌ File exists but NOT in any workflow - Must integrate into session_end.py, post_session_compress.py, etc. (manual usage is NOT acceptable)"
             )
         else:
             return (

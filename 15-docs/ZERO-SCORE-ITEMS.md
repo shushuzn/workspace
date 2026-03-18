@@ -1,8 +1,13 @@
 # Zero-Score Items Reference Card
 
-**Version:** 1.1 - Evidence Required + Workspace Check  
+**Version:** 2.0 - Workflow Integration Standard  
 **Date:** 2026-03-18  
 **Priority:** CRITICAL
+
+**Changes in v2.0:**
+- Tool usage standard changed: Manual usage = design failure
+- Only workflow integration is checked (session_end.py, etc.)
+- No longer accept manual invocation as valid usage
 
 ---
 
@@ -49,35 +54,47 @@ py 30-scripts-tools\auto-critic.py -t "Task-Name" -p start
 
 ### 2. 【USER-004】工具创建了必须使用
 
-**Requirement:** Tools must be used immediately after creation
+**Requirement:** Tools must be integrated into workflow (session_end.py, post_session_compress.py, etc.)
+
+**核心原则:**
+- ✅ PASS: 工具被工作流脚本自动调用
+- ❌ FAIL: 工具只被手动调用 (手动调用 = 工具设计失败)
 
 **Failure Case:**
 - Date: 2026-03-18
-- Task: Memory Tag System
-- Issue: Created memory_tag_search.py but never used
+- Task: auto-critic tool
+- Issue: Created auto-critic.py but not integrated into any workflow
 - Score: 0/100
 
 **Prevention:**
-```bash
-# Create → Use → Verify workflow
-py 30-scripts-tools\memory_tag_search.py --tag critical  # Use immediately
-py 30-scripts-tools\memory_tag_search.py --tag lesson   # Multiple uses
+```python
+# In session_end.py or post_session_compress.py:
+import subprocess
+subprocess.run('py 30-scripts-tools\\auto-critic.py -t "Task" -p final', shell=True)
 ```
 
 **Verification:**
-- [ ] Tool used ≥1 time in real workflow
-- [ ] Usage evidence documented (search results, output)
-- [ ] Value quantified (time saved, efficiency gain)
+- [ ] Tool integrated into workflow script (session_end.py, etc.)
+- [ ] Workflow script calls tool automatically
+- [ ] No manual invocation required
 
 **Evidence Required:**
 ```json
 {
   "item": "【USER-004】工具创建了必须使用 (创建→使用→验证)",
   "checked": true,
-  "notes": "工具创建后测试 3 次，93% 时间节省",
-  "evidence": "Command output: py memory_tag_search.py --tag critical (9 results)"
+  "notes": "✅ 工具已集成到 session_end.py STEP 4",
+  "evidence": "session_end.py: contains 'py 30-scripts-tools\\\\auto-critic.py'"
 }
 ```
+
+**❌ 旧标准 (不再适用):**
+- ~~"工具使用次数≥1 次"~~ → 改为"工作流集成"
+- ~~"手动调用证据"~~ → 手动调用 = 设计失败
+
+**✅ 新标准:**
+- 只检查工作流集成 (session_end.py, post_session_compress.py 等)
+- 不检查手动调用 (手动调用不被接受)
 
 ---
 
