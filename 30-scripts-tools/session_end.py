@@ -10,7 +10,8 @@ What it does:
     1. Run post_session_compress.py --auto
     2. Run fast_load.py to verify context <100KB
     3. Check daily note lines <100
-    4. Run auto-critic.py for final review (NEW!)
+    3.5. Run memory_consistency_checker.py + memory_benchmark.py (NEW!)
+    4. Run auto-critic.py for final review
     5. Git add + commit + push
     6. Clean up temp files
 
@@ -220,6 +221,79 @@ def run_auto_critic(commit_message: str):
         print_info("Continuing without critic review...")
         return True  # 不阻止流程
 
+def run_memory_tools():
+    """
+    Run memory system health check tools
+    
+    包含：
+    1. memory_consistency_checker.py - 数据一致性检查（每次运行）
+    2. memory_benchmark.py - 性能测试（每周一运行）
+    
+    非阻塞：即使失败也不影响流程
+    """
+    print_info("Running memory system health check...")
+    
+    # 1. Consistency checker (每次会话结束运行)
+    print_info("   (1/2) Running consistency checker...")
+    cmd1 = 'py 30-scripts-tools\\memory_consistency_checker.py'
+    
+    try:
+        result1 = subprocess.run(
+            cmd1,
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            encoding='utf-8',
+            errors='replace'
+        )
+        
+        if result1.returncode == 0:
+            print_success("Memory consistency check - OK")
+            # 显示摘要
+            for line in (result1.stdout or "").split('\n')[:5]:
+                if line.strip():
+                    print(f"   {line.strip()}")
+        else:
+            print_warning("Memory consistency check - Warning")
+            
+    except Exception as e:
+        print_warning(f"Consistency check - EXCEPTION: {str(e)}")
+    
+    # 2. Benchmark (仅每周一运行，避免每次会话都跑)
+    today = datetime.now().weekday()  # 0=Monday, 6=Sunday
+    
+    if today == 0:  # Monday
+        print_info("   (2/2) Running benchmark (weekly)...")
+        cmd2 = 'py 30-scripts-tools\\memory_benchmark.py'
+        
+        try:
+            result2 = subprocess.run(
+                cmd2,
+                shell=True,
+                capture_output=True,
+                text=True,
+                timeout=60,
+                encoding='utf-8',
+                errors='replace'
+            )
+            
+            if result2.returncode == 0:
+                print_success("Memory benchmark - OK")
+                # 显示关键结果
+                for line in (result2.stdout or "").split('\n'):
+                    if 'Average:' in line or 'PASS' in line:
+                        print(f"   {line.strip()}")
+            else:
+                print_warning("Memory benchmark - Warning")
+                
+        except Exception as e:
+            print_warning(f"Benchmark - EXCEPTION: {str(e)}")
+    else:
+        print_info("   (2/2) Benchmark skipped (runs on Mondays only)")
+    
+    return True  # 总是返回 True，不阻塞流程
+
 def git_status():
     """Check git status before commit"""
     print_info("Checking git status...")
@@ -267,6 +341,7 @@ def main():
         'session_compress': False,
         'context_check': False,
         'daily_note_check': False,
+        'memory_consistency': False,
         'auto_critic': False,
         'git_status': False,
         'git_add': False,
@@ -285,6 +360,9 @@ def main():
     
     print_header("STEP 3: Daily Note Check")
     results['daily_note_check'] = check_daily_note_lines()
+    
+    print_header("STEP 3.5: Memory System Health Check")
+    results['memory_consistency'] = run_memory_tools()
     
     print_header("STEP 4: Auto-Critic Review")
     results['auto_critic'] = run_auto_critic(commit_message)
