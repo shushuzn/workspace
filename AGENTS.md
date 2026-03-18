@@ -14,7 +14,7 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
    - SOUL.md, USER.md, AGENTS.md, TOOLS.md, HEARTBEAT.md
    - MEMORY.md, 13-memory/YYYY-MM-DD.md (today)
 
-2. ❌ **NEVER scan full workspace** (560MB → 61KB = 9442x faster)
+2. ❌ **NEVER scan full workspace** (560MB → 63KB = 9013x faster)
 
 3. ❌ **Respect .contextignore** rules:
    - 80-PROJECTS/, 40-arxiv/, 60-DATA/, 99-backups/
@@ -23,8 +23,24 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 4. ✅ **Verify with fast_load.py**:
    ```bash
    py 30-scripts-tools/fast_load.py
-   # Should show: 总大小：60.8KB, 速度提升：9442x
+   # Should show: 总大小：63.3KB, 速度提升：9013x
    ```
+
+**Session Compression (每次对话结束必须):**
+
+1. ✅ **Record key info** during session (optional: `session_temp.json`)
+2. ✅ **Run compression** at session end:
+   ```bash
+   py 30-scripts-tools\post_session_compress.py --auto
+   # OR simply: end-session.bat
+   ```
+3. ✅ **Verify context size** stays <100KB
+4. ✅ **Save to daily note** (`13-memory/YYYY-MM-DD.md`)
+
+**Compression效果:**
+- 完整对话：~50KB → 结构化摘要：~2KB (**-96%**)
+- Token 使用：~12,500 → ~500 (**-96%**)
+- 信息密度：提升**25x**
 
 **Then:**
 1. Read `SOUL.md` — this is who you are
