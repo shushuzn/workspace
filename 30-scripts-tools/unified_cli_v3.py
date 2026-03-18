@@ -84,6 +84,10 @@ COMMAND_ALIASES = {
     'install hooks': 'install-git-hooks.py',
     'setup hooks': 'setup-git-hooks.py',
     'test hook': 'pre_commit_hook.py --test',
+    'precheck': 'git-precheck.py',
+    'git check': 'git-precheck.py',
+    'git precheck': 'git-precheck.py --quick',
+    'check before commit': 'git-precheck.py',
     
     # Security (新增)
     'security scan': 'security_auditor.py',
