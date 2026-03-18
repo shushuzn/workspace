@@ -5,6 +5,12 @@
 import subprocess
 import time
 import sys
+import codecs
+
+# Set UTF-8 encoding for Windows
+if sys.platform == 'win32':
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer, 'strict')
+    sys.stderr = codecs.getwriter('utf-8')(sys.stderr.buffer, 'strict')
 
 print("="*60)
 print("SESSION END SCRIPT - TIMING TEST")
