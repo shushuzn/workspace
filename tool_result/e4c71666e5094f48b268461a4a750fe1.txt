@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:28:31.725427
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\auto-critic_v7.py  (lines 450-550 of 587)
+            })
+    
+    return {
+        "phase": phase,
+        "timestamp": datetime.now().isoformat(),
+        "checks": results
+    }
+
+def calculate_score(results: list) -> int:
+    """计算分数"""
+    total = len(results)
+    passed = sum(1 for r in results if r["checked"])
+    
+    # BLOCKER 失败直接 0 分
+    blocker_failures = sum(1 for r in results if r.get("blocking") and not r["checked"])
+    if blocker_failures > 0:
+        return 0
+    
+    return int(passed / total * 100) if total > 0 else 0
+
+def create_remediation_tasks(results: list, task_name: str):
+    """创建整改任务"""
+    if not COMPONENTS_AVAILABLE:
+        return
+    
+    tracker = RemediationTracker(WORKSPACE)
+    
+    # 筛选失败的项
+    failed_items = [
+        {
+            "id": r["id"],
+            "item": r["item"],
+            "level": "BLOCKER" if r.get("blocking") else "WARNING",
+            "notes": r.get("notes", ""),
+            "evidence": r.get("evidence", "")
+        }
+        for r in results if not r["checked"]
+    ]
+    
+    if failed_items:
+        task_ids = tracker.create_tasks(failed_items, f"critic-{task_name}", "claw")
+        print(f"\n[Remediation] Created {len(task_ids)} tasks:")
+        for tid in task_ids:
+            print(f"  • {tid}")
+
+def print_results(results: dict, score: int):
+    """打印结果"""
+    print("\n" + "=" * 60)
+    print(f"[CRITIC v7.0] {'FULLY AUTOMATED' if COMPONENTS_AVAILABLE else 'BASIC MODE'} - {results['phase'].upper()}")
+    print("=" * 60)
+    
+    # 统计
+    total = len(results["checks"])
+    passed = sum(1 for r in results["checks"] if r["checked"])
+    blocker_failures = sum(1 for r in results["checks"] if r.get("blocking") and not r["checked"])
+    warning_failures = sum(1 for r in results["checks"] if not r.get("blocking") and not r["checked"])
+    
+    status = "PASS" if score >= 95 else ("NEEDS_ATTENTION" if blocker_failures == 0 else "BLOCKED")
+    
+    print(f"\nTask: \"{results.get('task', 'Unknown')}\"")
+    print(f"Phase: {results['phase']}")
+    print(f"Time: {results['timestamp']}")
+    print(f"Status: {status}")
+    print(f"Score: {score}/100")
+    print(f"Checklist Items: {total}")
+    
+    print(f"\n{'X' if blocker_failures > 0 else '✓'} Blocker failures: {blocker_failures}")
+    print(f"{'⚠' if warning_failures > 0 else '✓'} Warning failures: {warning_failures}")
+    
+    print("\nChecklist:")
+    for i, r in enumerate(results["checks"], 1):
+        status_icon = "OK" if r["checked"] else "FAIL"
+        blocking_marker = "🚨" if r.get("blocking") and not r["checked"] else ("⚠" if not r.get("blocking") and not r["checked"] else "")
+        print(f"  [{status_icon}] {i}. {r['item']}")
+        print(f"      Notes: {r['notes']}")
+        print(f"      Evidence: {r['evidence'][:100]}")
+        if blocking_marker:
+            print(f"      {blocking_marker} {'BLOCKER' if r.get('blocking') else 'WARNING'} failure")
+    
+    # 失败项汇总
+    failed = [r for r in results["checks"] if not r["checked"]]
+    if failed:
+        print("\n" + "=" * 60)
+        print("FAILED ITEMS (需要修复):")
+        for r in failed:
+            blocking = "🚨 BLOCKER" if r.get("blocking") else "⚠ WARNING"
+            print(f"  - {r['item']} ({blocking})")
+        print("=" * 60)
+
+
+def main():
+    """主函数"""
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Auto-Critic v7.0')
+    parser.add_argument('-t', '--task', type=str, required=True, help='任务名称')
+    parser.add_argument('-p', '--phase', type=str, default='final', 
+                       choices=['start', 'mid', 'final'], help='审查阶段')
+    parser.add_argument('--create-remediation', action='store_true', 
+                       help='创建整改任务')
+    parser.add_argument('--flow_id', type=str, help='工作流唯一 ID')  # Flow ID 支持
+
+[37 more lines. Use start_line=551 to continue.]

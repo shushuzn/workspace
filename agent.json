@@ -227,6 +227,11 @@
     "every": "6h",
     "target": "main"
   },
+  "last_dispatch": {
+    "channel": "console",
+    "user_id": "default",
+    "session_id": "1773843968653"
+  },
   "running": {
     "max_iters": 50,
     "token_count_model": "default",

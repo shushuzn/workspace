@@ -1,3 +1,6 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:26:40.813313
+# ---
 {
   "workflow_id": "session-end",
   "name": "Session End Workflow",
@@ -170,12 +173,11 @@
       "stage": "pre-commit",
       "parameters": {
         "task": "${commit_message}",
-        "phase": "final",
-        "flow_id": "${flow_id}"
+        "phase": "final"
       },
       "blocking": false,
       "timeout_seconds": 120,
-      "note": "v7.0 新增：BLOCKER 失败自动创建整改任务，不阻断流程（历史遗留问题需时间修复）; 支持 Flow ID 隔离审查结果"
+      "note": "v7.0 新增：BLOCKER 失败自动创建整改任务，不阻断流程（历史遗留问题需时间修复）"
     },
     {
       "step_id": 14,

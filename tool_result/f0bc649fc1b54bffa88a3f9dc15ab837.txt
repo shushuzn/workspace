@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:30:27.012451
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 450-500 of 635)
+        
+        execution_time = (datetime.now() - start_time).total_seconds() * 1000
+        
+        summary = {
+            "workflow_id": workflow_id,
+            "success": all_passed,
+            "steps": results,
+            "total_steps": len(workflow["steps"]),
+            "passed_steps": sum(1 for r in results if r.get("success", False) or r.get("skipped", False)),
+            "execution_time_ms": execution_time
+        }
+        
+        print_header("Workflow Execution Summary")
+        print_info(f"Total steps: {summary['total_steps']}")
+        print_info(f"Passed: {summary['passed_steps']}")
+        print_info(f"Execution time: {execution_time:.0f}ms")
+        print_success("Workflow PASSED") if all_passed else print_error("Workflow FAILED")
+        
+        # Flow ID 隔离：专属日志保存
+        if self.flow_id:
+            log_dir = WORKSPACE / "flow-archive" / self.flow_id
+            log_dir.mkdir(parents=True, exist_ok=True)
+            log_file = log_dir / "execution-log.json"
+        else:
+            log_file = SCRIPTS_DIR / "workflow-execution-log.json"
+        
+        with open(log_file, 'w', encoding='utf-8') as f:
+            json.dump(summary, f, indent=2, ensure_ascii=False)
+        print_info(f"Log saved to: {log_file}")
+        
+        return summary
+    
+    def validate_compliance(self) -> Dict:
+        """
+        验证合规性（检查零分项）
+        
+        Returns:
+            合规性检查结果
+        """
+        print_header("Compliance Validation")
+        
+        compliance_rules = self.registry.get("compliance_rules", {})
+        zero_score_items = compliance_rules.get("zero_score_items", [])
+        
+        results = []
+        all_passed = True
+        
+        for item in zero_score_items:
+            rule_id = item["id"]
+            rule = item["rule"]
+            check_method = item["check"]
+
+[135 more lines. Use start_line=501 to continue.]

@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:32:23.721098
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\start-flow.bat  (lines 1-50 of 101)
+@echo off
+REM ========================================================================
+REM  Flow ID 工作流快速启动脚本
+REM ========================================================================
+REM 
+REM Usage:
+REM   start-flow.bat {业务名} "{任务描述}"
+REM 
+REM Examples:
+REM   start-flow.bat backend-crud "Backend CRUD API development"
+REM   start-flow.bat frontend-ui "Frontend dashboard UI implementation"
+REM   start-flow.bat db-migration "Database schema migration"
+REM 
+REM ========================================================================
+
+setlocal enabledelayedexpansion
+
+REM 检查参数
+if "%~1"=="" (
+    echo.
+    echo ============================================================
+    echo Flow ID 工作流快速启动
+    echo ============================================================
+    echo.
+    echo 用法：start-flow.bat {业务名} "{任务描述}"
+    echo.
+    echo 示例:
+    echo   start-flow.bat backend-crud "Backend CRUD API development"
+    echo   start-flow.bat frontend-ui "Frontend dashboard UI"
+    echo   start-flow.bat api-integration "Third-party API integration"
+    echo.
+    echo ============================================================
+    exit /b 1
+)
+
+REM 生成 Flow ID
+set BUSINESS_NAME=%1
+set DATE=%date:~0,4%%date:~5,2%%date:~8,2%
+set FLOW_ID=%DATE%-%BUSINESS_NAME%-001
+
+REM 任务描述 (可选)
+set TASK_DESC=%~2
+if "%TASK_DESC%"=="" set TASK_DESC=Flow execution
+
+echo.
+echo ============================================================
+echo  Flow ID 工作流启动
+echo ============================================================
+echo.
+echo Flow ID:     %FLOW_ID%
+
+[51 more lines. Use start_line=51 to continue.]

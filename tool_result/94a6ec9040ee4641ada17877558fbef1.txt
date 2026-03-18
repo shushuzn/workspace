@@ -1,0 +1,138 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:29:30.525493
+# ---
+            check_method = item["check"]
+            
+            print_info(f"Checking {rule_id}: {rule}")
+            
+            # 执行检查（简化版，实际应实现具体检查逻辑）
+            passed = True  # 默认通过
+            details = f"Check method: {check_method}"
+            
+            if not passed:
+                all_passed = False
+                print_error(f"  ❌ FAIL")
+            else:
+                print_success(f"  ✅ PASS")
+            
+            results.append({
+                "rule_id": rule_id,
+                "rule": rule,
+                "passed": passed,
+                "details": details
+            })
+        
+        return {
+            "all_passed": all_passed,
+            "total_rules": len(zero_score_items),
+            "passed_rules": sum(1 for r in results if r["passed"]),
+            "results": results
+        }
+    
+    def list_tools(self) -> List[Dict]:
+        """列出所有已注册工具"""
+        tools = self.registry.get("tools", {})
+        return [
+            {
+                "tool_id": tool_id,
+                "name": tool.get("name", ""),
+                "description": tool.get("description", ""),
+                "version": tool.get("version", "1.0")
+            }
+            for tool_id, tool in tools.items()
+        ]
+
+
+def main():
+    import argparse
+    
+    parser = argparse.ArgumentParser(
+        description="Tool Executor - 工具执行引擎",
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        epilog="""
+Examples:
+  # List all tools
+  py tool_executor.py --list
+  
+  # Execute single tool
+  py tool_executor.py --tool auto-critic --task "my-task" --phase final
+  
+  # Execute workflow
+  py tool_executor.py --workflow session-end --context "{\"commit_message\": \"Task complete\"}"
+  
+  # Validate compliance
+  py tool_executor.py --validate-compliance
+        """
+    )
+    
+    parser.add_argument("--list", action="store_true", help="List all registered tools")
+    parser.add_argument("--tool", type=str, help="Tool ID to execute")
+    parser.add_argument("--workflow", type=str, help="Workflow ID to execute")
+    parser.add_argument("--task", type=str, help="Task name (for auto-critic)")
+    parser.add_argument("--phase", type=str, help="Phase: start/mid/final")
+    parser.add_argument("--context", type=str, help="Context JSON (for workflows)")
+    parser.add_argument("--flow_id", type=str, help="Flow ID for isolation")  # Flow ID 支持
+    parser.add_argument("--validate-compliance", action="store_true", help="Validate compliance rules")
+    parser.add_argument("--output-json", action="store_true", help="Output result as JSON")
+    
+    args = parser.parse_args()
+    
+    try:
+        executor = ToolExecutor()
+        
+        if args.list:
+            tools = executor.list_tools()
+            print_header("Registered Tools")
+            for tool in tools:
+                print(f"  {Colors.BLUE}{tool['tool_id']}{Colors.RESET}: {tool['name']} (v{tool['version']})")
+                print(f"    {tool['description']}")
+            sys.exit(0)
+        
+        if args.validate_compliance:
+            result = executor.validate_compliance()
+            if args.output_json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            sys.exit(0 if result["all_passed"] else 1)
+        
+        if args.workflow:
+            context = json.loads(args.context) if args.context else {}
+            result = executor.execute_workflow(args.workflow, context, args.flow_id)
+            if args.output_json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            sys.exit(0 if result["success"] else 1)
+        
+        if args.tool:
+            params = {}
+            if args.task:
+                params["task"] = args.task
+            if args.phase:
+                params["phase"] = args.phase
+            result = executor.execute(args.tool, params)
+            if args.output_json:
+                print(json.dumps(result, indent=2, ensure_ascii=False))
+            else:
+                print_header("Execution Result")
+                print_success("PASSED") if result["success"] else print_error("FAILED")
+                print_info(f"Execution time: {result['execution_time_ms']:.0f}ms")
+                if result["output"]:
+                    print(f"\nOutput:\n{result['output'][:500]}")
+            sys.exit(0 if result["success"] else 1)
+        
+        parser.print_help()
+        sys.exit(1)
+        
+    except FileNotFoundError as e:
+        print_error(str(e))
+        sys.exit(1)
+    except ValueError as e:
+        print_error(str(e))
+        sys.exit(1)
+    except Exception as e:
+        print_error(f"Unexpected error: {str(e)}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:30:19.952571
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 350-450 of 635)
+                                details["results_check"] = f"PASS ({count} >= {validation_rules['min_results']})"
+        
+        return {
+            "passed": passed,
+            "rules_checked": list(validation_rules.keys()),
+            "details": details,
+            "returncode": result.returncode
+        }
+    
+    def execute_workflow(self, workflow_id: str, context: Dict = None, flow_id: str = None) -> Dict:
+        """
+        执行工作流（只引用 tool_id，不硬编码）
+        
+        Args:
+            workflow_id: 工作流唯一标识
+            context: 上下文参数（如 commit_message）
+            flow_id: Flow ID for isolation (optional)
+        
+        Returns:
+            工作流执行结果：{
+                "workflow_id": str,
+                "success": bool,
+                "steps": List[Dict],
+                "total_steps": int,
+                "passed_steps": int,
+                "execution_time_ms": int
+            }
+        """
+        start_time = datetime.now()
+        self.flow_id = flow_id  # 保存 Flow ID 用于日志隔离
+        
+        workflow_file = WORKFLOWS_DIR / f"{workflow_id}.json"
+        
+        if not workflow_file.exists():
+            raise FileNotFoundError(f"Workflow not found: {workflow_file}")
+        
+        with open(workflow_file, 'r', encoding='utf-8') as f:
+            workflow = json.load(f)
+        
+        print_header(f"Executing Workflow: {workflow_id}")
+        print_info(f"Total steps: {len(workflow['steps'])}")
+        
+        results = []
+        all_passed = True
+        
+        for step in workflow["steps"]:
+            step_num = step["step_id"]
+            tool_id = step["tool_id"]  # 只引用 ID
+            step_name = step.get("name", f"Step {step_num}")
+            params = step.get("parameters", {})
+            blocking = step.get("blocking", True)
+            
+            print(f"\n{Colors.BOLD}Step {step_num}/{len(workflow['steps'])}: {step_name}{Colors.RESET}")
+            print_info(f"Tool: {tool_id}")
+            
+            # 替换上下文变量
+            if context:
+                for key, value in context.items():
+                    for param_key, param_value in params.items():
+                        if isinstance(param_value, str) and f"${{{key}}}" in param_value:
+                            params[param_key] = param_value.replace(f"${{{key}}}", str(value))
+            
+            # 检查条件执行
+            if "conditional" in step:
+                cond = step["conditional"]
+                if "run_only_on" in cond:
+                    day_name = cond["run_only_on"]
+                    today = datetime.now().strftime('%A')
+                    if today != day_name:
+                        print_info(f"Skipped (runs on {day_name} only, today is {today})")
+                        results.append({
+                            "step_id": step_num,
+                            "step_name": step_name,
+                            "tool_id": tool_id,
+                            "skipped": True,
+                            "reason": f"Conditional: runs on {day_name} only"
+                        })
+                        continue
+            
+            # 执行工具
+            result = self.execute(tool_id, params)
+            result["step_id"] = step_num
+            result["step_name"] = step_name
+            result["blocking"] = blocking
+            
+            if result["success"]:
+                print_success(f"Step {step_num} PASSED")
+            else:
+                if blocking:
+                    print_error(f"Step {step_num} FAILED (blocking)")
+                    all_passed = False
+                else:
+                    print_warning(f"Step {step_num} FAILED (non-blocking)")
+            
+            results.append(result)
+            
+            # 阻塞步骤失败则中断
+            if not result["success"] and blocking:
+                print_warning("Workflow stopped due to blocking step failure")
+                break
+        
+
+[185 more lines. Use start_line=451 to continue.]

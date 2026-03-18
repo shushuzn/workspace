@@ -1,0 +1,266 @@
+{
+  "workflow_id": "session-end",
+  "success": true,
+  "steps": [
+    {
+      "success": true,
+      "output": "============================================================\nPost-Session Compressor v2.0 - 分层压缩 + 重要性评估\n============================================================\n\n[Context Size]\n  Total: 57.33KB (0.056MB)\n  Under 100KB limit: Yes\n\n[WARN] No session data found. Create session_temp.json first.\n\nUsage:\n  1. Create 30-scripts-tools/session_temp.json with session data\n  2. Run: py post_session_compress.py --auto\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "context_size_limit_kb",
+          "daily_note_lines_limit",
+          "verify_with"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "session-compress",
+      "command": "py 30-scripts-tools\\post_session_compress.py --auto",
+      "execution_time_ms": 130.685,
+      "step_id": 1,
+      "step_name": "Session Compression",
+      "blocking": true
+    },
+    {
+      "success": true,
+      "output": "============================================================\nFast Load - 快速加载核心上下文\n============================================================\n✅ SOUL.md: 12.8KB\n✅ USER.md: 10.6KB\n✅ AGENTS.md: 11.3KB\n✅ TOOLS.md: 5.7KB\n✅ HEARTBEAT.md: 5.6KB\n✅ 13-memory/MEMORY.md: 9.2KB\n✅ 13-memory/2026-03-18.md: 2.1KB\n============================================================\n总大小：57.3KB (0.06MB)\nToken 估算：~14676 tokens\n============================================================\n\n全工作区：565.91MB\n节省：100.0%\n速度提升：10108.2x\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "max_size_kb",
+          "core_files"
+        ],
+        "details": {
+          "context_size_kb": 57.3,
+          "size_check": "PASS (57.3KB <= 100KB)"
+        },
+        "returncode": 0
+      },
+      "tool_id": "context-verify",
+      "command": "py 30-scripts-tools\\fast_load.py",
+      "execution_time_ms": 3739.395,
+      "step_id": 2,
+      "step_name": "Context Size Verification",
+      "blocking": true
+    },
+    {
+      "success": true,
+      "output": "============================================================\nPost-Session Compressor v2.0 - 分层压缩 + 重要性评估\n============================================================\n\n[Context Size]\n  Total: 57.33KB (0.056MB)\n  Under 100KB limit: Yes\n\n[WARN] No session data found. Create session_temp.json first.\n\nUsage:\n  1. Create 30-scripts-tools/session_temp.json with session data\n  2. Run: py post_session_compress.py --auto\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "context_size_limit_kb",
+          "daily_note_lines_limit",
+          "verify_with"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "session-compress",
+      "command": "py 30-scripts-tools\\post_session_compress.py --auto",
+      "execution_time_ms": 176.367,
+      "step_id": 3,
+      "step_name": "Daily Note Check",
+      "blocking": true
+    },
+    {
+      "success": false,
+      "output": "[ERROR] File not found: D:\\OpenClaw\\workspace\\13-memory\\${TODAY}.md\n[CWD] D:\\OpenClaw\\workspace\n[WORKSPACE] D:\\OpenClaw\\workspace\n",
+      "validation": {
+        "passed": false,
+        "rules_checked": [
+          "dimensions",
+          "weights",
+          "total_score_max"
+        ],
+        "details": {},
+        "returncode": 1
+      },
+      "tool_id": "memory-importance-assessor",
+      "command": "py 30-scripts-tools\\memory_importance_assessor.py --memory \"13-memory/${TODAY}.md\"",
+      "execution_time_ms": 127.22,
+      "step_id": 4,
+      "step_name": "Memory Importance Assessment",
+      "blocking": false
+    },
+    {
+      "success": false,
+      "output": "\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94m🔍 MEMORY CONSISTENCY CHECKER\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nTime: 2026-03-18 22:36:24\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mLOADING DATA\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[92m✅ Loaded MEMORY.md: 12 entries\u001b[0m\n\u001b[92m✅ Loaded memory_index.json: 46 entries\u001b[0m\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mRUNNING CONSISTENCY CHECKS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nCheck 1: Entry Count Matching\n\u001b[91m❌ Entry count mismatch: MEMORY.md=12, index=46\u001b[0m\n\nCheck 2: Tag Statistics Accuracy\n\u001b[92m✅ Tag statistics match\u001b[0m\n\nCheck 3: Broken Tag Links\n\u001b[92m✅ No broken tag links\u001b[0m\n\nCheck 4: Duplicate Entries\n\u001b[92m✅ No duplicate entries\u001b[0m\n\nCheck 5: Orphaned Entries\n\u001b[93m⚠️  Orphaned entries (in index but not MEMORY.md): 34\u001b[0m\n   - Academic Integrity (2026-03-10)\n   - 7-Persona System\n   - Critic Required Every Step\n   - Knowledge Card Generator v2.5\n   - Git Permissions (2026-03-17)\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mCONSISTENCY CHECK SUMMARY\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nPassed: 3/5\n\n❌ Entry Count\n✅ Tag Statistics\n✅ Broken Links\n✅ Duplicates\n❌ Orphaned Entries\n\nReport saved to: 30-scripts-tools\\consistency_check_report.json\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mFINAL STATUS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[91m❌ MEMORY SYSTEM CONSISTENCY: FAIL\u001b[0m\n\u001b[93m⚠️  2 check(s) failed\u001b[0m\n",
+      "validation": {
+        "passed": false,
+        "rules_checked": [
+          "report_file",
+          "consistency_threshold"
+        ],
+        "details": {},
+        "returncode": 1
+      },
+      "tool_id": "memory-consistency-checker",
+      "command": "py 30-scripts-tools\\memory_consistency_checker.py",
+      "execution_time_ms": 103.022,
+      "step_id": 5,
+      "step_name": "Memory Consistency Check",
+      "blocking": false
+    },
+    {
+      "success": false,
+      "output": "usage: memory_tag_search.py [-h] [--tag TAG [TAG ...]] [--query QUERY]\n                            [--linked-to LINKED_TO] [--list-tags] [--snippet]\n                            [--json]\nmemory_tag_search.py: error: unrecognized arguments: --limit 3\n",
+      "validation": {
+        "passed": false,
+        "rules_checked": [
+          "min_results",
+          "index_file"
+        ],
+        "details": {},
+        "returncode": 2
+      },
+      "tool_id": "memory-tag-search",
+      "command": "py 30-scripts-tools\\memory_tag_search.py --tag critical --limit 3",
+      "execution_time_ms": 117.25099999999999,
+      "step_id": 6,
+      "step_name": "Tag Search Test",
+      "blocking": false
+    },
+    {
+      "step_id": 7,
+      "step_name": "Memory Benchmark",
+      "tool_id": "memory-benchmark",
+      "skipped": true,
+      "reason": "Conditional: runs on Monday only"
+    },
+    {
+      "step_id": 8,
+      "step_name": "Weekly Memory Cleanup",
+      "tool_id": "memory-cleanup-compress",
+      "skipped": true,
+      "reason": "Conditional: runs on Sunday only"
+    },
+    {
+      "step_id": 9,
+      "step_name": "Weekly Quality Assessment",
+      "tool_id": "memory-quality-scorer",
+      "skipped": true,
+      "reason": "Conditional: runs on Sunday only"
+    },
+    {
+      "step_id": 10,
+      "step_name": "Weekly Hybrid Compression",
+      "tool_id": "memory-hybrid-pipeline",
+      "skipped": true,
+      "reason": "Conditional: runs on Sunday only"
+    },
+    {
+      "step_id": 11,
+      "step_name": "Weekly Incremental Compression",
+      "tool_id": "memory-incremental-compressor",
+      "skipped": true,
+      "reason": "Conditional: runs on Sunday only"
+    },
+    {
+      "success": false,
+      "output": "usage: auto-critic.py [-h] -t TASK -p {start,mid,final}\n                      [--context-file CONTEXT_FILE]\nauto-critic.py: error: unrecognized arguments: - Flow ID ȫ��·֧��\n",
+      "validation": {
+        "passed": false,
+        "rules_checked": [
+          "review_file",
+          "score_threshold",
+          "zero_score_items"
+        ],
+        "details": {
+          "review_file_exists": false
+        },
+        "returncode": 2
+      },
+      "tool_id": "auto-critic",
+      "command": "py 30-scripts-tools\\auto-critic.py -t \"\"极简多工作流隔离方案落地 - Flow ID 全链路支持\"\" -p final",
+      "execution_time_ms": 119.91300000000001,
+      "step_id": 12,
+      "step_name": "Auto-Critic Review",
+      "blocking": false
+    },
+    {
+      "success": false,
+      "output": "usage: auto-critic_v7.py [-h] -t TASK [-p {start,mid,final}]\n                         [--create-remediation] [--flow_id FLOW_ID]\nauto-critic_v7.py: error: unrecognized arguments: - Flow ID ȫ��·֧��\n",
+      "validation": {
+        "passed": false,
+        "rules_checked": [
+          "review_file",
+          "score_threshold",
+          "blocker_items",
+          "warning_items"
+        ],
+        "details": {
+          "review_file_exists": false
+        },
+        "returncode": 2
+      },
+      "tool_id": "auto-critic-v7",
+      "command": "py 30-scripts-tools\\auto-critic_v7.py -t \"\"极简多工作流隔离方案落地 - Flow ID 全链路支持\"\" -p final --create-remediation",
+      "execution_time_ms": 140.072,
+      "step_id": 13,
+      "step_name": "Auto-Critic v7.0 Enhanced Review",
+      "blocking": false
+    },
+    {
+      "success": false,
+      "output": "usage: quality_gate.py [-h] [--check CHECK] [--report] [--json]\n                       [--min-score MIN_SCORE]\nquality_gate.py: error: argument --min-score: invalid int value: '{score}'\n",
+      "validation": {
+        "passed": false,
+        "rules_checked": [
+          "min_passing_score",
+          "checks"
+        ],
+        "details": {},
+        "returncode": 2
+      },
+      "tool_id": "quality-gate",
+      "command": "py 30-scripts-tools\\quality_gate.py --check {pattern} --min-score {score}",
+      "execution_time_ms": 123.614,
+      "step_id": 14,
+      "step_name": "Quality Gate Check",
+      "blocking": false
+    },
+    {
+      "success": true,
+      "output": "============================================================\nAUTO-FIXING P1 ISSUES\n============================================================\n\nFixed 0 files\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "os_system_remaining",
+          "eval_exec_remaining"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "p1-issue-fixer",
+      "command": "py 30-scripts-tools\\p1_issue_fixer.py --fix",
+      "execution_time_ms": 815.652,
+      "step_id": 15,
+      "step_name": "P1 Issue Auto-Fix",
+      "blocking": false
+    },
+    {
+      "success": false,
+      "output": "usage: issue_scanner.py [-h] [--path PATH]\n                        [--level {all,critical,major,minor,info}] [--json]\nissue_scanner.py: error: unrecognized arguments: --format json\n",
+      "validation": {
+        "passed": false,
+        "rules_checked": [
+          "categories",
+          "severity_levels"
+        ],
+        "details": {},
+        "returncode": 2
+      },
+      "tool_id": "issue-scanner",
+      "command": "py 30-scripts-tools\\issue_scanner.py --path 30-scripts-tools --format json",
+      "execution_time_ms": 132.20299999999997,
+      "step_id": 16,
+      "step_name": "Issue Scanner",
+      "blocking": false
+    }
+  ],
+  "total_steps": 16,
+  "passed_steps": 9,
+  "execution_time_ms": 5727.171
+}

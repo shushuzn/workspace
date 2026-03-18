@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:35:52.967434
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-multi-workflow-001\review.json  (lines 1-50 of 149)
+{
+  "phase": "final",
+  "timestamp": "2026-03-18T22:33:37.913666",
+  "checks": [
+    {
+      "id": "blocker-001",
+      "item": "致命问题 0 个",
+      "check": "check_fatal_issues",
+      "blocking": true,
+      "checked": false,
+      "notes": "FAIL",
+      "evidence": "Critical issues: 133"
+    },
+    {
+      "id": "blocker-002",
+      "item": "工作区正确性 (D:\\OpenClaw\\workspace)",
+      "check": "check_workspace",
+      "blocking": true,
+      "checked": true,
+      "notes": "OK",
+      "evidence": "os.getcwd() = D:\\OpenClaw\\workspace"
+    },
+    {
+      "id": "blocker-003",
+      "item": "代码/文档已提交 Git",
+      "check": "check_git_commit",
+      "blocking": true,
+      "checked": false,
+      "notes": "FAIL",
+      "evidence": "Uncommitted: 6 | Last commit: 8a7dc30 FLOW-20260318-flow-isolation-001 Commit review.json"
+    },
+    {
+      "id": "blocker-004",
+      "item": "【USER-004】批判者自动调用",
+      "check": "check_critic_auto_called",
+      "blocking": true,
+      "checked": true,
+      "notes": "OK",
+      "evidence": "Latest review: critic-auto-P1-Fix-Complete-Report-Added-v7.json, Score: N/A"
+    },
+    {
+      "id": "blocker-005",
+      "item": "【ZS-001】无工具多份定义",
+      "check": "check_unique_tool_ids",
+      "blocking": true,
+      "checked": true,
+      "notes": "OK",
+      "evidence": "Unique tool_ids: 19"
+    },
+    {
+
+[99 more lines. Use start_line=51 to continue.]
