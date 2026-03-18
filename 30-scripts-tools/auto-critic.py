@@ -28,7 +28,7 @@ MEMORY_DIR = WORKSPACE / '13-memory'
 
 
 def load_critic_template() -> dict:
-    """加载批判者审查模板 - 通用版"""
+    """加载批判者审查模板 - 通用版 + 零分项强制检查"""
     return {
         # ===== 任务前审查 (所有任务通用) =====
         "pre_task": [
@@ -56,6 +56,16 @@ def load_critic_template() -> dict:
             "验收标准 100% 满足",
             "代码/文档已提交 Git",
             "关键决策已记录到 MEMORY.md"
+        ],
+        
+        # ===== 零分项检查 (USER-004/AGENTS.md 强制要求) =====
+        # 这些是历史零分教训，必须每次检查
+        "zero_score_items": [
+            "【USER-004】批判者自动调用 (不能手动补审)",
+            "【USER-004】工具创建了必须使用 (创建→使用→验证)",
+            "【AGENTS.md】当日笔记压缩 (<100 行)",
+            "【AGENTS.md】会话压缩执行 (post_session_compress.py --auto)",
+            "【AGENTS.md】上下文大小验证 (<100KB)"
         ],
         
         # ===== 任务后审查 - 工具开发类 =====
@@ -163,6 +173,9 @@ def generate_critic_review(task_name: str, phase: str, context: dict = None) -> 
         # 通用检查项 (所有任务)
         checklist_items = template["post_task_common"].copy()
         
+        # 零分项检查 (所有任务必须检查 - 历史零分教训)
+        checklist_items.extend(template["zero_score_items"])
+        
         # 根据任务类型添加专项检查项
         type_specific_key = f"post_task_{task_type}"
         if type_specific_key in template:
@@ -174,7 +187,8 @@ def generate_critic_review(task_name: str, phase: str, context: dict = None) -> 
         ]
         review["status"] = "REQUIRES_REVIEW"
         review["message"] = "⚠️ 任务完成后必须完成批判者最终审查"
-        review["task_type_info"] = f"任务类型：{task_type} (已加载专项检查项)"
+        review["task_type_info"] = f"任务类型：{task_type} (已加载专项检查项 + 零分项)"
+        review["zero_score_warning"] = "⚠️ 零分项未通过 = 总分 0 分 (USER-004/AGENTS.md)"
     
     return review
 
@@ -263,6 +277,9 @@ def main():
     
     if 'task_type_info' in review:
         print(f"\n📋 {review['task_type_info']}")
+    
+    if 'zero_score_warning' in review:
+        print(f"\n🚨 {review['zero_score_warning']}")
     
     if 'message' in review:
         print(f"\n⚠️  {review['message']}")

@@ -1,8 +1,26 @@
 # Critic v5.0 - Universal Checklist Template
 
-**Version:** 5.0-Universal  
+**Version:** 5.0-Universal + Zero-Score Items  
 **Date:** 2026-03-18  
 **Auto-Critic:** `30-scripts-tools/auto-critic.py`
+
+---
+
+## 🚨 Zero-Score Items (CRITICAL)
+
+**These items MUST pass. Failure = 0/100 total score.**
+
+Historical lessons from actual zero-score failures:
+
+| Item | Source | Failure Case | Date |
+|------|--------|--------------|------|
+| **批判者自动调用** | USER-004 | Manual critic review instead of auto | 2026-03-18 |
+| **工具创建了必须使用** | USER-004 | Created tools but never used (0 usage) | 2026-03-18 |
+| **当日笔记压缩** | AGENTS.md | Daily note 260 lines (target <100) | 2026-03-18 |
+| **会话压缩执行** | AGENTS.md | post_session_compress.py not run | 2026-03-18 |
+| **上下文大小验证** | AGENTS.md | Context >100KB (was 64KB+ without compression) | 2026-03-18 |
+
+**Warning:** These 5 items are checked for EVERY task, regardless of type.
 
 ---
 
@@ -61,6 +79,16 @@ Auto-Critic automatically detects task type based on keywords:
 4. 验收标准 100% 满足
 5. 代码/文档已提交 Git
 6. 关键决策已记录到 MEMORY.md
+
+### Zero-Score Items (All Types - 5 Items) ⚠️ CRITICAL
+
+**Failure on ANY of these = 0/100 total score**
+
+7. 【USER-004】批判者自动调用 (不能手动补审)
+8. 【USER-004】工具创建了必须使用 (创建→使用→验证)
+9. 【AGENTS.md】当日笔记压缩 (<100 行)
+10. 【AGENTS.md】会话压缩执行 (post_session_compress.py --auto)
+11. 【AGENTS.md】上下文大小验证 (<100KB)
 
 ### Post-Task: Tool Development (6 Additional Items)
 
@@ -145,7 +173,13 @@ py 30-scripts-tools\auto-critic.py -t "Workspace-Cleanup" -p final
 
 ## Scoring
 
-### Score Calculation
+### Zero-Score Rule (CRITICAL)
+
+**If ANY zero-score item fails → Total Score = 0/100**
+
+Zero-score items override all other scoring. No exceptions.
+
+### Score Calculation (If Zero-Score Items Pass)
 
 | Category | Weight | Description |
 |----------|--------|-------------|
@@ -163,6 +197,7 @@ py 30-scripts-tools\auto-critic.py -t "Workspace-Cleanup" -p final
 | 85-94 | ✅ Pass | Minor improvements optional |
 | 70-84 | ⚠️ Borderline | Recommended improvements |
 | <70 | ❌ Fail | Required rework |
+| **0** | **❌ ZERO-SCORE** | **Critical failure - immediate rework** |
 
 ---
 
@@ -236,6 +271,16 @@ Future: Auto-invoke critic in git pre-commit hook for all commits.
 ---
 
 ## Best Practices
+
+### Zero-Score Prevention (TOP PRIORITY)
+
+1. **Invoke auto-critic.py at task START** - Not manual review at end
+2. **Use tools immediately after creation** - Create → Use → Verify workflow
+3. **Compress daily notes at session end** - Target <100 lines
+4. **Run post_session_compress.py --auto** - Every session without exception
+5. **Verify context size <100KB** - Use fast_load.py to check
+
+### General Best Practices
 
 1. **Invoke Early** - Run at task start, not just end
 2. **Be Honest** - Don't check items without evidence
