@@ -1,0 +1,41 @@
+{
+  "task": "\"Memory-Compression-Brainstorm\"",
+  "phase": "start",
+  "task_type": "documentation",
+  "timestamp": "2026-03-18T17:46:59.354326",
+  "checklist": [
+    {
+      "item": "任务目标清晰可衡量 (有明确验收标准)",
+      "checked": false,
+      "notes": ""
+    },
+    {
+      "item": "任务必要性已论证 (为什么做这个)",
+      "checked": false,
+      "notes": ""
+    },
+    {
+      "item": "已有方案调研 (≥3 个参考/竞品/文献)",
+      "checked": false,
+      "notes": ""
+    },
+    {
+      "item": "风险评估完成 (技术/时间/依赖)",
+      "checked": false,
+      "notes": ""
+    },
+    {
+      "item": "资源需求明确 (时间/工具/权限)",
+      "checked": false,
+      "notes": ""
+    },
+    {
+      "item": "成功标准定义 (如何算完成)",
+      "checked": false,
+      "notes": ""
+    }
+  ],
+  "score": 0,
+  "status": "REQUIRES_REVIEW",
+  "message": "⚠️ 任务开始前必须完成批判者设计审查"
+}
