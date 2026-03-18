@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "created_at": "2026-03-18T20:50:54.219505",
-  "last_updated": "2026-03-18T20:50:54.219509",
+  "created_at": "2026-03-18T21:06:30.522721",
+  "last_updated": "2026-03-18T21:06:30.522722",
   "tasks": {
     "REM-20260318-E32C84": {
       "task_id": "REM-20260318-E32C84",
@@ -13,12 +13,14 @@
       "created_at": "2026-03-18T20:14:51.541306",
       "deadline": "2026-03-19T20:14:51.541299",
       "assignee": "claw",
-      "status": "in_progress",
-      "linked_commit": "361aa85",
+      "status": "deferred",
+      "linked_commit": "b6c790d",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
-      "notes": []
+      "notes": [
+        "Deferred to remediation plan - 2026-03-18T21:06:30.019130"
+      ]
     },
     "REM-20260318-B22842": {
       "task_id": "REM-20260318-B22842",
@@ -47,12 +49,14 @@
       "created_at": "2026-03-18T20:36:37.151965",
       "deadline": "2026-03-19T20:36:37.151952",
       "assignee": "claw",
-      "status": "in_progress",
-      "linked_commit": "361aa85",
+      "status": "deferred",
+      "linked_commit": "b6c790d",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
-      "notes": []
+      "notes": [
+        "Deferred to remediation plan - 2026-03-18T21:06:30.150505"
+      ]
     },
     "REM-20260318-067A9A": {
       "task_id": "REM-20260318-067A9A",
@@ -81,12 +85,14 @@
       "created_at": "2026-03-18T20:36:37.152019",
       "deadline": "2026-03-25T20:36:37.152017",
       "assignee": "claw",
-      "status": "in_progress",
-      "linked_commit": "361aa85",
+      "status": "deferred",
+      "linked_commit": "b6c790d",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
-      "notes": []
+      "notes": [
+        "Deferred to remediation plan - 2026-03-18T21:06:30.279338"
+      ]
     },
     "REM-20260318-210E0A": {
       "task_id": "REM-20260318-210E0A",
@@ -98,12 +104,14 @@
       "created_at": "2026-03-18T20:36:37.152035",
       "deadline": "2026-03-25T20:36:37.152033",
       "assignee": "claw",
-      "status": "in_progress",
-      "linked_commit": "361aa85",
+      "status": "deferred",
+      "linked_commit": "b6c790d",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
-      "notes": []
+      "notes": [
+        "Deferred to remediation plan - 2026-03-18T21:06:30.402063"
+      ]
     },
     "REM-20260318-288004": {
       "task_id": "REM-20260318-288004",
@@ -149,12 +157,14 @@
       "created_at": "2026-03-18T20:36:37.152076",
       "deadline": "2026-03-25T20:36:37.152074",
       "assignee": "claw",
-      "status": "in_progress",
-      "linked_commit": "361aa85",
+      "status": "deferred",
+      "linked_commit": "b6c790d",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
-      "notes": []
+      "notes": [
+        "Deferred to remediation plan - 2026-03-18T21:06:30.522669"
+      ]
     },
     "REM-20260318-FBC596": {
       "task_id": "REM-20260318-FBC596",
@@ -206,18 +216,53 @@
       "reminder_count": 0,
       "last_reminder": null,
       "notes": []
+    },
+    "REM-20260318-AFD652": {
+      "task_id": "REM-20260318-AFD652",
+      "fail_item_id": "test-001",
+      "source": "test",
+      "title": "Test Item",
+      "description": "Test notes",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:04:55.647809",
+      "deadline": "2026-03-25T21:04:55.647802",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-49B3B4": {
+      "task_id": "REM-20260318-49B3B4",
+      "fail_item_id": "test-002",
+      "source": "test",
+      "title": "Test Item 2",
+      "description": "",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:04:55.649804",
+      "deadline": "2026-03-25T21:04:55.649801",
+      "assignee": "claw",
+      "status": "in_progress",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
     }
   },
   "statistics": {
-    "total_tasks": 12,
+    "total_tasks": 14,
     "by_status": {
-      "in_progress": 6,
+      "deferred": 5,
       "resolved": 5,
-      "open": 1
+      "open": 2,
+      "in_progress": 2
     },
     "by_severity": {
       "blocker": 4,
-      "warning": 8
+      "warning": 10
     },
     "overdue_count": 0,
     "completion_rate": 0.0

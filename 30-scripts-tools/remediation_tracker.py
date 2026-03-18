@@ -42,6 +42,7 @@ class TaskStatus(Enum):
     VERIFIED = "verified"
     CLOSED = "closed"
     OVERDUE = "overdue"
+    DEFERRED = "deferred"  # 延期处理 (历史遗留问题)
 
 
 class SeverityLevel(Enum):
@@ -355,6 +356,7 @@ def main():
     parser.add_argument('--resolve', type=str, help='解决任务 (task_id)')
     parser.add_argument('--commit', type=str, help='关联提交 SHA')
     parser.add_argument('--progress', type=str, help='标记为进行中 (task_id)')
+    parser.add_argument('--defer', type=str, help='延期处理 (task_id，用于历史遗留问题)')
     
     args = parser.parse_args()
     
@@ -466,6 +468,25 @@ def main():
         
         tracker._save()
         print(f"Task {task_id} marked as in_progress")
+        print(f"  Title: {task.title}")
+        print(f"  Status: {task.status}")
+        return 0
+    
+    # 延期处理 (历史遗留问题)
+    if args.defer:
+        task_id = args.defer
+        if task_id not in tracker.tasks:
+            print(f"[ERROR] Task not found: {task_id}")
+            return 1
+        
+        task = tracker.tasks[task_id]
+        task.status = TaskStatus.DEFERRED.value
+        task.notes.append(f"Deferred to remediation plan - {datetime.now().isoformat()}")
+        if args.commit:
+            task.linked_commit = args.commit
+        
+        tracker._save()
+        print(f"Task {task_id} marked as deferred (历史遗留问题)")
         print(f"  Title: {task.title}")
         print(f"  Status: {task.status}")
         return 0
