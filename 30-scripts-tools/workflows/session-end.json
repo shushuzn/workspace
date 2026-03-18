@@ -1,8 +1,8 @@
 {
   "workflow_id": "session-end",
   "name": "Session End Workflow",
-  "description": "会话结束工作流 - 8 步自动化流程",
-  "version": "2.0",
+  "description": "会话结束工作流 - 7 步自动化流程（不含 Git 操作）",
+  "version": "2.1",
   "last_updated": "2026-03-18",
   "principles": [
     "只引用 tool_id，禁止硬编码命令",
@@ -89,19 +89,6 @@
       },
       "blocking": false,
       "timeout_seconds": 60
-    },
-    {
-      "step_id": 8,
-      "name": "Git Commit & Push",
-      "description": "Git 提交并推送",
-      "tool_id": "git-commit-push",
-      "stage": "commit",
-      "parameters": {
-        "message": "${commit_message}"
-      },
-      "blocking": true,
-      "timeout_seconds": 30,
-      "note": "需要创建 git-commit-push 工具定义"
     }
   ],
   "execution_order": "sequential",
@@ -110,5 +97,9 @@
     "format": "console",
     "log_file": "30-scripts-tools/workflow-execution-log.json",
     "summary": true
+  },
+  "post_workflow": {
+    "git_operations": true,
+    "note": "Git add/commit/push handled by session_end.py after workflow completion"
   }
 }
