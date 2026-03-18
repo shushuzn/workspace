@@ -1,0 +1,9 @@
+{
+  "filters": [
+    "im.message.reaction.deleted_v1",
+    "im.chat.updated_v1",
+    "im.message.reaction.created_v1",
+    "im.chat.member.updated_v1"
+  ],
+  "description": "Feishu webhook event filters - events to ignore"
+}

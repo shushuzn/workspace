@@ -1,0 +1,12 @@
+{
+  "confirm_before_execute": false,
+  "report_progress": false,
+  "keep_current": true,
+  "updated_at": "2026-03-13T07:47:03.430394",
+  "counts": {
+    "confirm_before_execute": 6,
+    "report_progress": 0,
+    "keep_current": 4
+  },
+  "update_reason": "满意信号4次"
+}
