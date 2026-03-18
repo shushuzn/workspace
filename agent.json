@@ -50,7 +50,7 @@
       "robot_code": ""
     },
     "feishu": {
-      "enabled": false,
+      "enabled": true,
       "bot_prefix": "",
       "filter_tool_messages": false,
       "filter_thinking": false,

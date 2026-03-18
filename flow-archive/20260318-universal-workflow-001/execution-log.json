@@ -17,14 +17,14 @@
       },
       "tool_id": "session-compress",
       "command": "py 30-scripts-tools\\post_session_compress.py --auto",
-      "execution_time_ms": 220.038,
+      "execution_time_ms": 242.898,
       "step_id": 1,
       "step_name": "Session Compression",
       "blocking": true
     },
     {
       "success": true,
-      "output": "============================================================\nFast Load - 快速加载核心上下文\n============================================================\n✅ SOUL.md: 13.1KB\n✅ USER.md: 10.6KB\n✅ AGENTS.md: 11.4KB\n✅ TOOLS.md: 5.7KB\n✅ HEARTBEAT.md: 5.6KB\n✅ 13-memory/MEMORY.md: 9.2KB\n✅ 13-memory/2026-03-18.md: 1.8KB\n============================================================\n总大小：57.4KB (0.06MB)\nToken 估算：~14700 tokens\n============================================================\n\n全工作区：568.88MB\n节省：100.0%\n速度提升：10144.6x\n",
+      "output": "============================================================\nFast Load - 快速加载核心上下文\n============================================================\n✅ SOUL.md: 13.1KB\n✅ USER.md: 10.6KB\n✅ AGENTS.md: 11.4KB\n✅ TOOLS.md: 5.7KB\n✅ HEARTBEAT.md: 5.6KB\n✅ 13-memory/MEMORY.md: 9.2KB\n✅ 13-memory/2026-03-18.md: 1.8KB\n============================================================\n总大小：57.4KB (0.06MB)\nToken 估算：~14700 tokens\n============================================================\n\n全工作区：569.02MB\n节省：100.0%\n速度提升：10147.1x\n",
       "validation": {
         "passed": true,
         "rules_checked": [
@@ -39,7 +39,7 @@
       },
       "tool_id": "context-verify",
       "command": "py 30-scripts-tools\\fast_load.py",
-      "execution_time_ms": 6709.054,
+      "execution_time_ms": 6596.906,
       "step_id": 2,
       "step_name": "Context Size Verification",
       "blocking": true
@@ -59,7 +59,7 @@
       },
       "tool_id": "session-compress",
       "command": "py 30-scripts-tools\\post_session_compress.py --auto",
-      "execution_time_ms": 218.198,
+      "execution_time_ms": 208.929,
       "step_id": 3,
       "step_name": "Daily Note Check",
       "blocking": true
@@ -79,14 +79,14 @@
       },
       "tool_id": "memory-importance-assessor",
       "command": "py 30-scripts-tools\\memory_importance_assessor.py --memory \"13-memory/2026-03-19.md\"",
-      "execution_time_ms": 233.82,
+      "execution_time_ms": 237.073,
       "step_id": 4,
       "step_name": "Memory Importance Assessment",
       "blocking": false
     },
     {
       "success": true,
-      "output": "\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94m🔍 MEMORY CONSISTENCY CHECKER\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nTime: 2026-03-19 00:14:55\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mLOADING DATA\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[92m✅ Loaded MEMORY.md: 12 entries\u001b[0m\n\u001b[92m✅ Loaded memory_index.json: 46 entries\u001b[0m\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mRUNNING CONSISTENCY CHECKS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nCheck 1: Entry Count Matching\n\u001b[92m✅ Index contains all MEMORY.md entries (MEMORY.md=12, index=46)\u001b[0m\n\u001b[93m⚠️  Index contains 34 additional historical entries (normal)\u001b[0m\n\nCheck 2: Tag Statistics Accuracy\n\u001b[92m✅ Tag statistics match\u001b[0m\n\nCheck 3: Broken Tag Links\n\u001b[92m✅ No broken tag links\u001b[0m\n\nCheck 4: Duplicate Entries\n\u001b[92m✅ No duplicate entries\u001b[0m\n\nCheck 5: Orphaned Entries\n\u001b[92m✅ All MEMORY.md entries are indexed\u001b[0m\n\u001b[93m⚠️  Index contains 34 historical entries (normal)\u001b[0m\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mCONSISTENCY CHECK SUMMARY\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nPassed: 5/5\n\n✅ Entry Count\n✅ Tag Statistics\n✅ Broken Links\n✅ Duplicates\n✅ Orphaned Entries\n\nReport saved to: 30-scripts-tools\\consistency_check_report.json\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mFINAL STATUS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[92m✅ MEMORY SYSTEM CONSISTENCY: PASS\u001b[0m\n",
+      "output": "\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94m🔍 MEMORY CONSISTENCY CHECKER\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nTime: 2026-03-19 00:21:14\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mLOADING DATA\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[92m✅ Loaded MEMORY.md: 12 entries\u001b[0m\n\u001b[92m✅ Loaded memory_index.json: 46 entries\u001b[0m\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mRUNNING CONSISTENCY CHECKS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nCheck 1: Entry Count Matching\n\u001b[92m✅ Index contains all MEMORY.md entries (MEMORY.md=12, index=46)\u001b[0m\n\u001b[93m⚠️  Index contains 34 additional historical entries (normal)\u001b[0m\n\nCheck 2: Tag Statistics Accuracy\n\u001b[92m✅ Tag statistics match\u001b[0m\n\nCheck 3: Broken Tag Links\n\u001b[92m✅ No broken tag links\u001b[0m\n\nCheck 4: Duplicate Entries\n\u001b[92m✅ No duplicate entries\u001b[0m\n\nCheck 5: Orphaned Entries\n\u001b[92m✅ All MEMORY.md entries are indexed\u001b[0m\n\u001b[93m⚠️  Index contains 34 historical entries (normal)\u001b[0m\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mCONSISTENCY CHECK SUMMARY\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nPassed: 5/5\n\n✅ Entry Count\n✅ Tag Statistics\n✅ Broken Links\n✅ Duplicates\n✅ Orphaned Entries\n\nReport saved to: 30-scripts-tools\\consistency_check_report.json\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mFINAL STATUS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[92m✅ MEMORY SYSTEM CONSISTENCY: PASS\u001b[0m\n",
       "validation": {
         "passed": true,
         "rules_checked": [
@@ -98,7 +98,7 @@
       },
       "tool_id": "memory-consistency-checker",
       "command": "py 30-scripts-tools\\memory_consistency_checker.py",
-      "execution_time_ms": 208.893,
+      "execution_time_ms": 197.023,
       "step_id": 5,
       "step_name": "Memory Consistency Check",
       "blocking": false
@@ -120,7 +120,7 @@
       },
       "tool_id": "memory-tag-search",
       "command": "py 30-scripts-tools\\memory_tag_search.py --tag critical",
-      "execution_time_ms": 196.1,
+      "execution_time_ms": 219.302,
       "step_id": 6,
       "step_name": "Tag Search Test",
       "blocking": false
@@ -162,7 +162,7 @@
     },
     {
       "success": false,
-      "output": "Review saved to: 30-scripts-tools\\critic-auto-头脑风暴工作流归档完成.json\n\n\n============================================================\n[CRITIC v6.0] FULLY AUTOMATED - FINAL\n============================================================\n\nTask: \"头脑风暴工作流归档完成\"\nPhase: final\nType: general\nTime: 2026-03-19T00:14:56.612797\nStatus: FAIL\nScore: 0/100\nChecklist Items: 20\n\nX Zero-score items FAILED: 4\n\nWARNING: 6 items failed verification\n\nChecklist:\n  [OK] 1. 致命问题 0 个\n      Notes: 无异常抛出\n      Evidence: No exceptions during task execution\n  [OK] 2. 严重问题≤2 个\n      Notes: 用户未报告中止\n      Evidence: No critical failure reported by user\n  [OK] 3. 一般问题≤10 个\n      Notes: 自动通过\n      Evidence: Auto-pass (assumed no minor issues)\n  [OK] 4. 验收标准 100% 满足\n      Notes: 任务已完成，3 个提交\n      Evidence: Git commits: e966d66 Archive brainstorm workflow in flow-archive/, ea8df20 [FLOW ID: 20260318-universal-workflow-001] \"头脑风暴工作流创建完成\", b959bb0 Add brainstorm workflow (20260318-brainstorm-001)\n  [OK] 5. 代码/文档已提交 Git\n      Notes: 已提交 3 个 commits，无未提交更改\n      Evidence: Commits: e966d66 Archive brainstorm workflow in flow-archive/, ea8df20 [FLOW ID: 20260318-universal-workflow-001] \"头脑风暴工作流创建完成\", b959bb0 Add brainstorm workflow (20260318-brainstorm-001) | Uncommitted: None\n  [FAIL] 6. 关键决策已记录到 MEMORY.md\n      Notes: 批判者审查文件未找到\n      Evidence: ❌ File not found: 30-scripts-tools\\critic-auto-头脑风暴工作流归档完成.json\n  [FAIL] 7. 【USER-004】批判者自动调用 (不能手动补审)\n      Notes: 批判者审查文件未找到\n      Evidence: ❌ No critic review file found for task: 头脑风暴工作流归档完成\n  [OK] 8. 【USER-004】工具创建了必须使用 (创建→使用→验证)\n      Notes: 非工具任务 (general)，跳过工具使用检查\n      Evidence: Task type: general - Tool usage check not applicable\n  [FAIL] 9. 【AGENTS.md】当日笔记压缩 (<100 行)\n      Notes: 当日笔记未找到\n      Evidence: File not found: 13-memory\\2026-03-19.md\n  [FAIL] 10. 【AGENTS.md】会话压缩执行 (post_session_compress.py --auto)\n      Notes: 当日笔记未找到\n      Evidence: File not found: 13-memory\\2026-03-19.md\n  [FAIL] 11. 【AGENTS.md】上下文大小验证 (<100KB)\n      Notes: 当日笔记未找到\n      Evidence: File not found: 13-memory\\2026-03-19.md\n  [OK] 12. 【USER-001】工作区正确性 (D:\\OpenClaw\\workspace, C 盘=0 分)\n      Notes: 当前工作区：D:\\OpenClaw\\workspace\n      Evidence: os.getcwd() = D:\\OpenClaw\\workspace OK CORRECT\n  [OK] 13. 【USER-004】检查项必须有证据 (无证据=0 分)\n      Notes: 所有检查项都有自动生成的证据\n      Evidence: auto-critic.py v6.0: Fully automated verification with context-aware evidence\n  [OK] 14. 【ZS-001】无工具多份定义 (grep 重复 tool_id)\n      Notes: 无重复 tool_id\n      Evidence: ✅ Unique tool_ids: 24\n  [OK] 15. 【ZS-002】工作流无硬编码命令 (grep 'py 30-scripts')\n      Notes: 无硬编码命令\n      Evidence: ✅ All workflows use tool_executor\n  [OK] 16. 【ZS-003】未修改工具核心逻辑 (对比参数)\n      Notes: 未修改核心逻辑\n      Evidence: ✅ Workflows only override non-core params\n  [OK] 17. 【ZS-004】未绕过工具库 (检查执行日志)\n      Notes: 通过 tool_executor 调用\n      Evidence: ✅ Uses tool_executor only\n  [OK] 18. 【ZS-005】未事后补录定义 (检查 Git 历史)\n      Notes: 工具库已定义 24 个工具\n      Evidence: ✅ 24 tools defined\n  [FAIL] 19. 【ZS-006】工具有效使用 (被工作流引用)\n      Notes: 工具未使用：{'brainstorm-diverge', 'critical-checks', 'critical-issue-detector', 'brainstorm-action', 'brainstorm-define', 'brainstorm-prioritize', 'flow-manager', 'remediation-tracker'}\n      Evidence: ⚠️ Unused tools: {'brainstorm-diverge', 'critical-checks', 'critical-issue-detector', 'brainstorm-action', 'brainstorm-define', 'brainstorm-prioritize', 'flow-manager', 'remediation-tracker'}\n  [OK] 20. 【ZS-007】变更自动触发 (检查 change_log.json)\n      Notes: 变更日志有 1 条记录\n      Evidence: ✅ Last change: 2026-03-18T19:06:52.876339\n\n============================================================\nFAILED ITEMS (需要修复):\n  - 关键决策已记录到 MEMORY.md\n  - 【USER-004】批判者自动调用 (不能手动补审)\n  - 【AGENTS.md】当日笔记压缩 (<100 行)\n  - 【AGENTS.md】会话压缩执行 (post_session_compress.py --auto)\n  - 【AGENTS.md】上下文大小验证 (<100KB)\n  - 【ZS-006】工具有效使用 (被工作流引用)\n============================================================\n\n\n============================================================\n[USER-004] 批判者审查已自动调用 - 全自动验证所有检查项\n============================================================\n\n",
+      "output": "usage: auto-critic.py [-h] -t TASK -p {start,mid,final}\n                      [--context-file CONTEXT_FILE]\nauto-critic.py: error: unrecognized arguments: - ��/�ӹ������㼶\n",
       "validation": {
         "passed": false,
         "rules_checked": [
@@ -171,22 +171,20 @@
           "zero_score_items"
         ],
         "details": {
-          "review_file_exists": false,
-          "score": 0,
-          "score_check": "FAIL (0 < 95)"
+          "review_file_exists": false
         },
-        "returncode": 1
+        "returncode": 2
       },
       "tool_id": "auto-critic",
-      "command": "py 30-scripts-tools\\auto-critic.py -t \"\"头脑风暴工作流归档完成\"\" -p final",
-      "execution_time_ms": 1404.224,
+      "command": "py 30-scripts-tools\\auto-critic.py -t \"\"工作流架构修正 - 主/子工作流层级\"\" -p final",
+      "execution_time_ms": 264.071,
       "step_id": 12,
       "step_name": "Auto-Critic Review",
       "blocking": false
     },
     {
       "success": false,
-      "output": "\n============================================================\n[CRITIC v7.0] FULLY AUTOMATED - FINAL\n============================================================\n\nTask: \"头脑风暴工作流归档完成\"\nPhase: final\nTime: 2026-03-19T00:16:23.373467\nStatus: BLOCKED\nScore: 0/100\nChecklist Items: 15\n\nX Blocker failures: 2\n⚠ Warning failures: 6\n\nChecklist:\n  [FAIL] 1. 致命问题 0 个\n      Notes: FAIL\n      Evidence: Critical issues: 133\n      🚨 BLOCKER failure\n  [OK] 2. 工作区正确性 (D:\\OpenClaw\\workspace)\n      Notes: OK\n      Evidence: os.getcwd() = D:\\OpenClaw\\workspace\n  [FAIL] 3. 代码/文档已提交 Git\n      Notes: FAIL\n      Evidence: Uncommitted: 8 | Last commit: e966d66 Archive brainstorm workflow in flow-archive/\n      🚨 BLOCKER failure\n  [OK] 4. 【USER-004】批判者自动调用\n      Notes: OK\n      Evidence: Latest review: critic-auto-头脑风暴工作流归档完成.json, Score: 0\n  [OK] 5. 【ZS-001】无工具多份定义\n      Notes: OK\n      Evidence: Unique tool_ids: 24\n  [OK] 6. 【ZS-002】工作流无硬编码命令\n      Notes: OK\n      Evidence: Hardcoded commands: 0\n  [FAIL] 7. 严重问题≤2 个\n      Notes: FAIL\n      Evidence: High risk issues: 42\n      ⚠ WARNING failure\n  [FAIL] 8. 一般问题≤10 个\n      Notes: FAIL\n      Evidence: Minor issues: 1060\n      ⚠ WARNING failure\n  [FAIL] 9. 【AGENTS.md】当日笔记压缩 (<100 行)\n      Notes: FAIL\n      Evidence: Daily note not found\n      ⚠ WARNING failure\n  [FAIL] 10. 【AGENTS.md】会话压缩执行\n      Notes: FAIL\n      Evidence: Daily note not found\n      ⚠ WARNING failure\n  [FAIL] 11. 【ZS-006】工具有效使用 (新增工具)\n      Notes: FAIL\n      Evidence: New tools: ['brainstorm_action', 'brainstorm_define', 'brainstorm_diverge', 'brainstorm_prioritize']\n      ⚠ WARNING failure\n  [OK] 12. 代码质量检查 (pylint/flake8)\n      Notes: OK\n      Evidence: Quality issues: 0\n  [FAIL] 13. 安全检查 (无高危漏洞)\n      Notes: FAIL\n      Evidence: Security issues: 153\n      ⚠ WARNING failure\n  [OK] 14. 文档结构清晰\n      Notes: OK\n      Evidence: Documentation files: 23\n  [OK] 15. 单元测试覆盖率\n      Notes: OK\n      Evidence: Test files: 1\n\n============================================================\nFAILED ITEMS (需要修复):\n  - 致命问题 0 个 (🚨 BLOCKER)\n  - 代码/文档已提交 Git (🚨 BLOCKER)\n  - 严重问题≤2 个 (⚠ WARNING)\n  - 一般问题≤10 个 (⚠ WARNING)\n  - 【AGENTS.md】当日笔记压缩 (<100 行) (⚠ WARNING)\n  - 【AGENTS.md】会话压缩执行 (⚠ WARNING)\n  - 【ZS-006】工具有效使用 (新增工具) (⚠ WARNING)\n  - 安全检查 (无高危漏洞) (⚠ WARNING)\n============================================================\n\n[Remediation] Created 8 tasks:\n  • REM-20260319-8FCDE8\n  • REM-20260319-441177\n  • REM-20260319-F62957\n  • REM-20260319-F1842D\n  • REM-20260319-C3DD0E\n  • REM-20260319-72FFD4\n  • REM-20260319-213E64\n  • REM-20260319-9EEAEA\n\nReview saved to: 30-scripts-tools\\critic-auto-头脑风暴工作流归档完成-v7.json\n",
+      "output": "usage: auto-critic_v7.py [-h] -t TASK [-p {start,mid,final}]\n                         [--create-remediation] [--flow_id FLOW_ID]\nauto-critic_v7.py: error: unrecognized arguments: - ��/�ӹ������㼶\n",
       "validation": {
         "passed": false,
         "rules_checked": [
@@ -196,15 +194,13 @@
           "warning_items"
         ],
         "details": {
-          "review_file_exists": false,
-          "score": 0,
-          "score_check": "FAIL (0 < 95)"
+          "review_file_exists": false
         },
-        "returncode": 1
+        "returncode": 2
       },
       "tool_id": "auto-critic-v7",
-      "command": "py 30-scripts-tools\\auto-critic_v7.py -t \"\"头脑风暴工作流归档完成\"\" -p final --create-remediation",
-      "execution_time_ms": 86863.057,
+      "command": "py 30-scripts-tools\\auto-critic_v7.py -t \"\"工作流架构修正 - 主/子工作流层级\"\" -p final --create-remediation",
+      "execution_time_ms": 272.34999999999997,
       "step_id": 13,
       "step_name": "Auto-Critic v7.0 Enhanced Review",
       "blocking": false
@@ -223,7 +219,7 @@
       },
       "tool_id": "quality-gate",
       "command": "py 30-scripts-tools\\quality_gate.py --check 30-scripts-tools/*.py --min-score 80",
-      "execution_time_ms": 7301.159000000001,
+      "execution_time_ms": 3932.593,
       "step_id": 14,
       "step_name": "Quality Gate Check",
       "blocking": true
@@ -242,7 +238,7 @@
       },
       "tool_id": "p1-issue-fixer",
       "command": "py 30-scripts-tools\\p1_issue_fixer.py --fix",
-      "execution_time_ms": 1682.249,
+      "execution_time_ms": 1430.825,
       "step_id": 15,
       "step_name": "P1 Issue Auto-Fix",
       "blocking": true
@@ -261,7 +257,7 @@
       },
       "tool_id": "issue-scanner",
       "command": "py 30-scripts-tools\\issue_scanner.py --path 30-scripts-tools --format text",
-      "execution_time_ms": 280.101,
+      "execution_time_ms": 254.86399999999998,
       "step_id": 16,
       "step_name": "Issue Scanner",
       "blocking": false
@@ -269,5 +265,5 @@
   ],
   "total_steps": 16,
   "passed_steps": 12,
-  "execution_time_ms": 105321.25600000001
+  "execution_time_ms": 13860.379
 }
