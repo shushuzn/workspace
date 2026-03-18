@@ -1,6 +1,13 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "last_updated": "2026-03-18",
+  "changes": [
+    "Added auto-critic-v7 with issue detection and remediation tracking",
+    "Added issue-scanner for comprehensive code scanning",
+    "Added critical-issue-detector for high-risk issue detection",
+    "Added remediation-tracker for FAIL item tracking",
+    "Added quality-gate for code quality checks"
+  ],
   "description": "唯一工具库 - 全系统唯一真值来源",
   "principles": [
     "唯一数据源原则：所有工具只允许有一份唯一定义",
@@ -314,6 +321,170 @@
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 30
+    },
+    "auto-critic-v7": {
+      "tool_id": "auto-critic-v7",
+      "name": "Auto-Critic v7.0 Enhanced",
+      "description": "增强版批判者 - 集成问题检测/整改闭环/质量门禁",
+      "version": "7.0",
+      "command": "py 30-scripts-tools\\auto-critic_v7.py -t \"{task}\" -p {phase} --create-remediation",
+      "parameters": {
+        "task": {
+          "type": "string",
+          "required": true,
+          "description": "任务名称",
+          "validation": "^[a-zA-Z0-9-_]+$"
+        },
+        "phase": {
+          "type": "string",
+          "required": true,
+          "description": "审查阶段",
+          "enum": ["start", "mid", "final"],
+          "default": "final"
+        }
+      },
+      "validation": {
+        "review_file": "30-scripts-tools/critic-auto-{task}-v7.json",
+        "score_threshold": 95,
+        "blocker_items": [
+          "致命问题 0 个",
+          "工作区正确性",
+          "代码/文档已提交 Git",
+          "批判者自动调用",
+          "无工具多份定义",
+          "工作流无硬编码命令"
+        ],
+        "warning_items": [
+          "严重问题≤2 个",
+          "一般问题≤10 个",
+          "当日笔记压缩<100 行",
+          "会话压缩执行",
+          "工具有效使用",
+          "代码质量检查",
+          "安全检查"
+        ]
+      },
+      "triggers": ["session_end", "task_complete"],
+      "review_required": true,
+      "blocking": true,
+      "timeout_seconds": 120,
+      "components": ["issue_scanner", "critical_issue_detector", "remediation_tracker", "quality_gate"]
+    },
+    "issue-scanner": {
+      "tool_id": "issue-scanner",
+      "name": "Issue Scanner",
+      "description": "问题扫描器 - 日志/静态分析/TODO/代码异味/安全扫描",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\issue_scanner.py --path {path} --format {format}",
+      "parameters": {
+        "path": {
+          "type": "string",
+          "required": false,
+          "description": "扫描路径",
+          "default": "30-scripts-tools"
+        },
+        "format": {
+          "type": "string",
+          "required": false,
+          "description": "输出格式",
+          "enum": ["text", "json"],
+          "default": "text"
+        }
+      },
+      "validation": {
+        "categories": ["pylint", "flake8", "security", "complexity", "todo", "code_smell"],
+        "severity_levels": ["critical", "high", "medium", "low", "info"]
+      },
+      "triggers": ["auto_critic_v7"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 60
+    },
+    "critical-issue-detector": {
+      "tool_id": "critical-issue-detector",
+      "name": "Critical Issue Detector",
+      "description": "严重问题检测器 - 异常栈/核心模块变更/数据丢失风险",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\critical_issue_detector.py --path {path}",
+      "parameters": {
+        "path": {
+          "type": "string",
+          "required": false,
+          "description": "扫描路径",
+          "default": "."
+        }
+      },
+      "validation": {
+        "risk_levels": ["critical", "high", "medium", "low"],
+        "categories": ["data_loss", "core_change", "security", "exception_stack"]
+      },
+      "triggers": ["auto_critic_v7"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 60
+    },
+    "remediation-tracker": {
+      "tool_id": "remediation-tracker",
+      "name": "Remediation Tracker",
+      "description": "整改跟踪器 - 管理 FAIL 项整改闭环",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\remediation_tracker.py --create --fail-items {file}",
+      "parameters": {
+        "create": {
+          "type": "boolean",
+          "required": false,
+          "description": "创建整改任务"
+        },
+        "fail-items": {
+          "type": "string",
+          "required": false,
+          "description": "FAIL 项 JSON 文件"
+        },
+        "report": {
+          "type": "boolean",
+          "required": false,
+          "description": "生成报告"
+        }
+      },
+      "validation": {
+        "task_status": ["open", "in_progress", "resolved", "verified", "closed", "overdue"],
+        "severity_levels": ["blocker", "warning", "info"]
+      },
+      "triggers": ["auto_critic_v7_fail"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 30
+    },
+    "quality-gate": {
+      "tool_id": "quality-gate",
+      "name": "Quality Gate Checker",
+      "description": "质量门禁 - 代码质量/安全/复杂度/测试覆盖率",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\quality_gate.py --check {pattern} --min-score {score}",
+      "parameters": {
+        "check": {
+          "type": "string",
+          "required": false,
+          "description": "检查文件模式",
+          "default": "30-scripts-tools/*.py"
+        },
+        "min-score": {
+          "type": "integer",
+          "required": false,
+          "description": "最低通过分数",
+          "default": 80,
+          "min": 0,
+          "max": 100
+        }
+      },
+      "validation": {
+        "min_passing_score": 80,
+        "checks": ["pylint", "flake8", "security", "complexity", "test_coverage", "documentation"]
+      },
+      "triggers": ["auto_critic_v7"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 60
     }
   },
   "workflows": {
