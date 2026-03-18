@@ -162,9 +162,10 @@ Feedback Loop
 ## Tools & Infrastructure
 
 ### Core Memory System
-- **Memory Utils** (`memory_utils.py`) - Health check, audit, indexer (58→46 tools consolidated)
-- **Git Pre-Check** (`git-precheck.py`) - 7 checks before commit (18K files in 30s)
-- **Memory Distiller v2** (`memory_distiller_v2.py`) - Quality-driven (≥0.90 threshold)
+- **Memory Utils** (`memory_utils.py`) - Health check, audit, indexer (58→46 tools)
+- **Git Pre-Check** (`git-precheck.py`) - 7 checks before commit (18K files/30s)
+- **Context Compressor** (`context_compressor.py`) - Session summary (~95% compression)
+- **Memory Distiller v2** (`memory_distiller_v2.py`) - Quality-driven (≥0.90)
 
 ### 7-Persona & Autonomy
 - **7-Persona Agent** (`memory_persona.py`) - 7 agents, collective decision making
