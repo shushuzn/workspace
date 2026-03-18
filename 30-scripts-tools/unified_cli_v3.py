@@ -69,6 +69,52 @@ COMMAND_ALIASES = {
     'system health': 'system_health_checker.py --check',
     'deploy': 'auto_deployer.py',
     'performance': 'performance_analyzer.py',
+    
+    # File Organization (新增)
+    'scan files': 'file-organizer.py --scan',
+    'clean duplicates': 'clean-duplicates-safe.py',
+    'organize root': 'organize-root-files-v2.py',
+    'compress tiff': 'compress-tiff-to-png.py',
+    
+    # Backup & Recovery (新增)
+    'backup restructure': 'backup-strategy-restructure.py',
+    'disaster cleanup': 'disaster-recovery-cleanup.py',
+    
+    # Git Hooks (新增)
+    'install hooks': 'install-git-hooks.py',
+    'setup hooks': 'setup-git-hooks.py',
+    'test hook report': 'test-hook-report.py',
+    
+    # Security (新增)
+    'security scan': 'security_auditor.py',
+    'security fix': 'security_auto_fixer.py',
+    
+    # Monitoring (新增)
+    'monitor': 'real_time_monitor.py',
+    'anomaly detect': 'anomaly_detector_pro.py',
+    'error analyze': 'error_analyzer.py',
+    
+    # ArXiv (新增)
+    'arxiv scan': 'arxiv_collector_v2.py',
+    'arxiv workflow': 'arxiv_workflow.py',
+    
+    # Feishu (新增)
+    'feishu notify': 'feishu_notification.py',
+    'feishu analytics': 'feishu-analytics-dashboard.py',
+    
+    # Auto tools (新增)
+    'auto distill': 'auto_distill.py',
+    'auto test': 'auto_test_runner.py',
+    'auto deploy': 'auto_deploy.py',
+    
+    # Smart tools (新增)
+    'smart doc': 'smart_doc_generator.py',
+    'smart scheduler': 'smart_scheduler.py',
+    'smart workflow': 'smart_workflow_optimizer.py',
+    
+    # Workspace (新增)
+    'workspace init': 'workspace_init.py',
+    'workspace check': 'workspace.py',
 }
 
 # Command categories
@@ -81,6 +127,16 @@ COMMAND_CATEGORIES = {
     'workflow': ['workflow', 'visualizer', 'engine'],
     'knowledge': ['knowledge', 'kg'],
     'system': ['system', 'health', 'deploy', 'performance'],
+    'files': ['scan files', 'clean', 'organize', 'compress'],
+    'backup': ['backup', 'disaster', 'recovery'],
+    'git': ['hooks', 'install', 'setup', 'test'],
+    'security': ['security', 'scan', 'fix'],
+    'monitor': ['monitor', 'anomaly', 'error'],
+    'arxiv': ['arxiv'],
+    'feishu': ['feishu'],
+    'auto': ['auto', 'distill', 'deploy'],
+    'smart': ['smart', 'scheduler'],
+    'workspace': ['workspace'],
 }
 
 
@@ -276,29 +332,54 @@ class UnifiedCLI:
             help_text = f"\n📚 {category.upper()} Commands\n"
             help_text += "=" * 60 + "\n\n"
             
-            for alias, cmd in commands[:10]:
+            for alias, cmd in commands[:15]:
                 help_text += f"  {alias}\n"
                 help_text += f"    → {cmd}\n\n"
             
             return help_text
         
         # General help
-        help_text = "\n🎯 Unified CLI v3 - Available Commands\n"
+        help_text = "\n🎯 Unified CLI v3 - 工作区统一命令行界面\n"
         help_text += "=" * 60 + "\n\n"
         
-        help_text += "Usage:\n"
-        help_text += "  python unified_cli_v3.py <command> [args]\n\n"
+        help_text += "用法:\n"
+        help_text += "  py unified_cli_v3.py <命令> [参数]\n"
+        help_text += "  py unified_cli_v3.py --interactive  (交互模式)\n"
+        help_text += "  py unified_cli_v3.py --suggest <关键词>  (获取建议)\n\n"
         
-        help_text += "Examples:\n"
-        help_text += "  python unified_cli_v3.py \"scan tools\"\n"
-        help_text += "  python unified_cli_v3.py \"analyze tools\"\n"
-        help_text += "  python unified_cli_v3.py \"search memory query\"\n\n"
+        help_text += "常用命令:\n"
+        help_text += "  工具管理:\n"
+        help_text += "    scan tools          - 扫描 302 个工具\n"
+        help_text += "    list tools          - 列出所有工具\n"
+        help_text += "    tool stats          - 工具统计\n\n"
         
-        help_text += "Categories:\n"
+        help_text += "  文件整理:\n"
+        help_text += "    scan files          - 扫描文件问题\n"
+        help_text += "    clean duplicates    - 清理重复文件\n"
+        help_text += "    organize root       - 整理根目录\n\n"
+        
+        help_text += "  系统监控:\n"
+        help_text += "    system health       - 系统健康检查\n"
+        help_text += "    monitor             - 实时监控\n"
+        help_text += "    security scan       - 安全扫描\n\n"
+        
+        help_text += "  备份恢复:\n"
+        help_text += "    backup restructure  - 备份重构\n"
+        help_text += "    disaster cleanup    - 灾难清理\n\n"
+        
+        help_text += "  Git Hooks:\n"
+        help_text += "    install hooks       - 安装 Git Hooks\n"
+        help_text += "    test hook report    - 测试 Hook\n\n"
+        
+        help_text += "命令分类:\n"
         for category in COMMAND_CATEGORIES.keys():
             help_text += f"  {category}\n"
         
-        help_text += "\nUse 'help <category>' for category-specific commands.\n"
+        help_text += "\n使用 'help <分类>' 查看分类命令。\n"
+        help_text += "\n示例:\n"
+        help_text += "  py unified_cli_v3.py \"scan tools\"\n"
+        help_text += "  py unified_cli_v3.py \"system health\"\n"
+        help_text += "  py unified_cli_v3.py --interactive\n"
         
         return help_text
     
@@ -364,6 +445,7 @@ def main():
     parser.add_argument('args', nargs='*', help='Additional arguments')
     parser.add_argument('--interactive', '-i', action='store_true', help='Interactive mode')
     parser.add_argument('--suggest', type=str, help='Get suggestions')
+    parser.add_argument('--help-category', type=str, help='Help for category')
     args = parser.parse_args()
     
     cli = UnifiedCLI()
@@ -377,7 +459,15 @@ def main():
         for s in suggestions:
             print(f"  {s}")
     
+    elif args.help_category:
+        print(cli.get_help(args.help_category))
+    
     elif args.command:
+        # Handle 'help <category>' syntax
+        if args.command.lower() == 'help' and args.args:
+            print(cli.get_help(args.args[0]))
+            sys.exit(0)
+        
         command = cli.parse_command(args.command)
         
         if not command:

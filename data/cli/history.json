@@ -54,5 +54,13 @@
     "duration_seconds": 4.187141,
     "exit_code": 0,
     "success": true
+  },
+  {
+    "command": "clean-duplicates-safe.py",
+    "args": [],
+    "timestamp": "2026-03-18T08:36:08.766677",
+    "duration_seconds": 1.544045,
+    "exit_code": 0,
+    "success": true
   }
 ]
