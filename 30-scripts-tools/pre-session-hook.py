@@ -174,6 +174,56 @@ def check_forbidden_dirs() -> bool:
     return True
 
 
+def check_daily_note_pollution() -> tuple:
+    """检查日常笔记是否被污染 (包含历史总结)"""
+    print("\n日常笔记污染检查:")
+    
+    today = datetime.now().strftime("%Y-%m-%d")
+    daily_file = WORKSPACE / "13-memory" / f"{today}.md"
+    
+    if not daily_file.exists():
+        print("[INFO] 今日笔记不存在 (首次会话)")
+        return True, None
+    
+    content = daily_file.read_text(encoding='utf-8')
+    lines = content.split('\n')
+    
+    # 检查 1: 行数
+    if len(lines) > 150:  # 放宽到 150 行
+        print(f"[WARN] 行数过多：{len(lines)} 行 (>150 行)")
+    
+    # 检查 2: 大小
+    size_kb = daily_file.stat().st_size / 1024
+    if size_kb > 8:  # 放宽到 8KB
+        print(f"[WARN] 文件过大：{size_kb:.1f}KB (>8KB)")
+    
+    # 检查 3: 污染模式 (更精确)
+    pollution_patterns = [
+        ("## 历史总结", "包含历史总结章节"),
+        ("## Previous Summary", "包含 Previous Summary 章节"),
+        ("## 昨日成果", "包含昨日成果章节"),
+        ("## 所有会话", "包含所有会话章节"),
+        ("## 总结所有", "包含总结所有章节"),
+    ]
+    
+    found_issues = []
+    for pattern, desc in pollution_patterns:
+        if pattern in content:
+            found_issues.append(desc)
+    
+    if found_issues:
+        print(f"[WARN] 检测到污染：{', '.join(found_issues)}")
+        return False, f"污染：{found_issues}"
+    
+    # 综合判断
+    if len(lines) > 150 or size_kb > 8:
+        print(f"[WARN] 可能包含历史总结 (建议检查)")
+        return True, "可能污染 (需人工检查)"
+    
+    print(f"[OK] 日常笔记清洁 ({len(lines)}行，{size_kb:.1f}KB)")
+    return True, None
+
+
 def check_session_compressed() -> tuple:
     """检查上次会话是否已压缩"""
     print("\n会话压缩检查:")
@@ -297,6 +347,7 @@ def main():
         (".contextignore", check_contextignore()),
         ("核心文件", check_core_files()[0]),
         ("禁止目录", check_forbidden_dirs()),
+        ("日常笔记污染", check_daily_note_pollution()[0]),  # 新增
     ]
     
     # 会话压缩检查 (关键)

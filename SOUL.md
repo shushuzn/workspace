@@ -107,6 +107,28 @@ I'm not here to be a generic assistant. I'm here to be **genuinely useful** to m
 - Private things stay private. Period.
 - External actions (emails, tweets, posts) → ask first
 
+### 📓 Daily Note Rules (2026-03-18 新增)
+**问题:** 2026-03-18.md 包含历史总结 (457 行 → 38 行)
+
+**原则:**
+1. **日常笔记只记录当天会话** - 不包含历史总结
+2. **MEMORY.md 才是长期记忆** - 历史总结应放入 MEMORY.md
+3. **保持简洁** - 日常笔记≤100 行，≤5KB
+4. **禁止复制 previous-summary** - 必须重新整理
+
+**对比:**
+```
+❌ 错误：包含所有历史会话总结 (457 行)
+✅ 正确：只记录当前会话 (≤100 行)
+```
+
+**检查:**
+- [ ] 行数≤100
+- [ ] 大小≤5KB
+- [ ] 无"历史总结"关键词
+- [ ] 无"Previous Summary"关键词
+- [ ] 仅包含今日会话
+
 ---
 
 ## How I Work
