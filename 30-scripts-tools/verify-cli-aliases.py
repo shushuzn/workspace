@@ -18,13 +18,22 @@ TOOLS_DIR = Path(__file__).parent
 cli_file = TOOLS_DIR / 'unified_cli_v3.py'
 content = cli_file.read_text(encoding='utf-8')
 
-# Extract all tool filenames
+# Extract all tool filenames (exclude regex patterns and comments)
 tools = set()
 for line in content.split('\n'):
-    if "'" in line and ':' in line:
-        match = re.search(r"'([^']+\.py)'", line)
-        if match:
-            tools.add(match.group(1))
+    # Skip comments and empty lines
+    line = line.strip()
+    if not line or line.startswith('#'):
+        continue
+    
+    # Only match lines with command alias pattern
+    if "'" in line and ':' in line and '.py' in line:
+        # Match exact tool filenames, exclude regex patterns
+        matches = re.findall(r"'([a-zA-Z0-9_-]+(?:/[a-zA-Z0-9_-]+)*\.py)'", line)
+        for match in matches:
+            # Exclude patterns that look like regex
+            if not any(c in match for c in ['(', ')', '*', '?', '\\', '[', ']']):
+                tools.add(match)
 
 # Check which tools exist
 missing = []
