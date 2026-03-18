@@ -1,0 +1,114 @@
+{
+  "workflow_id": "session-end",
+  "name": "Session End Workflow",
+  "description": "会话结束工作流 - 8 步自动化流程",
+  "version": "2.0",
+  "last_updated": "2026-03-18",
+  "principles": [
+    "只引用 tool_id，禁止硬编码命令",
+    "实时从工具库拉取最新定义",
+    "参数只覆盖非核心配置"
+  ],
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "Session Compression",
+      "description": "压缩会话到结构化摘要",
+      "tool_id": "session-compress",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 30
+    },
+    {
+      "step_id": 2,
+      "name": "Context Size Verification",
+      "description": "验证上下文大小<100KB",
+      "tool_id": "context-verify",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 10
+    },
+    {
+      "step_id": 3,
+      "name": "Daily Note Check",
+      "description": "检查当日笔记<100 行",
+      "tool_id": "session-compress",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 10,
+      "note": "复用 session-compress，它已包含行数检查"
+    },
+    {
+      "step_id": 4,
+      "name": "Memory Consistency Check",
+      "description": "记忆数据一致性检查",
+      "tool_id": "memory-consistency-checker",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": false,
+      "timeout_seconds": 30
+    },
+    {
+      "step_id": 5,
+      "name": "Tag Search Test",
+      "description": "测试标签搜索功能（验证索引可用性）",
+      "tool_id": "memory-tag-search",
+      "stage": "pre-commit",
+      "parameters": {
+        "tag": "critical",
+        "limit": 3
+      },
+      "blocking": false,
+      "timeout_seconds": 10
+    },
+    {
+      "step_id": 6,
+      "name": "Memory Benchmark",
+      "description": "记忆系统性能测试（仅周一运行）",
+      "tool_id": "memory-benchmark",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": false,
+      "timeout_seconds": 60,
+      "conditional": {
+        "run_only_on": "Monday"
+      }
+    },
+    {
+      "step_id": 7,
+      "name": "Auto-Critic Review",
+      "description": "批判者最终审查",
+      "tool_id": "auto-critic",
+      "stage": "pre-commit",
+      "parameters": {
+        "task": "${commit_message}",
+        "phase": "final"
+      },
+      "blocking": false,
+      "timeout_seconds": 60
+    },
+    {
+      "step_id": 8,
+      "name": "Git Commit & Push",
+      "description": "Git 提交并推送",
+      "tool_id": "git-commit-push",
+      "stage": "commit",
+      "parameters": {
+        "message": "${commit_message}"
+      },
+      "blocking": true,
+      "timeout_seconds": 30,
+      "note": "需要创建 git-commit-push 工具定义"
+    }
+  ],
+  "execution_order": "sequential",
+  "stop_on_blocking_failure": true,
+  "output": {
+    "format": "console",
+    "log_file": "30-scripts-tools/workflow-execution-log.json",
+    "summary": true
+  }
+}
