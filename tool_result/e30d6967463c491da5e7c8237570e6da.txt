@@ -1,0 +1,37 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T00:10:02.295699
+# ---
+Command failed with exit code 1.
+[stderr]
+============================================================
+Git Pre-Commit Hook v2 - 杩愯惀鑰呮��鏌� + 鎵瑰垽鑰� v5.0
+============================================================
+
+妫�鏌� 8 涓�鏂囦欢...
+
+
+============================================================
+鉂� 闃绘�㈡彁浜わ細鏁忔劅鏂囦欢/澶ф枃浠�/鎶ュ憡鏂囦欢
+============================================================
+
+  - 鑷�鍔ㄧ敓鎴愭姤鍛婏細30-scripts-tools/BRAINSTORM-WORKFLOW-DESIGN.md
+  - 鑷�鍔ㄧ敓鎴愭姤鍛婏細30-scripts-tools/BRAINSTORM-WORKFLOW-GUIDE.md
+  - 鑷�鍔ㄧ敓鎴愭姤鍛婏細30-scripts-tools/brainstorm_action.py
+  - 鑷�鍔ㄧ敓鎴愭姤鍛婏細30-scripts-tools/brainstorm_define.py
+  - 鑷�鍔ㄧ敓鎴愭姤鍛婏細30-scripts-tools/brainstorm_diverge.py
+  - 鑷�鍔ㄧ敓鎴愭姤鍛婏細30-scripts-tools/brainstorm_prioritize.py
+  - 鑷�鍔ㄧ敓鎴愭姤鍛婏細30-scripts-tools/workflows/brainstorm-001.json
+
+瑙ｅ喅鏂规��:
+  1. 鍒犻櫎鏂囦欢锛歡it reset HEAD <file> && rm <file>
+  2. 鎴栨墜鍔ㄧ‘璁ゅ悗浣跨敤锛歡it commit --no-verify
+
+============================================================
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\temp_git.py", line 19, in <module>
+    subprocess.run(["git", "commit", "-m", "Add brainstorm workflow (20260318-brainstorm-001)"], check=True)
+    ~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 579, in run
+    raise CalledProcessError(retcode, process.args,
+                             output=stdout, stderr=stderr)
+subprocess.CalledProcessError: Command '['git', 'commit', '-m', 'Add brainstorm workflow (20260318-brainstorm-001)']' returned non-zero exit status 1.
