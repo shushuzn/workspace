@@ -352,6 +352,8 @@ def main():
     parser.add_argument('--overdue', action='store_true', help='仅超期任务')
     parser.add_argument('--report', action='store_true', help='生成报告')
     parser.add_argument('--json', action='store_true', help='输出 JSON')
+    parser.add_argument('--resolve', type=str, help='解决任务 (task_id)')
+    parser.add_argument('--commit', type=str, help='关联提交 SHA')
     
     args = parser.parse_args()
     
@@ -428,6 +430,25 @@ def main():
         else:
             print_report(report)
         
+        return 0
+    
+    # 解决任务
+    if args.resolve:
+        task_id = args.resolve
+        if task_id not in tracker.tasks:
+            print(f"[ERROR] Task not found: {task_id}")
+            return 1
+        
+        task = tracker.tasks[task_id]
+        task.status = TaskStatus.RESOLVED.value
+        if args.commit:
+            task.linked_commit = args.commit
+        
+        tracker._save()
+        print(f"Resolved task {task_id}")
+        print(f"  Title: {task.title}")
+        print(f"  Status: {task.status}")
+        print(f"  Commit: {args.commit or 'N/A'}")
         return 0
     
     # 默认显示状态
