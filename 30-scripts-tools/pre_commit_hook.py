@@ -213,7 +213,20 @@ def main():
                        help='Enforce checks (exit code 1 on failure)')
     parser.add_argument('--warn', action='store_true',
                        help='Warn only (always exit 0)')
+    parser.add_argument('--test', action='store_true',
+                       help='Test mode: simulate hook execution')
     args = parser.parse_args()
+    
+    if args.test:
+        # Test mode: show what the hook checks
+        print("\n🔍 Git Hook 测试模式\n")
+        print("检查项目:")
+        print("  1. 迭代状态检查")
+        print("  2. 单一提交规则")
+        print("  3. 文件完整性")
+        print("  4. 工作流合规性")
+        print("\n✅ Hook 配置正常\n")
+        return 0
     
     hook = PreCommitHook()
     

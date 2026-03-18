@@ -83,7 +83,7 @@ COMMAND_ALIASES = {
     # Git Hooks (新增)
     'install hooks': 'install-git-hooks.py',
     'setup hooks': 'setup-git-hooks.py',
-    'test hook report': 'test-hook-report.py',
+    'test hook': 'pre_commit_hook.py --test',
     
     # Security (新增)
     'security scan': 'security_auditor.py',
@@ -115,6 +115,42 @@ COMMAND_ALIASES = {
     # Workspace (新增)
     'workspace init': 'workspace_init.py',
     'workspace check': 'workspace.py',
+    
+    # Research (新增)
+    'research cnt': 'cnt-research-runner.py',
+    'research arxiv': 'arxiv_workflow.py',
+    'critic check': 'critic_auto_fix.py',
+    
+    # Data (新增)
+    'data scan': 'tool_registry.py --scan',
+    'data clean': 'clean-duplicates-safe.py',
+    
+    # Persona (新增)
+    'persona list': 'memory_persona.py --list',
+    'persona status': 'meta_cognition_monitor.py',
+    
+    # Memory (新增)
+    'memory distill': 'auto_distill.py',
+    'memory search': 'ultimate_memory_search_v3.py --demo',
+    'memory quality': 'memory_quality_assessor.py',
+    
+    # Experiment (新增)
+    'experiment run': 'experiment_platform.py',
+    'experiment analyze': 'data_sync_enhancer.py',
+    
+    # Documentation (新增)
+    'doc generate': 'doc_generator.py',
+    'doc update': 'unified_doc_generator.py',
+    
+    # Cleanup (新增)
+    'cleanup reports': 'cleanup_reports.py',
+    'cleanup cache': 'cache_manager.py --clean',
+    'cleanup temp': 'file-organizer.py --clean',
+    
+    # Visualization (新增)
+    'visualize workflow': 'workflow_visualizer_web.py',
+    'visualize kg': 'knowledge_graph_builder.py --visualize',
+    'dashboard': 'phase4_dashboard.py',
 }
 
 # Command categories
@@ -122,10 +158,10 @@ COMMAND_CATEGORIES = {
     'registry': ['scan', 'list', 'stats', 'health', 'search'],
     'analytics': ['analyze', 'report', 'dashboard'],
     'orchestrator': ['workflow', 'run', 'create'],
-    'memory': ['memory', 'search'],
+    'memory': ['memory', 'search', 'distill', 'quality'],
     'cache': ['cache'],
     'workflow': ['workflow', 'visualizer', 'engine'],
-    'knowledge': ['knowledge', 'kg'],
+    'knowledge': ['knowledge', 'kg', 'doc'],
     'system': ['system', 'health', 'deploy', 'performance'],
     'files': ['scan files', 'clean', 'organize', 'compress'],
     'backup': ['backup', 'disaster', 'recovery'],
@@ -137,6 +173,12 @@ COMMAND_CATEGORIES = {
     'auto': ['auto', 'distill', 'deploy'],
     'smart': ['smart', 'scheduler'],
     'workspace': ['workspace'],
+    'research': ['research', 'cnt', 'critic'],
+    'data': ['data'],
+    'persona': ['persona'],
+    'experiment': ['experiment'],
+    'cleanup': ['cleanup'],
+    'visualization': ['visualize', 'dashboard'],
 }
 
 
@@ -167,8 +209,28 @@ class UnifiedCLI:
     
     def _save_history(self):
         """Save command history"""
+        self.history_file.parent.mkdir(parents=True, exist_ok=True)
         with open(self.history_file, 'w', encoding='utf-8') as f:
-            json.dump(self.history[-100:], f, indent=2)  # Keep last 100
+            json.dump(self.history[-100:], f, indent=2, ensure_ascii=False)  # Keep last 100
+    
+    def show_history(self, limit: int = 10) -> str:
+        """Show command history"""
+        if not self.history:
+            return "\n📭 暂无历史记录\n"
+        
+        history_text = f"\n📜 最近 {min(limit, len(self.history))} 条命令历史\n"
+        history_text += "=" * 60 + "\n\n"
+        
+        for i, entry in enumerate(reversed(self.history[-limit:]), 1):
+            timestamp = entry.get('timestamp', 'Unknown')[:16].replace('T', ' ')
+            command = entry.get('command', 'Unknown')
+            success = '✅' if entry.get('success', False) else '❌'
+            duration = entry.get('duration_seconds', 0)
+            
+            history_text += f"{i:2d}. {success} {command}\n"
+            history_text += f"    ⏱️  {duration:.2f}s | 🕐 {timestamp}\n\n"
+        
+        return history_text
     
     def parse_command(self, user_input: str) -> Optional[str]:
         """
@@ -345,13 +407,15 @@ class UnifiedCLI:
         help_text += "用法:\n"
         help_text += "  py unified_cli_v3.py <命令> [参数]\n"
         help_text += "  py unified_cli_v3.py --interactive  (交互模式)\n"
-        help_text += "  py unified_cli_v3.py --suggest <关键词>  (获取建议)\n\n"
+        help_text += "  py unified_cli_v3.py --suggest <关键词>  (获取建议)\n"
+        help_text += "  py unified_cli_v3.py --history  (查看历史)\n\n"
         
         help_text += "常用命令:\n"
         help_text += "  工具管理:\n"
         help_text += "    scan tools          - 扫描 302 个工具\n"
         help_text += "    list tools          - 列出所有工具\n"
-        help_text += "    tool stats          - 工具统计\n\n"
+        help_text += "    tool stats          - 工具统计\n"
+        help_text += "    history             - 查看命令历史\n\n"
         
         help_text += "  文件整理:\n"
         help_text += "    scan files          - 扫描文件问题\n"
@@ -363,13 +427,18 @@ class UnifiedCLI:
         help_text += "    monitor             - 实时监控\n"
         help_text += "    security scan       - 安全扫描\n\n"
         
+        help_text += "  研究相关:\n"
+        help_text += "    research cnt        - CNT 研究\n"
+        help_text += "    critic check        - 批判者检查\n"
+        help_text += "    arxiv scan          - arXiv 扫描\n\n"
+        
         help_text += "  备份恢复:\n"
         help_text += "    backup restructure  - 备份重构\n"
         help_text += "    disaster cleanup    - 灾难清理\n\n"
         
         help_text += "  Git Hooks:\n"
         help_text += "    install hooks       - 安装 Git Hooks\n"
-        help_text += "    test hook report    - 测试 Hook\n\n"
+        help_text += "    test hook           - 测试 Hook\n\n"
         
         help_text += "命令分类:\n"
         for category in COMMAND_CATEGORIES.keys():
@@ -446,6 +515,8 @@ def main():
     parser.add_argument('--interactive', '-i', action='store_true', help='Interactive mode')
     parser.add_argument('--suggest', type=str, help='Get suggestions')
     parser.add_argument('--help-category', type=str, help='Help for category')
+    parser.add_argument('--history', action='store_true', help='Show command history')
+    parser.add_argument('--history-limit', type=int, default=10, help='History limit')
     args = parser.parse_args()
     
     cli = UnifiedCLI()
@@ -459,6 +530,9 @@ def main():
         for s in suggestions:
             print(f"  {s}")
     
+    elif args.history:
+        print(cli.show_history(args.history_limit))
+    
     elif args.help_category:
         print(cli.get_help(args.help_category))
     
@@ -466,6 +540,12 @@ def main():
         # Handle 'help <category>' syntax
         if args.command.lower() == 'help' and args.args:
             print(cli.get_help(args.args[0]))
+            sys.exit(0)
+        
+        # Handle 'history' command
+        if args.command.lower() == 'history':
+            limit = int(args.args[0]) if args.args else 10
+            print(cli.show_history(limit))
             sys.exit(0)
         
         command = cli.parse_command(args.command)

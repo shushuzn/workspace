@@ -1,0 +1,86 @@
+[
+  {
+    "timestamp": "2026-03-18T08:41:14.504475",
+    "overall_score": 95.0,
+    "status": "healthy",
+    "persona_scores": {
+      "planner": 95.0,
+      "executor": 95.0,
+      "critic": 95.0,
+      "learner": 95.0,
+      "coordinator": 95.0,
+      "innovator": 95.0,
+      "meta_cognition": 95.0
+    },
+    "collaboration_matrix": {
+      "planner": {
+        "planner": 100.0,
+        "executor": 91.0,
+        "critic": 89.0,
+        "learner": 94.0,
+        "coordinator": 92.0,
+        "innovator": 93.0,
+        "meta_cognition": 93.0
+      },
+      "executor": {
+        "planner": 87.0,
+        "executor": 100.0,
+        "critic": 88.0,
+        "learner": 88.0,
+        "coordinator": 87.0,
+        "innovator": 89.0,
+        "meta_cognition": 94.0
+      },
+      "critic": {
+        "planner": 88.0,
+        "executor": 92.0,
+        "critic": 100.0,
+        "learner": 87.0,
+        "coordinator": 92.0,
+        "innovator": 75.0,
+        "meta_cognition": 86.0
+      },
+      "learner": {
+        "planner": 88.0,
+        "executor": 88.0,
+        "critic": 94.0,
+        "learner": 100.0,
+        "coordinator": 94.0,
+        "innovator": 88.0,
+        "meta_cognition": 92.0
+      },
+      "coordinator": {
+        "planner": 94.0,
+        "executor": 93.0,
+        "critic": 89.0,
+        "learner": 91.0,
+        "coordinator": 100.0,
+        "innovator": 93.0,
+        "meta_cognition": 87.0
+      },
+      "innovator": {
+        "planner": 91.0,
+        "executor": 85.0,
+        "critic": 75.0,
+        "learner": 86.0,
+        "coordinator": 88.0,
+        "innovator": 100.0,
+        "meta_cognition": 93.0
+      },
+      "meta_cognition": {
+        "planner": 87.0,
+        "executor": 92.0,
+        "critic": 90.0,
+        "learner": 90.0,
+        "coordinator": 85.0,
+        "innovator": 86.0,
+        "meta_cognition": 100.0
+      }
+    },
+    "conflicts_this_week": 0,
+    "alerts": [],
+    "recommendations": [
+      "System healthy - continue monitoring"
+    ]
+  }
+]
