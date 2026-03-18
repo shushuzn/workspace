@@ -9,29 +9,51 @@ import os
 import sys
 import re
 import json
+import logging
 from datetime import datetime
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+logger = logging.getLogger(__name__)
 
 def extract_key_insights(daily_note_file):
     """从日常笔记中提取关键洞察"""
     
     if not os.path.exists(daily_note_file):
-        print(f"[ERROR] 文件不存在：{daily_note_file}")
-        return []
+        raise FileNotFoundError(f"文件不存在：{daily_note_file}")
     
-    with open(daily_note_file, 'r', encoding='utf-8') as f:
-        content = f.read()
+    try:
+        with open(daily_note_file, 'r', encoding='utf-8') as f:
+            content = f.read()
+    except Exception as e:
+        raise IOError(f"读取文件失败：{daily_note_file} - {str(e)}")
     
     # 提取模式：查找带有标记的洞察
     # 支持：[XXX-001] 标题 或 ### [XXX-001] 标题
-    pattern = r'(?:###\s*)?\[([A-Z]{2,4}-\d{3})\]\s*([^\n]+)'
+    # 修复：更严格的正则表达式，避免提取到无效内容
+    # 要求：ID 格式 [XX-000] 或 [XXX-000]，标题至少 2 字符，以字母/数字/中文开头
+    pattern = r'^(?:###\s*)?\[([A-Z]{2,4}-\d{3})\]\s+([A-Za-z0-9\u4e00-\u9fff][^\n]{1,49})$'
     
-    matches = re.findall(pattern, content)
+    matches = re.findall(pattern, content, re.MULTILINE)
     
+    # 去重：同一个 ID 只保留第一次出现
+    seen_ids = set()
     insights = []
     for match_id, title in matches:
+        title_clean = title.strip()
+        # 跳过无效标题（太短、包含特殊字符等）
+        if len(title_clean) < 2 or title_clean in [')', '(', ']', '[', '}']:
+            continue
+        if match_id in seen_ids:
+            continue
+        seen_ids.add(match_id)
         insights.append({
             'id': match_id,
-            'title': title.strip(),
+            'title': title_clean,
             'source': daily_note_file,
             'extracted_at': datetime.now().strftime("%Y-%m-%d %H:%M")
         })
@@ -150,6 +172,8 @@ def update_daily_note_header(daily_note_file, distilled=True):
 def real_time_distill(daily_note_file=None, memory_file=None, auto_commit=True):
     """实时蒸馏主函数"""
     
+    logger.info("实时蒸馏 v3.0 启动")
+    
     # 自动检测文件（支持双工作区）
     if not daily_note_file:
         today = datetime.now().strftime("%Y-%m-%d")
@@ -164,10 +188,11 @@ def real_time_distill(daily_note_file=None, memory_file=None, auto_commit=True):
         for pf in possible_files:
             if os.path.exists(pf):
                 daily_note_file = pf
+                logger.info(f"自动检测到日常笔记：{pf}")
                 break
         
         if not daily_note_file:
-            print("[ERROR] 未找到今日日常笔记")
+            logger.error("未找到今日日常笔记")
             return False
     
     if not memory_file:
@@ -183,37 +208,56 @@ def real_time_distill(daily_note_file=None, memory_file=None, auto_commit=True):
         for pm in possible_memory:
             if os.path.exists(pm):
                 memory_file = pm
+                logger.info(f"自动检测到记忆文件：{pm}")
                 break
         
         if not memory_file:
-            print("[ERROR] 未找到 MEMORY.md")
+            logger.error("未找到 MEMORY.md")
             return False
     
-    print(f"[INFO] 实时蒸馏 v3.0")
-    print(f"[INFO] 来源：{daily_note_file}")
-    print(f"[INFO] 目标：{memory_file}")
+    logger.info(f"来源：{daily_note_file}")
+    logger.info(f"目标：{memory_file}")
     
     # 提取洞察
-    insights = extract_key_insights(daily_note_file)
+    try:
+        insights = extract_key_insights(daily_note_file)
+    except FileNotFoundError as e:
+        logger.error(str(e))
+        return False
+    except IOError as e:
+        logger.error(str(e))
+        return False
+    except Exception as e:
+        logger.error(f"提取洞察失败：{str(e)}")
+        return False
     
     if not insights:
-        print("[WARN] 未提取到洞察，可能需要手动整理")
+        logger.warning("未提取到洞察，可能需要手动整理")
         # 仍然标记为已蒸馏
         update_daily_note_header(daily_note_file, distilled=True)
         return True
     
-    print(f"[INFO] 提取到 {len(insights)} 条洞察:")
+    logger.info(f"提取到 {len(insights)} 条洞察:")
     for insight in insights:
-        print(f"  - [{insight['id']}] {insight['title']}")
+        logger.info(f"  - [{insight['id']}] {insight['title']}")
     
     # 读取日常笔记内容
-    with open(daily_note_file, 'r', encoding='utf-8') as f:
-        daily_content = f.read()
+    try:
+        with open(daily_note_file, 'r', encoding='utf-8') as f:
+            daily_content = f.read()
+    except Exception as e:
+        logger.error(f"读取日常笔记失败：{str(e)}")
+        return False
     
     # 追加到 MEMORY.md
-    success = append_to_memory(memory_file, insights, daily_content)
+    try:
+        success = append_to_memory(memory_file, insights, daily_content)
+    except Exception as e:
+        logger.error(f"追加到 MEMORY.md 失败：{str(e)}")
+        return False
     
     if not success:
+        logger.error("追加到 MEMORY.md 失败")
         return False
     
     # 更新日常笔记标记
@@ -221,10 +265,16 @@ def real_time_distill(daily_note_file=None, memory_file=None, auto_commit=True):
     
     # 自动 Git 提交
     if auto_commit:
-        print("\n[INFO] 触发自动 Git 提交...")
-        from memory_git_auto_commit import auto_commit_memory
-        auto_commit_memory(memory_file, f"实时蒸馏：添加 {len(insights)} 条记忆")
+        logger.info("触发自动 Git 提交...")
+        try:
+            from memory_git_auto_commit import auto_commit_memory
+            auto_commit_memory(memory_file, f"实时蒸馏：添加 {len(insights)} 条记忆")
+        except ImportError:
+            logger.warning("memory_git_auto_commit 模块未找到，跳过自动提交")
+        except Exception as e:
+            logger.warning(f"自动提交失败：{str(e)}")
     
+    logger.info("实时蒸馏完成")
     return True
 
 def main():

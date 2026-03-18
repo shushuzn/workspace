@@ -8,7 +8,16 @@
 import os
 import sys
 import subprocess
+import logging
 from datetime import datetime
+
+# 配置日志
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    datefmt='%Y-%m-%d %H:%M:%S'
+)
+logger = logging.getLogger(__name__)
 
 def run_git_command(cmd, cwd=None):
     """执行 Git 命令"""
@@ -42,13 +51,34 @@ def auto_commit_memory(memory_file, message_prefix="记忆"):
             break
     
     if not workspace:
-        print("[ERROR] 未找到 Git 仓库")
+        logger.error("未找到 Git 仓库")
         return False
     
     # 检查文件是否存在
     if not os.path.exists(memory_file):
-        print(f"[ERROR] 文件不存在：{memory_file}")
+        logger.error(f"文件不存在：{memory_file}")
         return False
+    
+    # 修复：处理跨工作区路径问题
+    # 如果文件和工作区不在同一驱动器，使用文件所在驱动器的根目录作为工作区
+    memory_drive = os.path.splitdrive(memory_file)[0]
+    workspace_drive = os.path.splitdrive(workspace)[0]
+    
+    if memory_drive != workspace_drive:
+        # 跨驱动器，查找文件所在驱动器的 Git 仓库
+        memory_parent = os.path.dirname(memory_file)
+        # 向上查找 .git 目录
+        current = memory_parent
+        while current != os.path.dirname(current):  # 未到根目录
+            if os.path.exists(os.path.join(current, '.git')):
+                workspace = current
+                logger.info(f"找到目标工作区：{workspace}")
+                break
+            current = os.path.dirname(current)
+        
+        if memory_drive != os.path.splitdrive(workspace)[0]:
+            logger.error(f"跨驱动器且未找到目标驱动器 Git 仓库")
+            return False
     
     # 获取相对路径
     rel_path = os.path.relpath(memory_file, workspace)
@@ -60,18 +90,18 @@ def auto_commit_memory(memory_file, message_prefix="记忆"):
     )
     
     if not stdout.strip():
-        print("[OK] 记忆文件无变更，跳过提交")
+        logger.info("记忆文件无变更，跳过提交")
         return True
     
     # 添加文件
-    print(f"[ADD] 添加文件：{rel_path}")
+    logger.info(f"添加文件：{rel_path}")
     success, stdout, stderr = run_git_command(
         f'git add "{rel_path}"',
         cwd=workspace
     )
     
     if not success:
-        print(f"[ERROR] Git add 失败：{stderr}")
+        logger.error(f"Git add 失败：{stderr}")
         return False
     
     # 生成提交信息
@@ -79,32 +109,32 @@ def auto_commit_memory(memory_file, message_prefix="记忆"):
     commit_msg = f"{message_prefix}: 更新记忆文件 ({timestamp})"
     
     # 提交
-    print(f"[COMMIT] {commit_msg}")
+    logger.info(f"提交：{commit_msg}")
     success, stdout, stderr = run_git_command(
         f'git commit -m "{commit_msg}"',
         cwd=workspace
     )
     
     if not success:
-        print(f"[WARN] Git commit 失败：{stderr}")
+        logger.warning(f"Git commit 失败：{stderr}")
         # 可能是没有变更
         if "nothing to commit" in stderr:
             return True
         return False
     
     # 推送
-    print("[PUSH] 推送到远程仓库...")
+    logger.info("推送到远程仓库...")
     success, stdout, stderr = run_git_command(
         'git push origin master',
         cwd=workspace
     )
     
     if not success:
-        print(f"[WARN] Git push 失败：{stderr}")
+        logger.warning(f"Git push 失败：{stderr}")
         # 推送失败不影响本地提交
         return True
     
-    print("[OK] 记忆文件已提交并推送")
+    logger.info("记忆文件已提交并推送")
     return True
 
 def main():
