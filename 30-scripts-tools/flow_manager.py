@@ -227,7 +227,7 @@ class FlowManager:
                 json.dump(state, f, indent=2, ensure_ascii=False)
         
         self._save_registry()
-        print(f"✅ Flow archived: {flow_id}")
+        print(f"[OK] Flow archived: {flow_id}")
         return True
     
     def list_flows(self, status_filter: Optional[str] = None):
@@ -250,7 +250,148 @@ class FlowManager:
             created = info.get('created_at', '')[:19]
             print(f"{flow_id:<35} {business:<20} {status:<10} {created:<20}")
         
-        print(f"\nTotal: {len(flows)} flows")
+        print("-" * 90)
+        print(f"Total: {len(flows)} flows")
+
+
+# ============================================================================
+# 配置版本控制功能 (新增)
+# ============================================================================
+
+def list_registry_versions():
+    """列出所有可用的 tools_registry 版本"""
+    
+    versions_dir = WORKSPACE / "flow-archive" / "tools_registry_versions"
+    index_file = versions_dir / "VERSION_INDEX.json"
+    
+    print("=" * 60)
+    print("可用的 tools_registry 版本")
+    print("=" * 60)
+    
+    if not index_file.exists():
+        print("[ERROR] 版本索引不存在")
+        print(f"  路径：{index_file}")
+        print("\n请先运行初始化:")
+        print("  py 30-scripts-tools\\init_version_control.py")
+        return
+    
+    with open(index_file, 'r', encoding='utf-8') as f:
+        index = json.load(f)
+    
+    versions = index.get('versions', [])
+    current = index.get('current_version')
+    
+    if not versions:
+        print("[INFO] 暂无备份版本")
+        return
+    
+    print(f"\n{'版本':<15} {'文件名':<30} {'日期':<12} {'说明'}")
+    print("-" * 80)
+    
+    for v in sorted(versions, key=lambda x: x['created_at'], reverse=True):
+        version = v.get('version', 'unknown')
+        filename = v.get('filename', '')[:28]
+        date = v.get('created_at', '')[:10]
+        reason = v.get('reason', '')[:20]
+        marker = " [CURRENT]" if version == current else ""
+        print(f"v{version:<14} {filename:<30} {date:<12} {reason}{marker}")
+    
+    print("-" * 80)
+    print(f"当前版本：v{current}")
+    print(f"可用版本数：{len(versions)}")
+    print("\n使用示例:")
+    print("  py flow_manager.py --rollback-registry --to v1.3.0")
+    print("=" * 60)
+
+
+def rollback_registry(target_version: str):
+    """回滚 tools_registry.json 到指定版本"""
+    import shutil
+    
+    versions_dir = WORKSPACE / "flow-archive" / "tools_registry_versions"
+    index_file = versions_dir / "VERSION_INDEX.json"
+    registry_file = WORKSPACE / "30-scripts-tools" / "tools_registry.json"
+    
+    print("=" * 60)
+    print(f"回滚 tools_registry.json 到 v{target_version}")
+    print("=" * 60)
+    
+    # 检查版本索引
+    if not index_file.exists():
+        print("[ERROR] 版本索引不存在")
+        return 1
+    
+    with open(index_file, 'r', encoding='utf-8') as f:
+        index = json.load(f)
+    
+    # 查找目标版本
+    target = None
+    for v in index.get('versions', []):
+        if v.get('version') == target_version:
+            target = v
+            break
+    
+    if not target:
+        print(f"[ERROR] 未找到版本 v{target_version}")
+        print("\n使用 --list-versions 查看可用版本")
+        return 1
+    
+    # 备份当前版本 (回滚前的快照)
+    current_version = index.get('current_version')
+    if current_version:
+        print(f"\n[Step 1] 备份当前版本 v{current_version}...")
+        today = datetime.now().strftime('%Y%m%d')
+        backup_filename = f"v{current_version}-{today}-pre-rollback.json"
+        backup_path = versions_dir / backup_filename
+        shutil.copy2(registry_file, backup_path)
+        print(f"  [OK] 已备份：{backup_filename}")
+        
+        # 添加到版本索引
+        rollback_record = {
+            "version": current_version,
+            "filename": backup_filename,
+            "created_at": datetime.now().isoformat(),
+            "backup_path": str(backup_path),
+            "reason": f"Pre-rollback backup before restoring to v{target_version}"
+        }
+        index["versions"].append(rollback_record)
+    
+    # 执行回滚
+    print(f"\n[Step 2] 恢复 v{target_version}...")
+    source_file = versions_dir / target['filename']
+    
+    if not source_file.exists():
+        print(f"[ERROR] 版本文件不存在：{source_file}")
+        return 1
+    
+    shutil.copy2(source_file, registry_file)
+    print(f"  [OK] 已恢复：{target['filename']}")
+    
+    # 更新版本索引
+    index["current_version"] = target_version
+    with open(index_file, 'w', encoding='utf-8') as f:
+        json.dump(index, f, indent=2, ensure_ascii=False)
+    
+    print(f"\n[Step 3] 更新版本索引...")
+    print(f"  [OK] 当前版本：v{target_version}")
+    
+    # 验证回滚
+    print(f"\n[Step 4] 验证回滚...")
+    with open(registry_file, 'r', encoding='utf-8') as f:
+        restored = json.load(f)
+    restored_version = restored.get('version', 'unknown')
+    
+    if restored_version == target_version:
+        print(f"  [OK] 验证通过 - 当前版本 v{restored_version}")
+    else:
+        print(f"  [WARN] 版本不匹配 - 期望 v{target_version}, 实际 v{restored_version}")
+    
+    print("\n" + "=" * 60)
+    print(f"[OK] 回滚完成!")
+    print(f"  从 v{current_version} 回滚到 v{target_version}")
+    print("=" * 60)
+    
+    return 0
 
 
 def main():
@@ -267,13 +408,18 @@ def main():
     parser.add_argument('--variables', type=str, help='变量 (JSON 格式)')
     parser.add_argument('--context', type=str, help='上下文 (JSON 格式)')
     
+    # 新增：配置版本控制功能
+    parser.add_argument('--rollback-registry', action='store_true', help='回滚 tools_registry.json 到指定版本')
+    parser.add_argument('--to', type=str, metavar='VERSION', help='目标版本号 (如 v1.3.0)')
+    parser.add_argument('--list-versions', action='store_true', help='列出所有可用版本')
+    
     args = parser.parse_args()
     
     manager = FlowManager()
     
     if args.create:
         flow_id = manager.create_flow(args.create, args.description)
-        print(f"\n📋 启动指令模板:")
+        print(f"\n[INFO] 启动指令模板:")
         print(f"Flow ID: {flow_id}")
         print(f"任务目标：{args.description or '[填写具体需求]'}")
         print(f"隔离铁则：所有操作、文件、变量、日志，全部绑定本 Flow ID")
@@ -292,6 +438,17 @@ def main():
     
     elif args.list:
         manager.list_flows(args.status)
+    
+    # 新增：配置版本控制功能
+    elif args.list_versions:
+        list_registry_versions()
+    
+    elif args.rollback_registry:
+        if not args.to:
+            print("[ERROR] 必须指定目标版本 --to <VERSION>")
+            print("使用 --list-versions 查看可用版本")
+            sys.exit(1)
+        rollback_registry(args.to)
     
     else:
         parser.print_help()

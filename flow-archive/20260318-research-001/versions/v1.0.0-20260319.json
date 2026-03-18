@@ -1,0 +1,193 @@
+{
+  "flow_id": "20260318-research-001",
+  "name": "研究任务工作流",
+  "description": "深度研究 - 文献调研、数据分析、论文写作",
+  "version": "1.0.0",
+  "created_at": "2026-03-19T00:45:00+08:00",
+  "workflow_type": "subworkflow",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 60,
+  "total_steps": 10,
+  "stages": {
+    "preparation": "Step 1-2: 问题定义 + 关键词提取",
+    "search": "Step 3-4: 文献检索 + 筛选",
+    "analysis": "Step 5-7: 阅读摘要 + 数据提取 + 综合分析",
+    "output": "Step 8-10: 报告生成 + 参考文献 + 质量审查"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "研究问题定义",
+      "description": "明确研究问题、目标、范围",
+      "tool_id": "research-define",
+      "stage": "preparation",
+      "parameters": {
+        "output_file": "30-scripts-tools/research_question.md"
+      },
+      "blocking": true,
+      "timeout_seconds": 300
+    },
+    {
+      "step_id": 2,
+      "name": "关键词提取",
+      "description": "从研究问题中提取搜索关键词",
+      "tool_id": "keyword-extractor",
+      "stage": "preparation",
+      "parameters": {
+        "max_keywords": 10,
+        "include_synonyms": true
+      },
+      "blocking": true,
+      "timeout_seconds": 120
+    },
+    {
+      "step_id": 3,
+      "name": "文献检索",
+      "description": "在 arXiv/Google Scholar 等平台检索文献",
+      "tool_id": "literature-search",
+      "stage": "search",
+      "parameters": {
+        "sources": [
+          "arxiv",
+          "google_scholar"
+        ],
+        "max_results": 50,
+        "year_range": "2020-2026"
+      },
+      "blocking": true,
+      "timeout_seconds": 600
+    },
+    {
+      "step_id": 4,
+      "name": "文献筛选",
+      "description": "根据相关性筛选文献",
+      "tool_id": "paper-filter",
+      "stage": "search",
+      "parameters": {
+        "relevance_threshold": 0.7,
+        "max_papers": 20
+      },
+      "blocking": true,
+      "timeout_seconds": 180
+    },
+    {
+      "step_id": 5,
+      "name": "摘要阅读",
+      "description": "阅读筛选后文献的摘要",
+      "tool_id": "abstract-reader",
+      "stage": "analysis",
+      "parameters": {
+        "extract_key_points": true
+      },
+      "blocking": false,
+      "timeout_seconds": 600
+    },
+    {
+      "step_id": 6,
+      "name": "数据提取",
+      "description": "从文献中提取关键数据和方法",
+      "tool_id": "data-extractor",
+      "stage": "analysis",
+      "parameters": {
+        "extract_fields": [
+          "method",
+          "dataset",
+          "metrics",
+          "results"
+        ]
+      },
+      "blocking": false,
+      "timeout_seconds": 900
+    },
+    {
+      "step_id": 7,
+      "name": "综合分析",
+      "description": "综合所有文献进行对比分析",
+      "tool_id": "synthesis-analyzer",
+      "stage": "analysis",
+      "parameters": {
+        "comparison_dimensions": [
+          "method",
+          "performance",
+          "limitations"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 600
+    },
+    {
+      "step_id": 8,
+      "name": "报告生成",
+      "description": "生成结构化研究报告",
+      "tool_id": "report-generator",
+      "stage": "output",
+      "parameters": {
+        "format": "markdown",
+        "include_citations": true,
+        "output_file": "21-reports/research_report.md"
+      },
+      "blocking": true,
+      "timeout_seconds": 300
+    },
+    {
+      "step_id": 9,
+      "name": "参考文献整理",
+      "description": "整理参考文献列表 (BibTeX 格式)",
+      "tool_id": "bib-generator",
+      "stage": "output",
+      "parameters": {
+        "style": "apa",
+        "output_file": "21-reports/references.bib"
+      },
+      "blocking": false,
+      "timeout_seconds": 120
+    },
+    {
+      "step_id": 10,
+      "name": "质量审查",
+      "description": "Auto-Critic 审查研究报告质量",
+      "tool_id": "auto-critic-v7",
+      "stage": "output",
+      "parameters": {
+        "phase": "final",
+        "min_score": 90
+      },
+      "blocking": true,
+      "timeout_seconds": 300
+    }
+  ],
+  "tools_required": [
+    "research-define",
+    "keyword-extractor",
+    "literature-search",
+    "paper-filter",
+    "abstract-reader",
+    "data-extractor",
+    "synthesis-analyzer",
+    "report-generator",
+    "bib-generator",
+    "auto-critic-v7"
+  ],
+  "output_files": [
+    "30-scripts-tools/research_question.md",
+    "30-scripts-tools/keywords.json",
+    "30-scripts-tools/literature_search_results.json",
+    "30-scripts-tools/paper_summaries.md",
+    "30-scripts-tools/data_extraction.json",
+    "30-scripts-tools/synthesis_analysis.md",
+    "21-reports/research_report.md",
+    "21-reports/references.bib"
+  ],
+  "execution_rules": {
+    "can_call_other_workflows": false,
+    "can_be_called_by": [
+      "20260318-universal-workflow-001"
+    ],
+    "must_report_to": "20260318-universal-workflow-001"
+  },
+  "version_control": {
+    "enabled": true,
+    "version_file": "flow-archive/20260318-research-001/versions/VERSION_INDEX.json",
+    "auto_backup": true
+  }
+}

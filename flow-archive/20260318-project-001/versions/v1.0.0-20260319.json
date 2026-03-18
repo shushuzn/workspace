@@ -1,0 +1,153 @@
+{
+  "flow_id": "20260318-project-001",
+  "name": "项目管理工作流",
+  "description": "项目管理 - 任务分解、进度跟踪、资源协调",
+  "version": "1.0.0",
+  "created_at": "2026-03-19T00:45:00+08:00",
+  "workflow_type": "subworkflow",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 30,
+  "total_steps": 8,
+  "stages": {
+    "initiation": "Step 1-2: 项目定义 + 目标设定",
+    "planning": "Step 3-4: 任务分解 + 资源分配",
+    "execution": "Step 5-6: 进度跟踪 + 风险管理",
+    "closure": "Step 7-8: 总结复盘 + 文档归档"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "项目定义",
+      "description": "明确项目范围、目标、约束",
+      "tool_id": "project-define",
+      "stage": "initiation",
+      "parameters": {
+        "output_file": "80-PROJECTS/project_charter.md"
+      },
+      "blocking": true,
+      "timeout_seconds": 300
+    },
+    {
+      "step_id": 2,
+      "name": "目标设定",
+      "description": "设定 SMART 目标",
+      "tool_id": "goal-setter",
+      "stage": "initiation",
+      "parameters": {
+        "framework": "SMART"
+      },
+      "blocking": true,
+      "timeout_seconds": 180
+    },
+    {
+      "step_id": 3,
+      "name": "任务分解",
+      "description": "WBS 任务分解结构",
+      "tool_id": "wbs-generator",
+      "stage": "planning",
+      "parameters": {
+        "max_depth": 3,
+        "output_format": "json"
+      },
+      "blocking": true,
+      "timeout_seconds": 300
+    },
+    {
+      "step_id": 4,
+      "name": "资源分配",
+      "description": "分配时间、人力、物料资源",
+      "tool_id": "resource-allocator",
+      "stage": "planning",
+      "parameters": {
+        "resource_types": [
+          "time",
+          "effort",
+          "tools"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 240
+    },
+    {
+      "step_id": 5,
+      "name": "进度跟踪",
+      "description": "跟踪任务进度和里程碑",
+      "tool_id": "progress-tracker",
+      "stage": "execution",
+      "parameters": {
+        "update_frequency": "daily",
+        "report_format": "markdown"
+      },
+      "blocking": false,
+      "timeout_seconds": 180
+    },
+    {
+      "step_id": 6,
+      "name": "风险管理",
+      "description": "识别和应对风险",
+      "tool_id": "risk-manager",
+      "stage": "execution",
+      "parameters": {
+        "risk_matrix": "probability_impact"
+      },
+      "blocking": false,
+      "timeout_seconds": 240
+    },
+    {
+      "step_id": 7,
+      "name": "总结复盘",
+      "description": "项目结束后复盘总结",
+      "tool_id": "retrospective",
+      "stage": "closure",
+      "parameters": {
+        "framework": "KISS",
+        "output_file": "80-PROJECTS/retrospective.md"
+      },
+      "blocking": true,
+      "timeout_seconds": 300
+    },
+    {
+      "step_id": 8,
+      "name": "文档归档",
+      "description": "整理和归档项目文档",
+      "tool_id": "doc-archiver",
+      "stage": "closure",
+      "parameters": {
+        "archive_path": "99-workspace-archive/projects/"
+      },
+      "blocking": true,
+      "timeout_seconds": 180
+    }
+  ],
+  "tools_required": [
+    "project-define",
+    "goal-setter",
+    "wbs-generator",
+    "resource-allocator",
+    "progress-tracker",
+    "risk-manager",
+    "retrospective",
+    "doc-archiver"
+  ],
+  "output_files": [
+    "80-PROJECTS/project_charter.md",
+    "80-PROJECTS/smart_goals.json",
+    "80-PROJECTS/wbs.json",
+    "80-PROJECTS/resource_allocation.json",
+    "80-PROJECTS/progress_report.md",
+    "80-PROJECTS/risk_register.json",
+    "80-PROJECTS/retrospective.md"
+  ],
+  "execution_rules": {
+    "can_call_other_workflows": false,
+    "can_be_called_by": [
+      "20260318-universal-workflow-001"
+    ],
+    "must_report_to": "20260318-universal-workflow-001"
+  },
+  "version_control": {
+    "enabled": true,
+    "version_file": "flow-archive/20260318-project-001/versions/VERSION_INDEX.json",
+    "auto_backup": true
+  }
+}

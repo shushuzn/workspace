@@ -51,9 +51,35 @@
       "tools_count": 4,
       "workflow_type": "subworkflow",
       "parent_workflow": "20260318-universal-workflow-001"
+    },
+    "20260318-research-001": {
+      "business_name": "research",
+      "description": "子工作流 - 深度研究 (文献调研、数据分析、论文写作)",
+      "created_at": "2026-03-19T00:45:00+08:00",
+      "status": "active",
+      "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-research-001",
+      "last_updated": "2026-03-19T00:45:00+08:00",
+      "workflow_file": "workflow.json",
+      "total_steps": 10,
+      "tools_count": 10,
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001"
+    },
+    "20260318-project-001": {
+      "business_name": "project",
+      "description": "子工作流 - 项目管理 (任务分解、进度跟踪、资源协调)",
+      "created_at": "2026-03-19T00:45:00+08:00",
+      "status": "active",
+      "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-project-001",
+      "last_updated": "2026-03-19T00:45:00+08:00",
+      "workflow_file": "workflow.json",
+      "total_steps": 8,
+      "tools_count": 8,
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001"
     }
   },
-  "last_updated": "2026-03-19T00:15:00+08:00",
+  "last_updated": "2026-03-19T01:00:00+08:00",
   "architecture": {
     "main_workflow": "20260318-universal-workflow-001",
     "principle": "唯一主工作流原则 - 主工作流调用子工作流，子工作流不能反向调用"

@@ -1,11 +1,8 @@
 {
-  "version": "1.5.0",
-  "last_updated": "2026-03-19T01:00:00+08:00",
+  "version": "1.4.0",
+  "last_updated": "2026-03-18T22:12:32.445452",
   "changes": [
-    "Added workflow-research sub-workflow tool (research-001)",
-    "Added workflow-project sub-workflow tool (project-001)",
-    "Updated workflows section with research-001 and project-001",
-    "v1.4.0: Added auto-critic-v7 with issue detection and remediation tracking",
+    "Added auto-critic-v7 with issue detection and remediation tracking",
     "Added issue-scanner for comprehensive code scanning",
     "Added critical-issue-detector for high-risk issue detection",
     "Added remediation-tracker for FAIL item tracking",
@@ -861,83 +858,12 @@
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 300
-    },
-    "workflow-research": {
-      "tool_id": "workflow-research",
-      "name": "Research Sub-Workflow",
-      "description": "子工作流 - 深度研究 (主工作流专用)",
-      "version": "1.0.0",
-      "command": "py 30-scripts-tools\\tool_executor.py --workflow research-001",
-      "workflow_type": "subworkflow",
-      "parent_workflow": "20260318-universal-workflow-001",
-      "flow_id": "20260318-research-001",
-      "parameters": {
-        "research_question": {
-          "type": "string",
-          "required": true,
-          "description": "研究问题"
-        },
-        "sources": {
-          "type": "array",
-          "required": false,
-          "description": "检索来源",
-          "default": ["arxiv", "google_scholar"]
-        }
-      },
-      "triggers": [
-        "main_workflow_call"
-      ],
-      "review_required": false,
-      "blocking": true,
-      "timeout_seconds": 3600
-    },
-    "workflow-project": {
-      "tool_id": "workflow-project",
-      "name": "Project Sub-Workflow",
-      "description": "子工作流 - 项目管理 (主工作流专用)",
-      "version": "1.0.0",
-      "command": "py 30-scripts-tools\\tool_executor.py --workflow project-001",
-      "workflow_type": "subworkflow",
-      "parent_workflow": "20260318-universal-workflow-001",
-      "flow_id": "20260318-project-001",
-      "parameters": {
-        "project_name": {
-          "type": "string",
-          "required": true,
-          "description": "项目名称"
-        },
-        "objectives": {
-          "type": "array",
-          "required": false,
-          "description": "项目目标"
-        }
-      },
-      "triggers": [
-        "main_workflow_call"
-      ],
-      "review_required": false,
-      "blocking": true,
-      "timeout_seconds": 1800
     }
   },
   "workflows": {
     "session-end": {
       "workflow_id": "session-end",
       "description": "会话结束工作流 - 8 步自动化流程"
-    },
-    "research-001": {
-      "workflow_id": "research-001",
-      "description": "深度研究工作流 - 文献调研、数据分析、论文写作",
-      "flow_id": "20260318-research-001",
-      "total_steps": 10,
-      "estimated_time_minutes": 60
-    },
-    "project-001": {
-      "workflow_id": "project-001",
-      "description": "项目管理工作流 - 任务分解、进度跟踪、资源协调",
-      "flow_id": "20260318-project-001",
-      "total_steps": 8,
-      "estimated_time_minutes": 30
     },
     "task-complete": {
       "workflow_id": "task-complete",

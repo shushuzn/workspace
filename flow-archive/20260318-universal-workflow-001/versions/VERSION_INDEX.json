@@ -1,0 +1,20 @@
+{
+  "workflow_id": "20260318-universal-workflow-001",
+  "versions": [
+    {
+      "version": "1.0.0",
+      "filename": "v1.0.0-20260319.json",
+      "created_at": "2026-03-19T00:46:54.868016",
+      "backup_path": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-universal-workflow-001\\versions\\v1.0.0-20260319.json",
+      "reason": "Initial version - main workflow configuration",
+      "changes": [
+        "创建主工作流显式配置",
+        "定义 12 个核心步骤",
+        "集成 4 个子工作流",
+        "添加版本控制支持"
+      ]
+    }
+  ],
+  "current_version": "1.0.0",
+  "last_updated": "2026-03-19T00:46:54.868035"
+}

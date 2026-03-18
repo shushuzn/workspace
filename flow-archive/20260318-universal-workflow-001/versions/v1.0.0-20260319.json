@@ -1,0 +1,294 @@
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "name": "通用主工作流",
+  "description": "主工作流 - 总控/指挥/调度所有子工作流和工具",
+  "version": "1.0.0",
+  "created_at": "2026-03-18T22:46:04+08:00",
+  "workflow_type": "main",
+  "parent_workflow": null,
+  "estimated_time_minutes": "variable",
+  "total_steps": 12,
+  "stages": {
+    "initialization": "Step 1-2: 上下文加载 + Flow ID 绑定",
+    "task_analysis": "Step 3-4: 任务解析 + 工具/工作流选择",
+    "execution": "Step 5-8: 执行任务 (调用子工作流/工具)",
+    "validation": "Step 9-10: 批判者审查 + 质量门禁",
+    "completion": "Step 11-12: 压缩保存 + Git 提交"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "上下文加载验证",
+      "description": "验证 7 个核心文件已正确加载 (<100KB)",
+      "tool_id": "context-verify",
+      "stage": "initialization",
+      "parameters": {
+        "max_size_kb": 100,
+        "required_files": [
+          "SOUL.md",
+          "USER.md",
+          "AGENTS.md",
+          "TOOLS.md",
+          "HEARTBEAT.md",
+          "MEMORY.md",
+          "13-memory/YYYY-MM-DD.md"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 30,
+      "validation": {
+        "max_context_size_kb": 100,
+        "required_files_loaded": true
+      }
+    },
+    {
+      "step_id": 2,
+      "name": "Flow ID 绑定",
+      "description": "创建或绑定当前任务的 Flow ID",
+      "tool_id": "flow-manager",
+      "stage": "initialization",
+      "parameters": {
+        "action": "create_or_bind",
+        "business_name": "auto-generated"
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "flow_id_created": true,
+        "isolation_directory_exists": true
+      }
+    },
+    {
+      "step_id": 3,
+      "name": "任务解析",
+      "description": "分析用户请求，确定任务类型和复杂度",
+      "tool_id": "task-analyzer",
+      "stage": "task_analysis",
+      "parameters": {
+        "classify_by": "complexity",
+        "complexity_levels": ["simple", "medium", "complex"]
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "task_type_identified": true,
+        "estimated_time_minutes": "number"
+      }
+    },
+    {
+      "step_id": 4,
+      "name": "工具/工作流选择",
+      "description": "根据任务类型选择合适的工具或子工作流",
+      "tool_id": "tool-suggester",
+      "stage": "task_analysis",
+      "parameters": {
+        "suggest_type": "workflow_or_tool",
+        "max_suggestions": 3
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "selected_workflow": "string or null",
+        "selected_tools": "array"
+      }
+    },
+    {
+      "step_id": 5,
+      "name": "子工作流调度 (条件)",
+      "description": "如需要，调用子工作流执行",
+      "tool_id": "workflow-scheduler",
+      "stage": "execution",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 1800,
+      "conditional": {
+        "run_if": "subworkflow_required"
+      },
+      "subworkflows": {
+        "available": [
+          "20260318-brainstorm-001",
+          "20260318-session-end",
+          "20260318-research-001",
+          "20260318-project-001"
+        ],
+        "selection_logic": "based_on_task_type"
+      }
+    },
+    {
+      "step_id": 6,
+      "name": "工具执行",
+      "description": "执行选定的工具",
+      "tool_id": "tool-executor",
+      "stage": "execution",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 600,
+      "validation": {
+        "execution_success": true
+      }
+    },
+    {
+      "step_id": 7,
+      "name": "执行日志记录",
+      "description": "记录执行过程到 execution-log.json",
+      "tool_id": "execution-logger",
+      "stage": "execution",
+      "parameters": {
+        "log_file": "flow-archive/20260318-universal-workflow-001/execution-log.json"
+      },
+      "blocking": false,
+      "timeout_seconds": 30
+    },
+    {
+      "step_id": 8,
+      "name": "检查点保存",
+      "description": "保存当前状态到 checkpoint.json (支持断点续传)",
+      "tool_id": "checkpoint-saver",
+      "stage": "execution",
+      "parameters": {
+        "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json"
+      },
+      "blocking": false,
+      "timeout_seconds": 30
+    },
+    {
+      "step_id": 9,
+      "name": "批判者最终审查",
+      "description": "Auto-Critic v7.0 最终审查 (≥95 分通过)",
+      "tool_id": "auto-critic-v7",
+      "stage": "validation",
+      "parameters": {
+        "phase": "final",
+        "min_score": 95
+      },
+      "blocking": true,
+      "timeout_seconds": 300,
+      "validation": {
+        "critical_score": ">=95",
+        "fatal_issues": 0,
+        "severe_issues": "<=2"
+      }
+    },
+    {
+      "step_id": 10,
+      "name": "质量门禁",
+      "description": "质量门禁检查 (代码质量/安全/复杂度)",
+      "tool_id": "quality-gate",
+      "stage": "validation",
+      "parameters": {
+        "min_quality_score": 80
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "quality_score": ">=80",
+        "security_issues": 0
+      }
+    },
+    {
+      "step_id": 11,
+      "name": "会话压缩保存",
+      "description": "压缩会话内容并保存到 daily note",
+      "tool_id": "session-compress",
+      "stage": "completion",
+      "parameters": {
+        "compression_ratio_target": 0.96,
+        "save_to_daily": true
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "compressed_size_kb": "<5",
+        "saved_to_daily": true
+      }
+    },
+    {
+      "step_id": 12,
+      "name": "Git 提交推送",
+      "description": "提交所有变更并推送到远程仓库",
+      "tool_id": "git-commit-push",
+      "stage": "completion",
+      "parameters": {
+        "commit_message": "auto-generated",
+        "push_remote": true
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "commit_success": true,
+        "push_success": true
+      }
+    }
+  ],
+  "subworkflows": {
+    "registered": [
+      {
+        "flow_id": "20260318-brainstorm-001",
+        "name": "头脑风暴工作流",
+        "trigger_keywords": ["头脑风暴", "brainstorm", "创意", "想法"],
+        "estimated_time_minutes": 45
+      },
+      {
+        "flow_id": "20260318-session-end",
+        "name": "会话结束工作流",
+        "trigger_keywords": ["会话结束", "session-end", "完成", "提交"],
+        "estimated_time_minutes": 5
+      },
+      {
+        "flow_id": "20260318-research-001",
+        "name": "研究任务工作流",
+        "trigger_keywords": ["研究", "research", "论文", "文献"],
+        "estimated_time_minutes": 60
+      },
+      {
+        "flow_id": "20260318-project-001",
+        "name": "项目管理工作流",
+        "trigger_keywords": ["项目", "project", "任务管理"],
+        "estimated_time_minutes": 30
+      }
+    ],
+    "selection_rules": {
+      "priority": "keyword_match_first",
+      "fallback": "manual_selection",
+      "max_parallel": 1
+    }
+  },
+  "error_handling": {
+    "retry_policy": {
+      "max_retries": 3,
+      "retry_delay_seconds": 5,
+      "exponential_backoff": true
+    },
+    "failure_actions": {
+      "step_1_4": "abort_and_report",
+      "step_5_8": "resume_from_checkpoint",
+      "step_9_10": "manual_review_required",
+      "step_11_12": "continue_without_commit"
+    },
+    "checkpoint_recovery": {
+      "enabled": true,
+      "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json",
+      "resume_command": "py flow_manager.py --resume 20260318-universal-workflow-001"
+    }
+  },
+  "version_control": {
+    "enabled": true,
+    "version_file": "flow-archive/20260318-universal-workflow-001/versions/VERSION_INDEX.json",
+    "auto_backup": true,
+    "backup_on_change": true
+  },
+  "execution_rules": {
+    "can_call_subworkflows": true,
+    "can_call_tools": true,
+    "must_log_execution": true,
+    "must_save_checkpoint": true,
+    "must_pass_critic": true,
+    "must_compress_session": true
+  },
+  "output_files": {
+    "execution_log": "flow-archive/20260318-universal-workflow-001/execution-log.json",
+    "checkpoint": "flow-archive/20260318-universal-workflow-001/checkpoint.json",
+    "review": "flow-archive/20260318-universal-workflow-001/review.json",
+    "version_index": "flow-archive/20260318-universal-workflow-001/versions/VERSION_INDEX.json"
+  }
+}
