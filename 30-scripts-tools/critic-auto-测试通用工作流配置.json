@@ -1,0 +1,161 @@
+{
+  "task": "测试通用工作流配置",
+  "phase": "final",
+  "type": "general",
+  "time": "2026-03-18T22:53:45.830959",
+  "score": 0,
+  "passed": 17,
+  "failed": 3,
+  "total": 20,
+  "checklist": [
+    {
+      "item": "致命问题 0 个",
+      "status": "OK",
+      "notes": "无异常抛出",
+      "evidence": "No exceptions during task execution",
+      "zero_score": false
+    },
+    {
+      "item": "严重问题≤2 个",
+      "status": "OK",
+      "notes": "用户未报告中止",
+      "evidence": "No critical failure reported by user",
+      "zero_score": false
+    },
+    {
+      "item": "一般问题≤10 个",
+      "status": "OK",
+      "notes": "自动通过",
+      "evidence": "Auto-pass (assumed no minor issues)",
+      "zero_score": false
+    },
+    {
+      "item": "验收标准 100% 满足",
+      "status": "OK",
+      "notes": "任务已完成，3 个提交",
+      "evidence": "Git commits: ee063e4 [FLOW ID: 20260318-universal-workflow-001] \"通用工作流配置 - 对话中自动使用 20260318-universal-workflow-001\", 6107a07 [FLOW ID: 20260318-universal-workflow-001] \"通用工作流默认配置 - 不指定 Flow ID 自动使用 universal-workflow\", 1f1c19d [FLOW ID: 20260318-universal-workflow-001] 通用工作流落地 - Flow ID 全链路支持",
+      "zero_score": false
+    },
+    {
+      "item": "代码/文档已提交 Git",
+      "status": "OK",
+      "notes": "已提交 3 个 commits，无未提交更改",
+      "evidence": "Commits: ee063e4 [FLOW ID: 20260318-universal-workflow-001] \"通用工作流配置 - 对话中自动使用 20260318-universal-workflow-001\", 6107a07 [FLOW ID: 20260318-universal-workflow-001] \"通用工作流默认配置 - 不指定 Flow ID 自动使用 universal-workflow\", 1f1c19d [FLOW ID: 20260318-universal-workflow-001] 通用工作流落地 - Flow ID 全链路支持 | Uncommitted: None",
+      "zero_score": false
+    },
+    {
+      "item": "关键决策已记录到 MEMORY.md",
+      "status": "FAIL",
+      "notes": "批判者审查文件未找到",
+      "evidence": "❌ File not found: 30-scripts-tools\\critic-auto-测试通用工作流配置.json",
+      "zero_score": false
+    },
+    {
+      "item": "【USER-004】批判者自动调用 (不能手动补审)",
+      "status": "FAIL",
+      "notes": "批判者审查文件未找到",
+      "evidence": "❌ No critic review file found for task: 测试通用工作流配置",
+      "zero_score": true
+    },
+    {
+      "item": "【USER-004】工具创建了必须使用 (创建→使用→验证)",
+      "status": "OK",
+      "notes": "非工具任务 (general)，跳过工具使用检查",
+      "evidence": "Task type: general - Tool usage check not applicable",
+      "zero_score": true
+    },
+    {
+      "item": "【AGENTS.md】当日笔记压缩 (<100 行)",
+      "status": "OK",
+      "notes": "当日笔记行数：77",
+      "evidence": "File: 13-memory\\2026-03-18.md | Lines: 77 OK <100",
+      "zero_score": true
+    },
+    {
+      "item": "【AGENTS.md】会话压缩执行 (post_session_compress.py --auto)",
+      "status": "OK",
+      "notes": "会话压缩已执行",
+      "evidence": "Daily note: Has session summary OK",
+      "zero_score": true
+    },
+    {
+      "item": "【AGENTS.md】上下文大小验证 (<100KB)",
+      "status": "OK",
+      "notes": "当日笔记行数：77",
+      "evidence": "File: 13-memory\\2026-03-18.md | Lines: 77 OK <100",
+      "zero_score": true
+    },
+    {
+      "item": "【USER-001】工作区正确性 (D:\\OpenClaw\\workspace, C 盘=0 分)",
+      "status": "OK",
+      "notes": "当前工作区：D:\\OpenClaw\\workspace",
+      "evidence": "os.getcwd() = D:\\OpenClaw\\workspace OK CORRECT",
+      "zero_score": true
+    },
+    {
+      "item": "【USER-004】检查项必须有证据 (无证据=0 分)",
+      "status": "OK",
+      "notes": "所有检查项都有自动生成的证据",
+      "evidence": "auto-critic.py v6.0: Fully automated verification with context-aware evidence",
+      "zero_score": true
+    },
+    {
+      "item": "【ZS-001】无工具多份定义 (grep 重复 tool_id)",
+      "status": "OK",
+      "notes": "无重复 tool_id",
+      "evidence": "✅ Unique tool_ids: 19",
+      "zero_score": false
+    },
+    {
+      "item": "【ZS-002】工作流无硬编码命令 (grep 'py 30-scripts')",
+      "status": "OK",
+      "notes": "无硬编码命令",
+      "evidence": "✅ All workflows use tool_executor",
+      "zero_score": false
+    },
+    {
+      "item": "【ZS-003】未修改工具核心逻辑 (对比参数)",
+      "status": "OK",
+      "notes": "未修改核心逻辑",
+      "evidence": "✅ Workflows only override non-core params",
+      "zero_score": false
+    },
+    {
+      "item": "【ZS-004】未绕过工具库 (检查执行日志)",
+      "status": "OK",
+      "notes": "通过 tool_executor 调用",
+      "evidence": "✅ Uses tool_executor only",
+      "zero_score": false
+    },
+    {
+      "item": "【ZS-005】未事后补录定义 (检查 Git 历史)",
+      "status": "OK",
+      "notes": "工具库已定义 19 个工具",
+      "evidence": "✅ 19 tools defined",
+      "zero_score": false
+    },
+    {
+      "item": "【ZS-006】工具有效使用 (被工作流引用)",
+      "status": "FAIL",
+      "notes": "工具未使用：{'critical-issue-detector', 'remediation-tracker', 'flow-manager'}",
+      "evidence": "⚠️ Unused tools: {'critical-issue-detector', 'remediation-tracker', 'flow-manager'}",
+      "zero_score": false
+    },
+    {
+      "item": "【ZS-007】变更自动触发 (检查 change_log.json)",
+      "status": "OK",
+      "notes": "变更日志有 1 条记录",
+      "evidence": "✅ Last change: 2026-03-18T19:06:52.876339",
+      "zero_score": false
+    }
+  ],
+  "zero_score_failed": [
+    {
+      "item": "【USER-004】批判者自动调用 (不能手动补审)",
+      "status": "FAIL",
+      "notes": "批判者审查文件未找到",
+      "evidence": "❌ No critic review file found for task: 测试通用工作流配置",
+      "zero_score": true
+    }
+  ]
+}
