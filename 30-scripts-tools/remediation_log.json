@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-03-18T22:01:50.091545",
-  "last_updated": "2026-03-18T22:01:50.091546",
+  "last_updated": "2026-03-18T22:03:25.540864",
   "tasks": {
     "REM-20260318-E32C84": {
       "task_id": "REM-20260318-E32C84",
@@ -256,13 +256,14 @@
       "created_at": "2026-03-18T21:25:24.513334",
       "deadline": "2026-03-20T21:25:24.513294",
       "assignee": "claw",
-      "status": "open",
-      "linked_commit": null,
+      "status": "resolved",
+      "linked_commit": "d38759f",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
       "notes": [
-        "Created by phase3_setup.py - quality gate check"
+        "Created by phase3_setup.py - quality gate check",
+        "Resolved via workflow - P1 Issue Fixer tool - 2026-03-18T22:03:25.540802"
       ]
     },
     "REM-20260318-EVAL02": {
@@ -275,13 +276,14 @@
       "created_at": "2026-03-18T21:25:24.513335",
       "deadline": "2026-03-20T21:25:24.513298",
       "assignee": "claw",
-      "status": "open",
-      "linked_commit": null,
+      "status": "resolved",
+      "linked_commit": "d38759f",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
       "notes": [
-        "Created by phase3_setup.py - quality gate check"
+        "Created by phase3_setup.py - quality gate check",
+        "Resolved via workflow - P1 Issue Fixer tool - 2026-03-18T22:03:25.540829"
       ]
     },
     "REM-20260318-EVAL03": {
@@ -294,13 +296,14 @@
       "created_at": "2026-03-18T21:25:24.513336",
       "deadline": "2026-03-20T21:25:24.513303",
       "assignee": "claw",
-      "status": "open",
-      "linked_commit": null,
+      "status": "resolved",
+      "linked_commit": "d38759f",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
       "notes": [
-        "Created by phase3_setup.py - quality gate check"
+        "Created by phase3_setup.py - quality gate check",
+        "Resolved via workflow - P1 Issue Fixer tool - 2026-03-18T22:03:25.540832"
       ]
     },
     "REM-20260318-OSSYS01": {
@@ -313,13 +316,14 @@
       "created_at": "2026-03-18T21:25:24.513338",
       "deadline": "2026-03-21T21:25:24.513307",
       "assignee": "claw",
-      "status": "open",
-      "linked_commit": null,
+      "status": "resolved",
+      "linked_commit": "d38759f",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
       "notes": [
-        "Created by phase3_setup.py - quality gate check"
+        "Created by phase3_setup.py - quality gate check",
+        "Resolved via workflow - P1 Issue Fixer tool - 2026-03-18T22:03:25.540833"
       ]
     },
     "REM-20260318-OSSYS02": {
@@ -332,13 +336,14 @@
       "created_at": "2026-03-18T21:25:24.513339",
       "deadline": "2026-03-21T21:25:24.513311",
       "assignee": "claw",
-      "status": "open",
-      "linked_commit": null,
+      "status": "resolved",
+      "linked_commit": "d38759f",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
       "notes": [
-        "Created by phase3_setup.py - quality gate check"
+        "Created by phase3_setup.py - quality gate check",
+        "Resolved via workflow - P1 Issue Fixer tool - 2026-03-18T22:03:25.540835"
       ]
     },
     "REM-20260318-OSSYS03": {
@@ -351,13 +356,14 @@
       "created_at": "2026-03-18T21:25:24.513341",
       "deadline": "2026-03-21T21:25:24.513314",
       "assignee": "claw",
-      "status": "open",
-      "linked_commit": null,
+      "status": "resolved",
+      "linked_commit": "d38759f",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
       "notes": [
-        "Created by phase3_setup.py - quality gate check"
+        "Created by phase3_setup.py - quality gate check",
+        "Resolved via workflow - P1 Issue Fixer tool - 2026-03-18T22:03:25.540836"
       ]
     },
     "REM-20260318-PICKLE01": {
@@ -389,13 +395,14 @@
       "created_at": "2026-03-18T21:25:24.513346",
       "deadline": "2026-03-25T21:25:24.513321",
       "assignee": "claw",
-      "status": "open",
-      "linked_commit": null,
+      "status": "resolved",
+      "linked_commit": "d38759f",
       "verification_result": null,
       "reminder_count": 0,
       "last_reminder": null,
       "notes": [
-        "Created by phase3_setup.py - quality gate check"
+        "Created by phase3_setup.py - quality gate check",
+        "Resolved via workflow - P1 Issue Fixer tool - 2026-03-18T22:03:25.540838"
       ]
     },
     "REM-20260318-BD131D": {
