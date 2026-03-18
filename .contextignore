@@ -1,0 +1,57 @@
+# .contextignore - AI 上下文忽略文件
+
+# 告诉 AI 哪些目录不应该扫描/加载/索引
+# 减少上下文加载时间 90%+
+
+# === 项目子仓库 (独立上下文) ===
+80-PROJECTS/
+80-PROJECTS/rl-trading/
+80-PROJECTS/cnt-research/
+80-PROJECTS/github_repo/
+80-PROJECTS/stock-analyzer/
+
+# === 数据收集器 (自动扫描内容) ===
+40-arxiv/
+41-medium/
+42-hackernews/
+60-DATA/
+08-collectors/
+
+# === 归档目录 ===
+99-archive-归档/
+90-archive/
+91-logs/
+
+# === 备份目录 ===
+99-backups/
+
+# === 大型文档 ===
+*.md
+!README.md
+!AGENTS.md
+!SOUL.md
+!USER.md
+!TOOLS.md
+!HEARTBEAT.md
+!MEMORY.md
+!13-memory/*.md
+
+# === 测试和临时文件 ===
+92-tests/
+*.tmp
+*.temp
+*.log
+
+# === 节点模块和虚拟环境 ===
+node_modules/
+venv/
+.env/
+__pycache__/
+*.pyc
+
+# === 研究论文完整内容 ===
+**/deep/*-full.md
+**/Archive/**/*.md
+
+# === 旧工作区 ===
+99-workspace-archive/
