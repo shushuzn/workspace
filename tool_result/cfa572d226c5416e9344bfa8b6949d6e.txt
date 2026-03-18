@@ -1,0 +1,85 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:14:41.232207
+# ---
+      }
+    },
+    {
+      "step_id": 12,
+      "name": "Auto-Critic Review",
+      "description": "批判者最终审查（v6.0）",
+      "tool_id": "auto-critic",
+      "stage": "pre-commit",
+      "parameters": {
+        "task": "${commit_message}",
+        "phase": "final"
+      },
+      "blocking": false,
+      "timeout_seconds": 60
+    },
+    {
+      "step_id": 13,
+      "name": "Auto-Critic v7.0 Enhanced Review",
+      "description": "增强版批判者审查（问题检测 + 整改闭环 + 质量门禁）",
+      "tool_id": "auto-critic-v7",
+      "stage": "pre-commit",
+      "parameters": {
+        "task": "${commit_message}",
+        "phase": "final",
+        "flow_id": "${flow_id}"
+      },
+      "blocking": false,
+      "timeout_seconds": 120,
+      "note": "v7.0 新增：BLOCKER 失败自动创建整改任务，不阻断流程（历史遗留问题需时间修复）; 支持 Flow ID 隔离审查结果"
+    },
+    {
+      "step_id": 14,
+      "name": "Quality Gate Check",
+      "description": "代码质量门禁检查",
+      "tool_id": "quality-gate",
+      "stage": "pre-commit",
+      "parameters": {
+        "check": "30-scripts-tools/*.py",
+        "min-score": 80
+      },
+      "blocking": false,
+      "timeout_seconds": 60
+    },
+    {
+      "step_id": 15,
+      "name": "P1 Issue Auto-Fix",
+      "description": "自动修复 P1 优先级问题（os.system/eval/exec 替换）",
+      "tool_id": "p1-issue-fixer",
+      "stage": "pre-commit",
+      "parameters": {
+        "action": "fix"
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "note": "P1 优先级修复：自动替换危险调用为安全替代方案"
+    },
+    {
+      "step_id": 16,
+      "name": "Issue Scanner",
+      "description": "全面问题扫描（日志/静态分析/TODO/代码异味）",
+      "tool_id": "issue-scanner",
+      "stage": "pre-commit",
+      "parameters": {
+        "path": "30-scripts-tools",
+        "format": "json"
+      },
+      "blocking": false,
+      "timeout_seconds": 60
+    }
+  ],
+  "execution_order": "sequential",
+  "stop_on_blocking_failure": true,
+  "output": {
+    "format": "console",
+    "log_file": "30-scripts-tools/workflow-execution-log.json",
+    "summary": true
+  },
+  "post_workflow": {
+    "git_operations": true,
+    "note": "Git add/commit/push handled by session_end.py after workflow completion"
+  }
+}

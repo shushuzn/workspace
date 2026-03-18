@@ -1,0 +1,86 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:15:10.976537
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\workflows\session-end.json  (lines 1-80 of 229)
+{
+  "workflow_id": "session-end",
+  "name": "Session End Workflow",
+  "description": "会话结束工作流 - 16 步自动化流程（含 P1 修复）",
+  "version": "3.1",
+  "last_updated": "2026-03-18",
+  "principles": [
+    "只引用 tool_id，禁止硬编码命令",
+    "实时从工具库拉取最新定义",
+    "参数只覆盖非核心配置"
+  ],
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "Session Compression",
+      "description": "压缩会话到结构化摘要",
+      "tool_id": "session-compress",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 30
+    },
+    {
+      "step_id": 2,
+      "name": "Context Size Verification",
+      "description": "验证上下文大小<100KB",
+      "tool_id": "context-verify",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 10
+    },
+    {
+      "step_id": 3,
+      "name": "Daily Note Check",
+      "description": "检查当日笔记<100 行",
+      "tool_id": "session-compress",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 10,
+      "note": "复用 session-compress，它已包含行数检查"
+    },
+    {
+      "step_id": 4,
+      "name": "Memory Importance Assessment",
+      "description": "评估当日记忆重要性（阻塞性）",
+      "tool_id": "memory-importance-assessor",
+      "stage": "pre-commit",
+      "parameters": {
+        "memory": "13-memory/${TODAY}.md"
+      },
+      "blocking": true,
+      "timeout_seconds": 10
+    },
+    {
+      "step_id": 5,
+      "name": "Memory Consistency Check",
+      "description": "记忆数据一致性检查（阻塞性）",
+      "tool_id": "memory-consistency-checker",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 30
+    },
+    {
+      "step_id": 6,
+      "name": "Tag Search Test",
+      "description": "测试标签搜索功能（阻塞性）",
+      "tool_id": "memory-tag-search",
+      "stage": "pre-commit",
+      "parameters": {
+        "tag": "critical",
+        "limit": 3
+      },
+      "blocking": true,
+      "timeout_seconds": 10
+    },
+    {
+      "step_id": 7,
+
+[149 more lines. Use start_line=81 to continue.]
