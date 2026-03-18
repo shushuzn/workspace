@@ -1,8 +1,8 @@
 {
   "workflow_id": "session-end",
   "name": "Session End Workflow",
-  "description": "会话结束工作流 - 7 步自动化流程（不含 Git 操作）",
-  "version": "2.1",
+  "description": "会话结束工作流 - 9 步自动化流程（含记忆压缩工具）",
+  "version": "2.2",
   "last_updated": "2026-03-18",
   "principles": [
     "只引用 tool_id，禁止硬编码命令",
@@ -43,6 +43,18 @@
     },
     {
       "step_id": 4,
+      "name": "Memory Importance Assessment",
+      "description": "评估当日记忆重要性",
+      "tool_id": "memory-importance-assessor",
+      "stage": "pre-commit",
+      "parameters": {
+        "memory": "13-memory/${TODAY}.md"
+      },
+      "blocking": false,
+      "timeout_seconds": 10
+    },
+    {
+      "step_id": 5,
       "name": "Memory Consistency Check",
       "description": "记忆数据一致性检查",
       "tool_id": "memory-consistency-checker",
@@ -52,7 +64,7 @@
       "timeout_seconds": 30
     },
     {
-      "step_id": 5,
+      "step_id": 6,
       "name": "Tag Search Test",
       "description": "测试标签搜索功能（验证索引可用性）",
       "tool_id": "memory-tag-search",
@@ -65,7 +77,7 @@
       "timeout_seconds": 10
     },
     {
-      "step_id": 6,
+      "step_id": 7,
       "name": "Memory Benchmark",
       "description": "记忆系统性能测试（仅周一运行）",
       "tool_id": "memory-benchmark",
@@ -78,7 +90,67 @@
       }
     },
     {
-      "step_id": 7,
+      "step_id": 8,
+      "name": "Weekly Memory Cleanup",
+      "description": "每周日运行去重清理（仅周日）",
+      "tool_id": "memory-cleanup-compress",
+      "stage": "pre-commit",
+      "parameters": {
+        "days": 7
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "conditional": {
+        "run_only_on": "Sunday"
+      }
+    },
+    {
+      "step_id": 9,
+      "name": "Weekly Quality Assessment",
+      "description": "每周日运行质量评分（仅周日）",
+      "tool_id": "memory-quality-scorer",
+      "stage": "pre-commit",
+      "parameters": {
+        "days": 14
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "conditional": {
+        "run_only_on": "Sunday"
+      }
+    },
+    {
+      "step_id": 10,
+      "name": "Weekly Hybrid Compression",
+      "description": "每周日运行混合压缩（仅周日）",
+      "tool_id": "memory-hybrid-pipeline",
+      "stage": "pre-commit",
+      "parameters": {
+        "days": 7
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "conditional": {
+        "run_only_on": "Sunday"
+      }
+    },
+    {
+      "step_id": 11,
+      "name": "Weekly Incremental Compression",
+      "description": "每周日运行增量压缩（仅周日）",
+      "tool_id": "memory-incremental-compressor",
+      "stage": "pre-commit",
+      "parameters": {
+        "days": 7
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "conditional": {
+        "run_only_on": "Sunday"
+      }
+    },
+    {
+      "step_id": 12,
       "name": "Auto-Critic Review",
       "description": "批判者最终审查",
       "tool_id": "auto-critic",

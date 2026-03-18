@@ -175,6 +175,145 @@
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 30
+    },
+    "memory-hybrid-pipeline": {
+      "tool_id": "memory-hybrid-pipeline",
+      "name": "Memory Hybrid Compression Pipeline",
+      "description": "混合压缩管道 - 整合去重/质量/重要性/增量/分层压缩策略",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\memory_hybrid_pipeline.py --batch --days {days}",
+      "parameters": {
+        "days": {
+          "type": "integer",
+          "required": false,
+          "description": "处理最近 N 天",
+          "default": 7,
+          "min": 1,
+          "max": 90
+        }
+      },
+      "validation": {
+        "quality_threshold": 0.7,
+        "importance_threshold": 0.5,
+        "strategies": ["distill_to_memory", "tiered_light", "tiered_standard", "tiered_heavy", "archive"]
+      },
+      "triggers": ["weekly_sunday"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 60
+    },
+    "memory-quality-scorer": {
+      "tool_id": "memory-quality-scorer",
+      "name": "Memory Quality Scorer",
+      "description": "记忆质量评分工具 - 5 维度评分 (完整性/结构化/密度/可执行性/独特性)",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\memory_quality_scorer.py --report --days {days}",
+      "parameters": {
+        "days": {
+          "type": "integer",
+          "required": false,
+          "description": "处理最近 N 天",
+          "default": 14,
+          "min": 1,
+          "max": 90
+        }
+      },
+      "validation": {
+        "grade_levels": ["A", "B", "C", "D", "F"],
+        "dimensions": ["completeness", "structure", "density", "actionability", "uniqueness"],
+        "total_score_max": 100
+      },
+      "triggers": ["weekly_sunday"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 30
+    },
+    "memory-cleanup-compress": {
+      "tool_id": "memory-cleanup-compress",
+      "name": "Memory Cleanup & Deduplication",
+      "description": "记忆去重清理工具 - 检测重复/冗余，清理空行/无效内容",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\memory_cleanup_compress.py --batch --days {days}",
+      "parameters": {
+        "days": {
+          "type": "integer",
+          "required": false,
+          "description": "处理最近 N 天",
+          "default": 14,
+          "min": 1,
+          "max": 90
+        },
+        "threshold": {
+          "type": "float",
+          "required": false,
+          "description": "相似度阈值",
+          "default": 0.8,
+          "min": 0.5,
+          "max": 1.0
+        }
+      },
+      "validation": {
+        "similarity_algorithm": ["jaccard", "sequence"],
+        "duplicate_types": ["exact", "near_duplicate", "partial"]
+      },
+      "triggers": ["weekly_sunday"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 30
+    },
+    "memory-importance-assessor": {
+      "tool_id": "memory-importance-assessor",
+      "name": "Memory Importance Assessor",
+      "description": "记忆重要性评估工具 - 5 维度评分 (可执行性/独特性/时效性/影响力/连接性)",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\memory_importance_assessor.py --memory \"{memory}\"",
+      "parameters": {
+        "memory": {
+          "type": "string",
+          "required": true,
+          "description": "记忆文件路径"
+        }
+      },
+      "validation": {
+        "dimensions": ["actionability", "uniqueness", "recency", "impact", "connectedness"],
+        "weights": {
+          "actionability": 0.20,
+          "uniqueness": 0.25,
+          "recency": 0.15,
+          "impact": 0.25,
+          "connectedness": 0.15
+        },
+        "total_score_max": 1.0
+      },
+      "triggers": ["session_compress"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 10
+    },
+    "memory-incremental-compressor": {
+      "tool_id": "memory-incremental-compressor",
+      "name": "Memory Incremental Compressor",
+      "description": "记忆增量压缩工具 - LCS 算法识别重复，只存储差异部分",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\memory_incremental_compressor.py --diff --days {days}",
+      "parameters": {
+        "days": {
+          "type": "integer",
+          "required": false,
+          "description": "处理最近 N 天",
+          "default": 7,
+          "min": 1,
+          "max": 90
+        }
+      },
+      "validation": {
+        "algorithm": "LCS",
+        "redundancy_threshold": 0.3
+      },
+      "triggers": ["weekly_sunday"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 30
     }
   },
   "workflows": {

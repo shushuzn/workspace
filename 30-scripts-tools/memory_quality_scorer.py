@@ -1,446 +1,564 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-⚠️  DEPRECATED: This tool is deprecated. Use Memory Core v2.0 instead.
+Memory Quality Scorer - 记忆质量评分工具
 
-Migration Guide:
-    Old: python memory_quality_scorer.py --memory file.md
-    New: from memory_core import MemoryCore; MemoryCore().assess_quality('file.md')
+评估记忆质量，识别低质量内容，提供改进建议。
 
-See: 30-scripts-tools/MEMORY-MIGRATION-GUIDE.md for details.
+评分维度 (总分 100 分):
+1. 完整性 (25 分) - 是否有清晰的上下文、决策、结果
+2. 结构化 (20 分) - 是否有标题、列表、代码块等结构
+3. 信息密度 (20 分) - 非空行比例、有效信息量
+4. 可执行性 (20 分) - 是否有 Next Actions、待办事项
+5. 独特性 (15 分) - 是否有新洞察、新决策、新概念
+
+质量等级:
+- A (≥90): 优秀 - 直接蒸馏到 MEMORY.md
+- B (80-89): 良好 - 轻度压缩保留
+- C (70-79): 中等 - 标准压缩
+- D (60-69): 及格 - 重度压缩
+- F (<60): 不合格 - 归档或删除
+
+使用:
+    # 评分单条记忆
+    py memory_quality_scorer.py --memory "13-memory/2026-03-18.md"
+    
+    # 批量评分 (最近 7 天)
+    py memory_quality_scorer.py --batch --days 7
+    
+    # 识别低质量记忆
+    py memory_quality_scorer.py --low-quality --days 30
+    
+    # 生成质量报告
+    py memory_quality_scorer.py --report --days 30
 """
-import warnings
-warnings.warn(
-    "memory_quality_scorer.py is deprecated. Use MemoryCore from memory_core package instead. "
-    "See MEMORY-MIGRATION-GUIDE.md for migration instructions.",
-    DeprecationWarning,
-    stacklevel=2
-)
 
-"""
-Memory Quality Scorer - Evaluate memory quality across multiple dimensions
-"""
-
-import os
 import sys
 import json
+import re
 from pathlib import Path
-from datetime import datetime
-from typing import Dict, List, Tuple
+from datetime import datetime, timedelta
+from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass, asdict
+import subprocess
 
-# UTF-8 for Windows
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
-# Workspace setup
 WORKSPACE = Path(__file__).parent.parent
-MEMORY_DIR = WORKSPACE / '13-memory-记忆系统'
-MEMORY_FILE = MEMORY_DIR / 'MEMORY.md'
+MEMORY_DIR = WORKSPACE / '13-memory'
+SCRIPTS_DIR = WORKSPACE / '30-scripts-tools'
+
 
 @dataclass
-class QualityReport:
-    """Quality assessment report"""
+class QualityScore:
+    """质量评分结果"""
     memory_id: str
-    overall_score: float
+    total_score: float
+    grade: str
     dimensions: Dict[str, float]
-    grade: str  # A/B/C/D/F
-    issues: List[str]
+    strengths: List[str]
+    weaknesses: List[str]
     recommendations: List[str]
     timestamp: str
 
+
+@dataclass
+class QualityReport:
+    """质量报告"""
+    total_memories: int
+    average_score: float
+    grade_distribution: Dict[str, int]
+    low_quality_memories: List[str]
+    high_quality_memories: List[str]
+    details: List[QualityScore]
+    recommendations: List[str]
+    timestamp: str
+
+
 class MemoryQualityScorer:
-    """
-    Multi-dimensional memory quality scoring
-    Dimensions: completeness, clarity, relevance, uniqueness, actionability
-    """
+    """记忆质量评分器"""
     
     def __init__(self):
         self.weights = {
-            'completeness': 0.25,
-            'clarity': 0.20,
-            'relevance': 0.25,
-            'uniqueness': 0.15,
-            'actionability': 0.15,
-        }
-        
-        self.grade_thresholds = {
-            'A': 0.90,
-            'B': 0.75,
-            'C': 0.60,
-            'D': 0.50,
-            'F': 0.0,
+            'completeness': 25.0,    # 完整性
+            'structure': 20.0,       # 结构化
+            'density': 20.0,         # 信息密度
+            'actionability': 20.0,   # 可执行性
+            'uniqueness': 15.0       # 独特性
         }
     
-    def score_completeness(self, content: str) -> float:
-        """
-        Score completeness (0-1)
-        Factors: length, structure, examples
-        """
+    def _score_completeness(self, content: str) -> float:
+        """评分完整性 (25 分)"""
         score = 0.0
         
-        # Length score (40%)
-        length = len(content)
-        if length >= 200:
-            score += 0.4
-        elif length >= 100:
-            score += 0.3
-        elif length >= 50:
-            score += 0.2
-        elif length >= 20:
-            score += 0.1
+        # 1. 有清晰的标题/主题 (5 分)
+        has_title = bool(re.search(r'^#{1,3}\s+\S+', content, re.MULTILINE))
+        score += 5 if has_title else 0
         
-        # Structure score (40%)
-        if '\n' in content:
-            lines = content.split('\n')
-            if len(lines) >= 5:
-                score += 0.4
-            elif len(lines) >= 3:
-                score += 0.3
-            elif len(lines) >= 2:
-                score += 0.2
+        # 2. 有上下文/背景 (5 分)
+        context_keywords = ['context', 'background', 'goal', 'objective', '目标', '背景', '上下文']
+        has_context = any(kw in content.lower() for kw in context_keywords)
+        score += 5 if has_context else 0
         
-        # Has metadata (20%)
-        if '[' in content and ']' in content:  # Likely has tags/IDs
-            score += 0.2
+        # 3. 有决策/结论 (5 分)
+        decision_keywords = ['decided', 'decision', 'conclusion', 'result', '决定', '结论', '结果']
+        has_decision = any(kw in content.lower() for kw in decision_keywords)
+        score += 5 if has_decision else 0
         
-        return min(score, 1.0)
+        # 4. 有理由/依据 (5 分)
+        reason_keywords = ['because', 'reason', 'therefore', 'since', '因为', '所以', '原因']
+        has_reason = any(kw in content.lower() for kw in reason_keywords)
+        score += 5 if has_reason else 0
+        
+        # 5. 有后续行动 (5 分)
+        action_keywords = ['next', 'action', 'todo', 'should', 'will', '下一步', '待办']
+        has_action = any(kw in content.lower() for kw in action_keywords)
+        score += 5 if has_action else 0
+        
+        return score
     
-    def score_clarity(self, content: str) -> float:
-        """
-        Score clarity (0-1)
-        Factors: readability, organization, language
-        """
+    def _score_structure(self, content: str) -> float:
+        """评分结构化 (20 分)"""
         score = 0.0
         
-        # Readability (50%)
-        words = content.split()
-        if len(words) >= 10:
-            avg_word_len = sum(len(w) for w in words) / len(words)
-            if 4 <= avg_word_len <= 8:  # Reasonable word length
-                score += 0.3
-            elif 3 <= avg_word_len <= 10:
-                score += 0.2
-            
-            # Sentence structure
-            sentences = content.replace('。', '.').replace('！', '.').replace('？', '.').split('.')
-            if len(sentences) >= 3:
-                score += 0.2
+        # 1. 使用标题层级 (5 分)
+        headers = re.findall(r'^#{1,6}\s+', content, re.MULTILINE)
+        if len(headers) >= 3:
+            score += 5
+        elif len(headers) >= 1:
+            score += 3
         
-        # Organization (30%)
-        if content.count('#') > 0 or content.count('-') > 0 or content.count('*') > 0:
-            score += 0.3
+        # 2. 使用列表 (5 分)
+        lists = re.findall(r'^\s*[-*+]\s', content, re.MULTILINE)
+        if len(lists) >= 5:
+            score += 5
+        elif len(lists) >= 1:
+            score += 3
         
-        # No excessive repetition (20%)
-        unique_words = set(words)
-        if len(words) > 0:
-            uniqueness_ratio = len(unique_words) / len(words)
-            if uniqueness_ratio > 0.7:
-                score += 0.2
-            elif uniqueness_ratio > 0.5:
-                score += 0.1
+        # 3. 使用代码块 (5 分)
+        code_blocks = re.findall(r'```', content)
+        if len(code_blocks) >= 2:
+            score += 5
+        elif len(code_blocks) >= 1:
+            score += 3
         
-        return min(score, 1.0)
+        # 4. 使用表格 (5 分)
+        tables = re.findall(r'\|.*?\|', content)
+        if len(tables) >= 2:
+            score += 5
+        elif len(tables) >= 1:
+            score += 3
+        
+        return min(score, 20.0)
     
-    def score_relevance(self, content: str, context: str = "") -> float:
-        """
-        Score relevance (0-1)
-        Factors: keyword density, topic focus, context match
-        """
+    def _score_density(self, content: str) -> float:
+        """评分信息密度 (20 分)"""
         score = 0.0
         
-        # Has clear topic (40%)
-        if len(content.split('\n')[0]) <= 50:  # Clear title/heading
-            score += 0.4
+        lines = content.split('\n')
+        non_empty = [l for l in lines if l.strip() and not l.strip().startswith('#')]
         
-        # Keyword consistency (30%)
-        words = content.lower().split()
-        if len(words) > 0:
-            # Check if key terms repeat
-            word_freq = {}
-            for w in words:
-                if len(w) > 3:  # Ignore short words
-                    word_freq[w] = word_freq.get(w, 0) + 1
-            
-            # Some repetition indicates focus
-            repeated = sum(1 for count in word_freq.values() if count > 1)
-            if repeated >= 5:
-                score += 0.3
-            elif repeated >= 2:
-                score += 0.2
+        # 1. 非空行比例 (10 分)
+        if len(lines) > 0:
+            density = len(non_empty) / len(lines)
+            score += density * 10
         
-        # Context match (30%)
-        if context:
-            context_words = set(context.lower().split())
-            content_words = set(content.lower().split())
-            overlap = len(context_words & content_words)
-            if overlap >= 10:
-                score += 0.3
-            elif overlap >= 5:
-                score += 0.2
-            elif overlap >= 2:
-                score += 0.1
+        # 2. 平均行长度 (10 分)
+        if non_empty:
+            avg_length = sum(len(l) for l in non_empty) / len(non_empty)
+            if avg_length >= 50:
+                score += 10
+            elif avg_length >= 30:
+                score += 7
+            elif avg_length >= 15:
+                score += 5
+        
+        return min(score, 20.0)
+    
+    def _score_actionability(self, content: str) -> float:
+        """评分可执行性 (20 分)"""
+        score = 0.0
+        
+        # 1. 有明确的 Next Actions (10 分)
+        next_action_patterns = [
+            r'next\s*(action|step|task)',
+            r'todo\s*\d*',
+            r'待办\s*\d*',
+            r'下一步\s*[:：]',
+            r'TODO\s*[:：]',
+        ]
+        has_next_action = any(re.search(p, content, re.IGNORECASE) for p in next_action_patterns)
+        score += 10 if has_next_action else 0
+        
+        # 2. 有量化指标 (5 分)
+        metrics = re.findall(r'\d+\s*(%|ms|KB|MB|GB|seconds|minutes|hours)', content, re.IGNORECASE)
+        if len(metrics) >= 3:
+            score += 5
+        elif len(metrics) >= 1:
+            score += 3
+        
+        # 3. 有时间承诺 (5 分)
+        time_patterns = [
+            r'(today|tomorrow|this\s+week|next\s+week)',
+            r'(今天 | 明天 | 本周 | 下周)',
+            r'\d{4}-\d{2}-\d{2}',
+        ]
+        has_time = any(re.search(p, content, re.IGNORECASE) for p in time_patterns)
+        score += 5 if has_time else 0
+        
+        return score
+    
+    def _score_uniqueness(self, content: str) -> float:
+        """评分独特性 (15 分)"""
+        score = 0.0
+        
+        # 1. 有新概念/新工具 (5 分)
+        creation_keywords = ['create', 'implement', 'build', 'design', 'new', 'first', 
+                            '创建', '实现', '构建', '设计', '新', '首次']
+        creation_count = sum(1 for kw in creation_keywords if kw in content.lower())
+        if creation_count >= 5:
+            score += 5
+        elif creation_count >= 2:
+            score += 3
+        
+        # 2. 有洞察/发现 (5 分)
+        insight_keywords = ['insight', 'discover', 'learn', 'realize', 'found', 
+                           '洞察', '发现', '学到', '意识到']
+        insight_count = sum(1 for kw in insight_keywords if kw in content.lower())
+        if insight_count >= 3:
+            score += 5
+        elif insight_count >= 1:
+            score += 3
+        
+        # 3. 有架构变更/重大决策 (5 分)
+        architecture_keywords = ['architecture', 'refactor', 'migration', 'phase', 'major',
+                                '架构', '重构', '迁移', '阶段', '重大']
+        arch_count = sum(1 for kw in architecture_keywords if kw in content.lower())
+        if arch_count >= 3:
+            score += 5
+        elif arch_count >= 1:
+            score += 3
+        
+        return min(score, 15.0)
+    
+    def _determine_grade(self, total_score: float) -> str:
+        """确定等级"""
+        if total_score >= 90:
+            return 'A'
+        elif total_score >= 80:
+            return 'B'
+        elif total_score >= 70:
+            return 'C'
+        elif total_score >= 60:
+            return 'D'
         else:
-            score += 0.3  # Default if no context
-        
-        return min(score, 1.0)
+            return 'F'
     
-    def score_uniqueness(self, content: str, other_memories: List[str] = None) -> float:
-        """
-        Score uniqueness (0-1)
-        Factors: novelty, redundancy check
-        """
-        score = 0.0
+    def _generate_feedback(self, content: str, dimensions: Dict[str, float]) -> Tuple[List[str], List[str], List[str]]:
+        """生成反馈"""
+        strengths = []
+        weaknesses = []
+        recommendations = []
         
-        # Has unique identifiers (40%)
-        if '[' in content and ']' in content:  # Likely has lesson codes
-            score += 0.4
-        
-        # Content diversity (30%)
-        words = set(content.lower().split())
-        if len(words) >= 50:
-            score += 0.3
-        elif len(words) >= 30:
-            score += 0.2
-        elif len(words) >= 15:
-            score += 0.1
-        
-        # Compare with other memories (30%)
-        if other_memories:
-            min_similarity = 1.0
-            for other in other_memories:
-                similarity = self._jaccard_similarity(content, other)
-                min_similarity = min(min_similarity, similarity)
-            
-            # Lower similarity = more unique
-            if min_similarity < 0.3:
-                score += 0.3
-            elif min_similarity < 0.5:
-                score += 0.2
-            elif min_similarity < 0.7:
-                score += 0.1
+        # 完整性
+        if dimensions['completeness'] >= 20:
+            strengths.append("内容完整性良好，包含清晰的上下文和决策")
         else:
-            score += 0.3  # Default
+            weaknesses.append("缺少清晰的上下文或决策")
+            recommendations.append("添加背景说明、决策理由和后续行动")
         
-        return min(score, 1.0)
+        # 结构化
+        if dimensions['structure'] >= 15:
+            strengths.append("结构化良好，使用了标题、列表等格式")
+        else:
+            weaknesses.append("结构化不足")
+            recommendations.append("使用标题层级、列表、代码块来组织内容")
+        
+        # 信息密度
+        if dimensions['density'] >= 15:
+            strengths.append("信息密度高，内容充实")
+        else:
+            weaknesses.append("信息密度较低")
+            recommendations.append("减少空行，增加实质性内容")
+        
+        # 可执行性
+        if dimensions['actionability'] >= 15:
+            strengths.append("可执行性强，有明确的后续行动")
+        else:
+            weaknesses.append("缺少可执行的行动项")
+            recommendations.append("添加具体的 Next Actions 和时间承诺")
+        
+        # 独特性
+        if dimensions['uniqueness'] >= 10:
+            strengths.append("包含独特洞察或新概念")
+        else:
+            weaknesses.append("内容较为常规")
+            recommendations.append("记录更多个人洞察、决策理由和教训")
+        
+        return strengths, weaknesses, recommendations
     
-    def score_actionability(self, content: str) -> float:
-        """
-        Score actionability (0-1)
-        Factors: clear actions, implementation details, examples
-        """
-        score = 0.0
+    def score_single(self, memory_path: Path) -> QualityScore:
+        """评分单条记忆"""
+        content = memory_path.read_text(encoding='utf-8', errors='replace')
         
-        # Has action verbs (40%)
-        action_words = ['implement', 'create', 'use', 'add', 'fix', 'update', 
-                       'build', 'deploy', 'test', 'run', 'execute', 'apply',
-                       '实现', '创建', '使用', '添加', '修复', '更新',
-                       '构建', '部署', '测试', '运行', '执行', '应用']
-        
-        content_lower = content.lower()
-        has_action = any(word in content_lower for word in action_words)
-        if has_action:
-            score += 0.4
-        
-        # Has specific details (30%)
-        if any(c.isdigit() for c in content):  # Has numbers
-            score += 0.15
-        if ':' in content or '=' in content:  # Has specifications
-            score += 0.15
-        
-        # Has examples or implementation notes (30%)
-        if 'example' in content_lower or '示例' in content_lower:
-            score += 0.15
-        if 'code' in content_lower or '代码' in content_lower:
-            score += 0.15
-        
-        return min(score, 1.0)
-    
-    def _jaccard_similarity(self, text1: str, text2: str) -> float:
-        """Calculate Jaccard similarity"""
-        words1 = set(text1.lower().split())
-        words2 = set(text2.lower().split())
-        
-        if not words1 or not words2:
-            return 0.0
-        
-        intersection = words1 & words2
-        union = words1 | words2
-        
-        return len(intersection) / len(union)
-    
-    def calculate_overall(self, dimensions: Dict[str, float]) -> float:
-        """Calculate weighted overall score"""
-        score = sum(
-            dimensions[dim] * self.weights[dim]
-            for dim in self.weights
-        )
-        return round(score, 3)
-    
-    def get_grade(self, score: float) -> str:
-        """Convert score to letter grade"""
-        for grade, threshold in sorted(self.grade_thresholds.items(), 
-                                       key=lambda x: x[1], reverse=True):
-            if score >= threshold:
-                return grade
-        return 'F'
-    
-    def identify_issues(self, dimensions: Dict[str, float]) -> List[str]:
-        """Identify quality issues"""
-        issues = []
-        
-        if dimensions['completeness'] < 0.5:
-            issues.append("Content too short or lacks structure")
-        if dimensions['clarity'] < 0.5:
-            issues.append("Poor readability or organization")
-        if dimensions['relevance'] < 0.5:
-            issues.append("Unclear topic focus")
-        if dimensions['uniqueness'] < 0.5:
-            issues.append("Potentially redundant with other memories")
-        if dimensions['actionability'] < 0.5:
-            issues.append("Lacks actionable insights or examples")
-        
-        return issues
-    
-    def generate_recommendations(self, dimensions: Dict[str, float]) -> List[str]:
-        """Generate improvement recommendations"""
-        recs = []
-        
-        if dimensions['completeness'] < 0.7:
-            recs.append("Add more details, examples, or context")
-        if dimensions['clarity'] < 0.7:
-            recs.append("Improve organization with headings and bullet points")
-        if dimensions['relevance'] < 0.7:
-            recs.append("Clarify the main topic and key takeaways")
-        if dimensions['uniqueness'] < 0.7:
-            recs.append("Add unique identifiers or differentiate from similar memories")
-        if dimensions['actionability'] < 0.7:
-            recs.append("Include specific actions, code examples, or implementation steps")
-        
-        return recs
-    
-    def score_memory(self, memory_id: str, content: str, 
-                    other_memories: List[str] = None) -> QualityReport:
-        """
-        Score a single memory across all dimensions
-        """
-        # Calculate dimension scores
+        # 各维度评分
         dimensions = {
-            'completeness': self.score_completeness(content),
-            'clarity': self.score_clarity(content),
-            'relevance': self.score_relevance(content),
-            'uniqueness': self.score_uniqueness(content, other_memories),
-            'actionability': self.score_actionability(content),
+            'completeness': self._score_completeness(content),
+            'structure': self._score_structure(content),
+            'density': self._score_density(content),
+            'actionability': self._score_actionability(content),
+            'uniqueness': self._score_uniqueness(content)
         }
         
-        # Overall score
-        overall = self.calculate_overall(dimensions)
-        grade = self.get_grade(overall)
+        # 总分
+        total_score = sum(dimensions.values())
         
-        # Issues and recommendations
-        issues = self.identify_issues(dimensions)
-        recs = self.generate_recommendations(dimensions)
+        # 等级
+        grade = self._determine_grade(total_score)
         
-        return QualityReport(
-            memory_id=memory_id,
-            overall_score=overall,
-            dimensions=dimensions,
+        # 反馈
+        strengths, weaknesses, recommendations = self._generate_feedback(content, dimensions)
+        
+        return QualityScore(
+            memory_id=memory_path.name,
+            total_score=round(total_score, 2),
             grade=grade,
-            issues=issues,
-            recommendations=recs,
+            dimensions={k: round(v, 2) for k, v in dimensions.items()},
+            strengths=strengths,
+            weaknesses=weaknesses,
+            recommendations=recommendations,
             timestamp=datetime.now().isoformat()
         )
     
-    def score_all(self, memories: Dict[str, str]) -> List[QualityReport]:
-        """Score multiple memories"""
-        reports = []
-        contents = list(memories.values())
+    def score_batch(self, days: int = 7) -> List[QualityScore]:
+        """批量评分"""
+        scores = []
         
-        for memory_id, content in memories.items():
-            report = self.score_memory(memory_id, content, contents)
-            reports.append(report)
+        if not MEMORY_DIR.exists():
+            return scores
         
-        return sorted(reports, key=lambda r: r.overall_score, reverse=True)
+        cutoff_date = datetime.now() - timedelta(days=days)
+        
+        for note_file in MEMORY_DIR.glob("*.md"):
+            if note_file.stem == "MEMORY":
+                continue
+            
+            if not re.match(r'^\d{4}-\d{2}-\d{2}$', note_file.stem):
+                continue
+            
+            try:
+                note_date = datetime.strptime(note_file.stem, '%Y-%m-%d')
+                if note_date < cutoff_date:
+                    continue
+                
+                score = self.score_single(note_file)
+                scores.append(score)
+            
+            except Exception as e:
+                print(f"[ERROR] {note_file.name}: {e}")
+        
+        return sorted(scores, key=lambda x: x.total_score, reverse=True)
+    
+    def generate_report(self, days: int = 7) -> QualityReport:
+        """生成质量报告"""
+        scores = self.score_batch(days)
+        
+        if not scores:
+            return QualityReport(
+                total_memories=0,
+                average_score=0,
+                grade_distribution={},
+                low_quality_memories=[],
+                high_quality_memories=[],
+                details=[],
+                recommendations=["No memories found"],
+                timestamp=datetime.now().isoformat()
+            )
+        
+        # 统计
+        avg_score = sum(s.total_score for s in scores) / len(scores)
+        
+        # 等级分布
+        grade_dist = {'A': 0, 'B': 0, 'C': 0, 'D': 0, 'F': 0}
+        for s in scores:
+            grade_dist[s.grade] = grade_dist.get(s.grade, 0) + 1
+        
+        # 高质量和低质量
+        high_quality = [s.memory_id for s in scores if s.grade in ['A', 'B']]
+        low_quality = [s.memory_id for s in scores if s.grade in ['D', 'F']]
+        
+        # 总体建议
+        recommendations = []
+        if grade_dist['F'] > 0:
+            recommendations.append(f"发现 {grade_dist['F']} 条低质量记忆 (F 级)，建议归档或删除")
+        
+        if grade_dist['A'] > 0:
+            recommendations.append(f"发现 {grade_dist['A']} 条高质量记忆 (A 级)，建议蒸馏到 MEMORY.md")
+        
+        if avg_score < 70:
+            recommendations.append("整体质量偏低，建议改进记录习惯")
+        elif avg_score >= 85:
+            recommendations.append("整体质量优秀，保持当前实践")
+        
+        if not recommendations:
+            recommendations.append("记忆质量良好")
+        
+        return QualityReport(
+            total_memories=len(scores),
+            average_score=round(avg_score, 2),
+            grade_distribution=grade_dist,
+            low_quality_memories=low_quality,
+            high_quality_memories=high_quality,
+            details=scores,
+            recommendations=recommendations,
+            timestamp=datetime.now().isoformat()
+        )
+
+
+def print_score(score: QualityScore):
+    """打印评分结果"""
+    print("\n" + "=" * 60)
+    print(f"Quality Score: {score.memory_id}")
+    print("=" * 60)
+    
+    print(f"\n[Overall]")
+    print(f"  Total Score: {score.total_score}/100")
+    print(f"  Grade: {score.grade}")
+    
+    print(f"\n[Dimensions]")
+    for dim, val in score.dimensions.items():
+        max_score = {'completeness': 25, 'structure': 20, 'density': 20, 
+                    'actionability': 20, 'uniqueness': 15}[dim]
+        bar = '█' * int(val / max_score * 20)
+        print(f"  {dim:15s}: {val:5.1f}/{max_score:2d} {bar}")
+    
+    if score.strengths:
+        print(f"\n[Strengths]")
+        for s in score.strengths:
+            print(f"  ✓ {s}")
+    
+    if score.weaknesses:
+        print(f"\n[Weaknesses]")
+        for w in score.weaknesses:
+            print(f"  ✗ {w}")
+    
+    if score.recommendations:
+        print(f"\n[Recommendations]")
+        for r in score.recommendations:
+            print(f"  • {r}")
+
+
+def print_report(report: QualityReport):
+    """打印质量报告"""
+    print("\n" + "=" * 60)
+    print("Memory Quality Report")
+    print("=" * 60)
+    
+    print(f"\n[Overview]")
+    print(f"  Total Memories: {report.total_memories}")
+    print(f"  Average Score:  {report.average_score}/100")
+    
+    print(f"\n[Grade Distribution]")
+    for grade in ['A', 'B', 'C', 'D', 'F']:
+        count = report.grade_distribution.get(grade, 0)
+        pct = count / report.total_memories * 100 if report.total_memories > 0 else 0
+        bar = '█' * int(pct / 5)
+        print(f"  {grade}: {count:3d} ({pct:5.1f}%) {bar}")
+    
+    if report.high_quality_memories:
+        print(f"\n[High Quality ({len(report.high_quality_memories)})]")
+        for mem in report.high_quality_memories[:5]:
+            print(f"  • {mem}")
+    
+    if report.low_quality_memories:
+        print(f"\n[Low Quality ({len(report.low_quality_memories)})]")
+        for mem in report.low_quality_memories[:5]:
+            print(f"  • {mem}")
+    
+    print(f"\n[Recommendations]")
+    for rec in report.recommendations:
+        print(f"  • {rec}")
+
 
 def main():
+    """主函数"""
     import argparse
-    parser = argparse.ArgumentParser(description="Memory Quality Scorer")
-    parser.add_argument('--memory', type=str, default=str(MEMORY_FILE),
-                       help='Memory file to score')
-    parser.add_argument('--output', type=str, 
-                       help='Output JSON file for report')
+    
+    parser = argparse.ArgumentParser(description='Memory Quality Scorer')
+    parser.add_argument('--memory', type=str, help='评分单条记忆文件')
+    parser.add_argument('--batch', action='store_true', help='批量评分')
+    parser.add_argument('--days', type=int, default=7, help='处理最近 N 天 (默认 7)')
+    parser.add_argument('--low-quality', action='store_true', help='仅显示低质量记忆')
+    parser.add_argument('--report', action='store_true', help='生成完整报告')
+    parser.add_argument('--json', action='store_true', help='输出 JSON 格式')
+    
     args = parser.parse_args()
     
-    # Load memory file
-    memory_file = Path(args.memory)
-    if not memory_file.exists():
-        print(f"❌ Memory file not found: {memory_file}")
-        return
-    
-    with open(memory_file, 'r', encoding='utf-8') as f:
-        content = f.read()
-    
-    # Simple parsing (split by sections)
-    sections = content.split('###')[1:]  # Skip first empty
-    memories = {}
-    for section in sections:
-        lines = section.strip().split('\n')
-        if lines:
-            memory_id = f"mem_{len(memories)}"
-            memories[memory_id] = section.strip()
-    
-    print(f"📊 Scoring {len(memories)} memories...")
-    
-    # Score all
     scorer = MemoryQualityScorer()
-    reports = scorer.score_all(memories)
     
-    # Summary
-    print("\n" + "=" * 80)
-    print("📈 Memory Quality Summary")
-    print("=" * 80)
+    # 单文件评分
+    if args.memory:
+        memory_path = Path(args.memory.replace('"', '').replace("'", ""))
+        if not memory_path.is_absolute():
+            memory_path = WORKSPACE / memory_path
+        
+        if not memory_path.exists():
+            print(f"[ERROR] File not found: {memory_path}")
+            return 1
+        
+        score = scorer.score_single(memory_path)
+        
+        if args.json:
+            print(json.dumps(asdict(score), indent=2, ensure_ascii=False))
+        else:
+            print_score(score)
+        
+        return 0
     
-    grades = {}
-    for report in reports:
-        grade = report.grade
-        grades[grade] = grades.get(grade, 0) + 1
+    # 批量评分
+    if args.batch:
+        scores = scorer.score_batch(args.days)
+        
+        if args.json:
+            print(json.dumps([asdict(s) for s in scores], indent=2, ensure_ascii=False))
+        else:
+            for score in scores:
+                print_score(score)
+        
+        return 0
     
-    print(f"Total Memories: {len(reports)}")
-    print(f"\nGrade Distribution:")
-    for grade in ['A', 'B', 'C', 'D', 'F']:
-        count = grades.get(grade, 0)
-        pct = count / len(reports) * 100
-        print(f"  {grade}: {count} ({pct:.1f}%)")
+    # 低质量记忆
+    if args.low_quality:
+        scores = scorer.score_batch(args.days)
+        low_quality = [s for s in scores if s.grade in ['D', 'F']]
+        
+        if args.json:
+            print(json.dumps([asdict(s) for s in low_quality], indent=2, ensure_ascii=False))
+        else:
+            print(f"\n[Low Quality Memories ({len(low_quality)})]")
+            for score in low_quality:
+                print(f"\n{score.memory_id}: {score.total_score}/100 (Grade {score.grade})")
+                for w in score.weaknesses:
+                    print(f"  ✗ {w}")
+        
+        return 0
     
-    avg_score = sum(r.overall_score for r in reports) / len(reports)
-    print(f"\nAverage Score: {avg_score:.3f}")
+    # 生成报告
+    if args.report:
+        report = scorer.generate_report(args.days)
+        
+        if args.json:
+            print(json.dumps(asdict(report), indent=2, ensure_ascii=False))
+        else:
+            print_report(report)
+        
+        return 0
     
-    # Top 5
-    print(f"\n🏆 Top 5 Memories:")
-    for i, report in enumerate(reports[:5], 1):
-        print(f"  {i}. {report.memory_id}: {report.overall_score:.3f} ({report.grade})")
-    
-    # Bottom 5
-    print(f"\n⚠️  Bottom 5 Memories (Need Improvement):")
-    for i, report in enumerate(reports[-5:], 1):
-        print(f"  {i}. {report.memory_id}: {report.overall_score:.3f} ({report.grade})")
-        for issue in report.issues:
-            print(f"      - {issue}")
-    
-    # Save report
-    if args.output:
-        output_file = Path(args.output)
-        report_data = {
-            'summary': {
-                'total': len(reports),
-                'average_score': avg_score,
-                'grade_distribution': grades,
-            },
-            'reports': [asdict(r) for r in reports]
-        }
-        with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(report_data, f, indent=2, ensure_ascii=False)
-        print(f"\n💾 Full report saved to: {output_file}")
+    # 默认显示帮助
+    parser.print_help()
+    return 1
 
-if __name__ == "__main__":
-    main()
+
+if __name__ == '__main__':
+    sys.exit(main())
