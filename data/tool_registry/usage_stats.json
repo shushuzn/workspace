@@ -1,0 +1,1814 @@
+{
+  "active-learning-trigger.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "adaptive_ttl_cache.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "advanced_report_gen.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "ai_task_scheduler.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "ai_tool_suggester.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "analyze-memory-scripts.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "anomaly_detector.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "anomaly_detector_pro.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "api_gateway.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "arxiv_collector_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "arxiv_workflow.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "async_executor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "automation_enhancer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "automation_orchestrator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "autonomous_decision.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "autonomous_research_assistant.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_data_cleaner.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_deploy.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_deployer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_distill.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_fix_orchestrator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_optimizer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_recovery.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_signal_extractor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_test_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_test_runner.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "auto_tuner.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "backup-strategy-restructure.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "batch_card_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "batch_processor_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "batch_security_fixer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "cache_manager.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "cache_observability.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "canvas_auto_updater.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "capacity_planner.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "causal_inference_engine.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "ci_cd_pipeline.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "clean-duplicates-safe.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "cleanup_reports.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "cluster_manager.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "code_quality_reviewer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "code_reviewer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "complete_path_fixer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "compress-tiff-to-png.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "config_center.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "config_center_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "config_manager.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "context_aware_cache.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "context_cache_manager.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "context_cli.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "context_compressor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "context_db.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "context_search.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "coordinator_balancer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "core_system_test.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "critic_auto_fix.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "cron_manager.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "daily_brief_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "dashboard_anomaly_alerts.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "dashboard_decision_timeline.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "dashboard_health_widget.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "dashboard_integration.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "data_sync_enhancer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "decision_optimizer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "defuddle_integration.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "demo_tool.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "deployment_validator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "deploy_production.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "dialog_integrator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "disaster-recovery-cleanup.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "distributed_cache.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "distributed_search.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "doc_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "download_qwen_model.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "do_rename.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "effect_tracker.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "enhanced_canvas_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "error_analyzer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "error_predictor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "evolution_engine.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "execute_cleanup.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "experiment_platform.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "explainable_ai.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "federated_learning.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "feishu-analytics-dashboard.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "feishu-chatbot.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "feishu_approval_workflow.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "feishu_card_templates.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "feishu_message_queue.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "feishu_notification.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "feishu_persona_notify.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "feishu_report_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "file-organizer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "fix_memory_complete.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "fix_memory_encoding.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "fix_memory_encoding_deep.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "fix_workspace_paths.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "folder-organizer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "git-firewall-proxy.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "git_workflow.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "graded_fallback.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "health_monitor_ai.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "health_predictor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "heartbeat_integration.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "heartbeat_production_check.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "heartbeat_workflow.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "hybrid_search.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "incremental_indexer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "innovation_pattern_matcher.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "innovator_auto_executor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "innovator_engine.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "insight_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "install-git-hooks.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "install_requirements.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "intent_predictor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "iteration_manager.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "json_canvas_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "kg_enhancer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "kg_integrator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "kg_reasoner.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "knowledge-graph-builder.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "knowledge_graph_builder.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "knowledge_graph_updater.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "learner-assistant-v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "learning-quality-assessor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "load_balancer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "local_qwen_inference.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "maintenance_scheduler.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "master_orchestrator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_association_basic.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_causal_discovery.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_cleanup_compress.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_conflict_detector.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_conflict_resolver.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_consciousness_emergence.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_dark_matter.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_dashboard_v1.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_dashboard_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_distillation_runner.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_distiller_llm.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_distiller_v1.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_distiller_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_engine_autonomous.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_engine_evolution.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_engine_maintenance.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_engine_ops.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_engine_orchestrator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_evolutionary_algorithms.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_fix_auto.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_fix_ultimate.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_forgetting.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_forgetting_execute.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_forgetting_v1.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_fractal_compression.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_immune_system.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_llm_hypothesis.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_neural_network.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_perf_prefetch.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_perf_profiler.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_persona.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_predictive_coding.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_quality_assessor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_quality_scorer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_quality_scorer_v1.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_quantum_entanglement.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_search_cached.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_search_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_self_improving_engine.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_semantic_search.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_thermodynamics.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_time_crystal.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_topological_analysis.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_util_audit.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_util_health.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "memory_util_indexer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "meta_cognition_monitor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "meta_learning.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "meta_learning_optimizer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "monitor_reports.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "multi_agent_network.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "neural_embedding.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "notification_center.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "notification_router.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "obsidian_tools.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "ollama_qwen_test.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "openclaw.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "organize-root-files-v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "paper_summarizer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "parallel_executor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "path_interceptor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "path_security_fixer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "performance_analyzer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "performance_profiler.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "perf_dashboard.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "phase4_dashboard.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "plan-auto-optimizer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "plan-quality-assessor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "planner-assistant-v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "pm-duplicate-analyzer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "pm-merge-folders.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "predictive_alerting_engine.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "predictive_analytics.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "predictive_healing.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "pre_commit_hook.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "pre_file_operation_hook.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "production_monitor_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "quality_scorer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "query_predictor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "quick_security_fix.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "real_time_monitor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "redis_integration.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "rename-memory-scripts.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "report_access.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "report_lifecycle.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "report_quality_scorer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "report_search.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "report_storage.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "report_tracker.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "resilience_analyzer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "resource_monitor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "rl_ttl_optimizer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "safedir.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "safe_write.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "security_auditor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "security_auto_fixer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "security_reporter.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "security_validator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "self_healing.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "self_iteration.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "self_iter_cli.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "self_iter_dashboard.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "semantic_cache.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "sensitive_content_router.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "session-check.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "setup-git-hooks.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "smart-review-reminder.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "smart_cache_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "smart_doc_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "smart_notification.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "smart_recommendations.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "smart_report_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "smart_scheduler.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "smart_tool_finder.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "smart_workflow_optimizer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "system_health_checker.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "system_orchestrator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "task_priority_scorer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_enhancer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_feishu_tools.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_feishu_tools_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_memory_distillation_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p1_innovations.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p2_innovations.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p3_innovations.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p4_dashboard.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p4_orchestrator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p4_self_improving_engine.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p5_evolution.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p5_llm_hypothesis.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p5_tools.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p6_autonomy.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "test_p7_predictive_coding.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "tiered_cache.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "tool_analytics.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "tool_code_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "tool_consolidator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "tool_integration.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "tool_orchestrator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "tool_registry.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "tool_similarity_engine.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "trend_analyzer_pro.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "ultimate_memory_search.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "ultimate_memory_search_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "ultimate_memory_search_v3.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "ultra_fast_memory_search.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "unified_api.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "unified_cli_v3.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "unified_dashboard.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "unified_dashboard_v3.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "unified_doc_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "unified_monitor.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "update_heartbeat_for_memorycore.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "usage_pattern_miner.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "vector_search.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "verify_deployment.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "verify_p6_quick.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "windows_task_scheduler.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_analyzer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_engine.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_engine_v2.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_enhancer.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_generator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_manager.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_optimizer_ai.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_server.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_template_gen.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_tester_auto.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_validator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workflow_visualizer_web.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workspace.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workspace_comparator.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  },
+  "workspace_init.py": {
+    "total_runs": 0,
+    "last_run": null,
+    "avg_execution_time_ms": 0,
+    "error_count": 0
+  }
+}

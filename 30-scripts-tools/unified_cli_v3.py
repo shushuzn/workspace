@@ -50,8 +50,8 @@ COMMAND_ALIASES = {
     'create workflow': 'tool_orchestrator.py --create',
     
     # Memory search
-    'search memory': 'ultimate_memory_search_v3.py --search',
-    'memory search': 'ultimate_memory_search_v3.py --search',
+    'search memory': 'ultimate_memory_search_v3.py --demo',
+    'memory search': 'ultimate_memory_search_v3.py --demo',
     
     # Cache management
     'cache stats': 'cache_observability.py --stats',
@@ -66,9 +66,9 @@ COMMAND_ALIASES = {
     'kg update': 'knowledge_graph_enhanced.py --update',
     
     # System
-    'system health': 'health_checker.py',
+    'system health': 'system_health_checker.py --check',
     'deploy': 'auto_deployer.py',
-    'performance': 'performance_monitor.py --report',
+    'performance': 'performance_analyzer.py',
 }
 
 # Command categories
@@ -166,7 +166,7 @@ class UnifiedCLI:
         """
         start_time = datetime.now()
         
-        # Build full command
+        # Build full command - always use Python interpreter
         if command.endswith('.py'):
             tool_path = TOOLS_DIR / command
             if not tool_path.exists():
@@ -177,19 +177,41 @@ class UnifiedCLI:
             
             full_cmd = [sys.executable, str(tool_path)] + (args or [])
         else:
-            # Shell command
-            full_cmd = command.split() + (args or [])
+            # Check if it's a tool name without .py
+            tool_name = command.split()[0]
+            tool_args = command.split()[1:]
+            tool_path = TOOLS_DIR / f"{tool_name}.py"
+            if tool_path.exists():
+                full_cmd = [sys.executable, str(tool_path)] + tool_args + (args or [])
+            else:
+                # Shell command
+                full_cmd = command.split() + (args or [])
         
         try:
-            # Execute
-            result = subprocess.run(
-                full_cmd,
-                capture_output=True,
-                text=True,
-                timeout=300,
-                encoding='utf-8',
-                cwd=str(WORKSPACE),
-            )
+            # Execute - use shell=True on Windows
+            if sys.platform == 'win32':
+                # On Windows, use shell=True and pass command as string
+                cmd_str = ' '.join(full_cmd)
+                result = subprocess.run(
+                    cmd_str,
+                    capture_output=True,
+                    text=True,
+                    timeout=300,
+                    encoding='utf-8',
+                    errors='replace',
+                    cwd=str(TOOLS_DIR),
+                    shell=True,
+                )
+            else:
+                result = subprocess.run(
+                    full_cmd,
+                    capture_output=True,
+                    text=True,
+                    timeout=300,
+                    encoding='utf-8',
+                    errors='replace',
+                    cwd=str(TOOLS_DIR),
+                )
             
             end_time = datetime.now()
             duration = (end_time - start_time).total_seconds()
