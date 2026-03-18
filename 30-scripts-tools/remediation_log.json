@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "created_at": "2026-03-18T21:45:18.649540",
-  "last_updated": "2026-03-18T21:45:18.649541",
+  "created_at": "2026-03-18T21:47:42.066716",
+  "last_updated": "2026-03-18T21:47:42.066717",
   "tasks": {
     "REM-20260318-E32C84": {
       "task_id": "REM-20260318-E32C84",
@@ -652,18 +652,103 @@
       "reminder_count": 0,
       "last_reminder": null,
       "notes": []
+    },
+    "REM-20260318-AA5D48": {
+      "task_id": "REM-20260318-AA5D48",
+      "fail_item_id": "blocker-001",
+      "source": "critic-Session-End-Workflow-Test",
+      "title": "致命问题 0 个",
+      "description": "FAIL",
+      "severity": "blocker",
+      "created_at": "2026-03-18T21:47:42.066520",
+      "deadline": "2026-03-19T21:47:42.066496",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-EBA0A3": {
+      "task_id": "REM-20260318-EBA0A3",
+      "fail_item_id": "blocker-003",
+      "source": "critic-Session-End-Workflow-Test",
+      "title": "代码/文档已提交 Git",
+      "description": "FAIL",
+      "severity": "blocker",
+      "created_at": "2026-03-18T21:47:42.066593",
+      "deadline": "2026-03-19T21:47:42.066587",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-48B58D": {
+      "task_id": "REM-20260318-48B58D",
+      "fail_item_id": "warning-001",
+      "source": "critic-Session-End-Workflow-Test",
+      "title": "严重问题≤2 个",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:47:42.066645",
+      "deadline": "2026-03-25T21:47:42.066641",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-81918F": {
+      "task_id": "REM-20260318-81918F",
+      "fail_item_id": "warning-002",
+      "source": "critic-Session-End-Workflow-Test",
+      "title": "一般问题≤10 个",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:47:42.066666",
+      "deadline": "2026-03-25T21:47:42.066664",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-3E6D66": {
+      "task_id": "REM-20260318-3E6D66",
+      "fail_item_id": "warning-007",
+      "source": "critic-Session-End-Workflow-Test",
+      "title": "安全检查 (无高危漏洞)",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:47:42.066676",
+      "deadline": "2026-03-25T21:47:42.066675",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
     }
   },
   "statistics": {
-    "total_tasks": 36,
+    "total_tasks": 41,
     "by_status": {
       "deferred": 5,
       "resolved": 8,
-      "open": 23
+      "open": 28
     },
     "by_severity": {
-      "blocker": 16,
-      "warning": 20
+      "blocker": 18,
+      "warning": 23
     },
     "overdue_count": 0,
     "completion_rate": 0.0

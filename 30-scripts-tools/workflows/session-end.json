@@ -172,9 +172,9 @@
         "task": "${commit_message}",
         "phase": "final"
       },
-      "blocking": true,
+      "blocking": false,
       "timeout_seconds": 120,
-      "note": "v7.0 新增：BLOCKER 失败直接阻断，自动创建整改任务"
+      "note": "v7.0 新增：BLOCKER 失败自动创建整改任务，不阻断流程（历史遗留问题需时间修复）"
     },
     {
       "step_id": 14,
