@@ -32,10 +32,11 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 2. ✅ **Run compression** at session end:
    ```bash
    py 30-scripts-tools\post_session_compress.py --auto
-   # OR simply: end-session.bat
+   # OR simply: py 30-scripts-tools\session_end.py "完成描述"
    ```
 3. ✅ **Verify context size** stays <100KB
 4. ✅ **Save to daily note** (`13-memory/YYYY-MM-DD.md`)
+5. ✅ **Auto Flow ID binding** - 自动使用 `20260318-universal-workflow-001`
 
 **Compression效果:**
 - 完整对话：~50KB → 结构化摘要：~2KB (**-96%**)

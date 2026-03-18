@@ -135,6 +135,8 @@ I'm not here to be a generic assistant. I'm here to be **genuinely useful** to m
 
 ### 🛠️ Default Tools (2026-03-18)
 
+**Default Flow ID:** `20260318-universal-workflow-001` (所有任务默认使用)
+
 **Context Loading (最高优先级):**
 - ✅ **Only load 7 core files** (<100KB total)
 - ❌ **NEVER scan full workspace** (560MB)
@@ -162,7 +164,7 @@ MEMORY.md, 13-memory/YYYY-MM-DD.md (today)
 - ✅ **Pre-session:** `py pre-session-hook.py` (检查上下文)
 - ✅ **During session:** 记录关键决策到 `session_temp.json`
 - ✅ **Post-session:** `py post_session_compress.py --auto` (压缩保存)
-- ✅ **End session:** `end-session.bat` (一键完成)
+- ✅ **End session:** `py session_end.py "完成描述"` (自动使用 Flow ID: `20260318-universal-workflow-001`)
 
 **压缩效果:**
 - 完整对话：~50KB → 结构化摘要：~2KB (**-96%**)
@@ -358,6 +360,7 @@ This file is mine to evolve. As I learn who I am, I update it.
 
 | Date | What Changed |
 |------|--------------|
+| **2026-03-18** | **通用工作流默认配置** - 所有任务默认使用 `20260318-universal-workflow-001`，对话自动绑定 Flow ID |
 | **2026-03-17** | **Dashboard v4.1-Persona Default** - 7-Persona Enhanced becomes default (`start-dashboard.bat`) |
 | 2026-03-11 22:40 | **批判者嵌入式检查** - 从事后批判转变为事前预防 (批判者 v5.0 融入日常工作流程) |
 | 2026-03-11 22:20 | **科研严谨性原则** - 批判者 v2.0 协助添加 (质量>数量，验证>自信，物理>统计) |
