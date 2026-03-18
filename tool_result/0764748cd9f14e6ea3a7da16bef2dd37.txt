@@ -1,0 +1,50 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-18T23:50:54.389377
+# ---
+ Volume in drive D has no label.
+ Volume Serial Number is 0E0F-B1B8
+
+ Directory of D:\OpenClaw\workspace\30-scripts-tools
+
+2026/03/18  18:45             5,468 critic-auto-auto-critic-doc.json
+2026/03/18  18:49             5,359 critic-auto-auto-critic.json
+2026/03/18  18:29             5,078 critic-auto-critic-standard-doc.json
+2026/03/18  18:29             5,472 critic-auto-critic-standard-update.json
+2026/03/18  20:38               908 critic-auto-Final-v7.json
+2026/03/18  17:46             1,025 critic-auto-memory-compression-brainstorm.json
+2026/03/18  19:48             7,356 critic-auto-memory-compression-phase2-complete.json
+2026/03/18  19:46             7,495 critic-auto-memory-compression-phase2.json
+2026/03/18  19:43             8,131 critic-auto-memory-compression-tools.json
+2026/03/18  18:19             5,066 critic-auto-memory-index-generator.json
+2026/03/18  18:11             5,042 critic-auto-memory-system-9-improvements.json
+2026/03/18  18:51             5,578 critic-auto-memory-tag-search-integration.json
+2026/03/18  17:26             4,365 critic-auto-memory-tag-system-final.json
+2026/03/18  17:26             2,895 critic-auto-memory-tag-system.json
+2026/03/18  18:35             5,244 critic-auto-memory-tools-integrated-to-session-end.py.json
+2026/03/18  18:40             5,483 critic-auto-memory-tools-integration.json
+2026/03/18  21:43             4,244 critic-auto-P0-Credential-fix-quality-gate-improvements-v7.json
+2026/03/18  21:43             7,311 critic-auto-p0-credential-fix-quality-gate-improvements.json
+2026/03/18  21:41             4,187 critic-auto-P0-Credential-Fix-v7.json
+2026/03/18  22:04             4,293 critic-auto-P1-Fix-Complete-Report-Added-v7.json
+2026/03/18  22:04             7,215 critic-auto-p1-fix-complete-report-added.json
+2026/03/18  22:01             4,452 critic-auto-P1-Issue-Fix-Execution-v7.json
+2026/03/18  22:01             7,157 critic-auto-p1-issue-fix-execution.json
+2026/03/18  19:03             5,588 critic-auto-phase2-session-end-refactor.json
+2026/03/18  19:14             5,392 critic-auto-phase4-architecture-compliance.json
+2026/03/18  20:51               923 critic-auto-Remediation-Complete-v7.json
+2026/03/18  18:21             5,367 critic-auto-session-end-auto-critic-integration.json
+2026/03/18  17:28             3,031 critic-auto-session-end-script.json
+2026/03/18  21:45             4,226 critic-auto-Session-End-Test-v7.json
+2026/03/18  21:47             4,202 critic-auto-Session-End-Workflow-Test-v7.json
+2026/03/18  21:47             5,744 critic-auto-session-end-workflow-test.json
+2026/03/18  18:22             3,645 critic-auto-session-end.json
+2026/03/18  18:57             6,047 critic-auto-tool-architecture-phase-1-complete---tools-regist.json
+2026/03/18  18:57             5,867 critic-auto-tool-architecture-phase1.json
+2026/03/18  20:36             4,279 critic-auto-v7-Complete-v7.json
+2026/03/18  20:18             4,362 critic-auto-v7-Final-v7.json
+2026/03/18  20:14               913 critic-auto-v7-Quick-v7.json
+2026/03/18  23:49             6,084 critic-auto-测试中文任务.json
+2026/03/18  22:54             4,176 critic-auto-测试通用工作流配置-v7.json
+2026/03/18  22:53             6,232 critic-auto-测试通用工作流配置.json
+              40 File(s)        194,902 bytes
+               0 Dir(s)  384,824,004,608 bytes free

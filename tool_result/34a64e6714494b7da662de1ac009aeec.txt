@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:51:47.975125
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\auto-critic.py  (lines 600-700 of 1341)
+        else:
+            return (False, "文档文件未找到", f"❌ Doc file not found: {doc_file}")
+    
+    elif "引用" in item or "来源" in item:
+        # 排除架构合规审查的 ZS-006 检查（包含"引用"但实际上是检查工作流引用）
+        if "ZS-006" in item or "工作流引用" in item or "有效使用" in item or "被工作流" in item:
+            # 直接执行 ZS-006 检查逻辑 - 检查工作流 JSON 和 Python 脚本
+            registry_file = SCRIPTS_DIR / "tools_registry.json"
+            workflows_dir = SCRIPTS_DIR / "workflows"
+            
+            if not registry_file.exists():
+                return (False, "工具库不存在", f"❌ tools_registry.json not found")
+            
+            with open(registry_file, 'r', encoding='utf-8') as f:
+                registry = json.load(f)
+            
+            defined_tools = set(registry.get("tools", {}).keys())
+            used_tools = set()
+            
+            # 1. 检查工作流 JSON 文件中的引用
+            if workflows_dir.exists():
+                for wf_file in workflows_dir.glob("*.json"):
+                    with open(wf_file, 'r', encoding='utf-8') as f:
+                        workflow = json.load(f)
+                    
+                    for step in workflow.get("steps", []):
+                        tool_id = step.get("tool_id")
+                        if tool_id:
+                            used_tools.add(tool_id)
+            
+            # 2. 检查 Python 脚本中的工具调用
+            python_scripts = [
+                SCRIPTS_DIR / "session_end.py",
+                SCRIPTS_DIR / "post_session_compress.py",
+                SCRIPTS_DIR / "tool_executor.py",
+            ]
+            
+            for script in python_scripts:
+                if script.exists():
+                    content = script.read_text(encoding='utf-8', errors='replace')
+                    for tool_id in defined_tools:
+                        # 检查工具 ID 是否在脚本中被引用
+                        if tool_id in content or tool_id.replace('-', '_') in content:
+                            used_tools.add(tool_id)
+            
+            unused_tools = defined_tools - used_tools
+            
+            if unused_tools:
+                return (False, f"工具未使用：{unused_tools}", f"⚠️ Unused tools: {unused_tools}")
+            return (True, "所有工具都被使用", f"✅ {len(used_tools)}/{len(defined_tools)} tools used")
+        
+        doc_file = DOCS_DIR / f"{task.upper().replace(' ', '-')}.md"
+        if not doc_file.exists():
+            doc_file = DOCS_DIR / f"{task.lower().replace(' ', '-')}.md"
+        
+        quality = verify_document_quality(doc_file)
+        
+        if quality["exists"] and quality["has_references"]:
+            return (True, "有引用来源", f"References found in {doc_file}")
+        elif quality["exists"]:
+            return (False, "文档缺少引用", f"❌ No references found in {doc_file}")
+        else:
+            return (False, "文档文件未找到", f"❌ Doc file not found: {doc_file}")
+    
+    elif "格式" in item or "命名" in item or "术语" in item:
+        # 检查相关文件命名一致性
+        return (True, "格式统一", f"Naming/terminology consistent for: {task}")
+    
+    elif "长度" in item or "行数" in item:
+        doc_file = DOCS_DIR / f"{task.upper().replace(' ', '-')}.md"
+        if not doc_file.exists():
+            doc_file = DOCS_DIR / f"{task.lower().replace(' ', '-')}.md"
+        
+        quality = verify_document_quality(doc_file)
+        
+        if quality["exists"]:
+            under_100 = quality["lines"] < 100
+            return (
+                under_100,
+                f"文档长度：{quality['lines']} 行",
+                f"File: {doc_file} | Lines: {quality['lines']}" + (" ✅ <100" if under_100 else " ⚠️ >=100")
+            )
+        return (False, "文档文件未找到", f"❌ Doc file not found: {doc_file}")
+    
+    # ===== 工具类深度验证 =====
+    
+    elif "工具已创建" in item:
+        safe_name = task.lower().replace(" ", "-").replace("_", "-").replace('"', '').replace("'", "")
+        tool_file = SCRIPTS_DIR / f"{safe_name}.py"
+        if tool_file.exists():
+            return (
+                True,
+                f"工具已创建 ({tool_file.stat().st_size} bytes)",
+                f"File: {tool_file} | Size: {tool_file.stat().st_size} bytes"
+            )
+        return (False, "工具文件未找到", f"❌ File not found: {tool_file}")
+    
+    elif "工作流集成" in item or "工作流中使用" in item:
+        evidence = verify_tool_usage(task)
+        
+        if evidence["workflow_integrated"]:
+
+[641 more lines. Use start_line=701 to continue.]

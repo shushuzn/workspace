@@ -1,0 +1,87 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:53:32.030050
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\auto-critic.py  (lines 440-520 of 1341)
+                ["git", "status", "--short"],
+                capture_output=True,
+                text=True,
+                timeout=10,
+                encoding='utf-8',
+                errors='replace'
+            )
+            
+            uncommitted_files = []
+            for line in result.stdout.strip().split('\n'):
+                if line.strip():
+                    # 提取文件名（去掉状态标记）
+                    parts = line.strip().split(None, 1)  # 分割成两部分：状态和文件名
+                    if len(parts) >= 2:
+                        filename = parts[1].strip('"').strip("'")
+                        uncommitted_files.append(filename)
+            
+            # 检查当前任务相关文件是否在未提交列表中
+            safe_name = task.lower().replace(" ", "-").replace("_", "-")
+            task_files = [
+                f"{safe_name}.py",
+                f"{safe_name.replace('-', '_')}.py",
+                f"critic-auto-{safe_name}.json",
+                f"auto-critic.py",  # 特殊处理 auto-critic 任务
+                f"auto_critic.py",
+            ]
+            
+            # 检查是否有任务相关文件未提交
+            uncommitted_task_files = []
+            for uf in uncommitted_files:
+                for tf in task_files:
+                    if tf in uf or safe_name in uf:
+                        uncommitted_task_files.append(uf)
+                        break
+            
+            if uncommitted_task_files:
+                return (
+                    False,
+                    f"任务相关文件未提交：{', '.join(uncommitted_task_files)}",
+                    f"❌ Uncommitted files: {', '.join(uncommitted_task_files)}"
+                )
+            
+            # 如果没有未提交的文件，检查最近的提交
+            commits = get_git_commits_for_task(task)
+            
+            if commits:
+                return (
+                    True,
+                    f"已提交 {len(commits)} 个 commits，无未提交更改",
+                    f"Commits: {', '.join(commits[:3])} | Uncommitted: None"
+                )
+            else:
+                # 没有相关提交，但有未提交的文件
+                if uncommitted_files:
+                    return (
+                        False,
+                        f"有未提交更改，且无相关 Git 提交",
+                        f"❌ Uncommitted changes: {len(uncommitted_files)} files, No related commits"
+                    )
+                
+                return (
+                    True,
+                    "无未提交更改",
+                    "No uncommitted changes detected"
+                )
+                
+        except Exception as e:
+            return (
+                False,
+                f"无法检查 Git 状态：{str(e)}",
+                f"❌ Error checking git status: {str(e)}"
+            )
+    
+    elif "关键决策已记录" in item:
+        # 检查批判者审查文件
+        safe_name = task.lower().replace(" ", "-").replace("_", "-").replace('"', '').replace("'", "")
+        review_file = SCRIPTS_DIR / f"critic-auto-{safe_name}.json"
+        
+        # 如果文件不存在，尝试查找最近的匹配文件
+        if not review_file.exists():
+            critic_files = list(SCRIPTS_DIR.glob(f"critic-auto-{safe_name}*.json"))
+
+[821 more lines. Use start_line=521 to continue.]

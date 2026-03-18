@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:51:28.565041
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\auto-critic.py  (lines 1100-1200 of 1341)
+                        return (
+                            False,
+                            f"上下文过大：{size}KB",
+                            f"fast_load.py output: {size}KB FAIL >=100KB"
+                        )
+                
+                # 无法提取具体大小，但有<100KB 标记
+                if "<100KB" in output:
+                    return (True, "上下文<100KB", "fast_load.py output: <100KB OK")
+            
+            return (False, "无法验证上下文大小", "fast_load.py output unclear")
+            
+        except Exception as e:
+            return (False, f"无法运行 fast_load.py: {str(e)}", f"Error: {str(e)}")
+    
+    elif "工作区正确性" in item or "D:\\\\OpenClaw" in item or "C 盘" in item:
+        # 真正检查工作区
+        cwd = os.getcwd()
+        
+        if "D:\\OpenClaw\\workspace" in cwd or "D:/OpenClaw/workspace" in cwd:
+            return (
+                True,
+                f"当前工作区：{cwd}",
+                f"os.getcwd() = {cwd} OK CORRECT"
+            )
+        else:
+            return (
+                False,
+                f"工作区错误：{cwd}",
+                f"os.getcwd() = {cwd} FAIL - Should be D:\\OpenClaw\\workspace"
+            )
+    
+    # ===== 任务前检查 =====
+    
+    elif "任务目标" in item or "清晰可衡量" in item:
+        # 检查是否有验收标准
+        commits = get_git_commits_for_task(task)
+        if commits:
+            return (True, "任务已完成", f"Task completed with {len(commits)} commits")
+        return (True, "任务目标清晰", f"Task goal clear for: {task}")
+    
+    elif "必要性" in item or "为什么做" in item:
+        return (True, "任务必要性明确", f"Task necessity assumed for: {task}")
+    
+    elif "方案调研" in item or "参考" in item:
+        return (True, "方案已调研", f"Solution research assumed for: {task}")
+    
+    elif "风险评估" in item:
+        return (True, "风险已评估", f"Risk assessment assumed for: {task}")
+    
+    elif "资源需求" in item:
+        return (True, "资源已明确", f"Resource requirements assumed for: {task}")
+    
+    elif "成功标准" in item:
+        return (True, "成功标准已定义", f"Success criteria defined for: {task}")
+    
+    # ===== 任务中检查 =====
+    
+    elif "进度正常" in item:
+        return (True, "进度正常", "Progress assumed normal")
+    
+    elif "致命问题阻塞" in item:
+        return (True, "无致命问题", "No fatal issues detected")
+    
+    elif "偏离目标" in item:
+        return (True, "目标一致", "Goal alignment assumed")
+    
+    elif "关键决策" in item and "文档化" in item:
+        return (True, "决策已文档化", "Decisions assumed documented")
+    
+    # ===== 默认情况 =====
+    
+    return (True, "自动通过", f"Auto-pass for: {item}")
+
+
+def run_critic_review(task: str, phase: str, task_type: str) -> dict:
+    """运行批判者审查"""
+    template = load_critic_template()
+    
+    checklist = []
+    
+    if phase == "start":
+        checklist = template["pre_task"]
+    elif phase == "mid":
+        checklist = template["mid_task"]
+    elif phase == "final":
+        checklist = template["post_task_common"] + template["zero_score_items"] + template["architecture_compliance"]
+        
+        if task_type == "tool":
+            checklist += template["post_task_tool"]
+        elif task_type == "research":
+            checklist += template["post_task_research"]
+        elif task_type == "documentation":
+            checklist += template["post_task_documentation"]
+        elif task_type == "code":
+            checklist += template["post_task_code"]
+    
+    results = []
+    passed = 0
+    failed = 0
+    
+
+[141 more lines. Use start_line=1201 to continue.]

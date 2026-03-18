@@ -1,0 +1,63 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:52:04.871976
+# ---
+        "id": "ZS-004",
+        "rule": "禁止绕过唯一工具库直接创建、执行未注册的工具",
+        "check": "检查执行日志中的 tool_id",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-005",
+        "rule": "禁止事后补录工具定义、补全引用",
+        "check": "检查 Git 历史时间戳",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-006",
+        "rule": "工具的「有效使用」判定：tool_id 被正式工作流引用",
+        "check": "检查 workflow JSON 中的 tool_id 引用",
+        "consequence": "未使用工具标记"
+      },
+      {
+        "id": "ZS-007",
+        "rule": "工具修改后必须自动触发变更标记和合规重审",
+        "check": "检查变更日志和审查记录",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "CRITICAL-001",
+        "rule": "创建的工具必须在 tools_registry.json 注册",
+        "check": "critical_checks.py --verify",
+        "consequence": "0 分 + 阻断",
+        "enforcement": "blocker-007"
+      },
+      {
+        "id": "CRITICAL-002",
+        "rule": "中文必须用 UTF-8 编码",
+        "check": "critical_checks.py --verify",
+        "consequence": "0 分 + 阻断",
+        "enforcement": "blocker-008"
+      }
+    ],
+    "review_checkpoints": {
+      "pre_execution": [
+        "工具是否在 tools_registry.json 中唯一定义",
+        "tool_id 是否全局唯一（无重复）",
+        "是否先定义再引用（顺序正确）"
+      ],
+      "during_execution": [
+        "是否只引用 tool_id（无硬编码）",
+        "是否实时读取工具库（无缓存）",
+        "参数是否只覆盖非核心配置"
+      ],
+      "post_execution": [
+        "是否有工具多份定义",
+        "工作流是否硬编码命令",
+        "是否绕过工具库",
+        "是否事后补录定义",
+        "工具修改是否触发变更标记",
+        "执行是否使用最新版本"
+      ]
+    }
+  }
+}

@@ -1,0 +1,87 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:52:11.952799
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\auto-critic.py  (lines 100-180 of 1341)
+            "格式统一 (命名/术语一致)",
+            "长度适中 (<100 行或分页)"
+        ],
+        "post_task_code": [
+            "代码通过测试 (单元测试/集成测试)",
+            "无安全漏洞 (敏感信息/注入风险)",
+            "性能优化已验证 (基准测试)",
+            "代码注释完整 (复杂逻辑说明)",
+            "遵循代码规范 (PEP8/项目规范)",
+            "无冗余代码 (DRY 原则)"
+        ]
+    }
+
+
+def get_task_type(task_name: str) -> str:
+    """根据任务名称判断任务类型"""
+    task_lower = task_name.lower()
+    
+    if any(kw in task_lower for kw in ['research', 'analysis', 'study', 'experiment', 'model', 'prediction', 'cnt-']):
+        return 'research'
+    if any(kw in task_lower for kw in ['doc', 'readme', 'guide', 'manual', 'note', 'memory', 'summary', 'index']):
+        return 'documentation'
+    if any(kw in task_lower for kw in ['tool', 'generator', 'search', 'auto-', 'script', 'utility', 'critic']):
+        return 'tool'
+    if any(kw in task_lower for kw in ['optimize', 'refactor', 'fix', 'bug', 'performance', 'cleanup', 'hook']):
+        return 'code'
+    return 'general'
+
+
+def get_git_commits_for_task(task_name: str) -> list:
+    """获取与任务相关的 Git 提交"""
+    try:
+        result = subprocess.run(
+            ["git", "log", "--oneline", "-10"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+            encoding='utf-8',
+            errors='replace'
+        )
+        
+        if result.returncode != 0:
+            return []
+        
+        commits = []
+        task_keywords = task_name.lower().replace("-", " ").replace("_", " ").split()
+        
+        for line in result.stdout.strip().split('\n'):
+            if not line:
+                continue
+            
+            # 检查 commit message 是否包含任务关键词
+            commit_msg = line.lower()
+            match_count = sum(1 for keyword in task_keywords if keyword in commit_msg and len(keyword) > 3)
+            
+            if match_count > 0 or len(commits) < 3:  # 至少返回最近 3 个提交
+                commit_hash = line.split()[0] if line.split() else ""
+                if commit_hash:
+                    commits.append(f"{commit_hash} {line[len(commit_hash):].strip()}")
+        
+        return commits[:5]  # 最多返回 5 个
+        
+    except Exception:
+        return []
+
+
+def get_recent_file_changes(task_name: str) -> list:
+    """获取最近修改的文件"""
+    try:
+        result = subprocess.run(
+            ["git", "diff", "--name-only", "HEAD~5"],
+            capture_output=True,
+            text=True,
+            timeout=10,
+            encoding='utf-8',
+            errors='replace'
+        )
+        
+        if result.returncode != 0:
+            # 尝试获取已暂存的文件
+            result = subprocess.run(
+
+[1161 more lines. Use start_line=181 to continue.]

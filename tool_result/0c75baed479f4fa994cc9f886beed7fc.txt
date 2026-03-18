@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:52:32.573380
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\auto-critic.py  (lines 500-600 of 1341)
+                return (
+                    True,
+                    "无未提交更改",
+                    "No uncommitted changes detected"
+                )
+                
+        except Exception as e:
+            return (
+                False,
+                f"无法检查 Git 状态：{str(e)}",
+                f"❌ Error checking git status: {str(e)}"
+            )
+    
+    elif "关键决策已记录" in item:
+        # 检查批判者审查文件
+        safe_name = task.lower().replace(" ", "-").replace("_", "-").replace('"', '').replace("'", "")
+        review_file = SCRIPTS_DIR / f"critic-auto-{safe_name}.json"
+        
+        # 如果文件不存在，尝试查找最近的匹配文件
+        if not review_file.exists():
+            critic_files = list(SCRIPTS_DIR.glob(f"critic-auto-{safe_name}*.json"))
+            if critic_files:
+                review_file = critic_files[-1]
+        
+        if review_file.exists():
+            try:
+                content = review_file.read_text(encoding='utf-8')
+                if "checklist" in content:
+                    return (
+                        True,
+                        "批判者审查已保存",
+                        f"Review file: {review_file} ({len(content)} bytes)"
+                    )
+            except:
+                pass
+        
+        return (
+            False,
+            "批判者审查文件未找到",
+            f"❌ File not found: {review_file}"
+        )
+    
+    # ===== 文档类深度验证 =====
+    
+    elif "文档结构清晰" in item:
+        # 查找相关文档文件
+        doc_file = DOCS_DIR / f"{task.upper().replace(' ', '-')}.md"
+        if not doc_file.exists():
+            doc_file = DOCS_DIR / f"{task.lower().replace(' ', '-')}.md"
+        
+        quality = verify_document_quality(doc_file)
+        
+        if quality["exists"] and quality["has_structure"]:
+            return (
+                True,
+                f"文档结构清晰 ({quality['lines']} 行，{len(re.findall(r'^#{1,6}', doc_file.read_text(encoding='utf-8'), re.MULTILINE))} 个标题)",
+                f"File: {doc_file} | Lines: {quality['lines']} | Headers: OK"
+            )
+        elif quality["exists"]:
+            return (
+                False,
+                "文档结构不清晰",
+                f"❌ File exists but lacks structure (headers < 3)"
+            )
+        else:
+            return (False, "文档文件未找到", f"❌ Doc file not found: {doc_file}")
+    
+    elif "关键信息前置" in item:
+        doc_file = DOCS_DIR / f"{task.upper().replace(' ', '-')}.md"
+        if not doc_file.exists():
+            doc_file = DOCS_DIR / f"{task.lower().replace(' ', '-')}.md"
+        
+        quality = verify_document_quality(doc_file)
+        
+        if quality["exists"] and quality["has_summary"]:
+            return (
+                True,
+                "有关键信息前置",
+                f"Summary/Abstract section found in {doc_file}"
+            )
+        elif quality["exists"]:
+            return (
+                False,
+                "文档缺少执行摘要",
+                f"❌ No summary/abstract section found in {doc_file}"
+            )
+        else:
+            return (False, "文档文件未找到", f"❌ Doc file not found: {doc_file}")
+    
+    elif "示例" in item or "代码片段" in item:
+        doc_file = DOCS_DIR / f"{task.upper().replace(' ', '-')}.md"
+        if not doc_file.exists():
+            doc_file = DOCS_DIR / f"{task.lower().replace(' ', '-')}.md"
+        
+        quality = verify_document_quality(doc_file)
+        
+        if quality["exists"] and quality["has_examples"]:
+            return (True, "有示例/代码片段", f"Examples found in {doc_file}")
+        elif quality["exists"]:
+            return (False, "文档缺少示例", f"❌ No examples found in {doc_file}")
+        else:
+
+[741 more lines. Use start_line=601 to continue.]

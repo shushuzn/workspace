@@ -1,0 +1,64 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-18T23:47:53.236985
+# ---
+Command failed with exit code 1.
+[stdout]
+[1m[94m============================================================[0m
+[1m[94m🔍 MEMORY CONSISTENCY CHECKER[0m
+[1m[94m============================================================[0m
+
+Time: 2026-03-18 23:47:35
+
+
+[1m[94m============================================================[0m
+[1m[94mLOADING DATA[0m
+[1m[94m============================================================[0m
+
+[92m✅ Loaded MEMORY.md: 12 entries[0m
+[92m✅ Loaded memory_index.json: 46 entries[0m
+
+[1m[94m============================================================[0m
+[1m[94mRUNNING CONSISTENCY CHECKS[0m
+[1m[94m============================================================[0m
+
+Check 1: Entry Count Matching
+[91m❌ Entry count mismatch: MEMORY.md=12, index=46[0m
+
+Check 2: Tag Statistics Accuracy
+[92m✅ Tag statistics match[0m
+
+Check 3: Broken Tag Links
+[92m✅ No broken tag links[0m
+
+Check 4: Duplicate Entries
+[92m✅ No duplicate entries[0m
+
+Check 5: Orphaned Entries
+[93m⚠️  Orphaned entries (in index but not MEMORY.md): 34[0m
+   - 3. Tool Intelligence System 📋 (Proposed)
+   - Memory Distiller v2.0
+   - 🔧 Efficiency > Brute Force
+   - Git Permissions (2026-03-17)
+   - File Naming Consistency
+
+
+[1m[94m============================================================[0m
+[1m[94mCONSISTENCY CHECK SUMMARY[0m
+[1m[94m============================================================[0m
+
+Passed: 3/5
+
+❌ Entry Count
+✅ Tag Statistics
+✅ Broken Links
+✅ Duplicates
+❌ Orphaned Entries
+
+Report saved to: 30-scripts-tools\consistency_check_report.json
+
+[1m[94m============================================================[0m
+[1m[94mFINAL STATUS[0m
+[1m[94m============================================================[0m
+
+[91m❌ MEMORY SYSTEM CONSISTENCY: FAIL[0m
+[93m⚠️  2 check(s) failed[0m

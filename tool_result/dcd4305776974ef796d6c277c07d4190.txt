@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:51:36.108633
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\auto-critic.py  (lines 900-1000 of 1341)
+        defined_tools = set(registry.get("tools", {}).keys())
+        used_tools = set()
+        
+        if workflows_dir.exists():
+            for wf_file in workflows_dir.glob("*.json"):
+                with open(wf_file, 'r', encoding='utf-8') as f:
+                    workflow = json.load(f)
+                
+                for step in workflow.get("steps", []):
+                    tool_id = step.get("tool_id")
+                    if tool_id:
+                        used_tools.add(tool_id)
+        
+        unused_tools = defined_tools - used_tools
+        
+        if unused_tools:
+            return (False, f"工具未使用：{unused_tools}", f"⚠️ Unused tools: {unused_tools}")
+        return (True, "所有工具都被使用", f"✅ {len(used_tools)}/{len(defined_tools)} tools used")
+    
+    elif "ZS-007" in item or "变更自动触发" in item:
+        # 检查 change_log.json 是否存在且有记录
+        change_log = SCRIPTS_DIR / "change_log.json"
+        if not change_log.exists():
+            return (False, "变更日志不存在", f"❌ change_log.json not found")
+        
+        with open(change_log, 'r', encoding='utf-8') as f:
+            log = json.load(f)
+        
+        changes = log.get("changes", [])
+        if changes:
+            last_change = changes[-1]
+            return (True, f"变更日志有 {len(changes)} 条记录", f"✅ Last change: {last_change.get('timestamp', 'unknown')}")
+        return (True, "变更日志存在（无变更记录）", f"⚠️ No changes recorded yet")
+    
+    # ===== 研究类深度验证 =====
+    
+    elif "置信区间" in item:
+        return (False, "需要人工检查研究报告", f"⚠️ Manual check required for CI in research output")
+    
+    elif "效应量" in item:
+        return (False, "需要人工检查研究报告", f"⚠️ Manual check required for effect size")
+    
+    elif "统计功效" in item:
+        return (False, "需要人工检查研究报告", f"⚠️ Manual check required for power analysis")
+    
+    elif "多重共线性" in item or "VIF" in item:
+        return (False, "需要人工检查研究报告", f"⚠️ Manual check required for VIF analysis")
+    
+    elif "外部验证" in item:
+        return (False, "需要人工检查研究报告", f"⚠️ Manual check required for external validation")
+    
+    elif "可复现" in item:
+        # 检查是否有代码和数据
+        has_code = (SCRIPTS_DIR / f"{task.lower().replace(' ', '-')}.py").exists()
+        return (
+            has_code,
+            "代码已公开" if has_code else "需要公开代码",
+            f"Code file: {'✅' if has_code else '❌'}"
+        )
+    
+    # ===== 代码类深度验证 =====
+    
+    elif "通过测试" in item:
+        # 检查是否有测试文件
+        safe_name = task.lower().replace(" ", "-").replace("_", "-")
+        test_file = SCRIPTS_DIR / f"test_{safe_name}.py"
+        
+        if test_file.exists():
+            return (True, "有测试文件", f"Test file: {test_file}")
+        return (False, "缺少测试文件", f"❌ No test file found: {test_file}")
+    
+    elif "安全漏洞" in item:
+        # 简单检查常见安全问题
+        safe_name = task.lower().replace(" ", "-").replace("_", "-")
+        tool_file = SCRIPTS_DIR / f"{safe_name}.py"
+        
+        if tool_file.exists():
+            content = tool_file.read_text(encoding='utf-8', errors='replace')
+            issues = []
+            
+            if 'password' in content.lower() or 'secret' in content.lower():
+                issues.append("Contains password/secret")
+            if 'eval(' in content:
+                issues.append("Uses eval()")
+            
+            if issues:
+                return (False, f"发现安全问题：{', '.join(issues)}", f"⚠️ {', '.join(issues)}")
+        
+        return (True, "无明显安全问题", "No obvious security issues found")
+    
+    elif "性能优化" in item:
+        return (False, "需要基准测试证据", f"⚠️ Benchmark evidence required")
+    
+    elif "代码注释" in item:
+        safe_name = task.lower().replace(" ", "-").replace("_", "-")
+        tool_file = SCRIPTS_DIR / f"{safe_name}.py"
+        
+        if tool_file.exists():
+            content = tool_file.read_text(encoding='utf-8', errors='replace')
+            comment_ratio = content.count('"""') + content.count("'''") + content.count('#')
+            has_comments = comment_ratio > 5
+
+[341 more lines. Use start_line=1001 to continue.]
