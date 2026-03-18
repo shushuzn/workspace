@@ -28,49 +28,115 @@ MEMORY_DIR = WORKSPACE / '13-memory'
 
 
 def load_critic_template() -> dict:
-    """加载批判者审查模板"""
+    """加载批判者审查模板 - 通用版"""
     return {
+        # ===== 任务前审查 (所有任务通用) =====
         "pre_task": [
-            "研究问题有科学意义 (≥3 篇文献支持)",
-            "样本量先验功效分析 (Power≥0.95)",
-            "特征文献依据 (每个≥3 篇)",
-            "VIF 预分析 (<3)",
-            "验证方案 (5×5×5 嵌套 CV+10000Bootstrap)",
-            "外部验证方案 (真正独立≥50 样本)"
+            "任务目标清晰可衡量 (有明确验收标准)",
+            "任务必要性已论证 (为什么做这个)",
+            "已有方案调研 (≥3 个参考/竞品/文献)",
+            "风险评估完成 (技术/时间/依赖)",
+            "资源需求明确 (时间/工具/权限)",
+            "成功标准定义 (如何算完成)"
         ],
+        
+        # ===== 任务中审查 (所有任务通用) =====
         "mid_task": [
-            "数据质量 (缺失值<2%, VIF<3)",
             "进度正常 (每 30% 检查一次)",
-            "无致命问题"
+            "无致命问题阻塞",
+            "偏离目标已记录并调整",
+            "关键决策已文档化"
         ],
-        "post_task": [
+        
+        # ===== 任务后审查 - 通用项 (所有任务) =====
+        "post_task_common": [
             "致命问题 0 个",
             "严重问题≤2 个",
             "一般问题≤10 个",
-            "置信区间报告 (所有指标 95% CI)",
-            "效应量报告 (Cohen's f²)",
-            "统计功效 (Power≥0.95)",
-            "VIF 检验 (全部<3)",
-            "外部验证 (真正独立≥50 样本)",
-            "SHAP 分析 (p<0.001+95%CI)",
-            "GitHub 公开 + 第三方复现"
+            "验收标准 100% 满足",
+            "代码/文档已提交 Git",
+            "关键决策已记录到 MEMORY.md"
         ],
-        "tool_usage": [
+        
+        # ===== 任务后审查 - 工具开发类 =====
+        "post_task_tool": [
             "工具已创建并在实际工作流中使用",
-            "使用时间≥1 次",
+            "使用次数≥1 次 (有证据证明)",
             "价值已量化 (时间节省/效率提升)",
-            "使用案例已文档化"
+            "使用案例已文档化",
+            "工具文档完整 (README/使用说明)",
+            "错误处理完善 (边界情况测试)"
+        ],
+        
+        # ===== 任务后审查 - 研究分析类 =====
+        "post_task_research": [
+            "置信区间报告 (所有指标 95% CI)",
+            "效应量报告 (Cohen's f² 或等价指标)",
+            "统计功效分析 (Power≥0.8)",
+            "多重共线性检验 (VIF<5)",
+            "外部验证 (独立样本或交叉验证)",
+            "可复现性 (代码 + 数据公开)"
+        ],
+        
+        # ===== 任务后审查 - 文档编写类 =====
+        "post_task_documentation": [
+            "文档结构清晰 (目录/标题层级)",
+            "关键信息前置 (执行摘要)",
+            "示例/代码片段完整",
+            "引用来源可验证",
+            "格式统一 (命名/术语一致)",
+            "长度适中 (<100 行或分页)"
+        ],
+        
+        # ===== 任务后审查 - 代码优化类 =====
+        "post_task_code": [
+            "代码通过测试 (单元测试/集成测试)",
+            "无安全漏洞 (敏感信息/注入风险)",
+            "性能优化已验证 (基准测试)",
+            "代码注释完整 (复杂逻辑说明)",
+            "遵循代码规范 (PEP8/项目规范)",
+            "无冗余代码 (DRY 原则)"
         ]
     }
+
+
+def get_task_type(task_name: str, context: dict = None) -> str:
+    """根据任务名称和上下文判断任务类型"""
+    task_lower = task_name.lower()
+    
+    # 研究分析类 (优先匹配，避免与 tool 混淆)
+    research_keywords = ['research', 'analysis', 'study', 'experiment', 'model', 'prediction', 'cnt-', 'conductivity']
+    if any(kw in task_lower for kw in research_keywords):
+        return 'research'
+    
+    # 文档编写类
+    doc_keywords = ['doc', 'readme', 'guide', 'manual', 'note', 'memory', 'summary', 'index']
+    if any(kw in task_lower for kw in doc_keywords):
+        return 'documentation'
+    
+    # 工具开发类
+    tool_keywords = ['tool', 'generator', 'search', 'auto-', 'script', 'utility', 'critic']
+    if any(kw in task_lower for kw in tool_keywords):
+        return 'tool'
+    
+    # 代码优化类
+    code_keywords = ['optimize', 'refactor', 'fix', 'bug', 'performance', 'cleanup', 'hook']
+    if any(kw in task_lower for kw in code_keywords):
+        return 'code'
+    
+    # 默认：通用任务
+    return 'general'
 
 
 def generate_critic_review(task_name: str, phase: str, context: dict = None) -> dict:
     """生成批判者审查报告"""
     template = load_critic_template()
+    task_type = get_task_type(task_name, context)
     
     review = {
         "task": task_name,
         "phase": phase,
+        "task_type": task_type,
         "timestamp": datetime.now().isoformat(),
         "checklist": [],
         "score": 0,
@@ -94,12 +160,21 @@ def generate_critic_review(task_name: str, phase: str, context: dict = None) -> 
         review["message"] = "⚠️ 任务进行中必须完成批判者中期检查"
         
     elif phase == "final":
+        # 通用检查项 (所有任务)
+        checklist_items = template["post_task_common"].copy()
+        
+        # 根据任务类型添加专项检查项
+        type_specific_key = f"post_task_{task_type}"
+        if type_specific_key in template:
+            checklist_items.extend(template[type_specific_key])
+        
         review["checklist"] = [
             {"item": item, "checked": False, "notes": ""}
-            for item in template["post_task"] + template["tool_usage"]
+            for item in checklist_items
         ]
         review["status"] = "REQUIRES_REVIEW"
         review["message"] = "⚠️ 任务完成后必须完成批判者最终审查"
+        review["task_type_info"] = f"任务类型：{task_type} (已加载专项检查项)"
     
     return review
 
@@ -180,9 +255,14 @@ def main():
     print("=" * 60)
     print(f"\nTask: {review['task']}")
     print(f"Phase: {review['phase']}")
+    print(f"Task Type: {review.get('task_type', 'general')} (通用版)")
     print(f"Time: {review['timestamp'][:19]}")
     print(f"Status: {review['status']}")
+    print(f"Checklist Items: {len(review['checklist'])}")
     print(f"\nReview saved to: {filepath}")
+    
+    if 'task_type_info' in review:
+        print(f"\n📋 {review['task_type_info']}")
     
     if 'message' in review:
         print(f"\n⚠️  {review['message']}")
