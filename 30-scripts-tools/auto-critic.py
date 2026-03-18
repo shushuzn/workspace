@@ -27,6 +27,23 @@ SCRIPTS_DIR = WORKSPACE / '30-scripts-tools'
 MEMORY_DIR = WORKSPACE / '13-memory'
 
 
+def check_workspace() -> bool:
+    """Check if running in correct workspace (D:\\OpenClaw\\workspace)"""
+    import os
+    
+    cwd = os.getcwd()
+    
+    # Check if in D:\OpenClaw\workspace
+    if "D:\\OpenClaw\\workspace" in cwd or "D:/OpenClaw/workspace" in cwd:
+        return True
+    
+    # Check for C: drive (common mistake)
+    if "C:" in cwd:
+        return False
+    
+    return True  # Unknown, assume OK
+
+
 def load_critic_template() -> dict:
     """加载批判者审查模板 - 通用版 + 零分项强制检查"""
     return {
@@ -65,7 +82,9 @@ def load_critic_template() -> dict:
             "【USER-004】工具创建了必须使用 (创建→使用→验证)",
             "【AGENTS.md】当日笔记压缩 (<100 行)",
             "【AGENTS.md】会话压缩执行 (post_session_compress.py --auto)",
-            "【AGENTS.md】上下文大小验证 (<100KB)"
+            "【AGENTS.md】上下文大小验证 (<100KB)",
+            "【USER-001】工作区正确性 (D:\\OpenClaw\\workspace, C 盘=0 分)",
+            "【USER-004】检查项必须有证据 (无证据=0 分)"
         ],
         
         # ===== 任务后审查 - 工具开发类 =====
@@ -182,7 +201,7 @@ def generate_critic_review(task_name: str, phase: str, context: dict = None) -> 
             checklist_items.extend(template[type_specific_key])
         
         review["checklist"] = [
-            {"item": item, "checked": False, "notes": ""}
+            {"item": item, "checked": False, "notes": "", "evidence": ""}
             for item in checklist_items
         ]
         review["status"] = "REQUIRES_REVIEW"
@@ -249,6 +268,21 @@ def main():
     
     args = parser.parse_args()
     
+    # Workspace check (Zero-Score Item #6)
+    if not check_workspace():
+        print("="*60)
+        print("🚨 CRITICAL: WRONG WORKSPACE DETECTED")
+        print("="*60)
+        print(f"Current:  {os.getcwd()}")
+        print(f"Required: D:\\OpenClaw\\workspace")
+        print()
+        print("【USER-001】工作区错误 = 0 分 (C 盘是致命错误)")
+        print()
+        print("Solution:")
+        print('  cd /d D:\\OpenClaw\\workspace')
+        print("="*60)
+        sys.exit(1)
+    
     # 加载上下文 (如果有)
     context = None
     if args.context:
@@ -275,30 +309,36 @@ def main():
     print(f"Checklist Items: {len(review['checklist'])}")
     print(f"\nReview saved to: {filepath}")
     
-    if 'task_type_info' in review:
-        print(f"\n📋 {review['task_type_info']}")
+    print(f"\n📋 {review['task_type_info']}")
     
     if 'zero_score_warning' in review:
         print(f"\n🚨 {review['zero_score_warning']}")
     
+    print("\n⚠️  【USER-004】每项检查必须附证据，无证据=0 分")
+    print("   在 JSON 中填写 evidence 字段 (命令/输出/截图/文件路径)\n")
+    
     if 'message' in review:
-        print(f"\n⚠️  {review['message']}")
-    
-    print("\nChecklist:")
-    for i, item in enumerate(review['checklist'], 1):
-        checked = "✓" if item['checked'] else " "
-        print(f"  [{checked}] {i}. {item['item']}")
-    
-    # 自动更新当日笔记
-    if args.auto_update_daily:
-        today = datetime.now().strftime('%Y-%m-%d')
-        daily_note = MEMORY_DIR / f"{today}.md"
-        update_daily_note(review, daily_note)
-        print(f"\n[OK] Updated daily note: {daily_note}")
-    
-    print("\n" + "=" * 60)
-    print("[USER-004] 批判者审查已自动调用 - 必须完成所有检查项")
-    print("=" * 60)
+        print(f"⚠️  {review['message']}")
+        
+        print("\nChecklist:")
+        for i, item in enumerate(review['checklist'], 1):
+            checked = "✓" if item['checked'] else " "
+            print(f"  [{checked}] {i}. {item['item']}")
+            if item.get('notes'):
+                print(f"      Notes: {item['notes']}")
+            if item.get('evidence'):
+                print(f"      Evidence: {item['evidence']}")
+        
+        # 自动更新当日笔记
+        if args.auto_update_daily:
+            today = datetime.now().strftime('%Y-%m-%d')
+            daily_note = MEMORY_DIR / f"{today}.md"
+            update_daily_note(review, daily_note)
+            print(f"\n[OK] Updated daily note: {daily_note}")
+        
+        print("\n" + "=" * 60)
+        print("[USER-004] 批判者审查已自动调用 - 必须完成所有检查项")
+        print("=" * 60)
     
     return 0
 
