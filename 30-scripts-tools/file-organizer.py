@@ -34,11 +34,12 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 # 配置
+WORKSPACE = Path(__file__).parent.parent
 CONFIG = {
-    'workspace': r'D:\OpenClaw\workspace',
+    'workspace': str(WORKSPACE),
     'size_threshold_mb': 50,
     'age_threshold_days': 90,
-    'backup_dir': '99-backups/file-organizer',
+    'backup_dir': str(WORKSPACE / '99-backups' / 'file-organizer'),
 }
 
 # 缓存目录
@@ -420,11 +421,33 @@ def main():
     parser.add_argument('--clean', action='store_true', help='清理模式 (自动清理安全项)')
     parser.add_argument('--deep', action='store_true', help='深度模式 (询问后清理)')
     parser.add_argument('--backup', action='store_true', help='删除前备份')
+    parser.add_argument('--no-critic', action='store_true', help='跳过批判者审查 (不推荐)')
     args = parser.parse_args()
     
-    print("🔍 运营者文件整理工具 v1.0")
-    print(f"📂 工作区：{get_workspace()}")
+    print("=" * 60)
+    print("运营者文件整理工具 v1.1")
+    print("=" * 60)
+    print(f"工作区：{get_workspace()}")
     print()
+    
+    # 批判者 v5.0 审查 (除非明确跳过)
+    if not args.no_critic:
+        print("运行批判者 v5.0 审查...")
+        import subprocess
+        critic_result = subprocess.run(
+            [sys.executable, '30-scripts-tools/critic_v5_review.py', 
+             '--scenario', 'file_organize'],
+            cwd=str(WORKSPACE),
+            timeout=300  # 5 分钟超时
+        )
+        
+        if critic_result.returncode != 0:
+            print("\n[ERROR] 批判者审查未通过，中止操作")
+            print("提示：如确需跳过审查，使用 --no-critic 参数 (不推荐)")
+            return 1
+        
+        print("[OK] 批判者审查通过")
+        print()
     
     # 扫描
     print("正在扫描...")

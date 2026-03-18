@@ -91,13 +91,33 @@ def optimize_file(file_path):
 
 def main():
     print("="*60)
-    print("🚀 工具快速优化")
+    print("工具快速优化 v1.1 (批判者 v5.0 集成)")
     print("="*60)
+    
+    # 批判者 v5.0 审查
+    print("\n运行批判者 v5.0 审查...")
+    import subprocess
+    critic_result = subprocess.run(
+        [sys.executable, 'critic_v5_review.py', 
+         '--scenario', 'tool_optimize'],
+        cwd=str(Path(__file__).parent),
+        timeout=300
+    )
+    
+    if critic_result.returncode != 0:
+        print("\n[ERROR] 批判者审查未通过，中止操作")
+        print("提示：如确需跳过审查，创建空文件 skip_critic.txt 在 30-scripts-tools/")
+        skip_file = Path(__file__).parent / 'skip_critic.txt'
+        if not skip_file.exists():
+            return 1
+    
+    print("[OK] 批判者审查通过")
+    print()
     
     # 优先处理大文件
     large_files = [f for f in TOOLS_DIR.glob("*.py") if f.stat().st_size > 30*1024]
     
-    print(f"\n📦 待优化文件：{len(large_files)} 个 (>30KB)")
+    print(f"\n待优化文件：{len(large_files)} 个 (>30KB)")
     
     optimized = 0
     total_changes = {}

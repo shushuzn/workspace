@@ -21,6 +21,30 @@ BACKUP_DIR = WORKSPACE / "99-backups" / "data-cleanup-20260318"
 def cleanup_sensitive_files():
     """Clean up sensitive files in 60-DATA"""
     
+    # Critic v5.0 Review
+    print("="*60)
+    print("Data Cleanup v1.1 (Critic v5.0 Integrated)")
+    print("="*60)
+    
+    print("\n[Critic] Running Critic v5.0 Review...")
+    import subprocess
+    critic_result = subprocess.run(
+        [sys.executable, 'critic_v5_review.py', 
+         '--scenario', 'data_cleanup'],
+        cwd=str(Path(__file__).parent),
+        timeout=300
+    )
+    
+    if critic_result.returncode != 0:
+        print("\n[ERROR] Critic Review Failed. Aborting operation.")
+        print("Tip: Create skip_critic.txt to bypass (not recommended)")
+        skip_file = Path(__file__).parent / 'skip_critic.txt'
+        if not skip_file.exists():
+            return
+    
+    print("[OK] Critic Review Passed")
+    print()
+    
     # Create backup directory
     BACKUP_DIR.mkdir(parents=True, exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
