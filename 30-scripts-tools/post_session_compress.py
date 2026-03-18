@@ -117,6 +117,30 @@ def save_to_daily(summary: str, date: str = None) -> Path:
     return daily_path
 
 
+def update_memory_index():
+    """更新记忆索引"""
+    index_generator = SCRIPTS_DIR / 'memory_index_generator.py'
+    
+    if not index_generator.exists():
+        print(f"[MEMORY] Index generator not found, skipping")
+        return
+    
+    try:
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(index_generator)],
+            capture_output=True,
+            text=True,
+            timeout=30
+        )
+        
+        for line in result.stdout.split('\n'):
+            if line.strip() and ('Found' in line or 'Tags' in line or 'DONE' in line):
+                print(f"[MEMORY] {line.strip()}")
+    except Exception as e:
+        print(f"[MEMORY] Error updating index: {e}")
+
+
 def cleanup_temp():
     """清理临时文件"""
     temp_file = SCRIPTS_DIR / 'session_temp.json'
@@ -196,6 +220,9 @@ def main():
     # 保存
     daily_path = save_to_daily(summary)
     print(f"\n[OK] Saved to: {daily_path}")
+    
+    # 更新记忆索引
+    update_memory_index()
     
     # 清理
     cleanup_temp()

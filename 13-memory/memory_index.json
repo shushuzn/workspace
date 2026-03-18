@@ -1,0 +1,547 @@
+{
+  "version": "1.0",
+  "updated": "2026-03-18T16:30:43.918463",
+  "total_entries": 45,
+  "total_tags": 12,
+  "entries": [
+    {
+      "id": "SEC-001",
+      "title": "Core Identity",
+      "line_start": 9,
+      "line_end": 18,
+      "level": 2,
+      "tags": [
+        "#identity",
+        "#critical"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-002",
+      "title": "Core Principles",
+      "line_start": 19,
+      "line_end": 21,
+      "level": 2,
+      "tags": [
+        "#principle",
+        "#critical"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-003",
+      "title": "📝 Text > Brain",
+      "line_start": 22,
+      "line_end": 28,
+      "level": 3,
+      "tags": [
+        "#principle",
+        "#high"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-004",
+      "title": "🔧 Efficiency > Brute Force",
+      "line_start": 29,
+      "line_end": 35,
+      "level": 3,
+      "tags": [
+        "#principle",
+        "#system",
+        "#high"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-005",
+      "title": "🎯 Resourceful Before Asking",
+      "line_start": 36,
+      "line_end": 42,
+      "level": 3,
+      "tags": [
+        "#principle",
+        "#workflow"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-006",
+      "title": "🔍 Attention to Detail (2026-03-06 23:43)",
+      "line_start": 43,
+      "line_end": 53,
+      "level": 3,
+      "tags": [
+        "#principle",
+        "#critical",
+        "#lesson"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-007",
+      "title": "⚠️ Detail Rigor Reflection (2026-03-07 00:17)",
+      "line_start": 54,
+      "line_end": 65,
+      "level": 3,
+      "tags": [
+        "#lesson",
+        "#critical"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-008",
+      "title": "🔬 Research Rigor Principles (2026-03-11 22:20)",
+      "line_start": 66,
+      "line_end": 102,
+      "level": 3,
+      "tags": [
+        "#research",
+        "#principle",
+        "#critical"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-009",
+      "title": "🏠 I'm a Guest Here",
+      "line_start": 103,
+      "line_end": 111,
+      "level": 3,
+      "tags": [
+        "#principle",
+        "#critical"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-010",
+      "title": "User Preferences",
+      "line_start": 112,
+      "line_end": 114,
+      "level": 2,
+      "tags": [
+        "#user-pref",
+        "#critical"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "USER-001",
+      "title": "All Files in English",
+      "line_start": 115,
+      "line_end": 120,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "USER-002",
+      "title": "No Rest Suggestions",
+      "line_start": 121,
+      "line_end": 126,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "USER-003",
+      "title": "Quality Over Speed",
+      "line_start": 127,
+      "line_end": 133,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "USER-004",
+      "title": "Critic Required Every Step",
+      "line_start": 134,
+      "line_end": 149,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-015",
+      "title": "System Architecture",
+      "line_start": 150,
+      "line_end": 152,
+      "level": 2,
+      "tags": [
+        "#system",
+        "#high"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-016",
+      "title": "Cognitive-Execution Separation",
+      "line_start": 153,
+      "line_end": 168,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-017",
+      "title": "7-Persona System",
+      "line_start": 169,
+      "line_end": 179,
+      "level": 3,
+      "tags": [
+        "#system",
+        "#tool",
+        "#high"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-018",
+      "title": "File-Based Context Management",
+      "line_start": 180,
+      "line_end": 186,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-019",
+      "title": "Tools & Infrastructure",
+      "line_start": 187,
+      "line_end": 189,
+      "level": 2,
+      "tags": [
+        "#tool",
+        "#system"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-020",
+      "title": "Memory Distiller v2.0",
+      "line_start": 190,
+      "line_end": 196,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-021",
+      "title": "Autonomous Decision Engine",
+      "line_start": 197,
+      "line_end": 202,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-022",
+      "title": "7-Persona Agent System",
+      "line_start": 203,
+      "line_end": 208,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-023",
+      "title": "Predictive Coding Engine",
+      "line_start": 209,
+      "line_end": 215,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-024",
+      "title": "Production Monitor v2",
+      "line_start": 216,
+      "line_end": 222,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-025",
+      "title": "HEARTBEAT Automation",
+      "line_start": 223,
+      "line_end": 228,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-026",
+      "title": "Knowledge Card Generator v2.5",
+      "line_start": 229,
+      "line_end": 238,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-027",
+      "title": "Innovation Milestones",
+      "line_start": 239,
+      "line_end": 241,
+      "level": 2,
+      "tags": [
+        "#metric",
+        "#project"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-028",
+      "title": "Phase 1-2: Memory Cleanup (2026-03-17)",
+      "line_start": 242,
+      "line_end": 246,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-029",
+      "title": "Phase 6: Autonomy (2026-03-17)",
+      "line_start": 247,
+      "line_end": 252,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-030",
+      "title": "Phase 7: Predictive Coding (2026-03-17)",
+      "line_start": 253,
+      "line_end": 257,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-031",
+      "title": "Phase 9: Production Optimization (2026-03-17)",
+      "line_start": 258,
+      "line_end": 265,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-032",
+      "title": "Key Metrics",
+      "line_start": 266,
+      "line_end": 280,
+      "level": 2,
+      "tags": [
+        "#metric",
+        "#high"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-033",
+      "title": "Active Projects",
+      "line_start": 281,
+      "line_end": 283,
+      "level": 2,
+      "tags": [
+        "#project",
+        "#high"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-034",
+      "title": "1. Git Security Cleanup ✅",
+      "line_start": 284,
+      "line_end": 289,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-035",
+      "title": "2. Feishu Integration ✅",
+      "line_start": 290,
+      "line_end": 296,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-036",
+      "title": "3. Tool Intelligence System 📋 (Proposed)",
+      "line_start": 297,
+      "line_end": 304,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-037",
+      "title": "Lessons Learned",
+      "line_start": 305,
+      "line_end": 307,
+      "level": 2,
+      "tags": [
+        "#lesson",
+        "#critical"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-038",
+      "title": "Encoding Issues (2026-03-17)",
+      "line_start": 308,
+      "line_end": 313,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-039",
+      "title": "Git Permissions (2026-03-17)",
+      "line_start": 314,
+      "line_end": 319,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-040",
+      "title": "File Naming Consistency",
+      "line_start": 320,
+      "line_end": 325,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-041",
+      "title": "Testing Edge Cases",
+      "line_start": 326,
+      "line_end": 333,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-042",
+      "title": "Research Principles",
+      "line_start": 334,
+      "line_end": 336,
+      "level": 2,
+      "tags": [
+        "#research",
+        "#principle",
+        "#critical"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-043",
+      "title": "Academic Integrity (2026-03-10)",
+      "line_start": 337,
+      "line_end": 358,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-044",
+      "title": "Output Format",
+      "line_start": 359,
+      "line_end": 376,
+      "level": 2,
+      "tags": [
+        "#workflow",
+        "#principle"
+      ],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-045",
+      "title": "Backlinks",
+      "line_start": 377,
+      "line_end": 398,
+      "level": 2,
+      "tags": [
+        "#system"
+      ],
+      "backlinks": []
+    }
+  ],
+  "tag_index": {
+    "#identity": [
+      "SEC-001"
+    ],
+    "#critical": [
+      "SEC-001",
+      "SEC-002",
+      "SEC-006",
+      "SEC-007",
+      "SEC-008",
+      "SEC-009",
+      "SEC-010",
+      "SEC-037",
+      "SEC-042"
+    ],
+    "#principle": [
+      "SEC-002",
+      "SEC-003",
+      "SEC-004",
+      "SEC-005",
+      "SEC-006",
+      "SEC-008",
+      "SEC-009",
+      "SEC-042",
+      "SEC-044"
+    ],
+    "#high": [
+      "SEC-003",
+      "SEC-004",
+      "SEC-015",
+      "SEC-017",
+      "SEC-032",
+      "SEC-033"
+    ],
+    "#system": [
+      "SEC-004",
+      "SEC-015",
+      "SEC-017",
+      "SEC-019",
+      "SEC-045"
+    ],
+    "#workflow": [
+      "SEC-005",
+      "SEC-044"
+    ],
+    "#lesson": [
+      "SEC-006",
+      "SEC-007",
+      "SEC-037"
+    ],
+    "#research": [
+      "SEC-008",
+      "SEC-042"
+    ],
+    "#user-pref": [
+      "SEC-010"
+    ],
+    "#tool": [
+      "SEC-017",
+      "SEC-019"
+    ],
+    "#metric": [
+      "SEC-027",
+      "SEC-032"
+    ],
+    "#project": [
+      "SEC-027",
+      "SEC-033"
+    ]
+  }
+}
