@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "created_at": "2026-03-18T21:06:30.522721",
-  "last_updated": "2026-03-18T21:06:30.522722",
+  "created_at": "2026-03-18T21:10:21.421756",
+  "last_updated": "2026-03-18T21:10:21.421761",
   "tasks": {
     "REM-20260318-E32C84": {
       "task_id": "REM-20260318-E32C84",
@@ -182,87 +182,17 @@
       "reminder_count": 0,
       "last_reminder": null,
       "notes": []
-    },
-    "REM-20260318-55A3F3": {
-      "task_id": "REM-20260318-55A3F3",
-      "fail_item_id": "test-001",
-      "source": "test",
-      "title": "Test Item",
-      "description": "Test notes",
-      "severity": "warning",
-      "created_at": "2026-03-18T20:49:05.185200",
-      "deadline": "2026-03-25T20:49:05.185194",
-      "assignee": "claw",
-      "status": "open",
-      "linked_commit": null,
-      "verification_result": null,
-      "reminder_count": 0,
-      "last_reminder": null,
-      "notes": []
-    },
-    "REM-20260318-F40C3F": {
-      "task_id": "REM-20260318-F40C3F",
-      "fail_item_id": "test-002",
-      "source": "test",
-      "title": "Test Item 2",
-      "description": "",
-      "severity": "warning",
-      "created_at": "2026-03-18T20:49:05.187020",
-      "deadline": "2026-03-25T20:49:05.187016",
-      "assignee": "claw",
-      "status": "in_progress",
-      "linked_commit": null,
-      "verification_result": null,
-      "reminder_count": 0,
-      "last_reminder": null,
-      "notes": []
-    },
-    "REM-20260318-AFD652": {
-      "task_id": "REM-20260318-AFD652",
-      "fail_item_id": "test-001",
-      "source": "test",
-      "title": "Test Item",
-      "description": "Test notes",
-      "severity": "warning",
-      "created_at": "2026-03-18T21:04:55.647809",
-      "deadline": "2026-03-25T21:04:55.647802",
-      "assignee": "claw",
-      "status": "open",
-      "linked_commit": null,
-      "verification_result": null,
-      "reminder_count": 0,
-      "last_reminder": null,
-      "notes": []
-    },
-    "REM-20260318-49B3B4": {
-      "task_id": "REM-20260318-49B3B4",
-      "fail_item_id": "test-002",
-      "source": "test",
-      "title": "Test Item 2",
-      "description": "",
-      "severity": "warning",
-      "created_at": "2026-03-18T21:04:55.649804",
-      "deadline": "2026-03-25T21:04:55.649801",
-      "assignee": "claw",
-      "status": "in_progress",
-      "linked_commit": null,
-      "verification_result": null,
-      "reminder_count": 0,
-      "last_reminder": null,
-      "notes": []
     }
   },
   "statistics": {
-    "total_tasks": 14,
+    "total_tasks": 10,
     "by_status": {
       "deferred": 5,
-      "resolved": 5,
-      "open": 2,
-      "in_progress": 2
+      "resolved": 5
     },
     "by_severity": {
       "blocker": 4,
-      "warning": 10
+      "warning": 6
     },
     "overdue_count": 0,
     "completion_rate": 0.0

@@ -357,6 +357,7 @@ def main():
     parser.add_argument('--commit', type=str, help='关联提交 SHA')
     parser.add_argument('--progress', type=str, help='标记为进行中 (task_id)')
     parser.add_argument('--defer', type=str, help='延期处理 (task_id，用于历史遗留问题)')
+    parser.add_argument('--delete-test', action='store_true', help='删除测试任务')
     
     args = parser.parse_args()
     
@@ -489,6 +490,15 @@ def main():
         print(f"Task {task_id} marked as deferred (历史遗留问题)")
         print(f"  Title: {task.title}")
         print(f"  Status: {task.status}")
+        return 0
+    
+    # 删除测试任务
+    if args.delete_test:
+        test_tasks = [tid for tid, t in tracker.tasks.items() if 'Test Item' in t.title]
+        for tid in test_tasks:
+            del tracker.tasks[tid]
+        tracker._save()
+        print(f"Deleted {len(test_tasks)} test tasks")
         return 0
     
     # 默认显示状态
