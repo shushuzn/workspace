@@ -72,45 +72,53 @@
 | Integration | 95/100 | 20% |
 | Documentation | 92/100 | 10% |
 | Process Compliance | 95/100 | 10% |
+| **Tool Usage** | **0/100** | **CRITICAL** |
 
-**Weighted Score:** 95×0.4 + 92×0.2 + 95×0.2 + 92×0.1 + 95×0.1 = **94.9/100**
+**Weighted Score:** 95×0.4 + 92×0.2 + 95×0.2 + 92×0.1 + 95×0.1 + 0×CRITICAL = **0/100**
 
-**Status:** ⚠️ **94.9/100 - Borderline Pass** (target ≥95)
-
-**Gap Analysis:** 0.1 points short - Could improve with:
-- More comprehensive unit tests for edge cases
-- Better inline code documentation
-- Additional integration tests
+**Status:** ❌ **ZERO SCORE - Tool Created But Not Used**
 
 ---
 
-## Final Verification Checklist
+## Critical Failure (USER-004 Violation)
 
-- [x] Index generator works (45 entries, 12 tags)
-- [x] Tag search works (--tag critical → 9 results)
-- [x] Multi-tag search works (--tag system tool → 5 results)
-- [x] Keyword search works (-q "User" → 1 result)
-- [x] Auto-integration in post_session_compress.py
-- [x] Session compression executed
-- [x] Temp files cleaned up
-- [x] Daily note updated
-- [x] Git commit & push complete (5693ff5)
-- [x] Critic review documented
-- [x] Context size <100KB (62KB ✅)
+**Violation:** "工具创建了不用 = 零分"
 
----
+**What Happened:**
+- Created memory_index_generator.py ✅
+- Created memory_tag_search.py ✅
+- Integrated into post_session_compress.py ✅
+- **BUT: Never actually used the tools in real workflow** ❌
 
-## Critic Final Comments
+**Evidence:**
+- No search queries in actual research tasks
+- No tag-based memory retrieval in real work
+- Tools tested once, then abandoned
+- No integration into daily workflow
 
-> "Tool functionality is solid. Process compliance improved from 40/100 to 95/100 after correction."
-> "Initial failure to invoke critic and run compression was a serious violation of USER-004 and AGENTS.md."
-> "Recovery was swift and complete. All required actions executed."
-> "Final score 94.9/100 is acceptable but leaves room for improvement in testing and documentation."
-
-**Lesson Learned:** "Critic is not optional. Session compression is not optional. Both are mandatory workflow requirements."
-
-**Status:** ✅ **PASS** (94.9/100 ≈ 95 target)
+**Root Cause:**
+- Treated tools as "task completion" rather than "workflow enhancement"
+- Did not identify real use cases for the tools
+- Did not demonstrate value before declaring success
 
 ---
 
-**Review Complete:** 2026-03-18 16:40
+## Required Actions (Before Passing)
+
+1. **Identify real use case** - Find a task that NEEDS memory tag search
+2. **Use memory_tag_search.py** - Actually search for something useful
+3. **Use memory_index_generator.py** - Rebuild index with new tags
+4. **Demonstrate value** - Show how tools saved time or improved work
+5. **Update critic review** - Document actual usage
+6. **Record to MEMORY.md** - Add lesson learned
+
+---
+
+## Lesson Learned (Must Add to MEMORY.md)
+
+**Tags:** #lesson #critical #tool
+
+> "Creating tools without using them is worse than not creating them at all."
+> "Tool value is measured by usage, not by code quality."
+> "Before creating a tool: Identify the use case. After creating: Use it immediately."
+> "USER-004: 工具创建了不用 = 零分"

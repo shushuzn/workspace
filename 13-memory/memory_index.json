@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "updated": "2026-03-18T16:30:43.918463",
-  "total_entries": 45,
+  "updated": "2026-03-18T16:37:53.724363",
+  "total_entries": 46,
   "total_tags": 12,
   "entries": [
     {
@@ -423,16 +423,25 @@
       "id": "SEC-041",
       "title": "Testing Edge Cases",
       "line_start": 326,
-      "line_end": 333,
+      "line_end": 331,
       "level": 3,
       "tags": [],
       "backlinks": []
     },
     {
       "id": "SEC-042",
+      "title": "Tool Usage Principle (2026-03-18)",
+      "line_start": 332,
+      "line_end": 352,
+      "level": 3,
+      "tags": [],
+      "backlinks": []
+    },
+    {
+      "id": "SEC-043",
       "title": "Research Principles",
-      "line_start": 334,
-      "line_end": 336,
+      "line_start": 353,
+      "line_end": 355,
       "level": 2,
       "tags": [
         "#research",
@@ -442,19 +451,19 @@
       "backlinks": []
     },
     {
-      "id": "SEC-043",
+      "id": "SEC-044",
       "title": "Academic Integrity (2026-03-10)",
-      "line_start": 337,
-      "line_end": 358,
+      "line_start": 356,
+      "line_end": 377,
       "level": 3,
       "tags": [],
       "backlinks": []
     },
     {
-      "id": "SEC-044",
+      "id": "SEC-045",
       "title": "Output Format",
-      "line_start": 359,
-      "line_end": 376,
+      "line_start": 378,
+      "line_end": 395,
       "level": 2,
       "tags": [
         "#workflow",
@@ -463,10 +472,10 @@
       "backlinks": []
     },
     {
-      "id": "SEC-045",
+      "id": "SEC-046",
       "title": "Backlinks",
-      "line_start": 377,
-      "line_end": 398,
+      "line_start": 396,
+      "line_end": 417,
       "level": 2,
       "tags": [
         "#system"
@@ -487,7 +496,7 @@
       "SEC-009",
       "SEC-010",
       "SEC-037",
-      "SEC-042"
+      "SEC-043"
     ],
     "#principle": [
       "SEC-002",
@@ -497,8 +506,8 @@
       "SEC-006",
       "SEC-008",
       "SEC-009",
-      "SEC-042",
-      "SEC-044"
+      "SEC-043",
+      "SEC-045"
     ],
     "#high": [
       "SEC-003",
@@ -513,11 +522,11 @@
       "SEC-015",
       "SEC-017",
       "SEC-019",
-      "SEC-045"
+      "SEC-046"
     ],
     "#workflow": [
       "SEC-005",
-      "SEC-044"
+      "SEC-045"
     ],
     "#lesson": [
       "SEC-006",
@@ -526,7 +535,7 @@
     ],
     "#research": [
       "SEC-008",
-      "SEC-042"
+      "SEC-043"
     ],
     "#user-pref": [
       "SEC-010"
