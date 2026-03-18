@@ -1,5 +1,7 @@
 {
-  "timestamp": "2026-03-18T10:38:09.139122",
+  "timestamp": "2026-03-18T11:22:13.612224",
   "checks_passed": true,
-  "core_files_size_kb": 53.05859375
+  "auto_compressed": false,
+  "core_files_size_kb": 66.38,
+  "context_limit_kb": 100
 }
