@@ -1,0 +1,35 @@
+name: Quality Check
+
+on:
+  push:
+    branches: [master, main]
+  pull_request:
+    branches: [master, main]
+
+jobs:
+  quality-gate:
+    runs-on: windows-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+    
+    - name: Install dependencies
+      run: |
+        pip install pylint flake8 pytest pytest-cov
+    
+    - name: Run flake8
+      run: |
+        flake8 30-scripts-tools/ --max-line-length=120 --ignore=E501,W503
+    
+    - name: Run Auto-Critic v7.0
+      run: |
+        py 30-scripts-tools/auto-critic_v7.py --mode full
+    
+    - name: Run tests
+      run: |
+        pytest 92-tests/ --cov=30-scripts-tools/ --cov-report=xml

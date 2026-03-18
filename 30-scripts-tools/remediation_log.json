@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "created_at": "2026-03-18T21:10:21.421756",
-  "last_updated": "2026-03-18T21:10:21.421761",
+  "last_updated": "2026-03-18T21:25:24.513358",
   "tasks": {
     "REM-20260318-E32C84": {
       "task_id": "REM-20260318-E32C84",
@@ -182,17 +182,227 @@
       "reminder_count": 0,
       "last_reminder": null,
       "notes": []
+    },
+    "REM-20260318-CRED01": {
+      "task_id": "REM-20260318-CRED01",
+      "fail_item_id": "qg-CRED01",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "修复硬编码凭证 - feishu_notification.py",
+      "description": "迁移 API token 到环境变量",
+      "severity": "blocker",
+      "created_at": "2026-03-18T21:25:24.513324",
+      "deadline": "2026-03-19T21:25:24.513272",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-CRED02": {
+      "task_id": "REM-20260318-CRED02",
+      "fail_item_id": "qg-CRED02",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "修复硬编码凭证 - file-organizer.py",
+      "description": "迁移 API key 到配置文件",
+      "severity": "blocker",
+      "created_at": "2026-03-18T21:25:24.513329",
+      "deadline": "2026-03-19T21:25:24.513285",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-CRED03": {
+      "task_id": "REM-20260318-CRED03",
+      "fail_item_id": "qg-CRED03",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "清理 intentkit 测试文件 (含凭证)",
+      "description": "移动到 99-archive 或删除",
+      "severity": "blocker",
+      "created_at": "2026-03-18T21:25:24.513332",
+      "deadline": "2026-03-19T21:25:24.513290",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-EVAL01": {
+      "task_id": "REM-20260318-EVAL01",
+      "fail_item_id": "qg-EVAL01",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "替换 eval/exec - auto-critic.py",
+      "description": "改用 ast.literal_eval 或正则表达式",
+      "severity": "blocker",
+      "created_at": "2026-03-18T21:25:24.513334",
+      "deadline": "2026-03-20T21:25:24.513294",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-EVAL02": {
+      "task_id": "REM-20260318-EVAL02",
+      "fail_item_id": "qg-EVAL02",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "替换 eval/exec - critical_issue_detector.py",
+      "description": "改用正则表达式解析日志",
+      "severity": "blocker",
+      "created_at": "2026-03-18T21:25:24.513335",
+      "deadline": "2026-03-20T21:25:24.513298",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-EVAL03": {
+      "task_id": "REM-20260318-EVAL03",
+      "fail_item_id": "qg-EVAL03",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "替换 eval/exec - issue_scanner.py",
+      "description": "改用 AST 解析代码",
+      "severity": "blocker",
+      "created_at": "2026-03-18T21:25:24.513336",
+      "deadline": "2026-03-20T21:25:24.513303",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-OSSYS01": {
+      "task_id": "REM-20260318-OSSYS01",
+      "fail_item_id": "qg-OSSYS01",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "替换 os.system - auto_distill.py",
+      "description": "改用 subprocess.run()",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:25:24.513338",
+      "deadline": "2026-03-21T21:25:24.513307",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-OSSYS02": {
+      "task_id": "REM-20260318-OSSYS02",
+      "fail_item_id": "qg-OSSYS02",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "替换 os.system - critic_auto_fix.py",
+      "description": "改用 subprocess.run()",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:25:24.513339",
+      "deadline": "2026-03-21T21:25:24.513311",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-OSSYS03": {
+      "task_id": "REM-20260318-OSSYS03",
+      "fail_item_id": "qg-OSSYS03",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "替换 os.system - parallel_executor.py",
+      "description": "改用 concurrent.futures",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:25:24.513341",
+      "deadline": "2026-03-21T21:25:24.513314",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-PICKLE01": {
+      "task_id": "REM-20260318-PICKLE01",
+      "fail_item_id": "qg-PICKLE01",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "替换 pickle.load - context_cache_manager.py",
+      "description": "改用 JSON 格式",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:25:24.513342",
+      "deadline": "2026-03-25T21:25:24.513317",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
+    },
+    "REM-20260318-PICKLE02": {
+      "task_id": "REM-20260318-PICKLE02",
+      "fail_item_id": "qg-PICKLE02",
+      "source": "quality-gate-report-2026-03-18.md",
+      "title": "替换 pickle.load - belief_executor.py",
+      "description": "改用 JSON/msgpack",
+      "severity": "warning",
+      "created_at": "2026-03-18T21:25:24.513346",
+      "deadline": "2026-03-25T21:25:24.513321",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": [
+        "Created by phase3_setup.py - quality gate check"
+      ]
     }
   },
   "statistics": {
-    "total_tasks": 10,
+    "total_tasks": 21,
     "by_status": {
       "deferred": 5,
-      "resolved": 5
+      "resolved": 5,
+      "open": 11
     },
     "by_severity": {
-      "blocker": 4,
-      "warning": 6
+      "blocker": 10,
+      "warning": 11
     },
     "overdue_count": 0,
     "completion_rate": 0.0

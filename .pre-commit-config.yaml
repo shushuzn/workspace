@@ -1,0 +1,28 @@
+# Pre-commit Configuration
+# Auto-generated: 2026-03-18
+
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.5.0
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-json
+      - id: check-added-large-files
+        args: [--maxkb=1000]
+
+  - repo: https://github.com/pycqa/flake8
+    rev: 7.0.0
+    hooks:
+      - id: flake8
+        args: [--max-line-length=120, --ignore=E501,W503]
+
+  - repo: local
+    hooks:
+      - id: auto-critic-v7
+        name: Auto-Critic v7.0 Quality Check
+        entry: py 30-scripts-tools/auto-critic_v7.py --mode quick
+        language: system
+        pass_filenames: false
+        always_run: true

@@ -1,0 +1,11 @@
+{
+  "name": "Weekly Auto-Critic Quality Report",
+  "schedule": "0 5 * * 0",
+  "command": "py 30-scripts-tools/auto-critic_v7.py --mode full",
+  "output": "15-docs/weekly-quality-report.md",
+  "notify_on_issues": true,
+  "threshold": {
+    "blocker": 0,
+    "warning": 10
+  }
+}
