@@ -724,7 +724,7 @@ def verify_item(item: str, task: str, task_type: str) -> tuple:
         return (False, "工具文档缺失", f"❌ No documentation found for: {task}")
     
     elif "错误处理" in item:
-        safe_name = task.lower().replace(" ", "-").replace("_", "-")
+        safe_name = task.lower().replace(" ", "-").replace("_", "-").replace('"', '').replace("'", "")
         tool_file = SCRIPTS_DIR / f"{safe_name}.py"
         
         if tool_file.exists():
