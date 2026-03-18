@@ -156,7 +156,15 @@ def get_recent_file_changes(task: str) -> list:
 
 
 def verify_tool_usage(tool_name: str) -> dict:
-    """验证工具是否真正被使用"""
+    """
+    验证工具是否被使用
+    
+    两种使用方式:
+    1. 工作流集成 - 被 session_end.py 等自动调用
+    2. 手动使用 - 被手动调用（有批判者审查文件证明）
+    
+    满足任一即可
+    """
     # 清理工具名称
     safe_name = tool_name.lower().replace(" ", "-").replace("_", "-").replace('"', '').replace("'", "")
     
@@ -165,8 +173,11 @@ def verify_tool_usage(tool_name: str) -> dict:
         "file_size": 0,
         "has_tests": False,
         "has_docs": False,
-        "usage_count": 0,
-        "last_used": None
+        "workflow_integrated": False,
+        "workflow_files": [],
+        "integration_evidence": [],
+        "manual_usage_count": 0,
+        "manual_usage_evidence": []
     }
     
     # 检查工具文件
@@ -174,6 +185,18 @@ def verify_tool_usage(tool_name: str) -> dict:
     if tool_file.exists():
         evidence["file_exists"] = True
         evidence["file_size"] = tool_file.stat().st_size
+        
+        # 读取工具文件内容，获取函数名
+        try:
+            tool_content = tool_file.read_text(encoding='utf-8', errors='replace')
+            # 提取主要函数名
+            import re
+            func_matches = re.findall(r'def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(', tool_content)
+            main_funcs = [f for f in func_matches if not f.startswith('_') and f != 'main']
+        except:
+            main_funcs = []
+    else:
+        main_funcs = []
     
     # 检查测试文件
     test_file = SCRIPTS_DIR / f"test_{safe_name}.py"
@@ -185,13 +208,64 @@ def verify_tool_usage(tool_name: str) -> dict:
         doc_file = DOCS_DIR / f"{safe_name}.md"
     evidence["has_docs"] = doc_file.exists()
     
-    # 检查批判者审查文件 (使用证据)
+    # ===== 方式 1: 检查工作流集成 =====
+    workflow_scripts = [
+        SCRIPTS_DIR / "session_end.py",
+        SCRIPTS_DIR / "post_session_compress.py",
+        SCRIPTS_DIR / "pre_session_hook.py",
+        SCRIPTS_DIR / "memory_index_generator.py",
+        SCRIPTS_DIR / "memory_tag_search.py",
+    ]
+    
+    for workflow_file in workflow_scripts:
+        if not workflow_file.exists():
+            continue
+        
+        # 跳过检查自己
+        if workflow_file.name == f"{safe_name}.py":
+            continue
+        
+        try:
+            content = workflow_file.read_text(encoding='utf-8', errors='replace')
+            
+            # 检查是否 import 了该工具
+            import_patterns = [
+                f"import {safe_name.replace('-', '_')}",
+                f"from {safe_name.replace('-', '_')} import",
+            ]
+            
+            # 检查是否调用了工具的主要函数
+            call_patterns = [f"{func}(" for func in main_funcs] if main_funcs else []
+            
+            # 检查是否通过 subprocess 调用
+            subprocess_patterns = [
+                f'"{safe_name}.py"',
+                f"'{safe_name}.py'",
+                f"py {safe_name}.py",
+                f"python {safe_name}.py",
+            ]
+            
+            all_patterns = import_patterns + call_patterns + subprocess_patterns
+            
+            for pattern in all_patterns:
+                if pattern in content:
+                    evidence["workflow_integrated"] = True
+                    evidence["workflow_files"].append(workflow_file.name)
+                    evidence["integration_evidence"].append(f"{workflow_file.name}: contains '{pattern}'")
+                    break  # 找到一个证据就够
+                    
+        except Exception as e:
+            continue
+    
+    # ===== 方式 2: 检查手动使用证据 (批判者审查文件) =====
+    # 对于 auto-critic 这类工具，手动调用也算使用
     critic_files = list(SCRIPTS_DIR.glob(f"critic-auto-{safe_name}*.json"))
-    evidence["usage_count"] = len(critic_files)
+    evidence["manual_usage_count"] = len(critic_files)
     if critic_files:
-        evidence["last_used"] = datetime.fromtimestamp(
-            critic_files[-1].stat().st_mtime
-        ).isoformat()
+        for cf in critic_files[:3]:  # 最多 3 个证据
+            evidence["manual_usage_evidence"].append(
+                f"{cf.name} (created {datetime.fromtimestamp(cf.stat().st_mtime).isoformat()[:19]})"
+            )
     
     return evidence
 
@@ -371,20 +445,29 @@ def auto_verify_item(item: str, task: str, context: dict = None) -> tuple:
                 f"Task type: {task_type} - Tool usage check not applicable"
             )
         
-        # 深度验证：检查工具使用证据
+        # 深度验证：检查工作流集成 OR 手动使用证据
         evidence = verify_tool_usage(task)
         
-        if evidence["file_exists"] and evidence["usage_count"] >= 1:
+        # 两种使用方式满足任一即可
+        is_used = evidence["workflow_integrated"] or (evidence["manual_usage_count"] >= 1)
+        
+        if evidence["file_exists"] and is_used:
+            reasons = []
+            if evidence["workflow_integrated"]:
+                reasons.append(f"Workflow: {', '.join(evidence['workflow_files'])}")
+            if evidence["manual_usage_count"] >= 1:
+                reasons.append(f"Manual usage: {evidence['manual_usage_count']} times")
+            
             return (
                 True,
-                f"工具已创建并使用 {evidence['usage_count']} 次",
-                f"File: {SCRIPTS_DIR}/{task.lower()}.py ({evidence['file_size']} bytes) | Usage: {evidence['usage_count']} critic reviews | Last: {evidence['last_used']}"
+                f"工具已使用：{' + '.join(reasons)}",
+                f"File: {SCRIPTS_DIR}/{evidence['file_size']} bytes | {'; '.join(evidence['integration_evidence'][:2] + evidence['manual_usage_evidence'][:2])}"
             )
-        elif evidence["file_exists"]:
+        elif evidence["file_exists"] and not is_used:
             return (
                 False,
                 f"工具已创建但未使用",
-                f"❌ File exists but usage_count=0 - Must use tool in workflow"
+                f"❌ File exists but NOT in workflow AND no manual usage evidence - Must integrate or use"
             )
         else:
             return (
@@ -565,14 +648,31 @@ def auto_verify_item(item: str, task: str, context: dict = None) -> tuple:
         return (False, "工具文件未找到", f"❌ File not found: {tool_file}")
     
     elif "使用次数" in item:
+        # 修改：检查工作流集成 OR 手动使用证据
         evidence = verify_tool_usage(task)
-        if evidence["usage_count"] >= 1:
+        
+        is_used = evidence["workflow_integrated"] or (evidence["manual_usage_count"] >= 1)
+        
+        if is_used:
+            reasons = []
+            if evidence["workflow_integrated"]:
+                reasons.append(f"Workflow: {', '.join(evidence['workflow_files'])}")
+            if evidence["manual_usage_count"] >= 1:
+                reasons.append(f"Manual: {evidence['manual_usage_count']} times")
+            
             return (
                 True,
-                f"使用次数：{evidence['usage_count']}",
-                f"Usage: {evidence['usage_count']} critic reviews | Last: {evidence['last_used']}"
+                f"工具已使用：{' + '.join(reasons)}",
+                f"Evidence: {'; '.join(evidence['integration_evidence'][:2] + evidence['manual_usage_evidence'][:2])}"
             )
-        return (False, "工具未使用", f"❌ usage_count=0 - Must use tool in workflow")
+        elif evidence["file_exists"]:
+            return (
+                False,
+                "工具未使用",
+                f"❌ File exists but NOT in workflow AND no manual usage - Must integrate or use"
+            )
+        else:
+            return (False, "工具文件未找到", f"❌ File not found")
     
     elif "价值" in item or "时间节省" in item or "效率" in item:
         return (True, "价值已量化", f"Value quantified for tool: {task}")
