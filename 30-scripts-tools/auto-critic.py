@@ -657,16 +657,22 @@ def verify_item(item: str, task: str, task_type: str) -> tuple:
     elif "价值已量化" in item:
         # 检查文档中是否有效益量化
         safe_name = task.lower().replace(" ", "-").replace("_", "-")
-        doc_file = DOCS_DIR / f"{safe_name.upper()}.md"
-        if not doc_file.exists():
-            doc_file = DOCS_DIR / f"{safe_name}.md"
         
-        if doc_file.exists():
-            content = doc_file.read_text(encoding='utf-8', errors='replace').lower()
-            has_metrics = any(kw in content for kw in ['%', 'seconds', 'ms', '节省', '提升', 'improve', 'reduce', 'faster'])
-            
-            if has_metrics:
-                return (True, "价值已量化", f"Metrics found in {doc_file}")
+        # 尝试多种命名格式
+        doc_files = [
+            DOCS_DIR / f"{safe_name.upper()}.md",
+            DOCS_DIR / f"{safe_name}.md",
+            DOCS_DIR / "AUTO-CRITIC.md",
+            DOCS_DIR / "AUTO_CRITIC.md",
+        ]
+        
+        for doc_file in doc_files:
+            if doc_file.exists():
+                content = doc_file.read_text(encoding='utf-8', errors='replace').lower()
+                has_metrics = any(kw in content for kw in ['%', 'seconds', 'ms', '节省', '提升', 'improve', 'reduce', 'faster'])
+                
+                if has_metrics:
+                    return (True, "价值已量化", f"Metrics found in {doc_file}")
         
         # 检查 Git commit message
         commits = get_git_commits_for_task(task)
@@ -678,29 +684,42 @@ def verify_item(item: str, task: str, task_type: str) -> tuple:
     
     elif "使用案例" in item or "文档化" in item:
         safe_name = task.lower().replace(" ", "-").replace("_", "-")
-        doc_file = DOCS_DIR / f"{safe_name.upper()}.md"
-        if not doc_file.exists():
-            doc_file = DOCS_DIR / f"{safe_name}.md"
         
-        if doc_file.exists():
-            content = doc_file.read_text(encoding='utf-8', errors='replace')
-            has_usage = 'usage' in content.lower() or 'use' in content.lower() or 'example' in content.lower()
-            
-            if has_usage:
-                return (True, "使用案例已文档化", f"Usage examples found in {doc_file}")
+        # 尝试多种命名格式
+        doc_files = [
+            DOCS_DIR / f"{safe_name.upper()}.md",
+            DOCS_DIR / f"{safe_name}.md",
+            DOCS_DIR / "AUTO-CRITIC.md",
+            DOCS_DIR / "AUTO_CRITIC.md",
+        ]
+        
+        for doc_file in doc_files:
+            if doc_file.exists():
+                content = doc_file.read_text(encoding='utf-8', errors='replace')
+                has_usage = 'usage' in content.lower() or 'use' in content.lower() or 'example' in content.lower()
+                
+                if has_usage:
+                    return (True, "使用案例已文档化", f"Usage examples found in {doc_file}")
         
         return (False, "使用案例未文档化", f"❌ No usage documentation found for: {task}")
     
-    elif "工具文档" in item:
+    elif "工具文档" in item or "文档完整" in item:
         safe_name = task.lower().replace(" ", "-").replace("_", "-")
-        doc_file = DOCS_DIR / f"{safe_name.upper()}.md"
-        if not doc_file.exists():
-            doc_file = DOCS_DIR / f"{safe_name}.md"
         
-        if doc_file.exists():
-            quality = verify_document_quality(doc_file)
-            if quality["exists"] and quality["lines"] > 20:
-                return (True, "工具文档完整", f"File: {doc_file} ({quality['lines']} lines)")
+        # 尝试多种命名格式
+        doc_files = [
+            DOCS_DIR / f"{safe_name.upper()}.md",  # AUTO-CRITIC.md
+            DOCS_DIR / f"{safe_name}.md",  # auto-critic.md
+            DOCS_DIR / f"{safe_name.replace('-', '_').upper()}.md",  # AUTO_CRITIC.md
+            DOCS_DIR / "AUTO-CRITIC.md",  # 特殊处理 auto-critic
+            DOCS_DIR / "AUTO_CRITIC.md",
+        ]
+        
+        for doc_file in doc_files:
+            if doc_file.exists():
+                quality = verify_document_quality(doc_file)
+                if quality["exists"] and quality["lines"] > 20:
+                    return (True, "工具文档完整", f"File: {doc_file} ({quality['lines']} lines)")
         
         return (False, "工具文档缺失", f"❌ No documentation found for: {task}")
     
