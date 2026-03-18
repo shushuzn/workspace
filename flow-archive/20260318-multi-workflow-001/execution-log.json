@@ -17,14 +17,14 @@
       },
       "tool_id": "session-compress",
       "command": "py 30-scripts-tools\\post_session_compress.py --auto",
-      "execution_time_ms": 130.685,
+      "execution_time_ms": 121.742,
       "step_id": 1,
       "step_name": "Session Compression",
       "blocking": true
     },
     {
       "success": true,
-      "output": "============================================================\nFast Load - 快速加载核心上下文\n============================================================\n✅ SOUL.md: 12.8KB\n✅ USER.md: 10.6KB\n✅ AGENTS.md: 11.3KB\n✅ TOOLS.md: 5.7KB\n✅ HEARTBEAT.md: 5.6KB\n✅ 13-memory/MEMORY.md: 9.2KB\n✅ 13-memory/2026-03-18.md: 2.1KB\n============================================================\n总大小：57.3KB (0.06MB)\nToken 估算：~14676 tokens\n============================================================\n\n全工作区：565.91MB\n节省：100.0%\n速度提升：10108.2x\n",
+      "output": "============================================================\nFast Load - 快速加载核心上下文\n============================================================\n✅ SOUL.md: 12.8KB\n✅ USER.md: 10.6KB\n✅ AGENTS.md: 11.3KB\n✅ TOOLS.md: 5.7KB\n✅ HEARTBEAT.md: 5.6KB\n✅ 13-memory/MEMORY.md: 9.2KB\n✅ 13-memory/2026-03-18.md: 2.1KB\n============================================================\n总大小：57.3KB (0.06MB)\nToken 估算：~14676 tokens\n============================================================\n\n全工作区：566.06MB\n节省：100.0%\n速度提升：10110.9x\n",
       "validation": {
         "passed": true,
         "rules_checked": [
@@ -39,7 +39,7 @@
       },
       "tool_id": "context-verify",
       "command": "py 30-scripts-tools\\fast_load.py",
-      "execution_time_ms": 3739.395,
+      "execution_time_ms": 3616.976,
       "step_id": 2,
       "step_name": "Context Size Verification",
       "blocking": true
@@ -59,7 +59,7 @@
       },
       "tool_id": "session-compress",
       "command": "py 30-scripts-tools\\post_session_compress.py --auto",
-      "execution_time_ms": 176.367,
+      "execution_time_ms": 126.28900000000002,
       "step_id": 3,
       "step_name": "Daily Note Check",
       "blocking": true
@@ -79,14 +79,14 @@
       },
       "tool_id": "memory-importance-assessor",
       "command": "py 30-scripts-tools\\memory_importance_assessor.py --memory \"13-memory/${TODAY}.md\"",
-      "execution_time_ms": 127.22,
+      "execution_time_ms": 137.157,
       "step_id": 4,
       "step_name": "Memory Importance Assessment",
       "blocking": false
     },
     {
       "success": false,
-      "output": "\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94m🔍 MEMORY CONSISTENCY CHECKER\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nTime: 2026-03-18 22:36:24\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mLOADING DATA\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[92m✅ Loaded MEMORY.md: 12 entries\u001b[0m\n\u001b[92m✅ Loaded memory_index.json: 46 entries\u001b[0m\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mRUNNING CONSISTENCY CHECKS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nCheck 1: Entry Count Matching\n\u001b[91m❌ Entry count mismatch: MEMORY.md=12, index=46\u001b[0m\n\nCheck 2: Tag Statistics Accuracy\n\u001b[92m✅ Tag statistics match\u001b[0m\n\nCheck 3: Broken Tag Links\n\u001b[92m✅ No broken tag links\u001b[0m\n\nCheck 4: Duplicate Entries\n\u001b[92m✅ No duplicate entries\u001b[0m\n\nCheck 5: Orphaned Entries\n\u001b[93m⚠️  Orphaned entries (in index but not MEMORY.md): 34\u001b[0m\n   - Academic Integrity (2026-03-10)\n   - 7-Persona System\n   - Critic Required Every Step\n   - Knowledge Card Generator v2.5\n   - Git Permissions (2026-03-17)\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mCONSISTENCY CHECK SUMMARY\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nPassed: 3/5\n\n❌ Entry Count\n✅ Tag Statistics\n✅ Broken Links\n✅ Duplicates\n❌ Orphaned Entries\n\nReport saved to: 30-scripts-tools\\consistency_check_report.json\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mFINAL STATUS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[91m❌ MEMORY SYSTEM CONSISTENCY: FAIL\u001b[0m\n\u001b[93m⚠️  2 check(s) failed\u001b[0m\n",
+      "output": "\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94m🔍 MEMORY CONSISTENCY CHECKER\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nTime: 2026-03-18 22:38:39\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mLOADING DATA\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[92m✅ Loaded MEMORY.md: 12 entries\u001b[0m\n\u001b[92m✅ Loaded memory_index.json: 46 entries\u001b[0m\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mRUNNING CONSISTENCY CHECKS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nCheck 1: Entry Count Matching\n\u001b[91m❌ Entry count mismatch: MEMORY.md=12, index=46\u001b[0m\n\nCheck 2: Tag Statistics Accuracy\n\u001b[92m✅ Tag statistics match\u001b[0m\n\nCheck 3: Broken Tag Links\n\u001b[92m✅ No broken tag links\u001b[0m\n\nCheck 4: Duplicate Entries\n\u001b[92m✅ No duplicate entries\u001b[0m\n\nCheck 5: Orphaned Entries\n\u001b[93m⚠️  Orphaned entries (in index but not MEMORY.md): 34\u001b[0m\n   - Git Permissions (2026-03-17)\n   - Phase 7: Predictive Coding (2026-03-17)\n   - Memory Distiller v2.0\n   - 🔬 Research Rigor Principles (2026-03-11 22:20)\n   - Critic Required Every Step\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mCONSISTENCY CHECK SUMMARY\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nPassed: 3/5\n\n❌ Entry Count\n✅ Tag Statistics\n✅ Broken Links\n✅ Duplicates\n❌ Orphaned Entries\n\nReport saved to: 30-scripts-tools\\consistency_check_report.json\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mFINAL STATUS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[91m❌ MEMORY SYSTEM CONSISTENCY: FAIL\u001b[0m\n\u001b[93m⚠️  2 check(s) failed\u001b[0m\n",
       "validation": {
         "passed": false,
         "rules_checked": [
@@ -98,7 +98,7 @@
       },
       "tool_id": "memory-consistency-checker",
       "command": "py 30-scripts-tools\\memory_consistency_checker.py",
-      "execution_time_ms": 103.022,
+      "execution_time_ms": 104.107,
       "step_id": 5,
       "step_name": "Memory Consistency Check",
       "blocking": false
@@ -117,7 +117,7 @@
       },
       "tool_id": "memory-tag-search",
       "command": "py 30-scripts-tools\\memory_tag_search.py --tag critical --limit 3",
-      "execution_time_ms": 117.25099999999999,
+      "execution_time_ms": 110.256,
       "step_id": 6,
       "step_name": "Tag Search Test",
       "blocking": false
@@ -174,7 +174,7 @@
       },
       "tool_id": "auto-critic",
       "command": "py 30-scripts-tools\\auto-critic.py -t \"\"极简多工作流隔离方案落地 - Flow ID 全链路支持\"\" -p final",
-      "execution_time_ms": 119.91300000000001,
+      "execution_time_ms": 131.691,
       "step_id": 12,
       "step_name": "Auto-Critic Review",
       "blocking": false
@@ -197,7 +197,7 @@
       },
       "tool_id": "auto-critic-v7",
       "command": "py 30-scripts-tools\\auto-critic_v7.py -t \"\"极简多工作流隔离方案落地 - Flow ID 全链路支持\"\" -p final --create-remediation",
-      "execution_time_ms": 140.072,
+      "execution_time_ms": 156.507,
       "step_id": 13,
       "step_name": "Auto-Critic v7.0 Enhanced Review",
       "blocking": false
@@ -216,7 +216,7 @@
       },
       "tool_id": "quality-gate",
       "command": "py 30-scripts-tools\\quality_gate.py --check {pattern} --min-score {score}",
-      "execution_time_ms": 123.614,
+      "execution_time_ms": 130.643,
       "step_id": 14,
       "step_name": "Quality Gate Check",
       "blocking": false
@@ -235,7 +235,7 @@
       },
       "tool_id": "p1-issue-fixer",
       "command": "py 30-scripts-tools\\p1_issue_fixer.py --fix",
-      "execution_time_ms": 815.652,
+      "execution_time_ms": 870.2710000000001,
       "step_id": 15,
       "step_name": "P1 Issue Auto-Fix",
       "blocking": false
@@ -254,7 +254,7 @@
       },
       "tool_id": "issue-scanner",
       "command": "py 30-scripts-tools\\issue_scanner.py --path 30-scripts-tools --format json",
-      "execution_time_ms": 132.20299999999997,
+      "execution_time_ms": 149.29,
       "step_id": 16,
       "step_name": "Issue Scanner",
       "blocking": false
@@ -262,5 +262,5 @@
   ],
   "total_steps": 16,
   "passed_steps": 9,
-  "execution_time_ms": 5727.171
+  "execution_time_ms": 5657.005
 }

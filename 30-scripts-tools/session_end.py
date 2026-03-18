@@ -123,7 +123,7 @@ def run_session_end_workflow(commit_message: str, flow_id: str = None) -> bool:
             
             # 执行 Git 操作（工作流完成后）
             print_header("Git Operations")
-            git_success = run_git_operations(commit_message)
+            git_success = run_git_operations(commit_message, flow_id)
             
             return git_success
         else:
@@ -138,17 +138,24 @@ def run_session_end_workflow(commit_message: str, flow_id: str = None) -> bool:
         return False
 
 
-def run_git_operations(commit_message: str) -> bool:
+def run_git_operations(commit_message: str, flow_id: str = None) -> bool:
     """
     执行 Git 操作（add, commit, push）
     
     Args:
         commit_message: 提交消息
+        flow_id: 工作流唯一 ID (可选)
     
     Returns:
         Git 操作是否成功
     """
     print_info("Running Git operations...")
+    
+    # 构建提交消息 (包含 Flow ID)
+    if flow_id:
+        full_commit_message = f"[FLOW ID: {flow_id}] {commit_message}"
+    else:
+        full_commit_message = commit_message
     
     # 1. Git add
     print_info("Step 1: Git add...")
@@ -174,15 +181,29 @@ def run_git_operations(commit_message: str) -> bool:
     if len(files) > 10:
         print(f"   ... and {len(files) - 10} more")
     
-    # 3. Git commit
+    # 3. Git commit (使用完整的提交消息，包含 Flow ID)
     print_info("Step 3: Git commit...")
-    result = subprocess.run(
-        f'git commit -F .git\\COMMIT_EDITMSG --no-verify',
-        shell=True,
-        capture_output=True,
-        text=True,
-        timeout=30
-    )
+    # 使用临时文件存储提交消息，避免中文和引号问题
+    import tempfile
+    with tempfile.NamedTemporaryFile(mode='w', delete=False, suffix='.msg', encoding='utf-8') as f:
+        f.write(full_commit_message)
+        temp_file = f.name
+    
+    try:
+        result = subprocess.run(
+            f'git commit -F "{temp_file}" --no-verify',
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=30,
+            encoding='utf-8',
+            errors='replace'
+        )
+    finally:
+        # 清理临时文件
+        import os
+        if os.path.exists(temp_file):
+            os.remove(temp_file)
     if result.returncode == 0:
         print_success("Git commit - OK")
         # 显示 commit hash

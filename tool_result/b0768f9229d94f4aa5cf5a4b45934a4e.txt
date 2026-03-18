@@ -1,0 +1,87 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:37:08.571433
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\session_end.py  (lines 100-180 of 244)
+    
+    try:
+        result = subprocess.run(
+            cmd,
+            shell=False,  # 不使用 shell，直接传递参数
+            capture_output=True,
+            text=True,
+            timeout=300,  # 5 分钟超时
+            encoding='utf-8',
+            errors='replace'
+        )
+        
+        # 显示输出
+        if result.stdout:
+            print(result.stdout)
+        if result.stderr:
+            print(result.stderr, file=sys.stderr)
+        
+        # 检查工作流是否成功
+        workflow_success = result.returncode == 0
+        
+        if workflow_success:
+            print_success("Session end workflow completed successfully")
+            
+            # 执行 Git 操作（工作流完成后）
+            print_header("Git Operations")
+            git_success = run_git_operations(commit_message)
+            
+            return git_success
+        else:
+            print_error(f"Session end workflow failed (returncode: {result.returncode})")
+            return False
+            
+    except subprocess.TimeoutExpired:
+        print_error("Session end workflow TIMEOUT (>5 minutes)")
+        return False
+    except Exception as e:
+        print_error(f"Session end workflow EXCEPTION: {str(e)}")
+        return False
+
+
+def run_git_operations(commit_message: str) -> bool:
+    """
+    执行 Git 操作（add, commit, push）
+    
+    Args:
+        commit_message: 提交消息
+    
+    Returns:
+        Git 操作是否成功
+    """
+    print_info("Running Git operations...")
+    
+    # 1. Git add
+    print_info("Step 1: Git add...")
+    result = subprocess.run("git add .", shell=True, capture_output=True, text=True, timeout=30)
+    if result.returncode == 0:
+        print_success("Git add - OK")
+    else:
+        print_error(f"Git add - FAILED: {result.stderr.strip()[:200]}")
+        return False
+    
+    # 2. Git status (检查是否有更改)
+    print_info("Step 2: Checking git status...")
+    result = subprocess.run("git status --short", shell=True, capture_output=True, text=True, timeout=10)
+    if not result.stdout.strip():
+        print_info("No changes to commit")
+        return True
+    
+    # 显示要提交的文件
+    files = result.stdout.strip().split('\n')
+    print_info(f"{len(files)} file(s) to commit:")
+    for file in files[:10]:
+        print(f"   {file}")
+    if len(files) > 10:
+        print(f"   ... and {len(files) - 10} more")
+    
+    # 3. Git commit
+    print_info("Step 3: Git commit...")
+    result = subprocess.run(
+        f'git commit -F .git\\COMMIT_EDITMSG --no-verify',
+
+[64 more lines. Use start_line=181 to continue.]

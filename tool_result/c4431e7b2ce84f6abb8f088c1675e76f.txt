@@ -1,0 +1,54 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:37:57.448944
+# ---
+        print_error(f"Git commit - FAILED: {result.stderr.strip()[:200]}")
+        return False
+    
+    # 4. Git push
+    print_info("Step 4: Git push...")
+    result = subprocess.run("git push", shell=True, capture_output=True, text=True, timeout=60)
+    if result.returncode == 0:
+        print_success("Git push - OK")
+    else:
+        print_error(f"Git push - FAILED: {result.stderr.strip()[:200]}")
+        return False
+    
+    print_success("All Git operations completed")
+    return True
+
+
+def main():
+    print_header("SESSION END - One-Click Workflow (v2.1 - Flow ID Support)")
+    print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    
+    # 解析参数 (支持 --flow_id)
+    import argparse
+    parser = argparse.ArgumentParser(description='Session End Workflow')
+    parser.add_argument('commit_message', nargs='+', help='Git 提交消息')
+    parser.add_argument('--flow_id', type=str, help='工作流唯一 ID (例：20260318-backend-crud-001)')
+    args = parser.parse_args()
+    
+    commit_message = " ".join(args.commit_message)
+    flow_id = args.flow_id
+    
+    print_info(f"Commit message: \"{commit_message}\"")
+    if flow_id:
+        print_info(f"Flow ID: {flow_id}")
+        print_info(f"隔离模式：所有操作绑定 Flow ID")
+    
+    # 检查 tool_executor.py 是否存在
+    executor_path = Path("30-scripts-tools\\tool_executor.py")
+    if not executor_path.exists():
+        print_error(f"Tool executor not found: {executor_path}")
+        print_error("Cannot proceed without tool_executor.py")
+        sys.exit(1)
+    
+    # 使用 tool_executor.py 执行工作流
+    success = run_session_end_workflow(commit_message, flow_id)
+    
+    # 退出码
+    sys.exit(0 if success else 1)
+
+
+if __name__ == "__main__":
+    main()
