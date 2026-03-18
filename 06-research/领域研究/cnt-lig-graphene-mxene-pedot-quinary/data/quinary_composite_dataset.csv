@@ -1,4 +1,4 @@
-﻿sample_id,cnt_ratio,lig_ratio,graphene_ratio,mxene_ratio,pedot_ratio,base_conductivity,synergy_binary,synergy_ternary,synergy_quaternary,synergy_quinary,total_synergy,composite_conductivity,method,source
+sample_id,cnt_ratio,lig_ratio,graphene_ratio,mxene_ratio,pedot_ratio,base_conductivity,synergy_binary,synergy_ternary,synergy_quaternary,synergy_quinary,total_synergy,composite_conductivity,method,source
 Q5-0.12-0.12-0.12-0.12-0.50,0.125,0.125,0.125,0.125,0.5,262750.0,0.9091587473108358,0.0024609375,0.00011718750000000001,0.00091552734375,1.9126523996545857,515030.58843487984,Quinary Composite,Simulated
 Q5-0.12-0.12-0.12-0.25-0.38,0.125,0.125,0.125,0.25,0.375,269000.0,0.84335705701202,0.0032421875,0.00018554687500000003,0.0013732910156249998,1.8481580824026451,493717.58802341414,Quinary Composite,Simulated
 Q5-0.12-0.12-0.12-0.38-0.25,0.125,0.125,0.125,0.375,0.25,275250.0,0.7489867140284555,0.0033203125,0.00020507812500000002,0.0013732910156249998,1.7538853956690805,498390.762485123,Quinary Composite,Simulated

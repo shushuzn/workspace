@@ -1,4 +1,4 @@
-﻿---
+---
 name: proactive-agent-lite
 description: Transform AI agents from task-followers into proactive partners with memory architecture, reverse prompting, and self-healing patterns. Lightweight version focused on core proactive capabilities.
 metadata:

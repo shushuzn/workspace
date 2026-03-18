@@ -1,0 +1,57 @@
+
+======================================================================
+  Git Pre-Check 报告
+======================================================================
+
+检查时间：2026-03-18 10:33:29
+检查文件：17992 个
+
+【总体状态】
+  ❌ FAILED (通过:102409, 失败:571, 警告:4496, 跳过:0)
+
+【❌ 错误】必须修复后才能提交
+
+  编码 (472 个):
+    - $null: 编码错误：无法用 UTF-8 读取
+    - 06-research\领域研究\cnt-lig-experimental-platform\data\data_collection_template.xlsx: 编码错误：无法用 UTF-8 读取
+    - 06-research\领域研究\cnt-lig-graphene-ternary\data\ternary_composite_dataset.csv: BOM 头 (应使用 UTF-8 without BOM)
+    - 06-research\领域研究\data\lig_dataset_123.csv: BOM 头 (应使用 UTF-8 without BOM)
+    - 06-research\领域研究\data\lig_dataset_145.csv: BOM 头 (应使用 UTF-8 without BOM)
+    ... 还有 467 个
+
+  报告/敏感文件 (95 个):
+    - 敏感文件：08-collectors\medium-文章\Medium\Archive\2026-03-05\2026-03-05_2603.05494v1_Censored-LLMs-as-a-Natural-Testbed-for-Secret-Know.md
+    - 敏感文件：08-collectors\medium-文章\Medium\Archive\2026-03-06\medium-2026-03-06-El-Arma-Secreta-que-transformar-la-gerencia-de-pr.md
+    - 敏感文件：08-collectors\twitter-推特\daily\2026\2026-03\2026-03-02\20260302-201508-AnthropicAI-Pinned A statement on the comments from Secretary of War Pet.md
+    - 敏感文件：30-scripts-tools\01-SETUP\setup-aliyun-ecs.bat
+    - 敏感文件：30-scripts-tools\01-SETUP\setup-aliyun-ecs.py
+    ... 还有 90 个
+
+  嵌套备份 (4 个):
+    - 备份目录路径过深 (深度=11): 80-PROJECTS\rl-trading\openclaw\apps\android\app\src\main\res\xml\backup_rules.xml
+    - 备份目录路径过深 (深度=6): 80-PROJECTS\rl-trading\openclaw\src\config\backup-rotation.ts
+    - 备份目录路径过深 (深度=6): 80-PROJECTS\rl-trading\openclaw\src\config\config.backup-rotation.test-helpers.ts
+    - 备份目录路径过深 (深度=6): 80-PROJECTS\rl-trading\openclaw\src\config\config.backup-rotation.test.ts
+
+  解决方案:
+    1. 删除文件：git reset HEAD <file> && rm <file>
+    2. 修复编码：用 VSCode 打开 → 另存为 UTF-8
+    3. 或强制提交：git commit --no-verify (不推荐)
+
+【⚠️  警告】建议修复，但可强制提交
+
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-PubMed 检索实施-20260313.md (建议英文)
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-半小时自主决策总结-20260313.md (建议英文)
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-数据收集模板-20260313.md (建议英文)
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-数据收集脚本-20260313.py (建议英文)
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-数据收集计划-20260313.md (建议英文)
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-数据质量检查流程-20260313.md (建议英文)
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-文献调研-20260313.md (建议英文)
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-特征工程方案-20260313.md (建议英文)
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-研究框架-20260313.md (建议英文)
+    - 中文文件名：06-research\02-领域研究\CNT\CNT-研究进度报告-20260313-1844.md (建议英文)
+    ... 还有 4486 个警告
+
+  强制提交：git commit --no-verify
+
+======================================================================

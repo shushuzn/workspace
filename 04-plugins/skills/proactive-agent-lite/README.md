@@ -1,4 +1,4 @@
-﻿# Proactive Agent Lite
+# Proactive Agent Lite
 
 Transform your AI agents from passive responders into proactive partners that anticipate needs and continuously improve.
 

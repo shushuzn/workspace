@@ -1,4 +1,4 @@
-﻿# USER.md - About Your Human
+# USER.md - About Your Human
 
 **Last Updated:** 2026-03-06
 

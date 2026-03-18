@@ -1,4 +1,4 @@
-﻿# TOOLS.md - Local Notes
+# TOOLS.md - Local Notes
 
 **Last Updated:** 2026-03-06
 

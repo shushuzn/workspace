@@ -1,4 +1,4 @@
-﻿sample_id,cnt_ratio,lig_ratio,cnt_conductivity,lig_conductivity,composite_conductivity,synergy_factor,cnt_diameter,cnt_layers,lig_power,lig_speed,method,source
+sample_id,cnt_ratio,lig_ratio,cnt_conductivity,lig_conductivity,composite_conductivity,synergy_factor,cnt_diameter,cnt_layers,lig_power,lig_speed,method,source
 CNT-LIG-0.1-000,0.1,0.9,22646.8506723283,50.0,2917.2562477847637,1.2032848298702996,15.0,13,0.262,62.3,CNT-LIG Composite,Simulated
 CNT-LIG-0.1-001,0.1,0.9,172103.0,3200.0,23840.10821215438,1.2032848298702996,43.94,16,0.3,20.0,CNT-LIG Composite,Simulated
 CNT-LIG-0.1-002,0.1,0.9,65533.9805825242,50.0,8454.000939972271,1.2032848298702996,15.0,13,0.12,45.0,CNT-LIG Composite,Simulated
