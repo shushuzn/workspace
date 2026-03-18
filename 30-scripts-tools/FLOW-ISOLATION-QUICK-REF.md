@@ -1,19 +1,20 @@
-# 🚀 多工作流隔离方案 - 快速参考卡
+# 🚀 通用工作流 - 快速参考卡
 
 **Last Updated:** 2026-03-18  
 **Status:** ✅ Ready to Use  
+**默认 Flow ID:** `20260318-universal-workflow-001`
 
 ---
 
-## 📋 3 步落地 (极简版)
+## 📋 快速启动 (3 步)
 
-### Step 1: 启动工作流
+### Step 1: 启动工作流 (可选)
 ```bash
-# 方式 A: 使用快速启动脚本 (推荐)
-30-scripts-tools\start-flow.bat {业务名}
+# 方式 A: 使用快速启动脚本 (不指定 = 通用工作流)
+30-scripts-tools\start-flow.bat
 
-# 方式 B: 手动指定 Flow ID
-py 30-scripts-tools\session_end.py "任务完成" --flow_id 20260318-{业务名}-001
+# 方式 B: 指定业务类型
+30-scripts-tools\start-flow.bat backend-crud
 ```
 
 ### Step 2: 执行任务
@@ -24,10 +25,13 @@ py 30-scripts-tools\session_end.py "任务完成" --flow_id 20260318-{业务名}
 - 禁止修改/引用其他工作流内容
 ```
 
-### Step 3: 完成归档
+### Step 3: 完成归档 (自动使用通用 Flow ID)
 ```bash
-py 30-scripts-tools\session_end.py "完成描述" --flow_id 20260318-{业务名}-001
-# 自动执行：压缩 → 批判者审查 → Git 提交 → 归档
+# 不指定 Flow ID = 默认使用 20260318-universal-workflow-001
+py 30-scripts-tools\session_end.py "完成描述"
+
+# 或指定特定 Flow ID
+py 30-scripts-tools\session_end.py "完成描述" --flow_id 20260318-backend-crud-001
 ```
 
 ---
@@ -36,10 +40,19 @@ py 30-scripts-tools\session_end.py "完成描述" --flow_id 20260318-{业务名}
 
 ### 启动工作流
 ```bash
-# 快速启动 (自动分配 Flow ID)
-30-scripts-tools\start-flow.bat backend-crud
+# 快速启动 (不指定 = 通用工作流)
+30-scripts-tools\start-flow.bat
+# → Flow ID: 20260318-universal-workflow-001
 
-# 手动启动
+# 指定业务类型
+30-scripts-tools\start-flow.bat backend-crud
+# → Flow ID: 20260318-backend-crud-001
+
+# 手动启动 (不指定 --flow_id = 默认通用工作流)
+py session_end.py "Task"
+# → Flow ID: 20260318-universal-workflow-001
+
+# 手动指定 Flow ID
 py session_end.py "Task" --flow_id 20260318-backend-crud-001
 ```
 
@@ -83,24 +96,30 @@ start-flow.bat db-migration
 ### 🔴 红线 1: 切换必须先快照
 ```bash
 # 暂停当前 Flow
-py memory_benchmark.py --tag snapshot --flow_id 20260318-xxx-001
+py memory_benchmark.py --tag snapshot --flow_id 20260318-universal-workflow-001
 
 # ... 处理其他 Flow ...
 
 # 恢复
-py memory_benchmark.py --tag restore --flow_id 20260318-xxx-001
+py memory_benchmark.py --tag restore --flow_id 20260318-universal-workflow-001
 ```
 
 ### 🔴 红线 2: 并行必须独立子会话
 ```bash
 # ❌ 错误：同一上下文跑多个 Flow
 # ✅ 正确：开多个终端窗口
+
+# 终端 1: 通用工作流 (默认)
+start-flow.bat
+
+# 终端 2: 后端任务
+start-flow.bat backend-crud
 ```
 
 ### 🔴 红线 3: 完成后立即归档
 ```bash
-# 自动归档
-py session_end.py "归档" --flow_id 20260318-xxx-001
+# 自动归档 (使用默认通用 Flow ID)
+py session_end.py "归档"
 
 # 只同步核心结论到主会话
 ```
@@ -166,14 +185,16 @@ flow-archive/
 
 **Quick Start:**
 ```bash
-# 1. 启动
-30-scripts-tools\start-flow.bat my-task
+# 1. 启动 (可选)
+30-scripts-tools\start-flow.bat
+# → 默认 Flow ID: 20260318-universal-workflow-001
 
 # 2. 执行任务
 # ... 你的工作 ...
 
-# 3. 归档
-py session_end.py "Done" --flow_id 20260318-my-task-001
+# 3. 归档 (自动使用默认 Flow ID)
+py session_end.py "Done"
+# → Flow ID: 20260318-universal-workflow-001
 ```
 
 ---

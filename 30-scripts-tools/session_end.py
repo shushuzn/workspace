@@ -228,23 +228,27 @@ def run_git_operations(commit_message: str, flow_id: str = None) -> bool:
 
 
 def main():
-    print_header("SESSION END - One-Click Workflow (v2.1 - Flow ID Support)")
+    print_header("SESSION END - One-Click Workflow (v2.2 - Universal Flow Default)")
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     
     # 解析参数 (支持 --flow_id)
     import argparse
     parser = argparse.ArgumentParser(description='Session End Workflow')
     parser.add_argument('commit_message', nargs='+', help='Git 提交消息')
-    parser.add_argument('--flow_id', type=str, help='工作流唯一 ID (例：20260318-backend-crud-001)')
+    parser.add_argument('--flow_id', type=str, 
+                       default='20260318-universal-workflow-001',
+                       help='工作流唯一 ID (默认：20260318-universal-workflow-001)')
     args = parser.parse_args()
     
     commit_message = " ".join(args.commit_message)
     flow_id = args.flow_id
     
     print_info(f"Commit message: \"{commit_message}\"")
-    if flow_id:
-        print_info(f"Flow ID: {flow_id}")
-        print_info(f"隔离模式：所有操作绑定 Flow ID")
+    print_info(f"Flow ID: {flow_id}")
+    if flow_id == '20260318-universal-workflow-001':
+        print_info(f"模式：通用工作流 (默认)")
+    else:
+        print_info(f"模式：隔离工作流")
     
     # 检查 tool_executor.py 是否存在
     executor_path = Path("30-scripts-tools\\tool_executor.py")

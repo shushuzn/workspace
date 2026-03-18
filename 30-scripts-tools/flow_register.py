@@ -47,7 +47,7 @@ def register_flow(flow_id: str, business_name: str, description: str = "") -> bo
     with open(FLOW_REGISTRY, 'w', encoding='utf-8') as f:
         json.dump(registry, f, indent=2, ensure_ascii=False)
     
-    print(f"✅ Flow registered: {flow_id}")
+    print(f"[OK] Flow registered: {flow_id}")
     print(f"   Directory: {flow_dir}")
     return True
 

@@ -1,6 +1,6 @@
 {
   "phase": "final",
-  "timestamp": "2026-03-18T22:33:37.913666",
+  "timestamp": "2026-03-18T22:40:02.160453",
   "checks": [
     {
       "id": "blocker-001",
@@ -27,7 +27,7 @@
       "blocking": true,
       "checked": false,
       "notes": "FAIL",
-      "evidence": "Uncommitted: 6 | Last commit: 8a7dc30 FLOW-20260318-flow-isolation-001 Commit review.json"
+      "evidence": "Error: 'NoneType' object has no attribute 'strip'"
     },
     {
       "id": "blocker-004",
@@ -74,7 +74,7 @@
       "remediation_days": 7,
       "checked": false,
       "notes": "FAIL",
-      "evidence": "Minor issues: 2708"
+      "evidence": "Minor issues: 2711"
     },
     {
       "id": "warning-003",
@@ -102,9 +102,9 @@
       "check": "check_new_tool_usage",
       "blocking": false,
       "remediation_days": 2,
-      "checked": true,
-      "notes": "OK",
-      "evidence": "No new tools in recent commits"
+      "checked": false,
+      "notes": "FAIL",
+      "evidence": "New tools: ['flow_register'] | Used: [] | Unused: ['flow_register']"
     },
     {
       "id": "warning-006",

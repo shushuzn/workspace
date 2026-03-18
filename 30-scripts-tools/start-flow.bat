@@ -17,31 +17,19 @@ setlocal enabledelayedexpansion
 
 REM 检查参数
 if "%~1"=="" (
-    echo.
-    echo ============================================================
-    echo Flow ID 工作流快速启动
-    echo ============================================================
-    echo.
-    echo 用法：start-flow.bat {业务名} "{任务描述}"
-    echo.
-    echo 示例:
-    echo   start-flow.bat backend-crud "Backend CRUD API development"
-    echo   start-flow.bat frontend-ui "Frontend dashboard UI"
-    echo   start-flow.bat api-integration "Third-party API integration"
-    echo.
-    echo ============================================================
-    exit /b 1
+    set BUSINESS_NAME=universal-workflow
+) else (
+    set BUSINESS_NAME=%1
 )
 
 REM 生成 Flow ID
-set BUSINESS_NAME=%1
 REM 使用 PowerShell 获取标准日期格式
 for /f "delims=" %%i in ('powershell -Command "Get-Date -Format 'yyyyMMdd'"') do set DATE=%%i
 set FLOW_ID=%DATE%-%BUSINESS_NAME%-001
 
 REM 任务描述 (可选)
 set TASK_DESC=%~2
-if not defined TASK_DESC set TASK_DESC=Flow execution
+if not defined TASK_DESC set TASK_DESC=%BUSINESS_NAME% task
 
 echo.
 echo ============================================================

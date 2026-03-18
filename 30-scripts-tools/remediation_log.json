@@ -1,7 +1,7 @@
 {
   "version": "1.0",
-  "created_at": "2026-03-18T22:04:47.147029",
-  "last_updated": "2026-03-18T22:04:47.147030",
+  "created_at": "2026-03-18T22:40:02.161269",
+  "last_updated": "2026-03-18T22:40:02.161270",
   "tasks": {
     "REM-20260318-E32C84": {
       "task_id": "REM-20260318-E32C84",
@@ -948,18 +948,120 @@
       "reminder_count": 0,
       "last_reminder": null,
       "notes": []
+    },
+    "REM-20260318-C914F6": {
+      "task_id": "REM-20260318-C914F6",
+      "fail_item_id": "blocker-001",
+      "source": "critic-\"multi-workflow-flow-isolation\"",
+      "title": "致命问题 0 个",
+      "description": "FAIL",
+      "severity": "blocker",
+      "created_at": "2026-03-18T22:40:02.161169",
+      "deadline": "2026-03-19T22:40:02.161160",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-08A8C3": {
+      "task_id": "REM-20260318-08A8C3",
+      "fail_item_id": "blocker-003",
+      "source": "critic-\"multi-workflow-flow-isolation\"",
+      "title": "代码/文档已提交 Git",
+      "description": "FAIL",
+      "severity": "blocker",
+      "created_at": "2026-03-18T22:40:02.161192",
+      "deadline": "2026-03-19T22:40:02.161190",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-51AC17": {
+      "task_id": "REM-20260318-51AC17",
+      "fail_item_id": "warning-001",
+      "source": "critic-\"multi-workflow-flow-isolation\"",
+      "title": "严重问题≤2 个",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T22:40:02.161204",
+      "deadline": "2026-03-25T22:40:02.161203",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-6BD156": {
+      "task_id": "REM-20260318-6BD156",
+      "fail_item_id": "warning-002",
+      "source": "critic-\"multi-workflow-flow-isolation\"",
+      "title": "一般问题≤10 个",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T22:40:02.161213",
+      "deadline": "2026-03-25T22:40:02.161212",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-CCE043": {
+      "task_id": "REM-20260318-CCE043",
+      "fail_item_id": "warning-005",
+      "source": "critic-\"multi-workflow-flow-isolation\"",
+      "title": "【ZS-006】工具有效使用 (新增工具)",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T22:40:02.161221",
+      "deadline": "2026-03-25T22:40:02.161220",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-4C5AEA": {
+      "task_id": "REM-20260318-4C5AEA",
+      "fail_item_id": "warning-007",
+      "source": "critic-\"multi-workflow-flow-isolation\"",
+      "title": "安全检查 (无高危漏洞)",
+      "description": "FAIL",
+      "severity": "warning",
+      "created_at": "2026-03-18T22:40:02.161227",
+      "deadline": "2026-03-25T22:40:02.161227",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
     }
   },
   "statistics": {
-    "total_tasks": 53,
+    "total_tasks": 59,
     "by_status": {
       "deferred": 5,
       "resolved": 15,
-      "open": 33
+      "open": 39
     },
     "by_severity": {
-      "blocker": 22,
-      "warning": 31
+      "blocker": 24,
+      "warning": 35
     },
     "overdue_count": 0,
     "completion_rate": 0.0

@@ -1,3 +1,6 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:44:02.943071
+# ---
 {
   "version": "1.0.0",
   "flows": {
@@ -27,14 +30,14 @@
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-backend-crud-001",
       "last_updated": "2026-03-18T22:32:37.052227"
     },
-    "20260318-universal-workflow-001": {
-      "business_name": "universal-workflow",
-      "description": "",
-      "created_at": "2026-03-18T22:46:04.399303",
+    "20260318-multi-workflow-001": {
+      "business_name": "multi-workflow",
+      "description": "\"极简多工作流隔离方案落地\"",
+      "created_at": "2026-03-18T22:39:20.322547",
       "status": "active",
-      "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-universal-workflow-001",
-      "last_updated": "2026-03-18T22:46:04.399693"
+      "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-multi-workflow-001",
+      "last_updated": "2026-03-18T22:39:20.322891"
     }
   },
-  "last_updated": "2026-03-18T22:46:04.399697"
+  "last_updated": "2026-03-18T22:39:20.322895"
 }
