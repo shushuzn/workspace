@@ -162,7 +162,7 @@ class P1IssueFixer:
             content = file_path.read_text(encoding='utf-8')
             original = content
             
-            # 模式 1: os.system('chcp 65001 >nul') → subprocess.run(['chcp', '65001'], shell=True, capture_output=True)
+            # 模式 1: subprocess.run(['chcp', '65001'], shell=True, capture_output=True) → subprocess.run(['chcp', '65001'], shell=True, capture_output=True)
             content = re.sub(
                 r"os\.system\(['\"]chcp 65001[^'\"]*['\"]\)",
                 "subprocess.run(['chcp', '65001'], shell=True, capture_output=True)",
@@ -176,7 +176,7 @@ class P1IssueFixer:
                 content
             )
             
-            # 模式 3: os.system(f'python "{xxx}"') → subprocess.run([sys.executable, str(xxx)])
+            # 模式 3: subprocess.run([sys.executable, str(xxx)]) → subprocess.run([sys.executable, str(xxx)])
             content = re.sub(
                 r"os\.system\(f'python \"\{([^}]+)\}\"'\)",
                 r"subprocess.run([sys.executable, str(\1)])",
@@ -189,14 +189,14 @@ class P1IssueFixer:
                 if 'os.system(cmd)' in line and 'subprocess' not in line:
                     content = content.replace('os.system(cmd)', 'subprocess.run(cmd, shell=True)')
             
-            # 模式 5: os.system(f'wscript "{vbs_path}"') → subprocess.run(['wscript', str(vbs_path)])
+            # 模式 5: subprocess.run(['wscript', str(vbs_path)]) → subprocess.run(['wscript', str(vbs_path)])
             content = re.sub(
                 r"os\.system\(f'wscript \"\{([^}]+)\}\"'\)",
                 r"subprocess.run(['wscript', str(\1)])",
                 content
             )
             
-            # 模式 6: os.system("pip install xxx") → subprocess.run([sys.executable, "-m", "pip", "install", "xxx"])
+            # 模式 6: subprocess.run([sys.executable, '-m', 'pip', 'install', 'xxx']) → subprocess.run([sys.executable, "-m", "pip", "install", "xxx"])
             pip_match = re.search(r"os\.system\([\"']pip install ([^\"']+)[\"']\)", content)
             if pip_match:
                 package = pip_match.group(1)
