@@ -1,0 +1,87 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:43:18.083643
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 200-280 of 636)
+        self.execution_log.append(log_entry)
+        
+        return {
+            "success": result.returncode == 0 and validation["passed"],
+            "output": result.stdout + result.stderr,
+            "validation": validation,
+            "tool_id": tool_id,
+            "command": command_template,
+            "execution_time_ms": execution_time
+        }
+    
+    def _get_default_parameters(self, tool: Dict) -> Dict:
+        """获取工具默认参数"""
+        defaults = {}
+        for param_name, param_def in tool.get("parameters", {}).items():
+            if "default" in param_def:
+                defaults[param_name] = param_def["default"]
+        return defaults
+    
+    def _validate_parameters(self, tool: Dict, parameters: Dict) -> None:
+        """
+        验证参数合法性
+        
+        Args:
+            tool: 工具定义
+            parameters: 传入参数
+            
+        Raises:
+            ValueError: 参数不合法
+        """
+        tool_params = tool.get("parameters", {})
+        
+        # 检查必填参数
+        for param_name, param_def in tool_params.items():
+            if param_def.get("required", False) and param_name not in parameters:
+                raise ValueError(f"Missing required parameter: {param_name}")
+        
+        # 检查参数类型和枚举
+        for param_name, value in parameters.items():
+            if param_name not in tool_params:
+                print_warning(f"Unknown parameter: {param_name} (ignored)")
+                continue
+            
+            param_def = tool_params[param_name]
+            
+            # 类型检查
+            expected_type = param_def.get("type", "string")
+            if expected_type == "integer" and not isinstance(value, int):
+                try:
+                    value = int(value)
+                except:
+                    raise ValueError(f"Parameter {param_name} must be integer")
+            
+            # 枚举检查
+            if "enum" in param_def and value not in param_def["enum"]:
+                raise ValueError(
+                    f"Parameter {param_name} must be one of: {param_def['enum']}"
+                )
+            
+            # 范围检查
+            if "min" in param_def and value < param_def["min"]:
+                raise ValueError(f"Parameter {param_name} must be >= {param_def['min']}")
+            if "max" in param_def and value > param_def["max"]:
+                raise ValueError(f"Parameter {param_name} must be <= {param_def['max']}")
+    
+    def _validate_result(self, tool: Dict, result: subprocess.CompletedProcess, params: Dict) -> Dict:
+        """
+        验证工具执行结果
+        
+        Args:
+            tool: 工具定义
+            result: 执行结果
+            params: 参数
+            
+        Returns:
+            验证结果：{"passed": bool, "rules_checked": List, "details": Dict}
+        """
+        validation_rules = tool.get("validation", {})
+        passed = result.returncode == 0
+        details = {}
+        
+
+[356 more lines. Use start_line=281 to continue.]

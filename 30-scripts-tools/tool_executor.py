@@ -80,9 +80,10 @@ class ToolExecutor:
     3. 实时生效 - 每次执行都读取最新定义
     """
     
-    def __init__(self):
+    def __init__(self, context: Dict = None):
         self.registry = self._load_registry()
         self.execution_log = []
+        self.context = context or {}
     
     def _load_registry(self) -> Dict:
         """
@@ -168,6 +169,12 @@ class ToolExecutor:
         # 填充参数
         for key, value in params.items():
             command_template = command_template.replace(f"{{{key}}}", str(value))
+        
+        # 填充特殊变量（datetime 已在文件顶部导入）
+        today = datetime.now().strftime("%Y-%m-%d")
+        command_template = command_template.replace("${TODAY}", today)
+        command_template = command_template.replace("${flow_id}", self.context.get("flow_id", "unknown"))
+        command_template = command_template.replace("${commit_message}", self.context.get("commit_message", ""))
         
         print_info(f"Executing: {command_template}")
         

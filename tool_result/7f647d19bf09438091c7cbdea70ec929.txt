@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:44:55.235936
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 380-410 of 643)
+                "steps": List[Dict],
+                "total_steps": int,
+                "passed_steps": int,
+                "execution_time_ms": int
+            }
+        """
+        start_time = datetime.now()
+        self.flow_id = flow_id  # 保存 Flow ID 用于日志隔离
+        
+        workflow_file = WORKFLOWS_DIR / f"{workflow_id}.json"
+        
+        if not workflow_file.exists():
+            raise FileNotFoundError(f"Workflow not found: {workflow_file}")
+        
+        with open(workflow_file, 'r', encoding='utf-8') as f:
+            workflow = json.load(f)
+        
+        print_header(f"Executing Workflow: {workflow_id}")
+        print_info(f"Total steps: {len(workflow['steps'])}")
+        
+        results = []
+        all_passed = True
+        
+        for step in workflow["steps"]:
+            step_num = step["step_id"]
+            tool_id = step["tool_id"]  # 只引用 ID
+            step_name = step.get("name", f"Step {step_num}")
+            params = step.get("parameters", {})
+            blocking = step.get("blocking", True)
+            
+            print(f"\n{Colors.BOLD}Step {step_num}/{len(workflow['steps'])}: {step_name}{Colors.RESET}")
+
+[233 more lines. Use start_line=411 to continue.]

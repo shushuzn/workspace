@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:45:13.792034
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 340-365 of 643)
+                            details["lines_check"] = f"FAIL ({lines} > {validation_rules['daily_note_lines_limit']})"
+                        else:
+                            details["lines_check"] = f"PASS ({lines} <= {validation_rules['daily_note_lines_limit']})"
+        
+        # 检查最小结果数
+        if "min_results" in validation_rules:
+            output = result.stdout + result.stderr
+            if "results" in output.lower() or "found" in output.lower():
+                for line in output.split('\n'):
+                    if 'result' in line.lower():
+                        match = re.search(r'(\d+)', line)
+                        if match:
+                            count = int(match.group(1))
+                            details["results_count"] = count
+                            if count < validation_rules["min_results"]:
+                                passed = False
+                                details["results_check"] = f"FAIL ({count} < {validation_rules['min_results']})"
+                            else:
+                                details["results_check"] = f"PASS ({count} >= {validation_rules['min_results']})"
+        
+        return {
+            "passed": passed,
+            "rules_checked": list(validation_rules.keys()),
+            "details": details,
+            "returncode": result.returncode
+        }
+
+[278 more lines. Use start_line=366 to continue.]
