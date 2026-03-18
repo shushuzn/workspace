@@ -354,6 +354,7 @@ def main():
     parser.add_argument('--json', action='store_true', help='输出 JSON')
     parser.add_argument('--resolve', type=str, help='解决任务 (task_id)')
     parser.add_argument('--commit', type=str, help='关联提交 SHA')
+    parser.add_argument('--progress', type=str, help='标记为进行中 (task_id)')
     
     args = parser.parse_args()
     
@@ -449,6 +450,24 @@ def main():
         print(f"  Title: {task.title}")
         print(f"  Status: {task.status}")
         print(f"  Commit: {args.commit or 'N/A'}")
+        return 0
+    
+    # 标记为进行中
+    if args.progress:
+        task_id = args.progress
+        if task_id not in tracker.tasks:
+            print(f"[ERROR] Task not found: {task_id}")
+            return 1
+        
+        task = tracker.tasks[task_id]
+        task.status = TaskStatus.IN_PROGRESS.value
+        if args.commit:
+            task.linked_commit = args.commit
+        
+        tracker._save()
+        print(f"Task {task_id} marked as in_progress")
+        print(f"  Title: {task.title}")
+        print(f"  Status: {task.status}")
         return 0
     
     # 默认显示状态
