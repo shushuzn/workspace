@@ -1,0 +1,70 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:28:39.777408
+# ---
+      "execution_time_ms": 304.917,
+      "step_id": 13,
+      "step_name": "Auto-Critic v7.0 Enhanced Review",
+      "blocking": false
+    },
+    {
+      "success": true,
+      "output": "============================================================\nQUALITY GATE CHECK\n============================================================\nFiles Checked: 334\nAverage Score: 99.7/100\nMinimum Required: 80\nStatus: PASS\n============================================================\n30-scripts-tools\\fix_workspace_paths.py:3: SyntaxWarning: invalid escape sequence '\\O'\n  \"\"\"\n30-scripts-tools\\innovation_pattern_matcher.py:10: SyntaxWarning: invalid escape sequence '\\O'\n  \"\"\"\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "min_passing_score",
+          "checks"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "quality-gate",
+      "command": "py 30-scripts-tools\\quality_gate.py --check 30-scripts-tools/*.py --min-score 80",
+      "execution_time_ms": 6751.384,
+      "step_id": 14,
+      "step_name": "Quality Gate Check",
+      "blocking": true
+    },
+    {
+      "success": true,
+      "output": "============================================================\nAUTO-FIXING P1 ISSUES\n============================================================\n\nFixed 0 files\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "os_system_remaining",
+          "eval_exec_remaining"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "p1-issue-fixer",
+      "command": "py 30-scripts-tools\\p1_issue_fixer.py --fix",
+      "execution_time_ms": 1812.996,
+      "step_id": 15,
+      "step_name": "P1 Issue Auto-Fix",
+      "blocking": true
+    },
+    {
+      "success": false,
+      "output": "usage: issue_scanner.py [-h] [--path PATH]\n                        [--level {all,critical,major,minor,info}] [--json]\nissue_scanner.py: error: unrecognized arguments: --format json\n",
+      "validation": {
+        "passed": false,
+        "rules_checked": [
+          "categories",
+          "severity_levels"
+        ],
+        "details": {},
+        "returncode": 2
+      },
+      "tool_id": "issue-scanner",
+      "command": "py 30-scripts-tools\\issue_scanner.py --path 30-scripts-tools --format json",
+      "execution_time_ms": 296.67900000000003,
+      "step_id": 16,
+      "step_name": "Issue Scanner",
+      "blocking": true
+    }
+  ],
+  "total_steps": 16,
+  "passed_steps": 10,
+  "execution_time_ms": 14917.025000000001
+}

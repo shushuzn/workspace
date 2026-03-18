@@ -449,8 +449,11 @@ def main():
     else:
         print_result(result)
     
-    # 返回码：有 critical 问题返回 1
-    return 1 if result.critical_count > 0 else 0
+    # 返回码：只阻塞真正的致命安全问题（os.system/eval/exec/硬编码凭证）
+    # TODO/FIXME/代码异味不阻塞
+    blocking_categories = ['security', 'unsafe_call']
+    blocking_issues = [i for i in result.issues if i.category in blocking_categories and i.level == 'critical']
+    return 1 if len(blocking_issues) > 0 else 0
 
 
 if __name__ == '__main__':

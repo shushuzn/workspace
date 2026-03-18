@@ -1,0 +1,62 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-18T23:29:07.909069
+# ---
+Command failed with exit code 1.
+[stdout]
+
+============================================================
+Issue Scanner Report
+============================================================
+
+[Overview]
+  Total Issues:    1020
+  Files Scanned:   644
+  Scan Duration:   1459ms
+
+[By Level]
+  Critical:  131 🔴
+  Major:       0 🟠
+  Minor:     577 🟡
+  Info:      312 🔵
+
+[Top Issues]
+
+  🟡 [todo] auto_test_generator.py:169
+      TODO: Implement test logic
+      → Resolve todo
+
+  🟡 [todo] auto_test_generator.py:187
+      TODO: Implement test logic
+      → Resolve todo
+
+  🟡 [todo] dashboard_health_widget.py:142
+      TODO: 实现 SSH 上传或 API 推送
+      → Resolve todo
+
+  🟡 [todo] file-organizer.py:478
+      TODO: 实现备份
+      → Resolve todo
+
+  🟡 [todo] innovator_auto_executor.py:197
+      TODO: Implement tool listing
+      → Resolve todo
+
+  🟡 [todo] innovator_auto_executor.py:202
+      TODO: Implement tool execution
+      → Resolve todo
+
+  🟡 [todo] innovator_auto_executor.py:207
+      TODO: Implement workflow execution
+      → Resolve todo
+
+  🟡 [todo] issue_scanner.py:40
+      Hack: erNews 收集
+      → Resolve hack
+
+  🟡 [todo] master_orchestrator.py:61
+      TODO: Implement tool listing
+      → Resolve todo
+
+  🟡 [todo] master_orchestrator.py:66
+      TODO: Implement tool execution
+      → Resolve todo
