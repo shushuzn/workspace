@@ -24,7 +24,7 @@
     },
     {
       "success": true,
-      "output": "============================================================\nFast Load - 快速加载核心上下文\n============================================================\n✅ SOUL.md: 13.1KB\n✅ USER.md: 10.6KB\n✅ AGENTS.md: 11.4KB\n✅ TOOLS.md: 5.7KB\n✅ HEARTBEAT.md: 5.6KB\n✅ 13-memory/MEMORY.md: 9.2KB\n✅ 13-memory/2026-03-18.md: 2.1KB\n============================================================\n总大小：57.7KB (0.06MB)\nToken 估算：~14778 tokens\n============================================================\n\n全工作区：566.49MB\n节省：100.0%\n速度提升：10049.2x\n",
+      "output": "============================================================\nFast Load - 快速加载核心上下文\n============================================================\n✅ SOUL.md: 13.1KB\n✅ USER.md: 10.6KB\n✅ AGENTS.md: 11.4KB\n✅ TOOLS.md: 5.7KB\n✅ HEARTBEAT.md: 5.6KB\n✅ 13-memory/MEMORY.md: 9.2KB\n✅ 13-memory/2026-03-18.md: 2.1KB\n============================================================\n总大小：57.7KB (0.06MB)\nToken 估算：~14778 tokens\n============================================================\n\n全工作区：566.55MB\n节省：100.0%\n速度提升：10050.3x\n",
       "validation": {
         "passed": true,
         "rules_checked": [
@@ -39,7 +39,7 @@
       },
       "tool_id": "context-verify",
       "command": "py 30-scripts-tools\\fast_load.py",
-      "execution_time_ms": 3692.806,
+      "execution_time_ms": 3579.4320000000002,
       "step_id": 2,
       "step_name": "Context Size Verification",
       "blocking": true
@@ -59,7 +59,7 @@
       },
       "tool_id": "session-compress",
       "command": "py 30-scripts-tools\\post_session_compress.py --auto",
-      "execution_time_ms": 123.222,
+      "execution_time_ms": 118.855,
       "step_id": 3,
       "step_name": "Daily Note Check",
       "blocking": true
@@ -79,14 +79,14 @@
       },
       "tool_id": "memory-importance-assessor",
       "command": "py 30-scripts-tools\\memory_importance_assessor.py --memory \"13-memory/${TODAY}.md\"",
-      "execution_time_ms": 141.87,
+      "execution_time_ms": 130.12099999999998,
       "step_id": 4,
       "step_name": "Memory Importance Assessment",
       "blocking": false
     },
     {
       "success": false,
-      "output": "\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94m🔍 MEMORY CONSISTENCY CHECKER\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nTime: 2026-03-18 22:57:21\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mLOADING DATA\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[92m✅ Loaded MEMORY.md: 12 entries\u001b[0m\n\u001b[92m✅ Loaded memory_index.json: 46 entries\u001b[0m\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mRUNNING CONSISTENCY CHECKS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nCheck 1: Entry Count Matching\n\u001b[91m❌ Entry count mismatch: MEMORY.md=12, index=46\u001b[0m\n\nCheck 2: Tag Statistics Accuracy\n\u001b[92m✅ Tag statistics match\u001b[0m\n\nCheck 3: Broken Tag Links\n\u001b[92m✅ No broken tag links\u001b[0m\n\nCheck 4: Duplicate Entries\n\u001b[92m✅ No duplicate entries\u001b[0m\n\nCheck 5: Orphaned Entries\n\u001b[93m⚠️  Orphaned entries (in index but not MEMORY.md): 34\u001b[0m\n   - All Files in English\n   - HEARTBEAT Automation\n   - Critic Required Every Step\n   - File Naming Consistency\n   - Encoding Issues (2026-03-17)\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mCONSISTENCY CHECK SUMMARY\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nPassed: 3/5\n\n❌ Entry Count\n✅ Tag Statistics\n✅ Broken Links\n✅ Duplicates\n❌ Orphaned Entries\n\nReport saved to: 30-scripts-tools\\consistency_check_report.json\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mFINAL STATUS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[91m❌ MEMORY SYSTEM CONSISTENCY: FAIL\u001b[0m\n\u001b[93m⚠️  2 check(s) failed\u001b[0m\n",
+      "output": "\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94m🔍 MEMORY CONSISTENCY CHECKER\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nTime: 2026-03-18 23:02:16\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mLOADING DATA\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[92m✅ Loaded MEMORY.md: 12 entries\u001b[0m\n\u001b[92m✅ Loaded memory_index.json: 46 entries\u001b[0m\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mRUNNING CONSISTENCY CHECKS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nCheck 1: Entry Count Matching\n\u001b[91m❌ Entry count mismatch: MEMORY.md=12, index=46\u001b[0m\n\nCheck 2: Tag Statistics Accuracy\n\u001b[92m✅ Tag statistics match\u001b[0m\n\nCheck 3: Broken Tag Links\n\u001b[92m✅ No broken tag links\u001b[0m\n\nCheck 4: Duplicate Entries\n\u001b[92m✅ No duplicate entries\u001b[0m\n\nCheck 5: Orphaned Entries\n\u001b[93m⚠️  Orphaned entries (in index but not MEMORY.md): 34\u001b[0m\n   - Phase 9: Production Optimization (2026-03-17)\n   - 🔍 Attention to Detail (2026-03-06 23:43)\n   - 2. Feishu Integration ✅\n   - Git Permissions (2026-03-17)\n   - File-Based Context Management\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mCONSISTENCY CHECK SUMMARY\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nPassed: 3/5\n\n❌ Entry Count\n✅ Tag Statistics\n✅ Broken Links\n✅ Duplicates\n❌ Orphaned Entries\n\nReport saved to: 30-scripts-tools\\consistency_check_report.json\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mFINAL STATUS\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n\u001b[91m❌ MEMORY SYSTEM CONSISTENCY: FAIL\u001b[0m\n\u001b[93m⚠️  2 check(s) failed\u001b[0m\n",
       "validation": {
         "passed": false,
         "rules_checked": [
@@ -98,7 +98,7 @@
       },
       "tool_id": "memory-consistency-checker",
       "command": "py 30-scripts-tools\\memory_consistency_checker.py",
-      "execution_time_ms": 122.849,
+      "execution_time_ms": 119.879,
       "step_id": 5,
       "step_name": "Memory Consistency Check",
       "blocking": false
@@ -117,49 +117,111 @@
       },
       "tool_id": "memory-tag-search",
       "command": "py 30-scripts-tools\\memory_tag_search.py --tag critical --limit 3",
-      "execution_time_ms": 116.507,
+      "execution_time_ms": 107.034,
       "step_id": 6,
       "step_name": "Tag Search Test",
       "blocking": false
     },
     {
+      "success": true,
+      "output": "\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94m🏁 MEMORY SYSTEM BENCHMARK\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nTime: 2026-03-18 23:02:17\nPython: Python 3.13.2\n\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mTEST 1: Tag Search Performance\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n✅ Tag Search (--tag critical)\n   Time: 95.96ms (Target: <1000ms)\n   Status: PASS\n\n   Min: 92.80ms, Max: 101.80ms\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mTEST 2: Index Generation Performance\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n✅ Index Generation\n   Time: 107.34ms (Target: <5000ms)\n   Status: PASS\n\n   Min: 93.89ms, Max: 143.69ms\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mTEST 3: Session Compression Performance\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n✅ Session Compression (import)\n   Time: 92.20ms (Target: <2000ms)\n   Status: PASS\n\n   Min: 84.78ms, Max: 111.92ms\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mTEST 4: Full-Text Search Performance\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n✅ Full-Text Search (keyword='critic')\n   Time: 99.57ms (Target: <1000ms)\n   Status: PASS\n\n   Min: 94.56ms, Max: 111.83ms\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94mTEST 5: Memory Load & Parse Performance\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\n✅ MEMORY.md Load & Parse\n   Time: 83.42ms (Target: <500ms)\n   Status: PASS\n\n   Min: 81.37ms, Max: 87.35ms\n\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\u001b[1m\u001b[94m📊 BENCHMARK SUMMARY\u001b[0m\n\u001b[1m\u001b[94m============================================================\u001b[0m\n\nPassed: 5/5\n\n✅ Tag Search (--tag critical): 95.96ms (target: <1000ms)\n✅ Index Generation: 107.34ms (target: <5000ms)\n✅ Session Compression (import): 92.20ms (target: <2000ms)\n✅ Full-Text Search (keyword='critic'): 99.57ms (target: <1000ms)\n✅ MEMORY.md Load & Parse: 83.42ms (target: <500ms)\n\n\u001b[92mOverall Performance: EXCELLENT\u001b[0m\nAverage Time: 95.70ms\n\nResults saved to: 30-scripts-tools\\benchmark_results.json\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "performance_targets",
+          "schedule"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "memory-benchmark",
+      "command": "py 30-scripts-tools\\memory_benchmark.py",
+      "execution_time_ms": 4012.2790000000005,
       "step_id": 7,
       "step_name": "Memory Benchmark",
-      "tool_id": "memory-benchmark",
-      "skipped": true,
-      "reason": "Conditional: runs on Monday only"
+      "blocking": false
     },
     {
+      "success": true,
+      "output": "\n[Cleanup Results: 5 memories]\n  Total: 18,666 → 18,018 bytes (3.5% reduction)\n\n2026-03-12.md:\n  2,345 → 2,241 bytes (4.4% reduction)\n  Empty lines removed: 56\n  Duplicate lines removed: 8\n\n2026-03-13.md:\n  3,311 → 3,148 bytes (4.9% reduction)\n  Empty lines removed: 44\n  Duplicate lines removed: 11\n\n2026-03-14.md:\n  2,292 → 2,196 bytes (4.2% reduction)\n  Empty lines removed: 30\n  Duplicate lines removed: 6\n\n2026-03-17.md:\n  9,160 → 8,938 bytes (2.4% reduction)\n  Empty lines removed: 69\n  Duplicate lines removed: 23\n\n2026-03-18.md:\n  1,558 → 1,495 bytes (4.0% reduction)\n  Empty lines removed: 19\n  Duplicate lines removed: 2\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "similarity_algorithm",
+          "duplicate_types"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "memory-cleanup-compress",
+      "command": "py 30-scripts-tools\\memory_cleanup_compress.py --batch --days 7",
+      "execution_time_ms": 160.441,
       "step_id": 8,
       "step_name": "Weekly Memory Cleanup",
-      "tool_id": "memory-cleanup-compress",
-      "skipped": true,
-      "reason": "Conditional: runs on Sunday only"
+      "blocking": false
     },
     {
+      "success": true,
+      "output": "\n============================================================\nMemory Quality Report\n============================================================\n\n[Overview]\n  Total Memories: 8\n  Average Score:  64.82/100\n\n[Grade Distribution]\n  A:   0 (  0.0%) \n  B:   1 ( 12.5%) ██\n  C:   2 ( 25.0%) █████\n  D:   3 ( 37.5%) ███████\n  F:   2 ( 25.0%) █████\n\n[High Quality (1)]\n  • 2026-03-10.md\n\n[Low Quality (5)]\n  • 2026-03-13.md\n  • 2026-03-11.md\n  • 2026-03-18.md\n  • 2026-03-12.md\n  • 2026-03-07.md\n\n[Recommendations]\n  • 发现 2 条低质量记忆 (F 级)，建议归档或删除\n  • 整体质量偏低，建议改进记录习惯\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "grade_levels",
+          "dimensions",
+          "total_score_max"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "memory-quality-scorer",
+      "command": "py 30-scripts-tools\\memory_quality_scorer.py --report --days 14",
+      "execution_time_ms": 166.627,
       "step_id": 9,
       "step_name": "Weekly Quality Assessment",
-      "tool_id": "memory-quality-scorer",
-      "skipped": true,
-      "reason": "Conditional: runs on Sunday only"
+      "blocking": false
     },
     {
+      "success": true,
+      "output": "\n============================================================\nHybrid Compression Pipeline - Report\n============================================================\n\n[Overview]\n  Total Memories:     5\n  Original Size:      18,666 bytes\n  Final Size:         10,384 bytes\n  Compression Ratio:  44.4% reduction\n\n[Strategy Distribution]\n  tiered_heavy             :   2 ( 40.0%)\n  tiered_standard          :   2 ( 40.0%)\n  tiered_light             :   1 ( 20.0%)\n\n[Quality Distribution]\n  high      :   4 ( 80.0%)\n  medium    :   1 ( 20.0%)\n  low       :   0 (  0.0%)\n\n[Recommendations]\n  • 记忆质量整体良好，保持当前实践\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "quality_threshold",
+          "importance_threshold",
+          "strategies"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "memory-hybrid-pipeline",
+      "command": "py 30-scripts-tools\\memory_hybrid_pipeline.py --batch --days 7",
+      "execution_time_ms": 145.30100000000002,
       "step_id": 10,
       "step_name": "Weekly Hybrid Compression",
-      "tool_id": "memory-hybrid-pipeline",
-      "skipped": true,
-      "reason": "Conditional: runs on Sunday only"
+      "blocking": false
     },
     {
+      "success": true,
+      "output": "\n============================================================\nIncremental Compression - Diff Report\n============================================================\n\n[Overview]\n  Total Memories:        5\n  Total Original Size:   18,666 bytes\n  Total Compressed Size: 18,681 bytes\n  Overall Compression:   -0.1% reduction\n\n[Content Analysis]\n  Average Redundancy Rate:  0.3%\n  Average New Content:      99.6%\n\n[Details]\n  2026-03-18.md: 0.0% (new: 100.0%)\n  2026-03-17.md: 0.0% (new: 100.0%)\n  2026-03-14.md: 0.7% (new: 97.9%)\n  2026-03-13.md: -1.0% (new: 100.0%)\n  2026-03-12.md: 0.0% (new: 100.0%)\n",
+      "validation": {
+        "passed": true,
+        "rules_checked": [
+          "algorithm",
+          "redundancy_threshold"
+        ],
+        "details": {},
+        "returncode": 0
+      },
+      "tool_id": "memory-incremental-compressor",
+      "command": "py 30-scripts-tools\\memory_incremental_compressor.py --diff --days 7",
+      "execution_time_ms": 163.262,
       "step_id": 11,
       "step_name": "Weekly Incremental Compression",
-      "tool_id": "memory-incremental-compressor",
-      "skipped": true,
-      "reason": "Conditional: runs on Sunday only"
+      "blocking": false
     },
     {
       "success": false,
-      "output": "usage: auto-critic.py [-h] -t TASK -p {start,mid,final}\n                      [--context-file CONTEXT_FILE]\nauto-critic.py: error: unrecognized arguments: - 19 ���������˵��\n",
+      "output": "usage: auto-critic.py [-h] -t TASK -p {start,mid,final}\n                      [--context-file CONTEXT_FILE]\nauto-critic.py: error: unrecognized arguments: �����ȫ������ - ǿ���������в���\n",
       "validation": {
         "passed": false,
         "rules_checked": [
@@ -173,15 +235,15 @@
         "returncode": 2
       },
       "tool_id": "auto-critic",
-      "command": "py 30-scripts-tools\\auto-critic.py -t \"\"防护层级统计查询 - 19 层防护配置说明\"\" -p final",
-      "execution_time_ms": 128.395,
+      "command": "py 30-scripts-tools\\auto-critic.py -t \"\"19 层防护全量测试 - 强制运行所有步骤\"\" -p final",
+      "execution_time_ms": 126.627,
       "step_id": 12,
       "step_name": "Auto-Critic Review",
       "blocking": false
     },
     {
       "success": false,
-      "output": "usage: auto-critic_v7.py [-h] -t TASK [-p {start,mid,final}]\n                         [--create-remediation] [--flow_id FLOW_ID]\nauto-critic_v7.py: error: unrecognized arguments: - 19 ���������˵��\n",
+      "output": "usage: auto-critic_v7.py [-h] -t TASK [-p {start,mid,final}]\n                         [--create-remediation] [--flow_id FLOW_ID]\nauto-critic_v7.py: error: unrecognized arguments: �����ȫ������ - ǿ���������в���\n",
       "validation": {
         "passed": false,
         "rules_checked": [
@@ -196,8 +258,8 @@
         "returncode": 2
       },
       "tool_id": "auto-critic-v7",
-      "command": "py 30-scripts-tools\\auto-critic_v7.py -t \"\"防护层级统计查询 - 19 层防护配置说明\"\" -p final --create-remediation",
-      "execution_time_ms": 157.42700000000002,
+      "command": "py 30-scripts-tools\\auto-critic_v7.py -t \"\"19 层防护全量测试 - 强制运行所有步骤\"\" -p final --create-remediation",
+      "execution_time_ms": 144.886,
       "step_id": 13,
       "step_name": "Auto-Critic v7.0 Enhanced Review",
       "blocking": false
@@ -216,7 +278,7 @@
       },
       "tool_id": "quality-gate",
       "command": "py 30-scripts-tools\\quality_gate.py --check {pattern} --min-score {score}",
-      "execution_time_ms": 125.68599999999999,
+      "execution_time_ms": 125.247,
       "step_id": 14,
       "step_name": "Quality Gate Check",
       "blocking": false
@@ -235,7 +297,7 @@
       },
       "tool_id": "p1-issue-fixer",
       "command": "py 30-scripts-tools\\p1_issue_fixer.py --fix",
-      "execution_time_ms": 807.25,
+      "execution_time_ms": 824.8389999999999,
       "step_id": 15,
       "step_name": "P1 Issue Auto-Fix",
       "blocking": false
@@ -254,7 +316,7 @@
       },
       "tool_id": "issue-scanner",
       "command": "py 30-scripts-tools\\issue_scanner.py --path 30-scripts-tools --format json",
-      "execution_time_ms": 138.452,
+      "execution_time_ms": 136.534,
       "step_id": 16,
       "step_name": "Issue Scanner",
       "blocking": false
@@ -262,5 +324,5 @@
   ],
   "total_steps": 16,
   "passed_steps": 9,
-  "execution_time_ms": 5681.825
+  "execution_time_ms": 10188.867999999999
 }

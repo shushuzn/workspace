@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-18T22:59:34.339406
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\workflows\session-end.json  (lines 80-150 of 231)
+      "step_id": 7,
+      "name": "Memory Benchmark",
+      "description": "记忆系统性能测试（仅周一运行）",
+      "tool_id": "memory-benchmark",
+      "stage": "pre-commit",
+      "parameters": {},
+      "blocking": false,
+      "timeout_seconds": 60,
+      "conditional": {
+        "run_only_on": "Monday"
+      }
+    },
+    {
+      "step_id": 8,
+      "name": "Weekly Memory Cleanup",
+      "description": "每周日运行去重清理（仅周日）",
+      "tool_id": "memory-cleanup-compress",
+      "stage": "pre-commit",
+      "parameters": {
+        "days": 7
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "conditional": {
+        "run_only_on": "Sunday"
+      }
+    },
+    {
+      "step_id": 9,
+      "name": "Weekly Quality Assessment",
+      "description": "每周日运行质量评分（仅周日）",
+      "tool_id": "memory-quality-scorer",
+      "stage": "pre-commit",
+      "parameters": {
+        "days": 14
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "conditional": {
+        "run_only_on": "Sunday"
+      }
+    },
+    {
+      "step_id": 10,
+      "name": "Weekly Hybrid Compression",
+      "description": "每周日运行混合压缩（仅周日）",
+      "tool_id": "memory-hybrid-pipeline",
+      "stage": "pre-commit",
+      "parameters": {
+        "days": 7
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "conditional": {
+        "run_only_on": "Sunday"
+      }
+    },
+    {
+      "step_id": 11,
+      "name": "Weekly Incremental Compression",
+      "description": "每周日运行增量压缩（仅周日）",
+      "tool_id": "memory-incremental-compressor",
+      "stage": "pre-commit",
+      "parameters": {
+        "days": 7
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "conditional": {
+        "run_only_on": "Sunday"
+      }
+
+[81 more lines. Use start_line=151 to continue.]

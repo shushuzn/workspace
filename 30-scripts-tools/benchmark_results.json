@@ -1,43 +1,43 @@
 {
-  "timestamp": "2026-03-18T17:53:23.080441",
+  "timestamp": "2026-03-18T23:02:21.087383",
   "results": [
     {
       "name": "Tag Search (--tag critical)",
-      "avg_ms": 93.01,
-      "min_ms": 89.76,
-      "max_ms": 99.61,
+      "avg_ms": 95.96,
+      "min_ms": 92.8,
+      "max_ms": 101.8,
       "target_ms": 1000,
       "status": "PASS"
     },
     {
       "name": "Index Generation",
-      "avg_ms": 95.69,
-      "min_ms": 91.16,
-      "max_ms": 101.37,
+      "avg_ms": 107.34,
+      "min_ms": 93.89,
+      "max_ms": 143.69,
       "target_ms": 5000,
       "status": "PASS"
     },
     {
       "name": "Session Compression (import)",
-      "avg_ms": 90.66,
-      "min_ms": 84.91,
-      "max_ms": 97.34,
+      "avg_ms": 92.2,
+      "min_ms": 84.78,
+      "max_ms": 111.92,
       "target_ms": 2000,
       "status": "PASS"
     },
     {
       "name": "Full-Text Search (keyword='critic')",
-      "avg_ms": 94.87,
-      "min_ms": 89.42,
-      "max_ms": 104.23,
+      "avg_ms": 99.57,
+      "min_ms": 94.56,
+      "max_ms": 111.83,
       "target_ms": 1000,
       "status": "PASS"
     },
     {
       "name": "MEMORY.md Load & Parse",
-      "avg_ms": 85.5,
-      "min_ms": 79.11,
-      "max_ms": 91.23,
+      "avg_ms": 83.42,
+      "min_ms": 81.37,
+      "max_ms": 87.35,
       "target_ms": 500,
       "status": "PASS"
     }
@@ -45,7 +45,7 @@
   "summary": {
     "passed": 5,
     "total": 5,
-    "avg_ms": 91.95,
+    "avg_ms": 95.7,
     "rating": "EXCELLENT"
   }
 }
