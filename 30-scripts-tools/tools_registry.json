@@ -1,5 +1,5 @@
 {
-  "version": "1.3.0",
+  "version": "1.4.0",
   "last_updated": "2026-03-18T22:12:32.445452",
   "changes": [
     "Added auto-critic-v7 with issue detection and remediation tracking",
@@ -11,7 +11,8 @@
     "Added p1-issue-fixer for automated os.system/eval/exec replacement",
     "Added brainstorm workflow tools (define, diverge, prioritize, action)",
     "Added brainstorm workflow tools (define, diverge, prioritize, action)",
-    "Brainstorm workflow archived in flow-archive/20260318-brainstorm-001/"
+    "Brainstorm workflow archived in flow-archive/20260318-brainstorm-001/",
+    "Added sub-workflows as tools (session-end, brainstorm)"
   ],
   "description": "唯一工具库 - 全系统唯一真值来源",
   "principles": [
@@ -813,6 +814,50 @@
       "review_required": false,
       "blocking": true,
       "timeout_seconds": 600
+    },
+    "workflow-session-end": {
+      "tool_id": "workflow-session-end",
+      "name": "Session End Sub-Workflow",
+      "description": "子工作流 - 会话结束处理 (主工作流专用)",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\tool_executor.py --workflow session-end",
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001",
+      "parameters": {
+        "commit_message": {
+          "type": "string",
+          "required": true,
+          "description": "Git 提交信息"
+        }
+      },
+      "triggers": [
+        "main_workflow_call"
+      ],
+      "review_required": false,
+      "blocking": true,
+      "timeout_seconds": 120
+    },
+    "workflow-brainstorm": {
+      "tool_id": "workflow-brainstorm",
+      "name": "Brainstorm Sub-Workflow",
+      "description": "子工作流 - 头脑风暴 (主工作流专用)",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\tool_executor.py --workflow brainstorm-001",
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001",
+      "parameters": {
+        "topic": {
+          "type": "string",
+          "required": false,
+          "description": "头脑风暴主题"
+        }
+      },
+      "triggers": [
+        "main_workflow_call"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 300
     }
   },
   "workflows": {

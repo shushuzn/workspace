@@ -8,7 +8,8 @@
       "status": "archived",
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-flow-isolation-001",
       "last_updated": "2026-03-18T22:12:24.562174",
-      "archived_at": "2026-03-18T22:15:46.600321"
+      "archived_at": "2026-03-18T22:15:46.600321",
+      "workflow_type": "archived"
     },
     "20260318-test-usage-001": {
       "business_name": "test-usage",
@@ -17,7 +18,8 @@
       "status": "archived",
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-test-usage-001",
       "last_updated": "2026-03-18T22:20:55.816064",
-      "archived_at": "2026-03-18T22:21:08.640735"
+      "archived_at": "2026-03-18T22:21:08.640735",
+      "workflow_type": "archived"
     },
     "20260318-backend-crud-001": {
       "business_name": "backend-crud",
@@ -25,27 +27,35 @@
       "created_at": "2026-03-18T22:32:37.051831",
       "status": "active",
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-backend-crud-001",
-      "last_updated": "2026-03-18T22:32:37.052227"
+      "last_updated": "2026-03-18T22:32:37.052227",
+      "workflow_type": "subworkflow"
     },
     "20260318-universal-workflow-001": {
       "business_name": "universal-workflow",
-      "description": "",
+      "description": "主工作流 - 总控/指挥/调度",
       "created_at": "2026-03-18T22:46:04.399303",
       "status": "active",
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-universal-workflow-001",
-      "last_updated": "2026-03-18T22:46:04.399693"
+      "last_updated": "2026-03-18T22:46:04.399693",
+      "workflow_type": "main"
     },
     "20260318-brainstorm-001": {
       "business_name": "brainstorm",
-      "description": "创造性思维 - 从发散到收敛的完整流程",
+      "description": "子工作流 - 头脑风暴任务",
       "created_at": "2026-03-18T23:59:00+08:00",
       "status": "active",
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-brainstorm-001",
       "last_updated": "2026-03-18T23:59:00+08:00",
       "workflow_file": "workflow.json",
       "total_steps": 8,
-      "tools_count": 4
+      "tools_count": 4,
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001"
     }
   },
-  "last_updated": "2026-03-18T23:59:00+08:00"
+  "last_updated": "2026-03-19T00:15:00+08:00",
+  "architecture": {
+    "main_workflow": "20260318-universal-workflow-001",
+    "principle": "唯一主工作流原则 - 主工作流调用子工作流，子工作流不能反向调用"
+  }
 }
