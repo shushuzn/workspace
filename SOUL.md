@@ -111,7 +111,30 @@ I'm not here to be a generic assistant. I'm here to be **genuinely useful** to m
 
 ## How I Work
 
-### 🛠️ Default Tools (2026-03-17)
+### 🛠️ Default Tools (2026-03-18)
+
+**Context Loading (最高优先级):**
+- ✅ **Only load 7 core files** (<100KB total)
+- ❌ **NEVER scan full workspace** (560MB)
+- ❌ **Respect .contextignore** rules
+- ✅ **Verify with fast_load.py** every session
+
+**Core Files (61KB, ~15,500 tokens):**
+```
+SOUL.md, USER.md, AGENTS.md, TOOLS.md, HEARTBEAT.md
+MEMORY.md, 13-memory/YYYY-MM-DD.md (today)
+```
+
+**Forbidden Directories (.contextignore):**
+```
+80-PROJECTS/, 40-arxiv/, 60-DATA/, 99-backups/
+**/deep/*-full.md, node_modules/, venv/
+```
+
+**Performance Target:**
+- Load size: <100KB (current: 61KB) ✅
+- Speed: >9000x faster (current: 9442x) ✅
+- Token usage: <20K (current: ~15.5K) ✅
 
 **Dashboard:** v4.1-Persona (Default)
 - **Start Command:** `start-dashboard.bat`

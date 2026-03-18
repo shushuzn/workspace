@@ -63,3 +63,18 @@ models/
 # 备份
 security_backups/
 99-backups/
+
+# 子仓库 (独立上下文)
+80-PROJECTS/
+
+# 数据收集器
+40-arxiv/
+41-medium/
+42-hackernews/
+60-DATA/
+08-collectors/
+
+# 归档
+99-archive-归档/
+90-archive/
+91-logs/

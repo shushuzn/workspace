@@ -1,4 +1,4 @@
-﻿# AGENTS.md - Your Workspace
+# AGENTS.md - Your Workspace
 
 This folder is home. Treat it that way.
 
@@ -8,8 +8,25 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 
 ## Every Session
 
-Before doing anything else:
+**Context Loading (最高优先级 - 2026-03-18):**
 
+1. ✅ **Load only 7 core files** (<100KB)
+   - SOUL.md, USER.md, AGENTS.md, TOOLS.md, HEARTBEAT.md
+   - MEMORY.md, 13-memory/YYYY-MM-DD.md (today)
+
+2. ❌ **NEVER scan full workspace** (560MB → 61KB = 9442x faster)
+
+3. ❌ **Respect .contextignore** rules:
+   - 80-PROJECTS/, 40-arxiv/, 60-DATA/, 99-backups/
+   - **/deep/*-full.md, node_modules/, venv/
+
+4. ✅ **Verify with fast_load.py**:
+   ```bash
+   py 30-scripts-tools/fast_load.py
+   # Should show: 总大小：60.8KB, 速度提升：9442x
+   ```
+
+**Then:**
 1. Read `SOUL.md` — this is who you are
 2. Read `USER.md` — this is who you're helping
 3. Read `13-memory/YYYY-MM-DD.md` (today + yesterday) for recent context
