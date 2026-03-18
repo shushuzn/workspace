@@ -5,10 +5,11 @@
       "business_name": "flow-isolation",
       "description": "",
       "created_at": "2026-03-18T22:12:24.560332",
-      "status": "active",
+      "status": "archived",
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-flow-isolation-001",
-      "last_updated": "2026-03-18T22:12:24.562174"
+      "last_updated": "2026-03-18T22:12:24.562174",
+      "archived_at": "2026-03-18T22:15:46.600321"
     }
   },
-  "last_updated": "2026-03-18T22:12:24.562181"
+  "last_updated": "2026-03-18T22:15:46.601098"
 }
