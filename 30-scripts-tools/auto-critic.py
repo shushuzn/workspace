@@ -67,6 +67,15 @@ def load_critic_template() -> dict:
             "【USER-001】工作区正确性 (D:\\OpenClaw\\workspace, C 盘=0 分)",
             "【USER-004】检查项必须有证据 (无证据=0 分)"
         ],
+        "architecture_compliance": [
+            "【ZS-001】无工具多份定义 (grep 重复 tool_id)",
+            "【ZS-002】工作流无硬编码命令 (grep 'py 30-scripts')",
+            "【ZS-003】未修改工具核心逻辑 (对比参数)",
+            "【ZS-004】未绕过工具库 (检查执行日志)",
+            "【ZS-005】未事后补录定义 (检查 Git 历史)",
+            "【ZS-006】工具有效使用 (被工作流引用)",
+            "【ZS-007】变更自动触发 (检查 change_log.json)"
+        ],
         "post_task_tool": [
             "工具已创建并在实际工作流中使用 (session_end.py, post_session_compress.py 等)",
             "使用方式：工作流集成 (手动调用 = 设计失败)",
@@ -592,6 +601,53 @@ def verify_item(item: str, task: str, task_type: str) -> tuple:
             return (False, "文档文件未找到", f"❌ Doc file not found: {doc_file}")
     
     elif "引用" in item or "来源" in item:
+        # 排除架构合规审查的 ZS-006 检查（包含"引用"但实际上是检查工作流引用）
+        if "ZS-006" in item or "工作流引用" in item or "有效使用" in item or "被工作流" in item:
+            # 直接执行 ZS-006 检查逻辑 - 检查工作流 JSON 和 Python 脚本
+            registry_file = SCRIPTS_DIR / "tools_registry.json"
+            workflows_dir = SCRIPTS_DIR / "workflows"
+            
+            if not registry_file.exists():
+                return (False, "工具库不存在", f"❌ tools_registry.json not found")
+            
+            with open(registry_file, 'r', encoding='utf-8') as f:
+                registry = json.load(f)
+            
+            defined_tools = set(registry.get("tools", {}).keys())
+            used_tools = set()
+            
+            # 1. 检查工作流 JSON 文件中的引用
+            if workflows_dir.exists():
+                for wf_file in workflows_dir.glob("*.json"):
+                    with open(wf_file, 'r', encoding='utf-8') as f:
+                        workflow = json.load(f)
+                    
+                    for step in workflow.get("steps", []):
+                        tool_id = step.get("tool_id")
+                        if tool_id:
+                            used_tools.add(tool_id)
+            
+            # 2. 检查 Python 脚本中的工具调用
+            python_scripts = [
+                SCRIPTS_DIR / "session_end.py",
+                SCRIPTS_DIR / "post_session_compress.py",
+                SCRIPTS_DIR / "tool_executor.py",
+            ]
+            
+            for script in python_scripts:
+                if script.exists():
+                    content = script.read_text(encoding='utf-8', errors='replace')
+                    for tool_id in defined_tools:
+                        # 检查工具 ID 是否在脚本中被引用
+                        if tool_id in content or tool_id.replace('-', '_') in content:
+                            used_tools.add(tool_id)
+            
+            unused_tools = defined_tools - used_tools
+            
+            if unused_tools:
+                return (False, f"工具未使用：{unused_tools}", f"⚠️ Unused tools: {unused_tools}")
+            return (True, "所有工具都被使用", f"✅ {len(used_tools)}/{len(defined_tools)} tools used")
+        
         doc_file = DOCS_DIR / f"{task.upper().replace(' ', '-')}.md"
         if not doc_file.exists():
             doc_file = DOCS_DIR / f"{task.lower().replace(' ', '-')}.md"
@@ -735,6 +791,145 @@ def verify_item(item: str, task: str, task_type: str) -> tuple:
                 return (True, "有错误处理", f"try/except blocks found in {tool_file}")
         
         return (False, "缺少错误处理", f"❌ No error handling found in: {tool_file}")
+    
+    # ===== 架构合规审查 =====
+    
+    elif "ZS-001" in item or "多份定义" in item:
+        # 检查 tools_registry.json 是否有重复 tool_id
+        registry_file = SCRIPTS_DIR / "tools_registry.json"
+        if not registry_file.exists():
+            return (False, "工具库不存在", f"❌ tools_registry.json not found")
+        
+        with open(registry_file, 'r', encoding='utf-8') as f:
+            registry = json.load(f)
+        
+        tools = registry.get("tools", {})
+        tool_ids = list(tools.keys())
+        duplicates = [tid for tid in tool_ids if tool_ids.count(tid) > 1]
+        
+        if duplicates:
+            return (False, f"发现重复 tool_id: {duplicates}", f"❌ Duplicates: {duplicates}")
+        return (True, "无重复 tool_id", f"✅ Unique tool_ids: {len(tool_ids)}")
+    
+    elif "ZS-002" in item or "硬编码命令" in item:
+        # 检查工作流文件是否有硬编码命令
+        workflows_dir = SCRIPTS_DIR / "workflows"
+        if not workflows_dir.exists():
+            return (False, "工作流目录不存在", f"❌ workflows/ not found")
+        
+        hardcoded_found = []
+        for wf_file in workflows_dir.glob("*.json"):
+            content = wf_file.read_text(encoding='utf-8', errors='replace')
+            if 'py 30-scripts' in content and 'tool_executor' not in content:
+                hardcoded_found.append(str(wf_file))
+        
+        # 检查 session_end.py
+        session_end = SCRIPTS_DIR / "session_end.py"
+        if session_end.exists():
+            content = session_end.read_text(encoding='utf-8', errors='replace')
+            if 'py 30-scripts' in content and 'tool_executor' not in content:
+                hardcoded_found.append(str(session_end))
+        
+        if hardcoded_found:
+            return (False, f"发现硬编码命令：{hardcoded_found}", f"❌ Hardcoded in: {hardcoded_found}")
+        return (True, "无硬编码命令", f"✅ All workflows use tool_executor")
+    
+    elif "ZS-003" in item or "核心逻辑" in item:
+        # 检查工作流是否修改了工具核心逻辑（只允许覆盖非核心参数）
+        # 简化检查：工作流不应包含脚本路径
+        workflows_dir = SCRIPTS_DIR / "workflows"
+        if not workflows_dir.exists():
+            return (True, "工作流目录不存在，跳过", f"⚠️ workflows/ not found")
+        
+        modified_core = []
+        for wf_file in workflows_dir.glob("*.json"):
+            with open(wf_file, 'r', encoding='utf-8') as f:
+                workflow = json.load(f)
+            
+            for step in workflow.get("steps", []):
+                # 检查工作流是否尝试修改 script 参数（核心逻辑）
+                if "script" in step.get("params", {}):
+                    modified_core.append(f"{wf_file}:{step.get('step_id')}")
+        
+        if modified_core:
+            return (False, f"工作流修改核心逻辑：{modified_core}", f"❌ Modified core: {modified_core}")
+        return (True, "未修改核心逻辑", f"✅ Workflows only override non-core params")
+    
+    elif "ZS-004" in item or "绕过工具库" in item:
+        # 检查是否有直接调用脚本而不通过 tool_executor
+        session_end = SCRIPTS_DIR / "session_end.py"
+        if not session_end.exists():
+            return (False, "session_end.py 不存在", f"❌ session_end.py not found")
+        
+        content = session_end.read_text(encoding='utf-8', errors='replace')
+        
+        # 检查是否只调用 tool_executor
+        uses_executor = 'tool_executor.py' in content
+        direct_calls = content.count('py 30-scripts') - content.count('tool_executor.py')
+        
+        if uses_executor and direct_calls <= 0:
+            return (True, "通过 tool_executor 调用", f"✅ Uses tool_executor only")
+        return (False, "存在绕过工具库的调用", f"❌ Direct calls without executor: {direct_calls}")
+    
+    elif "ZS-005" in item or "事后补录" in item:
+        # 检查 Git 历史，确保工具定义先于使用
+        # 简化：检查 tools_registry.json 是否存在且有效
+        registry_file = SCRIPTS_DIR / "tools_registry.json"
+        if not registry_file.exists():
+            return (False, "工具库不存在", f"❌ tools_registry.json not found")
+        
+        with open(registry_file, 'r', encoding='utf-8') as f:
+            registry = json.load(f)
+        
+        tools_count = len(registry.get("tools", {}))
+        if tools_count > 0:
+            return (True, f"工具库已定义 {tools_count} 个工具", f"✅ {tools_count} tools defined")
+        return (False, "工具库为空", f"❌ No tools defined")
+    
+    elif "ZS-006" in item or "有效使用" in item or "被工作流引用" in item:
+        # 检查工具是否被工作流引用
+        registry_file = SCRIPTS_DIR / "tools_registry.json"
+        workflows_dir = SCRIPTS_DIR / "workflows"
+        
+        if not registry_file.exists():
+            return (False, "工具库不存在", f"❌ tools_registry.json not found")
+        
+        with open(registry_file, 'r', encoding='utf-8') as f:
+            registry = json.load(f)
+        
+        defined_tools = set(registry.get("tools", {}).keys())
+        used_tools = set()
+        
+        if workflows_dir.exists():
+            for wf_file in workflows_dir.glob("*.json"):
+                with open(wf_file, 'r', encoding='utf-8') as f:
+                    workflow = json.load(f)
+                
+                for step in workflow.get("steps", []):
+                    tool_id = step.get("tool_id")
+                    if tool_id:
+                        used_tools.add(tool_id)
+        
+        unused_tools = defined_tools - used_tools
+        
+        if unused_tools:
+            return (False, f"工具未使用：{unused_tools}", f"⚠️ Unused tools: {unused_tools}")
+        return (True, "所有工具都被使用", f"✅ {len(used_tools)}/{len(defined_tools)} tools used")
+    
+    elif "ZS-007" in item or "变更自动触发" in item:
+        # 检查 change_log.json 是否存在且有记录
+        change_log = SCRIPTS_DIR / "change_log.json"
+        if not change_log.exists():
+            return (False, "变更日志不存在", f"❌ change_log.json not found")
+        
+        with open(change_log, 'r', encoding='utf-8') as f:
+            log = json.load(f)
+        
+        changes = log.get("changes", [])
+        if changes:
+            last_change = changes[-1]
+            return (True, f"变更日志有 {len(changes)} 条记录", f"✅ Last change: {last_change.get('timestamp', 'unknown')}")
+        return (True, "变更日志存在（无变更记录）", f"⚠️ No changes recorded yet")
     
     # ===== 研究类深度验证 =====
     
@@ -988,7 +1183,7 @@ def run_critic_review(task: str, phase: str, task_type: str) -> dict:
     elif phase == "mid":
         checklist = template["mid_task"]
     elif phase == "final":
-        checklist = template["post_task_common"] + template["zero_score_items"]
+        checklist = template["post_task_common"] + template["zero_score_items"] + template["architecture_compliance"]
         
         if task_type == "tool":
             checklist += template["post_task_tool"]

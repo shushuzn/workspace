@@ -175,27 +175,6 @@
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 30
-    },
-    "git-commit-push": {
-      "tool_id": "git-commit-push",
-      "name": "Git Commit & Push",
-      "description": "Git 提交并推送工具 - 自动处理 commit message",
-      "version": "1.0",
-      "command": "git add . && git commit -F .git\\COMMIT_EDITMSG --no-verify && git push",
-      "parameters": {
-        "message": {
-          "type": "string",
-          "required": true,
-          "description": "Commit message"
-        }
-      },
-      "validation": {
-        "verify_with": "git status"
-      },
-      "triggers": ["session_end"],
-      "review_required": false,
-      "blocking": true,
-      "timeout_seconds": 30
     }
   },
   "workflows": {
