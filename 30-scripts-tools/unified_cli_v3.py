@@ -58,7 +58,7 @@ COMMAND_ALIASES = {
     'cache dashboard': 'cache_observability.py --dashboard',
     
     # Workflow
-    'workflow visualizer': 'workflow_visualizer.py',
+    'workflow visualizer': 'workflow_visualizer_web.py',
     'workflow engine': 'workflow_engine.py --demo',
     
     # Knowledge graph
@@ -105,21 +105,21 @@ COMMAND_ALIASES = {
     # Auto tools (新增)
     'auto distill': 'auto_distill.py',
     'auto test': 'auto_test_runner.py',
-    'auto deploy': 'auto_deploy.py',
+    'auto deploy': 'auto_deployer.py',
     
     # Smart tools (新增)
-    'smart doc': 'smart_doc_generator.py',
-    'smart scheduler': 'smart_scheduler.py',
-    'smart workflow': 'smart_workflow_optimizer.py',
+    'smart doc': 'doc_generator.py',
+    'smart scheduler': 'ai_task_scheduler.py',
+    'smart workflow': 'workflow_optimizer_ai.py',
     
     # Workspace (新增)
     'workspace init': 'workspace_init.py',
     'workspace check': 'workspace.py',
     
     # Research (新增)
-    'research cnt': 'cnt-research-runner.py',
+    'research cnt': 'domain_ranker_v2.py --compare',
     'research arxiv': 'arxiv_workflow.py',
-    'critic check': 'critic_auto_fix.py',
+    'critic check': 'pre_commit_hook.py --test',
     
     # Data (新增)
     'data scan': 'tool_registry.py --scan',
@@ -155,7 +155,7 @@ COMMAND_ALIASES = {
     # Quick Access (快速访问)
     'quick health': 'system_health_checker.py --quick',
     'quick scan': 'file-organizer.py --scan',
-    'recent': 'memory_recent.py',
+    'recent': 'ultimate_memory_search_v3.py --demo',
     'status': 'session-check.py',
 }
 
