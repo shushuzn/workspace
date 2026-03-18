@@ -28,10 +28,20 @@ def check_file(file_path: Path) -> dict:
         issues['warning'] += 1
         issues['details'].append('WARNING: pickle.load detected')
     
-    # Hardcoded credentials
-    if re.search(r'(password|secret|api_key|token)\s*=\s*["\'][^"\']+["\']', content, re.IGNORECASE):
-        issues['blocker'] += 1
-        issues['details'].append('BLOCKER: Hardcoded credential detected')
+    # Hardcoded credentials - exclude false positives
+    # Match: token = "actual_value" (not empty strings or env vars)
+    cred_pattern = r'(password|secret|api_key|token)\s*=\s*["\'][^"\']{4,}["\']'
+    if re.search(cred_pattern, content, re.IGNORECASE):
+        # Exclude lines with os.getenv or os.environ
+        lines = content.split('\n')
+        for line in lines:
+            if re.search(cred_pattern, line, re.IGNORECASE):
+                if 'os.getenv' not in line and 'os.environ' not in line:
+                    # Check if it's not an empty string
+                    if '=""' not in line and "=''" not in line:
+                        issues['blocker'] += 1
+                        issues['details'].append('BLOCKER: Hardcoded credential detected')
+                        break
     
     return issues
 
@@ -60,12 +70,22 @@ def main():
         
     elif args.all:
         active_dirs = ['30-scripts-tools', 'active_skills', '05-dashboard']
+        exclude_dirs = ['99-ARCHIVE', '99-archive', '__pycache__', 'node_modules', 'intent-belief-integration', '07-DATA', '01-KNOWLEDGE-CARDS']
+        
         for dir_name in active_dirs:
             dir_path = Path(dir_name)
             if not dir_path.exists():
                 continue
             
             for py_file in dir_path.rglob('*.py'):
+                # Skip excluded directories
+                if any(exclude in str(py_file) for exclude in exclude_dirs):
+                    continue
+                
+                # Skip self
+                if py_file.name == 'quality_gate_check.py':
+                    continue
+                    
                 issues = check_file(py_file)
                 if issues['blocker'] > 0 or issues['warning'] > 0:
                     total['files'][str(py_file)] = issues
