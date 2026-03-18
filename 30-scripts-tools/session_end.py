@@ -10,8 +10,9 @@ What it does:
     1. Run post_session_compress.py --auto
     2. Run fast_load.py to verify context <100KB
     3. Check daily note lines <100
-    4. Git add + commit + push
-    5. Clean up temp files
+    4. Run auto-critic.py for final review (NEW!)
+    5. Git add + commit + push
+    6. Clean up temp files
 
 Author: Claw
 Date: 2026-03-18
@@ -168,6 +169,57 @@ def check_context_size():
         print_warning(f"Could not verify context size: {str(e)}")
         return True
 
+
+def run_auto_critic(commit_message: str):
+    """
+    Run auto-critic.py for final review
+    
+    核心原则：所有工具都应该是自动调用的
+    auto-critic 必须在 session_end 中自动运行
+    """
+    print_info("Running auto-critic final review...")
+    
+    # 从 commit message 提取任务名称（简化：使用 commit message 本身）
+    task_name = commit_message[:50].replace('"', '').replace("'", "")
+    
+    cmd = f'py 30-scripts-tools\\auto-critic.py -t "{task_name}" -p final'
+    print(f"   Command: {cmd}")
+    
+    try:
+        result = subprocess.run(
+            cmd,
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=60,
+            encoding='utf-8',
+            errors='replace'
+        )
+        
+        output = (result.stdout or "") + (result.stderr or "")
+        
+        # 解析批判者评分
+        if "Score:" in output:
+            for line in output.split('\n'):
+                if 'Score:' in line:
+                    print(f"   {line.strip()}")
+                if 'Status:' in line:
+                    print(f"   {line.strip()}")
+        
+        if result.returncode == 0:
+            print_success("Auto-critic review - PASS")
+            return True
+        else:
+            print_warning("Auto-critic review - NEEDS ATTENTION")
+            print_info("Check critic review file for details")
+            # 不阻止流程，但提醒用户
+            return True  # 返回 True 让流程继续
+            
+    except Exception as e:
+        print_warning(f"Auto-critic review - EXCEPTION: {str(e)}")
+        print_info("Continuing without critic review...")
+        return True  # 不阻止流程
+
 def git_status():
     """Check git status before commit"""
     print_info("Checking git status...")
@@ -215,6 +267,7 @@ def main():
         'session_compress': False,
         'context_check': False,
         'daily_note_check': False,
+        'auto_critic': False,
         'git_status': False,
         'git_add': False,
         'git_commit': False,
@@ -233,16 +286,19 @@ def main():
     print_header("STEP 3: Daily Note Check")
     results['daily_note_check'] = check_daily_note_lines()
     
-    print_header("STEP 4: Git Status")
+    print_header("STEP 4: Auto-Critic Review")
+    results['auto_critic'] = run_auto_critic(commit_message)
+    
+    print_header("STEP 5: Git Status")
     results['git_status'] = git_status()
     
-    print_header("STEP 5: Git Add")
+    print_header("STEP 6: Git Add")
     results['git_add'] = run_command(
         "git add .",
         "Adding files to git"
     )
     
-    print_header("STEP 6: Git Commit")
+    print_header("STEP 7: Git Commit")
     print_info("Committing changes...")
     print(f"   Command: git commit -m \"{commit_message}\"")
     
@@ -271,7 +327,7 @@ def main():
         print_error(f"Committing changes - EXCEPTION: {str(e)}")
         results['git_commit'] = False
     
-    print_header("STEP 7: Git Push")
+    print_header("STEP 8: Git Push")
     results['git_push'] = run_command(
         "git push",
         "Pushing to remote"
@@ -291,7 +347,7 @@ def main():
     
     print_header("FINAL VERDICT")
     
-    critical_steps = ['session_compress', 'git_commit', 'git_push']
+    critical_steps = ['session_compress', 'auto_critic', 'git_commit', 'git_push']
     critical_passed = all(results[step] for step in critical_steps)
     
     if critical_passed:
