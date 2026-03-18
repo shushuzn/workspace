@@ -228,13 +228,14 @@ def run_memory_tools():
     包含：
     1. memory_consistency_checker.py - 数据一致性检查（每次运行）
     2. memory_benchmark.py - 性能测试（每周一运行）
+    3. memory_tag_search.py - 标签搜索测试（每次运行，验证索引可用）
     
     非阻塞：即使失败也不影响流程
     """
     print_info("Running memory system health check...")
     
     # 1. Consistency checker (每次会话结束运行)
-    print_info("   (1/2) Running consistency checker...")
+    print_info("   (1/3) Running consistency checker...")
     cmd1 = 'py 30-scripts-tools\\memory_consistency_checker.py'
     
     try:
@@ -264,7 +265,7 @@ def run_memory_tools():
     today = datetime.now().weekday()  # 0=Monday, 6=Sunday
     
     if today == 0:  # Monday
-        print_info("   (2/2) Running benchmark (weekly)...")
+        print_info("   (2/3) Running benchmark (weekly)...")
         cmd2 = 'py 30-scripts-tools\\memory_benchmark.py'
         
         try:
@@ -290,7 +291,37 @@ def run_memory_tools():
         except Exception as e:
             print_warning(f"Benchmark - EXCEPTION: {str(e)}")
     else:
-        print_info("   (2/2) Benchmark skipped (runs on Mondays only)")
+        print_info("   (2/3) Benchmark skipped (runs on Mondays only)")
+    
+    # 3. Tag search test (每次运行，验证索引可用性)
+    print_info("   (3/3) Testing tag search functionality...")
+    cmd3 = 'py 30-scripts-tools\\memory_tag_search.py --tag critical --limit 3'
+    
+    try:
+        result3 = subprocess.run(
+            cmd3,
+            shell=True,
+            capture_output=True,
+            text=True,
+            timeout=10,
+            encoding='utf-8',
+            errors='replace'
+        )
+        
+        if result3.returncode == 0:
+            print_success("Tag search test - OK")
+            # 显示搜索结果数
+            output = result3.stdout or ""
+            if "results" in output.lower():
+                for line in output.split('\n'):
+                    if 'result' in line.lower():
+                        print(f"   {line.strip()}")
+                        break
+        else:
+            print_warning("Tag search test - Warning")
+            
+    except Exception as e:
+        print_warning(f"Tag search test - EXCEPTION: {str(e)}")
     
     return True  # 总是返回 True，不阻塞流程
 
