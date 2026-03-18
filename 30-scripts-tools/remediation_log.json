@@ -1,0 +1,52 @@
+{
+  "version": "1.0",
+  "created_at": "2026-03-18T20:14:51.541349",
+  "last_updated": "2026-03-18T20:14:51.541350",
+  "tasks": {
+    "REM-20260318-E32C84": {
+      "task_id": "REM-20260318-E32C84",
+      "fail_item_id": "blocker-001",
+      "source": "30-scripts-tools\\critic-auto-v7-Quick-v7.json",
+      "title": "致命问题 0 个",
+      "description": "FAIL",
+      "severity": "blocker",
+      "created_at": "2026-03-18T20:14:51.541306",
+      "deadline": "2026-03-19T20:14:51.541299",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    },
+    "REM-20260318-B22842": {
+      "task_id": "REM-20260318-B22842",
+      "fail_item_id": "blocker-003",
+      "source": "30-scripts-tools\\critic-auto-v7-Quick-v7.json",
+      "title": "代码/文档已提交 Git",
+      "description": "FAIL",
+      "severity": "blocker",
+      "created_at": "2026-03-18T20:14:51.541331",
+      "deadline": "2026-03-19T20:14:51.541329",
+      "assignee": "claw",
+      "status": "open",
+      "linked_commit": null,
+      "verification_result": null,
+      "reminder_count": 0,
+      "last_reminder": null,
+      "notes": []
+    }
+  },
+  "statistics": {
+    "total_tasks": 2,
+    "by_status": {
+      "open": 2
+    },
+    "by_severity": {
+      "blocker": 2
+    },
+    "overdue_count": 0,
+    "completion_rate": 0.0
+  }
+}
