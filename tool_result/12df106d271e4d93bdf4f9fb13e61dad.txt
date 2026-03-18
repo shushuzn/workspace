@@ -1,0 +1,70 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:16:46.403614
+# ---
+      "execution_time_ms": 170.50199999999998,
+      "step_id": 6,
+      "step_name": "Tag Search Test",
+      "blocking": false
+    },
+    {
+      "step_id": 7,
+      "step_name": "Memory Benchmark",
+      "tool_id": "memory-benchmark",
+      "skipped": true,
+      "reason": "Conditional: runs on Monday only"
+    },
+    {
+      "step_id": 8,
+      "step_name": "Weekly Memory Cleanup",
+      "tool_id": "memory-cleanup-compress",
+      "skipped": true,
+      "reason": "Conditional: runs on Sunday only"
+    },
+    {
+      "step_id": 9,
+      "step_name": "Weekly Quality Assessment",
+      "tool_id": "memory-quality-scorer",
+      "skipped": true,
+      "reason": "Conditional: runs on Sunday only"
+    },
+    {
+      "step_id": 10,
+      "step_name": "Weekly Hybrid Compression",
+      "tool_id": "memory-hybrid-pipeline",
+      "skipped": true,
+      "reason": "Conditional: runs on Sunday only"
+    },
+    {
+      "step_id": 11,
+      "step_name": "Weekly Incremental Compression",
+      "tool_id": "memory-incremental-compressor",
+      "skipped": true,
+      "reason": "Conditional: runs on Sunday only"
+    },
+    {
+      "success": false,
+      "output": "usage: auto-critic.py [-h] -t TASK -p {start,mid,final}\n                      [--context-file CONTEXT_FILE]\nauto-critic.py: error: unrecognized arguments: - �������� 12-16 ��ǿ��ͨ��\n",
+      "validation": {
+        "passed": false,
+        "rules_checked": [
+          "review_file",
+          "score_threshold",
+          "zero_score_items"
+        ],
+        "details": {
+          "review_file_exists": false
+        },
+        "returncode": 2
+      },
+      "tool_id": "auto-critic",
+      "command": "py 30-scripts-tools\\auto-critic.py -t \"\"阻塞性防护配置 - 代码质量 12-16 层强制通过\"\" -p final",
+      "execution_time_ms": 138.087,
+      "step_id": 12,
+      "step_name": "Auto-Critic Review",
+      "blocking": true
+    }
+  ],
+  "total_steps": 16,
+  "passed_steps": 8,
+  "execution_time_ms": 4606.572
+}

@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:20:08.290463
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 1-100 of 784)
+{
+  "version": "1.2.1",
+  "last_updated": "2026-03-18T22:12:32.445452",
+  "changes": [
+    "Added auto-critic-v7 with issue detection and remediation tracking",
+    "Added issue-scanner for comprehensive code scanning",
+    "Added critical-issue-detector for high-risk issue detection",
+    "Added remediation-tracker for FAIL item tracking",
+    "Added quality-gate for code quality checks",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement"
+  ],
+  "description": "唯一工具库 - 全系统唯一真值来源",
+  "principles": [
+    "唯一数据源原则：所有工具只允许有一份唯一定义",
+    "引用优先原则：工作流只引用 tool_id，禁止硬编码",
+    "实时生效原则：工具修改后引用自动同步生效"
+  ],
+  "tools": {
+    "auto-critic": {
+      "tool_id": "auto-critic",
+      "name": "Auto-Critic v6.0",
+      "description": "全自动批判者审查工具 - 事前/事中/事后全流程审查",
+      "version": "6.0",
+      "command": "py 30-scripts-tools\\auto-critic.py -t \"{task}\" -p {phase}",
+      "parameters": {
+        "task": {
+          "type": "string",
+          "required": true,
+          "description": "任务名称（用于生成审查文件名）",
+          "validation": "^[a-zA-Z0-9-_]+$"
+        },
+        "phase": {
+          "type": "string",
+          "required": true,
+          "description": "审查阶段",
+          "enum": [
+            "start",
+            "mid",
+            "final"
+          ],
+          "default": "final"
+        }
+      },
+      "validation": {
+        "review_file": "30-scripts-tools/critic-auto-{task}.json",
+        "score_threshold": 95,
+        "zero_score_items": [
+          "批判者自动调用",
+          "工具创建了必须使用",
+          "当日笔记压缩<100 行",
+          "会话压缩执行",
+          "上下文大小验证<100KB",
+          "工作区正确性 D 盘",
+          "检查项必须有证据"
+        ]
+      },
+      "triggers": [
+        "session_end",
+        "task_complete"
+      ],
+      "review_required": true,
+      "blocking": false,
+      "timeout_seconds": 60
+    },
+    "session-compress": {
+      "tool_id": "session-compress",
+      "name": "Post-Session Compressor",
+      "description": "会话压缩工具 - 压缩对话到结构化摘要",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\post_session_compress.py --auto",
+      "parameters": {},
+      "validation": {
+        "context_size_limit_kb": 100,
+        "daily_note_lines_limit": 100,
+        "verify_with": "fast_load.py"
+      },
+      "triggers": [
+        "session_end"
+      ],
+      "review_required": true,
+      "blocking": true,
+      "timeout_seconds": 30
+    },
+    "context-verify": {
+      "tool_id": "context-verify",
+      "name": "Fast Load Context Verifier",
+      "description": "上下文大小验证工具 - 确保<100KB",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\fast_load.py",
+      "parameters": {},
+      "validation": {
+        "max_size_kb": 100,
+        "core_files": [
+          "SOUL.md",
+          "USER.md",
+          "AGENTS.md",
+          "TOOLS.md",
+          "HEARTBEAT.md",
+          "13-memory/MEMORY.md",
+
+[684 more lines. Use start_line=101 to continue.]

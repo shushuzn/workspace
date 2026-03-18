@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:20:15.042112
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 400-450 of 784)
+        },
+        "phase": {
+          "type": "string",
+          "required": true,
+          "description": "审查阶段",
+          "enum": [
+            "start",
+            "mid",
+            "final"
+          ],
+          "default": "final"
+        }
+      },
+      "validation": {
+        "review_file": "30-scripts-tools/critic-auto-{task}-v7.json",
+        "score_threshold": 95,
+        "blocker_items": [
+          "致命问题 0 个",
+          "工作区正确性",
+          "代码/文档已提交 Git",
+          "批判者自动调用",
+          "无工具多份定义",
+          "工作流无硬编码命令"
+        ],
+        "warning_items": [
+          "严重问题≤2 个",
+          "一般问题≤10 个",
+          "当日笔记压缩<100 行",
+          "会话压缩执行",
+          "工具有效使用",
+          "代码质量检查",
+          "安全检查"
+        ]
+      },
+      "triggers": [
+        "session_end",
+        "task_complete"
+      ],
+      "review_required": true,
+      "blocking": true,
+      "timeout_seconds": 120,
+      "components": [
+        "issue_scanner",
+        "critical_issue_detector",
+        "remediation_tracker",
+        "quality_gate"
+      ]
+    },
+    "issue-scanner": {
+      "tool_id": "issue-scanner",
+      "name": "Issue Scanner",
+
+[334 more lines. Use start_line=451 to continue.]

@@ -578,7 +578,7 @@
       "name": "Quality Gate Checker",
       "description": "质量门禁 - 代码质量/安全/复杂度/测试覆盖率",
       "version": "1.0",
-      "command": "py 30-scripts-tools\\quality_gate.py --check {pattern} --min-score {score}",
+      "command": "py 30-scripts-tools\\quality_gate.py --check {check} --min-score {min-score}",
       "parameters": {
         "check": {
           "type": "string",

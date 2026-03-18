@@ -1293,6 +1293,18 @@ def print_review(result: dict):
 
 def main():
     import argparse
+    import locale
+    
+    # 修复中文编码问题 - 强制使用 UTF-8
+    if sys.platform == 'win32':
+        try:
+            locale.setlocale(locale.LC_ALL, 'en_US.UTF-8')
+        except:
+            pass
+        # 强制 stdin/stdout 使用 UTF-8
+        import io
+        sys.stdin = io.TextIOWrapper(sys.stdin.buffer, encoding='utf-8', errors='replace')
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
     
     parser = argparse.ArgumentParser(description='Auto-Critic v6.0 - Fully Automated Verification')
     parser.add_argument('-t', '--task', required=True, help='Task name')
