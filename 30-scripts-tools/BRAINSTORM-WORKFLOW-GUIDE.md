@@ -2,7 +2,8 @@
 
 **Flow ID:** `20260318-brainstorm-001`  
 **版本:** 1.0  
-**创建日期:** 2026-03-18
+**创建日期:** 2026-03-18  
+**归档位置:** `flow-archive/20260318-brainstorm-001/`
 
 ---
 
@@ -11,8 +12,16 @@
 ### 方式 1: 完整工作流 (推荐)
 
 ```bash
+py 30-scripts-tools\tool_executor.py --workflow brainstorm-001
+```
+
+或
+
+```bash
 py 30-scripts-tools\start-flow.bat brainstorm-001
 ```
+
+**工作流文件:** `flow-archive/20260318-brainstorm-001/workflow.json`
 
 ### 方式 2: 单步执行
 

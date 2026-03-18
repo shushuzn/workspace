@@ -34,7 +34,18 @@
       "status": "active",
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-universal-workflow-001",
       "last_updated": "2026-03-18T22:46:04.399693"
+    },
+    "20260318-brainstorm-001": {
+      "business_name": "brainstorm",
+      "description": "创造性思维 - 从发散到收敛的完整流程",
+      "created_at": "2026-03-18T23:59:00+08:00",
+      "status": "active",
+      "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260318-brainstorm-001",
+      "last_updated": "2026-03-18T23:59:00+08:00",
+      "workflow_file": "workflow.json",
+      "total_steps": 8,
+      "tools_count": 4
     }
   },
-  "last_updated": "2026-03-18T22:46:04.399697"
+  "last_updated": "2026-03-18T23:59:00+08:00"
 }

@@ -1,0 +1,146 @@
+{
+  "flow_id": "20260318-brainstorm-001",
+  "name": "头脑风暴工作流",
+  "description": "创造性思维 - 从发散到收敛的完整流程",
+  "version": "1.0",
+  "created_at": "2026-03-18T23:59:00+08:00",
+  "estimated_time_minutes": 45,
+  "total_steps": 8,
+  "stages": {
+    "preparation": "Step 1-2: 问题定义 + 背景研究",
+    "divergence": "Step 3-4: 自由联想 + 强制关联",
+    "convergence": "Step 5-6: 初步筛选 + 深度评估",
+    "output": "Step 7-8: 优先级排序 + 行动规划"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "问题定义",
+      "description": "清晰定义头脑风暴的主题和边界",
+      "tool_id": "brainstorm-define",
+      "stage": "preparation",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 600,
+      "validation": {
+        "output_file": "30-scripts-tools/brainstorm_topic.json",
+        "required_fields": ["topic", "background", "expected_output"]
+      }
+    },
+    {
+      "step_id": 2,
+      "name": "背景研究",
+      "description": "快速收集相关背景信息 (非阻塞)",
+      "tool_id": "brainstorm-research",
+      "stage": "preparation",
+      "parameters": {},
+      "blocking": false,
+      "timeout_seconds": 300,
+      "conditional": {
+        "run_if": "time_available"
+      }
+    },
+    {
+      "step_id": 3,
+      "name": "自由联想",
+      "description": "产生尽可能多的想法 (不评判)",
+      "tool_id": "brainstorm-diverge",
+      "stage": "divergence",
+      "parameters": {
+        "min_ideas": 20
+      },
+      "blocking": false,
+      "timeout_seconds": 900
+    },
+    {
+      "step_id": 4,
+      "name": "强制关联",
+      "description": "将不相关的想法进行组合",
+      "tool_id": "brainstorm-connect",
+      "stage": "divergence",
+      "parameters": {},
+      "blocking": false,
+      "timeout_seconds": 600,
+      "conditional": {
+        "run_if_min_ideas": 15
+      }
+    },
+    {
+      "step_id": 5,
+      "name": "初步筛选",
+      "description": "使用简单标准筛选想法",
+      "tool_id": "brainstorm-filter",
+      "stage": "convergence",
+      "parameters": {
+        "min_total_score": 10
+      },
+      "blocking": false,
+      "timeout_seconds": 600
+    },
+    {
+      "step_id": 6,
+      "name": "深度评估",
+      "description": "对入围想法进行详细评估",
+      "tool_id": "brainstorm-evaluate",
+      "stage": "convergence",
+      "parameters": {},
+      "blocking": false,
+      "timeout_seconds": 900
+    },
+    {
+      "step_id": 7,
+      "name": "优先级排序",
+      "description": "生成优先级矩阵",
+      "tool_id": "brainstorm-prioritize",
+      "stage": "output",
+      "parameters": {},
+      "blocking": false,
+      "timeout_seconds": 300
+    },
+    {
+      "step_id": 8,
+      "name": "行动规划",
+      "description": "将想法转化为可执行任务",
+      "tool_id": "brainstorm-action",
+      "stage": "output",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 600,
+      "validation": {
+        "output_file": "30-scripts-tools/action_plan.md",
+        "min_actions": 3
+      }
+    }
+  ],
+  "success_criteria": {
+    "quantitative": {
+      "min_raw_ideas": 20,
+      "min_combinations": 10,
+      "min_shortlist": 5,
+      "min_actions": 3
+    },
+    "qualitative": [
+      "想法多样性 (≥3 个不同类别)",
+      "至少 1 个突破性想法",
+      "行动计划清晰可执行",
+      "团队对结果满意"
+    ]
+  },
+  "output_files": [
+    "30-scripts-tools/brainstorm_topic.json",
+    "30-scripts-tools/background_research.md",
+    "30-scripts-tools/ideas_raw.md",
+    "30-scripts-tools/idea_combinations.md",
+    "30-scripts-tools/ideas_shortlist.md",
+    "30-scripts-tools/ideas_evaluated.md",
+    "30-scripts-tools/priority_matrix.json",
+    "30-scripts-tools/action_plan.md"
+  ],
+  "integration": {
+    "next_workflows": [
+      "20260318-universal-workflow-001",
+      "20260318-research-001",
+      "20260318-project-001"
+    ]
+  }
+}

@@ -10,7 +10,8 @@
     "Added p1-issue-fixer for automated os.system/eval/exec replacement",
     "Added p1-issue-fixer for automated os.system/eval/exec replacement",
     "Added brainstorm workflow tools (define, diverge, prioritize, action)",
-    "Added brainstorm workflow tools (define, diverge, prioritize, action)"
+    "Added brainstorm workflow tools (define, diverge, prioritize, action)",
+    "Brainstorm workflow archived in flow-archive/20260318-brainstorm-001/"
   ],
   "description": "唯一工具库 - 全系统唯一真值来源",
   "principles": [
