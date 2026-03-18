@@ -151,6 +151,12 @@ COMMAND_ALIASES = {
     'visualize workflow': 'workflow_visualizer_web.py',
     'visualize kg': 'knowledge_graph_builder.py --visualize',
     'dashboard': 'phase4_dashboard.py',
+    
+    # Quick Access (快速访问)
+    'quick health': 'system_health_checker.py --quick',
+    'quick scan': 'file-organizer.py --scan',
+    'recent': 'memory_recent.py',
+    'status': 'session-check.py',
 }
 
 # Command categories
@@ -179,6 +185,7 @@ COMMAND_CATEGORIES = {
     'experiment': ['experiment'],
     'cleanup': ['cleanup'],
     'visualization': ['visualize', 'dashboard'],
+    'quick': ['quick', 'recent', 'status'],
 }
 
 
@@ -231,6 +238,39 @@ class UnifiedCLI:
             history_text += f"    ⏱️  {duration:.2f}s | 🕐 {timestamp}\n\n"
         
         return history_text
+    
+    def show_stats(self) -> str:
+        """Show command statistics"""
+        if not self.history:
+            return "\n📭 暂无统计数据\n"
+        
+        total = len(self.history)
+        success = sum(1 for h in self.history if h.get('success', False))
+        failed = total - success
+        success_rate = (success / total * 100) if total > 0 else 0
+        
+        # Most used commands
+        command_count = {}
+        for h in self.history:
+            cmd = h.get('command', 'Unknown')
+            command_count[cmd] = command_count.get(cmd, 0) + 1
+        
+        top_commands = sorted(command_count.items(), key=lambda x: x[1], reverse=True)[:5]
+        
+        # Average duration
+        avg_duration = sum(h.get('duration_seconds', 0) for h in self.history) / total
+        
+        stats_text = "\n📊 命令统计\n"
+        stats_text += "=" * 60 + "\n\n"
+        stats_text += f"总命令数：{total}\n"
+        stats_text += f"成功：{success} ({success_rate:.1f}%)\n"
+        stats_text += f"失败：{failed} ({100-success_rate:.1f}%)\n"
+        stats_text += f"平均执行时间：{avg_duration:.2f}s\n\n"
+        stats_text += "🔥 最常用命令:\n"
+        for i, (cmd, count) in enumerate(top_commands, 1):
+            stats_text += f"  {i}. {cmd} ({count}次)\n"
+        
+        return stats_text
     
     def parse_command(self, user_input: str) -> Optional[str]:
         """
@@ -408,7 +448,8 @@ class UnifiedCLI:
         help_text += "  py unified_cli_v3.py <命令> [参数]\n"
         help_text += "  py unified_cli_v3.py --interactive  (交互模式)\n"
         help_text += "  py unified_cli_v3.py --suggest <关键词>  (获取建议)\n"
-        help_text += "  py unified_cli_v3.py --history  (查看历史)\n\n"
+        help_text += "  py unified_cli_v3.py --history  (查看历史)\n"
+        help_text += "  py unified_cli_v3.py --stats  (查看统计)\n\n"
         
         help_text += "常用命令:\n"
         help_text += "  工具管理:\n"
@@ -439,6 +480,12 @@ class UnifiedCLI:
         help_text += "  Git Hooks:\n"
         help_text += "    install hooks       - 安装 Git Hooks\n"
         help_text += "    test hook           - 测试 Hook\n\n"
+        
+        help_text += "  快速访问:\n"
+        help_text += "    quick health        - 快速健康检查\n"
+        help_text += "    quick scan          - 快速文件扫描\n"
+        help_text += "    status              - 会话状态\n"
+        help_text += "    --stats             - 命令统计\n\n"
         
         help_text += "命令分类:\n"
         for category in COMMAND_CATEGORIES.keys():
@@ -517,6 +564,7 @@ def main():
     parser.add_argument('--help-category', type=str, help='Help for category')
     parser.add_argument('--history', action='store_true', help='Show command history')
     parser.add_argument('--history-limit', type=int, default=10, help='History limit')
+    parser.add_argument('--stats', action='store_true', help='Show command statistics')
     args = parser.parse_args()
     
     cli = UnifiedCLI()
@@ -532,6 +580,9 @@ def main():
     
     elif args.history:
         print(cli.show_history(args.history_limit))
+    
+    elif args.stats:
+        print(cli.show_stats())
     
     elif args.help_category:
         print(cli.get_help(args.help_category))

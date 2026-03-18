@@ -37,5 +37,44 @@
     "timestamp": "2026-03-18T08:30:49.767469",
     "applied": false,
     "effective": null
+  },
+  {
+    "user_reply": "你听不懂吗",
+    "context": "AI 理解错误",
+    "sentiment": "negative",
+    "sentiment_score": 0.2,
+    "urgency": "medium",
+    "improvement_type": "understanding",
+    "action": "confirm_before_execute",
+    "suggestion": "用户表示理解错误，下次应先确认'你是说 X 吗？'再执行",
+    "timestamp": "2026-03-18T08:49:25.724459",
+    "applied": false,
+    "effective": null
+  },
+  {
+    "user_reply": "好了吗，等很久了",
+    "context": "任务执行慢",
+    "sentiment": "positive",
+    "sentiment_score": 0.8,
+    "urgency": "medium",
+    "improvement_type": "speed",
+    "action": "report_progress",
+    "suggestion": "记录用户反馈",
+    "timestamp": "2026-03-18T08:49:25.727000",
+    "applied": false,
+    "effective": null
+  },
+  {
+    "user_reply": "好的，继续",
+    "context": "用户满意",
+    "sentiment": "positive",
+    "sentiment_score": 0.8,
+    "urgency": "medium",
+    "improvement_type": "keep",
+    "action": "keep_current",
+    "suggestion": "用户满意，保持当前方式",
+    "timestamp": "2026-03-18T08:49:25.727888",
+    "applied": false,
+    "effective": null
   }
 ]

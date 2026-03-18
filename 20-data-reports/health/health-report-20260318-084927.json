@@ -1,0 +1,177 @@
+{
+  "timestamp": "2026-03-18T08:49:27.089460",
+  "overall_status": "warning",
+  "checks": {
+    "tools": {
+      "total": 302,
+      "healthy": 30,
+      "warnings": 0,
+      "errors": 0,
+      "details": [
+        {
+          "name": "active-learning-trigger.py",
+          "status": "ok",
+          "response_time_ms": 67.073
+        },
+        {
+          "name": "adaptive_ttl_cache.py",
+          "status": "ok",
+          "response_time_ms": 102.997
+        },
+        {
+          "name": "advanced_report_gen.py",
+          "status": "ok",
+          "response_time_ms": 132.616
+        },
+        {
+          "name": "ai_task_scheduler.py",
+          "status": "ok",
+          "response_time_ms": 79.903
+        },
+        {
+          "name": "ai_tool_suggester.py",
+          "status": "ok",
+          "response_time_ms": 79.77
+        },
+        {
+          "name": "analyze-memory-scripts.py",
+          "status": "ok",
+          "response_time_ms": 217.76100000000002
+        },
+        {
+          "name": "anomaly_detector.py",
+          "status": "ok",
+          "response_time_ms": 83.751
+        },
+        {
+          "name": "anomaly_detector_pro.py",
+          "status": "ok",
+          "response_time_ms": 96.97500000000001
+        },
+        {
+          "name": "api_gateway.py",
+          "status": "ok",
+          "response_time_ms": 122.447
+        },
+        {
+          "name": "arxiv_collector_v2.py",
+          "status": "ok",
+          "response_time_ms": 125.79899999999999
+        },
+        {
+          "name": "arxiv_workflow.py",
+          "status": "ok",
+          "response_time_ms": 89.698
+        },
+        {
+          "name": "async_executor.py",
+          "status": "ok",
+          "response_time_ms": 139.805
+        },
+        {
+          "name": "automation_enhancer.py",
+          "status": "ok",
+          "response_time_ms": 86.022
+        },
+        {
+          "name": "automation_orchestrator.py",
+          "status": "ok",
+          "response_time_ms": 99.40599999999999
+        },
+        {
+          "name": "autonomous_decision.py",
+          "status": "ok",
+          "response_time_ms": 117.102
+        },
+        {
+          "name": "autonomous_research_assistant.py",
+          "status": "ok",
+          "response_time_ms": 111.413
+        },
+        {
+          "name": "auto_data_cleaner.py",
+          "status": "ok",
+          "response_time_ms": 95.285
+        },
+        {
+          "name": "auto_deploy.py",
+          "status": "ok",
+          "response_time_ms": 72.699
+        },
+        {
+          "name": "auto_deployer.py",
+          "status": "ok",
+          "response_time_ms": 90.81
+        },
+        {
+          "name": "auto_distill.py",
+          "status": "ok",
+          "response_time_ms": 106.58800000000001
+        },
+        {
+          "name": "auto_fix_orchestrator.py",
+          "status": "ok",
+          "response_time_ms": 94.322
+        },
+        {
+          "name": "auto_optimizer.py",
+          "status": "ok",
+          "response_time_ms": 92.78699999999999
+        },
+        {
+          "name": "auto_recovery.py",
+          "status": "ok",
+          "response_time_ms": 96.40799999999999
+        },
+        {
+          "name": "auto_signal_extractor.py",
+          "status": "ok",
+          "response_time_ms": 72.397
+        },
+        {
+          "name": "auto_test_generator.py",
+          "status": "ok",
+          "response_time_ms": 97.26400000000001
+        },
+        {
+          "name": "auto_test_runner.py",
+          "status": "ok",
+          "response_time_ms": 136.61100000000002
+        },
+        {
+          "name": "auto_tuner.py",
+          "status": "ok",
+          "response_time_ms": 92.399
+        },
+        {
+          "name": "backup-strategy-restructure.py",
+          "status": "ok",
+          "response_time_ms": 85.285
+        },
+        {
+          "name": "batch_card_generator.py",
+          "status": "ok",
+          "response_time_ms": 89.55399999999999
+        },
+        {
+          "name": "batch_processor_v2.py",
+          "status": "ok",
+          "response_time_ms": 155.264
+        }
+      ]
+    },
+    "git": {
+      "status": "warning",
+      "branch": "master",
+      "commits_behind": 0,
+      "uncommitted_changes": 2
+    },
+    "disk": {
+      "status": "ok",
+      "total_gb": 731.66,
+      "used_gb": 373.32,
+      "free_gb": 358.34,
+      "percent_used": 51.0
+    }
+  }
+}
