@@ -200,35 +200,6 @@ def run_git_operations(commit_message: str) -> bool:
     return True
 
 
-def legacy_fallback(commit_message: str) -> bool:
-    """
-    降级方案（如果 tool_executor.py 不可用）
-    
-    注意：这是临时方案，最终会移除
-    """
-    print_warning("Falling back to legacy execution mode")
-    print_info("Consider fixing tool_executor.py issues")
-    
-    # 临时使用硬编码（最终要移除）
-    steps = [
-        ("Session Compression", "py 30-scripts-tools\\post_session_compress.py --auto"),
-        ("Context Verification", "py 30-scripts-tools\\fast_load.py"),
-        ("Auto-Critic Review", f'py 30-scripts-tools\\auto-critic.py -t "{commit_message[:50]}" -p final'),
-    ]
-    
-    all_passed = True
-    for name, cmd in steps:
-        print_info(f"Running {name}...")
-        result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=60)
-        if result.returncode == 0:
-            print_success(f"{name} - OK")
-        else:
-            print_error(f"{name} - FAILED")
-            all_passed = False
-    
-    return all_passed
-
-
 def main():
     print_header("SESSION END - One-Click Workflow (v2.0)")
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
@@ -245,11 +216,11 @@ def main():
     executor_path = Path("30-scripts-tools\\tool_executor.py")
     if not executor_path.exists():
         print_error(f"Tool executor not found: {executor_path}")
-        print_warning("Falling back to legacy mode...")
-        success = legacy_fallback(commit_message)
-    else:
-        # 使用 tool_executor.py 执行工作流
-        success = run_session_end_workflow(commit_message)
+        print_error("Cannot proceed without tool_executor.py")
+        sys.exit(1)
+    
+    # 使用 tool_executor.py 执行工作流
+    success = run_session_end_workflow(commit_message)
     
     # 退出码
     sys.exit(0 if success else 1)
