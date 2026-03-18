@@ -134,7 +134,7 @@ class TestIssueScanner(unittest.TestCase):
         
         scanner = IssueScanner(SCRIPTS_DIR.parent)
         
-        self.assertIsNotNone(scanner.workspace)
+        self.assertIsNotNone(scanner.base_path)
         self.assertEqual(len(scanner.issues), 0)
 
 
@@ -147,7 +147,8 @@ class TestCriticalIssueDetector(unittest.TestCase):
         
         detector = CriticalIssueDetector(SCRIPTS_DIR.parent)
         
-        self.assertIsNotNone(detector.workspace)
+        self.assertIsNotNone(detector.base_path)
+        self.assertEqual(len(detector.issues), 0)
 
 
 if __name__ == '__main__':
