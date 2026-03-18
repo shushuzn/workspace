@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-18T23:07:29.755204
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\issue_scanner.py  (lines 100-200 of 426)
+        
+        # 统计
+        critical = sum(1 for i in self.issues if i.level == "critical")
+        major = sum(1 for i in self.issues if i.level == "major")
+        minor = sum(1 for i in self.issues if i.level == "minor")
+        info = sum(1 for i in self.issues if i.level == "info")
+        
+        return ScanResult(
+            total_issues=len(self.issues),
+            critical_count=critical,
+            major_count=major,
+            minor_count=minor,
+            info_count=info,
+            issues=self.issues,
+            scan_duration_ms=round(duration, 2),
+            files_scanned=self._count_files(),
+            timestamp=datetime.now().isoformat()
+        )
+    
+    def _scan_logs(self):
+        """扫描日志文件"""
+        log_patterns = ['*.log', '*-log.json', 'workflow-execution-log.json']
+        
+        for pattern in log_patterns:
+            for log_file in self.base_path.rglob(pattern):
+                try:
+                    content = log_file.read_text(encoding='utf-8', errors='replace')
+                    
+                    # 检测错误
+                    for match in re.finditer(r'(ERROR|Exception|Traceback|Failed|Failure)', content, re.IGNORECASE):
+                        line_num = content[:match.start()].count('\n') + 1
+                        self.issues.append(Issue(
+                            id=f"log-{len(self.issues)+1:03d}",
+                            level="major",
+                            category="log",
+                            file=str(log_file.relative_to(self.base_path)),
+                            line=line_num,
+                            message=f"Error detected in log: {match.group()}",
+                            evidence=content[match.start():match.start()+100],
+                            suggestion="Review log for root cause",
+                            timestamp=datetime.now().isoformat()
+                        ))
+                    
+                    # 检测警告
+                    for match in re.finditer(r'(WARNING|WARN|Deprecated)', content, re.IGNORECASE):
+                        line_num = content[:match.start()].count('\n') + 1
+                        self.issues.append(Issue(
+                            id=f"log-{len(self.issues)+1:03d}",
+                            level="minor",
+                            category="log",
+                            file=str(log_file.relative_to(self.base_path)),
+                            line=line_num,
+                            message=f"Warning detected in log: {match.group()}",
+                            evidence=content[match.start():match.start()+100],
+                            suggestion="Review warning",
+                            timestamp=datetime.now().isoformat()
+                        ))
+                
+                except Exception as e:
+                    continue
+    
+    def _run_pylint(self):
+        """运行 pylint"""
+        py_files = list(self.base_path.rglob("*.py"))
+        
+        for py_file in py_files[:20]:  # 限制文件数
+            try:
+                result = subprocess.run(
+                    ['pylint', '--errors-only', str(py_file)],
+                    capture_output=True,
+                    text=True,
+                    timeout=30
+                )
+                
+                if result.returncode != 0:
+                    for line in result.stdout.split('\n'):
+                        match = re.search(r':(\d+):\d+:.*?(E\d+):(.+)', line)
+                        if match:
+                            self.issues.append(Issue(
+                                id=f"pylint-{len(self.issues)+1:03d}",
+                                level="major",
+                                category="pylint",
+                                file=str(py_file.relative_to(self.base_path)),
+                                line=int(match.group(1)),
+                                message=f"Pylint error: {match.group(3).strip()}",
+                                evidence=line,
+                                suggestion="Fix pylint error",
+                                timestamp=datetime.now().isoformat()
+                            ))
+            
+            except Exception:
+                continue
+    
+    def _run_flake8(self):
+        """运行 flake8"""
+        try:
+            result = subprocess.run(
+                ['flake8', '--count', '--select=E9,F63,F7,F82', '--show-source', '--statistics', str(self.base_path)],
+                capture_output=True,
+                text=True,
+                timeout=60
+
+[226 more lines. Use start_line=201 to continue.]

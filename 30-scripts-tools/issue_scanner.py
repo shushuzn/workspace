@@ -28,6 +28,23 @@ from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass, asdict
 from enum import Enum
 
+# 排除扫描目录 (历史问题集中区域)
+EXCLUDE_DIRS = [
+    '99-backups',      # 备份文件
+    '92-tests',        # 测试文件
+    '90-archive',      # 归档文件
+    '80-PROJECTS',     # 旧项目
+    '60-DATA',         # 数据文件
+    '40-arxiv',        # 论文收集
+    '41-medium',       # Medium 收集
+    '42-hackernews',   # HackerNews 收集
+    'node_modules',    # NPM 依赖
+    'venv',            # Python 虚拟环境
+    '__pycache__',     # Python 缓存
+    '.git',            # Git 目录
+    'tool_result',     # 临时工具结果
+]
+
 if sys.platform == 'win32':
     sys.stdout.reconfigure(encoding='utf-8')
 
@@ -74,6 +91,21 @@ class IssueScanner:
     def __init__(self, base_path: Path):
         self.base_path = base_path
         self.issues = []
+    
+    def _should_exclude(self, path: Path) -> bool:
+        """检查路径是否应该排除"""
+        for part in path.parts:
+            if part in EXCLUDE_DIRS:
+                return True
+        return False
+    
+    def _get_py_files(self) -> List[Path]:
+        """获取 Python 文件列表（排除指定目录）"""
+        py_files = []
+        for py_file in self.base_path.rglob("*.py"):
+            if not self._should_exclude(py_file):
+                py_files.append(py_file)
+        return py_files
     
     def scan_all(self) -> ScanResult:
         """执行全量扫描"""
@@ -220,7 +252,7 @@ class IssueScanner:
     
     def _scan_todo_comments(self):
         """扫描 TODO/FIXME 注释"""
-        py_files = list(self.base_path.rglob("*.py"))
+        py_files = self._get_py_files()  # 使用排除逻辑
         
         for py_file in py_files:
             try:
@@ -248,7 +280,7 @@ class IssueScanner:
     
     def _detect_code_smells(self):
         """检测代码异味"""
-        py_files = list(self.base_path.rglob("*.py"))
+        py_files = self._get_py_files()  # 使用排除逻辑
         
         for py_file in py_files:
             try:
