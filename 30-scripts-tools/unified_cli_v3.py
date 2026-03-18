@@ -117,7 +117,7 @@ COMMAND_ALIASES = {
     'workspace check': 'workspace.py',
     
     # Research (新增)
-    'research cnt': 'domain_ranker_v2.py --compare',
+    'research cnt': '10-DOMAIN-RANKING/core/domain_ranker_v2.py --compare',
     'research arxiv': 'arxiv_workflow.py',
     'critic check': 'pre_commit_hook.py --test',
     
@@ -334,16 +334,30 @@ class UnifiedCLI:
                 }
             
             full_cmd = [sys.executable, str(tool_path)] + (args or [])
+            cwd = str(tool_path.parent)
         else:
             # Check if it's a tool name without .py
             tool_name = command.split()[0]
             tool_args = command.split()[1:]
-            tool_path = TOOLS_DIR / f"{tool_name}.py"
-            if tool_path.exists():
+            
+            # Check if tool path contains subdirectory
+            if '/' in tool_name or '\\' in tool_name:
+                # Tool is in subdirectory
+                tool_path = TOOLS_DIR / tool_name
+                if not tool_path.exists():
+                    tool_path = TOOLS_DIR / f"{tool_name}.py"
+                cwd = str(tool_path.parent)
                 full_cmd = [sys.executable, str(tool_path)] + tool_args + (args or [])
             else:
-                # Shell command
-                full_cmd = command.split() + (args or [])
+                # Tool is in tools directory
+                tool_path = TOOLS_DIR / f"{tool_name}.py"
+                if tool_path.exists():
+                    full_cmd = [sys.executable, str(tool_path)] + tool_args + (args or [])
+                    cwd = str(TOOLS_DIR)
+                else:
+                    # Shell command
+                    full_cmd = command.split() + (args or [])
+                    cwd = str(TOOLS_DIR)
         
         try:
             # Execute - use shell=True on Windows
@@ -357,7 +371,7 @@ class UnifiedCLI:
                     timeout=300,
                     encoding='utf-8',
                     errors='replace',
-                    cwd=str(TOOLS_DIR),
+                    cwd=cwd,
                     shell=True,
                 )
             else:
