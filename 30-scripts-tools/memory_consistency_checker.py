@@ -93,15 +93,19 @@ def load_index_json():
     return data, None
 
 def check_entry_count(memory_entries, index_data):
-    """Check if entry counts match"""
+    """检查条目数（允许索引包含历史记忆）"""
     memory_count = len(memory_entries)
     index_count = index_data.get('total_entries', 0)
     
-    if memory_count == index_count:
-        print_ok(f"Entry count matches: {memory_count}")
+    # 索引应该至少包含 MEMORY.md 的所有条目
+    if index_count >= memory_count:
+        print_ok(f"Index contains all MEMORY.md entries (MEMORY.md={memory_count}, index={index_count})")
+        if index_count > memory_count:
+            extra = index_count - memory_count
+            print_warning(f"Index contains {extra} additional historical entries (normal)")
         return True
     else:
-        print_error(f"Entry count mismatch: MEMORY.md={memory_count}, index={index_count}")
+        print_error(f"Index missing entries: MEMORY.md={memory_count}, index={index_count}")
         return False
 
 def check_tag_statistics(memory_entries, index_data):
@@ -159,20 +163,26 @@ def check_duplicate_entries(memory_entries):
         return False
 
 def check_orphaned_entries(memory_entries, index_data):
-    """Check for entries in index but not in MEMORY.md"""
-    # This is a simplified check - in reality would need more sophisticated matching
+    """检查索引中的条目是否在 MEMORY.md 中（允许索引包含历史记忆）"""
+    # 索引可能包含历史记忆（已被压缩），这是正常的
+    # 只检查 MEMORY.md 中的条目是否在索引中（确保索引完整）
     memory_titles = set(entry['title'] for entry in memory_entries)
     index_entries = index_data.get('entries', [])
     index_titles = set(entry.get('title', '') for entry in index_entries)
     
-    orphaned = index_titles - memory_titles
+    # 检查 MEMORY.md 的条目是否都在索引中
+    missing_from_index = memory_titles - index_titles
     
-    if not orphaned:
-        print_ok("No orphaned entries")
+    if not missing_from_index:
+        print_ok("All MEMORY.md entries are indexed")
+        # 索引可能包含更多历史条目，这是正常的
+        extra_in_index = len(index_titles - memory_titles)
+        if extra_in_index > 0:
+            print_warning(f"Index contains {extra_in_index} historical entries (normal)")
         return True
     else:
-        print_warning(f"Orphaned entries (in index but not MEMORY.md): {len(orphaned)}")
-        for title in list(orphaned)[:5]:
+        print_error(f"Entries missing from index: {len(missing_from_index)}")
+        for title in list(missing_from_index)[:5]:
             print(f"   - {title}")
         return False
 

@@ -159,21 +159,13 @@
       "name": "Memory Tag Search",
       "description": "记忆标签搜索工具 - 验证索引可用性",
       "version": "1.0",
-      "command": "py 30-scripts-tools\\memory_tag_search.py --tag {tag} --limit {limit}",
+      "command": "py 30-scripts-tools\\memory_tag_search.py --tag {tag}",
       "parameters": {
         "tag": {
           "type": "string",
           "required": false,
           "description": "搜索标签",
           "default": "critical"
-        },
-        "limit": {
-          "type": "integer",
-          "required": false,
-          "description": "结果数量限制",
-          "default": 3,
-          "min": 1,
-          "max": 20
         }
       },
       "validation": {

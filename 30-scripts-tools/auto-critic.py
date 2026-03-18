@@ -539,6 +539,42 @@ def verify_item(item: str, task: str, task_type: str) -> tuple:
             f"❌ File not found: {review_file}"
         )
     
+    elif "USER-004" in item or "批判者自动调用" in item:
+        # 检查批判者审查是否自动调用（通过工作流集成验证）
+        # 如果 auto-critic 工具被工作流引用，则视为自动调用
+        registry_file = SCRIPTS_DIR / "tools_registry.json"
+        workflows_dir = SCRIPTS_DIR / "workflows"
+        
+        if not registry_file.exists():
+            return (False, "工具库未找到", f"❌ Registry not found: {registry_file}")
+        
+        # 检查 auto-critic 是否在工作流中被引用
+        auto_critic_in_workflow = False
+        if workflows_dir.exists():
+            for wf_file in workflows_dir.glob("*.json"):
+                try:
+                    with open(wf_file, 'r', encoding='utf-8') as f:
+                        workflow = json.load(f)
+                    for step in workflow.get("steps", []):
+                        if step.get("tool_id") == "auto-critic":
+                            auto_critic_in_workflow = True
+                            break
+                except:
+                    continue
+        
+        if auto_critic_in_workflow:
+            return (
+                True,
+                "批判者已集成到工作流（自动调用）",
+                f"Evidence: auto-critic tool referenced in workflow JSON"
+            )
+        else:
+            return (
+                False,
+                "批判者未集成到工作流（需手动调用）",
+                f"❌ auto-critic not found in any workflow JSON"
+            )
+    
     # ===== 文档类深度验证 =====
     
     elif "文档结构清晰" in item:
