@@ -1,8 +1,8 @@
 {
   "workflow_id": "session-end",
   "name": "Session End Workflow",
-  "description": "会话结束工作流 - 9 步自动化流程（含记忆压缩工具）",
-  "version": "2.2",
+  "description": "会话结束工作流 - 13 步自动化流程（含 v7.0 工具）",
+  "version": "3.0",
   "last_updated": "2026-03-18",
   "principles": [
     "只引用 tool_id，禁止硬编码命令",
@@ -152,12 +152,52 @@
     {
       "step_id": 12,
       "name": "Auto-Critic Review",
-      "description": "批判者最终审查",
+      "description": "批判者最终审查（v6.0）",
       "tool_id": "auto-critic",
       "stage": "pre-commit",
       "parameters": {
         "task": "${commit_message}",
         "phase": "final"
+      },
+      "blocking": false,
+      "timeout_seconds": 60
+    },
+    {
+      "step_id": 13,
+      "name": "Auto-Critic v7.0 Enhanced Review",
+      "description": "增强版批判者审查（问题检测 + 整改闭环 + 质量门禁）",
+      "tool_id": "auto-critic-v7",
+      "stage": "pre-commit",
+      "parameters": {
+        "task": "${commit_message}",
+        "phase": "final"
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "note": "v7.0 新增：BLOCKER 失败直接阻断，自动创建整改任务"
+    },
+    {
+      "step_id": 14,
+      "name": "Quality Gate Check",
+      "description": "代码质量门禁检查",
+      "tool_id": "quality-gate",
+      "stage": "pre-commit",
+      "parameters": {
+        "check": "30-scripts-tools/*.py",
+        "min-score": 80
+      },
+      "blocking": false,
+      "timeout_seconds": 60
+    },
+    {
+      "step_id": 15,
+      "name": "Issue Scanner",
+      "description": "全面问题扫描（日志/静态分析/TODO/代码异味）",
+      "tool_id": "issue-scanner",
+      "stage": "pre-commit",
+      "parameters": {
+        "path": "30-scripts-tools",
+        "format": "json"
       },
       "blocking": false,
       "timeout_seconds": 60
