@@ -1,0 +1,39 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T17:47:17.305585
+# ---
+总工具数：348
+版本：1.8.1
+
+0 次使用：33 个
+
+前 30 个:
+  [memory-consistency-checker] - memory
+  [critical-issue-detector] - quality
+  [critical-checks] - quality-gate
+  [workflow-enforcer] - workflow
+  [analyze_memory_scripts] - memory
+  [analyze_memory_tools] - memory
+  [context_aware_cache] - performance
+  [context_db] - context
+  [critic_daily_note_pollution] - quality
+  [git_workflow] - workflow
+  [memory_fix_tools] - memory
+  [memory_rollback] - memory
+  [pre_session_hook_v1] - session
+  [rename_memory_scripts] - memory
+  [session_check] - quality
+  [smart_workflow_optimizer] - workflow
+  [test_critic_integration] - quality
+  [update_session_end_workflow] - session
+  [workflow_generator] - workflow
+  [workflow_tester_auto] - workflow
+  [workflow_validator] - workflow
+  [tool_usage_tracker] - monitoring
+  [mark_deprecated_tools] - automation
+  [workflow_session_end] - workflow
+  [workflow_brainstorm] - workflow
+  [workflow_research] - workflow
+  [workflow_project] - workflow
+  [naming_standard_analyzer] - quality
+  [standardize_naming] - automation
+  [subdivide_general_category] - automation

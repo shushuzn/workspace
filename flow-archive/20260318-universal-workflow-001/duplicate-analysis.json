@@ -1,0 +1,155 @@
+{
+  "analysis_date": "2026-03-19T17:45:54.678493",
+  "total_tools": 357,
+  "duplicate_groups": 3,
+  "top_20_groups": [
+    {
+      "keyword": "memory",
+      "tool_count": 10,
+      "tools": [
+        {
+          "tool_id": "memory-consistency-checker",
+          "usage_count": 0,
+          "name": "Memory Consistency Checker",
+          "description": "记忆数据一致性检查工具 - 确保索引与数据同步"
+        },
+        {
+          "tool_id": "memory-benchmark",
+          "usage_count": 0,
+          "name": "Memory Benchmark",
+          "description": "记忆系统性能测试工具 - 每周一自动运行"
+        },
+        {
+          "tool_id": "memory-tag-search",
+          "usage_count": 0,
+          "name": "Memory Tag Search",
+          "description": "记忆标签搜索工具 - 验证索引可用性"
+        },
+        {
+          "tool_id": "memory-index-generator",
+          "usage_count": 0,
+          "name": "Memory Index Generator",
+          "description": "记忆索引生成器 - 自动更新标签索引"
+        },
+        {
+          "tool_id": "memory-hybrid-pipeline",
+          "usage_count": 0,
+          "name": "Memory Hybrid Compression Pipeline",
+          "description": "混合压缩管道 - 整合去重/质量/重要性/增量/分层压缩策略"
+        },
+        {
+          "tool_id": "memory-quality-scorer",
+          "usage_count": 2,
+          "name": "Memory Quality Scorer",
+          "description": "记忆质量评分工具 - 5 维度评分 (完整性/结构化/密度/可执行性/独特性)"
+        },
+        {
+          "tool_id": "memory-cleanup-compress",
+          "usage_count": 0,
+          "name": "Memory Cleanup & Deduplication",
+          "description": "记忆去重清理工具 - 检测重复/冗余，清理空行/无效内容"
+        },
+        {
+          "tool_id": "memory-importance-assessor",
+          "usage_count": 0,
+          "name": "Memory Importance Assessor",
+          "description": "记忆重要性评估工具 - 5 维度评分 (可执行性/独特性/时效性/影响力/连接性)"
+        },
+        {
+          "tool_id": "memory-incremental-compressor",
+          "usage_count": 0,
+          "name": "Memory Incremental Compressor",
+          "description": "记忆增量压缩工具 - LCS 算法识别重复，只存储差异部分"
+        },
+        {
+          "tool_id": "memory_persistence",
+          "usage_count": 1,
+          "name": "Memory Persistence",
+          "description": "记忆持久化 - 将重要记忆永久保存到 MEMORY.md"
+        }
+      ],
+      "recommendation": {
+        "keep": "memory-quality-scorer",
+        "merge": [
+          "memory_persistence",
+          "memory-consistency-checker",
+          "memory-benchmark",
+          "memory-tag-search",
+          "memory-index-generator"
+        ],
+        "reason": "保留使用最多的工具 (2 次)"
+      }
+    },
+    {
+      "keyword": "brainstorm",
+      "tool_count": 4,
+      "tools": [
+        {
+          "tool_id": "brainstorm-define",
+          "usage_count": 1,
+          "name": "Brainstorm Define",
+          "description": "头脑风暴问题定义工具"
+        },
+        {
+          "tool_id": "brainstorm-diverge",
+          "usage_count": 1,
+          "name": "Brainstorm Diverge",
+          "description": "自由联想生成想法"
+        },
+        {
+          "tool_id": "brainstorm-prioritize",
+          "usage_count": 1,
+          "name": "Brainstorm Prioritize",
+          "description": "优先级排序工具"
+        },
+        {
+          "tool_id": "brainstorm-action",
+          "usage_count": 1,
+          "name": "Brainstorm Action",
+          "description": "行动规划工具"
+        }
+      ],
+      "recommendation": {
+        "keep": "brainstorm-define",
+        "merge": [
+          "brainstorm-diverge",
+          "brainstorm-prioritize",
+          "brainstorm-action"
+        ],
+        "reason": "保留使用最多的工具 (1 次)"
+      }
+    },
+    {
+      "keyword": "auto",
+      "tool_count": 3,
+      "tools": [
+        {
+          "tool_id": "auto-critic",
+          "usage_count": 44,
+          "name": "Auto-Critic v6.0",
+          "description": "全自动批判者审查工具 - 事前/事中/事后全流程审查"
+        },
+        {
+          "tool_id": "auto-critic-v7",
+          "usage_count": 2,
+          "name": "Auto-Critic v7.0 Enhanced",
+          "description": "增强版批判者 - 集成问题检测/整改闭环/质量门禁"
+        },
+        {
+          "tool_id": "auto-test-runner",
+          "usage_count": 1,
+          "name": "Auto Test Runner",
+          "description": "自动化测试运行器 - 自动运行项目测试并生成报告"
+        }
+      ],
+      "recommendation": {
+        "keep": "auto-critic",
+        "merge": [
+          "auto-critic-v7",
+          "auto-test-runner"
+        ],
+        "reason": "保留使用最多的工具 (44 次)"
+      }
+    }
+  ]
+}

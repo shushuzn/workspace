@@ -1,0 +1,33 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T17:46:35.712537
+# ---
+======================================================================
+🔀 合并重复工具
+======================================================================
+
+📊 重复组数：3
+
+🔹 处理组：memory (10 个工具)
+  保留：3 个 - memory-quality-scorer, memory_persistence, memory-consistency-checker
+  删除：7 个 - memory-benchmark, memory-tag-search, memory-index-generator, memory-hybrid-pipeline, memory-cleanup-compress
+
+🔹 处理组：brainstorm (4 个工具)
+  保留：4 个 - brainstorm-define, brainstorm-diverge, brainstorm-prioritize, brainstorm-action
+
+🔹 处理组：auto (3 个工具)
+  保留：1 个 - auto-critic
+  删除：2 个 - auto-critic-v7, auto-test-runner
+
+======================================================================
+📊 合并统计
+======================================================================
+  保留工具：8 个
+  删除工具：9 个
+
+📊 删除完成：9 个工具
+📊 工具库变化：357 → 348 (-9)
+💾 备份已保存：99-backups\deprecated-tools\merged-tools-backup.json
+
+======================================================================
+✅ 合并完成!
+======================================================================

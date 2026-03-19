@@ -1,5 +1,5 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -126,122 +126,6 @@
       "categorized_at": "2026-03-19T17:20:34.330675",
       "categorized_method": "auto"
     },
-    "memory-benchmark": {
-      "tool_id": "memory-benchmark",
-      "name": "Memory Benchmark",
-      "description": "记忆系统性能测试工具 - 每周一自动运行",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\memory_benchmark.py",
-      "parameters": {},
-      "validation": {
-        "performance_targets": {
-          "tag_search_ms": 1000,
-          "index_generation_ms": 5000,
-          "session_compression_ms": 2000,
-          "full_text_search_ms": 1000,
-          "memory_load_ms": 500
-        },
-        "schedule": "weekly_monday"
-      },
-      "triggers": [
-        "session_end"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 60,
-      "conditional": {
-        "run_only_on": "Monday"
-      },
-      "category": "memory",
-      "categorized_at": "2026-03-19T17:20:34.330677",
-      "categorized_method": "auto"
-    },
-    "memory-tag-search": {
-      "tool_id": "memory-tag-search",
-      "name": "Memory Tag Search",
-      "description": "记忆标签搜索工具 - 验证索引可用性",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\memory_tag_search.py --tag {tag}",
-      "parameters": {
-        "tag": {
-          "type": "string",
-          "required": false,
-          "description": "搜索标签",
-          "default": "critical"
-        }
-      },
-      "validation": {
-        "min_results": 1,
-        "index_file": "13-memory/memory_index.json"
-      },
-      "triggers": [
-        "session_end"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 10,
-      "category": "memory",
-      "categorized_at": "2026-03-19T17:20:34.330678",
-      "categorized_method": "auto"
-    },
-    "memory-index-generator": {
-      "tool_id": "memory-index-generator",
-      "name": "Memory Index Generator",
-      "description": "记忆索引生成器 - 自动更新标签索引",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\memory_index_generator.py",
-      "parameters": {},
-      "validation": {
-        "index_file": "13-memory/memory_index.json",
-        "min_entries": 10
-      },
-      "triggers": [
-        "session_compress"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 30,
-      "category": "memory",
-      "categorized_at": "2026-03-19T17:20:34.330680",
-      "categorized_method": "auto"
-    },
-    "memory-hybrid-pipeline": {
-      "tool_id": "memory-hybrid-pipeline",
-      "name": "Memory Hybrid Compression Pipeline",
-      "description": "混合压缩管道 - 整合去重/质量/重要性/增量/分层压缩策略",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\memory_hybrid_pipeline.py --batch --days {days}",
-      "parameters": {
-        "days": {
-          "type": "integer",
-          "required": false,
-          "description": "处理最近 N 天",
-          "default": 7,
-          "min": 1,
-          "max": 90
-        }
-      },
-      "validation": {
-        "quality_threshold": 0.7,
-        "importance_threshold": 0.5,
-        "strategies": [
-          "distill_to_memory",
-          "tiered_light",
-          "tiered_standard",
-          "tiered_heavy",
-          "archive"
-        ]
-      },
-      "triggers": [
-        "weekly_sunday"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 60,
-      "category": "memory",
-      "categorized_at": "2026-03-19T17:20:34.330681",
-      "categorized_method": "auto"
-    },
     "memory-quality-scorer": {
       "tool_id": "memory-quality-scorer",
       "name": "Memory Quality Scorer",
@@ -290,228 +174,6 @@
         "rename-memory-scripts.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013914"
-    },
-    "memory-cleanup-compress": {
-      "tool_id": "memory-cleanup-compress",
-      "name": "Memory Cleanup & Deduplication",
-      "description": "记忆去重清理工具 - 检测重复/冗余，清理空行/无效内容",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\memory_cleanup_compress.py --batch --days {days}",
-      "parameters": {
-        "days": {
-          "type": "integer",
-          "required": false,
-          "description": "处理最近 N 天",
-          "default": 14,
-          "min": 1,
-          "max": 90
-        },
-        "threshold": {
-          "type": "float",
-          "required": false,
-          "description": "相似度阈值",
-          "default": 0.8,
-          "min": 0.5,
-          "max": 1.0
-        }
-      },
-      "validation": {
-        "similarity_algorithm": [
-          "jaccard",
-          "sequence"
-        ],
-        "duplicate_types": [
-          "exact",
-          "near_duplicate",
-          "partial"
-        ]
-      },
-      "triggers": [
-        "weekly_sunday"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 30,
-      "category": "memory",
-      "categorized_at": "2026-03-19T17:20:34.330686",
-      "categorized_method": "auto"
-    },
-    "memory-importance-assessor": {
-      "tool_id": "memory-importance-assessor",
-      "name": "Memory Importance Assessor",
-      "description": "记忆重要性评估工具 - 5 维度评分 (可执行性/独特性/时效性/影响力/连接性)",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\memory_importance_assessor.py --memory \"{memory}\"",
-      "parameters": {
-        "memory": {
-          "type": "string",
-          "required": true,
-          "description": "记忆文件路径"
-        }
-      },
-      "validation": {
-        "dimensions": [
-          "actionability",
-          "uniqueness",
-          "recency",
-          "impact",
-          "connectedness"
-        ],
-        "weights": {
-          "actionability": 0.2,
-          "uniqueness": 0.25,
-          "recency": 0.15,
-          "impact": 0.25,
-          "connectedness": 0.15
-        },
-        "total_score_max": 1.0
-      },
-      "triggers": [
-        "session_compress"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 10,
-      "category": "memory",
-      "categorized_at": "2026-03-19T17:20:34.330688",
-      "categorized_method": "auto"
-    },
-    "memory-incremental-compressor": {
-      "tool_id": "memory-incremental-compressor",
-      "name": "Memory Incremental Compressor",
-      "description": "记忆增量压缩工具 - LCS 算法识别重复，只存储差异部分",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\memory_incremental_compressor.py --diff --days {days}",
-      "parameters": {
-        "days": {
-          "type": "integer",
-          "required": false,
-          "description": "处理最近 N 天",
-          "default": 7,
-          "min": 1,
-          "max": 90
-        }
-      },
-      "validation": {
-        "algorithm": "LCS",
-        "redundancy_threshold": 0.3
-      },
-      "triggers": [
-        "weekly_sunday"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 30,
-      "category": "memory",
-      "categorized_at": "2026-03-19T17:20:34.330689",
-      "categorized_method": "auto"
-    },
-    "auto-critic-v7": {
-      "tool_id": "auto-critic-v7",
-      "name": "Auto-Critic v7.0 Enhanced",
-      "description": "增强版批判者 - 集成问题检测/整改闭环/质量门禁",
-      "version": "7.0",
-      "command": "py 30-scripts-tools\\auto-critic_v7.py -t \"{task}\" -p {phase} --create-remediation",
-      "parameters": {
-        "task": {
-          "type": "string",
-          "required": true,
-          "description": "任务名称",
-          "validation": "^[a-zA-Z0-9-_]+$"
-        },
-        "phase": {
-          "type": "string",
-          "required": true,
-          "description": "审查阶段",
-          "enum": [
-            "start",
-            "mid",
-            "final"
-          ],
-          "default": "final"
-        }
-      },
-      "validation": {
-        "review_file": "30-scripts-tools/critic-auto-{task}-v7.json",
-        "score_threshold": 95,
-        "blocker_items": [
-          "致命问题 0 个",
-          "工作区正确性",
-          "代码/文档已提交 Git",
-          "批判者自动调用",
-          "无工具多份定义",
-          "工作流无硬编码命令"
-        ],
-        "warning_items": [
-          "严重问题≤2 个",
-          "一般问题≤10 个",
-          "当日笔记压缩<100 行",
-          "会话压缩执行",
-          "工具有效使用",
-          "代码质量检查",
-          "安全检查"
-        ]
-      },
-      "triggers": [
-        "session_end",
-        "task_complete"
-      ],
-      "review_required": true,
-      "blocking": true,
-      "timeout_seconds": 120,
-      "components": [
-        "issue_scanner",
-        "critical_issue_detector",
-        "remediation_tracker",
-        "quality_gate"
-      ],
-      "category": "optimization",
-      "categorized_at": "2026-03-19T17:20:34.330690",
-      "categorized_method": "auto",
-      "usage_count": 2,
-      "usage_files": [
-        "check_key_tools.py",
-        "fix_workflow_tool_ids.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013806"
-    },
-    "critical-issue-detector": {
-      "tool_id": "critical-issue-detector",
-      "name": "Critical Issue Detector",
-      "description": "严重问题检测器 - 异常栈/核心模块变更/数据丢失风险",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\critical_issue_detector.py --path {path}",
-      "parameters": {
-        "path": {
-          "type": "string",
-          "required": false,
-          "description": "扫描路径",
-          "default": "."
-        }
-      },
-      "validation": {
-        "risk_levels": [
-          "critical",
-          "high",
-          "medium",
-          "low"
-        ],
-        "categories": [
-          "data_loss",
-          "core_change",
-          "security",
-          "exception_stack"
-        ]
-      },
-      "triggers": [
-        "auto_critic_v7"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 60,
-      "category": "quality",
-      "categorized_at": "2026-03-19T17:20:34.330693",
-      "categorized_method": "auto"
     },
     "remediation-tracker": {
       "tool_id": "remediation-tracker",
@@ -673,45 +335,6 @@
         "register_core_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013802"
-    },
-    "critical-checks": {
-      "tool_id": "critical-checks",
-      "name": "Critical Checks Verifier",
-      "description": "关键审查项验证 - 工具注册 +UTF-8 编码",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\critical_checks.py --verify",
-      "parameters": {
-        "verify": {
-          "type": "boolean",
-          "required": false,
-          "description": "执行验证",
-          "default": true
-        },
-        "tool": {
-          "type": "string",
-          "required": false,
-          "description": "检查特定工具注册"
-        },
-        "file": {
-          "type": "string",
-          "required": false,
-          "description": "检查特定文件编码"
-        }
-      },
-      "validation": {
-        "critical_001": "创建的工具必须在 tools_registry.json 注册",
-        "critical_002": "中文必须用 UTF-8 编码",
-        "penalty": "零分"
-      },
-      "triggers": [
-        "session_end",
-        "tool_created"
-      ],
-      "review_required": true,
-      "blocking": true,
-      "timeout_seconds": 30,
-      "category": "quality-gate",
-      "priority": "P0"
     },
     "brainstorm-define": {
       "tool_id": "brainstorm-define",
@@ -925,60 +548,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014104",
       "recategorized_at": "2026-03-19T17:34:42.034372",
-      "recategorized_from": "general"
-    },
-    "analyze_memory_scripts": {
-      "tool_id": "analyze_memory_scripts",
-      "command": "py 30-scripts-tools/analyze-memory-scripts.py ${args}",
-      "description": "analyze-memory-scripts 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "memory",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/analyze-memory-scripts.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "recategorized_at": "2026-03-19T17:34:42.034391",
-      "recategorized_from": "general"
-    },
-    "analyze_memory_tools": {
-      "tool_id": "analyze_memory_tools",
-      "command": "py 30-scripts-tools/analyze-memory-tools.py ${args}",
-      "description": "analyze-memory-tools 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "memory",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/analyze-memory-tools.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "recategorized_at": "2026-03-19T17:34:42.034408",
       "recategorized_from": "general"
     },
     "anomaly_detector": {
@@ -2330,37 +1899,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013848"
     },
-    "context_db": {
-      "tool_id": "context_db",
-      "command": "py 30-scripts-tools/context_db.py ${args}",
-      "description": "context_db 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "context",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/context_db.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541371",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034982",
-      "recategorized_from": "general"
-    },
     "context_search": {
       "tool_id": "context_search",
       "command": "py 30-scripts-tools/context_search.py --demo",
@@ -2426,31 +1964,6 @@
       "usage_tracked_at": "2026-03-19T17:28:52.013849",
       "recategorized_at": "2026-03-19T17:34:42.035007",
       "recategorized_from": "general"
-    },
-    "critic_daily_note_pollution": {
-      "tool_id": "critic_daily_note_pollution",
-      "command": "py 30-scripts-tools/critic-daily-note-pollution.py ${args}",
-      "description": "批判者工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "quality",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/critic-daily-note-pollution.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      }
     },
     "critic_auto_fix": {
       "tool_id": "critic_auto_fix",
@@ -3600,31 +3113,6 @@
         "git-firewall-proxy.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013962"
-    },
-    "git_workflow": {
-      "tool_id": "git_workflow",
-      "command": "py 30-scripts-tools/git_workflow.py ${args}",
-      "description": "工作流工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "workflow",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/git_workflow.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      }
     },
     "graded_fallback": {
       "tool_id": "graded_fallback",
@@ -4799,33 +4287,6 @@
       "recategorized_at": "2026-03-19T17:34:42.035723",
       "recategorized_from": "general"
     },
-    "memory_fix_tools": {
-      "tool_id": "memory_fix_tools",
-      "command": "py 30-scripts-tools/memory_fix_tools.py ${args}",
-      "description": "memory_fix_tools 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "memory",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/memory_fix_tools.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "recategorized_at": "2026-03-19T17:34:42.035734",
-      "recategorized_from": "general"
-    },
     "memory_forgetting": {
       "tool_id": "memory_forgetting",
       "command": "py 30-scripts-tools/memory_forgetting.py ${args}",
@@ -5436,33 +4897,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013882",
       "recategorized_at": "2026-03-19T17:34:42.035931",
-      "recategorized_from": "general"
-    },
-    "memory_rollback": {
-      "tool_id": "memory_rollback",
-      "command": "py 30-scripts-tools/memory_rollback.py ${args}",
-      "description": "memory_rollback 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "memory",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/memory_rollback.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "recategorized_at": "2026-03-19T17:34:42.035941",
       "recategorized_from": "general"
     },
     "memory_search_cached": {
@@ -9468,27 +8902,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014052"
     },
-    "auto-test-runner": {
-      "name": "Auto Test Runner",
-      "description": "自动化测试运行器 - 自动运行项目测试并生成报告",
-      "file": "auto_test_runner.py",
-      "category": "testing",
-      "parameters": [
-        "--test-dir",
-        "--report-dir",
-        "--coverage"
-      ],
-      "examples": [
-        "py auto_test_runner.py"
-      ],
-      "added_at": "2026-03-19T15:11:26.457663",
-      "status": "active",
-      "usage_count": 1,
-      "usage_files": [
-        "register_medium_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014053"
-    },
     "parallel-executor": {
       "name": "Parallel Executor",
       "description": "并行执行器 - 并行执行独立任务以提高效率",
@@ -10775,6 +10188,54 @@
       ],
       "added_at": "2026-03-19T17:41:24.921780",
       "status": "active"
+    },
+    "detect_duplicate_tools": {
+      "name": "Detect Duplicate Tools",
+      "description": "检测重复工具 - 分析工具库识别功能重复的工具",
+      "file": "detect_duplicate_tools.py",
+      "category": "analysis",
+      "parameters": [],
+      "examples": [
+        "py detect_duplicate_tools.py"
+      ],
+      "added_at": "2026-03-19T17:47:29.562138",
+      "status": "active"
+    },
+    "merge_duplicate_tools": {
+      "name": "Merge Duplicate Tools",
+      "description": "合并重复工具 - 基于使用次数合并功能重复的工具",
+      "file": "merge_duplicate_tools.py",
+      "category": "automation",
+      "parameters": [],
+      "examples": [
+        "py merge_duplicate_tools.py"
+      ],
+      "added_at": "2026-03-19T17:47:29.562172",
+      "status": "active"
+    },
+    "extra_cleanup": {
+      "name": "Extra Cleanup",
+      "description": "额外清理 - 进一步清理低频工具达成 -20% 目标",
+      "file": "extra_cleanup.py",
+      "category": "automation",
+      "parameters": [],
+      "examples": [
+        "py extra_cleanup.py"
+      ],
+      "added_at": "2026-03-19T17:47:29.562176",
+      "status": "active"
+    },
+    "final_cleanup": {
+      "name": "Final Cleanup",
+      "description": "最终清理 - 删除 9 个低频工具达成 -20% 目标",
+      "file": "final_cleanup.py",
+      "category": "automation",
+      "parameters": [],
+      "examples": [
+        "py final_cleanup.py"
+      ],
+      "added_at": "2026-03-19T17:47:29.562184",
+      "status": "active"
     }
   },
   "workflows": {
@@ -10881,8 +10342,8 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T17:41:24.921783",
-  "total_tools": 357,
+  "updated_at": "2026-03-19T17:47:29.562186",
+  "total_tools": 343,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
   "manual_fixes": 5,
@@ -10936,5 +10397,18 @@
     "deleted_count": 86,
     "files_backed_up": 0,
     "backup_location": "99-backups/deprecated-tools/"
+  },
+  "merge_record": {
+    "merged_at": "2026-03-19T17:46:16.435043",
+    "deleted_count": 9,
+    "reason": "duplicate_merge"
+  },
+  "milestone_20_percent": {
+    "achieved_at": "2026-03-19T17:47:17.241399",
+    "original_count": 424,
+    "final_count": 339,
+    "reduction_count": 85,
+    "reduction_percentage": 20.047169811320757,
+    "target_achieved": true
   }
 }
