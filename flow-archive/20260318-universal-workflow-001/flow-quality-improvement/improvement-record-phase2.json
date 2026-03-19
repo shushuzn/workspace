@@ -1,0 +1,18 @@
+{
+  "improved_at": "2026-03-19T18:21:33.508016",
+  "improved_tools": [
+    "auto_execute_workflow",
+    "workflow_interactive",
+    "register_core_tools",
+    "check_core_tools",
+    "check_flow_manager",
+    "context_verify",
+    "critical-issue-detector",
+    "critical-checks",
+    "analyze_memory_scripts",
+    "analyze_memory_tools",
+    "critic_daily_note_pollution",
+    "memory_fix_tools"
+  ],
+  "count": 12
+}

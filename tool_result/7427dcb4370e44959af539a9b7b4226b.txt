@@ -1,0 +1,142 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T18:20:22.100778
+# ---
+======================================================================
+📊 分析低分工具
+======================================================================
+
+📊 工具库总览:
+  总工具数：372
+  平均评分：50.2
+
+📊 评分分布:
+  优秀 (80-100): 0 个
+  良好 (60-79):  24 个
+  一般 (40-59):  304 个
+  待改进 (0-39): 44 个
+
+🔍 低分工具分析 (<40 分，共44 个):
+
+  1. [brainstorm-define] - 36.5 分
+      类别：automation
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  2. [brainstorm-prioritize] - 36.5 分
+      类别：automation
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  3. [brainstorm-action] - 36.5 分
+      类别：automation
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  4. [auto_execute_workflow] - 36.5 分
+      类别：core
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  5. [workflow_interactive] - 36.5 分
+      类别：core
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  6. [check_tools] - 36.5 分
+      类别：utility
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  7. [check_workflow_steps] - 36.5 分
+      类别：utility
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  8. [register_core_tools] - 36.5 分
+      类别：utility
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  9. [check_core_tools] - 36.5 分
+      类别：utility
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  10. [check_flow_manager] - 36.5 分
+      类别：utility
+      原因：无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  11. [session_compress] - 36.5 分
+      类别：memory
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  12. [context_verify] - 36.5 分
+      类别：quality
+      原因：无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  13. [critical-issue-detector] - 37.5 分
+      类别：general
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  14. [critical-checks] - 37.5 分
+      类别：general
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  15. [analyze_memory_scripts] - 37.5 分
+      类别：general
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  16. [analyze_memory_tools] - 37.5 分
+      类别：general
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  17. [context_db] - 37.5 分
+      类别：general
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  18. [critic_daily_note_pollution] - 37.5 分
+      类别：general
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  19. [git_workflow] - 37.5 分
+      类别：general
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+  20. [memory_fix_tools] - 37.5 分
+      类别：general
+      原因：描述过短, 无参数说明, 无使用示例, 无文件
+      优先级：high
+
+📁 分析结果已保存：flow-archive\20260318-universal-workflow-001\flow-quality-improvement\low-quality-analysis.json
+
+✅ 选择 Top 20 优先改进工具:
+  - brainstorm-define (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - brainstorm-prioritize (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - brainstorm-action (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - auto_execute_workflow (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - workflow_interactive (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - check_tools (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - check_workflow_steps (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - register_core_tools (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - check_core_tools (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - check_flow_manager (36.5分) - 无参数说明, 无使用示例, 无文件
+  - session_compress (36.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - context_verify (36.5分) - 无参数说明, 无使用示例, 无文件
+  - critical-issue-detector (37.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - critical-checks (37.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - analyze_memory_scripts (37.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - analyze_memory_tools (37.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - context_db (37.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - critic_daily_note_pollution (37.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - git_workflow (37.5分) - 描述过短, 无参数说明, 无使用示例, 无文件
+  - memory_fix_tools (37.5分) - 描述过短, 无参数说明, 无使用示例, 无文件

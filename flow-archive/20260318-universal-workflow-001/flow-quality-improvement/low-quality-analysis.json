@@ -1,0 +1,296 @@
+{
+  "analyzed_at": "2026-03-19T18:19:32.630758",
+  "total_tools": 372,
+  "distribution": {
+    "excellent": 0,
+    "good": 24,
+    "fair": 304,
+    "poor": 44
+  },
+  "low_quality_analysis": [
+    {
+      "rank": 1,
+      "tool_id": "brainstorm-define",
+      "score": 36.5,
+      "name": "Brainstorm Define",
+      "category": "automation",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 2,
+      "tool_id": "brainstorm-prioritize",
+      "score": 36.5,
+      "name": "Brainstorm Prioritize",
+      "category": "automation",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 3,
+      "tool_id": "brainstorm-action",
+      "score": 36.5,
+      "name": "Brainstorm Action",
+      "category": "automation",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 4,
+      "tool_id": "auto_execute_workflow",
+      "score": 36.5,
+      "name": "",
+      "category": "core",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 5,
+      "tool_id": "workflow_interactive",
+      "score": 36.5,
+      "name": "",
+      "category": "core",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 6,
+      "tool_id": "check_tools",
+      "score": 36.5,
+      "name": "",
+      "category": "utility",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 7,
+      "tool_id": "check_workflow_steps",
+      "score": 36.5,
+      "name": "",
+      "category": "utility",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 8,
+      "tool_id": "register_core_tools",
+      "score": 36.5,
+      "name": "",
+      "category": "utility",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 9,
+      "tool_id": "check_core_tools",
+      "score": 36.5,
+      "name": "",
+      "category": "utility",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 10,
+      "tool_id": "check_flow_manager",
+      "score": 36.5,
+      "name": "",
+      "category": "utility",
+      "reasons": [
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 11,
+      "tool_id": "session_compress",
+      "score": 36.5,
+      "name": "Post-Session Compressor",
+      "category": "memory",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 12,
+      "tool_id": "context_verify",
+      "score": 36.5,
+      "name": "Fast Load Context Verifier",
+      "category": "quality",
+      "reasons": [
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 13,
+      "tool_id": "critical-issue-detector",
+      "score": 37.5,
+      "name": "Critical Issue Detector",
+      "category": "general",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 14,
+      "tool_id": "critical-checks",
+      "score": 37.5,
+      "name": "Critical Checks Verifier",
+      "category": "general",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 15,
+      "tool_id": "analyze_memory_scripts",
+      "score": 37.5,
+      "name": "",
+      "category": "general",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 16,
+      "tool_id": "analyze_memory_tools",
+      "score": 37.5,
+      "name": "",
+      "category": "general",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 17,
+      "tool_id": "context_db",
+      "score": 37.5,
+      "name": "",
+      "category": "general",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 18,
+      "tool_id": "critic_daily_note_pollution",
+      "score": 37.5,
+      "name": "",
+      "category": "general",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 19,
+      "tool_id": "git_workflow",
+      "score": 37.5,
+      "name": "",
+      "category": "general",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    },
+    {
+      "rank": 20,
+      "tool_id": "memory_fix_tools",
+      "score": 37.5,
+      "name": "",
+      "category": "general",
+      "reasons": [
+        "描述过短",
+        "无参数说明",
+        "无使用示例",
+        "无文件"
+      ],
+      "improvement_priority": "high"
+    }
+  ],
+  "improvement_targets": {
+    "current_average": 50.2,
+    "target_average": 55,
+    "poor_tools_to_improve": 20,
+    "expected_gain": "+4.8 分"
+  }
+}

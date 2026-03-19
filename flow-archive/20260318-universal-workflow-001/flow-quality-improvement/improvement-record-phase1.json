@@ -1,0 +1,14 @@
+{
+  "improved_at": "2026-03-19T18:20:28.924214",
+  "improved_tools": [
+    "brainstorm-define",
+    "brainstorm-prioritize",
+    "brainstorm-action",
+    "check_tools",
+    "check_workflow_steps",
+    "session_compress",
+    "git_workflow",
+    "context_db"
+  ],
+  "count": 8
+}

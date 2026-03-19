@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-03-19T18:22:12.786135",
+  "flow_id": "20260320-tool-quality-improvement",
+  "review_type": "quality_improvement",
+  "scores": {
+    "improvement": 60,
+    "reduction": 80,
+    "documentation": 90,
+    "sustainability": 90
+  },
+  "issues": {
+    "critical": [],
+    "major": [],
+    "minor": []
+  },
+  "total_score": 80.0,
+  "conclusion": "pass_good"
+}

@@ -387,10 +387,23 @@
     "brainstorm-define": {
       "tool_id": "brainstorm-define",
       "name": "Brainstorm Define",
-      "description": "头脑风暴问题定义工具",
+      "description": "头脑风暴定义工具 - 帮助定义问题范围、目标和约束条件，生成结构化的问题定义文档",
       "version": "1.0",
       "command": "py 30-scripts-tools\\brainstorm_define.py",
-      "parameters": {},
+      "parameters": [
+        {
+          "name": "topic",
+          "type": "string",
+          "required": true,
+          "description": "头脑风暴主题"
+        },
+        {
+          "name": "constraints",
+          "type": "list",
+          "required": false,
+          "description": "约束条件列表"
+        }
+      ],
       "validation": {
         "output_file": "30-scripts-tools/brainstorm_topic.json"
       },
@@ -408,14 +421,20 @@
         "auto_categorize_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013720",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (1 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "examples": [
+        "py brainstorm_define.py --topic \"AI  Agent 自主性提升\"",
+        "py brainstorm_define.py --topic \"工具库优化\" --constraints \"[\"时间<1 小时\", \"不影响核心功能\"]\""
+      ],
+      "improved_at": "2026-03-19T18:20:28.908454",
+      "improvement_version": "1.1.0"
     },
     "brainstorm-diverge": {
       "tool_id": "brainstorm-diverge",
@@ -460,10 +479,23 @@
     "brainstorm-prioritize": {
       "tool_id": "brainstorm-prioritize",
       "name": "Brainstorm Prioritize",
-      "description": "优先级排序工具",
+      "description": "头脑风暴优先级排序工具 - 对头脑风暴产生的想法进行优先级排序，使用影响/努力矩阵评估",
       "version": "1.0",
       "command": "py 30-scripts-tools\\brainstorm_prioritize.py",
-      "parameters": {},
+      "parameters": [
+        {
+          "name": "ideas",
+          "type": "list",
+          "required": true,
+          "description": "想法列表"
+        },
+        {
+          "name": "criteria",
+          "type": "dict",
+          "required": false,
+          "description": "评估标准"
+        }
+      ],
       "validation": {
         "output_file": "30-scripts-tools/priority_matrix.json"
       },
@@ -481,22 +513,41 @@
         "auto_categorize_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013723",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (1 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "examples": [
+        "py brainstorm_prioritize.py --ideas \"[\"想法 1\", \"想法 2\"]\"",
+        "py brainstorm_prioritize.py --ideas \"[...]\" --criteria \"{\"impact\": 0.6, \"effort\": 0.4}\""
+      ],
+      "improved_at": "2026-03-19T18:20:28.908486",
+      "improvement_version": "1.1.0"
     },
     "brainstorm-action": {
       "tool_id": "brainstorm-action",
       "name": "Brainstorm Action",
-      "description": "行动规划工具",
+      "description": "头脑风暴行动规划工具 - 将头脑风暴结果转化为可执行的行动计划，包含步骤、时间、负责人",
       "version": "1.0",
       "command": "py 30-scripts-tools\\brainstorm_action.py",
-      "parameters": {},
+      "parameters": [
+        {
+          "name": "prioritized_ideas",
+          "type": "list",
+          "required": true,
+          "description": "已排序的想法"
+        },
+        {
+          "name": "timeline",
+          "type": "string",
+          "required": false,
+          "description": "时间线 (如\"本周\", \"本月\")"
+        }
+      ],
       "validation": {
         "output_file": "30-scripts-tools/action_plan.md",
         "min_actions": 3
@@ -515,14 +566,19 @@
         "auto_categorize_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013724",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (1 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "examples": [
+        "py brainstorm_action.py --prioritized_ideas \"[...]\" --timeline \"本周\""
+      ],
+      "improved_at": "2026-03-19T18:20:28.908492",
+      "improvement_version": "1.1.0"
     },
     "workflow-enforcer": {
       "tool_id": "workflow-enforcer",
@@ -10771,7 +10827,7 @@
     "auto_execute_workflow": {
       "tool_id": "auto_execute_workflow",
       "command": "py 30-scripts-tools/auto_execute_workflow.py",
-      "description": "全自动工作流执行 - 零手动干预",
+      "description": "自动执行工作流工具 - 根据工作流配置自动执行各个步骤，支持进度跟踪和错误处理",
       "category": "core",
       "version": "1.0.0",
       "created_at": "2026-03-19",
@@ -10784,19 +10840,45 @@
         "register_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013797",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (6 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "parameters": [
+        {
+          "name": "flow_id",
+          "type": "string",
+          "required": true,
+          "description": "工作流 ID"
+        },
+        {
+          "name": "start_step",
+          "type": "int",
+          "required": false,
+          "description": "起始步骤"
+        },
+        {
+          "name": "dry_run",
+          "type": "boolean",
+          "required": false,
+          "description": "是否仅模拟执行"
+        }
+      ],
+      "examples": [
+        "py auto_execute_workflow.py --flow_id \"20260318-universal-workflow-001\"",
+        "py auto_execute_workflow.py --flow_id \"xxx\" --start_step 5 --dry_run true"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493707",
+      "improvement_version": "1.2.0"
     },
     "workflow_interactive": {
       "tool_id": "workflow_interactive",
       "command": "py 30-scripts-tools/workflow_interactive.py",
-      "description": "交互式工作流执行 - 图形界面",
+      "description": "交互式工作流工具 - 提供交互式工作流执行界面，支持用户输入和实时反馈",
       "category": "core",
       "version": "1.0.0",
       "created_at": "2026-03-19",
@@ -10808,19 +10890,38 @@
         "workflow_interactive_v2.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014038",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (7 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "parameters": [
+        {
+          "name": "flow_id",
+          "type": "string",
+          "required": true,
+          "description": "工作流 ID"
+        },
+        {
+          "name": "interactive_mode",
+          "type": "boolean",
+          "required": false,
+          "description": "是否交互模式"
+        }
+      ],
+      "examples": [
+        "py workflow_interactive.py --flow_id \"20260318-universal-workflow-001\" --interactive_mode true"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493740",
+      "improvement_version": "1.2.0"
     },
     "check_tools": {
       "tool_id": "check_tools",
       "command": "py 30-scripts-tools/check_tools.py",
-      "description": "工具列表检查",
+      "description": "工具检查工具 - 检查工具库健康状态，包括文件存在性、注册状态、使用情况",
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
@@ -10833,19 +10934,39 @@
         "system_health_checker.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013799",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (7 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "parameters": [
+        {
+          "name": "check_type",
+          "type": "string",
+          "required": false,
+          "description": "检查类型：all/files/usage"
+        },
+        {
+          "name": "output_format",
+          "type": "string",
+          "required": false,
+          "description": "输出格式：json/md/text"
+        }
+      ],
+      "examples": [
+        "py check_tools.py",
+        "py check_tools.py --check_type files --output_format md"
+      ],
+      "improved_at": "2026-03-19T18:20:28.908496",
+      "improvement_version": "1.1.0"
     },
     "check_workflow_steps": {
       "tool_id": "check_workflow_steps",
       "command": "py 30-scripts-tools/check_workflow_steps.py",
-      "description": "工作流步骤配置检查",
+      "description": "工作流步骤检查工具 - 验证工作流步骤执行情况，检查是否有跳步或未完成步骤",
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
@@ -10857,19 +10978,39 @@
         "register_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013800",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (5 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "parameters": [
+        {
+          "name": "flow_id",
+          "type": "string",
+          "required": true,
+          "description": "工作流 ID"
+        },
+        {
+          "name": "strict_mode",
+          "type": "boolean",
+          "required": false,
+          "description": "严格模式：是/否"
+        }
+      ],
+      "examples": [
+        "py check_workflow_steps.py --flow_id \"20260318-universal-workflow-001\"",
+        "py check_workflow_steps.py --flow_id \"xxx\" --strict_mode true"
+      ],
+      "improved_at": "2026-03-19T18:20:28.908500",
+      "improvement_version": "1.1.0"
     },
     "register_core_tools": {
       "tool_id": "register_core_tools",
       "command": "py 30-scripts-tools/register_core_tools.py",
-      "description": "注册核心工具",
+      "description": "核心工具注册工具 - 批量注册核心工具到工具库，包括工作流/内存/批判者类工具",
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
@@ -10879,19 +11020,39 @@
         "register_core_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014039",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (3 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "parameters": [
+        {
+          "name": "tool_list",
+          "type": "list",
+          "required": true,
+          "description": "工具列表"
+        },
+        {
+          "name": "category",
+          "type": "string",
+          "required": false,
+          "description": "工具类别"
+        }
+      ],
+      "examples": [
+        "py register_core_tools.py --tool_list \"[\"workflow-enforcer\", \"memory-checker\"]\"",
+        "py register_core_tools.py --tool_list \"[...]\" --category \"workflow\""
+      ],
+      "improved_at": "2026-03-19T18:21:33.493744",
+      "improvement_version": "1.2.0"
     },
     "check_core_tools": {
       "tool_id": "check_core_tools",
       "command": "py 30-scripts-tools/check_core_tools.py",
-      "description": "检查核心工具注册状态",
+      "description": "核心工具检查工具 - 验证核心工具是否已注册且文件存在，确保工作流正常运行",
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
@@ -10902,19 +11063,39 @@
         "register_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014041",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (4 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "parameters": [
+        {
+          "name": "tool_ids",
+          "type": "list",
+          "required": false,
+          "description": "要检查的工具 ID 列表"
+        },
+        {
+          "name": "check_file",
+          "type": "boolean",
+          "required": false,
+          "description": "是否检查文件存在"
+        }
+      ],
+      "examples": [
+        "py check_core_tools.py",
+        "py check_core_tools.py --tool_ids \"[\"workflow-enforcer\"]\" --check_file true"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493747",
+      "improvement_version": "1.2.0"
     },
     "check_flow_manager": {
       "tool_id": "check_flow_manager",
       "command": "py 30-scripts-tools/check_flow_manager.py",
-      "description": "检查 flow-manager 工具配置",
+      "description": "工作流管理器检查工具 - 检查工作流管理器状态，包括配置、进度、执行历史",
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
@@ -10925,14 +11106,34 @@
         "register_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014042",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (4 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "parameters": [
+        {
+          "name": "flow_id",
+          "type": "string",
+          "required": true,
+          "description": "工作流 ID"
+        },
+        {
+          "name": "check_type",
+          "type": "string",
+          "required": false,
+          "description": "检查类型：config/progress/history"
+        }
+      ],
+      "examples": [
+        "py check_flow_manager.py --flow_id \"20260318-universal-workflow-001\"",
+        "py check_flow_manager.py --flow_id \"xxx\" --check_type progress"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493750",
+      "improvement_version": "1.2.0"
     },
     "register_tools": {
       "tool_id": "register_tools",
@@ -11874,10 +12075,23 @@
     "session_compress": {
       "tool_id": "session-compress",
       "name": "Post-Session Compressor",
-      "description": "会话压缩工具 - 压缩对话到结构化摘要",
+      "description": "会话压缩工具 - 将完整会话日志压缩为结构化摘要，减少 96% token 使用",
       "version": "1.0",
       "command": "py 30-scripts-tools\\post_session_compress.py --auto",
-      "parameters": {},
+      "parameters": [
+        {
+          "name": "session_file",
+          "type": "string",
+          "required": true,
+          "description": "会话文件路径"
+        },
+        {
+          "name": "compression_ratio",
+          "type": "float",
+          "required": false,
+          "description": "目标压缩率 (0-1)"
+        }
+      ],
       "validation": {
         "context_size_limit_kb": 100,
         "daily_note_lines_limit": 100,
@@ -11901,22 +12115,41 @@
       "renamed_from": "session-compress",
       "renamed_at": "2026-03-19T17:33:50.992565",
       "naming_standard": "underscore",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (2 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "examples": [
+        "py session_compress.py --session_file \"session.json\"",
+        "py session_compress.py --session_file \"xxx.json\" --compression_ratio 0.96"
+      ],
+      "improved_at": "2026-03-19T18:20:28.908503",
+      "improvement_version": "1.1.0"
     },
     "context_verify": {
       "tool_id": "context-verify",
       "name": "Fast Load Context Verifier",
-      "description": "上下文大小验证工具 - 确保<100KB",
+      "description": "上下文验证工具 - 验证加载的上下文是否完整正确，包括 7 个核心文件检查",
       "version": "1.0",
       "command": "py 30-scripts-tools\\fast_load.py",
-      "parameters": {},
+      "parameters": [
+        {
+          "name": "strict_mode",
+          "type": "boolean",
+          "required": false,
+          "description": "严格模式：是/否"
+        },
+        {
+          "name": "output_detail",
+          "type": "boolean",
+          "required": false,
+          "description": "是否输出详情"
+        }
+      ],
       "validation": {
         "max_size_kb": 100,
         "core_files": [
@@ -11948,14 +12181,20 @@
       "renamed_from": "context-verify",
       "renamed_at": "2026-03-19T17:33:50.992746",
       "naming_standard": "underscore",
-      "quality_score": 36.5,
+      "quality_score": 56.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (2 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "examples": [
+        "py context_verify.py",
+        "py context_verify.py --strict_mode true --output_detail true"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493753",
+      "improvement_version": "1.2.0"
     },
     "quality_gate": {
       "tool_id": "quality-gate",
@@ -12983,131 +13222,297 @@
     },
     "critical-issue-detector": {
       "name": "Critical Issue Detector",
-      "description": "待补充",
+      "description": "关键问题检测工具 - 自动检测工作流执行中的关键问题和风险，提前预警",
       "category": "general",
       "status": "active",
       "restored_at": "2026-03-19T17:52:47.261980",
       "restored_from": "week4_final_cleanup",
-      "quality_score": 37.5,
+      "quality_score": 57.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
-      }
+      },
+      "parameters": [
+        {
+          "name": "flow_id",
+          "type": "string",
+          "required": true,
+          "description": "工作流 ID"
+        },
+        {
+          "name": "sensitivity",
+          "type": "string",
+          "required": false,
+          "description": "敏感度：high/medium/low"
+        }
+      ],
+      "examples": [
+        "py critical_issue_detector.py --flow_id \"20260318-universal-workflow-001\"",
+        "py critical_issue_detector.py --flow_id \"xxx\" --sensitivity high"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493756",
+      "improvement_version": "1.2.0"
     },
     "critical-checks": {
       "name": "Critical Checks Verifier",
-      "description": "待补充",
+      "description": "关键检查工具 - 执行关键质量检查，包括代码质量、文档完整性、测试覆盖率",
       "category": "general",
       "status": "active",
       "restored_at": "2026-03-19T17:52:47.262007",
       "restored_from": "week4_final_cleanup",
-      "quality_score": 37.5,
+      "quality_score": 57.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
-      }
+      },
+      "parameters": [
+        {
+          "name": "check_items",
+          "type": "list",
+          "required": true,
+          "description": "检查项列表"
+        },
+        {
+          "name": "threshold",
+          "type": "float",
+          "required": false,
+          "description": "通过阈值 (0-1)"
+        }
+      ],
+      "examples": [
+        "py critical_checks.py --check_items \"[\"code_quality\", \"documentation\"]\"",
+        "py critical_checks.py --check_items \"[...]\" --threshold 0.8"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493759",
+      "improvement_version": "1.2.0"
     },
     "analyze_memory_scripts": {
       "name": "",
-      "description": "待补充",
+      "description": "内存脚本分析工具 - 分析内存相关脚本的使用情况和性能，提供优化建议",
       "category": "general",
       "status": "active",
       "restored_at": "2026-03-19T17:52:47.262011",
       "restored_from": "week4_final_cleanup",
-      "quality_score": 37.5,
+      "quality_score": 57.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
-      }
+      },
+      "parameters": [
+        {
+          "name": "script_dir",
+          "type": "string",
+          "required": true,
+          "description": "脚本目录"
+        },
+        {
+          "name": "include_usage",
+          "type": "boolean",
+          "required": false,
+          "description": "是否包含使用统计"
+        }
+      ],
+      "examples": [
+        "py analyze_memory_scripts.py --script_dir \"30-scripts-tools\"",
+        "py analyze_memory_scripts.py --script_dir \"xxx\" --include_usage true"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493763",
+      "improvement_version": "1.2.0"
     },
     "analyze_memory_tools": {
       "name": "",
-      "description": "待补充",
+      "description": "内存工具分析工具 - 分析内存相关工具的效果和使用频率，识别改进机会",
       "category": "general",
       "status": "active",
       "restored_at": "2026-03-19T17:52:47.262012",
       "restored_from": "week4_final_cleanup",
-      "quality_score": 37.5,
+      "quality_score": 57.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
-      }
+      },
+      "parameters": [
+        {
+          "name": "time_range",
+          "type": "string",
+          "required": false,
+          "description": "时间范围：day/week/month"
+        },
+        {
+          "name": "output_format",
+          "type": "string",
+          "required": false,
+          "description": "输出格式：json/md"
+        }
+      ],
+      "examples": [
+        "py analyze_memory_tools.py --time_range week",
+        "py analyze_memory_tools.py --time_range month --output_format md"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493766",
+      "improvement_version": "1.2.0"
     },
     "context_db": {
       "name": "",
-      "description": "待补充",
+      "description": "上下文数据库工具 - 管理会话上下文数据，支持存储、查询、删除上下文记录",
       "category": "general",
       "status": "active",
       "restored_at": "2026-03-19T17:52:47.262014",
       "restored_from": "week4_final_cleanup",
-      "quality_score": 37.5,
+      "quality_score": 57.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
-      }
+      },
+      "parameters": [
+        {
+          "name": "action",
+          "type": "string",
+          "required": true,
+          "description": "操作类型：store/query/delete"
+        },
+        {
+          "name": "key",
+          "type": "string",
+          "required": true,
+          "description": "上下文键"
+        },
+        {
+          "name": "value",
+          "type": "any",
+          "required": false,
+          "description": "上下文值"
+        }
+      ],
+      "examples": [
+        "py context_db.py --action store --key \"user_pref\" --value \"{...}\"",
+        "py context_db.py --action query --key \"user_pref\""
+      ],
+      "improved_at": "2026-03-19T18:20:28.908509",
+      "improvement_version": "1.1.0"
     },
     "critic_daily_note_pollution": {
       "name": "",
-      "description": "待补充",
+      "description": "批判者每日笔记污染检测工具 - 检测每日笔记中的冗余和污染内容，保持笔记简洁",
       "category": "general",
       "status": "active",
       "restored_at": "2026-03-19T17:52:47.262015",
       "restored_from": "week4_final_cleanup",
-      "quality_score": 37.5,
+      "quality_score": 57.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
-      }
+      },
+      "parameters": [
+        {
+          "name": "date",
+          "type": "string",
+          "required": false,
+          "description": "日期 (YYYY-MM-DD)"
+        },
+        {
+          "name": "auto_clean",
+          "type": "boolean",
+          "required": false,
+          "description": "是否自动清理"
+        }
+      ],
+      "examples": [
+        "py critic_daily_note_pollution.py --date \"2026-03-20\"",
+        "py critic_daily_note_pollution.py --auto_clean true"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493770",
+      "improvement_version": "1.2.0"
     },
     "git_workflow": {
       "name": "",
-      "description": "待补充",
+      "description": "Git 工作流工具 - 自动化 Git 提交流程，包括 add/commit/push，支持自定义提交信息",
       "category": "general",
       "status": "active",
       "restored_at": "2026-03-19T17:52:47.262018",
       "restored_from": "week4_final_cleanup",
-      "quality_score": 37.5,
+      "quality_score": 57.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
-      }
+      },
+      "parameters": [
+        {
+          "name": "message",
+          "type": "string",
+          "required": true,
+          "description": "提交信息"
+        },
+        {
+          "name": "auto_push",
+          "type": "boolean",
+          "required": false,
+          "description": "是否自动推送"
+        }
+      ],
+      "examples": [
+        "py git_workflow.py --message \"feat: add new tool\"",
+        "py git_workflow.py --message \"fix: bug fix\" --auto_push true"
+      ],
+      "improved_at": "2026-03-19T18:20:28.908506",
+      "improvement_version": "1.1.0"
     },
     "memory_fix_tools": {
       "name": "",
-      "description": "待补充",
+      "description": "内存修复工具 - 修复内存相关工具的问题，包括数据损坏、索引错误等",
       "category": "general",
       "status": "active",
       "restored_at": "2026-03-19T17:52:47.262020",
       "restored_from": "week4_final_cleanup",
-      "quality_score": 37.5,
+      "quality_score": 57.5,
       "quality_details": {
         "functionality": "功能描述一般",
         "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:False, 示例:False",
+        "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
-      }
+      },
+      "parameters": [
+        {
+          "name": "issue_type",
+          "type": "string",
+          "required": true,
+          "description": "问题类型：corruption/index/backup"
+        },
+        {
+          "name": "backup_first",
+          "type": "boolean",
+          "required": false,
+          "description": "是否先备份"
+        }
+      ],
+      "examples": [
+        "py memory_fix_tools.py --issue_type corruption --backup_first true",
+        "py memory_fix_tools.py --issue_type index"
+      ],
+      "improved_at": "2026-03-19T18:21:33.493774",
+      "improvement_version": "1.2.0"
     },
     "memory_rollback": {
       "name": "",
@@ -13550,7 +13955,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T17:52:47.262537",
+  "updated_at": "2026-03-19T18:21:33.493775",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
@@ -13617,14 +14022,24 @@
     "reason": "quality_over_quantity - 质量优先于数量"
   },
   "quality_assessment": {
-    "assessed_at": "2026-03-19T17:57:14.620645",
+    "assessed_at": "2026-03-19T18:21:42.814165",
     "total_tools": 372,
-    "average_score": 50.2,
+    "average_score": 51.3,
     "distribution": {
       "excellent": 0,
       "good": 24,
-      "fair": 304,
-      "poor": 44
+      "fair": 324,
+      "poor": 24
     }
+  },
+  "improvement_record": {
+    "improved_at": "2026-03-19T18:20:28.908511",
+    "improved_count": 8,
+    "target": "tool_quality_improvement_phase1"
+  },
+  "improvement_record_phase2": {
+    "improved_at": "2026-03-19T18:21:33.493776",
+    "improved_count": 12,
+    "target": "tool_quality_improvement_phase2"
   }
 }
