@@ -1,5 +1,5 @@
 {
-  "version": "1.11.16",
+  "version": "1.11.17",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14357,6 +14357,38 @@
       "usage_count": 0,
       "file_path": "flow-archive/20260320-brainstorm-v3/workflow.json",
       "created_at": "2026-03-20T01:15:00+08:00"
+    },
+    "session_compressor": {
+      "category": "compression",
+      "description": "Session compressor (tokens>10K OR lines>200 -> compress to <5KB)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/session_compressor.py",
+      "created_at": "2026-03-20T02:00:00+08:00"
+    },
+    "memory_distiller": {
+      "category": "compression",
+      "description": "Memory distiller (MEMORY.md>50KB OR unprocessed>10 -> extract insights)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/memory_distiller.py",
+      "created_at": "2026-03-20T02:00:00+08:00"
+    },
+    "note_summarizer": {
+      "category": "compression",
+      "description": "Note summarizer (single note>5KB OR >100 lines -> compress)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/note_summarizer.py",
+      "created_at": "2026-03-20T02:00:00+08:00"
+    },
+    "compression_scheduler": {
+      "category": "compression",
+      "description": "Unified scheduler for 3 independent compression channels",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/compression_scheduler.py",
+      "created_at": "2026-03-20T02:00:00+08:00"
     }
   },
   "workflows": {
@@ -14463,7 +14495,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T22:46:57.882190",
+  "updated_at": "2026-03-19T22:58:06.270255",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
