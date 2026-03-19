@@ -1,8 +1,23 @@
 {
-  "timeout_threshold": 300,
+  "timeout_seconds": 300,
   "max_retries": 3,
-  "retry_delay": 10,
-  "exponential_backoff": true,
-  "auto_recovery": true,
-  "degradation_enabled": true
+  "retry_delay_seconds": 5,
+  "error_threshold": 3,
+  "warnings": [
+    {
+      "step_id": "2",
+      "type": "exception",
+      "counted_at": "2026-03-19T22:32:34.119346"
+    },
+    {
+      "step_id": "2",
+      "type": "exception",
+      "counted_at": "2026-03-19T22:32:39.122509"
+    },
+    {
+      "step_id": "2",
+      "type": "exception",
+      "counted_at": "2026-03-19T22:32:44.129582"
+    }
+  ]
 }

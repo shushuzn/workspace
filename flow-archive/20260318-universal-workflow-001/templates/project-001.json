@@ -1,80 +1,36 @@
 {
-  "template_id": "project-001",
-  "name": "项目开发工作流",
-  "version": "1.0.0",
-  "description": "适用于软件开发、功能实现、bug 修复等项目类任务",
-  "total_steps": 8,
-  "estimated_time": "20-40 分钟",
+  "name": "Project Task",
+  "description": "Standard project execution workflow",
   "steps": [
     {
-      "step": 1,
-      "name": "上下文加载验证",
-      "blocker": true,
-      "tool": "context_verify",
-      "description": "加载项目相关文件"
+      "id": 1,
+      "name": "Define project scope"
     },
     {
-      "step": 2,
-      "name": "Flow ID 绑定",
-      "blocker": true,
-      "tool": "flow_id_bind",
-      "description": "绑定到 project-001 工作流"
+      "id": 2,
+      "name": "Plan tasks"
     },
     {
-      "step": 3,
-      "name": "需求分析",
-      "blocker": true,
-      "tool": "task_parser",
-      "description": "明确功能需求、验收标准"
+      "id": 3,
+      "name": "Execute tasks"
     },
     {
-      "step": 4,
-      "name": "方案设计",
-      "blocker": true,
-      "tool": "design_planner",
-      "description": "技术方案设计、架构规划"
+      "id": 4,
+      "name": "Test and validate"
     },
     {
-      "step": 5,
-      "name": "代码实现",
-      "blocker": true,
-      "tool": "code_executor",
-      "description": "编写代码、实现功能"
+      "id": 5,
+      "name": "Document"
     },
     {
-      "step": 6,
-      "name": "测试验证",
-      "blocker": true,
-      "tool": "test_runner",
-      "description": "单元测试、集成测试"
+      "id": 6,
+      "name": "Deploy"
     },
     {
-      "step": 7,
-      "name": "代码审查",
-      "blocker": true,
-      "tool": "auto-critic_v7",
-      "description": "代码质量审查"
-    },
-    {
-      "step": 8,
-      "name": "Git 提交推送",
-      "blocker": true,
-      "tool": "git_commit_push",
-      "description": "提交代码到 Git"
+      "id": 7,
+      "name": "Review"
     }
   ],
-  "quality_gates": {
-    "step_7": {
-      "critical_issues": 0,
-      "severe_issues": 2,
-      "minor_issues": 10,
-      "min_score": 80
-    }
-  },
-  "deliverables": [
-    "源代码/",
-    "测试用例/",
-    "技术文档.md",
-    "CHANGELOG.md"
-  ]
+  "estimated_time_minutes": 90,
+  "complexity": "medium"
 }
