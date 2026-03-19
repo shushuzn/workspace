@@ -1,6 +1,6 @@
 {
-  "version": "1.11.23",
-  "last_updated": "2026-03-19T19:54:54.158751",
+  "version": "1.11.24",
+  "last_updated": "2026-03-20T00:14:42.991068",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
     "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
@@ -14452,6 +14452,98 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/summary_generator.py",
       "created_at": "2026-03-20T05:45:00+08:00"
+    },
+    "P0-UX-007": {
+      "tool_id": "P0-UX-007",
+      "name": "user_preferences",
+      "description": "User preference profile management with persistence",
+      "category": "ux",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:14:42.990900",
+      "file_path": "30-scripts-tools/user_preferences.py",
+      "size_kb": 8.4,
+      "status": "active",
+      "tested": true,
+      "test_results": {
+        "test_count": 5,
+        "passed": 5,
+        "failed": 0,
+        "tested_at": "2026-03-20T00:14:42.990971"
+      },
+      "features": [
+        "Profile management",
+        "Preference persistence",
+        "Shortcut customization",
+        "Usage statistics tracking",
+        "Profile import/export"
+      ],
+      "config": {
+        "default_profile": "default",
+        "profiles_dir": "03-config/user_profiles",
+        "auto_save": true
+      }
+    },
+    "P0-UX-008": {
+      "tool_id": "P0-UX-008",
+      "name": "auto_retry",
+      "description": "Intelligent retry system with exponential backoff",
+      "category": "ux",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:14:42.990981",
+      "file_path": "30-scripts-tools/auto_retry.py",
+      "size_kb": 10.9,
+      "status": "active",
+      "tested": true,
+      "test_results": {
+        "test_count": 5,
+        "passed": 5,
+        "failed": 0,
+        "tested_at": "2026-03-20T00:14:42.990983"
+      },
+      "features": [
+        "Exponential backoff",
+        "Jitter support",
+        "Retryable error detection",
+        "Retry logging",
+        "Statistics tracking"
+      ],
+      "config": {
+        "max_retries": 3,
+        "base_delay": 1.0,
+        "max_delay": 60.0,
+        "exponential": true,
+        "jitter": true
+      }
+    },
+    "P0-UX-009": {
+      "tool_id": "P0-UX-009",
+      "name": "progressive_output",
+      "description": "Stream output in chunks for better UX",
+      "category": "ux",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:14:42.990988",
+      "file_path": "30-scripts-tools/progressive_output.py",
+      "size_kb": 10.3,
+      "status": "active",
+      "tested": true,
+      "test_results": {
+        "test_count": 5,
+        "passed": 5,
+        "failed": 0,
+        "tested_at": "2026-03-20T00:14:42.990989"
+      },
+      "features": [
+        "Chunk-by-chunk streaming",
+        "Configurable chunk size",
+        "Line-by-line mode",
+        "Generator support",
+        "Progress tracking"
+      ],
+      "config": {
+        "chunk_size": 100,
+        "chunk_delay": 0.1,
+        "show_progress": true
+      }
     }
   },
   "workflows": {
