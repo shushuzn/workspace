@@ -1,0 +1,159 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T17:20:34.382614
+# ---
+======================================================================
+📂 分类未分类工具
+======================================================================
+
+📊 未分类工具：27 个
+
+[auto-critic]
+  名称：Auto-Critic v6.0
+  描述：全自动批判者审查工具 - 事前/事中/事后全流程审查...
+  建议分类：quality (置信度：1)
+
+[session-compress]
+  名称：Post-Session Compressor
+  描述：会话压缩工具 - 压缩对话到结构化摘要...
+  建议分类：memory (置信度：1)
+
+[context-verify]
+  名称：Fast Load Context Verifier
+  描述：上下文大小验证工具 - 确保<100KB...
+  建议分类：quality (置信度：1)
+
+[memory-consistency-checker]
+  名称：Memory Consistency Checker
+  描述：记忆数据一致性检查工具 - 确保索引与数据同步...
+  建议分类：memory (置信度：1)
+
+[memory-benchmark]
+  名称：Memory Benchmark
+  描述：记忆系统性能测试工具 - 每周一自动运行...
+  建议分类：memory (置信度：1)
+
+[memory-tag-search]
+  名称：Memory Tag Search
+  描述：记忆标签搜索工具 - 验证索引可用性...
+  建议分类：memory (置信度：1)
+
+[memory-index-generator]
+  名称：Memory Index Generator
+  描述：记忆索引生成器 - 自动更新标签索引...
+  建议分类：memory (置信度：1)
+
+[memory-hybrid-pipeline]
+  名称：Memory Hybrid Compression Pipeline
+  描述：混合压缩管道 - 整合去重/质量/重要性/增量/分层压缩策略...
+  建议分类：memory (置信度：2)
+
+[memory-quality-scorer]
+  名称：Memory Quality Scorer
+  描述：记忆质量评分工具 - 5 维度评分 (完整性/结构化/密度/可执行性/独特性)...
+  建议分类：memory (置信度：1)
+
+[memory-cleanup-compress]
+  名称：Memory Cleanup & Deduplication
+  描述：记忆去重清理工具 - 检测重复/冗余，清理空行/无效内容...
+  建议分类：memory (置信度：2)
+
+[memory-importance-assessor]
+  名称：Memory Importance Assessor
+  描述：记忆重要性评估工具 - 5 维度评分 (可执行性/独特性/时效性/影响力/连接性)...
+  建议分类：memory (置信度：1)
+
+[memory-incremental-compressor]
+  名称：Memory Incremental Compressor
+  描述：记忆增量压缩工具 - LCS 算法识别重复，只存储差异部分...
+  建议分类：memory (置信度：2)
+
+[auto-critic-v7]
+  名称：Auto-Critic v7.0 Enhanced
+  描述：增强版批判者 - 集成问题检测/整改闭环/质量门禁...
+  建议分类：optimization (置信度：1)
+
+[issue-scanner]
+  名称：Issue Scanner
+  描述：问题扫描器 - 日志/静态分析/TODO/代码异味/安全扫描...
+  建议分类：analysis (置信度：1)
+
+[critical-issue-detector]
+  名称：Critical Issue Detector
+  描述：严重问题检测器 - 异常栈/核心模块变更/数据丢失风险...
+  建议分类：quality (置信度：1)
+
+[remediation-tracker]
+  名称：Remediation Tracker
+  描述：整改跟踪器 - 管理 FAIL 项整改闭环...
+  建议分类：uncategorized (置信度：0)
+
+[quality-gate]
+  名称：Quality Gate Checker
+  描述：质量门禁 - 代码质量/安全/复杂度/测试覆盖率...
+  建议分类：quality (置信度：2)
+
+[flow-manager]
+  名称：
+  描述：Flow ID 管理器 - 创建/快照/恢复/归档工作流...
+  建议分类：workflow (置信度：1)
+
+[brainstorm-define]
+  名称：Brainstorm Define
+  描述：头脑风暴问题定义工具...
+  建议分类：uncategorized (置信度：0)
+
+[brainstorm-diverge]
+  名称：Brainstorm Diverge
+  描述：自由联想生成想法...
+  建议分类：uncategorized (置信度：0)
+
+[brainstorm-prioritize]
+  名称：Brainstorm Prioritize
+  描述：优先级排序工具...
+  建议分类：uncategorized (置信度：0)
+
+[brainstorm-action]
+  名称：Brainstorm Action
+  描述：行动规划工具...
+  建议分类：uncategorized (置信度：0)
+
+[workflow-session-end]
+  名称：Session End Sub-Workflow
+  描述：子工作流 - 会话结束处理 (主工作流专用)...
+  建议分类：workflow (置信度：2)
+
+[workflow-brainstorm]
+  名称：Brainstorm Sub-Workflow
+  描述：子工作流 - 头脑风暴 (主工作流专用)...
+  建议分类：workflow (置信度：2)
+
+[workflow-research]
+  名称：Research Sub-Workflow
+  描述：子工作流 - 深度研究 (主工作流专用)...
+  建议分类：workflow (置信度：2)
+
+[workflow-project]
+  名称：Project Sub-Workflow
+  描述：子工作流 - 项目管理 (主工作流专用)...
+  建议分类：workflow (置信度：2)
+
+[workflow-enforcer]
+  名称：Workflow Enforcement Tool
+  描述：工作流强制遵守工具 - 确保 12 步骤全部执行...
+  建议分类：workflow (置信度：3)
+
+======================================================================
+📊 建议分类统计:
+======================================================================
+  memory: 10 个
+  workflow: 6 个
+  uncategorized: 5 个
+  quality: 4 个
+  optimization: 1 个
+  analysis: 1 个
+
+💾 报告已保存：flow-archive\20260318-universal-workflow-001\uncategorized-tools-analysis.json
+
+======================================================================
+✅ 未分类工具分析完成!
+======================================================================

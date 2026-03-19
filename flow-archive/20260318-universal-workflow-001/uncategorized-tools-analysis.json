@@ -1,0 +1,230 @@
+{
+  "analysis_date": "2026-03-19T17:20:03.700378",
+  "total_uncategorized": 27,
+  "suggestions": [
+    {
+      "tool_id": "auto-critic",
+      "name": "Auto-Critic v6.0",
+      "description": "全自动批判者审查工具 - 事前/事中/事后全流程审查",
+      "current_category": "",
+      "suggested_category": "quality",
+      "confidence": 1
+    },
+    {
+      "tool_id": "session-compress",
+      "name": "Post-Session Compressor",
+      "description": "会话压缩工具 - 压缩对话到结构化摘要",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 1
+    },
+    {
+      "tool_id": "context-verify",
+      "name": "Fast Load Context Verifier",
+      "description": "上下文大小验证工具 - 确保<100KB",
+      "current_category": "",
+      "suggested_category": "quality",
+      "confidence": 1
+    },
+    {
+      "tool_id": "memory-consistency-checker",
+      "name": "Memory Consistency Checker",
+      "description": "记忆数据一致性检查工具 - 确保索引与数据同步",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 1
+    },
+    {
+      "tool_id": "memory-benchmark",
+      "name": "Memory Benchmark",
+      "description": "记忆系统性能测试工具 - 每周一自动运行",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 1
+    },
+    {
+      "tool_id": "memory-tag-search",
+      "name": "Memory Tag Search",
+      "description": "记忆标签搜索工具 - 验证索引可用性",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 1
+    },
+    {
+      "tool_id": "memory-index-generator",
+      "name": "Memory Index Generator",
+      "description": "记忆索引生成器 - 自动更新标签索引",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 1
+    },
+    {
+      "tool_id": "memory-hybrid-pipeline",
+      "name": "Memory Hybrid Compression Pipeline",
+      "description": "混合压缩管道 - 整合去重/质量/重要性/增量/分层压缩策略",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 2
+    },
+    {
+      "tool_id": "memory-quality-scorer",
+      "name": "Memory Quality Scorer",
+      "description": "记忆质量评分工具 - 5 维度评分 (完整性/结构化/密度/可执行性/独特性)",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 1
+    },
+    {
+      "tool_id": "memory-cleanup-compress",
+      "name": "Memory Cleanup & Deduplication",
+      "description": "记忆去重清理工具 - 检测重复/冗余，清理空行/无效内容",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 2
+    },
+    {
+      "tool_id": "memory-importance-assessor",
+      "name": "Memory Importance Assessor",
+      "description": "记忆重要性评估工具 - 5 维度评分 (可执行性/独特性/时效性/影响力/连接性)",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 1
+    },
+    {
+      "tool_id": "memory-incremental-compressor",
+      "name": "Memory Incremental Compressor",
+      "description": "记忆增量压缩工具 - LCS 算法识别重复，只存储差异部分",
+      "current_category": "",
+      "suggested_category": "memory",
+      "confidence": 2
+    },
+    {
+      "tool_id": "auto-critic-v7",
+      "name": "Auto-Critic v7.0 Enhanced",
+      "description": "增强版批判者 - 集成问题检测/整改闭环/质量门禁",
+      "current_category": "",
+      "suggested_category": "optimization",
+      "confidence": 1
+    },
+    {
+      "tool_id": "issue-scanner",
+      "name": "Issue Scanner",
+      "description": "问题扫描器 - 日志/静态分析/TODO/代码异味/安全扫描",
+      "current_category": "",
+      "suggested_category": "analysis",
+      "confidence": 1
+    },
+    {
+      "tool_id": "critical-issue-detector",
+      "name": "Critical Issue Detector",
+      "description": "严重问题检测器 - 异常栈/核心模块变更/数据丢失风险",
+      "current_category": "",
+      "suggested_category": "quality",
+      "confidence": 1
+    },
+    {
+      "tool_id": "remediation-tracker",
+      "name": "Remediation Tracker",
+      "description": "整改跟踪器 - 管理 FAIL 项整改闭环",
+      "current_category": "",
+      "suggested_category": "uncategorized",
+      "confidence": 0
+    },
+    {
+      "tool_id": "quality-gate",
+      "name": "Quality Gate Checker",
+      "description": "质量门禁 - 代码质量/安全/复杂度/测试覆盖率",
+      "current_category": "",
+      "suggested_category": "quality",
+      "confidence": 2
+    },
+    {
+      "tool_id": "flow-manager",
+      "name": "",
+      "description": "Flow ID 管理器 - 创建/快照/恢复/归档工作流",
+      "current_category": "",
+      "suggested_category": "workflow",
+      "confidence": 1
+    },
+    {
+      "tool_id": "brainstorm-define",
+      "name": "Brainstorm Define",
+      "description": "头脑风暴问题定义工具",
+      "current_category": "",
+      "suggested_category": "uncategorized",
+      "confidence": 0
+    },
+    {
+      "tool_id": "brainstorm-diverge",
+      "name": "Brainstorm Diverge",
+      "description": "自由联想生成想法",
+      "current_category": "",
+      "suggested_category": "uncategorized",
+      "confidence": 0
+    },
+    {
+      "tool_id": "brainstorm-prioritize",
+      "name": "Brainstorm Prioritize",
+      "description": "优先级排序工具",
+      "current_category": "",
+      "suggested_category": "uncategorized",
+      "confidence": 0
+    },
+    {
+      "tool_id": "brainstorm-action",
+      "name": "Brainstorm Action",
+      "description": "行动规划工具",
+      "current_category": "",
+      "suggested_category": "uncategorized",
+      "confidence": 0
+    },
+    {
+      "tool_id": "workflow-session-end",
+      "name": "Session End Sub-Workflow",
+      "description": "子工作流 - 会话结束处理 (主工作流专用)",
+      "current_category": "",
+      "suggested_category": "workflow",
+      "confidence": 2
+    },
+    {
+      "tool_id": "workflow-brainstorm",
+      "name": "Brainstorm Sub-Workflow",
+      "description": "子工作流 - 头脑风暴 (主工作流专用)",
+      "current_category": "",
+      "suggested_category": "workflow",
+      "confidence": 2
+    },
+    {
+      "tool_id": "workflow-research",
+      "name": "Research Sub-Workflow",
+      "description": "子工作流 - 深度研究 (主工作流专用)",
+      "current_category": "",
+      "suggested_category": "workflow",
+      "confidence": 2
+    },
+    {
+      "tool_id": "workflow-project",
+      "name": "Project Sub-Workflow",
+      "description": "子工作流 - 项目管理 (主工作流专用)",
+      "current_category": "",
+      "suggested_category": "workflow",
+      "confidence": 2
+    },
+    {
+      "tool_id": "workflow-enforcer",
+      "name": "Workflow Enforcement Tool",
+      "description": "工作流强制遵守工具 - 确保 12 步骤全部执行",
+      "current_category": "",
+      "suggested_category": "workflow",
+      "confidence": 3
+    }
+  ],
+  "category_counts": {
+    "quality": 4,
+    "memory": 10,
+    "optimization": 1,
+    "analysis": 1,
+    "uncategorized": 5,
+    "workflow": 6
+  }
+}

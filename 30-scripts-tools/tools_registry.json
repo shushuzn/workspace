@@ -1,5 +1,5 @@
 {
-  "version": "1.7.3",
+  "version": "1.7.5",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -91,7 +91,10 @@
       ],
       "review_required": true,
       "blocking": false,
-      "timeout_seconds": 60
+      "timeout_seconds": 60,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330638",
+      "categorized_method": "auto"
     },
     "session-compress": {
       "tool_id": "session-compress",
@@ -110,7 +113,10 @@
       ],
       "review_required": true,
       "blocking": true,
-      "timeout_seconds": 30
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330670",
+      "categorized_method": "auto"
     },
     "context-verify": {
       "tool_id": "context-verify",
@@ -137,7 +143,10 @@
       ],
       "review_required": true,
       "blocking": true,
-      "timeout_seconds": 10
+      "timeout_seconds": 10,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330673",
+      "categorized_method": "auto"
     },
     "memory-consistency-checker": {
       "tool_id": "memory-consistency-checker",
@@ -155,7 +164,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 30
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330675",
+      "categorized_method": "auto"
     },
     "memory-benchmark": {
       "tool_id": "memory-benchmark",
@@ -182,7 +194,10 @@
       "timeout_seconds": 60,
       "conditional": {
         "run_only_on": "Monday"
-      }
+      },
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330677",
+      "categorized_method": "auto"
     },
     "memory-tag-search": {
       "tool_id": "memory-tag-search",
@@ -207,7 +222,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 10
+      "timeout_seconds": 10,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330678",
+      "categorized_method": "auto"
     },
     "memory-index-generator": {
       "tool_id": "memory-index-generator",
@@ -225,7 +243,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 30
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330680",
+      "categorized_method": "auto"
     },
     "memory-hybrid-pipeline": {
       "tool_id": "memory-hybrid-pipeline",
@@ -259,7 +280,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 60
+      "timeout_seconds": 60,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330681",
+      "categorized_method": "auto"
     },
     "memory-quality-scorer": {
       "tool_id": "memory-quality-scorer",
@@ -299,7 +323,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 30
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330683",
+      "categorized_method": "auto"
     },
     "memory-cleanup-compress": {
       "tool_id": "memory-cleanup-compress",
@@ -341,7 +368,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 30
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330686",
+      "categorized_method": "auto"
     },
     "memory-importance-assessor": {
       "tool_id": "memory-importance-assessor",
@@ -378,7 +408,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 10
+      "timeout_seconds": 10,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330688",
+      "categorized_method": "auto"
     },
     "memory-incremental-compressor": {
       "tool_id": "memory-incremental-compressor",
@@ -405,7 +438,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 30
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330689",
+      "categorized_method": "auto"
     },
     "auto-critic-v7": {
       "tool_id": "auto-critic-v7",
@@ -465,7 +501,10 @@
         "critical_issue_detector",
         "remediation_tracker",
         "quality_gate"
-      ]
+      ],
+      "category": "optimization",
+      "categorized_at": "2026-03-19T17:20:34.330690",
+      "categorized_method": "auto"
     },
     "issue-scanner": {
       "tool_id": "issue-scanner",
@@ -513,7 +552,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 60
+      "timeout_seconds": 60,
+      "category": "analysis",
+      "categorized_at": "2026-03-19T17:20:34.330692",
+      "categorized_method": "auto"
     },
     "critical-issue-detector": {
       "tool_id": "critical-issue-detector",
@@ -548,7 +590,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 60
+      "timeout_seconds": 60,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330693",
+      "categorized_method": "auto"
     },
     "remediation-tracker": {
       "tool_id": "remediation-tracker",
@@ -593,7 +638,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 30
+      "timeout_seconds": 30,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330695",
+      "categorized_method": "auto"
     },
     "quality-gate": {
       "tool_id": "quality-gate",
@@ -633,7 +681,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 60
+      "timeout_seconds": 60,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330697",
+      "categorized_method": "auto"
     },
     "p1-issue-fixer": {
       "tool_id": "p1-issue-fixer",
@@ -724,7 +775,10 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330698",
+      "categorized_method": "auto"
     },
     "critical-checks": {
       "tool_id": "critical-checks",
@@ -780,7 +834,10 @@
       ],
       "review_required": false,
       "blocking": true,
-      "timeout_seconds": 600
+      "timeout_seconds": 600,
+      "category": "automation",
+      "categorized_at": "2026-03-19T17:20:34.330700",
+      "categorized_method": "auto"
     },
     "brainstorm-diverge": {
       "tool_id": "brainstorm-diverge",
@@ -804,7 +861,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 900
+      "timeout_seconds": 900,
+      "category": "automation",
+      "categorized_at": "2026-03-19T17:20:34.330702",
+      "categorized_method": "auto"
     },
     "brainstorm-prioritize": {
       "tool_id": "brainstorm-prioritize",
@@ -821,7 +881,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 300
+      "timeout_seconds": 300,
+      "category": "automation",
+      "categorized_at": "2026-03-19T17:20:34.330703",
+      "categorized_method": "auto"
     },
     "brainstorm-action": {
       "tool_id": "brainstorm-action",
@@ -839,7 +902,10 @@
       ],
       "review_required": false,
       "blocking": true,
-      "timeout_seconds": 600
+      "timeout_seconds": 600,
+      "category": "automation",
+      "categorized_at": "2026-03-19T17:20:34.330705",
+      "categorized_method": "auto"
     },
     "workflow-session-end": {
       "tool_id": "workflow-session-end",
@@ -861,7 +927,10 @@
       ],
       "review_required": false,
       "blocking": true,
-      "timeout_seconds": 120
+      "timeout_seconds": 120,
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330706",
+      "categorized_method": "auto"
     },
     "workflow-brainstorm": {
       "tool_id": "workflow-brainstorm",
@@ -883,7 +952,10 @@
       ],
       "review_required": false,
       "blocking": false,
-      "timeout_seconds": 300
+      "timeout_seconds": 300,
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330707",
+      "categorized_method": "auto"
     },
     "workflow-research": {
       "tool_id": "workflow-research",
@@ -915,7 +987,10 @@
       ],
       "review_required": false,
       "blocking": true,
-      "timeout_seconds": 3600
+      "timeout_seconds": 3600,
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330709",
+      "categorized_method": "auto"
     },
     "workflow-project": {
       "tool_id": "workflow-project",
@@ -943,7 +1018,10 @@
       ],
       "review_required": false,
       "blocking": true,
-      "timeout_seconds": 1800
+      "timeout_seconds": 1800,
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330710",
+      "categorized_method": "auto"
     },
     "workflow-enforcer": {
       "tool_id": "workflow-enforcer",
@@ -981,7 +1059,10 @@
       ],
       "review_required": false,
       "blocking": true,
-      "timeout_seconds": 60
+      "timeout_seconds": 60,
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330712",
+      "categorized_method": "auto"
     },
     "active_learning_trigger": {
       "tool_id": "active_learning_trigger",
@@ -10390,6 +10471,42 @@
       ],
       "added_at": "2026-03-19T17:12:30.643387",
       "status": "recovered"
+    },
+    "categorize_uncategorized_tools": {
+      "name": "Categorize Uncategorized Tools",
+      "description": "分类未分类工具 - 分析并建议分类",
+      "file": "categorize_uncategorized_tools.py",
+      "category": "automation",
+      "parameters": [],
+      "examples": [
+        "py categorize_uncategorized_tools.py"
+      ],
+      "added_at": "2026-03-19T17:21:44.580568",
+      "status": "active"
+    },
+    "auto_categorize_tools": {
+      "name": "Auto Categorize Tools",
+      "description": "自动分类工具 - 应用建议分类到工具库",
+      "file": "auto_categorize_tools.py",
+      "category": "automation",
+      "parameters": [],
+      "examples": [
+        "py auto_categorize_tools.py"
+      ],
+      "added_at": "2026-03-19T17:21:44.580600",
+      "status": "active"
+    },
+    "tool_search": {
+      "name": "Tool Search",
+      "description": "工具搜索 - 按关键词/分类搜索，支持模糊匹配",
+      "file": "tool_search.py",
+      "category": "utility",
+      "parameters": [],
+      "examples": [
+        "py tool_search.py"
+      ],
+      "added_at": "2026-03-19T17:21:44.580605",
+      "status": "active"
     }
   },
   "workflows": {
@@ -10496,7 +10613,9 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T17:12:30.643389",
-  "total_tools": 432,
-  "recovery_note": "Recovered 6 missing file tools"
+  "updated_at": "2026-03-19T17:21:44.580607",
+  "total_tools": 435,
+  "recovery_note": "Recovered 6 missing file tools",
+  "categorized_count": 27,
+  "manual_fixes": 5
 }
