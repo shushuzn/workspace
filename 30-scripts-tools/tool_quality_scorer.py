@@ -141,7 +141,7 @@ def score_all_tools():
     """为所有工具计算质量评分"""
     
     print("=" * 70)
-    print("📊 工具质量评分")
+    print("Tool Quality Scoring")
     print("=" * 70)
     
     with open(TOOLS_REGISTRY, 'r', encoding='utf-8') as f:
@@ -149,7 +149,7 @@ def score_all_tools():
     
     tools = registry.get("tools", {})
     
-    print(f"\n📊 工具总数：{len(tools)}")
+    print(f"\nTotal tools: {len(tools)}")
     
     results = []
     score_distribution = {
@@ -191,24 +191,24 @@ def score_all_tools():
         json.dump(registry, f, indent=2, ensure_ascii=False)
     
     # 输出结果
-    print(f"\n📊 平均质量评分：{registry['quality_assessment']['average_score']}")
+    print(f"\nAverage quality score: {registry['quality_assessment']['average_score']}")
     
-    print(f"\n📊 评分分布:")
-    print(f"  优秀 (80-100): {score_distribution['excellent']} 个")
-    print(f"  良好 (60-79):  {score_distribution['good']} 个")
-    print(f"  一般 (40-59):  {score_distribution['fair']} 个")
-    print(f"  待改进 (0-39): {score_distribution['poor']} 个")
+    print(f"\nScore Distribution:")
+    print(f"  Excellent (80-100): {score_distribution['excellent']} tools")
+    print(f"  Good (60-79):       {score_distribution['good']} tools")
+    print(f"  Fair (40-59):       {score_distribution['fair']} tools")
+    print(f"  Poor (0-39):        {score_distribution['poor']} tools")
     
     # 输出 Top 10 和 Bottom 10
     results.sort(key=lambda x: x["total_score"], reverse=True)
     
-    print(f"\n🏆 Top 10 工具:")
+    print(f"\nTop 10 Tools:")
     for i, r in enumerate(results[:10], 1):
-        print(f"  {i}. [{r['tool_id']}] - {r['total_score']} 分")
+        print(f"  {i}. [{r['tool_id']}] - {r['total_score']} pts")
     
-    print(f"\n⚠️  Bottom 10 工具:")
+    print(f"\nBottom 10 Tools:")
     for i, r in enumerate(results[-10:], 1):
-        print(f"  {i}. [{r['tool_id']}] - {r['total_score']} 分")
+        print(f"  {i}. [{r['tool_id']}] - {r['total_score']} pts")
     
     # 保存详细报告
     report_file = Path("21-reports/tool-quality-assessment-report.json")
@@ -224,10 +224,10 @@ def score_all_tools():
             "bottom_10": results[-10:]
         }, f, indent=2, ensure_ascii=False)
     
-    print(f"\n📁 详细报告：{report_file}")
+    print(f"\nReport saved to: {report_file}")
     
     print("\n" + "=" * 70)
-    print("✅ 质量评分完成!")
+    print("Quality scoring complete!")
     print("=" * 70)
     
     return results

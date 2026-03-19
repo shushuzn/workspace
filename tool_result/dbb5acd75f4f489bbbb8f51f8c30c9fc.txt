@@ -1,0 +1,41 @@
+# tool_name: read_file
+# created_at: 2026-03-19T18:34:48.498676
+# ---
+    print(f"  Poor (0-39):        {score_distribution['poor']} tools")
+    
+    # 输出 Top 10 和 Bottom 10
+    results.sort(key=lambda x: x["total_score"], reverse=True)
+    
+    print(f"\n🏆 Top 10 工具:")
+    for i, r in enumerate(results[:10], 1):
+        print(f"  {i}. [{r['tool_id']}] - {r['total_score']} 分")
+    
+    print(f"\n⚠️  Bottom 10 工具:")
+    for i, r in enumerate(results[-10:], 1):
+        print(f"  {i}. [{r['tool_id']}] - {r['total_score']} 分")
+    
+    # 保存详细报告
+    report_file = Path("21-reports/tool-quality-assessment-report.json")
+    report_file.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(report_file, 'w', encoding='utf-8') as f:
+        json.dump({
+            "assessed_at": datetime.now().isoformat(),
+            "total_tools": len(results),
+            "average_score": registry['quality_assessment']['average_score'],
+            "distribution": score_distribution,
+            "top_10": results[:10],
+            "bottom_10": results[-10:]
+        }, f, indent=2, ensure_ascii=False)
+    
+    print(f"\nReport saved to: {report_file}")
+    
+    print("\n" + "=" * 70)
+    print("Quality scoring complete!")
+    print("=" * 70)
+    
+    return results
+
+
+if __name__ == '__main__':
+    score_all_tools()
