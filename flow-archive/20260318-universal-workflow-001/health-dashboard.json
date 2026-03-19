@@ -1,0 +1,26 @@
+{
+  "generated_at": "2026-03-19T22:14:47.811050",
+  "metrics": {
+    "total_tasks": 9,
+    "compliance_rate": 0.0,
+    "avg_completion_time": 1.3333333333333333,
+    "quality_score": 6.666666666666667,
+    "trend": "stable"
+  },
+  "warnings": [
+    {
+      "level": "high",
+      "type": "compliance",
+      "message": "Compliance rate below 80%",
+      "action": "Review workflow enforcement"
+    },
+    {
+      "level": "high",
+      "type": "quality",
+      "message": "Quality score below 70",
+      "action": "Review quality gates"
+    }
+  ],
+  "health_score": 3.3333333333333335,
+  "health_level": "POOR"
+}

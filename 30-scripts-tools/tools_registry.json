@@ -1,5 +1,5 @@
 {
-  "version": "1.11.10",
+  "version": "1.11.11",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14213,6 +14213,22 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/git_precommit_check.py",
       "created_at": "2026-03-19T22:45:00+08:00"
+    },
+    "workflow-health-dashboard": {
+      "category": "monitoring",
+      "description": "工作流健康度仪表板 - 可视化展示合规率/质量/趋势",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/workflow_health_dashboard.py",
+      "created_at": "2026-03-19T23:05:00+08:00"
+    },
+    "auto-session-compressor": {
+      "category": "memory-management",
+      "description": "会话压缩自动化 - 自动摘要<5KB",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/auto_session_compressor.py",
+      "created_at": "2026-03-19T23:05:00+08:00"
     }
   },
   "workflows": {
@@ -14319,7 +14335,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T22:07:45.991790",
+  "updated_at": "2026-03-19T22:15:14.697010",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
