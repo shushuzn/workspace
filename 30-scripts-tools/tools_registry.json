@@ -1,5 +1,5 @@
 {
-  "version": "1.7.2",
+  "version": "1.7.3",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -10318,6 +10318,78 @@
       ],
       "added_at": "2026-03-19T17:03:53.291645",
       "status": "active"
+    },
+    "git_commit_push": {
+      "name": "Git Commit Push",
+      "description": "Git 提交和推送 - 自动 commit + push",
+      "file": "git_commit_push.py",
+      "category": "git",
+      "parameters": [],
+      "examples": [
+        "py git_commit_push.py"
+      ],
+      "added_at": "2026-03-19T17:12:30.643342",
+      "status": "recovered"
+    },
+    "execution_logger": {
+      "name": "Execution Logger",
+      "description": "执行日志记录 - 记录工具调用和执行结果",
+      "file": "execution_logger.py",
+      "category": "logging",
+      "parameters": [],
+      "examples": [
+        "py execution_logger.py"
+      ],
+      "added_at": "2026-03-19T17:12:30.643377",
+      "status": "recovered"
+    },
+    "tool_suggester": {
+      "name": "Tool Suggester",
+      "description": "工具推荐 - 根据任务描述推荐工具",
+      "file": "tool_suggester.py",
+      "category": "assistant",
+      "parameters": [],
+      "examples": [
+        "py tool_suggester.py"
+      ],
+      "added_at": "2026-03-19T17:12:30.643381",
+      "status": "recovered"
+    },
+    "task_analyzer": {
+      "name": "Task Analyzer",
+      "description": "任务分析 - 分析复杂度/估算时间/识别依赖",
+      "file": "task_analyzer.py",
+      "category": "analysis",
+      "parameters": [],
+      "examples": [
+        "py task_analyzer.py"
+      ],
+      "added_at": "2026-03-19T17:12:30.643383",
+      "status": "recovered"
+    },
+    "checkpoint_saver": {
+      "name": "Checkpoint Saver",
+      "description": "检查点保存 - 保存任务进度，支持恢复",
+      "file": "checkpoint_saver.py",
+      "category": "utility",
+      "parameters": [],
+      "examples": [
+        "py checkpoint_saver.py"
+      ],
+      "added_at": "2026-03-19T17:12:30.643385",
+      "status": "recovered"
+    },
+    "timeout_optimizer": {
+      "name": "Timeout Optimizer",
+      "description": "超时优化 - 根据任务类型优化超时设置",
+      "file": "timeout_optimizer.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py timeout_optimizer.py"
+      ],
+      "added_at": "2026-03-19T17:12:30.643387",
+      "status": "recovered"
     }
   },
   "workflows": {
@@ -10424,6 +10496,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T17:03:53.291658",
-  "total_tools": 426
+  "updated_at": "2026-03-19T17:12:30.643389",
+  "total_tools": 432,
+  "recovery_note": "Recovered 6 missing file tools"
 }
