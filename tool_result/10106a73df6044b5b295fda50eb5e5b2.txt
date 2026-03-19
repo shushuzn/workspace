@@ -1,0 +1,81 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T17:30:07.288512
+# ---
+======================================================================
+🏷️  标记废弃工具
+======================================================================
+
+📊 未使用工具：118 个
+
+======================================================================
+🏷️  废弃候选工具
+======================================================================
+
+标记 88 个工具为废弃候选:
+
+
+general (66 个):
+  - [active_learning_trigger] - 
+  - [analyze_causal] - 
+  - [async_executor] - 
+  - [automation_enhancer] - 
+  - [backup_strategy_restructure] - 
+  - [capacity_planner] - 
+  - [causal_split_plan] - 
+  - [ci_cd_pipeline] - 
+  - [clean_duplicates_safe] - 
+  - [cleanup_60_data_sensitive] - 
+  ... 还有 56 个
+
+tool (4 个):
+  - [ai_tool_suggester] - 
+  - [smart_tool_finder] - 
+  - [tool_consolidator] - 
+  - [tool_similarity_engine] - 
+
+security (4 个):
+  - [batch_security_fixer] - 
+  - [path_security_fixer] - 
+  - [quick_security_fix] - 
+  - [security_reporter] - 
+
+git (4 个):
+  - [git_pre_commit_hook] - 
+  - [git_precheck] - 
+  - [install_git_hooks] - 
+  - [setup_git_hooks] - 
+
+performance (3 个):
+  - [adaptive_ttl_cache] - 
+  - [clean_feishu_cache] - 
+  - [context_aware_cache] - 
+
+integration (2 个):
+  - [feishu_persona_notify] - 
+  - [find_feishu] - 
+
+analysis (1 个):
+  - [issue-scanner] - Issue Scanner
+
+brainstorm (1 个):
+  - [brainstorm_prioritize] - 
+
+reporting (1 个):
+  - [delete_all_reports] - 
+
+ui (1 个):
+  - [feishu_analytics_dashboard] - 
+
+monitoring (1 个):
+  - [health_monitor_ai] - 
+
+💡 建议:
+  1. 人工审查这些工具是否真的不需要
+  2. 确认后可以删除或归档
+  3. 更新 tools_registry.json
+
+💾 报告已保存
+
+======================================================================
+✅ 完成!
+======================================================================

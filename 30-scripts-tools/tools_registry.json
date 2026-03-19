@@ -1,5 +1,5 @@
 {
-  "version": "1.7.5",
+  "version": "1.7.7",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -94,7 +94,16 @@
       "timeout_seconds": 60,
       "category": "quality",
       "categorized_at": "2026-03-19T17:20:34.330638",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 44,
+      "usage_files": [
+        "auto-critic.py",
+        "auto-critic_v7.py",
+        "check_key_tools.py",
+        "critical_issue_detector.py",
+        "find_unsafe_calls.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013670"
     },
     "session-compress": {
       "tool_id": "session-compress",
@@ -116,7 +125,13 @@
       "timeout_seconds": 30,
       "category": "memory",
       "categorized_at": "2026-03-19T17:20:34.330670",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013803"
     },
     "context-verify": {
       "tool_id": "context-verify",
@@ -146,7 +161,13 @@
       "timeout_seconds": 10,
       "category": "quality",
       "categorized_at": "2026-03-19T17:20:34.330673",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013804"
     },
     "memory-consistency-checker": {
       "tool_id": "memory-consistency-checker",
@@ -326,7 +347,13 @@
       "timeout_seconds": 30,
       "category": "memory",
       "categorized_at": "2026-03-19T17:20:34.330683",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013914"
     },
     "memory-cleanup-compress": {
       "tool_id": "memory-cleanup-compress",
@@ -504,7 +531,13 @@
       ],
       "category": "optimization",
       "categorized_at": "2026-03-19T17:20:34.330690",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013806"
     },
     "issue-scanner": {
       "tool_id": "issue-scanner",
@@ -550,12 +583,15 @@
       "triggers": [
         "auto_critic_v7"
       ],
-      "review_required": false,
+      "review_required": true,
       "blocking": false,
       "timeout_seconds": 60,
       "category": "analysis",
       "categorized_at": "2026-03-19T17:20:34.330692",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541295"
     },
     "critical-issue-detector": {
       "tool_id": "critical-issue-detector",
@@ -641,7 +677,12 @@
       "timeout_seconds": 30,
       "category": "quality",
       "categorized_at": "2026-03-19T17:20:34.330695",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013718"
     },
     "quality-gate": {
       "tool_id": "quality-gate",
@@ -684,7 +725,13 @@
       "timeout_seconds": 60,
       "category": "quality",
       "categorized_at": "2026-03-19T17:20:34.330697",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013807"
     },
     "p1-issue-fixer": {
       "tool_id": "p1-issue-fixer",
@@ -711,7 +758,13 @@
       },
       "category": "code-quality",
       "priority": "P1",
-      "auto_run": true
+      "auto_run": true,
+      "usage_count": 5,
+      "usage_files": [
+        "register_p1_fixer.py",
+        "update_session_end_workflow.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014061"
     },
     "flow-manager": {
       "tool_id": "flow-manager",
@@ -778,7 +831,15 @@
       },
       "category": "workflow",
       "categorized_at": "2026-03-19T17:20:34.330698",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 6,
+      "usage_files": [
+        "check_flow_manager.py",
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py",
+        "register_core_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013802"
     },
     "critical-checks": {
       "tool_id": "critical-checks",
@@ -837,7 +898,12 @@
       "timeout_seconds": 600,
       "category": "automation",
       "categorized_at": "2026-03-19T17:20:34.330700",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013720"
     },
     "brainstorm-diverge": {
       "tool_id": "brainstorm-diverge",
@@ -864,7 +930,12 @@
       "timeout_seconds": 900,
       "category": "automation",
       "categorized_at": "2026-03-19T17:20:34.330702",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013721"
     },
     "brainstorm-prioritize": {
       "tool_id": "brainstorm-prioritize",
@@ -884,7 +955,12 @@
       "timeout_seconds": 300,
       "category": "automation",
       "categorized_at": "2026-03-19T17:20:34.330703",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013723"
     },
     "brainstorm-action": {
       "tool_id": "brainstorm-action",
@@ -905,7 +981,12 @@
       "timeout_seconds": 600,
       "category": "automation",
       "categorized_at": "2026-03-19T17:20:34.330705",
-      "categorized_method": "auto"
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013724"
     },
     "workflow-session-end": {
       "tool_id": "workflow-session-end",
@@ -1087,7 +1168,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541323",
+      "review_required": true
     },
     "adaptive_ttl_cache": {
       "tool_id": "adaptive_ttl_cache",
@@ -1112,7 +1197,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541327",
+      "review_required": true
     },
     "advanced_report_gen": {
       "tool_id": "advanced_report_gen",
@@ -1137,7 +1226,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "advanced_report_gen.py",
+        "batch_security_fixer.py",
+        "security_validator.py",
+        "workflow_enhancer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013634"
     },
     "ai_task_scheduler": {
       "tool_id": "ai_task_scheduler",
@@ -1162,7 +1259,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014104"
     },
     "ai_tool_suggester": {
       "tool_id": "ai_tool_suggester",
@@ -1187,7 +1289,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541329",
+      "review_required": true
     },
     "analyze_memory_scripts": {
       "tool_id": "analyze_memory_scripts",
@@ -1262,7 +1368,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541333",
+      "review_required": true
     },
     "anomaly_detector": {
       "tool_id": "anomaly_detector",
@@ -1287,7 +1397,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "anomaly_detector.py",
+        "health_monitor_ai.py",
+        "predictive_analytics.py",
+        "workflow_generator.py",
+        "workflow_optimizer_ai.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013638"
     },
     "anomaly_detector_pro": {
       "tool_id": "anomaly_detector_pro",
@@ -1312,7 +1431,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014105"
     },
     "api_gateway": {
       "tool_id": "api_gateway",
@@ -1337,7 +1461,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "api_gateway.py",
+        "auto_fix_orchestrator.py",
+        "batch_security_fixer.py",
+        "predictive_alerting_engine.py",
+        "security_validator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013642"
     },
     "arxiv_collector_v2": {
       "tool_id": "arxiv_collector_v2",
@@ -1362,7 +1495,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "obsidian_tools.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013997"
     },
     "arxiv_workflow": {
       "tool_id": "arxiv_workflow",
@@ -1387,7 +1526,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "arxiv_workflow.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013662"
     },
     "async_executor": {
       "tool_id": "async_executor",
@@ -1412,7 +1557,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541335",
+      "review_required": true
     },
     "auto_critic": {
       "tool_id": "auto_critic",
@@ -1437,7 +1586,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "auto-critic.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013672"
     },
     "auto_critic_v7": {
       "tool_id": "auto_critic_v7",
@@ -1462,7 +1616,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "check_key_tools.py",
+        "execute_step_fixed.py",
+        "fix_tool_commands.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013808"
     },
     "auto_data_cleaner": {
       "tool_id": "auto_data_cleaner",
@@ -1487,7 +1649,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 7,
+      "usage_files": [
+        "auto_data_cleaner.py",
+        "batch_security_fixer.py",
+        "openclaw.py",
+        "phase4_dashboard.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013725"
     },
     "auto_deploy": {
       "tool_id": "auto_deploy",
@@ -1512,7 +1682,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "auto_deploy.py",
+        "batch_security_fixer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013727"
     },
     "auto_deployer": {
       "tool_id": "auto_deployer",
@@ -1537,7 +1713,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 14,
+      "usage_files": [
+        "auto_deployer.py",
+        "batch_security_fixer.py",
+        "ci_cd_pipeline.py",
+        "openclaw.py",
+        "phase4_dashboard.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013737"
     },
     "auto_distill": {
       "tool_id": "auto_distill",
@@ -1562,7 +1747,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "auto_distill.py",
+        "batch_security_fixer.py",
+        "find_actual_os_system.py",
+        "memory_engine_evolution.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013738"
     },
     "auto_fix_orchestrator": {
       "tool_id": "auto_fix_orchestrator",
@@ -1587,7 +1781,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "auto_fix_orchestrator.py",
+        "production_monitor_v2.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013750"
     },
     "auto_optimizer": {
       "tool_id": "auto_optimizer",
@@ -1612,7 +1812,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "auto_optimizer.py",
+        "doc_generator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013752"
     },
     "auto_recovery": {
       "tool_id": "auto_recovery",
@@ -1637,7 +1843,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "auto_recovery.py",
+        "workflow_anomaly_detector.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013755"
     },
     "auto_signal_extractor": {
       "tool_id": "auto_signal_extractor",
@@ -1662,7 +1874,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "dialog_integrator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013901"
     },
     "auto_test_generator": {
       "tool_id": "auto_test_generator",
@@ -1687,7 +1904,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "auto_test_generator.py",
+        "openclaw.py",
+        "phase4_dashboard.py",
+        "smart_doc_generator.py",
+        "tool_integration.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013767"
     },
     "auto_test_runner": {
       "tool_id": "auto_test_runner",
@@ -1712,7 +1938,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 7,
+      "usage_files": [
+        "auto_test_runner.py",
+        "openclaw.py",
+        "phase4_dashboard.py",
+        "register_medium_priority_tools.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013768"
     },
     "auto_tuner": {
       "tool_id": "auto_tuner",
@@ -1737,7 +1972,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "auto_tuner.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013769"
     },
     "automation_enhancer": {
       "tool_id": "automation_enhancer",
@@ -1762,7 +2002,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541337",
+      "review_required": true
     },
     "automation_orchestrator": {
       "tool_id": "automation_orchestrator",
@@ -1787,7 +2031,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 11,
+      "usage_files": [
+        "arxiv_workflow.py",
+        "automation_orchestrator.py",
+        "batch_security_fixer.py",
+        "doc_generator.py",
+        "openclaw.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013664"
     },
     "autonomous_decision": {
       "tool_id": "autonomous_decision",
@@ -1812,7 +2065,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "autonomous_decision.py",
+        "autonomous_research_assistant.py",
+        "batch_security_fixer.py",
+        "security_validator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013704"
     },
     "autonomous_research_assistant": {
       "tool_id": "autonomous_research_assistant",
@@ -1837,7 +2098,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "autonomous_research_assistant.py",
+        "batch_security_fixer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013705"
     },
     "backup_strategy_restructure": {
       "tool_id": "backup_strategy_restructure",
@@ -1862,7 +2129,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541338",
+      "review_required": true
     },
     "batch_card_generator": {
       "tool_id": "batch_card_generator",
@@ -1887,7 +2158,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "batch_card_generator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013771"
     },
     "batch_processor_v2": {
       "tool_id": "batch_processor_v2",
@@ -1912,7 +2188,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "obsidian_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013999"
     },
     "batch_security_fixer": {
       "tool_id": "batch_security_fixer",
@@ -1937,7 +2218,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541340",
+      "review_required": true
     },
     "brainstorm_action": {
       "tool_id": "brainstorm_action",
@@ -1962,7 +2247,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "brainstorm_action.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013783"
     },
     "brainstorm_define": {
       "tool_id": "brainstorm_define",
@@ -1987,7 +2277,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "brainstorm_diverge.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013784"
     },
     "brainstorm_diverge": {
       "tool_id": "brainstorm_diverge",
@@ -2012,7 +2307,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "brainstorm_diverge.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013789"
     },
     "brainstorm_prioritize": {
       "tool_id": "brainstorm_prioritize",
@@ -2037,7 +2337,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541343",
+      "review_required": true
     },
     "cache_manager": {
       "tool_id": "cache_manager",
@@ -2062,7 +2366,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 26,
+      "usage_files": [
+        "automation_orchestrator.py",
+        "auto_optimizer.py",
+        "cache_manager.py",
+        "core_system_test.py",
+        "dashboard_health_widget.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013697"
     },
     "cache_observability": {
       "tool_id": "cache_observability",
@@ -2087,7 +2400,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "cache_observability.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013793"
     },
     "canvas_auto_updater": {
       "tool_id": "canvas_auto_updater",
@@ -2112,7 +2431,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "obsidian_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014000"
     },
     "capacity_planner": {
       "tool_id": "capacity_planner",
@@ -2137,7 +2461,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541345",
+      "review_required": true
     },
     "causal_inference_engine": {
       "tool_id": "causal_inference_engine",
@@ -2162,7 +2490,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 19,
+      "usage_files": [
+        "analyze_causal.py",
+        "autonomous_research_assistant.py",
+        "causal_inference_engine.py",
+        "causal_split_plan.py",
+        "context_compressor_v2.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013636"
     },
     "causal_split_plan": {
       "tool_id": "causal_split_plan",
@@ -2187,7 +2524,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541347",
+      "review_required": true
     },
     "ci_cd_pipeline": {
       "tool_id": "ci_cd_pipeline",
@@ -2212,7 +2553,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541349",
+      "review_required": true
     },
     "clean_duplicates_safe": {
       "tool_id": "clean_duplicates_safe",
@@ -2237,7 +2582,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541350",
+      "review_required": true
     },
     "clean_feishu_cache": {
       "tool_id": "clean_feishu_cache",
@@ -2262,7 +2611,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541352",
+      "review_required": true
     },
     "cleanup_60_data_sensitive": {
       "tool_id": "cleanup_60_data_sensitive",
@@ -2287,7 +2640,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541354",
+      "review_required": true
     },
     "cleanup_60data_sensitive": {
       "tool_id": "cleanup_60data_sensitive",
@@ -2312,7 +2669,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541356",
+      "review_required": true
     },
     "cleanup_nested_backups": {
       "tool_id": "cleanup_nested_backups",
@@ -2337,7 +2698,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "cleanup-precheck-issues.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013826"
     },
     "cleanup_precheck_issues": {
       "tool_id": "cleanup_precheck_issues",
@@ -2362,7 +2728,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541358",
+      "review_required": true
     },
     "cleanup_reports": {
       "tool_id": "cleanup_reports",
@@ -2387,7 +2757,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "cleanup_reports.py",
+        "report_lifecycle.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013827"
     },
     "cluster_manager": {
       "tool_id": "cluster_manager",
@@ -2412,7 +2789,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541359",
+      "review_required": true
     },
     "code_quality_reviewer": {
       "tool_id": "code_quality_reviewer",
@@ -2437,7 +2818,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "code_quality_reviewer.py",
+        "openclaw.py",
+        "phase4_dashboard.py",
+        "smart_doc_generator.py",
+        "tool_integration.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013829"
     },
     "code_reviewer": {
       "tool_id": "code_reviewer",
@@ -2462,7 +2852,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "code_reviewer.py",
+        "doc_generator.py",
+        "tool_integration.py",
+        "workflow_engine_v2.py",
+        "workflow_enhancer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013830"
     },
     "complete_path_fixer": {
       "tool_id": "complete_path_fixer",
@@ -2487,7 +2886,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541366",
+      "review_required": true
     },
     "compress_tiff_to_png": {
       "tool_id": "compress_tiff_to_png",
@@ -2512,7 +2915,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541368",
+      "review_required": true
     },
     "config_center_v2": {
       "tool_id": "config_center_v2",
@@ -2537,7 +2944,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "optimize-tools-executor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014013"
     },
     "config_manager": {
       "tool_id": "config_manager",
@@ -2562,7 +2974,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "batch_security_fixer.py",
+        "config_manager.py",
+        "openclaw.py",
+        "phase4_dashboard.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013772"
     },
     "context_aware_cache": {
       "tool_id": "context_aware_cache",
@@ -2587,7 +3007,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541369",
+      "review_required": true
     },
     "context_cache_manager": {
       "tool_id": "context_cache_manager",
@@ -2612,7 +3036,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "adaptive_ttl_cache.py",
+        "context_cli.py",
+        "memory_perf_prefetch.py",
+        "memory_search_cached.py",
+        "semantic_cache.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013578"
     },
     "context_cli": {
       "tool_id": "context_cli",
@@ -2637,7 +3070,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "context_cli.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013842"
     },
     "context_compressor": {
       "tool_id": "context_compressor",
@@ -2662,7 +3100,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "context_cli.py",
+        "context_compressor.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013843"
     },
     "context_compressor_v2": {
       "tool_id": "context_compressor_v2",
@@ -2687,7 +3132,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "context_compressor_v2.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013848"
     },
     "context_db": {
       "tool_id": "context_db",
@@ -2712,7 +3162,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541371",
+      "review_required": true
     },
     "context_search": {
       "tool_id": "context_search",
@@ -2737,7 +3191,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 12,
+      "usage_files": [
+        "context_cli.py",
+        "fix_missing_tools.py",
+        "fix_tool_commands.py",
+        "fix_tool_configs.py",
+        "memory_perf_profiler.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013845"
     },
     "coordinator_balancer": {
       "tool_id": "coordinator_balancer",
@@ -2762,7 +3225,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541373",
+      "review_required": true
     },
     "core_system_test": {
       "tool_id": "core_system_test",
@@ -2787,7 +3254,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "core_system_test.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013849"
     },
     "critic_daily_note_pollution": {
       "tool_id": "critic_daily_note_pollution",
@@ -2837,7 +3309,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "critic_auto_fix.py",
+        "find_actual_os_system.py",
+        "verify_p1_fix.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013853"
     },
     "critic_v5_review": {
       "tool_id": "critic_v5_review",
@@ -2862,7 +3341,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 16,
+      "usage_files": [
+        "cleanup-60data-sensitive.py",
+        "critic_v5_review.py",
+        "file-organizer.py",
+        "git-pre-commit-hook.py",
+        "optimize-tools-quick.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013824"
     },
     "critical_checks": {
       "tool_id": "critical_checks",
@@ -2887,7 +3375,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "critical_checks.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013852"
     },
     "critical_issue_detector": {
       "tool_id": "critical_issue_detector",
@@ -2912,7 +3405,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "auto-critic_v7.py",
+        "critical_issue_detector.py",
+        "find_unsafe_calls.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013692"
     },
     "cron_manager": {
       "tool_id": "cron_manager",
@@ -2937,7 +3437,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "cron_manager.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013856"
     },
     "daily_brief_generator": {
       "tool_id": "daily_brief_generator",
@@ -2962,7 +3467,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "daily_brief_generator.py",
+        "workflow_engine_v2.py",
+        "workflow_template_gen.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013857"
     },
     "dashboard_anomaly_alerts": {
       "tool_id": "dashboard_anomaly_alerts",
@@ -2987,7 +3499,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "dashboard_anomaly_alerts.py",
+        "dashboard_integration.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013859"
     },
     "dashboard_decision_timeline": {
       "tool_id": "dashboard_decision_timeline",
@@ -3012,7 +3530,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "dashboard_decision_timeline.py",
+        "dashboard_integration.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013860"
     },
     "dashboard_health_widget": {
       "tool_id": "dashboard_health_widget",
@@ -3037,7 +3561,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "automation_orchestrator.py",
+        "dashboard_health_widget.py",
+        "dashboard_integration.py",
+        "windows_task_scheduler.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013699"
     },
     "dashboard_integration": {
       "tool_id": "dashboard_integration",
@@ -3062,7 +3594,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "dashboard_integration.py",
+        "find_actual_os_system.py",
+        "verify_p1_fix.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013861"
     },
     "data_sync_enhancer": {
       "tool_id": "data_sync_enhancer",
@@ -3087,7 +3626,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "data_sync_enhancer.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013864"
     },
     "decision_optimizer": {
       "tool_id": "decision_optimizer",
@@ -3112,7 +3657,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "decision_optimizer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013865"
     },
     "defuddle_integration": {
       "tool_id": "defuddle_integration",
@@ -3137,7 +3687,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "arxiv_collector_v2.py",
+        "obsidian_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013657"
     },
     "delete_all_reports": {
       "tool_id": "delete_all_reports",
@@ -3162,7 +3718,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541375",
+      "review_required": true
     },
     "demo_tool": {
       "tool_id": "demo_tool",
@@ -3187,7 +3747,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541377",
+      "review_required": true
     },
     "deploy_production": {
       "tool_id": "deploy_production",
@@ -3212,7 +3776,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541379",
+      "review_required": true
     },
     "deployment_validator": {
       "tool_id": "deployment_validator",
@@ -3237,7 +3805,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "deploy_production.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013867"
     },
     "dialog_integrator": {
       "tool_id": "dialog_integrator",
@@ -3262,7 +3835,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541380",
+      "review_required": true
     },
     "disaster_recovery_cleanup": {
       "tool_id": "disaster_recovery_cleanup",
@@ -3287,7 +3864,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541382",
+      "review_required": true
     },
     "distributed_cache": {
       "tool_id": "distributed_cache",
@@ -3312,7 +3893,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "distributed_cache.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013902"
     },
     "distributed_search": {
       "tool_id": "distributed_search",
@@ -3337,7 +3923,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541385",
+      "review_required": true
     },
     "do_rename": {
       "tool_id": "do_rename",
@@ -3362,7 +3952,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541386",
+      "review_required": true
     },
     "doc_generator": {
       "tool_id": "doc_generator",
@@ -3387,7 +3981,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "doc_generator.py",
+        "tool_integration.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013904"
     },
     "download_qwen_model": {
       "tool_id": "download_qwen_model",
@@ -3412,7 +4013,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "download_qwen_model.py",
+        "local_qwen_inference.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013911"
     },
     "effect_tracker": {
       "tool_id": "effect_tracker",
@@ -3437,7 +4044,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "effect_tracker.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013939"
     },
     "enhanced_canvas_generator": {
       "tool_id": "enhanced_canvas_generator",
@@ -3462,7 +4074,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "obsidian_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014001"
     },
     "error_analyzer": {
       "tool_id": "error_analyzer",
@@ -3487,7 +4104,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 12,
+      "usage_files": [
+        "error_analyzer.py",
+        "openclaw.py",
+        "phase4_dashboard.py",
+        "tool_integration.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013941"
     },
     "error_predictor": {
       "tool_id": "error_predictor",
@@ -3512,7 +4138,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541388",
+      "review_required": true
     },
     "evolution_engine": {
       "tool_id": "evolution_engine",
@@ -3537,7 +4167,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 17,
+      "usage_files": [
+        "auto_deploy.py",
+        "deploy_production.py",
+        "evolution_engine.py",
+        "self_iter_cli.py",
+        "system_orchestrator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013728"
     },
     "execute_cleanup": {
       "tool_id": "execute_cleanup",
@@ -3562,7 +4201,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541390",
+      "review_required": true
     },
     "experiment_platform": {
       "tool_id": "experiment_platform",
@@ -3587,7 +4230,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "autonomous_research_assistant.py",
+        "experiment_platform.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013707"
     },
     "explainable_ai": {
       "tool_id": "explainable_ai",
@@ -3612,7 +4262,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 7,
+      "usage_files": [
+        "autonomous_research_assistant.py",
+        "explainable_ai.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013709"
     },
     "fast_load": {
       "tool_id": "fast_load",
@@ -3637,7 +4293,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 7,
+      "usage_files": [
+        "auto-critic.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013674"
     },
     "federated_learning": {
       "tool_id": "federated_learning",
@@ -3662,7 +4323,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "arxiv_workflow.py",
+        "autonomous_research_assistant.py",
+        "federated_learning.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013666"
     },
     "feishu_analytics_dashboard": {
       "tool_id": "feishu_analytics_dashboard",
@@ -3687,7 +4355,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541393",
+      "review_required": true
     },
     "feishu_chatbot": {
       "tool_id": "feishu_chatbot",
@@ -3712,7 +4384,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "feishu-chatbot.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013942"
     },
     "feishu_approval_workflow": {
       "tool_id": "feishu_approval_workflow",
@@ -3737,7 +4414,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "feishu-chatbot.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013944"
     },
     "feishu_card_templates": {
       "tool_id": "feishu_card_templates",
@@ -3762,7 +4444,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "feishu_approval_workflow.py",
+        "feishu_card_templates.py",
+        "feishu_persona_notify.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013947"
     },
     "feishu_message_queue": {
       "tool_id": "feishu_message_queue",
@@ -3787,7 +4476,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "feishu-chatbot.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013946"
     },
     "feishu_notification": {
       "tool_id": "feishu_notification",
@@ -3812,7 +4506,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "feishu_notification.py",
+        "openclaw.py",
+        "smart_doc_generator.py",
+        "smart_notification.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013949"
     },
     "feishu_persona_notify": {
       "tool_id": "feishu_persona_notify",
@@ -3837,7 +4540,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541395",
+      "review_required": true
     },
     "feishu_report_generator": {
       "tool_id": "feishu_report_generator",
@@ -3862,7 +4569,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "anomaly_detector.py",
+        "daily_brief_generator.py",
+        "feishu_report_generator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013640"
     },
     "file_organizer": {
       "tool_id": "file_organizer",
@@ -3887,7 +4601,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541396",
+      "review_required": true
     },
     "find_feishu": {
       "tool_id": "find_feishu",
@@ -3912,7 +4630,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541400",
+      "review_required": true
     },
     "find_actual_os_system": {
       "tool_id": "find_actual_os_system",
@@ -3937,7 +4659,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541401",
+      "review_required": true
     },
     "find_unsafe_calls": {
       "tool_id": "find_unsafe_calls",
@@ -3962,7 +4688,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541403",
+      "review_required": true
     },
     "fix_remaining_bom": {
       "tool_id": "fix_remaining_bom",
@@ -3987,7 +4717,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541406",
+      "review_required": true
     },
     "fix_memory_encoding": {
       "tool_id": "fix_memory_encoding",
@@ -4012,7 +4746,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014080"
     },
     "fix_workspace_paths": {
       "tool_id": "fix_workspace_paths",
@@ -4037,7 +4776,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "fix_workspace_paths.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013957"
     },
     "flow_manager": {
       "tool_id": "flow_manager",
@@ -4062,7 +4806,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 13,
+      "usage_files": [
+        "auto_execute_workflow.py",
+        "check_key_tools.py",
+        "execute_step_fixed.py",
+        "fix_workflow_tool_ids.py",
+        "flow_manager.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013742"
     },
     "flow_register": {
       "tool_id": "flow_register",
@@ -4087,7 +4840,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "flow_register.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013960"
     },
     "git_firewall_proxy": {
       "tool_id": "git_firewall_proxy",
@@ -4112,7 +4870,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "git-firewall-proxy.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013962"
     },
     "git_pre_commit_hook": {
       "tool_id": "git_pre_commit_hook",
@@ -4137,7 +4900,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541408",
+      "review_required": true
     },
     "git_precheck": {
       "tool_id": "git_precheck",
@@ -4162,7 +4929,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541410",
+      "review_required": true
     },
     "git_workflow": {
       "tool_id": "git_workflow",
@@ -4212,7 +4983,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "graded_fallback.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013965"
     },
     "health_monitor_ai": {
       "tool_id": "health_monitor_ai",
@@ -4237,7 +5013,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541412",
+      "review_required": true
     },
     "health_predictor": {
       "tool_id": "health_predictor",
@@ -4262,7 +5042,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541413",
+      "review_required": true
     },
     "heartbeat_lite": {
       "tool_id": "heartbeat_lite",
@@ -4287,7 +5071,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "heartbeat_lite.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013968"
     },
     "hybrid_search": {
       "tool_id": "hybrid_search",
@@ -4312,7 +5101,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 12,
+      "usage_files": [
+        "graded_fallback.py",
+        "hybrid_search.py",
+        "ultimate_memory_search_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013966"
     },
     "incremental_indexer": {
       "tool_id": "incremental_indexer",
@@ -4337,7 +5133,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541415",
+      "review_required": true
     },
     "init_version_control": {
       "tool_id": "init_version_control",
@@ -4362,7 +5162,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "flow_manager.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013959"
     },
     "innovation_pattern_matcher": {
       "tool_id": "innovation_pattern_matcher",
@@ -4387,7 +5192,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "find_actual_os_system.py",
+        "innovation_pattern_matcher.py",
+        "verify_p1_fix.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013951"
     },
     "innovator_auto_executor": {
       "tool_id": "innovator_auto_executor",
@@ -4412,7 +5224,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541417",
+      "review_required": true
     },
     "innovator_engine": {
       "tool_id": "innovator_engine",
@@ -4437,7 +5253,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541419",
+      "review_required": true
     },
     "insight_generator": {
       "tool_id": "insight_generator",
@@ -4462,7 +5282,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541420",
+      "review_required": true
     },
     "install_git_hooks": {
       "tool_id": "install_git_hooks",
@@ -4487,7 +5311,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541422",
+      "review_required": true
     },
     "install_requirements": {
       "tool_id": "install_requirements",
@@ -4512,7 +5340,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541425",
+      "review_required": true
     },
     "intent_predictor": {
       "tool_id": "intent_predictor",
@@ -4537,7 +5369,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "intent_predictor.py",
+        "ultimate_memory_search_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013976"
     },
     "issue_scanner": {
       "tool_id": "issue_scanner",
@@ -4562,7 +5400,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "auto-critic_v7.py",
+        "find_unsafe_calls.py",
+        "issue_scanner.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013694"
     },
     "iteration_manager": {
       "tool_id": "iteration_manager",
@@ -4587,7 +5432,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541427",
+      "review_required": true
     },
     "json_canvas_generator": {
       "tool_id": "json_canvas_generator",
@@ -4612,7 +5461,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "arxiv_collector_v2.py",
+        "canvas_auto_updater.py",
+        "obsidian_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013660"
     },
     "kg_enhancer": {
       "tool_id": "kg_enhancer",
@@ -4637,7 +5493,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "doc_generator.py",
+        "kg_enhancer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013905"
     },
     "kg_integrator": {
       "tool_id": "kg_integrator",
@@ -4662,7 +5524,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "kg_integrator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013978"
     },
     "kg_reasoner": {
       "tool_id": "kg_reasoner",
@@ -4687,7 +5554,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "autonomous_research_assistant.py",
+        "kg_reasoner.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013710"
     },
     "knowledge_graph_builder": {
       "tool_id": "knowledge_graph_builder",
@@ -4712,7 +5585,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 14,
+      "usage_files": [
+        "automation_orchestrator.py",
+        "knowledge_graph_builder.py",
+        "openclaw.py",
+        "phase4_dashboard.py",
+        "smart_doc_generator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013700"
     },
     "knowledge_graph_updater": {
       "tool_id": "knowledge_graph_updater",
@@ -4737,7 +5619,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "batch_security_fixer.py",
+        "knowledge_graph_updater.py",
+        "openclaw.py",
+        "windows_task_scheduler.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013773"
     },
     "learner_assistant_v2": {
       "tool_id": "learner_assistant_v2",
@@ -4762,7 +5652,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541428",
+      "review_required": true
     },
     "learning_quality_assessor": {
       "tool_id": "learning_quality_assessor",
@@ -4787,7 +5681,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541430",
+      "review_required": true
     },
     "load_balancer": {
       "tool_id": "load_balancer",
@@ -4812,7 +5710,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "load_balancer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013979"
     },
     "local_qwen_inference": {
       "tool_id": "local_qwen_inference",
@@ -4837,7 +5740,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "download_qwen_model.py",
+        "local_qwen_inference.py",
+        "smart_doc_generator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013913"
     },
     "maintenance_scheduler": {
       "tool_id": "maintenance_scheduler",
@@ -4862,7 +5772,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541432",
+      "review_required": true
     },
     "master_orchestrator": {
       "tool_id": "master_orchestrator",
@@ -4887,7 +5801,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "innovator_auto_executor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013974"
     },
     "memory_association_basic": {
       "tool_id": "memory_association_basic",
@@ -4912,7 +5831,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013916"
     },
     "memory_benchmark": {
       "tool_id": "memory_benchmark",
@@ -4937,7 +5862,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "auto-critic.py",
+        "memory_benchmark.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013676"
     },
     "memory_causal_discovery": {
       "tool_id": "memory_causal_discovery",
@@ -4962,7 +5893,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_causal_discovery.py",
+        "memory_engine_orchestrator.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013868"
     },
     "memory_cleanup_compress": {
       "tool_id": "memory_cleanup_compress",
@@ -4987,7 +5926,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "memory_cleanup_compress.py",
+        "memory_hybrid_pipeline.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013982"
     },
     "memory_conflict_detector": {
       "tool_id": "memory_conflict_detector",
@@ -5012,7 +5957,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "memory_engine_orchestrator.py",
+        "memory_immune_system.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013985"
     },
     "memory_conflict_resolver": {
       "tool_id": "memory_conflict_resolver",
@@ -5037,7 +5989,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 12,
+      "usage_files": [
+        "heartbeat_lite.py",
+        "memory_conflict_resolver.py",
+        "memory_distillation_runner.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013969"
     },
     "memory_consciousness_emergence": {
       "tool_id": "memory_consciousness_emergence",
@@ -5062,7 +6022,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 13,
+      "usage_files": [
+        "deploy_production.py",
+        "heartbeat_lite.py",
+        "memory_consciousness_emergence.py",
+        "memory_engine_orchestrator.py",
+        "memory_self_improving_engine.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013870"
     },
     "memory_consistency_checker": {
       "tool_id": "memory_consistency_checker",
@@ -5087,7 +6056,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "auto-critic.py",
+        "memory_consistency_checker.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013678"
     },
     "memory_dark_matter": {
       "tool_id": "memory_dark_matter",
@@ -5112,7 +6087,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_dark_matter.py",
+        "memory_engine_orchestrator.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013871"
     },
     "memory_dashboard_v2": {
       "tool_id": "memory_dashboard_v2",
@@ -5137,7 +6120,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_dashboard_v2.py",
+        "memory_self_improving_engine.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013872"
     },
     "memory_distill_simple": {
       "tool_id": "memory_distill_simple",
@@ -5162,7 +6153,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "context_compressor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013846"
     },
     "memory_distillation_runner": {
       "tool_id": "memory_distillation_runner",
@@ -5187,7 +6183,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 13,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_distillation_runner.py",
+        "memory_engine_autonomous.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013873"
     },
     "memory_distiller_llm": {
       "tool_id": "memory_distiller_llm",
@@ -5212,7 +6216,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013917"
     },
     "memory_distiller_v2": {
       "tool_id": "memory_distiller_v2",
@@ -5237,7 +6247,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 22,
+      "usage_files": [
+        "heartbeat_lite.py",
+        "memory_distillation_runner.py",
+        "memory_distiller_v2.py",
+        "memory_immune_system.py",
+        "memory_neural_network.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013971"
     },
     "memory_engine_autonomous": {
       "tool_id": "memory_engine_autonomous",
@@ -5262,7 +6281,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py",
+        "verify_p6_quick.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013919"
     },
     "memory_engine_evolution": {
       "tool_id": "memory_engine_evolution",
@@ -5287,7 +6313,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013920"
     },
     "memory_engine_maintenance": {
       "tool_id": "memory_engine_maintenance",
@@ -5312,7 +6344,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013921"
     },
     "memory_engine_ops": {
       "tool_id": "memory_engine_ops",
@@ -5337,7 +6375,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "do_rename.py",
+        "find_actual_os_system.py",
+        "rename-memory-scripts.py",
+        "verify_p1_fix.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013922"
     },
     "memory_engine_orchestrator": {
       "tool_id": "memory_engine_orchestrator",
@@ -5362,7 +6408,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "do_rename.py",
+        "memory_engine_orchestrator.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013924"
     },
     "memory_evolutionary_algorithms": {
       "tool_id": "memory_evolutionary_algorithms",
@@ -5387,7 +6440,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_engine_autonomous.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013875"
     },
     "memory_fix_tools": {
       "tool_id": "memory_fix_tools",
@@ -5437,7 +6497,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 12,
+      "usage_files": [
+        "memory_engine_orchestrator.py",
+        "memory_forgetting_execute.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013986"
     },
     "memory_forgetting_execute": {
       "tool_id": "memory_forgetting_execute",
@@ -5462,7 +6529,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "heartbeat_lite.py",
+        "memory_distillation_runner.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013972"
     },
     "memory_fractal_compression": {
       "tool_id": "memory_fractal_compression",
@@ -5487,7 +6561,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_engine_orchestrator.py",
+        "memory_fractal_compression.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013877"
     },
     "memory_git_auto_commit": {
       "tool_id": "memory_git_auto_commit",
@@ -5512,7 +6594,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "real_time_distill_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014031"
     },
     "memory_hybrid_pipeline": {
       "tool_id": "memory_hybrid_pipeline",
@@ -5537,7 +6624,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "memory_hybrid_pipeline.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013987"
     },
     "memory_immune_system": {
       "tool_id": "memory_immune_system",
@@ -5562,7 +6654,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_engine_orchestrator.py",
+        "memory_immune_system.py",
+        "memory_self_improving_engine.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013878"
     },
     "memory_importance_assessor": {
       "tool_id": "memory_importance_assessor",
@@ -5587,7 +6687,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "memory_hybrid_pipeline.py",
+        "memory_importance_assessor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013989"
     },
     "memory_incremental_compressor": {
       "tool_id": "memory_incremental_compressor",
@@ -5612,7 +6718,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "memory_hybrid_pipeline.py",
+        "memory_incremental_compressor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013990"
     },
     "memory_index_generator": {
       "tool_id": "memory_index_generator",
@@ -5637,7 +6749,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "auto-critic.py",
+        "memory_benchmark.py",
+        "memory_index_generator.py",
+        "memory_tag_search.py",
+        "post_session_compress.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013680"
     },
     "memory_llm_hypothesis": {
       "tool_id": "memory_llm_hypothesis",
@@ -5662,7 +6783,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "deploy_production.py",
+        "find_actual_os_system.py",
+        "memory_self_improving_engine.py",
+        "verify_p1_fix.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013880"
     },
     "memory_neural_network": {
       "tool_id": "memory_neural_network",
@@ -5687,7 +6816,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_engine_orchestrator.py",
+        "memory_neural_network.py",
+        "memory_self_improving_engine.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013881"
     },
     "memory_perf_prefetch": {
       "tool_id": "memory_perf_prefetch",
@@ -5712,7 +6850,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013925"
     },
     "memory_perf_profiler": {
       "tool_id": "memory_perf_profiler",
@@ -5737,7 +6881,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013927"
     },
     "memory_persona": {
       "tool_id": "memory_persona",
@@ -5762,7 +6912,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py",
+        "unified_cli_v3.py",
+        "verify_p6_quick.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013928"
     },
     "memory_predictive_coding": {
       "tool_id": "memory_predictive_coding",
@@ -5787,7 +6945,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014081"
     },
     "memory_quality_assessor": {
       "tool_id": "memory_quality_assessor",
@@ -5812,7 +6975,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013929"
     },
     "memory_quality_scorer": {
       "tool_id": "memory_quality_scorer",
@@ -5837,7 +7007,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 12,
+      "usage_files": [
+        "memory_distiller_v2.py",
+        "memory_engine_orchestrator.py",
+        "memory_hybrid_pipeline.py",
+        "memory_immune_system.py",
+        "memory_quality_scorer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013983"
     },
     "memory_quantum_entanglement": {
       "tool_id": "memory_quantum_entanglement",
@@ -5862,7 +7041,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_engine_orchestrator.py",
+        "memory_quantum_entanglement.py",
+        "memory_self_improving_engine.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013882"
     },
     "memory_rollback": {
       "tool_id": "memory_rollback",
@@ -5912,7 +7100,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "rename-memory-scripts.py",
+        "semantic_cache.py",
+        "ultra_fast_memory_search.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014082"
     },
     "memory_search_v2": {
       "tool_id": "memory_search_v2",
@@ -5937,7 +7132,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013938"
     },
     "memory_self_improving_engine": {
       "tool_id": "memory_self_improving_engine",
@@ -5962,7 +7163,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_engine_autonomous.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013884"
     },
     "memory_semantic_search": {
       "tool_id": "memory_semantic_search",
@@ -5987,7 +7195,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "memory_semantic_search.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013992"
     },
     "memory_tag_search": {
       "tool_id": "memory_tag_search",
@@ -6012,7 +7225,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "auto-critic.py",
+        "memory_benchmark.py",
+        "memory_tag_search.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013682"
     },
     "memory_thermodynamics": {
       "tool_id": "memory_thermodynamics",
@@ -6037,7 +7257,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_engine_orchestrator.py",
+        "memory_thermodynamics.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013886"
     },
     "memory_time_crystal": {
       "tool_id": "memory_time_crystal",
@@ -6062,7 +7290,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_engine_orchestrator.py",
+        "memory_time_crystal.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013887"
     },
     "memory_topological_analysis": {
       "tool_id": "memory_topological_analysis",
@@ -6087,7 +7323,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "deploy_production.py",
+        "memory_engine_orchestrator.py",
+        "memory_topological_analysis.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013889"
     },
     "memory_utils": {
       "tool_id": "memory_utils",
@@ -6112,7 +7356,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "memory_utils.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013993"
     },
     "meta_cognition_monitor": {
       "tool_id": "meta_cognition_monitor",
@@ -6137,7 +7386,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014106"
     },
     "meta_learning": {
       "tool_id": "meta_learning",
@@ -6162,7 +7416,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 39,
+      "usage_files": [
+        "autonomous_research_assistant.py",
+        "auto_deploy.py",
+        "kg_integrator.py",
+        "memory_persona.py",
+        "meta_learning.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013712"
     },
     "meta_learning_optimizer": {
       "tool_id": "meta_learning_optimizer",
@@ -6187,7 +7450,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "autonomous_research_assistant.py",
+        "meta_learning_optimizer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013713"
     },
     "metrics_tracker": {
       "tool_id": "metrics_tracker",
@@ -6212,7 +7481,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541435",
+      "review_required": true
     },
     "monitor_reports": {
       "tool_id": "monitor_reports",
@@ -6237,7 +7510,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "deploy_production.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013890"
     },
     "multi_agent_network": {
       "tool_id": "multi_agent_network",
@@ -6262,7 +7540,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "autonomous_research_assistant.py",
+        "multi_agent_network.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013714"
     },
     "neural_embedding": {
       "tool_id": "neural_embedding",
@@ -6287,7 +7571,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541438",
+      "review_required": true
     },
     "notification_center": {
       "tool_id": "notification_center",
@@ -6312,7 +7600,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "notification_center.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013995"
     },
     "notification_router": {
       "tool_id": "notification_router",
@@ -6337,7 +7630,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "notification_router.py",
+        "openclaw.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013996"
     },
     "obsidian_tools": {
       "tool_id": "obsidian_tools",
@@ -6362,7 +7661,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541439",
+      "review_required": true
     },
     "ollama_qwen_test": {
       "tool_id": "ollama_qwen_test",
@@ -6387,7 +7690,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "ollama_qwen_test.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014005"
     },
     "openclaw": {
       "tool_id": "openclaw",
@@ -6412,7 +7720,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 237,
+      "usage_files": [
+        "api_gateway.py",
+        "arxiv_collector_v2.py",
+        "async_executor.py",
+        "async_io_manager.py",
+        "auto-critic.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013645"
     },
     "optimize_causal": {
       "tool_id": "optimize_causal",
@@ -6437,7 +7754,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541441",
+      "review_required": true
     },
     "optimize_tools_analyzer": {
       "tool_id": "optimize_tools_analyzer",
@@ -6462,7 +7783,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541443",
+      "review_required": true
     },
     "optimize_tools_deep": {
       "tool_id": "optimize_tools_deep",
@@ -6487,7 +7812,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541446",
+      "review_required": true
     },
     "optimize_tools_executor": {
       "tool_id": "optimize_tools_executor",
@@ -6512,7 +7841,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541448",
+      "review_required": true
     },
     "optimize_tools_quick": {
       "tool_id": "optimize_tools_quick",
@@ -6537,7 +7870,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541449",
+      "review_required": true
     },
     "organize_root_files_v2": {
       "tool_id": "organize_root_files_v2",
@@ -6562,7 +7899,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541451",
+      "review_required": true
     },
     "p1_issue_fixer": {
       "tool_id": "p1_issue_fixer",
@@ -6587,7 +7928,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "p1_issue_fixer.py",
+        "register_p1_fixer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014017"
     },
     "paper_summarizer": {
       "tool_id": "paper_summarizer",
@@ -6612,7 +7959,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "obsidian_tools.py",
+        "openclaw.py",
+        "paper_summarizer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014003"
     },
     "parallel_executor": {
       "tool_id": "parallel_executor",
@@ -6637,7 +7991,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 7,
+      "usage_files": [
+        "find_actual_os_system.py",
+        "parallel_executor.py",
+        "register_medium_priority_tools.py",
+        "verify_p1_fix.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013952"
     },
     "path_interceptor": {
       "tool_id": "path_interceptor",
@@ -6662,7 +8024,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "batch_security_fixer.py",
+        "session-check.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013775"
     },
     "path_security_fixer": {
       "tool_id": "path_security_fixer",
@@ -6687,7 +8055,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541453",
+      "review_required": true
     },
     "perf_dashboard": {
       "tool_id": "perf_dashboard",
@@ -6712,7 +8084,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "perf_dashboard.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014020"
     },
     "performance_analyzer": {
       "tool_id": "performance_analyzer",
@@ -6737,7 +8114,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "auto_optimizer.py",
+        "doc_generator.py",
+        "performance_analyzer.py",
+        "unified_cli_v3.py",
+        "workflow_optimizer_ai.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013753"
     },
     "performance_profiler": {
       "tool_id": "performance_profiler",
@@ -6762,7 +8148,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "openclaw.py",
+        "phase4_dashboard.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014007"
     },
     "phase4_dashboard": {
       "tool_id": "phase4_dashboard",
@@ -6787,7 +8179,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "phase4_dashboard.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014021"
     },
     "plan_auto_optimizer": {
       "tool_id": "plan_auto_optimizer",
@@ -6812,7 +8210,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541454",
+      "review_required": true
     },
     "plan_quality_assessor": {
       "tool_id": "plan_quality_assessor",
@@ -6837,7 +8239,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "plan-auto-optimizer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014023"
     },
     "planner_assistant_v2": {
       "tool_id": "planner_assistant_v2",
@@ -6862,7 +8269,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "plan-auto-optimizer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014024"
     },
     "pm_duplicate_analyzer": {
       "tool_id": "pm_duplicate_analyzer",
@@ -6887,7 +8299,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541457",
+      "review_required": true
     },
     "pm_merge_folders": {
       "tool_id": "pm_merge_folders",
@@ -6912,7 +8328,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541459",
+      "review_required": true
     },
     "post_session_compress": {
       "tool_id": "post_session_compress",
@@ -6937,7 +8357,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 18,
+      "usage_files": [
+        "auto-critic.py",
+        "brainstorm_tool_governance.py",
+        "critical_issue_detector.py",
+        "memory_benchmark.py",
+        "memory_hybrid_pipeline.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013684"
     },
     "pre_session_hook_v1": {
       "tool_id": "pre_session_hook_v1",
@@ -6987,7 +8416,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "auto-critic.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013686"
     },
     "pre_commit_hook": {
       "tool_id": "pre_commit_hook",
@@ -7012,7 +8446,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "git-firewall-proxy.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013963"
     },
     "pre_file_operation_hook": {
       "tool_id": "pre_file_operation_hook",
@@ -7037,7 +8477,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "batch_security_fixer.py",
+        "critic_auto_fix.py",
+        "pre_file_operation_hook.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013777"
     },
     "predictive_alerting_engine": {
       "tool_id": "predictive_alerting_engine",
@@ -7062,7 +8509,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "predictive_alerting_engine.py",
+        "production_monitor_v2.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014026"
     },
     "predictive_analytics": {
       "tool_id": "predictive_analytics",
@@ -7087,7 +8540,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541461",
+      "review_required": true
     },
     "predictive_healing": {
       "tool_id": "predictive_healing",
@@ -7112,7 +8569,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "autonomous_research_assistant.py",
+        "predictive_healing.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013716"
     },
     "production_monitor_v2": {
       "tool_id": "production_monitor_v2",
@@ -7137,7 +8600,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "production_monitor_v2.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014027"
     },
     "quality_gate_check": {
       "tool_id": "quality_gate_check",
@@ -7162,7 +8630,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 15,
+      "usage_files": [
+        "check_key_tools.py",
+        "execute_step_fixed.py",
+        "find_unsafe_calls.py",
+        "fix_tool_commands.py",
+        "fix_tool_configs.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013810"
     },
     "quality_scorer": {
       "tool_id": "quality_scorer",
@@ -7187,7 +8664,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "quality_scorer.py",
+        "windows_task_scheduler.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014030"
     },
     "query_predictor": {
       "tool_id": "query_predictor",
@@ -7212,7 +8695,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541463",
+      "review_required": true
     },
     "quick_cleanup_571_errors": {
       "tool_id": "quick_cleanup_571_errors",
@@ -7237,7 +8724,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541465",
+      "review_required": true
     },
     "quick_security_fix": {
       "tool_id": "quick_security_fix",
@@ -7262,7 +8753,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541467",
+      "review_required": true
     },
     "real_time_distill_v3": {
       "tool_id": "real_time_distill_v3",
@@ -7287,7 +8782,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "test_real_time_distill.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014092"
     },
     "real_time_monitor": {
       "tool_id": "real_time_monitor",
@@ -7312,7 +8812,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "core_system_test.py",
+        "real_time_monitor.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013851"
     },
     "redis_integration": {
       "tool_id": "redis_integration",
@@ -7337,7 +8844,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541469",
+      "review_required": true
     },
     "register_p1_fixer": {
       "tool_id": "register_p1_fixer",
@@ -7362,7 +8873,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541471",
+      "review_required": true
     },
     "remediation_tracker": {
       "tool_id": "remediation_tracker",
@@ -7387,7 +8902,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "auto-critic_v7.py",
+        "remediation_tracker.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013696"
     },
     "rename_memory_scripts": {
       "tool_id": "rename_memory_scripts",
@@ -7437,7 +8958,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "deploy_production.py",
+        "report_access.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013891"
     },
     "report_lifecycle": {
       "tool_id": "report_lifecycle",
@@ -7462,7 +8989,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "deploy_production.py",
+        "report_lifecycle.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013893"
     },
     "report_quality_scorer": {
       "tool_id": "report_quality_scorer",
@@ -7487,7 +9020,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "deploy_production.py",
+        "report_quality_scorer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013894"
     },
     "report_search": {
       "tool_id": "report_search",
@@ -7512,7 +9051,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "deploy_production.py",
+        "report_search.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013896"
     },
     "report_storage": {
       "tool_id": "report_storage",
@@ -7537,7 +9082,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "deploy_production.py",
+        "report_storage.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013897"
     },
     "report_tracker": {
       "tool_id": "report_tracker",
@@ -7562,7 +9113,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "deploy_production.py",
+        "report_tracker.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013898"
     },
     "resilience_analyzer": {
       "tool_id": "resilience_analyzer",
@@ -7587,7 +9144,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541473",
+      "review_required": true
     },
     "resource_monitor": {
       "tool_id": "resource_monitor",
@@ -7612,7 +9173,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "openclaw.py",
+        "phase4_dashboard.py",
+        "resource_monitor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014008"
     },
     "rl_ttl_optimizer": {
       "tool_id": "rl_ttl_optimizer",
@@ -7637,7 +9205,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "rl_ttl_optimizer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014085"
     },
     "safe_write": {
       "tool_id": "safe_write",
@@ -7662,7 +9235,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 9,
+      "usage_files": [
+        "batch_security_fixer.py",
+        "safe_write.py",
+        "session-check.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013778"
     },
     "safedir": {
       "tool_id": "safedir",
@@ -7687,7 +9267,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "batch_security_fixer.py",
+        "safedir.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013780"
     },
     "scan_daily_notes": {
       "tool_id": "scan_daily_notes",
@@ -7712,7 +9298,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "auto_distill.py",
+        "scan-daily-notes.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013740"
     },
     "scan_p1_issues": {
       "tool_id": "scan_p1_issues",
@@ -7737,7 +9329,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541475",
+      "review_required": true
     },
     "security_auditor": {
       "tool_id": "security_auditor",
@@ -7762,7 +9358,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 15,
+      "usage_files": [
+        "doc_generator.py",
+        "find_unsafe_calls.py",
+        "security_auditor.py",
+        "unified_cli_v3.py",
+        "workflow_enhancer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013907"
     },
     "security_auto_fixer": {
       "tool_id": "security_auto_fixer",
@@ -7787,7 +9392,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014108"
     },
     "security_reporter": {
       "tool_id": "security_reporter",
@@ -7812,7 +9422,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541477",
+      "review_required": true
     },
     "security_validator": {
       "tool_id": "security_validator",
@@ -7837,7 +9451,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "batch_security_fixer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013782"
     },
     "self_healing": {
       "tool_id": "self_healing",
@@ -7862,7 +9481,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 19,
+      "usage_files": [
+        "automation_orchestrator.py",
+        "core_system_test.py",
+        "kg_enhancer.py",
+        "kg_integrator.py",
+        "openclaw.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013702"
     },
     "self_iter_cli": {
       "tool_id": "self_iter_cli",
@@ -7887,7 +9515,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 25,
+      "usage_files": [
+        "auto_deploy.py",
+        "doc_generator.py",
+        "self_iter_cli.py",
+        "system_orchestrator.py",
+        "unified_monitor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013729"
     },
     "self_iter_dashboard": {
       "tool_id": "self_iter_dashboard",
@@ -7912,7 +9549,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 7,
+      "usage_files": [
+        "auto_deploy.py",
+        "self_iter_dashboard.py",
+        "system_orchestrator.py",
+        "unified_monitor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013731"
     },
     "self_iteration": {
       "tool_id": "self_iteration",
@@ -7937,7 +9582,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 48,
+      "usage_files": [
+        "auto_deploy.py",
+        "doc_generator.py",
+        "kg_enhancer.py",
+        "kg_integrator.py",
+        "performance_analyzer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013733"
     },
     "semantic_cache": {
       "tool_id": "semantic_cache",
@@ -7962,7 +9616,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "ultra_fast_memory_search.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014101"
     },
     "sensitive_content_router": {
       "tool_id": "sensitive_content_router",
@@ -7987,7 +9646,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "sensitive_content_router.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014086"
     },
     "session_check": {
       "tool_id": "session_check",
@@ -8037,7 +9701,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 38,
+      "usage_files": [
+        "auto-critic.py",
+        "brainstorm_tool_governance.py",
+        "check_key_tools.py",
+        "critical_issue_detector.py",
+        "execute_step_fixed.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013688"
     },
     "session_end_checker": {
       "tool_id": "session_end_checker",
@@ -8062,7 +9735,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "session_end_checker.py",
+        "test-session-compression.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014088"
     },
     "setup_git_hooks": {
       "tool_id": "setup_git_hooks",
@@ -8087,7 +9766,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541479",
+      "review_required": true
     },
     "smart_review_reminder": {
       "tool_id": "smart_review_reminder",
@@ -8112,7 +9795,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541481",
+      "review_required": true
     },
     "smart_cache_v2": {
       "tool_id": "smart_cache_v2",
@@ -8137,7 +9824,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "obsidian_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014004"
     },
     "smart_doc_generator": {
       "tool_id": "smart_doc_generator",
@@ -8162,7 +9854,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "openclaw.py",
+        "phase4_dashboard.py",
+        "smart_doc_generator.py",
+        "tool_integration.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014010"
     },
     "smart_notification": {
       "tool_id": "smart_notification",
@@ -8187,7 +9887,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "find_actual_os_system.py",
+        "openclaw.py",
+        "phase4_dashboard.py",
+        "smart_doc_generator.py",
+        "smart_notification.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013954"
     },
     "smart_recommendations": {
       "tool_id": "smart_recommendations",
@@ -8212,7 +9921,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "auto_deploy.py",
+        "smart_recommendations.py",
+        "system_orchestrator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013734"
     },
     "smart_report_generator": {
       "tool_id": "smart_report_generator",
@@ -8237,7 +9953,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "smart_report_generator.py",
+        "workflow_engine_v2.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014089"
     },
     "smart_scheduler": {
       "tool_id": "smart_scheduler",
@@ -8262,7 +9984,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "openclaw.py",
+        "phase4_dashboard.py",
+        "smart_scheduler.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014011"
     },
     "smart_tool_finder": {
       "tool_id": "smart_tool_finder",
@@ -8287,7 +10016,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541483",
+      "review_required": true
     },
     "smart_workflow_optimizer": {
       "tool_id": "smart_workflow_optimizer",
@@ -8337,7 +10070,15 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "system_health_checker.py",
+        "tool_integration.py",
+        "unified_cli_v3.py",
+        "workflow_engine_v2.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014090"
     },
     "system_orchestrator": {
       "tool_id": "system_orchestrator",
@@ -8362,7 +10103,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 7,
+      "usage_files": [
+        "auto_deploy.py",
+        "system_orchestrator.py",
+        "unified_monitor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013736"
     },
     "task_priority_scorer": {
       "tool_id": "task_priority_scorer",
@@ -8387,7 +10135,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "find_actual_os_system.py",
+        "task_priority_scorer.py",
+        "verify_p1_fix.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013955"
     },
     "test_critic_integration": {
       "tool_id": "test_critic_integration",
@@ -8437,7 +10192,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "memory_benchmark.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013981"
     },
     "test_real_time_distill": {
       "tool_id": "test_real_time_distill",
@@ -8462,7 +10222,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541487",
+      "review_required": true
     },
     "tiered_cache": {
       "tool_id": "tiered_cache",
@@ -8487,7 +10251,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "tiered_cache.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014093"
     },
     "tool_analytics": {
       "tool_id": "tool_analytics",
@@ -8512,7 +10281,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "tool_analytics.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014095"
     },
     "tool_change_detector": {
       "tool_id": "tool_change_detector",
@@ -8537,7 +10312,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "tool_change_detector.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014096"
     },
     "tool_code_generator": {
       "tool_id": "tool_code_generator",
@@ -8562,7 +10342,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "deploy_production.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013900"
     },
     "tool_consolidator": {
       "tool_id": "tool_consolidator",
@@ -8587,7 +10372,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541489",
+      "review_required": true
     },
     "tool_integration": {
       "tool_id": "tool_integration",
@@ -8612,7 +10401,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "tool_integration.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014097"
     },
     "tool_orchestrator": {
       "tool_id": "tool_orchestrator",
@@ -8637,7 +10431,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "tool_orchestrator.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014098"
     },
     "tool_registry": {
       "tool_id": "tool_registry",
@@ -8662,7 +10462,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 21,
+      "usage_files": [
+        "insight_generator.py",
+        "memory_engine_orchestrator.py",
+        "predictive_analytics.py",
+        "tool_analytics.py",
+        "tool_orchestrator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013975"
     },
     "tool_registry_manager": {
       "tool_id": "tool_registry_manager",
@@ -8687,7 +10496,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "tool_registry_manager.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014100"
     },
     "tool_similarity_engine": {
       "tool_id": "tool_similarity_engine",
@@ -8712,7 +10526,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541491",
+      "review_required": true
     },
     "trend_analyzer_pro": {
       "tool_id": "trend_analyzer_pro",
@@ -8737,7 +10555,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "production_monitor_v2.py",
+        "trend_analyzer_pro.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014029"
     },
     "ultimate_memory_search_v3": {
       "tool_id": "ultimate_memory_search_v3",
@@ -8762,7 +10586,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "rename-memory-scripts.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014084"
     },
     "ultra_fast_memory_search": {
       "tool_id": "ultra_fast_memory_search",
@@ -8787,7 +10617,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "adaptive_ttl_cache.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013626"
     },
     "unified_api": {
       "tool_id": "unified_api",
@@ -8812,7 +10648,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "unified_api.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014103"
     },
     "unified_cli_v3": {
       "tool_id": "unified_cli_v3",
@@ -8837,7 +10678,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "unified_cli_v3.py",
+        "verify-cli-aliases.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014109"
     },
     "unified_dashboard_v3": {
       "tool_id": "unified_dashboard_v3",
@@ -8862,7 +10709,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "optimize-tools-executor.py",
+        "unified_dashboard_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014014"
     },
     "unified_doc_generator": {
       "tool_id": "unified_doc_generator",
@@ -8887,7 +10740,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014110"
     },
     "unified_monitor": {
       "tool_id": "unified_monitor",
@@ -8912,7 +10770,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "doc_generator.py",
+        "trend_analyzer_pro.py",
+        "unified_monitor.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013908"
     },
     "update_p1_remediation": {
       "tool_id": "update_p1_remediation",
@@ -8937,7 +10802,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541492",
+      "review_required": true
     },
     "update_session_end_workflow": {
       "tool_id": "update_session_end_workflow",
@@ -8987,7 +10856,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541495",
+      "review_required": true
     },
     "vector_search": {
       "tool_id": "vector_search",
@@ -9012,7 +10885,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "vector_search.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014114"
     },
     "verify_cli_aliases": {
       "tool_id": "verify_cli_aliases",
@@ -9037,7 +10915,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541496",
+      "review_required": true
     },
     "verify_deployment": {
       "tool_id": "verify_deployment",
@@ -9062,7 +10944,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541498",
+      "review_required": true
     },
     "verify_p1_fix": {
       "tool_id": "verify_p1_fix",
@@ -9087,7 +10973,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541500",
+      "review_required": true
     },
     "verify_p6_quick": {
       "tool_id": "verify_p6_quick",
@@ -9112,7 +11002,11 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "status": "deprecated_candidate",
+      "deprecated_reason": "unused_in_codebase",
+      "deprecated_at": "2026-03-19T17:29:43.541501",
+      "review_required": true
     },
     "windows_task_scheduler": {
       "tool_id": "windows_task_scheduler",
@@ -9137,7 +11031,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "windows_task_scheduler.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014116"
     },
     "workflow_analyzer": {
       "tool_id": "workflow_analyzer",
@@ -9162,7 +11061,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "workflow_analyzer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014117"
     },
     "workflow_engine_v2": {
       "tool_id": "workflow_engine_v2",
@@ -9187,7 +11091,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "optimize-tools-executor.py",
+        "system_orchestrator.py",
+        "unified_monitor.py",
+        "workflow_engine_v2.py",
+        "workflow_template_gen.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014016"
     },
     "workflow_enhancer": {
       "tool_id": "workflow_enhancer",
@@ -9212,7 +11125,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 15,
+      "usage_files": [
+        "doc_generator.py",
+        "workflow_enhancer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013910"
     },
     "workflow_generator": {
       "tool_id": "workflow_generator",
@@ -9262,7 +11181,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 11,
+      "usage_files": [
+        "workflow_server.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014119"
     },
     "workflow_optimizer_ai": {
       "tool_id": "workflow_optimizer_ai",
@@ -9287,7 +11211,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014112"
     },
     "workflow_server": {
       "tool_id": "workflow_server",
@@ -9312,7 +11241,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "workflow_server.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014120"
     },
     "workflow_template_gen": {
       "tool_id": "workflow_template_gen",
@@ -9337,7 +11271,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "workflow_template_gen.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014121"
     },
     "workflow_tester_auto": {
       "tool_id": "workflow_tester_auto",
@@ -9412,7 +11351,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "unified_cli_v3.py",
+        "workflow_visualizer_web.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014113"
     },
     "workspace": {
       "tool_id": "workspace",
@@ -9437,7 +11382,16 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1609,
+      "usage_files": [
+        "adaptive_ttl_cache.py",
+        "advanced_report_gen.py",
+        "ai_task_scheduler.py",
+        "ai_tool_suggester.py",
+        "anomaly_detector_pro.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013631"
     },
     "workspace_comparator": {
       "tool_id": "workspace_comparator",
@@ -9462,7 +11416,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 7,
+      "usage_files": [
+        "critic_auto_fix.py",
+        "pre_file_operation_hook.py",
+        "workspace_comparator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013855"
     },
     "workspace_init": {
       "tool_id": "workspace_init",
@@ -9487,7 +11448,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "path_interceptor.py",
+        "unified_cli_v3.py",
+        "workspace_init.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014019"
     },
     "check_key_tools": {
       "tool_id": "check_key_tools",
@@ -9512,7 +11480,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014072"
     },
     "check_tool_rules": {
       "tool_id": "check_tool_rules",
@@ -9537,7 +11510,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "check_core_tools.py",
+        "check_tool_rules.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013795"
     },
     "execute_step_fixed": {
       "tool_id": "execute_step_fixed",
@@ -9562,7 +11542,13 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "check_tool_rules.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013823"
     },
     "fix_missing_tools": {
       "tool_id": "fix_missing_tools",
@@ -9587,7 +11573,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014073"
     },
     "fix_session_end": {
       "tool_id": "fix_session_end",
@@ -9612,7 +11603,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014075"
     },
     "fix_tool_commands": {
       "tool_id": "fix_tool_commands",
@@ -9637,7 +11633,14 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "check_core_tools.py",
+        "check_tool_rules.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013796"
     },
     "fix_tool_configs": {
       "tool_id": "fix_tool_configs",
@@ -9662,7 +11665,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014076"
     },
     "fix_workflow_tool_ids": {
       "tool_id": "fix_workflow_tool_ids",
@@ -9687,7 +11695,12 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014077"
     },
     "tool_executor": {
       "tool_id": "tool_executor",
@@ -9696,7 +11709,16 @@
       "category": "core",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "critical"
+      "priority": "critical",
+      "usage_count": 77,
+      "usage_files": [
+        "auto-critic.py",
+        "auto_execute_workflow.py",
+        "check_core_tools.py",
+        "check_key_tools.py",
+        "check_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013690"
     },
     "workflow_enforcer": {
       "tool_id": "workflow_enforcer",
@@ -9705,7 +11727,16 @@
       "category": "core",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "critical"
+      "priority": "critical",
+      "usage_count": 23,
+      "usage_files": [
+        "auto_execute_workflow.py",
+        "check_core_tools.py",
+        "execute_step_fixed.py",
+        "register_core_tools.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013743"
     },
     "auto_execute_workflow": {
       "tool_id": "auto_execute_workflow",
@@ -9714,7 +11745,15 @@
       "category": "core",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "critical"
+      "priority": "critical",
+      "usage_count": 6,
+      "usage_files": [
+        "check_core_tools.py",
+        "check_tool_rules.py",
+        "register_core_tools.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013797"
     },
     "workflow_interactive": {
       "tool_id": "workflow_interactive",
@@ -9723,7 +11762,14 @@
       "category": "core",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "high"
+      "priority": "high",
+      "usage_count": 7,
+      "usage_files": [
+        "register_core_tools.py",
+        "register_tools.py",
+        "workflow_interactive_v2.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014038"
     },
     "check_tools": {
       "tool_id": "check_tools",
@@ -9732,7 +11778,15 @@
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "low"
+      "priority": "low",
+      "usage_count": 7,
+      "usage_files": [
+        "check_core_tools.py",
+        "register_core_tools.py",
+        "register_tools.py",
+        "system_health_checker.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013799"
     },
     "check_workflow_steps": {
       "tool_id": "check_workflow_steps",
@@ -9741,7 +11795,14 @@
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "low"
+      "priority": "low",
+      "usage_count": 5,
+      "usage_files": [
+        "check_core_tools.py",
+        "register_core_tools.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013800"
     },
     "register_core_tools": {
       "tool_id": "register_core_tools",
@@ -9750,7 +11811,12 @@
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "low"
+      "priority": "low",
+      "usage_count": 3,
+      "usage_files": [
+        "register_core_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014039"
     },
     "check_core_tools": {
       "tool_id": "check_core_tools",
@@ -9759,7 +11825,13 @@
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "low"
+      "priority": "low",
+      "usage_count": 4,
+      "usage_files": [
+        "register_core_tools.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014041"
     },
     "check_flow_manager": {
       "tool_id": "check_flow_manager",
@@ -9768,7 +11840,13 @@
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "low"
+      "priority": "low",
+      "usage_count": 4,
+      "usage_files": [
+        "register_core_tools.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014042"
     },
     "register_tools": {
       "tool_id": "register_tools",
@@ -9777,7 +11855,16 @@
       "category": "utility",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "priority": "low"
+      "priority": "low",
+      "usage_count": 26,
+      "usage_files": [
+        "auto_register_tools.py",
+        "check_core_tools.py",
+        "check_tool_rules.py",
+        "register_categorization_tools.py",
+        "register_core_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013757"
     },
     "long-term-memory": {
       "name": "Long Term Memory",
@@ -9796,7 +11883,13 @@
         "py long_term_memory.py --add '记忆内容'"
       ],
       "added_at": "2026-03-19T14:07:24.743626",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013758"
     },
     "task-decomposer": {
       "name": "Task Decomposer",
@@ -9813,7 +11906,13 @@
         "py task_decomposer.py --decompose '复杂任务' --template development"
       ],
       "added_at": "2026-03-19T14:07:24.743659",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013760"
     },
     "proactive-agent": {
       "name": "Proactive Agent",
@@ -9835,7 +11934,13 @@
         "py proactive_agent.py --remind '完成任务'"
       ],
       "added_at": "2026-03-19T14:07:24.743662",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013761"
     },
     "multimodal-agent": {
       "name": "Multimodal Agent",
@@ -9857,7 +11962,13 @@
         "py multimodal_agent.py --ocr 'scan.png'"
       ],
       "added_at": "2026-03-19T14:07:24.743664",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013762"
     },
     "workflow-recovery": {
       "name": "Workflow Recovery",
@@ -9874,7 +11985,13 @@
         "py workflow_recovery.py --restore 'checkpoint.json'"
       ],
       "added_at": "2026-03-19T14:07:24.743665",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013764"
     },
     "integration-validator": {
       "name": "Integration Validator",
@@ -9890,7 +12007,14 @@
         "py integration_validator.py --all"
       ],
       "added_at": "2026-03-19T14:07:24.743667",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py",
+        "register_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013765"
     },
     "workflow-cache": {
       "name": "Workflow Cache",
@@ -9907,7 +12031,12 @@
         "py workflow_cache.py --stats"
       ],
       "added_at": "2026-03-19T14:09:47.156027",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "register_workflow_cache.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014078"
     },
     "git-commit-push": {
       "name": "Git Commit Push",
@@ -9923,7 +12052,14 @@
         "py git_commit_push.py --message 'fix: update'"
       ],
       "added_at": "2026-03-19T14:32:33.621642",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py",
+        "register_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013811"
     },
     "execution-logger": {
       "name": "Execution Logger",
@@ -9939,7 +12075,14 @@
         "py execution_logger.py --log 'tool executed'"
       ],
       "added_at": "2026-03-19T14:32:33.621676",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py",
+        "register_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013813"
     },
     "workflow-scheduler": {
       "name": "Workflow Scheduler",
@@ -9955,7 +12098,14 @@
         "py workflow_scheduler.py --schedule 'task'"
       ],
       "added_at": "2026-03-19T14:32:33.621680",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py",
+        "register_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013814"
     },
     "tool-suggester": {
       "name": "Tool Suggester",
@@ -9970,7 +12120,14 @@
         "py tool_suggester.py --task 'analyze image'"
       ],
       "added_at": "2026-03-19T14:32:33.621681",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py",
+        "register_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013818"
     },
     "task-analyzer": {
       "name": "Task Analyzer",
@@ -9986,7 +12143,14 @@
         "py task_analyzer.py --analyze 'complex task'"
       ],
       "added_at": "2026-03-19T14:32:33.621684",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py",
+        "register_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013820"
     },
     "checkpoint-saver": {
       "name": "Checkpoint Saver",
@@ -10002,7 +12166,14 @@
         "py checkpoint_saver.py --save 'step6'"
       ],
       "added_at": "2026-03-19T14:32:33.621685",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py",
+        "register_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013821"
     },
     "auto-doc-generator": {
       "name": "Auto Doc Generator",
@@ -10017,7 +12188,12 @@
         "py auto_doc_generator.py"
       ],
       "added_at": "2026-03-19T14:54:26.823493",
-      "status": "active"
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014047"
     },
     "performance-benchmark": {
       "name": "Performance Benchmark",
@@ -10032,7 +12208,13 @@
         "py performance_benchmark.py"
       ],
       "added_at": "2026-03-19T14:54:26.823527",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "comprehensive_performance_benchmark.py",
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013831"
     },
     "changelog-generator": {
       "name": "Changelog Generator",
@@ -10047,7 +12229,12 @@
         "py changelog_generator.py"
       ],
       "added_at": "2026-03-19T14:54:26.823531",
-      "status": "active"
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014048"
     },
     "memory-auto-compress": {
       "name": "Memory Auto Compress",
@@ -10062,7 +12249,12 @@
         "py memory_auto_compress.py"
       ],
       "added_at": "2026-03-19T14:54:26.823533",
-      "status": "active"
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014049"
     },
     "incremental-executor": {
       "name": "Incremental Executor",
@@ -10077,7 +12269,12 @@
         "py incremental_executor.py"
       ],
       "added_at": "2026-03-19T14:54:26.823535",
-      "status": "active"
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014051"
     },
     "timeout-optimizer": {
       "name": "Timeout Optimizer",
@@ -10092,7 +12289,12 @@
         "py timeout_optimizer.py --workflow workflow.json"
       ],
       "added_at": "2026-03-19T14:54:26.823537",
-      "status": "active"
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014052"
     },
     "auto-test-runner": {
       "name": "Auto Test Runner",
@@ -10108,7 +12310,12 @@
         "py auto_test_runner.py"
       ],
       "added_at": "2026-03-19T15:11:26.457663",
-      "status": "active"
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_medium_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014053"
     },
     "rollback-manager": {
       "name": "Rollback Manager",
@@ -10125,7 +12332,12 @@
         "py rollback_manager.py --create"
       ],
       "added_at": "2026-03-19T15:11:26.457699",
-      "status": "active"
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_medium_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014055"
     },
     "memory-persistence": {
       "name": "Memory Persistence",
@@ -10141,7 +12353,12 @@
         "py memory_persistence.py --auto"
       ],
       "added_at": "2026-03-19T15:11:26.457702",
-      "status": "active"
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_medium_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014056"
     },
     "config-backup": {
       "name": "Config Backup",
@@ -10158,7 +12375,13 @@
         "py config_backup.py --backup-all"
       ],
       "added_at": "2026-03-19T15:11:26.457704",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "config_manager.py",
+        "register_medium_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013840"
     },
     "parallel-executor": {
       "name": "Parallel Executor",
@@ -10174,7 +12397,12 @@
         "py parallel_executor.py --execute"
       ],
       "added_at": "2026-03-19T15:11:26.457706",
-      "status": "active"
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_medium_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014058"
     },
     "result-cache": {
       "name": "Result Cache",
@@ -10191,7 +12419,13 @@
         "py result_cache.py --stats"
       ],
       "added_at": "2026-03-19T15:11:26.457707",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "register_medium_priority_tools.py",
+        "result_cache.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014059"
     },
     "speed-optimization-brainstorm": {
       "name": "Speed Optimization Brainstorm",
@@ -10206,7 +12440,13 @@
         "py speed_optimization_brainstorm.py"
       ],
       "added_at": "2026-03-19T15:31:57.494997",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "register_speed_opt_tool.py",
+        "speed_optimization_brainstorm.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014069"
     },
     "db_index_optimizer": {
       "name": "Database Index Optimizer",
@@ -10218,7 +12458,12 @@
         "py db_index_optimizer.py"
       ],
       "added_at": "2026-03-19T15:55:14.368387",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "register_speed_tools_batch.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014070"
     },
     "data_structure_optimizer": {
       "name": "Data Structure Optimizer",
@@ -10230,7 +12475,13 @@
         "py data_structure_optimizer.py"
       ],
       "added_at": "2026-03-19T15:55:14.368423",
-      "status": "active"
+      "status": "active",
+      "usage_count": 4,
+      "usage_files": [
+        "data_structure_optimizer.py",
+        "register_speed_tools_batch.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013862"
     },
     "lru_cache_manager": {
       "name": "LRU Cache Manager",
@@ -10242,7 +12493,15 @@
         "py lru_cache_manager.py"
       ],
       "added_at": "2026-03-19T15:55:14.368426",
-      "status": "active"
+      "status": "active",
+      "usage_count": 7,
+      "usage_files": [
+        "comprehensive_performance_benchmark.py",
+        "lru_cache_examples.py",
+        "lru_cache_manager.py",
+        "register_speed_tools_batch.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013833"
     },
     "async_io_manager": {
       "name": "Async I/O Manager",
@@ -10254,7 +12513,13 @@
         "py async_io_manager.py"
       ],
       "added_at": "2026-03-19T15:55:14.368433",
-      "status": "active"
+      "status": "active",
+      "usage_count": 4,
+      "usage_files": [
+        "async_io_manager.py",
+        "register_speed_tools_batch.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013668"
     },
     "multi_level_cache": {
       "name": "Multi-Level Cache",
@@ -10266,7 +12531,14 @@
         "py multi_level_cache.py"
       ],
       "added_at": "2026-03-19T15:55:14.368435",
-      "status": "active"
+      "status": "active",
+      "usage_count": 12,
+      "usage_files": [
+        "comprehensive_performance_benchmark.py",
+        "multi_level_cache.py",
+        "register_speed_tools_batch.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013834"
     },
     "query_result_cache": {
       "name": "Query Result Cache",
@@ -10278,7 +12550,13 @@
         "py query_result_cache.py"
       ],
       "added_at": "2026-03-19T16:14:14.933236",
-      "status": "active"
+      "status": "active",
+      "usage_count": 4,
+      "usage_files": [
+        "comprehensive_performance_benchmark.py",
+        "register_phase2_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013836"
     },
     "batch_parallel_processor": {
       "name": "Batch Parallel Processor",
@@ -10290,7 +12568,13 @@
         "py batch_parallel_processor.py"
       ],
       "added_at": "2026-03-19T16:14:14.933270",
-      "status": "active"
+      "status": "active",
+      "usage_count": 4,
+      "usage_files": [
+        "comprehensive_performance_benchmark.py",
+        "register_phase2_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013837"
     },
     "connection_pool_manager": {
       "name": "Connection Pool Manager",
@@ -10302,7 +12586,13 @@
         "py connection_pool_manager.py"
       ],
       "added_at": "2026-03-19T16:14:14.933274",
-      "status": "active"
+      "status": "active",
+      "usage_count": 5,
+      "usage_files": [
+        "comprehensive_performance_benchmark.py",
+        "register_phase2_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013839"
     },
     "comprehensive_performance_benchmark": {
       "name": "Comprehensive Performance Benchmark",
@@ -10314,7 +12604,12 @@
         "py comprehensive_performance_benchmark.py"
       ],
       "added_at": "2026-03-19T16:14:14.933276",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "register_phase2_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014062"
     },
     "cpu_multiprocess_optimizer": {
       "name": "CPU Multiprocess Optimizer",
@@ -10326,7 +12621,12 @@
         "py cpu_multiprocess_optimizer.py"
       ],
       "added_at": "2026-03-19T16:22:40.524035",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "register_phase3_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014063"
     },
     "pipeline_processor": {
       "name": "Pipeline Processor",
@@ -10338,7 +12638,12 @@
         "py pipeline_processor.py"
       ],
       "added_at": "2026-03-19T16:22:40.524072",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "register_phase3_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014064"
     },
     "memory_mapped_file": {
       "name": "Memory Mapped File",
@@ -10350,7 +12655,12 @@
         "py memory_mapped_file.py"
       ],
       "added_at": "2026-03-19T16:22:40.524076",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "register_phase3_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014066"
     },
     "brainstorm_agent_autonomy": {
       "name": "Brainstorm Agent Autonomy",
@@ -10362,7 +12672,12 @@
         "py brainstorm_agent_autonomy.py"
       ],
       "added_at": "2026-03-19T16:41:33.711847",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "register_brainstorm_tool.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014032"
     },
     "brainstorm_research_driven": {
       "name": "Brainstorm Research Driven",
@@ -10374,7 +12689,12 @@
         "py brainstorm_research_driven.py"
       ],
       "added_at": "2026-03-19T16:55:37.746946",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "register_research_brainstorm.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014067"
     },
     "tool_governance_analyzer": {
       "name": "Tool Governance Analyzer",
@@ -10386,7 +12706,12 @@
         "py tool_governance_analyzer.py"
       ],
       "added_at": "2026-03-19T17:03:53.291341",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "register_governance_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014044"
     },
     "brainstorm_tool_governance": {
       "name": "Brainstorm Tool Governance",
@@ -10398,7 +12723,12 @@
         "py brainstorm_tool_governance.py"
       ],
       "added_at": "2026-03-19T17:03:53.291645",
-      "status": "active"
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "register_governance_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014045"
     },
     "git_commit_push": {
       "name": "Git Commit Push",
@@ -10410,7 +12740,16 @@
         "py git_commit_push.py"
       ],
       "added_at": "2026-03-19T17:12:30.643342",
-      "status": "recovered"
+      "status": "recovered",
+      "usage_count": 12,
+      "usage_files": [
+        "brainstorm_tool_governance.py",
+        "check_key_tools.py",
+        "check_missing_tools.py",
+        "execute_step_fixed.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013790"
     },
     "execution_logger": {
       "name": "Execution Logger",
@@ -10422,7 +12761,16 @@
         "py execution_logger.py"
       ],
       "added_at": "2026-03-19T17:12:30.643377",
-      "status": "recovered"
+      "status": "recovered",
+      "usage_count": 12,
+      "usage_files": [
+        "auto_execute_workflow.py",
+        "brainstorm_tool_governance.py",
+        "check_key_tools.py",
+        "check_missing_tools.py",
+        "execute_step_fixed.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013745"
     },
     "tool_suggester": {
       "name": "Tool Suggester",
@@ -10434,7 +12782,16 @@
         "py tool_suggester.py"
       ],
       "added_at": "2026-03-19T17:12:30.643381",
-      "status": "recovered"
+      "status": "recovered",
+      "usage_count": 12,
+      "usage_files": [
+        "auto_execute_workflow.py",
+        "brainstorm_tool_governance.py",
+        "check_key_tools.py",
+        "check_missing_tools.py",
+        "execute_step_fixed.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013746"
     },
     "task_analyzer": {
       "name": "Task Analyzer",
@@ -10446,7 +12803,16 @@
         "py task_analyzer.py"
       ],
       "added_at": "2026-03-19T17:12:30.643383",
-      "status": "recovered"
+      "status": "recovered",
+      "usage_count": 12,
+      "usage_files": [
+        "auto_execute_workflow.py",
+        "brainstorm_tool_governance.py",
+        "check_key_tools.py",
+        "check_missing_tools.py",
+        "execute_step_fixed.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013748"
     },
     "checkpoint_saver": {
       "name": "Checkpoint Saver",
@@ -10458,7 +12824,16 @@
         "py checkpoint_saver.py"
       ],
       "added_at": "2026-03-19T17:12:30.643385",
-      "status": "recovered"
+      "status": "recovered",
+      "usage_count": 11,
+      "usage_files": [
+        "auto_execute_workflow.py",
+        "brainstorm_tool_governance.py",
+        "checkpoint_saver.py",
+        "check_key_tools.py",
+        "check_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013749"
     },
     "timeout_optimizer": {
       "name": "Timeout Optimizer",
@@ -10470,7 +12845,16 @@
         "py timeout_optimizer.py"
       ],
       "added_at": "2026-03-19T17:12:30.643387",
-      "status": "recovered"
+      "status": "recovered",
+      "usage_count": 8,
+      "usage_files": [
+        "brainstorm_tool_governance.py",
+        "check_missing_tools.py",
+        "register_low_priority_tools.py",
+        "register_missing_file_tools.py",
+        "timeout_optimizer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013792"
     },
     "categorize_uncategorized_tools": {
       "name": "Categorize Uncategorized Tools",
@@ -10482,7 +12866,12 @@
         "py categorize_uncategorized_tools.py"
       ],
       "added_at": "2026-03-19T17:21:44.580568",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "register_categorization_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014034"
     },
     "auto_categorize_tools": {
       "name": "Auto Categorize Tools",
@@ -10494,7 +12883,12 @@
         "py auto_categorize_tools.py"
       ],
       "added_at": "2026-03-19T17:21:44.580600",
-      "status": "active"
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "register_categorization_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014035"
     },
     "tool_search": {
       "name": "Tool Search",
@@ -10506,6 +12900,36 @@
         "py tool_search.py"
       ],
       "added_at": "2026-03-19T17:21:44.580605",
+      "status": "active",
+      "usage_count": 9,
+      "usage_files": [
+        "register_categorization_tools.py",
+        "tool_search.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014037"
+    },
+    "tool_usage_tracker": {
+      "name": "Tool Usage Tracker",
+      "description": "工具使用跟踪 - 扫描代码库统计使用频率，识别热门/冷门工具",
+      "file": "tool_usage_tracker.py",
+      "category": "monitoring",
+      "parameters": [],
+      "examples": [
+        "py tool_usage_tracker.py"
+      ],
+      "added_at": "2026-03-19T17:29:33.739672",
+      "status": "active"
+    },
+    "mark_deprecated_tools": {
+      "name": "Mark Deprecated Tools",
+      "description": "标记废弃工具 - 基于使用统计标记废弃候选",
+      "file": "mark_deprecated_tools.py",
+      "category": "automation",
+      "parameters": [],
+      "examples": [
+        "py mark_deprecated_tools.py"
+      ],
+      "added_at": "2026-03-19T17:30:07.231561",
       "status": "active"
     }
   },
@@ -10613,9 +13037,10 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T17:21:44.580607",
-  "total_tools": 435,
+  "updated_at": "2026-03-19T17:30:07.231596",
+  "total_tools": 437,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
-  "manual_fixes": 5
+  "manual_fixes": 5,
+  "deprecated_count": 88
 }
