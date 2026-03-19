@@ -1,5 +1,5 @@
 {
-  "version": "1.11.19",
+  "version": "1.11.20",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14380,6 +14380,22 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/tool_self_learner.py",
       "created_at": "2026-03-20T04:05:00+08:00"
+    },
+    "human_intent_understanding": {
+      "category": "autonomy",
+      "description": "Human intent understanding - detect implicit needs, urgency, emotion (19 patterns)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/human_intent_understanding.py",
+      "created_at": "2026-03-20T04:40:00+08:00"
+    },
+    "emotional_intelligence": {
+      "category": "autonomy",
+      "description": "Emotional intelligence - 8 emotions, empathetic response, style adjustment (68 words)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/emotional_intelligence.py",
+      "created_at": "2026-03-20T04:40:00+08:00"
     }
   },
   "workflows": {
@@ -14486,7 +14502,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T23:22:31.986969",
+  "updated_at": "2026-03-19T23:31:42.492139",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
