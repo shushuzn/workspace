@@ -1,10 +1,17 @@
 {
   "flow_id": "20260318-universal-workflow-001",
-  "task": "解决忘记用主工作流的问题",
-  "started_at": "2026-03-19T21:50:00+08:00",
+  "task": "头脑风暴 - 主工作流优化",
+  "started_at": "2026-03-19T22:00:00+08:00",
+  "completed_at": "2026-03-19T22:35:00+08:00",
   "total_steps": 20,
   "completed_steps": ["1", "2", "3", "4", "5", "6", "6.5", "6.6", "6.7", "7", "8", "8.5", "8.6", "8.7", "9.1", "10.1", "10.5", "11.1", "12.2", "13.1", "14.1", "15.1", "16.1", "17.1", "18.1", "19.1", "20.1"],
   "current_step": "20.1",
   "status": "completed",
-  "updated_at": "2026-03-19T21:55:00+08:00"
+  "brainstorm_output": {
+    "divergent_ideas": 15,
+    "convergent_solutions": 7,
+    "p0_priorities": 3,
+    "p1_priorities": 4
+  },
+  "updated_at": "2026-03-19T22:35:00+08:00"
 }

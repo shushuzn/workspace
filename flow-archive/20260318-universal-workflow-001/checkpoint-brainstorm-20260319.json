@@ -1,0 +1,16 @@
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "task": "头脑风暴 - 主工作流优化",
+  "started_at": "2026-03-19T22:00:00+08:00",
+  "completed_at": "2026-03-19T22:30:00+08:00",
+  "total_steps": 20,
+  "completed_steps": ["1", "2", "3", "4", "5", "6", "6.5", "6.6", "6.7", "7", "8"],
+  "current_step": "8",
+  "status": "in_progress",
+  "brainstorm_output": {
+    "divergent_ideas": 15,
+    "convergent_solutions": 7,
+    "p0_priorities": 3,
+    "p1_priorities": 4
+  }
+}

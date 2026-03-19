@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-19T21:59:47.337192
+# ---
+D:\OpenClaw\workspace\flow-archive\20260320-brainstorm-v2\workflow.json  (lines 1-50 of 266)
+{
+  "flow_id": "20260320-brainstorm-v2",
+  "name": "头脑风暴双环工作流 v2.2",
+  "description": "创造性想法生成工作流 - 发散环 (D1-D5) + 收敛环 (C1-C5), 最大 3 轮迭代，支持条件执行和阻塞控制",
+  "version": "2.2.0",
+  "created_at": "2026-03-20T12:00:00+08:00",
+  "updated_at": "2026-03-20T14:30:00+08:00",
+  "workflow_type": "sub",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 90,
+  "total_steps": 10,
+  "rings": {
+    "divergent": {
+      "name": "发散环",
+      "time_limit_minutes": 30,
+      "steps": [
+        {"step_id": "D1", "name": "灵感触发", "time_minutes": 5},
+        {"step_id": "D2", "name": "联想爆发", "time_minutes": 10},
+        {"step_id": "D3", "name": "强制连接", "time_minutes": 5},
+        {"step_id": "D4", "name": "逆向思考", "time_minutes": 5},
+        {"step_id": "D5", "name": "快速记录", "time_minutes": 5}
+      ]
+    },
+    "convergent": {
+      "name": "收敛环",
+      "time_limit_minutes": 25,
+      "steps": [
+        {"step_id": "C1", "name": "初步筛选", "time_minutes": 5},
+        {"step_id": "C2", "name": "轻量验证", "time_minutes": 5},
+        {"step_id": "C3", "name": "影响力评估", "time_minutes": 5},
+        {"step_id": "C4", "name": "快速批判", "time_minutes": 5},
+        {"step_id": "C5", "name": "行动规划", "time_minutes": 5}
+      ]
+    }
+  },
+  "steps": [
+    {
+      "step_id": "D1",
+      "name": "灵感触发",
+      "description": "从 arXiv 收集最新相关论文作为灵感来源",
+      "blocking": true,
+      "timeout_seconds": 300,
+      "conditional": null,
+      "validation": {
+        "min_papers": 3,
+        "output_field": "arxiv_papers"
+      }
+    },
+    {
+      "step_id": "D2",
+
+[216 more lines. Use start_line=51 to continue.]
