@@ -1,5 +1,5 @@
 {
-  "version": "1.11.15",
+  "version": "1.11.16",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14325,6 +14325,38 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/parallel_tool_executor.py",
       "created_at": "2026-03-20T00:50:00+08:00"
+    },
+    "brainstorm_ai_assistant": {
+      "category": "brainstorm-enhancement",
+      "description": "AI-powered idea generation (divergent/convergent/connection modes)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/brainstorm_ai_assistant.py",
+      "created_at": "2026-03-20T01:15:00+08:00"
+    },
+    "brainstorm_mindmap": {
+      "category": "visualization",
+      "description": "Mind map generator for brainstorm visualization (Markdown format)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/brainstorm_mindmap.py",
+      "created_at": "2026-03-20T01:15:00+08:00"
+    },
+    "brainstorm_quality_predictor": {
+      "category": "quality-control",
+      "description": "Predict idea quality & success probability (5 dimensions)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/brainstorm_quality_predictor.py",
+      "created_at": "2026-03-20T01:15:00+08:00"
+    },
+    "brainstorm_workflow_v3": {
+      "category": "workflow",
+      "description": "Enhanced brainstorm workflow v3.0 (12 steps, AI+Viz+Prediction)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "flow-archive/20260320-brainstorm-v3/workflow.json",
+      "created_at": "2026-03-20T01:15:00+08:00"
     }
   },
   "workflows": {
@@ -14431,7 +14463,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T22:41:06.416662",
+  "updated_at": "2026-03-19T22:46:57.882190",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
