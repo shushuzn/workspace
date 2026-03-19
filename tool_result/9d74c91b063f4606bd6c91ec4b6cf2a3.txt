@@ -1,0 +1,30 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T21:48:24.781531
+# ---
+Command failed with exit code 1.
+[stdout]
+测试：加载并显示主工作流
+
+================================================================================
+                    主工作流自动加载
+================================================================================
+
+任务：P1 优化实施
+Flow ID: 20260318-universal-workflow-001
+版本：1.3.4
+时间：2026-03-19T21:48:15.274635
+
+完整步骤：20 步
+--------------------------------------------------------------------------------
+[stderr]
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\workflow_autoloader.py", line 140, in <module>
+    main()
+    ~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\workflow_autoloader.py", line 133, in main
+    loader.load_and_display("P1 优化实施")
+    ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\workflow_autoloader.py", line 48, in load_and_display
+    print(f"  {i:2d}. {step_id:6s} {step_name:30s} {req_mark:6s} (工具：{tool})")
+                      ^^^^^^^^^^^^
+ValueError: Unknown format code 's' for object of type 'int'

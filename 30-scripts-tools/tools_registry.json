@@ -1,5 +1,5 @@
 {
-  "version": "1.11.8",
+  "version": "1.11.9",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14189,6 +14189,14 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/check_tool_registration.py",
       "created_at": "2026-03-20T21:45:00+08:00"
+    },
+    "workflow-autoloader": {
+      "category": "workflow-enforcement",
+      "description": "工作流自动加载器 - 每次任务开始强制显示 20 步",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/workflow_autoloader.py",
+      "created_at": "2026-03-20T21:50:00+08:00"
     }
   },
   "workflows": {
@@ -14295,7 +14303,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T21:41:57.776198",
+  "updated_at": "2026-03-19T21:48:37.291475",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,

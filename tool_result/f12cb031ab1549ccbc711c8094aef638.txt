@@ -1,0 +1,50 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T21:45:22.391942
+# ---
+[master 1a8fea1] "Fix encoding issues in enforcement tools (remove emoji for Windows GBK compatibility)"
+ 46 files changed, 5844 insertions(+), 49 deletions(-)
+ create mode 100644 30-scripts-tools/WORKFLOW_ENFORCEMENT.md
+ create mode 100644 30-scripts-tools/aai_scorer.py
+ create mode 100644 30-scripts-tools/adaptive_workflow.py
+ create mode 100644 30-scripts-tools/check_tool_registration.py
+ create mode 100644 30-scripts-tools/dynamic_goal_adjuster.py
+ create mode 100644 30-scripts-tools/dynamic_step_skipper.py
+ create mode 100644 30-scripts-tools/metacognition_monitor.py
+ create mode 100644 30-scripts-tools/pre_commit_checker.py
+ create mode 100644 30-scripts-tools/smart_task_decomposer.py
+ create mode 100644 30-scripts-tools/workflow_enforcer.py
+ create mode 100644 end-session.bat
+ create mode 100644 flow-archive/20260320-brainstorm-v2/flow-binding.json
+ create mode 100644 flow-archive/20260320-brainstorm-v2/versions/v2.0.0/workflow.json
+ create mode 100644 flow-archive/20260320-brainstorm-v2/workflow-v2.2.0.json
+ create mode 100644 flow-archive/20260320-main-workflow-brainstorm/aai-scores.json
+ create mode 100644 flow-archive/20260320-main-workflow-brainstorm/metacognition-log.json
+ create mode 100644 memory/2026-03-20.md
+ create mode 100644 start-session.bat
+ create mode 100644 tool_result/0130b447ba9a4f0db08d1e399206a614.txt
+ create mode 100644 tool_result/187a4fc19e564074b8ca537020a25967.txt
+ create mode 100644 tool_result/1e12e5db2e1243e79c4a957d63810994.txt
+ create mode 100644 tool_result/35ec7ec98b0b4bbaafd8556460004d00.txt
+ create mode 100644 tool_result/4db3267144d8441689fbb1efb4895e3c.txt
+ create mode 100644 tool_result/7199db8a9e344d5d98d880242a7e8f6e.txt
+ create mode 100644 tool_result/7c1d31067168412eb7f6e73de389034a.txt
+ create mode 100644 tool_result/872ccaefbbab40faa04bccf9772e0939.txt
+ create mode 100644 tool_result/905800c381b44bd0896503e7ce1b78f4.txt
+ create mode 100644 tool_result/9099847ec12a462e9f763c2a1e34653a.txt
+ create mode 100644 tool_result/9e6bad8b55dd44018ba1093e0e26b6b1.txt
+ create mode 100644 tool_result/a230193e19b94570a2f8b49cbfaddd89.txt
+ create mode 100644 tool_result/aec9f7c57d354fb19030f6e66dbf0921.txt
+ create mode 100644 tool_result/b27b649e559d40118bde578ef6ce450a.txt
+ create mode 100644 tool_result/befd731d4d9b40b5994da418077e9b42.txt
+ create mode 100644 tool_result/c30e59347361433594bc49f80fcfd08c.txt
+ create mode 100644 tool_result/c5212cee27fe4f5ab72973a7be9ac130.txt
+ create mode 100644 tool_result/c6666940f87140d49d94fbcef0247c39.txt
+ create mode 100644 tool_result/c9cbf00230984fc194dc1dcc46eef04f.txt
+ create mode 100644 tool_result/cb92475009ff4afd8d0c80633466e47f.txt
+ create mode 100644 tool_result/d6a63ef5c4004c5a866038c5d511696a.txt
+ create mode 100644 tool_result/e82e5049d3aa4d1a93ebb83cf93df942.txt
+ create mode 100644 tool_result/eb592ce9815a43d3883a561b867fadca.txt
+ create mode 100644 tool_result/f3367f274bdd40d38cc3159cb7dff094.txt
+ create mode 100644 tool_result/fae851c849a34b70bf825ebed5f11d04.txt
+ create mode 100644 tool_result/ff6693cc48dd46c29aef28be08acecf7.txt
+[OK] Git 推送成功
