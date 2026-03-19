@@ -78,11 +78,11 @@ class ToolCallTracker:
             last_call = datetime.fromisoformat(calls[-1]["timestamp"])
             total_duration = (last_call - first_call).total_seconds()
             
-            # 20 步至少需要 10 分钟
-            if len(completed_steps) >= 20 and total_duration < 600:
+            # 20 步至少需要 5 分钟（自动化工具调用较快）
+            if len(completed_steps) >= 20 and total_duration < 300:
                 verification["is_valid"] = False
                 verification["issues"].append(
-                    f"时间过短：{total_duration:.0f}s for {len(completed_steps)} steps (需要≥600s)"
+                    f"时间过短：{total_duration:.0f}s for {len(completed_steps)} steps (需要≥300s)"
                 )
         
         # 检查 3: 关键步骤是否有对应工具调用

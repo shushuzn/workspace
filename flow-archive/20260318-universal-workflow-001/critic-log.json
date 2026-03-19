@@ -64,5 +64,203 @@
     "passed": false,
     "blocking": false,
     "recommendation": "retry"
+  },
+  {
+    "step_id": "1",
+    "timestamp": "2026-03-20T07:44:58.405922",
+    "scores": {
+      "completeness": 90,
+      "accuracy": 85,
+      "consistency": 85,
+      "quality": 80,
+      "safety": 95
+    },
+    "comments": {
+      "completeness": "Output exists and non-empty",
+      "accuracy": "Output type matches expectation",
+      "consistency": "No consistency issues detected",
+      "quality": "Acceptable quality",
+      "safety": "No safety issues detected"
+    },
+    "total_score": 86.25,
+    "passed": true,
+    "blocking": false,
+    "recommendation": "proceed"
+  },
+  {
+    "step_id": "2",
+    "timestamp": "2026-03-20T07:44:58.407803",
+    "scores": {
+      "completeness": 10,
+      "accuracy": 85,
+      "consistency": 85,
+      "quality": 50,
+      "safety": 95
+    },
+    "comments": {
+      "completeness": "Output is empty string",
+      "accuracy": "Output type matches expectation",
+      "consistency": "No consistency issues detected",
+      "quality": "Output too short",
+      "safety": "No safety issues detected"
+    },
+    "total_score": 62.75,
+    "passed": false,
+    "blocking": false,
+    "recommendation": "retry"
+  },
+  {
+    "step_id": "3",
+    "timestamp": "2026-03-20T07:44:58.408958",
+    "scores": {
+      "completeness": 0,
+      "accuracy": 85,
+      "consistency": 85,
+      "quality": 80,
+      "safety": 95
+    },
+    "comments": {
+      "completeness": "Output is None",
+      "accuracy": "Output type matches expectation",
+      "consistency": "No consistency issues detected",
+      "quality": "Acceptable quality",
+      "safety": "No safety issues detected"
+    },
+    "total_score": 68.25,
+    "passed": false,
+    "blocking": false,
+    "recommendation": "retry"
+  },
+  {
+    "step_id": "1",
+    "timestamp": "2026-03-20T07:45:04.139331",
+    "scores": {
+      "completeness": 90,
+      "accuracy": 85,
+      "consistency": 85,
+      "quality": 80,
+      "safety": 95
+    },
+    "comments": {
+      "completeness": "Output exists and non-empty",
+      "accuracy": "Output type matches expectation",
+      "consistency": "No consistency issues detected",
+      "quality": "Acceptable quality",
+      "safety": "No safety issues detected"
+    },
+    "total_score": 86.25,
+    "passed": true,
+    "blocking": false,
+    "recommendation": "proceed"
+  },
+  {
+    "step_id": "2",
+    "timestamp": "2026-03-20T07:45:04.140517",
+    "scores": {
+      "completeness": 10,
+      "accuracy": 85,
+      "consistency": 85,
+      "quality": 50,
+      "safety": 95
+    },
+    "comments": {
+      "completeness": "Output is empty string",
+      "accuracy": "Output type matches expectation",
+      "consistency": "No consistency issues detected",
+      "quality": "Output too short",
+      "safety": "No safety issues detected"
+    },
+    "total_score": 62.75,
+    "passed": false,
+    "blocking": false,
+    "recommendation": "retry"
+  },
+  {
+    "step_id": "3",
+    "timestamp": "2026-03-20T07:45:04.141360",
+    "scores": {
+      "completeness": 0,
+      "accuracy": 85,
+      "consistency": 85,
+      "quality": 80,
+      "safety": 95
+    },
+    "comments": {
+      "completeness": "Output is None",
+      "accuracy": "Output type matches expectation",
+      "consistency": "No consistency issues detected",
+      "quality": "Acceptable quality",
+      "safety": "No safety issues detected"
+    },
+    "total_score": 68.25,
+    "passed": false,
+    "blocking": false,
+    "recommendation": "retry"
+  },
+  {
+    "step_id": "1",
+    "timestamp": "2026-03-20T07:52:36.712145",
+    "scores": {
+      "completeness": 90,
+      "accuracy": 85,
+      "consistency": 85,
+      "quality": 80,
+      "safety": 95
+    },
+    "comments": {
+      "completeness": "Output exists and non-empty",
+      "accuracy": "Output type matches expectation",
+      "consistency": "No consistency issues detected",
+      "quality": "Acceptable quality",
+      "safety": "No safety issues detected"
+    },
+    "total_score": 86.25,
+    "passed": true,
+    "blocking": false,
+    "recommendation": "proceed"
+  },
+  {
+    "step_id": "2",
+    "timestamp": "2026-03-20T07:52:36.713978",
+    "scores": {
+      "completeness": 10,
+      "accuracy": 85,
+      "consistency": 85,
+      "quality": 50,
+      "safety": 95
+    },
+    "comments": {
+      "completeness": "Output is empty string",
+      "accuracy": "Output type matches expectation",
+      "consistency": "No consistency issues detected",
+      "quality": "Output too short",
+      "safety": "No safety issues detected"
+    },
+    "total_score": 62.75,
+    "passed": false,
+    "blocking": false,
+    "recommendation": "retry"
+  },
+  {
+    "step_id": "3",
+    "timestamp": "2026-03-20T07:52:36.714852",
+    "scores": {
+      "completeness": 0,
+      "accuracy": 85,
+      "consistency": 85,
+      "quality": 80,
+      "safety": 95
+    },
+    "comments": {
+      "completeness": "Output is None",
+      "accuracy": "Output type matches expectation",
+      "consistency": "No consistency issues detected",
+      "quality": "Acceptable quality",
+      "safety": "No safety issues detected"
+    },
+    "total_score": 68.25,
+    "passed": false,
+    "blocking": false,
+    "recommendation": "retry"
   }
 ]

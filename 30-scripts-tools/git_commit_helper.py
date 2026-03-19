@@ -46,7 +46,7 @@ def main():
     print("[STEP 2] Running git commit...")
     code, out, err = run_command(f'git commit -m "{message}"')
     if code != 0:
-        print(f"[WARN] git commit failed (no changes?): {err}")
+        print(f"[WARN] git commit failed (no changes?): {err.encode('ascii', errors='ignore').decode('ascii')}")
         print("[INFO] Continuing to push anyway...")
     else:
         print("[OK] Local commit successful")

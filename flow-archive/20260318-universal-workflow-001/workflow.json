@@ -2,7 +2,7 @@
   "flow_id": "20260318-universal-workflow-001",
   "name": "通用主工作流",
   "description": "主工作流 - 总控/指挥/调度所有子工作流和工具",
-  "version": "1.5.0",
+  "version": "1.6.0",
   "created_at": "2026-03-18T22:46:04+08:00",
   "workflow_type": "main",
   "parent_workflow": null,
@@ -1004,6 +1004,27 @@
       "detect_missing_state_file": true,
       "detect_missing_tool_log": true,
       "action_on_violation": "block_and_report"
+    }
+  },
+  "mandatory_rules": {
+    "core_execution_rules": {
+      "enabled": true,
+      "file": "flow-archive/20260318-universal-workflow-001/CORE-EXECUTION-RULES.md",
+      "verify_tool": "core_rules_verifier.py",
+      "verify_at_step": 1,
+      "block_if_fail": true,
+      "rules": [
+        "纯执行代理",
+        "工具调用获取",
+        "严格单步执行",
+        "禁止提前生成",
+        "原样抛出错误",
+        "禁止总结润色",
+        "可验证字段",
+        "禁止假设",
+        "禁止过程描述",
+        "终止并上报"
+      ]
     }
   }
 }
