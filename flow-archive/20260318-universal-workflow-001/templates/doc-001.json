@@ -1,0 +1,65 @@
+{
+  "template_id": "doc-001",
+  "name": "文档编写工作流",
+  "version": "1.0.0",
+  "description": "适用于文档编写、报告撰写、文章创作等文档类任务",
+  "total_steps": 6,
+  "estimated_time": "15-30 分钟",
+  "steps": [
+    {
+      "step": 1,
+      "name": "上下文加载验证",
+      "blocker": true,
+      "tool": "context_verify",
+      "description": "加载相关文档和参考资料"
+    },
+    {
+      "step": 2,
+      "name": "Flow ID 绑定",
+      "blocker": true,
+      "tool": "flow_id_bind",
+      "description": "绑定到 doc-001 工作流"
+    },
+    {
+      "step": 3,
+      "name": "大纲规划",
+      "blocker": true,
+      "tool": "task_parser",
+      "description": "制定文档大纲、结构"
+    },
+    {
+      "step": 4,
+      "name": "内容撰写",
+      "blocker": true,
+      "tool": "content_writer",
+      "description": "编写文档内容"
+    },
+    {
+      "step": 5,
+      "name": "校对审查",
+      "blocker": true,
+      "tool": "auto-critic_v7",
+      "description": "文档质量审查（语法、逻辑、完整性）"
+    },
+    {
+      "step": 6,
+      "name": "Git 提交推送",
+      "blocker": true,
+      "tool": "git_commit_push",
+      "description": "提交文档到 Git"
+    }
+  ],
+  "quality_gates": {
+    "step_5": {
+      "critical_issues": 0,
+      "severe_issues": 3,
+      "minor_issues": 15,
+      "min_score": 75
+    }
+  },
+  "deliverables": [
+    "文档.md",
+    "图表/",
+    "参考资料/"
+  ]
+}
