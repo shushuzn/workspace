@@ -1,5 +1,5 @@
 {
-  "version": "1.11.5",
+  "version": "1.11.6",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14164,6 +14164,24 @@
       "created_at": "2026-03-20T16:00:00+08:00",
       "updated_at": "2026-03-19T21:03:29.439253",
       "usage": "30-scripts-tools\\git_commit.bat \"提交消息\""
+    },
+    "metacognition-monitor": {
+      "category": "monitoring",
+      "description": "元认知监控 - 自我监控/评估/优化",
+      "status": "active",
+      "usage_count": 1,
+      "last_used": "2026-03-19T21:30:45.359678",
+      "file_path": "30-scripts-tools/metacognition_monitor.py",
+      "created_at": "2026-03-20T21:30:00+08:00"
+    },
+    "aai-scorer": {
+      "category": "evaluation",
+      "description": "AAI 评分 - 10 维度自主性评估 (AAI-0 到 AAI-4)",
+      "status": "active",
+      "usage_count": 1,
+      "last_used": "2026-03-19T21:30:45.359707",
+      "file_path": "30-scripts-tools/aai_scorer.py",
+      "created_at": "2026-03-20T21:30:00+08:00"
     }
   },
   "workflows": {
@@ -14270,7 +14288,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T21:03:29.439281",
+  "updated_at": "2026-03-19T21:30:45.359713",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
