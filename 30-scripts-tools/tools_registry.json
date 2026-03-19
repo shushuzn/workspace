@@ -1,5 +1,5 @@
 {
-  "version": "1.11.9",
+  "version": "1.11.10",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14197,6 +14197,22 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/workflow_autoloader.py",
       "created_at": "2026-03-20T21:50:00+08:00"
+    },
+    "step-tracker": {
+      "category": "workflow-tracking",
+      "description": "步骤跟踪器 - 实时跟踪 20 步执行状态",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/step_tracker.py",
+      "created_at": "2026-03-19T22:45:00+08:00"
+    },
+    "git-precommit-check": {
+      "category": "git-hooks",
+      "description": "Git Pre-Commit 检查 - 完成率<100% 阻止提交",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/git_precommit_check.py",
+      "created_at": "2026-03-19T22:45:00+08:00"
     }
   },
   "workflows": {
@@ -14303,7 +14319,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T21:48:37.291475",
+  "updated_at": "2026-03-19T22:07:45.991790",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
