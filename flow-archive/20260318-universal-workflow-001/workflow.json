@@ -323,8 +323,8 @@
     {
       "step_id": 12,
       "name": "Git 提交推送",
-      "description": "提交所有变更并推送到远程仓库",
-      "tool_id": "git_commit_push",
+      "description": "提交所有变更并推送到远程仓库 (使用 git_commit.bat 避免空格问题)",
+      "tool_id": "git-commit",
       "stage": "completion",
       "parameters": {
         "commit_message": "auto-generated",
