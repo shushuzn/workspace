@@ -1,0 +1,81 @@
+{
+  "flow_id": "20260321-dialogue-lite-001",
+  "name": "对话轻量工作流",
+  "description": "处理日常对话/讨论/问答场景的轻量级工作流 (5 步)",
+  "version": "1.0.0",
+  "created_at": "2026-03-20T01:57:13.026675",
+  "workflow_type": "sub",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 2,
+  "total_steps": 5,
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "上下文加载",
+      "description": "加载核心文件和会话历史",
+      "tool_id": "context_search",
+      "stage": "initialization",
+      "blocking": true,
+      "required": true,
+      "timeout_seconds": 10
+    },
+    {
+      "step_id": 2,
+      "name": "问题理解",
+      "description": "解析用户问题/意图",
+      "tool_id": "task_analyzer",
+      "stage": "task_analysis",
+      "blocking": true,
+      "required": true,
+      "timeout_seconds": 15
+    },
+    {
+      "step_id": 3,
+      "name": "回答生成",
+      "description": "生成回答内容",
+      "tool_id": "response_generator",
+      "stage": "execution",
+      "blocking": false,
+      "required": true,
+      "timeout_seconds": 30
+    },
+    {
+      "step_id": 4,
+      "name": "质量检查",
+      "description": "验证回答质量",
+      "tool_id": "quality_check",
+      "stage": "validation",
+      "blocking": true,
+      "required": true,
+      "timeout_seconds": 10
+    },
+    {
+      "step_id": 5,
+      "name": "记录日志",
+      "description": "记录对话到日志",
+      "tool_id": "dialogue_logger",
+      "stage": "completion",
+      "blocking": false,
+      "required": true,
+      "timeout_seconds": 5
+    }
+  ],
+  "enforcement": {
+    "enabled": true,
+    "tool_id": "dialogue-enforcer",
+    "rules": [
+      "必须按顺序执行 5 个步骤",
+      "Step 1-2 必须完成才能回答",
+      "Step 4 质量检查必须通过"
+    ]
+  },
+  "quality_gate": {
+    "enabled": true,
+    "min_score": 70,
+    "action_on_fail": "revise_answer"
+  },
+  "state_persistence": {
+    "save_state": true,
+    "checkpoint_file": "flow-archive/20260321-dialogue-lite-001/dialogue-state.json"
+  }
+}

@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-20T01:52:36.163265
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\workflow_enforcer.py  (lines 1-50 of 192)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+会话前钩子 - 强制检查工作流合规性
+每次会话开始前自动运行，确保按主工作流执行
+"""
+
+import json
+from pathlib import Path
+from datetime import datetime
+import sys
+
+class WorkflowEnforcer:
+    """工作流强制执行器"""
+    
+    REQUIRED_STEPS = [
+        "上下文加载验证",
+        "Flow ID 绑定",
+        "任务解析",
+        "工具/工作流选择",
+        "工具执行",
+        "工具集成验证",
+        "会话压缩保存",
+        "Git 提交推送"
+    ]
+    
+    def __init__(self):
+        self.flow_file = Path("flow-archive/20260318-universal-workflow-001/workflow.json")
+        self.checkpoint_file = Path("flow-archive/20260318-universal-workflow-001/checkpoint.json")
+        self.enforcement_log = Path("flow-archive/20260318-universal-workflow-001/enforcement-log.json")
+        
+        with open(self.flow_file, 'r', encoding='utf-8') as f:
+            self.workflow = json.load(f)
+    
+    def check_workflow_loaded(self) -> bool:
+        """检查工作流是否已加载"""
+        
+        if not self.flow_file.exists():
+            print("[FAIL] 主工作流未加载！")
+            return False
+        
+        print(f"[OK] 主工作流已加载：{self.workflow['version']}")
+        return True
+    
+    def check_flow_id_bound(self) -> bool:
+        """检查 Flow ID 是否已绑定"""
+        
+        # 检查是否有当前会话的 Flow ID
+        if self.checkpoint_file.exists():
+            with open(self.checkpoint_file, 'r', encoding='utf-8') as f:
+
+[142 more lines. Use start_line=51 to continue.]
