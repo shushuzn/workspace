@@ -228,9 +228,9 @@
     "target": "main"
   },
   "last_dispatch": {
-    "channel": "console",
-    "user_id": "default",
-    "session_id": "1773843968653"
+    "channel": "feishu",
+    "user_id": "ou_72a847b95fc25870dcdd8ce56d929252",
+    "session_id": "6d929252"
   },
   "running": {
     "max_iters": 50,
