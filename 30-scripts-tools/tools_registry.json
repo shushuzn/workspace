@@ -1,5 +1,5 @@
 {
-  "version": "1.11.14",
+  "version": "1.11.15",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14293,6 +14293,38 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/workflow_templates.py",
       "created_at": "2026-03-19T22:30:00+08:00"
+    },
+    "cron-enhanced": {
+      "category": "automation",
+      "description": "Enhanced cron scheduler - 4 default tasks (arxiv/memory/heartbeat/performance)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/cron_enhanced.py",
+      "created_at": "2026-03-20T00:50:00+08:00"
+    },
+    "performance-analyzer": {
+      "category": "observability",
+      "description": "Performance bottleneck analyzer - auto-identify slow steps",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/performance_analyzer.py",
+      "created_at": "2026-03-20T00:50:00+08:00"
+    },
+    "auto-memory-distiller": {
+      "category": "automation",
+      "description": "Auto memory distillation - daily at 06:00 via cron",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/auto_memory_distiller.py",
+      "created_at": "2026-03-20T00:50:00+08:00"
+    },
+    "parallel-tool-executor": {
+      "category": "performance",
+      "description": "Parallel tool execution - 2.8x speedup, 64% time saved",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/parallel_tool_executor.py",
+      "created_at": "2026-03-20T00:50:00+08:00"
     }
   },
   "workflows": {
@@ -14399,7 +14431,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T22:33:13.207980",
+  "updated_at": "2026-03-19T22:41:06.416662",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
