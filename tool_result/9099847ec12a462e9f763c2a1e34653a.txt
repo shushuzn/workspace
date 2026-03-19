@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-19T21:18:18.907061
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 430-480 of 682)
+        "check_integration": true,
+        "check_security": true,
+        "check_performance": true,
+        "check_tests": true
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "quality_score": ">=80",
+        "security_issues": 0,
+        "integration_passed": true,
+        "performance_passed": true,
+        "tests_passed": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "human_approval": {
+        "required": false,
+        "trigger_if": "critical_decision",
+        "timeout_minutes": 30
+      }
+    },
+    {
+      "step_id": 11,
+      "name": "会话压缩保存",
+      "description": "压缩会话内容并保存到 daily note + 记忆持久化",
+      "tool_id": "post-session-compress",
+      "stage": "completion",
+      "parameters": {
+        "compression_ratio_target": 0.96,
+        "save_to_daily": true,
+        "save_to_memory": true,
+        "importance_score_threshold": 0.5
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "compressed_size_kb": "<5",
+        "saved_to_daily": true,
+        "saved_to_memory": true
+      },
+      "quality_gate": {
+
+[202 more lines. Use start_line=481 to continue.]

@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-19T21:17:38.918957
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 530-580 of 682)
+      "stage": "completion",
+      "parameters": {
+        "generate_project_overview": true,
+        "generate_tool_docs": true,
+        "generate_changelog": true
+      },
+      "blocking": false,
+      "timeout_seconds": 120,
+      "conditional": {
+        "run_if": "documentation_required",
+        "skip_message": "无需文档，跳过"
+      },
+      "validation": {
+        "docs_generated": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    }
+  ],
+  "subworkflows": {
+    "registered": [
+      {
+        "flow_id": "20260318-brainstorm-001",
+        "name": "头脑风暴工作流",
+        "trigger_keywords": [
+          "头脑风暴",
+          "brainstorm",
+          "创意",
+          "想法"
+        ],
+        "estimated_time_minutes": 45
+      },
+      {
+        "flow_id": "20260318-session-end",
+        "name": "会话结束工作流",
+        "trigger_keywords": [
+          "会话结束",
+          "session-end",
+          "完成",
+          "提交"
+        ],
+        "estimated_time_minutes": 5
+      },
+      {
+        "flow_id": "20260318-research-001",
+        "name": "研究任务工作流",
+        "trigger_keywords": [
+
+[102 more lines. Use start_line=581 to continue.]

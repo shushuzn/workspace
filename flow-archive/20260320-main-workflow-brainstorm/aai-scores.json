@@ -1,0 +1,95 @@
+{
+  "flow_id": "20260320-main-workflow-brainstorm",
+  "timestamp": "2026-03-19T21:30:34.035403",
+  "dimension_scores": {
+    "task_understanding": {
+      "score": 85,
+      "evidence": [
+        "Task parsed successfully",
+        "Clear objectives"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035435"
+    },
+    "tool_usage": {
+      "score": 92.0,
+      "evidence": [
+        "Tools executed successfully",
+        "Proper tool selection"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035447"
+    },
+    "error_recovery": {
+      "score": 80.0,
+      "evidence": [
+        "Errors handled",
+        "Recovery attempted"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035452"
+    },
+    "learning_ability": {
+      "score": 75.0,
+      "evidence": [
+        "Performance improved",
+        "Lessons applied"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035455"
+    },
+    "planning_ability": {
+      "score": 82,
+      "evidence": [
+        "Clear plan",
+        "Logical steps"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035457"
+    },
+    "execution_ability": {
+      "score": 95.0,
+      "evidence": [
+        "Steps completed",
+        "On time"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035460"
+    },
+    "monitoring_ability": {
+      "score": 88.0,
+      "evidence": [
+        "Metrics collected",
+        "Self-evaluation performed"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035462"
+    },
+    "collaboration_ability": {
+      "score": 78.0,
+      "evidence": [
+        "Human triggered when needed",
+        "Clear communication"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035466"
+    },
+    "innovation_ability": {
+      "score": 72,
+      "evidence": [
+        "New solutions proposed",
+        "Creative approaches"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035468"
+    },
+    "safety_awareness": {
+      "score": 95.0,
+      "evidence": [
+        "Security checks passed",
+        "No risks detected"
+      ],
+      "timestamp": "2026-03-19T21:30:34.035471"
+    }
+  },
+  "overall_score": 84.2,
+  "aai_level": "AAI-4",
+  "history": [
+    {
+      "timestamp": "2026-03-19T21:30:34.035502",
+      "overall_score": 84.2,
+      "aai_level": "AAI-4"
+    }
+  ]
+}

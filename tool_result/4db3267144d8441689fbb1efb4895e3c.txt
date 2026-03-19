@@ -1,0 +1,84 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T20:42:14.547472
+# ---
+ m 10-RESEARCH/domain-research/领域研究/cnt-research
+ M 30-scripts-tools/tools_registry.json
+ D commit_arxiv_brainstorm.bat
+ D commit_brainstorm.bat
+ D commit_categorization.bat
+ D commit_daily.bat
+ D commit_daily_summary.bat
+ D commit_daily_update.bat
+ D commit_governance.bat
+ D commit_layer4.bat
+ D commit_layer4_phase2.bat
+ D commit_phase3.bat
+ D commit_phase3_final.bat
+ D commit_phase3_report.bat
+ D commit_phase3_step7.bat
+ D commit_protection.bat
+ D commit_quality_improvement.bat
+ D commit_reflection.bat
+ D commit_research_brainstorm.bat
+ D commit_restore.bat
+ D commit_speed_opt.bat
+ D commit_week1_complete.bat
+ D commit_week2.bat
+ D commit_week3.bat
+ D commit_week4.bat
+ D end-session-v2.bat
+ D end-session.bat
+ D git-commit.bat
+ D run_improve_phase3.bat
+ D test-compression-flow.bat
+ D test-critic-integration.bat
+?? 30-scripts-tools/check_brainstorm_registration.py
+?? 30-scripts-tools/check_brainstorm_tools.py
+?? 30-scripts-tools/critique_brainstorm_workflow.py
+?? 30-scripts-tools/deep_check_workflow.py
+?? 30-scripts-tools/register_missing_brainstorm_tools.py
+?? 30-scripts-tools/validate_brainstorm_v2.2.py
+?? flow-archive/20260320-brainstorm-v2/COMPLETION-SUMMARY.md
+?? flow-archive/20260320-brainstorm-v2/FIX-PLAN.md
+?? flow-archive/20260320-brainstorm-v2/FIX-REPORT.md
+?? flow-archive/20260320-brainstorm-v2/SELF-EVALUATION.md
+?? flow-archive/20260320-brainstorm-v2/flow-binding.json
+?? flow-archive/20260320-brainstorm-v2/versions/v2.0.0/
+?? flow-archive/20260320-brainstorm-v2/workflow-v2.2.0.json
+?? memory/2026-03-20.md
+?? tool_result/03d289dd20f7432aa35d3160a0d43108.txt
+?? tool_result/06e630cd118f4f1eb00691d89f1b22e2.txt
+?? tool_result/07d325c2ad6c4af0901b735006124d3e.txt
+?? tool_result/0953c6b14308403aa1fdc762f323aa71.txt
+?? tool_result/12a31601965345cab63f17a0cc477c93.txt
+?? tool_result/19dcbb8fe2ce4c9e88d039a530e7a1b5.txt
+?? tool_result/1d45eba056f94e19a8001495e6342711.txt
+?? tool_result/2680ccfeb59a45a9a9bdeafcc026a873.txt
+?? tool_result/2efebabe0009482a99927652239cd744.txt
+?? tool_result/339a2c9dcdd44fb2b42fca0a89811a26.txt
+?? tool_result/34315b738ce1405c9058bd5cd50b337f.txt
+?? tool_result/357ed105feda475990969b0d04d42aaa.txt
+?? tool_result/4558d7e077424a3daaefd008c3c520cc.txt
+?? tool_result/485539ef0ff34fcc95a4b3aef244ccc7.txt
+?? tool_result/51faf4b8ff4b4776889737da743127e9.txt
+?? tool_result/6017b12bec514996bf5cf98f0e4798e3.txt
+?? tool_result/6729b1a306cf4075947ad235d8b044ac.txt
+?? tool_result/6d24165bfe7745089532d44cf1d1a8cc.txt
+?? tool_result/6d54b03414594e5ab6b6a11a1125e449.txt
+?? tool_result/6d69fc0dce3b4e6e935eeec8afc36f96.txt
+?? tool_result/6e276f58bf6740f8b876e18830689a04.txt
+?? tool_result/7aafb04e0e4d4659adf54ece31bd45c7.txt
+?? tool_result/7c7224d462dc495c9ab16b09c815c613.txt
+?? tool_result/843bccca33474a10a68a97cee301a611.txt
+?? tool_result/880f0349e9c14e01b2ddc93e6c2300fd.txt
+?? tool_result/9778c0fe29a248d2b258898e1cf2e508.txt
+?? tool_result/b1ea59388b3940f6b9afc95ba732f2b7.txt
+?? tool_result/ceae94689443401e80f46b62dc078313.txt
+?? tool_result/d025e39624fb41fe8ee55749242e55d7.txt
+?? tool_result/d3d7338699d449e39740846797bca92c.txt
+?? tool_result/d94d4cbdc47d4d0098a33324464c02cb.txt
+?? tool_result/dee6021e0fb2483db4abc2e492fb22c4.txt
+?? tool_result/e8dc83bdaf244a5a86471966cc99a8f9.txt
+?? tool_result/f6e11dc89fb74657bebac61889feaff1.txt
+?? tool_result/fc0d49fbf5a44a5da1db642e139d2d84.txt
+?? tool_result/fe31eeecf0b64dc1aeef1d7b7ed5f033.txt

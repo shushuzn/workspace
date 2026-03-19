@@ -1,0 +1,73 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T20:42:10.323568
+# ---
+======================================================================
+工作流深度检查 - 潜在问题扫描
+======================================================================
+
+[1] 时间一致性检查
+  发散环：30 分钟 (限制：30 分钟)
+  收敛环：25 分钟 (限制：25 分钟)
+  总步骤时间：55 分钟
+  估计总时间：90 分钟
+  [OK] 发散环时间合理
+  [OK] 收敛环时间合理
+
+[2] 条件执行逻辑检查
+  D3 (强制连接): {'run_if_min_ideas': 15, 'skip_message': '想法数量<15 个，跳过强制连接'}
+  D4 (逆向思考): {'run_if': 'time_remaining_minutes >= 5', 'skip_message': '剩余时间不足 5 分钟，跳过逆向思考'}
+  C2 (轻量验证): {'run_if_min_shortlist': 5, 'skip_message': '入围想法<5 个，跳过轻量验证'}
+  C3 (影响力评估): {'run_if_min_shortlist': 3, 'skip_message': '入围想法<3 个，跳过影响力评估'}
+  [OK] 条件执行逻辑无冲突
+
+[3] 验证字段可执行性检查
+  D1: ['min_papers', 'output_field']
+  D2: ['min_ideas']
+  D3: ['min_combinations']
+  D5: ['output_file_required']
+  C1: ['min_shortlist']
+  C3: ['matrix_required']
+  C4: ['critic_score_min']
+  C5: ['min_actions', 'output_file_required']
+  [OK] 验证字段格式正确
+
+[4] 迭代逻辑自洽性检查
+  continue_if 条件：3 项
+  stop_if 条件：4 项
+  [WARN] continue_if 和 stop_if 有重叠指标：{'critic_score', 'ideas_count'}
+
+[5] 成功标准可衡量性检查
+  定量标准：5 项 - ['min_raw_ideas', 'min_top_ideas', 'min_actions', 'min_categories', 'critic_score']
+  定性标准：5 项
+  评分等级：3 级 - ['excellent', 'good', 'pass']
+  [OK] 定量标准充足
+  [OK] 定性标准充足
+
+[6] 工具引用检查
+  注册工具：['divergent', 'convergent', 'facilitator', 'critic']
+  [OK] 所有工具已注册
+
+[7] 输出文件路径格式检查
+  divergent_pool: flow-archive/20260320-brainstorm-v2/divergent-ring-{iteration}.json
+    [OK] 支持迭代变量
+  convergent_plan: flow-archive/20260320-brainstorm-v2/convergent-ring-{iteration}.json
+    [OK] 支持迭代变量
+  final_report: flow-archive/20260320-brainstorm-v2/final-report.json
+  critic_review: flow-archive/20260320-brainstorm-v2/critic-lite-review.json
+
+[8] changelog 完整性检查
+  版本记录：['v2.2.0', 'v2.1.0', 'v2.0.1', 'v2.0.0']
+  [OK] changelog 完整
+
+======================================================================
+检查结果汇总
+======================================================================
+
+[OK] 无问题
+
+[OK] 无警告
+
+最终评分：100/100
+评级：A (优秀)
+
+======================================================================

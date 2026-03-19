@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-19T21:17:26.240564
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 280-330 of 682)
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 6.7,
+      "name": "配置备份",
+      "description": "备份关键配置文件",
+      "tool_id": "config-backup",
+      "stage": "execution",
+      "parameters": {
+        "backup_dir": "99-backups/configs",
+        "keep_days": 7,
+        "keep_count": 5
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "validation": {
+        "configs_backed_up": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 7,
+      "name": "执行日志记录",
+      "description": "记录执行过程到 execution-log.json",
+      "tool_id": "execution_logger",
+      "stage": "execution",
+      "parameters": {
+        "log_file": "flow-archive/20260318-universal-workflow-001/execution-log.json"
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 8,
+
+[352 more lines. Use start_line=331 to continue.]

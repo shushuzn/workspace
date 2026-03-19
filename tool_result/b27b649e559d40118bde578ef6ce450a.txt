@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-19T20:51:07.112370
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 1-100 of 451)
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "name": "通用主工作流",
+  "description": "主工作流 - 总控/指挥/调度所有子工作流和工具",
+  "version": "1.1.0",
+  "created_at": "2026-03-18T22:46:04+08:00",
+  "workflow_type": "main",
+  "parent_workflow": null,
+  "estimated_time_minutes": "variable",
+  "total_steps": 12,
+  "enforcement": {
+    "enabled": true,
+    "tool_id": "workflow-enforcer",
+    "rules": [
+      "必须按顺序执行 12 个步骤",
+      "跳步将被阻断",
+      "完成后必须验证",
+      "未通过验证禁止 Git 提交"
+    ],
+    "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json",
+    "git_hook": ".git/hooks/pre-commit"
+  },
+  "stages": {
+    "initialization": "Step 1-2: 上下文加载 + Flow ID 绑定",
+    "task_analysis": "Step 3-4: 任务解析 + 工具/工作流选择",
+    "execution": "Step 5-8: 执行任务 (调用子工作流/工具)",
+    "validation": "Step 9-10: 批判者审查 + 质量门禁",
+    "completion": "Step 11-12: 压缩保存 + Git 提交"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "上下文加载验证",
+      "description": "验证 7 个核心文件已正确加载 (<100KB)",
+      "tool_id": "context_search",
+      "stage": "initialization",
+      "parameters": {
+        "max_size_kb": 100,
+        "required_files": [
+          "SOUL.md",
+          "USER.md",
+          "AGENTS.md",
+          "TOOLS.md",
+          "HEARTBEAT.md",
+          "MEMORY.md",
+          "13-memory/YYYY-MM-DD.md"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 30,
+      "validation": {
+        "max_context_size_kb": 100,
+        "required_files_loaded": true
+      }
+    },
+    {
+      "step_id": 2,
+      "name": "Flow ID 绑定",
+      "description": "创建或绑定当前任务的 Flow ID",
+      "tool_id": "flow_manager",
+      "stage": "initialization",
+      "parameters": {
+        "action": "create_or_bind",
+        "business_name": "auto-generated"
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "flow_id_created": true,
+        "isolation_directory_exists": true
+      }
+    },
+    {
+      "step_id": 3,
+      "name": "任务解析",
+      "description": "分析用户请求，确定任务类型和复杂度",
+      "tool_id": "task_analyzer",
+      "stage": "task_analysis",
+      "parameters": {
+        "classify_by": "complexity",
+        "complexity_levels": [
+          "simple",
+          "medium",
+          "complex"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "task_type_identified": true,
+        "estimated_time_minutes": "number"
+      }
+    },
+    {
+      "step_id": 4,
+      "name": "工具/工作流选择",
+      "description": "根据任务类型选择合适的工具或子工作流",
+      "tool_id": "tool_suggester",
+      "stage": "task_analysis",
+      "parameters": {
+
+[351 more lines. Use start_line=101 to continue.]

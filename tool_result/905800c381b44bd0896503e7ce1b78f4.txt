@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-19T21:17:28.916798
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 330-380 of 682)
+      "step_id": 8,
+      "name": "检查点保存",
+      "description": "保存当前状态到 checkpoint.json (支持断点续传)",
+      "tool_id": "checkpoint_saver",
+      "stage": "execution",
+      "parameters": {
+        "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json"
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 8.5,
+      "name": "记忆持久化",
+      "description": "将重要记忆永久保存到 MEMORY.md",
+      "tool_id": "memory-persistence",
+      "stage": "completion",
+      "parameters": {
+        "min_importance": 0.7,
+        "save_to_memory_md": true
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "validation": {
+        "memories_persisted": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 8.6,
+      "name": "回滚检查点",
+      "description": "创建回滚检查点以备失败时恢复",
+      "tool_id": "rollback-manager",
+      "stage": "completion",
+      "parameters": {
+        "checkpoint_name": "auto",
+        "cleanup_old_days": 7
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+
+[302 more lines. Use start_line=381 to continue.]

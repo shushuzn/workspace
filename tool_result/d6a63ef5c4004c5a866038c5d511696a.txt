@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-19T21:17:34.083267
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 480-530 of 682)
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 12,
+      "name": "Git 提交推送",
+      "description": "提交所有变更并推送到远程仓库 (使用 git_commit.bat 避免空格问题)",
+      "tool_id": "git-commit",
+      "stage": "completion",
+      "parameters": {
+        "commit_message": "auto-generated",
+        "push_remote": true
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "commit_success": true,
+        "push_success": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "human_approval": {
+        "required": false,
+        "trigger_if": "critical_decision",
+        "timeout_minutes": 30
+      }
+    },
+    {
+      "step_id": 13,
+      "name": "文档生成 (可选)",
+      "description": "自动生成项目文档/工具文档/变更日志",
+      "tool_id": "auto-doc-generator",
+      "stage": "completion",
+
+[152 more lines. Use start_line=531 to continue.]

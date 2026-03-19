@@ -1,0 +1,265 @@
+{
+  "flow_id": "20260320-brainstorm-v2",
+  "name": "头脑风暴双环工作流 v2.2",
+  "description": "创造性想法生成工作流 - 发散环 (D1-D5) + 收敛环 (C1-C5), 最大 3 轮迭代，支持条件执行和阻塞控制",
+  "version": "2.2.0",
+  "created_at": "2026-03-20T12:00:00+08:00",
+  "updated_at": "2026-03-20T14:30:00+08:00",
+  "workflow_type": "sub",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 90,
+  "total_steps": 10,
+  "rings": {
+    "divergent": {
+      "name": "发散环",
+      "time_limit_minutes": 30,
+      "steps": [
+        {"step_id": "D1", "name": "灵感触发", "time_minutes": 5},
+        {"step_id": "D2", "name": "联想爆发", "time_minutes": 10},
+        {"step_id": "D3", "name": "强制连接", "time_minutes": 5},
+        {"step_id": "D4", "name": "逆向思考", "time_minutes": 5},
+        {"step_id": "D5", "name": "快速记录", "time_minutes": 5}
+      ]
+    },
+    "convergent": {
+      "name": "收敛环",
+      "time_limit_minutes": 25,
+      "steps": [
+        {"step_id": "C1", "name": "初步筛选", "time_minutes": 5},
+        {"step_id": "C2", "name": "轻量验证", "time_minutes": 5},
+        {"step_id": "C3", "name": "影响力评估", "time_minutes": 5},
+        {"step_id": "C4", "name": "快速批判", "time_minutes": 5},
+        {"step_id": "C5", "name": "行动规划", "time_minutes": 5}
+      ]
+    }
+  },
+  "steps": [
+    {
+      "step_id": "D1",
+      "name": "灵感触发",
+      "description": "从 arXiv 收集最新相关论文作为灵感来源",
+      "blocking": true,
+      "timeout_seconds": 300,
+      "conditional": null,
+      "validation": {
+        "min_papers": 3,
+        "output_field": "arxiv_papers"
+      }
+    },
+    {
+      "step_id": "D2",
+      "name": "联想爆发",
+      "description": "基于灵感自由联想，产生尽可能多的想法",
+      "blocking": false,
+      "timeout_seconds": 600,
+      "conditional": null,
+      "validation": {
+        "min_ideas": 10
+      }
+    },
+    {
+      "step_id": "D3",
+      "name": "强制连接",
+      "description": "将不相关的想法进行组合，产生新的连接",
+      "blocking": false,
+      "timeout_seconds": 300,
+      "conditional": {
+        "run_if_min_ideas": 15,
+        "skip_message": "想法数量<15 个，跳过强制连接"
+      },
+      "validation": {
+        "min_combinations": 5
+      }
+    },
+    {
+      "step_id": "D4",
+      "name": "逆向思考",
+      "description": "从反面/对立面重新审视问题",
+      "blocking": false,
+      "timeout_seconds": 300,
+      "conditional": {
+        "run_if": "time_remaining_minutes >= 5",
+        "skip_message": "剩余时间不足 5 分钟，跳过逆向思考"
+      }
+    },
+    {
+      "step_id": "D5",
+      "name": "快速记录",
+      "description": "整理并记录所有想法到发散池",
+      "blocking": true,
+      "timeout_seconds": 300,
+      "conditional": null,
+      "validation": {
+        "output_file_required": true
+      }
+    },
+    {
+      "step_id": "C1",
+      "name": "初步筛选",
+      "description": "使用简单标准快速筛选想法",
+      "blocking": true,
+      "timeout_seconds": 300,
+      "conditional": null,
+      "validation": {
+        "min_shortlist": 5
+      }
+    },
+    {
+      "step_id": "C2",
+      "name": "轻量验证",
+      "description": "快速验证想法的可行性和真实性",
+      "blocking": false,
+      "timeout_seconds": 300,
+      "conditional": {
+        "run_if_min_shortlist": 5,
+        "skip_message": "入围想法<5 个，跳过轻量验证"
+      }
+    },
+    {
+      "step_id": "C3",
+      "name": "影响力评估",
+      "description": "使用影响力 - 可行性矩阵评估想法",
+      "blocking": false,
+      "timeout_seconds": 300,
+      "conditional": {
+        "run_if_min_shortlist": 3,
+        "skip_message": "入围想法<3 个，跳过影响力评估"
+      },
+      "validation": {
+        "matrix_required": true
+      }
+    },
+    {
+      "step_id": "C4",
+      "name": "快速批判",
+      "description": "使用轻量批判者进行质量审查",
+      "blocking": true,
+      "timeout_seconds": 300,
+      "conditional": null,
+      "validation": {
+        "critic_score_min": 60
+      }
+    },
+    {
+      "step_id": "C5",
+      "name": "行动规划",
+      "description": "将高优先级想法转化为可执行任务",
+      "blocking": true,
+      "timeout_seconds": 300,
+      "conditional": null,
+      "validation": {
+        "min_actions": 3,
+        "output_file_required": true
+      }
+    }
+  ],
+  "max_iterations": 3,
+  "iteration_rules": {
+    "max_iterations": 3,
+    "continue_if": {
+      "any": [
+        {"critic_score": "<70"},
+        {"ideas_count": "<15"},
+        {"human_request": true}
+      ]
+    },
+    "stop_if": {
+      "any": [
+        {"critic_score": "≥85"},
+        {"ideas_count": "≥25"},
+        {"time_remaining_minutes": "<10"},
+        {"iteration_count": "≥3"}
+      ]
+    },
+    "recommendation_logic": {
+      "if_iteration_1_and_score_<60": "继续第 2 轮 (大幅改进)",
+      "if_iteration_2_and_score_<70": "继续第 3 轮 (小幅改进)",
+      "if_iteration_3": "结束 (已达最大迭代)",
+      "if_score_≥85": "结束 (质量优秀)"
+    }
+  },
+  "success_criteria": {
+    "quantitative": {
+      "min_raw_ideas": 20,
+      "min_top_ideas": 5,
+      "min_actions": 3,
+      "min_categories": 3,
+      "critic_score": 60
+    },
+    "qualitative": [
+      "想法多样性 (≥3 个不同类别)",
+      "至少 1 个高影响力想法 (影响力矩阵第一象限)",
+      "行动计划清晰可执行 (C5 输出完整)",
+      "arXiv 论文引用准确 (D1 验证)",
+      "无致命问题 (批判者 4 红线)"
+    ],
+    "scoring": {
+      "excellent": "≥90 分 + 所有定性标准满足",
+      "good": "≥75 分 + 核心定性标准满足",
+      "pass": "≥60 分 + 定量标准满足"
+    }
+  },
+  "tools": {
+    "divergent": "brainstorm-divergent",
+    "convergent": "brainstorm-convergent",
+    "facilitator": "brainstorm-facilitator",
+    "critic": "critic-brainstorm-lite"
+  },
+  "quality_control": {
+    "critic_tool": "critic-brainstorm-lite",
+    "pass_threshold": 60,
+    "pass_rate_threshold": 50,
+    "fatal_issues": ["学术诚信问题", "不可实现", "伦理风险", "成本过高"]
+  },
+  "output_files": {
+    "divergent_pool": "flow-archive/20260320-brainstorm-v2/divergent-ring-{iteration}.json",
+    "convergent_plan": "flow-archive/20260320-brainstorm-v2/convergent-ring-{iteration}.json",
+    "final_report": "flow-archive/20260320-brainstorm-v2/final-report.json",
+    "critic_review": "flow-archive/20260320-brainstorm-v2/critic-lite-review.json"
+  },
+  "enforcement": {
+    "enabled": true,
+    "rules": [
+      "发散环必须执行 D1-D5 全部步骤 (条件允许时)",
+      "收敛环必须执行 C1-C5 全部步骤 (条件允许时)",
+      "时间盒控制 (发散 30 分钟，收敛 25 分钟)",
+      "批判者审查≥60 分才允许结束",
+      "最大迭代 3 轮",
+      "阻塞步骤必须执行 (D1/D5/C1/C4/C5)",
+      "条件执行尊重上下文 (时间/想法数量)"
+    ]
+  },
+  "changelog": {
+    "v2.2.0": {
+      "date": "2026-03-20",
+      "changes": [
+        "添加 10 个步骤的完整配置 (blocking/conditional/validation)",
+        "添加条件执行机制 (D3/D4/C2/C3 支持跳过)",
+        "添加阻塞步骤定义 (D1/D5/C1/C4/C5 必须执行)",
+        "添加成功标准 (定量 5 项 + 定性 5 项 + 评分 3 级)",
+        "添加迭代决策逻辑 (continue_if/stop_if/recommendation)"
+      ]
+    },
+    "v2.1.0": {
+      "date": "2026-03-20",
+      "changes": [
+        "添加条件执行机制",
+        "恢复 v1.0 核心创新"
+      ]
+    },
+    "v2.0.1": {
+      "date": "2026-03-20",
+      "changes": [
+        "修复 output_files 路径错误"
+      ]
+    },
+    "v2.0.0": {
+      "date": "2026-03-20",
+      "changes": [
+        "初始双环迭代版本",
+        "真实 arXiv API 集成",
+        "轻量批判者集成"
+      ]
+    }
+  }
+}

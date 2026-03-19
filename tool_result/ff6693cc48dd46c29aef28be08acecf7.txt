@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-19T21:20:38.246867
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 460-500 of 682)
+    },
+    {
+      "step_id": 11,
+      "name": "会话压缩保存",
+      "description": "压缩会话内容并保存到 daily note + 记忆持久化",
+      "tool_id": "post-session-compress",
+      "stage": "completion",
+      "parameters": {
+        "compression_ratio_target": 0.96,
+        "save_to_daily": true,
+        "save_to_memory": true,
+        "importance_score_threshold": 0.5
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "compressed_size_kb": "<5",
+        "saved_to_daily": true,
+        "saved_to_memory": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 12,
+      "name": "Git 提交推送",
+      "description": "提交所有变更并推送到远程仓库 (使用 git_commit.bat 避免空格问题)",
+      "tool_id": "git-commit",
+      "stage": "completion",
+      "parameters": {
+        "commit_message": "auto-generated",
+        "push_remote": true
+
+[182 more lines. Use start_line=501 to continue.]

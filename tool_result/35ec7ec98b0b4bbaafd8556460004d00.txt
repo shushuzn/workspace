@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-19T21:17:31.698263
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 380-430 of 682)
+      "timeout_seconds": 60,
+      "validation": {
+        "checkpoint_created": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 9,
+      "name": "批判者最终审查",
+      "description": "Auto-Critic v7.0 最终审查 (≥95 分通过) + 集成度检查",
+      "tool_id": "auto_critic_v7",
+      "stage": "validation",
+      "parameters": {
+        "phase": "final",
+        "min_score": 95,
+        "check_integration": true
+      },
+      "blocking": true,
+      "timeout_seconds": 300,
+      "validation": {
+        "critical_score": ">=95",
+        "fatal_issues": 0,
+        "severe_issues": "<=2",
+        "integration_verified": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 10,
+      "name": "质量门禁",
+      "description": "质量门禁检查 (代码质量/安全/复杂度/集成度/测试)",
+      "tool_id": "quality-gate-check",
+      "stage": "validation",
+      "parameters": {
+        "min_quality_score": 80,
+        "check_integration": true,
+
+[252 more lines. Use start_line=431 to continue.]

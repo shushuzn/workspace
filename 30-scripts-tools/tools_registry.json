@@ -1,5 +1,5 @@
 {
-  "version": "1.11.7",
+  "version": "1.11.8",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -492,53 +492,12 @@
       "improvement_version": "1.1.0"
     },
     "workflow-enforcer": {
-      "tool_id": "workflow-enforcer",
-      "name": "Workflow Enforcement Tool",
-      "description": "工作流强制遵守工具 - 确保 12 步骤全部执行",
-      "version": "1.0.0",
-      "command": "py 30-scripts-tools\\workflow_enforcer.py",
-      "parameters": {
-        "action": {
-          "type": "string",
-          "required": true,
-          "description": "操作类型",
-          "enum": [
-            "start",
-            "check-step",
-            "complete-step",
-            "validate",
-            "status"
-          ]
-        },
-        "step": {
-          "type": "integer",
-          "required": false,
-          "description": "步骤编号"
-        }
-      },
-      "validation": {
-        "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json",
-        "enforcement_log": "flow-archive/20260318-universal-workflow-001/enforcement-log.json"
-      },
-      "triggers": [
-        "workflow_start",
-        "step_execution",
-        "workflow_complete"
-      ],
-      "review_required": false,
-      "blocking": true,
-      "timeout_seconds": 60,
-      "category": "workflow",
-      "categorized_at": "2026-03-19T17:20:34.330712",
-      "categorized_method": "auto",
-      "quality_score": 49.5,
-      "quality_details": {
-        "functionality": "功能描述一般",
-        "code_quality": "文件不存在或无文件",
-        "documentation": "描述:True, 参数:True, 示例:False",
-        "usage": "未使用 (0 次)",
-        "maintenance": "无时间戳"
-      }
+      "category": "workflow-enforcement",
+      "description": "工作流强制执行器 - 会话前/提交前检查",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/workflow_enforcer.py",
+      "created_at": "2026-03-20T21:45:00+08:00"
     },
     "advanced_report_gen": {
       "tool_id": "advanced_report_gen",
@@ -14214,6 +14173,22 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/dynamic_goal_adjuster.py",
       "created_at": "2026-03-20T21:35:00+08:00"
+    },
+    "pre-commit-checker": {
+      "category": "git-hooks",
+      "description": "Git 提交前合规检查 - 阻止不合规提交",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/pre_commit_checker.py",
+      "created_at": "2026-03-20T21:45:00+08:00"
+    },
+    "check-tool-registration": {
+      "category": "tool-governance",
+      "description": "工具注册检查 - 确保所有工具已注册",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/check_tool_registration.py",
+      "created_at": "2026-03-20T21:45:00+08:00"
     }
   },
   "workflows": {
@@ -14320,7 +14295,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T21:35:58.584929",
+  "updated_at": "2026-03-19T21:41:57.776198",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,

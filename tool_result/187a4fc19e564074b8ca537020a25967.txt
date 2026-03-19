@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-19T21:18:01.329224
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 230-280 of 682)
+      "tool_id": "integration_validator",
+      "stage": "execution",
+      "parameters": {
+        "check_registration": true,
+        "check_tool_executor": true,
+        "check_call_scenarios": true
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "registered_in_tools_registry": true,
+        "integrated_in_tool_executor": true,
+        "has_call_scenarios": true
+      },
+      "conditional": {
+        "run_if": "new_tool_created"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      }
+    },
+    {
+      "step_id": 6.6,
+      "name": "自动化测试",
+      "description": "运行自动化测试并生成报告",
+      "tool_id": "auto-test-runner",
+      "stage": "execution",
+      "parameters": {
+        "test_dir": "92-tests",
+        "report_dir": "21-reports/tests",
+        "run_syntax_check": true,
+        "run_quality_check": true
+      },
+      "blocking": false,
+      "timeout_seconds": 300,
+      "validation": {
+        "tests_run": true,
+        "report_generated": true
+      },
+      "conditional": {
+        "run_if": "test_required",
+        "skip_message": "无需测试，跳过"
+      },
+
+[402 more lines. Use start_line=281 to continue.]
