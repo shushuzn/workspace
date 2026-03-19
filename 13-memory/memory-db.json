@@ -14,7 +14,9 @@
       "access_count": 0,
       "associations": [],
       "compressed": false,
-      "compressed_from": []
+      "compressed_from": [],
+      "persisted": true,
+      "persisted_at": "2026-03-19T15:16:12.717534"
     },
     {
       "id": "MEM-0002",
@@ -30,7 +32,9 @@
       "access_count": 0,
       "associations": [],
       "compressed": false,
-      "compressed_from": []
+      "compressed_from": [],
+      "persisted": true,
+      "persisted_at": "2026-03-19T15:16:12.717555"
     },
     {
       "id": "MEM-0003",
@@ -46,7 +50,9 @@
       "access_count": 0,
       "associations": [],
       "compressed": false,
-      "compressed_from": []
+      "compressed_from": [],
+      "persisted": true,
+      "persisted_at": "2026-03-19T15:16:12.717559"
     },
     {
       "id": "MEM-0004",
@@ -62,7 +68,9 @@
       "access_count": 0,
       "associations": [],
       "compressed": false,
-      "compressed_from": []
+      "compressed_from": [],
+      "persisted": true,
+      "persisted_at": "2026-03-19T15:16:12.717561"
     },
     {
       "id": "MEM-0005",
@@ -79,8 +87,11 @@
       "access_count": 0,
       "associations": [],
       "compressed": false,
-      "compressed_from": []
+      "compressed_from": [],
+      "persisted": true,
+      "persisted_at": "2026-03-19T15:16:12.717566"
     }
   ],
-  "next_id": 6
+  "next_id": 6,
+  "updated_at": "2026-03-19T15:16:12.717568"
 }

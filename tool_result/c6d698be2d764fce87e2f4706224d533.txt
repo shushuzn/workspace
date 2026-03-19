@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-19T15:13:50.341889
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 145-175 of 383)
+    },
+    {
+      "step_id": 6.5,
+      "name": "工具集成验证",
+      "description": "验证新工具已注册并集成 (新增步骤)",
+      "tool_id": "integration_validator",
+      "stage": "execution",
+      "parameters": {
+        "check_registration": true,
+        "check_tool_executor": true,
+        "check_call_scenarios": true
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "registered_in_tools_registry": true,
+        "integrated_in_tool_executor": true,
+        "has_call_scenarios": true
+      },
+      "conditional": {
+        "run_if": "new_tool_created"
+      }
+    },
+    {
+      "step_id": 7,
+      "name": "执行日志记录",
+      "description": "记录执行过程到 execution-log.json",
+      "tool_id": "execution_logger",
+      "stage": "execution",
+      "parameters": {
+        "log_file": "flow-archive/20260318-universal-workflow-001/execution-log.json"
+
+[208 more lines. Use start_line=176 to continue.]

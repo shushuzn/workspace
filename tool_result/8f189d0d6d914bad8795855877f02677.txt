@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-19T15:12:21.184050
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 50-100 of 383)
+      "timeout_seconds": 30,
+      "validation": {
+        "max_context_size_kb": 100,
+        "required_files_loaded": true
+      }
+    },
+    {
+      "step_id": 2,
+      "name": "Flow ID 绑定",
+      "description": "创建或绑定当前任务的 Flow ID",
+      "tool_id": "flow_manager",
+      "stage": "initialization",
+      "parameters": {
+        "action": "create_or_bind",
+        "business_name": "auto-generated"
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "flow_id_created": true,
+        "isolation_directory_exists": true
+      }
+    },
+    {
+      "step_id": 3,
+      "name": "任务解析",
+      "description": "分析用户请求，确定任务类型和复杂度",
+      "tool_id": "task_analyzer",
+      "stage": "task_analysis",
+      "parameters": {
+        "classify_by": "complexity",
+        "complexity_levels": [
+          "simple",
+          "medium",
+          "complex"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "task_type_identified": true,
+        "estimated_time_minutes": "number"
+      }
+    },
+    {
+      "step_id": 4,
+      "name": "工具/工作流选择",
+      "description": "根据任务类型选择合适的工具或子工作流",
+      "tool_id": "tool_suggester",
+      "stage": "task_analysis",
+      "parameters": {
+
+[283 more lines. Use start_line=101 to continue.]

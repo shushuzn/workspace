@@ -1,0 +1,355 @@
+{
+  "timestamp": "20260319_151448",
+  "test_results": [
+    {
+      "file": "test_auto_critic_v7.py",
+      "status": "fail",
+      "duration": 0.104164,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\test_auto_critic_v7 (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\test_auto_critic_v7) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\test_auto_critic_v7 (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\test_auto_critic_v7)\n----------------------------------------------------------------------\nImportError: Failed to import test module: D:\\OpenClaw\\workspace\\92-tests\\te"
+    },
+    {
+      "file": "test_enhancer.py",
+      "status": "fail",
+      "duration": 0.122693,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_enhancer (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_enhancer) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_enhancer (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_enhancer)\n----------------------------------------------------------------------\nImportError: Failed to import test module: D:\\OpenCl"
+    },
+    {
+      "file": "test_feishu_tools_v2.py",
+      "status": "fail",
+      "duration": 0.101794,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_feishu_tools_v2 (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_feishu_tools_v2) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_feishu_tools_v2 (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_feishu_tools_v2)\n----------------------------------------------------------------------\nImportError: Failed to i"
+    },
+    {
+      "file": "test_p1_innovations.py",
+      "status": "fail",
+      "duration": 0.100165,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p1_innovations (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p1_innovations) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p1_innovations (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p1_innovations)\n----------------------------------------------------------------------\nImportError: Failed to impor"
+    },
+    {
+      "file": "test_p2_innovations.py",
+      "status": "fail",
+      "duration": 0.098635,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p2_innovations (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p2_innovations) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p2_innovations (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p2_innovations)\n----------------------------------------------------------------------\nImportError: Failed to impor"
+    },
+    {
+      "file": "test_p3_innovations.py",
+      "status": "fail",
+      "duration": 0.10254,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p3_innovations (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p3_innovations) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p3_innovations (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p3_innovations)\n----------------------------------------------------------------------\nImportError: Failed to impor"
+    },
+    {
+      "file": "test_p4_dashboard.py",
+      "status": "fail",
+      "duration": 0.104732,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_dashboard (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_dashboard) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_dashboard (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_dashboard)\n----------------------------------------------------------------------\nImportError: Failed to import test m"
+    },
+    {
+      "file": "test_p4_orchestrator.py",
+      "status": "fail",
+      "duration": 0.095762,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_orchestrator (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_orchestrator) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_orchestrator (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_orchestrator)\n----------------------------------------------------------------------\nImportError: Failed to i"
+    },
+    {
+      "file": "test_p4_self_improving_engine.py",
+      "status": "fail",
+      "duration": 0.087074,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_self_improving_engine (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_self_improving_engine) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_self_improving_engine (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p4_self_improving_engine)\n-----------------------------------------------------------"
+    },
+    {
+      "file": "test_p5_evolution.py",
+      "status": "fail",
+      "duration": 0.118807,
+      "output": "",
+      "error": "D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p5_evolution (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p5_evolution) ... ERROR\n\n======================================================================\nERROR: D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p5_evolution (unittest.loader._FailedTest.D:\\OpenClaw\\workspace\\92-tests\\tools-tests\\test_p5_evolution)\n----------------------------------------------------------------------\nImportError: Failed to import test m"
+    }
+  ],
+  "syntax_results": [
+    {
+      "status": "pass",
+      "error": null,
+      "file": "active-learning-trigger.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "adaptive_ttl_cache.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "advanced_report_gen.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "ai_task_scheduler.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "ai_tool_suggester.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "analyze-memory-scripts.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "analyze-memory-tools.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "analyze_causal.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "anomaly_detector.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "anomaly_detector_pro.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "api_gateway.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "arxiv_collector_v2.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "arxiv_workflow.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "async_executor.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "auto-critic.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "auto-critic_v7.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "automation_enhancer.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "automation_orchestrator.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "autonomous_decision.py"
+    },
+    {
+      "status": "pass",
+      "error": null,
+      "file": "autonomous_research_assistant.py"
+    }
+  ],
+  "quality_results": [
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "active-learning-trigger.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "adaptive_ttl_cache.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "advanced_report_gen.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "ai_task_scheduler.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "ai_tool_suggester.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "Line 113: 行过长 (126 > 120)",
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 2,
+      "file": "analyze-memory-scripts.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "analyze-memory-tools.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "analyze_causal.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "Line 82: 行过长 (123 > 120)",
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 2,
+      "file": "anomaly_detector.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "anomaly_detector_pro.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "api_gateway.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "Line 405: 行过长 (131 > 120)",
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 2,
+      "file": "arxiv_collector_v2.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "arxiv_workflow.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "async_executor.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "Line 390: 行过长 (163 > 120)",
+        "Line 396: 行过长 (158 > 120)",
+        "Line 591: 行过长 (135 > 120)",
+        "Line 764: 行过长 (124 > 120)",
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 5,
+      "file": "auto-critic.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "Line 354: 行过长 (133 > 120)",
+        "Line 522: 行过长 (136 > 120)",
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 3,
+      "file": "auto-critic_v7.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "Line 442: 行过长 (137 > 120)",
+        "Line 443: 行过长 (140 > 120)",
+        "Line 445: 行过长 (146 > 120)",
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 4,
+      "file": "automation_enhancer.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "automation_orchestrator.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 1,
+      "file": "autonomous_decision.py"
+    },
+    {
+      "status": "warning",
+      "issues": [
+        "Line 388: 行过长 (129 > 120)",
+        "Line 565: 行过长 (122 > 120)",
+        "Line 566: 行过长 (152 > 120)",
+        "Line 567: 行过长 (129 > 120)",
+        "文件末尾缺少空行"
+      ],
+      "issue_count": 5,
+      "file": "autonomous_research_assistant.py"
+    }
+  ]
+}
