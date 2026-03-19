@@ -1,0 +1,42 @@
+[
+  {
+    "timestamp": "2026-03-19T22:21:39.657669",
+    "tool_id": "add-tool",
+    "success": true,
+    "result": 5,
+    "error": null,
+    "retries": 0,
+    "fallback_used": false,
+    "duration_ms": 0.02
+  },
+  {
+    "timestamp": "2026-03-19T22:21:39.659531",
+    "tool_id": "failing-tool",
+    "success": true,
+    "result": 6,
+    "error": "Simulated failure",
+    "retries": 2,
+    "fallback_used": true,
+    "duration_ms": 0.011
+  },
+  {
+    "timestamp": "2026-03-19T22:21:54.704700",
+    "tool_id": "add-tool",
+    "success": true,
+    "result": 5,
+    "error": null,
+    "retries": 0,
+    "fallback_used": false,
+    "duration_ms": 0.022
+  },
+  {
+    "timestamp": "2026-03-19T22:21:54.707308",
+    "tool_id": "failing-tool",
+    "success": true,
+    "result": 6,
+    "error": "Simulated failure",
+    "retries": 2,
+    "fallback_used": true,
+    "duration_ms": 0.011
+  }
+]

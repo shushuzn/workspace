@@ -1,5 +1,5 @@
 {
-  "version": "1.11.11",
+  "version": "1.11.12",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14229,6 +14229,22 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/auto_session_compressor.py",
       "created_at": "2026-03-19T23:05:00+08:00"
+    },
+    "tool-monitor": {
+      "category": "tool-governance",
+      "description": "工具监控器 - 成功率监控/自动重试/fallback",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/tool_monitor.py",
+      "created_at": "2026-03-19T23:25:00+08:00"
+    },
+    "embedded-critic": {
+      "category": "quality-control",
+      "description": "批判者嵌入式检查 - 每步自动质量检查",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/embedded_critic.py",
+      "created_at": "2026-03-19T23:25:00+08:00"
     }
   },
   "workflows": {
@@ -14335,7 +14351,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T22:15:14.697010",
+  "updated_at": "2026-03-19T22:22:11.223996",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
