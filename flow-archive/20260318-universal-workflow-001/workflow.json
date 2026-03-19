@@ -32,7 +32,7 @@
       "step_id": 1,
       "name": "上下文加载验证",
       "description": "验证 7 个核心文件已正确加载 (<100KB)",
-      "tool_id": "context-verify",
+      "tool_id": "context_search",
       "stage": "initialization",
       "parameters": {
         "max_size_kb": 100,
@@ -57,7 +57,7 @@
       "step_id": 2,
       "name": "Flow ID 绑定",
       "description": "创建或绑定当前任务的 Flow ID",
-      "tool_id": "flow-manager",
+      "tool_id": "flow_manager",
       "stage": "initialization",
       "parameters": {
         "action": "create_or_bind",
@@ -74,11 +74,15 @@
       "step_id": 3,
       "name": "任务解析",
       "description": "分析用户请求，确定任务类型和复杂度",
-      "tool_id": "task-analyzer",
+      "tool_id": "task_analyzer",
       "stage": "task_analysis",
       "parameters": {
         "classify_by": "complexity",
-        "complexity_levels": ["simple", "medium", "complex"]
+        "complexity_levels": [
+          "simple",
+          "medium",
+          "complex"
+        ]
       },
       "blocking": true,
       "timeout_seconds": 120,
@@ -91,7 +95,7 @@
       "step_id": 4,
       "name": "工具/工作流选择",
       "description": "根据任务类型选择合适的工具或子工作流",
-      "tool_id": "tool-suggester",
+      "tool_id": "tool_suggester",
       "stage": "task_analysis",
       "parameters": {
         "suggest_type": "workflow_or_tool",
@@ -108,7 +112,7 @@
       "step_id": 5,
       "name": "子工作流调度 (条件)",
       "description": "如需要，调用子工作流执行",
-      "tool_id": "workflow-scheduler",
+      "tool_id": "workflow_scheduler",
       "stage": "execution",
       "parameters": {},
       "blocking": true,
@@ -130,7 +134,7 @@
       "step_id": 6,
       "name": "工具执行",
       "description": "执行选定的工具",
-      "tool_id": "tool-executor",
+      "tool_id": "tool_executor",
       "stage": "execution",
       "parameters": {},
       "blocking": true,
@@ -143,7 +147,7 @@
       "step_id": 7,
       "name": "执行日志记录",
       "description": "记录执行过程到 execution-log.json",
-      "tool_id": "execution-logger",
+      "tool_id": "execution_logger",
       "stage": "execution",
       "parameters": {
         "log_file": "flow-archive/20260318-universal-workflow-001/execution-log.json"
@@ -155,7 +159,7 @@
       "step_id": 8,
       "name": "检查点保存",
       "description": "保存当前状态到 checkpoint.json (支持断点续传)",
-      "tool_id": "checkpoint-saver",
+      "tool_id": "checkpoint_saver",
       "stage": "execution",
       "parameters": {
         "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json"
@@ -167,7 +171,7 @@
       "step_id": 9,
       "name": "批判者最终审查",
       "description": "Auto-Critic v7.0 最终审查 (≥95 分通过)",
-      "tool_id": "auto-critic-v7",
+      "tool_id": "auto_critic_v7",
       "stage": "validation",
       "parameters": {
         "phase": "final",
@@ -185,7 +189,7 @@
       "step_id": 10,
       "name": "质量门禁",
       "description": "质量门禁检查 (代码质量/安全/复杂度)",
-      "tool_id": "quality-gate",
+      "tool_id": "quality_gate_check",
       "stage": "validation",
       "parameters": {
         "min_quality_score": 80
@@ -201,7 +205,7 @@
       "step_id": 11,
       "name": "会话压缩保存",
       "description": "压缩会话内容并保存到 daily note",
-      "tool_id": "session-compress",
+      "tool_id": "session_end",
       "stage": "completion",
       "parameters": {
         "compression_ratio_target": 0.96,
@@ -218,7 +222,7 @@
       "step_id": 12,
       "name": "Git 提交推送",
       "description": "提交所有变更并推送到远程仓库",
-      "tool_id": "git-commit-push",
+      "tool_id": "git_commit_push",
       "stage": "completion",
       "parameters": {
         "commit_message": "auto-generated",
@@ -237,25 +241,44 @@
       {
         "flow_id": "20260318-brainstorm-001",
         "name": "头脑风暴工作流",
-        "trigger_keywords": ["头脑风暴", "brainstorm", "创意", "想法"],
+        "trigger_keywords": [
+          "头脑风暴",
+          "brainstorm",
+          "创意",
+          "想法"
+        ],
         "estimated_time_minutes": 45
       },
       {
         "flow_id": "20260318-session-end",
         "name": "会话结束工作流",
-        "trigger_keywords": ["会话结束", "session-end", "完成", "提交"],
+        "trigger_keywords": [
+          "会话结束",
+          "session-end",
+          "完成",
+          "提交"
+        ],
         "estimated_time_minutes": 5
       },
       {
         "flow_id": "20260318-research-001",
         "name": "研究任务工作流",
-        "trigger_keywords": ["研究", "research", "论文", "文献"],
+        "trigger_keywords": [
+          "研究",
+          "research",
+          "论文",
+          "文献"
+        ],
         "estimated_time_minutes": 60
       },
       {
         "flow_id": "20260318-project-001",
         "name": "项目管理工作流",
-        "trigger_keywords": ["项目", "project", "任务管理"],
+        "trigger_keywords": [
+          "项目",
+          "project",
+          "任务管理"
+        ],
         "estimated_time_minutes": 30
       }
     ],

@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-19T10:46:14.292554
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 100-200 of 307)
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "selected_workflow": "string or null",
+        "selected_tools": "array"
+      }
+    },
+    {
+      "step_id": 5,
+      "name": "子工作流调度 (条件)",
+      "description": "如需要，调用子工作流执行",
+      "tool_id": "workflow-scheduler",
+      "stage": "execution",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 1800,
+      "conditional": {
+        "run_if": "subworkflow_required"
+      },
+      "subworkflows": {
+        "available": [
+          "20260318-brainstorm-001",
+          "20260318-session-end",
+          "20260318-research-001",
+          "20260318-project-001"
+        ],
+        "selection_logic": "based_on_task_type"
+      }
+    },
+    {
+      "step_id": 6,
+      "name": "工具执行",
+      "description": "执行选定的工具",
+      "tool_id": "tool-executor",
+      "stage": "execution",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 600,
+      "validation": {
+        "execution_success": true
+      }
+    },
+    {
+      "step_id": 7,
+      "name": "执行日志记录",
+      "description": "记录执行过程到 execution-log.json",
+      "tool_id": "execution-logger",
+      "stage": "execution",
+      "parameters": {
+        "log_file": "flow-archive/20260318-universal-workflow-001/execution-log.json"
+      },
+      "blocking": false,
+      "timeout_seconds": 30
+    },
+    {
+      "step_id": 8,
+      "name": "检查点保存",
+      "description": "保存当前状态到 checkpoint.json (支持断点续传)",
+      "tool_id": "checkpoint-saver",
+      "stage": "execution",
+      "parameters": {
+        "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json"
+      },
+      "blocking": false,
+      "timeout_seconds": 30
+    },
+    {
+      "step_id": 9,
+      "name": "批判者最终审查",
+      "description": "Auto-Critic v7.0 最终审查 (≥95 分通过)",
+      "tool_id": "auto-critic-v7",
+      "stage": "validation",
+      "parameters": {
+        "phase": "final",
+        "min_score": 95
+      },
+      "blocking": true,
+      "timeout_seconds": 300,
+      "validation": {
+        "critical_score": ">=95",
+        "fatal_issues": 0,
+        "severe_issues": "<=2"
+      }
+    },
+    {
+      "step_id": 10,
+      "name": "质量门禁",
+      "description": "质量门禁检查 (代码质量/安全/复杂度)",
+      "tool_id": "quality-gate",
+      "stage": "validation",
+      "parameters": {
+        "min_quality_score": 80
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "quality_score": ">=80",
+        "security_issues": 0
+      }
+    },
+    {
+
+[107 more lines. Use start_line=201 to continue.]

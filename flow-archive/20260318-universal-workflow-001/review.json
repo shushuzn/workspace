@@ -1,6 +1,6 @@
 {
   "phase": "final",
-  "timestamp": "2026-03-19T10:39:55.584212",
+  "timestamp": "2026-03-19T11:06:50.046913",
   "checks": [
     {
       "id": "blocker-001",
@@ -45,7 +45,7 @@
       "blocking": true,
       "checked": true,
       "notes": "OK",
-      "evidence": "Unique tool_ids: 29"
+      "evidence": "Unique tool_ids: 366"
     },
     {
       "id": "blocker-006",
@@ -64,7 +64,7 @@
       "remediation_days": 3,
       "checked": false,
       "notes": "FAIL",
-      "evidence": "High risk issues: 45"
+      "evidence": "High risk issues: 46"
     },
     {
       "id": "warning-002",
@@ -102,9 +102,9 @@
       "check": "check_new_tool_usage",
       "blocking": false,
       "remediation_days": 2,
-      "checked": true,
-      "notes": "OK",
-      "evidence": "No new tools in recent commits"
+      "checked": false,
+      "notes": "FAIL",
+      "evidence": "New tools: ['auto_execute_workflow', 'check_flow_manager', 'check_tools', 'check_workflow_steps'] | Used: [] | Unused: ['auto_execute_workflow', 'check_flow_manager', 'check_tools', 'check_workflow_steps']"
     },
     {
       "id": "warning-006",

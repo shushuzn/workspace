@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-19T10:52:10.023771
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\quality_gate_check.py  (lines 50-80 of 125)
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='Quality Gate Check')
+    parser.add_argument('--path', type=str, help='Check single file')
+    parser.add_argument('--all', action='store_true', help='Check all active code')
+    
+    args = parser.parse_args()
+    
+    total = {'blocker': 0, 'warning': 0, 'files': {}}
+    
+    if args.path:
+        file_path = Path(args.path)
+        if not file_path.exists():
+            print(f"[ERROR] File not found: {file_path}")
+            return 1
+        
+        issues = check_file(file_path)
+        total['files'][str(file_path)] = issues
+        total['blocker'] += issues['blocker']
+        total['warning'] += issues['warning']
+        
+    elif args.all:
+        active_dirs = ['30-scripts-tools', 'active_skills', '05-dashboard']
+        exclude_dirs = ['99-ARCHIVE', '99-archive', '__pycache__', 'node_modules', 'intent-belief-integration', '07-DATA', '01-KNOWLEDGE-CARDS']
+        
+        for dir_name in active_dirs:
+            dir_path = Path(dir_name)
+            if not dir_path.exists():
+                continue
+            
+            for py_file in dir_path.rglob('*.py'):
+
+[45 more lines. Use start_line=81 to continue.]

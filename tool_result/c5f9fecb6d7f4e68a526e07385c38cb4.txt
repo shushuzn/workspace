@@ -1,0 +1,52 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T10:54:39.061525
+# ---
+Command failed with exit code 1.
+[stdout]
+[OK] 工作流已加载：通用主工作流
+     版本：v1.1.0
+     总步骤：12
+
+[OK] 工作流已启动：20260318-universal-workflow-001
+     步骤清单:
+       Step 1: 上下文加载验证 [阻塞]
+       Step 2: Flow ID 绑定 [阻塞]
+       Step 3: 任务解析 [阻塞]
+       Step 4: 工具/工作流选择 [阻塞]
+       Step 5: 子工作流调度 (条件) [阻塞]
+       Step 6: 工具执行 [阻塞]
+       Step 7: 执行日志记录 [非阻塞]
+       Step 8: 检查点保存 [非阻塞]
+       Step 9: 批判者最终审查 [阻塞]
+       Step 10: 质量门禁 [阻塞]
+       Step 11: 会话压缩保存 [阻塞]
+       Step 12: Git 提交推送 [阻塞]
+
+[ENFORCEMENT] 强制模式已启用
+     - 必须按顺序执行步骤
+     - 跳步将被阻断
+     - 完成后必须验证
+============================================================
+完全自动化工作流执行 - 方案 A 演示
+零手动干预 - 所有步骤自动完成
+============================================================
+
+============================================================
+Step 1: 上下文加载验证
+============================================================
+[ERROR] 步骤 1 执行失败
+
+[Tool Executor] 执行工具：context_search
+     当前步骤：1
+     自动完成：True
+     强制检查：True
+
+[ERROR] 工具执行失败：未知错误
+
+usage: context_search.py [-h] [--query QUERY] [--max MAX]
+                         [--min-score MIN_SCORE] [--demo]
+context_search.py: error: unrecognized arguments: ${args}
+
+
+
+[BLOCKER] 步骤 1 执行失败，终止工作流
