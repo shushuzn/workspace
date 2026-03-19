@@ -1,7 +1,8 @@
 {
-  "version": "1.11.2",
-  "last_updated": "2026-03-19T19:44:10.356221",
+  "version": "1.11.3",
+  "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
+    "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
     "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
     "v1.11.1: Added brainstorm workflow v2.0 tools (divergent, convergent, facilitator, critic-lite)",
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -436,98 +437,6 @@
         "py brainstorm_define.py --topic \"工具库优化\" --constraints \"[\"时间<1 小时\", \"不影响核心功能\"]\""
       ],
       "improved_at": "2026-03-19T18:20:28.908454",
-      "improvement_version": "1.1.0"
-    },
-    "brainstorm-diverge": {
-      "tool_id": "brainstorm-diverge",
-      "name": "Brainstorm Diverge",
-      "description": "自由联想生成想法",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\brainstorm_diverge.py",
-      "parameters": {
-        "min_ideas": {
-          "type": "integer",
-          "default": 20,
-          "min": 5
-        }
-      },
-      "validation": {
-        "output_file": "30-scripts-tools/ideas_raw.md",
-        "min_ideas": 10
-      },
-      "triggers": [
-        "manual"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 900,
-      "category": "automation",
-      "categorized_at": "2026-03-19T17:20:34.330702",
-      "categorized_method": "auto",
-      "usage_count": 1,
-      "usage_files": [
-        "auto_categorize_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013721",
-      "quality_score": 42.5,
-      "quality_details": {
-        "functionality": "功能描述一般",
-        "code_quality": "文件不存在或无文件",
-        "documentation": "描述:False, 参数:True, 示例:False",
-        "usage": "低频使用 (1 次)",
-        "maintenance": "无时间戳"
-      }
-    },
-    "brainstorm-prioritize": {
-      "tool_id": "brainstorm-prioritize",
-      "name": "Brainstorm Prioritize",
-      "description": "头脑风暴优先级排序工具 - 对头脑风暴产生的想法进行优先级排序，使用影响/努力矩阵评估",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\brainstorm_prioritize.py",
-      "parameters": [
-        {
-          "name": "ideas",
-          "type": "list",
-          "required": true,
-          "description": "想法列表"
-        },
-        {
-          "name": "criteria",
-          "type": "dict",
-          "required": false,
-          "description": "评估标准"
-        }
-      ],
-      "validation": {
-        "output_file": "30-scripts-tools/priority_matrix.json"
-      },
-      "triggers": [
-        "manual"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 300,
-      "category": "automation",
-      "categorized_at": "2026-03-19T17:20:34.330703",
-      "categorized_method": "auto",
-      "usage_count": 1,
-      "usage_files": [
-        "auto_categorize_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013723",
-      "quality_score": 56.5,
-      "quality_details": {
-        "functionality": "功能描述一般",
-        "code_quality": "文件不存在或无文件",
-        "documentation": "描述:True, 参数:True, 示例:True",
-        "usage": "低频使用 (1 次)",
-        "maintenance": "无时间戳"
-      },
-      "examples": [
-        "py brainstorm_prioritize.py --ideas \"[\"想法 1\", \"想法 2\"]\"",
-        "py brainstorm_prioritize.py --ideas \"[...]\" --criteria \"{\"impact\": 0.6, \"effort\": 0.4}\""
-      ],
-      "improved_at": "2026-03-19T18:20:28.908486",
       "improvement_version": "1.1.0"
     },
     "brainstorm-action": {
@@ -14177,21 +14086,6 @@
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 1800
-    },
-    "brainstorm-convergent": {
-      "description": "头脑风暴收敛工具 - 筛选高价值想法 (双环模式 C1-C5)",
-      "category": "brainstorm",
-      "automation_enabled": false,
-      "usage_count": 0,
-      "file": "brainstorm_convergent.py",
-      "created_at": "2026-03-19T19:17:40.776008",
-      "status": "active",
-      "triggers": [
-        "manual"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 1500
     },
     "brainstorm-facilitator": {
       "description": "头脑风暴引导工具 - 控制双环迭代流程",

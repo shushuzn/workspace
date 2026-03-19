@@ -1,46 +1,63 @@
 {
-  "task_id": "brainstorm-workflow-fix-innovation",
-  "parsed_at": "2026-03-20T11:15:00+08:00",
+  "task_id": "cleanup-old-brainstorm-tools",
+  "parsed_at": "2026-03-20T12:30:00+08:00",
   
   "requirements": {
     "primary": [
-      "修复学术诚信问题 (使用真实 arXiv API)",
-      "创建特色头脑风暴工作流 (区别于主工作流)",
-      "实现双环迭代模式 (发散→收敛)",
-      "集成轻量批判者 (critic-lite, ≥60 分)"
+      "备份旧版工具到 99-workspace-archive/brainstorm-v1/",
+      "保留 2 个精华工具 (brainstorm_define.py, brainstorm_action.py)",
+      "删除 16+ 个重复/问题工具",
+      "更新 tools_registry.json 移除已删除工具"
     ],
     "secondary": [
-      "工具注册到 tools_registry.json",
-      "创建文档 WORKFLOW-BRAINSTORM.md",
-      "时间盒控制 (≤30 分钟/环)",
-      "Git 提交完成"
+      "创建清理报告",
+      "Git 提交清理记录",
+      "验证新版工具正常工作"
     ]
   },
   
   "constraints": [
     "遵循 20260318-universal-workflow-001 12 步骤",
-    "学术诚信 (真实数据或明确标注)",
-    "批判者审查必须通过",
-    "会话压缩必须执行"
+    "备份优先 (可恢复)",
+    "工具注册表同步更新",
+    "批判者审查必须通过"
   ],
   
   "deliverables": [
-    "brainstorm_divergent.py",
-    "brainstorm_convergent.py",
-    "brainstorm_facilitator.py",
-    "critic_brainstorm_lite.py",
-    "WORKFLOW-BRAINSTORM.md",
-    "tools_registry.json (更新)"
+    "99-workspace-archive/brainstorm-v1/ (备份目录)",
+    "cleanup-brainstorm-v1-report.md (清理报告)",
+    "tools_registry.json (更新版)"
+  ],
+  
+  "files_to_backup": [
+    "workflow_brainstorm.py",
+    "brainstorm_diverge.py",
+    "brainstorm_convergent.py (旧版)",
+    "arxiv_brainstorm.py",
+    "brainstorm_agent_autonomy.py",
+    "brainstorm_research_driven.py",
+    "brainstorm_tool_governance.py",
+    "speed_optimization_brainstorm.py",
+    "critique_brainstorm_workflow.py",
+    "critic_auto_brainstorm_*.json",
+    "其他旧版 brainstorm_*.py"
+  ],
+  
+  "files_to_keep": [
+    "brainstorm_define.py (主题定义)",
+    "brainstorm_action.py (行动计划参考)"
   ],
   
   "success_criteria": [
-    "双环流程完整实现",
-    "真实 arXiv API 集成",
-    "critic-lite 评分≥60 分",
-    "工具注册完成",
-    "Git 提交完成"
+    "旧版工具 100% 备份",
+    "保留工具 2 个",
+    "删除工具 16+ 个",
+    "tools_registry.json 同步更新",
+    "清理报告完整",
+    "Git 提交完成",
+    "新版工具验证通过"
   ],
   
-  "estimated_time_minutes": 90,
+  "estimated_time_minutes": 45,
   "priority": "high"
 }

@@ -1,6 +1,6 @@
 {
   "flow_id": "20260318-universal-workflow-001",
-  "checkpoint_at": "2026-03-20T11:35:00+08:00",
+  "checkpoint_at": "2026-03-20T12:40:00+08:00",
   "step_completed": 7,
   "total_steps": 12,
   "progress_percentage": 58.3,
@@ -8,23 +8,31 @@
   "status": "in_progress",
   
   "task_summary": {
-    "task": "brainstorm-workflow-fix-innovation",
-    "description": "修复头脑风暴工作流学术诚信问题 + 创建特色创新版本 (双环迭代模式)",
-    "deliverables": [
-      "brainstorm_divergent.py ✓",
-      "brainstorm_convergent.py ✓",
-      "brainstorm_facilitator.py ✓",
-      "critic_brainstorm_lite.py ✓",
-      "WORKFLOW-BRAINSTORM.md ✓",
-      "tools_registry.json 更新 ✓"
-    ],
+    "task": "cleanup-old-brainstorm-tools",
+    "description": "清理旧版头脑风暴工具 - 保留 2 个精华，删除 16+ 个重复/问题工具",
     "key_achievements": [
-      "真实 arXiv API 集成 (学术诚信修复)",
-      "双环迭代模式设计 (发散→收敛)",
-      "轻量批判者创建 (≥60 分)",
-      "4 个工具注册完成 (v1.11.1)",
-      "发散工具测试通过 (28 个想法)"
-    ]
+      "备份 11 个旧版工具到 brainstorm-v1/",
+      "删除 11 个重复/问题工具",
+      "保留 12 个精华/新版工具",
+      "新版工具 4/4 验证通过",
+      "清理报告生成完成"
+    ],
+    "files_before": 20,
+    "files_after": 12,
+    "reduction": "-40%"
+  },
+  
+  "backup_details": {
+    "location": "99-workspace-archive/brainstorm-v1/",
+    "files_backed_up": 11,
+    "report": "CLEANUP-REPORT.md"
+  },
+  
+  "retained_tools": {
+    "essence": ["brainstorm_define.py", "brainstorm_action.py"],
+    "new_v2": ["brainstorm_divergent.py", "brainstorm_convergent.py", "brainstorm_facilitator.py", "critic_brainstorm_lite.py"],
+    "scripts": ["check_brainstorm_registration.py", "register_brainstorm_tools.py", "register_brainstorm_workflow.py"],
+    "reference": ["critique_brainstorm_workflow.py"]
   },
   
   "next_steps": [
@@ -35,11 +43,10 @@
   ],
   
   "quality_metrics": {
-    "tools_created": 4,
-    "tools_tested": 1,
-    "documentation_complete": true,
-    "academic_integrity_fixed": true,
-    "workflow_innovation": "双环迭代模式"
+    "tools_verified": 4,
+    "verification_status": "4/4 通过",
+    "backup_complete": true,
+    "report_generated": true
   },
   
   "can_proceed_to_critic": true

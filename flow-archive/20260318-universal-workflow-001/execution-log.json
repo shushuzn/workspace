@@ -1,7 +1,7 @@
 {
   "flow_id": "20260318-universal-workflow-001",
-  "task": "brainstorm-workflow-fix-innovation",
-  "started_at": "2026-03-20T11:15:00+08:00",
+  "task": "cleanup-old-brainstorm-tools",
+  "started_at": "2026-03-20T12:30:00+08:00",
   
   "steps_completed": [
     {
@@ -9,65 +9,66 @@
       "name": "上下文加载验证",
       "status": "completed",
       "result": "58.1KB < 100KB ✓",
-      "timestamp": "2026-03-20T11:15:00+08:00"
+      "timestamp": "2026-03-20T12:30:00+08:00"
     },
     {
       "step": 2,
       "name": "Flow ID 绑定",
       "status": "completed",
-      "result": "current-binding.json 创建 ✓",
-      "timestamp": "2026-03-20T11:15:30+08:00"
+      "result": "current-binding.json 更新 ✓",
+      "timestamp": "2026-03-20T12:30:30+08:00"
     },
     {
       "step": 3,
       "name": "任务解析",
       "status": "completed",
       "result": "task-analysis.json 创建 ✓",
-      "timestamp": "2026-03-20T11:16:00+08:00"
+      "timestamp": "2026-03-20T12:31:00+08:00"
     },
     {
       "step": 4,
       "name": "工具/工作流选择",
       "status": "completed",
-      "result": "选择创建新工具 ✓",
-      "timestamp": "2026-03-20T11:16:30+08:00"
+      "result": "识别 20 个 brainstorm 文件 ✓",
+      "timestamp": "2026-03-20T12:31:30+08:00"
     },
     {
       "step": 5,
       "name": "子工作流调度",
       "status": "completed",
-      "result": "创建 4 个头脑风暴工具 ✓",
-      "timestamp": "2026-03-20T11:25:00+08:00",
+      "result": "创建清理脚本 + 执行 ✓",
+      "timestamp": "2026-03-20T12:35:00+08:00",
       "deliverables": [
-        "brainstorm_divergent.py (8.6KB)",
-        "brainstorm_convergent.py (11.4KB)",
-        "brainstorm_facilitator.py (8.5KB)",
-        "critic_brainstorm_lite.py (6.9KB)"
+        "cleanup_old_brainstorm_tools.py (9.4KB)"
       ]
     },
     {
       "step": 6,
       "name": "工具执行",
       "status": "completed",
-      "result": "工具创建 + 注册 ✓",
-      "timestamp": "2026-03-20T11:30:00+08:00",
+      "result": "清理完成 ✓",
+      "timestamp": "2026-03-20T12:36:00+08:00",
       "details": {
-        "tools_registered": 4,
-        "registry_version": "1.11.1",
-        "total_tools": 376
+        "backed_up": 11,
+        "removed": 11,
+        "kept": 12,
+        "backup_location": "99-workspace-archive/brainstorm-v1/"
       }
     },
     {
       "step": 6.5,
       "name": "工具集成验证",
       "status": "completed",
-      "result": "发散工具测试通过 ✓",
-      "timestamp": "2026-03-20T11:35:00+08:00",
+      "result": "新版工具 4/4 验证通过 ✓",
+      "timestamp": "2026-03-20T12:38:00+08:00",
       "details": {
-        "test_file": "test-divergent.json",
-        "ideas_generated": 28,
-        "keywords_collected": 50,
-        "execution_time": "6.5 秒"
+        "tools_verified": [
+          "brainstorm_divergent.py",
+          "brainstorm_convergent.py",
+          "brainstorm_facilitator.py",
+          "critic_brainstorm_lite.py"
+        ],
+        "issue_fixed": "brainstorm_convergent.py 误删后恢复"
       }
     }
   ],
@@ -82,22 +83,24 @@
   ],
   
   "deliverables_created": [
-    "brainstorm_divergent.py",
-    "brainstorm_convergent.py",
-    "brainstorm_facilitator.py",
-    "critic_brainstorm_lite.py",
-    "WORKFLOW-BRAINSTORM.md",
-    "register_brainstorm_tools.py",
-    "test-divergent.json"
+    "cleanup_old_brainstorm_tools.py",
+    "verify_new_brainstorm_tools.py",
+    "99-workspace-archive/brainstorm-v1/ (备份目录)",
+    "99-workspace-archive/brainstorm-v1/CLEANUP-REPORT.md"
   ],
   
-  "tools_registry_updated": {
-    "version": "1.11.1",
-    "new_tools": [
-      "brainstorm-divergent",
-      "brainstorm-convergent",
-      "brainstorm-facilitator",
-      "critic-brainstorm-lite"
-    ]
+  "cleanup_summary": {
+    "before": {
+      "total_files": 20,
+      "python_files": 20,
+      "json_files": 2
+    },
+    "after": {
+      "total_files": 12,
+      "python_files": 12,
+      "reduction": "-40%"
+    },
+    "backup_location": "99-workspace-archive/brainstorm-v1/",
+    "registry_updated": "v1.11.3 (待确认)"
   }
 }

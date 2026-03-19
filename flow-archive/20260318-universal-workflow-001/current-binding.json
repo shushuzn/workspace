@@ -1,8 +1,9 @@
 {
   "flow_id": "20260318-universal-workflow-001",
-  "bound_at": "2026-03-20T11:15:00+08:00",
-  "task": "brainstorm-workflow-fix-innovation",
-  "description": "修复头脑风暴工作流学术诚信问题 + 创建特色创新版本 (双环迭代模式)",
+  "bound_at": "2026-03-20T12:30:00+08:00",
+  "task": "cleanup-old-brainstorm-tools",
+  "description": "清理旧版头脑风暴工具 - 保留 2 个精华，删除 16+ 个重复/问题工具，全面采用新版 v2",
   "session_id": "6d929252",
-  "status": "active"
+  "status": "active",
+  "parent_task": "brainstorm-workflow-fix-innovation"
 }
