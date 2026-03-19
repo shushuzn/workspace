@@ -1,0 +1,36 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T12:05:44.349287
+# ---
+ m "10-RESEARCH/domain-research/\351\242\206\345\237\237\347\240\224\347\251\266/cnt-research"
+A  30-scripts-tools/TOOL-CALLING-RULES.md
+A  30-scripts-tools/TOOL-RULES-SUMMARY.md
+M  30-scripts-tools/auto_execute_workflow.py
+A  30-scripts-tools/check_core_tools.py
+A  30-scripts-tools/check_tool_rules.py
+A  30-scripts-tools/critic-auto-workflow_execution-v7.json
+A  30-scripts-tools/fix_tool_commands.py
+A  30-scripts-tools/protection_system.py
+A  30-scripts-tools/register_core_tools.py
+M  30-scripts-tools/register_tools.py
+A  30-scripts-tools/run_workflow.bat
+A  30-scripts-tools/set_python_utf8.bat
+M  30-scripts-tools/tools_registry.json
+A  30-scripts-tools/verify_rules.py
+M  30-scripts-tools/workflow_enforcer.py
+M  dialog/2026-03-19.jsonl
+A  flow-archive/20260318-universal-workflow-001/5-LAYER-PROTECTION-SUMMARY.md
+A  flow-archive/20260318-universal-workflow-001/MULTI-LAYER-PROTECTION.md
+A  flow-archive/20260318-universal-workflow-001/PROTECTION-IMPLEMENTATION.md
+M  flow-archive/20260318-universal-workflow-001/checkpoint.json
+M  flow-archive/20260318-universal-workflow-001/execution-log.json
+A  memory/2026-03-19.md
+A  tool_result/0716c1fbb450494fbf26e4d0bda0a7a6.txt
+A  tool_result/0ebf74796dc64986b0094beccc682a47.txt
+A  tool_result/17e2c584d589469e99000be842e00372.txt
+A  tool_result/18c2a83d48194e9eb68a0cd618f828f9.txt
+A  tool_result/75912b15853f4deab08a6e1bb29e72ca.txt
+A  tool_result/8256110959cf4b1a859ea1ea8886519a.txt
+A  tool_result/a20a9b2991f0415cabd691d7281699c5.txt
+A  tool_result/a2849c9113234d6baef6db7292a04ece.txt
+A  tool_result/f95a804b61844b569774a8f3488e6952.txt
+A  tool_result/ffbe6be424444cbf9abe7f235cf6df91.txt
