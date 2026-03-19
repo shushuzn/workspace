@@ -1,5 +1,5 @@
 {
-  "version": "1.9.0",
+  "version": "1.9.1",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -10236,6 +10236,238 @@
       ],
       "added_at": "2026-03-19T17:47:29.562184",
       "status": "active"
+    },
+    "critical-issue-detector": {
+      "name": "Critical Issue Detector",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.261980",
+      "restored_from": "week4_final_cleanup"
+    },
+    "critical-checks": {
+      "name": "Critical Checks Verifier",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262007",
+      "restored_from": "week4_final_cleanup"
+    },
+    "analyze_memory_scripts": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262011",
+      "restored_from": "week4_final_cleanup"
+    },
+    "analyze_memory_tools": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262012",
+      "restored_from": "week4_final_cleanup"
+    },
+    "context_db": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262014",
+      "restored_from": "week4_final_cleanup"
+    },
+    "critic_daily_note_pollution": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262015",
+      "restored_from": "week4_final_cleanup"
+    },
+    "git_workflow": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262018",
+      "restored_from": "week4_final_cleanup"
+    },
+    "memory_fix_tools": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262020",
+      "restored_from": "week4_final_cleanup"
+    },
+    "memory_rollback": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262021",
+      "restored_from": "week4_final_cleanup"
+    },
+    "memory-importance-assessor": {
+      "name": "Memory Importance Assessor",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262186",
+      "restored_from": "week4_merge"
+    },
+    "memory-tag-search": {
+      "name": "Memory Tag Search",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262192",
+      "restored_from": "week4_merge"
+    },
+    "memory-incremental-compressor": {
+      "name": "Memory Incremental Compressor",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262201",
+      "restored_from": "week4_merge"
+    },
+    "memory-benchmark": {
+      "name": "Memory Benchmark",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262203",
+      "restored_from": "week4_merge"
+    },
+    "auto-test-runner": {
+      "name": "Auto Test Runner",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262204",
+      "restored_from": "week4_merge"
+    },
+    "memory-cleanup-compress": {
+      "name": "Memory Cleanup & Deduplication",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262207",
+      "restored_from": "week4_merge"
+    },
+    "memory-index-generator": {
+      "name": "Memory Index Generator",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262209",
+      "restored_from": "week4_merge"
+    },
+    "auto-critic-v7": {
+      "name": "Auto-Critic v7.0 Enhanced",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262210",
+      "restored_from": "week4_merge"
+    },
+    "memory-hybrid-pipeline": {
+      "name": "Memory Hybrid Compression Pipeline",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262211",
+      "restored_from": "week4_merge"
+    },
+    "adaptive_ttl_cache": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262446",
+      "restored_from": "week3_deletion"
+    },
+    "analyze_causal": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262454",
+      "restored_from": "week3_deletion"
+    },
+    "clean_feishu_cache": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262465",
+      "restored_from": "week3_deletion"
+    },
+    "optimize_causal": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262499",
+      "restored_from": "week3_deletion"
+    },
+    "optimize_tools_analyzer": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262502",
+      "restored_from": "week3_deletion"
+    },
+    "optimize_tools_deep": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262504",
+      "restored_from": "week3_deletion"
+    },
+    "optimize_tools_executor": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262506",
+      "restored_from": "week3_deletion"
+    },
+    "optimize_tools_quick": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262508",
+      "restored_from": "week3_deletion"
+    },
+    "plan_auto_optimizer": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262514",
+      "restored_from": "week3_deletion"
+    },
+    "pm_duplicate_analyzer": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262516",
+      "restored_from": "week3_deletion"
+    },
+    "resilience_analyzer": {
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "status": "active",
+      "restored_at": "2026-03-19T17:52:47.262524",
+      "restored_from": "week3_deletion"
     }
   },
   "workflows": {
@@ -10342,8 +10574,8 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T17:47:29.562186",
-  "total_tools": 343,
+  "updated_at": "2026-03-19T17:52:47.262537",
+  "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
   "manual_fixes": 5,
@@ -10403,12 +10635,9 @@
     "deleted_count": 9,
     "reason": "duplicate_merge"
   },
-  "milestone_20_percent": {
-    "achieved_at": "2026-03-19T17:47:17.241399",
-    "original_count": 424,
-    "final_count": 339,
-    "reduction_count": 85,
-    "reduction_percentage": 20.047169811320757,
-    "target_achieved": true
+  "restoration_record": {
+    "restored_at": "2026-03-19T17:52:47.262538",
+    "restored_count": 29,
+    "reason": "quality_over_quantity - 质量优先于数量"
   }
 }
