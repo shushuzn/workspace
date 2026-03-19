@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "created_at": "2026-03-20",
+  "principle": "quality_over_quantity",
+  "layers": {
+    "layer1_pre_check": {
+      "enabled": true
+    },
+    "layer2_human_review": {
+      "enabled": true
+    },
+    "layer3_impact_analysis": {
+      "enabled": true
+    },
+    "layer4_backup_verify": {
+      "enabled": true
+    },
+    "layer5_emergency_restore": {
+      "enabled": true
+    }
+  },
+  "rules": {
+    "max_deletion_per_batch": 5,
+    "require_human_review": true,
+    "require_backup": true,
+    "require_impact_analysis": true,
+    "protected_categories": [
+      "workflow",
+      "memory",
+      "critic",
+      "session"
+    ],
+    "min_quality_score": 40
+  },
+  "red_lines": [
+    "禁止为数量目标删除工具",
+    "禁止仅凭使用次数决定删除",
+    "禁止无文件删除 (除非确认无用)",
+    "禁止无备份删除",
+    "禁止无人工审查删除"
+  ]
+}

@@ -1,0 +1,395 @@
+{
+  "assessed_at": "2026-03-19T17:57:14.635973",
+  "total_tools": 372,
+  "average_score": 50.2,
+  "distribution": {
+    "excellent": 0,
+    "good": 24,
+    "fair": 304,
+    "poor": 44
+  },
+  "top_10": [
+    {
+      "tool_id": "automation_orchestrator",
+      "total_score": 68.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 70,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "中频使用 (11 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.615051"
+    },
+    {
+      "tool_id": "performance_analyzer",
+      "total_score": 68.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 70,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "中频使用 (10 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.615828"
+    },
+    {
+      "tool_id": "smart_notification",
+      "total_score": 68.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 70,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "中频使用 (10 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.616030"
+    },
+    {
+      "tool_id": "auto_doc_generator",
+      "total_score": 67.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 50,
+        "maintenance": 60
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "已添加但未更新"
+      },
+      "calculated_at": "2026-03-19T17:57:14.619423"
+    },
+    {
+      "tool_id": "auto_fix_orchestrator",
+      "total_score": 65.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (4 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.615022"
+    },
+    {
+      "tool_id": "auto_signal_extractor",
+      "total_score": 65.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.615034"
+    },
+    {
+      "tool_id": "auto_test_generator",
+      "total_score": 65.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (8 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.615038"
+    },
+    {
+      "tool_id": "autonomous_decision",
+      "total_score": 65.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (9 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.615055"
+    },
+    {
+      "tool_id": "autonomous_research_assistant",
+      "total_score": 65.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (4 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.615060"
+    },
+    {
+      "tool_id": "canvas_auto_updater",
+      "total_score": 65.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (2 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.615094"
+    }
+  ],
+  "bottom_10": [
+    {
+      "tool_id": "brainstorm-action",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.614952"
+    },
+    {
+      "tool_id": "auto_execute_workflow",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (6 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.616275"
+    },
+    {
+      "tool_id": "workflow_interactive",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (7 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.616279"
+    },
+    {
+      "tool_id": "check_tools",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (7 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.616283"
+    },
+    {
+      "tool_id": "check_workflow_steps",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (5 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.616288"
+    },
+    {
+      "tool_id": "register_core_tools",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (3 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.616292"
+    },
+    {
+      "tool_id": "check_core_tools",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (4 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.616298"
+    },
+    {
+      "tool_id": "check_flow_manager",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (4 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.616302"
+    },
+    {
+      "tool_id": "session_compress",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (2 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.618720"
+    },
+    {
+      "tool_id": "context_verify",
+      "total_score": 36.5,
+      "dimension_scores": {
+        "functionality": 50,
+        "code_quality": 40,
+        "documentation": 0,
+        "usage": 50,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "低频使用 (2 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T17:57:14.618729"
+    }
+  ]
+}
