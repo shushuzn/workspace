@@ -1,5 +1,5 @@
 {
-  "assessed_at": "2026-03-19T18:34:48.448896",
+  "assessed_at": "2026-03-19T18:40:56.900632",
   "total_tools": 372,
   "average_score": 51.3,
   "distribution": {
@@ -26,7 +26,7 @@
         "usage": "中频使用 (11 次)",
         "maintenance": "无时间戳"
       },
-      "calculated_at": "2026-03-19T18:34:48.410497"
+      "calculated_at": "2026-03-19T18:40:56.880927"
     },
     {
       "tool_id": "performance_analyzer",
@@ -45,7 +45,7 @@
         "usage": "中频使用 (10 次)",
         "maintenance": "无时间戳"
       },
-      "calculated_at": "2026-03-19T18:34:48.411922"
+      "calculated_at": "2026-03-19T18:40:56.881558"
     },
     {
       "tool_id": "smart_notification",
@@ -64,7 +64,7 @@
         "usage": "中频使用 (10 次)",
         "maintenance": "无时间戳"
       },
-      "calculated_at": "2026-03-19T18:34:48.412158"
+      "calculated_at": "2026-03-19T18:40:56.881759"
     },
     {
       "tool_id": "auto_doc_generator",
@@ -83,7 +83,7 @@
         "usage": "低频使用 (1 次)",
         "maintenance": "已添加但未更新"
       },
-      "calculated_at": "2026-03-19T18:34:48.424683"
+      "calculated_at": "2026-03-19T18:40:56.884818"
     },
     {
       "tool_id": "auto_fix_orchestrator",
@@ -102,7 +102,7 @@
         "usage": "低频使用 (4 次)",
         "maintenance": "无时间戳"
       },
-      "calculated_at": "2026-03-19T18:34:48.410468"
+      "calculated_at": "2026-03-19T18:40:56.880898"
     },
     {
       "tool_id": "auto_signal_extractor",
@@ -121,7 +121,7 @@
         "usage": "低频使用 (1 次)",
         "maintenance": "无时间戳"
       },
-      "calculated_at": "2026-03-19T18:34:48.410481"
+      "calculated_at": "2026-03-19T18:40:56.880911"
     },
     {
       "tool_id": "auto_test_generator",
@@ -140,7 +140,7 @@
         "usage": "低频使用 (8 次)",
         "maintenance": "无时间戳"
       },
-      "calculated_at": "2026-03-19T18:34:48.410485"
+      "calculated_at": "2026-03-19T18:40:56.880915"
     },
     {
       "tool_id": "autonomous_decision",
@@ -159,7 +159,7 @@
         "usage": "低频使用 (9 次)",
         "maintenance": "无时间戳"
       },
-      "calculated_at": "2026-03-19T18:34:48.410501"
+      "calculated_at": "2026-03-19T18:40:56.880932"
     },
     {
       "tool_id": "autonomous_research_assistant",
@@ -178,7 +178,7 @@
         "usage": "低频使用 (4 次)",
         "maintenance": "无时间戳"
       },
-      "calculated_at": "2026-03-19T18:34:48.410505"
+      "calculated_at": "2026-03-19T18:40:56.880936"
     },
     {
       "tool_id": "canvas_auto_updater",
@@ -197,7 +197,7 @@
         "usage": "低频使用 (2 次)",
         "maintenance": "无时间戳"
       },
-      "calculated_at": "2026-03-19T18:34:48.410541"
+      "calculated_at": "2026-03-19T18:40:56.880972"
     }
   ],
   "bottom_10": [
@@ -218,7 +218,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425761"
+      "calculated_at": "2026-03-19T18:40:56.885940"
     },
     {
       "tool_id": "clean_feishu_cache",
@@ -237,7 +237,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425765"
+      "calculated_at": "2026-03-19T18:40:56.885943"
     },
     {
       "tool_id": "optimize_causal",
@@ -256,7 +256,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425768"
+      "calculated_at": "2026-03-19T18:40:56.885947"
     },
     {
       "tool_id": "optimize_tools_analyzer",
@@ -275,7 +275,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425772"
+      "calculated_at": "2026-03-19T18:40:56.885951"
     },
     {
       "tool_id": "optimize_tools_deep",
@@ -294,7 +294,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425776"
+      "calculated_at": "2026-03-19T18:40:56.885955"
     },
     {
       "tool_id": "optimize_tools_executor",
@@ -313,7 +313,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425780"
+      "calculated_at": "2026-03-19T18:40:56.885959"
     },
     {
       "tool_id": "optimize_tools_quick",
@@ -332,7 +332,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425784"
+      "calculated_at": "2026-03-19T18:40:56.885963"
     },
     {
       "tool_id": "plan_auto_optimizer",
@@ -351,7 +351,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425787"
+      "calculated_at": "2026-03-19T18:40:56.885966"
     },
     {
       "tool_id": "pm_duplicate_analyzer",
@@ -370,7 +370,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425791"
+      "calculated_at": "2026-03-19T18:40:56.885970"
     },
     {
       "tool_id": "resilience_analyzer",
@@ -389,7 +389,7 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       },
-      "calculated_at": "2026-03-19T18:34:48.425795"
+      "calculated_at": "2026-03-19T18:40:56.885974"
     }
   ]
 }

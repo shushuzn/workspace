@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-19T18:41:36.412906
+# ---
+D:\OpenClaw\workspace\21-reports\tool-quality-assessment-report.json  (lines 1-50 of 395)
+{
+  "assessed_at": "2026-03-19T18:40:56.900632",
+  "total_tools": 372,
+  "average_score": 51.3,
+  "distribution": {
+    "excellent": 0,
+    "good": 24,
+    "fair": 324,
+    "poor": 24
+  },
+  "top_10": [
+    {
+      "tool_id": "automation_orchestrator",
+      "total_score": 68.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 70,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "中频使用 (11 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T18:40:56.880927"
+    },
+    {
+      "tool_id": "performance_analyzer",
+      "total_score": 68.5,
+      "dimension_scores": {
+        "functionality": 80,
+        "code_quality": 40,
+        "documentation": 100,
+        "usage": 70,
+        "maintenance": 40
+      },
+      "dimension_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "中频使用 (10 次)",
+        "maintenance": "无时间戳"
+      },
+      "calculated_at": "2026-03-19T18:40:56.881558"
+    },
+    {
+
+[345 more lines. Use start_line=51 to continue.]

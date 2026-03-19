@@ -1,5 +1,5 @@
 {
-  "version": "1.9.1",
+  "version": "1.10.0",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -991,7 +991,21 @@
         "documentation": "描述:False, 参数:True, 示例:True",
         "usage": "低频使用 (5 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "code_written",
+          "description": "代码完成自动审查"
+        },
+        {
+          "type": "event",
+          "event": "pre_commit",
+          "description": "提交前自动审查"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515276"
     },
     "auto_data_cleaner": {
       "tool_id": "auto_data_cleaner",
@@ -2587,7 +2601,16 @@
         "documentation": "描述:False, 参数:True, 示例:True",
         "usage": "低频使用 (1 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "pre_delivery",
+          "description": "交付前自动检查"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515322"
     },
     "critical_issue_detector": {
       "tool_id": "critical_issue_detector",
@@ -2627,7 +2650,21 @@
         "documentation": "描述:False, 参数:True, 示例:True",
         "usage": "低频使用 (6 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "error_occurred",
+          "description": "错误发生自动检测"
+        },
+        {
+          "type": "cron",
+          "schedule": "0 */4 * * *",
+          "description": "每 4 小时检测问题"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515318"
     },
     "cron_manager": {
       "tool_id": "cron_manager",
@@ -10796,7 +10833,16 @@
         "documentation": "描述:True, 参数:False, 示例:False",
         "usage": "中频使用 (77 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "task_assigned",
+          "description": "任务分配自动执行"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515263"
     },
     "workflow_enforcer": {
       "tool_id": "workflow_enforcer",
@@ -10822,7 +10868,21 @@
         "documentation": "描述:False, 参数:False, 示例:False",
         "usage": "中频使用 (23 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "workflow_start",
+          "description": "工作流开始自动检查"
+        },
+        {
+          "type": "event",
+          "event": "step_complete",
+          "description": "步骤完成自动验证"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515225"
     },
     "auto_execute_workflow": {
       "tool_id": "auto_execute_workflow",
@@ -10879,7 +10939,16 @@
         "py auto_execute_workflow.py --flow_id \"xxx\" --start_step 5 --dry_run true --auto_retry true"
       ],
       "improved_at": "2026-03-19T18:33:55.349209",
-      "improvement_version": "1.3.0"
+      "improvement_version": "1.3.0",
+      "triggers": [
+        {
+          "type": "event",
+          "event": "workflow_approved",
+          "description": "工作流批准自动执行"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515312"
     },
     "workflow_interactive": {
       "tool_id": "workflow_interactive",
@@ -11066,7 +11135,16 @@
         "py register_core_tools.py --tool_list \"[...]\" --force true"
       ],
       "improved_at": "2026-03-19T18:33:55.349194",
-      "improvement_version": "1.3.0"
+      "improvement_version": "1.3.0",
+      "triggers": [
+        {
+          "type": "event",
+          "event": "tool_missing",
+          "description": "工具缺失自动注册"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515294"
     },
     "check_core_tools": {
       "tool_id": "check_core_tools",
@@ -11115,7 +11193,16 @@
         "py check_core_tools.py --tool_ids \"[\"workflow-enforcer\"]\" --check_file true --output_format md"
       ],
       "improved_at": "2026-03-19T18:33:55.349198",
-      "improvement_version": "1.3.0"
+      "improvement_version": "1.3.0",
+      "triggers": [
+        {
+          "type": "cron",
+          "schedule": "0 */2 * * *",
+          "description": "每 2 小时检查核心工具"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515300"
     },
     "check_flow_manager": {
       "tool_id": "check_flow_manager",
@@ -11164,7 +11251,16 @@
         "py check_flow_manager.py --flow_id \"xxx\" --check_type progress --verbose true"
       ],
       "improved_at": "2026-03-19T18:33:55.349202",
-      "improvement_version": "1.3.0"
+      "improvement_version": "1.3.0",
+      "triggers": [
+        {
+          "type": "event",
+          "event": "workflow_start",
+          "description": "工作流开始检查管理器"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515304"
     },
     "register_tools": {
       "tool_id": "register_tools",
@@ -12129,7 +12225,17 @@
         "verify_with": "fast_load.py"
       },
       "triggers": [
-        "session_end"
+        "session_end",
+        {
+          "type": "cron",
+          "schedule": "*/30 * * * *",
+          "description": "每 30 分钟压缩会话"
+        },
+        {
+          "type": "event",
+          "event": "session_end",
+          "description": "会话结束自动压缩"
+        }
       ],
       "review_required": true,
       "blocking": true,
@@ -12159,7 +12265,9 @@
         "py session_compress.py --session_file \"xxx.json\" --compression_ratio 0.96"
       ],
       "improved_at": "2026-03-19T18:20:28.908503",
-      "improvement_version": "1.1.0"
+      "improvement_version": "1.1.0",
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.514098"
     },
     "context_verify": {
       "tool_id": "context-verify",
@@ -12201,7 +12309,12 @@
       },
       "triggers": [
         "session_start",
-        "session_end"
+        "session_end",
+        {
+          "type": "event",
+          "event": "session_start",
+          "description": "会话开始验证上下文"
+        }
       ],
       "review_required": true,
       "blocking": true,
@@ -12231,7 +12344,9 @@
         "py context_verify.py --strict_mode true --output_detail true --fix_issues true"
       ],
       "improved_at": "2026-03-19T18:33:55.349205",
-      "improvement_version": "1.3.0"
+      "improvement_version": "1.3.0",
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515285"
     },
     "quality_gate": {
       "tool_id": "quality-gate",
@@ -12560,7 +12675,21 @@
         "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (2 次)",
         "maintenance": "已添加但未更新"
-      }
+      },
+      "triggers": [
+        {
+          "type": "cron",
+          "schedule": "0 */2 * * *",
+          "description": "每 2 小时主动检查"
+        },
+        {
+          "type": "event",
+          "event": "user_idle",
+          "description": "用户空闲主动询问"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515341"
     },
     "multimodal_agent": {
       "name": "Multimodal Agent",
@@ -13381,7 +13510,16 @@
         "py analyze_memory_scripts.py --script_dir \"xxx\" --include_usage true --time_range week"
       ],
       "improved_at": "2026-03-19T18:33:55.349219",
-      "improvement_version": "1.3.0"
+      "improvement_version": "1.3.0",
+      "triggers": [
+        {
+          "type": "cron",
+          "schedule": "0 5 * * 0",
+          "description": "每周日 05:00 分析脚本"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515326"
     },
     "analyze_memory_tools": {
       "name": "",
@@ -13423,7 +13561,16 @@
         "py analyze_memory_tools.py --time_range month --output_format md --include_recommendations true"
       ],
       "improved_at": "2026-03-19T18:33:55.349222",
-      "improvement_version": "1.3.0"
+      "improvement_version": "1.3.0",
+      "triggers": [
+        {
+          "type": "cron",
+          "schedule": "0 5 * * 0",
+          "description": "每周日 05:00 分析工具"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515330"
     },
     "context_db": {
       "name": "",
@@ -13543,7 +13690,16 @@
         "py git_workflow.py --message \"fix: bug fix\" --auto_push true"
       ],
       "improved_at": "2026-03-19T18:20:28.908506",
-      "improvement_version": "1.1.0"
+      "improvement_version": "1.1.0",
+      "triggers": [
+        {
+          "type": "event",
+          "event": "task_complete",
+          "description": "任务完成自动提交"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515290"
     },
     "memory_fix_tools": {
       "name": "",
@@ -13585,7 +13741,16 @@
         "py memory_fix_tools.py --issue_type index --dry_run true"
       ],
       "improved_at": "2026-03-19T18:33:55.349229",
-      "improvement_version": "1.3.0"
+      "improvement_version": "1.3.0",
+      "triggers": [
+        {
+          "type": "event",
+          "event": "memory_corruption",
+          "description": "内存损坏自动修复"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515334"
     },
     "memory_rollback": {
       "name": "",
@@ -14028,7 +14193,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T18:33:55.349230",
+  "updated_at": "2026-03-19T18:42:25.515343",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
@@ -14095,7 +14260,7 @@
     "reason": "quality_over_quantity - 质量优先于数量"
   },
   "quality_assessment": {
-    "assessed_at": "2026-03-19T18:34:48.425797",
+    "assessed_at": "2026-03-19T18:40:56.885976",
     "total_tools": 372,
     "average_score": 51.3,
     "distribution": {
@@ -14119,5 +14284,11 @@
     "improved_at": "2026-03-19T18:33:55.349230",
     "improved_count": 12,
     "target": "tool_quality_improvement_phase3"
+  },
+  "automation_stats": {
+    "total_tools": 372,
+    "automated_tools": 16,
+    "automation_rate": 4.3,
+    "updated_at": "2026-03-19T18:42:25.515386"
   }
 }
