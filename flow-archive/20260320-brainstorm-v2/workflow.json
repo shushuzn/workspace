@@ -1,5 +1,5 @@
 {
-  "flow_id": "brainstorm-workflow-v2",
+  "flow_id": "20260320-brainstorm-v2",
   "name": "头脑风暴双环工作流 v2.0",
   "description": "创造性想法生成工作流 - 发散环 (D1-D5) + 收敛环 (C1-C5), 最大 3 轮迭代",
   "version": "2.0.0",
