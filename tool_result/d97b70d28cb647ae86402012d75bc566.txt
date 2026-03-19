@@ -1,0 +1,39 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T12:57:46.865838
+# ---
+Command failed with exit code 255.
+[stdout]
+[master a65b733] feat: workflow anomaly detection - auto timeout and retry
+ 10 files changed, 1077 insertions(+), 11 deletions(-)
+ create mode 100644 30-scripts-tools/critic-auto-实施自动异常检测-v7.json
+ create mode 100644 30-scripts-tools/git_commit_anomaly.bat
+ create mode 100644 30-scripts-tools/git_commit_recovery_done.bat
+ create mode 100644 30-scripts-tools/workflow_anomaly_detector.py
+ create mode 100644 flow-archive/20260318-universal-workflow-001/anomaly-config.json
+ create mode 100644 flow-archive/20260318-universal-workflow-001/implementation-anomaly-detection.md
+ create mode 100644 tool_result/7c28f7e2f47a4f5cb5d171fc26007847.txt
+ create mode 100644 tool_result/b2221ec366b241da8b56bc4a7a812f87.txt
+[stderr]
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+'-' is not recognized as an internal or external command,
+operable program or batch file.
+< was unexpected at this time.
