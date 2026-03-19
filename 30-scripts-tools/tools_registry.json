@@ -1,5 +1,5 @@
 {
-  "version": "1.6.0",
+  "version": "1.6.2",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -9697,6 +9697,136 @@
       "version": "1.0.0",
       "created_at": "2026-03-19",
       "priority": "low"
+    },
+    "long-term-memory": {
+      "name": "Long Term Memory",
+      "description": "跨会话持久化记忆系统 - 搜索、关联、压缩",
+      "file": "long_term_memory.py",
+      "category": "memory",
+      "parameters": [
+        "--search",
+        "--add",
+        "--compress",
+        "--list",
+        "--status"
+      ],
+      "examples": [
+        "py long_term_memory.py --search '关键词'",
+        "py long_term_memory.py --add '记忆内容'"
+      ],
+      "added_at": "2026-03-19T14:07:24.743626",
+      "status": "active"
+    },
+    "task-decomposer": {
+      "name": "Task Decomposer",
+      "description": "任务分解自动化 - 依赖管理、优先级排序、进度追踪",
+      "file": "task_decomposer.py",
+      "category": "task",
+      "parameters": [
+        "--decompose",
+        "--progress",
+        "--execute-next",
+        "--list"
+      ],
+      "examples": [
+        "py task_decomposer.py --decompose '复杂任务' --template development"
+      ],
+      "added_at": "2026-03-19T14:07:24.743659",
+      "status": "active"
+    },
+    "proactive-agent": {
+      "name": "Proactive Agent",
+      "description": "主动式交互系统 - 提醒、建议、预警、上下文感知",
+      "file": "proactive_agent.py",
+      "category": "interaction",
+      "parameters": [
+        "--check",
+        "--remind",
+        "--suggest",
+        "--alert",
+        "--alerts",
+        "--context",
+        "--learn",
+        "--status"
+      ],
+      "examples": [
+        "py proactive_agent.py --check",
+        "py proactive_agent.py --remind '完成任务'"
+      ],
+      "added_at": "2026-03-19T14:07:24.743662",
+      "status": "active"
+    },
+    "multimodal-agent": {
+      "name": "Multimodal Agent",
+      "description": "多模态理解系统 - 图像、OCR、语音、文档、融合",
+      "file": "multimodal_agent.py",
+      "category": "multimodal",
+      "parameters": [
+        "--image",
+        "--ocr",
+        "--audio",
+        "--doc",
+        "--pdf",
+        "--fuse",
+        "--result",
+        "--status"
+      ],
+      "examples": [
+        "py multimodal_agent.py --image 'photo.jpg'",
+        "py multimodal_agent.py --ocr 'scan.png'"
+      ],
+      "added_at": "2026-03-19T14:07:24.743664",
+      "status": "active"
+    },
+    "workflow-recovery": {
+      "name": "Workflow Recovery",
+      "description": "工作流恢复系统 - 检查点恢复、步骤重试",
+      "file": "workflow_recovery.py",
+      "category": "workflow",
+      "parameters": [
+        "--restore",
+        "--retry",
+        "--list-checkpoints",
+        "--status"
+      ],
+      "examples": [
+        "py workflow_recovery.py --restore 'checkpoint.json'"
+      ],
+      "added_at": "2026-03-19T14:07:24.743665",
+      "status": "active"
+    },
+    "integration-validator": {
+      "name": "Integration Validator",
+      "description": "工具集成验证器 - 检查注册、集成、调用场景",
+      "file": "integration_validator.py",
+      "category": "validation",
+      "parameters": [
+        "--tool",
+        "--all"
+      ],
+      "examples": [
+        "py integration_validator.py --tool 'proactive_agent.py'",
+        "py integration_validator.py --all"
+      ],
+      "added_at": "2026-03-19T14:07:24.743667",
+      "status": "active"
+    },
+    "workflow-cache": {
+      "name": "Workflow Cache",
+      "description": "工作流缓存系统 - TTL、命中率、自动清理",
+      "file": "workflow_cache.py",
+      "category": "workflow",
+      "parameters": [
+        "--get",
+        "--set",
+        "--clear",
+        "--stats"
+      ],
+      "examples": [
+        "py workflow_cache.py --stats"
+      ],
+      "added_at": "2026-03-19T14:09:47.156027",
+      "status": "active"
     }
   },
   "workflows": {
@@ -9803,5 +9933,5 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T11:36:24.904080"
+  "updated_at": "2026-03-19T14:07:24.743669"
 }

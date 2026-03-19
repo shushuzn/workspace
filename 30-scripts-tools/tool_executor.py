@@ -6,6 +6,13 @@ Tool Executor with Auto-Step Completion
 """
 
 import json
+import integration_validator
+import workflow_recovery
+import workflow_anomaly_detector
+import multimodal_agent
+import proactive_agent
+import task_decomposer
+import long_term_memory
 import subprocess
 import sys
 import io

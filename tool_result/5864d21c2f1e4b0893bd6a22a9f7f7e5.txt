@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-19T14:09:20.521835
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 1-50 of 316)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Tool Executor with Auto-Step Completion
+工具执行器 - 带自动步骤追踪 (方案 A)
+"""
+
+import json
+import integration_validator
+import workflow_recovery
+import multimodal_agent
+import proactive_agent
+import task_decomposer
+import long_term_memory
+import subprocess
+import sys
+import io
+import os
+from pathlib import Path
+from datetime import datetime
+
+WORKSPACE = Path(__file__).parent.parent
+FLOW_ARCHIVE = WORKSPACE / "flow-archive"
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+# 导入缓存系统
+try:
+    from workflow_cache import cache_get, cache_set, init_cache
+    CACHE_ENABLED = True
+except ImportError:
+    CACHE_ENABLED = False
+
+class WorkflowViolationError(Exception):
+    """工作流违规异常"""
+    pass
+
+class ToolExecutor:
+    def __init__(self, flow_id="20260318-universal-workflow-001"):
+        self.flow_id = flow_id
+        self.checkpoint_file = FLOW_ARCHIVE / flow_id / "checkpoint.json"
+        self.current_step = self._load_current_step()
+    
+    def _load_current_step(self):
+        """加载当前步骤"""
+        if not self.checkpoint_file.exists():
+            return 1
+        
+        with open(self.checkpoint_file, 'r', encoding='utf-8') as f:
+            state = json.load(f)
+
+[266 more lines. Use start_line=51 to continue.]
