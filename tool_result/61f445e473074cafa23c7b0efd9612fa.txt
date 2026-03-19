@@ -1,0 +1,55 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T16:52:53.249259
+# ---
+======================================================================
+🔍 arXiv AI Agent 研究扫描
+======================================================================
+
+[1/8] 搜索：autonomous AI agents
+❌ 搜索失败 autonomous AI agents: HTTP Error 502: Bad Gateway
+  ✅ 找到 0 篇
+
+[2/8] 搜索：AI assistant human collaboration
+❌ 搜索失败 AI assistant human collaboration: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+  ✅ 找到 0 篇
+
+[3/8] 搜索：agentic workflow automation
+❌ 搜索失败 agentic workflow automation: HTTP Error 502: Bad Gateway
+  ✅ 找到 0 篇
+
+[4/8] 搜索：self-improving AI systems
+❌ 搜索失败 self-improving AI systems: HTTP Error 502: Bad Gateway
+  ✅ 找到 0 篇
+
+[5/8] 搜索：multi-agent collaboration
+❌ 搜索失败 multi-agent collaboration: HTTP Error 502: Bad Gateway
+  ✅ 找到 0 篇
+
+[6/8] 搜索：AI task planning execution
+❌ 搜索失败 AI task planning execution: HTTP Error 502: Bad Gateway
+  ✅ 找到 0 篇
+
+[7/8] 搜索：human-AI interaction patterns
+❌ 搜索失败 human-AI interaction patterns: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+  ✅ 找到 0 篇
+
+[8/8] 搜索：AI memory systems long-term
+❌ 搜索失败 AI memory systems long-term: HTTP Error 502: Bad Gateway
+  ✅ 找到 0 篇
+======================================================================
+📚 arXiv AI Agent 研究扫描
+======================================================================
+
+📊 搜索统计:
+  搜索词数：8
+  找到论文：0 篇
+
+📊 年度分布:
+
+🏆 最新研究 (Top 20):
+
+💾 报告已保存：flow-archive/20260318-universal-workflow-001/arxiv-agent-research.json
+
+======================================================================
+✅ arXiv 扫描 完成!
+======================================================================

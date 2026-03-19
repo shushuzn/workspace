@@ -1,5 +1,5 @@
 {
-  "version": "1.7.0",
+  "version": "1.7.1",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -10282,6 +10282,18 @@
       ],
       "added_at": "2026-03-19T16:41:33.711847",
       "status": "active"
+    },
+    "brainstorm_research_driven": {
+      "name": "Brainstorm Research Driven",
+      "description": "研究驱动 AI Agent 创新 - GitHub 4 项目+arXiv 4 方向 20 创意",
+      "file": "brainstorm_research_driven.py",
+      "category": "brainstorm",
+      "parameters": [],
+      "examples": [
+        "py brainstorm_research_driven.py"
+      ],
+      "added_at": "2026-03-19T16:55:37.746946",
+      "status": "active"
     }
   },
   "workflows": {
@@ -10388,6 +10400,6 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T16:41:33.711874",
-  "total_tools": 423
+  "updated_at": "2026-03-19T16:55:37.746973",
+  "total_tools": 424
 }
