@@ -9,12 +9,14 @@ Workflow Enforcer - 工作流强制遵守工具
 3. 每步执行前验证顺序
 4. 完成后验证 12 步全部执行
 5. 未通过 → 阻断后续操作
+6. **集成 5 层防护系统**
 
 Usage:
     py workflow_enforcer.py --start <flow_id>     # 开始工作流
     py workflow_enforcer.py --check-step <step>   # 检查步骤
     py workflow_enforcer.py --validate            # 验证完成
     py workflow_enforcer.py --status              # 查看状态
+    py workflow_enforcer.py --protection-check    # 5 层防护检查
 """
 
 import sys
@@ -27,6 +29,13 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 
 WORKSPACE = Path("D:\\OpenClaw\\workspace")
 FLOW_ARCHIVE = WORKSPACE / "flow-archive"
+
+# 导入 5 层防护系统
+try:
+    from protection_system import FiveLayerProtectionSystem
+    PROTECTION_AVAILABLE = True
+except ImportError:
+    PROTECTION_AVAILABLE = False
 
 class WorkflowEnforcer:
     def __init__(self, flow_id="20260318-universal-workflow-001"):
@@ -208,6 +217,7 @@ def main():
     parser.add_argument('--validate', action='store_true', help='验证工作流完成')
     parser.add_argument('--can-commit', action='store_true', help='检查是否可以 Git 提交')
     parser.add_argument('--status', action='store_true', help='查看当前状态')
+    parser.add_argument('--protection-check', action='store_true', help='5 层防护系统检查')
     parser.add_argument('--flow-id', type=str, default='20260318-universal-workflow-001', help='Flow ID')
     
     args = parser.parse_args()
@@ -245,6 +255,16 @@ def main():
         else:
             print("[INFO] 工作流未启动")
         sys.exit(0)
+    
+    elif args.protection_check:
+        # 5 层防护系统检查
+        if not PROTECTION_AVAILABLE:
+            print("❌ 5 层防护系统未安装：protection_system.py")
+            sys.exit(1)
+        
+        system = FiveLayerProtectionSystem()
+        success, _ = system.check_all()
+        sys.exit(0 if success else 1)
     
     else:
         parser.print_help()

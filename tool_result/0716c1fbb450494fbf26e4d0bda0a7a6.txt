@@ -1,0 +1,101 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T11:23:59.093798
+# ---
+Command failed with exit code 1.
+[stdout]
+============================================================
+修复工具命令配置
+============================================================
+  context_search                : py 30-scripts-tools/context_search.py --demo       → py 30-scripts-tools/context_search.py --demo
+  quality_gate_check            : py 30-scripts-tools/quality_gate_check.py --all    → py 30-scripts-tools/quality_gate_check.py --all
+  session_end                   : py 30-scripts-tools/session_end.py auto            → py 30-scripts-tools/session_end.py auto
+  auto_critic_v7                : py 30-scripts-tools/auto-critic_v7.py ${args}      → py 30-scripts-tools/auto-critic_v7.py -t workflow_execution -p final
+
+[OK] 修复完成：4 个工具命令
+[OK] 宸ヤ綔娴佸凡鍔犺浇锛氶�氱敤涓诲伐浣滄祦
+     鐗堟湰锛歷1.1.0
+     鎬绘�ラ�わ細12
+
+[OK] 宸ヤ綔娴佸凡鍚�鍔�锛�20260318-universal-workflow-001
+     姝ラ�ゆ竻鍗�:
+       Step 1: 涓婁笅鏂囧姞杞介獙璇� [闃诲�瀅
+       Step 2: Flow ID 缁戝畾 [闃诲�瀅
+       Step 3: 浠诲姟瑙ｆ瀽 [闃诲�瀅
+       Step 4: 宸ュ叿/宸ヤ綔娴侀�夋嫨 [闃诲�瀅
+       Step 5: 瀛愬伐浣滄祦璋冨害 (鏉′欢) [闃诲�瀅
+       Step 6: 宸ュ叿鎵ц�� [闃诲�瀅
+       Step 7: 鎵ц�屾棩蹇楄�板綍 [闈為樆濉瀅
+       Step 8: 妫�鏌ョ偣淇濆瓨 [闈為樆濉瀅
+       Step 9: 鎵瑰垽鑰呮渶缁堝�℃煡 [闃诲�瀅
+       Step 10: 璐ㄩ噺闂ㄧ�� [闃诲�瀅
+       Step 11: 浼氳瘽鍘嬬缉淇濆瓨 [闃诲�瀅
+       Step 12: Git 鎻愪氦鎺ㄩ�� [闃诲�瀅
+
+[ENFORCEMENT] 寮哄埗妯″紡宸插惎鐢�
+     - 蹇呴』鎸夐『搴忔墽琛屾�ラ��
+     - 璺虫�ュ皢琚�闃绘柇
+     - 瀹屾垚鍚庡繀椤婚獙璇�
+============================================================
+完全自动化工作流执行 - 方案 A
+规则：所有工具通过 tool_executor 调用
+============================================================
+
+============================================================
+Step 1: 上下文加载验证
+============================================================
+[EXEC] 通过 tool_executor 执行：context_search
+[OK] 步骤 1 执行成功（自动完成）
+
+============================================================
+Step 2: Flow ID 绑定
+============================================================
+[INFO] 步骤 2 (flow_manager) 是配置步骤，自动跳过
+
+============================================================
+Step 3: 任务解析
+============================================================
+[INFO] 步骤 3 (task_analyzer) 是配置步骤，自动跳过
+
+============================================================
+Step 4: 工具/工作流选择
+============================================================
+[INFO] 步骤 4 (tool_suggester) 是配置步骤，自动跳过
+
+============================================================
+Step 5: 子工作流调度 (条件)
+============================================================
+[INFO] 步骤 5 (workflow_scheduler) 是配置步骤，自动跳过
+
+============================================================
+Step 6: 工具执行
+============================================================
+[INFO] 步骤 6 (tool_executor) 是配置步骤，自动跳过
+
+============================================================
+Step 7: 执行日志记录
+============================================================
+[INFO] 步骤 7 (execution_logger) 是配置步骤，自动跳过
+[INFO] 非阻塞步骤 7，可选择跳过
+
+============================================================
+Step 8: 检查点保存
+============================================================
+[INFO] 步骤 8 (checkpoint_saver) 是配置步骤，自动跳过
+[INFO] 非阻塞步骤 8，可选择跳过
+
+============================================================
+Step 9: 批判者最终审查
+============================================================
+[EXEC] 通过 tool_executor 执行：auto_critic_v7
+[ERROR] 步骤 9 执行失败
+[stderr]
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\auto_execute_workflow.py", line 168, in <module>
+    success = main()
+  File "D:\OpenClaw\workspace\30-scripts-tools\auto_execute_workflow.py", line 145, in main
+    if not execute_step(step):
+           ~~~~~~~~~~~~^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\auto_execute_workflow.py", line 122, in execute_step
+    print(stdout)
+    ~~~~~^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\u26a0' in position 404: illegal multibyte sequence

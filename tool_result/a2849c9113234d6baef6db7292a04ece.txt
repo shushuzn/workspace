@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-19T11:55:12.863695
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\workflow_enforcer.py  (lines 230-260 of 265)
+    elif args.check_step:
+        success = enforcer.check_step(args.check_step)
+        sys.exit(0 if success else 1)
+    
+    elif args.complete_step:
+        enforcer.complete_step(args.complete_step)
+        sys.exit(0)
+    
+    elif args.validate:
+        success = enforcer.validate_completion()
+        sys.exit(0 if success else 1)
+    
+    elif args.can_commit:
+        success = enforcer.can_commit_git()
+        sys.exit(0 if success else 1)
+    
+    elif args.status:
+        enforcer._load_state()
+        if enforcer.state:
+            print(f"Flow ID: {enforcer.state.get('flow_id', 'N/A')}")
+            print(f"状态：{enforcer.state.get('status', 'N/A')}")
+            print(f"当前步骤：{enforcer.state.get('current_step', 'N/A')}/{enforcer.state.get('total_steps', 'N/A')}")
+            print(f"已完成：{enforcer.state.get('completed_steps', [])}")
+            print(f"违规次数：{len(enforcer.state.get('violations', []))}")
+        else:
+            print("[INFO] 工作流未启动")
+        sys.exit(0)
+    
+    else:
+        parser.print_help()
+        sys.exit(1)
+
+[5 more lines. Use start_line=261 to continue.]

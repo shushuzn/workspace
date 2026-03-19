@@ -22,8 +22,30 @@
   "principles": [
     "唯一数据源原则：所有工具只允许有一份唯一定义",
     "引用优先原则：工作流只引用 tool_id，禁止硬编码",
-    "实时生效原则：工具修改后引用自动同步生效"
+    "实时生效原则：工具修改后引用自动同步生效",
+    "禁止重写工具原则：所有工具脚本禁止被其他脚本重写或修改",
+    "统一调用原则：所有工具只能通过 tool_executor.py 调用，禁止直接调用工具脚本"
   ],
+  "enforcement_rules": {
+    "tool_calling": {
+      "rule": "所有工具必须通过 tool_executor.py 调用",
+      "reason": "确保步骤追踪、强制检查、日志记录统一生效",
+      "violation": "直接调用工具脚本（如 subprocess.run(['py', 'tool.py'])）",
+      "compliance": "通过 tool_executor 调用（subprocess.run(['tool_executor.py', 'tool_id'])）"
+    },
+    "tool_modification": {
+      "rule": "禁止重写或修改工具脚本",
+      "reason": "保持工具稳定性和一致性",
+      "violation": "修改工具脚本文件内容",
+      "compliance": "通过 tools_registry.json 配置调整工具行为"
+    },
+    "tool_registration": {
+      "rule": "新工具必须注册到 tools_registry.json",
+      "reason": "确保工具可追踪、可验证、可审计",
+      "violation": "未注册的工具脚本",
+      "compliance": "使用 register_tools.py 批量注册或手动添加到 registry"
+    }
+  },
   "tools": {
     "auto-critic": {
       "tool_id": "auto-critic",
@@ -1338,7 +1360,7 @@
     },
     "auto_critic_v7": {
       "tool_id": "auto_critic_v7",
-      "command": "py 30-scripts-tools/auto-critic_v7.py ${args}",
+      "command": "py 30-scripts-tools/auto-critic_v7.py -t workflow_execution -p final",
       "description": "批判者工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
@@ -9385,6 +9407,296 @@
         "format": "console",
         "log_to_flow": true
       }
+    },
+    "check_key_tools": {
+      "tool_id": "check_key_tools",
+      "command": "py 30-scripts-tools/check_key_tools.py ${args}",
+      "description": "check_key_tools 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "general",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/check_key_tools.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      }
+    },
+    "check_tool_rules": {
+      "tool_id": "check_tool_rules",
+      "command": "py 30-scripts-tools/check_tool_rules.py ${args}",
+      "description": "工具管理",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "tool",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/check_tool_rules.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      }
+    },
+    "execute_step_fixed": {
+      "tool_id": "execute_step_fixed",
+      "command": "py 30-scripts-tools/execute_step_fixed.py ${args}",
+      "description": "execute_step_fixed 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "general",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/execute_step_fixed.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      }
+    },
+    "fix_missing_tools": {
+      "tool_id": "fix_missing_tools",
+      "command": "py 30-scripts-tools/fix_missing_tools.py ${args}",
+      "description": "fix_missing_tools 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "general",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/fix_missing_tools.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      }
+    },
+    "fix_session_end": {
+      "tool_id": "fix_session_end",
+      "command": "py 30-scripts-tools/fix_session_end.py ${args}",
+      "description": "会话结束处理 - 压缩/保存",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "session",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/fix_session_end.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      }
+    },
+    "fix_tool_commands": {
+      "tool_id": "fix_tool_commands",
+      "command": "py 30-scripts-tools/fix_tool_commands.py ${args}",
+      "description": "工具管理",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "tool",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/fix_tool_commands.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      }
+    },
+    "fix_tool_configs": {
+      "tool_id": "fix_tool_configs",
+      "command": "py 30-scripts-tools/fix_tool_configs.py ${args}",
+      "description": "工具管理",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "tool",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/fix_tool_configs.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      }
+    },
+    "fix_workflow_tool_ids": {
+      "tool_id": "fix_workflow_tool_ids",
+      "command": "py 30-scripts-tools/fix_workflow_tool_ids.py ${args}",
+      "description": "工作流工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "workflow",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/fix_workflow_tool_ids.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      }
+    },
+    "tool_executor": {
+      "tool_id": "tool_executor",
+      "command": "py 30-scripts-tools/tool_executor.py ${args}",
+      "description": "工具执行器 - 统一工具调用入口（唯一合法方式）",
+      "category": "core",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "critical"
+    },
+    "workflow_enforcer": {
+      "tool_id": "workflow_enforcer",
+      "command": "py 30-scripts-tools/workflow_enforcer.py ${args}",
+      "description": "工作流强制检查 - 确保步骤合规",
+      "category": "core",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "critical"
+    },
+    "auto_execute_workflow": {
+      "tool_id": "auto_execute_workflow",
+      "command": "py 30-scripts-tools/auto_execute_workflow.py",
+      "description": "全自动工作流执行 - 零手动干预",
+      "category": "core",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "critical"
+    },
+    "workflow_interactive": {
+      "tool_id": "workflow_interactive",
+      "command": "py 30-scripts-tools/workflow_interactive.py",
+      "description": "交互式工作流执行 - 图形界面",
+      "category": "core",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "high"
+    },
+    "check_tools": {
+      "tool_id": "check_tools",
+      "command": "py 30-scripts-tools/check_tools.py",
+      "description": "工具列表检查",
+      "category": "utility",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "low"
+    },
+    "check_workflow_steps": {
+      "tool_id": "check_workflow_steps",
+      "command": "py 30-scripts-tools/check_workflow_steps.py",
+      "description": "工作流步骤配置检查",
+      "category": "utility",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "low"
+    },
+    "register_core_tools": {
+      "tool_id": "register_core_tools",
+      "command": "py 30-scripts-tools/register_core_tools.py",
+      "description": "注册核心工具",
+      "category": "utility",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "low"
+    },
+    "check_core_tools": {
+      "tool_id": "check_core_tools",
+      "command": "py 30-scripts-tools/check_core_tools.py",
+      "description": "检查核心工具注册状态",
+      "category": "utility",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "low"
+    },
+    "check_flow_manager": {
+      "tool_id": "check_flow_manager",
+      "command": "py 30-scripts-tools/check_flow_manager.py",
+      "description": "检查 flow-manager 工具配置",
+      "category": "utility",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "low"
+    },
+    "register_tools": {
+      "tool_id": "register_tools",
+      "command": "py 30-scripts-tools/register_tools.py",
+      "description": "批量注册工具",
+      "category": "utility",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "low"
     }
   },
   "workflows": {
@@ -9491,5 +9803,5 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T10:43:59.324378"
+  "updated_at": "2026-03-19T11:36:24.904080"
 }

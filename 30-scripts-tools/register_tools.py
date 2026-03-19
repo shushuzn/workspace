@@ -25,7 +25,10 @@ REGISTRY_FILE = SCRIPTS_DIR / "tools_registry.json"
 EXCLUDE_FILES = [
     'tool_executor.py', 'workflow_enforcer.py', 'auto_execute_workflow.py',
     'workflow_interactive.py', 'check_tools.py', 'check_workflow_steps.py',
-    'check_flow_manager.py', 'register_tools.py'
+    'check_flow_manager.py', 'register_tools.py', 'check_tool_rules.py',
+    'check_core_tools.py', 'fix_tool_commands.py', 'fix_missing_tools.py',
+    'fix_session_end.py', 'fix_tool_configs.py', 'fix_workflow_tool_ids.py',
+    'execute_step_fixed.py', 'check_key_tools.py'
 ]
 
 # 工具分类映射

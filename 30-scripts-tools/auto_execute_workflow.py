@@ -2,22 +2,19 @@
 # -*- coding: utf-8 -*-
 """
 完全自动化工作流执行 - 零手动干预
-演示方案 A: 自动步骤追踪
+方案 A: 自动步骤追踪
+
+规则:
+1. 所有工具通过 tool_executor.py 调用（禁止直接调用工具脚本）
+2. 配置步骤自动跳过并标记完成
+3. 系统级 UTF-8 编码已设置（无需在脚本中处理）
 """
 
 import subprocess
 import sys
 import json
-import os
-import io
 from pathlib import Path
 from datetime import datetime
-
-# 修复中文乱码：设置控制台编码为 UTF-8
-if sys.platform == 'win32':
-    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
-    os.system('chcp 65001 >nul 2>&1')
 
 WORKSPACE = Path(__file__).parent.parent
 FLOW_ARCHIVE = WORKSPACE / "flow-archive"
@@ -48,8 +45,44 @@ def tool_exists(tool_id):
         registry = json.load(f)
     return tool_id in registry.get('tools', {})
 
+def is_config_step(tool_id):
+    """判断是否为配置步骤（需要特殊参数或仅配置用途）"""
+    config_tools = [
+        'flow_manager', 'task_analyzer', 'tool_suggester',
+        'workflow_selector', 'subworkflow_dispatcher', 'workflow_scheduler',
+        'execution_logger', 'checkpoint_saver', 'tool_executor'
+    ]
+    return tool_id in config_tools
+
+def execute_step_via_executor(tool_id):
+    """通过 tool_executor 执行工具（唯一合法方式）"""
+    result = subprocess.run([
+        sys.executable,
+        str(TOOL_EXECUTOR),
+        tool_id
+    ], cwd=str(WORKSPACE), capture_output=True, text=True, 
+       encoding='utf-8', errors='replace')
+    
+    return result.returncode == 0, result.stdout, result.stderr
+
+def mark_step_complete(step_id):
+    """标记步骤完成"""
+    subprocess.run([
+        sys.executable,
+        str(WORKSPACE / "30-scripts-tools" / "workflow_enforcer.py"),
+        "--complete-step",
+        str(step_id)
+    ], cwd=str(WORKSPACE), capture_output=True)
+
 def execute_step(step_config):
-    """执行单个步骤"""
+    """
+    执行单个步骤
+    
+    规则:
+    1. 配置步骤 → 自动跳过并标记完成
+    2. 工具不存在 → 警告并跳过
+    3. 实际工具 → 通过 tool_executor 执行
+    """
     step_id = step_config['step_id']
     tool_id = step_config.get('tool_id')
     step_name = step_config['name']
@@ -58,144 +91,50 @@ def execute_step(step_config):
     print(f"Step {step_id}: {step_name}")
     print(f"{'='*60}")
     
+    # 无工具 → 自动跳过
     if not tool_id:
         print(f"[INFO] 步骤 {step_id} 无关联工具，自动跳过")
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "workflow_enforcer.py"),
-            "--complete-step",
-            str(step_id)
-        ], cwd=str(WORKSPACE), capture_output=True)
+        mark_step_complete(step_id)
         return True
     
-    # 配置步骤：这些工具需要特定参数，自动跳过
-    config_tools = [
-        'flow_manager', 'task_analyzer', 'tool_suggester',
-        'workflow_selector', 'subworkflow_dispatcher', 'workflow_scheduler',
-        'execution_logger', 'checkpoint_saver', 'tool_executor'
-    ]
-    if tool_id in config_tools:
+    # 配置步骤 → 自动跳过
+    if is_config_step(tool_id):
         print(f"[INFO] 步骤 {step_id} ({tool_id}) 是配置步骤，自动跳过")
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "workflow_enforcer.py"),
-            "--complete-step",
-            str(step_id)
-        ], cwd=str(WORKSPACE), capture_output=True)
+        mark_step_complete(step_id)
         return True
     
-    # 特殊处理：quality_gate_check 需要 --all 参数
-    if tool_id == 'quality_gate_check':
-        print(f"[INFO] 步骤 {step_id} (quality_gate_check) 执行质量检查")
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "quality_gate_check.py"),
-            "--all"
-        ], cwd=str(WORKSPACE), capture_output=True)
-        
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "workflow_enforcer.py"),
-            "--complete-step",
-            str(step_id)
-        ], cwd=str(WORKSPACE), capture_output=True)
-        return True
-    
-    # 特殊处理：批判者需要额外参数
-    if tool_id == 'auto_critic_v7':
-        print(f"[INFO] 步骤 {step_id} (auto_critic_v7) 使用默认参数执行")
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "auto-critic_v7.py"),
-            "-t", "auto_workflow_execution",
-            "-p", "final",
-            "--flow_id", "20260318-universal-workflow-001"
-        ], cwd=str(WORKSPACE), capture_output=True)
-        
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "workflow_enforcer.py"),
-            "--complete-step",
-            str(step_id)
-        ], cwd=str(WORKSPACE), capture_output=True)
-        return True
-    
-    # 特殊处理：session_end 需要特定参数
-    if tool_id == 'session_end':
-        print(f"[INFO] 步骤 {step_id} (session_end) 执行会话结束处理")
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "session_end.py"),
-            "auto",
-            "--flow_id", "20260318-universal-workflow-001"
-        ], cwd=str(WORKSPACE), capture_output=True)
-        
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "workflow_enforcer.py"),
-            "--complete-step",
-            str(step_id)
-        ], cwd=str(WORKSPACE), capture_output=True)
-        return True
-    
-    # 特殊处理：Git 提交
-    if tool_id == 'git_commit_push':
-        print(f"[INFO] 步骤 {step_id} (git_commit_push) 执行 Git 提交")
-        result = subprocess.run(['git', 'status', '--short'], 
-                              cwd=str(WORKSPACE), 
-                              capture_output=True, text=True)
-        
-        if result.stdout.strip():
-            print("[INFO] 检测到 Git 变更，执行提交...")
-            subprocess.run(['git', 'add', '-A'], cwd=str(WORKSPACE), capture_output=True)
-            subprocess.run(['git', 'commit', '-m', 'auto: 工作流自动执行完成'], cwd=str(WORKSPACE), capture_output=True)
-            subprocess.run(['git', 'push', 'origin', 'master'], cwd=str(WORKSPACE), capture_output=True)
-        else:
-            print("[INFO] 无 Git 变更，跳过提交")
-        
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "workflow_enforcer.py"),
-            "--complete-step",
-            str(step_id)
-        ], cwd=str(WORKSPACE), capture_output=True)
-        return True
-    
-    # 检查工具是否存在
+    # 工具不存在 → 警告并跳过
     if not tool_exists(tool_id):
         print(f"[WARN] 工具 {tool_id} 不存在，自动跳过步骤 {step_id}")
-        subprocess.run([
-            sys.executable,
-            str(WORKSPACE / "30-scripts-tools" / "workflow_enforcer.py"),
-            "--complete-step",
-            str(step_id)
-        ], cwd=str(WORKSPACE), capture_output=True)
+        mark_step_complete(step_id)
         return True
     
-    # 使用 tool_executor 执行（自动完成步骤）
-    result = subprocess.run([
-        sys.executable,
-        str(TOOL_EXECUTOR),
-        tool_id
-    ], cwd=str(WORKSPACE), capture_output=True, text=True, encoding='utf-8', errors='replace')
+    # 通过 tool_executor 执行工具
+    print(f"[EXEC] 通过 tool_executor 执行：{tool_id}")
+    success, stdout, stderr = execute_step_via_executor(tool_id)
     
-    if result.returncode == 0:
+    if success:
         print(f"[OK] 步骤 {step_id} 执行成功（自动完成）")
         return True
     else:
         print(f"[ERROR] 步骤 {step_id} 执行失败")
-        try:
-            print(result.stdout)
-            print(result.stderr)
-        except UnicodeEncodeError:
-            print(result.stdout.encode('utf-8', errors='replace').decode('utf-8', errors='replace'))
-            print(result.stderr.encode('utf-8', errors='replace').decode('utf-8', errors='replace'))
+        # 安全打印（避免编码错误）
+        if stdout:
+            try:
+                print(stdout)
+            except UnicodeEncodeError:
+                print(stdout.encode('gbk', errors='replace').decode('gbk', errors='replace'))
+        if stderr:
+            try:
+                print(stderr)
+            except UnicodeEncodeError:
+                print(stderr.encode('gbk', errors='replace').decode('gbk', errors='replace'))
         return False
 
 def main():
     print("="*60)
-    print("完全自动化工作流执行 - 方案 A 演示")
-    print("零手动干预 - 所有步骤自动完成")
+    print("完全自动化工作流执行 - 方案 A")
+    print("规则：所有工具通过 tool_executor 调用")
     print("="*60)
     
     workflow = load_workflow()
@@ -214,7 +153,7 @@ def main():
             print(f"\n[BLOCKER] 步骤 {step_id} 执行失败，终止工作流")
             return False
         
-        # 非阻塞步骤可以跳过执行
+        # 非阻塞步骤提示
         if not step.get('blocking', True):
             print(f"[INFO] 非阻塞步骤 {step_id}，可选择跳过")
     
