@@ -1,0 +1,49 @@
+# tool_name: read_file
+# created_at: 2026-03-19T18:12:25.272674
+# ---
+{
+  "flow_id": "20260319-speed-optimization-phase3",
+  "status": "in_progress",
+  "current_step": 4,
+  "completed_steps": [1, 2, 3, 4],
+  "timestamp": "2026-03-19T20:30:00",
+  "task": "速度优化第三阶段 - 长期优化 + 总结报告",
+  "priority": "high",
+  "plan": {
+    "phase_1": "CPU 密集型任务多进程优化",
+    "phase_2": "流水线处理优化",
+    "phase_3": "内存映射文件优化",
+    "phase_4": "创建速度优化总结报告",
+    "phase_5": "生成优化实施指南",
+    "estimated_time": "45 分钟"
+  },
+  "phase3_optimizations": [
+    {
+      "id": "opt_010",
+      "title": "CPU 密集型任务多进程",
+      "tool": "cpu_multiprocess_optimizer.py",
+      "status": "pending",
+      "expected_gain": "2-4x 计算速度提升"
+    },
+    {
+      "id": "opt_011",
+      "title": "流水线处理",
+      "tool": "pipeline_processor.py",
+      "status": "pending",
+      "expected_gain": "2-3x 吞吐量提升"
+    },
+    {
+      "id": "opt_012",
+      "title": "内存映射文件",
+      "tool": "memory_mapped_file.py",
+      "status": "pending",
+      "expected_gain": "3-5x 大文件读取提升"
+    }
+  ],
+  "final_deliverables": [
+    "SPEED-OPTIMIZATION-FINAL-SUMMARY.md",
+    "SPEED-OPTIMIZATION-GUIDE.md",
+    "performance-comparison-report.json"
+  ],
+  "expected_gain": "整体速度提升 70-100%"
+}

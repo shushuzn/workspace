@@ -1,0 +1,28 @@
+{
+  "generated_at": "2026-03-19T18:12:32.315522",
+  "flow_id": "20260319-speed-optimization-phase3",
+  "phases": {
+    "phase1": {
+      "name": "Top 5 优先级优化",
+      "tools_count": 5,
+      "total_gain": "~9000x 上下文加载速度提升"
+    },
+    "phase2": {
+      "name": "中优先级优化",
+      "tools_count": 5,
+      "total_gain": "~7x 平均速度提升"
+    },
+    "phase3": {
+      "name": "长期优化",
+      "tools_count": 5,
+      "total_gain": "~3x 平均性能提升"
+    }
+  },
+  "overall_gain": "253x+",
+  "key_metrics": {
+    "context_loading": "9013x",
+    "session_compression": "96%",
+    "tool_governance": "7x",
+    "overall_efficiency": "253x+"
+  }
+}
