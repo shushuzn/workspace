@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-19T10:07:54.377744
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 1-100 of 237)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Tool Executor with Auto-Step Completion
+工具执行器 - 带自动步骤追踪 (方案 A)
+"""
+
+import json
+import subprocess
+import sys
+import io
+from pathlib import Path
+from datetime import datetime
+
+WORKSPACE = Path(__file__).parent.parent
+FLOW_ARCHIVE = WORKSPACE / "flow-archive"
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+class WorkflowViolationError(Exception):
+    """工作流违规异常"""
+    pass
+
+class ToolExecutor:
+    def __init__(self, flow_id="20260318-universal-workflow-001"):
+        self.flow_id = flow_id
+        self.checkpoint_file = FLOW_ARCHIVE / flow_id / "checkpoint.json"
+        self.current_step = self._load_current_step()
+    
+    def _load_current_step(self):
+        """加载当前步骤"""
+        if not self.checkpoint_file.exists():
+            return 1
+        
+        with open(self.checkpoint_file, 'r', encoding='utf-8') as f:
+            state = json.load(f)
+        
+        completed = state.get('completed_steps', [])
+        return len(completed) + 1
+    
+    def _load_workflow_config(self):
+        """加载工作流配置"""
+        workflow_file = FLOW_ARCHIVE / self.flow_id / "workflow.json"
+        with open(workflow_file, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    
+    def _get_step_tool_mapping(self):
+        """获取步骤 - 工具映射"""
+        workflow = self._load_workflow_config()
+        mapping = {}
+        
+        for step in workflow.get('steps', []):
+            step_id = step['step_id']
+            tool_id = step.get('tool_id')
+            if tool_id:
+                mapping[tool_id] = step_id
+        
+        return mapping
+    
+    def execute_tool(self, tool_id, auto_complete=True):
+        """执行工具并自动完成步骤"""
+        # 1. 验证工作流状态
+        if not self._verify_workflow_active():
+            raise WorkflowViolationError(
+                "工作流未启动！请先执行：py workflow_enforcer.py --start"
+            )
+        
+        # 2. 检查工具 - 步骤映射
+        tool_mapping = self._get_step_tool_mapping()
+        expected_step = tool_mapping.get(tool_id)
+        
+        if expected_step and expected_step != self.current_step:
+            print(f"[WARN] 工具 {tool_id} 通常在步骤 {expected_step} 执行")
+            print(f"       当前步骤：{self.current_step}")
+        
+        # 3. 执行工具
+        print(f"\n[Tool Executor] 执行工具：{tool_id}")
+        print(f"     当前步骤：{self.current_step}")
+        print(f"     自动完成：{auto_complete}")
+        
+        result = self._run_tool_command(tool_id)
+        
+        # 4. 自动完成步骤
+        if auto_complete and result['success']:
+            self._complete_current_step(tool_id, result)
+        
+        return result
+    
+    def _verify_workflow_active(self):
+        """验证工作流是否激活"""
+        if not self.checkpoint_file.exists():
+            return False
+        
+        with open(self.checkpoint_file, 'r', encoding='utf-8') as f:
+            state = json.load(f)
+        
+        return state.get('status') in ['in_progress', 'started']
+    
+    def _run_tool_command(self, tool_id):
+        """执行工具命令"""
+
+[137 more lines. Use start_line=101 to continue.]

@@ -1,0 +1,34 @@
+# tool_name: read_file
+# created_at: 2026-03-19T10:08:36.482368
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 58-85 of 237)
+        return mapping
+    
+    def execute_tool(self, tool_id, auto_complete=True):
+        """执行工具并自动完成步骤"""
+        # 1. 验证工作流状态
+        if not self._verify_workflow_active():
+            raise WorkflowViolationError(
+                "工作流未启动！请先执行：py workflow_enforcer.py --start"
+            )
+        
+        # 2. 检查工具 - 步骤映射
+        tool_mapping = self._get_step_tool_mapping()
+        expected_step = tool_mapping.get(tool_id)
+        
+        if expected_step and expected_step != self.current_step:
+            print(f"[WARN] 工具 {tool_id} 通常在步骤 {expected_step} 执行")
+            print(f"       当前步骤：{self.current_step}")
+        
+        # 3. 执行工具
+        print(f"\n[Tool Executor] 执行工具：{tool_id}")
+        print(f"     当前步骤：{self.current_step}")
+        print(f"     自动完成：{auto_complete}")
+        
+        result = self._run_tool_command(tool_id)
+        
+        # 4. 自动完成步骤
+        if auto_complete and result['success']:
+            self._complete_current_step(tool_id, result)
+
+[152 more lines. Use start_line=86 to continue.]

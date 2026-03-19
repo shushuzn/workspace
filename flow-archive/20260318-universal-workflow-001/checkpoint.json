@@ -1,6 +1,6 @@
 {
   "flow_id": "20260318-universal-workflow-001",
-  "started_at": "2026-03-19T09:36:32.688551",
+  "started_at": "2026-03-19T10:05:59.329841",
   "status": "in_progress",
   "total_steps": 12,
   "completed_steps": [
@@ -11,12 +11,9 @@
     5,
     6,
     7,
-    8,
-    9,
-    10,
-    11
+    8
   ],
-  "current_step": 12,
+  "current_step": 9,
   "step_status": {
     "1": "completed",
     "2": "completed",
@@ -26,9 +23,9 @@
     "6": "completed",
     "7": "completed",
     "8": "completed",
-    "9": "completed",
-    "10": "completed",
-    "11": "completed",
+    "9": "pending",
+    "10": "pending",
+    "11": "pending",
     "12": "pending"
   },
   "enforcement_enabled": true,

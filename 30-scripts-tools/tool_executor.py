@@ -57,30 +57,44 @@ class ToolExecutor:
         
         return mapping
     
-    def execute_tool(self, tool_id, auto_complete=True):
-        """执行工具并自动完成步骤"""
-        # 1. 验证工作流状态
-        if not self._verify_workflow_active():
+    def execute_tool(self, tool_id, auto_complete=True, enforce_workflow=True):
+        """执行工具并自动完成步骤
+        
+        方案 A: 自动步骤追踪 - auto_complete=True 时自动标记步骤完成
+        方案 C: 工具层强制检查 - enforce_workflow=True 时强制检查工作流状态
+        
+        Args:
+            tool_id: 工具 ID
+            auto_complete: 是否自动完成步骤 (默认 True)
+            enforce_workflow: 是否强制执行工作流检查 (默认 True)
+        """
+        # 1. 验证工作流状态 (方案 C: 工具层强制检查)
+        if enforce_workflow and not self._verify_workflow_active():
             raise WorkflowViolationError(
                 "工作流未启动！请先执行：py workflow_enforcer.py --start"
             )
         
-        # 2. 检查工具 - 步骤映射
-        tool_mapping = self._get_step_tool_mapping()
-        expected_step = tool_mapping.get(tool_id)
-        
-        if expected_step and expected_step != self.current_step:
-            print(f"[WARN] 工具 {tool_id} 通常在步骤 {expected_step} 执行")
-            print(f"       当前步骤：{self.current_step}")
+        # 2. 检查工具 - 步骤映射 (方案 C: 工具层强制检查)
+        if enforce_workflow:
+            tool_mapping = self._get_step_tool_mapping()
+            expected_step = tool_mapping.get(tool_id)
+            
+            if expected_step and expected_step != self.current_step:
+                raise WorkflowViolationError(
+                    f"工具 {tool_id} 不允许在步骤 {self.current_step} 执行\n"
+                    f"该工具应该在步骤 {expected_step} 执行\n"
+                    f"请先完成步骤 {self.current_step} 到 {expected_step - 1}"
+                )
         
         # 3. 执行工具
         print(f"\n[Tool Executor] 执行工具：{tool_id}")
         print(f"     当前步骤：{self.current_step}")
         print(f"     自动完成：{auto_complete}")
+        print(f"     强制检查：{enforce_workflow}")
         
         result = self._run_tool_command(tool_id)
         
-        # 4. 自动完成步骤
+        # 4. 自动完成步骤 (方案 A: 自动步骤追踪)
         if auto_complete and result['success']:
             self._complete_current_step(tool_id, result)
         
@@ -207,12 +221,14 @@ class ToolExecutor:
 if __name__ == '__main__':
     import argparse
     
-    parser = argparse.ArgumentParser(description='工具执行器 (带自动步骤追踪)')
+    parser = argparse.ArgumentParser(description='工具执行器 (方案 A+C: 自动步骤追踪 + 工具层强制)')
     parser.add_argument('tool_id', help='工具 ID')
     parser.add_argument('--flow-id', default='20260318-universal-workflow-001',
                        help='工作流 ID')
     parser.add_argument('--no-auto-complete', action='store_true',
                        help='禁用自动完成步骤')
+    parser.add_argument('--no-enforce', action='store_true',
+                       help='禁用工作流强制检查 (不推荐)')
     
     args = parser.parse_args()
     
@@ -221,7 +237,8 @@ if __name__ == '__main__':
     try:
         result = executor.execute_tool(
             args.tool_id,
-            auto_complete=not args.no_auto_complete
+            auto_complete=not args.no_auto_complete,
+            enforce_workflow=not args.no_enforce
         )
         
         if result['success']:
