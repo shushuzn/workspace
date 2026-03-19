@@ -1,17 +1,7 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-Git Pre-Commit 检查增强版 v2.0 - 强制检查工作流合规性
-集成 workflow_guardian_v2.py 进行深度验证
-完成率<100% 或类型不匹配 阻止提交
-"""
-
-import json
-from pathlib import Path
-import sys
-from datetime import datetime
-import subprocess
-
+# tool_name: read_file
+# created_at: 2026-03-20T01:17:49.151006
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\git_precommit_check.py  (lines 15-100 of 128)
 def run_workflow_guardian() -> bool:
     """运行 workflow_guardian_v2.py 进行深度验证"""
     try:
@@ -34,28 +24,11 @@ def run_workflow_guardian() -> bool:
         return False
 
 def check_workflow_completion() -> bool:
-    """检查工作流完成率 - 增强版 v2.0"""
+    """检查工作流完成率"""
     
     print("\n" + "=" * 80)
-    print(" " * 20 + "Git Pre-Commit 工作流检查 v2.0")
+    print(" " * 20 + "Git Pre-Commit 工作流检查")
     print("=" * 80)
-    print(f"检查时间：{datetime.now().isoformat()}")
-    
-    # 第 0 步：运行 workflow_guardian 深度验证
-    print("\n[阶段 1] 运行 Workflow Guardian 深度验证...")
-    guardian_passed = run_workflow_guardian()
-    
-    if not guardian_passed:
-        print("\n[FAIL] Workflow Guardian 验证失败！")
-        print("[BLOCK] Git 提交被阻止！")
-        print("\n[ACTION] 请先修复 workflow_guardian 报告的问题")
-        print("=" * 80)
-        return False
-    
-    print("\n[阶段 1] Workflow Guardian 验证通过")
-    
-    # 第 1 步：传统检查
-    print("\n[阶段 2] 传统完成率检查...")
     
     state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
     workflow_file = Path("flow-archive/20260318-universal-workflow-001/workflow.json")
@@ -115,30 +88,5 @@ def check_workflow_completion() -> bool:
     daily_note = Path("13-memory/2026-03-19.md")
     if daily_note.exists():
         size = daily_note.stat().st_size
-        if size > 5120:  # 5KB
-            print(f"\n[FAIL] 当日笔记过大：{size} bytes (>5KB)")
-            print("[BLOCK] 请先压缩会话笔记！")
-            print("=" * 80)
-            return False
-        else:
-            print(f"\n[OK] 当日笔记大小：{size/1024:.1f}KB (<5KB)")
-    
-    # 检查 6: 状态是否为 completed
-    if state.get('status') != 'completed':
-        print(f"\n[WARN] 任务状态不是 'completed'")
-        print(f"[INFO] 当前状态：{state.get('status')}")
-        # 警告但不阻止
-    
-    print(f"\n[OK] 完成率：{completion_rate:.1f}%")
-    print("[OK] 所有必需步骤已完成")
-    print("[OK] 允许 Git 提交")
-    print("=" * 80)
-    return True
 
-def main():
-    """测试入口"""
-    success = check_workflow_completion()
-    sys.exit(0 if success else 1)
-
-if __name__ == "__main__":
-    main()
+[28 more lines. Use start_line=101 to continue.]
