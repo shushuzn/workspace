@@ -1,5 +1,5 @@
 {
-  "version": "1.7.9",
+  "version": "1.8.0",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -475,60 +475,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013806"
     },
-    "issue-scanner": {
-      "tool_id": "issue-scanner",
-      "name": "Issue Scanner",
-      "description": "问题扫描器 - 日志/静态分析/TODO/代码异味/安全扫描",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\issue_scanner.py --path {path} --format {format}",
-      "parameters": {
-        "path": {
-          "type": "string",
-          "required": false,
-          "description": "扫描路径",
-          "default": "30-scripts-tools"
-        },
-        "format": {
-          "type": "string",
-          "required": false,
-          "description": "输出格式",
-          "enum": [
-            "text",
-            "json"
-          ],
-          "default": "text"
-        }
-      },
-      "validation": {
-        "categories": [
-          "pylint",
-          "flake8",
-          "security",
-          "complexity",
-          "todo",
-          "code_smell"
-        ],
-        "severity_levels": [
-          "critical",
-          "high",
-          "medium",
-          "low",
-          "info"
-        ]
-      },
-      "triggers": [
-        "auto_critic_v7"
-      ],
-      "review_required": true,
-      "blocking": false,
-      "timeout_seconds": 60,
-      "category": "analysis",
-      "categorized_at": "2026-03-19T17:20:34.330692",
-      "categorized_method": "auto",
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541295"
-    },
     "critical-issue-detector": {
       "tool_id": "critical-issue-detector",
       "name": "Critical Issue Detector",
@@ -916,66 +862,6 @@
       "categorized_at": "2026-03-19T17:20:34.330712",
       "categorized_method": "auto"
     },
-    "active_learning_trigger": {
-      "tool_id": "active_learning_trigger",
-      "command": "py 30-scripts-tools/active-learning-trigger.py ${args}",
-      "description": "active-learning-trigger 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "automation",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/active-learning-trigger.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541323",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034322",
-      "recategorized_from": "general"
-    },
-    "adaptive_ttl_cache": {
-      "tool_id": "adaptive_ttl_cache",
-      "command": "py 30-scripts-tools/adaptive_ttl_cache.py ${args}",
-      "description": "缓存优化",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "performance",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/adaptive_ttl_cache.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541327",
-      "review_required": true
-    },
     "advanced_report_gen": {
       "tool_id": "advanced_report_gen",
       "command": "py 30-scripts-tools/advanced_report_gen.py ${args}",
@@ -1041,35 +927,6 @@
       "recategorized_at": "2026-03-19T17:34:42.034372",
       "recategorized_from": "general"
     },
-    "ai_tool_suggester": {
-      "tool_id": "ai_tool_suggester",
-      "command": "py 30-scripts-tools/ai_tool_suggester.py ${args}",
-      "description": "工具管理",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "tool",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/ai_tool_suggester.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541329",
-      "review_required": true
-    },
     "analyze_memory_scripts": {
       "tool_id": "analyze_memory_scripts",
       "command": "py 30-scripts-tools/analyze-memory-scripts.py ${args}",
@@ -1122,37 +979,6 @@
         "log_to_flow": true
       },
       "recategorized_at": "2026-03-19T17:34:42.034408",
-      "recategorized_from": "general"
-    },
-    "analyze_causal": {
-      "tool_id": "analyze_causal",
-      "command": "py 30-scripts-tools/analyze_causal.py ${args}",
-      "description": "analyze_causal 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "analysis",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/analyze_causal.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541333",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034433",
       "recategorized_from": "general"
     },
     "anomaly_detector": {
@@ -1318,37 +1144,6 @@
         "unified_cli_v3.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013662"
-    },
-    "async_executor": {
-      "tool_id": "async_executor",
-      "command": "py 30-scripts-tools/async_executor.py ${args}",
-      "description": "async_executor 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "integration",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/async_executor.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541335",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034498",
-      "recategorized_from": "general"
     },
     "auto_critic": {
       "tool_id": "auto_critic",
@@ -1788,37 +1583,6 @@
       "recategorized_at": "2026-03-19T17:34:42.034641",
       "recategorized_from": "general"
     },
-    "automation_enhancer": {
-      "tool_id": "automation_enhancer",
-      "command": "py 30-scripts-tools/automation_enhancer.py ${args}",
-      "description": "automation_enhancer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "automation",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/automation_enhancer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541337",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034655",
-      "recategorized_from": "general"
-    },
     "automation_orchestrator": {
       "tool_id": "automation_orchestrator",
       "command": "py 30-scripts-tools/automation_orchestrator.py ${args}",
@@ -1923,37 +1687,6 @@
       "recategorized_at": "2026-03-19T17:34:42.034698",
       "recategorized_from": "general"
     },
-    "backup_strategy_restructure": {
-      "tool_id": "backup_strategy_restructure",
-      "command": "py 30-scripts-tools/backup-strategy-restructure.py ${args}",
-      "description": "backup-strategy-restructure 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "backup",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/backup-strategy-restructure.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541338",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034715",
-      "recategorized_from": "general"
-    },
     "batch_card_generator": {
       "tool_id": "batch_card_generator",
       "command": "py 30-scripts-tools/batch_card_generator.py ${args}",
@@ -2017,35 +1750,6 @@
       "usage_tracked_at": "2026-03-19T17:28:52.013999",
       "recategorized_at": "2026-03-19T17:34:42.034744",
       "recategorized_from": "general"
-    },
-    "batch_security_fixer": {
-      "tool_id": "batch_security_fixer",
-      "command": "py 30-scripts-tools/batch_security_fixer.py ${args}",
-      "description": "安全检查/修复",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "security",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/batch_security_fixer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541340",
-      "review_required": true
     },
     "brainstorm_action": {
       "tool_id": "brainstorm_action",
@@ -2136,35 +1840,6 @@
         "brainstorm_diverge.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013789"
-    },
-    "brainstorm_prioritize": {
-      "tool_id": "brainstorm_prioritize",
-      "command": "py 30-scripts-tools/brainstorm_prioritize.py ${args}",
-      "description": "头脑风暴工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "brainstorm",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/brainstorm_prioritize.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541343",
-      "review_required": true
     },
     "cache_manager": {
       "tool_id": "cache_manager",
@@ -2263,35 +1938,6 @@
       "recategorized_at": "2026-03-19T17:34:42.034758",
       "recategorized_from": "general"
     },
-    "capacity_planner": {
-      "tool_id": "capacity_planner",
-      "command": "py 30-scripts-tools/capacity_planner.py ${args}",
-      "description": "capacity_planner 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/capacity_planner.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541345",
-      "review_required": true
-    },
     "causal_inference_engine": {
       "tool_id": "causal_inference_engine",
       "command": "py 30-scripts-tools/causal_inference_engine.py ${args}",
@@ -2326,182 +1972,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013636"
     },
-    "causal_split_plan": {
-      "tool_id": "causal_split_plan",
-      "command": "py 30-scripts-tools/causal_split_plan.py ${args}",
-      "description": "causal_split_plan 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/causal_split_plan.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541347",
-      "review_required": true
-    },
-    "ci_cd_pipeline": {
-      "tool_id": "ci_cd_pipeline",
-      "command": "py 30-scripts-tools/ci_cd_pipeline.py ${args}",
-      "description": "ci_cd_pipeline 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "workflow",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/ci_cd_pipeline.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541349",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034805",
-      "recategorized_from": "general"
-    },
-    "clean_duplicates_safe": {
-      "tool_id": "clean_duplicates_safe",
-      "command": "py 30-scripts-tools/clean-duplicates-safe.py ${args}",
-      "description": "clean-duplicates-safe 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/clean-duplicates-safe.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541350",
-      "review_required": true
-    },
-    "clean_feishu_cache": {
-      "tool_id": "clean_feishu_cache",
-      "command": "py 30-scripts-tools/clean-feishu-cache.py ${args}",
-      "description": "缓存优化",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "performance",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/clean-feishu-cache.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541352",
-      "review_required": true
-    },
-    "cleanup_60_data_sensitive": {
-      "tool_id": "cleanup_60_data_sensitive",
-      "command": "py 30-scripts-tools/cleanup-60-data-sensitive.py ${args}",
-      "description": "cleanup-60-data-sensitive 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/cleanup-60-data-sensitive.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541354",
-      "review_required": true
-    },
-    "cleanup_60data_sensitive": {
-      "tool_id": "cleanup_60data_sensitive",
-      "command": "py 30-scripts-tools/cleanup-60data-sensitive.py ${args}",
-      "description": "cleanup-60data-sensitive 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/cleanup-60data-sensitive.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541356",
-      "review_required": true
-    },
     "cleanup_nested_backups": {
       "tool_id": "cleanup_nested_backups",
       "command": "py 30-scripts-tools/cleanup-nested-backups.py ${args}",
@@ -2532,37 +2002,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013826",
       "recategorized_at": "2026-03-19T17:34:42.034857",
-      "recategorized_from": "general"
-    },
-    "cleanup_precheck_issues": {
-      "tool_id": "cleanup_precheck_issues",
-      "command": "py 30-scripts-tools/cleanup-precheck-issues.py ${args}",
-      "description": "cleanup-precheck-issues 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "quality",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/cleanup-precheck-issues.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541358",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034871",
       "recategorized_from": "general"
     },
     "cleanup_reports": {
@@ -2596,37 +2035,6 @@
         "unified_cli_v3.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013827"
-    },
-    "cluster_manager": {
-      "tool_id": "cluster_manager",
-      "command": "py 30-scripts-tools/cluster_manager.py ${args}",
-      "description": "cluster_manager 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "utility",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/cluster_manager.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541359",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034884",
-      "recategorized_from": "general"
     },
     "code_quality_reviewer": {
       "tool_id": "code_quality_reviewer",
@@ -2698,66 +2106,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013830",
       "recategorized_at": "2026-03-19T17:34:42.034910",
-      "recategorized_from": "general"
-    },
-    "complete_path_fixer": {
-      "tool_id": "complete_path_fixer",
-      "command": "py 30-scripts-tools/complete_path_fixer.py ${args}",
-      "description": "complete_path_fixer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/complete_path_fixer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541366",
-      "review_required": true
-    },
-    "compress_tiff_to_png": {
-      "tool_id": "compress_tiff_to_png",
-      "command": "py 30-scripts-tools/compress-tiff-to-png.py ${args}",
-      "description": "compress-tiff-to-png 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "memory",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/compress-tiff-to-png.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541368",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.034935",
       "recategorized_from": "general"
     },
     "config_center_v2": {
@@ -3046,35 +2394,6 @@
         "memory_perf_profiler.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013845"
-    },
-    "coordinator_balancer": {
-      "tool_id": "coordinator_balancer",
-      "command": "py 30-scripts-tools/coordinator_balancer.py ${args}",
-      "description": "coordinator_balancer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/coordinator_balancer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541373",
-      "review_required": true
     },
     "core_system_test": {
       "tool_id": "core_system_test",
@@ -3550,95 +2869,6 @@
       "recategorized_at": "2026-03-19T17:34:42.035063",
       "recategorized_from": "general"
     },
-    "delete_all_reports": {
-      "tool_id": "delete_all_reports",
-      "command": "py 30-scripts-tools/delete-all-reports.py ${args}",
-      "description": "报告生成",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "reporting",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/delete-all-reports.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541375",
-      "review_required": true
-    },
-    "demo_tool": {
-      "tool_id": "demo_tool",
-      "command": "py 30-scripts-tools/demo_tool.py ${args}",
-      "description": "demo_tool 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "tool",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/demo_tool.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541377",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.035072",
-      "recategorized_from": "general"
-    },
-    "deploy_production": {
-      "tool_id": "deploy_production",
-      "command": "py 30-scripts-tools/deploy_production.py ${args}",
-      "description": "deploy_production 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/deploy_production.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541379",
-      "review_required": true
-    },
     "deployment_validator": {
       "tool_id": "deployment_validator",
       "command": "py 30-scripts-tools/deployment_validator.py ${args}",
@@ -3669,64 +2899,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013867"
     },
-    "dialog_integrator": {
-      "tool_id": "dialog_integrator",
-      "command": "py 30-scripts-tools/dialog_integrator.py ${args}",
-      "description": "dialog_integrator 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/dialog_integrator.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541380",
-      "review_required": true
-    },
-    "disaster_recovery_cleanup": {
-      "tool_id": "disaster_recovery_cleanup",
-      "command": "py 30-scripts-tools/disaster-recovery-cleanup.py ${args}",
-      "description": "disaster-recovery-cleanup 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/disaster-recovery-cleanup.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541382",
-      "review_required": true
-    },
     "distributed_cache": {
       "tool_id": "distributed_cache",
       "command": "py 30-scripts-tools/distributed_cache.py ${args}",
@@ -3756,64 +2928,6 @@
         "distributed_cache.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013902"
-    },
-    "distributed_search": {
-      "tool_id": "distributed_search",
-      "command": "py 30-scripts-tools/distributed_search.py ${args}",
-      "description": "distributed_search 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/distributed_search.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541385",
-      "review_required": true
-    },
-    "do_rename": {
-      "tool_id": "do_rename",
-      "command": "py 30-scripts-tools/do_rename.py ${args}",
-      "description": "do_rename 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/do_rename.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541386",
-      "review_required": true
     },
     "doc_generator": {
       "tool_id": "doc_generator",
@@ -3978,35 +3092,6 @@
       "recategorized_at": "2026-03-19T17:34:42.035180",
       "recategorized_from": "general"
     },
-    "error_predictor": {
-      "tool_id": "error_predictor",
-      "command": "py 30-scripts-tools/error_predictor.py ${args}",
-      "description": "error_predictor 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/error_predictor.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541388",
-      "review_required": true
-    },
     "evolution_engine": {
       "tool_id": "evolution_engine",
       "command": "py 30-scripts-tools/evolution_engine.py ${args}",
@@ -4040,37 +3125,6 @@
         "system_orchestrator.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013728"
-    },
-    "execute_cleanup": {
-      "tool_id": "execute_cleanup",
-      "command": "py 30-scripts-tools/execute_cleanup.py ${args}",
-      "description": "execute_cleanup 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "execution",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/execute_cleanup.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541390",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.035208",
-      "recategorized_from": "general"
     },
     "experiment_platform": {
       "tool_id": "experiment_platform",
@@ -4200,35 +3254,6 @@
       "usage_tracked_at": "2026-03-19T17:28:52.013666",
       "recategorized_at": "2026-03-19T17:34:42.035246",
       "recategorized_from": "general"
-    },
-    "feishu_analytics_dashboard": {
-      "tool_id": "feishu_analytics_dashboard",
-      "command": "py 30-scripts-tools/feishu-analytics-dashboard.py ${args}",
-      "description": "仪表板",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "ui",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/feishu-analytics-dashboard.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541393",
-      "review_required": true
     },
     "feishu_chatbot": {
       "tool_id": "feishu_chatbot",
@@ -4386,35 +3411,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013949"
     },
-    "feishu_persona_notify": {
-      "tool_id": "feishu_persona_notify",
-      "command": "py 30-scripts-tools/feishu_persona_notify.py ${args}",
-      "description": "飞书集成",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "integration",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/feishu_persona_notify.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541395",
-      "review_required": true
-    },
     "feishu_report_generator": {
       "tool_id": "feishu_report_generator",
       "command": "py 30-scripts-tools/feishu_report_generator.py ${args}",
@@ -4446,151 +3442,6 @@
         "feishu_report_generator.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013640"
-    },
-    "file_organizer": {
-      "tool_id": "file_organizer",
-      "command": "py 30-scripts-tools/file-organizer.py ${args}",
-      "description": "file-organizer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/file-organizer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541396",
-      "review_required": true
-    },
-    "find_feishu": {
-      "tool_id": "find_feishu",
-      "command": "py 30-scripts-tools/find-feishu.py ${args}",
-      "description": "飞书集成",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "integration",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/find-feishu.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541400",
-      "review_required": true
-    },
-    "find_actual_os_system": {
-      "tool_id": "find_actual_os_system",
-      "command": "py 30-scripts-tools/find_actual_os_system.py ${args}",
-      "description": "find_actual_os_system 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/find_actual_os_system.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541401",
-      "review_required": true
-    },
-    "find_unsafe_calls": {
-      "tool_id": "find_unsafe_calls",
-      "command": "py 30-scripts-tools/find_unsafe_calls.py ${args}",
-      "description": "find_unsafe_calls 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/find_unsafe_calls.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541403",
-      "review_required": true
-    },
-    "fix_remaining_bom": {
-      "tool_id": "fix_remaining_bom",
-      "command": "py 30-scripts-tools/fix-remaining-bom.py ${args}",
-      "description": "fix-remaining-bom 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/fix-remaining-bom.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541406",
-      "review_required": true
     },
     "fix_memory_encoding": {
       "tool_id": "fix_memory_encoding",
@@ -4750,64 +3601,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013962"
     },
-    "git_pre_commit_hook": {
-      "tool_id": "git_pre_commit_hook",
-      "command": "py 30-scripts-tools/git-pre-commit-hook.py ${args}",
-      "description": "Git 操作工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "git",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/git-pre-commit-hook.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541408",
-      "review_required": true
-    },
-    "git_precheck": {
-      "tool_id": "git_precheck",
-      "command": "py 30-scripts-tools/git-precheck.py ${args}",
-      "description": "Git 操作工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "git",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/git-precheck.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541410",
-      "review_required": true
-    },
     "git_workflow": {
       "tool_id": "git_workflow",
       "command": "py 30-scripts-tools/git_workflow.py ${args}",
@@ -4862,66 +3655,6 @@
         "graded_fallback.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013965"
-    },
-    "health_monitor_ai": {
-      "tool_id": "health_monitor_ai",
-      "command": "py 30-scripts-tools/health_monitor_ai.py ${args}",
-      "description": "监控工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "monitoring",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/health_monitor_ai.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541412",
-      "review_required": true
-    },
-    "health_predictor": {
-      "tool_id": "health_predictor",
-      "command": "py 30-scripts-tools/health_predictor.py ${args}",
-      "description": "health_predictor 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "monitoring",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/health_predictor.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541413",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.035342",
-      "recategorized_from": "general"
     },
     "heartbeat_lite": {
       "tool_id": "heartbeat_lite",
@@ -4985,35 +3718,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013966"
     },
-    "incremental_indexer": {
-      "tool_id": "incremental_indexer",
-      "command": "py 30-scripts-tools/incremental_indexer.py ${args}",
-      "description": "incremental_indexer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/incremental_indexer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541415",
-      "review_required": true
-    },
     "init_version_control": {
       "tool_id": "init_version_control",
       "command": "py 30-scripts-tools/init_version_control.py ${args}",
@@ -5075,155 +3779,6 @@
         "verify_p1_fix.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013951"
-    },
-    "innovator_auto_executor": {
-      "tool_id": "innovator_auto_executor",
-      "command": "py 30-scripts-tools/innovator_auto_executor.py ${args}",
-      "description": "innovator_auto_executor 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "automation",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/innovator_auto_executor.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541417",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.035403",
-      "recategorized_from": "general"
-    },
-    "innovator_engine": {
-      "tool_id": "innovator_engine",
-      "command": "py 30-scripts-tools/innovator_engine.py ${args}",
-      "description": "innovator_engine 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/innovator_engine.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541419",
-      "review_required": true
-    },
-    "insight_generator": {
-      "tool_id": "insight_generator",
-      "command": "py 30-scripts-tools/insight_generator.py ${args}",
-      "description": "insight_generator 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/insight_generator.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541420",
-      "review_required": true
-    },
-    "install_git_hooks": {
-      "tool_id": "install_git_hooks",
-      "command": "py 30-scripts-tools/install-git-hooks.py ${args}",
-      "description": "Git 操作工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "git",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/install-git-hooks.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541422",
-      "review_required": true
-    },
-    "install_requirements": {
-      "tool_id": "install_requirements",
-      "command": "py 30-scripts-tools/install_requirements.py ${args}",
-      "description": "install_requirements 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "ui",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/install_requirements.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541425",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.035433",
-      "recategorized_from": "general"
     },
     "intent_predictor": {
       "tool_id": "intent_predictor",
@@ -5288,37 +3843,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013694",
       "recategorized_at": "2026-03-19T17:34:42.035454",
-      "recategorized_from": "general"
-    },
-    "iteration_manager": {
-      "tool_id": "iteration_manager",
-      "command": "py 30-scripts-tools/iteration_manager.py ${args}",
-      "description": "iteration_manager 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "utility",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/iteration_manager.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541427",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.035466",
       "recategorized_from": "general"
     },
     "json_canvas_generator": {
@@ -5512,68 +4036,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013773"
     },
-    "learner_assistant_v2": {
-      "tool_id": "learner_assistant_v2",
-      "command": "py 30-scripts-tools/learner-assistant-v2.py ${args}",
-      "description": "learner-assistant-v2 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "learning",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/learner-assistant-v2.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541428",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.035488",
-      "recategorized_from": "general"
-    },
-    "learning_quality_assessor": {
-      "tool_id": "learning_quality_assessor",
-      "command": "py 30-scripts-tools/learning-quality-assessor.py ${args}",
-      "description": "learning-quality-assessor 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "quality",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/learning-quality-assessor.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541430",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.035500",
-      "recategorized_from": "general"
-    },
     "load_balancer": {
       "tool_id": "load_balancer",
       "command": "py 30-scripts-tools/load_balancer.py ${args}",
@@ -5637,37 +4099,6 @@
         "smart_doc_generator.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013913"
-    },
-    "maintenance_scheduler": {
-      "tool_id": "maintenance_scheduler",
-      "command": "py 30-scripts-tools/maintenance_scheduler.py ${args}",
-      "description": "maintenance_scheduler 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "automation",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/maintenance_scheduler.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541432",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.035532",
-      "recategorized_from": "general"
     },
     "master_orchestrator": {
       "tool_id": "master_orchestrator",
@@ -7433,35 +5864,6 @@
       "recategorized_at": "2026-03-19T17:34:42.036061",
       "recategorized_from": "general"
     },
-    "metrics_tracker": {
-      "tool_id": "metrics_tracker",
-      "command": "py 30-scripts-tools/metrics-tracker.py ${args}",
-      "description": "metrics-tracker 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/metrics-tracker.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541435",
-      "review_required": true
-    },
     "monitor_reports": {
       "tool_id": "monitor_reports",
       "command": "py 30-scripts-tools/monitor_reports.py ${args}",
@@ -7523,35 +5925,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013714"
     },
-    "neural_embedding": {
-      "tool_id": "neural_embedding",
-      "command": "py 30-scripts-tools/neural_embedding.py ${args}",
-      "description": "neural_embedding 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/neural_embedding.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541438",
-      "review_required": true
-    },
     "notification_center": {
       "tool_id": "notification_center",
       "command": "py 30-scripts-tools/notification_center.py ${args}",
@@ -7612,37 +5985,6 @@
         "openclaw.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013996"
-    },
-    "obsidian_tools": {
-      "tool_id": "obsidian_tools",
-      "command": "py 30-scripts-tools/obsidian_tools.py ${args}",
-      "description": "obsidian_tools 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "tool",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/obsidian_tools.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541439",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036114",
-      "recategorized_from": "general"
     },
     "ollama_qwen_test": {
       "tool_id": "ollama_qwen_test",
@@ -7709,190 +6051,6 @@
         "auto-critic.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013645"
-    },
-    "optimize_causal": {
-      "tool_id": "optimize_causal",
-      "command": "py 30-scripts-tools/optimize-causal.py ${args}",
-      "description": "optimize-causal 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "optimization",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/optimize-causal.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541441",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036136",
-      "recategorized_from": "general"
-    },
-    "optimize_tools_analyzer": {
-      "tool_id": "optimize_tools_analyzer",
-      "command": "py 30-scripts-tools/optimize-tools-analyzer.py ${args}",
-      "description": "optimize-tools-analyzer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "optimization",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/optimize-tools-analyzer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541443",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036150",
-      "recategorized_from": "general"
-    },
-    "optimize_tools_deep": {
-      "tool_id": "optimize_tools_deep",
-      "command": "py 30-scripts-tools/optimize-tools-deep.py ${args}",
-      "description": "optimize-tools-deep 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "optimization",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/optimize-tools-deep.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541446",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036158",
-      "recategorized_from": "general"
-    },
-    "optimize_tools_executor": {
-      "tool_id": "optimize_tools_executor",
-      "command": "py 30-scripts-tools/optimize-tools-executor.py ${args}",
-      "description": "optimize-tools-executor 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "optimization",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/optimize-tools-executor.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541448",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036166",
-      "recategorized_from": "general"
-    },
-    "optimize_tools_quick": {
-      "tool_id": "optimize_tools_quick",
-      "command": "py 30-scripts-tools/optimize-tools-quick.py ${args}",
-      "description": "optimize-tools-quick 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "optimization",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/optimize-tools-quick.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541449",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036175",
-      "recategorized_from": "general"
-    },
-    "organize_root_files_v2": {
-      "tool_id": "organize_root_files_v2",
-      "command": "py 30-scripts-tools/organize-root-files-v2.py ${args}",
-      "description": "organize-root-files-v2 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/organize-root-files-v2.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541451",
-      "review_required": true
     },
     "p1_issue_fixer": {
       "tool_id": "p1_issue_fixer",
@@ -8020,35 +6178,6 @@
         "session-check.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013775"
-    },
-    "path_security_fixer": {
-      "tool_id": "path_security_fixer",
-      "command": "py 30-scripts-tools/path_security_fixer.py ${args}",
-      "description": "安全检查/修复",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "security",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/path_security_fixer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541453",
-      "review_required": true
     },
     "perf_dashboard": {
       "tool_id": "perf_dashboard",
@@ -8180,37 +6309,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014021"
     },
-    "plan_auto_optimizer": {
-      "tool_id": "plan_auto_optimizer",
-      "command": "py 30-scripts-tools/plan-auto-optimizer.py ${args}",
-      "description": "plan-auto-optimizer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "optimization",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/plan-auto-optimizer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541454",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036232",
-      "recategorized_from": "general"
-    },
     "plan_quality_assessor": {
       "tool_id": "plan_quality_assessor",
       "command": "py 30-scripts-tools/plan-quality-assessor.py ${args}",
@@ -8272,66 +6370,6 @@
         "plan-auto-optimizer.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014024"
-    },
-    "pm_duplicate_analyzer": {
-      "tool_id": "pm_duplicate_analyzer",
-      "command": "py 30-scripts-tools/pm-duplicate-analyzer.py ${args}",
-      "description": "pm-duplicate-analyzer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "analysis",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/pm-duplicate-analyzer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541457",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036257",
-      "recategorized_from": "general"
-    },
-    "pm_merge_folders": {
-      "tool_id": "pm_merge_folders",
-      "command": "py 30-scripts-tools/pm-merge-folders.py ${args}",
-      "description": "pm-merge-folders 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/pm-merge-folders.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541459",
-      "review_required": true
     },
     "post_session_compress": {
       "tool_id": "post_session_compress",
@@ -8522,35 +6560,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014026"
     },
-    "predictive_analytics": {
-      "tool_id": "predictive_analytics",
-      "command": "py 30-scripts-tools/predictive_analytics.py ${args}",
-      "description": "predictive_analytics 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/predictive_analytics.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541461",
-      "review_required": true
-    },
     "predictive_healing": {
       "tool_id": "predictive_healing",
       "command": "py 30-scripts-tools/predictive_healing.py ${args}",
@@ -8679,95 +6688,6 @@
       "recategorized_at": "2026-03-19T17:34:42.036324",
       "recategorized_from": "general"
     },
-    "query_predictor": {
-      "tool_id": "query_predictor",
-      "command": "py 30-scripts-tools/query_predictor.py ${args}",
-      "description": "query_predictor 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/query_predictor.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541463",
-      "review_required": true
-    },
-    "quick_cleanup_571_errors": {
-      "tool_id": "quick_cleanup_571_errors",
-      "command": "py 30-scripts-tools/quick-cleanup-571-errors.py ${args}",
-      "description": "quick-cleanup-571-errors 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "ui",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/quick-cleanup-571-errors.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541465",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036339",
-      "recategorized_from": "general"
-    },
-    "quick_security_fix": {
-      "tool_id": "quick_security_fix",
-      "command": "py 30-scripts-tools/quick_security_fix.py ${args}",
-      "description": "安全检查/修复",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "security",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/quick_security_fix.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541467",
-      "review_required": true
-    },
     "real_time_distill_v3": {
       "tool_id": "real_time_distill_v3",
       "command": "py 30-scripts-tools/real_time_distill_v3.py ${args}",
@@ -8831,68 +6751,6 @@
         "unified_cli_v3.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013851"
-    },
-    "redis_integration": {
-      "tool_id": "redis_integration",
-      "command": "py 30-scripts-tools/redis_integration.py ${args}",
-      "description": "redis_integration 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "integration",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/redis_integration.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541469",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036355",
-      "recategorized_from": "general"
-    },
-    "register_p1_fixer": {
-      "tool_id": "register_p1_fixer",
-      "command": "py 30-scripts-tools/register_p1_fixer.py ${args}",
-      "description": "register_p1_fixer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "utility",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/register_p1_fixer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541471",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036363",
-      "recategorized_from": "general"
     },
     "remediation_tracker": {
       "tool_id": "remediation_tracker",
@@ -9138,37 +6996,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013898"
     },
-    "resilience_analyzer": {
-      "tool_id": "resilience_analyzer",
-      "command": "py 30-scripts-tools/resilience_analyzer.py ${args}",
-      "description": "resilience_analyzer 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "analysis",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/resilience_analyzer.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541473",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036387",
-      "recategorized_from": "general"
-    },
     "resource_monitor": {
       "tool_id": "resource_monitor",
       "command": "py 30-scripts-tools/resource_monitor.py ${args}",
@@ -9329,37 +7156,6 @@
       "recategorized_at": "2026-03-19T17:34:42.036414",
       "recategorized_from": "general"
     },
-    "scan_p1_issues": {
-      "tool_id": "scan_p1_issues",
-      "command": "py 30-scripts-tools/scan_p1_issues.py ${args}",
-      "description": "scan_p1_issues 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "analysis",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/scan_p1_issues.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541475",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036420",
-      "recategorized_from": "general"
-    },
     "security_auditor": {
       "tool_id": "security_auditor",
       "command": "py 30-scripts-tools/security_auditor.py ${args}",
@@ -9423,35 +7219,6 @@
         "unified_cli_v3.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014108"
-    },
-    "security_reporter": {
-      "tool_id": "security_reporter",
-      "command": "py 30-scripts-tools/security_reporter.py ${args}",
-      "description": "安全检查/修复",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "security",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/security_reporter.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541477",
-      "review_required": true
     },
     "security_validator": {
       "tool_id": "security_validator",
@@ -9770,66 +7537,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014088"
     },
-    "setup_git_hooks": {
-      "tool_id": "setup_git_hooks",
-      "command": "py 30-scripts-tools/setup-git-hooks.py ${args}",
-      "description": "Git 操作工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "git",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/setup-git-hooks.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541479",
-      "review_required": true
-    },
-    "smart_review_reminder": {
-      "tool_id": "smart_review_reminder",
-      "command": "py 30-scripts-tools/smart-review-reminder.py ${args}",
-      "description": "smart-review-reminder 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "quality",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/smart-review-reminder.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541481",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036462",
-      "recategorized_from": "general"
-    },
     "smart_cache_v2": {
       "tool_id": "smart_cache_v2",
       "command": "py 30-scripts-tools/smart_cache_v2.py ${args}",
@@ -10026,35 +7733,6 @@
       "recategorized_at": "2026-03-19T17:34:42.036491",
       "recategorized_from": "general"
     },
-    "smart_tool_finder": {
-      "tool_id": "smart_tool_finder",
-      "command": "py 30-scripts-tools/smart_tool_finder.py ${args}",
-      "description": "工具管理",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "tool",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/smart_tool_finder.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541483",
-      "review_required": true
-    },
     "smart_workflow_optimizer": {
       "tool_id": "smart_workflow_optimizer",
       "command": "py 30-scripts-tools/smart_workflow_optimizer.py ${args}",
@@ -10238,37 +7916,6 @@
       "recategorized_at": "2026-03-19T17:34:42.036523",
       "recategorized_from": "general"
     },
-    "test_real_time_distill": {
-      "tool_id": "test_real_time_distill",
-      "command": "py 30-scripts-tools/test_real_time_distill.py ${args}",
-      "description": "test_real_time_distill 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "memory",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/test_real_time_distill.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541487",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036532",
-      "recategorized_from": "general"
-    },
     "tiered_cache": {
       "tool_id": "tiered_cache",
       "command": "py 30-scripts-tools/tiered_cache.py ${args}",
@@ -10389,35 +8036,6 @@
         "deploy_production.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013900"
-    },
-    "tool_consolidator": {
-      "tool_id": "tool_consolidator",
-      "command": "py 30-scripts-tools/tool_consolidator.py ${args}",
-      "description": "工具管理",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "tool",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/tool_consolidator.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541489",
-      "review_required": true
     },
     "tool_integration": {
       "tool_id": "tool_integration",
@@ -10543,35 +8161,6 @@
         "tool_registry_manager.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014100"
-    },
-    "tool_similarity_engine": {
-      "tool_id": "tool_similarity_engine",
-      "command": "py 30-scripts-tools/tool_similarity_engine.py ${args}",
-      "description": "工具管理",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "tool",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/tool_similarity_engine.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541491",
-      "review_required": true
     },
     "trend_analyzer_pro": {
       "tool_id": "trend_analyzer_pro",
@@ -10824,35 +8413,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013908"
     },
-    "update_p1_remediation": {
-      "tool_id": "update_p1_remediation",
-      "command": "py 30-scripts-tools/update_p1_remediation.py ${args}",
-      "description": "update_p1_remediation 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/update_p1_remediation.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541492",
-      "review_required": true
-    },
     "update_session_end_workflow": {
       "tool_id": "update_session_end_workflow",
       "command": "py 30-scripts-tools/update_session_end_workflow.py ${args}",
@@ -10877,35 +8437,6 @@
         "format": "console",
         "log_to_flow": true
       }
-    },
-    "usage_pattern_miner": {
-      "tool_id": "usage_pattern_miner",
-      "command": "py 30-scripts-tools/usage_pattern_miner.py ${args}",
-      "description": "usage_pattern_miner 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "general",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/usage_pattern_miner.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541495",
-      "review_required": true
     },
     "vector_search": {
       "tool_id": "vector_search",
@@ -10936,130 +8467,6 @@
         "vector_search.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014114"
-    },
-    "verify_cli_aliases": {
-      "tool_id": "verify_cli_aliases",
-      "command": "py 30-scripts-tools/verify-cli-aliases.py ${args}",
-      "description": "verify-cli-aliases 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "quality",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/verify-cli-aliases.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541496",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036586",
-      "recategorized_from": "general"
-    },
-    "verify_deployment": {
-      "tool_id": "verify_deployment",
-      "command": "py 30-scripts-tools/verify_deployment.py ${args}",
-      "description": "verify_deployment 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "quality",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/verify_deployment.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541498",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036593",
-      "recategorized_from": "general"
-    },
-    "verify_p1_fix": {
-      "tool_id": "verify_p1_fix",
-      "command": "py 30-scripts-tools/verify_p1_fix.py ${args}",
-      "description": "verify_p1_fix 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "quality",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/verify_p1_fix.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541500",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036600",
-      "recategorized_from": "general"
-    },
-    "verify_p6_quick": {
-      "tool_id": "verify_p6_quick",
-      "command": "py 30-scripts-tools/verify_p6_quick.py ${args}",
-      "description": "verify_p6_quick 工具",
-      "version": "1.0.0",
-      "created_at": "2026-03-19",
-      "category": "quality",
-      "parameters": {
-        "args": {
-          "type": "string",
-          "description": "工具参数",
-          "required": false
-        }
-      },
-      "examples": [
-        "py 30-scripts-tools/verify_p6_quick.py --help"
-      ],
-      "validation": {
-        "workspace_check": true
-      },
-      "output": {
-        "format": "console",
-        "log_to_flow": true
-      },
-      "status": "deprecated_candidate",
-      "deprecated_reason": "unused_in_codebase",
-      "deprecated_at": "2026-03-19T17:29:43.541501",
-      "review_required": true,
-      "recategorized_at": "2026-03-19T17:34:42.036606",
-      "recategorized_from": "general"
     },
     "windows_task_scheduler": {
       "tool_id": "windows_task_scheduler",
@@ -13332,6 +10739,42 @@
       ],
       "added_at": "2026-03-19T17:34:56.711168",
       "status": "active"
+    },
+    "generate_tool_directory": {
+      "name": "Generate Tool Directory",
+      "description": "生成工具目录 - 创建 Markdown 格式的工具目录，按分类组织",
+      "file": "generate_tool_directory.py",
+      "category": "documentation",
+      "parameters": [],
+      "examples": [
+        "py generate_tool_directory.py"
+      ],
+      "added_at": "2026-03-19T17:41:24.921728",
+      "status": "active"
+    },
+    "review_deprecated_candidates": {
+      "name": "Review Deprecated Candidates",
+      "description": "审查废弃候选 - 人工审查废弃候选工具，决定保留或删除",
+      "file": "review_deprecated_candidates.py",
+      "category": "quality",
+      "parameters": [],
+      "examples": [
+        "py review_deprecated_candidates.py"
+      ],
+      "added_at": "2026-03-19T17:41:24.921775",
+      "status": "active"
+    },
+    "delete_deprecated_tools": {
+      "name": "Delete Deprecated Tools",
+      "description": "删除废弃工具 - 实际删除已确认的废弃工具，带备份",
+      "file": "delete_deprecated_tools.py",
+      "category": "automation",
+      "parameters": [],
+      "examples": [
+        "py delete_deprecated_tools.py"
+      ],
+      "added_at": "2026-03-19T17:41:24.921780",
+      "status": "active"
     }
   },
   "workflows": {
@@ -13438,8 +10881,8 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T17:34:56.711171",
-  "total_tools": 440,
+  "updated_at": "2026-03-19T17:41:24.921783",
+  "total_tools": 357,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
   "manual_fixes": 5,
@@ -13487,5 +10930,11 @@
     "multimodal": 1,
     "validation": 1,
     "cache": 1
+  },
+  "deletion_record": {
+    "deleted_at": "2026-03-19T17:40:49.903334",
+    "deleted_count": 86,
+    "files_backed_up": 0,
+    "backup_location": "99-backups/deprecated-tools/"
   }
 }

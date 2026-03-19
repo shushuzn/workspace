@@ -1,0 +1,545 @@
+{
+  "review_date": "2026-03-19T17:40:05.066332",
+  "total_candidates": 88,
+  "auto_keep": [
+    {
+      "tool_id": "context_aware_cache",
+      "name": "",
+      "category": "performance",
+      "reason": "0 次使用",
+      "keep_reason": "核心关键词：context"
+    },
+    {
+      "tool_id": "context_db",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用",
+      "keep_reason": "核心关键词：context"
+    }
+  ],
+  "auto_delete": [
+    {
+      "tool_id": "issue-scanner",
+      "name": "Issue Scanner",
+      "category": "analysis",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "active_learning_trigger",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "adaptive_ttl_cache",
+      "name": "",
+      "category": "performance",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "ai_tool_suggester",
+      "name": "",
+      "category": "tool",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "analyze_causal",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "async_executor",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "automation_enhancer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "backup_strategy_restructure",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "batch_security_fixer",
+      "name": "",
+      "category": "security",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "brainstorm_prioritize",
+      "name": "",
+      "category": "brainstorm",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "capacity_planner",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "causal_split_plan",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "ci_cd_pipeline",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "clean_duplicates_safe",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "clean_feishu_cache",
+      "name": "",
+      "category": "performance",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "cleanup_60_data_sensitive",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "cleanup_60data_sensitive",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "cleanup_precheck_issues",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "cluster_manager",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "complete_path_fixer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "compress_tiff_to_png",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "coordinator_balancer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "delete_all_reports",
+      "name": "",
+      "category": "reporting",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "demo_tool",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "deploy_production",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "dialog_integrator",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "disaster_recovery_cleanup",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "distributed_search",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "do_rename",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "error_predictor",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "execute_cleanup",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "feishu_analytics_dashboard",
+      "name": "",
+      "category": "ui",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "feishu_persona_notify",
+      "name": "",
+      "category": "integration",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "file_organizer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "find_feishu",
+      "name": "",
+      "category": "integration",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "find_actual_os_system",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "find_unsafe_calls",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "fix_remaining_bom",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "git_pre_commit_hook",
+      "name": "",
+      "category": "git",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "git_precheck",
+      "name": "",
+      "category": "git",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "health_monitor_ai",
+      "name": "",
+      "category": "monitoring",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "health_predictor",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "incremental_indexer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "innovator_auto_executor",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "innovator_engine",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "insight_generator",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "install_git_hooks",
+      "name": "",
+      "category": "git",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "install_requirements",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "iteration_manager",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "learner_assistant_v2",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "learning_quality_assessor",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "maintenance_scheduler",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "metrics_tracker",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "neural_embedding",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "obsidian_tools",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "optimize_causal",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "optimize_tools_analyzer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "optimize_tools_deep",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "optimize_tools_executor",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "optimize_tools_quick",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "organize_root_files_v2",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "path_security_fixer",
+      "name": "",
+      "category": "security",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "plan_auto_optimizer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "pm_duplicate_analyzer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "pm_merge_folders",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "predictive_analytics",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "query_predictor",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "quick_cleanup_571_errors",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "quick_security_fix",
+      "name": "",
+      "category": "security",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "redis_integration",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "register_p1_fixer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "resilience_analyzer",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "scan_p1_issues",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "security_reporter",
+      "name": "",
+      "category": "security",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "setup_git_hooks",
+      "name": "",
+      "category": "git",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "smart_review_reminder",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "smart_tool_finder",
+      "name": "",
+      "category": "tool",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "test_real_time_distill",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "tool_consolidator",
+      "name": "",
+      "category": "tool",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "tool_similarity_engine",
+      "name": "",
+      "category": "tool",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "update_p1_remediation",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "usage_pattern_miner",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "verify_cli_aliases",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "verify_deployment",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "verify_p1_fix",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    },
+    {
+      "tool_id": "verify_p6_quick",
+      "name": "",
+      "category": "general",
+      "reason": "0 次使用"
+    }
+  ],
+  "manual_review": [],
+  "summary": {
+    "auto_keep_count": 2,
+    "auto_delete_count": 86,
+    "manual_review_count": 0,
+    "deletion_reduction": "86/88 (97.7%)"
+  }
+}
