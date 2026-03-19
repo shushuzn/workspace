@@ -2,7 +2,7 @@
   "flow_id": "20260318-universal-workflow-001",
   "name": "通用主工作流",
   "description": "主工作流 - 总控/指挥/调度所有子工作流和工具",
-  "version": "1.4.0",
+  "version": "1.5.0",
   "created_at": "2026-03-18T22:46:04+08:00",
   "workflow_type": "main",
   "parent_workflow": null,
@@ -871,7 +871,7 @@
     "realtime_progress": "flow-archive/20260318-universal-workflow-001/progress.json",
     "timeout_alerts": "flow-archive/20260318-universal-workflow-001/alerts.json"
   },
-  "updated_at": "2026-03-20T02:14:56.959315",
+  "updated_at": "2026-03-20T02:20:12.713586",
   "changelog": [
     {
       "version": "1.2.0",
@@ -973,5 +973,37 @@
     "target_aai_level": "AAI-3",
     "assessment_storage": "flow-archive/20260318-universal-workflow-001/aai-scores.json",
     "history_days": 90
+  },
+  "mandatory_execution": {
+    "enabled": true,
+    "entry_point": "30-scripts-tools/copaw_entry.py",
+    "rules": [
+      "所有任务必须通过 copaw_entry.py 入口点启动",
+      "禁止直接执行工具脚本",
+      "禁止绕过主工作流",
+      "所有会话必须初始化 execution-state.json",
+      "会话结束必须更新 execution-state.json"
+    ],
+    "enforcement": {
+      "pre_session": {
+        "check": "copaw_entry.py 必须被调用",
+        "action": "自动初始化 execution-state.json"
+      },
+      "during_session": {
+        "check": "所有工具调用必须通过 tool_executor",
+        "action": "记录到 tool_call_log.jsonl"
+      },
+      "post_session": {
+        "check": "execution-state.json 必须更新",
+        "action": "验证完成率 + Git 提交"
+      }
+    },
+    "anti_bypass": {
+      "enabled": true,
+      "detect_direct_tool_calls": true,
+      "detect_missing_state_file": true,
+      "detect_missing_tool_log": true,
+      "action_on_violation": "block_and_report"
+    }
   }
 }

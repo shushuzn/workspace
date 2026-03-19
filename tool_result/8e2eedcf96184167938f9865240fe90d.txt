@@ -1,0 +1,25 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T02:19:52.068516
+# ---
+[master 37dc6d1] "Add-anti-fraud-protection-mechanism-v1.4.0"
+ 25 files changed, 2898 insertions(+), 81 deletions(-)
+ create mode 100644 30-scripts-tools/ANTI-FRAUD-SYSTEM.md
+ create mode 100644 30-scripts-tools/check_session.py
+ create mode 100644 30-scripts-tools/fix_execution_state.py
+ create mode 100644 30-scripts-tools/fix_execution_state_v2.py
+ create mode 100644 30-scripts-tools/list_tools.py
+ create mode 100644 30-scripts-tools/query_tools.py
+ create mode 100644 30-scripts-tools/step1_context_verify.py
+ create mode 100644 30-scripts-tools/tool_call_log.jsonl
+ create mode 100644 30-scripts-tools/tool_call_tracker.py
+ create mode 100644 30-scripts-tools/update_workflow_enforcement.py
+ create mode 100644 30-scripts-tools/verify_workflow_update.py
+ create mode 100644 flow-archive/20260318-universal-workflow-001/TOOL-PROTECTION-MECHANISM.md
+ create mode 100644 flow-archive/20260318-universal-workflow-001/step1-context-result.json
+ create mode 100644 tool_result/12460f83aa574926832971c9125b094b.txt
+ create mode 100644 tool_result/172f9bda759245c393268e47c32306cd.txt
+ create mode 100644 tool_result/1a26122e94a449929ead5ad60542f00e.txt
+ create mode 100644 tool_result/7193a494ae994f0ab86f24fd4fdabd74.txt
+ create mode 100644 tool_result/b37303644f5e421ea93891bbc6bff050.txt
+ create mode 100644 tool_result/b73efac46b664e118770b3b823634acc.txt
+ create mode 100644 tool_result/f1f4d299243842479523ad6a363d8c4b.txt
