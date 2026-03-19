@@ -1,0 +1,28 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T09:29:37.569570
+# ---
+Command failed with exit code 1.
+[stdout]
+============================================================
+Post-Session Compressor v2.0 - 分层压缩 + 重要性评估
+============================================================
+
+[Context Size]
+  Total: 57.2KB (0.0559MB)
+  Under 100KB limit: Yes
+
+[Importance Score] 0.38 / 1.00
+[Compression Strategy] compress_heavy
+[stderr]
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\post_session_compress.py", line 520, in <module>
+    sys.exit(main())
+             ~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\post_session_compress.py", line 495, in main
+    summary = compress_to_summary(session)
+  File "D:\OpenClaw\workspace\30-scripts-tools\post_session_compress.py", line 279, in compress_to_summary
+    return compress_hot(session)  # 默认使用热数据压缩
+  File "D:\OpenClaw\workspace\30-scripts-tools\post_session_compress.py", line 140, in compress_hot
+    date_str = session['timestamp'][:10]
+               ~~~~~~~^^^^^^^^^^^^^
+KeyError: 'timestamp'
