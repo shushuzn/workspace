@@ -1,0 +1,28 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T01:19:27.520680
+# ---
+============================================================
+Step ID 类型验证
+============================================================
+[OK] Step 1: workflow=1 (int), state=1 (int)
+[OK] Step 2: workflow=2 (int), state=2 (int)
+[OK] Step 3: workflow=3 (int), state=3 (int)
+[OK] Step 4: workflow=4 (int), state=4 (int)
+[OK] Step 5: workflow=5 (int), state=5 (int)
+[OK] Step 6: workflow=6 (int), state=6 (int)
+[OK] Step 7: workflow=6.5 (float), state=6.5 (float)
+[OK] Step 8: workflow=6.6 (float), state=6.6 (float)
+[OK] Step 9: workflow=6.7 (float), state=6.7 (float)
+[OK] Step 10: workflow=7 (int), state=7 (int)
+[OK] Step 11: workflow=8 (int), state=8 (int)
+[OK] Step 12: workflow=8.5 (float), state=8.5 (float)
+[OK] Step 13: workflow=8.6 (float), state=8.6 (float)
+[OK] Step 14: workflow=8.7 (float), state=8.7 (float)
+[OK] Step 15: workflow=9.1 (float), state=9.1 (float)
+[OK] Step 16: workflow=10.1 (float), state=10.1 (float)
+[OK] Step 17: workflow=10.5 (float), state=10.5 (float)
+[OK] Step 18: workflow=11.2 (float), state=11.2 (float)
+[OK] Step 19: workflow=12.2 (float), state=12.2 (float)
+[OK] Step 20: workflow=13.2 (float), state=13.2 (float)
+============================================================
+[OK] 所有 Step ID 类型和值完全匹配
