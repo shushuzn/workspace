@@ -1,5 +1,5 @@
 {
-  "version": "1.10.0",
+  "version": "1.11.0",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -7330,7 +7330,21 @@
         "documentation": "描述:False, 参数:True, 示例:True",
         "usage": "中频使用 (18 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "session_end",
+          "description": "会话结束自动压缩"
+        },
+        {
+          "type": "cron",
+          "schedule": "0 */4 * * *",
+          "description": "每 4 小时压缩"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:47:43.499996"
     },
     "pre_session_hook_v1": {
       "tool_id": "pre_session_hook_v1",
@@ -7405,7 +7419,16 @@
         "documentation": "描述:False, 参数:True, 示例:True",
         "usage": "低频使用 (1 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "session_start",
+          "description": "会话开始自动执行"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:47:43.499986"
     },
     "pre_commit_hook": {
       "tool_id": "pre_commit_hook",
@@ -8711,7 +8734,21 @@
         "documentation": "描述:False, 参数:True, 示例:True",
         "usage": "中频使用 (38 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "session_end",
+          "description": "会话结束自动执行"
+        },
+        {
+          "type": "cron",
+          "schedule": "0 */2 * * *",
+          "description": "每 2 小时检查"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:47:43.499950"
     },
     "session_end_checker": {
       "tool_id": "session_end_checker",
@@ -10151,7 +10188,16 @@
         "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "中频使用 (11 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "workflow_init",
+          "description": "工作流初始化自动管理"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:47:43.500013"
     },
     "workflow_optimizer_ai": {
       "tool_id": "workflow_optimizer_ai",
@@ -10331,7 +10377,16 @@
         "documentation": "描述:False, 参数:True, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "无时间戳"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "workflow_create",
+          "description": "工作流创建自动验证"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:47:43.500018"
     },
     "workflow_visualizer_web": {
       "tool_id": "workflow_visualizer_web",
@@ -12177,7 +12232,16 @@
         "documentation": "描述:True, 参数:False, 示例:True",
         "usage": "未使用 (0 次)",
         "maintenance": "已添加但未更新"
-      }
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "tool_used",
+          "description": "工具使用自动追踪"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:47:43.500026"
     },
     "mark_deprecated_tools": {
       "name": "Mark Deprecated Tools",
@@ -12602,7 +12666,16 @@
         "documentation": "描述:True, 参数:True, 示例:True",
         "usage": "低频使用 (2 次)",
         "maintenance": "已添加但未更新"
-      }
+      },
+      "triggers": [
+        {
+          "type": "cron",
+          "schedule": "0 5 * * 0",
+          "description": "每周日 05:00 提炼长期记忆"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:47:43.500004"
     },
     "task_decomposer": {
       "name": "Task Decomposer",
@@ -14193,7 +14266,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T18:42:25.515343",
+  "updated_at": "2026-03-19T18:47:43.500030",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
@@ -14287,8 +14360,9 @@
   },
   "automation_stats": {
     "total_tools": 372,
-    "automated_tools": 16,
-    "automation_rate": 4.3,
-    "updated_at": "2026-03-19T18:42:25.515386"
+    "automated_tools": 23,
+    "automation_rate": 6.18,
+    "phase2_added": 7,
+    "updated_at": "2026-03-19T18:47:43.500055"
   }
 }

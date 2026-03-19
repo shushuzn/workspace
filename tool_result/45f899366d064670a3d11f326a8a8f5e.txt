@@ -1,0 +1,39 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T18:48:23.249896
+# ---
+======================================================================
+Add Automation Triggers - Phase 2
+======================================================================
+OK session_end: Added 2 triggers
+OK pre_session_hook: Added 1 triggers
+OK post_session_compress: Added 2 triggers
+WARNING memory_checker: Tool not found
+WARNING memory_optimizer: Tool not found
+OK long_term_memory: Added 1 triggers
+WARNING critic_v5: Tool not found
+WARNING critic_embedded: Tool not found
+WARNING critic_review: Tool not found
+WARNING auto_critic_daily: Tool not found
+WARNING critic_quality_check: Tool not found
+WARNING critic_workflow: Tool not found
+OK workflow_manager: Added 1 triggers
+OK workflow_validator: Added 1 triggers
+WARNING workflow_optimizer: Tool not found
+WARNING flow_monitor: Tool not found
+WARNING step_validator: Tool not found
+WARNING completion_checker: Tool not found
+WARNING tool_quality_scorer: Tool not found
+OK tool_usage_tracker: Added 1 triggers
+WARNING tool_deprecated_marker: Tool not found
+WARNING duplicate_detector: Tool not found
+WARNING naming_standard_checker: Tool not found
+WARNING tool_directory_generator: Tool not found
+
+Automation Statistics:
+  Tools updated: 7
+  Tools skipped: 17
+  Already automated: 0
+  Total automated: 23/372
+  Automation rate: 6.18%
+
+Config saved to: flow-archive\20260318-universal-workflow-001\flow-governance-layer4\automation_triggers_phase2.json
