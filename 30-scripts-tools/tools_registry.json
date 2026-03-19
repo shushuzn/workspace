@@ -1,6 +1,6 @@
 {
-  "version": "1.11.32",
-  "last_updated": "2026-03-20T00:49:03.230064",
+  "version": "1.11.38",
+  "last_updated": "2026-03-20T01:02:19.995489",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
     "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
@@ -15028,6 +15028,210 @@
       "usage_count": 1,
       "usage_files": [
         "sa_012_report_generator.py"
+      ],
+      "quality_score": 61.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件存在且可运行",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "有时间戳"
+      }
+    },
+    "sa_013_portfolio_risk": {
+      "tool_id": "sa_013_portfolio_risk",
+      "name": "Portfolio Risk Analyzer",
+      "description": "Stock Analysis Phase 3 - Portfolio risk analysis (correlation/VaR/diversification)",
+      "version": "1.0.0",
+      "created_at": "2026-03-21",
+      "category": "stock-analysis",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": false,
+          "default": "TEST"
+        }
+      },
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "sa_013_*.py"
+      ],
+      "quality_score": 61.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件存在且可运行",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "有时间戳"
+      }
+    },
+    "sa_014_alert_system": {
+      "tool_id": "sa_014_alert_system",
+      "name": "Alert System",
+      "description": "Stock Analysis Phase 3 - Real-time price and indicator alerts",
+      "version": "1.0.0",
+      "created_at": "2026-03-21",
+      "category": "stock-analysis",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": false,
+          "default": "TEST"
+        }
+      },
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "sa_014_*.py"
+      ],
+      "quality_score": 61.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件存在且可运行",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "有时间戳"
+      }
+    },
+    "sa_015_market_regime": {
+      "tool_id": "sa_015_market_regime",
+      "name": "Market Regime Detector",
+      "description": "Stock Analysis Phase 3 - Market regime detection (bull/bear/sideways/volatile)",
+      "version": "1.0.0",
+      "created_at": "2026-03-21",
+      "category": "stock-analysis",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": false,
+          "default": "TEST"
+        }
+      },
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "sa_015_*.py"
+      ],
+      "quality_score": 61.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件存在且可运行",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "有时间戳"
+      }
+    },
+    "sa_016_sentiment_aggregator": {
+      "tool_id": "sa_016_sentiment_aggregator",
+      "name": "Sentiment Aggregator",
+      "description": "Stock Analysis Phase 3 - Multi-source sentiment aggregation",
+      "version": "1.0.0",
+      "created_at": "2026-03-21",
+      "category": "stock-analysis",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": false,
+          "default": "TEST"
+        }
+      },
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "sa_016_*.py"
+      ],
+      "quality_score": 61.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件存在且可运行",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "有时间戳"
+      }
+    },
+    "sa_017_strategy_optimizer": {
+      "tool_id": "sa_017_strategy_optimizer",
+      "name": "Strategy Optimizer",
+      "description": "Stock Analysis Phase 3 - Strategy parameter optimization (grid search/walk-forward)",
+      "version": "1.0.0",
+      "created_at": "2026-03-21",
+      "category": "stock-analysis",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": false,
+          "default": "TEST"
+        }
+      },
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "sa_017_*.py"
+      ],
+      "quality_score": 61.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件存在且可运行",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "有时间戳"
+      }
+    },
+    "sa_018_performance_attribution": {
+      "tool_id": "sa_018_performance_attribution",
+      "name": "Performance Attribution",
+      "description": "Stock Analysis Phase 3 - Return attribution analysis (factor decomposition)",
+      "version": "1.0.0",
+      "created_at": "2026-03-21",
+      "category": "stock-analysis",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "required": false,
+          "default": "TEST"
+        }
+      },
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "sa_018_*.py"
       ],
       "quality_score": 61.5,
       "quality_details": {

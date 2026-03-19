@@ -1,0 +1,18 @@
+{
+  "checkpoint_name": "checkpoint_step5_20260319_223224",
+  "created_at": "2026-03-19T22:32:24.412274",
+  "step_id": 5,
+  "state": {
+    "flow_id": "20260318-universal-workflow-001",
+    "current_step": 5,
+    "completed_steps": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "status": "in_progress"
+  },
+  "workflow_file": "flow-archive/20260318-universal-workflow-001/workflow.json"
+}

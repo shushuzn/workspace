@@ -1,0 +1,61 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:41:59.691402
+# ---
+======================================================================
+              SA-008: Support & Resistance
+======================================================================
+
+======================================================================
+              Support & Resistance Analyzer Status
+======================================================================
+
+[Analysis Methods]
+  - Classic Pivot Points
+  - Fibonacci Retracement
+  - Price Cluster Detection
+  - Volume Profile Analysis
+
+[Statistics]
+  Total Analyses:    0
+  Levels Detected:   0
+
+======================================================================
+
+
+[Test 1] Generate Test Data
+----------------------------------------------------------------------
+  Generated 100 candles
+  Price range: 93.70 - 140.17
+
+[Test 2] Analyze Support & Resistance
+----------------------------------------------------------------------
+  Symbol:        TEST
+  Current Price: 132.14
+
+  Pivot Points:
+    Pivot           135.32
+    Resistance 1    136.53
+    Resistance 2    137.91
+    Resistance 3    139.12
+    Support 1       133.94
+    Support 2       132.73
+    Support 3       131.35
+
+  Key Levels:
+    [1]  135.89 - resistance      (cluster) - Resistance (9 touches) [Strength: 1.00, Dist: +2.84%]
+    [2]  122.03 - support         (cluster) - Support (7 touches) [Strength: 1.00, Dist: -7.65%]
+    [3]  127.48 - support         (cluster) - Support (6 touches) [Strength: 1.00, Dist: -3.53%]
+    [4]  113.54 - support/resistance (volume) - HVN (vol ratio 3.02) [Strength: 0.91, Dist: -14.08%]
+    [5]  132.25 - support/resistance (volume) - HVN (vol ratio 2.69) [Strength: 0.81, Dist: +0.08%]
+    [6]  139.74 - resistance      (cluster) - Resistance (3 touches) [Strength: 0.76, Dist: +5.75%]
+    [7]  137.91 - resistance      (pivot ) - Resistance 2 [Strength: 0.70, Dist: +4.37%]
+    [8]  133.94 - resistance      (pivot ) - Support 1 [Strength: 0.70, Dist: +1.36%]
+
+  Recommendation: RESISTANCE TEST - Price near resistance at 132.25 (0.1% below)
+
+[Test 3] Final Statistics
+----------------------------------------------------------------------
+  Total Analyses:    1
+  Levels Detected:   10
+
+[OK] SA-008 Support & Resistance test completed

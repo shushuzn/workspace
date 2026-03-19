@@ -1,0 +1,62 @@
+[
+  {
+    "started_at": "2026-03-19T22:40:25.853646",
+    "total_tools": 4,
+    "successful": 4,
+    "failed": 0,
+    "tool_results": {
+      "tool4": {
+        "success": true,
+        "result": "tool4 result",
+        "error": null
+      },
+      "tool2": {
+        "success": true,
+        "result": "tool2 result",
+        "error": null
+      },
+      "tool3": {
+        "success": true,
+        "result": "tool3 result",
+        "error": null
+      },
+      "tool1": {
+        "success": true,
+        "result": "tool1 result",
+        "error": null
+      }
+    },
+    "total_time_seconds": 0.5020871162414551,
+    "completed_at": "2026-03-19T22:40:26.355761"
+  },
+  {
+    "started_at": "2026-03-19T22:40:33.035263",
+    "total_tools": 4,
+    "successful": 4,
+    "failed": 0,
+    "tool_results": {
+      "tool4": {
+        "success": true,
+        "result": "tool4 result",
+        "error": null
+      },
+      "tool2": {
+        "success": true,
+        "result": "tool2 result",
+        "error": null
+      },
+      "tool3": {
+        "success": true,
+        "result": "tool3 result",
+        "error": null
+      },
+      "tool1": {
+        "success": true,
+        "result": "tool1 result",
+        "error": null
+      }
+    },
+    "total_time_seconds": 0.5018630027770996,
+    "completed_at": "2026-03-19T22:40:33.537201"
+  }
+]

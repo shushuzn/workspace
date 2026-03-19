@@ -1,0 +1,18 @@
+{
+  "version": "1.0",
+  "streams": [
+    {
+      "timestamp": "2026-03-20T00:12:44.275715",
+      "success": true,
+      "chunks": 5,
+      "characters": 231,
+      "time": 0.207518
+    }
+  ],
+  "stats": {
+    "total_streams": 1,
+    "total_chunks": 5,
+    "total_characters": 231,
+    "total_time": 0.207518
+  }
+}

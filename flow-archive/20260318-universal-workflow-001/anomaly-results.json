@@ -1,0 +1,19 @@
+[
+  {
+    "step_id": "1",
+    "success": true,
+    "error": null,
+    "retries": 0,
+    "duration_seconds": 1.6e-05,
+    "anomaly_detected": false,
+    "result": "success"
+  },
+  {
+    "step_id": "2",
+    "success": false,
+    "error": "Simulated failure",
+    "retries": 3,
+    "duration_seconds": 0,
+    "anomaly_detected": true
+  }
+]

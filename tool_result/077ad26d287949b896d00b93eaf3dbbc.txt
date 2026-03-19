@@ -1,0 +1,48 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T01:01:43.286328
+# ---
+Command failed with exit code 1.
+[stdout]
+======================================================================
+                  SA-015: Market Regime Detector
+======================================================================
+
+======================================================================
+                  Market Regime Detector
+======================================================================
+
+[Regime Types]
+  - Bull/Bear/Sideways/Volatile/Transition
+
+[Statistics]
+  Total Analyses: 0
+
+======================================================================
+
+
+[Test] Detect Market Regime
+----------------------------------------------------------------------
+  Symbol:        TEST
+  Regime:        HIGHLY_VOLATILE
+  Description:   High volatility regime - expect large price swings
+  Confidence:    100%
+  Trend:         24.32%
+  Volatility:    7.79%
+  Momentum:      9.38%
+
+[OK] SA-015 Market Regime Detector test completed
+============================================================
+Git Commit + Push (with retry)
+============================================================
+
+[STEP 1] Running git add...
+[STEP 2] Running git commit...
+[stderr]
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\git_commit_helper.py", line 104, in <module>
+    main()
+    ~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\git_commit_helper.py", line 49, in main
+    print(f"[WARN] git commit failed (no changes?): {err}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\ufffd' in position 274: illegal multibyte sequence

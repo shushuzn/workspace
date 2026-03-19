@@ -1,0 +1,52 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:40:20.632254
+# ---
+======================================================================
+              SA-006: Pattern Recognition
+======================================================================
+
+======================================================================
+                Pattern Recognizer Status
+======================================================================
+
+[Pattern Types]
+  - Head Shoulders
+  - Double Top
+  - Double Bottom
+  - Triangle
+  - Flag
+  - Wedge
+  - Cup Handle
+
+[Statistics]
+  Total Recognitions: 0
+  Patterns Found:     0
+
+======================================================================
+
+
+[Test 1] Generate Test Data
+----------------------------------------------------------------------
+  Generated 100 candles
+  Price range: 99.62 - 188.46
+
+[Test 2] Scan for Patterns
+----------------------------------------------------------------------
+  Symbol:       TEST
+  Candles:      100
+  Patterns:     1
+
+  Detected Patterns:
+
+  [1] Double Bottom
+      Type:       reversal
+      Direction:  bullish
+      Confidence: 63%
+      Target:     186.82
+
+[Test 3] Final Statistics
+----------------------------------------------------------------------
+  Total Recognitions: 1
+  Patterns Found:     1
+
+[OK] SA-006 Pattern Recognition test completed

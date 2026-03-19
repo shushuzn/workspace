@@ -1,0 +1,41 @@
+{
+  "version": "1.0",
+  "retries": [
+    {
+      "timestamp": "2026-03-20T00:12:39.278001",
+      "success": true,
+      "attempts": 1,
+      "total_time": 0.0
+    },
+    {
+      "timestamp": "2026-03-20T00:12:39.281297",
+      "success": true,
+      "attempts": 1,
+      "total_time": 0.003307
+    },
+    {
+      "timestamp": "2026-03-20T00:12:40.682991",
+      "success": true,
+      "attempts": 3,
+      "total_time": 0.0
+    },
+    {
+      "timestamp": "2026-03-20T00:12:40.687101",
+      "success": true,
+      "attempts": 3,
+      "total_time": 1.403601
+    },
+    {
+      "timestamp": "2026-03-20T00:12:41.025151",
+      "success": false,
+      "attempts": 3,
+      "total_time": 0.333848
+    }
+  ],
+  "stats": {
+    "total_attempts": 11,
+    "successful_retries": 4,
+    "failed_retries": 1,
+    "total_retry_time": 1.740756
+  }
+}

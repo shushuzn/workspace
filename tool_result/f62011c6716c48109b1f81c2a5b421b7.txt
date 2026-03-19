@@ -1,0 +1,90 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:30:47.332575
+# ---
+======================================================================
+             SA-003: Financial Data Collector
+======================================================================
+
+======================================================================
+                Financial Data Collector Status
+======================================================================
+
+[Report Types]
+  - quarterly
+  - annual
+
+[Financial Metrics]
+  income_statement: 6 metrics
+  balance_sheet: 6 metrics
+  cash_flow: 5 metrics
+  ratios: 9 metrics
+
+[Statistics]
+  Total Collections: 0
+  Successful:        0
+  Failed:            0
+  Total Reports:     0
+
+======================================================================
+
+
+[Test 1] Collect Quarterly Financials (AAPL, 4 periods)
+----------------------------------------------------------------------
+[INFO] Collecting quarterly financials for AAPL (4 periods)
+  Symbol:         AAPL
+  Report Type:    quarterly
+  Periods:        4
+
+  Latest Period:  2026-Q1
+
+  Income Statement:
+    Revenue:          $1.73B
+    Gross Profit:     $0.71B
+    Net Income:       $0.19B
+    EPS:              $1.43
+
+[Test 2] Get Financial Ratios
+----------------------------------------------------------------------
+[INFO] Collecting quarterly financials for AAPL (1 periods)
+  Symbol:   AAPL
+  Period:   2026-Q1
+
+  Ratios:
+    pe_ratio             26.00
+    pb_ratio             3.00
+    roe                  11.00%
+    roa                  6.00%
+    gross_margin         41.00%
+    net_margin           11.00%
+    debt_to_equity       51.00%
+    current_ratio        1.60
+    quick_ratio          1.90
+
+[Test 3] Compare Periods (Growth Rates)
+----------------------------------------------------------------------
+[INFO] Collecting quarterly financials for AAPL (2 periods)
+  Symbol:         AAPL
+  Latest:         2026-Q1
+  Previous:       2025-Q4
+
+  Growth Rates:
+    revenue              -5.66%
+    gross_profit         -5.66%
+    net_income           -5.66%
+    eps                  -5.92%
+
+[Test 4] Collect Annual Financials (2 periods)
+----------------------------------------------------------------------
+[INFO] Collecting annual financials for AAPL (2 periods)
+  Periods: 2
+  2026-FY: Revenue $1.73B
+  2025-FY: Revenue $1.84B
+
+[Test 5] Final Statistics
+----------------------------------------------------------------------
+  Total Collections: 4
+  Successful:        4
+  Failed:            0
+  Total Reports:     9
+
+[OK] SA-003 Financial Data Collector test completed

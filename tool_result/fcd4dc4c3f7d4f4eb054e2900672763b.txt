@@ -1,0 +1,61 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:46:06.954044
+# ---
+======================================================================
+                  SA-009: Risk Management
+======================================================================
+
+======================================================================
+                  Risk Manager Status
+======================================================================
+
+[Risk Management Features]
+  - Position Sizing (Kelly-based)
+  - Stop Loss Calculation (ATR/Support/Percentage)
+  - Take Profit Targets (R:R based)
+  - Risk-Reward Analysis
+
+[Statistics]
+  Total Analyses:        0
+  Positions Calculated:  0
+
+======================================================================
+
+
+[Test 1] Analyze Sample Trade
+----------------------------------------------------------------------
+  Symbol:           TEST
+  Entry Price:      $100.0
+  Account Size:     $100,000
+
+  Position Sizing:
+    Risk per Trade:   2.0% ($2,000.00)
+    Stop Loss:        $95.0
+    Position Size:    400 shares
+    Position Value:   $40,000.00 (40.0% of account)
+    Max Loss:         $2,000.00
+
+  Stop Loss:
+    Method:           volatility
+    Stop Price:       $95.0
+    Stop Distance:    5.0%
+    ATR Multiple:     2.0x
+
+  Take Profit:
+    TP1    $ 105.00 (+5.0%) - 50%
+    TP2    $ 110.00 (+10.0%) - 50%
+
+  Risk-Reward:
+    R:R Ratio:        2.00:1
+    Quality:          GOOD
+    Risk:             5.00%
+    Reward:           10.00%
+
+  Recommendation: GOOD TRADE SETUP - R:R good, position size 40.0% of account
+
+[Test 2] Final Statistics
+----------------------------------------------------------------------
+  Total Analyses:        1
+  Positions Calculated:  1
+
+[OK] SA-009 Risk Management test completed

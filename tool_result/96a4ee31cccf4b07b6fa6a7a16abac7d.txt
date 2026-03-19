@@ -1,0 +1,77 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:13:04.296437
+# ---
+Progressive Output Test
+======================================================================
+
+======================================================================
+                  Progressive Output Status
+======================================================================
+
+[Configuration]
+  Chunk Size:     50 chars
+  Chunk Delay:    0.05s
+  Show Progress:  True
+
+[Statistics]
+  Total Streams:    0
+  Total Chunks:     0
+  Total Characters: 0
+  Total Time:       0.00s
+
+======================================================================
+
+
+[Test 1] Stream Text
+----------------------------------------------------------------------
+This is a test of progressive output streaming. The text will be displayed 
+    in chunks of 50 characters with a small delay between each chunk. This creates
+    a typing effect that can improve user experience for long responses.
+
+  Chunks: 5
+  Characters: 231
+  Time: 0.21s
+
+[Test 2] Stream Lines
+----------------------------------------------------------------------
+Line 1: Introduction
+Line 2: Main content
+Line 3: More details
+Line 4: Additional info
+Line 5: Conclusion
+
+  Lines: 5/5
+  Time: 0.26s
+
+[Test 3] Stream from Generator
+----------------------------------------------------------------------
+Chunk 1/10 generated dynamically
+Chunk 2/10 generated dynamically
+Chunk 3/10 generated dynamically
+Chunk 4/10 generated dynamically
+Chunk 5/10 generated dynamically
+Chunk 6/10 generated dynamically
+Chunk 7/10 generated dynamically
+Chunk 8/10 generated dynamically
+Chunk 9/10 generated dynamically
+Chunk 10/10 generated dynamically
+
+  Chunks: 10
+  Characters: 331
+  Time: 1.08s
+
+[Test 4] Chunk Calculation
+----------------------------------------------------------------------
+  Text length: 237 chars
+  Chunk size: 50 chars
+  Number of chunks: 5
+  Last chunk size: 37 chars
+
+[Test 5] Different Chunk Sizes
+----------------------------------------------------------------------
+  Chunk size  20: 12 chunks
+  Chunk size  50:  5 chunks
+  Chunk size 100:  3 chunks
+  Chunk size 200:  2 chunks
+
+[OK] Progressive output test completed

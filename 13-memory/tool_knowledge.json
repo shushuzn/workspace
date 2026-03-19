@@ -1,0 +1,198 @@
+{
+  "version": "1.0",
+  "created_at": "2026-03-19T23:21:55.410762",
+  "known_tools": {
+    "auto-critic": {
+      "tool_id": "auto-critic",
+      "learned_at": "2026-03-19T23:21:55.418359",
+      "category": "quality",
+      "description": "全自动批判者审查工具 - 事前/事中/事后全流程审查",
+      "file_path": "",
+      "usage_patterns": [],
+      "best_practices": [],
+      "common_errors": [],
+      "compatibility": [],
+      "last_used": null,
+      "use_count": 0,
+      "success_rate": 100,
+      "complexity": "medium",
+      "risk_level": "low",
+      "dependencies": [],
+      "input_requirements": [],
+      "output_format": "",
+      "side_effects": []
+    },
+    "memory-consistency-checker": {
+      "tool_id": "memory-consistency-checker",
+      "learned_at": "2026-03-19T23:21:55.420126",
+      "category": "memory",
+      "description": "记忆数据一致性检查工具 - 确保索引与数据同步",
+      "file_path": "",
+      "usage_patterns": [],
+      "best_practices": [],
+      "common_errors": [],
+      "compatibility": [],
+      "last_used": null,
+      "use_count": 0,
+      "success_rate": 100,
+      "complexity": "medium",
+      "risk_level": "low",
+      "dependencies": [],
+      "input_requirements": [],
+      "output_format": "",
+      "side_effects": []
+    },
+    "memory-quality-scorer": {
+      "tool_id": "memory-quality-scorer",
+      "learned_at": "2026-03-19T23:21:55.421101",
+      "category": "memory",
+      "description": "记忆质量评分工具 - 5 维度评分 (完整性/结构化/密度/可执行性/独特性)",
+      "file_path": "",
+      "usage_patterns": [],
+      "best_practices": [],
+      "common_errors": [],
+      "compatibility": [],
+      "last_used": null,
+      "use_count": 0,
+      "success_rate": 100,
+      "complexity": "medium",
+      "risk_level": "low",
+      "dependencies": [],
+      "input_requirements": [],
+      "output_format": "",
+      "side_effects": []
+    },
+    "remediation-tracker": {
+      "tool_id": "remediation-tracker",
+      "learned_at": "2026-03-19T23:21:55.422175",
+      "category": "quality",
+      "description": "整改跟踪器 - 管理 FAIL 项整改闭环",
+      "file_path": "",
+      "usage_patterns": [],
+      "best_practices": [],
+      "common_errors": [],
+      "compatibility": [],
+      "last_used": null,
+      "use_count": 0,
+      "success_rate": 100,
+      "complexity": "medium",
+      "risk_level": "low",
+      "dependencies": [],
+      "input_requirements": [],
+      "output_format": "",
+      "side_effects": []
+    },
+    "p1-issue-fixer": {
+      "tool_id": "p1-issue-fixer",
+      "learned_at": "2026-03-19T23:21:55.423141",
+      "category": "code-quality",
+      "description": "自动修复 P1 优先级问题（os.system/eval/exec 替换）",
+      "file_path": "",
+      "usage_patterns": [],
+      "best_practices": [],
+      "common_errors": [],
+      "compatibility": [],
+      "last_used": null,
+      "use_count": 0,
+      "success_rate": 100,
+      "complexity": "medium",
+      "risk_level": "low",
+      "dependencies": [],
+      "input_requirements": [],
+      "output_format": "",
+      "side_effects": []
+    },
+    "task_decomposer": {
+      "tool_id": "task_decomposer",
+      "learned_at": "2026-03-19T23:21:55.432415",
+      "category": "productivity",
+      "description": "Auto-decompose large tasks into <=10min subtasks",
+      "file_path": "30-scripts-tools/task_decomposer.py",
+      "usage_patterns": [
+        {
+          "timestamp": "2026-03-19T23:21:55.433690",
+          "context": {
+            "task": "decompose project"
+          },
+          "success": true
+        },
+        {
+          "timestamp": "2026-03-19T23:21:59.913566",
+          "context": {
+            "task": "decompose project"
+          },
+          "success": true
+        }
+      ],
+      "best_practices": [],
+      "common_errors": [],
+      "compatibility": [],
+      "last_used": "2026-03-19T23:21:59.913521",
+      "use_count": 2,
+      "success_rate": 100,
+      "complexity": "medium",
+      "risk_level": "low",
+      "dependencies": [],
+      "input_requirements": [],
+      "output_format": "",
+      "side_effects": []
+    }
+  },
+  "tool_patterns": {},
+  "learning_history": [
+    {
+      "timestamp": "2026-03-19T23:21:55.418376",
+      "action": "learn_tool",
+      "tool_id": "auto-critic",
+      "result": "success"
+    },
+    {
+      "timestamp": "2026-03-19T23:21:55.420136",
+      "action": "learn_tool",
+      "tool_id": "memory-consistency-checker",
+      "result": "success"
+    },
+    {
+      "timestamp": "2026-03-19T23:21:55.421110",
+      "action": "learn_tool",
+      "tool_id": "memory-quality-scorer",
+      "result": "success"
+    },
+    {
+      "timestamp": "2026-03-19T23:21:55.422185",
+      "action": "learn_tool",
+      "tool_id": "remediation-tracker",
+      "result": "success"
+    },
+    {
+      "timestamp": "2026-03-19T23:21:55.423150",
+      "action": "learn_tool",
+      "tool_id": "p1-issue-fixer",
+      "result": "success"
+    },
+    {
+      "timestamp": "2026-03-19T23:21:55.432429",
+      "action": "learn_tool",
+      "tool_id": "task_decomposer",
+      "result": "success"
+    },
+    {
+      "timestamp": "2026-03-19T23:21:55.433693",
+      "action": "use_tool",
+      "tool_id": "task_decomposer",
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-19T23:21:59.913569",
+      "action": "use_tool",
+      "tool_id": "task_decomposer",
+      "success": true
+    }
+  ],
+  "stats": {
+    "tools_learned": 6,
+    "patterns_discovered": 0,
+    "successful_uses": 2,
+    "failed_uses": 0
+  }
+}

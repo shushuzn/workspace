@@ -1,0 +1,62 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:31:24.995463
+# ---
+Human Intent Understanding Test
+======================================================================
+
+======================================================================
+                    Human Intent Understanding
+======================================================================
+
+[Statistics]
+  Total Interactions:   5
+  Intents Detected:     1
+  Accuracy Rate:        20.0%
+
+[Intent Categories]
+  urgency         4 patterns
+  action_type     6 patterns
+  emotion         4 patterns
+  implicit_need   5 patterns
+
+======================================================================
+
+[Analyzing User Inputs]
+
+  Input: 请尽快帮我修复这个 bug，今天要用！
+    Urgency: high_priority
+    Action: N/A
+    Emotion: neutral
+    Implicit: N/A
+    Confidence: 65.0%
+    Suggestions: Prioritize this task immediately
+
+  Input: 有空的时候检查一下这个文件
+    Urgency: N/A
+    Action: N/A
+    Emotion: neutral
+    Implicit: N/A
+    Confidence: 30.0%
+
+  Input: 这个文件太大了，能不能压缩一下？
+    Urgency: N/A
+    Action: N/A
+    Emotion: neutral
+    Implicit: N/A
+    Confidence: 30.0%
+
+  Input: 又错了！为什么总是出问题？
+    Urgency: N/A
+    Action: N/A
+    Emotion: neutral
+    Implicit: N/A
+    Confidence: 30.0%
+
+  Input: 请建议我如何优化性能
+    Urgency: N/A
+    Action: N/A
+    Emotion: neutral
+    Implicit: N/A
+    Confidence: 30.0%
+
+[OK] Intent understanding test completed

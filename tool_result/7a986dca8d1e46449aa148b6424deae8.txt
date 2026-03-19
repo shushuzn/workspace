@@ -1,0 +1,961 @@
+# tool_name: read_file
+# created_at: 2026-03-20T00:42:29.541386
+# ---
+{
+  "version": "1.11.27",
+  "last_updated": "2026-03-20T00:31:01.176024",
+  "changes": [
+    "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
+    "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
+    "v1.11.1: Added brainstorm workflow v2.0 tools (divergent, convergent, facilitator, critic-lite)",
+    "Added workflow-enforcer tool for mandatory workflow compliance",
+    "v1.5.0: Added workflow-research sub-workflow tool (research-001)",
+    "Added workflow-project sub-workflow tool (project-001)",
+    "Updated workflows section with research-001 and project-001",
+    "v1.4.0: Added auto-critic-v7 with issue detection and remediation tracking",
+    "Added issue-scanner for comprehensive code scanning",
+    "Added critical-issue-detector for high-risk issue detection",
+    "Added remediation-tracker for FAIL item tracking",
+    "Added quality-gate for code quality checks",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement",
+    "Added brainstorm workflow tools (define, diverge, prioritize, action)",
+    "Added brainstorm workflow tools (define, diverge, prioritize, action)",
+    "Brainstorm workflow archived in flow-archive/20260318-brainstorm-001/",
+    "Added sub-workflows as tools (session-end, brainstorm)"
+  ],
+  "description": "唯一工具库 - 全系统唯一真值来源",
+  "principles": [
+    "唯一数据源原则：所有工具只允许有一份唯一定义",
+    "引用优先原则：工作流只引用 tool_id，禁止硬编码",
+    "实时生效原则：工具修改后引用自动同步生效",
+    "禁止重写工具原则：所有工具脚本禁止被其他脚本重写或修改",
+    "统一调用原则：所有工具只能通过 tool_executor.py 调用，禁止直接调用工具脚本"
+  ],
+  "enforcement_rules": {
+    "tool_calling": {
+      "rule": "所有工具必须通过 tool_executor.py 调用",
+      "reason": "确保步骤追踪、强制检查、日志记录统一生效",
+      "violation": "直接调用工具脚本（如 subprocess.run(['py', 'tool.py'])）",
+      "compliance": "通过 tool_executor 调用（subprocess.run(['tool_executor.py', 'tool_id'])）"
+    },
+    "tool_modification": {
+      "rule": "禁止重写或修改工具脚本",
+      "reason": "保持工具稳定性和一致性",
+      "violation": "修改工具脚本文件内容",
+      "compliance": "通过 tools_registry.json 配置调整工具行为"
+    },
+    "tool_registration": {
+      "rule": "新工具必须注册到 tools_registry.json",
+      "reason": "确保工具可追踪、可验证、可审计",
+      "violation": "未注册的工具脚本",
+      "compliance": "使用 register_tools.py 批量注册或手动添加到 registry"
+    }
+  },
+  "tools": {
+    "auto-critic": {
+      "tool_id": "auto-critic",
+      "name": "Auto-Critic v6.0",
+      "description": "全自动批判者审查工具 - 事前/事中/事后全流程审查",
+      "version": "6.0",
+      "command": "py 30-scripts-tools\\auto-critic.py -t \"{task}\" -p {phase}",
+      "parameters": {
+        "task": {
+          "type": "string",
+          "required": true,
+          "description": "任务名称（用于生成审查文件名）",
+          "validation": "^[a-zA-Z0-9-_]+$"
+        },
+        "phase": {
+          "type": "string",
+          "required": true,
+          "description": "审查阶段",
+          "enum": [
+            "start",
+            "mid",
+            "final"
+          ],
+          "default": "final"
+        }
+      },
+      "validation": {
+        "review_file": "30-scripts-tools/critic-auto-{task}.json",
+        "score_threshold": 95,
+        "zero_score_items": [
+          "批判者自动调用",
+          "工具创建了必须使用",
+          "当日笔记压缩<100 行",
+          "会话压缩执行",
+          "上下文大小验证<100KB",
+          "工作区正确性 D 盘",
+          "检查项必须有证据"
+        ]
+      },
+      "triggers": [
+        "session_end",
+        "task_complete"
+      ],
+      "review_required": true,
+      "blocking": false,
+      "timeout_seconds": 60,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330638",
+      "categorized_method": "auto",
+      "usage_count": 44,
+      "usage_files": [
+        "auto-critic.py",
+        "auto-critic_v7.py",
+        "check_key_tools.py",
+        "critical_issue_detector.py",
+        "find_unsafe_calls.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013670",
+      "quality_score": 64.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:False",
+        "usage": "中频使用 (44 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "memory-consistency-checker": {
+      "tool_id": "memory-consistency-checker",
+      "name": "Memory Consistency Checker",
+      "description": "记忆数据一致性检查工具 - 确保索引与数据同步",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\memory_consistency_checker.py",
+      "parameters": {},
+      "validation": {
+        "report_file": "30-scripts-tools/consistency_check_report.json",
+        "consistency_threshold": 0.95
+      },
+      "triggers": [
+        "session_end"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330675",
+      "categorized_method": "auto",
+      "quality_score": 43.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:False, 示例:False",
+        "usage": "未使用 (0 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "memory-quality-scorer": {
+      "tool_id": "memory-quality-scorer",
+      "name": "Memory Quality Scorer",
+      "description": "记忆质量评分工具 - 5 维度评分 (完整性/结构化/密度/可执行性/独特性)",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\memory_quality_scorer.py --report --days {days}",
+      "parameters": {
+        "days": {
+          "type": "integer",
+          "required": false,
+          "description": "处理最近 N 天",
+          "default": 14,
+          "min": 1,
+          "max": 90
+        }
+      },
+      "validation": {
+        "grade_levels": [
+          "A",
+          "B",
+          "C",
+          "D",
+          "F"
+        ],
+        "dimensions": [
+          "completeness",
+          "structure",
+          "density",
+          "actionability",
+          "uniqueness"
+        ],
+        "total_score_max": 100
+      },
+      "triggers": [
+        "weekly_sunday"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330683",
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013914",
+      "quality_score": 52.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:False",
+        "usage": "低频使用 (2 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "remediation-tracker": {
+      "tool_id": "remediation-tracker",
+      "name": "Remediation Tracker",
+      "description": "整改跟踪器 - 管理 FAIL 项整改闭环",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\remediation_tracker.py --create --fail-items {file}",
+      "parameters": {
+        "create": {
+          "type": "boolean",
+          "required": false,
+          "description": "创建整改任务"
+        },
+        "fail-items": {
+          "type": "string",
+          "required": false,
+          "description": "FAIL 项 JSON 文件"
+        },
+        "report": {
+          "type": "boolean",
+          "required": false,
+          "description": "生成报告"
+        }
+      },
+      "validation": {
+        "task_status": [
+          "open",
+          "in_progress",
+          "resolved",
+          "verified",
+          "closed",
+          "overdue"
+        ],
+        "severity_levels": [
+          "blocker",
+          "warning",
+          "info"
+        ]
+      },
+      "triggers": [
+        "auto_critic_v7_fail"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 30,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330695",
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013718",
+      "quality_score": 52.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:False",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "p1-issue-fixer": {
+      "tool_id": "p1-issue-fixer",
+      "name": "P1 Issue Auto-Fixer",
+      "description": "自动修复 P1 优先级问题（os.system/eval/exec 替换）",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\p1_issue_fixer.py --{action}",
+      "parameters": {
+        "action": {
+          "type": "string",
+          "required": true,
+          "description": "操作类型",
+          "enum": [
+            "scan",
+            "fix",
+            "verify"
+          ],
+          "default": "fix"
+        }
+      },
+      "validation": {
+        "os_system_remaining": 0,
+        "eval_exec_remaining": 0
+      },
+      "category": "code-quality",
+      "priority": "P1",
+      "auto_run": true,
+      "usage_count": 5,
+      "usage_files": [
+        "register_p1_fixer.py",
+        "update_session_end_workflow.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014061",
+      "quality_score": 61.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:False",
+        "usage": "低频使用 (5 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "flow-manager": {
+      "tool_id": "flow-manager",
+      "command": "py 30-scripts-tools/flow_manager.py ${args}",
+      "description": "Flow ID 管理器 - 创建/快照/恢复/归档工作流",
+      "version": "1.0.0",
+      "created_at": "2026-03-18",
+      "parameters": {
+        "create": {
+          "type": "string",
+          "description": "业务名称，用于生成 Flow ID",
+          "required": false
+        },
+        "description": {
+          "type": "string",
+          "description": "工作流描述",
+          "required": false
+        },
+        "snapshot": {
+          "type": "string",
+          "description": "Flow ID，保存状态快照",
+          "required": false
+        },
+        "restore": {
+          "type": "string",
+          "description": "Flow ID，恢复状态",
+          "required": false
+        },
+        "archive": {
+          "type": "string",
+          "description": "Flow ID，归档工作流",
+          "required": false
+        },
+        "list": {
+          "type": "boolean",
+          "description": "列出所有工作流",
+          "required": false
+        },
+        "variables": {
+          "type": "string",
+          "description": "变量 (JSON 格式)",
+          "required": false
+        },
+        "context": {
+          "type": "string",
+          "description": "上下文 (JSON 格式)",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/flow_manager.py --create memory-search --description '优化记忆搜索性能'",
+        "py 30-scripts-tools/flow_manager.py --snapshot 20260318-memory-search-001 --variables '{\"step\": 3}'",
+        "py 30-scripts-tools/flow_manager.py --restore 20260318-memory-search-001",
+        "py 30-scripts-tools/flow_manager.py --list",
+        "py 30-scripts-tools/flow_manager.py --archive 20260318-memory-search-001"
+      ],
+      "validation": {
+        "workspace_check": true,
+        "flow_archive_exists": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330698",
+      "categorized_method": "auto",
+      "usage_count": 6,
+      "usage_files": [
+        "check_flow_manager.py",
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py",
+        "register_core_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013802",
+      "quality_score": 56.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (6 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "brainstorm-define": {
+      "tool_id": "brainstorm-define",
+      "name": "Brainstorm Define",
+      "description": "头脑风暴定义工具 - 帮助定义问题范围、目标和约束条件，生成结构化的问题定义文档",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\brainstorm_define.py",
+      "parameters": [
+        {
+          "name": "topic",
+          "type": "string",
+          "required": true,
+          "description": "头脑风暴主题"
+        },
+        {
+          "name": "constraints",
+          "type": "list",
+          "required": false,
+          "description": "约束条件列表"
+        }
+      ],
+      "validation": {
+        "output_file": "30-scripts-tools/brainstorm_topic.json"
+      },
+      "triggers": [
+        "manual"
+      ],
+      "review_required": false,
+      "blocking": true,
+      "timeout_seconds": 600,
+      "category": "automation",
+      "categorized_at": "2026-03-19T17:20:34.330700",
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013720",
+      "quality_score": 56.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      },
+      "examples": [
+        "py brainstorm_define.py --topic \"AI  Agent 自主性提升\"",
+        "py brainstorm_define.py --topic \"工具库优化\" --constraints \"[\"时间<1 小时\", \"不影响核心功能\"]\""
+      ],
+      "improved_at": "2026-03-19T18:20:28.908454",
+      "improvement_version": "1.1.0"
+    },
+    "brainstorm-action": {
+      "tool_id": "brainstorm-action",
+      "name": "Brainstorm Action",
+      "description": "头脑风暴行动规划工具 - 将头脑风暴结果转化为可执行的行动计划，包含步骤、时间、负责人",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\brainstorm_action.py",
+      "parameters": [
+        {
+          "name": "prioritized_ideas",
+          "type": "list",
+          "required": true,
+          "description": "已排序的想法"
+        },
+        {
+          "name": "timeline",
+          "type": "string",
+          "required": false,
+          "description": "时间线 (如\"本周\", \"本月\")"
+        }
+      ],
+      "validation": {
+        "output_file": "30-scripts-tools/action_plan.md",
+        "min_actions": 3
+      },
+      "triggers": [
+        "manual"
+      ],
+      "review_required": false,
+      "blocking": true,
+      "timeout_seconds": 600,
+      "category": "automation",
+      "categorized_at": "2026-03-19T17:20:34.330705",
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013724",
+      "quality_score": 56.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      },
+      "examples": [
+        "py brainstorm_action.py --prioritized_ideas \"[...]\" --timeline \"本周\""
+      ],
+      "improved_at": "2026-03-19T18:20:28.908492",
+      "improvement_version": "1.1.0"
+    },
+    "workflow-enforcer": {
+      "category": "workflow-enforcement",
+      "description": "工作流强制执行器 - 会话前/提交前检查",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/workflow_enforcer.py",
+      "created_at": "2026-03-20T21:45:00+08:00"
+    },
+    "advanced_report_gen": {
+      "tool_id": "advanced_report_gen",
+      "command": "py 30-scripts-tools/advanced_report_gen.py ${args}",
+      "description": "报告生成",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "reporting",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/advanced_report_gen.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "advanced_report_gen.py",
+        "batch_security_fixer.py",
+        "security_validator.py",
+        "workflow_enhancer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013634",
+      "quality_score": 49.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "中频使用 (10 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "ai_task_scheduler": {
+      "tool_id": "ai_task_scheduler",
+      "command": "py 30-scripts-tools/ai_task_scheduler.py ${args}",
+      "description": "ai_task_scheduler 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "automation",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/ai_task_scheduler.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014104",
+      "recategorized_at": "2026-03-19T17:34:42.034372",
+      "recategorized_from": "general",
+      "quality_score": 46.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "anomaly_detector": {
+      "tool_id": "anomaly_detector",
+      "command": "py 30-scripts-tools/anomaly_detector.py ${args}",
+      "description": "anomaly_detector 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "analysis",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/anomaly_detector.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "anomaly_detector.py",
+        "health_monitor_ai.py",
+        "predictive_analytics.py",
+        "workflow_generator.py",
+        "workflow_optimizer_ai.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013638",
+      "recategorized_at": "2026-03-19T17:34:42.034448",
+      "recategorized_from": "general",
+      "quality_score": 49.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "中频使用 (10 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "anomaly_detector_pro": {
+      "tool_id": "anomaly_detector_pro",
+      "command": "py 30-scripts-tools/anomaly_detector_pro.py ${args}",
+      "description": "anomaly_detector_pro 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "analysis",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/anomaly_detector_pro.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 1,
+      "usage_files": [
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014105",
+      "recategorized_at": "2026-03-19T17:34:42.034463",
+      "recategorized_from": "general",
+      "quality_score": 56.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "api_gateway": {
+      "tool_id": "api_gateway",
+      "command": "py 30-scripts-tools/api_gateway.py ${args}",
+      "description": "api_gateway 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "general",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/api_gateway.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "api_gateway.py",
+        "auto_fix_orchestrator.py",
+        "batch_security_fixer.py",
+        "predictive_alerting_engine.py",
+        "security_validator.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013642",
+      "quality_score": 46.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "低频使用 (8 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "arxiv_collector_v2": {
+      "tool_id": "arxiv_collector_v2",
+      "command": "py 30-scripts-tools/arxiv_collector_v2.py ${args}",
+      "description": "arxiv_collector_v2 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "general",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/arxiv_collector_v2.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 3,
+      "usage_files": [
+        "obsidian_tools.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013997",
+      "quality_score": 56.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (3 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "arxiv_workflow": {
+      "tool_id": "arxiv_workflow",
+      "command": "py 30-scripts-tools/arxiv_workflow.py ${args}",
+      "description": "工作流工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "workflow",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/arxiv_workflow.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "arxiv_workflow.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013662",
+      "quality_score": 46.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "低频使用 (6 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "auto_critic": {
+      "tool_id": "auto_critic",
+      "command": "py 30-scripts-tools/auto-critic.py ${args}",
+      "description": "批判者工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "quality",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/auto-critic.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 6,
+      "usage_files": [
+        "auto-critic.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013672",
+      "quality_score": 46.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "低频使用 (6 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "auto_critic_v7": {
+      "tool_id": "auto_critic_v7",
+      "command": "py 30-scripts-tools/auto-critic_v7.py -t workflow_execution -p final",
+      "description": "批判者工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "quality",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/auto-critic_v7.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 5,
+      "usage_files": [
+        "check_key_tools.py",
+        "execute_step_fixed.py",
+        "fix_tool_commands.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013808",
+      "quality_score": 46.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "低频使用 (5 次)",
+        "maintenance": "无时间戳"
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "code_written",
+          "description": "代码完成自动审查"
+        },
+        {
+          "type": "event",
+          "event": "pre_commit",
+          "description": "提交前自动审查"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515276"
+    },
+    "auto_data_cleaner": {
+      "tool_id": "auto_data_cleaner",
+      "command": "py 30-scripts-tools/auto_data_cleaner.py ${args}",
+      "description": "auto_data_cleaner 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "automation",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/auto_data_cleaner.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 7,
+      "usage_files": [
+        "auto_data_cleaner.py",
+        "batch_security_fixer.py",
+        "openclaw.py",
+        "phase4_dashboard.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013725",
+      "recategorized_at": "2026-03-19T17:34:42.034511",
+      "recategorized_from": "general",
+      "quality_score": 55.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "低频使用 (7 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "auto_deploy": {
+      "tool_id": "auto_deploy",
+      "command": "py 30-scripts-tools/auto_deploy.py ${args}",
+      "description": "auto_deploy 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "automation",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/auto_deploy.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 4,
+      "usage_files": [
+        "auto_deploy.py",
+        "batch_security_fixer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013727",
+      "recategorized_at": "2026-03-19T17:34:42.034523",
+      "recategorized_from": "general",
+      "quality_score": 55.5,
+      "quality_details": {
+
+[Output truncated: showing lines 1-956 of 14924 (30KB limit). Use start_line=957 to continue.]

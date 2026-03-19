@@ -1,0 +1,43 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T22:32:28.238349
+# ---
+Workflow Templates Test
+======================================================================
+
+[OK] Created default templates
+[OK] Available templates: 4
+[OK] Used template: research-001
+
+======================================================================
+                      Workflow Templates Library
+======================================================================
+
+[Library Stats]
+  Total Templates:  4
+  Total Uses:       1
+
+[Available Templates]
+
+  research-001: Research Task
+    Description: Standard research workflow with literature review and analysis
+    Steps: 7
+    Uses: 1
+
+  project-001: Project Task
+    Description: Standard project execution workflow
+    Steps: 7
+    Uses: 0
+
+  doc-001: Documentation Task
+    Description: Quick documentation workflow
+    Steps: 5
+    Uses: 0
+
+  fix-001: Quick Fix
+    Description: Fast bug fix workflow (skip heavy validation)
+    Steps: 4
+    Uses: 0
+
+======================================================================
+
+[OK] Templates test completed

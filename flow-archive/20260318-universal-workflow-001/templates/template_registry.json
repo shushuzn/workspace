@@ -1,0 +1,138 @@
+{
+  "templates": {
+    "research-001": {
+      "id": "research-001",
+      "name": "Research Task",
+      "description": "Standard research workflow with literature review and analysis",
+      "steps": [
+        {
+          "id": 1,
+          "name": "Define research question"
+        },
+        {
+          "id": 2,
+          "name": "Literature search"
+        },
+        {
+          "id": 3,
+          "name": "Data collection"
+        },
+        {
+          "id": 4,
+          "name": "Analysis"
+        },
+        {
+          "id": 5,
+          "name": "Write report"
+        },
+        {
+          "id": 6,
+          "name": "Review and validate"
+        },
+        {
+          "id": 7,
+          "name": "Publish results"
+        }
+      ],
+      "created_at": "2026-03-19T22:32:15.312709",
+      "uses": 1,
+      "file": "flow-archive\\20260318-universal-workflow-001\\templates\\research-001.json"
+    },
+    "project-001": {
+      "id": "project-001",
+      "name": "Project Task",
+      "description": "Standard project execution workflow",
+      "steps": [
+        {
+          "id": 1,
+          "name": "Define project scope"
+        },
+        {
+          "id": 2,
+          "name": "Plan tasks"
+        },
+        {
+          "id": 3,
+          "name": "Execute tasks"
+        },
+        {
+          "id": 4,
+          "name": "Test and validate"
+        },
+        {
+          "id": 5,
+          "name": "Document"
+        },
+        {
+          "id": 6,
+          "name": "Deploy"
+        },
+        {
+          "id": 7,
+          "name": "Review"
+        }
+      ],
+      "created_at": "2026-03-19T22:32:15.314067",
+      "uses": 0,
+      "file": "flow-archive\\20260318-universal-workflow-001\\templates\\project-001.json"
+    },
+    "doc-001": {
+      "id": "doc-001",
+      "name": "Documentation Task",
+      "description": "Quick documentation workflow",
+      "steps": [
+        {
+          "id": 1,
+          "name": "Gather requirements"
+        },
+        {
+          "id": 2,
+          "name": "Draft content"
+        },
+        {
+          "id": 3,
+          "name": "Review"
+        },
+        {
+          "id": 4,
+          "name": "Format"
+        },
+        {
+          "id": 5,
+          "name": "Publish"
+        }
+      ],
+      "created_at": "2026-03-19T22:32:15.316856",
+      "uses": 0,
+      "file": "flow-archive\\20260318-universal-workflow-001\\templates\\doc-001.json"
+    },
+    "fix-001": {
+      "id": "fix-001",
+      "name": "Quick Fix",
+      "description": "Fast bug fix workflow (skip heavy validation)",
+      "steps": [
+        {
+          "id": 1,
+          "name": "Identify issue"
+        },
+        {
+          "id": 2,
+          "name": "Fix code"
+        },
+        {
+          "id": 3,
+          "name": "Test fix"
+        },
+        {
+          "id": 4,
+          "name": "Commit"
+        }
+      ],
+      "created_at": "2026-03-19T22:32:15.318996",
+      "uses": 0,
+      "file": "flow-archive\\20260318-universal-workflow-001\\templates\\fix-001.json"
+    }
+  },
+  "total_uses": 1,
+  "updated_at": "2026-03-19T22:32:15.320480"
+}

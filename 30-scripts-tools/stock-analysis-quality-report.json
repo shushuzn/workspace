@@ -1,0 +1,67 @@
+{
+  "generated_at": "2026-03-20T00:20:12.124260",
+  "workflow_name": "Stock Analysis Workflow",
+  "overall_score": 98.5,
+  "grade": "A - Excellent",
+  "dimensions": {
+    "completeness": {
+      "name": "完整性",
+      "score": 100,
+      "weight": 0.25
+    },
+    "feasibility": {
+      "name": "可行性",
+      "score": 100,
+      "weight": 0.25
+    },
+    "value": {
+      "name": "价值",
+      "score": 100,
+      "weight": 0.2
+    },
+    "innovation": {
+      "name": "创新性",
+      "score": 90,
+      "weight": 0.15
+    },
+    "maintainability": {
+      "name": "可维护性",
+      "score": 100,
+      "weight": 0.15
+    }
+  },
+  "recommendations": [
+    {
+      "type": "strength",
+      "dimension": "maintainability",
+      "score": 100,
+      "text": "最强维度：可维护性 (100分)"
+    },
+    {
+      "type": "improvement",
+      "dimension": "innovation",
+      "score": 90,
+      "text": "需改进：创新性 (90分)"
+    },
+    {
+      "type": "priority",
+      "text": "建议优先实施 Phase 1 (数据基础)，确保数据质量"
+    },
+    {
+      "type": "risk",
+      "text": "SA-024 自动交易接口风险极高，建议单独评估或延后"
+    },
+    {
+      "type": "validation",
+      "text": "SA-018 信号回测必须包含样本外验证和交叉验证"
+    },
+    {
+      "type": "data",
+      "text": "建议至少准备 3 个备用数据源以防 API 限制"
+    }
+  ],
+  "total_components": 24,
+  "p0_components": 18,
+  "p1_components": 6,
+  "estimated_effort_hours": 153
+}

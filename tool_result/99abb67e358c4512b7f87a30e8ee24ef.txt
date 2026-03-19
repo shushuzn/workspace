@@ -1,0 +1,26 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:49:34.297498
+# ---
+Typing Indicator Test
+============================================================
+
+[Test 1] Context Manager
+[Thinking... 0.0s] [Working on it... 2.1s]                                                   Context manager test completed
+
+[Test 2] Manual Start/Stop
+[Thinking... 0.0s] [Working on it... 2.0s]                                                   Manual control test completed
+
+[Test 3] Simulated Long Operation
+
+Starting: Data Processing
+------------------------------------------------------------
+[Thinking... 0.0s] [Working on it... 2.0s] Data Processing Completed in 3.0s
+
+[Test 4] Elapsed Time Tracking
+[Thinking... 0.0s]                                                   [Working on it... 1.0s] [Processing... 2.0s]                                                   Elapsed time: 2.50s
+
+[Test 5] Quick Operation (No Indicator)
+Starting quick operation...
+Quick operation completed (indicator should not have shown)
+
+[OK] Typing indicator test completed

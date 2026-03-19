@@ -1,0 +1,126 @@
+{
+  "version": "1.0",
+  "errors": [
+    {
+      "original_error": "fatal: Could not read from remote repository",
+      "friendly_message": "Network connection issue with Git remote",
+      "solution": "1. Check your internet connection\n2. Try: git remote -v to verify remote URL\n3. Retry the operation (auto-retry enabled)",
+      "category": "git",
+      "retryable": true,
+      "confidence": 0.9,
+      "matched_pattern": "git_network",
+      "timestamp": "2026-03-19T23:50:03.047786"
+    },
+    {
+      "original_error": "SyntaxError: invalid syntax",
+      "friendly_message": "Python syntax error detected",
+      "solution": "1. Check for missing colons, parentheses, or quotes\n2. Verify indentation (use 4 spaces)\n3. Look for unclosed brackets/strings",
+      "category": "python",
+      "retryable": false,
+      "confidence": 0.9,
+      "matched_pattern": "python_syntax",
+      "timestamp": "2026-03-19T23:50:03.049747"
+    },
+    {
+      "original_error": "ModuleNotFoundError: No module named 'numpy'",
+      "friendly_message": "Python module not found",
+      "solution": "1. Install missing module: pip install <module_name>\n2. Check virtual environment is activated\n3. Verify module name spelling",
+      "category": "python",
+      "retryable": false,
+      "confidence": 0.9,
+      "matched_pattern": "python_import",
+      "timestamp": "2026-03-19T23:50:03.051960"
+    },
+    {
+      "original_error": "FileNotFoundError: [Errno 2] No such file or directory",
+      "friendly_message": "File access error",
+      "solution": "1. Verify file path is correct\n2. Check file permissions\n3. Ensure directory exists",
+      "category": "python",
+      "retryable": false,
+      "confidence": 0.9,
+      "matched_pattern": "python_file",
+      "timestamp": "2026-03-19T23:50:03.053473"
+    },
+    {
+      "original_error": "TimeoutError: Connection timed out",
+      "friendly_message": "Operation timed out",
+      "solution": "1. Increase timeout value if possible\n2. Check network connectivity\n3. Retry operation (may be temporary)",
+      "category": "general",
+      "retryable": true,
+      "confidence": 0.9,
+      "matched_pattern": "timeout",
+      "timestamp": "2026-03-19T23:50:03.054819"
+    },
+    {
+      "original_error": "Unknown error xyz",
+      "friendly_message": "An unexpected error occurred",
+      "solution": "Please check the error details and try again",
+      "category": "unknown",
+      "retryable": false,
+      "confidence": 0.0,
+      "matched_pattern": null,
+      "timestamp": "2026-03-19T23:50:03.056366"
+    },
+    {
+      "original_error": "fatal: Authentication failed for 'https://github.com/user/repo.git'",
+      "friendly_message": "Git authentication failed",
+      "solution": "1. Verify credentials are correct\n2. Check SSH keys: ssh-add -l\n3. For HTTPS: git config --global credential.helper store",
+      "category": "git",
+      "retryable": false,
+      "confidence": 0.9,
+      "matched_pattern": "git_auth",
+      "timestamp": "2026-03-19T23:50:03.057834"
+    },
+    {
+      "original_error": "fatal: Could not read from remote repository",
+      "friendly_message": "Network connection issue with Git remote",
+      "solution": "1. Check your internet connection\n2. Try: git remote -v to verify remote URL\n3. Retry the operation (auto-retry enabled)",
+      "category": "git",
+      "retryable": true,
+      "confidence": 0.9,
+      "matched_pattern": "git_network",
+      "timestamp": "2026-03-19T23:55:30.465315"
+    },
+    {
+      "original_error": "SyntaxError: invalid syntax",
+      "friendly_message": "Python syntax error detected",
+      "solution": "1. Check for missing colons, parentheses, or quotes\n2. Verify indentation (use 4 spaces)\n3. Look for unclosed brackets/strings",
+      "category": "python",
+      "retryable": false,
+      "confidence": 0.9,
+      "matched_pattern": "python_syntax",
+      "timestamp": "2026-03-19T23:55:30.475216"
+    },
+    {
+      "original_error": "ModuleNotFoundError: No module named 'pandas'",
+      "friendly_message": "Python module not found",
+      "solution": "1. Install missing module: pip install <module_name>\n2. Check virtual environment is activated\n3. Verify module name spelling",
+      "category": "python",
+      "retryable": false,
+      "confidence": 0.9,
+      "matched_pattern": "python_import",
+      "timestamp": "2026-03-19T23:55:30.480339"
+    },
+    {
+      "original_error": "TimeoutError: Connection timed out",
+      "friendly_message": "Operation timed out",
+      "solution": "1. Increase timeout value if possible\n2. Check network connectivity\n3. Retry operation (may be temporary)",
+      "category": "general",
+      "retryable": true,
+      "confidence": 0.9,
+      "matched_pattern": "timeout",
+      "timestamp": "2026-03-19T23:55:30.482651"
+    }
+  ],
+  "stats": {
+    "total_errors": 11,
+    "by_category": {
+      "git": 3,
+      "python": 5,
+      "general": 2,
+      "unknown": 1
+    },
+    "retryable_count": 4,
+    "resolved_count": 0
+  }
+}

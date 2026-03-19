@@ -1,0 +1,59 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:12:45.726044
+# ---
+User Preference Manager Test
+======================================================================
+
+[Test 1] Load Default Profile
+
+======================================================================
+                    User Preference Profile
+======================================================================
+
+[Profile: default]
+  Created:  2026-03-20T00:12:34.332195
+  Updated:  2026-03-20T00:12:34.333675
+
+[Preferences]
+  verbosity                 detailed
+  output_format             auto
+  show_emojis               True
+  show_progress             True
+  auto_compress             True
+  typing_indicator          True
+  typing_indicator_delay    2.0
+  error_handling            friendly
+  summary_mode              expandable
+  language                  en
+  timezone                  UTC
+
+[Shortcuts]
+  brief           -> /brief
+  detailed        -> /detailed
+  status          -> /status
+  help            -> /help
+
+[Usage Statistics]
+  Total Sessions:    0
+  Total Commands:    0
+  Last Active:       Never
+
+======================================================================
+
+
+[Test 2] Get/Set Preferences
+  Current verbosity: detailed
+  After set: brief
+
+[Test 3] Track Usage
+  Total commands: 2
+  Favorite: ['/brief', '/status']
+
+[Test 4] List Profiles
+  Available profiles: ['default']
+
+[Test 5] Shortcuts
+  Brief shortcut: /brief
+  After change: /b
+
+[OK] User preference manager test completed

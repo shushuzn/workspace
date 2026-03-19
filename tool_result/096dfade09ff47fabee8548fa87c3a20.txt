@@ -1,0 +1,38 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:59:49.813991
+# ---
+Progress Bar Test
+======================================================================
+
+[Test 1] Basic Progress Bar
+----------------------------------------------------------------------
+Test Progress: [----------------------------------------] 0.0% (0/10) unknownTest Progress: [====------------------------------------] 10.0% (1/10) 2s remainingTest Progress: [========--------------------------------] 20.0% (2/10) 2s remainingTest Progress: [============----------------------------] 30.0% (3/10) 1s remainingTest Progress: [================------------------------] 40.0% (4/10) 1s remainingTest Progress: [====================--------------------] 50.0% (5/10) 1s remainingTest Progress: [========================----------------] 60.0% (6/10) 1s remainingTest Progress: [============================------------] 70.0% (7/10) 1s remainingTest Progress: [================================--------] 80.0% (8/10) 0s remainingTest Progress: [====================================----] 90.0% (9/10) 0s remainingTest Progress: [========================================] 100.0% (10/10) 0s remaining
+  Basic test completed [OK]
+
+[Test 2] Progress Bar with Step Titles
+----------------------------------------------------------------------
+Workflow: [----------------------------------------] 0.0% (0/5) unknownWorkflow: [========--------------------------------] 20.0% (1/5) 1s remaining | Step 1Workflow: [================------------------------] 40.0% (2/5) 1s remaining | Step 2Workflow: [========================----------------] 60.0% (3/5) 1s remaining | Step 3Workflow: [================================--------] 80.0% (4/5) 0s remaining | Step 4Workflow: [========================================] 100.0% (5/5) 0s remaining | Step 5
+  Step titles test completed [OK]
+
+[Test 3] Context Manager
+----------------------------------------------------------------------
+Context Test: [----------------------------------------] 0.0% (0/5) unknownContext Test: [========--------------------------------] 20.0% (1/5) 1s remainingContext Test: [================------------------------] 40.0% (2/5) 1s remainingContext Test: [========================----------------] 60.0% (3/5) 0s remainingContext Test: [================================--------] 80.0% (4/5) 0s remainingContext Test: [========================================] 100.0% (5/5) 0s remaining
+Context Test: [========================================] 100.0% (5/5) 0s remaining
+  Context manager test completed [OK]
+
+[Test 4] Simulated Multi-Step Task
+----------------------------------------------------------------------
+
+Starting multi-step task...
+----------------------------------------------------------------------
+Task Progress: [----------------------------------------] 0.0% (0/5) unknownTask Progress: [========--------------------------------] 20.0% (1/5) 3s remaining | Initializing...Task Progress: [================------------------------] 40.0% (2/5) 2s remaining | Loading data...Task Progress: [========================----------------] 60.0% (3/5) 2s remaining | Processing...Task Progress: [================================--------] 80.0% (4/5) 1s remaining | Validating...Task Progress: [========================================] 100.0% (5/5) 0s remaining | Saving results...
+Task Progress: [========================================] 100.0% (5/5) 0s remaining | Saving results...
+Task completed!
+
+[Test 5] ETA Calculation
+----------------------------------------------------------------------
+ETA Test: [----------------------------------------] 0.0% (0/5) unknownETA Test: [========--------------------------------] 20.0% (1/5) 4s remaining  ETA after 1 step: 4.0s
+ETA Test: [========================================] 100.0% (5/5) 0s remaining
+  ETA test completed [OK]
+
+[OK] Progress bar test completed

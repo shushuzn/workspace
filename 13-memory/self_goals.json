@@ -1,0 +1,137 @@
+{
+  "version": "1.0",
+  "created_at": "2026-03-19T23:21:44.608981",
+  "goals": {
+    "daily": [
+      {
+        "id": "daily_1",
+        "type": "daily",
+        "description": "Maintain 100% workflow compliance",
+        "priority": 9,
+        "created_at": "2026-03-19T23:21:44.609071",
+        "deadline": null,
+        "subgoals": [
+          "Complete all 20 steps",
+          "Run critic check",
+          "Git commit"
+        ],
+        "progress": 0,
+        "status": "active",
+        "self_defined": true
+      },
+      {
+        "id": "daily_2",
+        "type": "daily",
+        "description": "Complete urgent task: Git commit before session end",
+        "priority": 9,
+        "created_at": "2026-03-19T23:21:44.614515",
+        "deadline": "2026-03-20T23:21:44.614501",
+        "subgoals": [],
+        "progress": 0,
+        "status": "active",
+        "self_defined": true
+      },
+      {
+        "id": "daily_3",
+        "type": "daily",
+        "description": "Maintain 100% workflow compliance",
+        "priority": 9,
+        "created_at": "2026-03-19T23:21:49.939497",
+        "deadline": null,
+        "subgoals": [
+          "Complete all 20 steps",
+          "Run critic check",
+          "Git commit"
+        ],
+        "progress": 0,
+        "status": "active",
+        "self_defined": true
+      },
+      {
+        "id": "daily_4",
+        "type": "daily",
+        "description": "Complete urgent task: Git commit before session end",
+        "priority": 9,
+        "created_at": "2026-03-19T23:21:49.969884",
+        "deadline": "2026-03-20T23:21:49.969856",
+        "subgoals": [],
+        "progress": 0,
+        "status": "active",
+        "self_defined": true
+      }
+    ],
+    "weekly": [],
+    "monthly": [],
+    "project": [
+      {
+        "id": "project_1",
+        "type": "project",
+        "description": "Implement AAI-5 capabilities",
+        "priority": 10,
+        "created_at": "2026-03-19T23:21:44.610472",
+        "deadline": "2026-06-17T23:21:44.610452",
+        "subgoals": [
+          "Cross-session memory",
+          "Self-correction",
+          "Self-goal setting",
+          "Tool self-learning"
+        ],
+        "progress": 0,
+        "status": "active",
+        "self_defined": true
+      },
+      {
+        "id": "project_2",
+        "type": "project",
+        "description": "Complete P0 Implementation project",
+        "priority": 8,
+        "created_at": "2026-03-19T23:21:44.613027",
+        "deadline": null,
+        "subgoals": [
+          "Design",
+          "Implement",
+          "Test",
+          "Document"
+        ],
+        "progress": 0,
+        "status": "active",
+        "self_defined": true
+      },
+      {
+        "id": "project_3",
+        "type": "project",
+        "description": "Implement AAI-5 capabilities",
+        "priority": 10,
+        "created_at": "2026-03-19T23:21:49.965388",
+        "deadline": "2026-06-17T23:21:49.965349",
+        "subgoals": [
+          "Cross-session memory",
+          "Self-correction",
+          "Self-goal setting",
+          "Tool self-learning"
+        ],
+        "progress": 0,
+        "status": "active",
+        "self_defined": true
+      },
+      {
+        "id": "project_4",
+        "type": "project",
+        "description": "Complete P0 Implementation project",
+        "priority": 8,
+        "created_at": "2026-03-19T23:21:49.967762",
+        "deadline": null,
+        "subgoals": [
+          "Design",
+          "Implement",
+          "Test",
+          "Document"
+        ],
+        "progress": 0,
+        "status": "active",
+        "self_defined": true
+      }
+    ]
+  },
+  "active_goal": "daily_1"
+}

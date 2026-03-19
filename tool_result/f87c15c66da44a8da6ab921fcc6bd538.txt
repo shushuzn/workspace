@@ -1,0 +1,53 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:22:00.042667
+# ---
+Self-Goal Setter Test
+======================================================================
+
+======================================================================
+                         Self-Goal Setter
+======================================================================
+
+[Overview]
+  Total Goals:        4
+  Active Goals:       4
+  Completed:          0
+  Avg Progress:       0.0%
+
+[Active Goals (Top 5)]
+  ○ [10] Implement AAI-5 capabilities (0%)
+  ○ [9] Maintain 100% workflow compliance (0%)
+  ○ [9] Complete urgent task: Git commit before session end (0%)
+  ○ [8] Complete P0 Implementation project (0%)
+
+======================================================================
+
+[Setting Goals]
+  Daily goal: {'status': 'success', 'goal_id': 'daily_3'}
+  Project goal: {'status': 'success', 'goal_id': 'project_3'}
+
+[Auto-Generating Goals]
+  Generated: 1 daily, 1 project
+
+[Updated Status]
+
+======================================================================
+                         Self-Goal Setter
+======================================================================
+
+[Overview]
+  Total Goals:        8
+  Active Goals:       8
+  Completed:          0
+  Avg Progress:       0.0%
+
+[Active Goals (Top 5)]
+  ○ [10] Implement AAI-5 capabilities (0%)
+  ○ [10] Implement AAI-5 capabilities (0%)
+  ○ [9] Maintain 100% workflow compliance (0%)
+  ○ [9] Complete urgent task: Git commit before session end (0%)
+  ○ [9] Maintain 100% workflow compliance (0%)
+
+======================================================================
+
+[OK] Self-goal setter test completed

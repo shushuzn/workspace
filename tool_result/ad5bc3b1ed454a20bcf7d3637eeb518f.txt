@@ -1,0 +1,93 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:31:42.649996
+# ---
+Emotional Intelligence Test
+======================================================================
+
+======================================================================
+                      Emotional Intelligence
+======================================================================
+
+[Statistics]
+  Total Interactions:   0
+  Emotions Detected:    0
+  Responses Given:      0
+
+[Emotion Categories]
+  joy             10 words
+  trust           6 words
+  fear            8 words
+  surprise        6 words
+  sadness         8 words
+  disgust         6 words
+  anger           8 words
+  anticipation    6 words
+
+======================================================================
+
+[Detecting Emotions]
+
+  Input: 太好了！这个功能太棒了！
+    Primary: joy
+    Intensity: 100.0%
+    Valence: +0.00
+    Arousal: 1.00
+    Words: ！, ！
+    Response: Great to hear that! I'm excited for you!
+    Style: tone=enthusiastic, speed=immediate
+
+  Input: 我很担心这个 bug 会影响用户
+    Primary: fear
+    Intensity: 90.0%
+    Valence: -1.00
+    Arousal: 0.90
+    Words: 担心
+    Response: I understand your concern. Let's address this step by step.
+    Style: tone=supportive, speed=immediate
+
+  Input: 又错了！真是令人沮丧！
+    Primary: joy
+    Intensity: 100.0%
+    Valence: +0.00
+    Arousal: 1.00
+    Words: ！, ！
+    Response: Great to hear that! I'm excited for you!
+    Style: tone=enthusiastic, speed=immediate
+
+  Input: 期待明天的演示
+    Primary: anticipation
+    Intensity: 70.0%
+    Valence: +1.00
+    Arousal: 0.70
+    Words: 期待
+    Response: Looking forward to it! Here's what we can do...
+    Style: tone=enthusiastic, speed=normal
+
+  Input: 这个项目让我很伤心
+    Primary: sadness
+    Intensity: 90.0%
+    Valence: -1.00
+    Arousal: 0.00
+    Words: 伤心
+    Response: I'm sorry you're feeling this way. I'm here for you.
+    Style: tone=supportive, speed=immediate
+
+  Input: 我相信你能做好
+    Primary: trust
+    Intensity: 80.0%
+    Valence: +1.00
+    Arousal: 0.00
+    Words: 相信
+    Response: Thank you for believing in me. I won't let you down!
+    Style: tone=neutral, speed=normal
+
+  Input: 普通的测试输入
+    Primary: neutral
+    Intensity: 30.0%
+    Valence: +0.00
+    Arousal: 0.00
+    Words: N/A
+    Response: Acknowledged. Ready to proceed.
+    Style: tone=neutral, speed=normal
+
+[OK] Emotional intelligence test completed

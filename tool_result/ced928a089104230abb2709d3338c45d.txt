@@ -1,0 +1,24 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T22:48:50.493234
+# ---
+D:\OpenClaw\workspace\flow-archive\20260320-brainstorm-v2
+D:\OpenClaw\workspace\flow-archive\20260320-brainstorm-v3
+D:\OpenClaw\workspace\flow-archive\20260320-main-workflow-brainstorm
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\BRAINSTORM-AGENT-AUTONOMITY-REPORT.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\brainstorm-agent-autonomy.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\brainstorm-ai-agent-evolution-2026-2027.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\BRAINSTORM-COMPLETION-REPORT.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\brainstorm-critique-report.json
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\BRAINSTORM-RESEARCH-DRIVEN-REPORT.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\brainstorm-research-driven.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\BRAINSTORM-TOP5-FINAL-REPORT.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\brainstorm-v2-2026-03-20.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\brainstorm-workflow-issues.json
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\brainstorm-workflow-optimization.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\checkpoint-brainstorm-20260319.json
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\flow-arxiv-brainstorm
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\speed-optimization-brainstorm-20260319_153053.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\SPEED-OPTIMIZATION-BRAINSTORM-COMPLETE.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\WORKFLOW-BRAINSTORM-REPORT.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\flow-arxiv-brainstorm\arxiv_brainstorm_report.md
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\flow-arxiv-brainstorm\arxiv_brainstorm_result.json

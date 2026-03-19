@@ -1,0 +1,64 @@
+# tool_name: read_file
+# created_at: 2026-03-20T00:13:26.794274
+# ---
+    "kg": 5,
+    "session": 8,
+    "task": 2,
+    "core": 4,
+    "logging": 2,
+    "assistant": 2,
+    "interaction": 1,
+    "multimodal": 1,
+    "validation": 1,
+    "cache": 1
+  },
+  "deletion_record": {
+    "deleted_at": "2026-03-19T17:40:49.903334",
+    "deleted_count": 86,
+    "files_backed_up": 0,
+    "backup_location": "99-backups/deprecated-tools/"
+  },
+  "merge_record": {
+    "merged_at": "2026-03-19T17:46:16.435043",
+    "deleted_count": 9,
+    "reason": "duplicate_merge"
+  },
+  "restoration_record": {
+    "restored_at": "2026-03-19T17:52:47.262538",
+    "restored_count": 29,
+    "reason": "quality_over_quantity - 质量优先于数量"
+  },
+  "quality_assessment": {
+    "assessed_at": "2026-03-19T18:40:56.885976",
+    "total_tools": 372,
+    "average_score": 51.3,
+    "distribution": {
+      "excellent": 0,
+      "good": 24,
+      "fair": 324,
+      "poor": 24
+    }
+  },
+  "improvement_record": {
+    "improved_at": "2026-03-19T18:20:28.908511",
+    "improved_count": 8,
+    "target": "tool_quality_improvement_phase1"
+  },
+  "improvement_record_phase2": {
+    "improved_at": "2026-03-19T18:21:33.493776",
+    "improved_count": 12,
+    "target": "tool_quality_improvement_phase2"
+  },
+  "improvement_record_phase3": {
+    "improved_at": "2026-03-19T18:33:55.349230",
+    "improved_count": 12,
+    "target": "tool_quality_improvement_phase3"
+  },
+  "automation_stats": {
+    "total_tools": 372,
+    "automated_tools": 23,
+    "automation_rate": 6.18,
+    "phase2_added": 7,
+    "updated_at": "2026-03-19T18:47:43.500055"
+  }
+}

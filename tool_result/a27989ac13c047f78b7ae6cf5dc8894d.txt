@@ -1,0 +1,71 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T01:00:48.572883
+# ---
+======================================================================
+                SA-014: Alert System
+======================================================================
+
+======================================================================
+                Alert System Status
+======================================================================
+
+[Alert Types]
+  - Price Alerts (above/below threshold)
+  - Indicator Alerts (RSI, MACD, etc.)
+  - Pattern Alerts (detection notifications)
+
+[Statistics]
+  Total Alerts:      0
+  Price Alerts:      0
+  Indicator Alerts:  0
+  Pattern Alerts:    0
+  Active Alerts:     0
+
+======================================================================
+
+
+[Test 1] Create Alerts
+----------------------------------------------------------------------
+  Created Price Alert:
+    ID:       price_TEST_1
+    Symbol:   TEST
+    Type:     above $105.0
+    Status:   active
+
+  Created Indicator Alert:
+    ID:       indicator_TEST_RSI_2
+    Symbol:   TEST
+    Indicator: RSI below 30.0
+    Status:   active
+
+  Created Pattern Alert:
+    ID:       pattern_TEST_double_bottom_3
+    Symbol:   TEST
+    Pattern:  double_bottom
+    Status:   active
+
+[Test 2] Check Alerts (Price Triggered)
+----------------------------------------------------------------------
+  Triggered 2 alert(s):
+
+    [PRICE] TEST
+      Price $106.0 crossed above $105.0
+      Time: 2026-03-20T00:59:27.848295
+
+    [INDICATOR] TEST
+      RSI 28.0 crossed below 30.0
+      Time: 2026-03-20T00:59:27.850256
+
+[Test 3] Active Alerts
+----------------------------------------------------------------------
+  Active alerts: 1
+    - pattern_TEST_double_bottom_3: TEST (active)
+
+[Test 4] Final Statistics
+----------------------------------------------------------------------
+  Total Alerts:      2
+  Price Alerts:      1
+  Indicator Alerts:  1
+  Pattern Alerts:    0
+
+[OK] SA-014 Alert System test completed

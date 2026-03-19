@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-19T23:50:03.126529
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\error_handler.py  (lines 155-180 of 355)
+                "patterns": [
+                    r"UnicodeEncodeError.*codec can't encode",
+                    r"UnicodeDecodeError.*codec can't decode",
+                    r"charmap.*can't encode",
+                ],
+                "message": "Character encoding error",
+                "solution": "1. Use UTF-8 encoding for files\n2. Remove or replace special characters\n3. Set encoding explicitly in file operations",
+                "retryable": False,
+                "category": "general"
+            },
+        }
+    
+    def _load_error_log(self) -> Dict:
+        """Load error log"""
+        if self.log_file.exists():
+            with open(self.log_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        
+        return {
+            "version": "1.0",
+            "errors": [],
+            "stats": {
+                "total_errors": 0,
+                "by_category": {},
+                "retryable_count": 0,
+                "resolved_count": 0
+
+[175 more lines. Use start_line=181 to continue.]

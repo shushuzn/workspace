@@ -1,0 +1,85 @@
+{
+  "version": "1.0",
+  "interactions": [
+    {
+      "timestamp": "2026-03-19T23:30:55.731303",
+      "input": "请尽快帮我修复这个 bug，今天要用！",
+      "intents": {
+        "urgency": "high_priority"
+      },
+      "confidence": 0.65,
+      "context": {}
+    },
+    {
+      "timestamp": "2026-03-19T23:30:55.734368",
+      "input": "有空的时候检查一下这个文件",
+      "intents": {},
+      "confidence": 0.3,
+      "context": {}
+    },
+    {
+      "timestamp": "2026-03-19T23:30:55.735775",
+      "input": "这个文件太大了，能不能压缩一下？",
+      "intents": {},
+      "confidence": 0.3,
+      "context": {}
+    },
+    {
+      "timestamp": "2026-03-19T23:30:55.736738",
+      "input": "又错了！为什么总是出问题？",
+      "intents": {},
+      "confidence": 0.3,
+      "context": {}
+    },
+    {
+      "timestamp": "2026-03-19T23:30:55.737525",
+      "input": "请建议我如何优化性能",
+      "intents": {},
+      "confidence": 0.3,
+      "context": {}
+    },
+    {
+      "timestamp": "2026-03-19T23:30:59.787335",
+      "input": "请尽快帮我修复这个 bug，今天要用！",
+      "intents": {
+        "urgency": "high_priority"
+      },
+      "confidence": 0.65,
+      "context": {}
+    },
+    {
+      "timestamp": "2026-03-19T23:30:59.796920",
+      "input": "有空的时候检查一下这个文件",
+      "intents": {},
+      "confidence": 0.3,
+      "context": {}
+    },
+    {
+      "timestamp": "2026-03-19T23:30:59.798413",
+      "input": "这个文件太大了，能不能压缩一下？",
+      "intents": {},
+      "confidence": 0.3,
+      "context": {}
+    },
+    {
+      "timestamp": "2026-03-19T23:30:59.799614",
+      "input": "又错了！为什么总是出问题？",
+      "intents": {},
+      "confidence": 0.3,
+      "context": {}
+    },
+    {
+      "timestamp": "2026-03-19T23:30:59.800523",
+      "input": "请建议我如何优化性能",
+      "intents": {},
+      "confidence": 0.3,
+      "context": {}
+    }
+  ],
+  "learned_preferences": {},
+  "stats": {
+    "total_interactions": 10,
+    "intents_detected": 2,
+    "accuracy_rate": 20.0
+  }
+}

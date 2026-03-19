@@ -1,0 +1,55 @@
+{
+  "tasks": {
+    "daily-arxiv-scan": {
+      "id": "daily-arxiv-scan",
+      "name": "Daily arXiv Scan",
+      "schedule": "0 7 * * *",
+      "command": "py 40-arxiv/arxiv_scan.py",
+      "description": "每日 arXiv 论文扫描",
+      "enabled": true,
+      "last_run": null,
+      "next_run": null,
+      "execution_count": 0,
+      "created_at": "2026-03-19T22:40:20.391944"
+    },
+    "daily-memory-distill": {
+      "id": "daily-memory-distill",
+      "name": "Daily Memory Distillation",
+      "schedule": "0 6 * * *",
+      "command": "py 30-scripts-tools/auto_memory_distiller.py",
+      "description": "每日记忆蒸馏",
+      "enabled": true,
+      "last_run": null,
+      "next_run": null,
+      "execution_count": 0,
+      "created_at": "2026-03-19T22:40:20.392799"
+    },
+    "hourly-heartbeat": {
+      "id": "hourly-heartbeat",
+      "name": "Hourly Heartbeat Check",
+      "schedule": "0 * * * *",
+      "command": "py 30-scripts-tools/heartbeat_check.py",
+      "description": "每小时心跳检查",
+      "enabled": true,
+      "last_run": null,
+      "next_run": null,
+      "execution_count": 0,
+      "created_at": "2026-03-19T22:40:20.394145"
+    },
+    "weekly-performance-report": {
+      "id": "weekly-performance-report",
+      "name": "Weekly Performance Report",
+      "schedule": "0 5 * * 0",
+      "command": "py 30-scripts-tools/performance_analyzer.py --weekly",
+      "description": "每周性能报告",
+      "enabled": true,
+      "last_run": null,
+      "next_run": null,
+      "execution_count": 0,
+      "created_at": "2026-03-19T22:40:20.394973"
+    }
+  },
+  "total_executions": 0,
+  "successful_executions": 0,
+  "failed_executions": 0
+}

@@ -1,0 +1,66 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:12:50.338184
+# ---
+Auto-Retry System Test
+======================================================================
+
+======================================================================
+                    Auto-Retry System Status
+======================================================================
+
+[Configuration]
+  Max Retries:      3
+  Base Delay:       0.5s
+  Max Delay:        60.0s
+  Exponential:      True
+  Jitter:           True
+
+[Statistics]
+  Total Attempts:   0
+  Successful:       0
+  Failed:           0
+  Success Rate:     0.0%
+  Total Retry Time: 0.0s
+
+======================================================================
+
+
+[Test 1] Successful Operation (No Retry)
+----------------------------------------------------------------------
+  Success: True
+  Attempts: 1
+  Result: Immediate success
+  Time: 0.003s
+
+[Test 2] Flaky Operation (Succeeds After Retries)
+----------------------------------------------------------------------
+  Success: True
+  Attempts: 3
+  Result: Success on attempt 3
+  Time: 1.404s
+  Retry Details:
+    Attempt 1: Connection timeout (attempt 1) (delay: 0.41s)
+    Attempt 2: Connection timeout (attempt 2) (delay: 0.98s)
+
+[Test 3] Delay Calculation
+----------------------------------------------------------------------
+  Attempt 0: 0.41s
+  Attempt 1: 1.19s
+  Attempt 2: 1.59s
+  Attempt 3: 3.65s
+  Attempt 4: 8.89s
+
+[Test 4] Max Retries Exceeded
+----------------------------------------------------------------------
+  Success: False
+  Attempts: 3
+  Error: Always fails
+
+[Test 5] Statistics
+----------------------------------------------------------------------
+  Total Attempts: 8
+  Successful: 4
+  Failed: 0
+  Success Rate: 100.0%
+
+[OK] Auto-retry system test completed

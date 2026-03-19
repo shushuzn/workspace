@@ -1,0 +1,54 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:48:30.675366
+# ---
+======================================================================
+                SA-011: Backtesting Engine
+======================================================================
+
+======================================================================
+                Backtesting Engine Status
+======================================================================
+
+[Features]
+  - Historical backtesting
+  - Position sizing
+  - Stop loss / Take profit
+  - Performance metrics
+  - Equity curve tracking
+
+[Statistics]
+  Total Backtests:  0
+
+======================================================================
+
+
+[Test 1] Generate Test Data
+----------------------------------------------------------------------
+  Generated 200 candles
+  Price range: 98.40 - 1884292.14
+
+[Test 2] Run Backtest
+----------------------------------------------------------------------
+  Symbol:           TEST
+  Initial Capital:  $100,000
+  Final Equity:     $100,000
+  Total Return:     +0.00%
+
+  Trade Statistics:
+    Total Trades:   0
+    Winning:        0
+    Losing:         0
+    Win Rate:       0.0%
+
+  Performance Metrics:
+    Avg Win:        $0.00
+    Avg Loss:       $0.00
+    Profit Factor:  999.00
+    Max Drawdown:   0.00%
+    Sharpe Ratio:   0.00
+
+[Test 3] Final Statistics
+----------------------------------------------------------------------
+  Total Backtests:  1
+
+[OK] SA-011 Backtesting Engine test completed

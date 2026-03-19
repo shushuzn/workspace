@@ -1,0 +1,45 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:21:50.078943
+# ---
+Self-Correction System Test
+======================================================================
+
+======================================================================
+                         Self-Correction System
+======================================================================
+
+[Statistics]
+  Total Errors:       4
+  Auto-Corrected:     0
+  Manual Fixed:       0
+  Auto-Correct Rate:  0.0%
+
+[Correction Contexts]
+  git             4 patterns
+  python          5 patterns
+  workflow        3 patterns
+
+======================================================================
+
+[Testing Error Detection]
+  Error: fatal: not a git repository...
+    Context: git (expected: git)
+    Suggestions: git init
+
+  Error: SyntaxError: unexpected EOF...
+    Context: python (expected: python)
+    Suggestions: Check for unclosed brackets/quotes
+
+  Error: IndentationError: expected an indented b...
+    Context: python (expected: python)
+    Suggestions: Fix indentation (use 4 spaces)
+
+  Error: step 6 not found in workflow...
+    Context: workflow (expected: workflow)
+    Suggestions: Check step ID in workflow.json
+
+
+[Testing Learning]
+  Learning result: success
+
+[OK] Self-correction test completed

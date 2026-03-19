@@ -1,0 +1,84 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:25:57.868859
+# ---
+======================================================================
+             SA-002: Historical Data Downloader
+======================================================================
+
+======================================================================
+                Historical Data Downloader Status
+======================================================================
+
+[Timeframes]
+  1d    - Daily
+  1w    - Weekly
+  1mo   - Monthly
+
+[Adjustment Types]
+  - none
+  - forward
+  - backward
+
+[Statistics]
+  Total Downloads:  0
+  Successful:       0
+  Failed:           0
+  Total Records:    0
+
+======================================================================
+
+
+[Test 1] Download Daily Data (AAPL, 1 year)
+----------------------------------------------------------------------
+[INFO] Downloading AAPL 1d data from 2025-03-20 to 2026-03-20
+  Symbol:       AAPL
+  Timeframe:    1d
+  Adjustment:   forward
+  Period:       2025-03-20 to 2026-03-20
+  Candle Count: 262
+
+  First Candle: {'date': '2025-03-20', 'open': 185.85, 'high': 193.04, 'low': 185.12, 'close': 190.18, 'volume': 42654870, 'amount': 7725497621.63}
+  Last Candle:  {'date': '2026-03-20', 'open': 140.37, 'high': 142.12, 'low': 136.66, 'close': 138.4, 'volume': 32307620, 'amount': 4258484584.09}
+
+[Test 2] Download Weekly Data (600519.SS, 2 years)
+----------------------------------------------------------------------
+[INFO] Downloading 600519.SS 1w data from 2024-03-20 to 2026-03-20
+  Candle Count: 105
+  First:        2024-03-20 - 186.0
+  Last:         2026-03-18 - 158.17
+
+[Test 3] Get Statistics
+----------------------------------------------------------------------
+  Symbol:           AAPL
+  Period:           2025-03-20 to 2026-03-20
+  Candle Count:     262
+
+  Price Statistics:
+    Current:        138.40
+    Period Open:    185.85
+    High:           203.52
+    Low:            120.41
+    Change:         -47.45 (-25.53%)
+
+  Volume Statistics:
+    Average:        26,522,838
+    Max:            49,903,487
+    Total:          6,948,983,476
+
+[Test 4] Get Latest Candle
+----------------------------------------------------------------------
+  Date:   2026-03-20
+  Open:   140.37
+  High:   142.12
+  Low:    136.66
+  Close:  138.4
+  Volume: 32,307,620
+
+[Test 5] Final Statistics
+----------------------------------------------------------------------
+  Total Downloads:  2
+  Successful:       2
+  Failed:           0
+  Total Records:    367
+
+[OK] SA-002 Historical Data Downloader test completed

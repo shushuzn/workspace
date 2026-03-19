@@ -1,0 +1,58 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:19:50.925767
+# ---
+======================================================================
+                    Stock Analysis Workflow Brainstorm
+======================================================================
+
+[Summary]
+  Total Components: 24
+  P0 Priority: 18
+  P1 Priority: 6
+
+[Categories]
+  数据收集                 |  4 components | P0 |  21h
+  技术分析                 |  4 components | P0 |  25h
+  基本面分析                |  4 components | P0 |  25h
+  风险管理                 |  3 components | P0 |  12h
+  信号生成                 |  3 components | P0 |  24h
+  可视化展示                |  3 components | P1 |  19h
+  自动化                  |  3 components | P1 |  27h
+
+  Total Estimated Effort: 153 hours
+
+[OK] Ideas saved to: 30-scripts-tools/brainstock-stock-analysis.json
+
+[P0 Components - Priority Implementation]
+----------------------------------------------------------------------
+
+  数据收集:
+    [SA-001] 实时行情获取 (4h)
+    [SA-002] 历史数据下载 (3h)
+    [SA-003] 财务数据采集 (6h)
+    [SA-004] 新闻舆情监控 (8h)
+
+  技术分析:
+    [SA-005] 技术指标计算 (4h)
+    [SA-006] 形态识别 (12h)
+    [SA-007] 趋势分析 (5h)
+    [SA-008] 支撑阻力位 (4h)
+
+  基本面分析:
+    [SA-009] 财务比率分析 (5h)
+    [SA-010] 估值模型 (10h)
+    [SA-011] 成长性分析 (4h)
+    [SA-012] 行业地位分析 (6h)
+
+  风险管理:
+    [SA-013] 波动率分析 (4h)
+    [SA-014] 仓位建议 (5h)
+    [SA-015] 止损止盈 (3h)
+
+  信号生成:
+    [SA-016] 多因子评分 (8h)
+    [SA-017] 买卖信号 (6h)
+    [SA-018] 信号回测 (10h)
+
+======================================================================
+[OK] Brainstorm completed

@@ -1,0 +1,64 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:47:01.679114
+# ---
+======================================================================
+                SA-010: Signal Generator
+======================================================================
+
+======================================================================
+                Signal Generator Status
+======================================================================
+
+[Signal Methods]
+  - Moving Average Analysis
+  - MACD Crossover
+  - RSI Overbought/Oversold
+  - KDJ Stochastic
+  - Bollinger Bands
+  - Confluence Scoring
+
+[Statistics]
+  Total Signals:    0
+  Buy Signals:      0
+  Sell Signals:     0
+  Neutral Signals:  0
+
+======================================================================
+
+
+[Test 1] Generate Trading Signal
+----------------------------------------------------------------------
+  Symbol:        TEST
+  Price:         $105.0
+
+  Individual Signals:
+    MA     - strong_buy   (strength: +1.00)
+             Price above all MAs
+    MACD   - buy          (strength: +0.50)
+             MACD above signal
+    RSI    - neutral      (strength: +0.00)
+             RSI neutral
+    KDJ    - buy          (strength: +0.30)
+             K above D
+    BOLL   - neutral      (strength: +0.20)
+             Price above middle band
+
+  Confluence Signal:
+    Signal:      buy
+    Strength:    +0.43
+    Confluence:  4/5
+    Buy:         4
+    Sell:        0
+    Neutral:     1
+
+  Recommendation: BUY - Moderate conviction long (4/5 confluence)
+  Confidence:     61%
+
+[Test 2] Final Statistics
+----------------------------------------------------------------------
+  Total Signals:    1
+  Buy Signals:      1
+  Sell Signals:     0
+  Neutral Signals:  0
+
+[OK] SA-010 Signal Generator test completed

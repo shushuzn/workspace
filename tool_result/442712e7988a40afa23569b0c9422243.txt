@@ -1,0 +1,43 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:21:33.667532
+# ---
+Cross-Session Memory Test
+======================================================================
+
+======================================================================
+                         Cross-Session Memory
+======================================================================
+
+[Overview]
+  Total Memories:     3
+  Last Updated:       2026-03-19T23:21:16.144129
+
+[By Category]
+  facts           1
+  skills          0
+  preferences     0
+  projects        0
+  lessons         1
+  goals           1
+
+======================================================================
+
+[Adding Memories]
+  Fact: {'status': 'success', 'memory_id': 'facts_2'}
+  Lesson: {'status': 'success', 'memory_id': 'lessons_2'}
+  Goal: {'status': 'success', 'memory_id': 'goals_2'}
+
+[Retrieving Memories]
+  [goals] Achieve AAI-5 autonomy by end of 2026 (importance: 9)
+  [goals] Achieve AAI-5 autonomy by end of 2026 (importance: 9)
+  [lessons] Always compress session before git commit (importance: 8)
+  [lessons] Always compress session before git commit (importance: 8)
+  [facts] AI Agent has 28 tools (importance: 7)
+
+[Searching for 'tools']
+  Found 2 results
+
+[Summary]
+  Total: 6 memories
+
+[OK] Cross-session memory test completed

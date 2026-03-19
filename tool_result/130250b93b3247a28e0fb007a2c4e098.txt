@@ -1,0 +1,56 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:59:53.859051
+# ---
+Auto-Format Detector Test
+============================================================
+
+============================================================
+               Auto-Format Detector Status
+============================================================
+
+[Supported Formats]
+  table           - Use table for comparisons and structured data
+  list            - Use list for sequential or enumerated items
+  code_block      - Use code block for programming code
+  json            - Use JSON format for structured data
+  text            - Use plain text for narrative content
+
+[Format Rules]
+  Total rules: 5
+
+============================================================
+
+
+[Test 1] List Detection
+  Input: ['Item 1', 'Item 2', 'Item 3']
+  Format: list (80%)
+  Reason: List data with 3 items
+
+[Test 2] Table Detection
+  Input: 2 records
+  Format: table (90%)
+  Reason: List of dictionaries (table-ready)
+
+[Test 3] Code Detection
+  Input: def hello():
+    return 'world...
+  Format: code_block (95%)
+  Reason: Code pattern detected
+
+[Test 4] Formatted Output
+------------------------------------------------------------
+Table format:
+Name  | Age | City
+------+-----+-----
+Alice | 30  | NYC 
+Bob   | 25  | LA  
+
+List format:
+  - A
+  - B
+  - C
+
+JSON format:
+  - key: value
+
+[OK] Auto-format detector test completed

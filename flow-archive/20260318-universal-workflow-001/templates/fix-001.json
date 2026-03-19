@@ -1,0 +1,24 @@
+{
+  "name": "Quick Fix",
+  "description": "Fast bug fix workflow (skip heavy validation)",
+  "steps": [
+    {
+      "id": 1,
+      "name": "Identify issue"
+    },
+    {
+      "id": 2,
+      "name": "Fix code"
+    },
+    {
+      "id": 3,
+      "name": "Test fix"
+    },
+    {
+      "id": 4,
+      "name": "Commit"
+    }
+  ],
+  "estimated_time_minutes": 20,
+  "complexity": "low"
+}

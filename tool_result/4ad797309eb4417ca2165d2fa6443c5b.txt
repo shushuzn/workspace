@@ -1,0 +1,64 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:57:54.330667
+# ---
+
+======================================================================
+                    UX Phase 1 Real-World Test
+======================================================================
+
+[Test 1] UX Settings - Mode Switching
+----------------------------------------------------------------------
+  Initial mode: brief
+  Command: /brief
+  New mode: brief [OK]
+  Command: /detailed
+  New mode: detailed [OK]
+  Command: /toggle
+  New mode: brief [OK]
+
+[Test 2] Typing Indicator - Long Operation Simulation
+----------------------------------------------------------------------
+
+  Starting: Data Processing
+[Thinking... 0.0s]                                                     Completed: Data Processing (3.0s)
+
+  Starting: File Upload
+[Thinking... 0.0s] [Working on it... 2.0s]                                                     Completed: File Upload (4.0s)
+
+  Starting: Quick Check
+  Completed: Quick Check (0.5s)
+
+  [OK] Indicator shows for long operations
+  [OK] Indicator hides for quick operations
+
+[Test 3] Error Handler - Real Error Scenarios
+----------------------------------------------------------------------
+
+  Scenario: Git Push Failed
+  Error: fatal: Could not read from remote repository
+  Friendly: Network connection issue with Git remote
+  Retryable: Yes
+  Confidence: 90%
+
+  Scenario: Syntax Error
+  Error: SyntaxError: invalid syntax
+  Friendly: Python syntax error detected
+  Retryable: No
+  Confidence: 90%
+
+  Scenario: Module Not Found
+  Error: ModuleNotFoundError: No module named 'pandas'
+  Friendly: Python module not found
+  Retryable: No
+  Confidence: 90%
+
+  Scenario: Timeout
+  Error: TimeoutError: Connection timed out
+  Friendly: Operation timed out
+  Retryable: Yes
+  Confidence: 90%
+
+======================================================================
+  All Phase 1 tools tested successfully [OK]
+======================================================================
+

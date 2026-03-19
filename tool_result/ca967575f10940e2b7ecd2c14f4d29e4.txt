@@ -1,0 +1,83 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-19T23:50:22.550962
+# ---
+Friendly Error Handler Test
+============================================================
+
+============================================================
+               Error Handler Status
+============================================================
+
+[Statistics]
+  Total Errors:     0
+  Retryable:        0
+
+[By Category]
+
+[Error Patterns Loaded]
+  Total patterns:   38
+  Pattern types:    12
+
+============================================================
+
+
+[Testing Error Analysis]
+
+  Error: fatal: Could not read from remote repository
+    Message: Network connection issue with Git remote
+    Category: git
+    Retryable: True
+    Confidence: 90%
+
+  Error: SyntaxError: invalid syntax
+    Message: Python syntax error detected
+    Category: python
+    Retryable: False
+    Confidence: 90%
+
+  Error: ModuleNotFoundError: No module named 'numpy'
+    Message: Python module not found
+    Category: python
+    Retryable: False
+    Confidence: 90%
+
+  Error: FileNotFoundError: [Errno 2] No such file or directory
+    Message: File access error
+    Category: python
+    Retryable: False
+    Confidence: 90%
+
+  Error: TimeoutError: Connection timed out
+    Message: Operation timed out
+    Category: general
+    Retryable: True
+    Confidence: 90%
+
+  Error: Unknown error xyz
+    Message: An unexpected error occurred
+    Category: unknown
+    Retryable: False
+    Confidence: 0%
+
+[Testing Formatted Response]
+
+============================================================
+ ERROR
+============================================================
+
+Git authentication failed
+
+Category: GIT
+Retryable: No
+
+------------------------------------------------------------
+ Suggested Solution:
+------------------------------------------------------------
+1. Verify credentials are correct
+2. Check SSH keys: ssh-add -l
+3. For HTTPS: git config --global credential.helper store
+
+============================================================
+
+
+[OK] Error handler test completed

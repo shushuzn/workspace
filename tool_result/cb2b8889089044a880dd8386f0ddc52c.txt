@@ -1,0 +1,60 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T00:41:50.771755
+# ---
+======================================================================
+                SA-007: Trend Analysis
+======================================================================
+
+======================================================================
+                  Trend Analyzer Status
+======================================================================
+
+[Timeframes]
+  - Short: 10 candles
+  - Medium: 30 candles
+  - Long: 60 candles
+
+[Statistics]
+  Total Analyses:     0
+  Trends Identified:  0
+
+======================================================================
+
+
+[Test 1] Generate Test Data
+----------------------------------------------------------------------
+  Generated 100 candles
+  Price range: 100.16 - 235.38
+
+[Test 2] Analyze Trend
+----------------------------------------------------------------------
+  Symbol:           TEST
+  Current Price:    231.91
+  Overall Trend:    BULLISH
+  Trend Strength:   STRONG
+  Recommendation:   BUY - Bullish trend, watch MA support
+
+  Timeframes:
+    Short    - Direction: sideways, Strength: weak    , Change: +1.65%
+    Medium   - Direction: bullish , Strength: moderate, Change: +15.36%
+    Long     - Direction: bullish , Strength: strong  , Change: +58.82%
+
+  Moving Averages:
+    MA5   :   230.49 (price above)
+    MA10  :   230.40 (price above)
+    MA20  :   229.10 (price above)
+    MA30  :   223.69 (price above)
+    MA50  :   201.13 (price above)
+    MA60  :   191.77 (price above)
+
+  ADX Indicator:
+    ADX:    89.16 (very_strong)
+    +DI:    50.54
+    -DI:    2.9
+
+[Test 3] Final Statistics
+----------------------------------------------------------------------
+  Total Analyses:     1
+  Trends Identified:  1
+
+[OK] SA-007 Trend Analysis test completed

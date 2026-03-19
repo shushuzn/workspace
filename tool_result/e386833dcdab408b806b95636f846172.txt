@@ -1,0 +1,27 @@
+# tool_name: read_file
+# created_at: 2026-03-19T23:49:49.380678
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\error_handler.py  (lines 125-145 of 355)
+                "solution": "1. Verify workflow.json exists and is valid JSON\n2. Check required fields: flow_id, total_steps, steps\n3. Validate JSON syntax",
+                "retryable": False,
+                "category": "workflow"
+            },
+            
+            # General errors
+            "timeout": {
+                "patterns": [
+                    r"TimeoutError",
+                    r"timed out",
+                    r"Connection timed out",
+                    r"Request timeout",
+                ],
+                "message": "Operation timed out",
+                "solution": "1. Increase timeout value if possible\n2. Check network connectivity\n3. Retry operation (may be temporary)",
+                "retryable": True,
+                "category": "general"
+            },
+            "memory": {
+                "patterns": [
+                    r"MemoryError",
+
+[210 more lines. Use start_line=146 to continue.]
