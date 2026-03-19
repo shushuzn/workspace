@@ -82,7 +82,7 @@
       "business_name": "brainstorm-v2",
       "description": "头脑风暴双环工作流 v2.0 - 发散环 (D1-D5) + 收敛环 (C1-C5), 最大 3 轮迭代",
       "created_at": "2026-03-19T20:04:59.748314",
-      "status": "active",
+      "status": "archived",
       "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260320-brainstorm-v2",
       "last_updated": "2026-03-19T20:04:59.748336",
       "workflow_file": "workflow.json",
@@ -101,10 +101,47 @@
         "critic-brainstorm-lite"
       ],
       "workflow_type": "subworkflow",
-      "parent_workflow": "20260318-universal-workflow-001"
+      "parent_workflow": "20260318-universal-workflow-001",
+      "archived_at": "2026-03-20T01:40:00+08:00",
+      "superseded_by": "20260320-brainstorm-v3"
+    },
+    "20260320-brainstorm-v3": {
+      "business_name": "brainstorm-v3",
+      "description": "头脑风暴增强工作流 v3.0 - AI 辅助 + 思维导图 + 质量预测 (12 步)",
+      "created_at": "2026-03-20T01:15:00+08:00",
+      "status": "active",
+      "directory": "D:\\OpenClaw\\workspace\\flow-archive\\20260320-brainstorm-v3",
+      "last_updated": "2026-03-20T01:40:00+08:00",
+      "workflow_file": "workflow.json",
+      "total_steps": 12,
+      "time_limit_minutes": 60,
+      "tools": [
+        "brainstorm_ai_assistant",
+        "brainstorm_mindmap",
+        "brainstorm_quality_predictor",
+        "brainstorm_facilitator",
+        "brainstorm_convergent",
+        "workflow_cache",
+        "git_commit_helper"
+      ],
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001",
+      "versions": {
+        "current": "v3.0.0",
+        "archived": ["v2.2.0", "v2.0.0", "v1.0.0"],
+        "version_index": "versions/VERSION_INDEX.md"
+      },
+      "enhancements": [
+        "AI 创意助手集成",
+        "思维导图可视化",
+        "创意质量预测",
+        "并行工具执行支持",
+        "缓存加速",
+        "性能监控"
+      ]
     }
   },
-  "last_updated": "2026-03-19T20:04:59.748339",
+  "last_updated": "2026-03-20T01:40:00+08:00",
   "architecture": {
     "main_workflow": "20260318-universal-workflow-001",
     "principle": "唯一主工作流原则 - 主工作流调用子工作流，子工作流不能反向调用"

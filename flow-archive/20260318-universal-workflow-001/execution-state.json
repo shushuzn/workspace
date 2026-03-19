@@ -1,13 +1,14 @@
 {
   "flow_id": "20260318-universal-workflow-001",
-  "task": "优化头脑风暴工作流 - AI 辅助 + 可视化 + 质量预测",
-  "started_at": "2026-03-20T01:15:00+08:00",
-  "completed_at": "2026-03-20T01:30:00+08:00",
+  "task": "头脑风暴工作流归档 - 旧版本归档到 versions 目录",
+  "started_at": "2026-03-20T01:35:00+08:00",
+  "completed_at": "2026-03-20T01:50:00+08:00",
   "total_steps": 20,
   "completed_steps": [1, 2, 3, 4, 5, 6, 6.5, 6.6, 6.7, 7, 8, 8.5, 8.6, 8.7, 9.1, 10.1, 10.5, 11.2, 12.2, 13.2],
   "current_step": 13.2,
   "status": "completed",
-  "tools_created": ["brainstorm_ai_assistant", "brainstorm_mindmap", "brainstorm_quality_predictor", "brainstorm_workflow_v3"],
-  "workflow_upgraded": "v2.2 -> v3.0",
-  "updated_at": "2026-03-20T01:30:00+08:00"
+  "archive_created": "flow-archive/20260320-brainstorm-v3/versions/",
+  "versions_archived": ["v1.0", "v2.0.0", "v2.2.0"],
+  "flow_registry_updated": "v1.0.0 -> v1.1.0",
+  "updated_at": "2026-03-20T01:50:00+08:00"
 }
