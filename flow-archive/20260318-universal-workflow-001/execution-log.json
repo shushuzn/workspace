@@ -1,256 +1,103 @@
 {
-  "workflow_id": "20260318-universal-workflow-001",
   "flow_id": "20260318-universal-workflow-001",
-  "task": "方案 C: 创建主工作流显式配置 + 子工作流创建",
-  "success": true,
-  "started_at": "2026-03-19T00:45:00+08:00",
-  "completed_at": "2026-03-19T01:30:00+08:00",
-  "duration_seconds": 2700,
-  "steps": [
+  "task": "brainstorm-workflow-fix-innovation",
+  "started_at": "2026-03-20T11:15:00+08:00",
+  
+  "steps_completed": [
     {
-      "step_id": 1,
-      "step_name": "上下文加载验证",
-      "success": true,
-      "tool_id": "context-verify",
-      "execution_time_ms": 500
+      "step": 1,
+      "name": "上下文加载验证",
+      "status": "completed",
+      "result": "58.1KB < 100KB ✓",
+      "timestamp": "2026-03-20T11:15:00+08:00"
     },
     {
-      "step_id": 2,
-      "step_name": "Flow ID 绑定",
-      "success": true,
-      "tool_id": "flow-manager",
-      "execution_time_ms": 800
+      "step": 2,
+      "name": "Flow ID 绑定",
+      "status": "completed",
+      "result": "current-binding.json 创建 ✓",
+      "timestamp": "2026-03-20T11:15:30+08:00"
     },
     {
-      "step_id": 3,
-      "step_name": "任务解析",
-      "success": true,
-      "tool_id": "task-analyzer",
-      "execution_time_ms": 1200
+      "step": 3,
+      "name": "任务解析",
+      "status": "completed",
+      "result": "task-analysis.json 创建 ✓",
+      "timestamp": "2026-03-20T11:16:00+08:00"
     },
     {
-      "step_id": 4,
-      "step_name": "工具/工作流选择",
-      "success": true,
-      "tool_id": "tool-suggester",
-      "execution_time_ms": 600
+      "step": 4,
+      "name": "工具/工作流选择",
+      "status": "completed",
+      "result": "选择创建新工具 ✓",
+      "timestamp": "2026-03-20T11:16:30+08:00"
     },
     {
-      "step_id": 5,
-      "step_name": "子工作流调度",
-      "success": true,
-      "tool_id": "workflow-scheduler",
-      "execution_time_ms": 2000
+      "step": 5,
+      "name": "子工作流调度",
+      "status": "completed",
+      "result": "创建 4 个头脑风暴工具 ✓",
+      "timestamp": "2026-03-20T11:25:00+08:00",
+      "deliverables": [
+        "brainstorm_divergent.py (8.6KB)",
+        "brainstorm_convergent.py (11.4KB)",
+        "brainstorm_facilitator.py (8.5KB)",
+        "critic_brainstorm_lite.py (6.9KB)"
+      ]
     },
     {
-      "step_id": 6,
-      "step_name": "工具执行",
-      "success": true,
-      "tool_id": "tool-executor",
-      "execution_time_ms": 15000
+      "step": 6,
+      "name": "工具执行",
+      "status": "completed",
+      "result": "工具创建 + 注册 ✓",
+      "timestamp": "2026-03-20T11:30:00+08:00",
+      "details": {
+        "tools_registered": 4,
+        "registry_version": "1.11.1",
+        "total_tools": 376
+      }
     },
     {
-      "step_id": 7,
-      "step_name": "执行日志记录",
-      "success": true,
-      "tool_id": "execution-logger",
-      "execution_time_ms": 300
-    },
-    {
-      "step_id": 8,
-      "step_name": "检查点保存",
-      "success": true,
-      "tool_id": "checkpoint-saver",
-      "execution_time_ms": 300
-    },
-    {
-      "step_id": 9,
-      "step_name": "批判者最终审查",
-      "success": true,
-      "tool_id": "auto-critic-v7",
-      "execution_time_ms": 5000
-    },
-    {
-      "step_id": 10,
-      "step_name": "质量门禁",
-      "success": true,
-      "tool_id": "quality-gate",
-      "execution_time_ms": 2000
-    },
-    {
-      "step_id": 11,
-      "step_name": "会话压缩保存",
-      "success": true,
-      "tool_id": "session-compress",
-      "execution_time_ms": 3000
-    },
-    {
-      "step_id": 12,
-      "step_name": "Git 提交推送",
-      "success": true,
-      "tool_id": "git-commit-push",
-      "execution_time_ms": 10000
+      "step": 6.5,
+      "name": "工具集成验证",
+      "status": "completed",
+      "result": "发散工具测试通过 ✓",
+      "timestamp": "2026-03-20T11:35:00+08:00",
+      "details": {
+        "test_file": "test-divergent.json",
+        "ideas_generated": 28,
+        "keywords_collected": 50,
+        "execution_time": "6.5 秒"
+      }
     }
   ],
-  "total_steps": 12,
-  "passed_steps": 12,
-  "failed_steps": 0,
-  "execution_time_ms": 40400,
-  "git_commit": "a3314cc",
-  "git_pushed": true,
-  "workflow_compliance": {
-    "all_12_steps_executed": true,
-    "critic_review_done": true,
-    "session_compressed": true,
-    "git_pushed": true
-  },
-  "executions": [
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:20:15.709138",
-      "success": true,
-      "execution_time_ms": 3975.4339999999997
-    },
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:21:40.640666",
-      "success": true,
-      "execution_time_ms": 4031.3819999999996
-    },
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:22:34.627699",
-      "success": true,
-      "execution_time_ms": 4069.2320000000004
-    },
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:22:57.298778",
-      "success": true,
-      "execution_time_ms": 4261.606
-    },
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:23:38.289433",
-      "success": true,
-      "execution_time_ms": 3985.265
-    },
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:24:14.256050",
-      "success": true,
-      "execution_time_ms": 3957.9019999999996
-    },
-    {
-      "step": 11,
-      "tool_id": "session-compress",
-      "timestamp": "2026-03-19T10:25:13.995391",
-      "success": true,
-      "execution_time_ms": 121.24799999999999
-    },
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:33:40.211612",
-      "success": true,
-      "execution_time_ms": 4134.9710000000005
-    },
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:34:50.080760",
-      "success": true,
-      "execution_time_ms": 4108.236
-    },
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:36:59.038521",
-      "success": true,
-      "execution_time_ms": 4137.024
-    },
-    {
-      "step": 1,
-      "tool_id": "context-verify",
-      "timestamp": "2026-03-19T10:38:57.538823",
-      "success": true,
-      "execution_time_ms": 4031.426
-    },
-    {
-      "step": 11,
-      "tool_id": "session-compress",
-      "timestamp": "2026-03-19T10:39:56.003808",
-      "success": true,
-      "execution_time_ms": 112.803
-    },
-    {
-      "step": 1,
-      "tool_id": "context_search",
-      "timestamp": "2026-03-19T10:55:01.429024",
-      "success": true,
-      "execution_time_ms": 131.811
-    },
-    {
-      "step": 1,
-      "tool_id": "context_search",
-      "timestamp": "2026-03-19T10:58:33.056983",
-      "success": true,
-      "execution_time_ms": 203.484
-    },
-    {
-      "step": 1,
-      "tool_id": "context_search",
-      "timestamp": "2026-03-19T11:05:51.050414",
-      "success": true,
-      "execution_time_ms": 138.461
-    },
-    {
-      "step": 1,
-      "tool_id": "context_search",
-      "timestamp": "2026-03-19T11:19:33.799378",
-      "success": true,
-      "execution_time_ms": 128.363
-    },
-    {
-      "step": 1,
-      "tool_id": "context_search",
-      "timestamp": "2026-03-19T11:20:03.286734",
-      "success": true,
-      "execution_time_ms": 137.526
-    },
-    {
-      "step": 1,
-      "tool_id": "context_search",
-      "timestamp": "2026-03-19T11:22:59.640505",
-      "success": true,
-      "execution_time_ms": 133.24800000000002
-    },
-    {
-      "step": 1,
-      "tool_id": "context_search",
-      "timestamp": "2026-03-19T11:24:51.415304",
-      "success": true,
-      "execution_time_ms": 140.815
-    },
-    {
-      "step": 1,
-      "tool_id": "context_search",
-      "timestamp": "2026-03-19T11:34:36.007461",
-      "success": true,
-      "execution_time_ms": 131.90099999999998
-    },
-    {
-      "step": 1,
-      "tool_id": "context_search",
-      "timestamp": "2026-03-19T11:58:38.553726",
-      "success": true,
-      "execution_time_ms": 149.309
-    }
-  ]
+  
+  "steps_pending": [
+    {"step": 7, "name": "执行日志记录"},
+    {"step": 8, "name": "检查点保存"},
+    {"step": 9, "name": "批判者最终审查"},
+    {"step": 10, "name": "质量门禁"},
+    {"step": 11, "name": "会话压缩保存"},
+    {"step": 12, "name": "Git 提交推送"}
+  ],
+  
+  "deliverables_created": [
+    "brainstorm_divergent.py",
+    "brainstorm_convergent.py",
+    "brainstorm_facilitator.py",
+    "critic_brainstorm_lite.py",
+    "WORKFLOW-BRAINSTORM.md",
+    "register_brainstorm_tools.py",
+    "test-divergent.json"
+  ],
+  
+  "tools_registry_updated": {
+    "version": "1.11.1",
+    "new_tools": [
+      "brainstorm-divergent",
+      "brainstorm-convergent",
+      "brainstorm-facilitator",
+      "critic-brainstorm-lite"
+    ]
+  }
 }

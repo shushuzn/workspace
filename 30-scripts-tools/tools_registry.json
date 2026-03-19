@@ -1,7 +1,8 @@
 {
-  "version": "1.11.0",
-  "last_updated": "2026-03-19T01:45:00+08:00",
+  "version": "1.11.1",
+  "last_updated": "2026-03-19T19:17:40.776018",
   "changes": [
+    "v1.11.1: Added brainstorm workflow v2.0 tools (divergent, convergent, facilitator, critic-lite)",
     "Added workflow-enforcer tool for mandatory workflow compliance",
     "v1.5.0: Added workflow-research sub-workflow tool (research-001)",
     "Added workflow-project sub-workflow tool (project-001)",
@@ -14160,6 +14161,66 @@
         "usage": "未使用 (0 次)",
         "maintenance": "最近有更新或恢复"
       }
+    },
+    "brainstorm-divergent": {
+      "description": "头脑风暴发散工具 - 快速生成大量想法 (双环模式 D1-D5)",
+      "category": "brainstorm",
+      "automation_enabled": false,
+      "usage_count": 0,
+      "file": "brainstorm_divergent.py",
+      "created_at": "2026-03-19T19:17:40.775980",
+      "status": "active",
+      "triggers": [
+        "manual"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 1800
+    },
+    "brainstorm-convergent": {
+      "description": "头脑风暴收敛工具 - 筛选高价值想法 (双环模式 C1-C5)",
+      "category": "brainstorm",
+      "automation_enabled": false,
+      "usage_count": 0,
+      "file": "brainstorm_convergent.py",
+      "created_at": "2026-03-19T19:17:40.776008",
+      "status": "active",
+      "triggers": [
+        "manual"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 1500
+    },
+    "brainstorm-facilitator": {
+      "description": "头脑风暴引导工具 - 控制双环迭代流程",
+      "category": "brainstorm",
+      "automation_enabled": false,
+      "usage_count": 0,
+      "file": "brainstorm_facilitator.py",
+      "created_at": "2026-03-19T19:17:40.776009",
+      "status": "active",
+      "triggers": [
+        "manual"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 5400
+    },
+    "critic-brainstorm-lite": {
+      "description": "头脑风暴轻量批判者 - 快速审查 (≥60 分通过)",
+      "category": "quality",
+      "automation_enabled": false,
+      "usage_count": 0,
+      "file": "critic_brainstorm_lite.py",
+      "created_at": "2026-03-19T19:17:40.776011",
+      "status": "active",
+      "triggers": [
+        "brainstorm_complete"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 300
     }
   },
   "workflows": {

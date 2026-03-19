@@ -1,0 +1,131 @@
+{
+  "generated_at": "2026-03-19T19:03:31.198394",
+  "flow_id": "20260318-universal-workflow-001",
+  "task": "arxiv-brainstorm",
+  "issues_found": 10,
+  "issues": [
+    {
+      "dimension": "执行完整性",
+      "severity": "高",
+      "issue": "头脑风暴流程未严格遵循 12 步骤",
+      "evidence": "arxiv-brainstorm 仅执行 10 步骤，缺少 Step 7 批判者审查、Step 8 验证测试",
+      "impact": "质量无法保证，可能遗漏关键问题",
+      "suggestion": "强制执行完整 12 步骤，添加步骤验证"
+    },
+    {
+      "dimension": "执行完整性",
+      "severity": "高",
+      "issue": "缺少批判者审查步骤",
+      "evidence": "arxiv_brainstorm.py 生成 20 个想法但未运行 critic 审查",
+      "impact": "想法质量未经验证，可能包含低质量建议",
+      "suggestion": "添加 auto-critic-v7 审查头脑风暴结果"
+    },
+    {
+      "dimension": "工具使用",
+      "severity": "中",
+      "issue": "浏览器使用效率低",
+      "evidence": "browser_use 多次 snapshot 失败，arXiv 搜索未获取完整论文数据",
+      "impact": "研究质量受影响，10 篇论文数据为硬编码而非实时获取",
+      "suggestion": "优化浏览器使用流程，添加错误重试机制"
+    },
+    {
+      "dimension": "工具使用",
+      "severity": "中",
+      "issue": "arXiv 工具未集成到工具库",
+      "evidence": "arxiv_brainstorm.py 未注册到 tools_registry.json",
+      "impact": "工具无法复用，违反工具治理原则",
+      "suggestion": "注册 arxiv_brainstorm 到工具库"
+    },
+    {
+      "dimension": "输出质量",
+      "severity": "高",
+      "issue": "arXiv 论文数据为硬编码非实时获取",
+      "evidence": "ARXIV_PAPERS 数组为预定义数据，非实际从 arXiv API 获取",
+      "impact": "违反学术诚信原则，论文 ID/标题可能不准确",
+      "suggestion": "实现真实 arXiv API 调用或明确标注为示例数据"
+    },
+    {
+      "dimension": "输出质量",
+      "severity": "中",
+      "issue": "20 个想法未经验证",
+      "evidence": "想法可行性/影响力评分为主观判断，无客观依据",
+      "impact": "优先级可能不准确，资源可能浪费在低价值想法上",
+      "suggestion": "添加想法验证步骤，引用文献支持评分"
+    },
+    {
+      "dimension": "会话管理",
+      "severity": "中",
+      "issue": "会话压缩未及时执行",
+      "evidence": "头脑风暴完成后未立即运行 post_session_compress.py",
+      "impact": "上下文累积，影响后续任务性能",
+      "suggestion": "每个 Flow 完成后立即压缩"
+    },
+    {
+      "dimension": "会话管理",
+      "severity": "低",
+      "issue": "头脑风暴结果未保存到长期记忆",
+      "evidence": "arxiv_brainstorm_result.json 未链接到 MEMORY.md",
+      "impact": "跨会话知识丢失，未来无法参考",
+      "suggestion": "添加记忆持久化步骤"
+    },
+    {
+      "dimension": "Git 规范",
+      "severity": "低",
+      "issue": "Git 提交粒度过大",
+      "evidence": "单次提交包含 10 个文件变更，应拆分为多个小提交",
+      "impact": "代码审查困难，回滚成本高",
+      "suggestion": "每完成一个步骤就提交"
+    },
+    {
+      "dimension": "性能优化",
+      "severity": "中",
+      "issue": "头脑风暴用时过长",
+      "evidence": "45 分钟完成 10 篇论文分析，平均每篇 4.5 分钟",
+      "impact": "效率低，影响其他任务执行",
+      "suggestion": "优化浏览器使用，预加载论文数据"
+    }
+  ],
+  "historical_issues": 15,
+  "total_issues": 25,
+  "top_suggestions": [
+    {
+      "priority": 1,
+      "suggestion": "修复学术诚信问题 - 使用真实 arXiv API 或明确标注示例数据",
+      "effort": "中",
+      "impact": "极高"
+    },
+    {
+      "priority": 2,
+      "suggestion": "添加批判者审查步骤到头脑风暴流程",
+      "effort": "低",
+      "impact": "高"
+    },
+    {
+      "priority": 3,
+      "suggestion": "注册 arxiv_brainstorm 到工具库",
+      "effort": "低",
+      "impact": "中"
+    },
+    {
+      "priority": 4,
+      "suggestion": "优化浏览器使用流程，添加错误重试",
+      "effort": "中",
+      "impact": "中"
+    },
+    {
+      "priority": 5,
+      "suggestion": "强制执行完整 12 步骤，添加步骤验证",
+      "effort": "中",
+      "impact": "高"
+    }
+  ],
+  "execution_quality": {
+    "steps_completed": "10/12 (83%)",
+    "critic_review": "缺失",
+    "tool_registration": "部分缺失",
+    "data_authenticity": "存在问题",
+    "session_compression": "延迟",
+    "git_commits": "1 次 (粒度过大)",
+    "overall_score": "65/100"
+  }
+}

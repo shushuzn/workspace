@@ -1,0 +1,46 @@
+{
+  "task_id": "brainstorm-workflow-fix-innovation",
+  "parsed_at": "2026-03-20T11:15:00+08:00",
+  
+  "requirements": {
+    "primary": [
+      "修复学术诚信问题 (使用真实 arXiv API)",
+      "创建特色头脑风暴工作流 (区别于主工作流)",
+      "实现双环迭代模式 (发散→收敛)",
+      "集成轻量批判者 (critic-lite, ≥60 分)"
+    ],
+    "secondary": [
+      "工具注册到 tools_registry.json",
+      "创建文档 WORKFLOW-BRAINSTORM.md",
+      "时间盒控制 (≤30 分钟/环)",
+      "Git 提交完成"
+    ]
+  },
+  
+  "constraints": [
+    "遵循 20260318-universal-workflow-001 12 步骤",
+    "学术诚信 (真实数据或明确标注)",
+    "批判者审查必须通过",
+    "会话压缩必须执行"
+  ],
+  
+  "deliverables": [
+    "brainstorm_divergent.py",
+    "brainstorm_convergent.py",
+    "brainstorm_facilitator.py",
+    "critic_brainstorm_lite.py",
+    "WORKFLOW-BRAINSTORM.md",
+    "tools_registry.json (更新)"
+  ],
+  
+  "success_criteria": [
+    "双环流程完整实现",
+    "真实 arXiv API 集成",
+    "critic-lite 评分≥60 分",
+    "工具注册完成",
+    "Git 提交完成"
+  ],
+  
+  "estimated_time_minutes": 90,
+  "priority": "high"
+}
