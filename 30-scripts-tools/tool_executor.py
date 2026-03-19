@@ -9,6 +9,7 @@ import json
 import subprocess
 import sys
 import io
+import os
 from pathlib import Path
 from datetime import datetime
 
@@ -137,18 +138,43 @@ class ToolExecutor:
         start_time = datetime.now()
         
         try:
-            result = subprocess.run(
-                command,
-                shell=True,
-                capture_output=True,
-                text=True,
-                encoding='utf-8',
-                errors='replace',
-                timeout=tool_config.get('timeout_seconds', 60)
-            )
+            # 修复中文乱码：使用 chcp 65001 设置 UTF-8 编码
+            if sys.platform == 'win32':
+                result = subprocess.run(
+                    command,
+                    shell=True,
+                    capture_output=True,
+                    text=True,
+                    encoding='utf-8',
+                    errors='replace',
+                    timeout=tool_config.get('timeout_seconds', 60),
+                    env={**os.environ, 'PYTHONIOENCODING': 'utf-8'}
+                )
+            else:
+                result = subprocess.run(
+                    command,
+                    shell=True,
+                    capture_output=True,
+                    text=True,
+                    encoding='utf-8',
+                    errors='replace',
+                    timeout=tool_config.get('timeout_seconds', 60)
+                )
             
             end_time = datetime.now()
             execution_time = (end_time - start_time).total_seconds() * 1000
+            
+            # 打印输出（修复乱码）
+            if result.stdout:
+                try:
+                    print(result.stdout)
+                except UnicodeEncodeError:
+                    print(result.stdout.encode('utf-8', errors='replace').decode('utf-8', errors='replace'))
+            if result.stderr:
+                try:
+                    print(result.stderr, file=sys.stderr)
+                except UnicodeEncodeError:
+                    print(result.stderr.encode('utf-8', errors='replace').decode('utf-8', errors='replace'), file=sys.stderr)
             
             return {
                 'success': result.returncode == 0,
