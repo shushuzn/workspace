@@ -18,6 +18,13 @@ FLOW_ARCHIVE = WORKSPACE / "flow-archive"
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
+# 导入缓存系统
+try:
+    from workflow_cache import cache_get, cache_set, init_cache
+    CACHE_ENABLED = True
+except ImportError:
+    CACHE_ENABLED = False
+
 class WorkflowViolationError(Exception):
     """工作流违规异常"""
     pass
@@ -58,7 +65,7 @@ class ToolExecutor:
         
         return mapping
     
-    def execute_tool(self, tool_id, auto_complete=True, enforce_workflow=True):
+    def execute_tool(self, tool_id, params=None, auto_complete=True, enforce_workflow=True):
         """执行工具并自动完成步骤
         
         方案 A: 自动步骤追踪 - auto_complete=True 时自动标记步骤完成
@@ -66,9 +73,14 @@ class ToolExecutor:
         
         Args:
             tool_id: 工具 ID
+            params: 工具参数 (用于缓存键生成)
             auto_complete: 是否自动完成步骤 (默认 True)
             enforce_workflow: 是否强制执行工作流检查 (默认 True)
         """
+        # 初始化缓存
+        if CACHE_ENABLED:
+            init_cache()
+        
         # 1. 验证工作流状态 (方案 C: 工具层强制检查)
         if enforce_workflow and not self._verify_workflow_active():
             raise WorkflowViolationError(
@@ -87,7 +99,20 @@ class ToolExecutor:
                     f"请先完成步骤 {self.current_step} 到 {expected_step - 1}"
                 )
         
-        # 3. 执行工具
+        # 3. 检查缓存 (新增功能)
+        if CACHE_ENABLED and params:
+            cached_result, cache_status = cache_get(tool_id, params)
+            if cached_result is not None:
+                print(f"\n[Tool Executor] 🗜️ 缓存命中：{tool_id}")
+                print(f"     状态：{cache_status}")
+                return {
+                    "success": True,
+                    "cached": True,
+                    "result": cached_result,
+                    "cache_status": cache_status
+                }
+        
+        # 4. 执行工具
         print(f"\n[Tool Executor] 执行工具：{tool_id}")
         print(f"     当前步骤：{self.current_step}")
         print(f"     自动完成：{auto_complete}")
@@ -95,7 +120,12 @@ class ToolExecutor:
         
         result = self._run_tool_command(tool_id)
         
-        # 4. 自动完成步骤 (方案 A: 自动步骤追踪)
+        # 5. 设置缓存 (新增功能)
+        if CACHE_ENABLED and result['success'] and params:
+            cache_set(tool_id, params, result)
+            print(f"     🗜️ 结果已缓存")
+        
+        # 6. 自动完成步骤 (方案 A: 自动步骤追踪)
         if auto_complete and result['success']:
             self._complete_current_step(tool_id, result)
         
