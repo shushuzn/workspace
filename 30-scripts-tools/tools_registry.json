@@ -1,6 +1,6 @@
 {
-  "version": "1.11.26",
-  "last_updated": "2026-03-20T00:25:57.741566",
+  "version": "1.11.27",
+  "last_updated": "2026-03-20T00:31:01.176024",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
     "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
@@ -14655,6 +14655,66 @@
         "data_dir": "60-DATA/stock_historical",
         "default_timeframe": "1d",
         "default_adjustment": "forward"
+      }
+    },
+    "SA-003": {
+      "tool_id": "SA-003",
+      "name": "sa_003_financial_collector",
+      "description": "Financial statement data collector (quarterly/annual)",
+      "category": "stock_analysis",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:31:01.175944",
+      "file_path": "30-scripts-tools/sa_003_financial_collector.py",
+      "size_kb": 14.5,
+      "status": "active",
+      "tested": true,
+      "test_results": {
+        "test_count": 5,
+        "passed": 5,
+        "failed": 0,
+        "tested_at": "2026-03-20T00:31:01.175994"
+      },
+      "features": [
+        "Quarterly and annual reports",
+        "Income statement, balance sheet, cash flow",
+        "Financial ratios calculation",
+        "Period-over-period comparison",
+        "Growth rate analysis"
+      ],
+      "config": {
+        "data_dir": "60-DATA/stock_financials",
+        "default_report_type": "quarterly",
+        "default_periods": 4
+      }
+    },
+    "SA-004": {
+      "tool_id": "SA-004",
+      "name": "sa_004_sentiment_monitor",
+      "description": "News and sentiment monitoring with multi-source support",
+      "category": "stock_analysis",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:31:01.176005",
+      "file_path": "30-scripts-tools/sa_004_sentiment_monitor.py",
+      "size_kb": 14.7,
+      "status": "active",
+      "tested": true,
+      "test_results": {
+        "test_count": 4,
+        "passed": 4,
+        "failed": 0,
+        "tested_at": "2026-03-20T00:31:01.176006"
+      },
+      "features": [
+        "Multi-source monitoring (Sina, Xueqiu, Seeking Alpha, Twitter)",
+        "Sentiment analysis (positive/neutral/negative)",
+        "Sentiment scoring (-1.0 to +1.0)",
+        "Trend analysis over time",
+        "Article caching"
+      ],
+      "config": {
+        "data_dir": "60-DATA/stock_news",
+        "default_hours": 24,
+        "default_limit": 50
       }
     }
   },
