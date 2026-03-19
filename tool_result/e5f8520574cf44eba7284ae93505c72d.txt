@@ -1,0 +1,957 @@
+# tool_name: read_file
+# created_at: 2026-03-20T01:06:24.834898
+# ---
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "name": "通用主工作流",
+  "description": "主工作流 - 总控/指挥/调度所有子工作流和工具",
+  "version": "1.3.4",
+  "created_at": "2026-03-18T22:46:04+08:00",
+  "workflow_type": "main",
+  "parent_workflow": null,
+  "estimated_time_minutes": "variable",
+  "total_steps": 12,
+  "enforcement": {
+    "enabled": true,
+    "tool_id": "workflow-enforcer",
+    "rules": [
+      "必须按顺序执行 12 个步骤",
+      "跳步将被阻断",
+      "完成后必须验证",
+      "未通过验证禁止 Git 提交"
+    ],
+    "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json",
+    "git_hook": ".git/hooks/pre-commit"
+  },
+  "stages": {
+    "initialization": "Step 1-2: 上下文加载 + Flow ID 绑定",
+    "task_analysis": "Step 3-4: 任务解析 + 工具/工作流选择",
+    "execution": "Step 5-8: 执行任务 (调用子工作流/工具)",
+    "validation": "Step 9-10: 批判者审查 + 质量门禁",
+    "completion": "Step 11-12: 压缩保存 + Git 提交"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "上下文加载验证",
+      "description": "验证 7 个核心文件已正确加载 (<100KB)",
+      "tool_id": "context_search",
+      "stage": "initialization",
+      "parameters": {
+        "max_size_kb": 100,
+        "required_files": [
+          "SOUL.md",
+          "USER.md",
+          "AGENTS.md",
+          "TOOLS.md",
+          "HEARTBEAT.md",
+          "MEMORY.md",
+          "13-memory/YYYY-MM-DD.md"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 30,
+      "validation": {
+        "max_context_size_kb": 100,
+        "required_files_loaded": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 2,
+      "name": "Flow ID 绑定",
+      "description": "创建或绑定当前任务的 Flow ID",
+      "tool_id": "flow_manager",
+      "stage": "initialization",
+      "parameters": {
+        "action": "create_or_bind",
+        "business_name": "auto-generated"
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "flow_id_created": true,
+        "isolation_directory_exists": true
+      },
+      "conditional": {
+        "run_if": "time_remaining_minutes >= 10",
+        "skip_message": "时间不足，跳过背景研究",
+        "default": false
+      },
+      "fallback": {
+        "action": "skip_with_note",
+        "log_reason": "时间不足"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 3,
+      "name": "任务解析",
+      "description": "分析用户请求，确定任务类型和复杂度",
+      "tool_id": "task_analyzer",
+      "stage": "task_analysis",
+      "parameters": {
+        "classify_by": "complexity",
+        "complexity_levels": [
+          "simple",
+          "medium",
+          "complex"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "task_type_identified": true,
+        "estimated_time_minutes": "number"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 4,
+      "name": "工具/工作流选择",
+      "description": "根据任务类型选择合适的工具或子工作流",
+      "tool_id": "tool_suggester",
+      "stage": "task_analysis",
+      "parameters": {
+        "suggest_type": "workflow_or_tool",
+        "max_suggestions": 3
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "selected_workflow": "string or null",
+        "selected_tools": "array"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 5,
+      "name": "子工作流调度 (条件)",
+      "description": "如需要，调用子工作流执行",
+      "tool_id": "workflow_scheduler",
+      "stage": "execution",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 600,
+      "conditional": {
+        "run_if": "subworkflow_required"
+      },
+      "subworkflows": {
+        "available": [
+          "20260318-brainstorm-001",
+          "20260318-session-end",
+          "20260318-research-001",
+          "20260318-project-001"
+        ],
+        "selection_logic": "based_on_task_type"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "human_approval": {
+        "required": false,
+        "trigger_if": "critical_decision",
+        "timeout_minutes": 30
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 6,
+      "name": "工具执行",
+      "description": "执行选定的工具",
+      "tool_id": "tool_executor",
+      "stage": "execution",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 600,
+      "validation": {
+        "execution_success": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "parallelizable": true,
+      "parallel_group": "parallel-execution-1",
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 6.5,
+      "name": "工具集成验证",
+      "description": "验证新工具已注册并集成 (新增步骤)",
+      "tool_id": "integration_validator",
+      "stage": "execution",
+      "parameters": {
+        "check_registration": true,
+        "check_tool_executor": true,
+        "check_call_scenarios": true
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "registered_in_tools_registry": true,
+        "integrated_in_tool_executor": true,
+        "has_call_scenarios": true
+      },
+      "conditional": {
+        "run_if": "new_tool_created"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "parallelizable": true,
+      "parallel_group": "parallel-execution-1",
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 6.6,
+      "name": "自动化测试",
+      "description": "运行自动化测试并生成报告",
+      "tool_id": "auto-test-runner",
+      "stage": "execution",
+      "parameters": {
+        "test_dir": "92-tests",
+        "report_dir": "21-reports/tests",
+        "run_syntax_check": true,
+        "run_quality_check": true
+      },
+      "blocking": false,
+      "timeout_seconds": 300,
+      "validation": {
+        "tests_run": true,
+        "report_generated": true
+      },
+      "conditional": {
+        "run_if": "test_required",
+        "skip_message": "无需测试，跳过"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "parallelizable": true,
+      "parallel_group": "parallel-execution-1",
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 6.7,
+      "name": "配置备份",
+      "description": "备份关键配置文件",
+      "tool_id": "config-backup",
+      "stage": "execution",
+      "parameters": {
+        "backup_dir": "99-backups/configs",
+        "keep_days": 7,
+        "keep_count": 5
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "validation": {
+        "configs_backed_up": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "parallelizable": true,
+      "parallel_group": "parallel-execution-1",
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 7,
+      "name": "执行日志记录",
+      "description": "记录执行过程到 execution-log.json",
+      "tool_id": "execution_logger",
+      "stage": "execution",
+      "parameters": {
+        "log_file": "flow-archive/20260318-universal-workflow-001/execution-log.json"
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 8,
+      "name": "检查点保存",
+      "description": "保存当前状态到 checkpoint.json (支持断点续传)",
+      "tool_id": "checkpoint_saver",
+      "stage": "execution",
+      "parameters": {
+        "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json"
+      },
+      "blocking": false,
+      "timeout_seconds": 30,
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 8.5,
+      "name": "记忆持久化",
+      "description": "将重要记忆永久保存到 MEMORY.md",
+      "tool_id": "memory-persistence",
+      "stage": "completion",
+      "parameters": {
+        "min_importance": 0.7,
+        "save_to_memory_md": true
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "validation": {
+        "memories_persisted": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 8.6,
+      "name": "回滚检查点",
+      "description": "创建回滚检查点以备失败时恢复",
+      "tool_id": "rollback-manager",
+      "stage": "completion",
+      "parameters": {
+        "checkpoint_name": "auto",
+        "cleanup_old_days": 7
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "validation": {
+        "checkpoint_created": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 8.7,
+      "name": "元认知评估",
+      "description": "自我监控/评估/优化 - 收集执行指标并调整策略",
+      "tool_id": "metacognition-monitor",
+      "stage": "execution",
+      "parameters": {
+        "collect_metrics": true,
+        "self_evaluate": true,
+        "self_optimize": true,
+        "metrics_to_collect": [
+          "execution_time",
+          "tool_success_rate",
+          "error_frequency",
+          "quality_score_trend",
+          "resource_usage"
+        ]
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "validation": {
+        "metrics_collected": true,
+        "evaluation_completed": true,
+        "optimization_applied": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90
+      }
+    },
+    {
+      "step_id": 9.1,
+      "name": "批判者最终审查",
+      "description": "Auto-Critic v7.0 最终审查 (≥95 分通过) + 集成度检查",
+      "tool_id": "auto_critic_v7",
+      "stage": "validation",
+      "parameters": {
+        "phase": "final",
+        "min_score": 95,
+        "check_integration": true
+      },
+      "blocking": true,
+      "timeout_seconds": 300,
+      "validation": {
+        "critical_score": ">=95",
+        "fatal_issues": 0,
+        "severe_issues": "<=2",
+        "integration_verified": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 10.1,
+      "name": "质量门禁",
+      "description": "质量门禁检查 (代码质量/安全/复杂度/集成度/测试)",
+      "tool_id": "quality-gate-check",
+      "stage": "validation",
+      "parameters": {
+        "min_quality_score": 80,
+        "check_integration": true,
+        "check_security": true,
+        "check_performance": true,
+        "check_tests": true,
+        "check_autonomy_risk": true,
+        "check_code_safety": true,
+        "check_permission_escalation": true,
+        "autonomy_risk_threshold": 0.7
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "quality_score": ">=80",
+        "security_issues": 0,
+        "integration_passed": true,
+        "performance_passed": true,
+        "tests_passed": true,
+        "autonomy_risk_passed": true,
+        "code_safety_passed": true,
+        "permission_check_passed": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "human_approval": {
+        "required": false,
+        "trigger_if": "critical_decision",
+        "timeout_minutes": 30
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 10.5,
+      "name": "自主性评分",
+      "description": "基于 arXiv 2511.13411 - 10 维度 AAI 评估 (AAI-0 到 AAI-4)",
+      "tool_id": "aai-scorer",
+      "stage": "validation",
+      "parameters": {
+        "dimensions": [
+          "task_understanding",
+          "tool_usage",
+          "error_recovery",
+          "learning_ability",
+          "planning_ability",
+          "execution_ability",
+          "monitoring_ability",
+          "collaboration_ability",
+          "innovation_ability",
+          "safety_awareness"
+        ],
+        "output_level": true,
+        "output_scores": true
+      },
+      "blocking": true,
+      "timeout_seconds": 90,
+      "validation": {
+        "all_dimensions_scored": true,
+        "aai_level_assigned": true,
+        "score_saved": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 70,
+        "action_on_fail": "retry_with_human_help"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90
+      }
+    },
+    {
+      "step_id": 11.2,
+      "name": "会话压缩保存",
+      "description": "压缩会话内容并保存到 daily note + 记忆持久化",
+      "tool_id": "post-session-compress",
+      "stage": "completion",
+      "parameters": {
+        "compression_ratio_target": 0.96,
+        "save_to_daily": true,
+        "save_to_memory": true,
+        "importance_score_threshold": 0.5
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "compressed_size_kb": "<5",
+        "saved_to_daily": true,
+        "saved_to_memory": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 12.2,
+      "name": "Git 提交推送",
+      "description": "提交所有变更并推送到远程仓库 (使用 git_commit.bat 避免空格问题)",
+      "tool_id": "git-commit",
+      "stage": "completion",
+      "parameters": {
+        "commit_message": "auto-generated",
+        "push_remote": true
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "commit_success": true,
+        "push_success": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "human_approval": {
+        "required": false,
+        "trigger_conditions": {
+          "risk_score_threshold": 0.7,
+          "importance_threshold": 0.9,
+          "uncertainty_threshold": 0.8,
+          "confidence_threshold": 0.6,
+          "aai_level_threshold": "AAI-2"
+        },
+        "auto_trigger": true,
+        "timeout_minutes": 30,
+        "fallback_action": "continue_with_warning"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 13.2,
+      "name": "文档生成 (可选)",
+      "description": "自动生成项目文档/工具文档/变更日志",
+      "tool_id": "auto-doc-generator",
+      "stage": "completion",
+      "parameters": {
+        "generate_project_overview": true,
+        "generate_tool_docs": true,
+        "generate_changelog": true
+      },
+      "blocking": false,
+      "timeout_seconds": 120,
+      "conditional": {
+        "run_if": "documentation_required",
+        "skip_message": "无需文档，跳过"
+      },
+      "validation": {
+        "docs_generated": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    }
+  ],
+  "subworkflows": {
+    "registered": [
+      {
+        "flow_id": "20260318-brainstorm-001",
+        "name": "头脑风暴工作流",
+        "trigger_keywords": [
+          "头脑风暴",
+          "brainstorm",
+          "创意",
+          "想法"
+        ],
+        "estimated_time_minutes": 45
+      },
+      {
+        "flow_id": "20260318-session-end",
+        "name": "会话结束工作流",
+        "trigger_keywords": [
+          "会话结束",
+          "session-end",
+          "完成",
+          "提交"
+        ],
+        "estimated_time_minutes": 5
+      },
+      {
+        "flow_id": "20260318-research-001",
+        "name": "研究任务工作流",
+        "trigger_keywords": [
+          "研究",
+          "research",
+          "论文",
+          "文献"
+        ],
+        "estimated_time_minutes": 60
+      },
+      {
+        "flow_id": "20260318-project-001",
+        "name": "项目管理工作流",
+        "trigger_keywords": [
+          "项目",
+          "project",
+          "任务管理"
+        ],
+        "estimated_time_minutes": 30
+      }
+    ],
+    "selection_rules": {
+      "priority": "keyword_match_first",
+      "fallback": "manual_selection",
+      "max_parallel": 1
+    }
+  },
+  "error_handling": {
+    "retry_policy": {
+      "max_retries": 3,
+      "retry_delay_seconds": 5,
+      "exponential_backoff": true
+    },
+    "failure_actions": {
+      "step_1_4": "abort_and_report",
+      "step_5_8": "resume_from_checkpoint",
+      "step_9_10": "manual_review_required",
+      "step_11_12": "use_fallback_tool"
+    },
+    "checkpoint_recovery": {
+      "enabled": true,
+      "checkpoint_file": "flow-archive/20260318-universal-workflow-001/checkpoint.json",
+      "resume_command": "py flow_manager.py --resume 20260318-universal-workflow-001"
+    },
+    "fallback_tools": {
+      "git-commit": [
+        "manual_git_command"
+      ],
+      "tool_executor": [
+        "manual_execution"
+      ],
+      "critic_v7": [
+        "skip_with_warning"
+      ]
+    },
+    "recovery": {
+      "enabled": true,
+      "strategy": "resume_from_checkpoint",
+      "max_retries_per_step": 2,
+      "retry_delay_seconds": 5,
+      "fallback_to_manual": true,
+      "preserve_context_on_error": true
+    }
+  },
+  "version_control": {
+    "enabled": true,
+    "version_file": "flow-archive/20260318-universal-workflow-001/versions/VERSION_INDEX.json",
+    "auto_backup": true,
+    "backup_on_change": true,
+    "git_hook_enabled": true,
+    "auto_commit_message": "Auto: workflow.json updated",
+    "backup_count": 10
+  },
+  "execution_rules": {
+    "can_call_subworkflows": true,
+    "can_call_tools": true,
+    "must_log_execution": true,
+    "must_save_checkpoint": true,
+    "must_pass_critic": true,
+    "must_compress_session": true
+  },
+  "output_files": {
+    "execution_log": "flow-archive/20260318-universal-workflow-001/execution-log.json",
+    "checkpoint": "flow-archive/20260318-universal-workflow-001/checkpoint.json",
+    "review": "flow-archive/20260318-universal-workflow-001/review.json",
+    "version_index": "flow-archive/20260318-universal-workflow-001/versions/VERSION_INDEX.json",
+    "realtime_progress": "flow-archive/20260318-universal-workflow-001/progress.json",
+    "timeout_alerts": "flow-archive/20260318-universal-workflow-001/alerts.json"
+  },
+  "updated_at": "2026-03-19T21:27:31.243384",
+  "changelog": [
+    {
+      "version": "1.2.0",
+      "date": "2026-03-19",
+      "changes": [
+        "P0 优化实施：条件执行机制",
+        "P0 优化实施：工具失败降级",
+        "P0 优化实施：质量门禁嵌入",
+        "P0 优化实施：配置版本控制增强"
+      ]
+    },
+    {
+      "version": "1.2.1",
+      "date": "2026-03-19",
+      "changes": [
+        "P2 优化：超时告警系统",
+        "P2 优化：人工审批节点",
+        "P2 优化：执行日志增强",
+        "记忆压缩：当日笔记<5KB"
+      ]
+    },
+    {
+      "version": "1.2.2",
+      "date": "2026-03-19",
+      "changes": [
+        "P1 优化：并行执行支持 (2 个组)",
+        "P1 优化：状态持久化 (每步自动保存)",
+        "P1 优化：错误恢复增强 (断点续跑)"
+      ]
+    },
+    {
+      "version": "1.3.4",
+      "date": "2026-03-19",
+      "changes": [
+        "P0-1: 元认知监控系统 (Step 8.7)",
+        "P0-2: 自主性评分系统 (Step 10.5, 10 维度 AAI)",
+        "P0-3: 智能人工介入触发 (Step 12.2 增强)",
+        "P0-4: 安全审查增强 (Step 10.1 增强)",
+        "主流程升级到 v2.0"
+      ]
+    }
+  ],
+  "parallel_execution": {
+    "enabled": true,
+    "groups": [
+      {
+        "group_id": "parallel-execution-1",
+        "name": "工具执行阶段",
+        "steps": [
+          6,
+          6.5,
+          6.6,
+          6.7
+        ],
+        "max_parallel": 2,
+        "description": "独立工具执行可并行"
+      },
+      {
+        "group_id": "parallel-validation-1",
+        "name": "验证阶段",
+        "steps": [
+          9,
+          10
+        ],
+        "max_parallel": 1,
+        "description": "验证步骤依赖前序结果"
+      }
+    ],
+    "default_max_parallel": 2,
+    "timeout_multiplier": 1.5
+  },
+  "state_persistence": {
+    "enabled": true,
+    "checkpoint_file": "flow-archive/20260318-universal-workflow-001/state-checkpoint.json",
+    "auto_save_interval_steps": 1,
+    "save_on_step_completion": true,
+    "save_on_error": true,
+    "max_checkpoints": 10,
+    "cleanup_old_days": 7,
+    "include": [
+      "step_results",
+      "tool_outputs",
+      "flow_variables",
+      "execution_context",
+      "error_state"
+    ]
+  },
+  "metacognition": {
+    "enabled": true,
+    "monitoring_interval_steps": 1,
+    "self_evaluation_enabled": true,
+    "self_optimization_enabled": true,
+    "metrics_storage": "flow-archive/20260318-universal-workflow-001/metacognition-log.json",
+    "optimization_history_days": 30
+  },
+  "autonomy_assessment": {
+    "enabled": true,
+    "aai_scale_version": "2511.13411",
+    "target_aai_level": "AAI-3",
+    "assessment_storage": "flow-archive/20260318-universal-workflow-001/aai-scores.json",
+    "history_days": 90
+  }
+}

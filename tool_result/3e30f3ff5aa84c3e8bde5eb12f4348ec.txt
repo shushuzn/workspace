@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-20T01:11:18.548285
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\git_precommit_check.py  (lines 20-60 of 105)
+    state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
+    workflow_file = Path("flow-archive/20260318-universal-workflow-001/workflow.json")
+    
+    # 检查 1: 状态文件是否存在
+    if not state_file.exists():
+        print("\n[WARN] 执行状态文件不存在")
+        print("[ACTION] 请先运行 workflow_autoloader.py 初始化任务")
+        return False
+    
+    # 检查 2: 加载状态
+    with open(state_file, 'r', encoding='utf-8') as f:
+        state = json.load(f)
+    
+    # 检查 3: 加载工作流
+    if not workflow_file.exists():
+        print("\n[FAIL] 工作流配置文件不存在！")
+        return False
+    
+    with open(workflow_file, 'r', encoding='utf-8') as f:
+        workflow = json.load(f)
+    
+    steps = workflow.get('steps', [])
+    required_steps = [s.get('step_id') for s in steps if s.get('required', True)]
+    completed = state.get('completed_steps', [])
+    
+    # 计算完成率
+    completed_required = [s for s in completed if s in required_steps]
+    completion_rate = len(completed_required) / len(required_steps) * 100 if required_steps else 0
+    
+    # 显示状态
+    print(f"\n任务：{state.get('task', 'N/A')}")
+    print(f"Flow ID: {state.get('flow_id', 'N/A')}")
+    print(f"状态：{state.get('status', 'unknown')}")
+    print(f"\n必需步骤：{len(required_steps)} 步")
+    print(f"已完成：{len(completed_required)} 步")
+    print(f"完成率：{completion_rate:.1f}%")
+    
+    # 检查 4: 完成率是否 100%
+    if completion_rate < 100:
+        missing = [s for s in required_steps if s not in completed]
+        
+
+[45 more lines. Use start_line=61 to continue.]
