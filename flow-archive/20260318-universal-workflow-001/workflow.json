@@ -2,7 +2,7 @@
   "flow_id": "20260318-universal-workflow-001",
   "name": "通用主工作流",
   "description": "主工作流 - 总控/指挥/调度所有子工作流和工具",
-  "version": "1.2.1",
+  "version": "1.2.2",
   "created_at": "2026-03-18T22:46:04+08:00",
   "workflow_type": "main",
   "parent_workflow": null,
@@ -62,6 +62,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -99,6 +104,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -131,6 +141,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -159,6 +174,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -197,6 +217,11 @@
         "required": false,
         "trigger_if": "critical_decision",
         "timeout_minutes": 30
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -221,6 +246,13 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "parallelizable": true,
+      "parallel_group": "parallel-execution-1",
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -254,6 +286,13 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "parallelizable": true,
+      "parallel_group": "parallel-execution-1",
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -283,6 +322,13 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "parallelizable": true,
+      "parallel_group": "parallel-execution-1",
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -306,6 +352,13 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "parallelizable": true,
+      "parallel_group": "parallel-execution-1",
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -324,6 +377,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -342,6 +400,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -364,6 +427,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -386,6 +454,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -417,6 +490,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -456,6 +534,11 @@
         "required": false,
         "trigger_if": "critical_decision",
         "timeout_minutes": 30
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -487,6 +570,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -520,6 +608,11 @@
         "required": false,
         "trigger_if": "critical_decision",
         "timeout_minutes": 30
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     },
     {
@@ -547,6 +640,11 @@
         "warning_at_percent": 75,
         "critical_at_percent": 90,
         "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
       }
     }
   ],
@@ -629,6 +727,14 @@
       "critic_v7": [
         "skip_with_warning"
       ]
+    },
+    "recovery": {
+      "enabled": true,
+      "strategy": "resume_from_checkpoint",
+      "max_retries_per_step": 2,
+      "retry_delay_seconds": 5,
+      "fallback_to_manual": true,
+      "preserve_context_on_error": true
     }
   },
   "version_control": {
@@ -656,7 +762,7 @@
     "realtime_progress": "flow-archive/20260318-universal-workflow-001/progress.json",
     "timeout_alerts": "flow-archive/20260318-universal-workflow-001/alerts.json"
   },
-  "updated_at": "2026-03-19T21:15:11.299759",
+  "updated_at": "2026-03-19T21:21:02.366637",
   "changelog": [
     {
       "version": "1.2.0",
@@ -677,6 +783,60 @@
         "P2 优化：执行日志增强",
         "记忆压缩：当日笔记<5KB"
       ]
+    },
+    {
+      "version": "1.2.2",
+      "date": "2026-03-19",
+      "changes": [
+        "P1 优化：并行执行支持 (2 个组)",
+        "P1 优化：状态持久化 (每步自动保存)",
+        "P1 优化：错误恢复增强 (断点续跑)"
+      ]
     }
-  ]
+  ],
+  "parallel_execution": {
+    "enabled": true,
+    "groups": [
+      {
+        "group_id": "parallel-execution-1",
+        "name": "工具执行阶段",
+        "steps": [
+          6,
+          6.5,
+          6.6,
+          6.7
+        ],
+        "max_parallel": 2,
+        "description": "独立工具执行可并行"
+      },
+      {
+        "group_id": "parallel-validation-1",
+        "name": "验证阶段",
+        "steps": [
+          9,
+          10
+        ],
+        "max_parallel": 1,
+        "description": "验证步骤依赖前序结果"
+      }
+    ],
+    "default_max_parallel": 2,
+    "timeout_multiplier": 1.5
+  },
+  "state_persistence": {
+    "enabled": true,
+    "checkpoint_file": "flow-archive/20260318-universal-workflow-001/state-checkpoint.json",
+    "auto_save_interval_steps": 1,
+    "save_on_step_completion": true,
+    "save_on_error": true,
+    "max_checkpoints": 10,
+    "cleanup_old_days": 7,
+    "include": [
+      "step_results",
+      "tool_outputs",
+      "flow_variables",
+      "execution_context",
+      "error_state"
+    ]
+  }
 }
