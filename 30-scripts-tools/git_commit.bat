@@ -14,7 +14,7 @@ echo.
 
 REM 本地提交
 git add -u
-git commit -m "%MSG%"
+git commit -m "%MSG%" 2>nul
 if %errorlevel% neq 0 (
     echo [WARN] 本地提交失败，可能没有更改
     goto :check_push
@@ -51,7 +51,7 @@ if %RETRY_COUNT% equ 1 (
     echo [PUSH] Retry attempt %RETRY_COUNT%/%MAX_RETRIES%...
 )
 
-git push origin master
+git push origin master 2>&1 | findstr /C:"Counting" /C:"Writing" /C:"Enumerating" /C:"OK" /C:"success" /C:"failed" /C:"error" /C:"remote"
 if %errorlevel% equ 0 (
     set "PUSH_SUCCESS=1"
     goto :push_success
