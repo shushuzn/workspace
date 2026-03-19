@@ -1,5 +1,5 @@
 {
-  "version": "1.11.12",
+  "version": "1.11.13",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14245,6 +14245,14 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/embedded_critic.py",
       "created_at": "2026-03-19T23:25:00+08:00"
+    },
+    "git-commit-helper": {
+      "category": "git-tools",
+      "description": "Git commit+push with retry mechanism (max 3 attempts)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/git_commit_helper.py",
+      "created_at": "2026-03-19T22:28:15.768129"
     }
   },
   "workflows": {
@@ -14351,7 +14359,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T22:22:11.223996",
+  "updated_at": "2026-03-19T22:28:15.768170",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
