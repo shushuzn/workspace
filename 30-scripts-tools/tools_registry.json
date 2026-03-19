@@ -1,6 +1,6 @@
 {
-  "version": "1.11.25",
-  "last_updated": "2026-03-20T00:20:32.754069",
+  "version": "1.11.26",
+  "last_updated": "2026-03-20T00:25:57.741566",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
     "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
@@ -14595,6 +14595,66 @@
         "quality_score": 98.5,
         "grade": "A - Excellent",
         "dimensions": 5
+      }
+    },
+    "SA-001": {
+      "tool_id": "SA-001",
+      "name": "sa_001_realtime_fetcher",
+      "description": "Real-time stock market data fetcher (multi-source)",
+      "category": "stock_analysis",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:25:57.741405",
+      "file_path": "30-scripts-tools/sa_001_realtime_fetcher.py",
+      "size_kb": 11.0,
+      "status": "active",
+      "tested": true,
+      "test_results": {
+        "test_count": 5,
+        "passed": 5,
+        "failed": 0,
+        "tested_at": "2026-03-20T00:25:57.741526"
+      },
+      "features": [
+        "Multi-source data (Yahoo/East Money)",
+        "Real-time price fetching",
+        "60-second cache",
+        "Batch fetching support",
+        "Fetch statistics tracking"
+      ],
+      "config": {
+        "cache_dir": "60-DATA/stock_cache",
+        "cache_age_seconds": 60,
+        "default_source": "yahoo"
+      }
+    },
+    "SA-002": {
+      "tool_id": "SA-002",
+      "name": "sa_002_historical_downloader",
+      "description": "Historical K-line data downloader with adjustment",
+      "category": "stock_analysis",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:25:57.741537",
+      "file_path": "30-scripts-tools/sa_002_historical_downloader.py",
+      "size_kb": 15.1,
+      "status": "active",
+      "tested": true,
+      "test_results": {
+        "test_count": 5,
+        "passed": 5,
+        "failed": 0,
+        "tested_at": "2026-03-20T00:25:57.741541"
+      },
+      "features": [
+        "Multiple timeframes (1d/1w/1mo)",
+        "Adjustment support (forward/backward/none)",
+        "OHLCV data",
+        "Statistics calculation",
+        "Auto-caching"
+      ],
+      "config": {
+        "data_dir": "60-DATA/stock_historical",
+        "default_timeframe": "1d",
+        "default_adjustment": "forward"
       }
     }
   },
