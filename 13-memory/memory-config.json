@@ -1,0 +1,7 @@
+{
+  "auto_compress": true,
+  "compress_threshold": 10,
+  "max_memories_per_category": 100,
+  "enable_associations": true,
+  "enable_tags": true
+}
