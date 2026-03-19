@@ -1,0 +1,64 @@
+{
+  "flow_id": "brainstorm-workflow-v2",
+  "name": "头脑风暴双环工作流 v2.0",
+  "description": "创造性想法生成工作流 - 发散环 (D1-D5) + 收敛环 (C1-C5), 最大 3 轮迭代",
+  "version": "2.0.0",
+  "created_at": "2026-03-20T12:00:00+08:00",
+  "workflow_type": "sub",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 90,
+  "total_steps": 10,
+  "rings": {
+    "divergent": {
+      "name": "发散环",
+      "time_limit_minutes": 30,
+      "steps": [
+        {"step_id": "D1", "name": "灵感触发", "time_minutes": 5},
+        {"step_id": "D2", "name": "联想爆发", "time_minutes": 10},
+        {"step_id": "D3", "name": "强制连接", "time_minutes": 5},
+        {"step_id": "D4", "name": "逆向思考", "time_minutes": 5},
+        {"step_id": "D5", "name": "快速记录", "time_minutes": 5}
+      ]
+    },
+    "convergent": {
+      "name": "收敛环",
+      "time_limit_minutes": 25,
+      "steps": [
+        {"step_id": "C1", "name": "初步筛选", "time_minutes": 5},
+        {"step_id": "C2", "name": "轻量验证", "time_minutes": 5},
+        {"step_id": "C3", "name": "影响力评估", "time_minutes": 5},
+        {"step_id": "C4", "name": "快速批判", "time_minutes": 5},
+        {"step_id": "C5", "name": "行动规划", "time_minutes": 5}
+      ]
+    }
+  },
+  "max_iterations": 3,
+  "tools": {
+    "divergent": "brainstorm-divergent",
+    "convergent": "brainstorm-convergent",
+    "facilitator": "brainstorm-facilitator",
+    "critic": "critic-brainstorm-lite"
+  },
+  "quality_control": {
+    "critic_tool": "critic-brainstorm-lite",
+    "pass_threshold": 60,
+    "pass_rate_threshold": 50,
+    "fatal_issues": ["学术诚信问题", "不可实现", "伦理风险", "成本过高"]
+  },
+  "output_files": {
+    "divergent_pool": "flow-archive/brainstorm-workflow-v2/divergent-ring-{iteration}.json",
+    "convergent_plan": "flow-archive/brainstorm-workflow-v2/convergent-ring-{iteration}.json",
+    "final_report": "flow-archive/brainstorm-workflow-v2/final-report.json",
+    "critic_review": "flow-archive/brainstorm-workflow-v2/critic-lite-review.json"
+  },
+  "enforcement": {
+    "enabled": true,
+    "rules": [
+      "发散环必须执行 D1-D5 全部步骤",
+      "收敛环必须执行 C1-C5 全部步骤",
+      "时间盒控制 (发散 30 分钟，收敛 25 分钟)",
+      "批判者审查≥60 分才允许结束",
+      "最大迭代 3 轮"
+    ]
+  }
+}

@@ -1,7 +1,8 @@
 {
-  "version": "1.11.1",
-  "last_updated": "2026-03-19T19:17:40.776018",
+  "version": "1.11.2",
+  "last_updated": "2026-03-19T19:44:10.356221",
   "changes": [
+    "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
     "v1.11.1: Added brainstorm workflow v2.0 tools (divergent, convergent, facilitator, critic-lite)",
     "Added workflow-enforcer tool for mandatory workflow compliance",
     "v1.5.0: Added workflow-research sub-workflow tool (research-001)",
@@ -14221,6 +14222,33 @@
       "review_required": false,
       "blocking": false,
       "timeout_seconds": 300
+    },
+    "brainstorm-workflow-v2": {
+      "description": "头脑风暴双环工作流 v2.0 - 发散环 (D1-D5) + 收敛环 (C1-C5), 最大 3 轮迭代",
+      "category": "workflow",
+      "automation_enabled": false,
+      "usage_count": 0,
+      "file": "brainstorm_facilitator.py",
+      "created_at": "2026-03-19T19:44:10.356189",
+      "status": "active",
+      "triggers": [
+        "manual",
+        "creative_task"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 5400,
+      "workflow_config": {
+        "flow_id": "brainstorm-workflow-v2",
+        "total_steps": 10,
+        "rings": [
+          "divergent",
+          "convergent"
+        ],
+        "max_iterations": 3,
+        "time_limit_minutes": 90,
+        "critic_threshold": 60
+      }
     }
   },
   "workflows": {
