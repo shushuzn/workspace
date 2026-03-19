@@ -1,5 +1,5 @@
 {
-  "version": "1.6.5",
+  "version": "1.6.9",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -10111,6 +10111,165 @@
       ],
       "added_at": "2026-03-19T15:11:26.457707",
       "status": "active"
+    },
+    "speed-optimization-brainstorm": {
+      "name": "Speed Optimization Brainstorm",
+      "description": "速度优化头脑风暴 - 生成在不影响功能情况下提升速度的优化方案",
+      "file": "speed_optimization_brainstorm.py",
+      "category": "optimization",
+      "parameters": [
+        "--output-dir",
+        "--top-n"
+      ],
+      "examples": [
+        "py speed_optimization_brainstorm.py"
+      ],
+      "added_at": "2026-03-19T15:31:57.494997",
+      "status": "active"
+    },
+    "db_index_optimizer": {
+      "name": "Database Index Optimizer",
+      "description": "数据库索引优化器 - 为 SQLite 添加索引，提升查询速度 10-100x",
+      "file": "db_index_optimizer.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py db_index_optimizer.py"
+      ],
+      "added_at": "2026-03-19T15:55:14.368387",
+      "status": "active"
+    },
+    "data_structure_optimizer": {
+      "name": "Data Structure Optimizer",
+      "description": "数据结构优化器 - 将 list 查找改为 set/dict，提升查找速度 10-1000x",
+      "file": "data_structure_optimizer.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py data_structure_optimizer.py"
+      ],
+      "added_at": "2026-03-19T15:55:14.368423",
+      "status": "active"
+    },
+    "lru_cache_manager": {
+      "name": "LRU Cache Manager",
+      "description": "LRU 缓存管理器 - 实现 LRU 缓存淘汰策略，提升读取速度 30-50%",
+      "file": "lru_cache_manager.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py lru_cache_manager.py"
+      ],
+      "added_at": "2026-03-19T15:55:14.368426",
+      "status": "active"
+    },
+    "async_io_manager": {
+      "name": "Async I/O Manager",
+      "description": "I/O 异步化管理器 - 将 I/O 操作改为异步执行，减少 I/O 等待时间 60%",
+      "file": "async_io_manager.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py async_io_manager.py"
+      ],
+      "added_at": "2026-03-19T15:55:14.368433",
+      "status": "active"
+    },
+    "multi_level_cache": {
+      "name": "Multi-Level Cache",
+      "description": "多级缓存架构 - 实现 L1→L2→L3 三级缓存，整体速度提升 50-70%",
+      "file": "multi_level_cache.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py multi_level_cache.py"
+      ],
+      "added_at": "2026-03-19T15:55:14.368435",
+      "status": "active"
+    },
+    "query_result_cache": {
+      "name": "Query Result Cache",
+      "description": "查询结果缓存 - 缓存频繁查询结果，重复查询减少 90%",
+      "file": "query_result_cache.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py query_result_cache.py"
+      ],
+      "added_at": "2026-03-19T16:14:14.933236",
+      "status": "active"
+    },
+    "batch_parallel_processor": {
+      "name": "Batch Parallel Processor",
+      "description": "批量操作并行化 - 并行执行批量操作，速度提升 3-5x",
+      "file": "batch_parallel_processor.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py batch_parallel_processor.py"
+      ],
+      "added_at": "2026-03-19T16:14:14.933270",
+      "status": "active"
+    },
+    "connection_pool_manager": {
+      "name": "Connection Pool Manager",
+      "description": "连接池管理器 - 复用数据库/HTTP 连接，连接开销减少 90%",
+      "file": "connection_pool_manager.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py connection_pool_manager.py"
+      ],
+      "added_at": "2026-03-19T16:14:14.933274",
+      "status": "active"
+    },
+    "comprehensive_performance_benchmark": {
+      "name": "Comprehensive Performance Benchmark",
+      "description": "综合性能基准测试 - 对比优化前后性能，生成详细报告",
+      "file": "comprehensive_performance_benchmark.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py comprehensive_performance_benchmark.py"
+      ],
+      "added_at": "2026-03-19T16:14:14.933276",
+      "status": "active"
+    },
+    "cpu_multiprocess_optimizer": {
+      "name": "CPU Multiprocess Optimizer",
+      "description": "CPU 密集型任务多进程优化器 - 多进程并行计算，速度提升 2-4x",
+      "file": "cpu_multiprocess_optimizer.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py cpu_multiprocess_optimizer.py"
+      ],
+      "added_at": "2026-03-19T16:22:40.524035",
+      "status": "active"
+    },
+    "pipeline_processor": {
+      "name": "Pipeline Processor",
+      "description": "流水线处理器 - 多阶段并行处理，吞吐量提升 2-3x",
+      "file": "pipeline_processor.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py pipeline_processor.py"
+      ],
+      "added_at": "2026-03-19T16:22:40.524072",
+      "status": "active"
+    },
+    "memory_mapped_file": {
+      "name": "Memory Mapped File",
+      "description": "内存映射文件 - mmap 大文件映射，读取速度提升 3-5x",
+      "file": "memory_mapped_file.py",
+      "category": "optimization",
+      "parameters": [],
+      "examples": [
+        "py memory_mapped_file.py"
+      ],
+      "added_at": "2026-03-19T16:22:40.524076",
+      "status": "active"
     }
   },
   "workflows": {
@@ -10217,5 +10376,6 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T15:11:26.457709"
+  "updated_at": "2026-03-19T16:22:40.524077",
+  "total_tools": 422
 }

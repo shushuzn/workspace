@@ -1,0 +1,78 @@
+{
+  "timestamp": "2026-03-19T16:14:26.717801",
+  "tests": [
+    {
+      "name": "缓存性能测试",
+      "result": {
+        "lru_cache": {
+          "write_1000_ms": 1.16,
+          "read_1000_ms": 0.34,
+          "hit_rate": "100.00%",
+          "ops_per_sec": 2983294.0
+        },
+        "multi_level_cache": {
+          "write_1000_ms": 3993.61,
+          "l1_read_1000_ms": 2.63,
+          "l1_hit_rate": "100.00%",
+          "overall_hit_rate": "100.00%",
+          "l1_ops_per_sec": 379564.0
+        },
+        "comparison": {
+          "lru_vs_multi_write": 0.0,
+          "lru_vs_multi_read": 0.13
+        }
+      },
+      "status": "pass"
+    },
+    {
+      "name": "查询性能测试",
+      "result": {
+        "error": "'dict' object is not callable"
+      },
+      "status": "fail"
+    },
+    {
+      "name": "并行处理测试",
+      "result": {
+        "sequential_100_ms": 152.66,
+        "parallel_100_ms": 17.53,
+        "speedup": 8.71,
+        "improvement": 88.5,
+        "avg_time_per_task_ms": 0.175
+      },
+      "status": "pass"
+    },
+    {
+      "name": "I/O 性能测试",
+      "result": {
+        "sync_read_50_ms": 10.28,
+        "buffered_read_50_ms": 7.66,
+        "file_count": 50
+      },
+      "status": "pass"
+    },
+    {
+      "name": "数据结构性能测试",
+      "result": {
+        "list_lookup_1000_ms": 47.48,
+        "set_lookup_1000_ms": 0.05,
+        "dict_lookup_1000_ms": 0.04,
+        "list_vs_set_speedup": 1003.82,
+        "list_vs_dict_speedup": 1096.55
+      },
+      "status": "pass"
+    }
+  ],
+  "summary": {
+    "total_tests": 5,
+    "passed_tests": 4,
+    "failed_tests": 1,
+    "key_metrics": {
+      "lru_cache_ops_sec": 2983294.0,
+      "parallel_speedup": 8.71,
+      "set_speedup_vs_list": 1003.82
+    },
+    "overall_speedup": 253.13,
+    "performance_rating": "优秀"
+  }
+}
