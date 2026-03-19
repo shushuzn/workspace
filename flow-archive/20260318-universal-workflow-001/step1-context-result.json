@@ -1,0 +1,36 @@
+{
+  "loaded": [
+    {
+      "file": "SOUL.md",
+      "size": 13428
+    },
+    {
+      "file": "USER.md",
+      "size": 10896
+    },
+    {
+      "file": "AGENTS.md",
+      "size": 11662
+    },
+    {
+      "file": "TOOLS.md",
+      "size": 5823
+    },
+    {
+      "file": "HEARTBEAT.md",
+      "size": 5766
+    },
+    {
+      "file": "13-memory/MEMORY.md",
+      "size": 10272
+    },
+    {
+      "file": "13-memory/2026-03-20.md",
+      "size": 5408
+    }
+  ],
+  "missing": [],
+  "total_size": 63255,
+  "valid": true,
+  "status": "pass"
+}

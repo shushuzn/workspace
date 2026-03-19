@@ -1,0 +1,71 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T02:16:00.707015
+# ---
+Command failed with exit code 1.
+[stdout]
+
+================================================================================
+                         工作流防护系统 v2.0
+================================================================================
+检查时间：2026-03-20T02:15:35.455990
+================================================================================
+
+[检查 1] Step ID 类型匹配...
+  [FAIL] 发现 1 个错误
+    - 步骤数量不匹配 - workflow.json=20, execution-state.json=1
+
+[检查 2] Step 状态完整性...
+  [FAIL] 发现 19 个错误
+    - 步骤 2: step_status 中缺失
+    - 步骤 3: step_status 中缺失
+    - 步骤 4: step_status 中缺失
+    - 步骤 5: step_status 中缺失
+    - 步骤 6: step_status 中缺失
+    - 步骤 6.5: step_status 中缺失
+    - 步骤 6.6: step_status 中缺失
+    - 步骤 6.7: step_status 中缺失
+    - 步骤 7: step_status 中缺失
+    - 步骤 8: step_status 中缺失
+    - 步骤 8.5: step_status 中缺失
+    - 步骤 8.6: step_status 中缺失
+    - 步骤 8.7: step_status 中缺失
+    - 步骤 9.1: step_status 中缺失
+    - 步骤 10.1: step_status 中缺失
+    - 步骤 10.5: step_status 中缺失
+    - 步骤 11.2: step_status 中缺失
+    - 步骤 12.2: step_status 中缺失
+    - 步骤 13.2: step_status 中缺失
+
+[检查 3] 完成率计算正确性...
+  [OK] 完成率计算正确
+
+[检查 4] Workflow Compliance 标志...
+  [OK] Compliance 标志正确
+
+================================================================================
+[RESULT] 验证失败 - 共 20 个错误
+
+[修复建议]
+  1. 确保 completed_steps 包含所有 20 个必需步骤
+  2. 添加 step_status['2'] 条目
+  3. 添加 step_status['3'] 条目
+  4. 添加 step_status['4'] 条目
+  5. 添加 step_status['5'] 条目
+  6. 添加 step_status['6'] 条目
+  7. 添加 step_status['6.5'] 条目
+  8. 添加 step_status['6.6'] 条目
+  9. 添加 step_status['6.7'] 条目
+  10. 添加 step_status['7'] 条目
+  11. 添加 step_status['8'] 条目
+  12. 添加 step_status['8.5'] 条目
+  13. 添加 step_status['8.6'] 条目
+  14. 添加 step_status['8.7'] 条目
+  15. 添加 step_status['9.1'] 条目
+  16. 添加 step_status['10.1'] 条目
+  17. 添加 step_status['10.5'] 条目
+  18. 添加 step_status['11.2'] 条目
+  19. 添加 step_status['12.2'] 条目
+  20. 添加 step_status['13.2'] 条目
+================================================================================
+
+[ACTION] 是否自动修复？(y/n): [INFO] 非交互模式，请手动修复或调用 auto_fix 参数

@@ -1,0 +1,39 @@
+# tool_name: read_file
+# created_at: 2026-03-20T02:17:09.330568
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_call_tracker.py  (lines 48-80 of 126)
+    def verify_execution(self, execution_state_path: str) -> dict:
+        """验证执行记录的真实性"""
+        with open(execution_state_path, "r", encoding="utf-8") as f:
+            state = json.load(f)
+        
+        # 获取该会话的工具调用日志
+        session_id = self._get_session_id()
+        calls = self.get_calls_for_session(session_id)
+        
+        # 验证
+        completed_steps = state.get("completed_steps", [])
+        step_status = state.get("step_status", {})
+        
+        verification = {
+            "total_steps": len(completed_steps),
+            "tool_calls_found": len(calls),
+            "is_valid": True,
+            "issues": []
+        }
+        
+        # 检查 1: 工具调用数量是否合理
+        if len(calls) < len(completed_steps) * 0.5:
+            verification["is_valid"] = False
+            verification["issues"].append(
+                f"工具调用过少：{len(calls)} calls for {len(completed_steps)} steps"
+            )
+        
+        # 检查 2: 时间合理性
+        if calls:
+            first_call = datetime.fromisoformat(calls[0]["timestamp"])
+            last_call = datetime.fromisoformat(calls[-1]["timestamp"])
+            total_duration = (last_call - first_call).total_seconds()
+            
+
+[46 more lines. Use start_line=81 to continue.]

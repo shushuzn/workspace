@@ -1,0 +1,38 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T02:15:52.494355
+# ---
+Command failed with exit code 1.
+[stderr]
+========================================
+Git Pre-Commit Workflow Check v2.0
+========================================
+Exception in thread Thread-1 (_readerthread):
+Traceback (most recent call last):
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1611, in _readerthread
+    buffer.append(fh.read())
+                  ~~~~~~~^^
+  File "<frozen codecs>", line 325, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb9 in position 109: invalid start byte
+
+================================================================================
+                    Git Pre-Commit 工作流检查 v2.0
+================================================================================
+检查时间：2026-03-20T02:15:32.729282
+
+[阶段 1] 运行 Workflow Guardian 深度验证...
+None
+
+[FAIL] Workflow Guardian 验证失败！
+[BLOCK] Git 提交被阻止！
+
+[ACTION] 请先修复 workflow_guardian 报告的问题
+================================================================================
+
+Workflow compliance check FAILED!
+Commit blocked. Please complete all required steps.
