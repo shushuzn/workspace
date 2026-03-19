@@ -1,0 +1,8 @@
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "task": "解决忘记用主工作流的问题",
+  "started_at": "2026-03-19T21:50:00+08:00",
+  "current_step": "Step 8",
+  "completed_steps": ["1", "2", "3", "4", "5", "6", "6.5", "6.6", "6.7", "7", "8"],
+  "status": "in_progress"
+}
