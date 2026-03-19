@@ -1,5 +1,5 @@
 {
-  "version": "1.11.22",
+  "version": "1.11.23",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -14428,6 +14428,30 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/error_handler.py",
       "created_at": "2026-03-20T05:30:00+08:00"
+    },
+    "progress_bar": {
+      "category": "ux",
+      "description": "Visual progress bar for multi-step tasks (ETA, step titles, context manager)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/progress_bar.py",
+      "created_at": "2026-03-20T05:45:00+08:00"
+    },
+    "auto_format_detector": {
+      "category": "ux",
+      "description": "Auto-detect optimal format (table/list/code/json) based on content (5 formats, 38 rules)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/auto_format_detector.py",
+      "created_at": "2026-03-20T05:45:00+08:00"
+    },
+    "summary_generator": {
+      "category": "ux",
+      "description": "TL;DR summary generator with expandable details (200 chars, 11 key indicators)",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/summary_generator.py",
+      "created_at": "2026-03-20T05:45:00+08:00"
     }
   },
   "workflows": {
@@ -14534,7 +14558,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T23:50:22.445360",
+  "updated_at": "2026-03-20T00:00:17.220261",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
