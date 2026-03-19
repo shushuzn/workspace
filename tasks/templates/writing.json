@@ -1,0 +1,31 @@
+{
+  "name": "写作任务模板",
+  "subtasks": [
+    {
+      "name": "大纲设计",
+      "estimated_hours": 1,
+      "dependencies": []
+    },
+    {
+      "name": "初稿撰写",
+      "estimated_hours": 4,
+      "dependencies": [
+        1
+      ]
+    },
+    {
+      "name": "修改润色",
+      "estimated_hours": 2,
+      "dependencies": [
+        2
+      ]
+    },
+    {
+      "name": "最终审核",
+      "estimated_hours": 1,
+      "dependencies": [
+        3
+      ]
+    }
+  ]
+}

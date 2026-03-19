@@ -1,0 +1,7 @@
+{
+  "auto_decompose": true,
+  "decompose_threshold": 3,
+  "default_priority": "important",
+  "enable_dependencies": true,
+  "auto_progress_report": true
+}

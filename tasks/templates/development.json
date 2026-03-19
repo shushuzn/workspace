@@ -1,0 +1,38 @@
+{
+  "name": "开发任务模板",
+  "subtasks": [
+    {
+      "name": "需求分析",
+      "estimated_hours": 2,
+      "dependencies": []
+    },
+    {
+      "name": "设计架构",
+      "estimated_hours": 3,
+      "dependencies": [
+        1
+      ]
+    },
+    {
+      "name": "编码实现",
+      "estimated_hours": 8,
+      "dependencies": [
+        2
+      ]
+    },
+    {
+      "name": "测试验证",
+      "estimated_hours": 4,
+      "dependencies": [
+        3
+      ]
+    },
+    {
+      "name": "文档编写",
+      "estimated_hours": 2,
+      "dependencies": [
+        3
+      ]
+    }
+  ]
+}

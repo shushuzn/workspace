@@ -1,0 +1,31 @@
+{
+  "name": "研究任务模板",
+  "subtasks": [
+    {
+      "name": "文献调研",
+      "estimated_hours": 2,
+      "dependencies": []
+    },
+    {
+      "name": "数据收集",
+      "estimated_hours": 3,
+      "dependencies": [
+        1
+      ]
+    },
+    {
+      "name": "数据分析",
+      "estimated_hours": 4,
+      "dependencies": [
+        2
+      ]
+    },
+    {
+      "name": "结果总结",
+      "estimated_hours": 1,
+      "dependencies": [
+        3
+      ]
+    }
+  ]
+}
