@@ -46,10 +46,10 @@
     "fatal_issues": ["学术诚信问题", "不可实现", "伦理风险", "成本过高"]
   },
   "output_files": {
-    "divergent_pool": "flow-archive/brainstorm-workflow-v2/divergent-ring-{iteration}.json",
-    "convergent_plan": "flow-archive/brainstorm-workflow-v2/convergent-ring-{iteration}.json",
-    "final_report": "flow-archive/brainstorm-workflow-v2/final-report.json",
-    "critic_review": "flow-archive/brainstorm-workflow-v2/critic-lite-review.json"
+    "divergent_pool": "flow-archive/20260320-brainstorm-v2/divergent-ring-{iteration}.json",
+    "convergent_plan": "flow-archive/20260320-brainstorm-v2/convergent-ring-{iteration}.json",
+    "final_report": "flow-archive/20260320-brainstorm-v2/final-report.json",
+    "critic_review": "flow-archive/20260320-brainstorm-v2/critic-lite-review.json"
   },
   "enforcement": {
     "enabled": true,
