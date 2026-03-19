@@ -1,5 +1,5 @@
 {
-  "version": "1.6.2",
+  "version": "1.6.3",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -9827,6 +9827,101 @@
       ],
       "added_at": "2026-03-19T14:09:47.156027",
       "status": "active"
+    },
+    "git-commit-push": {
+      "name": "Git Commit Push",
+      "description": "Git 提交和推送 - 自动 commit + push",
+      "file": "git_commit_push.py",
+      "category": "git",
+      "parameters": [
+        "--message",
+        "--push",
+        "--all"
+      ],
+      "examples": [
+        "py git_commit_push.py --message 'fix: update'"
+      ],
+      "added_at": "2026-03-19T14:32:33.621642",
+      "status": "active"
+    },
+    "execution-logger": {
+      "name": "Execution Logger",
+      "description": "执行日志记录 - 记录工具调用和执行结果",
+      "file": "execution_logger.py",
+      "category": "logging",
+      "parameters": [
+        "--log",
+        "--get-logs",
+        "--clear-logs"
+      ],
+      "examples": [
+        "py execution_logger.py --log 'tool executed'"
+      ],
+      "added_at": "2026-03-19T14:32:33.621676",
+      "status": "active"
+    },
+    "workflow-scheduler": {
+      "name": "Workflow Scheduler",
+      "description": "工作流调度器 - 调度和管理工作流执行",
+      "file": "workflow_scheduler.py",
+      "category": "workflow",
+      "parameters": [
+        "--schedule",
+        "--list",
+        "--cancel"
+      ],
+      "examples": [
+        "py workflow_scheduler.py --schedule 'task'"
+      ],
+      "added_at": "2026-03-19T14:32:33.621680",
+      "status": "active"
+    },
+    "tool-suggester": {
+      "name": "Tool Suggester",
+      "description": "工具推荐器 - 根据任务推荐合适的工具",
+      "file": "tool_suggester.py",
+      "category": "assistant",
+      "parameters": [
+        "--suggest",
+        "--task"
+      ],
+      "examples": [
+        "py tool_suggester.py --task 'analyze image'"
+      ],
+      "added_at": "2026-03-19T14:32:33.621681",
+      "status": "active"
+    },
+    "task-analyzer": {
+      "name": "Task Analyzer",
+      "description": "任务分析器 - 分析任务复杂度和类型",
+      "file": "task_analyzer.py",
+      "category": "analysis",
+      "parameters": [
+        "--analyze",
+        "--complexity",
+        "--type"
+      ],
+      "examples": [
+        "py task_analyzer.py --analyze 'complex task'"
+      ],
+      "added_at": "2026-03-19T14:32:33.621684",
+      "status": "active"
+    },
+    "checkpoint-saver": {
+      "name": "Checkpoint Saver",
+      "description": "检查点保存器 - 保存工作流执行状态",
+      "file": "checkpoint_saver.py",
+      "category": "workflow",
+      "parameters": [
+        "--save",
+        "--load",
+        "--list"
+      ],
+      "examples": [
+        "py checkpoint_saver.py --save 'step6'"
+      ],
+      "added_at": "2026-03-19T14:32:33.621685",
+      "status": "active"
     }
   },
   "workflows": {
@@ -9933,5 +10028,5 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T14:07:24.743669"
+  "updated_at": "2026-03-19T14:32:33.621687"
 }

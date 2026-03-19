@@ -212,36 +212,44 @@
     {
       "step_id": 10,
       "name": "质量门禁",
-      "description": "质量门禁检查 (代码质量/安全/复杂度/集成度)",
-      "tool_id": "quality_gate_check",
+      "description": "质量门禁检查 (代码质量/安全/复杂度/集成度/测试)",
+      "tool_id": "quality-gate-check",
       "stage": "validation",
       "parameters": {
         "min_quality_score": 80,
-        "check_integration": true
+        "check_integration": true,
+        "check_security": true,
+        "check_performance": true,
+        "check_tests": true
       },
       "blocking": true,
       "timeout_seconds": 120,
       "validation": {
         "quality_score": ">=80",
         "security_issues": 0,
-        "integration_passed": true
+        "integration_passed": true,
+        "performance_passed": true,
+        "tests_passed": true
       }
     },
     {
       "step_id": 11,
       "name": "会话压缩保存",
-      "description": "压缩会话内容并保存到 daily note",
-      "tool_id": "session_end",
+      "description": "压缩会话内容并保存到 daily note + 记忆持久化",
+      "tool_id": "post-session-compress",
       "stage": "completion",
       "parameters": {
         "compression_ratio_target": 0.96,
-        "save_to_daily": true
+        "save_to_daily": true,
+        "save_to_memory": true,
+        "importance_score_threshold": 0.5
       },
       "blocking": true,
       "timeout_seconds": 60,
       "validation": {
         "compressed_size_kb": "<5",
-        "saved_to_daily": true
+        "saved_to_daily": true,
+        "saved_to_memory": true
       }
     },
     {
