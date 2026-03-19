@@ -1,0 +1,49 @@
+{
+  "timestamp": "20260319_145636",
+  "results": [
+    {
+      "test": "File Read (SOUL.md)",
+      "iterations": 10,
+      "mean_ms": 0.14909000601619482,
+      "median_ms": 0.12704997789114714,
+      "std_dev_ms": 0.06295769176966218,
+      "min_ms": 0.10609999299049377,
+      "max_ms": 0.3155000158585608
+    },
+    {
+      "test": "JSON Parse (tools_registry.json)",
+      "iterations": 10,
+      "mean_ms": 2.725849999114871,
+      "median_ms": 2.5457000301685184,
+      "std_dev_ms": 0.6937746526755646,
+      "min_ms": 2.165899961255491,
+      "max_ms": 4.530499980319291
+    },
+    {
+      "test": "Workflow Load (workflow.json)",
+      "iterations": 10,
+      "mean_ms": 0.2213000028859824,
+      "median_ms": 0.1953499740920961,
+      "std_dev_ms": 0.059938174308732196,
+      "min_ms": 0.16870000399649143,
+      "max_ms": 0.33660000190138817
+    },
+    {
+      "test": "Context Load (7 core files)",
+      "iterations": 5,
+      "mean_time_ms": 1.5225999988615513,
+      "median_time_ms": 1.1781000066548586,
+      "mean_size_kb": 53.9228515625,
+      "total_size_kb": 53.9228515625
+    },
+    {
+      "test": "Tool Execution (simulated)",
+      "iterations": 5,
+      "mean_ms": 10.303599992766976,
+      "median_ms": 10.3506000014022,
+      "std_dev_ms": 0.18797434903815494,
+      "min_ms": 10.066599992569536,
+      "max_ms": 10.553799977060407
+    }
+  ]
+}

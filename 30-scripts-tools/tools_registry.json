@@ -1,5 +1,5 @@
 {
-  "version": "1.6.3",
+  "version": "1.6.4",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -9922,6 +9922,96 @@
       ],
       "added_at": "2026-03-19T14:32:33.621685",
       "status": "active"
+    },
+    "auto-doc-generator": {
+      "name": "Auto Doc Generator",
+      "description": "自动文档生成器 - 根据代码/项目结构自动生成文档",
+      "file": "auto_doc_generator.py",
+      "category": "documentation",
+      "parameters": [
+        "--output-dir",
+        "--include-tests"
+      ],
+      "examples": [
+        "py auto_doc_generator.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823493",
+      "status": "active"
+    },
+    "performance-benchmark": {
+      "name": "Performance Benchmark",
+      "description": "性能基准测试 - 测试系统性能并生成报告",
+      "file": "performance_benchmark.py",
+      "category": "performance",
+      "parameters": [
+        "--output-dir",
+        "--iterations"
+      ],
+      "examples": [
+        "py performance_benchmark.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823527",
+      "status": "active"
+    },
+    "changelog-generator": {
+      "name": "Changelog Generator",
+      "description": "变更日志生成器 - 从 Git 历史自动生成 CHANGELOG.md",
+      "file": "changelog_generator.py",
+      "category": "documentation",
+      "parameters": [
+        "--output",
+        "--max-commits"
+      ],
+      "examples": [
+        "py changelog_generator.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823531",
+      "status": "active"
+    },
+    "memory-auto-compress": {
+      "name": "Memory Auto Compress",
+      "description": "记忆自动压缩 - 自动压缩过期的记忆文件",
+      "file": "memory_auto_compress.py",
+      "category": "memory",
+      "parameters": [
+        "--days-old",
+        "--cleanup-after"
+      ],
+      "examples": [
+        "py memory_auto_compress.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823533",
+      "status": "active"
+    },
+    "incremental-executor": {
+      "name": "Incremental Executor",
+      "description": "增量执行支持 - 只执行变更的部分，跳过未变化的内容",
+      "file": "incremental_executor.py",
+      "category": "execution",
+      "parameters": [
+        "--files",
+        "--cache-dir"
+      ],
+      "examples": [
+        "py incremental_executor.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823535",
+      "status": "active"
+    },
+    "timeout-optimizer": {
+      "name": "Timeout Optimizer",
+      "description": "超时优化器 - 优化工作流步骤超时设置",
+      "file": "timeout_optimizer.py",
+      "category": "optimization",
+      "parameters": [
+        "--workflow",
+        "--optimize"
+      ],
+      "examples": [
+        "py timeout_optimizer.py --workflow workflow.json"
+      ],
+      "added_at": "2026-03-19T14:54:26.823537",
+      "status": "active"
     }
   },
   "workflows": {
@@ -10028,5 +10118,5 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T14:32:33.621687"
+  "updated_at": "2026-03-19T14:54:26.823539"
 }

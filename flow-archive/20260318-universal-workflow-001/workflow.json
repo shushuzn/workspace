@@ -116,7 +116,7 @@
       "stage": "execution",
       "parameters": {},
       "blocking": true,
-      "timeout_seconds": 1800,
+      "timeout_seconds": 600,
       "conditional": {
         "run_if": "subworkflow_required"
       },
@@ -267,6 +267,26 @@
       "validation": {
         "commit_success": true,
         "push_success": true
+      }
+    },
+    {
+      "step_id": 13,
+      "name": "文档生成 (可选)",
+      "description": "自动生成项目文档/工具文档/变更日志",
+      "tool_id": "auto-doc-generator",
+      "stage": "completion",
+      "parameters": {
+        "generate_project_overview": true,
+        "generate_tool_docs": true,
+        "generate_changelog": true
+      },
+      "blocking": false,
+      "timeout_seconds": 120,
+      "conditional": {
+        "execute_if": "documentation_needed"
+      },
+      "validation": {
+        "docs_generated": true
       }
     }
   ],
