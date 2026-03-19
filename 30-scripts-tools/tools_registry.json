@@ -1,5 +1,5 @@
 {
-  "version": "1.7.1",
+  "version": "1.7.2",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -10294,6 +10294,30 @@
       ],
       "added_at": "2026-03-19T16:55:37.746946",
       "status": "active"
+    },
+    "tool_governance_analyzer": {
+      "name": "Tool Governance Analyzer",
+      "description": "工具治理分析 - 分析 424 个工具现状，识别问题",
+      "file": "tool_governance_analyzer.py",
+      "category": "analysis",
+      "parameters": [],
+      "examples": [
+        "py tool_governance_analyzer.py"
+      ],
+      "added_at": "2026-03-19T17:03:53.291341",
+      "status": "active"
+    },
+    "brainstorm_tool_governance": {
+      "name": "Brainstorm Tool Governance",
+      "description": "工具爆炸治理方案 - 5 层治理框架，15 个行动",
+      "file": "brainstorm_tool_governance.py",
+      "category": "brainstorm",
+      "parameters": [],
+      "examples": [
+        "py brainstorm_tool_governance.py"
+      ],
+      "added_at": "2026-03-19T17:03:53.291645",
+      "status": "active"
     }
   },
   "workflows": {
@@ -10400,6 +10424,6 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T16:55:37.746973",
-  "total_tools": 424
+  "updated_at": "2026-03-19T17:03:53.291658",
+  "total_tools": 426
 }
