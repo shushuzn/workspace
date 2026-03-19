@@ -1,5 +1,5 @@
 {
-  "version": "1.11.17",
+  "version": "1.11.18",
   "last_updated": "2026-03-19T19:54:54.158751",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -12548,38 +12548,12 @@
       "automation_updated_at": "2026-03-19T18:47:43.500004"
     },
     "task_decomposer": {
-      "name": "Task Decomposer",
-      "description": "任务分解自动化 - 依赖管理、优先级排序、进度追踪",
-      "file": "task_decomposer.py",
-      "category": "task",
-      "parameters": [
-        "--decompose",
-        "--progress",
-        "--execute-next",
-        "--list"
-      ],
-      "examples": [
-        "py task_decomposer.py --decompose '复杂任务' --template development"
-      ],
-      "added_at": "2026-03-19T14:07:24.743659",
+      "category": "productivity",
+      "description": "Auto-decompose large tasks into <=10min subtasks",
       "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "auto_register_tools.py",
-        "integrate_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013760",
-      "renamed_from": "task-decomposer",
-      "renamed_at": "2026-03-19T17:33:50.993190",
-      "naming_standard": "underscore",
-      "quality_score": 58.5,
-      "quality_details": {
-        "functionality": "功能描述一般",
-        "code_quality": "文件不存在或无文件",
-        "documentation": "描述:True, 参数:True, 示例:True",
-        "usage": "低频使用 (2 次)",
-        "maintenance": "已添加但未更新"
-      }
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/task_decomposer.py",
+      "created_at": "2026-03-20T03:00:00+08:00"
     },
     "proactive_agent": {
       "name": "Proactive Agent",
@@ -12809,35 +12783,12 @@
       }
     },
     "auto_doc_generator": {
-      "name": "Auto Doc Generator",
-      "description": "自动文档生成器 - 根据代码/项目结构自动生成文档",
-      "file": "auto_doc_generator.py",
       "category": "documentation",
-      "parameters": [
-        "--output-dir",
-        "--include-tests"
-      ],
-      "examples": [
-        "py auto_doc_generator.py"
-      ],
-      "added_at": "2026-03-19T14:54:26.823493",
+      "description": "Auto-generate docs from Python code and JSON configs",
       "status": "active",
-      "usage_count": 1,
-      "usage_files": [
-        "register_low_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014047",
-      "renamed_from": "auto-doc-generator",
-      "renamed_at": "2026-03-19T17:33:50.993534",
-      "naming_standard": "underscore",
-      "quality_score": 67.5,
-      "quality_details": {
-        "functionality": "有独特功能描述",
-        "code_quality": "文件不存在或无文件",
-        "documentation": "描述:True, 参数:True, 示例:True",
-        "usage": "低频使用 (1 次)",
-        "maintenance": "已添加但未更新"
-      }
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/auto_doc_generator.py",
+      "created_at": "2026-03-20T03:00:00+08:00"
     },
     "performance_benchmark": {
       "name": "Performance Benchmark",
@@ -14389,6 +14340,14 @@
       "usage_count": 0,
       "file_path": "30-scripts-tools/compression_scheduler.py",
       "created_at": "2026-03-20T02:00:00+08:00"
+    },
+    "context_aware_assistant": {
+      "category": "assistant",
+      "description": "Recommend tools based on current file/directory context",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/context_aware_assistant.py",
+      "created_at": "2026-03-20T03:00:00+08:00"
     }
   },
   "workflows": {
@@ -14495,7 +14454,7 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T22:58:06.270255",
+  "updated_at": "2026-03-19T23:09:26.548901",
   "total_tools": 372,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
