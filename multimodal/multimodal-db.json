@@ -1,0 +1,12 @@
+{
+  "items": [],
+  "fused_results": [],
+  "next_id": 1,
+  "stats": {
+    "total_processed": 0,
+    "images": 0,
+    "audio": 0,
+    "documents": 0,
+    "fusions": 0
+  }
+}
