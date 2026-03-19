@@ -1,6 +1,6 @@
 {
-  "version": "1.11.24",
-  "last_updated": "2026-03-20T00:14:42.991068",
+  "version": "1.11.25",
+  "last_updated": "2026-03-20T00:20:32.754069",
   "changes": [
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
     "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
@@ -14543,6 +14543,58 @@
         "chunk_size": 100,
         "chunk_delay": 0.1,
         "show_progress": true
+      }
+    },
+    "BRAIN-STOCK-001": {
+      "tool_id": "BRAIN-STOCK-001",
+      "name": "brainstorm_stock_analysis",
+      "description": "Stock analysis workflow brainstorm - AI idea generation",
+      "category": "brainstorm",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:20:32.753978",
+      "file_path": "30-scripts-tools/brainstorm_stock_analysis.py",
+      "size_kb": 11.3,
+      "status": "active",
+      "tested": true,
+      "output": {
+        "components": 24,
+        "p0_count": 18,
+        "p1_count": 6,
+        "total_effort_hours": 153
+      }
+    },
+    "BRAIN-STOCK-002": {
+      "tool_id": "BRAIN-STOCK-002",
+      "name": "stock_analysis_mindmap",
+      "description": "Stock analysis workflow mind map visualization",
+      "category": "brainstorm",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:20:32.754050",
+      "file_path": "30-scripts-tools/stock-analysis-mindmap.md",
+      "size_kb": 4.6,
+      "status": "active",
+      "tested": true,
+      "output": {
+        "format": "markdown",
+        "has_dependency_graph": true,
+        "has_implementation_phases": true
+      }
+    },
+    "BRAIN-STOCK-003": {
+      "tool_id": "BRAIN-STOCK-003",
+      "name": "stock_analysis_quality_predictor",
+      "description": "Quality prediction for stock analysis workflow",
+      "category": "brainstorm",
+      "version": "1.0.0",
+      "created_at": "2026-03-20T00:20:32.754054",
+      "file_path": "30-scripts-tools/stock_analysis_quality_predictor.py",
+      "size_kb": 5.9,
+      "status": "active",
+      "tested": true,
+      "output": {
+        "quality_score": 98.5,
+        "grade": "A - Excellent",
+        "dimensions": 5
       }
     }
   },
