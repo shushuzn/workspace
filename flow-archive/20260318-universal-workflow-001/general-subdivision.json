@@ -1,0 +1,30 @@
+{
+  "subdivision_date": "2026-03-19T17:34:42.047307",
+  "original_general_count": 222,
+  "reclassified_count": 145,
+  "remaining_general": 77,
+  "new_categories": {
+    "automation": 22,
+    "memory": 45,
+    "analysis": 10,
+    "integration": 4,
+    "optimization": 10,
+    "backup": 2,
+    "workflow": 3,
+    "quality": 16,
+    "utility": 5,
+    "context": 5,
+    "testing": 2,
+    "tool": 3,
+    "documentation": 3,
+    "execution": 1,
+    "learning": 3,
+    "monitoring": 2,
+    "ui": 2,
+    "performance": 2,
+    "session": 3,
+    "git": 1,
+    "task": 1
+  },
+  "reduction_percentage": 65.31531531531532
+}

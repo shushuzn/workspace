@@ -1,5 +1,5 @@
 {
-  "version": "1.7.7",
+  "version": "1.7.9",
   "last_updated": "2026-03-19T01:45:00+08:00",
   "changes": [
     "Added workflow-enforcer tool for mandatory workflow compliance",
@@ -104,70 +104,6 @@
         "find_unsafe_calls.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013670"
-    },
-    "session-compress": {
-      "tool_id": "session-compress",
-      "name": "Post-Session Compressor",
-      "description": "会话压缩工具 - 压缩对话到结构化摘要",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\post_session_compress.py --auto",
-      "parameters": {},
-      "validation": {
-        "context_size_limit_kb": 100,
-        "daily_note_lines_limit": 100,
-        "verify_with": "fast_load.py"
-      },
-      "triggers": [
-        "session_end"
-      ],
-      "review_required": true,
-      "blocking": true,
-      "timeout_seconds": 30,
-      "category": "memory",
-      "categorized_at": "2026-03-19T17:20:34.330670",
-      "categorized_method": "auto",
-      "usage_count": 2,
-      "usage_files": [
-        "check_key_tools.py",
-        "fix_workflow_tool_ids.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013803"
-    },
-    "context-verify": {
-      "tool_id": "context-verify",
-      "name": "Fast Load Context Verifier",
-      "description": "上下文大小验证工具 - 确保<100KB",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\fast_load.py",
-      "parameters": {},
-      "validation": {
-        "max_size_kb": 100,
-        "core_files": [
-          "SOUL.md",
-          "USER.md",
-          "AGENTS.md",
-          "TOOLS.md",
-          "HEARTBEAT.md",
-          "13-memory/MEMORY.md",
-          "13-memory/YYYY-MM-DD.md"
-        ]
-      },
-      "triggers": [
-        "session_start",
-        "session_end"
-      ],
-      "review_required": true,
-      "blocking": true,
-      "timeout_seconds": 10,
-      "category": "quality",
-      "categorized_at": "2026-03-19T17:20:34.330673",
-      "categorized_method": "auto",
-      "usage_count": 2,
-      "usage_files": [
-        "check_key_tools.py",
-        "fix_workflow_tool_ids.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013804"
     },
     "memory-consistency-checker": {
       "tool_id": "memory-consistency-checker",
@@ -684,55 +620,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013718"
     },
-    "quality-gate": {
-      "tool_id": "quality-gate",
-      "name": "Quality Gate Checker",
-      "description": "质量门禁 - 代码质量/安全/复杂度/测试覆盖率",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\quality_gate.py --check {check} --min-score {min-score}",
-      "parameters": {
-        "check": {
-          "type": "string",
-          "required": false,
-          "description": "检查文件模式",
-          "default": "30-scripts-tools/*.py"
-        },
-        "min-score": {
-          "type": "integer",
-          "required": false,
-          "description": "最低通过分数",
-          "default": 80,
-          "min": 0,
-          "max": 100
-        }
-      },
-      "validation": {
-        "min_passing_score": 80,
-        "checks": [
-          "pylint",
-          "flake8",
-          "security",
-          "complexity",
-          "test_coverage",
-          "documentation"
-        ]
-      },
-      "triggers": [
-        "auto_critic_v7"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 60,
-      "category": "quality",
-      "categorized_at": "2026-03-19T17:20:34.330697",
-      "categorized_method": "auto",
-      "usage_count": 2,
-      "usage_files": [
-        "check_key_tools.py",
-        "fix_workflow_tool_ids.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013807"
-    },
     "p1-issue-fixer": {
       "tool_id": "p1-issue-fixer",
       "name": "P1 Issue Auto-Fixer",
@@ -988,122 +875,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013724"
     },
-    "workflow-session-end": {
-      "tool_id": "workflow-session-end",
-      "name": "Session End Sub-Workflow",
-      "description": "子工作流 - 会话结束处理 (主工作流专用)",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\tool_executor.py --workflow session-end",
-      "workflow_type": "subworkflow",
-      "parent_workflow": "20260318-universal-workflow-001",
-      "parameters": {
-        "commit_message": {
-          "type": "string",
-          "required": true,
-          "description": "Git 提交信息"
-        }
-      },
-      "triggers": [
-        "main_workflow_call"
-      ],
-      "review_required": false,
-      "blocking": true,
-      "timeout_seconds": 120,
-      "category": "workflow",
-      "categorized_at": "2026-03-19T17:20:34.330706",
-      "categorized_method": "auto"
-    },
-    "workflow-brainstorm": {
-      "tool_id": "workflow-brainstorm",
-      "name": "Brainstorm Sub-Workflow",
-      "description": "子工作流 - 头脑风暴 (主工作流专用)",
-      "version": "1.0",
-      "command": "py 30-scripts-tools\\tool_executor.py --workflow brainstorm-001",
-      "workflow_type": "subworkflow",
-      "parent_workflow": "20260318-universal-workflow-001",
-      "parameters": {
-        "topic": {
-          "type": "string",
-          "required": false,
-          "description": "头脑风暴主题"
-        }
-      },
-      "triggers": [
-        "main_workflow_call"
-      ],
-      "review_required": false,
-      "blocking": false,
-      "timeout_seconds": 300,
-      "category": "workflow",
-      "categorized_at": "2026-03-19T17:20:34.330707",
-      "categorized_method": "auto"
-    },
-    "workflow-research": {
-      "tool_id": "workflow-research",
-      "name": "Research Sub-Workflow",
-      "description": "子工作流 - 深度研究 (主工作流专用)",
-      "version": "1.0.0",
-      "command": "py 30-scripts-tools\\tool_executor.py --workflow research-001",
-      "workflow_type": "subworkflow",
-      "parent_workflow": "20260318-universal-workflow-001",
-      "flow_id": "20260318-research-001",
-      "parameters": {
-        "research_question": {
-          "type": "string",
-          "required": true,
-          "description": "研究问题"
-        },
-        "sources": {
-          "type": "array",
-          "required": false,
-          "description": "检索来源",
-          "default": [
-            "arxiv",
-            "google_scholar"
-          ]
-        }
-      },
-      "triggers": [
-        "main_workflow_call"
-      ],
-      "review_required": false,
-      "blocking": true,
-      "timeout_seconds": 3600,
-      "category": "workflow",
-      "categorized_at": "2026-03-19T17:20:34.330709",
-      "categorized_method": "auto"
-    },
-    "workflow-project": {
-      "tool_id": "workflow-project",
-      "name": "Project Sub-Workflow",
-      "description": "子工作流 - 项目管理 (主工作流专用)",
-      "version": "1.0.0",
-      "command": "py 30-scripts-tools\\tool_executor.py --workflow project-001",
-      "workflow_type": "subworkflow",
-      "parent_workflow": "20260318-universal-workflow-001",
-      "flow_id": "20260318-project-001",
-      "parameters": {
-        "project_name": {
-          "type": "string",
-          "required": true,
-          "description": "项目名称"
-        },
-        "objectives": {
-          "type": "array",
-          "required": false,
-          "description": "项目目标"
-        }
-      },
-      "triggers": [
-        "main_workflow_call"
-      ],
-      "review_required": false,
-      "blocking": true,
-      "timeout_seconds": 1800,
-      "category": "workflow",
-      "categorized_at": "2026-03-19T17:20:34.330710",
-      "categorized_method": "auto"
-    },
     "workflow-enforcer": {
       "tool_id": "workflow-enforcer",
       "name": "Workflow Enforcement Tool",
@@ -1151,7 +922,7 @@
       "description": "active-learning-trigger 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1172,7 +943,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541323",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034322",
+      "recategorized_from": "general"
     },
     "adaptive_ttl_cache": {
       "tool_id": "adaptive_ttl_cache",
@@ -1242,7 +1015,7 @@
       "description": "ai_task_scheduler 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1264,7 +1037,9 @@
       "usage_files": [
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014104"
+      "usage_tracked_at": "2026-03-19T17:28:52.014104",
+      "recategorized_at": "2026-03-19T17:34:42.034372",
+      "recategorized_from": "general"
     },
     "ai_tool_suggester": {
       "tool_id": "ai_tool_suggester",
@@ -1301,7 +1076,7 @@
       "description": "analyze-memory-scripts 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -1318,7 +1093,9 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "recategorized_at": "2026-03-19T17:34:42.034391",
+      "recategorized_from": "general"
     },
     "analyze_memory_tools": {
       "tool_id": "analyze_memory_tools",
@@ -1326,7 +1103,7 @@
       "description": "analyze-memory-tools 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -1343,7 +1120,9 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "recategorized_at": "2026-03-19T17:34:42.034408",
+      "recategorized_from": "general"
     },
     "analyze_causal": {
       "tool_id": "analyze_causal",
@@ -1351,7 +1130,7 @@
       "description": "analyze_causal 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -1372,7 +1151,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541333",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034433",
+      "recategorized_from": "general"
     },
     "anomaly_detector": {
       "tool_id": "anomaly_detector",
@@ -1380,7 +1161,7 @@
       "description": "anomaly_detector 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -1406,7 +1187,9 @@
         "workflow_generator.py",
         "workflow_optimizer_ai.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013638"
+      "usage_tracked_at": "2026-03-19T17:28:52.013638",
+      "recategorized_at": "2026-03-19T17:34:42.034448",
+      "recategorized_from": "general"
     },
     "anomaly_detector_pro": {
       "tool_id": "anomaly_detector_pro",
@@ -1414,7 +1197,7 @@
       "description": "anomaly_detector_pro 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -1436,7 +1219,9 @@
       "usage_files": [
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014105"
+      "usage_tracked_at": "2026-03-19T17:28:52.014105",
+      "recategorized_at": "2026-03-19T17:34:42.034463",
+      "recategorized_from": "general"
     },
     "api_gateway": {
       "tool_id": "api_gateway",
@@ -1540,7 +1325,7 @@
       "description": "async_executor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "integration",
       "parameters": {
         "args": {
           "type": "string",
@@ -1561,7 +1346,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541335",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034498",
+      "recategorized_from": "general"
     },
     "auto_critic": {
       "tool_id": "auto_critic",
@@ -1632,7 +1419,7 @@
       "description": "auto_data_cleaner 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1657,7 +1444,9 @@
         "openclaw.py",
         "phase4_dashboard.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013725"
+      "usage_tracked_at": "2026-03-19T17:28:52.013725",
+      "recategorized_at": "2026-03-19T17:34:42.034511",
+      "recategorized_from": "general"
     },
     "auto_deploy": {
       "tool_id": "auto_deploy",
@@ -1665,7 +1454,7 @@
       "description": "auto_deploy 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1688,7 +1477,9 @@
         "auto_deploy.py",
         "batch_security_fixer.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013727"
+      "usage_tracked_at": "2026-03-19T17:28:52.013727",
+      "recategorized_at": "2026-03-19T17:34:42.034523",
+      "recategorized_from": "general"
     },
     "auto_deployer": {
       "tool_id": "auto_deployer",
@@ -1696,7 +1487,7 @@
       "description": "auto_deployer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1722,7 +1513,9 @@
         "openclaw.py",
         "phase4_dashboard.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013737"
+      "usage_tracked_at": "2026-03-19T17:28:52.013737",
+      "recategorized_at": "2026-03-19T17:34:42.034536",
+      "recategorized_from": "general"
     },
     "auto_distill": {
       "tool_id": "auto_distill",
@@ -1730,7 +1523,7 @@
       "description": "auto_distill 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -1756,7 +1549,9 @@
         "memory_engine_evolution.py",
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013738"
+      "usage_tracked_at": "2026-03-19T17:28:52.013738",
+      "recategorized_at": "2026-03-19T17:34:42.034548",
+      "recategorized_from": "general"
     },
     "auto_fix_orchestrator": {
       "tool_id": "auto_fix_orchestrator",
@@ -1764,7 +1559,7 @@
       "description": "auto_fix_orchestrator 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1787,7 +1582,9 @@
         "auto_fix_orchestrator.py",
         "production_monitor_v2.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013750"
+      "usage_tracked_at": "2026-03-19T17:28:52.013750",
+      "recategorized_at": "2026-03-19T17:34:42.034563",
+      "recategorized_from": "general"
     },
     "auto_optimizer": {
       "tool_id": "auto_optimizer",
@@ -1795,7 +1592,7 @@
       "description": "auto_optimizer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -1818,7 +1615,9 @@
         "auto_optimizer.py",
         "doc_generator.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013752"
+      "usage_tracked_at": "2026-03-19T17:28:52.013752",
+      "recategorized_at": "2026-03-19T17:34:42.034576",
+      "recategorized_from": "general"
     },
     "auto_recovery": {
       "tool_id": "auto_recovery",
@@ -1826,7 +1625,7 @@
       "description": "auto_recovery 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1849,7 +1648,9 @@
         "auto_recovery.py",
         "workflow_anomaly_detector.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013755"
+      "usage_tracked_at": "2026-03-19T17:28:52.013755",
+      "recategorized_at": "2026-03-19T17:34:42.034588",
+      "recategorized_from": "general"
     },
     "auto_signal_extractor": {
       "tool_id": "auto_signal_extractor",
@@ -1857,7 +1658,7 @@
       "description": "auto_signal_extractor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1879,7 +1680,9 @@
       "usage_files": [
         "dialog_integrator.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013901"
+      "usage_tracked_at": "2026-03-19T17:28:52.013901",
+      "recategorized_at": "2026-03-19T17:34:42.034602",
+      "recategorized_from": "general"
     },
     "auto_test_generator": {
       "tool_id": "auto_test_generator",
@@ -1887,7 +1690,7 @@
       "description": "auto_test_generator 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1913,7 +1716,9 @@
         "smart_doc_generator.py",
         "tool_integration.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013767"
+      "usage_tracked_at": "2026-03-19T17:28:52.013767",
+      "recategorized_at": "2026-03-19T17:34:42.034616",
+      "recategorized_from": "general"
     },
     "auto_test_runner": {
       "tool_id": "auto_test_runner",
@@ -1921,7 +1726,7 @@
       "description": "auto_test_runner 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1947,7 +1752,9 @@
         "register_medium_priority_tools.py",
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013768"
+      "usage_tracked_at": "2026-03-19T17:28:52.013768",
+      "recategorized_at": "2026-03-19T17:34:42.034629",
+      "recategorized_from": "general"
     },
     "auto_tuner": {
       "tool_id": "auto_tuner",
@@ -1955,7 +1762,7 @@
       "description": "auto_tuner 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -1977,7 +1784,9 @@
       "usage_files": [
         "auto_tuner.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013769"
+      "usage_tracked_at": "2026-03-19T17:28:52.013769",
+      "recategorized_at": "2026-03-19T17:34:42.034641",
+      "recategorized_from": "general"
     },
     "automation_enhancer": {
       "tool_id": "automation_enhancer",
@@ -1985,7 +1794,7 @@
       "description": "automation_enhancer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -2006,7 +1815,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541337",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034655",
+      "recategorized_from": "general"
     },
     "automation_orchestrator": {
       "tool_id": "automation_orchestrator",
@@ -2014,7 +1825,7 @@
       "description": "automation_orchestrator 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -2040,7 +1851,9 @@
         "doc_generator.py",
         "openclaw.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013664"
+      "usage_tracked_at": "2026-03-19T17:28:52.013664",
+      "recategorized_at": "2026-03-19T17:34:42.034669",
+      "recategorized_from": "general"
     },
     "autonomous_decision": {
       "tool_id": "autonomous_decision",
@@ -2048,7 +1861,7 @@
       "description": "autonomous_decision 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -2073,7 +1886,9 @@
         "batch_security_fixer.py",
         "security_validator.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013704"
+      "usage_tracked_at": "2026-03-19T17:28:52.013704",
+      "recategorized_at": "2026-03-19T17:34:42.034682",
+      "recategorized_from": "general"
     },
     "autonomous_research_assistant": {
       "tool_id": "autonomous_research_assistant",
@@ -2081,7 +1896,7 @@
       "description": "autonomous_research_assistant 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -2104,7 +1919,9 @@
         "autonomous_research_assistant.py",
         "batch_security_fixer.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013705"
+      "usage_tracked_at": "2026-03-19T17:28:52.013705",
+      "recategorized_at": "2026-03-19T17:34:42.034698",
+      "recategorized_from": "general"
     },
     "backup_strategy_restructure": {
       "tool_id": "backup_strategy_restructure",
@@ -2112,7 +1929,7 @@
       "description": "backup-strategy-restructure 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "backup",
       "parameters": {
         "args": {
           "type": "string",
@@ -2133,7 +1950,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541338",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034715",
+      "recategorized_from": "general"
     },
     "batch_card_generator": {
       "tool_id": "batch_card_generator",
@@ -2141,7 +1960,7 @@
       "description": "batch_card_generator 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -2163,7 +1982,9 @@
       "usage_files": [
         "batch_card_generator.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013771"
+      "usage_tracked_at": "2026-03-19T17:28:52.013771",
+      "recategorized_at": "2026-03-19T17:34:42.034729",
+      "recategorized_from": "general"
     },
     "batch_processor_v2": {
       "tool_id": "batch_processor_v2",
@@ -2171,7 +1992,7 @@
       "description": "batch_processor_v2 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -2193,7 +2014,9 @@
       "usage_files": [
         "obsidian_tools.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013999"
+      "usage_tracked_at": "2026-03-19T17:28:52.013999",
+      "recategorized_at": "2026-03-19T17:34:42.034744",
+      "recategorized_from": "general"
     },
     "batch_security_fixer": {
       "tool_id": "batch_security_fixer",
@@ -2414,7 +2237,7 @@
       "description": "canvas_auto_updater 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -2436,7 +2259,9 @@
       "usage_files": [
         "obsidian_tools.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014000"
+      "usage_tracked_at": "2026-03-19T17:28:52.014000",
+      "recategorized_at": "2026-03-19T17:34:42.034758",
+      "recategorized_from": "general"
     },
     "capacity_planner": {
       "tool_id": "capacity_planner",
@@ -2536,7 +2361,7 @@
       "description": "ci_cd_pipeline 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "workflow",
       "parameters": {
         "args": {
           "type": "string",
@@ -2557,7 +2382,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541349",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034805",
+      "recategorized_from": "general"
     },
     "clean_duplicates_safe": {
       "tool_id": "clean_duplicates_safe",
@@ -2681,7 +2508,7 @@
       "description": "cleanup-nested-backups 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "backup",
       "parameters": {
         "args": {
           "type": "string",
@@ -2703,7 +2530,9 @@
       "usage_files": [
         "cleanup-precheck-issues.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013826"
+      "usage_tracked_at": "2026-03-19T17:28:52.013826",
+      "recategorized_at": "2026-03-19T17:34:42.034857",
+      "recategorized_from": "general"
     },
     "cleanup_precheck_issues": {
       "tool_id": "cleanup_precheck_issues",
@@ -2711,7 +2540,7 @@
       "description": "cleanup-precheck-issues 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -2732,7 +2561,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541358",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034871",
+      "recategorized_from": "general"
     },
     "cleanup_reports": {
       "tool_id": "cleanup_reports",
@@ -2772,7 +2603,7 @@
       "description": "cluster_manager 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "utility",
       "parameters": {
         "args": {
           "type": "string",
@@ -2793,7 +2624,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541359",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034884",
+      "recategorized_from": "general"
     },
     "code_quality_reviewer": {
       "tool_id": "code_quality_reviewer",
@@ -2801,7 +2634,7 @@
       "description": "code_quality_reviewer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -2827,7 +2660,9 @@
         "smart_doc_generator.py",
         "tool_integration.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013829"
+      "usage_tracked_at": "2026-03-19T17:28:52.013829",
+      "recategorized_at": "2026-03-19T17:34:42.034898",
+      "recategorized_from": "general"
     },
     "code_reviewer": {
       "tool_id": "code_reviewer",
@@ -2835,7 +2670,7 @@
       "description": "code_reviewer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -2861,7 +2696,9 @@
         "workflow_engine_v2.py",
         "workflow_enhancer.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013830"
+      "usage_tracked_at": "2026-03-19T17:28:52.013830",
+      "recategorized_at": "2026-03-19T17:34:42.034910",
+      "recategorized_from": "general"
     },
     "complete_path_fixer": {
       "tool_id": "complete_path_fixer",
@@ -2898,7 +2735,7 @@
       "description": "compress-tiff-to-png 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -2919,7 +2756,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541368",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034935",
+      "recategorized_from": "general"
     },
     "config_center_v2": {
       "tool_id": "config_center_v2",
@@ -2957,7 +2796,7 @@
       "description": "config_manager 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "utility",
       "parameters": {
         "args": {
           "type": "string",
@@ -2982,7 +2821,9 @@
         "openclaw.py",
         "phase4_dashboard.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013772"
+      "usage_tracked_at": "2026-03-19T17:28:52.013772",
+      "recategorized_at": "2026-03-19T17:34:42.034958",
+      "recategorized_from": "general"
     },
     "context_aware_cache": {
       "tool_id": "context_aware_cache",
@@ -3053,7 +2894,7 @@
       "description": "context_cli 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "context",
       "parameters": {
         "args": {
           "type": "string",
@@ -3075,7 +2916,9 @@
       "usage_files": [
         "context_cli.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013842"
+      "usage_tracked_at": "2026-03-19T17:28:52.013842",
+      "recategorized_at": "2026-03-19T17:34:42.034971",
+      "recategorized_from": "general"
     },
     "context_compressor": {
       "tool_id": "context_compressor",
@@ -3145,7 +2988,7 @@
       "description": "context_db 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "context",
       "parameters": {
         "args": {
           "type": "string",
@@ -3166,7 +3009,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541371",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.034982",
+      "recategorized_from": "general"
     },
     "context_search": {
       "tool_id": "context_search",
@@ -3237,7 +3082,7 @@
       "description": "core_system_test 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "testing",
       "parameters": {
         "args": {
           "type": "string",
@@ -3259,7 +3104,9 @@
       "usage_files": [
         "core_system_test.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013849"
+      "usage_tracked_at": "2026-03-19T17:28:52.013849",
+      "recategorized_at": "2026-03-19T17:34:42.035007",
+      "recategorized_from": "general"
     },
     "critic_daily_note_pollution": {
       "tool_id": "critic_daily_note_pollution",
@@ -3420,7 +3267,7 @@
       "description": "cron_manager 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "utility",
       "parameters": {
         "args": {
           "type": "string",
@@ -3442,7 +3289,9 @@
       "usage_files": [
         "cron_manager.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013856"
+      "usage_tracked_at": "2026-03-19T17:28:52.013856",
+      "recategorized_at": "2026-03-19T17:34:42.035020",
+      "recategorized_from": "general"
     },
     "daily_brief_generator": {
       "tool_id": "daily_brief_generator",
@@ -3609,7 +3458,7 @@
       "description": "data_sync_enhancer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "integration",
       "parameters": {
         "args": {
           "type": "string",
@@ -3632,7 +3481,9 @@
         "data_sync_enhancer.py",
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013864"
+      "usage_tracked_at": "2026-03-19T17:28:52.013864",
+      "recategorized_at": "2026-03-19T17:34:42.035040",
+      "recategorized_from": "general"
     },
     "decision_optimizer": {
       "tool_id": "decision_optimizer",
@@ -3640,7 +3491,7 @@
       "description": "decision_optimizer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -3662,7 +3513,9 @@
       "usage_files": [
         "decision_optimizer.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013865"
+      "usage_tracked_at": "2026-03-19T17:28:52.013865",
+      "recategorized_at": "2026-03-19T17:34:42.035051",
+      "recategorized_from": "general"
     },
     "defuddle_integration": {
       "tool_id": "defuddle_integration",
@@ -3670,7 +3523,7 @@
       "description": "defuddle_integration 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "integration",
       "parameters": {
         "args": {
           "type": "string",
@@ -3693,7 +3546,9 @@
         "arxiv_collector_v2.py",
         "obsidian_tools.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013657"
+      "usage_tracked_at": "2026-03-19T17:28:52.013657",
+      "recategorized_at": "2026-03-19T17:34:42.035063",
+      "recategorized_from": "general"
     },
     "delete_all_reports": {
       "tool_id": "delete_all_reports",
@@ -3730,7 +3585,7 @@
       "description": "demo_tool 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "tool",
       "parameters": {
         "args": {
           "type": "string",
@@ -3751,7 +3606,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541377",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.035072",
+      "recategorized_from": "general"
     },
     "deploy_production": {
       "tool_id": "deploy_production",
@@ -3964,7 +3821,7 @@
       "description": "doc_generator 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "documentation",
       "parameters": {
         "args": {
           "type": "string",
@@ -3988,7 +3845,9 @@
         "tool_integration.py",
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013904"
+      "usage_tracked_at": "2026-03-19T17:28:52.013904",
+      "recategorized_at": "2026-03-19T17:34:42.035139",
+      "recategorized_from": "general"
     },
     "download_qwen_model": {
       "tool_id": "download_qwen_model",
@@ -3996,7 +3855,7 @@
       "description": "download_qwen_model 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "context",
       "parameters": {
         "args": {
           "type": "string",
@@ -4019,7 +3878,9 @@
         "download_qwen_model.py",
         "local_qwen_inference.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013911"
+      "usage_tracked_at": "2026-03-19T17:28:52.013911",
+      "recategorized_at": "2026-03-19T17:34:42.035150",
+      "recategorized_from": "general"
     },
     "effect_tracker": {
       "tool_id": "effect_tracker",
@@ -4087,7 +3948,7 @@
       "description": "error_analyzer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -4113,7 +3974,9 @@
         "tool_integration.py",
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013941"
+      "usage_tracked_at": "2026-03-19T17:28:52.013941",
+      "recategorized_at": "2026-03-19T17:34:42.035180",
+      "recategorized_from": "general"
     },
     "error_predictor": {
       "tool_id": "error_predictor",
@@ -4184,7 +4047,7 @@
       "description": "execute_cleanup 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "execution",
       "parameters": {
         "args": {
           "type": "string",
@@ -4205,7 +4068,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541390",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.035208",
+      "recategorized_from": "general"
     },
     "experiment_platform": {
       "tool_id": "experiment_platform",
@@ -4276,7 +4141,7 @@
       "description": "fast_load 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "context",
       "parameters": {
         "args": {
           "type": "string",
@@ -4298,7 +4163,9 @@
       "usage_files": [
         "auto-critic.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013674"
+      "usage_tracked_at": "2026-03-19T17:28:52.013674",
+      "recategorized_at": "2026-03-19T17:34:42.035235",
+      "recategorized_from": "general"
     },
     "federated_learning": {
       "tool_id": "federated_learning",
@@ -4306,7 +4173,7 @@
       "description": "federated_learning 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "learning",
       "parameters": {
         "args": {
           "type": "string",
@@ -4330,7 +4197,9 @@
         "autonomous_research_assistant.py",
         "federated_learning.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013666"
+      "usage_tracked_at": "2026-03-19T17:28:52.013666",
+      "recategorized_at": "2026-03-19T17:34:42.035246",
+      "recategorized_from": "general"
     },
     "feishu_analytics_dashboard": {
       "tool_id": "feishu_analytics_dashboard",
@@ -4729,7 +4598,7 @@
       "description": "fix_memory_encoding 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -4751,7 +4620,9 @@
       "usage_files": [
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014080"
+      "usage_tracked_at": "2026-03-19T17:28:52.014080",
+      "recategorized_at": "2026-03-19T17:34:42.035305",
+      "recategorized_from": "general"
     },
     "fix_workspace_paths": {
       "tool_id": "fix_workspace_paths",
@@ -4823,7 +4694,7 @@
       "description": "flow_register 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "workflow",
       "parameters": {
         "args": {
           "type": "string",
@@ -4845,7 +4716,9 @@
       "usage_files": [
         "flow_register.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013960"
+      "usage_tracked_at": "2026-03-19T17:28:52.013960",
+      "recategorized_at": "2026-03-19T17:34:42.035323",
+      "recategorized_from": "general"
     },
     "git_firewall_proxy": {
       "tool_id": "git_firewall_proxy",
@@ -5025,7 +4898,7 @@
       "description": "health_predictor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "monitoring",
       "parameters": {
         "args": {
           "type": "string",
@@ -5046,7 +4919,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541413",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.035342",
+      "recategorized_from": "general"
     },
     "heartbeat_lite": {
       "tool_id": "heartbeat_lite",
@@ -5207,7 +5082,7 @@
       "description": "innovator_auto_executor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -5228,7 +5103,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541417",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.035403",
+      "recategorized_from": "general"
     },
     "innovator_engine": {
       "tool_id": "innovator_engine",
@@ -5323,7 +5200,7 @@
       "description": "install_requirements 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "ui",
       "parameters": {
         "args": {
           "type": "string",
@@ -5344,7 +5221,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541425",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.035433",
+      "recategorized_from": "general"
     },
     "intent_predictor": {
       "tool_id": "intent_predictor",
@@ -5383,7 +5262,7 @@
       "description": "issue_scanner 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -5407,7 +5286,9 @@
         "find_unsafe_calls.py",
         "issue_scanner.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013694"
+      "usage_tracked_at": "2026-03-19T17:28:52.013694",
+      "recategorized_at": "2026-03-19T17:34:42.035454",
+      "recategorized_from": "general"
     },
     "iteration_manager": {
       "tool_id": "iteration_manager",
@@ -5415,7 +5296,7 @@
       "description": "iteration_manager 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "utility",
       "parameters": {
         "args": {
           "type": "string",
@@ -5436,7 +5317,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541427",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.035466",
+      "recategorized_from": "general"
     },
     "json_canvas_generator": {
       "tool_id": "json_canvas_generator",
@@ -5635,7 +5518,7 @@
       "description": "learner-assistant-v2 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "learning",
       "parameters": {
         "args": {
           "type": "string",
@@ -5656,7 +5539,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541428",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.035488",
+      "recategorized_from": "general"
     },
     "learning_quality_assessor": {
       "tool_id": "learning_quality_assessor",
@@ -5664,7 +5549,7 @@
       "description": "learning-quality-assessor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -5685,7 +5570,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541430",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.035500",
+      "recategorized_from": "general"
     },
     "load_balancer": {
       "tool_id": "load_balancer",
@@ -5693,7 +5580,7 @@
       "description": "load_balancer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "context",
       "parameters": {
         "args": {
           "type": "string",
@@ -5715,7 +5602,9 @@
       "usage_files": [
         "load_balancer.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013979"
+      "usage_tracked_at": "2026-03-19T17:28:52.013979",
+      "recategorized_at": "2026-03-19T17:34:42.035510",
+      "recategorized_from": "general"
     },
     "local_qwen_inference": {
       "tool_id": "local_qwen_inference",
@@ -5755,7 +5644,7 @@
       "description": "maintenance_scheduler 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -5776,7 +5665,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541432",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.035532",
+      "recategorized_from": "general"
     },
     "master_orchestrator": {
       "tool_id": "master_orchestrator",
@@ -5814,7 +5705,7 @@
       "description": "memory_association_basic 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -5837,7 +5728,9 @@
         "do_rename.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013916"
+      "usage_tracked_at": "2026-03-19T17:28:52.013916",
+      "recategorized_at": "2026-03-19T17:34:42.035554",
+      "recategorized_from": "general"
     },
     "memory_benchmark": {
       "tool_id": "memory_benchmark",
@@ -5845,7 +5738,7 @@
       "description": "memory_benchmark 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -5868,7 +5761,9 @@
         "auto-critic.py",
         "memory_benchmark.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013676"
+      "usage_tracked_at": "2026-03-19T17:28:52.013676",
+      "recategorized_at": "2026-03-19T17:34:42.035564",
+      "recategorized_from": "general"
     },
     "memory_causal_discovery": {
       "tool_id": "memory_causal_discovery",
@@ -5876,7 +5771,7 @@
       "description": "memory_causal_discovery 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -5901,7 +5796,9 @@
         "memory_engine_orchestrator.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013868"
+      "usage_tracked_at": "2026-03-19T17:28:52.013868",
+      "recategorized_at": "2026-03-19T17:34:42.035576",
+      "recategorized_from": "general"
     },
     "memory_cleanup_compress": {
       "tool_id": "memory_cleanup_compress",
@@ -5940,7 +5837,7 @@
       "description": "memory_conflict_detector 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -5964,7 +5861,9 @@
         "memory_immune_system.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013985"
+      "usage_tracked_at": "2026-03-19T17:28:52.013985",
+      "recategorized_at": "2026-03-19T17:34:42.035588",
+      "recategorized_from": "general"
     },
     "memory_conflict_resolver": {
       "tool_id": "memory_conflict_resolver",
@@ -5972,7 +5871,7 @@
       "description": "memory_conflict_resolver 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -5997,7 +5896,9 @@
         "memory_distillation_runner.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013969"
+      "usage_tracked_at": "2026-03-19T17:28:52.013969",
+      "recategorized_at": "2026-03-19T17:34:42.035601",
+      "recategorized_from": "general"
     },
     "memory_consciousness_emergence": {
       "tool_id": "memory_consciousness_emergence",
@@ -6005,7 +5906,7 @@
       "description": "memory_consciousness_emergence 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6031,7 +5932,9 @@
         "memory_engine_orchestrator.py",
         "memory_self_improving_engine.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013870"
+      "usage_tracked_at": "2026-03-19T17:28:52.013870",
+      "recategorized_at": "2026-03-19T17:34:42.035614",
+      "recategorized_from": "general"
     },
     "memory_consistency_checker": {
       "tool_id": "memory_consistency_checker",
@@ -6039,7 +5942,7 @@
       "description": "memory_consistency_checker 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -6062,7 +5965,9 @@
         "auto-critic.py",
         "memory_consistency_checker.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013678"
+      "usage_tracked_at": "2026-03-19T17:28:52.013678",
+      "recategorized_at": "2026-03-19T17:34:42.035627",
+      "recategorized_from": "general"
     },
     "memory_dark_matter": {
       "tool_id": "memory_dark_matter",
@@ -6070,7 +5975,7 @@
       "description": "memory_dark_matter 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6095,7 +6000,9 @@
         "memory_engine_orchestrator.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013871"
+      "usage_tracked_at": "2026-03-19T17:28:52.013871",
+      "recategorized_at": "2026-03-19T17:34:42.035638",
+      "recategorized_from": "general"
     },
     "memory_dashboard_v2": {
       "tool_id": "memory_dashboard_v2",
@@ -6264,7 +6171,7 @@
       "description": "memory_engine_autonomous 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6288,7 +6195,9 @@
         "rename-memory-scripts.py",
         "verify_p6_quick.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013919"
+      "usage_tracked_at": "2026-03-19T17:28:52.013919",
+      "recategorized_at": "2026-03-19T17:34:42.035650",
+      "recategorized_from": "general"
     },
     "memory_engine_evolution": {
       "tool_id": "memory_engine_evolution",
@@ -6296,7 +6205,7 @@
       "description": "memory_engine_evolution 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6319,7 +6228,9 @@
         "do_rename.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013920"
+      "usage_tracked_at": "2026-03-19T17:28:52.013920",
+      "recategorized_at": "2026-03-19T17:34:42.035662",
+      "recategorized_from": "general"
     },
     "memory_engine_maintenance": {
       "tool_id": "memory_engine_maintenance",
@@ -6327,7 +6238,7 @@
       "description": "memory_engine_maintenance 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6350,7 +6261,9 @@
         "do_rename.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013921"
+      "usage_tracked_at": "2026-03-19T17:28:52.013921",
+      "recategorized_at": "2026-03-19T17:34:42.035674",
+      "recategorized_from": "general"
     },
     "memory_engine_ops": {
       "tool_id": "memory_engine_ops",
@@ -6358,7 +6271,7 @@
       "description": "memory_engine_ops 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6383,7 +6296,9 @@
         "rename-memory-scripts.py",
         "verify_p1_fix.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013922"
+      "usage_tracked_at": "2026-03-19T17:28:52.013922",
+      "recategorized_at": "2026-03-19T17:34:42.035684",
+      "recategorized_from": "general"
     },
     "memory_engine_orchestrator": {
       "tool_id": "memory_engine_orchestrator",
@@ -6391,7 +6306,7 @@
       "description": "memory_engine_orchestrator 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6415,7 +6330,9 @@
         "memory_engine_orchestrator.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013924"
+      "usage_tracked_at": "2026-03-19T17:28:52.013924",
+      "recategorized_at": "2026-03-19T17:34:42.035709",
+      "recategorized_from": "general"
     },
     "memory_evolutionary_algorithms": {
       "tool_id": "memory_evolutionary_algorithms",
@@ -6423,7 +6340,7 @@
       "description": "memory_evolutionary_algorithms 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6447,7 +6364,9 @@
         "memory_engine_autonomous.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013875"
+      "usage_tracked_at": "2026-03-19T17:28:52.013875",
+      "recategorized_at": "2026-03-19T17:34:42.035723",
+      "recategorized_from": "general"
     },
     "memory_fix_tools": {
       "tool_id": "memory_fix_tools",
@@ -6455,7 +6374,7 @@
       "description": "memory_fix_tools 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6472,7 +6391,9 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "recategorized_at": "2026-03-19T17:34:42.035734",
+      "recategorized_from": "general"
     },
     "memory_forgetting": {
       "tool_id": "memory_forgetting",
@@ -6480,7 +6401,7 @@
       "description": "memory_forgetting 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6504,7 +6425,9 @@
         "memory_forgetting_execute.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013986"
+      "usage_tracked_at": "2026-03-19T17:28:52.013986",
+      "recategorized_at": "2026-03-19T17:34:42.035745",
+      "recategorized_from": "general"
     },
     "memory_forgetting_execute": {
       "tool_id": "memory_forgetting_execute",
@@ -6512,7 +6435,7 @@
       "description": "memory_forgetting_execute 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6536,7 +6459,9 @@
         "memory_distillation_runner.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013972"
+      "usage_tracked_at": "2026-03-19T17:28:52.013972",
+      "recategorized_at": "2026-03-19T17:34:42.035757",
+      "recategorized_from": "general"
     },
     "memory_fractal_compression": {
       "tool_id": "memory_fractal_compression",
@@ -6544,7 +6469,7 @@
       "description": "memory_fractal_compression 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6569,7 +6494,9 @@
         "memory_fractal_compression.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013877"
+      "usage_tracked_at": "2026-03-19T17:28:52.013877",
+      "recategorized_at": "2026-03-19T17:34:42.035770",
+      "recategorized_from": "general"
     },
     "memory_git_auto_commit": {
       "tool_id": "memory_git_auto_commit",
@@ -6607,7 +6534,7 @@
       "description": "memory_hybrid_pipeline 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6629,7 +6556,9 @@
       "usage_files": [
         "memory_hybrid_pipeline.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013987"
+      "usage_tracked_at": "2026-03-19T17:28:52.013987",
+      "recategorized_at": "2026-03-19T17:34:42.035781",
+      "recategorized_from": "general"
     },
     "memory_immune_system": {
       "tool_id": "memory_immune_system",
@@ -6637,7 +6566,7 @@
       "description": "memory_immune_system 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6662,7 +6591,9 @@
         "memory_immune_system.py",
         "memory_self_improving_engine.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013878"
+      "usage_tracked_at": "2026-03-19T17:28:52.013878",
+      "recategorized_at": "2026-03-19T17:34:42.035792",
+      "recategorized_from": "general"
     },
     "memory_importance_assessor": {
       "tool_id": "memory_importance_assessor",
@@ -6670,7 +6601,7 @@
       "description": "memory_importance_assessor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6693,7 +6624,9 @@
         "memory_hybrid_pipeline.py",
         "memory_importance_assessor.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013989"
+      "usage_tracked_at": "2026-03-19T17:28:52.013989",
+      "recategorized_at": "2026-03-19T17:34:42.035805",
+      "recategorized_from": "general"
     },
     "memory_incremental_compressor": {
       "tool_id": "memory_incremental_compressor",
@@ -6701,7 +6634,7 @@
       "description": "memory_incremental_compressor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6724,7 +6657,9 @@
         "memory_hybrid_pipeline.py",
         "memory_incremental_compressor.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013990"
+      "usage_tracked_at": "2026-03-19T17:28:52.013990",
+      "recategorized_at": "2026-03-19T17:34:42.035818",
+      "recategorized_from": "general"
     },
     "memory_index_generator": {
       "tool_id": "memory_index_generator",
@@ -6732,7 +6667,7 @@
       "description": "memory_index_generator 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6758,7 +6693,9 @@
         "memory_tag_search.py",
         "post_session_compress.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013680"
+      "usage_tracked_at": "2026-03-19T17:28:52.013680",
+      "recategorized_at": "2026-03-19T17:34:42.035830",
+      "recategorized_from": "general"
     },
     "memory_llm_hypothesis": {
       "tool_id": "memory_llm_hypothesis",
@@ -6766,7 +6703,7 @@
       "description": "memory_llm_hypothesis 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6791,7 +6728,9 @@
         "memory_self_improving_engine.py",
         "verify_p1_fix.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013880"
+      "usage_tracked_at": "2026-03-19T17:28:52.013880",
+      "recategorized_at": "2026-03-19T17:34:42.035841",
+      "recategorized_from": "general"
     },
     "memory_neural_network": {
       "tool_id": "memory_neural_network",
@@ -6799,7 +6738,7 @@
       "description": "memory_neural_network 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6825,7 +6764,9 @@
         "memory_self_improving_engine.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013881"
+      "usage_tracked_at": "2026-03-19T17:28:52.013881",
+      "recategorized_at": "2026-03-19T17:34:42.035852",
+      "recategorized_from": "general"
     },
     "memory_perf_prefetch": {
       "tool_id": "memory_perf_prefetch",
@@ -6833,7 +6774,7 @@
       "description": "memory_perf_prefetch 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6856,7 +6797,9 @@
         "do_rename.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013925"
+      "usage_tracked_at": "2026-03-19T17:28:52.013925",
+      "recategorized_at": "2026-03-19T17:34:42.035863",
+      "recategorized_from": "general"
     },
     "memory_perf_profiler": {
       "tool_id": "memory_perf_profiler",
@@ -6864,7 +6807,7 @@
       "description": "memory_perf_profiler 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6887,7 +6830,9 @@
         "do_rename.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013927"
+      "usage_tracked_at": "2026-03-19T17:28:52.013927",
+      "recategorized_at": "2026-03-19T17:34:42.035874",
+      "recategorized_from": "general"
     },
     "memory_persona": {
       "tool_id": "memory_persona",
@@ -6895,7 +6840,7 @@
       "description": "memory_persona 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6920,7 +6865,9 @@
         "unified_cli_v3.py",
         "verify_p6_quick.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013928"
+      "usage_tracked_at": "2026-03-19T17:28:52.013928",
+      "recategorized_at": "2026-03-19T17:34:42.035884",
+      "recategorized_from": "general"
     },
     "memory_predictive_coding": {
       "tool_id": "memory_predictive_coding",
@@ -6928,7 +6875,7 @@
       "description": "memory_predictive_coding 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -6950,7 +6897,9 @@
       "usage_files": [
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014081"
+      "usage_tracked_at": "2026-03-19T17:28:52.014081",
+      "recategorized_at": "2026-03-19T17:34:42.035896",
+      "recategorized_from": "general"
     },
     "memory_quality_assessor": {
       "tool_id": "memory_quality_assessor",
@@ -6958,7 +6907,7 @@
       "description": "memory_quality_assessor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -6982,7 +6931,9 @@
         "rename-memory-scripts.py",
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013929"
+      "usage_tracked_at": "2026-03-19T17:28:52.013929",
+      "recategorized_at": "2026-03-19T17:34:42.035907",
+      "recategorized_from": "general"
     },
     "memory_quality_scorer": {
       "tool_id": "memory_quality_scorer",
@@ -6990,7 +6941,7 @@
       "description": "memory_quality_scorer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -7016,7 +6967,9 @@
         "memory_immune_system.py",
         "memory_quality_scorer.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013983"
+      "usage_tracked_at": "2026-03-19T17:28:52.013983",
+      "recategorized_at": "2026-03-19T17:34:42.035919",
+      "recategorized_from": "general"
     },
     "memory_quantum_entanglement": {
       "tool_id": "memory_quantum_entanglement",
@@ -7024,7 +6977,7 @@
       "description": "memory_quantum_entanglement 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -7050,7 +7003,9 @@
         "memory_self_improving_engine.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013882"
+      "usage_tracked_at": "2026-03-19T17:28:52.013882",
+      "recategorized_at": "2026-03-19T17:34:42.035931",
+      "recategorized_from": "general"
     },
     "memory_rollback": {
       "tool_id": "memory_rollback",
@@ -7058,7 +7013,7 @@
       "description": "memory_rollback 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -7075,7 +7030,9 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "recategorized_at": "2026-03-19T17:34:42.035941",
+      "recategorized_from": "general"
     },
     "memory_search_cached": {
       "tool_id": "memory_search_cached",
@@ -7146,7 +7103,7 @@
       "description": "memory_self_improving_engine 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -7170,7 +7127,9 @@
         "memory_engine_autonomous.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013884"
+      "usage_tracked_at": "2026-03-19T17:28:52.013884",
+      "recategorized_at": "2026-03-19T17:34:42.035954",
+      "recategorized_from": "general"
     },
     "memory_semantic_search": {
       "tool_id": "memory_semantic_search",
@@ -7178,7 +7137,7 @@
       "description": "memory_semantic_search 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -7200,7 +7159,9 @@
       "usage_files": [
         "memory_semantic_search.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013992"
+      "usage_tracked_at": "2026-03-19T17:28:52.013992",
+      "recategorized_at": "2026-03-19T17:34:42.035965",
+      "recategorized_from": "general"
     },
     "memory_tag_search": {
       "tool_id": "memory_tag_search",
@@ -7208,7 +7169,7 @@
       "description": "memory_tag_search 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -7232,7 +7193,9 @@
         "memory_benchmark.py",
         "memory_tag_search.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013682"
+      "usage_tracked_at": "2026-03-19T17:28:52.013682",
+      "recategorized_at": "2026-03-19T17:34:42.035976",
+      "recategorized_from": "general"
     },
     "memory_thermodynamics": {
       "tool_id": "memory_thermodynamics",
@@ -7240,7 +7203,7 @@
       "description": "memory_thermodynamics 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -7265,7 +7228,9 @@
         "memory_thermodynamics.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013886"
+      "usage_tracked_at": "2026-03-19T17:28:52.013886",
+      "recategorized_at": "2026-03-19T17:34:42.035986",
+      "recategorized_from": "general"
     },
     "memory_time_crystal": {
       "tool_id": "memory_time_crystal",
@@ -7273,7 +7238,7 @@
       "description": "memory_time_crystal 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -7298,7 +7263,9 @@
         "memory_time_crystal.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013887"
+      "usage_tracked_at": "2026-03-19T17:28:52.013887",
+      "recategorized_at": "2026-03-19T17:34:42.035997",
+      "recategorized_from": "general"
     },
     "memory_topological_analysis": {
       "tool_id": "memory_topological_analysis",
@@ -7306,7 +7273,7 @@
       "description": "memory_topological_analysis 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -7331,7 +7298,9 @@
         "memory_topological_analysis.py",
         "rename-memory-scripts.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013889"
+      "usage_tracked_at": "2026-03-19T17:28:52.013889",
+      "recategorized_at": "2026-03-19T17:34:42.036009",
+      "recategorized_from": "general"
     },
     "memory_utils": {
       "tool_id": "memory_utils",
@@ -7339,7 +7308,7 @@
       "description": "memory_utils 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -7361,7 +7330,9 @@
       "usage_files": [
         "memory_utils.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013993"
+      "usage_tracked_at": "2026-03-19T17:28:52.013993",
+      "recategorized_at": "2026-03-19T17:34:42.036020",
+      "recategorized_from": "general"
     },
     "meta_cognition_monitor": {
       "tool_id": "meta_cognition_monitor",
@@ -7399,7 +7370,7 @@
       "description": "meta_learning 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "learning",
       "parameters": {
         "args": {
           "type": "string",
@@ -7425,7 +7396,9 @@
         "memory_persona.py",
         "meta_learning.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013712"
+      "usage_tracked_at": "2026-03-19T17:28:52.013712",
+      "recategorized_at": "2026-03-19T17:34:42.036030",
+      "recategorized_from": "general"
     },
     "meta_learning_optimizer": {
       "tool_id": "meta_learning_optimizer",
@@ -7433,7 +7406,7 @@
       "description": "meta_learning_optimizer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -7456,7 +7429,9 @@
         "autonomous_research_assistant.py",
         "meta_learning_optimizer.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013713"
+      "usage_tracked_at": "2026-03-19T17:28:52.013713",
+      "recategorized_at": "2026-03-19T17:34:42.036061",
+      "recategorized_from": "general"
     },
     "metrics_tracker": {
       "tool_id": "metrics_tracker",
@@ -7644,7 +7619,7 @@
       "description": "obsidian_tools 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "tool",
       "parameters": {
         "args": {
           "type": "string",
@@ -7665,7 +7640,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541439",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036114",
+      "recategorized_from": "general"
     },
     "ollama_qwen_test": {
       "tool_id": "ollama_qwen_test",
@@ -7673,7 +7650,7 @@
       "description": "ollama_qwen_test 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "testing",
       "parameters": {
         "args": {
           "type": "string",
@@ -7695,7 +7672,9 @@
       "usage_files": [
         "ollama_qwen_test.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014005"
+      "usage_tracked_at": "2026-03-19T17:28:52.014005",
+      "recategorized_at": "2026-03-19T17:34:42.036122",
+      "recategorized_from": "general"
     },
     "openclaw": {
       "tool_id": "openclaw",
@@ -7737,7 +7716,7 @@
       "description": "optimize-causal 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -7758,7 +7737,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541441",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036136",
+      "recategorized_from": "general"
     },
     "optimize_tools_analyzer": {
       "tool_id": "optimize_tools_analyzer",
@@ -7766,7 +7747,7 @@
       "description": "optimize-tools-analyzer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -7787,7 +7768,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541443",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036150",
+      "recategorized_from": "general"
     },
     "optimize_tools_deep": {
       "tool_id": "optimize_tools_deep",
@@ -7795,7 +7778,7 @@
       "description": "optimize-tools-deep 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -7816,7 +7799,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541446",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036158",
+      "recategorized_from": "general"
     },
     "optimize_tools_executor": {
       "tool_id": "optimize_tools_executor",
@@ -7824,7 +7809,7 @@
       "description": "optimize-tools-executor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -7845,7 +7830,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541448",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036166",
+      "recategorized_from": "general"
     },
     "optimize_tools_quick": {
       "tool_id": "optimize_tools_quick",
@@ -7853,7 +7840,7 @@
       "description": "optimize-tools-quick 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -7874,7 +7861,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541449",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036175",
+      "recategorized_from": "general"
     },
     "organize_root_files_v2": {
       "tool_id": "organize_root_files_v2",
@@ -8097,7 +8086,7 @@
       "description": "performance_analyzer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "performance",
       "parameters": {
         "args": {
           "type": "string",
@@ -8123,7 +8112,9 @@
         "unified_cli_v3.py",
         "workflow_optimizer_ai.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013753"
+      "usage_tracked_at": "2026-03-19T17:28:52.013753",
+      "recategorized_at": "2026-03-19T17:34:42.036216",
+      "recategorized_from": "general"
     },
     "performance_profiler": {
       "tool_id": "performance_profiler",
@@ -8131,7 +8122,7 @@
       "description": "performance_profiler 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "performance",
       "parameters": {
         "args": {
           "type": "string",
@@ -8154,7 +8145,9 @@
         "openclaw.py",
         "phase4_dashboard.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014007"
+      "usage_tracked_at": "2026-03-19T17:28:52.014007",
+      "recategorized_at": "2026-03-19T17:34:42.036224",
+      "recategorized_from": "general"
     },
     "phase4_dashboard": {
       "tool_id": "phase4_dashboard",
@@ -8193,7 +8186,7 @@
       "description": "plan-auto-optimizer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -8214,7 +8207,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541454",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036232",
+      "recategorized_from": "general"
     },
     "plan_quality_assessor": {
       "tool_id": "plan_quality_assessor",
@@ -8222,7 +8217,7 @@
       "description": "plan-quality-assessor 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -8244,7 +8239,9 @@
       "usage_files": [
         "plan-auto-optimizer.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014023"
+      "usage_tracked_at": "2026-03-19T17:28:52.014023",
+      "recategorized_at": "2026-03-19T17:34:42.036241",
+      "recategorized_from": "general"
     },
     "planner_assistant_v2": {
       "tool_id": "planner_assistant_v2",
@@ -8282,7 +8279,7 @@
       "description": "pm-duplicate-analyzer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -8303,7 +8300,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541457",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036257",
+      "recategorized_from": "general"
     },
     "pm_merge_folders": {
       "tool_id": "pm_merge_folders",
@@ -8374,7 +8373,7 @@
       "description": "pre-session-hook-v1 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "session",
       "parameters": {
         "args": {
           "type": "string",
@@ -8391,7 +8390,9 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "recategorized_at": "2026-03-19T17:34:42.036272",
+      "recategorized_from": "general"
     },
     "pre_session_hook": {
       "tool_id": "pre_session_hook",
@@ -8399,7 +8400,7 @@
       "description": "pre-session-hook 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "session",
       "parameters": {
         "args": {
           "type": "string",
@@ -8421,7 +8422,9 @@
       "usage_files": [
         "auto-critic.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013686"
+      "usage_tracked_at": "2026-03-19T17:28:52.013686",
+      "recategorized_at": "2026-03-19T17:34:42.036280",
+      "recategorized_from": "general"
     },
     "pre_commit_hook": {
       "tool_id": "pre_commit_hook",
@@ -8429,7 +8432,7 @@
       "description": "pre_commit_hook 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "git",
       "parameters": {
         "args": {
           "type": "string",
@@ -8452,7 +8455,9 @@
         "git-firewall-proxy.py",
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013963"
+      "usage_tracked_at": "2026-03-19T17:28:52.013963",
+      "recategorized_at": "2026-03-19T17:34:42.036287",
+      "recategorized_from": "general"
     },
     "pre_file_operation_hook": {
       "tool_id": "pre_file_operation_hook",
@@ -8647,7 +8652,7 @@
       "description": "quality_scorer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -8670,7 +8675,9 @@
         "quality_scorer.py",
         "windows_task_scheduler.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014030"
+      "usage_tracked_at": "2026-03-19T17:28:52.014030",
+      "recategorized_at": "2026-03-19T17:34:42.036324",
+      "recategorized_from": "general"
     },
     "query_predictor": {
       "tool_id": "query_predictor",
@@ -8707,7 +8714,7 @@
       "description": "quick-cleanup-571-errors 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "ui",
       "parameters": {
         "args": {
           "type": "string",
@@ -8728,7 +8735,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541465",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036339",
+      "recategorized_from": "general"
     },
     "quick_security_fix": {
       "tool_id": "quick_security_fix",
@@ -8765,7 +8774,7 @@
       "description": "real_time_distill_v3 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -8787,7 +8796,9 @@
       "usage_files": [
         "test_real_time_distill.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014092"
+      "usage_tracked_at": "2026-03-19T17:28:52.014092",
+      "recategorized_at": "2026-03-19T17:34:42.036347",
+      "recategorized_from": "general"
     },
     "real_time_monitor": {
       "tool_id": "real_time_monitor",
@@ -8827,7 +8838,7 @@
       "description": "redis_integration 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "integration",
       "parameters": {
         "args": {
           "type": "string",
@@ -8848,7 +8859,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541469",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036355",
+      "recategorized_from": "general"
     },
     "register_p1_fixer": {
       "tool_id": "register_p1_fixer",
@@ -8856,7 +8869,7 @@
       "description": "register_p1_fixer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "utility",
       "parameters": {
         "args": {
           "type": "string",
@@ -8877,7 +8890,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541471",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036363",
+      "recategorized_from": "general"
     },
     "remediation_tracker": {
       "tool_id": "remediation_tracker",
@@ -8916,7 +8931,7 @@
       "description": "rename-memory-scripts 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -8933,7 +8948,9 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "recategorized_at": "2026-03-19T17:34:42.036378",
+      "recategorized_from": "general"
     },
     "report_access": {
       "tool_id": "report_access",
@@ -9127,7 +9144,7 @@
       "description": "resilience_analyzer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -9148,7 +9165,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541473",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036387",
+      "recategorized_from": "general"
     },
     "resource_monitor": {
       "tool_id": "resource_monitor",
@@ -9188,7 +9207,7 @@
       "description": "rl_ttl_optimizer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "optimization",
       "parameters": {
         "args": {
           "type": "string",
@@ -9210,7 +9229,9 @@
       "usage_files": [
         "rl_ttl_optimizer.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014085"
+      "usage_tracked_at": "2026-03-19T17:28:52.014085",
+      "recategorized_at": "2026-03-19T17:34:42.036394",
+      "recategorized_from": "general"
     },
     "safe_write": {
       "tool_id": "safe_write",
@@ -9281,7 +9302,7 @@
       "description": "scan-daily-notes 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -9304,7 +9325,9 @@
         "auto_distill.py",
         "scan-daily-notes.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013740"
+      "usage_tracked_at": "2026-03-19T17:28:52.013740",
+      "recategorized_at": "2026-03-19T17:34:42.036414",
+      "recategorized_from": "general"
     },
     "scan_p1_issues": {
       "tool_id": "scan_p1_issues",
@@ -9312,7 +9335,7 @@
       "description": "scan_p1_issues 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -9333,7 +9356,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541475",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036420",
+      "recategorized_from": "general"
     },
     "security_auditor": {
       "tool_id": "security_auditor",
@@ -9659,7 +9684,7 @@
       "description": "session-check 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -9676,7 +9701,9 @@
       "output": {
         "format": "console",
         "log_to_flow": true
-      }
+      },
+      "recategorized_at": "2026-03-19T17:34:42.036454",
+      "recategorized_from": "general"
     },
     "session_end": {
       "tool_id": "session_end",
@@ -9778,7 +9805,7 @@
       "description": "smart-review-reminder 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -9799,7 +9826,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541481",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036462",
+      "recategorized_from": "general"
     },
     "smart_cache_v2": {
       "tool_id": "smart_cache_v2",
@@ -9837,7 +9866,7 @@
       "description": "smart_doc_generator 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "documentation",
       "parameters": {
         "args": {
           "type": "string",
@@ -9862,7 +9891,9 @@
         "smart_doc_generator.py",
         "tool_integration.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014010"
+      "usage_tracked_at": "2026-03-19T17:28:52.014010",
+      "recategorized_at": "2026-03-19T17:34:42.036470",
+      "recategorized_from": "general"
     },
     "smart_notification": {
       "tool_id": "smart_notification",
@@ -9967,7 +9998,7 @@
       "description": "smart_scheduler 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -9991,7 +10022,9 @@
         "phase4_dashboard.py",
         "smart_scheduler.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014011"
+      "usage_tracked_at": "2026-03-19T17:28:52.014011",
+      "recategorized_at": "2026-03-19T17:34:42.036491",
+      "recategorized_from": "general"
     },
     "smart_tool_finder": {
       "tool_id": "smart_tool_finder",
@@ -10053,7 +10086,7 @@
       "description": "system_health_checker 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "monitoring",
       "parameters": {
         "args": {
           "type": "string",
@@ -10078,7 +10111,9 @@
         "unified_cli_v3.py",
         "workflow_engine_v2.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014090"
+      "usage_tracked_at": "2026-03-19T17:28:52.014090",
+      "recategorized_at": "2026-03-19T17:34:42.036499",
+      "recategorized_from": "general"
     },
     "system_orchestrator": {
       "tool_id": "system_orchestrator",
@@ -10118,7 +10153,7 @@
       "description": "task_priority_scorer 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "task",
       "parameters": {
         "args": {
           "type": "string",
@@ -10142,7 +10177,9 @@
         "task_priority_scorer.py",
         "verify_p1_fix.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013955"
+      "usage_tracked_at": "2026-03-19T17:28:52.013955",
+      "recategorized_at": "2026-03-19T17:34:42.036514",
+      "recategorized_from": "general"
     },
     "test_critic_integration": {
       "tool_id": "test_critic_integration",
@@ -10175,7 +10212,7 @@
       "description": "test-session-compression 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "session",
       "parameters": {
         "args": {
           "type": "string",
@@ -10197,7 +10234,9 @@
       "usage_files": [
         "memory_benchmark.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013981"
+      "usage_tracked_at": "2026-03-19T17:28:52.013981",
+      "recategorized_at": "2026-03-19T17:34:42.036523",
+      "recategorized_from": "general"
     },
     "test_real_time_distill": {
       "tool_id": "test_real_time_distill",
@@ -10205,7 +10244,7 @@
       "description": "test_real_time_distill 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "memory",
       "parameters": {
         "args": {
           "type": "string",
@@ -10226,7 +10265,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541487",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036532",
+      "recategorized_from": "general"
     },
     "tiered_cache": {
       "tool_id": "tiered_cache",
@@ -10538,7 +10579,7 @@
       "description": "trend_analyzer_pro 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "analysis",
       "parameters": {
         "args": {
           "type": "string",
@@ -10561,7 +10602,9 @@
         "production_monitor_v2.py",
         "trend_analyzer_pro.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014029"
+      "usage_tracked_at": "2026-03-19T17:28:52.014029",
+      "recategorized_at": "2026-03-19T17:34:42.036539",
+      "recategorized_from": "general"
     },
     "ultimate_memory_search_v3": {
       "tool_id": "ultimate_memory_search_v3",
@@ -10723,7 +10766,7 @@
       "description": "unified_doc_generator 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "documentation",
       "parameters": {
         "args": {
           "type": "string",
@@ -10745,7 +10788,9 @@
       "usage_files": [
         "unified_cli_v3.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014110"
+      "usage_tracked_at": "2026-03-19T17:28:52.014110",
+      "recategorized_at": "2026-03-19T17:34:42.036559",
+      "recategorized_from": "general"
     },
     "unified_monitor": {
       "tool_id": "unified_monitor",
@@ -10898,7 +10943,7 @@
       "description": "verify-cli-aliases 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -10919,7 +10964,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541496",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036586",
+      "recategorized_from": "general"
     },
     "verify_deployment": {
       "tool_id": "verify_deployment",
@@ -10927,7 +10974,7 @@
       "description": "verify_deployment 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -10948,7 +10995,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541498",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036593",
+      "recategorized_from": "general"
     },
     "verify_p1_fix": {
       "tool_id": "verify_p1_fix",
@@ -10956,7 +11005,7 @@
       "description": "verify_p1_fix 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -10977,7 +11026,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541500",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036600",
+      "recategorized_from": "general"
     },
     "verify_p6_quick": {
       "tool_id": "verify_p6_quick",
@@ -10985,7 +11036,7 @@
       "description": "verify_p6_quick 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -11006,7 +11057,9 @@
       "status": "deprecated_candidate",
       "deprecated_reason": "unused_in_codebase",
       "deprecated_at": "2026-03-19T17:29:43.541501",
-      "review_required": true
+      "review_required": true,
+      "recategorized_at": "2026-03-19T17:34:42.036606",
+      "recategorized_from": "general"
     },
     "windows_task_scheduler": {
       "tool_id": "windows_task_scheduler",
@@ -11014,7 +11067,7 @@
       "description": "windows_task_scheduler 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "automation",
       "parameters": {
         "args": {
           "type": "string",
@@ -11036,7 +11089,9 @@
       "usage_files": [
         "windows_task_scheduler.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014116"
+      "usage_tracked_at": "2026-03-19T17:28:52.014116",
+      "recategorized_at": "2026-03-19T17:34:42.036614",
+      "recategorized_from": "general"
     },
     "workflow_analyzer": {
       "tool_id": "workflow_analyzer",
@@ -11463,7 +11518,7 @@
       "description": "check_key_tools 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "quality",
       "parameters": {
         "args": {
           "type": "string",
@@ -11485,7 +11540,9 @@
       "usage_files": [
         "register_tools.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014072"
+      "usage_tracked_at": "2026-03-19T17:28:52.014072",
+      "recategorized_at": "2026-03-19T17:34:42.036640",
+      "recategorized_from": "general"
     },
     "check_tool_rules": {
       "tool_id": "check_tool_rules",
@@ -11525,7 +11582,7 @@
       "description": "execute_step_fixed 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "workflow",
       "parameters": {
         "args": {
           "type": "string",
@@ -11548,7 +11605,9 @@
         "check_tool_rules.py",
         "register_tools.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013823"
+      "usage_tracked_at": "2026-03-19T17:28:52.013823",
+      "recategorized_at": "2026-03-19T17:34:42.036648",
+      "recategorized_from": "general"
     },
     "fix_missing_tools": {
       "tool_id": "fix_missing_tools",
@@ -11556,7 +11615,7 @@
       "description": "fix_missing_tools 工具",
       "version": "1.0.0",
       "created_at": "2026-03-19",
-      "category": "general",
+      "category": "tool",
       "parameters": {
         "args": {
           "type": "string",
@@ -11578,7 +11637,9 @@
       "usage_files": [
         "register_tools.py"
       ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014073"
+      "usage_tracked_at": "2026-03-19T17:28:52.014073",
+      "recategorized_at": "2026-03-19T17:34:42.036655",
+      "recategorized_from": "general"
     },
     "fix_session_end": {
       "tool_id": "fix_session_end",
@@ -11866,178 +11927,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013757"
     },
-    "long-term-memory": {
-      "name": "Long Term Memory",
-      "description": "跨会话持久化记忆系统 - 搜索、关联、压缩",
-      "file": "long_term_memory.py",
-      "category": "memory",
-      "parameters": [
-        "--search",
-        "--add",
-        "--compress",
-        "--list",
-        "--status"
-      ],
-      "examples": [
-        "py long_term_memory.py --search '关键词'",
-        "py long_term_memory.py --add '记忆内容'"
-      ],
-      "added_at": "2026-03-19T14:07:24.743626",
-      "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "auto_register_tools.py",
-        "integrate_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013758"
-    },
-    "task-decomposer": {
-      "name": "Task Decomposer",
-      "description": "任务分解自动化 - 依赖管理、优先级排序、进度追踪",
-      "file": "task_decomposer.py",
-      "category": "task",
-      "parameters": [
-        "--decompose",
-        "--progress",
-        "--execute-next",
-        "--list"
-      ],
-      "examples": [
-        "py task_decomposer.py --decompose '复杂任务' --template development"
-      ],
-      "added_at": "2026-03-19T14:07:24.743659",
-      "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "auto_register_tools.py",
-        "integrate_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013760"
-    },
-    "proactive-agent": {
-      "name": "Proactive Agent",
-      "description": "主动式交互系统 - 提醒、建议、预警、上下文感知",
-      "file": "proactive_agent.py",
-      "category": "interaction",
-      "parameters": [
-        "--check",
-        "--remind",
-        "--suggest",
-        "--alert",
-        "--alerts",
-        "--context",
-        "--learn",
-        "--status"
-      ],
-      "examples": [
-        "py proactive_agent.py --check",
-        "py proactive_agent.py --remind '完成任务'"
-      ],
-      "added_at": "2026-03-19T14:07:24.743662",
-      "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "auto_register_tools.py",
-        "integrate_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013761"
-    },
-    "multimodal-agent": {
-      "name": "Multimodal Agent",
-      "description": "多模态理解系统 - 图像、OCR、语音、文档、融合",
-      "file": "multimodal_agent.py",
-      "category": "multimodal",
-      "parameters": [
-        "--image",
-        "--ocr",
-        "--audio",
-        "--doc",
-        "--pdf",
-        "--fuse",
-        "--result",
-        "--status"
-      ],
-      "examples": [
-        "py multimodal_agent.py --image 'photo.jpg'",
-        "py multimodal_agent.py --ocr 'scan.png'"
-      ],
-      "added_at": "2026-03-19T14:07:24.743664",
-      "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "auto_register_tools.py",
-        "integrate_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013762"
-    },
-    "workflow-recovery": {
-      "name": "Workflow Recovery",
-      "description": "工作流恢复系统 - 检查点恢复、步骤重试",
-      "file": "workflow_recovery.py",
-      "category": "workflow",
-      "parameters": [
-        "--restore",
-        "--retry",
-        "--list-checkpoints",
-        "--status"
-      ],
-      "examples": [
-        "py workflow_recovery.py --restore 'checkpoint.json'"
-      ],
-      "added_at": "2026-03-19T14:07:24.743665",
-      "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "auto_register_tools.py",
-        "integrate_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013764"
-    },
-    "integration-validator": {
-      "name": "Integration Validator",
-      "description": "工具集成验证器 - 检查注册、集成、调用场景",
-      "file": "integration_validator.py",
-      "category": "validation",
-      "parameters": [
-        "--tool",
-        "--all"
-      ],
-      "examples": [
-        "py integration_validator.py --tool 'proactive_agent.py'",
-        "py integration_validator.py --all"
-      ],
-      "added_at": "2026-03-19T14:07:24.743667",
-      "status": "active",
-      "usage_count": 3,
-      "usage_files": [
-        "auto_register_tools.py",
-        "integrate_tools.py",
-        "register_missing_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013765"
-    },
-    "workflow-cache": {
-      "name": "Workflow Cache",
-      "description": "工作流缓存系统 - TTL、命中率、自动清理",
-      "file": "workflow_cache.py",
-      "category": "workflow",
-      "parameters": [
-        "--get",
-        "--set",
-        "--clear",
-        "--stats"
-      ],
-      "examples": [
-        "py workflow_cache.py --stats"
-      ],
-      "added_at": "2026-03-19T14:09:47.156027",
-      "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "register_workflow_cache.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014078"
-    },
     "git-commit-push": {
       "name": "Git Commit Push",
       "description": "Git 提交和推送 - 自动 commit + push",
@@ -12083,29 +11972,6 @@
         "register_missing_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013813"
-    },
-    "workflow-scheduler": {
-      "name": "Workflow Scheduler",
-      "description": "工作流调度器 - 调度和管理工作流执行",
-      "file": "workflow_scheduler.py",
-      "category": "workflow",
-      "parameters": [
-        "--schedule",
-        "--list",
-        "--cancel"
-      ],
-      "examples": [
-        "py workflow_scheduler.py --schedule 'task'"
-      ],
-      "added_at": "2026-03-19T14:32:33.621680",
-      "status": "active",
-      "usage_count": 3,
-      "usage_files": [
-        "check_key_tools.py",
-        "fix_workflow_tool_ids.py",
-        "register_missing_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013814"
     },
     "tool-suggester": {
       "name": "Tool Suggester",
@@ -12175,107 +12041,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.013821"
     },
-    "auto-doc-generator": {
-      "name": "Auto Doc Generator",
-      "description": "自动文档生成器 - 根据代码/项目结构自动生成文档",
-      "file": "auto_doc_generator.py",
-      "category": "documentation",
-      "parameters": [
-        "--output-dir",
-        "--include-tests"
-      ],
-      "examples": [
-        "py auto_doc_generator.py"
-      ],
-      "added_at": "2026-03-19T14:54:26.823493",
-      "status": "active",
-      "usage_count": 1,
-      "usage_files": [
-        "register_low_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014047"
-    },
-    "performance-benchmark": {
-      "name": "Performance Benchmark",
-      "description": "性能基准测试 - 测试系统性能并生成报告",
-      "file": "performance_benchmark.py",
-      "category": "performance",
-      "parameters": [
-        "--output-dir",
-        "--iterations"
-      ],
-      "examples": [
-        "py performance_benchmark.py"
-      ],
-      "added_at": "2026-03-19T14:54:26.823527",
-      "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "comprehensive_performance_benchmark.py",
-        "register_low_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013831"
-    },
-    "changelog-generator": {
-      "name": "Changelog Generator",
-      "description": "变更日志生成器 - 从 Git 历史自动生成 CHANGELOG.md",
-      "file": "changelog_generator.py",
-      "category": "documentation",
-      "parameters": [
-        "--output",
-        "--max-commits"
-      ],
-      "examples": [
-        "py changelog_generator.py"
-      ],
-      "added_at": "2026-03-19T14:54:26.823531",
-      "status": "active",
-      "usage_count": 1,
-      "usage_files": [
-        "register_low_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014048"
-    },
-    "memory-auto-compress": {
-      "name": "Memory Auto Compress",
-      "description": "记忆自动压缩 - 自动压缩过期的记忆文件",
-      "file": "memory_auto_compress.py",
-      "category": "memory",
-      "parameters": [
-        "--days-old",
-        "--cleanup-after"
-      ],
-      "examples": [
-        "py memory_auto_compress.py"
-      ],
-      "added_at": "2026-03-19T14:54:26.823533",
-      "status": "active",
-      "usage_count": 1,
-      "usage_files": [
-        "register_low_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014049"
-    },
-    "incremental-executor": {
-      "name": "Incremental Executor",
-      "description": "增量执行支持 - 只执行变更的部分，跳过未变化的内容",
-      "file": "incremental_executor.py",
-      "category": "execution",
-      "parameters": [
-        "--files",
-        "--cache-dir"
-      ],
-      "examples": [
-        "py incremental_executor.py"
-      ],
-      "added_at": "2026-03-19T14:54:26.823535",
-      "status": "active",
-      "usage_count": 1,
-      "usage_files": [
-        "register_low_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014051"
-    },
     "timeout-optimizer": {
       "name": "Timeout Optimizer",
       "description": "超时优化器 - 优化工作流步骤超时设置",
@@ -12317,72 +12082,6 @@
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014053"
     },
-    "rollback-manager": {
-      "name": "Rollback Manager",
-      "description": "回滚管理器 - 管理工作流失败时的回滚操作",
-      "file": "rollback_manager.py",
-      "category": "workflow",
-      "parameters": [
-        "--create",
-        "--list",
-        "--rollback",
-        "--cleanup"
-      ],
-      "examples": [
-        "py rollback_manager.py --create"
-      ],
-      "added_at": "2026-03-19T15:11:26.457699",
-      "status": "active",
-      "usage_count": 1,
-      "usage_files": [
-        "register_medium_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014055"
-    },
-    "memory-persistence": {
-      "name": "Memory Persistence",
-      "description": "记忆持久化 - 将重要记忆永久保存到 MEMORY.md",
-      "file": "memory_persistence.py",
-      "category": "memory",
-      "parameters": [
-        "--auto",
-        "--persist",
-        "--min-importance"
-      ],
-      "examples": [
-        "py memory_persistence.py --auto"
-      ],
-      "added_at": "2026-03-19T15:11:26.457702",
-      "status": "active",
-      "usage_count": 1,
-      "usage_files": [
-        "register_medium_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014056"
-    },
-    "config-backup": {
-      "name": "Config Backup",
-      "description": "配置备份 - 自动备份关键配置文件",
-      "file": "config_backup.py",
-      "category": "backup",
-      "parameters": [
-        "--backup-all",
-        "--list",
-        "--restore",
-        "--cleanup"
-      ],
-      "examples": [
-        "py config_backup.py --backup-all"
-      ],
-      "added_at": "2026-03-19T15:11:26.457704",
-      "status": "active",
-      "usage_count": 3,
-      "usage_files": [
-        "config_manager.py",
-        "register_medium_priority_tools.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.013840"
-    },
     "parallel-executor": {
       "name": "Parallel Executor",
       "description": "并行执行器 - 并行执行独立任务以提高效率",
@@ -12403,50 +12102,6 @@
         "register_medium_priority_tools.py"
       ],
       "usage_tracked_at": "2026-03-19T17:28:52.014058"
-    },
-    "result-cache": {
-      "name": "Result Cache",
-      "description": "结果缓存 - 缓存工具执行结果以提高重复任务效率",
-      "file": "result_cache.py",
-      "category": "cache",
-      "parameters": [
-        "--get",
-        "--set",
-        "--clear-expired",
-        "--stats"
-      ],
-      "examples": [
-        "py result_cache.py --stats"
-      ],
-      "added_at": "2026-03-19T15:11:26.457707",
-      "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "register_medium_priority_tools.py",
-        "result_cache.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014059"
-    },
-    "speed-optimization-brainstorm": {
-      "name": "Speed Optimization Brainstorm",
-      "description": "速度优化头脑风暴 - 生成在不影响功能情况下提升速度的优化方案",
-      "file": "speed_optimization_brainstorm.py",
-      "category": "optimization",
-      "parameters": [
-        "--output-dir",
-        "--top-n"
-      ],
-      "examples": [
-        "py speed_optimization_brainstorm.py"
-      ],
-      "added_at": "2026-03-19T15:31:57.494997",
-      "status": "active",
-      "usage_count": 2,
-      "usage_files": [
-        "register_speed_opt_tool.py",
-        "speed_optimization_brainstorm.py"
-      ],
-      "usage_tracked_at": "2026-03-19T17:28:52.014069"
     },
     "db_index_optimizer": {
       "name": "Database Index Optimizer",
@@ -12931,6 +12586,752 @@
       ],
       "added_at": "2026-03-19T17:30:07.231561",
       "status": "active"
+    },
+    "session_compress": {
+      "tool_id": "session-compress",
+      "name": "Post-Session Compressor",
+      "description": "会话压缩工具 - 压缩对话到结构化摘要",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\post_session_compress.py --auto",
+      "parameters": {},
+      "validation": {
+        "context_size_limit_kb": 100,
+        "daily_note_lines_limit": 100,
+        "verify_with": "fast_load.py"
+      },
+      "triggers": [
+        "session_end"
+      ],
+      "review_required": true,
+      "blocking": true,
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330670",
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013803",
+      "renamed_from": "session-compress",
+      "renamed_at": "2026-03-19T17:33:50.992565",
+      "naming_standard": "underscore"
+    },
+    "context_verify": {
+      "tool_id": "context-verify",
+      "name": "Fast Load Context Verifier",
+      "description": "上下文大小验证工具 - 确保<100KB",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\fast_load.py",
+      "parameters": {},
+      "validation": {
+        "max_size_kb": 100,
+        "core_files": [
+          "SOUL.md",
+          "USER.md",
+          "AGENTS.md",
+          "TOOLS.md",
+          "HEARTBEAT.md",
+          "13-memory/MEMORY.md",
+          "13-memory/YYYY-MM-DD.md"
+        ]
+      },
+      "triggers": [
+        "session_start",
+        "session_end"
+      ],
+      "review_required": true,
+      "blocking": true,
+      "timeout_seconds": 10,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330673",
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013804",
+      "renamed_from": "context-verify",
+      "renamed_at": "2026-03-19T17:33:50.992746",
+      "naming_standard": "underscore"
+    },
+    "quality_gate": {
+      "tool_id": "quality-gate",
+      "name": "Quality Gate Checker",
+      "description": "质量门禁 - 代码质量/安全/复杂度/测试覆盖率",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\quality_gate.py --check {check} --min-score {min-score}",
+      "parameters": {
+        "check": {
+          "type": "string",
+          "required": false,
+          "description": "检查文件模式",
+          "default": "30-scripts-tools/*.py"
+        },
+        "min-score": {
+          "type": "integer",
+          "required": false,
+          "description": "最低通过分数",
+          "default": 80,
+          "min": 0,
+          "max": 100
+        }
+      },
+      "validation": {
+        "min_passing_score": 80,
+        "checks": [
+          "pylint",
+          "flake8",
+          "security",
+          "complexity",
+          "test_coverage",
+          "documentation"
+        ]
+      },
+      "triggers": [
+        "auto_critic_v7"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 60,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330697",
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013807",
+      "renamed_from": "quality-gate",
+      "renamed_at": "2026-03-19T17:33:50.992839",
+      "naming_standard": "underscore"
+    },
+    "workflow_session_end": {
+      "tool_id": "workflow-session-end",
+      "name": "Session End Sub-Workflow",
+      "description": "子工作流 - 会话结束处理 (主工作流专用)",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\tool_executor.py --workflow session-end",
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001",
+      "parameters": {
+        "commit_message": {
+          "type": "string",
+          "required": true,
+          "description": "Git 提交信息"
+        }
+      },
+      "triggers": [
+        "main_workflow_call"
+      ],
+      "review_required": false,
+      "blocking": true,
+      "timeout_seconds": 120,
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330706",
+      "categorized_method": "auto",
+      "renamed_from": "workflow-session-end",
+      "renamed_at": "2026-03-19T17:33:50.992918",
+      "naming_standard": "underscore"
+    },
+    "workflow_brainstorm": {
+      "tool_id": "workflow-brainstorm",
+      "name": "Brainstorm Sub-Workflow",
+      "description": "子工作流 - 头脑风暴 (主工作流专用)",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\tool_executor.py --workflow brainstorm-001",
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001",
+      "parameters": {
+        "topic": {
+          "type": "string",
+          "required": false,
+          "description": "头脑风暴主题"
+        }
+      },
+      "triggers": [
+        "main_workflow_call"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 300,
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330707",
+      "categorized_method": "auto",
+      "renamed_from": "workflow-brainstorm",
+      "renamed_at": "2026-03-19T17:33:50.992983",
+      "naming_standard": "underscore"
+    },
+    "workflow_research": {
+      "tool_id": "workflow-research",
+      "name": "Research Sub-Workflow",
+      "description": "子工作流 - 深度研究 (主工作流专用)",
+      "version": "1.0.0",
+      "command": "py 30-scripts-tools\\tool_executor.py --workflow research-001",
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001",
+      "flow_id": "20260318-research-001",
+      "parameters": {
+        "research_question": {
+          "type": "string",
+          "required": true,
+          "description": "研究问题"
+        },
+        "sources": {
+          "type": "array",
+          "required": false,
+          "description": "检索来源",
+          "default": [
+            "arxiv",
+            "google_scholar"
+          ]
+        }
+      },
+      "triggers": [
+        "main_workflow_call"
+      ],
+      "review_required": false,
+      "blocking": true,
+      "timeout_seconds": 3600,
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330709",
+      "categorized_method": "auto",
+      "renamed_from": "workflow-research",
+      "renamed_at": "2026-03-19T17:33:50.993043",
+      "naming_standard": "underscore"
+    },
+    "workflow_project": {
+      "tool_id": "workflow-project",
+      "name": "Project Sub-Workflow",
+      "description": "子工作流 - 项目管理 (主工作流专用)",
+      "version": "1.0.0",
+      "command": "py 30-scripts-tools\\tool_executor.py --workflow project-001",
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001",
+      "flow_id": "20260318-project-001",
+      "parameters": {
+        "project_name": {
+          "type": "string",
+          "required": true,
+          "description": "项目名称"
+        },
+        "objectives": {
+          "type": "array",
+          "required": false,
+          "description": "项目目标"
+        }
+      },
+      "triggers": [
+        "main_workflow_call"
+      ],
+      "review_required": false,
+      "blocking": true,
+      "timeout_seconds": 1800,
+      "category": "workflow",
+      "categorized_at": "2026-03-19T17:20:34.330710",
+      "categorized_method": "auto",
+      "renamed_from": "workflow-project",
+      "renamed_at": "2026-03-19T17:33:50.993091",
+      "naming_standard": "underscore"
+    },
+    "long_term_memory": {
+      "name": "Long Term Memory",
+      "description": "跨会话持久化记忆系统 - 搜索、关联、压缩",
+      "file": "long_term_memory.py",
+      "category": "memory",
+      "parameters": [
+        "--search",
+        "--add",
+        "--compress",
+        "--list",
+        "--status"
+      ],
+      "examples": [
+        "py long_term_memory.py --search '关键词'",
+        "py long_term_memory.py --add '记忆内容'"
+      ],
+      "added_at": "2026-03-19T14:07:24.743626",
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013758",
+      "renamed_from": "long-term-memory",
+      "renamed_at": "2026-03-19T17:33:50.993139",
+      "naming_standard": "underscore"
+    },
+    "task_decomposer": {
+      "name": "Task Decomposer",
+      "description": "任务分解自动化 - 依赖管理、优先级排序、进度追踪",
+      "file": "task_decomposer.py",
+      "category": "task",
+      "parameters": [
+        "--decompose",
+        "--progress",
+        "--execute-next",
+        "--list"
+      ],
+      "examples": [
+        "py task_decomposer.py --decompose '复杂任务' --template development"
+      ],
+      "added_at": "2026-03-19T14:07:24.743659",
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013760",
+      "renamed_from": "task-decomposer",
+      "renamed_at": "2026-03-19T17:33:50.993190",
+      "naming_standard": "underscore"
+    },
+    "proactive_agent": {
+      "name": "Proactive Agent",
+      "description": "主动式交互系统 - 提醒、建议、预警、上下文感知",
+      "file": "proactive_agent.py",
+      "category": "interaction",
+      "parameters": [
+        "--check",
+        "--remind",
+        "--suggest",
+        "--alert",
+        "--alerts",
+        "--context",
+        "--learn",
+        "--status"
+      ],
+      "examples": [
+        "py proactive_agent.py --check",
+        "py proactive_agent.py --remind '完成任务'"
+      ],
+      "added_at": "2026-03-19T14:07:24.743662",
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013761",
+      "renamed_from": "proactive-agent",
+      "renamed_at": "2026-03-19T17:33:50.993239",
+      "naming_standard": "underscore"
+    },
+    "multimodal_agent": {
+      "name": "Multimodal Agent",
+      "description": "多模态理解系统 - 图像、OCR、语音、文档、融合",
+      "file": "multimodal_agent.py",
+      "category": "multimodal",
+      "parameters": [
+        "--image",
+        "--ocr",
+        "--audio",
+        "--doc",
+        "--pdf",
+        "--fuse",
+        "--result",
+        "--status"
+      ],
+      "examples": [
+        "py multimodal_agent.py --image 'photo.jpg'",
+        "py multimodal_agent.py --ocr 'scan.png'"
+      ],
+      "added_at": "2026-03-19T14:07:24.743664",
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013762",
+      "renamed_from": "multimodal-agent",
+      "renamed_at": "2026-03-19T17:33:50.993287",
+      "naming_standard": "underscore"
+    },
+    "workflow_recovery": {
+      "name": "Workflow Recovery",
+      "description": "工作流恢复系统 - 检查点恢复、步骤重试",
+      "file": "workflow_recovery.py",
+      "category": "workflow",
+      "parameters": [
+        "--restore",
+        "--retry",
+        "--list-checkpoints",
+        "--status"
+      ],
+      "examples": [
+        "py workflow_recovery.py --restore 'checkpoint.json'"
+      ],
+      "added_at": "2026-03-19T14:07:24.743665",
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013764",
+      "renamed_from": "workflow-recovery",
+      "renamed_at": "2026-03-19T17:33:50.993337",
+      "naming_standard": "underscore"
+    },
+    "integration_validator": {
+      "name": "Integration Validator",
+      "description": "工具集成验证器 - 检查注册、集成、调用场景",
+      "file": "integration_validator.py",
+      "category": "validation",
+      "parameters": [
+        "--tool",
+        "--all"
+      ],
+      "examples": [
+        "py integration_validator.py --tool 'proactive_agent.py'",
+        "py integration_validator.py --all"
+      ],
+      "added_at": "2026-03-19T14:07:24.743667",
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "auto_register_tools.py",
+        "integrate_tools.py",
+        "register_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013765",
+      "renamed_from": "integration-validator",
+      "renamed_at": "2026-03-19T17:33:50.993384",
+      "naming_standard": "underscore"
+    },
+    "workflow_cache": {
+      "name": "Workflow Cache",
+      "description": "工作流缓存系统 - TTL、命中率、自动清理",
+      "file": "workflow_cache.py",
+      "category": "workflow",
+      "parameters": [
+        "--get",
+        "--set",
+        "--clear",
+        "--stats"
+      ],
+      "examples": [
+        "py workflow_cache.py --stats"
+      ],
+      "added_at": "2026-03-19T14:09:47.156027",
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "register_workflow_cache.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014078",
+      "renamed_from": "workflow-cache",
+      "renamed_at": "2026-03-19T17:33:50.993439",
+      "naming_standard": "underscore"
+    },
+    "workflow_scheduler": {
+      "name": "Workflow Scheduler",
+      "description": "工作流调度器 - 调度和管理工作流执行",
+      "file": "workflow_scheduler.py",
+      "category": "workflow",
+      "parameters": [
+        "--schedule",
+        "--list",
+        "--cancel"
+      ],
+      "examples": [
+        "py workflow_scheduler.py --schedule 'task'"
+      ],
+      "added_at": "2026-03-19T14:32:33.621680",
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py",
+        "register_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013814",
+      "renamed_from": "workflow-scheduler",
+      "renamed_at": "2026-03-19T17:33:50.993487",
+      "naming_standard": "underscore"
+    },
+    "auto_doc_generator": {
+      "name": "Auto Doc Generator",
+      "description": "自动文档生成器 - 根据代码/项目结构自动生成文档",
+      "file": "auto_doc_generator.py",
+      "category": "documentation",
+      "parameters": [
+        "--output-dir",
+        "--include-tests"
+      ],
+      "examples": [
+        "py auto_doc_generator.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823493",
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014047",
+      "renamed_from": "auto-doc-generator",
+      "renamed_at": "2026-03-19T17:33:50.993534",
+      "naming_standard": "underscore"
+    },
+    "performance_benchmark": {
+      "name": "Performance Benchmark",
+      "description": "性能基准测试 - 测试系统性能并生成报告",
+      "file": "performance_benchmark.py",
+      "category": "performance",
+      "parameters": [
+        "--output-dir",
+        "--iterations"
+      ],
+      "examples": [
+        "py performance_benchmark.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823527",
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "comprehensive_performance_benchmark.py",
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013831",
+      "renamed_from": "performance-benchmark",
+      "renamed_at": "2026-03-19T17:33:50.993600",
+      "naming_standard": "underscore"
+    },
+    "changelog_generator": {
+      "name": "Changelog Generator",
+      "description": "变更日志生成器 - 从 Git 历史自动生成 CHANGELOG.md",
+      "file": "changelog_generator.py",
+      "category": "documentation",
+      "parameters": [
+        "--output",
+        "--max-commits"
+      ],
+      "examples": [
+        "py changelog_generator.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823531",
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014048",
+      "renamed_from": "changelog-generator",
+      "renamed_at": "2026-03-19T17:33:50.993720",
+      "naming_standard": "underscore"
+    },
+    "memory_auto_compress": {
+      "name": "Memory Auto Compress",
+      "description": "记忆自动压缩 - 自动压缩过期的记忆文件",
+      "file": "memory_auto_compress.py",
+      "category": "memory",
+      "parameters": [
+        "--days-old",
+        "--cleanup-after"
+      ],
+      "examples": [
+        "py memory_auto_compress.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823533",
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014049",
+      "renamed_from": "memory-auto-compress",
+      "renamed_at": "2026-03-19T17:33:50.993793",
+      "naming_standard": "underscore"
+    },
+    "incremental_executor": {
+      "name": "Incremental Executor",
+      "description": "增量执行支持 - 只执行变更的部分，跳过未变化的内容",
+      "file": "incremental_executor.py",
+      "category": "execution",
+      "parameters": [
+        "--files",
+        "--cache-dir"
+      ],
+      "examples": [
+        "py incremental_executor.py"
+      ],
+      "added_at": "2026-03-19T14:54:26.823535",
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_low_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014051",
+      "renamed_from": "incremental-executor",
+      "renamed_at": "2026-03-19T17:33:50.993849",
+      "naming_standard": "underscore"
+    },
+    "rollback_manager": {
+      "name": "Rollback Manager",
+      "description": "回滚管理器 - 管理工作流失败时的回滚操作",
+      "file": "rollback_manager.py",
+      "category": "workflow",
+      "parameters": [
+        "--create",
+        "--list",
+        "--rollback",
+        "--cleanup"
+      ],
+      "examples": [
+        "py rollback_manager.py --create"
+      ],
+      "added_at": "2026-03-19T15:11:26.457699",
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_medium_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014055",
+      "renamed_from": "rollback-manager",
+      "renamed_at": "2026-03-19T17:33:50.993899",
+      "naming_standard": "underscore"
+    },
+    "memory_persistence": {
+      "name": "Memory Persistence",
+      "description": "记忆持久化 - 将重要记忆永久保存到 MEMORY.md",
+      "file": "memory_persistence.py",
+      "category": "memory",
+      "parameters": [
+        "--auto",
+        "--persist",
+        "--min-importance"
+      ],
+      "examples": [
+        "py memory_persistence.py --auto"
+      ],
+      "added_at": "2026-03-19T15:11:26.457702",
+      "status": "active",
+      "usage_count": 1,
+      "usage_files": [
+        "register_medium_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014056",
+      "renamed_from": "memory-persistence",
+      "renamed_at": "2026-03-19T17:33:50.993955",
+      "naming_standard": "underscore"
+    },
+    "config_backup": {
+      "name": "Config Backup",
+      "description": "配置备份 - 自动备份关键配置文件",
+      "file": "config_backup.py",
+      "category": "backup",
+      "parameters": [
+        "--backup-all",
+        "--list",
+        "--restore",
+        "--cleanup"
+      ],
+      "examples": [
+        "py config_backup.py --backup-all"
+      ],
+      "added_at": "2026-03-19T15:11:26.457704",
+      "status": "active",
+      "usage_count": 3,
+      "usage_files": [
+        "config_manager.py",
+        "register_medium_priority_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013840",
+      "renamed_from": "config-backup",
+      "renamed_at": "2026-03-19T17:33:50.994009",
+      "naming_standard": "underscore"
+    },
+    "result_cache": {
+      "name": "Result Cache",
+      "description": "结果缓存 - 缓存工具执行结果以提高重复任务效率",
+      "file": "result_cache.py",
+      "category": "cache",
+      "parameters": [
+        "--get",
+        "--set",
+        "--clear-expired",
+        "--stats"
+      ],
+      "examples": [
+        "py result_cache.py --stats"
+      ],
+      "added_at": "2026-03-19T15:11:26.457707",
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "register_medium_priority_tools.py",
+        "result_cache.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014059",
+      "renamed_from": "result-cache",
+      "renamed_at": "2026-03-19T17:33:50.994062",
+      "naming_standard": "underscore"
+    },
+    "speed_optimization_brainstorm": {
+      "name": "Speed Optimization Brainstorm",
+      "description": "速度优化头脑风暴 - 生成在不影响功能情况下提升速度的优化方案",
+      "file": "speed_optimization_brainstorm.py",
+      "category": "optimization",
+      "parameters": [
+        "--output-dir",
+        "--top-n"
+      ],
+      "examples": [
+        "py speed_optimization_brainstorm.py"
+      ],
+      "added_at": "2026-03-19T15:31:57.494997",
+      "status": "active",
+      "usage_count": 2,
+      "usage_files": [
+        "register_speed_opt_tool.py",
+        "speed_optimization_brainstorm.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.014069",
+      "renamed_from": "speed-optimization-brainstorm",
+      "renamed_at": "2026-03-19T17:33:50.994109",
+      "naming_standard": "underscore"
+    },
+    "naming_standard_analyzer": {
+      "name": "Naming Standard Analyzer",
+      "description": "命名规范分析 - 分析工具命名，识别不符合规范的工具",
+      "file": "naming_standard_analyzer.py",
+      "category": "quality",
+      "parameters": [],
+      "examples": [
+        "py naming_standard_analyzer.py"
+      ],
+      "added_at": "2026-03-19T17:34:56.711123",
+      "status": "active"
+    },
+    "standardize_naming": {
+      "name": "Standardize Naming",
+      "description": "统一命名规范 - 将 kebab-case 工具重命名为 underscore",
+      "file": "standardize_naming.py",
+      "category": "automation",
+      "parameters": [],
+      "examples": [
+        "py standardize_naming.py"
+      ],
+      "added_at": "2026-03-19T17:34:56.711162",
+      "status": "active"
+    },
+    "subdivide_general_category": {
+      "name": "Subdivide General Category",
+      "description": "细分 general 类 - 将 222 个 general 工具细分为更具体的分类",
+      "file": "subdivide_general_category.py",
+      "category": "automation",
+      "parameters": [],
+      "examples": [
+        "py subdivide_general_category.py"
+      ],
+      "added_at": "2026-03-19T17:34:56.711168",
+      "status": "active"
     }
   },
   "workflows": {
@@ -13037,10 +13438,54 @@
       ]
     }
   },
-  "updated_at": "2026-03-19T17:30:07.231596",
-  "total_tools": 437,
+  "updated_at": "2026-03-19T17:34:56.711171",
+  "total_tools": 440,
   "recovery_note": "Recovered 6 missing file tools",
   "categorized_count": 27,
   "manual_fixes": 5,
-  "deprecated_count": 88
+  "deprecated_count": 88,
+  "naming_standard": {
+    "standardized_at": "2026-03-19T17:33:50.994168",
+    "renamed_tools": 25,
+    "renamed_files": 0,
+    "skipped": 30,
+    "compliance_rate": 93.13501144164759
+  },
+  "category_distribution": {
+    "quality": 30,
+    "memory": 67,
+    "optimization": 26,
+    "analysis": 14,
+    "code-quality": 1,
+    "workflow": 31,
+    "quality-gate": 1,
+    "automation": 29,
+    "performance": 13,
+    "reporting": 11,
+    "tool": 17,
+    "general": 77,
+    "integration": 10,
+    "backup": 3,
+    "security": 7,
+    "brainstorm": 7,
+    "utility": 13,
+    "context": 8,
+    "testing": 3,
+    "ui": 12,
+    "documentation": 5,
+    "execution": 3,
+    "learning": 3,
+    "git": 9,
+    "monitoring": 10,
+    "kg": 5,
+    "session": 8,
+    "task": 2,
+    "core": 4,
+    "logging": 2,
+    "assistant": 2,
+    "interaction": 1,
+    "multimodal": 1,
+    "validation": 1,
+    "cache": 1
+  }
 }
