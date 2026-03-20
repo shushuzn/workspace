@@ -1,7 +1,8 @@
 {
-  "version": "1.11.66-phase6-complete",
+  "version": "1.11.67-advisor",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.67: Added NEXT-001 next step advisor for progress tracking",
     "v1.11.66: Added SA-032 strategy recommendation engine (Phase 6 complete)",
     "v1.11.65: Added SA-031 intelligent report generator with multiple templates",
     "v1.11.64: Added SA-030 sentiment analyzer for news/social media",
@@ -5978,6 +5979,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T21:30:00.000000"
+    },
+    "next-001-advisor": {
+      "tool_id": "next-001-advisor",
+      "name": "NEXT-001 Next Step Advisor",
+      "description": "下一步建议器 - 自动分析状态、生成下一步建议、提供行动项目",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/next_001_advisor.py",
+      "category": "project_management",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:35:00.000000"
     }
   },
   "workflows": {
