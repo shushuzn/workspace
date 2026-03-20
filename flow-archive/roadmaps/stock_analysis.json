@@ -1,0 +1,377 @@
+{
+  "roadmap_id": "stock-v2.1.0",
+  "name": "Stock Analysis Tools",
+  "dimension": "stock_analysis",
+  "version": "2.1.0",
+  "created_at": "2026-03-18T22:00:00.000000",
+  "last_updated": "2026-03-20T22:07:47.478214",
+  "total_tools": 45,
+  "completed_tools": 45,
+  "progress_pct": 100.0,
+  "phases": [
+    {
+      "phase": "1",
+      "name": "Data Collection",
+      "total": 4,
+      "status": "completed"
+    },
+    {
+      "phase": "2",
+      "name": "Technical Analysis",
+      "total": 8,
+      "status": "completed"
+    },
+    {
+      "phase": "3",
+      "name": "Risk & Signals",
+      "total": 6,
+      "status": "completed"
+    },
+    {
+      "phase": "4",
+      "name": "Visualization",
+      "total": 6,
+      "status": "completed"
+    },
+    {
+      "phase": "5",
+      "name": "Real Data",
+      "total": 4,
+      "status": "completed"
+    },
+    {
+      "phase": "6",
+      "name": "AI Enhancement",
+      "total": 4,
+      "status": "completed"
+    },
+    {
+      "phase": "7",
+      "name": "Advanced Features",
+      "total": 4,
+      "status": "completed"
+    }
+  ],
+  "tools": [
+    {
+      "tool_id": "sa-001-realtime-fetcher",
+      "name": "Sa_001_Realtime_Fetcher",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.431008",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-002-historical-downloader",
+      "name": "Sa_002_Historical_Downloader",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.431616",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-003-financial-collector",
+      "name": "Sa_003_Financial_Collector",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.432231",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-004-sentiment-monitor",
+      "name": "Sa_004_Sentiment_Monitor",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.432886",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-005-indicator-calculator",
+      "name": "Sa_005_Indicator_Calculator",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.433505",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-006-pattern-recognition",
+      "name": "Sa_006_Pattern_Recognition",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.434175",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-007-trend-analysis",
+      "name": "Sa_007_Trend_Analysis",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.434784",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-008-support-resistance",
+      "name": "Sa_008_Support_Resistance",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.435433",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-009-financial-ratios",
+      "name": "Sa_009_Financial_Ratios",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.436081",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-009-risk-management",
+      "name": "Sa_009_Risk_Management",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.436735",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-010-signal-generator",
+      "name": "Sa_010_Signal_Generator",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.437409",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-010-valuation-model",
+      "name": "Sa_010_Valuation_Model",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.438094",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-011-backtesting",
+      "name": "Sa_011_Backtesting",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.438763",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-011-growth-analysis",
+      "name": "Sa_011_Growth_Analysis",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.439437",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-012-industry-analysis",
+      "name": "Sa_012_Industry_Analysis",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.440104",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-012-report-generator",
+      "name": "Sa_012_Report_Generator",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.440785",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-013-portfolio-risk",
+      "name": "Sa_013_Portfolio_Risk",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.441489",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-014-alert-system",
+      "name": "Sa_014_Alert_System",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.442194",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-015-market-regime",
+      "name": "Sa_015_Market_Regime",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.442887",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-016-sentiment-aggregator",
+      "name": "Sa_016_Sentiment_Aggregator",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.443594",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-017-strategy-optimizer",
+      "name": "Sa_017_Strategy_Optimizer",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.444336",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-018-performance-attribution",
+      "name": "Sa_018_Performance_Attribution",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.445055",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-registry-sa-phase1",
+      "name": "Update_Registry_Sa_Phase1",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.447174",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-registry-sa-phase1-complete",
+      "name": "Update_Registry_Sa_Phase1_Complete",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.447953",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-registry-sa-phase2",
+      "name": "Update_Registry_Sa_Phase2",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.448729",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-registry-sa-phase2-final",
+      "name": "Update_Registry_Sa_Phase2_Final",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.449501",
+      "status": "active"
+    },
+    {
+      "tool_id": "verify-sa-tools",
+      "name": "Verify_Sa_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.452476",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-019-chart-generator",
+      "name": "SA-019 Stock Chart Generator",
+      "file": "sa_019_chart_generator.py",
+      "added_at": "2026-03-20T22:07:47.462327",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-020-report-generator",
+      "name": "SA-020 Report Generator",
+      "file": "sa_020_report_generator.py",
+      "added_at": "2026-03-20T22:07:47.463088",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-021-dashboard",
+      "name": "SA-021 Stock Dashboard",
+      "file": "sa_021_dashboard.py",
+      "added_at": "2026-03-20T22:07:47.464611",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-022-backtest",
+      "name": "SA-022 Strategy Backtest",
+      "file": "sa_022_backtest.py",
+      "added_at": "2026-03-20T22:07:47.465877",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-023-trader",
+      "name": "SA-023 Simulated Trading",
+      "file": "sa_023_trader.py",
+      "added_at": "2026-03-20T22:07:47.466873",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-024-api",
+      "name": "SA-024 RESTful API",
+      "file": "sa_024_api.py",
+      "added_at": "2026-03-20T22:07:47.467671",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-025-datasource",
+      "name": "SA-025 Data Source Manager",
+      "file": "sa_025_datasource.py",
+      "added_at": "2026-03-20T22:07:47.468682",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-026-realtime",
+      "name": "SA-026 Realtime Quotes",
+      "file": "sa_026_realtime.py",
+      "added_at": "2026-03-20T22:07:47.469454",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-027-optimizer",
+      "name": "SA-027 Strategy Optimizer",
+      "file": "sa_027_optimizer.py",
+      "added_at": "2026-03-20T22:07:47.470267",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-028-portfolio",
+      "name": "SA-028 Portfolio Optimizer",
+      "file": "sa_028_optimizer.py",
+      "added_at": "2026-03-20T22:07:47.471060",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-029-ai-signal",
+      "name": "SA-029 AI Signal Generator",
+      "file": "sa_029_ai_signal.py",
+      "added_at": "2026-03-20T22:07:47.471910",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-030-sentiment",
+      "name": "SA-030 Sentiment Analyzer",
+      "file": "sa_030_sentiment.py",
+      "added_at": "2026-03-20T22:07:47.472750",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-031-report",
+      "name": "SA-031 Intelligent Report Generator",
+      "file": "sa_031_report.py",
+      "added_at": "2026-03-20T22:07:47.473540",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-032-strategy",
+      "name": "SA-032 Strategy Recommendation Engine",
+      "file": "sa_032_strategy.py",
+      "added_at": "2026-03-20T22:07:47.474382",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-033-backtest",
+      "name": "SA-033 Portfolio Backtest Engine",
+      "file": "sa_033_backtest.py",
+      "added_at": "2026-03-20T22:07:47.475488",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-034-risk",
+      "name": "SA-034 Risk Manager",
+      "file": "sa_034_risk.py",
+      "added_at": "2026-03-20T22:07:47.476321",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-035-executor",
+      "name": "SA-035 Trade Executor",
+      "file": "sa_035_executor.py",
+      "added_at": "2026-03-20T22:07:47.477365",
+      "status": "active"
+    },
+    {
+      "tool_id": "sa-036-analyzer",
+      "name": "SA-036 Portfolio Analyzer",
+      "file": "sa_036_analyzer.py",
+      "added_at": "2026-03-20T22:07:47.478209",
+      "status": "active"
+    }
+  ],
+  "metrics": {
+    "total_tools": 36,
+    "completed": 36,
+    "in_progress": 0
+  }
+}

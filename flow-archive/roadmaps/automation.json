@@ -1,0 +1,51 @@
+{
+  "roadmap_id": "auto-v1.0.0",
+  "name": "Automation Tools",
+  "dimension": "automation",
+  "version": "1.0.0",
+  "created_at": "2026-03-20T22:00:00.000000",
+  "last_updated": "2026-03-20T22:07:47.482015",
+  "total_tools": 2,
+  "completed_tools": 2,
+  "progress_pct": 100.0,
+  "phases": [
+    {
+      "phase": "1",
+      "name": "Workflow Automation",
+      "total": 3,
+      "status": "completed"
+    },
+    {
+      "phase": "2",
+      "name": "Batch Processing",
+      "total": 2,
+      "status": "completed"
+    },
+    {
+      "phase": "3",
+      "name": "Scheduling",
+      "total": 3,
+      "status": "completed"
+    }
+  ],
+  "tools": [
+    {
+      "tool_id": "auto-001-automator",
+      "name": "AUTO-001 Workflow Automator",
+      "file": "auto_001_automator.py",
+      "added_at": "2026-03-20T22:07:47.479025",
+      "status": "active"
+    },
+    {
+      "tool_id": "batch-tools-001",
+      "name": "BATCH-TOOLS-001 Batch Tools Executor",
+      "file": "batch_tools_001.py",
+      "added_at": "2026-03-20T22:07:47.482012",
+      "status": "active"
+    }
+  ],
+  "metrics": {
+    "tasks_automated": "15+",
+    "time_saved": "hours/day"
+  }
+}

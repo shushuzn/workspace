@@ -1,7 +1,8 @@
 {
-  "version": "1.11.76-optimap",
+  "version": "1.11.77-roadmap-master",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.77: Add ROADMAP-MASTER-001 multi-dimensional roadmap manager (4 dimensions)",
     "v1.11.76: Add OPTIMAP-001 roadmap manager + optimization roadmap",
     "v1.11.75: Add SMART-CACHE-001, PROMPT-OPTIMIZER-001, BATCH-TOOLS-001",
     "v1.11.74: Add WORKFLOW-OPTIMIZER-001 for workflow analysis and optimization",
@@ -6175,6 +6176,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T22:50:00.000000"
+    },
+    "roadmap-master-001": {
+      "tool_id": "roadmap-master-001",
+      "name": "ROADMAP-MASTER-001 Multi-Dimensional Roadmap Manager",
+      "description": "多维度路线图管理器 - 4维度(股票/优化/防护/自动化)、自动同步、持续更新",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/roadmap_master_001.py",
+      "category": "roadmap",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:00:00.000000"
     }
   },
   "workflows": {

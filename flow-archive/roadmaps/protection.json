@@ -1,0 +1,156 @@
+{
+  "roadmap_id": "prot-v1.0.0",
+  "name": "Protection System",
+  "dimension": "protection",
+  "version": "1.0.0",
+  "created_at": "2026-03-18T22:00:00.000000",
+  "last_updated": "2026-03-20T22:07:47.461003",
+  "total_tools": 17,
+  "completed_tools": 17,
+  "progress_pct": 100.0,
+  "phases": [
+    {
+      "phase": "1",
+      "name": "Core Protection",
+      "total": 3,
+      "status": "completed"
+    },
+    {
+      "phase": "2",
+      "name": "Enforcement",
+      "total": 3,
+      "status": "completed"
+    },
+    {
+      "phase": "3",
+      "name": "Monitoring",
+      "total": 4,
+      "status": "completed"
+    }
+  ],
+  "tools": [
+    {
+      "tool_id": "workflow_enforcer",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.417278",
+      "status": "active"
+    },
+    {
+      "tool_id": "dialog-workflow-enforcer",
+      "name": "Dialog_Workflow_Enforcer",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.421024",
+      "status": "active"
+    },
+    {
+      "tool_id": "exec-protection-task",
+      "name": "Exec_Protection_Task",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.422081",
+      "status": "active"
+    },
+    {
+      "tool_id": "guardian-auto-fix",
+      "name": "Guardian_Auto_Fix",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.423295",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-auto-protection",
+      "name": "Reg_Auto_Protection",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.425340",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-forced-protection",
+      "name": "Reg_Forced_Protection",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.426261",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-guardian-fix",
+      "name": "Reg_Guardian_Fix",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.426998",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-protection-phase2",
+      "name": "Reg_Protection_Phase2",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.427705",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-protection-phase3",
+      "name": "Reg_Protection_Phase3",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.428324",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-safe-shell",
+      "name": "Reg_Safe_Shell",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.429150",
+      "status": "active"
+    },
+    {
+      "tool_id": "safe-git-executor",
+      "name": "Safe_Git_Executor",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.430368",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-workflow-enforcement",
+      "name": "Update_Workflow_Enforcement",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.451451",
+      "status": "active"
+    },
+    {
+      "tool_id": "view-safe-shell",
+      "name": "View_Safe_Shell",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.453398",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-enforcer-v2",
+      "name": "Workflow_Enforcer_V2",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.454979",
+      "status": "active"
+    },
+    {
+      "tool_id": "file-guardian",
+      "name": "File_Guardian",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.458426",
+      "status": "active"
+    },
+    {
+      "tool_id": "protection-monitor",
+      "name": "Protection_Monitor",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.459640",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-guardian-v2",
+      "name": "Workflow_Guardian_V2",
+      "file": "",
+      "added_at": "2026-03-20T22:07:47.460999",
+      "status": "active"
+    }
+  ],
+  "metrics": {
+    "security_level": "high",
+    "enforcement_rate": "100%"
+  }
+}
