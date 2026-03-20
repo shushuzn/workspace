@@ -1,0 +1,66 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:34:31.334424
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\adaptive_workflow.py  (lines 1-60 of 167)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+自适应工作流编排工具 - 基于 arXiv 2512.04521
+根据任务类型/复杂度/上下文动态调整工作流步骤
+"""
+
+import json
+from pathlib import Path
+from typing import Dict, List, Optional
+
+class AdaptiveWorkflowOrchestrator:
+    """自适应工作流编排器"""
+    
+    # 任务类型到工作流配置的映射
+    WORKFLOW_PROFILES = {
+        "simple_query": {
+            "name": "简单查询",
+            "steps_to_skip": [2, 6.6, 8.5, 13],
+            "parallel_enabled": False,
+            "timeout_multiplier": 0.5
+        },
+        "research_task": {
+            "name": "研究任务",
+            "steps_to_enhance": [2, 6, 9, 10],
+            "additional_steps": ["literature_review", "citation_check"],
+            "timeout_multiplier": 2.0
+        },
+        "code_development": {
+            "name": "代码开发",
+            "steps_to_enhance": [6, 6.5, 6.6, 10],
+            "additional_steps": ["code_review", "security_scan"],
+            "timeout_multiplier": 1.5
+        },
+        "brainstorm": {
+            "name": "头脑风暴",
+            "steps_to_skip": [6.5, 6.6, 8.5],
+            "divergent_phase": True,
+            "convergent_phase": True,
+            "timeout_multiplier": 1.2
+        },
+        "data_analysis": {
+            "name": "数据分析",
+            "steps_to_enhance": [6, 6.6, 9, 10],
+            "additional_steps": ["data_validation", "statistical_test"],
+            "timeout_multiplier": 1.8
+        }
+    }
+    
+    def __init__(self, workflow_file: str):
+        self.workflow_file = Path(workflow_file)
+        with open(self.workflow_file, 'r', encoding='utf-8') as f:
+            self.workflow = json.load(f)
+    
+    def detect_task_type(self, task_description: str) -> str:
+        """检测任务类型"""
+        
+        task_lower = task_description.lower()
+        
+        if any(kw in task_lower for kw in ["查询", "query", "简单", "simple"]):
+
+[107 more lines. Use start_line=61 to continue.]
