@@ -174,5 +174,7 @@
   "workflow_compliance": true,
   "session_id": "session-20260320111128",
   "entry_point": "copaw_entry.py",
-  "mandatory_execution": true
+  "mandatory_execution": true,
+  "signature": "baabdaff9a5a18fbfd7cf26ef9ca8cfcefc654ce9e11962214eca11c400f936c",
+  "protection_enabled": true
 }
