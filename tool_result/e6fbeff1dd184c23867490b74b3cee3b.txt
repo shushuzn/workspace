@@ -1,0 +1,86 @@
+# tool_name: read_file
+# created_at: 2026-03-20T10:55:39.521668
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 1-80 of 164)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+工具执行器 - 所有工具调用的唯一入口
+
+用途：
+1. 拦截所有工具调用
+2. 检查防护层
+3. 记录调用日志
+4. 拒绝违规调用
+
+使用方式：
+    py 30-scripts-tools/tool_executor.py execute_shell_command "echo test"
+    py 30-scripts-tools/tool_executor.py read_file "file_path=test.txt"
+"""
+
+import json
+import sys
+import os
+import subprocess
+from datetime import datetime
+from pathlib import Path
+
+# 导入防护层
+try:
+    from auto_protection_layer import get_protection_layer
+    PROTECTION_ENABLED = True
+except ImportError:
+    PROTECTION_ENABLED = False
+
+
+def parse_args(args):
+    """解析命令行参数"""
+    if len(args) < 2:
+        print("用法：py tool_executor.py <tool_name> [params...]")
+        print("示例:")
+        print("  py tool_executor.py execute_shell_command \"echo test\"")
+        print("  py tool_executor.py read_file \"file_path=test.txt\"")
+        sys.exit(1)
+    
+    tool_name = args[0]
+    params_str = args[1] if len(args) > 1 else ""
+    
+    # 解析参数字符串为字典
+    params = {}
+    if params_str:
+        # 简单解析：key=value 格式
+        for item in params_str.split(','):
+            if '=' in item:
+                key, value = item.split('=', 1)
+                params[key.strip()] = value.strip()
+        # 如果是 execute_shell_command，command 参数是完整的剩余部分
+        if tool_name == 'execute_shell_command' and 'command' not in params:
+            params['command'] = params_str
+    
+    return tool_name, params
+
+
+def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
+    """
+    执行工具调用
+    
+    Returns:
+        (returncode, stdout, stderr)
+    """
+    # 防护检查
+    if PROTECTION_ENABLED:
+        layer = get_protection_layer()
+        allowed, msg = layer.before_tool_call(tool_name, params)
+        if not allowed:
+            print(f"[BLOCK] {msg}", file=sys.stderr)
+            return 1, "", msg
+    
+    # 执行工具
+    if tool_name == 'execute_shell_command':
+        command = params.get('command', '')
+        try:
+            result = subprocess.run(
+                command,
+                shell=True,
+
+[84 more lines. Use start_line=81 to continue.]

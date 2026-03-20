@@ -1,0 +1,26 @@
+{
+  "flow_id": "20260318-universal-workflow-001-simplified",
+  "task": "强化防护-工作流强制入口",
+  "description": "Task started via copaw_entry.py",
+  "started_at": "2026-03-20T10:49:39.728703+08:00",
+  "current_step": 1,
+  "total_steps": 5,
+  "status": "initializing",
+  "step_status": {
+    "1": {
+      "name": "上下文加载验证",
+      "status": "completed",
+      "started_at": "2026-03-20T10:49:39.732864+08:00",
+      "completed_at": "2026-03-20T10:49:39.732868+08:00",
+      "result": "验证通过"
+    }
+  },
+  "completed_steps": [
+    1
+  ],
+  "completion_percentage": 20,
+  "workflow_compliance": false,
+  "session_id": "session-20260320104939",
+  "entry_point": "copaw_entry.py",
+  "mandatory_execution": true
+}

@@ -1,0 +1,37 @@
+{
+  "tool_id": "execute_shell_command",
+  "name": "Execute Shell Command",
+  "description": "执行 Shell 命令 - 系统内置工具（受安全规则约束）",
+  "version": "1.0.0",
+  "category": "system",
+  "status": "active",
+  "security_rules": {
+    "enabled": true,
+    "mandatory_wrapper": "safe_shell_executor.py",
+    "forbidden_patterns": [
+      "bash", "sh", "cmd", "powershell",
+      "os.system", "subprocess", "exec", "eval",
+      "pipe |", "semicolon ;", "and/or &&/||"
+    ],
+    "required_wrapper_check": true,
+    "violation_consequence": "immediate_termination_and_report"
+  },
+  "allowed_tools": [
+    "read_file",
+    "write_file",
+    "edit_file",
+    "browser_use",
+    "desktop_screenshot",
+    "view_image",
+    "get_current_time",
+    "get_token_usage",
+    "memory_search",
+    "send_file_to_user"
+  ],
+  "wrapper_tools": [
+    "safe-shell-executor",
+    "tool_executor"
+  ],
+  "usage_policy": "必须通过 safe_shell_executor.py 包装，禁止直接使用",
+  "created_at": "2026-03-20T10:45:00+08:00"
+}

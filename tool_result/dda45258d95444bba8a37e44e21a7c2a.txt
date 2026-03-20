@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-20T10:55:29.905096
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\safe_shell_executor.py  (lines 100-150 of 202)
+            # 简单实现：直接阻断危险命令
+            return {
+                "status": "blocked",
+                "reason": "dangerous_command",
+                "message": f"危险命令被阻断：{command}",
+                "returncode": -1
+            }
+        
+        # 步骤 4: 执行命令
+        print(f"[EXEC] {command}")
+        try:
+            result = subprocess.run(
+                command,
+                shell=True,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                timeout=300
+            )
+            
+            output = {
+                "status": "success" if result.returncode == 0 else "error",
+                "returncode": result.returncode,
+                "stdout": result.stdout[:5000] if result.stdout else "",
+                "stderr": result.stderr[:5000] if result.stderr else ""
+            }
+        except subprocess.TimeoutExpired:
+            output = {
+                "status": "error",
+                "returncode": -1,
+                "reason": "timeout"
+            }
+        except Exception as e:
+            output = {
+                "status": "error",
+                "returncode": -1,
+                "reason": str(e)
+            }
+        
+        # 步骤 4: 记录工具调用日志
+        self._log_call(command, description, output)
+        
+        return output
+    
+    def _log_call(self, command: str, description: str, result: dict):
+        """记录工具调用日志"""
+        session_id = "unknown"
+        if self.state_file.exists():
+            with open(self.state_file, "r", encoding="utf-8") as f:
+                state = json.load(f)
+            session_id = state.get("session_id", "unknown")
+
+[52 more lines. Use start_line=151 to continue.]

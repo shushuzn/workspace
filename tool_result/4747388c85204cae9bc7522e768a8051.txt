@@ -1,0 +1,33 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T10:45:36.661119
+# ---
+Command failed with exit code 1.
+[stdout]
+[EXEC] py 30-scripts-tools/search_shell_tools.py
+[stderr]
+Exception in thread Thread-1 (_readerthread):
+Exception in thread Thread-2 (_readerthread):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1611, in _readerthread
+    buffer.append(fh.read())
+                  ~~~~~~~^^
+  File "<frozen codecs>", line 325, in decode
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 1041, in _bootstrap_inner
+    self.run()
+    ~~~~~~~~^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\threading.py", line 992, in run
+    self._target(*self._args, **self._kwargs)
+    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd5 in position 0: invalid continuation byte
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\subprocess.py", line 1611, in _readerthread
+    buffer.append(fh.read())
+                  ~~~~~~~^^
+  File "<frozen codecs>", line 325, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xb2 in position 175: invalid start byte

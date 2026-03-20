@@ -1,0 +1,112 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T11:04:28.050653
+# ---
+Active code page: 65001
+[EXEC] py 30-scripts-tools/git_commit_helper.py "Add-mandatory-workflow-enforcement-system-complete"
+============================================================
+Git Commit + Push (with retry)
+============================================================
+
+[STEP 1] Running git add...
+[STEP 2] Running git commit...
+[WARN] git commit failed (no changes?): ========================================
+Git Pre-Commit Hook v3.0
+========================================
+[Check 1] Checking execution-state.json...
+[OK] execution-state.json exists
+[Check 2] Checking session validity...
+[OK] Session valid
+[Check 3] Checking tool call log...
+[OK] Tool call log exists for session
+[Check 3.5] Checking for tool bypass...
+[OK] No tool bypass detected
+[OK] No tool bypass detected
+[Check 4] Running Workflow Guardian...
+
+================================================================================
+                          v2.0
+================================================================================
+2026-03-20T11:04:04.737755
+================================================================================
+
+[ 1] Step ID ...
+  [FAIL]  4 
+    -  2:  - workflow.json=int(2), execution-state.json=float(6.1)
+    -  - workflow.json=20, execution-state.json=2
+    -  2:  - workflow.json=2, execution-state.json=6.1
+    -  2:  -  2,  6.1
+
+[ 2] Step ...
+  [FAIL]  18 
+    -  2: step_status 
+    -  3: step_status 
+    -  4: step_status 
+    -  5: step_status 
+    -  6: step_status 
+    -  6.5: step_status 
+    -  6.6: step_status 
+    -  6.7: step_status 
+    -  7: step_status 
+    -  8: step_status 
+    -  8.5: step_status 
+    -  8.6: step_status 
+    -  8.7: step_status 
+    -  9.1: step_status 
+    -  10.1: step_status 
+    -  10.5: step_status 
+    -  11.2: step_status 
+    -  12.2: step_status 
+
+[ 3] ...
+  [FAIL]  1 
+    -  - =10.0%, =5.0%
+
+[ 4] Workflow Compliance ...
+  [FAIL]  1 
+    - workflow_compliance=true  completion_percentage=10.0%
+
+================================================================================
+[RESULT]  -  24 
+
+[]
+  1.  6.1 (float)  2 (int)
+  2.  completed_steps  20 
+  3.  6.1  2
+  4.  2  2
+  5.  step_status['2'] 
+  6.  step_status['3'] 
+  7.  step_status['4'] 
+  8.  step_status['5'] 
+  9.  step_status['6'] 
+  10.  step_status['6.5'] 
+  11.  step_status['6.6'] 
+  12.  step_status['6.7'] 
+  13.  step_status['7'] 
+  14.  step_status['8'] 
+  15.  step_status['8.5'] 
+  16.  step_status['8.6'] 
+  17.  step_status['8.7'] 
+  18.  step_status['9.1'] 
+  19.  step_status['10.1'] 
+  20.  step_status['10.5'] 
+  21.  step_status['11.2'] 
+  22.  step_status['12.2'] 
+  23.  completion_percentage  5.0
+  24.  workflow_compliance=false =100%
+================================================================================
+
+[ACTION] (y/n): [INFO]  auto_fix 
+[FAIL] Workflow Guardian 
+
+[INFO] Continuing to push anyway...
+
+[CHECK] Testing network connection...
+
+[PUSH] Attempt 1/3...
+
+[OK] Git push successful on attempt 1
+
+============================================================
+[RESULT] SUCCESS
+============================================================
+

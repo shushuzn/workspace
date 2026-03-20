@@ -1,0 +1,51 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T10:46:02.809015
+# ---
+搜索 shell 相关工具:
+
+  [OK] forced-protection-executor
+     描述：强制防护执行器 - 无法绕过的防护执行
+     命令：N/A
+
+  [OK] improvement-executor
+     描述：改进计划执行器 - 自动执行合规率改进
+     命令：N/A
+
+  [OK] incremental_executor
+     描述：增量执行支持 - 只执行变更的部分，跳过未变化的内容
+     命令：N/A
+
+  [OK] optimize_tools_executor
+     描述：待补充
+     命令：N/A
+
+  [OK] parallel-executor
+     描述：并行执行器 - 并行执行独立任务以提高效率
+     命令：N/A
+
+  [OK] parallel-tool-executor
+     描述：Parallel tool execution - 2.8x speedup, 64% time saved
+     命令：N/A
+
+  [OK] parallel_executor
+     描述：parallel_executor 工具
+     命令：py 30-scripts-tools/parallel_executor.py ${args}
+
+  [OK] safe-shell-executor
+     描述：安全 Shell 执行器 - 唯一允许的 shell 命令入口
+     命令：N/A
+
+  [OK] tool_executor
+     描述：工具执行器 - 统一工具调用入口（唯一合法方式）
+     命令：py 30-scripts-tools/tool_executor.py ${args}
+
+  [OK] workflow-auto-executor
+     描述：workflow-auto-executor 工具
+     命令：N/A
+
+
+检查特定工具:
+  [X] execute_shell_command - 未注册
+  [X] safe_shell_executor - 未注册
+  [OK] tool_executor - 已注册
+  [X] shell - 未注册

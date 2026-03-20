@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-20T10:55:51.867231
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 120-150 of 176)
+            return 1, "", str(e)
+    
+    else:
+        return 1, "", f"Unknown tool: {tool_name}"
+
+
+def log_call(tool_name: str, params: dict, result: str, returncode: int):
+    """记录工具调用"""
+    log_entry = {
+        "timestamp": datetime.now().isoformat(),
+        "tool_id": tool_name,
+        "params": params,
+        "result": result,
+        "returncode": returncode,
+    }
+    
+    # 尝试获取 session_id
+    session_id = "unknown"
+    state_files = list(Path("flow-archive").glob("*/execution-state.json"))
+    if state_files:
+        try:
+            with open(max(state_files, key=lambda f: f.stat().st_mtime), 'r', encoding='utf-8') as f:
+                state = json.load(f)
+            session_id = state.get('session_id', 'unknown')
+        except:
+            pass
+    
+    log_entry["session_id"] = session_id
+    
+    # 写入日志
+    log_file = Path("30-scripts-tools/tool_call_log.jsonl")
+
+[26 more lines. Use start_line=151 to continue.]

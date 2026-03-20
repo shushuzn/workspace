@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-20T10:41:16.677982
+# ---
+D:\OpenClaw\workspace\AGENTS.md  (lines 1-50 of 157)
+# AGENTS.md - Your Workspace
+
+This folder is home. Treat it that way.
+
+## First Run
+
+If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out who you are, then delete it. You won't need it again.
+
+## Every Session
+
+**Context Loading (最高优先级 - 2026-03-18):**
+
+1. ✅ **Load only 7 core files** (<100KB)
+   - SOUL.md, USER.md, AGENTS.md, TOOLS.md, HEARTBEAT.md
+   - MEMORY.md, 13-memory/YYYY-MM-DD.md (today)
+
+2. ❌ **NEVER scan full workspace** (560MB → 63KB = 9013x faster)
+
+3. ❌ **Respect .contextignore** rules:
+   - 80-PROJECTS/, 40-arxiv/, 60-DATA/, 99-backups/
+   - **/deep/*-full.md, node_modules/, venv/
+
+4. ✅ **Verify with fast_load.py**:
+   ```bash
+   py 30-scripts-tools/fast_load.py
+   # Should show: 总大小：63.3KB, 速度提升：9013x
+   ```
+
+**Session Compression (每次对话结束必须):**
+
+1. ✅ **Pre-session:** `py pre-session-hook.py` (检查上下文)
+2. ✅ **During session:** 记录关键决策到 `session_temp.json`
+3. ✅ **Post-session:** `py post_session_compress.py --auto` (压缩保存)
+4. ✅ **End session:** `py session_end.py "完成描述"` (自动使用 Flow ID: `20260318-universal-workflow-001`)
+
+**压缩效果:**
+- 完整对话：~50KB → 结构化摘要：~2KB (**-96%**)
+- Token 使用：~12,500 → ~500 (**-96%**)
+- 信息密度：提升**25x**
+- Speed: >9000x faster (current: 9442x) ✅
+- Token usage: <20K (current: ~15.5K) ✅
+
+**Dashboard:** v4.1-Persona (Default)
+- **Start Command:** `start-dashboard.bat`
+- **Port:** 8448
+- **Features:** 7-Persona + Async I/O + WebSocket + Redis Queue
+- **API:** http://localhost:8448/api/personas
+- **Personas:** Planner, Executor, Critic, Learner, Coordinator, Innovator, Metacognition
+
+**Memory System:** Phase 4 Evolution
+
+[107 more lines. Use start_line=51 to continue.]

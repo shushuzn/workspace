@@ -1,0 +1,24 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T11:06:20.005814
+# ---
+Active code page: 65001
+[EXEC] git show --stat f7808d0
+commit f7808d0f4a088178d9320ddb7102a058979c5f07
+Author: shushuzn <132275809+shushuzn@users.noreply.github.com>
+Date:   Fri Mar 20 11:05:27 2026 +0800
+
+    Add-mandatory-workflow-enforcement-system-complete
+
+ 13-memory/2026-03-20.md                            | 310 ++++++++++++++++-
+ 30-scripts-tools/git_commit_helper.py              |  10 +-
+ 30-scripts-tools/safe_shell_executor.py            |  23 +-
+ 30-scripts-tools/tool_call_log.jsonl               |  37 ++
+ 30-scripts-tools/tool_executor.py                  |  16 +
+ 30-scripts-tools/tools_registry.json               |  42 ++-
+ AGENTS.md                                          |  33 ++
+ SOUL.md                                            |  24 +-
+ dialog/2026-03-20.jsonl                            | 371 +++++++++++++++++++++
+ .../execution-state.json                           | 184 ++--------
+ .../validation-log.jsonl                           |   2 +
+ 11 files changed, 879 insertions(+), 173 deletions(-)
+
