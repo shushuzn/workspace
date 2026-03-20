@@ -1,9 +1,22 @@
 # MEMORY.md - Long-Term Memory
 
-**Last Updated:** 2026-03-18 10:00  
+**Last Updated:** 2026-03-20 23:50  
 **Method:** Quality-first manual curation from SOUL.md + daily notes  
 **Principle:** Quality > Quantity, Preserve all core insights  
 **Latest Distillation:** 2026-03-18.md → MEMORY.md (Git Pre-Check tool added)
+
+---
+
+## 🚨 SESSION START - 每次对话开始时运行
+
+```bash
+py brainstorm_next.py
+```
+
+这会显示:
+1. 当前工作流状态
+2. 下一步建议
+3. 所有可用头脑风暴方法
 
 ---
 
