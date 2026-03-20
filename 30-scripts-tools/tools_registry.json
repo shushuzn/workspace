@@ -1,5 +1,5 @@
 {
-  "version": "1.11.60-phase5-v3",
+  "version": "1.11.61-phase5-complete",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
     "v1.11.58: Added SA-025 data source manager (Phase 5 start)",
@@ -5907,6 +5907,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T20:55:00.000000"
+    },
+    "sa-028-portfolio": {
+      "tool_id": "sa-028-portfolio",
+      "name": "SA-028 Portfolio Optimizer",
+      "description": "投资组合优化 - 均值方差、风险平价、有效前沿",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/sa_028_optimizer.py",
+      "category": "stock_analysis",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T20:58:00.000000"
     }
   },
   "workflows": {
