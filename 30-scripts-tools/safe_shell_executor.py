@@ -70,6 +70,8 @@ except ImportError:
     TOOL_WRAPPER_AVAILABLE = False
 
 # 导入工作流强制执行器 v2（内容验证）
+import sys
+sys.path.insert(0, str(Path(__file__).parent.resolve()))
 try:
     from workflow_enforcer_v2 import WorkflowEnforcerV2
     WORKFLOW_ENFORCER_V2_AVAILABLE = True
