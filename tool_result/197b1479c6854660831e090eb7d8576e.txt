@@ -1,0 +1,142 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T16:45:06.961838
+# ---
+00-UTILS\input_validator.py:250:>         print("✓ Date validation passed")
+00-UTILS\input_validator.py:257:>         print("✓ arXiv ID validation passed")
+00-UTILS\input_validator.py:264:>         print("✓ Integer validation passed")
+00-UTILS\input_validator.py:271:>         print("✓ String validation passed")
+00-UTILS\tools\stop.sh:16:>     echo "✓ API 服务已停止"
+00-UTILS\tools\stop.sh:25:>     echo "✓ 监控服务已停止"
+00-UTILS\tools\stop.sh:29:> echo "✓ 所有服务已停止"
+01-KNOWLEDGE-CARDS\formula\finetune-formula-model.py:105:>                 print(f"  ✓ 保存最佳模型 (准确率：{val_acc:.2%})")
+01-KNOWLEDGE-CARDS\pdf\layoutlm_pdf_extractor.py:474:>             md.append(f"     表格：{'✓' if page['has_table'] else '✗'} | ")
+01-KNOWLEDGE-CARDS\pdf\layoutlm_pdf_extractor.py:475:>             md.append(f"     图表：{'✓' if page['has_figure'] else '✗'} | ")
+01-KNOWLEDGE-CARDS\pdf\layoutlm_pdf_extractor.py:476:>             md.append(f"     公式：{'✓' if page['has_equation'] else '✗'} | ")
+01-KNOWLEDGE-CARDS\pdf\README.md:107:>      公式：✓ | 
+01-KNOWLEDGE-CARDS\pdf\README.md:115:>      表格：✓ | 
+01-KNOWLEDGE-CARDS\pdf\README.md:117:>      公式：✓ | 
+01-KNOWLEDGE-CARDS\tests\collect_test_pdfs.py:171:>                         print(f"    ✓ 已存在：{pdf_name}")
+01-KNOWLEDGE-CARDS\tests\collect_test_pdfs.py:178:>                         print(f"    ✓ 下载成功")
+04-collectors\arxiv\arxiv_ops_cli.py:31:>             click.echo(click.style('✓', fg='green') + f" 系统健康 (版本：{data.get('version', 'unknown')})")
+04-collectors\arxiv\arxiv_ops_cli.py:48:>     click.echo(click.style('✓', fg='green') + " 收集任务已启动")
+04-collectors\arxiv\arxiv_ops_cli.py:109:>                 click.echo(click.style('✓', fg='green') + " 无告警")
+04-collectors\arxiv\arxiv_ops_cli.py:193:>             click.echo(click.style('  健康状态:', fg='green') + f" ✓ {data.get('version', 'unknown')}")
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_SyncSetup_v1.0.ps1:78:>         Write-Host "✓ Created: $Path" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_SyncSetup_v1.0.ps1:97:>         Write-Host "✓ Created: $Path" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_SyncSetup_v1.0.ps1:124:>     Write-Host "`n✓ 完整结构初始化完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_SyncSetup_v1.0.ps1:165:>     Write-Host "`n✓ $date 每日目录创建完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_SyncSetup_v1.0.ps1:186:>     Write-Host "`n✓ $weekId 周汇总创建完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_SyncSetup_v1.0.ps1:204:>     Write-Host "`n✓ $month 月汇总创建完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_SyncSetup_v1.0.ps1:243:>     Write-Host "`n✓ 所有操作完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_SyncStart_v1.0.ps1:60:> Write-Host "`n✓ 完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Auto_UpdateKnowledgeGraph_v1.0.ps1:19:>     Write-Host "  ✓ 完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Auto_UpdateKnowledgeGraph_v1.0.ps1:30:>     Write-Host "  ✓ 完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Auto_UpdateKnowledgeGraph_v1.0.ps1:41:>     Write-Host "  ✓ 完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Auto_UpdateKnowledgeGraph_v1.0.ps1:52:>     Write-Host "  ✓ 完成" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_Auto_UpdateKnowledgeGraph_v1.0.ps1:69:>         Write-Host "  ✓ 已提交并推送" -ForegroundColor Green
+08-AUTOMATION\scheduled-tasks\SCRIPT_CPU_Limiter_v1.0.ps1:47:>             Write-Host "[$timestamp] ✓ CPU 正常：$cpuLoad%" -ForegroundColor Green
+08-AUTOMATION\scripts\deploy.sh:20:>     echo -e "${GREEN}✓ ${PYTHON_VERSION}${NC}"
+08-AUTOMATION\scripts\deploy.sh:29:> echo -e "${GREEN}✓ 依赖安装完成${NC}"
+08-AUTOMATION\scripts\deploy.sh:36:> echo -e "${GREEN}✓ 目录创建完成${NC}"
+08-AUTOMATION\scripts\deploy.sh:41:> echo -e "${GREEN}✓ 数据库迁移完成${NC}"
+08-AUTOMATION\scripts\deploy.sh:49:> echo -e "${GREEN}✓ API 服务已启动 (PID: $API_PID)${NC}"
+08-AUTOMATION\scripts\deploy.sh:54:> echo -e "${GREEN}✓ 监控服务已启动 (PID: $MONITOR_PID)${NC}"
+08-AUTOMATION\scripts\git-cleanup.ps1:95:>     Write-Host "  ✓ 未发现 >50MB 的大文件" -ForegroundColor Green
+13-SECURITY\scripts\check-quality.sh:21:>     echo -e "${GREEN}✓ flake8 通过${NC}"
+13-SECURITY\scripts\check-quality.sh:30:>     echo -e "${GREEN}✓ mypy 通过${NC}"
+13-SECURITY\scripts\check-quality.sh:39:>     echo -e "${GREEN}✓ black 通过${NC}"
+13-SECURITY\scripts\check-quality.sh:48:>     echo -e "${GREEN}✓ pylint 通过 (评分 > 8.0)${NC}"
+92-tests\test_memory_distillation_v2.py:432:>             print(f"✓ Quality score: {score:.2f}")
+92-tests\test_memory_distillation_v2.py:436:>             print(f"✓ Extracted {len(insights)} insights")
+92-tests\test_memory_distillation_v2.py:442:>             print(f"✓ Retention score: {result['retention_score']:.2f}")
+92-tests\test_memory_distillation_v2.py:443:>             print(f"✓ Action: {result['action']}")
+92-tests\test_memory_distillation_v2.py:449:>             print(f"✓ Extracted {len(statements)} statements for conflict check")
+92-tests\test_memory_distillation_v2.py:455:>             print(f"✓ Audit statistics: {stats['total_operations']} operations")
+auto_protection_layer.py:54:>             return True, f"✓ Session: {self.session_id}"
+auto_protection_layer.py:62:>         return True, "✓ 无停止标志"
+auto_protection_layer.py:68:>         return True, "✓ 无封锁"
+auto_protection_layer.py:80:>                 return True, f"✓ 惩罚等级：{level}"
+auto_protection_layer.py:83:>         return True, "✓ 无惩罚记录"
+check_all_existing_tools.py:83:>         print(f"  ✓ {tool_id} -> {filename}")
+complete_current_session.py:71:> print(f"\n✓ Session 已完成，可以提交")
+copaw_entry.py:172:>             print(f"  保护：State 保护器已启用 ✓")
+DEPLOYMENT-GUIDE.md:169:>         print(f"✓ 记忆已处理")
+DEPLOYMENT-GUIDE.md:177:>         print(f"✓ 找到 {len(results)} 个结果:")
+DEPLOYMENT-GUIDE.md:196:>         print(f"✓ 批量处理完成")
+DEPLOYMENT-GUIDE.md:279:>     print(f"✓ 监控数据已记录")
+DEPLOYMENT-GUIDE.md:413:>     print(f"✓ 单个处理 (100 个): {duration:.2f}s ({duration/100*1000:.2f}ms/个)")
+DEPLOYMENT-GUIDE.md:420:>     print(f"✓ 批量串行 (100 个): {duration:.2f}s ({duration/100*1000:.2f}ms/个)")
+DEPLOYMENT-GUIDE.md:426:>     print(f"✓ 批量并行 (100 个): {duration:.2f}s ({duration/100*1000:.2f}ms/个)")
+DEPLOYMENT-GUIDE.md:433:>     print(f"✓ 搜索 (10 次): {duration:.2f}s ({duration/10*1000:.2f}ms/次)")
+DEPLOYMENT-GUIDE.md:438:>         print(f"✓ 缓存命中率：{stats['hit_rate']}")
+DEPLOYMENT-GUIDE.md:532:> ✓ Memory Core v2.0 部署验证
+DEPLOYMENT-GUIDE.md:533:> ✓ 所有模块加载成功
+DEPLOYMENT-GUIDE.md:534:> ✓ 基础功能测试通过
+DEPLOYMENT-GUIDE.md:535:> ✓ 性能基准达标
+DEPLOYMENT-GUIDE.md:536:> ✓ 监控系统正常
+DEPLOYMENT-GUIDE.md:537:> ✓ 日志系统正常
+DEPLOYMENT-GUIDE.md:538:> ✓ 部署完成！
+docs\QUALITY-SELF-CHECK.md:42:> - [x] 一句话描述 ✓
+docs\QUALITY-SELF-CHECK.md:43:> - [x] 快速开始 ✓
+docs\QUALITY-SELF-CHECK.md:44:> - [x] 功能特性 ✓
+docs\QUALITY-SELF-CHECK.md:45:> - [x] 使用示例 (≥3 个) ✓
+docs\QUALITY-SELF-CHECK.md:46:> - [x] 配置参数 ✓
+docs\QUALITY-SELF-CHECK.md:47:> - [x] API 参考 ✓
+docs\QUALITY-SELF-CHECK.md:48:> - [x] FAQ (≥5 个) ✓
+docs\QUALITY-SELF-CHECK.md:49:> - [x] 更新日志 ✓
+docs\QUALITY-SELF-CHECK.md:53:> - [x] 基础示例 ✓
+docs\QUALITY-SELF-CHECK.md:54:> - [x] 进阶示例 ✓
+docs\QUALITY-SELF-CHECK.md:55:> - [x] 高级示例 ✓
+docs\QUALITY-SELF-CHECK.md:56:> - [x] 代码可运行 ✓
+docs\QUALITY-SELF-CHECK.md:57:> - [x] 注释完整 ✓
+docs\QUALITY-SELF-CHECK.md:61:> - [x] 方法签名完整 ✓
+docs\QUALITY-SELF-CHECK.md:62:> - [x] 参数说明 ✓
+docs\QUALITY-SELF-CHECK.md:63:> - [x] 返回值说明 ✓
+docs\QUALITY-SELF-CHECK.md:64:> - [x] 示例代码 ✓
+docs\QUALITY-SELF-CHECK.md:68:> - [x] ≥5 个问题 ✓
+docs\QUALITY-SELF-CHECK.md:69:> - [x] 覆盖常见问题 ✓
+docs\QUALITY-SELF-CHECK.md:70:> - [x] 答案清晰 ✓
+docs\QUALITY-SELF-CHECK.md:74:> - [x] multimodal-kg: 21 个测试 ✓
+docs\QUALITY-SELF-CHECK.md:75:> - [x] pdf-extractor: 测试套件 ✓
+docs\QUALITY-SELF-CHECK.md:76:> - [x] figure-enhancer: 测试套件 ✓
+docs\QUALITY-SELF-CHECK.md:77:> - [x] graph-optimizer: 基准测试 ✓
+docs\QUALITY-SELF-CHECK.md:83:> - [x] Markdown 语法正确 ✓
+docs\QUALITY-SELF-CHECK.md:84:> - [x] 代码块高亮 ✓
+docs\QUALITY-SELF-CHECK.md:85:> - [x] 表格格式统一 ✓
+docs\QUALITY-SELF-CHECK.md:86:> - [x] 链接有效 ✓
+feishu-tools\examples.py:229:>             print(f"✓ Sent to {user_id}")
+feishu-tools\QUICK_INTEGRATION.md:136:>   "✓ 0 overdue | ✓ 3 pending | ✓ System healthy"
+pdf-extractor\layoutlm_pdf_extractor.py:474:>             md.append(f"     表格：{'✓' if page['has_table'] else '✗'} | ")
+pdf-extractor\layoutlm_pdf_extractor.py:475:>             md.append(f"     图表：{'✓' if page['has_figure'] else '✗'} | ")
+pdf-extractor\layoutlm_pdf_extractor.py:476:>             md.append(f"     公式：{'✓' if page['has_equation'] else '✗'} | ")
+pdf-extractor\README.md:108:>      公式：✓ | 
+pdf-extractor\README.md:116:>      表格：✓ | 
+pdf-extractor\README.md:118:>      公式：✓ | 
+PRODUCTION-INTEGRATION-COMPLETE.md:59:> core.search("测试")  # ✓ 现在正常工作
+PRODUCTION-INTEGRATION-COMPLETE.md:73:> - Unicode 符号 (✓ ✗) 无法显示
+PRODUCTION-INTEGRATION-COMPLETE.md:78:> print("✓ MemoryCore 导入成功")
+PRODUCTION-INTEGRATION-COMPLETE.md:88:> [OK] MemoryCore 导入成功  # ✓ 正常显示
+quick_complete_workflow.py:50:> print(f"\n✓ 可以提交了")
+security_dashboard.html:189:>             content: "✓";
+self_goal_setter.py:242:>             status_icon = "✓" if goal["status"] == "completed" else "○"
+stock_parallel_loader.py:224:>             status = "✓" if r.success else "✗"
+stock_realtime_alert.py:239:>             print("  ✓ 无警报")
+task_decomposer.py:206:>         status_icon = "✓" if subtask['status'] == 'completed' else "○"
+test_auto_step_tracking.py:54:>     print(f"\n[PASS] 自动步骤跟踪生效 ✓")
+test_wrapper.py:14:>         print("  结果：拒绝执行 ✓")
+utils\input_validator.py:250:>         print("✓ Date validation passed")
+utils\input_validator.py:257:>         print("✓ arXiv ID validation passed")
+utils\input_validator.py:264:>         print("✓ Integer validation passed")
+utils\input_validator.py:271:>         print("✓ String validation passed")
+WORKFLOW-OPTIMIZATION-PLAN.md:541:>             status = "[✓]" if i in state.get('completed_steps', []) else "[ ]"
+WORKFLOW-OPTIMIZATION-PLAN.md:575:>             print(f"    结果：{'✓' if exec_item.get('success') else '✗'}")
+WORKFLOW-OPTIMIZATION-PLAN.md:770:> [✓] 1. 上下文加载验证
+WORKFLOW-OPTIMIZATION-PLAN.md:771:> [✓] 2. Flow ID 绑定
+WORKFLOW-OPTIMIZATION-PLAN.md:772:> [✓] 3. 任务解析
+WORKFLOW-OPTIMIZATION-PLAN.md:773:> [✓] 4. 工具/工作流选择
+WORKFLOW-OPTIMIZATION-PLAN.md:774:> [✓] 5. 子工作流调度
+WORKFLOW-OPTIMIZATION-PLAN.md:775:> [✓] 6. 工具执行
+WORKFLOW-OPTIMIZATION-PLAN.md:776:> [✓] 7. 执行日志记录
+WORKFLOW-OPTIMIZATION-PLAN.md:777:> [✓] 8. 检查点保存
+workflow_dashboard.html:544:>                 el.textContent = '✓';
+workflow_enforcer_v2.py:124:>         mark = "✓" if validated else "✗"
