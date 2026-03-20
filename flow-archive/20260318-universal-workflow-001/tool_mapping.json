@@ -1,0 +1,299 @@
+{
+  "workflow_id": "20260318-universal-workflow-001",
+  "workflow_version": "2.0.0",
+  "updated_at": "2026-03-20T14:30:00+08:00",
+  "description": "工作流工具映射表 - 映射步骤到实际工具",
+  
+  "tool_mapping": {
+    "1": {
+      "step_name": "会话前检查",
+      "tool_id": "pre-session-hook.py",
+      "exists": true,
+      "path": "30-scripts-tools/pre-session-hook.py",
+      "size_kb": 7.2,
+      "status": "active",
+      "notes": "新增工具 - 检查核心文件"
+    },
+    "2": {
+      "step_name": "上下文加载验证",
+      "tool_id": "context_verify.py",
+      "exists": true,
+      "path": "30-scripts-tools/context_verify.py",
+      "size_kb": 3.5,
+      "status": "active",
+      "notes": "替代 context_search.py"
+    },
+    "3": {
+      "step_name": "Flow ID 绑定",
+      "tool_id": "workflow_scheduler.py",
+      "exists": true,
+      "path": "30-scripts-tools/workflow_scheduler.py",
+      "size_kb": 8.2,
+      "status": "active",
+      "notes": "替代 flow_manager.py"
+    },
+    "4": {
+      "step_name": "任务解析",
+      "tool_id": "task_analyzer.py",
+      "exists": true,
+      "path": "30-scripts-tools/task_analyzer.py",
+      "size_kb": 5.8,
+      "status": "active",
+      "notes": "保留原有映射"
+    },
+    "5": {
+      "step_name": "工具选择",
+      "tool_id": "tool_selector.py",
+      "exists": true,
+      "path": "30-scripts-tools/tool_selector.py",
+      "size_kb": 4.2,
+      "status": "active",
+      "notes": "替代 tool_suggester.py"
+    },
+    "6": {
+      "step_name": "子工作流调度",
+      "tool_id": "workflow_scheduler.py",
+      "exists": true,
+      "path": "30-scripts-tools/workflow_scheduler.py",
+      "size_kb": 8.2,
+      "status": "active",
+      "notes": "复用步骤 3 工具"
+    },
+    "7": {
+      "step_name": "工具执行",
+      "tool_id": "tool_executor.py",
+      "exists": true,
+      "path": "30-scripts-tools/tool_executor.py",
+      "size_kb": 6.5,
+      "status": "active",
+      "notes": "核心执行器"
+    },
+    "8": {
+      "step_name": "内容验证",
+      "tool_id": "content_validator.py",
+      "exists": true,
+      "path": "30-scripts-tools/content_validator.py",
+      "size_kb": 4.8,
+      "status": "active",
+      "notes": "替代 integration_validator.py"
+    },
+    "9": {
+      "step_name": "自动备份",
+      "tool_id": "auto_backup.py",
+      "exists": true,
+      "path": "30-scripts-tools/auto_backup.py",
+      "size_kb": 3.2,
+      "status": "active",
+      "notes": "替代 config-backup.py"
+    },
+    "10": {
+      "step_name": "检查点保存",
+      "tool_id": "state_snapshot.py",
+      "exists": true,
+      "path": "30-scripts-tools/state_snapshot.py",
+      "size_kb": 2.8,
+      "status": "active",
+      "notes": "替代 checkpoint_saver.py"
+    },
+    "11": {
+      "step_name": "记忆持久化",
+      "tool_id": "memory_distiller.py",
+      "exists": true,
+      "path": "30-scripts-tools/memory_distiller_v2.py",
+      "size_kb": 12.5,
+      "status": "active",
+      "notes": "使用 memory_distiller_v2.py"
+    },
+    "12": {
+      "step_name": "元认知评估",
+      "tool_id": "metacognition_monitor.py",
+      "exists": true,
+      "path": "30-scripts-tools/metacognition_monitor.py",
+      "size_kb": 6.8,
+      "status": "active",
+      "notes": "替代 metacognition-monitor"
+    },
+    "13": {
+      "step_name": "批判者审查",
+      "tool_id": "embedded_critic.py",
+      "exists": true,
+      "path": "30-scripts-tools/embedded_critic.py",
+      "size_kb": 8.5,
+      "status": "active",
+      "notes": "替代 auto_critic_v7.py - Critic v5.0"
+    },
+    "14": {
+      "step_name": "质量评分",
+      "tool_id": "aai_scorer.py",
+      "exists": true,
+      "path": "30-scripts-tools/aai_scorer.py",
+      "size_kb": 5.2,
+      "status": "active",
+      "notes": "保留原有映射"
+    },
+    "15": {
+      "step_name": "核心文件压缩",
+      "tool_id": "core_files_compressor.py",
+      "exists": true,
+      "path": "30-scripts-tools/core_files_compressor.py",
+      "size_kb": 13.7,
+      "status": "active",
+      "notes": "新增工具 - 压缩 7 个核心文件"
+    },
+    "16": {
+      "step_name": "会话压缩",
+      "tool_id": "post_session_compress.py",
+      "exists": true,
+      "path": "30-scripts-tools/post_session_compress.py",
+      "size_kb": 7.2,
+      "status": "active",
+      "notes": "新增工具 - 完整会话后压缩"
+    },
+    "17": {
+      "step_name": "会话结束",
+      "tool_id": "session_end.py",
+      "exists": true,
+      "path": "30-scripts-tools/session_end.py",
+      "size_kb": 6.5,
+      "status": "active",
+      "notes": "新增工具 - 完整会话结束流程"
+    },
+    "18": {
+      "step_name": "Git 提交",
+      "tool_id": "git_commit_helper.py",
+      "exists": true,
+      "path": "30-scripts-tools/git_commit_helper.py",
+      "size_kb": 4.5,
+      "status": "active",
+      "notes": "替代 git-commit.py"
+    },
+    "19": {
+      "step_name": "文档生成",
+      "tool_id": "auto_doc_generator.py",
+      "exists": true,
+      "path": "30-scripts-tools/auto_doc_generator.py",
+      "size_kb": 7.8,
+      "status": "active",
+      "notes": "保留原有映射"
+    },
+    "20": {
+      "step_name": "清理临时文件",
+      "tool_id": null,
+      "exists": true,
+      "path": "built-in",
+      "size_kb": 0,
+      "status": "active",
+      "notes": "内置功能 - session_end.py 包含清理"
+    }
+  },
+  
+  "statistics": {
+    "total_steps": 20,
+    "tools_exist": 20,
+    "tools_missing": 0,
+    "new_tools_added": 4,
+    "tools_replaced": 12,
+    "coverage": "100%"
+  },
+  
+  "replaced_tools": [
+    {
+      "old": "context_search.py",
+      "new": "context_verify.py",
+      "reason": "工具不存在，使用功能相似的工具"
+    },
+    {
+      "old": "flow_manager.py",
+      "new": "workflow_scheduler.py",
+      "reason": "工具不存在，使用功能相似的工具"
+    },
+    {
+      "old": "tool_suggester.py",
+      "new": "tool_selector.py",
+      "reason": "工具不存在，使用功能相似的工具"
+    },
+    {
+      "old": "integration_validator.py",
+      "new": "content_validator.py",
+      "reason": "工具不存在，使用内容验证器"
+    },
+    {
+      "old": "auto-test-runner.py",
+      "new": "(removed)",
+      "reason": "功能合并到步骤 8"
+    },
+    {
+      "old": "config-backup.py",
+      "new": "auto_backup.py",
+      "reason": "工具不存在，使用自动备份工具"
+    },
+    {
+      "old": "execution_logger.py",
+      "new": "(built-in)",
+      "reason": "功能由 session_temp.json 提供"
+    },
+    {
+      "old": "checkpoint_saver.py",
+      "new": "state_snapshot.py",
+      "reason": "工具不存在，使用状态快照工具"
+    },
+    {
+      "old": "memory-persistence.py",
+      "new": "memory_distiller_v2.py",
+      "reason": "工具不存在，使用记忆蒸馏工具"
+    },
+    {
+      "old": "rollback-manager.py",
+      "new": "(merged)",
+      "reason": "功能合并到步骤 10"
+    },
+    {
+      "old": "metacognition-monitor.py",
+      "new": "metacognition_monitor.py",
+      "reason": "名称标准化"
+    },
+    {
+      "old": "auto_critic_v7.py",
+      "new": "embedded_critic.py",
+      "reason": "工具不存在，使用内置批判者"
+    },
+    {
+      "old": "quality-gate-check.py",
+      "new": "(merged)",
+      "reason": "功能合并到步骤 13"
+    },
+    {
+      "old": "post-session-compress.py",
+      "new": "post_session_compress.py",
+      "reason": "名称标准化"
+    },
+    {
+      "old": "git-commit.py",
+      "new": "git_commit_helper.py",
+      "reason": "工具不存在，使用 Git 辅助工具"
+    }
+  ],
+  
+  "new_tools": [
+    {
+      "tool": "pre-session-hook.py",
+      "step": 1,
+      "purpose": "会话前检查核心文件"
+    },
+    {
+      "tool": "core_files_compressor.py",
+      "step": 15,
+      "purpose": "压缩 7 个核心文件"
+    },
+    {
+      "tool": "post_session_compress.py",
+      "step": 16,
+      "purpose": "完整会话后压缩流程"
+    },
+    {
+      "tool": "session_end.py",
+      "step": 17,
+      "purpose": "完整会话结束流程"
+    }
+  ]
+}

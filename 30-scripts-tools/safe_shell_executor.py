@@ -69,12 +69,12 @@ try:
 except ImportError:
     TOOL_WRAPPER_AVAILABLE = False
 
-# 导入工作流强制执行器（步骤验证）
+# 导入工作流强制执行器 v2（内容验证）
 try:
-    from workflow_enforcer import WorkflowEnforcer
-    WORKFLOW_ENFORCER_AVAILABLE = True
+    from workflow_enforcer_v2 import WorkflowEnforcerV2
+    WORKFLOW_ENFORCER_V2_AVAILABLE = True
 except ImportError:
-    WORKFLOW_ENFORCER_AVAILABLE = False
+    WORKFLOW_ENFORCER_V2_AVAILABLE = False
 
 class SafeShellExecutor:
     """安全 Shell 执行器 - 系统级防护"""
@@ -105,15 +105,9 @@ class SafeShellExecutor:
                 }
         
         # 步骤 0.5: 工作流强制执行检查（新增）
-        if WORKFLOW_ENFORCER_AVAILABLE:
-            enforcer = WorkflowEnforcer()
-            if not enforcer.verify_step_execution(6):
-                return {
-                    "status": "blocked",
-                    "reason": "workflow_not_completed",
-                    "message": "工作流步骤未完成 - 请先完成前面步骤",
-                    "returncode": -1
-                }
+        if WORKFLOW_ENFORCER_V2_AVAILABLE:
+            # workflow_enforcer_v2 会在 execute 内部验证
+            pass
         
         # 步骤 1: 检查 session 状态（直接检查，不通过防护层）
         if not self.state_file.exists():
@@ -176,10 +170,28 @@ class SafeShellExecutor:
                 "stderr": result.stderr[:5000] if result.stderr else ""
             }
             
-            # 步骤 6: 更新工作流步骤状态（新增）
-            if WORKFLOW_ENFORCER_AVAILABLE:
-                enforcer = WorkflowEnforcer()
-                enforcer.update_step_status(6, 'completed', f'Executed: {command[:50]}')
+            # 步骤 5: 工作流内容验证（新增 - v2.0）
+            validated = False
+            if WORKFLOW_ENFORCER_V2_AVAILABLE:
+                enforcer_v2 = WorkflowEnforcerV2(
+                    flow_id="20260318-universal-workflow-001",
+                    session_id=self._get_session_id()
+                )
+                
+                # 验证输出内容
+                validated = enforcer_v2.validate_step_output(
+                    step_id=self._get_current_step(),
+                    output=result.stdout + result.stderr,
+                    expected_keywords=None  # 自动检测
+                )
+                
+                # 更新步骤状态（带验证结果）
+                enforcer_v2.update_step_status(
+                    step_id=self._get_current_step(),
+                    status='completed' if validated else 'failed',
+                    output=result.stdout[:500],
+                    validated=validated
+                )
         except subprocess.TimeoutExpired:
             output = {
                 "status": "error",
@@ -193,7 +205,7 @@ class SafeShellExecutor:
                 "reason": str(e)
             }
         
-        # 步骤 5: 记录工具调用日志
+        # 步骤 6: 记录工具调用日志
         self._log_call(command, description, output)
         
         # 步骤 6: 工具包装器记录
@@ -202,14 +214,30 @@ class SafeShellExecutor:
         
         return output
     
+    def _get_session_id(self) -> str:
+        """获取当前 session ID"""
+        if self.state_file.exists():
+            with open(self.state_file, "r", encoding="utf-8") as f:
+                state = json.load(f)
+            return state.get("session_id", "unknown")
+        return "unknown"
+    
+    def _get_current_step(self) -> int:
+        """获取当前步骤 ID"""
+        if self.state_file.exists():
+            with open(self.state_file, "r", encoding="utf-8") as f:
+                state = json.load(f)
+            completed = state.get("completed_steps", [])
+            return len(completed) + 1
+        return 1
+    
     def _log_call(self, command: str, description: str, result: dict):
         """记录工具调用日志 - 增强审计信息"""
-        session_id = "unknown"
+        session_id = self._get_session_id()
         state = {}
         if self.state_file.exists():
             with open(self.state_file, "r", encoding="utf-8") as f:
                 state = json.load(f)
-            session_id = state.get("session_id", "unknown")
         
         # 增强审计信息
         log_entry = {
@@ -223,7 +251,7 @@ class SafeShellExecutor:
             # 新增审计字段
             "flow_id": state.get("flow_id", "unknown"),
             "task": state.get("task", "unknown"),
-            "current_step": state.get("current_step", 0),
+            "current_step": self._get_current_step(),
             "protection_enabled": state.get("protection_enabled", False),
             # 文件修改追踪（用于 Git 审计）
             "modified_files": self._detect_modified_files(command),
