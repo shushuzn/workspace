@@ -1,7 +1,8 @@
 {
-  "version": "1.11.79-gantt-export",
+  "version": "1.11.80-velocity-dashboard",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.80: Add VELOCITY-PREDICT-001 + DASHBOARD-VIEW-001 (Week 2 tools)",
     "v1.11.79: Add GANTT-CHART-001 + EXPORT-FORMAT-001 (Week 1 tools)",
     "v1.11.78: Add brainstorm_roadmap_tools.py - 头脑风暴创新路线图工具ideas",
     "v1.11.77: Add ROADMAP-MASTER-001 multi-dimensional roadmap manager (4 dimensions)",
@@ -6222,6 +6223,28 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T23:16:00.000000"
+    },
+    "velocity-predict-001": {
+      "tool_id": "velocity-predict-001",
+      "name": "VELOCITY-PREDICT-001 Velocity & Progress Predictor",
+      "description": "进度预测器 - 基于历史数据预测完成时间、速度计算、趋势分析",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/velocity_predict_001.py",
+      "category": "prediction",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:20:00.000000"
+    },
+    "dashboard-view-001": {
+      "tool_id": "dashboard-view-001",
+      "name": "DASHBOARD-VIEW-001 Comprehensive Dashboard",
+      "description": "综合仪表盘 - 多维度状态总览、进度可视化、实时更新",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/dashboard_view_001.py",
+      "category": "visualization",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:21:00.000000"
     }
   },
   "workflows": {
