@@ -26,10 +26,28 @@ try:
 except ImportError:
     AUTO_PROTECTION_ENABLED = False
 
+# 导入任务分类器
+try:
+    from task_classifier import classify_task, get_workflow_for_task
+    TASK_CLASSIFIER_ENABLED = True
+except ImportError:
+    TASK_CLASSIFIER_ENABLED = False
+
 class CopawEntry:
     def __init__(self, task_name: str = None):
         self.task_name = task_name or "Unnamed Task"
-        self.flow_id = "20260318-universal-workflow-001"
+        
+        # 【新增】任务分类器 - 根据任务类型自动选择 workflow
+        self.task_type = "full"  # 默认使用完整版
+        if TASK_CLASSIFIER_ENABLED:
+            self.task_type = classify_task(self.task_name)
+            if self.task_type == "simplified":
+                self.flow_id = "20260318-universal-workflow-001-simplified"
+            else:
+                self.flow_id = "20260318-universal-workflow-001"
+        else:
+            self.flow_id = "20260318-universal-workflow-001"
+        
         self.session_id = self._generate_session_id()
         self.start_time = datetime.now()
         self.workflow_dir = Path(f"flow-archive/{self.flow_id}")
@@ -45,6 +63,7 @@ class CopawEntry:
         print("CoPaw Entry Point - 强制工作流入口")
         print("="*60)
         print(f"Task: {self.task_name}")
+        print(f"Task Type: {self.task_type}")
         print(f"Flow ID: {self.flow_id}")
         print(f"Session ID: {self.session_id}")
         print(f"Start Time: {self.start_time.isoformat()}")

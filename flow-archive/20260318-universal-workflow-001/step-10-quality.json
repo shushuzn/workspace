@@ -1,0 +1,35 @@
+{
+  "step": 10.1,
+  "name": "质量门禁",
+  "action": "quality_gate",
+  "checks": {
+    "workflow_compliance": {
+      "required": true,
+      "actual": true,
+      "pass": true
+    },
+    "tool_call_log": {
+      "required": true,
+      "actual": true,
+      "pass": true
+    },
+    "execution_state": {
+      "required": true,
+      "actual": true,
+      "pass": true
+    },
+    "critic_review": {
+      "required": true,
+      "score": 95,
+      "pass": true
+    },
+    "git_status": {
+      "required": "clean or staged",
+      "actual": "changes staged",
+      "pass": true
+    }
+  },
+  "overall_result": "pass",
+  "timestamp": "2026-03-20T10:27:35+08:00",
+  "status": "completed"
+}

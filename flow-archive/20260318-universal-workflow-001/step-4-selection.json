@@ -1,0 +1,23 @@
+{
+  "step": 4,
+  "name": "工具/工作流选择",
+  "action": "tool_workflow_selection",
+  "selection": {
+    "workflow": "20260318-universal-workflow-001",
+    "workflow_type": "full",
+    "tools_required": [
+      "context_verify",
+      "task_analyzer",
+      "tool_executor",
+      "auto_critic_v7",
+      "workflow_guardian",
+      "tool_call_tracker",
+      "post_session_compress",
+      "session_end"
+    ],
+    "sub_workflows": [],
+    "reason": "防护强化属于复杂任务，需要完整 20 步工作流"
+  },
+  "timestamp": "2026-03-20T10:25:35+08:00",
+  "status": "completed"
+}

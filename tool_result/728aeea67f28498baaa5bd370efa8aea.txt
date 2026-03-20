@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-20T10:26:09.877941
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\copaw_entry.py  (lines 51-100 of 244)
+        if AUTO_PROTECTION_ENABLED:
+            print(f"[防护] 自动防护层已激活")
+        print("="*60)
+        print("="*60)
+    
+    def _generate_session_id(self) -> str:
+        """生成会话 ID"""
+        timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
+        return f"session-{timestamp}"
+    
+    def initialize_state(self) -> dict:
+        """初始化 execution-state.json"""
+        self.workflow_dir.mkdir(parents=True, exist_ok=True)
+        
+        # 加载 workflow.json 获取步骤
+        workflow_file = self.workflow_dir / "workflow.json"
+        with open(workflow_file, "r", encoding="utf-8") as f:
+            workflow = json.load(f)
+        
+        total_steps = workflow.get("total_steps", 20)
+        
+        state = {
+            "flow_id": self.flow_id,
+            "task": self.task_name,
+            "description": f"Task started via copaw_entry.py",
+            "started_at": self.start_time.isoformat() + "+08:00",
+            "current_step": 0,
+            "total_steps": total_steps,
+            "status": "initializing",
+            "step_status": {},
+            "completed_steps": [],
+            "completion_percentage": 0,
+            "workflow_compliance": False,
+            "session_id": self.session_id,
+            "entry_point": "copaw_entry.py",
+            "mandatory_execution": True
+        }
+        
+        # 保存初始状态
+        with open(self.state_file, "w", encoding="utf-8") as f:
+            json.dump(state, f, ensure_ascii=False, indent=2)
+        
+        print(f"\n[OK] execution-state.json 已初始化")
+        print(f"  路径：{self.state_file}")
+        print(f"  总步骤：{total_steps}")
+        
+        return state
+    
+    def verify_context(self) -> bool:
+        """Step 1: 验证上下文加载"""
+
+[144 more lines. Use start_line=101 to continue.]

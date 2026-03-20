@@ -1,0 +1,10 @@
+{
+  "step": 2,
+  "name": "Flow ID 绑定",
+  "action": "bind_flow_id",
+  "flow_id": "20260318-universal-workflow-001",
+  "session_id": "session-20260320102523",
+  "task": "强化防护 - 工作流合规修复",
+  "timestamp": "2026-03-20T10:25:23+08:00",
+  "status": "completed"
+}
