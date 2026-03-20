@@ -26,12 +26,13 @@ def run_command(cmd, capture=True):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: py git_commit_helper.py \"commit message\" [--force]")
-        print("  --force: Skip pre-commit hook validation (use with caution)")
+        print("Usage: py git_commit_helper.py \"commit message\"")
+        print("")
+        print("注意：不允许跳过 pre-commit hook 检查")
+        print("如需提交，请先完成 workflow 步骤")
         sys.exit(1)
     
     message = sys.argv[1]
-    force_mode = "--force" in sys.argv
     
     print("=" * 60)
     print("Git Commit + Push (with retry)")
@@ -40,18 +41,13 @@ def main():
     
     # Step 1: Git add
     print("[STEP 1] Running git add...")
-    add_cmd = "git add -A" if force_mode else "git add -u"
-    code, out, err = run_command(add_cmd)
+    code, out, err = run_command("git add -u")
     if code != 0:
         print(f"[WARN] git add failed: {err}")
     
     # Step 2: Git commit
     print("[STEP 2] Running git commit...")
-    commit_cmd = f'git commit -m "{message}"'
-    if force_mode:
-        commit_cmd += ' --no-verify'
-        print("[INFO] Force mode: Skipping pre-commit hook")
-    code, out, err = run_command(commit_cmd)
+    code, out, err = run_command(f'git commit -m "{message}"')
     if code != 0:
         print(f"[WARN] git commit failed (no changes?): {err.encode('ascii', errors='ignore').decode('ascii')}")
         print("[INFO] Continuing to push anyway...")
