@@ -1,7 +1,8 @@
 {
-  "version": "1.11.63-phase6-start",
+  "version": "1.11.64-sentiment",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.64: Added SA-030 sentiment analyzer for news/social media",
     "v1.11.63: Added SA-029 AI signal generator (Phase 6 start)",
     "v1.11.62: Added ROADMAP-001 roadmap manager for standardized updates",
     "v1.11.58: Added SA-025 data source manager (Phase 5 start)",
@@ -5942,6 +5943,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T21:15:00.000000"
+    },
+    "sa-030-sentiment": {
+      "tool_id": "sa-030-sentiment",
+      "name": "SA-030 Sentiment Analyzer",
+      "description": "情绪分析器 - 新闻/社交媒体情绪分析、舆情监控、情绪指标",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/sa_030_sentiment.py",
+      "category": "stock_analysis",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:20:00.000000"
     }
   },
   "workflows": {
