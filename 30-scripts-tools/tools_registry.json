@@ -1,7 +1,8 @@
 {
-  "version": "1.11.72-auto-001",
+  "version": "1.11.73-llm-guide",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.73: Add LLM-GUIDE-001 for task classification and workflow optimization",
     "v1.11.72: Add AUTO-001 workflow automator for one-click flows",
     "v1.11.71: Add Phase 7 - SA-033 to SA-036 (backtest, risk, executor, analyzer)",
     "v1.11.70: Add BATCH-001, AUDIT-001, INTEGRATE-001 generic tools",
@@ -6105,6 +6106,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T22:00:00.000000"
+    },
+    "llm-guide-001": {
+      "tool_id": "llm-guide-001",
+      "name": "LLM-GUIDE-001 LLM Usage Guide",
+      "description": "LLM使用指南 - 任务分类、决策矩阵、工作流优化建议",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/llm_guide_001.py",
+      "category": "guidance",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T22:10:00.000000"
     }
   },
   "workflows": {
