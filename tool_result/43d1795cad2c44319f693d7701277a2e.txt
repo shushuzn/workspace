@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-20T14:20:52.649496
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\auto_session_compressor.py  (lines 1-100 of 223)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+自动会话压缩器 v1.0
+
+功能：
+1. 每 2 小时自动检查会话是否需要压缩
+2. 自动执行 post_session_compress.py
+3. 验证压缩效果 (<100KB)
+4. 记录压缩日志
+
+使用：
+  py auto_session_compressor.py --auto
+  py auto_session_compressor.py --check
+  py auto_session_compressor.py --compress
+"""
+
+import json
+import sys
+import subprocess
+from datetime import datetime, timedelta
+from pathlib import Path
+
+
+class AutoSessionCompressor:
+    """自动会话压缩器"""
+    
+    def __init__(self):
+        self.workspace = Path("D:/OpenClaw/workspace")
+        self.compress_script = self.workspace / "30-scripts-tools/post_session_compress.py"
+        self.checker_script = self.workspace / "30-scripts-tools/session_end_checker.py"
+        self.log_file = self.workspace / "13-memory/session-compression-log.jsonl"
+        self.config = {
+            "check_interval_hours": 2,
+            "max_context_size_kb": 100,
+            "target_size_kb": 5,
+            "compression_rate_min": 0.8
+        }
+    
+    def check_compression_needed(self) -> dict:
+        """
+        检查是否需要压缩
+        
+        Returns:
+            dict: 检查结果
+        """
+        result = {
+            "needs_compression": False,
+            "current_size_kb": 0,
+            "last_compression": None,
+            "hours_since_last": 0
+        }
+        
+        # 检查今日笔记文件
+        today = datetime.now().strftime("%Y-%m-%d")
+        daily_note = self.workspace / f"13-memory/{today}.md"
+        
+        if daily_note.exists():
+            size_kb = daily_note.stat().st_size / 1024
+            result["current_size_kb"] = round(size_kb, 2)
+            
+            if size_kb > self.config["max_context_size_kb"]:
+                result["needs_compression"] = True
+        
+        # 检查上次压缩时间
+        if self.log_file.exists():
+            with open(self.log_file, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+                if lines:
+                    last_entry = json.loads(lines[-1])
+                    result["last_compression"] = last_entry.get("timestamp")
+                    
+                    last_time = datetime.fromisoformat(last_entry["timestamp"])
+                    hours_since = (datetime.now() - last_time).total_seconds() / 3600
+                    result["hours_since_last"] = round(hours_since, 1)
+                    
+                    # 如果超过检查间隔，需要压缩
+                    if hours_since >= self.config["check_interval_hours"]:
+                        result["needs_compression"] = True
+        
+        return result
+    
+    def execute_compression(self) -> dict:
+        """
+        执行压缩
+        
+        Returns:
+            dict: 压缩结果
+        """
+        result = {
+            "success": False,
+            "before_size_kb": 0,
+            "after_size_kb": 0,
+            "compression_rate": 0,
+            "message": ""
+        }
+        
+        # 检查压缩前大小
+        today = datetime.now().strftime("%Y-%m-%d")
+        daily_note = self.workspace / f"13-memory/{today}.md"
+
+[123 more lines. Use start_line=101 to continue.]

@@ -4,21 +4,75 @@
   "session_id": "session-20260320145000",
   "started_at": "2026-03-20T14:50:00+08:00",
   "updated_at": "2026-03-20T14:40:00+08:00",
-  "current_step": 17,
+  "current_step": 6.1,
   "total_steps": 20,
   "status": "completed",
-  "mandatory_steps": [1, 2, 7, 13, 15, 16, 17],
-  "completed_steps": [1, 2, 3, 4, 5, 6, 7, 8, 13, 14, 15, 16, 17],
-  "skipped_steps": [9, 10, 11, 12],
+  "mandatory_steps": [
+    1,
+    2,
+    7,
+    13,
+    15,
+    16,
+    17
+  ],
+  "completed_steps": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    13,
+    14,
+    15,
+    16,
+    17,
+    6.1
+  ],
+  "skipped_steps": [
+    9,
+    10,
+    11,
+    12
+  ],
   "step_results": {
-    "1": {"status": "pass", "tool": "pre-session-hook.py"},
-    "2": {"status": "pass", "tool": "context_verify.py"},
-    "7": {"status": "pass", "tool": "workflow_analyzer.py"},
-    "13": {"status": "pass", "tool": "embedded_critic.py", "score": 86.2},
-    "14": {"status": "pass", "tool": "aai_scorer.py", "score": 84.2},
-    "15": {"status": "pass", "tool": "core_files_compressor.py"},
-    "16": {"status": "pass", "tool": "post_session_compress.py"},
-    "17": {"status": "pass", "tool": "session_end.py"}
+    "1": {
+      "status": "pass",
+      "tool": "pre-session-hook.py"
+    },
+    "2": {
+      "status": "pass",
+      "tool": "context_verify.py"
+    },
+    "7": {
+      "status": "pass",
+      "tool": "workflow_analyzer.py"
+    },
+    "13": {
+      "status": "pass",
+      "tool": "embedded_critic.py",
+      "score": 86.2
+    },
+    "14": {
+      "status": "pass",
+      "tool": "aai_scorer.py",
+      "score": 84.2
+    },
+    "15": {
+      "status": "pass",
+      "tool": "core_files_compressor.py"
+    },
+    "16": {
+      "status": "pass",
+      "tool": "post_session_compress.py"
+    },
+    "17": {
+      "status": "pass",
+      "tool": "session_end.py"
+    }
   },
   "mandatory_execution": true,
   "protection_enabled": true,
@@ -28,5 +82,16 @@
     "aai_level": "AAI-4",
     "critic_score": 86.2,
     "total_size_kb": 57.68
-  }
+  },
+  "signature": "edbdba24096714a53793cbc5c087140ed565dfb9e1a61945aab8ab3faec0b0fb",
+  "step_status": {
+    "6.1": {
+      "name": "工具调用：safe_shell_executor",
+      "status": "completed",
+      "started_at": "2026-03-20T14:41:08.829776",
+      "completed_at": "2026-03-20T14:41:08.829781",
+      "result": "error"
+    }
+  },
+  "completion_percentage": 70.0
 }

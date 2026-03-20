@@ -512,3 +512,5 @@
 {\"timestamp\": \"2026-03-20T14:38:10+08:00\", \"session_id\": \"session-20260320145000\", \"tool_id\": \"core_files_compressor.py\", \"result\": \"success\"}  
 {\"timestamp\": \"2026-03-20T14:38:20+08:00\", \"session_id\": \"session-20260320145000\", \"tool_id\": \"post_session_compress.py\", \"result\": \"success\"}  
 {\"timestamp\": \"2026-03-20T14:38:30+08:00\", \"session_id\": \"session-20260320145000\", \"tool_id\": \"session_end.py\", \"result\": \"success\"} 
+{"timestamp": "2026-03-20T14:41:08.827798", "session_id": "session-20260320145000", "tool_id": "safe-shell-executor", "command": "echo Step 1 - 测试有效输出验证", "description": "", "result": "error", "returncode": -1, "flow_id": "20260318-universal-workflow-001", "task": "unknown", "current_step": 14, "protection_enabled": true, "modified_files": []}
+{"timestamp": "2026-03-20T14:41:08.829093", "session_id": "session-20260320145000", "tool_id": "safe_shell_executor", "params": {"command": "echo Step 1 - 测试有效输出验证"}, "result": "error"}

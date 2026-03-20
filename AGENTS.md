@@ -14,7 +14,7 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
    - SOUL.md, USER.md, AGENTS.md, TOOLS.md, HEARTBEAT.md
    - MEMORY.md, 13-memory/YYYY-MM-DD.md (today)
 
-2. ❌ **NEVER scan full workspace** (560MB → 63KB = 9013x faster)
+2. ❌ **NEVER scan full workspace** (560MB → 50KB = 11562x faster)
 
 3. ❌ **Respect .contextignore** rules:
    - 80-PROJECTS/, 40-arxiv/, 60-DATA/, 99-backups/
@@ -23,7 +23,7 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 4. ✅ **Verify with fast_load.py**:
    ```bash
    py 30-scripts-tools/fast_load.py
-   # Should show: 总大小：63.3KB, 速度提升：9013x
+   # Should show: 总大小：49.6KB, 速度提升：11562x
    ```
 
 **Session Compression (每次对话结束必须):**
@@ -37,7 +37,7 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 - 完整对话：~50KB → 结构化摘要：~2KB (**-96%**)
 - Token 使用：~12,500 → ~500 (**-96%**)
 - 信息密度：提升**25x**
-- Speed: >9000x faster (current: 9442x) ✅
+- Speed: >11000x faster (current: 11562x) ✅
 - Token usage: <20K (current: ~15.5K) ✅
 
 **Dashboard:** v4.1-Persona (Default)

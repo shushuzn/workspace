@@ -1,8 +1,8 @@
 {
   "flow_id": "20260318-universal-workflow-001-simplified",
-  "task": "'按工作流真正执行 Phase 2'",
+  "task": "测试工作流强制执行 v2.0",
   "description": "Task started via copaw_entry.py",
-  "started_at": "2026-03-20T13:43:43.281119+08:00",
+  "started_at": "2026-03-20T14:41:03.125075+08:00",
   "current_step": 0,
   "total_steps": 5,
   "status": "failed",
@@ -10,11 +10,11 @@
   "completed_steps": [],
   "completion_percentage": 0,
   "workflow_compliance": false,
-  "session_id": "session-20260320134343",
+  "session_id": "session-20260320144103",
   "entry_point": "copaw_entry.py",
   "mandatory_execution": true,
-  "signature": "c4218710f9449df23327432e4f8a3f67820bf6b79e1a81f578aa4876fe5300d0",
+  "signature": "6beb72104990b4da162e1caf0473fae5900eb5ab812cbdf3caef90f00e37a45b",
   "protection_enabled": true,
-  "ended_at": "2026-03-20T13:43:43.285762+08:00",
-  "duration_seconds": 0.004643
+  "ended_at": "2026-03-20T14:41:03.130127+08:00",
+  "duration_seconds": 0.005052
 }

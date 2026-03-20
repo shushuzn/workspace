@@ -1,0 +1,48 @@
+[
+  {
+    "timestamp": "2026-03-20T14:25:23.727258",
+    "before_size_kb": 50.49,
+    "after_size_kb": 50.49,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T14:26:32.563811",
+    "before_size_kb": 53.21,
+    "after_size_kb": 53.21,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T14:38:38.495911",
+    "before_size_kb": 57.68,
+    "after_size_kb": 57.68,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": [
+      "2026-03-20.md 超过限制: 10935 > 10000 bytes"
+    ]
+  },
+  {
+    "timestamp": "2026-03-20T14:38:43.853984",
+    "before_size_kb": 57.68,
+    "after_size_kb": 57.68,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": [
+      "2026-03-20.md 超过限制: 10935 > 10000 bytes"
+    ]
+  },
+  {
+    "timestamp": "2026-03-20T14:38:48.269501",
+    "before_size_kb": 57.68,
+    "after_size_kb": 57.68,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": [
+      "2026-03-20.md 超过限制: 10935 > 10000 bytes"
+    ]
+  }
+]

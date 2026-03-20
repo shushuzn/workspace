@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-20T14:21:34.323648
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\session_end_audit.py  (lines 1-100 of 209)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+会话结束审计工具
+
+功能：
+1. 检查 tool_call_log 完整性
+2. 检查文件修改 vs 工具调用匹配
+3. 生成审计报告
+4. 更新 MEMORY.md
+
+使用：
+  py session_end_audit.py --session session-xxx
+"""
+
+import json
+import sys
+from pathlib import Path
+from datetime import datetime
+from collections import Counter
+
+
+class SessionEndAuditor:
+    """会话结束审计器"""
+    
+    def __init__(self, session_id: str = None):
+        self.workspace = Path("D:/OpenClaw/workspace")
+        self.tool_call_log = self.workspace / "30-scripts-tools/tool_call_log.jsonl"
+        self.memory_file = self.workspace / "13-memory/MEMORY.md"
+        self.session_id = session_id
+        self.report = {}
+    
+    def audit(self) -> dict:
+        """执行完整审计"""
+        print("=" * 70)
+        print(" " * 25 + "Session End Audit")
+        print("=" * 70)
+        
+        # 1. 加载工具调用日志
+        calls = self._load_tool_calls()
+        
+        # 2. 统计分析
+        stats = self._analyze_calls(calls)
+        
+        # 3. 完整性检查
+        integrity = self._check_integrity(calls)
+        
+        # 4. 生成报告
+        report = {
+            "session_id": self.session_id,
+            "audit_time": datetime.now().isoformat(),
+            "statistics": stats,
+            "integrity": integrity,
+            "score": self._calculate_score(stats, integrity)
+        }
+        
+        # 5. 打印报告
+        self._print_report(report)
+        
+        # 6. 保存到审计报告
+        self._save_report(report)
+        
+        return report
+    
+    def _load_tool_calls(self) -> list:
+        """加载工具调用日志"""
+        print("\n[1] Loading tool call log...")
+        
+        if not self.tool_call_log.exists():
+            print("  [WARN] tool_call_log.jsonl not found")
+            return []
+        
+        calls = []
+        with open(self.tool_call_log, 'r', encoding='utf-8') as f:
+            for line in f:
+                try:
+                    entry = json.loads(line.strip())
+                    if self.session_id and entry.get('session_id') != self.session_id:
+                        continue
+                    calls.append(entry)
+                except:
+                    continue
+        
+        print(f"  [OK] Loaded {len(calls)} calls")
+        return calls
+    
+    def _analyze_calls(self, calls: list) -> dict:
+        """统计分析"""
+        print("\n[2] Analyzing calls...")
+        
+        stats = {
+            "total_calls": len(calls),
+            "tools_used": Counter(c.get('tool_id', 'unknown') for c in calls),
+            "success_rate": 0,
+            "avg_duration": 0,
+        }
+        
+        # 计算成功率
+        success = sum(1 for c in calls if c.get('result') in ['success', 'completed', 'allowed'])
+        stats['success_rate'] = success / len(calls) * 100 if calls else 0
+
+[109 more lines. Use start_line=101 to continue.]

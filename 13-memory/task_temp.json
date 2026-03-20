@@ -1,0 +1,12 @@
+{
+  "task_type": "workflow_optimization",
+  "description": "采纳工作流优化方案，应用 workflow v2.0.0",
+  "subtasks": [
+    "备份旧版本 workflow.json",
+    "应用 workflow-v2.0.0.json",
+    "执行完整工作流",
+    "验证执行结果"
+  ],
+  "priority": "high",
+  "session_id": "session-20260320145000"
+}

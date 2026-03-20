@@ -1,0 +1,68 @@
+{
+  "symbol": "TEST",
+  "report_date": "2026-03-20T14:26:01.849296",
+  "executive_summary": {
+    "overall_score": 68.8,
+    "rating": "buy",
+    "description": "买入 (综合评分：68.8/100)",
+    "key_highlights": [
+      "技术面：75.0/100",
+      "基本面：75.0/100",
+      "行业地位：75.0/100",
+      "估值：50.0/100"
+    ]
+  },
+  "technical_analysis": {
+    "summary": {
+      "overall_trend": "bullish",
+      "confidence": 0.75
+    }
+  },
+  "fundamental_analysis": {
+    "growth_score": {
+      "score": 75
+    }
+  },
+  "industry_analysis": {
+    "market_share": {
+      "market_share_percent": 23.81,
+      "rating": "leader",
+      "description": "行业龙头 (市场份额：23.81%)"
+    },
+    "competitive_position": {
+      "rankings": {
+        "revenue": 3,
+        "net_income": 3,
+        "gross_margin": 2,
+        "roe": 2
+      },
+      "average_rank": 2.5,
+      "position": "strong",
+      "description": "竞争力强 (平均排名：2.5)"
+    },
+    "industry_ranking": {
+      "rank": 2,
+      "total_companies": 5,
+      "percentile": 60.0,
+      "rating": "above_average",
+      "description": "高于平均 (排名：2/5, 前60.0%)"
+    }
+  },
+  "valuation": {
+    "upside_potential": 0.15
+  },
+  "investment_recommendation": {
+    "action": "buy",
+    "confidence": "medium",
+    "target_price": 115.0,
+    "stop_loss": 85.0,
+    "time_horizon": "6-12 months",
+    "rationale": [
+      "技术面表现良好",
+      "基本面稳健",
+      "行业地位稳固",
+      "估值合理"
+    ]
+  },
+  "risk_factors": []
+}

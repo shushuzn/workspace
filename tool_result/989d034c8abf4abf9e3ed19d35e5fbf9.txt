@@ -1,0 +1,49 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T14:39:16.564370
+# ---
+ m 10-RESEARCH/domain-research/领域研究/cnt-research
+ M 13-memory/2026-03-20.md
+ M 30-scripts-tools/safe_shell_executor.py
+ M 30-scripts-tools/tool_call_log.jsonl
+ M AGENTS.md
+ M flow-archive/20260318-universal-workflow-001-simplified/execution-state.json
+ M flow-archive/20260318-universal-workflow-001/critic-log.json
+ M flow-archive/20260318-universal-workflow-001/enforcement-log.json
+ M flow-archive/20260318-universal-workflow-001/execution-state.json
+ M flow-archive/20260318-universal-workflow-001/workflow.json
+ M flow-archive/20260320-main-workflow-brainstorm/aai-scores.json
+ M memory/2026-03-20.md
+?? 13-memory/compression_log.json
+?? 13-memory/session-compression-log.jsonl
+?? 13-memory/task_temp.json
+?? 21-reports/session-audits/audit_session-20260320142352_20260320_142624.json
+?? 21-reports/stock-analysis/
+?? 30-scripts-tools/core_files_compressor.py
+?? 30-scripts-tools/fast_load.py
+?? 30-scripts-tools/post_session_compress.py
+?? 30-scripts-tools/pre-session-hook.py
+?? 30-scripts-tools/session_end.py
+?? 30-scripts-tools/workflow_analyzer.py
+?? flow-archive/20260318-universal-workflow-001/OPTIMIZATION-PLAN.md
+?? flow-archive/20260318-universal-workflow-001/tool_mapping.json
+?? flow-archive/20260318-universal-workflow-001/workflow-v1.6.0-backup.json
+?? flow-archive/20260318-universal-workflow-001/workflow-v2.0.0.json
+?? tool_result/041e17102fc343deb8196801896d0dc6.txt
+?? tool_result/0627d2b652b740028f877740342fed4b.txt
+?? tool_result/1f20630f18574a74b6b4a4f7c130f56e.txt
+?? tool_result/2107781bc0b04ddd9ff6418ab0b74829.txt
+?? tool_result/248ef9ed72de42fcb535f6d417715bf4.txt
+?? tool_result/2579d410b980425499235c51700d305b.txt
+?? tool_result/275f48205de34e2b8e554f6359fdde01.txt
+?? tool_result/3113fa76f4b14d72b91291d93c0220eb.txt
+?? tool_result/3dcf28f6f1304173b73ea49fa20138b0.txt
+?? tool_result/43d1795cad2c44319f693d7701277a2e.txt
+?? tool_result/5cfb0c818275498aa552ed75a33b69ca.txt
+?? tool_result/6a69a0a7f3eb4d7b9b0fe2c9d8129206.txt
+?? tool_result/7d0d6b6148164dd59d82b7363787e9ad.txt
+?? tool_result/aacf6cfbc8a14b6aa223f378be8db0ba.txt
+?? tool_result/c5023cfcf4fd4e11999bd2431a8e1447.txt
+?? tool_result/d1d4f3595f524e1b9d65ec236c607e04.txt
+?? tool_result/e322c98043dd408f9a7bd2fb087cbd48.txt
+?? tool_result/e78b4d46f3f24b9f8e1eda5c12335d97.txt
+?? tool_result/eb1bcfe5220041089096007aacb16bd7.txt

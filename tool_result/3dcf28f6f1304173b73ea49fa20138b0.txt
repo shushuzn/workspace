@@ -1,0 +1,36 @@
+# tool_name: read_file
+# created_at: 2026-03-20T14:21:09.915311
+# ---
+D:\OpenClaw\workspace\AGENTS.md  (lines 31-60 of 204)
+1. ✅ **Pre-session:** `py pre-session-hook.py` (检查上下文)
+2. ✅ **During session:** 记录关键决策到 `session_temp.json`
+3. ✅ **Post-session:** `py post_session_compress.py --auto` (压缩保存)
+4. ✅ **End session:** `py session_end.py "完成描述"` (自动使用 Flow ID: `20260318-universal-workflow-001`)
+
+**压缩效果:**
+- 完整对话：~50KB → 结构化摘要：~2KB (**-96%**)
+- Token 使用：~12,500 → ~500 (**-96%**)
+- 信息密度：提升**25x**
+- Speed: >11000x faster (current: 11562x) ✅
+- Token usage: <20K (current: ~15.5K) ✅
+
+**Dashboard:** v4.1-Persona (Default)
+- **Start Command:** `start-dashboard.bat`
+- **Port:** 8448
+- **Features:** 7-Persona + Async I/O + WebSocket + Redis Queue
+- **API:** http://localhost:8448/api/personas
+- **Personas:** Planner, Executor, Critic, Learner, Coordinator, Innovator, Metacognition
+
+**Memory System:** Phase 4 Evolution
+- **Daily:** Auto-distillation at 06:00
+- **Weekly:** Batch processing (Sunday 05:00)
+- **Consciousness:** Φ monitoring (target ≥0.5 B-grade)
+
+**Research Automation:**
+- **arXiv Scan:** Daily at 07:00
+- **Domain Ranking:** `py domain_ranker_v2.py --compare`
+- **Critic v5.0:** Embedded in all research tasks
+
+---
+
+[144 more lines. Use start_line=61 to continue.]

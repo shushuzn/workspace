@@ -1,0 +1,30 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T14:18:45.547804
+# ---
+Command failed with exit code 1.
+[stdout]
+[INFO] OpenClaw Workspace loaded
+[stderr]
+At line:1 char:217
++ ... Test-Path $f) { $size = (Get-Item $f).Length; Write-Host \"$f : $size ...
++                                                                ~~
+Unexpected token '$f' in expression or statement.
+At line:1 char:220
++ ... st-Path $f) { $size = (Get-Item $f).Length; Write-Host \"$f : $size b ...
++                                                                 ~
+Unexpected token ':' in expression or statement.
+At line:1 char:365
++ ... -Host \"`nTotal: $total bytes ($([math]::Round($total/1KB, 2)) KB)\""
++                                                                    ~~
+Unexpected token 'KB' in expression or statement.
+At line:1 char:364
++ ... -Host \"`nTotal: $total bytes ($([math]::Round($total/1KB, 2)) KB)\""
++                                                                   ~
+Missing closing ')' in expression.
+At line:1 char:367
++ ... -Host \"`nTotal: $total bytes ($([math]::Round($total/1KB, 2)) KB)\""
++                                                                      ~
+Unexpected token ')' in expression or statement.
+    + CategoryInfo          : ParserError: (:) [], ParentContainsErrorRecordException
+    + FullyQualifiedErrorId : UnexpectedToken
+ 
