@@ -3,7 +3,7 @@
   "task": "强化防护-工作流强制入口",
   "description": "Task started via copaw_entry.py",
   "started_at": "2026-03-20T10:49:39.728703+08:00",
-  "current_step": 1,
+  "current_step": 6.1,
   "total_steps": 5,
   "status": "initializing",
   "step_status": {
@@ -13,12 +13,27 @@
       "started_at": "2026-03-20T10:49:39.732864+08:00",
       "completed_at": "2026-03-20T10:49:39.732868+08:00",
       "result": "验证通过"
+    },
+    "6.1": {
+      "name": "工具调用：safe-shell-executor",
+      "status": "completed",
+      "started_at": "2026-03-20T11:22:34.502400",
+      "completed_at": "2026-03-20T11:22:34.502403",
+      "result": "error"
+    },
+    "6.1": {
+      "name": "工具调用：safe-shell-executor",
+      "status": "completed",
+      "started_at": "2026-03-20T11:22:42.442837",
+      "completed_at": "2026-03-20T11:22:42.442840",
+      "result": "error"
     }
   },
   "completed_steps": [
-    1
+    1,
+    6.1
   ],
-  "completion_percentage": 20,
+  "completion_percentage": 40.0,
   "workflow_compliance": false,
   "session_id": "session-20260320104939",
   "entry_point": "copaw_entry.py",

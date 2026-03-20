@@ -20,6 +20,40 @@ import subprocess
 from pathlib import Path
 from datetime import datetime
 
+# ============================================================================
+# 【系统级防护】模块加载时强制检查 session - 无法绕过
+# ============================================================================
+def _force_session_check():
+    """模块加载时强制检查 - 在有任何代码执行前"""
+    state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
+    
+    # 检查 1: state 文件必须存在
+    if not state_file.exists():
+        print("=" * 70, file=sys.stderr)
+        print("[BLOCK] 模块加载被拒绝", file=sys.stderr)
+        print("[BLOCK] 原因：execution-state.json 不存在", file=sys.stderr)
+        print("[BLOCK] 请先运行：py 30-scripts-tools/copaw_entry.py <task>", file=sys.stderr)
+        print("=" * 70, file=sys.stderr)
+        sys.exit(1)
+    
+    # 检查 2: 必须有 session_id 和 mandatory_execution
+    try:
+        with open(state_file, 'r', encoding='utf-8') as f:
+            state = json.load(f)
+        assert state.get('session_id'), "session_id missing"
+        assert state.get('mandatory_execution'), "mandatory_execution not enabled"
+    except Exception as e:
+        print("=" * 70, file=sys.stderr)
+        print("[BLOCK] 模块加载被拒绝", file=sys.stderr)
+        print(f"[BLOCK] 原因：session 无效 - {e}", file=sys.stderr)
+        print("[BLOCK] 请先运行：py 30-scripts-tools/copaw_entry.py <task>", file=sys.stderr)
+        print("=" * 70, file=sys.stderr)
+        sys.exit(1)
+
+# 立即执行检查（在模块导入时）
+_force_session_check()
+# ============================================================================
+
 # 导入拦截器
 sys.path.insert(0, str(Path("30-scripts-tools").resolve()))
 try:

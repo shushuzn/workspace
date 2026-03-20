@@ -163,3 +163,9 @@
 {"timestamp": "2026-03-20T11:16:50.865413", "session_id": "session-20260320111128", "tool_id": "task_analyzer", "params": {}, "result": "success"}
 {"timestamp": "2026-03-20T11:16:55.865413", "session_id": "session-20260320111128", "tool_id": "tool_executor", "params": {}, "result": "success"}
 {"timestamp": "2026-03-20T11:17:00.865413", "session_id": "session-20260320111128", "tool_id": "auto_critic_v7", "params": {}, "result": "success"}
+{"timestamp": "2026-03-20T11:22:34.499602", "session_id": "session-20260320104939", "tool_id": "safe-shell-executor", "params": {}, "result": "allowed"}
+{"timestamp": "2026-03-20T11:22:34.500282", "tool_id": "safe-shell-executor", "params": {}, "result": "error", "returncode": 1, "session_id": "session-20260320104939"}
+{"timestamp": "2026-03-20T11:22:34.501792", "session_id": "session-20260320104939", "tool_id": "safe-shell-executor", "params": {}, "result": "error"}
+{"timestamp": "2026-03-20T11:22:42.440257", "session_id": "session-20260320104939", "tool_id": "safe-shell-executor", "params": {}, "result": "allowed"}
+{"timestamp": "2026-03-20T11:22:42.440821", "tool_id": "safe-shell-executor", "params": {}, "result": "error", "returncode": 1, "session_id": "session-20260320104939"}
+{"timestamp": "2026-03-20T11:22:42.442217", "session_id": "session-20260320104939", "tool_id": "safe-shell-executor", "params": {}, "result": "error"}

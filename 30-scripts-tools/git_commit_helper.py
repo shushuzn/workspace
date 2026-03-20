@@ -3,11 +3,19 @@
 """
 Git Commit + Push with Retry Mechanism
 Usage: py git_commit_helper.py "commit message"
+
+防护规则:
+- 禁止 --no-verify 参数
+- 禁止 --no-hooks 参数
+- 强制 session 检查
 """
 
 import subprocess
 import sys
 import time
+
+# 禁止的参数
+FORBIDDEN_ARGS = ['--no-verify', '--no-hooks', '-n']
 
 def run_command(cmd, capture=True):
     """运行命令"""
@@ -29,8 +37,19 @@ def main():
         print("Usage: py git_commit_helper.py \"commit message\"")
         print("")
         print("注意：不允许跳过 pre-commit hook 检查")
+        print("禁止使用：--no-verify, --no-hooks, -n")
         print("如需提交，请先完成 workflow 步骤")
         sys.exit(1)
+    
+    # 检查禁止的参数
+    for arg in sys.argv[1:]:
+        if arg in FORBIDDEN_ARGS:
+            print("=" * 70, file=sys.stderr)
+            print("[BLOCK] Git 命令被拒绝", file=sys.stderr)
+            print(f"[BLOCK] 禁止的参数：{arg}", file=sys.stderr)
+            print("[BLOCK] 不允许绕过 pre-commit hook", file=sys.stderr)
+            print("=" * 70, file=sys.stderr)
+            sys.exit(1)
     
     message = sys.argv[1]
     
