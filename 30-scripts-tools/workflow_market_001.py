@@ -1,185 +1,294 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-WORKFLOW-MARKET-001 Workflow Template Market
+WORKFLOW-MARKET-001 Template Market
+=====================================
+Browse, install, and manage workflow templates
 """
 
-import json
-import sys
+import json, sys
 from pathlib import Path
-from datetime import datetime
-from typing import Dict, List, Optional
 
-# Fix Windows Unicode
 if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-
 MARKET_DIR = Path("13-memory/.workflow_market")
-TEMPLATES_FILE = MARKET_DIR / "templates.json"
-MY_TEMPLATES_FILE = MARKET_DIR / "my_templates.json"
+MARKET_DIR.mkdir(parents=True, exist_ok=True)
 
+MARKETPLACE_TEMPLATES = {
+    # Stock Analysis Templates
+    "stock-quick": {
+        "id": "stock-quick",
+        "name": "Stock Quick Analysis",
+        "description": "Quick stock analysis in under 1 minute",
+        "category": "stock",
+        "steps": [
+            {"tool": "sa_signal_generator_001", "args": []},
+            {"tool": "sa_analyzer_001", "args": ["--quick"]}
+        ],
+        "rating": 5,
+        "installs": 0
+    },
+    "stock-full": {
+        "id": "stock-full",
+        "name": "Stock Full Analysis",
+        "description": "Comprehensive stock analysis with backtest",
+        "category": "stock",
+        "steps": [
+            {"tool": "sa_historical_downloader_001", "args": []},
+            {"tool": "sa_analyzer_001", "args": []},
+            {"tool": "sa_signal_generator_001", "args": []},
+            {"tool": "sa_backtesting_001", "args": []},
+            {"tool": "sa_risk_001", "args": []}
+        ],
+        "rating": 5,
+        "installs": 0
+    },
+    "stock-research": {
+        "id": "stock-research",
+        "name": "Stock Research Mode",
+        "description": "Deep dive research with all metrics",
+        "category": "stock",
+        "steps": [
+            {"tool": "sa_financial_collector_001", "args": []},
+            {"tool": "sa_indicator_calculator_001", "args": []},
+            {"tool": "sa_trend_analysis_001", "args": []},
+            {"tool": "sa_valuation_model_001", "args": []},
+            {"tool": "sa_report_generator_001", "args": []}
+        ],
+        "rating": 5,
+        "installs": 0
+    },
+    "stock-monitor": {
+        "id": "stock-monitor",
+        "name": "Stock Monitor",
+        "description": "Real-time stock monitoring",
+        "category": "stock",
+        "steps": [
+            {"tool": "sa_realtime_001", "args": []},
+            {"tool": "sa_sentiment_monitor_001", "args": []},
+            {"tool": "sa_alert_system_001", "args": []}
+        ],
+        "rating": 4,
+        "installs": 0
+    },
+    
+    # Development Templates
+    "dev-cycle": {
+        "id": "dev-cycle",
+        "name": "Development Cycle",
+        "description": "Discover -> Validate -> Test -> Commit",
+        "category": "development",
+        "steps": [
+            {"tool": "auto_discover_001", "args": ["--scan"]},
+            {"tool": "tool_validator_001", "args": []},
+            {"tool": "tool_namer_001", "args": ["--scan"]},
+            {"tool": "workflow_test_001", "args": []}
+        ],
+        "rating": 5,
+        "installs": 0
+    },
+    "safe-code": {
+        "id": "safe-code",
+        "name": "Safe Code Generation",
+        "description": "Generate code with safety checks",
+        "category": "development",
+        "steps": [
+            {"tool": "safe_coder_001", "args": []},
+            {"tool": "tool_validator_001", "args": []},
+            {"tool": "file_integrity_001", "args": []}
+        ],
+        "rating": 5,
+        "installs": 0
+    },
+    "code-review": {
+        "id": "code-review",
+        "name": "Code Review",
+        "description": "Full code quality review",
+        "category": "development",
+        "steps": [
+            {"tool": "tool_validator_001", "args": []},
+            {"tool": "workflow_security_001", "args": []},
+            {"tool": "file_integrity_001", "args": []}
+        ],
+        "rating": 4,
+        "installs": 0
+    },
+    
+    # Brainstorm Templates
+    "brainstorm-quick": {
+        "id": "brainstorm-quick",
+        "name": "Quick Brainstorm",
+        "description": "5-minute brainstorm",
+        "category": "brainstorm",
+        "steps": [
+            {"tool": "brainstorm_workflow_001", "args": ["--step", "1"]},
+            {"tool": "brainstorm_workflow_001", "args": ["--step", "2"]}
+        ],
+        "rating": 5,
+        "installs": 0
+    },
+    "brainstorm-scamp": {
+        "id": "brainstorm-scamp",
+        "name": "SCAMPER Analysis",
+        "description": "SCAMPER creative method",
+        "category": "brainstorm",
+        "steps": [
+            {"tool": "brainstorm_scamper_001", "args": []}
+        ],
+        "rating": 4,
+        "installs": 0
+    },
+    
+    # System Templates
+    "health-check": {
+        "id": "health-check",
+        "name": "System Health Check",
+        "description": "Check overall system health",
+        "category": "system",
+        "steps": [
+            {"tool": "workflow_diagnosis_001", "args": []},
+            {"tool": "workflow_health_001", "args": []},
+            {"tool": "workflow_monitor_001", "args": []}
+        ],
+        "rating": 5,
+        "installs": 0
+    },
+    "daily-standup": {
+        "id": "daily-standup",
+        "name": "Daily Standup",
+        "description": "Daily workflow check",
+        "category": "routine",
+        "steps": [
+            {"tool": "workflow_master_001", "args": ["--run", "dev"]},
+            {"tool": "workflow_analytics_001", "args": []}
+        ],
+        "rating": 4,
+        "installs": 0
+    },
+    "weekly-review": {
+        "id": "weekly-review",
+        "name": "Weekly Review",
+        "description": "Comprehensive weekly review",
+        "category": "routine",
+        "steps": [
+            {"tool": "workflow_master_001", "args": ["--run", "full"]},
+            {"tool": "workflow_analytics_001", "args": []},
+            {"tool": "workflow_backup_001", "args": ["--create", "weekly"]},
+            {"tool": "workflow_report_001", "args": []}
+        ],
+        "rating": 5,
+        "installs": 0
+    }
+}
 
 class WorkflowMarket:
-    """Workflow Template Market"""
-    
-    BUILTIN_TEMPLATES = {
-        "quick-brainstorm": {
-            "id": "quick-brainstorm",
-            "name": "Quick Brainstorm",
-            "description": "5-min quick brainstorm flow",
-            "category": "brainstorm",
-            "steps": [
-                {"tool": "brainstorm_001_define", "args": []},
-                {"tool": "brainstorm_002_diverge", "args": [10]},
-                {"tool": "brainstorm_003_filter", "args": [5]},
-                {"tool": "brainstorm_004_prioritize", "args": [3]}
-            ],
-            "tags": ["quick", "brainstorm", "5min"],
-            "rating": 5
-        },
-        "discover-sync": {
-            "id": "discover-sync",
-            "name": "Tool Discovery & Sync",
-            "description": "Scan and sync tool registry",
-            "category": "tooling",
-            "steps": [
-                {"tool": "auto_discover_001", "args": ["--sync"]}
-            ],
-            "tags": ["tool", "discover", "sync"],
-            "rating": 5
-        },
-        "full-optimize": {
-            "id": "full-optimize",
-            "name": "Full Optimize Cycle",
-            "description": "Discover -> Optimize -> Report",
-            "category": "optimization",
-            "steps": [
-                {"tool": "auto_discover_001", "args": ["--scan"]},
-                {"tool": "chain_runner_001", "args": ["--run", "optimize-cycle"]}
-            ],
-            "tags": ["optimize", "automation"],
-            "rating": 4
-        },
-        "daily-review": {
-            "id": "daily-review",
-            "name": "Daily Review",
-            "description": "Review daily work, update notes",
-            "category": "routine",
-            "steps": [
-                {"tool": "version_ctrl_001", "args": ["--snapshot", "daily"]}
-            ],
-            "tags": ["daily", "review"],
-            "rating": 4
-        }
-    }
-    
     def __init__(self):
-        self.workspace = Path(__file__).parent.parent
-        self.tools_dir = self.workspace / "30-scripts-tools"
-        MARKET_DIR.mkdir(parents=True, exist_ok=True)
-        self._ensure_files()
+        self.installed_file = MARKET_DIR / "installed.json"
+        if not self.installed_file.exists():
+            self._save_installed({})
     
-    def _ensure_files(self):
-        if not TEMPLATES_FILE.exists():
-            TEMPLATES_FILE.write_text(json.dumps({"templates": self.BUILTIN_TEMPLATES}, ensure_ascii=False, indent=2))
-        if not MY_TEMPLATES_FILE.exists():
-            MY_TEMPLATES_FILE.write_text(json.dumps({"templates": {}}, ensure_ascii=False, indent=2))
+    def _load_installed(self):
+        return json.loads(self.installed_file.read_text(encoding="utf-8", errors="replace"))
     
-    def _load_templates(self) -> dict:
-        return json.loads(TEMPLATES_FILE.read_text(encoding="utf-8"))
+    def _save_installed(self, data):
+        self.installed_file.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
     
-    def _save_templates(self, data: dict):
-        TEMPLATES_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2))
-    
-    def _load_my_templates(self) -> dict:
-        return json.loads(MY_TEMPLATES_FILE.read_text(encoding="utf-8"))
-    
-    def _save_my_templates(self, data: dict):
-        MY_TEMPLATES_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2))
-    
-    def list_templates(self, category: str = None) -> List:
-        templates = self._load_templates()["templates"]
+    def list(self, category=None):
+        templates = list(MARKETPLACE_TEMPLATES.values())
         if category:
-            templates = {k: v for k, v in templates.items() if v.get("category") == category}
-        return [{"id": k, "name": v["name"], "description": v["description"], "category": v.get("category"), "steps": len(v.get("steps", [])), "rating": v.get("rating", 3)} for k, v in templates.items()]
+            templates = [t for t in templates if t.get("category") == category]
+        
+        installed = self._load_installed()
+        
+        for t in templates:
+            t["installed"] = t["id"] in installed
+        
+        return {
+            "templates": templates,
+            "count": len(templates),
+            "categories": list(set(t.get("category") for t in templates))
+        }
     
-    def get_template(self, template_id: str) -> Optional[Dict]:
-        templates = self._load_templates()["templates"]
-        return templates.get(template_id)
+    def install(self, template_id):
+        if template_id not in MARKETPLACE_TEMPLATES:
+            return {"error": f"Template not found: {template_id}"}
+        
+        installed = self._load_installed()
+        installed[template_id] = MARKETPLACE_TEMPLATES[template_id]
+        installed[template_id]["installed_at"] = str(Path().resolve())
+        
+        self._save_installed(installed)
+        MARKETPLACE_TEMPLATES[template_id]["installs"] += 1
+        
+        return {"status": "installed", "template": template_id}
     
-    def import_template(self, template_id: str) -> Dict:
-        template = self.get_template(template_id)
-        if not template:
-            return {"status": "error", "reason": "Template not found"}
-        my_templates = self._load_my_templates()
-        if template_id in my_templates["templates"]:
-            return {"status": "exists", "reason": "Already imported"}
-        my_templates["templates"][template_id] = {**template, "imported_at": datetime.now().isoformat()}
-        self._save_my_templates(my_templates)
-        return {"status": "success", "template_id": template_id}
+    def uninstall(self, template_id):
+        installed = self._load_installed()
+        if template_id not in installed:
+            return {"error": f"Template not installed: {template_id}"}
+        
+        del installed[template_id]
+        self._save_installed(installed)
+        
+        return {"status": "uninstalled", "template": template_id}
     
-    def search(self, keyword: str) -> List:
-        templates = self._load_templates()["templates"]
-        results = []
-        for tid, t in templates.items():
-            if keyword.lower() in t.get("name", "").lower():
-                results.append({"id": tid, "name": t["name"], "match": "name"})
-            elif any(keyword.lower() in tag.lower() for tag in t.get("tags", [])):
-                results.append({"id": tid, "name": t["name"], "match": "tag"})
-        return results
+    def run(self, template_id):
+        """Run an installed template"""
+        installed = self._load_installed()
+        if template_id not in installed:
+            return {"error": f"Template not installed: {template_id}"}
+        
+        template = installed[template_id]
+        return {
+            "template": template_id,
+            "name": template["name"],
+            "steps": len(template["steps"]),
+            "workflow": template["steps"]
+        }
     
-    def run_template(self, template_id: str) -> Dict:
-        template = self.get_template(template_id)
-        if not template:
-            return {"status": "error", "reason": "Template not found"}
-        return {"status": "ready", "template": template_id, "steps": len(template.get("steps", []))}
+    def categories(self):
+        """List all categories"""
+        cats = {}
+        for t in MARKETPLACE_TEMPLATES.values():
+            cat = t.get("category", "other")
+            if cat not in cats:
+                cats[cat] = {"count": 0, "templates": []}
+            cats[cat]["count"] += 1
+            cats[cat]["templates"].append(t["id"])
+        
+        return {"categories": cats}
 
-
-def main():
+if __name__ == "__main__":
     market = WorkflowMarket()
     
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
-        
         if cmd == "--list":
-            templates = market.list_templates()
-            print(json.dumps(templates, ensure_ascii=False, indent=2))
-            return 0
-        
-        if cmd == "--import":
-            tid = sys.argv[2] if len(sys.argv) > 2 else None
-            if not tid:
-                print("Error: Specify template id")
-                return 1
-            result = market.import_template(tid)
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
-        
-        if cmd == "--search":
-            keyword = sys.argv[2] if len(sys.argv) > 2 else ""
-            results = market.search(keyword)
-            print(json.dumps(results, ensure_ascii=False, indent=2))
-            return 0
-        
-        if cmd == "--run":
-            tid = sys.argv[2] if len(sys.argv) > 2 else None
-            if not tid:
-                print("Error: Specify template id")
-                return 1
-            result = market.run_template(tid)
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
+            cat = sys.argv[2] if len(sys.argv) > 2 else None
+            print(json.dumps(market.list(cat), ensure_ascii=False, indent=2))
+        elif cmd == "--install":
+            tid = sys.argv[2] if len(sys.argv) > 2 else ""
+            print(json.dumps(market.install(tid), ensure_ascii=False, indent=2))
+        elif cmd == "--uninstall":
+            tid = sys.argv[2] if len(sys.argv) > 2 else ""
+            print(json.dumps(market.uninstall(tid), ensure_ascii=False, indent=2))
+        elif cmd == "--run":
+            tid = sys.argv[2] if len(sys.argv) > 2 else ""
+            print(json.dumps(market.run(tid), ensure_ascii=False, indent=2))
+        elif cmd == "--categories":
+            print(json.dumps(market.categories(), ensure_ascii=False, indent=2))
+    else:
+        print("WORKFLOW-MARKET-001")
+        print("Commands:")
+        print("  --list [category]     List templates")
+        print("  --install <id>       Install template")
+        print("  --uninstall <id>    Uninstall template")
+        print("  --run <id>           Run template")
+        print("  --categories         List categories")
+        print()
+        print("Categories: stock, development, brainstorm, system, routine")
+
     
-    print("WORKFLOW-MARKET-001 Workflow Template Market")
-    print("Usage:")
-    print("  py workflow_market_001.py --list                  # List all")
-    print("  py workflow_market_001.py --import <id>          # Import")
-    print("  py workflow_market_001.py --search <keyword>     # Search")
-    print("  py workflow_market_001.py --run <id>              # Run template")
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+   
