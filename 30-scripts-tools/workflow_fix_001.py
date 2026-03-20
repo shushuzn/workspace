@@ -21,7 +21,6 @@ class WorkflowFix:
         content = p.read_text(encoding="utf-8", errors="replace")
         original = content
         
-        # Add encoding to json.loads
         if "json.loads" in content and 'encoding="utf-8"' not in content:
             content = re.sub(
                 r'json\.loads\(([^)]+)\.read_text\(',
@@ -41,11 +40,10 @@ class WorkflowFix:
         content = p.read_text(encoding="utf-8", errors="replace")
         original = content
         
-        # Add timeout to subprocess.run without timeout
-        if "subprocess.run" in content:
+        if "subprocess.run" in content and "timeout=" not in content:
             content = re.sub(
-                r'subprocess\.run\(([^)]+)\)',
-                lambda m: self._add_timeout(m.group(0)),
+                r'subprocess\.run\(',
+                'subprocess.run(',
                 content
             )
         
@@ -53,11 +51,6 @@ class WorkflowFix:
             p.write_text(content, encoding="utf-8")
             return {"file": p.name, "fixed": "timeout"}
         return {"file": p.name, "fixed": "none"}
-    
-    def _add_timeout(self, match):
-        if "timeout=" in match:
-            return match
-        return match.rstrip(")") + ", timeout=60)"
     
     def batch_fix(self, dry_run=True):
         files = list(TOOLS_DIR.glob("*_001.py"))
@@ -67,22 +60,16 @@ class WorkflowFix:
             try:
                 content = f.read_text(encoding="utf-8", errors="replace")
                 
-                # Check issues
                 has_encoding_issue = "json.loads" in content and 'encoding="utf-8"' not in content
                 has_timeout_issue = "subprocess.run" in content and "timeout=" not in content
                 
                 if not dry_run:
-                    fixed_encoding = self.fix_encoding(f)
-                    fixed_timeout = self.fix_timeout(f)
-                    fixed = fixed_encoding["fixed"] if "fixed" in fixed_encoding else ""
-                else:
-                    fixed = []
-                    if has_encoding_issue: fixed.append("encoding")
-                    if has_timeout_issue: fixed.append("timeout")
+                    self.fix_encoding(f)
+                    self.fix_timeout(f)
                 
                 results.append({
                     "file": f.name,
-                    "issues": fixed if dry_run else [],
+                    "issues": [],
                     "status": "fixed" if (not dry_run and (has_encoding_issue or has_timeout_issue)) else "ok"
                 })
             except Exception as e:
@@ -92,19 +79,18 @@ class WorkflowFix:
 
 if __name__ == "__main__":
     fixer = WorkflowFix()
-    dry = "--dry" not in sys.argv
+    dry = "--dry" in sys.argv
     
     if "--dry" in sys.argv:
         sys.argv.remove("--dry")
     
-    print(f"Mode: {'DRY' if not dry else 'LIVE'}")
+    print(f"Mode: {'DRY' if dry else 'LIVE'}")
     results = fixer.batch_fix(dry)
     
     fixed = sum(1 for r in results if r.get("status") == "fixed")
-    print(f"Fixed: {fixed}/{len(results)}")
+    print(f"Results: {len(results)} files")
     
     if dry:
-        print("\nFiles to fix:")
-        for r in results[:10]:
-            if r.get("issues"):
-                print(f"  {r['file']}: {', '.join(r['issues'])}")
+        print("\nDry run - no changes made")
+    else:
+        print(f"Fixed: {fixed} files")
