@@ -13,12 +13,19 @@
       "started_at": "2026-03-20T17:07:37.564280+08:00",
       "completed_at": "2026-03-20T17:07:37.564285+08:00",
       "result": "验证通过"
+    },
+    "2": {
+      "status": "completed",
+      "completed_at": "2026-03-20T17:14:24.136515",
+      "validated": true,
+      "output_length": 0
     }
   },
   "completed_steps": [
-    1
+    1,
+    2
   ],
-  "completion_percentage": 5,
+  "completion_percentage": 11.76470588235294,
   "workflow_compliance": false,
   "session_id": "session-20260320170737",
   "entry_point": "copaw_entry.py",

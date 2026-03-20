@@ -1,0 +1,30 @@
+# tool_name: glob_search
+# created_at: 2026-03-20T17:12:39.949423
+# ---
+80-PROJECTS\stock-analyzer-v2\.github/
+80-PROJECTS\stock-analyzer-v2\.github\workflows/
+80-PROJECTS\stock-analyzer-v2\.github\workflows\daily-scan.yml
+80-PROJECTS\stock-analyzer-v2\.gitignore
+80-PROJECTS\stock-analyzer-v2\config/
+80-PROJECTS\stock-analyzer-v2\config\settings.yaml
+80-PROJECTS\stock-analyzer-v2\LICENSE
+80-PROJECTS\stock-analyzer-v2\README.md
+80-PROJECTS\stock-analyzer-v2\requirements.txt
+80-PROJECTS\stock-analyzer-v2\scripts/
+80-PROJECTS\stock-analyzer-v2\scripts\run_daily.py
+80-PROJECTS\stock-analyzer-v2\src/
+80-PROJECTS\stock-analyzer-v2\src\60-ai-brief/
+80-PROJECTS\stock-analyzer-v2\src\60-ai-brief\__init__.py
+80-PROJECTS\stock-analyzer-v2\src\60-ai-brief\ai_brief_generator.py
+80-PROJECTS\stock-analyzer-v2\src\60-ai-brief\templates/
+80-PROJECTS\stock-analyzer-v2\src\60-ai-brief\templates\brief_template.md
+80-PROJECTS\stock-analyzer-v2\src\61-smart-signals/
+80-PROJECTS\stock-analyzer-v2\src\61-smart-signals\__init__.py
+80-PROJECTS\stock-analyzer-v2\src\61-smart-signals\indicators/
+80-PROJECTS\stock-analyzer-v2\src\61-smart-signals\indicators\__init__.py
+80-PROJECTS\stock-analyzer-v2\src\61-smart-signals\signal_generator.py
+80-PROJECTS\stock-analyzer-v2\src\62-arbitrage/
+80-PROJECTS\stock-analyzer-v2\src\62-arbitrage\__init__.py
+80-PROJECTS\stock-analyzer-v2\src\62-arbitrage\arbitrage_scanner.py
+80-PROJECTS\stock-analyzer-v2\src\__init__.py
+80-PROJECTS\stock-analyzer-v2\tests/

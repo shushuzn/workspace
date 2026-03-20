@@ -1,0 +1,46 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T17:14:16.431421
+# ---
+Command failed with exit code 1.
+[stdout]
+[Adaptive] 使用通用工作流 (未识别任务类型：general)
+[Adaptive] Task category: general
+[Adaptive] Steps to skip: []
+============================================================
+CoPaw Entry Point - 强制工作流入口
+============================================================
+Task: "Push P4 to GitHub"
+Task Type: simplified
+Flow ID: 20260318-universal-workflow-001-simplified
+Session ID: session-20260320171359
+Start Time: 2026-03-20T17:13:59.194909
+[防护] 自动防护层已激活
+[工作流] 强制执行器已激活
+============================================================
+============================================================
+[WorkflowEnforcer] Initialized for session session-20260320171359
+[WorkflowEnforcer] Flow ID: 20260318-universal-workflow-001-simplified
+[WorkflowEnforcer] Total steps: 5
+[WorkflowEnforcer] Enforcement: ENABLED
+[工作流] 强制执行器已初始化 - 5步
+
+[OK] execution-state.json 已初始化
+  路径：flow-archive\20260318-universal-workflow-001-simplified\execution-state.json
+  总步骤：5
+
+[ERROR] 'gbk' codec can't encode character '\u2713' in position 18: illegal multibyte sequence
+
+============================================================
+会话结束
+============================================================
+状态：失败
+持续时间：0.0s
+完成率：0%
+工作流合规：False
+============================================================
+
+
+============================================================
+Step 1.5: 自动注册工具
+============================================================
+  [REGISTER] 无新工具需要注册
