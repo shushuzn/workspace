@@ -1,0 +1,118 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:49:09.309611
+# ---
+# 通用工作流配置
+
+**Flow ID:** `20260318-universal-workflow-001`  
+**Status:** ✅ Active (默认)  
+**Usage:** 所有任务默认使用此 Flow ID
+
+---
+
+## 🎯 核心原则
+
+**任何任务都使用这个工作流**，不需要指定 Flow ID。
+
+```bash
+# 完成任何任务后执行
+py 30-scripts-tools\session_end.py "任务描述"
+
+# 自动使用 Flow ID: 20260318-universal-workflow-001
+```
+
+---
+
+## 📋 使用场景
+
+### 1. 代码开发任务
+```bash
+py session_end.py "Backend API 完成"
+# → Flow: 20260318-universal-workflow-001
+```
+
+### 2. 文档编写任务
+```bash
+py session_end.py "文档更新完成"
+# → Flow: 20260318-universal-workflow-001
+```
+
+### 3. 研究分析任务
+```bash
+py session_end.py "领域研究分析完成"
+# → Flow: 20260318-universal-workflow-001
+```
+
+### 4. 配置修改任务
+```bash
+py session_end.py "配置文件优化"
+# → Flow: 20260318-universal-workflow-001
+```
+
+---
+
+## 📁 文件归档位置
+
+```
+flow-archive/20260318-universal-workflow-001/
+├── review.json              # 批判者审查结果
+├── execution-log.json       # 工作流执行日志
+└── (其他任务文件)           # 按日期自动归档
+```
+
+---
+
+## 🔍 批判者审查
+
+所有任务完成后**自动触发**批判者审查：
+
+```bash
+# 自动执行 (在 session_end.py 中)
+py 30-scripts-tools\auto-critic_v7.py -t "任务名" -p final --flow_id 20260318-universal-workflow-001
+```
+
+**审查结果:** `flow-archive/20260318-universal-workflow-001/review.json`
+
+---
+
+## 📊 Git 提交规范
+
+所有提交自动标注 Flow ID：
+
+```
+[FLOW ID: 20260318-universal-workflow-001] 任务描述
+```
+
+**示例:**
+```
+[FLOW ID: 20260318-universal-workflow-001] 通用工作流配置 - 对话默认绑定
+```
+
+---
+
+## ⚠️ 注意事项
+
+1. **不需要手动指定 Flow ID** - 系统自动使用
+2. **所有任务共享同一 Flow** - 统一归档到 `20260318-universal-workflow-001`
+3. **批判者审查自动触发** - 每次 session_end 自动执行
+4. **Git 提交自动标注** - 提交消息包含 Flow ID
+
+---
+
+## 🚀 快速命令
+
+```bash
+# 完成任务后执行这一句就够了
+py 30-scripts-tools\session_end.py "完成描述"
+
+# 查看 Flow 状态
+dir flow-archive\20260318-universal-workflow-001
+
+# 查看审查结果
+cat flow-archive\20260318-universal-workflow-001\review.json
+```
+
+---
+
+**Last Updated:** 2026-03-18  
+**Version:** 1.0  
+**Author:** Claw

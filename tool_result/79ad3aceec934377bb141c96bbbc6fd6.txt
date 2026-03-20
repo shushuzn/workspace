@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:55:46.565136
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 100-150 of 5948)
+        {
+          "name": "topic",
+          "type": "string",
+          "required": true,
+          "description": "头脑风暴主题"
+        },
+        {
+          "name": "constraints",
+          "type": "list",
+          "required": false,
+          "description": "约束条件列表"
+        }
+      ],
+      "validation": {
+        "output_file": "30-scripts-tools/brainstorm_topic.json"
+      },
+      "triggers": [
+        "manual"
+      ],
+      "review_required": false,
+      "blocking": true,
+      "timeout_seconds": 600,
+      "category": "automation",
+      "categorized_at": "2026-03-19T17:20:34.330700",
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013720",
+      "quality_score": 56.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      },
+      "examples": [
+        "py brainstorm_define.py --topic \"AI  Agent 自主性提升\"",
+        "py brainstorm_define.py --topic \"工具库优化\" --constraints \"[\"时间<1 小时\", \"不影响核心功能\"]\""
+      ],
+      "improved_at": "2026-03-19T18:20:28.908454",
+      "improvement_version": "1.1.0"
+    },
+    "brainstorm-action": {
+      "tool_id": "brainstorm-action",
+      "name": "Brainstorm Action",
+      "description": "头脑风暴行动规划工具 - 将头脑风暴结果转化为可执行的行动计划，包含步骤、时间、负责人",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\brainstorm_action.py",
+
+[5798 more lines. Use start_line=151 to continue.]

@@ -1,0 +1,25 @@
+# tool_name: glob_search
+# created_at: 2026-03-20T16:53:11.376203
+# ---
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\MEMORY-OPTIMIZATION-PHASE2-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\MEMORY-OPTIMIZATION-PHASE3-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\MEMORY-OPTIMIZATION-PHASE4-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-5A-SMART-CACHING-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-5B-INTELLIGENT-RETRIEVAL-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-5C-ML-OPTIMIZATION-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-5D-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-6-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-6A-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-6B-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-6C-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-6D-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-6E-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE-7-PLAN.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE1-COMPLETE-SUMMARY.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE2-BREAKTHROUGH-SUMMARY.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\PHASE3-BREAKTHROUGH-SUMMARY.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\session-breakthrough-phase1.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\SESSION-COMPLETE-PHASE4-PROGRESS.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\SESSION-STATUS-PHASE4-STARTED.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\STOCK-ANALYZER-PHASE3-FRAUD.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\STOCK-ANALYZER-PHASE3-RISK.md

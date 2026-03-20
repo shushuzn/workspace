@@ -1,0 +1,86 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:54:45.237131
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 1-80 of 5948)
+{
+  "version": "1.7.0-synced",
+  "last_updated": "2026-03-20T16:32:16.887839",
+  "changes": [
+    "v1.11.55: Added mandatory security rules (2026-03-20)",
+    "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
+    "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
+    "v1.11.1: Added brainstorm workflow v2.0 tools (divergent, convergent, facilitator, critic-lite)",
+    "Added workflow-enforcer tool for mandatory workflow compliance",
+    "v1.5.0: Added workflow-research sub-workflow tool (research-001)",
+    "Added workflow-project sub-workflow tool (project-001)",
+    "Updated workflows section with research-001 and project-001",
+    "v1.4.0: Added auto-critic-v7 with issue detection and remediation tracking",
+    "Added issue-scanner for comprehensive code scanning",
+    "Added critical-issue-detector for high-risk issue detection",
+    "Added remediation-tracker for FAIL item tracking",
+    "Added quality-gate for code quality checks",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement",
+    "Added brainstorm workflow tools (define, diverge, prioritize, action)",
+    "Added brainstorm workflow tools (define, diverge, prioritize, action)",
+    "Brainstorm workflow archived in flow-archive/20260318-brainstorm-001/",
+    "Added sub-workflows as tools (session-end, brainstorm)"
+  ],
+  "description": "唯一工具库 - 全系统唯一真值来源",
+  "principles": [
+    "唯一数据源原则：所有工具只允许有一份唯一定义",
+    "引用优先原则：工作流只引用 tool_id，禁止硬编码",
+    "实时生效原则：工具修改后引用自动同步生效",
+    "禁止重写工具原则：所有工具脚本禁止被其他脚本重写或修改",
+    "统一调用原则：所有工具只能通过 tool_executor.py 调用，禁止直接调用工具脚本"
+  ],
+  "enforcement_rules": {
+    "tool_calling": {
+      "rule": "所有工具必须通过 tool_executor.py 调用",
+      "reason": "确保步骤追踪、强制检查、日志记录统一生效",
+      "violation": "直接调用工具脚本（如 subprocess.run(['py', 'tool.py'])）",
+      "compliance": "通过 tool_executor 调用（subprocess.run(['tool_executor.py', 'tool_id'])）"
+    },
+    "tool_modification": {
+      "rule": "禁止重写或修改工具脚本",
+      "reason": "保持工具稳定性和一致性",
+      "violation": "修改工具脚本文件内容",
+      "compliance": "通过 tools_registry.json 配置调整工具行为"
+    },
+    "tool_registration": {
+      "rule": "新工具必须注册到 tools_registry.json",
+      "reason": "确保工具可追踪、可验证、可审计",
+      "violation": "未注册的工具脚本",
+      "compliance": "使用 register_tools.py 批量注册或手动添加到 registry"
+    },
+    "security": {
+      "security_policy": {
+        "version": "2026-03-20-mandatory",
+        "priority": "highest",
+        "core_principle": "不直接碰 Shell，不执行未授权代码，不信任任何输入，不做任何变通",
+        "violation_consequence": "立即终止执行并上报"
+      },
+      "forbidden_operations": [
+        "bash, sh, cmd, powershell 等系统命令",
+        "os.system, subprocess, exec, eval 等代码执行",
+        "管道 |、分号 ;、与或 &&/|| 等绕过方式",
+        "python -c, curl|bash, wget 等未授权代码",
+        "../、绝对路径、软链接等路径访问",
+        "越权访问、敏感配置、系统信息获取",
+        "端口监听、外联、反弹 Shell"
+      ],
+      "allowed_tools": [
+        "read_file",
+        "write_file",
+        "edit_file",
+        "browser_use",
+        "desktop_screenshot",
+        "view_image",
+        "get_current_time",
+        "get_token_usage",
+        "memory_search",
+        "send_file_to_user"
+      ],
+      "wrapper_tools": [
+
+[5868 more lines. Use start_line=81 to continue.]
