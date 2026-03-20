@@ -136,6 +136,9 @@ py 30-scripts-tools/memory_distiller_v2.py --check-quality --threshold 0.90
 
 # 意识状态
 py 30-scripts-tools/memory_consciousness_emergence.py status --brief
+
+# 会话压缩检查
+py 30-scripts-tools/auto_session_compressor.py --auto
 ```
 
 ---
@@ -173,6 +176,23 @@ py 30-scripts-tools/memory_consciousness_emergence.py higher-order-thought --ord
 py 30-scripts-tools/self_healing.py --auto-heal
 py 30-scripts-tools/cache_manager.py --stats --brief
 ```
+
+## 📊 会话压缩检查 (每 2 小时)
+
+```bash
+py 30-scripts-tools/auto_session_compressor.py --auto
+```
+
+**检查项:**
+1. 今日会话是否已压缩？
+2. 如未压缩 → 自动执行 `post_session_compress.py --auto`
+3. 验证上下文<100KB
+4. 更新会话状态
+
+**压缩目标:**
+- 完整对话：~50KB → 结构化摘要：~2KB (-96%)
+- Token 使用：~12,500 → ~500 (-96%)
+- 上下文总量：<100KB
 
 **错误模式:**
 1. API Token 过期 → 自动刷新

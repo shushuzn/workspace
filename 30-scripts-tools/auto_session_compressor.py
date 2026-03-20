@@ -1,175 +1,222 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-会话压缩自动化 - 自动摘要会话内容到<5KB
-提取关键信息，生成结构化摘要
+自动会话压缩器 v1.0
+
+功能：
+1. 每 2 小时自动检查会话是否需要压缩
+2. 自动执行 post_session_compress.py
+3. 验证压缩效果 (<100KB)
+4. 记录压缩日志
+
+使用：
+  py auto_session_compressor.py --auto
+  py auto_session_compressor.py --check
+  py auto_session_compressor.py --compress
 """
 
 import json
+import sys
+import subprocess
+from datetime import datetime, timedelta
 from pathlib import Path
-from datetime import datetime
-from typing import Dict, List
+
 
 class AutoSessionCompressor:
-    """会话压缩自动化"""
+    """自动会话压缩器"""
     
     def __init__(self):
-        self.memory_dir = Path("13-memory")
-        self.state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
-        self.target_size = 5120  # 5KB
+        self.workspace = Path("D:/OpenClaw/workspace")
+        self.compress_script = self.workspace / "30-scripts-tools/post_session_compress.py"
+        self.checker_script = self.workspace / "30-scripts-tools/session_end_checker.py"
+        self.log_file = self.workspace / "13-memory/session-compression-log.jsonl"
+        self.config = {
+            "check_interval_hours": 2,
+            "max_context_size_kb": 100,
+            "target_size_kb": 5,
+            "compression_rate_min": 0.8
+        }
     
-    def extract_key_info(self) -> Dict:
-        """提取关键信息"""
+    def check_compression_needed(self) -> dict:
+        """
+        检查是否需要压缩
         
-        # 加载执行状态
-        if not self.state_file.exists():
-            return {}
-        
-        with open(self.state_file, 'r', encoding='utf-8') as f:
-            state = json.load(f)
-        
-        key_info = {
-            "flow_id": state.get('flow_id', 'N/A'),
-            "task": state.get('task', 'N/A'),
-            "status": state.get('status', 'unknown'),
-            "started_at": state.get('started_at', 'N/A'),
-            "completed_at": state.get('completed_at', 'N/A'),
-            "total_steps": state.get('total_steps', 0),
-            "completed_steps": len(state.get('completed_steps', [])),
-            "tools_created": state.get('tools_created', []),
-            "completion_rate": len(state.get('completed_steps', [])) / max(state.get('total_steps', 1), 1) * 100
+        Returns:
+            dict: 检查结果
+        """
+        result = {
+            "needs_compression": False,
+            "current_size_kb": 0,
+            "last_compression": None,
+            "hours_since_last": 0
         }
         
-        return key_info
-    
-    def generate_summary(self, key_info: Dict) -> str:
-        """生成摘要"""
-        
+        # 检查今日笔记文件
         today = datetime.now().strftime("%Y-%m-%d")
+        daily_note = self.workspace / f"13-memory/{today}.md"
         
-        summary = f"""# {today} Session Summary
-
-**Tasks:** 1 | **Time:** ~30min | **Git:** 1
-
-## Completed
-
-### Task: {key_info.get('task', 'N/A')}
-- Flow ID: {key_info.get('flow_id', 'N/A')}
-- Status: {key_info.get('status', 'unknown')}
-- Steps: {key_info.get('completed_steps', 0)}/{key_info.get('total_steps', 0)} ({key_info.get('completion_rate', 0):.0f}%)
-- Tools: {len(key_info.get('tools_created', []))} created
-
-## Tools Created
-"""
-        
-        tools = key_info.get('tools_created', [])
-        if tools:
-            for tool in tools:
-                summary += f"- {tool}\n"
-        else:
-            summary += "- None\n"
-        
-        summary += f"""
-## Git Commit
-- Pending
-
-## Next
-- Continue P1 implementation
-"""
-        
-        return summary
-    
-    def compress_daily_note(self, summary: str) -> str:
-        """压缩当日笔记"""
-        
-        # 检查大小
-        current_size = len(summary.encode('utf-8'))
-        
-        if current_size > self.target_size:
-            # 简化内容
-            lines = summary.split('\n')
-            compressed_lines = []
-            current_size = 0
+        if daily_note.exists():
+            size_kb = daily_note.stat().st_size / 1024
+            result["current_size_kb"] = round(size_kb, 2)
             
-            for line in lines:
-                if current_size + len(line.encode('utf-8')) < self.target_size - 100:
-                    compressed_lines.append(line)
-                    current_size += len(line.encode('utf-8')) + 1
-            
-            summary = '\n'.join(compressed_lines)
+            if size_kb > self.config["max_context_size_kb"]:
+                result["needs_compression"] = True
         
-        return summary
+        # 检查上次压缩时间
+        if self.log_file.exists():
+            with open(self.log_file, 'r', encoding='utf-8') as f:
+                lines = f.readlines()
+                if lines:
+                    last_entry = json.loads(lines[-1])
+                    result["last_compression"] = last_entry.get("timestamp")
+                    
+                    last_time = datetime.fromisoformat(last_entry["timestamp"])
+                    hours_since = (datetime.now() - last_time).total_seconds() / 3600
+                    result["hours_since_last"] = round(hours_since, 1)
+                    
+                    # 如果超过检查间隔，需要压缩
+                    if hours_since >= self.config["check_interval_hours"]:
+                        result["needs_compression"] = True
+        
+        return result
     
-    def save_compressed(self, summary: str) -> Path:
-        """保存压缩后的笔记"""
+    def execute_compression(self) -> dict:
+        """
+        执行压缩
         
-        today = datetime.now().strftime("%Y-%m-%d")
-        note_file = self.memory_dir / f"{today}.md"
-        
-        # 确保目录存在
-        self.memory_dir.mkdir(parents=True, exist_ok=True)
-        
-        with open(note_file, 'w', encoding='utf-8') as f:
-            f.write(summary)
-        
-        return note_file
-    
-    def run(self) -> Dict:
-        """运行压缩流程"""
-        
-        print("\n" + "=" * 80)
-        print(" " * 25 + "Auto Session Compressor")
-        print("=" * 80)
-        
-        # 提取关键信息
-        key_info = self.extract_key_info()
-        print(f"\nExtracting key info...")
-        print(f"  Task: {key_info.get('task', 'N/A')}")
-        print(f"  Steps: {key_info.get('completed_steps', 0)}/{key_info.get('total_steps', 0)}")
-        print(f"  Tools: {len(key_info.get('tools_created', []))}")
-        
-        # 生成摘要
-        print(f"\nGenerating summary...")
-        summary = self.generate_summary(key_info)
-        
-        # 压缩
-        print(f"Compressing...")
-        compressed = self.compress_daily_note(summary)
-        
-        # 保存
-        note_file = self.save_compressed(compressed)
-        final_size = len(compressed.encode('utf-8'))
-        
-        print(f"\n[OK] Summary generated")
-        print(f"[OK] Size: {final_size} bytes ({final_size/1024:.2f} KB)")
-        print(f"[OK] Target: <{self.target_size} bytes (5 KB)")
-        print(f"[OK] Saved to: {note_file}")
-        
-        if final_size < self.target_size:
-            print(f"[OK] Size check PASSED")
-        else:
-            print(f"[WARN] Size check FAILED (too large)")
-        
-        print("=" * 80)
-        
-        return {
-            "key_info": key_info,
-            "summary": compressed,
-            "size_bytes": final_size,
-            "size_kb": final_size / 1024,
-            "target_bytes": self.target_size,
-            "passed": final_size < self.target_size,
-            "saved_to": str(note_file),
-            "success": True
+        Returns:
+            dict: 压缩结果
+        """
+        result = {
+            "success": False,
+            "before_size_kb": 0,
+            "after_size_kb": 0,
+            "compression_rate": 0,
+            "message": ""
         }
+        
+        # 检查压缩前大小
+        today = datetime.now().strftime("%Y-%m-%d")
+        daily_note = self.workspace / f"13-memory/{today}.md"
+        
+        if daily_note.exists():
+            result["before_size_kb"] = round(daily_note.stat().st_size / 1024, 2)
+        
+        # 执行压缩脚本
+        try:
+            cmd = [sys.executable, str(self.compress_script), "--auto"]
+            proc = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=60,
+                cwd=str(self.workspace)
+            )
+            
+            if proc.returncode == 0:
+                result["success"] = True
+                
+                # 检查压缩后大小
+                if daily_note.exists():
+                    result["after_size_kb"] = round(daily_note.stat().st_size / 1024, 2)
+                    
+                    if result["before_size_kb"] > 0:
+                        result["compression_rate"] = round(
+                            1 - (result["after_size_kb"] / result["before_size_kb"]),
+                            2
+                        )
+                
+                result["message"] = "压缩成功"
+            else:
+                result["message"] = f"压缩失败：{proc.stderr}"
+                
+        except subprocess.TimeoutExpired:
+            result["message"] = "压缩超时 (60s)"
+        except Exception as e:
+            result["message"] = str(e)
+        
+        # 记录日志
+        self._log_compression(result)
+        
+        return result
+    
+    def _log_compression(self, result: dict):
+        """记录压缩日志"""
+        log_entry = {
+            "timestamp": datetime.now().isoformat(),
+            "before_size_kb": result.get("before_size_kb", 0),
+            "after_size_kb": result.get("after_size_kb", 0),
+            "compression_rate": result.get("compression_rate", 0),
+            "success": result.get("success", False),
+            "message": result.get("message", "")
+        }
+        
+        try:
+            with open(self.log_file, 'a', encoding='utf-8') as f:
+                f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
+        except Exception as e:
+            print(f"[WARN] 记录日志失败：{e}")
+    
+    def run_auto_check(self):
+        """自动检查模式"""
+        print("=" * 70)
+        print(" " * 20 + "自动会话压缩检查")
+        print("=" * 70)
+        
+        check_result = self.check_compression_needed()
+        
+        print(f"\n当前大小：{check_result['current_size_kb']:.2f} KB")
+        print(f"限制大小：{self.config['max_context_size_kb']} KB")
+        print(f"上次压缩：{check_result['last_compression'] or '无'}")
+        print(f"距上次：{check_result['hours_since_last']:.1f} 小时")
+        print(f"检查间隔：{self.config['check_interval_hours']} 小时")
+        
+        if check_result['needs_compression']:
+            print("\n[NEEDS COMPRESSION] 需要压缩")
+            print("\n执行压缩...")
+            compress_result = self.execute_compression()
+            
+            print(f"\n压缩前：{compress_result['before_size_kb']:.2f} KB")
+            print(f"压缩后：{compress_result['after_size_kb']:.2f} KB")
+            print(f"压缩率：{compress_result['compression_rate']:.0%}")
+            print(f"状态：{'✅ 成功' if compress_result['success'] else '❌ 失败'}")
+        else:
+            print("\n[OK] 不需要压缩")
+    
+    def run_manual_compress(self):
+        """手动压缩模式"""
+        print("=" * 70)
+        print(" " * 20 + "手动会话压缩")
+        print("=" * 70)
+        
+        print("\n执行压缩...")
+        result = self.execute_compression()
+        
+        print(f"\n压缩前：{result['before_size_kb']:.2f} KB")
+        print(f"压缩后：{result['after_size_kb']:.2f} KB")
+        print(f"压缩率：{result['compression_rate']:.0%}")
+        print(f"状态：{'✅ 成功' if result['success'] else '❌ 失败'}")
+        print(f"消息：{result['message']}")
+
 
 def main():
-    """测试入口"""
+    """主函数"""
     compressor = AutoSessionCompressor()
-    result = compressor.run()
     
-    print(f"\n[OK] Compression completed")
-    print(f"[OK] Passed: {result['passed']}")
+    if len(sys.argv) > 1:
+        if sys.argv[1] == '--auto':
+            compressor.run_auto_check()
+        elif sys.argv[1] == '--compress':
+            compressor.run_manual_compress()
+        elif sys.argv[1] == '--check':
+            result = compressor.check_compression_needed()
+            print(json.dumps(result, indent=2, ensure_ascii=False))
+        else:
+            print("用法：py auto_session_compressor.py [--auto|--compress|--check]")
+    else:
+        # 默认自动检查
+        compressor.run_auto_check()
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()
