@@ -28,13 +28,13 @@ if sys.platform == 'win32':
 
 
 INTENT_PATTERNS = {
-    "optimize": ["优化", "提升", "改进", "效率", "优化", "optimize", "improve"],
-    "analyze": ["分析", "研究", "调研", "分析", "analyze", "research"],
+    "optimize": ["优化", "提升", "改进", "效率", "optimize", "improve"],
+    "analyze": ["分析", "研究", "调研", "analyze", "research"],
     "discover": ["发现", "探索", "扫描", "搜索", "discover", "scan", "find"],
     "automate": ["自动", "批量", "批量处理", "automate", "batch"],
     "report": ["报告", "总结", "导出", "report", "summary", "export"],
     "brainstorm": ["头脑风暴", "创意", "想法", "brainstorm", "idea"],
-    "test": ["测试", "验证", "检查", "test", "verify"],
+    "test": ["验证", "检查", "test", "verify"],
     "manage": ["管理", "整理", "归档", "manage", "organize"]
 }
 
@@ -58,13 +58,14 @@ class NLWorkflowGenerator:
         self.tools_dir = self.workspace / "30-scripts-tools"
     
     def detect_intent(self, description: str) -> Dict:
-        """检测意图"""
+        """检测意图 - 优先精确匹配"""
         desc_lower = description.lower()
         matched_intents = []
         
+        # 精确匹配 (优先)
         for intent, patterns in INTENT_PATTERNS.items():
             for pattern in patterns:
-                if pattern.lower() in desc_lower:
+                if len(pattern) >= 2 and pattern.lower() in desc_lower:
                     matched_intents.append(intent)
                     break
         
@@ -72,7 +73,7 @@ class NLWorkflowGenerator:
         return {
             "primary": primary,
             "all": list(set(matched_intents)),
-            "confidence": len(matched_intents) / len(INTENT_PATTERNS)
+            "confidence": len(matched_intents) / len(INTENT_PATTERNS) if matched_intents else 0
         }
     
     def recommend_tools(self, intents: List[str]) -> List[Dict]:

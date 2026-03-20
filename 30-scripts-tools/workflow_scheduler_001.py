@@ -74,10 +74,12 @@ class WorkflowScheduler:
     
     def add_task(self, name: str, command: str, cron: str = "0 9 * * *") -> Dict:
         tasks = self._load_tasks()
-        task_id = name.lower().replace(" ", "-")
+        # 清理name中的特殊字符
+        clean_name = name.strip().strip('"').strip("'")
+        task_id = clean_name.lower().replace(" ", "-").replace('"', "").replace("'", "")
         if task_id in tasks["tasks"]:
             return {"status": "error", "reason": "Task already exists"}
-        tasks["tasks"][task_id] = {"id": task_id, "name": name, "cron": cron, "command": command, "enabled": True, "last_run": None}
+        tasks["tasks"][task_id] = {"id": task_id, "name": clean_name, "cron": cron, "command": command, "enabled": True, "last_run": None}
         self._save_tasks(tasks)
         return {"status": "success", "task_id": task_id}
     
@@ -133,19 +135,30 @@ def main():
             return 0
         
         if cmd == "--add":
-            # Format: --add "name|command|cron"
-            full = sys.argv[2] if len(sys.argv) > 2 else None
-            if not full or "|" not in full:
-                print("Usage: py scheduler.py --add <name|command|cron>")
-                print("Example: py scheduler.py --add \"Test|echo hello|0 9 * * *\"")
+            # Format: --add "task.json"
+            arg = sys.argv[2] if len(sys.argv) > 2 else None
+            if not arg:
+                print("Usage: py scheduler.py --add <json>")
+                print("Example: py scheduler.py --add \"{'name':'Test','command':'echo hello','cron':'0 9 * * *'}\"")
                 return 1
-            parts = full.split("|")
-            name = parts[0].strip()
-            command = parts[1].strip()
-            cron = parts[2].strip() if len(parts) > 2 else "0 9 * * *"
-            result = scheduler.add_task(name, command, cron)
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
+            try:
+                if arg.startswith("{"):
+                    data = json.loads(arg)
+                    result = scheduler.add_task(data["name"], data["command"], data.get("cron", "0 9 * * *"))
+                else:
+                    parts = [p.strip() for p in arg.split("|")]
+                    if len(parts) < 2:
+                        print("Error: Need name|command format")
+                        return 1
+                    result = scheduler.add_task(parts[0], parts[1], parts[2] if len(parts) > 2 else "0 9 * * *")
+                print(json.dumps(result, ensure_ascii=False, indent=2))
+                return 0
+            except json.JSONDecodeError as e:
+                print(f"JSON Error: {e}")
+                return 1
+            except Exception as e:
+                print(f"Error: {e}")
+                return 1
         
         if cmd == "--run":
             tid = sys.argv[2] if len(sys.argv) > 2 else None
