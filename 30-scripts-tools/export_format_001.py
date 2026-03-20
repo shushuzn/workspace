@@ -2,13 +2,14 @@
 # -*- coding: utf-8 -*-
 """
 EXPORT-FORMAT-001 Multi-Format Exporter
-【多格式导出器】
+【多格式导出器 v2】
 
 功能:
   - 导出路线图为 JSON/MD/HTML/TXT
   - 批量导出
   - 模板支持
-  - 自定义样式
+  - API文档自动生成
+  - 示例代码生成
 """
 import json
 import sys
@@ -228,6 +229,73 @@ class MultiFormatExporter:
                 results[dim] = result["files"]
         
         return results
+    
+    def export_api_docs(self, dimension: str = "stock_analysis") -> str:
+        """导出API文档"""
+        roadmap = self.load_roadmap(dimension)
+        if "error" in roadmap:
+            return roadmap["error"]
+        
+        tools = roadmap.get("tools", [])
+        
+        docs = f"# {dimension.upper()} API Documentation\nGenerated: {datetime.now().isoformat()}\n\n## Overview\nTotal Tools: {len(tools)}\n\n## Tool Registry\n\n"
+        for tool in tools:
+            tool_id = tool.get("tool_id", "unknown")
+            name = tool.get("name", "Unknown")
+            desc = tool.get("description", "No description")
+            file_path = tool.get("file_path", "N/A")
+            
+            docs += f"""### {name}
+
+**ID:** `{tool_id}`  
+**File:** `{file_path}`  
+**Description:** {desc}
+
+**Usage:**
+```bash
+py {file_path}
+```
+
+---
+"""
+        
+        output_file = self.export_dir / f"{dimension}_api_docs.md"
+        output_file.write_text(docs, encoding="utf-8")
+        return str(output_file)
+    
+    def generate_examples(self, dimension: str = "stock_analysis") -> str:
+        """生成示例代码"""
+        roadmap = self.load_roadmap(dimension)
+        if "error" in roadmap:
+            return roadmap["error"]
+        
+        tools = roadmap.get("tools", [])
+        
+        examples = f"""# {dimension.upper()} Usage Examples
+Generated: {datetime.now().isoformat()}
+
+## Python Examples
+
+"""
+        for tool in tools:
+            name = tool.get("name", "Unknown")
+            file_path = tool.get("file_path", "unknown.py")
+            
+            examples += f"""### {name}
+
+```python
+# Import and run {name}
+import subprocess
+result = subprocess.run(["python", "{file_path}"], capture_output=True, text=True)
+print(result.stdout)
+```
+
+---
+"""
+        
+        output_file = self.export_dir / f"{dimension}_examples.md"
+        output_file.write_text(examples, encoding="utf-8")
+        return str(output_file)
 
 
 def main():
@@ -243,6 +311,18 @@ def main():
         if sys.argv[1] == "--all":
             results = exporter.export_all_dimensions()
             print(json.dumps(results, ensure_ascii=False, indent=2))
+            return 0
+        
+        if sys.argv[1] == "--api-docs":
+            dim = sys.argv[2] if len(sys.argv) > 2 else "stock_analysis"
+            path = exporter.export_api_docs(dim)
+            print(f"API Docs: {path}")
+            return 0
+        
+        if sys.argv[1] == "--examples":
+            dim = sys.argv[2] if len(sys.argv) > 2 else "stock_analysis"
+            path = exporter.generate_examples(dim)
+            print(f"Examples: {path}")
             return 0
         
         if sys.argv[1] == "--json":
@@ -277,14 +357,16 @@ def main():
                 print(f"Exported: {path}")
             return 0
     
-    print("EXPORT-FORMAT-001 Multi-Format Exporter")
+    print("EXPORT-FORMAT-001 Multi-Format Exporter v2")
     print("Usage:")
-    print("  py export_format_001.py --dimension <dim> # Export all formats")
-    print("  py export_format_001.py --all             # Export all dimensions")
+    print("  py export_format_001.py --dimension <dim>  # Export all formats")
+    print("  py export_format_001.py --all              # Export all dimensions")
     print("  py export_format_001.py --json <dim>       # Export JSON only")
     print("  py export_format_001.py --md <dim>         # Export Markdown only")
     print("  py export_format_001.py --html <dim>       # Export HTML only")
     print("  py export_format_001.py --txt <dim>        # Export Text only")
+    print("  py export_format_001.py --api-docs <dim>   # Generate API docs")
+    print("  py export_format_001.py --examples <dim>   # Generate examples")
     return 0
 
 
