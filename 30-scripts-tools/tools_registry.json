@@ -1,7 +1,8 @@
 {
-  "version": "1.11.81-ai-suggest",
+  "version": "1.11.83-phase1-tools",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.83: Add Phase 1 tools for research + utility dimensions",
     "v1.11.82: Add 5 new dimensions to roadmap (research/utility/testing/integration/reporting)",
     "v1.11.81: Add AI-SUGGEST-001 (Week 3 - 头脑风暴完成)",
     "v1.11.80: Add VELOCITY-PREDICT-001 + DASHBOARD-VIEW-001 (Week 2 tools)",
@@ -6258,6 +6259,61 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T23:30:00.000000"
+    },
+    "research-001-topic": {
+      "tool_id": "research-001-topic",
+      "name": "RESEARCH-001 Research Topic Generator",
+      "description": "研究主题生成器 - 生成研究主题ideas、分类整理、优先级排序",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/research_001_topic.py",
+      "category": "research",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:35:00.000000"
+    },
+    "research-002-literature": {
+      "tool_id": "research-002-literature",
+      "name": "RESEARCH-002 Literature Review Assistant",
+      "description": "文献综述助手 - 生成文献综述模板、结构化整理、引用格式化",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/research_002_literature.py",
+      "category": "research",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:36:00.000000"
+    },
+    "util-001-string": {
+      "tool_id": "util-001-string",
+      "name": "UTIL-001 String Utility",
+      "description": "字符串工具 - 字符串格式化、编码转换、模板填充",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/util_001_string.py",
+      "category": "utility",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:37:00.000000"
+    },
+    "util-002-file": {
+      "tool_id": "util-002-file",
+      "name": "UTIL-002 File Utility",
+      "description": "文件工具 - 文件批量处理、查找重复、统计信息",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/util_002_file.py",
+      "category": "utility",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:38:00.000000"
+    },
+    "util-003-datetime": {
+      "tool_id": "util-003-datetime",
+      "name": "UTIL-003 DateTime Utility",
+      "description": "日期时间工具 - 日期格式转换、时区处理、时间计算",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/util_003_datetime.py",
+      "category": "utility",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:39:00.000000"
     }
   },
   "workflows": {
