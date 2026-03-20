@@ -57,13 +57,13 @@ class WorkflowScheduler:
             HISTORY_FILE.write_text(json.dumps({"history": []}, ensure_ascii=False, indent=2))
     
     def _load_tasks(self) -> dict:
-        return json.loads(TASKS_FILE.read_text(encoding="utf-8"))
+        return json.loads(TASKS_FILE.read_text(encoding="utf-8", errors="replace"))
     
     def _save_tasks(self, data: dict):
         TASKS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2))
     
     def _load_history(self) -> dict:
-        return json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
+        return json.loads(HISTORY_FILE.read_text(encoding="utf-8", errors="replace"))
     
     def _save_history(self, data: dict):
         HISTORY_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2))
@@ -97,7 +97,7 @@ class WorkflowScheduler:
             return {"status": "error", "reason": "Task not found"}
         task = tasks["tasks"][task_id]
         try:
-            result = subprocess.run(task["command"], shell=True, capture_output=True, text=True, timeout=120, cwd=str(self.workspace))
+            result = subprocess.run(task["command"], shell=True, capture_output=True, text=True, timeout=120, cwd=str(self.workspace), encoding="utf-8", errors="replace")
             history = self._load_history()
             history["history"].append({"task_id": task_id, "executed_at": datetime.now().isoformat(), "status": "success" if result.returncode == 0 else "failed"})
             if len(history["history"]) > 100:
