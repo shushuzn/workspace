@@ -111,6 +111,7 @@ def show_methods():
     print("  --random <topic>      Random Input (triggers unconventional)")
     print("  --analogy <topic>     Analogy (cross-domain solutions)")
     print("  --refine <problem>    Auto-refine problem (AI enhancement)")
+    print("\n[NEXT STEP] Run: py brainstorm_next.py for workflow guidance")
 
 def main():
     if len(sys.argv) == 1:
@@ -157,6 +158,11 @@ def main():
         topic = " ".join(sys.argv[2:]) or "优化工作流"
         import subprocess
         subprocess.run([sys.executable, "30-scripts-tools/brainstorm_refine.py", topic])
+        return
+    
+    if sys.argv[1] == "--next":
+        import subprocess
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_next.py"])
         return
     
     if sys.argv[1] == "--step":
