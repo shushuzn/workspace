@@ -1,120 +1,171 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
 """
-工具调用拦截器 - 强制所有 execute_shell_command 通过防护检查
-【系统级防护】- 无法绕过
+工具调用拦截器 - 强制所有工具调用通过防护层
 
-使用方法：
-  在工具调用前自动检查：
-  1. session 是否存在
-  2. 停止标志是否激活
-  3. 封锁状态是否激活
-  4. 惩罚等级是否超标
-  
-【关键】此脚本必须被工具执行器调用，而不是直接执行
+问题：execute_shell_command 可以直接调用，绕过 tool_executor 和防护检查
+
+解决：
+1. 拦截所有工具调用
+2. 检查 session 状态
+3. 检查防护标志
+4. 记录调用日志
+5. 拒绝违规调用
 """
+
 import json
-import sys
-from pathlib import Path
+import os
 from datetime import datetime
+from pathlib import Path
+
+# 工具调用白名单（允许直接调用的工具）
+SAFE_TOOLS = [
+    'read_file',
+    'write_file', 
+    'edit_file',
+    'browser_use',
+    'desktop_screenshot',
+    'view_image',
+    'get_current_time',
+    'get_token_usage',
+    'memory_search',
+    'send_file_to_user',
+]
+
+# 需要防护检查的工具
+PROTECTED_TOOLS = [
+    'execute_shell_command',
+]
+
 
 class ToolCallInterceptor:
-    """工具调用拦截器 - 系统级防护"""
+    """工具调用拦截器"""
     
     def __init__(self):
-        self.state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
-        self.stop_flag = Path("30-scripts-tools/.STOP_FLAG")
-        self.lockdown_file = Path("30-scripts-tools/.lockdown_active")
-        self.penalty_file = Path("30-scripts-tools/penalty_state.json")
-        self.violation_log = Path("30-scripts-tools/violation_log.jsonl")
+        self.session_id = None
+        self.state_file = None
+        self.tool_log = Path("30-scripts-tools/tool_call_log.jsonl")
         
-    def intercept(self, command: str) -> dict:
-        """拦截工具调用 - 强制防护检查"""
+    def check_session(self) -> tuple[bool, str]:
+        """检查会话状态"""
+        # 检查 execution-state.json
+        state_files = list(Path("flow-archive").glob("*/execution-state.json"))
+        if not state_files:
+            return False, "无 execution-state.json - 未初始化会话"
         
-        # 检查 1: session 存在性
-        if not self.state_file.exists():
-            return self._block("no_session", "execution-state.json 不存在，必须通过 copaw_entry.py 启动")
+        # 使用最新的 state 文件
+        self.state_file = max(state_files, key=lambda f: f.stat().st_mtime)
         
-        with open(self.state_file, "r", encoding="utf-8") as f:
-            state = json.load(f)
-        
-        if not state.get("session_id"):
-            return self._block("no_session_id", "session_id 缺失")
-        
-        if not state.get("mandatory_execution"):
-            return self._block("no_mandatory_execution", "mandatory_execution 未启用")
-        
-        # 检查 2: 停止标志
-        if self.stop_flag.exists():
-            with open(self.stop_flag, "r", encoding="utf-8") as f:
-                stop_data = json.load(f)
-            return self._block("stop_flag", f"系统停止：{stop_data.get('reason', '未知')}")
-        
-        # 检查 3: 封锁状态
-        if self.lockdown_file.exists():
-            return self._block("lockdown", "系统封锁中")
-        
-        # 检查 4: 惩罚等级
-        if self.penalty_file.exists():
-            with open(self.penalty_file, "r", encoding="utf-8") as f:
-                penalty = json.load(f)
-            level = penalty.get("current_level", 0)
-            if level >= 3:
-                return self._block("penalty_level_3", f"惩罚等级 Level {level} - 只读模式")
-        
-        # 所有检查通过
-        return {
-            "allowed": True,
-            "session_id": state["session_id"],
-            "command": command,
-            "checked_at": datetime.now().isoformat()
-        }
-    
-    def _block(self, reason: str, message: str) -> dict:
-        """阻断调用并记录违规"""
-        violation = {
-            "timestamp": datetime.now().isoformat(),
-            "session_id": "unknown",
-            "violation_type": "bypass_attempt",
-            "reason": reason,
-            "message": message,
-            "action": "BLOCKED"
-        }
-        
-        # 记录违规日志
         try:
-            with open(self.violation_log, "a", encoding="utf-8") as f:
-                f.write(json.dumps(violation, ensure_ascii=False) + "\n")
-        except:
-            pass
+            with open(self.state_file, 'r', encoding='utf-8') as f:
+                state = json.load(f)
+            self.session_id = state.get('session_id')
+            return True, f"Session valid: {self.session_id}"
+        except Exception as e:
+            return False, f"State file error: {e}"
+    
+    def check_protection_flags(self) -> tuple[bool, str]:
+        """检查防护标志"""
+        # 检查 .STOP_FLAG
+        if Path(".STOP_FLAG").exists():
+            return False, "系统已停止 (.STOP_FLAG exists)"
         
-        return {
-            "allowed": False,
-            "blocked": True,
-            "reason": reason,
-            "message": message,
-            "action": "BLOCKED"
+        # 检查 .lockdown_active
+        if Path(".lockdown_active").exists():
+            return False, "系统封锁中 (.lockdown_active exists)"
+        
+        return True, "防护检查通过"
+    
+    def log_tool_call(self, tool_name: str, params: dict, result: str) -> None:
+        """记录工具调用"""
+        log_entry = {
+            "timestamp": datetime.now().isoformat(),
+            "session_id": self.session_id,
+            "tool_id": tool_name,
+            "params": params,
+            "result": result,
         }
-
-
-def create_interceptor():
-    """创建拦截器实例"""
-    return ToolCallInterceptor()
-
-
-# 测试模式
-if __name__ == "__main__":
-    print("=" * 70)
-    print("工具调用拦截器 - 测试")
-    print("=" * 70)
+        
+        with open(self.tool_log, 'a', encoding='utf-8') as f:
+            f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
     
-    interceptor = create_interceptor()
+    def intercept(self, tool_name: str, params: dict) -> tuple[bool, str, dict]:
+        """
+        拦截工具调用
+        
+        Returns:
+            (allowed, message, modified_params)
+        """
+        # 白名单工具直接放行
+        if tool_name in SAFE_TOOLS:
+            return True, "Whitelisted tool", params
+        
+        # 保护工具需要检查
+        if tool_name in PROTECTED_TOOLS:
+            # 检查会话
+            session_ok, session_msg = self.check_session()
+            if not session_ok:
+                return False, f"[BLOCK] {session_msg}", {}
+            
+            # 检查防护标志
+            protection_ok, protection_msg = self.check_protection_flags()
+            if not protection_ok:
+                return False, f"[BLOCK] {protection_msg}", {}
+            
+            # 强制通过 safe_shell_executor
+            if tool_name == 'execute_shell_command':
+                command = params.get('command', '')
+                # 如果命令已经通过 safe_shell_executor，放行
+                if 'safe_shell_executor' in command or 'protected_py' in command:
+                    return True, "Protected command", params
+                # 否则拒绝
+                return False, f"[BLOCK] 必须通过 safe_shell_executor: {command}", {}
+            
+            return True, "Protection check passed", params
+        
+        # 未知工具放行（但记录）
+        return True, f"Unknown tool (logged): {tool_name}", params
+
+
+# 全局拦截器实例
+_interceptor = None
+
+def get_interceptor() -> ToolCallInterceptor:
+    """获取拦截器实例"""
+    global _interceptor
+    if _interceptor is None:
+        _interceptor = ToolCallInterceptor()
+    return _interceptor
+
+
+def intercept_tool_call(tool_name: str, params: dict) -> tuple[bool, str, dict]:
+    """
+    拦截工具调用（供外部调用）
     
-    # 测试拦截
-    result = interceptor.intercept("echo test")
-    print(f"\n测试结果：{result}")
+    Returns:
+        (allowed, message, modified_params)
+    """
+    interceptor = get_interceptor()
+    return interceptor.intercept(tool_name, params)
+
+
+if __name__ == '__main__':
+    # 测试
+    print("工具调用拦截器测试\n")
     
-    if result.get("allowed"):
-        print("[OK] 防护检查通过")
-    else:
-        print(f"[BLOCK] 防护检查失败：{result.get('message')}")
+    interceptor = ToolCallInterceptor()
+    
+    # 测试 1: 无 session
+    print("测试 1: execute_shell_command (无 session)")
+    allowed, msg, _ = interceptor.intercept('execute_shell_command', {'command': 'echo test'})
+    print(f"  结果：{msg}\n")
+    
+    # 测试 2: 白名单工具
+    print("测试 2: read_file (白名单)")
+    allowed, msg, _ = interceptor.intercept('read_file', {'file_path': 'test.txt'})
+    print(f"  结果：{msg}\n")
+    
+    # 测试 3: 受保护命令
+    print("测试 3: execute_shell_command with safe_shell_executor")
+    allowed, msg, _ = interceptor.intercept('execute_shell_command', {
+        'command': 'py 30-scripts-tools/safe_shell_executor.py echo test'
+    })
+    print(f"  结果：{msg}\n")

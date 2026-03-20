@@ -1,0 +1,62 @@
+# tool_name: read_file
+# created_at: 2026-03-20T10:35:58.003431
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\safe_shell_executor.py  (lines 45-100 of 173)
+    
+    def execute(self, command: str, description: str = None) -> dict:
+        """执行 shell 命令 - 强制防护检查"""
+        
+        # 步骤 1: 拦截器检查
+        check_result = self.interceptor.intercept(command)
+        
+        if not check_result.get("allowed"):
+            print("=" * 70)
+            print("[BLOCK] 命令执行被阻断")
+            print(f"[BLOCK] 原因：{check_result.get('message')}")
+            print("=" * 70)
+            return {
+                "status": "blocked",
+                "reason": check_result.get("reason"),
+                "message": check_result.get("message"),
+                "returncode": -1
+            }
+        
+        # 步骤 2: 危险命令检查
+        is_dangerous = any(cmd in command.lower() for cmd in self.DANGEROUS_COMMANDS)
+        if is_dangerous:
+            print("=" * 70)
+            print(f"[WARN] 检测到危险命令：{command}")
+            print("[WARN] 需要人工确认")
+            print("=" * 70)
+            # 简单实现：直接阻断危险命令
+            return {
+                "status": "blocked",
+                "reason": "dangerous_command",
+                "message": f"危险命令被阻断：{command}",
+                "returncode": -1
+            }
+        
+        # 步骤 3: 执行命令
+        print(f"[EXEC] {command}")
+        try:
+            result = subprocess.run(
+                command,
+                shell=True,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                timeout=300
+            )
+            
+            output = {
+                "status": "success" if result.returncode == 0 else "error",
+                "returncode": result.returncode,
+                "stdout": result.stdout[:5000] if result.stdout else "",
+                "stderr": result.stderr[:5000] if result.stderr else ""
+            }
+        except subprocess.TimeoutExpired:
+            output = {
+                "status": "error",
+                "returncode": -1,
+
+[73 more lines. Use start_line=101 to continue.]

@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-20T10:36:35.851003
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\safe_shell_executor.py  (lines 45-70 of 177)
+    
+    def execute(self, command: str, description: str = None) -> dict:
+        """执行 shell 命令 - 强制防护检查"""
+        
+        # 步骤 1: 防护层检查（使用 auto_protection_layer）
+        try:
+            from auto_protection_layer import get_protection_layer
+            layer = get_protection_layer()
+            allowed, msg = layer.before_tool_call('execute_shell_command', {'command': command})
+            if not allowed:
+                print("=" * 70)
+                print("[BLOCK] 命令执行被阻断")
+                print(f"[BLOCK] 原因：{msg}")
+                print("=" * 70)
+                return {
+                    "status": "blocked",
+                    "reason": "protection_blocked",
+                    "message": msg,
+                    "returncode": -1
+                }
+        except ImportError:
+            pass  # 防护层不可用时跳过
+        
+        # 步骤 2: 危险命令检查
+        is_dangerous = any(cmd in command.lower() for cmd in self.DANGEROUS_COMMANDS)
+        if is_dangerous:
+
+[107 more lines. Use start_line=71 to continue.]

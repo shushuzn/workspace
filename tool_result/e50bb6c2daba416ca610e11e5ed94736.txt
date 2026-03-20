@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-20T10:36:45.565498
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\safe_shell_executor.py  (lines 60-100 of 180)
+            }
+        
+        # 步骤 2: 检查停止标志
+        if Path(".STOP_FLAG").exists():
+            print("=" * 70)
+            print("[BLOCK] 命令执行被阻断")
+            print("[BLOCK] 原因：.STOP_FLAG exists - 系统已停止")
+            print("=" * 70)
+            return {
+                "status": "blocked",
+                "reason": "stop_flag",
+                "message": "系统已停止",
+                "returncode": -1
+            }
+            print("=" * 70)
+            print(f"[WARN] 检测到危险命令：{command}")
+            print("[WARN] 需要人工确认")
+            print("=" * 70)
+            # 简单实现：直接阻断危险命令
+            return {
+                "status": "blocked",
+                "reason": "dangerous_command",
+                "message": f"危险命令被阻断：{command}",
+                "returncode": -1
+            }
+        
+        # 步骤 3: 执行命令
+        print(f"[EXEC] {command}")
+        try:
+            result = subprocess.run(
+                command,
+                shell=True,
+                capture_output=True,
+                text=True,
+                encoding="utf-8",
+                timeout=300
+            )
+            
+            output = {
+                "status": "success" if result.returncode == 0 else "error",
+                "returncode": result.returncode,
+
+[80 more lines. Use start_line=101 to continue.]
