@@ -108,8 +108,9 @@ def show_methods():
     print("  --scamper <topic>     SCAMPER method (7 operators)")
     print("  --sixhats <topic>     Six Thinking Hats")
     print("  --reverse <topic>     Reverse Brainstorming")
-    print("  --random <topic>      Random Input (Coming soon)")
-    print("  --analogy <topic>     Analogy (Coming soon)")
+    print("  --random <topic>      Random Input (triggers unconventional)")
+    print("  --analogy <topic>     Analogy (cross-domain solutions)")
+    print("  --refine <problem>    Auto-refine problem (AI enhancement)")
 
 def main():
     if len(sys.argv) == 1:
@@ -138,6 +139,24 @@ def main():
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
         subprocess.run([sys.executable, "30-scripts-tools/brainstorm_reverse.py", topic])
+        return
+    
+    if sys.argv[1] == "--random":
+        topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
+        import subprocess
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_random.py", topic])
+        return
+    
+    if sys.argv[1] == "--analogy":
+        topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
+        import subprocess
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_analogy.py", topic])
+        return
+    
+    if sys.argv[1] == "--refine":
+        topic = " ".join(sys.argv[2:]) or "优化工作流"
+        import subprocess
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_refine.py", topic])
         return
     
     if sys.argv[1] == "--step":
