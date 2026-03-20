@@ -1,7 +1,8 @@
 {
-  "version": "1.11.77-roadmap-master",
+  "version": "1.11.78-brainstorm",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.78: Add brainstorm_roadmap_tools.py - 头脑风暴创新路线图工具ideas",
     "v1.11.77: Add ROADMAP-MASTER-001 multi-dimensional roadmap manager (4 dimensions)",
     "v1.11.76: Add OPTIMAP-001 roadmap manager + optimization roadmap",
     "v1.11.75: Add SMART-CACHE-001, PROMPT-OPTIMIZER-001, BATCH-TOOLS-001",
@@ -6187,6 +6188,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T23:00:00.000000"
+    },
+    "brainstorm-roadmap-tools": {
+      "tool_id": "brainstorm-roadmap-tools",
+      "name": "Brainstorm Roadmap Tools Ideas",
+      "description": "头脑风暴创新路线图工具 - 生成15+创新工具ideas并制定实施计划",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/brainstorm_roadmap_tools.py",
+      "category": "brainstorm",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:10:00.000000"
     }
   },
   "workflows": {

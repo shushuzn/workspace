@@ -1,0 +1,27 @@
+[
+  {
+    "rank": 1,
+    "name": "GANTT-CHART-001",
+    "reason": "可视化最直观,用户最需要"
+  },
+  {
+    "rank": 2,
+    "name": "EXPORT-FORMAT-001",
+    "reason": "实用性高,快速产出"
+  },
+  {
+    "rank": 3,
+    "name": "VELOCITY-PREDICT-001",
+    "reason": "数据驱动预测"
+  },
+  {
+    "rank": 4,
+    "name": "DASHBOARD-VIEW-001",
+    "reason": "综合展示"
+  },
+  {
+    "rank": 5,
+    "name": "AI-SUGGEST-001",
+    "reason": "智能推荐"
+  }
+]

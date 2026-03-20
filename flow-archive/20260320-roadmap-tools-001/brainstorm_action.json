@@ -1,0 +1,28 @@
+[
+  {
+    "phase": 1,
+    "tools": [
+      "GANTT-CHART-001",
+      "EXPORT-FORMAT-001"
+    ],
+    "timeline": "Week 1",
+    "llm_calls": 1
+  },
+  {
+    "phase": 2,
+    "tools": [
+      "VELOCITY-PREDICT-001",
+      "DASHBOARD-VIEW-001"
+    ],
+    "timeline": "Week 2",
+    "llm_calls": 1
+  },
+  {
+    "phase": 3,
+    "tools": [
+      "AI-SUGGEST-001"
+    ],
+    "timeline": "Week 3",
+    "llm_calls": 2
+  }
+]

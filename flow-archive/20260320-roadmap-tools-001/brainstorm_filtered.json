@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "TIMELINE-VIEW-001",
+    "category": "visualization",
+    "description": "可视化时间线视图",
+    "llm_needed": false
+  },
+  {
+    "id": 2,
+    "name": "DEPENDENCY-TRACK-001",
+    "category": "analysis",
+    "description": "依赖关系追踪",
+    "llm_needed": false
+  },
+  {
+    "id": 3,
+    "name": "RISK-ASSESS-001",
+    "category": "analysis",
+    "description": "风险评估工具",
+    "llm_needed": false
+  },
+  {
+    "id": 4,
+    "name": "GANTT-CHART-001",
+    "category": "visualization",
+    "description": "甘特图生成",
+    "llm_needed": false
+  },
+  {
+    "id": 5,
+    "name": "MILESTONE-TRACK-001",
+    "category": "tracking",
+    "description": "里程碑追踪",
+    "llm_needed": false
+  },
+  {
+    "id": 6,
+    "name": "VERSION-COMPARE-001",
+    "category": "comparison",
+    "description": "版本对比工具",
+    "llm_needed": false
+  },
+  {
+    "id": 7,
+    "name": "EXPORT-FORMAT-001",
+    "category": "export",
+    "description": "多格式导出PDF/MD/HTML",
+    "llm_needed": false
+  },
+  {
+    "id": 8,
+    "name": "VELOCITY-PREDICT-001",
+    "category": "prediction",
+    "description": "进度预测基于历史",
+    "llm_needed": false
+  }
+]

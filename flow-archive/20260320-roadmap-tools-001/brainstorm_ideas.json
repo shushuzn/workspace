@@ -1,0 +1,107 @@
+[
+  {
+    "id": 1,
+    "name": "TIMELINE-VIEW-001",
+    "category": "visualization",
+    "description": "可视化时间线视图",
+    "llm_needed": false
+  },
+  {
+    "id": 2,
+    "name": "DEPENDENCY-TRACK-001",
+    "category": "analysis",
+    "description": "依赖关系追踪",
+    "llm_needed": false
+  },
+  {
+    "id": 3,
+    "name": "RISK-ASSESS-001",
+    "category": "analysis",
+    "description": "风险评估工具",
+    "llm_needed": false
+  },
+  {
+    "id": 4,
+    "name": "GANTT-CHART-001",
+    "category": "visualization",
+    "description": "甘特图生成",
+    "llm_needed": false
+  },
+  {
+    "id": 5,
+    "name": "MILESTONE-TRACK-001",
+    "category": "tracking",
+    "description": "里程碑追踪",
+    "llm_needed": false
+  },
+  {
+    "id": 6,
+    "name": "VERSION-COMPARE-001",
+    "category": "comparison",
+    "description": "版本对比工具",
+    "llm_needed": false
+  },
+  {
+    "id": 7,
+    "name": "EXPORT-FORMAT-001",
+    "category": "export",
+    "description": "多格式导出PDF/MD/HTML",
+    "llm_needed": false
+  },
+  {
+    "id": 8,
+    "name": "VELOCITY-PREDICT-001",
+    "category": "prediction",
+    "description": "进度预测基于历史",
+    "llm_needed": false
+  },
+  {
+    "id": 9,
+    "name": "PRIORITY-RANK-001",
+    "category": "ranking",
+    "description": "智能优先级排序",
+    "llm_needed": false
+  },
+  {
+    "id": 10,
+    "name": "RETRO-UPDATE-001",
+    "category": "management",
+    "description": "回溯更新历史",
+    "llm_needed": false
+  },
+  {
+    "id": 11,
+    "name": "INTEGRATE-GIT-001",
+    "category": "integration",
+    "description": "Git提交关联",
+    "llm_needed": false
+  },
+  {
+    "id": 12,
+    "name": "CATEGORY-FILTER-001",
+    "category": "filter",
+    "description": "多维筛选过滤",
+    "llm_needed": false
+  },
+  {
+    "id": 13,
+    "name": "DASHBOARD-VIEW-001",
+    "category": "visualization",
+    "description": "综合仪表盘",
+    "llm_needed": false
+  },
+  {
+    "id": 14,
+    "name": "AI-SUGGEST-001",
+    "category": "ai",
+    "description": "AI智能建议下一步",
+    "llm_needed": true
+  },
+  {
+    "id": 15,
+    "name": "COLLAB-WORKSPACE-001",
+    "category": "collaboration",
+    "description": "协作工作区",
+    "llm_needed": false
+  }
+]

@@ -1,0 +1,8 @@
+{
+  "step": "problem_definition",
+  "topic": "创新路线图工具ideas",
+  "background": "现有ROADMAP-MASTER-001已支持4维度管理，需要更多创新功能",
+  "constraints": "需要LLM调用最少化，可自动化实现",
+  "expected_output": "15+创新工具ideas，带优先级和实施计划",
+  "created_at": "2026-03-20T22:12:16.719386"
+}
