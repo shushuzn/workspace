@@ -6435,6 +6435,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T22:55:00.000000"
+    },
+    "optimize-master-001": {
+      "tool_id": "optimize-master-001",
+      "name": "OPTIMIZE-MASTER-001 优化大师",
+      "description": "优化大师 - 整合所有优化工具的统一入口、一键执行完整优化",
+      "version": "1.0",
+      "file_path": "30-scripts-tools/optimize_master_001.py",
+      "category": "optimization",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:00:00.000000"
     }
   },
   "workflows": {
