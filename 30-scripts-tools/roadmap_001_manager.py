@@ -176,21 +176,25 @@ class RoadmapManager:
             }
     
     def _get_next_tool(self) -> str:
-        """获取下一个工具 ID"""
-        # 收集所有已存在的工具
-        all_tools = []
-        for phase in self.roadmap["phases"].values():
-            all_tools.extend(phase["tools"])
+        """获取下一个工具 ID - 跳过已完成的"""
+        completed = set(self.roadmap.get("completed_tools", []))
         
-        # 找最大的 SA 编号
+        # 收集所有工具，找第一个未完成的
+        for phase in self.roadmap["phases"].values():
+            for tool in phase["tools"]:
+                if tool not in completed:
+                    return tool
+        
+        # 如果都完成了，返回下一个新编号
         max_num = 0
-        for tool in all_tools:
-            if tool.startswith("SA-"):
-                try:
-                    num = int(tool.split("-")[1])
-                    max_num = max(max_num, num)
-                except:
-                    pass
+        for phase in self.roadmap["phases"].values():
+            for tool in phase["tools"]:
+                if tool.startswith("SA-"):
+                    try:
+                        num = int(tool.split("-")[1])
+                        max_num = max(max_num, num)
+                    except:
+                        pass
         
         return f"SA-{max_num + 1:03d}"
     
@@ -219,9 +223,20 @@ class RoadmapManager:
         """获取下一步"""
         next_tool = self._get_next_tool()
         
+        # 计算下一工具属于哪个阶段
+        next_phase = None
+        for phase_id, phase in self.roadmap["phases"].items():
+            if next_tool in phase["tools"]:
+                next_phase = int(phase_id)
+                break
+        
+        # 如果没找到，使用 current_phase 或 6
+        if not next_phase:
+            next_phase = self.roadmap.get("current_phase", 6)
+        
         return {
             "next_tool": next_tool,
-            "next_phase": self.roadmap.get("next_phase"),
+            "next_phase": next_phase,
             "version": self.roadmap["version"]
         }
     
