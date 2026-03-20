@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-20T17:55:29.478795
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\stock-analyzer-v2\src\60-ai-brief\ai_brief_generator.py  (lines 1-50 of 166)
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+AI Brief Generator - Automated Stock Analysis Briefs
+
+Generates AI-powered analysis briefs combining:
+- Technical analysis summary
+- Fundamental analysis highlights
+- Risk assessment (fraud + risk monitor)
+- Market sentiment indicators
+- Investment recommendations
+
+Author: OpenClaw Team
+Date: 2026-03-20
+Version: 1.0
+"""
+
+import sys
+import json
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Optional
+
+# UTF-8 encoding for Windows
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except AttributeError:
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer)
+
+
+class AIBriefGenerator:
+    """Generate AI-powered stock analysis briefs"""
+    
+    def __init__(self, config: Optional[Dict] = None):
+        self.config = config or {}
+        self.version = "1.0.0"
+    
+    def generate_brief(self, ticker: str, analysis_data: Dict) -> Dict:
+        """
+        Generate a comprehensive AI brief for a stock
+        
+        Args:
+            ticker: Stock ticker symbol
+            analysis_data: Dictionary containing analysis results from:
+                - Technical analysis
+                - Fundamental analysis
+                - Fraud detection
+                - Risk monitoring
+        
+
+[116 more lines. Use start_line=51 to continue.]

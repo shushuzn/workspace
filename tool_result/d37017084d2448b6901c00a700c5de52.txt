@@ -1,0 +1,21 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T17:32:02.370249
+# ---
+50-ton-hackathon-2026 - https://github.com/shushuzn/50-ton-hackathon-2026
+ai_research_os - https://github.com/shushuzn/ai_research_os
+AlphaBrief - https://github.com/shushuzn/AlphaBrief
+cnt-conductivity-prediction - https://github.com/shushuzn/cnt-conductivity-prediction
+Crazy-Factory - https://github.com/shushuzn/Crazy-Factory
+Ghost-in-the-Wire- - https://github.com/shushuzn/Ghost-in-the-Wire-
+intentkit - https://github.com/shushuzn/intentkit
+knowledge-card-generator - https://github.com/shushuzn/knowledge-card-generator
+lig-conductivity-prediction - https://github.com/shushuzn/lig-conductivity-prediction
+lig-theory-model - https://github.com/shushuzn/lig-theory-model
+obsidian-sync - https://github.com/shushuzn/obsidian-sync
+OpenBB - https://github.com/shushuzn/OpenBB
+OpenClaw-RL - https://github.com/shushuzn/OpenClaw-RL
+Snake-Game - https://github.com/shushuzn/Snake-Game
+stock-analyzer-v2 - https://github.com/shushuzn/stock-analyzer-v2
+watcher - https://github.com/shushuzn/watcher
+workspace - https://github.com/shushuzn/workspace
+worldmonitor - https://github.com/shushuzn/worldmonitor

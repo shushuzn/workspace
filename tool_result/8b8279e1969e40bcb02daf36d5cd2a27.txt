@@ -1,0 +1,169 @@
+# tool_name: read_file
+# created_at: 2026-03-20T17:55:43.778114
+# ---
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+AI Brief Generator - Automated Stock Analysis Briefs
+
+Generates AI-powered analysis briefs combining:
+- Technical analysis summary
+- Fundamental analysis highlights
+- Risk assessment (fraud + risk monitor)
+- Market sentiment indicators
+- Investment recommendations
+
+Author: OpenClaw Team
+Date: 2026-03-20
+Version: 1.0
+"""
+
+import sys
+import json
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, List, Optional
+
+# UTF-8 encoding for Windows
+try:
+    sys.stdout.reconfigure(encoding='utf-8')
+except AttributeError:
+    import codecs
+    sys.stdout = codecs.getwriter('utf-8')(sys.stdout.buffer)
+
+
+class AIBriefGenerator:
+    """Generate AI-powered stock analysis briefs"""
+    
+    def __init__(self, config: Optional[Dict] = None):
+        self.config = config or {}
+        self.version = "1.0.0"
+    
+    def generate_brief(self, ticker: str, analysis_data: Dict) -> Dict:
+        """
+        Generate a comprehensive AI brief for a stock
+        
+        Args:
+            ticker: Stock ticker symbol
+            analysis_data: Dictionary containing analysis results from:
+                - Technical analysis
+                - Fundamental analysis
+                - Fraud detection
+                - Risk monitoring
+        
+        Returns:
+            Dict containing the AI brief
+        """
+        brief = {
+            "ticker": ticker,
+            "generated_at": datetime.now().isoformat(),
+            "version": self.version,
+            "sections": {
+                "executive_summary": self._generate_summary(analysis_data),
+                "technical_outlook": self._analyze_technical(analysis_data.get("technical", {})),
+                "fundamental_score": self._analyze_fundamental(analysis_data.get("fundamental", {})),
+                "risk_assessment": self._assess_risks(analysis_data.get("risk", {})),
+                "fraud_indicators": self._check_fraud(analysis_data.get("fraud", {})),
+                "recommendation": self._generate_recommendation(analysis_data)
+            }
+        }
+        return brief
+    
+    def _generate_summary(self, data: Dict) -> str:
+        """Generate executive summary"""
+        return f"AI-generated analysis brief for {data.get('ticker', 'N/A')}"
+    
+    def _analyze_technical(self, tech_data: Dict) -> Dict:
+        """Analyze technical indicators"""
+        return {
+            "trend": tech_data.get("trend", "neutral"),
+            "signals": tech_data.get("signals", []),
+            "momentum": tech_data.get("momentum", 0)
+        }
+    
+    def _analyze_fundamental(self, fund_data: Dict) -> Dict:
+        """Analyze fundamental metrics"""
+        return {
+            "score": fund_data.get("score", 50),
+            "pe_ratio": fund_data.get("pe_ratio"),
+            "growth": fund_data.get("growth", 0)
+        }
+    
+    def _assess_risks(self, risk_data: Dict) -> Dict:
+        """Assess overall risk level"""
+        return {
+            "volatility": risk_data.get("volatility", "medium"),
+            "liquidity": risk_data.get("liquidity", "medium"),
+            "valuation": risk_data.get("valuation", "fair")
+        }
+    
+    def _check_fraud(self, fraud_data: Dict) -> Dict:
+        """Check fraud detection results"""
+        return {
+            "beneish_m_score": fraud_data.get("m_score"),
+            "altman_z": fraud_data.get("z_score"),
+            "piotroski_f": fraud_data.get("f_score"),
+            "verdict": "clean" if fraud_data.get("flags", 0) == 0 else "review"
+        }
+    
+    def _generate_recommendation(self, data: Dict) -> Dict:
+        """Generate investment recommendation"""
+        # Simple logic - can be enhanced with ML
+        score = 50
+        
+        # Adjust based on technical
+        if data.get("technical", {}).get("trend") == "bullish":
+            score += 10
+        
+        # Adjust based on fraud check
+        if data.get("fraud", {}).get("flags", 0) > 0:
+            score -= 20
+        
+        if score >= 70:
+            recommendation = "BUY"
+        elif score >= 50:
+            recommendation = "HOLD"
+        elif score >= 30:
+            recommendation = "REDUCE"
+        else:
+            recommendation = "SELL"
+        
+        return {
+            "action": recommendation,
+            "confidence": abs(score - 50) * 2,
+            "score": score
+        }
+    
+    def batch_generate(self, tickers: List[str], data_sources: Dict) -> List[Dict]:
+        """Generate briefs for multiple tickers"""
+        results = []
+        for ticker in tickers:
+            brief = self.generate_brief(ticker, data_sources.get(ticker, {}))
+            results.append(brief)
+        return results
+
+
+def main():
+    """CLI entry point"""
+    if len(sys.argv) < 2:
+        print("Usage: python ai_brief_generator.py <ticker>")
+        sys.exit(1)
+    
+    ticker = sys.argv[1]
+    generator = AIBriefGenerator()
+    
+    # Demo data - in production, would fetch from analysis modules
+    demo_data = {
+        "ticker": ticker,
+        "technical": {"trend": "bullish", "signals": ["MA_CROSS", "RSI_OVERSOLD"], "momentum": 0.65},
+        "fundamental": {"score": 72, "pe_ratio": 18.5, "growth": 0.15},
+        "risk": {"volatility": "low", "liquidity": "high", "valuation": "fair"},
+        "fraud": {"m_score": -2.1, "z_score": 3.2, "f_score": 7, "flags": 0}
+    }
+    
+    brief = generator.generate_brief(ticker, demo_data)
+    print(json.dumps(brief, indent=2, ensure_ascii=False))
+
+
+if __name__ == "__main__":
+    main()

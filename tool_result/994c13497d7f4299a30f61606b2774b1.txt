@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-20T17:55:37.682211
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\stock-analyzer-v2\src\60-ai-brief\ai_brief_generator.py  (lines 50-100 of 166)
+        
+        Returns:
+            Dict containing the AI brief
+        """
+        brief = {
+            "ticker": ticker,
+            "generated_at": datetime.now().isoformat(),
+            "version": self.version,
+            "sections": {
+                "executive_summary": self._generate_summary(analysis_data),
+                "technical_outlook": self._analyze_technical(analysis_data.get("technical", {})),
+                "fundamental_score": self._analyze_fundamental(analysis_data.get("fundamental", {})),
+                "risk_assessment": self._assess_risks(analysis_data.get("risk", {})),
+                "fraud_indicators": self._check_fraud(analysis_data.get("fraud", {})),
+                "recommendation": self._generate_recommendation(analysis_data)
+            }
+        }
+        return brief
+    
+    def _generate_summary(self, data: Dict) -> str:
+        """Generate executive summary"""
+        return f"AI-generated analysis brief for {data.get('ticker', 'N/A')}"
+    
+    def _analyze_technical(self, tech_data: Dict) -> Dict:
+        """Analyze technical indicators"""
+        return {
+            "trend": tech_data.get("trend", "neutral"),
+            "signals": tech_data.get("signals", []),
+            "momentum": tech_data.get("momentum", 0)
+        }
+    
+    def _analyze_fundamental(self, fund_data: Dict) -> Dict:
+        """Analyze fundamental metrics"""
+        return {
+            "score": fund_data.get("score", 50),
+            "pe_ratio": fund_data.get("pe_ratio"),
+            "growth": fund_data.get("growth", 0)
+        }
+    
+    def _assess_risks(self, risk_data: Dict) -> Dict:
+        """Assess overall risk level"""
+        return {
+            "volatility": risk_data.get("volatility", "medium"),
+            "liquidity": risk_data.get("liquidity", "medium"),
+            "valuation": risk_data.get("valuation", "fair")
+        }
+    
+    def _check_fraud(self, fraud_data: Dict) -> Dict:
+        """Check fraud detection results"""
+        return {
+            "beneish_m_score": fraud_data.get("m_score"),
+
+[66 more lines. Use start_line=101 to continue.]

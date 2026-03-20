@@ -1,0 +1,81 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T18:13:32.389900
+# ---
+Command failed with exit code 1.
+[stdout]
+============================= test session starts =============================
+platform win32 -- Python 3.13.2, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\华为\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: D:\OpenClaw\workspace
+plugins: anyio-4.12.1, freezegun-0.4.2
+collecting ... collected 9 items
+
+80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestAIBriefGenerator::test_initialization FAILED [ 11%]
+80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestAIBriefGenerator::test_generate_brief_without_api FAILED [ 22%]
+80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestAIBriefGenerator::test_generate_brief_with_mock_api FAILED [ 33%]
+80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestSignalGenerator::test_initialization FAILED [ 44%]
+80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestArbitrageScanner::test_initialization FAILED [ 55%]
+80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestNotificationService::test_initialization PASSED [ 66%]
+80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestNotificationService::test_format_signal_message PASSED [ 77%]
+80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestUtils::test_setup_logger PASSED [ 88%]
+80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestUtils::test_retry_decorator PASSED [100%]
+
+================================== FAILURES ===================================
+__________________ TestAIBriefGenerator.test_initialization ___________________
+
+self = <test_modules.TestAIBriefGenerator object at 0x000001BAB0BFE0D0>
+
+    def test_initialization(self):
+>       from ai_brief.ai_brief_generator import AIBriefGenerator
+E       ModuleNotFoundError: No module named 'ai_brief'
+
+80-PROJECTS\stock-analyzer-v2\tests\test_modules.py:16: ModuleNotFoundError
+____________ TestAIBriefGenerator.test_generate_brief_without_api _____________
+
+self = <test_modules.TestAIBriefGenerator object at 0x000001BAB0BFE990>
+
+    def test_generate_brief_without_api(self):
+>       from ai_brief.ai_brief_generator import AIBriefGenerator
+E       ModuleNotFoundError: No module named 'ai_brief'
+
+80-PROJECTS\stock-analyzer-v2\tests\test_modules.py:21: ModuleNotFoundError
+___________ TestAIBriefGenerator.test_generate_brief_with_mock_api ____________
+
+self = <test_modules.TestAIBriefGenerator object at 0x000001BAB0B82FD0>
+
+    def test_generate_brief_with_mock_api(self):
+>       from ai_brief.ai_brief_generator import AIBriefGenerator
+E       ModuleNotFoundError: No module named 'ai_brief'
+
+80-PROJECTS\stock-analyzer-v2\tests\test_modules.py:31: ModuleNotFoundError
+___________________ TestSignalGenerator.test_initialization ___________________
+
+self = <test_modules.TestSignalGenerator object at 0x000001BAB0BFE850>
+
+    def test_initialization(self):
+>       from smart_signals.signal_generator import SignalGenerator
+E       ModuleNotFoundError: No module named 'smart_signals'
+
+80-PROJECTS\stock-analyzer-v2\tests\test_modules.py:45: ModuleNotFoundError
+__________________ TestArbitrageScanner.test_initialization ___________________
+
+self = <test_modules.TestArbitrageScanner object at 0x000001BAB0BFEAD0>
+
+    def test_initialization(self):
+>       from arbitrage.arbitrage_scanner import ArbitrageScanner
+E       ModuleNotFoundError: No module named 'arbitrage'
+
+80-PROJECTS\stock-analyzer-v2\tests\test_modules.py:54: ModuleNotFoundError
+============================== warnings summary ===============================
+C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages\pytest_freezegun.py:17: 18 warnings
+  C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages\pytest_freezegun.py:17: DeprecationWarning: distutils Version classes are deprecated. Use packaging.version instead.
+    if LooseVersion(pytest.__version__) < LooseVersion('3.6.0'):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED 80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestAIBriefGenerator::test_initialization
+FAILED 80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestAIBriefGenerator::test_generate_brief_without_api
+FAILED 80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestAIBriefGenerator::test_generate_brief_with_mock_api
+FAILED 80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestSignalGenerator::test_initialization
+FAILED 80-PROJECTS/stock-analyzer-v2/tests/test_modules.py::TestArbitrageScanner::test_initialization
+================== 5 failed, 4 passed, 18 warnings in 0.55s ===================

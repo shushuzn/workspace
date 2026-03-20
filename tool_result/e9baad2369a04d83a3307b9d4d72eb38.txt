@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-20T18:19:59.410448
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\stock-analyzer-v2\src\data_fetcher.py  (lines 30-60 of 137)
+            'us': ['AAPL', 'MSFT', 'GOOGL', 'NVDA'],
+            'hk': ['0700.HK', '9988.HK'],
+            'cn': ['600519.SS', '000858.SZ']
+        })
+    
+    def fetch_ticker(self, ticker: str, period: str = "1mo", retry: int = 3) -> Optional[Dict]:
+        """Fetch data for a single ticker"""
+        if not YFINANCE_AVAILABLE:
+            return self._mock_data(ticker)
+        
+        for attempt in range(retry):
+            try:
+                stock = yf.Ticker(ticker)
+                info = stock.info
+                
+                # Get historical data
+                hist = stock.history(period=period)
+                
+                if hist.empty:
+                    return None
+            
+            if hist.empty:
+                return None
+            
+            latest = hist.iloc[-1]
+            prev = hist.iloc[-2] if len(hist) > 1 else latest
+            
+            # Calculate change
+            change = ((latest['Close'] - prev['Close']) / prev['Close']) * 100
+            
+            return {
+
+[77 more lines. Use start_line=61 to continue.]
