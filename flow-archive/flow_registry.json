@@ -139,6 +139,29 @@
         "缓存加速",
         "性能监控"
       ]
+    },
+    "20260320-stock-analysis": {
+      "business_name": "stock-analysis",
+      "description": "股票分析工作流 - 数据收集、技术分析、风险管理、可视化",
+      "created_at": "2026-03-20T10:30:00+08:00",
+      "status": "active",
+      "directory": "D:\\OpenClaw\\workspace\\flow-archive\\stock-analysis",
+      "last_updated": "2026-03-20T10:30:00+08:00",
+      "workflow_type": "subworkflow",
+      "parent_workflow": "20260318-universal-workflow-001",
+      "phases": {
+        "1": {"name": "数据收集", "tools": "SA-001~SA-004", "status": "complete"},
+        "2": {"name": "技术分析", "tools": "SA-005~SA-012", "status": "complete"},
+        "3": {"name": "风险与信号", "tools": "SA-013~SA-018", "status": "complete"},
+        "4": {"name": "可视化与自动化", "tools": "SA-019~SA-024", "status": "planned"}
+      },
+      "total_tools": 24,
+      "completed_tools": 18,
+      "progress": "75%",
+      "documentation": {
+        "roadmap": "stock-analysis-roadmap.md",
+        "mindmap": "stock-analysis-mindmap.md"
+      }
     }
   },
   "last_updated": "2026-03-20T01:40:00+08:00",
