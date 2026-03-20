@@ -1,7 +1,8 @@
 {
-  "version": "1.11.73-llm-guide",
+  "version": "1.11.74-workflow-optimizer",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.74: Add WORKFLOW-OPTIMIZER-001 for workflow analysis and optimization",
     "v1.11.73: Add LLM-GUIDE-001 for task classification and workflow optimization",
     "v1.11.72: Add AUTO-001 workflow automator for one-click flows",
     "v1.11.71: Add Phase 7 - SA-033 to SA-036 (backtest, risk, executor, analyzer)",
@@ -6117,6 +6118,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T22:10:00.000000"
+    },
+    "workflow-optimizer-001": {
+      "tool_id": "workflow-optimizer-001",
+      "name": "WORKFLOW-OPTIMIZER-001 Workflow Optimization Tool",
+      "description": "工作流优化器 - 分析LLM调用、自动步骤分离、生成优化建议",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/workflow_optimizer_001.py",
+      "category": "automation",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T22:20:00.000000"
     }
   },
   "workflows": {
