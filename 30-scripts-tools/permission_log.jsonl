@@ -1,0 +1,4 @@
+{"timestamp": "2026-03-20T10:16:02.331888", "session_id": "session-20260320101306", "role": "Executor", "tool_id": "write_file", "risk_level": "L2_写入", "allowed": true, "denial_reason": null}
+{"timestamp": "2026-03-20T10:16:02.332525", "session_id": "session-20260320101306", "role": "Executor", "tool_id": "safe_shell_executor", "risk_level": "L4_系统", "allowed": false, "denial_reason": "角色 Executor 禁止使用 L4_系统 工具"}
+{"timestamp": "2026-03-20T10:16:02.334378", "session_id": "session-20260320101306", "role": "Admin", "tool_id": "safe_shell_executor", "risk_level": "L4_系统", "allowed": true, "denial_reason": null}
+{"timestamp": "2026-03-20T10:16:02.335471", "session_id": "session-20260320101306", "role": "Critic", "tool_id": "write_file", "risk_level": "L2_写入", "allowed": false, "denial_reason": "角色 Critic 禁止使用 L2_写入 工具"}

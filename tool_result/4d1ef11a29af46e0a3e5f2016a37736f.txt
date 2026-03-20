@@ -1,0 +1,67 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T07:45:04.208922
+# ---
+Registry 版本：2.0.0-rebuilt
+工具总数：101
+
+可用工具列表 (前 30 个):
+  1. aai-scorer
+     py 30-scripts-tools\aai_scorer.py
+  2. adaptive-workflow
+     py 30-scripts-tools\adaptive_workflow.py
+  3. add-core-rules-to-workflow
+     py 30-scripts-tools\add_core_rules_to_workflow.py
+  4. auto-doc-generator
+     py 30-scripts-tools\auto_doc_generator.py
+  5. auto-format-detector
+     py 30-scripts-tools\auto_format_detector.py
+  6. auto-memory-distiller
+     py 30-scripts-tools\auto_memory_distiller.py
+  7. auto-retry
+     py 30-scripts-tools\auto_retry.py
+  8. auto-session-compressor
+     py 30-scripts-tools\auto_session_compressor.py
+  9. brainstorm-ai-assistant
+     py 30-scripts-tools\brainstorm_ai_assistant.py
+  10. brainstorm-mindmap
+     py 30-scripts-tools\brainstorm_mindmap.py
+  11. brainstorm-quality-predictor
+     py 30-scripts-tools\brainstorm_quality_predictor.py
+  12. brainstorm-stock-analysis
+     py 30-scripts-tools\brainstorm_stock_analysis.py
+  13. compression-scheduler
+     py 30-scripts-tools\compression_scheduler.py
+  14. context-aware-assistant
+     py 30-scripts-tools\context_aware_assistant.py
+  15. copaw-entry
+     py 30-scripts-tools\copaw_entry.py
+  16. core-rules-verifier
+     py 30-scripts-tools\core_rules_verifier.py
+  17. create-brainstorm-v3
+     py 30-scripts-tools\create_brainstorm_v3.py
+  18. create-dialogue-workflow
+     py 30-scripts-tools\create_dialogue_workflow.py
+  19. cron-enhanced
+     py 30-scripts-tools\cron_enhanced.py
+  20. cross-session-memory
+     py 30-scripts-tools\cross_session_memory.py
+  21. dynamic-goal-adjuster
+     py 30-scripts-tools\dynamic_goal_adjuster.py
+  22. dynamic-step-skipper
+     py 30-scripts-tools\dynamic_step_skipper.py
+  23. embedded-critic
+     py 30-scripts-tools\embedded_critic.py
+  24. emotional-intelligence
+     py 30-scripts-tools\emotional_intelligence.py
+  25. error-handler
+     py 30-scripts-tools\error_handler.py
+  26. get-workflow-steps
+     py 30-scripts-tools\get_workflow_steps.py
+  27. git-commit-helper
+     py 30-scripts-tools\git_commit_helper.py
+  28. git-precommit-check
+     py 30-scripts-tools\git_precommit_check.py
+  29. human-intent-understanding
+     py 30-scripts-tools\human_intent_understanding.py
+  30. memory-distiller
+     py 30-scripts-tools\memory_distiller.py

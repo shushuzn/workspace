@@ -1,0 +1,35 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T09:15:58.560059
+# ---
+Workflow: 20260318-universal-workflow-001
+版本：1.6.0
+总步骤：12
+
+阶段定义:
+  initialization: Step 1-2: 上下文加载 + Flow ID 绑定
+  task_analysis: Step 3-4: 任务解析 + 工具/工作流选择
+  execution: Step 5-8: 执行任务 (调用子工作流/工具)
+  validation: Step 9-10: 批判者审查 + 质量门禁
+  completion: Step 11-12: 压缩保存 + Git 提交
+
+步骤列表:
+      1 | 上下文加载验证              | context_search            | initialization
+      2 | Flow ID 绑定           | flow_manager              | initialization
+      3 | 任务解析                 | task_analyzer             | task_analysis
+      4 | 工具/工作流选择             | tool_suggester            | task_analysis
+      5 | 子工作流调度 (条件)          | workflow_scheduler        | execution
+      6 | 工具执行                 | tool_executor             | execution
+    6.5 | 工具集成验证               | integration_validator     | execution
+    6.6 | 自动化测试                | auto-test-runner          | execution
+    6.7 | 配置备份                 | config-backup             | execution
+      7 | 执行日志记录               | execution_logger          | execution
+      8 | 检查点保存                | checkpoint_saver          | execution
+    8.5 | 记忆持久化                | memory-persistence        | completion
+    8.6 | 回滚检查点                | rollback-manager          | completion
+    8.7 | 元认知评估                | metacognition-monitor     | execution
+    9.1 | 批判者最终审查              | auto_critic_v7            | validation
+   10.1 | 质量门禁                 | quality-gate-check        | validation
+   10.5 | 自主性评分                | aai-scorer                | validation
+   11.2 | 会话压缩保存               | post-session-compress     | completion
+   12.2 | Git 提交推送             | git-commit                | completion
+   13.2 | 文档生成 (可选)            | auto-doc-generator        | completion

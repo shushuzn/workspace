@@ -1,0 +1,73 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T02:57:07.906662
+# ---
+第一个工具 ID: auto-critic
+工具结构:
+{
+  "tool_id": "auto-critic",
+  "name": "Auto-Critic v6.0",
+  "description": "全自动批判者审查工具 - 事前/事中/事后全流程审查",
+  "version": "6.0",
+  "command": "py 30-scripts-tools\\auto-critic.py -t \"{task}\" -p {phase}",
+  "parameters": {
+    "task": {
+      "type": "string",
+      "required": true,
+      "description": "任务名称（用于生成审查文件名）",
+      "validation": "^[a-zA-Z0-9-_]+$"
+    },
+    "phase": {
+      "type": "string",
+      "required": true,
+      "description": "审查阶段",
+      "enum": [
+        "start",
+        "mid",
+        "final"
+      ],
+      "default": "final"
+    }
+  },
+  "validation": {
+    "review_file": "30-scripts-tools/critic-auto-{task}.json",
+    "score_threshold": 95,
+    "zero_score_items": [
+      "批判者自动调用",
+      "工具创建了必须使用",
+      "当日笔记压缩<100 行",
+      "会话压缩执行",
+      "上下文大小验证<100KB",
+      "工作区正确性 D 盘",
+      "检查项必须有证据"
+    ]
+  },
+  "triggers": [
+    "session_end",
+    "task_complete"
+  ],
+  "review_required": true,
+  "blocking": false,
+  "timeout_seconds": 60,
+  "category": "quality",
+  "categorized_at": "2026-03-19T17:20:34.330638",
+  "categorized_method": "auto",
+  "usage_count": 44,
+  "usage_files": [
+    "auto-critic.py",
+    "auto-critic_v7.py",
+    "check_key_tools.py",
+    "critical_issue_detector.py",
+    "find_unsafe_calls.py"
+  ],
+  "usage_tracked_at": "2026-03-19T17:28:52.013670",
+  "quality_score": 64.5,
+  "quality_details": {
+    "functionality": "有独特功能描述",
+    "code_quality": "文件不存在或无文件",
+    "documentation": "描述:True, 参数:True, 示例:False",
+    "usage": "中频使用 (44 次)",
+    "maintenance": "无时间戳"
+  }
+}
+
+是否有 path 字段：False

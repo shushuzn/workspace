@@ -1,0 +1,11 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T07:45:22.930784
+# ---
+[OK] Session 验证通过：session-20260320023811
+[TRACK] embedded-critic - 0.12s
+{
+  "status": "success",
+  "stdout": "Embedded Critic Test\n================================================================================\n\nTest 1: Good output\n  Score: 86.2\n  Passed: True\n\nTest 2: Empty output\n  Score: 62.8\n  Passed: False\n\nTest 3: None output\n  Score: 68.2\n  Passed: False\n  Blocking: False\n\n================================================================================\n                    Embedded Critic Status\n================================================================================\n\n[Workflow State]\n  Completion Rate:  8.3%\n  Critic Checks:    9\n\n[Quality Metrics]\n  Avg Score:        72.4/100\n  Pass Rate:        33.3%\n  Health:           NEEDS_IMPROVEMENT\n\n[WARN] Quality needs improvement!\n[ACTION] Review recent critic logs\n================================================================================\n\n[OK] Critic test completed\n",
+  "stderr": "",
+  "returncode": 0
+}

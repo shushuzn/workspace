@@ -1,0 +1,4 @@
+{"timestamp": "2026-03-20T08:39:38.283684", "event_type": "blocked", "session_id": "session-test-001", "data": {"reason": "系统封锁中，禁止所有操作"}}
+{"timestamp": "2026-03-20T08:39:38.284883", "event_type": "blocked", "session_id": "session-test-001", "data": {"reason": "系统封锁中，禁止所有操作"}}
+{"timestamp": "2026-03-20T08:39:38.285402", "event_type": "blocked", "session_id": "session-test-001", "data": {"reason": "系统封锁中，禁止执行工作流"}}
+{"timestamp": "2026-03-20T08:39:38.285857", "event_type": "blocked", "session_id": "session-test-001", "data": {"reason": "系统封锁中，禁止执行工作流"}}

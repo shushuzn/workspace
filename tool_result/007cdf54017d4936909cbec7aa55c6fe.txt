@@ -1,0 +1,202 @@
+# tool_name: read_file
+# created_at: 2026-03-20T09:03:27.924365
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 55-250 of 1030)
+      "step_id": 1,
+      "name": "上下文加载验证",
+      "description": "验证 7 个核心文件已正确加载 (<100KB)",
+      "tool_id": "context_search",
+      "stage": "initialization",
+      "parameters": {
+        "max_size_kb": 100,
+        "required_files": [
+          "SOUL.md",
+          "USER.md",
+          "AGENTS.md",
+          "TOOLS.md",
+          "HEARTBEAT.md",
+          "MEMORY.md",
+          "13-memory/YYYY-MM-DD.md"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 30,
+      "validation": {
+        "max_context_size_kb": 100,
+        "required_files_loaded": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 2,
+      "name": "Flow ID 绑定",
+      "description": "创建或绑定当前任务的 Flow ID",
+      "tool_id": "flow_manager",
+      "stage": "initialization",
+      "parameters": {
+        "action": "create_or_bind",
+        "business_name": "auto-generated"
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "flow_id_created": true,
+        "isolation_directory_exists": true
+      },
+      "conditional": {
+        "run_if": "time_remaining_minutes >= 10",
+        "skip_message": "时间不足，跳过背景研究",
+        "default": false
+      },
+      "fallback": {
+        "action": "skip_with_note",
+        "log_reason": "时间不足"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 3,
+      "name": "任务解析",
+      "description": "分析用户请求，确定任务类型和复杂度",
+      "tool_id": "task_analyzer",
+      "stage": "task_analysis",
+      "parameters": {
+        "classify_by": "complexity",
+        "complexity_levels": [
+          "simple",
+          "medium",
+          "complex"
+        ]
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "task_type_identified": true,
+        "estimated_time_minutes": "number"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 4,
+      "name": "工具/工作流选择",
+      "description": "根据任务类型选择合适的工具或子工作流",
+      "tool_id": "tool_suggester",
+      "stage": "task_analysis",
+      "parameters": {
+        "suggest_type": "workflow_or_tool",
+        "max_suggestions": 3
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "selected_workflow": "string or null",
+        "selected_tools": "array"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 5,
+      "name": "子工作流调度 (条件)",
+      "description": "如需要，调用子工作流执行",
+      "tool_id": "workflow_scheduler",
+      "stage": "execution",
+      "parameters": {},
+      "blocking": true,
+      "timeout_seconds": 600,
+      "conditional": {
+        "run_if": "subworkflow_required"
+      },
+      "subworkflows": {
+        "available": [
+          "20260318-brainstorm-001",
+          "20260318-session-end",
+          "20260318-research-001",
+          "20260318-project-001"
+        ],
+        "selection_logic": "based_on_task_type"
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "human_approval": {
+        "required": false,
+        "trigger_if": "critical_decision",
+        "timeout_minutes": 30
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+
+[780 more lines. Use start_line=251 to continue.]

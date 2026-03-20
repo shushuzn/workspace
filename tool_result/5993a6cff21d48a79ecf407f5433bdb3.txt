@@ -1,0 +1,207 @@
+# tool_name: read_file
+# created_at: 2026-03-20T09:03:50.800684
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 500-700 of 1030)
+          "error_frequency",
+          "quality_score_trend",
+          "resource_usage"
+        ]
+      },
+      "blocking": false,
+      "timeout_seconds": 60,
+      "validation": {
+        "metrics_collected": true,
+        "evaluation_completed": true,
+        "optimization_applied": true
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90
+      }
+    },
+    {
+      "step_id": 9.1,
+      "name": "批判者最终审查",
+      "description": "Auto-Critic v7.0 最终审查 (≥95 分通过) + 集成度检查",
+      "tool_id": "auto_critic_v7",
+      "stage": "validation",
+      "parameters": {
+        "phase": "final",
+        "min_score": 95,
+        "check_integration": true
+      },
+      "blocking": true,
+      "timeout_seconds": 300,
+      "validation": {
+        "critical_score": ">=95",
+        "fatal_issues": 0,
+        "severe_issues": "<=2",
+        "integration_verified": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 10.1,
+      "name": "质量门禁",
+      "description": "质量门禁检查 (代码质量/安全/复杂度/集成度/测试)",
+      "tool_id": "quality-gate-check",
+      "stage": "validation",
+      "parameters": {
+        "min_quality_score": 80,
+        "check_integration": true,
+        "check_security": true,
+        "check_performance": true,
+        "check_tests": true,
+        "check_autonomy_risk": true,
+        "check_code_safety": true,
+        "check_permission_escalation": true,
+        "autonomy_risk_threshold": 0.7
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "quality_score": ">=80",
+        "security_issues": 0,
+        "integration_passed": true,
+        "performance_passed": true,
+        "tests_passed": true,
+        "autonomy_risk_passed": true,
+        "code_safety_passed": true,
+        "permission_check_passed": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "human_approval": {
+        "required": false,
+        "trigger_if": "critical_decision",
+        "timeout_minutes": 30
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 10.5,
+      "name": "自主性评分",
+      "description": "基于 arXiv 2511.13411 - 10 维度 AAI 评估 (AAI-0 到 AAI-4)",
+      "tool_id": "aai-scorer",
+      "stage": "validation",
+      "parameters": {
+        "dimensions": [
+          "task_understanding",
+          "tool_usage",
+          "error_recovery",
+          "learning_ability",
+          "planning_ability",
+          "execution_ability",
+          "monitoring_ability",
+          "collaboration_ability",
+          "innovation_ability",
+          "safety_awareness"
+        ],
+        "output_level": true,
+        "output_scores": true
+      },
+      "blocking": true,
+      "timeout_seconds": 90,
+      "validation": {
+        "all_dimensions_scored": true,
+        "aai_level_assigned": true,
+        "score_saved": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 70,
+        "action_on_fail": "retry_with_human_help"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90
+      }
+    },
+    {
+      "step_id": 11.2,
+      "name": "会话压缩保存",
+      "description": "压缩会话内容并保存到 daily note + 记忆持久化",
+      "tool_id": "post-session-compress",
+      "stage": "completion",
+      "parameters": {
+        "compression_ratio_target": 0.96,
+        "save_to_daily": true,
+        "save_to_memory": true,
+        "importance_score_threshold": 0.5
+      },
+      "blocking": true,
+      "timeout_seconds": 60,
+      "validation": {
+        "compressed_size_kb": "<5",
+        "saved_to_daily": true,
+        "saved_to_memory": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+      },
+      "timeout_alert": {
+        "enabled": true,
+        "warning_at_percent": 75,
+        "critical_at_percent": 90,
+        "action_on_timeout": "alert_and_continue"
+      },
+      "state_persistence": {
+        "save_state": true,
+        "include_in_checkpoint": true,
+        "rollback_on_fail": true
+      }
+    },
+    {
+      "step_id": 12.2,
+      "name": "Git 提交推送",
+      "description": "提交所有变更并推送到远程仓库 (使用 git_commit.bat 避免空格问题)",
+      "tool_id": "git-commit",
+      "stage": "completion",
+      "parameters": {
+        "commit_message": "auto-generated",
+        "push_remote": true
+      },
+      "blocking": true,
+      "timeout_seconds": 120,
+      "validation": {
+        "commit_success": true,
+        "push_success": true
+      },
+      "quality_gate": {
+        "enabled": true,
+        "min_score": 80,
+        "action_on_fail": "rollback_and_retry"
+
+[330 more lines. Use start_line=701 to continue.]

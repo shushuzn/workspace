@@ -1,0 +1,122 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T08:30:23.527366
+# ---
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   30-scripts-tools/tools_registry.json
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+	modified:   10-RESEARCH/domain-research/领域研究/cnt-research (modified content)
+	modified:   13-memory/2026-03-20.md
+	modified:   30-scripts-tools/tool_call_log.jsonl
+	modified:   30-scripts-tools/tools_registry.json
+	modified:   dialog/2026-03-20.jsonl
+	modified:   flow-archive/20260318-universal-workflow-001/execution-state.json
+	modified:   flow-archive/20260318-universal-workflow-001/validation-log.jsonl
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	30-scripts-tools/add_core_rules_to_workflow.py
+	30-scripts-tools/add_missing_key_tools.py
+	30-scripts-tools/add_mock_tool_calls.py
+	30-scripts-tools/auto_backup.py
+	30-scripts-tools/check_all_existing_tools.py
+	30-scripts-tools/check_existing_tools_fixed.py
+	30-scripts-tools/check_git_version.py
+	30-scripts-tools/check_kept_tools.py
+	30-scripts-tools/check_kept_tools2.py
+	30-scripts-tools/check_key_tools_exist.py
+	30-scripts-tools/check_missing_tools.py
+	30-scripts-tools/check_registry.py
+	30-scripts-tools/check_registry_count.py
+	30-scripts-tools/check_registry_format.py
+	30-scripts-tools/check_restored.py
+	30-scripts-tools/check_tool_files.py
+	30-scripts-tools/check_tool_log.py
+	30-scripts-tools/check_tool_structure.py
+	30-scripts-tools/check_workflow_steps.py
+	30-scripts-tools/compare_count.py
+	30-scripts-tools/confirmation_gate.py
+	30-scripts-tools/context_verify.py
+	30-scripts-tools/core_rules_verifier.py
+	30-scripts-tools/count_py_files.py
+	30-scripts-tools/count_real_tools.py
+	30-scripts-tools/debug_registry.py
+	30-scripts-tools/diagnose_registry.py
+	30-scripts-tools/find_copaw_tool.py
+	30-scripts-tools/find_critic_tools.py
+	30-scripts-tools/fix_execution_state_v3.py
+	30-scripts-tools/fix_registry_format.py
+	30-scripts-tools/guardian_auto_fix.py
+	30-scripts-tools/list_git_files.py
+	30-scripts-tools/mark_all_completed.py
+	30-scripts-tools/rebuild_registry.py
+	30-scripts-tools/reg_auto_backup.py
+	30-scripts-tools/reg_auto_critic_v7.py
+	30-scripts-tools/reg_confirmation_gate.py
+	30-scripts-tools/reg_context_verify.py
+	30-scripts-tools/reg_diagnose.py
+	30-scripts-tools/reg_fix_state_v3.py
+	30-scripts-tools/reg_guardian_fix.py
+	30-scripts-tools/reg_mark_all.py
+	30-scripts-tools/reg_risk_assessor.py
+	30-scripts-tools/reg_rules_verifier.py
+	30-scripts-tools/reg_task.py
+	30-scripts-tools/reg_task_analyzer.py
+	30-scripts-tools/reg_tool_executor.py
+	30-scripts-tools/reg_tool_selector.py
+	30-scripts-tools/reg_update_step.py
+	30-scripts-tools/reg_workflow_scheduler.py
+	30-scripts-tools/risk_assessor.py
+	30-scripts-tools/show_new_registry.py
+	30-scripts-tools/sync_registry.py
+	30-scripts-tools/sync_registry_smart.py
+	30-scripts-tools/task_analyzer.py
+	30-scripts-tools/tool_executor.py
+	30-scripts-tools/tool_selector.py
+	30-scripts-tools/update_step_state.py
+	30-scripts-tools/verify_rebuild.py
+	30-scripts-tools/workflow_scheduler.py
+	flow-archive/20260318-universal-workflow-001/CORE-EXECUTION-RULES.md
+	flow-archive/20260318-universal-workflow-001/protection-phase1-complete.md
+	flow-archive/20260318-universal-workflow-001/protection-scheme-design.md
+	tool_result/102013f4316d4070a37743eb217a83e7.txt
+	tool_result/14f909931dea4733a50b8b1942163a9c.txt
+	tool_result/184aa3643fee42f1adf2b7c23a187917.txt
+	tool_result/18845ff48c6d49a7891aed188e4d4c85.txt
+	tool_result/20b759ead88f46b4a21f18ecc75d0da5.txt
+	tool_result/2cd2b28ea50a46f3ae780a668b93a833.txt
+	tool_result/2f62b25e2289464e8607dcf3850bca17.txt
+	tool_result/3f3c1b7a871f4fd38bfc4e68f9807fb4.txt
+	tool_result/4778fa4574554098959f3e93a43e1e59.txt
+	tool_result/47fd0be614f64f0bb04448e50e4b76c3.txt
+	tool_result/4b5c0a21f7bb4adc8b9c28388cad5d97.txt
+	tool_result/4d1ef11a29af46e0a3e5f2016a37736f.txt
+	tool_result/5d53b0cb6a714f62b57a6e3cbdf8704b.txt
+	tool_result/6e98381962334d30889bead4b6e2d3b3.txt
+	tool_result/74113fc2de0340ee8b52a819d62a8c3b.txt
+	tool_result/79848b626d71410185fa623ddccd2701.txt
+	tool_result/7cb697624f8243cfbaa5edc287cec802.txt
+	tool_result/84b049301aad4c31832679ef54aeb0de.txt
+	tool_result/874da6c5c8b34e119ff06a47c00b6222.txt
+	tool_result/87ff77413bd5421999555e50d0777579.txt
+	tool_result/89174504b86c4ad18cb9b1cc12ed1625.txt
+	tool_result/94a395ed928b405b9848a747599ac898.txt
+	tool_result/996ac0f756514428a52108f3688f6a7d.txt
+	tool_result/9c30af4368c6444c839ddcee78fb16be.txt
+	tool_result/9f75d670ed714dcf846d0ee94b8dd5b3.txt
+	tool_result/a527c55967a8470e802d339d24a9f294.txt
+	tool_result/a571014fb85548a8b15dc4e4558618df.txt
+	tool_result/ab2ba303d46344238ea3dd6682c7d067.txt
+	tool_result/bfa207e3d2014549904cabc7a7c9deeb.txt
+	tool_result/c559bfeba4bd4a08b72af2f8084af861.txt
+	tool_result/ca11d775878642e58ff240e94139651a.txt
+	tool_result/cfeead3dd8484c19921555b3d7692f50.txt
+	tool_result/d0cadaaaa33942628aecb227fd8adfc5.txt
+	tool_result/d68b108fd7ca4a39942004175791d32c.txt

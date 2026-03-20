@@ -1,0 +1,25 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T02:41:20.042603
+# ---
+Command failed with exit code 1.
+[stdout]
+[OK] Session 验证通过：session-20260320023811
+[stderr]
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\reg_task.py", line 3, in <module>
+    r = json.load(f)
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 293, in load
+    return loads(fp.read(),
+        cls=cls, object_hook=object_hook,
+        parse_float=parse_float, parse_int=parse_int,
+        parse_constant=parse_constant, object_pairs_hook=object_pairs_hook, **kw)
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 345, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\json\decoder.py", line 363, in raw_decode
+    raise JSONDecodeError("Expecting value", s, err.value) from None
+json.decoder.JSONDecodeError: Expecting value: line 1 column 1 (char 0)
+[ERROR] Expecting value: line 1 column 1 (char 0)

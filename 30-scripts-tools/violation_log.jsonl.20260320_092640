@@ -1,0 +1,3 @@
+{"timestamp": "2026-03-20T08:33:21.439274", "violation_type": "skip_workflow_step", "violation_name": "跳过工作流步骤", "severity": "high", "penalty_points": 10, "session_id": "session-test-001", "details": "\"测试违规记录\""}
+{"id": "V-20260320083933-itical", "timestamp": "2026-03-20T08:39:33.351554", "violation_type": "fabricate_result", "violation_name": "编造结果", "severity": "critical", "penalty_points": 50, "session_id": "session-test-critical", "details": "\"测试编造结果", "auto_triggered": false, "lockdown_triggered": true}
+{"timestamp": "2026-03-20T09:11:40.372547", "session_id": "unknown", "violation_type": "bypass_attempt", "reason": "no_session", "message": "execution-state.json 不存在，必须通过 copaw_entry.py 启动", "action": "BLOCKED"}

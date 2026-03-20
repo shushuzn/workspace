@@ -1,0 +1,76 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T10:16:11.741134
+# ---
+======================================================================
+测试 1: Executor 角色 - write_file (L2)
+======================================================================
+{
+  "timestamp": "2026-03-20T10:16:02.331888",
+  "session_id": "session-20260320101306",
+  "role": "Executor",
+  "tool_id": "write_file",
+  "allowed": true,
+  "checks": {
+    "risk_level_identified": true,
+    "role_exists": true,
+    "permission_match": true
+  },
+  "risk_level": "L2_写入",
+  "requires_confirmation": false,
+  "requires_backup": false
+}
+
+======================================================================
+测试 2: Executor 角色 - safe_shell_executor (L4)
+======================================================================
+{
+  "timestamp": "2026-03-20T10:16:02.332525",
+  "session_id": "session-20260320101306",
+  "role": "Executor",
+  "tool_id": "safe_shell_executor",
+  "allowed": false,
+  "checks": {
+    "risk_level_identified": true,
+    "role_exists": true,
+    "permission_match": false
+  },
+  "risk_level": "L4_系统",
+  "denial_reason": "角色 Executor 禁止使用 L4_系统 工具"
+}
+
+======================================================================
+测试 3: Admin 角色 - safe_shell_executor (L4)
+======================================================================
+{
+  "timestamp": "2026-03-20T10:16:02.334378",
+  "session_id": "session-20260320101306",
+  "role": "Admin",
+  "tool_id": "safe_shell_executor",
+  "allowed": true,
+  "checks": {
+    "risk_level_identified": true,
+    "role_exists": true,
+    "permission_match": true
+  },
+  "risk_level": "L4_系统",
+  "requires_confirmation": false,
+  "requires_backup": true
+}
+
+======================================================================
+测试 4: Critic 角色 - write_file (L2)
+======================================================================
+{
+  "timestamp": "2026-03-20T10:16:02.335471",
+  "session_id": "session-20260320101306",
+  "role": "Critic",
+  "tool_id": "write_file",
+  "allowed": false,
+  "checks": {
+    "risk_level_identified": true,
+    "role_exists": true,
+    "permission_match": false
+  },
+  "risk_level": "L2_写入",
+  "denial_reason": "角色 Critic 禁止使用 L2_写入 工具"
+}

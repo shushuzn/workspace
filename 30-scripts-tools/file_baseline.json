@@ -1,0 +1,50 @@
+{
+  "created_at": "2026-03-20T10:03:57.616179",
+  "files": {
+    "30-scripts-tools\\copaw_entry.py": {
+      "hash": "859fcb7de9e3bce90845a1f48354e713463946c2c1b6a51513231dbaba68cb4f",
+      "size": 8715,
+      "exists": true
+    },
+    "30-scripts-tools\\tool_executor.py": {
+      "hash": "d623cef7c6e0ea3e0376622c943f42a2057249eaefd13f9ef792e5a8d96aabcd",
+      "size": 6863,
+      "exists": true
+    },
+    "30-scripts-tools\\safe_shell_executor.py": {
+      "hash": "89d5d8332b85719cf92b57af1f088ec226c7b9566b06fc6f4ea9f8e2e9fd36be",
+      "size": 5813,
+      "exists": true
+    },
+    "30-scripts-tools\\forced_protection_executor.py": {
+      "hash": "c4fd9cf5a20b7941dba0719ee766578c5022a29f0175922f0fe1f6ce0c3fe6d3",
+      "size": 8084,
+      "exists": true
+    },
+    "30-scripts-tools\\auto_protection_layer.py": {
+      "hash": "4fca7956cc4416b8ded122dec5afefba75c200df6195f3bf8f616bcb631a63f4",
+      "size": 10857,
+      "exists": true
+    },
+    "30-scripts-tools\\integrity_checker.py": {
+      "hash": "c081ca9f7c1f1e9ba98de92890fb78c46224749f385910b7af8e419261e84329",
+      "size": 11406,
+      "exists": true
+    },
+    "30-scripts-tools\\anti_bypass_engine.py": {
+      "hash": "558053e419f93dea171db26803be75c0d584e7563f1b556047934ee616fdd336",
+      "size": 11732,
+      "exists": true
+    },
+    ".git\\hooks\\pre-commit": {
+      "hash": "449c25594f211e59fe10a84839009cd90ce10e214238f51418cde8b0a8dd9772",
+      "size": 2725,
+      "exists": true
+    },
+    "flow-archive\\20260318-universal-workflow-001\\workflow.json": {
+      "hash": "3c37807cc7e0195a67960d78c78a32021d8aa9f28774ed647a96c5da4469db2e",
+      "size": 30870,
+      "exists": true
+    }
+  }
+}

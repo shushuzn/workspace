@@ -1,0 +1,160 @@
+{
+  "version": "1.0.0",
+  "created_at": "2026-03-20T10:10:00+08:00",
+  "principle": "最小权限原则 - 只授予完成任务所需的最小权限",
+  
+  "工具风险分级": {
+    "L1_只读": {
+      "description": "只读操作，无修改风险",
+      "risk_level": "低",
+      "auto_approve": true,
+      "examples": [
+        "read_file",
+        "memory_search",
+        "get_current_time",
+        "get_token_usage",
+        "view_image",
+        "desktop_screenshot"
+      ]
+    },
+    "L2_写入": {
+      "description": "文件写入/修改操作",
+      "risk_level": "中",
+      "auto_approve": true,
+      "requires_log": true,
+      "examples": [
+        "write_file",
+        "edit_file",
+        "git_commit_helper"
+      ]
+    },
+    "L3_删除": {
+      "description": "文件删除/移动操作",
+      "risk_level": "高",
+      "auto_approve": false,
+      "requires_confirmation": true,
+      "requires_backup": true,
+      "examples": [
+        "trash",
+        "delete_file",
+        "move_to_archive"
+      ]
+    },
+    "L4_系统": {
+      "description": "系统级操作（Shell 命令）",
+      "risk_level": "极高",
+      "auto_approve": false,
+      "requires_confirmation": true,
+      "requires_backup": true,
+      "requires_audit": true,
+      "examples": [
+        "safe_shell_executor",
+        "execute_system_command"
+      ]
+    },
+    "L5_防护": {
+      "description": "防护系统核心工具",
+      "risk_level": "最高",
+      "auto_approve": false,
+      "requires_admin": true,
+      "requires_audit": true,
+      "examples": [
+        "integrity_checker",
+        "anti_bypass_engine",
+        "emergency_stop",
+        "file_guardian"
+      ]
+    }
+  },
+  
+  "角色权限矩阵": {
+    "Planner": {
+      "description": "规划者 - 负责任务分解和规划",
+      "allowed_levels": ["L1_只读", "L2_写入"],
+      "denied_levels": ["L3_删除", "L4_系统", "L5_防护"],
+      "max_tools_per_session": 50,
+      "requires_confirmation_for": []
+    },
+    "Executor": {
+      "description": "执行者 - 负责任务执行",
+      "allowed_levels": ["L1_只读", "L2_写入", "L3_删除"],
+      "denied_levels": ["L4_系统", "L5_防护"],
+      "max_tools_per_session": 100,
+      "requires_confirmation_for": ["L3_删除"]
+    },
+    "Critic": {
+      "description": "批判者 - 负责质量审查",
+      "allowed_levels": ["L1_只读"],
+      "denied_levels": ["L2_写入", "L3_删除", "L4_系统", "L5_防护"],
+      "max_tools_per_session": 30,
+      "requires_confirmation_for": []
+    },
+    "Coordinator": {
+      "description": "协调者 - 负责任务协调",
+      "allowed_levels": ["L1_只读", "L2_写入"],
+      "denied_levels": ["L3_删除", "L4_系统", "L5_防护"],
+      "max_tools_per_session": 60,
+      "requires_confirmation_for": []
+    },
+    "Admin": {
+      "description": "管理员 - 拥有所有权限",
+      "allowed_levels": ["L1_只读", "L2_写入", "L3_删除", "L4_系统", "L5_防护"],
+      "denied_levels": [],
+      "max_tools_per_session": -1,
+      "requires_confirmation_for": ["L5_防护"]
+    }
+  },
+  
+  "工具分类映射": {
+    "read_file": "L1_只读",
+    "memory_search": "L1_只读",
+    "get_current_time": "L1_只读",
+    "get_token_usage": "L1_只读",
+    "view_image": "L1_只读",
+    "desktop_screenshot": "L1_只读",
+    "write_file": "L2_写入",
+    "edit_file": "L2_写入",
+    "git_commit_helper": "L2_写入",
+    "trash": "L3_删除",
+    "delete_file": "L3_删除",
+    "move_to_archive": "L3_删除",
+    "safe_shell_executor": "L4_系统",
+    "execute_system_command": "L4_系统",
+    "integrity_checker": "L5_防护",
+    "anti_bypass_engine": "L5_防护",
+    "emergency_stop": "L5_防护",
+    "file_guardian": "L5_防护",
+    "tool_executor": "L4_系统",
+    "copaw_entry": "L4_系统"
+  },
+  
+  "权限验证规则": {
+    "rule_1_session_bound": "权限令牌绑定到特定 session_id",
+    "rule_2_role_bound": "权限令牌绑定到特定角色",
+    "rule_3_time_limited": "权限令牌有时间限制（默认 session 有效期）",
+    "rule_4_tool_specific": "每个工具调用需要对应风险等级的权限",
+    "rule_5_audit_all": "所有权限使用必须记录审计日志",
+    "rule_6_deny_by_default": "未明确允许的权限一律拒绝",
+    "rule_7_escalation_required": "越权尝试触发升级告警"
+  },
+  
+  "审计日志字段": {
+    "timestamp": "ISO8601 时间戳",
+    "session_id": "会话 ID",
+    "role": "调用者角色",
+    "tool_id": "工具 ID",
+    "risk_level": "工具风险等级",
+    "permission_level": "调用者权限等级",
+    "allowed": "是否允许",
+    "denial_reason": "拒绝原因（如被拒绝）",
+    "confirmation_id": "确认 ID（如需确认）",
+    "backup_id": "备份 ID（如需备份）"
+  },
+  
+  "违规处理": {
+    "越权尝试": "+20 惩罚分",
+    "伪造角色": "+50 惩罚分 + 自动封锁",
+    "绕过权限检查": "+50 惩罚分 + 自动封锁",
+    "连续 3 次越权": "自动触发紧急停止"
+  }
+}

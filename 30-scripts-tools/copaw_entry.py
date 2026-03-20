@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-CoPaw Entry Point - 强制工作流入口点
+CoPaw Entry Point - 强制工作流入口点 (集成自动防护)
 
 所有任务必须通过此入口点启动，确保主工作流被执行。
 功能：
@@ -10,6 +10,7 @@ CoPaw Entry Point - 强制工作流入口点
 3. 验证上下文加载
 4. 记录会话开始
 5. 强制使用 tool_executor
+6. 【新增】自动激活防护层
 """
 
 import json
@@ -17,6 +18,13 @@ import sys
 import os
 from datetime import datetime
 from pathlib import Path
+
+# 导入自动防护层
+try:
+    from auto_protection_layer import create_protection_layer
+    AUTO_PROTECTION_ENABLED = True
+except ImportError:
+    AUTO_PROTECTION_ENABLED = False
 
 class CopawEntry:
     def __init__(self, task_name: str = None):
@@ -28,6 +36,11 @@ class CopawEntry:
         self.state_file = self.workflow_dir / "execution-state.json"
         self.tool_log = Path("30-scripts-tools/tool_call_log.jsonl")
         
+        # 【新增】自动防护层
+        self.protection = None
+        if AUTO_PROTECTION_ENABLED:
+            self.protection = create_protection_layer(self.session_id)
+        
         print("="*60)
         print("CoPaw Entry Point - 强制工作流入口")
         print("="*60)
@@ -35,6 +48,9 @@ class CopawEntry:
         print(f"Flow ID: {self.flow_id}")
         print(f"Session ID: {self.session_id}")
         print(f"Start Time: {self.start_time.isoformat()}")
+        if AUTO_PROTECTION_ENABLED:
+            print(f"[防护] 自动防护层已激活")
+        print("="*60)
         print("="*60)
     
     def _generate_session_id(self) -> str:

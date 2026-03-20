@@ -1,0 +1,53 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T07:43:17.677439
+# ---
+Registry 中的工具详情:
+
+工具：anomaly_detector
+  command: py 30-scripts-tools/anomaly_detector.py ${args}
+  文件名：anomaly_detector.
+  文件存在：False
+
+工具：doc_generator
+  command: py 30-scripts-tools/doc_generator.py ${args}
+  文件名：doc_generator.
+  文件存在：False
+
+工具：memory_distiller_llm
+  command: py 30-scripts-tools/memory_distiller_llm.py ${args}
+  文件名：memory_distiller_llm.
+  文件存在：False
+
+工具：memory_distiller_v2
+  command: py 30-scripts-tools/memory_distiller_v2.py ${args}
+  文件名：memory_distiller_v2.
+  文件存在：False
+
+工具：performance_analyzer
+  command: py 30-scripts-tools/performance_analyzer.py ${args}
+  文件名：performance_analyzer.
+  文件存在：False
+  相似文件：['performance_analyzer.py']
+
+工具：tool_executor
+  command: py 30-scripts-tools/tool_executor.py ${args}
+  文件名：tool_executor.
+  文件存在：False
+  相似文件：['tool_executor.py']
+
+工具：workflow_enforcer
+  command: py 30-scripts-tools/workflow_enforcer.py ${args}
+  文件名：workflow_enforcer.
+  文件存在：False
+  相似文件：['workflow_enforcer.py']
+
+工具：session_compress
+  command: py 30-scripts-tools\post_session_compress.py --auto
+  文件名：post_session_compress.
+  文件存在：False
+
+工具：context_verify
+  command: py 30-scripts-tools\fast_load.py
+  文件名：fast_load.py
+  文件存在：False
+

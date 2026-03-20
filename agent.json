@@ -229,8 +229,8 @@
   },
   "last_dispatch": {
     "channel": "console",
-    "user_id": "ou_72a847b95fc25870dcdd8ce56d929252",
-    "session_id": "6d929252"
+    "user_id": "default",
+    "session_id": "1773972708777"
   },
   "running": {
     "max_iters": 50,

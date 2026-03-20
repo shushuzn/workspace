@@ -7,12 +7,12 @@
   "workflow_type": "main",
   "parent_workflow": null,
   "estimated_time_minutes": "variable",
-  "total_steps": 12,
+  "total_steps": 20,
   "enforcement": {
     "enabled": true,
     "tool_id": "workflow-enforcer",
     "rules": [
-      "必须按顺序执行 12 个步骤",
+      "必须按顺序执行 20 个步骤",
       "跳步将被阻断",
       "完成后必须验证",
       "未通过验证禁止 Git 提交",

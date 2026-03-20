@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>防护系统合规报告 - session-20260320092253</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .metric { display: inline-block; margin: 10px; padding: 20px; border: 1px solid #ccc; border-radius: 5px; }
+        .excellent { background-color: #d4edda; }
+        .good { background-color: #d1ecf1; }
+        .warning { background-color: #fff3cd; }
+        .critical { background-color: #f8d7da; }
+        table { border-collapse: collapse; width: 100%; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #4CAF50; color: white; }
+    </style>
+</head>
+<body>
+    <h1>防护系统合规报告</h1>
+    <p>会话：session-20260320092253</p>
+    <p>时间：2026-03-20T09:26:57.036143</p>
+    
+    <h2>核心指标</h2>
+    <div class="metric critical">
+        <h3>合规率</h3>
+        <p style="font-size: 2em;">0.0%</p>
+        <p>状态：critical</p>
+    </div>
+    
+    <div class="metric">
+        <h3>违规总数</h3>
+        <p style="font-size: 2em;">3</p>
+        <p>惩罚分：60</p>
+    </div>
+    
+    <div class="metric">
+        <h3>惩罚等级</h3>
+        <p style="font-size: 2em;">Level 0</p>
+        <p>状态：clean</p>
+    </div>
+    
+    <div class="metric">
+        <h3>防护工具</h3>
+        <p style="font-size: 2em;">20</p>
+    </div>
+    
+    <h2>趋势分析</h2>
+    <p>趋势：worsening</p>
+    <p>变化率：300.0%</p>
+    
+    <h2>自动修复建议</h2>
+    <table>
+        <tr><th>优先级</th><th>问题</th><th>操作</th><th>自动修复命令</th></tr>
+<tr>
+                <td>high</td>
+                <td>合规率过低 (0.0%)</td>
+                <td>检查所有脚本是否通过防护层执行</td>
+                <td><code>py 30-scripts-tools/safe_shell_executor.py <command></code></td>
+            </tr>
+    </table>
+</body>
+</html>

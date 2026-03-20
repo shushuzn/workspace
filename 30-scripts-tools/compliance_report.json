@@ -1,0 +1,110 @@
+{
+  "session_id": "session-20260320095222",
+  "timestamp": "2026-03-20T09:52:41.481333",
+  "analysis": {
+    "total_violations": 5,
+    "total_tool_calls": 40,
+    "compliance_rate": 88.88888888888889,
+    "root_causes": [
+      {
+        "type": "bypass_attempt",
+        "count": 3,
+        "percentage": 60.0,
+        "root_cause": "尝试绕过防护层（如 --no-verify）",
+        "solution": "强化 Git hook，使用 anti_bypass_engine 实时监控",
+        "priority": "critical"
+      },
+      {
+        "type": "skip_workflow_step",
+        "count": 1,
+        "percentage": 20.0,
+        "root_cause": "未知违规类型",
+        "solution": "检查 violation_log.jsonl 详情",
+        "priority": "medium"
+      },
+      {
+        "type": "fabricate_result",
+        "count": 1,
+        "percentage": 20.0,
+        "root_cause": "未知违规类型",
+        "solution": "检查 violation_log.jsonl 详情",
+        "priority": "medium"
+      }
+    ]
+  },
+  "improvement_plan": [
+    {
+      "step": 1,
+      "issue": "尝试绕过防护层（如 --no-verify）",
+      "action": "强化 Git hook，使用 anti_bypass_engine 实时监控",
+      "priority": "critical",
+      "estimated_impact": "+48.0% 合规率"
+    },
+    {
+      "step": 2,
+      "issue": "未知违规类型",
+      "action": "检查 violation_log.jsonl 详情",
+      "priority": "medium",
+      "estimated_impact": "+16.0% 合规率"
+    },
+    {
+      "step": 3,
+      "issue": "未知违规类型",
+      "action": "检查 violation_log.jsonl 详情",
+      "priority": "medium",
+      "estimated_impact": "+16.0% 合规率"
+    },
+    {
+      "step": 4,
+      "issue": "合规意识不足",
+      "action": "每次操作前检查：是否通过防护层？",
+      "priority": "medium",
+      "estimated_impact": "+10% 合规率"
+    },
+    {
+      "step": 5,
+      "issue": "缺乏实时监控",
+      "action": "使用 compliance_dashboard.py 实时监控",
+      "priority": "medium",
+      "estimated_impact": "+5% 合规率"
+    }
+  ],
+  "training": {
+    "top_compliant_tools": [
+      {
+        "tool": "risk-assessor",
+        "usage": 4
+      },
+      {
+        "tool": "context_verify",
+        "usage": 3
+      },
+      {
+        "tool": "task_analyzer",
+        "usage": 3
+      },
+      {
+        "tool": "update-step-state",
+        "usage": 3
+      },
+      {
+        "tool": "workflow-enforcer",
+        "usage": 3
+      }
+    ],
+    "best_practices": [
+      "所有 Python 脚本通过 protected_py.py 执行",
+      "所有 Shell 命令通过 safe_shell_executor.py 执行",
+      "所有会话从 copaw_entry.py 开始",
+      "所有 Git 提交通过 git_commit_helper.py 执行",
+      "使用 compliance_dashboard.py 实时监控"
+    ],
+    "anti_patterns": [
+      "直接使用 execute_shell_command",
+      "使用 git commit --no-verify",
+      "手动修改 execution-state.json",
+      "跳过 workflow 步骤",
+      "直接删除防护文件"
+    ]
+  }
+}

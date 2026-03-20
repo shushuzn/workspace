@@ -1,0 +1,153 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T07:48:54.049837
+# ---
+Command failed with exit code 1.
+[stdout]
+
+================================================================================
+                         工作流防护系统 v2.0
+================================================================================
+检查时间：2026-03-20T07:48:35.833281
+================================================================================
+
+[检查 1] Step ID 类型匹配...
+  [FAIL] 发现 60 个错误
+    - 步骤 1: 类型不匹配 - workflow.json=int(1), execution-state.json=str(1)
+    - 步骤 2: 类型不匹配 - workflow.json=int(2), execution-state.json=str(2)
+    - 步骤 3: 类型不匹配 - workflow.json=int(3), execution-state.json=str(3)
+    - 步骤 4: 类型不匹配 - workflow.json=int(4), execution-state.json=str(4)
+    - 步骤 5: 类型不匹配 - workflow.json=int(5), execution-state.json=str(5)
+    - 步骤 6: 类型不匹配 - workflow.json=int(6), execution-state.json=str(6)
+    - 步骤 7: 类型不匹配 - workflow.json=float(6.5), execution-state.json=str(6.5)
+    - 步骤 8: 类型不匹配 - workflow.json=float(6.6), execution-state.json=str(6.6)
+    - 步骤 9: 类型不匹配 - workflow.json=float(6.7), execution-state.json=str(6.7)
+    - 步骤 10: 类型不匹配 - workflow.json=int(7), execution-state.json=str(7)
+    - 步骤 11: 类型不匹配 - workflow.json=int(8), execution-state.json=str(8)
+    - 步骤 12: 类型不匹配 - workflow.json=float(8.5), execution-state.json=str(8.5)
+    - 步骤 13: 类型不匹配 - workflow.json=float(8.6), execution-state.json=str(8.6)
+    - 步骤 14: 类型不匹配 - workflow.json=float(8.7), execution-state.json=str(8.7)
+    - 步骤 15: 类型不匹配 - workflow.json=float(9.1), execution-state.json=str(9.1)
+    - 步骤 16: 类型不匹配 - workflow.json=float(10.1), execution-state.json=str(10.1)
+    - 步骤 17: 类型不匹配 - workflow.json=float(10.5), execution-state.json=str(10.5)
+    - 步骤 18: 类型不匹配 - workflow.json=float(11.2), execution-state.json=str(11.2)
+    - 步骤 19: 类型不匹配 - workflow.json=float(12.2), execution-state.json=str(12.2)
+    - 步骤 20: 类型不匹配 - workflow.json=float(13.2), execution-state.json=str(13.2)
+    - 步骤 1: 值不匹配 - workflow.json=1, execution-state.json=1
+    - 步骤 2: 值不匹配 - workflow.json=2, execution-state.json=2
+    - 步骤 3: 值不匹配 - workflow.json=3, execution-state.json=3
+    - 步骤 4: 值不匹配 - workflow.json=4, execution-state.json=4
+    - 步骤 5: 值不匹配 - workflow.json=5, execution-state.json=5
+    - 步骤 6: 值不匹配 - workflow.json=6, execution-state.json=6
+    - 步骤 7: 值不匹配 - workflow.json=6.5, execution-state.json=6.5
+    - 步骤 8: 值不匹配 - workflow.json=6.6, execution-state.json=6.6
+    - 步骤 9: 值不匹配 - workflow.json=6.7, execution-state.json=6.7
+    - 步骤 10: 值不匹配 - workflow.json=7, execution-state.json=7
+    - 步骤 11: 值不匹配 - workflow.json=8, execution-state.json=8
+    - 步骤 12: 值不匹配 - workflow.json=8.5, execution-state.json=8.5
+    - 步骤 13: 值不匹配 - workflow.json=8.6, execution-state.json=8.6
+    - 步骤 14: 值不匹配 - workflow.json=8.7, execution-state.json=8.7
+    - 步骤 15: 值不匹配 - workflow.json=9.1, execution-state.json=9.1
+    - 步骤 16: 值不匹配 - workflow.json=10.1, execution-state.json=10.1
+    - 步骤 17: 值不匹配 - workflow.json=10.5, execution-state.json=10.5
+    - 步骤 18: 值不匹配 - workflow.json=11.2, execution-state.json=11.2
+    - 步骤 19: 值不匹配 - workflow.json=12.2, execution-state.json=12.2
+    - 步骤 20: 值不匹配 - workflow.json=13.2, execution-state.json=13.2
+    - 步骤 1: 顺序错误 - 期望 1, 实际 1
+    - 步骤 2: 顺序错误 - 期望 2, 实际 2
+    - 步骤 3: 顺序错误 - 期望 3, 实际 3
+    - 步骤 4: 顺序错误 - 期望 4, 实际 4
+    - 步骤 5: 顺序错误 - 期望 5, 实际 5
+    - 步骤 6: 顺序错误 - 期望 6, 实际 6
+    - 步骤 7: 顺序错误 - 期望 6.5, 实际 6.5
+    - 步骤 8: 顺序错误 - 期望 6.6, 实际 6.6
+    - 步骤 9: 顺序错误 - 期望 6.7, 实际 6.7
+    - 步骤 10: 顺序错误 - 期望 7, 实际 7
+    - 步骤 11: 顺序错误 - 期望 8, 实际 8
+    - 步骤 12: 顺序错误 - 期望 8.5, 实际 8.5
+    - 步骤 13: 顺序错误 - 期望 8.6, 实际 8.6
+    - 步骤 14: 顺序错误 - 期望 8.7, 实际 8.7
+    - 步骤 15: 顺序错误 - 期望 9.1, 实际 9.1
+    - 步骤 16: 顺序错误 - 期望 10.1, 实际 10.1
+    - 步骤 17: 顺序错误 - 期望 10.5, 实际 10.5
+    - 步骤 18: 顺序错误 - 期望 11.2, 实际 11.2
+    - 步骤 19: 顺序错误 - 期望 12.2, 实际 12.2
+    - 步骤 20: 顺序错误 - 期望 13.2, 实际 13.2
+
+[检查 2] Step 状态完整性...
+  [OK] 所有 step_status 完整
+
+[检查 3] 完成率计算正确性...
+  [FAIL] 发现 1 个错误
+    - 完成率计算错误 - 报告值=100.0%, 实际值=0.0%
+
+[检查 4] Workflow Compliance 标志...
+  [OK] Compliance 标志正确
+
+================================================================================
+[RESULT] 验证失败 - 共 61 个错误
+
+[修复建议]
+  1. 将 1 (str) 改为 1 (int)
+  2. 将 2 (str) 改为 2 (int)
+  3. 将 3 (str) 改为 3 (int)
+  4. 将 4 (str) 改为 4 (int)
+  5. 将 5 (str) 改为 5 (int)
+  6. 将 6 (str) 改为 6 (int)
+  7. 将 6.5 (str) 改为 6.5 (float)
+  8. 将 6.6 (str) 改为 6.6 (float)
+  9. 将 6.7 (str) 改为 6.7 (float)
+  10. 将 7 (str) 改为 7 (int)
+  11. 将 8 (str) 改为 8 (int)
+  12. 将 8.5 (str) 改为 8.5 (float)
+  13. 将 8.6 (str) 改为 8.6 (float)
+  14. 将 8.7 (str) 改为 8.7 (float)
+  15. 将 9.1 (str) 改为 9.1 (float)
+  16. 将 10.1 (str) 改为 10.1 (float)
+  17. 将 10.5 (str) 改为 10.5 (float)
+  18. 将 11.2 (str) 改为 11.2 (float)
+  19. 将 12.2 (str) 改为 12.2 (float)
+  20. 将 13.2 (str) 改为 13.2 (float)
+  21. 将 1 改为 1
+  22. 将 2 改为 2
+  23. 将 3 改为 3
+  24. 将 4 改为 4
+  25. 将 5 改为 5
+  26. 将 6 改为 6
+  27. 将 6.5 改为 6.5
+  28. 将 6.6 改为 6.6
+  29. 将 6.7 改为 6.7
+  30. 将 7 改为 7
+  31. 将 8 改为 8
+  32. 将 8.5 改为 8.5
+  33. 将 8.6 改为 8.6
+  34. 将 8.7 改为 8.7
+  35. 将 9.1 改为 9.1
+  36. 将 10.1 改为 10.1
+  37. 将 10.5 改为 10.5
+  38. 将 11.2 改为 11.2
+  39. 将 12.2 改为 12.2
+  40. 将 13.2 改为 13.2
+  41. 调整步骤顺序，确保第 1 个步骤是 1
+  42. 调整步骤顺序，确保第 2 个步骤是 2
+  43. 调整步骤顺序，确保第 3 个步骤是 3
+  44. 调整步骤顺序，确保第 4 个步骤是 4
+  45. 调整步骤顺序，确保第 5 个步骤是 5
+  46. 调整步骤顺序，确保第 6 个步骤是 6
+  47. 调整步骤顺序，确保第 7 个步骤是 6.5
+  48. 调整步骤顺序，确保第 8 个步骤是 6.6
+  49. 调整步骤顺序，确保第 9 个步骤是 6.7
+  50. 调整步骤顺序，确保第 10 个步骤是 7
+  51. 调整步骤顺序，确保第 11 个步骤是 8
+  52. 调整步骤顺序，确保第 12 个步骤是 8.5
+  53. 调整步骤顺序，确保第 13 个步骤是 8.6
+  54. 调整步骤顺序，确保第 14 个步骤是 8.7
+  55. 调整步骤顺序，确保第 15 个步骤是 9.1
+  56. 调整步骤顺序，确保第 16 个步骤是 10.1
+  57. 调整步骤顺序，确保第 17 个步骤是 10.5
+  58. 调整步骤顺序，确保第 18 个步骤是 11.2
+  59. 调整步骤顺序，确保第 19 个步骤是 12.2
+  60. 调整步骤顺序，确保第 20 个步骤是 13.2
+  61. 更新 completion_percentage 为 0.0
+================================================================================
+
+[ACTION] 是否自动修复？(y/n): [INFO] 非交互模式，请手动修复或调用 auto_fix 参数

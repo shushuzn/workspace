@@ -1,0 +1,76 @@
+# tool_name: read_file
+# created_at: 2026-03-20T07:44:25.587890
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 31-100 of 692)
+  ],
+  "enforcement_rules": {
+    "tool_calling": {
+      "rule": "所有工具必须通过 tool_executor.py 调用",
+      "reason": "确保步骤追踪、强制检查、日志记录统一生效",
+      "violation": "直接调用工具脚本（如 subprocess.run(['py', 'tool.py'])）",
+      "compliance": "通过 tool_executor 调用（subprocess.run(['tool_executor.py', 'tool_id'])）"
+    },
+    "tool_modification": {
+      "rule": "禁止重写或修改工具脚本",
+      "reason": "保持工具稳定性和一致性",
+      "violation": "修改工具脚本文件内容",
+      "compliance": "通过 tools_registry.json 配置调整工具行为"
+    },
+    "tool_registration": {
+      "rule": "新工具必须注册到 tools_registry.json",
+      "reason": "确保工具可追踪、可验证、可审计",
+      "violation": "未注册的工具脚本",
+      "compliance": "使用 register_tools.py 批量注册或手动添加到 registry"
+    }
+  },
+  "tools": {
+    "anomaly_detector": {
+      "tool_id": "anomaly_detector",
+      "command": "py 30-scripts-tools/anomaly_detector.py ${args}",
+      "description": "anomaly_detector 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "analysis",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/anomaly_detector.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "anomaly_detector.py",
+        "health_monitor_ai.py",
+        "predictive_analytics.py",
+        "workflow_generator.py",
+        "workflow_optimizer_ai.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013638",
+      "recategorized_at": "2026-03-19T17:34:42.034448",
+      "recategorized_from": "general",
+      "quality_score": 49.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "中频使用 (10 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "doc_generator": {
+      "tool_id": "doc_generator",
+      "command": "py 30-scripts-tools/doc_generator.py ${args}",
+      "description": "doc_generator 工具",
+
+[592 more lines. Use start_line=101 to continue.]

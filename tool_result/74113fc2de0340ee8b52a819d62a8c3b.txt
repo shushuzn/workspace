@@ -1,0 +1,58 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T02:56:46.395921
+# ---
+工具总数：447
+
+工具列表 (前 50 个):
+  1. auto-critic: N/A
+  2. memory-consistency-checker: N/A
+  3. memory-quality-scorer: N/A
+  4. remediation-tracker: N/A
+  5. p1-issue-fixer: N/A
+  6. flow-manager: N/A
+  7. brainstorm-define: N/A
+  8. brainstorm-action: N/A
+  9. workflow-enforcer: N/A
+  10. advanced_report_gen: N/A
+  11. ai_task_scheduler: N/A
+  12. anomaly_detector: N/A
+  13. anomaly_detector_pro: N/A
+  14. api_gateway: N/A
+  15. arxiv_collector_v2: N/A
+  16. arxiv_workflow: N/A
+  17. auto_critic: N/A
+  18. auto_critic_v7: N/A
+  19. auto_data_cleaner: N/A
+  20. auto_deploy: N/A
+  21. auto_deployer: N/A
+  22. auto_distill: N/A
+  23. auto_fix_orchestrator: N/A
+  24. auto_optimizer: N/A
+  25. auto_recovery: N/A
+  26. auto_signal_extractor: N/A
+  27. auto_test_generator: N/A
+  28. auto_test_runner: N/A
+  29. auto_tuner: N/A
+  30. automation_orchestrator: N/A
+  31. autonomous_decision: N/A
+  32. autonomous_research_assistant: N/A
+  33. batch_card_generator: N/A
+  34. batch_processor_v2: N/A
+  35. brainstorm_action: N/A
+  36. brainstorm_define: N/A
+  37. brainstorm_diverge: N/A
+  38. cache_manager: N/A
+  39. cache_observability: N/A
+  40. canvas_auto_updater: N/A
+  41. causal_inference_engine: N/A
+  42. cleanup_nested_backups: N/A
+  43. cleanup_reports: N/A
+  44. code_quality_reviewer: N/A
+  45. code_reviewer: N/A
+  46. config_center_v2: N/A
+  47. config_manager: N/A
+  48. context_aware_cache: N/A
+  49. context_cache_manager: N/A
+  50. context_cli: N/A
+
+... 还有 397 个工具

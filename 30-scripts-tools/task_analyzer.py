@@ -1,0 +1,44 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Step 3: 任务解析工具
+解析任务需求、复杂度、所需资源
+"""
+import json
+from datetime import datetime
+
+task = "系统级防护方案"
+
+# 任务分析
+analysis = {
+    "task_name": task,
+    "task_type": "系统设计 + 实现",
+    "complexity": "高",
+    "estimated_steps": 20,
+    "estimated_time_minutes": 60,
+    "required_tools": [
+        "workflow_designer",
+        "code_generator",
+        "test_creator",
+        "documentation_writer"
+    ],
+    "deliverables": [
+        "防护方案设计文档",
+        "实现代码",
+        "测试用例",
+        "使用文档"
+    ],
+    "acceptance_criteria": [
+        "Git 提交通过 pre-commit hook",
+        "tool_call_log 有真实记录",
+        "execution-state.json 完成率 100%",
+        "无手动伪造 JSON"
+    ]
+}
+
+# 保存分析结果
+with open("flow-archive/20260318-universal-workflow-001/task-analysis.json", "w", encoding="utf-8") as f:
+    json.dump(analysis, f, ensure_ascii=False, indent=2)
+
+print("任务分析完成:")
+print(json.dumps(analysis, ensure_ascii=False, indent=2))

@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-20T08:46:57.309835
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 70-100 of 156)
+        result = self._run_tool(tool_id, params)
+        duration = time.time() - start
+        self._log_call(tool_id, params, result, duration)
+        return result
+    
+    def _verify_registered(self, tool_id):
+        if not self.registry_file.exists():
+            return False
+        with open(self.registry_file, "r", encoding="utf-8") as f:
+            registry = json.load(f)
+        return tool_id in registry.get("tools", {})
+    
+    def _run_tool(self, tool_id, params):
+        with open(self.registry_file, "r", encoding="utf-8") as f:
+            registry = json.load(f)
+        tool_info = registry["tools"].get(tool_id, {})
+        
+        # 支持 command 字段
+        command = tool_info.get("command", "")
+        if not command:
+            # 回退到 path 字段
+            tool_path = tool_info.get("path", "")
+            if tool_path:
+                command = f"py {tool_path}"
+            else:
+                # 回退到 file_path 字段 (旧格式)
+                file_path = tool_info.get("file_path", "")
+                if file_path:
+                    command = f"py {file_path}"
+                else:
+                    return {"status": "error", "message": f"工具无 command/path/file_path: {tool_id}"}
+
+[56 more lines. Use start_line=101 to continue.]

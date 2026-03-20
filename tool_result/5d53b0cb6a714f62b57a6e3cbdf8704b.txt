@@ -1,0 +1,37 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T07:39:56.514808
+# ---
+实际存在的 Python 文件：124
+保留的工具：9
+移除的工具：438
+
+移除的工具示例 (前 20 个):
+  - auto-critic: auto-critic.
+  - memory-consistency-checker: memory_consistency_checker.py
+  - memory-quality-scorer: memory_quality_scorer.
+  - remediation-tracker: remediation_tracker.
+  - p1-issue-fixer: p1_issue_fixer.
+  - flow-manager: flow_manager.
+  - brainstorm-define: brainstorm_define.py
+  - brainstorm-action: brainstorm_action.py
+  - workflow-enforcer: N/A
+  - advanced_report_gen: advanced_report_gen.
+  - ai_task_scheduler: ai_task_scheduler.
+  - anomaly_detector_pro: anomaly_detector_pro.
+  - api_gateway: api_gateway.
+  - arxiv_collector_v2: arxiv_collector_v2.
+  - arxiv_workflow: arxiv_workflow.
+  - auto_critic: auto-critic.
+  - auto_critic_v7: auto-critic_v7.
+  - auto_data_cleaner: auto_data_cleaner.
+  - auto_deploy: auto_deploy.
+  - auto_deployer: auto_deployer.
+
+Registry 已同步到实际文件
+版本：1.7.0-synced-smart
+{
+  "status": "success",
+  "kept": 9,
+  "removed": 438,
+  "server_time": "2026-03-20T02:46:00+08:00"
+}

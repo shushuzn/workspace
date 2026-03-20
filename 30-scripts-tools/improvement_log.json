@@ -1,0 +1,130 @@
+{
+  "timestamp": "2026-03-20T09:54:09.919166",
+  "execution": {
+    "completed": 6,
+    "failed": 0,
+    "total": 19
+  },
+  "verification": {
+    "old_rate": 88.88888888888889,
+    "new_rate": 88.88888888888889,
+    "improvement": 0.0,
+    "target_reached": false
+  },
+  "log": [
+    {
+      "timestamp": "2026-03-20T09:54:09.909949",
+      "action": "START",
+      "status": "INFO",
+      "details": "执行 5 项改进计划"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.909991",
+      "action": "执行：尝试绕过防护层（如 --no-verify）",
+      "status": "START",
+      "details": "优先级：critical"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.910301",
+      "action": "强化 Git hook",
+      "status": "WARN",
+      "details": "缺少检查：integrity_checker"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.910311",
+      "action": "强化 Git hook",
+      "status": "OK",
+      "details": "Git hook 已包含主要检查"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.910318",
+      "action": "执行：未知违规类型",
+      "status": "START",
+      "details": "优先级：medium"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.910529",
+      "action": "分析违规日志",
+      "status": "OK",
+      "details": "共 5 条违规记录"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.910579",
+      "action": "违规类型：bypass_attempt",
+      "status": "INFO",
+      "details": "3 次"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.910583",
+      "action": "违规类型：skip_workflow_step",
+      "status": "INFO",
+      "details": "1 次"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.910585",
+      "action": "违规类型：fabricate_result",
+      "status": "INFO",
+      "details": "1 次"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.910592",
+      "action": "执行：未知违规类型",
+      "status": "START",
+      "details": "优先级：medium"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.911003",
+      "action": "分析违规日志",
+      "status": "OK",
+      "details": "共 5 条违规记录"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.911098",
+      "action": "违规类型：bypass_attempt",
+      "status": "INFO",
+      "details": "3 次"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.911107",
+      "action": "违规类型：skip_workflow_step",
+      "status": "INFO",
+      "details": "1 次"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.911112",
+      "action": "违规类型：fabricate_result",
+      "status": "INFO",
+      "details": "1 次"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.911126",
+      "action": "执行：合规意识不足",
+      "status": "START",
+      "details": "优先级：medium"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.911133",
+      "action": "合规意识不足",
+      "status": "OK",
+      "details": "已执行：每次操作前检查：是否通过防护层？"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.911139",
+      "action": "执行：缺乏实时监控",
+      "status": "START",
+      "details": "优先级：medium"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.911424",
+      "action": "启用合规监控",
+      "status": "OK",
+      "details": "compliance_dashboard.py 已就绪"
+    },
+    {
+      "timestamp": "2026-03-20T09:54:09.911438",
+      "action": "启用合规监控",
+      "status": "OK",
+      "details": "建议：定期运行 compliance_dashboard.py 检查"
+    }
+  ]
+}

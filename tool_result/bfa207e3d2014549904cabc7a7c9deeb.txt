@@ -1,0 +1,148 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T07:43:05.268917
+# ---
+============================================================
+30-scripts-tools 目录中的 Python 文件
+============================================================
+总数：128
+
+[关键工具检查]
+  [OK] embedded_critic.py
+  [OK] workflow_enforcer.py
+  [OK] tool_executor.py
+  [OK] copaw_entry.py
+  [OK] tool_call_tracker.py
+  [OK] workflow_guardian_v2.py
+  [OK] git_commit_helper.py
+  [MISSING] fast_load.py
+  [MISSING] post_session_compress.py
+  [OK] performance_analyzer.py
+
+============================================================
+Registry 工具 vs 实际文件匹配
+============================================================
+Registry 工具总数：9
+
+匹配的工具：0
+
+不匹配的工具：9
+前 20 个示例:
+  [MISSING] anomaly_detector -> anomaly_detector.
+  [MISSING] context_verify -> fast_load.py
+  [MISSING] doc_generator -> doc_generator.
+  [MISSING] memory_distiller_llm -> memory_distiller_llm.
+  [MISSING] memory_distiller_v2 -> memory_distiller_v2.
+  [MISSING] performance_analyzer -> performance_analyzer.
+  [MISSING] session_compress -> post_session_compress.
+  [MISSING] tool_executor -> tool_executor.
+  [MISSING] workflow_enforcer -> workflow_enforcer.
+
+============================================================
+实际文件分类统计
+============================================================
+
+sa* - 18 个文件:
+  - sa_001_realtime_fetcher.py
+  - sa_002_historical_downloader.py
+  - sa_003_financial_collector.py
+  - sa_004_sentiment_monitor.py
+  - sa_005_indicator_calculator.py
+  ... 还有 13 个
+
+check* - 13 个文件:
+  - check_all_existing_tools.py
+  - check_core_files.py
+  - check_existing_tools_fixed.py
+  - check_kept_tools.py
+  - check_kept_tools2.py
+  ... 还有 8 个
+
+update* - 11 个文件:
+  - update_execution_state.py
+  - update_mandatory_workflow.py
+  - update_registry_phase3.py
+  - update_registry_sa_phase1.py
+  - update_registry_sa_phase1_complete.py
+  ... 还有 6 个
+
+workflow* - 11 个文件:
+  - workflow_anomaly_detector.py
+  - workflow_auto_executor.py
+  - workflow_autoloader.py
+  - workflow_cache.py
+  - workflow_enforcer.py
+  ... 还有 6 个
+
+auto* - 5 个文件:
+  - auto_doc_generator.py
+  - auto_format_detector.py
+  - auto_memory_distiller.py
+  - auto_retry.py
+  - auto_session_compressor.py
+
+tool* - 5 个文件:
+  - tool_call_tracker.py
+  - tool_executor.py
+  - tool_monitor.py
+  - tool_selector.py
+  - tool_self_learner.py
+
+brainstorm* - 4 个文件:
+  - brainstorm_ai_assistant.py
+  - brainstorm_mindmap.py
+  - brainstorm_quality_predictor.py
+  - brainstorm_stock_analysis.py
+
+reg* - 4 个文件:
+  - reg_rules_verifier.py
+  - reg_task.py
+  - reg_tool_selector.py
+  - reg_workflow_scheduler.py
+
+fix* - 3 个文件:
+  - fix_execution_state.py
+  - fix_execution_state_v2.py
+  - fix_state_with_substeps.py
+
+verify* - 3 个文件:
+  - verify_sa_tools.py
+  - verify_state_types.py
+  - verify_workflow_update.py
+
+create* - 2 个文件:
+  - create_brainstorm_v3.py
+  - create_dialogue_workflow.py
+
+debug* - 2 个文件:
+  - debug_step_match.py
+  - debug_workflow_steps.py
+
+dynamic* - 2 个文件:
+  - dynamic_goal_adjuster.py
+  - dynamic_step_skipper.py
+
+git* - 2 个文件:
+  - git_commit_helper.py
+  - git_precommit_check.py
+
+list* - 2 个文件:
+  - list_git_files.py
+  - list_tools.py
+
+self* - 2 个文件:
+  - self_corrector.py
+  - self_goal_setter.py
+
+sync* - 2 个文件:
+  - sync_registry.py
+  - sync_registry_smart.py
+
+task* - 2 个文件:
+  - task_analyzer.py
+  - task_decomposer.py
+
+============================================================
+总结:
+  实际 Python 文件：128
+  Registry 匹配：0
+  Registry 不匹配：9

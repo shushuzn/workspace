@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-20T10:16:47.907683
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_executor.py  (lines 40-100 of 191)
+        # 加载防护层
+        if AUTO_PROTECTION_ENABLED:
+            self._load_protection()
+        
+        # 加载权限验证器
+        if PERMISSION_ENABLED:
+            self._load_permission()
+        
+        self._verify_session()
+    
+    def _load_protection(self):
+        """加载防护层"""
+        try:
+            if self.state_file.exists():
+                with open(self.state_file, "r", encoding="utf-8") as f:
+                    state = json.load(f)
+                session_id = state.get("session_id")
+                if session_id:
+                    self.protection = create_protection_layer(session_id)
+        except Exception as e:
+            print(f"[WARN] 防护层加载失败：{e}")
+    
+    def _verify_session(self):
+        if not self.state_file.exists():
+            raise RuntimeError(
+                "[BLOCK] execution-state.json 不存在\n"
+                "[ACTION] 必须通过 copaw_entry.py 启动任务"
+            )
+        with open(self.state_file, "r", encoding="utf-8") as f:
+            state = json.load(f)
+        self.session_id = state.get("session_id")
+        if not self.session_id:
+            raise RuntimeError("[BLOCK] session_id 缺失")
+        if not state.get("mandatory_execution"):
+            raise RuntimeError("[BLOCK] mandatory_execution 未启用")
+        print(f"[OK] Session 验证通过：{self.session_id}")
+    
+    def execute(self, tool_id: str, params: dict = None):
+        if params is None:
+            params = {}
+        
+        # 【新增】操作前防护检查
+        if self.protection:
+            pre_check = self.protection.pre_operation_check("tool_call", {"tool_id": tool_id})
+            if not pre_check.get("allowed", True):
+                print(f"[BLOCK] 防护层阻断：{pre_check['reason']}")
+                return {
+                    "status": "blocked",
+                    "reason": pre_check["reason"],
+                    "check_failed": pre_check.get("check_failed"),
+                    "action": "BLOCKED"
+                }
+            if pre_check.get("requires_confirmation"):
+                print(f"[WARN] 需要额外确认：{pre_check['reason']}")
+        
+        start = time.time()
+        if not self._verify_registered(tool_id):
+            raise ValueError(f"[BLOCK] 工具未注册：{tool_id}")
+        result = self._run_tool(tool_id, params)
+        duration = time.time() - start
+        
+
+[91 more lines. Use start_line=101 to continue.]

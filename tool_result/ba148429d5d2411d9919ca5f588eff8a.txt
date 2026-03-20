@@ -1,0 +1,129 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T10:21:10.802707
+# ---
+[EXEC] git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	modified:   13-memory/2026-03-20.md
+	modified:   30-scripts-tools/copaw_entry.py
+	modified:   30-scripts-tools/tool_call_log.jsonl
+	modified:   30-scripts-tools/tools_registry.json
+	modified:   AGENTS.md
+	modified:   agent.json
+	modified:   dialog/2026-03-20.jsonl
+	modified:   flow-archive/20260318-universal-workflow-001/execution-state.json
+	modified:   flow-archive/20260318-universal-workflow-001/validation-log.jsonl
+	modified:   flow-archive/20260318-universal-workflow-001/workflow.json
+	modified:   memory/2026-03-20.md
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+	modified:   10-RESEARCH/domain-research/领域研究/cnt-research (modified content)
+	modified:   30-scripts-tools/tool_call_log.jsonl
+	modified:   agent.json
+	modified:   flow-archive/20260318-universal-workflow-001/execution-state.json
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	30-scripts-tools/add_core_rules_to_workflow.py
+	30-scripts-tools/add_missing_key_tools.py
+	30-scripts-tools/add_mock_tool_calls.py
+	30-scripts-tools/admin_notifications.jsonl
+	30-scripts-tools/agent_tool_monitor.py
+	30-scripts-tools/anti_bypass_engine.py
+	30-scripts-tools/auto_backup.py
+	30-scripts-tools/auto_fix_engine.py
+	30-scripts-tools/auto_fix_log.jsonl
+	30-scripts-tools/auto_protection_layer.py
+	30-scripts-tools/auto_recovery.py
+	30-scripts-tools/auto_training_engine.py
+	30-scripts-tools/behavior_analyzer.py
+	30-scripts-tools/blockchain_logger.py
+	30-scripts-tools/check_all_existing_tools.py
+	30-scripts-tools/check_existing_tools_fixed.py
+	30-scripts-tools/check_git_version.py
+	30-scripts-tools/check_kept_tools.py
+	30-scripts-tools/check_kept_tools2.py
+	30-scripts-tools/check_key_tools_exist.py
+	30-scripts-tools/check_log.py
+	30-scripts-tools/check_missing_tools.py
+	30-scripts-tools/check_registry.py
+	30-scripts-tools/check_registry_count.py
+	30-scripts-tools/check_registry_format.py
+	30-scripts-tools/check_restored.py
+	30-scripts-tools/check_tool_files.py
+	30-scripts-tools/check_tool_log.py
+	30-scripts-tools/check_tool_structure.py
+	30-scripts-tools/check_workflow.py
+	30-scripts-tools/check_workflow_steps.py
+	30-scripts-tools/compare_count.py
+	30-scripts-tools/compliance_booster.py
+	30-scripts-tools/compliance_dashboard.py
+	30-scripts-tools/compliance_report.html
+	30-scripts-tools/compliance_report.json
+	30-scripts-tools/confirmation_gate.py
+	30-scripts-tools/context_verify.py
+	30-scripts-tools/core_rules_verifier.py
+	30-scripts-tools/count_py_files.py
+	30-scripts-tools/count_real_tools.py
+	30-scripts-tools/debug_registry.py
+	30-scripts-tools/diagnose_registry.py
+	30-scripts-tools/emergency_stop.py
+	30-scripts-tools/emergency_stop_log.jsonl
+	30-scripts-tools/exec_protection_task.py
+	30-scripts-tools/external_verifier.py
+	30-scripts-tools/file_baseline.json
+	30-scripts-tools/file_guardian.py
+	30-scripts-tools/find_copaw_tool.py
+	30-scripts-tools/find_critic_tools.py
+	30-scripts-tools/fix_execution_state_v3.py
+	30-scripts-tools/fix_registry_format.py
+	30-scripts-tools/forced_protection_executor.py
+	30-scripts-tools/git_hook_checks.jsonl
+	30-scripts-tools/git_precommit_check_v4.py
+	30-scripts-tools/guardian_auto_fix.py
+	30-scripts-tools/improvement_executor.py
+	30-scripts-tools/improvement_log.json
+	30-scripts-tools/integrity_checker.py
+	30-scripts-tools/integrity_state.json
+	30-scripts-tools/interceptor_log.jsonl
+	30-scripts-tools/list_git_files.py
+	30-scripts-tools/mark_all_completed.py
+	30-scripts-tools/monitor_log.jsonl
+	30-scripts-tools/penalty_state.json
+	30-scripts-tools/penalty_system.py
+	30-scripts-tools/penalty_system_v2.py
+	30-scripts-tools/permission_log.jsonl
+	30-scripts-tools/permission_matrix.json
+	30-scripts-tools/permission_tokens.json
+	30-scripts-tools/permission_validator.py
+	30-scripts-tools/protected_py.bat
+	30-scripts-tools/protected_py.py
+	30-scripts-tools/protection_monitor.py
+	30-scripts-tools/read_steps.py
+	30-scripts-tools/rebuild_registry.py
+	30-scripts-tools/reg_agent_monitor.py
+	30-scripts-tools/reg_antibypass.py
+	30-scripts-tools/reg_auto_backup.py
+	30-scripts-tools/reg_auto_critic_v7.py
+	30-scripts-tools/reg_auto_protection.py
+	30-scripts-tools/reg_confirmation_gate.py
+	30-scripts-tools/reg_context_verify.py
+	30-scripts-tools/reg_dashboard_fix.py
+	30-scripts-tools/reg_diagnose.py
+	30-scripts-tools/reg_fix_state_v3.py
+	30-scripts-tools/reg_forced_protection.py
+	30-scripts-tools/reg_guardian_fix.py
+	30-scripts-tools/reg_mark_all.py
+	30-scripts-tools/reg_protection_phase2.py
+	30-scripts-tools/reg_protection_phase3.py
+	30-scripts-tools/reg_reward_stop.py
+	30-scripts-tools/reg_risk_assessor.py
+	30-scripts-tools/reg_rules_verifier.py
+	30-scripts-tools/reg_safe_shell.py
+	30-scri

@@ -1,0 +1,424 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T09:25:54.889319
+# ---
+Command failed with exit code 1.
+[stderr]
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 51, in get_metrics
+    "auto_fix_suggestions": self._get_auto_fix_suggestions()
+                            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 206, in _get_auto_fix_suggestions
+    metrics = self.get_metrics()
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 49, in get_metrics
+    "system_status": self._get_system_status(),
+                     ~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 155, in _get_system_status
+    "protection_tools": self._count_protection_tools()
+                        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\compliance_dashboard.py", line 161, in _count_protection_tools
+    if not registry_file.exists():
+           ~~~~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\pathlib\_abc.py", line 450, in exists
+    self.stat(follow_symlinks=follow_symlinks)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 515, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 167, in __fspath__
+    return str(self)
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\pathlib\_local.py", line 233, in __str__
+    self._str = self._format_parsed_parts(self.drive, self.root,
+                                          ^^^^^^^^^^
+RecursionError: maximum recursion depth exceeded
+
+[Output truncated: showing lines 2097-2513 of 2513 (30KB limit)]

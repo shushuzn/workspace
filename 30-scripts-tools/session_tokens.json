@@ -1,0 +1,9 @@
+{
+  "session-20260320095844": {
+    "token": "142ea7f2347981988f9461a0083481303eda9f579b27f7dbdf8cd34ae6d9fd1b",
+    "created_at": "2026-03-20T02:04:04.640552+00:00",
+    "entropy_sources": 4,
+    "git_commit": "cb8b665d",
+    "expires_at": null
+  }
+}

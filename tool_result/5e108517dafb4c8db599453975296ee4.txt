@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-20T08:46:12.725739
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\copaw_entry.py  (lines 20-45 of 236)
+from pathlib import Path
+
+# 导入自动防护层
+try:
+    from auto_protection_layer import create_protection_layer
+    AUTO_PROTECTION_ENABLED = True
+except ImportError:
+    AUTO_PROTECTION_ENABLED = False
+
+class CopawEntry:
+    def __init__(self, task_name: str = None):
+        self.task_name = task_name or "Unnamed Task"
+        self.flow_id = "20260318-universal-workflow-001"
+        self.session_id = self._generate_session_id()
+        self.start_time = datetime.now()
+        self.workflow_dir = Path(f"flow-archive/{self.flow_id}")
+        self.state_file = self.workflow_dir / "execution-state.json"
+        self.tool_log = Path("30-scripts-tools/tool_call_log.jsonl")
+        
+        print("="*60)
+        print("CoPaw Entry Point - 强制工作流入口")
+        print("="*60)
+        print(f"Task: {self.task_name}")
+        print(f"Flow ID: {self.flow_id}")
+        print(f"Session ID: {self.session_id}")
+        print(f"Start Time: {self.start_time.isoformat()}")
+
+[191 more lines. Use start_line=46 to continue.]
