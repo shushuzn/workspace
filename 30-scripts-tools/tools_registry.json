@@ -1,7 +1,8 @@
 {
-  "version": "1.11.78-brainstorm",
+  "version": "1.11.79-gantt-export",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.79: Add GANTT-CHART-001 + EXPORT-FORMAT-001 (Week 1 tools)",
     "v1.11.78: Add brainstorm_roadmap_tools.py - 头脑风暴创新路线图工具ideas",
     "v1.11.77: Add ROADMAP-MASTER-001 multi-dimensional roadmap manager (4 dimensions)",
     "v1.11.76: Add OPTIMAP-001 roadmap manager + optimization roadmap",
@@ -6199,6 +6200,28 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T23:10:00.000000"
+    },
+    "gantt-chart-001": {
+      "tool_id": "gantt-chart-001",
+      "name": "GANTT-CHART-001 Gantt Chart Generator",
+      "description": "甘特图生成器 - ASCII甘特图、时间线可视化、多维度视图",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/gantt_chart_001.py",
+      "category": "visualization",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:15:00.000000"
+    },
+    "export-format-001": {
+      "tool_id": "export-format-001",
+      "name": "EXPORT-FORMAT-001 Multi-Format Exporter",
+      "description": "多格式导出器 - JSON/MD/HTML/TXT格式导出、批量导出",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/export_format_001.py",
+      "category": "export",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:16:00.000000"
     }
   },
   "workflows": {
