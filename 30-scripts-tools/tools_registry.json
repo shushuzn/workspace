@@ -1,5 +1,5 @@
 {
-  "version": "1.11.87-super-compress",
+  "version": "1.11.88-brainstorm-optimize",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
     "v1.11.83: Add Phase 1 tools for research + utility dimensions",
@@ -6413,6 +6413,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T22:45:00.000000"
+    },
+    "brainstorm-optimize-001": {
+      "tool_id": "brainstorm-optimize-001",
+      "name": "BRAINSTORM-OPTIMIZE-001 头脑风暴优化器",
+      "description": "头脑风暴优化器 - 用头脑风暴工作流生成优化ideas、评估、实现",
+      "version": "1.0",
+      "file_path": "30-scripts-tools/brainstorm_optimize_001.py",
+      "category": "optimization",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T22:50:00.000000"
     }
   },
   "workflows": {
