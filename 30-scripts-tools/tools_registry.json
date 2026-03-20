@@ -1,7 +1,8 @@
 {
-  "version": "1.11.65-report",
+  "version": "1.11.66-phase6-complete",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.66: Added SA-032 strategy recommendation engine (Phase 6 complete)",
     "v1.11.65: Added SA-031 intelligent report generator with multiple templates",
     "v1.11.64: Added SA-030 sentiment analyzer for news/social media",
     "v1.11.63: Added SA-029 AI signal generator (Phase 6 start)",
@@ -5966,6 +5967,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T21:25:00.000000"
+    },
+    "sa-032-strategy": {
+      "tool_id": "sa-032-strategy",
+      "name": "SA-032 Strategy Recommendation Engine",
+      "description": "策略推荐引擎 - 智能策略推荐、风险匹配、个性化建议",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/sa_032_strategy.py",
+      "category": "stock_analysis",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:30:00.000000"
     }
   },
   "workflows": {
