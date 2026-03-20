@@ -1,6 +1,6 @@
 {
   "version": "1.7.0-synced",
-  "last_updated": "2026-03-20T16:29:27.187025",
+  "last_updated": "2026-03-20T16:32:16.887839",
   "changes": [
     "v1.11.55: Added mandatory security rules (2026-03-20)",
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -5722,6 +5722,24 @@
       "categorized_at": "2026-03-20T16:29:27.186672+08:00",
       "auto_registered": true,
       "auto_registered_at": "2026-03-20T16:29:27.186676"
+    },
+    "stock-dashboard": {
+      "tool_id": "stock-dashboard",
+      "name": "Stock_Dashboard",
+      "description": "自动注册的工具: stock_dashboard.py",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\stock_dashboard.py",
+      "parameters": [],
+      "triggers": [
+        "manual"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 300,
+      "category": "automation",
+      "categorized_at": "2026-03-20T16:32:16.887426+08:00",
+      "auto_registered": true,
+      "auto_registered_at": "2026-03-20T16:32:16.887431"
     }
   },
   "workflows": {
