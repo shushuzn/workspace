@@ -1,0 +1,90 @@
+[
+  {
+    "id": "opt-001",
+    "name": "Smart Compression v3.0",
+    "category": "compression",
+    "description": "结构感知压缩，保留Markdown结构",
+    "impact": "high",
+    "difficulty": "medium",
+    "status": "completed",
+    "score": 100,
+    "priority": "[CRITICAL]"
+  },
+  {
+    "id": "opt-002",
+    "name": "Response Caching",
+    "category": "caching",
+    "description": "LLM响应缓存，避免重复调用",
+    "impact": "high",
+    "difficulty": "easy",
+    "status": "completed",
+    "score": 100,
+    "priority": "[CRITICAL]"
+  },
+  {
+    "id": "opt-005",
+    "name": "Auto Session Compression",
+    "category": "compression",
+    "description": "自动压缩会话，减少token",
+    "impact": "high",
+    "difficulty": "medium",
+    "status": "in_progress",
+    "score": 100,
+    "priority": "[CRITICAL]"
+  },
+  {
+    "id": "opt-003",
+    "name": "Batch Tool Executor",
+    "category": "batch",
+    "description": "批量执行工具，减少交互次数",
+    "impact": "medium",
+    "difficulty": "easy",
+    "status": "completed",
+    "score": 95,
+    "priority": "[CRITICAL]"
+  },
+  {
+    "id": "opt-006",
+    "name": "Smart Prompt Optimizer",
+    "category": "prompt",
+    "description": "简化提示词，减少token消耗",
+    "impact": "medium",
+    "difficulty": "easy",
+    "status": "completed",
+    "score": 95,
+    "priority": "[CRITICAL]"
+  },
+  {
+    "id": "opt-004",
+    "name": "Workflow Optimizer",
+    "category": "workflow",
+    "description": "分析并优化工作流步骤",
+    "impact": "medium",
+    "difficulty": "medium",
+    "status": "completed",
+    "score": 90,
+    "priority": "[CRITICAL]"
+  },
+  {
+    "id": "opt-008",
+    "name": "Memory Distillation",
+    "category": "memory",
+    "description": "自动蒸馏记忆，保留核心信息",
+    "impact": "medium",
+    "difficulty": "medium",
+    "status": "pending",
+    "score": 90,
+    "priority": "[CRITICAL]"
+  },
+  {
+    "id": "opt-007",
+    "name": "Parallel Execution Engine",
+    "category": "parallel",
+    "description": "并行执行独立任务",
+    "impact": "high",
+    "difficulty": "hard",
+    "status": "pending",
+    "score": 75,
+    "priority": "[HIGH]"
+  }
+]

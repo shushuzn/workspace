@@ -212,7 +212,7 @@ class BrainstormOptimizer:
                 "description": "简化提示词，减少token消耗",
                 "impact": "medium",
                 "difficulty": "easy",
-                "status": "pending"
+                "status": "completed"
             },
             {
                 "id": "opt-007",
@@ -277,10 +277,13 @@ class BrainstormOptimizer:
             json.dump(results, f, ensure_ascii=False, indent=2)
     
     def list_ideas(self) -> str:
-        """列出所有ideas"""
+        """列出未完成的ideas"""
         ideas = self.evaluate_ideas()
         
-        output = ["# OPTIMIZATION IDEAS\n"]
+        # 只显示未完成的
+        ideas = [i for i in ideas if i.get("status") != "completed"]
+        
+        output = ["# PENDING OPTIMIZATION IDEAS\n"]
         output.append(f"Total: {len(ideas)}\n")
         
         for i, idea in enumerate(ideas, 1):

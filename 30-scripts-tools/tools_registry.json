@@ -6424,6 +6424,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T22:50:00.000000"
+    },
+    "prompt-optimizer-001": {
+      "tool_id": "prompt-optimizer-001",
+      "name": "PROMPT-OPTIMIZER-001 提示词优化器",
+      "description": "提示词优化器 - 简化冗长提示词、提取核心指令、压缩重复内容",
+      "version": "1.0",
+      "file_path": "30-scripts-tools/prompt_optimizer_001.py",
+      "category": "optimization",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T22:55:00.000000"
     }
   },
   "workflows": {
