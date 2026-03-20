@@ -1,5 +1,5 @@
 {
-  "version": "1.11.58-phase5-v1",
+  "version": "1.11.59-phase5-v2",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
     "v1.11.58: Added SA-025 data source manager (Phase 5 start)",
@@ -5885,6 +5885,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T20:46:00.000000"
+    },
+    "sa-026-realtime": {
+      "tool_id": "sa-026-realtime",
+      "name": "SA-026 Realtime Quotes",
+      "description": "实时WebSocket行情 - 订阅推送、自动重连、价格告警",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/sa_026_realtime.py",
+      "category": "stock_analysis",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T20:51:00.000000"
     }
   },
   "workflows": {
