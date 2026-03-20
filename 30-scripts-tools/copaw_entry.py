@@ -19,6 +19,13 @@ import os
 from datetime import datetime
 from pathlib import Path
 
+# 导入 State 保护器
+try:
+    from state_protector import update_state, init_state_protection, compute_signature
+    STATE_PROTECTOR_ENABLED = True
+except ImportError:
+    STATE_PROTECTOR_ENABLED = False
+
 # 导入自动防护层
 try:
     from auto_protection_layer import create_protection_layer
@@ -105,13 +112,24 @@ class CopawEntry:
             "mandatory_execution": True
         }
         
+        # 添加数字签名（State 保护器）
+        if STATE_PROTECTOR_ENABLED:
+            state['signature'] = compute_signature(state)
+            state['protection_enabled'] = True
+        
         # 保存初始状态
         with open(self.state_file, "w", encoding="utf-8") as f:
             json.dump(state, f, ensure_ascii=False, indent=2)
         
+        # 初始化保护
+        if STATE_PROTECTOR_ENABLED:
+            init_state_protection()
+        
         print(f"\n[OK] execution-state.json 已初始化")
         print(f"  路径：{self.state_file}")
         print(f"  总步骤：{total_steps}")
+        if STATE_PROTECTOR_ENABLED:
+            print(f"  保护：State 保护器已启用 ✓")
         
         return state
     

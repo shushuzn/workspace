@@ -3,7 +3,7 @@
   "task": "\"提交安全修复 - 移除 force 模式\"",
   "description": "Task started via copaw_entry.py",
   "started_at": "2026-03-20T11:11:28.544599+08:00",
-  "current_step": 2,
+  "current_step": 20,
   "total_steps": 20,
   "status": "completed",
   "step_status": {
