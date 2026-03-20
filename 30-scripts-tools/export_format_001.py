@@ -286,7 +286,7 @@ Generated: {datetime.now().isoformat()}
 ```python
 # Import and run {name}
 import subprocess
-result = subprocess.run(["python", "{file_path}"], capture_output=True, text=True)
+result = subprocess.run(["python", "{file_path}"], capture_output=True, text=True, timeout=60)
 print(result.stdout)
 ```
 

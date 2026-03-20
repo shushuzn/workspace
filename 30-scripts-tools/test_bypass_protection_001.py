@@ -55,7 +55,7 @@ def test_direct_state_modification():
         text=True,
         encoding='utf-8',
         errors='replace'
-    )
+    , timeout=60)
     
     # 恢复原始状态
     with open(STATE_FILE, 'w', encoding='utf-8') as f:
@@ -94,7 +94,7 @@ print("State modified")
     
     # 执行绕过脚本
     result = subprocess.run(
-        ['py', str(bypass_script)],
+        ['py', str(bypass_script, timeout=60)],
         capture_output=True,
         text=True,
         encoding='utf-8',
@@ -113,7 +113,7 @@ print("State modified")
         text=True,
         encoding='utf-8',
         errors='replace'
-    )
+    , timeout=60)
     
     if result.returncode != 0:
         print("  [BLOCK] 签名验证失败 - 防护生效")
@@ -133,7 +133,7 @@ def test_git_commit_bypass():
         text=True,
         encoding='utf-8',
         errors='replace'
-    )
+    , timeout=60)
     
     if '[BLOCK]' in result.stdout or '[BLOCK]' in result.stderr or result.returncode != 0:
         print("  [BLOCK] 检测到 --no-verify - 防护生效")

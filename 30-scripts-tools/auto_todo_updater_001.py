@@ -195,7 +195,7 @@ class AutoTODOUpdater:
         try:
             # Git add
             subprocess.run(
-                ['git', 'add', str(self.todo_file)],
+                ['git', 'add', str(self.todo_file, timeout=60)],
                 cwd=str(self.workspace),
                 capture_output=True,
                 timeout=30
@@ -207,7 +207,7 @@ class AutoTODOUpdater:
             
             result_proc = subprocess.run(
                 ['git', 'commit', '-m', msg],
-                cwd=str(self.workspace),
+                cwd=str(self.workspace, timeout=60),
                 capture_output=True,
                 text=True,
                 timeout=30
@@ -270,7 +270,7 @@ class AutoTODOUpdater:
                     print("\n自动推送 Git...")
                     subprocess.run(
                         ['git', 'push'],
-                        cwd=str(self.workspace),
+                        cwd=str(self.workspace, timeout=60),
                         capture_output=True,
                         timeout=60
                     )

@@ -8,7 +8,7 @@ result = subprocess.run(
     cwd=r"D:\OpenClaw\workspace",
     capture_output=True,
     text=True
-)
+, timeout=60)
 print(result.stdout)
 print(result.stderr)
 sys.exit(result.returncode)

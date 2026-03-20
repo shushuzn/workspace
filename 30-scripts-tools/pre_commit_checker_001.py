@@ -48,7 +48,7 @@ def check_workflow_compliance():
             text=True,
             encoding='utf-8',
             cwd="D:\\OpenClaw\\workspace"
-        )
+        , timeout=60)
         
         if result.returncode == 0:
             last_commit_msg = result.stdout.strip()
@@ -65,7 +65,7 @@ def check_workflow_compliance():
             text=True,
             encoding='utf-8',
             cwd="D:\\OpenClaw\\workspace"
-        )
+        , timeout=60)
         
         if result.returncode == 0:
             untracked = [line for line in result.stdout.split('\n') if line.startswith('??') and '30-scripts-tools/' in line and '.py' in line]

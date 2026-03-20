@@ -60,7 +60,7 @@ def run_full_workflow(topic):
     result = subprocess.run(
         [sys.executable, "30-scripts-tools/brainstorm_001_define.py", topic],
         capture_output=True, text=True
-    )
+    , timeout=60)
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
         return
@@ -70,7 +70,7 @@ def run_full_workflow(topic):
     result = subprocess.run(
         [sys.executable, "30-scripts-tools/brainstorm_002_diverge.py", "15"],
         capture_output=True, text=True
-    )
+    , timeout=60)
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
         return
@@ -80,7 +80,7 @@ def run_full_workflow(topic):
     result = subprocess.run(
         [sys.executable, "30-scripts-tools/brainstorm_003_filter.py", "7"],
         capture_output=True, text=True
-    )
+    , timeout=60)
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
         return
@@ -90,7 +90,7 @@ def run_full_workflow(topic):
     result = subprocess.run(
         [sys.executable, "30-scripts-tools/brainstorm_004_prioritize.py", "5"],
         capture_output=True, text=True
-    )
+    , timeout=60)
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
         return
@@ -127,42 +127,42 @@ def main():
     if sys.argv[1] == "--scamper":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
-        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_scamper.py", topic])
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_scamper.py", topic], timeout=60)
         return
     
     if sys.argv[1] == "--sixhats":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
-        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_sixhats.py", topic])
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_sixhats.py", topic], timeout=60)
         return
     
     if sys.argv[1] == "--reverse":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
-        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_reverse.py", topic])
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_reverse.py", topic], timeout=60)
         return
     
     if sys.argv[1] == "--random":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
-        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_random.py", topic])
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_random.py", topic], timeout=60)
         return
     
     if sys.argv[1] == "--analogy":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
-        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_analogy.py", topic])
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_analogy.py", topic], timeout=60)
         return
     
     if sys.argv[1] == "--refine":
         topic = " ".join(sys.argv[2:]) or "优化工作流"
         import subprocess
-        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_refine.py", topic])
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_refine.py", topic], timeout=60)
         return
     
     if sys.argv[1] == "--next":
         import subprocess
-        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_next.py"])
+        subprocess.run([sys.executable, "30-scripts-tools/brainstorm_next.py"], timeout=60)
         return
     
     if sys.argv[1] == "--step":
@@ -186,7 +186,7 @@ def main():
             cmd.append(topic)
         
         import subprocess
-        subprocess.run(cmd)
+        subprocess.run(cmd, timeout=60)
         return
     
     # Full workflow with topic

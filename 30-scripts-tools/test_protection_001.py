@@ -20,7 +20,7 @@ def test(description, command, should_block=True):
         text=True,
         encoding='utf-8',
         errors='replace'
-    )
+    , timeout=60)
     
     blocked = result.returncode != 0 or '[BLOCK]' in result.stdout or '[BLOCK]' in result.stderr
     

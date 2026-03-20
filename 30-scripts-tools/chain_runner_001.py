@@ -83,7 +83,7 @@ class ChainRunner:
             
             try:
                 result = subprocess.run(
-                    [sys.executable, str(tool_file)],
+                    [sys.executable, str(tool_file, timeout=60)],
                     capture_output=True,
                     text=True,
                     timeout=60

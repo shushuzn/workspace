@@ -157,14 +157,14 @@ class SessionEnd:
         
         try:
             # Add all changes
-            subprocess.run(['git', 'add', '-A'], capture_output=True, check=True)
+            subprocess.run(['git', 'add', '-A'], capture_output=True, check=True, timeout=60)
             
             # Commit with description (use --no-verify to bypass pre-commit)
             commit_msg = f"{description} - {datetime.now().strftime('%Y-%m-%d %H:%M')}"
-            subprocess.run(['git', 'commit', '-m', commit_msg, '--no-verify'], capture_output=True, check=True)
+            subprocess.run(['git', 'commit', '-m', commit_msg, '--no-verify'], capture_output=True, check=True, timeout=60)
             
             # Push
-            subprocess.run(['git', 'push'], capture_output=True, check=True)
+            subprocess.run(['git', 'push'], capture_output=True, check=True, timeout=60)
             
             result['success'] = True
             result['message'] = 'Git push successful'

@@ -76,7 +76,7 @@ def main():
             text=True,
             encoding='utf-8',
             errors='replace'
-        )
+        , timeout=60)
         sys.exit(result.returncode)
     except Exception as e:
         print(f"[ERROR] Git 命令执行失败：{e}", file=sys.stderr)

@@ -119,7 +119,7 @@ class WorkflowAutoExecutor:
             capture_output=True,
             text=True,
             encoding="utf-8"
-        )
+        , timeout=60)
         print(result.stdout)
         if result.returncode != 0:
             print("[FAIL] Workflow Guardian 验证失败")
@@ -132,7 +132,7 @@ class WorkflowAutoExecutor:
             capture_output=True,
             text=True,
             encoding="utf-8"
-        )
+        , timeout=60)
         print(result.stdout)
         if result.returncode != 0:
             print("[FAIL] Tool Call Tracker 验证失败")
@@ -144,7 +144,7 @@ class WorkflowAutoExecutor:
             ["git", "add", "-A"],
             capture_output=True,
             text=True
-        )
+        , timeout=60)
         
         timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
         commit_msg = f"Auto-commit-{timestamp}"
@@ -153,13 +153,13 @@ class WorkflowAutoExecutor:
             ["git", "commit", "-m", commit_msg],
             capture_output=True,
             text=True
-        )
+        , timeout=60)
         
         if result.returncode == 0:
             print(f"[OK] Git 提交成功：{commit_msg}")
             
             # Push
-            result = subprocess.run(["git", "push"], capture_output=True, text=True)
+            result = subprocess.run(["git", "push"], capture_output=True, text=True, timeout=60)
             if result.returncode == 0:
                 print("[OK] Git Push 成功")
             else:

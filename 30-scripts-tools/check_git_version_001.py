@@ -7,7 +7,7 @@ result = subprocess.run(
     capture_output=True,
     text=True,
     encoding="utf-8"
-)
+, timeout=60)
 
 if result.returncode == 0:
     registry = json.loads(result.stdout)

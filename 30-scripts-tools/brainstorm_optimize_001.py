@@ -68,7 +68,7 @@ class BrainstormOptimizer:
         try:
             # 使用 subprocess 运行头脑风暴
             result = subprocess.run(
-                [sys.executable, str(brainstorm_script), "--generate", "optimization"],
+                [sys.executable, str(brainstorm_script, timeout=60), "--generate", "optimization"],
                 capture_output=True,
                 text=True,
                 timeout=120,

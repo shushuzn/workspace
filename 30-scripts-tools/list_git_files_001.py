@@ -5,7 +5,7 @@ result = subprocess.run(
     capture_output=True,
     text=True,
     encoding="utf-8"
-)
+, timeout=60)
 
 files = result.stdout.strip().split("\n")
 critic_files = [f for f in files if "critic" in f.lower()]

@@ -27,7 +27,7 @@ def run_command(cmd, capture=True):
             text=True,
             encoding='utf-8',
             errors='replace'
-        )
+        , timeout=60)
         return result.returncode, result.stdout, result.stderr
     except Exception as e:
         return 1, "", str(e)
