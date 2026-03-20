@@ -4,14 +4,37 @@
   "dimension": "reporting",
   "version": "1.0.0",
   "created_at": "2026-03-20T22:30:00.000000",
-  "last_updated": "2026-03-20T22:30:00.000000",
+  "last_updated": "2026-03-20T23:57:00.000000",
   "total_tools": 3,
-  "completed_tools": 0,
-  "progress_pct": 0.0,
+  "completed_tools": 3,
+  "progress_pct": 100.0,
   "phases": [
-    {"phase": "1", "name": "Report Generation", "total": 2, "status": "pending"},
-    {"phase": "2", "name": "Visual Reports", "total": 1, "status": "pending"}
+    {"phase": "1", "name": "Report Generation", "total": 1, "status": "completed"},
+    {"phase": "2", "name": "Export Tools", "total": 1, "status": "completed"},
+    {"phase": "3", "name": "Templates", "total": 1, "status": "completed"}
   ],
-  "tools": [],
+  "tools": [
+    {
+      "id": "report-001-generator",
+      "name": "REPORT-001 Report Generator",
+      "file": "30-scripts-tools/report_001_generator.py",
+      "status": "completed",
+      "created_at": "2026-03-20T23:55:00.000000"
+    },
+    {
+      "id": "report-002-export",
+      "name": "REPORT-002 Export Tool",
+      "file": "30-scripts-tools/report_002_export.py",
+      "status": "completed",
+      "created_at": "2026-03-20T23:56:00.000000"
+    },
+    {
+      "id": "report-003-template",
+      "name": "REPORT-003 Template Generator",
+      "file": "30-scripts-tools/report_003_template.py",
+      "status": "completed",
+      "created_at": "2026-03-20T23:57:00.000000"
+    }
+  ],
   "metrics": {"category": "reporting", "focus": "output visualization"}
 }

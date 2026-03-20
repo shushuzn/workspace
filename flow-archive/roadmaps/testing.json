@@ -4,14 +4,29 @@
   "dimension": "testing",
   "version": "1.0.0",
   "created_at": "2026-03-20T22:30:00.000000",
-  "last_updated": "2026-03-20T22:30:00.000000",
-  "total_tools": 4,
-  "completed_tools": 0,
-  "progress_pct": 0.0,
+  "last_updated": "2026-03-20T23:45:00.000000",
+  "total_tools": 2,
+  "completed_tools": 2,
+  "progress_pct": 100.0,
   "phases": [
-    {"phase": "1", "name": "Unit Testing", "total": 2, "status": "pending"},
-    {"phase": "2", "name": "Integration Testing", "total": 2, "status": "pending"}
+    {"phase": "1", "name": "Unit Testing", "total": 1, "status": "completed"},
+    {"phase": "2", "name": "Integration Testing", "total": 1, "status": "completed"}
   ],
-  "tools": [],
-  "metrics": {"category": "testing", "focus": "quality assurance"}
+  "tools": [
+    {
+      "id": "test-001-unit",
+      "name": "TEST-001 Unit Test Generator",
+      "file": "30-scripts-tools/test_001_unit.py",
+      "status": "completed",
+      "created_at": "2026-03-20T23:45:00.000000"
+    },
+    {
+      "id": "test-002-integration",
+      "name": "TEST-002 Integration Test Framework",
+      "file": "30-scripts-tools/test_002_integration.py",
+      "status": "completed",
+      "created_at": "2026-03-20T23:46:00.000000"
+    }
+  ],
+  "metrics": {"category": "testing", "focus": "test automation"}
 }

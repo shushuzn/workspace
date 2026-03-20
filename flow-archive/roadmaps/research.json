@@ -4,14 +4,63 @@
   "dimension": "research",
   "version": "1.0.0",
   "created_at": "2026-03-20T22:30:00.000000",
-  "last_updated": "2026-03-20T22:30:00.000000",
+  "last_updated": "2026-03-20T22:33:09.538080",
   "total_tools": 5,
-  "completed_tools": 0,
-  "progress_pct": 0.0,
+  "completed_tools": 5,
+  "progress_pct": 100.0,
   "phases": [
-    {"phase": "1", "name": "Research Infrastructure", "total": 2, "status": "pending"},
-    {"phase": "2", "name": "Analysis Tools", "total": 3, "status": "pending"}
+    {
+      "phase": "1",
+      "name": "Research Infrastructure",
+      "total": 2,
+      "status": "pending"
+    },
+    {
+      "phase": "2",
+      "name": "Analysis Tools",
+      "total": 3,
+      "status": "pending"
+    }
   ],
-  "tools": [],
-  "metrics": {"category": "research", "focus": "knowledge discovery"}
+  "tools": [
+    {
+      "tool_id": "find-critic-tools",
+      "name": "Find_Critic_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.194258",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-auto-critic-v7",
+      "name": "Reg_Auto_Critic_V7",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.234590",
+      "status": "active"
+    },
+    {
+      "tool_id": "embedded-critic",
+      "name": "Embedded_Critic",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.390480",
+      "status": "active"
+    },
+    {
+      "tool_id": "research-001-topic",
+      "name": "RESEARCH-001 Research Topic Generator",
+      "file": "research_001_topic.py",
+      "added_at": "2026-03-20T22:33:09.537257",
+      "status": "active"
+    },
+    {
+      "tool_id": "research-002-literature",
+      "name": "RESEARCH-002 Literature Review Assistant",
+      "file": "research_002_literature.py",
+      "added_at": "2026-03-20T22:33:09.538075",
+      "status": "active"
+    }
+  ],
+  "metrics": {
+    "category": "research",
+    "focus": "knowledge discovery"
+  }
 }

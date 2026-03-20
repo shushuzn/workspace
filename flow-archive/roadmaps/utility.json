@@ -4,14 +4,1939 @@
   "dimension": "utility",
   "version": "1.0.0",
   "created_at": "2026-03-20T22:30:00.000000",
-  "last_updated": "2026-03-20T22:30:00.000000",
-  "total_tools": 5,
-  "completed_tools": 0,
-  "progress_pct": 0.0,
+  "last_updated": "2026-03-20T22:58:01.519743",
+  "total_tools": 273,
+  "completed_tools": 273,
+  "progress_pct": 100.0,
   "phases": [
-    {"phase": "1", "name": "Core Utilities", "total": 3, "status": "pending"},
-    {"phase": "2", "name": "Extended Utilities", "total": 2, "status": "pending"}
+    {
+      "phase": "1",
+      "name": "Core Utilities",
+      "total": 3,
+      "status": "pending"
+    },
+    {
+      "phase": "2",
+      "name": "Extended Utilities",
+      "total": 2,
+      "status": "pending"
+    }
   ],
-  "tools": [],
-  "metrics": {"category": "utility", "focus": "common functions"}
+  "tools": [
+    {
+      "tool_id": "brainstorm-define",
+      "name": "Brainstorm Define",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.113574",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-action",
+      "name": "Brainstorm Action",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.115326",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-filter",
+      "name": "Brainstorm Filter",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.116080",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-prioritize",
+      "name": "Brainstorm Prioritize",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.116773",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto_recovery",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.117505",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm_action",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.118169",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm_define",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.118931",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm_diverge",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.119597",
+      "status": "active"
+    },
+    {
+      "tool_id": "fast_load",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.120279",
+      "status": "active"
+    },
+    {
+      "tool_id": "performance_analyzer",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.121003",
+      "status": "active"
+    },
+    {
+      "tool_id": "post_session_compress",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.121708",
+      "status": "active"
+    },
+    {
+      "tool_id": "pre_session_hook",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.122457",
+      "status": "active"
+    },
+    {
+      "tool_id": "session_end",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.123388",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow_analyzer",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.124123",
+      "status": "active"
+    },
+    {
+      "tool_id": "tool_executor",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.124843",
+      "status": "active"
+    },
+    {
+      "tool_id": "check_workflow_steps",
+      "name": "",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.125850",
+      "status": "active"
+    },
+    {
+      "tool_id": "context_verify",
+      "name": "Fast Load Context Verifier",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.126581",
+      "status": "active"
+    },
+    {
+      "tool_id": "fix-execution-state-v3",
+      "name": "Fix Execution State v3",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.127373",
+      "status": "active"
+    },
+    {
+      "tool_id": "add-core-rules-to-workflow",
+      "name": "Add_Core_Rules_To_Workflow",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.128115",
+      "status": "active"
+    },
+    {
+      "tool_id": "add-missing-key-tools",
+      "name": "Add_Missing_Key_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.129139",
+      "status": "active"
+    },
+    {
+      "tool_id": "add-missing-tool-calls",
+      "name": "Add_Missing_Tool_Calls",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.129930",
+      "status": "active"
+    },
+    {
+      "tool_id": "add-mock-tool-calls",
+      "name": "Add_Mock_Tool_Calls",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.130814",
+      "status": "active"
+    },
+    {
+      "tool_id": "add-security-rules-to-registry",
+      "name": "Add_Security_Rules_To_Registry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.131596",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-doc-generator",
+      "name": "Auto_Doc_Generator",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.132351",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-format-detector",
+      "name": "Auto_Format_Detector",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.133109",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-retry",
+      "name": "Auto_Retry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.133885",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-todo-updater",
+      "name": "Auto_Todo_Updater",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.134624",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-ai-assistant",
+      "name": "Brainstorm_Ai_Assistant",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.135350",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-diverge",
+      "name": "Brainstorm_Diverge",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.136095",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-mindmap",
+      "name": "Brainstorm_Mindmap",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.136874",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-quality-predictor",
+      "name": "Brainstorm_Quality_Predictor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.137671",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-stock-analysis",
+      "name": "Brainstorm_Stock_Analysis",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.138452",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-all-existing-tools",
+      "name": "Check_All_Existing_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.139221",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-core-files",
+      "name": "Check_Core_Files",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.139981",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-current-state",
+      "name": "Check_Current_State",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.140765",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-existing-tools-fixed",
+      "name": "Check_Existing_Tools_Fixed",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.141937",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-git-version",
+      "name": "Check_Git_Version",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.142955",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-kept-tools",
+      "name": "Check_Kept_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.143943",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-kept-tools2",
+      "name": "Check_Kept_Tools2",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.144950",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-key-tools-exist",
+      "name": "Check_Key_Tools_Exist",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.145922",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-log",
+      "name": "Check_Log",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.146947",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-missing-tools",
+      "name": "Check_Missing_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.147909",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-registry",
+      "name": "Check_Registry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.148833",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-registry-count",
+      "name": "Check_Registry_Count",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.149792",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-registry-format",
+      "name": "Check_Registry_Format",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.150728",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-registry-structure",
+      "name": "Check_Registry_Structure",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.151634",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-restored",
+      "name": "Check_Restored",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.152578",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-session",
+      "name": "Check_Session",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.153502",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-state-files",
+      "name": "Check_State_Files",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.154535",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-step-ids",
+      "name": "Check_Step_Ids",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.155487",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-tool-bypass",
+      "name": "Check_Tool_Bypass",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.156432",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-tool-files",
+      "name": "Check_Tool_Files",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.157534",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-tool-log",
+      "name": "Check_Tool_Log",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.158545",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-tool-registry",
+      "name": "Check_Tool_Registry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.159598",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-tool-structure",
+      "name": "Check_Tool_Structure",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.160624",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-workflow",
+      "name": "Check_Workflow",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.161548",
+      "status": "active"
+    },
+    {
+      "tool_id": "check-workflow-steps",
+      "name": "Check_Workflow_Steps",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.162459",
+      "status": "active"
+    },
+    {
+      "tool_id": "compare-count",
+      "name": "Compare_Count",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.163599",
+      "status": "active"
+    },
+    {
+      "tool_id": "complete-current-session",
+      "name": "Complete_Current_Session",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.164534",
+      "status": "active"
+    },
+    {
+      "tool_id": "compression-scheduler",
+      "name": "Compression_Scheduler",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.165452",
+      "status": "active"
+    },
+    {
+      "tool_id": "content-validator",
+      "name": "Content_Validator",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.166389",
+      "status": "active"
+    },
+    {
+      "tool_id": "context-aware-assistant",
+      "name": "Context_Aware_Assistant",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.167390",
+      "status": "active"
+    },
+    {
+      "tool_id": "context-verify",
+      "name": "Context_Verify",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.168367",
+      "status": "active"
+    },
+    {
+      "tool_id": "core-files-compressor",
+      "name": "Core_Files_Compressor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.169354",
+      "status": "active"
+    },
+    {
+      "tool_id": "core-rules-verifier",
+      "name": "Core_Rules_Verifier",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.170384",
+      "status": "active"
+    },
+    {
+      "tool_id": "count-py-files",
+      "name": "Count_Py_Files",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.171580",
+      "status": "active"
+    },
+    {
+      "tool_id": "count-real-tools",
+      "name": "Count_Real_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.172607",
+      "status": "active"
+    },
+    {
+      "tool_id": "create-brainstorm-v3",
+      "name": "Create_Brainstorm_V3",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.173639",
+      "status": "active"
+    },
+    {
+      "tool_id": "create-dialogue-workflow",
+      "name": "Create_Dialogue_Workflow",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.174689",
+      "status": "active"
+    },
+    {
+      "tool_id": "cross-session-memory",
+      "name": "Cross_Session_Memory",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.175666",
+      "status": "active"
+    },
+    {
+      "tool_id": "data-cache",
+      "name": "Data_Cache",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.176644",
+      "status": "active"
+    },
+    {
+      "tool_id": "data-source-manager",
+      "name": "Data_Source_Manager",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.177614",
+      "status": "active"
+    },
+    {
+      "tool_id": "debug-registry",
+      "name": "Debug_Registry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.178658",
+      "status": "active"
+    },
+    {
+      "tool_id": "debug-step-match",
+      "name": "Debug_Step_Match",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.179892",
+      "status": "active"
+    },
+    {
+      "tool_id": "debug-workflow",
+      "name": "Debug_Workflow",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.181169",
+      "status": "active"
+    },
+    {
+      "tool_id": "debug-workflow-steps",
+      "name": "Debug_Workflow_Steps",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.182219",
+      "status": "active"
+    },
+    {
+      "tool_id": "diagnose-registry",
+      "name": "Diagnose_Registry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.183267",
+      "status": "active"
+    },
+    {
+      "tool_id": "dialog-entry",
+      "name": "Dialog_Entry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.184450",
+      "status": "active"
+    },
+    {
+      "tool_id": "emotional-intelligence",
+      "name": "Emotional_Intelligence",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.185711",
+      "status": "active"
+    },
+    {
+      "tool_id": "error-handler",
+      "name": "Error_Handler",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.186865",
+      "status": "active"
+    },
+    {
+      "tool_id": "evolution-dashboard",
+      "name": "Evolution_Dashboard",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.187907",
+      "status": "active"
+    },
+    {
+      "tool_id": "fast-load",
+      "name": "Fast_Load",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.189329",
+      "status": "active"
+    },
+    {
+      "tool_id": "finalize-current-session",
+      "name": "Finalize_Current_Session",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.190427",
+      "status": "active"
+    },
+    {
+      "tool_id": "finalize-session",
+      "name": "Finalize_Session",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.191516",
+      "status": "active"
+    },
+    {
+      "tool_id": "find-copaw-tool",
+      "name": "Find_Copaw_Tool",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.193112",
+      "status": "active"
+    },
+    {
+      "tool_id": "fix-execution-state",
+      "name": "Fix_Execution_State",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.195935",
+      "status": "active"
+    },
+    {
+      "tool_id": "fix-execution-state-v2",
+      "name": "Fix_Execution_State_V2",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.197065",
+      "status": "active"
+    },
+    {
+      "tool_id": "fix-missing-steps",
+      "name": "Fix_Missing_Steps",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.198157",
+      "status": "active"
+    },
+    {
+      "tool_id": "fix-registry-format",
+      "name": "Fix_Registry_Format",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.199677",
+      "status": "active"
+    },
+    {
+      "tool_id": "fix-state-signature",
+      "name": "Fix_State_Signature",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.200783",
+      "status": "active"
+    },
+    {
+      "tool_id": "fix-state-with-substeps",
+      "name": "Fix_State_With_Substeps",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.202003",
+      "status": "active"
+    },
+    {
+      "tool_id": "fix-step-id-type",
+      "name": "Fix_Step_Id_Type",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.203126",
+      "status": "active"
+    },
+    {
+      "tool_id": "get-workflow-steps",
+      "name": "Get_Workflow_Steps",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.204243",
+      "status": "active"
+    },
+    {
+      "tool_id": "git-precommit-check-v4",
+      "name": "Git_Precommit_Check_V4",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.205390",
+      "status": "active"
+    },
+    {
+      "tool_id": "human-intent-understanding",
+      "name": "Human_Intent_Understanding",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.206860",
+      "status": "active"
+    },
+    {
+      "tool_id": "list-git-files",
+      "name": "List_Git_Files",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.208043",
+      "status": "active"
+    },
+    {
+      "tool_id": "list-tools",
+      "name": "List_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.209230",
+      "status": "active"
+    },
+    {
+      "tool_id": "mark-all-completed",
+      "name": "Mark_All_Completed",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.210472",
+      "status": "active"
+    },
+    {
+      "tool_id": "mark-meta-task",
+      "name": "Mark_Meta_Task",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.211717",
+      "status": "active"
+    },
+    {
+      "tool_id": "mark-simplified-execution",
+      "name": "Mark_Simplified_Execution",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.213896",
+      "status": "active"
+    },
+    {
+      "tool_id": "memory-distiller",
+      "name": "Memory_Distiller",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.215126",
+      "status": "active"
+    },
+    {
+      "tool_id": "note-summarizer",
+      "name": "Note_Summarizer",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.216474",
+      "status": "active"
+    },
+    {
+      "tool_id": "phase5-planner",
+      "name": "Phase5_Planner",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.217938",
+      "status": "active"
+    },
+    {
+      "tool_id": "post-session-compress",
+      "name": "Post_Session_Compress",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.219227",
+      "status": "active"
+    },
+    {
+      "tool_id": "pre-session-hook",
+      "name": "Pre Session Hook",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.220615",
+      "status": "active"
+    },
+    {
+      "tool_id": "progressive-output",
+      "name": "Progressive_Output",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.221942",
+      "status": "active"
+    },
+    {
+      "tool_id": "progress-bar",
+      "name": "Progress_Bar",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.223313",
+      "status": "active"
+    },
+    {
+      "tool_id": "query-tools",
+      "name": "Query_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.224663",
+      "status": "active"
+    },
+    {
+      "tool_id": "quick-complete-workflow",
+      "name": "Quick_Complete_Workflow",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.226025",
+      "status": "active"
+    },
+    {
+      "tool_id": "read-steps",
+      "name": "Read_Steps",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.227395",
+      "status": "active"
+    },
+    {
+      "tool_id": "rebuild-registry",
+      "name": "Rebuild_Registry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.229008",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-agent-monitor",
+      "name": "Reg_Agent_Monitor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.230378",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-antibypass",
+      "name": "Reg_Antibypass",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.231733",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-auto-backup",
+      "name": "Reg_Auto_Backup",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.233217",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-confirmation-gate",
+      "name": "Reg_Confirmation_Gate",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.235698",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-context-verify",
+      "name": "Reg_Context_Verify",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.237103",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-dashboard-fix",
+      "name": "Reg_Dashboard_Fix",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.238587",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-diagnose",
+      "name": "Reg_Diagnose",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.240235",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-fix-state-v3",
+      "name": "Reg_Fix_State_V3",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.241669",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-mark-all",
+      "name": "Reg_Mark_All",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.243875",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-reward-stop",
+      "name": "Reg_Reward_Stop",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.245813",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-risk-assessor",
+      "name": "Reg_Risk_Assessor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.247457",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-rules-verifier",
+      "name": "Reg_Rules_Verifier",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.248988",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-task",
+      "name": "Reg_Task",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.250496",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-task-analyzer",
+      "name": "Reg_Task_Analyzer",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.252094",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-tool-executor",
+      "name": "Reg_Tool_Executor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.253587",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-tool-selector",
+      "name": "Reg_Tool_Selector",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.255110",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-update-step",
+      "name": "Reg_Update_Step",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.256584",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-v10.1",
+      "name": "Reg_V10.1",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.258058",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-v10",
+      "name": "Reg_V10",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.260146",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-v7",
+      "name": "Reg_V7",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.261518",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-v8",
+      "name": "Reg_V8",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.262880",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-v9",
+      "name": "Reg_V9",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.264359",
+      "status": "active"
+    },
+    {
+      "tool_id": "reg-workflow-scheduler",
+      "name": "Reg_Workflow_Scheduler",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.265883",
+      "status": "active"
+    },
+    {
+      "tool_id": "renumber-steps",
+      "name": "Renumber_Steps",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.267480",
+      "status": "active"
+    },
+    {
+      "tool_id": "restore-state",
+      "name": "Restore_State",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.269011",
+      "status": "active"
+    },
+    {
+      "tool_id": "search-shell-tools",
+      "name": "Search_Shell_Tools",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.276566",
+      "status": "active"
+    },
+    {
+      "tool_id": "self-corrector",
+      "name": "Self_Corrector",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.277896",
+      "status": "active"
+    },
+    {
+      "tool_id": "self-goal-setter",
+      "name": "Self_Goal_Setter",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.279289",
+      "status": "active"
+    },
+    {
+      "tool_id": "session-compressor",
+      "name": "Session_Compressor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.280759",
+      "status": "active"
+    },
+    {
+      "tool_id": "session-end",
+      "name": "Session_End",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.282213",
+      "status": "active"
+    },
+    {
+      "tool_id": "session-end-audit",
+      "name": "Session_End_Audit",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.283728",
+      "status": "active"
+    },
+    {
+      "tool_id": "show-new-registry",
+      "name": "Show_New_Registry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.285225",
+      "status": "active"
+    },
+    {
+      "tool_id": "sitecustomize",
+      "name": "Sitecustomize",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.286881",
+      "status": "active"
+    },
+    {
+      "tool_id": "state-monitor",
+      "name": "State_Monitor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.288486",
+      "status": "active"
+    },
+    {
+      "tool_id": "state-protector",
+      "name": "State_Protector",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.290096",
+      "status": "active"
+    },
+    {
+      "tool_id": "step1-context-verify",
+      "name": "Step1_Context_Verify",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.291685",
+      "status": "active"
+    },
+    {
+      "tool_id": "stock-analysis-pipeline",
+      "name": "Stock_Analysis_Pipeline",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.293394",
+      "status": "active"
+    },
+    {
+      "tool_id": "stock-analysis-quality-predictor",
+      "name": "Stock_Analysis_Quality_Predictor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.294990",
+      "status": "active"
+    },
+    {
+      "tool_id": "summary-generator",
+      "name": "Summary_Generator",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.296567",
+      "status": "active"
+    },
+    {
+      "tool_id": "sync-registry",
+      "name": "Sync_Registry",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.298274",
+      "status": "active"
+    },
+    {
+      "tool_id": "sync-registry-smart",
+      "name": "Sync_Registry_Smart",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.299921",
+      "status": "active"
+    },
+    {
+      "tool_id": "task-classifier",
+      "name": "Task_Classifier",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.301536",
+      "status": "active"
+    },
+    {
+      "tool_id": "task-decomposer",
+      "name": "Task_Decomposer",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.303219",
+      "status": "active"
+    },
+    {
+      "tool_id": "temp-file-cleaner",
+      "name": "Temp_File_Cleaner",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.304956",
+      "status": "active"
+    },
+    {
+      "tool_id": "tool-call-interceptor-v2",
+      "name": "Tool_Call_Interceptor_V2",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.306871",
+      "status": "active"
+    },
+    {
+      "tool_id": "tool-executor",
+      "name": "Tool_Executor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.308669",
+      "status": "active"
+    },
+    {
+      "tool_id": "tool-selector",
+      "name": "Tool_Selector",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.310407",
+      "status": "active"
+    },
+    {
+      "tool_id": "tool-self-learner",
+      "name": "Tool_Self_Learner",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.312041",
+      "status": "active"
+    },
+    {
+      "tool_id": "tool-wrapper",
+      "name": "Tool_Wrapper",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.313696",
+      "status": "active"
+    },
+    {
+      "tool_id": "typing-indicator",
+      "name": "Typing_Indicator",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.315446",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-execution-state",
+      "name": "Update_Execution_State",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.317019",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-mandatory-workflow",
+      "name": "Update_Mandatory_Workflow",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.318592",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-registry-phase3",
+      "name": "Update_Registry_Phase3",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.320068",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-registry-stock-brainstorm",
+      "name": "Update_Registry_Stock_Brainstorm",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.322795",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-registry-ux-phase3",
+      "name": "Update_Registry_Ux_Phase3",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.324536",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-state-for-mandatory",
+      "name": "Update_State_For_Mandatory",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.326268",
+      "status": "active"
+    },
+    {
+      "tool_id": "update-step-state",
+      "name": "Update_Step_State",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.327992",
+      "status": "active"
+    },
+    {
+      "tool_id": "user-preferences",
+      "name": "User_Preferences",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.329982",
+      "status": "active"
+    },
+    {
+      "tool_id": "ux-settings",
+      "name": "Ux_Settings",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.331761",
+      "status": "active"
+    },
+    {
+      "tool_id": "verify-rebuild",
+      "name": "Verify_Rebuild",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.333586",
+      "status": "active"
+    },
+    {
+      "tool_id": "verify-registry-update",
+      "name": "Verify_Registry_Update",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.335357",
+      "status": "active"
+    },
+    {
+      "tool_id": "verify-state-types",
+      "name": "Verify_State_Types",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.337491",
+      "status": "active"
+    },
+    {
+      "tool_id": "verify-workflow-complete",
+      "name": "Verify_Workflow_Complete",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.339577",
+      "status": "active"
+    },
+    {
+      "tool_id": "verify-workflow-update",
+      "name": "Verify_Workflow_Update",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.341319",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-analyzer",
+      "name": "Workflow_Analyzer",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.343341",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-evolver",
+      "name": "Workflow_Evolver",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.345337",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-helper",
+      "name": "Workflow_Helper",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.348046",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-performance-monitor",
+      "name": "Workflow_Performance_Monitor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.350049",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-scheduler",
+      "name": "Workflow_Scheduler",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.351597",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-self-test",
+      "name": "Workflow_Self_Test",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.353133",
+      "status": "active"
+    },
+    {
+      "tool_id": "aai-scorer",
+      "name": "Aai_Scorer",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.354794",
+      "status": "active"
+    },
+    {
+      "tool_id": "adaptive-workflow",
+      "name": "Adaptive_Workflow",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.356386",
+      "status": "active"
+    },
+    {
+      "tool_id": "agent-tool-monitor",
+      "name": "Agent_Tool_Monitor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.358080",
+      "status": "active"
+    },
+    {
+      "tool_id": "anti-bypass-engine",
+      "name": "Anti_Bypass_Engine",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.359900",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-backup",
+      "name": "Auto_Backup",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.362816",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-fix-engine",
+      "name": "Auto_Fix_Engine",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.365676",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-memory-distiller",
+      "name": "Auto_Memory_Distiller",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.367563",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-recovery",
+      "name": "Auto_Recovery",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.369409",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-session-compressor",
+      "name": "Auto_Session_Compressor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.371325",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-training-engine",
+      "name": "Auto_Training_Engine",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.373273",
+      "status": "active"
+    },
+    {
+      "tool_id": "behavior-analyzer",
+      "name": "Behavior_Analyzer",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.375191",
+      "status": "active"
+    },
+    {
+      "tool_id": "blockchain-logger",
+      "name": "Blockchain_Logger",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.377435",
+      "status": "active"
+    },
+    {
+      "tool_id": "compliance-booster",
+      "name": "Compliance_Booster",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.379993",
+      "status": "active"
+    },
+    {
+      "tool_id": "compliance-dashboard",
+      "name": "Compliance_Dashboard",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.381866",
+      "status": "active"
+    },
+    {
+      "tool_id": "confirmation-gate",
+      "name": "Confirmation_Gate",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.383481",
+      "status": "active"
+    },
+    {
+      "tool_id": "cron-enhanced",
+      "name": "Cron_Enhanced",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.385164",
+      "status": "active"
+    },
+    {
+      "tool_id": "dynamic-goal-adjuster",
+      "name": "Dynamic_Goal_Adjuster",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.387182",
+      "status": "active"
+    },
+    {
+      "tool_id": "dynamic-step-skipper",
+      "name": "Dynamic_Step_Skipper",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.388895",
+      "status": "active"
+    },
+    {
+      "tool_id": "emergency-stop",
+      "name": "Emergency_Stop",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.391279",
+      "status": "active"
+    },
+    {
+      "tool_id": "external-verifier",
+      "name": "External_Verifier",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.393464",
+      "status": "active"
+    },
+    {
+      "tool_id": "git-commit-helper",
+      "name": "Git_Commit_Helper",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.395721",
+      "status": "active"
+    },
+    {
+      "tool_id": "git-precommit-check",
+      "name": "Git_Precommit_Check",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.397724",
+      "status": "active"
+    },
+    {
+      "tool_id": "improvement-executor",
+      "name": "Improvement_Executor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.399710",
+      "status": "active"
+    },
+    {
+      "tool_id": "integrity-checker",
+      "name": "Integrity_Checker",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.401728",
+      "status": "active"
+    },
+    {
+      "tool_id": "metacognition-monitor",
+      "name": "Metacognition_Monitor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.403757",
+      "status": "active"
+    },
+    {
+      "tool_id": "parallel-tool-executor",
+      "name": "Parallel_Tool_Executor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.405773",
+      "status": "active"
+    },
+    {
+      "tool_id": "penalty-system",
+      "name": "Penalty_System",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.407413",
+      "status": "active"
+    },
+    {
+      "tool_id": "penalty-system-v2",
+      "name": "Penalty_System_V2",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.409040",
+      "status": "active"
+    },
+    {
+      "tool_id": "performance-analyzer",
+      "name": "Performance_Analyzer",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.410678",
+      "status": "active"
+    },
+    {
+      "tool_id": "permission-validator",
+      "name": "Permission_Validator",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.412378",
+      "status": "active"
+    },
+    {
+      "tool_id": "pre-commit-checker",
+      "name": "Pre_Commit_Checker",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.414152",
+      "status": "active"
+    },
+    {
+      "tool_id": "protected-py",
+      "name": "Protected_Py",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.416010",
+      "status": "active"
+    },
+    {
+      "tool_id": "result-verifier",
+      "name": "Result_Verifier",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.418006",
+      "status": "active"
+    },
+    {
+      "tool_id": "reward-system",
+      "name": "Reward_System",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.419743",
+      "status": "active"
+    },
+    {
+      "tool_id": "risk-assessor",
+      "name": "Risk_Assessor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.421521",
+      "status": "active"
+    },
+    {
+      "tool_id": "session-token-validator",
+      "name": "Session_Token_Validator",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.423361",
+      "status": "active"
+    },
+    {
+      "tool_id": "single-step-lock",
+      "name": "Single_Step_Lock",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.425267",
+      "status": "active"
+    },
+    {
+      "tool_id": "smart-task-decomposer",
+      "name": "Smart_Task_Decomposer",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.427305",
+      "status": "active"
+    },
+    {
+      "tool_id": "state-snapshot",
+      "name": "State_Snapshot",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.429376",
+      "status": "active"
+    },
+    {
+      "tool_id": "step-tracker",
+      "name": "Step_Tracker",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.431885",
+      "status": "active"
+    },
+    {
+      "tool_id": "task-analyzer",
+      "name": "Task_Analyzer",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.434275",
+      "status": "active"
+    },
+    {
+      "tool_id": "tool-call-tracker",
+      "name": "Tool_Call_Tracker",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.436553",
+      "status": "active"
+    },
+    {
+      "tool_id": "tool-monitor",
+      "name": "Tool_Monitor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.438697",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-anomaly-detector",
+      "name": "Workflow_Anomaly_Detector",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.440826",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-autoloader",
+      "name": "Workflow_Autoloader",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.442995",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-auto-executor",
+      "name": "Workflow_Auto_Executor",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.445199",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-cache",
+      "name": "Workflow_Cache",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.448027",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-health-dashboard",
+      "name": "Workflow_Health_Dashboard",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.450302",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-progress-bar",
+      "name": "Workflow_Progress_Bar",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.452096",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-recovery",
+      "name": "Workflow_Recovery",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.454089",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-templates",
+      "name": "Workflow_Templates",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.455931",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-stock-optimize",
+      "name": "Brainstorm_Stock_Optimize",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.457971",
+      "status": "active"
+    },
+    {
+      "tool_id": "stock-optimize-action",
+      "name": "Stock_Optimize_Action",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.460098",
+      "status": "active"
+    },
+    {
+      "tool_id": "stock-data-cache",
+      "name": "Stock_Data_Cache",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.462398",
+      "status": "active"
+    },
+    {
+      "tool_id": "stock-parallel-loader",
+      "name": "Stock_Parallel_Loader",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.464746",
+      "status": "active"
+    },
+    {
+      "tool_id": "stock-pipeline-enhanced",
+      "name": "Stock_Pipeline_Enhanced",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.467145",
+      "status": "active"
+    },
+    {
+      "tool_id": "stock-auto-report",
+      "name": "Stock_Auto_Report",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.469335",
+      "status": "active"
+    },
+    {
+      "tool_id": "stock-realtime-alert",
+      "name": "Stock_Realtime_Alert",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.471541",
+      "status": "active"
+    },
+    {
+      "tool_id": "stock-dashboard",
+      "name": "Stock_Dashboard",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.473803",
+      "status": "active"
+    },
+    {
+      "tool_id": "auto-step",
+      "name": "Auto_Step",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.476303",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-menu",
+      "name": "Workflow_Menu",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.478573",
+      "status": "active"
+    },
+    {
+      "tool_id": "workflow-stats",
+      "name": "Workflow_Stats",
+      "file": "",
+      "added_at": "2026-03-20T22:33:09.480899",
+      "status": "active"
+    },
+    {
+      "tool_id": "cron-001-scheduler",
+      "name": "CRON-001 Scheduler",
+      "file": "cron_001_scheduler.py",
+      "added_at": "2026-03-20T22:33:09.486381",
+      "status": "active"
+    },
+    {
+      "tool_id": "roadmap-001-manager",
+      "name": "ROADMAP-001 Roadmap Manager",
+      "file": "roadmap_001_manager.py",
+      "added_at": "2026-03-20T22:33:09.489866",
+      "status": "active"
+    },
+    {
+      "tool_id": "next-001-advisor",
+      "name": "NEXT-001 Next Step Advisor",
+      "file": "next_001_advisor.py",
+      "added_at": "2026-03-20T22:33:09.494386",
+      "status": "active"
+    },
+    {
+      "tool_id": "test-001-runner",
+      "name": "TEST-001 Test Runner",
+      "file": "test_001_runner.py",
+      "added_at": "2026-03-20T22:33:09.496897",
+      "status": "active"
+    },
+    {
+      "tool_id": "health-001-checker",
+      "name": "HEALTH-001 System Health Checker",
+      "file": "health_001_checker.py",
+      "added_at": "2026-03-20T22:33:09.499011",
+      "status": "active"
+    },
+    {
+      "tool_id": "batch-001-runner",
+      "name": "BATCH-001 Batch Task Runner",
+      "file": "batch_001_runner.py",
+      "added_at": "2026-03-20T22:33:09.501204",
+      "status": "active"
+    },
+    {
+      "tool_id": "audit-001-analyzer",
+      "name": "AUDIT-001 Audit Log Analyzer",
+      "file": "audit_001_analyzer.py",
+      "added_at": "2026-03-20T22:33:09.503533",
+      "status": "active"
+    },
+    {
+      "tool_id": "integrate-001-suite",
+      "name": "INTEGRATE-001 Integration Test Suite",
+      "file": "integrate_001_suite.py",
+      "added_at": "2026-03-20T22:33:09.505988",
+      "status": "active"
+    },
+    {
+      "tool_id": "optimap-001",
+      "name": "OPTIMAP-001 Optimization Roadmap Manager",
+      "file": "optimap_001_manager.py",
+      "added_at": "2026-03-20T22:33:09.517225",
+      "status": "active"
+    },
+    {
+      "tool_id": "roadmap-master-001",
+      "name": "ROADMAP-MASTER-001 Multi-Dimensional Roadmap Manager",
+      "file": "roadmap_master_001.py",
+      "added_at": "2026-03-20T22:33:09.519747",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-roadmap-tools",
+      "name": "Brainstorm Roadmap Tools Ideas",
+      "file": "brainstorm_roadmap_tools.py",
+      "added_at": "2026-03-20T22:33:09.522239",
+      "status": "active"
+    },
+    {
+      "tool_id": "gantt-chart-001",
+      "name": "GANTT-CHART-001 Gantt Chart Generator",
+      "file": "gantt_chart_001.py",
+      "added_at": "2026-03-20T22:33:09.525107",
+      "status": "active"
+    },
+    {
+      "tool_id": "export-format-001",
+      "name": "EXPORT-FORMAT-001 Multi-Format Exporter",
+      "file": "export_format_001.py",
+      "added_at": "2026-03-20T22:33:09.527422",
+      "status": "active"
+    },
+    {
+      "tool_id": "velocity-predict-001",
+      "name": "VELOCITY-PREDICT-001 Velocity & Progress Predictor",
+      "file": "velocity_predict_001.py",
+      "added_at": "2026-03-20T22:33:09.529703",
+      "status": "active"
+    },
+    {
+      "tool_id": "dashboard-view-001",
+      "name": "DASHBOARD-VIEW-001 Comprehensive Dashboard",
+      "file": "dashboard_view_001.py",
+      "added_at": "2026-03-20T22:33:09.532532",
+      "status": "active"
+    },
+    {
+      "tool_id": "ai-suggest-001",
+      "name": "AI-SUGGEST-001 AI Smart Suggestions",
+      "file": "ai_suggest_001.py",
+      "added_at": "2026-03-20T22:33:09.535027",
+      "status": "active"
+    },
+    {
+      "tool_id": "util-001-string",
+      "name": "UTIL-001 String Utility",
+      "file": "util_001_string.py",
+      "added_at": "2026-03-20T22:33:09.539115",
+      "status": "active"
+    },
+    {
+      "tool_id": "util-002-file",
+      "name": "UTIL-002 File Utility",
+      "file": "util_002_file.py",
+      "added_at": "2026-03-20T22:33:09.541528",
+      "status": "active"
+    },
+    {
+      "tool_id": "util-003-datetime",
+      "name": "UTIL-003 DateTime Utility",
+      "file": "util_003_datetime.py",
+      "added_at": "2026-03-20T22:33:09.543963",
+      "status": "active"
+    },
+    {
+      "tool_id": "test-001-unit",
+      "name": "TEST-001 Unit Test Generator",
+      "file": "test_001_unit.py",
+      "added_at": "2026-03-20T22:37:52.477507",
+      "status": "active"
+    },
+    {
+      "tool_id": "test-002-integration",
+      "name": "TEST-002 Integration Test Framework",
+      "file": "test_002_integration.py",
+      "added_at": "2026-03-20T22:37:52.481729",
+      "status": "active"
+    },
+    {
+      "tool_id": "integrate-001-api",
+      "name": "INTEGRATE-001 API Connector",
+      "file": "integrate_001_api.py",
+      "added_at": "2026-03-20T22:37:52.483896",
+      "status": "active"
+    },
+    {
+      "tool_id": "integrate-002-data",
+      "name": "INTEGRATE-002 Data Connector",
+      "file": "integrate_002_data.py",
+      "added_at": "2026-03-20T22:37:52.485842",
+      "status": "active"
+    },
+    {
+      "tool_id": "report-001-generator",
+      "name": "REPORT-001 Report Generator",
+      "file": "report_001_generator.py",
+      "added_at": "2026-03-20T22:40:01.299055",
+      "status": "active"
+    },
+    {
+      "tool_id": "report-002-export",
+      "name": "REPORT-002 Export Tool",
+      "file": "report_002_export.py",
+      "added_at": "2026-03-20T22:40:01.302150",
+      "status": "active"
+    },
+    {
+      "tool_id": "report-003-template",
+      "name": "REPORT-003 Template Generator",
+      "file": "report_003_template.py",
+      "added_at": "2026-03-20T22:40:01.304524",
+      "status": "active"
+    },
+    {
+      "tool_id": "smart-compress-001",
+      "name": "SMART-COMPRESS-001 智能压缩器",
+      "file": "smart_compress_001.py",
+      "added_at": "2026-03-20T22:44:10.804708",
+      "status": "active"
+    },
+    {
+      "tool_id": "smart-compress-002",
+      "name": "SMART-COMPRESS-002 超级压缩器",
+      "file": "smart_compress_002.py",
+      "added_at": "2026-03-20T22:50:55.367623",
+      "status": "active"
+    },
+    {
+      "tool_id": "brainstorm-optimize-001",
+      "name": "BRAINSTORM-OPTIMIZE-001 头脑风暴优化器",
+      "file": "brainstorm_optimize_001.py",
+      "added_at": "2026-03-20T22:50:55.373807",
+      "status": "active"
+    },
+    {
+      "tool_id": "optimize-master-001",
+      "name": "OPTIMIZE-MASTER-001 优化大师",
+      "file": "optimize_master_001.py",
+      "added_at": "2026-03-20T22:58:01.519718",
+      "status": "active"
+    }
+  ],
+  "metrics": {
+    "category": "utility",
+    "focus": "common functions"
+  }
 }
