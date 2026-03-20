@@ -2,13 +2,13 @@
   "flow_id": "20260318-universal-workflow-001",
   "name": "通用主工作流",
   "description": "主工作流 - 总控/指挥/调度所有子工作流和工具",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "created_at": "2026-03-18T22:46:04+08:00",
   "updated_at": "2026-03-20T14:30:00+08:00",
   "workflow_type": "main",
   "parent_workflow": null,
   "estimated_time_minutes": 4,
-  "total_steps": 20,
+  "total_steps": 17,
   "enforcement": {
     "enabled": true,
     "tool_id": "workflow-enforcer",
@@ -29,27 +29,52 @@
   },
   "step_groups": {
     "init": {
-      "steps": [1, 2, 3, 4, 5],
+      "steps": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
       "name": "初始化阶段",
       "description": "检查上下文、绑定工作流、解析任务"
     },
     "execution": {
-      "steps": [6, 7, 8, 9, 10],
+      "steps": [
+        6,
+        6,
+        7,
+        9,
+        10
+      ],
       "name": "执行阶段",
       "description": "调度工作流、执行工具、验证内容"
     },
     "memory": {
-      "steps": [11, 12],
+      "steps": [
+        8,
+        9
+      ],
       "name": "记忆阶段",
       "description": "持久化记忆、元认知评估"
     },
     "quality": {
-      "steps": [13, 14],
+      "steps": [
+        10,
+        11
+      ],
       "name": "质量阶段",
       "description": "批判审查、质量评分"
     },
     "cleanup": {
-      "steps": [15, 16, 17, 18, 19, 20],
+      "steps": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
       "name": "收尾阶段",
       "description": "压缩、提交、清理"
     }
@@ -63,7 +88,10 @@
       "mandatory": true,
       "estimated_time_seconds": 5,
       "skip_condition": null,
-      "outputs": ["context_validated", "issues_list"],
+      "outputs": [
+        "context_validated",
+        "issues_list"
+      ],
       "error_handling": {
         "on_fail": "block",
         "max_retries": 1
@@ -77,7 +105,10 @@
       "mandatory": true,
       "estimated_time_seconds": 10,
       "skip_condition": null,
-      "outputs": ["files_loaded", "total_size_kb"],
+      "outputs": [
+        "files_loaded",
+        "total_size_kb"
+      ],
       "error_handling": {
         "on_fail": "block",
         "max_retries": 2
@@ -91,7 +122,10 @@
       "mandatory": false,
       "estimated_time_seconds": 5,
       "skip_condition": "if flow_id already bound",
-      "outputs": ["flow_id", "session_id"],
+      "outputs": [
+        "flow_id",
+        "session_id"
+      ],
       "error_handling": {
         "on_fail": "continue",
         "max_retries": 1
@@ -105,7 +139,11 @@
       "mandatory": false,
       "estimated_time_seconds": 15,
       "skip_condition": null,
-      "outputs": ["task_type", "subtasks", "priority"],
+      "outputs": [
+        "task_type",
+        "subtasks",
+        "priority"
+      ],
       "error_handling": {
         "on_fail": "continue",
         "max_retries": 1
@@ -113,41 +151,52 @@
     },
     {
       "step_id": 5,
-      "name": "工具选择",
-      "description": "根据任务选择合适的工具",
-      "tool_id": "tool_selector.py",
+      "name": "工具选择与调度",
+      "description": "根据任务选择工具并调度子工作流",
+      "tool_id": "workflow_optimizer.py",
       "mandatory": false,
-      "estimated_time_seconds": 10,
-      "skip_condition": "if tool_already_selected",
-      "outputs": ["selected_tools", "tool_order"],
+      "estimated_time_seconds": 15,
+      "skip_condition": "if tool_already_selected and no_subworkflow_needed",
+      "outputs": [
+        "selected_tools",
+        "tool_order",
+        "scheduled_tasks"
+      ],
       "error_handling": {
         "on_fail": "continue",
         "max_retries": 1
-      }
+      },
+      "combined_from": [
+        5,
+        6
+      ],
+      "sub_steps": [
+        {
+          "sub_id": "5a",
+          "name": "工具选择",
+          "original_tool": "tool_selector.py",
+          "function": "select_tools"
+        },
+        {
+          "sub_id": "6a",
+          "name": "子工作流调度",
+          "original_tool": "workflow_scheduler.py",
+          "function": "schedule_workflow"
+        }
+      ]
     },
     {
       "step_id": 6,
-      "name": "子工作流调度",
-      "description": "调度子工作流或独立工具",
-      "tool_id": "workflow_scheduler.py",
-      "mandatory": false,
-      "estimated_time_seconds": 5,
-      "skip_condition": "if no_subworkflow_needed",
-      "outputs": ["subworkflow_id", "scheduled_tasks"],
-      "error_handling": {
-        "on_fail": "continue",
-        "max_retries": 2
-      }
-    },
-    {
-      "step_id": 7,
       "name": "工具执行",
       "description": "执行选定的工具或工作流",
       "tool_id": "tool_executor.py",
       "mandatory": true,
       "estimated_time_seconds": 60,
       "skip_condition": null,
-      "outputs": ["execution_result", "tool_outputs"],
+      "outputs": [
+        "execution_result",
+        "tool_outputs"
+      ],
       "error_handling": {
         "on_fail": "retry_with_alternative",
         "max_retries": 3,
@@ -155,14 +204,71 @@
       }
     },
     {
-      "step_id": 8,
-      "name": "内容验证",
-      "description": "验证执行结果的有效性",
-      "tool_id": "content_validator.py",
+      "step_id": 7,
+      "name": "验证与保障",
+      "description": "验证执行结果、备份配置、保存检查点",
+      "tool_id": "workflow_optimizer.py",
       "mandatory": false,
-      "estimated_time_seconds": 10,
-      "skip_condition": "if_no_output_generated",
-      "outputs": ["validation_result", "issues"],
+      "estimated_time_seconds": 20,
+      "skip_condition": "if_no_output_generated and if_backup_recent",
+      "outputs": [
+        "validation_result",
+        "backup_path",
+        "checkpoint_id"
+      ],
+      "error_handling": {
+        "on_fail": "warn",
+        "max_retries": 1
+      },
+      "combined_from": [
+        8,
+        9,
+        10
+      ],
+      "sub_steps": [
+        {
+          "sub_id": "8a",
+          "name": "内容验证",
+          "original_tool": "content_validator.py",
+          "function": "validate_content"
+        },
+        {
+          "sub_id": "9a",
+          "name": "自动备份",
+          "original_tool": "auto_backup.py",
+          "function": "auto_backup"
+        },
+        {
+          "sub_id": "10a",
+          "name": "检查点保存",
+          "original_tool": "state_snapshot.py",
+          "function": "save_checkpoint"
+        }
+      ],
+      "parallel_enabled": true,
+      "parallel_config": {
+        "9a": {
+          "after": "8a",
+          "dependency": "validation_passed"
+        },
+        "10a": {
+          "after": "8a",
+          "dependency": "none"
+        }
+      }
+    },
+    {
+      "step_id": 8,
+      "name": "记忆持久化",
+      "description": "蒸馏并保存长期记忆",
+      "tool_id": "memory_distiller.py",
+      "mandatory": false,
+      "estimated_time_seconds": 30,
+      "skip_condition": "if MEMORY.md < 20KB",
+      "outputs": [
+        "distilled_items",
+        "memory_size_kb"
+      ],
       "error_handling": {
         "on_fail": "warn",
         "max_retries": 1
@@ -170,41 +276,51 @@
     },
     {
       "step_id": 9,
-      "name": "自动备份",
-      "description": "备份关键配置和状态",
-      "tool_id": "auto_backup.py",
+      "name": "元认知评估",
+      "description": "评估当前会话的认知状态",
+      "tool_id": "metacognition_monitor.py",
       "mandatory": false,
-      "estimated_time_seconds": 5,
-      "skip_condition": "if_backup_recent",
-      "outputs": ["backup_path", "backup_size"],
+      "estimated_time_seconds": 10,
+      "skip_condition": "if_short_session",
+      "outputs": [
+        "consciousness_score",
+        "metacognition_report"
+      ],
       "error_handling": {
-        "on_fail": "warn",
+        "on_fail": "skip",
         "max_retries": 1
       }
     },
     {
       "step_id": 10,
-      "name": "检查点保存",
-      "description": "保存当前执行状态",
-      "tool_id": "state_snapshot.py",
-      "mandatory": false,
-      "estimated_time_seconds": 5,
+      "name": "批判者审查",
+      "description": "Critic v5.0 最终审查",
+      "tool_id": "embedded_critic.py",
+      "mandatory": true,
+      "estimated_time_seconds": 20,
       "skip_condition": null,
-      "outputs": ["checkpoint_id", "state_file"],
+      "outputs": [
+        "critic_score",
+        "critic_report",
+        "improvement_suggestions"
+      ],
       "error_handling": {
-        "on_fail": "warn",
+        "on_fail": "block",
         "max_retries": 2
       }
     },
     {
       "step_id": 11,
-      "name": "记忆持久化",
-      "description": "蒸馏并保存长期记忆",
-      "tool_id": "memory_distiller.py",
+      "name": "质量评分",
+      "description": "AAI 自主性评分",
+      "tool_id": "aai_scorer.py",
       "mandatory": false,
-      "estimated_time_seconds": 30,
-      "skip_condition": "if MEMORY.md < 20KB",
-      "outputs": ["distilled_items", "memory_size_kb"],
+      "estimated_time_seconds": 10,
+      "skip_condition": null,
+      "outputs": [
+        "aai_score",
+        "quality_report"
+      ],
       "error_handling": {
         "on_fail": "warn",
         "max_retries": 1
@@ -212,125 +328,101 @@
     },
     {
       "step_id": 12,
-      "name": "元认知评估",
-      "description": "评估当前会话的认知状态",
-      "tool_id": "metacognition_monitor.py",
-      "mandatory": false,
-      "estimated_time_seconds": 10,
-      "skip_condition": "if_short_session",
-      "outputs": ["consciousness_score", "metacognition_report"],
-      "error_handling": {
-        "on_fail": "skip",
-        "max_retries": 1
-      }
-    },
-    {
-      "step_id": 13,
-      "name": "批判者审查",
-      "description": "Critic v5.0 最终审查",
-      "tool_id": "embedded_critic.py",
-      "mandatory": true,
-      "estimated_time_seconds": 20,
-      "skip_condition": null,
-      "outputs": ["critic_score", "critic_report", "improvement_suggestions"],
-      "error_handling": {
-        "on_fail": "block",
-        "max_retries": 2
-      }
-    },
-    {
-      "step_id": 14,
-      "name": "质量评分",
-      "description": "AAI 自主性评分",
-      "tool_id": "aai_scorer.py",
-      "mandatory": false,
-      "estimated_time_seconds": 10,
-      "skip_condition": null,
-      "outputs": ["aai_score", "quality_report"],
-      "error_handling": {
-        "on_fail": "warn",
-        "max_retries": 1
-      }
-    },
-    {
-      "step_id": 15,
       "name": "核心文件压缩",
       "description": "压缩 7 个核心文件",
       "tool_id": "core_files_compressor.py",
       "mandatory": true,
       "estimated_time_seconds": 15,
       "skip_condition": "if total_size < 80KB",
-      "outputs": ["compression_rate", "after_size_kb"],
+      "outputs": [
+        "compression_rate",
+        "after_size_kb"
+      ],
       "error_handling": {
         "on_fail": "warn",
         "max_retries": 1
       }
     },
     {
-      "step_id": 16,
+      "step_id": 13,
       "name": "会话压缩",
       "description": "压缩当前会话内容",
       "tool_id": "post_session_compress.py",
       "mandatory": true,
       "estimated_time_seconds": 30,
       "skip_condition": null,
-      "outputs": ["session_summary", "compression_rate"],
+      "outputs": [
+        "session_summary",
+        "compression_rate"
+      ],
       "error_handling": {
         "on_fail": "warn",
         "max_retries": 2
       }
     },
     {
-      "step_id": 17,
+      "step_id": 14,
       "name": "会话结束",
       "description": "完成会话结束流程",
       "tool_id": "session_end.py",
       "mandatory": true,
       "estimated_time_seconds": 10,
       "skip_condition": null,
-      "outputs": ["session_report", "cleanup_status"],
+      "outputs": [
+        "session_report",
+        "cleanup_status"
+      ],
       "error_handling": {
         "on_fail": "block",
         "max_retries": 1
       }
     },
     {
-      "step_id": 18,
+      "step_id": 15,
       "name": "Git 提交",
       "description": "提交更改到版本控制",
       "tool_id": "git_commit_helper.py",
       "mandatory": false,
       "estimated_time_seconds": 15,
       "skip_condition": "if no_changes",
-      "outputs": ["commit_hash", "files_changed"],
+      "outputs": [
+        "commit_hash",
+        "files_changed"
+      ],
       "error_handling": {
         "on_fail": "warn",
         "max_retries": 2
       }
     },
     {
-      "step_id": 19,
+      "step_id": 16,
       "name": "文档生成",
       "description": "自动生成文档 (可选)",
       "tool_id": "auto_doc_generator.py",
       "mandatory": false,
       "estimated_time_seconds": 20,
       "skip_condition": "if not user_requested",
-      "outputs": ["doc_path", "doc_size"],
+      "outputs": [
+        "doc_path",
+        "doc_size"
+      ],
       "error_handling": {
         "on_fail": "skip",
         "max_retries": 1
       }
     },
     {
-      "step_id": 20,
+      "step_id": 17,
       "name": "清理临时文件",
       "description": "清理会话临时文件",
       "tool_id": "temp_file_cleaner.py",
       "mandatory": false,
       "estimated_time_seconds": 5,
       "skip_condition": null,
-      "outputs": ["files_cleaned", "space_freed"],
+      "outputs": [
+        "files_cleaned",
+        "space_freed"
+      ],
       "error_handling": {
         "on_fail": "skip",
         "max_retries": 1
@@ -348,8 +440,22 @@
     "max_steps": 20,
     "min_tool_calls": 5,
     "min_duration_seconds": 60,
-    "required_tools": ["pre-session-hook.py", "tool_executor.py", "embedded_critic.py", "post_session_compress.py", "session_end.py"],
-    "mandatory_steps": [1, 2, 7, 13, 15, 16, 17]
+    "required_tools": [
+      "pre-session-hook.py",
+      "tool_executor.py",
+      "embedded_critic.py",
+      "post_session_compress.py",
+      "session_end.py"
+    ],
+    "mandatory_steps": [
+      1,
+      2,
+      7,
+      13,
+      15,
+      16,
+      17
+    ]
   },
   "mandatory_rules": {
     "core_execution_rules": {
@@ -361,22 +467,36 @@
     }
   },
   "parallel_groups": [
-    [8, 9],
-    [13, 14]
+    [
+      7,
+      9
+    ],
+    [
+      10,
+      11
+    ]
   ],
   "skip_conditions": {
-    "11": "if MEMORY.md < 20KB",
-    "15": "if total_size < 80KB",
-    "19": "if not user_requested"
+    "8": "if MEMORY.md < 20KB",
+    "12": "if total_size < 80KB",
+    "16": "if not user_requested"
   },
   "change_log": [
+    {
+      "version": "2.1.0",
+      "date": "2026-03-20",
+      "changes": [
+        "步骤合并优化: 步骤 5+6 → 5 (工具选择与调度)",
+        "步骤合并优化: 步骤 8+9+10 → 8 (验证与保障)",
+        "步骤总数: 20 → 17",
+        "步骤编号重新整理为连续整数"
+      ]
+    },
     {
       "version": "2.0.1",
       "date": "2026-03-20",
       "changes": [
-        "步骤 20 进化: 创建 temp_file_cleaner.py 工具",
-        "步骤 20 tool_id: null -> temp_file_cleaner.py",
-        "适应度提升: 0.50 -> 0.95 (预期)"
+        "步骤 20 进化: 创建 temp_file_cleaner.py 工具"
       ]
     },
     {
