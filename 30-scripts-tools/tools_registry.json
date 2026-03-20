@@ -1,7 +1,8 @@
 {
-  "version": "1.11.71-phase7-complete",
+  "version": "1.11.72-auto-001",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.72: Add AUTO-001 workflow automator for one-click flows",
     "v1.11.71: Add Phase 7 - SA-033 to SA-036 (backtest, risk, executor, analyzer)",
     "v1.11.70: Add BATCH-001, AUDIT-001, INTEGRATE-001 generic tools",
     "v1.11.69: Added HEALTH-001 system health checker",
@@ -6093,6 +6094,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T21:58:00.000000"
+    },
+    "auto-001-automator": {
+      "tool_id": "auto-001-automator",
+      "name": "AUTO-001 Workflow Automator",
+      "description": "工作流自动化器 - 一键提交流程、批量测试、自动报告、验证流程",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/auto_001_automator.py",
+      "category": "automation",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T22:00:00.000000"
     }
   },
   "workflows": {
