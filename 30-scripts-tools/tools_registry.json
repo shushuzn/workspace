@@ -1,7 +1,8 @@
 {
-  "version": "1.11.69-health-checker",
+  "version": "1.11.70-generic-tools",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.70: Add BATCH-001, AUDIT-001, INTEGRATE-001 generic tools",
     "v1.11.69: Added HEALTH-001 system health checker",
     "v1.11.68: Added TEST-001 test runner for automated testing",
     "v1.11.67: Added NEXT-001 next step advisor for progress tracking",
@@ -6014,6 +6015,39 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T21:45:00.000000"
+    },
+    "batch-001-runner": {
+      "tool_id": "batch-001-runner",
+      "name": "BATCH-001 Batch Task Runner",
+      "description": "通用批量任务运行器 - 批量执行命令、并行/串行执行、进度追踪",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/batch_001_runner.py",
+      "category": "utility",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:50:00.000000"
+    },
+    "audit-001-analyzer": {
+      "tool_id": "audit-001-analyzer",
+      "name": "AUDIT-001 Audit Log Analyzer",
+      "description": "通用审计日志分析器 - 解析日志、统计操作、检测异常、生成报告",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/audit_001_analyzer.py",
+      "category": "utility",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:51:00.000000"
+    },
+    "integrate-001-suite": {
+      "tool_id": "integrate-001-suite",
+      "name": "INTEGRATE-001 Integration Test Suite",
+      "description": "通用集成测试套件 - 定义场景、多工具联动、端到端验证",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/integrate_001_suite.py",
+      "category": "quality",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:52:00.000000"
     }
   },
   "workflows": {
