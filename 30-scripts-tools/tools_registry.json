@@ -1,6 +1,6 @@
 {
   "version": "1.7.0-synced",
-  "last_updated": "2026-03-20T16:16:26.743677",
+  "last_updated": "2026-03-20T16:27:39.392646",
   "changes": [
     "v1.11.55: Added mandatory security rules (2026-03-20)",
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -5686,6 +5686,24 @@
       "categorized_at": "2026-03-20T16:16:26.743329+08:00",
       "auto_registered": true,
       "auto_registered_at": "2026-03-20T16:16:26.743330"
+    },
+    "stock-auto-report": {
+      "tool_id": "stock-auto-report",
+      "name": "Stock_Auto_Report",
+      "description": "自动注册的工具: stock_auto_report.py",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\stock_auto_report.py",
+      "parameters": [],
+      "triggers": [
+        "manual"
+      ],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 300,
+      "category": "automation",
+      "categorized_at": "2026-03-20T16:27:39.392252+08:00",
+      "auto_registered": true,
+      "auto_registered_at": "2026-03-20T16:27:39.392257"
     }
   },
   "workflows": {
