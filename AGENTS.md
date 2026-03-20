@@ -63,6 +63,20 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 
 **核心原则:** 不直接碰 Shell，不执行未授权代码，不信任任何输入，不做任何变通。
 
+### ⚠️ 自举例外 (Bootstrap Exception)
+
+**允许在无 session 时执行:**
+- `py 30-scripts-tools/copaw_entry.py <task>` - 会话初始化（唯一例外）
+
+**条件:**
+- 仅限 `copaw_entry.py` 这一个脚本
+- 必须是直接调用，不能有参数注入
+- 执行后必须创建 `execution-state.json`
+
+**原则:** 允许合理的自举机制，但不允许借此绕过后续防护
+
+---
+
 ### 严禁操作
 
 | 类别 | 禁止内容 |

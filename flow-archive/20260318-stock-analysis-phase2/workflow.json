@@ -1,0 +1,195 @@
+{
+  "flow_id": "20260318-stock-analysis-phase2",
+  "name": "股票分析 Phase 2 - 技术分析引擎",
+  "description": "股票分析系统 Phase 2 - 包含技术指标、形态识别、趋势分析、支撑阻力等",
+  "version": "1.0.0",
+  "created_at": "2026-03-20T13:30:00+08:00",
+  "workflow_type": "sub-workflow",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 120,
+  "total_steps": 12,
+  "stages": {
+    "initialization": "Step 1-2: 数据准备 + 参数配置",
+    "analysis": "Step 3-8: 技术分析 (指标/形态/趋势/支撑阻力)",
+    "validation": "Step 9-10: 结果验证 + 质量检查",
+    "completion": "Step 11-12: 报告生成 + Git 提交"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "数据准备",
+      "description": "准备股票历史数据 (SA-002)",
+      "tool_id": "SA-002",
+      "stage": "initialization",
+      "parameters": {
+        "symbol": "TEST",
+        "period": "1y",
+        "interval": "1d"
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 2,
+      "name": "参数配置",
+      "description": "配置技术分析参数",
+      "tool_id": "config_manager",
+      "stage": "initialization",
+      "parameters": {
+        "ma_periods": [5, 10, 20, 60],
+        "rsi_period": 14,
+        "macd_fast": 12,
+        "macd_slow": 26,
+        "boll_period": 20,
+        "boll_std": 2
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 3,
+      "name": "技术指标计算",
+      "description": "计算 11+ 技术指标 (SA-005)",
+      "tool_id": "SA-005",
+      "stage": "analysis",
+      "parameters": {
+        "indicators": ["MA", "MACD", "RSI", "KDJ", "BOLL", "ATR"]
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 4,
+      "name": "形态识别",
+      "description": "K 线形态和趋势形态识别 (SA-006)",
+      "tool_id": "SA-006",
+      "stage": "analysis",
+      "parameters": {
+        "patterns": ["candlestick", "engulfing", "head_shoulders", "double_top_bottom"]
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 5,
+      "name": "趋势分析",
+      "description": "趋势方向和强度分析 (SA-007)",
+      "tool_id": "SA-007",
+      "stage": "analysis",
+      "parameters": {
+        "ma_trend": true,
+        "macd_trend": true,
+        "adx_strength": true
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 6,
+      "name": "支撑阻力分析",
+      "description": "识别支撑位和阻力位 (SA-008)",
+      "tool_id": "SA-008",
+      "stage": "analysis",
+      "parameters": {
+        "pivot_window": 5,
+        "psychological_levels": true,
+        "volume_profile": true
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 7,
+      "name": "信号生成",
+      "description": "综合所有分析生成交易信号",
+      "tool_id": "SA-010",
+      "stage": "analysis",
+      "parameters": {
+        "signal_types": ["buy", "sell", "hold"],
+        "confidence_threshold": 0.7
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 8,
+      "name": "风险评估",
+      "description": "风险评估和管理",
+      "tool_id": "SA-009",
+      "stage": "analysis",
+      "parameters": {
+        "risk_metrics": ["volatility", "max_drawdown", "var"]
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 9,
+      "name": "批判者审查",
+      "description": "代码和质量审查",
+      "tool_id": "auto_critic_v7",
+      "stage": "validation",
+      "parameters": {
+        "min_score": 80,
+        "check_types": ["code_quality", "logic", "performance"]
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 10,
+      "name": "质量门禁",
+      "description": "最终质量检查",
+      "tool_id": "quality_gate",
+      "stage": "validation",
+      "parameters": {
+        "min_test_coverage": 0.8,
+        "required_tests": ["unit", "integration"]
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 11,
+      "name": "报告生成",
+      "description": "生成分析报告",
+      "tool_id": "SA-012",
+      "stage": "completion",
+      "parameters": {
+        "format": ["json", "markdown"],
+        "include_charts": true
+      },
+      "blocking": true
+    },
+    {
+      "step_id": 12,
+      "name": "Git 提交",
+      "description": "提交代码和报告",
+      "tool_id": "git_commit_helper",
+      "stage": "completion",
+      "parameters": {
+        "commit_message": "Stock Analysis Phase 2 complete",
+        "push": true
+      },
+      "blocking": true
+    }
+  ],
+  "tools_required": [
+    "SA-002",
+    "SA-005",
+    "SA-006",
+    "SA-007",
+    "SA-008",
+    "SA-009",
+    "SA-010",
+    "SA-012",
+    "auto_critic_v7",
+    "quality_gate",
+    "git_commit_helper"
+  ],
+  "quality_gates": {
+    "code_coverage_min": 0.8,
+    "critic_score_min": 80,
+    "test_pass_rate_min": 0.95
+  },
+  "enforcement": {
+    "enabled": true,
+    "tool_id": "workflow_enforcer",
+    "rules": [
+      "必须按顺序执行 12 个步骤",
+      "跳步将被阻断",
+      "所有工具调用必须记录",
+      "质量门禁不通过禁止提交"
+    ]
+  }
+}

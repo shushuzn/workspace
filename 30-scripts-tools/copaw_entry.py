@@ -40,6 +40,13 @@ try:
 except ImportError:
     TASK_CLASSIFIER_ENABLED = False
 
+# 导入工作流强制执行器
+try:
+    from workflow_enforcer import WorkflowEnforcer
+    WORKFLOW_ENFORCER_ENABLED = True
+except ImportError:
+    WORKFLOW_ENFORCER_ENABLED = False
+
 class CopawEntry:
     def __init__(self, task_name: str = None):
         self.task_name = task_name or "Unnamed Task"
@@ -66,6 +73,11 @@ class CopawEntry:
         if AUTO_PROTECTION_ENABLED:
             self.protection = create_protection_layer(self.session_id)
         
+        # 【新增】工作流强制执行器
+        self.enforcer = None
+        if WORKFLOW_ENFORCER_ENABLED:
+            self.enforcer = WorkflowEnforcer(self.flow_id, self.session_id)
+        
         print("="*60)
         print("CoPaw Entry Point - 强制工作流入口")
         print("="*60)
@@ -76,6 +88,8 @@ class CopawEntry:
         print(f"Start Time: {self.start_time.isoformat()}")
         if AUTO_PROTECTION_ENABLED:
             print(f"[防护] 自动防护层已激活")
+        if WORKFLOW_ENFORCER_ENABLED:
+            print(f"[工作流] 强制执行器已激活")
         print("="*60)
         print("="*60)
     
@@ -120,6 +134,11 @@ class CopawEntry:
         # 保存初始状态
         with open(self.state_file, "w", encoding="utf-8") as f:
             json.dump(state, f, ensure_ascii=False, indent=2)
+        
+        # 【新增】工作流强制执行器初始化
+        if WORKFLOW_ENFORCER_ENABLED and self.enforcer:
+            self.enforcer.initialize(state)
+            print(f"[工作流] 强制执行器已初始化 - {total_steps}步")
         
         # 初始化保护
         if STATE_PROTECTOR_ENABLED:

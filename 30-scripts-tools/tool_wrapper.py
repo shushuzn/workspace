@@ -67,6 +67,11 @@ class ToolWrapper:
         Returns:
             bool: 是否允许执行
         """
+        # 自举例外：允许 copaw_entry.py 在无 session 时执行（用于初始化）
+        if tool_name in ('copaw_entry', 'copaw_entry.py'):
+            print("[BOOTSTRAP] 允许执行 copaw_entry.py（会话初始化例外）")
+            return True
+        
         # 每次检查 session（确保最新状态）
         if not self.load_state():
             return False

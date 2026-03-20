@@ -69,6 +69,13 @@ try:
 except ImportError:
     TOOL_WRAPPER_AVAILABLE = False
 
+# 导入工作流强制执行器（步骤验证）
+try:
+    from workflow_enforcer import WorkflowEnforcer
+    WORKFLOW_ENFORCER_AVAILABLE = True
+except ImportError:
+    WORKFLOW_ENFORCER_AVAILABLE = False
+
 class SafeShellExecutor:
     """安全 Shell 执行器 - 系统级防护"""
     
@@ -85,7 +92,7 @@ class SafeShellExecutor:
         self.tool_call_log = Path("30-scripts-tools/tool_call_log.jsonl")
     
     def execute(self, command: str, description: str = None) -> dict:
-        """执行 shell 命令 - 强制防护检查"""
+        """执行 shell 命令 - 增强版（集成工作流强制执行）"""
         
         # 步骤 0: 工具包装器检查（强制工作流）
         if TOOL_WRAPPER_AVAILABLE:
@@ -94,6 +101,17 @@ class SafeShellExecutor:
                     "status": "blocked",
                     "reason": "no_session",
                     "message": "未初始化会话 - 请先运行 copaw_entry.py",
+                    "returncode": -1
+                }
+        
+        # 步骤 0.5: 工作流强制执行检查（新增）
+        if WORKFLOW_ENFORCER_AVAILABLE:
+            enforcer = WorkflowEnforcer()
+            if not enforcer.verify_step_execution(6):
+                return {
+                    "status": "blocked",
+                    "reason": "workflow_not_completed",
+                    "message": "工作流步骤未完成 - 请先完成前面步骤",
                     "returncode": -1
                 }
         
@@ -157,6 +175,11 @@ class SafeShellExecutor:
                 "stdout": result.stdout[:5000] if result.stdout else "",
                 "stderr": result.stderr[:5000] if result.stderr else ""
             }
+            
+            # 步骤 6: 更新工作流步骤状态（新增）
+            if WORKFLOW_ENFORCER_AVAILABLE:
+                enforcer = WorkflowEnforcer()
+                enforcer.update_step_status(6, 'completed', f'Executed: {command[:50]}')
         except subprocess.TimeoutExpired:
             output = {
                 "status": "error",
@@ -180,13 +203,15 @@ class SafeShellExecutor:
         return output
     
     def _log_call(self, command: str, description: str, result: dict):
-        """记录工具调用日志"""
+        """记录工具调用日志 - 增强审计信息"""
         session_id = "unknown"
+        state = {}
         if self.state_file.exists():
             with open(self.state_file, "r", encoding="utf-8") as f:
                 state = json.load(f)
             session_id = state.get("session_id", "unknown")
         
+        # 增强审计信息
         log_entry = {
             "timestamp": datetime.now().isoformat(),
             "session_id": session_id,
@@ -194,7 +219,14 @@ class SafeShellExecutor:
             "command": command,
             "description": description or "",
             "result": result.get("status", "unknown"),
-            "returncode": result.get("returncode", -1)
+            "returncode": result.get("returncode", -1),
+            # 新增审计字段
+            "flow_id": state.get("flow_id", "unknown"),
+            "task": state.get("task", "unknown"),
+            "current_step": state.get("current_step", 0),
+            "protection_enabled": state.get("protection_enabled", False),
+            # 文件修改追踪（用于 Git 审计）
+            "modified_files": self._detect_modified_files(command),
         }
         
         try:
@@ -202,22 +234,41 @@ class SafeShellExecutor:
                 f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
         except Exception as e:
             print(f"[WARN] 日志记录失败：{e}")
+    
+    def _detect_modified_files(self, command: str) -> list:
+        """检测命令可能修改的文件（用于 Git 审计）"""
+        modified = []
+        
+        # 检测写操作命令
+        write_patterns = [
+            ('write_file', r'write_file.*?path=([^\s,)]+)'),
+            ('edit_file', r'edit_file.*?path=([^\s,)]+)'),
+            ('py_file', r'(.*?\.py)'),
+            ('git_commit', r'git.*commit'),
+            ('redirect', r'>(.+?)'),  # 重定向
+        ]
+        
+        import re
+        for tool_name, pattern in write_patterns:
+            matches = re.findall(pattern, command, re.IGNORECASE)
+            for match in matches:
+                if isinstance(match, tuple):
+                    match = match[0]
+                modified.append(match.strip())
+        
+        return modified
 
 
 def main():
-    """命令行入口"""
+    """命令行入口 - 修复版（正确处理参数）"""
     if len(sys.argv) < 2:
-        print("用法：py safe_shell_executor.py <command> [description]")
+        print("用法：py safe_shell_executor.py <command>")
         print("所有 shell 命令都必须通过此执行器")
         sys.exit(1)
     
     # 合并所有参数作为命令（支持带空格的命令）
     command = " ".join(sys.argv[1:])
-    # 如果最后一个参数看起来像描述，则分离
-    description = None
-    if len(sys.argv) > 2 and not sys.argv[-1].startswith("-") and sys.argv[-1] not in ["dir", "echo", "py", "git"]:
-        # 简单启发式：最后一个参数可能是描述
-        pass  # 暂时不分离，全部作为命令
+    description = ""
     
     executor = SafeShellExecutor()
     result = executor.execute(command, description)

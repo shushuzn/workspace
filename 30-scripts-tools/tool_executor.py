@@ -35,6 +35,13 @@ try:
 except ImportError:
     TOOL_WRAPPER_ENABLED = False
 
+# 导入工作流强制执行器（步骤验证）
+try:
+    from workflow_enforcer import WorkflowEnforcer
+    WORKFLOW_ENFORCER_ENABLED = True
+except ImportError:
+    WORKFLOW_ENFORCER_ENABLED = False
+
 
 def parse_args(args):
     """解析命令行参数"""
@@ -65,7 +72,7 @@ def parse_args(args):
 
 def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
     """
-    执行工具调用
+    执行工具调用 - 增强版（集成工作流强制执行）
     
     Returns:
         (returncode, stdout, stderr)
@@ -74,6 +81,13 @@ def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
     if TOOL_WRAPPER_ENABLED:
         if not before_tool_call(tool_name, params):
             return 1, "", "未初始化会话 - 请先运行 copaw_entry.py"
+    
+    # 步骤 0.5: 工作流强制执行检查（新增）
+    if WORKFLOW_ENFORCER_ENABLED:
+        enforcer = WorkflowEnforcer()
+        # 工具调用视为 Step 6（工具执行阶段）
+        if not enforcer.verify_step_execution(6):
+            return 1, "", "工作流步骤未完成 - 请先完成前面步骤"
     
     # 防护检查
     if PROTECTION_ENABLED:
@@ -94,6 +108,10 @@ def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
                 text=True,
                 timeout=60
             )
+            # 步骤 6.x: 更新步骤状态（新增）
+            if WORKFLOW_ENFORCER_ENABLED:
+                enforcer = WorkflowEnforcer()
+                enforcer.update_step_status(6, 'completed', f'Executed: {command[:50]}')
             return result.returncode, result.stdout, result.stderr
         except subprocess.TimeoutExpired:
             return 1, "", "Command timeout (60s)"

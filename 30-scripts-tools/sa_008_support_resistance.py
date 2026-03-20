@@ -1,586 +1,616 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-Stock Analysis - SA-008: Support & Resistance
-Automatic support and resistance level detection (pivot points, Fibonacci, volume profile)
+SA-008: Support & Resistance - 支撑阻力分析引擎
+
+功能：
+1. 自动识别支撑位和阻力位
+2. 心理关口检测（整数位）
+3. 前高/前低识别
+4. 成交密集区分析
+5. 支撑/阻力强度评分
+6. 突破信号检测
+
+依赖：
+- SA-002: Historical data downloader
+
+作者：Claw (AI Agent)
+创建日期：2026-03-20
+版本：1.0.0
 """
 
 import json
+import sys
 from datetime import datetime
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple, Any
+from typing import Dict, List, Optional, Tuple
+from collections import Counter
 import math
 
+
 class SupportResistanceAnalyzer:
-    """Detect and analyze support and resistance levels"""
+    """支撑阻力分析引擎"""
     
-    def __init__(self, data_dir: str = "60-DATA/stock_sr_levels"):
-        self.data_dir = Path(data_dir)
-        self.data_dir.mkdir(parents=True, exist_ok=True)
-        
-        self.analysis_log = self._load_analysis_log()
+    def __init__(self):
+        self.cache_dir = Path("60-DATA/stock_sr")
+        self.cache_dir.mkdir(parents=True, exist_ok=True)
     
-    def _load_analysis_log(self) -> Dict:
-        """Load analysis log"""
-        log_file = self.data_dir / "analysis_log.json"
-        if log_file.exists():
-            with open(log_file, 'r', encoding='utf-8') as f:
-                return json.load(f)
+    def identify_pivot_points(self, candles: List[Dict], window: int = 5) -> List[Dict]:
+        """
+        识别高低点（枢轴点）
         
-        return {
-            "version": "1.0",
-            "analyses": [],
-            "stats": {
-                "total_analyses": 0,
-                "levels_detected": 0,
+        Args:
+            candles: K 线数据列表
+            window: 检测窗口大小
+        
+        Returns:
+            枢轴点列表
+        """
+        pivots = []
+        
+        for i in range(window, len(candles) - window):
+            # 检测局部高点
+            high = candles[i]['high']
+            is_high = all(candles[i-j]['high'] < high for j in range(1, window+1)) and \
+                      all(candles[i+j]['high'] < high for j in range(1, window+1))
+            
+            if is_high:
+                pivots.append({
+                    'index': i,
+                    'type': 'high',
+                    'price': high,
+                    'date': candles[i].get('date', f'candle_{i}')
+                })
+            
+            # 检测局部低点
+            low = candles[i]['low']
+            is_low = all(candles[i-j]['low'] > low for j in range(1, window+1)) and \
+                     all(candles[i+j]['low'] > low for j in range(1, window+1))
+            
+            if is_low:
+                pivots.append({
+                    'index': i,
+                    'type': 'low',
+                    'price': low,
+                    'date': candles[i].get('date', f'candle_{i}')
+                })
+        
+        return pivots
+    
+    def identify_support_resistance(self, candles: List[Dict], 
+                                     pivots: List[Dict] = None) -> Dict:
+        """
+        识别支撑位和阻力位
+        
+        Args:
+            candles: K 线数据列表
+            pivots: 枢轴点列表（可选，不提供则自动计算）
+        
+        Returns:
+            支撑阻力分析结果
+        """
+        if not pivots:
+            pivots = self.identify_pivot_points(candles, window=5)
+        
+        # 分离高低点
+        highs = [p for p in pivots if p['type'] == 'high']
+        lows = [p for p in pivots if p['type'] == 'low']
+        
+        # 聚类分析（简化版：价格接近的归为一组）
+        def cluster_prices(points: List[Dict], tolerance: float = 0.02) -> List[Dict]:
+            if not points:
+                return []
+            
+            clusters = []
+            sorted_points = sorted(points, key=lambda x: x['price'])
+            
+            current_cluster = {
+                'price': sorted_points[0]['price'],
+                'touches': [sorted_points[0]],
+                'strength': 1
             }
-        }
-    
-    def _save_analysis_log(self):
-        """Save analysis log"""
-        log_file = self.data_dir / "analysis_log.json"
-        with open(log_file, 'w', encoding='utf-8') as f:
-            json.dump(self.analysis_log, f, ensure_ascii=False, indent=2)
-    
-    def calculate_pivot_points(self, high: float, low: float, close: float) -> Dict:
-        """
-        Calculate classic pivot points
-        
-        Args:
-            high: Previous period high
-            low: Previous period low
-            close: Previous period close
             
-        Returns:
-            Dict with pivot point levels
-        """
-        pivot = (high + low + close) / 3
-        r1 = 2 * pivot - low
-        s1 = 2 * pivot - high
-        r2 = pivot + (high - low)
-        s2 = pivot - (high - low)
-        r3 = high + 2 * (pivot - low)
-        s3 = low - 2 * (high - pivot)
-        
-        return {
-            "pivot": round(pivot, 2),
-            "resistance_1": round(r1, 2),
-            "resistance_2": round(r2, 2),
-            "resistance_3": round(r3, 2),
-            "support_1": round(s1, 2),
-            "support_2": round(s2, 2),
-            "support_3": round(s3, 2)
-        }
-    
-    def calculate_fibonacci_retracement(self, high: float, low: float) -> Dict:
-        """
-        Calculate Fibonacci retracement levels
-        
-        Args:
-            high: Swing high
-            low: Swing low
+            for point in sorted_points[1:]:
+                price_ratio = point['price'] / current_cluster['price']
+                if abs(price_ratio - 1) < tolerance:
+                    # 归入当前聚类
+                    current_cluster['touches'].append(point)
+                    current_cluster['strength'] = len(current_cluster['touches'])
+                    # 更新中心价格
+                    current_cluster['price'] = sum(t['price'] for t in current_cluster['touches']) / len(current_cluster['touches'])
+                else:
+                    # 新建聚类
+                    clusters.append(current_cluster)
+                    current_cluster = {
+                        'price': point['price'],
+                        'touches': [point],
+                        'strength': 1
+                    }
             
-        Returns:
-            Dict with Fibonacci levels
-        """
-        diff = high - low
+            clusters.append(current_cluster)
+            return clusters
         
-        levels = {
-            "0.0%": round(high, 2),
-            "23.6%": round(high - 0.236 * diff, 2),
-            "38.2%": round(high - 0.382 * diff, 2),
-            "50.0%": round(high - 0.5 * diff, 2),
-            "61.8%": round(high - 0.618 * diff, 2),
-            "78.6%": round(high - 0.786 * diff, 2),
-            "100.0%": round(low, 2)
-        }
+        resistance_clusters = cluster_prices(highs)
+        support_clusters = cluster_prices(lows)
         
-        # Extension levels
-        levels["127.2%"] = round(low - 0.272 * diff, 2)
-        levels["161.8%"] = round(low - 0.618 * diff, 2)
+        # 排序
+        resistance_clusters.sort(key=lambda x: x['price'], reverse=True)
+        support_clusters.sort(key=lambda x: x['price'])
         
-        return levels
-    
-    def find_price_clusters(self, candles: List[Dict], window: int = 50, 
-                           tolerance: float = 0.02) -> List[Dict]:
-        """
-        Find price levels where price has reversed multiple times
-        
-        Args:
-            candles: List of candle data
-            window: Number of candles to analyze
-            tolerance: Price tolerance for clustering (2%)
-            
-        Returns:
-            List of support/resistance clusters
-        """
-        if len(candles) < window:
-            return []
-        
-        recent_candles = candles[-window:]
-        
-        # Find local highs and lows
-        highs = []
-        lows = []
-        
-        for i in range(2, len(recent_candles) - 2):
-            candle = recent_candles[i]
-            prev_candle = recent_candles[i-1]
-            next_candle = recent_candles[i+1]
-            
-            # Local high
-            if candle["high"] > prev_candle["high"] and candle["high"] > next_candle["high"]:
-                if candle["high"] > prev_candle["close"] and candle["high"] > next_candle["close"]:
-                    highs.append(candle["high"])
-            
-            # Local low
-            if candle["low"] < prev_candle["low"] and candle["low"] < next_candle["low"]:
-                if candle["low"] < prev_candle["close"] and candle["low"] < next_candle["close"]:
-                    lows.append(candle["low"])
-        
-        # Cluster highs (resistance levels)
-        resistance_clusters = self._cluster_prices(highs, tolerance)
-        
-        # Cluster lows (support levels)
-        support_clusters = self._cluster_prices(lows, tolerance)
-        
-        # Format results
-        levels = []
-        
-        for cluster in resistance_clusters:
-            if cluster["count"] >= 2:  # At least 2 touches
-                levels.append({
-                    "type": "resistance",
-                    "price": round(cluster["avg"], 2),
-                    "touches": cluster["count"],
-                    "strength": self._calculate_level_strength(cluster["count"], cluster["recency"]),
-                    "last_touch": cluster["last_touch"]
-                })
-        
-        for cluster in support_clusters:
-            if cluster["count"] >= 2:
-                levels.append({
-                    "type": "support",
-                    "price": round(cluster["avg"], 2),
-                    "touches": cluster["count"],
-                    "strength": self._calculate_level_strength(cluster["count"], cluster["recency"]),
-                    "last_touch": cluster["last_touch"]
-                })
-        
-        # Sort by strength
-        levels.sort(key=lambda x: x["strength"], reverse=True)
-        
-        return levels
-    
-    def _cluster_prices(self, prices: List[float], tolerance: float) -> List[Dict]:
-        """Cluster similar prices together"""
-        if not prices:
-            return []
-        
-        clusters = []
-        
-        for price in prices:
-            found_cluster = False
-            
-            for cluster in clusters:
-                if abs(price - cluster["avg"]) / cluster["avg"] < tolerance:
-                    # Add to existing cluster
-                    cluster["prices"].append(price)
-                    cluster["count"] += 1
-                    cluster["avg"] = sum(cluster["prices"]) / len(cluster["prices"])
-                    cluster["recency"] = max(cluster["recency"], 1)
-                    found_cluster = True
-                    break
-            
-            if not found_cluster:
-                # Create new cluster
-                clusters.append({
-                    "prices": [price],
-                    "count": 1,
-                    "avg": price,
-                    "recency": 10,  # Most recent
-                    "last_touch": "recent"
-                })
-        
-        # Update recency
-        for cluster in clusters:
-            cluster["recency"] = max(1, cluster["recency"])
-        
-        return clusters
-    
-    def _calculate_level_strength(self, touches: int, recency: int) -> float:
-        """Calculate strength of support/resistance level"""
-        # More touches = stronger
-        touch_score = min(touches / 5, 1.0) * 0.6
-        
-        # More recent = stronger
-        recency_score = min(recency / 10, 1.0) * 0.4
-        
-        return touch_score + recency_score
-    
-    def analyze_volume_profile(self, candles: List[Dict], num_bins: int = 20) -> Dict:
-        """
-        Analyze volume profile to find high-volume nodes (support/resistance)
-        
-        Args:
-            candles: List of candle data
-            num_bins: Number of price bins
-            
-        Returns:
-            Dict with volume profile analysis
-        """
-        if not candles:
-            return {"error": "No data"}
-        
-        # Find price range
-        all_highs = [c["high"] for c in candles]
-        all_lows = [c["low"] for c in candles]
-        
-        price_min = min(all_lows)
-        price_max = max(all_highs)
-        price_range = price_max - price_min
-        
-        if price_range == 0:
-            return {"error": "Zero price range"}
-        
-        bin_size = price_range / num_bins
-        
-        # Initialize bins
-        bins = []
-        for i in range(num_bins):
-            bins.append({
-                "price_low": price_min + i * bin_size,
-                "price_high": price_min + (i + 1) * bin_size,
-                "volume": 0,
-                "count": 0
+        # 转换为标准格式
+        resistances = []
+        for i, cluster in enumerate(resistance_clusters[:5]):  # 取前 5 个阻力位
+            resistances.append({
+                'level': round(cluster['price'], 2),
+                'strength': cluster['strength'],
+                'touches': len(cluster['touches']),
+                'type': 'resistance',
+                'rank': i + 1
             })
         
-        # Fill bins
-        for candle in candles:
-            avg_price = (candle["high"] + candle["low"]) / 2
-            bin_idx = int((avg_price - price_min) / bin_size)
-            bin_idx = max(0, min(num_bins - 1, bin_idx))
-            
-            bins[bin_idx]["volume"] += candle["volume"]
-            bins[bin_idx]["count"] += 1
-        
-        # Find high volume nodes (HVN) and low volume nodes (LVN)
-        avg_volume = sum(b["volume"] for b in bins) / num_bins
-        
-        hvn = []
-        lvn = []
-        
-        for i, bin_data in enumerate(bins):
-            center_price = (bin_data["price_low"] + bin_data["price_high"]) / 2
-            
-            if bin_data["volume"] > avg_volume * 1.5:
-                hvn.append({
-                    "price": round(center_price, 2),
-                    "volume": bin_data["volume"],
-                    "volume_ratio": round(bin_data["volume"] / avg_volume, 2),
-                    "type": "HVN"
-                })
-            elif bin_data["volume"] < avg_volume * 0.5:
-                lvn.append({
-                    "price": round(center_price, 2),
-                    "volume": bin_data["volume"],
-                    "volume_ratio": round(bin_data["volume"] / avg_volume, 2),
-                    "type": "LVN"
-                })
-        
-        # Sort by volume
-        hvn.sort(key=lambda x: x["volume"], reverse=True)
-        lvn.sort(key=lambda x: x["volume"])
+        supports = []
+        for i, cluster in enumerate(support_clusters[:5]):  # 取前 5 个支撑位
+            supports.append({
+                'level': round(cluster['price'], 2),
+                'strength': cluster['strength'],
+                'touches': len(cluster['touches']),
+                'type': 'support',
+                'rank': i + 1
+            })
         
         return {
-            "high_volume_nodes": hvn[:5],  # Top 5 HVNs
-            "low_volume_nodes": lvn[:5],   # Top 5 LVNs
-            "avg_volume": round(avg_volume, 0),
-            "price_range": round(price_range, 2)
+            'supports': supports,
+            'resistances': resistances,
+            'current_price': candles[-1]['close'],
+            'description': f'识别到 {len(supports)} 个支撑位，{len(resistances)} 个阻力位'
         }
     
-    def analyze_all_levels(self, symbol: str, candles: List[Dict]) -> Dict:
+    def identify_psychological_levels(self, current_price: float) -> List[Dict]:
         """
-        Comprehensive support and resistance analysis
+        识别心理关口（整数位）
         
         Args:
-            symbol: Stock symbol
-            candles: List of candle data
-            
+            current_price: 当前价格
+        
         Returns:
-            Dict with all S&R levels
+            心理关口列表
         """
-        if not candles or len(candles) < 30:
-            return {"error": "Insufficient data (need at least 30 candles)"}
+        levels = []
         
-        # Extract recent data
-        recent_candles = candles[-60:] if len(candles) >= 60 else candles
-        latest = candles[-1]
-        prev = candles[-2] if len(candles) >= 2 else candles[-1]
+        # 计算不同级别的整数关口
+        for precision in [100, 50, 10, 5, 1, 0.5, 0.1]:
+            lower = math.floor(current_price / precision) * precision
+            upper = math.ceil(current_price / precision) * precision
+            
+            if lower > 0 and lower != current_price:
+                levels.append({
+                    'level': round(lower, 2),
+                    'type': 'psychological',
+                    'rounding': precision,
+                    'distance_percent': abs(lower - current_price) / current_price * 100
+                })
+            
+            if upper != current_price:
+                levels.append({
+                    'level': round(upper, 2),
+                    'type': 'psychological',
+                    'rounding': precision,
+                    'distance_percent': abs(upper - current_price) / current_price * 100
+                })
         
+        # 去重并排序
+        seen = set()
+        unique_levels = []
+        for level in sorted(levels, key=lambda x: x['distance_percent']):
+            if level['level'] not in seen:
+                seen.add(level['level'])
+                unique_levels.append(level)
+        
+        return unique_levels[:10]  # 返回最近的 10 个
+    
+    def identify_previous_highs_lows(self, candles: List[Dict]) -> Dict:
+        """
+        识别前高/前低
+        
+        Args:
+            candles: K 线数据列表
+        
+        Returns:
+            前高前低分析
+        """
+        if len(candles) < 20:
+            return {
+                'previous_high': None,
+                'previous_low': None,
+                'description': '数据不足'
+            }
+        
+        # 最近 20 根 K 线的前高前低
+        recent = candles[-20:]
+        
+        previous_high = max(c['high'] for c in recent)
+        previous_low = min(c['low'] for c in recent)
+        
+        # 历史前高前低（全部数据）
+        all_time_high = max(c['high'] for c in candles)
+        all_time_low = min(c['low'] for c in candles)
+        
+        current_price = candles[-1]['close']
+        
+        return {
+            'previous_high': {
+                'price': previous_high,
+                'distance_percent': (previous_high - current_price) / current_price * 100
+            },
+            'previous_low': {
+                'price': previous_low,
+                'distance_percent': (current_price - previous_low) / current_price * 100
+            },
+            'all_time_high': {
+                'price': all_time_high,
+                'distance_percent': (all_time_high - current_price) / current_price * 100
+            },
+            'all_time_low': {
+                'price': all_time_low,
+                'distance_percent': (current_price - all_time_low) / current_price * 100
+            },
+            'description': f'前高：{previous_high:.2f}, 前低：{previous_low:.2f}'
+        }
+    
+    def analyze_volume_profile(self, candles: List[Dict], num_bins: int = 10) -> Dict:
+        """
+        分析成交密集区（简化版 Volume Profile）
+        
+        Args:
+            candles: K 线数据列表
+            num_bins: 价格区间数量
+        
+        Returns:
+            成交密集区分析
+        """
+        if len(candles) < 20:
+            return {
+                'poc': None,
+                'value_area': [],
+                'description': '数据不足'
+            }
+        
+        # 价格范围
+        all_highs = [c['high'] for c in candles]
+        all_lows = [c['low'] for c in candles]
+        price_range = (max(all_highs) - min(all_lows)) / num_bins
+        
+        # 统计每个价格区间的成交量
+        volume_by_price = Counter()
+        for candle in candles:
+            avg_price = (candle['high'] + candle['low']) / 2
+            bin_index = int((avg_price - min(all_lows)) / price_range)
+            bin_index = max(0, min(num_bins - 1, bin_index))
+            volume_by_price[bin_index] += candle['volume']
+        
+        # 找到 POC（Point of Control - 成交量最大的价格区间）
+        if volume_by_price:
+            poc_bin = max(volume_by_price, key=volume_by_price.get)
+            poc_price = min(all_lows) + (poc_bin + 0.5) * price_range
+            poc_volume = volume_by_price[poc_bin]
+        else:
+            poc_price = 0
+            poc_volume = 0
+        
+        # 计算价值区域（70% 成交量区域 - 简化版）
+        total_volume = sum(volume_by_price.values())
+        sorted_bins = sorted(volume_by_price.items(), key=lambda x: -x[1])
+        
+        cumulative_volume = 0
+        value_area_bins = []
+        for bin_idx, volume in sorted_bins:
+            cumulative_volume += volume
+            value_area_bins.append(bin_idx)
+            if cumulative_volume >= total_volume * 0.7:
+                break
+        
+        value_area_low = min(all_lows) + min(value_area_bins) * price_range
+        value_area_high = min(all_lows) + (max(value_area_bins) + 1) * price_range
+        
+        return {
+            'poc': {
+                'price': round(poc_price, 2),
+                'volume': poc_volume
+            },
+            'value_area': {
+                'low': round(value_area_low, 2),
+                'high': round(value_area_high, 2)
+            },
+            'description': f'POC: {poc_price:.2f}, 价值区域：{value_area_low:.2f}-{value_area_high:.2f}'
+        }
+    
+    def detect_breakout(self, candles: List[Dict], 
+                         support_resistance: Dict) -> Dict:
+        """
+        检测突破信号
+        
+        Args:
+            candles: K 线数据列表
+            support_resistance: 支撑阻力分析结果
+        
+        Returns:
+            突破信号分析
+        """
+        current_price = candles[-1]['close']
+        prev_close = candles[-2]['close'] if len(candles) > 1 else current_price
+        
+        breakouts = []
+        
+        # 检查阻力突破
+        for resistance in support_resistance.get('resistances', []):
+            level = resistance['level']
+            strength = resistance['strength']
+            
+            # 价格上穿阻力
+            if prev_close <= level < current_price:
+                breakouts.append({
+                    'type': 'resistance_breakout',
+                    'level': level,
+                    'strength': strength,
+                    'direction': 'bullish',
+                    'significance': 'high' if strength >= 3 else 'medium'
+                })
+        
+        # 检查支撑跌破
+        for support in support_resistance.get('supports', []):
+            level = support['level']
+            strength = support['strength']
+            
+            # 价格下破支撑
+            if prev_close >= level > current_price:
+                breakouts.append({
+                    'type': 'support_breakdown',
+                    'level': level,
+                    'strength': strength,
+                    'direction': 'bearish',
+                    'significance': 'high' if strength >= 3 else 'medium'
+                })
+        
+        return {
+            'breakouts': breakouts,
+            'current_price': current_price,
+            'description': f'检测到 {len(breakouts)} 个突破信号' if breakouts else '无突破信号'
+        }
+    
+    def analyze_all_sr(self, candles: List[Dict]) -> Dict:
+        """
+        综合分析所有支撑阻力指标
+        
+        Args:
+            candles: K 线数据列表
+        
+        Returns:
+            完整支撑阻力分析报告
+        """
         result = {
-            "symbol": symbol,
-            "candle_count": len(candles),
-            "analyzed_at": datetime.now().isoformat(),
-            "current_price": latest["close"],
-            "pivot_points": {},
-            "fibonacci_levels": {},
-            "price_clusters": [],
-            "volume_profile": {},
-            "key_levels": [],
-            "recommendation": ""
+            'symbol': 'TEST',
+            'analysis_date': datetime.now().isoformat(),
+            'candle_count': len(candles),
+            'current_price': candles[-1]['close'],
+            'support_resistance': {},
+            'psychological_levels': [],
+            'previous_highs_lows': {},
+            'volume_profile': {},
+            'breakouts': {},
+            'summary': {
+                'nearest_support': 0,
+                'nearest_resistance': 0,
+                'support_distance': 0,
+                'resistance_distance': 0,
+                'trend': 'neutral',
+                'description': ''
+            }
         }
         
-        # Calculate pivot points
-        result["pivot_points"] = self.calculate_pivot_points(
-            prev["high"], prev["low"], prev["close"]
+        # 1. 支撑阻力位
+        result['support_resistance'] = self.identify_support_resistance(candles)
+        
+        # 2. 心理关口
+        result['psychological_levels'] = self.identify_psychological_levels(
+            result['current_price']
         )
         
-        # Calculate Fibonacci levels
-        swing_high = max(c["high"] for c in recent_candles)
-        swing_low = min(c["low"] for c in recent_candles)
-        result["fibonacci_levels"] = self.calculate_fibonacci_retracement(swing_high, swing_low)
+        # 3. 前高前低
+        result['previous_highs_lows'] = self.identify_previous_highs_lows(candles)
         
-        # Find price clusters
-        result["price_clusters"] = self.find_price_clusters(candles)
+        # 4. 成交密集区
+        result['volume_profile'] = self.analyze_volume_profile(candles, num_bins=10)
         
-        # Analyze volume profile
-        result["volume_profile"] = self.analyze_volume_profile(recent_candles)
+        # 5. 突破信号
+        result['breakouts'] = self.detect_breakout(
+            candles, result['support_resistance']
+        )
         
-        # Combine all levels into key levels
-        result["key_levels"] = self._combine_key_levels(result)
-        
-        # Generate recommendation
-        result["recommendation"] = self._generate_sr_recommendation(result)
-        
-        # Save to cache
-        cache_file = self.data_dir / f"{symbol}_sr_levels.json"
-        with open(cache_file, 'w', encoding='utf-8') as f:
-            json.dump(result, f, ensure_ascii=False, indent=2)
-        
-        # Log analysis
-        self._log_analysis(symbol, len(result["key_levels"]), success=True)
+        # 6. 综合判断
+        result['summary'] = self._synthesize_sr(result)
         
         return result
     
-    def _combine_key_levels(self, result: Dict) -> List[Dict]:
-        """Combine all levels into unified key levels list"""
-        key_levels = []
-        current_price = result["current_price"]
+    def save_report(self, report: Dict, symbol: str = 'TEST'):
+        """保存支撑阻力分析报告"""
+        timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
+        filename = f"{symbol}_sr_{timestamp}.json"
+        filepath = self.cache_dir / filename
         
-        # Add pivot points
-        pivots = result.get("pivot_points", {})
-        for name, price in pivots.items():
-            distance = (price - current_price) / current_price * 100
-            level_type = "resistance" if price > current_price else "support"
-            
-            key_levels.append({
-                "price": price,
-                "type": level_type,
-                "source": "pivot",
-                "name": name.replace("_", " ").title(),
-                "distance_pct": round(distance, 2),
-                "strength": 0.7
-            })
+        with open(filepath, 'w', encoding='utf-8') as f:
+            json.dump(report, f, indent=2, ensure_ascii=False)
         
-        # Add price clusters
-        clusters = result.get("price_clusters", [])
-        for cluster in clusters:
-            distance = (cluster["price"] - current_price) / current_price * 100
-            
-            key_levels.append({
-                "price": cluster["price"],
-                "type": cluster["type"],
-                "source": "cluster",
-                "name": f"{cluster['type'].title()} ({cluster['touches']} touches)",
-                "distance_pct": round(distance, 2),
-                "strength": cluster["strength"]
-            })
-        
-        # Add HVNs from volume profile
-        volume_profile = result.get("volume_profile", {})
-        hvns = volume_profile.get("high_volume_nodes", [])
-        for hvn in hvns[:3]:
-            distance = (hvn["price"] - current_price) / current_price * 100
-            
-            key_levels.append({
-                "price": hvn["price"],
-                "type": "support/resistance",
-                "source": "volume",
-                "name": f"HVN (vol ratio {hvn['volume_ratio']})",
-                "distance_pct": round(distance, 2),
-                "strength": 0.6 * hvn["volume_ratio"] / 2
-            })
-        
-        # Sort by strength and remove duplicates (within 1%)
-        key_levels.sort(key=lambda x: x["strength"], reverse=True)
-        
-        filtered = []
-        for level in key_levels:
-            is_duplicate = False
-            for existing in filtered:
-                if abs(level["price"] - existing["price"]) / existing["price"] < 0.01:
-                    is_duplicate = True
-                    break
-            
-            if not is_duplicate:
-                filtered.append(level)
-        
-        return filtered[:10]  # Top 10 key levels
+        return filepath
     
-    def _generate_sr_recommendation(self, result: Dict) -> str:
-        """Generate recommendation based on S&R levels"""
-        current_price = result["current_price"]
-        key_levels = result.get("key_levels", [])
+    # ========== 辅助方法 ==========
+    
+    def _synthesize_sr(self, result: Dict) -> Dict:
+        """综合判断支撑阻力"""
+        current_price = result['current_price']
+        supports = result['support_resistance'].get('supports', [])
+        resistances = result['support_resistance'].get('resistances', [])
         
-        if not key_levels:
-            return "NEUTRAL - No clear S&R levels identified"
+        # 最近支撑和阻力
+        nearest_support = max([s['level'] for s in supports if s['level'] < current_price], default=0)
+        nearest_resistance = min([r['level'] for r in resistances if r['level'] > current_price], default=0)
         
-        # Find nearest support and resistance
-        supports = [l for l in key_levels if l["type"] in ["support", "support/resistance"] and l["price"] < current_price]
-        resistances = [l for l in key_levels if l["type"] in ["resistance", "support/resistance"] and l["price"] > current_price]
+        # 距离百分比
+        support_distance = (current_price - nearest_support) / current_price * 100 if nearest_support > 0 else 0
+        resistance_distance = (nearest_resistance - current_price) / current_price * 100 if nearest_resistance > 0 else 0
         
-        if not supports or not resistances:
-            return "NEUTRAL - Insufficient S&R data"
-        
-        nearest_support = max(supports, key=lambda x: x["price"])
-        nearest_resistance = min(resistances, key=lambda x: x["price"])
-        
-        support_distance = (current_price - nearest_support["price"]) / current_price * 100
-        resistance_distance = (nearest_resistance["price"] - current_price) / current_price * 100
-        
-        if support_distance < 3:
-            return f"SUPPORT TEST - Price near support at {nearest_support['price']} ({support_distance:.1f}% above)"
-        elif resistance_distance < 3:
-            return f"RESISTANCE TEST - Price near resistance at {nearest_resistance['price']} ({resistance_distance:.1f}% below)"
-        elif support_distance < resistance_distance:
-            return f"BIASED BULLISH - Closer to support ({support_distance:.1f}%) than resistance ({resistance_distance:.1f}%)"
+        # 判断趋势
+        if support_distance < 2 and resistance_distance > 10:
+            trend = 'near_support'
+            description = f'接近支撑位 {nearest_support:.2f}'
+        elif resistance_distance < 2 and support_distance > 10:
+            trend = 'near_resistance'
+            description = f'接近阻力位 {nearest_resistance:.2f}'
+        elif support_distance < 5 and resistance_distance < 5:
+            trend = 'consolidation'
+            description = f'盘整区间 {nearest_support:.2f}-{nearest_resistance:.2f}'
         else:
-            return f"BIASED BEARISH - Closer to resistance ({resistance_distance:.1f}%) than support ({support_distance:.1f}%)"
-    
-    def _log_analysis(self, symbol: str, levels: int, success: bool):
-        """Log analysis attempt"""
-        log_entry = {
-            "timestamp": datetime.now().isoformat(),
-            "symbol": symbol,
-            "levels_detected": levels,
-            "success": success
+            trend = 'neutral'
+            description = f'支撑：{nearest_support:.2f}, 阻力：{nearest_resistance:.2f}'
+        
+        return {
+            'nearest_support': nearest_support,
+            'nearest_resistance': nearest_resistance,
+            'support_distance': round(support_distance, 2),
+            'resistance_distance': round(resistance_distance, 2),
+            'trend': trend,
+            'description': description
         }
-        
-        self.analysis_log["analyses"].append(log_entry)
-        self.analysis_log["stats"]["total_analyses"] += 1
-        self.analysis_log["stats"]["levels_detected"] += levels
-        
-        # Keep only last 500 entries
-        self.analysis_log["analyses"] = self.analysis_log["analyses"][-500:]
-        
-        self._save_analysis_log()
+
+
+def generate_test_data(num_candles: int = 100) -> List[Dict]:
+    """生成测试 K 线数据（带明显支撑阻力）"""
+    import random
     
-    def get_stats(self) -> Dict:
-        """Get analysis statistics"""
-        return self.analysis_log["stats"].copy()
+    candles = []
+    price = 100.0
     
-    def display_status(self) -> str:
-        """Display analyzer status"""
-        stats = self.get_stats()
+    # 创建区间震荡
+    support = 95.0
+    resistance = 105.0
+    
+    for i in range(num_candles):
+        # 均值回归
+        if price > resistance:
+            drift = -0.02
+        elif price < support:
+            drift = 0.02
+        else:
+            drift = 0
         
-        output = []
-        output.append("\n" + "=" * 70)
-        output.append(" " * 14 + "Support & Resistance Analyzer Status")
-        output.append("=" * 70)
+        change = random.uniform(-0.03, 0.03) + drift
+        open_price = price
+        close_price = price * (1 + change)
+        high_price = max(open_price, close_price) * (1 + random.uniform(0, 0.02))
+        low_price = min(open_price, close_price) * (1 - random.uniform(0, 0.02))
         
-        output.append(f"\n[Analysis Methods]")
-        output.append("  - Classic Pivot Points")
-        output.append("  - Fibonacci Retracement")
-        output.append("  - Price Cluster Detection")
-        output.append("  - Volume Profile Analysis")
+        candles.append({
+            'date': f'2026-01-{i+1:02d}',
+            'open': round(open_price, 2),
+            'high': round(high_price, 2),
+            'low': round(low_price, 2),
+            'close': round(close_price, 2),
+            'volume': random.randint(1000000, 10000000)
+        })
         
-        output.append(f"\n[Statistics]")
-        output.append(f"  Total Analyses:    {stats['total_analyses']}")
-        output.append(f"  Levels Detected:   {stats['levels_detected']}")
-        
-        output.append("\n" + "=" * 70 + "\n")
-        
-        return "\n".join(output)
+        price = close_price
+    
+    return candles
 
 
 def main():
-    """Test entry point"""
+    """主函数"""
     print("=" * 70)
-    print(" " * 14 + "SA-008: Support & Resistance")
+    print(" " * 20 + "SA-008: Support & Resistance")
     print("=" * 70)
     
     analyzer = SupportResistanceAnalyzer()
     
-    # Test 1: Display status
-    print(analyzer.display_status())
-    
-    # Test 2: Generate test data
-    print("\n[Test 1] Generate Test Data")
-    print("-" * 70)
-    import random
-    random.seed(42)
-    
-    candles = []
-    price = 100
-    
-    # Create price action with clear S&R levels
-    for i in range(100):
-        # Create range-bound action with occasional breakouts
-        if i < 30:
-            price = 100 + random.uniform(-5, 5)  # Range 95-105
-        elif i < 60:
-            price = 115 + random.uniform(-3, 3)  # Range 112-118
-        else:
-            price = 130 + random.uniform(-8, 8)  # Range 122-138
+    # 测试模式
+    if len(sys.argv) > 1 and sys.argv[1] == '--test':
+        print("\n[Test 1] Generate Test Data")
+        print("-" * 70)
+        candles = generate_test_data(100)
+        print(f"  Generated {len(candles)} candles")
+        print(f"  Price range: {min(c['low'] for c in candles):.2f} - {max(c['high'] for c in candles):.2f}")
         
-        open_p = price
-        close_p = price * (1 + random.uniform(-0.01, 0.01))
-        high_p = max(open_p, close_p) * (1 + random.uniform(0, 0.02))
-        low_p = min(open_p, close_p) * (1 - random.uniform(0, 0.02))
-        volume = random.randint(5000000, 50000000)
+        print("\n[Test 2] Identify Pivot Points")
+        print("-" * 70)
+        pivots = analyzer.identify_pivot_points(candles, window=5)
+        print(f"  Found {len(pivots)} pivot points")
+        highs = [p for p in pivots if p['type'] == 'high']
+        lows = [p for p in pivots if p['type'] == 'low']
+        print(f"  Highs: {len(highs)}, Lows: {len(lows)}")
         
-        candles.append({
-            "date": f"2026-01-{i%30+1:02d}",
-            "open": round(open_p, 2),
-            "high": round(high_p, 2),
-            "low": round(low_p, 2),
-            "close": round(close_p, 2),
-            "volume": volume
-        })
-    
-    print(f"  Generated {len(candles)} candles")
-    print(f"  Price range: {min(c['low'] for c in candles):.2f} - {max(c['high'] for c in candles):.2f}")
-    
-    # Test 3: Analyze S&R levels
-    print("\n[Test 2] Analyze Support & Resistance")
-    print("-" * 70)
-    result = analyzer.analyze_all_levels("TEST", candles)
-    
-    if "error" not in result:
-        print(f"  Symbol:        {result['symbol']}")
-        print(f"  Current Price: {result['current_price']}")
+        print("\n[Test 3] Identify Support & Resistance Levels")
+        print("-" * 70)
+        sr = analyzer.identify_support_resistance(candles, pivots)
+        print(f"  {sr['description']}")
+        print(f"  Supports: {[s['level'] for s in sr['supports']]}")
+        print(f"  Resistances: {[r['level'] for r in sr['resistances']]}")
         
-        print(f"\n  Pivot Points:")
-        for name, price in result["pivot_points"].items():
-            print(f"    {name.replace('_', ' ').title():15} {price}")
+        print("\n[Test 4] Psychological Levels")
+        print("-" * 70)
+        psych = analyzer.identify_psychological_levels(sr['current_price'])
+        print(f"  Nearest 5 psychological levels:")
+        for level in psych[:5]:
+            print(f"    {level['level']:.2f} (rounding: {level['rounding']})")
         
-        print(f"\n  Key Levels:")
-        for i, level in enumerate(result["key_levels"][:8], 1):
-            print(f"    [{i}] {level['price']:7.2f} - {level['type']:15} "
-                  f"({level['source']:6}) - {level['name']} "
-                  f"[Strength: {level['strength']:.2f}, Dist: {level['distance_pct']:+.2f}%]")
+        print("\n[Test 5] Previous Highs & Lows")
+        print("-" * 70)
+        phl = analyzer.identify_previous_highs_lows(candles)
+        print(f"  {phl['description']}")
+        if phl.get('previous_high'):
+            print(f"  Previous High: {phl['previous_high']['price']:.2f} ({phl['previous_high']['distance_percent']:.1f}%)")
+            print(f"  Previous Low: {phl['previous_low']['price']:.2f} ({phl['previous_low']['distance_percent']:.1f}%)")
         
-        print(f"\n  Recommendation: {result['recommendation']}")
+        print("\n[Test 6] Volume Profile")
+        print("-" * 70)
+        vp = analyzer.analyze_volume_profile(candles, num_bins=10)
+        print(f"  {vp['description']}")
+        
+        print("\n[Test 7] Breakout Detection")
+        print("-" * 70)
+        breakouts = analyzer.detect_breakout(candles, sr)
+        print(f"  {breakouts['description']}")
+        for bo in breakouts.get('breakouts', []):
+            print(f"    {bo['type']} at {bo['level']:.2f} ({bo['direction']})")
+        
+        print("\n[Test 8] Comprehensive Analysis")
+        print("-" * 70)
+        all_sr = analyzer.analyze_all_sr(candles)
+        summary = all_sr['summary']
+        print(f"  Current Price: {all_sr['current_price']:.2f}")
+        print(f"  Nearest Support: {summary['nearest_support']:.2f} ({summary['support_distance']:.1f}%)")
+        print(f"  Nearest Resistance: {summary['nearest_resistance']:.2f} ({summary['resistance_distance']:.1f}%)")
+        print(f"  Trend: {summary['trend']}")
+        print(f"  {summary['description']}")
+        
+        print("\n[Test 9] Save Report")
+        print("-" * 70)
+        report_path = analyzer.save_report(all_sr, 'TEST')
+        print(f"  Report saved to: {report_path}")
+        
+        print("\n" + "=" * 70)
+        print(" SA-008 Support & Resistance test completed")
+        print("=" * 70)
     
-    # Test 4: Final stats
-    print("\n[Test 3] Final Statistics")
-    print("-" * 70)
-    stats = analyzer.get_stats()
-    print(f"  Total Analyses:    {stats['total_analyses']}")
-    print(f"  Levels Detected:   {stats['levels_detected']}")
-    
-    print("\n[OK] SA-008 Support & Resistance test completed")
+    else:
+        # 正常使用模式
+        print("\nUsage: py sa_008_support_resistance.py --test")
+        print("\nFeatures:")
+        print("  - Automatic support/resistance identification")
+        print("  - Pivot point detection")
+        print("  - Psychological level detection")
+        print("  - Previous highs/lows analysis")
+        print("  - Volume profile (POC, value area)")
+        print("  - Breakout signal detection")
+        print("  - Auto-save reports to 60-DATA/stock_sr/")
 
-if __name__ == "__main__":
+
+if __name__ == '__main__':
     main()

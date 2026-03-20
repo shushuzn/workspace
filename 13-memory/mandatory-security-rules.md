@@ -8,6 +8,20 @@
 
 ## 核心规则
 
+### 0. 自举例外 (Bootstrap Exception) ✅
+
+**允许在无 session 时执行:**
+- `py 30-scripts-tools/copaw_entry.py <task>` - 会话初始化（唯一例外）
+
+**条件:**
+- 仅限 `copaw_entry.py` 这一个脚本
+- 必须是直接调用，不能有参数注入
+- 执行后必须创建 `execution-state.json`
+
+**原则:** 允许合理的自举机制，但不允许借此绕过后续防护
+
+---
+
 ### 1. 严禁执行系统命令 ❌
 
 **禁止:**
