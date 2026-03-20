@@ -1,0 +1,106 @@
+{"timestamp": "2026-03-20T13:12:23.838747", "session_id": null, "step_id": 6, "action": "blocked", "reason": "Step 5 not completed"}
+{"timestamp": "2026-03-20T13:12:55.542791", "session_id": null, "step_id": 6, "action": "blocked", "reason": "Step 5 not completed"}
+{"timestamp": "2026-03-20T13:13:10.855200", "session_id": null, "step_id": 6, "action": "allowed", "reason": "First step execution"}
+{"timestamp": "2026-03-20T13:16:15.933146", "session_id": null, "step_id": 6, "action": "allowed", "reason": "First step execution"}
+{"timestamp": "2026-03-20T13:16:16.500416", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:16:16.639121", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:16:16.776646", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:16:16.914858", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:16:17.055482", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:16:17.204745", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:17:41.216308", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:18:50.254203", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:20:36.424537", "session_id": null, "step_id": 6, "action": "allowed", "reason": "First step execution"}
+{"timestamp": "2026-03-20T13:20:59.264637", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:21:03.073178", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:21:07.353900", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:21:12.005552", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:21:16.107429", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:21:20.285201", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:21:24.749594", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:21:29.229322", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:21:33.439139", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:23:15.147319", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:23:23.900106", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:23:28.057811", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:26:54.278771", "session_id": null, "step_id": 1, "action": "allowed", "reason": "First step execution"}
+{"timestamp": "2026-03-20T13:26:59.095838", "session_id": null, "step_id": 3, "action": "blocked", "reason": "Step order violation"}
+{"timestamp": "2026-03-20T13:27:05.192213", "session_id": null, "step_id": 1, "action": "allowed", "reason": "First step execution"}
+{"timestamp": "2026-03-20T13:27:05.320304", "session_id": null, "step_id": 3, "action": "blocked", "reason": "Step order violation"}
+{"timestamp": "2026-03-20T13:27:05.424152", "session_id": null, "step_id": 3, "action": "blocked", "reason": "Step order violation"}
+{"timestamp": "2026-03-20T13:27:41.522305", "session_id": null, "step_id": 1, "action": "allowed", "reason": "First step execution"}
+{"timestamp": "2026-03-20T13:27:41.663201", "session_id": null, "step_id": 3, "action": "blocked", "reason": "Step order violation"}
+{"timestamp": "2026-03-20T13:27:41.770454", "session_id": null, "step_id": 3, "action": "blocked", "reason": "Step order violation"}
+{"timestamp": "2026-03-20T13:28:12.001179", "session_id": null, "step_id": 1, "action": "allowed", "reason": "First step execution"}
+{"timestamp": "2026-03-20T13:28:12.140857", "session_id": null, "step_id": 3, "action": "blocked", "reason": "Step order violation"}
+{"timestamp": "2026-03-20T13:28:12.254951", "session_id": null, "step_id": 3, "action": "blocked", "reason": "Step order violation"}
+{"timestamp": "2026-03-20T13:28:28.513512", "session_id": null, "step_id": 1, "action": "allowed", "reason": "First step execution"}
+{"timestamp": "2026-03-20T13:28:28.644388", "session_id": null, "step_id": 2, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:28:28.783273", "session_id": null, "step_id": 3, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:29:37.863405", "session_id": null, "step_id": 1, "action": "allowed", "reason": "First step execution"}
+{"timestamp": "2026-03-20T13:29:42.710235", "session_id": null, "step_id": 2, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:29:47.966635", "session_id": null, "step_id": 3, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:29:53.872193", "session_id": null, "step_id": 4, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:29:54.026152", "session_id": null, "step_id": 5, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:29:54.179455", "session_id": null, "step_id": 6, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:29:54.331806", "session_id": null, "step_id": 7, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:29:54.480136", "session_id": null, "step_id": 8, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:29:54.625254", "session_id": null, "step_id": 9, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:29:54.770693", "session_id": null, "step_id": 10, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:30:00.432707", "session_id": null, "step_id": 11, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:30:00.582727", "session_id": null, "step_id": 12, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:30:00.728326", "session_id": null, "step_id": 13, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:31:19.798585", "session_id": null, "step_id": 14, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:31:29.580939", "session_id": null, "step_id": 15, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:31:50.751143", "session_id": null, "step_id": 16, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:32:35.429370", "session_id": null, "step_id": 17, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:32:39.717695", "session_id": null, "step_id": 18, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:32:43.777288", "session_id": null, "step_id": 19, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:33:10.130921", "session_id": null, "step_id": 20, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:34:04.633954", "session_id": null, "step_id": 21, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:34:09.628072", "session_id": null, "step_id": 22, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:34:15.069199", "session_id": null, "step_id": 23, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:34:19.897730", "session_id": null, "step_id": 24, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:35:38.003365", "session_id": null, "step_id": 25, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:35:42.887008", "session_id": null, "step_id": 26, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:35:47.581063", "session_id": null, "step_id": 27, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:36:32.813590", "session_id": null, "step_id": 28, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:37:39.747574", "session_id": null, "step_id": 29, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:37:44.864454", "session_id": null, "step_id": 30, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:37:49.360364", "session_id": null, "step_id": 31, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:40:45.094023", "session_id": null, "step_id": 32, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:42:13.065885", "session_id": null, "step_id": 33, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:42:41.563312", "session_id": null, "step_id": 34, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:42:48.567317", "session_id": null, "step_id": 35, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:43:27.115132", "session_id": null, "step_id": 36, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:43:43.166771", "session_id": null, "step_id": 37, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:43:50.143192", "session_id": null, "step_id": 38, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:45:48.545736", "session_id": null, "step_id": 39, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:45:54.318424", "session_id": null, "step_id": 40, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:46:00.495004", "session_id": null, "step_id": 41, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:46:15.182614", "session_id": null, "step_id": 42, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:47:32.675916", "session_id": null, "step_id": 43, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:47:45.618134", "session_id": null, "step_id": 44, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:48:35.907534", "session_id": null, "step_id": 45, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:48:48.062876", "session_id": null, "step_id": 46, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:48:53.774712", "session_id": null, "step_id": 47, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:48:58.934817", "session_id": null, "step_id": 48, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:49:10.340630", "session_id": null, "step_id": 49, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:49:15.203647", "session_id": null, "step_id": 50, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:49:21.076348", "session_id": null, "step_id": 51, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:49:27.586056", "session_id": null, "step_id": 52, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:49:33.552231", "session_id": null, "step_id": 53, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:49:38.417758", "session_id": null, "step_id": 54, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:49:43.705595", "session_id": null, "step_id": 55, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:49:49.123157", "session_id": null, "step_id": 56, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:50:38.039506", "session_id": null, "step_id": 57, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:50:43.774079", "session_id": null, "step_id": 58, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:50:50.093088", "session_id": null, "step_id": 59, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:51:06.213193", "session_id": null, "step_id": 60, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:51:31.170991", "session_id": null, "step_id": 61, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:51:46.750382", "session_id": null, "step_id": 62, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:51:52.477006", "session_id": null, "step_id": 63, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:51:58.545123", "session_id": null, "step_id": 64, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:52:03.248320", "session_id": null, "step_id": 65, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:52:08.734056", "session_id": null, "step_id": 66, "action": "allowed", "reason": "Step execution"}
+{"timestamp": "2026-03-20T13:52:15.287376", "session_id": null, "step_id": 67, "action": "allowed", "reason": "Step execution"}

@@ -1,0 +1,33 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T11:25:07.734695
+# ---
+ m 10-RESEARCH/domain-research/领域研究/cnt-research
+ M flow-archive/20260318-universal-workflow-001/validation-log.jsonl
+?? 13-memory/protection-system-v4-unbypassable.md
+?? 30-scripts-tools/add_missing_tool_calls.py
+?? 30-scripts-tools/debug_workflow.py
+?? 30-scripts-tools/git_wrapper.bat
+?? 30-scripts-tools/quick_complete_workflow.py
+?? 30-scripts-tools/safe_git_executor.py
+?? 30-scripts-tools/sitecustomize.py
+?? 30-scripts-tools/test_protection.py
+?? tool_result/0926d239b3604d3e927f89898c16b42f.txt
+?? tool_result/1329ed38b4b84ce1b703dc6b8dd465c4.txt
+?? tool_result/287e19f980f249189b01029cc43ce9bc.txt
+?? tool_result/3145830993ff44419b3347b2780b146a.txt
+?? tool_result/542630fdc252488cad6625f127bd4d93.txt
+?? tool_result/69ab2ed039a5460581f414c611e73b10.txt
+?? tool_result/819aa9db570b4e229adb6cb837e8b5ad.txt
+?? tool_result/848b638cedf84f5fbf8fd3d75bdde2da.txt
+?? tool_result/8ecbd246e91845b2976c4a45d76a2f72.txt
+?? tool_result/8ff266bbadfe45ffa20726e15d39a84d.txt
+?? tool_result/95469a0723064ddd915a2bd6612ec081.txt
+?? tool_result/96098d882b864694bf114288ce4c3ad1.txt
+?? tool_result/ac560f2dc49e40ebb1317a168fc9d3fe.txt
+?? tool_result/ade3f29161274ba9b24a6ac141d9c4dc.txt
+?? tool_result/b0f1a9cbd0c842948a6fd7c71fe7de9e.txt
+?? tool_result/b87bae4f9a8a40b3881a966a9c367bc7.txt
+?? tool_result/bef969ad24af4160be120516e2eebeaa.txt
+?? tool_result/c101677fb84b4e1d9fde106a171b650a.txt
+?? tool_result/d1cf9c6c8bc14c7f9193b6b3b73b1efc.txt
+?? tool_result/deffe36b01614a64a923dcabf8a9eaeb.txt

@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-20T11:28:39.065920
+# ---
+D:\OpenClaw\workspace\.git\hooks\pre-commit  (lines 1-50 of 108)
+#!/bin/sh
+# Git Pre-Commit Hook v4.0 - 不可绕过版本
+# 位置：.git/hooks/pre-commit
+
+# 检测是否通过 --no-verify 调用
+if [ "$GIT_NO_VERIFY" = "1" ]; then
+    echo "========================================"
+    echo "[BLOCK] 检测到 --no-verify 调用"
+    echo "[BLOCK] 此操作被禁止"
+    echo "========================================"
+    exit 1
+fi
+
+# 检查 hook 是否被篡改
+HOOK_HASH=$(certutil -hashfile ".git/hooks/pre-commit" SHA256 | findstr /v "SHA256" | findstr /v "certutil")
+EXPECTED_HASH="PRE_COMMIT_HOOK_HASH_PLACEHOLDER"
+# 注意：hash 会在首次安装时设置
+
+echo "========================================"
+echo "Git Pre-Commit Hook v4.0 (不可绕过)"
+echo "========================================"
+
+# 检查 1: execution-state.json 必须存在
+echo "[Check 1] Checking execution-state.json..."
+if [ ! -f "flow-archive/20260318-universal-workflow-001/execution-state.json" ]; then
+    echo "[FAIL] execution-state.json 不存在"
+    echo "[BLOCK] 必须通过 copaw_entry.py 启动任务"
+    echo "[CMD] py 30-scripts-tools\\copaw_entry.py \"任务名称\""
+    exit 1
+fi
+echo "[OK] execution-state.json exists"
+
+# 检查 2: execution-state.json 必须有 session_id 和 mandatory_execution
+echo "[Check 2] Checking session validity..."
+py -c "import json; e=json.load(open('flow-archive/20260318-universal-workflow-001/execution-state.json', encoding='utf-8')); assert e.get('session_id'), 'session_id missing'; assert e.get('mandatory_execution'), 'mandatory_execution not enabled'; assert e.get('workflow_compliance'), 'workflow_compliance not enabled'"
+if [ $? -ne 0 ]; then
+    echo "[FAIL] session 无效 - 缺少必需字段"
+    echo "[BLOCK] 必须通过 copaw_entry.py 启动任务"
+    exit 1
+fi
+echo "[OK] Session valid"
+
+# 检查 3: tool_call_log.jsonl 必须有本次会话的记录
+echo "[Check 3] Checking tool call log..."
+SESSION_ID=$(py -c "import json; print(json.load(open('flow-archive/20260318-universal-workflow-001/execution-state.json', encoding='utf-8'))['session_id'])")
+if [ ! -f "30-scripts-tools/tool_call_log.jsonl" ]; then
+    echo "[FAIL] tool_call_log.jsonl 不存在"
+    echo "[BLOCK] 工具调用未记录"
+    exit 1
+fi
+
+[58 more lines. Use start_line=51 to continue.]

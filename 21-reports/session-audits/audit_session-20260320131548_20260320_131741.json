@@ -1,0 +1,21 @@
+{
+  "session_id": "session-20260320131548",
+  "audit_time": "2026-03-20T13:17:41.317562",
+  "statistics": {
+    "total_calls": 20,
+    "tools_used": {
+      "safe-shell-executor": 10,
+      "safe_shell_executor": 10
+    },
+    "success_rate": 100.0,
+    "avg_duration": 0
+  },
+  "integrity": {
+    "has_session_id": true,
+    "has_tool_calls": true,
+    "has_variety": true,
+    "has_success": true,
+    "no_critical_errors": true
+  },
+  "score": 100
+}

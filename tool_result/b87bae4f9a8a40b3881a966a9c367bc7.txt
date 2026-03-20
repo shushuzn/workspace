@@ -1,0 +1,96 @@
+# tool_name: read_file
+# created_at: 2026-03-20T11:19:38.249824
+# ---
+#!/bin/sh
+# Git Pre-Commit Hook - 强制工作流合规检查 (v3.0 - 真正强制)
+# 位置：.git/hooks/pre-commit
+
+echo "========================================"
+echo "Git Pre-Commit Hook v3.0"
+echo "========================================"
+
+# 检查 1: execution-state.json 必须存在
+echo "[Check 1] Checking execution-state.json..."
+if [ ! -f "flow-archive/20260318-universal-workflow-001/execution-state.json" ]; then
+    echo "[FAIL] execution-state.json 不存在"
+    echo "[BLOCK] 必须通过 copaw_entry.py 启动任务"
+    echo "[CMD] py 30-scripts-tools\\copaw_entry.py \"任务名称\""
+    exit 1
+fi
+echo "[OK] execution-state.json exists"
+
+# 检查 2: execution-state.json 必须有 session_id 和 mandatory_execution
+echo "[Check 2] Checking session validity..."
+py -c "import json; e=json.load(open('flow-archive/20260318-universal-workflow-001/execution-state.json', encoding='utf-8')); assert e.get('session_id'), 'session_id missing'; assert e.get('mandatory_execution'), 'mandatory_execution not enabled'"
+if [ $? -ne 0 ]; then
+    echo "[FAIL] session_id 或 mandatory_execution 缺失"
+    echo "[BLOCK] 必须通过 copaw_entry.py 启动任务"
+    exit 1
+fi
+echo "[OK] Session valid"
+
+# 检查 3: tool_call_log.jsonl 必须有本次会话的记录
+echo "[Check 3] Checking tool call log..."
+SESSION_ID=$(py -c "import json; print(json.load(open('flow-archive/20260318-universal-workflow-001/execution-state.json', encoding='utf-8'))['session_id'])")
+if [ ! -f "30-scripts-tools/tool_call_log.jsonl" ]; then
+    echo "[FAIL] tool_call_log.jsonl 不存在"
+    echo "[BLOCK] 工具调用未记录"
+    exit 1
+fi
+# 检查是否有本次会话的日志
+grep -q "$SESSION_ID" 30-scripts-tools/tool_call_log.jsonl
+if [ $? -ne 0 ]; then
+    echo "[FAIL] 无本次会话的工具调用日志 (session: $SESSION_ID)"
+    echo "[BLOCK] 必须通过 tool_executor.py 调用工具"
+    exit 1
+fi
+echo "[OK] Tool call log exists for session"
+
+# 检查 3.5: 检测绕过防护的直接工具调用
+echo "[Check 3.5] Checking for tool bypass..."
+py 30-scripts-tools/check_tool_bypass.py
+if [ $? -ne 0 ]; then
+    echo "[FAIL] 检测到工具调用绕过"
+    echo "[BLOCK] 必须通过 tool_executor.py 或 safe_shell_executor.py"
+    exit 1
+fi
+echo "[OK] No tool bypass detected"
+
+# 检查 4: Workflow Guardian 验证
+echo "[Check 4] Running Workflow Guardian..."
+py 30-scripts-tools/workflow_guardian_v2.py
+if [ $? -ne 0 ]; then
+    echo "[FAIL] Workflow Guardian 验证失败"
+    exit 1
+fi
+echo "[OK] Workflow Guardian passed"
+
+# 检查 5: Tool Call Tracker 验证
+echo "[Check 5] Running Tool Call Tracker..."
+
+# 检查是否为简化执行模式（简单问答任务）
+SIMPLIFIED=$(py -c "import json; e=json.load(open('flow-archive/20260318-universal-workflow-001/execution-state.json', encoding='utf-8')); print('true' if e.get('skip_validation') and e.get('execution_mode')=='simplified' else 'false')")
+if [ "$SIMPLIFIED" = "true" ]; then
+    echo "[INFO] Simplified execution mode detected - skipping tool call count validation"
+    echo "[OK] Tool Call Tracker skipped (simplified mode)"
+else
+    # 检查是否为元任务（防护系统自修复）
+    META_TASK=$(py -c "import json; e=json.load(open('flow-archive/20260318-universal-workflow-001/execution-state.json', encoding='utf-8')); print('true' if e.get('skip_tool_call_validation') and e.get('execution_mode')=='meta-task' else 'false')")
+    if [ "$META_TASK" = "true" ]; then
+        echo "[INFO] Meta-task execution mode detected - skipping tool call count validation"
+        echo "[OK] Tool Call Tracker skipped (meta-task mode)"
+    else
+        py 30-scripts-tools/tool_call_tracker.py
+        if [ $? -ne 0 ]; then
+            echo "[FAIL] Tool Call Tracker 验证失败"
+            echo "[BLOCK] 工具调用日志不真实"
+            exit 1
+        fi
+        echo "[OK] Tool Call Tracker passed"
+    fi
+fi
+
+echo "========================================"
+echo "[OK] All checks passed - Commit allowed"
+echo "========================================"
+exit 0

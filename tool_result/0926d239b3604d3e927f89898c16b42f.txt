@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-20T11:20:31.819508
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\safe_shell_executor.py  (lines 50-100 of 206)
+        self.state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
+        self.tool_call_log = Path("30-scripts-tools/tool_call_log.jsonl")
+    
+    def execute(self, command: str, description: str = None) -> dict:
+        """执行 shell 命令 - 强制防护检查"""
+        
+        # 步骤 0: 工具包装器检查（强制工作流）
+        if TOOL_WRAPPER_AVAILABLE:
+            if not before_tool_call('safe_shell_executor', {'command': command}):
+                return {
+                    "status": "blocked",
+                    "reason": "no_session",
+                    "message": "未初始化会话 - 请先运行 copaw_entry.py",
+                    "returncode": -1
+                }
+        
+        # 步骤 1: 检查 session 状态（直接检查，不通过防护层）
+        if not self.state_file.exists():
+            print("=" * 70)
+            print("[BLOCK] 命令执行被阻断")
+            print("[BLOCK] 原因：execution-state.json 不存在 - 请先运行 copaw_entry.py")
+            print("=" * 70)
+            return {
+                "status": "blocked",
+                "reason": "no_session",
+                "message": "未初始化会话",
+                "returncode": -1
+            }
+        
+        # 步骤 2: 检查停止标志
+        if Path(".STOP_FLAG").exists():
+            print("=" * 70)
+            print("[BLOCK] 命令执行被阻断")
+            print("[BLOCK] 原因：.STOP_FLAG exists - 系统已停止")
+            print("=" * 70)
+            return {
+                "status": "blocked",
+                "reason": "stop_flag",
+                "message": "系统已停止",
+                "returncode": -1
+            }
+        
+        # 步骤 3: 危险命令检查
+        is_dangerous = any(cmd in command.lower() for cmd in self.DANGEROUS_COMMANDS)
+        if is_dangerous:
+            print("=" * 70)
+            print("[WARN] 检测到危险命令")
+            print(f"[WARN] 命令：{command}")
+            print("[WARN] 需要人工确认")
+            print("=" * 70)
+            # 简单实现：直接阻断危险命令
+
+[106 more lines. Use start_line=101 to continue.]

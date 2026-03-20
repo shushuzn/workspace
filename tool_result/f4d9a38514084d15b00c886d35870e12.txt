@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-20T11:28:07.211845
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\copaw_entry.py  (lines 100-150 of 270)
+            "task": self.task_name,
+            "description": f"Task started via copaw_entry.py",
+            "started_at": self.start_time.isoformat() + "+08:00",
+            "current_step": 0,
+            "total_steps": total_steps,
+            "status": "initializing",
+            "step_status": {},
+            "completed_steps": [],
+            "completion_percentage": 0,
+            "workflow_compliance": False,
+            "session_id": self.session_id,
+            "entry_point": "copaw_entry.py",
+            "mandatory_execution": True
+        }
+        
+        # 保存初始状态
+        with open(self.state_file, "w", encoding="utf-8") as f:
+            json.dump(state, f, ensure_ascii=False, indent=2)
+        
+        print(f"\n[OK] execution-state.json 已初始化")
+        print(f"  路径：{self.state_file}")
+        print(f"  总步骤：{total_steps}")
+        
+        return state
+    
+    def verify_context(self) -> bool:
+        """Step 1: 验证上下文加载"""
+        print(f"\n{'='*60}")
+        print("Step 1: 上下文加载验证")
+        print(f"{'='*60}")
+        
+        core_files = [
+            "SOUL.md", "USER.md", "AGENTS.md", "TOOLS.md", "HEARTBEAT.md",
+            "13-memory/MEMORY.md"
+        ]
+        
+        today = datetime.now().strftime("%Y-%m-%d")
+        core_files.append(f"13-memory/{today}.md")
+        
+        loaded = []
+        missing = []
+        total_size = 0
+        
+        for f in core_files:
+            p = Path(f)
+            if p.exists():
+                size = p.stat().st_size
+                loaded.append({"file": f, "size": size})
+                total_size += size
+            else:
+                missing.append(f)
+
+[120 more lines. Use start_line=151 to continue.]

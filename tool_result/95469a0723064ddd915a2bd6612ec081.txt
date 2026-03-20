@@ -1,0 +1,51 @@
+# tool_name: read_file
+# created_at: 2026-03-20T11:11:54.582389
+# ---
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "task": "\"测试工作流强制防护\"",
+  "description": "Task started via copaw_entry.py",
+  "started_at": "2026-03-20T10:56:30.069320+08:00",
+  "current_step": 6.1,
+  "total_steps": 20,
+  "status": "completed",
+  "step_status": {
+    "1": {
+      "name": "上下文加载验证",
+      "status": "completed",
+      "started_at": "2026-03-20T10:56:30.073367+08:00",
+      "completed_at": "2026-03-20T10:56:30.073372+08:00",
+      "result": "验证通过"
+    },
+    "13.2": {
+      "name": "会话结束",
+      "status": "completed",
+      "started_at": "2026-03-20T10:57:19.755812",
+      "completed_at": "2026-03-20T10:57:19.755836",
+      "result": "工作流强制防护系统集成完成"
+    },
+    "6.1": {
+      "name": "工具调用：safe_shell_executor",
+      "status": "completed",
+      "started_at": "2026-03-20T11:10:36.992884",
+      "completed_at": "2026-03-20T11:10:36.992888",
+      "result": "success"
+    },
+    "6.1": {
+      "name": "工具调用：safe_shell_executor",
+      "status": "completed",
+      "started_at": "2026-03-20T11:10:40.929375",
+      "completed_at": "2026-03-20T11:10:40.929379",
+      "result": "success"
+    }
+  },
+  "completed_steps": [
+    1,
+    6.1
+  ],
+  "completion_percentage": 10.0,
+  "workflow_compliance": true,
+  "session_id": "session-20260320105630",
+  "entry_point": "copaw_entry.py",
+  "mandatory_execution": true
+}

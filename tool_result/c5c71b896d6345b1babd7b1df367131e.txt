@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-20T11:27:48.183434
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\copaw_entry.py  (lines 1-50 of 263)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+CoPaw Entry Point - 强制工作流入口点 (集成自动防护)
+
+所有任务必须通过此入口点启动，确保主工作流被执行。
+功能：
+1. 初始化 execution-state.json
+2. 绑定 Flow ID
+3. 验证上下文加载
+4. 记录会话开始
+5. 强制使用 tool_executor
+6. 【新增】自动激活防护层
+"""
+
+import json
+import sys
+import os
+from datetime import datetime
+from pathlib import Path
+
+# 导入自动防护层
+try:
+    from auto_protection_layer import create_protection_layer
+    AUTO_PROTECTION_ENABLED = True
+except ImportError:
+    AUTO_PROTECTION_ENABLED = False
+
+# 导入任务分类器
+try:
+    from task_classifier import classify_task, get_workflow_for_task
+    TASK_CLASSIFIER_ENABLED = True
+except ImportError:
+    TASK_CLASSIFIER_ENABLED = False
+
+class CopawEntry:
+    def __init__(self, task_name: str = None):
+        self.task_name = task_name or "Unnamed Task"
+        
+        # 【新增】任务分类器 - 根据任务类型自动选择 workflow
+        self.task_type = "full"  # 默认使用完整版
+        if TASK_CLASSIFIER_ENABLED:
+            self.task_type = classify_task(self.task_name)
+            if self.task_type == "simplified":
+                self.flow_id = "20260318-universal-workflow-001-simplified"
+            else:
+                self.flow_id = "20260318-universal-workflow-001"
+        else:
+            self.flow_id = "20260318-universal-workflow-001"
+        
+
+[213 more lines. Use start_line=51 to continue.]
