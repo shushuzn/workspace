@@ -1,0 +1,83 @@
+name: OpenClaw CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+  schedule:
+    - cron: '0 6 * * *'  # Daily at 6 AM
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Run Pre-Commit Pipeline
+        run: |
+          python 30-scripts-tools/ci_cd_integration_001.py --pipeline pre-commit
+      
+      - name: Run Dev Workflow
+        run: |
+          python 30-scripts-tools/workflow_master_001.py --run dev
+      
+      - name: Check Health
+        run: |
+          python 30-scripts-tools/workflow_health_001.py
+
+  test:
+    runs-on: ubuntu-latest
+    needs: validate
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Run Tests
+        run: |
+          python 30-scripts-tools/workflow_test_001.py
+      
+      - name: Stock Analysis Test
+        run: |
+          python 30-scripts-tools/workflow_stock_001.py --run quick AAPL
+
+  release:
+    runs-on: ubuntu-latest
+    needs: test
+    if: github.ref == 'refs/heads/master'
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Run Full Workflow
+        run: |
+          python 30-scripts-tools/workflow_master_001.py --run full
+      
+      - name: Analytics
+        run: |
+          python 30-scripts-tools/workflow_analytics_001.py
+      
+      - name: Version Bump
+        run: |
+          python 30-scripts-tools/workflow_version_001.py --bump patch
+      
+      - name: Commit Version Bump
+        run: |
+          git config --local user.email "github-actions@openclaw.ai"
+          git config --local user.name "GitHub Actions"
+          git add -A
+          git diff --staged --quiet || git commit -m "ci: version bump [skip ci]"
+          git push
