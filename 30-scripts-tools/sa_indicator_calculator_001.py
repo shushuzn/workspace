@@ -562,11 +562,11 @@ class TechnicalIndicatorCalculator:
         }
         
         # Get latest values
-        ma = indicators["indicators"]["MA"]
-        macd = indicators["indicators"]["MACD"]
-        rsi = indicators["indicators"]["RSI"]
-        kdj = indicators["indicators"]["KDJ"]
-        boll = indicators["indicators"]["BOLL"]
+        ma = indicators["indicators"].get("MA", {})
+        macd = indicators["indicators"].get("MACD", {})
+        rsi = indicators["indicators"].get("RSI", {})
+        kdj = indicators["indicators"].get("KDJ", {})
+        boll = indicators["indicators"].get("Bollinger", indicators["indicators"].get("BOLL", {}))
         
         # MA signal
         if ma["MA5"][-1] and ma["MA20"][-1]:
@@ -722,7 +722,7 @@ def main():
         print(f"    D: {kdj['D'][-1]}")
         print(f"    J: {kdj['J'][-1]}")
         
-        boll = result["indicators"]["BOLL"]
+        boll = result["indicators"].get("Bollinger", result["indicators"].get("BOLL", {}))
         print(f"\n  BOLL (Latest):")
         print(f"    Upper:  {boll['upper'][-1]}")
         print(f"    Middle: {boll['middle'][-1]}")

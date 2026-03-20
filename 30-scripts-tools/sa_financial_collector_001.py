@@ -254,15 +254,15 @@ class FinancialDataCollector:
         """Get latest financial ratios for a symbol"""
         data = self.collect_financials(symbol, report_type, periods=1)
         
-        if not data or not data["reports"]:
+        if not data or not data.get("reports"):
             return None
         
         latest_report = data["reports"][0]
         
         return {
             "symbol": symbol,
-            "period": latest_report["period_end"],
-            "ratios": latest_report["ratios"]
+            "period": latest_report.get("period_end", latest_report.get("period", "N/A")),
+            "ratios": latest_report.get("ratios", {})
         }
     
     def compare_periods(self, symbol: str, report_type: str = "quarterly",
@@ -371,27 +371,32 @@ def main():
     print("\n[Test 1] Collect Quarterly Financials (AAPL, 4 periods)")
     print("-" * 70)
     data = collector.collect_financials("AAPL", report_type="quarterly", periods=4)
-    if data:
-        print(f"  Symbol:         {data['symbol']}")
-        print(f"  Report Type:    {data['report_type']}")
-        print(f"  Periods:        {data['periods_collected']}")
-        print(f"\n  Latest Period:  {data['reports'][0]['period_end']}")
-        print(f"\n  Income Statement:")
-        inc = data['reports'][0]['income_statement']
-        print(f"    Revenue:          ${inc['revenue']/1e9:.2f}B")
-        print(f"    Gross Profit:     ${inc['gross_profit']/1e9:.2f}B")
-        print(f"    Net Income:       ${inc['net_income']/1e9:.2f}B")
-        print(f"    EPS:              ${inc['eps']:.2f}")
+    if data and data.get('reports'):
+        print(f"  Symbol:         {data.get('symbol', 'N/A')}")
+        print(f"  Report Type:    {data.get('report_type', 'N/A')}")
+        print(f"  Periods:        {data.get('periods_collected', 0)}")
+        if data['reports']:
+            print(f"\n  Latest Period:  {data['reports'][0].get('period_end', 'N/A')}")
+            print(f"\n  Income Statement:")
+            inc = data['reports'][0].get('income_statement', {})
+            revenue = inc.get('revenue', 0)
+            gross = inc.get('gross_profit', 0)
+            net = inc.get('net_income', 0)
+            eps = inc.get('eps', 0)
+            print(f"    Revenue:          ${revenue/1e9:.2f}B")
+            print(f"    Gross Profit:     ${gross/1e9:.2f}B")
+            print(f"    Net Income:       ${net/1e9:.2f}B")
+            print(f"    EPS:              ${eps:.2f}")
     
     # Test 3: Get financial ratios
     print("\n[Test 2] Get Financial Ratios")
     print("-" * 70)
     ratios = collector.get_financial_ratios("AAPL")
     if ratios:
-        print(f"  Symbol:   {ratios['symbol']}")
-        print(f"  Period:   {ratios['period']}")
+        print(f"  Symbol:   {ratios.get('symbol', 'N/A')}")
+        print(f"  Period:   {ratios.get('period', 'N/A')}")
         print(f"\n  Ratios:")
-        for key, value in ratios['ratios'].items():
+        for key, value in ratios.get('ratios', {}).items():
             if isinstance(value, float) and value < 1:
                 print(f"    {key:20} {value:.2%}")
             else:
@@ -402,9 +407,9 @@ def main():
     print("-" * 70)
     comparison = collector.compare_periods("AAPL", periods=2)
     if comparison:
-        print(f"  Symbol:         {comparison['symbol']}")
-        print(f"  Latest:         {comparison['latest_period']}")
-        print(f"  Previous:       {comparison['previous_period']}")
+        print(f"  Symbol:         {comparison.get('symbol', 'N/A')}")
+        print(f"  Latest:         {comparison.get('latest_period', 'N/A')}")
+        print(f"  Previous:       {comparison.get('previous_period', 'N/A')}")
         print(f"\n  Growth Rates:")
         for metric, growth in comparison['growth_rates'].items():
             if growth is not None:
@@ -417,9 +422,11 @@ def main():
     print("-" * 70)
     data = collector.collect_financials("AAPL", report_type="annual", periods=2)
     if data:
-        print(f"  Periods: {data['periods_collected']}")
-        for report in data['reports']:
-            print(f"  {report['period_end']}: Revenue ${report['income_statement']['revenue']/1e9:.2f}B")
+        print(f"  Periods: {data.get('periods_collected', 0)}")
+        for report in data.get('reports', []):
+            period = report.get('period_end', report.get('period', 'N/A'))
+            revenue = report.get('income_statement', {}).get('revenue', report.get('revenue', 0))
+            print(f"  {period}: Revenue ${revenue/1e9:.2f}B")
     
     # Test 6: Final stats
     print("\n[Test 5] Final Statistics")
