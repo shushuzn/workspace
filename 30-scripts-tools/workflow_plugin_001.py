@@ -1,0 +1,53 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+WORKFLOW-PLUGIN-001 Plugin Manager
+"""
+
+import json, sys
+from pathlib import Path
+
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+PLUGIN_DIR = Path("30-scripts-tools/plugins")
+
+class WorkflowPlugin:
+    def __init__(self):
+        PLUGIN_DIR.mkdir(exist_ok=True)
+    
+    def install(self, plugin_name):
+        plugin_path = PLUGIN_DIR / f"{plugin_name}.py"
+        if plugin_path.exists():
+            return {"status": "already_installed", "plugin": plugin_name}
+        
+        # Create stub plugin
+        plugin_path.write_text(f'''#!/usr/bin/env python
+# Plugin: {plugin_name}
+
+def run():
+    return {{"plugin": "{plugin_name}", "status": "ok"}}
+
+if __name__ == "__main__":
+    print(run())
+''', encoding="utf-8")
+        
+        return {"status": "installed", "plugin": plugin_name}
+    
+    def list(self):
+        plugins = [p.stem for p in PLUGIN_DIR.glob("*.py")]
+        return {"plugins": plugins, "count": len(plugins)}
+
+if __name__ == "__main__":
+    plugin = WorkflowPlugin()
+    
+    if len(sys.argv) > 1:
+        cmd = sys.argv[1]
+        if cmd == "--install":
+            name = sys.argv[2] if len(sys.argv) > 2 else "custom"
+            print(json.dumps(plugin.install(name), ensure_ascii=False, indent=2))
+        elif cmd == "--list":
+            print(json.dumps(plugin.list(), ensure_ascii=False, indent=2))
+    else:
+        print("Usage: workflow_plugin_001.py --install <name> | --list")
