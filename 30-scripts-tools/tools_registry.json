@@ -1,5 +1,5 @@
 {
-  "version": "1.11.86-smart-compress",
+  "version": "1.11.87-super-compress",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
     "v1.11.83: Add Phase 1 tools for research + utility dimensions",
@@ -6402,6 +6402,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T22:40:00.000000"
+    },
+    "smart-compress-002": {
+      "tool_id": "smart-compress-002",
+      "name": "SMART-COMPRESS-002 超级压缩器",
+      "description": "超级压缩器 v3.0 - 结构感知、语义摘要、多级压缩、会话模式",
+      "version": "3.0",
+      "file_path": "30-scripts-tools/smart_compress_002.py",
+      "category": "optimization",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T22:45:00.000000"
     }
   },
   "workflows": {
