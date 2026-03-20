@@ -2,11 +2,12 @@
 # -*- coding: utf-8 -*-
 """
 SMART-CACHE-001 Smart Cache Manager
-【智能缓存管理器】
+【智能缓存管理器 v2】
 
 功能:
   - 缓存LLM响应避免重复调用
   - 基于内容hash的精确匹配
+  - LRU (Least Recently Used) 驱逐策略
   - 缓存统计与分析
   - 自动过期清理
 """
@@ -21,12 +22,15 @@ CACHE_DIR = Path("60-DATA/smart_cache_001")
 CACHE_FILE = CACHE_DIR / "cache_store.json"
 CACHE_STATS = CACHE_DIR / "cache_stats.json"
 
+MAX_CACHE_SIZE = 1000  # 最大缓存条目数
+
 
 class SmartCache:
     """智能缓存"""
     
-    def __init__(self, ttl_hours: int = 24):
+    def __init__(self, ttl_hours: int = 24, max_size: int = MAX_CACHE_SIZE):
         self.ttl_hours = ttl_hours
+        self.max_size = max_size
         self.cache_dir = CACHE_DIR
         self.cache_dir.mkdir(parents=True, exist_ok=True)
         
@@ -48,6 +52,28 @@ class SmartCache:
         with open(self.cache_file, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
     
+    def _lru_evict(self, cache: dict) -> dict:
+        """LRU驱逐 - 删除最久未使用的条目"""
+        entries = cache.get("entries", {})
+        
+        if len(entries) >= self.max_size:
+            # 找出最久未使用的条目
+            lru_key = None
+            lru_time = None
+            
+            for key, entry in entries.items():
+                last_used = entry.get("last_used", entry["created_at"])
+                if lru_time is None or last_used < lru_time:
+                    lru_time = last_used
+                    lru_key = key
+            
+            if lru_key:
+                del entries[lru_key]
+                cache["entries"] = entries
+                cache["metadata"]["evictions"] = cache["metadata"].get("evictions", 0) + 1
+        
+        return cache
+    
     def _hash_key(self, key: str) -> str:
         return hashlib.sha256(key.encode()).hexdigest()[:16]
     
@@ -66,11 +92,17 @@ class SmartCache:
                 self._save_cache(cache)
                 return {"status": "expired", "data": None}
             
+            # 更新访问时间和命中计数
+            entry["last_used"] = datetime.now().isoformat()
+            entry["hit_count"] = entry.get("hit_count", 0) + 1
+            cache["entries"][key] = entry
+            self._save_cache(cache)
+            
             return {
                 "status": "hit",
                 "data": entry["response"],
                 "created_at": entry["created_at"],
-                "hit_count": entry.get("hit_count", 1)
+                "hit_count": entry["hit_count"]
             }
         
         return {"status": "miss", "data": None}
@@ -80,10 +112,14 @@ class SmartCache:
         cache = self._load_cache()
         key = self._hash_key(prompt)
         
+        # LRU驱逐检查
+        cache = self._lru_evict(cache)
+        
         cache["entries"][key] = {
             "prompt": prompt[:100] + "...",
             "response": response,
             "created_at": datetime.now().isoformat(),
+            "last_used": datetime.now().isoformat(),
             "hit_count": 0
         }
         

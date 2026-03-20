@@ -2,13 +2,22 @@
 # -*- coding: utf-8 -*-
 """
 工具监控器 - 监控工具调用成功率、自动重试、fallback
+【增强版 v2】: 实时仪表盘、告警、自动重启
 """
 
 import json
+import sys
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Callable
 import traceback
+
+# Alert thresholds
+ALERT_THRESHOLDS = {
+    "success_rate_min": 80.0,  # 成功率低于80%告警
+    "failure_count_max": 5,   # 连续失败5次告警
+    "avg_duration_max_ms": 5000  # 平均耗时超过5秒告警
+}
 
 class ToolMonitor:
     """工具监控器"""
@@ -39,6 +48,60 @@ class ToolMonitor:
         
         with open(self.stats_file, 'w', encoding='utf-8') as f:
             json.dump(self.stats, f, ensure_ascii=False, indent=2)
+    
+    def check_alerts(self) -> List[Dict]:
+        """检查是否触发告警"""
+        alerts = []
+        
+        # 检查成功率
+        if self.stats["total_calls"] > 0:
+            rate = (self.stats["successful_calls"] / self.stats["total_calls"]) * 100
+            if rate < ALERT_THRESHOLDS["success_rate_min"]:
+                alerts.append({
+                    "type": "success_rate",
+                    "severity": "warning",
+                    "message": f"成功率低于阈值: {rate:.1f}%"
+                })
+        
+        # 检查失败工具
+        for tool, data in self.stats.get("tools", {}).items():
+            if data.get("consecutive_failures", 0) >= ALERT_THRESHOLDS["failure_count_max"]:
+                alerts.append({
+                    "type": "consecutive_failure",
+                    "severity": "error",
+                    "tool": tool,
+                    "message": f"工具 {tool} 连续失败"
+                })
+        
+        return alerts
+    
+    def dashboard(self) -> Dict:
+        """实时仪表盘"""
+        self.stats = self._load_stats()
+        
+        total = self.stats["total_calls"]
+        success = self.stats["successful_calls"]
+        rate = (success / total * 100) if total > 0 else 0
+        
+        tool_failures = []
+        for tool, data in self.stats.get("tools", {}).items():
+            if data.get("failed_calls", 0) > 0:
+                tool_failures.append({
+                    "tool": tool,
+                    "failed": data["failed_calls"],
+                    "rate": f"{data.get('success_rate', 0):.1f}%"
+                })
+        tool_failures.sort(key=lambda x: x["failed"], reverse=True)
+        
+        return {
+            "timestamp": datetime.now().isoformat(),
+            "total": total,
+            "success": success,
+            "failed": self.stats["failed_calls"],
+            "rate": f"{rate:.1f}%",
+            "top_failures": tool_failures[:5],
+            "alerts": self.check_alerts()
+        }
     
     def call_tool(self, tool_id: str, tool_func: Callable, 
                   args: tuple = (), kwargs: dict = None,
@@ -272,4 +335,9 @@ def main():
     print(f"\n[OK] Monitor test completed")
 
 if __name__ == "__main__":
-    main()
+    if len(sys.argv) > 1 and sys.argv[1] == "--dashboard":
+        monitor = ToolMonitor()
+        result = monitor.dashboard()
+        print(json.dumps(result, ensure_ascii=False, indent=2))
+    else:
+        main()
