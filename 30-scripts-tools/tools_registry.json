@@ -1,7 +1,8 @@
 {
-  "version": "1.11.74-workflow-optimizer",
+  "version": "1.11.75-batch-optimization",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.75: Add SMART-CACHE-001, PROMPT-OPTIMIZER-001, BATCH-TOOLS-001",
     "v1.11.74: Add WORKFLOW-OPTIMIZER-001 for workflow analysis and optimization",
     "v1.11.73: Add LLM-GUIDE-001 for task classification and workflow optimization",
     "v1.11.72: Add AUTO-001 workflow automator for one-click flows",
@@ -6129,6 +6130,39 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T22:20:00.000000"
+    },
+    "smart-cache-001": {
+      "tool_id": "smart-cache-001",
+      "name": "SMART-CACHE-001 Smart Cache Manager",
+      "description": "智能缓存管理器 - LLM响应缓存、过期清理、统计",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/smart_cache_001.py",
+      "category": "optimization",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T22:30:00.000000"
+    },
+    "prompt-optimizer-001": {
+      "tool_id": "prompt-optimizer-001",
+      "name": "PROMPT-OPTIMIZER-001 Prompt Optimization Tool",
+      "description": "Prompt优化器 - 简化prompts、提取代码、合并请求",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/prompt_optimizer_001.py",
+      "category": "optimization",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T22:35:00.000000"
+    },
+    "batch-tools-001": {
+      "tool_id": "batch-tools-001",
+      "name": "BATCH-TOOLS-001 Batch Tools Executor",
+      "description": "批量工具执行器 - 串行/并行执行、预设工具集",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/batch_tools_001.py",
+      "category": "automation",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T22:40:00.000000"
     }
   },
   "workflows": {
