@@ -6446,6 +6446,28 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T23:00:00.000000"
+    },
+    "version-ctrl-001": {
+      "tool_id": "version-ctrl-001",
+      "name": "VERSION-CTRL-001 版本控制工具",
+      "description": "版本控制工具 - 快照状态、比较差异、回滚、查看历史",
+      "version": "1.0",
+      "file_path": "30-scripts-tools/version_ctrl_001.py",
+      "category": "utility",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:30:00.000000"
+    },
+    "undo-undo-001": {
+      "tool_id": "undo-undo-001",
+      "name": "UNDO-REDO-001 撤销/重做工具",
+      "description": "撤销/重做工具 - 记录操作历史、撤销操作、重做操作",
+      "version": "1.0",
+      "file_path": "30-scripts-tools/undo_redo_001.py",
+      "category": "utility",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:31:00.000000"
     }
   },
   "workflows": {
