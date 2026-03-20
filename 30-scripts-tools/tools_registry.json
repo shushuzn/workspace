@@ -1,5 +1,5 @@
 {
-  "version": "1.11.83-phase1-tools",
+  "version": "1.11.84-phase2-tools",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
     "v1.11.83: Add Phase 1 tools for research + utility dimensions",
@@ -6314,6 +6314,50 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T23:39:00.000000"
+    },
+    "test-001-unit": {
+      "tool_id": "test-001-unit",
+      "name": "TEST-001 Unit Test Generator",
+      "description": "单元测试生成器 - 生成单元测试模板、Mock数据生成、断言辅助",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/test_001_unit.py",
+      "category": "testing",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:45:00.000000"
+    },
+    "test-002-integration": {
+      "tool_id": "test-002-integration",
+      "name": "TEST-002 Integration Test Framework",
+      "description": "集成测试框架 - 集成测试模板、API测试、端到端测试",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/test_002_integration.py",
+      "category": "testing",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:46:00.000000"
+    },
+    "integrate-001-api": {
+      "tool_id": "integrate-001-api",
+      "name": "INTEGRATE-001 API Connector",
+      "description": "API连接器 - REST API调用、认证处理、响应解析",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/integrate_001_api.py",
+      "category": "integration",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:47:00.000000"
+    },
+    "integrate-002-data": {
+      "tool_id": "integrate-002-data",
+      "name": "INTEGRATE-002 Data Connector",
+      "description": "数据连接器 - CSV/JSON数据导入、数据转换、批量处理",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/integrate_002_data.py",
+      "category": "integration",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:48:00.000000"
     }
   },
   "workflows": {
