@@ -1,7 +1,8 @@
 {
-  "version": "1.11.57-cron-v1",
+  "version": "1.11.58-phase5-v1",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.58: Added SA-025 data source manager (Phase 5 start)",
     "v1.11.57: Added CRON-001 scheduler for automated tasks",
     "v1.11.56: Added SA-022 backtest, SA-023 trader, SA-024 API (Phase 4 complete)",
     "v1.11.55: Added mandatory security rules (2026-03-20)",
@@ -5873,6 +5874,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T20:35:00.000000"
+    },
+    "sa-025-datasource": {
+      "tool_id": "sa-025-datasource",
+      "name": "SA-025 Data Source Manager",
+      "description": "真实数据源整合 - 多源健康检查、自动切换、数据验证",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/sa_025_datasource.py",
+      "category": "stock_analysis",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T20:46:00.000000"
     }
   },
   "workflows": {
