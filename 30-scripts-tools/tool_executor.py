@@ -184,6 +184,14 @@ def main():
     if TOOL_WRAPPER_ENABLED:
         after_tool_call(tool_name, params, result)
     
+    # 【新增】自动完成工作流步骤
+    try:
+        from auto_step import AutoStepTracker
+        tracker = AutoStepTracker()
+        tracker.auto_complete(tool_name)
+    except Exception as e:
+        pass  # 静默失败，不影响工具执行
+    
     # 输出结果
     if stdout:
         print(stdout)

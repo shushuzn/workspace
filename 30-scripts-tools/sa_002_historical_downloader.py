@@ -113,25 +113,114 @@ class HistoricalDataDownloader:
     def _generate_historical_data(self, symbol: str, timeframe: str,
                                   start_date: str, end_date: str,
                                   adjustment: str) -> Dict:
-        """Generate simulated historical data"""
+        """Fetch real historical data using Yahoo Finance API"""
         
+        try:
+            import requests
+            
+            # Map timeframe to Yahoo interval
+            interval_map = {
+                "1d": "1d",
+                "1w": "1wk", 
+                "1mo": "1mo"
+            }
+            interval = interval_map.get(timeframe, "1d")
+            
+            # Yahoo Finance chart endpoint
+            url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+            params = {
+                'period1': int(datetime.strptime(start_date, "%Y-%m-%d").timestamp()),
+                'period2': int(datetime.strptime(end_date, "%Y-%m-%d").timestamp()),
+                'interval': interval,
+                'events': 'div,split'
+            }
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            }
+            
+            resp = requests.get(url, params=params, headers=headers, timeout=15)
+            
+            if resp.status_code != 200:
+                raise Exception(f"HTTP {resp.status_code}")
+            
+            data = resp.json()
+            
+            if "chart" not in data or "result" not in data["chart"] or data["chart"]["result"] is None:
+                raise Exception("No data returned")
+            
+            result = data["chart"]["result"][0]
+            timestamps = result.get("timestamp", [])
+            indicators = result.get("indicators", {}).get("quote", [{}])[0]
+            
+            if not timestamps:
+                raise Exception("No timestamps")
+            
+            candles = []
+            for i, ts in enumerate(timestamps):
+                date = datetime.fromtimestamp(ts).strftime("%Y-%m-%d")
+                
+                # Safely extract values
+                def safe_val(arr, idx, default=0):
+                    if arr and idx < len(arr):
+                        val = arr[idx]
+                        if val is not None:
+                            return val
+                    return default
+                
+                open_v = safe_val(indicators.get("open"), i)
+                high_v = safe_val(indicators.get("high"), i)
+                low_v = safe_val(indicators.get("low"), i)
+                close_v = safe_val(indicators.get("close"), i)
+                vol_v = safe_val(indicators.get("volume"), i)
+                
+                candle = {
+                    "date": date,
+                    "open": round(float(open_v), 2) if open_v else 0,
+                    "high": round(float(high_v), 2) if high_v else 0,
+                    "low": round(float(low_v), 2) if low_v else 0,
+                    "close": round(float(close_v), 2) if close_v else 0,
+                    "volume": int(vol_v) if vol_v else 0,
+                }
+                
+                if candle["close"] > 0 and candle["volume"] > 0:
+                    candle["amount"] = round(candle["close"] * candle["volume"], 2)
+                    candles.append(candle)
+            
+            if not candles:
+                raise Exception("No valid candles")
+            
+            return {
+                "symbol": symbol,
+                "timeframe": timeframe,
+                "adjustment": adjustment,
+                "start_date": start_date,
+                "end_date": end_date,
+                "candle_count": len(candles),
+                "candles": candles,
+                "source": "yahoo-api"
+            }
+            
+        except Exception as e:
+            print(f"   [WARN] Yahoo API error: {str(e)[:50]}, using fallback")
+            return self._generate_fallback_data(symbol, timeframe, start_date, end_date)
+    
+    def _generate_fallback_data(self, symbol: str, timeframe: str,
+                               start_date: str, end_date: str) -> Dict:
+        """Generate simulated data as fallback"""
+        # (Same as original _generate_historical_data for compatibility)
         start = datetime.strptime(start_date, "%Y-%m-%d")
         end = datetime.strptime(end_date, "%Y-%m-%d")
         
         candles = []
-        
-        # Base price (random based on symbol)
         base_price = 100 + (hash(symbol) % 200)
         current_price = base_price
         
         current = start
         while current <= end:
-            # Skip weekends for daily data
             if timeframe == "1d" and current.weekday() >= 5:
                 current += timedelta(days=1)
                 continue
             
-            # Generate OHLCV
             daily_change = random.uniform(-0.03, 0.03)
             open_price = current_price
             close_price = current_price * (1 + daily_change)
@@ -150,10 +239,8 @@ class HistoricalDataDownloader:
             }
             
             candles.append(candle)
-            
             current_price = close_price
             
-            # Move to next period
             if timeframe == "1d":
                 current += timedelta(days=1)
             elif timeframe == "1w":
@@ -161,18 +248,15 @@ class HistoricalDataDownloader:
             elif timeframe == "1mo":
                 current += timedelta(days=30)
         
-        # Apply adjustment if needed
-        if adjustment != "none":
-            candles = self._apply_adjustment(candles, adjustment)
-        
         return {
             "symbol": symbol,
             "timeframe": timeframe,
-            "adjustment": adjustment,
+            "adjustment": "none",
             "start_date": start_date,
             "end_date": end_date,
             "candle_count": len(candles),
             "candles": candles,
+            "source": "simulated",
             "downloaded_at": datetime.now().isoformat()
         }
     

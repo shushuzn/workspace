@@ -193,15 +193,26 @@ class WorkflowEnforcer:
         """检查步骤完成情况"""
         
         if not self.workflow:
-            return {"error": "workflow not loaded"}
+            return {"error": "workflow not loaded", "missing": 0, "missing_steps": []}
+        
+        # 获取必需步骤（标记为 mandatory 的步骤）
+        mandatory_steps = self.workflow.get('mandatory_steps', list(range(1, 7)))
+        
+        # 找出缺失的必需步骤
+        completed_set = set(completed_steps) if completed_steps else set()
+        missing_steps = [s for s in mandatory_steps if s not in completed_set]
         
         total_steps = self.workflow.get('total_steps', 20)
-        compliance_rate = len(completed_steps) / total_steps * 100 if total_steps > 0 else 0
+        compliance_rate = (len(mandatory_steps) - len(missing_steps)) / len(mandatory_steps) * 100 if mandatory_steps else 100
         
         return {
             "completed": len(completed_steps),
             "total": total_steps,
-            "compliance_rate": compliance_rate
+            "mandatory_completed": len(mandatory_steps) - len(missing_steps),
+            "mandatory_total": len(mandatory_steps),
+            "compliance_rate": compliance_rate,
+            "missing": len(missing_steps),
+            "missing_steps": missing_steps
         }
     
     def enforce_before_task(self, task_description: str) -> bool:

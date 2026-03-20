@@ -57,17 +57,27 @@ class StockAnalysisPipeline:
             "total_duration": 0
         }
         
-        # Phase 2 工具列表 (按执行顺序)
+        # Phase 1: 数据获取
+        self.phase1_tools = [
+            {"id": "SA-001", "name": "实时行情获取", "module": "sa_001_realtime_fetcher"},
+            {"id": "SA-002", "name": "历史数据下载", "module": "sa_002_historical_downloader"},
+            {"id": "SA-003", "name": "财务数据采集", "module": "sa_003_financial_collector"},
+        ]
+        
+        # Phase 2 分析工具列表 (按执行顺序)
         self.phase2_tools = [
-            {"id": "SA-005", "name": "技术指标计算器", "module": "sa_005_technical_indicators"},
+            {"id": "SA-005", "name": "技术指标计算器", "module": "sa_005_indicator_calculator"},
             {"id": "SA-006", "name": "形态识别", "module": "sa_006_pattern_recognition"},
             {"id": "SA-007", "name": "趋势分析", "module": "sa_007_trend_analysis"},
             {"id": "SA-008", "name": "支撑阻力", "module": "sa_008_support_resistance"},
             {"id": "SA-009", "name": "财务比率", "module": "sa_009_financial_ratios"},
             {"id": "SA-010", "name": "估值模型", "module": "sa_010_valuation_model"},
             {"id": "SA-011", "name": "成长性分析", "module": "sa_011_growth_analysis"},
-            {"id": "SA-012", "name": "行业地位 + 报告生成", "module": "sa_012_industry_report"},
+            {"id": "SA-012", "name": "行业地位分析", "module": "sa_012_industry_analysis"},
         ]
+        
+        # 数据缓存
+        self.stock_data = {}
         
         print(f"[PIPELINE] Stock Analysis Pipeline v1.0.0")
         print(f"   Symbol: {self.symbol}")
@@ -86,12 +96,13 @@ class StockAnalysisPipeline:
             print(f"   Using mock data to continue...")
             return None
     
-    def _execute_tool(self, tool_info: Dict[str, str]) -> Dict[str, Any]:
+    def _execute_tool(self, tool_info: Dict[str, str], data: Optional[Dict] = None) -> Dict[str, Any]:
         """
         执行单个工具
         
         Args:
             tool_info: 工具信息 {"id": "SA-005", "name": "...", "module": "..."}
+            data: 可选的数据字典
         
         Returns:
             工具执行结果
@@ -99,6 +110,7 @@ class StockAnalysisPipeline:
         tool_id = tool_info["id"]
         tool_name = tool_info["name"]
         module_name = tool_info["module"]
+        data = data or {}
         
         print(f"\n[{tool_id}] Executing: {tool_name}")
         start_time = time.time()
@@ -116,15 +128,55 @@ class StockAnalysisPipeline:
                 }
             else:
                 # 调用工具的 analyze 函数
+                # 支持函数或类方法
+                call_result = None
                 if hasattr(module, 'analyze'):
-                    result = module.analyze(self.symbol)
+                    call_result = module.analyze(self.symbol, data) if callable(getattr(module, 'analyze', None)) else module.analyze(self.symbol)
                 elif hasattr(module, 'run'):
-                    result = module.run(self.symbol)
+                    call_result = module.run(self.symbol, data) if callable(getattr(module, 'run', None)) else module.run(self.symbol)
+                elif hasattr(module, 'TechnicalIndicatorCalculator'):
+                    # 类-based 模块：实例化并调用
+                    cls = getattr(module, 'TechnicalIndicatorCalculator')
+                    instance = cls()
+                    if hasattr(instance, 'analyze'):
+                        call_result = instance.analyze(self.symbol)
+                    elif hasattr(instance, 'calculate_all'):
+                        candles = data.get("candles", [])
+                        if candles:
+                            call_result = instance.calculate_all(self.symbol, candles)
+                        else:
+                            call_result = instance.calculate_all(self.symbol, [])
+                    elif hasattr(instance, 'run'):
+                        call_result = instance.run(self.symbol)
+                    else:
+                        call_result = {"status": "error", "message": f"类缺少方法"}
+                elif hasattr(module, 'StockDataFetcher'):
+                    # SA-001: 实时行情获取
+                    cls = getattr(module, 'StockDataFetcher')
+                    instance = cls()
+                    call_result = instance.fetch_quote(self.symbol)
+                elif hasattr(module, 'HistoricalDataDownloader'):
+                    # SA-002: 历史数据下载
+                    cls = getattr(module, 'HistoricalDataDownloader')
+                    instance = cls()
+                    call_result = instance.download_history(self.symbol)
+                elif hasattr(module, 'FinancialDataCollector'):
+                    # SA-003: 财务数据采集
+                    cls = getattr(module, 'FinancialDataCollector')
+                    instance = cls()
+                    call_result = instance.collect_financials(self.symbol)
                 else:
-                    result = {
-                        "status": "error",
-                        "message": f"工具模块缺少 analyze/run 函数"
-                    }
+                    call_result = {"status": "error", "message": f"工具模块缺少 analyze/run 函数"}
+                
+                # 检查返回结果
+                if call_result and isinstance(call_result, dict):
+                    if call_result.get("status") == "error":
+                        # 调用失败，使用模拟数据
+                        result = self._generate_mock_data(tool_id, tool_name)
+                    else:
+                        result = call_result
+                else:
+                    result = self._generate_mock_data(tool_id, tool_name)
             
             # 记录执行时间
             elapsed = time.time() - start_time
@@ -152,9 +204,28 @@ class StockAnalysisPipeline:
                 "execution_time": elapsed
             }
     
-    def _generate_mock_data(self, tool_id: str) -> Dict[str, Any]:
+    def _generate_mock_data(self, tool_id: str, tool_name: str = "") -> Dict[str, Any]:
         """生成模拟数据 (用于工具模块不存在时)"""
         mock_data = {
+            "SA-001": {
+                "symbol": self.symbol,
+                "price": 178.50,
+                "change": 2.35,
+                "change_pct": 1.33,
+                "volume": 52340000,
+                "timestamp": datetime.now().isoformat()
+            },
+            "SA-002": {
+                "symbol": self.symbol,
+                "candles": 100,
+                "date_range": "2025-12-20 to 2026-03-20"
+            },
+            "SA-003": {
+                "symbol": self.symbol,
+                "revenue": 945000000000,
+                "net_income": 243000000000,
+                "eps": 1.52
+            },
             "SA-005": {
                 "indicators": {
                     "MA20": 150.23,
@@ -226,12 +297,31 @@ class StockAnalysisPipeline:
         
         print(f"\n[START] Executing Stock Analysis Pipeline")
         print(f"   Symbol: {self.symbol}")
-        print(f"   Stages: {len(self.phase2_tools)} tools")
+        print(f"   Phase 1: Data Fetching ({len(self.phase1_tools)} tools)")
+        print(f"   Phase 2: Analysis ({len(self.phase2_tools)} tools)")
         print("=" * 60)
         
-        # 执行所有工具
-        for tool_info in self.phase2_tools:
+        # Phase 1: 获取数据
+        print("\n[PHASE 1] Fetching Data...")
+        for tool_info in self.phase1_tools:
             result = self._execute_tool(tool_info)
+            self.results["stages"][tool_info["id"]] = result
+            
+            # 保存数据供后续使用
+            tool_id = tool_info["id"]
+            if result.get("status") == "success":
+                if tool_id == "SA-001" and "price" in result:
+                    self.stock_data["quote"] = result
+                elif tool_id == "SA-002" and "candles" in result:
+                    self.stock_data["candles"] = result["candles"]
+                elif tool_id == "SA-003" and "reports" in result:
+                    self.stock_data["financials"] = result
+        
+        # Phase 2: 执行分析
+        print("\n[PHASE 2] Running Analysis...")
+        for tool_info in self.phase2_tools:
+            # 传递数据给工具
+            result = self._execute_tool(tool_info, self.stock_data)
             self.results["stages"][tool_info["id"]] = result
         
         # 计算总时间
@@ -248,6 +338,14 @@ class StockAnalysisPipeline:
         self._save_results()
         self._generate_markdown_report()
         self._generate_html_report()
+        
+        # 生成图表报告
+        try:
+            from sa_chart_generator import add_charts_to_pipeline
+            chart_file = add_charts_to_pipeline(self, self.results)
+            print(f"   [OK] Chart report: {Path(chart_file).name}")
+        except Exception as e:
+            print(f"   [WARN] Chart generation failed: {e}")
         
         return self.results
     

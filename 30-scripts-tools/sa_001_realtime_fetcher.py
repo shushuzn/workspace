@@ -100,29 +100,75 @@ class StockDataFetcher:
             return None
     
     def _fetch_yahoo(self, symbol: str) -> Optional[Dict]:
-        """Fetch from Yahoo Finance (simulated for demo)"""
-        # In production, use yfinance library
-        # import yfinance as yf
-        # ticker = yf.Ticker(symbol)
-        # quote = ticker.fast_info
-        
-        # Simulated data for demo
-        return {
-            "symbol": symbol,
-            "source": "yahoo",
-            "price": 150.25 + (hash(symbol) % 100) / 10,
-            "change": 2.35,
-            "change_percent": 1.58,
-            "volume": 12500000,
-            "market_cap": 2500000000000,
-            "pe_ratio": 28.5,
-            "high": 152.10,
-            "low": 148.90,
-            "open": 149.50,
-            "previous_close": 147.90,
-            "timestamp": datetime.now().isoformat(),
-            "currency": "USD"
-        }
+        """Fetch from Yahoo Finance using direct API (fallback when yfinance fails)"""
+        try:
+            import requests
+            
+            # Use Yahoo Finance v8 quote endpoint
+            url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}"
+            headers = {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            }
+            
+            resp = requests.get(url, headers=headers, timeout=10)
+            
+            if resp.status_code == 429:
+                # Rate limited - use simulated
+                raise Exception("Rate limited")
+            
+            if resp.status_code != 200:
+                raise Exception(f"HTTP {resp.status_code}")
+            
+            data = resp.json()
+            
+            if "chart" not in data or "result" not in data["chart"] or data["chart"]["result"] is None:
+                raise Exception("No data returned")
+            
+            result = data["chart"]["result"][0]
+            meta = result.get("meta", {})
+            
+            # Extract quote data
+            price = meta.get("regularMarketPrice", 0)
+            prev_close = meta.get("previousClose", meta.get("chartPreviousClose", price))
+            change = price - prev_close
+            change_pct = (change / prev_close) * 100 if prev_close > 0 else 0
+            
+            return {
+                "symbol": symbol,
+                "source": "yahoo-api",
+                "price": round(price, 2),
+                "change": round(change, 2),
+                "change_percent": round(change_pct, 2),
+                "volume": meta.get("regularMarketVolume", 0),
+                "market_cap": meta.get("marketCap", 0),
+                "pe_ratio": meta.get("peRatio", None),
+                "high": round(meta.get("regularMarketDayHigh", price), 2),
+                "low": round(meta.get("regularMarketDayLow", price), 2),
+                "open": round(meta.get("regularMarketOpen", price), 2),
+                "previous_close": round(prev_close, 2),
+                "timestamp": datetime.now().isoformat(),
+                "currency": meta.get("currency", "USD")
+            }
+            
+        except Exception as e:
+            print(f"   [WARN] Yahoo API error: {str(e)[:50]}")
+            # Fallback to simulated data
+            return {
+                "symbol": symbol,
+                "source": "simulated",
+                "price": 150.25 + (hash(symbol) % 100) / 10,
+                "change": 2.35,
+                "change_percent": 1.58,
+                "volume": 12500000,
+                "market_cap": 2500000000000,
+                "pe_ratio": 28.5,
+                "high": 152.10,
+                "low": 148.90,
+                "open": 149.50,
+                "previous_close": 147.90,
+                "timestamp": datetime.now().isoformat(),
+                "currency": "USD"
+            }
     
     def _fetch_eastmoney(self, symbol: str) -> Optional[Dict]:
         """Fetch from East Money (simulated for demo)"""

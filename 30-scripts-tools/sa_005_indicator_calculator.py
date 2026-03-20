@@ -312,6 +312,161 @@ class TechnicalIndicatorCalculator:
         
         return atr_values
     
+    def calculate_adx(self, highs: List[float], lows: List[float], 
+                      closes: List[float], period: int = 14) -> Dict[str, List[float]]:
+        """
+        Calculate ADX (Average Directional Index)
+        
+        Returns:
+            Dict with ADX, +DI, -DI values
+        """
+        if len(closes) < period + 1:
+            return {"adx": [], "plus_di": [], "minus_di": []}
+        
+        plus_dm = []
+        minus_dm = []
+        true_ranges = []
+        
+        for i in range(1, len(closes)):
+            high_diff = highs[i] - highs[i-1]
+            low_diff = lows[i-1] - lows[i]
+            
+            plus_dm.append(high_diff if high_diff > low_diff and high_diff > 0 else 0)
+            minus_dm.append(low_diff if low_diff > high_diff and low_diff > 0 else 0)
+            
+            tr = max(
+                highs[i] - lows[i],
+                abs(highs[i] - closes[i-1]),
+                abs(lows[i] - closes[i-1])
+            )
+            true_ranges.append(tr)
+        
+        # Smoothed averages
+        smoothed_tr = sum(true_ranges[:period])
+        smoothed_plus = sum(plus_dm[:period])
+        smoothed_minus = sum(minus_dm[:period])
+        
+        plus_di_values = []
+        minus_di_values = []
+        adx_values = []
+        
+        for i in range(period, len(closes)):
+            if i > period:
+                smoothed_tr = smoothed_tr - (smoothed_tr / period) + true_ranges[i-1]
+                smoothed_plus = smoothed_plus - (smoothed_plus / period) + plus_dm[i-1]
+                smoothed_minus = smoothed_minus - (smoothed_minus / period) + minus_dm[i-1]
+            
+            plus_di = (smoothed_plus / smoothed_tr * 100) if smoothed_tr > 0 else 0
+            minus_di = (smoothed_minus / smoothed_tr * 100) if smoothed_tr > 0 else 0
+            
+            plus_di_values.append(round(plus_di, 2))
+            minus_di_values.append(round(minus_di, 2))
+            
+            # ADX
+            di_sum = plus_di + minus_di
+            dx = ((plus_di - minus_di) / di_sum * 100) if di_sum > 0 else 0
+            
+            if len(adx_values) == 0:
+                adx_values.append(dx)
+            else:
+                adx_values.append(round((adx_values[-1] * (period - 1) + dx) / period, 2))
+        
+        return {
+            "adx": adx_values,
+            "plus_di": plus_di_values,
+            "minus_di": minus_di_values
+        }
+    
+    def calculate_cci(self, highs: List[float], lows: List[float],
+                     closes: List[float], period: int = 20) -> List[float]:
+        """
+        Calculate CCI (Commodity Channel Index)
+        """
+        cci_values = []
+        typical_prices = [(h + l + c) / 3 for h, l, c in zip(highs, lows, closes)]
+        
+        for i in range(period - 1, len(typical_prices)):
+            tp_period = typical_prices[i - period + 1:i + 1]
+            sma = sum(tp_period) / period
+            mad = sum(abs(tp - sma) for tp in tp_period) / period
+            
+            cci = (typical_prices[i] - sma) / (0.015 * mad) if mad > 0 else 0
+            cci_values.append(round(cci, 2))
+        
+        return cci_values
+    
+    def calculate_wr(self, highs: List[float], lows: List[float],
+                   closes: List[float], period: int = 14) -> List[float]:
+        """
+        Calculate Williams %R
+        """
+        wr_values = []
+        
+        for i in range(period - 1, len(closes)):
+            highest = max(highs[i - period + 1:i + 1])
+            lowest = min(lows[i - period + 1:i + 1])
+            
+            if highest != lowest:
+                wr = ((highest - closes[i]) / (highest - lowest)) * -100
+            else:
+                wr = -50
+            
+            wr_values.append(round(wr, 2))
+        
+        return wr_values
+    
+    def calculate_obv(self, closes: List[float], volumes: List[int]) -> List[float]:
+        """
+        Calculate OBV (On Balance Volume)
+        """
+        obv_values = [float(volumes[0])]
+        
+        for i in range(1, len(closes)):
+            if closes[i] > closes[i-1]:
+                obv_values.append(obv_values[-1] + volumes[i])
+            elif closes[i] < closes[i-1]:
+                obv_values.append(obv_values[-1] - volumes[i])
+            else:
+                obv_values.append(obv_values[-1])
+        
+        return [round(v, 2) for v in obv_values]
+    
+    def generate_signals(self, indicators: Dict) -> List[Dict]:
+        """
+        Generate buy/sell signals based on indicators
+        """
+        signals = []
+        
+        # RSI signals
+        if "RSI" in indicators:
+            rsi = indicators["RSI"]
+            if rsi and len(rsi) > 0:
+                latest_rsi = rsi[-1]
+                if latest_rsi < 30:
+                    signals.append({"type": "BUY", "indicator": "RSI", "value": latest_rsi, "reason": "Oversold (<30)"})
+                elif latest_rsi > 70:
+                    signals.append({"type": "SELL", "indicator": "RSI", "value": latest_rsi, "reason": "Overbought (>70)"})
+        
+        # MACD signals
+        if "MACD" in indicators:
+            macd = indicators["MACD"]
+            if macd and isinstance(macd, dict):
+                hist = macd.get("histogram", [])
+                if hist and len(hist) >= 2:
+                    if hist[-1] > 0 and hist[-2] <= 0:
+                        signals.append({"type": "BUY", "indicator": "MACD", "value": hist[-1], "reason": "Golden cross"})
+                    elif hist[-1] < 0 and hist[-2] >= 0:
+                        signals.append({"type": "SELL", "indicator": "MACD", "value": hist[-1], "reason": "Death cross"})
+        
+        # Bollinger signals
+        if "Bollinger" in indicators:
+            boll = indicators["Bollinger"]
+            if boll and isinstance(boll, dict):
+                # Simple BB signals
+                signals.append({"type": "NEUTRAL", "indicator": "BB", "value": 0, "reason": "Check price position"})
+        
+        return signals
+    
     def calculate_all(self, symbol: str, candles: List[Dict]) -> Dict:
         """
         Calculate all technical indicators for a stock
@@ -341,8 +496,9 @@ class TechnicalIndicatorCalculator:
             "indicators": {}
         }
         
-        # MA
+        # Basic indicators
         result["indicators"]["MA"] = self.calculate_ma(closes)
+        result["indicators"]["EMA"] = self.calculate_ema(closes, 12)
         
         # MACD
         result["indicators"]["MACD"] = self.calculate_macd(closes)
@@ -353,11 +509,31 @@ class TechnicalIndicatorCalculator:
         # KDJ
         result["indicators"]["KDJ"] = self.calculate_kdj(highs, lows, closes)
         
-        # BOLL
-        result["indicators"]["BOLL"] = self.calculate_boll(closes)
+        # Bollinger
+        result["indicators"]["Bollinger"] = self.calculate_boll(closes)
         
         # ATR
         result["indicators"]["ATR"] = self.calculate_atr(highs, lows, closes)
+        
+        # NEW: ADX (Average Directional Index)
+        adx_result = self.calculate_adx(highs, lows, closes)
+        result["indicators"]["ADX"] = {
+            "adx": adx_result["adx"],
+            "plus_di": adx_result["plus_di"],
+            "minus_di": adx_result["minus_di"]
+        }
+        
+        # NEW: CCI (Commodity Channel Index)
+        result["indicators"]["CCI"] = self.calculate_cci(highs, lows, closes)
+        
+        # NEW: Williams %R
+        result["indicators"]["WR"] = self.calculate_wr(highs, lows, closes)
+        
+        # NEW: OBV (On Balance Volume)
+        result["indicators"]["OBV"] = self.calculate_obv(closes, volumes)
+        
+        # Generate trading signals
+        result["signals"] = self.generate_signals(result["indicators"])
         
         # Save to cache
         cache_file = self.data_dir / f"{symbol}_indicators.json"
