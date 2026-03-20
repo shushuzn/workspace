@@ -1,7 +1,8 @@
 {
-  "version": "1.11.56-phase4-v2",
+  "version": "1.11.57-cron-v1",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.57: Added CRON-001 scheduler for automated tasks",
     "v1.11.56: Added SA-022 backtest, SA-023 trader, SA-024 API (Phase 4 complete)",
     "v1.11.55: Added mandatory security rules (2026-03-20)",
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
@@ -5861,6 +5862,17 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T20:25:02.000000"
+    },
+    "cron-001-scheduler": {
+      "tool_id": "cron-001-scheduler",
+      "name": "CRON-001 Scheduler",
+      "description": "定时任务调度器 - 每日/每周自动任务配置",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/cron_001_scheduler.py",
+      "category": "automation",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T20:35:00.000000"
     }
   },
   "workflows": {
