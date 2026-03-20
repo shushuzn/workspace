@@ -175,17 +175,21 @@ class SafeShellExecutor:
             # 步骤 5: 工作流内容验证（新增 - v2.0）
             validated = False
             if WORKFLOW_ENFORCER_V2_AVAILABLE:
+                print(f"[DEBUG] workflow_enforcer_v2 available")
                 enforcer_v2 = WorkflowEnforcerV2(
                     flow_id="20260318-universal-workflow-001",
                     session_id=self._get_session_id()
                 )
                 
                 # 验证输出内容
+                output_text = result.stdout + result.stderr
+                print(f"[DEBUG] Validating output: {len(output_text)} chars")
                 validated = enforcer_v2.validate_step_output(
                     step_id=self._get_current_step(),
-                    output=result.stdout + result.stderr,
+                    output=output_text,
                     expected_keywords=None  # 自动检测
                 )
+                print(f"[DEBUG] Validation result: {validated}")
                 
                 # 更新步骤状态（带验证结果）
                 enforcer_v2.update_step_status(
