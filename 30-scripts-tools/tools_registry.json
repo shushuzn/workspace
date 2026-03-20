@@ -1,5 +1,5 @@
 {
-  "version": "1.11.84-phase2-tools",
+  "version": "1.11.85-phase3-tools",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
     "v1.11.83: Add Phase 1 tools for research + utility dimensions",
@@ -6358,6 +6358,39 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T23:48:00.000000"
+    },
+    "report-001-generator": {
+      "tool_id": "report-001-generator",
+      "name": "REPORT-001 Report Generator",
+      "description": "报告生成器 - 自动生成报告、多格式输出、模板填充",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/report_001_generator.py",
+      "category": "reporting",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:55:00.000000"
+    },
+    "report-002-export": {
+      "tool_id": "report-002-export",
+      "name": "REPORT-002 Export Tool",
+      "description": "导出工具 - 数据导出为多种格式、批量导出、自定义字段",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/report_002_export.py",
+      "category": "reporting",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:56:00.000000"
+    },
+    "report-003-template": {
+      "tool_id": "report-003-template",
+      "name": "REPORT-003 Template Generator",
+      "description": "模板生成器 - 报告模板创建、变量替换、样式定制",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/report_003_template.py",
+      "category": "reporting",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T23:57:00.000000"
     }
   },
   "workflows": {
