@@ -1,0 +1,86 @@
+{
+  "flow_id": "20260318-universal-workflow-001-simplified",
+  "name": "通用主工作流 - 简化版",
+  "description": "简化版主工作流 - 用于简单问答任务（5 步）",
+  "version": "1.0.0",
+  "created_at": "2026-03-20T10:30:00+08:00",
+  "workflow_type": "main-simplified",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 2,
+  "total_steps": 5,
+  "enforcement": {
+    "enabled": true,
+    "tool_id": "workflow-enforcer",
+    "rules": [
+      "必须按顺序执行步骤",
+      "禁止跳过关键步骤 (1, 5)",
+      "必须记录工具调用日志"
+    ],
+    "verification_tool": "tool_call_tracker.py",
+    "git_hook_integration": true,
+    "simplified_mode": true,
+    "min_tool_calls": 2,
+    "min_duration_seconds": 30
+  },
+  "stages": {
+    "initialization": "Step 1: 上下文加载",
+    "task_analysis": "Step 2: 任务解析",
+    "execution": "Step 3: 执行任务",
+    "validation": "Step 4: 质量检查",
+    "completion": "Step 5: 会话结束"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "上下文加载验证",
+      "description": "加载 7 个核心文件，验证上下文完整性",
+      "tools": ["context_verify"],
+      "mandatory": true,
+      "estimated_time_seconds": 5
+    },
+    {
+      "step_id": 2,
+      "name": "任务解析",
+      "description": "分析用户需求，确定任务类型",
+      "tools": ["task_analyzer", "task_classifier"],
+      "mandatory": true,
+      "estimated_time_seconds": 3
+    },
+    {
+      "step_id": 3,
+      "name": "工具执行",
+      "description": "执行必要的工具调用完成任务",
+      "tools": ["tool_executor"],
+      "mandatory": true,
+      "estimated_time_seconds": 30
+    },
+    {
+      "step_id": 4,
+      "name": "质量检查",
+      "description": "验证结果正确性",
+      "tools": ["auto_critic_v7"],
+      "mandatory": true,
+      "estimated_time_seconds": 5
+    },
+    {
+      "step_id": 5,
+      "name": "会话压缩保存",
+      "description": "压缩会话记录，保存到 memory",
+      "tools": ["post_session_compress", "session_end"],
+      "mandatory": true,
+      "estimated_time_seconds": 10
+    }
+  ],
+  "output_requirements": {
+    "execution_state": "flow-archive/20260318-universal-workflow-001-simplified/execution-state.json",
+    "tool_call_log": "30-scripts-tools/tool_call_log.jsonl",
+    "session_summary": "13-memory/YYYY-MM-DD.md"
+  },
+  "validation_rules": {
+    "min_steps": 5,
+    "max_steps": 5,
+    "min_tool_calls": 2,
+    "min_duration_seconds": 30,
+    "required_tools": ["context_verify", "tool_executor"]
+  }
+}
