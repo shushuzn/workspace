@@ -3,6 +3,7 @@
 用途：根据任务复杂度分类，决定使用简化版还是完整版 workflow
 """
 
+# 简单任务关键词（Q&A/查询）
 SIMPLE_KEYWORDS = [
     '什么是', '解释', '原则', '概念', '定义',
     'what is', 'explain', 'principle', 'concept', 'definition',
@@ -12,38 +13,49 @@ SIMPLE_KEYWORDS = [
     '简单', '快速', 'brief', 'quick'
 ]
 
+# 标准任务关键词（工具开发/功能实现）
+STANDARD_KEYWORDS = [
+    '创建', '实现', '开发', '工具', '功能',
+    'create', 'implement', 'develop', 'tool', 'feature',
+    'sa-', 'phase', '分析', '优化',
+    'analyze', 'optimize'
+]
+
+# 复杂任务关键词（大型项目）
 COMPLEX_KEYWORDS = [
-    '创建', '实现', '开发', '构建', '部署',
-    'create', 'implement', 'develop', 'build', 'deploy',
-    '分析', '研究', '调查', '优化', '重构',
-    'analyze', 'research', 'investigate', 'optimize', 'refactor',
-    '修复', '调试', '测试', '集成', '迁移',
-    'fix', 'debug', 'test', 'integrate', 'migrate'
+    '部署', '研究', '项目', '系统', '架构',
+    'deploy', 'research', 'project', 'system', 'architecture',
+    '重构', '迁移', '集成',
+    'refactor', 'migrate', 'integrate'
 ]
 
 
 def classify_task(task: str) -> str:
     """
-    分类任务为 'simplified' 或 'full'
+    分类任务为 'simplified', 'standard', 或 'full'
     
     Args:
         task: 任务描述字符串
         
     Returns:
-        'simplified' 或 'full'
+        'simplified', 'standard', 或 'full'
     """
     task_lower = task.lower()
     
-    # 计算简单和复杂关键词的匹配数
+    # 计算各类型关键词匹配数
     simple_score = sum(1 for kw in SIMPLE_KEYWORDS if kw.lower() in task_lower)
+    standard_score = sum(1 for kw in STANDARD_KEYWORDS if kw.lower() in task_lower)
     complex_score = sum(1 for kw in COMPLEX_KEYWORDS if kw.lower() in task_lower)
     
-    # 如果复杂关键词更多，使用完整 workflow
-    if complex_score > simple_score:
-        return 'full'
+    # 选择最高分的类型
+    scores = {
+        'simplified': simple_score,
+        'standard': standard_score,
+        'full': complex_score
+    }
     
-    # 如果简单关键词更多或相等，使用简化 workflow
-    return 'simplified'
+    # 返回最高分的类型
+    return max(scores, key=scores.get)
 
 
 def get_workflow_for_task(task: str) -> str:

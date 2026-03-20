@@ -39,6 +39,8 @@ try:
     TASK_CLASSIFIER_ENABLED = True
 except ImportError:
     TASK_CLASSIFIER_ENABLED = False
+    def classify_task(t): return "standard"
+    def get_workflow_for_task(t): return "20260318-standard-workflow-001"
 
 # 导入工作流强制执行器
 try:

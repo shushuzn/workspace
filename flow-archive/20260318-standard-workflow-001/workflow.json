@@ -1,0 +1,136 @@
+{
+  "flow_id": "20260318-standard-workflow-001",
+  "name": "标准工作流",
+  "description": "标准流程 - 工具开发/功能实现",
+  "version": "1.0.0",
+  "created_at": "2026-03-20T14:00:00+08:00",
+  "workflow_type": "standard",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 60,
+  "total_steps": 12,
+  "stages": {
+    "initialization": "Step 1-2: 上下文 + Flow ID",
+    "analysis": "Step 3-4: 任务解析 + 工具选择",
+    "execution": "Step 5-8: 执行任务",
+    "validation": "Step 9-10: 批判者 + 质量门禁",
+    "completion": "Step 11-12: 压缩 + 提交"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "上下文加载验证",
+      "description": "验证 7 个核心文件已加载",
+      "tool_id": "context_verify",
+      "stage": "initialization",
+      "blocking": true
+    },
+    {
+      "step_id": 2,
+      "name": "Flow ID 绑定",
+      "description": "创建或绑定 Flow ID",
+      "tool_id": "flow_manager",
+      "stage": "initialization",
+      "blocking": true
+    },
+    {
+      "step_id": 3,
+      "name": "任务解析",
+      "description": "解析任务类型和复杂度",
+      "tool_id": "task_classifier",
+      "stage": "analysis",
+      "blocking": true
+    },
+    {
+      "step_id": 4,
+      "name": "工具选择",
+      "description": "选择合适工具或创建新工具",
+      "tool_id": "tool_selector",
+      "stage": "analysis",
+      "blocking": true
+    },
+    {
+      "step_id": 5,
+      "name": "工具执行",
+      "description": "执行选定的工具",
+      "tool_id": "tool_executor",
+      "stage": "execution",
+      "blocking": true
+    },
+    {
+      "step_id": 6,
+      "name": "工具集成验证",
+      "description": "验证工具集成正确",
+      "tool_id": "tool_validator",
+      "stage": "execution",
+      "blocking": true
+    },
+    {
+      "step_id": 7,
+      "name": "功能测试",
+      "description": "执行功能测试",
+      "tool_id": "test_runner",
+      "stage": "execution",
+      "blocking": true
+    },
+    {
+      "step_id": 8,
+      "name": "结果验证",
+      "description": "验证执行结果",
+      "tool_id": "result_verifier",
+      "stage": "execution",
+      "blocking": true
+    },
+    {
+      "step_id": 9,
+      "name": "批判者审查",
+      "description": "代码和质量审查",
+      "tool_id": "auto_critic_v7",
+      "stage": "validation",
+      "blocking": true,
+      "validation": {
+        "min_score": 80
+      }
+    },
+    {
+      "step_id": 10,
+      "name": "质量门禁",
+      "description": "最终质量检查",
+      "tool_id": "quality_gate",
+      "stage": "validation",
+      "blocking": true,
+      "validation": {
+        "min_test_coverage": 0.8
+      }
+    },
+    {
+      "step_id": 11,
+      "name": "会话压缩",
+      "description": "压缩会话记录到<5KB",
+      "tool_id": "session_compressor",
+      "stage": "completion",
+      "blocking": true,
+      "validation": {
+        "max_size_kb": 5,
+        "compression_rate_min": 0.8
+      }
+    },
+    {
+      "step_id": 12,
+      "name": "Git 提交推送",
+      "description": "提交并推送所有更改",
+      "tool_id": "git_commit_helper",
+      "stage": "completion",
+      "blocking": true
+    }
+  ],
+  "enforcement": {
+    "enabled": true,
+    "tool_id": "workflow_enforcer",
+    "rules": [
+      "必须按顺序执行 12 个步骤",
+      "Step 9-10 必须有实际工具调用",
+      "Step 11 必须执行压缩",
+      "压缩后文件<5KB"
+    ]
+  }
+}

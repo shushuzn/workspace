@@ -1,0 +1,75 @@
+{
+  "flow_id": "20260318-simplified-workflow-001",
+  "name": "简化工作流",
+  "description": "简化流程 - 简单任务/Q&A/查询类任务",
+  "version": "1.0.0",
+  "created_at": "2026-03-20T14:00:00+08:00",
+  "workflow_type": "simplified",
+  "parent_workflow": "20260318-universal-workflow-001",
+  "estimated_time_minutes": 10,
+  "total_steps": 5,
+  "stages": {
+    "initialization": "Step 1: 上下文加载",
+    "execution": "Step 2-3: 任务执行",
+    "completion": "Step 4-5: 压缩 + 提交"
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "上下文加载",
+      "description": "验证核心文件已加载",
+      "tool_id": "context_verify",
+      "stage": "initialization",
+      "blocking": true,
+      "validation": {
+        "max_context_size_kb": 100,
+        "required_files": ["SOUL.md", "USER.md", "MEMORY.md"]
+      }
+    },
+    {
+      "step_id": 2,
+      "name": "任务解析",
+      "description": "解析任务类型和复杂度",
+      "tool_id": "task_classifier",
+      "stage": "execution",
+      "blocking": true
+    },
+    {
+      "step_id": 3,
+      "name": "执行任务",
+      "description": "执行具体任务",
+      "tool_id": "tool_executor",
+      "stage": "execution",
+      "blocking": true
+    },
+    {
+      "step_id": 4,
+      "name": "会话压缩",
+      "description": "压缩会话记录到<5KB",
+      "tool_id": "session_compressor",
+      "stage": "completion",
+      "blocking": true,
+      "validation": {
+        "max_size_kb": 5,
+        "compression_rate_min": 0.8
+      }
+    },
+    {
+      "step_id": 5,
+      "name": "Git 提交",
+      "description": "提交压缩结果",
+      "tool_id": "git_commit_helper",
+      "stage": "completion",
+      "blocking": true
+    }
+  ],
+  "enforcement": {
+    "enabled": true,
+    "tool_id": "workflow_enforcer",
+    "rules": [
+      "必须按顺序执行 5 个步骤",
+      "Step 4 必须执行压缩",
+      "压缩后文件<5KB"
+    ]
+  }
+}
