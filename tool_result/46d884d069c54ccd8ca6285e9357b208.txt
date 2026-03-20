@@ -1,3 +1,6 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:43:55.998616
+# ---
 # 2026-03-20 Daily Notes
 
 ## Session: 头脑风暴
@@ -169,19 +172,3 @@
 
 **Updated:**
 - BRAINSTORM-WORKFLOW-DESIGN.md
-
----
-
-## Session: 集成自适应工作流
-
-**Changes:**
-1. 导入 AdaptiveWorkflowOrchestrator
-2. 在 CopawEntry 初始化时调用
-3. 自动检测任务类型 (5 种)
-4. 应用 timeout_multiplier
-
-**Test:**
-- "代码开发测试" → code_development, timeout x1.5 ✅
-
-**Files Modified:**
-- copaw_entry.py (集成 adaptive_workflow.py)

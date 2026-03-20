@@ -42,6 +42,13 @@ except ImportError:
     def classify_task(t): return "standard"
     def get_workflow_for_task(t): return "20260318-standard-workflow-001"
 
+# 导入自适应工作流
+try:
+    from adaptive_workflow import AdaptiveWorkflowOrchestrator
+    ADAPTIVE_WORKFLOW_ENABLED = True
+except ImportError:
+    ADAPTIVE_WORKFLOW_ENABLED = False
+
 # 导入工作流强制执行器
 try:
     from workflow_enforcer import WorkflowEnforcer
@@ -63,6 +70,18 @@ class CopawEntry:
                 self.flow_id = "20260318-universal-workflow-001"
         else:
             self.flow_id = "20260318-universal-workflow-001"
+        
+        # 【新增】自适应工作流 - 动态调整步骤
+        self.adaptive_config = {}
+        if ADAPTIVE_WORKFLOW_ENABLED:
+            try:
+                adaptive = AdaptiveWorkflowOrchestrator("flow-archive/default-workflow.json")
+                task_category = adaptive.detect_task_type(self.task_name)
+                self.adaptive_config = adaptive.adapt_workflow(task_category)
+                print(f"[Adaptive] Task category: {task_category}")
+                print(f"[Adaptive] Steps to skip: {self.adaptive_config.get('steps_to_skip', [])}")
+            except Exception as e:
+                print(f"[Adaptive] Failed to load: {e}")
         
         self.session_id = self._generate_session_id()
         self.start_time = datetime.now()

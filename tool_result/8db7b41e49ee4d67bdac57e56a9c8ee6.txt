@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:39:55.822173
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\copaw_entry.py  (lines 160-200 of 404)
+        if WORKFLOW_ENFORCER_ENABLED and self.enforcer:
+            self.enforcer.initialize(state)
+            print(f"[工作流] 强制执行器已初始化 - {total_steps}步")
+        
+        # 初始化保护
+        if STATE_PROTECTOR_ENABLED:
+            init_state_protection()
+        
+        print(f"\n[OK] execution-state.json 已初始化")
+        print(f"  路径：{self.state_file}")
+        print(f"  总步骤：{total_steps}")
+        if STATE_PROTECTOR_ENABLED:
+            print(f"  保护：State 保护器已启用 ✓")
+        
+        return state
+    
+    def verify_context(self) -> bool:
+        """Step 1: 验证上下文加载"""
+        print(f"\n{'='*60}")
+        print("Step 1: 上下文加载验证")
+        print(f"{'='*60}")
+        
+        core_files = [
+            "SOUL.md", "USER.md", "AGENTS.md", "TOOLS.md", "HEARTBEAT.md",
+            "13-memory/MEMORY.md"
+        ]
+        
+        today = datetime.now().strftime("%Y-%m-%d")
+        core_files.append(f"13-memory/{today}.md")
+        
+        loaded = []
+        missing = []
+        total_size = 0
+        
+        for f in core_files:
+            p = Path(f)
+            if p.exists():
+                size = p.stat().st_size
+                loaded.append({"file": f, "size": size})
+                total_size += size
+            else:
+
+[204 more lines. Use start_line=201 to continue.]
