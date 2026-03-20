@@ -26,6 +26,7 @@
 - [x] Research模式修复 (5/5 ✅)
 - [x] Full模式完整测试 (6/6 ✅)
 - [x] 实时数据源集成 (sa_data_optimizer_001)
+- [x] 回测引擎优化 (sa_backtest_optimizer_001)
 - [ ] 回测引擎优化
 
 ## Phase 4: 工具生态 ✅ (已完成)
