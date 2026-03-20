@@ -26,10 +26,12 @@ def run_command(cmd, capture=True):
 
 def main():
     if len(sys.argv) < 2:
-        print("Usage: py git_commit_helper.py \"commit message\"")
+        print("Usage: py git_commit_helper.py \"commit message\" [--force]")
+        print("  --force: Skip pre-commit hook validation (use with caution)")
         sys.exit(1)
     
     message = sys.argv[1]
+    force_mode = "--force" in sys.argv
     
     print("=" * 60)
     print("Git Commit + Push (with retry)")
@@ -44,7 +46,11 @@ def main():
     
     # Step 2: Git commit
     print("[STEP 2] Running git commit...")
-    code, out, err = run_command(f'git commit -m "{message}"')
+    commit_cmd = f'git commit -m "{message}"'
+    if force_mode:
+        commit_cmd += ' --no-verify'
+        print("[INFO] Force mode: Skipping pre-commit hook")
+    code, out, err = run_command(commit_cmd)
     if code != 0:
         print(f"[WARN] git commit failed (no changes?): {err.encode('ascii', errors='ignore').decode('ascii')}")
         print("[INFO] Continuing to push anyway...")

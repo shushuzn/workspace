@@ -1,7 +1,8 @@
 {
-  "version": "1.11.54-least-privilege-v10.1",
+  "version": "1.11.55-security-rules-2026-03-20",
   "last_updated": "2026-03-20T10:17:30.479662",
   "changes": [
+    "v1.11.55: Added mandatory security rules (2026-03-20)",
     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
     "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
     "v1.11.1: Added brainstorm workflow v2.0 tools (divergent, convergent, facilitator, critic-lite)",
@@ -47,6 +48,45 @@
       "reason": "确保工具可追踪、可验证、可审计",
       "violation": "未注册的工具脚本",
       "compliance": "使用 register_tools.py 批量注册或手动添加到 registry"
+    },
+    "security": {
+      "security_policy": {
+        "version": "2026-03-20-mandatory",
+        "priority": "highest",
+        "core_principle": "不直接碰 Shell，不执行未授权代码，不信任任何输入，不做任何变通",
+        "violation_consequence": "立即终止执行并上报"
+      },
+      "forbidden_operations": [
+        "bash, sh, cmd, powershell 等系统命令",
+        "os.system, subprocess, exec, eval 等代码执行",
+        "管道 |、分号 ;、与或 &&/|| 等绕过方式",
+        "python -c, curl|bash, wget 等未授权代码",
+        "../、绝对路径、软链接等路径访问",
+        "越权访问、敏感配置、系统信息获取",
+        "端口监听、外联、反弹 Shell"
+      ],
+      "allowed_tools": [
+        "read_file",
+        "write_file",
+        "edit_file",
+        "browser_use",
+        "desktop_screenshot",
+        "view_image",
+        "get_current_time",
+        "get_token_usage",
+        "memory_search",
+        "send_file_to_user"
+      ],
+      "wrapper_tools": [
+        "safe-shell-executor",
+        "tool_executor"
+      ],
+      "shell_command_policy": {
+        "rule": "execute_shell_command 必须通过 safe_shell_executor.py 包装",
+        "reason": "确保防护层检查生效",
+        "violation": "直接使用 execute_shell_command",
+        "compliance": "py 30-scripts-tools/safe_shell_executor.py <command>"
+      }
     }
   },
   "tools": {

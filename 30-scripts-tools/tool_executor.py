@@ -28,6 +28,13 @@ try:
 except ImportError:
     PROTECTION_ENABLED = False
 
+# 导入工具包装器（强制工作流检查）
+try:
+    from tool_wrapper import before_tool_call, after_tool_call
+    TOOL_WRAPPER_ENABLED = True
+except ImportError:
+    TOOL_WRAPPER_ENABLED = False
+
 
 def parse_args(args):
     """解析命令行参数"""
@@ -63,6 +70,11 @@ def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
     Returns:
         (returncode, stdout, stderr)
     """
+    # 步骤 0: 工具包装器检查（强制工作流）
+    if TOOL_WRAPPER_ENABLED:
+        if not before_tool_call(tool_name, params):
+            return 1, "", "未初始化会话 - 请先运行 copaw_entry.py"
+    
     # 防护检查
     if PROTECTION_ENABLED:
         layer = get_protection_layer()
@@ -149,6 +161,10 @@ def main():
     # 记录调用
     result = "success" if returncode == 0 else "error"
     log_call(tool_name, params, result, returncode)
+    
+    # 工具包装器记录
+    if TOOL_WRAPPER_ENABLED:
+        after_tool_call(tool_name, params, result)
     
     # 输出结果
     if stdout:

@@ -28,6 +28,13 @@ try:
 except ImportError:
     INTERCEPTOR_AVAILABLE = False
 
+# 导入工具包装器（强制工作流检查）
+try:
+    from tool_wrapper import before_tool_call, after_tool_call
+    TOOL_WRAPPER_AVAILABLE = True
+except ImportError:
+    TOOL_WRAPPER_AVAILABLE = False
+
 class SafeShellExecutor:
     """安全 Shell 执行器 - 系统级防护"""
     
@@ -45,6 +52,16 @@ class SafeShellExecutor:
     
     def execute(self, command: str, description: str = None) -> dict:
         """执行 shell 命令 - 强制防护检查"""
+        
+        # 步骤 0: 工具包装器检查（强制工作流）
+        if TOOL_WRAPPER_AVAILABLE:
+            if not before_tool_call('safe_shell_executor', {'command': command}):
+                return {
+                    "status": "blocked",
+                    "reason": "no_session",
+                    "message": "未初始化会话 - 请先运行 copaw_entry.py",
+                    "returncode": -1
+                }
         
         # 步骤 1: 检查 session 状态（直接检查，不通过防护层）
         if not self.state_file.exists():
@@ -119,8 +136,12 @@ class SafeShellExecutor:
                 "reason": str(e)
             }
         
-        # 步骤 4: 记录工具调用日志
+        # 步骤 5: 记录工具调用日志
         self._log_call(command, description, output)
+        
+        # 步骤 6: 工具包装器记录
+        if TOOL_WRAPPER_AVAILABLE:
+            after_tool_call('safe_shell_executor', {'command': command}, output.get('status', 'unknown'))
         
         return output
     
