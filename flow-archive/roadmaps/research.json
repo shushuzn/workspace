@@ -1,0 +1,17 @@
+{
+  "roadmap_id": "research-v1.0.0",
+  "name": "Research Tools",
+  "dimension": "research",
+  "version": "1.0.0",
+  "created_at": "2026-03-20T22:30:00.000000",
+  "last_updated": "2026-03-20T22:30:00.000000",
+  "total_tools": 5,
+  "completed_tools": 0,
+  "progress_pct": 0.0,
+  "phases": [
+    {"phase": "1", "name": "Research Infrastructure", "total": 2, "status": "pending"},
+    {"phase": "2", "name": "Analysis Tools", "total": 3, "status": "pending"}
+  ],
+  "tools": [],
+  "metrics": {"category": "research", "focus": "knowledge discovery"}
+}

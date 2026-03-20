@@ -2,6 +2,7 @@
   "version": "1.11.81-ai-suggest",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.82: Add 5 new dimensions to roadmap (research/utility/testing/integration/reporting)",
     "v1.11.81: Add AI-SUGGEST-001 (Week 3 - 头脑风暴完成)",
     "v1.11.80: Add VELOCITY-PREDICT-001 + DASHBOARD-VIEW-001 (Week 2 tools)",
     "v1.11.79: Add GANTT-CHART-001 + EXPORT-FORMAT-001 (Week 1 tools)",

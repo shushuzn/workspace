@@ -1,0 +1,17 @@
+{
+  "roadmap_id": "utility-v1.0.0",
+  "name": "Utility Tools",
+  "dimension": "utility",
+  "version": "1.0.0",
+  "created_at": "2026-03-20T22:30:00.000000",
+  "last_updated": "2026-03-20T22:30:00.000000",
+  "total_tools": 5,
+  "completed_tools": 0,
+  "progress_pct": 0.0,
+  "phases": [
+    {"phase": "1", "name": "Core Utilities", "total": 3, "status": "pending"},
+    {"phase": "2", "name": "Extended Utilities", "total": 2, "status": "pending"}
+  ],
+  "tools": [],
+  "metrics": {"category": "utility", "focus": "common functions"}
+}

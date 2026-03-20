@@ -1,29 +1,15 @@
 {
-  "created_at": "2026-03-20T22:07:47.413431",
+  "created_at": "2026-03-20T22:24:12.000000",
+  "last_updated": "2026-03-20T22:30:00.000000",
   "dimensions": [
-    {
-      "id": "stock_analysis",
-      "name": "Stock Analysis",
-      "file": "stock_analysis.json",
-      "status": "active"
-    },
-    {
-      "id": "optimization",
-      "name": "Optimization",
-      "file": "optimization.json",
-      "status": "active"
-    },
-    {
-      "id": "protection",
-      "name": "Protection",
-      "file": "protection.json",
-      "status": "active"
-    },
-    {
-      "id": "automation",
-      "name": "Automation",
-      "file": "automation.json",
-      "status": "active"
-    }
+    {"id": "stock_analysis", "name": "Stock Analysis", "file": "stock_analysis.json", "status": "active"},
+    {"id": "optimization", "name": "Optimization", "file": "optimization.json", "status": "active"},
+    {"id": "protection", "name": "Protection", "file": "protection.json", "status": "active"},
+    {"id": "automation", "name": "Automation", "file": "automation.json", "status": "active"},
+    {"id": "research", "name": "Research Tools", "file": "research.json", "status": "in_progress"},
+    {"id": "utility", "name": "Utility Tools", "file": "utility.json", "status": "in_progress"},
+    {"id": "testing", "name": "Testing Tools", "file": "testing.json", "status": "pending"},
+    {"id": "integration", "name": "Integration Tools", "file": "integration.json", "status": "pending"},
+    {"id": "reporting", "name": "Reporting Tools", "file": "reporting.json", "status": "pending"}
   ]
 }
