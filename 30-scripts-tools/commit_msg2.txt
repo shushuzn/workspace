@@ -1,0 +1,4 @@
+Enhance monitoring and caching tools
+
+- tool_monitor.py v2: add real-time dashboard, alerts
+- smart_cache_001.py v2: add LRU eviction policy

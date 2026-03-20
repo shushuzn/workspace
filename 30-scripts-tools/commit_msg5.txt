@@ -1,0 +1,5 @@
+Add random, analogy, and refine brainstorm methods
+
+- brainstorm_random.py: Random input triggers
+- brainstorm_analogy.py: Cross-domain solutions
+- brainstorm_refine.py: Auto problem refinement

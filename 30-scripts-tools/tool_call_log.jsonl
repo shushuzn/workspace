@@ -556,3 +556,6 @@
 {"timestamp": "2026-03-20T16:47:57.953331", "session_id": "session-20260320164506", "tool_id": "safe_shell_executor", "params": {"command": "git commit -m \"Complete Stock Analysis Phase 3 - Add tools SA-013 to SA-018\""}, "result": "error"}
 {"timestamp": "2026-03-20T17:14:24.138345", "session_id": "session-20260320170737", "tool_id": "safe-shell-executor", "command": "\"cd 80-PROJECTS/stock-analyzer-v2 && git init\"", "description": "", "result": "error", "returncode": -1, "flow_id": "20260318-universal-workflow-001", "task": "\"Phase 4 workflow design\"", "current_step": 3, "protection_enabled": true, "modified_files": []}
 {"timestamp": "2026-03-20T17:14:24.139599", "session_id": "session-20260320171416", "tool_id": "safe_shell_executor", "params": {"command": "\"cd 80-PROJECTS/stock-analyzer-v2 && git init\""}, "result": "error"}
+{"timestamp": "2026-03-20T22:11:11.703817", "session_id": "session-20260320192103", "tool_id": "--workflow", "params": {}, "result": "allowed"}
+{"timestamp": "2026-03-20T22:11:11.704530", "tool_id": "--workflow", "params": {}, "result": "error", "returncode": 1, "session_id": "session-20260320192103"}
+{"timestamp": "2026-03-20T22:11:11.706082", "session_id": "session-20260320192103", "tool_id": "--workflow", "params": {}, "result": "error"}

@@ -6152,14 +6152,14 @@
     },
     "prompt-optimizer-001": {
       "tool_id": "prompt-optimizer-001",
-      "name": "PROMPT-OPTIMIZER-001 Prompt Optimization Tool",
-      "description": "Prompt优化器 - 简化prompts、提取代码、合并请求",
-      "version": "1.0.0",
+      "name": "PROMPT-OPTIMIZER-001 提示词优化器",
+      "description": "提示词优化器 - 简化冗长提示词、提取核心指令、压缩重复内容",
+      "version": "1.0",
       "file_path": "30-scripts-tools/prompt_optimizer_001.py",
       "category": "optimization",
       "status": "active",
       "usage_count": 0,
-      "created_at": "2026-03-20T22:35:00.000000"
+      "created_at": "2026-03-20T22:55:00.000000"
     },
     "batch-tools-001": {
       "tool_id": "batch-tools-001",
@@ -6425,17 +6425,6 @@
       "usage_count": 0,
       "created_at": "2026-03-20T22:50:00.000000"
     },
-    "prompt-optimizer-001": {
-      "tool_id": "prompt-optimizer-001",
-      "name": "PROMPT-OPTIMIZER-001 提示词优化器",
-      "description": "提示词优化器 - 简化冗长提示词、提取核心指令、压缩重复内容",
-      "version": "1.0",
-      "file_path": "30-scripts-tools/prompt_optimizer_001.py",
-      "category": "optimization",
-      "status": "active",
-      "usage_count": 0,
-      "created_at": "2026-03-20T22:55:00.000000"
-    },
     "optimize-master-001": {
       "tool_id": "optimize-master-001",
       "name": "OPTIMIZE-MASTER-001 优化大师",
@@ -6468,6 +6457,3926 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T23:31:00.000000"
+    },
+    "aai_scorer": {
+      "tool_id": "aai_scorer",
+      "name": "Aai_Scorer",
+      "description": "\nAAI 评分工具 - 自主性智能体评估\n基于 arXiv 2511.13411 - 10 维度 AAI 评估 (AAI-0 到 AAI-4)\n",
+      "file_path": "30-scripts-tools\\aai_scorer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.215897",
+      "auto_discovery": true
+    },
+    "adaptive_workflow": {
+      "tool_id": "adaptive_workflow",
+      "name": "Adaptive_Workflow",
+      "description": "\n自适应工作流编排工具 - 基于 arXiv 2512.04521\n根据任务类型/复杂度/上下文动态调整工作流步骤\n",
+      "file_path": "30-scripts-tools\\adaptive_workflow.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.216839",
+      "auto_discovery": true
+    },
+    "add_core_rules_to_workflow": {
+      "tool_id": "add_core_rules_to_workflow",
+      "name": "Add_Core_Rules_To_Workflow",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\add_core_rules_to_workflow.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.217660",
+      "auto_discovery": true
+    },
+    "add_missing_key_tools": {
+      "tool_id": "add_missing_key_tools",
+      "name": "Add_Missing_Key_Tools",
+      "description": "\n添加缺失的关键工具到 registry\n",
+      "file_path": "30-scripts-tools\\add_missing_key_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.218300",
+      "auto_discovery": true
+    },
+    "add_missing_tool_calls": {
+      "tool_id": "add_missing_tool_calls",
+      "name": "Add_Missing_Tool_Calls",
+      "description": "30-scripts-tools/tool_call_log.jsonl",
+      "file_path": "30-scripts-tools\\add_missing_tool_calls.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.218930",
+      "auto_discovery": true
+    },
+    "add_mock_tool_calls": {
+      "tool_id": "add_mock_tool_calls",
+      "name": "Add_Mock_Tool_Calls",
+      "description": "\n模拟补充工具调用 - 用于通过 Tool Call Tracker 验证\n",
+      "file_path": "30-scripts-tools\\add_mock_tool_calls.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.219576",
+      "auto_discovery": true
+    },
+    "SA-029": {
+      "tool_id": "SA-029",
+      "name": "Sa 029",
+      "description": "flow-archive/stock-analysis-roadmap.json",
+      "file_path": "30-scripts-tools\\add_phase.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.219844",
+      "auto_discovery": true
+    },
+    "add_security_rules_to_registry": {
+      "tool_id": "add_security_rules_to_registry",
+      "name": "Add_Security_Rules_To_Registry",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\add_security_rules_to_registry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.220564",
+      "auto_discovery": true
+    },
+    "agent_tool_monitor": {
+      "tool_id": "agent_tool_monitor",
+      "name": "Agent_Tool_Monitor",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\agent_tool_monitor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.221193",
+      "auto_discovery": true
+    },
+    "ai_suggest_001": {
+      "tool_id": "ai_suggest_001",
+      "name": "Ai_Suggest_001",
+      "description": "\nimport json\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\n\n\nSUGGEST_DIR = Path(",
+      "file_path": "30-scripts-tools\\ai_suggest_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.221788",
+      "auto_discovery": true
+    },
+    "analyze_cats": {
+      "tool_id": "analyze_cats",
+      "name": "Analyze_Cats",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\analyze_cats.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.221971",
+      "auto_discovery": true
+    },
+    "anti_bypass_engine": {
+      "tool_id": "anti_bypass_engine",
+      "name": "Anti_Bypass_Engine",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\anti_bypass_engine.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.222593",
+      "auto_discovery": true
+    },
+    "audit_001_analyzer": {
+      "tool_id": "audit_001_analyzer",
+      "name": "Audit_001_Analyzer",
+      "description": "60-DATA/audit_001",
+      "file_path": "30-scripts-tools\\audit_001_analyzer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.223073",
+      "auto_discovery": true
+    },
+    "auto_001_automator": {
+      "tool_id": "auto_001_automator",
+      "name": "Auto_001_Automator",
+      "description": "60-DATA/auto_001",
+      "file_path": "30-scripts-tools\\auto_001_automator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.223547",
+      "auto_discovery": true
+    },
+    "auto_backup": {
+      "tool_id": "auto_backup",
+      "name": "Auto_Backup",
+      "description": "\n自动备份工具 - 修改文件前自动备份\n",
+      "file_path": "30-scripts-tools\\auto_backup.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.223948",
+      "auto_discovery": true
+    },
+    "auto_discover_001": {
+      "tool_id": "auto_discover_001",
+      "name": "Auto_Discover_001",
+      "description": "30-scripts-tools",
+      "file_path": "30-scripts-tools\\auto_discover_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.224193",
+      "auto_discovery": true
+    },
+    "auto_doc_generator": {
+      "tool_id": "auto_doc_generator",
+      "name": "Auto_Doc_Generator",
+      "description": "\n自动文档生成器 - 从代码/配置自动生成文档\n",
+      "file_path": "30-scripts-tools\\auto_doc_generator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.224719",
+      "auto_discovery": true
+    },
+    "auto_fix_engine": {
+      "tool_id": "auto_fix_engine",
+      "name": "Auto_Fix_Engine",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\auto_fix_engine.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.225288",
+      "auto_discovery": true
+    },
+    "auto_format_detector": {
+      "tool_id": "auto_format_detector",
+      "name": "Auto_Format_Detector",
+      "description": "\nAuto-Format Detector - Smart format selection based on content type\n",
+      "file_path": "30-scripts-tools\\auto_format_detector.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.225823",
+      "auto_discovery": true
+    },
+    "auto_memory_distiller": {
+      "tool_id": "auto_memory_distiller",
+      "name": "Auto_Memory_Distiller",
+      "description": "\n自动记忆蒸馏器 - 定期自动提炼 MEMORY.md\n",
+      "file_path": "30-scripts-tools\\auto_memory_distiller.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.226764",
+      "auto_discovery": true
+    },
+    "auto_protection_layer": {
+      "tool_id": "auto_protection_layer",
+      "name": "Auto_Protection_Layer",
+      "description": "30-scripts-tools/tool_call_log.jsonl",
+      "file_path": "30-scripts-tools\\auto_protection_layer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.227425",
+      "auto_discovery": true
+    },
+    "auto_retry": {
+      "tool_id": "auto_retry",
+      "name": "Auto_Retry",
+      "description": "\nAuto-Retry System - Intelligent retry with backoff\n",
+      "file_path": "30-scripts-tools\\auto_retry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.228813",
+      "auto_discovery": true
+    },
+    "auto_session_compressor": {
+      "tool_id": "auto_session_compressor",
+      "name": "Auto_Session_Compressor",
+      "description": "\n    \n    def __init__(self):\n        self.workspace = Path(",
+      "file_path": "30-scripts-tools\\auto_session_compressor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.229354",
+      "auto_discovery": true
+    },
+    "auto_step": {
+      "tool_id": "auto_step",
+      "name": "Auto_Step",
+      "description": "\nWorkflow Auto-Step - 自动步骤追踪\n工具执行后自动完成对应步骤\n",
+      "file_path": "30-scripts-tools\\auto_step.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.229575",
+      "auto_discovery": true
+    },
+    "SA-005": {
+      "tool_id": "SA-005",
+      "name": "Sa 005",
+      "description": "自动 TODO 更新器",
+      "file_path": "30-scripts-tools\\auto_todo_updater.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.229964",
+      "auto_discovery": true
+    },
+    "auto_training_engine": {
+      "tool_id": "auto_training_engine",
+      "name": "Auto_Training_Engine",
+      "description": "\nimport json\nfrom pathlib import Path\nfrom datetime import datetime\n\nTOOL_CALL_LOG = Path(",
+      "file_path": "30-scripts-tools\\auto_training_engine.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.230431",
+      "auto_discovery": true
+    },
+    "batch_001_runner": {
+      "tool_id": "batch_001_runner",
+      "name": "Batch_001_Runner",
+      "description": "60-DATA/batch_001",
+      "file_path": "30-scripts-tools\\batch_001_runner.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.230927",
+      "auto_discovery": true
+    },
+    "batch_tools_001": {
+      "tool_id": "batch_tools_001",
+      "name": "Batch_Tools_001",
+      "description": "\nBATCH-TOOLS-001 Batch Tools Executor\n【批量工具执行器】\n\n功能:\n  - 批量执行多个工具\n  - 并行/串行执行模式\n  - 结果汇总\n  - 错误处理\n",
+      "file_path": "30-scripts-tools\\batch_tools_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.231440",
+      "auto_discovery": true
+    },
+    "behavior_analyzer": {
+      "tool_id": "behavior_analyzer",
+      "name": "Behavior_Analyzer",
+      "description": "30-scripts-tools/tool_call_log.jsonl",
+      "file_path": "30-scripts-tools\\behavior_analyzer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.232005",
+      "auto_discovery": true
+    },
+    "blockchain_logger": {
+      "tool_id": "blockchain_logger",
+      "name": "Blockchain_Logger",
+      "description": "30-scripts-tools/blockchain_log.jsonl",
+      "file_path": "30-scripts-tools\\blockchain_logger.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.232431",
+      "auto_discovery": true
+    },
+    "brainstorm_001_define": {
+      "tool_id": "brainstorm_001_define",
+      "name": "Brainstorm_001_Define",
+      "description": "\nBrainstorm Step 1: Problem Definition\nDefine the topic, context, constraints and expected output\n",
+      "file_path": "30-scripts-tools\\brainstorm_001_define.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.232622",
+      "auto_discovery": true
+    },
+    "brainstorm_002_diverge": {
+      "tool_id": "brainstorm_002_diverge",
+      "name": "Brainstorm_002_Diverge",
+      "description": ":\n    import io\n    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding=",
+      "file_path": "30-scripts-tools\\brainstorm_002_diverge.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.232809",
+      "auto_discovery": true
+    },
+    "brainstorm_003_filter": {
+      "tool_id": "brainstorm_003_filter",
+      "name": "Brainstorm_003_Filter",
+      "description": "\n\nimport json\nimport sys\nfrom datetime import datetime\nfrom pathlib import Path\n\nif sys.platform == ",
+      "file_path": "30-scripts-tools\\brainstorm_003_filter.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.232977",
+      "auto_discovery": true
+    },
+    "brainstorm_004_prioritize": {
+      "tool_id": "brainstorm_004_prioritize",
+      "name": "Brainstorm_004_Prioritize",
+      "description": "\nBrainstorm Step 4: Prioritize - Rank and Plan\nRank ideas and create implementation plan\n",
+      "file_path": "30-scripts-tools\\brainstorm_004_prioritize.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.233148",
+      "auto_discovery": true
+    },
+    "brainstorm_ai_assistant": {
+      "tool_id": "brainstorm_ai_assistant",
+      "name": "Brainstorm_Ai_Assistant",
+      "description": "\nAI 创意助手 - LLM 辅助头脑风暴，生成高质量创意\n",
+      "file_path": "30-scripts-tools\\brainstorm_ai_assistant.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.234102",
+      "auto_discovery": true
+    },
+    "brainstorm_analogy": {
+      "tool_id": "brainstorm_analogy",
+      "name": "Brainstorm_Analogy",
+      "description": "\n\nimport json\nimport sys\nfrom pathlib import Path\n\n\n# 领域类比库\nDOMAIN_ANALOGIES = {\n    ",
+      "file_path": "30-scripts-tools\\brainstorm_analogy.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.234326",
+      "auto_discovery": true
+    },
+    "brainstorm_auto_scanner_001": {
+      "tool_id": "brainstorm_auto_scanner_001",
+      "name": "Brainstorm_Auto_Scanner_001",
+      "description": "\n    \n    # 优化工具关键词映射\n    OPTIMIZER_KEYWORDS = {\n        ",
+      "file_path": "30-scripts-tools\\brainstorm_auto_scanner_001.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.235073",
+      "auto_discovery": true
+    },
+    "brainstorm_filter": {
+      "tool_id": "brainstorm_filter",
+      "name": "Brainstorm_Filter",
+      "description": "\n头脑风暴 Step 5: 初步筛选工具\n从大量想法中选出有潜力的入围想法 (≥5个)\n",
+      "file_path": "30-scripts-tools\\brainstorm_filter.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.236322",
+      "auto_discovery": true
+    },
+    "brainstorm_matcher": {
+      "tool_id": "brainstorm_matcher",
+      "name": "Brainstorm_Matcher",
+      "description": "\nBrainstorm Matcher - Match brainstorm ideas with existing tools\n",
+      "file_path": "30-scripts-tools\\brainstorm_matcher.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.236524",
+      "auto_discovery": true
+    },
+    "brainstorm_mindmap": {
+      "tool_id": "brainstorm_mindmap",
+      "name": "Brainstorm_Mindmap",
+      "description": "\n思维导图生成器 - 可视化头脑风暴创意结构\n",
+      "file_path": "30-scripts-tools\\brainstorm_mindmap.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.236917",
+      "auto_discovery": true
+    },
+    "brainstorm_new_dimensions": {
+      "tool_id": "brainstorm_new_dimensions",
+      "name": "Brainstorm_New_Dimensions",
+      "description": "\nBrainstorm New Dimensions - Non-interactive Version\n头脑风暴: 新增路线图维度ideas\n",
+      "file_path": "30-scripts-tools\\brainstorm_new_dimensions.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.237487",
+      "auto_discovery": true
+    },
+    "brainstorm_next": {
+      "tool_id": "brainstorm_next",
+      "name": "Brainstorm_Next",
+      "description": ": {\n        ",
+      "file_path": "30-scripts-tools\\brainstorm_next.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.237817",
+      "auto_discovery": true
+    },
+    "opt-001": {
+      "tool_id": "opt-001",
+      "name": "Opt 001",
+      "description": "\n    \n    OPTIMIZATION_CATEGORIES = [\n        ",
+      "file_path": "30-scripts-tools\\brainstorm_optimize_001.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.238077",
+      "auto_discovery": true
+    },
+    "brainstorm_prioritize": {
+      "tool_id": "brainstorm_prioritize",
+      "name": "Brainstorm_Prioritize",
+      "description": "\n头脑风暴 Step 7: 优先级排序工具\n使用 ICE 或 RICE 方法对想法进行优先级排序\n",
+      "file_path": "30-scripts-tools\\brainstorm_prioritize.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.238491",
+      "auto_discovery": true
+    },
+    "brainstorm_quality_predictor": {
+      "tool_id": "brainstorm_quality_predictor",
+      "name": "Brainstorm_Quality_Predictor",
+      "description": "\n创意质量预测器 - 预测创意的潜在价值和成功率\n",
+      "file_path": "30-scripts-tools\\brainstorm_quality_predictor.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.239016",
+      "auto_discovery": true
+    },
+    "brainstorm_quick": {
+      "tool_id": "brainstorm_quick",
+      "name": "Brainstorm_Quick",
+      "description": "\nQuick Brainstorm - Generate next tool ideas\n",
+      "file_path": "30-scripts-tools\\brainstorm_quick.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.239216",
+      "auto_discovery": true
+    },
+    "brainstorm_random": {
+      "tool_id": "brainstorm_random",
+      "name": "Brainstorm_Random",
+      "description": ": [\n        ",
+      "file_path": "30-scripts-tools\\brainstorm_random.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.239427",
+      "auto_discovery": true
+    },
+    "brainstorm_refine": {
+      "tool_id": "brainstorm_refine",
+      "name": "Brainstorm_Refine",
+      "description": "\n\nimport json\nimport re\nimport sys\nfrom pathlib import Path\n\n\n# 问题重构规则\nREFINEMENT_RULES = {\n    ",
+      "file_path": "30-scripts-tools\\brainstorm_refine.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.239639",
+      "auto_discovery": true
+    },
+    "brainstorm_reverse": {
+      "tool_id": "brainstorm_reverse",
+      "name": "Brainstorm_Reverse",
+      "description": "\nBRAINSTORM-REVERSE-001 Reverse Brainstorming Method\n【逆向头脑风暴方法】\n\n原理: 不是思考",
+      "file_path": "30-scripts-tools\\brainstorm_reverse.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.239826",
+      "auto_discovery": true
+    },
+    "brainstorm_roadmap_tools": {
+      "tool_id": "brainstorm_roadmap_tools",
+      "name": "Brainstorm_Roadmap_Tools",
+      "description": "\nBrainstorm Roadmap Tools Ideas - Non-interactive Version\n头脑风暴: 创新路线图工具\n",
+      "file_path": "30-scripts-tools\\brainstorm_roadmap_tools.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.240340",
+      "auto_discovery": true
+    },
+    "brainstorm_scamper": {
+      "tool_id": "brainstorm_scamper",
+      "name": "Brainstorm_Scamper",
+      "description": "\n\nimport json\nimport sys\nfrom pathlib import Path\n\n\n# SCAMPER操作符定义\nSCAMPER_OPERATORS = {\n    ",
+      "file_path": "30-scripts-tools\\brainstorm_scamper.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.240557",
+      "auto_discovery": true
+    },
+    "brainstorm_sixhats": {
+      "tool_id": "brainstorm_sixhats",
+      "name": "Brainstorm_Sixhats",
+      "description": "\n\nimport json\nimport sys\nfrom pathlib import Path\n\n\n# 六顶帽子定义\nSIX_HATS = {\n    ",
+      "file_path": "30-scripts-tools\\brainstorm_sixhats.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.240758",
+      "auto_discovery": true
+    },
+    "SA-001": {
+      "tool_id": "SA-001",
+      "name": "Sa 001",
+      "description": "\nStock Analysis Workflow Brainstorm - AI Assistant\n",
+      "file_path": "30-scripts-tools\\brainstorm_stock_analysis.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.241172",
+      "auto_discovery": true
+    },
+    "brainstorm_stock_optimize": {
+      "tool_id": "brainstorm_stock_optimize",
+      "name": "Brainstorm_Stock_Optimize",
+      "description": "\n头脑风暴 Step 3: 股票分析工作流优化\n",
+      "file_path": "30-scripts-tools\\brainstorm_stock_optimize.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.241684",
+      "auto_discovery": true
+    },
+    "brainstorm_workflow": {
+      "tool_id": "brainstorm_workflow",
+      "name": "Brainstorm_Workflow",
+      "description": "Your question/topic",
+      "file_path": "30-scripts-tools\\brainstorm_workflow.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.241908",
+      "auto_discovery": true
+    },
+    "check_all_existing_tools": {
+      "tool_id": "check_all_existing_tools",
+      "name": "Check_All_Existing_Tools",
+      "description": "\n全面检查实际存在的工具文件\n输出可用的工具列表\n",
+      "file_path": "30-scripts-tools\\check_all_existing_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.242396",
+      "auto_discovery": true
+    },
+    "check_core_files": {
+      "tool_id": "check_core_files",
+      "name": "Check_Core_Files",
+      "description": "HEARTBEAT.md",
+      "file_path": "30-scripts-tools\\check_core_files.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.242633",
+      "auto_discovery": true
+    },
+    "check_current_state": {
+      "tool_id": "check_current_state",
+      "name": "Check_Current_State",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\check_current_state.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.243111",
+      "auto_discovery": true
+    },
+    "check_existing_tools_fixed": {
+      "tool_id": "check_existing_tools_fixed",
+      "name": "Check_Existing_Tools_Fixed",
+      "description": "\n全面检查实际存在的工具文件 - 修复 GBK 编码问题\n",
+      "file_path": "30-scripts-tools\\check_existing_tools_fixed.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.243655",
+      "auto_discovery": true
+    },
+    "check_git_version": {
+      "tool_id": "check_git_version",
+      "name": "Check_Git_Version",
+      "description": "7f1c44e:30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_git_version.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.244123",
+      "auto_discovery": true
+    },
+    "check_kept_tools": {
+      "tool_id": "check_kept_tools",
+      "name": "Check_Kept_Tools",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_kept_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.244369",
+      "auto_discovery": true
+    },
+    "check_kept_tools2": {
+      "tool_id": "check_kept_tools2",
+      "name": "Check_Kept_Tools2",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_kept_tools2.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.244661",
+      "auto_discovery": true
+    },
+    "check_key_tools_exist": {
+      "tool_id": "check_key_tools_exist",
+      "name": "Check_Key_Tools_Exist",
+      "description": "\n检查关键工具文件是否存在\n",
+      "file_path": "30-scripts-tools\\check_key_tools_exist.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.245113",
+      "auto_discovery": true
+    },
+    "check_log": {
+      "tool_id": "check_log",
+      "name": "Check_Log",
+      "description": "30-scripts-tools/tool_call_log.jsonl",
+      "file_path": "30-scripts-tools\\check_log.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.245393",
+      "auto_discovery": true
+    },
+    "check_missing_tools": {
+      "tool_id": "check_missing_tools",
+      "name": "Check_Missing_Tools",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_missing_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.245821",
+      "auto_discovery": true
+    },
+    "check_registry": {
+      "tool_id": "check_registry",
+      "name": "Check_Registry",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_registry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.246095",
+      "auto_discovery": true
+    },
+    "check_registry_count": {
+      "tool_id": "check_registry_count",
+      "name": "Check_Registry_Count",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_registry_count.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.246354",
+      "auto_discovery": true
+    },
+    "check_registry_format": {
+      "tool_id": "check_registry_format",
+      "name": "Check_Registry_Format",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_registry_format.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.246608",
+      "auto_discovery": true
+    },
+    "check_registry_structure": {
+      "tool_id": "check_registry_structure",
+      "name": "Check_Registry_Structure",
+      "description": "Check tools_registry.json structure",
+      "file_path": "30-scripts-tools\\check_registry_structure.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.246859",
+      "auto_discovery": true
+    },
+    "check_restored": {
+      "tool_id": "check_restored",
+      "name": "Check_Restored",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_restored.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.247101",
+      "auto_discovery": true
+    },
+    "check_session": {
+      "tool_id": "check_session",
+      "name": "Check_Session",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\check_session.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.247326",
+      "auto_discovery": true
+    },
+    "check_state_files": {
+      "tool_id": "check_state_files",
+      "name": "Check_State_Files",
+      "description": "flow-archive",
+      "file_path": "30-scripts-tools\\check_state_files.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.247563",
+      "auto_discovery": true
+    },
+    "check_step_ids": {
+      "tool_id": "check_step_ids",
+      "name": "Check_Step_Ids",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\check_step_ids.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.247789",
+      "auto_discovery": true
+    },
+    "check_tool_bypass": {
+      "tool_id": "check_tool_bypass",
+      "name": "Check_Tool_Bypass",
+      "description": "\n    now = datetime.now()\n    modified = []\n    \n    for root, dirs, files in Path(",
+      "file_path": "30-scripts-tools\\check_tool_bypass.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.248333",
+      "auto_discovery": true
+    },
+    "check_tool_files": {
+      "tool_id": "check_tool_files",
+      "name": "Check_Tool_Files",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_tool_files.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.248861",
+      "auto_discovery": true
+    },
+    "check_tool_log": {
+      "tool_id": "check_tool_log",
+      "name": "Check_Tool_Log",
+      "description": "30-scripts-tools/tool_call_log.jsonl",
+      "file_path": "30-scripts-tools\\check_tool_log.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.249142",
+      "auto_discovery": true
+    },
+    "check_tool_registration": {
+      "tool_id": "check_tool_registration",
+      "name": "Check_Tool_Registration",
+      "description": "\n工具注册强制检查 - 确保新创建的工具都注册\n",
+      "file_path": "30-scripts-tools\\check_tool_registration.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.249586",
+      "auto_discovery": true
+    },
+    "check_tool_registry": {
+      "tool_id": "check_tool_registry",
+      "name": "Check_Tool_Registry",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_tool_registry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.250016",
+      "auto_discovery": true
+    },
+    "check_tool_structure": {
+      "tool_id": "check_tool_structure",
+      "name": "Check_Tool_Structure",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\check_tool_structure.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.250264",
+      "auto_discovery": true
+    },
+    "check_workflow": {
+      "tool_id": "check_workflow",
+      "name": "Check_Workflow",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\check_workflow.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.250485",
+      "auto_discovery": true
+    },
+    "compare_count": {
+      "tool_id": "compare_count",
+      "name": "Compare_Count",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\compare_count.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.250967",
+      "auto_discovery": true
+    },
+    "complete_current_session": {
+      "tool_id": "complete_current_session",
+      "name": "Complete_Current_Session",
+      "description": "\n完成当前 session 的所有步骤 - 使 workflow compliance 达到 100%\n",
+      "file_path": "30-scripts-tools\\complete_current_session.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.251324",
+      "auto_discovery": true
+    },
+    "compliance_booster": {
+      "tool_id": "compliance_booster",
+      "name": "Compliance_Booster",
+      "description": "30-scripts-tools/violation_log.jsonl",
+      "file_path": "30-scripts-tools\\compliance_booster.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.251774",
+      "auto_discovery": true
+    },
+    "compliance_dashboard": {
+      "tool_id": "compliance_dashboard",
+      "name": "Compliance_Dashboard",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\compliance_dashboard.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.252343",
+      "auto_discovery": true
+    },
+    "compression_scheduler": {
+      "tool_id": "compression_scheduler",
+      "name": "Compression_Scheduler",
+      "description": "\n统一压缩调度器 - 协调会话/记忆/笔记三个独立压缩通道\n策略：分别检查阈值，独立触发压缩\n",
+      "file_path": "30-scripts-tools\\compression_scheduler.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.252793",
+      "auto_discovery": true
+    },
+    "confirmation_gate": {
+      "tool_id": "confirmation_gate",
+      "name": "Confirmation_Gate",
+      "description": "\n用户确认门 - 高风险操作前必须用户确认\n",
+      "file_path": "30-scripts-tools\\confirmation_gate.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.253246",
+      "auto_discovery": true
+    },
+    "content_validator": {
+      "tool_id": "content_validator",
+      "name": "Content_Validator",
+      "description": "\n工作流内容验证器 - 防止假装执行\n\n核心功能：\n1. 验证步骤输出是否有实质内容\n2. 关键步骤（9-10）必须有工具调用\n3. 执行阶段不能只有 echo\n",
+      "file_path": "30-scripts-tools\\content_validator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.253606",
+      "auto_discovery": true
+    },
+    "context_aware_assistant": {
+      "tool_id": "context_aware_assistant",
+      "name": "Context_Aware_Assistant",
+      "description": "\n上下文感知助手 - 根据当前文件/目录自动推荐工具\n",
+      "file_path": "30-scripts-tools\\context_aware_assistant.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.254029",
+      "auto_discovery": true
+    },
+    "copaw_entry": {
+      "tool_id": "copaw_entry",
+      "name": "Copaw_Entry",
+      "description": "\n    def get_workflow_for_task(t): return ",
+      "file_path": "30-scripts-tools\\copaw_entry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.254915",
+      "auto_discovery": true
+    },
+    "core_files_compressor": {
+      "tool_id": "core_files_compressor",
+      "name": "Core_Files_Compressor",
+      "description": "\n    \n    # 核心文件列表\n    CORE_FILES = [\n        ",
+      "file_path": "30-scripts-tools\\core_files_compressor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.255413",
+      "auto_discovery": true
+    },
+    "core_rules_verifier": {
+      "tool_id": "core_rules_verifier",
+      "name": "Core_Rules_Verifier",
+      "description": "\n核心执行规则验证工具\n每次工作流启动前必须调用此工具验证\n",
+      "file_path": "30-scripts-tools\\core_rules_verifier.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.255828",
+      "auto_discovery": true
+    },
+    "count_py_files": {
+      "tool_id": "count_py_files",
+      "name": "Count_Py_Files",
+      "description": "30-scripts-tools",
+      "file_path": "30-scripts-tools\\count_py_files.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.256064",
+      "auto_discovery": true
+    },
+    "count_real_tools": {
+      "tool_id": "count_real_tools",
+      "name": "Count_Real_Tools",
+      "description": "\n统计实际工具文件数量\n",
+      "file_path": "30-scripts-tools\\count_real_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.256522",
+      "auto_discovery": true
+    },
+    "create_brainstorm_v3": {
+      "tool_id": "create_brainstorm_v3",
+      "name": "Create_Brainstorm_V3",
+      "description": "\n头脑风暴工作流 v3.0 - 增强版 (AI 辅助 + 可视化 + 质量预测)\n",
+      "file_path": "30-scripts-tools\\create_brainstorm_v3.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.256978",
+      "auto_discovery": true
+    },
+    "create_dialogue_workflow": {
+      "tool_id": "create_dialogue_workflow",
+      "name": "Create_Dialogue_Workflow",
+      "description": "\n创建对话子工作流 - 完整执行主工作流 20 步\n",
+      "file_path": "30-scripts-tools\\create_dialogue_workflow.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.257503",
+      "auto_discovery": true
+    },
+    "create_dir": {
+      "tool_id": "create_dir",
+      "name": "Create_Dir",
+      "description": "active_skills/agent-spectrum",
+      "file_path": "30-scripts-tools\\create_dir.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.257675",
+      "auto_discovery": true
+    },
+    "create_dirs": {
+      "tool_id": "create_dirs",
+      "name": "Create_Dirs",
+      "description": "active_skills/agent-spectrum/references",
+      "file_path": "30-scripts-tools\\create_dirs.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.257828",
+      "auto_discovery": true
+    },
+    "cron_001_scheduler": {
+      "tool_id": "cron_001_scheduler",
+      "name": "Cron_001_Scheduler",
+      "description": "  添加任务\n  py cron_001_scheduler.py --remove ",
+      "file_path": "30-scripts-tools\\cron_001_scheduler.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.258344",
+      "auto_discovery": true
+    },
+    "cron_enhanced": {
+      "tool_id": "cron_enhanced",
+      "name": "Cron_Enhanced",
+      "description": "\n定时任务调度增强 - 基于 cron 技能的增强集成\n",
+      "file_path": "30-scripts-tools\\cron_enhanced.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.258769",
+      "auto_discovery": true
+    },
+    "cross_session_memory": {
+      "tool_id": "cross_session_memory",
+      "name": "Cross_Session_Memory",
+      "description": "\n跨会话记忆管理器 - 持久化记忆跨越多个会话\n",
+      "file_path": "30-scripts-tools\\cross_session_memory.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.259311",
+      "auto_discovery": true
+    },
+    "dashboard_view_001": {
+      "tool_id": "dashboard_view_001",
+      "name": "Dashboard_View_001",
+      "description": "\nDASHBOARD-VIEW-001 Comprehensive Dashboard\n【综合仪表盘】\n\n功能:\n  - 多维度状态总览\n  - 进度可视化\n  - 关键指标展示\n  - 实时更新\n",
+      "file_path": "30-scripts-tools\\dashboard_view_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.259895",
+      "auto_discovery": true
+    },
+    "data_cache": {
+      "tool_id": "data_cache",
+      "name": "Data_Cache",
+      "description": "D:/OpenClaw/workspace",
+      "file_path": "30-scripts-tools\\data_cache.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.260479",
+      "auto_discovery": true
+    },
+    "data_source_manager": {
+      "tool_id": "data_source_manager",
+      "name": "Data_Source_Manager",
+      "description": "D:/OpenClaw/workspace",
+      "file_path": "30-scripts-tools\\data_source_manager.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.261015",
+      "auto_discovery": true
+    },
+    "debug_registry": {
+      "tool_id": "debug_registry",
+      "name": "Debug_Registry",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\debug_registry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.261518",
+      "auto_discovery": true
+    },
+    "debug_step_match": {
+      "tool_id": "debug_step_match",
+      "name": "Debug_Step_Match",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\debug_step_match.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.261961",
+      "auto_discovery": true
+    },
+    "debug_workflow": {
+      "tool_id": "debug_workflow",
+      "name": "Debug_Workflow",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\debug_workflow.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.262200",
+      "auto_discovery": true
+    },
+    "debug_workflow_steps": {
+      "tool_id": "debug_workflow_steps",
+      "name": "Debug_Workflow_Steps",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\debug_workflow_steps.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.262425",
+      "auto_discovery": true
+    },
+    "diagnose_registry": {
+      "tool_id": "diagnose_registry",
+      "name": "Diagnose_Registry",
+      "description": "\n诊断工具：检查 registry 与 实际文件的映射关系\n",
+      "file_path": "30-scripts-tools\\diagnose_registry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.262878",
+      "auto_discovery": true
+    },
+    "dialog_entry": {
+      "tool_id": "dialog_entry",
+      "name": "Dialog_Entry",
+      "description": "30-scripts-tools",
+      "file_path": "30-scripts-tools\\dialog_entry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.263290",
+      "auto_discovery": true
+    },
+    "dialog_workflow_enforcer": {
+      "tool_id": "dialog_workflow_enforcer",
+      "name": "Dialog_Workflow_Enforcer",
+      "description": "\n\nimport json\nimport sys\nfrom datetime import datetime\nfrom pathlib import Path\n\nSTATE_FILE = Path(",
+      "file_path": "30-scripts-tools\\dialog_workflow_enforcer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.263722",
+      "auto_discovery": true
+    },
+    "do_commit": {
+      "tool_id": "do_commit",
+      "name": "Do_Commit",
+      "description": "--no-verify",
+      "file_path": "30-scripts-tools\\do_commit.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.263926",
+      "auto_discovery": true
+    },
+    "dynamic_goal_adjuster": {
+      "tool_id": "dynamic_goal_adjuster",
+      "name": "Dynamic_Goal_Adjuster",
+      "description": "\n动态目标调整工具 - 基于 arXiv 2602.10479\n根据执行状态动态调整任务目标\n",
+      "file_path": "30-scripts-tools\\dynamic_goal_adjuster.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.264511",
+      "auto_discovery": true
+    },
+    "dynamic_step_skipper": {
+      "tool_id": "dynamic_step_skipper",
+      "name": "Dynamic_Step_Skipper",
+      "description": "\n动态步骤跳过工具 - 基于上下文智能跳过非必要步骤\n",
+      "file_path": "30-scripts-tools\\dynamic_step_skipper.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.264949",
+      "auto_discovery": true
+    },
+    "embedded_critic": {
+      "tool_id": "embedded_critic",
+      "name": "Embedded_Critic",
+      "description": "\n批判者嵌入式检查器 - 每步自动质量检查，不通过不允许下一步\n",
+      "file_path": "30-scripts-tools\\embedded_critic.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.265357",
+      "auto_discovery": true
+    },
+    "emergency_stop": {
+      "tool_id": "emergency_stop",
+      "name": "Emergency_Stop",
+      "description": "\n立即停止机制 - 出现问题立刻停止所有操作\n紧急制动系统\n",
+      "file_path": "30-scripts-tools\\emergency_stop.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.265911",
+      "auto_discovery": true
+    },
+    "emotional_intelligence": {
+      "tool_id": "emotional_intelligence",
+      "name": "Emotional_Intelligence",
+      "description": "\n情感智能 - 识别和响应人类情感\n",
+      "file_path": "30-scripts-tools\\emotional_intelligence.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.266514",
+      "auto_discovery": true
+    },
+    "error_handler": {
+      "tool_id": "error_handler",
+      "name": "Error_Handler",
+      "description": "\nFriendly Error Handler - User-friendly error messages with solutions\n",
+      "file_path": "30-scripts-tools\\error_handler.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.267034",
+      "auto_discovery": true
+    },
+    "evolution_dashboard": {
+      "tool_id": "evolution_dashboard",
+      "name": "Evolution_Dashboard",
+      "description": "\n工作流进化仪表盘 v1.0\n\n可视化展示工作流进化状态\n",
+      "file_path": "30-scripts-tools\\evolution_dashboard.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.267545",
+      "auto_discovery": true
+    },
+    "exec_protection_task": {
+      "tool_id": "exec_protection_task",
+      "name": "Exec_Protection_Task",
+      "description": "\n执行防护强化任务 - 通过 tool_executor\n",
+      "file_path": "30-scripts-tools\\exec_protection_task.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.268000",
+      "auto_discovery": true
+    },
+    "export_format_001": {
+      "tool_id": "export_format_001",
+      "name": "Export_Format_001",
+      "description": "\nimport json\nimport sys\nfrom pathlib import Path\nfrom datetime import datetime\n\n\nEXPORT_DIR = Path(",
+      "file_path": "30-scripts-tools\\export_format_001.py",
+      "category": "export",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.268302",
+      "auto_discovery": true
+    },
+    "external_verifier": {
+      "tool_id": "external_verifier",
+      "name": "External_Verifier",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\external_verifier.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.268864",
+      "auto_discovery": true
+    },
+    "file_guardian": {
+      "tool_id": "file_guardian",
+      "name": "File_Guardian",
+      "description": "99-backups/auto",
+      "file_path": "30-scripts-tools\\file_guardian.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.269858",
+      "auto_discovery": true
+    },
+    "finalize_current_session": {
+      "tool_id": "finalize_current_session",
+      "name": "Finalize_Current_Session",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\finalize_current_session.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.270328",
+      "auto_discovery": true
+    },
+    "finalize_session": {
+      "tool_id": "finalize_session",
+      "name": "Finalize_Session",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\finalize_session.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.270838",
+      "auto_discovery": true
+    },
+    "find_copaw_tool": {
+      "tool_id": "find_copaw_tool",
+      "name": "Find_Copaw_Tool",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\find_copaw_tool.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.271106",
+      "auto_discovery": true
+    },
+    "find_critic_tools": {
+      "tool_id": "find_critic_tools",
+      "name": "Find_Critic_Tools",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\find_critic_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.271343",
+      "auto_discovery": true
+    },
+    "fix_execution_state": {
+      "tool_id": "fix_execution_state",
+      "name": "Fix_Execution_State",
+      "description": "\n修复 execution-state.json 以匹配 workflow.json\n",
+      "file_path": "30-scripts-tools\\fix_execution_state.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.271886",
+      "auto_discovery": true
+    },
+    "fix_execution_state_v2": {
+      "tool_id": "fix_execution_state_v2",
+      "name": "Fix_Execution_State_V2",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\fix_execution_state_v2.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.272288",
+      "auto_discovery": true
+    },
+    "fix_execution_state_v3": {
+      "tool_id": "fix_execution_state_v3",
+      "name": "Fix_Execution_State_V3",
+      "description": "\n修复 execution-state.json - 匹配 workflow.json 的所有步骤 ID\n",
+      "file_path": "30-scripts-tools\\fix_execution_state_v3.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.272663",
+      "auto_discovery": true
+    },
+    "fix_missing_steps": {
+      "tool_id": "fix_missing_steps",
+      "name": "Fix_Missing_Steps",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\fix_missing_steps.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.273051",
+      "auto_discovery": true
+    },
+    "fix_registry_format": {
+      "tool_id": "fix_registry_format",
+      "name": "Fix_Registry_Format",
+      "description": "\n修复 tools_registry.json - 修正 command 字段格式\n",
+      "file_path": "30-scripts-tools\\fix_registry_format.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.273410",
+      "auto_discovery": true
+    },
+    "fix_state_signature": {
+      "tool_id": "fix_state_signature",
+      "name": "Fix_State_Signature",
+      "description": "\n修复 state 文件签名\n",
+      "file_path": "30-scripts-tools\\fix_state_signature.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.273889",
+      "auto_discovery": true
+    },
+    "fix_state_with_substeps": {
+      "tool_id": "fix_state_with_substeps",
+      "name": "Fix_State_With_Substeps",
+      "description": "Flow ID 绑定",
+      "file_path": "30-scripts-tools\\fix_state_with_substeps.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.274306",
+      "auto_discovery": true
+    },
+    "fix_step_id_type": {
+      "tool_id": "fix_step_id_type",
+      "name": "Fix_Step_Id_Type",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\fix_step_id_type.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.274707",
+      "auto_discovery": true
+    },
+    "forced_protection_executor": {
+      "tool_id": "forced_protection_executor",
+      "name": "Forced_Protection_Executor",
+      "description": "\n强制防护执行器 v1.0\n所有操作必须通过此执行器，无法绕过\n",
+      "file_path": "30-scripts-tools\\forced_protection_executor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.275232",
+      "auto_discovery": true
+    },
+    "gantt_chart_001": {
+      "tool_id": "gantt_chart_001",
+      "name": "Gantt_Chart_001",
+      "description": "60-DATA/gantt_001",
+      "file_path": "30-scripts-tools\\gantt_chart_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.275748",
+      "auto_discovery": true
+    },
+    "get_workflow_steps": {
+      "tool_id": "get_workflow_steps",
+      "name": "Get_Workflow_Steps",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\get_workflow_steps.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.275979",
+      "auto_discovery": true
+    },
+    "git_commit_helper": {
+      "tool_id": "git_commit_helper",
+      "name": "Git_Commit_Helper",
+      "description": "\nGit Commit + Push with Retry Mechanism\nUsage: py git_commit_helper.py ",
+      "file_path": "30-scripts-tools\\git_commit_helper.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.276449",
+      "auto_discovery": true
+    },
+    "git_precommit_check": {
+      "tool_id": "git_precommit_check",
+      "name": "Git_Precommit_Check",
+      "description": "\nGit Pre-Commit 检查增强版 v2.0 - 强制检查工作流合规性\n集成 workflow_guardian_v2.py 进行深度验证\n完成率<100% 或类型不匹配 阻止提交\n",
+      "file_path": "30-scripts-tools\\git_precommit_check.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.276960",
+      "auto_discovery": true
+    },
+    "git_precommit_check_v4": {
+      "tool_id": "git_precommit_check_v4",
+      "name": "Git_Precommit_Check_V4",
+      "description": "\nGit Pre-Commit Hook v4.0 (强化版)\n更严格的检查 + 惩罚机制集成\n",
+      "file_path": "30-scripts-tools\\git_precommit_check_v4.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.277544",
+      "auto_discovery": true
+    },
+    "guardian_auto_fix": {
+      "tool_id": "guardian_auto_fix",
+      "name": "Guardian_Auto_Fix",
+      "description": "\n自动修复 execution-state.json - 由 workflow_guardian_v2.py 调用\n",
+      "file_path": "30-scripts-tools\\guardian_auto_fix.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.278014",
+      "auto_discovery": true
+    },
+    "health_001_checker": {
+      "tool_id": "health_001_checker",
+      "name": "Health_001_Checker",
+      "description": "\nHEALTH-001 System Health Checker\n【系统健康检查器】\n\n功能:\n  - 检查工具完整性\n  - 验证注册状态\n  - 测试连接\n  - 生成健康报告\n",
+      "file_path": "30-scripts-tools\\health_001_checker.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.278494",
+      "auto_discovery": true
+    },
+    "human_intent_understanding": {
+      "tool_id": "human_intent_understanding",
+      "name": "Human_Intent_Understanding",
+      "description": "\n人类意图理解 - 深度理解人类隐含意图\n",
+      "file_path": "30-scripts-tools\\human_intent_understanding.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.279026",
+      "auto_discovery": true
+    },
+    "improvement_executor": {
+      "tool_id": "improvement_executor",
+      "name": "Improvement_Executor",
+      "description": "\nimport json\nfrom pathlib import Path\nfrom datetime import datetime\n\nCOMPLIANCE_REPORT = Path(",
+      "file_path": "30-scripts-tools\\improvement_executor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.279490",
+      "auto_discovery": true
+    },
+    "integrate_001_api": {
+      "tool_id": "integrate_001_api",
+      "name": "Integrate_001_Api",
+      "description": "\nINTEGRATE-001 API Connector\n【API连接器】\n\n功能:\n  - REST API调用\n  - 认证处理\n  - 响应解析\n",
+      "file_path": "30-scripts-tools\\integrate_001_api.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.280013",
+      "auto_discovery": true
+    },
+    "integrate_001_suite": {
+      "tool_id": "integrate_001_suite",
+      "name": "Integrate_001_Suite",
+      "description": "60-DATA/integrate_001",
+      "file_path": "30-scripts-tools\\integrate_001_suite.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.280494",
+      "auto_discovery": true
+    },
+    "integrate_002_data": {
+      "tool_id": "integrate_002_data",
+      "name": "Integrate_002_Data",
+      "description": "\nINTEGRATE-002 Data Connector\n【数据连接器】\n\n功能:\n  - CSV/JSON数据导入\n  - 数据转换\n  - 批量处理\n",
+      "file_path": "30-scripts-tools\\integrate_002_data.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.281021",
+      "auto_discovery": true
+    },
+    "integrity_checker": {
+      "tool_id": "integrity_checker",
+      "name": "Integrity_Checker",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\integrity_checker.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.281558",
+      "auto_discovery": true
+    },
+    "list_git_files": {
+      "tool_id": "list_git_files",
+      "name": "List_Git_Files",
+      "description": "],\n    capture_output=True,\n    text=True,\n    encoding=",
+      "file_path": "30-scripts-tools\\list_git_files.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.281813",
+      "auto_discovery": true
+    },
+    "list_tools": {
+      "tool_id": "list_tools",
+      "name": "List_Tools",
+      "description": "30-scripts-tools",
+      "file_path": "30-scripts-tools\\list_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.282040",
+      "auto_discovery": true
+    },
+    "llm_guide_001": {
+      "tool_id": "llm_guide_001",
+      "name": "Llm_Guide_001",
+      "description": "60-DATA/llm_guide_001",
+      "file_path": "30-scripts-tools\\llm_guide_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.282550",
+      "auto_discovery": true
+    },
+    "mark_all_completed": {
+      "tool_id": "mark_all_completed",
+      "name": "Mark_All_Completed",
+      "description": "\n批量更新步骤状态 - 标记所有已执行的步骤为完成\n",
+      "file_path": "30-scripts-tools\\mark_all_completed.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.282955",
+      "auto_discovery": true
+    },
+    "mark_meta_task": {
+      "tool_id": "mark_meta_task",
+      "name": "Mark_Meta_Task",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\mark_meta_task.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.283465",
+      "auto_discovery": true
+    },
+    "mark_simplified_execution": {
+      "tool_id": "mark_simplified_execution",
+      "name": "Mark_Simplified_Execution",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\mark_simplified_execution.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.283921",
+      "auto_discovery": true
+    },
+    "memory_distiller": {
+      "tool_id": "memory_distiller",
+      "name": "Memory_Distiller",
+      "description": "\n记忆蒸馏器 - 从日常笔记提炼长期记忆\n触发条件：MEMORY.md > 50KB 或 日常笔记 > 10 条未处理\n",
+      "file_path": "30-scripts-tools\\memory_distiller.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.284449",
+      "auto_discovery": true
+    },
+    "metacognition_monitor": {
+      "tool_id": "metacognition_monitor",
+      "name": "Metacognition_Monitor",
+      "description": "\n元认知监控工具 - 自我监控/评估/优化\n基于主流程 v2.0 P0-1 优化\n",
+      "file_path": "30-scripts-tools\\metacognition_monitor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.285004",
+      "auto_discovery": true
+    },
+    "next_001_advisor": {
+      "tool_id": "next_001_advisor",
+      "name": "Next_001_Advisor",
+      "description": "60-DATA/advisor_001",
+      "file_path": "30-scripts-tools\\next_001_advisor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.285655",
+      "auto_discovery": true
+    },
+    "note_summarizer": {
+      "tool_id": "note_summarizer",
+      "name": "Note_Summarizer",
+      "description": "\n笔记摘要器 - 压缩单个笔记文件\n触发条件：单个笔记 > 5KB 或 > 100 行\n",
+      "file_path": "30-scripts-tools\\note_summarizer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.286290",
+      "auto_discovery": true
+    },
+    "optimap_001_manager": {
+      "tool_id": "optimap_001_manager",
+      "name": "Optimap_001_Manager",
+      "description": "\nOPTIMAP-001 Optimization Roadmap Manager\n【优化路线图管理器】\n\n功能:\n  - 查看优化工具进度\n  - 状态更新\n  - 下一步建议\n  - 统计与分析\n",
+      "file_path": "30-scripts-tools\\optimap_001_manager.py",
+      "category": "optimization",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.286918",
+      "auto_discovery": true
+    },
+    "optimize_master_001": {
+      "tool_id": "optimize_master_001",
+      "name": "Optimize_Master_001",
+      "description": "\n    \n    # 可用优化工具\n    OPTIMIZERS = {\n        ",
+      "file_path": "30-scripts-tools\\optimize_master_001.py",
+      "category": "optimization",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.287562",
+      "auto_discovery": true
+    },
+    "parallel_tool_executor": {
+      "tool_id": "parallel_tool_executor",
+      "name": "Parallel_Tool_Executor",
+      "description": "\n并行工具执行器 - 支持工具并行执行，加速准备阶段\n",
+      "file_path": "30-scripts-tools\\parallel_tool_executor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.288031",
+      "auto_discovery": true
+    },
+    "penalty_system": {
+      "tool_id": "penalty_system",
+      "name": "Penalty_System",
+      "description": "\n违规惩罚机制 - 对违反工作流和规定的行为进行惩罚\n",
+      "file_path": "30-scripts-tools\\penalty_system.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.288506",
+      "auto_discovery": true
+    },
+    "penalty_system_v2": {
+      "tool_id": "penalty_system_v2",
+      "name": "Penalty_System_V2",
+      "description": "\n违规惩罚机制 v2.0 - 强化版\n更严厉、更快速、更透明\n",
+      "file_path": "30-scripts-tools\\penalty_system_v2.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.289072",
+      "auto_discovery": true
+    },
+    "permission_validator": {
+      "tool_id": "permission_validator",
+      "name": "Permission_Validator",
+      "description": "30-scripts-tools/permission_matrix.json",
+      "file_path": "30-scripts-tools\\permission_validator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.290102",
+      "auto_discovery": true
+    },
+    "phase5_planner": {
+      "tool_id": "phase5_planner",
+      "name": "Phase5_Planner",
+      "description": "Phase 5 规划总结工具",
+      "file_path": "30-scripts-tools\\phase5_planner.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.290580",
+      "auto_discovery": true
+    },
+    "pre_commit_checker": {
+      "tool_id": "pre_commit_checker",
+      "name": "Pre_Commit_Checker",
+      "description": "\nGit 提交前强制检查 - 阻止不合规的提交\n集成到 Git pre-commit hook\n",
+      "file_path": "30-scripts-tools\\pre_commit_checker.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.292059",
+      "auto_discovery": true
+    },
+    "progressive_output": {
+      "tool_id": "progressive_output",
+      "name": "Progressive_Output",
+      "description": "\nProgressive Output - Chunk-by-chunk response streaming\n",
+      "file_path": "30-scripts-tools\\progressive_output.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.292647",
+      "auto_discovery": true
+    },
+    "progress_bar": {
+      "tool_id": "progress_bar",
+      "name": "Progress_Bar",
+      "description": "\nProgress Bar - Visual progress tracker for multi-step tasks\n",
+      "file_path": "30-scripts-tools\\progress_bar.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.293382",
+      "auto_discovery": true
+    },
+    "prompt_optimizer_001": {
+      "tool_id": "prompt_optimizer_001",
+      "name": "Prompt_Optimizer_001",
+      "description": "long prompt...",
+      "file_path": "30-scripts-tools\\prompt_optimizer_001.py",
+      "category": "optimization",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.293959",
+      "auto_discovery": true
+    },
+    "protected_py": {
+      "tool_id": "protected_py",
+      "name": "Protected_Py",
+      "description": "\nPython 执行包装器 - 强制所有 py 命令通过防护层\n使用方法：py protected_py.py <script.py> [args...]\n",
+      "file_path": "30-scripts-tools\\protected_py.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.294385",
+      "auto_discovery": true
+    },
+    "protection_monitor": {
+      "tool_id": "protection_monitor",
+      "name": "Protection_Monitor",
+      "description": "\n实时防护监控 - 监控所有操作并实时阻断违规\n",
+      "file_path": "30-scripts-tools\\protection_monitor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.294861",
+      "auto_discovery": true
+    },
+    "query_tools": {
+      "tool_id": "query_tools",
+      "name": "Query_Tools",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\query_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.295121",
+      "auto_discovery": true
+    },
+    "quick_complete_workflow": {
+      "tool_id": "quick_complete_workflow",
+      "name": "Quick_Complete_Workflow",
+      "description": "\n快速完成 workflow 步骤 - 用于通过 pre-commit hook 检查\n",
+      "file_path": "30-scripts-tools\\quick_complete_workflow.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.295597",
+      "auto_discovery": true
+    },
+    "read_steps": {
+      "tool_id": "read_steps",
+      "name": "Read_Steps",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\read_steps.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.295843",
+      "auto_discovery": true
+    },
+    "rebuild_registry": {
+      "tool_id": "rebuild_registry",
+      "name": "Rebuild_Registry",
+      "description": "\n重建 tools_registry.json - 基于实际存在的文件\n",
+      "file_path": "30-scripts-tools\\rebuild_registry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.296259",
+      "auto_discovery": true
+    },
+    "reg_agent_monitor": {
+      "tool_id": "reg_agent_monitor",
+      "name": "Reg_Agent_Monitor",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_agent_monitor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.296658",
+      "auto_discovery": true
+    },
+    "reg_antibypass": {
+      "tool_id": "reg_antibypass",
+      "name": "Reg_Antibypass",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_antibypass.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.297112",
+      "auto_discovery": true
+    },
+    "reg_auto_backup": {
+      "tool_id": "reg_auto_backup",
+      "name": "Reg_Auto_Backup",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_auto_backup.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.297365",
+      "auto_discovery": true
+    },
+    "reg_auto_critic_v7": {
+      "tool_id": "reg_auto_critic_v7",
+      "name": "Reg_Auto_Critic_V7",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_auto_critic_v7.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.297740",
+      "auto_discovery": true
+    },
+    "reg_auto_protection": {
+      "tool_id": "reg_auto_protection",
+      "name": "Reg_Auto_Protection",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_auto_protection.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.298287",
+      "auto_discovery": true
+    },
+    "reg_confirmation_gate": {
+      "tool_id": "reg_confirmation_gate",
+      "name": "Reg_Confirmation_Gate",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_confirmation_gate.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.298657",
+      "auto_discovery": true
+    },
+    "reg_context_verify": {
+      "tool_id": "reg_context_verify",
+      "name": "Reg_Context_Verify",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_context_verify.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.299031",
+      "auto_discovery": true
+    },
+    "reg_dashboard_fix": {
+      "tool_id": "reg_dashboard_fix",
+      "name": "Reg_Dashboard_Fix",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_dashboard_fix.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.299408",
+      "auto_discovery": true
+    },
+    "reg_diagnose": {
+      "tool_id": "reg_diagnose",
+      "name": "Reg_Diagnose",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_diagnose.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.299653",
+      "auto_discovery": true
+    },
+    "reg_fix_state_v3": {
+      "tool_id": "reg_fix_state_v3",
+      "name": "Reg_Fix_State_V3",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_fix_state_v3.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.300013",
+      "auto_discovery": true
+    },
+    "reg_forced_protection": {
+      "tool_id": "reg_forced_protection",
+      "name": "Reg_Forced_Protection",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_forced_protection.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.300502",
+      "auto_discovery": true
+    },
+    "reg_guardian_fix": {
+      "tool_id": "reg_guardian_fix",
+      "name": "Reg_Guardian_Fix",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_guardian_fix.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.300743",
+      "auto_discovery": true
+    },
+    "reg_mark_all": {
+      "tool_id": "reg_mark_all",
+      "name": "Reg_Mark_All",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_mark_all.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.300966",
+      "auto_discovery": true
+    },
+    "reg_phase4": {
+      "tool_id": "reg_phase4",
+      "name": "Reg_Phase4",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_phase4.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.301610",
+      "auto_discovery": true
+    },
+    "reg_protection_phase2": {
+      "tool_id": "reg_protection_phase2",
+      "name": "Reg_Protection_Phase2",
+      "description": "\n注册 Phase 2 工具到 registry\n",
+      "file_path": "30-scripts-tools\\reg_protection_phase2.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.302344",
+      "auto_discovery": true
+    },
+    "reg_protection_phase3": {
+      "tool_id": "reg_protection_phase3",
+      "name": "Reg_Protection_Phase3",
+      "description": "\n注册 Phase 3 强化工具到 registry\n",
+      "file_path": "30-scripts-tools\\reg_protection_phase3.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.302809",
+      "auto_discovery": true
+    },
+    "reg_reward_stop": {
+      "tool_id": "reg_reward_stop",
+      "name": "Reg_Reward_Stop",
+      "description": "\n注册奖励系统和立即停止机制到 registry\n",
+      "file_path": "30-scripts-tools\\reg_reward_stop.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.303218",
+      "auto_discovery": true
+    },
+    "reg_risk_assessor": {
+      "tool_id": "reg_risk_assessor",
+      "name": "Reg_Risk_Assessor",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_risk_assessor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.303491",
+      "auto_discovery": true
+    },
+    "reg_rules_verifier": {
+      "tool_id": "reg_rules_verifier",
+      "name": "Reg_Rules_Verifier",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_rules_verifier.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.303855",
+      "auto_discovery": true
+    },
+    "reg_safe_shell": {
+      "tool_id": "reg_safe_shell",
+      "name": "Reg_Safe_Shell",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_safe_shell.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.304333",
+      "auto_discovery": true
+    },
+    "reg_task": {
+      "tool_id": "reg_task",
+      "name": "Reg_Task",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_task.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.304586",
+      "auto_discovery": true
+    },
+    "reg_task_analyzer": {
+      "tool_id": "reg_task_analyzer",
+      "name": "Reg_Task_Analyzer",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_task_analyzer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.304823",
+      "auto_discovery": true
+    },
+    "reg_tool_executor": {
+      "tool_id": "reg_tool_executor",
+      "name": "Reg_Tool_Executor",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_tool_executor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.305056",
+      "auto_discovery": true
+    },
+    "reg_tool_selector": {
+      "tool_id": "reg_tool_selector",
+      "name": "Reg_Tool_Selector",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_tool_selector.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.305509",
+      "auto_discovery": true
+    },
+    "reg_update_step": {
+      "tool_id": "reg_update_step",
+      "name": "Reg_Update_Step",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_update_step.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.305746",
+      "auto_discovery": true
+    },
+    "reg_v10.1": {
+      "tool_id": "reg_v10.1",
+      "name": "Reg_V10.1",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_v10.1.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.306194",
+      "auto_discovery": true
+    },
+    "reg_v10": {
+      "tool_id": "reg_v10",
+      "name": "Reg_V10",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_v10.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.306563",
+      "auto_discovery": true
+    },
+    "reg_v7": {
+      "tool_id": "reg_v7",
+      "name": "Reg_V7",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_v7.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.307038",
+      "auto_discovery": true
+    },
+    "reg_v8": {
+      "tool_id": "reg_v8",
+      "name": "Reg_V8",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_v8.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.307445",
+      "auto_discovery": true
+    },
+    "reg_v9": {
+      "tool_id": "reg_v9",
+      "name": "Reg_V9",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_v9.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.307837",
+      "auto_discovery": true
+    },
+    "reg_workflow_scheduler": {
+      "tool_id": "reg_workflow_scheduler",
+      "name": "Reg_Workflow_Scheduler",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\reg_workflow_scheduler.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.308258",
+      "auto_discovery": true
+    },
+    "renumber_steps": {
+      "tool_id": "renumber_steps",
+      "name": "Renumber_Steps",
+      "description": ", 0)):\n        old_id = step.get(",
+      "file_path": "30-scripts-tools\\renumber_steps.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.308734",
+      "auto_discovery": true
+    },
+    "report_001_generator": {
+      "tool_id": "report_001_generator",
+      "name": "Report_001_Generator",
+      "description": "\nREPORT-001 Report Generator\n【报告生成器】\n\n功能:\n  - 自动生成报告\n  - 多格式输出\n  - 模板填充\n",
+      "file_path": "30-scripts-tools\\report_001_generator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.309271",
+      "auto_discovery": true
+    },
+    "report_002_export": {
+      "tool_id": "report_002_export",
+      "name": "Report_002_Export",
+      "description": "\nREPORT-002 Export Tool\n【导出工具】\n\n功能:\n  - 数据导出为多种格式\n  - 批量导出\n  - 自定义字段\n",
+      "file_path": "30-scripts-tools\\report_002_export.py",
+      "category": "export",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.309749",
+      "auto_discovery": true
+    },
+    "report_003_template": {
+      "tool_id": "report_003_template",
+      "name": "Report_003_Template",
+      "description": "\nREPORT-003 Template Generator\n【模板生成器】\n\n功能:\n  - 报告模板创建\n  - 变量替换\n  - 样式定制\n",
+      "file_path": "30-scripts-tools\\report_003_template.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.310320",
+      "auto_discovery": true
+    },
+    "research_001_topic": {
+      "tool_id": "research_001_topic",
+      "name": "Research_001_Topic",
+      "description": "\nRESEARCH-001 Research Topic Generator\n【研究主题生成器】\n\n功能:\n  - 生成研究主题 ideas\n  - 分类整理\n  - 优先级排序\n",
+      "file_path": "30-scripts-tools\\research_001_topic.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.310860",
+      "auto_discovery": true
+    },
+    "research_002_literature": {
+      "tool_id": "research_002_literature",
+      "name": "Research_002_Literature",
+      "description": "\nRESEARCH-002 Literature Review Assistant\n【文献综述助手】\n\n功能:\n  - 生成文献综述模板\n  - 结构化整理\n  - 引用格式化\n",
+      "file_path": "30-scripts-tools\\research_002_literature.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.311393",
+      "auto_discovery": true
+    },
+    "restore_state": {
+      "tool_id": "restore_state",
+      "name": "Restore_State",
+      "description": "flow-archive",
+      "file_path": "30-scripts-tools\\restore_state.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.311636",
+      "auto_discovery": true
+    },
+    "result_verifier": {
+      "tool_id": "result_verifier",
+      "name": "Result_Verifier",
+      "description": "\n结果验证器 - 验证工具执行结果是否符合预期\n防止错误结果被接受\n",
+      "file_path": "30-scripts-tools\\result_verifier.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.312015",
+      "auto_discovery": true
+    },
+    "reward_system": {
+      "tool_id": "reward_system",
+      "name": "Reward_System",
+      "description": "\n奖励系统 - 只有完整执行工作流才有奖励\n与惩罚系统配对，正向激励\n",
+      "file_path": "30-scripts-tools\\reward_system.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.312694",
+      "auto_discovery": true
+    },
+    "risk_assessor": {
+      "tool_id": "risk_assessor",
+      "name": "Risk_Assessor",
+      "description": "\n风险评级工具 - 评估操作风险等级\n🟢 低风险：读取、查询、分析\n🟡 中风险：创建、修改\n🔴 高风险：删除、覆盖、同步\n",
+      "file_path": "30-scripts-tools\\risk_assessor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.313480",
+      "auto_discovery": true
+    },
+    "auto-001": {
+      "tool_id": "auto-001",
+      "name": "Auto 001",
+      "description": "flow-archive/roadmaps",
+      "file_path": "30-scripts-tools\\roadmap_master_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.314598",
+      "auto_discovery": true
+    },
+    "safe_git_executor": {
+      "tool_id": "safe_git_executor",
+      "name": "Safe_Git_Executor",
+      "description": "\n  py safe_git_executor.py push\n  py safe_git_executor.py status\n",
+      "file_path": "30-scripts-tools\\safe_git_executor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.315078",
+      "auto_discovery": true
+    },
+    "safe_shell_executor": {
+      "tool_id": "safe_shell_executor",
+      "name": "Safe_Shell_Executor",
+      "description": "\n安全 Shell 执行器 - 唯一允许执行 shell 命令的入口\n【系统级强制】- 无法绕过\n\n使用方法：\n  py safe_shell_executor.py ",
+      "file_path": "30-scripts-tools\\safe_shell_executor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.315650",
+      "auto_discovery": true
+    },
+    "sa_001_realtime_fetcher": {
+      "tool_id": "sa_001_realtime_fetcher",
+      "name": "Sa_001_Realtime_Fetcher",
+      "description": "Fetch real-time stock data from multiple sources",
+      "file_path": "30-scripts-tools\\sa_001_realtime_fetcher.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.316252",
+      "auto_discovery": true
+    },
+    "sa_002_historical_downloader": {
+      "tool_id": "sa_002_historical_downloader",
+      "name": "Sa_002_Historical_Downloader",
+      "description": "Download and manage historical stock data",
+      "file_path": "30-scripts-tools\\sa_002_historical_downloader.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.316736",
+      "auto_discovery": true
+    },
+    "sa_003_financial_collector": {
+      "tool_id": "sa_003_financial_collector",
+      "name": "Sa_003_Financial_Collector",
+      "description": "Collect and manage financial statement data",
+      "file_path": "30-scripts-tools\\sa_003_financial_collector.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.317439",
+      "auto_discovery": true
+    },
+    "sa_004_sentiment_monitor": {
+      "tool_id": "sa_004_sentiment_monitor",
+      "name": "Sa_004_Sentiment_Monitor",
+      "description": "Monitor and analyze news sentiment for stocks",
+      "file_path": "30-scripts-tools\\sa_004_sentiment_monitor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.318151",
+      "auto_discovery": true
+    },
+    "sa_005_indicator_calculator": {
+      "tool_id": "sa_005_indicator_calculator",
+      "name": "Sa_005_Indicator_Calculator",
+      "description": "Calculate technical indicators from price data",
+      "file_path": "30-scripts-tools\\sa_005_indicator_calculator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.318911",
+      "auto_discovery": true
+    },
+    "sa_006_pattern_recognition": {
+      "tool_id": "sa_006_pattern_recognition",
+      "name": "Sa_006_Pattern_Recognition",
+      "description": "锤子线 - 底部反转信号",
+      "file_path": "30-scripts-tools\\sa_006_pattern_recognition.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.319683",
+      "auto_discovery": true
+    },
+    "sa_007_trend_analysis": {
+      "tool_id": "sa_007_trend_analysis",
+      "name": "Sa_007_Trend_Analysis",
+      "description": "\n    \n    def __init__(self):\n        self.cache_dir = Path(",
+      "file_path": "30-scripts-tools\\sa_007_trend_analysis.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.320418",
+      "auto_discovery": true
+    },
+    "sa_008_support_resistance": {
+      "tool_id": "sa_008_support_resistance",
+      "name": "Sa_008_Support_Resistance",
+      "description": "\n    \n    def __init__(self):\n        self.cache_dir = Path(",
+      "file_path": "30-scripts-tools\\sa_008_support_resistance.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.321025",
+      "auto_discovery": true
+    },
+    "sa_009_financial_ratios": {
+      "tool_id": "sa_009_financial_ratios",
+      "name": "Sa_009_Financial_Ratios",
+      "description": "\n    \n    def __init__(self):\n        self.cache_dir = Path(",
+      "file_path": "30-scripts-tools\\sa_009_financial_ratios.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.321604",
+      "auto_discovery": true
+    },
+    "sa_009_risk_management": {
+      "tool_id": "sa_009_risk_management",
+      "name": "Sa_009_Risk_Management",
+      "description": "Manage trading risk and position sizing",
+      "file_path": "30-scripts-tools\\sa_009_risk_management.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.322193",
+      "auto_discovery": true
+    },
+    "sa_010_signal_generator": {
+      "tool_id": "sa_010_signal_generator",
+      "name": "Sa_010_Signal_Generator",
+      "description": "Generate trading signals from multiple technical indicators",
+      "file_path": "30-scripts-tools\\sa_010_signal_generator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.322706",
+      "auto_discovery": true
+    },
+    "sa_010_valuation_model": {
+      "tool_id": "sa_010_valuation_model",
+      "name": "Sa_010_Valuation_Model",
+      "description": "\n    \n    def __init__(self):\n        self.cache_dir = Path(",
+      "file_path": "30-scripts-tools\\sa_010_valuation_model.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.323197",
+      "auto_discovery": true
+    },
+    "sa_011_growth_analysis": {
+      "tool_id": "sa_011_growth_analysis",
+      "name": "Sa_011_Growth_Analysis",
+      "description": "\n    \n    def __init__(self):\n        self.cache_dir = Path(",
+      "file_path": "30-scripts-tools\\sa_011_growth_analysis.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.323666",
+      "auto_discovery": true
+    },
+    "sa_012_industry_analysis": {
+      "tool_id": "sa_012_industry_analysis",
+      "name": "Sa_012_Industry_Analysis",
+      "description": "\n    \n    def __init__(self):\n        self.cache_dir = Path(",
+      "file_path": "30-scripts-tools\\sa_012_industry_analysis.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.324274",
+      "auto_discovery": true
+    },
+    "sa_012_report_generator": {
+      "tool_id": "sa_012_report_generator",
+      "name": "Sa_012_Report_Generator",
+      "description": "\nStock Analysis - SA-012: Report Generator\nGenerate comprehensive stock analysis reports\n",
+      "file_path": "30-scripts-tools\\sa_012_report_generator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.324784",
+      "auto_discovery": true
+    },
+    "sa_013_portfolio_risk": {
+      "tool_id": "sa_013_portfolio_risk",
+      "name": "Sa_013_Portfolio_Risk",
+      "description": "投资组合风险分析引擎",
+      "file_path": "30-scripts-tools\\sa_013_portfolio_risk.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.325272",
+      "auto_discovery": true
+    },
+    "sa_014_alert_system": {
+      "tool_id": "sa_014_alert_system",
+      "name": "Sa_014_Alert_System",
+      "description": "\n    \n    def __init__(self):\n        self.alert_dir = Path(",
+      "file_path": "30-scripts-tools\\sa_014_alert_system.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.325753",
+      "auto_discovery": true
+    },
+    "sa_015_market_regime": {
+      "tool_id": "sa_015_market_regime",
+      "name": "Sa_015_Market_Regime",
+      "description": "\n    \n    def __init__(self):\n        self.cache_dir = Path(",
+      "file_path": "30-scripts-tools\\sa_015_market_regime.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.326263",
+      "auto_discovery": true
+    },
+    "sa_016_sentiment_aggregator": {
+      "tool_id": "sa_016_sentiment_aggregator",
+      "name": "Sa_016_Sentiment_Aggregator",
+      "description": "SA-016: Sentiment Aggregator - Aggregate multiple sentiment sources",
+      "file_path": "30-scripts-tools\\sa_016_sentiment_aggregator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.326739",
+      "auto_discovery": true
+    },
+    "sa_017_strategy_optimizer": {
+      "tool_id": "sa_017_strategy_optimizer",
+      "name": "Sa_017_Strategy_Optimizer",
+      "description": "SA-017: Strategy Optimizer - Optimize trading strategy parameters",
+      "file_path": "30-scripts-tools\\sa_017_strategy_optimizer.py",
+      "category": "optimization",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.327224",
+      "auto_discovery": true
+    },
+    "sa_018_performance_attribution": {
+      "tool_id": "sa_018_performance_attribution",
+      "name": "Sa_018_Performance_Attribution",
+      "description": "SA-018: Performance Attribution - Analyze sources of trading returns",
+      "file_path": "30-scripts-tools\\sa_018_performance_attribution.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.327883",
+      "auto_discovery": true
+    },
+    "sa_019_chart_generator": {
+      "tool_id": "sa_019_chart_generator",
+      "name": "Sa_019_Chart_Generator",
+      "description": "60-DATA/stock_019",
+      "file_path": "30-scripts-tools\\sa_019_chart_generator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.328406",
+      "auto_discovery": true
+    },
+    "sa_020_report_generator": {
+      "tool_id": "sa_020_report_generator",
+      "name": "Sa_020_Report_Generator",
+      "description": "60-DATA/stock_019/reports",
+      "file_path": "30-scripts-tools\\sa_020_report_generator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.328965",
+      "auto_discovery": true
+    },
+    "sa_021_dashboard": {
+      "tool_id": "sa_021_dashboard",
+      "name": "Sa_021_Dashboard",
+      "description": "60-DATA/stock_019/dashboard",
+      "file_path": "30-scripts-tools\\sa_021_dashboard.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.329464",
+      "auto_discovery": true
+    },
+    "sa_023_trader": {
+      "tool_id": "sa_023_trader",
+      "name": "Sa_023_Trader",
+      "description": "\nSA-023 股票模拟交易系统\n【Phase 4 - 可视化与自动化】\n\n功能:\n  - 虚拟组合管理\n  - 成交记录\n  - 绩效跟踪\n  - 实时模拟下单\n\n依赖: pandas (可选)\n",
+      "file_path": "30-scripts-tools\\sa_023_trader.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.329928",
+      "auto_discovery": true
+    },
+    "sa_024_api": {
+      "tool_id": "sa_024_api",
+      "name": "Sa_024_Api",
+      "description": "60-DATA/stock_024",
+      "file_path": "30-scripts-tools\\sa_024_api.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.330446",
+      "auto_discovery": true
+    },
+    "sa_025_datasource": {
+      "tool_id": "sa_025_datasource",
+      "name": "Sa_025_Datasource",
+      "description": "60-DATA/stock_025",
+      "file_path": "30-scripts-tools\\sa_025_datasource.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.330984",
+      "auto_discovery": true
+    },
+    "sa_026_realtime": {
+      "tool_id": "sa_026_realtime",
+      "name": "Sa_026_Realtime",
+      "description": "60-DATA/stock_026",
+      "file_path": "30-scripts-tools\\sa_026_realtime.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.331507",
+      "auto_discovery": true
+    },
+    "sa_027_optimizer": {
+      "tool_id": "sa_027_optimizer",
+      "name": "Sa_027_Optimizer",
+      "description": "\nSA-027 策略参数优化器\n【Phase 5 - 真实数据增强】\n\n功能:\n  - 参数网格搜索\n  - 遗传算法优化\n  - 贝叶斯优化\n  - 参数敏感性分析\n\n依赖: numpy (可选)\n",
+      "file_path": "30-scripts-tools\\sa_027_optimizer.py",
+      "category": "optimization",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.331996",
+      "auto_discovery": true
+    },
+    "sa_028_optimizer": {
+      "tool_id": "sa_028_optimizer",
+      "name": "Sa_028_Optimizer",
+      "description": "60-DATA/stock_028",
+      "file_path": "30-scripts-tools\\sa_028_optimizer.py",
+      "category": "optimization",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.332517",
+      "auto_discovery": true
+    },
+    "sa_029_ai_signal": {
+      "tool_id": "sa_029_ai_signal",
+      "name": "Sa_029_Ai_Signal",
+      "description": "60-DATA/stock_029",
+      "file_path": "30-scripts-tools\\sa_029_ai_signal.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.333086",
+      "auto_discovery": true
+    },
+    "sa_030_sentiment": {
+      "tool_id": "sa_030_sentiment",
+      "name": "Sa_030_Sentiment",
+      "description": "60-DATA/stock_030",
+      "file_path": "30-scripts-tools\\sa_030_sentiment.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.333886",
+      "auto_discovery": true
+    },
+    "sa_031_report": {
+      "tool_id": "sa_031_report",
+      "name": "Sa_031_Report",
+      "description": "60-DATA/stock_031",
+      "file_path": "30-scripts-tools\\sa_031_report.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.334552",
+      "auto_discovery": true
+    },
+    "sa_032_strategy": {
+      "tool_id": "sa_032_strategy",
+      "name": "Sa_032_Strategy",
+      "description": "60-DATA/stock_032",
+      "file_path": "30-scripts-tools\\sa_032_strategy.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.335169",
+      "auto_discovery": true
+    },
+    "sa_034_risk": {
+      "tool_id": "sa_034_risk",
+      "name": "Sa_034_Risk",
+      "description": "\nSA-034 Risk Manager\n【Phase 7 - 高级功能】\n\n功能:\n  - 实时风险监控\n  - 仓位限制检查\n  - 止损管理\n  - 风险预警\n\n依赖: 风险数据配置\n",
+      "file_path": "30-scripts-tools\\sa_034_risk.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.335657",
+      "auto_discovery": true
+    },
+    "sa_035_executor": {
+      "tool_id": "sa_035_executor",
+      "name": "Sa_035_Executor",
+      "description": "60-DATA/stock_035",
+      "file_path": "30-scripts-tools\\sa_035_executor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.336231",
+      "auto_discovery": true
+    },
+    "sa_036_analyzer": {
+      "tool_id": "sa_036_analyzer",
+      "name": "Sa_036_Analyzer",
+      "description": "60-DATA/stock_036",
+      "file_path": "30-scripts-tools\\sa_036_analyzer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.336744",
+      "auto_discovery": true
+    },
+    "sa_037_api": {
+      "tool_id": "sa_037_api",
+      "name": "Sa_037_Api",
+      "description": "60-DATA/stock_037",
+      "file_path": "30-scripts-tools\\sa_037_api.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.336988",
+      "auto_discovery": true
+    },
+    "search_shell_tools": {
+      "tool_id": "search_shell_tools",
+      "name": "Search_Shell_Tools",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\search_shell_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.337745",
+      "auto_discovery": true
+    },
+    "self_corrector": {
+      "tool_id": "self_corrector",
+      "name": "Self_Corrector",
+      "description": "\n自我纠错能力 - 检测错误并自主修复\n",
+      "file_path": "30-scripts-tools\\self_corrector.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.338298",
+      "auto_discovery": true
+    },
+    "self_goal_setter": {
+      "tool_id": "self_goal_setter",
+      "name": "Self_Goal_Setter",
+      "description": "\n自我目标设定 - Agent 自主定义任务目标\n",
+      "file_path": "30-scripts-tools\\self_goal_setter.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.338785",
+      "auto_discovery": true
+    },
+    "session_compressor": {
+      "tool_id": "session_compressor",
+      "name": "Session_Compressor",
+      "description": "\n会话压缩器 - 压缩当前会话内容到 <5KB\n触发条件：会话 token > 10000 或 会话时长 > 30min\n",
+      "file_path": "30-scripts-tools\\session_compressor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.339257",
+      "auto_discovery": true
+    },
+    "session_end_audit": {
+      "tool_id": "session_end_audit",
+      "name": "Session_End_Audit",
+      "description": "\n    \n    def __init__(self, session_id: str = None):\n        self.workspace = Path(",
+      "file_path": "30-scripts-tools\\session_end_audit.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.340175",
+      "auto_discovery": true
+    },
+    "session_token_validator": {
+      "tool_id": "session_token_validator",
+      "name": "Session_Token_Validator",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\session_token_validator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.340715",
+      "auto_discovery": true
+    },
+    "show_new_registry": {
+      "tool_id": "show_new_registry",
+      "name": "Show_New_Registry",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\show_new_registry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.340984",
+      "auto_discovery": true
+    },
+    "single_step_lock": {
+      "tool_id": "single_step_lock",
+      "name": "Single_Step_Lock",
+      "description": "\n单步锁 - 确保每次只执行一个步骤\n防止批量执行、跳步执行\n",
+      "file_path": "30-scripts-tools\\single_step_lock.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.341413",
+      "auto_discovery": true
+    },
+    "smart_cache_001": {
+      "tool_id": "smart_cache_001",
+      "name": "Smart_Cache_001",
+      "description": "60-DATA/smart_cache_001",
+      "file_path": "30-scripts-tools\\smart_cache_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.342132",
+      "auto_discovery": true
+    },
+    "smart_compress_001": {
+      "tool_id": "smart_compress_001",
+      "name": "Smart_Compress_001",
+      "description": "智能压缩器 v2.0",
+      "file_path": "30-scripts-tools\\smart_compress_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.342743",
+      "auto_discovery": true
+    },
+    "test-001": {
+      "tool_id": "test-001",
+      "name": "Test 001",
+      "description": "超级压缩器 v3.0",
+      "file_path": "30-scripts-tools\\smart_compress_002.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.343456",
+      "auto_discovery": true
+    },
+    "smart_task_decomposer": {
+      "tool_id": "smart_task_decomposer",
+      "name": "Smart_Task_Decomposer",
+      "description": "\n智能任务拆解工具 - 基于 arXiv 2603.01234\n使用 LLM 自动分解复杂任务为可执行子任务\n",
+      "file_path": "30-scripts-tools\\smart_task_decomposer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.343996",
+      "auto_discovery": true
+    },
+    "state_monitor": {
+      "tool_id": "state_monitor",
+      "name": "State_Monitor",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\state_monitor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.344613",
+      "auto_discovery": true
+    },
+    "state_protector": {
+      "tool_id": "state_protector",
+      "name": "State_Protector",
+      "description": "current_step",
+      "file_path": "30-scripts-tools\\state_protector.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.345146",
+      "auto_discovery": true
+    },
+    "step1_context_verify": {
+      "tool_id": "step1_context_verify",
+      "name": "Step1_Context_Verify",
+      "description": "\nStep 1: 上下文加载验证 - 验证 7 个核心文件\n",
+      "file_path": "30-scripts-tools\\step1_context_verify.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.346050",
+      "auto_discovery": true
+    },
+    "step_tracker": {
+      "tool_id": "step_tracker",
+      "name": "Step_Tracker",
+      "description": "\n步骤跟踪器 - 实时跟踪主工作流 20 步执行状态\n自动记录每步完成时间、耗时、状态\n",
+      "file_path": "30-scripts-tools\\step_tracker.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.346570",
+      "auto_discovery": true
+    },
+    "stock_analysis_quality_predictor": {
+      "tool_id": "stock_analysis_quality_predictor",
+      "name": "Stock_Analysis_Quality_Predictor",
+      "description": "\nStock Analysis Workflow - Quality Predictor\n",
+      "file_path": "30-scripts-tools\\stock_analysis_quality_predictor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.347571",
+      "auto_discovery": true
+    },
+    "stock_auto_report": {
+      "tool_id": "stock_auto_report",
+      "name": "Stock_Auto_Report",
+      "description": "\n股票自动报告生成器\n功能：一键生成完整分析报告 (整合现有工具)\n\n作者：Claw\n版本：v1.0.0\n",
+      "file_path": "30-scripts-tools\\stock_auto_report.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.348063",
+      "auto_discovery": true
+    },
+    "stock_dashboard": {
+      "tool_id": "stock_dashboard",
+      "name": "Stock_Dashboard",
+      "description": "\n股票分析基础仪表板 MVP\n功能：Web 界面展示股票数据和分析结果\n\n作者：Claw\n版本：v1.0.0\n",
+      "file_path": "30-scripts-tools\\stock_dashboard.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.348585",
+      "auto_discovery": true
+    },
+    "stock_data_cache": {
+      "tool_id": "stock_data_cache",
+      "name": "Stock_Data_Cache",
+      "description": "\n股票分析数据缓存层\n功能：减少重复 IO，提升效率 70%\n\n作者：Claw\n版本：v1.0.0\n",
+      "file_path": "30-scripts-tools\\stock_data_cache.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.349100",
+      "auto_discovery": true
+    },
+    "stock_optimize_action": {
+      "tool_id": "stock_optimize_action",
+      "name": "Stock_Optimize_Action",
+      "description": "\n股票分析工作流优化 - 行动计划\n",
+      "file_path": "30-scripts-tools\\stock_optimize_action.py",
+      "category": "optimization",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.349527",
+      "auto_discovery": true
+    },
+    "stock_parallel_loader": {
+      "tool_id": "stock_parallel_loader",
+      "name": "Stock_Parallel_Loader",
+      "description": "\n股票分析并行加载器\n功能：并行加载多个数据源，提升效率 50%\n\n作者：Claw\n版本：v1.0.0\n",
+      "file_path": "30-scripts-tools\\stock_parallel_loader.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.350031",
+      "auto_discovery": true
+    },
+    "stock_pipeline_enhanced": {
+      "tool_id": "stock_pipeline_enhanced",
+      "name": "Stock_Pipeline_Enhanced",
+      "description": "\n股票分析管道增强版\n功能：集成缓存 + 并行加载\n\n作者：Claw\n版本：v1.1.0\n",
+      "file_path": "30-scripts-tools\\stock_pipeline_enhanced.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.350494",
+      "auto_discovery": true
+    },
+    "stock_realtime_alert": {
+      "tool_id": "stock_realtime_alert",
+      "name": "Stock_Realtime_Alert",
+      "description": "\n股票实时警报 MVP\n功能：价格/RSI/成交量异常警报\n\n作者：Claw\n版本：v1.0.0\n",
+      "file_path": "30-scripts-tools\\stock_realtime_alert.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.350989",
+      "auto_discovery": true
+    },
+    "summary_generator": {
+      "tool_id": "summary_generator",
+      "name": "Summary_Generator",
+      "description": "\nSummary Generator - TL;DR at top with expandable details\n",
+      "file_path": "30-scripts-tools\\summary_generator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.351592",
+      "auto_discovery": true
+    },
+    "sync_registry": {
+      "tool_id": "sync_registry",
+      "name": "Sync_Registry",
+      "description": "\n同步 tools_registry.json 与实际存在的工具文件\n只保留实际存在的工具\n",
+      "file_path": "30-scripts-tools\\sync_registry.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.352014",
+      "auto_discovery": true
+    },
+    "sync_registry_smart": {
+      "tool_id": "sync_registry_smart",
+      "name": "Sync_Registry_Smart",
+      "description": "\n智能同步 tools_registry.json 与实际存在的工具文件\n支持命名转换：下划线<->连字符，auto_critic<->auto-critic 等\n",
+      "file_path": "30-scripts-tools\\sync_registry_smart.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.352419",
+      "auto_discovery": true
+    },
+    "task_analyzer": {
+      "tool_id": "task_analyzer",
+      "name": "Task_Analyzer",
+      "description": "\nStep 3: 任务解析工具\n解析任务需求、复杂度、所需资源\n",
+      "file_path": "30-scripts-tools\\task_analyzer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.352791",
+      "auto_discovery": true
+    },
+    "task_classifier": {
+      "tool_id": "task_classifier",
+      "name": "Task_Classifier",
+      "description": "\n任务分类器 v1.0\n用途：根据任务复杂度分类，决定使用简化版还是完整版 workflow\n",
+      "file_path": "30-scripts-tools\\task_classifier.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.353294",
+      "auto_discovery": true
+    },
+    "task_decomposer": {
+      "tool_id": "task_decomposer",
+      "name": "Task_Decomposer",
+      "description": "\n智能任务分解器 - 自动将大任务拆分为≤10 分钟子任务\n",
+      "file_path": "30-scripts-tools\\task_decomposer.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.353836",
+      "auto_discovery": true
+    },
+    "temp_file_cleaner": {
+      "tool_id": "temp_file_cleaner",
+      "name": "Temp_File_Cleaner",
+      "description": "\n\n    # 清理规则\n    CLEANUP_RULES = {\n        ",
+      "file_path": "30-scripts-tools\\temp_file_cleaner.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.354354",
+      "auto_discovery": true
+    },
+    "tool_call_interceptor": {
+      "tool_id": "tool_call_interceptor",
+      "name": "Tool_Call_Interceptor",
+      "description": "write_file",
+      "file_path": "30-scripts-tools\\tool_call_interceptor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.354865",
+      "auto_discovery": true
+    },
+    "tool_call_interceptor_v2": {
+      "tool_id": "tool_call_interceptor_v2",
+      "name": "Tool_Call_Interceptor_V2",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\tool_call_interceptor_v2.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.355374",
+      "auto_discovery": true
+    },
+    "tool_call_tracker": {
+      "tool_id": "tool_call_tracker",
+      "name": "Tool_Call_Tracker",
+      "description": "\n工具调用追踪器 - 防止造假的核心机制\n\n原理：每次工具调用必须记录到 tool_call_log.jsonl\n没有调用日志的执行记录视为伪造\n",
+      "file_path": "30-scripts-tools\\tool_call_tracker.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.355812",
+      "auto_discovery": true
+    },
+    "tool_monitor": {
+      "tool_id": "tool_monitor",
+      "name": "Tool_Monitor",
+      "description": "\n工具监控器 - 监控工具调用成功率、自动重试、fallback\n【增强版 v2】: 实时仪表盘、告警、自动重启\n",
+      "file_path": "30-scripts-tools\\tool_monitor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.356589",
+      "auto_discovery": true
+    },
+    "tool_selector": {
+      "tool_id": "tool_selector",
+      "name": "Tool_Selector",
+      "description": "\nStep 4: 工具选择工具\n根据任务分析结果选择合适的工具\n",
+      "file_path": "30-scripts-tools\\tool_selector.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.356949",
+      "auto_discovery": true
+    },
+    "tool_self_learner": {
+      "tool_id": "tool_self_learner",
+      "name": "Tool_Self_Learner",
+      "description": "\n工具自学习能力 - 自主学习和掌握新工具\n",
+      "file_path": "30-scripts-tools\\tool_self_learner.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.357541",
+      "auto_discovery": true
+    },
+    "tool_wrapper": {
+      "tool_id": "tool_wrapper",
+      "name": "Tool_Wrapper",
+      "description": ", params)\n        result = ...\n        after_tool_call(",
+      "file_path": "30-scripts-tools\\tool_wrapper.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.358032",
+      "auto_discovery": true
+    },
+    "typing_indicator": {
+      "tool_id": "typing_indicator",
+      "name": "Typing_Indicator",
+      "description": "\nTyping Indicator - Show activity during long operations\n",
+      "file_path": "30-scripts-tools\\typing_indicator.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.358420",
+      "auto_discovery": true
+    },
+    "undo_redo_001": {
+      "tool_id": "undo_redo_001",
+      "name": "Undo_Redo_001",
+      "description": "13-memory/.undoredo",
+      "file_path": "30-scripts-tools\\undo_redo_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.358652",
+      "auto_discovery": true
+    },
+    "update_execution_state": {
+      "tool_id": "update_execution_state",
+      "name": "Update_Execution_State",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\update_execution_state.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.359121",
+      "auto_discovery": true
+    },
+    "update_mandatory_workflow": {
+      "tool_id": "update_mandatory_workflow",
+      "name": "Update_Mandatory_Workflow",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\update_mandatory_workflow.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.359528",
+      "auto_discovery": true
+    },
+    "update_registry_phase3": {
+      "tool_id": "update_registry_phase3",
+      "name": "Update_Registry_Phase3",
+      "description": "Update registry for Phase 3 tools (SA-013 to SA-018)",
+      "file_path": "30-scripts-tools\\update_registry_phase3.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.359916",
+      "auto_discovery": true
+    },
+    "SA-003": {
+      "tool_id": "SA-003",
+      "name": "Sa 003",
+      "description": "Register SA-003 and SA-004 tools",
+      "file_path": "30-scripts-tools\\update_registry_sa_phase1_complete.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.360894",
+      "auto_discovery": true
+    },
+    "update_registry_sa_phase2": {
+      "tool_id": "update_registry_sa_phase2",
+      "name": "Update_Registry_Sa_Phase2",
+      "description": "Update tools_registry.json with new stock analysis tools",
+      "file_path": "30-scripts-tools\\update_registry_sa_phase2.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.361486",
+      "auto_discovery": true
+    },
+    "update_registry_sa_phase2_final": {
+      "tool_id": "update_registry_sa_phase2_final",
+      "name": "Update_Registry_Sa_Phase2_Final",
+      "description": "Update tools_registry.json with SA-009 to SA-012",
+      "file_path": "30-scripts-tools\\update_registry_sa_phase2_final.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.361921",
+      "auto_discovery": true
+    },
+    "update_registry_stock_brainstorm": {
+      "tool_id": "update_registry_stock_brainstorm",
+      "name": "Update_Registry_Stock_Brainstorm",
+      "description": "Register stock analysis brainstorm tools",
+      "file_path": "30-scripts-tools\\update_registry_stock_brainstorm.py",
+      "category": "brainstorm",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.362290",
+      "auto_discovery": true
+    },
+    "update_registry_ux_phase3": {
+      "tool_id": "update_registry_ux_phase3",
+      "name": "Update_Registry_Ux_Phase3",
+      "description": "Update tools_registry.json with UX Phase 3 tools",
+      "file_path": "30-scripts-tools\\update_registry_ux_phase3.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.362689",
+      "auto_discovery": true
+    },
+    "update_state_for_mandatory": {
+      "tool_id": "update_state_for_mandatory",
+      "name": "Update_State_For_Mandatory",
+      "description": "20260318-universal-workflow-001",
+      "file_path": "30-scripts-tools\\update_state_for_mandatory.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.363050",
+      "auto_discovery": true
+    },
+    "update_step_state": {
+      "tool_id": "update_step_state",
+      "name": "Update_Step_State",
+      "description": "\n更新 execution-state.json 中的步骤状态\n",
+      "file_path": "30-scripts-tools\\update_step_state.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.363519",
+      "auto_discovery": true
+    },
+    "update_workflow_enforcement": {
+      "tool_id": "update_workflow_enforcement",
+      "name": "Update_Workflow_Enforcement",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\update_workflow_enforcement.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.363952",
+      "auto_discovery": true
+    },
+    "user_preferences": {
+      "tool_id": "user_preferences",
+      "name": "User_Preferences",
+      "description": "\nUser Preference Profiles - Comprehensive preference management\n",
+      "file_path": "30-scripts-tools\\user_preferences.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.364372",
+      "auto_discovery": true
+    },
+    "util_001_string": {
+      "tool_id": "util_001_string",
+      "name": "Util_001_String",
+      "description": "\nUTIL-001 String Utility\n【字符串工具】\n\n功能:\n  - 字符串格式化\n  - 编码转换\n  - 模板填充\n",
+      "file_path": "30-scripts-tools\\util_001_string.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.364983",
+      "auto_discovery": true
+    },
+    "util_002_file": {
+      "tool_id": "util_002_file",
+      "name": "Util_002_File",
+      "description": "\nUTIL-002 File Utility\n【文件工具】\n\n功能:\n  - 文件批量重命名\n  - 查找重复文件\n  - 统计文件信息\n",
+      "file_path": "30-scripts-tools\\util_002_file.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.365414",
+      "auto_discovery": true
+    },
+    "util_003_datetime": {
+      "tool_id": "util_003_datetime",
+      "name": "Util_003_Datetime",
+      "description": "\nUTIL-003 DateTime Utility\n【日期时间工具】\n\n功能:\n  - 日期格式转换\n  - 时区处理\n  - 时间计算\n",
+      "file_path": "30-scripts-tools\\util_003_datetime.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.365808",
+      "auto_discovery": true
+    },
+    "ux_settings": {
+      "tool_id": "ux_settings",
+      "name": "Ux_Settings",
+      "description": "\nQuick Settings Toggle - Brief/Detailed Mode\n",
+      "file_path": "30-scripts-tools\\ux_settings.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.366208",
+      "auto_discovery": true
+    },
+    "velocity_predict_001": {
+      "tool_id": "velocity_predict_001",
+      "name": "Velocity_Predict_001",
+      "description": "60-DATA/velocity_predict_001",
+      "file_path": "30-scripts-tools\\velocity_predict_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.366722",
+      "auto_discovery": true
+    },
+    "verify_rebuild": {
+      "tool_id": "verify_rebuild",
+      "name": "Verify_Rebuild",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\verify_rebuild.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.367139",
+      "auto_discovery": true
+    },
+    "verify_registry_update": {
+      "tool_id": "verify_registry_update",
+      "name": "Verify_Registry_Update",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\verify_registry_update.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.367578",
+      "auto_discovery": true
+    },
+    "verify_sa_tools": {
+      "tool_id": "verify_sa_tools",
+      "name": "Verify_Sa_Tools",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\verify_sa_tools.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.367820",
+      "auto_discovery": true
+    },
+    "verify_state_types": {
+      "tool_id": "verify_state_types",
+      "name": "Verify_State_Types",
+      "description": "\n快速验证 execution-state.json 类型正确性\n用法：py verify_state_types.py\n",
+      "file_path": "30-scripts-tools\\verify_state_types.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.368159",
+      "auto_discovery": true
+    },
+    "verify_workflow_complete": {
+      "tool_id": "verify_workflow_complete",
+      "name": "Verify_Workflow_Complete",
+      "description": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+      "file_path": "30-scripts-tools\\verify_workflow_complete.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.368615",
+      "auto_discovery": true
+    },
+    "verify_workflow_update": {
+      "tool_id": "verify_workflow_update",
+      "name": "Verify_Workflow_Update",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\verify_workflow_update.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.369015",
+      "auto_discovery": true
+    },
+    "version_ctrl_001": {
+      "tool_id": "version_ctrl_001",
+      "name": "Version_Ctrl_001",
+      "description": "13-memory/.snapshots",
+      "file_path": "30-scripts-tools\\version_ctrl_001.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.369259",
+      "auto_discovery": true
+    },
+    "view_safe_shell": {
+      "tool_id": "view_safe_shell",
+      "name": "View_Safe_Shell",
+      "description": "30-scripts-tools/tools_registry.json",
+      "file_path": "30-scripts-tools\\view_safe_shell.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.369496",
+      "auto_discovery": true
+    },
+    "workflow_anomaly_detector": {
+      "tool_id": "workflow_anomaly_detector",
+      "name": "Workflow_Anomaly_Detector",
+      "description": "\n自动异常检测器 - 超时检测 + 自动重试 + 异常预警\n",
+      "file_path": "30-scripts-tools\\workflow_anomaly_detector.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.370411",
+      "auto_discovery": true
+    },
+    "workflow_autoloader": {
+      "tool_id": "workflow_autoloader",
+      "name": "Workflow_Autoloader",
+      "description": "\n工作流自动加载器 - 每次任务开始自动显示完整 20 步\n强制读取 workflow.json，显示所有步骤，不允许跳过\n",
+      "file_path": "30-scripts-tools\\workflow_autoloader.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.370908",
+      "auto_discovery": true
+    },
+    "workflow_auto_executor": {
+      "tool_id": "workflow_auto_executor",
+      "name": "Workflow_Auto_Executor",
+      "description": "CopawEntry",
+      "file_path": "30-scripts-tools\\workflow_auto_executor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.371351",
+      "auto_discovery": true
+    },
+    "workflow_cache": {
+      "tool_id": "workflow_cache",
+      "name": "Workflow_Cache",
+      "description": "\n工作流缓存 - 缓存上下文验证结果，加速重复任务\n",
+      "file_path": "30-scripts-tools\\workflow_cache.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.371874",
+      "auto_discovery": true
+    },
+    "workflow_enforcer_v2": {
+      "tool_id": "workflow_enforcer_v2",
+      "name": "Workflow_Enforcer_V2",
+      "description": "\n工作流强制执行器 v2.0 - 集成内容验证\n\n核心改进：\n1. 每步必须验证输出内容\n2. 不通过验证 → 不允许继续\n3. 防止假装执行\n",
+      "file_path": "30-scripts-tools\\workflow_enforcer_v2.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.372772",
+      "auto_discovery": true
+    },
+    "workflow_evolver": {
+      "tool_id": "workflow_evolver",
+      "name": "Workflow_Evolver",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\workflow_evolver.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.373242",
+      "auto_discovery": true
+    },
+    "workflow_guardian_v2": {
+      "tool_id": "workflow_guardian_v2",
+      "name": "Workflow_Guardian_V2",
+      "description": "工作流守护者 - 强化防护系统",
+      "file_path": "30-scripts-tools\\workflow_guardian_v2.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.373784",
+      "auto_discovery": true
+    },
+    "workflow_health_dashboard": {
+      "tool_id": "workflow_health_dashboard",
+      "name": "Workflow_Health_Dashboard",
+      "description": "\n工作流健康度仪表板 - 可视化展示工作流执行健康度\n指标：合规率、效率趋势、质量评分、问题预警\n",
+      "file_path": "30-scripts-tools\\workflow_health_dashboard.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.374342",
+      "auto_discovery": true
+    },
+    "workflow_helper": {
+      "tool_id": "workflow_helper",
+      "name": "Workflow_Helper",
+      "description": "\n工作流执行助手 - 严格按 20 步执行\n自动更新 execution-state.json\n",
+      "file_path": "30-scripts-tools\\workflow_helper.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.374721",
+      "auto_discovery": true
+    },
+    "workflow_integration": {
+      "tool_id": "workflow_integration",
+      "name": "Workflow_Integration",
+      "description": "\nWorkflow Integration - Agentic BPM 与 Workflow 系统集成\n让工作流系统可以使用 Agentic BPM 管理任务\n",
+      "file_path": "30-scripts-tools\\workflow_integration.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.374950",
+      "auto_discovery": true
+    },
+    "workflow_menu": {
+      "tool_id": "workflow_menu",
+      "name": "Workflow_Menu",
+      "description": "\nWorkflow Menu - 交互式工作流菜单\n快速查看状态、执行操作\n",
+      "file_path": "30-scripts-tools\\workflow_menu.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.375169",
+      "auto_discovery": true
+    },
+    "workflow_optimizer": {
+      "tool_id": "workflow_optimizer",
+      "name": "Workflow_Optimizer",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\workflow_optimizer.py",
+      "category": "optimization",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.375662",
+      "auto_discovery": true
+    },
+    "workflow_optimizer_001": {
+      "tool_id": "workflow_optimizer_001",
+      "name": "Workflow_Optimizer_001",
+      "description": "original_steps",
+      "file_path": "30-scripts-tools\\workflow_optimizer_001.py",
+      "category": "optimization",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.376105",
+      "auto_discovery": true
+    },
+    "workflow_performance_monitor": {
+      "tool_id": "workflow_performance_monitor",
+      "name": "Workflow_Performance_Monitor",
+      "description": "flow-archive/20260318-universal-workflow-001/performance-log.jsonl",
+      "file_path": "30-scripts-tools\\workflow_performance_monitor.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.376701",
+      "auto_discovery": true
+    },
+    "workflow_progress_bar": {
+      "tool_id": "workflow_progress_bar",
+      "name": "Workflow_Progress_Bar",
+      "description": "\n可视化进度条 - 实时显示工作流执行进度\n",
+      "file_path": "30-scripts-tools\\workflow_progress_bar.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.377216",
+      "auto_discovery": true
+    },
+    "workflow_recovery": {
+      "tool_id": "workflow_recovery",
+      "name": "Workflow_Recovery",
+      "description": "\n错误恢复机制 - checkpoint 恢复 + 步骤重试\n",
+      "file_path": "30-scripts-tools\\workflow_recovery.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.377617",
+      "auto_discovery": true
+    },
+    "workflow_scheduler": {
+      "tool_id": "workflow_scheduler",
+      "name": "Workflow_Scheduler",
+      "description": "\nStep 5: 子工作流调度工具\n判断是否需要子工作流，并调度相应子工作流\n",
+      "file_path": "30-scripts-tools\\workflow_scheduler.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.378011",
+      "auto_discovery": true
+    },
+    "workflow_stats": {
+      "tool_id": "workflow_stats",
+      "name": "Workflow_Stats",
+      "description": "\nWorkflow Stats - 工作流执行统计面板\n",
+      "file_path": "30-scripts-tools\\workflow_stats.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.378217",
+      "auto_discovery": true
+    },
+    "research-001": {
+      "tool_id": "research-001",
+      "name": "Research 001",
+      "description": "\n工作流模板库 - 预定义常用工作流模板\n",
+      "file_path": "30-scripts-tools\\workflow_templates.py",
+      "category": "auto",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.378693",
+      "auto_discovery": true
+    },
+    "add_memories": {
+      "tool_id": "add_memories",
+      "name": "add_memories.bat",
+      "description": "Script: add_memories.bat",
+      "file_path": "30-scripts-tools\\add_memories.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379475",
+      "auto_discovery": true
+    },
+    "add_tasks": {
+      "tool_id": "add_tasks",
+      "name": "add_tasks.bat",
+      "description": "Script: add_tasks.bat",
+      "file_path": "30-scripts-tools\\add_tasks.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379499",
+      "auto_discovery": true
+    },
+    "commit_brainstorm": {
+      "tool_id": "commit_brainstorm",
+      "name": "commit_brainstorm.bat",
+      "description": "Script: commit_brainstorm.bat",
+      "file_path": "30-scripts-tools\\commit_brainstorm.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379539",
+      "auto_discovery": true
+    },
+    "commit_brainstorm_done": {
+      "tool_id": "commit_brainstorm_done",
+      "name": "commit_brainstorm_done.bat",
+      "description": "Script: commit_brainstorm_done.bat",
+      "file_path": "30-scripts-tools\\commit_brainstorm_done.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379552",
+      "auto_discovery": true
+    },
+    "commit_cache": {
+      "tool_id": "commit_cache",
+      "name": "commit_cache.bat",
+      "description": "Script: commit_cache.bat",
+      "file_path": "30-scripts-tools\\commit_cache.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379566",
+      "auto_discovery": true
+    },
+    "commit_final": {
+      "tool_id": "commit_final",
+      "name": "commit_final.bat",
+      "description": "Script: commit_final.bat",
+      "file_path": "30-scripts-tools\\commit_final.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379578",
+      "auto_discovery": true
+    },
+    "commit_fix": {
+      "tool_id": "commit_fix",
+      "name": "commit_fix.bat",
+      "description": "Script: commit_fix.bat",
+      "file_path": "30-scripts-tools\\commit_fix.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379590",
+      "auto_discovery": true
+    },
+    "commit_integration": {
+      "tool_id": "commit_integration",
+      "name": "commit_integration.bat",
+      "description": "Script: commit_integration.bat",
+      "file_path": "30-scripts-tools\\commit_integration.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379603",
+      "auto_discovery": true
+    },
+    "commit_low_priority": {
+      "tool_id": "commit_low_priority",
+      "name": "commit_low_priority.bat",
+      "description": "Script: commit_low_priority.bat",
+      "file_path": "30-scripts-tools\\commit_low_priority.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379615",
+      "auto_discovery": true
+    },
+    "commit_medium_priority": {
+      "tool_id": "commit_medium_priority",
+      "name": "commit_medium_priority.bat",
+      "description": "Script: commit_medium_priority.bat",
+      "file_path": "30-scripts-tools\\commit_medium_priority.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379628",
+      "auto_discovery": true
+    },
+    "commit_memory": {
+      "tool_id": "commit_memory",
+      "name": "commit_memory.bat",
+      "description": "Script: commit_memory.bat",
+      "file_path": "30-scripts-tools\\commit_memory.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379641",
+      "auto_discovery": true
+    },
+    "commit_memory_done": {
+      "tool_id": "commit_memory_done",
+      "name": "commit_memory_done.bat",
+      "description": "Script: commit_memory_done.bat",
+      "file_path": "30-scripts-tools\\commit_memory_done.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379654",
+      "auto_discovery": true
+    },
+    "commit_multimodal": {
+      "tool_id": "commit_multimodal",
+      "name": "commit_multimodal.bat",
+      "description": "Script: commit_multimodal.bat",
+      "file_path": "30-scripts-tools\\commit_multimodal.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379668",
+      "auto_discovery": true
+    },
+    "commit_proactive": {
+      "tool_id": "commit_proactive",
+      "name": "commit_proactive.bat",
+      "description": "Script: commit_proactive.bat",
+      "file_path": "30-scripts-tools\\commit_proactive.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379681",
+      "auto_discovery": true
+    },
+    "commit_report": {
+      "tool_id": "commit_report",
+      "name": "commit_report.bat",
+      "description": "Script: commit_report.bat",
+      "file_path": "30-scripts-tools\\commit_report.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379694",
+      "auto_discovery": true
+    },
+    "commit_task": {
+      "tool_id": "commit_task",
+      "name": "commit_task.bat",
+      "description": "Script: commit_task.bat",
+      "file_path": "30-scripts-tools\\commit_task.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379706",
+      "auto_discovery": true
+    },
+    "commit_task_done": {
+      "tool_id": "commit_task_done",
+      "name": "commit_task_done.bat",
+      "description": "Script: commit_task_done.bat",
+      "file_path": "30-scripts-tools\\commit_task_done.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379719",
+      "auto_discovery": true
+    },
+    "commit_top5_done": {
+      "tool_id": "commit_top5_done",
+      "name": "commit_top5_done.bat",
+      "description": "Script: commit_top5_done.bat",
+      "file_path": "30-scripts-tools\\commit_top5_done.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379732",
+      "auto_discovery": true
+    },
+    "critic_cleanup": {
+      "tool_id": "critic_cleanup",
+      "name": "critic-cleanup.bat",
+      "description": "Script: critic-cleanup.bat",
+      "file_path": "30-scripts-tools\\critic-cleanup.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379765",
+      "auto_discovery": true
+    },
+    "critic_file_organize": {
+      "tool_id": "critic_file_organize",
+      "name": "critic-file-organize.bat",
+      "description": "Script: critic-file-organize.bat",
+      "file_path": "30-scripts-tools\\critic-file-organize.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379777",
+      "auto_discovery": true
+    },
+    "critic_git": {
+      "tool_id": "critic_git",
+      "name": "critic-git.bat",
+      "description": "Script: critic-git.bat",
+      "file_path": "30-scripts-tools\\critic-git.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379789",
+      "auto_discovery": true
+    },
+    "critic_tools": {
+      "tool_id": "critic_tools",
+      "name": "critic-tools.bat",
+      "description": "Script: critic-tools.bat",
+      "file_path": "30-scripts-tools\\critic-tools.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379803",
+      "auto_discovery": true
+    },
+    "critic": {
+      "tool_id": "critic",
+      "name": "critic.bat",
+      "description": "Script: critic.bat",
+      "file_path": "30-scripts-tools\\critic.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379816",
+      "auto_discovery": true
+    },
+    "final_commit": {
+      "tool_id": "final_commit",
+      "name": "final_commit.bat",
+      "description": "Script: final_commit.bat",
+      "file_path": "30-scripts-tools\\final_commit.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379840",
+      "auto_discovery": true
+    },
+    "fix_critic": {
+      "tool_id": "fix_critic",
+      "name": "fix_critic.bat",
+      "description": "Script: fix_critic.bat",
+      "file_path": "30-scripts-tools\\fix_critic.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379853",
+      "auto_discovery": true
+    },
+    "fix_remaining": {
+      "tool_id": "fix_remaining",
+      "name": "fix_remaining.bat",
+      "description": "Script: fix_remaining.bat",
+      "file_path": "30-scripts-tools\\fix_remaining.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379867",
+      "auto_discovery": true
+    },
+    "git_commit": {
+      "tool_id": "git_commit",
+      "name": "git_commit.bat",
+      "description": "Script: git_commit.bat",
+      "file_path": "30-scripts-tools\\git_commit.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379882",
+      "auto_discovery": true
+    },
+    "git_commit_anomaly": {
+      "tool_id": "git_commit_anomaly",
+      "name": "git_commit_anomaly.bat",
+      "description": "Script: git_commit_anomaly.bat",
+      "file_path": "30-scripts-tools\\git_commit_anomaly.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379894",
+      "auto_discovery": true
+    },
+    "git_commit_brainstorm": {
+      "tool_id": "git_commit_brainstorm",
+      "name": "git_commit_brainstorm.bat",
+      "description": "Script: git_commit_brainstorm.bat",
+      "file_path": "30-scripts-tools\\git_commit_brainstorm.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379907",
+      "auto_discovery": true
+    },
+    "git_commit_checkpoint": {
+      "tool_id": "git_commit_checkpoint",
+      "name": "git_commit_checkpoint.bat",
+      "description": "Script: git_commit_checkpoint.bat",
+      "file_path": "30-scripts-tools\\git_commit_checkpoint.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379919",
+      "auto_discovery": true
+    },
+    "git_commit_final": {
+      "tool_id": "git_commit_final",
+      "name": "git_commit_final.bat",
+      "description": "Script: git_commit_final.bat",
+      "file_path": "30-scripts-tools\\git_commit_final.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379930",
+      "auto_discovery": true
+    },
+    "git_commit_final_report": {
+      "tool_id": "git_commit_final_report",
+      "name": "git_commit_final_report.bat",
+      "description": "Script: git_commit_final_report.bat",
+      "file_path": "30-scripts-tools\\git_commit_final_report.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379944",
+      "auto_discovery": true
+    },
+    "git_commit_progress": {
+      "tool_id": "git_commit_progress",
+      "name": "git_commit_progress.bat",
+      "description": "Script: git_commit_progress.bat",
+      "file_path": "30-scripts-tools\\git_commit_progress.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379958",
+      "auto_discovery": true
+    },
+    "git_commit_recovery": {
+      "tool_id": "git_commit_recovery",
+      "name": "git_commit_recovery.bat",
+      "description": "Script: git_commit_recovery.bat",
+      "file_path": "30-scripts-tools\\git_commit_recovery.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379971",
+      "auto_discovery": true
+    },
+    "git_commit_recovery_done": {
+      "tool_id": "git_commit_recovery_done",
+      "name": "git_commit_recovery_done.bat",
+      "description": "Script: git_commit_recovery_done.bat",
+      "file_path": "30-scripts-tools\\git_commit_recovery_done.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379984",
+      "auto_discovery": true
+    },
+    "git_commit_session_end": {
+      "tool_id": "git_commit_session_end",
+      "name": "git_commit_session_end.bat",
+      "description": "Script: git_commit_session_end.bat",
+      "file_path": "30-scripts-tools\\git_commit_session_end.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.379997",
+      "auto_discovery": true
+    },
+    "git_commit_templates": {
+      "tool_id": "git_commit_templates",
+      "name": "git_commit_templates.bat",
+      "description": "Script: git_commit_templates.bat",
+      "file_path": "30-scripts-tools\\git_commit_templates.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380009",
+      "auto_discovery": true
+    },
+    "git_commit_template_done": {
+      "tool_id": "git_commit_template_done",
+      "name": "git_commit_template_done.bat",
+      "description": "Script: git_commit_template_done.bat",
+      "file_path": "30-scripts-tools\\git_commit_template_done.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380021",
+      "auto_discovery": true
+    },
+    "git_wrapper": {
+      "tool_id": "git_wrapper",
+      "name": "git_wrapper.bat",
+      "description": "Script: git_wrapper.bat",
+      "file_path": "30-scripts-tools\\git_wrapper.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380034",
+      "auto_discovery": true
+    },
+    "integrate_all": {
+      "tool_id": "integrate_all",
+      "name": "integrate_all.bat",
+      "description": "Script: integrate_all.bat",
+      "file_path": "30-scripts-tools\\integrate_all.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380049",
+      "auto_discovery": true
+    },
+    "run_workflow": {
+      "tool_id": "run_workflow",
+      "name": "run_workflow.bat",
+      "description": "Script: run_workflow.bat",
+      "file_path": "30-scripts-tools\\run_workflow.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380109",
+      "auto_discovery": true
+    },
+    "safe_shell": {
+      "tool_id": "safe_shell",
+      "name": "safe_shell.bat",
+      "description": "Script: safe_shell.bat",
+      "file_path": "30-scripts-tools\\safe_shell.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380121",
+      "auto_discovery": true
+    },
+    "set_python_utf8": {
+      "tool_id": "set_python_utf8",
+      "name": "set_python_utf8.bat",
+      "description": "Script: set_python_utf8.bat",
+      "file_path": "30-scripts-tools\\set_python_utf8.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380148",
+      "auto_discovery": true
+    },
+    "start_flow": {
+      "tool_id": "start_flow",
+      "name": "start-flow.bat",
+      "description": "Script: start-flow.bat",
+      "file_path": "30-scripts-tools\\start-flow.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380161",
+      "auto_discovery": true
+    },
+    "wf": {
+      "tool_id": "wf",
+      "name": "wf.bat",
+      "description": "Script: wf.bat",
+      "file_path": "30-scripts-tools\\wf.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380190",
+      "auto_discovery": true
+    },
+    "workflow": {
+      "tool_id": "workflow",
+      "name": "workflow.bat",
+      "description": "Script: workflow.bat",
+      "file_path": "30-scripts-tools\\workflow.bat",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380202",
+      "auto_discovery": true
+    },
+    "commit_new_tools": {
+      "tool_id": "commit_new_tools",
+      "name": "commit_new_tools.sh",
+      "description": "Script: commit_new_tools.sh",
+      "file_path": "30-scripts-tools\\commit_new_tools.sh",
+      "category": "script",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:58:44.380880",
+      "auto_discovery": true
+    },
+    "sa_011_backtesting": {
+      "tool_id": "sa_011_backtesting",
+      "name": "Sa_011_Backtesting",
+      "description": "\nStock Analysis - SA-011: Backtesting Engine\nSimple backtesting for trading strategies\n",
+      "file_path": "30-scripts-tools\\sa_011_backtesting.py",
+      "category": "testing",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:59:27.898547",
+      "auto_discovery": true
+    },
+    "sa_022_backtest": {
+      "tool_id": "sa_022_backtest",
+      "name": "Sa_022_Backtest",
+      "description": "60-DATA/stock_022",
+      "file_path": "30-scripts-tools\\sa_022_backtest.py",
+      "category": "testing",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:59:27.902605",
+      "auto_discovery": true
+    },
+    "sa_033_backtest": {
+      "tool_id": "sa_033_backtest",
+      "name": "Sa_033_Backtest",
+      "description": "60-DATA/stock_033",
+      "file_path": "30-scripts-tools\\sa_033_backtest.py",
+      "category": "testing",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:59:27.905896",
+      "auto_discovery": true
+    },
+    "workflow_self_test": {
+      "tool_id": "workflow_self_test",
+      "name": "Workflow_Self_Test",
+      "description": "flow-archive/20260318-universal-workflow-001/workflow.json",
+      "file_path": "30-scripts-tools\\workflow_self_test.py",
+      "category": "testing",
+      "status": "auto_discovered",
+      "discovered_at": "2026-03-20T23:59:27.928082",
+      "auto_discovery": true
     }
   },
   "workflows": {

@@ -1,0 +1,6 @@
+Add advanced brainstorm methods
+
+- brainstorm_scamper.py: SCAMPER 7-operator method
+- brainstorm_sixhats.py: Six Thinking Hats method
+- brainstorm_reverse.py: Reverse Brainstorming method
+- brainstorm_workflow.py: Integrate new methods
