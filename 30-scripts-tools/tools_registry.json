@@ -1,7 +1,8 @@
 {
-  "version": "1.11.70-generic-tools",
+  "version": "1.11.71-phase7-complete",
   "last_updated": "2026-03-20T20:25:03.000000",
   "changes": [
+    "v1.11.71: Add Phase 7 - SA-033 to SA-036 (backtest, risk, executor, analyzer)",
     "v1.11.70: Add BATCH-001, AUDIT-001, INTEGRATE-001 generic tools",
     "v1.11.69: Added HEALTH-001 system health checker",
     "v1.11.68: Added TEST-001 test runner for automated testing",
@@ -6048,6 +6049,50 @@
       "status": "active",
       "usage_count": 0,
       "created_at": "2026-03-20T21:52:00.000000"
+    },
+    "sa-033-backtest": {
+      "tool_id": "sa-033-backtest",
+      "name": "SA-033 Portfolio Backtest Engine",
+      "description": "组合回测引擎 - 多资产组合回测、资金管理、绩效分析",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/sa_033_backtest.py",
+      "category": "stock_analysis",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:55:00.000000"
+    },
+    "sa-034-risk": {
+      "tool_id": "sa-034-risk",
+      "name": "SA-034 Risk Manager",
+      "description": "风险管理器 - 实时风险监控、仓位限制、止损管理、风险预警",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/sa_034_risk.py",
+      "category": "stock_analysis",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:56:00.000000"
+    },
+    "sa-035-executor": {
+      "tool_id": "sa-035-executor",
+      "name": "SA-035 Trade Executor",
+      "description": "交易执行器 - 订单管理、成交确认、交易日志、持仓同步",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/sa_035_executor.py",
+      "category": "stock_analysis",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:57:00.000000"
+    },
+    "sa-036-analyzer": {
+      "tool_id": "sa-036-analyzer",
+      "name": "SA-036 Portfolio Analyzer",
+      "description": "组合分析器 - 绩效分析、风险指标、相关性分析、最优权重",
+      "version": "1.0.0",
+      "file_path": "30-scripts-tools/sa_036_analyzer.py",
+      "category": "stock_analysis",
+      "status": "active",
+      "usage_count": 0,
+      "created_at": "2026-03-20T21:58:00.000000"
     }
   },
   "workflows": {
