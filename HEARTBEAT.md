@@ -139,6 +139,9 @@ py 30-scripts-tools/memory_consciousness_emergence.py status --brief
 
 # 会话压缩检查
 py 30-scripts-tools/auto_session_compressor.py --auto
+
+# TODO 自动更新
+py 30-scripts-tools/auto_todo_updater.py --auto
 ```
 
 ---
