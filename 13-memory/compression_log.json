@@ -44,5 +44,87 @@
     "issues": [
       "2026-03-20.md 超过限制: 10935 > 10000 bytes"
     ]
+  },
+  {
+    "timestamp": "2026-03-20T15:03:35.317250",
+    "before_size_kb": 66.2,
+    "after_size_kb": 66.2,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": [
+      "2026-03-20.md 超过限制: 19663 > 10000 bytes"
+    ]
+  },
+  {
+    "timestamp": "2026-03-20T15:51:57.261066",
+    "before_size_kb": 47.66,
+    "after_size_kb": 47.66,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T15:56:11.690063",
+    "before_size_kb": 48.38,
+    "after_size_kb": 48.38,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T16:10:14.690174",
+    "before_size_kb": 49.24,
+    "after_size_kb": 49.24,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T16:14:37.353210",
+    "before_size_kb": 49.83,
+    "after_size_kb": 49.83,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T16:18:05.525987",
+    "before_size_kb": 50.11,
+    "after_size_kb": 50.11,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T16:19:26.662322",
+    "before_size_kb": 50.11,
+    "after_size_kb": 50.11,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T16:19:48.299650",
+    "before_size_kb": 50.11,
+    "after_size_kb": 50.11,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T16:21:01.899550",
+    "before_size_kb": 50.11,
+    "after_size_kb": 50.11,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
+  },
+  {
+    "timestamp": "2026-03-20T16:21:26.902519",
+    "before_size_kb": 50.11,
+    "after_size_kb": 50.11,
+    "compression_rate": 0.0,
+    "within_limit": true,
+    "issues": []
   }
 ]

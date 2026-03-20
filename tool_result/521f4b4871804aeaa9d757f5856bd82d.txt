@@ -1,0 +1,55 @@
+# tool_name: read_file
+# created_at: 2026-03-20T15:57:43.377861
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 482-530 of 15917)
+    "brainstorm-action": {
+      "tool_id": "brainstorm-action",
+      "name": "Brainstorm Action",
+      "description": "头脑风暴行动规划工具 - 将头脑风暴结果转化为可执行的行动计划，包含步骤、时间、负责人",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\brainstorm_action.py",
+      "parameters": [
+        {
+          "name": "prioritized_ideas",
+          "type": "list",
+          "required": true,
+          "description": "已排序的想法"
+        },
+        {
+          "name": "timeline",
+          "type": "string",
+          "required": false,
+          "description": "时间线 (如\"本周\", \"本月\")"
+        }
+      ],
+      "validation": {
+        "output_file": "30-scripts-tools/action_plan.md",
+        "min_actions": 3
+      },
+      "triggers": [
+        "manual"
+      ],
+      "review_required": false,
+      "blocking": true,
+      "timeout_seconds": 600,
+      "category": "automation",
+      "categorized_at": "2026-03-19T17:20:34.330705",
+      "categorized_method": "auto",
+      "usage_count": 1,
+      "usage_files": [
+        "auto_categorize_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013724",
+      "quality_score": 56.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      },
+      "examples": [
+        "py brainstorm_action.py --prioritized_ideas \"[...]\" --timeline \"本周\""
+      ],
+
+[15387 more lines. Use start_line=531 to continue.]

@@ -1,0 +1,205 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T16:00:25.895618
+# ---
+00-UTILS\current-files-full.json:3593:>         "FullName":  "D:\\OpenClaw\\workspace\\30-scripts\\intent-belief-integration\\test_intentkit\\intentkit\\intentkit\\skills\\basename\\register.py",
+00-UTILS\FILE_INDEX_2026-03-07.csv:1672:> "D:\OpenClaw\workspace\43-reddit\daily\2026\2026-03\2026-03-02\20260302-201515-D ICLR 2026 Registration Process.md","1254","2026/3/6 14:12:14"
+02-DAILY-BRIEF\README.md:144:> Register-ScheduledTask -TaskName "Daily-Brief" `
+05-AI-RESEARCH\multi-agent\multi-agent-framework.py:169:>     def register_agent(self, agent_id: str):
+05-AI-RESEARCH\multi-agent\multi-agent-framework.py:174:>                 print(f"  [BUS] Registered agent: {agent_id}")
+05-AI-RESEARCH\multi-agent\multi-agent-framework.py:207:>         self.message_bus.register_agent(agent_id)
+05-AI-RESEARCH\user-authentication.py:46:>     def register_user(self, username: str, password: str, email: str = None) -> Dict:
+05-AI-RESEARCH\user-authentication.py:59:>         return {"status": "success", "message": "User registered"}
+05-AI-RESEARCH\user-authentication.py:136:>     result = auth.register_user("admin", "password123", "admin@example.com")
+07-DATA\.github\workflows\ci.yml:65:>     # - name: Push to Registry (可选)
+07-DATA\.github\workflows\ci_from_30-scripts-脚本工具.yml:65:>     # - name: Push to Registry (可选)
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_TaskSchedConfig_v1.0.ps1:31:>     Register-ScheduledTask -TaskName $taskName -Trigger $trigger -Action $action -Settings $settings -Force
+08-AUTOMATION\scheduled-tasks\SCRIPT_Arxiv_TaskSchedConfig_v1.0.ps1:52:>     Register-ScheduledTask -TaskName $taskName -Trigger $trigger -Action $action -Settings $settings -Force
+08-AUTOMATION\scheduled-tasks\SCRIPT_Fix_ArxivTask_v1.0.ps1:24:> Register-ScheduledTask -TaskName $TaskName `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AllTasks_v1.0.ps1:19:>     Register-ScheduledTask -TaskName "OpenClaw-Arxiv-Collector" -Action $action -Trigger $trigger -Principal $principal -Description "Daily arXiv paper collection" -ErrorAction SilentlyContinue
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AllTasks_v1.0.ps1:31:>     Register-ScheduledTask -TaskName "OpenClaw-Medium-Watcher" -Action $action -Trigger $trigger -Principal $principal -Description "Daily Medium article collection" -ErrorAction SilentlyContinue
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AllTasks_v1.0.ps1:43:>     Register-ScheduledTask -TaskName "OpenClaw-Nightly-Security-Audit" -Action $action -Trigger $trigger -Principal $principal -Description "Daily security audit" -ErrorAction SilentlyContinue
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AllTasks_v1.0.ps1:55:>     Register-ScheduledTask -TaskName "OpenClaw-Memory-Distiller" -Action $action -Trigger $trigger -Principal $principal -Description "Weekly memory distillation" -ErrorAction SilentlyContinue
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AllTasks_v1.0.ps1:67:>     Register-ScheduledTask -TaskName "OpenClaw-Daily-Collect" -Action $action -Trigger $trigger -Principal $principal -Description "Daily collection from all sources" -ErrorAction SilentlyContinue
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AllTasks_v1.0.ps1:79:>     Register-ScheduledTask -TaskName "OpenClaw-Weekly-Report" -Action $action -Trigger $trigger -Principal $principal -Description "Weekly report generation" -ErrorAction SilentlyContinue
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AuditTasks_v1.0.ps1:19:>     Register-ScheduledTask -TaskName "OpenClaw-Weekly-Audit" `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AuditTasks_v1.0.ps1:42:>     Register-ScheduledTask -TaskName "OpenClaw-Monthly-Heat-Analysis" `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AuditTasks_v1.0.ps1:67:> Write-Host "  Unregister-ScheduledTask -TaskName 'OpenClaw-Weekly-Audit' -Confirm:`$false"
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_AuditTasks_v1.0.ps1:68:> Write-Host "  Unregister-ScheduledTask -TaskName 'OpenClaw-Monthly-Heat-Analysis' -Confirm:`$false"
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_ObsidianSyncTask_v1.0.ps1:42:>     Unregister-ScheduledTask -TaskName $taskName -Confirm:$false -ErrorAction SilentlyContinue
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_ObsidianSyncTask_v1.0.ps1:44:>     Register-ScheduledTask `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_SecurityAuditTask_v1.0.ps1:46:>     Register-ScheduledTask `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_Tasks_v1.0.ps1:69:>         Register-ScheduledTask -TaskName $task.Name `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_Tasks_v1.0.ps1:94:> Write-Host "  .\setup-tasks.ps1 -Unregister" -ForegroundColor Gray
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_WindowsTasks_v1.0.ps1:16:> Register-ScheduledTask -TaskName "OpenClaw-Arxiv-Collect" `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_WindowsTasks_v1.0.ps1:25:> Register-ScheduledTask -TaskName "OpenClaw-Medium-Watcher" `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_WindowsTasks_v1.0.ps1:36:> Register-ScheduledTask -TaskName "OpenClaw-Git-AutoCommit" `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_WindowsTasks_v1.0.ps1:45:> Register-ScheduledTask -TaskName "OpenClaw-File-Archive" `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_WindowsTasks_v1.0.ps1:54:> Register-ScheduledTask -TaskName "OpenClaw-Log-Cleanup" `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_WindowsTasks_v1.0.ps1:63:> Register-ScheduledTask -TaskName "OpenClaw-Cache-Cleanup" `
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_WindowsTasks_v1.0.ps1:77:> Write-Host "  - 删除任务：Unregister-ScheduledTask -TaskName '任务名' -Confirm:false"
+08-AUTOMATION\scheduled-tasks\setup-arxiv-orchestrator-task.ps1:61:> Register-ScheduledTask `
+08-AUTOMATION\scheduled-tasks\setup-daily-brief-task.ps1:19:>     Register-ScheduledTask -TaskName $TaskName -Action $action -Trigger $trigger -Settings $settings -Force
+08-AUTOMATION\scheduled-tasks\setup-daily-brief-task.ps1:23:>     Write-Host "  删除任务：Unregister-ScheduledTask -TaskName `"$TaskName`" -Confirm:`$false"
+08-AUTOMATION\scheduled-tasks\setup-domain-cron.ps1:77:>     Register-ScheduledTask -TaskName $TaskName `
+14-PLUGIN\marketplace\plugin_marketplace.py:16:>     def __init__(self, registry_url='https://plugins.example.com'):
+14-PLUGIN\marketplace\plugin_marketplace.py:17:>         self.registry_url = registry_url
+14-PLUGIN\marketplace\plugin_marketplace.py:19:>         self.registry_file = self.plugins_dir / 'registry.json'
+14-PLUGIN\marketplace\plugin_marketplace.py:21:>     def register_plugin(self, name: str, version: str, description: str, author: str) -> Dict:
+14-PLUGIN\marketplace\plugin_marketplace.py:33:>         registry = self.load_registry()
+14-PLUGIN\marketplace\plugin_marketplace.py:34:>         registry['plugins'].append(plugin_info)
+14-PLUGIN\marketplace\plugin_marketplace.py:35:>         self.save_registry(registry)
+14-PLUGIN\marketplace\plugin_marketplace.py:39:>     def load_registry(self) -> Dict:
+14-PLUGIN\marketplace\plugin_marketplace.py:41:>         if self.registry_file.exists():
+14-PLUGIN\marketplace\plugin_marketplace.py:42:>             with open(self.registry_file, 'r') as f:
+14-PLUGIN\marketplace\plugin_marketplace.py:46:>     def save_registry(self, registry: Dict):
+14-PLUGIN\marketplace\plugin_marketplace.py:49:>         with open(self.registry_file, 'w') as f:
+14-PLUGIN\marketplace\plugin_marketplace.py:50:>             json.dump(registry, f, indent=2)
+14-PLUGIN\marketplace\plugin_marketplace.py:54:>         registry = self.load_registry()
+14-PLUGIN\marketplace\plugin_marketplace.py:55:>         return registry.get('plugins', [])
+14-PLUGIN\marketplace\plugin_marketplace.py:68:>         registry = self.load_registry()
+14-PLUGIN\marketplace\plugin_marketplace.py:69:>         plugin = next((p for p in registry['plugins'] if p['name'] == name), None)
+14-PLUGIN\marketplace\plugin_marketplace.py:76:>         plugin_url = f"{self.registry_url}/plugins/{name}/{name}.py"
+14-PLUGIN\marketplace\plugin_marketplace.py:86:>                 self.save_registry(registry)
+14-PLUGIN\marketplace\plugin_marketplace.py:132:>     # marketplace.register_plugin(
+add_missing_key_tools.py:4:> 添加缺失的关键工具到 registry
+add_missing_key_tools.py:11:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+add_missing_key_tools.py:14:>     with open(registry_file, "r", encoding="utf-8") as f:
+add_missing_key_tools.py:15:>         registry = json.load(f)
+add_missing_key_tools.py:40:>         if tool_id in registry["tools"] or tool_name in registry["tools"]:
+add_missing_key_tools.py:51:>         registry["tools"][tool_id] = {
+add_missing_key_tools.py:66:>     registry["version"] = "1.11.39-restored"
+add_missing_key_tools.py:67:>     registry["last_updated"] = datetime.now().isoformat()
+add_missing_key_tools.py:70:>     with open(registry_file, "w", encoding="utf-8") as f:
+add_missing_key_tools.py:71:>         json.dump(registry, f, ensure_ascii=False, indent=2)
+add_missing_key_tools.py:74:>     print(f"新版本：{registry['version']}")
+add_security_rules_to_registry.py:4:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+add_security_rules_to_registry.py:5:>     registry = json.load(f)
+add_security_rules_to_registry.py:48:> # 添加到 registry
+add_security_rules_to_registry.py:49:> registry['enforcement_rules']['security'] = security_rules
+add_security_rules_to_registry.py:52:> registry['version'] = "1.11.55-security-rules-2026-03-20"
+add_security_rules_to_registry.py:55:> registry['changes'].insert(0, "v1.11.55: Added mandatory security rules (2026-03-20)")
+add_security_rules_to_registry.py:58:> with open('30-scripts-tools/tools_registry.json', 'w', encoding='utf-8') as f:
+add_security_rules_to_registry.py:59:>     json.dump(registry, f, indent=2, ensure_ascii=False)
+add_security_rules_to_registry.py:62:> print(f"  版本：{registry['version']}")
+add_security_rules_to_registry.py:64:> print(f"  允许工具：{len(registry['enforcement_rules']['security']['allowed_tools'])} 个")
+anti_bypass_engine.py:99:>             Path("30-scripts-tools/tools_registry.json"),
+auto_backup.py:52:>             "30-scripts-tools/tools_registry.json",
+auto_recovery.py:22:> TOOLS_REGISTRY = Path("30-scripts-tools/tools_registry.json")
+auto_recovery.py:59:>             "tools_registry.json": TOOLS_REGISTRY,
+auto_recovery.py:177:>         elif "tools_registry" in file_name:
+auto_recovery.py:178:>             target = TOOLS_REGISTRY
+auto_recovery.py:212:>             elif "tools_registry" in file_name:
+auto_recovery.py:213:>                 self._log("Rebuild tools_registry", "FAIL", "Cannot auto-rebuild registry")
+auto_todo_updater.py:31:>         self.tools_registry = self.workspace / "30-scripts-tools" / "tools_registry.json"
+auto_todo_updater.py:61:>             filepath = self.tools_registry.parent / filename
+BLOCKING-CONFIG-SUMMARY.md:65:> - ✅ 已注册到 tools_registry.json
+change_log.json:12:>           "description": "New tool registered: auto-critic"
+change_log.json:18:>           "description": "New tool registered: session-compress"
+change_log.json:24:>           "description": "New tool registered: context-verify"
+change_log.json:30:>           "description": "New tool registered: memory-consistency-checker"
+change_log.json:36:>           "description": "New tool registered: memory-benchmark"
+change_log.json:42:>           "description": "New tool registered: memory-tag-search"
+change_log.json:48:>           "description": "New tool registered: memory-index-generator"
+change_log.json:54:>           "description": "New tool registered: git-commit-push"
+change_log.json:67:>       "registry_version": "1.0.0"
+check_all_existing_tools.py:12:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+check_all_existing_tools.py:58:>     # 加载 registry，检查哪些工具有对应文件
+check_all_existing_tools.py:60:>     print(f"Registry 工具 vs 实际文件匹配")
+check_all_existing_tools.py:63:>     with open(registry_file, "r", encoding="utf-8") as f:
+check_all_existing_tools.py:64:>         registry = json.load(f)
+check_all_existing_tools.py:66:>     tools = registry.get("tools", {})
+check_all_existing_tools.py:104:>     print(f"  Registry 匹配：{result['matched_tools']}")
+check_all_existing_tools.py:105:>     print(f"  Registry 不匹配：{result['unmatched_tools']}")
+check_existing_tools_fixed.py:11:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+check_existing_tools_fixed.py:42:>     # 加载 registry
+check_existing_tools_fixed.py:44:>     print("Registry 工具 vs 实际文件匹配")
+check_existing_tools_fixed.py:47:>     with open(registry_file, "r", encoding="utf-8") as f:
+check_existing_tools_fixed.py:48:>         registry = json.load(f)
+check_existing_tools_fixed.py:50:>     tools = registry.get("tools", {})
+check_existing_tools_fixed.py:51:>     print(f"Registry 工具总数：{len(tools)}\n")
+check_existing_tools_fixed.py:109:>     print(f"  Registry 匹配：{result['matched_tools']}")
+check_existing_tools_fixed.py:110:>     print(f"  Registry 不匹配：{result['unmatched_tools']}")
+check_git_version.py:4:> # 获取 7f1c44e 版本的 registry
+check_git_version.py:6:>     ["git", "show", "7f1c44e:30-scripts-tools/tools_registry.json"],
+check_git_version.py:13:>     registry = json.loads(result.stdout)
+check_git_version.py:14:>     tools = registry.get("tools", {})
+check_git_version.py:16:>     print(f"Registry 版本：{registry.get('version', 'N/A')}")
+check_kept_tools.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_kept_tools.py:4:>     registry = json.load(f)
+check_kept_tools.py:6:> print(f"保留的工具 ({len(registry['tools'])}):")
+check_kept_tools.py:7:> for tool_id, info in registry["tools"].items():
+check_kept_tools2.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_kept_tools2.py:4:>     registry = json.load(f)
+check_kept_tools2.py:6:> print(f"保留的工具 ({len(registry['tools'])}):")
+check_kept_tools2.py:7:> for tool_id, info in registry["tools"].items():
+check_missing_tools.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_missing_tools.py:5:>     registry = json.load(f)
+check_missing_tools.py:7:> tools = registry["tools"]
+check_missing_tools.py:13:> # 查找 registry 中不存在的文件
+check_missing_tools.py:14:> missing_from_registry = []
+check_missing_tools.py:17:>         missing_from_registry.append(f)
+check_missing_tools.py:19:> print("实际存在但 Registry 中没有的工具 (前 30):")
+check_missing_tools.py:20:> for f in missing_from_registry[:20]:
+check_registry.py:4:> registry_file = Path("30-scripts-tools/tools_registry.json")
+check_registry.py:5:> if registry_file.exists():
+check_registry.py:6:>     with open(registry_file, "r", encoding="utf-8") as f:
+check_registry.py:7:>         registry = json.load(f)
+check_registry.py:9:>     tools = registry.get("tools", {})
+check_registry.py:19:>     print("ERROR: tools_registry.json 不存在")
+check_registry_count.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_registry_count.py:4:>     registry = json.load(f)
+check_registry_count.py:6:> print(f"工具总数：{len(registry.get('tools', {}))}")
+check_registry_format.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_registry_format.py:4:>     registry = json.load(f)
+check_registry_format.py:7:> tool = registry["tools"].get("workflow-enforcer", {})
+check_registry_format.py:14:>     tool = registry["tools"].get(tool_id, {})
+check_registry_structure.py:3:> """Check tools_registry.json structure"""
+check_registry_structure.py:7:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+check_registry_structure.py:8:>     registry = json.load(f)
+check_registry_structure.py:10:> print(f"Type of 'tools': {type(registry.get('tools'))}")
+check_registry_structure.py:11:> print(f"Keys: {list(registry.keys())[:10]}")
+check_registry_structure.py:13:> if isinstance(registry.get('tools'), dict):
+check_registry_structure.py:14:>     print(f"Tools dict keys (first 5): {list(registry['tools'].keys())[:5]}")
+check_registry_structure.py:15:>     print(f"Total tools: {len(registry['tools'])}")
+check_restored.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_restored.py:4:>     registry = json.load(f)
+check_restored.py:6:> print(f"Registry 版本：{registry.get('version', 'N/A')}")
+check_restored.py:7:> print(f"工具总数：{len(registry.get('tools', {}))}")
+check_restored.py:8:> print(f"最后更新：{registry.get('last_updated', 'N/A')}")
+check_tool_files.py:4:> registry_file = Path("30-scripts-tools/tools_registry.json")
+check_tool_files.py:5:> with open(registry_file, "r", encoding="utf-8") as f:
+check_tool_files.py:6:>     registry = json.load(f)
+check_tool_files.py:8:> tools = registry.get("tools", {})
+check_tool_registration.py:11:> def check_tool_registration():
+check_tool_registration.py:15:>     print("Tool Registration Compliance Check")
+check_tool_registration.py:19:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+check_tool_registration.py:26:>     with open(registry_file, 'r', encoding='utf-8') as f:
+check_tool_registration.py:27:>         registry = json.load(f)
+check_tool_registration.py:29:>     registered_tools = set(registry['tools'].keys())
+check_tool_registration.py:32:>     unregistered = []
+check_tool_registration.py:36:>         # 检查是否在 registry 中
+check_tool_registration.py:37:>         is_registered = False
+check_tool_registration.py:38:>         for reg_tool in registered_tools:
+check_tool_registration.py:40:>                 is_registered = True
+check_tool_registration.py:43:>         if not is_registered:
+check_tool_registration.py:46:>                 unregistered.append(py_file.name)
+check_tool_registration.py:50:>     print(f"已注册工具：{len(registered_tools)}")
+check_tool_registration.py:51:>     print(f"未注册工具：{len(unregistered)}")
+check_tool_registration.py:53:>     if unregistered:
+check_tool_registration.py:55:>         for f in unregistered[:10]:
+check_tool_registration.py:58:>         if len(unregistered) > 10:
+check_tool_registration.py:59:>             print(f"  ... 还有 {len(unregistered)-10} 个")
+check_tool_registration.py:62:>         print("  py 30-scripts-tools/register_tool.py <工具文件名>")
+check_tool_registration.py:70:>     success = check_tool_registration()
+check_tool_registry.py:4:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+check_tool_registry.py:5:>     registry = json.load(f)
+check_tool_registry.py:7:> tools = registry.get('tools', {})
+check_tool_structure.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_tool_structure.py:4:>     registry = json.load(f)
+check_tool_structure.py:7:> first_tool_id = list(registry["tools"].keys())[0]
+check_tool_structure.py:8:> first_tool = registry["tools"][first_tool_id]
+CLI-ENHANCEMENT-GUIDE.md:14:> | **命令分类** | 17 个 | registry/files/backup/git/security 等 |
+CLI-ENHANCEMENT-GUIDE.md:175:> **原有分类:** 8 个 (registry/analytics/orchestrator/memory/cache/workflow/knowledge/system)
+CLI-ENHANCEMENT-GUIDE.md:369:> py tool_registry.py --scan
+
+(Results truncated at 200 matches.)

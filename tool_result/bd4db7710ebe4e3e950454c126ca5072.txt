@@ -1,0 +1,47 @@
+# tool_name: glob_search
+# created_at: 2026-03-20T15:53:23.742088
+# ---
+06-research\领域研究\cnt-lig-paper\submission\tomorrow-biorender-workflow.md
+08-collectors\medium-文章\Medium\Raw\medium-2026-03-10-Resolving-Parallel-Workflow-Conflicts-with-Partial.md
+08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-201616-I built a tool to automate your workflow after recording yourself doing the task.md
+10-RESEARCH\domain-research\领域研究\cnt-lig-paper\submission\tomorrow-biorender-workflow.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\ARXIV-WORKFLOW-QUICKSTART.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\GIT-WORKFLOW-SINGLE-COMMIT.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\WORKFLOW-OPTIMIZATION-COMPLETE.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\WORKFLOW-OPTIMIZATION-V2.md
+13-memory\dialog-workflow-enforcement.md
+13-memory\stock-workflow-optimization-2026-03-20.md
+13-memory\workflow-compliance-fix-2026-03-20.md
+13-memory\workflow-enforcement-2026-03-20.md
+13-memory\workflow-enforcement-failure-2026-03-20.md
+13-memory\workflow-enforcement-implementation-2026-03-20.md
+13-memory\workflow-enforcement-integration-complete.md
+13-memory\workflow-full-test-report-2026-03-20.md
+15-docs\WORKFLOW-BRAINSTORM.md
+21-reports\stock-analysis-workflow-optimization.md
+30-scripts-tools\BRAINSTORM-WORKFLOW-DESIGN.md
+30-scripts-tools\BRAINSTORM-WORKFLOW-GUIDE.md
+30-scripts-tools\DEFAULT-WORKFLOW.md
+30-scripts-tools\MULTI-WORKFLOW-FLOW-ISOLATION.md
+30-scripts-tools\UNIVERSAL-WORKFLOW-SUMMARY.md
+30-scripts-tools\WORKFLOW-ENFORCER.md
+30-scripts-tools\WORKFLOW-OPTIMIZATION-PLAN.md
+30-scripts-tools\WORKFLOW_ENFORCEMENT.md
+30-scripts-tools\WORKFLOW_ENFORCEMENT_RULES.md
+40-TOOLS\automation\workflows\WORKFLOW_DASHBOARD.md
+40-TOOLS\automation\workflows\WORKFLOW_INDEX.md
+60-DATA\collectors\08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-201616-I built a tool to automate your workflow after recording yourself doing the task.md
+99-archive\docs-reports\guides\GIT-WORKFLOW-SINGLE-COMMIT.md
+99-archive\docs-reports\reports\WORKFLOW-OPTIMIZATION-COMPLETE.md
+99-archive\docs-reports\reports\WORKFLOW-OPTIMIZATION-V2.md
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Raw\medium-2026-03-10-Resolving-Parallel-Workflow-Conflicts-with-Partial.md
+99-backups\report-cleanup-20260318-103015\10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\WORKFLOW-V3-ITERATION-REPORT.md
+99-backups\report-cleanup-20260318-103015\99-archive\docs-reports\reports\WORKFLOW-V3-ITERATION-REPORT.md
+flow-archive\20260318-universal-workflow-001\brainstorm-workflow-optimization.md
+flow-archive\20260318-universal-workflow-001\WORKFLOW-100PERCENT-COMPLETE.md
+flow-archive\20260318-universal-workflow-001\WORKFLOW-BRAINSTORM-REPORT.md
+flow-archive\20260318-universal-workflow-001\WORKFLOW-DIAGRAM.md
+flow-archive\20260318-universal-workflow-001\WORKFLOW-PROTECTION-SYSTEM.md
+flow-archive\20260318-universal-workflow-001\WORKFLOW-PROTECTION-V2.md
+flow-archive\20260318-universal-workflow-001\workflow-v3-simple.md
+flow-archive\20260321-dialogue-lite-001\DIALOGUE-WORKFLOW.md

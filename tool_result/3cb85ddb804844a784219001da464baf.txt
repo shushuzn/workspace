@@ -1,0 +1,176 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T15:03:32.510915
+# ---
+{
+  "timestamp": "2026-03-20T15:03:11.182773",
+  "workflow_version": "2.1.0",
+  "tests": {
+    "tool_availability": {
+      "total": 17,
+      "passed": 17,
+      "failed": 0,
+      "skipped": 0,
+      "details": [
+        {
+          "step_id": 1,
+          "name": "会话前检查",
+          "tool": "pre-session-hook.py",
+          "status": "pass",
+          "size_kb": 7.73
+        },
+        {
+          "step_id": 2,
+          "name": "上下文加载验证",
+          "tool": "context_verify.py",
+          "status": "pass",
+          "size_kb": 1.23
+        },
+        {
+          "step_id": 3,
+          "name": "Flow ID 绑定",
+          "tool": "workflow_scheduler.py",
+          "status": "pass",
+          "size_kb": 1.96
+        },
+        {
+          "step_id": 4,
+          "name": "任务解析",
+          "tool": "task_analyzer.py",
+          "status": "pass",
+          "size_kb": 1.15
+        },
+        {
+          "step_id": 5,
+          "name": "工具选择与调度",
+          "tool": "workflow_optimizer.py",
+          "status": "pass",
+          "size_kb": 11.32
+        },
+        {
+          "step_id": 6,
+          "name": "工具执行",
+          "tool": "tool_executor.py",
+          "status": "pass",
+          "size_kb": 6.09
+        },
+        {
+          "step_id": 7,
+          "name": "验证与保障",
+          "tool": "workflow_optimizer.py",
+          "status": "pass",
+          "size_kb": 11.32
+        },
+        {
+          "step_id": 8,
+          "name": "记忆持久化",
+          "tool": "memory_distiller.py",
+          "status": "pass",
+          "size_kb": 7.41
+        },
+        {
+          "step_id": 9,
+          "name": "元认知评估",
+          "tool": "metacognition_monitor.py",
+          "status": "pass",
+          "size_kb": 5.74
+        },
+        {
+          "step_id": 10,
+          "name": "批判者审查",
+          "tool": "embedded_critic.py",
+          "status": "pass",
+          "size_kb": 8.41
+        },
+        {
+          "step_id": 11,
+          "name": "质量评分",
+          "tool": "aai_scorer.py",
+          "status": "pass",
+          "size_kb": 7.98
+        },
+        {
+          "step_id": 12,
+          "name": "核心文件压缩",
+          "tool": "core_files_compressor.py",
+          "status": "pass",
+          "size_kb": 14.7
+        },
+        {
+          "step_id": 13,
+          "name": "会话压缩",
+          "tool": "post_session_compress.py",
+          "status": "pass",
+          "size_kb": 7.75
+        },
+        {
+          "step_id": 14,
+          "name": "会话结束",
+          "tool": "session_end.py",
+          "status": "pass",
+          "size_kb": 7.0
+        },
+        {
+          "step_id": 15,
+          "name": "Git 提交",
+          "tool": "git_commit_helper.py",
+          "status": "pass",
+          "size_kb": 3.91
+        },
+        {
+          "step_id": 16,
+          "name": "文档生成",
+          "tool": "auto_doc_generator.py",
+          "status": "pass",
+          "size_kb": 11.19
+        },
+        {
+          "step_id": 17,
+          "name": "清理临时文件",
+          "tool": "temp_file_cleaner.py",
+          "status": "pass",
+          "size_kb": 9.5
+        }
+      ],
+      "pass_rate": 100.0
+    },
+    "step_dependencies": {
+      "total": 17,
+      "passed": 17,
+      "warnings": 0,
+      "details": [],
+      "mandatory_count": 7,
+      "parallel_groups": 2
+    },
+    "critical_path": {
+      "mandatory_steps": [
+        1,
+        2,
+        6,
+        10,
+        12,
+        13,
+        14
+      ],
+      "count": 7,
+      "estimated_time": 150,
+      "health": "good"
+    },
+    "output_requirements": {
+      "required_outputs": [
+        "execution_state",
+        "tool_call_log",
+        "session_summary",
+        "compression_log"
+      ],
+      "checked": [
+        "execution_state",
+        "tool_call_log",
+        "session_summary",
+        "compression_log"
+      ],
+      "missing": []
+    }
+  },
+  "health_score": 100,
+  "health_level": "excellent"
+}

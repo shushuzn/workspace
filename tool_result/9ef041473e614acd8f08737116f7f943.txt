@@ -1,0 +1,60 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T16:14:32.724095
+# ---
+
+============================================================
+First Run (cold)
+============================================================
+
+============================================================
+Stock Analysis Pipeline Enhanced v1.1.0
+Symbol: AAPL
+Cache: ON | Parallel: ON
+============================================================
+
+[Stage 1] Loading Data...
+  [CACHE SAVE] Stock data
+
+[Stage 2] Technical Indicators...
+  [CACHE SAVE] Indicators
+
+[Stage 3] Trend Analysis...
+  [CACHE SAVE] Trend
+
+============================================================
+Pipeline Complete!
+Total Time: 1.11s
+Cache Stats: 0 hits, 3 misses, 0.0%
+============================================================
+
+============================================================
+Second Run (warm)
+============================================================
+
+============================================================
+Stock Analysis Pipeline Enhanced v1.1.0
+Symbol: AAPL
+Cache: ON | Parallel: ON
+============================================================
+
+[Stage 1] Loading Data...
+  [CACHE HIT] Stock data
+
+[Stage 2] Technical Indicators...
+  [CACHE HIT] Indicators
+
+[Stage 3] Trend Analysis...
+  [CACHE HIT] Trend
+
+============================================================
+Pipeline Complete!
+Total Time: 0.00s
+Cache Stats: 3 hits, 3 misses, 50.0%
+============================================================
+
+============================================================
+Cache Statistics
+============================================================
+  Hits: 3
+  Misses: 3
+  Hit Rate: 50.0%

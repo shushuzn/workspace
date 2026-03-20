@@ -38,19 +38,19 @@
       "filter_tool_messages": false,
       "filter_thinking": false,
       "dm_policy": "open",
-      "group_policy": "open",
+      "group_policy": "allowlist",
       "allow_from": [],
       "deny_message": "",
       "require_mention": false,
-      "client_id": "",
-      "client_secret": "",
+      "client_id": "cli_a93a6936eff81bcd",
+      "client_secret": "vWIWGFZPYBi6clKb1IV5JfDGnWrT1bra",
       "message_type": "markdown",
       "card_template_id": "",
       "card_template_key": "content",
       "robot_code": ""
     },
     "feishu": {
-      "enabled": false,
+      "enabled": true,
       "bot_prefix": "",
       "filter_tool_messages": false,
       "filter_thinking": false,
@@ -59,8 +59,8 @@
       "allow_from": [],
       "deny_message": "",
       "require_mention": false,
-      "app_id": "",
-      "app_secret": "",
+      "app_id": "cli_a93a6936eff81bcd",
+      "app_secret": "vWIWGFZPYBi6clKb1IV5JfDGnWrT1bra",
       "encrypt_key": "",
       "verification_token": ""
     },
@@ -230,19 +230,33 @@
   "last_dispatch": {
     "channel": "console",
     "user_id": "default",
-    "session_id": "1773981047144"
+    "session_id": "1773992999317"
   },
   "running": {
     "max_iters": 50,
     "token_count_model": "default",
     "token_count_estimate_divisor": 3.75,
     "token_count_use_mirror": false,
-    "max_input_length": 1310720,
-    "memory_compact_ratio": 0.6,
+    "max_input_length": 131072,
+    "memory_compact_ratio": 0.75,
     "memory_reserve_ratio": 0.1,
-    "enable_tool_result_compact": true,
-    "tool_result_compact_keep_n": 3,
-    "history_max_length": 10000
+    "tool_result_compact_recent_n": 2,
+    "tool_result_compact_old_threshold": 1000,
+    "tool_result_compact_recent_threshold": 30000,
+    "tool_result_compact_retention_days": 7,
+    "history_max_length": 10000,
+    "embedding_config": {
+      "backend": "openai",
+      "api_key": "",
+      "base_url": "",
+      "model_name": "",
+      "dimensions": 1024,
+      "enable_cache": true,
+      "use_dimensions": false,
+      "max_cache_size": 2000,
+      "max_input_length": 8192,
+      "max_batch_size": 10
+    }
   },
   "llm_routing": {
     "enabled": false,
@@ -251,10 +265,6 @@
       "provider_id": "",
       "model": ""
     }
-  },
-  "active_model": {
-    "provider_id": "aliyun-codingplan",
-    "model": "glm-5"
   },
   "language": "en",
   "system_prompt_files": [
@@ -286,6 +296,18 @@
         "name": "edit_file",
         "enabled": true,
         "description": "Edit file using find-and-replace",
+        "display_to_user": true
+      },
+      "grep_search": {
+        "name": "grep_search",
+        "enabled": true,
+        "description": "Search file contents by pattern",
+        "display_to_user": true
+      },
+      "glob_search": {
+        "name": "glob_search",
+        "enabled": true,
+        "description": "Find files matching a glob pattern",
         "display_to_user": true
       },
       "browser_use": {

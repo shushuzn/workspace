@@ -1,0 +1,19 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T16:19:48.338786
+# ---
+core_files_compressor.py:22:>   py core_files_compressor.py --check
+core_files_compressor.py:23:>   py core_files_compressor.py --compress
+core_files_compressor.py:24:>   py core_files_compressor.py --report
+core_files_compressor.py:378:>             report.append("  1. 运行: py core_files_compressor.py --compress")
+core_files_compressor.py:419:>         print("  py core_files_compressor.py --check     检查核心文件")
+core_files_compressor.py:420:>         print("  py core_files_compressor.py --compress  压缩核心文件")
+core_files_compressor.py:421:>         print("  py core_files_compressor.py --report    生成报告")
+post_session_compress.py:26:> from core_files_compressor import CoreFilesCompressor
+pre-session-hook.py:26:> from core_files_compressor import CoreFilesCompressor
+pre-session-hook.py:210:>             report.append("  2. 运行: py core_files_compressor.py --compress")
+session_end.py:29:> from core_files_compressor import CoreFilesCompressor
+session_end.py:119:>             summary.append("建议: 运行 py core_files_compressor.py --compress")
+tool_call_log.jsonl:60:> {"timestamp": "2026-03-20T14:38:50+08:00", "session_id": "session-20260320145000", "tool_id": "core_files_compressor.py", "params": {"action": "compress"}, "result": "success", "returncode": 0}
+tool_call_log.jsonl:516:> {\"timestamp\": \"2026-03-20T14:38:10+08:00\", \"session_id\": \"session-20260320145000\", \"tool_id\": \"core_files_compressor.py\", \"result\": \"success\"}  
+tools_registry.json:1715:>       "description": "自动注册的工具: core_files_compressor.py",
+tools_registry.json:1717:>       "command": "py 30-scripts-tools\\core_files_compressor.py",

@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-20T15:24:21.918228
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\memory_distiller.py  (lines 1-50 of 207)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+记忆蒸馏器 - 从日常笔记提炼长期记忆
+触发条件：MEMORY.md > 50KB 或 日常笔记 > 10 条未处理
+"""
+
+import json
+from pathlib import Path
+from datetime import datetime, timedelta
+from typing import Dict, List
+
+class MemoryDistiller:
+    """记忆蒸馏器"""
+    
+    def __init__(self):
+        self.memory_file = Path("13-memory/MEMORY.md")
+        self.daily_dir = Path("13-memory")
+        self.threshold_size_kb = 50
+        self.threshold_unprocessed = 10
+        self.processed_marker = ".distilled"
+    
+    def check_threshold(self) -> Dict:
+        """检查是否达到蒸馏阈值"""
+        result = {
+            "should_distill": False,
+            "reason": [],
+            "current_stats": {}
+        }
+        
+        # 检查 MEMORY.md 大小
+        if self.memory_file.exists():
+            size_kb = self.memory_file.stat().st_size / 1024
+            result["current_stats"]["memory_size_kb"] = size_kb
+            
+            if size_kb > self.threshold_size_kb:
+                result["should_distill"] = True
+                result["reason"].append(f"MEMORY.md ({size_kb:.1f}KB) > threshold ({self.threshold_size_kb}KB)")
+        
+        # 检查未处理的日常笔记
+        unprocessed = self._get_unprocessed_notes()
+        result["current_stats"]["unprocessed_notes"] = len(unprocessed)
+        
+        if len(unprocessed) > self.threshold_unprocessed:
+            result["should_distill"] = True
+            result["reason"].append(f"Unprocessed notes ({len(unprocessed)}) > threshold ({self.threshold_unprocessed})")
+        
+        return result
+    
+    def _get_unprocessed_notes(self) -> List[Path]:
+
+[157 more lines. Use start_line=51 to continue.]

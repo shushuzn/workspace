@@ -1,0 +1,89 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T14:41:19.106876
+# ---
+Command failed with exit code 1.
+[stdout]
+On branch master
+Your branch is ahead of 'origin/master' by 1 commit.
+  (use "git push" to publish your local commits)
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+  (commit or discard the untracked or modified content in submodules)
+	modified:   10-RESEARCH/domain-research/领域研究/cnt-research (modified content)
+	modified:   AGENTS.md
+	modified:   flow-archive/20260318-universal-workflow-001-simplified/execution-state.json
+	modified:   flow-archive/20260318-universal-workflow-001/critic-log.json
+	modified:   flow-archive/20260318-universal-workflow-001/enforcement-log.json
+	modified:   flow-archive/20260320-main-workflow-brainstorm/aai-scores.json
+	modified:   memory/2026-03-20.md
+
+Untracked files:
+  (use "git add <file>..." to include in what will be committed)
+	13-memory/compression_log.json
+	13-memory/session-compression-log.jsonl
+	13-memory/task_temp.json
+	21-reports/session-audits/audit_session-20260320142352_20260320_142624.json
+	21-reports/stock-analysis/
+	30-scripts-tools/fast_load.py
+	flow-archive/20260318-universal-workflow-001/workflow-v1.6.0-backup.json
+	tool_result/041e17102fc343deb8196801896d0dc6.txt
+	tool_result/0627d2b652b740028f877740342fed4b.txt
+	tool_result/1f20630f18574a74b6b4a4f7c130f56e.txt
+	tool_result/2107781bc0b04ddd9ff6418ab0b74829.txt
+	tool_result/248ef9ed72de42fcb535f6d417715bf4.txt
+	tool_result/2579d410b980425499235c51700d305b.txt
+	tool_result/275f48205de34e2b8e554f6359fdde01.txt
+	tool_result/3113fa76f4b14d72b91291d93c0220eb.txt
+	tool_result/3dcf28f6f1304173b73ea49fa20138b0.txt
+	tool_result/43d1795cad2c44319f693d7701277a2e.txt
+	tool_result/530177dabddd4986aafa39e922621229.txt
+	tool_result/5cfb0c818275498aa552ed75a33b69ca.txt
+	tool_result/6a69a0a7f3eb4d7b9b0fe2c9d8129206.txt
+	tool_result/79dbf28d314947efb52f3788362ae10c.txt
+	tool_result/7d0d6b6148164dd59d82b7363787e9ad.txt
+	tool_result/989d034c8abf4abf9e3ed19d35e5fbf9.txt
+	tool_result/a4f6096cd6774be083893f2ee666a884.txt
+	tool_result/aacf6cfbc8a14b6aa223f378be8db0ba.txt
+	tool_result/c5023cfcf4fd4e11999bd2431a8e1447.txt
+	tool_result/d1d4f3595f524e1b9d65ec236c607e04.txt
+	tool_result/e322c98043dd408f9a7bd2fb087cbd48.txt
+	tool_result/e78b4d46f3f24b9f8e1eda5c12335d97.txt
+	tool_result/eb1bcfe5220041089096007aacb16bd7.txt
+
+no changes added to commit (use "git add" and/or "git commit -a")
+[stderr]
+======================================================================
+                    Git Pre-commit Audit v4.0
+======================================================================
+
+[Check 1] execution-state.json existence
+  [OK] execution-state.json exists
+
+[Check 2] Session validity
+  [OK] Session session-20260320145000 valid
+       Flow ID: 20260318-universal-workflow-001
+       Task: unknown
+
+[Check 3] Tool Call Log audit
+  [OK] 8 tool calls this session
+       Tools: {'pre-session-hook.py': 1, 'context_verify.py': 1, 'workflow_analyzer.py': 1, 'embedded_critic.py': 1, 'aai_scorer.py': 1, 'core_files_compressor.py': 1, 'post_session_compress.py': 1, 'session_end.py': 1}
+
+[Check 4] File modification audit
+  [INFO] No staged files
+
+[Check 5] Workflow integrity
+  Completion: 0.0%
+  Completed steps: 13
+  [OK] Workflow integrity check passed
+
+======================================================================
+ [OK] 所有审计检查通过 - 允许提交
+======================================================================
+
+======================================================================
+ Audit Summary
+======================================================================
+
+[OK] Perfect: no issues found

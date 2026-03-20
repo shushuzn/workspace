@@ -1,0 +1,156 @@
+# tool_name: read_file
+# created_at: 2026-03-20T15:40:27.865726
+# ---
+D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001\workflow.json  (lines 1-150 of 519)
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "name": "通用主工作流",
+  "description": "主工作流 - 总控/指挥/调度所有子工作流和工具",
+  "version": "2.3.0",
+  "created_at": "2026-03-18T22:46:04+08:00",
+  "updated_at": "2026-03-20T14:30:00+08:00",
+  "workflow_type": "main",
+  "parent_workflow": null,
+  "estimated_time_minutes": 4,
+  "total_steps": 17,
+  "enforcement": {
+    "enabled": true,
+    "tool_id": "workflow-enforcer",
+    "rules": [
+      "必须按顺序执行步骤",
+      "关键步骤 (1, 2, 7, 13, 15, 16, 17) 不可跳过",
+      "完成后必须验证",
+      "未通过验证禁止 Git 提交",
+      "所有工具必须通过 tool_executor 调用"
+    ],
+    "anti_bypass": {
+      "enabled": true,
+      "detect_direct_tool_calls": true,
+      "detect_missing_state_file": true,
+      "detect_missing_tool_log": true,
+      "action_on_violation": "block_and_report"
+    }
+  },
+  "step_groups": {
+    "init": {
+      "steps": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "name": "初始化阶段",
+      "description": "检查上下文、绑定工作流、解析任务"
+    },
+    "execution": {
+      "steps": [
+        6,
+        6,
+        7,
+        9,
+        10
+      ],
+      "name": "执行阶段",
+      "description": "调度工作流、执行工具、验证内容"
+    },
+    "memory": {
+      "steps": [
+        8,
+        9
+      ],
+      "name": "记忆阶段",
+      "description": "持久化记忆、元认知评估"
+    },
+    "quality": {
+      "steps": [
+        10,
+        11
+      ],
+      "name": "质量阶段",
+      "description": "批判审查、质量评分"
+    },
+    "cleanup": {
+      "steps": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        17
+      ],
+      "name": "收尾阶段",
+      "description": "压缩、提交、清理"
+    }
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "name": "会话前检查",
+      "description": "检查核心文件存在性和大小限制",
+      "tool_id": "pre-session-hook.py",
+      "mandatory": true,
+      "estimated_time_seconds": 5,
+      "skip_condition": null,
+      "outputs": [
+        "context_validated",
+        "issues_list"
+      ],
+      "error_handling": {
+        "on_fail": "block",
+        "max_retries": 1
+      }
+    },
+    {
+      "step_id": 2,
+      "name": "上下文加载验证",
+      "description": "验证 7 个核心文件已加载",
+      "tool_id": "context_verify.py",
+      "mandatory": true,
+      "estimated_time_seconds": 10,
+      "skip_condition": null,
+      "outputs": [
+        "files_loaded",
+        "total_size_kb"
+      ],
+      "error_handling": {
+        "on_fail": "block",
+        "max_retries": 2
+      }
+    },
+    {
+      "step_id": 3,
+      "name": "Flow ID 绑定",
+      "description": "绑定当前会话到工作流实例",
+      "tool_id": "workflow_scheduler.py",
+      "mandatory": false,
+      "estimated_time_seconds": 5,
+      "skip_condition": "if flow_id already bound",
+      "outputs": [
+        "flow_id",
+        "session_id"
+      ],
+      "error_handling": {
+        "on_fail": "continue",
+        "max_retries": 1
+      }
+    },
+    {
+      "step_id": 4,
+      "name": "任务解析",
+      "description": "解析用户任务并分类",
+      "tool_id": "task_analyzer.py",
+      "mandatory": false,
+      "estimated_time_seconds": 15,
+      "skip_condition": null,
+      "outputs": [
+        "task_type",
+        "subtasks",
+        "priority"
+      ],
+      "error_handling": {
+        "on_fail": "continue",
+        "max_retries": 1
+      }
+
+[369 more lines. Use start_line=151 to continue.]

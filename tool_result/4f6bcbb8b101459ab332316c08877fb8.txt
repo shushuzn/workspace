@@ -1,0 +1,51 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T16:11:33.227498
+# ---
+============================================================
+CoPaw Entry Point - 强制工作流入口
+============================================================
+Task: "实现股票分析统一调用接口 stock_pipeline.py"
+Task Type: standard
+Flow ID: 20260318-universal-workflow-001
+Session ID: session-20260320161115
+Start Time: 2026-03-20T16:11:15.923192
+[防护] 自动防护层已激活
+[工作流] 强制执行器已激活
+============================================================
+============================================================
+[WorkflowEnforcer] Initialized for session session-20260320161115
+[WorkflowEnforcer] Flow ID: 20260318-universal-workflow-001
+[WorkflowEnforcer] Total steps: 17
+[WorkflowEnforcer] Enforcement: ENABLED
+[工作流] 强制执行器已初始化 - 17步
+
+[OK] execution-state.json 已初始化
+  路径：flow-archive\20260318-universal-workflow-001\execution-state.json
+  总步骤：17
+  保护：State 保护器已启用 ✓
+
+============================================================
+Step 1: 上下文加载验证
+============================================================
+加载文件：7/7
+总大小：46.5KB (目标<100KB)
+缺失文件：0
+验证结果：通过
+============================================================
+
+
+[OK] CoPaw Entry 初始化完成
+现在可以开始执行任务...
+所有工具调用将通过 tool_executor 记录
+
+============================================================
+Step 1.5: 自动注册工具
+============================================================
+  [REGISTER] brainstorm-stock-optimize <- brainstorm_stock_optimize.py
+  [REGISTER] stock-optimize-action <- stock_optimize_action.py
+  [REGISTER] 共注册 2 个新工具
+
+============================================================
+等待任务完成...
+按 Ctrl+C 或调用 entry.finalize() 结束会话
+============================================================

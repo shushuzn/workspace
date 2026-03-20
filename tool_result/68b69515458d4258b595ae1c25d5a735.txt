@@ -1,0 +1,106 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T15:53:41.074464
+# ---
+BRAINSTORM-WORKFLOW-DESIGN.md:31:> **工具:** `brainstorm_define.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:33:> **输出:** `brainstorm_topic.json`
+BRAINSTORM-WORKFLOW-DESIGN.md:42:> **工具:** `brainstorm_research.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:57:> **工具:** `brainstorm_diverge.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:76:> **工具:** `brainstorm_connect.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:92:> **工具:** `brainstorm_filter.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:104:> **工具:** `brainstorm_evaluate.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:120:> **工具:** `brainstorm_prioritize.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:131:> **工具:** `brainstorm_action.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:148:> | brainstorm_define.py | 问题定义 | ✅ 阻塞 |
+BRAINSTORM-WORKFLOW-DESIGN.md:149:> | brainstorm_research.py | 背景研究 | ❌ 非阻塞 |
+BRAINSTORM-WORKFLOW-DESIGN.md:150:> | brainstorm_diverge.py | 自由联想 | ❌ 非阻塞 |
+BRAINSTORM-WORKFLOW-DESIGN.md:151:> | brainstorm_connect.py | 强制关联 | ❌ 非阻塞 |
+BRAINSTORM-WORKFLOW-DESIGN.md:152:> | brainstorm_filter.py | 初步筛选 | ❌ 非阻塞 |
+BRAINSTORM-WORKFLOW-DESIGN.md:153:> | brainstorm_evaluate.py | 深度评估 | ❌ 非阻塞 |
+BRAINSTORM-WORKFLOW-DESIGN.md:154:> | brainstorm_prioritize.py | 优先级排序 | ❌ 非阻塞 |
+BRAINSTORM-WORKFLOW-DESIGN.md:155:> | brainstorm_action.py | 行动规划 | ✅ 阻塞 |
+BRAINSTORM-WORKFLOW-DESIGN.md:189:> ├── brainstorm_topic.json       # 问题定义
+BRAINSTORM-WORKFLOW-GUIDE.md:30:> py 30-scripts-tools\brainstorm_define.py
+BRAINSTORM-WORKFLOW-GUIDE.md:33:> py 30-scripts-tools\brainstorm_diverge.py
+BRAINSTORM-WORKFLOW-GUIDE.md:36:> py 30-scripts-tools\brainstorm_prioritize.py
+BRAINSTORM-WORKFLOW-GUIDE.md:39:> py 30-scripts-tools\brainstorm_action.py
+BRAINSTORM-WORKFLOW-GUIDE.md:72:> | `brainstorm_topic.json` | 问题定义 | ✅ |
+BRAINSTORM-WORKFLOW-GUIDE.md:135:> | `brainstorm_define.py` | 问题定义 | ✅ |
+BRAINSTORM-WORKFLOW-GUIDE.md:136:> | `brainstorm_diverge.py` | 自由联想 | ❌ |
+BRAINSTORM-WORKFLOW-GUIDE.md:137:> | `brainstorm_prioritize.py` | 优先级排序 | ❌ |
+BRAINSTORM-WORKFLOW-GUIDE.md:138:> | `brainstorm_action.py` | 行动规划 | ✅ |
+context_aware_assistant.py:36:>             "brainstorm": ["brainstorm_ai_assistant", "brainstorm_mindmap", "brainstorm_quality_predictor"],
+create_brainstorm_v3.py:11:> def create_brainstorm_v3_workflow():
+create_brainstorm_v3.py:26:>             "AI 创意助手集成 (brainstorm_ai_assistant)",
+create_brainstorm_v3.py:27:>             "思维导图可视化 (brainstorm_mindmap)",
+create_brainstorm_v3.py:28:>             "创意质量预测 (brainstorm_quality_predictor)",
+create_brainstorm_v3.py:71:>                 "tool_id": "brainstorm_ai_assistant",
+create_brainstorm_v3.py:80:>                 "tool_id": "brainstorm_facilitator",
+create_brainstorm_v3.py:88:>                 "tool_id": "brainstorm_ai_assistant",
+create_brainstorm_v3.py:96:>                 "tool_id": "brainstorm_ai_assistant",
+create_brainstorm_v3.py:104:>                 "tool_id": "brainstorm_quality_predictor",
+create_brainstorm_v3.py:112:>                 "tool_id": "brainstorm_convergent",
+create_brainstorm_v3.py:119:>                 "tool_id": "brainstorm_mindmap",
+create_brainstorm_v3.py:162:>             "brainstorm_ai_assistant",
+create_brainstorm_v3.py:163:>             "brainstorm_mindmap",
+create_brainstorm_v3.py:164:>             "brainstorm_quality_predictor",
+create_brainstorm_v3.py:165:>             "brainstorm_facilitator",
+create_brainstorm_v3.py:166:>             "brainstorm_convergent",
+create_brainstorm_v3.py:182:>     workflow = create_brainstorm_v3_workflow()
+critic-auto-头脑风暴工作流创建完成-v7.json:107:>       "evidence": "New tools: ['brainstorm_action', 'brainstorm_define', 'brainstorm_diverge', 'brainstorm_prioritize'] | Used: []"
+critic-auto-头脑风暴工作流归档完成-v7.json:107:>       "evidence": "New tools: ['brainstorm_action', 'brainstorm_define', 'brainstorm_diverge', 'brainstorm_prioritize'] | Used: [] | Unused: ['brainstorm_action', 'brainstorm_define', 'brainstorm_diverge', 'brainstorm_prioritize']"
+tools_registry.json:435:>       "command": "py 30-scripts-tools\\brainstorm_define.py",
+tools_registry.json:451:>         "output_file": "30-scripts-tools/brainstorm_topic.json"
+tools_registry.json:476:>         "py brainstorm_define.py --topic \"AI  Agent 自主性提升\"",
+tools_registry.json:477:>         "py brainstorm_define.py --topic \"工具库优化\" --constraints \"[\"时间<1 小时\", \"不影响核心功能\"]\""
+tools_registry.json:487:>       "command": "py 30-scripts-tools\\brainstorm_action.py",
+tools_registry.json:529:>         "py brainstorm_action.py --prioritized_ideas \"[...]\" --timeline \"本周\""
+tools_registry.json:1591:>     "brainstorm_action": {
+tools_registry.json:1592:>       "tool_id": "brainstorm_action",
+tools_registry.json:1593:>       "command": "py 30-scripts-tools/brainstorm_action.py ${args}",
+tools_registry.json:1606:>         "py 30-scripts-tools/brainstorm_action.py --help"
+tools_registry.json:1617:>         "brainstorm_action.py"
+tools_registry.json:1629:>     "brainstorm_define": {
+tools_registry.json:1630:>       "tool_id": "brainstorm_define",
+tools_registry.json:1631:>       "command": "py 30-scripts-tools/brainstorm_define.py ${args}",
+tools_registry.json:1644:>         "py 30-scripts-tools/brainstorm_define.py --help"
+tools_registry.json:1655:>         "brainstorm_diverge.py"
+tools_registry.json:1667:>     "brainstorm_diverge": {
+tools_registry.json:1668:>       "tool_id": "brainstorm_diverge",
+tools_registry.json:1669:>       "command": "py 30-scripts-tools/brainstorm_diverge.py ${args}",
+tools_registry.json:1682:>         "py 30-scripts-tools/brainstorm_diverge.py --help"
+tools_registry.json:1693:>         "brainstorm_diverge.py"
+tools_registry.json:7230:>         "brainstorm_tool_governance.py",
+tools_registry.json:8634:>         "brainstorm_tool_governance.py",
+tools_registry.json:11777:>     "brainstorm_agent_autonomy": {
+tools_registry.json:11780:>       "file": "brainstorm_agent_autonomy.py",
+tools_registry.json:11784:>         "py brainstorm_agent_autonomy.py"
+tools_registry.json:11790:>         "register_brainstorm_tool.py"
+tools_registry.json:11802:>     "brainstorm_research_driven": {
+tools_registry.json:11805:>       "file": "brainstorm_research_driven.py",
+tools_registry.json:11809:>         "py brainstorm_research_driven.py"
+tools_registry.json:11852:>     "brainstorm_tool_governance": {
+tools_registry.json:11855:>       "file": "brainstorm_tool_governance.py",
+tools_registry.json:11859:>         "py brainstorm_tool_governance.py"
+tools_registry.json:11890:>         "brainstorm_tool_governance.py",
+tools_registry.json:11920:>         "brainstorm_tool_governance.py",
+tools_registry.json:11949:>         "brainstorm_tool_governance.py",
+tools_registry.json:11978:>         "brainstorm_tool_governance.py",
+tools_registry.json:12007:>         "brainstorm_tool_governance.py",
+tools_registry.json:12035:>         "brainstorm_tool_governance.py",
+tools_registry.json:14030:>       "file": "brainstorm_divergent.py",
+tools_registry.json:14045:>       "file": "brainstorm_facilitator.py",
+tools_registry.json:14060:>       "file": "critic_brainstorm_lite.py",
+tools_registry.json:14064:>         "brainstorm_complete"
+tools_registry.json:14075:>       "file": "brainstorm_facilitator.py",
+tools_registry.json:14103:>       "file_path": "30-scripts-tools/brainstorm_convergent.py",
+tools_registry.json:14320:>     "brainstorm_ai_assistant": {
+tools_registry.json:14325:>       "file_path": "30-scripts-tools/brainstorm_ai_assistant.py",
+tools_registry.json:14328:>     "brainstorm_mindmap": {
+tools_registry.json:14333:>       "file_path": "30-scripts-tools/brainstorm_mindmap.py",
+tools_registry.json:14336:>     "brainstorm_quality_predictor": {
+tools_registry.json:14341:>       "file_path": "30-scripts-tools/brainstorm_quality_predictor.py",
+tools_registry.json:14344:>     "brainstorm_workflow_v3": {
+tools_registry.json:14590:>       "name": "brainstorm_stock_analysis",
+tools_registry.json:14595:>       "file_path": "30-scripts-tools/brainstorm_stock_analysis.py",
+update_registry_stock_brainstorm.py:19:>         "name": "brainstorm_stock_analysis",
+update_registry_stock_brainstorm.py:24:>         "file_path": "30-scripts-tools/brainstorm_stock_analysis.py",

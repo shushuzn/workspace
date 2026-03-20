@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:03:21.522102
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\copaw_entry.py  (lines 280-340 of 367)
+            return False
+
+
+def auto_register_tools():
+    """自动注册新创建的工具到 tools_registry.json"""
+    import uuid
+    
+    registry_file = Path("30-scripts-tools/tools_registry.json")
+    scripts_dir = Path("30-scripts-tools")
+    
+    with open(registry_file, "r", encoding="utf-8") as f:
+        registry = json.load(f)
+    
+    if "tools" not in registry:
+        registry["tools"] = {}
+    
+    # 获取已注册的 tool_id
+    registered_ids = set(registry["tools"].keys())
+    
+    # 扫描所有 .py 文件
+    new_tools = []
+    for py_file in scripts_dir.glob("*.py"):
+        # 跳过特殊文件
+        if py_file.name.startswith("_") or py_file.name.startswith("test_"):
+            continue
+        
+        tool_id = py_file.stem.replace("_", "-")
+        
+        # 如果未注册，自动添加
+        if tool_id not in registered_ids:
+            tool_info = {
+                "tool_id": tool_id,
+                "name": py_file.stem.replace("-", " ").title(),
+                "description": f"自动注册的工具: {py_file.name}",
+                "version": "1.0",
+                "command": f"py 30-scripts-tools\\{py_file.name}",
+                "parameters": [],
+                "triggers": ["manual"],
+                "review_required": False,
+                "blocking": False,
+                "timeout_seconds": 300,
+                "category": "automation",
+                "categorized_at": datetime.now().isoformat() + "+08:00",
+                "auto_registered": True,
+                "auto_registered_at": datetime.now().isoformat()
+            }
+            registry["tools"][tool_id] = tool_info
+            new_tools.append(tool_id)
+            print(f"  [REGISTER] {tool_id} <- {py_file.name}")
+    
+    if new_tools:
+        # 保存 registry
+        registry["last_updated"] = datetime.now().isoformat()
+        with open(registry_file, "w", encoding="utf-8") as f:
+            json.dump(registry, f, ensure_ascii=False, indent=2)
+        print(f"  [REGISTER] 共注册 {len(new_tools)} 个新工具")
+        return len(new_tools)
+    else:
+        print(f"  [REGISTER] 无新工具需要注册")
+        return 0
+
+
+[27 more lines. Use start_line=341 to continue.]

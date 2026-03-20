@@ -1,0 +1,44 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T15:36:53.326387
+# ---
+==================================================
+Running Dual-Layer Memory Tests
+==================================================
+[TEST] Import modules...
+  PASS - All imports OK
+[TEST] ImportanceScorer...
+  Preference score: 0.25
+  Conversation score: 0.13
+  Ranking: [0.3742, 0.34299999999999997, 0.123]
+  PASS
+[TEST] WorkingMemory...
+  Count after add: 1
+  Compressed: 0 items
+  PASS
+[TEST] ArchiveMemory...
+  Stored item, count: 1
+  Retrieve OK
+  Search results: 0
+  PASS
+[TEST] ForgettingMechanism...
+  Decay after 7 days: 0.693
+  Should forget (low importance, old): False
+  Should forget (high importance, preference): False
+  Retention suggestion: 56 days
+  PASS
+[TEST] DualLayerMemory...
+  Added preference, importance: 0.25
+  Added conversation, importance: 0.12
+  Added decision, importance: 0.37
+  Stats: working=3, archive=0
+  Compress result: {'compressed': 0, 'archived': 2, 'forgotten': 0}
+  PASS
+[TEST] SessionBridge...
+  Exported: 3 items
+  Preferences: 2
+  Decisions: 1
+  Imported: 3 items
+  PASS
+==================================================
+Results: 7 passed, 0 failed
+==================================================

@@ -1,0 +1,36 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T14:58:34.265408
+# ---
+======================================================================
+工作流: 20260318-universal-workflow-001
+名称: 通用主工作流
+版本: 2.0.1
+总步骤: 17
+======================================================================
+
+步骤列表:
+----------------------------------------------------------------------
+[M]     1 会话前检查                               pre-session-hook.py       5s
+[M]     2 上下文加载验证                             context_verify.py         10s
+[ ]     3 Flow ID 绑定                          workflow_scheduler.py     5s
+[ ]     4 任务解析                                task_analyzer.py          15s
+[ ]     5 工具选择与调度                             workflow_optimizer.py     15s
+[M]     6 工具执行                                tool_executor.py          60s
+[ ]     7 验证与保障                               workflow_optimizer.py     20s
+[ ]     8 记忆持久化                               memory_distiller.py       30s
+[ ]     9 元认知评估                               metacognition_monitor.py  10s
+[M]    10 批判者审查                               embedded_critic.py        20s
+[ ]    11 质量评分                                aai_scorer.py             10s
+[M]    12 核心文件压缩                              core_files_compressor.py  15s
+[M]    13 会话压缩                                post_session_compress.py  30s
+[M]    14 会话结束                                session_end.py            10s
+[ ]    15 Git 提交                              git_commit_helper.py      15s
+[ ]    16 文档生成                                auto_doc_generator.py     20s
+[ ]    17 清理临时文件                              temp_file_cleaner.py      5s
+----------------------------------------------------------------------
+
+统计:
+  必要步骤: 7/17
+  预计时间: 295秒 (4.9分钟)
+
+状态: 无问题

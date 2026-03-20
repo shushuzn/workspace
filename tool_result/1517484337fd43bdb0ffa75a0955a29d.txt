@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:19:18.978307
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\session_end.py  (lines 50-120 of 211)
+            'session_data': None,
+            'execution_data': None
+        }
+        
+        if result['session_file_exists']:
+            with open(self.session_file, 'r', encoding='utf-8') as f:
+                result['session_data'] = json.load(f)
+        
+        if result['execution_state_exists']:
+            with open(self.execution_state, 'r', encoding='utf-8') as f:
+                result['execution_data'] = json.load(f)
+        
+        return result
+    
+    def compress_core_files(self) -> Dict:
+        """压缩核心文件"""
+        compressor = CoreFilesCompressor()
+        return compressor.compress_all()
+    
+    def compress_session(self) -> Dict:
+        """压缩会话"""
+        compressor = SessionCompressor()
+        return compressor.compress_session()
+    
+    def generate_summary(self, description: str = "") -> str:
+        """生成会话摘要"""
+        state = self.check_session_state()
+        
+        summary = []
+        summary.append(f"\n{'='*60}")
+        summary.append(f"会话结束报告 - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        summary.append(f"{'='*60}")
+        summary.append(f"Flow ID: {self.flow_id}")
+        summary.append(f"描述: {description}")
+        summary.append("")
+        
+        # 会话状态
+        summary.append("会话状态:")
+        if state['session_file_exists']:
+            summary.append("  [OK] session_temp.json 存在")
+        else:
+            summary.append("  [WARN] session_temp.json 不存在")
+        
+        if state['execution_state_exists']:
+            summary.append("  [OK] execution-state.json 存在")
+            if state['execution_data']:
+                summary.append(f"    - 步骤: {state['execution_data'].get('current_step', 0)}/{state['execution_data'].get('total_steps', 0)}")
+                summary.append(f"    - 状态: {state['execution_data'].get('status', 'unknown')}")
+        else:
+            summary.append("  [WARN] execution-state.json 不存在")
+        
+        summary.append("")
+        
+        # 核心文件状态
+        summary.append("核心文件:")
+        core_compressor = CoreFilesCompressor()
+        check_result = core_compressor.check_files()
+        for f in check_result['files']:
+            if f['exists']:
+                status = "[OK]" if f['within_limit'] else "[WARN]"
+                summary.append(f"  {status} {f['name']:<25} {f['size_kb']:>6.2f}KB")
+            else:
+                summary.append(f"  [MISSING] {f['name']:<25}")
+        
+        summary.append(f"  总计: {check_result['total_size_kb']:.2f}KB")
+        summary.append("")
+        
+        # 建议
+        if not check_result['within_limit']:
+            summary.append("建议: 运行 py core_files_compressor.py --compress")
+        
+
+[91 more lines. Use start_line=121 to continue.]

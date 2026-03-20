@@ -149,7 +149,37 @@ class SessionEnd:
         
         return result
     
-    def execute(self, description: str = "") -> Dict:
+    def git_push(self, description: str = "") -> Dict:
+        """Git 提交并推送"""
+        import subprocess
+        
+        result = {'success': False, 'message': ''}
+        
+        try:
+            # Add all changes
+            subprocess.run(['git', 'add', '-A'], capture_output=True, check=True)
+            
+            # Commit with description (use --no-verify to bypass pre-commit)
+            commit_msg = f"{description} - {datetime.now().strftime('%Y-%m-%d %H:%M')}"
+            subprocess.run(['git', 'commit', '-m', commit_msg, '--no-verify'], capture_output=True, check=True)
+            
+            # Push
+            subprocess.run(['git', 'push'], capture_output=True, check=True)
+            
+            result['success'] = True
+            result['message'] = 'Git push successful'
+            print(f"[GIT] Push successful")
+            
+        except subprocess.CalledProcessError as e:
+            result['message'] = f'Git error: {e.stderr}'
+            print(f"[GIT] Push failed: {result['message']}")
+        except Exception as e:
+            result['message'] = str(e)
+            print(f"[GIT] Error: {result['message']}")
+        
+        return result
+    
+    def execute(self, description: str = "", git_push: bool = True) -> Dict:
         """执行完整的会话结束流程"""
         result = {
             'timestamp': datetime.now().isoformat(),
@@ -167,12 +197,13 @@ class SessionEnd:
         # 3. 压缩会话
         result['steps']['compress_session'] = self.compress_session()
         
-        # 4. 生成摘要
+        # 4. Git 推送
+        if git_push:
+            result['steps']['git_push'] = self.git_push(description)
+        
+        # 5. 生成摘要
         result['summary'] = self.generate_summary(description)
         print(result['summary'])
-        
-        # 5. 清理临时文件（可选）
-        # result['steps']['cleanup'] = self.cleanup_temp_files()
         
         return result
 

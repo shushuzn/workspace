@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:12:06.655511
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_analysis_pipeline.py  (lines 80-150 of 384)
+        try:
+            # 尝试导入工具模块
+            module = __import__(module_name, fromlist=[''])
+            return module
+        except ImportError as e:
+            print(f"[WARN] Tool module '{module_name}' not found: {e}")
+            print(f"   Using mock data to continue...")
+            return None
+    
+    def _execute_tool(self, tool_info: Dict[str, str]) -> Dict[str, Any]:
+        """
+        执行单个工具
+        
+        Args:
+            tool_info: 工具信息 {"id": "SA-005", "name": "...", "module": "..."}
+        
+        Returns:
+            工具执行结果
+        """
+        tool_id = tool_info["id"]
+        tool_name = tool_info["name"]
+        module_name = tool_info["module"]
+        
+        print(f"\n[{tool_id}] Executing: {tool_name}")
+        start_time = time.time()
+        
+        try:
+            # 加载工具模块
+            module = self._load_tool(module_name)
+            
+            if module is None:
+                # 模块加载失败，返回模拟结果
+                result = {
+                    "status": "simulated",
+                    "message": f"工具模块未找到，使用模拟数据",
+                    "data": self._generate_mock_data(tool_id)
+                }
+            else:
+                # 调用工具的 analyze 函数
+                if hasattr(module, 'analyze'):
+                    result = module.analyze(self.symbol)
+                elif hasattr(module, 'run'):
+                    result = module.run(self.symbol)
+                else:
+                    result = {
+                        "status": "error",
+                        "message": f"工具模块缺少 analyze/run 函数"
+                    }
+            
+            # 记录执行时间
+            elapsed = time.time() - start_time
+            self.metrics["stage_times"][tool_id] = elapsed
+            
+            # 添加元数据
+            result["tool_id"] = tool_id
+            result["tool_name"] = tool_name
+            result["execution_time"] = elapsed
+            result["status"] = result.get("status", "success")
+            
+            print(f"   [OK] Complete ({elapsed:.2f}s) - Status: {result['status']}")
+            return result
+            
+        except Exception as e:
+            elapsed = time.time() - start_time
+            print(f"   [ERROR] Failed ({elapsed:.2f}s): {str(e)}")
+            traceback.print_exc()
+            
+            return {
+                "tool_id": tool_id,
+                "tool_name": tool_name,
+                "status": "error",
+
+[234 more lines. Use start_line=151 to continue.]

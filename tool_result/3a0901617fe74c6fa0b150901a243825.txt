@@ -1,0 +1,104 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T16:08:07.164741
+# ---
+============================================================
+CoPaw Entry Point - 强制工作流入口
+============================================================
+Task: "最终测试自动注册"
+Task Type: simplified
+Flow ID: 20260318-universal-workflow-001-simplified
+Session ID: session-20260320160418
+Start Time: 2026-03-20T16:04:18.389010
+[防护] 自动防护层已激活
+[工作流] 强制执行器已激活
+============================================================
+============================================================
+[WorkflowEnforcer] Initialized for session session-20260320160418
+[WorkflowEnforcer] Flow ID: 20260318-universal-workflow-001-simplified
+[WorkflowEnforcer] Total steps: 5
+[WorkflowEnforcer] Enforcement: ENABLED
+[工作流] 强制执行器已初始化 - 5步
+
+[OK] execution-state.json 已初始化
+  路径：flow-archive\20260318-universal-workflow-001-simplified\execution-state.json
+  总步骤：5
+  保护：State 保护器已启用 ✓
+
+============================================================
+Step 1: 上下文加载验证
+============================================================
+加载文件：7/7
+总大小：45.6KB (目标<100KB)
+缺失文件：0
+验证结果：通过
+============================================================
+
+
+[OK] CoPaw Entry 初始化完成
+现在可以开始执行任务...
+所有工具调用将通过 tool_executor 记录
+
+============================================================
+Step 1.5: 自动注册工具
+============================================================
+  [REGISTER] aai-scorer <- aai_scorer.py
+  [REGISTER] adaptive-workflow <- adaptive_workflow.py
+  [REGISTER] agent-tool-monitor <- agent_tool_monitor.py
+  [REGISTER] anti-bypass-engine <- anti_bypass_engine.py
+  [REGISTER] auto-backup <- auto_backup.py
+  [REGISTER] auto-fix-engine <- auto_fix_engine.py
+  [REGISTER] auto-memory-distiller <- auto_memory_distiller.py
+  [REGISTER] auto-recovery <- auto_recovery.py
+  [REGISTER] auto-session-compressor <- auto_session_compressor.py
+  [REGISTER] auto-training-engine <- auto_training_engine.py
+  [REGISTER] behavior-analyzer <- behavior_analyzer.py
+  [REGISTER] blockchain-logger <- blockchain_logger.py
+  [REGISTER] compliance-booster <- compliance_booster.py
+  [REGISTER] compliance-dashboard <- compliance_dashboard.py
+  [REGISTER] confirmation-gate <- confirmation_gate.py
+  [REGISTER] cron-enhanced <- cron_enhanced.py
+  [REGISTER] dynamic-goal-adjuster <- dynamic_goal_adjuster.py
+  [REGISTER] dynamic-step-skipper <- dynamic_step_skipper.py
+  [REGISTER] embedded-critic <- embedded_critic.py
+  [REGISTER] emergency-stop <- emergency_stop.py
+  [REGISTER] external-verifier <- external_verifier.py
+  [REGISTER] file-guardian <- file_guardian.py
+  [REGISTER] git-commit-helper <- git_commit_helper.py
+  [REGISTER] git-precommit-check <- git_precommit_check.py
+  [REGISTER] improvement-executor <- improvement_executor.py
+  [REGISTER] integrity-checker <- integrity_checker.py
+  [REGISTER] metacognition-monitor <- metacognition_monitor.py
+  [REGISTER] parallel-tool-executor <- parallel_tool_executor.py
+  [REGISTER] penalty-system <- penalty_system.py
+  [REGISTER] penalty-system-v2 <- penalty_system_v2.py
+  [REGISTER] performance-analyzer <- performance_analyzer.py
+  [REGISTER] permission-validator <- permission_validator.py
+  [REGISTER] pre-commit-checker <- pre_commit_checker.py
+  [REGISTER] protected-py <- protected_py.py
+  [REGISTER] protection-monitor <- protection_monitor.py
+  [REGISTER] result-verifier <- result_verifier.py
+  [REGISTER] reward-system <- reward_system.py
+  [REGISTER] risk-assessor <- risk_assessor.py
+  [REGISTER] session-token-validator <- session_token_validator.py
+  [REGISTER] single-step-lock <- single_step_lock.py
+  [REGISTER] smart-task-decomposer <- smart_task_decomposer.py
+  [REGISTER] state-snapshot <- state_snapshot.py
+  [REGISTER] step-tracker <- step_tracker.py
+  [REGISTER] task-analyzer <- task_analyzer.py
+  [REGISTER] tool-call-tracker <- tool_call_tracker.py
+  [REGISTER] tool-monitor <- tool_monitor.py
+  [REGISTER] workflow-anomaly-detector <- workflow_anomaly_detector.py
+  [REGISTER] workflow-autoloader <- workflow_autoloader.py
+  [REGISTER] workflow-auto-executor <- workflow_auto_executor.py
+  [REGISTER] workflow-cache <- workflow_cache.py
+  [REGISTER] workflow-guardian-v2 <- workflow_guardian_v2.py
+  [REGISTER] workflow-health-dashboard <- workflow_health_dashboard.py
+  [REGISTER] workflow-progress-bar <- workflow_progress_bar.py
+  [REGISTER] workflow-recovery <- workflow_recovery.py
+  [REGISTER] workflow-templates <- workflow_templates.py
+  [REGISTER] 共注册 55 个新工具
+
+============================================================
+等待任务完成...
+按 Ctrl+C 或调用 entry.finalize() 结束会话
+============================================================

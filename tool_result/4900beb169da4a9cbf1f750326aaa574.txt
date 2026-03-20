@@ -1,0 +1,82 @@
+# tool_name: read_file
+# created_at: 2026-03-20T15:58:27.539484
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 525-600 of 15972)
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      },
+      "examples": [
+        "py brainstorm_action.py --prioritized_ideas \"[...]\" --timeline \"本周\""
+      ],
+      "improved_at": "2026-03-19T18:20:28.908492",
+      "improvement_version": "1.1.0"
+    },
+    "brainstorm-filter": {
+      "tool_id": "brainstorm-filter",
+      "name": "Brainstorm Filter",
+      "description": "头脑风暴初步筛选工具 - 从大量想法中选出有潜力的入围想法 (≥5个)",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\brainstorm_filter.py",
+      "parameters": [
+        {
+          "name": "ideas_file",
+          "type": "string",
+          "required": true,
+          "description": "想法列表文件路径"
+        }
+      ],
+      "validation": {
+        "output_file": "30-scripts-tools/ideas_shortlisted.json",
+        "min_candidates": 5
+      },
+      "triggers": ["manual"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 300,
+      "category": "automation",
+      "categorized_at": "2026-03-20T15:56:00+08:00"
+    },
+    "brainstorm-prioritize": {
+      "tool_id": "brainstorm-prioritize",
+      "name": "Brainstorm Prioritize",
+      "description": "头脑风暴优先级排序工具 - 使用 ICE 或 RICE 方法对想法进行优先级排序",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\brainstorm_prioritize.py",
+      "parameters": [
+        {
+          "name": "shortlisted_ideas",
+          "type": "list",
+          "required": true,
+          "description": "入围想法列表"
+        },
+        {
+          "name": "method",
+          "type": "string",
+          "required": false,
+          "description": "排序方法 (ICE/RICE)"
+        }
+      ],
+      "validation": {
+        "output_file": "30-scripts-tools/ideas_ranked.json"
+      },
+      "triggers": ["manual"],
+      "review_required": false,
+      "blocking": false,
+      "timeout_seconds": 300,
+      "category": "automation",
+      "categorized_at": "2026-03-20T15:57:00+08:00"
+    },
+    "workflow-enforcer": {
+      "category": "workflow-enforcement",
+      "description": "工作流强制执行器 - 会话前/提交前检查",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/workflow_enforcer.py",
+      "created_at": "2026-03-20T21:45:00+08:00"
+    },
+    "advanced_report_gen": {
+      "tool_id": "advanced_report_gen",
+      "command": "py 30-scripts-tools/advanced_report_gen.py ${args}",
+      "description": "报告生成",
+
+[15372 more lines. Use start_line=601 to continue.]

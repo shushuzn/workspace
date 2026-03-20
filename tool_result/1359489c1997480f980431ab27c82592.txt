@@ -1,0 +1,209 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T15:57:10.319437
+# ---
+tools_registry.json:430:      "brainstorm-define": {
+tools_registry.json:431:        "tool_id": "brainstorm-define",
+tools_registry.json:432:        "name": "Brainstorm Define",
+tools_registry.json:433:        "description": "头脑风暴定义工具 - 帮助定义问题范围、目标和约束条件，生成结构化的问题定义文档",
+tools_registry.json:434:        "version": "1.0",
+tools_registry.json:435:>       "command": "py 30-scripts-tools\\brainstorm_define.py",
+tools_registry.json:436:        "parameters": [
+tools_registry.json:437:          {
+tools_registry.json:438:            "name": "topic",
+tools_registry.json:439:            "type": "string",
+tools_registry.json:440:            "required": true,
+---
+tools_registry.json:446:            "required": false,
+tools_registry.json:447:            "description": "约束条件列表"
+tools_registry.json:448:          }
+tools_registry.json:449:        ],
+tools_registry.json:450:        "validation": {
+tools_registry.json:451:>         "output_file": "30-scripts-tools/brainstorm_topic.json"
+tools_registry.json:452:        },
+tools_registry.json:453:        "triggers": [
+tools_registry.json:454:          "manual"
+tools_registry.json:455:        ],
+tools_registry.json:456:        "review_required": false,
+---
+tools_registry.json:471:          "documentation": "描述:True, 参数:True, 示例:True",
+tools_registry.json:472:          "usage": "低频使用 (1 次)",
+tools_registry.json:473:          "maintenance": "无时间戳"
+tools_registry.json:474:        },
+tools_registry.json:475:        "examples": [
+tools_registry.json:476:>         "py brainstorm_define.py --topic \"AI  Agent 自主性提升\"",
+tools_registry.json:477:          "py brainstorm_define.py --topic \"工具库优化\" --constraints \"[\"时间<1 小时\", \"不影响核心功能\"]\""
+tools_registry.json:478:        ],
+tools_registry.json:479:        "improved_at": "2026-03-19T18:20:28.908454",
+tools_registry.json:480:        "improvement_version": "1.1.0"
+tools_registry.json:481:      },
+---
+tools_registry.json:472:          "usage": "低频使用 (1 次)",
+tools_registry.json:473:          "maintenance": "无时间戳"
+tools_registry.json:474:        },
+tools_registry.json:475:        "examples": [
+tools_registry.json:476:          "py brainstorm_define.py --topic \"AI  Agent 自主性提升\"",
+tools_registry.json:477:>         "py brainstorm_define.py --topic \"工具库优化\" --constraints \"[\"时间<1 小时\", \"不影响核心功能\"]\""
+tools_registry.json:478:        ],
+tools_registry.json:479:        "improved_at": "2026-03-19T18:20:28.908454",
+tools_registry.json:480:        "improvement_version": "1.1.0"
+tools_registry.json:481:      },
+tools_registry.json:482:      "brainstorm-action": {
+---
+tools_registry.json:482:      "brainstorm-action": {
+tools_registry.json:483:        "tool_id": "brainstorm-action",
+tools_registry.json:484:        "name": "Brainstorm Action",
+tools_registry.json:485:        "description": "头脑风暴行动规划工具 - 将头脑风暴结果转化为可执行的行动计划，包含步骤、时间、负责人",
+tools_registry.json:486:        "version": "1.0",
+tools_registry.json:487:>       "command": "py 30-scripts-tools\\brainstorm_action.py",
+tools_registry.json:488:        "parameters": [
+tools_registry.json:489:          {
+tools_registry.json:490:            "name": "prioritized_ideas",
+tools_registry.json:491:            "type": "list",
+tools_registry.json:492:            "required": true,
+---
+tools_registry.json:524:          "documentation": "描述:True, 参数:True, 示例:True",
+tools_registry.json:525:          "usage": "低频使用 (1 次)",
+tools_registry.json:526:          "maintenance": "无时间戳"
+tools_registry.json:527:        },
+tools_registry.json:528:        "examples": [
+tools_registry.json:529:>         "py brainstorm_action.py --prioritized_ideas \"[...]\" --timeline \"本周\""
+tools_registry.json:530:        ],
+tools_registry.json:531:        "improved_at": "2026-03-19T18:20:28.908492",
+tools_registry.json:532:        "improvement_version": "1.1.0"
+tools_registry.json:533:      },
+tools_registry.json:534:      "workflow-enforcer": {
+---
+tools_registry.json:1586:          "documentation": "描述:True, 参数:True, 示例:True",
+tools_registry.json:1587:          "usage": "低频使用 (1 次)",
+tools_registry.json:1588:          "maintenance": "无时间戳"
+tools_registry.json:1589:        }
+tools_registry.json:1590:      },
+tools_registry.json:1591:>     "brainstorm_action": {
+tools_registry.json:1592:        "tool_id": "brainstorm_action",
+tools_registry.json:1593:        "command": "py 30-scripts-tools/brainstorm_action.py ${args}",
+tools_registry.json:1594:        "description": "头脑风暴工具",
+tools_registry.json:1595:        "version": "1.0.0",
+tools_registry.json:1596:        "created_at": "2026-03-19",
+---
+tools_registry.json:1587:          "usage": "低频使用 (1 次)",
+tools_registry.json:1588:          "maintenance": "无时间戳"
+tools_registry.json:1589:        }
+tools_registry.json:1590:      },
+tools_registry.json:1591:      "brainstorm_action": {
+tools_registry.json:1592:>       "tool_id": "brainstorm_action",
+tools_registry.json:1593:        "command": "py 30-scripts-tools/brainstorm_action.py ${args}",
+tools_registry.json:1594:        "description": "头脑风暴工具",
+tools_registry.json:1595:        "version": "1.0.0",
+tools_registry.json:1596:        "created_at": "2026-03-19",
+tools_registry.json:1597:        "category": "brainstorm",
+---
+tools_registry.json:1588:          "maintenance": "无时间戳"
+tools_registry.json:1589:        }
+tools_registry.json:1590:      },
+tools_registry.json:1591:      "brainstorm_action": {
+tools_registry.json:1592:        "tool_id": "brainstorm_action",
+tools_registry.json:1593:>       "command": "py 30-scripts-tools/brainstorm_action.py ${args}",
+tools_registry.json:1594:        "description": "头脑风暴工具",
+tools_registry.json:1595:        "version": "1.0.0",
+tools_registry.json:1596:        "created_at": "2026-03-19",
+tools_registry.json:1597:        "category": "brainstorm",
+tools_registry.json:1598:        "parameters": {
+---
+tools_registry.json:1601:            "description": "工具参数",
+tools_registry.json:1602:            "required": false
+tools_registry.json:1603:          }
+tools_registry.json:1604:        },
+tools_registry.json:1605:        "examples": [
+tools_registry.json:1606:>         "py 30-scripts-tools/brainstorm_action.py --help"
+tools_registry.json:1607:        ],
+tools_registry.json:1608:        "validation": {
+tools_registry.json:1609:          "workspace_check": true
+tools_registry.json:1610:        },
+tools_registry.json:1611:        "output": {
+---
+tools_registry.json:1612:          "format": "console",
+tools_registry.json:1613:          "log_to_flow": true
+tools_registry.json:1614:        },
+tools_registry.json:1615:        "usage_count": 1,
+tools_registry.json:1616:        "usage_files": [
+tools_registry.json:1617:>         "brainstorm_action.py"
+tools_registry.json:1618:        ],
+tools_registry.json:1619:        "usage_tracked_at": "2026-03-19T17:28:52.013783",
+tools_registry.json:1620:        "quality_score": 46.5,
+tools_registry.json:1621:        "quality_details": {
+tools_registry.json:1622:          "functionality": "功能描述一般",
+---
+tools_registry.json:1624:          "documentation": "描述:False, 参数:True, 示例:True",
+tools_registry.json:1625:          "usage": "低频使用 (1 次)",
+tools_registry.json:1626:          "maintenance": "无时间戳"
+tools_registry.json:1627:        }
+tools_registry.json:1628:      },
+tools_registry.json:1629:>     "brainstorm_define": {
+tools_registry.json:1630:        "tool_id": "brainstorm_define",
+tools_registry.json:1631:        "command": "py 30-scripts-tools/brainstorm_define.py ${args}",
+tools_registry.json:1632:        "description": "头脑风暴工具",
+tools_registry.json:1633:        "version": "1.0.0",
+tools_registry.json:1634:        "created_at": "2026-03-19",
+---
+tools_registry.json:1625:          "usage": "低频使用 (1 次)",
+tools_registry.json:1626:          "maintenance": "无时间戳"
+tools_registry.json:1627:        }
+tools_registry.json:1628:      },
+tools_registry.json:1629:      "brainstorm_define": {
+tools_registry.json:1630:>       "tool_id": "brainstorm_define",
+tools_registry.json:1631:        "command": "py 30-scripts-tools/brainstorm_define.py ${args}",
+tools_registry.json:1632:        "description": "头脑风暴工具",
+tools_registry.json:1633:        "version": "1.0.0",
+tools_registry.json:1634:        "created_at": "2026-03-19",
+tools_registry.json:1635:        "category": "brainstorm",
+---
+tools_registry.json:1626:          "maintenance": "无时间戳"
+tools_registry.json:1627:        }
+tools_registry.json:1628:      },
+tools_registry.json:1629:      "brainstorm_define": {
+tools_registry.json:1630:        "tool_id": "brainstorm_define",
+tools_registry.json:1631:>       "command": "py 30-scripts-tools/brainstorm_define.py ${args}",
+tools_registry.json:1632:        "description": "头脑风暴工具",
+tools_registry.json:1633:        "version": "1.0.0",
+tools_registry.json:1634:        "created_at": "2026-03-19",
+tools_registry.json:1635:        "category": "brainstorm",
+tools_registry.json:1636:        "parameters": {
+---
+tools_registry.json:1639:            "description": "工具参数",
+tools_registry.json:1640:            "required": false
+tools_registry.json:1641:          }
+tools_registry.json:1642:        },
+tools_registry.json:1643:        "examples": [
+tools_registry.json:1644:>         "py 30-scripts-tools/brainstorm_define.py --help"
+tools_registry.json:1645:        ],
+tools_registry.json:1646:        "validation": {
+tools_registry.json:1647:          "workspace_check": true
+tools_registry.json:1648:        },
+tools_registry.json:1649:        "output": {
+---
+tools_registry.json:1650:          "format": "console",
+tools_registry.json:1651:          "log_to_flow": true
+tools_registry.json:1652:        },
+tools_registry.json:1653:        "usage_count": 1,
+tools_registry.json:1654:        "usage_files": [
+tools_registry.json:1655:>         "brainstorm_diverge.py"
+tools_registry.json:1656:        ],
+tools_registry.json:1657:        "usage_tracked_at": "2026-03-19T17:28:52.013784",
+tools_registry.json:1658:        "quality_score": 46.5,
+tools_registry.json:1659:        "quality_details": {
+tools_registry.json:1660:          "functionality": "功能描述一般",
+---
+tools_registry.json:1662:          "documentation": "描述:False, 参数:True, 示例:True",
+tools_registry.json:1663:          "usage": "低频使用 (1 次)",
+tools_registry.json:1664:          "maintenance": "无时间戳"
+tools_registry.json:1665:        }
+tools_registry.json:1666:      },
+tools_registry.json:1667:>     "brainstorm_diverge": {
+tools_registry.json:1668:        "tool_id": "brainstorm_diverge",
+tools_registry.json:1669:        "command": "py 30-scripts-tools/brainstorm_diverge.py ${args}",
+tools_registry.json:1670:        "description": "头脑风暴工具",
+tools_registry.json:1671:        "version": "1.0.0",
+tools_registry.json:1672:        "created_at": "2026-03-19",
+---
+
+(Results truncated at 200 matches.)

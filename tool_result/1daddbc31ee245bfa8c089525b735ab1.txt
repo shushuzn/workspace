@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:02:37.111753
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\copaw_entry.py  (lines 150-200 of 302)
+        print(f"  路径：{self.state_file}")
+        print(f"  总步骤：{total_steps}")
+        if STATE_PROTECTOR_ENABLED:
+            print(f"  保护：State 保护器已启用 ✓")
+        
+        return state
+    
+    def verify_context(self) -> bool:
+        """Step 1: 验证上下文加载"""
+        print(f"\n{'='*60}")
+        print("Step 1: 上下文加载验证")
+        print(f"{'='*60}")
+        
+        core_files = [
+            "SOUL.md", "USER.md", "AGENTS.md", "TOOLS.md", "HEARTBEAT.md",
+            "13-memory/MEMORY.md"
+        ]
+        
+        today = datetime.now().strftime("%Y-%m-%d")
+        core_files.append(f"13-memory/{today}.md")
+        
+        loaded = []
+        missing = []
+        total_size = 0
+        
+        for f in core_files:
+            p = Path(f)
+            if p.exists():
+                size = p.stat().st_size
+                loaded.append({"file": f, "size": size})
+                total_size += size
+            else:
+                missing.append(f)
+        
+        valid = total_size < 100 * 1024 and len(missing) == 0
+        
+        print(f"加载文件：{len(loaded)}/{len(core_files)}")
+        print(f"总大小：{total_size/1024:.1f}KB (目标<100KB)")
+        print(f"缺失文件：{len(missing)}")
+        print(f"验证结果：{'通过' if valid else '失败'}")
+        print(f"{'='*60}\n")
+        
+        return valid
+    
+    def log_tool_call(self, tool_id: str, params: dict, result: str, duration: float):
+        """记录工具调用"""
+        entry = {
+            "timestamp": datetime.now().isoformat(),
+            "tool_id": tool_id,
+            "params": params,
+            "result": result,
+
+[102 more lines. Use start_line=201 to continue.]

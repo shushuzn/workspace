@@ -143,16 +143,18 @@
 
 ## 🛠️ 工具清单 (8 个)
 
-| 工具 | 功能 | 阻塞性 |
-|------|------|--------|
-| brainstorm_define.py | 问题定义 | ✅ 阻塞 |
-| brainstorm_research.py | 背景研究 | ❌ 非阻塞 |
-| brainstorm_diverge.py | 自由联想 | ❌ 非阻塞 |
-| brainstorm_connect.py | 强制关联 | ❌ 非阻塞 |
-| brainstorm_filter.py | 初步筛选 | ❌ 非阻塞 |
-| brainstorm_evaluate.py | 深度评估 | ❌ 非阻塞 |
-| brainstorm_prioritize.py | 优先级排序 | ❌ 非阻塞 |
-| brainstorm_action.py | 行动规划 | ✅ 阻塞 |
+| 工具 | 功能 | 阻塞性 | 状态 |
+|------|------|--------|------|
+| brainstorm_define.py | 问题定义 | ✅ 阻塞 | ✅ 已实现 |
+| brainstorm_research.py | 背景研究 | ❌ 非阻塞 | ❌ 待实现 |
+| brainstorm_diverge.py | 自由联想 | ❌ 非阻塞 | ✅ 已实现 |
+| brainstorm_connect.py | 强制关联 | ❌ 非阻塞 | ❌ 待实现 |
+| brainstorm_filter.py | 初步筛选 | ❌ 非阻塞 | ✅ 已实现 |
+| brainstorm_evaluate.py | 深度评估 | ❌ 非阻塞 | ❌ 待实现 |
+| brainstorm_prioritize.py | 优先级排序 | ❌ 非阻塞 | ✅ 已实现 |
+| brainstorm_action.py | 行动规划 | ✅ 阻塞 | ✅ 已实现 |
+
+> **v2.0 状态:** 5/8 核心工具已实现 (62.5%)
 
 ---
 
@@ -178,6 +180,30 @@
 ### 条件触发
 - **Step 2 (研究):** 有时间时运行
 - **Step 4 (关联):** 想法数量≥15 时运行
+
+---
+
+## 🔴 Critic 强制检查点 (v2.0 新增)
+
+每个阻塞性步骤必须通过 Critic 评估才能继续：
+
+| 步骤 | Critic 检查点 | 最低分数 |
+|------|--------------|----------|
+| Step 1 | 问题清晰度 | 7/10 |
+| Step 3 | 想法数量 ≥20 | 8/10 |
+| Step 5 | 入围质量 | 7/10 |
+| Step 7 | 排序合理性 | 8/10 |
+| Step 8 | 行动计划完整性 | 8/10 |
+
+### Critic 调用方式
+```bash
+py 30-scripts-tools/embedded_critic.py --step brainstorm --input <file> --threshold 7
+```
+
+### 不通过处理
+- 分数 < 7 → 提示改进建议
+- 连续 2 次不通过 → 返回上一步重做
+- 记录到 `brainstorm_session.json`
 - **Step 7-8 (输出):** 必须有≥3 个入围想法
 
 ---

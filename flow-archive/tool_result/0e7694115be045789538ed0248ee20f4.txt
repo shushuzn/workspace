@@ -1,0 +1,111 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T15:41:59.718386
+# ---
+workflow.json:12:    "enforcement": {
+workflow.json:13:      "enabled": true,
+workflow.json:14:>     "tool_id": "workflow-enforcer",
+workflow.json:15:      "rules": [
+workflow.json:16:        "必须按顺序执行步骤",
+---
+workflow.json:85:        "name": "会话前检查",
+workflow.json:86:        "description": "检查核心文件存在性和大小限制",
+workflow.json:87:>       "tool_id": "pre-session-hook.py",
+workflow.json:88:        "mandatory": true,
+workflow.json:89:        "estimated_time_seconds": 5,
+---
+workflow.json:102:        "name": "上下文加载验证",
+workflow.json:103:        "description": "验证 7 个核心文件已加载",
+workflow.json:104:>       "tool_id": "context_verify.py",
+workflow.json:105:        "mandatory": true,
+workflow.json:106:        "estimated_time_seconds": 10,
+---
+workflow.json:119:        "name": "Flow ID 绑定",
+workflow.json:120:        "description": "绑定当前会话到工作流实例",
+workflow.json:121:>       "tool_id": "workflow_scheduler.py",
+workflow.json:122:        "mandatory": false,
+workflow.json:123:        "estimated_time_seconds": 5,
+---
+workflow.json:136:        "name": "任务解析",
+workflow.json:137:        "description": "解析用户任务并分类",
+workflow.json:138:>       "tool_id": "task_analyzer.py",
+workflow.json:139:        "mandatory": false,
+workflow.json:140:        "estimated_time_seconds": 15,
+---
+workflow.json:154:        "name": "工具选择与调度",
+workflow.json:155:        "description": "根据任务选择工具并调度子工作流",
+workflow.json:156:>       "tool_id": "workflow_optimizer.py",
+workflow.json:157:        "mandatory": false,
+workflow.json:158:        "estimated_time_seconds": 15,
+---
+workflow.json:190:        "name": "工具执行",
+workflow.json:191:        "description": "执行选定的工具或工作流",
+workflow.json:192:>       "tool_id": "tool_executor.py",
+workflow.json:193:        "mandatory": true,
+workflow.json:194:        "estimated_time_seconds": 60,
+---
+workflow.json:208:        "name": "验证与保障",
+workflow.json:209:        "description": "验证执行结果、备份配置、保存检查点",
+workflow.json:210:>       "tool_id": "workflow_optimizer.py",
+workflow.json:211:        "mandatory": false,
+workflow.json:212:        "estimated_time_seconds": 20,
+---
+workflow.json:262:        "name": "记忆持久化",
+workflow.json:263:        "description": "蒸馏并保存长期记忆",
+workflow.json:264:>       "tool_id": "memory_distiller.py",
+workflow.json:265:        "mandatory": false,
+workflow.json:266:        "estimated_time_seconds": 30,
+---
+workflow.json:279:        "name": "元认知评估",
+workflow.json:280:        "description": "评估当前会话的认知状态",
+workflow.json:281:>       "tool_id": "metacognition_monitor.py",
+workflow.json:282:        "mandatory": false,
+workflow.json:283:        "estimated_time_seconds": 10,
+---
+workflow.json:296:        "name": "批判者审查",
+workflow.json:297:        "description": "Critic v5.0 最终审查",
+workflow.json:298:>       "tool_id": "embedded_critic.py",
+workflow.json:299:        "mandatory": true,
+workflow.json:300:        "estimated_time_seconds": 20,
+---
+workflow.json:314:        "name": "质量评分",
+workflow.json:315:        "description": "AAI 自主性评分",
+workflow.json:316:>       "tool_id": "aai_scorer.py",
+workflow.json:317:        "mandatory": false,
+workflow.json:318:        "estimated_time_seconds": 10,
+---
+workflow.json:331:        "name": "核心文件压缩",
+workflow.json:332:        "description": "压缩 7 个核心文件",
+workflow.json:333:>       "tool_id": "core_files_compressor.py",
+workflow.json:334:        "mandatory": true,
+workflow.json:335:        "estimated_time_seconds": 15,
+---
+workflow.json:348:        "name": "会话压缩",
+workflow.json:349:        "description": "压缩当前会话内容",
+workflow.json:350:>       "tool_id": "post_session_compress.py",
+workflow.json:351:        "mandatory": true,
+workflow.json:352:        "estimated_time_seconds": 30,
+---
+workflow.json:365:        "name": "会话结束",
+workflow.json:366:        "description": "完成会话结束流程",
+workflow.json:367:>       "tool_id": "session_end.py",
+workflow.json:368:        "mandatory": true,
+workflow.json:369:        "estimated_time_seconds": 10,
+---
+workflow.json:382:        "name": "Git 提交",
+workflow.json:383:        "description": "提交更改到版本控制",
+workflow.json:384:>       "tool_id": "git_commit_helper.py",
+workflow.json:385:        "mandatory": false,
+workflow.json:386:        "estimated_time_seconds": 15,
+---
+workflow.json:399:        "name": "文档生成",
+workflow.json:400:        "description": "自动生成文档 (可选)",
+workflow.json:401:>       "tool_id": "auto_doc_generator.py",
+workflow.json:402:        "mandatory": false,
+workflow.json:403:        "estimated_time_seconds": 20,
+---
+workflow.json:416:        "name": "清理临时文件",
+workflow.json:417:        "description": "清理会话临时文件",
+workflow.json:418:>       "tool_id": "temp_file_cleaner.py",
+workflow.json:419:        "mandatory": false,
+workflow.json:420:        "estimated_time_seconds": 5,
+---

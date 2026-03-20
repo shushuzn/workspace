@@ -1,2 +1,3 @@
 {"timestamp": "2026-03-20T14:11:45.989008", "before_size_kb": 1.86, "after_size_kb": 0, "compression_rate": 0, "success": false, "message": "压缩失败：C:\\Users\\华为\\AppData\\Local\\Programs\\Python\\Python313\\python.exe: can't open file 'D:\\\\OpenClaw\\\\workspace\\\\30-scripts-tools\\\\post_session_compress.py': [Errno 2] No such file or directory\n"}
 {"timestamp": "2026-03-20T14:26:32.581322", "before_size_kb": 6.28, "after_size_kb": 6.28, "compression_rate": 0.0, "success": true, "message": "压缩成功"}
+{"timestamp": "2026-03-20T15:03:35.333103", "before_size_kb": 19.2, "after_size_kb": 19.2, "compression_rate": 0.0, "success": true, "message": "压缩成功"}

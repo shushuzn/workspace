@@ -1,0 +1,163 @@
+# tool_name: read_file
+# created_at: 2026-03-20T14:59:06.474721
+# ---
+      "tool_id": "post_session_compress.py",
+      "mandatory": true,
+      "estimated_time_seconds": 30,
+      "skip_condition": null,
+      "outputs": [
+        "session_summary",
+        "compression_rate"
+      ],
+      "error_handling": {
+        "on_fail": "warn",
+        "max_retries": 2
+      }
+    },
+    {
+      "step_id": 14,
+      "name": "会话结束",
+      "description": "完成会话结束流程",
+      "tool_id": "session_end.py",
+      "mandatory": true,
+      "estimated_time_seconds": 10,
+      "skip_condition": null,
+      "outputs": [
+        "session_report",
+        "cleanup_status"
+      ],
+      "error_handling": {
+        "on_fail": "block",
+        "max_retries": 1
+      }
+    },
+    {
+      "step_id": 15,
+      "name": "Git 提交",
+      "description": "提交更改到版本控制",
+      "tool_id": "git_commit_helper.py",
+      "mandatory": false,
+      "estimated_time_seconds": 15,
+      "skip_condition": "if no_changes",
+      "outputs": [
+        "commit_hash",
+        "files_changed"
+      ],
+      "error_handling": {
+        "on_fail": "warn",
+        "max_retries": 2
+      }
+    },
+    {
+      "step_id": 16,
+      "name": "文档生成",
+      "description": "自动生成文档 (可选)",
+      "tool_id": "auto_doc_generator.py",
+      "mandatory": false,
+      "estimated_time_seconds": 20,
+      "skip_condition": "if not user_requested",
+      "outputs": [
+        "doc_path",
+        "doc_size"
+      ],
+      "error_handling": {
+        "on_fail": "skip",
+        "max_retries": 1
+      }
+    },
+    {
+      "step_id": 17,
+      "name": "清理临时文件",
+      "description": "清理会话临时文件",
+      "tool_id": "temp_file_cleaner.py",
+      "mandatory": false,
+      "estimated_time_seconds": 5,
+      "skip_condition": null,
+      "outputs": [
+        "files_cleaned",
+        "space_freed"
+      ],
+      "error_handling": {
+        "on_fail": "skip",
+        "max_retries": 1
+      }
+    }
+  ],
+  "output_requirements": {
+    "execution_state": "flow-archive/20260318-universal-workflow-001/execution-state.json",
+    "tool_call_log": "30-scripts-tools/tool_call_log.jsonl",
+    "session_summary": "13-memory/YYYY-MM-DD.md",
+    "compression_log": "13-memory/compression_log.json"
+  },
+  "validation_rules": {
+    "min_steps": 7,
+    "max_steps": 20,
+    "min_tool_calls": 5,
+    "min_duration_seconds": 60,
+    "required_tools": [
+      "pre-session-hook.py",
+      "tool_executor.py",
+      "embedded_critic.py",
+      "post_session_compress.py",
+      "session_end.py"
+    ],
+    "mandatory_steps": [
+      1,
+      2,
+      7,
+      13,
+      15,
+      16,
+      17
+    ]
+  },
+  "mandatory_rules": {
+    "core_execution_rules": {
+      "enabled": true,
+      "file": "flow-archive/20260318-universal-workflow-001/CORE-EXECUTION-RULES.md",
+      "verify_tool": "core_rules_verifier.py",
+      "verify_at_step": 1,
+      "block_if_fail": true
+    }
+  },
+  "parallel_groups": [
+    [
+      7,
+      9
+    ],
+    [
+      10,
+      11
+    ]
+  ],
+  "skip_conditions": {
+    "8": "if MEMORY.md < 20KB",
+    "12": "if total_size < 80KB",
+    "16": "if not user_requested"
+  },
+  "change_log": [
+    {
+      "version": "2.1.0",
+      "date": "2026-03-20",
+      "changes": [
+        "步骤 20 进化: 创建 temp_file_cleaner.py 工具",
+        "步骤 20 tool_id: null -> temp_file_cleaner.py",
+        "适应度提升: 0.50 -> 0.95 (预期)"
+      ]
+    },
+    {
+      "version": "2.0.0",
+      "date": "2026-03-20",
+      "changes": [
+        "重新编号所有步骤为连续整数",
+        "更新工具映射到实际存在的文件",
+        "集成新工具: pre-session-hook, core_files_compressor, post_session_compress, session_end",
+        "标记必要步骤: 1, 2, 7, 13, 15, 16, 17",
+        "添加时间估算",
+        "添加步骤分组",
+        "添加并行执行支持",
+        "添加跳过条件"
+      ]
+    }
+  ]
+}

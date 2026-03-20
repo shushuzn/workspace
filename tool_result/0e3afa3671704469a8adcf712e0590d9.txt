@@ -1,0 +1,52 @@
+# tool_name: read_file
+# created_at: 2026-03-20T15:58:48.965911
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 595-640 of 15972)
+      "created_at": "2026-03-20T21:45:00+08:00"
+    },
+    "advanced_report_gen": {
+      "tool_id": "advanced_report_gen",
+      "command": "py 30-scripts-tools/advanced_report_gen.py ${args}",
+      "description": "报告生成",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "reporting",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/advanced_report_gen.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "advanced_report_gen.py",
+        "batch_security_fixer.py",
+        "security_validator.py",
+        "workflow_enhancer.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013634",
+      "quality_score": 49.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "中频使用 (10 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "ai_task_scheduler": {
+      "tool_id": "ai_task_scheduler",
+      "command": "py 30-scripts-tools/ai_task_scheduler.py ${args}",
+
+[15332 more lines. Use start_line=641 to continue.]

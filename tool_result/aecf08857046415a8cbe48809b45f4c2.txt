@@ -1,0 +1,40 @@
+# tool_name: read_file
+# created_at: 2026-03-20T15:23:58.813049
+# ---
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "task": "Brainstorm: AI Agent Workflow Optimization",
+  "description": "Creative brainstorming on improving AI agent workflows",
+  "started_at": "2026-03-20T15:19:50.000000+08:00",
+  "current_step": 7,
+  "total_steps": 17,
+  "status": "in_progress",
+  "step_status": {
+    "1": "completed",
+    "2": "completed",
+    "3": "completed",
+    "4": "completed",
+    "5": "completed",
+    "6": "in_progress",
+    "7": "in_progress"
+  },
+  "completed_steps": [1, 2, 3, 4, 5],
+  "completion_percentage": 35,
+  "workflow_compliance": true,
+  "session_id": "session-20260320151936",
+  "entry_point": "manual_init",
+  "mandatory_execution": true,
+  "signature": "05c58976d833038a4712078dab27f8c1c7095a8428487cf3afdb66b00fe9333a",
+  "protection_enabled": true,
+  "selected_project": {
+    "name": "Dual-layer Memory Architecture",
+    "priority": "P0",
+    "components": [
+      "Working Memory (短期待机)",
+      "Archive Memory (长期向量存储)",
+      "Forgetting Curve (遗忘机制)",
+      "Importance Scorer (重要性评分)",
+      "Cross-session Bridge (Session桥接)"
+    ]
+  }
+}

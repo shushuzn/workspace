@@ -1,0 +1,255 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T16:03:59.234708
+# ---
+============================================================
+CoPaw Entry Point - 强制工作流入口
+============================================================
+Task: "测试自动注册"
+Task Type: simplified
+Flow ID: 20260318-universal-workflow-001-simplified
+Session ID: session-20260320160321
+Start Time: 2026-03-20T16:03:21.452644
+[防护] 自动防护层已激活
+[工作流] 强制执行器已激活
+============================================================
+============================================================
+[WorkflowEnforcer] Initialized for session session-20260320160321
+[WorkflowEnforcer] Flow ID: 20260318-universal-workflow-001-simplified
+[WorkflowEnforcer] Total steps: 5
+[WorkflowEnforcer] Enforcement: ENABLED
+[工作流] 强制执行器已初始化 - 5步
+
+[OK] execution-state.json 已初始化
+  路径：flow-archive\20260318-universal-workflow-001-simplified\execution-state.json
+  总步骤：5
+  保护：State 保护器已启用 ✓
+
+============================================================
+Step 1: 上下文加载验证
+============================================================
+加载文件：7/7
+总大小：45.6KB (目标<100KB)
+缺失文件：0
+验证结果：通过
+============================================================
+
+
+[OK] CoPaw Entry 初始化完成
+现在可以开始执行任务...
+所有工具调用将通过 tool_executor 记录
+
+============================================================
+Step 1.5: 自动注册工具
+============================================================
+  [REGISTER] add-core-rules-to-workflow <- add_core_rules_to_workflow.py
+  [REGISTER] add-missing-key-tools <- add_missing_key_tools.py
+  [REGISTER] add-missing-tool-calls <- add_missing_tool_calls.py
+  [REGISTER] add-mock-tool-calls <- add_mock_tool_calls.py
+  [REGISTER] add-security-rules-to-registry <- add_security_rules_to_registry.py
+  [REGISTER] auto-doc-generator <- auto_doc_generator.py
+  [REGISTER] auto-format-detector <- auto_format_detector.py
+  [REGISTER] auto-retry <- auto_retry.py
+  [REGISTER] auto-todo-updater <- auto_todo_updater.py
+  [REGISTER] brainstorm-ai-assistant <- brainstorm_ai_assistant.py
+  [REGISTER] brainstorm-diverge <- brainstorm_diverge.py
+  [REGISTER] brainstorm-mindmap <- brainstorm_mindmap.py
+  [REGISTER] brainstorm-quality-predictor <- brainstorm_quality_predictor.py
+  [REGISTER] brainstorm-stock-analysis <- brainstorm_stock_analysis.py
+  [REGISTER] check-all-existing-tools <- check_all_existing_tools.py
+  [REGISTER] check-core-files <- check_core_files.py
+  [REGISTER] check-current-state <- check_current_state.py
+  [REGISTER] check-existing-tools-fixed <- check_existing_tools_fixed.py
+  [REGISTER] check-git-version <- check_git_version.py
+  [REGISTER] check-kept-tools <- check_kept_tools.py
+  [REGISTER] check-kept-tools2 <- check_kept_tools2.py
+  [REGISTER] check-key-tools-exist <- check_key_tools_exist.py
+  [REGISTER] check-log <- check_log.py
+  [REGISTER] check-missing-tools <- check_missing_tools.py
+  [REGISTER] check-registry <- check_registry.py
+  [REGISTER] check-registry-count <- check_registry_count.py
+  [REGISTER] check-registry-format <- check_registry_format.py
+  [REGISTER] check-registry-structure <- check_registry_structure.py
+  [REGISTER] check-restored <- check_restored.py
+  [REGISTER] check-session <- check_session.py
+  [REGISTER] check-state-files <- check_state_files.py
+  [REGISTER] check-step-ids <- check_step_ids.py
+  [REGISTER] check-tool-bypass <- check_tool_bypass.py
+  [REGISTER] check-tool-files <- check_tool_files.py
+  [REGISTER] check-tool-log <- check_tool_log.py
+  [REGISTER] check-tool-registry <- check_tool_registry.py
+  [REGISTER] check-tool-structure <- check_tool_structure.py
+  [REGISTER] check-workflow <- check_workflow.py
+  [REGISTER] check-workflow-steps <- check_workflow_steps.py
+  [REGISTER] compare-count <- compare_count.py
+  [REGISTER] complete-current-session <- complete_current_session.py
+  [REGISTER] compression-scheduler <- compression_scheduler.py
+  [REGISTER] content-validator <- content_validator.py
+  [REGISTER] context-aware-assistant <- context_aware_assistant.py
+  [REGISTER] context-verify <- context_verify.py
+  [REGISTER] core-files-compressor <- core_files_compressor.py
+  [REGISTER] core-rules-verifier <- core_rules_verifier.py
+  [REGISTER] count-py-files <- count_py_files.py
+  [REGISTER] count-real-tools <- count_real_tools.py
+  [REGISTER] create-brainstorm-v3 <- create_brainstorm_v3.py
+  [REGISTER] create-dialogue-workflow <- create_dialogue_workflow.py
+  [REGISTER] cross-session-memory <- cross_session_memory.py
+  [REGISTER] data-cache <- data_cache.py
+  [REGISTER] data-source-manager <- data_source_manager.py
+  [REGISTER] debug-registry <- debug_registry.py
+  [REGISTER] debug-step-match <- debug_step_match.py
+  [REGISTER] debug-workflow <- debug_workflow.py
+  [REGISTER] debug-workflow-steps <- debug_workflow_steps.py
+  [REGISTER] diagnose-registry <- diagnose_registry.py
+  [REGISTER] dialog-entry <- dialog_entry.py
+  [REGISTER] dialog-workflow-enforcer <- dialog_workflow_enforcer.py
+  [REGISTER] emotional-intelligence <- emotional_intelligence.py
+  [REGISTER] error-handler <- error_handler.py
+  [REGISTER] evolution-dashboard <- evolution_dashboard.py
+  [REGISTER] exec-protection-task <- exec_protection_task.py
+  [REGISTER] fast-load <- fast_load.py
+  [REGISTER] finalize-current-session <- finalize_current_session.py
+  [REGISTER] finalize-session <- finalize_session.py
+  [REGISTER] find-copaw-tool <- find_copaw_tool.py
+  [REGISTER] find-critic-tools <- find_critic_tools.py
+  [REGISTER] fix-execution-state <- fix_execution_state.py
+  [REGISTER] fix-execution-state-v2 <- fix_execution_state_v2.py
+  [REGISTER] fix-missing-steps <- fix_missing_steps.py
+  [REGISTER] fix-registry-format <- fix_registry_format.py
+  [REGISTER] fix-state-signature <- fix_state_signature.py
+  [REGISTER] fix-state-with-substeps <- fix_state_with_substeps.py
+  [REGISTER] fix-step-id-type <- fix_step_id_type.py
+  [REGISTER] get-workflow-steps <- get_workflow_steps.py
+  [REGISTER] git-precommit-check-v4 <- git_precommit_check_v4.py
+  [REGISTER] guardian-auto-fix <- guardian_auto_fix.py
+  [REGISTER] human-intent-understanding <- human_intent_understanding.py
+  [REGISTER] list-git-files <- list_git_files.py
+  [REGISTER] list-tools <- list_tools.py
+  [REGISTER] mark-all-completed <- mark_all_completed.py
+  [REGISTER] mark-meta-task <- mark_meta_task.py
+  [REGISTER] mark-simplified-execution <- mark_simplified_execution.py
+  [REGISTER] memory-distiller <- memory_distiller.py
+  [REGISTER] note-summarizer <- note_summarizer.py
+  [REGISTER] phase5-planner <- phase5_planner.py
+  [REGISTER] post-session-compress <- post_session_compress.py
+  [REGISTER] pre-session-hook <- pre-session-hook.py
+  [REGISTER] progressive-output <- progressive_output.py
+  [REGISTER] progress-bar <- progress_bar.py
+  [REGISTER] query-tools <- query_tools.py
+  [REGISTER] quick-complete-workflow <- quick_complete_workflow.py
+  [REGISTER] read-steps <- read_steps.py
+  [REGISTER] rebuild-registry <- rebuild_registry.py
+  [REGISTER] reg-agent-monitor <- reg_agent_monitor.py
+  [REGISTER] reg-antibypass <- reg_antibypass.py
+  [REGISTER] reg-auto-backup <- reg_auto_backup.py
+  [REGISTER] reg-auto-critic-v7 <- reg_auto_critic_v7.py
+  [REGISTER] reg-auto-protection <- reg_auto_protection.py
+  [REGISTER] reg-confirmation-gate <- reg_confirmation_gate.py
+  [REGISTER] reg-context-verify <- reg_context_verify.py
+  [REGISTER] reg-dashboard-fix <- reg_dashboard_fix.py
+  [REGISTER] reg-diagnose <- reg_diagnose.py
+  [REGISTER] reg-fix-state-v3 <- reg_fix_state_v3.py
+  [REGISTER] reg-forced-protection <- reg_forced_protection.py
+  [REGISTER] reg-guardian-fix <- reg_guardian_fix.py
+  [REGISTER] reg-mark-all <- reg_mark_all.py
+  [REGISTER] reg-protection-phase2 <- reg_protection_phase2.py
+  [REGISTER] reg-protection-phase3 <- reg_protection_phase3.py
+  [REGISTER] reg-reward-stop <- reg_reward_stop.py
+  [REGISTER] reg-risk-assessor <- reg_risk_assessor.py
+  [REGISTER] reg-rules-verifier <- reg_rules_verifier.py
+  [REGISTER] reg-safe-shell <- reg_safe_shell.py
+  [REGISTER] reg-task <- reg_task.py
+  [REGISTER] reg-task-analyzer <- reg_task_analyzer.py
+  [REGISTER] reg-tool-executor <- reg_tool_executor.py
+  [REGISTER] reg-tool-selector <- reg_tool_selector.py
+  [REGISTER] reg-update-step <- reg_update_step.py
+  [REGISTER] reg-v10.1 <- reg_v10.1.py
+  [REGISTER] reg-v10 <- reg_v10.py
+  [REGISTER] reg-v7 <- reg_v7.py
+  [REGISTER] reg-v8 <- reg_v8.py
+  [REGISTER] reg-v9 <- reg_v9.py
+  [REGISTER] reg-workflow-scheduler <- reg_workflow_scheduler.py
+  [REGISTER] renumber-steps <- renumber_steps.py
+  [REGISTER] restore-state <- restore_state.py
+  [REGISTER] safe-git-executor <- safe_git_executor.py
+  [REGISTER] sa-001-realtime-fetcher <- sa_001_realtime_fetcher.py
+  [REGISTER] sa-002-historical-downloader <- sa_002_historical_downloader.py
+  [REGISTER] sa-003-financial-collector <- sa_003_financial_collector.py
+  [REGISTER] sa-004-sentiment-monitor <- sa_004_sentiment_monitor.py
+  [REGISTER] sa-005-indicator-calculator <- sa_005_indicator_calculator.py
+  [REGISTER] sa-006-pattern-recognition <- sa_006_pattern_recognition.py
+  [REGISTER] sa-007-trend-analysis <- sa_007_trend_analysis.py
+  [REGISTER] sa-008-support-resistance <- sa_008_support_resistance.py
+  [REGISTER] sa-009-financial-ratios <- sa_009_financial_ratios.py
+  [REGISTER] sa-009-risk-management <- sa_009_risk_management.py
+  [REGISTER] sa-010-signal-generator <- sa_010_signal_generator.py
+  [REGISTER] sa-010-valuation-model <- sa_010_valuation_model.py
+  [REGISTER] sa-011-backtesting <- sa_011_backtesting.py
+  [REGISTER] sa-011-growth-analysis <- sa_011_growth_analysis.py
+  [REGISTER] sa-012-industry-analysis <- sa_012_industry_analysis.py
+  [REGISTER] sa-012-report-generator <- sa_012_report_generator.py
+  [REGISTER] sa-013-portfolio-risk <- sa_013_portfolio_risk.py
+  [REGISTER] sa-014-alert-system <- sa_014_alert_system.py
+  [REGISTER] sa-015-market-regime <- sa_015_market_regime.py
+  [REGISTER] sa-016-sentiment-aggregator <- sa_016_sentiment_aggregator.py
+  [REGISTER] sa-017-strategy-optimizer <- sa_017_strategy_optimizer.py
+  [REGISTER] sa-018-performance-attribution <- sa_018_performance_attribution.py
+  [REGISTER] search-shell-tools <- search_shell_tools.py
+  [REGISTER] self-corrector <- self_corrector.py
+  [REGISTER] self-goal-setter <- self_goal_setter.py
+  [REGISTER] session-compressor <- session_compressor.py
+  [REGISTER] session-end <- session_end.py
+  [REGISTER] session-end-audit <- session_end_audit.py
+  [REGISTER] show-new-registry <- show_new_registry.py
+  [REGISTER] sitecustomize <- sitecustomize.py
+  [REGISTER] state-monitor <- state_monitor.py
+  [REGISTER] state-protector <- state_protector.py
+  [REGISTER] step1-context-verify <- step1_context_verify.py
+  [REGISTER] stock-analysis-pipeline <- stock_analysis_pipeline.py
+  [REGISTER] stock-analysis-quality-predictor <- stock_analysis_quality_predictor.py
+  [REGISTER] summary-generator <- summary_generator.py
+  [REGISTER] sync-registry <- sync_registry.py
+  [REGISTER] sync-registry-smart <- sync_registry_smart.py
+  [REGISTER] task-classifier <- task_classifier.py
+  [REGISTER] task-decomposer <- task_decomposer.py
+  [REGISTER] temp-file-cleaner <- temp_file_cleaner.py
+  [REGISTER] tool-call-interceptor-v2 <- tool_call_interceptor_v2.py
+  [REGISTER] tool-executor <- tool_executor.py
+  [REGISTER] tool-selector <- tool_selector.py
+  [REGISTER] tool-self-learner <- tool_self_learner.py
+  [REGISTER] tool-wrapper <- tool_wrapper.py
+  [REGISTER] typing-indicator <- typing_indicator.py
+  [REGISTER] update-execution-state <- update_execution_state.py
+  [REGISTER] update-mandatory-workflow <- update_mandatory_workflow.py
+  [REGISTER] update-registry-phase3 <- update_registry_phase3.py
+  [REGISTER] update-registry-sa-phase1 <- update_registry_sa_phase1.py
+  [REGISTER] update-registry-sa-phase1-complete <- update_registry_sa_phase1_complete.py
+  [REGISTER] update-registry-sa-phase2 <- update_registry_sa_phase2.py
+  [REGISTER] update-registry-sa-phase2-final <- update_registry_sa_phase2_final.py
+  [REGISTER] update-registry-stock-brainstorm <- update_registry_stock_brainstorm.py
+  [REGISTER] update-registry-ux-phase3 <- update_registry_ux_phase3.py
+  [REGISTER] update-state-for-mandatory <- update_state_for_mandatory.py
+  [REGISTER] update-step-state <- update_step_state.py
+  [REGISTER] update-workflow-enforcement <- update_workflow_enforcement.py
+  [REGISTER] user-preferences <- user_preferences.py
+  [REGISTER] ux-settings <- ux_settings.py
+  [REGISTER] verify-rebuild <- verify_rebuild.py
+  [REGISTER] verify-registry-update <- verify_registry_update.py
+  [REGISTER] verify-sa-tools <- verify_sa_tools.py
+  [REGISTER] verify-state-types <- verify_state_types.py
+  [REGISTER] verify-workflow-complete <- verify_workflow_complete.py
+  [REGISTER] verify-workflow-update <- verify_workflow_update.py
+  [REGISTER] view-safe-shell <- view_safe_shell.py
+  [REGISTER] workflow-analyzer <- workflow_analyzer.py
+  [REGISTER] workflow-enforcer-v2 <- workflow_enforcer_v2.py
+  [REGISTER] workflow-evolver <- workflow_evolver.py
+  [REGISTER] workflow-helper <- workflow_helper.py
+  [REGISTER] workflow-optimizer <- workflow_optimizer.py
+  [REGISTER] workflow-performance-monitor <- workflow_performance_monitor.py
+  [REGISTER] workflow-scheduler <- workflow_scheduler.py
+  [REGISTER] workflow-self-test <- workflow_self_test.py
+  [REGISTER] 共注册 206 个新工具
+
+============================================================
+等待任务完成...
+按 Ctrl+C 或调用 entry.finalize() 结束会话
+============================================================

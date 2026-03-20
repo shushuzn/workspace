@@ -1,0 +1,54 @@
+{
+  "summary": {
+    "symbol": "TSLA",
+    "timestamp": "2026-03-20T16:17:33.042151",
+    "report_version": "1.0.0",
+    "executive_summary": "TSLA 股票分析报告 - 2026-03-20"
+  },
+  "price": {
+    "current_price": 150.0,
+    "change_pct": 1.25,
+    "volume": 52000000,
+    "market_cap": "2.5T",
+    "52w_high": 198.23,
+    "52w_low": 124.17
+  },
+  "indicators": {
+    "rsi": {
+      "value": 65.5,
+      "signal": "neutral"
+    },
+    "macd": {
+      "value": 0.5,
+      "signal": "bullish"
+    },
+    "sma_20": 148.5,
+    "sma_50": 145.0,
+    "bollinger": {
+      "upper": 155,
+      "middle": 148,
+      "lower": 141
+    }
+  },
+  "trend": {
+    "direction": "bullish",
+    "strength": 0.7,
+    "support": 145.0,
+    "resistance": 155.0,
+    "outlook": "短期看涨，中期震荡"
+  },
+  "financial": {
+    "pe_ratio": 25.5,
+    "eps": 5.8,
+    "dividend_yield": 0.55,
+    "revenue_growth": 8.5,
+    "profit_margin": 24.2
+  },
+  "recommendation": {
+    "signal": "HOLD",
+    "reason": "中性区域",
+    "target_price": 160.0,
+    "stop_loss": 140.0,
+    "confidence": 0.75
+  }
+}

@@ -1,0 +1,195 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T16:01:26.175601
+# ---
+add_missing_key_tools.py:11:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+add_security_rules_to_registry.py:4:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+add_security_rules_to_registry.py:58:> with open('30-scripts-tools/tools_registry.json', 'w', encoding='utf-8') as f:
+anti_bypass_engine.py:99:>             Path("30-scripts-tools/tools_registry.json"),
+auto_backup.py:52:>             "30-scripts-tools/tools_registry.json",
+auto_recovery.py:22:> TOOLS_REGISTRY = Path("30-scripts-tools/tools_registry.json")
+auto_recovery.py:59:>             "tools_registry.json": TOOLS_REGISTRY,
+auto_recovery.py:177:>         elif "tools_registry" in file_name:
+auto_recovery.py:212:>             elif "tools_registry" in file_name:
+auto_recovery.py:213:>                 self._log("Rebuild tools_registry", "FAIL", "Cannot auto-rebuild registry")
+auto_todo_updater.py:31:>         self.tools_registry = self.workspace / "30-scripts-tools" / "tools_registry.json"
+auto_todo_updater.py:61:>             filepath = self.tools_registry.parent / filename
+BLOCKING-CONFIG-SUMMARY.md:65:> - ✅ 已注册到 tools_registry.json
+check_all_existing_tools.py:12:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+check_existing_tools_fixed.py:11:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+check_git_version.py:6:>     ["git", "show", "7f1c44e:30-scripts-tools/tools_registry.json"],
+check_kept_tools.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_kept_tools2.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_missing_tools.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_registry.py:4:> registry_file = Path("30-scripts-tools/tools_registry.json")
+check_registry.py:19:>     print("ERROR: tools_registry.json 不存在")
+check_registry_count.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_registry_format.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_registry_structure.py:3:> """Check tools_registry.json structure"""
+check_registry_structure.py:7:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+check_restored.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+check_tool_files.py:4:> registry_file = Path("30-scripts-tools/tools_registry.json")
+check_tool_registration.py:19:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+check_tool_registry.py:4:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+check_tool_structure.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+commit_fix.bat:9:> - Registered 6 missing tools to tools_registry.json v1.6.3
+commit_integration.bat:12:> - tools_registry.json v1.6.2
+commit_low_priority.bat:12:> - Registered 6 tools to tools_registry.json v1.6.4
+commit_medium_priority.bat:14:> - Registered 6 tools to tools_registry.json v1.6.5
+compare_count.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+compliance_dashboard.py:160:>         registry_file = Path("30-scripts-tools/tools_registry.json")
+context_aware_assistant.py:16:>         self.registry_file = Path("30-scripts-tools/tools_registry.json")
+critic-auto-phase2-session-end-refactor.json:36:>       "evidence": "Git commits: d39eaa8 \"Tool Architecture Phase 1 complete - tools_registry + executor\", 53a6f79 \"Tool Architecture Phase 1 complete - tools_registry + executor\", 6e401ad \"Memory tag search integrated - 7/7 tools complete\"",
+critic-auto-phase2-session-end-refactor.json:43:>       "evidence": "Commits: d39eaa8 \"Tool Architecture Phase 1 complete - tools_registry + executor\", 53a6f79 \"Tool Architecture Phase 1 complete - tools_registry + executor\", 6e401ad \"Memory tag search integrated - 7/7 tools complete\" | Uncommitted: None",
+critic-auto-phase4-architecture-compliance.json:36:>       "evidence": "Git commits: 8fe4ea6 \"Tool Architecture Phase 1 complete - tools_registry + executor\", 062cc65 \"Tool Architecture Phase 1 complete - tools_registry + executor\", 3595dea \"Tool Architecture Phase 1 complete - tools_registry + executor\"",
+CRITICAL-CHECKS-CONFIG.md:13:> **规则:** 创建的工具必须在 `tools_registry.json` 注册  
+CRITICAL-CHECKS-CONFIG.md:71:>   "item": "【CRITICAL-001】创建的工具必须在 tools_registry.json 注册",
+CRITICAL-CHECKS-CONFIG.md:103:> **注册:** `tools_registry.json` → `critical-checks`  
+CRITICAL-CHECKS-CONFIG.md:135:> **文件:** `tools_registry.json` → `compliance_rules.zero_score_items`
+CRITICAL-CHECKS-CONFIG.md:142:>   "rule": "创建的工具必须在 tools_registry.json 注册",
+CRITICAL-CHECKS-CONFIG.md:173:> [CRITICAL-001] 创建的工具必须在 tools_registry.json 注册
+CRITICAL-CHECKS-CONFIG.md:198:> 3. **注册到 tools_registry.json**:
+CRITICAL-CHECKS-CONFIG.md:252:> - [x] critical-checks 已注册到 tools_registry.json
+debug_registry.py:4:> registry_file = Path("30-scripts-tools/tools_registry.json")
+diagnose_registry.py:10:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+find_copaw_tool.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+find_critic_tools.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+fix_registry_format.py:4:> 修复 tools_registry.json - 修正 command 字段格式
+fix_registry_format.py:10:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+integrate_all.bat:12:> echo [Step 1] 注册工具到 tools_registry.json...
+MULTI-WORKFLOW-FLOW-ISOLATION.md:285:> - `30-scripts-tools/tools_registry.json` - 工具注册表
+NON-BLOCKING-FIXES-SUMMARY.md:35:> **修复:** 从 tools_registry.json 移除 --limit 参数  
+NON-BLOCKING-FIXES-SUMMARY.md:36:> **文件:** `30-scripts-tools/tools_registry.json`  
+NON-BLOCKING-FIXES-SUMMARY.md:86:> **修复方案:** 更新 tools_registry.json 参数  
+NON-BLOCKING-FIXES-SUMMARY.md:105:> 1. `6589d92` - Fix non-blocking issues (auto-critic, memory_consistency, tools_registry)
+protection_monitor.py:137:>             "tools_registry.json",
+query_tools.py:2:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+rebuild_registry.py:4:> 重建 tools_registry.json - 基于实际存在的文件
+rebuild_registry.py:12:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+reg_agent_monitor.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_agent_monitor.py:27:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_antibypass.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_antibypass.py:43:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_auto_backup.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_auto_backup.py:18:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_auto_critic_v7.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_auto_critic_v7.py:18:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_auto_protection.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_auto_protection.py:19:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_confirmation_gate.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_confirmation_gate.py:18:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_context_verify.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_context_verify.py:22:>     with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_dashboard_fix.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_dashboard_fix.py:43:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_diagnose.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_diagnose.py:17:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_fix_state_v3.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_fix_state_v3.py:17:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_forced_protection.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_forced_protection.py:43:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_guardian_fix.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_guardian_fix.py:17:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_mark_all.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_mark_all.py:17:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_protection_phase2.py:10:>     with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_protection_phase2.py:63:>     with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_protection_phase3.py:10:>     with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_protection_phase3.py:56:>     with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_reward_stop.py:10:>     with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_reward_stop.py:49:>     with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_risk_assessor.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_risk_assessor.py:18:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_rules_verifier.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_rules_verifier.py:16:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_safe_shell.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_safe_shell.py:43:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_task.py:2:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_task.py:13:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_task_analyzer.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_task_analyzer.py:17:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_tool_executor.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_tool_executor.py:17:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_tool_selector.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_tool_selector.py:16:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_update_step.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_update_step.py:17:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_v10.1.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_v10.1.py:43:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_v10.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_v10.py:54:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_v7.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_v7.py:54:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_v8.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_v8.py:54:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_v9.py:4:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_v9.py:26:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+reg_workflow_scheduler.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+reg_workflow_scheduler.py:16:> with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
+risk_assessor.py:90:>             ("py sync_registry.py", "30-scripts-tools/tools_registry.json"),
+search_shell_tools.py:4:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+self_corrector.py:44:>                     (r"tool.*not registered", "Register tool in tools_registry.json"),
+show_new_registry.py:3:> with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
+state_snapshot.py:26:>         "30-scripts-tools/tools_registry.json",
+sync_registry.py:4:> 同步 tools_registry.json 与实际存在的工具文件
+sync_registry.py:12:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+sync_registry_smart.py:4:> 智能同步 tools_registry.json 与实际存在的工具文件
+sync_registry_smart.py:22:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+TOOL-CALLING-RULES.md:5:> **位置:** `30-scripts-tools/tools_registry.json`
+TOOL-CALLING-RULES.md:23:> # ✅ 合规：通过 tools_registry.json 配置调整
+TOOL-CALLING-RULES.md:58:> > **新工具必须注册到 tools_registry.json**
+TOOL-CALLING-RULES.md:71:> # 或手动添加到 tools_registry.json
+TOOL-CALLING-RULES.md:148:> │ tools_registry│ ← 查 找 工 具 命 令
+TOOL-CALLING-RULES.md:161:> - `tools_registry.json` - 工具注册表（唯一真值来源）
+TOOL-RULES-SUMMARY.md:15:> - ✅ 写入 `tools_registry.json` principles
+TOOL-RULES-SUMMARY.md:23:> - ✅ 写入 `tools_registry.json` enforcement_rules
+TOOL-RULES-SUMMARY.md:29:> > 新工具必须注册到 `tools_registry.json`
+TOOL-RULES-SUMMARY.md:97:> # 修改 tools_registry.json
+TOOL-RULES-SUMMARY.md:116:> 2. **注册表原则** - `tools_registry.json` principles
+TOOL-RULES-SUMMARY.md:125:> - `tools_registry.json` - 工具注册表（唯一真值来源）
+TOOL-RULES-SUMMARY.md:135:> - [x] 规则写入 `tools_registry.json`
+tool_call_interceptor_v2.py:21:> TOOL_REGISTRY = Path("30-scripts-tools/tools_registry.json")
+tool_call_log.jsonl:85:> {"timestamp": "2026-03-20T10:47:25.245232", "session_id": "session-20260320102523", "tool_id": "safe-shell-executor", "command": "py -c \"import json; r=json.load(open('30-scripts-tools/tools_registry.json')); print('Version:', r.get('version')); print('Security rules:', 'security' in r.get('enforcement_rules', {}))\"", "description": "", "result": "error", "returncode": 1}
+tool_call_log.jsonl:189:> {"timestamp": "2026-03-20T12:44:25.533924", "tool_id": "execute_shell_command", "params": {"command": "py 30-scripts-tools/update_tools_registry.py --add sa_005_indicator_calculator.py --id SA-005 --name Technical Indicator Calculator --priority P0 --phase Phase2-StockAnalysis"}, "result": "error", "returncode": 1, "session_id": "session-20260320124324"}
+tool_call_log.jsonl:190:> {"timestamp": "2026-03-20T12:44:25.535652", "session_id": "session-20260320124324", "tool_id": "execute_shell_command", "params": {"command": "py 30-scripts-tools/update_tools_registry.py --add sa_005_indicator_calculator.py --id SA-005 --name Technical Indicator Calculator --priority P0 --phase Phase2-StockAnalysis"}, "result": "error"}
+tool_call_log.jsonl:319:> {"timestamp": "2026-03-20T13:31:19.836154", "session_id": "session-20260320132932", "tool_id": "safe-shell-executor", "command": "Select-String -Path 30-scripts-tools/tools_registry.json -Pattern 'SA-0' | Select-Object -First 10", "description": "", "result": "error", "returncode": 255, "flow_id": "20260318-universal-workflow-001", "task": "20260318-universal-workflow-001 完整测试", "current_step": 14, "protection_enabled": true, "modified_files": []}
+tool_call_log.jsonl:320:> {"timestamp": "2026-03-20T13:31:19.836999", "session_id": "session-20260320132932", "tool_id": "safe_shell_executor", "params": {"command": "Select-String -Path 30-scripts-tools/tools_registry.json -Pattern 'SA-0' | Select-Object -First 10"}, "result": "error"}
+tool_selector.py:24:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+tool_self_learner.py:19:>         self.registry_file = Path("30-scripts-tools/tools_registry.json")
+tool_self_learner.py:325:>     registry_file = Path("30-scripts-tools/tools_registry.json")
+tools_registry.json:44:>       "compliance": "通过 tools_registry.json 配置调整工具行为"
+tools_registry.json:47:>       "rule": "新工具必须注册到 tools_registry.json",
+tools_registry.json:15839:>         "rule": "创建的工具必须在 tools_registry.json 注册",
+tools_registry.json:15854:>         "工具是否在 tools_registry.json 中唯一定义",
+update_registry_phase3.py:8:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+update_registry_phase3.py:50:> with open('30-scripts-tools/tools_registry.json', 'w', encoding='utf-8') as f:
+update_registry_sa_phase1.py:9:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+update_registry_sa_phase1.py:89:> with open('30-scripts-tools/tools_registry.json', 'w', encoding='utf-8') as f:
+update_registry_sa_phase1_complete.py:9:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+update_registry_sa_phase1_complete.py:89:> with open('30-scripts-tools/tools_registry.json', 'w', encoding='utf-8') as f:
+update_registry_sa_phase2.py:3:> """Update tools_registry.json with new stock analysis tools"""
+update_registry_sa_phase2.py:9:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+update_registry_sa_phase2.py:122:> with open('30-scripts-tools/tools_registry.json', 'w', encoding='utf-8') as f:
+update_registry_sa_phase2_final.py:3:> """Update tools_registry.json with SA-009 to SA-012"""
+update_registry_sa_phase2_final.py:9:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+update_registry_sa_phase2_final.py:122:> with open('30-scripts-tools/tools_registry.json', 'w', encoding='utf-8') as f:
+update_registry_stock_brainstorm.py:9:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+update_registry_stock_brainstorm.py:81:> with open('30-scripts-tools/tools_registry.json', 'w', encoding='utf-8') as f:
+update_registry_ux_phase3.py:3:> """Update tools_registry.json with UX Phase 3 tools"""
+update_registry_ux_phase3.py:9:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+update_registry_ux_phase3.py:127:> with open('30-scripts-tools/tools_registry.json', 'w', encoding='utf-8') as f:
+update_workflow_enforcement.py:8:> 2. 所有工具必须通过 tools_registry.json 注册
+update_workflow_enforcement.py:28:>     "🛡️ 禁止直接使用工具脚本 - 所有工具必须通过 tools_registry.json 注册",
+update_workflow_enforcement.py:37:> workflow["enforcement"]["tool_registry_path"] = "30-scripts-tools/tools_registry.json"
+update_workflow_enforcement.py:93:> 工具调用 → 检查 tools_registry.json → 工具 ID 存在？→ 否 → 拒绝
+update_workflow_enforcement.py:99:> - 所有工具必须在 `tools_registry.json` 中注册
+verify_rebuild.py:4:> registry_file = Path("30-scripts-tools/tools_registry.json")
+verify_registry_update.py:3:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+verify_sa_tools.py:2:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+view_safe_shell.py:3:> with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
+WORKFLOW-ENFORCER.md:186:> **位置:** `30-scripts-tools/tools_registry.json`
+WORKFLOW-OPTIMIZATION-PLAN.md:182:>         registry_file = WORKSPACE / "30-scripts-tools" / "tools_registry.json"
+WORKFLOW-OPTIMIZATION-PLAN.md:506:>         registry_file = WORKSPACE / "30-scripts-tools" / "tools_registry.json"
+workflow_auto_executor.py:73:>         registry_file = Path("30-scripts-tools/tools_registry.json")
+WORKFLOW_ENFORCEMENT.md:108:> - 对比 `tools_registry.json`
+WORKFLOW_ENFORCEMENT.md:175:> # 手动添加到 tools_registry.json
+workflows\tool-dev-integration.json:9:>     "禁止手动修改 tools_registry.json",

@@ -1,0 +1,37 @@
+# tool_name: glob_search
+# created_at: 2026-03-20T15:24:28.073747
+# ---
+30-scripts-tools\05-AI-RESEARCH\ai-contribution-extractor.py
+30-scripts-tools\05-AI-RESEARCH\auto-report-generator.py
+30-scripts-tools\05-AI-RESEARCH\auto-survey-generator.py
+30-scripts-tools\05-AI-RESEARCH\auto-tagger.py
+30-scripts-tools\05-AI-RESEARCH\batch-processor-optimized.py
+30-scripts-tools\05-AI-RESEARCH\batch-processor-realtime.py
+30-scripts-tools\05-AI-RESEARCH\cache-mechanism.py
+30-scripts-tools\05-AI-RESEARCH\collaboration-network.py
+30-scripts-tools\05-AI-RESEARCH\collaboration-recommender.py
+30-scripts-tools\05-AI-RESEARCH\context-compressor.py
+30-scripts-tools\05-AI-RESEARCH\data-quality-checker.py
+30-scripts-tools\05-AI-RESEARCH\generate-stats.py
+30-scripts-tools\05-AI-RESEARCH\knowledge-optimizer.py
+30-scripts-tools\05-AI-RESEARCH\knowledge-qa-system.py
+30-scripts-tools\05-AI-RESEARCH\paper-classifier.py
+30-scripts-tools\05-AI-RESEARCH\paper-comparator.py
+30-scripts-tools\05-AI-RESEARCH\paper-quality-scorer.py
+30-scripts-tools\05-AI-RESEARCH\pdf-downloader.py
+30-scripts-tools\05-AI-RESEARCH\pdf-metadata-extractor.py
+30-scripts-tools\05-AI-RESEARCH\performance-benchmark.py
+30-scripts-tools\05-AI-RESEARCH\performance-optimizer.py
+30-scripts-tools\05-AI-RESEARCH\performance_optimization.py
+30-scripts-tools\05-AI-RESEARCH\pnote-auto-fill.py
+30-scripts-tools\05-AI-RESEARCH\report-generator.py
+30-scripts-tools\05-AI-RESEARCH\research-doc-generator.py
+30-scripts-tools\05-AI-RESEARCH\research-question-discovery.py
+30-scripts-tools\05-AI-RESEARCH\research-stats.py
+30-scripts-tools\05-AI-RESEARCH\sync-arxiv-papers.py
+30-scripts-tools\05-AI-RESEARCH\task-monitor.py
+30-scripts-tools\05-AI-RESEARCH\tech-trend-predictor.py
+30-scripts-tools\05-AI-RESEARCH\topic-clusterer.py
+30-scripts-tools\05-AI-RESEARCH\trend-analyzer.py
+30-scripts-tools\05-AI-RESEARCH\update-progress.py
+30-scripts-tools\05-AI-RESEARCH\user-authentication.py

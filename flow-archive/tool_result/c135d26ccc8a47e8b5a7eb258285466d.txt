@@ -1,0 +1,18 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T15:43:54.945704
+# ---
+flow-arxiv-brainstorm\checkpoint.json:31:>       "Build metacognition monitoring system",
+OPTIMIZATION-PLAN.md:45:> | 8.7 | metacognition-monitor | ❌ | metacognition_monitor.py ✅ |
+OPTIMIZATION-PLAN.md:123:> | 12 | 元认知评估 | metacognition_monitor.py | ✅ 替换 |
+tool_mapping.json:109:>       "tool_id": "metacognition_monitor.py",
+tool_mapping.json:111:>       "path": "30-scripts-tools/metacognition_monitor.py",
+tool_mapping.json:114:>       "notes": "替代 metacognition-monitor"
+tool_mapping.json:251:>       "old": "metacognition-monitor.py",
+tool_mapping.json:252:>       "new": "metacognition_monitor.py",
+workflow-v1.6.0-backup.json:491:>       "tool_id": "metacognition-monitor",
+workflow-v1.6.0-backup.json:962:>   "metacognition": {
+workflow-v1.6.0-backup.json:967:>     "metrics_storage": "flow-archive/20260318-universal-workflow-001/metacognition-log.json",
+workflow-v2.0.0.json:217:>       "tool_id": "metacognition_monitor.py",
+workflow-v2.0.0.json:221:>       "outputs": ["consciousness_score", "metacognition_report"],
+workflow.json:281:>       "tool_id": "metacognition_monitor.py",
+workflow.json:287:>         "metacognition_report"

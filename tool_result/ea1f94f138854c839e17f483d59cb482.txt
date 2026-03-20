@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-20T15:57:56.019368
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tools_registry.json  (lines 525-560 of 15917)
+        "usage": "低频使用 (1 次)",
+        "maintenance": "无时间戳"
+      },
+      "examples": [
+        "py brainstorm_action.py --prioritized_ideas \"[...]\" --timeline \"本周\""
+      ],
+      "improved_at": "2026-03-19T18:20:28.908492",
+      "improvement_version": "1.1.0"
+    },
+    "workflow-enforcer": {
+      "category": "workflow-enforcement",
+      "description": "工作流强制执行器 - 会话前/提交前检查",
+      "status": "active",
+      "usage_count": 0,
+      "file_path": "30-scripts-tools/workflow_enforcer.py",
+      "created_at": "2026-03-20T21:45:00+08:00"
+    },
+    "advanced_report_gen": {
+      "tool_id": "advanced_report_gen",
+      "command": "py 30-scripts-tools/advanced_report_gen.py ${args}",
+      "description": "报告生成",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "reporting",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/advanced_report_gen.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+
+[15357 more lines. Use start_line=561 to continue.]

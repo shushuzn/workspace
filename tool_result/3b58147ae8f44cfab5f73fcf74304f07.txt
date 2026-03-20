@@ -1,0 +1,205 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T15:56:51.491193
+# ---
+aai_scorer.py:211:>     scorer = AAIScorer("20260320-main-workflow-brainstorm")
+adaptive_workflow.py:35:>         "brainstorm": {
+adaptive_workflow.py:66:>         elif any(kw in task_lower for kw in ["头脑风暴", "brainstorm", "创意", "ideas"]):
+adaptive_workflow.py:67:>             return "brainstorm"
+BRAINSTORM-MEMORY-COMPRESSION-2026-03-17.md:1:> # Brainstorm: Memory Compression Optimization
+BRAINSTORM-MEMORY-COMPRESSION-2026-03-17.md:349:> - [ ] Create this brainstorm report ✅
+BRAINSTORM-MEMORY-COMPRESSION-2026-03-17.md:371:> **Brainstorm Session:** COMPLETE ✅  
+BRAINSTORM-WORKFLOW-DESIGN.md:3:> **Flow ID:** `20260318-brainstorm-001`  
+BRAINSTORM-WORKFLOW-DESIGN.md:31:> **工具:** `brainstorm_define.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:33:> **输出:** `brainstorm_topic.json`
+BRAINSTORM-WORKFLOW-DESIGN.md:42:> **工具:** `brainstorm_research.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:57:> **工具:** `brainstorm_diverge.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:76:> **工具:** `brainstorm_connect.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:92:> **工具:** `brainstorm_filter.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:104:> **工具:** `brainstorm_evaluate.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:120:> **工具:** `brainstorm_prioritize.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:131:> **工具:** `brainstorm_action.py`  
+BRAINSTORM-WORKFLOW-DESIGN.md:148:> | brainstorm_define.py | 问题定义 | ✅ 阻塞 | ✅ 已实现 |
+BRAINSTORM-WORKFLOW-DESIGN.md:149:> | brainstorm_research.py | 背景研究 | ❌ 非阻塞 | ❌ 待实现 |
+BRAINSTORM-WORKFLOW-DESIGN.md:150:> | brainstorm_diverge.py | 自由联想 | ❌ 非阻塞 | ✅ 已实现 |
+BRAINSTORM-WORKFLOW-DESIGN.md:151:> | brainstorm_connect.py | 强制关联 | ❌ 非阻塞 | ❌ 待实现 |
+BRAINSTORM-WORKFLOW-DESIGN.md:152:> | brainstorm_filter.py | 初步筛选 | ❌ 非阻塞 | ✅ 已实现 |
+BRAINSTORM-WORKFLOW-DESIGN.md:153:> | brainstorm_evaluate.py | 深度评估 | ❌ 非阻塞 | ❌ 待实现 |
+BRAINSTORM-WORKFLOW-DESIGN.md:154:> | brainstorm_prioritize.py | 优先级排序 | ❌ 非阻塞 | ✅ 已实现 |
+BRAINSTORM-WORKFLOW-DESIGN.md:155:> | brainstorm_action.py | 行动规划 | ✅ 阻塞 | ✅ 已实现 |
+BRAINSTORM-WORKFLOW-DESIGN.md:166:>   "flow_id": "20260318-brainstorm-001",
+BRAINSTORM-WORKFLOW-DESIGN.md:200:> py 30-scripts-tools/embedded_critic.py --step brainstorm --input <file> --threshold 7
+BRAINSTORM-WORKFLOW-DESIGN.md:206:> - 记录到 `brainstorm_session.json`
+BRAINSTORM-WORKFLOW-DESIGN.md:214:> 20260318-brainstorm-001/
+BRAINSTORM-WORKFLOW-DESIGN.md:215:> ├── brainstorm_topic.json       # 问题定义
+BRAINSTORM-WORKFLOW-GUIDE.md:3:> **Flow ID:** `20260318-brainstorm-001`  
+BRAINSTORM-WORKFLOW-GUIDE.md:6:> **归档位置:** `flow-archive/20260318-brainstorm-001/`
+BRAINSTORM-WORKFLOW-GUIDE.md:15:> py 30-scripts-tools\tool_executor.py --workflow brainstorm-001
+BRAINSTORM-WORKFLOW-GUIDE.md:21:> py 30-scripts-tools\start-flow.bat brainstorm-001
+BRAINSTORM-WORKFLOW-GUIDE.md:24:> **工作流文件:** `flow-archive/20260318-brainstorm-001/workflow.json`
+BRAINSTORM-WORKFLOW-GUIDE.md:30:> py 30-scripts-tools\brainstorm_define.py
+BRAINSTORM-WORKFLOW-GUIDE.md:33:> py 30-scripts-tools\brainstorm_diverge.py
+BRAINSTORM-WORKFLOW-GUIDE.md:36:> py 30-scripts-tools\brainstorm_prioritize.py
+BRAINSTORM-WORKFLOW-GUIDE.md:39:> py 30-scripts-tools\brainstorm_action.py
+BRAINSTORM-WORKFLOW-GUIDE.md:72:> | `brainstorm_topic.json` | 问题定义 | ✅ |
+BRAINSTORM-WORKFLOW-GUIDE.md:135:> | `brainstorm_define.py` | 问题定义 | ✅ |
+BRAINSTORM-WORKFLOW-GUIDE.md:136:> | `brainstorm_diverge.py` | 自由联想 | ❌ |
+BRAINSTORM-WORKFLOW-GUIDE.md:137:> | `brainstorm_prioritize.py` | 优先级排序 | ❌ |
+BRAINSTORM-WORKFLOW-GUIDE.md:138:> | `brainstorm_action.py` | 行动规划 | ✅ |
+brainstorm_action.py:20:>     ranked_file = Path("flow-archive/brainstorm-current/ideas_ranked.json")
+brainstorm_action.py:22:>         print("❌ 请先运行 brainstorm_prioritize.py 排序想法")
+brainstorm_action.py:72:>     output_path = Path("flow-archive/brainstorm-current/action_plan.json")
+brainstorm_ai_assistant.py:12:> class BrainstormAIAssistant:
+brainstorm_ai_assistant.py:16:>         self.log_file = Path("flow-archive/20260320-brainstorm-v2/ai-assistant-log.json")
+brainstorm_ai_assistant.py:191:>         output.append(" " * 22 + "AI Brainstorm Assistant")
+brainstorm_ai_assistant.py:217:>     assistant = BrainstormAIAssistant()
+brainstorm_ai_assistant.py:219:>     print("AI Brainstorm Assistant Test")
+brainstorm_define.py:41:>     output_path = Path("flow-archive/brainstorm-current/brainstorm_topic.json")
+brainstorm_diverge.py:33:>     topic_file = Path("flow-archive/brainstorm-current/brainstorm_topic.json")
+brainstorm_diverge.py:35:>         print("❌ 请先运行 brainstorm_define.py 定义问题")
+brainstorm_diverge.py:85:>     output_path = Path("flow-archive/brainstorm-current/ideas_raw.json")
+brainstorm_filter.py:20:>     ideas_file = Path("flow-archive/brainstorm-current/ideas_raw.json")
+brainstorm_filter.py:22:>         print("❌ 请先运行 brainstorm_diverge.py 产生想法")
+brainstorm_filter.py:69:>     output_path = Path("flow-archive/brainstorm-current/ideas_shortlisted.json")
+brainstorm_mindmap.py:12:> class BrainstormMindMap:
+brainstorm_mindmap.py:16:>         self.output_dir = Path("flow-archive/20260320-brainstorm-v2/mindmaps")
+brainstorm_mindmap.py:19:>     def generate_from_ideas(self, ideas: List[Dict], title: str = "Brainstorm") -> Dict:
+brainstorm_mindmap.py:103:>         lines.append("\n*Generated by Brainstorm MindMap Generator*\n")
+brainstorm_mindmap.py:111:>             "title": "Brainstorm Iteration Comparison",
+brainstorm_mindmap.py:186:>     def run(self, ideas: List[Dict], title: str = "Brainstorm") -> Dict:
+brainstorm_mindmap.py:192:>     mindmap = BrainstormMindMap()
+brainstorm_mindmap.py:205:>     result = mindmap.generate_from_ideas(test_ideas, "Test Brainstorm")
+brainstorm_prioritize.py:24:>     shortlisted_file = Path("flow-archive/brainstorm-current/ideas_shortlisted.json")
+brainstorm_prioritize.py:26:>         print("❌ 请先运行 brainstorm_filter.py 筛选想法")
+brainstorm_prioritize.py:79:>     output_path = Path("flow-archive/brainstorm-current/ideas_ranked.json")
+brainstorm_quality_predictor.py:12:> class BrainstormQualityPredictor:
+brainstorm_quality_predictor.py:16:>         self.model_file = Path("flow-archive/20260320-brainstorm-v2/quality-model.json")
+brainstorm_quality_predictor.py:17:>         self.history_file = Path("flow-archive/20260320-brainstorm-v2/idea-history.json")
+brainstorm_quality_predictor.py:266:>     predictor = BrainstormQualityPredictor()
+brainstorm_stock_analysis.py:4:> Stock Analysis Workflow Brainstorm - AI Assistant
+brainstorm_stock_analysis.py:301:>     print(" " * 20 + "Stock Analysis Workflow Brainstorm")
+brainstorm_stock_analysis.py:345:>     print("[OK] Brainstorm completed")
+commit_brainstorm.bat:7:> git commit -m "feat: workflow brainstorm - identified 15 issues across 6 dimensions
+commit_brainstorm.bat:9:> - workflow_brainstorm.py (18.7KB) - 6-dimension review tool
+commit_brainstorm.bat:10:> - WORKFLOW-BRAINSTORM-REPORT.md (3.0KB)
+commit_brainstorm.bat:11:> - brainstorm-workflow-issues.json
+commit_brainstorm_done.bat:7:> git commit -m "docs: brainstorm completion report
+commit_brainstorm_done.bat:9:> - Add BRAINSTORM-COMPLETION-REPORT.md
+commit_final.bat:7:> git commit -m "docs: brainstorm Top 5 final completion report - 100%% implemented!
+commit_final.bat:9:> - BRAINSTORM-TOP5-FINAL-REPORT.md
+commit_memory.bat:21:> - Brainstorm priority #1 implementation
+commit_memory_done.bat:11:> - Brainstorm priority #1 implemented
+commit_multimodal.bat:7:> git commit -m "feat: multimodal understanding system - brainstorm priority #5 COMPLETE!
+commit_multimodal.bat:14:> - BRAINSTORM TOP 5: 5/5 (100%) COMPLETE! 🎉
+commit_proactive.bat:7:> git commit -m "feat: proactive interaction system - brainstorm priority #3
+commit_proactive.bat:14:> - Brainstorm implementation: 4/5 (80%%) complete
+commit_task.bat:20:> - Brainstorm priority #2 implementation
+commit_task_done.bat:11:> - Brainstorm priority #2 implemented
+context_aware_assistant.py:36:>             "brainstorm": ["brainstorm_ai_assistant", "brainstorm_mindmap", "brainstorm_quality_predictor"],
+create_brainstorm_v3.py:11:> def create_brainstorm_v3_workflow():
+create_brainstorm_v3.py:15:>         "flow_id": "20260320-brainstorm-v3",
+create_brainstorm_v3.py:26:>             "AI 创意助手集成 (brainstorm_ai_assistant)",
+create_brainstorm_v3.py:27:>             "思维导图可视化 (brainstorm_mindmap)",
+create_brainstorm_v3.py:28:>             "创意质量预测 (brainstorm_quality_predictor)",
+create_brainstorm_v3.py:71:>                 "tool_id": "brainstorm_ai_assistant",
+create_brainstorm_v3.py:80:>                 "tool_id": "brainstorm_facilitator",
+create_brainstorm_v3.py:88:>                 "tool_id": "brainstorm_ai_assistant",
+create_brainstorm_v3.py:96:>                 "tool_id": "brainstorm_ai_assistant",
+create_brainstorm_v3.py:104:>                 "tool_id": "brainstorm_quality_predictor",
+create_brainstorm_v3.py:112:>                 "tool_id": "brainstorm_convergent",
+create_brainstorm_v3.py:119:>                 "tool_id": "brainstorm_mindmap",
+create_brainstorm_v3.py:162:>             "brainstorm_ai_assistant",
+create_brainstorm_v3.py:163:>             "brainstorm_mindmap",
+create_brainstorm_v3.py:164:>             "brainstorm_quality_predictor",
+create_brainstorm_v3.py:165:>             "brainstorm_facilitator",
+create_brainstorm_v3.py:166:>             "brainstorm_convergent",
+create_brainstorm_v3.py:172:>             "flow-archive/20260320-brainstorm-v3/report.md",
+create_brainstorm_v3.py:173:>             "flow-archive/20260320-brainstorm-v3/mindmaps/*.md",
+create_brainstorm_v3.py:174:>             "flow-archive/20260320-brainstorm-v3/ideas.json"
+create_brainstorm_v3.py:182:>     workflow = create_brainstorm_v3_workflow()
+create_brainstorm_v3.py:184:>     print("Brainstorm Workflow v3.0")
+create_brainstorm_v3.py:204:>     output_dir = Path("flow-archive/20260320-brainstorm-v3")
+create_brainstorm_v3.py:212:>     print(f"\n[OK] Brainstorm v3 workflow created")
+critic-auto-long-term-memory-system-v7.json:30:>       "evidence": "Uncommitted: 2 | Last commit: 02e8368 docs: brainstorm completion report"
+critic-auto-long-term-memory-system-v7.json:39:>       "evidence": "Latest review: critic-auto-brainstorm-ai-agent-evolution-v7.json, Score: N/A"
+critic-auto-speed-optimization-phase3-v7.json:107:>       "evidence": "New tools: ['async_io_manager', 'auto_doc_generator', 'batch_parallel_processor', 'changelog_generator', 'comprehensive_performance_benchmark', 'config_backup', 'connection_pool_manager', 'data_structure_optimizer', 'db_index_optimizer', 'incremental_executor', 'lru_cache_examples', 'lru_cache_manager', 'memory_auto_compress', 'memory_persistence', 'multi_level_cache', 'performance_benchmark', 'query_result_cache', 'register_low_priority_tools', 'register_medium_priority_tools', 'register_missing_tools', 'register_phase2_tools', 'register_speed_opt_tool', 'register_speed_tools_batch', 'result_cache', 'rollback_manager', 'speed_optimization_brainstorm'] | Used: [] | Unused: ['async_io_manager', 'auto_doc_generator', 'batch_parallel_processor', 'changelog_generator', 'comprehensive_performance_benchmark', 'config_backup', 'connection_pool_manager', 'data_structure_optimizer', 'db_index_optimizer', 'incremental_executor', 'lru_cache_examples', 'lru_cache_manager', 'memory_auto_compress', 'memory_persistence', 'multi_level_cache', 'performance_benchmark', 'query_result_cache', 'register_low_priority_tools', 'register_medium_priority_tools', 'register_missing_tools', 'register_phase2_tools', 'register_speed_opt_tool', 'register_speed_tools_batch', 'result_cache', 'rollback_manager', 'speed_optimization_brainstorm']"
+critic-auto-头脑风暴工作流创建完成-v7.json:30:>       "evidence": "Uncommitted: 4 | Last commit: b959bb0 Add brainstorm workflow (20260318-brainstorm-001)"
+critic-auto-头脑风暴工作流创建完成-v7.json:107:>       "evidence": "New tools: ['brainstorm_action', 'brainstorm_define', 'brainstorm_diverge', 'brainstorm_prioritize'] | Used: []"
+critic-auto-头脑风暴工作流创建完成.json:36:>       "evidence": "Git commits: b959bb0 Add brainstorm workflow (20260318-brainstorm-001), b4bd290 Add non-blocking fixes summary, 96fea24 [FLOW ID: 20260318-universal-workflow-001] \"非阻塞问题修复完成\"",
+critic-auto-头脑风暴工作流创建完成.json:43:>       "evidence": "Commits: b959bb0 Add brainstorm workflow (20260318-brainstorm-001), b4bd290 Add non-blocking fixes summary, 96fea24 [FLOW ID: 20260318-universal-workflow-001] \"非阻塞问题修复完成\" | Uncommitted: None",
+critic-auto-头脑风暴工作流归档完成-v7.json:30:>       "evidence": "Uncommitted: 8 | Last commit: e966d66 Archive brainstorm workflow in flow-archive/"
+critic-auto-头脑风暴工作流归档完成-v7.json:107:>       "evidence": "New tools: ['brainstorm_action', 'brainstorm_define', 'brainstorm_diverge', 'brainstorm_prioritize'] | Used: [] | Unused: ['brainstorm_action', 'brainstorm_define', 'brainstorm_diverge', 'brainstorm_prioritize']"
+critic-auto-头脑风暴工作流归档完成.json:36:>       "evidence": "Git commits: e966d66 Archive brainstorm workflow in flow-archive/, ea8df20 [FLOW ID: 20260318-universal-workflow-001] \"头脑风暴工作流创建完成\", b959bb0 Add brainstorm workflow (20260318-brainstorm-001)",
+critic-auto-头脑风暴工作流归档完成.json:43:>       "evidence": "Commits: e966d66 Archive brainstorm workflow in flow-archive/, ea8df20 [FLOW ID: 20260318-universal-workflow-001] \"头脑风暴工作流创建完成\", b959bb0 Add brainstorm workflow (20260318-brainstorm-001) | Uncommitted: None",
+critic-auto-头脑风暴工作流归档完成.json:140:>       "notes": "工具未使用：{'brainstorm-diverge', 'critical-checks', 'critical-issue-detector', 'brainstorm-action', 'brainstorm-define', 'brainstorm-prioritize', 'flow-manager', 'remediation-tracker'}",
+critic-auto-头脑风暴工作流归档完成.json:141:>       "evidence": "⚠️ Unused tools: {'brainstorm-diverge', 'critical-checks', 'critical-issue-detector', 'brainstorm-action', 'brainstorm-define', 'brainstorm-prioritize', 'flow-manager', 'remediation-tracker'}",
+GIT-HOOK-GUIDE.md:23:> **测试用例 1.2:** `-brainstorm-` 模式
+GIT-HOOK-GUIDE.md:25:> echo "# Test" > 21-reports/test-brainstorm-20260318.md
+GIT-HOOK-GUIDE.md:26:> git add 21-reports/test-brainstorm-20260318.md
+GIT-HOOKS.md:16:> - `21-reports/*-brainstorm-*`
+git_commit_brainstorm.bat:7:> git commit -m "Add brainstorm workflow optimization results"
+git_commit_final.bat:7:> git commit -m "Complete brainstorm workflow - 24 ideas generated"
+metacognition_monitor.py:148:>     monitor = MetacognitionMonitor("20260320-main-workflow-brainstorm")
+smart_task_decomposer.py:82:>         elif "头脑风暴" in task_description or "brainstorm" in task_description.lower():
+tools_registry.json:6:>     "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
+tools_registry.json:7:>     "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
+tools_registry.json:8:>     "v1.11.1: Added brainstorm workflow v2.0 tools (divergent, convergent, facilitator, critic-lite)",
+tools_registry.json:20:>     "Added brainstorm workflow tools (define, diverge, prioritize, action)",
+tools_registry.json:21:>     "Added brainstorm workflow tools (define, diverge, prioritize, action)",
+tools_registry.json:22:>     "Brainstorm workflow archived in flow-archive/20260318-brainstorm-001/",
+tools_registry.json:23:>     "Added sub-workflows as tools (session-end, brainstorm)"
+tools_registry.json:430:>     "brainstorm-define": {
+tools_registry.json:431:>       "tool_id": "brainstorm-define",
+tools_registry.json:432:>       "name": "Brainstorm Define",
+tools_registry.json:435:>       "command": "py 30-scripts-tools\\brainstorm_define.py",
+tools_registry.json:451:>         "output_file": "30-scripts-tools/brainstorm_topic.json"
+tools_registry.json:476:>         "py brainstorm_define.py --topic \"AI  Agent 自主性提升\"",
+tools_registry.json:477:>         "py brainstorm_define.py --topic \"工具库优化\" --constraints \"[\"时间<1 小时\", \"不影响核心功能\"]\""
+tools_registry.json:482:>     "brainstorm-action": {
+tools_registry.json:483:>       "tool_id": "brainstorm-action",
+tools_registry.json:484:>       "name": "Brainstorm Action",
+tools_registry.json:487:>       "command": "py 30-scripts-tools\\brainstorm_action.py",
+tools_registry.json:529:>         "py brainstorm_action.py --prioritized_ideas \"[...]\" --timeline \"本周\""
+tools_registry.json:1591:>     "brainstorm_action": {
+tools_registry.json:1592:>       "tool_id": "brainstorm_action",
+tools_registry.json:1593:>       "command": "py 30-scripts-tools/brainstorm_action.py ${args}",
+tools_registry.json:1597:>       "category": "brainstorm",
+tools_registry.json:1606:>         "py 30-scripts-tools/brainstorm_action.py --help"
+tools_registry.json:1617:>         "brainstorm_action.py"
+tools_registry.json:1629:>     "brainstorm_define": {
+tools_registry.json:1630:>       "tool_id": "brainstorm_define",
+tools_registry.json:1631:>       "command": "py 30-scripts-tools/brainstorm_define.py ${args}",
+tools_registry.json:1635:>       "category": "brainstorm",
+tools_registry.json:1644:>         "py 30-scripts-tools/brainstorm_define.py --help"
+tools_registry.json:1655:>         "brainstorm_diverge.py"
+tools_registry.json:1667:>     "brainstorm_diverge": {
+tools_registry.json:1668:>       "tool_id": "brainstorm_diverge",
+tools_registry.json:1669:>       "command": "py 30-scripts-tools/brainstorm_diverge.py ${args}",
+tools_registry.json:1673:>       "category": "brainstorm",
+tools_registry.json:1682:>         "py 30-scripts-tools/brainstorm_diverge.py --help"
+tools_registry.json:1693:>         "brainstorm_diverge.py"
+tools_registry.json:7230:>         "brainstorm_tool_governance.py",
+tools_registry.json:8634:>         "brainstorm_tool_governance.py",
+tools_registry.json:11777:>     "brainstorm_agent_autonomy": {
+tools_registry.json:11778:>       "name": "Brainstorm Agent Autonomy",
+tools_registry.json:11780:>       "file": "brainstorm_agent_autonomy.py",
+tools_registry.json:11781:>       "category": "brainstorm",
+tools_registry.json:11784:>         "py brainstorm_agent_autonomy.py"
+tools_registry.json:11790:>         "register_brainstorm_tool.py"
+tools_registry.json:11802:>     "brainstorm_research_driven": {
+tools_registry.json:11803:>       "name": "Brainstorm Research Driven",
+tools_registry.json:11805:>       "file": "brainstorm_research_driven.py",
+tools_registry.json:11806:>       "category": "brainstorm",
+tools_registry.json:11809:>         "py brainstorm_research_driven.py"
+tools_registry.json:11815:>         "register_research_brainstorm.py"
+tools_registry.json:11852:>     "brainstorm_tool_governance": {
+tools_registry.json:11853:>       "name": "Brainstorm Tool Governance",
+tools_registry.json:11855:>       "file": "brainstorm_tool_governance.py",
+tools_registry.json:11856:>       "category": "brainstorm",
+tools_registry.json:11859:>         "py brainstorm_tool_governance.py"
+tools_registry.json:11890:>         "brainstorm_tool_governance.py",
+tools_registry.json:11920:>         "brainstorm_tool_governance.py",
+tools_registry.json:11949:>         "brainstorm_tool_governance.py",
+tools_registry.json:11978:>         "brainstorm_tool_governance.py",
+tools_registry.json:12007:>         "brainstorm_tool_governance.py",
+
+(Results truncated at 200 matches.)

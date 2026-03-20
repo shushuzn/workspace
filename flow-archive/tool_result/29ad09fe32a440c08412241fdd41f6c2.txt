@@ -1,0 +1,59 @@
+# tool_name: grep_search
+# created_at: 2026-03-20T15:44:17.523425
+# ---
+OPTIMIZATION-PLAN.md:42:  | 8 | checkpoint_saver | ❌ | state_snapshot.py ✅ |
+OPTIMIZATION-PLAN.md:43:  | 8.5 | memory-persistence | ❌ | memory_distiller.py ✅ |
+OPTIMIZATION-PLAN.md:44:  | 8.6 | rollback-manager | ❌ | (合并到步骤 8) |
+OPTIMIZATION-PLAN.md:45:> | 8.7 | metacognition-monitor | ❌ | metacognition_monitor.py ✅ |
+OPTIMIZATION-PLAN.md:46:  | 9.1 | auto_critic_v7 | ❌ | embedded_critic.py ✅ |
+OPTIMIZATION-PLAN.md:47:  | 10.1 | quality-gate-check | ❌ | (合并到步骤 9) |
+OPTIMIZATION-PLAN.md:48:  | 10.5 | aai-scorer | ✅ | - |
+---
+OPTIMIZATION-PLAN.md:120:  | 9 | 自动备份 | auto_backup.py | ✅ 替换 |
+OPTIMIZATION-PLAN.md:121:  | 10 | 检查点保存 | state_snapshot.py | ✅ 替换 |
+OPTIMIZATION-PLAN.md:122:  | 11 | 记忆持久化 | memory_distiller.py | ✅ 替换 |
+OPTIMIZATION-PLAN.md:123:> | 12 | 元认知评估 | metacognition_monitor.py | ✅ 替换 |
+OPTIMIZATION-PLAN.md:124:  | 13 | 批判者审查 | embedded_critic.py | ✅ 替换 |
+OPTIMIZATION-PLAN.md:125:  | 14 | 质量评分 | aai_scorer.py | ✅ 保留 |
+OPTIMIZATION-PLAN.md:126:  | 15 | 核心文件压缩 | core_files_compressor.py | ✅ 新增 |
+---
+tool_mapping.json:106:      },
+tool_mapping.json:107:      "12": {
+tool_mapping.json:108:        "step_name": "元认知评估",
+tool_mapping.json:109:>       "tool_id": "metacognition_monitor.py",
+tool_mapping.json:110:        "exists": true,
+tool_mapping.json:111:        "path": "30-scripts-tools/metacognition_monitor.py",
+tool_mapping.json:112:        "size_kb": 6.8,
+---
+tool_mapping.json:108:        "step_name": "元认知评估",
+tool_mapping.json:109:        "tool_id": "metacognition_monitor.py",
+tool_mapping.json:110:        "exists": true,
+tool_mapping.json:111:>       "path": "30-scripts-tools/metacognition_monitor.py",
+tool_mapping.json:112:        "size_kb": 6.8,
+tool_mapping.json:113:        "status": "active",
+tool_mapping.json:114:        "notes": "替代 metacognition-monitor"
+---
+tool_mapping.json:249:      },
+tool_mapping.json:250:      {
+tool_mapping.json:251:        "old": "metacognition-monitor.py",
+tool_mapping.json:252:>       "new": "metacognition_monitor.py",
+tool_mapping.json:253:        "reason": "名称标准化"
+tool_mapping.json:254:      },
+tool_mapping.json:255:      {
+---
+workflow-v2.0.0.json:214:        "step_id": 12,
+workflow-v2.0.0.json:215:        "name": "元认知评估",
+workflow-v2.0.0.json:216:        "description": "评估当前会话的认知状态",
+workflow-v2.0.0.json:217:>       "tool_id": "metacognition_monitor.py",
+workflow-v2.0.0.json:218:        "mandatory": false,
+workflow-v2.0.0.json:219:        "estimated_time_seconds": 10,
+workflow-v2.0.0.json:220:        "skip_condition": "if_short_session",
+---
+workflow.json:278:        "step_id": 9,
+workflow.json:279:        "name": "元认知评估",
+workflow.json:280:        "description": "评估当前会话的认知状态",
+workflow.json:281:>       "tool_id": "metacognition_monitor.py",
+workflow.json:282:        "mandatory": false,
+workflow.json:283:        "estimated_time_seconds": 10,
+workflow.json:284:        "skip_condition": "if_short_session",
+---

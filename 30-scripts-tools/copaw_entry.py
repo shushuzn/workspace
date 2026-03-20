@@ -280,12 +280,95 @@ class CopawEntry:
             return False
 
 
+def auto_register_tools():
+    """自动注册新创建的工具到 tools_registry.json"""
+    import uuid
+    
+    registry_file = Path("30-scripts-tools/tools_registry.json")
+    scripts_dir = Path("30-scripts-tools")
+    
+    with open(registry_file, "r", encoding="utf-8") as f:
+        registry = json.load(f)
+    
+    if "tools" not in registry:
+        registry["tools"] = {}
+    
+    # 获取已注册的 tool_id
+    registered_ids = set(registry["tools"].keys())
+    
+    # 排除列表 - 不自动注册
+    EXCLUDE_PREFIXES = (
+        "_", "test_", "sitecustomize",  # 特殊文件
+        "check_", "verify_", "debug_",  # 检查/调试工具
+        "fix_", "repair_", "restore_",  # 修复工具
+        "reg_",  # 注册脚本
+    )
+    EXCLUDE_NAMES = {
+        "copaw_entry", "tool_executor", "session_end", "session_compressor",
+        "auto_protection_layer", "forced_protection_executor", "workflow_enforcer",
+        "state_protector", "safe_shell_executor", "tool_call_interceptor",
+        "sync_registry", "rebuild_registry", "fast_load", "pre_session_hook",
+    }
+    
+    # 扫描所有 .py 文件
+    new_tools = []
+    for py_file in scripts_dir.glob("*.py"):
+        # 跳过特殊文件
+        if py_file.name.startswith("_") or py_file.name.startswith("test_"):
+            continue
+        if py_file.stem in EXCLUDE_NAMES:
+            continue
+        if any(py_file.stem.startswith(p) for p in EXCLUDE_PREFIXES):
+            continue
+        
+        tool_id = py_file.stem.replace("_", "-")
+        
+        # 如果未注册，自动添加
+        if tool_id not in registered_ids:
+            tool_info = {
+                "tool_id": tool_id,
+                "name": py_file.stem.replace("-", " ").title(),
+                "description": f"自动注册的工具: {py_file.name}",
+                "version": "1.0",
+                "command": f"py 30-scripts-tools\\{py_file.name}",
+                "parameters": [],
+                "triggers": ["manual"],
+                "review_required": False,
+                "blocking": False,
+                "timeout_seconds": 300,
+                "category": "automation",
+                "categorized_at": datetime.now().isoformat() + "+08:00",
+                "auto_registered": True,
+                "auto_registered_at": datetime.now().isoformat()
+            }
+            registry["tools"][tool_id] = tool_info
+            new_tools.append(tool_id)
+            print(f"  [REGISTER] {tool_id} <- {py_file.name}")
+    
+    if new_tools:
+        # 保存 registry
+        registry["last_updated"] = datetime.now().isoformat()
+        with open(registry_file, "w", encoding="utf-8") as f:
+            json.dump(registry, f, ensure_ascii=False, indent=2)
+        print(f"  [REGISTER] 共注册 {len(new_tools)} 个新工具")
+        return len(new_tools)
+    else:
+        print(f"  [REGISTER] 无新工具需要注册")
+        return 0
+
+
 def main():
     """主函数 - 从命令行调用"""
     task_name = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else "Default Task"
     
     entry = CopawEntry(task_name)
     success = entry.run()
+    
+    # 【新增】自动注册新工具
+    print(f"\n{'='*60}")
+    print("Step 1.5: 自动注册工具")
+    print(f"{'='*60}")
+    auto_register_tools()
     
     # 保持入口点活跃，等待任务完成
     if success:

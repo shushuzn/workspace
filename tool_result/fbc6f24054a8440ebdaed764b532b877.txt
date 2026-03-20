@@ -1,0 +1,65 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:19:26.703272
+# ---
+        return result
+    
+    def execute(self, description: str = "") -> Dict:
+        """执行完整的会话结束流程"""
+        result = {
+            'timestamp': datetime.now().isoformat(),
+            'flow_id': self.flow_id,
+            'description': description,
+            'steps': {}
+        }
+        
+        # 1. 检查会话状态
+        result['steps']['check_state'] = self.check_session_state()
+        
+        # 2. 压缩核心文件
+        result['steps']['compress_core'] = self.compress_core_files()
+        
+        # 3. 压缩会话
+        result['steps']['compress_session'] = self.compress_session()
+        
+        # 4. 生成摘要
+        result['summary'] = self.generate_summary(description)
+        print(result['summary'])
+        
+        # 5. 清理临时文件（可选）
+        # result['steps']['cleanup'] = self.cleanup_temp_files()
+        
+        return result
+
+
+def main():
+    """主函数"""
+    if len(sys.argv) < 2:
+        print("用法: py session_end.py \"完成描述\" [--flow-id FLOW_ID]")
+        return
+    
+    # 解析参数
+    description = ""
+    flow_id = None
+    
+    i = 1
+    while i < len(sys.argv):
+        if sys.argv[i] == '--flow-id' and i + 1 < len(sys.argv):
+            flow_id = sys.argv[i + 1]
+            i += 2
+        else:
+            description = sys.argv[i]
+            i += 1
+    
+    # 执行会话结束
+    session_end = SessionEnd(flow_id=flow_id)
+    result = session_end.execute(description)
+    
+    # 返回状态码
+    if result['steps']['compress_core']['after']['within_limit']:
+        sys.exit(0)
+    else:
+        sys.exit(1)
+
+
+if __name__ == "__main__":
+    main()

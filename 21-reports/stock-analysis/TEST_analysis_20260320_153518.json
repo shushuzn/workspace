@@ -1,0 +1,86 @@
+{
+  "symbol": "TEST",
+  "timestamp": "2026-03-20T15:35:18.882354",
+  "pipeline_version": "1.0.0",
+  "stages": {
+    "SA-005": {
+      "status": "simulated",
+      "message": "工具模块未找到，使用模拟数据",
+      "data": {
+        "indicators": {
+          "MA20": 150.23,
+          "MA50": 148.56,
+          "MA200": 145.78,
+          "RSI": 58.34,
+          "MACD": {
+            "value": 2.34,
+            "signal": 1.89,
+            "histogram": 0.45
+          },
+          "Bollinger": {
+            "upper": 155.67,
+            "middle": 150.23,
+            "lower": 144.79
+          }
+        }
+      },
+      "tool_id": "SA-005",
+      "tool_name": "技术指标计算器",
+      "execution_time": 0.0005846023559570312
+    },
+    "SA-006": {
+      "status": "error",
+      "message": "工具模块缺少 analyze/run 函数",
+      "tool_id": "SA-006",
+      "tool_name": "形态识别",
+      "execution_time": 0.0006825923919677734
+    },
+    "SA-007": {
+      "status": "error",
+      "message": "工具模块缺少 analyze/run 函数",
+      "tool_id": "SA-007",
+      "tool_name": "趋势分析",
+      "execution_time": 0.000614166259765625
+    },
+    "SA-008": {
+      "status": "error",
+      "message": "工具模块缺少 analyze/run 函数",
+      "tool_id": "SA-008",
+      "tool_name": "支撑阻力",
+      "execution_time": 0.0005574226379394531
+    },
+    "SA-009": {
+      "status": "error",
+      "message": "工具模块缺少 analyze/run 函数",
+      "tool_id": "SA-009",
+      "tool_name": "财务比率",
+      "execution_time": 0.000537872314453125
+    },
+    "SA-010": {
+      "status": "error",
+      "message": "工具模块缺少 analyze/run 函数",
+      "tool_id": "SA-010",
+      "tool_name": "估值模型",
+      "execution_time": 0.0005049705505371094
+    },
+    "SA-011": {
+      "status": "error",
+      "message": "工具模块缺少 analyze/run 函数",
+      "tool_id": "SA-011",
+      "tool_name": "成长性分析",
+      "execution_time": 0.0005209445953369141
+    },
+    "SA-012": {
+      "status": "simulated",
+      "message": "工具模块未找到，使用模拟数据",
+      "data": {
+        "industry_rank": "Top 20%",
+        "competitive_advantage": "Strong",
+        "report_url": "report.html"
+      },
+      "tool_id": "SA-012",
+      "tool_name": "行业地位 + 报告生成",
+      "execution_time": 0.0006995201110839844
+    }
+  }
+}

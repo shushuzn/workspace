@@ -1,0 +1,31 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-20T15:51:08.035663
+# ---
+ Volume in drive D has no label.
+ Volume Serial Number is 0E0F-B1B8
+
+ Directory of D:\OpenClaw\workspace\flow-archive\20260318-universal-workflow-001-simplified
+
+2026/03/20  15:50               688 execution-state.json
+               1 File(s)            688 bytes
+               0 Dir(s)  381,771,145,216 bytes free
+{
+  "flow_id": "20260318-universal-workflow-001-simplified",
+  "task": "\"头脑风暴\"",
+  "description": "Task started via copaw_entry.py",
+  "started_at": "2026-03-20T15:50:49.211317+08:00",
+  "current_step": 0,
+  "total_steps": 5,
+  "status": "failed",
+  "step_status": {},
+  "completed_steps": [],
+  "completion_percentage": 0,
+  "workflow_compliance": false,
+  "session_id": "session-20260320155049",
+  "entry_point": "copaw_entry.py",
+  "mandatory_execution": true,
+  "signature": "c4150ff10557f11f539284962ce41291e572043f97791f9be348c716720fd5cb",
+  "protection_enabled": true,
+  "ended_at": "2026-03-20T15:50:49.215940+08:00",
+  "duration_seconds": 0.004623
+}

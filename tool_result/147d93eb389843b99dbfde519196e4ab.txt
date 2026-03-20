@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:17:29.236116
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\sa_012_report_generator.py  (lines 100-160 of 462)
+        report_file = self.data_dir / f"{symbol}_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+        with open(report_file, 'w', encoding='utf-8') as f:
+            json.dump(report, f, ensure_ascii=False, indent=2)
+        
+        # Also save text version
+        text_file = self.data_dir / f"{symbol}_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
+        with open(text_file, 'w', encoding='utf-8') as f:
+            f.write(report["text_report"])
+        
+        # Log report
+        self._log_report(symbol, report["overall_rating"], success=True)
+        
+        return report
+    
+    def _generate_executive_summary(self, symbol: str, data: Dict) -> str:
+        """Generate executive summary"""
+        summary_parts = []
+        
+        # Price info
+        if "price_data" in data:
+            price = data["price_data"].get("current_price", 0)
+            change = data["price_data"].get("change_pct", 0)
+            summary_parts.append(f"{symbol} is trading at ${price:.2f} ({change:+.2f}%)")
+        
+        # Trend
+        if "trend" in data:
+            trend = data["trend"].get("overall_trend", "unknown")
+            summary_parts.append(f"overall trend is {trend}")
+        
+        # Signal
+        if "signals" in data:
+            signal = data["signals"].get("confluence_signal", {}).get("signal", "neutral")
+            summary_parts.append(f"technical signal: {signal}")
+        
+        return " | ".join(summary_parts) if summary_parts else "Analysis in progress"
+    
+    def _format_price_section(self, price_data: Dict) -> Dict:
+        """Format price analysis section"""
+        return {
+            "current_price": price_data.get("current_price", 0),
+            "change": price_data.get("change", 0),
+            "change_pct": price_data.get("change_pct", 0),
+            "high_52w": price_data.get("high_52w", 0),
+            "low_52w": price_data.get("low_52w", 0),
+            "volume": price_data.get("volume", 0),
+            "avg_volume": price_data.get("avg_volume", 0)
+        }
+    
+    def _format_indicators_section(self, indicators: Dict) -> Dict:
+        """Format technical indicators section"""
+        return {
+            "mas": indicators.get("moving_averages", {}),
+            "rsi": indicators.get("rsi", {}),
+            "macd": indicators.get("macd", {}),
+            "kdj": indicators.get("kdj", {}),
+            "boll": indicators.get("bollinger", {})
+        }
+    
+    def _format_trend_section(self, trend: Dict) -> Dict:
+        """Format trend analysis section"""
+        return {
+
+[302 more lines. Use start_line=161 to continue.]

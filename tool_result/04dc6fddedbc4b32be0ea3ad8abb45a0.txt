@@ -1,0 +1,66 @@
+# tool_name: read_file
+# created_at: 2026-03-20T15:24:38.667216
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\session_compressor.py  (lines 1-60 of 205)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+会话压缩器 - 压缩当前会话内容到 <5KB
+触发条件：会话 token > 10000 或 会话时长 > 30min
+"""
+
+import json
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, List
+
+class SessionCompressor:
+    """会话压缩器"""
+    
+    def __init__(self):
+        self.session_file = Path("13-memory/session_temp.json")
+        self.daily_note = Path(f"13-memory/{datetime.now().strftime('%Y-%m-%d')}.md")
+        self.threshold_tokens = 10000
+        self.threshold_lines = 200
+        self.target_size_kb = 5
+    
+    def check_threshold(self) -> Dict:
+        """检查是否达到压缩阈值"""
+        result = {
+            "should_compress": False,
+            "reason": [],
+            "current_stats": {}
+        }
+        
+        # 检查会话文件
+        if self.session_file.exists():
+            with open(self.session_file, 'r', encoding='utf-8') as f:
+                content = f.read()
+                token_estimate = len(content) // 4  # 粗略估算
+                result["current_stats"]["session_tokens"] = token_estimate
+                result["current_stats"]["session_size_kb"] = len(content) / 1024
+                
+                if token_estimate > self.threshold_tokens:
+                    result["should_compress"] = True
+                    result["reason"].append(f"Session tokens ({token_estimate}) > threshold ({self.threshold_tokens})")
+        
+        # 检查当日笔记
+        if self.daily_note.exists():
+            with open(self.daily_note, 'r', encoding='utf-8') as f:
+                lines = len(f.readlines())
+                result["current_stats"]["note_lines"] = lines
+                
+                if lines > self.threshold_lines:
+                    result["should_compress"] = True
+                    result["reason"].append(f"Note lines ({lines}) > threshold ({self.threshold_lines})")
+        
+        return result
+    
+    def compress_session(self) -> Dict:
+        """压缩会话"""
+        if not self.session_file.exists():
+            return {"status": "skipped", "reason": "No session file"}
+        
+        with open(self.session_file, 'r', encoding='utf-8') as f:
+
+[145 more lines. Use start_line=61 to continue.]

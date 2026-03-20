@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-20T16:19:10.923250
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\session_end.py  (lines 1-50 of 211)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+会话结束脚本 - 完整的会话结束流程
+
+功能：
+1. 检查会话状态
+2. 压缩核心文件
+3. 压缩今日笔记
+4. 生成会话摘要
+5. 更新 MEMORY.md
+6. 清理临时文件
+7. 生成审计报告
+
+使用：
+  py session_end.py "完成描述"
+  py session_end.py --flow-id 20260318-universal-workflow-001
+"""
+
+import json
+import sys
+from pathlib import Path
+from datetime import datetime
+from typing import Dict, Optional
+
+# 导入核心模块
+sys.path.insert(0, str(Path(__file__).parent))
+
+from core_files_compressor import CoreFilesCompressor
+from session_compressor import SessionCompressor
+
+
+class SessionEnd:
+    """会话结束处理器"""
+    
+    def __init__(self, flow_id: str = None):
+        self.workspace = Path(__file__).parent.parent
+        self.today = datetime.now().strftime('%Y-%m-%d')
+        self.flow_id = flow_id or f"{self.today.replace('-', '')}-universal-workflow-001"
+        self.session_file = self.workspace / '13-memory/session_temp.json'
+        self.execution_state = self.workspace / f'flow-archive/{self.flow_id}/execution-state.json'
+        self.daily_note = self.workspace / f'13-memory/{self.today}.md'
+        
+    def check_session_state(self) -> Dict:
+        """检查会话状态"""
+        result = {
+            'session_file_exists': self.session_file.exists(),
+            'execution_state_exists': self.execution_state.exists(),
+            'daily_note_exists': self.daily_note.exists(),
+            'session_data': None,
+
+[161 more lines. Use start_line=51 to continue.]
