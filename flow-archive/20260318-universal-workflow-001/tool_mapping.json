@@ -1,7 +1,7 @@
 {
   "workflow_id": "20260318-universal-workflow-001",
-  "workflow_version": "2.0.0",
-  "updated_at": "2026-03-20T14:30:00+08:00",
+  "workflow_version": "2.0.1",
+  "updated_at": "2026-03-20T14:51:00+08:00",
   "description": "工作流工具映射表 - 映射步骤到实际工具",
   
   "tool_mapping": {
@@ -178,12 +178,12 @@
     },
     "20": {
       "step_name": "清理临时文件",
-      "tool_id": null,
+      "tool_id": "temp_file_cleaner.py",
       "exists": true,
-      "path": "built-in",
-      "size_kb": 0,
+      "path": "30-scripts-tools/temp_file_cleaner.py",
+      "size_kb": 9.0,
       "status": "active",
-      "notes": "内置功能 - session_end.py 包含清理"
+      "notes": "新增工具 - 清理临时文件"
     }
   },
   
@@ -191,7 +191,7 @@
     "total_steps": 20,
     "tools_exist": 20,
     "tools_missing": 0,
-    "new_tools_added": 4,
+    "new_tools_added": 5,
     "tools_replaced": 12,
     "coverage": "100%"
   },
@@ -294,6 +294,11 @@
       "tool": "session_end.py",
       "step": 17,
       "purpose": "完整会话结束流程"
+    },
+    {
+      "tool": "temp_file_cleaner.py",
+      "step": 20,
+      "purpose": "清理会话临时文件"
     }
   ]
 }
