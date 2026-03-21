@@ -20,6 +20,11 @@ if "%CMD%"=="--help" goto :help
 
 if "%CMD%"=="list" goto :list
 if "%CMD%"=="categories" goto :categories
+if "%CMD%"=="agent" goto :agent
+if "%CMD%"=="multi-agent" goto :agent
+
+if "%CMD%"=="viz" goto :viz
+if "%CMD%"=="visualize" goto :viz
 
 if "%CMD%"=="run" (
     set "WF=%2"
@@ -59,6 +64,25 @@ echo ========================================
 python 30-scripts-tools\workflow_master_001.py --categories
 exit /b 0
 
+:agent
+echo.
+echo ========================================
+echo Multi-Agent Collaboration
+echo ========================================
+python 30-scripts-tools\multi_agent_orchestrator_001.py --viz
+echo.
+echo Run task:
+echo   workflow.bat agent "your task"
+exit /b 0
+
+:viz
+echo.
+echo ========================================
+echo Multi-Agent Visualization
+echo ========================================
+python 30-scripts-tools\multi_agent_orchestrator_001.py --viz
+exit /b 0
+
 :help
 echo.
 echo ========================================
@@ -68,9 +92,11 @@ echo.
 echo Usage:
 echo   workflow.bat              - Show this help
 echo   workflow.bat list         - List all workflows
-echo   workflow.bat categories    - List by category
+echo   workflow.bat categories   - List by category
 echo   workflow.bat dev          - Run dev workflow
 echo   workflow.bat run ^<name^> - Run specific workflow
+echo   workflow.bat agent        - Multi-Agent status
+echo   workflow.bat viz          - Agent visualization
 echo.
 echo Categories:
 echo   dev       - Development workflows
@@ -78,11 +104,11 @@ echo   plan      - Planning workflows
 echo   qa        - Quality Assurance
 echo   ops       - Operations
 echo   research  - Research pipelines
+echo   agent     - Multi-Agent collaboration
 echo.
 echo Examples:
 echo   workflow.bat dev
 echo   workflow.bat plan
-echo   workflow.bat full
-echo   workflow.bat research
-echo   workflow.bat run dev
+echo   workflow.bat agent
+echo   workflow.bat agent "优化代码"
 exit /b 0

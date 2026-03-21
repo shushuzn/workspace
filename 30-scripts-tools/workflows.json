@@ -116,5 +116,19 @@
       {"tool": "workflow_health_001", "args": []},
       {"tool": "workflow_optimizer_001", "args": ["--report"]}
     ]
+  },
+  "multi-agent": {
+    "name": "Multi-Agent Collaboration",
+    "category": "agent",
+    "steps": [
+      {"tool": "multi_agent_orchestrator_001", "args": ["--viz"]}
+    ]
+  },
+  "agent-learn": {
+    "name": "Agent Learning Report",
+    "category": "agent",
+    "steps": [
+      {"tool": "multi_agent_orchestrator_001", "args": ["--report"]}
+    ]
   }
 }
