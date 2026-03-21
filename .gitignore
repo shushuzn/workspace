@@ -22,6 +22,7 @@ Thumbs.db
 
 # 日志文件
 *.log
+*.jsonl
 logs/
 
 # 测试输出
@@ -96,4 +97,8 @@ flow-archive/
 13-memory/.workflow_guard_log.json  
 13-memory/.workflow_schedule.json  
 13-memory/.workflow_version.json  
-13-memory/.workflow_registry.json 
+13-memory/.workflow_registry.json
+
+# Test artifacts
+*test*.py
+*_test_*.py 

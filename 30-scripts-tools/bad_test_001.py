@@ -1,9 +1,15 @@
 #!/usr/bin/env python
-# BAD TOOL - Missing encoding, bare except
-import json
-def bad(): 
-    try:
-        data = open("test.json").read()
-        return json.loads(data)
-    except Exception as e:
-    logger.error(f"Error: {e}") pass
+# -*- coding: utf-8 -*-
+"""
+bad_test_001 - DELETE THIS FILE
+Test artifact - intentionally invalid
+"""
+import sys
+from pathlib import Path
+
+def main():
+    print("[DELETE] This file should be removed")
+    return 0
+
+if __name__ == "__main__":
+    sys.exit(main())

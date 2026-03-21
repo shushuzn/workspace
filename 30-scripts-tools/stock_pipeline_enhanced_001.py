@@ -21,8 +21,8 @@ WORKSPACE = Path("D:/OpenClaw/workspace")
 sys.path.insert(0, str(WORKSPACE / "30-scripts-tools"))
 
 # 导入缓存和并行加载
-from stock_data_cache import StockDataCache, get_cache
-from stock_parallel_loader import StockParallelLoader, LoadStrategy
+from stock_data_cache_001 import StockDataCache, get_cache
+from stock_parallel_loader_001 import StockParallelLoader, LoadStrategy
 
 class StockPipelineEnhanced:
     """增强版股票分析管道"""
