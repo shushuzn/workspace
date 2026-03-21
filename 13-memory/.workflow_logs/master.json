@@ -1,312 +1,6 @@
 {
   "runs": [
     {
-      "time": "2026-03-21T09:20:04.758213",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:20:04.818000",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:18.775868",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:18.851744",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:18.913828",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:19.191621",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:19.269441",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:19.328627",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:19.601656",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:19.675390",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:19.749003",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:23.010574",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:23.090586",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:23.154640",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:23.446904",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:23.522960",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:23.602241",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:23.903481",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:24.020828",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:21:24.166313",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:30.612697",
-      "workflow": "quick",
-      "step": "tool_validator_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:30.679012",
-      "workflow": "quick",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:30.955499",
-      "workflow": "plan",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:31.015492",
-      "workflow": "plan",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:31.927560",
-      "workflow": "plan",
-      "step": "workflow_optimizer_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:32.153954",
-      "workflow": "security",
-      "step": "tool_validator_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:32.316588",
-      "workflow": "security",
-      "step": "workflow_security_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:36.300736",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:36.372331",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:36.439684",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:36.718039",
-      "workflow": "security",
-      "step": "tool_validator_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:36.880103",
-      "workflow": "security",
-      "step": "workflow_security_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:37.167587",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:37.248196",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:37.311998",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:41.102638",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:41.174029",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:41.236725",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:41.523757",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:41.606394",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:41.676656",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:41.907959",
-      "workflow": "security",
-      "step": "tool_validator_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:22:42.080379",
-      "workflow": "security",
-      "step": "workflow_security_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:23:45.039076",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:23:45.202771",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:23:45.263886",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:23:45.536272",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:23:45.609730",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:23:45.671171",
-      "workflow": "full",
-      "step": "workflow_health_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:23:45.939943",
-      "workflow": "full",
-      "step": "workflow_diagnosis_001",
-      "status": "ok"
-    },
-    {
-      "time": "2026-03-21T09:23:46.053179",
-      "workflow": "full",
-      "step": "auto_discover_001",
-      "status": "ok"
-    },
-    {
       "time": "2026-03-21T09:23:46.121771",
       "workflow": "full",
       "step": "workflow_health_001",
@@ -580,6 +274,138 @@
       "time": "2026-03-21T09:25:13.271220",
       "workflow": "full",
       "step": "workflow_health_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:13.165100",
+      "workflow": "security",
+      "step": "tool_validator_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:13.336185",
+      "workflow": "security",
+      "step": "workflow_security_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:13.551014",
+      "workflow": "security",
+      "step": "tool_validator_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:14.153144",
+      "workflow": "security",
+      "step": "workflow_security_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:14.461404",
+      "workflow": "plan",
+      "step": "workflow_diagnosis_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:14.533833",
+      "workflow": "plan",
+      "step": "workflow_health_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:15.434144",
+      "workflow": "plan",
+      "step": "workflow_optimizer_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:19.748918",
+      "workflow": "security",
+      "step": "tool_validator_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:19.905279",
+      "workflow": "security",
+      "step": "workflow_security_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:20.136618",
+      "workflow": "security",
+      "step": "tool_validator_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:20.300042",
+      "workflow": "security",
+      "step": "workflow_security_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:20.605168",
+      "workflow": "full",
+      "step": "workflow_diagnosis_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:20.688798",
+      "workflow": "full",
+      "step": "auto_discover_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:20.761156",
+      "workflow": "full",
+      "step": "workflow_health_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:24.534665",
+      "workflow": "full",
+      "step": "workflow_diagnosis_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:24.610635",
+      "workflow": "full",
+      "step": "auto_discover_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:24.674967",
+      "workflow": "full",
+      "step": "workflow_health_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:24.988741",
+      "workflow": "full",
+      "step": "workflow_diagnosis_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:25.065534",
+      "workflow": "full",
+      "step": "auto_discover_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:25.129364",
+      "workflow": "full",
+      "step": "workflow_health_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:25.376330",
+      "workflow": "security",
+      "step": "tool_validator_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T09:26:25.550233",
+      "workflow": "security",
+      "step": "workflow_security_001",
       "status": "ok"
     }
   ]
