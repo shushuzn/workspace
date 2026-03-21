@@ -1,1 +1,1 @@
-Clean up ROADMAP: Simplify to v1.2.0 summary, archive old versions
+Iterate ROADMAP: Simplify to quick reference, archive stock-analysis-roadmap
