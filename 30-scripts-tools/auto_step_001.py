@@ -10,6 +10,12 @@ Workflow Auto-Step - 自动步骤追踪
 
 import json
 import sys
+sys.path.insert(0, str(Path(__file__).parent))
+try:
+    from smart_cache_001 import cached
+except ImportError:
+    cached = lambda: (lambda f: f)
+import sys
 from pathlib import Path
 from datetime import datetime
 

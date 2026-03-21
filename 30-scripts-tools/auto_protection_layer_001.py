@@ -16,6 +16,12 @@ logger = logging.getLogger(__name__)
 """
 
 import json
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+try:
+    from smart_cache_001 import cached
+except ImportError:
+    cached = lambda: (lambda f: f)
 import os
 import sys
 from datetime import datetime

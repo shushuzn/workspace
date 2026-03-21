@@ -2,6 +2,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 import json
+import sys
+sys.path.insert(0, str(Path(__file__).parent))
+try:
+    from smart_cache_001 import cached
+except ImportError:
+    cached = lambda: (lambda f: f)
 
 # 读取工具注册表
 with open('30-scripts-tools/tools_registry.json', 'r', encoding='utf-8') as f:
