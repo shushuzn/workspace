@@ -1,5 +1,0 @@
-FEAT: Four-Stage compliance 71% -> 94% (408/432 tools)
-
-- Added STAGE 2: CODE headers to 399 tools
-- All core tools now 100% four-stage compliant
-- Remaining 24 non-compliant are test files (expected)

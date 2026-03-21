@@ -16,7 +16,20 @@
       "WebFetch(domain:en.wikipedia.org)",
       "Bash(npm create:*)",
       "Bash(npm install:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(npx electron-builder:*)",
+      "Bash(npx asar:*)",
+      "Bash(grep -E \"^\\\\\\\\\\(dist|electron\\)\")",
+      "Bash(tasklist)",
+      "Bash(timeout 8 \"release/win-unpacked/Star Forge.exe\")",
+      "Bash(curl -s http://localhost:5174/)",
+      "Bash(powershell -Command \"$proc = Start-Process ''D:/OpenClaw/workspace/80-PROJECTS/star-forge/release/win-unpacked/Star Forge.exe'' -PassThru; Start-Sleep 5; if \\($proc.HasExited\\) { Write-Host ''Crashed with exit code:'' $proc.ExitCode } else { Write-Host ''Running with PID:'' $proc.Id }\")",
+      "Bash(taskkill /F /IM \"Star Forge.exe\")",
+      "Bash(taskkill /F /IM electron.exe)",
+      "Bash(powershell -Command \"Remove-Item -Recurse -Force ''D:\\\\OpenClaw\\\\workspace\\\\80-PROJECTS\\\\star-forge\\\\node_modules\\\\electron''\")",
+      "Bash(powershell -Command \"Get-Process | Where-Object { $_.Path -like ''*electron*'' } | Select-Object Id, ProcessName, Path\")",
+      "Bash(npx vite:*)",
+      "Bash(powershell -ExecutionPolicy Bypass -File \"D:/OpenClaw/workspace/80-PROJECTS/star-forge/cleanup.ps1\")"
     ]
   }
 }
