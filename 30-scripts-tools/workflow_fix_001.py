@@ -77,6 +77,12 @@ class WorkflowFix:
         
         return results
 
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print(f"Usage: python {sys.argv[0]} <args>")
+        sys.exit(1)
+
 if __name__ == "__main__":
     fixer = WorkflowFix()
     dry = "--dry" in sys.argv

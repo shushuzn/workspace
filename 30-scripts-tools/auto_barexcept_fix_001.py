@@ -36,7 +36,7 @@ def fix_file(filepath):
     """Fix bare except in a file"""
     try:
         content = filepath.read_text(encoding="utf-8", errors="replace")
-    except:
+    except (IOError, OSError):
         return {"file": filepath.name, "status": "skip", "reason": "Cannot read"}
     
     original = content
@@ -78,7 +78,7 @@ def main():
         # Check if has bare except
         try:
             content = f.read_text(encoding="utf-8", errors="replace")
-        except:
+        except (IOError, OSError):
             continue
         
         if re.search(r'except\s*:\s*$', content, re.MULTILINE):
@@ -111,6 +111,12 @@ def main():
     Path("13-memory/.barexcept_fix_report.json").write_text(json.dumps(report, indent=2))
     
     return results
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print(f"Usage: python {sys.argv[0]} <args>")
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()

@@ -1,8 +1,13 @@
 {
-  "total": 414,
+  "total": 416,
   "issues": [
     {
       "file": "agent_tool_monitor_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "auto_argv_fix_001.py",
       "type": "missing_argv_check",
       "line": 0
     },
@@ -75,6 +80,11 @@
       "file": "data_source_manager_001.py",
       "type": "too_long",
       "lines": 587
+    },
+    {
+      "file": "health_reporter_001.py",
+      "type": "bare_except",
+      "line": 29
     },
     {
       "file": "multi_agent_router_001.py",
@@ -163,8 +173,8 @@
     }
   ],
   "metrics": {
-    "bare_except_count": 4,
-    "missing_argv_count": 21,
+    "bare_except_count": 5,
+    "missing_argv_count": 22,
     "long_files": 7,
     "clean_files": 382
   },

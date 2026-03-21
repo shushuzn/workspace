@@ -80,3 +80,9 @@ try:
         f.write(str(log_entry) + '\n')
 except (Exception,):
     pass  # 日志失败不影响执行
+
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print(f"Usage: python {sys.argv[0]} <args>")
+        sys.exit(1)

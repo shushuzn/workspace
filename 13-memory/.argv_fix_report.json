@@ -1,0 +1,45 @@
+{
+  "results": [
+    {
+      "file": "auto_barexcept_fix_001.py",
+      "status": "fixed"
+    },
+    {
+      "file": "brainstorm_analogy_001.py",
+      "status": "fixed"
+    },
+    {
+      "file": "brainstorm_random_001.py",
+      "status": "fixed"
+    },
+    {
+      "file": "code_quality_001.py",
+      "status": "fixed"
+    },
+    {
+      "file": "post_session_compress_001.py",
+      "status": "fixed"
+    },
+    {
+      "file": "pre_session_hook_001.py",
+      "status": "fixed"
+    },
+    {
+      "file": "safe_git_executor_001.py",
+      "status": "fixed"
+    },
+    {
+      "file": "sitecustomize_001.py",
+      "status": "fixed"
+    },
+    {
+      "file": "tool_executor_001.py",
+      "status": "fixed"
+    },
+    {
+      "file": "workflow_fix_001.py",
+      "status": "fixed"
+    }
+  ],
+  "total": 10
+}
