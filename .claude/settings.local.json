@@ -3,7 +3,12 @@
     "allow": [
       "Bash(ls 30-scripts-tools/sa_*.py)",
       "Bash(python -m py_compile 30-scripts-tools/stock_analysis_pipeline_001.py)",
-      "Bash(python -m py_compile 30-scripts-tools/stock_pipeline_enhanced_001.py)"
+      "Bash(python -m py_compile 30-scripts-tools/stock_pipeline_enhanced_001.py)",
+      "Bash(git diff:*)",
+      "Bash(git status:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(ls -la 30-scripts-tools/sa_00*.py)"
     ]
   }
 }

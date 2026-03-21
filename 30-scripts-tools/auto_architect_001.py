@@ -2,28 +2,15 @@
 # -*- coding: utf-8 -*-
 """
 AUTO-ARCHITECT-001 Tool Architecture Rebuilder
-4-STAGE: ARCHITECT→CODE→ASK→DEBUG
+4-STAGE: ARCHITECT to CODE to ASK to DEBUG
 
-=============================================================================
-STAGE 1: ARCHITECT
-=============================================================================
 Purpose:
     - Analyze tool dependencies and structure
     - Suggest architectural improvements
     - Generate architecture blueprints
 
 Data Flow:
-    analyze_topology() → find_clusters() → suggest_architecture() → apply()
-
-Edge Cases:
-    - No dependencies → mark as orphan
-    - Very large tool (>500 lines) → suggest split
-
-=============================================================================
-STAGE 2: CODE
-=============================================================================
-"""
-Automatically restructures tools based on topology and dependencies
+    analyze_topology() -> find_clusters() -> suggest_architecture() -> apply()
 """
 import json, re, sys
 from pathlib import Path
@@ -42,15 +29,13 @@ class ToolArchitect:
     def __init__(self):
         self.analysis = {"clusters": [], "dependencies": {}, "orphans": []}
     
-    def analyze_topology(self) -> None:
-        """Analyze tool dependencies and structure"""
+    def analyze_topology(self):
         imports = defaultdict(list)
         tools = {}
         
         for f in TOOLS_DIR.glob("*_001.py"):
             if f.name.startswith("__"):
                 continue
-            
             try:
                 content = f.read_text(encoding="utf-8", errors="replace")
                 tools[f.name] = {
@@ -59,21 +44,18 @@ class ToolArchitect:
                     "imports": re.findall(r'import (\w+)', content),
                     "from_imports": re.findall(r'from (\w+)', content),
                 }
-                
                 for imp in tools[f.name]["imports"] + tools[f.name]["from_imports"]:
                     if imp in ["pathlib", "json", "datetime", "subprocess", "sys"]:
                         continue
                     imports[imp].append(f.name)
-            except Exception as e:
+            except Exception:
                 pass
         
-        # Find clusters (tools with similar imports)
         clusters = defaultdict(list)
         for tool, data in tools.items():
             key = tuple(sorted(data["imports"][:3]))
             clusters[key].append(tool)
         
-        # Find orphan tools (no dependencies)
         orphans = [t for t, d in tools.items() if not d["imports"] or 
                    all(i in ["pathlib", "json", "datetime", "subprocess", "sys"] for i in d["imports"])]
         
@@ -84,23 +66,19 @@ class ToolArchitect:
             "dependencies": dict(imports),
             "tool_data": tools,
         }
-        
         return self.analysis
     
-    def suggest_architecture(self) -> None:
-        """Suggest architectural improvements"""
+    def suggest_architecture(self):
         analysis = self.analyze_topology()
         suggestions = []
         
-        # Suggest grouping orphans
         if len(analysis["orphans"]) > 10:
             suggestions.append({
                 "type": "group_orphans",
                 "count": len(analysis["orphans"]),
-                "action": f"Create {len(analysis['orphans'])//10} new module groups"
+                "action": "Create " + str(len(analysis["orphans"])//10) + " new module groups"
             })
         
-        # Suggest splitting large tools
         large_tools = [(t, d) for t, d in analysis["tool_data"].items() if d["lines"] > 500]
         if large_tools:
             suggestions.append({
@@ -109,7 +87,6 @@ class ToolArchitect:
                 "action": "Split tools with >500 lines"
             })
         
-        # Suggest extracting common code
         if analysis["clusters"]:
             suggestions.append({
                 "type": "extract_common",
@@ -119,10 +96,12 @@ class ToolArchitect:
         
         return suggestions
     
-    def generate_blueprint(self) -> None:
-        """Generate architecture blueprint"""
+    def generate_blueprint(self):
         analysis = self.analyze_topology()
         suggestions = self.suggest_architecture()
+        
+        total_lines = sum(d["lines"] for d in analysis["tool_data"].values())
+        avg_size = total_lines // max(1, len(analysis["tool_data"]))
         
         blueprint = {
             "timestamp": datetime.now().isoformat(),
@@ -130,67 +109,42 @@ class ToolArchitect:
                 "total_tools": analysis["total_tools"],
                 "orphan_tools": len(analysis["orphans"]),
                 "clusters": len(analysis["clusters"]),
-                "avg_size": sum(d["lines"] for d in analysis["tool_data"].values()) // max(1, len(analysis["tool_data"]))
+                "avg_size": avg_size
             },
             "suggestions": suggestions,
             "orphans": analysis["orphans"][:20],
             "large_tools": [(t, d["lines"]) for t, d in analysis["tool_data"].items() if d["lines"] > 300][:10],
         }
-        
         return blueprint
     
-    def apply_architecture(self, action) -> None:
-        """Apply architectural changes"""
+    def apply_architecture(self, action):
         blueprint = self.generate_blueprint()
         applied = []
         
         if action == "group_orphans":
-            # Create a grouped utility tool
             orphans = blueprint["orphans"]
             if orphans:
-                content = f'''#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-ORPHAN-UTILS-001
-Orphan tools grouped by AUTO-ARCHITECT-001
-Generated: {datetime.now().isoformat()}
-Orphans: {len(orphans)}
-"""
-
-'''
+                ts = datetime.now().isoformat()
+                content = "#!/usr/bin/env python\n# Orphan utils\n"
                 for i, orphan in enumerate(orphans[:10], 1):
-                    content += f'# {i}. {orphan}\n'
-                
+                    content += "# " + str(i) + ". " + orphan + "\n"
                 (TOOLS_DIR / "orphan_utils_001.py").write_text(content, encoding="utf-8")
                 applied.append("orphan_utils_001.py")
         
         elif action == "create_base":
-            # Create base module
             content = '''#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-"""
-BASE-001 Base Module
-Created by AUTO-ARCHITECT-001
-Common utilities for all tools
-"""
-import logging
-import json
+# BASE module
+import logging, json
 from pathlib import Path
-from datetime import datetime
 
-logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 def load_json(path):
     try:
         return json.loads(Path(path).read_text(encoding="utf-8"))
     except Exception as e:
-        logger.error(f"Failed to load {{path}}: {{e}}")
-        return {{}}
-
-def save_json(data, path):
-    Path(path).write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
-    return True
+        logger.error("Failed to load: " + str(path))
+        return {}
 '''
             (TOOLS_DIR / "base_001.py").write_text(content, encoding="utf-8")
             applied.append("base_001.py")
@@ -199,61 +153,38 @@ def save_json(data, path):
 
 def main():
     architect = ToolArchitect()
-    
     print("\n[AUTO-ARCHITECT-001] Tool Architecture Rebuilder")
     print("=" * 50)
     
     if "--analyze" in sys.argv:
         analysis = architect.analyze_topology()
-        print(f"\n[ANALYSIS]")
-        print(f"  Total tools: {analysis['total_tools']}")
-        print(f"  Orphan tools: {len(analysis['orphans'])}")
-        print(f"  Clusters: {len(analysis['clusters'])}")
-        
-        if analysis["orphans"]:
-            print(f"\n  Orphan tools (first 10):")
-            for t in analysis["orphans"][:10]:
-                print(f"    - {t}")
-    
-    elif "--suggest" in sys.argv:
-        suggestions = architect.suggest_architecture()
-        print(f"\n[SUGGESTIONS]")
-        for s in suggestions:
-            print(f"\n  [{s['type']}]")
-            print(f"  {s['action']}")
-            if "count" in s:
-                print(f"  Count: {s['count']}")
-            if "tools" in s:
-                for t in s["tools"]:
-                    print(f"    - {t}")
+        print("\n[ANALYSIS]")
+        print("  Total tools: " + str(analysis["total_tools"]))
+        print("  Orphan tools: " + str(len(analysis["orphans"])))
+        print("  Clusters: " + str(len(analysis["clusters"])))
     
     elif "--blueprint" in sys.argv:
         blueprint = architect.generate_blueprint()
-        print(f"\n[ARCHITECTURE BLUEPRINT]")
-        print(f"  Metrics:")
+        print("\n[ARCHITECTURE BLUEPRINT]")
         for k, v in blueprint["metrics"].items():
-            print(f"    {k}: {v}")
-        print(f"\n  Suggestions: {len(blueprint['suggestions'])}")
-        for s in blueprint["suggestions"]:
-            print(f"    - {s['action']}")
+            print("  " + k + ": " + str(v))
+        print("\n  Suggestions: " + str(len(blueprint["suggestions"])))
     
     elif "--apply" in sys.argv:
-        action = sys.argv[sys.argv.index("--apply") + 1] if "--apply" in sys.argv and len(sys.argv) > 2 else None
-        if action:
+        idx = sys.argv.index("--apply") if "--apply" in sys.argv else -1
+        if idx >= 0 and idx + 1 < len(sys.argv):
+            action = sys.argv[idx + 1]
             applied = architect.apply_architecture(action)
-            print(f"\n[APPLIED] {applied}")
+            print("\n[APPLIED] " + str(applied))
         else:
             print("Usage: --apply <group_orphans|create_base>")
     
     else:
-        # Default: show summary
         blueprint = architect.generate_blueprint()
-        print(f"\n[TOPOLOGY SUMMARY]")
-        print(f"  Tools: {blueprint['metrics']['total_tools']}")
-        print(f"  Orphans: {blueprint['metrics']['orphan_tools']}")
-        print(f"  Clusters: {blueprint['metrics']['clusters']}")
-        print(f"  Avg size: {blueprint['metrics']['avg_size']} lines")
-        print(f"\n  Suggestions: {len(blueprint['suggestions'])}")
+        print("\n[TOPOLOGY SUMMARY]")
+        print("  Tools: " + str(blueprint["metrics"]["total_tools"]))
+        print("  Orphans: " + str(blueprint["metrics"]["orphan_tools"]))
+        print("  Avg size: " + str(blueprint["metrics"]["avg_size"]) + " lines")
 
 if __name__ == "__main__":
     main()
