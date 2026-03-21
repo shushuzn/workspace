@@ -56,6 +56,14 @@ class WorkflowMaster:
         
         wf = WORKFLOWS[workflow_id]
         
+        # Show persona collaboration header
+        persona = wf.get("persona", "coordinator")
+        print(f"\n[MULTI-AGENT COLLABORATION]")
+        print(f"  Workflow: {wf['name']}")
+        print(f"  Primary Persona: {persona.upper()}")
+        print(f"  Category: {wf.get('category', 'other')}")
+        print("=" * 50)
+        
         if "workflow_dir" in wf:
             return self._run_dir_workflow(workflow_id, wf)
         

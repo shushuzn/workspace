@@ -1,0 +1,15 @@
+{
+  "backups": [
+    {
+      "time": "2026-03-21T09:30:00.783415",
+      "label": "auto",
+      "path": "13-memory\\.backups\\backup_20260321_093000_auto.zip",
+      "files": [
+        "30-scripts-tools/workflow_master_001.py",
+        "30-scripts-tools/workflows.json",
+        "workflow.bat"
+      ]
+    }
+  ],
+  "files": {}
+}
