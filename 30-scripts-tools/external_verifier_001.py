@@ -188,7 +188,7 @@ class ExternalVerifier:
                     "local_time": self.timestamp,
                     "source": "git"
                 }
-        except:
+        except (Exception,):
             pass
         
         # Fallback: 使用本地时间
@@ -212,7 +212,7 @@ class ExternalVerifier:
                 entry = json.loads(line)
                 if entry.get("session_id") == session_id:
                     session_entries.append(entry)
-            except:
+            except (Exception,):
                 pass
         
         if not session_entries:

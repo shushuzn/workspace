@@ -37,7 +37,7 @@ class DateTimeUtil:
         try:
             dt = datetime.strptime(date_str, format)
             return dt.isoformat()
-        except:
+        except (Exception,):
             return "Invalid date"
     
     @staticmethod
@@ -47,7 +47,7 @@ class DateTimeUtil:
             dt = datetime.strptime(date_str, "%Y-%m-%d")
             result = dt + timedelta(days=days)
             return result.strftime("%Y-%m-%d")
-        except:
+        except (Exception,):
             return "Invalid date"
     
     @staticmethod
@@ -57,7 +57,7 @@ class DateTimeUtil:
             d1 = datetime.strptime(date1, "%Y-%m-%d")
             d2 = datetime.strptime(date2, "%Y-%m-%d")
             return abs((d2 - d1).days)
-        except:
+        except (Exception,):
             return -1
 
 

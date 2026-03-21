@@ -159,7 +159,7 @@ def log_call(tool_name: str, params: dict, result: str, returncode: int):
             with open(max(state_files, key=lambda f: f.stat().st_mtime), 'r', encoding='utf-8') as f:
                 state = json.load(f)
             session_id = state.get('session_id', 'unknown')
-        except:
+        except (Exception,):
             pass
     
     log_entry["session_id"] = session_id

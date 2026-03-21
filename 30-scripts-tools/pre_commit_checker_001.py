@@ -53,7 +53,7 @@ def check_workflow_compliance():
         if result.returncode == 0:
             last_commit_msg = result.stdout.strip()
             print(f"[OK] 上次提交：{last_commit_msg[:50]}...")
-    except:
+    except (Exception,):
         warnings.append("无法检查 Git 历史")
     
     # 检查 4: 检查是否有未提交的工具文件
@@ -73,7 +73,7 @@ def check_workflow_compliance():
                 warnings.append(f"发现未跟踪的工具文件：{len(untracked)} 个")
                 for f in untracked[:3]:
                     print(f"  - {f}")
-    except:
+    except (Exception,):
         pass
     
     # 输出结果

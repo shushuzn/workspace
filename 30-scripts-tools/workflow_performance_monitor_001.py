@@ -92,7 +92,7 @@ class WorkflowPerformanceMonitor:
                 try:
                     entry = json.loads(line.strip())
                     history.append(entry)
-                except:
+                except (IOError, OSError, UnicodeDecodeError):
                     continue
 
         return history[-limit:]
@@ -186,7 +186,7 @@ class WorkflowPerformanceMonitor:
                 started = datetime.fromisoformat(session.get('started_at', ''))
                 if started >= cutoff:
                     recent.append(session)
-            except:
+            except (Exception,):
                 continue
 
         if not recent:

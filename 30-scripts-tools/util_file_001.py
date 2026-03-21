@@ -30,7 +30,7 @@ class FileUtil:
                 try:
                     h = hashlib.md5(f.read_bytes()).hexdigest()
                     hashes[h].append(str(f))
-                except:
+                except (Exception,):
                     pass
         
         return {h: files for h, files in hashes.items() if len(files) > 1}

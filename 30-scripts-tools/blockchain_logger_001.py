@@ -42,7 +42,7 @@ class BlockchainLogger:
         try:
             last_entry = json.loads(lines[-1])
             return last_entry.get("hash", "0" * 64)
-        except:
+        except (json.JSONDecodeError, IOError, OSError):
             return "0" * 64
     
     def _get_block_height(self) -> int:
@@ -122,7 +122,7 @@ class BlockchainLogger:
             try:
                 entry = json.loads(line)
                 hashes.append(entry.get("hash", ""))
-            except:
+            except (json.JSONDecodeError, IOError, OSError):
                 pass
         
         merkle_root = self._compute_merkle_root(hashes)

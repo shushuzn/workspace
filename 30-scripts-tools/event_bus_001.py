@@ -152,7 +152,7 @@ def main():
             data_str = sys.argv[3] if len(sys.argv) > 3 else "{}"
             try:
                 data = json.loads(data_str)
-            except:
+            except (Exception,):
                 data = {"message": data_str}
             
             result = bus.publish(event_type, data)

@@ -55,7 +55,7 @@ def check_session() -> tuple[bool, str]:
                 state = json.load(f)
             if state.get('session_id') and state.get('mandatory_execution'):
                 return True, 'full'
-        except:
+        except (Exception,):
             pass
     
     # 检查简化 workflow
@@ -65,7 +65,7 @@ def check_session() -> tuple[bool, str]:
                 state = json.load(f)
             if state.get('session_id'):
                 return True, 'simplified'
-        except:
+        except (Exception,):
             pass
     
     return False, 'none'

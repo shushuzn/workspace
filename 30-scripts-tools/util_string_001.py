@@ -36,7 +36,7 @@ class StringUtil:
     def format_json(text: str, indent: int = 2) -> str:
         try:
             return json.dumps(json.loads(text), ensure_ascii=False, indent=indent)
-        except:
+        except (Exception,):
             return text
 
 

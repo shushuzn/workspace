@@ -61,7 +61,7 @@ class RealtimeQuote:
                 with open(self.state_file, "r", encoding="utf-8") as f:
                     state = json.load(f)
                     self.subscriptions = set(state.get("subscriptions", []))
-            except:
+            except (Exception,):
                 pass
     
     def _save_state(self):
@@ -82,7 +82,7 @@ class RealtimeQuote:
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                     return {**default, **json.load(f)}
-            except:
+            except (Exception,):
                 return default
         return default
     
@@ -96,7 +96,7 @@ class RealtimeQuote:
             try:
                 with open(self.log_file, "r", encoding="utf-8") as f:
                     logs = json.load(f)
-            except:
+            except (Exception,):
                 pass
         
         logs.append({
@@ -213,7 +213,7 @@ class RealtimeQuote:
                         "latest": logs[-1],
                         "count": len(logs)
                     }
-            except:
+            except (Exception,):
                 pass
         
         return {"status": "error", "message": "No data"}
@@ -279,7 +279,7 @@ class RealtimeQuote:
         if self.ws:
             try:
                 self.ws.close()
-            except:
+            except (Exception,):
                 pass
 
 

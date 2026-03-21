@@ -96,7 +96,7 @@ class StrategyEngine:
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                     return {**default, **json.load(f)}
-            except:
+            except (Exception,):
                 return default
         return default
     
@@ -191,7 +191,7 @@ class StrategyEngine:
             try:
                 with open(self.history_file, "r", encoding="utf-8") as f:
                     history = json.load(f)
-            except:
+            except (Exception,):
                 pass
         
         history.append({
@@ -310,7 +310,7 @@ def main():
                         k, v = arg.split("=")
                         try:
                             profile[k] = int(v)
-                        except:
+                        except (Exception,):
                             profile[k] = v
             
             result = engine.recommend(profile)

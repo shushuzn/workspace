@@ -34,7 +34,7 @@ def get_recently_modified_files(minutes: int = 30) -> list:
                 mtime = datetime.fromtimestamp(file_path.stat().st_mtime)
                 if now - mtime < timedelta(minutes=minutes):
                     modified.append(str(file_path))
-            except:
+            except (Exception,):
                 pass
     
     return modified
@@ -56,7 +56,7 @@ def get_tool_calls(minutes: int = 30) -> list:
                 timestamp = datetime.fromisoformat(entry['timestamp'])
                 if now - timestamp < timedelta(minutes=minutes):
                     calls.append(entry)
-            except:
+            except (json.JSONDecodeError, IOError, OSError):
                 pass
     
     return calls

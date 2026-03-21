@@ -46,7 +46,7 @@ class TestRunner:
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                     return {**default, **json.load(f)}
-            except:
+            except (Exception,):
                 return default
         return default
     

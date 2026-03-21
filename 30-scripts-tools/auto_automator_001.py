@@ -232,7 +232,7 @@ class WorkflowAutomator:
             try:
                 with open(self.log_file, "r", encoding="utf-8") as f:
                     logs = json.load(f)
-            except:
+            except (Exception,):
                 pass
         
         logs.append(result)

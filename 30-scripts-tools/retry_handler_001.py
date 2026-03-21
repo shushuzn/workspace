@@ -116,7 +116,7 @@ class RetryHandler:
                 if result.returncode == 0:
                     self._log_attempt(alt_tool, 1, True, is_alternative=True)
                     return {"status": "success", "tool": alt_tool, "original": tool_id, "is_alternative": True}
-            except:
+            except (subprocess.SubprocessError, OSError):
                 continue
         
         return None

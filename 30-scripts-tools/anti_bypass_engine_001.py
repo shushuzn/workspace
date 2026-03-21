@@ -80,7 +80,7 @@ class AntiBypassEngine:
             if "--no-verify" in result.stdout:
                 detected = True
                 evidence.append("Git 日志中发现 --no-verify 使用痕迹")
-        except:
+        except (Exception,):
             pass
         
         return {
@@ -121,7 +121,7 @@ class AntiBypassEngine:
                             # 修改时间在 session 开始之前，可能是旧修改
                             pass
                         # 这里可以添加更复杂的逻辑
-                    except:
+                    except (Exception,):
                         pass
         
         return {
@@ -181,7 +181,7 @@ class AntiBypassEngine:
                 ts = entry.get("timestamp", "")
                 if ts:
                     timestamps.append((i, datetime.fromisoformat(ts)))
-            except:
+            except (json.JSONDecodeError, IOError, OSError):
                 detected = True
                 evidence.append(f"第 {i+1} 行日志格式错误")
         

@@ -1,5 +1,5 @@
 {
-  "total": 413,
+  "total": 414,
   "issues": [
     {
       "file": "agent_tool_monitor_001.py",
@@ -7,39 +7,14 @@
       "line": 0
     },
     {
-      "file": "anti_bypass_engine_001.py",
+      "file": "auto_barexcept_fix_001.py",
       "type": "bare_except",
-      "line": 83
+      "line": 5
     },
     {
-      "file": "audit_analyzer_001.py",
-      "type": "bare_except",
-      "line": 44
-    },
-    {
-      "file": "auto_automator_001.py",
-      "type": "bare_except",
-      "line": 235
-    },
-    {
-      "file": "auto_discover_001.py",
-      "type": "bare_except",
-      "line": 56
-    },
-    {
-      "file": "auto_fix_engine_001.py",
-      "type": "bare_except",
-      "line": 218
-    },
-    {
-      "file": "auto_todo_updater_001.py",
-      "type": "bare_except",
-      "line": 239
-    },
-    {
-      "file": "auto_training_engine_001.py",
-      "type": "bare_except",
-      "line": 39
+      "file": "auto_barexcept_fix_001.py",
+      "type": "missing_argv_check",
+      "line": 0
     },
     {
       "file": "bad_test_001.py",
@@ -52,29 +27,9 @@
       "line": 0
     },
     {
-      "file": "behavior_analyzer_001.py",
-      "type": "bare_except",
-      "line": 43
-    },
-    {
-      "file": "benchmark_001.py",
-      "type": "bare_except",
-      "line": 25
-    },
-    {
-      "file": "blockchain_logger_001.py",
-      "type": "bare_except",
-      "line": 45
-    },
-    {
       "file": "brainstorm_analogy_001.py",
       "type": "missing_argv_check",
       "line": 0
-    },
-    {
-      "file": "brainstorm_auto_scanner_001.py",
-      "type": "bare_except",
-      "line": 78
     },
     {
       "file": "brainstorm_define_001.py",
@@ -107,24 +62,9 @@
       "line": 0
     },
     {
-      "file": "check_tool_bypass_001.py",
-      "type": "bare_except",
-      "line": 37
-    },
-    {
       "file": "code_quality_001.py",
       "type": "bare_except",
       "line": 30
-    },
-    {
-      "file": "compliance_booster_001.py",
-      "type": "bare_except",
-      "line": 50
-    },
-    {
-      "file": "compliance_dashboard_001.py",
-      "type": "bare_except",
-      "line": 190
     },
     {
       "file": "copaw_entry_001.py",
@@ -132,59 +72,9 @@
       "line": 0
     },
     {
-      "file": "core_files_compressor_001.py",
-      "type": "bare_except",
-      "line": 322
-    },
-    {
-      "file": "cron_scheduler_001.py",
-      "type": "bare_except",
-      "line": 103
-    },
-    {
       "file": "data_source_manager_001.py",
       "type": "too_long",
       "lines": 587
-    },
-    {
-      "file": "dep_resolver_001.py",
-      "type": "bare_except",
-      "line": 85
-    },
-    {
-      "file": "dialog_workflow_enforcer_001.py",
-      "type": "bare_except",
-      "line": 58
-    },
-    {
-      "file": "event_bus_001.py",
-      "type": "bare_except",
-      "line": 155
-    },
-    {
-      "file": "external_verifier_001.py",
-      "type": "bare_except",
-      "line": 191
-    },
-    {
-      "file": "improvement_executor_001.py",
-      "type": "bare_except",
-      "line": 201
-    },
-    {
-      "file": "integrate_suite_001.py",
-      "type": "bare_except",
-      "line": 69
-    },
-    {
-      "file": "integrity_checker_001.py",
-      "type": "bare_except",
-      "line": 160
-    },
-    {
-      "file": "llm_guide_001.py",
-      "type": "bare_except",
-      "line": 275
     },
     {
       "file": "multi_agent_router_001.py",
@@ -192,19 +82,9 @@
       "line": 0
     },
     {
-      "file": "next_advisor_001.py",
-      "type": "bare_except",
-      "line": 50
-    },
-    {
       "file": "penalty_system_v_001.py",
       "type": "too_long",
       "lines": 541
-    },
-    {
-      "file": "performance_analyzer_001.py",
-      "type": "bare_except",
-      "line": 130
     },
     {
       "file": "post_session_compress_001.py",
@@ -212,24 +92,9 @@
       "line": 0
     },
     {
-      "file": "pre_commit_checker_001.py",
-      "type": "bare_except",
-      "line": 56
-    },
-    {
       "file": "pre_session_hook_001.py",
       "type": "missing_argv_check",
       "line": 0
-    },
-    {
-      "file": "retry_handler_001.py",
-      "type": "bare_except",
-      "line": 119
-    },
-    {
-      "file": "roadmap_manager_001.py",
-      "type": "bare_except",
-      "line": 49
     },
     {
       "file": "safe_git_executor_001.py",
@@ -242,46 +107,6 @@
       "line": 0
     },
     {
-      "file": "sa_ai_signal_001.py",
-      "type": "bare_except",
-      "line": 52
-    },
-    {
-      "file": "sa_analyzer_001.py",
-      "type": "bare_except",
-      "line": 48
-    },
-    {
-      "file": "sa_api_001.py",
-      "type": "bare_except",
-      "line": 69
-    },
-    {
-      "file": "sa_backtest_001.py",
-      "type": "bare_except",
-      "line": 59
-    },
-    {
-      "file": "sa_chart_generator_001.py",
-      "type": "bare_except",
-      "line": 85
-    },
-    {
-      "file": "sa_dashboard_001.py",
-      "type": "bare_except",
-      "line": 58
-    },
-    {
-      "file": "sa_datasource_001.py",
-      "type": "bare_except",
-      "line": 62
-    },
-    {
-      "file": "sa_executor_001.py",
-      "type": "bare_except",
-      "line": 56
-    },
-    {
       "file": "sa_indicator_calculator_001.py",
       "type": "too_long",
       "lines": 756
@@ -292,49 +117,14 @@
       "lines": 540
     },
     {
-      "file": "sa_optimizer_001.py",
-      "type": "bare_except",
-      "line": 58
-    },
-    {
       "file": "sa_pattern_recognition_001.py",
       "type": "too_long",
       "lines": 568
     },
     {
-      "file": "sa_realtime_001.py",
-      "type": "bare_except",
-      "line": 64
-    },
-    {
-      "file": "sa_report_001.py",
-      "type": "bare_except",
-      "line": 53
-    },
-    {
-      "file": "sa_risk_001.py",
-      "type": "bare_except",
-      "line": 53
-    },
-    {
-      "file": "sa_sentiment_001.py",
-      "type": "bare_except",
-      "line": 50
-    },
-    {
-      "file": "sa_strategy_001.py",
-      "type": "bare_except",
-      "line": 99
-    },
-    {
       "file": "sa_support_resistance_001.py",
       "type": "too_long",
       "lines": 617
-    },
-    {
-      "file": "sa_trader_001.py",
-      "type": "bare_except",
-      "line": 57
     },
     {
       "file": "sa_trend_analysis_001.py",
@@ -347,49 +137,14 @@
       "line": 0
     },
     {
-      "file": "session_end_audit_001.py",
-      "type": "bare_except",
-      "line": 81
-    },
-    {
-      "file": "session_token_validator_001.py",
-      "type": "bare_except",
-      "line": 98
-    },
-    {
-      "file": "sitecustomize_001.py",
-      "type": "bare_except",
-      "line": 81
-    },
-    {
       "file": "sitecustomize_001.py",
       "type": "missing_argv_check",
       "line": 0
     },
     {
-      "file": "stock_data_cache_001.py",
-      "type": "bare_except",
-      "line": 162
-    },
-    {
-      "file": "test_runner_001.py",
-      "type": "bare_except",
-      "line": 49
-    },
-    {
-      "file": "tool_executor_001.py",
-      "type": "bare_except",
-      "line": 162
-    },
-    {
       "file": "tool_executor_001.py",
       "type": "missing_argv_check",
       "line": 0
-    },
-    {
-      "file": "tool_self_learner_001.py",
-      "type": "bare_except",
-      "line": 179
     },
     {
       "file": "tool_validator_001.py",
@@ -397,56 +152,21 @@
       "line": 29
     },
     {
-      "file": "util_datetime_001.py",
-      "type": "bare_except",
-      "line": 40
-    },
-    {
-      "file": "util_file_001.py",
-      "type": "bare_except",
-      "line": 33
-    },
-    {
-      "file": "util_string_001.py",
-      "type": "bare_except",
-      "line": 39
-    },
-    {
       "file": "workflow_auto_executor_001.py",
       "type": "missing_argv_check",
       "line": 0
     },
     {
-      "file": "workflow_enforcer_001.py",
-      "type": "bare_except",
-      "line": 189
-    },
-    {
-      "file": "workflow_evolver_001.py",
-      "type": "bare_except",
-      "line": 51
-    },
-    {
       "file": "workflow_fix_001.py",
       "type": "missing_argv_check",
       "line": 0
-    },
-    {
-      "file": "workflow_performance_monitor_001.py",
-      "type": "bare_except",
-      "line": 95
-    },
-    {
-      "file": "workflow_plugin_manager_001.py",
-      "type": "bare_except",
-      "line": 123
     }
   ],
   "metrics": {
-    "bare_except_count": 61,
-    "missing_argv_count": 20,
+    "bare_except_count": 4,
+    "missing_argv_count": 21,
     "long_files": 7,
-    "clean_files": 325
+    "clean_files": 382
   },
   "suggestions": [
     "Use specific exception types instead of bare except",

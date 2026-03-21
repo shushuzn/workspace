@@ -176,7 +176,7 @@ class ToolSelfLearner:
                     # 过滤标准库
                     std_libs = ['json', 'os', 'sys', 'pathlib', 'datetime', 're', 'typing']
                     dependencies = [d for d in dependencies if d not in std_libs]
-                except:
+                except (Exception,):
                     pass
         
         return dependencies

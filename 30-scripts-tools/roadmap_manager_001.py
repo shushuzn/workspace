@@ -46,7 +46,7 @@ class RoadmapManager:
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                     return {**default, **json.load(f)}
-            except:
+            except (Exception,):
                 return default
         return default
     
@@ -56,7 +56,7 @@ class RoadmapManager:
             try:
                 with open(self.roadmap_file, "r", encoding="utf-8") as f:
                     return json.load(f)
-            except:
+            except (Exception,):
                 pass
         
         # 初始化
@@ -193,7 +193,7 @@ class RoadmapManager:
                     try:
                         num = int(tool.split("-")[1])
                         max_num = max(max_num, num)
-                    except:
+                    except (Exception,):
                         pass
         
         return f"SA-{max_num + 1:03d}"

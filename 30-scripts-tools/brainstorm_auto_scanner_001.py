@@ -75,7 +75,7 @@ class BrainstormAutoScanner:
             # 读取文件内容
             try:
                 content = py_file.read_text(encoding='utf-8')
-            except:
+            except (Exception,):
                 continue
             
             # 匹配优化类型

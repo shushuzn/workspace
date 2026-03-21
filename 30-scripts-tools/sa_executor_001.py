@@ -53,7 +53,7 @@ class TradeExecutor:
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                     return {**default, **json.load(f)}
-            except:
+            except (Exception,):
                 return default
         return default
     
@@ -62,7 +62,7 @@ class TradeExecutor:
             try:
                 with open(self.orders_file, "r", encoding="utf-8") as f:
                     return json.load(f)
-            except:
+            except (Exception,):
                 return []
         return []
     
@@ -71,7 +71,7 @@ class TradeExecutor:
             try:
                 with open(self.positions_file, "r", encoding="utf-8") as f:
                     return json.load(f)
-            except:
+            except (Exception,):
                 return {}
         return {}
     
@@ -80,7 +80,7 @@ class TradeExecutor:
             try:
                 with open(self.trades_file, "r", encoding="utf-8") as f:
                     return json.load(f)
-            except:
+            except (Exception,):
                 return []
         return []
     

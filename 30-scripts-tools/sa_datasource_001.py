@@ -59,7 +59,7 @@ class DataSourceManager:
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                     return {**default, **json.load(f)}
-            except:
+            except (Exception,):
                 return default
         return default
     
@@ -108,7 +108,7 @@ class DataSourceManager:
                             result["source"] = name
                             result["fallback"] = True
                             return result
-                    except:
+                    except (Exception,):
                         continue
         
         return {"status": "error", "message": "All sources failed"}
@@ -123,7 +123,7 @@ class DataSourceManager:
                 if result["status"] == "success":
                     result["source"] = source
                     return result
-            except:
+            except (Exception,):
                 pass
         
         # 备用
@@ -135,7 +135,7 @@ class DataSourceManager:
                         if result["status"] == "success":
                             result["source"] = name
                             return result
-                    except:
+                    except (Exception,):
                         continue
         
         return {"status": "error", "message": "All sources failed"}
@@ -180,7 +180,7 @@ class YahooFinanceSource:
         try:
             response = requests.get("https://finance.yahoo.com", timeout=5)
             return {"status": "healthy", "status_code": response.status_code}
-        except:
+        except (Exception,):
             return {"status": "unhealthy", "message": "Connection failed"}
     
     def get_quote(self, symbol: str) -> dict:

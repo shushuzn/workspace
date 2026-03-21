@@ -272,7 +272,7 @@ class LLMGuide:
             try:
                 with open(self.history_file, "r", encoding="utf-8") as f:
                     history = json.load(f)
-            except:
+            except (Exception,):
                 pass
         
         history.append(result)

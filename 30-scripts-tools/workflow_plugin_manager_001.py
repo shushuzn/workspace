@@ -120,7 +120,7 @@ class PluginManager:
                 
                 info = module.info() if hasattr(module, 'info') else {"name": f.stem}
                 plugins.append(info)
-            except:
+            except (Exception,):
                 plugins.append({"name": f.stem, "status": "error"})
         
         return {"plugins": plugins, "count": len(plugins)}

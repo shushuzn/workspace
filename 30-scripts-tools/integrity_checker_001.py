@@ -157,7 +157,7 @@ class IntegrityChecker:
                 now = datetime.now(start_time.tzinfo) if start_time.tzinfo else datetime.now()
                 if start_time > now:
                     issues.append("started_at 是未来时间（伪造）")
-            except:
+            except (Exception,):
                 issues.append("started_at 格式错误")
         
         # 检查 entry_point
@@ -188,7 +188,7 @@ class IntegrityChecker:
                     ts = entry.get("timestamp", "")
                     if ts:
                         timestamps.append(datetime.fromisoformat(ts))
-                except:
+                except (json.JSONDecodeError, IOError, OSError):
                     pass
             
             if len(timestamps) >= 2:

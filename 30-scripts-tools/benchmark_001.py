@@ -22,7 +22,7 @@ def benchmark_tool(tool_path, runs=5):
             )
             elapsed = time.time() - start
             times.append(elapsed)
-        except:
+        except (subprocess.SubprocessError, OSError):
             times.append(999)
     return {
         "min": min(times) if times else 999,

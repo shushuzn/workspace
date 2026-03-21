@@ -40,7 +40,7 @@ class BehaviorAnalyzer:
         for line in lines[-limit:]:
             try:
                 calls.append(json.loads(line))
-            except:
+            except (json.JSONDecodeError, IOError, OSError):
                 pass
         
         return calls
@@ -57,7 +57,7 @@ class BehaviorAnalyzer:
         for line in lines[-limit:]:
             try:
                 violations.append(json.loads(line))
-            except:
+            except (json.JSONDecodeError, IOError, OSError):
                 pass
         
         return violations
@@ -82,7 +82,7 @@ class BehaviorAnalyzer:
                 try:
                     hour = datetime.fromisoformat(ts).hour
                     model["hourly_pattern"][hour] += 1
-                except:
+                except (Exception,):
                     pass
             
             # Session 模式
@@ -142,7 +142,7 @@ class BehaviorAnalyzer:
                 if ts:
                     try:
                         violation_times.append(datetime.fromisoformat(ts))
-                    except:
+                    except (Exception,):
                         pass
             
             if len(violation_times) >= 2:
@@ -172,7 +172,7 @@ class BehaviorAnalyzer:
                 if ts:
                     try:
                         timestamps.append(datetime.fromisoformat(ts))
-                    except:
+                    except (Exception,):
                         pass
             
             if len(timestamps) >= 2:

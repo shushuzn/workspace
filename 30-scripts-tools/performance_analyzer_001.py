@@ -127,7 +127,7 @@ class PerformanceAnalyzer:
                     start_dt = datetime.fromisoformat(start)
                     end_dt = datetime.fromisoformat(end)
                     total_times.append((end_dt - start_dt).total_seconds())
-                except:
+                except (Exception,):
                     pass
         
         if len(total_times) < 2:

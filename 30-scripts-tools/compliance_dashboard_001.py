@@ -187,7 +187,7 @@ class ComplianceDashboard:
                             recent_violations += 1
                         elif ts > hour_ago - timedelta(hours=1):
                             previous_violations += 1
-                    except:
+                    except (Exception,):
                         pass
         
         trend = "improving" if recent_violations < previous_violations else "worsening" if recent_violations > previous_violations else "stable"

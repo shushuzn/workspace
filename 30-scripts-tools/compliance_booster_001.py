@@ -47,7 +47,7 @@ class ComplianceBooster:
         for line in lines[-limit:]:
             try:
                 violations.append(json.loads(line))
-            except:
+            except (json.JSONDecodeError, IOError, OSError):
                 pass
         
         return violations
@@ -64,7 +64,7 @@ class ComplianceBooster:
         for line in lines[-limit:]:
             try:
                 calls.append(json.loads(line))
-            except:
+            except (json.JSONDecodeError, IOError, OSError):
                 pass
         
         return calls

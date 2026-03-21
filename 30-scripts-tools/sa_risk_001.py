@@ -50,7 +50,7 @@ class RiskManager:
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                     return {**default, **json.load(f)}
-            except:
+            except (Exception,):
                 return default
         return default
     
@@ -196,7 +196,7 @@ class RiskManager:
             try:
                 with open(self.alerts_file, "r", encoding="utf-8") as f:
                     alerts = json.load(f)
-            except:
+            except (Exception,):
                 pass
         
         alert = {

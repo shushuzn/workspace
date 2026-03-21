@@ -48,7 +48,7 @@ class WorkflowEvolver:
                 try:
                     entry = json.loads(line.strip())
                     history.append(entry)
-                except:
+                except (IOError, OSError, UnicodeDecodeError):
                     continue
 
         return history[-limit:]

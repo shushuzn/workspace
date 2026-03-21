@@ -198,7 +198,7 @@ class ImprovementExecutor:
                 v = json.loads(line)
                 v_type = v.get("violation_type", "unknown")
                 types[v_type] = types.get(v_type, 0) + 1
-            except:
+            except (json.JSONDecodeError, IOError, OSError):
                 pass
         
         for v_type, count in sorted(types.items(), key=lambda x: -x[1])[:5]:

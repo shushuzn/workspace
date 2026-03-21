@@ -47,7 +47,7 @@ class SentimentAnalyzer:
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
                     return {**default, **json.load(f)}
-            except:
+            except (Exception,):
                 return default
         return default
     
@@ -144,7 +144,7 @@ class SentimentAnalyzer:
             try:
                 with open(self.history_file, "r", encoding="utf-8") as f:
                     history = json.load(f)
-            except:
+            except (Exception,):
                 pass
         
         history.append({

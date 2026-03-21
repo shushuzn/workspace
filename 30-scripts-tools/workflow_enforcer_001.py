@@ -186,7 +186,7 @@ class WorkflowEnforcer:
         try:
             with open(self.enforcement_log, 'a', encoding='utf-8') as f:
                 f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
-        except:
+        except (IOError, OSError, UnicodeDecodeError):
             pass
     
     def check_step_completion(self, completed_steps: list) -> dict:

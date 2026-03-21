@@ -95,7 +95,7 @@ class SessionTokenValidator:
                 timeout=10
             )
             return result.stdout.strip() if result.returncode == 0 else "unknown"
-        except:
+        except (Exception,):
             return "unknown"
     
     def _get_system_info(self) -> str:
@@ -185,7 +185,7 @@ class SessionTokenValidator:
                     "name": "git",
                     "time": result.stdout.strip()
                 })
-        except:
+        except (Exception,):
             pass
         
         # 检查时间一致性（简单实现：不检查未来时间）

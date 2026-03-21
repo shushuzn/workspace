@@ -215,7 +215,7 @@ def main():
     if len(sys.argv) > 2:
         try:
             params = json.loads(" ".join(sys.argv[2:]))
-        except:
+        except (Exception,):
             params = {"reason": sys.argv[2]}
     
     result = engine.execute_fix(fix_type, params)

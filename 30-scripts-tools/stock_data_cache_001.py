@@ -159,7 +159,7 @@ class StockDataCache:
                     cache_file.unlink()
                     self.stats["evictions"] += 1
                     
-            except:
+            except (Exception,):
                 pass
         
         print(f"[CACHE] Cleared: {symbol or 'all'}, {data_type or 'all'}")
@@ -196,7 +196,7 @@ class StockDataCache:
                     cache_file.unlink()
                     cleaned += 1
                     
-            except:
+            except (Exception,):
                 pass
         
         print(f"[CACHE] Cleaned {cleaned} expired entries")

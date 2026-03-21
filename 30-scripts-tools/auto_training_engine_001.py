@@ -36,7 +36,7 @@ class AutoTrainingEngine:
         for line in lines[-limit:]:
             try:
                 calls.append(json.loads(line))
-            except:
+            except (IOError, OSError, UnicodeDecodeError):
                 pass
         return calls
     
@@ -49,7 +49,7 @@ class AutoTrainingEngine:
         for line in lines[-limit:]:
             try:
                 violations.append(json.loads(line))
-            except:
+            except (IOError, OSError, UnicodeDecodeError):
                 pass
         return violations
     

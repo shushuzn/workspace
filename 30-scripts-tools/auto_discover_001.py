@@ -53,7 +53,7 @@ class ToolAutoDiscover:
                 "category": self._get_category(file_path.name),
                 "discovered_at": datetime.now().isoformat()
             }
-        except:
+        except (Exception,):
             return None
     
     def _get_category(self, name):

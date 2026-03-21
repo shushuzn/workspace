@@ -41,7 +41,7 @@ class AuditAnalyzer:
             try:
                 with open(self.log_file, "r", encoding="utf-8") as f:
                     events = json.load(f)
-            except:
+            except (Exception,):
                 pass
         
         event = {

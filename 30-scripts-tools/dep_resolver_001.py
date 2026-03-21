@@ -82,7 +82,7 @@ class DependencyResolver:
                     dep_id = imp.lower().replace("_", "-")
                     if dep_id not in deps:
                         deps.append(dep_id)
-        except:
+        except (subprocess.SubprocessError, OSError):
             pass
         
         return deps

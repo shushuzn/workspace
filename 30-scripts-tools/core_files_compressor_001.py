@@ -319,7 +319,7 @@ class CoreFilesCompressor:
             with open(self.compression_log, 'r', encoding='utf-8') as f:
                 try:
                     logs = json.load(f)
-                except:
+                except (Exception,):
                     logs = []
         
         # 添加新日志

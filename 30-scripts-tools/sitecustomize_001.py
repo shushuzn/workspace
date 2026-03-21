@@ -78,5 +78,5 @@ try:
     }
     with open(log_file, 'a', encoding='utf-8') as f:
         f.write(str(log_entry) + '\n')
-except:
+except (Exception,):
     pass  # 日志失败不影响执行

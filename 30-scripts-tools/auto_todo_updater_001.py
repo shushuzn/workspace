@@ -236,7 +236,7 @@ class AutoTODOUpdater:
         try:
             with open(self.log_file, 'a', encoding='utf-8') as f:
                 f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
-        except:
+        except (IOError, OSError, UnicodeDecodeError):
             pass
     
     def run_auto(self):

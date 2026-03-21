@@ -78,7 +78,7 @@ class SessionEndAuditor:
                     if self.session_id and entry.get('session_id') != self.session_id:
                         continue
                     calls.append(entry)
-                except:
+                except (json.JSONDecodeError, IOError, OSError):
                     continue
         
         print(f"  [OK] Loaded {len(calls)} calls")
