@@ -14,7 +14,7 @@ Data Flow:
     analyze_tool() -> find_issues() -> optimize_tool() -> save_log()
 
 STAGE 2: CODE
-
+"""
 import json, re, sys
 from pathlib import Path
 from datetime import datetime
@@ -36,12 +36,13 @@ OPTIMIZATIONS = {
         (r'def (\w+)\(([^)]*)\):', r'def \1(\2) -> None:'),
     ],
     "remove_bare_except": [
-        (r'except\s*:', r'except Exception as e:\n            logger.error(f"Error: {e}")'),
+        (r'except\s*:', r'except Exception as e:\n            logger.error("Error")'),
     ],
     "add_docstring": [
         (r'#!/usr/bin/env python', r'#!/usr/bin/env python\n"""\nTODO: Add description\n"""'),
     ],
 }
+
 
 class AutoOptimizer:
     def __init__(self):
@@ -50,30 +51,32 @@ class AutoOptimizer:
     
     def load_log(self):
         if OPT_LOG.exists():
-            self.log = json.loads(OPT_LOG.read_text(encoding="utf-8", errors="replace"))
+            try:
+                self.log = json.loads(OPT_LOG.read_text(encoding="utf-8", errors="replace"))
+            except:
+                pass
     
     def save_log(self):
-        OPT_LOG.write_text(json.dumps(self.log, indent=2, ensure_ascii=False))
+        OPT_LOG.write_text(json.dumps(self.log, indent=2, ensure_ascii=False), encoding="utf-8")
     
     def analyze_tool(self, path):
         issues = []
-        content = path.read_text(encoding="utf-8", errors="replace")
+        try:
+            content = path.read_text(encoding="utf-8", errors="replace")
+        except:
+            return issues
         
-        # Check for missing logging
         if "print(" in content and "logging" not in content:
             issues.append(("add_logging", "Uses print, no logging"))
         
-        # Check for bare except
         if re.search(r'except\s*:', content):
             issues.append(("remove_bare_except", "Uses bare except"))
         
-        # Check for missing type hints
         func_defs = re.findall(r'def (\w+)\([^)]*\):', content)
         type_hints = re.findall(r'def \w+\([^)]*\) -> ', content)
         if len(func_defs) > len(type_hints) and len(func_defs) > 3:
             issues.append(("add_type_hints", "Missing type hints"))
         
-        # Check for missing docstrings
         if '"""' not in content[:500] and "'''" not in content[:500]:
             issues.append(("add_docstring", "Missing docstring"))
         
@@ -91,7 +94,7 @@ class AutoOptimizer:
                     content = content.replace("def main():", "logging.basicConfig(level=logging.INFO)\ndef main():")
             
             elif opt_type == "remove_bare_except":
-                content = re.sub(r'except\s*:', 'except Exception as e:\n    logger.error(f"Error: {e}")', content)
+                content = re.sub(r'except\s*:', 'except Exception as e:\n    logger.error("Error")', content)
             
             elif opt_type == "add_type_hints":
                 content = re.sub(r'def (\w+)\(([^)]*)\):(\s*\n\s*""")', 
@@ -101,13 +104,13 @@ class AutoOptimizer:
                 path.write_text(content, encoding="utf-8")
                 return True
             return False
-        except Exception as e:
+        except:
             return False
     
     def optimize_all(self, dry_run=True):
-        print(f"\n[AUTO-OPTIMIZER-001] Self-Optimization")
+        print("\n[AUTO-OPTIMIZER-001] Self-Optimization")
         print("=" * 50)
-        print(f"  Mode: {'DRY RUN' if dry_run else 'LIVE'}")
+        print("  Mode: " + ("DRY RUN" if dry_run else "LIVE"))
         
         results = {"fixed": [], "skipped": [], "issues": defaultdict(list)}
         
@@ -118,24 +121,23 @@ class AutoOptimizer:
             issues = self.analyze_tool(f)
             
             if issues:
-                print(f"\n[{f.name}]")
+                print("\n[" + f.name + "]")
                 for opt_type, desc in issues:
-                    print(f"  - {desc}")
+                    print("  - " + desc)
                     results["issues"][opt_type].append(f.name)
                     
                     if not dry_run:
                         if self.optimize_tool(f, opt_type):
                             results["fixed"].append(f.name)
-                            print(f"    [FIXED]")
+                            print("    [FIXED]")
                         else:
                             results["skipped"].append(f.name)
-                            print(f"    [SKIPPED]")
+                            print("    [SKIPPED]")
         
-        # Summary
-        print(f"\n" + "=" * 50)
-        print(f"[SUMMARY]")
-        print(f"  Tools analyzed: {len(list(TOOLS_DIR.glob('*_001.py')))}")
-        print(f"  Issues found: {sum(len(v) for v in results['issues'].values())}")
+        print("\n" + "=" * 50)
+        print("[SUMMARY]")
+        print("  Tools analyzed: " + str(len(list(TOOLS_DIR.glob("*_001.py")))))
+        print("  Issues found: " + str(sum(len(v) for v in results["issues"].values())))
         
         if not dry_run:
             self.log["optimizations"].append({
@@ -144,12 +146,13 @@ class AutoOptimizer:
                 "skipped": results["skipped"]
             })
             self.save_log()
-            print(f"  Fixed: {len(results['fixed'])}")
-            print(f"  Skipped: {len(results['skipped'])}")
+            print("  Fixed: " + str(len(results["fixed"])))
+            print("  Skipped: " + str(len(results["skipped"])))
         else:
-            print(f"  Would fix: {sum(len(v) for v in results['issues'].values())}")
+            print("  Would fix: " + str(sum(len(v) for v in results["issues"].values())))
         
         return results
+
 
 def main():
     optimizer = AutoOptimizer()
@@ -160,9 +163,9 @@ def main():
         optimizer.optimize_all(dry_run=True)
     elif "--report" in sys.argv:
         print("\n[OPTIMIZATION REPORT]")
-        print(f"  Total runs: {len(optimizer.log['optimizations'])}")
+        print("  Total runs: " + str(len(optimizer.log["optimizations"])))
         fixed = sum(len(x["fixed"]) for x in optimizer.log["optimizations"])
-        print(f"  Total fixed: {fixed}")
+        print("  Total fixed: " + str(fixed))
     else:
         print("\n[AUTO-OPTIMIZER-001]")
         print("  --dry        Preview changes")
@@ -177,31 +180,12 @@ if __name__ == "__main__":
 # STAGE 3: ASK
 """
 ASK: Run verification
-    py auto_optimizer_001.py --dry        (preview)
-    py auto_optimizer_001.py --optimize  (apply)
-    py auto_optimizer_001.py --report     (stats)
+    py auto_optimizer_001.py --dry
+    py auto_optimizer_001.py --optimize
+    py auto_optimizer_001.py --report
 """
 
 # STAGE 4: DEBUG
-"""
-DEBUG:
-    - 2026-03-21: 475 issues fixed in one run
-    - Fixed regex for bare except matching
-"""
-
-# ==============================================================================
-# STAGE 3: ASK 询问确认
-# ==============================================================================
-"""
-ASK: Run verification
-    py auto_optimizer_001.py --dry        (preview)
-    py auto_optimizer_001.py --optimize   (apply)
-    py auto_optimizer_001.py --report      (stats)
-"""
-
-# ==============================================================================
-# STAGE 4: DEBUG 调试测试
-# ==============================================================================
 """
 DEBUG:
     - 2026-03-21: 475 issues fixed in one run
