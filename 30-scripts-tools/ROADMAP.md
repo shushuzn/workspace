@@ -1,59 +1,50 @@
 # OpenClaw 路线图 2026
 
 ## 当前状态
-- **工具总数**: 411
+- **工具总数**: 414
 - **命名合规**: 100%
 - **工作流成功率**: 100%
 - **版本**: 1.2.0
-- **更新**: 2026-03-21 09:55
+- **更新**: 2026-03-21 09:58
 
 ---
 
-## v1.2.0 ✅ 已完成 (2026-03-21)
+## v1.2.0 ✅ 已完成
 
-### 多Agent协作系统
-- ✅ multi_agent_orchestrator_001 - 编排器
-- ✅ multi_agent_router_001 - 智能路由
-- ✅ multi_agent_viz_001 - 可视化
-- ✅ multi_agent_learn_001 - 学习系统
-- ✅ 集成到17个工作流
-- ✅ 7 Personas激活
+### 新增工具
+| 工具 | 功能 | 状态 |
+|------|------|------|
+| **batch_runner_001.py** | 批量工作流执行器 | ✅ 新增 |
+| **workflow_completion_001.py** | 命令补全 | ✅ |
 
-### 命令补全 ✅ 新增
-- ✅ **workflow_completion_001.py** - 命令补全工具
-  - Bash/PowerShell 补全脚本
-  - 快速参考文档
-  - 安装命令: `py workflow_completion_001.py install`
+### 批量运行 (新增!)
+```bash
+# 快速批量: dev + quick
+py batch_runner_001.py
 
-### 核心工具 (411个)
-- ✅ 100%命名合规
-- ✅ 100%工作流成功率
+# 自定义: 指定工作流
+py batch_runner_001.py dev quick plan security full
 
----
+# 全部工作流
+py batch_runner_001.py dev quick plan security full research
+```
 
-## v1.3.0 计划 (下周)
-
-### 高优先级
-- [ ] 预测性维护系统
-- [ ] 跨Agent知识共享
-- [ ] API网关
-
-### 中优先级
-- [ ] 交互式Dashboard
-- [ ] 历史记录追踪
+### 核心系统
+- ✅ 7 Personas 多Agent协作
+- ✅ 414工具，100%合规
+- ✅ 100%成功率
 
 ---
 
 ## 快速命令
 
 ```bash
-# 命令补全 (新增!)
-py 30-scripts-tools/workflow_completion_001.py install
-py 30-scripts-tools/workflow_completion_001.py ref
+# 批量执行 (新增!)
+py 30-scripts-tools/batch_runner_001.py [workflows...]
 
-# 工作流
+# 单个
 workflow.bat dev|full|plan|security|quick
 
-# 健康检查
-py 30-scripts-tools/workflow_health_001.py
+# 健康
+py workflow_health_001.py
 ```

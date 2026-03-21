@@ -1,5 +1,5 @@
 {
-  "total": 410,
+  "total": 413,
   "issues": [
     {
       "file": "agent_tool_monitor_001.py",
@@ -65,6 +65,11 @@
       "file": "behavior_analyzer_001.py",
       "type": "bare_except",
       "line": 43
+    },
+    {
+      "file": "benchmark_001.py",
+      "type": "bare_except",
+      "line": 25
     },
     {
       "file": "blockchain_logger_001.py",
@@ -468,10 +473,10 @@
     }
   ],
   "metrics": {
-    "bare_except_count": 67,
+    "bare_except_count": 68,
     "missing_argv_count": 19,
     "long_files": 7,
-    "clean_files": 317
+    "clean_files": 319
   },
   "suggestions": [
     "Use specific exception types instead of bare except",

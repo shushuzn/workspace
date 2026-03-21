@@ -1,0 +1,36 @@
+{
+  "timestamp": "2026-03-21T09:57:02.611615",
+  "workflows": [
+    "dev",
+    "quick",
+    "plan",
+    "security"
+  ],
+  "results": [
+    {
+      "name": "dev",
+      "status": "OK",
+      "time": "0.5s"
+    },
+    {
+      "name": "quick",
+      "status": "OK",
+      "time": "0.4s"
+    },
+    {
+      "name": "plan",
+      "status": "OK",
+      "time": "1.3s"
+    },
+    {
+      "name": "security",
+      "status": "OK",
+      "time": "0.5s"
+    }
+  ],
+  "summary": {
+    "passed": 4,
+    "total": 4,
+    "time": 2.7
+  }
+}

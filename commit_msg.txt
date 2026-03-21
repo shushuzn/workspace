@@ -1,1 +1,1 @@
-Add workflow_completion_001.py: command completion with bash/ps scripts
+Add batch_runner_001.py: batch workflow execution with reporting
