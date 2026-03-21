@@ -92,7 +92,44 @@ class SimulatedTrader:
             json.dump(trades, f, ensure_ascii=False, indent=2)
     
     def _get_current_price(self, symbol: str) -> float:
-        """获取当前价格 (模拟)"""
+        """
+# ==============================================================================
+# STAGE 1: ARCHITECT 架构设计
+Purpose: Automation workflow tool
+Data Flow: input -> process -> output
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# py sa_trader_001.py  # Run verification
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py sa_trader_001.py
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# Test: 2026
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+"""
+
+获取当前价格 (模拟)"""
         base_prices = {
             "AAPL": 185.0, "GOOGL": 142.0, "MSFT": 415.0,
             "AMZN": 178.0, "TSLA": 245.0, "META": 485.0,

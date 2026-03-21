@@ -11,7 +11,11 @@
       "Bash(ls -la 30-scripts-tools/sa_00*.py)",
       "Bash(git rm:*)",
       "Bash(git -C D:/OpenClaw/workspace/80-PROJECTS/rl-trading submodule status)",
-      "Bash(find \"D:\\\\OpenClaw\\\\workspace\\\\80-PROJECTS\" -type d -name \"__pycache__\" -exec rm -rf {} +)"
+      "Bash(find \"D:\\\\OpenClaw\\\\workspace\\\\80-PROJECTS\" -type d -name \"__pycache__\" -exec rm -rf {} +)",
+      "WebSearch",
+      "WebFetch(domain:en.wikipedia.org)",
+      "Bash(npm create:*)",
+      "Bash(npm install:*)"
     ]
   }
 }

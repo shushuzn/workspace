@@ -46,7 +46,44 @@ def save_state(state):
         json.dump(state, f, ensure_ascii=False, indent=2)
 
 def complete_step(step_id, result="完成"):
-    """完成一个步骤"""
+    """
+# ==============================================================================
+# STAGE 1: ARCHITECT 架构设计
+Purpose: Automation workflow tool
+Data Flow: input -> process -> output
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# py workflow_helper_001.py  # Run verification
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py workflow_helper_001.py
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# Test: 2026
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+"""
+
+完成一个步骤"""
     state = load_state()
     
     step_name = next((name for sid, name, _ in STEPS if sid == step_id), f"Step {step_id}")

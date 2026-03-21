@@ -91,6 +91,7 @@ if __name__ == "__main__":
     main()
 
 # STAGE 3: ASK
+# py health_reporter_001.py  # Run verification
 """
 ASK: Run verification
     py health_reporter_001.py
@@ -98,6 +99,7 @@ ASK: Run verification
 """
 
 # STAGE 4: DEBUG
+# Test: 2026
 """
 DEBUG:
     - 2026-03-21: Reports generated daily

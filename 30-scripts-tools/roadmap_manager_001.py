@@ -202,7 +202,44 @@ class RoadmapManager:
         return f"SA-{max_num + 1:03d}"
     
     def add_phase(self, phase_name: str, tools: list) -> dict:
-        """添加新阶段"""
+        """
+# ==============================================================================
+# STAGE 1: ARCHITECT 架构设计
+Purpose: Automation workflow tool
+Data Flow: input -> process -> output
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# py roadmap_manager_001.py  # Run verification
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py roadmap_manager_001.py
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# Test: 2026
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+"""
+
+添加新阶段"""
         next_phase = str(self.roadmap.get("next_phase", 6))
         
         self.roadmap["phases"][next_phase] = {

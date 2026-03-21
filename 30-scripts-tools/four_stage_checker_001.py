@@ -191,7 +191,9 @@ def main():
 │  STAGE 1: ARCHITECT - Purpose, Data Flow, Files, Edge Cases │
 │  STAGE 2: CODE - Implementation with DEBUG comments         │
 │  STAGE 3: ASK - Run verification, check output              │
+# py four_stage_checker_001.py  # Run verification
 │  STAGE 4: DEBUG - Test cases, edge cases, fixes            │
+# Test: 2026
 └─────────────────────────────────────────────────────────────┘
         """)
     

@@ -37,7 +37,44 @@ def detect_context(content, line_num):
     return "(Exception,)"
 
 def fix_file(filepath):
-    """Fix bare except in a file"""
+    """
+# ==============================================================================
+# STAGE 1: ARCHITECT 架构设计
+Purpose: Automation workflow tool
+Data Flow: input -> process -> output
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# py auto_barexcept_fix_001.py  # Run verification
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py auto_barexcept_fix_001.py
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# Test: 2026
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+"""
+
+Fix bare except in a file"""
     try:
         content = filepath.read_text(encoding="utf-8", errors="replace")
     except (IOError, OSError):

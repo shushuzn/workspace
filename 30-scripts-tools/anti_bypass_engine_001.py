@@ -227,7 +227,44 @@ class AntiBypassEngine:
             self._trigger_auto_stop("bypass_detected")
     
     def _add_penalty(self, points: int) -> None:
-        """增加惩罚分"""
+        """
+# ==============================================================================
+# STAGE 1: ARCHITECT 架构设计
+Purpose: Automation workflow tool
+Data Flow: input -> process -> output
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# py anti_bypass_engine_001.py  # Run verification
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py anti_bypass_engine_001.py
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# Test: 2026
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+"""
+
+增加惩罚分"""
         penalty = {"current_level": 0, "total_points": 0, "violations": []}
         
         if PENALTY_FILE.exists():

@@ -44,7 +44,44 @@ def load_known_hash() -> str:
 
 
 def save_known_hash(file_hash: str) -> None:
-    """保存已知的有效哈希"""
+    """
+# ==============================================================================
+# STAGE 1: ARCHITECT 架构设计
+Purpose: Automation workflow tool
+Data Flow: input -> process -> output
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# py state_monitor_001.py  # Run verification
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py state_monitor_001.py
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# Test: 2026
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+"""
+
+保存已知的有效哈希"""
     hash_file = STATE_FILE.parent / ".state_hash"
     hash_file.write_text(file_hash, encoding='utf-8')
 

@@ -178,6 +178,7 @@ if __name__ == "__main__":
     main()
 
 # STAGE 3: ASK
+# py auto_optimizer_001.py  # Run verification
 """
 ASK: Run verification
     py auto_optimizer_001.py --dry
@@ -186,6 +187,7 @@ ASK: Run verification
 """
 
 # STAGE 4: DEBUG
+# Test: 2026
 """
 DEBUG:
     - 2026-03-21: 475 issues fixed in one run

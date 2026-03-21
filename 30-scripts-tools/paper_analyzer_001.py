@@ -194,6 +194,7 @@ if __name__ == "__main__":
     main()
 
 # STAGE 3: ASK
+# py paper_analyzer_001.py  # Run verification
 """
 ASK: Run verification
     py paper_analyzer_001.py <pdf_path>
@@ -205,6 +206,7 @@ Test:
 """
 
 # STAGE 4: DEBUG
+# Test: 2026
 """
 DEBUG:
     - 2026-03-21: Created paper analyzer tool

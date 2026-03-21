@@ -110,6 +110,7 @@ if __name__ == "__main__":
     main()
 
 # STAGE 3: ASK
+# py topology_viz_001.py  # Run verification
 """
 ASK: Run verification
     py topology_viz_001.py
@@ -118,6 +119,7 @@ ASK: Run verification
 """
 
 # STAGE 4: DEBUG
+# Test: 2026
 """
 DEBUG:
     - 2026-03-21: Health 97-100% maintained

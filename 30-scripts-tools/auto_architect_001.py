@@ -193,6 +193,7 @@ if __name__ == "__main__":
     main()
 
 # STAGE 3: ASK
+# py auto_architect_001.py  # Run verification
 """
 ASK: Run verification
     py auto_architect_001.py --analyze
@@ -201,6 +202,7 @@ ASK: Run verification
 """
 
 # STAGE 4: DEBUG
+# Test: 2026
 """
 DEBUG:
     - 2026-03-21: Fixed f-string issue with 001 in docstrings

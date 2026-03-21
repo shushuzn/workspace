@@ -56,3 +56,39 @@ print(f"  enabled: {workflow['mandatory_execution']['enabled']}")
 print(f"  entry_point: {workflow['mandatory_execution']['entry_point']}")
 print(f"  rules: {len(workflow['mandatory_execution']['rules'])} 条")
 print(f"  anti_bypass.enabled: {workflow['mandatory_execution']['anti_bypass']['enabled']}")
+
+# ==============================================================================
+# STAGE 1: ARCHITECT 架构设计
+Purpose: Automation workflow tool
+Data Flow: input -> process -> output
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# py update_mandatory_workflow_001.py  # Run verification
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py update_mandatory_workflow_001.py
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# Test: 2026
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+"""

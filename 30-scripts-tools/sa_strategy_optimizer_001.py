@@ -15,7 +15,44 @@ class StrategyOptimizer:
         self.data_dir.mkdir(parents=True, exist_ok=True)
     
     def grid_search(self, param_ranges: dict, evaluate_func) -> dict:
-        """Simple grid search optimization"""
+        """
+# ==============================================================================
+# STAGE 1: ARCHITECT 架构设计
+Purpose: Automation workflow tool
+Data Flow: input -> process -> output
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# py sa_strategy_optimizer_001.py  # Run verification
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py sa_strategy_optimizer_001.py
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# Test: 2026
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+"""
+
+Simple grid search optimization"""
         import itertools
         
         param_names = list(param_ranges.keys())

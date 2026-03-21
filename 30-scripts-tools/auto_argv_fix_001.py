@@ -17,7 +17,44 @@ def has_argv_check(content):
     return bool(re.search(r'if\s+len\(sys\.argv\)\s*[<>=]', content))
 
 def add_argv_check(content, filepath):
-    """Add argv validation to tool"""
+    """
+# ==============================================================================
+# STAGE 1: ARCHITECT 架构设计
+Purpose: Automation workflow tool
+Data Flow: input -> process -> output
+# ==============================================================================
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# py auto_argv_fix_001.py  # Run verification
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py auto_argv_fix_001.py
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# Test: 2026
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+"""
+
+Add argv validation to tool"""
     # Find where to insert (after imports, before main class/def)
     lines = content.split("\n")
     
