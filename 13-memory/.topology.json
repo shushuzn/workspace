@@ -1,0 +1,1617 @@
+{
+  "timestamp": "2026-03-21T10:44:57.050280",
+  "summary": {
+    "total_tools": 417,
+    "health_score": 100.0,
+    "workflows": {
+      "total": 73,
+      "success": 73,
+      "rate": 100.0
+    }
+  },
+  "categories": {
+    "aai": 1,
+    "adaptive": 1,
+    "add": 6,
+    "agent": 1,
+    "ai": 3,
+    "analyze": 1,
+    "anti": 1,
+    "audit": 1,
+    "auto": 16,
+    "bad": 1,
+    "batch": 3,
+    "behavior": 1,
+    "benchmark": 1,
+    "blockchain": 1,
+    "brainstorm": 24,
+    "chain": 1,
+    "check": 25,
+    "ci": 1,
+    "code": 1,
+    "compare": 1,
+    "complete": 1,
+    "compliance": 2,
+    "compression": 1,
+    "confirmation": 1,
+    "content": 1,
+    "context": 2,
+    "copaw": 1,
+    "core": 2,
+    "count": 2,
+    "create": 4,
+    "cron": 2,
+    "cross": 1,
+    "dashboard": 1,
+    "data": 2,
+    "debug": 4,
+    "dep": 1,
+    "diagnose": 1,
+    "dialog": 2,
+    "do": 1,
+    "dynamic": 2,
+    "embedded": 1,
+    "emergency": 1,
+    "emotional": 1,
+    "error": 1,
+    "event": 1,
+    "evolution": 1,
+    "exec": 1,
+    "export": 1,
+    "external": 1,
+    "fast": 1,
+    "file": 2,
+    "finalize": 2,
+    "find": 2,
+    "fix": 7,
+    "forced": 1,
+    "gantt": 1,
+    "get": 1,
+    "git": 3,
+    "guardian": 1,
+    "health": 2,
+    "human": 1,
+    "improvement": 1,
+    "integrate": 3,
+    "integrity": 1,
+    "list": 2,
+    "llm": 1,
+    "mark": 3,
+    "memory": 1,
+    "metacognition": 1,
+    "multi": 4,
+    "next": 1,
+    "nl": 1,
+    "note": 1,
+    "notify": 1,
+    "optimap": 1,
+    "optimize": 1,
+    "parallel": 2,
+    "penalty": 2,
+    "performance": 2,
+    "permission": 1,
+    "phase": 1,
+    "post": 1,
+    "pre": 2,
+    "progressive": 1,
+    "progress": 1,
+    "prompt": 1,
+    "protected": 1,
+    "protection": 1,
+    "query": 1,
+    "quick": 1,
+    "read": 1,
+    "rebuild": 1,
+    "reg": 26,
+    "renumber": 1,
+    "report": 3,
+    "research": 2,
+    "restore": 1,
+    "result": 1,
+    "retry": 1,
+    "reward": 1,
+    "risk": 1,
+    "roadmap": 2,
+    "safe": 3,
+    "sa": 39,
+    "search": 1,
+    "self": 2,
+    "session": 4,
+    "show": 1,
+    "single": 1,
+    "sitecustomize": 1,
+    "smart": 3,
+    "snippet": 1,
+    "state": 3,
+    "step": 2,
+    "stock": 9,
+    "summary": 1,
+    "sync": 2,
+    "task": 3,
+    "temp": 1,
+    "test": 16,
+    "tool": 10,
+    "topology": 1,
+    "typing": 1,
+    "undo": 1,
+    "update": 11,
+    "user": 1,
+    "util": 3,
+    "ux": 1,
+    "velocity": 1,
+    "verify": 6,
+    "version": 1,
+    "view": 1,
+    "workflow": 46
+  },
+  "dependencies": {
+    "aai_scorer_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "adaptive_workflow_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "add_missing_key_tools_001.py": [
+      "Path"
+    ],
+    "add_mock_tool_calls_001.py": [
+      "Path"
+    ],
+    "add_phase_001.py": [
+      "Path"
+    ],
+    "agent_tool_monitor_001.py": [
+      "Path"
+    ],
+    "ai_code_suggest_001.py": [
+      "Path",
+      "io",
+      "io",
+      "Path",
+      "io",
+      "Path",
+      "io"
+    ],
+    "ai_suggest_001.py": [
+      "Path"
+    ],
+    "ai_workflow_001.py": [
+      "Path",
+      "io"
+    ],
+    "analyze_cats_001.py": [
+      "Path"
+    ],
+    "anti_bypass_engine_001.py": [
+      "psutil",
+      "Path"
+    ],
+    "audit_analyzer_001.py": [
+      "Path",
+      "Counter",
+      "statistics"
+    ],
+    "auto_argv_fix_001.py": [
+      "Path"
+    ],
+    "auto_automator_001.py": [
+      "Path"
+    ],
+    "auto_backup_001.py": [
+      "Path"
+    ],
+    "auto_barexcept_fix_001.py": [
+      "Path"
+    ],
+    "auto_discover_001.py": [
+      "Path",
+      "ThreadPoolExecutor",
+      "io"
+    ],
+    "auto_doc_generator_001.py": [
+      "Path",
+      "Dict",
+      "和"
+    ],
+    "auto_fix_engine_001.py": [
+      "Path",
+      "ComplianceDashboard",
+      "ComplianceDashboard"
+    ],
+    "auto_format_detector_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "auto_memory_distiller_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "auto_protection_layer_001.py": [
+      "os",
+      "Path"
+    ],
+    "auto_recovery_001.py": [
+      "shutil",
+      "os",
+      "Path"
+    ],
+    "auto_retry_001.py": [
+      "time",
+      "random",
+      "Callable",
+      "Path"
+    ],
+    "auto_session_compressor_001.py": [
+      "Path"
+    ],
+    "auto_step_001.py": [
+      "Path"
+    ],
+    "auto_todo_updater_001.py": [
+      "Path"
+    ],
+    "auto_training_engine_001.py": [
+      "Path"
+    ],
+    "batch_rename_001.py": [
+      "Path",
+      "io"
+    ],
+    "batch_runner_001.py": [
+      "Path"
+    ],
+    "batch_tools_001.py": [
+      "Path",
+      "ThreadPoolExecutor"
+    ],
+    "behavior_analyzer_001.py": [
+      "Path",
+      "defaultdict"
+    ],
+    "benchmark_001.py": [
+      "Path"
+    ],
+    "blockchain_logger_001.py": [
+      "hashlib",
+      "os",
+      "Path"
+    ],
+    "brainstorm_action_001.py": [
+      "Path"
+    ],
+    "brainstorm_ai_assistant_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "brainstorm_analogy_001.py": [
+      "Path"
+    ],
+    "brainstorm_auto_scanner_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "brainstorm_define_001.py": [
+      "os",
+      "Path",
+      "io"
+    ],
+    "brainstorm_diverge_001.py": [
+      "random",
+      "Path",
+      "io"
+    ],
+    "brainstorm_filter_001.py": [
+      "Path",
+      "io"
+    ],
+    "brainstorm_matcher_001.py": [
+      "Path",
+      "io"
+    ],
+    "brainstorm_mindmap_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "brainstorm_new_dimensions_001.py": [
+      "Path"
+    ],
+    "brainstorm_next_001.py": [
+      "Path"
+    ],
+    "brainstorm_optimize_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "brainstorm_prioritize_001.py": [
+      "Path",
+      "io"
+    ],
+    "brainstorm_quality_predictor_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "brainstorm_quick_001.py": [
+      "Path"
+    ],
+    "brainstorm_random_001.py": [
+      "random",
+      "Path"
+    ],
+    "brainstorm_refine_001.py": [
+      "Path"
+    ],
+    "brainstorm_reverse_001.py": [
+      "Path"
+    ],
+    "brainstorm_roadmap_tools_001.py": [
+      "Path"
+    ],
+    "brainstorm_scamper_001.py": [
+      "Path"
+    ],
+    "brainstorm_sixhats_001.py": [
+      "Path"
+    ],
+    "brainstorm_stock_optimize_001.py": [
+      "Path"
+    ],
+    "brainstorm_workflow_001.py": [
+      "Path",
+      "io"
+    ],
+    "chain_runner_001.py": [
+      "Path",
+      "Dict",
+      "io"
+    ],
+    "check_all_existing_tools_001.py": [
+      "Path"
+    ],
+    "check_core_files_001.py": [
+      "os"
+    ],
+    "check_current_state_001.py": [
+      "Path"
+    ],
+    "check_existing_tools_fixed_001.py": [
+      "Path"
+    ],
+    "check_key_tools_exist_001.py": [
+      "Path"
+    ],
+    "check_missing_tools_001.py": [
+      "Path"
+    ],
+    "check_registry_001.py": [
+      "Path"
+    ],
+    "check_state_files_001.py": [
+      "Path",
+      "shutil"
+    ],
+    "check_tool_bypass_001.py": [
+      "Path"
+    ],
+    "check_tool_files_001.py": [
+      "Path"
+    ],
+    "check_tool_registration_001.py": [
+      "Path"
+    ],
+    "ci_cd_integration_001.py": [
+      "Path",
+      "io"
+    ],
+    "code_quality_001.py": [
+      "Path",
+      "Counter"
+    ],
+    "complete_current_session_001.py": [
+      "Path"
+    ],
+    "compliance_booster_001.py": [
+      "Path"
+    ],
+    "compliance_dashboard_001.py": [
+      "Path",
+      "defaultdict"
+    ],
+    "compression_scheduler_001.py": [
+      "Path",
+      "Dict",
+      "SessionCompressor",
+      "MemoryDistiller",
+      "NoteSummarizer"
+    ],
+    "content_validator_001.py": [
+      "Path"
+    ],
+    "context_aware_assistant_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "context_verify_001.py": [
+      "Path"
+    ],
+    "copaw_entry_001.py": [
+      "os",
+      "Path",
+      "update_state",
+      "create_protection_layer",
+      "classify_task",
+      "AdaptiveWorkflowOrchestrator",
+      "WorkflowEnforcer",
+      "uuid"
+    ],
+    "core_files_compressor_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "core_rules_verifier_001.py": [
+      "Path"
+    ],
+    "count_py_files_001.py": [
+      "os",
+      "Path"
+    ],
+    "count_real_tools_001.py": [
+      "Path"
+    ],
+    "create_brainstorm_v_001.py": [
+      "Path"
+    ],
+    "create_dialogue_workflow_001.py": [
+      "Path"
+    ],
+    "create_dirs_001.py": [
+      "Path"
+    ],
+    "create_dir_001.py": [
+      "Path"
+    ],
+    "cron_enhanced_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "cron_scheduler_001.py": [
+      "os",
+      "Path"
+    ],
+    "cross_session_memory_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "dashboard_view_001.py": [
+      "Path"
+    ],
+    "data_cache_001.py": [
+      "os",
+      "time",
+      "hashlib",
+      "Path",
+      "Any",
+      "wraps",
+      "argparse"
+    ],
+    "data_source_manager_001.py": [
+      "os",
+      "time",
+      "random",
+      "Path",
+      "Dict",
+      "ABC",
+      "functools",
+      "yfinance",
+      "requests",
+      "argparse",
+      "StockDataCache"
+    ],
+    "debug_registry_001.py": [
+      "Path"
+    ],
+    "dep_resolver_001.py": [
+      "Path",
+      "Dict",
+      "io",
+      "或",
+      "X"
+    ],
+    "diagnose_registry_001.py": [
+      "Path"
+    ],
+    "dialog_entry_001.py": [
+      "Path",
+      "enforce_workflow",
+      "CoPawEntry"
+    ],
+    "dialog_workflow_enforcer_001.py": [
+      "enforce_workflow",
+      "Path"
+    ],
+    "dynamic_goal_adjuster_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "dynamic_step_skipper_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "embedded_critic_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "emergency_stop_001.py": [
+      "Path",
+      "Path"
+    ],
+    "emotional_intelligence_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "error_handler_001.py": [
+      "Path",
+      "Dict",
+      "name"
+    ],
+    "event_bus_001.py": [
+      "Path",
+      "Dict",
+      "io"
+    ],
+    "evolution_dashboard_001.py": [
+      "Path",
+      "WorkflowEvolver"
+    ],
+    "exec_protection_task_001.py": [
+      "Path",
+      "ToolExecutor"
+    ],
+    "export_format_001.py": [
+      "Path"
+    ],
+    "external_verifier_001.py": [
+      "hashlib",
+      "os",
+      "Path"
+    ],
+    "fast_load_001.py": [
+      "os",
+      "Path"
+    ],
+    "file_guardian_001.py": [
+      "hashlib",
+      "shutil",
+      "time",
+      "Path"
+    ],
+    "file_integrity_001.py": [
+      "Path",
+      "io"
+    ],
+    "fix_execution_state_001.py": [
+      "Path"
+    ],
+    "fix_registry_format_001.py": [
+      "Path"
+    ],
+    "fix_state_signature_001.py": [
+      "hashlib",
+      "Path"
+    ],
+    "forced_protection_executor_001.py": [
+      "Path",
+      "importlib"
+    ],
+    "gantt_chart_001.py": [
+      "Path"
+    ],
+    "git_commit_helper_001.py": [
+      "time"
+    ],
+    "git_precommit_check_001.py": [
+      "Path"
+    ],
+    "git_precommit_check_v_001.py": [
+      "Path"
+    ],
+    "guardian_auto_fix_001.py": [
+      "Path"
+    ],
+    "health_checker_001.py": [
+      "Path"
+    ],
+    "health_reporter_001.py": [
+      "Path"
+    ],
+    "human_intent_understanding_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "improvement_executor_001.py": [
+      "Path",
+      "SourceFileLoader"
+    ],
+    "integrate_api_001.py": [
+      "urllib",
+      "urllib"
+    ],
+    "integrate_data_001.py": [
+      "csv",
+      "Path"
+    ],
+    "integrate_suite_001.py": [
+      "Path"
+    ],
+    "integrity_checker_001.py": [
+      "hashlib",
+      "os",
+      "Path"
+    ],
+    "list_tools_001.py": [
+      "os",
+      "Path"
+    ],
+    "llm_guide_001.py": [
+      "Path"
+    ],
+    "mark_all_completed_001.py": [
+      "Path"
+    ],
+    "memory_distiller_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "metacognition_monitor_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "multi_agent_learn_001.py": [
+      "Path",
+      "defaultdict",
+      "io"
+    ],
+    "multi_agent_orchestrator_001.py": [
+      "Path"
+    ],
+    "multi_agent_router_001.py": [
+      "Path",
+      "io"
+    ],
+    "multi_agent_viz_001.py": [
+      "Path",
+      "io"
+    ],
+    "next_advisor_001.py": [
+      "Path"
+    ],
+    "nl_workflow_001.py": [
+      "Path",
+      "Dict",
+      "io"
+    ],
+    "note_summarizer_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "notify_001.py": [
+      "Path"
+    ],
+    "optimap_manager_001.py": [
+      "Path"
+    ],
+    "optimize_master_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "parallel_tool_executor_001.py": [
+      "time",
+      "Path",
+      "Dict",
+      "ThreadPoolExecutor"
+    ],
+    "parallel_workflow_001.py": [
+      "Path",
+      "ThreadPoolExecutor",
+      "io"
+    ],
+    "penalty_system_001.py": [
+      "Path"
+    ],
+    "penalty_system_v_001.py": [
+      "Path"
+    ],
+    "performance_analyzer_001.py": [
+      "Path",
+      "Dict",
+      "defaultdict"
+    ],
+    "performance_optimizer_001.py": [
+      "Path",
+      "ThreadPoolExecutor",
+      "io"
+    ],
+    "permission_validator_001.py": [
+      "hashlib",
+      "os",
+      "Path"
+    ],
+    "phase_planner_001.py": [
+      "Path"
+    ],
+    "post_session_compress_001.py": [
+      "Path",
+      "Dict",
+      "CoreFilesCompressor"
+    ],
+    "pre_commit_checker_001.py": [
+      "Path"
+    ],
+    "pre_session_hook_001.py": [
+      "Path",
+      "Dict",
+      "CoreFilesCompressor"
+    ],
+    "progressive_output_001.py": [
+      "time",
+      "List",
+      "Path"
+    ],
+    "progress_bar_001.py": [
+      "time",
+      "Optional"
+    ],
+    "prompt_optimizer_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "protected_py_001.py": [
+      "Path"
+    ],
+    "protection_monitor_001.py": [
+      "Path",
+      "time"
+    ],
+    "quick_complete_workflow_001.py": [
+      "Path"
+    ],
+    "rebuild_registry_001.py": [
+      "Path"
+    ],
+    "renumber_steps_001.py": [
+      "Path",
+      "WorkflowOptimizer"
+    ],
+    "report_export_001.py": [
+      "csv",
+      "Path"
+    ],
+    "report_generator_001.py": [
+      "Path"
+    ],
+    "report_template_001.py": [
+      "Path"
+    ],
+    "research_literature_001.py": [
+      "Path"
+    ],
+    "research_topic_001.py": [
+      "Path"
+    ],
+    "restore_state_001.py": [
+      "Path",
+      "shutil"
+    ],
+    "result_verifier_001.py": [
+      "Path"
+    ],
+    "retry_handler_001.py": [
+      "Path",
+      "Dict",
+      "io"
+    ],
+    "reward_system_001.py": [
+      "Path"
+    ],
+    "risk_assessor_001.py": [
+      "Path"
+    ],
+    "roadmap_manager_001.py": [
+      "os",
+      "Path"
+    ],
+    "roadmap_master_001.py": [
+      "Path"
+    ],
+    "safe_coder_001.py": [
+      "Path",
+      "io",
+      "Path",
+      "io"
+    ],
+    "safe_git_executor_001.py": [
+      "Path"
+    ],
+    "safe_shell_executor_001.py": [
+      "Path",
+      "get_interceptor",
+      "before_tool_call",
+      "WorkflowEnforcerV2"
+    ],
+    "sa_ai_signal_001.py": [
+      "os",
+      "Path",
+      "random"
+    ],
+    "sa_alert_system_001.py": [
+      "Path",
+      "Dict",
+      "time"
+    ],
+    "sa_analyzer_001.py": [
+      "Path",
+      "random",
+      "math"
+    ],
+    "sa_api_001.py": [
+      "os",
+      "Path",
+      "hashlib",
+      "hmac",
+      "base64",
+      "time",
+      "requests",
+      "time",
+      "FastAPI",
+      "BaseModel",
+      "Optional",
+      "random"
+    ],
+    "sa_backtesting_001.py": [
+      "Path",
+      "Dict",
+      "math",
+      "random"
+    ],
+    "sa_backtest_001.py": [
+      "os",
+      "Path",
+      "random",
+      "pandas",
+      "numpy"
+    ],
+    "sa_backtest_optimizer_001.py": [
+      "Path",
+      "io"
+    ],
+    "sa_chart_generator_001.py": [
+      "os",
+      "Path",
+      "matplotlib",
+      "matplotlib",
+      "matplotlib",
+      "Rectangle",
+      "mplfinance",
+      "pandas",
+      "numpy",
+      "random"
+    ],
+    "sa_dashboard_001.py": [
+      "os",
+      "Path",
+      "random"
+    ],
+    "sa_datasource_001.py": [
+      "os",
+      "Path",
+      "time",
+      "requests"
+    ],
+    "sa_data_optimizer_001.py": [
+      "Path",
+      "io",
+      "urllib"
+    ],
+    "sa_executor_001.py": [
+      "Path",
+      "random"
+    ],
+    "sa_financial_collector_001.py": [
+      "Path",
+      "Dict",
+      "requests"
+    ],
+    "sa_financial_ratios_001.py": [
+      "Path",
+      "Dict",
+      "math"
+    ],
+    "sa_growth_analysis_001.py": [
+      "Path",
+      "Dict",
+      "math"
+    ],
+    "sa_historical_downloader_001.py": [
+      "Path",
+      "Dict",
+      "random",
+      "requests"
+    ],
+    "sa_indicator_calculator_001.py": [
+      "Path",
+      "Dict",
+      "math",
+      "random"
+    ],
+    "sa_industry_analysis_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "sa_market_regime_001.py": [
+      "Path",
+      "Dict",
+      "math",
+      "random"
+    ],
+    "sa_optimizer_001.py": [
+      "os",
+      "Path",
+      "random",
+      "numpy",
+      "itertools"
+    ],
+    "sa_pattern_recognition_001.py": [
+      "Path",
+      "Dict",
+      "math",
+      "random"
+    ],
+    "sa_performance_attribution_001.py": [
+      "Path"
+    ],
+    "sa_portfolio_risk_001.py": [
+      "Path",
+      "Dict",
+      "math",
+      "random",
+      "random"
+    ],
+    "sa_realtime_001.py": [
+      "os",
+      "Path",
+      "time",
+      "threading",
+      "queue",
+      "websocket",
+      "random"
+    ],
+    "sa_realtime_fetcher_001.py": [
+      "Path",
+      "Dict",
+      "time",
+      "requests"
+    ],
+    "sa_report_001.py": [
+      "os",
+      "Path",
+      "random"
+    ],
+    "sa_report_generator_001.py": [
+      "Path",
+      "Dict",
+      "math"
+    ],
+    "sa_risk_001.py": [
+      "Path",
+      "random"
+    ],
+    "sa_risk_management_001.py": [
+      "Path",
+      "Dict",
+      "math"
+    ],
+    "sa_sentiment_001.py": [
+      "os",
+      "Path",
+      "random"
+    ],
+    "sa_sentiment_aggregator_001.py": [
+      "Path"
+    ],
+    "sa_sentiment_monitor_001.py": [
+      "Path",
+      "Dict",
+      "random"
+    ],
+    "sa_signal_generator_001.py": [
+      "Path",
+      "Dict",
+      "math"
+    ],
+    "sa_strategy_001.py": [
+      "os",
+      "Path",
+      "random"
+    ],
+    "sa_strategy_optimizer_001.py": [
+      "Path",
+      "itertools"
+    ],
+    "sa_support_resistance_001.py": [
+      "Path",
+      "Dict",
+      "Counter",
+      "math",
+      "random"
+    ],
+    "sa_trader_001.py": [
+      "os",
+      "Path",
+      "random"
+    ],
+    "sa_trend_analysis_001.py": [
+      "Path",
+      "Dict",
+      "math",
+      "random"
+    ],
+    "sa_valuation_model_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "self_corrector_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "self_goal_setter_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "session_compressor_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "session_end_001.py": [
+      "Path",
+      "Dict",
+      "CoreFilesCompressor",
+      "SessionCompressor",
+      "shutil"
+    ],
+    "session_end_audit_001.py": [
+      "Path",
+      "Counter"
+    ],
+    "session_token_validator_001.py": [
+      "hashlib",
+      "os",
+      "Path"
+    ],
+    "single_step_lock_001.py": [
+      "Path",
+      "time"
+    ],
+    "sitecustomize_001.py": [
+      "os",
+      "Path"
+    ],
+    "smart_cache_001.py": [
+      "hashlib",
+      "Path"
+    ],
+    "smart_compress_001.py": [
+      "hashlib",
+      "Path",
+      "Dict",
+      "defaultdict"
+    ],
+    "smart_task_decomposer_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "snippet_001.py": [
+      "Path",
+      "io",
+      "Path",
+      "Dict",
+      "io"
+    ],
+    "state_monitor_001.py": [
+      "hashlib",
+      "Path",
+      "shutil"
+    ],
+    "state_protector_001.py": [
+      "update_state",
+      "hashlib",
+      "os",
+      "Path",
+      "traceback"
+    ],
+    "state_snapshot_001.py": [
+      "shutil",
+      "Path"
+    ],
+    "step_context_verify_001.py": [
+      "Path"
+    ],
+    "step_tracker_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "stock_analysis_pipeline_001.py": [
+      "os",
+      "time",
+      "Path",
+      "Dict",
+      "traceback",
+      "add_charts_to_pipeline",
+      "argparse"
+    ],
+    "stock_auto_report_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "stock_dashboard_001.py": [
+      "http",
+      "socketserver",
+      "Path",
+      "Dict",
+      "threading",
+      "webbrowser",
+      "time"
+    ],
+    "stock_data_cache_001.py": [
+      "hashlib",
+      "os",
+      "time",
+      "Path",
+      "Any",
+      "shutil"
+    ],
+    "stock_parallel_loader_001.py": [
+      "time",
+      "concurrent",
+      "List",
+      "dataclass",
+      "Enum",
+      "random"
+    ],
+    "stock_pipeline_enhanced_001.py": [
+      "time",
+      "Path",
+      "Dict",
+      "StockDataCache",
+      "StockParallelLoader"
+    ],
+    "stock_realtime_alert_001.py": [
+      "time",
+      "Path",
+      "Dict",
+      "dataclass",
+      "Enum"
+    ],
+    "summary_generator_001.py": [
+      "Dict",
+      "Path"
+    ],
+    "sync_registry_001.py": [
+      "Path"
+    ],
+    "sync_registry_smart_001.py": [
+      "Path"
+    ],
+    "task_decomposer_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "temp_file_cleaner_001.py": [
+      "os",
+      "shutil",
+      "Path",
+      "Dict"
+    ],
+    "test_auto_step_tracking_001.py": [
+      "Path",
+      "before_tool_call"
+    ],
+    "test_bypass_protection_001.py": [
+      "Path",
+      "Path"
+    ],
+    "test_cache_enhanced_001.py": [
+      "SmartCache"
+    ],
+    "test_copaw_entry_001.py": [
+      "CopawEntry"
+    ],
+    "test_data_cache_001.py": [
+      "unittest",
+      "time",
+      "tempfile",
+      "shutil",
+      "Path",
+      "StockDataCache"
+    ],
+    "test_data_source_manager_001.py": [
+      "unittest",
+      "Path",
+      "Mock",
+      "pandas"
+    ],
+    "test_integration_001.py": [
+      "Path"
+    ],
+    "test_permission_001.py": [
+      "PermissionValidator"
+    ],
+    "test_protection_001.py": [
+      "Path"
+    ],
+    "test_runner_001.py": [
+      "Path"
+    ],
+    "test_runtime_intercept_001.py": [
+      "importlib",
+      "Path",
+      "openclaw",
+      "openclaw",
+      "openclaw"
+    ],
+    "test_stock_analysis_pipeline_001.py": [
+      "unittest",
+      "Path",
+      "tempfile",
+      "shutil",
+      "StockAnalysisPipeline",
+      "time"
+    ],
+    "test_unit_001.py": [
+      "Path",
+      "unittest"
+    ],
+    "test_wrapper_001.py": [
+      "before_tool_call"
+    ],
+    "test_wrapper_no_session_001.py": [
+      "os",
+      "Path",
+      "shutil",
+      "Path",
+      "ToolWrapper"
+    ],
+    "test_wrapper_strict_001.py": [
+      "Path",
+      "shutil",
+      "ToolWrapper"
+    ],
+    "tool_call_interceptor_001.py": [
+      "os",
+      "Path"
+    ],
+    "tool_call_interceptor_v_001.py": [
+      "os",
+      "Path"
+    ],
+    "tool_call_tracker_001.py": [
+      "Path",
+      "os"
+    ],
+    "tool_executor_001.py": [
+      "os",
+      "Path",
+      "get_protection_layer",
+      "before_tool_call",
+      "WorkflowEnforcer",
+      "AutoStepTracker"
+    ],
+    "tool_monitor_001.py": [
+      "Path",
+      "Dict",
+      "traceback"
+    ],
+    "tool_namer_001.py": [
+      "Path",
+      "io"
+    ],
+    "tool_selector_001.py": [
+      "Path"
+    ],
+    "tool_self_learner_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "tool_validator_001.py": [
+      "ast",
+      "Path",
+      "Dict",
+      "io",
+      "io"
+    ],
+    "tool_wrapper_001.py": [
+      "before_tool_call",
+      "Path"
+    ],
+    "topology_viz_001.py": [
+      "Path",
+      "defaultdict"
+    ],
+    "typing_indicator_001.py": [
+      "time",
+      "threading",
+      "Optional"
+    ],
+    "undo_redo_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "update_step_state_001.py": [
+      "Path"
+    ],
+    "update_workflow_enforcement_001.py": [
+      "Path",
+      "xxx"
+    ],
+    "user_preferences_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "util_file_001.py": [
+      "hashlib",
+      "Path",
+      "defaultdict"
+    ],
+    "util_string_001.py": [
+      "Path"
+    ],
+    "ux_settings_001.py": [
+      "Path"
+    ],
+    "velocity_predict_001.py": [
+      "Path",
+      "defaultdict"
+    ],
+    "verify_rebuild_001.py": [
+      "Path"
+    ],
+    "version_ctrl_001.py": [
+      "hashlib",
+      "Path",
+      "Dict"
+    ],
+    "workflow_alert_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_analytics_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_analyzer_001.py": [
+      "Path"
+    ],
+    "workflow_anomaly_detector_001.py": [
+      "time",
+      "Path",
+      "Dict",
+      "traceback"
+    ],
+    "workflow_autoloader_001.py": [
+      "Path"
+    ],
+    "workflow_auto_executor_001.py": [
+      "Path",
+      "CopawEntry"
+    ],
+    "workflow_backup_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_cache_001.py": [
+      "hashlib",
+      "Path",
+      "Dict"
+    ],
+    "workflow_completion_001.py": [
+      "Path"
+    ],
+    "workflow_dashboard_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_deploy_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_diagnosis_001.py": [
+      "Path",
+      "Counter",
+      "io"
+    ],
+    "workflow_enforcer_001.py": [
+      "Path"
+    ],
+    "workflow_enforcer_v_001.py": [
+      "Path",
+      "ContentValidator"
+    ],
+    "workflow_evolver_001.py": [
+      "Path",
+      "Dict",
+      "defaultdict"
+    ],
+    "workflow_fix_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_guardian_v_001.py": [
+      "Path"
+    ],
+    "workflow_guard_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_health_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_health_dashboard_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "workflow_helper_001.py": [
+      "Path"
+    ],
+    "workflow_integration_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_logger_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_market_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_master_001.py": [
+      "Path",
+      "ThreadPoolExecutor",
+      "io"
+    ],
+    "workflow_menu_001.py": [
+      "Path"
+    ],
+    "workflow_monitor_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_optimizer_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_performance_monitor_001.py": [
+      "time",
+      "Path",
+      "Dict",
+      "defaultdict"
+    ],
+    "workflow_plugin_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_plugin_manager_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_progress_bar_001.py": [
+      "Path",
+      "Dict",
+      "time"
+    ],
+    "workflow_recovery_001.py": [
+      "shutil",
+      "Path",
+      "Dict"
+    ],
+    "workflow_registry_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_report_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_runner_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_scheduler_001.py": [
+      "Path",
+      "Dict",
+      "io"
+    ],
+    "workflow_schedule_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_security_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_self_test_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "workflow_stats_001.py": [
+      "Path"
+    ],
+    "workflow_stock_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_templates_001.py": [
+      "Path",
+      "Dict"
+    ],
+    "workflow_template_001.py": [
+      "Path",
+      "io",
+      "io",
+      "io"
+    ],
+    "workflow_test_001.py": [
+      "Path",
+      "io"
+    ],
+    "workflow_version_001.py": [
+      "Path",
+      "io"
+    ]
+  },
+  "top_tools": {
+    "most_depended": [
+      [
+        "sa_api_001.py",
+        12
+      ],
+      [
+        "data_source_manager_001.py",
+        11
+      ],
+      [
+        "sa_chart_generator_001.py",
+        10
+      ],
+      [
+        "copaw_entry_001.py",
+        8
+      ],
+      [
+        "ai_code_suggest_001.py",
+        7
+      ],
+      [
+        "data_cache_001.py",
+        7
+      ],
+      [
+        "sa_realtime_001.py",
+        7
+      ],
+      [
+        "stock_analysis_pipeline_001.py",
+        7
+      ],
+      [
+        "stock_dashboard_001.py",
+        7
+      ],
+      [
+        "stock_data_cache_001.py",
+        6
+      ]
+    ]
+  }
+}
