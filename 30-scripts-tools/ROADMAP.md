@@ -1,11 +1,11 @@
 # OpenClaw 路线图 2026
 
 ## 当前状态
-- **工具总数**: 410
+- **工具总数**: 411
 - **命名合规**: 100%
 - **工作流成功率**: 100%
 - **版本**: 1.2.0
-- **更新**: 2026-03-21 09:50
+- **更新**: 2026-03-21 09:55
 
 ---
 
@@ -13,18 +13,19 @@
 
 ### 多Agent协作系统
 - ✅ multi_agent_orchestrator_001 - 编排器
-- ✅ multi_agent_router_001 - 智能路由 (51ms 最快之一)
+- ✅ multi_agent_router_001 - 智能路由
 - ✅ multi_agent_viz_001 - 可视化
 - ✅ multi_agent_learn_001 - 学习系统
 - ✅ 集成到17个工作流
 - ✅ 7 Personas激活
 
-### 性能基准
-- ✅ 使用 `performance_optimizer_001.py --benchmark-all`
-- 最快: add_core_rules_to_workflow_001.py (51ms)
-- 最慢: anti_bypass_engine_001.py (215ms)
+### 命令补全 ✅ 新增
+- ✅ **workflow_completion_001.py** - 命令补全工具
+  - Bash/PowerShell 补全脚本
+  - 快速参考文档
+  - 安装命令: `py workflow_completion_001.py install`
 
-### 核心工具 (410个)
+### 核心工具 (411个)
 - ✅ 100%命名合规
 - ✅ 100%工作流成功率
 
@@ -39,16 +40,16 @@
 
 ### 中优先级
 - [ ] 交互式Dashboard
-- [ ] 命令补全
-- [ ] 历史记录
+- [ ] 历史记录追踪
 
 ---
 
 ## 快速命令
 
 ```bash
-# 基准测试
-py 30-scripts-tools/performance_optimizer_001.py --benchmark-all
+# 命令补全 (新增!)
+py 30-scripts-tools/workflow_completion_001.py install
+py 30-scripts-tools/workflow_completion_001.py ref
 
 # 工作流
 workflow.bat dev|full|plan|security|quick
