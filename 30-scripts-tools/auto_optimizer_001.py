@@ -14,9 +14,7 @@ Data Flow:
     analyze_tool() -> find_issues() -> optimize_tool() -> save_log()
 
 STAGE 2: CODE
-"""
-Automatically optimizes tools based on pattern analysis
-"""
+
 import json, re, sys
 from pathlib import Path
 from datetime import datetime
