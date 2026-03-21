@@ -1,11 +1,13 @@
 # OpenClaw 路线图 2026
 
 ## 当前状态
-- **工具总数**: 433
+- **工具总数**: 352
 - **命名合规**: 100%
 - **工作流成功率**: 100%
-- **四阶段合规**: 408/433 (94%) ✅ 核心工具 100%
-- **版本**: 1.2.2
+- **四阶段合规**: 94% ✅ 核心工具 100%
+- **系统健康**: 100%
+- **缓存系统**: 已部署
+- **版本**: 1.2.3
 - **更新时间**: 2026-03-21
 
 ---
@@ -69,4 +71,45 @@ py 30-scripts-tools/intent_predictor_001.py --predict
 
 # 运营面板
 py 30-scripts-tools/ops_panel_001.py heal
+
+# 健康检查
+py 30-scripts-tools/health_checker_001.py --check
 ```
+
+---
+
+## v1.2.3 性能优化
+
+### 缓存系统
+
+| 工具 | 功能 |
+|------|------|
+| smart_cache_001 | 智能缓存核心 (get/set/cached/stats) |
+| apply_caching_001 | 批量应用缓存优化 |
+
+### 使用方法
+
+```python
+from smart_cache_001 import get, set, cached
+
+# 装饰器模式
+@cached(ttl=3600)
+def expensive_function(x):
+    return compute(x)
+
+# 手动缓存
+value = get("key")
+if value is None:
+    value = expensive_computation()
+    set("key", value)
+
+# 统计
+print(stats())  # {"hits": 0, "misses": 0, "hit_rate": "0.0%", "entries": 0}
+```
+
+### Auto-Evolve 结果
+
+- **代数**: 5
+- **创建工具**: 2
+- **优化建议**: 117个工具建议添加缓存
+- **优化修复**: 475个问题
