@@ -1,1 +1,1 @@
-Update ROADMAP.md: Add Phase 6 for multi-agent, update stats to 410 tools
+Clean up ROADMAP: Simplify to v1.2.0 summary, archive old versions
