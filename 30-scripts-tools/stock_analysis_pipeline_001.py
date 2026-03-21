@@ -59,9 +59,9 @@ class StockAnalysisPipeline:
         
         # Phase 1: 数据获取
         self.phase1_tools = [
-            {"id": "SA-001", "name": "实时行情获取", "module": "sa_001_realtime_fetcher"},
-            {"id": "SA-002", "name": "历史数据下载", "module": "sa_002_historical_downloader"},
-            {"id": "SA-003", "name": "财务数据采集", "module": "sa_003_financial_collector"},
+            {"id": "SA-001", "name": "实时行情获取", "module": "sa_realtime_fetcher_001"},
+            {"id": "SA-002", "name": "历史数据下载", "module": "sa_historical_downloader_001"},
+            {"id": "SA-003", "name": "财务数据采集", "module": "sa_financial_collector_001"},
         ]
         
         # Phase 2 分析工具列表 (按执行顺序)

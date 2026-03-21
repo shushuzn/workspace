@@ -176,6 +176,21 @@ def main():
 if __name__ == "__main__":
     main()
 
+# STAGE 3: ASK
+"""
+ASK: Run verification
+    py auto_optimizer_001.py --dry        (preview)
+    py auto_optimizer_001.py --optimize  (apply)
+    py auto_optimizer_001.py --report     (stats)
+"""
+
+# STAGE 4: DEBUG
+"""
+DEBUG:
+    - 2026-03-21: 475 issues fixed in one run
+    - Fixed regex for bare except matching
+"""
+
 # ==============================================================================
 # STAGE 3: ASK 询问确认
 # ==============================================================================

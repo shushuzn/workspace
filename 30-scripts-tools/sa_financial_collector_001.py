@@ -358,6 +358,21 @@ class FinancialDataCollector:
         
         return "\n".join(output)
 
+    def analyze(self, symbol: str, data: Dict = None) -> Dict:
+        """
+        Unified analyze wrapper for pipeline compatibility.
+
+        Args:
+            symbol: Stock symbol
+            data: Optional dict with report_type and other parameters
+
+        Returns:
+            Dict with financial data
+        """
+        data = data or {}
+        report_type = data.get('report_type', 'quarterly')
+        return self.collect_financials(symbol, report_type)
+
 
 logging.basicConfig(level=logging.INFO)
 def main():

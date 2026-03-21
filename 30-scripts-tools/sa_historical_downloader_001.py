@@ -411,6 +411,21 @@ class HistoricalDataDownloader:
         
         return "\n".join(output)
 
+    def analyze(self, symbol: str, data: Dict = None) -> Dict:
+        """
+        Unified analyze wrapper for pipeline compatibility.
+
+        Args:
+            symbol: Stock symbol
+            data: Optional dict with timeframe and other parameters
+
+        Returns:
+            Dict with historical data
+        """
+        data = data or {}
+        timeframe = data.get('timeframe', '1d')
+        return self.download_history(symbol, timeframe)
+
 
 logging.basicConfig(level=logging.INFO)
 def main():

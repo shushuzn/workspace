@@ -291,6 +291,21 @@ class StockDataFetcher:
         
         return "\n".join(output)
 
+    def analyze(self, symbol: str, data: Dict = None) -> Dict:
+        """
+        Unified analyze wrapper for pipeline compatibility.
+
+        Args:
+            symbol: Stock symbol
+            data: Optional dict with source and other parameters
+
+        Returns:
+            Dict with quote data
+        """
+        data = data or {}
+        source = data.get('source', 'yahoo')
+        return self.fetch_quote(symbol, source)
+
 
 logging.basicConfig(level=logging.INFO)
 def main():

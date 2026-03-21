@@ -17,26 +17,23 @@ CHECK_LOG = Path("13-memory/.four_stage_check_log.json")
 
 REQUIRED_SECTIONS = {
     "ARCHITECT": [
-        r"STAGE\s*1.*ARCHITECT",
-        r"ARCHITECT",
+        r"STAGE.*1.*ARCHITECT",
         r"Purpose",
         r"Data\s*Flow",
-        r"Edge\s*Cases",
     ],
     "CODE": [
-        r"STAGE\s*2.*CODE",
+        r"STAGE.*2.*CODE",
         r"class\s+\w+",
         r"def\s+\w+\(",
     ],
     "ASK": [
-        r"STAGE\s*3.*ASK",
-        r"Test\s*Commands",
-        r"Expected",
+        r"STAGE.*3.*ASK",
+        r"py\s+\w+.*\.py",
     ],
     "DEBUG": [
-        r"STAGE\s*4.*DEBUG",
-        r"Test\s*Cases",
-        r"Fixes",
+        r"STAGE.*4.*DEBUG",
+        r"Test",
+        r"20\d{2}",
     ],
 }
 

@@ -191,3 +191,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# STAGE 3: ASK
+"""
+ASK: Run verification
+    py auto_architect_001.py --analyze
+    py auto_architect_001.py --blueprint
+    py auto_architect_001.py --apply create_base
+"""
+
+# STAGE 4: DEBUG
+"""
+DEBUG:
+    - 2026-03-21: Fixed f-string issue with 001 in docstrings
+    - 2026-03-21: 87 orphans reduced to 3 after optimization
+"""

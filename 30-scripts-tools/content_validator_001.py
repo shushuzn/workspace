@@ -66,7 +66,7 @@ def main():
     print("Test 1: Valid execution")
     result = validator.validate_step(
         6,
-        "py sa_010_valuation_model.py --test",
+        "py sa_valuation_model_001.py --test",
         "SA-010 Valuation Model test completed successfully"
     )
     print(f"  Result: {'[OK] Valid' if result else '[FAIL] Invalid'}\n")
