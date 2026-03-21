@@ -1,11 +1,11 @@
 {
-  "timestamp": "2026-03-21T10:44:57.050280",
+  "timestamp": "2026-03-21T10:54:36.841083",
   "summary": {
-    "total_tools": 417,
+    "total_tools": 422,
     "health_score": 100.0,
     "workflows": {
-      "total": 73,
-      "success": 73,
+      "total": 100,
+      "success": 100,
       "rate": 100.0
     }
   },
@@ -18,7 +18,7 @@
     "analyze": 1,
     "anti": 1,
     "audit": 1,
-    "auto": 16,
+    "auto": 17,
     "bad": 1,
     "batch": 3,
     "behavior": 1,
@@ -56,6 +56,7 @@
     "error": 1,
     "event": 1,
     "evolution": 1,
+    "evolved": 1,
     "exec": 1,
     "export": 1,
     "external": 1,
@@ -74,6 +75,7 @@
     "improvement": 1,
     "integrate": 3,
     "integrity": 1,
+    "intent": 1,
     "list": 2,
     "llm": 1,
     "mark": 3,
@@ -84,6 +86,7 @@
     "nl": 1,
     "note": 1,
     "notify": 1,
+    "ops": 1,
     "optimap": 1,
     "optimize": 1,
     "parallel": 2,
@@ -115,7 +118,7 @@
     "safe": 3,
     "sa": 39,
     "search": 1,
-    "self": 2,
+    "self": 3,
     "session": 4,
     "show": 1,
     "single": 1,
@@ -214,6 +217,13 @@
       "Path",
       "Dict",
       "和"
+    ],
+    "auto_evolve_001.py": [
+      "Path",
+      "defaultdict",
+      "logging",
+      "lru_cache",
+      "Path"
     ],
     "auto_fix_engine_001.py": [
       "Path",
@@ -564,6 +574,9 @@
       "Path",
       "WorkflowEvolver"
     ],
+    "evolved_tool_1_001.py": [
+      "Path"
+    ],
     "exec_protection_task_001.py": [
       "Path",
       "ToolExecutor"
@@ -649,6 +662,10 @@
       "os",
       "Path"
     ],
+    "intent_predictor_001.py": [
+      "Path",
+      "defaultdict"
+    ],
     "list_tools_001.py": [
       "os",
       "Path"
@@ -696,6 +713,9 @@
       "Dict"
     ],
     "notify_001.py": [
+      "Path"
+    ],
+    "ops_panel_001.py": [
       "Path"
     ],
     "optimap_manager_001.py": [
@@ -1068,6 +1088,10 @@
       "Path",
       "Dict"
     ],
+    "self_heal_001.py": [
+      "Path",
+      "defaultdict"
+    ],
     "session_compressor_001.py": [
       "Path",
       "Dict"
@@ -1335,7 +1359,8 @@
     ],
     "topology_viz_001.py": [
       "Path",
-      "defaultdict"
+      "defaultdict",
+      "time"
     ],
     "typing_indicator_001.py": [
       "time",

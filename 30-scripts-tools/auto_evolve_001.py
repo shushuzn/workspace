@@ -58,7 +58,7 @@ class SelfEvolution:
                 if "print(" in content and "logging" not in content:
                     patterns["optimization_points"].append(f.name)
                     
-            except:
+            except (IOError, OSError):
                 pass
         
         return patterns

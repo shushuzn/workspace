@@ -18,7 +18,7 @@ def run_tool(tool, args=""):
             capture_output=True, text=True, timeout=60
         )
         return result.stdout[:500] if result.stdout else result.stderr[:200]
-    except:
+    except (IOError, OSError):
         return "[ERROR]"
 
 def main():
@@ -44,7 +44,7 @@ def main():
         tools = data.get("summary", {}).get("total_tools", "?")
         health_score = data.get("summary", {}).get("health_score", "?")
         print(f"      工具: {tools} | 健康: {health_score}%")
-    except:
+    except (json.JSONDecodeError, IOError, OSError):
         print("      [OK] 正常")
     
     # 3. Self-Heal Status
@@ -63,11 +63,11 @@ def main():
     if issues.exists():
         try:
             data = json.loads(issues.read_text())
-            clean = data.get("clean_files", "?")
-            total = data.get("total", "?")
-            pct = clean/total*100 if total else 0
+            clean = data.get("clean_files", 0)
+            total = data.get("total", 1)
+            pct = int(clean)/int(total)*100 if total else 0
             print(f"      Clean: {clean}/{total} ({pct:.0f}%)")
-        except:
+        except (json.JSONDecodeError, IOError, OSError):
             print("      [OK] 正常")
     
     # 5. Multi-Agent Status
