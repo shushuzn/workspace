@@ -547,7 +547,21 @@ class TechnicalIndicatorCalculator:
         self._log_calculation(symbol, len(candles), success=True)
         
         return result
-    
+
+    def analyze(self, symbol: str, candles: List[Dict]) -> Dict:
+        """
+        Unified analyze wrapper for pipeline compatibility.
+        Alias for calculate_all() - calculates all technical indicators.
+
+        Args:
+            symbol: Stock symbol
+            candles: List of candle data (open, high, low, close, volume)
+
+        Returns:
+            Dict with all indicator values
+        """
+        return self.calculate_all(symbol, candles)
+
     def get_latest_signals(self, indicators: Dict) -> Dict:
         """
         Get trading signals from latest indicator values

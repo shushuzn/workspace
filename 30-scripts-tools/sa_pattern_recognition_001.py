@@ -466,6 +466,21 @@ class PatternRecognition:
         
         return filepath
 
+    def analyze(self, symbol: str, candles: List[Dict]) -> Dict:
+        """
+        Unified analyze wrapper for pipeline compatibility.
+
+        Args:
+            symbol: Stock symbol
+            candles: List of candle data (open, high, low, close, volume)
+
+        Returns:
+            Dict with pattern analysis results
+        """
+        result = self.analyze_all_patterns(candles)
+        result['symbol'] = symbol
+        return result
+
 
 def generate_test_data(num_candles: int = 100) -> List[Dict]:
     """生成测试 K 线数据"""

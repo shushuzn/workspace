@@ -295,6 +295,28 @@ class ValuationModel:
         
         return filepath
 
+    def analyze(self, symbol: str, data: Dict = None) -> Dict:
+        """
+        Unified analyze wrapper for pipeline compatibility.
+
+        Args:
+            symbol: Stock symbol
+            data: Optional dict with financial_data, market_data, peer_data
+
+        Returns:
+            Dict with valuation analysis
+        """
+        data = data or {}
+        financial_data = data.get('financial_data', {})
+        if not financial_data:
+            financial_data = generate_test_data()
+        financial_data['symbol'] = symbol
+
+        market_data = data.get('market_data') or generate_market_data()
+        peer_data = data.get('peer_data') or generate_peer_data()
+
+        return self.comprehensive_valuation(financial_data, market_data, peer_data)
+
 
 def generate_test_data() -> Dict:
     """生成测试财务数据"""

@@ -325,6 +325,27 @@ class GrowthAnalyzer:
         
         return filepath
 
+    def analyze(self, symbol: str, data: Dict = None) -> Dict:
+        """
+        Unified analyze wrapper for pipeline compatibility.
+
+        Args:
+            symbol: Stock symbol
+            data: Optional dict with financial_history
+
+        Returns:
+            Dict with growth analysis
+        """
+        data = data or {}
+        financial_history = data.get('financial_history', [])
+        if not financial_history:
+            financial_history = generate_test_data()
+        # Ensure symbol is set
+        for item in financial_history:
+            item['symbol'] = symbol
+
+        return self.analyze_all_growth(financial_history)
+
 
 def generate_test_data() -> List[Dict]:
     """生成测试财务历史数据"""

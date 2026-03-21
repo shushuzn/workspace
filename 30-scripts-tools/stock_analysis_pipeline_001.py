@@ -66,14 +66,14 @@ class StockAnalysisPipeline:
         
         # Phase 2 分析工具列表 (按执行顺序)
         self.phase2_tools = [
-            {"id": "SA-005", "name": "技术指标计算器", "module": "sa_005_indicator_calculator"},
-            {"id": "SA-006", "name": "形态识别", "module": "sa_006_pattern_recognition"},
-            {"id": "SA-007", "name": "趋势分析", "module": "sa_007_trend_analysis"},
-            {"id": "SA-008", "name": "支撑阻力", "module": "sa_008_support_resistance"},
-            {"id": "SA-009", "name": "财务比率", "module": "sa_009_financial_ratios"},
-            {"id": "SA-010", "name": "估值模型", "module": "sa_010_valuation_model"},
-            {"id": "SA-011", "name": "成长性分析", "module": "sa_011_growth_analysis"},
-            {"id": "SA-012", "name": "行业地位分析", "module": "sa_012_industry_analysis"},
+            {"id": "SA-005", "name": "技术指标计算器", "module": "sa_indicator_calculator_001"},
+            {"id": "SA-006", "name": "形态识别", "module": "sa_pattern_recognition_001"},
+            {"id": "SA-007", "name": "趋势分析", "module": "sa_trend_analysis_001"},
+            {"id": "SA-008", "name": "支撑阻力", "module": "sa_support_resistance_001"},
+            {"id": "SA-009", "name": "财务比率", "module": "sa_financial_ratios_001"},
+            {"id": "SA-010", "name": "估值模型", "module": "sa_valuation_model_001"},
+            {"id": "SA-011", "name": "成长性分析", "module": "sa_growth_analysis_001"},
+            {"id": "SA-012", "name": "报告生成", "module": "sa_report_generator_001"},
         ]
         
         # 数据缓存

@@ -320,6 +320,28 @@ class FinancialRatioAnalyzer:
         
         return filepath
 
+    def analyze(self, symbol: str, data: Dict = None) -> Dict:
+        """
+        Unified analyze wrapper for pipeline compatibility.
+
+        Args:
+            symbol: Stock symbol
+            data: Optional dict with financial_data, previous_data, market_data
+
+        Returns:
+            Dict with financial ratio analysis
+        """
+        data = data or {}
+        financial_data = data.get('financial_data', {})
+        if not financial_data:
+            financial_data = generate_test_data()
+        financial_data['symbol'] = symbol
+
+        previous_data = data.get('previous_data') or generate_previous_data()
+        market_data = data.get('market_data') or generate_market_data()
+
+        return self.analyze_all_ratios(financial_data, previous_data, market_data)
+
 
 def generate_test_data() -> Dict:
     """生成测试财务数据"""

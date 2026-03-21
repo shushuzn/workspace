@@ -383,6 +383,32 @@ class ReportGenerator:
         
         return "\n".join(output)
 
+    def analyze(self, symbol: str, data: Dict = None) -> Dict:
+        """
+        Unified analyze wrapper for pipeline compatibility.
+
+        Args:
+            symbol: Stock symbol
+            data: Optional dict with analysis_data containing all SA results
+
+        Returns:
+            Dict with generated report
+        """
+        data = data or {}
+        analysis_data = data.get('analysis_data', {})
+        # If no analysis data provided, create a minimal structure
+        if not analysis_data:
+            analysis_data = {
+                'symbol': symbol,
+                'indicators': {},
+                'patterns': {},
+                'trend': {},
+                'support_resistance': {},
+                'signals': {},
+                'risk': {}
+            }
+        return self.generate_report(symbol, analysis_data)
+
 
 logging.basicConfig(level=logging.INFO)
 def main():
