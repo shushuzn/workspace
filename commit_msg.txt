@@ -1,1 +1,1 @@
-Iterate ROADMAP: Simplify to quick reference, archive stock-analysis-roadmap
+Add benchmark_001.py (64ms) and notify_001.py for performance tracking
