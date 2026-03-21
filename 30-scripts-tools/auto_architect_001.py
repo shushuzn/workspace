@@ -4,6 +4,7 @@
 AUTO-ARCHITECT-001 Tool Architecture Rebuilder
 4-STAGE: ARCHITECT to CODE to ASK to DEBUG
 
+STAGE 1: ARCHITECT
 Purpose:
     - Analyze tool dependencies and structure
     - Suggest architectural improvements
@@ -11,6 +12,8 @@ Purpose:
 
 Data Flow:
     analyze_topology() -> find_clusters() -> suggest_architecture() -> apply()
+
+STAGE 2: CODE
 """
 import json, re, sys
 from pathlib import Path

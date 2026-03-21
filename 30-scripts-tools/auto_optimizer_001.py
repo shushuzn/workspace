@@ -2,27 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 AUTO-OPTIMIZER-001 Self-Optimization System
-4-STAGE: ARCHITECT→CODE→ASK→DEBUG
+4-STAGE: ARCHITECT to CODE to ASK to DEBUG
 
-=============================================================================
-STAGE 1: ARCHITECT 架构设计
-=============================================================================
+STAGE 1: ARCHITECT
 Purpose:
     - Automatically optimize tools based on pattern analysis
     - Add logging, error handling, type hints
     - Fix bare except, missing docstrings
 
 Data Flow:
-    analyze_tool() → find_issues() → optimize_tool() → save_log()
+    analyze_tool() -> find_issues() -> optimize_tool() -> save_log()
 
-Edge Cases:
-    - Syntax error in file → skip
-    - Permission denied → log and skip
-    - Already optimized → skip
-
-=============================================================================
-STAGE 2: CODE 编写代码
-=============================================================================
+STAGE 2: CODE
 """
 Automatically optimizes tools based on pattern analysis
 """
