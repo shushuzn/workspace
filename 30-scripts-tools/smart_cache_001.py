@@ -1,324 +1,212 @@
-import logging
-logger = logging.getLogger(__name__)
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-SMART-CACHE-001 Smart Cache Manager
-【智能缓存管理器 v2】
-
-功能:
-  - 缓存LLM响应避免重复调用
-  - 基于内容hash的精确匹配
-  - LRU (Least Recently Used) 驱逐策略
-  - 缓存统计与分析
-  - 自动过期清理
-"""
-import json
-import hashlib
-import sys
-from pathlib import Path
-from datetime import datetime, timedelta
-
-
-CACHE_DIR = Path("60-DATA/smart_cache_001")
-CACHE_FILE = CACHE_DIR / "cache_store.json"
-CACHE_STATS = CACHE_DIR / "cache_stats.json"
-
-MAX_CACHE_SIZE = 1000  # 最大缓存条目数
-
-
-class SmartCache:
-    """智能缓存"""
-    
-    def __init__(self, ttl_hours: int = 24, max_size: int = MAX_CACHE_SIZE):
-        self.ttl_hours = ttl_hours
-        self.max_size = max_size
-        self.cache_dir = CACHE_DIR
-        self.cache_dir.mkdir(parents=True, exist_ok=True)
-        
-        self.cache_file = CACHE_FILE
-        self.stats_file = CACHE_STATS
-        
-        self._ensure_cache_file()
-    
-    def _ensure_cache_file(self):
-        if not self.cache_file.exists():
-            with open(self.cache_file, "w", encoding="utf-8") as f:
-                json.dump({"entries": {}, "metadata": {"created": datetime.now().isoformat()}}, f)
-    
-    def _load_cache(self) -> dict:
-        with open(self.cache_file, "r", encoding="utf-8") as f:
-            return json.load(f)
-    
-    def _save_cache(self, data: dict):
-        with open(self.cache_file, "w", encoding="utf-8") as f:
-            json.dump(data, f, ensure_ascii=False, indent=2)
-    
-    def _lru_evict(self, cache: dict) -> dict:
-        """
+SMART-CACHE-001 智能缓存工具
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计
-
+# Purpose: 提供跨工具的智能缓存功能
+# Data Flow: check_cache -> store -> retrieve -> invalidate
+# Files: smart_cache_001.py, cache_store.json
 # ==============================================================================
 # STAGE 2: CODE 编写代码
 # ==============================================================================
-
-Purpose: Automation workflow tool
-Data Flow: input -> process -> output
-# ==============================================================================
-
-# ==============================================================================
-# STAGE 3: ASK 询问确认
-# py smart_cache_001.py  # Run verification
-# ==============================================================================
 """
-ASK: Run verification
+import json
+import hashlib
+import time
+from pathlib import Path
+from functools import lru_cache
+from typing import Any, Optional, Callable
 
-Test Commands:
-    py smart_cache_001.py
+# Cache configuration
+CACHE_DIR = Path("data/cache")
+CACHE_DIR.mkdir(parents=True, exist_ok=True)
+CACHE_FILE = CACHE_DIR / "smart_cache.json"
+DEFAULT_TTL = 3600  # 1 hour
 
-Expected Output:
-    - Tool runs without errors
-    - Shows usage or performs intended action
-"""
 
-# ==============================================================================
-# STAGE 4: DEBUG 调试测试
-# Test: 2026
-# ==============================================================================
-"""
-DEBUG: Test cases and fixes
+def _load_cache() -> dict:
+    """Load cache from disk"""
+    if CACHE_FILE.exists():
+        return json.loads(CACHE_FILE.read_text(encoding="utf-8"))
+    return {"entries": {}, "stats": {"hits": 0, "misses": 0}}
 
-Test Cases:
-    1. Basic invocation → Works
-    2. --help flag → Shows usage
 
-Fixes:
-    - (none yet)
-"""
+def _save_cache(cache: dict) -> None:
+    """Save cache to disk"""
+    CACHE_FILE.write_text(json.dumps(cache, indent=2, ensure_ascii=False), encoding="utf-8")
 
-LRU驱逐 - 删除最久未使用的条目"""
-        entries = cache.get("entries", {})
-        
-        if len(entries) >= self.max_size:
-            # 找出最久未使用的条目
-            lru_key = None
-            lru_time = None
-            
-            for key, entry in entries.items():
-                last_used = entry.get("last_used", entry["created_at"])
-                if lru_time is None or last_used < lru_time:
-                    lru_time = last_used
-                    lru_key = key
-            
-            if lru_key:
-                del entries[lru_key]
-                cache["entries"] = entries
-                cache["metadata"]["evictions"] = cache["metadata"].get("evictions", 0) + 1
-        
-        return cache
+
+def _make_key(key: str) -> str:
+    """Create cache key hash"""
+    return hashlib.md5(key.encode()).hexdigest()
+
+
+def get(key: str, ttl: int = DEFAULT_TTL) -> Optional[Any]:
+    """
+    Get value from cache if not expired
     
-    def _hash_key(self, key: str) -> str:
-        return hashlib.sha256(key.encode()).hexdigest()[:16]
+    Args:
+        key: Cache key
+        ttl: Time to live in seconds
     
-    def get(self, prompt: str) -> dict:
-        """获取缓存"""
-        cache = self._load_cache()
-        key = self._hash_key(prompt)
-        
-        if key in cache["entries"]:
-            entry = cache["entries"][key]
-            
-            # 检查过期
-            created = datetime.fromisoformat(entry["created_at"])
-            if datetime.now() - created > timedelta(hours=self.ttl_hours):
-                del cache["entries"][key]
-                self._save_cache(cache)
-                return {"status": "expired", "data": None}
-            
-            # 更新访问时间和命中计数
-            entry["last_used"] = datetime.now().isoformat()
-            entry["hit_count"] = entry.get("hit_count", 0) + 1
-            cache["entries"][key] = entry
-            self._save_cache(cache)
-            
-            return {
-                "status": "hit",
-                "data": entry["response"],
-                "created_at": entry["created_at"],
-                "hit_count": entry["hit_count"]
-            }
-        
-        return {"status": "miss", "data": None}
+    Returns:
+        Cached value or None
+    """
+    cache = _load_cache()
+    entries = cache.get("entries", {})
     
-    def set(self, prompt: str, response: str) -> bool:
-        """设置缓存"""
-        cache = self._load_cache()
-        key = self._hash_key(prompt)
-        
-        # LRU驱逐检查
-        cache = self._lru_evict(cache)
-        
-        cache["entries"][key] = {
-            "prompt": prompt[:100] + "...",
-            "response": response,
-            "created_at": datetime.now().isoformat(),
-            "last_used": datetime.now().isoformat(),
-            "hit_count": 0
-        }
-        
-        self._save_cache(cache)
-        return True
+    if key in entries:
+        entry = entries[key]
+        if time.time() - entry["timestamp"] < ttl:
+            cache["stats"]["hits"] += 1
+            _save_cache(cache)
+            return entry["value"]
+        else:
+            del entries[key]
     
-    def delete(self, prompt: str) -> bool:
-        """删除缓存"""
-        cache = self._load_cache()
-        key = self._hash_key(prompt)
-        
-        if key in cache["entries"]:
-            del cache["entries"][key]
-            self._save_cache(cache)
-            return True
-        
-        return False
+    cache["stats"]["misses"] += 1
+    _save_cache(cache)
+    return None
+
+
+def set(key: str, value: Any) -> None:
+    """
+    Store value in cache
     
-    def clear(self) -> int:
-        """清空缓存"""
-        cache = self._load_cache()
-        count = len(cache["entries"])
-        
+    Args:
+        key: Cache key
+        value: Value to cache
+    """
+    cache = _load_cache()
+    if "entries" not in cache:
         cache["entries"] = {}
-        self._save_cache(cache)
-        
-        return count
     
-    def cleanup_expired(self) -> int:
-        """清理过期缓存"""
-        cache = self._load_cache()
-        expired_keys = []
-        
-        for key, entry in cache["entries"].items():
-            created = datetime.fromisoformat(entry["created_at"])
-            if datetime.now() - created > timedelta(hours=self.ttl_hours):
-                expired_keys.append(key)
-        
-        for key in expired_keys:
-            del cache["entries"][key]
-        
-        self._save_cache(cache)
-        return len(expired_keys)
-    
-    def get_stats(self) -> dict:
-        """获取统计"""
-        cache = self._load_cache()
-        
-        total = len(cache["entries"])
-        total_hits = sum(e.get("hit_count", 0) for e in cache["entries"].values())
-        
-        # 按时间分组
-        now = datetime.now()
-        last_hour = 0
-        last_day = 0
-        
-        for entry in cache["entries"].values():
-            created = datetime.fromisoformat(entry["created_at"])
-            age = (now - created).total_seconds()
-            
-            if age < 3600:
-                last_hour += 1
-            if age < 86400:
-                last_day += 1
-        
-        return {
-            "total_entries": total,
-            "total_hits": total_hits,
-            "last_hour": last_hour,
-            "last_day": last_day,
-            "cache_size_kb": self.cache_file.stat().st_size / 1024 if self.cache_file.exists() else 0
-        }
-    
-    def get_all(self, limit: int = 10) -> list:
-        """获取所有缓存条目"""
-        cache = self._load_cache()
-        entries = []
-        
-        for key, entry in cache["entries"].items():
-            entries.append({
-                "key": key,
-                "prompt": entry["prompt"],
-                "created_at": entry["created_at"],
-                "hit_count": entry.get("hit_count", 0)
-            })
-        
-        entries.sort(key=lambda x: x["created_at"], reverse=True)
-        return entries[:limit]
+    cache["entries"][key] = {
+        "value": value,
+        "timestamp": time.time()
+    }
+    _save_cache(cache)
 
 
-logging.basicConfig(level=logging.INFO)
+def invalidate(key: Optional[str] = None) -> int:
+    """
+    Invalidate cache entries
+    
+    Args:
+        key: Specific key to invalidate, or None for all
+    
+    Returns:
+        Number of entries invalidated
+    """
+    cache = _load_cache()
+    
+    if key is None:
+        count = len(cache.get("entries", {}))
+        cache["entries"] = {}
+    elif key in cache.get("entries", {}):
+        del cache["entries"][key]
+        count = 1
+    else:
+        count = 0
+    
+    _save_cache(cache)
+    return count
+
+
+def cached(ttl: int = DEFAULT_TTL) -> Callable:
+    """
+    Decorator for caching function results
+    
+    Args:
+        ttl: Time to live in seconds
+    
+    Returns:
+        Decorated function
+    """
+    def decorator(func: Callable) -> Callable:
+        @lru_cache(maxsize=128)
+        def wrapper(*args, **kwargs):
+            key = f"{func.__name__}:{str(args)}:{str(kwargs)}"
+            result = get(key, ttl)
+            if result is None:
+                result = func(*args, **kwargs)
+                set(key, result)
+            return result
+        return wrapper
+    return decorator
+
+
+def stats() -> dict:
+    """Get cache statistics"""
+    cache = _load_cache()
+    total = cache["stats"]["hits"] + cache["stats"]["misses"]
+    hit_rate = (cache["stats"]["hits"] / total * 100) if total > 0 else 0
+    
+    return {
+        "hits": cache["stats"]["hits"],
+        "misses": cache["stats"]["misses"],
+        "hit_rate": f"{hit_rate:.1f}%",
+        "entries": len(cache.get("entries", {}))
+    }
+
+
 def main():
-    cache = SmartCache()
+    """CLI interface"""
+    import argparse
     
-    if len(sys.argv) > 1:
-        if sys.argv[1] == "--get":
-            prompt = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else ""
-            if not prompt:
-                return 1
-            
-            result = cache.get(prompt)
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
-        
-        if sys.argv[1] == "--set":
-            # --set "prompt" "response"
-            if len(sys.argv) < 4:
-                print("Usage: --set <prompt> <response>")
-                return 1
-            
-            prompt = sys.argv[2]
-            response = sys.argv[3]
-            cache.set(prompt, response)
-            print(json.dumps({"status": "saved", "key": cache._hash_key(prompt)}))
-            return 0
-        
-        if sys.argv[1] == "--delete":
-            prompt = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else ""
-            result = cache.delete(prompt)
-            print(json.dumps({"status": "deleted" if result else "not_found"}))
-            return 0
-        
-        if sys.argv[1] == "--clear":
-            count = cache.clear()
-            print(json.dumps({"status": "cleared", "count": count}))
-            return 0
-        
-        if sys.argv[1] == "--cleanup":
-            count = cache.cleanup_expired()
-            print(json.dumps({"status": "cleaned", "count": count}))
-            return 0
-        
-        if sys.argv[1] == "--stats":
-            stats = cache.get_stats()
-            print(json.dumps(stats, ensure_ascii=False, indent=2))
-            return 0
-        
-        if sys.argv[1] == "--list":
-            entries = cache.get_all()
-            print(json.dumps(entries, ensure_ascii=False, indent=2))
-            return 0
+    parser = argparse.ArgumentParser(description="SMART-CACHE-001 智能缓存工具")
+    parser.add_argument("--stats", action="store_true", help="显示缓存统计")
+    parser.add_argument("--clear", action="store_true", help="清空所有缓存")
+    parser.add_argument("--invalidate", metavar="KEY", help="删除指定缓存")
     
-    print("SMART-CACHE-001 Smart Cache Manager")
-    print("Usage:")
-    print("  py smart_cache_001.py --get <prompt>      # Get cached response")
-    print("  py smart_cache_001.py --set <p> <r>       # Set cache entry")
-    print("  py smart_cache_001.py --delete <prompt>   # Delete cache entry")
-    print("  py smart_cache_001.py --clear             # Clear all cache")
-    print("  py smart_cache_001.py --cleanup           # Clean expired entries")
-    print("  py smart_cache_001.py --stats             # Show cache statistics")
-    print("  py smart_cache_001.py --list              # List cache entries")
-    return 0
+    args = parser.parse_args()
+    
+    if args.stats:
+        print(json.dumps(stats(), indent=2, ensure_ascii=False))
+    elif args.clear:
+        print(f"[OK] Cleared {invalidate()} entries")
+    elif args.invalidate:
+        print(f"[OK] Invalidated {invalidate(args.invalidate)} entries")
+    else:
+        print(stats())
 
 
 if __name__ == "__main__":
-    import sys
-    sys.exit(main())
+    main()
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# ==============================================================================
+"""
+Usage:
+    from smart_cache_001 import get, set, cached, stats
+    
+    # Simple get/set
+    value = get("my_key")
+    if value is None:
+        value = compute_expensive()
+        set("my_key", value)
+    
+    # Decorator style
+    @cached(ttl=3600)
+    def expensive_function(x):
+        return x ** 2
+    
+    # Stats
+    print(stats())
+
+Test:
+    py smart_cache_001.py --stats
+    py smart_cache_001.py --clear
+"""
+
+# STAGE 4: DEBUG
+# ==============================================================================
+"""
+DEBUG:
+    - 2026-03-21: Created smart_cache_001.py
+    - Provides: get(), set(), cached(), stats(), invalidate()
+    - TTL default: 3600 seconds (1 hour)
+    - Storage: data/cache/smart_cache.json
+"""
