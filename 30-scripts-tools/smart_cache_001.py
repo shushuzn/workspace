@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -210,6 +213,7 @@ class SmartCache:
         return entries[:limit]
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     cache = SmartCache()
     

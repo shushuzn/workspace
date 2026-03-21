@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -24,7 +27,7 @@ from stock_parallel_loader import StockParallelLoader, LoadStrategy
 class StockPipelineEnhanced:
     """增强版股票分析管道"""
     
-    def __init__(self, symbol: str, use_cache: bool = True, use_parallel: bool = True):
+    def __init__(self, symbol: str, use_cache: bool = True, use_parallel: bool = True) -> None:
         """
         初始化增强管道
         
@@ -233,7 +236,8 @@ class StockPipelineEnhanced:
         return {"pe": 25.5, "eps": 5.8}
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """测试"""
     import sys
     

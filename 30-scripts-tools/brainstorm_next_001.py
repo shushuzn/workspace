@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -212,6 +215,7 @@ def display_next_step(recommendations: dict):
     print("  --refine       Auto-refine Problem")
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """主函数"""
     

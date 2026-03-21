@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env py
 # -*- coding: utf-8 -*-
 """
@@ -540,6 +543,7 @@ class DataSourceManager:
 
 
 # CLI 接口
+logging.basicConfig(level=logging.INFO)
 def main():
     """命令行接口"""
     import argparse

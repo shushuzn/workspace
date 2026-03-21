@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -49,6 +52,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
+logging.basicConfig(level=logging.INFO)
 def main():
     parser = argparse.ArgumentParser(description="{description}")
     parser.add_argument("--input", help="Input file")

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -234,7 +237,7 @@ class WorkflowMarket:
         
         return {"status": "uninstalled", "template": template_id}
     
-    def run(self, template_id):
+    def run(self, template_id) -> None:
         """Run an installed template"""
         installed = self._load_installed()
         if template_id not in installed:
@@ -248,7 +251,7 @@ class WorkflowMarket:
             "workflow": template["steps"]
         }
     
-    def categories(self):
+    def categories(self) -> None:
         """List all categories"""
         cats = {}
         for t in MARKETPLACE_TEMPLATES.values():

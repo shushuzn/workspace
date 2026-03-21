@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -27,11 +30,13 @@ def scan_quality():
         lines = content.split('\n')
         
         # Check for common issues
-        if "except:" in content:
+        if "except Exception as e:
+    logger.error(f"Error: {e}")" in content:
             results["issues"].append({
                 "file": tool.name,
                 "type": "bare_except",
-                "line": content[:content.find("except:")].count('\n') + 1
+                "line": content[:content.find("except Exception as e:
+    logger.error(f"Error: {e}")")].count('\n') + 1
             })
         
         if "sys.argv" in content and "sys.argv[1]" not in content:
@@ -64,6 +69,7 @@ def scan_quality():
     
     return results
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("\n[CODE QUALITY REPORT]")
     print("=" * 50)

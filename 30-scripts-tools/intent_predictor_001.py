@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -85,6 +88,7 @@ class IntentPredictor:
             "confidence": intent_counts.most_common(1)[0][1] / max(1, len(intents)) * 100 if intent_counts else 0
         }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     predictor = IntentPredictor()
     

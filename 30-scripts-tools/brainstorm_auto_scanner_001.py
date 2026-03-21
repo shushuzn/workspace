@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -234,6 +237,7 @@ class BrainstormAutoScanner:
         return '\n'.join(lines)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     scanner = BrainstormAutoScanner()
     

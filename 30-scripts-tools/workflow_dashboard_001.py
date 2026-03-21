@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -34,7 +37,7 @@ def load_health():
     
     return {"score": score, "tools": len(tools), "compliant": compliant, "runs": runs, "success": success}
 
-def get_workflow_status(wf_id, wf):
+def get_workflow_status(wf_id, wf) -> None:
     """Get recent status of a workflow"""
     if not LOGS_FILE.exists():
         return "unknown"
@@ -165,7 +168,7 @@ def generate_html():
     
     return html
 
-def generate_markdown():
+def generate_markdown() -> None:
     """Generate markdown dashboard"""
     workflows = load_workflows()
     health = load_health()

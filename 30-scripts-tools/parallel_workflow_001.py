@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -20,7 +23,7 @@ class ParallelWorkflow:
     def __init__(self):
         self.results = []
     
-    def run_parallel(self, tools, max_workers=4, timeout=60):
+    def run_parallel(self, tools, max_workers=4, timeout=60) -> None:
         """Run multiple tools in parallel"""
         results = []
         
@@ -49,14 +52,14 @@ class ParallelWorkflow:
         
         return results
     
-    def _run_tool(self, cmd, timeout):
+    def _run_tool(self, cmd, timeout) -> None:
         """Run a single tool and return result with timing"""
         start = time.time()
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout, encoding="utf-8", errors="replace")
         elapsed = time.time() - start
         return result, elapsed
     
-    def run_sequential(self, tools, timeout=60):
+    def run_sequential(self, tools, timeout=60) -> None:
         """Run tools sequentially"""
         results = []
         
@@ -81,7 +84,7 @@ class ParallelWorkflow:
         
         return results
     
-    def compare(self, tools, sample_size=5):
+    def compare(self, tools, sample_size=5) -> None:
         """Compare parallel vs sequential execution"""
         # Sequential
         print("Running sequential...")
@@ -109,7 +112,7 @@ class ParallelWorkflow:
             "speedup": f"{(seq_total / par_total):.2f}x" if par_total > 0 else "N/A"
         }
     
-    def run_workflow(self, workflow_id):
+    def run_workflow(self, workflow_id) -> None:
         """Run a predefined workflow"""
         workflows = {
             "dev": ["auto_discover_001", "tool_validator_001", "tool_namer_001"],

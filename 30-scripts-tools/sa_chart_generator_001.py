@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -324,6 +327,7 @@ class StockChartGenerator:
         return result
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) > 1:
         if sys.argv[1] == "--test":

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -293,6 +296,7 @@ class SafeShellExecutor:
         return modified
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """命令行入口 - 修复版（正确处理参数）"""
     if len(sys.argv) < 2:

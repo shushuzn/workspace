@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -209,6 +212,7 @@ class StockAutoReport:
         return "\n".join(md)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     symbol = sys.argv[1] if len(sys.argv) > 1 else "AAPL"
     

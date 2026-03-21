@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -219,7 +222,7 @@ class AutoTrainingEngine:
         
         return report
     
-    def display(self):
+    def display(self) -> None:
         """显示训练报告"""
         report = self.generate_report()
         
@@ -254,7 +257,7 @@ class AutoTrainingEngine:
         print(f"预期提升：{report['expected_improvement']}")
         print("=" * 70)
     
-    def save_report(self):
+    def save_report(self) -> None:
         """保存报告"""
         report = self.generate_report()
         
@@ -264,6 +267,7 @@ class AutoTrainingEngine:
         return str(TRAINING_REPORT)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import sys
     

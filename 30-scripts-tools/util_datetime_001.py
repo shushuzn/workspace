@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -61,6 +64,7 @@ class DateTimeUtil:
             return -1
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     util = DateTimeUtil()
     

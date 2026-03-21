@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -279,6 +282,7 @@ class AutoTODOUpdater:
             print("\nPhase 2 尚未完成，跳过更新")
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """主函数"""
     updater = AutoTODOUpdater()

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -279,6 +282,7 @@ def reset_rewards():
     if REWARD_STATE.exists():
         REWARD_STATE.unlink()
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         # 测试模式

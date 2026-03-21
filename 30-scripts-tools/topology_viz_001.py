@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -12,7 +15,7 @@ from collections import defaultdict
 TOOLS_DIR = Path("30-scripts-tools")
 LOGS_DIR = Path("13-memory/.workflow_logs")
 
-def scan_dependencies():
+def scan_dependencies() -> None:
     """Scan tools for dependencies"""
     deps = defaultdict(list)
     categories = defaultdict(list)
@@ -39,7 +42,7 @@ def scan_dependencies():
     
     return deps, categories
 
-def get_health_status():
+def get_health_status() -> None:
     """Get workflow health status"""
     log_file = LOGS_DIR / "master.json"
     if log_file.exists():
@@ -52,7 +55,7 @@ def get_health_status():
             pass
     return {"total": 0, "success": 0, "rate": 100}
 
-def generate_ascii_topology():
+def generate_ascii_topology() -> None:
     """Generate ASCII visualization"""
     deps, categories = scan_dependencies()
     health = get_health_status()
@@ -116,7 +119,7 @@ def generate_ascii_topology():
     
     return "\n".join(output)
 
-def generate_json_topology():
+def generate_json_topology() -> None:
     """Generate JSON topology data"""
     deps, categories = scan_dependencies()
     health = get_health_status()
@@ -137,6 +140,7 @@ def generate_json_topology():
         }
     }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import time
     

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -15,7 +18,7 @@ class SelfHealSystem:
     def __init__(self):
         self.health_score = 100
     
-    def diagnose_file(self, filepath):
+    def diagnose_file(self, filepath) -> None:
         """Diagnose issues in a single file"""
         try:
             content = filepath.read_text(encoding="utf-8", errors="replace")
@@ -38,7 +41,7 @@ class SelfHealSystem:
         
         return issues
     
-    def heal_file(self, filepath, issues):
+    def heal_file(self, filepath, issues) -> None:
         """Auto-heal a file"""
         try:
             content = filepath.read_text(encoding="utf-8", errors="replace")
@@ -73,7 +76,7 @@ class SelfHealSystem:
             return True
         return False
     
-    def predict_failures(self):
+    def predict_failures(self) -> None:
         """Predict which tools might fail"""
         predictions = []
         
@@ -94,7 +97,7 @@ class SelfHealSystem:
         predictions.sort(key=lambda x: x["risk"], reverse=True)
         return predictions[:10]
     
-    def auto_heal(self, dry_run=False):
+    def auto_heal(self, dry_run=False) -> None:
         """Auto-heal all detected issues"""
         all_issues = []
         
@@ -124,6 +127,7 @@ class SelfHealSystem:
             "health_score": self.health_score
         }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     healer = SelfHealSystem()
     

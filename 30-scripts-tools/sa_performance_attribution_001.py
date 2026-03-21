@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """SA-018: Performance Attribution - Analyze sources of trading returns"""
@@ -58,6 +61,7 @@ class PerformanceAttribution:
             "outperformed": outperformance > 0
         }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("=" * 70)
     print(" " * 16 + "SA-018: Performance Attribution")

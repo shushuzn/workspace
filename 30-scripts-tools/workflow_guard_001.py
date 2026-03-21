@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -42,7 +45,7 @@ class WorkflowGuard:
         
         self.log_file.write_text(json.dumps(logs, ensure_ascii=False, indent=2), encoding="utf-8")
     
-    def check_file(self, filepath):
+    def check_file(self, filepath) -> None:
         """Mandatory check for a single file"""
         path = Path(filepath)
         if not path.exists():
@@ -88,7 +91,7 @@ class WorkflowGuard:
         
         return results
     
-    def check_and_commit(self, filepaths):
+    def check_and_commit(self, filepaths) -> None:
         """Mandatory workflow: check -> block if fail -> commit only if all pass"""
         if not filepaths:
             return {"error": "No files specified"}
@@ -130,7 +133,7 @@ class WorkflowGuard:
         
         return {"status": "COMMITTED", "results": results, "commit": commit_result.stdout[:200]}
     
-    def enforce_new_tool(self, tool_name):
+    def enforce_new_tool(self, tool_name) -> None:
         """Enforce workflow for new tool creation"""
         tool_path = TOOLS_DIR / f"{tool_name}.py"
         
@@ -149,7 +152,7 @@ class WorkflowGuard:
         print("\n✅ TOOL APPROVED")
         return result
     
-    def status(self):
+    def status(self) -> None:
         """Show guard status"""
         logs = []
         if self.log_file.exists():

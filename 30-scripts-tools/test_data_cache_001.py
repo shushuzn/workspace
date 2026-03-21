@@ -28,7 +28,7 @@ from data_cache import StockDataCache, cache_result
 class TestStockDataCache(unittest.TestCase):
     """股票数据缓存测试类"""
     
-    def setUp(self):
+    def setUp(self) -> None:
         """测试前准备"""
         self.test_dir = tempfile.mkdtemp()
         self.cache = StockDataCache(
@@ -38,17 +38,17 @@ class TestStockDataCache(unittest.TestCase):
         self.test_symbol = "TEST"
         self.test_data = {"price": 150.23, "volume": 1000000}
     
-    def tearDown(self):
+    def tearDown(self) -> None:
         """测试后清理"""
         shutil.rmtree(self.test_dir, ignore_errors=True)
     
-    def test_initialization(self):
+    def test_initialization(self) -> None:
         """测试初始化"""
         self.assertEqual(self.cache.default_ttl, 3600)
         self.assertTrue(self.cache.cache_dir.exists())
         self.assertEqual(len(self.cache.memory_cache), 0)
     
-    def test_cache_write_and_read(self):
+    def test_cache_write_and_read(self) -> None:
         """测试缓存写入和读取"""
         # 写入缓存
         key = self.cache.set(self.test_symbol, "price", self.test_data)
@@ -62,7 +62,7 @@ class TestStockDataCache(unittest.TestCase):
         # 验证数据
         self.assertEqual(cached_data, self.test_data)
     
-    def test_cache_hit_miss(self):
+    def test_cache_hit_miss(self) -> None:
         """测试缓存命中和未命中"""
         # 首次读取 (miss)
         result = self.cache.get(self.test_symbol, "nonexistent")
@@ -75,7 +75,7 @@ class TestStockDataCache(unittest.TestCase):
         result = self.cache.get(self.test_symbol, "price")
         self.assertEqual(result, self.test_data)
     
-    def test_cache_expiration(self):
+    def test_cache_expiration(self) -> None:
         """测试缓存过期"""
         # 写入短期缓存 (1 秒过期)
         self.cache.set(self.test_symbol, "temp", self.test_data, ttl=1)
@@ -91,7 +91,7 @@ class TestStockDataCache(unittest.TestCase):
         result = self.cache.get(self.test_symbol, "temp")
         self.assertIsNone(result)
     
-    def test_cache_invalidation(self):
+    def test_cache_invalidation(self) -> None:
         """测试缓存失效"""
         # 写入多个缓存
         self.cache.set(self.test_symbol, "price", {"price": 100})
@@ -110,7 +110,7 @@ class TestStockDataCache(unittest.TestCase):
         # 验证 OTHER 缓存仍存在
         self.assertIsNotNone(self.cache.get("OTHER", "price"))
     
-    def test_cache_clear_all(self):
+    def test_cache_clear_all(self) -> None:
         """测试清除所有缓存"""
         # 写入多个缓存
         self.cache.set("AAPL", "price", {"price": 150})
@@ -126,7 +126,7 @@ class TestStockDataCache(unittest.TestCase):
         self.assertIsNone(self.cache.get("TSLA", "price"))
         self.assertEqual(len(self.cache.memory_cache), 0)
     
-    def test_cache_stats(self):
+    def test_cache_stats(self) -> None:
         """测试缓存统计"""
         # 制造一些命中和未命中
         self.cache.get("MISS1", "data")  # miss
@@ -143,7 +143,7 @@ class TestStockDataCache(unittest.TestCase):
         self.assertEqual(stats["writes"], 2)
         self.assertEqual(stats["hit_rate"], "50.00%")
     
-    def test_memory_cache_lru(self):
+    def test_memory_cache_lru(self) -> None:
         """测试内存缓存 LRU 淘汰机制"""
         # 设置较小的缓存大小
         self.cache.memory_cache_max_size = 5
@@ -158,7 +158,7 @@ class TestStockDataCache(unittest.TestCase):
         # 验证有淘汰发生
         self.assertGreater(self.cache.stats["evictions"], 0)
     
-    def test_disk_cache_persistence(self):
+    def test_disk_cache_persistence(self) -> None:
         """测试磁盘缓存持久化"""
         # 写入缓存
         self.cache.set(self.test_symbol, "persistent", self.test_data)
@@ -174,7 +174,7 @@ class TestStockDataCache(unittest.TestCase):
         cached_data = new_cache.get(self.test_symbol, "persistent")
         self.assertEqual(cached_data, self.test_data)
     
-    def test_cache_with_params(self):
+    def test_cache_with_params(self) -> None:
         """测试带参数的缓存"""
         params1 = {"timeframe": "1d", "adjustment": "forward"}
         params2 = {"timeframe": "1h", "adjustment": "none"}
@@ -190,7 +190,7 @@ class TestStockDataCache(unittest.TestCase):
         self.assertEqual(daily_data["data"], "daily")
         self.assertEqual(hourly_data["data"], "hourly")
     
-    def test_cache_decorator(self):
+    def test_cache_decorator(self) -> None:
         """测试缓存装饰器"""
         call_count = 0
         
@@ -216,7 +216,7 @@ class TestStockDataCache(unittest.TestCase):
 class TestCacheIntegration(unittest.TestCase):
     """集成测试"""
     
-    def test_full_workflow(self):
+    def test_full_workflow(self) -> None:
         """测试完整工作流"""
         test_dir = tempfile.mkdtemp()
         try:

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -294,6 +297,7 @@ class LLMGuide:
         }
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     guide = LLMGuide()
     

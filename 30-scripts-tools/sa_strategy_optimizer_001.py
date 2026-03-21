@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """SA-017: Strategy Optimizer - Optimize trading strategy parameters"""
@@ -70,6 +73,7 @@ class StrategyOptimizer:
             "avg_difference": sum(r["difference"] for r in results) / len(results) if results else 0
         }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("=" * 70)
     print(" " * 16 + "SA-017: Strategy Optimizer")

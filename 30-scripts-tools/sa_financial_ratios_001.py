@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -353,6 +356,7 @@ def generate_market_data() -> Dict:
     }
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """主函数"""
     print("=" * 70)

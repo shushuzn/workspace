@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -133,6 +136,7 @@ def restore_snapshot(snapshot_id: str) -> dict:
             "reason": str(e)
         }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import sys
     

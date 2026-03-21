@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -42,7 +45,7 @@ class FileGuardian:
         self.baseline = self._load_baseline()
         self.alerts = []
     
-    def _load_baseline(self):
+    def _load_baseline(self) -> None:
         """加载文件基线"""
         baseline_file = Path("30-scripts-tools/file_baseline.json")
         if baseline_file.exists():
@@ -50,7 +53,7 @@ class FileGuardian:
                 return json.load(f)
         return self._create_baseline()
     
-    def _create_baseline(self):
+    def _create_baseline(self) -> None:
         """创建文件基线"""
         baseline = {
             "created_at": datetime.now().isoformat(),
@@ -168,7 +171,7 @@ class FileGuardian:
             print(f"Recovery failed for {file_path}: {e}")
             return False
     
-    def _log_recovery(self, file_path: Path, backup_path: Path):
+    def _log_recovery(self, file_path: Path, backup_path: Path) -> None:
         """记录恢复日志"""
         log_entry = {
             "timestamp": datetime.now().isoformat(),
@@ -180,7 +183,7 @@ class FileGuardian:
         with open(GUARDIAN_LOG, "a", encoding="utf-8") as f:
             f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
     
-    def _alert(self, issue: dict):
+    def _alert(self, issue: dict) -> None:
         """发送告警"""
         self.alerts.append(issue)
         
@@ -196,12 +199,12 @@ class FileGuardian:
                     json.dump(stop_data, f, ensure_ascii=False, indent=2)
                 print(f"[ALERT] Stop flag activated due to {issue['type']}: {issue['file']}")
     
-    def update_baseline(self):
+    def update_baseline(self) -> None:
         """更新基线"""
         self.baseline = self._create_baseline()
         print("[OK] File baseline updated")
     
-    def display(self):
+    def display(self) -> None:
         """显示检查结果"""
         results = self.check_all()
         
@@ -229,6 +232,7 @@ class FileGuardian:
         print("=" * 70)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import sys
     

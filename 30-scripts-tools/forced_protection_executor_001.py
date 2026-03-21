@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -33,7 +36,7 @@ class ForcedProtectionExecutor:
         # 强制检查停止状态
         self._force_stop_check()
     
-    def _force_session_check(self):
+    def _force_session_check(self) -> None:
         """强制会话检查 - 没有 session 直接退出"""
         if not self.state_file.exists():
             print("=" * 70)
@@ -57,7 +60,7 @@ class ForcedProtectionExecutor:
         
         print(f"[OK] 强制会话检查通过：{self.session_id}")
     
-    def _force_load_protection(self):
+    def _force_load_protection(self) -> None:
         """强制加载防护层"""
         try:
             # 直接导入，不允许失败
@@ -72,7 +75,7 @@ class ForcedProtectionExecutor:
             print(f"[WARN] 防护层加载失败：{e}")
             print("[WARN] 继续执行但记录警告")
     
-    def _force_stop_check(self):
+    def _force_stop_check(self) -> None:
         """强制停止检查 - 停止状态直接退出"""
         if self.stop_flag.exists():
             print("=" * 70)
@@ -178,7 +181,7 @@ class ForcedProtectionExecutor:
         
         return output
     
-    def _trigger_auto_stop(self, trigger_type: str, reason: str):
+    def _trigger_auto_stop(self, trigger_type: str, reason: str) -> None:
         """触发自动停止"""
         stop_data = {
             "activated_at": datetime.now().isoformat(),
@@ -192,7 +195,8 @@ class ForcedProtectionExecutor:
         print(f"[STOP] 自动停止标志已设置")
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """测试模式"""
     print("=" * 70)
     print("强制防护执行器 v1.0 - 测试")

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -206,6 +209,7 @@ class AAIScorer:
         
         return result
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试入口"""
     scorer = AAIScorer("20260320-main-workflow-brainstorm")

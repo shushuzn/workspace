@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -21,35 +24,35 @@ STATS_FILE = Path("13-memory/.workflow_logs/master.json")
 LEARN_FILE = LEARN_DIR / "collaboration_history.json"
 PATTERNS_FILE = LEARN_DIR / "routing_patterns.json"
 
-def ensure_dir():
+def ensure_dir() -> None:
     """Ensure learn directory exists"""
     LEARN_DIR.mkdir(parents=True, exist_ok=True)
 
-def load_history():
+def load_history() -> None:
     """Load collaboration history"""
     ensure_dir()
     if LEARN_FILE.exists():
         return json.loads(LEARN_FILE.read_text(encoding="utf-8", errors="replace"))
     return {"tasks": [], "outcomes": [], "patterns": {}}
 
-def save_history(history):
+def save_history(history) -> None:
     """Save collaboration history"""
     ensure_dir()
     LEARN_FILE.write_text(json.dumps(history, indent=2, ensure_ascii=False), encoding="utf-8")
 
-def load_patterns():
+def load_patterns() -> None:
     """Load routing patterns"""
     ensure_dir()
     if PATTERNS_FILE.exists():
         return json.loads(PATTERNS_FILE.read_text(encoding="utf-8", errors="replace"))
     return {"persona_scores": {}, "task_keywords": {}}
 
-def save_patterns(patterns):
+def save_patterns(patterns) -> None:
     """Save routing patterns"""
     ensure_dir()
     PATTERNS_FILE.write_text(json.dumps(patterns, indent=2, ensure_ascii=False), encoding="utf-8")
 
-def analyze_patterns():
+def analyze_patterns() -> None:
     """Analyze past patterns and improve routing"""
     history = load_history()
     patterns = load_patterns()
@@ -80,7 +83,7 @@ def analyze_patterns():
     save_patterns(patterns)
     return patterns
 
-def record_outcome(task, persona, success, keywords):
+def record_outcome(task, persona, success, keywords) -> None:
     """Record task outcome for learning"""
     history = load_history()
     
@@ -97,7 +100,7 @@ def record_outcome(task, persona, success, keywords):
     
     save_history(history)
 
-def get_best_persona(task_text):
+def get_best_persona(task_text) -> None:
     """Get best persona based on learned patterns"""
     patterns = load_patterns()
     scores = defaultdict(float)
@@ -114,7 +117,7 @@ def get_best_persona(task_text):
     
     return max(scores.items(), key=lambda x: x[1])[0]
 
-def generate_report():
+def generate_report() -> None:
     """Generate learning report"""
     history = load_history()
     patterns = load_patterns()

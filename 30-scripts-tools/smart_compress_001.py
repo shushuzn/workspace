@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -353,6 +356,7 @@ class SmartCompressor:
         return result
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     compressor = SmartCompressor()
     

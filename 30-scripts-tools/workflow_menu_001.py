@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -34,7 +37,7 @@ class WorkflowMenu:
                 return json.load(f)
         return {}
     
-    def show_status(self):
+    def show_status(self) -> None:
         """显示当前状态"""
         state = self.load_state()
         workflow = self.load_workflow()
@@ -76,7 +79,7 @@ class WorkflowMenu:
                 name = info.get('name', f'Step {step_id}')
                 print(f"  {status_icon} {step_id}: {name}")
     
-    def complete_step(self, step_id: int = None):
+    def complete_step(self, step_id: int = None) -> None:
         """完成指定步骤"""
         state = self.load_state()
         
@@ -114,7 +117,7 @@ class WorkflowMenu:
         
         print(f"✅ 步骤 {step_id} ({step_name}) 已标记完成")
     
-    def reset_state(self):
+    def reset_state(self) -> None:
         """重置状态"""
         state = {
             "flow_id": self.flow_id,
@@ -131,7 +134,7 @@ class WorkflowMenu:
         
         print("✅ 状态已重置")
     
-    def show_menu(self):
+    def show_menu(self) -> None:
         """显示主菜单"""
         print("\n" + "=" * 50)
         print("🔧 工作流工具菜单")
@@ -144,7 +147,7 @@ class WorkflowMenu:
         print("0. ❌ 退出")
         print("=" * 50)
         
-    def run(self):
+    def run(self) -> None:
         """运行菜单"""
         while True:
             self.show_menu()
@@ -174,6 +177,7 @@ class WorkflowMenu:
                 print("❌ 无效选择")
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     menu = WorkflowMenu()
     

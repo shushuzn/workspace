@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -150,6 +153,7 @@ class OptimizationRoadmapManager:
         return data.get("metrics", {})
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     manager = OptimizationRoadmapManager()
     

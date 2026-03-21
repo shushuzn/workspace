@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -419,6 +422,7 @@ def generate_test_data() -> tuple:
     return prices, highs, lows, volumes, ma_short, ma_long, returns
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """主函数"""
     print("=" * 70)

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -61,6 +64,7 @@ def generate_report():
     
     return report
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("\n[HEALTH-REPORTER-001] Daily Health Report")
     print("=" * 50)

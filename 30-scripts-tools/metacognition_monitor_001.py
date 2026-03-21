@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -31,7 +34,7 @@ class MetacognitionMonitor:
                        tool_success_rate: float = 1.0,
                        error_frequency: float = 0.0,
                        quality_score: float = 80.0,
-                       resource_usage: Dict = None):
+                       resource_usage: Dict = None) -> None:
         """收集执行指标"""
         
         step_metric = {
@@ -112,7 +115,7 @@ class MetacognitionMonitor:
         
         return optimizations
     
-    def save(self):
+    def save(self) -> None:
         """保存指标到文件"""
         self.metrics["end_time"] = datetime.now().isoformat()
         
@@ -143,7 +146,8 @@ class MetacognitionMonitor:
             "success": True
         }
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """测试入口"""
     monitor = MetacognitionMonitor("20260320-main-workflow-brainstorm")
     

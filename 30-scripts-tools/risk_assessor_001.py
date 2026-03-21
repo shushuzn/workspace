@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -83,6 +86,7 @@ def assess_risk(command: str, file_path: str = None) -> dict:
     
     return result
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         # 测试模式

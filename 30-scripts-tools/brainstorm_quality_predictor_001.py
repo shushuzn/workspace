@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -261,6 +264,7 @@ class BrainstormQualityPredictor:
         """运行预测"""
         return self.batch_predict(ideas, context)
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试入口"""
     predictor = BrainstormQualityPredictor()

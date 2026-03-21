@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -48,6 +51,7 @@ def request_confirmation(operation: str, risk_level: str, reasons: list):
         "log_entry": log_entry
     }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 3:
         print("用法：py confirmation_gate.py <operation> <risk_level> [reasons_json]")

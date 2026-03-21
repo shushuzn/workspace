@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -19,7 +22,7 @@ def save_notifications(data):
     NOTIFY_FILE.parent.mkdir(parents=True, exist_ok=True)
     NOTIFY_FILE.write_text(json.dumps(data, indent=2, ensure_ascii=False), encoding="utf-8")
 
-def send_notification(title, message, level="info"):
+def send_notification(title, message, level="info") -> None:
     """Send a notification"""
     notifications = load_notifications()
     
@@ -46,7 +49,7 @@ def send_notification(title, message, level="info"):
     
     return notification
 
-def list_notifications(unread_only=False):
+def list_notifications(unread_only=False) -> None:
     """List all notifications"""
     notifications = load_notifications()
     items = notifications.get("notifications", [])
@@ -66,7 +69,7 @@ def list_notifications(unread_only=False):
     
     return items
 
-def mark_read(index=None):
+def mark_read(index=None) -> None:
     """Mark notifications as read"""
     notifications = load_notifications()
     if index is None:
@@ -77,6 +80,7 @@ def mark_read(index=None):
             notifications["notifications"][index]["read"] = True
     save_notifications(notifications)
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         print("""

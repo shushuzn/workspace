@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -29,7 +32,7 @@ class AutoStepTracker:
         with open(self.state_file, 'w', encoding='utf-8') as f:
             json.dump(state, f, ensure_ascii=False, indent=2)
     
-    def auto_complete(self, tool_name: str = None):
+    def auto_complete(self, tool_name: str = None) -> None:
         """
         根据工具调用自动完成步骤
         
@@ -88,6 +91,7 @@ class AutoStepTracker:
         return state
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     tracker = AutoStepTracker()
     

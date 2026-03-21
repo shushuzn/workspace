@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 from pathlib import Path
 Path('active_skills/agent-spectrum').mkdir(parents=True, exist_ok=True)

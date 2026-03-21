@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -257,6 +260,7 @@ class AutoFormatDetector:
         
         return "\n".join(output)
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """Test entry point"""
     detector = AutoFormatDetector()

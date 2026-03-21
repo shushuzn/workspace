@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -492,6 +495,7 @@ def generate_test_data(num_candles: int = 100) -> List[Dict]:
     return candles
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """主函数"""
     print("=" * 70)

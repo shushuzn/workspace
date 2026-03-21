@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -215,6 +218,7 @@ class VelocityPredictor:
         return {"status": "synced", "dimensions": dimensions}
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     predictor = VelocityPredictor()
     

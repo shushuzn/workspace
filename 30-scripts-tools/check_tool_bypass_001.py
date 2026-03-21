@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -120,6 +123,7 @@ def check_bypass() -> tuple[bool, list]:
     return len(issues) == 0, issues
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     passed, issues = check_bypass()
     

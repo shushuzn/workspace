@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -35,7 +38,7 @@ class ComplianceBooster:
             state = json.load(f)
         return state.get("session_id")
     
-    def _load_violations(self, limit=100):
+    def _load_violations(self, limit=100) -> None:
         """加载违规记录"""
         if not VIOLATION_LOG.exists():
             return []
@@ -52,7 +55,7 @@ class ComplianceBooster:
         
         return violations
     
-    def _load_tool_calls(self, limit=1000):
+    def _load_tool_calls(self, limit=1000) -> None:
         """加载工具调用记录"""
         if not TOOL_CALL_LOG.exists():
             return []
@@ -215,7 +218,7 @@ class ComplianceBooster:
         
         return training_result
     
-    def display(self):
+    def display(self) -> None:
         """显示分析报告"""
         analysis = self.analyze_root_causes()
         plan = self.generate_improvement_plan()
@@ -262,7 +265,7 @@ class ComplianceBooster:
             print(f"  [FAIL] {pattern}")
         print("=" * 70)
     
-    def save_report(self):
+    def save_report(self) -> None:
         """保存报告"""
         report = {
             "session_id": self.session_id,
@@ -278,6 +281,7 @@ class ComplianceBooster:
         return str(COMPLIANCE_REPORT)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import sys
     

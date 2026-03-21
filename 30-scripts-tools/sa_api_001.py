@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -269,40 +272,40 @@ class StockAPIClient:
         self.session = requests.Session()
         self.session.headers.update({"X-API-Key": api_key})
     
-    def get_quote(self, symbol):
+    def get_quote(self, symbol) -> None:
         """获取实时行情"""
         response = self.session.get(f"{self.base_url}/quote/{symbol}")
         return response.json()
     
-    def get_history(self, symbol, period="1m", interval="1d"):
+    def get_history(self, symbol, period="1m", interval="1d") -> None:
         """获取历史数据"""
         params = {"period": period, "interval": interval}
         response = self.session.get(f"{self.base_url}/history/{symbol}", params=params)
         return response.json()
     
-    def get_indicators(self, symbol, indicators="MA,RSI,MACD"):
+    def get_indicators(self, symbol, indicators="MA,RSI,MACD") -> None:
         """获取技术指标"""
         params = {"indicators": indicators}
         response = self.session.get(f"{self.base_url}/indicators/{symbol}", params=params)
         return response.json()
     
-    def get_signals(self, symbol):
+    def get_signals(self, symbol) -> None:
         """获取交易信号"""
         response = self.session.get(f"{self.base_url}/signals/{symbol}")
         return response.json()
     
-    def get_portfolio(self):
+    def get_portfolio(self) -> None:
         """获取投资组合"""
         response = self.session.get(f"{self.base_url}/portfolio")
         return response.json()
     
-    def trade(self, action, symbol, shares):
+    def trade(self, action, symbol, shares) -> None:
         """交易"""
         data = {"action": action, "symbol": symbol, "shares": shares}
         response = self.session.post(f"{self.base_url}/portfolio", json=data)
         return response.json()
     
-    def backtest(self, strategy, symbol, period="1y", capital=100000):
+    def backtest(self, strategy, symbol, period="1y", capital=100000) -> None:
         """回测"""
         data = {
             "strategy": strategy,
@@ -313,12 +316,12 @@ class StockAPIClient:
         response = self.session.post(f"{self.base_url}/backtest", json=data)
         return response.json()
     
-    def get_alerts(self):
+    def get_alerts(self) -> None:
         """获取告警"""
         response = self.session.get(f"{self.base_url}/alerts")
         return response.json()
     
-    def create_alert(self, symbol, condition, threshold):
+    def create_alert(self, symbol, condition, threshold) -> None:
         """创建告警"""
         data = {"symbol": symbol, "condition": condition, "threshold": threshold}
         response = self.session.post(f"{self.base_url}/alerts", json=data)
@@ -464,6 +467,7 @@ def get_alerts(api_key: str = Depends(verify_api_key)):
         }
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) > 1:
         if sys.argv[1] == "--test":

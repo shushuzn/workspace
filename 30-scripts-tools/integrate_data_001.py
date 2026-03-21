@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -47,6 +50,7 @@ class DataConnector:
         return [item for item in data if item.get(key) == value]
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     connector = DataConnector()
     

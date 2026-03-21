@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -7,6 +10,7 @@
 
 import json
 
+logging.basicConfig(level=logging.INFO)
 def main():
     # 加载文件
     with open('flow-archive/20260318-universal-workflow-001/workflow.json', 'r', encoding='utf-8') as f:

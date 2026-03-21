@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -23,12 +26,12 @@ class WorkflowGuardian:
         self.state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
         self.validation_log = Path("flow-archive/20260318-universal-workflow-001/validation-log.jsonl")
         
-    def load_json(self, file_path):
+    def load_json(self, file_path) -> None:
         """加载 JSON 文件"""
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
     
-    def validate_step_types(self):
+    def validate_step_types(self) -> None:
         """
         验证 step_id 类型完全匹配
         返回：(是否通过，错误列表，修复建议)
@@ -68,7 +71,7 @@ class WorkflowGuardian:
         passed = len(errors) == 0
         return passed, errors, fixes
     
-    def validate_step_status(self):
+    def validate_step_status(self) -> None:
         """验证 step_status 中的每个步骤状态"""
         workflow = self.load_json(self.workflow_file)
         state = self.load_json(self.state_file)
@@ -104,7 +107,7 @@ class WorkflowGuardian:
         passed = len(errors) == 0
         return passed, errors, fixes
     
-    def validate_completion_percentage(self):
+    def validate_completion_percentage(self) -> None:
         """验证完成率计算正确"""
         workflow = self.load_json(self.workflow_file)
         state = self.load_json(self.state_file)
@@ -127,7 +130,7 @@ class WorkflowGuardian:
         passed = len(errors) == 0
         return passed, errors, fixes
     
-    def validate_workflow_compliance_flag(self):
+    def validate_workflow_compliance_flag(self) -> None:
         """验证 workflow_compliance 标志"""
         state = self.load_json(self.state_file)
         
@@ -148,7 +151,7 @@ class WorkflowGuardian:
         passed = len(errors) == 0
         return passed, errors, fixes
     
-    def run_full_validation(self):
+    def run_full_validation(self) -> None:
         """运行完整验证流程"""
         print("\n" + "=" * 80)
         print(" " * 25 + "工作流防护系统 v2.0")
@@ -228,7 +231,7 @@ class WorkflowGuardian:
         
         return all_passed, all_errors, all_fixes
     
-    def log_validation(self, passed, errors, fixes):
+    def log_validation(self, passed, errors, fixes) -> None:
         """记录验证结果到日志"""
         log_entry = {
             "timestamp": datetime.now().isoformat(),
@@ -242,7 +245,7 @@ class WorkflowGuardian:
         with open(self.validation_log, 'a', encoding='utf-8') as f:
             f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
     
-    def auto_fix_state_file(self):
+    def auto_fix_state_file(self) -> None:
         """自动修复 execution-state.json"""
         print("\n[自动修复] 正在修复 execution-state.json...")
         
@@ -270,7 +273,8 @@ class WorkflowGuardian:
         return True
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """主函数"""
     guardian = WorkflowGuardian()
     

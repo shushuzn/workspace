@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -298,6 +301,7 @@ print(result.stdout)
         return str(output_file)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     exporter = MultiFormatExporter()
     

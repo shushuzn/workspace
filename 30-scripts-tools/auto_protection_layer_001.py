@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 """
 自动防护层 - 在每次工具调用前自动执行检查
 

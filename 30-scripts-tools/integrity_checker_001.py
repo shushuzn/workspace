@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -48,7 +51,7 @@ class IntegrityChecker:
             state = json.load(f)
         return state.get("session_id")
     
-    def _load_baseline(self):
+    def _load_baseline(self) -> None:
         """加载完整性基线"""
         if not INTEGRITY_FILE.exists():
             return self._create_baseline()
@@ -56,7 +59,7 @@ class IntegrityChecker:
         with open(INTEGRITY_FILE, "r", encoding="utf-8") as f:
             return json.load(f)
     
-    def _create_baseline(self):
+    def _create_baseline(self) -> None:
         """创建完整性基线"""
         baseline = {
             "created_at": datetime.now().isoformat(),
@@ -230,7 +233,7 @@ class IntegrityChecker:
             "issues": issues
         }
     
-    def _log_violation(self, results: dict):
+    def _log_violation(self, results: dict) -> None:
         """记录违规"""
         violation = {
             "timestamp": datetime.now().isoformat(),
@@ -244,12 +247,12 @@ class IntegrityChecker:
         with open(VIOLATION_LOG, "a", encoding="utf-8") as f:
             f.write(json.dumps(violation, ensure_ascii=False) + "\n")
     
-    def update_baseline(self):
+    def update_baseline(self) -> None:
         """更新基线"""
         self.baseline = self._create_baseline()
         print("[OK] 完整性基线已更新")
     
-    def display(self):
+    def display(self) -> None:
         """显示检查结果"""
         results = self.check_all()
         
@@ -299,6 +302,7 @@ class IntegrityChecker:
             print("=" * 70)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import sys
     

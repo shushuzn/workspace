@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -143,6 +146,7 @@ def generate_recommendations(dimensions, overall_score):
     return recommendations
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """Main entry point"""
     print("=" * 70)

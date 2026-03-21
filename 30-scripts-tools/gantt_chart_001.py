@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -153,6 +156,7 @@ class GanttChartGenerator:
         }
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     generator = GanttChartGenerator()
     

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -302,6 +305,7 @@ class WorkflowEnforcer:
         with open(self.enforcement_log, 'w', encoding='utf-8') as f:
             json.dump(log, f, ensure_ascii=False, indent=2)
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试入口"""
     enforcer = WorkflowEnforcer()

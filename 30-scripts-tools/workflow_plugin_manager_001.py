@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -45,7 +48,7 @@ class PluginManager:
     def __init__(self):
         self.plugins = {}
     
-    def install(self, name, description="", author="OpenClaw"):
+    def install(self, name, description="", author="OpenClaw") -> None:
         """Install a new plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
         
@@ -58,7 +61,7 @@ class PluginManager:
         plugin_file.write_text(content, encoding="utf-8")
         return {"status": "installed", "plugin": name, "path": str(plugin_file)}
     
-    def uninstall(self, name):
+    def uninstall(self, name) -> None:
         """Remove a plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
         
@@ -68,7 +71,7 @@ class PluginManager:
         plugin_file.unlink()
         return {"status": "uninstalled", "plugin": name}
     
-    def load(self, name):
+    def load(self, name) -> None:
         """Load and execute a plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
         
@@ -88,7 +91,7 @@ class PluginManager:
         except Exception as e:
             return {"error": str(e), "traceback": traceback.format_exc()}
     
-    def run(self, name, args=None):
+    def run(self, name, args=None) -> None:
         """Run a plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
         
@@ -106,7 +109,7 @@ class PluginManager:
         except Exception as e:
             return {"error": str(e)}
     
-    def list(self):
+    def list(self) -> None:
         """List all installed plugins"""
         plugins = []
         for f in PLUGIN_DIR.glob("*.py"):
@@ -125,7 +128,7 @@ class PluginManager:
         
         return {"plugins": plugins, "count": len(plugins)}
     
-    def validate(self, name):
+    def validate(self, name) -> None:
         """Validate a plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
         

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -379,6 +382,7 @@ class EmotionalIntelligence:
         
         return "\n".join(output)
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试入口"""
     ei = EmotionalIntelligence()

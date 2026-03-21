@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -365,6 +368,7 @@ def generate_test_holdings() -> tuple:
     return portfolio_value, holdings
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """主函数"""
     print("=" * 70)

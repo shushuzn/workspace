@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 import json
 import sys
 sys.path.insert(0, "30-scripts-tools")

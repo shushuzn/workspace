@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -88,7 +91,7 @@ class ParallelToolExecutor:
         
         return results
     
-    def _log_execution(self, results: Dict):
+    def _log_execution(self, results: Dict) -> None:
         """记录执行日志"""
         log = []
         if self.log_file.exists():
@@ -204,7 +207,8 @@ class ParallelToolExecutor:
             "success": True
         }
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """测试入口"""
     executor = ParallelToolExecutor(max_workers=4)
     

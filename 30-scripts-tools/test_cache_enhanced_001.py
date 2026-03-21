@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 from smart_cache_001 import SmartCache
 c = SmartCache()
 c.set("test1", "response1")

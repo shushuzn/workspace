@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -33,6 +36,7 @@ class {CLASS}:
     def cmd_list(self): return {"cmd": ["--list", "--run"]}
     def cmd_run(self, id): return {"status": "ok", "id": id} if id else {"status": "error"}
 
+logging.basicConfig(level=logging.INFO)
 def main():
     t = {CLASS}()
     if len(sys.argv) < 2: print("Usage: py {FILE} <cmd>"); return 1

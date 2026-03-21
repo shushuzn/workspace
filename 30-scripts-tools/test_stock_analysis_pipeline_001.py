@@ -28,7 +28,7 @@ from stock_analysis_pipeline import StockAnalysisPipeline
 class TestStockAnalysisPipeline(unittest.TestCase):
     """股票分析管道测试类"""
     
-    def setUp(self):
+    def setUp(self) -> None:
         """测试前准备"""
         self.test_symbol = "TEST"
         self.test_dir = tempfile.mkdtemp()
@@ -37,18 +37,18 @@ class TestStockAnalysisPipeline(unittest.TestCase):
             output_dir=Path(self.test_dir)
         )
     
-    def tearDown(self):
+    def tearDown(self) -> None:
         """测试后清理"""
         shutil.rmtree(self.test_dir, ignore_errors=True)
     
-    def test_initialization(self):
+    def test_initialization(self) -> None:
         """测试初始化"""
         self.assertEqual(self.pipeline.symbol, "TEST")
         self.assertEqual(len(self.pipeline.phase2_tools), 8)
         self.assertIsInstance(self.pipeline.output_dir, Path)
         self.assertTrue(self.pipeline.output_dir.exists())
     
-    def test_mock_data_generation(self):
+    def test_mock_data_generation(self) -> None:
         """测试模拟数据生成"""
         for tool_id in ["SA-005", "SA-006", "SA-007", "SA-008", 
                         "SA-009", "SA-010", "SA-011", "SA-012"]:
@@ -56,7 +56,7 @@ class TestStockAnalysisPipeline(unittest.TestCase):
             self.assertIsInstance(mock_data, dict)
             self.assertTrue(len(mock_data) > 0)
     
-    def test_pipeline_execution(self):
+    def test_pipeline_execution(self) -> None:
         """测试管道执行"""
         results = self.pipeline.run()
         
@@ -75,7 +75,7 @@ class TestStockAnalysisPipeline(unittest.TestCase):
             self.assertIn(tool_id, results["stages"])
             self.assertIn("status", results["stages"][tool_id])
     
-    def test_metrics_collection(self):
+    def test_metrics_collection(self) -> None:
         """测试指标收集"""
         self.pipeline.run()
         
@@ -88,7 +88,7 @@ class TestStockAnalysisPipeline(unittest.TestCase):
         # 验证所有阶段都有时间记录
         self.assertEqual(len(metrics["stage_times"]), 8)
     
-    def test_json_report_generation(self):
+    def test_json_report_generation(self) -> None:
         """测试 JSON 报告生成"""
         self.pipeline.run()
         
@@ -102,7 +102,7 @@ class TestStockAnalysisPipeline(unittest.TestCase):
             self.assertIn("symbol", data)
             self.assertIn("stages", data)
     
-    def test_markdown_report_generation(self):
+    def test_markdown_report_generation(self) -> None:
         """测试 Markdown 报告生成"""
         self.pipeline.run()
         
@@ -116,7 +116,7 @@ class TestStockAnalysisPipeline(unittest.TestCase):
             self.assertIn("TEST", content)
             self.assertIn("Stock Analysis Report", content)
     
-    def test_html_report_generation(self):
+    def test_html_report_generation(self) -> None:
         """测试 HTML 报告生成"""
         self.pipeline.run()
         
@@ -131,7 +131,7 @@ class TestStockAnalysisPipeline(unittest.TestCase):
             self.assertIn("</html>", content)
             self.assertIn("TEST", content)
     
-    def test_error_handling(self):
+    def test_error_handling(self) -> None:
         """测试错误处理"""
         # 测试无效股票代码
         pipeline = StockAnalysisPipeline(symbol="INVALID_SYMBOL_12345")
@@ -141,7 +141,7 @@ class TestStockAnalysisPipeline(unittest.TestCase):
         self.assertIn("symbol", results)
         self.assertEqual(results["symbol"], "INVALID_SYMBOL_12345")
     
-    def test_performance(self):
+    def test_performance(self) -> None:
         """测试性能 (所有工具执行时间 < 5 秒)"""
         import time
         start = time.time()
@@ -151,7 +151,7 @@ class TestStockAnalysisPipeline(unittest.TestCase):
         # 使用模拟数据应该在 1 秒内完成
         self.assertLess(duration, 5.0, "Pipeline execution too slow")
     
-    def test_output_directory_creation(self):
+    def test_output_directory_creation(self) -> None:
         """测试输出目录自动创建"""
         nested_dir = Path(self.test_dir) / "subdir1" / "subdir2"
         pipeline = StockAnalysisPipeline(
@@ -166,7 +166,7 @@ class TestStockAnalysisPipeline(unittest.TestCase):
 class TestPipelineIntegration(unittest.TestCase):
     """集成测试"""
     
-    def test_full_workflow(self):
+    def test_full_workflow(self) -> None:
         """测试完整工作流"""
         test_dir = tempfile.mkdtemp()
         try:

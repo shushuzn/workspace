@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -187,6 +190,7 @@ TOOL_SETS = {
 }
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     executor = BatchExecutor()
     

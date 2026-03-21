@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -170,6 +173,7 @@ def log_call(tool_name: str, params: dict, result: str, returncode: int):
         f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     tool_name, params = parse_args(sys.argv[1:])
     

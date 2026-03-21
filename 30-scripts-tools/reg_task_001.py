@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 import json
 with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
     r = json.load(f)

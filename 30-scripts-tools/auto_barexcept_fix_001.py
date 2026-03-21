@@ -1,8 +1,12 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 AUTO-BAREXCEPT-FIX-001 Auto-fix bare except statements
-Scans and fixes bare except: with specific exception types
+Scans and fixes bare except Exception as e:
+    logger.error(f"Error: {e}") with specific exception types
 """
 import json, re, sys
 from pathlib import Path
@@ -62,6 +66,7 @@ def fix_file(filepath):
     
     return {"file": filepath.name, "status": "ok", "count": 0}
 
+logging.basicConfig(level=logging.INFO)
 def main():
     dry_run = "--dry-run" in sys.argv
     

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """SA-016: Sentiment Aggregator - Aggregate multiple sentiment sources"""
@@ -64,6 +67,7 @@ class SentimentAggregator:
     def get_stats(self):
         return self.sentiment_log["stats"].copy()
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("=" * 70)
     print(" " * 16 + "SA-016: Sentiment Aggregator")

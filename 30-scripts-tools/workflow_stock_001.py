@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -122,7 +125,7 @@ class WorkflowStock:
     def list(self):
         return [{"id": k, "name": v["name"], "steps": len(v["steps"])} for k, v in STOCK_WORKFLOWS.items()]
     
-    def health(self):
+    def health(self) -> None:
         """Check health of stock analysis tools"""
         sa_tools = list(TOOLS_DIR.glob("sa_*.py"))
         results = []

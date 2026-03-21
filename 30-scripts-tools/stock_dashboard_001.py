@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -283,7 +286,7 @@ class StockDashboard:
             alerts_html=alerts_html
         )
     
-    def _serve(self):
+    def _serve(self) -> None:
         """启动 HTTP 服务器"""
         html = self._generate_html()
         
@@ -308,7 +311,7 @@ class StockDashboard:
             print(f"{'='*60}")
             httpd.serve_forever()
     
-    def open(self, open_browser: bool = True):
+    def open(self, open_browser: bool = True) -> None:
         """打开仪表板"""
         # 在新线程中启动服务器
         server_thread = threading.Thread(target=self._serve, daemon=True)
@@ -322,6 +325,7 @@ class StockDashboard:
         print(f"\n按 Ctrl+C 停止服务器")
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import sys
     symbol = sys.argv[1] if len(sys.argv) > 1 else "AAPL"

@@ -5,4 +5,5 @@ def bad():
     try:
         data = open("test.json").read()
         return json.loads(data)
-    except: pass
+    except Exception as e:
+    logger.error(f"Error: {e}") pass

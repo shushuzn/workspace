@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 import json
 
 with open("flow-archive/20260318-universal-workflow-001/execution-state.json", "r", encoding="utf-8") as f:

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -40,13 +43,13 @@ def load_known_hash() -> str:
     return None
 
 
-def save_known_hash(file_hash: str):
+def save_known_hash(file_hash: str) -> None:
     """保存已知的有效哈希"""
     hash_file = STATE_FILE.parent / ".state_hash"
     hash_file.write_text(file_hash, encoding='utf-8')
 
 
-def log_tampering(old_hash: str, new_hash: str, detected_at: str):
+def log_tampering(old_hash: str, new_hash: str, detected_at: str) -> None:
     """记录篡改事件"""
     log_entry = {
         "timestamp": detected_at,
@@ -59,7 +62,7 @@ def log_tampering(old_hash: str, new_hash: str, detected_at: str):
         f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
 
 
-def create_backup():
+def create_backup() -> None:
     """创建备份"""
     BACKUP_DIR.mkdir(exist_ok=True)
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -107,7 +110,7 @@ def check_integrity() -> bool:
     return True
 
 
-def restore_from_backup():
+def restore_from_backup() -> None:
     """从备份恢复"""
     if not BACKUP_DIR.exists():
         print("[ERROR] 备份目录不存在")
@@ -132,6 +135,7 @@ def restore_from_backup():
     return True
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         print("用法：py state_monitor.py [--check|--restore|--init]")

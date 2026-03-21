@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -199,6 +202,7 @@ class HealthChecker:
             return json.load(f)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     checker = HealthChecker()
     

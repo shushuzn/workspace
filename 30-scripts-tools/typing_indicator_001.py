@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -13,7 +16,7 @@ from typing import Optional, Callable
 class TypingIndicator:
     """Display typing/activity indicator during long operations"""
     
-    def __init__(self, delay_seconds: float = 2.0, update_interval: float = 5.0):
+    def __init__(self, delay_seconds: float = 2.0, update_interval: float = 5.0) -> None:
         """
         Initialize typing indicator
         
@@ -34,7 +37,7 @@ class TypingIndicator:
         self.current_message_index = 0
         self.start_time: Optional[datetime] = None
     
-    def _display_indicator(self):
+    def _display_indicator(self) -> None:
         """Internal method to display indicator (runs in separate thread)"""
         time.sleep(self.delay_seconds)
         
@@ -58,25 +61,25 @@ class TypingIndicator:
         sys.stdout.write("\r" + " " * 50 + "\r")
         sys.stdout.flush()
     
-    def start(self):
+    def start(self) -> None:
         """Start the typing indicator"""
         self.is_running = True
         self.current_message_index = 0
         self.indicator_thread = threading.Thread(target=self._display_indicator, daemon=True)
         self.indicator_thread.start()
     
-    def stop(self):
+    def stop(self) -> None:
         """Stop the typing indicator"""
         self.is_running = False
         if self.indicator_thread and self.indicator_thread.is_alive():
             self.indicator_thread.join(timeout=1.0)
     
-    def __enter__(self):
+    def __enter__(self) -> None:
         """Context manager entry"""
         self.start()
         return self
     
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         """Context manager exit"""
         self.stop()
     
@@ -87,7 +90,7 @@ class TypingIndicator:
         return 0.0
 
 
-def with_typing_indicator(func: Callable):
+def with_typing_indicator(func: Callable) -> None:
     """
     Decorator to automatically show typing indicator for long operations
     
@@ -106,7 +109,7 @@ def with_typing_indicator(func: Callable):
     return wrapper
 
 
-def simulate_long_operation(duration: float, description: str = "Operation"):
+def simulate_long_operation(duration: float, description: str = "Operation") -> None:
     """Simulate a long operation with typing indicator"""
     print(f"\nStarting: {description}")
     print("-" * 60)
@@ -124,7 +127,8 @@ def simulate_long_operation(duration: float, description: str = "Operation"):
     return result
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """Test entry point"""
     print("Typing Indicator Test")
     print("=" * 60)

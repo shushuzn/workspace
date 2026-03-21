@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -43,7 +46,7 @@ class ToolMonitor:
             "tools": {}
         }
     
-    def _save_stats(self):
+    def _save_stats(self) -> None:
         """保存统计数据"""
         
         with open(self.stats_file, 'w', encoding='utf-8') as f:
@@ -215,7 +218,7 @@ class ToolMonitor:
         
         return result
     
-    def _log_call(self, result: Dict):
+    def _log_call(self, result: Dict) -> None:
         """记录调用日志"""
         
         log_entry = {
@@ -298,7 +301,8 @@ class ToolMonitor:
             "success": True
         }
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """测试入口"""
     monitor = ToolMonitor()
     

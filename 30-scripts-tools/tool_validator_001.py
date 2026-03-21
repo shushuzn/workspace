@@ -26,7 +26,7 @@ COMMON_PATTERNS = {
     "except_no_detail": {
         "pattern": r'except\s*:\s*(?!.*(?:log|print|raise|return))',
         "severity": "warning",
-        "message": "Bare except: without logging may hide errors"
+        "message": "Bare except without logging may hide errors"
     },
     "sys_argv_no_check": {
         "pattern": r'sys\.argv\s*\[\s*[2-9]',

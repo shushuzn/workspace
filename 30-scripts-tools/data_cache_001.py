@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env py
 # -*- coding: utf-8 -*-
 """
@@ -30,7 +33,7 @@ sys.path.insert(0, str(WORKSPACE / "30-scripts-tools"))
 class StockDataCache:
     """股票数据缓存层"""
     
-    def __init__(self, cache_dir: Optional[Path] = None, default_ttl: int = 3600):
+    def __init__(self, cache_dir: Optional[Path] = None, default_ttl: int = 3600) -> None:
         """
         初始化缓存
         
@@ -187,7 +190,7 @@ class StockDataCache:
         
         return key
     
-    def _add_to_memory(self, key: str, entry: Dict[str, Any]):
+    def _add_to_memory(self, key: str, entry: Dict[str, Any]) -> None:
         """添加到内存缓存 (带 LRU 淘汰)"""
         # 如果缓存已满，淘汰最旧的条目
         if len(self.memory_cache) >= self.memory_cache_max_size:
@@ -200,7 +203,7 @@ class StockDataCache:
         
         self.memory_cache[key] = entry
     
-    def invalidate(self, symbol: str, data_type: Optional[str] = None):
+    def invalidate(self, symbol: str, data_type: Optional[str] = None) -> None:
         """
         使缓存失效
         
@@ -225,7 +228,7 @@ class StockDataCache:
         
         print(f"[CACHE INVALIDATE] {symbol}{'.' + data_type if data_type else '.*'}")
     
-    def clear_all(self):
+    def clear_all(self) -> None:
         """清除所有缓存"""
         # 清除内存缓存
         self.memory_cache.clear()
@@ -255,7 +258,7 @@ class StockDataCache:
             "cache_directory": str(self.cache_dir)
         }
     
-    def print_stats(self):
+    def print_stats(self) -> None:
         """打印缓存统计信息"""
         stats = self.get_stats()
         
@@ -274,7 +277,7 @@ class StockDataCache:
 
 
 # 装饰器：自动缓存函数结果
-def cache_result(cache: StockDataCache, data_type: str, ttl: Optional[int] = None):
+def cache_result(cache: StockDataCache, data_type: str, ttl: Optional[int] = None) -> None:
     """
     自动缓存装饰器
     
@@ -304,7 +307,8 @@ def cache_result(cache: StockDataCache, data_type: str, ttl: Optional[int] = Non
 
 
 # CLI 接口
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """命令行接口"""
     import argparse
     

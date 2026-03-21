@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -186,6 +189,7 @@ class SessionEndAuditor:
         print(f"  [OK] Saved to: {report_file}")
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         print("Usage: py session_end_audit.py <session_id>")

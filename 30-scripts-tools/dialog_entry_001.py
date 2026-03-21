@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -39,6 +42,7 @@ def auto_start_simplified_session(question: str):
     return entry
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         print("用法：py dialog_entry.py \"用户问题\"")

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -15,7 +18,7 @@ def load_workflows():
         return json.loads(WORKFLOWS_FILE.read_text(encoding="utf-8", errors="replace"))
     return {}
 
-def generate_bash_completion():
+def generate_bash_completion() -> None:
     """Generate bash completion script"""
     workflows = load_workflows()
     workflow_names = list(workflows.keys()) if isinstance(workflows, dict) else [w.get("name", "unknown") for w in workflows]
@@ -36,7 +39,7 @@ complete -F _complete_workflow workflow.bat
 '''
     return script
 
-def generate_ps_completion():
+def generate_ps_completion() -> None:
     """Generate PowerShell completion script"""
     script = '''# OpenClaw Workflow Completion for PowerShell
 $commands = @("dev", "full", "plan", "security", "quick", "research", "arxiv", "classify", "trends", "optimize", "backup", "deploy", "test")
@@ -50,7 +53,7 @@ Register-ArgumentCompleter -CommandName workflow.bat -ScriptBlock {
 '''
     return script
 
-def generate_quick_ref():
+def generate_quick_ref() -> None:
     """Generate quick reference markdown"""
     workflows = load_workflows()
     
@@ -90,6 +93,7 @@ py performance_optimizer_001.py --benchmark-all  # 性能基准
 """
     return ref
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         print("""[WORKFLOW-COMPLETION-001]

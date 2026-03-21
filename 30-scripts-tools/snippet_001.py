@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -41,6 +44,7 @@ if sys.platform == 'win32':
 ''',
 
     "cli_main": '''
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         print("Usage: py {FILE} <command>")

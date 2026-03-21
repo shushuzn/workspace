@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -201,7 +204,7 @@ class AntiBypassEngine:
             "evidence": evidence
         }
     
-    def _handle_bypass(self, results: dict):
+    def _handle_bypass(self, results: dict) -> None:
         """处理绕过行为"""
         # 记录违规
         violation = {
@@ -223,7 +226,7 @@ class AntiBypassEngine:
         if self._should_auto_stop():
             self._trigger_auto_stop("bypass_detected")
     
-    def _add_penalty(self, points: int):
+    def _add_penalty(self, points: int) -> None:
         """增加惩罚分"""
         penalty = {"current_level": 0, "total_points": 0, "violations": []}
         
@@ -261,7 +264,7 @@ class AntiBypassEngine:
         
         return penalty.get("current_level", 0) >= 4
     
-    def _trigger_auto_stop(self, reason: str):
+    def _trigger_auto_stop(self, reason: str) -> None:
         """触发自动停止"""
         stop_data = {
             "activated_at": datetime.now().isoformat(),
@@ -274,7 +277,7 @@ class AntiBypassEngine:
         with open(STOP_FLAG, "w", encoding="utf-8") as f:
             json.dump(stop_data, f, ensure_ascii=False, indent=2)
     
-    def display(self):
+    def display(self) -> None:
         """显示检测结果"""
         results = self.detect_bypass_attempts()
         
@@ -325,6 +328,7 @@ class AntiBypassEngine:
             print("=" * 70)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     engine = AntiBypassEngine()
     engine.display()

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -25,6 +28,7 @@ def run_tool(tool, args=""):
     except (IOError, OSError):
         return "[ERROR]"
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("\n" + "=" * 60)
     print("  OPS-PANEL-001  One-Click Operations Panel")

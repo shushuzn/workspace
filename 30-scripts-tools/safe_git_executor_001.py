@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -51,6 +54,7 @@ def check_session():
         print("=" * 70, file=sys.stderr)
         sys.exit(1)
 
+logging.basicConfig(level=logging.INFO)
 def main():
     # 检查 session
     check_session()

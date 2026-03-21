@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -29,7 +32,7 @@ class ToolNamer:
     def _to_pascal(self, name):
         return ''.join(word.capitalize() for word in name.replace("-", "_").split("_"))
     
-    def suggest_name(self, name):
+    def suggest_name(self, name) -> None:
         """Suggest correct naming"""
         snake = self._to_snake(name)
         return {
@@ -49,7 +52,7 @@ class ToolNamer:
             })
         return results
     
-    def batch_suggest(self):
+    def batch_suggest(self) -> None:
         """Suggest renames for all non-conforming files"""
         results = []
         pattern = re.compile(r'^[a-z][a-z0-9_]*_\d+\.py$')

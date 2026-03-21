@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -69,6 +72,7 @@ def batch_run(workflows=None):
     
     return report
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) > 1:
         workflows = sys.argv[1:]

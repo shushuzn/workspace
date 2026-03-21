@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -9,6 +12,7 @@ Purpose: Auto-evolved capability from generation 1
 import json, sys
 from pathlib import Path
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("[evolved_tool_1] Auto-generated tool")
     # TODO: Implement functionality

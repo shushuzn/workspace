@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -34,6 +37,7 @@ def test(description, command, should_block=True):
         print(f"  [FAIL] 预期{'阻断' if should_block else '允许'}但{'未阻断' if should_block else '被阻断'}")
         return False
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("=" * 70)
     print("防护系统测试")

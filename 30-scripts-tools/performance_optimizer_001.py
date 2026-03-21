@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -32,7 +35,7 @@ class PerformanceOptimizer:
     def save_stats(self):
         self.stats_file.write_text(json.dumps(self.stats, ensure_ascii=False, indent=2), encoding="utf-8")
     
-    def get_cache(self, key):
+    def get_cache(self, key) -> None:
         """Get cached result"""
         cache_file = CACHE_DIR / f"{key}.json"
         if cache_file.exists():
@@ -43,12 +46,12 @@ class PerformanceOptimizer:
         self.stats["cache_misses"] += 1
         return None
     
-    def set_cache(self, key, value):
+    def set_cache(self, key, value) -> None:
         """Set cached result"""
         cache_file = CACHE_DIR / f"{key}.json"
         cache_file.write_text(json.dumps(value, ensure_ascii=False, indent=2), encoding="utf-8")
     
-    def clear_cache(self):
+    def clear_cache(self) -> None:
         """Clear all cache"""
         count = 0
         for f in CACHE_DIR.glob("*.json"):
@@ -57,7 +60,7 @@ class PerformanceOptimizer:
                 count += 1
         return {"cleared": count}
     
-    def benchmark_tool(self, tool_path, runs=5):
+    def benchmark_tool(self, tool_path, runs=5) -> None:
         """Benchmark a single tool"""
         import subprocess
         
@@ -79,7 +82,7 @@ class PerformanceOptimizer:
             "runs": runs
         }
     
-    def benchmark_all(self, tools_dir):
+    def benchmark_all(self, tools_dir) -> None:
         """Benchmark all tools"""
         tools = list(tools_dir.glob("*_001.py"))
         results = []
@@ -96,7 +99,7 @@ class PerformanceOptimizer:
             "fastest": results[-1] if results else None
         }
     
-    def run_parallel(self, tools, max_workers=4):
+    def run_parallel(self, tools, max_workers=4) -> None:
         """Run multiple tools in parallel"""
         import subprocess
         
@@ -119,7 +122,7 @@ class PerformanceOptimizer:
         
         return {"results": results, "total": len(results)}
     
-    def profile_tool(self, tool_path):
+    def profile_tool(self, tool_path) -> None:
         """Profile a tool with detailed timing"""
         import subprocess
         
@@ -143,7 +146,7 @@ class PerformanceOptimizer:
             "stdout_lines": len(result.stdout.split("\n")) if result.stdout else 0
         }
     
-    def optimize_tool(self, tool_path):
+    def optimize_tool(self, tool_path) -> None:
         """Suggest optimizations for a tool"""
         content = tool_path.read_text(encoding="utf-8", errors="replace")
         
@@ -171,7 +174,7 @@ class PerformanceOptimizer:
             "potential_speedup": f"{len(suggestions) * 5}%" if suggestions else "0%"
         }
     
-    def report(self):
+    def report(self) -> None:
         """Generate performance report"""
         cache_hit_rate = 0
         total = self.stats.get("cache_hits", 0) + self.stats.get("cache_misses", 0)

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -28,7 +31,7 @@ class BehaviorAnalyzer:
         self.violations = self._load_violations()
         self.behavior_model = self._build_behavior_model()
     
-    def _load_tool_calls(self, limit=1000):
+    def _load_tool_calls(self, limit=1000) -> None:
         """加载工具调用记录"""
         if not TOOL_CALL_LOG.exists():
             return []
@@ -45,7 +48,7 @@ class BehaviorAnalyzer:
         
         return calls
     
-    def _load_violations(self, limit=100):
+    def _load_violations(self, limit=100) -> None:
         """加载违规记录"""
         if not VIOLATION_LOG.exists():
             return []
@@ -288,7 +291,7 @@ class BehaviorAnalyzer:
         
         return max(0, min(100, score))
     
-    def display(self):
+    def display(self) -> None:
         """显示行为分析"""
         report = self.generate_behavior_report()
         
@@ -338,7 +341,7 @@ class BehaviorAnalyzer:
             print("状态：[CRITICAL] 危险")
         print("=" * 70)
     
-    def save_report(self):
+    def save_report(self) -> None:
         """保存报告"""
         report = self.generate_behavior_report()
         
@@ -348,6 +351,7 @@ class BehaviorAnalyzer:
         return str(BEHAVIOR_REPORT)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import sys
     

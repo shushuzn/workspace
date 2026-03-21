@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 """
 任务分类器 v1.0
 用途：根据任务复杂度分类，决定使用简化版还是完整版 workflow

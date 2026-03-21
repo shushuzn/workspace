@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -169,6 +172,7 @@ class VersionControl:
         }
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     vc = VersionControl()
     

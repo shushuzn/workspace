@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -22,7 +25,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-def show_status():
+def show_status() -> None:
     """Show current brainstorm status"""
     base = Path("flow-archive/brainstorm-current")
     
@@ -47,7 +50,7 @@ def show_status():
             topic = json.load(f)
         print(f"\nCurrent Topic: {topic.get('topic')}")
 
-def run_full_workflow(topic):
+def run_full_workflow(topic) -> None:
     """Run the full brainstorm workflow"""
     import subprocess
     
@@ -102,7 +105,7 @@ def run_full_workflow(topic):
     
     show_status()
 
-def show_methods():
+def show_methods() -> None:
     """Show available brainstorm methods"""
     print("\n[Available Methods]")
     print("  --scamper <topic>     SCAMPER method (7 operators)")
@@ -113,6 +116,7 @@ def show_methods():
     print("  --refine <problem>    Auto-refine problem (AI enhancement)")
     print("\n[NEXT STEP] Run: py brainstorm_next.py for workflow guidance")
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) == 1:
         print(__doc__)

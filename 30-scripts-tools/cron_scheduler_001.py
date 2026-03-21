@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -239,6 +242,7 @@ class CronScheduler:
         return script
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) > 1:
         scheduler = CronScheduler()

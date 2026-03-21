@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -85,7 +88,7 @@ def verify_result(tool_id: str, result: dict, expected_fields: list = None) -> d
             "verdict": "结果完全符合预期"
         }
 
-def verify_context_verify(result: dict):
+def verify_context_verify(result: dict) -> None:
     """验证 context-verify 结果"""
     issues = []
     warnings = []
@@ -97,7 +100,7 @@ def verify_context_verify(result: dict):
     
     return issues, warnings
 
-def verify_task_analyzer(result: dict):
+def verify_task_analyzer(result: dict) -> None:
     """验证 task-analyzer 结果"""
     issues = []
     warnings = []
@@ -108,7 +111,7 @@ def verify_task_analyzer(result: dict):
     
     return issues, warnings
 
-def verify_critic(result: dict):
+def verify_critic(result: dict) -> None:
     """验证 critic 结果"""
     issues = []
     warnings = []
@@ -119,6 +122,7 @@ def verify_critic(result: dict):
     
     return issues, warnings
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         # 测试模式

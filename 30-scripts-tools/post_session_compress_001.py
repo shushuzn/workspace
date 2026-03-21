@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -201,6 +204,7 @@ class PostSessionCompress:
         return "\n".join(summary)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """主函数"""
     auto = '--auto' in sys.argv

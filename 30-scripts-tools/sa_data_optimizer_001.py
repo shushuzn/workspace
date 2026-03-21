@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -24,7 +27,7 @@ class SADataOptimizer:
             "cache": {"ttl": 3600}
         }
     
-    def get_quote(self, symbol):
+    def get_quote(self, symbol) -> None:
         """Get quote with caching"""
         cache_file = CACHE_DIR / f"{symbol}_quote.json"
         
@@ -46,7 +49,7 @@ class SADataOptimizer:
         
         return result
     
-    def _fetch_yahoo(self, symbol):
+    def _fetch_yahoo(self, symbol) -> None:
         """Fetch from Yahoo Finance"""
         try:
             import urllib.request
@@ -71,7 +74,7 @@ class SADataOptimizer:
         except Exception as e:
             return {"error": str(e), "symbol": symbol}
     
-    def get_batch(self, symbols):
+    def get_batch(self, symbols) -> None:
         """Get multiple quotes efficiently"""
         results = []
         for symbol in symbols:
@@ -85,7 +88,7 @@ class SADataOptimizer:
             "quotes": results
         }
     
-    def clear_cache(self, symbol=None):
+    def clear_cache(self, symbol=None) -> None:
         """Clear cache for symbol or all"""
         if symbol:
             files = [CACHE_DIR / f"{symbol}_quote.json"]

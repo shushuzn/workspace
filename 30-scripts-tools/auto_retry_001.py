@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -16,7 +19,7 @@ class AutoRetry:
     
     def __init__(self, max_retries: int = 3, base_delay: float = 1.0, 
                  max_delay: float = 60.0, exponential: bool = True,
-                 jitter: bool = True):
+                 jitter: bool = True) -> None:
         """
         Initialize auto-retry system
         
@@ -53,7 +56,7 @@ class AutoRetry:
             }
         }
     
-    def _save_retry_log(self):
+    def _save_retry_log(self) -> None:
         """Save retry log"""
         self.retry_log_file.parent.mkdir(parents=True, exist_ok=True)
         with open(self.retry_log_file, 'w', encoding='utf-8') as f:
@@ -182,7 +185,7 @@ class AutoRetry:
         
         return result
     
-    def _log_retry(self, result: Dict, success: bool):
+    def _log_retry(self, result: Dict, success: bool) -> None:
         """Log retry attempt"""
         log_entry = {
             "timestamp": datetime.now().isoformat(),
@@ -248,7 +251,7 @@ class AutoRetry:
         return "\n".join(output)
 
 
-def simulate_flaky_operation(fail_count: int = 2):
+def simulate_flaky_operation(fail_count: int = 2) -> None:
     """Simulate a flaky operation that fails N times then succeeds"""
     simulate_flaky_operation.attempt = getattr(simulate_flaky_operation, 'attempt', 0) + 1
     
@@ -258,7 +261,8 @@ def simulate_flaky_operation(fail_count: int = 2):
     return f"Success on attempt {simulate_flaky_operation.attempt}"
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """Test entry point"""
     print("Auto-Retry System Test")
     print("=" * 70)

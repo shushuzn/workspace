@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -12,6 +15,7 @@ sys.path.insert(0, str(Path("30-scripts-tools").resolve()))
 
 from tool_executor import ToolExecutor
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("=" * 70)
     print("防护强化任务 - 通过 tool_executor 执行")

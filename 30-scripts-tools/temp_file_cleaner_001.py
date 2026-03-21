@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -245,6 +248,7 @@ class TempFileCleaner:
         return "\n".join(report)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """主函数"""
     cleaner = TempFileCleaner()

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -33,7 +36,7 @@ class WorkflowPerformanceMonitor:
         self.perf_log = self.workspace / "flow-archive/20260318-universal-workflow-001/performance-log.jsonl"
         self.current_session = None
 
-    def start_session(self, session_id: str = None, workflow_id: str = None):
+    def start_session(self, session_id: str = None, workflow_id: str = None) -> None:
         """开始性能监控会话"""
         self.current_session = {
             'session_id': session_id or f"session-{datetime.now().strftime('%Y%m%d%H%M%S')}",
@@ -44,7 +47,7 @@ class WorkflowPerformanceMonitor:
         return self.current_session
 
     def record_step(self, step_id: int, step_name: str, actual_time: float,
-                    estimated_time: int = None, status: str = "completed"):
+                    estimated_time: int = None, status: str = "completed") -> None:
         """记录步骤执行"""
         if not self.current_session:
             self.start_session()
@@ -70,7 +73,7 @@ class WorkflowPerformanceMonitor:
 
         return step_record
 
-    def _write_session(self):
+    def _write_session(self) -> None:
         """写入会话日志"""
         if not self.current_session:
             return
@@ -287,7 +290,8 @@ class WorkflowPerformanceMonitor:
         return "\n".join(report)
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """主函数"""
     monitor = WorkflowPerformanceMonitor()
 

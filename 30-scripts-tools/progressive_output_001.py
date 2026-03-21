@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -259,6 +262,7 @@ def generate_large_text():
         time.sleep(0.05)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """Test entry point"""
     print("Progressive Output Test")

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -320,6 +323,7 @@ class TushareSource:
         return {"status": "error", "message": "Tushare requires token configuration"}
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) > 1:
         manager = DataSourceManager()

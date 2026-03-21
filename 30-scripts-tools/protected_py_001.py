@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -49,6 +52,7 @@ def force_protection_check():
     
     print(f"[OK] 防护检查通过：{state['session_id']}")
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         print("用法：py protected_py.py <script.py> [args...]")

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -112,12 +115,12 @@ class ToolCallInterceptor:
         
         return True
     
-    def _log_call(self, result: dict):
+    def _log_call(self, result: dict) -> None:
         """记录调用日志"""
         with open(INTERCEPTOR_LOG, "a", encoding="utf-8") as f:
             f.write(json.dumps(result, ensure_ascii=False) + "\n")
     
-    def _log_and_violate(self, result: dict):
+    def _log_and_violate(self, result: dict) -> None:
         """记录违规"""
         # 记录调用
         self._log_call(result)
@@ -135,7 +138,7 @@ class ToolCallInterceptor:
         with open(VIOLATION_LOG, "a", encoding="utf-8") as f:
             f.write(json.dumps(violation, ensure_ascii=False) + "\n")
     
-    def display_stats(self):
+    def display_stats(self) -> None:
         """显示统计"""
         if not INTERCEPTOR_LOG.exists():
             print("No interceptor logs found")
@@ -159,6 +162,7 @@ class ToolCallInterceptor:
         print("=" * 70)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import sys
     

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -220,6 +223,7 @@ class ProtectionMonitor:
             "violations": self.violations
         }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         # 测试模式

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -49,6 +52,7 @@ class APIConnector:
             return {"status": "error", "message": str(e)}
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     connector = APIConnector()
     

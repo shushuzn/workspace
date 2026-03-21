@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -187,6 +190,7 @@ class BrainstormMindMap:
         """运行思维导图生成"""
         return self.generate_from_ideas(ideas, title)
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试入口"""
     mindmap = BrainstormMindMap()

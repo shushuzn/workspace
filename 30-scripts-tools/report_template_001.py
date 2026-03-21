@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -57,6 +60,7 @@ class TemplateGenerator:
         return template.get("variables", [])
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     generator = TemplateGenerator()
     

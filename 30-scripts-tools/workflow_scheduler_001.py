@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -123,6 +126,7 @@ class WorkflowScheduler:
         return {"status": "success", "task_id": task_id, "enabled": not current}
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     scheduler = WorkflowScheduler()
     

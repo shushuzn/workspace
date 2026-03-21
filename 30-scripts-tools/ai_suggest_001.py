@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -226,6 +229,7 @@ Respond in JSON format with keys: priority_actions, risks, optimizations, new_di
         return result
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     suggestor = AISuggestor()
     

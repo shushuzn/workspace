@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -46,6 +49,7 @@ def analyze_stats():
         "top_tools": dict(sorted(tools.items(), key=lambda x: x[1], reverse=True)[:10])
     }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     stats = analyze_stats()
     

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 """
 工具调用拦截器 - 强制所有工具调用通过防护层
 

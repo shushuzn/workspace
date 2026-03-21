@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -23,7 +26,7 @@ def save_track(track):
     ensure_dir(TRACK_FILE.parent)
     TRACK_FILE.write_text(json.dumps(track, indent=2, ensure_ascii=False), encoding="utf-8")
 
-def backup_files(files, label="manual"):
+def backup_files(files, label="manual") -> None:
     """Backup specified files"""
     ensure_dir(BACKUP_DIR)
     
@@ -49,7 +52,7 @@ def backup_files(files, label="manual"):
     
     return backup_path
 
-def restore_latest():
+def restore_latest() -> None:
     """Restore from latest backup"""
     track = load_track()
     if not track["backups"]:
@@ -69,7 +72,7 @@ def restore_latest():
     
     return restore_dir
 
-def auto_backup_changed():
+def auto_backup_changed() -> None:
     """Auto backup files that will be changed"""
     important = [
         "30-scripts-tools/workflow_master_001.py",
@@ -86,6 +89,7 @@ def auto_backup_changed():
     
     return None
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         print("""

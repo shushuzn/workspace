@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -140,6 +143,7 @@ def display_scamper_ideas(results: dict):
     print("\n" + "=" * 60)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """主函数"""
     

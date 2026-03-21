@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -103,6 +106,7 @@ def check_lock_status() -> dict:
             "reason": str(e)
         }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         # 测试模式

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -299,6 +302,7 @@ class RoadmapMaster:
         return suggestions
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     master = RoadmapMaster()
     

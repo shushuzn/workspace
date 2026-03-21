@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -351,6 +354,7 @@ class StrategyOptimizer:
         return {"status": "error", "message": "No saved params"}
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     opt = StrategyOptimizer()
     

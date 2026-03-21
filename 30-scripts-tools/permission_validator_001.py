@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf- utf-8 -*-
 """
@@ -238,6 +241,7 @@ class PermissionValidator:
         print("=" * 70)
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     import sys
     

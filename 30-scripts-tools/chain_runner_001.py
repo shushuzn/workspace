@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -171,6 +174,7 @@ class ChainRunner:
         return self.run_chain(template["tools"])
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     runner = ChainRunner()
     

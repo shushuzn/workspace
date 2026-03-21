@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -210,7 +213,7 @@ class CopawEntry:
         
         return valid
     
-    def log_tool_call(self, tool_id: str, params: dict, result: str, duration: float):
+    def log_tool_call(self, tool_id: str, params: dict, result: str, duration: float) -> None:
         """记录工具调用"""
         entry = {
             "timestamp": datetime.now().isoformat(),
@@ -227,7 +230,7 @@ class CopawEntry:
         
         print(f"[TRACK] {tool_id} - {duration:.2f}s")
     
-    def update_step(self, step_id: int, name: str, status: str, result: str):
+    def update_step(self, step_id: int, name: str, status: str, result: str) -> None:
         """更新步骤状态"""
         with open(self.state_file, "r", encoding="utf-8") as f:
             state = json.load(f)
@@ -248,7 +251,7 @@ class CopawEntry:
         with open(self.state_file, "w", encoding="utf-8") as f:
             json.dump(state, f, ensure_ascii=False, indent=2)
     
-    def finalize(self, success: bool = True):
+    def finalize(self, success: bool = True) -> None:
         """会话结束 - 更新最终状态"""
         end_time = datetime.now()
         duration = (end_time - self.start_time).total_seconds()
@@ -273,7 +276,7 @@ class CopawEntry:
         print(f"工作流合规：{state['workflow_compliance']}")
         print(f"{'='*60}\n")
     
-    def run(self):
+    def run(self) -> None:
         """执行入口点流程"""
         try:
             # 初始化状态
@@ -299,7 +302,7 @@ class CopawEntry:
             return False
 
 
-def auto_register_tools():
+def auto_register_tools() -> None:
     """自动注册新创建的工具到 tools_registry.json"""
     import uuid
     
@@ -376,7 +379,8 @@ def auto_register_tools():
         return 0
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """主函数 - 从命令行调用"""
     task_name = " ".join(sys.argv[1:]) if len(sys.argv) > 1 else "Default Task"
     

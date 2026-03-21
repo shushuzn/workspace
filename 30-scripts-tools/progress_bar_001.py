@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -12,7 +15,7 @@ from typing import Optional, List
 class ProgressBar:
     """Visual progress bar for multi-step tasks"""
     
-    def __init__(self, total_steps: int, title: str = "Progress", width: int = 50):
+    def __init__(self, total_steps: int, title: str = "Progress", width: int = 50) -> None:
         """
         Initialize progress bar
         
@@ -29,18 +32,18 @@ class ProgressBar:
         self.step_start_time: Optional[datetime] = None
         self.step_titles: List[str] = []
     
-    def set_step_titles(self, titles: List[str]):
+    def set_step_titles(self, titles: List[str]) -> None:
         """Set titles for each step"""
         self.step_titles = titles
     
-    def start(self):
+    def start(self) -> None:
         """Start the progress bar"""
         self.start_time = datetime.now()
         self.step_start_time = datetime.now()
         self.current_step = 0
         self._display()
     
-    def update(self, step: int = None, step_title: str = None):
+    def update(self, step: int = None, step_title: str = None) -> None:
         """
         Update progress
         
@@ -61,7 +64,7 @@ class ProgressBar:
         
         self._display()
     
-    def _display(self):
+    def _display(self) -> None:
         """Display the progress bar"""
         if self.total_steps == 0:
             percent = 100
@@ -97,7 +100,7 @@ class ProgressBar:
             sys.stdout.write('\n')
             sys.stdout.flush()
     
-    def finish(self):
+    def finish(self) -> None:
         """Mark progress bar as complete"""
         self.current_step = self.total_steps
         self._display()
@@ -116,17 +119,17 @@ class ProgressBar:
             return (self.total_steps - self.current_step) * per_step
         return 0.0
     
-    def __enter__(self):
+    def __enter__(self) -> None:
         """Context manager entry"""
         self.start()
         return self
     
-    def __exit__(self, exc_type, exc_val, exc_tb):
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
         """Context manager exit"""
         self.finish()
 
 
-def simulate_multi_step_task():
+def simulate_multi_step_task() -> None:
     """Simulate a multi-step task with progress bar"""
     steps = [
         "Initializing...",
@@ -151,7 +154,8 @@ def simulate_multi_step_task():
     return True
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """Test entry point"""
     print("Progress Bar Test")
     print("=" * 70)

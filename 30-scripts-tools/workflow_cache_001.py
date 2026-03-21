@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -139,6 +142,7 @@ class WorkflowCache:
             "success": True
         }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试入口"""
     cache = WorkflowCache()

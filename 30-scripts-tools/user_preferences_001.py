@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -65,7 +68,7 @@ class UserPreferenceManager:
         self._save_profile(profile)
         return profile
     
-    def _save_profile(self, profile: Dict = None):
+    def _save_profile(self, profile: Dict = None) -> None:
         """Save profile to file"""
         if profile is None:
             profile = self.current_profile
@@ -82,7 +85,7 @@ class UserPreferenceManager:
         """Get a preference value"""
         return self.current_profile["preferences"].get(key, default)
     
-    def set_preference(self, key: str, value: Any):
+    def set_preference(self, key: str, value: Any) -> None:
         """Set a preference value"""
         self.current_profile["preferences"][key] = value
         self._save_profile()
@@ -91,7 +94,7 @@ class UserPreferenceManager:
         """Get all preferences"""
         return self.current_profile["preferences"].copy()
     
-    def reset_preferences(self):
+    def reset_preferences(self) -> None:
         """Reset all preferences to defaults"""
         self.current_profile = self._create_default_profile(self.profile_name)
     
@@ -99,12 +102,12 @@ class UserPreferenceManager:
         """Get a shortcut command"""
         return self.current_profile["shortcuts"].get(name, f"/{name}")
     
-    def set_shortcut(self, name: str, command: str):
+    def set_shortcut(self, name: str, command: str) -> None:
         """Set a shortcut command"""
         self.current_profile["shortcuts"][name] = command
         self._save_profile()
     
-    def track_usage(self, command: str):
+    def track_usage(self, command: str) -> None:
         """Track command usage"""
         stats = self.current_profile["usage_stats"]
         stats["total_commands"] += 1
@@ -119,7 +122,7 @@ class UserPreferenceManager:
         
         self._save_profile()
     
-    def increment_session_count(self):
+    def increment_session_count(self) -> None:
         """Increment session count"""
         self.current_profile["usage_stats"]["total_sessions"] += 1
         self._save_profile()
@@ -142,12 +145,12 @@ class UserPreferenceManager:
         self.current_profile = self._load_profile(name)
         return True
     
-    def export_profile(self, output_file: str):
+    def export_profile(self, output_file: str) -> None:
         """Export profile to file"""
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(self.current_profile, f, ensure_ascii=False, indent=2)
     
-    def import_profile(self, input_file: str, new_name: str = None):
+    def import_profile(self, input_file: str, new_name: str = None) -> None:
         """Import profile from file"""
         with open(input_file, 'r', encoding='utf-8') as f:
             profile = json.load(f)
@@ -195,7 +198,8 @@ class UserPreferenceManager:
         
         return "\n".join(output)
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """Test entry point"""
     print("User Preference Manager Test")
     print("=" * 70)

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -33,7 +36,7 @@ class WorkflowAnomalyDetector:
             "warnings": []
         }
     
-    def _save_config(self):
+    def _save_config(self) -> None:
         """保存配置"""
         with open(self.config_file, 'w', encoding='utf-8') as f:
             json.dump(self.config, f, ensure_ascii=False, indent=2)
@@ -107,7 +110,7 @@ class WorkflowAnomalyDetector:
         
         return result
     
-    def _log_anomaly(self, step_id: str, anomaly_type: str, details: str):
+    def _log_anomaly(self, step_id: str, anomaly_type: str, details: str) -> None:
         """记录异常"""
         log = []
         if self.log_file.exists():
@@ -136,7 +139,7 @@ class WorkflowAnomalyDetector:
         self.config['warnings'] = self.config['warnings'][-10:]
         self._save_config()
     
-    def _save_result(self, result: Dict):
+    def _save_result(self, result: Dict) -> None:
         """保存结果"""
         results_file = Path("flow-archive/20260318-universal-workflow-001/anomaly-results.json")
         
@@ -211,7 +214,8 @@ class WorkflowAnomalyDetector:
             "success": True
         }
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """测试入口"""
     detector = WorkflowAnomalyDetector()
     

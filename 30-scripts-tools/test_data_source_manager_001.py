@@ -34,7 +34,7 @@ from data_source_manager import (
 class TestDataSourceBase(unittest.TestCase):
     """数据源基类测试"""
     
-    def test_rate_limit_check(self):
+    def test_rate_limit_check(self) -> None:
         """测试速率限制检查"""
         source = YahooFinanceDataSource()
         
@@ -56,14 +56,14 @@ class TestDataSourceBase(unittest.TestCase):
 class TestYahooFinanceDataSource(unittest.TestCase):
     """Yahoo Finance 数据源测试"""
     
-    def test_initialization(self):
+    def test_initialization(self) -> None:
         """测试初始化"""
         source = YahooFinanceDataSource()
         self.assertEqual(source.name, "Yahoo Finance")
         self.assertFalse(source.requires_api_key())
     
     @patch('data_source_manager.yf')
-    def test_fetch_quote_mock(self, mock_yf):
+    def test_fetch_quote_mock(self, mock_yf) -> None:
         """测试获取行情 (mock)"""
         # 设置 mock 数据
         mock_ticker = MagicMock()
@@ -87,7 +87,7 @@ class TestYahooFinanceDataSource(unittest.TestCase):
         self.assertIn("timestamp", quote)
     
     @patch('data_source_manager.yf')
-    def test_fetch_historical_mock(self, mock_yf):
+    def test_fetch_historical_mock(self, mock_yf) -> None:
         """测试获取历史数据 (mock)"""
         import pandas as pd
         from datetime import datetime, timedelta
@@ -121,20 +121,20 @@ class TestYahooFinanceDataSource(unittest.TestCase):
 class TestAlphaVantageDataSource(unittest.TestCase):
     """Alpha Vantage 数据源测试"""
     
-    def test_initialization(self):
+    def test_initialization(self) -> None:
         """测试初始化"""
         source = AlphaVantageDataSource("test_key")
         self.assertEqual(source.name, "Alpha Vantage")
         self.assertTrue(source.requires_api_key())
         self.assertTrue(source.enabled)
     
-    def test_initialization_no_key(self):
+    def test_initialization_no_key(self) -> None:
         """测试无 API Key 初始化"""
         source = AlphaVantageDataSource("")
         self.assertFalse(source.enabled)
     
     @patch('data_source_manager.requests')
-    def test_fetch_quote_mock(self, mock_requests):
+    def test_fetch_quote_mock(self, mock_requests) -> None:
         """测试获取行情 (mock)"""
         # 设置 mock 响应
         mock_response = MagicMock()
@@ -164,13 +164,13 @@ class TestAlphaVantageDataSource(unittest.TestCase):
 class TestEastMoneyDataSource(unittest.TestCase):
     """东方财富数据源测试"""
     
-    def test_initialization(self):
+    def test_initialization(self) -> None:
         """测试初始化"""
         source = EastMoneyDataSource()
         self.assertEqual(source.name, "East Money")
         self.assertFalse(source.requires_api_key())
     
-    def test_symbol_conversion(self):
+    def test_symbol_conversion(self) -> None:
         """测试股票代码转换"""
         source = EastMoneyDataSource()
         
@@ -183,13 +183,13 @@ class TestEastMoneyDataSource(unittest.TestCase):
 class TestDataSourceManager(unittest.TestCase):
     """数据源管理器测试"""
     
-    def setUp(self):
+    def setUp(self) -> None:
         """测试前准备"""
         self.mock_cache = Mock()
         self.mock_cache.get.return_value = None  # 缓存未命中
         self.mock_cache.set.return_value = None
     
-    def test_initialization(self):
+    def test_initialization(self) -> None:
         """测试初始化"""
         manager = DataSourceManager(cache=self.mock_cache)
         
@@ -199,7 +199,7 @@ class TestDataSourceManager(unittest.TestCase):
         self.assertIn("eastmoney", manager.sources)
     
     @patch('data_source_manager.YahooFinanceDataSource')
-    def test_fetch_quote_success(self, mock_yahoo):
+    def test_fetch_quote_success(self, mock_yahoo) -> None:
         """测试成功获取行情"""
         # 设置 mock
         mock_source = Mock()
@@ -223,7 +223,7 @@ class TestDataSourceManager(unittest.TestCase):
     
     @patch('data_source_manager.YahooFinanceDataSource')
     @patch('data_source_manager.AlphaVantageDataSource')
-    def test_fetch_quote_fallback(self, mock_alpha, mock_yahoo):
+    def test_fetch_quote_fallback(self, mock_alpha, mock_yahoo) -> None:
         """测试故障转移"""
         # Yahoo 失败
         mock_yahoo_source = Mock()
@@ -248,7 +248,7 @@ class TestDataSourceManager(unittest.TestCase):
         self.assertEqual(quote["source"], "alpha_vantage")
         self.assertEqual(quote["price"], 150.50)
     
-    def test_fetch_quote_cache_hit(self):
+    def test_fetch_quote_cache_hit(self) -> None:
         """测试缓存命中"""
         cached_data = {"symbol": "AAPL", "price": 150.00, "source": "cache"}
         self.mock_cache.get.return_value = cached_data
@@ -260,7 +260,7 @@ class TestDataSourceManager(unittest.TestCase):
         self.assertEqual(quote["price"], 150.00)
         self.assertEqual(quote["source"], "cache")
     
-    def test_fetch_quote_all_sources_fail(self):
+    def test_fetch_quote_all_sources_fail(self) -> None:
         """测试所有数据源失败"""
         # 所有数据源都失败
         for source in ["yahoo", "alpha_vantage", "eastmoney"]:
@@ -272,7 +272,7 @@ class TestDataSourceManager(unittest.TestCase):
         with self.assertRaises(DataSourceError):
             manager.fetch_quote("AAPL")
     
-    def test_stats_collection(self):
+    def test_stats_collection(self) -> None:
         """测试统计信息收集"""
         manager = DataSourceManager(cache=self.mock_cache)
         
@@ -288,12 +288,12 @@ class TestDataSourceManager(unittest.TestCase):
 class TestDataSourceError(unittest.TestCase):
     """异常类测试"""
     
-    def test_datasource_error(self):
+    def test_datasource_error(self) -> None:
         """测试 DataSourceError"""
         error = DataSourceError("Test error")
         self.assertEqual(str(error), "Test error")
     
-    def test_ratelimit_error(self):
+    def test_ratelimit_error(self) -> None:
         """测试 RateLimitError"""
         error = RateLimitError("Rate limited")
         self.assertIsInstance(error, DataSourceError)

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -140,7 +143,7 @@ class AutoSessionCompressor:
         
         return result
     
-    def _log_compression(self, result: dict):
+    def _log_compression(self, result: dict) -> None:
         """记录压缩日志"""
         log_entry = {
             "timestamp": datetime.now().isoformat(),
@@ -157,7 +160,7 @@ class AutoSessionCompressor:
         except Exception as e:
             print(f"[WARN] 记录日志失败：{e}")
     
-    def run_auto_check(self):
+    def run_auto_check(self) -> None:
         """自动检查模式"""
         print("=" * 70)
         print(" " * 20 + "自动会话压缩检查")
@@ -183,7 +186,7 @@ class AutoSessionCompressor:
         else:
             print("\n[OK] 不需要压缩")
     
-    def run_manual_compress(self):
+    def run_manual_compress(self) -> None:
         """手动压缩模式"""
         print("=" * 70)
         print(" " * 20 + "手动会话压缩")
@@ -199,7 +202,8 @@ class AutoSessionCompressor:
         print(f"消息：{result['message']}")
 
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """主函数"""
     compressor = AutoSessionCompressor()
     

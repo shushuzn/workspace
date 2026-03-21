@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -204,6 +207,7 @@ class StepTracker:
         progress = self.get_progress()
         return progress['completion_rate'] >= 100
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试入口"""
     tracker = StepTracker()

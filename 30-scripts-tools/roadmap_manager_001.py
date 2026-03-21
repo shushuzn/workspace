@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -292,6 +295,7 @@ class RoadmapManager:
         return {"status": "success", "version": new_version}
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     mgr = RoadmapManager()
     

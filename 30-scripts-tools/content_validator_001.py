@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -52,6 +55,7 @@ class ContentValidator:
         return True
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试"""
     print("Content Validator Test\n")

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 import json
 
 with open('30-scripts-tools/tool_call_log.jsonl', 'r', encoding='utf-8') as f:

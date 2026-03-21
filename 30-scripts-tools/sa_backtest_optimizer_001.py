@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -20,7 +23,7 @@ class BacktestOptimizer:
         self.data_dir = Path("60-DATA/stock_backtest")
         self.data_dir.mkdir(parents=True, exist_ok=True)
     
-    def generate_data(self, days=200, start_price=100, volatility=0.02):
+    def generate_data(self, days=200, start_price=100, volatility=0.02) -> None:
         """Generate realistic OHLCV data"""
         candles = []
         price = start_price
@@ -45,7 +48,7 @@ class BacktestOptimizer:
         
         return candles
     
-    def backtest(self, candles, strategy="ma_cross", capital=100000, params=None):
+    def backtest(self, candles, strategy="ma_cross", capital=100000, params=None) -> None:
         """Run backtest with given strategy"""
         params = params or self.default_params(strategy)
         
@@ -58,7 +61,7 @@ class BacktestOptimizer:
         else:
             return self.sma_strategy(candles, capital, params)
     
-    def default_params(self, strategy):
+    def default_params(self, strategy) -> None:
         """Get default parameters for strategy"""
         defaults = {
             "ma_cross": {"fast": 10, "slow": 30, "stop_loss": 0.02, "take_profit": 0.05},
@@ -68,7 +71,7 @@ class BacktestOptimizer:
         }
         return defaults.get(strategy, defaults["ma_cross"])
     
-    def calculate_ma(self, candles, period):
+    def calculate_ma(self, candles, period) -> None:
         """Calculate moving average"""
         ma = []
         for i in range(len(candles)):
@@ -79,7 +82,7 @@ class BacktestOptimizer:
                 ma.append(round(avg, 2))
         return ma
     
-    def calculate_rsi(self, candles, period=14):
+    def calculate_rsi(self, candles, period=14) -> None:
         """Calculate RSI"""
         if len(candles) < period + 1:
             return [50] * len(candles)
@@ -100,7 +103,7 @@ class BacktestOptimizer:
         
         return rsi
     
-    def ma_cross_strategy(self, candles, capital, params):
+    def ma_cross_strategy(self, candles, capital, params) -> None:
         """MA Crossover Strategy"""
         fast = params.get("fast", 10)
         slow = params.get("slow", 30)
@@ -153,7 +156,7 @@ class BacktestOptimizer:
         
         return self.calculate_metrics(candles, trades, capital, equity)
     
-    def rsi_strategy(self, candles, capital, params):
+    def rsi_strategy(self, candles, capital, params) -> None:
         """RSI Strategy"""
         period = params.get("period", 14)
         oversold = params.get("oversold", 30)
@@ -198,7 +201,7 @@ class BacktestOptimizer:
         
         return self.calculate_metrics(candles, trades, capital, equity)
     
-    def bollinger_strategy(self, candles, capital, params):
+    def bollinger_strategy(self, candles, capital, params) -> None:
         """Bollinger Bands Strategy"""
         period = params.get("period", 20)
         std_dev = params.get("std_dev", 2)
@@ -251,7 +254,7 @@ class BacktestOptimizer:
         
         return self.calculate_metrics(candles, trades, capital, equity)
     
-    def sma_strategy(self, candles, capital, params):
+    def sma_strategy(self, candles, capital, params) -> None:
         """Simple SMA Strategy"""
         period = params.get("period", 20)
         stop_loss = params.get("stop_loss", 0.02)
@@ -286,7 +289,7 @@ class BacktestOptimizer:
         
         return self.calculate_metrics(candles, trades, capital, equity)
     
-    def calculate_metrics(self, candles, trades, capital, final_equity):
+    def calculate_metrics(self, candles, trades, capital, final_equity) -> None:
         """Calculate performance metrics"""
         total_return = (final_equity - capital) / capital * 100
         winning_trades = [t for t in trades if t.get("type") == "SELL" and t.get("pnl", 0) > 0]
@@ -334,7 +337,7 @@ class BacktestOptimizer:
             "trades": trades[-10:]  # Last 10 trades
         }
     
-    def optimize(self, strategy, candles, param_grid, capital=100000):
+    def optimize(self, strategy, candles, param_grid, capital=100000) -> None:
         """Optimize strategy parameters"""
         results = []
         

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -32,6 +35,7 @@ def run_command(cmd, capture=True):
     except Exception as e:
         return 1, "", str(e)
 
+logging.basicConfig(level=logging.INFO)
 def main():
     if len(sys.argv) < 2:
         print("Usage: py git_commit_helper.py \"commit message\"")

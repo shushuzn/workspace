@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -324,6 +327,7 @@ def check_lockdown_status() -> dict:
         "message": "无封锁"
     }
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("=" * 70)
     print("Git Pre-Commit Hook v4.0 (强化版)")

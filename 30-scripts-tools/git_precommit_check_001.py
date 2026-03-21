@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -135,6 +138,7 @@ def check_workflow_completion() -> bool:
     print("=" * 80)
     return True
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试入口"""
     success = check_workflow_completion()

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -56,6 +59,7 @@ if __name__ == "__main__":
     
     return {"file": filepath.name, "status": "skip"}
 
+logging.basicConfig(level=logging.INFO)
 def main():
     dry_run = "--dry-run" in sys.argv
     

@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -295,6 +298,7 @@ def summarize_ideas(ideas):
     return summary, total, p0_count, p1_count
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """Main entry point"""
     print("=" * 70)

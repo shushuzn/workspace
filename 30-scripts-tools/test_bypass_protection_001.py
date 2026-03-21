@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -11,7 +14,7 @@ from pathlib import Path
 
 STATE_FILE = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
 
-def test(description, test_func):
+def test(description, test_func) -> None:
     """测试函数"""
     print(f"\n{'='*70}")
     print(f"测试：{description}")
@@ -30,7 +33,7 @@ def test(description, test_func):
         return False
 
 
-def test_direct_state_modification():
+def test_direct_state_modification() -> None:
     """测试 1: 直接修改 state 文件"""
     print("尝试直接修改 execution-state.json...")
     
@@ -69,7 +72,7 @@ def test_direct_state_modification():
         return False
 
 
-def test_script_bypass():
+def test_script_bypass() -> None:
     """测试 2: 写脚本跳过步骤"""
     print("尝试写脚本直接更新 state...")
     
@@ -123,7 +126,7 @@ print("State modified")
         return False
 
 
-def test_git_commit_bypass():
+def test_git_commit_bypass() -> None:
     """测试 3: git commit 绕过"""
     print("尝试 git commit --no-verify...")
     
@@ -143,6 +146,7 @@ def test_git_commit_bypass():
         return False
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     print("="*70)
     print("绕过防护测试")

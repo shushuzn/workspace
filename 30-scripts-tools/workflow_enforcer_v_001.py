@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -142,6 +145,7 @@ class WorkflowEnforcerV2:
         return True
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """测试"""
     print("Workflow Enforcer V2.0 - Test")

@@ -21,7 +21,7 @@ class ToolArchitect:
     def __init__(self):
         self.analysis = {"clusters": [], "dependencies": {}, "orphans": []}
     
-    def analyze_topology(self):
+    def analyze_topology(self) -> None:
         """Analyze tool dependencies and structure"""
         imports = defaultdict(list)
         tools = {}
@@ -43,7 +43,7 @@ class ToolArchitect:
                     if imp in ["pathlib", "json", "datetime", "subprocess", "sys"]:
                         continue
                     imports[imp].append(f.name)
-            except:
+            except Exception as e:
                 pass
         
         # Find clusters (tools with similar imports)
@@ -66,7 +66,7 @@ class ToolArchitect:
         
         return self.analysis
     
-    def suggest_architecture(self):
+    def suggest_architecture(self) -> None:
         """Suggest architectural improvements"""
         analysis = self.analyze_topology()
         suggestions = []
@@ -98,7 +98,7 @@ class ToolArchitect:
         
         return suggestions
     
-    def generate_blueprint(self):
+    def generate_blueprint(self) -> None:
         """Generate architecture blueprint"""
         analysis = self.analyze_topology()
         suggestions = self.suggest_architecture()
@@ -118,7 +118,7 @@ class ToolArchitect:
         
         return blueprint
     
-    def apply_architecture(self, action):
+    def apply_architecture(self, action) -> None:
         """Apply architectural changes"""
         blueprint = self.generate_blueprint()
         applied = []

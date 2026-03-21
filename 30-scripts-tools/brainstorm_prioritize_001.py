@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -14,7 +17,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-def load_filtered():
+def load_filtered() -> None:
     """Load filtered ideas"""
     ideas_file = Path("flow-archive/brainstorm-current/brainstorm_ideas_filtered.json")
     if not ideas_file.exists():
@@ -24,7 +27,7 @@ def load_filtered():
     with open(ideas_file, encoding="utf-8") as f:
         return json.load(f)
 
-def prioritize(ideas, top_n=5):
+def prioritize(ideas, top_n=5) -> None:
     """Prioritize top N ideas"""
     # Take top N
     top = ideas[:top_n]
@@ -44,7 +47,7 @@ def prioritize(ideas, top_n=5):
     
     return prioritized
 
-def save_prioritized(prioritized):
+def save_prioritized(prioritized) -> None:
     """Save prioritized list"""
     output_file = Path("flow-archive/brainstorm-current/brainstorm_ideas_prioritized.json")
     
@@ -54,7 +57,7 @@ def save_prioritized(prioritized):
     print(f"\n[Saved] {len(prioritized)} prioritized ideas")
     return output_file
 
-def run(top_n=5):
+def run(top_n=5) -> None:
     """Execute prioritize step"""
     print("="*60)
     print("[BRAINSTORM] Step 4: Prioritize - Rank & Plan")

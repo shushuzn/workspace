@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -177,6 +180,7 @@ class TestRunner:
         return {"status": "success", "message": f"Added test for {tool_id}"}
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     runner = TestRunner()
     

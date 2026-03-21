@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -295,6 +298,7 @@ class StrategyEngine:
         }
 
 
+logging.basicConfig(level=logging.INFO)
 def main():
     engine = StrategyEngine()
     

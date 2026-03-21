@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -103,7 +106,7 @@ class CiCdIntegration:
     def list_pipelines(self):
         return [{"id": k, "name": v["name"], "steps": len(v["steps"])} for k, v in PIPELINES.items()]
     
-    def setup_hooks(self):
+    def setup_hooks(self) -> None:
         """Setup git hooks"""
         hooks_dir = Path(".git/hooks")
         hooks_dir.mkdir(exist_ok=True)
@@ -127,7 +130,7 @@ cd {os.getcwd()}
         
         return {"status": "hooks_created", "hooks": ["pre-commit", "post-commit"]}
     
-    def ci_env_check(self):
+    def ci_env_check(self) -> None:
         """Check CI environment"""
         ci_vars = {
             "CI": os.getenv("CI", "false"),

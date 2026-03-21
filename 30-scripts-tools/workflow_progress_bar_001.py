@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -21,7 +24,7 @@ class WorkflowProgressBar:
         self.step_times = {}
         self.state_file = Path("flow-archive/20260318-universal-workflow-001/progress-display.json")
     
-    def update_step(self, step_id: int, status: str = "completed"):
+    def update_step(self, step_id: int, status: str = "completed") -> None:
         """更新步骤状态"""
         if step_id not in self.completed_steps:
             self.completed_steps.append(step_id)
@@ -32,7 +35,7 @@ class WorkflowProgressBar:
         }
         self._save_state()
     
-    def _save_state(self):
+    def _save_state(self) -> None:
         """保存状态"""
         state = {
             "total_steps": self.total_steps,
@@ -59,7 +62,7 @@ class WorkflowProgressBar:
         else:
             return f"{seconds/3600:.1f}h"
     
-    def display(self):
+    def display(self) -> None:
         """显示进度"""
         completed = len(self.completed_steps)
         percent = (completed / self.total_steps * 100) if self.total_steps > 0 else 0
@@ -126,7 +129,8 @@ class WorkflowProgressBar:
             "success": True
         }
 
-def main():
+logging.basicConfig(level=logging.INFO)
+def main() -> None:
     """测试入口"""
     progress = WorkflowProgressBar(total_steps=20)
     

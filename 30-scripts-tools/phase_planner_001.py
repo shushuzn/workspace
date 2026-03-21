@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """Phase 5 规划总结工具"""
@@ -6,6 +9,7 @@ import json
 from pathlib import Path
 from datetime import datetime
 
+logging.basicConfig(level=logging.INFO)
 def main():
     """显示 Phase 5 规划摘要"""
     

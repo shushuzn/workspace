@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -28,7 +31,7 @@ METHODS = [
     "Trend Extrapolation"
 ]
 
-def load_topic():
+def load_topic() -> None:
     """Load topic from file"""
     topic_file = Path("flow-archive/brainstorm-current/brainstorm_topic.json")
     if not topic_file.exists():
@@ -38,7 +41,7 @@ def load_topic():
     with open(topic_file, encoding="utf-8") as f:
         return json.load(f)
 
-def generate_ideas(topic_data, count=15):
+def generate_ideas(topic_data, count=15) -> None:
     """Generate ideas based on topic"""
     topic = topic_data.get("topic", "")
     
@@ -73,7 +76,7 @@ def generate_ideas(topic_data, count=15):
     
     return ideas
 
-def save_ideas(ideas):
+def save_ideas(ideas) -> None:
     """Save ideas to file"""
     output_file = Path("flow-archive/brainstorm-current/brainstorm_ideas_raw.json")
     output_file.parent.mkdir(parents=True, exist_ok=True)
@@ -84,7 +87,7 @@ def save_ideas(ideas):
     print(f"\n[Saved] {len(ideas)} ideas to {output_file}")
     return output_file
 
-def run(count=15):
+def run(count=15) -> None:
     """Execute diverge step"""
     print("="*60)
     print("[BRAINSTORM] Step 2: Diverge - Generate Ideas")

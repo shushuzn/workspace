@@ -1,3 +1,6 @@
+import logging
+logger = logging.getLogger(__name__)
+
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -14,7 +17,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-def load_ideas():
+def load_ideas() -> None:
     """Load raw ideas"""
     ideas_file = Path("flow-archive/brainstorm-current/brainstorm_ideas_raw.json")
     if not ideas_file.exists():
@@ -24,12 +27,12 @@ def load_ideas():
     with open(ideas_file, encoding="utf-8") as f:
         return json.load(f)
 
-def filter_ideas(ideas, min_score=6):
+def filter_ideas(ideas, min_score=6) -> None:
     """Filter ideas by score"""
     filtered = [idea for idea in ideas if idea.get("score", 0) >= min_score]
     return sorted(filtered, key=lambda x: x.get("score", 0), reverse=True)
 
-def save_filtered(filtered):
+def save_filtered(filtered) -> None:
     """Save filtered ideas"""
     output_file = Path("flow-archive/brainstorm-current/brainstorm_ideas_filtered.json")
     
@@ -39,7 +42,7 @@ def save_filtered(filtered):
     print(f"\n[Saved] {len(filtered)} filtered ideas")
     return output_file
 
-def run(min_score=6):
+def run(min_score=6) -> None:
     """Execute filter step"""
     print("="*60)
     print("[BRAINSTORM] Step 3: Filter - Evaluate Ideas")
