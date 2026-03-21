@@ -1,0 +1,13 @@
+{
+  "intents": [
+    "optimize",
+    "operate",
+    "create"
+  ],
+  "commands": [
+    "self_heal",
+    "ops_panel",
+    "safe_coder"
+  ],
+  "last_updated": null
+}
