@@ -1,0 +1,13 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "type": "tool.started",
+      "data": {
+        "message": "{\"tool\":"
+      },
+      "timestamp": "2026-03-21T00:00:15.863840",
+      "source": "cli"
+    }
+  ]
+}

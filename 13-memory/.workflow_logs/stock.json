@@ -1,0 +1,184 @@
+{
+  "runs": [
+    {
+      "time": "2026-03-21T00:58:13.422149",
+      "workflow": "quick",
+      "step": "sa_signal_generator_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T00:58:13.625704",
+      "workflow": "quick",
+      "step": "sa_analyzer_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T00:59:32.270641",
+      "workflow": "quick",
+      "step": "sa_signal_generator_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T00:59:32.448254",
+      "workflow": "quick",
+      "step": "sa_analyzer_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:01:31.389369",
+      "workflow": "research",
+      "step": "sa_financial_collector_001",
+      "status": "FAIL"
+    },
+    {
+      "time": "2026-03-21T01:01:31.542738",
+      "workflow": "research",
+      "step": "sa_indicator_calculator_001",
+      "status": "FAIL"
+    },
+    {
+      "time": "2026-03-21T01:01:31.666232",
+      "workflow": "research",
+      "step": "sa_trend_analysis_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:01:31.786647",
+      "workflow": "research",
+      "step": "sa_valuation_model_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:01:31.923365",
+      "workflow": "research",
+      "step": "sa_report_generator_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:02:35.389522",
+      "workflow": "research",
+      "step": "sa_financial_collector_001",
+      "status": "FAIL"
+    },
+    {
+      "time": "2026-03-21T01:02:35.557112",
+      "workflow": "research",
+      "step": "sa_indicator_calculator_001",
+      "status": "FAIL"
+    },
+    {
+      "time": "2026-03-21T01:02:35.681001",
+      "workflow": "research",
+      "step": "sa_trend_analysis_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:02:35.814549",
+      "workflow": "research",
+      "step": "sa_valuation_model_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:02:35.944055",
+      "workflow": "research",
+      "step": "sa_report_generator_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:10.792178",
+      "workflow": "research",
+      "step": "sa_financial_collector_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:10.932901",
+      "workflow": "research",
+      "step": "sa_indicator_calculator_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:11.053708",
+      "workflow": "research",
+      "step": "sa_trend_analysis_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:11.178826",
+      "workflow": "research",
+      "step": "sa_valuation_model_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:11.318923",
+      "workflow": "research",
+      "step": "sa_report_generator_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:38.827975",
+      "workflow": "research",
+      "step": "sa_financial_collector_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:38.970726",
+      "workflow": "research",
+      "step": "sa_indicator_calculator_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:39.088965",
+      "workflow": "research",
+      "step": "sa_trend_analysis_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:39.204102",
+      "workflow": "research",
+      "step": "sa_valuation_model_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:05:39.326039",
+      "workflow": "research",
+      "step": "sa_report_generator_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:08:10.187311",
+      "workflow": "full",
+      "step": "sa_historical_downloader_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:08:10.312058",
+      "workflow": "full",
+      "step": "sa_analyzer_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:08:10.452556",
+      "workflow": "full",
+      "step": "sa_signal_generator_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:08:10.598750",
+      "workflow": "full",
+      "step": "sa_backtesting_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:08:10.722499",
+      "workflow": "full",
+      "step": "sa_risk_001",
+      "status": "OK"
+    },
+    {
+      "time": "2026-03-21T01:08:10.859775",
+      "workflow": "full",
+      "step": "sa_dashboard_001",
+      "status": "OK"
+    }
+  ]
+}

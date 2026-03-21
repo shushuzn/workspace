@@ -1,0 +1,106 @@
+{
+  "templates": {
+    "quick-brainstorm": {
+      "id": "quick-brainstorm",
+      "name": "Quick Brainstorm",
+      "description": "5-min quick brainstorm flow",
+      "category": "brainstorm",
+      "steps": [
+        {
+          "tool": "brainstorm_001_define",
+          "args": []
+        },
+        {
+          "tool": "brainstorm_002_diverge",
+          "args": [
+            10
+          ]
+        },
+        {
+          "tool": "brainstorm_003_filter",
+          "args": [
+            5
+          ]
+        },
+        {
+          "tool": "brainstorm_004_prioritize",
+          "args": [
+            3
+          ]
+        }
+      ],
+      "tags": [
+        "quick",
+        "brainstorm",
+        "5min"
+      ],
+      "rating": 5
+    },
+    "discover-sync": {
+      "id": "discover-sync",
+      "name": "Tool Discovery & Sync",
+      "description": "Scan and sync tool registry",
+      "category": "tooling",
+      "steps": [
+        {
+          "tool": "auto_discover_001",
+          "args": [
+            "--sync"
+          ]
+        }
+      ],
+      "tags": [
+        "tool",
+        "discover",
+        "sync"
+      ],
+      "rating": 5
+    },
+    "full-optimize": {
+      "id": "full-optimize",
+      "name": "Full Optimize Cycle",
+      "description": "Discover -> Optimize -> Report",
+      "category": "optimization",
+      "steps": [
+        {
+          "tool": "auto_discover_001",
+          "args": [
+            "--scan"
+          ]
+        },
+        {
+          "tool": "chain_runner_001",
+          "args": [
+            "--run",
+            "optimize-cycle"
+          ]
+        }
+      ],
+      "tags": [
+        "optimize",
+        "automation"
+      ],
+      "rating": 4
+    },
+    "daily-review": {
+      "id": "daily-review",
+      "name": "Daily Review",
+      "description": "Review daily work, update notes",
+      "category": "routine",
+      "steps": [
+        {
+          "tool": "version_ctrl_001",
+          "args": [
+            "--snapshot",
+            "daily"
+          ]
+        }
+      ],
+      "tags": [
+        "daily",
+        "review"
+      ],
+      "rating": 4
+    }
+  }
+}

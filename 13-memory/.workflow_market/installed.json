@@ -1,0 +1,46 @@
+{
+  "stock-quick": {
+    "id": "stock-quick",
+    "name": "Stock Quick Analysis",
+    "description": "Quick stock analysis in under 1 minute",
+    "category": "stock",
+    "steps": [
+      {
+        "tool": "sa_signal_generator_001",
+        "args": []
+      },
+      {
+        "tool": "sa_analyzer_001",
+        "args": [
+          "--quick"
+        ]
+      }
+    ],
+    "rating": 5,
+    "installs": 0,
+    "installed_at": "D:\\OpenClaw\\workspace"
+  },
+  "health-check": {
+    "id": "health-check",
+    "name": "System Health Check",
+    "description": "Check overall system health",
+    "category": "system",
+    "steps": [
+      {
+        "tool": "workflow_diagnosis_001",
+        "args": []
+      },
+      {
+        "tool": "workflow_health_001",
+        "args": []
+      },
+      {
+        "tool": "workflow_monitor_001",
+        "args": []
+      }
+    ],
+    "rating": 5,
+    "installs": 0,
+    "installed_at": "D:\\OpenClaw\\workspace"
+  }
+}

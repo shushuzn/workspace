@@ -1,0 +1,28 @@
+{
+  "tasks": {
+    "daily-discover": {
+      "id": "daily-discover",
+      "name": "Daily Tool Discovery",
+      "cron": "0 7 * * *",
+      "command": "py 30-scripts-tools/auto_discover_001.py --sync",
+      "enabled": true,
+      "last_run": null
+    },
+    "weekly-optimize": {
+      "id": "weekly-optimize",
+      "name": "Weekly Optimization",
+      "cron": "0 8 * * 1",
+      "command": "py 30-scripts-tools/chain_runner_001.py --run full-optimize",
+      "enabled": true,
+      "last_run": null
+    },
+    "test": {
+      "id": "test",
+      "name": "Test",
+      "cron": "0 9 * * *",
+      "command": "echo",
+      "enabled": true,
+      "last_run": "2026-03-21T00:19:41.562877"
+    }
+  }
+}

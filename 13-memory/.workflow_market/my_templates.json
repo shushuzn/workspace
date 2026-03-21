@@ -1,0 +1,41 @@
+{
+  "templates": {
+    "quick-brainstorm": {
+      "id": "quick-brainstorm",
+      "name": "Quick Brainstorm",
+      "description": "5-min quick brainstorm flow",
+      "category": "brainstorm",
+      "steps": [
+        {
+          "tool": "brainstorm_001_define",
+          "args": []
+        },
+        {
+          "tool": "brainstorm_002_diverge",
+          "args": [
+            10
+          ]
+        },
+        {
+          "tool": "brainstorm_003_filter",
+          "args": [
+            5
+          ]
+        },
+        {
+          "tool": "brainstorm_004_prioritize",
+          "args": [
+            3
+          ]
+        }
+      ],
+      "tags": [
+        "quick",
+        "brainstorm",
+        "5min"
+      ],
+      "rating": 5,
+      "imported_at": "2026-03-21T00:09:57.134517"
+    }
+  }
+}
