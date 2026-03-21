@@ -1,11 +1,11 @@
 {
   "date": "2026-03-21",
-  "timestamp": "2026-03-21T10:31:22.829097",
+  "timestamp": "2026-03-21T10:41:27.752407",
   "health_score": 100,
   "status": "HEALTHY",
   "metrics": {
     "tools": "416/416",
-    "workflows": "79/79",
+    "workflows": "69/69",
     "compliance_rate": "100.0%",
     "success_rate": "100.0%"
   }
