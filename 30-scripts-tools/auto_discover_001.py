@@ -31,7 +31,7 @@ class ToolAutoDiscover:
                 data = json.loads(CACHE_FILE.read_text(encoding="utf-8", errors="replace"))
                 if datetime.now().timestamp() - data.get("cache_time", 0) < CACHE_TTL:
                     return data.get("results")
-            except:
+            except (json.JSONDecodeError, IOError, OSError):
                 pass
         return None
     

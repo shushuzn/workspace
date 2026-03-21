@@ -58,8 +58,8 @@
     },
     {
       "file": "batch_runner_001.py",
-      "type": "bare_except",
-      "line": 52
+      "type": "missing_argv_check",
+      "line": 0
     },
     {
       "file": "behavior_analyzer_001.py",
@@ -473,8 +473,8 @@
     }
   ],
   "metrics": {
-    "bare_except_count": 68,
-    "missing_argv_count": 19,
+    "bare_except_count": 67,
+    "missing_argv_count": 20,
     "long_files": 7,
     "clean_files": 319
   },
