@@ -56,7 +56,7 @@ class ToolValidator:
         try:
             with open(filepath, "r", encoding="utf-8") as f:
                 content = f.read()
-        except:
+        except (IOError, OSError, UnicodeDecodeError):
             return [{"error": "Cannot read file"}]
         
         issues = []
@@ -83,7 +83,7 @@ class ToolValidator:
             if has_unicode and not has_codecs:
                 return {"status": "warning", "issues": ["Missing Unicode fix for Windows"]}
             return {"status": "ok", "issues": []}
-        except:
+        except (IOError, OSError, UnicodeDecodeError):
             return {"status": "error", "issues": ["Cannot read file"]}
     
     def validate(self, filepath: str) -> Dict:

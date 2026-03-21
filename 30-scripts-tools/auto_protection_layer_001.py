@@ -78,7 +78,7 @@ class AutoProtectionLayer:
                 if level >= 3:
                     return False, f"❌ 惩罚等级 Level {level} - 只读模式"
                 return True, f"✓ 惩罚等级：{level}"
-            except:
+            except (IOError, OSError, ValueError):
                 pass
         return True, "✓ 无惩罚记录"
     

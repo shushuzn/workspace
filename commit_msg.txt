@@ -1,1 +1,1 @@
-Fix bare_except in 5 core workflow tools
+Fix bare_except: tool_validator, auto_protection_layer, auto_recovery

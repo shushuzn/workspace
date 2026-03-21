@@ -72,7 +72,7 @@ class AutoRecoverySystem:
                 try:
                     with open(file_path, "r", encoding="utf-8") as f:
                         json.load(f)
-                except:
+                except (IOError, OSError, json.JSONDecodeError):
                     issues.append({
                         "type": "corrupted_file",
                         "file": name,

@@ -32,16 +32,6 @@
       "line": 218
     },
     {
-      "file": "auto_protection_layer_001.py",
-      "type": "bare_except",
-      "line": 81
-    },
-    {
-      "file": "auto_recovery_001.py",
-      "type": "bare_except",
-      "line": 75
-    },
-    {
       "file": "auto_todo_updater_001.py",
       "type": "bare_except",
       "line": 239
@@ -453,10 +443,10 @@
     }
   ],
   "metrics": {
-    "bare_except_count": 63,
+    "bare_except_count": 61,
     "missing_argv_count": 20,
     "long_files": 7,
-    "clean_files": 323
+    "clean_files": 325
   },
   "suggestions": [
     "Use specific exception types instead of bare except",
