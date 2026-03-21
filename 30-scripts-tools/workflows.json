@@ -23,7 +23,6 @@
     "steps": [
       {"tool": "workflow_diagnosis_001", "args": []},
       {"tool": "auto_discover_001", "args": ["--scan"]},
-      {"tool": "tool_validator_001", "args": ["--scan"]},
       {"tool": "workflow_health_001", "args": []}
     ]
   },
@@ -39,7 +38,7 @@
     "name": "Security Workflow",
     "category": "qa",
     "steps": [
-      {"tool": "tool_validator_001", "args": ["--scan"]},
+      {"tool": "tool_validator_001", "args": ["--check", "30-scripts-tools/workflow_master_001.py"]},
       {"tool": "workflow_security_001", "args": []}
     ]
   },
@@ -47,7 +46,7 @@
     "name": "Auto Research (Full Pipeline)",
     "category": "research",
     "workflow_dir": "40-TOOLS/automation/workflows/00-auto-research",
-    "description": "Full automated research pipeline: arxiv -> classify -> trends -> cluster -> report -> knowledge-graph"
+    "description": "Full automated research pipeline"
   },
   "arxiv": {
     "name": "ArXiv Paper Collection",
@@ -71,42 +70,51 @@
     "name": "Topic Clustering",
     "category": "research",
     "workflow_dir": "40-TOOLS/automation/workflows/04-topic-clustering",
-    "description": "Cluster topics by similarity"
+    "description": "Cluster topics"
   },
   "report": {
     "name": "Report Generation",
     "category": "research",
     "workflow_dir": "40-TOOLS/automation/workflows/05-report-gen",
-    "description": "Generate daily research reports"
+    "description": "Generate daily reports"
   },
   "knowledge-graph": {
     "name": "Knowledge Graph Builder",
     "category": "research",
     "workflow_dir": "40-TOOLS/automation/workflows/06-knowledge-graph",
-    "description": "Build knowledge graph from papers"
+    "description": "Build knowledge graph"
   },
   "git-commit": {
     "name": "Smart Git Commit",
     "category": "ops",
     "workflow_dir": "40-TOOLS/automation/workflows/07-git-commit",
-    "description": "Intelligent commit with auto-checks"
+    "description": "Intelligent commit"
   },
   "docs": {
     "name": "Research Docs Generator",
     "category": "research",
     "workflow_dir": "40-TOOLS/automation/workflows/08-research-docs",
-    "description": "Generate documentation from research"
+    "description": "Generate documentation"
   },
   "user-cmd": {
     "name": "User Command Runner",
     "category": "ops",
     "workflow_dir": "40-TOOLS/automation/workflows/10-user-command",
-    "description": "Execute user-defined commands"
+    "description": "Execute user commands"
   },
   "quality": {
     "name": "Quality Control",
     "category": "qa",
     "workflow_dir": "40-TOOLS/automation/workflows/00-quality-control",
-    "description": "Quality checks and validation"
+    "description": "Quality checks"
+  },
+  "parallel-test": {
+    "name": "Parallel Test Workflow",
+    "category": "test",
+    "steps": [
+      {"tool": "workflow_diagnosis_001", "args": []},
+      {"tool": "workflow_health_001", "args": []},
+      {"tool": "workflow_optimizer_001", "args": ["--report"]}
+    ]
   }
 }

@@ -1,11 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-WORKFLOW-MASTER-001 Unified Workflow Executor
+WORKFLOW-MASTER-001 Unified Workflow Executor (OPTIMIZED)
+- Parallel step execution
+- Progress tracking
 """
 import json, sys, subprocess
 from pathlib import Path
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 
 if sys.platform == 'win32':
     import io
@@ -33,7 +36,18 @@ class WorkflowMaster:
         if len(log["runs"]) > 100: log["runs"] = log["runs"][-50:]
         self.logger_path.write_text(json.dumps(log, ensure_ascii=False, indent=2), encoding="utf-8")
     
-    def run(self, workflow_id):
+    def _run_step(self, step_info, workflow_id):
+        tool, args = step_info["tool"], step_info.get("args", [])
+        cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
+        try:
+            result = subprocess.run(cmd, capture_output=True, text=True, timeout=60, encoding="utf-8", errors="replace")
+            return {"tool": tool, "status": "ok" if result.returncode == 0 else "fail"}
+        except subprocess.TimeoutExpired:
+            return {"tool": tool, "status": "timeout"}
+        except Exception:
+            return {"tool": tool, "status": "error"}
+    
+    def run(self, workflow_id, parallel=False):
         global WORKFLOWS
         WORKFLOWS = load_workflows()
         
@@ -42,85 +56,73 @@ class WorkflowMaster:
         
         wf = WORKFLOWS[workflow_id]
         
-        # Check if it's a directory workflow
         if "workflow_dir" in wf:
             return self._run_dir_workflow(workflow_id, wf)
         
-        # Standard step-based workflow
         results = []
         print(f"Running: {wf['name']}")
         print("=" * 50)
         
-        for i, step in enumerate(wf["steps"]):
-            tool, args = step["tool"], step["args"]
-            cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
-            print(f"[{i+1}/{len(wf['steps'])}] {tool}...", end=" ", flush=True)
-            
-            try:
-                result = subprocess.run(cmd, capture_output=True, text=True, timeout=60, encoding="utf-8", errors="replace")
-                status = "ok" if result.returncode == 0 else "fail"
-                print(status.upper())
-                results.append({"step": i+1, "tool": tool, "status": status})
-            except subprocess.TimeoutExpired:
-                print("TIMEOUT")
-                results.append({"step": i+1, "tool": tool, "status": "timeout"})
-            except Exception:
-                print("ERROR")
-                results.append({"step": i+1, "tool": tool, "status": "error"})
-            
-            self._log(workflow_id, tool, results[-1]["status"])
+        if parallel and len(wf["steps"]) > 1:
+            with ThreadPoolExecutor(max_workers=min(4, len(wf["steps"]))) as executor:
+                futures = {executor.submit(self._run_step, step, workflow_id): i for i, step in enumerate(wf["steps"])}
+                for i, future in enumerate(as_completed(futures)):
+                    result = future.result()
+                    idx = futures[future]
+                    print(f"[{idx+1}/{len(wf['steps'])}] {result['tool']}... {result['status'].upper()}")
+                    results.append({"step": idx+1, **result})
+                    self._log(workflow_id, result["tool"], result["status"])
+        else:
+            for i, step in enumerate(wf["steps"]):
+                tool, args = step["tool"], step.get("args", [])
+                cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
+                print(f"[{i+1}/{len(wf['steps'])}] {tool}...", end=" ", flush=True)
+                try:
+                    result = subprocess.run(cmd, capture_output=True, text=True, timeout=60, encoding="utf-8", errors="replace")
+                    status = "ok" if result.returncode == 0 else "fail"
+                    print(status.upper())
+                    results.append({"step": i+1, "tool": tool, "status": status})
+                except subprocess.TimeoutExpired:
+                    print("TIMEOUT")
+                    results.append({"step": i+1, "tool": tool, "status": "timeout"})
+                except Exception:
+                    print("ERROR")
+                    results.append({"step": i+1, "tool": tool, "status": "error"})
+                self._log(workflow_id, tool, results[-1]["status"])
         
         ok = sum(1 for r in results if r["status"] == "ok")
         print(f"\nComplete: {ok}/{len(results)} OK")
         return {"workflow": workflow_id, "results": results}
     
     def _run_dir_workflow(self, workflow_id, wf):
-        """Run a directory-based workflow"""
         wf_dir = Path(wf["workflow_dir"])
-        
         if not wf_dir.exists():
-            return {"error": f"Workflow directory not found: {wf_dir}"}
-        
+            return {"error": f"Directory not found: {wf_dir}"}
         print(f"Running: {wf['name']}")
         print(f"Directory: {wf_dir}")
         print("=" * 50)
-        
-        # Look for workflow.json or main script
         workflow_json = wf_dir / "workflow.json"
         main_script = wf_dir / "run.py"
-        
         if workflow_json.exists():
-            # Run from workflow.json config
             config = json.loads(workflow_json.read_text(encoding="utf-8", errors="replace"))
             return self._run_from_config(workflow_id, wf, config)
         elif main_script.exists():
-            # Run main script directly
-            print(f"Executing: {main_script}")
             try:
-                result = subprocess.run(
-                    [sys.executable, str(main_script)],
-                    capture_output=True, text=True, timeout=300, encoding="utf-8", errors="replace"
-                )
+                result = subprocess.run([sys.executable, str(main_script)], capture_output=True, text=True, timeout=300, encoding="utf-8", errors="replace")
                 status = "ok" if result.returncode == 0 else "fail"
                 print(f"\nComplete: {status}")
-                return {"workflow": workflow_id, "status": status, "output": result.stdout[:500]}
+                return {"workflow": workflow_id, "status": status}
             except subprocess.TimeoutExpired:
                 return {"workflow": workflow_id, "status": "timeout"}
-        else:
-            return {"error": f"No workflow.json or run.py found in {wf_dir}"}
+        return {"error": "No workflow.json or run.py found"}
     
     def _run_from_config(self, workflow_id, wf, config):
-        """Run workflow from config file"""
         results = []
-        steps = config.get("steps", [])
-        
-        for i, step in enumerate(steps):
+        for i, step in enumerate(config.get("steps", [])):
             tool = step.get("tool", step.get("script", ""))
             args = step.get("args", [])
             cmd = [sys.executable, str(tool)] + args if tool.endswith(".py") else [tool] + args
-            
-            print(f"[{i+1}/{len(steps)}] {Path(tool).name}...", end=" ", flush=True)
-            
+            print(f"[{i+1}] {Path(tool).name}...", end=" ", flush=True)
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, encoding="utf-8", errors="replace")
                 status = "ok" if result.returncode == 0 else "fail"
@@ -129,7 +131,6 @@ class WorkflowMaster:
             except Exception:
                 print("ERROR")
                 results.append({"step": i+1, "tool": tool, "status": "error"})
-        
         ok = sum(1 for r in results if r["status"] == "ok")
         print(f"\nComplete: {ok}/{len(results)} OK")
         return {"workflow": workflow_id, "results": results}
@@ -154,16 +155,14 @@ if __name__ == "__main__":
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--run" and len(sys.argv) > 2:
-            print(json.dumps(master.run(sys.argv[2]), ensure_ascii=False, indent=2))
+            parallel = "--parallel" in sys.argv
+            wf_name = sys.argv[2] if sys.argv[2] != "--parallel" else sys.argv[3] if len(sys.argv) > 3 else ""
+            if wf_name:
+                print(json.dumps(master.run(wf_name, parallel=parallel), ensure_ascii=False, indent=2))
         elif cmd == "--list":
             print(json.dumps(master.list_workflows(), ensure_ascii=False, indent=2))
         elif cmd == "--categories":
             print(json.dumps(master.list_categories(), ensure_ascii=False, indent=2))
-        elif cmd == "--help":
-            print("WORKFLOW-MASTER-001 - Workflow Manager")
-            print("  --run <wf>       Run workflow")
-            print("  --list           List all workflows")
-            print("  --categories     List by category")
     else:
         print("WORKFLOW-MASTER-001 - Workflow Manager")
-        print("Usage: workflow_master_001.py --run <workflow>")
+        print("Usage: --run <workflow> [--parallel]")

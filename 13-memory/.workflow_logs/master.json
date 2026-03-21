@@ -1,0 +1,22 @@
+{
+  "runs": [
+    {
+      "time": "2026-03-21T08:50:40.187341",
+      "workflow": "full",
+      "step": "workflow_diagnosis_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T08:50:40.266666",
+      "workflow": "full",
+      "step": "auto_discover_001",
+      "status": "ok"
+    },
+    {
+      "time": "2026-03-21T08:50:40.344179",
+      "workflow": "full",
+      "step": "workflow_health_001",
+      "status": "ok"
+    }
+  ]
+}
