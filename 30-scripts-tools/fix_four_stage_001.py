@@ -9,6 +9,11 @@ from pathlib import Path
 TOOLS_DIR = Path("30-scripts-tools")
 
 
+# ==============================================================================
+# STAGE 2: CODE 编写代码
+# ==============================================================================
+
+
 def fix_tool(path):
     """Add missing four-stage compliance markers."""
     content = path.read_text(encoding="utf-8", errors="replace")

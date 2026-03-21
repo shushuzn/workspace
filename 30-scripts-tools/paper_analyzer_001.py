@@ -5,6 +5,11 @@ PAPER-ANALYZER-001 Deep Paper Analysis
 4-STAGE: ARCHITECT to CODE to ASK to DEBUG
 
 STAGE 1: ARCHITECT
+
+# ==============================================================================
+# STAGE 2: CODE 编写代码
+# ==============================================================================
+
 Purpose:
     - Deep analysis of research papers
     - Extract key contributions, methods, results

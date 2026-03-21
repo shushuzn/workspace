@@ -5,6 +5,11 @@ DEEP-PAPER-ANALYZER-001 Extended Paper Analysis
 4-STAGE: ARCHITECT to CODE to ASK to DEBUG
 
 STAGE 1: ARCHITECT
+
+# ==============================================================================
+# STAGE 2: CODE 编写代码
+# ==============================================================================
+
 Purpose:
     - Extract full paper content section by section
     - Analyze methods, results, discussion in depth

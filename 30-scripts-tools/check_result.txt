@@ -1,0 +1,22 @@
+
+[FOUR-STAGE-CHECKER-001] 四阶段流程检查
+==================================================
+
+[SUMMARY]
+  Total tools: 431
+  Compliant: 305 (71%)
+  Non-compliant: 126
+
+[TOP 5 - Best]
+  30-scripts-tools\auto_architect_001.py: 100%
+  30-scripts-tools\auto_evolve_001.py: 100%
+  30-scripts-tools\auto_optimizer_001.py: 100%
+  30-scripts-tools\four_stage_checker_001.py: 100%
+  30-scripts-tools\intent_predictor_001.py: 100%
+
+[BOTTOM 5 - Need Work]
+  30-scripts-tools\test_cache_enhanced_001.py: 8% (missing: ARCHITECT, CODE, ASK, DEBUG)
+  30-scripts-tools\test_wrapper_001.py: 8% (missing: ARCHITECT, CODE, ASK, DEBUG)
+  30-scripts-tools\test_wrapper_strict_001.py: 8% (missing: ARCHITECT, CODE, ASK, DEBUG)
+  30-scripts-tools\test_copaw_entry_001.py: 0% (missing: ARCHITECT, CODE, ASK, DEBUG)
+  30-scripts-tools\test_permission_001.py: 0% (missing: ARCHITECT, CODE, ASK, DEBUG)
