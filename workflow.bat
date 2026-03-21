@@ -65,14 +65,19 @@ python 30-scripts-tools\workflow_master_001.py --categories
 exit /b 0
 
 :agent
-echo.
-echo ========================================
-echo Multi-Agent Collaboration
-echo ========================================
-python 30-scripts-tools\multi_agent_orchestrator_001.py --viz
-echo.
-echo Run task:
-echo   workflow.bat agent "your task"
+set "TASK=%~2"
+if "!TASK!"=="" (
+    echo.
+    echo ========================================
+    echo Multi-Agent Collaboration
+    echo ========================================
+    python 30-scripts-tools\multi_agent_orchestrator_001.py --viz
+    echo.
+    echo Run task:
+    echo   workflow.bat agent "your task"
+) else (
+    python 30-scripts-tools\multi_agent_orchestrator_001.py !TASK!
+)
 exit /b 0
 
 :viz
