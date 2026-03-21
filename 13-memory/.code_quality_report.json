@@ -24,7 +24,7 @@
     {
       "file": "auto_discover_001.py",
       "type": "bare_except",
-      "line": 34
+      "line": 56
     },
     {
       "file": "auto_fix_engine_001.py",
@@ -197,24 +197,9 @@
       "line": 275
     },
     {
-      "file": "multi_agent_learn_001.py",
-      "type": "bare_except",
-      "line": 16
-    },
-    {
-      "file": "multi_agent_router_001.py",
-      "type": "bare_except",
-      "line": 15
-    },
-    {
       "file": "multi_agent_router_001.py",
       "type": "missing_argv_check",
       "line": 0
-    },
-    {
-      "file": "multi_agent_viz_001.py",
-      "type": "bare_except",
-      "line": 15
     },
     {
       "file": "next_advisor_001.py",
@@ -442,11 +427,6 @@
       "line": 0
     },
     {
-      "file": "workflow_diagnosis_001.py",
-      "type": "bare_except",
-      "line": 59
-    },
-    {
       "file": "workflow_enforcer_001.py",
       "type": "bare_except",
       "line": 189
@@ -473,10 +453,10 @@
     }
   ],
   "metrics": {
-    "bare_except_count": 67,
+    "bare_except_count": 63,
     "missing_argv_count": 20,
     "long_files": 7,
-    "clean_files": 319
+    "clean_files": 323
   },
   "suggestions": [
     "Use specific exception types instead of bare except",

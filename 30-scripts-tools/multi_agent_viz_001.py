@@ -12,7 +12,7 @@ if sys.platform == 'win32':
     import io
     try:
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
-    except:
+    except (AttributeError, ValueError):
         pass
 
 PERSONAS = ["planner", "executor", "critic", "learner", "coordinator", "innovator", "metacognition"]

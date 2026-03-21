@@ -56,7 +56,7 @@ class WorkflowDiagnosis:
                     issues.append({"file": f.name, "issue": "no_timeout"})
                 if "json.loads" in content and 'encoding="utf-8"' not in content:
                     issues.append({"file": f.name, "issue": "no_encoding"})
-            except:
+            except (IOError, OSError, UnicodeDecodeError):
                 pass
         return issues
     
