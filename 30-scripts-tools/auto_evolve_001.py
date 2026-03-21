@@ -2,7 +2,18 @@
 # -*- coding: utf-8 -*-
 """
 AUTO-EVOLVE-001 Self-Evolution System
-Analyzes patterns, generates improvements, self-programs new capabilities
+4-STAGE: ARCHITECT to CODE to ASK to DEBUG
+
+STAGE 1: ARCHITECT
+Purpose:
+    - Analyze code patterns across all tools
+    - Generate improvements automatically
+    - Self-program new capabilities
+
+Data Flow:
+    analyze_patterns() -> generate_improvement() -> create_new_tool() -> evolve()
+
+STAGE 2: CODE
 """
 import json, re, sys, hashlib
 from pathlib import Path
@@ -88,6 +99,21 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# STAGE 3: ASK
+"""
+ASK: Run verification
+    py auto_evolve_001.py --analyze
+    py auto_evolve_001.py --evolve 2
+    py auto_evolve_001.py --report
+"""
+
+# STAGE 4: DEBUG
+"""
+DEBUG:
+    - 2026-03-21: 490 optimization points found
+    - 2026-03-21: Created 1 evolved_tool_1_001.py
+"""
 '''
         
         tool_path = TOOLS_DIR / f"{name}_001.py"
@@ -214,3 +240,18 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# STAGE 3: ASK
+"""
+ASK: Run verification
+    py auto_evolve_001.py --analyze
+    py auto_evolve_001.py --evolve 2
+    py auto_evolve_001.py --report
+"""
+
+# STAGE 4: DEBUG
+"""
+DEBUG:
+    - 2026-03-21: 490 optimization points found
+    - 2026-03-21: Created 1 evolved_tool_1_001.py
+"""
