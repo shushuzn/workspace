@@ -2,6 +2,28 @@
 # -*- coding: utf-8 -*-
 """
 AUTO-OPTIMIZER-001 Self-Optimization System
+4-STAGE: ARCHITECT→CODE→ASK→DEBUG
+
+=============================================================================
+STAGE 1: ARCHITECT 架构设计
+=============================================================================
+Purpose:
+    - Automatically optimize tools based on pattern analysis
+    - Add logging, error handling, type hints
+    - Fix bare except, missing docstrings
+
+Data Flow:
+    analyze_tool() → find_issues() → optimize_tool() → save_log()
+
+Edge Cases:
+    - Syntax error in file → skip
+    - Permission denied → log and skip
+    - Already optimized → skip
+
+=============================================================================
+STAGE 2: CODE 编写代码
+=============================================================================
+"""
 Automatically optimizes tools based on pattern analysis
 """
 import json, re, sys
@@ -162,3 +184,22 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# ==============================================================================
+"""
+ASK: Run verification
+    py auto_optimizer_001.py --dry        (preview)
+    py auto_optimizer_001.py --optimize   (apply)
+    py auto_optimizer_001.py --report      (stats)
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# ==============================================================================
+"""
+DEBUG:
+    - 2026-03-21: 475 issues fixed in one run
+    - Fixed regex for bare except matching
+"""

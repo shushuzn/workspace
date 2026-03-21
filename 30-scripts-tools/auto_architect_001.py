@@ -2,6 +2,27 @@
 # -*- coding: utf-8 -*-
 """
 AUTO-ARCHITECT-001 Tool Architecture Rebuilder
+4-STAGE: ARCHITECT→CODE→ASK→DEBUG
+
+=============================================================================
+STAGE 1: ARCHITECT
+=============================================================================
+Purpose:
+    - Analyze tool dependencies and structure
+    - Suggest architectural improvements
+    - Generate architecture blueprints
+
+Data Flow:
+    analyze_topology() → find_clusters() → suggest_architecture() → apply()
+
+Edge Cases:
+    - No dependencies → mark as orphan
+    - Very large tool (>500 lines) → suggest split
+
+=============================================================================
+STAGE 2: CODE
+=============================================================================
+"""
 Automatically restructures tools based on topology and dependencies
 """
 import json, re, sys

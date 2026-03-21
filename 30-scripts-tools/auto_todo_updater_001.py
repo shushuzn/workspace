@@ -36,14 +36,14 @@ class AutoTODOUpdater:
         
         # Phase 2 工具清单
         self.phase2_tools = {
-            'SA-005': 'sa_005_indicator_calculator.py',
-            'SA-006': 'sa_006_pattern_recognition.py',
-            'SA-007': 'sa_007_trend_analysis.py',
-            'SA-008': 'sa_008_support_resistance.py',
-            'SA-009': 'sa_009_financial_ratios.py',
-            'SA-010': 'sa_010_valuation_model.py',
-            'SA-011': 'sa_011_growth_analysis.py',
-            'SA-012': 'sa_012_industry_analysis.py'
+            'SA-005': 'sa_indicator_calculator_001.py',
+            'SA-006': 'sa_pattern_recognition_001.py',
+            'SA-007': 'sa_trend_analysis_001.py',
+            'SA-008': 'sa_support_resistance_001.py',
+            'SA-009': 'sa_financial_ratios_001.py',
+            'SA-010': 'sa_valuation_model_001.py',
+            'SA-011': 'sa_growth_analysis_001.py',
+            'SA-012': 'sa_report_generator_001.py'
         }
     
     def check_tool_completion(self) -> dict:

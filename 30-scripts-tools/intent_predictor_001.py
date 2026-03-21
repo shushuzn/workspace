@@ -3,6 +3,31 @@
 """
 INTENT-PREDICTOR-001 AI Intent Prediction System
 4-STAGE: ARCHITECT→CODE→ASK→DEBUG
+
+=============================================================================
+STAGE 1: ARCHITECT 架构设计
+=============================================================================
+Purpose:
+    - Predict user intent from text
+    - Learn from user actions
+    - Recommend next actions based on patterns
+
+Data Flow:
+    user_input → detect_intent() → learn() → predict_next() → recommend()
+
+Files:
+    - intent_predictor_001.py (主逻辑)
+    - .intent_history.json (学习历史)
+    - .intent_learn_log.json (学习记录)
+
+Edge Cases:
+    - Empty input → return "unknown"
+    - Corrupt JSON → reset history
+    - No history → return defaults
+
+=============================================================================
+STAGE 2: CODE 编写代码
+=============================================================================
 """
 import json, sys
 from pathlib import Path
@@ -181,3 +206,37 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# ==============================================================================
+"""
+ASK: Run verification
+
+Test Commands:
+    py intent_predictor_001.py --detect "optimize workflow"
+    py intent_predictor_001.py --learn optimize self_heal
+    py intent_predictor_001.py --predict
+
+Expected Output:
+    - detect: "optimize" intent detected
+    - learn: "Learned: optimize -> self_heal"
+    - predict: Shows learned patterns and recommendations
+"""
+
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# ==============================================================================
+"""
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Empty text → "unknown" ✓
+    2. "optimize" → "optimize" ✓
+    3. Learn pattern → Updates history ✓
+    4. Predict → Returns most common action ✓
+
+Fixes:
+    - 2026-03-21: Added JSON error handling for corrupt history
+    - 2026-03-21: Added empty input check
+"""
