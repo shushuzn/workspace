@@ -1,0 +1,9 @@
+{
+  "timestamp": "2026-03-21T10:48:19.663571",
+  "predictions": [
+    {
+      "file": "self_heal_001.py",
+      "risk": 45
+    }
+  ]
+}

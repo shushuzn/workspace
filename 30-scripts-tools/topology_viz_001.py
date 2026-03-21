@@ -23,7 +23,7 @@ def scan_dependencies():
         
         try:
             content = f.read_text(encoding="utf-8", errors="replace")
-        except:
+        except (IOError, OSError):
             continue
         
         # Find imports
@@ -48,7 +48,7 @@ def get_health_status():
             runs = log.get("runs", [])
             success = sum(1 for r in runs if r.get("status") == "ok")
             return {"total": len(runs), "success": success, "rate": success/max(1,len(runs))*100}
-        except:
+        except (json.JSONDecodeError, IOError, OSError):
             pass
     return {"total": 0, "success": 0, "rate": 100}
 

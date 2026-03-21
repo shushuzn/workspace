@@ -26,7 +26,7 @@ def get_health_status():
             log = json.loads(log_file.read_text(encoding="utf-8", errors="replace"))
             runs = len(log.get("runs", []))
             success = sum(1 for r in log.get("runs", []) if r.get("status") == "ok")
-        except:
+        except (json.JSONDecodeError, IOError, OSError):
             pass
     
     score = 100
