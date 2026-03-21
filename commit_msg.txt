@@ -1,1 +1,1 @@
-Fix bare_except in auto_discover_001.py, batch run 4/4 OK
+Update ROADMAP: batch_runner + code quality fixes

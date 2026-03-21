@@ -1,16 +1,15 @@
 {
-  "timestamp": "2026-03-21T09:59:21.468147",
+  "timestamp": "2026-03-21T09:59:46.013901",
   "workflows": [
     "dev",
     "quick",
-    "plan",
-    "security"
+    "full"
   ],
   "results": [
     {
       "name": "dev",
       "status": "OK",
-      "time": "0.5s"
+      "time": "0.4s"
     },
     {
       "name": "quick",
@@ -18,19 +17,14 @@
       "time": "0.4s"
     },
     {
-      "name": "plan",
-      "status": "OK",
-      "time": "1.4s"
-    },
-    {
-      "name": "security",
+      "name": "full",
       "status": "OK",
       "time": "0.5s"
     }
   ],
   "summary": {
-    "passed": 4,
-    "total": 4,
-    "time": 2.8
+    "passed": 3,
+    "total": 3,
+    "time": 1.3
   }
 }
