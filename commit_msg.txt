@@ -1,1 +1,1 @@
-Tools actively used: INTENT-PREDICTOR detects optimize, SELF-HEAL reports 100% health, OPS-PANEL operational
+"Fix encoding: ASCII-safe output for Windows cmd"  

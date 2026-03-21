@@ -9,18 +9,22 @@ from pathlib import Path
 from datetime import datetime
 from collections import defaultdict, Counter
 
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
 LOGS_DIR = Path("13-memory/.workflow_logs")
 HISTORY_FILE = Path("13-memory/.intent_history.json")
 
 INTENT_PATTERNS = {
-    "optimize": ["optimize", "improve", "fix", "better", "优化", "改善"],
-    "create": ["create", "new", "write", "make", "创建", "新建"],
-    "analyze": ["analyze", "check", "review", "scan", "分析", "检查"],
-    "deploy": ["deploy", "release", "publish", "部署", "发布"],
-    "test": ["test", "verify", "validate", "测试", "验证"],
-    "learn": ["learn", "study", "research", "学习", "研究"],
-    "brainstorm": ["brainstorm", "idea", "think", "头脑风暴", "创意"],
-    "operate": ["operate", "manage", "monitor", "运营", "管理"],
+    "optimize": ["optimize", "improve", "fix", "better", "youhua", "gaishan"],
+    "create": ["create", "new", "write", "make", "create", "xinjian"],
+    "analyze": ["analyze", "check", "review", "scan", "fenxi", "jiancha"],
+    "deploy": ["deploy", "release", "publish", "deploy", "release"],
+    "test": ["test", "verify", "validate", "ceshi", "yanzheng"],
+    "learn": ["learn", "study", "research", "xuexi", "yanjiu"],
+    "brainstorm": ["brainstorm", "idea", "think", "brainstorm", "chuangyi"],
+    "operate": ["operate", "manage", "monitor", "yunying", "guanli"],
 }
 
 class IntentPredictor:
@@ -54,11 +58,11 @@ class IntentPredictor:
     
     def recommend_action(self, intent):
         recs = {
-            "optimize": [("self_heal", "运行自愈系统"), ("code_quality", "检查代码质量")],
-            "create": [("brainstorm", "头脑风暴创意"), ("safe_coder", "安全代码生成")],
-            "analyze": [("health", "健康检查"), ("topology_viz", "拓扑分析")],
-            "brainstorm": [("scamper", "SCAMPER创新"), ("sixhats", "六顶思考帽")],
-            "operate": [("ops_panel", "运营面板"), ("health", "健康检查")],
+            "optimize": [("self_heal", "Run Self-Heal"), ("code_quality", "Check Quality")],
+            "create": [("brainstorm", "Brainstorm Ideas"), ("safe_coder", "Safe Code Gen")],
+            "analyze": [("health", "Health Check"), ("topology_viz", "Topology Analysis")],
+            "brainstorm": [("scamper", "SCAMPER Innovation"), ("sixhats", "Six Thinking Hats")],
+            "operate": [("ops_panel", "Ops Panel"), ("health", "Health Check")],
         }
         return recs.get(intent, [])
     
@@ -112,11 +116,17 @@ def main():
         actions = predictor.recommend_action(intent)
         print(f"  Actions: {actions}")
     
+    elif "--learn" in sys.argv and len(sys.argv) > 3:
+        intent = sys.argv[2]
+        action = sys.argv[3]
+        predictor.learn(intent, action)
+        print(f"\n  Learned: {intent} -> {action}")
+    
     else:
         print("\nUsage:")
-        print("  --predict    Predict next action")
-        print("  --detect <text>    Detect intent from text")
-        print("  --learn <intent> <action>    Learn from action")
+        print("  --predict        Predict next action")
+        print("  --detect <text>  Detect intent from text")
+        print("  --learn <i> <a>  Learn from action")
 
 if __name__ == "__main__":
     main()

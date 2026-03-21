@@ -8,57 +8,60 @@ import json, sys, subprocess
 from pathlib import Path
 from datetime import datetime
 
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
 TOOLS_DIR = Path("30-scripts-tools")
 
 def run_tool(tool, args=""):
-    """Run a tool and return output"""
     try:
         result = subprocess.run(
             ["python", str(TOOLS_DIR / tool), args] if args else ["python", str(TOOLS_DIR / tool)],
             capture_output=True, text=True, timeout=60
         )
         return result.stdout[:500] if result.stdout else result.stderr[:200]
-    except (IOError, OSError):
+    except:
         return "[ERROR]"
 
 def main():
     print("\n" + "=" * 60)
-    print("  OPS-PANEL-001  一键运营面板")
+    print("  OPS-PANEL-001  One-Click Operations Panel")
     print("=" * 60)
     print(f"  {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("")
     
     # 1. Health Check
-    print("  [1] 健康检查...")
+    print("  [1] Health Check...", end=" ")
     health = run_tool("workflow_health_001.py")
     if '"status": "healthy"' in health:
-        print("      [OK] 系统健康")
+        print("[OK] Healthy")
     else:
-        print("      [!] 需要检查")
+        print("[!] Need check")
     
     # 2. Topology
-    print("  [2] 拓扑视图...")
+    print("  [2] Topology View...", end=" ")
     topo = run_tool("topology_viz_001.py", "--json")
     try:
         data = json.loads(topo)
         tools = data.get("summary", {}).get("total_tools", "?")
         health_score = data.get("summary", {}).get("health_score", "?")
-        print(f"      工具: {tools} | 健康: {health_score}%")
-    except (json.JSONDecodeError, IOError, OSError):
-        print("      [OK] 正常")
+        print(f"Tools: {tools} | Health: {health_score}%")
+    except:
+        print("[OK] Normal")
     
     # 3. Self-Heal Status
-    print("  [3] 自愈状态...")
+    print("  [3] Self-Heal Status...", end=" ")
     heal = run_tool("self_heal_001.py", "--predict")
     if "High-risk: 0" in heal:
-        print("      [OK] 无风险")
+        print("[OK] No risk")
     elif "High-risk:" in heal:
         risk_line = [l for l in heal.split("\n") if "High-risk:" in l]
-        print(f"      {risk_line[0].strip() if risk_line else ''}")
+        print(risk_line[0].strip() if risk_line else "")
     
     # 4. Code Quality
-    print("  [4] 代码质量...")
-    # Count issues
+    print("  [4] Code Quality...", end=" ")
     issues = Path("13-memory/.code_quality_report.json")
     if issues.exists():
         try:
@@ -66,27 +69,26 @@ def main():
             clean = data.get("clean_files", 0)
             total = data.get("total", 1)
             pct = int(clean)/int(total)*100 if total else 0
-            print(f"      Clean: {clean}/{total} ({pct:.0f}%)")
-        except (json.JSONDecodeError, IOError, OSError):
-            print("      [OK] 正常")
+            print(f"Clean: {clean}/{total} ({pct:.0f}%)")
+        except:
+            print("[OK] Normal")
     
     # 5. Multi-Agent Status
-    print("  [5] Agent状态...")
+    print("  [5] Agent Status...", end=" ")
     viz = run_tool("multi_agent_viz_001.py")
     if "PLANNER" in viz:
-        print("      [OK] Personas激活")
+        print("[OK] Personas active")
     else:
-        print("      [OK] 正常")
+        print("[OK] Normal")
     
     print("")
     print("  " + "-" * 50)
-    print("  快速操作:")
+    print("  Quick Actions:")
     print("  " + "-" * 50)
-    print("  dev     full    plan    security  quick")
-    print("  health  topo    heal    quality   agent")
+    print("  dev | full | plan | security | quick")
+    print("  health | topo | heal | quality | agent | report")
     print("")
     
-    # Interactive mode
     if len(sys.argv) < 2:
         print("=" * 60)
         return

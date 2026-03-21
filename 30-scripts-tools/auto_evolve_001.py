@@ -9,6 +9,10 @@ from pathlib import Path
 from datetime import datetime
 from collections import defaultdict, Counter
 
+if sys.platform == 'win32':
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
 TOOLS_DIR = Path("30-scripts-tools")
 EVOLUTION_DIR = Path("13-memory/.evolution")
 EVOLUTION_DIR.mkdir(exist_ok=True)
@@ -28,7 +32,6 @@ class SelfEvolution:
         self.evolution_log.write_text(json.dumps(self.log, indent=2, ensure_ascii=False))
     
     def analyze_patterns(self):
-        """Analyze code patterns to find improvement opportunities"""
         patterns = {
             "repeated_code": [],
             "missing_features": [],
@@ -36,74 +39,36 @@ class SelfEvolution:
             "unused_functions": [],
         }
         
-        # Analyze tools
         for f in TOOLS_DIR.glob("*_001.py"):
             if f.name.startswith("__"):
                 continue
             try:
                 content = f.read_text(encoding="utf-8", errors="replace")
-                
-                # Find repeated patterns
                 lines = [l.strip() for l in content.split("\n") if l.strip()]
                 
-                # Check for TODO/FIXME
                 if "TODO" in content or "FIXME" in content:
                     patterns["missing_features"].append(f.name)
                 
-                # Check for long functions
                 if len(content.split("\n")) > 300:
                     patterns["optimization_points"].append(f.name)
                 
-                # Check for print without logging
                 if "print(" in content and "logging" not in content:
                     patterns["optimization_points"].append(f.name)
                     
-            except (IOError, OSError):
+            except:
                 pass
         
         return patterns
     
     def generate_improvement(self, tool_name, improvement_type):
-        """Generate code improvement for a tool"""
-        
         improvements = {
-            "add_logging": '''
-    # Auto-evolution: Added structured logging
-    import logging
-    logger = logging.getLogger(__name__)
-    logger.setLevel(logging.INFO)
-    if not logger.handlers:
-        handler = logging.FileHandler("{log_file}")
-        handler.setFormatter(logging.Formatter("%(asctime)s - %(name)s - %(levelname)s - %(message)s"))
-        logger.addHandler(handler)
-'''.format(log_file=str(EVOLUTION_DIR / f"{tool_name}.log")),
-            
-            "add_error_handling": '''
-    # Auto-evolution: Enhanced error handling
-    def safe_execute(func):
-        def wrapper(*args, **kwargs):
-            try:
-                return func(*args, **kwargs)
-            except Exception as e:
-                logger.error(f"Error in {func.__name__}: {{e}}")
-                return None
-        return wrapper
-''',
-            
-            "add_caching": '''
-    # Auto-evolution: Added caching
-    from functools import lru_cache
-    @lru_cache(maxsize=128)
-    def cached_operation(data):
-        # Cached version
-        return data
-''',
+            "add_logging": '# Auto-evolution: Added structured logging',
+            "add_error_handling": '# Auto-evolution: Enhanced error handling',
+            "add_caching": '# Auto-evolution: Added caching (lru_cache)',
         }
-        
         return improvements.get(improvement_type, "")
     
     def create_new_tool(self, spec):
-        """Auto-generate a new tool from specification"""
         name = spec.get("name", "new_tool")
         purpose = spec.get("purpose", "Auto-generated tool")
         code = f'''#!/usr/bin/env python
@@ -137,7 +102,6 @@ if __name__ == "__main__":
         return tool_path
     
     def evolve(self, iterations=3):
-        """Run evolution cycles"""
         print(f"\n[AUTO-EVOLVE-001] Starting evolution ({iterations} cycles)")
         print("=" * 50)
         
@@ -146,21 +110,17 @@ if __name__ == "__main__":
         for i in range(iterations):
             print(f"\n[Generation {i+1}]")
             
-            # Analyze
             patterns = self.analyze_patterns()
             print(f"  Patterns found: {sum(len(v) for v in patterns.values())}")
             
-            # Generate improvements
             improvements = []
             if patterns["optimization_points"]:
                 improvements.append("Add caching")
             if patterns["missing_features"]:
                 improvements.append("Add error handling")
             
-            # Create new tools
             new_tools = []
-            if i == 0:  # First generation creates new tools
-                # Generate a tool maker
+            if i == 0:
                 tool_spec = {
                     "name": f"evolved_tool_{i+1}",
                     "purpose": f"Auto-evolved capability from generation {i+1}"
@@ -179,7 +139,6 @@ if __name__ == "__main__":
             print(f"  Improvements: {improvements}")
             print(f"  New tools: {new_tools}")
             
-            # Record evolution
             self.log["generations"].append(result)
         
         self.save_log()
@@ -187,7 +146,6 @@ if __name__ == "__main__":
         return results
     
     def generate_report(self):
-        """Generate evolution report"""
         patterns = self.analyze_patterns()
         
         report = {
@@ -201,7 +159,6 @@ if __name__ == "__main__":
         return report
     
     def generate_suggestions(self, patterns):
-        """Generate actionable suggestions based on patterns"""
         suggestions = []
         
         if patterns["optimization_points"]:
@@ -223,10 +180,11 @@ def main():
     print("=" * 50)
     
     if "--evolve" in sys.argv:
-        iterations = int(sys.argv[sys.argv.index("--evolve") + 1]) if "--evolve" in sys.argv and len(sys.argv) > 2 else 3
+        idx = sys.argv.index("--evolve") if "--evolve" in sys.argv else -1
+        iterations = int(sys.argv[idx + 1]) if idx >= 0 and idx + 1 < len(sys.argv) else 3
         results = evolver.evolve(iterations)
         
-        print(f"\n[EVOLED] {len(results)} generations complete")
+        print(f"\n[EVOLVED] {len(results)} generations complete")
         for r in results:
             print(f"  Gen {r['generation']}: {r['new_tools']}")
     
