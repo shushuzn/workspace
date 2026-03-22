@@ -1,7 +1,7 @@
 """
-Stock PRO - Modular Stock Analysis Tool v13.0
+Stock PRO - Modular Stock Analysis Tool v14.0
 """
-__version__ = "13.0"
+__version__ = "14.0"
 
 # Core
 from .core import analyze, analyze_multiple, analyze_multiple_parallel, fetch, fetch_live, calc_score, calc_dcf

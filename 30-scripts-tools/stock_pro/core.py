@@ -63,24 +63,28 @@ def fetch_live(symbols):
     results = fetch_batch(symbols)
     return [{"symbol": s, "price": results.get(s, (0,))[0]} for s in symbols]
 
-def calc_dcf(symbol, price, shares=15, wacc=0.10, growth=0.15, de=0):
-    """DCF valuation"""
-    fcf = F.get(symbol, (0,0,0,0,0,0,0,0))[6] or 0.03
-    fcf_y1 = price * shares * fcf
-    cash_flows = []
-    for y in range(1, 6):
-        cf = fcf_y1 * ((1 + growth) ** y) / ((1 + wacc) ** y)
-        cash_flows.append(cf)
-    tv = cash_flows[-1] * (1 + growth) / (wacc - growth)
-    terminal = tv / ((1 + wacc) ** 5)
-    equity = sum(cash_flows) + terminal
-    intrinsic = equity / shares
-    upside = (intrinsic - price) / price * 100 if price else 0
+def calc_dcf(symbol, price, wacc=0.09, growth=0.10):
+    """Simplified DCF using PE-based valuation"""
+    eps = E.get(symbol, 0) or (price / 30)
+    _, _, _, _, _, rev_g, fcf_yield, _ = F.get(symbol, (0,0,0,0,0,0,0.05,0))
+    
+    # Target PE based on growth
+    target_pe = 25 + rev_g * 50  # Higher growth = higher PE
+    target_pe = min(target_pe, 50)  # Cap at 50x
+    
+    # Project EPS
+    eps_future = eps * ((1 + growth) ** 5)
+    
+    # Intrinsic = 5yr avg PE * avg EPS
+    intrinsic = eps * target_pe * 0.8 + eps_future * target_pe * 0.2
+    
+    upside = (intrinsic - price) / price * 100 if price > 0 else 0
+    
     return {
-        "dcf_base": intrinsic, 
-        "dcf_bull": intrinsic * 1.3, 
-        "dcf_bear": intrinsic * 0.7,
-        "upside": upside
+        "dcf_base": round(intrinsic, 2), 
+        "dcf_bull": round(intrinsic * 1.5, 2), 
+        "dcf_bear": round(intrinsic * 0.5, 2),
+        "upside": round(upside, 1)
     }
 
 def calc_score(symbol, price, data):
@@ -150,9 +154,9 @@ def analyze(symbol):
         "recommend": recommend,
         "pe": pe, "eps": eps, "beta": beta,
         "fpe": fpe, "peg": peg,
-        "gm": gm, "pm": pm, "roe": roe, "roic": roic,
-        "de": de, "rg": rg, "rev_g": rev_g,
-        "fcf": fcf, "div": div,
+        "gm": gm * 100, "pm": pm * 100, "roe": roe * 100, "roic": roic * 100,
+        "de": de, "rg": rg * 100, "rev_g": rev_g,
+        "fcf": fcf * 100, "div": div * 100,
         "analyst_rating": analyst_rating, "num_analysts": num_analysts,
         "dcf_base": dcf["dcf_base"],
         "dcf_bull": dcf["dcf_bull"],
