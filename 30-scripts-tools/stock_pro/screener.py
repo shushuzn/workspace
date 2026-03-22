@@ -1,5 +1,5 @@
-"""Stock screener"""
-from .core import A, F, P, B, E, calc_score, fetch_live
+"""Stock screener - Optimized v12.8"""
+from .core import A, F, P, B, E, calc_score, analyze_multiple_parallel
 
 class StockScreener:
     def __init__(self, min_score=60, min_upside=15, max_pe=40):
@@ -7,28 +7,42 @@ class StockScreener:
         self.min_upside = min_upside
         self.max_pe = max_pe
     
-    def screen(self, live=False):
+    def screen(self, live=True):
+        """Screen stocks using parallel analysis"""
+        symbols = list(F.keys())
+        
+        # Use parallel analysis for speed
+        if live:
+            results_dict = analyze_multiple_parallel(symbols, max_workers=10)
+        else:
+            results_dict = {}
+            for sym in symbols:
+                from .core import analyze
+                results_dict[sym] = analyze(sym)
+        
         results = []
-        for sym in F.keys():
-            price = P.get(sym, 100)
-            if live:
-                p = fetch_live(sym)
-                if p > 0: price = p
-            fin = F[sym]
-            eps = E.get(sym, 3)
-            beta = B.get(sym, 1)
-            analyst = A.get(sym, A["META"])
-            pe = price / eps if eps > 0 else 50
-            upside = (analyst[0] - price) / price * 100
-            score = calc_score(sym, price, A.get(sym, A["META"]))
-            rev_g = fin[5]
+        for sym, data in results_dict.items():
+            if not data:
+                continue
+            score = data.get("score", 0)
+            upside = data.get("upside", 0)
+            pe = data.get("pe", 999)
+            
             if score >= self.min_score and upside >= self.min_upside and pe <= self.max_pe:
                 results.append({
-                    "symbol": sym, "price": price, "target": analyst[0], "upside": upside,
-                    "score": score, "pe": pe, "peg": pe / (rev_g * 100) if rev_g > 0 else 5,
-                    "roe": fin[2] * 100, "fcf": fin[6] * 100, "div": fin[7] * 100,
-                    "rating": "BUY" if score >= 65 else "HOLD" if score >= 55 else "SELL",
+                    "symbol": sym,
+                    "price": data.get("price", 0),
+                    "target": data.get("target", 0),
+                    "upside": upside,
+                    "score": score,
+                    "pe": pe,
+                    "peg": data.get("peg", 5),
+                    "roe": data.get("roe", 0),
+                    "fcf": data.get("fcf", 0) * 100,
+                    "div": data.get("div", 0),
+                    "rating": data.get("rating_int", "HOLD"),
                 })
+        
         results.sort(key=lambda x: x["score"], reverse=True)
         return results
     

@@ -1,104 +1,104 @@
 {
-  "last_update": "2026-03-22T11:43:14.759517",
+  "last_update": "2026-03-22T16:09:49.389322",
   "portfolio": {
     "stocks": 54,
-    "total_value": 16123,
+    "total_value": 15340.65,
     "total_target": 19575,
-    "avg_upside": 21.410407492402157,
-    "avg_score": 50.2962962962963
+    "avg_upside": 27.60215505861877,
+    "avg_score": 53.22222222222222
   },
   "sectors": [
     {
-      "name": "Technology",
-      "stocks": 31,
-      "avg_score": 55.483870967741936,
-      "avg_upside": 32.89965266538024
-    },
-    {
-      "name": "Finance",
-      "stocks": 5,
-      "avg_score": 48.4,
-      "avg_upside": 14.748318481451914
-    },
-    {
-      "name": "Healthcare",
-      "stocks": 6,
-      "avg_score": 46.666666666666664,
-      "avg_upside": 20.814529258077645
-    },
-    {
-      "name": "Technology/Auto",
-      "stocks": 2,
-      "avg_score": 46.5,
-      "avg_upside": 26.602564102564102
-    },
-    {
-      "name": "Industrial",
+      "name": "Consumer",
       "stocks": 3,
-      "avg_score": 43.666666666666664,
-      "avg_upside": 14.612625538020085
-    },
-    {
-      "name": "Energy",
-      "stocks": 2,
-      "avg_score": 38.5,
-      "avg_upside": 13.18840579710145
+      "avg_score": 60.0,
+      "avg_upside": 0.9332691703008799
     },
     {
       "name": "ETF",
       "stocks": 2,
-      "avg_score": 37.5,
-      "avg_upside": 7.870370370370369
+      "avg_score": 60.0,
+      "avg_upside": -10.617310649778739
     },
     {
-      "name": "Consumer",
+      "name": "Energy",
+      "stocks": 2,
+      "avg_score": 60.0,
+      "avg_upside": -17.155510079870865
+    },
+    {
+      "name": "Industrial",
       "stocks": 3,
-      "avg_score": 32.666666666666664,
-      "avg_upside": 7.802463237245846
+      "avg_score": 60.0,
+      "avg_upside": -18.19892265578209
+    },
+    {
+      "name": "Finance",
+      "stocks": 5,
+      "avg_score": 55.8,
+      "avg_upside": 7.3011315820988445
+    },
+    {
+      "name": "Technology",
+      "stocks": 31,
+      "avg_score": 52.516129032258064,
+      "avg_upside": 95.2355065374252
+    },
+    {
+      "name": "Healthcare",
+      "stocks": 6,
+      "avg_score": 51.166666666666664,
+      "avg_upside": 25.120545377451645
+    },
+    {
+      "name": "Technology/Auto",
+      "stocks": 2,
+      "avg_score": 30.0,
+      "avg_upside": -15.727105321350866
     }
   ],
   "top_gainers": [
     {
-      "symbol": "GOOGL",
-      "upside": 92.10526315789474
+      "symbol": "NOW",
+      "upside": 715.3651023736185
     },
     {
-      "symbol": "AMZN",
-      "upside": 77.77777777777779
+      "symbol": "NFLX",
+      "upside": 662.3611413635374
     },
     {
-      "symbol": "DASH",
-      "upside": 63.63636363636363
+      "symbol": "AVGO",
+      "upside": 479.69147531480473
     },
     {
-      "symbol": "NVDA",
-      "upside": 56.395348837209305
+      "symbol": "TEAM",
+      "upside": 198.38600298386
     },
     {
-      "symbol": "SNOW",
-      "upside": 55.55555555555556
+      "symbol": "ADBE",
+      "upside": 149.84888172476326
     }
   ],
   "top_scores": [
     {
       "symbol": "NVDA",
-      "score": 87
+      "score": 60
+    },
+    {
+      "symbol": "MSFT",
+      "score": 60
     },
     {
       "symbol": "GOOGL",
-      "score": 83
+      "score": 60
     },
     {
-      "symbol": "META",
-      "score": 75
+      "symbol": "AMZN",
+      "score": 60
     },
     {
-      "symbol": "DASH",
-      "score": 71
-    },
-    {
-      "symbol": "COIN",
-      "score": 66
+      "symbol": "AMD",
+      "score": 60
     }
   ]
 }

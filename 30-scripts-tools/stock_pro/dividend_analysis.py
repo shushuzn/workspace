@@ -111,6 +111,10 @@ def calc_dividend_score(symbol):
 
 def dividend_report(symbols):
     """Generate dividend report"""
+    # Support single symbol
+    if isinstance(symbols, str):
+        symbols = [symbols]
+    
     report = "# Dividend Analysis Report\n\n"
     report += "| Symbol | Yield | Payout | Growth | Streak | Score | Grade |\n"
     report += "|--------|-------|--------|--------|--------|-------|-------|\n"

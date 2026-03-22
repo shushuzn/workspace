@@ -1,5 +1,34 @@
 # Stock PRO Changelog
 
+## [13.0] - 2026-03-22
+### New Features
+- `picks.py`: New module with quick stock screening
+  - `top_picks(n)` - Top N overall picks
+  - `value_picks()` - Best value stocks
+  - `growth_picks()` - Fastest growing stocks
+  - `dividend_picks()` - Best dividend stocks
+  - `momentum_picks()` - Best momentum stocks
+
+### UI
+- `simple_ui.py`: Simple HTML UI (no install required)
+- `dash_app.py`: Full Dash UI with charts
+- `install_dash.py`: Dash installation helper
+
+### Performance
+- All pick functions use parallel analysis
+
+## [12.9] - 2026-03-22
+### Performance Optimizations
+- `core.py`: Added `fetch_batch()` for batch API calls
+- `core.py`: Optimized `analyze_multiple_parallel()` with batch fetch
+- `screener.py`: Replaced sequential loop with parallel analysis
+- New `prewarm_cache()` function for cache warming
+
+### Compatibility Fixes
+- Added `dcf_base`, `dcf_bull`, `dcf_bear` fields to analyze()
+- Added `recommend`, `rev_g`, `analyst_rating` fields to analyze()
+- Fixed report generation compatibility
+
 ## [12.3] - 2026-03-22
 ### Enhanced
 - Archive workflow v2: auto versioning, checksum verification, commit types

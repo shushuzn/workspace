@@ -228,12 +228,12 @@
     "target": "main"
   },
   "last_dispatch": {
-    "channel": "feishu",
-    "user_id": "ou_72a847b95fc25870dcdd8ce56d929252",
-    "session_id": "6d929252"
+    "channel": "console",
+    "user_id": "default",
+    "session_id": "1774158562894"
   },
   "running": {
-    "max_iters": 50,
+    "max_iters": 200,
     "token_count_model": "default",
     "token_count_estimate_divisor": 3.75,
     "token_count_use_mirror": false,

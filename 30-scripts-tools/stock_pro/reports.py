@@ -7,6 +7,11 @@ OUTPUT = WORKSPACE / "50-reports" / "stocks"
 OUTPUT.mkdir(parents=True, exist_ok=True)
 
 def gen_report(data, lang="en"):
+    """Generate analysis report from symbol or analyze() result"""
+    # Support both symbol string and analyze() dict
+    if isinstance(data, str):
+        from stock_pro.core import analyze
+        data = analyze(data)
     sym = data["symbol"]
     cn = lang == "cn"
     f = lambda t, e: t if cn else e

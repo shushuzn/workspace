@@ -1,10 +1,10 @@
 """
-Stock PRO - Modular Stock Analysis Tool v12.4
+Stock PRO - Modular Stock Analysis Tool v13.0
 """
-__version__ = "12.4"
+__version__ = "13.0"
 
 # Core
-from .core import analyze, analyze_multiple, fetch, fetch_live, calc_score, calc_dcf
+from .core import analyze, analyze_multiple, analyze_multiple_parallel, fetch, fetch_live, calc_score, calc_dcf
 
 # Data & Config
 from .config import load_config, save_config
@@ -45,7 +45,7 @@ from .watchlist_v2 import (
 )
 
 # Picks
-from .picks import get_top_picks, get_top_picks_report, quick_picks
+from .picks import value_picks, growth_picks, dividend_picks, momentum_picks, top_picks
 
 # Performance
 from .performance import performance_report, performance_metrics, risk_adjusted_report
@@ -107,7 +107,7 @@ from .fscore import calc_fscore, fscore_report
 
 __all__ = [
     # Core
-    'analyze', 'analyze_multiple', 'fetch', 'calc_score', 'calc_dcf',
+    'analyze', 'analyze_multiple', 'analyze_multiple_parallel', 'fetch', 'calc_score', 'calc_dcf', 'fetch_batch', 'prewarm_cache',
     # Data
     'A', 'F', 'P', 'B', 'E',
     # Analysis
@@ -120,4 +120,6 @@ __all__ = [
     'earnings_report', 'predict_earnings_beat',
     'dividend_report', 'calc_dividend_score',
     'fscore_report', 'calc_fscore',
+    # Picks
+    'value_picks', 'growth_picks', 'dividend_picks', 'momentum_picks', 'top_picks',
 ]

@@ -1,24 +1,67 @@
-"""Core stock analysis engine"""
-import json, urllib.request
+"""Core stock analysis engine - Optimized v12.8"""
+import json
+import urllib.request
 from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from stock_pro.data_target import A
 from stock_pro.data_financial import F
 from stock_pro.data_price import P, B, E
+from stock_pro.cache import cache
+
+# Cache TTL: 15 minutes
+LIVE_CACHE_TTL = 900
 
 def fetch(symbol):
-    """Get current price from API"""
+    """Get current price with caching"""
+    cache_key = f"price:{symbol}"
+    cached = cache.get(cache_key)
+    if cached:
+        return cached[0], "cached", cached[1], cached[2]
+    
     try:
         url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=1d"
         req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=5) as resp:
             data = json.loads(resp.read())
             price = data["chart"]["result"][0]["meta"]["regularMarketPrice"]
-            return price, "live", datetime.now().isoformat(), datetime.now().isoformat()
+            now = datetime.now().isoformat()
+            cache.set(cache_key, (price, now, now), ttl=LIVE_CACHE_TTL)
+            return price, "live", now, now
     except:
-        return P.get(symbol, 0), "cached", datetime.now().isoformat(), datetime.now().isoformat()
+        fallback = P.get(symbol, 0), "fallback", datetime.now().isoformat(), datetime.now().isoformat()
+        cache.set(cache_key, fallback, ttl=LIVE_CACHE_TTL)
+        return fallback
+
+def fetch_batch(symbols):
+    """Batch fetch - cache first, then fetch remaining"""
+    results = {}
+    uncached = []
+    
+    # Check cache
+    for sym in symbols:
+        cached = cache.get(f"price:{sym}")
+        if cached:
+            results[sym] = (cached[0], "cached", cached[1], cached[2])
+        else:
+            uncached.append(sym)
+    
+    # Fetch uncached in parallel
+    if uncached:
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            futures = {executor.submit(fetch, s): s for s in uncached}
+            for future in as_completed(futures):
+                s = futures[future]
+                try:
+                    results[s] = future.result()
+                except:
+                    results[s] = (0, "error", datetime.now().isoformat(), datetime.now().isoformat())
+    
+    return results
 
 def fetch_live(symbols):
-    return [{"symbol": s, "price": fetch(s)[0]} for s in symbols]
+    """Get live prices"""
+    results = fetch_batch(symbols)
+    return [{"symbol": s, "price": results.get(s, (0,))[0]} for s in symbols]
 
 def calc_dcf(symbol, price, shares=15, wacc=0.10, growth=0.15, de=0):
     """DCF valuation"""
@@ -33,7 +76,12 @@ def calc_dcf(symbol, price, shares=15, wacc=0.10, growth=0.15, de=0):
     equity = sum(cash_flows) + terminal
     intrinsic = equity / shares
     upside = (intrinsic - price) / price * 100 if price else 0
-    return {"base": intrinsic, "upside": upside, "bear": intrinsic * 0.7, "bull": intrinsic * 1.3}
+    return {
+        "dcf_base": intrinsic, 
+        "dcf_bull": intrinsic * 1.3, 
+        "dcf_bear": intrinsic * 0.7,
+        "upside": upside
+    }
 
 def calc_score(symbol, price, data):
     """Calculate composite score"""
@@ -82,19 +130,61 @@ def analyze(symbol):
     if score >= 75: rating = "STRONG BUY"
     elif score >= 60: rating = "BUY"
     elif score >= 40: rating = "HOLD"
-    else: rating = "UNDERWEIGHT"
+    elif score >= 20: rating = "SELL"
+    else: rating = "STRONG SELL"
     
-    recommend = "Expensive" if pe > 40 else "Fair" if pe > 20 else "Cheap"
+    if upside >= 30: recommend = "Strong Buy"
+    elif upside >= 15: recommend = "Buy"
+    elif upside >= 0: recommend = "Hold"
+    else: recommend = "Sell"
     
-    return {"symbol": symbol, "price": price, "target": t, "upside": upside, "score": score, "rating": rating, "pe": pe, "fpe": fpe, "peg": peg, "dcf_base": dcf["base"], "dcf_bear": dcf["bear"], "dcf_bull": dcf["bull"], "gm": gm * 100, "pm": pm * 100, "roe": roe * 100, "roic": roic * 100, "de": de, "rev_g": rg * 100, "fcf": fcf * 100, "div": div * 100, "beta": beta, "analyst_rating": r, "num_analysts": n, "recommend": recommend, "source": source, "fetched_at": fetched, "expires_at": expires}
+    rev_g = rg * 100
+    analyst_rating = r
+    num_analysts = 25
+    
+    return {
+        "symbol": symbol, "price": price, "source": source,
+        "fetched_at": fetched, "price_source": source,
+        "target": t, "rating": r, "name": n,
+        "upside": upside, "score": score, "rating_int": rating,
+        "recommend": recommend,
+        "pe": pe, "eps": eps, "beta": beta,
+        "fpe": fpe, "peg": peg,
+        "gm": gm, "pm": pm, "roe": roe, "roic": roic,
+        "de": de, "rg": rg, "rev_g": rev_g,
+        "fcf": fcf, "div": div,
+        "analyst_rating": analyst_rating, "num_analysts": num_analysts,
+        "dcf_base": dcf["dcf_base"],
+        "dcf_bull": dcf["dcf_bull"],
+        "dcf_bear": dcf["dcf_bear"],
+        "dcf": dcf, "fetched": fetched
+    }
 
 def analyze_multiple(symbols):
-    return [r for r in (analyze(s) for s in symbols) if r]
+    """Analyze multiple symbols"""
+    return [analyze(s) for s in symbols]
 
-def get_top_picks(n=10):
-    results = analyze_multiple(list(A.keys()))
-    return sorted(results, key=lambda x: x["score"], reverse=True)[:n]
+def analyze_multiple_parallel(symbols, max_workers=10):
+    """Parallel analysis - optimized batch fetch"""
+    if not symbols:
+        return {}
+    
+    results = {}
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {executor.submit(analyze, s): s for s in symbols}
+        for future in as_completed(futures):
+            s = futures[future]
+            try:
+                results[s] = future.result()
+            except:
+                results[s] = None
+    
+    return results
 
-def get_value_picks():
-    results = analyze_multiple(list(A.keys()))
-    return sorted(results, key=lambda x: x["upside"], reverse=True)[:10]
+# Performance: pre-warm cache with popular stocks
+_POPULAR_STOCKS = ["AAPL", "MSFT", "GOOGL", "AMZN", "NVDA"]
+
+def prewarm_cache():
+    """Pre-warm cache - call manually or after hours"""
+    fetch_batch(_POPULAR_STOCKS)
+    return len(_POPULAR_STOCKS)

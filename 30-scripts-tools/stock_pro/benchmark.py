@@ -2,6 +2,9 @@
 
 def benchmark_vs_index(symbols, benchmark="SPY"):
     """Compare stock performance vs benchmark index"""
+    # Support single symbol string
+    if isinstance(symbols, str):
+        symbols = [symbols]
     from stock_pro.history import _history
     from stock_pro.core import analyze_multiple, P
     

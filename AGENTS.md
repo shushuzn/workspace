@@ -8,6 +8,25 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 
 ## Every Session
 
+**统一工作流入口 (2026-03-22 更新):**
+
+```bash
+# 开始任务
+py 30-scripts-tools/workflow.py start "任务名称"
+
+# 保存进度
+py 30-scripts-tools/workflow.py save "进度描述"
+
+# 运行测试
+py 30-scripts-tools/workflow.py test
+
+# 查看状态
+py 30-scripts-tools/workflow.py status
+
+# 结束会话
+py 30-scripts-tools/workflow.py end "完成描述"
+```
+
 **Context Loading (最高优先级 - 2026-03-18):**
 
 1. ✅ **Load only 7 core files** (<100KB)
@@ -28,17 +47,18 @@ If `BOOTSTRAP.md` exists, that's your birth certificate. Follow it, figure out w
 
 **Session Compression (每次对话结束必须):**
 
-1. ✅ **Pre-session:** `py pre-session-hook.py` (检查上下文)
-2. ✅ **During session:** 记录关键决策到 `session_temp.json`
-3. ✅ **Post-session:** `py post_session_compress.py --auto` (压缩保存)
-4. ✅ **End session:** `py session_end.py "完成描述"` (自动使用 Flow ID: `20260318-universal-workflow-001`)
+```bash
+# 1. 保存进度 (可选)
+py workflow.py save "进度描述"
+
+# 2. 结束会话 (自动压缩 + 保存内存)
+py workflow.py end "完成描述"
+```
 
 **压缩效果:**
 - 完整对话：~50KB → 结构化摘要：~2KB (**-96%**)
-- Token 使用：~12,500 → ~500 (**-96%**)
 - 信息密度：提升**25x**
-- Speed: >11000x faster (current: 11562x) ✅
-- Token usage: <20K (current: ~15.5K) ✅
+- Speed: >11000x faster ✅
 
 **Dashboard:** v4.1-Persona (Default)
 - **Start Command:** `start-dashboard.bat`

@@ -11,6 +11,10 @@ def calc_var(returns, confidence=0.95):
 
 def risk_profile(result):
     """Generate risk profile for a stock"""
+    # Support both analyze() dict and symbol string
+    if isinstance(result, str):
+        from stock_pro.core import analyze
+        result = analyze(result)
     sym = result["symbol"]
     beta = result.get("beta", 1.0)
     pe = result.get("pe", 0)
@@ -80,6 +84,10 @@ def risk_report(results):
 
 def diversification_check(portfolio_results):
     """Check portfolio diversification"""
+    # Support both analyze() results list and symbol list
+    if portfolio_results and isinstance(portfolio_results[0], str):
+        from stock_pro.core import analyze_multiple
+        portfolio_results = analyze_multiple(portfolio_results)
     sectors = {}
     for r in portfolio_results:
         sym = r["symbol"]

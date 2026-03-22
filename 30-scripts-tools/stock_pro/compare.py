@@ -7,6 +7,9 @@ from stock_pro.data_price import P, B, E
 
 def compare_stocks(symbols):
     """Compare multiple stocks side by side"""
+    # Support single symbol string
+    if isinstance(symbols, str):
+        symbols = [symbols]
     if not symbols:
         return "[ERROR] No symbols provided"
     
@@ -71,6 +74,9 @@ def compare_stocks(symbols):
 
 def compare_sectors(symbols):
     """Compare stocks by sector"""
+    # Support single symbol string
+    if isinstance(symbols, str):
+        symbols = [symbols]
     from stock_pro.sectors import get_sector
     
     results = analyze_multiple(symbols)
@@ -102,6 +108,9 @@ def compare_sectors(symbols):
 
 def compare_risk(symbols):
     """Compare risk metrics"""
+    # Support single symbol string
+    if isinstance(symbols, str):
+        symbols = [symbols]
     results = analyze_multiple(symbols)
     
     report = "# Risk Comparison\n\n"

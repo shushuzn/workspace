@@ -90,6 +90,9 @@ def get_advanced_metrics(symbol):
 
 def get_all_advanced_metrics(symbols=None):
     """Get advanced metrics for multiple symbols"""
+    # Support single symbol string
+    if isinstance(symbols, str):
+        symbols = [symbols]
     symbols = symbols or list(A.keys())
     return [m for m in (get_advanced_metrics(s) for s in symbols) if m]
 

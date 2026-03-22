@@ -1,0 +1,133 @@
+#!/usr/bin/env python
+"""Rebuild simple_ui.py from scratch"""
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from stock_pro import top_picks, value_picks, growth_picks, dividend_picks
+from datetime import datetime
+
+def make_row(s):
+    score = s.get('score', 0)
+    upside = s.get('upside', 0)
+    color = '#00d26a' if score >= 75 else '#7bed9f' if score >= 60 else '#ffa502'
+    upc = '#00d26a' if upside >= 0 else '#ff4757'
+    return f'''<tr>
+    <td><strong>{s.get('symbol','')}</strong></td>
+    <td style="color:{color}">{score:.0f}</td>
+    <td style="color:{upc}">{upside:.1f}%</td>
+    <td>${s.get('price', 0):.2f}</td>
+    <td>{s.get('pe', 0):.1f}x</td>
+    <td>{s.get('roe', 0):.1f}%</td>
+    <td>{s.get('div', 0):.2f}%</td>
+</tr>'''
+
+try:
+    top = top_picks(10) or []
+    value = value_picks() or []
+    growth = growth_picks() or []
+    dividend = dividend_picks() or []
+except:
+    top = value = growth = dividend = []
+
+header = f'''#!/usr/bin/env python
+"""
+Stock PRO Simple UI v2.0 - With Charts
+Run: python simple_ui.py
+Open: http://127.0.0.1:8080
+"""
+import http.server
+import socketserver
+import json
+import sys
+from pathlib import Path
+from datetime import datetime
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from stock_pro import analyze
+from stock_pro.charts import generate_chart_data, get_stock_data_json
+
+PORT = 8080
+
+def generate_html():
+    from stock_pro import top_picks, value_picks, growth_picks, dividend_picks
+    try:
+        top = top_picks(10) or []
+        value = value_picks() or []
+        growth = growth_picks() or []
+        dividend = dividend_picks() or []
+    except:
+        top = value = growth = dividend = []
+    
+    def make_row(s):
+        score = s.get('score', 0)
+        upside = s.get('upside', 0)
+        color = '#00d26a' if score >= 75 else '#7bed9f' if score >= 60 else '#ffa502'
+        upc = '#00d26a' if upside >= 0 else '#ff4757'
+        return f\'\'\'''<tr>
+    <td><strong>{{s.get('symbol','')}}</strong></td>
+    <td style="color:{color}">{{score:.0f}}</td>
+    <td style="color:{upc}">{{upside:.1f}}%</td>
+    <td>${{s.get('price', 0):.2f}}</td>
+    <td>{{s.get('pe', 0):.1f}}x</td>
+    <td>{{s.get('roe', 0):.1f}}%</td>
+    <td>{{s.get('div', 0):.2f}}%</td>
+</tr>\'\'\'
+    
+    top_rows = ''.join(make_row(s) for s in top)
+    value_rows = ''.join(make_row(s) for s in value)
+    growth_rows = ''.join(make_row(s) for s in growth)
+    dividend_rows = ''.join(make_row(s) for s in dividend)
+    
+    timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    
+    return f\'\'\'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock PRO Dashboard</title>
+    <style>
+        * {{ margin: 0; padding: 0; box-sizing: border-box; }}
+        body {{ font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0f0c29, #302b63, #24243e); color: #fff; min-height: 100vh; padding: 20px; }}
+        .header {{ text-align: center; margin-bottom: 30px; padding: 20px; background: rgba(0,210,106,0.1); border-radius: 15px; border: 1px solid rgba(0,210,106,0.3); }}
+        h1 {{ color: #00d26a; margin-bottom: 5px; }}
+        .subtitle {{ color: #888; font-size: 14px; }}
+        .grid {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 20px; margin-bottom: 20px; }}
+        .card {{ background: rgba(22,33,62,0.9); border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 4px 20px rgba(0,0,0,0.3); }}
+        h2 {{ color: #7bed9f; margin-bottom: 15px; border-bottom: 2px solid #0f3460; padding-bottom: 10px; }}
+        table {{ width: 100%; border-collapse: collapse; }}
+        th, td {{ padding: 8px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.1); }}
+        th {{ color: #00d26a; font-size: 12px; text-transform: uppercase; }}
+        tr:hover {{ background: rgba(0,210,106,0.1); }}
+        .analyze-box {{ background: rgba(22,33,62,0.9); border-radius: 15px; padding: 25px; max-width: 600px; margin: 0 auto 30px; }}
+        input {{ padding: 15px 20px; font-size: 18px; border: 2px solid #0f3460; border-radius: 10px; width: 250px; background: rgba(0,0,0,0.3); color: #fff; outline: none; }}
+        input:focus {{ border-color: #00d26a; }}
+        button {{ padding: 15px 30px; font-size: 16px; background: linear-gradient(135deg, #00d26a, #00a854); border: none; border-radius: 10px; color: #fff; cursor: pointer; font-weight: bold; margin-left: 10px; }}
+        button:hover {{ transform: translateY(-2px); box-shadow: 0 4px 15px rgba(0,210,106,0.4); }}
+        .result-card {{ margin-top: 25px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px; display: none; }}
+        #chart-container {{ margin-top: 20px; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px; display: none; }}
+        canvas {{ width: 100% !important; }}
+        .legend {{ display: flex; gap: 20px; margin-top: 10px; font-size: 12px; }}
+        .legend-item {{ display: flex; align-items: center; gap: 5px; }}
+        .dot {{ width: 10px; height: 10px; border-radius: 50%; }}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Stock PRO Dashboard</h1>
+        <p class="subtitle">Last updated: {timestamp}</p>
+    </div>
+    
+    <div class="analyze-box">
+        <h2 style="border:none; margin-bottom:20px">Quick Analyze</h2>
+        <input type="text" id="symbol" value="NVDA" placeholder="Enter symbol...">
+        <button onclick="analyze()">Analyze</button>
+        <div id="result" class="result-card"></div>
+        <div id="chart-container">
+            <canvas id="priceChart"></canvas>
+            <div class="legend">
+                <div class="legend-item"><div class="dot" style="background:#00d26a"></div> Price</div>
+                <div class="legend-item"><div class="dot" style="background:#ffa502"></div> MA20</div>
+                <div class="legend-item"><div

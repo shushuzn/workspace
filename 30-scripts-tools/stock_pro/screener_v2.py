@@ -1,5 +1,5 @@
 """Advanced Screener - Multi-factor stock screening"""
-from stock_pro.core import A, F, P, analyze_multiple
+from stock_pro.core import A, F, P, analyze_multiple_parallel
 
 
 class AdvancedScreener:
@@ -54,12 +54,12 @@ class AdvancedScreener:
         return self
     
     def execute(self, symbols=None):
-        """Execute screener"""
+        """Execute screener with parallel analysis"""
         from stock_pro.core import A
         if symbols is None:
             symbols = list(A.keys())
         
-        self.results = analyze_multiple(symbols)
+        self.results = analyze_multiple_parallel(symbols, max_workers=10)
         return self
     
     def top(self, n=10):

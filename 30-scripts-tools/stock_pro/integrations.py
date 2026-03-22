@@ -76,7 +76,15 @@ def check_alerts(results, threshold=30):
     return f"[Alert] {len(alerts)} alerts" if alerts else f"[Alert] No alerts"
 
 def gen_chart(results, filename=None):
+    """Generate chart from analyze() results or symbol list"""
     if not PLT_AVAILABLE: return "[Chart] pip install matplotlib"
+    # Support single symbol or list of symbols
+    if isinstance(results, str):
+        from stock_pro.core import analyze
+        results = [analyze(results)]
+    elif isinstance(results, list) and len(results) > 0 and isinstance(results[0], str):
+        from stock_pro.core import analyze_multiple
+        results = analyze_multiple(results)
     if not filename: filename = OUTPUT / f"chart_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
     fig, axes = plt.subplots(2, 2, figsize=(12, 8))
     syms = [r['symbol'] for r in results]

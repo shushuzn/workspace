@@ -116,6 +116,10 @@ def score_model_v3(symbol, price, data):
 
 def get_all_scores(symbol):
     """Get scores from all models"""
+    # Support list of symbols
+    if isinstance(symbol, list):
+        return [get_all_scores(s) for s in symbol]
+    
     if symbol not in A:
         return None
     

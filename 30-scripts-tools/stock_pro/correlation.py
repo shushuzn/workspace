@@ -63,6 +63,10 @@ def correlation_report(symbols=None, days=30):
     """Generate correlation report"""
     from stock_pro.core import A
     
+    # Support single symbol string
+    if isinstance(symbols, str):
+        symbols = [symbols]
+    
     if symbols is None:
         symbols = list(A.keys())[:10]  # Limit to 10 for readability
     

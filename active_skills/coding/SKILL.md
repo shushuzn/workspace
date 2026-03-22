@@ -1,0 +1,398 @@
+---
+name: coding
+description: |
+  General-purpose coding workflow for AI agents. Use when: writing code, debugging,
+  refactoring, code review, or any programming task.
+license: MIT
+metadata:
+  version: "1.0.0"
+  category: programming
+  sources:
+    - "SOLID Principles"
+    - "PEP 8 Style Guide"
+    - "pytest documentation"
+---
+
+# Coding Studio
+
+Universal coding workflow for AI-assisted programming.
+
+## Invocation
+
+```bash
+# Part of session workflow
+py workflow.py start <task>   # Start coding task
+py workflow.py save <desc>    # Save progress
+py workflow.py test           # Run tests
+py workflow.py end <desc>    # Complete task
+```
+
+## Skill Structure
+
+```
+coding/
+├── SKILL.md           # Core skill (this file)
+├── templates/
+│   ├── python_template.py
+│   └── test_template.py
+└── scripts/
+    └── lint_check.py
+```
+
+## Compliance
+
+**All rules in this skill are mandatory.**
+
+- [ ] Four-stage workflow followed
+- [ ] Code review completed (ASK stage)
+- [ ] Tests written and passing
+- [ ] Error handling implemented
+- [ ] No forbidden operations
+- [ ] SOLID principles followed
+- [ ] Type hints added
+
+---
+
+## Workflow
+
+### Stage 1: Architect
+
+Define before coding:
+1. **Purpose** — What problem does this solve?
+2. **Data Flow** — Input → Process → Output
+3. **Files** — What to create/modify?
+4. **Edge Cases** — Error handling
+
+### Stage 2: Code
+
+Implement following Architect:
+1. Clean, documented code
+2. DEBUG comments for complexity
+3. Follow naming conventions
+4. Keep functions focused
+
+### Stage 3: Ask
+
+Self-review before testing:
+1. Edge cases handled?
+2. Error handling complete?
+3. Types correct?
+4. Dependencies valid?
+
+### Stage 4: Debug
+
+Verify correctness:
+1. Unit tests
+2. Integration tests
+3. Edge case tests
+
+---
+
+# 1. Naming Conventions
+
+## 1.1 Variables
+
+```python
+# Variables: snake_case
+user_name = "John"
+max_count = 100
+is_valid = True
+user_list = []
+
+# Avoid single letters except counters
+for i in range(n):
+    pass
+```
+
+## 1.2 Functions
+
+```python
+# Functions: snake_case with verb
+def get_user(user_id: int) -> User:
+def calculate_total(items: list) -> float:
+def validate_input(data: dict) -> bool:
+def process_batch(items: list) -> list:
+```
+
+## 1.3 Classes
+
+```python
+# Classes: PascalCase with noun
+class UserService:
+class PaymentProcessor:
+class DataValidator:
+class CacheManager:
+```
+
+## 1.4 Constants
+
+```python
+# Constants: UPPER_SNAKE_CASE
+MAX_RETRIES = 3
+DEFAULT_TIMEOUT = 30
+API_BASE_URL = "https://api.example.com"
+CACHE_TTL = 3600
+```
+
+---
+
+# 2. Code Structure
+
+## 2.1 Function Template
+
+```python
+def function_name(param: type, option: type = default) -> return_type:
+    """
+    Brief description of what this function does.
+
+    Args:
+        param: Description of the parameter
+        option: Description of optional parameter
+
+    Returns:
+        Description of return value
+
+    Raises:
+        ValueError: When param is invalid
+        TypeError: When param has wrong type
+    """
+    # DEBUG: Input validation
+    assert param > 0, "param must be positive"
+
+    # DEBUG: Key checkpoint
+    result = process(param)
+
+    return result
+```
+
+## 2.2 Class Template
+
+```python
+class DataProcessor:
+    """Brief description of the class."""
+
+    def __init__(self, config: dict) -> None:
+        """Initialize with configuration."""
+        self.config = config
+        self._cache = {}
+
+    def process(self, data: Any) -> Any:
+        """Process data according to config."""
+        # Implementation
+        return result
+```
+
+---
+
+# 3. Anti-Patterns
+
+## 3.1 Avoid
+
+| Anti-Pattern | Problem | Solution |
+|-------------|---------|----------|
+| `except:` | Catches everything | `except SpecificError:` |
+| `global` state | Hard to test | Dependency injection |
+| Deep nesting | Hard to read | Early return |
+| Magic numbers | Unclear meaning | Named constants |
+| Long functions | Hard to maintain | Split into smaller |
+| `==` for None | Not Pythonic | Use `is None` |
+
+## 3.2 Recommended
+
+```python
+# GOOD: Specific exceptions
+try:
+    result = divide(a, b)
+except ZeroDivisionError:
+    result = 0
+
+# GOOD: Early return
+def process(data):
+    if not data:
+        return None
+    # main logic
+
+# GOOD: Constants
+MAX_ITEMS = 100
+for item in items[:MAX_ITEMS]:
+    pass
+```
+
+---
+
+# 4. Testing
+
+## 4.1 Test Template
+
+```python
+import pytest
+
+class TestFunction:
+    """Tests for function_name."""
+
+    def test_normal_case(self):
+        """Test with valid input."""
+        # Arrange
+        input_data = valid_data
+        expected = expected_result
+
+        # Act
+        result = function_name(input_data)
+
+        # Assert
+        assert result == expected
+
+    def test_edge_case_empty(self):
+        """Test with empty input."""
+        result = function_name([])
+        assert result == default_value
+
+    def test_error_case(self):
+        """Test error handling."""
+        with pytest.raises(ValueError):
+            function_name(invalid_data)
+```
+
+## 4.2 Running Tests
+
+```bash
+# Run all tests
+pytest
+
+# Run specific file
+pytest test_file.py
+
+# Run with coverage
+pytest --cov=src --cov-report=html
+
+# Run with verbose
+pytest -v
+```
+
+---
+
+# 5. Type Hints
+
+## 5.1 Basic Types
+
+```python
+def func(a: int, b: str) -> bool:
+def process(items: list) -> dict:
+def get_user(user_id: int) -> Optional[User]:
+def parse(data: bytes) -> Any:
+```
+
+## 5.2 Complex Types
+
+```python
+from typing import List, Dict, Optional, Union, Callable
+
+def process_users(users: List[User]) -> Dict[str, User]:
+def validate(func: Callable[[int], bool]) -> bool:
+def get_config(key: str) -> Union[str, int, None]:
+```
+
+---
+
+# 6. Error Handling
+
+## 6.1 Exception Hierarchy
+
+```python
+class AppError(Exception):
+    """Base exception for app."""
+    pass
+
+class ValidationError(AppError):
+    """Input validation failed."""
+    pass
+
+class ProcessingError(AppError):
+    """Processing step failed."""
+    pass
+```
+
+## 6.2 Best Practices
+
+```python
+# GOOD: Specific exceptions with context
+try:
+    user = get_user(user_id)
+except UserNotFoundError:
+    logger.error(f"User not found: {user_id}")
+    raise
+
+# GOOD: Cleanup with finally
+file = None
+try:
+    file = open(path)
+    process(file)
+finally:
+    if file:
+        file.close()
+```
+
+---
+
+# 7. Safety Rules
+
+## 7.1 Forbidden Operations
+
+| Category | Examples | Penalty |
+|----------|----------|---------|
+| Shell Direct | `bash`, `sh`, `cmd` | 50 pts |
+| Execute Code | `os.system()`, `exec()` | 50 pts |
+| Network Raw | `curl\|bash` | 50 pts |
+
+## 7.2 Allowed Operations
+
+| Category | Functions |
+|----------|-----------|
+| Read | `read_file` |
+| Write | `write_file`, `edit_file` |
+| Browser | `browser_use`, `screenshot` |
+| Shell Safe | `safe_shell_executor.py` |
+
+---
+
+# 8. Session Workflow
+
+## 8.1 Complete Workflow
+
+```bash
+# 1. Start session
+py workflow.py start "Build feature X"
+
+# 2. Architect
+#    - Define purpose
+#    - Plan data flow
+#    - List files
+#    - Identify edge cases
+
+# 3. Code
+#    - Implement per plan
+#    - Add DEBUG comments
+#    - Follow conventions
+
+# 4. Save progress
+py workflow.py save "Core logic implemented"
+
+# 5. Ask (Self-review)
+#    - Check edge cases
+#    - Verify error handling
+#    - Review types
+
+# 6. Debug (Test)
+py workflow.py test
+
+# 7. End session
+py workflow.py end "Feature X complete"
+```
+
+## 8.2 Quick Workflow
+
+```bash
+py workflow.py start "Fix bug"
+# Code and test inline
+py workflow.py end "Bug fixed"
+```

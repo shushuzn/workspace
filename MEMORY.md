@@ -263,6 +263,23 @@ Feedback Loop
 
 ---
 
+### Workflow System (2026-03-22)
+**Tags:** #workflow #system
+
+**Unified Entry:** `workflow.py` (replaced 500+ scripts)
+
+| Command | Purpose |
+|---------|---------|
+| `start <task>` | Initialize session |
+| `save <desc>` | Save progress |
+| `test` | Run tests |
+| `status` | View status |
+| `end <desc>` | End session |
+
+**Archive:** 500+ old scripts → `archive_001/`
+
+---
+
 ## Key Metrics
 **Tags:** #metric #high
 
@@ -275,6 +292,8 @@ Feedback Loop
 | Memory Insights | 430 total | 2026-03-17 |
 | Distillation Success | 88.9% | 2026-03-17 |
 | 7-Persona Execution | 96/100 | 2026-03-17 |
+| Stock PRO Tests | 18/18 | 2026-03-22 |
+| Archived Files | 500+ | 2026-03-22 |
 
 ---
 

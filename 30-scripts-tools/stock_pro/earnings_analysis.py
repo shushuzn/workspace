@@ -91,6 +91,10 @@ def predict_earnings_beat(symbol):
 
 def earnings_report(symbols):
     """Generate earnings report"""
+    # Support single symbol
+    if isinstance(symbols, str):
+        symbols = [symbols]
+    
     report = "# Earnings Analysis Report\n\n"
     report += "| Symbol | Current EPS | Forward EPS | Growth | Yield | Beat Prob |\n"
     report += "|--------|-------------|-------------|--------|--------|------------|\n"
