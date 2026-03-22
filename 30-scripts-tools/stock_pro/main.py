@@ -7,8 +7,10 @@ import json
 import argparse
 from pathlib import Path
 
-# Add stock_pro to path
-sys.path.insert(0, str(Path(__file__).parent))
+# Add parent to path for stock_pro imports
+parent_dir = str(Path(__file__).parent.parent)
+if parent_dir not in sys.path:
+    sys.path.insert(0, parent_dir)
 
 from stock_pro import (
     analyze, analyze_multiple, fetch_live,
@@ -23,20 +25,20 @@ from stock_pro.cache import cache_stats, clear_cache
 from stock_pro.history import get_history, get_trends, history_stats
 from stock_pro.sectors import get_sector, get_symbols_by_sector, get_all_sectors, sector_report
 from stock_pro.risk import risk_profile, risk_report, diversification_check
-from stock_pro.watchlist import add_to_watchlist, remove_from_watchlist, list_watchlists, get_watchlist, create_watchlist
+from stock_pro.watchlist_v2 import add_to_watchlist, remove_from_watchlist, list_watchlists, get_watchlist
 from stock_pro.picks import get_top_picks_report, quick_picks
 from stock_pro.performance import performance_report, risk_adjusted_report
 from stock_pro.validator import data_quality_report
-from stock_pro.exporter import full_report, export_all
+from stock_pro.exporters import export_all
 from stock_pro.correlation import correlation_report
 from stock_pro.benchmark import benchmark_vs_index, sector_benchmark, score_distribution
-from stock_pro.backtest import backtest_report, compare_strategies
+from stock_pro.backtest import backtest_report, backtest_all
 from stock_pro.alerts import add_alert, remove_alert, list_alerts, check_alerts
 from stock_pro.technical import technical_report
 from stock_pro.sync import sync_yfinance, get_sync_status
 from stock_pro.pdf_export import export_pdf, full_pdf_report
 from stock_pro.optimizer import optimize_report
-from stock_pro.earnings import earnings_report, predict_earnings_beat
+from stock_pro.earnings_analysis import earnings_report, predict_earnings_beat
 from stock_pro.sentiment import sentiment_report, sector_sentiment
 from stock_pro.screener_v2 import advanced_screener_report, value_picks, growth_picks, dividend_picks
 from stock_pro.dashboard import dashboard_report, Dashboard
@@ -47,6 +49,9 @@ from stock_pro.report_builder import ReportBuilder, quick_report, investment_sum
 from stock_pro.market import get_market_overview, market_report, sector_rotation_report, market_breadth_indicator
 from stock_pro.advanced_metrics import quality_report, risk_return_report, value_vs_growth_report, get_advanced_metrics
 from stock_pro.compare import compare_stocks, compare_risk, find_winners
+from stock_pro.earnings_analysis import earnings_report, predict_earnings_beat
+from stock_pro.dividend_analysis import dividend_report, calc_dividend_score
+from stock_pro.fscore import fscore_report, calc_fscore
 from stock_pro.core import A  # For picks
 
 
@@ -145,6 +150,9 @@ def main():
     parser.add_argument('--compare-all', action='store_true', help='Compare all metrics')
     parser.add_argument('--compare-risk', action='store_true', help='Compare risk metrics')
     parser.add_argument('--winners', metavar='CRITERIA', help='Find winners (score/upside/pe/roe/beta)')
+    parser.add_argument('--earnings-report', action='store_true', help='Earnings analysis report')
+    parser.add_argument('--dividend-report', action='store_true', help='Dividend analysis report')
+    parser.add_argument('--fscore', action='store_true', help='Piotroski F-Score report')
     
     args = parser.parse_args()
     
@@ -192,7 +200,7 @@ Automation:
     # Technical Analysis (check before single stock)
     if args.technical:
         sym = args.symbols[0] if args.symbols else "NVDA"
-        output = technical_report(sym, days=30)
+        output = technical_report([sym])
         print(BANNER)
         print(output)
         return
@@ -203,20 +211,24 @@ Automation:
         return
     
     # Single stock analysis
-    if args.symbols and not any([
+    # Skip single-stock analysis if other analysis modes are requested
+    skip_single = any([
         args.technical, args.sync_status,
-        args.export_json, args.export_md, args.export_html, args.export_all_formats
-    ]):
+        args.export_json, args.export_md, args.export_html, args.export_all_formats,
+        args.earnings_predict, args.fscore, args.dividend_report,
+        args.summary is not None, args.compare, args.csv, args.xlsx, args.db
+    ])
+    
+    if args.symbols and not skip_single:
         sym = args.symbols[0]
         lang = "cn" if args.cn else "en"
-        data = analyze(sym, live=args.live)
+        data = analyze(sym)
         
         if args.json:
             print(json.dumps(data, indent=2))
         else:
-            path, content = gen_report(data, lang)
+            content = gen_report(data, lang)
             print(content)
-            print(f"\n[Report saved to: {path}]")
         return
     
     # Portfolio
@@ -244,13 +256,14 @@ Automation:
     
     # Compare
     if args.compare:
-        results = analyze_multiple(args.compare, live=args.live)
+        results = analyze_multiple(args.compare)
         print(gen_compare_table(results))
         return
     
     # Summary
-    if args.summary:
-        results = analyze_multiple(args.summary, live=args.live)
+    if args.summary is not None:
+        symbols = args.summary if args.summary else args.symbols
+        results = analyze_multiple(symbols)
         print(gen_summary_card(results))
         return
     
@@ -565,8 +578,8 @@ Automation:
     
     # Earnings Predictions
     if args.earnings_predict:
-        symbols = args.symbols if args.symbols else None
-        print(predict_earnings_beat(symbols))
+        sym = args.symbols[0] if args.symbols else "NVDA"
+        print(predict_earnings_beat(sym))
         return
     
     # Sentiment Analysis
@@ -727,6 +740,28 @@ Automation:
     if args.winners:
         criteria = args.winners if args.winners in ['score', 'upside', 'pe', 'roe', 'beta'] else 'score'
         print(find_winners(args.symbols or None, criteria))
+        return
+    
+    # Earnings Analysis
+    if args.earnings:
+        print(earnings_report(args.symbols or None))
+        return
+    
+    # Dividend Analysis
+    if args.dividend:
+        print(dividend_report(args.symbols or None))
+        return
+    
+    # F-Score Analysis
+    if args.fscore:
+        symbols = args.symbols if args.symbols else ["NVDA"]
+        print(fscore_report(symbols))
+        return
+    
+    # Dividend Report
+    if args.dividend_report:
+        sym = args.symbols[0] if args.symbols else "NVDA"
+        print(dividend_report([sym]))
         return
 
 
