@@ -1,0 +1,57 @@
+{
+  "symbol": "AAPL",
+  "generated_at": "2026-03-22T01:26:28.377750",
+  "summary": {
+    "company": "Apple Inc.",
+    "sector": "Technology",
+    "price": "$178.5",
+    "change": "+1.33%",
+    "trend": "上涨",
+    "score": 80,
+    "recommendation": "追涨"
+  },
+  "data": {
+    "symbol": "AAPL",
+    "price": 178.5,
+    "change": 2.35,
+    "change_pct": 1.33,
+    "prev_close": 176.15,
+    "open": 176.5,
+    "high": 179.2,
+    "low": 175.8,
+    "volume": 52000000,
+    "market_cap": 2800000000000,
+    "pe": 28.5,
+    "eps": 6.26,
+    "dividend_yield": 0.55,
+    "52w_high": 199.62,
+    "52w_low": 164.08,
+    "ma20": 177.3,
+    "ma50": 175.8,
+    "rsi": 58.5,
+    "company": "Apple Inc.",
+    "sector": "Technology",
+    "recommendation": "buy",
+    "target_price": 195.0,
+    "updated_at": "2026-03-22T01:26:28.377542"
+  },
+  "analysis": {
+    "trend": "上涨",
+    "signals": [
+      "✅ 均线多头排列",
+      "📊 RSI正常",
+      "📍 52周位置: 40.6%",
+      "📈 市盈率合理"
+    ],
+    "score": 80
+  },
+  "strategy": {
+    "action": "追涨",
+    "entry": "现价 $178.50 直接入场",
+    "stop_loss": "止损 $177.30",
+    "target": "目标 $199.62",
+    "position": "50-80% 仓位",
+    "reason": "趋势强劲，顺势而为",
+    "risk_level": "激进"
+  }
+}

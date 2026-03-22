@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Stock PRO Dashboard</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="refresh" content="300">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Arial, sans-serif; background: #0a0a0a; color: #fff; padding: 20px; }
+        .header { text-align: center; padding: 20px; background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 10px; margin-bottom: 20px; }
+        .header h1 { color: #00d4ff; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .card { background: #1a1a2e; border-radius: 10px; padding: 20px; }
+        .card h2 { color: #00d4ff; border-bottom: 1px solid #333; padding-bottom: 10px; margin-bottom: 15px; }
+        .stat { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #333; }
+        .positive { color: #00ff88; }
+        .table { width: 100%; border-collapse: collapse; }
+        .table th, .table td { padding: 8px; text-align: left; border-bottom: 1px solid #333; }
+        .footer { text-align: center; padding: 20px; color: #666; font-size: 12px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Stock PRO Dashboard</h1>
+        <p>Last Update: 2026-03-22T11:43:14.759517</p>
+    </div>
+    
+    <div class="grid">
+        <div class="card">
+            <h2>Portfolio Overview</h2>
+            <div class="stat"><span>Stocks</span><span>54</span></div>
+            <div class="stat"><span>Avg Score</span><span>50</span></div>
+            <div class="stat"><span>Avg Upside</span><span class="positive">+21.4%</span></div>
+        </div>
+        
+        <div class="card">
+            <h2>Top Gainers</h2>
+            <table class="table">
+                <tr><th>Symbol</th><th>Upside</th></tr>
+<tr><td>GOOGL</td><td class='positive'>+92.1%</td></tr>
+<tr><td>AMZN</td><td class='positive'>+77.8%</td></tr>
+<tr><td>DASH</td><td class='positive'>+63.6%</td></tr>
+<tr><td>NVDA</td><td class='positive'>+56.4%</td></tr>
+<tr><td>SNOW</td><td class='positive'>+55.6%</td></tr>
+
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>Top Scores</h2>
+            <table class="table">
+                <tr><th>Symbol</th><th>Score</th></tr>
+<tr><td>NVDA</td><td>87</td></tr>
+<tr><td>GOOGL</td><td>83</td></tr>
+<tr><td>META</td><td>75</td></tr>
+<tr><td>DASH</td><td>71</td></tr>
+<tr><td>COIN</td><td>66</td></tr>
+
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>Sector Performance</h2>
+            <table class="table">
+                <tr><th>Sector</th><th>Score</th><th>Upside</th></tr>
+<tr><td>Technology</td><td>55</td><td class='positive'>+32.9%</td></tr>
+<tr><td>Finance</td><td>48</td><td class='positive'>+14.7%</td></tr>
+<tr><td>Healthcare</td><td>47</td><td class='positive'>+20.8%</td></tr>
+<tr><td>Technology/Auto</td><td>46</td><td class='positive'>+26.6%</td></tr>
+<tr><td>Industrial</td><td>44</td><td class='positive'>+14.6%</td></tr>
+<tr><td>Energy</td><td>38</td><td class='positive'>+13.2%</td></tr>
+<tr><td>ETF</td><td>38</td><td class='positive'>+7.9%</td></tr>
+<tr><td>Consumer</td><td>33</td><td class='positive'>+7.8%</td></tr>
+
+            </table>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p>Stock PRO Dashboard - Auto-refresh every 5 minutes</p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,12 @@
+{
+  "positions": [
+    {
+      "symbol": "NVDA",
+      "shares": 100.0,
+      "avg_cost": 150.0,
+      "date_added": "2026-03-22T10:39:45.622120"
+    }
+  ],
+  "cash": 10000,
+  "currency": "USD"
+}

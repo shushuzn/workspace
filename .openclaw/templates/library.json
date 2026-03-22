@@ -1,0 +1,14 @@
+{
+  "python-project": {
+    "description": "Python 项目",
+    "main.py": "def main():\n    pass\n\nif __name__ == '__main__':\n    main()"
+  },
+  "javascript-module": {
+    "description": "JavaScript 模块",
+    "index.js": "export function main() {}\n"
+  },
+  "html-site": {
+    "description": "HTML 网站",
+    "index.html": "<!DOCTYPE html>\n<html>\n<head><meta charset='UTF-8'><title></title></head>\n<body>\n</body>\n</html>"
+  }
+}

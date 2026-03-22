@@ -266,6 +266,10 @@
       "model": ""
     }
   },
+  "active_model": {
+    "provider_id": "minimax-cn",
+    "model": "MiniMax-M2.7-highspeed"
+  },
   "language": "en",
   "system_prompt_files": [
     "AGENTS.md",

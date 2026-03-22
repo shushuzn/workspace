@@ -1,0 +1,11 @@
+{
+  "python": {
+    "function": "def {name}({params}):\n    \"\"\"\"\"\"\n    pass",
+    "class": "class {ClassName}:\n    def __init__(self):\n        pass"
+  },
+  "javascript": {
+    "function": "function {name}({params}) {{\n    \n}}",
+    "arrow": "const {name} = ({params}) => {{\n    \n}};",
+    "class": "class {ClassName} {{\n    constructor() {{\n    }}\n}}"
+  }
+}

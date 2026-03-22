@@ -1,0 +1,149 @@
+{
+  "generated_at": "2026-03-22T01:31:19.580768",
+  "results": [
+    {
+      "symbol": "AAPL",
+      "price": 384.31,
+      "change": 0.75,
+      "market_cap": 2501000000000.0,
+      "pe": 15.4,
+      "52w_high": 200,
+      "52w_low": 100,
+      "recommendation": "持有",
+      "company": "AAPL Inc.",
+      "sector": "Technology",
+      "status": "mock",
+      "score": 50,
+      "signals": [
+        "🟡 中性",
+        "📍 284%分位"
+      ]
+    },
+    {
+      "symbol": "BRK-B",
+      "price": 301.39,
+      "change": 3.87,
+      "market_cap": 697000000000.0,
+      "pe": 38.8,
+      "52w_high": 200,
+      "52w_low": 100,
+      "recommendation": "持有",
+      "company": "BRK-B Inc.",
+      "sector": "Technology",
+      "status": "mock",
+      "score": 50,
+      "signals": [
+        "🟡 中性",
+        "📍 201%分位"
+      ]
+    },
+    {
+      "symbol": "MSFT",
+      "price": 171.17,
+      "change": -0.4,
+      "market_cap": 759000000000.0,
+      "pe": 38.4,
+      "52w_high": 200,
+      "52w_low": 100,
+      "recommendation": "观望",
+      "company": "MSFT Inc.",
+      "sector": "Technology",
+      "status": "mock",
+      "score": 40,
+      "signals": [
+        "🔴 弱势",
+        "📍 71%分位"
+      ]
+    },
+    {
+      "symbol": "GOOGL",
+      "price": 343.04,
+      "change": 1.65,
+      "market_cap": 2598000000000.0,
+      "pe": 40.3,
+      "52w_high": 200,
+      "52w_low": 100,
+      "recommendation": "观望",
+      "company": "GOOGL Inc.",
+      "sector": "Technology",
+      "status": "mock",
+      "score": 30,
+      "signals": [
+        "🔴 弱势",
+        "📍 243%分位"
+      ]
+    },
+    {
+      "symbol": "TSLA",
+      "price": 387.51,
+      "change": 1.41,
+      "market_cap": 1379000000000.0,
+      "pe": 49.5,
+      "52w_high": 200,
+      "52w_low": 100,
+      "recommendation": "观望",
+      "company": "TSLA Inc.",
+      "sector": "Technology",
+      "status": "mock",
+      "score": 30,
+      "signals": [
+        "🔴 弱势",
+        "📍 288%分位"
+      ]
+    },
+    {
+      "symbol": "NVDA",
+      "price": 175.01,
+      "change": -3.45,
+      "market_cap": 1642000000000.0,
+      "pe": 25.4,
+      "52w_high": 200,
+      "52w_low": 100,
+      "recommendation": "观望",
+      "company": "NVDA Inc.",
+      "sector": "Technology",
+      "status": "mock",
+      "score": 30,
+      "signals": [
+        "🔴 弱势",
+        "📍 75%分位"
+      ]
+    },
+    {
+      "symbol": "META",
+      "price": 405.29,
+      "change": -3.48,
+      "market_cap": 1085000000000.0,
+      "pe": 28.0,
+      "52w_high": 200,
+      "52w_low": 100,
+      "recommendation": "观望",
+      "company": "META Inc.",
+      "sector": "Technology",
+      "status": "mock",
+      "score": 30,
+      "signals": [
+        "🔴 弱势",
+        "📍 305%分位"
+      ]
+    },
+    {
+      "symbol": "AMZN",
+      "price": 212.83,
+      "change": -3.14,
+      "market_cap": 502000000000.0,
+      "pe": 40.7,
+      "52w_high": 200,
+      "52w_low": 100,
+      "recommendation": "观望",
+      "company": "AMZN Inc.",
+      "sector": "Technology",
+      "status": "mock",
+      "score": 20,
+      "signals": [
+        "🔴 弱势",
+        "📍 113%分位"
+      ]
+    }
+  ]
+}

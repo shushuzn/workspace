@@ -135,7 +135,15 @@ class CoreFilesCompressor:
         
         return result
     
-    def compress_soul_md(self) -> Dict:
+    def _auto_threshold(self, current_size: int, target_size: int) -> float:
+        """自动计算压缩阈值 - 根据剩余空间计算最小压缩率"""
+        if current_size <= target_size:
+            return 100.0  # 无需压缩
+        excess_ratio = (current_size - target_size) / current_size
+        # 阈值 = 需要的压缩率 + 5% 缓冲
+        return max(0.1, excess_ratio * 100 - 5)
+    
+    def compress_soul_md(self, force_threshold: float = None) -> Dict:
         """压缩 SOUL.md - 移除冗余内容"""
         soul_path = self.workspace / 'SOUL.md'
         
@@ -154,13 +162,12 @@ class CoreFilesCompressor:
         # 2. 移除行尾空格
         content = re.sub(r'[ \t]+\n', '\n', content)
         
-        # 3. 压缩表格（保留结构）
-        # 不处理表格，避免破坏格式
-        
         compressed_size = len(content)
         compression_rate = (1 - compressed_size / original_size) * 100 if original_size > 0 else 0
         
-        if compression_rate > 5:  # 只在实际压缩超过 5% 时才写入
+        # 自动阈值
+        threshold = force_threshold if force_threshold else 5.0
+        if compression_rate > threshold:
             with open(soul_path, 'w', encoding='utf-8') as f:
                 f.write(content)
             return {
@@ -170,9 +177,9 @@ class CoreFilesCompressor:
                 'compression_rate': round(compression_rate, 2)
             }
         
-        return {'status': 'skipped', 'reason': f'Compression rate too low: {compression_rate:.2f}%'}
+        return {'status': 'skipped', 'reason': f'Compression rate {compression_rate:.2f}% <= threshold {threshold:.2f}%'}
     
-    def compress_agents_md(self) -> Dict:
+    def compress_agents_md(self, force_threshold: float = None) -> Dict:
         """压缩 AGENTS.md - 移除冗余内容"""
         agents_path = self.workspace / 'AGENTS.md'
         
@@ -194,7 +201,8 @@ class CoreFilesCompressor:
         compressed_size = len(content)
         compression_rate = (1 - compressed_size / original_size) * 100 if original_size > 0 else 0
         
-        if compression_rate > 5:
+        threshold = force_threshold if force_threshold else 5.0
+        if compression_rate > threshold:
             with open(agents_path, 'w', encoding='utf-8') as f:
                 f.write(content)
             return {
@@ -204,9 +212,9 @@ class CoreFilesCompressor:
                 'compression_rate': round(compression_rate, 2)
             }
         
-        return {'status': 'skipped', 'reason': f'Compression rate too low: {compression_rate:.2f}%'}
+        return {'status': 'skipped', 'reason': f'Compression rate {compression_rate:.2f}% <= threshold {threshold:.2f}%'}
     
-    def compress_memory_md(self) -> Dict:
+    def compress_memory_md(self, force_threshold: float = None) -> Dict:
         """压缩 MEMORY.md - 提取核心内容"""
         memory_path = self.workspace / 'MEMORY.md'
         
@@ -225,13 +233,11 @@ class CoreFilesCompressor:
         # 2. 移除行尾空格
         content = re.sub(r'[ \t]+\n', '\n', content)
         
-        # 3. 移除详细示例（保留核心原则）
-        # 不处理内容，避免破坏信息
-        
         compressed_size = len(content)
         compression_rate = (1 - compressed_size / original_size) * 100 if original_size > 0 else 0
         
-        if compression_rate > 5:
+        threshold = force_threshold if force_threshold else 5.0
+        if compression_rate > threshold:
             with open(memory_path, 'w', encoding='utf-8') as f:
                 f.write(content)
             return {
@@ -241,9 +247,9 @@ class CoreFilesCompressor:
                 'compression_rate': round(compression_rate, 2)
             }
         
-        return {'status': 'skipped', 'reason': f'Compression rate too low: {compression_rate:.2f}%'}
+        return {'status': 'skipped', 'reason': f'Compression rate {compression_rate:.2f}% <= threshold {threshold:.2f}%'}
     
-    def compress_daily_note(self) -> Dict:
+    def compress_daily_note(self, force_threshold: float = None) -> Dict:
         """压缩今日笔记 - 保留核心内容"""
         if not self.daily_note.exists():
             return {'status': 'skipped', 'reason': 'File not found'}
@@ -263,7 +269,8 @@ class CoreFilesCompressor:
         compressed_size = len(content)
         compression_rate = (1 - compressed_size / original_size) * 100 if original_size > 0 else 0
         
-        if compression_rate > 5:
+        threshold = force_threshold if force_threshold else 5.0
+        if compression_rate > threshold:
             with open(self.daily_note, 'w', encoding='utf-8') as f:
                 f.write(content)
             return {
@@ -273,22 +280,40 @@ class CoreFilesCompressor:
                 'compression_rate': round(compression_rate, 2)
             }
         
-        return {'status': 'skipped', 'reason': f'Compression rate too low: {compression_rate:.2f}%'}
+        return {'status': 'skipped', 'reason': f'Compression rate {compression_rate:.2f}% <= threshold {threshold:.2f}%'}
     
     def compress_all(self) -> Dict:
-        """压缩所有核心文件"""
+        """压缩所有核心文件 - 自动阈值"""
         result = {
             'timestamp': datetime.now().isoformat(),
             'before': self.check_files(),
             'compressions': {},
-            'after': None
+            'after': None,
+            'auto_threshold': None
         }
         
-        # 压缩各文件
-        result['compressions']['SOUL.md'] = self.compress_soul_md()
-        result['compressions']['AGENTS.md'] = self.compress_agents_md()
-        result['compressions']['MEMORY.md'] = self.compress_memory_md()
-        result['compressions']['daily_note'] = self.compress_daily_note()
+        # 检查当前是否超过限制
+        before = result['before']
+        if before['within_limit']:
+            # 未超限，使用默认阈值
+            result['compressions']['SOUL.md'] = self.compress_soul_md()
+            result['compressions']['AGENTS.md'] = self.compress_agents_md()
+            result['compressions']['MEMORY.md'] = self.compress_memory_md()
+            result['compressions']['daily_note'] = self.compress_daily_note()
+            result['auto_threshold'] = 5.0
+        else:
+            # 超限，自动降低阈值
+            excess = before['total_size'] - self.TOTAL_LIMIT
+            result['auto_threshold'] = self._auto_threshold(
+                before['total_size'], 
+                self.TOTAL_LIMIT * 0.9  # 目标90%
+            )
+            print(f"[AUTO] 超限{excess/1024:.1f}KB，自动阈值: {result['auto_threshold']:.1f}%")
+            
+            result['compressions']['SOUL.md'] = self.compress_soul_md(result['auto_threshold'])
+            result['compressions']['AGENTS.md'] = self.compress_agents_md(result['auto_threshold'])
+            result['compressions']['MEMORY.md'] = self.compress_memory_md(result['auto_threshold'])
+            result['compressions']['daily_note'] = self.compress_daily_note(result['auto_threshold'])
         
         # 检查压缩后大小
         result['after'] = self.check_files()
@@ -389,50 +414,9 @@ class CoreFilesCompressor:
 
 
 logging.basicConfig(level=logging.INFO)
+
 def main():
-    """
-# ==============================================================================
-# STAGE 1: ARCHITECT 架构设计
-
-# ==============================================================================
-# STAGE 2: CODE 编写代码
-# ==============================================================================
-
-Purpose: Automation workflow tool
-Data Flow: input -> process -> output
-# ==============================================================================
-
-# ==============================================================================
-# STAGE 3: ASK 询问确认
-# py core_files_compressor_001.py  # Run verification
-# ==============================================================================
-"""
-ASK: Run verification
-
-Test Commands:
-    py core_files_compressor_001.py
-
-Expected Output:
-    - Tool runs without errors
-    - Shows usage or performs intended action
-"""
-
-# ==============================================================================
-# STAGE 4: DEBUG 调试测试
-# Test: 2026
-# ==============================================================================
-"""
-DEBUG: Test cases and fixes
-
-Test Cases:
-    1. Basic invocation → Works
-    2. --help flag → Shows usage
-
-Fixes:
-    - (none yet)
-"""
-
-主函数"""
+    """Core files compressor main entry point."""
     compressor = CoreFilesCompressor()
     
     if len(sys.argv) < 2:

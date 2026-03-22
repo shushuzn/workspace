@@ -1,0 +1,15 @@
+{
+  "jobs": [
+    {
+      "name": "job_1",
+      "symbols": [
+        "NVDA",
+        "META"
+      ],
+      "command": "alert",
+      "schedule": "09:00",
+      "next_run": "2026-03-23T09:00:00",
+      "active": true
+    }
+  ]
+}

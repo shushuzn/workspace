@@ -1,0 +1,47 @@
+{
+  "generated_at": "2026-03-22T01:37:18.770508",
+  "data": {
+    "symbol": "AAPL",
+    "price": 247.99,
+    "change": -0.39,
+    "open": 248.96,
+    "high": 249.2,
+    "low": 246.0,
+    "volume": 87981315,
+    "market_cap": "3.645T",
+    "pe": 31.35,
+    "eps": 7.91,
+    "dividend": 1.04,
+    "dividend_yield": 0.42,
+    "52w_high": 288.62,
+    "52w_low": 169.21,
+    "analyst_rating": "Outperform",
+    "analyst_target": 295.44,
+    "ytd": -8.69,
+    "sector": "Technology",
+    "company": "Apple Inc."
+  },
+  "analysis": {
+    "score": 80,
+    "position": 65.97437400552718,
+    "upside": 19.133836041775872,
+    "signals": [
+      [
+        "[=]",
+        "价格中部"
+      ],
+      [
+        "[^]",
+        "上涨19%"
+      ]
+    ]
+  },
+  "strategy": {
+    "level": "激进",
+    "action": "买入",
+    "position": "50-80%",
+    "entry": "$247.99",
+    "stop": "$169.21",
+    "target": "$295.44"
+  }
+}

@@ -1,0 +1,8002 @@
+[
+  {
+    "timestamp": "2026-03-22T11:18:23.425934",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.427451",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.429077",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.430608",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.432119",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.433640",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.435191",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.436784",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.438576",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.440176",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.441747",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.443389",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.445109",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.446681",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.448279",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.449855",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.451439",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.453295",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.456080",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.457773",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:18:23.459483",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:18:24.028952",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:18:24.031226",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:18:24.032936",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:20:07.804367",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.866764",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.869123",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.872078",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.875923",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.880257",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.882333",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.884462",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.886904",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.889087",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.891059",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.893192",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.895182",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.897123",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.899102",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.901152",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.903161",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.905016",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.907053",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.908981",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.910894",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.912823",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.915375",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.917500",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.919464",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.921465",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.923444",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.926482",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.928506",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.930635",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.932573",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.934551",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.936551",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.938553",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.940533",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.942488",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.944534",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.946705",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.949255",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.951356",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:20:11.953357",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.434479",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.436784",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.438752",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.440703",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.443198",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.445088",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.447050",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.449652",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.451941",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.454107",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.456248",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.459124",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.461210",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.463196",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.465279",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.467350",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.469348",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.471388",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.473524",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.475599",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.477640",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.479719",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.481943",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.484038",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.486063",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.488204",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.490621",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.492874",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.494958",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.497127",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.499211",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.501353",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.503755",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.506356",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.508527",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.510707",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.513030",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.515192",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.517370",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:20:15.520131",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:20:34.867195",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:20:34.870993",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:20:34.875181",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:20:34.877289",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.844391",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.847341",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.850491",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.852930",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.855317",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.857779",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.860303",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.862789",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.865411",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.867980",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.870484",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.873000",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.875557",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.878430",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.881330",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.883824",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.886290",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.888861",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.891824",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.894577",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.897514",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.900055",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.902593",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.905318",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.907943",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.910499",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.913238",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.916028",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.918636",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.921221",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.924048",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.926627",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.929283",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.932143",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.935114",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.937834",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.940536",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.943239",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.946777",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:21:18.949482",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:21:23.089921",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:21:23.093566",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:21:23.096185",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:21:23.099006",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:21:40.722407",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:21:40.725771",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:21:40.728942",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:21:40.731930",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.122305",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.125743",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.128472",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.131066",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.133654",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.136518",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.139328",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.142039",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.144595",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.147146",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.149764",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.152376",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.155017",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.157864",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.160566",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.163474",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.166284",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.169317",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.172332",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.175290",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.178378",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.181590",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.184467",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.187746",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.190608",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.193553",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.196511",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.199339",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.204593",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.207980",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.210770",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.213803",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.216676",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.219670",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.225563",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.228351",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.231140",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.234115",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.237190",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:21:48.240933",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:25:57.462368",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:25:57.466166",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:25:57.469162",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:25:57.471875",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:26:02.892904",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:26:25.177256",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:26:25.180427",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:26:25.183683",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:26:25.186660",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.382376",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.387770",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.390908",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.393822",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.396837",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.399935",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.402863",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.406390",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.410777",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.418136",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.422132",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.425210",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.428073",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.431295",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.434046",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.437043",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.439919",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.443022",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.446162",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.450427",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.453676",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.456697",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.460031",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.463928",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.497350",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.508408",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.512857",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.516169",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.522798",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.526823",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.530581",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.534387",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.537817",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.547155",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.551152",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.554229",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.557414",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.560686",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.563739",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.567606",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.571105",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.574158",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.577252",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.580385",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.583523",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.586896",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.590381",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.593754",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.597108",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.601764",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.605505",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.608948",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.612385",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:26:26.615863",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:29:11.819169",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:29:11.822898",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:29:11.826174",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:29:11.829471",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.383353",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.387276",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.390946",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.394482",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.398020",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.401621",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.405118",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.408677",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.412152",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.415620",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.419319",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.422883",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.426682",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.430222",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.434733",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.438138",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.441643",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.445021",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.448541",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.451961",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.455309",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.459178",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.462782",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.467422",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.471023",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.474674",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.478304",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.482262",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.485805",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.489478",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.492941",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.496903",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.500754",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.504372",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.507983",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.511599",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.515350",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.518988",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.522743",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.526310",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.531009",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.534768",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.538615",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.542778",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.547373",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.551463",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.555186",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.559220",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.562945",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.566881",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.570623",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.574837",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.578675",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:29:15.582464",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.160366",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.164536",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.168352",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.172894",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.176749",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.180591",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.184232",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.188272",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.192001",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.195904",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.199631",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.203659",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.207920",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.212989",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.217087",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.220765",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.226324",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.230154",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.234005",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.240028",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.279987",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.286641",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.291617",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.295679",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.299513",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.303490",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.307430",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.311543",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.315648",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.321981",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.325950",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.330062",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.333936",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.337733",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.343117",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.348530",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.353027",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.356945",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.361255",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.365191",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.369234",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.373511",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.377487",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.381346",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.385303",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.390381",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.394351",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.398326",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.402234",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.406750",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.411000",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.415972",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.420950",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:29:16.425410",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:32:03.864093",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:32:03.868869",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:32:03.873176",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:32:03.877501",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:32:06.944196",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:32:13.666826",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:33:16.185005",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:33:16.189542",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:33:16.193777",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:33:16.199521",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:35:30.889457",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:35:30.894468",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:35:30.898436",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:35:30.902282",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:35:35.452588",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:35:35.457260",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:35:35.461481",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:35:35.467201",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:35:35.471596",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:35:35.475866",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:35:35.480275",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.617210",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.621642",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.626849",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.631566",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.636204",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.640672",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.644866",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.649076",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.653233",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.657433",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.661657",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.666873",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.671269",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.675577",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.680226",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.684541",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.689308",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.693592",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.698035",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.702572",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.707036",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.711370",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.715693",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.720197",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.724602",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.729018",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.734934",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.740158",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.744565",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.749190",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.753476",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.757947",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.762562",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.767292",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.771599",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.775881",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.780172",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.784584",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.788987",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.793320",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.798253",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.802736",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.807071",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.811779",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.816085",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.820475",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.825191",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.834108",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.838678",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.843504",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.848258",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.852742",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.857753",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:35:43.862274",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.037747",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.044495",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.049812",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.054440",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.059601",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.064626",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.069262",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.074032",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.078892",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.083576",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.088218",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.092958",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.097735",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.102349",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.107019",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.112791",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.117553",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.122340",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.129094",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.133712",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.138318",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.142957",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.147661",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.152334",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.157453",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.757950",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.762928",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.767711",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.772568",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.777680",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.783066",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.788026",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.792954",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.798256",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.803121",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.808026",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.813362",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.818587",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.823631",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.828583",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.833756",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.838729",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.843607",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.850648",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:35:50.855616",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.579240",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.584686",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.589812",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.594884",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.599933",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.605037",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.609930",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.615476",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.620599",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.625600",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.630838",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.635985",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.640910",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.646454",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.651575",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.656679",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.664042",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.669008",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.673913",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:36:02.679956",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:36:24.424524",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:36:24.430274",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:36:24.435745",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:36:24.442552",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:39:45.709436",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:39:45.718191",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:39:45.723435",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:39:45.728553",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:39:55.748854",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:39:55.754776",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:39:55.759634",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:39:55.764539",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.342334",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.349001",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.357765",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.363940",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.369197",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.374770",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.380511",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.385808",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.391388",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.396842",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.402046",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.407212",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.412686",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.418494",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.423835",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.430090",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.435784",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.441206",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.446746",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.452195",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.457701",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.462832",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.468228",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.473495",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.480361",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.485719",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.491458",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.498255",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.503786",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.509443",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.514785",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.520502",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.526408",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.533806",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.541904",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.547660",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.553283",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.560173",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.566998",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.575588",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.581421",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.587449",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.593585",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.599651",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.605794",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.611531",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.617000",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.622724",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.628180",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.633620",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.640235",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.645713",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.651565",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:39:56.658315",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:42:39.892336",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:42:39.898344",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:42:39.904505",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:42:39.909847",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.669562",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.676152",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.681736",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.687291",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.697724",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.706397",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.711865",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.720114",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.725683",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.731240",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.736818",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.742467",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.747980",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.800800",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.807817",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.813897",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.820515",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.826408",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.832587",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.838409",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.844130",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.850063",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.855698",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.861395",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.868118",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.874166",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.882003",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.887864",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.895332",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.901080",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.907253",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.912986",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.921093",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.928620",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.934350",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.940399",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.946382",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.951962",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.957525",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.963641",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.969826",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.975279",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.981255",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.986922",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.992706",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:43:08.998263",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:09.005448",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:43:09.011569",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:43:09.017677",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:43:09.023049",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:43:09.028486",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:43:09.034542",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:43:09.040823",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:09.047173",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.246325",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.252393",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.259648",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.265878",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.272032",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.279984",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.286555",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.293719",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.301105",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.309368",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.316906",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.324680",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.330962",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.340394",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.347162",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.353493",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.359793",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.365944",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.371886",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.377950",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.384184",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.390222",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.396969",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.402750",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.408662",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.415139",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.421531",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.427421",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.433929",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.439699",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.445667",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.452370",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.458994",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.465437",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.471612",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.478141",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.484177",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.490045",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.495939",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.501797",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.508846",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.514998",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.521294",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.527125",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.533028",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.541486",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.548500",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.554566",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.560693",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.567133",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.577267",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.585078",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.591987",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:10.599432",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.334561",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.344093",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.351571",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.358658",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.366229",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.374532",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.381277",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.387604",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.394513",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.403762",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.410062",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.416753",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.425062",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.432535",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.468415",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.480683",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.490179",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.497383",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.504635",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.513979",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.520341",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.526713",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.533380",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.540278",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.547069",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.554260",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.560781",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.569303",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.575809",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.582410",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.589158",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.596055",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.604011",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.611502",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.617886",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.624614",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.631549",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.638532",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.645113",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.653255",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.659965",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.666904",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.673527",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.680566",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.687337",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.694169",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.701084",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.707790",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.716996",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.725021",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.731864",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.739023",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.745447",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:43:14.752516",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:43:35.600886",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:43:35.607526",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:43:35.614296",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:43:35.621083",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:47:36.756398",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:47:36.765412",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:47:36.772280",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:47:36.779935",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:47:53.616992",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:48:12.999379",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:48:13.006219",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:48:13.014450",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:48:13.645980",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:48:13.656392",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:48:13.674240",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:48:13.682989",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:48:33.958800",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:48:33.965591",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:48:33.972318",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:48:33.979907",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.172579",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.180399",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.188052",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.195540",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.203088",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.210310",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.217450",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.224516",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.231732",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.238987",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.245984",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.253028",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.259893",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.266800",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.273490",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.280352",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.287795",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.296198",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.306523",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.315987",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.323471",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.331135",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.338829",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.346684",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.354097",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.362090",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.369753",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.388332",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.398374",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.406136",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.413737",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.421228",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.428180",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.435257",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.442340",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.449246",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.457106",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.464275",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.471483",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.478474",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.486226",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.493547",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.500802",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.508137",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.515217",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.522650",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.529618",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.538304",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.545330",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.552296",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.559330",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.567273",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.575120",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:53:42.585138",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.450377",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.457959",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.466095",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.472889",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.480891",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.488143",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.496274",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.503170",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.511212",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.518176",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.525039",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.532087",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.539959",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.547374",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.554667",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.561826",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.569940",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.576961",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.586197",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:53:45.593954",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.773690",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.781310",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.789031",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.796480",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.803702",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.811211",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.819039",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.826175",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.834299",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.841616",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.849356",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.856639",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.864575",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.871813",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.878854",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.886278",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.893569",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.901746",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.909065",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.916334",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.924630",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.931638",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.938509",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.947202",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.956027",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.965379",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.972920",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.980266",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.987090",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:53:48.998725",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.007124",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.014191",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.021296",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.029333",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.037431",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.045674",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.053020",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.061041",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.069337",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.076688",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.083569",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.091832",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.106512",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.115457",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.124027",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.133236",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.140772",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.148161",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.155923",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.163667",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.171444",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.179595",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.186921",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:53:49.194177",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.461407",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.469491",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.477286",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.484950",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.492543",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.500736",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.509448",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.516756",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.524354",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.532155",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.539692",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.547228",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.555294",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.563210",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.571086",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.578599",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.585750",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.593229",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.601335",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.610491",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.617696",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.625550",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.633425",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.642202",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.653852",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.661192",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.668695",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.677461",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.684786",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.692623",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.699935",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.707710",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.714727",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.722189",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.729414",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.736757",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.744642",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.752275",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.761356",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.768868",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.776010",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.783301",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.790228",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.797619",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.805370",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.813574",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.820680",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.828220",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.835272",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.843575",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.850509",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.858492",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.865872",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:54:08.874331",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.637947",
+    "symbol": "META",
+    "price": 575,
+    "score": 75,
+    "rating": "STRONG BUY",
+    "upside": 50.26086956521739
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.645225",
+    "symbol": "NVDA",
+    "price": 172,
+    "score": 87,
+    "rating": "STRONG BUY",
+    "upside": 56.395348837209305
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.652504",
+    "symbol": "AAPL",
+    "price": 228,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 20.614035087719298
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.659792",
+    "symbol": "MSFT",
+    "price": 415,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 19.27710843373494
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.667170",
+    "symbol": "GOOGL",
+    "price": 190,
+    "score": 83,
+    "rating": "STRONG BUY",
+    "upside": 92.10526315789474
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.675088",
+    "symbol": "AMZN",
+    "price": 225,
+    "score": 51,
+    "rating": "BUY",
+    "upside": 77.77777777777779
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.682600",
+    "symbol": "AMD",
+    "price": 130,
+    "score": 63,
+    "rating": "BUY",
+    "upside": 42.30769230769231
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.689873",
+    "symbol": "TSLA",
+    "price": 195,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.205128205128204
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.700072",
+    "symbol": "NFLX",
+    "price": 570,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 22.807017543859647
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.707049",
+    "symbol": "CRM",
+    "price": 275,
+    "score": 40,
+    "rating": "HOLD",
+    "upside": 16.363636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.714287",
+    "symbol": "ORCL",
+    "price": 160,
+    "score": 40,
+    "rating": "SELL",
+    "upside": 12.5
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.721416",
+    "symbol": "INTC",
+    "price": 35,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.728927",
+    "symbol": "QCOM",
+    "price": 170,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 17.647058823529413
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.735639",
+    "symbol": "JPM",
+    "price": 330,
+    "score": 45,
+    "rating": "UNDERPERFORM",
+    "upside": 12.121212121212121
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.742518",
+    "symbol": "BAC",
+    "price": 45,
+    "score": 42,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.749189",
+    "symbol": "GS",
+    "price": 580,
+    "score": 43,
+    "rating": "SELL",
+    "upside": 12.068965517241379
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.756087",
+    "symbol": "JNJ",
+    "price": 155,
+    "score": 55,
+    "rating": "BUY",
+    "upside": 45.16129032258064
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.763302",
+    "symbol": "UNH",
+    "price": 520,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.770630",
+    "symbol": "PFE",
+    "price": 28,
+    "score": 35,
+    "rating": "SELL",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.777903",
+    "symbol": "WMT",
+    "price": 210,
+    "score": 29,
+    "rating": "SELL",
+    "upside": 4.761904761904762
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.784701",
+    "symbol": "COST",
+    "price": 920,
+    "score": 28,
+    "rating": "SELL",
+    "upside": 3.260869565217391
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.792587",
+    "symbol": "KO",
+    "price": 65,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.800542",
+    "symbol": "V",
+    "price": 280,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 14.285714285714285
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.807795",
+    "symbol": "MA",
+    "price": 460,
+    "score": 57,
+    "rating": "HOLD",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.815573",
+    "symbol": "ADBE",
+    "price": 530,
+    "score": 56,
+    "rating": "HOLD",
+    "upside": 16.9811320754717
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.824349",
+    "symbol": "NOW",
+    "price": 780,
+    "score": 55,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.832145",
+    "symbol": "AVGO",
+    "price": 1500,
+    "score": 65,
+    "rating": "BUY",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.840379",
+    "symbol": "ASML",
+    "price": 980,
+    "score": 62,
+    "rating": "HOLD",
+    "upside": 22.448979591836736
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.847587",
+    "symbol": "SPY",
+    "price": 540,
+    "score": 34,
+    "rating": "SELL",
+    "upside": 7.4074074074074066
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.855637",
+    "symbol": "QQQ",
+    "price": 480,
+    "score": 41,
+    "rating": "SELL",
+    "upside": 8.333333333333332
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.862729",
+    "symbol": "XOM",
+    "price": 115,
+    "score": 38,
+    "rating": "SELL",
+    "upside": 13.043478260869565
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.872286",
+    "symbol": "CVX",
+    "price": 150,
+    "score": 39,
+    "rating": "SELL",
+    "upside": 13.333333333333334
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.879485",
+    "symbol": "MRK",
+    "price": 125,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 12.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.887152",
+    "symbol": "ABBV",
+    "price": 175,
+    "score": 53,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.894327",
+    "symbol": "CAT",
+    "price": 340,
+    "score": 44,
+    "rating": "SELL",
+    "upside": 11.76470588235294
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.902536",
+    "symbol": "HON",
+    "price": 200,
+    "score": 46,
+    "rating": "HOLD",
+    "upside": 15.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.909971",
+    "symbol": "DE",
+    "price": 410,
+    "score": 41,
+    "rating": "HOLD",
+    "upside": 17.073170731707318
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.917713",
+    "symbol": "LLY",
+    "price": 720,
+    "score": 52,
+    "rating": "HOLD",
+    "upside": 18.055555555555554
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.925174",
+    "symbol": "SNOW",
+    "price": 180,
+    "score": 36,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.933050",
+    "symbol": "PANW",
+    "price": 320,
+    "score": 48,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.940106",
+    "symbol": "UBER",
+    "price": 65,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 30.76923076923077
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.948644",
+    "symbol": "DASH",
+    "price": 110,
+    "score": 71,
+    "rating": "BUY",
+    "upside": 63.63636363636363
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.956879",
+    "symbol": "COIN",
+    "price": 180,
+    "score": 66,
+    "rating": "BUY",
+    "upside": 55.55555555555556
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.964272",
+    "symbol": "RIVN",
+    "price": 12,
+    "score": 46,
+    "rating": "BUY",
+    "upside": 25.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.972891",
+    "symbol": "PLTR",
+    "price": 18,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 38.88888888888889
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.980262",
+    "symbol": "ARM",
+    "price": 150,
+    "score": 64,
+    "rating": "HOLD",
+    "upside": 20.0
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.987456",
+    "symbol": "CRWD",
+    "price": 320,
+    "score": 60,
+    "rating": "HOLD",
+    "upside": 18.75
+  },
+  {
+    "timestamp": "2026-03-22T11:54:13.994883",
+    "symbol": "NET",
+    "price": 75,
+    "score": 30,
+    "rating": "BUY",
+    "upside": 26.666666666666668
+  },
+  {
+    "timestamp": "2026-03-22T11:54:14.001753",
+    "symbol": "ZS",
+    "price": 180,
+    "score": 58,
+    "rating": "HOLD",
+    "upside": 22.22222222222222
+  },
+  {
+    "timestamp": "2026-03-22T11:54:14.009316",
+    "symbol": "DDOG",
+    "price": 140,
+    "score": 47,
+    "rating": "BUY",
+    "upside": 28.57142857142857
+  },
+  {
+    "timestamp": "2026-03-22T11:54:14.016486",
+    "symbol": "TEAM",
+    "price": 175,
+    "score": 61,
+    "rating": "BUY",
+    "upside": 25.71428571428571
+  },
+  {
+    "timestamp": "2026-03-22T11:54:14.023702",
+    "symbol": "DOCU",
+    "price": 60,
+    "score": 41,
+    "rating": "BUY",
+    "upside": 41.66666666666667
+  },
+  {
+    "timestamp": "2026-03-22T11:54:14.031068",
+    "symbol": "ZM",
+    "price": 65,
+    "score": 43,
+    "rating": "HOLD",
+    "upside": 15.384615384615385
+  },
+  {
+    "timestamp": "2026-03-22T11:54:14.038325",
+    "symbol": "OKTA",
+    "price": 95,
+    "score": 54,
+    "rating": "BUY",
+    "upside": 26.31578947368421
+  }
+]

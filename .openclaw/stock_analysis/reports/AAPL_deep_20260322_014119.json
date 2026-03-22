@@ -1,0 +1,151 @@
+{
+  "symbol": "AAPL",
+  "generated_at": "2026-03-22T01:41:19.282333",
+  "financial": {
+    "metrics": {
+      "revenue_fy25": "$416,161M",
+      "revenue_growth": "6.4%",
+      "gross_margin": "46.9%",
+      "net_margin": "26.9%",
+      "net_income_fy25": "$112,010M",
+      "eps_fy25": "$7.46",
+      "eps_growth": "22.7%"
+    },
+    "score": 85,
+    "strengths": [
+      "毛利率47%",
+      "净利率27%",
+      "EPS增长23%"
+    ],
+    "weaknesses": [
+      "营收增速放缓至6%",
+      "iPhone依赖度高"
+    ]
+  },
+  "valuation": {
+    "metrics": {
+      "pe_current": 31.35,
+      "pe_5y_avg": 27,
+      "peg": 3.14,
+      "price": 247.99
+    },
+    "targets": {
+      "保守": {
+        "price": 221.56,
+        "upside": "-10.7%"
+      },
+      "中性": {
+        "price": 250.66,
+        "upside": "1.1%"
+      },
+      "乐观": {
+        "price": 283.11,
+        "upside": "14.2%"
+      }
+    },
+    "score": 75,
+    "verdict": "估值合理，略高于历史平均"
+  },
+  "competitors": {
+    "metrics": {
+      "aapl_pe": 31.35,
+      "sector_avg_pe": 27.2,
+      "aapl_vs_sector": "+4.4%"
+    },
+    "comparison": [
+      {
+        "ticker": "AAPL",
+        "pe": 31.35,
+        "growth": 6.4
+      },
+      {
+        "ticker": "MSFT",
+        "pe": 35.2,
+        "growth": 13.8
+      },
+      {
+        "ticker": "GOOGL",
+        "pe": 23.5,
+        "growth": 12.3
+      },
+      {
+        "ticker": "META",
+        "pe": 22.8,
+        "growth": 21.2
+      }
+    ],
+    "score": 70,
+    "strengths": [
+      "品牌护城河",
+      "生态系统",
+      "现金流充沛"
+    ],
+    "weaknesses": [
+      "增长放缓",
+      "估值偏高"
+    ]
+  },
+  "risk": {
+    "risks": [
+      {
+        "type": "宏观",
+        "level": "中",
+        "desc": "利率上升压力"
+      },
+      {
+        "type": "行业",
+        "level": "中",
+        "desc": "智能手机市场饱和"
+      },
+      {
+        "type": "公司",
+        "level": "低",
+        "desc": "产品创新放缓"
+      },
+      {
+        "type": "地缘",
+        "level": "高",
+        "desc": "中美贸易摩擦"
+      }
+    ],
+    "score": 65,
+    "mitigation": [
+      "服务业务增长",
+      "印度市场开拓",
+      "股票回购"
+    ]
+  },
+  "forecast": {
+    "fy26": {
+      "revenue": 445000,
+      "growth": "7%",
+      "eps": 8.2
+    },
+    "fy27": {
+      "revenue": 478000,
+      "growth": "7%",
+      "eps": 8.95
+    },
+    "fy28": {
+      "revenue": 512000,
+      "growth": "7%",
+      "eps": 9.7
+    },
+    "scenarios": {
+      "乐观": {
+        "price": 320,
+        "prob": "25%"
+      },
+      "中性": {
+        "price": 280,
+        "prob": "55%"
+      },
+      "悲观": {
+        "price": 220,
+        "prob": "20%"
+      }
+    },
+    "score": 70
+  },
+  "overall_score": 74.2
+}

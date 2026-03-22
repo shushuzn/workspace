@@ -1,399 +1,344 @@
-import logging
-logger = logging.getLogger(__name__)
-
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-SA-026 实时 WebSocket 行情
-【Phase 5 - 真实数据增强】
-
-功能:
-  - WebSocket 实时推送
-  - 多 symbol 订阅
-  - 自动重连
-  - 断线告警
-
-依赖: websocket-client (可选)
+AAPL 实时分析
+使用 yfinance 获取真实数据
 """
+
 import json
 import sys
-import os
-from pathlib import Path
 from datetime import datetime
-import time
-import threading
-import queue
 
-# 配置
-WS_DIR = Path("60-DATA/stock_026")
-CONFIG_FILE = Path("30-scripts-tools/sa_026_config.json")
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout.reconfigure(encoding='utf-8')
 
 try:
-    import websocket
-    WS_AVAILABLE = True
+    import yfinance as yf
+    HAS_YF = True
 except ImportError:
-    WS_AVAILABLE = False
+    HAS_YF = False
+    print("[WARN] yfinance not installed. Using mock data.")
 
 
-class RealtimeQuote:
-    """实时行情订阅"""
+def get_stock_data(symbol):
+    """获取股票数据"""
+    print(f"[INFO] 获取 {symbol} 数据...")
     
-    def __init__(self):
-        self.ws_dir = WS_DIR
-        self.config = self._load_config()
-        
-        self.ws_dir.mkdir(parents=True, exist_ok=True)
-        
-        self.subscriptions = set()
-        self.message_queue = queue.Queue()
-        self.running = False
-        self.ws = None
-        self.reconnect_count = 0
-        self.max_reconnect = 5
-        
-        self.log_file = self.ws_dir / "realtime_log.json"
-        self.state_file = self.ws_dir / "state.json"
-        
-        # 加载状态
-        self._load_state()
+    if not HAS_YF:
+        return get_mock_data(symbol)
     
-    def _load_state(self):
-        """加载订阅状态"""
-        if self.state_file.exists():
-            try:
-                with open(self.state_file, "r", encoding="utf-8") as f:
-                    state = json.load(f)
-                    self.subscriptions = set(state.get("subscriptions", []))
-            except (Exception,):
-                pass
-    
-    def _save_state(self):
-        """保存订阅状态"""
-        with open(self.state_file, "w", encoding="utf-8") as f:
-            json.dump({"subscriptions": list(self.subscriptions)}, f)
-    
-    def _load_config(self) -> dict:
-        default = {
-            "provider": "demo",  # demo, twelvedata, Finnhub
-            "demo_interval": 1,  # 秒
-            "auto_reconnect": True,
-            "max_reconnect": 5,
-            "log_enabled": True
-        }
+    try:
+        stock = yf.Ticker(symbol)
         
-        if CONFIG_FILE.exists():
-            try:
-                with open(CONFIG_FILE, "r", encoding="utf-8") as f:
-                    return {**default, **json.load(f)}
-            except (Exception,):
-                return default
-        return default
-    
-    def _log_message(self, msg: dict):
-        """记录消息"""
-        if not self.config["log_enabled"]:
-            return
+        # 实时价格
+        info = stock.info
         
-        logs = []
-        if self.log_file.exists():
-            try:
-                with open(self.log_file, "r", encoding="utf-8") as f:
-                    logs = json.load(f)
-            except (Exception,):
-                pass
+        # 最近历史
+        hist = stock.history(period="1mo")
         
-        logs.append({
-            "timestamp": datetime.now().isoformat(),
-            **msg
-        })
+        # 计算指标
+        current_price = info.get('currentPrice', info.get('previousClose', 0))
+        prev_close = info.get('previousClose', current_price)
+        change = current_price - prev_close
+        change_pct = (change / prev_close * 100) if prev_close else 0
         
-        # 只保留最近1000条
-        logs = logs[-1000:]
+        # MA
+        if len(hist) > 20:
+            ma20 = hist['Close'].tail(20).mean()
+        else:
+            ma20 = current_price
+            
+        if len(hist) > 50:
+            ma50 = hist['Close'].tail(50).mean()
+        else:
+            ma50 = current_price
         
-        with open(self.log_file, "w", encoding="utf-8") as f:
-            json.dump(logs, f, ensure_ascii=False, indent=2)
-    
-    def subscribe(self, symbols: list) -> dict:
-        """订阅 symbol"""
-        if isinstance(symbols, str):
-            symbols = [symbols]
+        # RSI (14)
+        if len(hist) >= 14:
+            delta = hist['Close'].diff()
+            gain = delta.clip(lower=0).rolling(14).mean()
+            loss = (-delta.clip(upper=0)).rolling(14).mean()
+            rs = gain / loss
+            rsi = 100 - (100 / (1 + rs)).iloc[-1]
+        else:
+            rsi = 50
         
-        for symbol in symbols:
-            self.subscriptions.add(symbol.upper())
-        
-        self._save_state()
-        
-        return {
-            "status": "success",
-            "subscribed": list(self.subscriptions),
-            "count": len(self.subscriptions)
-        }
-    
-    def unsubscribe(self, symbols: list) -> dict:
-        """取消订阅"""
-        if isinstance(symbols, str):
-            symbols = [symbols]
-        
-        for symbol in symbols:
-            self.subscriptions.discard(symbol.upper())
-        
-        self._save_state()
-        
-        return {
-            "status": "success",
-            "subscribed": list(self.subscriptions),
-            "count": len(self.subscriptions)
-        }
-    
-    def _generate_demo_quote(self, symbol: str) -> dict:
-        """生成模拟报价"""
-        import random
-        
-        base_prices = {
-            "AAPL": 250, "GOOGL": 142, "MSFT": 415,
-            "AMZN": 180, "TSLA": 245, "META": 485,
-            "NVDA": 780, "AMD": 165, "NFLX": 620,
-            "INTC": 45, "ORCL": 125, "CRM": 290
-        }
-        
-        base = base_prices.get(symbol, 100)
-        price = base + random.uniform(-2, 2)
-        change = random.uniform(-1, 1)
-        
-        return {
+        data = {
             "symbol": symbol,
-            "price": round(price, 2),
+            "price": round(current_price, 2),
             "change": round(change, 2),
-            "change_pct": round((change / base) * 100, 2),
-            "bid": round(price - 0.01, 2),
-            "ask": round(price + 0.01, 2),
-            "volume": random.randint(10000, 1000000),
-            "timestamp": datetime.now().isoformat()
+            "change_pct": round(change_pct, 2),
+            "prev_close": round(prev_close, 2),
+            "open": info.get('open', current_price),
+            "high": info.get('dayHigh', current_price),
+            "low": info.get('dayLow', current_price),
+            "volume": info.get('volume', 0),
+            "market_cap": info.get('marketCap', 0),
+            "pe": info.get('trailingPE', 0),
+            "eps": info.get('trailingEps', 0),
+            "dividend_yield": info.get('dividendYield', 0) * 100 if info.get('dividendYield') else 0,
+            "52w_high": info.get('fiftyTwoWeekHigh', 0),
+            "52w_low": info.get('fiftyTwoWeekLow', 0),
+            "ma20": round(ma20, 2),
+            "ma50": round(ma50, 2),
+            "rsi": round(rsi, 2),
+            "company": info.get('shortName', symbol),
+            "sector": info.get('sector', 'N/A'),
+            "recommendation": info.get('recommendationKey', 'N/A'),
+            "target_price": info.get('targetMeanPrice', 0),
+            "updated_at": datetime.now().isoformat()
         }
+        
+        print(f"[OK] 价格: ${data['price']} ({data['change_pct']:+.2f}%)")
+        return data
+        
+    except Exception as e:
+        print(f"[WARN] {e}")
+        return get_mock_data(symbol)
+
+
+def get_mock_data(symbol):
+    """模拟数据"""
+    return {
+        "symbol": symbol,
+        "price": 178.50,
+        "change": 2.35,
+        "change_pct": 1.33,
+        "prev_close": 176.15,
+        "open": 176.50,
+        "high": 179.20,
+        "low": 175.80,
+        "volume": 52000000,
+        "market_cap": 2800000000000,
+        "pe": 28.5,
+        "eps": 6.26,
+        "dividend_yield": 0.55,
+        "52w_high": 199.62,
+        "52w_low": 164.08,
+        "ma20": 177.30,
+        "ma50": 175.80,
+        "rsi": 58.5,
+        "company": "Apple Inc.",
+        "sector": "Technology",
+        "recommendation": "buy",
+        "target_price": 195.00,
+        "updated_at": datetime.now().isoformat()
+    }
+
+
+def analyze(data):
+    """分析股票"""
+    print(f"\n[2/4] 分析 {data['symbol']}...")
     
-    def start_demo_stream(self, duration: int = 10) -> dict:
-        """启动模拟实时流"""
-        if not self.subscriptions:
-            return {"status": "error", "message": "No subscriptions"}
-        
-        self.running = True
-        quotes = []
-        
-        for _ in range(duration):
-            if not self.running:
-                break
-            
-            for symbol in list(self.subscriptions):
-                quote = self._generate_demo_quote(symbol)
-                quotes.append(quote)
-                self._log_message(quote)
-                self.message_queue.put(quote)
-            
-            time.sleep(self.config["demo_interval"])
-        
-        self.running = False
-        
-        return {
-            "status": "success",
-            "duration": duration,
-            "quotes_received": len(quotes),
-            "symbols": list(self.subscriptions)
+    signals = []
+    trend = "震荡"
+    
+    # 趋势判断
+    if data['price'] > data['ma20'] > data['ma50']:
+        trend = "上涨"
+        signals.append("✅ 均线多头排列")
+    elif data['price'] < data['ma20'] < data['ma50']:
+        trend = "下跌"
+        signals.append("⚠️ 均线空头排列")
+    
+    # RSI 判断
+    rsi = data['rsi']
+    if rsi > 70:
+        signals.append("⚠️ RSI超买")
+    elif rsi < 30:
+        signals.append("✅ RSI超卖")
+    else:
+        signals.append("📊 RSI正常")
+    
+    # 相对位置
+    pos = (data['price'] - data['52w_low']) / (data['52w_high'] - data['52w_low']) * 100
+    signals.append(f"📍 52周位置: {pos:.1f}%")
+    
+    # 估值
+    pe = data['pe']
+    if pe < 20:
+        signals.append("💰 市盈率偏低（价值）")
+    elif pe > 35:
+        signals.append("💎 市盈率偏高（成长）")
+    else:
+        signals.append("📈 市盈率合理")
+    
+    result = {
+        "trend": trend,
+        "signals": signals,
+        "score": analyze_score(data)
+    }
+    
+    print(f"[OK] 趋势: {trend}")
+    print(f"[OK] 信号: {len(signals)} 条")
+    
+    return result
+
+
+def analyze_score(data):
+    """综合评分"""
+    score = 50  # 基础分
+    
+    # 趋势加分
+    if data['price'] > data['ma20']:
+        score += 10
+    if data['price'] > data['ma50']:
+        score += 10
+    
+    # RSI 加分
+    if 40 < data['rsi'] < 60:
+        score += 10
+    elif data['rsi'] < 30:
+        score += 15
+    elif data['rsi'] > 70:
+        score -= 10
+    
+    # 相对位置
+    pos = (data['price'] - data['52w_low']) / (data['52w_high'] - data['52w_low']) * 100
+    if pos < 30:
+        score += 10
+    elif pos > 80:
+        score -= 10
+    
+    return max(0, min(100, score))
+
+
+def recommend(data, analysis):
+    """推荐策略"""
+    print(f"\n[3/4] 生成策略建议...")
+    
+    # 自动判断风险偏好
+    if analysis['score'] < 40:
+        risk_level = "保守"
+    elif analysis['score'] > 70:
+        risk_level = "激进"
+    else:
+        risk_level = "稳健"
+    
+    strategies = {
+        "保守": {
+            "action": "观望",
+            "entry": f"等价格回调至 ${data['ma50']:.2f} 以下入场",
+            "stop_loss": f"止损 ${data['price'] * 0.95:.2f} (-5%)",
+            "target": f"目标 ${data['target_price']:.2f}",
+            "position": "10-20% 仓位",
+            "reason": "当前趋势不明，建议轻仓观望"
+        },
+        "稳健": {
+            "action": "分批建仓",
+            "entry": f"现价 ${data['price']:.2f} 可入30%，回调入剩余",
+            "stop_loss": f"止损 ${data['ma50']:.2f}",
+            "target": f"目标 ${data['target_price']:.2f} (+{((data['target_price']/data['price'])-1)*100:.1f}%)",
+            "position": "30-50% 仓位",
+            "reason": "均线多头，回调是机会"
+        },
+        "激进": {
+            "action": "追涨",
+            "entry": f"现价 ${data['price']:.2f} 直接入场",
+            "stop_loss": f"止损 ${data['ma20']:.2f}",
+            "target": f"目标 ${data['52w_high']:.2f}",
+            "position": "50-80% 仓位",
+            "reason": "趋势强劲，顺势而为"
         }
+    }
     
-    def get_latest(self, symbol: str = None) -> dict:
-        """获取最新行情"""
-        if self.log_file.exists():
-            try:
-                with open(self.log_file, "r", encoding="utf-8") as f:
-                    logs = json.load(f)
-                
-                if symbol:
-                    logs = [l for l in logs if l.get("symbol") == symbol.upper()]
-                
-                if logs:
-                    return {
-                        "status": "success",
-                        "latest": logs[-1],
-                        "count": len(logs)
-                    }
-            except (Exception,):
-                pass
-        
-        return {"status": "error", "message": "No data"}
+    strategy = strategies.get(risk_level, strategies["稳健"])
+    strategy["risk_level"] = risk_level
     
-    def get_price_alert(self, symbol: str, target_price: float, direction: str = "above") -> dict:
-        """价格告警"""
-        latest = self.get_latest(symbol)
-        
-        if latest["status"] != "success":
-            return {"status": "error", "message": "No data for " + symbol}
-        
-        current = latest["latest"]["price"]
-        
-        triggered = False
-        if direction == "above" and current >= target_price:
-            triggered = True
-        elif direction == "below" and current <= target_price:
-            triggered = True
-        
-        return {
-            "status": "success",
-            "symbol": symbol,
-            "current_price": current,
-            "target_price": target_price,
-            "direction": direction,
-            "triggered": triggered,
-            "timestamp": datetime.now().isoformat()
-        }
+    print(f"[OK] 推荐策略: {strategy['action']}")
     
-    def stream_to_file(self, symbol: str, duration: int = 60, interval: float = 1.0) -> dict:
-        """持续写入文件"""
-        output_file = self.ws_dir / f"{symbol}_stream.json"
-        
-        self.subscriptions.add(symbol.upper())
-        self.running = True
-        
-        start_time = time.time()
-        quotes = []
-        
-        while self.running and (time.time() - start_time) < duration:
-            quote = self._generate_demo_quote(symbol.upper())
-            quotes.append(quote)
-            
-            # 追加写入
-            with open(output_file, "a", encoding="utf-8") as f:
-                f.write(json.dumps(quote, ensure_ascii=False) + "\n")
-            
-            time.sleep(interval)
-        
-        self.running = False
-        
-        return {
-            "status": "success",
-            "symbol": symbol,
-            "duration": duration,
-            "quotes": len(quotes),
-            "file": str(output_file)
-        }
+    return strategy
+
+
+def generate_report(symbol, data, analysis, strategy):
+    """生成报告"""
+    print(f"\n[4/4] 生成报告...")
     
-    def stop(self):
-        """停止流"""
-        self.running = False
-        if self.ws:
-            try:
-                self.ws.close()
-            except (Exception,):
-                pass
-
-
-class WebSocketServer:
-    """简易 WebSocket 服务器 (可选)"""
+    report = {
+        "symbol": symbol,
+        "generated_at": datetime.now().isoformat(),
+        "summary": {
+            "company": data['company'],
+            "sector": data['sector'],
+            "price": f"${data['price']}",
+            "change": f"{data['change_pct']:+.2f}%",
+            "trend": analysis['trend'],
+            "score": analysis['score'],
+            "recommendation": strategy['action']
+        },
+        "data": data,
+        "analysis": analysis,
+        "strategy": strategy
+    }
     
-    def __init__(self, port: int = 8765):
-        self.port = port
-        self.clients = set()
+    # 保存
+    import os
+    report_dir = os.path.dirname(__file__).replace("30-scripts-tools", ".openclaw/stock_analysis/reports")
+    os.makedirs(report_dir, exist_ok=True)
     
-    def start(self) -> dict:
-        """
-# ==============================================================================
-# STAGE 1: ARCHITECT 架构设计
-
-# ==============================================================================
-# STAGE 2: CODE 编写代码
-# ==============================================================================
-
-Purpose: Automation workflow tool
-Data Flow: input -> process -> output
-# ==============================================================================
-
-# ==============================================================================
-# STAGE 3: ASK 询问确认
-# py sa_realtime_001.py  # Run verification
-# ==============================================================================
-"""
-ASK: Run verification
-
-Test Commands:
-    py sa_realtime_001.py
-
-Expected Output:
-    - Tool runs without errors
-    - Shows usage or performs intended action
-"""
-
-# ==============================================================================
-# STAGE 4: DEBUG 调试测试
-# Test: 2026
-# ==============================================================================
-"""
-DEBUG: Test cases and fixes
-
-Test Cases:
-    1. Basic invocation → Works
-    2. --help flag → Shows usage
-
-Fixes:
-    - (none yet)
-"""
-
-启动服务器"""
-        # 注意: 需要安装 websocket-server 库
-        return {
-            "status": "info",
-            "message": "WebSocket server requires additional setup",
-            "port": self.port
-        }
+    ts = datetime.now().strftime("%Y%m%d_%H%M%S")
+    report_file = f"{report_dir}/{symbol}_{ts}.json"
+    
+    with open(report_file, 'w', encoding='utf-8') as f:
+        json.dump(report, f, ensure_ascii=False, indent=2)
+    
+    print(f"[OK] 报告已保存")
+    
+    return report
 
 
-logging.basicConfig(level=logging.INFO)
+def print_report(report):
+    """打印报告"""
+    d = report['data']
+    a = report['analysis']
+    s = report['strategy']
+    
+    print("\n" + "=" * 60)
+    print(f"📊 AAPL 股票分析报告")
+    print("=" * 60)
+    
+    print(f"\n🏢 公司: {d['company']} ({d['sector']})")
+    print(f"💰 当前价格: ${d['price']} ({d['change_pct']:+.2f}%)")
+    print(f"📈 52周范围: ${d['52w_low']} - ${d['52w_high']}")
+    
+    print(f"\n📉 技术指标:")
+    print(f"   MA20: ${d['ma20']} | MA50: ${d['ma50']}")
+    print(f"   RSI(14): {d['rsi']}")
+    print(f"   综合评分: {a['score']}/100")
+    
+    print(f"\n📊 信号:")
+    for signal in a['signals']:
+        print(f"   {signal}")
+    
+    print(f"\n🎯 策略建议 ({s['risk_level']}):")
+    print(f"   操作: {s['action']}")
+    print(f"   入场: {s['entry']}")
+    print(f"   止损: {s['stop_loss']}")
+    print(f"   目标: {s['target']}")
+    print(f"   仓位: {s['position']}")
+    print(f"   理由: {s['reason']}")
+    
+    print("\n" + "=" * 60)
+
+
 def main():
-    rt = RealtimeQuote()
+    symbol = sys.argv[1] if len(sys.argv) > 1 else "AAPL"
     
-    if len(sys.argv) > 1:
-        if sys.argv[1] == "--subscribe":
-            symbols = sys.argv[2].split(",") if len(sys.argv) > 2 else ["AAPL"]
-            result = rt.subscribe(symbols)
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
-        
-        if sys.argv[1] == "--stream":
-            symbol = sys.argv[2] if len(sys.argv) > 2 else "AAPL"
-            duration = int(sys.argv[3]) if len(sys.argv) > 3 else 10
-            result = rt.start_demo_stream(duration)
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
-        
-        if sys.argv[1] == "--latest":
-            symbol = sys.argv[2] if len(sys.argv) > 2 else None
-            result = rt.get_latest(symbol)
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
-        
-        if sys.argv[1] == "--alert":
-            symbol = sys.argv[2] if len(sys.argv) > 2 else "AAPL"
-            price = float(sys.argv[3]) if len(sys.argv) > 3 else 250
-            direction = sys.argv[4] if len(sys.argv) > 4 else "above"
-            result = rt.get_price_alert(symbol, price, direction)
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
-        
-        if sys.argv[1] == "--file":
-            symbol = sys.argv[2] if len(sys.argv) > 2 else "AAPL"
-            duration = int(sys.argv[3]) if len(sys.argv) > 3 else 60
-            result = rt.stream_to_file(symbol, duration)
-            print(json.dumps(result, ensure_ascii=False, indent=2))
-            return 0
+    # 1. 获取数据
+    data = get_stock_data(symbol)
     
-    print("SA-026 Realtime Quotes")
-    print("Usage:")
-    print("  py sa_026_realtime.py --subscribe AAPL,GOOGL  # Subscribe")
-    print("  py sa_026_realtime.py --stream AAPL 10          # Stream 10s")
-    print("  py sa_026_realtime.py --latest AAPL             # Get latest")
-    print("  py sa_026_realtime.py --alert AAPL 260 above    # Price alert")
-    print("  py sa_026_realtime.py --file AAPL 60            # Stream to file")
-    return 0
+    # 2. 分析
+    analysis = analyze(data)
+    
+    # 3. 推荐策略
+    strategy = recommend(data, analysis)
+    
+    # 4. 生成报告
+    report = generate_report(symbol, data, analysis, strategy)
+    
+    # 打印报告
+    print_report(report)
 
 
 if __name__ == "__main__":
-    import sys
-    sys.exit(main())
+    main()

@@ -1,0 +1,35 @@
+{
+  "generated": "2026-03-22T11:48:13.655926",
+  "count": 1,
+  "stocks": [
+    {
+      "symbol": "NVDA",
+      "price": 172,
+      "target": 269,
+      "upside": 56.395348837209305,
+      "score": 87,
+      "rating": "STRONG BUY",
+      "pe": 34.88843813387424,
+      "fpe": 2.8000000000000003,
+      "peg": 0.6977687626774848,
+      "dcf_bull": 40.59756682131995,
+      "dcf_base": 26.99567889704691,
+      "dcf_bear": 14.797402110271559,
+      "roe": 57.99999999999999,
+      "pm": 49.0,
+      "de": 0.4,
+      "fcf": 2.8000000000000003,
+      "div": 0,
+      "beta": 1.7,
+      "recommend": "Expensive",
+      "analyst_rating": "Outperform",
+      "num_analysts": 52,
+      "rev_g": 50.0,
+      "gm": 73.0,
+      "roic": 45.0,
+      "fetched_at": "2026-03-22T11:48:13.645969",
+      "price_source": "cached",
+      "expires_at": 1774151580.0
+    }
+  ]
+}
