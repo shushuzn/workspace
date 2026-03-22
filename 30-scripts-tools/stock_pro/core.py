@@ -88,7 +88,7 @@ def calc_dcf(symbol, price, wacc=0.09, growth=0.10):
     }
 
 def calc_score(symbol, price, data):
-    """Calculate composite score"""
+    """Calculate composite score (0-100)"""
     t, r, n = data
     upside = (t - price) / price * 100 if price else 0
     gm, pm, roe, roic, de, rg, fcf, div = F.get(symbol, (0,0,0,0,0,0,0,0))
@@ -96,23 +96,95 @@ def calc_score(symbol, price, data):
     eps = E.get(symbol, 0)
     
     pe = price / eps if eps > 0 else 100
-    v_score = min(100, max(0, 100 - pe * 2)) if eps > 0 else 50
-    g_score = min(100, rg * 4) if rg > 0 else max(0, 50 + rg * 5)
-    p_score = min(100, (pm * 100 + gm * 0.5 + roic * 0.5))
-    b_score = max(0, 100 - de * 15)
-    m_score = max(0, 100 - (beta - 1) * 30)
     
-    weights = {"val": 0.25, "growth": 0.25, "prof": 0.25, "bal": 0.15, "mom": 0.10}
-    score = v_score * weights["val"] + g_score * weights["growth"] + p_score * weights["prof"] + b_score * weights["bal"] + m_score * weights["mom"]
+    # Value Score (25%): Lower PE = better, fair PE ~20x
+    if pe <= 15: v_score = 90
+    elif pe <= 20: v_score = 75
+    elif pe <= 25: v_score = 60
+    elif pe <= 30: v_score = 45
+    elif pe <= 40: v_score = 30
+    else: v_score = 15
     
-    if r == "Sell": score = min(score, 20)
-    elif r == "Underperform": score = min(score, 35)
+    # Growth Score (25%): Higher revenue growth = better
+    if rg >= 0.30: g_score = 90
+    elif rg >= 0.20: g_score = 75
+    elif rg >= 0.15: g_score = 60
+    elif rg >= 0.10: g_score = 45
+    elif rg >= 0.05: g_score = 30
+    else: g_score = 15
+    
+    # Profitability Score (25%): ROE + Profit Margin
+    prof = (roe * 0.5 + pm * 50)  # ROE already in %, pm in decimal
+    if prof >= 40: p_score = 90
+    elif prof >= 30: p_score = 75
+    elif prof >= 20: p_score = 60
+    elif prof >= 10: p_score = 45
+    else: p_score = 30
+    
+    # Balance Sheet Score (15%): Lower debt = better
+    if de <= 0.5: b_score = 90
+    elif de <= 1.0: b_score = 75
+    elif de <= 2.0: b_score = 60
+    elif de <= 3.0: b_score = 45
+    else: b_score = 30
+    
+    # Momentum/Beta Score (10%): Lower beta = better
+    if beta <= 0.8: m_score = 90
+    elif beta <= 1.0: m_score = 75
+    elif beta <= 1.2: m_score = 60
+    elif beta <= 1.5: m_score = 45
+    else: m_score = 30
+    
+    # Weighted average
+    score = v_score * 0.25 + g_score * 0.25 + p_score * 0.25 + b_score * 0.15 + m_score * 0.10
+    
+    # Analyst adjustment
+    if r in ("Outperform", "Buy", "Strong Buy"): score = max(score, 65)
+    elif r == "Overweight": score = max(score, 60)
     elif r == "Neutral": score = min(max(score, 45), 55)
-    elif r == "Hold": score = min(max(score, 40), 60)
-    elif r in ("Outperform", "Buy"): score = max(score, 60)
-    elif r == "Strong Buy": score = max(score, 80)
+    elif r == "Hold": score = min(max(score, 40), 55)
+    elif r in ("Underperform", "Sell"): score = min(score, 40)
     
     return int(min(100, max(0, score)))
+
+def calc_risk(symbol, price, data):
+    """Calculate risk score (0-100, higher = riskier)"""
+    _, _, _, _, de, rg, _, div = F.get(symbol, (0,0,0,0,0,0,0,0))
+    beta = B.get(symbol, 1.0)
+    eps = E.get(symbol, 0)
+    pe = price / eps if eps > 0 else 100
+    
+    # Risk factors (lower = riskier)
+    risks = {}
+    
+    # Valuation risk: High PE = risky
+    if pe >= 50: risks["valuation"] = 30
+    elif pe >= 40: risks["valuation"] = 50
+    elif pe >= 30: risks["valuation"] = 70
+    else: risks["valuation"] = 90
+    
+    # Debt risk: High debt = risky
+    if de >= 3: risks["debt"] = 30
+    elif de >= 2: risks["debt"] = 50
+    elif de >= 1: risks["debt"] = 70
+    else: risks["debt"] = 90
+    
+    # Volatility risk: High beta = risky
+    if beta >= 2.0: risks["volatility"] = 30
+    elif beta >= 1.5: risks["volatility"] = 50
+    elif beta >= 1.2: risks["volatility"] = 70
+    else: risks["volatility"] = 90
+    
+    # Growth risk: Negative or declining growth
+    if rg < 0: risks["growth"] = 30
+    elif rg < 0.05: risks["growth"] = 50
+    elif rg < 0.10: risks["growth"] = 70
+    else: risks["growth"] = 90
+    
+    risk_score = sum(risks.values()) / len(risks)
+    risk_level = "HIGH" if risk_score < 50 else "MEDIUM" if risk_score < 70 else "LOW"
+    
+    return {"risk_score": round(risk_score, 1), "risk_level": risk_level, "risks": risks}
 
 def analyze(symbol):
     """Full analysis for one symbol"""
@@ -145,6 +217,7 @@ def analyze(symbol):
     rev_g = rg * 100
     analyst_rating = r
     num_analysts = 25
+    risk = calc_risk(symbol, price, A[symbol])
     
     return {
         "symbol": symbol, "price": price, "source": source,
@@ -161,7 +234,9 @@ def analyze(symbol):
         "dcf_base": dcf["dcf_base"],
         "dcf_bull": dcf["dcf_bull"],
         "dcf_bear": dcf["dcf_bear"],
-        "dcf": dcf, "fetched": fetched
+        "dcf": dcf, "fetched": fetched,
+        "risk_score": risk["risk_score"],
+        "risk_level": risk["risk_level"],
     }
 
 def analyze_multiple(symbols):

@@ -7,7 +7,7 @@ description: |
   or generating investment reports.
 license: MIT
 metadata:
-  version: "13.0"
+  version: "15.0"
   category: finance
   sources:
     - Yahoo Finance API
@@ -388,8 +388,8 @@ stock_pro.__version__  # Check version
 
 | Version | Date | Changes |
 |---------|------|---------|
-| **13.0** | **2026-03-22** | **Export functions: accept symbols, analyze internally** |
-| 12.7 | 2026-03-22 | All features fixed: argparse, exports, portfolio, screener |
+| **15.0** | **2026-03-22** | **New scoring algorithm, risk assessment (LOW/MEDIUM/HIGH)** |
+| 14.0 | 2026-03-22 | DCF fixed, ROE% display, EPS data |
 | 12.6 | 2026-03-22 | CSV/XLSX export fixes, argparse conditions |
 | 12.5 | 2026-03-22 | Import paths, duplicate args, function signatures |
 | 12.0 | 2026-03-22 | Modular refactor (39+ modules) |
