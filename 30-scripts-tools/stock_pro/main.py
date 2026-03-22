@@ -217,7 +217,7 @@ Automation:
         args.export_json, args.export_md, args.export_html, args.export_all_formats,
         args.earnings_predict, args.fscore, args.dividend_report,
         args.summary is not None, args.compare, args.csv, args.xlsx, args.db,
-        args.dashboard, args.insights
+        args.dashboard is not None, args.insights, args.sentiment, args.sector_sentiment
     ])
     
     if args.symbols and not skip_single:
@@ -252,7 +252,7 @@ Automation:
     # Screener
     if args.screener:
         screener = StockScreener()
-        print(screener.show(live=args.live))
+        print(screener.show())
         return
     
     # Compare
@@ -292,7 +292,7 @@ Automation:
     # Dashboard
     if args.dashboard is not None:
         symbols = args.dashboard if args.dashboard else args.symbols
-        results = analyze_multiple(symbols, live=args.live)
+        results = analyze_multiple(symbols)
         print(gen_dashboard(results))
         return
     

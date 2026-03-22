@@ -51,7 +51,7 @@ class PortfolioManager:
         for sym, pos in self.positions.items():
             shares = pos["shares"]
             avg_cost = pos["avg_cost"]
-            _, _, price, _, _ = fetch(sym)
+            price, _, _, _ = fetch(sym)
             if use_live:
                 p = fetch_live(sym)
                 if p > 0: price = p

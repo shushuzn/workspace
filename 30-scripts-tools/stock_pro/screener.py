@@ -20,7 +20,7 @@ class StockScreener:
             analyst = A.get(sym, A["META"])
             pe = price / eps if eps > 0 else 50
             upside = (analyst[0] - price) / price * 100
-            score = calc_score(fin, price, eps, beta, analyst[0])
+            score = calc_score(sym, price, A.get(sym, A["META"]))
             rev_g = fin[5]
             if score >= self.min_score and upside >= self.min_upside and pe <= self.max_pe:
                 results.append({
