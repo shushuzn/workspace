@@ -1,6 +1,36 @@
 """Quick stock picks - Fast screening"""
 from .core import analyze_multiple_parallel
 
+def dividend_picks(min_div=2.0, min_score=50):
+    """Find best dividend stocks"""
+    from .data_financial import F
+    symbols = list(F.keys())
+    
+    results = analyze_multiple_parallel(symbols, max_workers=10)
+    
+    picks = []
+    for sym, data in results.items():
+        if not data:
+            continue
+        div_yield = data.get("div", 0)
+        if div_yield >= min_div and data["score"] >= min_score:
+            picks.append(data)
+    
+    return sorted(picks, key=lambda x: x["div"], reverse=True)[:10]
+
+def dividend_report():
+    """Generate dividend stock report"""
+    picks = dividend_picks(min_div=2.0)
+    
+    report = "# Dividend Stock Picks\n\n"
+    report += "| Symbol | Price | Div Yield | Score | P/E | ROE | Risk |\n"
+    report += "|--------|-------|-----------|-------|-----|-----|------|\n"
+    
+    for p in picks:
+        report += f"| {p['symbol']} | ${p['price']:.2f} | {p['div']:.2f}% | {p['score']} | {p['pe']:.0f}x | {p['roe']:.0f}% | {p.get('risk_level', 'N/A')} |\n"
+    
+    return report
+
 def value_picks(min_score=70, min_upside=20):
     """Find best value stocks"""
     from .data_financial import F

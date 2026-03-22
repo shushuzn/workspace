@@ -1,10 +1,10 @@
 """
 Stock PRO - Modular Stock Analysis Tool v14.0
 """
-__version__ = "15.0"
+__version__ = "16.0"
 
 # Core
-from .core import analyze, analyze_multiple, analyze_multiple_parallel, fetch, fetch_live, calc_score, calc_dcf
+from .core import analyze, analyze_multiple, analyze_multiple_parallel, fetch, fetch_live, calc_score, calc_dcf, calc_risk, detect_trend
 
 # Data & Config
 from .config import load_config, save_config
@@ -32,7 +32,7 @@ from .cache import get_cached, cache_stats, clear_cache
 from .history import track, get_history, get_trends, history_stats
 
 # Sectors
-from .sectors import get_sector, get_symbols_by_sector, get_all_sectors, sector_report
+from .sectors import get_sector, get_symbols_by_sector, get_all_sectors, sector_report, sector_rotation
 
 # Risk
 from .risk import risk_profile, risk_report, diversification_check
@@ -45,7 +45,7 @@ from .watchlist_v2 import (
 )
 
 # Picks
-from .picks import value_picks, growth_picks, dividend_picks, momentum_picks, top_picks
+from .picks import value_picks, growth_picks, dividend_picks, momentum_picks, top_picks, dividend_report
 
 # Performance
 from .performance import performance_report, performance_metrics, risk_adjusted_report

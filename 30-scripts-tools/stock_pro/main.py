@@ -23,10 +23,11 @@ from stock_pro.cron import CronScheduler
 from stock_pro.webhook import WebhookManager
 from stock_pro.cache import cache_stats, clear_cache
 from stock_pro.history import get_history, get_trends, history_stats
-from stock_pro.sectors import get_sector, get_symbols_by_sector, get_all_sectors, sector_report
+from stock_pro.sectors import get_sector, get_symbols_by_sector, get_all_sectors, sector_report, sector_rotation
 from stock_pro.risk import risk_profile, risk_report, diversification_check
+from stock_pro.core import detect_trend
 from stock_pro.watchlist_v2 import add_to_watchlist, remove_from_watchlist, list_watchlists, get_watchlist
-from stock_pro.picks import get_top_picks_report, quick_picks
+from stock_pro.picks import get_top_picks_report, quick_picks, dividend_report
 from stock_pro.performance import performance_report, risk_adjusted_report
 from stock_pro.validator import data_quality_report
 from stock_pro.exporters import export_all
@@ -50,7 +51,8 @@ from stock_pro.market import get_market_overview, market_report, sector_rotation
 from stock_pro.advanced_metrics import quality_report, risk_return_report, value_vs_growth_report, get_advanced_metrics
 from stock_pro.compare import compare_stocks, compare_risk, find_winners
 from stock_pro.earnings_analysis import earnings_report, predict_earnings_beat
-from stock_pro.dividend_analysis import dividend_report, calc_dividend_score
+from stock_pro.dividend_analysis import calc_dividend_score
+from stock_pro.picks import dividend_report
 from stock_pro.fscore import fscore_report, calc_fscore
 from stock_pro.core import A  # For picks
 
@@ -93,6 +95,7 @@ def main():
     parser.add_argument('--cache-clear', action='store_true', help='Clear cache')
     parser.add_argument('--history', nargs='?', const='30', help='Show history (days)')
     parser.add_argument('--trends', nargs='?', const='7', type=int, help='Show trends (days)')
+    parser.add_argument('--signal', action='store_true', help='Show buy/sell signals')
     parser.add_argument('--sectors', action='store_true', help='List all sectors')
     parser.add_argument('--sector', nargs=1, help='Analyze sector (e.g. Technology)')
     parser.add_argument('--risk', nargs='*', help='Risk analysis for stocks')
@@ -217,7 +220,8 @@ Automation:
         args.export_json, args.export_md, args.export_html, args.export_all_formats,
         args.earnings_predict, args.fscore, args.dividend_report,
         args.summary is not None, args.compare, args.csv, args.xlsx, args.db,
-        args.dashboard is not None, args.insights, args.sentiment, args.sector_sentiment
+        args.dashboard is not None, args.insights, args.sentiment, args.sector_sentiment,
+        args.signal, args.risk is not None, args.trends
     ])
     
     if args.symbols and not skip_single:
@@ -399,6 +403,21 @@ Automation:
         else:
             print("[Trends] No data")
         return
+    
+    # Signal Analysis
+    if args.signal:
+        symbols = args.symbols if args.symbols else ["NVDA"]
+        print("\n# Technical Signals\n")
+        for sym in symbols:
+            data = analyze(sym)
+            if data:
+                trend = detect_trend(sym, data["price"])
+                print(f"## {sym} @ ${data['price']:.2f} - {trend['trend']}")
+                for sig, sig_type in trend["signals"]:
+                    icon = "[+]" if sig_type == "bullish" else "[-]" if sig_type == "bearish" else "[*]"
+                    print(f"  {icon} {sig}")
+                print()
+        return
 
 
     # Sectors
@@ -469,6 +488,11 @@ Automation:
     
     if args.quick_picks:
         print(quick_picks(n=5))
+        return
+    
+    # Dividend Report
+    if args.dividend:
+        print(dividend_report())
         return
     
     # Performance Analysis
@@ -606,7 +630,7 @@ Automation:
     
     # Dividend Picks
     if args.dividend:
-        print(dividend_picks())
+        print(dividend_report())
         return
     
     # Dashboard Report

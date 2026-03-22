@@ -63,6 +63,41 @@ def fetch_live(symbols):
     results = fetch_batch(symbols)
     return [{"symbol": s, "price": results.get(s, (0,))[0]} for s in symbols]
 
+def detect_trend(symbol, price):
+    """Detect trend based on fundamentals"""
+    beta = B.get(symbol, 1.0)
+    _, _, _, _, _, rg, _, div = F.get(symbol, (0,0,0,0,0,0,0,0))
+    eps = E.get(symbol, 0)
+    pe = price / eps if eps > 0 else 100
+    
+    signals = []
+    
+    # Price vs Fair Value (simplified)
+    fair_pe = 20 + rg * 50
+    if pe < fair_pe * 0.8: signals.append(("UNDERVALUED", "bullish"))
+    elif pe > fair_pe * 1.2: signals.append(("OVERVALUED", "bearish"))
+    
+    # Momentum (Beta-based)
+    if beta > 1.3: signals.append(("HIGH_BETA", "volatile"))
+    elif beta < 0.8: signals.append(("LOW_BETA", "defensive"))
+    
+    # Growth
+    if rg > 0.2: signals.append(("HIGH_GROWTH", "bullish"))
+    elif rg > 0.1: signals.append(("MODERATE_GROWTH", "neutral"))
+    
+    # Dividend
+    if div > 0.03: signals.append(("HIGH_DIVIDEND", "income"))
+    
+    # Overall trend
+    bullish = sum(1 for _, s in signals if s == "bullish")
+    bearish = sum(1 for _, s in signals if s == "bearish")
+    
+    if bullish > bearish: trend = "UPTREND"
+    elif bearish > bullish: trend = "DOWNTREND"
+    else: trend = "NEUTRAL"
+    
+    return {"trend": trend, "signals": signals, "price": price}
+
 def calc_dcf(symbol, price, wacc=0.09, growth=0.10):
     """Simplified DCF using PE-based valuation"""
     eps = E.get(symbol, 0) or (price / 30)
