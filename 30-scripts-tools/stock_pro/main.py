@@ -72,9 +72,9 @@ def main():
     parser.add_argument('--live', '-l', action='store_true', help='Use live price')
     parser.add_argument('--compare', nargs='*', help='Compare stocks')
     parser.add_argument('--summary', nargs='*', help='Summary cards')
-    parser.add_argument('--csv', nargs='*', help='Export CSV')
-    parser.add_argument('--xlsx', nargs='*', help='Export Excel')
-    parser.add_argument('--db', nargs='*', help='Save to DB')
+    parser.add_argument('--csv', action='store_true', help='Export to CSV')
+    parser.add_argument('--xlsx', action='store_true', help='Export to Excel')
+    parser.add_argument('--db', action='store_true', help='Save to SQLite DB')
     parser.add_argument('--dashboard', nargs='*', help='Generate dashboard')
     parser.add_argument('--alert', nargs='*', help='Price alerts')
     parser.add_argument('--chart', nargs='*', help='Generate chart')
@@ -216,7 +216,8 @@ Automation:
         args.technical, args.sync_status,
         args.export_json, args.export_md, args.export_html, args.export_all_formats,
         args.earnings_predict, args.fscore, args.dividend_report,
-        args.summary is not None, args.compare, args.csv, args.xlsx, args.db
+        args.summary is not None, args.compare, args.csv, args.xlsx, args.db,
+        args.dashboard, args.insights
     ])
     
     if args.symbols and not skip_single:
@@ -268,21 +269,21 @@ Automation:
         return
     
     # CSV
-    if args.csv is not None:
-        symbols = args.csv if args.csv else args.symbols
-        results = analyze_multiple(symbols, live=args.live)
+    if args.csv:
+        symbols = args.symbols if args.symbols else ["NVDA"]
+        results = analyze_multiple(symbols)
         print(export_csv(results))
         return
     
     # Excel
-    if args.xlsx is not None:
-        symbols = args.xlsx if args.xlsx else args.symbols
-        results = analyze_multiple(symbols, live=args.live)
+    if args.xlsx:
+        symbols = args.symbols if args.symbols else ["NVDA"]
+        results = analyze_multiple(symbols)
         print(export_xlsx(results))
         return
     
     # DB
-    if args.db is not None:
+    if args.db:
         symbols = args.db if args.db else args.symbols
         results = analyze_multiple(symbols, live=args.live)
         print(save_db(results))
