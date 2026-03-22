@@ -15,7 +15,10 @@ OUTPUT = WORKSPACE / "50-reports" / "stocks"
 OUTPUT.mkdir(parents=True, exist_ok=True)
 DB_FILE = WORKSPACE / "30-scripts-tools" / "stock_pro.db"
 
-def export_csv(results, filename=None):
+def export_csv(symbols, filename=None):
+    """Export to CSV - takes symbols, does analysis internally"""
+    from stock_pro.core import analyze_multiple
+    results = analyze_multiple(symbols)
     if not filename: filename = OUTPUT / f"stocks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
     if not results: return "[CSV] No data"
     with open(filename, 'w', newline='', encoding='utf-8') as f:
@@ -25,7 +28,10 @@ def export_csv(results, filename=None):
             w.writerow([r['symbol'], r['price'], r['target'], f"{r['upside']:.1f}%", r['score'], r['rating'], f"{r['pe']:.1f}", f"{r['roe']:.1f}", r.get('source', 'unknown')])
     return f"[CSV] Exported {len(results)} stocks"
 
-def export_xlsx(results, filename=None):
+def export_xlsx(symbols, filename=None):
+    """Export to Excel - takes symbols, does analysis internally"""
+    from stock_pro.core import analyze_multiple
+    results = analyze_multiple(symbols)
     try: import openpyxl
     except ImportError: return "[Excel] pip install openpyxl"
     if not filename: filename = OUTPUT / f"stocks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
@@ -35,7 +41,10 @@ def export_xlsx(results, filename=None):
     wb.save(filename)
     return f"[Excel] Exported {len(results)} stocks"
 
-def save_db(results):
+def save_db(symbols):
+    """Save to DB - takes symbols, does analysis internally"""
+    from stock_pro.core import analyze_multiple
+    results = analyze_multiple(symbols)
     conn = sqlite3.connect(DB_FILE); c = conn.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS stocks (symbol TEXT, price REAL, target REAL, upside REAL, score INTEGER, rating TEXT, fetched_at TEXT)''')
     for r in results:
@@ -43,7 +52,10 @@ def save_db(results):
     conn.commit(); conn.close()
     return f"[DB] Saved {len(results)} stocks"
 
-def gen_dashboard(results):
+def gen_dashboard(symbols):
+    """Generate dashboard - takes symbols, does analysis internally"""
+    from stock_pro.core import analyze_multiple
+    results = analyze_multiple(symbols)
     if not results: return "[Dashboard] No data"
     fetched = results[0].get('fetched_at', datetime.now().isoformat())
     avg_score = sum(r['score'] for r in results) / len(results)

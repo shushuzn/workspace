@@ -79,3 +79,26 @@ def top_picks(n=10):
     
     picks = [data for data in results.values() if data]
     return sorted(picks, key=lambda x: x["score"], reverse=True)[:n]
+
+def quick_picks(n=5):
+    """Quick top picks for dashboard"""
+    return top_picks(n)
+
+def get_top_picks_report(n=10, category="all"):
+    """Generate top picks report"""
+    picks = top_picks(n)
+    
+    if category == "value":
+        picks = value_picks()
+    elif category == "growth":
+        picks = growth_picks()
+    elif category == "momentum":
+        picks = momentum_picks()
+    
+    report = ["# Top Stock Picks Report\n"]
+    report.append(f"## {len(picks)} Top Picks\n")
+    
+    for i, p in enumerate(picks, 1):
+        report.append(f"{i}. **{p['symbol']}** - Score: {p['score']}, Upside: {p.get('upside', 0):.1f}%")
+    
+    return "\n".join(report)

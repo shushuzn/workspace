@@ -272,28 +272,25 @@ Automation:
     if args.csv:
         symbols = args.symbols if args.symbols else ["NVDA"]
         results = analyze_multiple(symbols)
-        print(export_csv(results))
+        print(export_csv(symbols))
         return
     
     # Excel
     if args.xlsx:
         symbols = args.symbols if args.symbols else ["NVDA"]
-        results = analyze_multiple(symbols)
-        print(export_xlsx(results))
+        print(export_xlsx(symbols))
         return
     
     # DB
     if args.db:
         symbols = args.db if args.db else args.symbols
-        results = analyze_multiple(symbols, live=args.live)
-        print(save_db(results))
+        print(save_db(symbols))
         return
     
     # Dashboard
     if args.dashboard is not None:
         symbols = args.dashboard if args.dashboard else args.symbols
-        results = analyze_multiple(symbols)
-        print(gen_dashboard(results))
+        print(gen_dashboard(symbols))
         return
     
     # Chart
