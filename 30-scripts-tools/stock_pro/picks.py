@@ -70,15 +70,18 @@ def momentum_picks(min_score=60, min_upside=10):
     
     return sorted(picks, key=lambda x: x["score"], reverse=True)[:10]
 
-def top_picks(n=10):
-    """Get top N overall picks"""
+def top_picks(n=10, min_upside=15):
+    """Get top N overall picks - filtered by upside"""
+    n = int(n) if n else 10
     from .data_financial import F
     symbols = list(F.keys())
     
     results = analyze_multiple_parallel(symbols, max_workers=10)
     
-    picks = [data for data in results.values() if data]
-    return sorted(picks, key=lambda x: x["score"], reverse=True)[:n]
+    # Filter: positive upside and good score
+    picks = [data for data in results.values() if data 
+             if data.get("score", 0) >= 50 and data.get("upside", 0) >= min_upside]
+    return sorted(picks, key=lambda x: (x.get("score", 0), x.get("upside", 0)), reverse=True)[:n]
 
 def quick_picks(n=5):
     """Quick top picks for dashboard"""
@@ -86,6 +89,7 @@ def quick_picks(n=5):
 
 def get_top_picks_report(n=10, category="all"):
     """Generate top picks report"""
+    n = int(n) if n else 10
     picks = top_picks(n)
     
     if category == "value":

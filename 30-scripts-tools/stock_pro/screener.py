@@ -38,7 +38,7 @@ class StockScreener:
                     "pe": pe,
                     "peg": data.get("peg", 5),
                     "roe": data.get("roe", 0),
-                    "fcf": data.get("fcf", 0) * 100,
+                    "fcf": data.get("fcf", 0),  # Already in %
                     "div": data.get("div", 0),
                     "rating": data.get("rating_int", "HOLD"),
                 })

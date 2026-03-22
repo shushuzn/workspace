@@ -464,13 +464,11 @@ Automation:
     
     # Top Picks
     if args.picks:
-        results = analyze_multiple(args.symbols if args.symbols else list(A.keys()))
-        print(get_top_picks_report(results))
+        print(get_top_picks_report(n=10))
         return
     
     if args.quick_picks:
-        results = analyze_multiple(args.symbols if args.symbols else list(A.keys()))
-        print(quick_picks(results))
+        print(quick_picks(n=5))
         return
     
     # Performance Analysis
