@@ -1,0 +1,1 @@
+-e "# Cache files\n*.json\n!config.json\n!sources.json\n*.db\n*.txt\n" 
