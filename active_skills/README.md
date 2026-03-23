@@ -4,6 +4,7 @@
 |-------|---------|----------|-------------|
 | [workflow](workflow/) | v1.0.0 | workflow | Session management |
 | [coding](coding/) | v1.0.0 | programming | Universal coding workflow |
+| [ai-research](ai-research/) | v1.0.0 | research | FLARE/MEMORA/AutoTool research |
 | [stock-pro](stock-pro/) | v12.7 | finance | Stock analysis toolkit |
 | [pdf](pdf/) | - | document | PDF manipulation |
 | [xlsx](xlsx/) | - | document | Spreadsheet operations |
@@ -30,6 +31,7 @@ Skills are automatically loaded when relevant. Key phrases:
 | Skill | Trigger Phrases |
 |-------|-----------------|
 | coding | "write code", "debug", "refactor" |
+| ai-research | "research", "FLARE", "MEMORA", "AutoTool", "研究" |
 | stock-pro | "stock", "analyze", "portfolio" |
 | pdf | "pdf", "merge", "split" |
 | xlsx | "spreadsheet", "excel", "xlsx" |
@@ -101,5 +103,6 @@ metadata:
 
 | Date | Skill | Change |
 |------|-------|--------|
+| 2026-03-23 | ai-research | Created - FLARE/MEMORA/AutoTool integration |
 | 2026-03-22 | coding | Created |
 | 2026-03-22 | stock-pro | v12.7 - 20 fixes |

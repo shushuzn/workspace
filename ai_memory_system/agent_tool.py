@@ -6,15 +6,6 @@ Provides a simple string-based interface for AI agents to interact with memory.
 
 from .memory_system import MemorySystem
 
-try:
-    from .ai_research_tool import ResearchTool, get_research_tool
-
-    RESEARCH_TOOL_AVAILABLE = True
-except ImportError:
-    RESEARCH_TOOL_AVAILABLE = False
-    ResearchTool = None
-    get_research_tool = None
-
 
 class MemoryAgentTool:
     """
@@ -214,120 +205,6 @@ class MemoryAgentTool:
             lines.append(f"  长期 Key: {', '.join(stats['long_term_keys'][:5])}")
         return "\n".join(lines)
 
-    def research(self, task: str) -> str:
-        """
-        AI 研究任务 - 使用 FLARE/MEMORA/AutoTool 进行研究。
-
-        Args:
-            task: 研究任务描述
-
-        Returns:
-            研究结果
-        """
-        if not RESEARCH_TOOL_AVAILABLE:
-            return "❌ 研究工具未安装 (需要 ai_research_tool)"
-
-        _get_tool = get_research_tool
-        assert _get_tool is not None
-        tool = _get_tool()
-        result = tool.research(task)
-
-        lines = [
-            f"🔬 研究任务: {task}",
-            f"✅ 成功: {result['success']}",
-            f"📋 计划动作: {len(result['plan']['actions'])} 个",
-        ]
-
-        for action in result["plan"]["actions"]:
-            lines.append(f"  - [{action['action_type']}] {action['description']}")
-
-        if result.get("tool_sequence"):
-            lines.append(f"\n🔧 工具序列 (AutoTool 惯性):")
-            for t in result["tool_sequence"]:
-                lines.append(f"  - {t['tool']} (via {t['method']})")
-
-        stats = result.get("tool_registry_stats", {})
-        if stats:
-            lines.append(f"\n📊 工具效率: {stats.get('efficiency_score', 0):.1%}")
-
-        return "\n".join(lines)
-
-    def add_research_memory(self, content: str, entities: str = "") -> str:
-        """
-        添加研究记忆 - 使用 MEMORA 双层记忆。
-
-        Args:
-            content: 记忆内容
-            entities: 实体列表 (逗号分隔)
-
-        Returns:
-            确认信息
-        """
-        if not RESEARCH_TOOL_AVAILABLE:
-            return "❌ 研究工具未安装"
-
-        _get_tool = get_research_tool
-        assert _get_tool is not None
-        tool = _get_tool()
-        entity_list = [e.strip() for e in entities.split(",")] if entities else None
-        result = tool.add_research_memory(content, entity_list)
-
-        if result["success"]:
-            return f"✅ 已添加研究记忆 [{result['memory_id'][:8]}]: {content[:50]}..."
-        return f"❌ 添加失败"
-
-    def search_research_memory(self, query: str, limit: int = 3) -> str:
-        """
-        搜索研究记忆 - 使用谐波检索。
-
-        Args:
-            query: 搜索查询
-            limit: 返回数量
-
-        Returns:
-            搜索结果
-        """
-        if not RESEARCH_TOOL_AVAILABLE:
-            return "❌ 研究工具未安装"
-
-        _get_tool = get_research_tool
-        assert _get_tool is not None
-        tool = _get_tool()
-        result = tool.search_research_memory(query, limit=limit)
-
-        if not result["results"]:
-            return f"🔍 无研究记忆结果: {query}"
-
-        lines = [f"🔍 研究记忆搜索 '{query}' ({result['count']} 条):"]
-        for r in result["results"]:
-            lines.append(f"  • {r['abstraction'][:60]}...")
-            if r.get("cue_anchors"):
-                lines.append(f"    锚点: {', '.join(r['cue_anchors'][:3])}")
-
-        return "\n".join(lines)
-
-    def get_next_tool(self, current_tool: str) -> str:
-        """
-        获取下一个工具 - 基于 AutoTool 惯性。
-
-        Args:
-            current_tool: 当前工具
-
-        Returns:
-            下一个工具建议
-        """
-        if not RESEARCH_TOOL_AVAILABLE:
-            return "❌ 研究工具未安装"
-
-        _get_tool = get_research_tool
-        assert _get_tool is not None
-        tool = _get_tool()
-        result = tool.get_next_tool(current_tool)
-
-        if result["next"]:
-            return f"🔧 {current_tool} → {result['next']} (via {result['method']}, 效率 {result['efficiency']:.1%})"
-        return f"🔧 {current_tool} → 无惯性建议 (使用 LLM)"
-
     def help(self) -> str:
         """显示帮助信息。"""
         return """🧠 AI Memory System 帮助
@@ -344,17 +221,10 @@ class MemoryAgentTool:
   status   查看状态    status
   help     显示帮助    help
 
-AI研究命令 (FLARE+MEMORA+AutoTool):
-  research     AI研究任务   research '{"task": "研究AI Agent规划"}'
-  add_research_memory 添加研究记忆 add_research_memory '{"content": "内容", "entities": "e1,e2"}'
-  search_research_memory 搜索研究记忆 search_research_memory '{"query": "查询", "limit": 3}'
-  get_next_tool 下一工具    get_next_tool '{"current_tool": "research_scan"}'
-
 示例:
   py active_skills/memory-assistant/run_memory.py status
   py active_skills/memory-assistant/run_memory.py memorize '{"key": "user", "value": "Alice", "memory_type": "long"}'
-  py active_skills/memory-assistant/run_memory.py search '{"query": "alice"}'
-  py active_skills/memory-assistant/run_memory.py research '{"task": "研究自治Agent"}'"""
+  py active_skills/memory-assistant/run_memory.py search '{"query": "alice"}'"""
 
     def run(self, action: str, **kwargs) -> str:
         actions = {
@@ -370,11 +240,6 @@ AI研究命令 (FLARE+MEMORA+AutoTool):
             "clear": self.clear_short_term,
             "status": self.get_status,
             "help": self.help,
-            # AI Research Tool integration
-            "research": self.research,
-            "add_research_memory": self.add_research_memory,
-            "search_research_memory": self.search_research_memory,
-            "get_next_tool": self.get_next_tool,
         }
         if action not in actions:
             return f"❌ 未知动作: {action}"
