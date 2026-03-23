@@ -4,7 +4,7 @@ Stock PRO - Modular Stock Analysis Tool v14.0
 __version__ = "16.0"
 
 # Core
-from .core import analyze, analyze_multiple, analyze_multiple_parallel, fetch, fetch_live, calc_score, calc_dcf, calc_risk, detect_trend
+from .core import analyze, analyze_multiple, analyze_multiple_parallel, fetch, fetch_live, calc_score, calc_dcf, calc_risk, detect_trend, calc_momentum, momentum_report, ultimate_analysis, ultimate_report
 
 # Data & Config
 from .config import load_config, save_config
@@ -77,7 +77,7 @@ from .pdf_export import export_pdf, full_pdf_report
 from .optimizer import optimize_report, PortfolioOptimizer
 
 # Sentiment
-from .sentiment import sentiment_report, sector_sentiment, calculate_sentiment
+from .sentiment import sentiment_report, sector_sentiment, calculate_sentiment, research_report, combined_analysis, sentiment_report_full, institutional_report, institutional_analysis, fetch_jin10_news, jin10_news_report, jin10_stock_news, fetch_cn_news, get_cn_news_for_stock
 
 # Dashboard
 from .dashboard import Dashboard, dashboard_report

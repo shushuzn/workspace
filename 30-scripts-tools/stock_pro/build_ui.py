@@ -118,12 +118,39 @@ html = f'''<!DOCTYPE html>
     </div>
     
     <script>
-        async function analyze() {{
+        // Real-time update function
+        async function updateData() {
+            try {
+                // Update last updated time
+                document.querySelector('.subtitle').textContent = 'Last updated: ' + new Date().toLocaleString();
+                
+                // Here you would typically fetch new data from an API
+                // For now, we'll just refresh the page to get new data
+                location.reload();
+            } catch (error) {
+                console.error('Error updating data:', error);
+            }
+        }
+        
+        // Set up auto-refresh every 30 seconds
+        setInterval(updateData, 30000);
+        
+        async function analyze() {
             const sym = document.getElementById('symbol').value.toUpperCase();
             const result = document.getElementById('result');
             result.innerHTML = '<p>Loading...</p>';
             result.style.display = 'block';
             
-            try {{
-                const resp = await fetch('/api/analyze/' + sym);
-                const data
+            try {
+                // For standalone HTML, we'll just show a message
+                // In a real scenario, you would have an API endpoint
+                result.innerHTML = '<div style="padding: 20px;">
+                    <h3>Analysis for ' + sym + '</h3>
+                    <p>Real-time analysis would be displayed here.</p>
+                    <p>Note: This is a standalone HTML version. For full functionality, use the Dash app.</p>
+                </div>';
+                document.getElementById('chart-container').style.display = 'block';
+            } catch (error) {
+                result.innerHTML = '<p style="color: #ff4757;">Error: ' + error.message + '</p>';
+            }
+        }

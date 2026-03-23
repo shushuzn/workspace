@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """
-Stock PRO v11.0 - Modular Stock Analysis Tool
+Stock PRO v20.0 - Modular Stock Analysis Tool
 """
 import sys
+import io
 import json
 import argparse
+from datetime import datetime
 from pathlib import Path
+
+# Fix Windows GBK encoding
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 # Add parent to path for stock_pro imports
 parent_dir = str(Path(__file__).parent.parent)
@@ -25,7 +30,7 @@ from stock_pro.cache import cache_stats, clear_cache
 from stock_pro.history import get_history, get_trends, history_stats
 from stock_pro.sectors import get_sector, get_symbols_by_sector, get_all_sectors, sector_report, sector_rotation
 from stock_pro.risk import risk_profile, risk_report, diversification_check
-from stock_pro.core import detect_trend
+from stock_pro.core import detect_trend, calc_momentum, momentum_report, ultimate_analysis, ultimate_report
 from stock_pro.watchlist_v2 import add_to_watchlist, remove_from_watchlist, list_watchlists, get_watchlist
 from stock_pro.picks import get_top_picks_report, quick_picks, dividend_report
 from stock_pro.performance import performance_report, risk_adjusted_report
@@ -40,7 +45,11 @@ from stock_pro.sync import sync_yfinance, get_sync_status
 from stock_pro.pdf_export import export_pdf, full_pdf_report
 from stock_pro.optimizer import optimize_report
 from stock_pro.earnings_analysis import earnings_report, predict_earnings_beat
-from stock_pro.sentiment import sentiment_report, sector_sentiment
+from stock_pro.sentiment import sentiment_report, sector_sentiment, research_report, combined_analysis, sentiment_report_full, institutional_report, institutional_analysis, fetch_jin10_news, jin10_news_report, jin10_stock_news, fetch_cn_news, get_cn_news_for_stock
+from stock_pro.news_api import get_news as get_live_news, news_report as live_news_report, get_stats as get_news_stats
+from stock_pro.realtime_news import format_report as realtime_news_report, get_realtime_news, format_report
+from stock_pro.rss_news import format_report as rss_report, get_news as rss_get_news
+from stock_pro.fast_news import format_report as fast_news_report, get_news as fast_get_news
 from stock_pro.screener_v2 import advanced_screener_report, value_picks, growth_picks, dividend_picks
 from stock_pro.dashboard import dashboard_report, Dashboard
 from stock_pro.watchlist_v2 import watchlist_performance, compare_watchlists
@@ -59,14 +68,14 @@ from stock_pro.core import A  # For picks
 
 BANNER = """
 +==============================================================+
-|                    Stock PRO v12.0                          |
+|                    Stock PRO v20.0                          |
 |          Professional Stock Analysis Suite                  |
 +==============================================================+
 """
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Stock PRO v11.0", add_help=False)
+    parser = argparse.ArgumentParser(description="Stock PRO v20.0", add_help=False)
     parser.add_argument('symbols', nargs='*', help='Stock symbols')
     parser.add_argument('--help', '-h', action='store_true')
     parser.add_argument('--cn', action='store_true', help='Chinese report')
@@ -127,6 +136,19 @@ def main():
     parser.add_argument('--earnings-predict', action='store_true', help='Predict earnings beat')
     parser.add_argument('--sentiment', action='store_true', help='News sentiment')
     parser.add_argument('--sector-sentiment', action='store_true', help='Sector sentiment')
+    parser.add_argument('--research', action='store_true', help='Research reports summary')
+    parser.add_argument('--combined', action='store_true', help='Combined analysis (tech+sentiment+research)')
+    parser.add_argument('--institutional', action='store_true', help='Institutional ownership analysis')
+    parser.add_argument('--momentum', action='store_true', help='Momentum analysis')
+    parser.add_argument('--ultimate', action='store_true', help='Ultimate analysis (all features)')
+    parser.add_argument('--jin10', action='store_true', help='Jin10 latest news')
+    parser.add_argument('--refresh-jin10', action='store_true', help='Refresh Jin10 cache from xnews.jin10.com')
+    parser.add_argument('--cnnews', action='store_true', help='Chinese financial news (Sina/Netease)')
+    parser.add_argument('--news', action='store_true', help='Real-time news (Yahoo + Sina)')
+    parser.add_argument('--rt', action='store_true', help='Realtime news (zero latency)')
+    parser.add_argument('--content', action='store_true', help='Fetch full article content')
+    parser.add_argument('--rss', action='store_true', help='RSS feeds (unlimited, no rate limits)')
+    parser.add_argument('--fast', action='store_true', help='Fast news with full content (async)')
     parser.add_argument('--screener-advanced', action='store_true', help='Advanced screener')
     parser.add_argument('--value', action='store_true', help='Value stock picks')
     parser.add_argument('--growth', action='store_true', help='Growth stock picks')
@@ -164,7 +186,7 @@ def main():
     # Help
     if args.help or (not args.symbols and not any(vars(args).values())):
         print("""
-Stock PRO v11.0 - Usage
+Stock PRO v20.0 - Usage
 =======================
 
 Analysis:
@@ -220,8 +242,9 @@ Automation:
         args.export_json, args.export_md, args.export_html, args.export_all_formats,
         args.earnings_predict, args.fscore, args.dividend_report,
         args.summary is not None, args.compare, args.csv, args.xlsx, args.db,
-        args.dashboard is not None, args.insights, args.sentiment, args.sector_sentiment,
-        args.signal, args.risk is not None, args.trends
+        args.dashboard is not None, args.insights, args.sentiment, args.sector_sentiment, args.research, args.combined,
+        args.institutional, args.momentum, args.ultimate, args.jin10, args.cnnews, args.news, args.rt, args.rss, args.fast,
+        args.refresh_jin10, args.signal, args.risk is not None, args.trends
     ])
     
     if args.symbols and not skip_single:
@@ -611,6 +634,106 @@ Automation:
     # Sector Sentiment
     if args.sector_sentiment:
         print(sector_sentiment())
+        return
+    
+    # Research Reports
+    if args.research:
+        symbols = args.symbols if args.symbols else None
+        print(research_report(symbols))
+        return
+    
+    # Combined Analysis
+    if args.combined:
+        symbols = args.symbols if args.symbols else ["NVDA", "MSFT", "GOOGL", "AAPL", "META"]
+        print(sentiment_report_full(symbols))
+        return
+    
+    # Institutional Ownership
+    if args.institutional:
+        symbols = args.symbols if args.symbols else None
+        print(institutional_report(symbols))
+        return
+    
+    # Momentum Analysis
+    if args.momentum:
+        symbols = args.symbols if args.symbols else None
+        print(momentum_report(symbols))
+        return
+    
+    # Ultimate Analysis
+    if args.ultimate:
+        if args.symbols and len(args.symbols) == 1:
+            print(ultimate_analysis(args.symbols[0]))
+        else:
+            symbols = args.symbols if args.symbols else None
+            print(ultimate_report(symbols))
+        return
+    
+    # Jin10 News
+    if args.jin10:
+        if args.symbols and len(args.symbols) == 1:
+            print(jin10_stock_news(args.symbols[0]))
+        else:
+            print(jin10_news_report())
+        return
+    
+    # Refresh Jin10 Cache
+    if args.refresh_jin10:
+        print("Refreshing Jin10 cache...")
+        from stock_pro.sentiment import fetch_jin10_news
+        news = fetch_jin10_news()
+        print(f"Refreshed {len(news)} Jin10 news items")
+        return
+    
+    # Chinese Financial News
+    if args.cnnews:
+        if args.symbols and len(args.symbols) == 1:
+            news = get_cn_news_for_stock(args.symbols[0])
+            report = f"# Chinese News: {args.symbols[0]}\n\n"
+            report += f"_Sources: Sina Finance, NetEase Money, Phoenix Finance_\n\n"
+            if news:
+                for i, n in enumerate(news[:15], 1):
+                    report += f"**{i}. {n['title']}**\n"
+                    report += f"   [{n['source']}] {n['time']}\n\n"
+            else:
+                report += "_No relevant news found._\n"
+            print(report)
+        else:
+            news = fetch_cn_news("sina", max_items=30)
+            report = "# Chinese Financial News\n\n"
+            report += f"_Source: Sina Finance | Items: {len(news)} | {datetime.now().strftime('%Y-%m-%d %H:%M')}_\n\n"
+            for i, n in enumerate(news[:20], 1):
+                report += f"**{i}. {n['title'][:80]}...**\n"
+                report += f"   [{n['source']}] {n['time']}\n\n"
+            print(report)
+        return
+    
+    # Live News (from SQLite cache)
+    if args.news:
+        if args.symbols and len(args.symbols) == 1:
+            print(live_news_report(args.symbols[0]))
+        else:
+            stats = get_news_stats()
+            print(live_news_report())
+        return
+    
+    # Realtime News (direct API - zero latency)
+    if args.rt:
+        symbol = args.symbols[0] if args.symbols else None
+        with_content = args.content
+        print(format_report(symbol, with_content))
+        return
+    
+    # RSS News (unlimited, no rate limits)
+    if args.rss:
+        symbol = args.symbols[0] if args.symbols else None
+        print(rss_report(symbol))
+        return
+    
+    # Fast News (async, with full content)
+    if args.fast:
+        symbol = args.symbols[0] if args.symbols else None
+        print(fast_news_report(symbol, with_content=True))
         return
     
     # Advanced Screener

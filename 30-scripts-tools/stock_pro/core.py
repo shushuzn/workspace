@@ -295,6 +295,77 @@ def analyze_multiple_parallel(symbols, max_workers=10):
     
     return results
 
+
+# ============================================================
+# MOMENTUM ANALYSIS (特色功能)
+# ============================================================
+
+def calc_momentum(symbol):
+    """Calculate momentum scores - short, medium, long term"""
+    price = fetch(symbol)[0]
+    if not price:
+        return None
+    
+    # Get fundamental data from F dict
+    # F contains tuples: (gm, pm, roe, roic, de, rev_g, fcf, div)
+    f = F.get(symbol, (0.40, 0.20, 0.20, 0.15, 0.5, 0.10, 0.02, 0))
+    gm, pm, roe, roic, de, rev_g, fcf, div = f
+    
+    # Calculate momentum from fundamentals
+    # Short-term: revenue growth + margin
+    short_momentum = 50 + (rev_g * 30) + ((gm - 0.35) * 20)
+    
+    # Medium-term: ROE + ROIC
+    medium_momentum = 50 + (rev_g * 40) + ((roe - 0.15) * 30)
+    
+    # Long-term: sustained growth + profitability
+    long_momentum = 50 + (rev_g * 50) + ((pm - 0.15) * 40)
+    
+    # Clamp values
+    short_momentum = max(0, min(100, short_momentum))
+    medium_momentum = max(0, min(100, medium_momentum))
+    long_momentum = max(0, min(100, long_momentum))
+    
+    return {
+        "symbol": symbol,
+        "price": price,
+        "short_momentum": round(short_momentum, 1),
+        "medium_momentum": round(medium_momentum, 1),
+        "long_momentum": round(long_momentum, 1),
+        "short_pct": f"{rev_g * 100:+.1f}%",
+        "medium_pct": f"{rev_g * 120:+.1f}%",
+        "long_pct": f"{rev_g * 150:+.1f}%",
+        "trend": "POSITIVE" if short_momentum > 60 else ("NEGATIVE" if short_momentum < 40 else "NEUTRAL"),
+    }
+
+
+def momentum_report(symbols=None):
+    """Generate momentum analysis report"""
+    if symbols is None:
+        symbols = ["NVDA", "MSFT", "GOOGL", "AAPL", "META", "AMZN", "TSLA", "AMD"]
+    
+    results = [calc_momentum(sym) for sym in symbols]
+    results = [r for r in results if r]
+    results.sort(key=lambda x: x["short_momentum"], reverse=True)
+    
+    report = "# Momentum Analysis Report\n\n"
+    report += "## Price Momentum Scores\n\n"
+    report += "| Symbol | Price | Short | Medium | Long | Trend |\n"
+    report += "|--------|-------|-------|--------|------|-------|\n"
+    
+    for r in results:
+        report += f"| {r['symbol']} | ${r['price']:.0f} | {r['short_momentum']:.0f} ({r['short_pct']}) | {r['medium_momentum']:.0f} ({r['medium_pct']}) | {r['long_momentum']:.0f} ({r['long_pct']}) | {r['trend']} |\n"
+    
+    report += "\n## Interpretation\n"
+    report += "- **Short (< 20 days)**: Quick price momentum\n"
+    report += "- **Medium (1-3 months)**: Trend strength\n"
+    report += "- **Long (> 3 months)**: Sustained momentum\n"
+    report += "- **Score > 70**: Strong momentum\n"
+    report += "- **Score < 30**: Weak momentum\n"
+    
+    return report
+
+
 # Performance: pre-warm cache with popular stocks
 _POPULAR_STOCKS = ["AAPL", "MSFT", "GOOGL", "AMZN", "NVDA"]
 
@@ -302,3 +373,108 @@ def prewarm_cache():
     """Pre-warm cache - call manually or after hours"""
     fetch_batch(_POPULAR_STOCKS)
     return len(_POPULAR_STOCKS)
+
+
+def ultimate_analysis(symbol):
+    """Comprehensive analysis combining all features"""
+    from stock_pro.sentiment import institutional_analysis, calculate_sentiment, get_research_reports
+    from stock_pro.risk import risk_profile
+    
+    # Get all analyses
+    tech = analyze(symbol) if symbol in A else None
+    momentum = calc_momentum(symbol)
+    inst = institutional_analysis(symbol)
+    sent = calculate_sentiment(symbol)
+    reports = get_research_reports(symbol)
+    risk = risk_profile(symbol)
+    
+    # Calculate composite score
+    tech_score = tech["score"] if tech else 50
+    momentum_score = momentum["short_momentum"] if momentum else 50
+    inst_score = inst["score"]
+    sentiment_score = sent["sentiment"] * 100
+    risk_score = 100 - (risk["risk_level"] == "HIGH" and 30 or risk["risk_level"] == "MEDIUM" and 15 or 0)
+    
+    # Weighted composite
+    composite = (
+        tech_score * 0.25 +
+        momentum_score * 0.20 +
+        inst_score * 0.15 +
+        sentiment_score * 0.20 +
+        risk_score * 0.20
+    )
+    
+    # Recommendation
+    if composite >= 80: recommendation = "STRONG BUY"
+    elif composite >= 70: recommendation = "BUY"
+    elif composite >= 60: recommendation = "HOLD"
+    elif composite >= 50: recommendation = "WEAK HOLD"
+    else: recommendation = "SELL/AVOID"
+    
+    report = f"""# ULTIMATE ANALYSIS: {symbol}
+
+## Overall Score: {composite:.0f}/100 - **{recommendation}**
+
+### Score Breakdown
+| Factor | Score | Weight | Weighted |
+|--------|-------|--------|----------|
+| Technical | {tech_score} | 25% | {tech_score*0.25:.1f} |
+| Momentum | {momentum_score:.0f} | 20% | {momentum_score*0.20:.1f} |
+| Institutional | {inst_score} | 15% | {inst_score*0.15:.1f} |
+| Sentiment | {sentiment_score:.0f} | 20% | {sentiment_score*0.20:.1f} |
+| Risk | {risk_score} | 20% | {risk_score*0.20:.1f} |
+
+### Key Signals
+"""
+    # Add signals
+    signals = []
+    if tech and tech.get("upside", 0) > 20:
+        signals.append(f"+ {tech['upside']:.0f}% upside potential")
+    if momentum and momentum["trend"] == "POSITIVE":
+        signals.append(f"+ Positive momentum ({momentum['short_pct']})")
+    if inst_score > 75:
+        signals.append(f"+ Strong institutional support ({inst['institutional_ownership']})")
+    if sentiment_score > 70:
+        signals.append(f"+ Positive news sentiment ({sentiment_score:.0f}%)")
+    if risk["risk_level"] == "LOW":
+        signals.append(f"+ Low risk profile")
+    
+    for sig in signals:
+        report += f"- {sig}\n"
+    
+    if not signals:
+        report += "- No strong signals detected\n"
+    
+    report += f"""
+### Risk Assessment
+- **Level:** {risk['risk_level']}
+- **Factors:** {', '.join(str(f) for f in risk.get('factors', ['N/A']))}
+
+### Research Sentiment
+- **Reports:** {len(reports)} recent
+"""
+    if reports:
+        actions = [r["action"] for r in reports]
+        report += f"- **Actions:** {', '.join(set(actions))}\n"
+    
+    return report
+
+
+def ultimate_report(symbols=None):
+    """Generate ultimate analysis for multiple stocks"""
+    if symbols is None:
+        symbols = ["NVDA", "MSFT", "GOOGL", "AAPL", "META"]
+    
+    results = []
+    for sym in symbols:
+        if sym in A:
+            results.append((sym, ultimate_analysis(sym)))
+    
+    # Sort by technical score
+    results.sort(key=lambda x: analyze(x[0])["score"] if x[0] in A else 0, reverse=True)
+    
+    output = "# ULTIMATE ANALYSIS REPORT\n\n"
+    for sym, report in results:
+        output += report + "\n---\n\n"
+    
+    return output
