@@ -115,3 +115,4 @@ flow-archive/
 30-scripts-tools/stock_pro/*.xml
 30-scripts-tools/stock_pro/*.db
 30-scripts-tools/stock_pro/rss_cache/ 
+"agent.json"  
