@@ -79,8 +79,42 @@ ai-memory-system/
 ├── retrieval.py         # Unified retrieval interface
 ├── distiller.py         # LLM-based memory distillation
 ├── memory_system.py     # Core MemorySystem class
+├── ai_research_tool.py  # AI Research Tool (FLARE + MEMORA + AutoTool)
 ├── main.py              # CLI entry point
 └── README.md
+```
+
+## AI Research Tool (v3.0)
+
+Integrated research system combining FLARE + MEMORA + AutoTool:
+
+```python
+from ai_memory_system.ai_research_tool import ResearchTool, get_research_tool
+
+# Get singleton instance
+tool = get_research_tool()
+
+# Run research task
+result = tool.research("Research AI agent planning")
+
+# Add to memory
+tool.add_research_memory("FLARE planner solves myopic commitment", entities=["FLARE"])
+
+# Search memories
+results = tool.search_research_memory("FLARE")
+
+# Get next tool via AutoTool inertia
+next_tool = tool.get_next_tool("research_scan")
+# Returns: {"next": "research_analyze", "method": "graph", "efficiency": 1.0}
+```
+
+### CLI Usage
+
+```bash
+py ai_research_tool.py research --task "Research AI agents"
+py ai_research_tool.py add --content "FLARE saves 30% cost"
+py ai_research_tool.py search --query "FLARE"
+py ai_research_tool.py next --current research_scan
 ```
 
 ## Requirements
