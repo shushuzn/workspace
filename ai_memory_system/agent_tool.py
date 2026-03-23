@@ -51,6 +51,15 @@ class MemoryAgentTool:
         self._ms.save()
         return f"✅ 已批量记忆 {count} 条 [{memory_type}]"
 
+    def delete(self, key: str) -> str:
+        """删除记忆。"""
+        short_removed = self._ms._short_term.remove(key)
+        long_removed = self._ms._long_term.remove(key)
+        if short_removed or long_removed:
+            self._ms.save()
+            return f"🗑️ 已删除记忆: {key}"
+        return f"❌ 未找到记忆: {key}"
+
     def recall(self, key: str) -> str:
         """
         记忆召回 - 根据 key 获取记忆。
@@ -208,6 +217,7 @@ class MemoryAgentTool:
         actions = {
             "memorize": self.memorize,
             "batch_memorize": self.batch_memorize,
+            "delete": self.delete,
             "recall": self.recall,
             "recall_all": self.recall_all,
             "search": self.search_memories,
