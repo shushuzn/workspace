@@ -1,0 +1,24 @@
+{
+  "commands": {
+    "start": 2,
+    "save": 1,
+    "end": 1
+  },
+  "projects": {
+    "NewsHub": 4
+  },
+  "hourly_distribution": {
+    "18": 4
+  },
+  "daily_stats": {
+    "2026-03-23": 4
+  },
+  "session_durations": [
+    0.11666666666666667
+  ],
+  "tests_run": 0,
+  "decisions_made": 1,
+  "first_used": "2026-03-23T18:33:18.668875",
+  "last_used": "2026-03-23T18:33:57.161695",
+  "avg_session_duration": 0.11666666666666667
+}
