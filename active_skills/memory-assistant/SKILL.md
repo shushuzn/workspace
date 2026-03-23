@@ -1,3 +1,13 @@
+---
+name: memory-assistant
+description: |
+  AI Memory System 的 OpenClaw Agent 接口。用于存储、检索和蒸馏记忆。
+  Use when: 用户需要记忆跨会话信息、搜索过往记忆、获取上下文。
+metadata:
+  version: "0.1.0"
+  category: memory
+---
+
 # Memory Assistant Skill
 
 记忆助手 - AI Memory System 的 OpenClaw Agent 接口。
@@ -8,62 +18,70 @@
 - 语义搜索相关记忆
 - 生成 LLM 上下文
 - 记忆蒸馏压缩
+- 持久化存储
 
 ## Usage
 
-### memorize
-添加记忆到系统。
+```bash
+# 查看状态
+py active_skills/memory-assistant/run_memory.py status
 
-```
-Key: user_name
-Value: Alice
-Type: short|long
-```
+# 添加记忆
+py active_skills/memory-assistant/run_memory.py memorize '{"key": "key_name", "value": "value", "memory_type": "short"}'
 
-### recall
-根据 Key 召回记忆。
+# 召回记忆
+py active_skills/memory-assistant/run_memory.py recall '{"key": "key_name"}'
 
-```
-Key: user_name
-```
+# 搜索记忆
+py active_skills/memory-assistant/run_memory.py search '{"query": "关键词", "top_k": 3}'
 
-### search
-语义搜索记忆。
+# 获取上下文 (RAG)
+py active_skills/memory-assistant/run_memory.py context '{"query": "query", "max_items": 5}'
 
-```
-Query: alice login
-TopK: 3
-```
+# 蒸馏记忆
+py active_skills/memory-assistant/run_memory.py distill
 
-### context
-获取 RAG 上下文字符串。
+# 清理短期记忆
+py active_skills/memory-assistant/run_memory.py clear
 
-```
-Query: user preferences
-MaxItems: 5
+# 获取状态
+py active_skills/memory-assistant/run_memory.py status
 ```
 
-### distill
-蒸馏压缩所有记忆。
+## Memory Types
 
-### clear
-清理短期记忆。
+| Type | 说明 | 持久化 |
+|------|------|--------|
+| short | 短期记忆 (内存, LRU+TTL) | 否 |
+| long | 长期记忆 (JSON 文件) | 是 |
 
-### status
-查看记忆系统状态。
+## Examples
 
-## Integration
-
-```python
-from ai_memory_system.agent_tool import MemoryAgentTool
-
-tool = MemoryAgentTool()
-tool.memorize("key", "value")
-tool.search_memories("query")
-tool.get_context("query")
-tool.distill_memories()
-tool.get_status()
+### 记住用户偏好
 ```
+py active_skills/memory-assistant/run_memory.py memorize '{"key": "user_language", "value": "Chinese", "memory_type": "long"}'
+```
+
+### 记住当前项目
+```
+py active_skills/memory-assistant/run_memory.py memorize '{"key": "current_project", "value": "OpenClaw optimization", "memory_type": "short"}'
+```
+
+### 搜索相关记忆
+```
+py active_skills/memory-assistant/run_memory.py search '{"query": "project"}'
+```
+
+### 获取 RAG 上下文
+```
+py active_skills/memory-assistant/run_memory.py context '{"query": "user preferences"}'
+```
+
+## Implementation
+
+- Python runner: `active_skills/memory-assistant/run_memory.py`
+- Memory library: `D:\ai_memory_system\`
+- 数据存储: `D:\ai_memory_system\data\`
 
 ## Config
 
