@@ -101,4 +101,17 @@ flow-archive/
 
 # Test artifacts
 *test*.py
-*_test_*.py 
+*_test_*.py
+
+# News cache files
+30-scripts-tools/llm_config.json
+30-scripts-tools/news_history.json
+30-scripts-tools/news_manager_data.json
+30-scripts-tools/qq_news_history_napcat.json
+30-scripts-tools/feishu-tools/feishu-stats.json
+30-scripts-tools/stock_pro_cache.json
+30-scripts-tools/stock_pro/data_*.json
+30-scripts-tools/stock_pro/*.txt
+30-scripts-tools/stock_pro/*.xml
+30-scripts-tools/stock_pro/*.db
+30-scripts-tools/stock_pro/rss_cache/ 
