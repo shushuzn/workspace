@@ -73,6 +73,26 @@ class MemoryRetriever:
         final.sort(key=lambda x: x["score"], reverse=True)
         return final[: self._top_k]
 
+    def semantic_search(self, query: str, top_k: int = None) -> list[dict]:
+        """
+        Semantic search using embeddings.
+        Only searches long-term memory.
+
+        Args:
+            query: Search query string
+            top_k: Number of results (default: self._top_k)
+
+        Returns:
+            List of {source, key, value, score} dicts
+        """
+        if top_k is None:
+            top_k = self._top_k
+
+        results = self._long_term.semantic_search(query, top_k)
+        for r in results:
+            r["source"] = "long"
+        return results
+
     def recall(self, key: str) -> Optional[Any]:
         """
         Direct recall by key.

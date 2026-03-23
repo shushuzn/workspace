@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any, Optional
 
 from .config import LONG_TERM_STORAGE_PATH, LONG_TERM_MAX_ITEMS
+from .vector_store import VectorStore
 
 
 class LongTermMemory:
@@ -18,6 +19,7 @@ class LongTermMemory:
     def __init__(self, storage_path: Path = LONG_TERM_STORAGE_PATH):
         self._storage_path = Path(storage_path)
         self._store: dict[str, dict] = {}  # key -> {value, keywords, timestamp}
+        self._vector_store = VectorStore(storage_path)
         self._load()
 
     def add(self, key: str, value: Any, keywords: Optional[list[str]] = None) -> None:
@@ -40,6 +42,8 @@ class LongTermMemory:
             "keywords": keywords,
             "timestamp": time.time(),
         }
+
+        self._vector_store.add(key, str(value))
 
         # Evict oldest if over capacity
         if len(self._store) > LONG_TERM_MAX_ITEMS:
@@ -82,22 +86,43 @@ class LongTermMemory:
         results.sort(key=lambda x: x["score"], reverse=True)
         return results[:top_k]
 
+    def semantic_search(self, query: str, top_k: int = 5) -> list[dict]:
+        """
+        Semantic search using embeddings.
+
+        Returns list of dicts with {key, value, score} sorted by relevance.
+        Requires sentence-transformers package.
+        """
+        texts = {k: str(v["value"]) for k, v in self._store.items()}
+        results = self._vector_store.search(query, texts, top_k)
+
+        # Enrich with full data
+        for r in results:
+            if r["key"] in self._store:
+                r["keywords"] = self._store[r["key"]].get("keywords", [])
+                r["timestamp"] = self._store[r["key"]].get("timestamp", 0)
+
+        return results
+
     def remove(self, key: str) -> bool:
         """Remove a memory entry."""
         if key in self._store:
             del self._store[key]
+            self._vector_store.remove(key)
             return True
         return False
 
     def clear(self) -> None:
         """Clear all long-term memory."""
         self._store.clear()
+        self._vector_store.clear()
 
     def save(self) -> None:
         """Persist memory to disk."""
         self._storage_path.parent.mkdir(parents=True, exist_ok=True)
         with open(self._storage_path, "w", encoding="utf-8") as f:
             json.dump(self._store, f, ensure_ascii=False, indent=2)
+        self._vector_store.save_vectors()
 
     def _load(self) -> None:
         """Load memory from disk."""

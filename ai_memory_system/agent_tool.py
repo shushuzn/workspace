@@ -120,6 +120,18 @@ class MemoryAgentTool:
             lines.append(f"  {i}. [{r['source']}] {r['key']} = {r['value']}")
         return "\n".join(lines)
 
+    def semantic_search(self, query: str, top_k: int = 3) -> str:
+        """语义搜索 - 使用 embeddings 检索记忆。"""
+        results = self._ms.semantic_search(query, top_k)
+        if not results:
+            return f"🔍 无语义搜索结果: {query}"
+        lines = [f"🔍 语义搜索 '{query}' (共 {len(results)} 条):"]
+        for i, r in enumerate(results[:top_k], 1):
+            lines.append(
+                f"  {i}. [{r['source']}] {r['key']} = {r['value']} (score: {r['score']:.3f})"
+            )
+        return "\n".join(lines)
+
     def get_context(self, query: str) -> str:
         """
         获取上下文 - RAG 风格注入 LLM。
@@ -202,6 +214,7 @@ class MemoryAgentTool:
   batch_memorize 批量添加    batch_memorize '{"memories": [{"key": "k1", "value": "v1"}], "memory_type": "short"}'
   recall       召回记忆    recall '{"key": "name"}'
   search   搜索记忆    search '{"query": "关键词", "top_k": 5}'
+  semantic_search 语义搜索 semantic_search '{"query": "自然语言", "top_k": 5}'
   context  RAG上下文   context '{"query": "query", "max_items": 5}'
   distill  蒸馏压缩    distill
   clear    清理短期    clear
@@ -221,6 +234,7 @@ class MemoryAgentTool:
             "recall": self.recall,
             "recall_all": self.recall_all,
             "search": self.search_memories,
+            "semantic_search": self.semantic_search,
             "context": self.get_context,
             "distill": self.distill_memories,
             "clear": self.clear_short_term,

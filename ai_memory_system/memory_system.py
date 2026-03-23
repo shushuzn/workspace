@@ -85,6 +85,14 @@ class MemorySystem:
         """
         return self._retriever.search(query, memory_type)
 
+    def semantic_search(self, query: str, top_k: int = 5) -> list[dict]:
+        """
+        Semantic search using embeddings.
+        Only searches long-term memory.
+        Requires sentence-transformers package.
+        """
+        return self._retriever.semantic_search(query, top_k)
+
     def get_context(self, query: str, max_items: int = 5) -> str:
         """
         Get formatted context string for LLM prompts.
