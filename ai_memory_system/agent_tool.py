@@ -144,6 +144,25 @@ class MemoryAgentTool:
             lines.append(f"  长期 Key: {', '.join(stats['long_term_keys'][:5])}")
         return "\n".join(lines)
 
+    def help(self) -> str:
+        """显示帮助信息。"""
+        return """🧠 AI Memory System 帮助
+
+可用命令:
+  memorize  添加记忆    memorize '{"key": "name", "value": "Alice", "memory_type": "short"}'
+  recall   召回记忆    recall '{"key": "name"}'
+  search   搜索记忆    search '{"query": "关键词", "top_k": 5}'
+  context  RAG上下文   context '{"query": "query", "max_items": 5}'
+  distill  蒸馏压缩    distill
+  clear    清理短期    clear
+  status   查看状态    status
+  help     显示帮助    help
+
+示例:
+  py active_skills/memory-assistant/run_memory.py status
+  py active_skills/memory-assistant/run_memory.py memorize '{"key": "user", "value": "Alice", "memory_type": "long"}'
+  py active_skills/memory-assistant/run_memory.py search '{"query": "alice"}'"""
+
     def run(self, action: str, **kwargs) -> str:
         actions = {
             "memorize": self.memorize,
@@ -153,6 +172,7 @@ class MemoryAgentTool:
             "distill": self.distill_memories,
             "clear": self.clear_short_term,
             "status": self.get_status,
+            "help": self.help,
         }
         if action not in actions:
             return f"❌ 未知动作: {action}"
