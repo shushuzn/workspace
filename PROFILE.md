@@ -28,3 +28,14 @@ read_when:
 - **当前项目：** AI Research OS setup、Knowledge graph building、Automated paper collection and analysis、CNT conductivity prediction
 - **工作风格：** 注重效率和自动化，喜欢结构化组织，使用Obsidian做笔记
 - **偏好：** 保持文件整洁有序，文件命名要有规律，输出简短，关注细节，质量优先
+
+### AI研究集成 (2026-03-23)
+
+**已集成论文算法:**
+- FLARE Planner - 未来感知规划
+- MEMORA Memory - 双层记忆系统
+- AutoTool Selector - 高效工具选择
+- HiMAC Executor - 层次化执行
+- ABC Contracts - 行为契约
+
+**Skills:** `.opencode/skills/ai-research/`, `.opencode/skills/himac-executor/`, `.opencode/skills/abc-contracts/`

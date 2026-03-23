@@ -88,6 +88,22 @@ execute_shell_command("python gen.py")
 - **Dashboard:** `start-dashboard.bat` (端口 8448)
 - **自动化:** arXiv 扫描、Domain 排名、Critic v5.0
 
+## 🔬 AI 研究能力 (2026-03-23)
+
+**集成论文实现:**
+- **FLARE** (arXiv:2601.22311) - 未来感知规划，防止 myopic commitment
+- **MEMORA** (arXiv:2602.03315) - 双层记忆，98% token 节省
+- **AutoTool** (arXiv:2511.14650) - 图工具选择，30% 成本降低
+- **HiMAC** (arXiv:2603.00977) - 层次化宏微执行
+- **ABC Contracts** (arXiv:2602.22302) - 行为契约可靠性
+
+**使用:**
+```bash
+py .opencode/skills/ai-research/run_ai_research.py research "任务"
+py .opencode/skills/ai-research/run_ai_research.py stats
+py .opencode/skills/himac-executor/run_himac.py plan "任务"
+```
+
 ---
 
 **详细文档:** `13-memory/MEMORY.md`

@@ -51,17 +51,20 @@ py 30-scripts-tools/workflow.py end "完成描述"
 
 ```
 任务类型          → 必须读取的 SKILL
-─────────────────────────────────────
-写文件            → active_skills/file-handling/SKILL.md
-写代码            → active_skills/coding/SKILL.md
-定时任务          → active_skills/cron/SKILL.md
-读文件            → active_skills/file_reader/SKILL.md
-Excel操作         → active_skills/xlsx/SKILL.md
-PDF操作           → active_skills/pdf/SKILL.md
-PPT操作           → active_skills/pptx/SKILL.md
-Word操作          → active_skills/docx/SKILL.md
-股票分析          → active_skills/stock-pro/SKILL.md
-浏览器操作        → active_skills/browser_visible/SKILL.md
+────────────────────────────────────
+写文件            → .opencode/skills/file-handling/SKILL.md
+写代码            → .opencode/skills/coding/SKILL.md
+定时任务          → .opencode/skills/cron/SKILL.md
+读文件            → .opencode/skills/file_reader/SKILL.md
+Excel操作         → .opencode/skills/xlsx/SKILL.md
+PDF操作           → .opencode/skills/pdf/SKILL.md
+PPT操作           → .opencode/skills/pptx/SKILL.md
+Word操作          → .opencode/skills/docx/SKILL.md
+股票分析          → .opencode/skills/stock-pro/SKILL.md
+浏览器操作        → .opencode/skills/browser_visible/SKILL.md
+AI研究            → .opencode/skills/ai-research/SKILL.md
+层次规划          → .opencode/skills/himac-executor/SKILL.md
+行为契约          → .opencode/skills/abc-contracts/SKILL.md
 ```
 
 ⚠️ **违反后果：方法错误，文件损坏，浪费时间**

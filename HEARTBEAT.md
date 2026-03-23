@@ -142,6 +142,9 @@ py 30-scripts-tools/auto_session_compressor.py --auto
 
 # TODO 自动更新
 py 30-scripts-tools/auto_todo_updater.py --auto
+
+# AI研究状态检查
+py .opencode/skills/ai-research/run_ai_research.py stats
 ```
 
 ---
