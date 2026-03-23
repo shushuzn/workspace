@@ -45,6 +45,27 @@ py 30-scripts-tools/workflow.py end "完成描述"
    # Should show: 总大小：49.6KB, 速度提升：11562x
    ```
 
+**SKILL Loading (每次会话必须 - 2026-03-23):**
+
+执行任务前，**必须先读相关 SKILL**：
+
+```
+任务类型          → 必须读取的 SKILL
+─────────────────────────────────────
+写文件            → active_skills/file-handling/SKILL.md
+写代码            → active_skills/coding/SKILL.md
+定时任务          → active_skills/cron/SKILL.md
+读文件            → active_skills/file_reader/SKILL.md
+Excel操作         → active_skills/xlsx/SKILL.md
+PDF操作           → active_skills/pdf/SKILL.md
+PPT操作           → active_skills/pptx/SKILL.md
+Word操作          → active_skills/docx/SKILL.md
+股票分析          → active_skills/stock-pro/SKILL.md
+浏览器操作        → active_skills/browser_visible/SKILL.md
+```
+
+⚠️ **违反后果：方法错误，文件损坏，浪费时间**
+
 **Session Compression (每次对话结束必须):**
 
 ```bash

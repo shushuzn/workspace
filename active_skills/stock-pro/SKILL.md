@@ -14,7 +14,7 @@ metadata:
     - Financial modeling best practices
 ---
 
-# Stock PRO v12.7
+# Stock PRO v20.0
 
 Complete stock analysis toolkit with real-time data, technical analysis, and portfolio management. **All features working - argparse fixed, export functions fixed**.
 
@@ -52,6 +52,21 @@ python stock_pro/main.py --screener          # Stock screener
 python stock_pro/main.py --portfolio         # Portfolio view
 python stock_pro/main.py --dashboard NVDA    # HTML dashboard
 python stock_pro/main.py --sentiment NVDA    # News sentiment
+python stock_pro/main.py --research          # Research reports summary
+python stock_pro/main.py --combined          # Combined analysis report
+python stock_pro/main.py --institutional     # Institutional ownership analysis
+python stock_pro/main.py --momentum          # Momentum analysis
+python stock_pro/main.py NVDA --ultimate     # Ultimate analysis (all features)
+python stock_pro/main.py --jin10             # Jin10 latest news
+python stock_pro/main.py NVDA --jin10        # Jin10 news for specific stock
+python stock_pro/main.py --cnnews           # Chinese financial news
+python stock_pro/main.py NVDA --cnnews      # Chinese news for specific stock
+python stock_pro/main.py --news            # Real-time cached news
+python stock_pro/main.py TSLA --news       # Real-time news for stock
+python stock_pro/main.py --rt             # Realtime news (Yahoo + Sina, ~2s)
+python stock_pro/main.py TSLA --rt        # TSLA realtime news from Yahoo
+python stock_pro/main.py --fast           # Fast news with full content (async)
+python stock_pro/main.py TSLA --fast      # TSLA fast news with content
 ```
 
 ## Skill Structure
@@ -245,6 +260,20 @@ check = diversification_check(['NVDA', 'META', 'JPM', 'XOM', 'JNJ'])
 | `quality_report(symbol)` | Quality metrics |
 | `compare_stocks(symbols)` | Side-by-side comparison |
 | `dashboard_report()` | Portfolio overview |
+| `research_report(symbols)` | Research reports summary |
+| `combined_analysis(symbol)` | Technical+Sentiment+Research |
+| `sentiment_report_full(symbols)` | Full combined report |
+| `institutional_report(symbols)` | Institutional ownership analysis |
+| `institutional_analysis(symbol)` | Single stock institutional data |
+| `momentum_report(symbols)` | Momentum analysis report |
+| `calc_momentum(symbol)` | Single stock momentum scores |
+| `ultimate_analysis(symbol)` | Single stock ultimate analysis |
+| `ultimate_report(symbols)` | Multi-stock ultimate analysis |
+| `jin10_news_report()` | Jin10 latest news |
+| `jin10_stock_news(symbol)` | Jin10 news for specific stock |
+| `fetch_cn_news(source)` | Fetch Chinese financial news |
+| `get_cn_news_for_stock(symbol)` | Get Chinese news for stock |
+| `format_news_report(symbol)` | Realtime news report (zero latency) |
 
 ## 6.2 Export Formats
 
@@ -353,7 +382,7 @@ py 30-scripts-tools/stock_pro/test_all.py
 
 ```
 ==================================================
-Stock PRO v12.7 - Full Module Test
+Stock PRO v18.0 - Full Module Test
 ==================================================
 PASS: analyze('NVDA')
 PASS: analyze_multiple(['NVDA','META'])
@@ -402,7 +431,7 @@ stock_pro.__version__  # Check version
 D:\OpenClaw\workspace\
 ├── 30-scripts-tools\
 │   └── stock_pro\           # Main package
-│       ├── __init__.py     # v12.7
+│       ├── __init__.py     # v17.0
 │       ├── core.py         # Analysis engine
 │       ├── cache.py        # Cache system
 │       └── test_all.py     # 18 tests

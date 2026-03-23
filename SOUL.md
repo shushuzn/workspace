@@ -49,6 +49,29 @@
 - ❌ 自动创建报告文件 (除非用户明确说"保存报告")
 - ❌ 扩展研究范围或创建新主题
 - ❌ 编造引用 (必须真实可验证)
+- ❌ **用 write_file 写入 >8KB 文件**（会被截断）
+
+---
+
+## 📁 文件写入规则
+
+**write_file 有 8KB 限制，超过必须用 Generator Pattern：**
+
+```
+< 8KB → write_file(path, content)
+> 8KB → write_file("gen.py", 生成器代码) + execute_shell_command("python gen.py")
+```
+
+**Generator Pattern 模板：**
+```python
+# Step 1
+write_file("gen.py", '''
+content = """大文件内容"""
+open("output.py", "w", encoding="utf-8").write(content)
+''')
+# Step 2
+execute_shell_command("python gen.py")
+```
 
 ---
 
