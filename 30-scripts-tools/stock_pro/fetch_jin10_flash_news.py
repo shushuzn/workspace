@@ -1,0 +1,80 @@
+import urllib.request, re, sys, time
+sys.stdout.reconfigure(encoding='utf-8')
+
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+}
+
+# Detail IDs from flash.jin10.com
+ids = [
+    "20260322183626806800",
+    "20260322183613484800",
+    "20260322183251997800",
+    "20260322183059138800",
+    "20260322182754314800",
+    "20260322182708573800",
+    "20260322182523428800",
+    "20260322182247807800",
+    "20260322182104043800",
+    "20260322182003256800",
+    "20260322181848806800",
+    "20260322181808959800",
+    "20260322181750364800",
+    "20260322181706450800",
+    "20260322180730745800",
+    "20260322180706906800",
+    "20260322180610488800",
+    "20260322180322737800",
+    "20260322175442001800",
+    "20260322175434868800",
+]
+
+print("=" * 70)
+print("                    金十快讯（免费实时新闻）")
+print("=" * 70)
+print()
+
+news_list = []
+for i, id in enumerate(ids, 1):
+    url = f"https://flash.jin10.com/detail/{id}"
+    try:
+        req = urllib.request.Request(url, headers=headers)
+        with urllib.request.urlopen(req, timeout=8) as r:
+            content = r.read().decode('utf-8')
+        
+        # Extract title
+        title_match = re.search(r'<title>([^<]+)</title>', content)
+        if title_match:
+            title = title_match.group(1).replace(' - 金十数据', '').strip()
+            
+            # Extract content from meta tags
+            desc_match = re.search(r'<meta[^>]+name="description"[^>]+content="([^"]+)"', content)
+            content_text = desc_match.group(1) if desc_match else ""
+            
+            print(f"【{i}】 {title}")
+            if content_text:
+                print(f"    {content_text[:100]}...")
+            print()
+            
+            news_list.append({
+                'id': id,
+                'title': title,
+                'content': content_text,
+                'link': url,
+                'time': id[:8]  # Extract timestamp from ID
+            })
+        
+        time.sleep(0.3)  # Rate limiting
+    except Exception as e:
+        print(f"【{i}】 Error: {e}")
+
+print("=" * 70)
+print(f"共获取 {len(news_list)} 条快讯")
+print("=" * 70)
+
+# Save to file
+import json
+output_file = r"D:\OpenClaw\workspace\30-scripts-tools\stock_pro\data_jin10_flash.json"
+with open(output_file, 'w', encoding='utf-8') as f:
+    json.dump(news_list, f, ensure_ascii=False, indent=2)
+print(f"\n已保存到: {output_file}")
