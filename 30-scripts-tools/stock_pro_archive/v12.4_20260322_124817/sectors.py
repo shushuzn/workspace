@@ -35,14 +35,14 @@ SECTORS = {
     "DOCU": "Technology",
     "ZM": "Technology",
     "OKTA": "Technology",
-    
+
     # Finance
     "JPM": "Finance",
     "BAC": "Finance",
     "GS": "Finance",
     "V": "Finance",
     "MA": "Finance",
-    
+
     # Healthcare
     "JNJ": "Healthcare",
     "PFE": "Healthcare",
@@ -50,21 +50,21 @@ SECTORS = {
     "MRK": "Healthcare",
     "ABBV": "Healthcare",
     "LLY": "Healthcare",
-    
+
     # Consumer
     "WMT": "Consumer",
     "COST": "Consumer",
     "KO": "Consumer",
-    
+
     # Industrial
     "CAT": "Industrial",
     "HON": "Industrial",
     "DE": "Industrial",
-    
+
     # Energy
     "XOM": "Energy",
     "CVX": "Energy",
-    
+
     # ETF
     "SPY": "ETF",
     "QQQ": "ETF",
@@ -89,21 +89,21 @@ def get_all_sectors():
 def sector_report(results):
     """Generate sector analysis report"""
     sectors = {}
-    
+
     for r in results:
         sym = r["symbol"]
         sector = get_sector(sym)
         if sector not in sectors:
             sectors[sector] = []
         sectors[sector].append(r)
-    
+
     report = "# Sector Analysis\n\n"
-    
+
     for sector in sorted(sectors.keys()):
         stocks = sectors[sector]
         avg_score = sum(s["score"] for s in stocks) / len(stocks)
         best = max(stocks, key=lambda x: x["score"])
-        
+
         report += f"## {sector} ({len(stocks)} stocks)\n"
         report += f"- Avg Score: {avg_score:.0f}\n"
         report += f"- Best: {best['symbol']} ({best['score']}/100)\n"
@@ -112,5 +112,5 @@ def sector_report(results):
         for s in sorted(stocks, key=lambda x: x["score"], reverse=True):
             report += f"| {s['symbol']} | ${s['price']:.2f} | {s['score']} | {s['upside']:+.1f}% | {s['rating']} |\n"
         report += "\n"
-    
+
     return report

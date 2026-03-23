@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 LIG 论文准备 - 自治执行任务
 自动完成论文准备的所有后续步骤
@@ -59,12 +59,12 @@ ref_path = Path("research/docs/PAPER_REFERENCES.md")
 with open(ref_path, 'w', encoding='utf-8') as f:
     f.write("# LIG 论文参考文献\n\n")
     f.write(f"**更新时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-    
+
     for category, refs in references.items():
         f.write(f"## {category}\n\n")
         for i, ref in enumerate(refs, 1):
             f.write(f"{i}. {ref}\n\n")
-    
+
     f.write(f"\n**总计:** {sum(len(refs) for refs in references.values())} 篇\n")
 
 print(f"  [OK] 参考文献已保存：{ref_path}")
@@ -80,7 +80,7 @@ paper_path = Path("research/docs/PAPER_DRAFT_V2.md")
 if paper_path.exists():
     with open(paper_path, 'r', encoding='utf-8') as f:
         paper_content = f.read()
-    
+
     # 检查清单
     checks = {
         "摘要完整性": "摘要" in paper_content and "背景" in paper_content and "方法" in paper_content,
@@ -89,24 +89,24 @@ if paper_path.exists():
         "表格格式": "|" in paper_content,
         "参考文献占位": "[1-50]" in paper_content or "待补充" in paper_content
     }
-    
+
     # 生成检查报告
     report_path = Path("research/docs/PAPER_CHECKLIST.md")
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write("# 论文检查清单\n\n")
         f.write(f"**检查时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-        
+
         for item, passed in checks.items():
             status = "[OK]" if passed else "❌"
             f.write(f"- [{status}] {item}\n")
-        
+
         f.write(f"\n**通过率:** {sum(checks.values())}/{len(checks)} ({sum(checks.values())/len(checks)*100:.0f}%)\n")
-        
+
         if all(checks.values()):
             f.write("\n**状态:** [OK] 所有检查通过！准备投稿！\n")
         else:
             f.write("\n**状态:** ⚠️ 有待完善项目\n")
-    
+
     print(f"  [OK] 检查报告已保存：{report_path}")
     print(f"  通过率：{sum(checks.values())}/{len(checks)} ({sum(checks.values())/len(checks)*100:.0f}%)")
 else:
@@ -155,13 +155,13 @@ with open(supp_path, 'w', encoding='utf-8') as f:
     f.write("所有数据、代码、模型已开源至 GitHub:\n\n")
     f.write("https://github.com/shushuzn/obsidian-sync/tree/master/research\n\n")
     f.write("## 文件清单\n\n")
-    
+
     for category, info in supplementary.items():
         f.write(f"### {category}\n\n")
         f.write(f"- **文件:** `{info['文件']}`\n")
         f.write(f"- **描述:** {info['描述']}\n")
         f.write(f"- **格式:** {info['格式']}\n\n")
-    
+
     f.write("## 使用许可\n\n")
     f.write("- 数据：CC BY 4.0\n")
     f.write("- 代码：MIT License\n")
@@ -206,13 +206,13 @@ checklist_path = Path("research/docs/SUBMISSION_CHECKLIST.md")
 with open(checklist_path, 'w', encoding='utf-8') as f:
     f.write("# 论文投稿清单\n\n")
     f.write(f"**更新时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-    
+
     for category, items in submission_checklist.items():
         f.write(f"## {category}\n\n")
         for item in items:
             f.write(f"- {item}\n")
         f.write("\n")
-    
+
     f.write("## 时间计划\n\n")
     f.write("- **今天 (03-06):** 论文初稿完成 [OK]\n")
     f.write("- **明天 (03-07):** 语言润色、格式调整\n")
@@ -243,27 +243,27 @@ with open(report_path, 'w', encoding='utf-8') as f:
     f.write("## 执行摘要\n\n")
     for key, value in final_report.items():
         f.write(f"- **{key}:** {value}\n")
-    
+
     f.write("\n## 已完成任务\n\n")
     f.write("1. [OK] 补充参考文献 (15 篇)\n")
     f.write("2. [OK] 语言润色检查 (5 项检查)\n")
     f.write("3. [OK] 补充材料准备 (5 类材料)\n")
     f.write("4. [OK] 投稿清单生成\n")
     f.write("5. [OK] 最终报告生成\n\n")
-    
+
     f.write("## 生成的文件\n\n")
     f.write("- research/docs/PAPER_REFERENCES.md\n")
     f.write("- research/docs/PAPER_CHECKLIST.md\n")
     f.write("- research/docs/SUPPLEMENTARY_MATERIALS.md\n")
     f.write("- research/docs/SUBMISSION_CHECKLIST.md\n")
     f.write("- research/docs/AUTONOMOUS_TASK_REPORT.md\n\n")
-    
+
     f.write("## 下一步行动\n\n")
     f.write("1. 语言润色 (人工)\n")
     f.write("2. Cover Letter 撰写\n")
     f.write("3. 推荐审稿人列表\n")
     f.write("4. 投稿 (目标：03-17)\n\n")
-    
+
     f.write("---\n\n")
     f.write("*自治任务执行完成！*\n")
 

@@ -26,20 +26,20 @@ FIX_LOG = Path("30-scripts-tools/auto_fix_log.jsonl")
 
 class AutoFixEngine:
     """自动修复引擎 - 防护 v5"""
-    
+
     def __init__(self):
         self.session_id = self._get_session_id()
-    
+
     def _get_session_id(self):
         if not STATE_FILE.exists():
             return None
         with open(STATE_FILE, "r", encoding="utf-8") as f:
             state = json.load(f)
         return state.get("session_id")
-    
+
     def execute_fix(self, fix_type: str, params: dict = None) -> dict:
         """执行自动修复"""
-        
+
         fixes = {
             "clear_stop_flag": self._clear_stop_flag,
             "clear_lockdown": self._clear_lockdown,
@@ -48,45 +48,45 @@ class AutoFixEngine:
             "generate_report": self._generate_report,
             "restart_session": self._restart_session
         }
-        
+
         if fix_type not in fixes:
             return {"status": "error", "reason": f"未知修复类型：{fix_type}"}
-        
+
         try:
             result = fixes[fix_type](params)
             self._log_fix(fix_type, result)
             return result
         except Exception as e:
             return {"status": "error", "reason": str(e)}
-    
+
     def _clear_stop_flag(self, params=None) -> dict:
         """清除停止标志"""
         if not STOP_FLAG.exists():
             return {"status": "success", "message": "停止标志不存在"}
-        
+
         # 需要管理员确认（简单实现：直接删除）
         STOP_FLAG.unlink()
         return {"status": "success", "message": "停止标志已清除"}
-    
+
     def _clear_lockdown(self, params=None) -> dict:
         """清除系统封锁"""
         if not LOCKDOWN_FILE.exists():
             return {"status": "success", "message": "封锁文件不存在"}
-        
+
         LOCKDOWN_FILE.unlink()
         return {"status": "success", "message": "系统封锁已解除"}
-    
+
     def _reset_penalty(self, params=None) -> dict:
         """重置惩罚状态"""
         penalty_file = Path("30-scripts-tools/penalty_state.json")
-        
+
         if not penalty_file.exists():
             return {"status": "success", "message": "惩罚状态不存在"}
-        
+
         # 备份
         backup = penalty_file.with_suffix(".json.bak")
         penalty_file.rename(backup)
-        
+
         # 重置
         with open(penalty_file, "w", encoding="utf-8") as f:
             json.dump({
@@ -96,24 +96,24 @@ class AutoFixEngine:
                 "reset_at": datetime.now().isoformat(),
                 "reset_reason": params.get("reason", "auto_fix") if params else "auto_fix"
             }, f, ensure_ascii=False, indent=2)
-        
+
         return {"status": "success", "message": "惩罚状态已重置", "backup": str(backup)}
-    
+
     def _backup_violations(self, params=None) -> dict:
         """备份违规日志"""
         if not VIOLATION_LOG.exists():
             return {"status": "success", "message": "违规日志不存在"}
-        
+
         backup = VIOLATION_LOG.with_suffix(f".jsonl.{datetime.now().strftime('%Y%m%d_%H%M%S')}")
-        
+
         with open(VIOLATION_LOG, "r", encoding="utf-8") as f:
             content = f.read()
-        
+
         with open(backup, "w", encoding="utf-8") as f:
             f.write(content)
-        
+
         return {"status": "success", "message": f"违规日志已备份", "backup": str(backup)}
-    
+
     def _generate_report(self, params=None) -> dict:
         """生成合规报告"""
         try:
@@ -123,14 +123,14 @@ class AutoFixEngine:
             return {"status": "success", "message": "报告已生成", "report": str(output)}
         except Exception as e:
             return {"status": "error", "reason": str(e)}
-    
+
     def _restart_session(self, params=None) -> dict:
         """重启会话"""
         task_name = params.get("task", "Auto-restarted session") if params else "Auto-restarted session"
-        
+
         # 启动新会话
         cmd = f'py 30-scripts-tools\\copaw_entry.py "{task_name}"'
-        
+
         try:
             result = subprocess.run(cmd, shell=True, capture_output=True, text=True, timeout=30)
             return {
@@ -140,7 +140,7 @@ class AutoFixEngine:
             }
         except Exception as e:
             return {"status": "error", "reason": str(e)}
-    
+
     def _log_fix(self, fix_type: str, result: dict):
         """
 # ==============================================================================
@@ -192,10 +192,10 @@ Fixes:
             "result": result.get("status"),
             "message": result.get("message", "")
         }
-        
+
         with open(FIX_LOG, "a", encoding="utf-8") as f:
             f.write(json.dumps(log_entry, ensure_ascii=False) + "\n")
-    
+
     def smart_fix(self) -> dict:
         """智能修复 - 根据当前状态自动选择修复策略"""
         from compliance_dashboard import ComplianceDashboard

@@ -100,7 +100,7 @@ def camofox_search(query: str, num: int = 10, lang: str = "zh-CN", engine: str =
     Returns list of dicts: [{"title": ..., "url": ..., "snippet": ...}, ...]
     """
     encoded = urllib.parse.quote(query)
-    
+
     if engine == "duckduckgo":
         search_url = f"https://duckduckgo.com/?q={encoded}&kl={lang}&t=h_"
         snapshot = camofox_fetch_page(search_url, f"ddg-{int(time.time())}", wait=5, port=port)
@@ -126,7 +126,7 @@ def _parse_duckduckgo_results(snapshot: str, max_results: int = 10) -> list:
         if '- heading "' in line and '[level=' in line:
             m = re.search(r'heading "(.+?)"', line)
             title = m.group(1) if m else ""
-            
+
             # Look for URL nearby
             url = ""
             for j in range(max(0, i - 3), min(len(lines), i + 3)):
@@ -135,7 +135,7 @@ def _parse_duckduckgo_results(snapshot: str, max_results: int = 10) -> list:
                     if candidate and "duckduckgo.com" not in candidate:
                         url = candidate
                         break
-            
+
             # Look forward for snippet
             snippet_parts = []
             k = i + 1
@@ -148,9 +148,9 @@ def _parse_duckduckgo_results(snapshot: str, max_results: int = 10) -> list:
                         snippet_parts.append(sline.split(prefix, 1)[1].strip())
                         break
                 k += 1
-            
+
             snippet = " ".join(snippet_parts).strip()
-            
+
             if url and title:
                 results.append({"title": title, "url": url, "snippet": snippet})
         i += 1
@@ -174,14 +174,14 @@ def _parse_google_results(snapshot: str) -> list:
             # Extract title
             m = re.search(r'heading "(.+?)"', line)
             title = m.group(1) if m else ""
-            
+
             # Look backwards for the URL
             url = ""
             for j in range(max(0, i - 3), i):
                 if "/url:" in lines[j]:
                     url = lines[j].strip().split("/url:", 1)[1].strip()
                     break
-            
+
             # Look forward for snippet text
             snippet_parts = []
             k = i + 1
@@ -202,9 +202,9 @@ def _parse_google_results(snapshot: str) -> list:
                 elif sline.startswith("emphasis:"):
                     snippet_parts.append(sline.split("emphasis:", 1)[1].strip())
                 k += 1
-            
+
             snippet = " ".join(snippet_parts).strip()
-            
+
             # Filter out non-result entries
             if url and title and not url.startswith("/search") and "google.com" not in url:
                 results.append({

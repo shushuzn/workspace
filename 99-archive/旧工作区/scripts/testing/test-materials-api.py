@@ -15,7 +15,7 @@ BASE_URL = "http://localhost:8000"
 
 class TestBasicEndpoints:
     """基础端点测试"""
-    
+
     def test_root(self):
         """测试根路径"""
         response = requests.get(f"{BASE_URL}/")
@@ -23,7 +23,7 @@ class TestBasicEndpoints:
         data = response.json()
         assert "name" in data
         assert "version" in data
-    
+
     def test_health(self):
         """测试健康检查"""
         response = requests.get(f"{BASE_URL}/health")
@@ -36,7 +36,7 @@ class TestBasicEndpoints:
 
 class TestMaterialsEndpoints:
     """材料查询端点测试"""
-    
+
     def test_get_materials(self):
         """测试获取材料列表"""
         response = requests.get(f"{BASE_URL}/materials")
@@ -44,7 +44,7 @@ class TestMaterialsEndpoints:
         data = response.json()
         assert isinstance(data, list)
         assert len(data) > 0
-    
+
     def test_get_material_by_id(self):
         """测试按 ID 获取材料"""
         response = requests.get(f"{BASE_URL}/materials/MP-1234")
@@ -52,12 +52,12 @@ class TestMaterialsEndpoints:
         data = response.json()
         assert data["id"] == "MP-1234"
         assert "formula" in data
-    
+
     def test_get_material_not_found(self):
         """测试材料未找到"""
         response = requests.get(f"{BASE_URL}/materials/MP-9999")
         assert response.status_code == 404
-    
+
     def test_search_materials_by_formula(self):
         """测试按化学式搜索"""
         response = requests.get(f"{BASE_URL}/materials?formula=Li")
@@ -66,7 +66,7 @@ class TestMaterialsEndpoints:
         assert isinstance(data, list)
         for mat in data:
             assert "Li" in mat.get("formula", "")
-    
+
     def test_advanced_search(self):
         """测试高级搜索"""
         payload = {"formula": "Li", "band_gap_min": 2.0, "limit": 5}
@@ -76,7 +76,7 @@ class TestMaterialsEndpoints:
         assert isinstance(data, list)
         for mat in data:
             assert mat.get("band_gap", 0) >= 2.0
-    
+
     def test_get_materials_stats(self):
         """测试材料统计"""
         response = requests.get(f"{BASE_URL}/materials/stats")
@@ -89,7 +89,7 @@ class TestMaterialsEndpoints:
 
 class TestPredictionEndpoints:
     """性能预测端点测试"""
-    
+
     def test_predict_bandgap(self):
         """测试带隙预测"""
         payload = {"material_id": "MP-1234", "property": "bandgap"}
@@ -99,7 +99,7 @@ class TestPredictionEndpoints:
         assert "prediction" in data
         assert "unit" in data
         assert "confidence" in data
-    
+
     def test_predict_formation_energy(self):
         """测试形成能预测"""
         payload = {"material_id": "MP-1234", "property": "formation_energy"}
@@ -108,7 +108,7 @@ class TestPredictionEndpoints:
         data = response.json()
         assert "prediction" in data
         assert data["unit"] == "eV/atom"
-    
+
     def test_predict_elastic(self):
         """测试弹性性能预测"""
         payload = {"material_id": "MP-1234", "property": "elastic"}
@@ -118,7 +118,7 @@ class TestPredictionEndpoints:
         assert "bulk_modulus" in data
         assert "shear_modulus" in data
         assert "young_modulus" in data
-    
+
     def test_predict_all(self):
         """测试所有性能预测"""
         payload = {"material_id": "MP-1234", "property": "all"}
@@ -133,7 +133,7 @@ class TestPredictionEndpoints:
 
 class TestSynthesisEndpoints:
     """合成路径端点测试"""
-    
+
     def test_get_synthesis_pathway(self):
         """测试获取合成路径"""
         response = requests.get(f"{BASE_URL}/synthesize/LiCoO2")
@@ -142,7 +142,7 @@ class TestSynthesisEndpoints:
         assert data["target"] == "LiCoO2"
         assert "pathways" in data
         assert len(data["pathways"]) > 0
-    
+
     def test_recommend_synthesis(self):
         """测试推荐合成路径"""
         payload = {"target": "LiCoO2", "optimize": "cost"}
@@ -151,7 +151,7 @@ class TestSynthesisEndpoints:
         data = response.json()
         assert "target" in data
         assert "pathways" in data
-    
+
     def test_get_synthesis_cost(self):
         """测试获取合成成本"""
         response = requests.get(f"{BASE_URL}/synthesize/LiCoO2/cost")
@@ -159,7 +159,7 @@ class TestSynthesisEndpoints:
         data = response.json()
         assert "target" in data
         assert "cost" in data
-    
+
     def test_get_synthesis_safety(self):
         """测试获取安全性评分"""
         response = requests.get(f"{BASE_URL}/synthesize/LiCoO2/safety")
@@ -172,7 +172,7 @@ class TestSynthesisEndpoints:
 
 class TestKnowledgeGraphEndpoints:
     """知识图谱端点测试"""
-    
+
     def test_get_material_kg(self):
         """测试获取材料知识图谱"""
         response = requests.get(f"{BASE_URL}/kg/materials/MP-1234")
@@ -181,7 +181,7 @@ class TestKnowledgeGraphEndpoints:
         assert "material" in data
         assert "entities" in data
         assert "relations" in data
-    
+
     def test_get_element_kg(self):
         """测试获取元素知识图谱"""
         response = requests.get(f"{BASE_URL}/kg/elements/Li")
@@ -189,7 +189,7 @@ class TestKnowledgeGraphEndpoints:
         data = response.json()
         assert "element" in data
         assert "materials" in data
-    
+
     def test_get_kg_stats(self):
         """测试获取知识图谱统计"""
         response = requests.get(f"{BASE_URL}/kg/stats")
@@ -204,10 +204,10 @@ if __name__ == "__main__":
     print("=" * 60)
     print("Materials API Tests")
     print("=" * 60)
-    
+
     # 运行 pytest
     pytest.main([__file__, "-v", "--tb=short"])
-    
+
     print("-" * 60)
     print("[COMPLETE]")
     print("=" * 60)

@@ -14,12 +14,12 @@ COLORS = {
     'primary': '#6366F1',
     'primary_dark': '#4F46E5',
     'primary_light': '#818CF8',
-    
+
     # Semantic
     'success': '#10B981',
     'warning': '#F59E0B',
     'danger': '#EF4444',
-    
+
     # Neutral - Dark Theme
     'bg_dark': '#0F172A',
     'bg_card': '#1E293B',
@@ -36,7 +36,7 @@ COLORS = {
 def create_sparkline(data, title="", color=COLORS['primary'], height=60):
     """Create a minimal sparkline chart"""
     fig = go.Figure()
-    
+
     fig.add_trace(go.Scatter(
         x=list(range(len(data))),
         y=data,
@@ -46,7 +46,7 @@ def create_sparkline(data, title="", color=COLORS['primary'], height=60):
         fillcolor=f'rgba(99, 102, 241, 0.1)',
         hoverinfo='skip',
     ))
-    
+
     fig.update_layout(
         margin=dict(l=0, r=0, t=0, b=0),
         paper_bgcolor='rgba(0,0,0,0)',
@@ -56,13 +56,13 @@ def create_sparkline(data, title="", color=COLORS['primary'], height=60):
         height=height,
         showlegend=False,
     )
-    
+
     return fig
 
 def create_gauge_chart(value, title="Score", max_val=100):
     """Create a modern gauge chart for scores"""
     color = COLORS['success'] if value >= 80 else COLORS['warning'] if value >= 60 else COLORS['danger']
-    
+
     fig = go.Figure(go.Indicator(
         mode="gauge+number",
         value=value,
@@ -85,22 +85,22 @@ def create_gauge_chart(value, title="Score", max_val=100):
             }
         }
     ))
-    
+
     fig.update_layout(
         paper_bgcolor='rgba(0,0,0,0)',
         plot_bgcolor='rgba(0,0,0,0)',
         margin=dict(l=20, r=20, t=40, b=20),
         height=200,
     )
-    
+
     return fig
 
 def create_bar_chart(categories, values, title="", orientation='h'):
     """Create a modern bar chart"""
     colors = [COLORS['success'] if v > 70 else COLORS['warning'] if v > 50 else COLORS['danger'] for v in values]
-    
+
     fig = go.Figure()
-    
+
     fig.add_trace(go.Bar(
         y=categories if orientation == 'h' else None,
         x=values if orientation == 'h' else categories,
@@ -114,7 +114,7 @@ def create_bar_chart(categories, values, title="", orientation='h'):
         textposition='outside',
         textfont=dict(color=COLORS['text_secondary'], size=12),
     ))
-    
+
     fig.update_layout(
         title=dict(text=title, font=dict(color=COLORS['text_primary'], size=16)),
         paper_bgcolor='rgba(0,0,0,0)',
@@ -134,13 +134,13 @@ def create_bar_chart(categories, values, title="", orientation='h'):
         showlegend=False,
         bargap=0.3,
     )
-    
+
     return fig
 
 def create_donut_chart(labels, values, title="", hole=0.6):
     """Create a modern donut chart"""
     colors = [COLORS['primary'], COLORS['success'], COLORS['warning'], COLORS['danger'], COLORS['primary_light']]
-    
+
     fig = go.Figure(go.Pie(
         labels=labels,
         values=values,
@@ -150,7 +150,7 @@ def create_donut_chart(labels, values, title="", hole=0.6):
         textfont=dict(color=COLORS['text_primary'], size=12),
         hovertemplate='%{label}<br>%{value}<br>%{percent}<extra></extra>',
     ))
-    
+
     fig.update_layout(
         title=dict(text=title, font=dict(color=COLORS['text_primary'], size=16)),
         paper_bgcolor='rgba(0,0,0,0)',
@@ -164,13 +164,13 @@ def create_donut_chart(labels, values, title="", hole=0.6):
             showarrow=False,
         )],
     )
-    
+
     return fig
 
 def create_line_chart(dates, prices, symbol="", show_volume=False):
     """Create a modern stock price line chart"""
     fig = go.Figure()
-    
+
     # Price line
     fig.add_trace(go.Scatter(
         x=dates,
@@ -181,7 +181,7 @@ def create_line_chart(dates, prices, symbol="", show_volume=False):
         fill='tozeroy',
         fillcolor='rgba(99, 102, 241, 0.1)',
     ))
-    
+
     # Add moving average
     if len(prices) >= 20:
         ma20 = [sum(prices[max(0, i-19):i+1])/min(20, i+1) for i in range(len(prices))]
@@ -192,7 +192,7 @@ def create_line_chart(dates, prices, symbol="", show_volume=False):
             name='MA20',
             line=dict(color=COLORS['warning'], width=1.5, dash='dash'),
         ))
-    
+
     fig.update_layout(
         title=dict(text=f"{symbol} Price Chart", font=dict(color=COLORS['text_primary'], size=18)),
         paper_bgcolor='rgba(0,0,0,0)',
@@ -222,7 +222,7 @@ def create_line_chart(dates, prices, symbol="", show_volume=False):
         ),
         hovermode='x unified',
     )
-    
+
     return fig
 
 # ============================================
@@ -232,9 +232,9 @@ def progress_bar(value, max_val=100, color=None, height=8, show_label=True):
     """Create a modern progress bar"""
     if color is None:
         color = COLORS['success'] if value >= 80 else COLORS['warning'] if value >= 60 else COLORS['danger']
-    
+
     percentage = (value / max_val) * 100
-    
+
     return html.Div([
         html.Div(style={
             'width': '100%',
@@ -263,13 +263,13 @@ def badge(text, color=None, size="md"):
     """Create a modern badge"""
     if color is None:
         color = COLORS['primary']
-    
+
     sizes = {
         "sm": {'padding': '2px 8px', 'fontSize': '11px'},
         "md": {'padding': '4px 12px', 'fontSize': '12px'},
         "lg": {'padding': '6px 16px', 'fontSize': '14px'},
     }
-    
+
     return html.Span(text, style={
         'display': 'inline-block',
         'background': f'{color}22',
@@ -289,7 +289,7 @@ def tooltip(text, children, position="top"):
         "left": {'right': '100%', 'top': '50%', 'transform': 'translateY(-50%)', 'marginRight': '8px'},
         "right": {'left': '100%', 'top': '50%', 'transform': 'translateY(-50%)', 'marginLeft': '8px'},
     }
-    
+
     return html.Div([
         children,
         html.Div(text, style={
@@ -320,16 +320,16 @@ def alert(message, type_="info", dismissible=True):
         "warning": COLORS['warning'],
         "error": COLORS['danger'],
     }
-    
+
     icons = {
         "info": "ℹ️",
         "success": "✅",
         "warning": "⚠️",
         "error": "❌",
     }
-    
+
     color = colors.get(type_, COLORS['primary'])
-    
+
     return html.Div([
         html.Span(icons.get(type_, "ℹ️"), style={'marginRight': '12px', 'fontSize': '18px'}),
         html.Span(message, style={'flex': '1'}),
@@ -366,7 +366,7 @@ def skeleton_loader(height=100, count=1):
             'borderRadius': '8px',
             'marginBottom': '12px',
         }))
-    
+
     return html.Div(items, style={
         'width': '100%',
     })

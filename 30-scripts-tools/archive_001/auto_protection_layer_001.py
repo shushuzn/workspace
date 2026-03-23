@@ -30,13 +30,13 @@ from pathlib import Path
 
 class AutoProtectionLayer:
     """自动防护层"""
-    
+
     def __init__(self, session_id: str = None):
         self.session_id = session_id
         self.state_file = None
         self.tool_log = Path("30-scripts-tools/tool_call_log.jsonl")
         self.load_state()
-    
+
     def load_state(self):
         """加载会话状态"""
         if self.session_id:
@@ -44,38 +44,38 @@ class AutoProtectionLayer:
             state_files = list(Path("flow-archive").glob("*/execution-state.json"))
             if state_files:
                 self.state_file = max(state_files, key=lambda f: f.stat().st_mtime)
-    
+
     def check_session(self) -> tuple[bool, str]:
         """检查会话状态"""
         state_files = list(Path("flow-archive").glob("*/execution-state.json"))
         if not state_files:
             return False, "❌ 未初始化会话 - 请先运行 copaw_entry.py"
-        
+
         self.state_file = max(state_files, key=lambda f: f.stat().st_mtime)
-        
+
         try:
             with open(self.state_file, 'r', encoding='utf-8') as f:
                 state = json.load(f)
-            
+
             if not self.session_id:
                 self.session_id = state.get('session_id')
-            
+
             return True, f"✓ Session: {self.session_id}"
         except Exception as e:
             return False, f"❌ State file error: {e}"
-    
+
     def check_stop_flag(self) -> tuple[bool, str]:
         """检查停止标志"""
         if Path(".STOP_FLAG").exists():
             return False, "❌ 系统已停止 (.STOP_FLAG exists) - 需要管理员恢复"
         return True, "✓ 无停止标志"
-    
+
     def check_lockdown(self) -> tuple[bool, str]:
         """检查封锁状态"""
         if Path(".lockdown_active").exists():
             return False, "❌ 系统封锁中 (.lockdown_active exists) - 需要管理员解锁"
         return True, "✓ 无封锁"
-    
+
     def check_punishment_level(self) -> tuple[bool, str]:
         """检查惩罚等级"""
         punishment_file = Path("30-scripts-tools/punishment_state.json")
@@ -90,7 +90,7 @@ class AutoProtectionLayer:
             except (IOError, OSError, ValueError):
                 pass
         return True, "✓ 无惩罚记录"
-    
+
     def log_tool_call(self, tool_name: str, params: dict, result: str = "pending") -> None:
         """
 # ==============================================================================
@@ -142,13 +142,13 @@ Fixes:
             "params": params,
             "result": result,
         }
-        
+
         try:
             with open(self.tool_log, 'a', encoding='utf-8') as f:
                 f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
         except Exception as e:
             print(f"[Warning] Failed to log tool call: {e}", file=sys.stderr)
-    
+
     def full_check(self, tool_name: str = None, params: dict = None) -> tuple[bool, str]:
         """
         完整防护检查

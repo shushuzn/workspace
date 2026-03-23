@@ -36,7 +36,7 @@ PROBLEM_CAUSES = [
 
 def generate_reverse_ideas(topic: str) -> dict:
     """逆向头脑风暴"""
-    
+
     results = {
         "topic": topic,
         "method": "Reverse Brainstorming",
@@ -45,12 +45,12 @@ def generate_reverse_ideas(topic: str) -> dict:
             "step2_solutions": []
         }
     }
-    
+
     # Step 1: 列出制造问题的方向
     for cause in PROBLEM_CAUSES:
         question = cause.replace("this", topic)
         results["steps"]["step1_problems"].append(question)
-    
+
     # Step 2: 反转这些方向得到解决方案
     reversals = [
         ("slower", "faster"),
@@ -64,31 +64,31 @@ def generate_reverse_ideas(topic: str) -> dict:
         ("complexity", "simplicity"),
         ("unreliable", "reliable"),
     ]
-    
+
     for cause, solution in reversals:
         question = f"How to make {topic} {solution}?"
         results["steps"]["step2_solutions"].append(question)
-    
+
     return results
 
 
 def display_reverse_ideas(results: dict):
     """展示逆向头脑风暴结果"""
-    
+
     print("=" * 60)
     print(f"[REVERSE BRAINSTORM] Topic: {results['topic']}")
     print("=" * 60)
-    
+
     print("\n[Step 1] 逆向问题 (如何制造问题)")
     print("-" * 40)
     for i, q in enumerate(results["steps"]["step1_problems"], 1):
         print(f"  {i}. {q}")
-    
+
     print("\n[Step 2] 解决方案 (反转问题)")
     print("-" * 40)
     for i, q in enumerate(results["steps"]["step2_solutions"], 1):
         print(f"  {i}. {q}")
-    
+
     print("\n" + "=" * 60)
 
 
@@ -137,22 +137,22 @@ Fixes:
 """
 
 主函数"""
-    
+
     if len(sys.argv) > 1:
         topic = " ".join(sys.argv[1:])
     else:
         topic = "OpenClaw workflow"
-    
+
     results = generate_reverse_ideas(topic)
     display_reverse_ideas(results)
-    
+
     # 保存结果
     output_file = Path(f"flow-archive/brainstorm-current/reverse_ideas.json")
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n[Saved to] {output_file}")
-    
+
     return 0
 
 

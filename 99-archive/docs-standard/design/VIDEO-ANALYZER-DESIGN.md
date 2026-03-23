@@ -25,19 +25,19 @@ Video Content Analyzer v1 - 设计文档
 class VideoAnalyzer:
     def __init__(self, api_key):
         self.api_key = api_key
-    
+
     def search_videos(self, query, max_results=10):
         """搜索视频"""
         pass
-    
+
     def get_transcript(self, video_id):
         """获取字幕"""
         pass
-    
+
     def analyze_content(self, transcript):
         """分析内容"""
         pass
-    
+
     def save_to_vault(self, video_info, analysis):
         """保存到 Vault"""
         pass
@@ -69,7 +69,7 @@ class VideoAnalyzer:
 
 ## 4. 实施计划
 
-**时间:** 2026-03-16 ~ 03-20  
+**时间:** 2026-03-16 ~ 03-20
 **优先级:** 🟡 中
 
 ---

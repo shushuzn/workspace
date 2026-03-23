@@ -36,32 +36,32 @@ batch4_samples = [
     # 超高电导率组 (>4500 S/m)
     {'sample_id': 'LIT-041', 'P_W': 0.52, 'v_mms': 14, 'E_Jcm2': 37.14, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4800, 'ssa_m2g': 400, 'id_ig': 1.7, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'Maximum conductivity'},
     {'sample_id': 'LIT-042', 'P_W': 0.55, 'v_mms': 16, 'E_Jcm2': 34.38, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4600, 'ssa_m2g': 410, 'id_ig': 1.65, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'Very high power'},
-    
+
     # 高电导率组 (3500-4500 S/m)
     {'sample_id': 'LIT-043', 'P_W': 0.46, 'v_mms': 20, 'E_Jcm2': 23.0, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4000, 'ssa_m2g': 470, 'id_ig': 1.45, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'High optimized'},
     {'sample_id': 'LIT-044', 'P_W': 0.44, 'v_mms': 21, 'E_Jcm2': 20.95, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3850, 'ssa_m2g': 485, 'id_ig': 1.42, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'High quality'},
     {'sample_id': 'LIT-045', 'P_W': 0.43, 'v_mms': 23, 'E_Jcm2': 18.7, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3650, 'ssa_m2g': 505, 'id_ig': 1.38, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'High balanced'},
-    
+
     # 中高电导率组 (3000-3500 S/m)
     {'sample_id': 'LIT-046', 'P_W': 0.41, 'v_mms': 25, 'E_Jcm2': 16.4, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3450, 'ssa_m2g': 530, 'id_ig': 1.32, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'Medium-high'},
     {'sample_id': 'LIT-047', 'P_W': 0.39, 'v_mms': 26, 'E_Jcm2': 15.0, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3250, 'ssa_m2g': 545, 'id_ig': 1.28, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'Medium-high opt'},
     {'sample_id': 'LIT-048', 'P_W': 0.40, 'v_mms': 27, 'E_Jcm2': 14.81, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3150, 'ssa_m2g': 555, 'id_ig': 1.25, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'Medium-high std'},
-    
+
     # 中电导率组 (2500-3000 S/m)
     {'sample_id': 'LIT-049', 'P_W': 0.37, 'v_mms': 30, 'E_Jcm2': 12.33, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2900, 'ssa_m2g': 580, 'id_ig': 1.18, 'method': '4-probe', 'uncertainty': '±7%', 'notes': 'Medium opt'},
     {'sample_id': 'LIT-050', 'P_W': 0.35, 'v_mms': 33, 'E_Jcm2': 10.61, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2700, 'ssa_m2g': 605, 'id_ig': 1.1, 'method': '4-probe', 'uncertainty': '±7%', 'notes': 'Medium std'},
     {'sample_id': 'LIT-051', 'P_W': 0.34, 'v_mms': 35, 'E_Jcm2': 9.71, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2550, 'ssa_m2g': 625, 'id_ig': 1.05, 'method': '4-probe', 'uncertainty': '±7%', 'notes': 'Medium speed'},
-    
+
     # 中低电导率组 (2000-2500 S/m)
     {'sample_id': 'LIT-052', 'P_W': 0.32, 'v_mms': 37, 'E_Jcm2': 8.65, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2400, 'ssa_m2g': 655, 'id_ig': 0.95, 'method': '4-probe', 'uncertainty': '±8%', 'notes': 'Medium-low'},
     {'sample_id': 'LIT-053', 'P_W': 0.30, 'v_mms': 38, 'E_Jcm2': 7.89, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2250, 'ssa_m2g': 680, 'id_ig': 0.9, 'method': '4-probe', 'uncertainty': '±8%', 'notes': 'Medium-low std'},
     {'sample_id': 'LIT-054', 'P_W': 0.29, 'v_mms': 40, 'E_Jcm2': 7.25, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2100, 'ssa_m2g': 705, 'id_ig': 0.85, 'method': '4-probe', 'uncertainty': '±8%', 'notes': 'Low-medium'},
-    
+
     # 低电导率组 (<2000 S/m)
     {'sample_id': 'LIT-055', 'P_W': 0.26, 'v_mms': 46, 'E_Jcm2': 5.65, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 1650, 'ssa_m2g': 760, 'id_ig': 0.75, 'method': '4-probe', 'uncertainty': '±9%', 'notes': 'Low power'},
     {'sample_id': 'LIT-056', 'P_W': 0.23, 'v_mms': 50, 'E_Jcm2': 4.6, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 1450, 'ssa_m2g': 810, 'id_ig': 0.68, 'method': '4-probe', 'uncertainty': '±10%', 'notes': 'Very low'},
     {'sample_id': 'LIT-057', 'P_W': 0.20, 'v_mms': 55, 'E_Jcm2': 3.64, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 1150, 'ssa_m2g': 890, 'id_ig': 0.6, 'method': '4-probe', 'uncertainty': '±11%', 'notes': 'Ultra low power'},
-    
+
     # 特殊前驱体
     {'sample_id': 'LIT-058', 'P_W': 0.40, 'v_mms': 25, 'E_Jcm2': 16.0, 'co_ratio': 2.5, 'precursor': 'PET', 'sigma_Sm': 2500, 'ssa_m2g': 650, 'id_ig': 1.22, 'method': '4-probe', 'uncertainty': '±8%', 'notes': 'PET high quality'},
     {'sample_id': 'LIT-059', 'P_W': 0.35, 'v_mms': 30, 'E_Jcm2': 11.67, 'co_ratio': 0.9, 'precursor': 'Wood', 'sigma_Sm': 1850, 'ssa_m2g': 980, 'id_ig': 1.05, 'method': '4-probe', 'uncertainty': '±9%', 'notes': 'Wood natural'},

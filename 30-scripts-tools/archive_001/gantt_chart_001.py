@@ -25,11 +25,11 @@ GANTT_OUTPUT = GANTT_DIR / "gantt_charts"
 
 class GanttChartGenerator:
     """甘特图生成器"""
-    
+
     def __init__(self):
         self.output_dir = GANTT_OUTPUT
         self.output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     def load_roadmap(self, dimension: str = "stock_analysis") -> dict:
         """
 # ==============================================================================
@@ -75,13 +75,13 @@ Fixes:
 
 加载路线图数据"""
         roadmap_file = Path(f"flow-archive/roadmaps/{dimension}.json")
-        
+
         if not roadmap_file.exists():
             return {"error": f"Dimension '{dimension}' not found"}
-        
+
         with open(roadmap_file, "r", encoding="utf-8") as f:
             return json.load(f)
-    
+
     def generate_ascii_gantt(self, roadmap: dict, width: int = 80) -> str:
         """生成ASCII甘特图"""
         lines = []

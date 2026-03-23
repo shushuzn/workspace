@@ -16,45 +16,45 @@ from datetime import datetime
 
 class WorkflowMenu:
     """工作流交互式菜单"""
-    
+
     def __init__(self, flow_id: str = "20260318-universal-workflow-001"):
         self.flow_id = flow_id
         self.flow_dir = Path(f"flow-archive/{self.flow_id}")
         self.state_file = self.flow_dir / "execution-state.json"
         self.workflow_file = self.flow_dir / "workflow.json"
-        
+
     def load_state(self) -> dict:
         """加载执行状态"""
         if self.state_file.exists():
             with open(self.state_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         return {}
-    
+
     def load_workflow(self) -> dict:
         """加载工作流定义"""
         if self.workflow_file.exists():
             with open(self.workflow_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         return {}
-    
+
     def show_status(self) -> None:
         """显示当前状态"""
         state = self.load_state()
         workflow = self.load_workflow()
-        
+
         print("\n" + "=" * 50)
         print("📊 工作流状态")
         print("=" * 50)
-        
+
         if not state:
             print("❌ 无执行状态")
             return
-        
+
         print(f"任务: {state.get('task', 'N/A')}")
         print(f"状态: {state.get('status', 'N/A')}")
         print(f"步骤: {state.get('current_step', 0)} / {state.get('total_steps', 0)}")
         print(f"完成度: {state.get('completion_percentage', 0):.1f}%")
-        
+
         # 进度条
         total = state.get('total_steps', 1)
         current = state.get('current_step', 0)
@@ -62,14 +62,14 @@ class WorkflowMenu:
         bar_len = 30
         filled = int(bar_len * current / total) if total > 0 else 0
         bar = "█" * filled + "░" * (bar_len - filled)
-        
+
         print(f"\n[{bar}] {percent:.1f}%")
-        
+
         # 显示已完成的步骤
         completed = state.get('completed_steps', [])
         if completed:
             print(f"\n✅ 已完成步骤: {completed}")
-        
+
         # 显示步骤状态详情
         step_status = state.get('step_status', {})
         if step_status:
@@ -78,7 +78,7 @@ class WorkflowMenu:
                 status_icon = "✅" if info.get('status') == 'completed' else "⏳"
                 name = info.get('name', f'Step {step_id}')
                 print(f"  {status_icon} {step_id}: {name}")
-    
+
     def complete_step(self, step_id: int = None) -> None:
         """
 # ==============================================================================
@@ -124,41 +124,41 @@ Fixes:
 
 完成指定步骤"""
         state = self.load_state()
-        
+
         if step_id is None:
             # 自动完成当前步骤
             step_id = state.get('current_step', 0) + 1
-        
+
         # 更新状态
         if 'completed_steps' not in state:
             state['completed_steps'] = []
-        
+
         if step_id not in state['completed_steps']:
             state['completed_steps'].append(step_id)
-        
+
         state['current_step'] = step_id
         state['completion_percentage'] = len(state['completed_steps']) / state.get('total_steps', 1) * 100
-        
+
         # 添加步骤详情
         if 'step_status' not in state:
             state['step_status'] = {}
-        
+
         workflow = self.load_workflow()
         steps = workflow.get('steps', [])
         step_name = steps[step_id - 1].get('name', f'Step {step_id}') if step_id <= len(steps) else f'Step {step_id}'
-        
+
         state['step_status'][str(step_id)] = {
             'name': step_name,
             'status': 'completed',
             'completed_at': datetime.now().isoformat()
         }
-        
+
         # 保存
         with open(self.state_file, 'w', encoding='utf-8') as f:
             json.dump(state, f, ensure_ascii=False, indent=2)
-        
+
         print(f"✅ 步骤 {step_id} ({step_name}) 已标记完成")
-    
+
     def reset_state(self) -> None:
         """重置状态"""
         state = {

@@ -270,13 +270,13 @@ with open(opportunity_report, 'w', encoding='utf-8') as f:
     f.write("# LIG 研究机会发现报告\n\n")
     f.write(f"**生成日期:** 2026-03-11\n")
     f.write(f"**数据来源:** {len(df_lig)} 样本\n\n")
-    
+
     f.write("## 高优先级机会\n\n")
     for i, opp in enumerate(opportunities, 1):
         f.write(f"### {i}. {opp['description']}\n")
         f.write(f"- 类型：{opp['type']}\n")
         f.write(f"- 优先级：{opp['potential']}\n\n")
-    
+
     f.write("## 推理规则\n\n")
     for rule in inference_rules:
         f.write(f"- **{rule['id']}:** {rule['description']} (置信度：{rule['confidence']})\n")

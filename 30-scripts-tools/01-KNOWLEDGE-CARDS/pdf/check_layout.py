@@ -48,7 +48,7 @@ if left:
 if right:
     right_avg = sum(b["width"] for b in right) / len(right)
     print(f"Right avg width: {right_avg:.1f} ({right_avg/page_width:.2f})")
-    
+
     if left:
         ratio = right_avg / left_avg
         print(f"Width ratio (R/L): {ratio:.2f}")

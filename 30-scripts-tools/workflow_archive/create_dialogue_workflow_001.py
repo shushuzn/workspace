@@ -138,7 +138,7 @@ current_time = base_time
 for step_key, step_data in step_results.items():
     start = current_time
     end = current_time.replace(second=min(59, current_time.second + step_data['duration']))
-    
+
     state['step_status'][step_key] = {
         "name": step_data['name'],
         "status": "completed",

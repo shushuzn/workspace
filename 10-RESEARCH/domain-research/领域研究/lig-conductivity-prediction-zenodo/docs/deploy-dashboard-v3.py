@@ -38,7 +38,7 @@ def print_step(step, message):
 def connect_ssh():
     """Connect to cloud server via SSH"""
     print_step(1, f"Connecting to {SERVER_HOST}")
-    
+
     try:
         ssh = paramiko.SSHClient()
         ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())
@@ -58,7 +58,7 @@ def connect_ssh():
 def create_remote_dir(ssh):
     """Create remote directory"""
     print_step(2, f"Creating remote directory {REMOTE_DIR}")
-    
+
     try:
         sftp = ssh.open_sftp()
         try:
@@ -67,7 +67,7 @@ def create_remote_dir(ssh):
         except FileNotFoundError:
             sftp.mkdir(REMOTE_DIR)
             print(f"✅ Directory created")
-        
+
         sftp.close()
         return True
     except Exception as e:
@@ -77,21 +77,21 @@ def create_remote_dir(ssh):
 def upload_files(ssh):
     """Upload files to server"""
     print_step(3, "Uploading files")
-    
+
     try:
         sftp = ssh.open_sftp()
-        
+
         for filename in FILES_TO_DEPLOY:
             local_path = os.path.join(LOCAL_WORKSPACE, filename)
             remote_path = f"{REMOTE_DIR}/{filename}"
-            
+
             if os.path.exists(local_path):
                 print(f"📤 Uploading {filename}...")
                 sftp.put(local_path, remote_path)
                 print(f"✅ {filename} uploaded")
             else:
                 print(f"⚠️  {filename} not found locally")
-        
+
         sftp.close()
         return True
     except Exception as e:
@@ -101,11 +101,11 @@ def upload_files(ssh):
 def install_dependencies(ssh):
     """Install Python dependencies"""
     print_step(4, "Installing dependencies (psutil)")
-    
+
     try:
         stdin, stdout, stderr = ssh.exec_command('pip3 install psutil -q')
         exit_code = stdout.channel.recv_exit_status()
-        
+
         if exit_code == 0:
             print(f"✅ Dependencies installed")
             return True
@@ -120,7 +120,7 @@ def install_dependencies(ssh):
 def stop_existing_server(ssh):
     """Stop any existing dashboard server"""
     print_step(5, "Stopping existing server")
-    
+
     try:
         # Find and kill existing process
         stdin, stdout, stderr = ssh.exec_command(
@@ -136,19 +136,19 @@ def stop_existing_server(ssh):
 def start_server(ssh):
     """Start the new dashboard server"""
     print_step(6, "Starting dashboard server")
-    
+
     try:
         # Start server in background using nohup
         command = f"cd {REMOTE_DIR} && nohup python3 dashboard-api-v3.py > dashboard.log 2>&1 &"
         stdin, stdout, stderr = ssh.exec_command(command)
         time.sleep(2)
-        
+
         # Check if server is running
         stdin, stdout, stderr = ssh.exec_command(
             f"lsof -i :{SERVER_PORT} | grep LISTEN || netstat -tlnp | grep :{SERVER_PORT}"
         )
         result = stdout.read().decode()
-        
+
         if result:
             print(f"✅ Server started on port {SERVER_PORT}")
             return True
@@ -174,7 +174,7 @@ def start_server(ssh):
 def configure_firewall(ssh):
     """Configure firewall to allow port"""
     print_step(7, "Configuring firewall")
-    
+
     try:
         # Try to open port with ufw
         stdin, stdout, stderr = ssh.exec_command(
@@ -190,14 +190,14 @@ def configure_firewall(ssh):
 def verify_deployment(ssh):
     """Verify deployment is working"""
     print_step(8, "Verifying deployment")
-    
+
     try:
         # Test API endpoint
         stdin, stdout, stderr = ssh.exec_command(
             f"curl -s http://localhost:{SERVER_PORT}/api/health"
         )
         health = stdout.read().decode()
-        
+
         if health and 'local' in health:
             print(f"✅ API health check passed")
             print(f"📊 Health: {health[:100]}...")
@@ -212,7 +212,7 @@ def verify_deployment(ssh):
 def show_access_info():
     """Display access information"""
     print_step(9, "Deployment Complete!")
-    
+
     print(f"""
 ╔══════════════════════════════════════════════════════════╗
 ║           🎭 Innovator Dashboard v3.0 LIVE!              ║
@@ -250,43 +250,43 @@ def main():
 ║              Target: 8.208.30.28 (UK London)             ║
 ╚══════════════════════════════════════════════════════════╝
     """)
-    
+
     start_time = time.time()
-    
+
     # Connect
     ssh = connect_ssh()
     if not ssh:
         sys.exit(1)
-    
+
     try:
         # Deploy
         if not create_remote_dir(ssh):
             sys.exit(1)
-        
+
         if not upload_files(ssh):
             sys.exit(1)
-        
+
         if not install_dependencies(ssh):
             sys.exit(1)
-        
+
         if not stop_existing_server(ssh):
             sys.exit(1)
-        
+
         if not start_server(ssh):
             sys.exit(1)
-        
+
         if not configure_firewall(ssh):
             pass  # Non-critical
-        
+
         if not verify_deployment(ssh):
             pass  # Non-critical
-        
+
         # Show info
         elapsed = time.time() - start_time
         print(f"\n⏱️  Total deployment time: {elapsed:.1f} seconds")
-        
+
         show_access_info()
-        
+
     finally:
         ssh.close()
 

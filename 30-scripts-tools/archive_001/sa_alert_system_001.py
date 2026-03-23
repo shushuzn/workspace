@@ -29,14 +29,14 @@ import time
 
 class AlertSystem:
     """实时警报系统"""
-    
+
     def __init__(self):
         self.alert_dir = Path("60-DATA/stock_alerts")
         self.alert_dir.mkdir(parents=True, exist_ok=True)
         self.alert_log = self.alert_dir / "alert_log.jsonl"
         self.active_alerts = []
-    
-    def create_price_alert(self, symbol: str, alert_type: str, 
+
+    def create_price_alert(self, symbol: str, alert_type: str,
                            target_price: float, current_price: float) -> Dict:
         """
         创建价格警报
@@ -61,10 +61,10 @@ class AlertSystem:
             'status': 'active',
             'triggered': False
         }
-        
+
         self.active_alerts.append(alert)
         return alert
-    
+
     def create_indicator_alert(self, symbol: str, indicator: str,
                                 condition: str, threshold: float,
                                 current_value: float) -> Dict:
@@ -93,10 +93,10 @@ class AlertSystem:
             'status': 'active',
             'triggered': False
         }
-        
+
         self.active_alerts.append(alert)
         return alert
-    
+
     def create_volume_alert(self, symbol: str, volume_ratio: float,
                             avg_volume: float) -> Dict:
         """
@@ -121,10 +121,10 @@ class AlertSystem:
             'status': 'active',
             'triggered': False
         }
-        
+
         self.active_alerts.append(alert)
         return alert
-    
+
     def check_price_alerts(self, symbol: str, current_price: float) -> List[Dict]:
         """
         检查价格警报
@@ -137,13 +137,13 @@ class AlertSystem:
             触发的警报列表
         """
         triggered = []
-        
+
         for alert in self.active_alerts:
             if alert['type'] != 'price' or alert['symbol'] != symbol:
                 continue
             if alert['triggered']:
                 continue
-            
+
             should_trigger = False
             if alert['alert_type'] == 'above' and current_price >= alert['target_price']:
                 should_trigger = True
@@ -153,16 +153,16 @@ class AlertSystem:
                 # 简化：假设之前低于目标价
                 if current_price >= alert['target_price']:
                     should_trigger = True
-            
+
             if should_trigger:
                 alert['triggered'] = True
                 alert['triggered_at'] = datetime.now().isoformat()
                 alert['trigger_price'] = current_price
                 triggered.append(alert)
                 self._log_alert(alert)
-        
+
         return triggered
-    
+
     def check_indicator_alerts(self, symbol: str, indicator: str,
                                 current_value: float) -> List[Dict]:
         """
@@ -177,7 +177,7 @@ class AlertSystem:
             触发的警报列表
         """
         triggered = []
-        
+
         for alert in self.active_alerts:
             if alert['type'] != 'indicator':
                 continue
@@ -185,7 +185,7 @@ class AlertSystem:
                 continue
             if alert['triggered']:
                 continue
-            
+
             should_trigger = False
             if alert['condition'] == 'above' and current_value >= alert['threshold']:
                 should_trigger = True
@@ -198,16 +198,16 @@ class AlertSystem:
             elif alert['condition'] == 'cross_under':
                 if current_value <= alert['threshold']:
                     should_trigger = True
-            
+
             if should_trigger:
                 alert['triggered'] = True
                 alert['triggered_at'] = datetime.now().isoformat()
                 alert['trigger_value'] = current_value
                 triggered.append(alert)
                 self._log_alert(alert)
-        
+
         return triggered
-    
+
     def check_volume_alerts(self, symbol: str, current_volume: float,
                             avg_volume: float) -> List[Dict]:
         """
@@ -223,13 +223,13 @@ class AlertSystem:
         """
         triggered = []
         volume_ratio = current_volume / avg_volume if avg_volume > 0 else 0
-        
+
         for alert in self.active_alerts:
             if alert['type'] != 'volume' or alert['symbol'] != symbol:
                 continue
             if alert['triggered']:
                 continue
-            
+
             if volume_ratio >= alert['trigger_threshold']:
                 alert['triggered'] = True
                 alert['triggered_at'] = datetime.now().isoformat()
@@ -237,9 +237,9 @@ class AlertSystem:
                 alert['trigger_ratio'] = volume_ratio
                 triggered.append(alert)
                 self._log_alert(alert)
-        
+
         return triggered
-    
+
     def _log_alert(self, alert: Dict):
         """记录警报日志"""
         log_entry = {
@@ -250,49 +250,49 @@ class AlertSystem:
             'status': 'triggered',
             'details': alert
         }
-        
+
         try:
             with open(self.alert_log, 'a', encoding='utf-8') as f:
                 f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
         except Exception as e:
             print(f"[WARN] 记录警报日志失败：{e}")
-    
+
     def get_active_alerts(self, symbol: str = None) -> List[Dict]:
         """获取活跃警报"""
         if symbol:
             return [a for a in self.active_alerts if a['symbol'] == symbol and not a['triggered']]
         return [a for a in self.active_alerts if not a['triggered']]
-    
+
     def get_triggered_alerts(self, symbol: str = None) -> List[Dict]:
         """获取已触发警报"""
         if symbol:
             return [a for a in self.active_alerts if a['symbol'] == symbol and a['triggered']]
         return [a for a in self.active_alerts if a['triggered']]
-    
+
     def clear_triggered_alerts(self):
         """清除已触发警报"""
         self.active_alerts = [a for a in self.active_alerts if not a['triggered']]
-    
+
     def save_alerts(self, filename: str = None):
         """保存警报配置"""
         if filename is None:
             filename = f"alerts_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
-        
+
         filepath = self.alert_dir / filename
-        
+
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump({
                 'active_alerts': self.active_alerts,
                 'saved_at': datetime.now().isoformat()
             }, f, indent=2, ensure_ascii=False)
-        
+
         return filepath
-    
+
     def load_alerts(self, filepath: Path):
         """加载警报配置"""
         with open(filepath, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        
+
         self.active_alerts = data.get('active_alerts', [])
         return len(self.active_alerts)
 
@@ -300,19 +300,19 @@ class AlertSystem:
 def create_sample_alerts(alert_system: AlertSystem) -> List[Dict]:
     """创建示例警报"""
     alerts = []
-    
+
     # 价格警报
     alerts.append(alert_system.create_price_alert('AAPL', 'above', 150.0, 145.0))
     alerts.append(alert_system.create_price_alert('AAPL', 'below', 140.0, 145.0))
-    
+
     # 指标警报
     alerts.append(alert_system.create_indicator_alert('AAPL', 'RSI', 'above', 70, 65))
     alerts.append(alert_system.create_indicator_alert('AAPL', 'RSI', 'below', 30, 35))
     alerts.append(alert_system.create_indicator_alert('AAPL', 'MACD', 'cross_over', 0, -0.5))
-    
+
     # 成交量警报
     alerts.append(alert_system.create_volume_alert('AAPL', 0, 1000000))
-    
+
     return alerts
 
 
@@ -363,16 +363,16 @@ Fixes:
     print("=" * 70)
     print(" " * 25 + "SA-014: Real-time Alert System")
     print("=" * 70)
-    
+
     alert_system = AlertSystem()
-    
+
     # 测试模式
     if len(sys.argv) > 1 and sys.argv[1] == '--test':
         print("\n[Test 1] Create Sample Alerts")
         print("-" * 70)
         alerts = create_sample_alerts(alert_system)
         print(f"  Created {len(alerts)} alerts")
-        
+
         print("\n[Test 2] Check Price Alerts")
         print("-" * 70)
         # 测试价格突破
@@ -380,40 +380,40 @@ Fixes:
         print(f"  Triggered: {len(triggered)} alerts")
         for alert in triggered:
             print(f"    - {alert['id']}: Price breakthrough at ${alert['trigger_price']}")
-        
+
         print("\n[Test 3] Check Indicator Alerts (RSI Overbought)")
         print("-" * 70)
         triggered = alert_system.check_indicator_alerts('AAPL', 'RSI', 75)
         print(f"  Triggered: {len(triggered)} alerts")
         for alert in triggered:
             print(f"    - {alert['id']}: RSI {alert['trigger_value']} > {alert['threshold']}")
-        
+
         print("\n[Test 4] Check Volume Alerts")
         print("-" * 70)
         triggered = alert_system.check_volume_alerts('AAPL', 2500000, 1000000)
         print(f"  Triggered: {len(triggered)} alerts")
         for alert in triggered:
             print(f"    - {alert['id']}: Volume ratio {alert['trigger_ratio']:.2f}x")
-        
+
         print("\n[Test 5] Get Active Alerts")
         print("-" * 70)
         active = alert_system.get_active_alerts('AAPL')
         print(f"  Active alerts: {len(active)}")
         for alert in active:
             print(f"    - {alert['id']}: {alert['type']} ({alert['status']})")
-        
+
         print("\n[Test 6] Get Triggered Alerts")
         print("-" * 70)
         triggered = alert_system.get_triggered_alerts('AAPL')
         print(f"  Triggered alerts: {len(triggered)}")
         for alert in triggered:
             print(f"    - {alert['id']}: Triggered at {alert['triggered_at']}")
-        
+
         print("\n[Test 7] Save Alerts")
         print("-" * 70)
         filepath = alert_system.save_alerts()
         print(f"  Saved to: {filepath}")
-        
+
         print("\n[Test 8] Alert Log")
         print("-" * 70)
         if alert_system.alert_log.exists():
@@ -422,11 +422,11 @@ Fixes:
             print(f"  Alert log entries: {len(lines)}")
         else:
             print("  No alert log yet")
-        
+
         print("\n" + "=" * 70)
         print(" SA-014 Real-time Alert System test completed")
         print("=" * 70)
-    
+
     else:
         # 正常使用模式
         print("\nUsage: py sa_014_alert_system.py --test")

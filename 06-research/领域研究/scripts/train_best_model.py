@@ -36,10 +36,10 @@ y_scaled = scaler_y.fit_transform(y.reshape(-1, 1)).flatten()
 # Train GB with regularization
 print("\nTraining Gradient Boosting...")
 gb = GradientBoostingRegressor(
-    n_estimators=150, 
-    max_depth=2, 
+    n_estimators=150,
+    max_depth=2,
     learning_rate=0.03,
-    min_samples_leaf=15, 
+    min_samples_leaf=15,
     random_state=42
 )
 

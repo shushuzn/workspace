@@ -27,24 +27,24 @@ VIOLATION_LOG = Path("30-scripts-tools/violation_log.jsonl")
 
 class ToolCallInterceptor:
     """工具调用拦截器 - 防护 v10"""
-    
+
     def __init__(self):
         self.session_id = self._get_session_id()
         self.registry = self._load_registry()
-    
+
     def _get_session_id(self):
         if not STATE_FILE.exists():
             return None
         with open(STATE_FILE, "r", encoding="utf-8") as f:
             state = json.load(f)
         return state.get("session_id")
-    
+
     def _load_registry(self):
         if not TOOL_REGISTRY.exists():
             return None
         with open(TOOL_REGISTRY, "r", encoding="utf-8") as f:
             return json.load(f)
-    
+
     def intercept(self, tool_id: str, caller: str = "unknown") -> dict:
         """拦截工具调用"""
         result = {
@@ -55,51 +55,51 @@ class ToolCallInterceptor:
             "allowed": False,
             "reason": ""
         }
-        
+
         # 检查 1: 会话有效性
         if not self.session_id:
             result["reason"] = "No valid session (must use copaw_entry.py)"
             self._log_and_violate(result)
             return result
-        
+
         # 检查 2: 工具注册
         if self.registry and tool_id not in self.registry.get("tools", {}):
             result["reason"] = f"Unregistered tool: {tool_id}"
             self._log_and_violate(result)
             return result
-        
+
         # 检查 3: 调用者权限
         if not self._check_caller_permission(caller, tool_id):
             result["reason"] = f"Caller {caller} not authorized for {tool_id}"
             self._log_and_violate(result)
             return result
-        
+
         # 检查 4: 防护层完整性
         if not self._check_protection_integrity():
             result["reason"] = "Protection layer integrity check failed"
             self._log_and_violate(result)
             return result
-        
+
         # 所有检查通过
         result["allowed"] = True
         result["reason"] = "Authorized"
         self._log_call(result)
-        
+
         return result
-    
+
     def _check_caller_permission(self, caller: str, tool_id: str) -> bool:
         """检查调用者权限"""
         # 白名单：允许所有已注册工具通过 tool_executor.py 调用
         if caller in ["tool_executor.py", "workflow_helper.py", "copaw_entry.py"]:
             return True
-        
+
         # 黑名单：禁止直接调用
         if caller in ["unknown", "direct_call", "manual"]:
             return False
-        
+
         # 默认：允许（可配置）
         return True
-    
+
     def _check_protection_integrity(self) -> bool:
         """检查防护层完整性"""
         critical_files = [
@@ -108,13 +108,13 @@ class ToolCallInterceptor:
             Path("30-scripts-tools/safe_shell_executor.py"),
             Path(".git/hooks/pre-commit"),
         ]
-        
+
         for file_path in critical_files:
             if not file_path.exists():
                 return False
-        
+
         return True
-    
+
     def _log_call(self, result: dict) -> None:
         """
 # ==============================================================================
@@ -161,7 +161,7 @@ Fixes:
 记录调用日志"""
         with open(INTERCEPTOR_LOG, "a", encoding="utf-8") as f:
             f.write(json.dumps(result, ensure_ascii=False) + "\n")
-    
+
     def _log_and_violate(self, result: dict) -> None:
         """记录违规"""
         # 记录调用

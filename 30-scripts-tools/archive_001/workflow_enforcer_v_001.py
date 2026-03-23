@@ -20,7 +20,7 @@ from content_validator import ContentValidator
 
 class WorkflowEnforcerV2:
     """工作流强制执行器 v2.0"""
-    
+
     def __init__(self, flow_id: str, session_id: str):
         self.flow_id = flow_id
         self.session_id = session_id
@@ -28,7 +28,7 @@ class WorkflowEnforcerV2:
         self.state_file = self.flow_dir / "execution-state.json"
         self.validator = ContentValidator()
         self.enforcement_enabled = True
-    
+
     def verify_and_execute(self, step_id: int, command: str, expected_output: str = "") -> bool:
         """
         验证并执行步骤
@@ -44,13 +44,13 @@ class WorkflowEnforcerV2:
         # 1. 验证步骤顺序
         if not self._verify_step_order(step_id):
             return False
-        
+
         # 2. 执行命令（由调用者执行）
         # 3. 验证输出
         # （由调用者提供输出）
-        
+
         return True
-    
+
     def validate_step_output(self, step_id: int, output: str, expected_keywords: list = None) -> bool:
         """
         验证步骤输出
@@ -66,17 +66,17 @@ class WorkflowEnforcerV2:
         if not output or len(output.strip()) < 10:
             print(f"[FAIL] Step {step_id}: Output too short")
             return False
-        
+
         # 使用 content_validator 验证
         if expected_keywords:
             for keyword in expected_keywords:
                 if keyword.lower() not in output.lower():
                     print(f"[FAIL] Step {step_id}: Missing keyword '{keyword}'")
                     return False
-        
+
         print(f"[OK] Step {step_id}: Output validated")
         return True
-    
+
     def update_step_status(self, step_id: int, status: str, output: str = "", validated: bool = True):
         """
         更新步骤状态（必须验证）
@@ -89,59 +89,59 @@ class WorkflowEnforcerV2:
         """
         if not self.state_file.exists():
             return
-        
+
         with open(self.state_file, 'r', encoding='utf-8') as f:
             self.state = json.load(f)
-        
+
         # 只允许更新已验证的步骤
         if status == 'completed' and not validated:
             print(f"[BLOCK] Step {step_id}: Cannot complete without validation")
             status = 'failed'
-        
+
         # 更新状态
         if 'step_status' not in self.state:
             self.state['step_status'] = {}
-        
+
         self.state['step_status'][step_id] = {
             'status': status,
             'completed_at': datetime.now().isoformat(),
             'validated': validated,
             'output_length': len(output) if output else 0
         }
-        
+
         # 更新 completed_steps（只记录 validated=True）
         if status == 'completed' and validated:
             if 'completed_steps' not in self.state:
                 self.state['completed_steps'] = []
             if step_id not in self.state['completed_steps']:
                 self.state['completed_steps'].append(step_id)
-        
+
         # 更新完成率
         total = self.state.get('total_steps', 5)
         self.state['completion_percentage'] = len(self.state['completed_steps']) / total * 100
-        
+
         # 保存
         with open(self.state_file, 'w', encoding='utf-8') as f:
             json.dump(self.state, f, ensure_ascii=False, indent=2)
-        
+
         mark = "✓" if validated else "✗"
         print(f"[OK] Step {step_id} updated: {status} {mark}")
-    
+
     def _verify_step_order(self, step_id: int) -> bool:
         """验证步骤顺序"""
         if not self.state_file.exists():
             return False
-        
+
         with open(self.state_file, 'r', encoding='utf-8') as f:
             self.state = json.load(f)
-        
+
         completed = self.state.get('completed_steps', [])
         next_expected = len(completed) + 1
-        
+
         if step_id != next_expected:
             print(f"[BLOCK] Step order violation: expected {next_expected}, got {step_id}")
             return False
-        
+
         return True
 
 
@@ -191,12 +191,12 @@ Fixes:
 
 测试"""
     print("Workflow Enforcer V2.0 - Test")
-    
+
     enforcer = WorkflowEnforcerV2(
         flow_id="20260318-simplified-workflow-001",
         session_id="test-session"
     )
-    
+
     # Test 1: Valid output
     print("\nTest 1: Valid output")
     valid = enforcer.validate_step_output(
@@ -205,7 +205,7 @@ Fixes:
         ["completed", "context"]
     )
     print(f"  Result: {'[OK] Valid' if valid else '[FAIL] Invalid'}")
-    
+
     # Test 2: Missing keyword
     print("\nTest 2: Missing keyword")
     valid = enforcer.validate_step_output(
@@ -214,7 +214,7 @@ Fixes:
         ["task", "analysis"]
     )
     print(f"  Result: {'[OK] Valid' if valid else '[FAIL] Invalid'}")
-    
+
     # Test 3: Too short
     print("\nTest 3: Too short output")
     valid = enforcer.validate_step_output(

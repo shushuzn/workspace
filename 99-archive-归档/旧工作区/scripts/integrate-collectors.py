@@ -22,39 +22,39 @@ import yaml
 def check_dependencies():
     """检查依赖"""
     missing = []
-    
+
     try:
         import feedparser
     except ImportError:
         missing.append("feedparser")
-    
+
     try:
         import requests
     except ImportError:
         missing.append("requests")
-    
+
     try:
         import bs4
     except ImportError:
         missing.append("beautifulsoup4")
-    
+
     try:
         import yaml
     except ImportError:
         missing.append("pyyaml")
-    
+
     if missing:
         print(f"⚠️ 缺少依赖：{', '.join(missing)}")
         print(f"安装命令：py -m pip install {' '.join(missing)}")
         return False
-    
+
     return True
 
 
 def create_cron_tasks(workspace: str):
     """创建定时任务配置"""
     workspace_path = Path(workspace)
-    
+
     cron_config = {
         "tasks": [
             {
@@ -80,13 +80,13 @@ def create_cron_tasks(workspace: str):
             }
         ]
     }
-    
+
     output_path = workspace_path / ".openclaw" / "cron-tasks.json"
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(cron_config, f, indent=2, ensure_ascii=False)
-    
+
     print(f"✅ 已创建定时任务配置：{output_path}")
     return output_path
 
@@ -94,7 +94,7 @@ def create_cron_tasks(workspace: str):
 def create_integration_guide(workspace: str):
     """创建集成指南"""
     workspace_path = Path(workspace)
-    
+
     guide = f"""# 🔗 技能集成指南
 
 **集成日期:** {datetime.now().strftime('%Y-%m-%d')}  
@@ -279,13 +279,13 @@ py -m pip install feedparser requests beautifulsoup4 pyyaml
 
 *集成完成，系统已就绪！* 🎉
 """
-    
+
     output_path = workspace_path / "reports" / "SKILL-INTEGRATION-GUIDE.md"
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(output_path, "w", encoding="utf-8") as f:
         f.write(guide)
-    
+
     print(f"✅ 已创建集成指南：{output_path}")
     return output_path
 
@@ -295,10 +295,10 @@ def main():
     parser.add_argument("--workspace", type=str, default="D:\\OpenClaw\\workspace",
                         help="工作空间路径")
     args = parser.parse_args()
-    
+
     print(f"\n=== Skill Integration ===")
     print(f"工作空间：{args.workspace}\n")
-    
+
     # 检查依赖
     print("🔍 检查依赖...")
     if check_dependencies():
@@ -306,21 +306,21 @@ def main():
     else:
         print("⚠️ 请先安装缺少的依赖")
         return 1
-    
+
     # 创建定时任务配置
     print("\n📅 创建定时任务配置...")
     create_cron_tasks(args.workspace)
-    
+
     # 创建集成指南
     print("\n📖 创建集成指南...")
     create_integration_guide(args.workspace)
-    
+
     print("\n✅ 技能集成完成！")
     print("\n下一步:")
     print("1. 安装依赖：py -m pip install feedparser requests beautifulsoup4 pyyaml")
     print("2. 测试运行：查看集成指南中的测试命令")
     print("3. 配置定时任务：OpenClaw 心跳检查已集成")
-    
+
     return 0
 
 

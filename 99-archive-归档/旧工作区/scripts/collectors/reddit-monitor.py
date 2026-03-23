@@ -105,21 +105,21 @@ def fetch_subreddit_rss(subreddit: str, limit: int = 25) -> List[Dict]:
     """
     # Reddit RSS feed URL
     rss_url = f"https://www.reddit.com/r/{subreddit}/hot.rss?limit={limit}"
-    
+
     # 备用：使用 Libreddit 实例（如果 Reddit 官方 RSS 被限制）
     libreddit_instances = [
         "https://libreddit.kavin.rocks",
         "https://libreddit.privacy.com.de",
         "https://reddit.r4fo.com"
     ]
-    
+
     posts = []
-    
+
     try:
         # 先尝试官方 RSS
         log(f"  → 尝试官方 RSS")
         response = requests.get(rss_url, timeout=30)
-        
+
         if response.status_code != 200 or len(response.content) < 500:
             log(f"  → 官方 RSS 失败，尝试 Libreddit")
             # 尝试 Libreddit 实例
@@ -132,32 +132,32 @@ def fetch_subreddit_rss(subreddit: str, limit: int = 25) -> List[Dict]:
                         break
                 except Exception:
                     continue
-        
+
         if response.status_code != 200:
             log(f"⚠️ r/{subreddit} RSS 返回状态码 {response.status_code}")
             return []
-        
+
         # 解析 RSS
         feed = feedparser.parse(response.content)
-        
+
         for entry in feed.entries[:limit]:
             # 提取帖子 ID
             post_id = entry.id.split('/')[-1] if '/' in entry.id else entry.id
-            
+
             # 提取内容
             title = entry.title
             content = entry.get('summary', '')
-            
+
             # 过滤相关帖子
             if not is_relevant(title, content):
                 continue
-            
+
             # 提取作者
             author = entry.get('author', '[deleted]')
-            
+
             # 提取链接
             link = entry.get('link', '')
-            
+
             # 提取发布时间
             published = entry.get('published', '')
             if published:
@@ -168,7 +168,7 @@ def fetch_subreddit_rss(subreddit: str, limit: int = 25) -> List[Dict]:
                     created_utc = datetime.now().isoformat()
             else:
                 created_utc = datetime.now().isoformat()
-            
+
             posts.append({
                 "id": post_id,
                 "title": title,
@@ -181,9 +181,9 @@ def fetch_subreddit_rss(subreddit: str, limit: int = 25) -> List[Dict]:
                 "link_flair_text": '',
                 "created_utc": created_utc
             })
-        
+
         return posts
-        
+
     except Exception as e:
         log(f"❌ r/{subreddit} RSS 错误：{e}")
         return []
@@ -199,76 +199,76 @@ def generate_markdown(posts: List[Dict], date_str: str) -> str:
 ---
 
 """
-    
+
     by_subreddit = {}
     for post in posts:
         sub = post['subreddit']
         if sub not in by_subreddit:
             by_subreddit[sub] = []
         by_subreddit[sub].append(post)
-    
+
     for subreddit, sub_posts in sorted(by_subreddit.items()):
         md += f"## r/{subreddit}\n\n"
-        
+
         # 按时间排序（最新在前）
         sub_posts.sort(key=lambda x: x['created_utc'], reverse=True)
-        
+
         for post in sub_posts[:15]:  # 每个版块最多 15 条
             title = post['title']
             url = post['url']
             author = post.get('author', '')
             published = post.get('created_utc', '')[:10] if post.get('created_utc') else ''
-            
+
             md += f"### {title}\n\n"
             md += f"👤 {author} | 📅 {published} | 🔗 [查看帖子]({url})\n\n"
-            
+
             # 如果有内容摘要
             if post.get('selftext'):
                 summary = post['selftext'][:200]
                 if len(post['selftext']) > 200:
                     summary += "..."
                 md += f"> {summary}\n\n"
-            
+
             md += "---\n\n"
-    
+
     md += f"\n**结束时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
     return md
 
 # ============ 主流程 ============
 def main():
     log("🚀 启动 Reddit 监控 (RSS 模式)")
-    
+
     conn = init_db()
     all_posts = []
-    
+
     for subreddit in SUBREDDITS:
         log(f"📝 监控 r/{subreddit}")
-        
+
         posts = fetch_subreddit_rss(subreddit, limit=25)
-        
+
         # 过滤已见过的
         new_posts = [p for p in posts if not is_seen(conn, p['id'])]
-        
+
         for post in new_posts:
             mark_seen(conn, post['id'], post['title'], post['subreddit'])
             all_posts.append(post)
-        
+
         log(f"✅ r/{subreddit}: {len(new_posts)} 条新帖子")
-    
+
     if all_posts:
         today_dir = get_today_dir()
         date_str = datetime.now().strftime("%Y-%m-%d")
         filename = sanitize_filename(f"reddit-monitor-{date_str}.md")
         filepath = os.path.join(today_dir, filename)
-        
+
         md_content = generate_markdown(all_posts, date_str)
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(md_content)
-        
+
         log(f"💾 已保存到 {filepath}")
     else:
         log("ℹ️ 无新帖子")
-    
+
     conn.close()
     log("✅ 完成")
 

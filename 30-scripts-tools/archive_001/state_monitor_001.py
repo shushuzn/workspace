@@ -99,7 +99,7 @@ def log_tampering(old_hash: str, new_hash: str, detected_at: str) -> None:
         "old_hash": old_hash,
         "new_hash": new_hash,
     }
-    
+
     with open(MONITOR_LOG, 'a', encoding='utf-8') as f:
         f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
 
@@ -118,19 +118,19 @@ def check_integrity() -> bool:
     if not STATE_FILE.exists():
         print("[ERROR] State 文件不存在")
         return False
-    
+
     # 计算当前哈希
     current_hash = compute_file_hash(STATE_FILE)
-    
+
     # 加载已知哈希
     known_hash = load_known_hash()
-    
+
     if known_hash is None:
         # 首次运行，保存当前哈希
         print("[INFO] 首次运行，保存当前哈希")
         save_known_hash(current_hash)
         return True
-    
+
     # 比较哈希
     if current_hash != known_hash:
         print("=" * 70)
@@ -138,16 +138,16 @@ def check_integrity() -> bool:
         print(f"[SECURITY] 已知哈希：{known_hash[:16]}...")
         print(f"[SECURITY] 当前哈希：{current_hash[:16]}...")
         print("=" * 70)
-        
+
         # 记录篡改
         log_tampering(known_hash, current_hash, datetime.now().isoformat())
-        
+
         # 创建备份
         backup_file = create_backup()
         print(f"[INFO] 已创建备份：{backup_file}")
-        
+
         return False
-    
+
     print("[OK] State 文件完整性验证通过")
     return True
 
@@ -157,22 +157,22 @@ def restore_from_backup() -> None:
     if not BACKUP_DIR.exists():
         print("[ERROR] 备份目录不存在")
         return False
-    
+
     # 获取最新备份
     backups = sorted(BACKUP_DIR.glob("execution-state-*.json"), reverse=True)
     if not backups:
         print("[ERROR] 无可用备份")
         return False
-    
+
     latest_backup = backups[0]
     print(f"[INFO] 从备份恢复：{latest_backup}")
-    
+
     shutil.copy2(latest_backup, STATE_FILE)
-    
+
     # 更新哈希
     new_hash = compute_file_hash(STATE_FILE)
     save_known_hash(new_hash)
-    
+
     print("[OK] 已恢复到已知有效状态")
     return True
 
@@ -186,7 +186,7 @@ def main():
         print("  --restore  从备份恢复")
         print("  --init     初始化哈希（首次运行）")
         sys.exit(1)
-    
+
     if sys.argv[1] == '--check':
         if check_integrity():
             sys.exit(0)
@@ -194,13 +194,13 @@ def main():
             print("\n[BLOCK] 检测到未经授权的修改")
             print("[ACTION] 请运行：py state_monitor.py --restore")
             sys.exit(1)
-    
+
     elif sys.argv[1] == '--restore':
         if restore_from_backup():
             sys.exit(0)
         else:
             sys.exit(1)
-    
+
     elif sys.argv[1] == '--init':
         if STATE_FILE.exists():
             file_hash = compute_file_hash(STATE_FILE)
@@ -210,7 +210,7 @@ def main():
         else:
             print("[ERROR] State 文件不存在")
             sys.exit(1)
-    
+
     else:
         print(f"[ERROR] 未知参数：{sys.argv[1]}")
         sys.exit(1)

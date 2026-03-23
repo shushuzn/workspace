@@ -21,25 +21,25 @@ class WorkflowDeploy:
         # Validate
         validator_path = TOOLS_DIR / "tool_validator_001.py"
         tool_path = TOOLS_DIR / f"{tool_name}.py"
-        
+
         if not tool_path.exists():
             return {"error": f"Tool not found: {tool_name}"}
-        
+
         # Validate tool
         result = subprocess.run(
             [sys.executable, str(validator_path), "--check", str(tool_path)],
             capture_output=True, text=True, timeout=30
         )
-        
+
         if result.returncode != 0:
             return {"error": "Validation failed", "details": result.stdout}
-        
+
         return {
             "status": "deployed",
             "tool": tool_name,
             "validated": True
         }
-    
+
     def batch_deploy(self, tools):
         results = []
         for tool in tools:
@@ -48,7 +48,7 @@ class WorkflowDeploy:
 
 if __name__ == "__main__":
     deploy = WorkflowDeploy()
-    
+
     if len(sys.argv) > 1:
         tool = sys.argv[1]
         print(json.dumps(deploy.deploy(tool), ensure_ascii=False, indent=2))

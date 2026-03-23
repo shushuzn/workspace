@@ -18,7 +18,7 @@ call_count = {}
 for tool in tools:
     name = tool.stem
     call_count[name] = 0
-    
+
     for other in tools:
         if other == tool:
             continue

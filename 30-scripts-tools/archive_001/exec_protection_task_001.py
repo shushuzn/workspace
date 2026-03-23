@@ -20,15 +20,15 @@ def main():
     print("=" * 70)
     print("防护强化任务 - 通过 tool_executor 执行")
     print("=" * 70)
-    
+
     # 创建执行器
     executor = ToolExecutor()
-    
+
     # 测试执行一个已注册的工具
     print("\n[测试] 执行 risk-assessor 工具")
     result = executor.execute("risk-assessor", {"command": "echo 防护检查"})
     print(f"结果：{result}")
-    
+
     return 0
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计

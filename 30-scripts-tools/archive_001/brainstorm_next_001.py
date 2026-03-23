@@ -81,52 +81,52 @@ METHOD_RECOMMENDATIONS = {
 def get_current_status() -> dict:
     """获取当前状态"""
     base = Path("flow-archive/brainstorm-current")
-    
+
     status = {
         "topic": None,
         "steps_completed": [],
         "next_step": "define",
         "current_phase": None
     }
-    
+
     # 检查各步骤文件
     if (base / "brainstorm_topic.json").exists():
         status["steps_completed"].append("define")
         with open(base / "brainstorm_topic.json", encoding="utf-8") as f:
             data = json.load(f)
             status["topic"] = data.get("topic")
-    
+
     if (base / "brainstorm_ideas_raw.json").exists():
         status["steps_completed"].append("diverge")
-    
+
     if (base / "brainstorm_ideas_filtered.json").exists():
         status["steps_completed"].append("filter")
-    
+
     if (base / "brainstorm_ideas_prioritized.json").exists():
         status["steps_completed"].append("prioritize")
-    
+
     # 确定下一步
     for step in ["define", "diverge", "filter", "prioritize", "implement", "review"]:
         if step not in status["steps_completed"]:
             status["next_step"] = step
             status["current_phase"] = step
             break
-    
+
     return status
 
 
 def generate_recommendations(status: dict) -> dict:
     """生成建议"""
-    
+
     recommendations = {
         "status": status,
         "suggestions": [],
         "methods": [],
         "command": None
     }
-    
+
     next_step = status["next_step"]
-    
+
     # 主流程建议
     if next_step in WORKFLOW_STEPS:
         step_info = WORKFLOW_STEPS[next_step]
@@ -137,13 +137,13 @@ def generate_recommendations(status: dict) -> dict:
             "tip": step_info['tip'],
             "command": f"py brainstorm_workflow.py --step {step_info['step']}"
         })
-        
+
         # 方法推荐
         if next_step in METHOD_RECOMMENDATIONS:
             methods = METHOD_RECOMMENDATIONS[next_step]
             for method in methods:
                 recommendations["methods"].append(method)
-    
+
     # 如果已完成基本流程，推荐高级方法
     if next_step == "implement":
         recommendations["suggestions"].append({
@@ -152,7 +152,7 @@ def generate_recommendations(status: dict) -> dict:
             "message": "[建议] 完成后可用以下方法继续发散",
             "methods": ["--scamper", "--sixhats", "--random", "--analogy", "--reverse"]
         })
-    
+
     # 如果有topic但还在早期，推荐多种方法
     if status["topic"] and next_step in ["define", "diverge"]:
         recommendations["suggestions"].append({
@@ -161,25 +161,25 @@ def generate_recommendations(status: dict) -> dict:
             "message": "[可选] 使用不同方法探索同一topic",
             "methods": ["--scamper", "--sixhats", "--random", "--analogy"]
         })
-    
+
     return recommendations
 
 
 def display_next_step(recommendations: dict):
     """显示下一步"""
-    
+
     status = recommendations["status"]
-    
+
     print("=" * 60)
     print("[NEXT STEP] Brainstorm Workflow Advisor")
     print("=" * 60)
-    
+
     # 当前状态
     print(f"\n[Status]")
     print(f"  Topic: {status['topic'] or 'Not set'}")
     print(f"  Completed: {', '.join(status['steps_completed']) or 'None'}")
     print(f"  Next: {status['next_step']}")
-    
+
     # 建议
     print(f"\n[Recommendations]")
     for suggestion in recommendations["suggestions"]:
@@ -190,20 +190,20 @@ def display_next_step(recommendations: dict):
             print(f"      Command: {suggestion['command']}")
         if suggestion.get("methods"):
             print(f"      Methods: {', '.join(suggestion['methods'])}")
-    
+
     # 快速执行命令
     if status["next_step"] in WORKFLOW_STEPS:
         step_info = WORKFLOW_STEPS[status["next_step"]]
         if step_info["step"] <= 4:
             recommendations["command"] = f"py brainstorm_workflow.py --step {step_info['step']}"
-    
+
     print("\n" + "=" * 60)
-    
+
     # 快速命令
     if recommendations.get("command"):
         print(f"\n[Quick Command]")
         print(f"  {recommendations['command']}")
-    
+
     # 完整方法列表
     print(f"\n[All Methods]")
     print("  --step N       Continue workflow step N")
@@ -260,11 +260,11 @@ Fixes:
 """
 
 主函数"""
-    
+
     status = get_current_status()
     recommendations = generate_recommendations(status)
     display_next_step(recommendations)
-    
+
     return 0
 
 

@@ -30,15 +30,15 @@ def recommend_collaborators(target_author, network):
     """推荐合作者"""
     recs = []
     target_topics = set(network['authors'].get(target_author, {}).get('topics', []))
-    
+
     for author, data in network['authors'].items():
         if author == target_author:
             continue
-        
+
         author_topics = set(data.get('topics', []))
         overlap = len(target_topics & author_topics)
         complement = len(target_topics | author_topics)
-        
+
         score = overlap * 2 + complement
         if score > 3:
             recs.append({
@@ -47,7 +47,7 @@ def recommend_collaborators(target_author, network):
                 'topics': data['topics'],
                 'reason': f"主题重叠：{overlap}, 互补：{complement}"
             })
-    
+
     recs.sort(key=lambda x: x['score'], reverse=True)
     return recs
 
@@ -55,13 +55,13 @@ def save_recommendations(target_author, recs):
     """保存推荐结果"""
     date_str = datetime.now().strftime('%Y-%m-%d')
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     md_file = OUTPUT_DIR / f"collaborators-{target_author}-{date_str}.md"
     with open(md_file, 'w', encoding='utf-8') as f:
         f.write(f"# 合作者推荐 - @{target_author}\n\n")
         f.write(f"**生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
         f.write("---\n\n")
-        
+
         if recs:
             f.write("## 🤝 推荐合作者\n\n")
             for i, rec in enumerate(recs, 1):
@@ -72,7 +72,7 @@ def save_recommendations(target_author, recs):
                 f.write("---\n\n")
         else:
             f.write("暂无推荐\n")
-    
+
     print(f"[OK] Saved {len(recs)} recommendations for {target_author}")
     return md_file
 
@@ -81,21 +81,21 @@ def recommend():
     print("=" * 60)
     print("Collaboration Recommender v1")
     print("=" * 60)
-    
+
     print("\n[1/3] Building citation network...")
     network = build_citation_network()
     print(f"  Authors: {len(network['authors'])}")
-    
+
     print("\n[2/3] Generating recommendations...")
     all_recs = []
     for author in network['authors'].keys():
         recs = recommend_collaborators(author, network)
         all_recs.extend(recs)
         save_recommendations(author, recs)
-    
+
     print("\n[3/3] Summary...")
     print(f"  Total recommendations: {len(all_recs)}")
-    
+
     print("-" * 60)
     print("[COMPLETE]")
     print("=" * 60)

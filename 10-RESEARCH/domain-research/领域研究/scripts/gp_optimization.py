@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 GP 模型优化 - 目标 R2 > 0.80
 方法：特征工程 + 核函数优化 + 超参数调优
@@ -121,7 +121,7 @@ best_gp = None
 
 for kernel_name, kernel in kernels.items():
     print(f"\n  测试核函数：{kernel_name}...")
-    
+
     gp = GaussianProcessRegressor(
         kernel=kernel,
         n_restarts_optimizer=50,  # 增加优化次数
@@ -129,15 +129,15 @@ for kernel_name, kernel in kernels.items():
         normalize_y=True,
         alpha=1e-6
     )
-    
+
     gp.fit(X_train_scaled, y_train_scaled)
-    
+
     y_pred_scaled, _ = gp.predict(X_test_scaled, return_std=True)
     y_pred = scaler_y.inverse_transform(y_pred_scaled.reshape(-1, 1)).flatten()
-    
+
     r2 = r2_score(y_test, y_pred)
     print(f"    R2 = {r2:.3f}")
-    
+
     if r2 > best_r2:
         best_r2 = r2
         best_kernel_name = kernel_name
@@ -297,7 +297,7 @@ ax1.set_title("GP 模型优化效果\n特征工程 + 核函数优化 + 超参数
 ax1.set_ylim(0, 1.0)
 
 for bar, r2_val in zip(bars, r2_vals):
-    ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02, 
+    ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
             f'R2={r2_val:.3f}', ha='center', va='bottom', fontsize=11)
 
 ax1.axhline(y=0.80, color='red', linestyle='--', linewidth=1.5, label='目标 R2>0.80')
@@ -310,7 +310,7 @@ print(f"  [OK] 性能对比图：{figures_dir / 'GP_optimization_comparison.png'
 
 # 图 2: 预测 vs 真实值 (优化后)
 fig2, ax2 = plt.subplots(figsize=(8, 6), dpi=300)
-ax2.errorbar(y_test, y_pred, yerr=y_std, fmt='o', capsize=3, markersize=6, alpha=0.7, 
+ax2.errorbar(y_test, y_pred, yerr=y_std, fmt='o', capsize=3, markersize=6, alpha=0.7,
              color='green', ecolor='gray', elinewidth=1.5)
 ax2.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', linewidth=2, label='理想预测')
 ax2.set_xlabel("实验真实值 (S/m)", fontsize=12)

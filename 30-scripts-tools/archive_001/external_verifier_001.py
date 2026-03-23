@@ -29,25 +29,25 @@ AUDIT_REPORT_DIR = Path("99-backups/audit-reports")
 
 class ExternalVerifier:
     """外部验证器 - 防护 v7"""
-    
+
     def __init__(self):
         self.session_id = self._get_session_id()
         self.timestamp = datetime.now(timezone.utc).isoformat()
-    
+
     def _get_session_id(self):
         if not STATE_FILE.exists():
             return None
         with open(STATE_FILE, "r", encoding="utf-8") as f:
             state = json.load(f)
         return state.get("session_id")
-    
+
     def generate_audit_package(self, output_dir: Path = None) -> dict:
         """生成审计包（供第三方验证）"""
         if output_dir is None:
             output_dir = AUDIT_REPORT_DIR
-        
+
         output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # 收集所有关键文件
         files_to_include = {
             "execution-state.json": STATE_FILE,
@@ -55,24 +55,24 @@ class ExternalVerifier:
             "blockchain_checkpoints.json": CHECKPOINT_FILE,
             "violation_log.jsonl": VIOLATION_LOG,
         }
-        
+
         package = {
             "generated_at": self.timestamp,
             "session_id": self.session_id,
             "files": {},
             "hashes": {}
         }
-        
+
         for name, file_path in files_to_include.items():
             if file_path.exists():
                 with open(file_path, "rb") as f:
                     content = f.read()
-                
+
                 # 保存副本
                 output_file = output_dir / f"{self.session_id}_{name}"
                 with open(output_file, "wb") as f:
                     f.write(content)
-                
+
                 # 计算哈希
                 file_hash = hashlib.sha256(content).hexdigest()
                 package["files"][name] = {
@@ -81,18 +81,18 @@ class ExternalVerifier:
                     "lines": content.count(b"\n")
                 }
                 package["hashes"][name] = file_hash
-        
+
         # 保存审计包元数据
         package_file = output_dir / f"{self.session_id}_audit_package.json"
         with open(package_file, "w", encoding="utf-8") as f:
             json.dump(package, f, ensure_ascii=False, indent=2)
-        
+
         return {
             "package_file": str(package_file),
             "files_count": len(package["files"]),
             "output_dir": str(output_dir)
         }
-    
+
     def generate_integrity_report(self) -> dict:
         """生成完整性报告"""
         report = {
@@ -101,7 +101,7 @@ class ExternalVerifier:
             "session_id": self.session_id,
             "checks": {}
         }
-        
+
         # 检查 1: 执行状态
         if STATE_FILE.exists():
             with open(STATE_FILE, "r", encoding="utf-8") as f:
@@ -115,7 +115,7 @@ class ExternalVerifier:
             }
         else:
             report["checks"]["execution_state"] = {"exists": False}
-        
+
         # 检查 2: 区块链日志
         if BLOCKCHAIN_LOG.exists():
             with open(BLOCKCHAIN_LOG, "r", encoding="utf-8") as f:
@@ -127,7 +127,7 @@ class ExternalVerifier:
             }
         else:
             report["checks"]["blockchain_log"] = {"exists": False}
-        
+
         # 检查 3: 检查点
         if CHECKPOINT_FILE.exists():
             with open(CHECKPOINT_FILE, "r", encoding="utf-8") as f:
@@ -139,7 +139,7 @@ class ExternalVerifier:
             }
         else:
             report["checks"]["checkpoint"] = {"exists": False}
-        
+
         # 检查 4: 违规日志
         if VIOLATION_LOG.exists():
             with open(VIOLATION_LOG, "r", encoding="utf-8") as f:
@@ -150,7 +150,7 @@ class ExternalVerifier:
             }
         else:
             report["checks"]["violation_log"] = {"exists": False}
-        
+
         # 总体评估
         passed_checks = sum(1 for check in report["checks"].values() if check.get("exists"))
         total_checks = len(report["checks"])
@@ -159,18 +159,18 @@ class ExternalVerifier:
             "total": total_checks,
             "rate": f"{passed_checks/total_checks*100:.1f}%" if total_checks > 0 else "N/A"
         }
-        
+
         # 保存报告
         AUDIT_REPORT_DIR.mkdir(parents=True, exist_ok=True)
         report_file = AUDIT_REPORT_DIR / f"{self.session_id}_integrity_report.json"
         with open(report_file, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
-        
+
         return {
             "report_file": str(report_file),
             "overall": report["overall"]
         }
-    
+
     def get_trusted_timestamp(self) -> dict:
         """获取可信时间戳（使用 Git commit 作为时间证明）"""
         try:
@@ -182,7 +182,7 @@ class ExternalVerifier:
                 text=True,
                 timeout=30
             )
-            
+
             if result.returncode == 0:
                 lines = result.stdout.strip().split("\n")
                 return {
@@ -193,22 +193,22 @@ class ExternalVerifier:
                 }
         except (Exception,):
             pass
-        
+
         # Fallback: 使用本地时间
         return {
             "local_time": self.timestamp,
             "source": "local",
             "warning": "No trusted timestamp source available"
         }
-    
+
     def verify_session_chain(self, session_id: str) -> dict:
         """验证特定会话的完整链"""
         if not BLOCKCHAIN_LOG.exists():
             return {"error": "No blockchain log"}
-        
+
         with open(BLOCKCHAIN_LOG, "r", encoding="utf-8") as f:
             lines = f.readlines()
-        
+
         session_entries = []
         for line in lines:
             try:
@@ -217,10 +217,10 @@ class ExternalVerifier:
                     session_entries.append(entry)
             except (Exception,):
                 pass
-        
+
         if not session_entries:
             return {"found": False, "message": "No entries for this session"}
-        
+
         # 验证链完整性
         prev_hash = session_entries[0].get("prev_hash", "")
         valid = True
@@ -229,7 +229,7 @@ class ExternalVerifier:
                 valid = False
                 break
             prev_hash = entry.get("hash", "")
-        
+
         return {
             "found": True,
             "session_id": session_id,
@@ -238,7 +238,7 @@ class ExternalVerifier:
             "first_block": session_entries[0].get("block_height"),
             "last_block": session_entries[-1].get("block_height")
         }
-    
+
     def display(self):
         """
 # ==============================================================================
@@ -289,7 +289,7 @@ Fixes:
         print(f"会话：{self.session_id}")
         print(f"时间：{self.timestamp}")
         print()
-        
+
         # 生成报告
         report_result = self.generate_integrity_report()
         print("完整性报告:")
@@ -297,14 +297,14 @@ Fixes:
         print(f"  通过：{report_result['overall']['passed']}/{report_result['overall']['total']}")
         print(f"  比率：{report_result['overall']['rate']}")
         print()
-        
+
         # 可信时间戳
         ts = self.get_trusted_timestamp()
         print("可信时间戳:")
         print(f"  来源：{ts['source']}")
         print(f"  时间：{ts.get('git_time', ts.get('local_time'))}")
         print()
-        
+
         # 审计包
         print("审计包:")
         print(f"  目录：{AUDIT_REPORT_DIR}")
@@ -315,9 +315,9 @@ Fixes:
 logging.basicConfig(level=logging.INFO)
 def main():
     import sys
-    
+
     verifier = ExternalVerifier()
-    
+
     if len(sys.argv) > 1:
         if sys.argv[1] == "--package":
             result = verifier.generate_audit_package()
@@ -334,7 +334,7 @@ def main():
                 result = verifier.verify_session_chain(session_id)
                 print(json.dumps(result, indent=2, ensure_ascii=False))
             return 0
-    
+
     # 默认：显示状态
     verifier.display()
     return 0

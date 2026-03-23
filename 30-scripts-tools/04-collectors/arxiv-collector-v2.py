@@ -89,17 +89,17 @@ def fetch_arxiv_papers(category=None, keyword=None, max_papers=50):
         print(f"[INFO] Fetching keyword: {keyword}")
     else:
         return []
-    
+
     try:
         response = requests.get(rss_url, timeout=30)
         response.raise_for_status()
-        
+
         feed = feedparser.parse(response.content)
         papers = []
-        
+
         for entry in feed.entries[:max_papers]:
             paper_id = entry.id if hasattr(entry, 'id') else entry.link
-            
+
             paper = {
                 'id': paper_id,
                 'title': entry.title,
@@ -110,7 +110,7 @@ def fetch_arxiv_papers(category=None, keyword=None, max_papers=50):
                 'categories': [t.term for t in entry.get('tags', [])]
             }
             papers.append(paper)
-        
+
         print(f"  [OK] Retrieved {len(papers)} papers")
         return papers
     except Exception as e:
@@ -123,10 +123,10 @@ def save_paper_markdown(paper):
     title_slug = sanitize_filename(paper['title'])[:50]
     filename = f"{timestamp}-{title_slug}.md"
     filepath = os.path.join(OUTPUT_DIR_MD, filename)
-    
+
     authors = ', '.join(paper['authors']) if paper['authors'] else 'Unknown'
     categories = ', '.join(paper['categories']) if paper['categories'] else 'AI'
-    
+
     content = f"""# {paper['title']}
 
 ## Metadata
@@ -148,27 +148,27 @@ def save_paper_markdown(paper):
 ---
 *Auto-collected*
 """
-    
+
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     return filename
 
 def save_papers_json(papers, source):
     """Save as JSON"""
     filename = f"{source.replace(' ', '_')}_{datetime.now().strftime('%Y%m%d')}.json"
     filepath = os.path.join(OUTPUT_DIR_JSON, filename)
-    
+
     data = {
         'source': source,
         'collectedAt': datetime.now().isoformat(),
         'totalPapers': len(papers),
         'papers': papers
     }
-    
+
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
-    
+
     print(f"  [SAVE] JSON: {filename}")
     return len(papers)
 
@@ -177,60 +177,60 @@ def main():
     print("Arxiv AI Papers Collector v2.0")
     print("=" * 70)
     print()
-    
+
     # Load deduplication database
     seen_ids = load_seen_ids() if ENABLE_DEDUP else set()
     print(f"[INFO] Seen papers: {len(seen_ids)}")
     print()
-    
+
     total_new = 0
     total_dup = 0
-    
+
     # Fetch by categories
     print("[CATEGORIES]")
     for category in CATEGORIES:
         papers = fetch_arxiv_papers(category=category, max_papers=MAX_PAPERS)
-        
+
         # Deduplicate
         if ENABLE_DEDUP:
             new_papers = [p for p in papers if p['id'] not in seen_ids]
             dup_count = len(papers) - len(new_papers)
             total_dup += dup_count
-            
+
             for p in new_papers:
                 seen_ids.add(p['id'])
         else:
             new_papers = papers
-        
+
         # Save
         for paper in new_papers:
             save_paper_markdown(paper)
-        
+
         total_new += len(new_papers)
         print(f"  New: {len(new_papers)} / Duplicates: {dup_count if ENABLE_DEDUP else 0}")
-    
+
     print()
-    
+
     # Fetch by keywords
     print("[KEYWORDS]")
     for keyword in KEYWORDS:
         papers = fetch_arxiv_papers(keyword=keyword, max_papers=MAX_PAPERS)
-        
+
         # Deduplicate
         if ENABLE_DEDUP:
             new_papers = [p for p in papers if p['id'] not in seen_ids]
             dup_count = len(papers) - len(new_papers)
             total_dup += dup_count
-            
+
             for p in new_papers:
                 seen_ids.add(p['id'])
         else:
             new_papers = papers
-        
+
         # Save JSON
         count = save_papers_json(new_papers, keyword)
         total_new += len(new_papers)
-    
+
     print()
     print("=" * 70)
     print(f"[SUMMARY]")
@@ -238,12 +238,12 @@ def main():
     print(f"  Duplicates: {total_dup}")
     print(f"  Total: {total_new + total_dup}")
     print("=" * 70)
-    
+
     # Save deduplication database
     if ENABLE_DEDUP:
         save_seen_ids(seen_ids)
         print(f"[SAVE] Dedup database updated ({len(seen_ids)} papers)")
-    
+
     print()
     print("[SUCCESS] Collection complete!")
 

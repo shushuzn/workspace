@@ -51,13 +51,13 @@ def generate_dashboard():
 </body>
 </html>
 """
-    
+
     output_path = Path(r"D:\OpenClaw\workspace\web\materials-dashboard.html")
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html_content)
-    
+
     print(f"[OK] Dashboard generated: {output_path}")
     return output_path
 
@@ -65,9 +65,9 @@ if __name__ == "__main__":
     print("=" * 60)
     print("Materials Web Dashboard Generator v1")
     print("=" * 60)
-    
+
     generate_dashboard()
-    
+
     print("-" * 60)
     print("[COMPLETE]")
     print("=" * 60)

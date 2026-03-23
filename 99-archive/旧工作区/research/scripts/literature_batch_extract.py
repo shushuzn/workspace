@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 LIG 文献数据批量提取工具
 从已下载的 PDF 中提取数据
@@ -276,21 +276,21 @@ main_data_path = Path("research/data/lig_dataset_100.csv")
 if main_data_path.exists():
     df_main = pd.read_csv(main_data_path)
     print(f"  原始数据：{len(df_main)} 样本")
-    
+
     # 合并
     df_combined = pd.concat([df_main, df_lit], ignore_index=True)
     print(f"  文献数据：{len(df_lit)} 样本")
     print(f"  合并后：{len(df_combined)} 样本")
-    
+
     # 保存合并后的数据
     combined_path = Path("research/data/lig_dataset_123.csv")
     df_combined.to_csv(combined_path, index=False, encoding='utf-8-sig')
     print(f"  [OK] 合并数据已保存：{combined_path}")
-    
+
     # 进度
     progress = len(df_combined) / 200 * 100
     print(f"\n  进度：{len(df_combined)}/200 ({progress:.0f}%)")
-    
+
     # 性能预测
     if len(df_combined) >= 140:
         expected_r2 = "0.70-0.85"
@@ -301,11 +301,11 @@ if main_data_path.exists():
     else:
         expected_r2 = "0.65-0.82"
         expected_unc = "±7-12%"
-    
+
     print(f"\n  预期性能:")
     print(f"    R2: {expected_r2}")
     print(f"    不确定性：{expected_unc}")
-    
+
 else:
     print(f"  [WARN] 主数据文件不存在：{main_data_path}")
 

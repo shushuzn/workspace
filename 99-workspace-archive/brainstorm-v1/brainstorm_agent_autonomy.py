@@ -70,7 +70,7 @@ BRAINSTORM_MATRIX = {
             }
         ]
     },
-    
+
     "cognition": {
         "name": "认知能力",
         "description": "提升 Agent 的理解和推理能力",
@@ -122,7 +122,7 @@ BRAINSTORM_MATRIX = {
             }
         ]
     },
-    
+
     "decision": {
         "name": "决策能力",
         "description": "提升 Agent 的自主决策能力",
@@ -174,7 +174,7 @@ BRAINSTORM_MATRIX = {
             }
         ]
     },
-    
+
     "action": {
         "name": "行动能力",
         "description": "提升 Agent 的执行效率和范围",
@@ -226,7 +226,7 @@ BRAINSTORM_MATRIX = {
             }
         ]
     },
-    
+
     "learning": {
         "name": "学习能力",
         "description": "提升 Agent 的自我进化能力",
@@ -278,7 +278,7 @@ BRAINSTORM_MATRIX = {
             }
         ]
     },
-    
+
     "collaboration": {
         "name": "协作能力",
         "description": "提升 Agent 与人和其他 Agent 的协作能力",
@@ -340,14 +340,14 @@ def calculate_priority_score(impact, effort):
 
 def generate_brainstorm_report():
     """生成头脑风暴报告"""
-    
+
     print("=" * 70)
     print("🧠 AI Agent 自主性提升头脑风暴")
     print("=" * 70)
-    
+
     all_ideas = []
     dimension_stats = {}
-    
+
     # 收集所有创意
     for dim_key, dim_data in BRAINSTORM_MATRIX.items():
         ideas = dim_data["ideas"]
@@ -358,31 +358,31 @@ def generate_brainstorm_report():
             "avg_impact": sum(i["impact"] for i in ideas) / len(ideas),
             "avg_effort": sum(i["effort"] for i in ideas) / len(ideas)
         }
-        
+
         for idea in ideas:
             idea["dimension"] = dim_key
             idea["priority_score"] = calculate_priority_score(idea["impact"], idea["effort"])
             all_ideas.append(idea)
-    
+
     # 按优先级分数排序
     all_ideas.sort(key=lambda x: x["priority_score"], reverse=True)
-    
+
     # 统计
     total_ideas = len(all_ideas)
     high_priority = sum(1 for i in all_ideas if i["priority"] == "高")
     avg_impact = sum(i["impact"] for i in all_ideas) / total_ideas
     avg_effort = sum(i["effort"] for i in all_ideas) / total_ideas
-    
+
     print(f"\n📊 总体统计:")
     print(f"  总创意数：{total_ideas}")
     print(f"  高优先级：{high_priority} ({high_priority/total_ideas*100:.0f}%)")
     print(f"  平均影响力：{avg_impact:.1f}/5")
     print(f"  平均工作量：{avg_effort:.1f}/5")
-    
+
     print(f"\n📊 维度分布:")
     for dim_key, stats in dimension_stats.items():
         print(f"  {stats['name']}: {stats['count']} 个创意，{stats['high_priority']} 个高优先级")
-    
+
     # Top 10 创意
     print(f"\n🏆 Top 10 创意 (按优先级分数):")
     for i, idea in enumerate(all_ideas[:10], 1):
@@ -390,18 +390,18 @@ def generate_brainstorm_report():
         print(f"  {i}. [{idea['id']}] {idea['title']} ({dim_name})")
         print(f"     影响力：{idea['impact']}/5, 工作量：{idea['effort']}/5, 优先级分数：{idea['priority_score']:.2f}")
         print(f"     时间：{idea['timeline']}")
-    
+
     # 高优先级创意 (短期可实施)
     short_term_high = [
-        i for i in all_ideas 
+        i for i in all_ideas
         if i["priority"] == "高" and ("短期" in i["timeline"] or "1-2 周" in i["timeline"] or "1 周" in i["timeline"])
     ]
-    
+
     print(f"\n🎯 短期高优先级实施清单 ({len(short_term_high)} 个):")
     for i, idea in enumerate(short_term_high, 1):
         print(f"  {i}. [{idea['id']}] {idea['title']}")
         print(f"     {idea['description']}")
-    
+
     # 生成报告
     report = {
         "title": "AI Agent 自主性提升头脑风暴",
@@ -413,20 +413,20 @@ def generate_brainstorm_report():
         "short_term_high_priority": short_term_high,
         "all_ideas": all_ideas
     }
-    
+
     # 保存报告
     report_path = Path("flow-archive/20260318-universal-workflow-001/brainstorm-agent-autonomy.md")
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(report_path, 'w', encoding='utf-8') as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
-    
+
     print(f"\n💾 报告已保存：{report_path}")
-    
+
     print("\n" + "=" * 70)
     print("✅ 头脑风暴完成!")
     print("=" * 70)
-    
+
     return report
 
 

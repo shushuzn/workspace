@@ -8,7 +8,7 @@ import sys
 
 def install():
     packages = ['dash', 'plotly']
-    
+
     print("Installing Dash and dependencies...")
     for pkg in packages:
         print(f"  Installing {pkg}...")
@@ -21,7 +21,7 @@ def install():
             print(f"  ✓ {pkg} installed")
         else:
             print(f"  ✗ {pkg} failed: {result.stderr[:100]}")
-    
+
     print("\nDone! Run:")
     print("  cd 30-scripts-tools/stock_pro")
     print("  python dash_app.py")

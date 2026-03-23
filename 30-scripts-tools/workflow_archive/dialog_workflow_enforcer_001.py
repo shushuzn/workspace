@@ -60,7 +60,7 @@ def check_session() -> tuple[bool, str]:
                 return True, 'full'
         except (Exception,):
             pass
-    
+
     # 检查简化 workflow
     if SIMPLIFIED_STATE_FILE.exists():
         try:
@@ -70,28 +70,28 @@ def check_session() -> tuple[bool, str]:
                 return True, 'simplified'
         except (Exception,):
             pass
-    
+
     return False, 'none'
 
 
 def is_simple_question(user_input: str) -> bool:
     """判断是否是简单问题"""
     user_input_lower = user_input.lower()
-    
+
     # 检查是否在简单问题列表
     for keyword in SIMPLE_QUESTIONS:
         if keyword in user_input_lower:
             return True
-    
+
     # 检查是否是需要工作流的关键词
     for keyword in WORKFLOW_REQUIRED:
         if keyword in user_input_lower:
             return False
-    
+
     # 默认：短问题视为简单问题
     if len(user_input) < 20:
         return True
-    
+
     return False
 
 
@@ -112,7 +112,7 @@ def enforce_workflow(user_input: str) -> dict:
     """
     has_session, workflow_type = check_session()
     is_simple = is_simple_question(user_input)
-    
+
     # 情况 1: 有 session → 允许
     if has_session:
         return {
@@ -121,7 +121,7 @@ def enforce_workflow(user_input: str) -> dict:
             "action": "continue",
             "workflow_type": workflow_type
         }
-    
+
     # 情况 2: 无 session + 简单问题 → 允许（但建议启动 session）
     if is_simple:
         return {
@@ -131,7 +131,7 @@ def enforce_workflow(user_input: str) -> dict:
             "workflow_type": "none",
             "warning": "建议启动 session 以获得完整功能"
         }
-    
+
     # 情况 3: 无 session + 复杂任务 → 拒绝
     return {
         "allowed": False,
@@ -206,7 +206,7 @@ Fixes:
         "response_type": response_type,
         "workflow_type": workflow_type,
     }
-    
+
     try:
         DIALOG_LOG.parent.mkdir(exist_ok=True)
         with open(DIALOG_LOG, 'a', encoding='utf-8') as f:
@@ -224,11 +224,11 @@ if __name__ == '__main__':
         "status",
         "运行这个脚本",
     ]
-    
+
     print("="*70)
     print("对话工作流强制器测试")
     print("="*70)
-    
+
     for test_input in test_inputs:
         result = enforce_workflow(test_input)
         print(f"\n输入：{test_input}")

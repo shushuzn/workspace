@@ -31,7 +31,7 @@ class ExperimentPlan:
     atmosphere: str
     safety_level: str
     estimated_cost: float
-    
+
     def to_dict(self) -> Dict:
         return {
             'material': self.material,
@@ -47,7 +47,7 @@ class ExperimentPlan:
 
 class ExperimentDesigner:
     """实验设计助手"""
-    
+
     def __init__(self):
         self.method_database = {
             'oxide': {
@@ -72,26 +72,26 @@ class ExperimentDesigner:
                 'atmosphere': '密闭高压'
             }
         }
-    
+
     def design_experiment(self, material_formula: str) -> ExperimentPlan:
         """设计实验"""
-        
+
         # 判断材料类型
         material_type = self._classify_material(material_formula)
-        
+
         # 获取方法
         method_info = self.method_database.get(material_type, self.method_database['oxide'])
-        
+
         # 生成具体条件
         temp = random.uniform(*method_info['temperature_range'])
         time = random.uniform(*method_info['time_range'])
-        
+
         # 安全性评估
         safety = self._assess_safety(material_formula, temp)
-        
+
         # 成本估算
         cost = self._estimate_cost(method_info['precursors'], time)
-        
+
         return ExperimentPlan(
             material=material_formula,
             method=method_info['method'],
@@ -102,7 +102,7 @@ class ExperimentDesigner:
             safety_level=safety,
             estimated_cost=round(cost, 2)
         )
-    
+
     def _classify_material(self, formula: str) -> str:
         """分类材料"""
         if 'O' in formula and 'P' in formula:
@@ -111,7 +111,7 @@ class ExperimentDesigner:
             return 'sulfide'
         else:
             return 'oxide'
-    
+
     def _assess_safety(self, formula: str, temperature: float) -> str:
         """安全性评估"""
         if temperature > 900:
@@ -120,7 +120,7 @@ class ExperimentDesigner:
             return '中 (标准操作)'
         else:
             return '低 (常规操作)'
-    
+
     def _estimate_cost(self, precursors: List[str], time: float) -> float:
         """成本估算"""
         base_cost = len(precursors) * 50
@@ -133,15 +133,15 @@ def main():
     print("=" * 60)
     print("Experiment Designer - 实验设计助手")
     print("=" * 60)
-    
+
     designer = ExperimentDesigner()
-    
+
     test_materials = ['LiFePO4', 'SiO2', 'TiO2', 'LiCoO2']
-    
+
     for formula in test_materials:
         print(f"\n材料：{formula}")
         plan = designer.design_experiment(formula)
-        
+
         print(f"  方法：{plan.method}")
         print(f"  前驱体：{plan.precursors}")
         print(f"  温度：{plan.temperature}°C")
@@ -149,7 +149,7 @@ def main():
         print(f"  气氛：{plan.atmosphere}")
         print(f"  安全性：{plan.safety_level}")
         print(f"  成本：${plan.estimated_cost}")
-    
+
     print("\n" + "=" * 60)
     print("实验设计助手准备完成！")
     print("=" * 60)

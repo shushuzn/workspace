@@ -21,19 +21,19 @@ class WorkflowVersion:
     def __init__(self):
         if not VERSION_FILE.exists():
             VERSION_FILE.write_text(json.dumps({"version": "1.0.0", "history": []}, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def _load(self):
         return json.loads(VERSION_FILE.read_text(encoding="utf-8", errors="replace"))
-    
+
     def _save(self, data):
         VERSION_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def bump(self, part="patch"):
         data = self._load()
         parts = data["version"].split(".")
-        
+
         major, minor, patch = int(parts[0]), int(parts[1]), int(parts[2])
-        
+
         if part == "major":
             major += 1
             minor = 0
@@ -43,24 +43,24 @@ class WorkflowVersion:
             patch = 0
         else:
             patch += 1
-        
+
         new_version = f"{major}.{minor}.{patch}"
         data["version"] = new_version
         data["history"].append({
             "version": new_version,
             "time": datetime.now().isoformat()
         })
-        
+
         self._save(data)
         return {"status": "bumped", "old": data["version"], "new": new_version}
-    
+
     def current(self):
         data = self._load()
         return {"version": data["version"]}
 
 if __name__ == "__main__":
     version = WorkflowVersion()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--bump":

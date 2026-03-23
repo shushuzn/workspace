@@ -25,16 +25,16 @@ class PerformanceOptimizer:
     def __init__(self):
         self.stats_file = CACHE_DIR / "stats.json"
         self.load_stats()
-    
+
     def load_stats(self):
         if self.stats_file.exists():
             self.stats = json.loads(self.stats_file.read_text(encoding="utf-8", errors="replace"))
         else:
             self.stats = {"runs": [], "tools": {}, "cache_hits": 0, "cache_misses": 0}
-    
+
     def save_stats(self):
         self.stats_file.write_text(json.dumps(self.stats, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def get_cache(self, key) -> None:
         """
 # ==============================================================================
@@ -87,7 +87,7 @@ Get cached result"""
                 return json.loads(cache_file.read_text(encoding="utf-8", errors="replace"))
         self.stats["cache_misses"] += 1
         return None
-    
+
     def set_cache(self, key, value) -> None:
         """Set cached result"""
         cache_file = CACHE_DIR / f"{key}.json"

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 GP 模型 - 使用完整特征 (包含 E_Jcm2)
 预期 R2 > 0.80
@@ -185,7 +185,7 @@ figures_dir.mkdir(parents=True, exist_ok=True)
 
 # 图 1: 预测 vs 真实值
 fig1, ax1 = plt.subplots(figsize=(8, 6), dpi=300)
-ax1.errorbar(y_test, y_pred, yerr=y_std, fmt='o', capsize=3, markersize=6, alpha=0.7, 
+ax1.errorbar(y_test, y_pred, yerr=y_std, fmt='o', capsize=3, markersize=6, alpha=0.7,
              color='blue', ecolor='gray', elinewidth=1.5)
 ax1.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', linewidth=2, label='理想预测')
 ax1.set_xlabel("实验真实值 (S/m)", fontsize=12)
@@ -227,11 +227,11 @@ print(f"  [OK] 残差图：{figures_dir / 'GP_complete_residuals.png'}")
 # 图 3: 不确定性分布
 fig3, ax3 = plt.subplots(figsize=(8, 6), dpi=300)
 ax3.hist(y_std, bins=15, edgecolor='black', alpha=0.7, color='lightgreen')
-ax3.axvline(mean_uncertainty, color='red', linestyle='--', linewidth=2, 
+ax3.axvline(mean_uncertainty, color='red', linestyle='--', linewidth=2,
             label=f'平均：±{mean_uncertainty:.1f} S/m')
 ax3.set_xlabel("预测不确定性 (S/m)", fontsize=12)
 ax3.set_ylabel("样本数", fontsize=12)
-ax3.set_title(f"GP 预测不确定性分布\n平均：±{rel_uncertainty:.1f}%, 95% CI 覆盖率：{coverage:.1f}%", 
+ax3.set_title(f"GP 预测不确定性分布\n平均：±{rel_uncertainty:.1f}%, 95% CI 覆盖率：{coverage:.1f}%",
               fontsize=13)
 ax3.legend(fontsize=10)
 ax3.grid(True, alpha=0.3, linestyle='--', axis='y')

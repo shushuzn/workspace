@@ -98,7 +98,7 @@ class ServiceStats(BaseModel):
 
 class ModelManager:
     """模型管理器"""
-    
+
     def __init__(self):
         self.models = {}
         self.stats = {
@@ -106,31 +106,31 @@ class ModelManager:
             'inference_times': []
         }
         self.lock = threading.Lock()
-    
+
     def load_model(self, model_name: str, model_instance):
         """加载模型"""
         with self.lock:
             self.models[model_name] = model_instance
             logger.info(f"模型 {model_name} 加载成功")
-    
+
     def get_model(self, model_name: str):
         """获取模型"""
         return self.models.get(model_name)
-    
+
     def list_models(self) -> List[str]:
         """列出所有模型"""
         return list(self.models.keys())
-    
+
     def record_prediction(self, inference_time: float):
         """记录预测统计"""
         with self.lock:
             self.stats['total_predictions'] += 1
             self.stats['inference_times'].append(inference_time)
-            
+
             # 只保留最近 100 次
             if len(self.stats['inference_times']) > 100:
                 self.stats['inference_times'] = self.stats['inference_times'][-100:]
-    
+
     def get_avg_inference_time(self) -> float:
         """获取平均推理时间"""
         if not self.stats['inference_times']:
@@ -146,10 +146,10 @@ model_manager = ModelManager()
 
 def create_app() -> FastAPI:
     """创建 FastAPI 应用"""
-    
+
     if not FASTAPI_AVAILABLE:
         return None
-    
+
     @asynccontextmanager
     async def lifespan(app: FastAPI):
         """应用生命周期"""
@@ -157,19 +157,19 @@ def create_app() -> FastAPI:
         logger.info("正在加载模型...")
         load_all_models()
         logger.info("模型加载完成")
-        
+
         yield
-        
+
         # 关闭时清理
         logger.info("服务关闭")
-    
+
     app = FastAPI(
         title="Materials AI Model Serving",
         description="材料性能预测 API 服务 (CPU 优化版)",
         version="1.0.0",
         lifespan=lifespan
     )
-    
+
     # 健康检查
     @app.get("/health")
     async def health_check():
@@ -179,7 +179,7 @@ def create_app() -> FastAPI:
             "models_loaded": model_manager.list_models(),
             "timestamp": time.time()
         }
-    
+
     # 预测端点
     @app.post("/predict", response_model=PredictionResult)
     async def predict(input: PropertyInput):
@@ -191,23 +191,23 @@ def create_app() -> FastAPI:
         - **model**: 使用的模型 (cgcnn/megnet/multitask)
         """
         start = time.time()
-        
+
         # 获取模型
         model = model_manager.get_model(input.model)
         if not model:
             raise HTTPException(status_code=404, detail=f"模型 {input.model} 未找到")
-        
+
         try:
             # 预测
             structure_dict = input.structure.dict()
-            
+
             if input.model == 'multitask':
                 result = model.predict(structure_dict, input.properties)
                 predictions = result.predictions if result else {}
             else:
                 result = model.predict(structure_dict)
                 predictions = result if result else {}
-            
+
             # 不确定性量化 (如果请求)
             uncertainty = None
             if input.include_uncertainty:
@@ -217,12 +217,12 @@ def create_app() -> FastAPI:
                     model, structure_dict, input.properties
                 )
                 uncertainty = {k: v.to_dict() for k, v in unc_results.items()}
-            
+
             inference_time = time.time() - start
-            
+
             # 记录统计
             model_manager.record_prediction(inference_time)
-            
+
             return PredictionResult(
                 material=input.structure.material,
                 predictions=predictions,
@@ -231,25 +231,25 @@ def create_app() -> FastAPI:
                 model=input.model,
                 timestamp=time.time()
             )
-            
+
         except Exception as e:
             logger.error(f"预测失败：{e}")
             raise HTTPException(status_code=500, detail=str(e))
-    
+
     # 批量预测端点
     @app.post("/predict/batch", response_model=BatchPredictionResult)
     async def predict_batch(structures: List[MaterialInput], model: str = 'cgcnn'):
         """批量预测"""
         start = time.time()
-        
+
         model_instance = model_manager.get_model(model)
         if not model_instance:
             raise HTTPException(status_code=404, detail=f"模型 {model} 未找到")
-        
+
         results = []
         successful = 0
         failed = 0
-        
+
         for structure in structures:
             try:
                 pred = model_instance.predict(structure.dict())
@@ -264,9 +264,9 @@ def create_app() -> FastAPI:
             except Exception as e:
                 logger.error(f"批量预测失败：{e}")
                 failed += 1
-        
+
         total_time = time.time() - start
-        
+
         return BatchPredictionResult(
             total=len(structures),
             successful=successful,
@@ -274,7 +274,7 @@ def create_app() -> FastAPI:
             results=results,
             total_time=total_time
         )
-    
+
     # 统计端点
     @app.get("/stats", response_model=ServiceStats)
     async def get_stats():
@@ -286,7 +286,7 @@ def create_app() -> FastAPI:
         except:
             cpu_usage = 0.0
             memory = 0.0
-        
+
         return ServiceStats(
             status="running",
             models_loaded=model_manager.list_models(),
@@ -296,7 +296,7 @@ def create_app() -> FastAPI:
             cpu_usage=cpu_usage,
             memory_usage=memory
         )
-    
+
     # 模型列表端点
     @app.get("/models")
     async def list_models():
@@ -305,7 +305,7 @@ def create_app() -> FastAPI:
             "models": model_manager.list_models(),
             "count": len(model_manager.list_models())
         }
-    
+
     return app
 
 # ============================================================================
@@ -314,7 +314,7 @@ def create_app() -> FastAPI:
 
 def load_all_models():
     """加载所有模型"""
-    
+
     # 加载 CGCNN
     try:
         from cgcnn_model import get_cgcnn_model, CPUConfig
@@ -323,7 +323,7 @@ def load_all_models():
         model_manager.load_model('cgcnn', cgcnn)
     except Exception as e:
         logger.warning(f"CGCNN 加载失败：{e}")
-    
+
     # 加载 MEGNet
     try:
         from megnet_model import get_megnet_model, CPUConfig
@@ -332,7 +332,7 @@ def load_all_models():
         model_manager.load_model('megnet', megnet)
     except Exception as e:
         logger.warning(f"MEGNet 加载失败：{e}")
-    
+
     # 加载多任务模型
     try:
         from multitask_model import get_multitask_model, CPUConfig
@@ -351,7 +351,7 @@ def main():
     print("=" * 60)
     print("Model Serving - CPU Optimized")
     print("=" * 60)
-    
+
     if not FASTAPI_AVAILABLE:
         print("\n⚠️ FastAPI 未安装，无法启动 Web 服务")
         print("安装：pip install fastapi uvicorn")
@@ -359,17 +359,17 @@ def main():
         print("  from model_serving import model_manager")
         print("  model_manager.load_model('cgcnn', model_instance)")
         return
-    
+
     # 创建应用
     print("\n[1/3] 创建 FastAPI 应用...")
     app = create_app()
-    
+
     # 加载模型
     print("\n[2/3] 加载模型...")
     load_all_models()
-    
+
     print(f"\n已加载模型：{model_manager.list_models()}")
-    
+
     # 启动服务
     print("\n[3/3] 启动服务...")
     print("\n" + "=" * 60)

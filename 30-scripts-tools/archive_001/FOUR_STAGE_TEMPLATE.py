@@ -72,7 +72,7 @@ class NewTool:
     def __init__(self):
         # DEBUG: Initialize state
         self.state = "initialized"
-    
+
     def process(self, data):
         # DEBUG: Validate input
         if not data:

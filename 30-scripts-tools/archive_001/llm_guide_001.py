@@ -28,7 +28,7 @@ GUIDE_DIR = Path("60-DATA/llm_guide_001")
 
 class LLMGuide:
     """LLM使用指南"""
-    
+
     # 任务分类
     LLM_REQUIRED = {
         "creative": {
@@ -76,7 +76,7 @@ class LLMGuide:
             "llm_score": 7
         }
     }
-    
+
     AUTOMATABLE = {
         "execution": {
             "name": "执行类",
@@ -134,30 +134,30 @@ class LLMGuide:
             "auto_score": 8
         }
     }
-    
+
     def __init__(self):
         self.guide_dir = GUIDE_DIR
         self.guide_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.history_file = self.guide_dir / "task_history.json"
-    
+
     def classify_task(self, task_description: str) -> dict:
         """分类任务 - 判断是否需要LLM"""
         task_lower = task_description.lower()
-        
+
         # 检测关键词
-        llm_keywords = ["设计", "创建", "分析", "判断", "决定", "评估", "规划", 
+        llm_keywords = ["设计", "创建", "分析", "判断", "决定", "评估", "规划",
                        "创意", "理解", "学习", "优化", "改进", "头脑风暴", "strategy",
                        "design", "create", "analyze", "decide", "evaluate", "plan"]
-        
+
         auto_keywords = ["运行", "执行", "检查", "验证", "生成", "提交", "转换",
                         "格式化", "解析", "监控", "导出", "处理", "run", "execute",
                         "check", "validate", "generate", "submit", "convert", "parse"]
-        
+
         # 计算得分
         llm_score = sum(1 for kw in llm_keywords if kw in task_lower)
         auto_score = sum(1 for kw in auto_keywords if kw in task_lower)
-        
+
         # 决策
         if llm_score > auto_score:
             decision = "LLM_REQUIRED"
@@ -171,7 +171,7 @@ class LLMGuide:
             decision = "MIXED"
             reason = "任务混合了LLM和自动化元素"
             workflow = ["1. LLM规划", "2. 自动化执行", "3. LLM审核"]
-        
+
         result = {
             "task": task_description,
             "decision": decision,
@@ -181,12 +181,12 @@ class LLMGuide:
             "workflow": workflow,
             "timestamp": datetime.now().isoformat()
         }
-        
+
         # 保存
         self._save_history(result)
-        
+
         return result
-    
+
     def get_recommendations(self, task_type: str = None) -> dict:
         """获取推荐"""
         if task_type == "llm":
@@ -221,11 +221,11 @@ class LLMGuide:
                     "混合处理": "复杂任务分解，先LLM后自动"
                 }
             }
-    
+
     def analyze_workflow(self, steps: list) -> dict:
         """分析工作流中哪些步骤需要LLM"""
         analysis = []
-        
+
         for i, step in enumerate(steps):
             result = self.classify_task(step)
             analysis.append({
@@ -234,11 +234,11 @@ class LLMGuide:
                 "needs_llm": result["decision"] == "LLM_REQUIRED",
                 "decision": result["decision"]
             })
-        
+
         # 统计
         llm_steps = [a for a in analysis if a["needs_llm"]]
         auto_steps = [a for a in analysis if not a["needs_llm"]]
-        
+
         return {
             "total_steps": len(steps),
             "llm_steps": len(llm_steps),
@@ -246,29 +246,29 @@ class LLMGuide:
             "recommendation": f"将{len(llm_steps)}个LLM步骤与{len(auto_steps)}个自动步骤分离",
             "steps": analysis
         }
-    
+
     def optimize_workflow(self, steps: list) -> dict:
         """优化工作流 - 减少LLM调用"""
         analysis = self.analyze_workflow(steps)
-        
+
         # 重新组织: 先批量执行所有自动步骤
         optimized = {
             "phase_1_auto": [s["task"] for s in analysis["steps"] if not s["needs_llm"]],
             "phase_2_llm": [s["task"] for s in analysis["steps"] if s["needs_llm"]],
             "phase_3_auto": []
         }
-        
+
         # 如果有需要重复的自动步骤
         if optimized["phase_1_auto"]:
             optimized["phase_3_auto"] = optimized["phase_1_auto"].copy()
-        
+
         return {
             "original_steps": len(steps),
             "estimated_llm_calls": len(optimized["phase_2_llm"]),
             "optimization": "将自动步骤批量处理，减少上下文切换",
             "phases": optimized
         }
-    
+
     def _save_history(self, result: dict):
         history = []
         if self.history_file.exists():
@@ -277,20 +277,20 @@ class LLMGuide:
                     history = json.load(f)
             except (Exception,):
                 pass
-        
+
         history.append(result)
         history = history[-50:]
-        
+
         with open(self.history_file, "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
-    
+
     def get_history(self, limit: int = 10) -> dict:
         if not self.history_file.exists():
             return {"status": "error", "message": "No history"}
-        
+
         with open(self.history_file, "r", encoding="utf-8") as f:
             history = json.load(f)
-        
+
         return {
             "status": "success",
             "history": history[-limit:]
@@ -300,7 +300,7 @@ class LLMGuide:
 logging.basicConfig(level=logging.INFO)
 def main():
     guide = LLMGuide()
-    
+
     if len(sys.argv) > 1:
         if sys.argv[1] == "--classify":
             task = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else ""
@@ -314,13 +314,13 @@ def main():
                 "workflow": result["workflow"]
             }, ensure_ascii=False, indent=2))
             return 0
-        
+
         if sys.argv[1] == "--recommend":
             task_type = sys.argv[2] if len(sys.argv) > 2 else None
             result = guide.get_recommendations(task_type)
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
-        
+
         if sys.argv[1] == "--analyze":
             # 示例工作流
             steps = [
@@ -333,7 +333,7 @@ def main():
             result = guide.analyze_workflow(steps)
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
-        
+
         if sys.argv[1] == "--optimize":
             steps = [
                 "分析需求",
@@ -345,17 +345,17 @@ def main():
             result = guide.optimize_workflow(steps)
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
-        
+
         if sys.argv[1] == "--matrix":
             result = guide.get_recommendations()
             print(json.dumps(result.get("decision_matrix", {}), ensure_ascii=False, indent=2))
             return 0
-        
+
         if sys.argv[1] == "--history":
             result = guide.get_history()
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
-    
+
     print("LLM-GUIDE-001 LLM Usage Guide")
     print("Usage:")
     print("  py llm_guide_001.py --classify <task>           # Classify task")

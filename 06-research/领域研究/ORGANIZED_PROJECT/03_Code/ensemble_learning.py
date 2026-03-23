@@ -78,7 +78,7 @@ for name, model in models.items():
     pred_s, _ = model.predict(X_test_s, return_std=True) if hasattr(model, 'predict') and name == 'GP' else (model.predict(X_test_s), None)
     pred = scaler_y.inverse_transform(pred_s.reshape(-1, 1)).flatten()
     predictions[name] = pred
-    
+
     r2 = r2_score(y_test, pred)
     mae = mean_absolute_error(y_test, pred)
     print(f"  {name}: R2 = {r2:.3f}, MAE = {mae:.1f} S/m")

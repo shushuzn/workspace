@@ -13,18 +13,18 @@ from pathlib import Path
 
 class PDFParserAgent(AgentBase):
     """PDF 解析 Agent"""
-    
+
     def __init__(self, agent_id: str, message_bus: MessageBus):
         super().__init__(agent_id, "pdf_parser", message_bus)
         self.pdf_dir = Path(r"D:\obsidian\Vault\Arxiv\PDF")
-    
+
     def process_message(self, message):
         if message.message_type == MessageType.TASK_ASSIGN:
             task_data = message.payload.get('task', {})
             arxiv_id = task_data.get('arxiv_id', '')
-            
+
             print(f"  [PDF_PARSER] Parsing {arxiv_id}...")
-            
+
             # 模拟 PDF 解析
             result = {
                 'arxiv_id': arxiv_id,
@@ -32,7 +32,7 @@ class PDFParserAgent(AgentBase):
                 'pages': 10,
                 'status': 'parsed'
             }
-            
+
             # 发送完成消息
             self.send_message(
                 message.from_agent,
@@ -44,16 +44,16 @@ class PDFParserAgent(AgentBase):
 
 class MetadataExtractorAgent(AgentBase):
     """元数据提取 Agent"""
-    
+
     def __init__(self, agent_id: str, message_bus: MessageBus):
         super().__init__(agent_id, "metadata_extractor", message_bus)
-    
+
     def process_message(self, message):
         if message.message_type == MessageType.TASK_ASSIGN:
             task_data = message.payload.get('task', {})
-            
+
             print(f"  [METADATA] Extracting metadata...")
-            
+
             # 模拟元数据提取
             result = {
                 'authors': ['Author A', 'Author B'],
@@ -61,7 +61,7 @@ class MetadataExtractorAgent(AgentBase):
                 'keywords': ['AI', 'ML'],
                 'status': 'extracted'
             }
-            
+
             self.send_message(
                 message.from_agent,
                 MessageType.TASK_COMPLETE,
@@ -72,16 +72,16 @@ class MetadataExtractorAgent(AgentBase):
 
 class ContributionSummarizerAgent(AgentBase):
     """贡献总结 Agent"""
-    
+
     def __init__(self, agent_id: str, message_bus: MessageBus):
         super().__init__(agent_id, "contribution_summarizer", message_bus)
-    
+
     def process_message(self, message):
         if message.message_type == MessageType.TASK_ASSIGN:
             task_data = message.payload.get('task', {})
-            
+
             print(f"  [SUMMARIZER] Generating summary...")
-            
+
             # 模拟贡献总结
             result = {
                 'contributions': [
@@ -91,7 +91,7 @@ class ContributionSummarizerAgent(AgentBase):
                 ],
                 'status': 'summarized'
             }
-            
+
             self.send_message(
                 message.from_agent,
                 MessageType.TASK_COMPLETE,
@@ -102,23 +102,23 @@ class ContributionSummarizerAgent(AgentBase):
 
 class KnowledgeGraphUpdaterAgent(AgentBase):
     """知识图谱更新 Agent"""
-    
+
     def __init__(self, agent_id: str, message_bus: MessageBus):
         super().__init__(agent_id, "knowledge_graph_updater", message_bus)
-    
+
     def process_message(self, message):
         if message.message_type == MessageType.TASK_ASSIGN:
             task_data = message.payload.get('task', {})
-            
+
             print(f"  [KG_UPDATER] Updating knowledge graph...")
-            
+
             # 模拟知识图谱更新
             result = {
                 'entities_added': 5,
                 'relations_added': 10,
                 'status': 'updated'
             }
-            
+
             self.send_message(
                 message.from_agent,
                 MessageType.TASK_COMPLETE,
@@ -129,25 +129,25 @@ class KnowledgeGraphUpdaterAgent(AgentBase):
 
 class ReviewerAgent(AgentBase):
     """质量审核 Agent"""
-    
+
     def __init__(self, agent_id: str, message_bus: MessageBus):
         super().__init__(agent_id, "reviewer", message_bus)
-    
+
     def process_message(self, message):
         if message.message_type == MessageType.REVIEW_REQUEST:
             task_data = message.payload.get('task', {})
             result = task_data.get('result', {})
-            
+
             print(f"  [REVIEWER] Reviewing task...")
-            
+
             # 简单质量检查
             passed = True
             feedback = []
-            
+
             if not result:
                 passed = False
                 feedback.append("Result is empty")
-            
+
             # 发送审核结果
             self.send_message(
                 message.from_agent,
@@ -166,9 +166,9 @@ def test_agents():
     print("=" * 60)
     print("Multi-Agent Executors Test")
     print("=" * 60)
-    
+
     message_bus = MessageBus()
-    
+
     # 创建 Agent
     agents = [
         PDFParserAgent("pdf_parser_1", message_bus),
@@ -177,20 +177,20 @@ def test_agents():
         KnowledgeGraphUpdaterAgent("kg_updater_1", message_bus),
         ReviewerAgent("reviewer_1", message_bus),
     ]
-    
+
     print("\n[TEST] All agents initialized")
     print(f"  Total agents: {len(agents)}")
-    
+
     # 测试消息传递
     print("\n[TEST] Testing message passing...")
     message_bus.send_message(
         Message.create("test", "pdf_parser_1", MessageType.TASK_ASSIGN, {'test': 'data'})
     )
-    
+
     msg = message_bus.receive_message("pdf_parser_1")
     if msg:
         print(f"  [OK] Message received: {msg.message_type.value}")
-    
+
     print("\n" + "=" * 60)
     print("[TEST] Agent test complete!")
     print("=" * 60)

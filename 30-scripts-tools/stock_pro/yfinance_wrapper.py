@@ -11,7 +11,7 @@ def get_live_price(symbol):
     """Get live price via yfinance"""
     if not YF_AVAILABLE:
         return None
-    
+
     try:
         ticker = yf.Ticker(symbol)
         info = ticker.fast_info
@@ -23,11 +23,11 @@ def get_live_data(symbol):
     """Get full live data"""
     if not YF_AVAILABLE:
         return None
-    
+
     try:
         ticker = yf.Ticker(symbol)
         info = ticker.info
-        
+
         return {
             "price": info.get("currentPrice") or info.get("regularMarketPrice"),
             "target": info.get("targetMeanPrice"),

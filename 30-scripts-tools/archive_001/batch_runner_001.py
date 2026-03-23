@@ -44,12 +44,12 @@ def run_workflow(name):
 def main():
     print("\n[BATCH-RUNNER-001] Running workflows")
     print("=" * 50)
-    
+
     if len(sys.argv) < 2:
         workflows_to_run = WORKFLOWS[:3]  # Default: dev, quick, plan
     else:
         workflows_to_run = sys.argv[1:]
-    
+
     results = []
     for wf in workflows_to_run:
         print("-> " + wf + "...", end=" ", flush=True)
@@ -57,17 +57,17 @@ def main():
         results.append(result)
         status = "OK" if result["success"] else "FAIL"
         print(status)
-    
+
     # Summary
     passed = sum(1 for r in results if r["success"])
     total = len(results)
     total_time = sum(r["elapsed"] for r in results)
-    
+
     print("")
     print("[SUMMARY]")
     print("  Passed: " + str(passed) + "/" + str(total))
     print("  Total: " + str(int(total_time)) + "s")
-    
+
     # Save report
     report = {
         "timestamp": datetime.now().isoformat(),

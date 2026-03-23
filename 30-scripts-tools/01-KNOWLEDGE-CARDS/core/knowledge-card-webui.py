@@ -68,16 +68,16 @@ def check_quota(api_name: str) -> bool:
     """检查 API 配额"""
     if api_name not in api_quota:
         return True
-    
+
     quota = api_quota[api_name]
     now = datetime.now()
-    
+
     # 重置配额 (每小时)
     if now >= quota["reset_at"]:
         quota["requests"] = 0
         quota["reset_at"] = now.replace(minute=0, second=0, microsecond=0)
         quota["reset_at"] = quota["reset_at"].replace(hour=now.hour + 1)
-    
+
     return quota["requests"] < quota["limit"]
 
 
@@ -385,20 +385,20 @@ def get_status():
 @app.route('/api/process', methods=['POST'])
 def process_files():
     global processing_status
-    
+
     if 'files' not in request.files:
         return jsonify({"error": "No files uploaded"}), 400
-    
+
     files = request.files.getlist('files')
     validate = request.form.get('validate', 'false') == 'true'
     export_bibtex = request.form.get('exportBibtex', 'false') == 'true'
     concurrent = request.form.get('concurrent', 'false') == 'true'
     workers = int(request.form.get('workers', 5))
-    
+
     # 创建临时工作目录
     work_dir = TEMP_DIR / datetime.now().strftime("%Y%m%d_%H%M%S")
     work_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # 保存上传的文件
     pdf_paths = []
     for f in files:
@@ -406,7 +406,7 @@ def process_files():
             pdf_path = work_dir / secure_filename(f.filename)
             f.save(str(pdf_path))
             pdf_paths.append(pdf_path)
-    
+
     # 启动后台处理
     def process_background():
         global processing_status
@@ -414,7 +414,7 @@ def process_files():
         processing_status["total_files"] = len(pdf_paths)
         processing_status["completed"] = 0
         processing_status["failed"] = 0
-        
+
         results = {
             "total": len(pdf_paths),
             "success": 0,
@@ -429,18 +429,18 @@ def process_files():
                 "api_calls": 0
             }
         }
-        
+
         generator = KnowledgeCardGenerator()
         generator.validator = ReferenceValidator(max_workers=workers)
-        
+
         for i, pdf_path in enumerate(pdf_paths):
             processing_status["current_file"] = pdf_path.name
             processing_status["progress"] = (i / len(pdf_paths)) * 100
-            
+
             try:
                 # 处理 PDF
                 html = generator.process_pdf(pdf_path)
-                
+
                 # 验证参考文献
                 if validate:
                     stats = generator.validate_references(show_progress=False, use_concurrent=concurrent)
@@ -451,28 +451,28 @@ def process_files():
                     results["stats"]["cache_hits"] += stats["cache_hits"]
                     results["stats"]["api_calls"] += stats["api_calls"]
                     html = generator.generate_html_card()
-                    
+
                     # 跟踪 API 调用
                     track_api_call("crossref")
                     track_api_call("arxiv")
-                
+
                 # 保存 HTML
                 output_file = work_dir / f"{pdf_path.stem}.html"
                 output_file.write_text(html, encoding='utf-8')
-                
+
                 # 导出 BibTeX
                 if export_bibtex:
                     bibtex = generator.export_bibtex()
                     bibtex_file = work_dir / f"{pdf_path.stem}.bib"
                     bibtex_file.write_text(bibtex, encoding='utf-8')
-                
+
                 results["success"] += 1
                 results["files"].append({
                     "file": pdf_path.name,
                     "output": output_file.name,
                     "status": "success"
                 })
-                
+
             except Exception as e:
                 results["failed"] += 1
                 results["files"].append({
@@ -480,21 +480,21 @@ def process_files():
                     "error": str(e),
                     "status": "failed"
                 })
-            
+
             processing_status["completed"] = results["success"]
             processing_status["failed"] = results["failed"]
-        
+
         # 保存统计
         stats_file = work_dir / "batch-stats.json"
         stats_file.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding='utf-8')
-        
+
         # 压缩结果
         import zipfile
         zip_path = work_dir.parent / f"{work_dir.name}.zip"
         with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
             for file in work_dir.rglob('*'):
                 zipf.write(file, file.relative_to(work_dir))
-        
+
         processing_status["active"] = False
         processing_status["progress"] = 100
         processing_status["result"] = {
@@ -506,10 +506,10 @@ def process_files():
             "invalid": results["stats"]["invalid"],
             "download_url": f"/api/download/{zip_path.name}"
         }
-    
+
     thread = threading.Thread(target=process_background)
     thread.start()
-    
+
     return jsonify({"status": "started"})
 
 
@@ -527,17 +527,17 @@ if __name__ == "__main__":
     parser.add_argument("--port", type=int, default=5000, help="服务端口 (默认：5000)")
     parser.add_argument("--host", type=str, default="127.0.0.1", help="监听地址 (默认：127.0.0.1)")
     args = parser.parse_args()
-    
+
     try:
         print(f"🚀 知识卡片生成器 Web UI v2.5")
         print(f"   访问地址：http://{args.host}:{args.port}")
         print(f"   按 Ctrl+C 停止服务")
     except:
         pass  # 后台运行时忽略 print 错误
-    
+
     # 禁用 Flask banner 避免后台运行错误
     import logging
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.ERROR)
-    
+
     app.run(host=args.host, port=args.port, debug=False, threaded=True, use_reloader=False)

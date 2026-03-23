@@ -31,7 +31,7 @@ print("\n[3/3] 验证安装...")
 try:
     from mace.calculators import mace_mp
     print("  [OK] MACE 导入成功")
-    
+
     # 尝试加载模型
     try:
         calc = mace_mp(model="small", device="cpu")
@@ -45,7 +45,7 @@ except Exception as e:
 try:
     import matgl
     print("  [OK] CHGNet (matgl) 导入成功")
-    
+
     # 尝试加载模型
     try:
         model = matgl.load_model("CHGNet-MP-2024.2.13-PBE")

@@ -35,7 +35,7 @@ print("\n[1/4] 尝试使用 matgl 下载...")
 
 model_names = [
     "CHGNet-MP-2024.2.13-PBE",
-    "CHGNet-MP-2023.12.9-PBE", 
+    "CHGNet-MP-2023.12.9-PBE",
     "CHGNet-0.3.0",
 ]
 
@@ -87,14 +87,14 @@ downloaded_files = []
 
 for file_info in model_files:
     file_path = d_models_dir / file_info['name']
-    
+
     if file_path.exists():
         print(f"  [OK] 已存在：{file_info['name']}")
         downloaded_files.append(file_info['name'])
         continue
-    
+
     print(f"  下载：{file_info['name']}...")
-    
+
     try:
         # 尝试主链接
         urllib.request.urlretrieve(file_info['url'], file_path)
@@ -102,7 +102,7 @@ for file_info in model_files:
         downloaded_files.append(file_info['name'])
     except Exception as e:
         print(f"    [WARN] 主链接失败：{e}")
-        
+
         try:
             # 尝试备用链接
             urllib.request.urlretrieve(file_info['alt_url'], file_path)
@@ -122,7 +122,7 @@ if downloaded_files:
         file_path = d_models_dir / f
         size_mb = file_path.stat().st_size / 1024 / 1024
         print(f"    - {f} ({size_mb:.1f} MB)")
-    
+
     # 创建配置文件
     chgnet_config = {
         'model_name': 'CHGNet-MP-2024.2.13-PBE',
@@ -131,11 +131,11 @@ if downloaded_files:
         'files': downloaded_files,
         'downloaded_at': '2026-03-06'
     }
-    
+
     config_path = d_models_dir / "chgnet_config.json"
     with open(config_path, 'w', encoding='utf-8') as f:
         json.dump(chgnet_config, f, indent=2, ensure_ascii=False)
-    
+
     print(f"  [OK] 配置文件已保存：{config_path}")
 else:
     print(f"  [ERROR] 没有成功下载任何文件")

@@ -59,14 +59,14 @@ if len(files) > 4:
     path = os.path.join(drafts_dir, f)
     with open(path, 'r', encoding='utf-8') as file:
         content = file.read()
-    
+
     old_len = len(content)
     content += chapter2_addition
     new_len = len(content)
-    
+
     with open(path, 'w', encoding='utf-8') as file:
         file.write(content)
-    
+
     print(f"[OK] Chapter 2: {f}")
     print(f"     {old_len} -> {new_len} (+{new_len - old_len})")
 
@@ -76,14 +76,14 @@ if len(files) > 6:
     path = os.path.join(drafts_dir, f)
     with open(path, 'r', encoding='utf-8') as file:
         content = file.read()
-    
+
     old_len = len(content)
     content += chapter3_addition
     new_len = len(content)
-    
+
     with open(path, 'w', encoding='utf-8') as file:
         file.write(content)
-    
+
     print(f"[OK] Chapter 3: {f}")
     print(f"     {old_len} -> {new_len} (+{new_len - old_len})")
 

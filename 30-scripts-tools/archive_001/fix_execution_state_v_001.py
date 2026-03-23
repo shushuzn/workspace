@@ -52,7 +52,7 @@ current_time = base_time
 for step_id in step_ids:
     name = step_names.get(step_id, f"Step {step_id}")
     current_time = current_time.replace(minute=min(59, current_time.minute + 2))
-    
+
     state["step_status"][str(step_id)] = {
         "name": name,
         "status": "completed",

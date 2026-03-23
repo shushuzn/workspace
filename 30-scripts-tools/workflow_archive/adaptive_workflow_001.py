@@ -14,7 +14,7 @@ from typing import Dict, List, Optional
 
 class AdaptiveWorkflowOrchestrator:
     """自适应工作流编排器"""
-    
+
     # 任务类型到工作流配置的映射
     WORKFLOW_PROFILES = {
         "simple_query": {
@@ -49,17 +49,17 @@ class AdaptiveWorkflowOrchestrator:
             "timeout_multiplier": 1.8
         }
     }
-    
+
     def __init__(self, workflow_file: str):
         self.workflow_file = Path(workflow_file)
         with open(self.workflow_file, 'r', encoding='utf-8') as f:
             self.workflow = json.load(f)
-    
+
     def detect_task_type(self, task_description: str) -> str:
         """检测任务类型"""
-        
+
         task_lower = task_description.lower()
-        
+
         if any(kw in task_lower for kw in ["查询", "query", "简单", "simple"]):
             return "simple_query"
         elif any(kw in task_lower for kw in ["研究", "research", "论文", "paper"]):
@@ -72,26 +72,26 @@ class AdaptiveWorkflowOrchestrator:
             return "data_analysis"
         else:
             return "general"
-    
+
     def adapt_workflow(self, task_type: str) -> Dict:
         """根据任务类型自适应调整工作流"""
-        
+
         if task_type not in self.WORKFLOW_PROFILES:
             print(f"[Adaptive] 使用通用工作流 (未识别任务类型：{task_type})")
             return self.workflow
-        
+
         profile = self.WORKFLOW_PROFILES[task_type]
         adapted = self.workflow.copy()
-        
+
         print(f"\n[Adaptive] 任务类型：{task_type} - {profile['name']}")
-        
+
         # 调整步骤
         steps_to_skip = profile.get("steps_to_skip", [])
         adapted_steps = []
-        
+
         for step in adapted["steps"]:
             step_id = step["step_id"]
-            
+
             # 跳过指定步骤
             if step_id in steps_to_skip:
                 step["conditional"] = {
@@ -99,45 +99,45 @@ class AdaptiveWorkflowOrchestrator:
                     "skip_message": f"自适应跳过：{task_type} 不需要此步骤"
                 }
                 print(f"  [Skip] Step {step_id}: {step['name']}")
-            
+
             # 增强指定步骤
             if step_id in profile.get("steps_to_enhance", []):
                 step["enhanced"] = True
                 step["timeout_seconds"] = int(step.get("timeout_seconds", 60) * 1.5)
                 print(f"  [Enhance] Step {step_id}: {step['name']} (timeout x1.5)")
-            
+
             adapted_steps.append(step)
-        
+
         adapted["steps"] = adapted_steps
-        
+
         # 应用超时乘数
         timeout_mult = profile.get("timeout_multiplier", 1.0)
         adapted["timeout_multiplier"] = timeout_mult
         print(f"  [Timeout] 全局超时乘数：x{timeout_mult}")
-        
+
         return adapted
-    
+
     def save_adapted_workflow(self, adapted: Dict, output_file: str):
         """保存自适应工作流"""
-        
+
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(adapted, f, ensure_ascii=False, indent=2)
-        
+
         print(f"\n[OK] 自适应工作流已保存到：{output_file}")
-    
+
     def run(self, task_description: str, output_file: Optional[str] = None) -> Dict:
         """完整流程：检测 -> 适配 -> 保存"""
-        
+
         # 检测任务类型
         task_type = self.detect_task_type(task_description)
-        
+
         # 自适应调整
         adapted = self.adapt_workflow(task_type)
-        
+
         # 保存
         if output_file:
             self.save_adapted_workflow(adapted, output_file)
-        
+
         return {
             "task_type": task_type,
             "adapted_workflow": adapted,
@@ -192,7 +192,7 @@ Fixes:
     orchestrator = AdaptiveWorkflowOrchestrator(
         "flow-archive/20260318-universal-workflow-001/workflow.json"
     )
-    
+
     # 测试不同任务类型
     test_tasks = [
         "简单查询：今天天气如何？",
@@ -201,7 +201,7 @@ Fixes:
         "头脑风暴：AI Agent 优化想法",
         "数据分析：实验数据统计分析"
     ]
-    
+
     for task in test_tasks:
         print("\n" + "=" * 60)
         result = orchestrator.run(task, output_file=None)

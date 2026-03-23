@@ -19,7 +19,7 @@ class WorkflowReport:
     def generate(self):
         tools_dir = Path("30-scripts-tools")
         tools = list(tools_dir.glob("*_001.py"))
-        
+
         # Categorize
         categories = {}
         for t in tools:
@@ -35,7 +35,7 @@ class WorkflowReport:
             else:
                 cat = "other"
             categories[cat] = categories.get(cat, 0) + 1
-        
+
         # Workflow stats
         log_file = Path("13-memory/.workflow_logs/master.json")
         log_stats = {"runs": 0, "success": 0}
@@ -43,7 +43,7 @@ class WorkflowReport:
             log = json.loads(log_file.read_text(encoding="utf-8", errors="replace"))
             log_stats["runs"] = len(log.get("runs", []))
             log_stats["success"] = sum(1 for r in log.get("runs", []) if r.get("status") == "ok")
-        
+
         return {
             "generated": datetime.now().isoformat(),
             "summary": {

@@ -14,11 +14,11 @@ from typing import Dict, List, Optional
 
 class BrainstormAIAssistant:
     """AI 创意助手"""
-    
+
     def __init__(self):
         self.log_file = Path("flow-archive/20260320-brainstorm-v2/ai-assistant-log.json")
         self.prompt_templates = self._load_prompts()
-    
+
     def _load_prompts(self) -> Dict:
         """加载提示模板"""
         return {
@@ -79,12 +79,12 @@ class BrainstormAIAssistant:
 }}
 """
         }
-    
-    def generate_divergent_ideas(self, topic: str, context: str = "", 
+
+    def generate_divergent_ideas(self, topic: str, context: str = "",
                                   count: int = 15, categories: int = 3,
                                   inspiration: str = "") -> Dict:
         """生成发散性创意"""
-        
+
         prompt = self.prompt_templates['divergent'].format(
             topic=topic,
             context=context,
@@ -92,10 +92,10 @@ class BrainstormAIAssistant:
             categories=categories,
             inspiration=inspiration or "无特定灵感来源"
         )
-        
+
         # 模拟 LLM 调用 (实际应调用 LLM API)
         result = self._simulate_llm_call("divergent", prompt)
-        
+
         return {
             "success": True,
             "mode": "divergent",
@@ -103,19 +103,19 @@ class BrainstormAIAssistant:
             "ideas": result.get('ideas', []),
             "prompt_used": prompt[:200]
         }
-    
+
     def evaluate_ideas(self, ideas: List[Dict], top_count: int = 5) -> Dict:
         """评估创意"""
-        
+
         ideas_str = "\n".join([f"- {i['name']}: {i.get('description', '')}" for i in ideas])
-        
+
         prompt = self.prompt_templates['convergent'].format(
             count=len(ideas),
             ideas=ideas_str
         )
-        
+
         result = self._simulate_llm_call("convergent", prompt)
-        
+
         return {
             "success": True,
             "mode": "convergent",
@@ -123,29 +123,29 @@ class BrainstormAIAssistant:
             "top_picks": result.get('top_picks', [])[:top_count],
             "recommendations": result.get('recommendations', '')
         }
-    
+
     def generate_connections(self, ideas: List[Dict]) -> Dict:
         """生成创意连接"""
-        
+
         ideas_str = "\n".join([f"- {i['name']}: {i.get('description', '')}" for i in ideas])
-        
+
         prompt = self.prompt_templates['connection'].format(ideas=ideas_str)
-        
+
         result = self._simulate_llm_call("connection", prompt)
-        
+
         return {
             "success": True,
             "mode": "connection",
             "connections": result.get('connections', []),
             "connection_count": len(result.get('connections', []))
         }
-    
+
     def _simulate_llm_call(self, mode: str, prompt: str) -> Dict:
         """模拟 LLM 调用 (占位符)"""
-        
+
         # 实际实现应调用 LLM API
         # 这里返回示例数据
-        
+
         if mode == "divergent":
             return {
                 "ideas": [
@@ -169,14 +169,14 @@ class BrainstormAIAssistant:
                     for i in range(5)
                 ]
             }
-    
+
     def get_stats(self) -> Dict:
         """获取统计"""
         log = []
         if self.log_file.exists():
             with open(self.log_file, 'r', encoding='utf-8') as f:
                 log = json.load(f)
-        
+
         return {
             "total_sessions": len(log),
             "total_ideas_generated": sum(s.get('ideas_count', 0) for s in log),
@@ -184,30 +184,30 @@ class BrainstormAIAssistant:
                 sum(s.get('ideas_count', 0) for s in log) / len(log)
             ) if log else 0
         }
-    
+
     def display_status(self) -> str:
         """显示状态"""
         stats = self.get_stats()
-        
+
         output = []
         output.append("\n" + "=" * 70)
         output.append(" " * 22 + "AI Brainstorm Assistant")
         output.append("=" * 70)
-        
+
         output.append(f"\n[Stats]")
         output.append(f"  Total Sessions:     {stats['total_sessions']}")
         output.append(f"  Ideas Generated:    {stats['total_ideas_generated']}")
         output.append(f"  Avg Ideas/Session:  {stats['avg_ideas_per_session']:.1f}")
-        
+
         output.append(f"\n[Capabilities]")
         output.append(f"  - Divergent idea generation")
         output.append(f"  - Idea evaluation & ranking")
         output.append(f"  - Creative connection discovery")
-        
+
         output.append("\n" + "=" * 70)
-        
+
         return "\n".join(output)
-    
+
     def run(self, topic: str, mode: str = "divergent") -> Dict:
         """运行 AI 助手"""
         if mode == "divergent":
@@ -261,10 +261,10 @@ Fixes:
 
 测试入口"""
     assistant = BrainstormAIAssistant()
-    
+
     print("AI Brainstorm Assistant Test")
     print("=" * 70)
-    
+
     # 测试：生成创意
     result = assistant.generate_divergent_ideas(
         topic="工作流系统优化",
@@ -272,13 +272,13 @@ Fixes:
         count=10,
         categories=3
     )
-    
+
     print(f"\n[OK] Generated {result['ideas_count']} ideas")
     print(f"Mode: {result['mode']}")
-    
+
     # 显示状态
     print(assistant.display_status())
-    
+
     print(f"\n[OK] AI assistant test completed")
 
 if __name__ == "__main__":

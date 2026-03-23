@@ -29,23 +29,23 @@ CONFIG_FILE = Path("30-scripts-tools/sa_030_config.json")
 
 class SentimentAnalyzer:
     """情绪分析器"""
-    
+
     def __init__(self):
         self.sentiment_dir = SENTIMENT_DIR
         self.config = self._load_config()
-        
+
         self.sentiment_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.history_file = self.sentiment_dir / "sentiment_history.json"
         self.news_cache = self.sentiment_dir / "news_cache.json"
-    
+
     def _load_config(self) -> dict:
         default = {
             "demo_mode": True,
             "news_api_key": os.environ.get("NEWS_API_KEY", ""),
             "sentiment_threshold": 0.3
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -53,11 +53,11 @@ class SentimentAnalyzer:
             except (Exception,):
                 return default
         return default
-    
+
     def _generate_demo_news(self, symbol: str) -> list:
         """生成模拟新闻数据"""
         random.seed(hash(symbol) % 10000)
-        
+
         news_templates = [
             {"title": f"{symbol} 发布 Q4 财报，营收超预期", "sentiment": 0.8},
             {"title": f"分析师上调 {symbol} 目标价", "sentiment": 0.7},
@@ -70,11 +70,11 @@ class SentimentAnalyzer:
             {"title": f"竞争加剧影响 {symbol}", "sentiment": -0.4},
             {"title": f"{symbol} 创新技术获突破", "sentiment": 0.7}
         ]
-        
+
         # 随机选3-5条新闻
         count = random.randint(3, 5)
         selected = random.sample(news_templates, count)
-        
+
         news = []
         for i, n in enumerate(selected):
             news.append({
@@ -84,9 +84,9 @@ class SentimentAnalyzer:
                 "source": random.choice(["Reuters", "Bloomberg", "WSJ", "CNBC"]),
                 "timestamp": datetime.now().isoformat()
             })
-        
+
         return news
-    
+
     def _analyze_sentiment(self, news: list) -> dict:
         """分析情绪"""
         if not news:
@@ -95,13 +95,13 @@ class SentimentAnalyzer:
                 "label": "NEUTRAL",
                 "confidence": 0
             }
-        
+
         scores = [n["sentiment"] for n in news]
         avg_score = sum(scores) / len(scores)
-        
+
         # 置信度基于新闻数量
         confidence = min(0.5 + len(news) * 0.1, 0.95)
-        
+
         # 情绪标签
         if avg_score > 0.3:
             label = "POSITIVE"
@@ -109,22 +109,22 @@ class SentimentAnalyzer:
             label = "NEGATIVE"
         else:
             label = "NEUTRAL"
-        
+
         return {
             "score": round(avg_score, 2),
             "label": label,
             "confidence": round(confidence, 2),
             "news_count": len(news)
         }
-    
+
     def analyze(self, symbol: str) -> dict:
         """分析情绪"""
         # 获取新闻
         news = self._generate_demo_news(symbol)
-        
+
         # 分析
         sentiment = self._analyze_sentiment(news)
-        
+
         result = {
             "symbol": symbol,
             "timestamp": datetime.now().isoformat(),
@@ -134,12 +134,12 @@ class SentimentAnalyzer:
             "label": sentiment["label"],
             "confidence": sentiment["confidence"]
         }
-        
+
         # 保存
         self._save_sentiment(result)
-        
+
         return result
-    
+
     def _save_sentiment(self, result: dict):
         """
 # ==============================================================================
@@ -191,19 +191,19 @@ Fixes:
                     history = json.load(f)
             except (Exception,):
                 pass
-        
+
         history.append({
             "symbol": result["symbol"],
             "score": result["score"],
             "label": result["label"],
             "timestamp": result["timestamp"]
         })
-        
+
         history = history[-100:]
-        
+
         with open(self.history_file, "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
-    
+
     def get_history(self, symbol: str = None, limit: int = 20) -> dict:
         """获取情绪历史"""
         if not self.history_file.exists():

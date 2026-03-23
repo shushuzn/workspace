@@ -64,7 +64,7 @@ Fixes:
 Generate bash completion script"""
     workflows = load_workflows()
     workflow_names = list(workflows.keys()) if isinstance(workflows, dict) else [w.get("name", "unknown") for w in workflows]
-    
+
     script = '''# OpenClaw Workflow Completion for Bash
 _complete_workflow() {
     local cur prev
@@ -98,7 +98,7 @@ Register-ArgumentCompleter -CommandName workflow.bat -ScriptBlock {
 def generate_quick_ref() -> None:
     """Generate quick reference markdown"""
     workflows = load_workflows()
-    
+
     ref = """# OpenClaw 命令快速参考
 
 ## 工作流命令
@@ -146,9 +146,9 @@ Usage:
   python workflow_completion_001.py install   # Install all completions
 """)
         return
-    
+
     cmd = sys.argv[1]
-    
+
     if cmd == "bash":
         script = generate_bash_completion()
         print(script)
@@ -157,25 +157,25 @@ Usage:
         out_file.write_text(script)
         print(f"\n[Saved to: {out_file}]")
         print("Add to ~/.bashrc: source {0}".format(out_file))
-    
+
     elif cmd == "ps":
         script = generate_ps_completion()
         print(script)
-    
+
     elif cmd == "ref":
         print(generate_quick_ref())
-    
+
     elif cmd == "install":
         # Bash
         bash_script = generate_bash_completion()
         bash_file = Path.home() / ".openclaw_completion.sh"
         bash_file.write_text(bash_script)
-        
+
         # PowerShell
         ps_script = generate_ps_completion()
         ps_file = Path("openclaw_completion.ps1")
         ps_file.write_text(ps_script)
-        
+
         print("[WORKFLOW-COMPLETION-001] Installed!")
         print(f"  Bash: {bash_file}")
         print(f"  PS:   {ps_file}")

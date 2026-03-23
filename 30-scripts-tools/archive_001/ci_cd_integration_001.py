@@ -56,35 +56,35 @@ PIPELINES = {
 class CiCdIntegration:
     def __init__(self):
         self.load_config()
-    
+
     def load_config(self):
         if CI_CONFIG.exists():
             self.config = json.loads(CI_CONFIG.read_text(encoding="utf-8", errors="replace"))
         else:
             self.config = {"pipelines": {}, "env": {}}
             self.save_config()
-    
+
     def save_config(self):
         CI_CONFIG.parent.mkdir(parents=True, exist_ok=True)
         CI_CONFIG.write_text(json.dumps(self.config, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def run_pipeline(self, pipeline_id):
         if pipeline_id not in PIPELINES:
             return {"error": f"Unknown pipeline: {pipeline_id}", "available": list(PIPELINES.keys())}
-        
+
         pipeline = PIPELINES[pipeline_id]
         results = []
-        
+
         print(f"Running: {pipeline['name']}")
         print("=" * 50)
-        
+
         for i, step in enumerate(pipeline["steps"]):
             tool = step["tool"]
             args = step["args"]
             cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
-            
+
             print(f"[{i+1}/{len(pipeline['steps'])}] {tool}...", end=" ", flush=True)
-            
+
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, encoding="utf-8", errors="replace")
                 status = "OK" if result.returncode == 0 else "FAIL"
@@ -96,16 +96,16 @@ class CiCdIntegration:
             except Exception as e:
                 print(f"ERROR: {e}")
                 results.append({"step": i+1, "tool": tool, "status": "ERROR"})
-        
+
         success = sum(1 for r in results if r["status"] == "OK")
         print("=" * 50)
         print(f"Complete: {success}/{len(results)} steps OK")
-        
+
         return {"pipeline": pipeline_id, "results": results}
-    
+
     def list_pipelines(self):
         return [{"id": k, "name": v["name"], "steps": len(v["steps"])} for k, v in PIPELINES.items()]
-    
+
     def setup_hooks(self) -> None:
         """
 # ==============================================================================
@@ -152,7 +152,7 @@ Fixes:
 Setup git hooks"""
         hooks_dir = Path(".git/hooks")
         hooks_dir.mkdir(exist_ok=True)
-        
+
         # Pre-commit hook
         precommit = hooks_dir / "pre-commit"
         precommit.write_text(f'''#!/bin/sh
@@ -161,7 +161,7 @@ cd {os.getcwd()}
 {sys.executable} {TOOLS_DIR / "ci_cd_integration_001.py"} --pipeline pre-commit
 exit $?
 ''', encoding="utf-8")
-        
+
         # Post-commit hook
         postcommit = hooks_dir / "post-commit"
         postcommit.write_text(f'''#!/bin/sh
@@ -169,9 +169,9 @@ exit $?
 cd {os.getcwd()}
 {sys.executable} {TOOLS_DIR / "ci_cd_integration_001.py"} --pipeline post-commit
 ''', encoding="utf-8")
-        
+
         return {"status": "hooks_created", "hooks": ["pre-commit", "post-commit"]}
-    
+
     def ci_env_check(self) -> None:
         """Check CI environment"""
         ci_vars = {

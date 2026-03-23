@@ -51,9 +51,9 @@ def calculate_complexity_score(steps):
     """
     if not steps:
         return {"score": 0, "level": "N/A", "factors": {}}
-    
+
     factors = {}
-    
+
     # 1. 步骤数量评分 (0-25分)
     step_count = len(steps)
     factors["step_count"] = {
@@ -61,10 +61,10 @@ def calculate_complexity_score(steps):
         "max_score": 25,
         "score": min(25, step_count * 2.5)
     }
-    
+
     # 2. 决策点数量 (0-25分)
     decision_points = sum(1 for s in steps if any(
-        k in s.get("name", "").lower() 
+        k in s.get("name", "").lower()
         for k in ["判断", "选择", "decision", "choose", "if", "branch"]
     ))
     factors["decision_points"] = {
@@ -72,7 +72,7 @@ def calculate_complexity_score(steps):
         "max_score": 25,
         "score": min(25, decision_points * 8)
     }
-    
+
     # 3. 工具多样性 (0-25分) - 跨任务学习潜力
     tool_ids = set()
     for s in steps:
@@ -85,7 +85,7 @@ def calculate_complexity_score(steps):
         "max_score": 25,
         "score": min(25, unique_tools * 5)
     }
-    
+
     # 4. 必需步骤比例 (0-25分) - 训练迁移潜力
     mandatory = sum(1 for s in steps if s.get("mandatory", False))
     mandatory_ratio = mandatory / step_count if step_count > 0 else 0
@@ -94,10 +94,10 @@ def calculate_complexity_score(steps):
         "max_score": 25,
         "score": mandatory_ratio * 25
     }
-    
+
     # 总分
     total_score = sum(f["score"] for f in factors.values())
-    
+
     # 复杂度等级
     if total_score < 30:
         level = "简单 (Simple)"
@@ -107,7 +107,7 @@ def calculate_complexity_score(steps):
         level = "复杂 (Complex)"
     else:
         level = "极复杂 (Very Complex)"
-    
+
     return {
         "score": round(total_score, 1),
         "level": level,
@@ -120,15 +120,15 @@ def analyze_workflow(workflow_path):
     """分析工作流并输出报告"""
     with open(workflow_path, 'r', encoding='utf-8') as f:
         workflow = json.load(f)
-    
+
     flow_id = workflow.get('flow_id', 'unknown')
     name = workflow.get('name', 'Unnamed')
     version = workflow.get('version', 'N/A')
     steps = workflow.get('steps', [])
-    
+
     # 计算复杂度
     complexity = calculate_complexity_score(steps)
-    
+
     # 打印报告
     print("=" * 70)
     print("工作流分析报告")
@@ -137,7 +137,7 @@ def analyze_workflow(workflow_path):
     print(f"名称: {name}")
     print(f"版本: {version}")
     print("-" * 70)
-    
+
     # 复杂度评分
     print(f"\n【复杂度评分】 {complexity['score']}/100 ({complexity['level']})")
     print("-" * 70)
@@ -145,16 +145,16 @@ def analyze_workflow(workflow_path):
         bar_len = int(factor_data['score'] / factor_data['max_score'] * 20)
         bar = "#" * bar_len + "-" * (20 - bar_len)
         print(f"  {factor_name:<20} [{bar}] {factor_data['score']:.1f}")
-    
+
     # 统计
     mandatory_count = sum(1 for s in steps if s.get('mandatory', False))
     total_time = sum(s.get('estimated_time_seconds', 0) for s in steps)
-    
+
     print(f"\n【基本信息】")
     print(f"  总步骤: {len(steps)}")
     print(f"  必需步骤: {mandatory_count}")
     print(f"  预计时间: {total_time}秒 ({total_time/60:.1f}分钟)")
-    
+
     # 检查问题
     issues = []
     tool_ids = set()
@@ -164,12 +164,12 @@ def analyze_workflow(workflow_path):
             tool_ids.add(tool)
             if not Path(f"30-scripts-tools/{tool}").exists():
                 issues.append(f"工具不存在: {tool}")
-    
+
     if issues:
         print(f"\n【警告】 {len(issues)} 个问题")
         for issue in issues:
             print(f"  - {issue}")
-    
+
     # 训练迁移潜力评估 (基于论文)
     print(f"\n【训练迁移潜力】")
     tool_diversity_score = complexity['factors']['tool_diversity']['score']
@@ -179,9 +179,9 @@ def analyze_workflow(workflow_path):
         print("  [MED] 中等迁移潜力")
     else:
         print("  [LOW] 低迁移潜力 - 建议增加工具多样性")
-    
+
     print("=" * 70)
-    
+
     return {
         "flow_id": flow_id,
         "complexity": complexity,

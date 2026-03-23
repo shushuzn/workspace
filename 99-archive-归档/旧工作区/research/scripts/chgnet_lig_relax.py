@@ -49,47 +49,47 @@ def create_lig_disordered_carbon(n_atoms=72, density=2.0, defect_density=0.1):
         defect_density: 缺陷密度 (空位比例)
     """
     from ase.build import bulk
-    
+
     # 从石墨开始
     graphite = bulk('C', 'hex', a=2.46, c=6.71)
-    
+
     # 扩大超胞
     supercell = graphite * (3, 3, 2)  # 72 原子
-    
+
     # 引入无序 (模拟激光处理)
     positions = supercell.get_positions()
     np.random.seed(42)
-    
+
     # 1. 随机位移
     displacement = np.random.normal(0, 0.5, positions.shape)  # 0.5 Å 标准差
     positions += displacement
-    
+
     # 2. 引入空位 (模拟缺陷)
     n_defects = int(len(supercell) * defect_density)
     defect_indices = np.random.choice(len(supercell), n_defects, replace=False)
-    
+
     # 创建带缺陷的结构
     from ase import Atoms
     atoms_without_defects = supercell.copy()
     for idx in sorted(defect_indices, reverse=True):
         del supercell[idx]
-    
+
     supercell.set_positions(positions)
-    
+
     # 调整密度
     current_volume = supercell.get_volume()
     n_atoms = len(supercell)
     target_volume = n_atoms * 12.01 / (density * 6.022) * 10  # Å³
-    
+
     scale = (target_volume / current_volume) ** (1/3)
     supercell.set_cell(supercell.get_cell() * scale, scale_atoms=True)
-    
+
     return supercell, n_defects
 
 # 创建 LIG 结构
 lig_structure, n_defects = create_lig_disordered_carbon(
-    n_atoms=72, 
-    density=2.0, 
+    n_atoms=72,
+    density=2.0,
     defect_density=0.1  # 10% 空位
 )
 

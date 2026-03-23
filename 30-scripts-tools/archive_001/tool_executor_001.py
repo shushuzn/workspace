@@ -54,10 +54,10 @@ def parse_args(args):
         print("  py tool_executor.py execute_shell_command \"echo test\"")
         print("  py tool_executor.py read_file \"file_path=test.txt\"")
         sys.exit(1)
-    
+
     tool_name = args[0]
     params_str = args[1] if len(args) > 1 else ""
-    
+
     # 解析参数字符串为字典
     params = {}
     if params_str:
@@ -69,7 +69,7 @@ def parse_args(args):
         # 如果是 execute_shell_command，command 参数是完整的剩余部分
         if tool_name == 'execute_shell_command' and 'command' not in params:
             params['command'] = params_str
-    
+
     return tool_name, params
 
 
@@ -84,14 +84,14 @@ def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
     if TOOL_WRAPPER_ENABLED:
         if not before_tool_call(tool_name, params):
             return 1, "", "未初始化会话 - 请先运行 copaw_entry.py"
-    
+
     # 步骤 0.5: 工作流强制执行检查（新增）
     if WORKFLOW_ENFORCER_ENABLED:
         enforcer = WorkflowEnforcer()
         # 工具调用视为 Step 6（工具执行阶段）
         if not enforcer.verify_step_execution(6):
             return 1, "", "工作流步骤未完成 - 请先完成前面步骤"
-    
+
     # 防护检查
     if PROTECTION_ENABLED:
         layer = get_protection_layer()
@@ -99,7 +99,7 @@ def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
         if not allowed:
             print(f"[BLOCK] {msg}", file=sys.stderr)
             return 1, "", msg
-    
+
     # 执行工具
     if tool_name == 'execute_shell_command':
         command = params.get('command', '')
@@ -120,7 +120,7 @@ def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
             return 1, "", "Command timeout (60s)"
         except Exception as e:
             return 1, "", str(e)
-    
+
     elif tool_name == 'read_file':
         file_path = params.get('file_path', '')
         try:
@@ -129,7 +129,7 @@ def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
             return 0, content, ""
         except Exception as e:
             return 1, "", str(e)
-    
+
     elif tool_name == 'write_file':
         file_path = params.get('file_path', '')
         content = params.get('content', '')
@@ -139,7 +139,7 @@ def execute_tool(tool_name: str, params: dict) -> tuple[int, str, str]:
             return 0, f"Written to {file_path}", ""
         except Exception as e:
             return 1, "", str(e)
-    
+
     else:
         return 1, "", f"Unknown tool: {tool_name}"
 
@@ -195,7 +195,7 @@ Fixes:
         "result": result,
         "returncode": returncode,
     }
-    
+
     # 尝试获取 session_id
     session_id = "unknown"
     state_files = list(Path("flow-archive").glob("*/execution-state.json"))
@@ -206,9 +206,9 @@ Fixes:
             session_id = state.get('session_id', 'unknown')
         except (Exception,):
             pass
-    
+
     log_entry["session_id"] = session_id
-    
+
     # 写入日志
     log_file = Path("30-scripts-tools/tool_call_log.jsonl")
     with open(log_file, 'a', encoding='utf-8') as f:
@@ -218,18 +218,18 @@ Fixes:
 logging.basicConfig(level=logging.INFO)
 def main():
     tool_name, params = parse_args(sys.argv[1:])
-    
+
     # 执行工具
     returncode, stdout, stderr = execute_tool(tool_name, params)
-    
+
     # 记录调用
     result = "success" if returncode == 0 else "error"
     log_call(tool_name, params, result, returncode)
-    
+
     # 工具包装器记录
     if TOOL_WRAPPER_ENABLED:
         after_tool_call(tool_name, params, result)
-    
+
     # 【新增】自动完成工作流步骤
     try:
         from auto_step import AutoStepTracker
@@ -237,13 +237,13 @@ def main():
         tracker.auto_complete(tool_name)
     except Exception as e:
         pass  # 静默失败，不影响工具执行
-    
+
     # 输出结果
     if stdout:
         print(stdout)
     if stderr:
         print(stderr, file=sys.stderr)
-    
+
     sys.exit(returncode)
 
 

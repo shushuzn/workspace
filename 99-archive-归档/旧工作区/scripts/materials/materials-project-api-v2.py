@@ -32,17 +32,17 @@ print(f"[MP API] Connected with key: {MP_API_KEY[:10]}...")
 
 class MaterialsProjectClient:
     """Materials Project API v2 Client (using mp-api)"""
-    
+
     def __init__(self, api_key: str = None):
         self.api_key = api_key or MP_API_KEY
-        
+
         if MP_API_AVAILABLE:
             self.mpr = MPRester(self.api_key)
             print("[MP API] Using official mp-api client")
         else:
             self.mpr = None
             print("[MP API] Using fallback HTTP client")
-    
+
     def get_material_summary(self, material_id: str) -> Optional[Dict]:
         """Get material summary by ID (e.g., mp-1171422)"""
         if MP_API_AVAILABLE and self.mpr:
@@ -66,7 +66,7 @@ class MaterialsProjectClient:
             else:
                 print(f"[MP API] HTTP Error: {response.status_code}")
                 return None
-    
+
     def search_by_formula(self, formula: str, limit: int = 10) -> List[Dict]:
         """Search materials by formula (e.g., LiFePO4, SiO2)"""
         if MP_API_AVAILABLE and self.mpr:
@@ -94,7 +94,7 @@ class MaterialsProjectClient:
             else:
                 print(f"[MP API] HTTP Error: {response.status_code}")
                 return []
-    
+
     def get_band_structure(self, material_id: str) -> Optional[Dict]:
         """Get band structure for a material"""
         if MP_API_AVAILABLE and self.mpr:
@@ -107,7 +107,7 @@ class MaterialsProjectClient:
         else:
             print("[MP API] Band structure requires mp-api package")
             return None
-    
+
     def get_dos(self, material_id: str) -> Optional[Dict]:
         """Get density of states for a material"""
         if MP_API_AVAILABLE and self.mpr:
@@ -120,7 +120,7 @@ class MaterialsProjectClient:
         else:
             print("[MP API] DOS requires mp-api package")
             return None
-    
+
     def get_thermodynamics(self, material_id: str) -> Optional[Dict]:
         """Get thermodynamic properties"""
         if MP_API_AVAILABLE and self.mpr:
@@ -140,13 +140,13 @@ def main():
     print("=" * 60)
     print("Materials Project API v2 Client")
     print("=" * 60)
-    
+
     client = MaterialsProjectClient()
-    
+
     # Test search
     print("\n[1/2] Searching for LiFePO4...")
     results = client.search_by_formula("LiFePO4", limit=3)
-    
+
     if results:
         print(f"Found {len(results)} materials:")
         for mat in results:
@@ -154,13 +154,13 @@ def main():
                 mat_id = mat.get('material_id', mat.get('materialId', 'N/A'))
                 formula = mat.get('formula', {}).get('pretty', 'N/A') if isinstance(mat.get('formula'), dict) else mat.get('formula', 'N/A')
                 print(f"  - {mat_id}: {formula}")
-    
+
     # Test material summary (use LiFePO4 from search results)
     print("\n[2/2] Getting material details...")
     if results:
         first_mat_id = results[0].get('material_id', 'mp-dqobo')
         summary = client.get_material_summary(first_mat_id)
-        
+
         if summary:
             print(f"Material: {first_mat_id}")
             formula = summary.get('formula', {})
@@ -172,11 +172,11 @@ def main():
             print(f"  Band Gap: {summary.get('band_gap', 'N/A')} eV")
         else:
             print(f"No details for {first_mat_id}")
-    
+
     print("\n" + "=" * 60)
     print("API client ready!")
     print("=" * 60)
-    
+
     if not MP_API_AVAILABLE:
         print("\n[INFO] For full functionality, install mp-api:")
         print("  pip install mp-api")

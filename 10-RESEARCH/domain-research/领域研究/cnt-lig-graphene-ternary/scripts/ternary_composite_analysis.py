@@ -62,20 +62,20 @@ ternary_data = []
 for cnt_ratio in np.linspace(0.1, 0.7, 7):  # 10% - 70%
     for lig_ratio in np.linspace(0.1, 0.8 - cnt_ratio, 8):
         graphene_ratio = 1.0 - cnt_ratio - lig_ratio
-        
+
         if graphene_ratio < 0.1 or graphene_ratio > 0.6:
             continue
-        
+
         # 随机采样 CNT 和 LIG 样本 (仅数值列)
         cnt_sample = df_cnt[['conductivity_Sm', 'diameter_nm', 'layers']].sample(n=3, random_state=42).mean(numeric_only=True)
         lig_sample = df_lig[['sigma_Sm', 'P_W', 'v_mms']].sample(n=3, random_state=42).mean(numeric_only=True)
-        
+
         for idx in range(3):  # 每个比例 3 个重复
             # 各组分贡献
             cnt_conductivity = cnt_sample['conductivity_Sm'] if pd.notna(cnt_sample['conductivity_Sm']) else 1e5
             lig_conductivity = lig_sample['sigma_Sm'] if 'sigma_Sm' in lig_sample and pd.notna(lig_sample['sigma_Sm']) else 1000
             graphene_conductivity = graphene_properties['conductivity']
-            
+
             # 三元协同效应
             # 假设：三元协同 > 二元协同
             # 最优区域：CNT 20-40%, LIG 30-50%, Graphene 20-40%
@@ -84,21 +84,21 @@ for cnt_ratio in np.linspace(0.1, 0.7, 7):  # 10% - 70%
                 0.3 * np.exp(-((graphene_ratio - 0.3) ** 2) / 0.1) +  # CNT-Graphene 协同
                 0.2 * np.exp(-((lig_ratio - 0.4) ** 2) / 0.1)  # LIG-Graphene 协同
             )
-            
+
             # 三元协同增强
             synergy_3d = 1.0 + synergy_2d + 0.2 * cnt_ratio * lig_ratio * graphene_ratio * 10
-            
+
             # 复合电导率
             composite_conductivity = (
                 cnt_ratio * cnt_conductivity +
                 lig_ratio * lig_conductivity +
                 graphene_ratio * graphene_conductivity
             ) * synergy_3d
-            
+
             # 添加噪声
             noise = np.random.normal(1.0, 0.08)
             composite_conductivity *= noise
-            
+
             ternary_data.append({
                 'sample_id': f'TERNARY-{cnt_ratio:.1f}-{lig_ratio:.1f}-{graphene_ratio:.1f}-{idx:02d}',
                 'cnt_ratio': cnt_ratio,

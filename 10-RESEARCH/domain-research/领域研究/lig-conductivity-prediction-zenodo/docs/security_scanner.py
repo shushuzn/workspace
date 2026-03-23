@@ -35,7 +35,7 @@ class SecretFinding:
 
 class SecurityScanner:
     """安全扫描器"""
-    
+
     # 秘密检测模式
     PATTERNS = {
         'api_key': {
@@ -89,22 +89,22 @@ class SecurityScanner:
             'recommendation': '使用 pathlib 和相对路径，避免硬编码绝对路径'
         },
     }
-    
+
     def __init__(self, root_dir: str = "."):
         self.root_dir = Path(root_dir)
         self.findings: List[SecretFinding] = []
         self.files_scanned = 0
         self.lines_scanned = 0
-        
+
     def should_skip(self, path: Path) -> bool:
         """检查是否应该跳过该文件/目录"""
-        
+
         skip_dirs = {
             '.git', 'node_modules', '__pycache__', 'venv', '.venv',
             'env', '.env', 'dist', 'build', '.idea', '.vscode',
             'models', 'data', 'cache', '.cache', 'tmp', 'temp'
         }
-        
+
         skip_extensions = {
             '.pyc', '.pyo', '.so', '.dll', '.exe', '.bin',
             '.jpg', '.jpeg', '.png', '.gif', '.ico', '.svg',
@@ -112,54 +112,54 @@ class SecurityScanner:
             '.db', '.sqlite', '.sqlite3', '.pkl', '.pickle',
             '.gguf', '.bin', '.pt', '.pth', '.onnx'
         }
-        
+
         # 跳过特定目录
         for part in path.parts:
             if part in skip_dirs:
                 return True
-        
+
         # 跳过特定扩展名
         if path.suffix.lower() in skip_extensions:
             return True
-        
+
         # 跳过太大的文件
         try:
             if path.stat().st_size > 1024 * 1024:  # 1MB
                 return True
         except:
             return True
-        
+
         return False
-    
+
     def scan_file(self, file_path: Path) -> List[SecretFinding]:
         """扫描单个文件"""
-        
+
         findings = []
-        
+
         try:
             with open(file_path, 'r', encoding='utf-8', errors='ignore') as f:
                 lines = f.readlines()
         except Exception as e:
             return findings
-        
+
         self.lines_scanned += len(lines)
-        
+
         for line_num, line in enumerate(lines, 1):
             # 跳过注释和空行
             stripped = line.strip()
             if not stripped or stripped.startswith('#'):
                 continue
-            
+
             # 检查每个模式
             for pattern_name, pattern_info in self.PATTERNS.items():
                 try:
                     matches = re.finditer(pattern_info['regex'], line, re.IGNORECASE)
-                    
+
                     for match in matches:
                         # 跳过误报
                         if self.is_false_positive(line, pattern_name, match.group()):
                             continue
-                        
+
                         finding = SecretFinding(
                             file=str(file_path),
                             line=line_num,
@@ -172,87 +172,87 @@ class SecurityScanner:
                         findings.append(finding)
                 except:
                     continue
-        
+
         return findings
-    
+
     def is_false_positive(self, line: str, pattern_name: str, match: str) -> bool:
         """检查是否为误报"""
-        
+
         # 跳过示例/文档
         if 'example' in line.lower() or 'example' in match.lower():
             return True
-        
+
         # 跳过占位符
         placeholders = ['your_', 'xxx', 'placeholder', 'dummy', 'fake', 'test_']
         if any(p in match.lower() for p in placeholders):
             return True
-        
+
         # 跳过配置示例
         if 'config' in line.lower() and '=' in line:
             if 'YOUR_' in line or 'CHANGEME' in line:
                 return True
-        
+
         # 特定模式跳过
         if pattern_name == 'email':
             # 跳过文档中的邮箱
             if 'author' in line.lower() or 'contact' in line.lower():
                 return True
-        
+
         if pattern_name == 'ip_address':
             # 跳过 localhost 和常见 IP
             if match in ['127.0.0.1', '0.0.0.0', '255.255.255.255']:
                 return True
-        
+
         return False
-    
+
     def scan_directory(self) -> List[SecretFinding]:
         """扫描整个目录"""
-        
+
         print("\n" + "="*80)
         print("🔍 安全扫描 - 秘密检测")
         print("="*80)
-        
+
         all_findings = []
-        
+
         # 扫描 Python 文件和配置文件
         file_patterns = ['*.py', '*.json', '*.yaml', '*.yml', '*.env', '*.toml', '*.ini', '*.sh']
-        
+
         files_to_scan = []
         for pattern in file_patterns:
             files_to_scan.extend(self.root_dir.rglob(pattern))
-        
+
         # 添加 .env 文件
         files_to_scan.extend(self.root_dir.rglob('.env'))
         files_to_scan.extend(self.root_dir.rglob('.env.*'))
-        
+
         for file_path in files_to_scan:
             if self.should_skip(file_path):
                 continue
-            
+
             self.files_scanned += 1
             findings = self.scan_file(file_path)
             all_findings.extend(findings)
-            
+
             if findings:
                 print(f"  ⚠️  {file_path}: {len(findings)} 个问题")
-        
+
         self.findings = all_findings
-        
+
         print(f"\n  扫描完成：{self.files_scanned} 文件，{self.lines_scanned} 行")
         print(f"  发现问题：{len(all_findings)} 个")
-        
+
         return all_findings
-    
+
     def get_statistics(self) -> Dict:
         """获取统计信息"""
-        
+
         by_severity = {'CRITICAL': 0, 'HIGH': 0, 'MEDIUM': 0, 'LOW': 0}
         by_type = {}
-        
+
         for finding in self.findings:
             by_severity[finding.severity] = by_severity.get(finding.severity, 0) + 1
             by_type[finding.type] = by_type.get(finding.type, 0) + 1
-        
+
         return {
             'total': len(self.findings),
             'by_severity': by_severity,
@@ -261,55 +261,55 @@ class SecurityScanner:
             'lines_scanned': self.lines_scanned,
             'scan_time': datetime.now().isoformat()
         }
-    
+
     def generate_report(self, output_file: str = "data/security_scan_report.json"):
         """生成扫描报告"""
-        
+
         report = {
             'scan_time': datetime.now().isoformat(),
             'statistics': self.get_statistics(),
             'findings': [asdict(f) for f in self.findings]
         }
-        
+
         # 确保目录存在
         Path(output_file).parent.mkdir(exist_ok=True)
-        
+
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(report, f, indent=2, ensure_ascii=False)
-        
+
         print(f"\n  报告保存到：{output_file}")
-        
+
         return report
-    
+
     def print_summary(self):
         """打印摘要"""
-        
+
         stats = self.get_statistics()
-        
+
         print("\n" + "="*80)
         print("📊 安全扫描摘要")
         print("="*80)
-        
+
         print(f"\n  扫描范围:")
         print(f"    文件数：{stats['files_scanned']}")
         print(f"    代码行数：{stats['lines_scanned']}")
-        
+
         print(f"\n  发现问题:")
         print(f"    总计：{stats['total']} 个")
-        
+
         print(f"\n  按严重程度:")
         for severity, count in stats['by_severity'].items():
             if count > 0:
                 emoji = {'CRITICAL': '🔴', 'HIGH': '🟠', 'MEDIUM': '🟡', 'LOW': '🟢'}[severity]
                 print(f"    {emoji} {severity}: {count} 个")
-        
+
         if stats['by_type']:
             print(f"\n  按类型:")
             for type_name, count in sorted(stats['by_type'].items(), key=lambda x: x[1], reverse=True)[:10]:
                 print(f"    {type_name}: {count} 个")
-        
+
         print("\n" + "="*80)
-        
+
         if stats['by_severity']['CRITICAL'] > 0:
             print("\n🚨 发现严重安全问题！请立即处理！")
         elif stats['by_severity']['HIGH'] > 0:
@@ -318,30 +318,30 @@ class SecurityScanner:
             print("\nℹ️  发现一些安全问题，建议审查！")
         else:
             print("\n✅ 未发现明显安全问题！")
-        
+
         print("\n" + "="*80)
 
 
 def main():
     import argparse
-    
+
     parser = argparse.ArgumentParser(description='安全扫描器 - 秘密检测')
     parser.add_argument('--scan', action='store_true', help='扫描代码库')
     parser.add_argument('--report', action='store_true', help='生成报告')
     parser.add_argument('--fix', action='store_true', help='提供修复建议')
     parser.add_argument('--dir', type=str, default='.', help='扫描目录')
-    
+
     args = parser.parse_args()
-    
+
     scanner = SecurityScanner(args.dir)
-    
+
     if args.scan or not (args.report or args.fix):
         scanner.scan_directory()
         scanner.print_summary()
-    
+
     if args.report:
         scanner.generate_report()
-    
+
     if args.fix:
         scanner.print_summary()
         print("\n💡 修复建议:")

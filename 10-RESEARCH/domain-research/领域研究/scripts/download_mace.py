@@ -20,7 +20,7 @@ else:
     print(f"Downloading MACE-MP-0 to {model_path}...")
     print(f"Size: ~215 MB")
     print(f"This may take 5-10 minutes...")
-    
+
     try:
         url = "https://github.com/ACEsuit/mace/raw/main/models/mace-mp-0.model"
         urllib.request.urlretrieve(url, model_path)
@@ -29,7 +29,7 @@ else:
     except Exception as e:
         print(f"[ERROR] Download failed: {e}")
         print(f"Try alternative URL...")
-        
+
         # 备用下载链接
         try:
             url2 = "https://huggingface.co/mace-models/mace-mp/resolve/main/mace-mp-0.model"

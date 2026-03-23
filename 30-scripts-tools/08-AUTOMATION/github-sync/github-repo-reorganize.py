@@ -40,7 +40,7 @@ def backup_repo():
 def clean_root_files():
     """清理根目录散落文件"""
     print("\n[1/6] 整理根目录文件...")
-    
+
     # 创建归档目录
     archive_dirs = {
         'reports': ['AI-Analysis', 'AI-Agents', 'AI-Research', 'MCP-Deep'],
@@ -48,34 +48,34 @@ def clean_root_files():
         'cron': ['CRON-TASK'],
         'knowledge': ['KNOWLEDGE', 'MEMORY', 'knowledge-index'],
     }
-    
+
     moved = 0
     for file in REPO_PATH.glob("*.md"):
         filename = file.name
         dest_dir = None
-        
+
         for dir_name, prefixes in archive_dirs.items():
             if any(filename.startswith(p) for p in prefixes):
                 dest_dir = REPO_PATH / "_archive" / dir_name
                 break
-        
+
         if dest_dir:
             dest_dir.mkdir(parents=True, exist_ok=True)
             shutil.move(str(file), str(dest_dir / filename))
             moved += 1
-    
+
     print(f"  [OK] 移动 {moved} 个文件到 _archive/")
 
 def clean_duplicates():
     """清理重复文件（保留最新版本）"""
     print("\n[2/6] 清理重复文件...")
-    
+
     # 按来源目录处理
     for source_dir in ['Arxiv', 'HackerNews', 'Medium', 'Reddit', 'X-Twitter']:
         dir_path = REPO_PATH / source_dir
         if not dir_path.exists():
             continue
-        
+
         # 按标题分组
         by_title = {}
         for f in dir_path.glob("*.md"):
@@ -86,7 +86,7 @@ def clean_duplicates():
                 if title not in by_title:
                     by_title[title] = []
                 by_title[title].append(f)
-        
+
         # 保留最新版本（时间戳最大）
         deleted = 0
         for title, files in by_title.items():
@@ -96,23 +96,23 @@ def clean_duplicates():
                 for old_file in sorted_files[1:]:
                     old_file.unlink()
                     deleted += 1
-        
+
         if deleted > 0:
             print(f"  {source_dir}: 清理 {deleted} 个重复文件")
-    
+
     print(f"  [OK] 重复文件清理完成")
 
 def reorganize_arxiv():
     """重组 Arxiv 目录到新结构"""
     print("\n[3/6] 重组 Arxiv 目录...")
-    
+
     old_arxiv = REPO_PATH / "Arxiv"
     new_arxiv = REPO_PATH / "arxiv" / "daily"
-    
+
     if not old_arxiv.exists():
         print(f"  [SKIP] 旧 Arxiv 目录不存在")
         return
-    
+
     # 按日期迁移
     migrated = 0
     for f in old_arxiv.glob("*.md"):
@@ -120,33 +120,33 @@ def reorganize_arxiv():
         parts = f.stem.split('-', 2)
         if len(parts) < 2:
             continue
-        
+
         date_str = parts[0]  # YYYYMMDD
         try:
             year = date_str[:4]
             month = date_str[4:6]
             day = date_str[6:8]
-            
+
             # 创建目标目录
             target_dir = new_arxiv / year / month / f"{year}-{month}-{day}" / "csAI"
             target_dir.mkdir(parents=True, exist_ok=True)
-            
+
             # 移动文件
             shutil.move(str(f), str(target_dir / f.name))
             migrated += 1
         except Exception as e:
             print(f"  [WARN] 跳过 {f.name}: {e}")
-    
+
     # 删除旧目录
     if old_arxiv.exists() and not any(old_arxiv.iterdir()):
         old_arxiv.rmdir()
-    
+
     print(f"  [OK] 迁移 {migrated} 篇论文到新结构")
 
 def create_readme():
     """创建 README.md"""
     print("\n[4/6] 创建 README.md...")
-    
+
     readme = """# Obsidian Sync - 知识库同步仓库
 
 自动同步多源内容到 Obsidian 知识库
@@ -249,29 +249,29 @@ RSS 源 → 收集脚本 → Obsidian → Git Sync → GitHub
 
 *最后更新：2026-03-03*
 """
-    
+
     readme_path = REPO_PATH / "README.md"
     with open(readme_path, 'w', encoding='utf-8') as f:
         f.write(readme)
-    
+
     print(f"  [OK] README.md 已创建")
 
 def commit_changes():
     """提交更改"""
     print("\n[5/6] 提交更改到 Git...")
-    
+
     # 添加所有更改
     success, out, err = run_git(["add", "-A"])
     if not success:
         print(f"  [FAIL] 添加失败：{err}")
         return False
-    
+
     # 检查是否有更改
     success, out, err = run_git(["status", "--porcelain"])
     if not out.strip():
         print(f"  [INFO] 没有更改需要提交")
         return True
-    
+
     # 提交
     commit_msg = """refactor: 重组仓库结构
 
@@ -280,19 +280,19 @@ def commit_changes():
 - 重组 Arxiv 到新结构 (daily/YYYY/MM/DD/领域/)
 - 添加 README.md 文档
 """
-    
+
     success, out, err = run_git(["commit", "-m", commit_msg])
     if not success:
         print(f"  [FAIL] 提交失败：{err}")
         return False
-    
+
     print(f"  [OK] 提交成功")
     return True
 
 def push_changes():
     """推送到 GitHub"""
     print("\n[6/6] 推送到 GitHub...")
-    
+
     success, out, err = run_git(["push", "-u", "origin", "master"])
     if not success:
         if "Authentication" in err or "authentication" in err.lower():
@@ -302,7 +302,7 @@ def push_changes():
         else:
             print(f"  [FAIL] 推送失败：{err}")
             return False
-    
+
     print(f"  [OK] 推送成功")
     print(f"  仓库：https://github.com/shushuzn/obsidian-sync")
     return True
@@ -314,37 +314,37 @@ def main():
     print("GitHub 仓库整理")
     print("整理 github.com/shushuzn/obsidian-sync")
     print("=" * 60)
-    
+
     # 备份
     backup_repo()
-    
+
     # 整理根目录
     clean_root_files()
-    
+
     # 清理重复
     clean_duplicates()
-    
+
     # 重组 Arxiv
     reorganize_arxiv()
-    
+
     # 创建 README
     create_readme()
-    
+
     # 提交
     if not commit_changes():
         print("\n[ERROR] 提交失败")
         return False
-    
+
     # 推送
     push_changes()
-    
+
     # 完成
     print("\n" + "=" * 60)
     print("[SUCCESS] 整理完成")
     print(f"  仓库：https://github.com/shushuzn/obsidian-sync")
     print(f"  时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
-    
+
     return True
 
 if __name__ == '__main__':

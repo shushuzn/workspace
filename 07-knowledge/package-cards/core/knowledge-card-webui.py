@@ -73,16 +73,16 @@ def check_quota(api_name: str) -> bool:
     """检查 API 配额"""
     if api_name not in api_quota:
         return True
-    
+
     quota = api_quota[api_name]
     now = datetime.now()
-    
+
     # 重置配额 (每小时)
     if now >= quota["reset_at"]:
         quota["requests"] = 0
         quota["reset_at"] = now.replace(minute=0, second=0, microsecond=0)
         quota["reset_at"] = quota["reset_at"].replace(hour=now.hour + 1)
-    
+
     return quota["requests"] < quota["limit"]
 
 
@@ -413,26 +413,26 @@ def get_quota():
 def load_stress_test(n_papers):
     """加载压力测试数据"""
     import random
-    
+
     # 生成测试数据
     fields = {
         'NLP': ['BERT', 'transformer', 'attention', 'NLP', 'language model'],
         'CV': ['CNN', 'ResNet', 'AlexNet', 'ImageNet', 'image classification'],
         'ML': ['deep learning', 'neural network', 'optimization', 'gradient']
     }
-    
+
     papers = []
     for i in range(n_papers):
         field = random.choice(list(fields.keys()))
         keywords = random.sample(fields[field], min(3, len(fields[field])))
         year = random.randint(2010, 2024)
-        
+
         references = []
         if i > 0:
             n_refs = random.randint(0, min(3, i))
             for idx in random.sample(range(i), n_refs):
                 references.append({"title": f"Paper {idx}", "doi": f"10.1000/test{idx}"})
-        
+
         papers.append({
             "id": i + 1,
             "title": f"Paper {i + 1}: {random.choice(keywords)} Study",
@@ -441,15 +441,15 @@ def load_stress_test(n_papers):
             "keywords": keywords,
             "references": references
         })
-    
+
     # 生成图谱
     from graph_generator import GraphGenerator
     graph_gen = GraphGenerator()
-    
+
     start_time = __import__('time').time()
     citation_graph = graph_gen.generate_citation_graph(papers)
     gen_time = __import__('time').time() - start_time
-    
+
     return jsonify({
         "success": True,
         "data": {"citation": citation_graph},
@@ -466,17 +466,17 @@ def load_stress_test(n_papers):
 def arxiv_search():
     """arXiv 搜索 API"""
     from arxiv_api import ArXivClient
-    
+
     query = request.args.get('q', '')
     max_results = int(request.args.get('limit', 10))
-    
+
     if not query:
         return jsonify({"error": "请输入搜索关键词"}), 400
-    
+
     try:
         client = ArXivClient(max_results=max_results)
         papers = client.search(query, max_results)
-        
+
         return jsonify({
             "success": True,
             "count": len(papers),
@@ -490,29 +490,29 @@ def arxiv_download():
     """下载 arXiv PDF"""
     import tempfile
     from arxiv_api import ArXivClient
-    
+
     pdf_url = request.args.get('url', '')
     arxiv_id = request.args.get('id', '')
-    
+
     if not pdf_url:
         return jsonify({"error": "请提供 PDF URL"}), 400
-    
+
     try:
         # 创建临时文件
         temp_dir = Path(tempfile.gettempdir()) / 'knowledge-cards' / 'arxiv'
         temp_dir.mkdir(parents=True, exist_ok=True)
-        
+
         pdf_path = temp_dir / f"{arxiv_id or 'paper'}.pdf"
-        
+
         client = ArXivClient()
         if client.download_pdf(pdf_url, str(pdf_path)):
             # 直接处理 PDF
             from graph_generator import GraphGenerator
             from knowledge_card_generator import KnowledgeCardGenerator
-            
+
             generator = KnowledgeCardGenerator()
             result = generator.process_pdf(pdf_path)
-            
+
             return jsonify({
                 "success": True,
                 "result": result,
@@ -520,7 +520,7 @@ def arxiv_download():
             })
         else:
             return jsonify({"error": "下载失败"}), 500
-            
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -533,10 +533,10 @@ def async_generate_graph():
     task_id = data.get('task_id', f'task-{datetime.now().strftime("%Y%m%d%H%M%S")}')
     pdf_paths = data.get('pdf_paths', [])
     graph_type = data.get('graph_type', 'keyword')
-    
+
     # 提交异步任务
     async_executor.submit(task_id, example_knowledge_graph_task, pdf_paths)
-    
+
     return jsonify({
         "success": True,
         "task_id": task_id,
@@ -575,22 +575,22 @@ def load_sample_field(field):
     """加载指定领域的示例数据"""
     import json
     sample_path = Path(__file__).parent.parent / 'data' / 'sample_papers_multi_field.json'
-    
+
     try:
         with open(sample_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        
+
         if field not in data['fields']:
             return jsonify({"error": f"未知领域：{field}"}), 400
-        
+
         papers = data['fields'][field]['papers']
-        
+
         from graph_generator import GraphGenerator
         graph_gen = GraphGenerator()
-        
+
         keyword_graph = graph_gen.generate_keyword_graph(papers)
         citation_graph = graph_gen.generate_citation_graph(papers)
-        
+
         return jsonify({
             "success": True,
             "field": field,
@@ -605,7 +605,7 @@ def load_sample_field(field):
             },
             "message": f"已加载 {len(papers)} 篇{data['fields'][field]['name']}论文"
         })
-        
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -614,21 +614,21 @@ def load_sample():
     """加载示例数据 (默认 AI 领域)"""
     import json
     sample_path = Path(__file__).parent.parent / 'data' / 'sample_papers.json'
-    
+
     try:
         with open(sample_path, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        
+
         papers = data['papers']
-        
+
         # 生成三种图谱
         from graph_generator import GraphGenerator
         graph_gen = GraphGenerator()
-        
+
         keyword_graph = graph_gen.generate_keyword_graph(papers)
         citation_graph = graph_gen.generate_citation_graph(papers)
         domain_graph = graph_gen.generate_domain_graph(papers)
-        
+
         # 返回所有图谱类型
         return jsonify({
             "success": True,
@@ -644,7 +644,7 @@ def load_sample():
             },
             "message": f"已加载 {len(papers)} 篇示例论文"
         })
-        
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -652,29 +652,29 @@ def load_sample():
 def generate_graph():
     """生成知识图谱 API"""
     from graph_generator import GraphGenerator
-    
+
     if 'files' not in request.files:
         return jsonify({"error": "No files uploaded"}), 400
-    
+
     files = request.files.getlist('files')
     graph_type = request.form.get('graph_type', 'keyword')
-    
+
     # 保存上传的文件
     work_dir = TEMP_DIR / datetime.now().strftime("%Y%m%d_%H%M%S")
     work_dir.mkdir(parents=True, exist_ok=True)
-    
+
     pdf_paths = []
     for f in files:
         if f.filename.endswith('.pdf'):
             pdf_path = work_dir / secure_filename(f.filename)
             f.save(str(pdf_path))
             pdf_paths.append(pdf_path)
-    
+
     try:
         # 处理 PDF 提取信息
         generator = KnowledgeCardGenerator()
         papers = []
-        
+
         for pdf_path in pdf_paths:
             result = generator.process_pdf(pdf_path)
             papers.append({
@@ -683,10 +683,10 @@ def generate_graph():
                 'keywords': result.get('keywords', []),
                 'references': result.get('references', [])
             })
-        
+
         # 生成图谱
         graph_gen = GraphGenerator()
-        
+
         if graph_type == 'keyword':
             graph_data = graph_gen.generate_keyword_graph(papers)
         elif graph_type == 'citation':
@@ -695,13 +695,13 @@ def generate_graph():
             graph_data = graph_gen.generate_domain_graph(papers)
         else:
             return jsonify({"error": "Invalid graph type"}), 400
-        
+
         return jsonify({
             "success": True,
             "data": graph_data,
             "stats": graph_data.get('stats', {})
         })
-        
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -723,20 +723,20 @@ def get_status():
 @app.route('/api/process', methods=['POST'])
 def process_files():
     global processing_status
-    
+
     if 'files' not in request.files:
         return jsonify({"error": "No files uploaded"}), 400
-    
+
     files = request.files.getlist('files')
     validate = request.form.get('validate', 'false') == 'true'
     export_bibtex = request.form.get('exportBibtex', 'false') == 'true'
     concurrent = request.form.get('concurrent', 'false') == 'true'
     workers = int(request.form.get('workers', 5))
-    
+
     # 创建临时工作目录
     work_dir = TEMP_DIR / datetime.now().strftime("%Y%m%d_%H%M%S")
     work_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # 保存上传的文件
     pdf_paths = []
     for f in files:
@@ -744,7 +744,7 @@ def process_files():
             pdf_path = work_dir / secure_filename(f.filename)
             f.save(str(pdf_path))
             pdf_paths.append(pdf_path)
-    
+
     # 启动后台处理
     def process_background():
         global processing_status
@@ -752,7 +752,7 @@ def process_files():
         processing_status["total_files"] = len(pdf_paths)
         processing_status["completed"] = 0
         processing_status["failed"] = 0
-        
+
         results = {
             "total": len(pdf_paths),
             "success": 0,
@@ -767,18 +767,18 @@ def process_files():
                 "api_calls": 0
             }
         }
-        
+
         generator = KnowledgeCardGenerator()
         generator.validator = ReferenceValidator(max_workers=workers)
-        
+
         for i, pdf_path in enumerate(pdf_paths):
             processing_status["current_file"] = pdf_path.name
             processing_status["progress"] = (i / len(pdf_paths)) * 100
-            
+
             try:
                 # 处理 PDF
                 html = generator.process_pdf(pdf_path)
-                
+
                 # 验证参考文献
                 if validate:
                     stats = generator.validate_references(show_progress=False, use_concurrent=concurrent)
@@ -789,28 +789,28 @@ def process_files():
                     results["stats"]["cache_hits"] += stats["cache_hits"]
                     results["stats"]["api_calls"] += stats["api_calls"]
                     html = generator.generate_html_card()
-                    
+
                     # 跟踪 API 调用
                     track_api_call("crossref")
                     track_api_call("arxiv")
-                
+
                 # 保存 HTML
                 output_file = work_dir / f"{pdf_path.stem}.html"
                 output_file.write_text(html, encoding='utf-8')
-                
+
                 # 导出 BibTeX
                 if export_bibtex:
                     bibtex = generator.export_bibtex()
                     bibtex_file = work_dir / f"{pdf_path.stem}.bib"
                     bibtex_file.write_text(bibtex, encoding='utf-8')
-                
+
                 results["success"] += 1
                 results["files"].append({
                     "file": pdf_path.name,
                     "output": output_file.name,
                     "status": "success"
                 })
-                
+
             except Exception as e:
                 results["failed"] += 1
                 results["files"].append({
@@ -818,21 +818,21 @@ def process_files():
                     "error": str(e),
                     "status": "failed"
                 })
-            
+
             processing_status["completed"] = results["success"]
             processing_status["failed"] = results["failed"]
-        
+
         # 保存统计
         stats_file = work_dir / "batch-stats.json"
         stats_file.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding='utf-8')
-        
+
         # 压缩结果
         import zipfile
         zip_path = work_dir.parent / f"{work_dir.name}.zip"
         with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
             for file in work_dir.rglob('*'):
                 zipf.write(file, file.relative_to(work_dir))
-        
+
         processing_status["active"] = False
         processing_status["progress"] = 100
         processing_status["result"] = {
@@ -844,10 +844,10 @@ def process_files():
             "invalid": results["stats"]["invalid"],
             "download_url": f"/api/download/{zip_path.name}"
         }
-    
+
     thread = threading.Thread(target=process_background)
     thread.start()
-    
+
     return jsonify({"status": "started"})
 
 
@@ -861,15 +861,15 @@ def download(filename):
 
 if __name__ == "__main__":
     import os
-    
+
     # 直接从环境变量读取 (Render 自动设置 PORT)
     host = "0.0.0.0"
     port = int(os.environ.get('PORT', 5000))
-    
+
     # 禁用 Flask 启动 banner (Render Python 3.14 兼容)
     import sys
     sys.stdout = open(os.devnull, 'w')
     sys.stderr = open(os.devnull, 'w')
-    
+
     # 启动服务
     app.run(host=host, port=port, debug=False, threaded=True, use_reloader=False)

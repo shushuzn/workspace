@@ -58,7 +58,7 @@ class Entity:
     name: str
     name_cn: Optional[str] = None
     properties: Dict = field(default_factory=dict)
-    
+
     def to_dict(self) -> Dict:
         return asdict(self)
 
@@ -70,7 +70,7 @@ class Relation:
     target: str  # 目标实体 ID
     type: str
     properties: Dict = field(default_factory=dict)
-    
+
     def to_dict(self) -> Dict:
         return asdict(self)
 
@@ -80,19 +80,19 @@ class KnowledgeGraph:
     """知识图谱"""
     entities: Dict[str, Entity] = field(default_factory=dict)
     relations: List[Relation] = field(default_factory=list)
-    
+
     def add_entity(self, entity: Entity):
         """添加实体"""
         self.entities[entity.id] = entity
-    
+
     def add_relation(self, relation: Relation):
         """添加关系"""
         self.relations.append(relation)
-    
+
     def get_entity(self, entity_id: str) -> Optional[Entity]:
         """获取实体"""
         return self.entities.get(entity_id)
-    
+
     def get_neighbors(self, entity_id: str, relation_type: Optional[str] = None) -> List[Tuple[str, str]]:
         """获取邻居节点"""
         neighbors = []
@@ -104,7 +104,7 @@ class KnowledgeGraph:
                 if relation_type is None or rel.type == relation_type:
                     neighbors.append((rel.source, rel.type))
         return neighbors
-    
+
     def to_dict(self) -> Dict:
         """转换为字典"""
         return {
@@ -112,18 +112,18 @@ class KnowledgeGraph:
             'relations': [r.to_dict() for r in self.relations],
             'stats': self.get_stats()
         }
-    
+
     def get_stats(self) -> Dict:
         """获取统计信息"""
         entity_types = defaultdict(int)
         relation_types = defaultdict(int)
-        
+
         for entity in self.entities.values():
             entity_types[entity.type] += 1
-        
+
         for relation in self.relations:
             relation_types[relation.type] += 1
-        
+
         return {
             'total_entities': len(self.entities),
             'total_relations': len(self.relations),
@@ -138,32 +138,32 @@ class KnowledgeGraph:
 
 class AutoKGBuilder:
     """自动知识图谱构建器"""
-    
+
     def __init__(self):
         self.graph = KnowledgeGraph()
         self.entity_counter = 0
-    
+
     def generate_entity_id(self, entity_type: str) -> str:
         """生成实体 ID"""
         self.entity_counter += 1
         return f"{entity_type}_{self.entity_counter:04d}"
-    
+
     def build_from_ner_results(self, ner_results: List[Dict]) -> KnowledgeGraph:
         """从 NER 结果构建图谱"""
         for result in ner_results:
             text = result.get('text', '')
             entities = result.get('entities', [])
-            
+
             # 1. 创建材料实体
             material_entities = [e for e in entities if e['label'] == 'MATERIAL']
             material_id = None
-            
+
             for mat in material_entities:
                 material_id = self._create_entity(
                     EntityType.MATERIAL,
                     mat['text']
                 )
-            
+
             # 2. 创建性能实体并建立关系
             property_entities = [e for e in entities if e['label'] == 'PROPERTY']
             for prop in property_entities:
@@ -173,25 +173,25 @@ class AutoKGBuilder:
                 )
                 if material_id:
                     self._create_relation(material_id, prop_id, RelationType.HAS_PROPERTY)
-                
+
                 # 查找关联的数值和单位
                 value_entities = [e for e in entities if e['label'] == 'VALUE']
                 unit_entities = [e for e in entities if e['label'] == 'UNIT']
-                
+
                 if value_entities:
                     value_id = self._create_entity(
                         EntityType.VALUE,
                         value_entities[0]['text']
                     )
                     self._create_relation(prop_id, value_id, RelationType.HAS_VALUE)
-                
+
                 if unit_entities:
                     unit_id = self._create_entity(
                         EntityType.UNIT,
                         unit_entities[0]['text']
                     )
                     self._create_relation(prop_id, unit_id, RelationType.MEASURED_IN)
-            
+
             # 3. 创建结构实体并建立关系
             structure_entities = [e for e in entities if e['label'] == 'CRYSTAL_STRUCTURE']
             for struct in structure_entities:
@@ -201,7 +201,7 @@ class AutoKGBuilder:
                 )
                 if material_id:
                     self._create_relation(material_id, struct_id, RelationType.HAS_STRUCTURE)
-            
+
             # 4. 创建方法实体并建立关系
             method_entities = [e for e in entities if e['label'] == 'SYNTHESIS_KEYWORD']
             for method in method_entities:
@@ -211,9 +211,9 @@ class AutoKGBuilder:
                 )
                 if material_id:
                     self._create_relation(material_id, method_id, RelationType.SYNTHESIZED_BY)
-        
+
         return self.graph
-    
+
     def _create_entity(self, entity_type: str, name: str) -> str:
         """创建实体"""
         entity_id = self.generate_entity_id(entity_type)
@@ -224,7 +224,7 @@ class AutoKGBuilder:
         )
         self.graph.add_entity(entity)
         return entity_id
-    
+
     def _create_relation(self, source_id: str, target_id: str, relation_type: str):
         """创建关系"""
         relation = Relation(
@@ -233,7 +233,7 @@ class AutoKGBuilder:
             type=relation_type
         )
         self.graph.add_relation(relation)
-    
+
     def build_from_property_data(self, property_data: List[Dict]) -> KnowledgeGraph:
         """从性能数据构建图谱"""
         for data in property_data:
@@ -241,20 +241,20 @@ class AutoKGBuilder:
             property_name = data.get('property_name', 'Unknown')
             value = data.get('value')
             unit = data.get('unit', '')
-            
+
             # 创建材料实体
             material_id = self._create_entity(EntityType.MATERIAL, material_name)
-            
+
             # 创建性能实体
             property_id = self._create_entity(
                 EntityType.PROPERTY,
                 property_name,
                 data.get('property_name_cn')
             )
-            
+
             # 建立关系
             self._create_relation(material_id, property_id, RelationType.HAS_PROPERTY)
-            
+
             # 创建数值实体
             if value is not None:
                 value_id = self._create_entity(
@@ -263,29 +263,29 @@ class AutoKGBuilder:
                     properties={'numeric_value': value}
                 )
                 self._create_relation(property_id, value_id, RelationType.HAS_VALUE)
-            
+
             # 创建单位实体
             if unit:
                 unit_id = self._create_entity(EntityType.UNIT, unit)
                 self._create_relation(property_id, unit_id, RelationType.MEASURED_IN)
-        
+
         return self.graph
-    
+
     def export_json(self, output_path: str):
         """导出为 JSON"""
         output_file = Path(output_path)
         output_file.parent.mkdir(parents=True, exist_ok=True)
-        
+
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(self.graph.to_dict(), f, ensure_ascii=False, indent=2)
-        
+
         print(f"知识图谱已保存到 {output_path}")
-    
+
     def export_for_visualization(self) -> Dict:
         """导出用于可视化的格式"""
         nodes = []
         links = []
-        
+
         # 转换节点
         for entity in self.graph.entities.values():
             nodes.append({
@@ -294,7 +294,7 @@ class AutoKGBuilder:
                 'type': entity.type,
                 'group': hash(entity.type) % 10
             })
-        
+
         # 转换边
         for relation in self.graph.relations:
             links.append({
@@ -302,7 +302,7 @@ class AutoKGBuilder:
                 'target': relation.target,
                 'type': relation.type
             })
-        
+
         return {
             'nodes': nodes,
             'links': links
@@ -318,12 +318,12 @@ def main():
     print("=" * 60)
     print("Auto Knowledge Graph Builder - 知识图谱自动构建器")
     print("=" * 60)
-    
+
     # 1. 测试构建
     print("\n[1/3] 测试知识图谱构建...")
-    
+
     builder = AutoKGBuilder()
-    
+
     # 示例 NER 结果
     ner_results = [
         {
@@ -350,9 +350,9 @@ def main():
             ]
         },
     ]
-    
+
     graph = builder.build_from_ner_results(ner_results)
-    
+
     # 2. 统计信息
     print("\n[2/3] 图谱统计...")
     stats = graph.get_stats()
@@ -360,21 +360,21 @@ def main():
     print(f"  关系总数：{stats['total_relations']}")
     print(f"  实体类型分布：{stats['entity_types']}")
     print(f"  关系类型分布：{stats['relation_types']}")
-    
+
     # 3. 导出
     print("\n[3/3] 导出图谱...")
     builder.export_json("data/knowledge-graph-example.json")
-    
+
     # 可视化格式
     viz_data = builder.export_for_visualization()
     print(f"  节点数：{len(viz_data['nodes'])}")
     print(f"  边数：{len(viz_data['links'])}")
-    
+
     # 显示部分节点
     print("\n  部分节点:")
     for node in viz_data['nodes'][:5]:
         print(f"    - {node['label']}")
-    
+
     print("\n" + "=" * 60)
     print("知识图谱自动构建器准备完成！")
     print("=" * 60)

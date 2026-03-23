@@ -24,17 +24,17 @@ except ImportError:
 
 class GraphGenerator:
     """知识图谱生成器"""
-    
+
     def __init__(self):
         if KnowledgeCardGenerator:
             self.generator = KnowledgeCardGenerator()
         if KeywordExtractor:
             self.extractor = KeywordExtractor()
-    
+
     def extract_keywords(self, text: str, top_n: int = 50) -> List[str]:
         """提取关键词 (TF-IDF + TextRank)"""
         return self.extractor.extract_combined(text, top_n=top_n)
-    
+
     def generate_keyword_graph(self, papers: List[Dict]) -> Dict:
         """
         生成关键词共现图谱
@@ -48,25 +48,25 @@ class GraphGenerator:
         # 收集所有关键词
         all_keywords = set()
         paper_keywords = []
-        
+
         for paper in papers:
             keywords = paper.get('keywords', [])
             all_keywords.update(keywords)
             paper_keywords.append(keywords)
-        
+
         # 创建节点
         nodes = [
             {"name": kw, "symbolSize": 20 + len(kw) * 2, "category": 0}
             for kw in all_keywords
         ]
-        
+
         # 创建边 (共现关系)
         links = []
         for i, kw1 in enumerate(all_keywords):
             for kw2 in list(all_keywords)[i+1:]:
                 # 计算共现次数
                 cooccurrence = sum(
-                    1 for kws in paper_keywords 
+                    1 for kws in paper_keywords
                     if kw1 in kws and kw2 in kws
                 )
                 if cooccurrence > 0:
@@ -75,7 +75,7 @@ class GraphGenerator:
                         "target": kw2,
                         "value": cooccurrence
                     })
-        
+
         return {
             "nodes": nodes,
             "links": links,
@@ -86,7 +86,7 @@ class GraphGenerator:
                 "papers": len(papers)
             }
         }
-    
+
     def generate_citation_graph(self, papers: List[Dict]) -> Dict:
         """
         生成论文引用图谱 (DOI 匹配 + 标题模糊匹配)
@@ -100,23 +100,23 @@ class GraphGenerator:
         # 1. 创建论文索引 (DOI 和标题)
         doi_index = {}  # DOI → paper_id
         title_index = {}  # 标题简化 → paper_id
-        
+
         print(f"引用图谱：处理 {len(papers)} 篇论文")
-        
+
         for i, paper in enumerate(papers):
             # DOI 索引
             doi = paper.get('doi', '')
             if doi:
                 doi_index[doi.lower()] = i
                 print(f"  DOI 索引 [{i}]: {doi.lower()}")
-            
+
             # 标题索引 (简化版)
             title = paper.get('title', '')
             if title:
                 simplified = self._simplify_title(title)
                 title_index[simplified] = i
                 print(f"  标题索引 [{i}]: {simplified[:50]}...")
-        
+
         # 2. 创建论文节点
         nodes = []
         for i, paper in enumerate(papers):
@@ -131,26 +131,26 @@ class GraphGenerator:
                 "value": year  # 用于 tooltip 显示
             })
             print(f"  节点 [{i}]: {title[:30]}... (年份：{year})")
-        
+
         # 3. 创建引用边 (DOI 匹配 + 标题匹配)
         links = []
         link_set = set()  # 避免重复
-        
+
         print(f"开始匹配引用关系...")
-        
+
         for i, paper in enumerate(papers):
             references = paper.get('references', [])
             print(f"  论文 [{i}] 有 {len(references)} 篇参考文献")
-            
+
             for ref in references:
                 target_id = None
-                
+
                 # 尝试 DOI 匹配
                 ref_doi = ref.get('doi', '')
                 if ref_doi:
                     target_id = doi_index.get(ref_doi.lower())
                     print(f"    DOI 匹配：{ref_doi.lower()} → {target_id}")
-                
+
                 # 尝试标题匹配
                 if target_id is None:
                     ref_title = ref.get('title', '')
@@ -158,7 +158,7 @@ class GraphGenerator:
                         simplified = self._simplify_title(ref_title)
                         target_id = title_index.get(simplified)
                         print(f"    标题匹配：{simplified[:30]}... → {target_id}")
-                
+
                 # 找到匹配的引用
                 if target_id is not None and target_id != i:
                     link_key = f"{i}->{target_id}"
@@ -170,16 +170,16 @@ class GraphGenerator:
                         })
                         link_set.add(link_key)
                         print(f"    ✅ 添加引用边：{i} → {target_id}")
-        
+
         print(f"引用图谱完成：{len(nodes)} 节点，{len(links)} 边")
-        
+
         # 确保节点有 name 字段
         for node in nodes:
             if "name" not in node:
                 node["name"] = f"Paper {node.get('paper_id', 'Unknown')}"
             if "symbolSize" not in node:
                 node["symbolSize"] = 30
-        
+
         return {
             "nodes": nodes,
             "links": links,
@@ -190,7 +190,7 @@ class GraphGenerator:
                 "papers": len(papers)
             }
         }
-    
+
     def _simplify_title(self, title: str) -> str:
         """
         简化标题用于匹配
@@ -212,7 +212,7 @@ class GraphGenerator:
             if simplified.startswith(prefix):
                 simplified = simplified[len(prefix):]
         return simplified
-    
+
     def generate_domain_graph(self, papers: List[Dict]) -> Dict:
         """
         生成领域知识图谱 (概念 + 关系)
@@ -234,22 +234,22 @@ class GraphGenerator:
             "clustering": 0,
             "feature extraction": 0,
         }
-        
+
         # 统计概念出现
         for paper in papers:
-            text = (paper.get('title', '') + ' ' + 
+            text = (paper.get('title', '') + ' ' +
                    paper.get('abstract', '')).lower()
-            
+
             for concept in domain_concepts:
                 if concept in text:
                     domain_concepts[concept] += 1
-        
+
         # 创建节点
         nodes = [
             {"name": concept, "symbolSize": 20 + count * 5, "category": 0}
             for concept, count in domain_concepts.items() if count > 0
         ]
-        
+
         # 创建关系 (预定义)
         relations = [
             ("machine learning", "deep learning"),
@@ -262,14 +262,14 @@ class GraphGenerator:
             ("classification", "feature extraction"),
             ("regression", "feature extraction"),
         ]
-        
+
         links = [
             {"source": s, "target": t, "value": 1}
             for s, t in relations
-            if any(n["name"] == s for n in nodes) and 
+            if any(n["name"] == s for n in nodes) and
                any(n["name"] == t for n in nodes)
         ]
-        
+
         return {
             "nodes": nodes,
             "links": links,

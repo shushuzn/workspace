@@ -33,7 +33,7 @@ cover_template_path = Path("research/docs/COVER_LETTER_COMPLETE.md")
 if cover_template_path.exists():
     with open(cover_template_path, 'r', encoding='utf-8') as f:
         cover_content = f.read()
-    
+
     # 自动填写已知信息
     auto_filled = {
         "[Date]": datetime.now().strftime("%B %d, %Y"),
@@ -44,10 +44,10 @@ if cover_template_path.exists():
         "+60.2%": "+60.2%",
         "~12 hours": "~12 hours"
     }
-    
+
     for old, new in auto_filled.items():
         cover_content = cover_content.replace(old, new)
-    
+
     # 保存自动填写版本
     cover_filled_path = Path("research/docs/COVER_LETTER_FILLED.md")
     with open(cover_filled_path, 'w', encoding='utf-8') as f:
@@ -66,7 +66,7 @@ if cover_template_path.exists():
         f.write("```text\n")
         f.write(cover_content)
         f.write("\n```\n\n")
-    
+
     print(f"  [OK] 自动填写版已保存：{cover_filled_path}")
     print(f"  待填写项：7 项 (作者信息)")
 else:
@@ -192,13 +192,13 @@ package_list_path = Path("research/docs/FINAL_SUBMISSION_PACKAGE.md")
 with open(package_list_path, 'w', encoding='utf-8') as f:
     f.write("# 最终投稿包清单\n\n")
     f.write(f"**生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-    
+
     for category, items in final_package.items():
         f.write(f"## {category}\n\n")
         for name, path in items.items():
             f.write(f"- **{name}:** `{path}`\n")
         f.write("\n")
-    
+
     f.write("## 投稿前检查\n\n")
     f.write("- [ ] 所有文件已准备\n")
     f.write("- [ ] Cover Letter 已填写完整\n")

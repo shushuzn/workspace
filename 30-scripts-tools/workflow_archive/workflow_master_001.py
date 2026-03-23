@@ -74,13 +74,13 @@ class WorkflowMaster:
     def __init__(self):
         self.logger_path = Path("13-memory/.workflow_logs/master.json")
         self.logger_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     def _log(self, workflow, step, status):
         log = json.loads(self.logger_path.read_text(encoding="utf-8", errors="replace")) if self.logger_path.exists() else {"runs": []}
         log["runs"].append({"time": datetime.now().isoformat(), "workflow": workflow, "step": step, "status": status})
         if len(log["runs"]) > 100: log["runs"] = log["runs"][-50:]
         self.logger_path.write_text(json.dumps(log, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def _run_step(self, step_info, workflow_id):
         tool, args = step_info["tool"], step_info.get("args", [])
         cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
@@ -91,16 +91,16 @@ class WorkflowMaster:
             return {"tool": tool, "status": "timeout"}
         except Exception:
             return {"tool": tool, "status": "error"}
-    
+
     def run(self, workflow_id, parallel=False):
         global WORKFLOWS
         WORKFLOWS = load_workflows()
-        
+
         if workflow_id not in WORKFLOWS:
             return {"error": f"Unknown: {workflow_id}", "available": list(WORKFLOWS.keys())}
-        
+
         wf = WORKFLOWS[workflow_id]
-        
+
         # Show persona collaboration header
         persona = wf.get("persona", "coordinator")
         print(f"\n[MULTI-AGENT COLLABORATION]")
@@ -108,14 +108,14 @@ class WorkflowMaster:
         print(f"  Primary Persona: {persona.upper()}")
         print(f"  Category: {wf.get('category', 'other')}")
         print("=" * 50)
-        
+
         if "workflow_dir" in wf:
             return self._run_dir_workflow(workflow_id, wf)
-        
+
         results = []
         print(f"Running: {wf['name']}")
         print("=" * 50)
-        
+
         if parallel and len(wf["steps"]) > 1:
             with ThreadPoolExecutor(max_workers=min(4, len(wf["steps"]))) as executor:
                 futures = {executor.submit(self._run_step, step, workflow_id): i for i, step in enumerate(wf["steps"])}
@@ -142,11 +142,11 @@ class WorkflowMaster:
                     print("ERROR")
                     results.append({"step": i+1, "tool": tool, "status": "error"})
                 self._log(workflow_id, tool, results[-1]["status"])
-        
+
         ok = sum(1 for r in results if r["status"] == "ok")
         print(f"\nComplete: {ok}/{len(results)} OK")
         return {"workflow": workflow_id, "results": results}
-    
+
     def _run_dir_workflow(self, workflow_id, wf):
         wf_dir = Path(wf["workflow_dir"])
         if not wf_dir.exists():
@@ -168,7 +168,7 @@ class WorkflowMaster:
             except subprocess.TimeoutExpired:
                 return {"workflow": workflow_id, "status": "timeout"}
         return {"error": "No workflow.json or run.py found"}
-    
+
     def _run_from_config(self, workflow_id, wf, config):
         results = []
         for i, step in enumerate(config.get("steps", [])):
@@ -187,12 +187,12 @@ class WorkflowMaster:
         ok = sum(1 for r in results if r["status"] == "ok")
         print(f"\nComplete: {ok}/{len(results)} OK")
         return {"workflow": workflow_id, "results": results}
-    
+
     def list_workflows(self):
         global WORKFLOWS
         WORKFLOWS = load_workflows()
         return [{"id": k, "name": v["name"], "category": v.get("category", "other"), "steps": len(v.get("steps", [])), "type": "dir" if "workflow_dir" in v else "steps"} for k, v in WORKFLOWS.items()]
-    
+
     def list_categories(self):
         global WORKFLOWS
         WORKFLOWS = load_workflows()

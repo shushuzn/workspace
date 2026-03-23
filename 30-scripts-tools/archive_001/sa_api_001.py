@@ -34,13 +34,13 @@ SPEC_FILE = API_DIR / "api_spec.json"
 
 class StockAPIService:
     """股票分析 API 服务"""
-    
+
     def __init__(self):
         self.api_dir = API_DIR
         self.config = self._load_config()
-        
+
         self.api_dir.mkdir(parents=True, exist_ok=True)
-    
+
     def _load_config(self) -> dict:
         default = {
             "version": "1.0.0",
@@ -64,7 +64,7 @@ class StockAPIService:
                 "alerts": "/api/v1/alerts"
             }
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -72,7 +72,7 @@ class StockAPIService:
             except (Exception,):
                 return default
         return default
-    
+
     def generate_api_spec(self) -> dict:
         """
 # ==============================================================================
@@ -154,7 +154,7 @@ Fixes:
                 }
             }
         }
-        
+
         # Quote endpoint
         spec["paths"]["/api/v1/quote/{symbol}"] = {
             "get": {
@@ -188,7 +188,7 @@ Fixes:
                 }
             }
         }
-        
+
         # History endpoint
         spec["paths"]["/api/v1/history/{symbol}"] = {
             "get": {
@@ -200,7 +200,7 @@ Fixes:
                 ]
             }
         }
-        
+
         # Indicators endpoint
         spec["paths"]["/api/v1/indicators/{symbol}"] = {
             "get": {
@@ -211,7 +211,7 @@ Fixes:
                 ]
             }
         }
-        
+
         # Signals endpoint
         spec["paths"]["/api/v1/signals/{symbol}"] = {
             "get": {
@@ -236,7 +236,7 @@ Fixes:
                 }
             }
         }
-        
+
         # Portfolio endpoint
         spec["paths"]["/api/v1/portfolio"] = {
             "get": {
@@ -259,7 +259,7 @@ Fixes:
                 }
             }
         }
-        
+
         # Backtest endpoint
         spec["paths"]["/api/v1/backtest"] = {
             "post": {
@@ -278,7 +278,7 @@ Fixes:
                 }
             }
         }
-        
+
         # Alerts endpoint
         spec["paths"]["/api/v1/alerts"] = {
             "get": {
@@ -290,9 +290,9 @@ Fixes:
                 "security": [{"ApiKeyAuth": []}]
             }
         }
-        
+
         return spec
-    
+
     def generate_client_example(self) -> str:
         """生成客户端示例代码"""
         client_code = '''#!/usr/bin/env python

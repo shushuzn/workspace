@@ -49,7 +49,7 @@ def detect_domain(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read().lower()
-        
+
         if '---' in content:
             frontmatter = content.split('---')[1]
             if 'tag:' in frontmatter or 'tags:' in frontmatter:
@@ -58,12 +58,12 @@ def detect_domain(filepath):
                         match = re.search(r'cs([A-Z]{2})', line, re.IGNORECASE)
                         if match:
                             return f"cs{match.group(1)}"
-        
+
         for domain, keywords in DOMAIN_KEYWORDS.items():
             for keyword in keywords:
                 if keyword in content:
                     return domain
-        
+
         return 'csAI'
     except Exception as e:
         print(f"  [WARN] Domain detection failed: {e}")
@@ -74,10 +74,10 @@ def get_new_path(parsed, domain):
     year = date.strftime('%Y')
     month = date.strftime('%m')
     day = date.strftime('%Y-%m-%d')
-    
+
     new_dir = NEW_ARXIV_ROOT / "daily" / year / month / day / domain
     new_filename = f"{day}-{parsed['time'].replace(':', '')}-{parsed['title']}.md"
-    
+
     return new_dir / new_filename
 
 def ensure_directory(path):
@@ -89,33 +89,33 @@ def migrate_execute():
     print("=" * 70)
     print("Arxiv Data Migration - Recovery from Backup")
     print("=" * 70)
-    
+
     if not OLD_ARXIV_PATH.exists():
         print(f"[ERROR] Backup directory not found: {OLD_ARXIV_PATH}")
         return
-    
+
     # 1. Ensure new root
     print(f"\n[1/3] Initializing new directory...")
     NEW_ARXIV_ROOT.mkdir(parents=True, exist_ok=True)
     print(f"  [OK] Ready: {NEW_ARXIV_ROOT}")
-    
+
     # 2. Migrate files
     print(f"\n[2/3] Migrating files...")
     files = list(OLD_ARXIV_PATH.glob("*.md"))
     stats = {'total': len(files), 'success': 0, 'failed': 0, 'by_domain': {}, 'by_date': {}}
-    
+
     for i, filepath in enumerate(files, 1):
         filename = filepath.name
         parsed = parse_old_filename(filename)
-        
+
         if not parsed:
             print(f"  [{i}/{len(files)}] [SKIP] Cannot parse: {filename}")
             stats['failed'] += 1
             continue
-        
+
         domain = detect_domain(filepath)
         new_path = get_new_path(parsed, domain)
-        
+
         try:
             ensure_directory(new_path)
             shutil.copy2(filepath, new_path)
@@ -127,11 +127,11 @@ def migrate_execute():
         except Exception as e:
             print(f"  [{i}/{len(files)}] [FAIL] {filename} - {e}")
             stats['failed'] += 1
-    
+
     # 3. Generate report
     print(f"\n[3/3] Generating report...")
     report_path = NEW_ARXIV_ROOT / "migration-report-recovery.md"
-    
+
     content = f"""---
 created: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 tags: [arxiv, migration, log, recovery]
@@ -162,14 +162,14 @@ Backup: {OLD_ARXIV_PATH}
 | Domain | Count |
 |--------|-------|
 """
-    
+
     for domain, count in sorted(stats['by_domain'].items()):
         content += f"| {domain} | {count} |\n"
-    
+
     content += "\n## Date Distribution\n\n"
     for date, count in sorted(stats['by_date'].items()):
         content += f"- {date}: {count} papers\n"
-    
+
     content += f"""
 ## Output Path
 
@@ -178,12 +178,12 @@ Backup: {OLD_ARXIV_PATH}
 ---
 *Auto-generated*
 """
-    
+
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     print(f"  [OK] Report: {report_path}")
-    
+
     # Output
     print("\n" + "=" * 70)
     print(f"[SUCCESS] Migration complete")

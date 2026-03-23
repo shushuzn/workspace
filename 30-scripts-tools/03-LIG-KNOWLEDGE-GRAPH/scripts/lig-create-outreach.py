@@ -26,7 +26,7 @@ TOPICS = [
     "06-LIG 的柔韧性为什么这么好",
     "07-LIG 的比表面积优势",
     "08-LIG 制备只需一台激光器",
-    
+
     # 系列 2: LIG 怎么制备？(制备工艺 8 篇)
     "09-LIG 制备原理光热转化",
     "10-CO2 激光器 vs 紫外激光器",
@@ -36,7 +36,7 @@ TOPICS = [
     "14-聚酰亚胺 PI 薄膜详解",
     "15-木质素制备 LIG 新进展",
     "16-食品材料也能做 LIG",
-    
+
     # 系列 3: LIG 有什么用？(应用领域 10 篇)
     "17-LIG 在超级电容器中的应用",
     "18-LIG 在锂离子电池中的应用",
@@ -48,7 +48,7 @@ TOPICS = [
     "24-LIG 在葡萄糖检测中的应用",
     "25-LIG 在神经电极中的应用",
     "26-LIG 在可穿戴设备中的应用",
-    
+
     # 系列 4: LIG 的未来 (前景展望 6 篇)
     "27-LIG 产业化现状 2026",
     "28-LIG 面临的挑战与解决",
@@ -60,12 +60,12 @@ TOPICS = [
 
 def create_outreach_article(topic_id, topic_title):
     """创建单篇科普笔记"""
-    
+
     # 解析系列信息
     series_num = (topic_id - 1) // 8 + 1
     series_names = ["基础入门", "制备工艺", "应用领域", "前景展望"]
     series_name = series_names[series_num - 1]
-    
+
     # 生成内容模板
     content = f"""# LIG 科普笔记 {topic_id:02d}: {topic_title}
 
@@ -194,36 +194,36 @@ LIG 生物传感器可检测：
 
 *本系列共 32 篇，覆盖 LIG 基础/制备/应用/前景四大主题*
 """
-    
+
     return content
 
 def main():
     """主函数：批量创作 32 篇科普笔记"""
-    
+
     os.makedirs(OUTREACH_DIR, exist_ok=True)
-    
+
     print(f"📝 开始创作 LIG 科普笔记 (共{len(TOPICS)}篇)")
     print(f"📁 输出目录：{OUTREACH_DIR}")
     print("-" * 60)
-    
+
     created_count = 0
-    
+
     for i, topic in enumerate(TOPICS, 1):
         filename = f"lig-outreach-{i:02d}.md"
         filepath = os.path.join(OUTREACH_DIR, filename)
-        
+
         content = create_outreach_article(i, topic)
-        
+
         with open(filepath, 'w', encoding='utf-8') as f:
             f.write(content)
-        
+
         created_count += 1
         print(f"✅ [{i:02d}/32] {filename}")
-    
+
     print("-" * 60)
     print(f"🎉 完成！共创作 {created_count} 篇科普笔记")
     print(f"📊 预计 XP 增长：{created_count * 50} XP (教育普及维度)")
-    
+
     # 生成索引文件
     index_content = f"""# LIG 科普笔记索引
 
@@ -238,44 +238,44 @@ def main():
 | 编号 | 主题 | 难度 |
 |------|------|------|
 """
-    
+
     for i in range(1, 9):
         index_content += f"| {i:02d} | {TOPICS[i-1]} | ⭐⭐ |\n"
-    
+
     index_content += """
 ## 系列 2: 制备工艺 (09-16)
 
 | 编号 | 主题 | 难度 |
 |------|------|------|
 """
-    
+
     for i in range(9, 17):
         index_content += f"| {i:02d} | {TOPICS[i-1]} | ⭐⭐⭐ |\n"
-    
+
     index_content += """
 ## 系列 3: 应用领域 (17-26)
 
 | 编号 | 主题 | 难度 |
 |------|------|------|
 """
-    
+
     for i in range(17, 27):
         index_content += f"| {i:02d} | {TOPICS[i-1]} | ⭐⭐⭐ |\n"
-    
+
     index_content += """
 ## 系列 4: 前景展望 (27-32)
 
 | 编号 | 主题 | 难度 |
 |------|------|------|
 """
-    
+
     for i in range(27, 33):
         index_content += f"| {i:02d} | {TOPICS[i-1]} | ⭐⭐ |\n"
-    
+
     index_path = os.path.join(OUTREACH_DIR, "README.md")
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(index_content)
-    
+
     print(f"📑 索引文件：{index_path}")
 
 if __name__ == "__main__":

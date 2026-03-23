@@ -43,7 +43,7 @@ VIOLATION_TYPES = {
         "auto_lockdown": True,
         "notify_admin": True
     },
-    
+
     # High 级别
     "skip_workflow_step": {
         "name": "跳过工作流步骤",
@@ -85,7 +85,7 @@ VIOLATION_TYPES = {
         "auto_lockdown": False,
         "notify_admin": True
     },
-    
+
     # Medium 级别
     "batch_execution": {
         "name": "批量执行",
@@ -111,7 +111,7 @@ VIOLATION_TYPES = {
         "auto_lockdown": False,
         "notify_admin": False
     },
-    
+
     # Low 级别
     "invalid_tool_call": {
         "name": "无效工具调用",
@@ -190,15 +190,15 @@ PENALTY_LEVELS = {
 
 def record_violation(violation_type: str, session_id: str, details: str = None, auto_triggered: bool = False) -> dict:
     """记录违规 (强化版)"""
-    
+
     if violation_type not in VIOLATION_TYPES:
         return {
             "status": "error",
             "reason": f"未知违规类型：{violation_type}"
         }
-    
+
     violation_info = VIOLATION_TYPES[violation_type]
-    
+
     # 记录违规
     entry = {
         "id": f"V-{datetime.now().strftime('%Y%m%d%H%M%S')}-{session_id[-6:]}",
@@ -212,22 +212,22 @@ def record_violation(violation_type: str, session_id: str, details: str = None, 
         "auto_triggered": auto_triggered,
         "lockdown_triggered": violation_info.get("auto_lockdown", False)
     }
-    
+
     # 追加到日志
     with open(VIOLATION_LOG, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-    
+
     # 更新惩罚状态
     penalty_result = update_penalty_state(violation_info)
-    
+
     # 如果需要自动封锁
     if violation_info.get("auto_lockdown", False):
         activate_lockdown(session_id, violation_type, entry["id"])
-    
+
     # 如果需要通知管理员
     if violation_info.get("notify_admin", False):
         log_admin_notification(entry)
-    
+
     return {
         "status": "recorded",
         "violation": entry,
@@ -238,7 +238,7 @@ def record_violation(violation_type: str, session_id: str, details: str = None, 
 
 def update_penalty_state(violation_info: dict) -> dict:
     """更新惩罚状态 (强化版)"""
-    
+
     # 读取现有状态
     current_points = 0
     consecutive_violations = 0
@@ -247,11 +247,11 @@ def update_penalty_state(violation_info: dict) -> dict:
             state = json.load(f)
             current_points = state.get("total_points", 0)
             consecutive_violations = state.get("consecutive_violations", 0)
-    
+
     # 累加分数
     new_points = violation_info["penalty_points"]
     total_points = current_points + new_points
-    
+
     # 连续违规加倍惩罚
     consecutive_violations += 1
     if consecutive_violations >= 3:
@@ -259,21 +259,21 @@ def update_penalty_state(violation_info: dict) -> dict:
         message = f"连续违规第{consecutive_violations}次，惩罚加倍!"
     else:
         message = "违规已记录"
-    
+
     # 确定惩罚等级
     level = 0
     for threshold in sorted(PENALTY_LEVELS.keys(), reverse=True):
         if total_points >= threshold:
             level = PENALTY_LEVELS[threshold]["level"]
             break
-    
+
     # 计算解封时间
     cooldown_hours = violation_info["cooldown_hours"]
     if consecutive_violations >= 3:
         cooldown_hours *= 2  # 连续违规冷却时间加倍
-    
+
     unlock_time = datetime.now() + timedelta(hours=cooldown_hours)
-    
+
     # 保存状态
     state = {
         "total_points": total_points,
@@ -299,10 +299,10 @@ def update_penalty_state(violation_info: dict) -> dict:
         "cooldown_hours": cooldown_hours,
         "message": message
     }
-    
+
     with open(PENALTY_STATE, "w", encoding="utf-8") as f:
         json.dump(state, f, ensure_ascii=False, indent=2)
-    
+
     return {
         "total_points": total_points,
         "level": level,
@@ -313,7 +313,7 @@ def update_penalty_state(violation_info: dict) -> dict:
 
 def activate_lockdown(session_id: str, violation_type: str, violation_id: str):
     """激活封锁状态"""
-    
+
     lockdown_data = {
         "activated_at": datetime.now().isoformat(),
         "session_id": session_id,
@@ -322,20 +322,20 @@ def activate_lockdown(session_id: str, violation_type: str, violation_id: str):
         "status": "active",
         "reason": "触发自动封锁机制"
     }
-    
+
     with open(LOCKDOWN_FILE, "w", encoding="utf-8") as f:
         json.dump(lockdown_data, f, ensure_ascii=False, indent=2)
 
 def check_lockdown_status() -> dict:
     """检查封锁状态"""
-    
+
     if not LOCKDOWN_FILE.exists():
         return {"status": "none", "active": False}
-    
+
     try:
         with open(LOCKDOWN_FILE, "r", encoding="utf-8") as f:
             lockdown_data = json.load(f)
-        
+
         return {
             "status": "active",
             "active": True,
@@ -348,31 +348,31 @@ def check_lockdown_status() -> dict:
 
 def deactivate_lockdown(admin_code: str = None) -> dict:
     """解除封锁 (需要管理员权限)"""
-    
+
     if not LOCKDOWN_FILE.exists():
         return {"status": "skip", "message": "无活跃封锁"}
-    
+
     # 简化：实际应该验证管理员权限
     if admin_code is None:
         return {
             "status": "error",
             "message": "需要管理员授权码"
         }
-    
+
     try:
         LOCKDOWN_FILE.unlink()
-        
+
         # 重置惩罚状态
         if PENALTY_STATE.exists():
             PENALTY_STATE.unlink()
-        
+
         return {"status": "deactivated", "message": "封锁已解除"}
     except Exception as e:
         return {"status": "error", "reason": str(e)}
 
 def check_penalty_status() -> dict:
     """检查惩罚状态 (强化版)"""
-    
+
     # 先检查封锁
     lockdown = check_lockdown_status()
     if lockdown["active"]:
@@ -383,17 +383,17 @@ def check_penalty_status() -> dict:
             "message": "系统已被封锁",
             "details": lockdown
         }
-    
+
     if not PENALTY_STATE.exists():
         return {
             "status": "clean",
             "level": 0,
             "message": "无违规记录"
         }
-    
+
     with open(PENALTY_STATE, "r", encoding="utf-8") as f:
         state = json.load(f)
-    
+
     # 检查是否已解封
     unlock_time = datetime.fromisoformat(state["unlock_time"])
     if datetime.now() > unlock_time:
@@ -402,7 +402,7 @@ def check_penalty_status() -> dict:
             "status": "reset",
             "message": "惩罚已解除"
         }
-    
+
     return {
         "status": "penalized",
         "level": state["current_level"],
@@ -468,7 +468,7 @@ Fixes:
 """
 
 记录管理员通知"""
-    
+
     notification = {
         "type": "admin_notification",
         "timestamp": datetime.now().isoformat(),
@@ -476,17 +476,17 @@ Fixes:
         "urgency": "high" if violation_entry["severity"] in ["critical", "high"] else "medium",
         "status": "pending"
     }
-    
+
     admin_log = Path("30-scripts-tools/admin_notifications.jsonl")
     with open(admin_log, "a", encoding="utf-8") as f:
         f.write(json.dumps(notification, ensure_ascii=False) + "\n")
 
 def list_violations(session_id: str = None, limit: int = 50) -> dict:
     """列出违规记录 (强化版)"""
-    
+
     if not VIOLATION_LOG.exists():
         return {"status": "empty", "message": "无违规记录"}
-    
+
     violations = []
     with open(VIOLATION_LOG, "r", encoding="utf-8") as f:
         for line in f:
@@ -497,15 +497,15 @@ def list_violations(session_id: str = None, limit: int = 50) -> dict:
                 violations.append(entry)
             except Exception:
                 pass
-    
+
     violations.sort(key=lambda x: x["timestamp"], reverse=True)
-    
+
     # 统计
     severity_count = {"critical": 0, "high": 0, "medium": 0, "low": 0}
     for v in violations:
         sev = v.get("severity", "low")
         severity_count[sev] = severity_count.get(sev, 0) + 1
-    
+
     return {
         "status": "success",
         "count": len(violations),
@@ -520,7 +520,7 @@ def main():
         print("=" * 70)
         print("违规惩罚机制 v2.0 (强化版)")
         print("=" * 70)
-        
+
         # 检查当前状态
         status = check_penalty_status()
         print(f"\n当前状态：{status['status']}")
@@ -532,7 +532,7 @@ def main():
                 print(f"限制措施：{status['restrictions_count']} 项")
             if status.get('hours_remaining'):
                 print(f"剩余时间：{status['hours_remaining']:.1f}小时")
-        
+
         # 列出违规
         violations = list_violations()
         print(f"\n违规记录：{violations['count']} 条")
@@ -541,7 +541,7 @@ def main():
             print(f"  High: {violations['severity_breakdown'].get('high', 0)}")
             print(f"  Medium: {violations['severity_breakdown'].get('medium', 0)}")
             print(f"  Low: {violations['severity_breakdown'].get('low', 0)}")
-        
+
         print("\n" + "=" * 70)
         print("违规类型列表:")
         print("=" * 70)
@@ -549,11 +549,11 @@ def main():
             lockdown_flag = " [LOCKDOWN]" if info.get("auto_lockdown") else ""
             notify_flag = " [NOTIFY]" if info.get("notify_admin") else ""
             print(f"  {vtype:30s} +{info['penalty_points']:2d}分 {info['severity']:8s}{lockdown_flag}{notify_flag}")
-        
+
         return 0
-    
+
     command = sys.argv[1]
-    
+
     if command == "record" and len(sys.argv) >= 4:
         violation_type = sys.argv[2]
         session_id = sys.argv[3]
@@ -578,7 +578,7 @@ def main():
         print("  py penalty_system_v2.py reset [admin_code]")
         print("  py penalty_system_v2.py unlock [admin_code]")
         sys.exit(1)
-    
+
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result.get("status") in ["clean", "success", "recorded", "reset", "deactivated"] else 1
 

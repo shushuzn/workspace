@@ -13,22 +13,22 @@ from dataclasses import dataclass
 @dataclass
 class AlignmentResult:
     """对齐度计算结果"""
-    
+
     # 综合对齐度 (0-1)
     alignment_score: float
-    
+
     # 意图达成度 (0 或 1)
     intent_achievement: float
-    
+
     # 信念置信度 (0-1)
     belief_confidence: float
-    
+
     # 效率得分 (0-1)
     efficiency: float
-    
+
     # 各组件权重
     weights: Dict[str, float]
-    
+
     def to_dict(self) -> Dict[str, Any]:
         """转换为字典"""
         return {
@@ -38,7 +38,7 @@ class AlignmentResult:
             "efficiency": self.efficiency,
             "weights": self.weights
         }
-    
+
     def __str__(self) -> str:
         """字符串表示"""
         return (
@@ -51,14 +51,14 @@ class AlignmentResult:
 
 class AlignmentCalculator:
     """对齐度计算器"""
-    
+
     # 默认权重
     DEFAULT_WEIGHTS = {
         "intent": 0.5,      # 意图达成 50%
         "belief": 0.3,      # 信念置信 30%
         "efficiency": 0.2   # 效率奖励 20%
     }
-    
+
     def __init__(self, weights: Optional[Dict[str, float]] = None):
         """初始化计算器
         
@@ -66,7 +66,7 @@ class AlignmentCalculator:
             weights: 自定义权重 (可选)
         """
         self.weights = weights or self.DEFAULT_WEIGHTS.copy()
-    
+
     def calculate(
         self,
         intent_achieved: bool,
@@ -87,17 +87,17 @@ class AlignmentCalculator:
         """
         # 意图达成度 (0 或 1)
         intent_score = 1.0 if intent_achieved else 0.0
-        
+
         # 效率得分 (早退奖励)
         efficiency = 1 - (layers_used / total_layers)
-        
+
         # 综合对齐度
         alignment = (
             self.weights["intent"] * intent_score +
             self.weights["belief"] * belief_confidence +
             self.weights["efficiency"] * efficiency
         )
-        
+
         return AlignmentResult(
             alignment_score=alignment,
             intent_achievement=intent_score,
@@ -105,7 +105,7 @@ class AlignmentCalculator:
             efficiency=efficiency,
             weights=self.weights
         )
-    
+
     def calculate_batch(
         self,
         executions: list
@@ -123,7 +123,7 @@ class AlignmentCalculator:
         """
         if not executions:
             return {"avg_alignment": 0.0, "count": 0}
-        
+
         results = []
         for exec_data in executions:
             result = self.calculate(
@@ -132,7 +132,7 @@ class AlignmentCalculator:
                 layers_used=exec_data["layers_used"]
             )
             results.append(result.alignment_score)
-        
+
         return {
             "avg_alignment": sum(results) / len(results),
             "min_alignment": min(results),
@@ -145,10 +145,10 @@ class AlignmentCalculator:
 def demo():
     """演示使用"""
     print("=== 意图 - 信念对齐度计算演示 ===\n")
-    
+
     # 创建计算器
     calculator = AlignmentCalculator()
-    
+
     # 示例 1: 早退成功
     print("示例 1: 早退成功")
     result1 = calculator.calculate(
@@ -158,7 +158,7 @@ def demo():
     )
     print(result1)
     print()
-    
+
     # 示例 2: 全模型成功
     print("示例 2: 全模型成功")
     result2 = calculator.calculate(
@@ -168,7 +168,7 @@ def demo():
     )
     print(result2)
     print()
-    
+
     # 示例 3: 早退失败
     print("示例 3: 早退失败")
     result3 = calculator.calculate(
@@ -178,7 +178,7 @@ def demo():
     )
     print(result3)
     print()
-    
+
     # 批量计算
     print("=== 批量统计 ===")
     executions = [
@@ -188,7 +188,7 @@ def demo():
         {"intent_achieved": True, "belief_confidence": 0.88, "layers_used": 15},
         {"intent_achieved": True, "belief_confidence": 0.91, "layers_used": 10},
     ]
-    
+
     stats = calculator.calculate_batch(executions)
     print(f"平均对齐度：{stats['avg_alignment']:.4f}")
     print(f"最小对齐度：{stats['min_alignment']:.4f}")

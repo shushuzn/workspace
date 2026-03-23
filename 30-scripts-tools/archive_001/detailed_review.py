@@ -30,22 +30,22 @@ for f in files:
     if not p.exists():
         print(f"[DELETED] {f}")
         continue
-    
+
     content = p.read_text(encoding='utf-8', errors='ignore')
-    
+
     # 提取描述
     desc = ""
     doc_match = re.search(r'"""(.+?)"""', content, re.DOTALL)
     if doc_match:
         desc = doc_match.group(1).strip().split('\n')[0][:60]
-    
+
     # 提取主要函数
     funcs = re.findall(r'def (\w+)\(', content)
-    
+
     # 检查是否有实际逻辑
     lines = [l for l in content.split('\n') if l.strip() and not l.strip().startswith('#')]
     logic_lines = len(lines)
-    
+
     # 判断
     if 'register_tools' in content and len(funcs) <= 3 and logic_lines < 50:
         # 简单的注册器文件
@@ -58,7 +58,7 @@ for f in files:
     else:
         unclear.append((f, desc, funcs))
         status = "[UNSURE]"
-    
+
     print(f"\n{status} {f}")
     print(f"  Desc: {desc}")
     print(f"  Funcs: {funcs}")

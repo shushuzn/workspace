@@ -25,10 +25,10 @@ DASHBOARD_DIR.mkdir(parents=True, exist_ok=True)
 
 class DashboardView:
     """综合仪表盘"""
-    
+
     def __init__(self):
         self.dashboard_dir = DASHBOARD_DIR
-    
+
     def load_roadmaps(self) -> dict:
         """
 # ==============================================================================
@@ -75,15 +75,15 @@ Fixes:
 加载所有路线图"""
         dimensions = ["stock_analysis", "optimization", "protection", "automation"]
         roadmaps = {}
-        
+
         for dim in dimensions:
             file = Path(f"flow-archive/roadmaps/{dim}.json")
             if file.exists():
                 with open(file, "r", encoding="utf-8") as f:
                     roadmaps[dim] = json.load(f)
-        
+
         return roadmaps
-    
+
     def get_summary(self) -> dict:
         """获取汇总"""
         roadmaps = self.load_roadmaps()

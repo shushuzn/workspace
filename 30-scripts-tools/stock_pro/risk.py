@@ -19,10 +19,10 @@ def risk_profile(result):
     beta = result.get("beta", 1.0)
     pe = result.get("pe", 0)
     score = result["score"]
-    
+
     # Risk score components
     factors = []
-    
+
     # Beta risk
     if beta > 1.5:
         factors.append(("High Volatility", beta, "red"))
@@ -32,7 +32,7 @@ def risk_profile(result):
         factors.append(("Defensive", beta, "green"))
     else:
         factors.append(("Normal Volatility", beta, "white"))
-    
+
     # P/E risk
     if pe > 40:
         factors.append(("High Valuation", f"{pe:.1f}x", "red"))
@@ -42,7 +42,7 @@ def risk_profile(result):
         factors.append(("Value", f"{pe:.1f}x", "green"))
     else:
         factors.append(("Fair Valuation", f"{pe:.1f}x", "white"))
-    
+
     # Overall risk level
     if beta > 1.5 and pe > 40:
         risk_level = "HIGH"
@@ -53,7 +53,7 @@ def risk_profile(result):
     else:
         risk_level = "LOW"
         risk_color = "green"
-    
+
     return {
         "symbol": sym,
         "risk_level": risk_level,
@@ -68,17 +68,17 @@ def risk_report(results):
     """Generate risk comparison report"""
     if not results:
         return "[Risk] No data"
-    
+
     profiles = [risk_profile(r) for r in results]
-    
+
     report = "# Risk Analysis\n\n"
     report += "| Symbol | Risk | Beta | P/E | Factors |\n"
     report += "|--------|------|------|-----|--------|\n"
-    
+
     for p in sorted(profiles, key=lambda x: x["beta"], reverse=True):
         factors_str = ", ".join([f[0] for f in p["factors"]])
         report += f"| {p['symbol']} | {p['risk_level']} | {p['beta']:.1f} | {p['pe']:.1f}x | {factors_str} |\n"
-    
+
     return report
 
 
@@ -114,35 +114,35 @@ def diversification_check(portfolio_results):
             sector = "ETF"
         else:
             sector = "Other"
-        
+
         if sector not in sectors:
             sectors[sector] = []
         sectors[sector].append(r)
-    
+
     recommendations = []
-    
+
     if len(sectors) < 3:
         recommendations.append(f"[!] Only {len(sectors)} sectors - consider diversifying")
     else:
         recommendations.append(f"[+] Good sector diversification ({len(sectors)} sectors)")
-    
+
     # Check concentration
     for sector, stocks in sectors.items():
         weight = len(stocks) / len(portfolio_results) * 100
         if weight > 40:
             recommendations.append(f"[!] {sector} is {weight:.0f}% of portfolio - high concentration")
-    
+
     # Check Beta balance
     high_beta = sum(1 for r in portfolio_results if r.get("beta", 1) > 1.3)
     low_beta = sum(1 for r in portfolio_results if r.get("beta", 1) < 0.8)
-    
+
     if high_beta > len(portfolio_results) * 0.6:
         recommendations.append("[!] Portfolio is heavily weighted toward high-volatility stocks")
     elif low_beta > len(portfolio_results) * 0.6:
         recommendations.append("[!] Portfolio may be too defensive - missing growth opportunities")
     else:
         recommendations.append("[+] Good balance of growth and defensive stocks")
-    
+
     return {
         "sectors": {k: len(v) for k, v in sectors.items()},
         "recommendations": recommendations

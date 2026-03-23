@@ -18,7 +18,7 @@ if result.returncode == 0:
     print(f"版本：7f1c44e")
     print(f"Registry 版本：{registry.get('version', 'N/A')}")
     print(f"工具总数：{len(tools)}")
-    
+
     # 显示前 10 个工具
     print(f"\n前 10 个工具:")
     for i, (tool_id, info) in enumerate(list(tools.items())[:10], 1):

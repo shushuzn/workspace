@@ -11,7 +11,7 @@ class AlertManager:
     def __init__(self):
         self.alerts = {}
         self.load()
-    
+
     def load(self):
         """Load alerts from file"""
         if ALERTS_FILE.exists():
@@ -22,18 +22,18 @@ class AlertManager:
                 self.alerts = {}
         else:
             self.alerts = {}
-    
+
     def save(self):
         """Save alerts to file"""
         with open(ALERTS_FILE, 'w') as f:
             json.dump(self.alerts, f, indent=2)
-    
+
     def add(self, symbol, alert_type, threshold, condition="above"):
         """Add an alert"""
         sym = symbol.upper()
         if sym not in self.alerts:
             self.alerts[sym] = []
-        
+
         alert = {
             "type": alert_type,  # price, score, upside, peg, pe
             "threshold": threshold,
@@ -41,11 +41,11 @@ class AlertManager:
             "created": datetime.now().isoformat(),
             "triggered": None
         }
-        
+
         self.alerts[sym].append(alert)
         self.save()
         return f"[Alert] Added {alert_type} {condition} {threshold} for {sym}"
-    
+
     def remove(self, symbol, index=None):
         """Remove an alert"""
         sym = symbol.upper()
@@ -59,38 +59,38 @@ class AlertManager:
                 self.save()
                 return f"[Alert] Removed all alerts for {sym}"
         return f"[Alert] No alerts for {sym}"
-    
+
     def check(self, symbol, current_value):
         """Check if alert is triggered"""
         sym = symbol.upper()
         if sym not in self.alerts:
             return []
-        
+
         triggered = []
         for i, alert in enumerate(self.alerts[sym]):
             should_trigger = False
-            
+
             if alert["condition"] == "above":
                 should_trigger = current_value > alert["threshold"]
             else:
                 should_trigger = current_value < alert["threshold"]
-            
+
             if should_trigger:
                 triggered.append((i, alert))
                 alert["triggered"] = datetime.now().isoformat()
-        
+
         if triggered:
             self.save()
-        
+
         return triggered
-    
+
     def check_all(self, results):
         """Check all alerts against results"""
         triggered_alerts = []
-        
+
         for r in results:
             sym = r["symbol"]
-            
+
             # Check price alert
             if "price" in [a["type"] for a in self.alerts.get(sym, [])]:
                 price_alerts = [a for a in self.alerts.get(sym, []) if a["type"] == "price"]
@@ -102,7 +102,7 @@ class AlertManager:
                             "type": "price",
                             "message": f"Price ${r['price']:.2f} {alert['condition']} ${alert['threshold']:.2f}"
                         })
-            
+
             # Check score alert
             if "score" in [a["type"] for a in self.alerts.get(sym, [])]:
                 score_alerts = [a for a in self.alerts.get(sym, []) if a["type"] == "score"]
@@ -114,21 +114,21 @@ class AlertManager:
                             "type": "score",
                             "message": f"Score {r['score']} {alert['condition']} {alert['threshold']}"
                         })
-        
+
         return triggered_alerts
-    
+
     def check_alert(self, alert, current_value):
         """Check single alert"""
         if alert["condition"] == "above":
             return current_value > alert["threshold"]
         else:
             return current_value < alert["threshold"]
-    
+
     def list_all(self):
         """List all alerts"""
         if not self.alerts:
             return "[Alerts] No alerts configured"
-        
+
         report = "# Active Alerts\n\n"
         for sym, alerts in sorted(self.alerts.items()):
             report += f"## {sym}\n"

@@ -17,23 +17,23 @@ print("\n[1/3] 验证 MACE-MP...")
 try:
     from mace.calculators import mace_mp
     from ase.build import bulk
-    
+
     # 加载 MACE-MP 模型
     print("  加载 MACE-MP 模型...")
     mace_calc = mace_mp(model="small", device="cpu")
     print("  [OK] MACE-MP 加载成功")
-    
+
     # 测试：计算石墨能量
     print("  测试：计算石墨能量...")
     graphite = bulk('C', 'hex', a=2.46, c=6.71)
     graphite.calc = mace_calc
     energy = graphite.get_potential_energy()
     forces = graphite.get_forces()
-    
+
     print(f"  [OK] 石墨能量：{energy:.4f} eV")
     print(f"  [OK] 每原子能量：{energy/len(graphite):.4f} eV/atom")
     print(f"  [OK] 最大力：{max(abs(forces.flatten())):.4f} eV/A")
-    
+
     # 与 DFT 对比
     dft_ref = -9.17  # MP DFT 参考值
     error = abs(energy/len(graphite) - dft_ref) * 1000
@@ -41,16 +41,16 @@ try:
     print(f"    DFT 参考：{dft_ref:.4f} eV/atom")
     print(f"    MACE-MP: {energy/len(graphite):.4f} eV/atom")
     print(f"    误差：{error:.1f} meV/atom")
-    
+
     if error < 10:
         print(f"    [TOP] 精度优秀！(<10 meV/atom)")
     elif error < 50:
         print(f"    [OK] 精度良好！(<50 meV/atom)")
     else:
         print(f"    [WARN] 误差较大")
-    
+
     mace_available = True
-    
+
 except Exception as e:
     print(f"  [ERROR] MACE 验证失败：{e}")
     mace_available = False
@@ -64,14 +64,14 @@ try:
     import matgl
     from matgl.ext.ase import PESCalculator
     from ase.build import molecule
-    
+
     # 尝试不同的 CHGNet 模型名称
     model_names = [
         "CHGNet-MP-2024.2.13-PBE",
         "CHGNet-MP-2023.12.9-PBE",
         "CHGNet-0.3.0",
     ]
-    
+
     chgnet_model = None
     for model_name in model_names:
         try:
@@ -81,23 +81,23 @@ try:
             break
         except Exception as e:
             print(f"  [WARN] {model_name} 失败：{e}")
-    
+
     if chgnet_model:
         # 测试：计算 C60 能量
         print("  测试：计算 C60 能量...")
         c60 = molecule('C60')
         c60.calc = PESCalculator(chgnet_model)
         energy = c60.get_potential_energy()
-        
+
         print(f"  [OK] C60 能量：{energy:.4f} eV")
         print(f"  [OK] 每原子能量：{energy/len(c60):.4f} eV/atom")
-        
+
         chgnet_available = True
     else:
         print("  [ERROR] 所有 CHGNet 模型都失败")
         print("  [INFO] 请手动下载模型")
         chgnet_available = False
-    
+
 except Exception as e:
     print(f"  [ERROR] CHGNet 验证失败：{e}")
     chgnet_available = False

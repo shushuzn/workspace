@@ -24,7 +24,7 @@ class SessionBridge:
     3. 项目状态继承 - 进行中的任务状态
     4. 上下文桥接 - 最近对话摘要
     """
-    
+
     def __init__(self):
         # 继承优先级
         self.priority_order = [
@@ -33,7 +33,7 @@ class SessionBridge:
             'project',       # 中: 项目状态
             'context'        # 低: 对话上下文
         ]
-        
+
         # 最小重要性阈值
         self.min_importance = {
             'preference': 0.3,
@@ -41,8 +41,8 @@ class SessionBridge:
             'project': 0.4,
             'context': 0.6
         }
-    
-    def export_essential(self, working: WorkingMemory, 
+
+    def export_essential(self, working: WorkingMemory,
                          archive: ArchiveMemory,
                          new_session_id: str,
                          max_items: int = 20) -> Dict:
@@ -67,42 +67,42 @@ class SessionBridge:
             'context_summary': None,
             'stats': {}
         }
-        
+
         # 1. 导出偏好（从Working + Archive）
         preferences = self._extract_by_type(working, archive, 'preference')
         essential['preferences'] = [
             self._serialize_item(p) for p in preferences
         ][:10]
-        
+
         # 2. 导出决策
         decisions = self._extract_by_type(working, archive, 'decision')
         essential['decisions'] = [
             self._serialize_item(d) for d in decisions
         ][:10]
-        
+
         # 3. 导出项目状态
         project_items = self._extract_by_type(working, archive, 'project')
         essential['project_state'] = [
             self._serialize_item(p) for p in project_items
         ][:5]
-        
+
         # 4. 生成上下文摘要
         essential['context_summary'] = self._generate_summary(working)
-        
+
         # 5. 统计
         essential['stats'] = {
             'total_exported': (
-                len(essential['preferences']) + 
-                len(essential['decisions']) + 
+                len(essential['preferences']) +
+                len(essential['decisions']) +
                 len(essential['project_state'])
             ),
             'preference_count': len(essential['preferences']),
             'decision_count': len(essential['decisions']),
             'project_count': len(essential['project_state'])
         }
-        
+
         return essential
-    
+
     def import_essential(self, essential: Dict) -> List[MemoryItem]:
         """
         从导出的essential恢复记忆
@@ -114,7 +114,7 @@ class SessionBridge:
             List[MemoryItem]: 可直接加载的MemoryItem列表
         """
         items = []
-        
+
         # 恢复偏好
         for pref in essential.get('preferences', []):
             item = MemoryItem(
@@ -126,7 +126,7 @@ class SessionBridge:
                 metadata={'inherited': True, 'origin': essential['session_id']}
             )
             items.append(item)
-        
+
         # 恢复决策
         for decision in essential.get('decisions', []):
             item = MemoryItem(
@@ -138,51 +138,51 @@ class SessionBridge:
                 metadata={'inherited': True, 'origin': essential['session_id']}
             )
             items.append(item)
-        
+
         return items
-    
-    def save_essential(self, essential: Dict, 
+
+    def save_essential(self, essential: Dict,
                        path: str = None) -> str:
         """保存essential到文件"""
         path = path or f"13-memory/essential_{essential['session_id']}.json"
-        
+
         Path(path).parent.mkdir(parents=True, exist_ok=True)
-        
+
         with open(path, 'w', encoding='utf-8') as f:
             json.dump(essential, f, ensure_ascii=False, indent=2)
-        
+
         return path
-    
+
     def load_essential(self, path: str) -> Dict:
         """从文件加载essential"""
         with open(path, 'r', encoding='utf-8') as f:
             return json.load(f)
-    
+
     def _extract_by_type(self, working: WorkingMemory,
                          archive: ArchiveMemory,
                          memory_type: str) -> List[MemoryItem]:
         """按类型提取记忆"""
         threshold = self.min_importance.get(memory_type, 0.3)
-        
+
         results = []
-        
+
         # 从Working Memory提取
         for item in working.get_all():
             if item.type == memory_type and item.importance >= threshold:
                 results.append(item)
-        
+
         # 从Archive补充
         recent = archive.retrieve_recent(token_budget=2000)
         for item in recent:
             if item.type == memory_type and item.importance >= threshold:
                 if item.id not in [r.id for r in results]:
                     results.append(item)
-        
+
         # 按重要性排序
         results.sort(key=lambda x: x.importance, reverse=True)
-        
+
         return results
-    
+
     def _serialize_item(self, item: MemoryItem) -> Dict:
         """序列化MemoryItem"""
         return {
@@ -193,27 +193,27 @@ class SessionBridge:
             'created_at': item.created_at,
             'metadata': item.metadata
         }
-    
+
     def _generate_summary(self, working: WorkingMemory) -> Optional[str]:
         """生成上下文摘要"""
         items = working.get_recent(n=10)
-        
+
         if not items:
             return None
-        
+
         # 提取关键信息
         topics = []
         for item in items:
             if item.type in ['decision', 'preference']:
                 topics.append(item.content[:100])
-        
+
         if topics:
             summary = "Recent priorities: " + "; ".join(topics[:3])
             return summary
-        
+
         return None
-    
-    def auto_bridge(self, old_session_id: str, 
+
+    def auto_bridge(self, old_session_id: str,
                     new_session_id: str,
                     archive_path: str = "13-memory/memory.db") -> Dict:
         """
@@ -223,11 +223,11 @@ class SessionBridge:
         """
         # 查找旧session的essential文件
         essential_path = f"13-memory/essential_{old_session_id}.json"
-        
+
         if Path(essential_path).exists():
             old_essential = self.load_essential(essential_path)
             new_items = self.import_essential(old_essential)
-            
+
             return {
                 'status': 'success',
                 'items': [self._serialize_item(i) for i in new_items],

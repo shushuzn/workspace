@@ -102,24 +102,24 @@ _NEWS_SOURCES = {
 def fetch_cn_news(source="sina", max_items=50):
     """Fetch Chinese financial news from various sources"""
     import urllib.request
-    
+
     source_config = _NEWS_SOURCES.get(source, _NEWS_SOURCES["sina"])
-    
+
     all_news = []
     seen_titles = set()
-    
+
     for url in source_config["urls"]:
         try:
             req = urllib.request.Request(url, headers={
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
                 "Accept": "text/html,application/xhtml+xml",
             })
-            
+
             with urllib.request.urlopen(req, timeout=15) as resp:
                 content = resp.read().decode('utf-8', errors='ignore')
-                
+
                 matches = re.findall(source_config["pattern"], content)
-                
+
                 for href, title in matches:
                     title = title.strip()
                     if title and title not in seen_titles and len(title) > 15 and len(title) < 200:
@@ -130,11 +130,11 @@ def fetch_cn_news(source="sina", max_items=50):
                             "source": source_config["name"],
                             "time": datetime.now().strftime("%H:%M")
                         })
-        
+
         except Exception as e:
             print(f"Error fetching {url}: {e}")
             continue
-    
+
     return all_news[:max_items]
 
 
@@ -143,14 +143,14 @@ def get_cn_news_for_stock(symbol):
     keywords = _STOCK_KEYWORDS.get(symbol.upper(), [])
     if not keywords:
         return []
-    
+
     all_news = []
     seen_titles = set()
-    
+
     # Fetch from multiple sources
     for source in ["sina", "netease", "ifeng"]:
         news = fetch_cn_news(source, max_items=100)
-        
+
         for n in news:
             title = n["title"]
             for keyword in keywords:
@@ -159,52 +159,52 @@ def get_cn_news_for_stock(symbol):
                         seen_titles.add(title)
                         all_news.append(n)
                     break
-    
+
     return all_news
 
 
 def fetch_jin10_news():
     """Fetch latest news from Jin10 (xnews.jin10.com)"""
     global _JIN10_NEWS_CACHE, _JIN10_CACHE_TIME
-    
+
     now = datetime.now()
-    
+
     # Check memory cache
     if _JIN10_NEWS_CACHE is not None and _JIN10_CACHE_TIME is not None:
         if (now - _JIN10_CACHE_TIME).total_seconds() < _JIN10_CACHE_TTL:
             return _JIN10_NEWS_CACHE
-    
+
     try:
         url = "https://xnews.jin10.com/"
         req = urllib.request.Request(url, headers={
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
         })
-        
+
         with urllib.request.urlopen(req, timeout=15) as resp:
             content = resp.read().decode('utf-8')
-            
+
             # Extract news titles
             pattern = r'<a href="(https://xnews\.jin10\.com/details/\d+)"[^>]*>(.*?)</a>'
             matches = re.findall(pattern, content, re.DOTALL)
-            
+
             news_items = []
             for href, title_html in matches:
                 # Clean HTML tags
                 title = re.sub(r'<[^>]+>', '', title_html).strip()
                 title = title.replace('\n', ' ').replace('\r', ' ').replace('  ', ' ')
-                
+
                 if title and len(title) > 10:
                     # Extract time if available
                     time_match = re.search(r'(\d+天|\d+小时|\d+分钟)', title)
                     time_ago = time_match.group(1) if time_match else "N/A"
-                    
+
                     news_items.append({
                         'url': href,
                         'title': title[:200],
                         'time_ago': time_ago,
                         'source': 'Jin10'
                     })
-            
+
             # Remove duplicates
             seen = set()
             unique_news = []
@@ -212,15 +212,15 @@ def fetch_jin10_news():
                 if item['title'] not in seen:
                     seen.add(item['title'])
                     unique_news.append(item)
-            
+
             _JIN10_NEWS_CACHE = unique_news[:50]
             _JIN10_CACHE_TIME = now
-            
+
             # Save to file cache for fetch_jin10_full
             _save_jin10_cache(unique_news[:20])
-            
+
             return _JIN10_NEWS_CACHE
-    
+
     except Exception as e:
         print(f"Jin10 fetch error: {e}")
         return _JIN10_NEWS_CACHE or []
@@ -246,17 +246,17 @@ def get_jin10_news_for_stock(symbol):
     keywords = _STOCK_KEYWORDS.get(symbol.upper(), [])
     if not keywords:
         return []
-    
+
     all_news = fetch_jin10_news()
     matched_news = []
-    
+
     for news in all_news:
         title = news['title']
         for keyword in keywords:
             if keyword.lower() in title.lower():
                 matched_news.append(news)
                 break
-    
+
     return matched_news
 
 
@@ -269,16 +269,16 @@ def fetch_jin10_full(max_items=20, use_cache=True):
     3. Returns news with both headline and content summary
     """
     import time
-    
+
     cache_file = Path(__file__).parent / "data_jin10_news.json"
     cache_ttl = 3600  # 1 hour
-    
+
     # Check cache first
     if use_cache and cache_file.exists():
         try:
             with open(cache_file, 'r', encoding='utf-8') as f:
                 cached = json.load(f)
-            
+
             # Check if cache is fresh
             fetched_at = cached.get('fetched_at', '')
             if fetched_at:
@@ -300,7 +300,7 @@ def fetch_jin10_full(max_items=20, use_cache=True):
                             content = content.strip()
                         else:
                             headline, content = title, ''
-                        
+
                         news_list.append({
                             'title': headline,
                             'content': content,
@@ -310,20 +310,20 @@ def fetch_jin10_full(max_items=20, use_cache=True):
                     return news_list
         except:
             pass
-    
+
     # Fetch fresh data - visit details pages
     try:
         url = "https://xnews.jin10.com/"
         req = urllib.request.Request(url, headers={
             "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
         })
-        
+
         with urllib.request.urlopen(req, timeout=15) as resp:
             content = resp.read().decode('utf-8')
-        
+
         # Extract details links
         links = list(dict.fromkeys(re.findall(r'https://xnews\.jin10\.com/details/\d+', content)))[:max_items]
-        
+
         news_list = []
         for detail_url in links[:10]:  # Limit to avoid rate limit
             try:
@@ -332,36 +332,36 @@ def fetch_jin10_full(max_items=20, use_cache=True):
                 })
                 with urllib.request.urlopen(detail_req, timeout=10) as r:
                     page = r.read().decode('utf-8')
-                
+
                 # Extract title
                 title_match = re.search(r'<title>([^<]+)</title>', page)
                 title = title_match.group(1).replace('-市场参考-金十数据', '').strip() if title_match else ""
-                
+
                 # Extract content
                 p_pattern = r'<p[^>]*>(.*?)</p>'
                 paragraphs = re.findall(p_pattern, page, re.DOTALL)
-                
+
                 content = ""
                 for p in paragraphs:
                     clean = re.sub(r'<[^>]+>', '', p).strip()
                     if len(clean) > 60:
                         content = clean
                         break
-                
+
                 news_list.append({
                     'title': title,
                     'content': content,
                     'url': detail_url,
                     'source': 'jin10',
                 })
-                
+
                 time.sleep(0.5)  # Rate limit
-                
+
             except:
                 pass
-        
+
         return news_list
-    
+
     except Exception as e:
         print(f"Jin10 error: {e}")
         return []
@@ -371,24 +371,24 @@ def get_news(symbol, days=7):
     """Get recent news for a symbol (combines local + Jin10)"""
     today = datetime.now()
     cutoff = today - timedelta(days=days)
-    
+
     # Get local news
     news = NEWS_DATA.get(symbol, [])
-    
+
     # Get Jin10 news
     jin10_news = get_jin10_news_for_stock(symbol)
-    
+
     # Combine and dedupe
     all_news = []
     seen_titles = set()
-    
+
     # Add local news first
     for n in news:
         date = datetime.strptime(n["date"], "%Y-%m-%d")
         if date >= cutoff:
             all_news.append(n)
             seen_titles.add(n.get("headline", "").lower())
-    
+
     # Add Jin10 news
     for jn in jin10_news:
         title = jn['title']
@@ -401,19 +401,19 @@ def get_news(symbol, days=7):
                 "impact": "medium"
             })
             seen_titles.add(title.lower())
-    
+
     return all_news
 
 
 def calculate_sentiment(symbol):
     """Calculate overall sentiment score"""
     news = get_news(symbol, days=30)
-    
+
     if not news:
         return {"sentiment": 0.5, "news_count": 0, "trend": "Neutral"}
-    
+
     avg_sentiment = sum(n["sentiment"] for n in news) / len(news)
-    
+
     # Determine trend
     if len(news) >= 3:
         recent = sum(n["sentiment"] for n in news[:3]) / min(3, len(news))
@@ -426,7 +426,7 @@ def calculate_sentiment(symbol):
             trend = "Stable"
     else:
         trend = "Stable"
-    
+
     return {
         "sentiment": avg_sentiment,
         "news_count": len(news),
@@ -438,14 +438,14 @@ def calculate_sentiment(symbol):
 def jin10_news_report():
     """Generate Jin10 latest news report"""
     news = fetch_jin10_news()
-    
+
     report = "# Jin10 Latest News\n\n"
     report += f"_Source: xnews.jin10.com | Items: {len(news)} | Updated: {datetime.now().strftime('%H:%M:%S')}_\n\n"
-    
+
     for i, n in enumerate(news[:20], 1):
         report += f"**{i}. {n['title'][:150]}...**\n"
         report += f"   - Time: {n['time_ago']} | Source: {n['source']}\n\n"
-    
+
     return report
 
 
@@ -453,36 +453,36 @@ def jin10_stock_news(symbol):
     """Get Jin10 news related to a specific stock with analysis"""
     jin10_news = get_jin10_news_for_stock(symbol)
     local_news = get_news(symbol, days=7)
-    
+
     # Categorize sentiment based on keywords
     bullish_keywords = ["涨", "突破", "新高", "利好", "增长", "买入", "看涨", "增持"]
     bearish_keywords = ["跌", "破", "新低", "利空", "下跌", "卖出", "看跌", "减持", "裁员", "调查"]
-    
+
     def estimate_sentiment(title):
         title_lower = title.lower()
         bull_count = sum(1 for k in bullish_keywords if k in title)
         bear_count = sum(1 for k in bearish_keywords if k in title)
-        
+
         if bull_count > bear_count:
             return 0.7 + (bull_count - bear_count) * 0.05
         elif bear_count > bull_count:
             return 0.4 - (bear_count - bull_count) * 0.05
         return 0.5
-    
+
     report = f"# Jin10 News: {symbol}\n\n"
-    
+
     if not jin10_news and not local_news:
         report += "_No recent news found._\n"
         return report
-    
+
     report += f"## Stock-Specific News ({len(jin10_news)} from Jin10, {len(local_news)} total)\n\n"
-    
+
     for n in jin10_news[:10]:
         sentiment = estimate_sentiment(n['title'])
         indicator = "[+]" if sentiment > 0.55 else ("[-]" if sentiment < 0.45 else "[=]")
         report += f"{indicator} {n['title'][:120]}...\n"
         report += f"    [{n['time_ago']}] {n['source']}\n\n"
-    
+
     # Local news
     if local_news:
         report += f"\n## Local News ({len(local_news)} items)\n\n"
@@ -490,23 +490,23 @@ def jin10_stock_news(symbol):
             indicator = "[+]" if n.get("sentiment", 0.5) > 0.55 else ("[-]" if n.get("sentiment", 0.5) < 0.45 else "[=]")
             report += f"{indicator} {n.get('headline', '')[:100]}...\n"
             report += f"    [{n.get('date', '')}] {n.get('source', 'Unknown')}\n\n"
-    
+
     return report
 
 
 def sentiment_report(symbols=None):
     """Generate sentiment report"""
     from stock_pro.sectors import get_sector
-    
+
     if symbols is None:
         symbols = list(A.keys())
-    
+
     results = []
-    
+
     for sym in symbols:
         sentiment = calculate_sentiment(sym)
         analysis = analyze_multiple([sym])[0] if sym in A else None
-        
+
         results.append({
             "symbol": sym,
             "sector": get_sector(sym),
@@ -516,16 +516,16 @@ def sentiment_report(symbols=None):
             "score": analysis["score"] if analysis else 0,
             "latest_news": sentiment.get("latest")
         })
-    
+
     # Sort by sentiment
     results.sort(key=lambda x: x["sentiment"], reverse=True)
-    
+
     report = "# News Sentiment Analysis\n\n"
     report += "| Symbol | Sector | Sentiment | Trend | News | Score |\n"
     report += "|--------|--------|-----------|-------|------|-------|\n"
-    
+
     bullish = bearish = neutral = 0
-    
+
     for r in results:
         if r["sentiment"] >= 0.65:
             sentiment_label = "Bullish"
@@ -536,16 +536,16 @@ def sentiment_report(symbols=None):
         else:
             sentiment_label = "Neutral"
             neutral += 1
-        
+
         report += f"| {r['symbol']} | {r['sector']} | {r['sentiment']:.0%} | {r['trend']} | {r['news_count']} | {r['score']} |\n"
-    
+
     report += f"\n**Summary:** {bullish} Bullish, {neutral} Neutral, {bearish} Bearish\n"
-    
+
     # Top bullish
     top_bullish = [r for r in results if r["sentiment"] >= 0.70][:5]
     if top_bullish:
         report += f"\n**Top Bullish:** {', '.join(r['symbol'] for r in top_bullish)}\n"
-    
+
     return report
 
 
@@ -598,7 +598,7 @@ def get_research_reports(symbol, days=30):
     """Get recent research reports for symbol"""
     today = datetime.now()
     cutoff = today - timedelta(days=days)
-    
+
     reports = RESEARCH_REPORTS.get(symbol, [])
     filtered = []
     for r in reports:
@@ -612,82 +612,82 @@ def research_report(symbols=None):
     """Generate research reports summary"""
     if symbols is None:
         symbols = ["NVDA", "MSFT", "GOOGL", "AAPL", "META", "AMZN", "TSLA", "AMD"]
-    
+
     report = "# Research Reports Summary\n\n"
-    
+
     strong_buys = []
     upgrades = []
     downgrades = []
-    
+
     for sym in symbols:
         reports = get_research_reports(sym)
         if not reports:
             continue
-        
+
         # Aggregate
         actions = [r["action"] for r in reports]
         avg_target = sum(r["target"] for r in reports) / len(reports)
-        
+
         for r in reports:
             if r["action"] in ("Upgrade", "Outperform", "Strong Buy", "Buy"):
                 strong_buys.append((sym, r))
             elif r["action"] in ("Downgrade", "Underperform", "Sell"):
                 downgrades.append((sym, r))
-    
+
     # Sort by conviction
     strong_buys.sort(key=lambda x: x[1]["conviction"] == "High", reverse=True)
     downgrades.sort(key=lambda x: x[1]["conviction"] == "High", reverse=True)
-    
+
     report += "## Upgrades & Initiations\n"
     report += "| Date | Symbol | Firm | Action | Target | Note |\n"
     report += "|------|--------|------|--------|--------|------|\n"
     for sym, r in strong_buys[:10]:
         report += f"| {r['date']} | {sym} | {r['firm']} | {r['action']} | ${r['target']} | {r['note']} |\n"
-    
+
     report += "\n## Downgrades\n"
     report += "| Date | Symbol | Firm | Action | Target | Note |\n"
     report += "|------|--------|------|--------|--------|------|\n"
     for sym, r in downgrades[:10]:
         report += f"| {r['date']} | {sym} | {r['firm']} | {r['action']} | ${r['target']} | {r['note']} |\n"
-    
+
     return report
 
 
 def combined_analysis(symbol):
     """Combined technical + news + research analysis"""
     from stock_pro.core import detect_trend, analyze
-    
+
     data = analyze(symbol) if symbol in A else None
     sentiment = calculate_sentiment(symbol)
     reports = get_research_reports(symbol)
     trend = detect_trend(symbol, data["price"]) if data else None
-    
+
     # Combine scores
     technical_score = data["score"] if data else 50
     sentiment_score = sentiment["sentiment"] * 100
     research_score = 50  # Neutral baseline
-    
+
     # Adjust based on research
     for r in reports:
         if r["action"] in ("Buy", "Outperform", "Upgrade"):
             research_score += 10
         elif r["action"] in ("Sell", "Underperform", "Downgrade"):
             research_score -= 10
-    
+
     # Weighted composite
     composite = (
         technical_score * 0.40 +
         sentiment_score * 0.30 +
         research_score * 0.30
     )
-    
+
     # Recommendation
     if composite >= 75: recommendation = "STRONG BUY"
     elif composite >= 65: recommendation = "BUY"
     elif composite >= 55: recommendation = "HOLD"
     elif composite >= 45: recommendation = "WEAK HOLD"
     else: recommendation = "SELL"
-    
+
     return {
         "symbol": symbol,
         "composite_score": round(composite, 1),
@@ -706,18 +706,18 @@ def sentiment_report_full(symbols=None):
     """Full sentiment + research + technical combined report"""
     if symbols is None:
         symbols = ["NVDA", "MSFT", "GOOGL", "AAPL", "META", "AMZN", "TSLA"]
-    
+
     results = [combined_analysis(sym) for sym in symbols if sym in A]
     results.sort(key=lambda x: x["composite_score"], reverse=True)
-    
+
     report = "# Combined Analysis Report\n"
     report += "## Technical + Sentiment + Research\n\n"
     report += "| Symbol | Composite | Rec | Tech | Sentiment | Research | Trend |\n"
     report += "|--------|-----------|-----|------|-----------|----------|-------|\n"
-    
+
     for r in results:
         report += f"| {r['symbol']} | {r['composite_score']:.0f} | {r['recommendation']} | {r['technical_score']} | {r['sentiment_score']:.0f} | {r['research_score']} | {r['trend']} |\n"
-    
+
     report += "\n**Composite Score** = Tech(40%) + Sentiment(30%) + Research(30%)\n"
 
     return report
@@ -994,16 +994,16 @@ def get_institutional_data(symbol):
 def institutional_analysis(symbol):
     """Analyze institutional ownership and generate signal"""
     from stock_pro.core import detect_trend, analyze
-    
+
     data = get_institutional_data(symbol)
-    
+
     io = data["institutional_ownership"]
     qoq = data["qoq_change"]
     si = data["short_interest_ratio"]
-    
+
     # Signals
     signals = []
-    
+
     # Institutional ownership signal (>60% is positive)
     if io >= 0.70:
         signals.append(("INST_STRONG_SUPPORT", "High institutional backing"))
@@ -1011,7 +1011,7 @@ def institutional_analysis(symbol):
         signals.append(("INST_MODERATE", "Moderate institutional interest"))
     else:
         signals.append(("INST_LOW", "Low institutional interest"))
-    
+
     # Quarter over quarter change
     if qoq >= 3.0:
         signals.append(("INST_ACCUMULATION", "Heavy accumulation"))
@@ -1021,7 +1021,7 @@ def institutional_analysis(symbol):
         signals.append(("INST_DISTRIBUTION", "Distribution/selling"))
     elif qoq <= -1.0:
         signals.append(("INST_REDUCING", "Reducing position"))
-    
+
     # Short interest analysis
     if si >= 4.0:
         signals.append(("HIGH_SHORT_SQUEEZE_RISK", "High short squeeze risk"))
@@ -1029,14 +1029,14 @@ def institutional_analysis(symbol):
         signals.append(("ELEVATED_SHORT", "Elevated short interest"))
     elif si < 0.5:
         signals.append(("LOW_SHORT_BULLISH", "Low short interest - bullish"))
-    
+
     # Institutional score (0-100)
     score = min(100, int(
         io * 40 +  # Institutional ownership weight
         max(0, qoq) * 5 +  # Positive accumulation
         (20 - min(si, 10)) * 2  # Low short interest bonus
     ))
-    
+
     return {
         "symbol": symbol,
         "institutional_ownership": f"{io*100:.1f}%",
@@ -1052,43 +1052,43 @@ def institutional_report(symbols=None):
     """Generate institutional ownership report"""
     if symbols is None:
         symbols = ["NVDA", "MSFT", "GOOGL", "AAPL", "META", "AMZN", "TSLA", "AMD"]
-    
+
     results = [institutional_analysis(sym) for sym in symbols]
     results.sort(key=lambda x: x["score"], reverse=True)
-    
+
     report = "# Institutional Ownership Analysis\n\n"
     report += "## Institutional Activity\n\n"
     report += "| Symbol | IO % | QoQ | Short | Score | Key Signal |\n"
     report += "|--------|------|-----|-------|-------|------------|\n"
-    
+
     for r in results:
         signal = r["signals"][0][0] if r["signals"] else "N/A"
         report += f"| {r['symbol']} | {r['institutional_ownership']} | {r['qoq_change']} | {r['short_interest_ratio']} | {r['score']} | {signal} |\n"
-    
+
     report += "\n## Signal Legend\n"
     report += "- **INST_STRONG_SUPPORT**: >70% institutional ownership\n"
     report += "- **INST_ACCUMULATION**: QoQ change >3%\n"
     report += "- **HIGH_SHORT_SQUEEZE_RISK**: Short interest >4%\n"
-    
+
     return report
 
 
 def sector_sentiment():
     """Get sector-level sentiment"""
     from stock_pro.sectors import get_all_sectors, get_symbols_by_sector
-    
+
     sectors = get_all_sectors()
-    
+
     sector_sentiments = []
     for sector in sectors:
         symbols = get_symbols_by_sector(sector)
-        
+
         sentiments = []
         for sym in symbols:
             s = calculate_sentiment(sym)
             if s["news_count"] > 0:
                 sentiments.append(s["sentiment"])
-        
+
         if sentiments:
             avg = sum(sentiments) / len(sentiments)
             sector_sentiments.append({
@@ -1096,16 +1096,16 @@ def sector_sentiment():
                 "avg_sentiment": avg,
                 "stocks_with_news": len(sentiments)
             })
-    
+
     sector_sentiments.sort(key=lambda x: x["avg_sentiment"], reverse=True)
-    
+
     report = "# Sector Sentiment\n\n"
     report += "| Sector | Avg Sentiment | Active Stocks |\n"
     report += "|--------|---------------|----------------|\n"
-    
+
     for s in sector_sentiments:
         report += f"| {s['sector']} | {s['avg_sentiment']:.0%} | {s['stocks_with_news']} |\n"
-    
+
     return report
 
 
@@ -1158,7 +1158,7 @@ def get_research_reports(symbol, days=30):
     """Get recent research reports for symbol"""
     today = datetime.now()
     cutoff = today - timedelta(days=days)
-    
+
     reports = RESEARCH_REPORTS.get(symbol, [])
     filtered = []
     for r in reports:
@@ -1172,82 +1172,82 @@ def research_report(symbols=None):
     """Generate research reports summary"""
     if symbols is None:
         symbols = ["NVDA", "MSFT", "GOOGL", "AAPL", "META", "AMZN", "TSLA", "AMD"]
-    
+
     report = "# Research Reports Summary\n\n"
-    
+
     strong_buys = []
     upgrades = []
     downgrades = []
-    
+
     for sym in symbols:
         reports = get_research_reports(sym)
         if not reports:
             continue
-        
+
         # Aggregate
         actions = [r["action"] for r in reports]
         avg_target = sum(r["target"] for r in reports) / len(reports)
-        
+
         for r in reports:
             if r["action"] in ("Upgrade", "Outperform", "Strong Buy", "Buy"):
                 strong_buys.append((sym, r))
             elif r["action"] in ("Downgrade", "Underperform", "Sell"):
                 downgrades.append((sym, r))
-    
+
     # Sort by conviction
     strong_buys.sort(key=lambda x: x[1]["conviction"] == "High", reverse=True)
     downgrades.sort(key=lambda x: x[1]["conviction"] == "High", reverse=True)
-    
+
     report += "## Upgrades & Initiations\n"
     report += "| Date | Symbol | Firm | Action | Target | Note |\n"
     report += "|------|--------|------|--------|--------|------|\n"
     for sym, r in strong_buys[:10]:
         report += f"| {r['date']} | {sym} | {r['firm']} | {r['action']} | ${r['target']} | {r['note']} |\n"
-    
+
     report += "\n## Downgrades\n"
     report += "| Date | Symbol | Firm | Action | Target | Note |\n"
     report += "|------|--------|------|--------|--------|------|\n"
     for sym, r in downgrades[:10]:
         report += f"| {r['date']} | {sym} | {r['firm']} | {r['action']} | ${r['target']} | {r['note']} |\n"
-    
+
     return report
 
 
 def combined_analysis(symbol):
     """Combined technical + news + research analysis"""
     from stock_pro.core import detect_trend, analyze
-    
+
     data = analyze(symbol) if symbol in A else None
     sentiment = calculate_sentiment(symbol)
     reports = get_research_reports(symbol)
     trend = detect_trend(symbol, data["price"]) if data else None
-    
+
     # Combine scores
     technical_score = data["score"] if data else 50
     sentiment_score = sentiment["sentiment"] * 100
     research_score = 50  # Neutral baseline
-    
+
     # Adjust based on research
     for r in reports:
         if r["action"] in ("Buy", "Outperform", "Upgrade"):
             research_score += 10
         elif r["action"] in ("Sell", "Underperform", "Downgrade"):
             research_score -= 10
-    
+
     # Weighted composite
     composite = (
         technical_score * 0.40 +
         sentiment_score * 0.30 +
         research_score * 0.30
     )
-    
+
     # Recommendation
     if composite >= 75: recommendation = "STRONG BUY"
     elif composite >= 65: recommendation = "BUY"
     elif composite >= 55: recommendation = "HOLD"
     elif composite >= 45: recommendation = "WEAK HOLD"
     else: recommendation = "SELL"
-    
+
     return {
         "symbol": symbol,
         "composite_score": round(composite, 1),
@@ -1266,18 +1266,18 @@ def sentiment_report_full(symbols=None):
     """Full sentiment + research + technical combined report"""
     if symbols is None:
         symbols = ["NVDA", "MSFT", "GOOGL", "AAPL", "META", "AMZN", "TSLA"]
-    
+
     results = [combined_analysis(sym) for sym in symbols if sym in A]
     results.sort(key=lambda x: x["composite_score"], reverse=True)
-    
+
     report = "# Combined Analysis Report\n"
     report += "## Technical + Sentiment + Research\n\n"
     report += "| Symbol | Composite | Rec | Tech | Sentiment | Research | Trend |\n"
     report += "|--------|-----------|-----|------|-----------|----------|-------|\n"
-    
+
     for r in results:
         report += f"| {r['symbol']} | {r['composite_score']:.0f} | {r['recommendation']} | {r['technical_score']} | {r['sentiment_score']:.0f} | {r['research_score']} | {r['trend']} |\n"
-    
+
     report += "\n**Composite Score** = Tech(40%) + Sentiment(30%) + Research(30%)\n"
 
     return report
@@ -1554,16 +1554,16 @@ def get_institutional_data(symbol):
 def institutional_analysis(symbol):
     """Analyze institutional ownership and generate signal"""
     from stock_pro.core import detect_trend, analyze
-    
+
     data = get_institutional_data(symbol)
-    
+
     io = data["institutional_ownership"]
     qoq = data["qoq_change"]
     si = data["short_interest_ratio"]
-    
+
     # Signals
     signals = []
-    
+
     # Institutional ownership signal (>60% is positive)
     if io >= 0.70:
         signals.append(("INST_STRONG_SUPPORT", "High institutional backing"))
@@ -1571,7 +1571,7 @@ def institutional_analysis(symbol):
         signals.append(("INST_MODERATE", "Moderate institutional interest"))
     else:
         signals.append(("INST_LOW", "Low institutional interest"))
-    
+
     # Quarter over quarter change
     if qoq >= 3.0:
         signals.append(("INST_ACCUMULATION", "Heavy accumulation"))
@@ -1581,7 +1581,7 @@ def institutional_analysis(symbol):
         signals.append(("INST_DISTRIBUTION", "Distribution/selling"))
     elif qoq <= -1.0:
         signals.append(("INST_REDUCING", "Reducing position"))
-    
+
     # Short interest analysis
     if si >= 4.0:
         signals.append(("HIGH_SHORT_SQUEEZE_RISK", "High short squeeze risk"))
@@ -1589,14 +1589,14 @@ def institutional_analysis(symbol):
         signals.append(("ELEVATED_SHORT", "Elevated short interest"))
     elif si < 0.5:
         signals.append(("LOW_SHORT_BULLISH", "Low short interest - bullish"))
-    
+
     # Institutional score (0-100)
     score = min(100, int(
         io * 40 +  # Institutional ownership weight
         max(0, qoq) * 5 +  # Positive accumulation
         (20 - min(si, 10)) * 2  # Low short interest bonus
     ))
-    
+
     return {
         "symbol": symbol,
         "institutional_ownership": f"{io*100:.1f}%",

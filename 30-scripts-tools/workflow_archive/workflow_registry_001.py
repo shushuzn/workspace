@@ -21,13 +21,13 @@ class WorkflowRegistry:
     def __init__(self):
         if not REGISTRY_FILE.exists():
             REGISTRY_FILE.write_text(json.dumps({"tools": {}}, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def _load(self):
         return json.loads(REGISTRY_FILE.read_text(encoding="utf-8", errors="replace"))
-    
+
     def _save(self, data):
         REGISTRY_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def register(self, tool_name, category="general", description=""):
         data = self._load()
         data["tools"][tool_name] = {
@@ -37,7 +37,7 @@ class WorkflowRegistry:
         }
         self._save(data)
         return {"status": "registered", "tool": tool_name}
-    
+
     def list(self, category=None):
         data = self._load()
         tools = data.get("tools", {})
@@ -47,7 +47,7 @@ class WorkflowRegistry:
 
 if __name__ == "__main__":
     registry = WorkflowRegistry()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--register":

@@ -91,13 +91,13 @@ def acquisition_function_ucb(gp_model, X_samples, scaler_X, kappa=2.0):
     if gp_model is None:
         # 模拟不确定性
         return np.random.random(len(X_samples))
-    
+
     X_scaled = scaler_X.transform(X_samples)
     y_pred, y_std = gp_model.predict(X_scaled, return_std=True)
-    
+
     # UCB 分数 (最大化)
     ucb_score = y_pred + kappa * y_std
-    
+
     return ucb_score, y_pred, y_std
 
 ucb_scores, predictions, uncertainties = acquisition_function_ucb(gp_model, candidate_samples, scaler_X)
@@ -165,11 +165,11 @@ passed_screening = []
 for i, idx in enumerate(top_indices):
     sample = candidate_samples[idx]
     cost = calculate_cost(sample, features)
-    
+
     if (10**predictions[idx] >= screening_criteria['min_conductivity'] and
         uncertainties[idx] <= screening_criteria['max_uncertainty'] and
         cost <= screening_criteria['cost_limit']):
-        
+
         passed = {
             'sample_id': i + 1,
             'cost': cost,
@@ -199,22 +199,22 @@ def priority_score(exp, weights=None):
     """
     if weights is None:
         weights = {'performance': 0.5, 'certainty': 0.3, 'cost': 0.2}
-    
+
     # 归一化性能 (电导率)
     perf_score = np.log10(exp['predicted_conductivity']) / 6.0  # 归一化到 0-1
-    
+
     # 确定性 (低不确定性 = 高分数)
     cert_score = 1.0 - exp['uncertainty']
-    
+
     # 成本效益
     cost_score = 1.0 - (exp.get('cost', 5.0) / 10.0)
-    
+
     total_score = (
         weights['performance'] * perf_score +
         weights['certainty'] * cert_score +
         weights['cost'] * cost_score
     )
-    
+
     return total_score
 
 # 计算优先级
@@ -274,7 +274,7 @@ with open(protocol_file, 'w', encoding='utf-8') as f:
                 f"{exp['lig_ratio']:.0%} | {exp['graphene_ratio']:.0%} | "
                 f"{exp['mxene_ratio']:.0%} | {exp['pedot_ratio']:.0%} | "
                 f"{exp['predicted_conductivity']:.2e} | {exp['cost']:.1f} |\n")
-    
+
     f.write("\n## 实验步骤\n\n")
     f.write("### 1. 材料准备\n")
     f.write("- CNT: 单壁/多壁碳纳米管\n")
@@ -282,19 +282,19 @@ with open(protocol_file, 'w', encoding='utf-8') as f:
     f.write("- 石墨烯：氧化石墨烯 (GO) 或还原氧化石墨烯 (rGO)\n")
     f.write("- MXene: Ti3C2Tx\n")
     f.write("- PEDOT: PEDOT:PSS 水分散液\n\n")
-    
+
     f.write("### 2. 复合工艺\n")
     f.write("1. 按推荐比例称量各组分\n")
     f.write("2. 超声分散 30 分钟\n")
     f.write("3. 真空过滤成膜\n")
     f.write("4. 热压成型 (100°C, 10 MPa, 10 分钟)\n\n")
-    
+
     f.write("### 3. 性能测试\n")
     f.write("- 电导率：四探针法\n")
     f.write("- 力学性能：拉伸测试\n")
     f.write("- 微观结构：SEM/TEM\n")
     f.write("- 拉曼光谱：ID/IG 比值\n\n")
-    
+
     f.write("### 4. 数据反馈\n")
     f.write("- 将实验结果反馈到模型\n")
     f.write("- 更新主动学习推荐\n")

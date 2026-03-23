@@ -20,7 +20,7 @@ else:
     print(f"Downloading CHGNet-MP-2024 to {model_path}...")
     print(f"Size: ~100 MB")
     print(f"This may take 3-5 minutes...")
-    
+
     try:
         # CHGNet 官方下载链接
         url = "https://github.com/CederGroupHub/chgnet/raw/main/pretrained_0.3.0.pth"
@@ -30,7 +30,7 @@ else:
     except Exception as e:
         print(f"[ERROR] Download failed: {e}")
         print(f"Try alternative URL...")
-        
+
         # 备用下载链接
         try:
             url2 = "https://huggingface.co/ceder/chgnet/resolve/main/chgnet_0.3.0.pth"

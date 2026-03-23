@@ -55,11 +55,11 @@ TOOL_RECOMMENDATIONS = {
 
 class NLWorkflowGenerator:
     """Natural Language Workflow Generator"""
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.tools_dir = self.workspace / "30-scripts-tools"
-    
+
     def detect_intent(self, description: str) -> Dict:
         """
 # ==============================================================================
@@ -106,21 +106,21 @@ Fixes:
 检测意图 - 优先精确匹配"""
         desc_lower = description.lower()
         matched_intents = []
-        
+
         # 精确匹配 (优先)
         for intent, patterns in INTENT_PATTERNS.items():
             for pattern in patterns:
                 if len(pattern) >= 2 and pattern.lower() in desc_lower:
                     matched_intents.append(intent)
                     break
-        
+
         primary = matched_intents[0] if matched_intents else "general"
         return {
             "primary": primary,
             "all": list(set(matched_intents)),
             "confidence": len(matched_intents) / len(INTENT_PATTERNS) if matched_intents else 0
         }
-    
+
     def recommend_tools(self, intents: List[str]) -> List[Dict]:
         """推荐工具"""
         tools = []

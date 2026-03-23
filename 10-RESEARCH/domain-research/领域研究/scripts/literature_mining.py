@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 LIG 文献数据挖掘脚本
 从 arXiv 和已下载 PDF 中提取 LIG 相关数据

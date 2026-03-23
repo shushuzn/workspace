@@ -30,18 +30,18 @@ from typing import Dict, List, Optional
 
 class UndoRedo:
     """撤销/重做工具"""
-    
+
     MAX_HISTORY = 50  # 默认历史深度
-    
+
     def __init__(self, max_depth: int = None):
         self.workspace = Path(__file__).parent.parent
         self.history_dir = self.workspace / "13-memory/.undoredo"
         self.history_dir.mkdir(parents=True, exist_ok=True)
         self.history_file = self.history_dir / "history.json"
-        
+
         self.max_depth = max_depth or self.MAX_HISTORY
         self._ensure_history()
-    
+
     def _ensure_history(self):
         """确保历史文件存在"""
         if not self.history_file.exists():
@@ -50,15 +50,15 @@ class UndoRedo:
                 "redo_stack": [],
                 "current": None
             })
-    
+
     def _load(self) -> dict:
         with open(self.history_file, encoding="utf-8") as f:
             return json.load(f)
-    
+
     def _save(self, history: dict):
         with open(self.history_file, "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
-    
+
     def push(self, action: str, data: dict = None) -> Dict:
         """
 # ==============================================================================
@@ -104,31 +104,31 @@ Fixes:
 
 记录操作"""
         history = self._load()
-        
+
         entry = {
             "action": action,
             "data": data or {},
             "timestamp": datetime.now().isoformat()
         }
-        
+
         # 添加到undo栈
         history["undo_stack"].append(entry)
-        
+
         # 清空redo栈
         history["redo_stack"] = []
-        
+
         # 限制深度
         if len(history["undo_stack"]) > self.max_depth:
             history["undo_stack"] = history["undo_stack"][-self.max_depth:]
-        
+
         self._save(history)
-        
+
         return {
             "status": "success",
             "action": action,
             "undo_depth": len(history["undo_stack"])
         }
-    
+
     def undo(self) -> Dict:
         """撤销"""
         history = self._load()

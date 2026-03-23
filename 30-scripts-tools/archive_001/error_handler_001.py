@@ -15,12 +15,12 @@ from typing import Dict, List, Optional, Tuple
 
 class FriendlyErrorHandler:
     """Convert technical errors to user-friendly messages with solutions"""
-    
+
     def __init__(self):
         self.error_patterns = self._load_error_patterns()
         self.log_file = Path("13-memory/error_log.json")
         self.error_log = self._load_error_log()
-    
+
     def _load_error_patterns(self) -> Dict:
         """Load error pattern library"""
         return {
@@ -59,7 +59,7 @@ class FriendlyErrorHandler:
                 "retryable": False,
                 "category": "git"
             },
-            
+
             # Python errors
             "python_syntax": {
                 "patterns": [
@@ -105,7 +105,7 @@ class FriendlyErrorHandler:
                 "retryable": False,
                 "category": "python"
             },
-            
+
             # Workflow errors
             "workflow_step": {
                 "patterns": [
@@ -129,7 +129,7 @@ class FriendlyErrorHandler:
                 "retryable": False,
                 "category": "workflow"
             },
-            
+
             # General errors
             "timeout": {
                 "patterns": [
@@ -166,13 +166,13 @@ class FriendlyErrorHandler:
                 "category": "general"
             },
         }
-    
+
     def _load_error_log(self) -> Dict:
         """Load error log"""
         if self.log_file.exists():
             with open(self.log_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        
+
         return {
             "version": "1.0",
             "errors": [],
@@ -183,13 +183,13 @@ class FriendlyErrorHandler:
                 "resolved_count": 0
             }
         }
-    
+
     def _save_error_log(self):
         """Save error log"""
         self.log_file.parent.mkdir(parents=True, exist_ok=True)
         with open(self.log_file, 'w', encoding='utf-8') as f:
             json.dump(self.error_log, f, ensure_ascii=False, indent=2)
-    
+
     def analyze_error(self, error_message: str) -> Dict:
         """
         Analyze error message and provide friendly response
@@ -210,7 +210,7 @@ class FriendlyErrorHandler:
             "matched_pattern": None,
             "timestamp": datetime.now().isoformat()
         }
-        
+
         # Try to match error patterns
         for error_type, error_info in self.error_patterns.items():
             for pattern in error_info["patterns"]:
@@ -222,47 +222,47 @@ class FriendlyErrorHandler:
                     result["matched_pattern"] = error_type
                     result["confidence"] = 0.9
                     break
-            
+
             if result["confidence"] > 0:
                 break
-        
+
         # Log the error
         self._log_error(result)
-        
+
         return result
-    
+
     def _log_error(self, result: Dict):
         """Log error to file"""
         self.error_log["errors"].append(result)
         self.error_log["stats"]["total_errors"] += 1
-        
+
         category = result["category"]
         self.error_log["stats"]["by_category"][category] = \
             self.error_log["stats"]["by_category"].get(category, 0) + 1
-        
+
         if result["retryable"]:
             self.error_log["stats"]["retryable_count"] += 1
-        
+
         # Keep only last 100 errors
         self.error_log["errors"] = self.error_log["errors"][-100:]
-        
+
         self._save_error_log()
-    
+
     def get_friendly_message(self, error_message: str) -> str:
         """Get just the friendly message"""
         result = self.analyze_error(error_message)
         return result["friendly_message"]
-    
+
     def get_solution(self, error_message: str) -> str:
         """Get just the solution"""
         result = self.analyze_error(error_message)
         return result["solution"]
-    
+
     def should_retry(self, error_message: str) -> bool:
         """Check if error is retryable"""
         result = self.analyze_error(error_message)
         return result["retryable"]
-    
+
     def format_error_response(self, error_message: str) -> str:
         """
         Format complete error response for user
@@ -271,7 +271,7 @@ class FriendlyErrorHandler:
             Formatted string with message and solution
         """
         result = self.analyze_error(error_message)
-        
+
         output = []
         output.append("\n" + "=" * 60)
         output.append(" ERROR")
@@ -284,36 +284,36 @@ class FriendlyErrorHandler:
         output.append("-" * 60)
         output.append(result["solution"])
         output.append("\n" + "=" * 60 + "\n")
-        
+
         return "\n".join(output)
-    
+
     def get_stats(self) -> Dict:
         """Get error statistics"""
         return self.error_log["stats"]
-    
+
     def display_status(self) -> str:
         """Display error handler status"""
         stats = self.get_stats()
-        
+
         output = []
         output.append("\n" + "=" * 60)
         output.append(" " * 15 + "Error Handler Status")
         output.append("=" * 60)
-        
+
         output.append(f"\n[Statistics]")
         output.append(f"  Total Errors:     {stats['total_errors']}")
         output.append(f"  Retryable:        {stats['retryable_count']}")
-        
+
         output.append(f"\n[By Category]")
         for category, count in stats.get("by_category", {}).items():
             output.append(f"  {category:15} {count}")
-        
+
         output.append(f"\n[Error Patterns Loaded]")
         output.append(f"  Total patterns:   {sum(len(p['patterns']) for p in self.error_patterns.values())}")
         output.append(f"  Pattern types:    {len(self.error_patterns)}")
-        
+
         output.append("\n" + "=" * 60 + "\n")
-        
+
         return "\n".join(output)
 
 logging.basicConfig(level=logging.INFO)
@@ -362,16 +362,16 @@ Fixes:
 
 Test entry point"""
     handler = FriendlyErrorHandler()
-    
+
     print("Friendly Error Handler Test")
     print("=" * 60)
-    
+
     # Display status
     print(handler.display_status())
-    
+
     # Test various errors
     print("\n[Testing Error Analysis]")
-    
+
     test_errors = [
         "fatal: Could not read from remote repository",
         "SyntaxError: invalid syntax",
@@ -380,7 +380,7 @@ Test entry point"""
         "TimeoutError: Connection timed out",
         "Unknown error xyz",
     ]
-    
+
     for error in test_errors:
         print(f"\n  Error: {error}")
         result = handler.analyze_error(error)
@@ -388,12 +388,12 @@ Test entry point"""
         print(f"    Category: {result['category']}")
         print(f"    Retryable: {result['retryable']}")
         print(f"    Confidence: {result['confidence']:.0%}")
-    
+
     # Test formatted response
     print("\n[Testing Formatted Response]")
     test_error = "fatal: Authentication failed for 'https://github.com/user/repo.git'"
     print(handler.format_error_response(test_error))
-    
+
     print("\n[OK] Error handler test completed")
 
 if __name__ == "__main__":

@@ -64,12 +64,12 @@ best_weight = 0
 
 for gp_weight in np.arange(0.0, 1.05, 0.05):
     en_weight = 1.0 - gp_weight
-    
+
     # For ensemble, we need predictions from both models
     # GP uses 3 features, EN uses 6 features - need to align
     # Simple approach: use GP weight for GP prediction, EN weight for EN prediction
     y_pred_ensemble = gp_weight * y_pred_gp + en_weight * y_pred_en
-    
+
     r2_ens = r2_score(y, y_pred_ensemble)
     if r2_ens > best_r2:
         best_r2 = r2_ens

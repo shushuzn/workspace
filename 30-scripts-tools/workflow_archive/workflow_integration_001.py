@@ -35,25 +35,25 @@ class WorkflowIntegration:
             "tools": ["news_workflow_001"]
         }
     }
-    
+
     def list(self):
         return self.INTEGRATIONS
-    
+
     def status(self, integration):
         if integration not in self.INTEGRATIONS:
             return {"error": f"Unknown integration: {integration}"}
-        
+
         tools = self.INTEGRATIONS[integration]["tools"]
         status = {}
         for tool in tools:
             path = TOOLS_DIR / f"{tool}.py"
             status[tool] = "installed" if path.exists() else "missing"
-        
+
         return {"integration": integration, "status": status}
 
 if __name__ == "__main__":
     hub = WorkflowIntegration()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--list":

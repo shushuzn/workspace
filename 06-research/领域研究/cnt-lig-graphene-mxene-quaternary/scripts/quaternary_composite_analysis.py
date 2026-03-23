@@ -77,16 +77,16 @@ for i in range(steps + 1):
     for j in range(steps + 1 - i):
         for k in range(steps + 1 - i - j):
             l = steps - i - j - k
-            
+
             cnt_ratio = i / steps
             lig_ratio = j / steps
             graphene_ratio = k / steps
             mxene_ratio = l / steps
-            
+
             # 过滤极端比例 (确保每种组分至少 5%)
             if min(cnt_ratio, lig_ratio, graphene_ratio, mxene_ratio) < 0.05:
                 continue
-            
+
             # 四元协同效应模型
             # 1. 二元协同
             synergy_cnt_lig = 0.3 * np.exp(-((cnt_ratio - 0.3) ** 2) / 0.05)
@@ -95,25 +95,25 @@ for i in range(steps + 1):
             synergy_lig_g = 0.15 * np.exp(-((lig_ratio - graphene_ratio) ** 2) / 0.05)
             synergy_lig_mxene = 0.15 * np.exp(-((lig_ratio - mxene_ratio) ** 2) / 0.05)
             synergy_g_mxene = 0.25 * np.exp(-((graphene_ratio - mxene_ratio) ** 2) / 0.02)
-            
+
             # 2. 三元协同
             synergy_ternary = (
                 0.15 * cnt_ratio * graphene_ratio * mxene_ratio +  # CNT-G-MXene
                 0.10 * cnt_ratio * lig_ratio * graphene_ratio +    # CNT-LIG-G
                 0.10 * cnt_ratio * lig_ratio * mxene_ratio         # CNT-LIG-MXene
             )
-            
+
             # 3. 四元协同 (独特效应)
             # MXene 赝电容 + 石墨烯高导电 + CNT 长程 + LIG 柔性
             synergy_quaternary = 0.2 * cnt_ratio * lig_ratio * graphene_ratio * mxene_ratio * 20
-            
+
             # 总协同因子
             total_synergy = 1.0 + (
                 synergy_cnt_lig + synergy_cnt_g + synergy_cnt_mxene +
                 synergy_lig_g + synergy_lig_mxene + synergy_g_mxene +
                 synergy_ternary + synergy_quaternary
             )
-            
+
             # 复合电导率 (混合规则 + 协同)
             base_conductivity = (
                 cnt_ratio * material_properties['CNT']['conductivity'] +
@@ -121,13 +121,13 @@ for i in range(steps + 1):
                 graphene_ratio * material_properties['Graphene']['conductivity'] +
                 mxene_ratio * material_properties['MXene']['conductivity']
             )
-            
+
             composite_conductivity = base_conductivity * total_synergy
-            
+
             # 添加实验噪声
             noise = np.random.normal(1.0, 0.06)
             composite_conductivity *= noise
-            
+
             quaternary_data.append({
                 'sample_id': f'Q-{cnt_ratio:.2f}-{lig_ratio:.2f}-{graphene_ratio:.2f}-{mxene_ratio:.2f}',
                 'cnt_ratio': cnt_ratio,
@@ -188,34 +188,34 @@ try:
     lig_conductivity = 1.94e3  # LIG 平均
     graphene_conductivity = 1e6  # 石墨烯
     mxene_conductivity = 6e4  # MXene
-    
+
     # 二元复合
     binary_data = pd.read_csv("11-research/cnt-lig-composite/data/cnt_lig_composite_dataset.csv")
     binary_conductivity = binary_data['composite_conductivity'].mean()
     binary_synergy = binary_data['synergy_factor'].mean() - 1
-    
+
     # 三元复合
     ternary_data = pd.read_csv("11-research/cnt-lig-graphene-ternary/data/ternary_composite_dataset.csv")
     ternary_conductivity = ternary_data['composite_conductivity'].mean()
     ternary_synergy = ternary_data['synergy_3d'].mean() - 1
-    
+
     print(f"\n📈 性能演进:")
     print(f"  单一 CNT:   {cnt_conductivity:.2e} S/m")
     print(f"  单一 LIG:   {lig_conductivity:.2e} S/m")
     print(f"  二元复合：  {binary_conductivity:.2e} S/m (协同 {binary_synergy*100:.1f}%)")
     print(f"  三元复合：  {ternary_conductivity:.2e} S/m (协同 {ternary_synergy*100:.1f}%)")
     print(f"  四元复合：  {df_quaternary['composite_conductivity'].mean():.2e} S/m (协同 {(df_quaternary['total_synergy'].mean()-1)*100:.1f}%)")
-    
+
     # 计算提升
     improvement_binary = (binary_conductivity / cnt_conductivity - 1) * 100
     improvement_ternary = (ternary_conductivity / binary_conductivity - 1) * 100
     improvement_quaternary = (df_quaternary['composite_conductivity'].mean() / ternary_conductivity - 1) * 100
-    
+
     print(f"\n📊 相对提升:")
     print(f"  单一→二元：{improvement_binary:+.1f}%")
     print(f"  二元→三元：{improvement_ternary:+.1f}%")
     print(f"  三元→四元：{improvement_quaternary:+.1f}%")
-    
+
 except FileNotFoundError as e:
     print(f"  ⚠️  历史数据未找到：{e}")
     print(f"  仅显示四元数据")

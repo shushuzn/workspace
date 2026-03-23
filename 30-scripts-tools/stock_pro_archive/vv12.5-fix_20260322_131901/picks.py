@@ -31,9 +31,9 @@ def get_top_picks_report(results):
     """Generate comprehensive top picks report"""
     if not results:
         return "[Picks] No data"
-    
+
     report = "# Top Picks Report\n\n"
-    
+
     # Top 10 by score
     top10 = get_top_picks(results, 10)
     report += "## Top 10 by Score\n\n"
@@ -41,7 +41,7 @@ def get_top_picks_report(results):
     report += "|---|--------|-------|-------|--------|--------|-----|\n"
     for i, r in enumerate(top10, 1):
         report += f"| {i} | {r['symbol']} | ${r['price']:.2f} | {r['score']} | {r['upside']:+.1f}% | {r['rating']} | {r['pe']:.1f}x |\n"
-    
+
     # Best value
     best_value = get_best_value(results, 5)
     report += "\n## Best Value\n\n"
@@ -49,7 +49,7 @@ def get_top_picks_report(results):
     report += "|--------|-------|-------|--------|--------|\n"
     for r in best_value:
         report += f"| {r['symbol']} | ${r['price']:.2f} | {r['score']} | {r['upside']:+.1f}% | {r['rating']} |\n"
-    
+
     # Growth picks
     growth = get_growth_picks(results, 5)
     report += "\n## Growth Picks\n\n"
@@ -57,7 +57,7 @@ def get_top_picks_report(results):
     report += "|--------|-------|-------|------------|--------|\n"
     for r in growth:
         report += f"| {r['symbol']} | ${r['price']:.2f} | {r['score']} | {r.get('rev_g', 0):+.1f}% | {r['rating']} |\n"
-    
+
     # Defensive picks
     defensive = get_defensive_picks(results, 5)
     report += "\n## Defensive Picks (Low Risk)\n\n"
@@ -65,7 +65,7 @@ def get_top_picks_report(results):
     report += "|--------|-------|------|----------|--------|\n"
     for r in defensive:
         report += f"| {r['symbol']} | ${r['price']:.2f} | {r.get('beta', 1):.1f} | {r.get('div', 0):.2f}% | {r['rating']} |\n"
-    
+
     return report
 
 
@@ -73,13 +73,13 @@ def quick_picks(results):
     """Show quick picks summary"""
     if not results:
         return "[Picks] No data"
-    
+
     top = get_top_picks(results, 5)
-    
+
     output = "# Quick Picks\n\n"
     output += "| Symbol | Price | Score | Upside | Why |\n"
     output += "|--------|-------|-------|--------|-----|\n"
-    
+
     for r in top:
         # Generate brief reason
         reasons = []
@@ -93,8 +93,8 @@ def quick_picks(results):
             reasons.append("Strong FCF")
         if r.get("peg", 99) < 1:
             reasons.append("Low PEG")
-        
+
         reason = ", ".join(reasons[:2]) if reasons else "-"
         output += f"| {r['symbol']} | ${r['price']:.2f} | {r['score']} | {r['upside']:+.1f}% | {reason} |\n"
-    
+
     return output

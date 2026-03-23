@@ -12,7 +12,7 @@ from datetime import datetime
 
 core_files = [
     "SOUL.md",
-    "USER.md", 
+    "USER.md",
     "AGENTS.md",
     "TOOLS.md",
     "HEARTBEAT.md",

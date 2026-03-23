@@ -41,13 +41,13 @@ def save_report(report):
     """保存报告"""
     date_str = datetime.now().strftime('%Y-%m-%d')
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     md_file = OUTPUT_DIR / f"daily-report-{date_str}.md"
     with open(md_file, 'w', encoding='utf-8') as f:
         f.write(f"# {report['title']}\n\n")
         f.write(f"**生成时间:** {report['generated_at']}\n\n")
         f.write("---\n\n")
-        
+
         f.write("## 📊 今日概览\n\n")
         data = report['data']
         f.write(f"- **arXiv 论文:** {data['papers_collected']} 篇\n")
@@ -56,14 +56,14 @@ def save_report(report):
         f.write(f"- **Reddit 帖子:** {data['reddit_posts']} 篇\n")
         f.write(f"- **蒸馏观点:** {data['viewpoints_distilled']} 条\n\n")
         f.write("---\n\n")
-        
+
         f.write("## ✨ 亮点\n\n")
         for highlight in report['highlights']:
             f.write(f"- {highlight}\n")
         f.write("\n---\n\n")
-        
+
         f.write("*本报告由 Auto Report Generator v1 自动生成*\n")
-    
+
     print(f"[OK] Saved daily report to {md_file}")
     return md_file
 
@@ -72,16 +72,16 @@ def generate():
     print("=" * 60)
     print("Auto Report Generator v1")
     print("=" * 60)
-    
+
     print("\n[1/3] Loading daily data...")
     data = load_daily_data()
-    
+
     print("\n[2/3] Generating report...")
     report = generate_daily_report(data)
-    
+
     print("\n[3/3] Saving report...")
     save_report(report)
-    
+
     print("-" * 60)
     print("[COMPLETE]")
     print("=" * 60)

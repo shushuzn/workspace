@@ -41,21 +41,21 @@ for i, id in enumerate(ids, 1):
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=8) as r:
             content = r.read().decode('utf-8')
-        
+
         # Extract title
         title_match = re.search(r'<title>([^<]+)</title>', content)
         if title_match:
             title = title_match.group(1).replace(' - 金十数据', '').strip()
-            
+
             # Extract content from meta tags
             desc_match = re.search(r'<meta[^>]+name="description"[^>]+content="([^"]+)"', content)
             content_text = desc_match.group(1) if desc_match else ""
-            
+
             print(f"【{i}】 {title}")
             if content_text:
                 print(f"    {content_text[:100]}...")
             print()
-            
+
             news_list.append({
                 'id': id,
                 'title': title,
@@ -63,7 +63,7 @@ for i, id in enumerate(ids, 1):
                 'link': url,
                 'time': id[:8]  # Extract timestamp from ID
             })
-        
+
         time.sleep(0.3)  # Rate limiting
     except Exception as e:
         print(f"【{i}】 Error: {e}")

@@ -25,7 +25,7 @@ def load_shortlist():
     if not SHORTLIST_FILE.exists():
         print("⚠️  未找到入围清单，请先运行筛选工具")
         return []
-    
+
     ideas = []
     with open(SHORTLIST_FILE, 'r', encoding='utf-8') as f:
         for line in f:
@@ -56,11 +56,11 @@ def prioritize(ideas):
         "P2": [],  # 低价值 + 低难度
         "P3": []   # 低价值 + 高难度
     }
-    
+
     for idea in ideas:
         value = idea['impact'] + idea['novelty']  # 价值 = 影响力 + 新颖性
         difficulty = 6 - idea['feasibility']  # 难度 = 6 - 可行性
-        
+
         if value >= 7 and difficulty <= 3:
             matrix["P0"].append(idea)
         elif value >= 7 and difficulty > 3:
@@ -69,7 +69,7 @@ def prioritize(ideas):
             matrix["P2"].append(idea)
         else:
             matrix["P3"].append(idea)
-    
+
     return matrix
 
 def save_matrix(matrix):
@@ -86,7 +86,7 @@ def save_matrix(matrix):
         "recommendations": [],
         "created_at": datetime.now().isoformat()
     }
-    
+
     # 生成建议
     if matrix["P0"]:
         result["recommendations"].append(f"立即执行：{len(matrix['P0'])} 个高价值低难度想法")
@@ -96,10 +96,10 @@ def save_matrix(matrix):
         result["recommendations"].append(f"可选执行：{len(matrix['P2'])} 个低价值低难度想法")
     if not matrix["P0"] and not matrix["P1"]:
         result["recommendations"].append("⚠️  建议重新头脑风暴，缺乏高价值想法")
-    
+
     with open(MATRIX_FILE, 'w', encoding='utf-8') as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
-    
+
     print(f"✅ 优先级矩阵已保存：{MATRIX_FILE}")
     return result
 
@@ -108,14 +108,14 @@ def print_matrix(matrix):
     print(f"\n{'='*60}")
     print("📊 优先级矩阵")
     print(f"{'='*60}\n")
-    
+
     priorities = [
         ("P0", "🔴 高价值 + 低难度", "立即执行"),
         ("P1", "🟡 高价值 + 高难度", "规划执行"),
         ("P2", "🟢 低价值 + 低难度", "可选执行"),
         ("P3", "⚪ 低价值 + 高难度", "暂不执行")
     ]
-    
+
     for key, label, action in priorities:
         ideas = matrix[key]
         print(f"{key}: {label} - {action}")
@@ -129,19 +129,19 @@ def main():
     print(f"{'='*60}")
     print("🎯 优先级排序")
     print(f"{'='*60}\n")
-    
+
     ideas = load_shortlist()
-    
+
     if not ideas:
         print("❌ 没有入围想法，请先运行筛选工具")
         return
-    
+
     print(f"加载 {len(ideas)} 个入围想法\n")
-    
+
     matrix = prioritize(ideas)
     result = save_matrix(matrix)
     print_matrix(matrix)
-    
+
     print("💡 建议:")
     for rec in result["recommendations"]:
         print(f"  - {rec}")

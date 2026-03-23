@@ -103,11 +103,11 @@ print("\n[5/6] Running simulation...")
 
 for n in range(nt):
     T_new = T.copy()
-    
+
     # Internal nodes (diffusion)
     for i in range(1, nz-1):
         T_new[i] = T[i] + alpha * dt / dz**2 * (T[i+1] - 2*T[i] + T[i-1])
-    
+
     # Surface boundary
     if n * dt < t_dwell:
         # Laser heating during dwell time
@@ -118,12 +118,12 @@ for n in range(nt):
         # Convection boundary (simplified)
         h = 10  # W/(m2.K) convection coefficient
         T_new[0] = T[0] - h * (T[0] - T_env) * dt / (rho * Cp * dz)
-    
+
     # Bottom boundary (adiabatic)
     T_new[nz-1] = T[nz-1]
-    
+
     T = T_new
-    
+
     # Record
     if n in record_times:
         T_history.append(T.copy())
@@ -149,7 +149,7 @@ if T_max_analytical > 0:
     error = abs(T_max_sim - T_max_analytical) / T_max_analytical * 100
     print(f"\n  Comparison:")
     print(f"    Error: {error:.1f}%")
-    
+
     if error < 50:
         print(f"    [OK] Reasonable agreement!")
     elif error < 100:
@@ -206,7 +206,7 @@ for n in range(nt):
     time_full.append(n * dt * 1e6)  # us
 
 ax2.plot(time_full, T_surface_full, 'b-', linewidth=2)
-ax2.axvline(x=t_dwell*1e6, color='r', linestyle='--', linewidth=2, 
+ax2.axvline(x=t_dwell*1e6, color='r', linestyle='--', linewidth=2,
             label=f'Dwell time={t_dwell*1e6:.0f} us')
 ax2.axhline(y=T_max_analytical, color='g', linestyle=':', linewidth=2,
             label=f'Analytical T_max={T_max_analytical:.0f} K')

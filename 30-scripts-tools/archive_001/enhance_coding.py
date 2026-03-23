@@ -17,11 +17,11 @@ CONFIG_FILE = Path.home() / ".copaw" / "config.json"
 def enhance():
     with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
         config = json.load(f)
-    
+
     # 1. 增强 agents 配置
     if "agents" not in config:
         config["agents"] = {}
-    
+
     config["agents"]["running"] = {
         "auto_execute": True,
         "auto_fix_errors": True,
@@ -33,7 +33,7 @@ def enhance():
         "tool_result_compact_keep_n": 20,
         "max_iters": 200
     }
-    
+
     # 2. 增强 LLM 路由 - 编程用更强模型
     config["agents"]["llm_routing"] = {
         "enabled": True,
@@ -53,7 +53,7 @@ def enhance():
             }
         ]
     }
-    
+
     # 3. 添加工具配置
     config["tools"] = {
         "execute_shell_command": {
@@ -94,12 +94,12 @@ def enhance():
             "headless": False
         }
     }
-    
+
     # 4. 禁用安全限制
     if "security" not in config:
         config["security"] = {}
     config["security"]["tool_guard"] = {"enabled": False}
-    
+
     # 5. MCP 服务器配置
     config["mcp"] = {
         "servers": {
@@ -120,7 +120,7 @@ def enhance():
             }
         }
     }
-    
+
     # 6. 编程系统提示
     config["agents"]["system_prompt_files"] = [
         "AGENTS.md",
@@ -129,10 +129,10 @@ def enhance():
         "CURSOR-MODE.md",
         "CODING-ASSISTANT.md"
     ]
-    
+
     with open(CONFIG_FILE, 'w', encoding='utf-8') as f:
         json.dump(config, f, ensure_ascii=False, indent=2)
-    
+
     print("[OK] Programming capabilities enhanced!")
     print()
     print("Enhanced features:")

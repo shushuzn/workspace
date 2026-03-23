@@ -29,7 +29,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
     <title>Stock Dashboard - {symbol}</title>
     <style>
         * {{ margin: 0; padding: 0; box-sizing: border-box; }}
-        body {{ 
+        body {{
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
             min-height: 100vh;
@@ -102,7 +102,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
         <h1>📊 Stock Dashboard</h1>
         <div class="subtitle">{symbol} - {timestamp}</div>
     </div>
-    
+
     <div class="grid">
         <!-- 价格卡片 -->
         <div class="card">
@@ -110,7 +110,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             <div class="price">${price}</div>
             <span class="change {change_class}">{change_pct:+.2f}%</span>
         </div>
-        
+
         <!-- 技术指标 -->
         <div class="card">
             <h3>📈 技术指标</h3>
@@ -131,7 +131,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 <span class="value">${sma50}</span>
             </div>
         </div>
-        
+
         <!-- 趋势分析 -->
         <div class="card">
             <h3>📉 趋势分析</h3>
@@ -152,7 +152,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 <span class="value">${resistance:.2f}</span>
             </div>
         </div>
-        
+
         <!-- 投资建议 -->
         <div class="card">
             <h3>🎯 投资建议</h3>
@@ -172,13 +172,13 @@ HTML_TEMPLATE = """<!DOCTYPE html>
                 </div>
             </div>
         </div>
-        
+
         <!-- 警报 -->
         <div class="card">
             <h3>🔔 最近警报</h3>
             {alerts_html}
         </div>
-        
+
         <!-- 财务数据 -->
         <div class="card">
             <h3>💼 财务数据</h3>
@@ -200,7 +200,7 @@ HTML_TEMPLATE = """<!DOCTYPE html>
             </div>
         </div>
     </div>
-    
+
     <div class="footer">
         Stock Dashboard MVP | 数据更新: {timestamp}
     </div>
@@ -210,12 +210,12 @@ HTML_TEMPLATE = """<!DOCTYPE html>
 
 class StockDashboard:
     """股票仪表板"""
-    
+
     def __init__(self, symbol: str = "AAPL"):
         self.symbol = symbol.upper()
         self.port = PORT
         self.data = self._get_sample_data()
-    
+
     def _get_sample_data(self) -> Dict:
         """
 # ==============================================================================
@@ -286,7 +286,7 @@ Fixes:
                 {"level": "low", "message": "价格变动 +1.25%"}
             ]
         }
-    
+
     def _generate_html(self) -> str:
         """生成 HTML"""
         d = self.data

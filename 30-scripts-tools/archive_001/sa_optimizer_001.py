@@ -35,16 +35,16 @@ CONFIG_FILE = Path("30-scripts-tools/sa_027_config.json")
 
 class StrategyOptimizer:
     """策略参数优化器"""
-    
+
     def __init__(self):
         self.opt_dir = OPT_DIR
         self.config = self._load_config()
-        
+
         self.opt_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.results_file = self.opt_dir / "optimization_results.json"
         self.best_params_file = self.opt_dir / "best_params.json"
-    
+
     def _load_config(self) -> dict:
         default = {
             "default_metric": "sharpe_ratio",
@@ -53,7 +53,7 @@ class StrategyOptimizer:
             "mutation_rate": 0.1,
             "crossover_rate": 0.7
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -61,7 +61,7 @@ class StrategyOptimizer:
             except (Exception,):
                 return default
         return default
-    
+
     def _simulate_performance(self, params: dict, strategy: str) -> dict:
         """
 # ==============================================================================
@@ -107,52 +107,52 @@ Fixes:
 
 模拟策略绩效 (实际应调用回测)"""
         random.seed(hash(str(params)) % 10000)
-        
+
         # 根据不同策略计算绩效
         if strategy == "ma_cross":
             fast = params.get("fast_period", 5)
             slow = params.get("slow_period", 20)
-            
+
             if fast >= slow:
                 return {"sharpe": 0, "return": 0, "drawdown": 100}
-            
+
             # 模拟
             sharpe = random.uniform(0.5, 2.5) * (1 - fast/slow)
             retrn = random.uniform(-5, 15) * (1 + slow/fast)
             dd = random.uniform(2, 20)
-            
+
         elif strategy == "rsi":
             period = params.get("period", 14)
             oversold = params.get("oversold", 30)
             overbought = params.get("overbought", 70)
-            
+
             if oversold >= overbought:
                 return {"sharpe": 0, "return": 0, "drawdown": 100}
-            
+
             sharpe = random.uniform(0.3, 2.0)
             retrn = random.uniform(-3, 12)
             dd = random.uniform(5, 25)
-            
+
         elif strategy == "breakout":
             period = params.get("period", 20)
             atr_mult = params.get("atr_multiplier", 2.0)
-            
+
             sharpe = random.uniform(0.4, 1.8)
             retrn = random.uniform(-2, 18)
             dd = random.uniform(8, 30)
-            
+
         else:
             sharpe = random.uniform(0.2, 1.5)
             retrn = random.uniform(-5, 10)
             dd = random.uniform(5, 25)
-        
+
         return {
             "sharpe": round(sharpe, 3),
             "return": round(retrn, 2),
             "drawdown": round(dd, 2),
             "score": round(sharpe * 0.4 + (retrn/10) * 0.3 - (dd/100) * 0.3, 3)
         }
-    
+
     def grid_search(self, strategy: str, param_grid: dict) -> dict:
         """网格搜索"""
         import itertools

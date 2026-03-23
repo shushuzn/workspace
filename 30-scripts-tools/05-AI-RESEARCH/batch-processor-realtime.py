@@ -39,22 +39,22 @@ except ImportError:
 
 class StreamingOutput:
     """流式输出管理器"""
-    
+
     def __init__(self, jsonl_path: Optional[str] = None, verbose: bool = True):
         self.jsonl_path = jsonl_path
         self.verbose = verbose
         self.jsonl_file = None
         self.start_time = time.time()
-        
+
     def __enter__(self):
         if self.jsonl_path:
             self.jsonl_file = open(self.jsonl_path, 'w', encoding='utf-8')
         return self
-    
+
     def __exit__(self, exc_type, exc_val, exc_tb):
         if self.jsonl_file:
             self.jsonl_file.close()
-    
+
     def log_event(self, event_type: str, data: Dict):
         """记录事件 (流式输出)"""
         event = {
@@ -63,48 +63,48 @@ class StreamingOutput:
             "event": event_type,
             "data": data
         }
-        
+
         # 输出到控制台
         if self.verbose:
             self._print_event(event)
-        
+
         # 输出到 JSONL 文件
         if self.jsonl_file:
             self.jsonl_file.write(json.dumps(event, ensure_ascii=False) + "\n")
             self.jsonl_file.flush()
-    
+
     def _print_event(self, event: Dict):
         """打印事件到控制台"""
         event_type = event["event"]
         data = event["data"]
-        
+
         if event_type == "batch_start":
             print(f"\n{'='*60}")
             print(f"🚀 批量任务启动：{data.get('batch_id')}")
             print(f"📊 论文数量：{data.get('total_papers')}, 并发数：{data.get('max_concurrent')}")
             print(f"{'='*60}\n")
-        
+
         elif event_type == "paper_start":
             print(f"  [{data.get('current')}/{data.get('total')}] 处理 {data.get('paper_id')}...")
-        
+
         elif event_type == "paper_complete":
             status_icon = "✅" if data.get('status') == 'completed' else "❌"
             duration = data.get('duration', 0)
             print(f"     {status_icon} 完成 ({duration:.1f}s) → {data.get('output', 'N/A')}")
-        
+
         elif event_type == "paper_failed":
             print(f"     ❌ 失败：{data.get('error', 'Unknown error')}")
-        
+
         elif event_type == "paper_subagent_started":
             print(f"     🤖 子代理已启动：{data.get('session_key', 'N/A')}")
-        
+
         elif event_type == "progress":
             progress = data.get('progress', 0)
             bar_width = 40
             filled = int(bar_width * progress / 100)
             bar = "█" * filled + "░" * (bar_width - filled)
             print(f"     进度：[{bar}] {progress:.1f}%")
-        
+
         elif event_type == "batch_complete":
             print(f"\n{'='*60}")
             print(f"✅ 批量处理完成!")
@@ -118,7 +118,7 @@ class StreamingOutput:
 
 class BatchProcessorRealtime:
     """实时批量处理器 - 集成真实 sessions_spawn"""
-    
+
     def __init__(self, max_concurrent: int = 4, timeout: int = 600, streaming: bool = False):
         self.max_concurrent = max_concurrent
         self.timeout = timeout
@@ -126,7 +126,7 @@ class BatchProcessorRealtime:
         self.results = []
         self.progress = {}
         self.stream_output: Optional[StreamingOutput] = None
-        
+
     def compress_task_description(self, paper_id: str, task_type: str = "pnote") -> str:
         """
         压缩子代理任务描述
@@ -147,16 +147,16 @@ P-Note 模板要求:
 
 请确保笔记简洁、结构化，便于后续知识图谱构建。
 """
-        
+
         # 压缩版本
         compressed = f"""
 P-Note: arXiv:{paper_id}
 模板：标题 | 问题 | 方法 (3-5) | 结果 | 洞见 | 引用
 要求：简洁/结构化
 """
-        
+
         return compressed.strip()
-    
+
     def create_subagent_task(self, paper_id: str, model: str = "bailian/qwen3.5-plus") -> Dict:
         """创建优化的子代理任务"""
         return {
@@ -168,12 +168,12 @@ P-Note: arXiv:{paper_id}
             "task": self.compress_task_description(paper_id),
             "thinking": "medium"
         }
-    
+
     def set_stream_output(self, stream_output: StreamingOutput):
         """设置流式输出管理器"""
         self.stream_output = stream_output
-    
-    async def process_paper_async(self, paper_id: str, output_dir: str, 
+
+    async def process_paper_async(self, paper_id: str, output_dir: str,
                                    current: int, total: int) -> Dict:
         """
         异步处理单篇论文
@@ -188,7 +188,7 @@ P-Note: arXiv:{paper_id}
             处理结果
         """
         paper_start = time.time()
-        
+
         # 流式输出：paper_start
         if self.stream_output:
             self.stream_output.log_event("paper_start", {
@@ -196,11 +196,11 @@ P-Note: arXiv:{paper_id}
                 "current": current,
                 "total": total
             })
-        
+
         try:
             # 创建子代理任务
             task = self.create_subagent_task(paper_id)
-            
+
             if HAS_OPENCLAW:
                 # 真实调用 sessions_spawn
                 if self.stream_output:
@@ -208,13 +208,13 @@ P-Note: arXiv:{paper_id}
                         "paper_id": paper_id,
                         "session_key": f"pnote-{paper_id}"
                     })
-                
+
                 # 调用 sessions_spawn (实际使用时取消注释)
                 # result = await sessions_spawn(**task)
-                
+
                 # 模拟等待子代理完成
                 await asyncio.sleep(2)  # 实际使用时删除
-                
+
                 result = {
                     "session_key": f"pnote-{paper_id}",
                     "status": "completed",
@@ -228,9 +228,9 @@ P-Note: arXiv:{paper_id}
                     "status": "completed",
                     "output": f"{output_dir}/P-2026-{paper_id}.md"
                 }
-            
+
             duration = time.time() - paper_start
-            
+
             # 流式输出：paper_complete
             if self.stream_output:
                 self.stream_output.log_event("paper_complete", {
@@ -240,7 +240,7 @@ P-Note: arXiv:{paper_id}
                     "duration": duration,
                     "session_key": result.get("session_key")
                 })
-            
+
             return {
                 "id": paper_id,
                 "status": "completed",
@@ -248,10 +248,10 @@ P-Note: arXiv:{paper_id}
                 "duration_seconds": duration,
                 "session_key": result.get("session_key")
             }
-            
+
         except Exception as e:
             duration = time.time() - paper_start
-            
+
             # 流式输出：paper_failed
             if self.stream_output:
                 self.stream_output.log_event("paper_failed", {
@@ -259,14 +259,14 @@ P-Note: arXiv:{paper_id}
                     "error": str(e),
                     "duration": duration
                 })
-            
+
             return {
                 "id": paper_id,
                 "status": "failed",
                 "error": str(e),
                 "duration_seconds": duration
             }
-    
+
     async def process_batch_async(self, paper_ids: List[str], output_dir: str = "Medium/P-Note/") -> Dict:
         """
         异步批量处理论文
@@ -279,7 +279,7 @@ P-Note: arXiv:{paper_id}
             批量处理摘要
         """
         batch_id = f"batch-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
-        
+
         # 流式输出：batch_start
         if self.stream_output:
             self.stream_output.log_event("batch_start", {
@@ -287,30 +287,30 @@ P-Note: arXiv:{paper_id}
                 "total_papers": len(paper_ids),
                 "max_concurrent": self.max_concurrent
             })
-        
+
         start_time = time.time()
-        
+
         # 使用信号量控制并发数
         semaphore = asyncio.Semaphore(self.max_concurrent)
-        
+
         async def process_with_semaphore(paper_id, current, total):
             async with semaphore:
                 return await self.process_paper_async(paper_id, output_dir, current, total)
-        
+
         # 创建任务列表
         tasks = [
             process_with_semaphore(paper_id, i+1, len(paper_ids))
             for i, paper_id in enumerate(paper_ids)
         ]
-        
+
         # 并发执行
         results = await asyncio.gather(*tasks, return_exceptions=True)
-        
+
         # 处理结果
         completed = 0
         failed = 0
         final_results = []
-        
+
         for i, result in enumerate(results):
             if isinstance(result, Exception):
                 failed += 1
@@ -330,14 +330,14 @@ P-Note: arXiv:{paper_id}
                 else:
                     failed += 1
                 final_results.append(result)
-            
+
             # 更新进度
             if self.stream_output:
                 progress = (i + 1) / len(paper_ids) * 100
                 self.stream_output.log_event("progress", {"progress": progress})
-        
+
         elapsed = time.time() - start_time
-        
+
         summary = {
             "batch_id": batch_id,
             "started_at": datetime.now().isoformat(),
@@ -354,13 +354,13 @@ P-Note: arXiv:{paper_id}
                 "async_execution": True
             }
         }
-        
+
         # 流式输出：batch_complete
         if self.stream_output:
             self.stream_output.log_event("batch_complete", summary)
-        
+
         return summary
-    
+
     def process_batch(self, paper_ids: List[str], output_dir: str = "Medium/P-Note/") -> Dict:
         """同步包装器"""
         return asyncio.run(self.process_batch_async(paper_ids, output_dir))
@@ -376,24 +376,24 @@ def main():
     parser.add_argument('--stream', '-s', action='store_true', help='启用流式输出')
     parser.add_argument('--output-jsonl', '-j', help='JSONL 输出文件路径')
     parser.add_argument('--quiet', '-q', action='store_true', help='静默模式 (仅 JSONL)')
-    
+
     args = parser.parse_args()
-    
+
     paper_ids = [p.strip() for p in args.papers.split(',')]
-    
+
     processor = BatchProcessorRealtime(
         max_concurrent=args.max_concurrent,
         timeout=args.timeout,
         streaming=args.stream
     )
-    
+
     if args.dry_run:
         print("🔍 Dry-run 模式")
         print(f"📊 论文数量：{len(paper_ids)}")
         print(f"🤖 并发数：{args.max_concurrent}")
         print(f"⏱️  超时：{args.timeout}秒")
         print(f"📝 OpenClaw 可用：{'是' if HAS_OPENCLAW else '否 (模拟模式)'}\n")
-        
+
         for paper_id in paper_ids:
             task = processor.create_subagent_task(paper_id)
             print(f"任务：{paper_id}")
@@ -405,24 +405,24 @@ def main():
             jsonl_path=args.output_jsonl if args.stream else None,
             verbose=not args.quiet
         ) as stream_output:
-            
+
             # 设置流式输出
             if args.stream:
                 processor.set_stream_output(stream_output)
-            
+
             # 执行批量处理
             summary = processor.process_batch(paper_ids, args.output)
-            
+
             # 保存 JSON 报告
             report_path = f"batch-summary-{summary['batch_id']}.json"
             with open(report_path, 'w', encoding='utf-8') as f:
                 json.dump(summary, f, indent=2, ensure_ascii=False)
-            
+
             if args.stream:
                 print(f"📄 JSONL 流式日志：{args.output_jsonl or '未指定'}")
-            
+
             print(f"📄 JSON 报告：{report_path}")
-            
+
             # 返回退出码
             sys.exit(0 if summary['failed'] == 0 else 1)
 

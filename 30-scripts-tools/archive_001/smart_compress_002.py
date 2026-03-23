@@ -6,7 +6,7 @@ SMART-COMPRESS-002 超级压缩器 v3.0
 
 核心创新:
 1. 结构感知压缩 - 理解Markdown结构
-2. 语义摘要生成 - 智能提取核心信息  
+2. 语义摘要生成 - 智能提取核心信息
 3. 多级压缩 - 支持不同压缩级别
 4. 自适应阈值 - 根据内容类型自动调整
 5. 对话模式 - 专为会话压缩优化
@@ -29,7 +29,7 @@ from collections import defaultdict
 
 class SuperCompressor:
     """超级压缩器 v3.0"""
-    
+
     # Markdown结构标记
     STRUCT_PATTERNS = {
         'h1': r'^#\s+',
@@ -43,7 +43,7 @@ class SuperCompressor:
         'task_done': r'^[-*]\s+\[x\]',
         'task_pending': r'^[-*]\s+\[ \]',
     }
-    
+
     # 优先级关键词
     PRIORITY_WORDS = {
         'critical': 100,  # goal, decision, block, error, stop, critical
@@ -51,19 +51,19 @@ class SuperCompressor:
         'normal': 50,      # tool, file, function, method
         'context': 30,     # test, check, view, list
     }
-    
+
     KEYWORDS = {
         'critical': ['goal', 'constraint', 'decision', 'block', 'error', 'fail', 'stop', 'critical', 'must', 'required'],
         'important': ['done', 'complete', 'fix', 'create', 'update', 'progress', 'next', 'achieved', 'success'],
         'normal': ['tool', 'file', 'function', 'class', 'method', 'script', 'implementation', 'feature'],
         'context': ['test', 'check', 'view', 'read', 'list', 'example', 'note']
     }
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.cache_dir = self.workspace / '13-memory/.compress_cache'
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # 压缩级别配置
         self.LEVELS = {
             'light': {'ratio': 0.7, 'min_lines': 50, 'keep_struct': True},
@@ -71,13 +71,13 @@ class SuperCompressor:
             'aggressive': {'ratio': 0.3, 'min_lines': 30, 'keep_struct': False},
             'extreme': {'ratio': 0.15, 'min_lines': 20, 'keep_struct': False},
         }
-    
+
     # ========== 核心方法 ==========
-    
+
     def analyze_content(self, content: str) -> Dict:
         """分析内容结构"""
         lines = content.split('\n')
-        
+
         analysis = {
             'total_lines': len(lines),
             'total_chars': len(content),
@@ -86,35 +86,35 @@ class SuperCompressor:
             'priority_map': self._build_priority_map(lines),
             'sections': self._extract_sections(lines),
         }
-        
+
         return analysis
-    
+
     def _estimate_tokens(self, text: str) -> int:
         """智能Token估算"""
         chinese = len(re.findall(r'[\u4e00-\u9fff]', text))
         code = len(re.findall(r'[{}()\[\];=]', text))
         english = len(text) - chinese - code
         return chinese + (english // 4) + (code // 3)
-    
+
     def _analyze_structure(self, lines: List[str]) -> Dict:
         """分析Markdown结构"""
         structure = defaultdict(int)
-        
+
         for line in lines:
             for name, pattern in self.STRUCT_PATTERNS.items():
                 if re.match(pattern, line):
                     structure[name] += 1
                     break
-        
+
         return dict(structure)
-    
+
     def _build_priority_map(self, lines: List[str]) -> Dict[int, int]:
         """构建行优先级映射"""
         priority_map = {}
-        
+
         for i, line in enumerate(lines):
             score = 50  # 默认优先级
-            
+
             # 位置权重
             if i < 5:
                 score += 30
@@ -122,7 +122,7 @@ class SuperCompressor:
                 score += 15
             elif i > len(lines) - 5:
                 score += 20
-            
+
             # 结构权重
             for name, pattern in self.STRUCT_PATTERNS.items():
                 if re.match(pattern, line):
@@ -131,7 +131,7 @@ class SuperCompressor:
                     elif name in ['task_done', 'task_pending']:
                         score += 15
                     break
-            
+
             # 关键词权重
             line_lower = line.lower()
             for level, keywords in self.KEYWORDS.items():
@@ -139,16 +139,16 @@ class SuperCompressor:
                     if kw in line_lower:
                         score += self.PRIORITY_WORDS[level]
                         break
-            
+
             priority_map[i] = min(score, 150)  # 上限150
-        
+
         return priority_map
-    
+
     def _extract_sections(self, lines: List[str]) -> List[Dict]:
         """提取章节"""
         sections = []
         current = {'start': 0, 'title': 'header', 'level': 0}
-        
+
         for i, line in enumerate(lines):
             # 检测标题
             h_match = re.match(r'^(#{1,6})\s+(.+)$', line)
@@ -158,61 +158,61 @@ class SuperCompressor:
                     sections.append(current)
                 level = len(h_match.group(1))
                 current = {'start': i, 'title': h_match.group(2), 'level': level, 'end': len(lines)}
-        
+
         if current.get('title'):
             current['end'] = len(lines)
             sections.append(current)
-        
+
         return sections
-    
+
     # ========== 压缩方法 ==========
-    
+
     def compress_structural(self, content: str, level: str = 'normal') -> str:
         """结构感知压缩"""
         lines = content.split('\n')
         config = self.LEVELS.get(level, self.LEVELS['normal'])
-        
+
         analysis = self.analyze_content(content)
         priority_map = analysis['priority_map']
-        
+
         # 计算目标行数
         target_lines = max(config['min_lines'], int(len(lines) * config['ratio']))
-        
+
         # 选择要保留的行
         # 1. 保留所有标题
         # 2. 保留所有任务项
         # 3. 按优先级保留其他行
-        
+
         keep_indices = set()
-        
+
         # 策略: 保留标题行
         for i, line in enumerate(lines):
             if re.match(r'^#{1,3}\s+', line):
                 keep_indices.add(i)
-        
+
         # 策略: 保留任务行
         for i, line in enumerate(lines):
             if re.match(r'^[-*]\s+\[', line):
                 keep_indices.add(i)
-        
+
         # 策略: 按优先级填充剩余
         sorted_by_priority = sorted(priority_map.items(), key=lambda x: x[1], reverse=True)
-        
+
         for idx, score in sorted_by_priority:
             if len(keep_indices) >= target_lines:
                 break
             keep_indices.add(idx)
-        
+
         # 保持顺序并重建
         keep_indices = sorted(keep_indices)
         kept_lines = [lines[i] for i in keep_indices]
-        
+
         # 添加压缩标记
         if len(kept_lines) < len(lines):
             kept_lines.insert(1, f"\n> [{len(lines) - len(kept_lines)} lines compressed | {level} mode]\n")
-        
+
         return '\n'.join(kept_lines)
-    
+
     def compress_semantic(self, content: str) -> str:
         """
 # ==============================================================================
@@ -255,30 +255,30 @@ Fixes:
         lines = content.split('\n')
         analysis = self.analyze_content(content)
         sections = analysis['sections']
-        
+
         result_lines = []
-        
+
         # 保留头部
         header_end = min(5, len(lines))
         result_lines.extend(lines[:header_end])
         result_lines.append("")
-        
+
         # 为每个章节生成摘要
         for section in sections[1:]:  # 跳过header
             title_line = lines[section['start']]
             result_lines.append(title_line)
-            
+
             # 提取该章节中的关键行
             section_lines = lines[section['start']:section['end']]
             key_lines = self._extract_key_lines(section_lines, max(3, len(section_lines) // 5))
             result_lines.extend(key_lines)
             result_lines.append("")
-        
+
         # 添加压缩标记
         result_lines.insert(1, f"\n> [Compressed to {len(result_lines)} lines | Semantic mode]\n")
-        
+
         return '\n'.join(result_lines)
-    
+
     def _extract_key_lines(self, lines: List[str], max_lines: int) -> List[str]:
         """从一组行中提取关键行"""
         if len(lines) <= max_lines:

@@ -19,22 +19,22 @@ from pathlib import Path
 
 class StringUtil:
     """字符串工具"""
-    
+
     @staticmethod
     def camel_to_snake(text: str) -> str:
         import re
         text = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', text)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', text).lower()
-    
+
     @staticmethod
     def snake_to_camel(text: str) -> str:
         components = text.split('_')
         return components[0] + ''.join(x.title() for x in components[1:])
-    
+
     @staticmethod
     def truncate(text: str, length: int = 50) -> str:
         return text[:length] + ('...' if len(text) > length else '')
-    
+
     @staticmethod
     def format_json(text: str, indent: int = 2) -> str:
         try:
@@ -46,31 +46,31 @@ class StringUtil:
 logging.basicConfig(level=logging.INFO)
 def main():
     util = StringUtil()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
-        
+
         if cmd == "--camel2snake":
             text = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else "CamelCase"
             print(util.camel_to_snake(text))
             return 0
-        
+
         if cmd == "--snake2camel":
             text = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else "snake_case"
             print(util.snake_to_camel(text))
             return 0
-        
+
         if cmd == "--truncate":
             text = sys.argv[2] if len(sys.argv) > 2 else "Long text"
             length = int(sys.argv[3]) if len(sys.argv) > 3 else 50
             print(util.truncate(text, length))
             return 0
-        
+
         if cmd == "--format-json":
             text = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else '{"a":1}'
             print(util.format_json(text))
             return 0
-    
+
     print("UTIL-001 String Utility")
     print("Usage:")
     print("  py util_001.py --camel2snake <text>   # CamelCase to snake_case")

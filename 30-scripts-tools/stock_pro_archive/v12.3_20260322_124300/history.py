@@ -12,7 +12,7 @@ class History:
     def __init__(self):
         self.records = []
         self.load()
-    
+
     def load(self):
         """Load history from file"""
         if HISTORY_FILE.exists():
@@ -21,7 +21,7 @@ class History:
                     self.records = json.load(f)
             except Exception:
                 self.records = []
-    
+
     def save(self):
         """Save history to file"""
         # Keep only last MAX_HISTORY records
@@ -29,7 +29,7 @@ class History:
             self.records = self.records[-MAX_HISTORY:]
         with open(HISTORY_FILE, 'w') as f:
             json.dump(self.records, f, indent=2)
-    
+
     def add(self, symbol, data):
         """Add a record"""
         record = {
@@ -42,29 +42,29 @@ class History:
         }
         self.records.append(record)
         self.save()
-    
+
     def get_symbol_history(self, symbol, days=30):
         """Get history for a symbol"""
         cutoff = datetime.now() - timedelta(days=days)
         cutoff_str = cutoff.isoformat()
-        return [r for r in self.records 
+        return [r for r in self.records
                 if r["symbol"] == symbol and r["timestamp"] >= cutoff_str]
-    
+
     def get_price_history(self, symbol, days=30):
         """Get price history for charting"""
         history = self.get_symbol_history(symbol, days)
         return [(r["timestamp"], r["price"]) for r in history]
-    
+
     def get_score_history(self, symbol, days=30):
         """Get score history for charting"""
         history = self.get_symbol_history(symbol, days)
         return [(r["timestamp"], r["score"]) for r in history]
-    
+
     def get_trends(self, days=7):
         """Get trending stocks"""
         cutoff = datetime.now() - timedelta(days=days)
         cutoff_str = cutoff.isoformat()
-        
+
         # Group by symbol
         trends = {}
         for r in self.records:
@@ -73,7 +73,7 @@ class History:
                 if sym not in trends:
                     trends[sym] = []
                 trends[sym].append(r)
-        
+
         # Calculate changes
         result = []
         for sym, records in trends.items():
@@ -88,15 +88,15 @@ class History:
                     "change_pct": change,
                     "records": len(records)
                 })
-        
+
         # Sort by change
         result.sort(key=lambda x: x["change_pct"], reverse=True)
         return result
-    
+
     def stats(self):
         """Get history statistics"""
         return f"[History] {len(self.records)} records, {len(set(r['symbol'] for r in self.records))} symbols"
-    
+
     def clear(self):
         """Clear history"""
         self.records = []

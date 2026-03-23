@@ -11,7 +11,7 @@ def get_price_history(symbol, days=365):
     from .core import fetch
     price, *_ = fetch(symbol)
     current = price
-    
+
     # Simulate price history (in production, use yfinance)
     import random
     base = P.get(symbol, current)
@@ -24,18 +24,18 @@ def get_price_history(symbol, days=365):
             "date": datetime.fromtimestamp(date).strftime("%Y-%m-%d"),
             "price": round(hist_price, 2)
         })
-    
+
     return history
 
 def generate_chart_data(symbol):
     """Generate chart data for a symbol"""
     price, *_ = A.get(symbol, (0, "", ""))
-    
+
     history = get_price_history(symbol)
-    
+
     # Technical indicators
     prices = [h["price"] for h in history]
-    
+
     # Simple moving average
     ma20 = []
     for i in range(len(prices)):
@@ -43,20 +43,20 @@ def generate_chart_data(symbol):
             ma20.append(None)
         else:
             ma20.append(sum(prices[i-19:i+1]) / 20)
-    
+
     ma50 = []
     for i in range(len(prices)):
         if i < 49:
             ma50.append(None)
         else:
             ma50.append(sum(prices[i-49:i+1]) / 50)
-    
+
     # Calculate returns
     returns = []
     for i in range(1, len(prices)):
         ret = (prices[i] - prices[i-1]) / prices[i-1] * 100
         returns.append(round(ret, 2))
-    
+
     return {
         "symbol": symbol,
         "current_price": price,
@@ -70,14 +70,14 @@ def generate_chart_data(symbol):
 def get_stock_data_json(symbol):
     """Get full stock data as JSON for frontend"""
     from .core import analyze
-    
+
     try:
         data = analyze(symbol)
         if not data:
             return {"error": f"Stock {symbol} not found"}
-        
+
         chart = generate_chart_data(symbol)
-        
+
         return {
             "symbol": data["symbol"],
             "name": data.get("name", ""),
@@ -105,10 +105,10 @@ def generate_portfolio_chart(portfolio):
     """Generate portfolio allocation chart data"""
     # portfolio = {"AAPL": 10, "NVDA": 5, "MSFT": 8}
     from .core import analyze
-    
+
     holdings = []
     total_value = 0
-    
+
     for symbol, shares in portfolio.items():
         try:
             data = analyze(symbol)
@@ -125,11 +125,11 @@ def generate_portfolio_chart(portfolio):
                 })
         except:
             pass
-    
+
     # Calculate weights
     for h in holdings:
         h["weight"] = round(h["value"] / total_value * 100, 1) if total_value > 0 else 0
-    
+
     return {
         "holdings": holdings,
         "total_value": round(total_value, 2),

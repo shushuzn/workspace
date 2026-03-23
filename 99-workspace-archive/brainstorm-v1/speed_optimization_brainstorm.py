@@ -347,7 +347,7 @@ def calculate_priority_score(idea):
     impact = idea.get('impact', 5)
     effort = idea.get('effort', 5)
     risk = idea.get('risk', 5)
-    
+
     # 优先级 = (影响 * 2 - 努力 - 风险) / 3
     score = (impact * 2 - effort - risk) / 3
     return round(score, 2)
@@ -355,19 +355,19 @@ def calculate_priority_score(idea):
 def generate_brainstorm_report():
     """生成头脑风暴报告"""
     timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    
+
     all_ideas = []
-    
+
     # 收集所有想法
     for dimension, data in DIMENSIONS.items():
         for idea in data['ideas']:
             idea['dimension'] = dimension
             idea['priority_score'] = calculate_priority_score(idea)
             all_ideas.append(idea)
-    
+
     # 按优先级排序
     all_ideas.sort(key=lambda x: x['priority_score'], reverse=True)
-    
+
     # 生成报告
     report = f"""# 🚀 速度优化头脑风暴报告
 
@@ -383,13 +383,13 @@ def generate_brainstorm_report():
 | 维度 | 想法数 | 权重 | 平均影响 | 平均努力 |
 |------|--------|------|----------|----------|
 """
-    
+
     for dim_name, dim_data in sorted(DIMENSIONS.items(), key=lambda x: x[1]['weight'], reverse=True):
         ideas = dim_data['ideas']
         avg_impact = sum(i['impact'] for i in ideas) / len(ideas)
         avg_effort = sum(i['effort'] for i in ideas) / len(ideas)
         report += f"| {dim_name} | {len(ideas)} | {dim_data['weight']} | {avg_impact:.1f} | {avg_effort:.1f} |\n"
-    
+
     report += f"""
 ---
 
@@ -398,18 +398,18 @@ def generate_brainstorm_report():
 | 排名 | ID | 优化项 | 维度 | 影响 | 努力 | 风险 | 优先级分 | 预估收益 |
 |------|-----|--------|------|------|------|------|----------|----------|
 """
-    
+
     for i, idea in enumerate(all_ideas[:10], 1):
         impact_stars = "⭐" * idea['impact']
         report += f"| {i} | {idea['id']} | {idea['title'][:20]} | {idea['dimension'][:8]} | {idea['impact']} | {idea['effort']} | {idea['risk']} | {idea['priority_score']:.2f} | {idea['estimated_gain'][:20]} |\n"
-    
+
     report += f"""
 ---
 
 ## 📈 按维度分类
 
 """
-    
+
     for dim_name, dim_data in DIMENSIONS.items():
         report += f"""### {dim_name}
 
@@ -420,34 +420,34 @@ def generate_brainstorm_report():
             report += f"  - {idea['description']}\n"
             report += f"  - 预估收益：{idea['estimated_gain']}\n"
             report += f"  - 实现方案：{idea['implementation']}\n\n"
-    
+
     report += f"""---
 
 ## 🎯 实施建议
 
 ### 第一阶段：快速收益 (1-2 周)
 """
-    
+
     quick_wins = [i for i in all_ideas if i['priority'] == 'high' and i['effort'] <= 4]
     for idea in quick_wins[:5]:
         report += f"- [ ] {idea['title']} (预计：{idea['estimated_gain']})\n"
-    
+
     report += f"""
 ### 第二阶段：中等投入 (2-4 周)
 """
-    
+
     medium_term = [i for i in all_ideas if i['priority'] in ['high', 'medium'] and 4 < i['effort'] <= 6]
     for idea in medium_term[:5]:
         report += f"- [ ] {idea['title']} (预计：{idea['estimated_gain']})\n"
-    
+
     report += f"""
 ### 第三阶段：长期优化 (1-2 月)
 """
-    
+
     long_term = [i for i in all_ideas if i['effort'] > 6]
     for idea in long_term[:5]:
         report += f"- [ ] {idea['title']} (预计：{idea['estimated_gain']})\n"
-    
+
     report += f"""
 ---
 
@@ -474,7 +474,7 @@ def generate_brainstorm_report():
 
 *本报告由 speed_optimization_brainstorm.py 自动生成*
 """
-    
+
     return report, all_ideas
 
 def main():
@@ -482,46 +482,46 @@ def main():
     print("=" * 60)
     print("Speed Optimization Brainstorm v1.0 - 速度优化头脑风暴")
     print("=" * 60)
-    
+
     # 生成报告
     print(f"\n[1/3] 生成头脑风暴报告...")
     report, all_ideas = generate_brainstorm_report()
     print(f"✅ 生成 {len(all_ideas)} 个优化想法")
-    
+
     # 统计
     high_priority = sum(1 for i in all_ideas if i['priority'] == 'high')
     medium_priority = sum(1 for i in all_ideas if i['priority'] == 'medium')
     low_priority = sum(1 for i in all_ideas if i['priority'] == 'low')
-    
+
     print(f"📊 高优先级：{high_priority}, 中优先级：{medium_priority}, 低优先级：{low_priority}")
-    
+
     # 保存报告
     print(f"\n[2/3] 保存报告...")
     report_dir = "D:\\OpenClaw\\workspace\\flow-archive\\20260318-universal-workflow-001"
-    
+
     timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
     report_path = f"{report_dir}\\speed-optimization-brainstorm-{timestamp}.md"
-    
+
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(report)
-    
+
     print(f"✅ 报告已保存：{report_path}")
-    
+
     # 保存 JSON
     json_path = f"{report_dir}\\speed-optimization-ideas-{timestamp}.json"
     with open(json_path, 'w', encoding='utf-8') as f:
         json.dump(all_ideas, f, indent=2, ensure_ascii=False)
-    
+
     print(f"✅ JSON 已保存：{json_path}")
-    
+
     # 生成摘要
     print(f"\n[3/3] 生成摘要...")
-    
+
     top5 = all_ideas[:5]
     print("\n🎯 Top 5 优先级优化:")
     for i, idea in enumerate(top5, 1):
         print(f"  {i}. {idea['title']} ({idea['estimated_gain']})")
-    
+
     print("\n" + "=" * 60)
     print("✅ 速度优化头脑风暴完成!")
     print("=" * 60)

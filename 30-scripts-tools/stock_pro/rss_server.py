@@ -34,21 +34,21 @@ STOCKS = {
 def fetch_jin10():
     """Fetch free flash news from flash.jin10.com"""
     news = []
-    
+
     try:
         url = "https://flash.jin10.com/"
         req = urllib.request.Request(url, headers={
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
             'Referer': 'https://flash.jin10.com/',
         })
-        
+
         with urllib.request.urlopen(req, timeout=15) as r:
             content = r.read().decode('utf-8')
-        
+
         # Extract detail IDs
         ids = re.findall(r'/detail/(\d{17,20})', content)
         ids = list(dict.fromkeys(ids))[:50]  # Dedupe, limit to 50
-        
+
         for id in ids:
             detail_url = f"https://flash.jin10.com/detail/{id}"
             try:
@@ -57,14 +57,14 @@ def fetch_jin10():
                 })
                 with urllib.request.urlopen(req2, timeout=8) as r2:
                     detail = r2.read().decode('utf-8')
-                
+
                 # Extract title
                 title_match = re.search(r'<title>([^<]+)</title>', detail)
                 if title_match:
                     title = title_match.group(1).replace(' - 金十数据', '').strip()
                     # Remove 【金十数据】 prefix for cleaner display
                     title = re.sub(r'^【金十数据】', '', title)
-                    
+
                     news.append({
                         "title": title,
                         "content": "",
@@ -77,7 +77,7 @@ def fetch_jin10():
                 pass
     except:
         pass
-    
+
     return news
 
 class Cache:
@@ -86,13 +86,13 @@ class Cache:
         self.news = []
         self.jin10_news = []
         self.last_update = 0
-    
+
     def save(self, news):
         self.news = news
         self.last_update = time.time()
         with open(CACHE_DIR / "cache.json", "w", encoding="utf-8") as f:
             json.dump({"news": news, "t": self.last_update}, f, ensure_ascii=False)
-    
+
     def load(self):
         try:
             with open(CACHE_DIR / "cache.json", "r", encoding="utf-8") as f:
@@ -104,7 +104,7 @@ class Cache:
             return True
         except:
             return False
-    
+
     def get_all_news(self):
         """Return all news: Jin10 first, then RSS"""
         return self.jin10_news + self.news
@@ -186,19 +186,19 @@ def html_page(news, title):
 
 class Handler(BaseHTTPRequestHandler):
     cache = None
-    
+
     def do_GET(self):
         path = self.path.strip("/").lower()
         cache.load()
         jin10_news = fetch_jin10()  # 实时获取！
         rss_news = self.cache.news
         all_news = jin10_news + rss_news  # 金十在前
-        
+
         if self.cache.last_update:
             last = datetime.fromtimestamp(self.cache.last_update).strftime("%H:%M:%S")
         else:
             last = "Never"
-        
+
         if path in ["", "index", "index.html"]:
             self.send_response(200)
             self.send_header("Content-type", "text/html; charset=utf-8")
@@ -217,7 +217,7 @@ class Handler(BaseHTTPRequestHandler):
                 h += '<a href="/' + s.lower() + '.xml">' + s + '</a>'
             self.wfile.write(h.encode())
             return
-        
+
         # Jin10 RSS (Chinese financial news)
         if path == "jin10.xml":
             self.send_response(200)
@@ -225,7 +225,7 @@ class Handler(BaseHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(rss(jin10_news, "金十数据").encode())
             return
-        
+
         # Jin10 HTML page (flash news)
         if path == "jin10":
             self.send_response(200)
@@ -260,7 +260,7 @@ a.back{color:#ffd700}
             h += '<p class="stats">更新时间: ' + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + '</p></body></html>'
             self.wfile.write(h.encode())
             return
-        
+
         if path == "all.xml":
             self.send_response(200)
             self.send_header("Content-type", "application/xml; charset=utf-8")
@@ -273,7 +273,7 @@ a.back{color:#ffd700}
             self.end_headers()
             self.wfile.write(html_page(all_news, "All News").encode())
             return
-        
+
         for sym, kws in STOCKS.items():
             if path == sym.lower() + ".xml":
                 filtered = [n for n in all_news if any(kw.lower() in (n["title"]+n.get("content","")).lower() for kw in kws)]
@@ -282,18 +282,18 @@ a.back{color:#ffd700}
                 self.end_headers()
                 self.wfile.write(rss(filtered, sym + " News").encode())
                 return
-        
+
         self.send_response(404)
         self.end_headers()
         self.wfile.write(b"Not Found")
-    
+
     def log_message(self, format, *args):
         pass
 
 if __name__ == "__main__":
     cache = Cache()
     cache.load()
-    
+
     if len(sys.argv) > 1 and sys.argv[1] == "update":
         print("Updating...")
         import platform

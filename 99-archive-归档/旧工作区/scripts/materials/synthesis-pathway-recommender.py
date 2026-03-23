@@ -26,7 +26,7 @@ class SynthesisPathway:
 
 class SynthesisPathwayRecommender:
     """合成路径推荐器"""
-    
+
     def __init__(self):
         # 模拟反应数据库
         self.reaction_db = [
@@ -47,11 +47,11 @@ class SynthesisPathwayRecommender:
                 "yield_rate": 0.92
             }
         ]
-    
+
     def recommend(self, target: str, optimize: str = "cost") -> List[SynthesisPathway]:
         """推荐合成路径"""
         pathways = []
-        
+
         for reaction in self.reaction_db:
             if reaction["target"].lower() == target.lower():
                 pathway = SynthesisPathway(
@@ -63,7 +63,7 @@ class SynthesisPathwayRecommender:
                     yield_rate=reaction["yield_rate"]
                 )
                 pathways.append(pathway)
-        
+
         # 根据优化目标排序
         if optimize == "cost":
             pathways.sort(key=lambda x: x.cost)
@@ -71,36 +71,36 @@ class SynthesisPathwayRecommender:
             pathways.sort(key=lambda x: x.safety_score, reverse=True)
         elif optimize == "yield":
             pathways.sort(key=lambda x: x.yield_rate, reverse=True)
-        
+
         return pathways
-    
+
     def estimate_cost(self, reactants: List[str], conditions: ReactionCondition) -> float:
         """估算成本"""
         # 简化成本估算
         base_cost = len(reactants) * 10
         temp_factor = conditions.temperature / 100
         time_factor = conditions.time / 10
-        
+
         return base_cost * (1 + temp_factor * 0.1 + time_factor * 0.05)
-    
+
     def assess_safety(self, conditions: ReactionCondition) -> int:
         """评估安全性"""
         score = 100
-        
+
         # 高温扣分
         if conditions.temperature > 800:
             score -= 20
         elif conditions.temperature > 500:
             score -= 10
-        
+
         # 长时间扣分
         if conditions.time > 24:
             score -= 10
-        
+
         # 特殊气氛扣分
         if conditions.atmosphere in ["hydrogen", "argon"]:
             score -= 5
-        
+
         return max(0, score)
 
 def demo():
@@ -108,13 +108,13 @@ def demo():
     print("=" * 60)
     print("Synthesis Pathway Recommender v1 Demo")
     print("=" * 60)
-    
+
     recommender = SynthesisPathwayRecommender()
-    
+
     # 推荐 LiCoO2 合成路径
     print("\n🧪 推荐 LiCoO2 合成路径:")
     pathways = recommender.recommend("LiCoO2", optimize="cost")
-    
+
     for i, pathway in enumerate(pathways, 1):
         print(f"\n路径 {i}:")
         print(f"  反应物：{', '.join(pathway.reactants)}")
@@ -122,7 +122,7 @@ def demo():
         print(f"  成本：¥{pathway.cost}/g")
         print(f"  安全性：{pathway.safety_score}")
         print(f"  产率：{pathway.yield_rate:.2f}")
-    
+
     print("-" * 60)
     print("[COMPLETE]")
     print("=" * 60)

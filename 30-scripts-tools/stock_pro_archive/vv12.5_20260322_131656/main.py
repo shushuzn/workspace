@@ -153,11 +153,11 @@ def main():
     parser.add_argument('--earnings-report', action='store_true', help='Earnings analysis report')
     parser.add_argument('--dividend-report', action='store_true', help='Dividend analysis report')
     parser.add_argument('--fscore', action='store_true', help='Piotroski F-Score report')
-    
+
     args = parser.parse_args()
-    
+
     print(BANNER)
-    
+
     # Help
     if args.help or (not args.symbols and not any(vars(args).values())):
         print("""
@@ -196,7 +196,7 @@ Automation:
    stock_pro.bat --api                  Start API server (port 8765)
 """)
         return
-    
+
     # Technical Analysis (check before single stock)
     if args.technical:
         sym = args.symbols[0] if args.symbols else "NVDA"
@@ -204,12 +204,12 @@ Automation:
         print(BANNER)
         print(output)
         return
-    
+
     # Sync Status (check before single stock)
     if args.sync_status:
         print(get_sync_status())
         return
-    
+
     # Single stock analysis
     if args.symbols and not any([
         args.technical, args.sync_status,
@@ -219,84 +219,84 @@ Automation:
         sym = args.symbols[0]
         lang = "cn" if args.cn else "en"
         data = analyze(sym)
-        
+
         if args.json:
             print(json.dumps(data, indent=2))
         else:
             content = gen_report(data, lang)
             print(content)
         return
-    
+
     # Portfolio
     if args.portfolio_add:
         pm = PortfolioManager()
         sym, shares, cost = args.portfolio_add
         print(pm.add(sym, float(shares), float(cost)))
         return
-    
+
     if args.portfolio_remove:
         pm = PortfolioManager()
         print(pm.remove(args.portfolio_remove[0]))
         return
-    
+
     if args.portfolio:
         pm = PortfolioManager()
         print(pm.show(use_live=args.live))
         return
-    
+
     # Screener
     if args.screener:
         screener = StockScreener()
         print(screener.show(live=args.live))
         return
-    
+
     # Compare
     if args.compare:
         results = analyze_multiple(args.compare)
         print(gen_compare_table(results))
         return
-    
+
     # Summary
     if args.summary:
         results = analyze_multiple(args.summary, live=args.live)
         print(gen_summary_card(results))
         return
-    
+
     # CSV
     if args.csv is not None:
         symbols = args.csv if args.csv else args.symbols
         results = analyze_multiple(symbols, live=args.live)
         print(export_csv(results))
         return
-    
+
     # Excel
     if args.xlsx is not None:
         symbols = args.xlsx if args.xlsx else args.symbols
         results = analyze_multiple(symbols, live=args.live)
         print(export_xlsx(results))
         return
-    
+
     # DB
     if args.db is not None:
         symbols = args.db if args.db else args.symbols
         results = analyze_multiple(symbols, live=args.live)
         print(save_db(results))
         return
-    
+
     # Dashboard
     if args.dashboard is not None:
         symbols = args.dashboard if args.dashboard else args.symbols
         results = analyze_multiple(symbols, live=args.live)
         print(gen_dashboard(results))
         return
-    
+
     # Chart
     if args.chart is not None:
         symbols = args.chart if args.chart else args.symbols
         results = analyze_multiple(symbols, live=args.live)
         print(gen_chart(results))
         return
-    
+
     # Alerts
     if args.alert is not None:
         symbols = args.alert if args.alert else args.symbols
@@ -304,62 +304,62 @@ Automation:
         cfg = load_config()
         threshold = cfg.get("alert_threshold", 30)
         print(check_alerts(results, threshold))
-        
+
         # Send webhook notification
         wh = WebhookManager()
         wh.notify_alert(results, threshold)
         return
-    
+
     # Cron
     if args.cron:
         cron = CronScheduler()
         print(cron.list_jobs())
         return
-    
+
     if args.cron_add:
         schedule, command, sym1, sym2 = args.cron_add
         cron = CronScheduler()
         name = f"job_{len(cron.jobs) + 1}"
         print(cron.add(name, [sym1, sym2], command, schedule))
         return
-    
+
     if args.cron_remove:
         cron = CronScheduler()
         print(cron.remove(args.cron_remove[0]))
         return
-    
+
     # Webhook
     if args.webhook:
         wh = WebhookManager()
         print(wh.list_webhooks())
         return
-    
+
     if args.webhook_add:
         name, url, events = args.webhook_add
         wh = WebhookManager()
         print(wh.add(name, url, events.split(',')))
         return
-    
+
     if args.webhook_remove:
         wh = WebhookManager()
         print(wh.remove(args.webhook_remove[0]))
         return
-    
+
     # API Server
     if args.api:
         from stock_pro.api import start_server
         start_server()
         return
-    
+
     # Cache
     if args.cache_stats:
         print(cache_stats())
         return
-    
+
     if args.cache_clear:
         print(clear_cache())
         return
-    
+
     # History
     if args.history:
         days = int(args.history)
@@ -372,7 +372,7 @@ Automation:
                 if sym not in by_symbol:
                     by_symbol[sym] = []
                 by_symbol[sym].append(r)
-            
+
             print(f"\n# History (last {len(records)} records)")
             for sym in sorted(by_symbol.keys()):
                 recs = by_symbol[sym]
@@ -382,7 +382,7 @@ Automation:
         else:
             print("[History] No records yet")
         return
-    
+
     # Trends
     if args.trends:
         days = int(args.trends)
@@ -406,7 +406,7 @@ Automation:
             count = len(get_symbols_by_sector(s))
             print(f"  - {s}: {count} stocks")
         return
-    
+
     if args.sector:
         sector_name = args.sector[0]
         symbols = get_symbols_by_sector(sector_name)
@@ -417,14 +417,14 @@ Automation:
         results = analyze_multiple(symbols)
         print(sector_report(results))
         return
-    
+
     # Risk Analysis
     if args.risk is not None:
         symbols = args.risk if args.risk else ["NVDA", "META", "JPM"]
         results = analyze_multiple(symbols)
         print(risk_report(results))
         return
-    
+
     # Diversification Check
     if args.diversify is not None:
         symbols = args.diversify if args.diversify else args.symbols
@@ -443,52 +443,52 @@ Automation:
         for rec in check["recommendations"]:
             print(f"  {rec}")
         return
-    
+
     # Watchlist
     if args.watchlist:
         print(list_watchlists())
         return
-    
+
     if args.watchlist_add:
         symbol, list_name = args.watchlist_add
         print(add_to_watchlist(symbol, list_name))
         return
-    
+
     if args.watchlist_remove:
         symbol, list_name = args.watchlist_remove
         print(remove_from_watchlist(symbol, list_name))
         return
-    
+
     # Top Picks
     if args.picks:
         results = analyze_multiple(args.symbols if args.symbols else list(A.keys()))
         print(get_top_picks_report(results))
         return
-    
+
     if args.quick_picks:
         results = analyze_multiple(args.symbols if args.symbols else list(A.keys()))
         print(quick_picks(results))
         return
-    
+
     # Performance Analysis
     if args.performance:
         symbols = args.symbols if args.symbols else list(A.keys())
         results = analyze_multiple(symbols)
         print(performance_report(results))
         return
-    
+
     # Data Quality
     if args.quality:
         results = analyze_multiple(args.symbols if args.symbols else list(A.keys()))
         print(data_quality_report(results))
         return
-    
+
     # Full Report
     if args.full_report:
         symbols = args.symbols if args.symbols else list(A.keys())
         print(full_report(symbols))
         return
-    
+
     # Export All
     if args.export_all:
         symbols = args.symbols if args.symbols else list(A.keys())
@@ -496,40 +496,40 @@ Automation:
         for o in outputs:
             print(o)
         return
-    
+
     # Correlation Analysis
     if args.correlation:
         symbols = args.symbols if args.symbols else list(A.keys())[:10]
         print(correlation_report(symbols))
         return
-    
+
     # Benchmark Analysis
     if args.benchmark:
         symbols = args.symbols if args.symbols else list(A.keys())[:10]
         print(benchmark_vs_index(symbols))
         return
-    
+
     # Sector Benchmark
     if args.sector_benchmark:
         print(sector_benchmark())
         return
-    
+
     # Score Distribution
     if args.distribution:
         print(score_distribution())
         return
-    
+
     # Backtest
     if args.backtest:
         symbols = args.symbols if args.symbols else ['NVDA', 'META', 'GOOGL', 'MSFT', 'AMZN']
         print(backtest_report(symbols))
         return
-    
+
     # Alerts
     if args.alerts:
         print(list_alerts())
         return
-    
+
     if args.alert_add:
         sym, atype, val, cond = args.alert_add
         try:
@@ -538,12 +538,12 @@ Automation:
         except ValueError:
             print(f"[Error] Invalid value: {val}")
         return
-    
+
     if args.alert_remove:
         sym = args.alert_remove[0]
         print(remove_alert(sym))
         return
-    
+
     # PDF Export
     if args.pdf:
         if args.symbols:
@@ -558,120 +558,120 @@ Automation:
                 report += f"- Upside: {r['upside']:+.1f}%\n\n"
             print(export_pdf(report))
         return
-    
+
     # Portfolio Optimization
     if args.optimize:
         symbols = args.symbols if args.symbols else list(A.keys())[:15]
         print(optimize_report(symbols))
         return
-    
+
     # Earnings Calendar
     if args.earnings:
         symbols = args.symbols if args.symbols else None
         print(earnings_report(symbols))
         return
-    
+
     # Earnings Predictions
     if args.earnings_predict:
         sym = args.symbols[0] if args.symbols else "NVDA"
         print(predict_earnings_beat(sym))
         return
-    
+
     # Sentiment Analysis
     if args.sentiment:
         symbols = args.symbols if args.symbols else None
         print(sentiment_report(symbols))
         return
-    
+
     # Sector Sentiment
     if args.sector_sentiment:
         print(sector_sentiment())
         return
-    
+
     # Advanced Screener
     if args.screener_advanced:
         print(advanced_screener_report())
         return
-    
+
     # Value Picks
     if args.value:
         print(value_picks())
         return
-    
+
     # Growth Picks
     if args.growth:
         print(growth_picks())
         return
-    
+
     # Dividend Picks
     if args.dividend:
         print(dividend_picks())
         return
-    
+
     # Dashboard Report
     if args.dashboard_report:
         print(dashboard_report())
         return
-    
+
     # Dashboard HTML
     if args.dashboard_html:
         dash = Dashboard()
         path = dash.save_html()
         print(f"[Dashboard] HTML saved to: {path}")
         return
-    
+
     # Watchlist Performance
     if args.watchlist_perf:
         list_name = args.watchlist_perf
         print(watchlist_performance(list_name))
         return
-    
+
     # Compare Watchlists
     if args.compare_lists:
         list1, list2 = args.compare_lists
         print(compare_watchlists(list1, list2))
         return
-    
+
     # Export Formats
     symbols = args.symbols if args.symbols else list(A.keys())[:20]
-    
+
     if args.export_json:
         print(export_json(symbols))
         return
-    
+
     if args.export_md:
         print(export_markdown(symbols))
         return
-    
+
     if args.export_html:
         print(export_html(symbols))
         return
-    
+
     if args.export_all_formats:
         for output in export_all(symbols):
             print(output)
         return
-    
+
     # Portfolio Insights
     if args.insights:
         print(get_portfolio_insights())
         return
-    
+
     # Investment Themes
     if args.themes:
         print(generate_investment_themes())
         return
-    
+
     # Market Overview
     if args.market:
         print(market_report())
         return
-    
+
     # Sector Rotation
     if args.sector_rotation:
         print(sector_rotation_report())
         return
-    
+
     # Market Breadth
     if args.market_breadth:
         breadth = market_breadth_indicator()
@@ -679,32 +679,32 @@ Automation:
         print(f"- Stocks Above 50: {breadth['above_50']}/{breadth['total']} ({breadth['breadth']:.1f}%)")
         print(f"- Stocks Above 75: {breadth['above_75']}/{breadth['total']} ({breadth['strength']:.1f}%)")
         return
-    
+
     # Quick Report
     if args.quick_report:
         print(quick_report())
         return
-    
+
     # Investment Summary
     if args.investment_summary:
         print(investment_summary())
         return
-    
+
     # Quality Analysis
     if args.quality_report:
         print(quality_report(args.symbols or None))
         return
-    
+
     # Risk-Return Analysis
     if args.risk_return:
         print(risk_return_report(args.symbols or None))
         return
-    
+
     # Value vs Growth
     if args.value_growth:
         print(value_vs_growth_report(args.symbols or None))
         return
-    
+
     # Advanced Metrics
     if args.metrics:
         m = get_advanced_metrics(args.metrics)
@@ -720,33 +720,33 @@ Automation:
         else:
             print(f"[ERROR] Symbol {args.metrics} not found")
         return
-    
+
     # Compare All
     if args.compare_all:
         print(compare_stocks(args.symbols or None))
         return
-    
+
     # Compare Risk
     if args.compare_risk:
         print(compare_risk(args.symbols or None))
         return
-    
+
     # Find Winners
     if args.winners:
         criteria = args.winners if args.winners in ['score', 'upside', 'pe', 'roe', 'beta'] else 'score'
         print(find_winners(args.symbols or None, criteria))
         return
-    
+
     # Earnings Analysis
     if args.earnings:
         print(earnings_report(args.symbols or None))
         return
-    
+
     # Dividend Analysis
     if args.dividend:
         print(dividend_report(args.symbols or None))
         return
-    
+
     # F-Score Analysis
     if args.fscore:
         symbols = args.symbols if args.symbols else ["NVDA"]

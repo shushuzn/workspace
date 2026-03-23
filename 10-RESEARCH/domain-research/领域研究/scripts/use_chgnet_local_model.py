@@ -45,10 +45,10 @@ if latest_model.exists():
     dest = d_chgnet_dir / "chgnet_0.3.0.pth.tar"
     print(f"  源文件：{latest_model.name}")
     print(f"  目标：{dest}")
-    
+
     shutil.copy2(latest_model, dest)
     print(f"  [OK] 复制成功！")
-    
+
     # 计算大小
     size_mb = dest.stat().st_size / 1024 / 1024
     print(f"  大小：{size_mb:.1f} MB")

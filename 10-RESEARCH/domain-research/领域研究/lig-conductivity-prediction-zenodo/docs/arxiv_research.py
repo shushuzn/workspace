@@ -38,31 +38,31 @@ class PaperAnalysis:
     categories: List[str]
     published_date: str
     url: str
-    
+
     # Analysis dimensions
     novelty_score: float  # 0-100
     impact_score: float  # 0-100
     feasibility_score: float  # 0-100
     reproducibility_score: float  # 0-100
-    
+
     # Innovation extraction
     key_innovations: List[str]
     methodology: List[str]
     datasets: List[str]
     metrics: List[str]
-    
+
     # Implementation assessment
     implementation_effort: str  # low/medium/high
     required_resources: List[str]
     potential_applications: List[str]
     risks_limitations: List[str]
-    
+
     # Personal notes
     relevance_to_project: float  # 0-100
     priority: str  # high/medium/low
     implementation_plan: str
     notes: List[str] = field(default_factory=list)
-    
+
     def to_dict(self):
         return asdict(self)
 
@@ -80,24 +80,24 @@ class ResearchTrend:
 
 class ArxivResearchTool:
     """arXiv paper research and analysis tool"""
-    
+
     def __init__(self):
         self.papers: Dict[str, PaperAnalysis] = {}
         self.trends: List[ResearchTrend] = []
         self.research_log: List[Dict] = []
-    
+
     def add_paper(self, paper_data: Dict) -> PaperAnalysis:
         """Add analyzed paper"""
         paper = PaperAnalysis(**paper_data)
         self.papers[paper.paper_id] = paper
         return paper
-    
+
     def scan_simulated(self) -> List[PaperAnalysis]:
         """Simulate arXiv scan with detailed papers"""
         print("="*80)
         print("📚 arXiv Paper Research - Deep Scan")
         print("="*80)
-        
+
         # Simulated papers from different categories
         papers_data = [
             {
@@ -325,20 +325,20 @@ class ArxivResearchTool:
                 "notes": ["Builds on existing KG work", "High priority"]
             },
         ]
-        
+
         print(f"\n📊 Analyzing {len(papers_data)} papers...\n")
-        
+
         added_papers = []
-        
+
         for paper_data in papers_data:
             paper = self.add_paper(paper_data)
             added_papers.append(paper)
-            
+
             print(f"  📄 {paper.paper_id}: {paper.title[:60]}...")
             print(f"     Novelty: {paper.novelty_score}/100 | Impact: {paper.impact_score}/100 | Feasibility: {paper.feasibility_score}/100")
             print(f"     Relevance: {paper.relevance_to_project}/100 | Priority: {paper.priority}")
             print()
-        
+
         # Record research session
         self.research_log.append({
             "timestamp": datetime.now().isoformat(),
@@ -347,15 +347,15 @@ class ArxivResearchTool:
             "avg_novelty": sum(p["novelty_score"] for p in papers_data) / len(papers_data),
             "avg_impact": sum(p["impact_score"] for p in papers_data) / len(papers_data)
         })
-        
+
         return added_papers
-    
+
     def identify_trends(self) -> List[ResearchTrend]:
         """Identify research trends from analyzed papers"""
         print("\n" + "="*80)
         print("📈 Identifying Research Trends")
         print("="*80)
-        
+
         trends_data = [
             {
                 "trend_name": "Multi-Agent Scientific Discovery",
@@ -398,31 +398,31 @@ class ArxivResearchTool:
                 "opportunity_score": 85
             }
         ]
-        
+
         self.trends = [ResearchTrend(**data) for data in trends_data]
-        
+
         for trend in self.trends:
             print(f"\n  🔬 {trend.trend_name}")
             print(f"     {trend.description}")
             print(f"     Stage: {trend.maturity_stage} | Growth: {trend.growth_rate} papers/month")
             print(f"     Opportunity: {trend.opportunity_score}/100")
             print(f"     Related Papers: {len(trend.related_papers)}")
-        
+
         return self.trends
-    
+
     def generate_research_report(self, output_file: str = "arxiv_research_report.md") -> str:
         """Generate comprehensive research report"""
         print("\n" + "="*80)
         print("📝 Generating Research Report")
         print("="*80)
-        
+
         report = []
         report.append("# arXiv Research Report")
         report.append(f"\n**Generated:** {datetime.now().isoformat()}")
         report.append(f"**Papers Analyzed:** {len(self.papers)}")
         report.append(f"**Research Trends:** {len(self.trends)}")
         report.append("")
-        
+
         # Executive Summary
         report.append("## Executive Summary")
         report.append("")
@@ -432,11 +432,11 @@ class ArxivResearchTool:
         report.append(f"- **Average Impact:** {sum(p.impact_score for p in self.papers.values()) / len(self.papers):.1f}/100")
         report.append(f"- **Implementation Feasibility:** {sum(p.feasibility_score for p in self.papers.values()) / len(self.papers):.1f}/100")
         report.append("")
-        
+
         # Top Papers
         report.append("## Top Priority Papers")
         report.append("")
-        
+
         for i, paper in enumerate(sorted(self.papers.values(), key=lambda x: x.relevance_to_project, reverse=True)[:5], 1):
             report.append(f"### {i}. {paper.title}")
             report.append(f"**Paper ID:** {paper.paper_id}")
@@ -460,11 +460,11 @@ class ArxivResearchTool:
             for note in paper.notes:
                 report.append(f"- {note}")
             report.append("")
-        
+
         # Research Trends
         report.append("## Research Trends")
         report.append("")
-        
+
         for trend in sorted(self.trends, key=lambda x: x.opportunity_score, reverse=True):
             report.append(f"### {trend.trend_name}")
             report.append(f"{trend.description}")
@@ -474,7 +474,7 @@ class ArxivResearchTool:
             report.append(f"- **Opportunity Score:** {trend.opportunity_score}/100")
             report.append(f"- **Related Papers:** {', '.join(trend.related_papers)}")
             report.append("")
-        
+
         # Implementation Roadmap
         report.append("## Implementation Roadmap")
         report.append("")
@@ -493,58 +493,58 @@ class ArxivResearchTool:
             if paper.priority == "medium":
                 report.append(f"- [ ] {paper.title} ({paper.paper_id})")
         report.append("")
-        
+
         # Save report
         report_text = "\n".join(report)
-        
+
         with open(output_file, 'w', encoding='utf-8') as f:
             f.write(report_text)
-        
+
         print(f"  ✅ Report saved to: {output_file}")
-        
+
         return report_text
-    
+
     def export_data(self, output_file: str = "data/arxiv_research.json"):
         """Export all research data to JSON"""
         os.makedirs(os.path.dirname(output_file), exist_ok=True)
-        
+
         data = {
             "timestamp": datetime.now().isoformat(),
             "papers": [p.to_dict() for p in self.papers.values()],
             "trends": [asdict(t) for t in self.trends],
             "research_log": self.research_log
         }
-        
+
         with open(output_file, 'w', encoding='utf-8') as f:
             json.dump(data, f, indent=2, ensure_ascii=False)
-        
+
         print(f"  ✅ Data exported to: {output_file}")
 
 
 def main():
     import os
-    
+
     parser = argparse.ArgumentParser(description="arXiv Paper Research Tool")
     parser.add_argument("--scan", action="store_true", help="Scan arXiv for papers")
     parser.add_argument("--trends", action="store_true", help="Identify research trends")
     parser.add_argument("--report", action="store_true", help="Generate research report")
     parser.add_argument("--export", action="store_true", help="Export data to JSON")
     args = parser.parse_args()
-    
+
     tool = ArxivResearchTool()
-    
+
     if args.scan or True:  # Default to scan
         tool.scan_simulated()
-    
+
     if args.trends or True:  # Default to trends
         tool.identify_trends()
-    
+
     if args.report or True:  # Default to report
         tool.generate_research_report()
-    
+
     if args.export or True:  # Default to export
         tool.export_data()
-    
+
     print("\n" + "="*80)
     print("✅ arXiv Research complete!")
     print("="*80)

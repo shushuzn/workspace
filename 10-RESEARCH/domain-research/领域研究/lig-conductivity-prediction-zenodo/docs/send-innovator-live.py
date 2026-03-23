@@ -12,7 +12,7 @@ def get_token():
         config = json.load(f)
     app_id = config["app_id"]
     app_secret = config["app_secret"]
-    
+
     if TOKEN_CACHE.exists():
         with open(TOKEN_CACHE) as f:
             cache = json.load(f)
@@ -21,12 +21,12 @@ def get_token():
             expires = datetime.fromisoformat(expires).timestamp()
         if expires > datetime.now().timestamp() + 300:
             return cache["token"]
-    
+
     url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
     payload = {"app_id": app_id, "app_secret": app_secret}
     resp = requests.post(url, json=payload, timeout=10)
     data = resp.json()
-    
+
     if data.get("code") == 0:
         token = data["tenant_access_token"]
         expires = datetime.now().timestamp() + 2700
@@ -41,14 +41,14 @@ def send_message(text):
         config = json.load(f)
     user_id = config.get("user_id") or config.get("default_receive_id")
     receive_id_type = config.get("receive_id_type", "open_id")
-    
+
     url = f"https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type={receive_id_type}"
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     payload = {"receive_id": user_id, "msg_type": "text", "content": json.dumps({"text": text})}
-    
+
     resp = requests.post(url, headers=headers, json=payload, timeout=10)
     data = resp.json()
-    
+
     if data.get("code") == 0:
         print(f"[OK] Message sent: {data['data']['message_id']}")
         return True
@@ -77,7 +77,7 @@ if __name__ == "__main__":
 
 Open: https://felixxii.xyz
 """
-    
+
     try:
         send_message(message.strip())
     except Exception as e:

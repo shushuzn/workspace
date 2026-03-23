@@ -31,11 +31,11 @@ from typing import Dict, List, Optional
 
 class ValuationModel:
     """估值模型引擎"""
-    
+
     def __init__(self):
         self.cache_dir = Path("60-DATA/stock_valuation")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-    
+
     def dcf_valuation(self, financial_data: Dict, assumptions: Dict = None) -> Dict:
         """
         DCF 估值（现金流折现模型）
@@ -54,32 +54,32 @@ class ValuationModel:
                 'terminal_growth': 0.03,  # 永续增长率 3%
                 'years': 5  # 预测 5 年
             }
-        
+
         free_cash_flow = financial_data.get('free_cash_flow', 100000)
         shares_outstanding = financial_data.get('shares_outstanding', 10000)
-        
+
         # 预测未来现金流
         projected_fcf = []
         for year in range(assumptions['years']):
             fcf = free_cash_flow * (1 + assumptions['growth_rate']) ** year
             projected_fcf.append(fcf)
-        
+
         # 计算现值
         pv_fcf = sum(
             fcf / (1 + assumptions['discount_rate']) ** (year + 1)
             for year, fcf in enumerate(projected_fcf)
         )
-        
+
         # 计算终值
         terminal_fcf = projected_fcf[-1] * (1 + assumptions['terminal_growth'])
         terminal_value = terminal_fcf / (assumptions['discount_rate'] - assumptions['terminal_growth'])
         pv_terminal = terminal_value / (1 + assumptions['discount_rate']) ** assumptions['years']
-        
+
         # 计算企业价值和每股价值
         enterprise_value = pv_fcf + pv_terminal
         equity_value = enterprise_value - financial_data.get('total_debt', 0)
         value_per_share = equity_value / shares_outstanding if shares_outstanding > 0 else 0
-        
+
         return {
             'method': 'DCF',
             'enterprise_value': round(enterprise_value, 2),
@@ -88,7 +88,7 @@ class ValuationModel:
             'assumptions': assumptions,
             'description': f'DCF 估值：{value_per_share:.2f}元/股'
         }
-    
+
     def relative_valuation(self, company_data: Dict, peer_data: List[Dict]) -> Dict:
         """
         相对估值（与同行业对比）
@@ -103,24 +103,24 @@ class ValuationModel:
         company_pe = company_data.get('pe_ratio', 0)
         company_pb = company_data.get('pb_ratio', 0)
         company_ps = company_data.get('ps_ratio', 0)
-        
+
         # 计算行业平均
         peer_pes = [p.get('pe_ratio', 0) for p in peer_data if p.get('pe_ratio', 0) > 0]
         peer_pbs = [p.get('pb_ratio', 0) for p in peer_data if p.get('pb_ratio', 0) > 0]
         peer_pss = [p.get('ps_ratio', 0) for p in peer_data if p.get('ps_ratio', 0) > 0]
-        
+
         industry_pe = sum(peer_pes) / len(peer_pes) if peer_pes else 0
         industry_pb = sum(peer_pbs) / len(peer_pbs) if peer_pbs else 0
         industry_ps = sum(peer_pss) / len(peer_pss) if peer_pss else 0
-        
+
         # 计算相对估值
         pe_premium = (company_pe - industry_pe) / industry_pe if industry_pe > 0 else 0
         pb_premium = (company_pb - industry_pb) / industry_pb if industry_pb > 0 else 0
         ps_premium = (company_ps - industry_ps) / industry_ps if industry_ps > 0 else 0
-        
+
         # 判断高估/低估
         avg_premium = (pe_premium + pb_premium + ps_premium) / 3
-        
+
         if avg_premium > 0.2:
             valuation = 'overvalued'
             description = '高估'
@@ -130,7 +130,7 @@ class ValuationModel:
         else:
             valuation = 'fair'
             description = '合理'
-        
+
         return {
             'method': 'Relative Valuation',
             'company_pe': company_pe,
@@ -145,7 +145,7 @@ class ValuationModel:
             'valuation': valuation,
             'description': f'相对估值：{description} (行业平均 PE: {industry_pe:.2f})'
         }
-    
+
     def peg_valuation(self, pe_ratio: float, growth_rate: float) -> Dict:
         """
         PEG 估值（成长性调整）
@@ -158,7 +158,7 @@ class ValuationModel:
             PEG 估值结果
         """
         peg_ratio = pe_ratio / (growth_rate * 100) if growth_rate > 0 else 0
-        
+
         # PEG 判断标准
         if peg_ratio < 1:
             valuation = 'undervalued'
@@ -169,7 +169,7 @@ class ValuationModel:
         else:
             valuation = 'overvalued'
             description = '高估'
-        
+
         return {
             'method': 'PEG',
             'pe_ratio': pe_ratio,
@@ -178,7 +178,7 @@ class ValuationModel:
             'valuation': valuation,
             'description': f'PEG: {peg_ratio:.2f} - {description}'
         }
-    
+
     def ddm_valuation(self, dividend_data: Dict, assumptions: Dict = None) -> Dict:
         """
         股息贴现模型（DDM）
@@ -195,13 +195,13 @@ class ValuationModel:
                 'growth_rate': 0.05,  # 股息增长率 5%
                 'required_return': 0.10  # 要求回报率 10%
             }
-        
+
         current_dividend = dividend_data.get('annual_dividend', 0)
-        
+
         # Gordon Growth Model: P = D1 / (r - g)
         next_dividend = current_dividend * (1 + assumptions['growth_rate'])
         value_per_share = next_dividend / (assumptions['required_return'] - assumptions['growth_rate'])
-        
+
         return {
             'method': 'DDM',
             'current_dividend': current_dividend,
@@ -210,8 +210,8 @@ class ValuationModel:
             'assumptions': assumptions,
             'description': f'DDM 估值：{value_per_share:.2f}元/股'
         }
-    
-    def comprehensive_valuation(self, financial_data: Dict, 
+
+    def comprehensive_valuation(self, financial_data: Dict,
                                  market_data: Dict,
                                  peer_data: List[Dict] = None) -> Dict:
         """
@@ -234,10 +234,10 @@ class ValuationModel:
             'upside_potential': 0,
             'recommendation': 'hold'
         }
-        
+
         # 1. DCF 估值
         result['valuations']['dcf'] = self.dcf_valuation(financial_data)
-        
+
         # 2. 相对估值（如果有同行数据）
         if peer_data:
             result['valuations']['relative'] = self.relative_valuation(
@@ -248,32 +248,32 @@ class ValuationModel:
                 },
                 peer_data
             )
-        
+
         # 3. PEG 估值
         pe_ratio = market_data.get('pe_ratio', 0)
         growth_rate = financial_data.get('net_income_growth', 0.15)
         result['valuations']['peg'] = self.peg_valuation(pe_ratio, growth_rate)
-        
+
         # 4. DDM 估值（如果有股息数据）
         if financial_data.get('annual_dividend', 0) > 0:
             result['valuations']['ddm'] = self.ddm_valuation(financial_data)
-        
+
         # 5. 计算目标价（多种方法平均）
         target_prices = [
             result['valuations']['dcf']['value_per_share']
         ]
-        
+
         if 'ddm' in result['valuations']:
             target_prices.append(result['valuations']['ddm']['value_per_share'])
-        
+
         if target_prices:
             result['target_price'] = sum(target_prices) / len(target_prices)
-        
+
         # 6. 计算上涨空间
         current_price = market_data.get('price', 0)
         if current_price > 0 and result['target_price'] > 0:
             result['upside_potential'] = (result['target_price'] - current_price) / current_price
-        
+
         # 7. 投资建议
         if result['upside_potential'] > 0.2:
             result['recommendation'] = 'buy'
@@ -281,18 +281,18 @@ class ValuationModel:
             result['recommendation'] = 'sell'
         else:
             result['recommendation'] = 'hold'
-        
+
         return result
-    
+
     def save_report(self, report: Dict, symbol: str = 'TEST'):
         """保存估值报告"""
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         filename = f"{symbol}_valuation_{timestamp}.json"
         filepath = self.cache_dir / filename
-        
+
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(report, f, indent=2, ensure_ascii=False)
-        
+
         return filepath
 
     def analyze(self, symbol: str, data: Dict = None) -> Dict:
@@ -398,9 +398,9 @@ Fixes:
     print("=" * 70)
     print(" " * 25 + "SA-010: Valuation Model")
     print("=" * 70)
-    
+
     model = ValuationModel()
-    
+
     # 测试模式
     if len(sys.argv) > 1 and sys.argv[1] == '--test':
         print("\n[Test 1] Generate Test Data")
@@ -411,12 +411,12 @@ Fixes:
         print(f"  Symbol: {financial_data['symbol']}")
         print(f"  Current Price: {market_data['price']:.2f}")
         print(f"  PE Ratio: {market_data['pe_ratio']:.2f}")
-        
+
         print("\n[Test 2] DCF Valuation")
         print("-" * 70)
         dcf = model.dcf_valuation(financial_data)
         print(f"  {dcf['description']}")
-        
+
         print("\n[Test 3] Relative Valuation")
         print("-" * 70)
         relative = model.relative_valuation(
@@ -428,17 +428,17 @@ Fixes:
             peer_data
         )
         print(f"  {relative['description']}")
-        
+
         print("\n[Test 4] PEG Valuation")
         print("-" * 70)
         peg = model.peg_valuation(market_data['pe_ratio'], financial_data['net_income_growth'])
         print(f"  {peg['description']}")
-        
+
         print("\n[Test 5] DDM Valuation")
         print("-" * 70)
         ddm = model.ddm_valuation(financial_data)
         print(f"  {ddm['description']}")
-        
+
         print("\n[Test 6] Comprehensive Valuation")
         print("-" * 70)
         comprehensive = model.comprehensive_valuation(financial_data, market_data, peer_data)
@@ -446,16 +446,16 @@ Fixes:
         print(f"  Target Price: {comprehensive['target_price']:.2f}")
         print(f"  Upside Potential: {comprehensive['upside_potential']:.2%}")
         print(f"  Recommendation: {comprehensive['recommendation']}")
-        
+
         print("\n[Test 7] Save Report")
         print("-" * 70)
         report_path = model.save_report(comprehensive, 'TEST')
         print(f"  Report saved to: {report_path}")
-        
+
         print("\n" + "=" * 70)
         print(" SA-010 Valuation Model test completed")
         print("=" * 70)
-    
+
     else:
         # 正常使用模式
         print("\nUsage: py sa_010_valuation_model.py --test")

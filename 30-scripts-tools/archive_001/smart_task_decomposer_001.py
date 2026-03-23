@@ -15,7 +15,7 @@ from datetime import datetime
 
 class SmartTaskDecomposer:
     """智能任务拆解器"""
-    
+
     # 任务复杂度评估标准
     COMPLEXITY_CRITERIA = {
         "low": {"max_subtasks": 3, "estimated_time_minutes": 15},
@@ -23,19 +23,19 @@ class SmartTaskDecomposer:
         "high": {"max_subtasks": 8, "estimated_time_minutes": 60},
         "very_high": {"max_subtasks": 12, "estimated_time_minutes": 120}
     }
-    
+
     def __init__(self):
         self.decomposition_history = []
-    
+
     def assess_complexity(self, task_description: str) -> str:
         """评估任务复杂度"""
-        
+
         # 简单启发式规则 (实际应使用 LLM)
         word_count = len(task_description.split())
         has_multiple_goals = any(kw in task_description for kw in ["并且", "同时", "还有", "and", "also"])
         requires_research = any(kw in task_description for kw in ["研究", "调研", "research"])
         requires_coding = any(kw in task_description for kw in ["代码", "编程", "code", "create"])
-        
+
         score = 0
         if word_count > 20:
             score += 1
@@ -47,7 +47,7 @@ class SmartTaskDecomposer:
             score += 1
         if requires_coding:
             score += 1
-        
+
         if score <= 1:
             return "low"
         elif score <= 2:
@@ -56,16 +56,16 @@ class SmartTaskDecomposer:
             return "high"
         else:
             return "very_high"
-    
+
     def decompose(self, task_description: str, complexity: str) -> List[Dict]:
         """分解任务为子任务"""
-        
+
         criteria = self.COMPLEXITY_CRITERIA[complexity]
         max_subtasks = criteria["max_subtasks"]
-        
+
         # 启发式分解 (实际应使用 LLM)
         subtasks = []
-        
+
         # 通用分解模式
         if "研究" in task_description or "research" in task_description.lower():
             subtasks = [
@@ -97,30 +97,30 @@ class SmartTaskDecomposer:
                 {"name": "执行任务", "description": "执行主要任务", "estimated_minutes": 20},
                 {"name": "结果验证", "description": "验证结果正确性", "estimated_minutes": 10}
             ]
-        
+
         # 限制子任务数量
         subtasks = subtasks[:max_subtasks]
-        
+
         # 添加元数据
         for i, subtask in enumerate(subtasks, 1):
             subtask["id"] = i
             subtask["priority"] = "high" if i <= 2 else "medium"
             subtask["dependencies"] = [i-1] if i > 1 else []
-        
+
         return subtasks
-    
+
     def generate_decomposition_plan(self, task_description: str) -> Dict:
         """生成完整的任务分解计划"""
-        
+
         # 评估复杂度
         complexity = self.assess_complexity(task_description)
-        
+
         # 分解任务
         subtasks = self.decompose(task_description, complexity)
-        
+
         # 计算总时间
         total_time = sum(st["estimated_minutes"] for st in subtasks)
-        
+
         plan = {
             "original_task": task_description,
             "complexity": complexity,
@@ -130,14 +130,14 @@ class SmartTaskDecomposer:
             "total_estimated_minutes": total_time,
             "created_at": datetime.now().isoformat()
         }
-        
+
         self.decomposition_history.append(plan)
-        
+
         return plan
-    
+
     def print_plan(self, plan: Dict):
         """打印分解计划"""
-        
+
         print(f"\n{'='*60}")
         print(f"任务分解计划")
         print(f"{'='*60}")
@@ -146,20 +146,20 @@ class SmartTaskDecomposer:
         print(f"子任务数：{plan['total_subtasks']}")
         print(f"预计时间：{plan['total_estimated_minutes']} 分钟")
         print(f"\n子任务列表:")
-        
+
         for st in plan["subtasks"]:
             deps = f" (依赖：{st['dependencies']})" if st['dependencies'] else ""
             print(f"  [{st['id']}] {st['name']} - {st['estimated_minutes']} 分钟{deps}")
             print(f"      {st['description']}")
-        
+
         print(f"{'='*60}")
-    
+
     def run(self, task_description: str) -> Dict:
         """完整流程：评估 -> 分解 -> 输出"""
-        
+
         plan = self.generate_decomposition_plan(task_description)
         self.print_plan(plan)
-        
+
         return plan
 
 logging.basicConfig(level=logging.INFO)
@@ -208,7 +208,7 @@ Fixes:
 
 测试入口"""
     decomposer = SmartTaskDecomposer()
-    
+
     # 测试不同任务
     test_tasks = [
         "简单查询：今天天气如何？",
@@ -216,7 +216,7 @@ Fixes:
         "代码开发：创建一个 Python 工具脚本，实现自动化文件整理功能",
         "头脑风暴：AI Agent 优化想法，需要发散和收敛思维"
     ]
-    
+
     for task in test_tasks:
         decomposer.run(task)
 

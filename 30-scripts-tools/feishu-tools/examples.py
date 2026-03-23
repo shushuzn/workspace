@@ -27,12 +27,12 @@ def example_text_message():
     print("\n" + "="*50)
     print("Example 1: Text Message")
     print("="*50)
-    
+
     client = FeishuAPIClient()
-    
+
     # Simple text
     client.send_text("🐾 Hello from OpenClaw!\n\nThis is an automated test message.")
-    
+
     # Text with formatting (Feishu supports markdown-like syntax)
     client.send_text("""**Bold Text**
 *Italic Text*
@@ -49,9 +49,9 @@ def example_card_message():
     print("\n" + "="*50)
     print("Example 2: Card Message")
     print("="*50)
-    
+
     client = FeishuAPIClient()
-    
+
     # Task completion notification
     title = "✅ Task Completed"
     elements = [
@@ -87,7 +87,7 @@ def example_card_message():
             ]
         }
     ]
-    
+
     client.send_poster(title, elements)
 
 
@@ -96,9 +96,9 @@ def example_alert_message():
     print("\n" + "="*50)
     print("Example 3: Alert Message")
     print("="*50)
-    
+
     client = FeishuAPIClient()
-    
+
     title = "⚠️ System Alert"
     elements = [
         {
@@ -141,7 +141,7 @@ def example_alert_message():
             ]
         }
     ]
-    
+
     client.send_poster(title, elements)
 
 
@@ -150,9 +150,9 @@ def example_daily_report():
     print("\n" + "="*50)
     print("Example 4: Daily Report")
     print("="*50)
-    
+
     client = FeishuAPIClient()
-    
+
     title = "📊 Daily Report - 2026-03-14"
     elements = [
         {
@@ -183,7 +183,7 @@ def example_daily_report():
             }
         }
     ]
-    
+
     client.send_poster(title, elements)
 
 
@@ -192,12 +192,12 @@ def example_token_management():
     print("\n" + "="*50)
     print("Example 5: Token Management")
     print("="*50)
-    
+
     client = FeishuAPIClient()
-    
+
     # Get token info
     info = client.get_token_info()
-    
+
     print("\nToken Information:")
     print(f"  Status: {info['status']}")
     if info['status'] != 'no_token':
@@ -212,17 +212,17 @@ def example_batch_messages():
     print("\n" + "="*50)
     print("Example 6: Batch Messages")
     print("="*50)
-    
+
     client = FeishuAPIClient()
-    
+
     # Multiple recipients (example - use real user IDs)
     recipients = [
         "ou_72a847b95fc25870dcdd8ce56d929252",
         # Add more user IDs here
     ]
-    
+
     message = "📢 Broadcast: System maintenance scheduled for 2026-03-15 02:00-04:00"
-    
+
     for user_id in recipients:
         try:
             client.send_text(message, receive_id=user_id)
@@ -237,9 +237,9 @@ def main():
         print("Usage: python examples.py <example_name>")
         print("Examples: all, text, card, alert, report, token, batch")
         sys.exit(1)
-    
+
     example_name = sys.argv[1].lower()
-    
+
     examples = {
         'all': [
             example_token_management,
@@ -255,25 +255,25 @@ def main():
         'token': [example_token_management],
         'batch': [example_batch_messages],
     }
-    
+
     if example_name not in examples:
         print(f"Unknown example: {example_name}")
         print(f"Available: {', '.join(examples.keys())}")
         sys.exit(1)
-    
+
     print("\n" + "="*50)
     print("Feishu API Examples - OpenClaw")
     print("="*50)
-    
+
     selected_examples = examples[example_name]
-    
+
     for example_func in selected_examples:
         try:
             example_func()
         except Exception as e:
             print(f"\n[✗] Example failed: {e}")
             print("Continue with next example...\n")
-    
+
     print("\n" + "="*50)
     print("Examples Complete!")
     print("="*50 + "\n")

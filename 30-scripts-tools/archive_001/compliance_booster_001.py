@@ -24,12 +24,12 @@ COMPLIANCE_REPORT = Path("30-scripts-tools/compliance_report.json")
 
 class ComplianceBooster:
     """合规率提升引擎 - 防护 v8"""
-    
+
     def __init__(self):
         self.session_id = self._get_session_id()
         self.violations = self._load_violations()
         self.tool_calls = self._load_tool_calls()
-    
+
     def _get_session_id(self):
         state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
         if not state_file.exists():
@@ -37,41 +37,41 @@ class ComplianceBooster:
         with open(state_file, "r", encoding="utf-8") as f:
             state = json.load(f)
         return state.get("session_id")
-    
+
     def _load_violations(self, limit=100) -> None:
         """加载违规记录"""
         if not VIOLATION_LOG.exists():
             return []
-        
+
         with open(VIOLATION_LOG, "r", encoding="utf-8") as f:
             lines = f.readlines()
-        
+
         violations = []
         for line in lines[-limit:]:
             try:
                 violations.append(json.loads(line))
             except (json.JSONDecodeError, IOError, OSError):
                 pass
-        
+
         return violations
-    
+
     def _load_tool_calls(self, limit=1000) -> None:
         """加载工具调用记录"""
         if not TOOL_CALL_LOG.exists():
             return []
-        
+
         with open(TOOL_CALL_LOG, "r", encoding="utf-8") as f:
             lines = f.readlines()
-        
+
         calls = []
         for line in lines[-limit:]:
             try:
                 calls.append(json.loads(line))
             except (json.JSONDecodeError, IOError, OSError):
                 pass
-        
+
         return calls
-    
+
     def analyze_root_causes(self) -> dict:
         """
 # ==============================================================================
@@ -122,13 +122,13 @@ Fixes:
                 "root_causes": [],
                 "compliance_rate": 100.0
             }
-        
+
         # 统计违规类型
         violation_types = {}
         for v in self.violations:
             v_type = v.get("violation_type", "unknown")
             violation_types[v_type] = violation_types.get(v_type, 0) + 1
-        
+
         # 分析根因
         root_causes = []
         for v_type, count in sorted(violation_types.items(), key=lambda x: -x[1]):
@@ -141,18 +141,18 @@ Fixes:
                 "solution": cause["solution"],
                 "priority": cause["priority"]
             })
-        
+
         # 计算合规率
         total_actions = len(self.violations) + len(self.tool_calls)
         compliance_rate = (len(self.tool_calls) / total_actions * 100) if total_actions > 0 else 0
-        
+
         return {
             "total_violations": len(self.violations),
             "total_tool_calls": len(self.tool_calls),
             "compliance_rate": compliance_rate,
             "root_causes": root_causes
         }
-    
+
     def _identify_root_cause(self, violation_type: str) -> dict:
         """识别根因"""
         cause_map = {

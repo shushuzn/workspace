@@ -9,7 +9,7 @@ CRON-001 Cron 定时任务配置
   - 自动执行每日任务
   - 每周批处理
   - 定时扫描
-  
+
 使用方法:
   py cron_001_scheduler.py --list      列出任务
   py cron_001_scheduler.py --add "task" "schedule"  添加任务
@@ -30,15 +30,15 @@ LOG_FILE = CRON_DIR / "execution_log.json"
 
 class CronScheduler:
     """定时任务调度器"""
-    
+
     def __init__(self):
         self.cron_dir = CRON_DIR
         self.config_file = CONFIG_FILE
         self.log_file = LOG_FILE
-        
+
         self.cron_dir.mkdir(parents=True, exist_ok=True)
         self.tasks = self._load_tasks()
-    
+
     def _load_tasks(self) -> dict:
         default = {
             "tasks": {
@@ -98,7 +98,7 @@ class CronScheduler:
                 }
             }
         }
-        
+
         if self.config_file.exists():
             try:
                 with open(self.config_file, "r", encoding="utf-8") as f:
@@ -106,11 +106,11 @@ class CronScheduler:
             except (Exception,):
                 return default
         return default
-    
+
     def _save_tasks(self):
         with open(self.config_file, "w", encoding="utf-8") as f:
             json.dump(self.tasks, f, ensure_ascii=False, indent=2)
-    
+
     def list_tasks(self) -> dict:
         """
 # ==============================================================================
@@ -156,7 +156,7 @@ Fixes:
 
 列出所有任务"""
         task_list = []
-        
+
         for task_id, task in self.tasks["tasks"].items():
             task_list.append({
                 "id": task_id,
@@ -166,14 +166,14 @@ Fixes:
                 "last_run": task.get("last_run"),
                 "next_run": task.get("next_run")
             })
-        
+
         return {
             "status": "success",
             "total_tasks": len(task_list),
             "enabled_tasks": sum(1 for t in task_list if t["enabled"]),
             "tasks": task_list
         }
-    
+
     def add_task(self, task_id: str, name: str, schedule: str, command: str) -> dict:
         """添加新任务"""
         if task_id in self.tasks["tasks"]:

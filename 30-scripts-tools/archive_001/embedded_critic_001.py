@@ -14,7 +14,7 @@ from typing import Dict, List, Optional
 
 class EmbeddedCritic:
     """批判者嵌入式检查器"""
-    
+
     # 检查维度
     CHECK_DIMENSIONS = {
         "completeness": {
@@ -43,11 +43,11 @@ class EmbeddedCritic:
             "weight": 0.15
         }
     }
-    
+
     def __init__(self):
         self.log_file = Path("flow-archive/20260318-universal-workflow-001/critic-log.json")
         self.state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
-    
+
     def check_step(self, step_id: str, output: any, context: Dict = None) -> Dict:
         """
         检查步骤输出
@@ -60,13 +60,13 @@ class EmbeddedCritic:
         Returns:
             检查结果
         """
-        
+
         context = context or {}
-        
+
         # 初始化检查维度
         scores = {}
         comments = {}
-        
+
         # 维度 1: 完整性
         if output is None:
             scores['completeness'] = 0
@@ -77,7 +77,7 @@ class EmbeddedCritic:
         else:
             scores['completeness'] = 90
             comments['completeness'] = "Output exists and non-empty"
-        
+
         # 维度 2: 准确性（简化检查）
         if context.get('expected_type') and not isinstance(output, context['expected_type']):
             scores['accuracy'] = 30
@@ -85,7 +85,7 @@ class EmbeddedCritic:
         else:
             scores['accuracy'] = 85
             comments['accuracy'] = "Output type matches expectation"
-        
+
         # 维度 3: 一致性
         if context.get('previous_output'):
             # 检查与之前输出的一致性
@@ -94,7 +94,7 @@ class EmbeddedCritic:
         else:
             scores['consistency'] = 85
             comments['consistency'] = "No consistency issues detected"
-        
+
         # 维度 4: 质量
         quality_score = 80
         if isinstance(output, str) and len(output) < 10:
@@ -106,21 +106,21 @@ class EmbeddedCritic:
         else:
             comments['quality'] = "Acceptable quality"
         scores['quality'] = quality_score
-        
+
         # 维度 5: 安全性
         scores['safety'] = 95
         comments['safety'] = "No safety issues detected"
-        
+
         # 计算加权总分
         total_score = sum(
             scores[dim] * self.CHECK_DIMENSIONS[dim]['weight']
             for dim in scores
         )
-        
+
         # 判定是否通过
         passed = total_score >= 70
         blocking = total_score < 50  # 严重问题，阻塞下一步
-        
+
         result = {
             "step_id": step_id,
             "timestamp": datetime.now().isoformat(),
@@ -131,46 +131,46 @@ class EmbeddedCritic:
             "blocking": blocking,
             "recommendation": "proceed" if passed else ("retry" if not blocking else "block")
         }
-        
+
         # 记录日志
         self._log_check(result)
-        
+
         return result
-    
+
     def _log_check(self, result: Dict):
         """记录检查日志"""
-        
+
         log = []
         if self.log_file.exists():
             with open(self.log_file, 'r', encoding='utf-8') as f:
                 log = json.load(f)
-        
+
         log.append(result)
         log = log[-500:]  # 保留最近 500 条
-        
+
         with open(self.log_file, 'w', encoding='utf-8') as f:
             json.dump(log, f, ensure_ascii=False, indent=2)
-    
+
     def check_workflow_state(self) -> Dict:
         """检查工作流状态"""
-        
+
         if not self.state_file.exists():
             return {"error": "State file not found"}
-        
+
         with open(self.state_file, 'r', encoding='utf-8') as f:
             state = json.load(f)
-        
+
         completed_steps = state.get('completed_steps', [])
         total_steps = state.get('total_steps', 20)
-        
+
         completion_rate = len(completed_steps) / total_steps * 100
-        
+
         # 检查日志
         critic_log = []
         if self.log_file.exists():
             with open(self.log_file, 'r', encoding='utf-8') as f:
                 critic_log = json.load(f)
-        
+
         # 计算平均质量分
         if critic_log:
             avg_score = sum(c.get('total_score', 0) for c in critic_log) / len(critic_log)
@@ -178,7 +178,7 @@ class EmbeddedCritic:
         else:
             avg_score = 0
             pass_rate = 0
-        
+
         return {
             "completion_rate": completion_rate,
             "critic_checks": len(critic_log),
@@ -186,37 +186,37 @@ class EmbeddedCritic:
             "pass_rate": pass_rate,
             "health": "good" if avg_score >= 80 and pass_rate >= 90 else "needs_improvement"
         }
-    
+
     def display_status(self) -> str:
         """显示批判者状态"""
-        
+
         state = self.check_workflow_state()
-        
+
         output = []
         output.append("\n" + "=" * 80)
         output.append(" " * 20 + "Embedded Critic Status")
         output.append("=" * 80)
-        
+
         output.append(f"\n[Workflow State]")
         output.append(f"  Completion Rate:  {state.get('completion_rate', 0):.1f}%")
         output.append(f"  Critic Checks:    {state.get('critic_checks', 0)}")
-        
+
         output.append(f"\n[Quality Metrics]")
         output.append(f"  Avg Score:        {state.get('avg_quality_score', 0):.1f}/100")
         output.append(f"  Pass Rate:        {state.get('pass_rate', 0):.1f}%")
         output.append(f"  Health:           {state.get('health', 'unknown').upper()}")
-        
+
         if state.get('health') == 'needs_improvement':
             output.append(f"\n[WARN] Quality needs improvement!")
             output.append("[ACTION] Review recent critic logs")
-        
+
         output.append("=" * 80)
-        
+
         return "\n".join(output)
-    
+
     def run(self) -> Dict:
         """运行批判者"""
-        
+
         return {
             "state": self.check_workflow_state(),
             "success": True
@@ -268,30 +268,30 @@ Fixes:
 
 测试入口"""
     critic = EmbeddedCritic()
-    
+
     print("Embedded Critic Test")
     print("=" * 80)
-    
+
     # 测试：检查步骤输出
     print("\nTest 1: Good output")
     result1 = critic.check_step("1", "Context loaded successfully", {"expected_type": str})
     print(f"  Score: {result1['total_score']:.1f}")
     print(f"  Passed: {result1['passed']}")
-    
+
     print("\nTest 2: Empty output")
     result2 = critic.check_step("2", "", {"expected_type": str})
     print(f"  Score: {result2['total_score']:.1f}")
     print(f"  Passed: {result2['passed']}")
-    
+
     print("\nTest 3: None output")
     result3 = critic.check_step("3", None)
     print(f"  Score: {result3['total_score']:.1f}")
     print(f"  Passed: {result3['passed']}")
     print(f"  Blocking: {result3['blocking']}")
-    
+
     # 显示状态
     print(critic.display_status())
-    
+
     print(f"\n[OK] Critic test completed")
 
 if __name__ == "__main__":

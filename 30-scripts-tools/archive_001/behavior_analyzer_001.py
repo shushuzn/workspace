@@ -25,46 +25,46 @@ BEHAVIOR_REPORT = Path("30-scripts-tools/behavior_analysis.json")
 
 class BehaviorAnalyzer:
     """AI 行为分析器 - 防护 v8"""
-    
+
     def __init__(self):
         self.tool_calls = self._load_tool_calls()
         self.violations = self._load_violations()
         self.behavior_model = self._build_behavior_model()
-    
+
     def _load_tool_calls(self, limit=1000) -> None:
         """加载工具调用记录"""
         if not TOOL_CALL_LOG.exists():
             return []
-        
+
         with open(TOOL_CALL_LOG, "r", encoding="utf-8") as f:
             lines = f.readlines()
-        
+
         calls = []
         for line in lines[-limit:]:
             try:
                 calls.append(json.loads(line))
             except (json.JSONDecodeError, IOError, OSError):
                 pass
-        
+
         return calls
-    
+
     def _load_violations(self, limit=100) -> None:
         """加载违规记录"""
         if not VIOLATION_LOG.exists():
             return []
-        
+
         with open(VIOLATION_LOG, "r", encoding="utf-8") as f:
             lines = f.readlines()
-        
+
         violations = []
         for line in lines[-limit:]:
             try:
                 violations.append(json.loads(line))
             except (json.JSONDecodeError, IOError, OSError):
                 pass
-        
+
         return violations
-    
+
     def _build_behavior_model(self) -> dict:
         """
 # ==============================================================================
@@ -115,12 +115,12 @@ Fixes:
             "session_patterns": defaultdict(list),
             "violation_correlation": defaultdict(list)
         }
-        
+
         # 统计工具使用
         for call in self.tool_calls:
             tool = call.get("tool_id", "unknown")
             model["tool_usage"][tool] += 1
-            
+
             # 小时模式
             ts = call.get("timestamp", "")
             if ts:
@@ -129,18 +129,18 @@ Fixes:
                     model["hourly_pattern"][hour] += 1
                 except (Exception,):
                     pass
-            
+
             # Session 模式
             session = call.get("session_id", "unknown")
             model["session_patterns"][session].append(call)
-        
+
         # 违规关联
         for v in self.violations:
             session = v.get("session_id", "unknown")
             model["violation_correlation"][session].append(v)
-        
+
         return model
-    
+
     def detect_anomalies(self) -> list:
         """检测异常行为"""
         anomalies = []

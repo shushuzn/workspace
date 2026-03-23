@@ -22,7 +22,7 @@ from pathlib import Path
 # 工具调用白名单（允许直接调用的工具）
 SAFE_TOOLS = [
     'read_file',
-    'write_file', 
+    'write_file',
     'edit_file',
     'browser_use',
     'desktop_screenshot',
@@ -41,22 +41,22 @@ PROTECTED_TOOLS = [
 
 class ToolCallInterceptor:
     """工具调用拦截器"""
-    
+
     def __init__(self):
         self.session_id = None
         self.state_file = None
         self.tool_log = Path("30-scripts-tools/tool_call_log.jsonl")
-        
+
     def check_session(self) -> tuple[bool, str]:
         """检查会话状态"""
         # 检查 execution-state.json
         state_files = list(Path("flow-archive").glob("*/execution-state.json"))
         if not state_files:
             return False, "无 execution-state.json - 未初始化会话"
-        
+
         # 使用最新的 state 文件
         self.state_file = max(state_files, key=lambda f: f.stat().st_mtime)
-        
+
         try:
             with open(self.state_file, 'r', encoding='utf-8') as f:
                 state = json.load(f)
@@ -64,19 +64,19 @@ class ToolCallInterceptor:
             return True, f"Session valid: {self.session_id}"
         except Exception as e:
             return False, f"State file error: {e}"
-    
+
     def check_protection_flags(self) -> tuple[bool, str]:
         """检查防护标志"""
         # 检查 .STOP_FLAG
         if Path(".STOP_FLAG").exists():
             return False, "系统已停止 (.STOP_FLAG exists)"
-        
+
         # 检查 .lockdown_active
         if Path(".lockdown_active").exists():
             return False, "系统封锁中 (.lockdown_active exists)"
-        
+
         return True, "防护检查通过"
-    
+
     def log_tool_call(self, tool_name: str, params: dict, result: str) -> None:
         """
 # ==============================================================================
@@ -128,10 +128,10 @@ Fixes:
             "params": params,
             "result": result,
         }
-        
+
         with open(self.tool_log, 'a', encoding='utf-8') as f:
             f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
-    
+
     def intercept(self, tool_name: str, params: dict) -> tuple[bool, str, dict]:
         """
         拦截工具调用

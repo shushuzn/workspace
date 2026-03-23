@@ -38,7 +38,7 @@ def sogou_wechat_search_via_router(keyword, max_results=10):
     queue_file = os.environ.get("ROUTER_CMD_QUEUE", "/root/router-agent/cmd-queue")
     result_file = os.environ.get("ROUTER_CMD_RESULT", "/root/router-agent/cmd-result")
     output_file = os.environ.get("ROUTER_CMD_OUTPUT", "/root/router-agent/cmd-output")
-    
+
     # Mark current result file position
     try:
         with open(result_file) as f:
@@ -46,16 +46,16 @@ def sogou_wechat_search_via_router(keyword, max_results=10):
         before_len = len(before)
     except FileNotFoundError:
         before_len = 0
-    
+
     # Queue the curl command — router will fetch raw HTML
     encoded_kw = quote(keyword)
     cmd = f'curl -s "https://weixin.sogou.com/weixin?type=2&query={encoded_kw}" -H "User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36"'
-    
+
     with open(queue_file, 'w') as f:
         f.write(cmd)
-    
+
     print(f"Command queued, waiting for router (up to 90s)...", file=sys.stderr)
-    
+
     # Wait for result (router polls every ~60s)
     for _ in range(18):  # 18 * 5s = 90s max
         time.sleep(5)
@@ -73,7 +73,7 @@ def sogou_wechat_search_via_router(keyword, max_results=10):
                     pass
         except FileNotFoundError:
             pass
-    
+
     print("Router timeout, falling back to direct", file=sys.stderr)
     return sogou_wechat_search(keyword, max_results)
 
@@ -147,12 +147,12 @@ print(json.dumps(results, ensure_ascii=False))
         with tempfile.NamedTemporaryFile(mode='w', suffix='.py', delete=False) as f:
             f.write(script)
             local_path = f.name
-        
+
         remote_path = "/tmp/_sogou_search.py"
         subprocess.run(["scp", "-o", "ConnectTimeout=5", "-q", local_path, f"{host}:{remote_path}"],
                        capture_output=True, timeout=10)
         os.unlink(local_path)
-        
+
         result = subprocess.run(
             ["ssh", "-o", "ConnectTimeout=5", host, "python3", remote_path],
             capture_output=True, text=True, timeout=30
@@ -169,44 +169,44 @@ print(json.dumps(results, ensure_ascii=False))
 
 def sogou_wechat_search(keyword, max_results=10):
     """搜索搜狗微信公众号文章"""
-    
+
     headers = {
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
     }
-    
+
     url = f'https://weixin.sogou.com/weixin?type=2&query={quote(keyword)}'
-    
+
     try:
         response = requests.get(url, headers=headers, timeout=10)
         response.raise_for_status()
         text = response.text
-        
+
         results = []
-        
+
         # 找到所有 txt-box 块
         blocks = re.findall(r'<div class="txt-box">(.*?)</div>\s*</div>', text, re.DOTALL)
-        
+
         for block in blocks[:max_results]:
             # 标题和链接
             title_match = re.search(r'<a[^>]*href="([^"]*)"[^>]*>(.*?)</a>', block, re.DOTALL)
             if not title_match:
                 continue
-            
+
             article_url = title_match.group(1).replace('&amp;', '&')
             # 清理标题中的 HTML 标签
             raw_title = title_match.group(2)
             title = re.sub(r'<[^>]+>', '', raw_title).strip()
             title = html_lib.unescape(title)
-            
+
             # 作者/公众号
             author_match = re.search(r'<a[^>]*class="account"[^>]*>(.*?)</a>', block, re.DOTALL)
             author = re.sub(r'<[^>]+>', '', author_match.group(1)).strip() if author_match else ''
-            
+
             # 摘要
             snippet_match = re.search(r'<p class="txt-info">(.*?)</p>', block, re.DOTALL)
             snippet = re.sub(r'<[^>]+>', '', snippet_match.group(1)).strip() if snippet_match else ''
             snippet = html_lib.unescape(snippet)
-            
+
             # 日期 (timestamp)
             date_match = re.search(r"document\.write\(timeConvert\('(\d+)'\)\)", block)
             if date_match:
@@ -215,11 +215,11 @@ def sogou_wechat_search(keyword, max_results=10):
                 date = datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
             else:
                 date = ''
-            
+
             # 完整链接
             if article_url.startswith('/link'):
                 article_url = 'https://weixin.sogou.com' + article_url
-            
+
             results.append({
                 'title': title,
                 'url': article_url,
@@ -227,9 +227,9 @@ def sogou_wechat_search(keyword, max_results=10):
                 'snippet': snippet,
                 'date': date
             })
-            
+
         return results
-        
+
     except Exception as e:
         print(f"搜索失败: {e}", file=sys.stderr)
         return []

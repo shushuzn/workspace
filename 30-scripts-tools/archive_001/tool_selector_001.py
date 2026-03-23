@@ -19,30 +19,30 @@ def select_tools(task_analysis_file: str):
             "message": "任务分析文件不存在",
             "server_time": datetime.now().isoformat()
         }
-    
+
     with open(analysis_path, "r", encoding="utf-8") as f:
         analysis = json.load(f)
-    
+
     # 加载工具注册表
     registry_file = Path("30-scripts-tools/tools_registry.json")
     with open(registry_file, "r", encoding="utf-8") as f:
         registry = json.load(f)
-    
+
     # 根据任务类型选择工具
     task_type = analysis.get("task_type", "unknown")
     required_tools = analysis.get("required_tools", [])
-    
+
     # 匹配可用工具
     available_tools = list(registry.get("tools", {}).keys())
     selected = []
     missing = []
-    
+
     for tool in required_tools:
         if tool in available_tools:
             selected.append(tool)
         else:
             missing.append(tool)
-    
+
     return {
         "status": "success",
         "task_type": task_type,

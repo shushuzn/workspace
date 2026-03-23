@@ -13,7 +13,7 @@ class PerformanceAttribution:
     def __init__(self, data_dir="60-DATA/stock_performance"):
         self.data_dir = Path(data_dir)
         self.data_dir.mkdir(parents=True, exist_ok=True)
-    
+
     def attribute_returns(self, portfolio_return: float, benchmark_return: float,
                          factors: dict) -> dict:
         """
@@ -60,17 +60,17 @@ Fixes:
 
 Decompose returns into factors"""
         excess_return = portfolio_return - benchmark_return
-        
+
         factor_contributions = {}
         total_factor = 0
-        
+
         for factor_name, factor_value in factors.items():
             contribution = factor_value * 0.1
             factor_contributions[factor_name] = round(contribution, 4)
             total_factor += contribution
-        
+
         residual = excess_return - total_factor
-        
+
         return {
             "analyzed_at": datetime.now().isoformat(),
             "portfolio_return": round(portfolio_return, 4),
@@ -81,7 +81,7 @@ Decompose returns into factors"""
             "residual": round(residual, 4),
             "skill_vs_luck": "skill" if abs(total_factor) > abs(residual) else "luck"
         }
-    
+
     def compare_benchmark(self, portfolio_returns: list, benchmark_returns: list) -> dict:
         """Compare portfolio vs benchmark"""
         if len(portfolio_returns) != len(benchmark_returns):

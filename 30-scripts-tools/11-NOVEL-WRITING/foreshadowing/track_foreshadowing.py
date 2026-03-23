@@ -44,7 +44,7 @@ def load_foreshadowing_settings():
 def scan_chapter_for_foreshadowing(chapter_num, content):
     """Scan single chapter for foreshadowing"""
     found = []
-    
+
     # Simple keyword matching (can be enhanced)
     keywords = {
         1: ['拇指', '滑动', '游戏', '肌肉记忆'],
@@ -63,13 +63,13 @@ def scan_chapter_for_foreshadowing(chapter_num, content):
         14: ['咖啡', '茶', '饮料'],
         15: ['照片', '墙', '回忆'],
     }
-    
+
     for f_id, words in keywords.items():
         for word in words:
             if word in content:
                 found.append(f_id)
                 break
-    
+
     return list(set(found))
 
 def track_foreshadowing():
@@ -81,9 +81,9 @@ def track_foreshadowing():
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
     print()
-    
+
     foreshadowing_settings = load_foreshadowing_settings()
-    
+
     # Scan all chapters
     draft_files = []
     for file in os.listdir(DRAFTS_FOLDER):
@@ -92,9 +92,9 @@ def track_foreshadowing():
             if match:
                 chapter_num = int(match.group(1))
                 draft_files.append((chapter_num, os.path.join(DRAFTS_FOLDER, file)))
-    
+
     draft_files.sort(key=lambda x: x[0])
-    
+
     # Track foreshadowing
     tracking_results = {}
     for f in foreshadowing_settings:
@@ -103,57 +103,57 @@ def track_foreshadowing():
             'plant_status': [],
             'recover_status': [],
         }
-    
+
     for chapter_num, file_path in draft_files:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
-        
+
         found = scan_chapter_for_foreshadowing(chapter_num, content)
-        
+
         for f_id in found:
             if f_id in tracking_results:
                 if chapter_num in foreshadowing_settings[f_id-1]['plant_chapters']:
                     tracking_results[f_id]['plant_status'].append(chapter_num)
                 if chapter_num in foreshadowing_settings[f_id-1]['recover_chapters']:
                     tracking_results[f_id]['recover_status'].append(chapter_num)
-    
+
     # Print report
     print("Foreshadowing Status:")
     print("-" * 60)
     print(f"{'ID':<5} {'Name':<20} {'Planted':<15} {'Recovered':<15} {'Status':<10}")
     print("-" * 60)
-    
+
     for f in foreshadowing_settings:
         f_id = f['id']
         name = f['name'][:18].ljust(20)
-        
+
         planted = tracking_results[f_id]['plant_status']
         recovered = tracking_results[f_id]['recover_status']
-        
+
         planted_str = ','.join(map(str, planted)) if planted else 'None'
         recovered_str = ','.join(map(str, recovered)) if recovered else 'None'
-        
+
         # Determine status
         expected_plant = len(f['plant_chapters'])
         expected_recover = len(f['recover_chapters'])
-        
+
         if len(planted) == expected_plant and len(recovered) == expected_recover:
             status = '✅ Complete'
         elif len(planted) > 0:
             status = '⏳ In Progress'
         else:
             status = '❌ Not Started'
-        
+
         print(f"{f_id:<5} {name} {planted_str:<15} {recovered_str:<15} {status}")
-    
+
     print("-" * 60)
     print()
-    
+
     # Save report
     report_file = os.path.join(DRAFTS_FOLDER, "foreshadowing_report.json")
     with open(report_file, 'w', encoding='utf-8') as f:
         json.dump(tracking_results, f, ensure_ascii=False, indent=2)
-    
+
     print(f"Report saved to: {report_file}")
     print()
     print("=" * 60)

@@ -9,12 +9,12 @@ replacements = {
     "每一次...每一次...每一次": "一次，又一次。",
     "非常惊讶，非常震惊，非常不可思议": "惊讶得说不出话",
     "越来越专注，越来越投入，越来越忘记": "忘了时间，忘了周围",
-    
+
     # 情感通过动作呈现
     "他很伤心": "他把头埋进臂弯",
     "他很难过": "他盯着地面，很久没眨眼",
     "他非常激动": "他的手心出了汗",
-    
+
     # 减少过渡词
     "然后他": "他",
     "接着他": "他",
@@ -27,16 +27,16 @@ def optimize_chapter(filename, chapter_num):
     if not os.path.exists(path):
         print(f"[SKIP] {filename} not found")
         return
-    
+
     with open(path, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     original_len = len(content)
-    
+
     # 应用替换
     for old, new in replacements.items():
         content = content.replace(old, new)
-    
+
     # 增加感官细节（在合适位置插入）
     if chapter_num == 3:
         # 在教室场景增加感官细节
@@ -49,7 +49,7 @@ def optimize_chapter(filename, chapter_num):
 """
         if "教室里" in content:
             content = content.replace("教室里", "教室里\n" + sensory_addition, 1)
-    
+
     elif chapter_num == 4:
         # 在心流场景增加感官细节
         sensory_addition = """
@@ -61,7 +61,7 @@ def optimize_chapter(filename, chapter_num):
 """
         if "晚自习" in content:
             content = content.replace("晚自习", "晚自习\n" + sensory_addition, 1)
-    
+
     elif chapter_num == 5:
         # 在奶茶店场景增加感官细节
         sensory_addition = """
@@ -73,12 +73,12 @@ def optimize_chapter(filename, chapter_num):
 """
         if "奶茶店" in content:
             content = content.replace("奶茶店", "奶茶店\n" + sensory_addition, 1)
-    
+
     new_len = len(content)
-    
+
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     print(f"[OK] Chapter {chapter_num} optimized: {original_len} → {new_len} chars (+{new_len - original_len})")
 
 # 优化第 3/4/5 章

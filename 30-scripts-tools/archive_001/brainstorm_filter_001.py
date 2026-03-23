@@ -23,7 +23,7 @@ def load_ideas() -> None:
     if not ideas_file.exists():
         print("ERROR: Please run brainstorm_002_diverge.py first")
         return None
-    
+
     with open(ideas_file, encoding="utf-8") as f:
         return json.load(f)
 
@@ -35,10 +35,10 @@ def filter_ideas(ideas, min_score=6) -> None:
 def save_filtered(filtered) -> None:
     """Save filtered ideas"""
     output_file = Path("flow-archive/brainstorm-current/brainstorm_ideas_filtered.json")
-    
+
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(filtered, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n[Saved] {len(filtered)} filtered ideas")
     return output_file
 
@@ -47,25 +47,25 @@ def run(min_score=6) -> None:
     print("="*60)
     print("[BRAINSTORM] Step 3: Filter - Evaluate Ideas")
     print("="*60)
-    
+
     # Load ideas
     ideas = load_ideas()
     if not ideas:
         return None
-    
+
     print(f"\n[Input] {len(ideas)} ideas")
-    
+
     # Filter
     filtered = filter_ideas(ideas, min_score)
-    
+
     print(f"[Output] {len(filtered)} filtered ideas (score >= {min_score})")
     print("\n[Top Ideas]")
     for i, idea in enumerate(filtered[:5], 1):
         print(f"  {i}. [{idea.get('score')}] {idea['text']}")
-    
+
     # Save
     save_filtered(filtered)
-    
+
     return filtered
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计

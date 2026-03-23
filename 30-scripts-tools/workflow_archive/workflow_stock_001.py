@@ -66,7 +66,7 @@ class WorkflowStock:
     def __init__(self):
         self.log_path = Path("13-memory/.workflow_logs/stock.json")
         self.log_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     def _log(self, workflow, step, status):
         logs = json.loads(self.log_path.read_text(encoding="utf-8", errors="replace")) if self.log_path.exists() else {"runs": []}
         logs["runs"].append({
@@ -78,29 +78,29 @@ class WorkflowStock:
         if len(logs["runs"]) > 100:
             logs["runs"] = logs["runs"][-50:]
         self.log_path.write_text(json.dumps(logs, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def run(self, workflow_id, symbol=None):
         if workflow_id not in STOCK_WORKFLOWS:
             return {"error": f"Unknown: {workflow_id}", "available": list(STOCK_WORKFLOWS.keys())}
-        
+
         wf = STOCK_WORKFLOWS[workflow_id]
         results = []
-        
+
         print(f"Stock Analysis: {wf['name']}")
         print(f"{wf['description']}")
         print("=" * 50)
-        
+
         for i, step in enumerate(wf["steps"]):
             tool = step["tool"]
             args = list(step["args"])
-            
+
             # Replace symbol placeholder
             if symbol:
                 args = [a.replace("AAPL", symbol) for a in args]
-            
+
             cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
             print(f"[{i+1}/{len(wf['steps'])}] {tool}...", end=" ", flush=True)
-            
+
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=60, encoding="utf-8", errors="replace")
                 status = "OK" if result.returncode == 0 else "FAIL"
@@ -115,16 +115,16 @@ class WorkflowStock:
                 print(f"ERROR: {e}")
                 self._log(workflow_id, tool, "ERROR")
                 results.append({"step": i+1, "tool": tool, "status": "ERROR"})
-        
+
         success = sum(1 for r in results if r["status"] == "OK")
         print("=" * 50)
         print(f"Complete: {success}/{len(results)} steps OK")
-        
+
         return {"workflow": workflow_id, "symbol": symbol, "results": results}
-    
+
     def list(self):
         return [{"id": k, "name": v["name"], "steps": len(v["steps"])} for k, v in STOCK_WORKFLOWS.items()]
-    
+
     def health(self) -> None:
         """
 # ==============================================================================
@@ -171,7 +171,7 @@ Fixes:
 Check health of stock analysis tools"""
         sa_tools = list(TOOLS_DIR.glob("sa_*.py"))
         results = []
-        
+
         for tool in sa_tools[:10]:  # Sample first 10
             result = subprocess.run(
                 [sys.executable, str(TOOLS_DIR / "tool_validator_001.py"), "--check", str(tool)],
@@ -179,7 +179,7 @@ Check health of stock analysis tools"""
             )
             passed = '"status": "PASS"' in result.stdout
             results.append({"tool": tool.stem, "valid": passed})
-        
+
         valid = sum(1 for r in results if r["valid"])
         return {
             "sa_tools_total": len(sa_tools),
@@ -190,7 +190,7 @@ Check health of stock analysis tools"""
 
 if __name__ == "__main__":
     ws = WorkflowStock()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--run":

@@ -6,11 +6,11 @@ class StockScreener:
         self.min_score = min_score
         self.min_upside = min_upside
         self.max_pe = max_pe
-    
+
     def screen(self, live=True):
         """Screen stocks using parallel analysis"""
         symbols = list(F.keys())
-        
+
         # Use parallel analysis for speed
         if live:
             results_dict = analyze_multiple_parallel(symbols, max_workers=10)
@@ -19,7 +19,7 @@ class StockScreener:
             for sym in symbols:
                 from .core import analyze
                 results_dict[sym] = analyze(sym)
-        
+
         results = []
         for sym, data in results_dict.items():
             if not data:
@@ -27,7 +27,7 @@ class StockScreener:
             score = data.get("score", 0)
             upside = data.get("upside", 0)
             pe = data.get("pe", 999)
-            
+
             if score >= self.min_score and upside >= self.min_upside and pe <= self.max_pe:
                 results.append({
                     "symbol": sym,
@@ -42,10 +42,10 @@ class StockScreener:
                     "div": data.get("div", 0),
                     "rating": data.get("rating_int", "HOLD"),
                 })
-        
+
         results.sort(key=lambda x: x["score"], reverse=True)
         return results
-    
+
     def show(self, live=False):
         results = self.screen(live)
         if not results:

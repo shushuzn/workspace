@@ -13,7 +13,7 @@ class StrategyOptimizer:
     def __init__(self, data_dir="60-DATA/stock_strategies"):
         self.data_dir = Path(data_dir)
         self.data_dir.mkdir(parents=True, exist_ok=True)
-    
+
     def grid_search(self, param_ranges: dict, evaluate_func) -> dict:
         """
 # ==============================================================================
@@ -59,27 +59,27 @@ Fixes:
 
 Simple grid search optimization"""
         import itertools
-        
+
         param_names = list(param_ranges.keys())
         param_values = [param_ranges[name] for name in param_names]
-        
+
         best_score = float('-inf')
         best_params = {}
         all_results = []
-        
+
         for combination in itertools.product(*param_values):
             params = dict(zip(param_names, combination))
             score = evaluate_func(params)
-            
+
             result = {"params": params, "score": score}
             all_results.append(result)
-            
+
             if score > best_score:
                 best_score = score
                 best_params = params
-        
+
         all_results.sort(key=lambda x: x["score"], reverse=True)
-        
+
         return {
             "optimized_at": datetime.now().isoformat(),
             "best_params": best_params,
@@ -87,7 +87,7 @@ Simple grid search optimization"""
             "total_combinations": len(all_results),
             "top_10": all_results[:10]
         }
-    
+
     def walk_forward_test(self, data: list, train_size: int, test_size: int) -> dict:
         """Simple walk-forward analysis"""
         if len(data) < train_size + test_size:

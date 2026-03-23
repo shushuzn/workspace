@@ -27,7 +27,7 @@ class ToolAutoDiscover:
         self.workspace = Path(__file__).parent.parent
         self.tools_dir = self.workspace / "30-scripts-tools"
         self.registry_file = self.tools_dir / "tools_registry.json"
-    
+
     def _get_cache(self):
         if CACHE_FILE.exists():
             try:
@@ -37,14 +37,14 @@ class ToolAutoDiscover:
             except (json.JSONDecodeError, IOError, OSError):
                 pass
         return None
-    
+
     def _set_cache(self, results):
         CACHE_FILE.parent.mkdir(parents=True, exist_ok=True)
         CACHE_FILE.write_text(json.dumps({
             "cache_time": datetime.now().timestamp(),
             "results": results
         }, ensure_ascii=False), encoding="utf-8", errors="replace")
-    
+
     def _extract_metadata(self, file_path):
         try:
             content = file_path.read_text(encoding="utf-8", errors="replace")
@@ -58,16 +58,16 @@ class ToolAutoDiscover:
             }
         except (Exception,):
             return None
-    
+
     def _get_category(self, name):
         name_lower = name.lower()
-        for kw, cat in [("test", "testing"), ("brainstorm", "brainstorm"), 
+        for kw, cat in [("test", "testing"), ("brainstorm", "brainstorm"),
                         ("optim", "optimization"), ("export", "export"),
                         ("workflow", "workflow"), ("stock", "stock")]:
             if kw in name_lower:
                 return cat
         return "auto"
-    
+
     def _scan_parallel(self, files, max_workers=4):
         results = []
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
@@ -77,54 +77,54 @@ class ToolAutoDiscover:
                 if result:
                     results.append(result)
         return results
-    
+
     def scan_tools(self, use_cache=True):
         if use_cache:
             cached = self._get_cache()
             if cached:
                 return {"status": "success", "discovered": len(cached), "cached": True}
-        
-        files = [f for f in self.tools_dir.glob("*.py") 
+
+        files = [f for f in self.tools_dir.glob("*.py")
                  if not f.name.startswith("_") and not f.name.startswith("test_")]
-        
+
         discovered = self._scan_parallel(files)
         self._set_cache(discovered)
-        
+
         return {"status": "success", "discovered": len(discovered), "cached": False}
-    
+
     def register_all(self):
         registry = json.loads(self.registry_file.read_text(encoding="utf-8", errors="replace")) if self.registry_file.exists() else {"tools": {}}
-        
+
         if "tools" not in registry:
             registry["tools"] = {}
-        
+
         cached = self._get_cache() or []
         registered = sum(1 for t in cached if t["tool_id"] not in registry["tools"])
-        
+
         for tool in cached:
             if tool["tool_id"] not in registry["tools"]:
                 registry["tools"][tool["tool_id"]] = tool
-        
+
         self.registry_file.write_text(json.dumps(registry, ensure_ascii=False, indent=2), encoding="utf-8", errors="replace")
-        
+
         return {"status": "success", "registered": registered, "total": len(registry["tools"])}
-    
+
     def status(self):
         cached = self._get_cache() or []
         registry = json.loads(self.registry_file.read_text(encoding="utf-8", errors="replace")) if self.registry_file.exists() else {"tools": {}}
-        
+
         return {
             "total_discovered": len(cached),
             "total_registered": len(registry.get("tools", {})),
             "cached": bool(cached)
         }
-    
+
     def sync(self):
         return {"scan": self.scan_tools(), "register": self.register_all()}
 
 if __name__ == "__main__":
     discover = ToolAutoDiscover()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--scan":

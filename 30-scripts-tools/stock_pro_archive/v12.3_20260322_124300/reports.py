@@ -13,7 +13,7 @@ def gen_report(data, lang="en"):
     title = f"{sym} 分析报告" if cn else f"# {sym} Analysis"
     fetched = data.get('fetched_at', datetime.now().isoformat())
     src = data.get('price_source', 'cached')
-    
+
     lines = [title, f"**时间:** {fetched} | **来源:** {src}\n",
              "## 估值摘要" if cn else "## Valuation",
              f"| 指标 | 数值 | 评估 |" if cn else "| Metric | Value | Assessment |",

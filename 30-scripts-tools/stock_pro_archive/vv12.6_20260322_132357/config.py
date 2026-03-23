@@ -38,13 +38,13 @@ def get_cached(key, fetch_func, ttl=None):
     """Get cached data or fetch fresh"""
     global _cache
     ttl = ttl or _cache_ttl
-    
+
     now = time.time()
     if key in _cache:
         data, timestamp = _cache[key]
         if now - timestamp < ttl:
             return data
-    
+
     data = fetch_func()
     _cache[key] = (data, now)
     return data

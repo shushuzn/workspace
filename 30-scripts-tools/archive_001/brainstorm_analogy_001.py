@@ -87,19 +87,19 @@ DOMAIN_ANALOGIES = {
 
 def generate_domain_analogies(topic: str, domain: str = None) -> dict:
     """生成领域类比"""
-    
+
     results = {
         "topic": topic,
         "method": "Analogy",
         "analogies": []
     }
-    
+
     # 选择领域
     if domain and domain in DOMAIN_ANALOGIES:
         domains = [domain]
     else:
         domains = list(DOMAIN_ANALOGIES.keys())
-    
+
     # 生成类比
     for d in domains:
         domain_data = DOMAIN_ANALOGIES[d]
@@ -115,28 +115,28 @@ def generate_domain_analogies(topic: str, domain: str = None) -> dict:
                 ]
             }
             results["analogies"].append(analogy)
-    
+
     return results
 
 
 def display_analogies(results: dict):
     """展示类比结果"""
-    
+
     print("=" * 60)
     print(f"[ANALOGY] Topic: {results['topic']}")
     print("=" * 60)
-    
+
     # 按领域分组显示
     current_domain = None
     for analogy in results["analogies"]:
         if analogy["domain"] != current_domain:
             current_domain = analogy["domain"]
             print(f"\n【{current_domain}】")
-        
+
         print(f"\n  [{analogy['concept']}]")
         print(f"  Lesson: {analogy['lesson']}")
         print(f"  -> {analogy['questions'][0]}")
-    
+
     print("\n" + "=" * 60)
 
 
@@ -185,30 +185,30 @@ Fixes:
 """
 
 主函数"""
-    
+
     topic = None
     domain = None
-    
+
     for i, arg in enumerate(sys.argv[1:], 1):
         if arg == "--domain" and i < len(sys.argv) - 1:
             domain = sys.argv[i + 1]
         elif not arg.startswith("--"):
             topic = arg
-    
+
     if not topic:
         topic = "OpenClaw tools"
-    
+
     results = generate_domain_analogies(topic, domain)
     display_analogies(results)
-    
+
     # 保存结果
     output_file = Path(f"flow-archive/brainstorm-current/analogy_ideas.json")
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n[Saved to] {output_file}")
     print(f"\n[Tip] 使用 --domain <领域> 指定领域: {', '.join(DOMAIN_ANALOGIES.keys())}")
-    
+
     return 0
 
 

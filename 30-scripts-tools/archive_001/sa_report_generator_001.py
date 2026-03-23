@@ -16,20 +16,20 @@ import math
 
 class ReportGenerator:
     """Generate comprehensive stock analysis reports"""
-    
+
     def __init__(self, data_dir: str = "60-DATA/stock_reports"):
         self.data_dir = Path(data_dir)
         self.data_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.report_log = self._load_report_log()
-    
+
     def _load_report_log(self) -> Dict:
         """Load report log"""
         log_file = self.data_dir / "report_log.json"
         if log_file.exists():
             with open(log_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        
+
         return {
             "version": "1.0",
             "reports": [],
@@ -37,13 +37,13 @@ class ReportGenerator:
                 "total_reports": 0,
             }
         }
-    
+
     def _save_report_log(self):
         """Save report log"""
         log_file = self.data_dir / "report_log.json"
         with open(log_file, 'w', encoding='utf-8') as f:
             json.dump(self.report_log, f, ensure_ascii=False, indent=2)
-    
+
     def generate_report(self, symbol: str, analysis_data: Dict) -> Dict:
         """
         Generate comprehensive analysis report
@@ -65,77 +65,77 @@ class ReportGenerator:
             "recommendation": "",
             "confidence": 0
         }
-        
+
         # Generate executive summary
         report["executive_summary"] = self._generate_executive_summary(symbol, analysis_data)
-        
+
         # Add sections
         if "price_data" in analysis_data:
             report["sections"]["price_analysis"] = self._format_price_section(analysis_data["price_data"])
-        
+
         if "indicators" in analysis_data:
             report["sections"]["technical_indicators"] = self._format_indicators_section(analysis_data["indicators"])
-        
+
         if "trend" in analysis_data:
             report["sections"]["trend_analysis"] = self._format_trend_section(analysis_data["trend"])
-        
+
         if "patterns" in analysis_data:
             report["sections"]["pattern_recognition"] = self._format_patterns_section(analysis_data["patterns"])
-        
+
         if "support_resistance" in analysis_data:
             report["sections"]["support_resistance"] = self._format_sr_section(analysis_data["support_resistance"])
-        
+
         if "signals" in analysis_data:
             report["sections"]["trading_signals"] = self._format_signals_section(analysis_data["signals"])
-        
+
         if "risk" in analysis_data:
             report["sections"]["risk_analysis"] = self._format_risk_section(analysis_data["risk"])
-        
+
         # Calculate overall rating
         report["overall_rating"] = self._calculate_overall_rating(report["sections"])
         report["recommendation"] = self._generate_recommendation(report)
         report["confidence"] = self._calculate_confidence(report)
-        
+
         # Generate text report
         report["text_report"] = self._generate_text_report(report)
-        
+
         # Save report
         report_file = self.data_dir / f"{symbol}_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
         with open(report_file, 'w', encoding='utf-8') as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
-        
+
         # Also save text version
         text_file = self.data_dir / f"{symbol}_report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.txt"
         with open(text_file, 'w', encoding='utf-8') as f:
             f.write(report["text_report"])
-        
+
         # Log report
         self._log_report(symbol, report["overall_rating"], success=True)
-        
+
         return report
-    
+
     def _generate_executive_summary(self, symbol: str, data: Dict) -> str:
         """Generate executive summary"""
         summary_parts = []
-        
+
         # Price info
         if "price_data" in data:
             price = data["price_data"].get("current_price", 0)
             change = data["price_data"].get("change_pct", 0)
             summary_parts.append(f"{symbol} is trading at ${price:.2f} ({change:+.2f}%)")
-        
+
         # Trend
         if "trend" in data:
             trend = data["trend"].get("overall_trend", "unknown")
             summary_parts.append(f"overall trend is {trend}")
-        
+
         # Signal
         if "signals" in data:
             signal = data["signals"].get("confluence_signal", {}).get("signal", "neutral")
             summary_parts.append(f"technical signal: {signal}")
-        
+
         return " | ".join(summary_parts) if summary_parts else "Analysis in progress"
-    
+
     def _format_price_section(self, price_data: Dict) -> Dict:
         """Format price analysis section"""
         return {
@@ -147,7 +147,7 @@ class ReportGenerator:
             "volume": price_data.get("volume", 0),
             "avg_volume": price_data.get("avg_volume", 0)
         }
-    
+
     def _format_indicators_section(self, indicators: Dict) -> Dict:
         """Format technical indicators section"""
         return {
@@ -157,7 +157,7 @@ class ReportGenerator:
             "kdj": indicators.get("kdj", {}),
             "boll": indicators.get("bollinger", {})
         }
-    
+
     def _format_trend_section(self, trend: Dict) -> Dict:
         """Format trend analysis section"""
         return {
@@ -166,7 +166,7 @@ class ReportGenerator:
             "timeframes": trend.get("timeframes", {}),
             "recommendation": trend.get("recommendation", "")
         }
-    
+
     def _format_patterns_section(self, patterns: Dict) -> Dict:
         """Format pattern recognition section"""
         found_patterns = patterns.get("patterns_found", [])
@@ -174,7 +174,7 @@ class ReportGenerator:
             "patterns_detected": len(found_patterns),
             "patterns": found_patterns
         }
-    
+
     def _format_sr_section(self, sr_data: Dict) -> Dict:
         """Format support & resistance section"""
         return {
@@ -182,7 +182,7 @@ class ReportGenerator:
             "pivot_points": sr_data.get("pivot_points", {}),
             "recommendation": sr_data.get("recommendation", "")
         }
-    
+
     def _format_signals_section(self, signals: Dict) -> Dict:
         """Format trading signals section"""
         return {
@@ -191,7 +191,7 @@ class ReportGenerator:
             "recommendation": signals.get("recommendation", ""),
             "confidence": signals.get("confidence", 0)
         }
-    
+
     def _format_risk_section(self, risk: Dict) -> Dict:
         """Format risk analysis section"""
         return {
@@ -201,12 +201,12 @@ class ReportGenerator:
             "risk_reward": risk.get("risk_reward", {}),
             "recommendation": risk.get("recommendation", "")
         }
-    
+
     def _calculate_overall_rating(self, sections: Dict) -> str:
         """Calculate overall rating from sections"""
         score = 0
         count = 0
-        
+
         # Check trend
         if "trend_analysis" in sections:
             trend = sections["trend_analysis"]
@@ -215,7 +215,7 @@ class ReportGenerator:
             elif trend.get("overall_trend") == "bearish":
                 score -= 2
             count += 1
-        
+
         # Check signals
         if "trading_signals" in sections:
             signal = sections["trading_signals"].get("confluence_signal", {})
@@ -225,14 +225,14 @@ class ReportGenerator:
             elif signal_type in ["strong_sell", "sell"]:
                 score -= 2
             count += 1
-        
+
         # Check patterns
         if "pattern_recognition" in sections:
             patterns = sections["pattern_recognition"]
             if patterns.get("patterns_detected", 0) > 0:
                 score += 1
             count += 1
-        
+
         # Determine rating
         if score >= 3:
             return "A+ (Strong Buy)"
@@ -248,11 +248,11 @@ class ReportGenerator:
             return "C (Sell)"
         else:
             return "D (Strong Sell)"
-    
+
     def _generate_recommendation(self, report: Dict) -> str:
         """Generate final recommendation"""
         rating = report.get("overall_rating", "")
-        
+
         if "Strong Buy" in rating:
             return "STRONG BUY - Multiple bullish signals with high confidence"
         elif "Buy" in rating:
@@ -269,43 +269,43 @@ class ReportGenerator:
             return "STRONG SELL - Multiple bearish signals, exit recommended"
         else:
             return "NEUTRAL - Insufficient data for recommendation"
-    
+
     def _calculate_confidence(self, report: Dict) -> float:
         """Calculate report confidence"""
         sections = report.get("sections", {})
-        
+
         # Base confidence on data completeness
         expected_sections = 7
         actual_sections = len(sections)
-        
+
         completeness = actual_sections / expected_sections
-        
+
         # Adjust based on signal confidence
         if "trading_signals" in sections:
             signal_conf = sections["trading_signals"].get("confidence", 0.5)
             confidence = (completeness + signal_conf) / 2
         else:
             confidence = completeness * 0.5
-        
+
         return round(min(confidence, 1.0), 2)
-    
+
     def _generate_text_report(self, report: Dict) -> str:
         """Generate human-readable text report"""
         lines = []
-        
+
         lines.append("=" * 70)
         lines.append(f" STOCK ANALYSIS REPORT - {report['symbol']}")
         lines.append("=" * 70)
         lines.append(f" Generated: {report['generated_at']}")
         lines.append(f" Report Type: {report['report_type']}")
         lines.append("")
-        
+
         lines.append("-" * 70)
         lines.append(" EXECUTIVE SUMMARY")
         lines.append("-" * 70)
         lines.append(report["executive_summary"])
         lines.append("")
-        
+
         lines.append("-" * 70)
         lines.append(" OVERALL RATING")
         lines.append("-" * 70)
@@ -313,13 +313,13 @@ class ReportGenerator:
         lines.append(f" Recommendation: {report['recommendation']}")
         lines.append(f" Confidence: {report['confidence']*100:.0f}%")
         lines.append("")
-        
+
         # Add sections
         for section_name, section_data in report["sections"].items():
             lines.append("-" * 70)
             lines.append(f" {section_name.replace('_', ' ').title()}")
             lines.append("-" * 70)
-            
+
             if isinstance(section_data, dict):
                 for key, value in section_data.items():
                     if isinstance(value, dict):
@@ -328,15 +328,15 @@ class ReportGenerator:
                             lines.append(f"    {k}: {v}")
                     else:
                         lines.append(f"  {key}: {value}")
-            
+
             lines.append("")
-        
+
         lines.append("=" * 70)
         lines.append(" END OF REPORT")
         lines.append("=" * 70)
-        
+
         return "\n".join(lines)
-    
+
     def _log_report(self, symbol: str, rating: str, success: bool):
         """Log report generation"""
         log_entry = {
@@ -345,28 +345,28 @@ class ReportGenerator:
             "rating": rating,
             "success": success
         }
-        
+
         self.report_log["reports"].append(log_entry)
         self.report_log["stats"]["total_reports"] += 1
-        
+
         # Keep only last 100 entries
         self.report_log["reports"] = self.report_log["reports"][-100:]
-        
+
         self._save_report_log()
-    
+
     def get_stats(self) -> Dict:
         """Get report statistics"""
         return self.report_log["stats"].copy()
-    
+
     def display_status(self) -> str:
         """Display generator status"""
         stats = self.get_stats()
-        
+
         output = []
         output.append("\n" + "=" * 70)
         output.append(" " * 16 + "Report Generator Status")
         output.append("=" * 70)
-        
+
         output.append(f"\n[Report Sections]")
         output.append("  - Price Analysis")
         output.append("  - Technical Indicators")
@@ -375,12 +375,12 @@ class ReportGenerator:
         output.append("  - Support & Resistance")
         output.append("  - Trading Signals")
         output.append("  - Risk Analysis")
-        
+
         output.append(f"\n[Statistics]")
         output.append(f"  Total Reports:  {stats['total_reports']}")
-        
+
         output.append("\n" + "=" * 70 + "\n")
-        
+
         return "\n".join(output)
 
     def analyze(self, symbol: str, data: Dict = None) -> Dict:
@@ -458,16 +458,16 @@ Test entry point"""
     print("=" * 70)
     print(" " * 16 + "SA-012: Report Generator")
     print("=" * 70)
-    
+
     generator = ReportGenerator()
-    
+
     # Test 1: Display status
     print(generator.display_status())
-    
+
     # Test 2: Generate sample report
     print("\n[Test 1] Generate Sample Report")
     print("-" * 70)
-    
+
     # Sample analysis data
     analysis_data = {
         "price_data": {
@@ -501,32 +501,32 @@ Test entry point"""
             }
         }
     }
-    
+
     result = generator.generate_report("TEST", analysis_data)
-    
+
     print(f"  Symbol:          {result['symbol']}")
     print(f"  Generated:       {result['generated_at']}")
     print(f"  Overall Rating:  {result['overall_rating']}")
     print(f"  Recommendation:  {result['recommendation']}")
     print(f"  Confidence:      {result['confidence']*100:.0f}%")
-    
+
     print(f"\n  Sections Generated:")
     for section in result["sections"].keys():
         print(f"    - {section.replace('_', ' ').title()}")
-    
+
     print(f"\n  Executive Summary:")
     print(f"    {result['executive_summary']}")
-    
+
     print(f"\n  Report Files:")
     print(f"    - JSON: {result['symbol']}_report_*.json")
     print(f"    - Text: {result['symbol']}_report_*.txt")
-    
+
     # Test 3: Final stats
     print("\n[Test 2] Final Statistics")
     print("-" * 70)
     stats = generator.get_stats()
     print(f"  Total Reports:  {stats['total_reports']}")
-    
+
     print("\n[OK] SA-012 Report Generator test completed")
 
 if __name__ == "__main__":

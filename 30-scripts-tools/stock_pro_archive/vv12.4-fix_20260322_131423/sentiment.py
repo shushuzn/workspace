@@ -40,27 +40,27 @@ def get_news(symbol, days=7):
     """Get recent news for a symbol"""
     today = datetime.now()
     cutoff = today - timedelta(days=days)
-    
+
     news = NEWS_DATA.get(symbol, [])
-    
+
     filtered = []
     for n in news:
         date = datetime.strptime(n["date"], "%Y-%m-%d")
         if date >= cutoff:
             filtered.append(n)
-    
+
     return filtered
 
 
 def calculate_sentiment(symbol):
     """Calculate overall sentiment score"""
     news = get_news(symbol, days=30)
-    
+
     if not news:
         return {"sentiment": 0.5, "news_count": 0, "trend": "Neutral"}
-    
+
     avg_sentiment = sum(n["sentiment"] for n in news) / len(news)
-    
+
     # Determine trend
     if len(news) >= 3:
         recent = sum(n["sentiment"] for n in news[:3]) / min(3, len(news))
@@ -73,7 +73,7 @@ def calculate_sentiment(symbol):
             trend = "Stable"
     else:
         trend = "Stable"
-    
+
     return {
         "sentiment": avg_sentiment,
         "news_count": len(news),
@@ -85,16 +85,16 @@ def calculate_sentiment(symbol):
 def sentiment_report(symbols=None):
     """Generate sentiment report"""
     from stock_pro.sectors import get_sector
-    
+
     if symbols is None:
         symbols = list(A.keys())
-    
+
     results = []
-    
+
     for sym in symbols:
         sentiment = calculate_sentiment(sym)
         analysis = analyze_multiple([sym])[0] if sym in A else None
-        
+
         results.append({
             "symbol": sym,
             "sector": get_sector(sym),
@@ -104,16 +104,16 @@ def sentiment_report(symbols=None):
             "score": analysis["score"] if analysis else 0,
             "latest_news": sentiment.get("latest")
         })
-    
+
     # Sort by sentiment
     results.sort(key=lambda x: x["sentiment"], reverse=True)
-    
+
     report = "# News Sentiment Analysis\n\n"
     report += "| Symbol | Sector | Sentiment | Trend | News | Score |\n"
     report += "|--------|--------|-----------|-------|------|-------|\n"
-    
+
     bullish = bearish = neutral = 0
-    
+
     for r in results:
         if r["sentiment"] >= 0.65:
             sentiment_label = "Bullish"
@@ -124,35 +124,35 @@ def sentiment_report(symbols=None):
         else:
             sentiment_label = "Neutral"
             neutral += 1
-        
+
         report += f"| {r['symbol']} | {r['sector']} | {r['sentiment']:.0%} | {r['trend']} | {r['news_count']} | {r['score']} |\n"
-    
+
     report += f"\n**Summary:** {bullish} Bullish, {neutral} Neutral, {bearish} Bearish\n"
-    
+
     # Top bullish
     top_bullish = [r for r in results if r["sentiment"] >= 0.70][:5]
     if top_bullish:
         report += f"\n**Top Bullish:** {', '.join(r['symbol'] for r in top_bullish)}\n"
-    
+
     return report
 
 
 def sector_sentiment():
     """Get sector-level sentiment"""
     from stock_pro.sectors import get_all_sectors, get_symbols_by_sector
-    
+
     sectors = get_all_sectors()
-    
+
     sector_sentiments = []
     for sector in sectors:
         symbols = get_symbols_by_sector(sector)
-        
+
         sentiments = []
         for sym in symbols:
             s = calculate_sentiment(sym)
             if s["news_count"] > 0:
                 sentiments.append(s["sentiment"])
-        
+
         if sentiments:
             avg = sum(sentiments) / len(sentiments)
             sector_sentiments.append({
@@ -160,14 +160,14 @@ def sector_sentiment():
                 "avg_sentiment": avg,
                 "stocks_with_news": len(sentiments)
             })
-    
+
     sector_sentiments.sort(key=lambda x: x["avg_sentiment"], reverse=True)
-    
+
     report = "# Sector Sentiment\n\n"
     report += "| Sector | Avg Sentiment | Active Stocks |\n"
     report += "|--------|---------------|----------------|\n"
-    
+
     for s in sector_sentiments:
         report += f"| {s['sector']} | {s['avg_sentiment']:.0%} | {s['stocks_with_news']} |\n"
-    
+
     return report

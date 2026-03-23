@@ -145,7 +145,7 @@ class PersonaTask:
     completed_at: Optional[str] = None
     result: Optional[Dict] = None
     error: Optional[str] = None
-    
+
     def to_dict(self):
         return asdict(self)
 
@@ -160,7 +160,7 @@ class PersonaState:
     tasks_failed: int
     avg_response_time: float
     last_active: str
-    
+
     def to_dict(self):
         return asdict(self)
 
@@ -170,13 +170,13 @@ class PersonaManager:
     多人格管理器
     支持：任务分发、状态追踪、消息队列
     """
-    
+
     def __init__(self):
         self.persona_states: Dict[str, PersonaState] = {}
         self.task_queues: Dict[str, List[PersonaTask]] = {p: [] for p in PERSONA_LIST}
         self.completed_tasks: List[PersonaTask] = []
         self.message_log: List[Dict] = []
-        
+
         # Initialize states
         for persona in PERSONA_LIST:
             self.persona_states[persona] = PersonaState(
@@ -188,13 +188,13 @@ class PersonaManager:
                 avg_response_time=0.0,
                 last_active=datetime.datetime.now().isoformat()
             )
-    
-    def assign_task(self, persona: str, action: str, payload: Dict, 
+
+    def assign_task(self, persona: str, action: str, payload: Dict,
                    priority: str = 'normal') -> str:
         """分配任务给人格"""
         if persona not in PERSONA_LIST:
             raise ValueError(f"Unknown persona: {persona}")
-        
+
         task_id = str(uuid.uuid4())
         task = PersonaTask(
             task_id=task_id,
@@ -205,18 +205,18 @@ class PersonaManager:
             status='pending',
             created_at=datetime.datetime.now().isoformat()
         )
-        
+
         # Add to persona's queue
         self.task_queues[persona].append(task)
-        
+
         # Update state
         state = self.persona_states[persona]
         if state.status == 'idle':
             state.status = 'waiting'
-        
+
         print(f"[PERSONA] {get_persona_roles('zh')[persona]['color']} {persona} assigned: {action}")
         return task_id
-    
+
     async def process_task(self, persona: str, task_id: str):
         """处理任务 (模拟)"""
         task = None
@@ -224,23 +224,23 @@ class PersonaManager:
             if t.task_id == task_id:
                 task = t
                 break
-        
+
         if not task:
             return
-        
+
         # Update status
         task.status = 'running'
         task.started_at = datetime.datetime.now().isoformat()
-        
+
         state = self.persona_states[persona]
         state.status = 'busy'
         state.current_task = task_id
-        
+
         # Simulate task execution
         start_time = time.time()
         await asyncio.sleep(0.5)  # Simulate work
         duration = time.time() - start_time
-        
+
         # Complete task
         task.status = 'completed'
         task.completed_at = datetime.datetime.now().isoformat()
@@ -248,29 +248,29 @@ class PersonaManager:
             'message': f'Task completed by {persona}',
             'duration_ms': duration * 1000
         }
-        
+
         # Update state
         state.status = 'idle'
         state.current_task = None
         state.tasks_completed += 1
         state.avg_response_time = (state.avg_response_time * (state.tasks_completed - 1) + duration * 1000) / state.tasks_completed
         state.last_active = datetime.datetime.now().isoformat()
-        
+
         # Move to completed
         self.task_queues[persona].remove(task)
         self.completed_tasks.append(task)
-        
+
         print(f"[PERSONA] {get_persona_roles('zh')[persona]['color']} {persona} completed: {task.action}")
-    
+
     def get_persona_status(self, persona: str, lang: str = 'zh') -> Optional[Dict]:
         """获取人格状态 / Get persona status"""
         if persona not in self.persona_states:
             return None
-        
+
         state = self.persona_states[persona]
         queue_len = len(self.task_queues[persona])
         roles = get_persona_roles(lang)
-        
+
         return {
             **state.to_dict(),
             'pending_tasks': queue_len,
@@ -280,19 +280,19 @@ class PersonaManager:
             'description': roles[persona]['description'],
             'language': lang
         }
-    
+
     def get_all_personas_status(self, lang: str = 'zh') -> Dict:
         """获取所有人格状态 / Get all personas status"""
         return {
             persona: self.get_persona_status(persona, lang)
             for persona in PERSONA_LIST
         }
-    
+
     def get_statistics(self) -> Dict:
         """获取统计信息"""
         total_completed = sum(s.tasks_completed for s in self.persona_states.values())
         total_failed = sum(s.tasks_failed for s in self.persona_states.values())
-        
+
         return {
             'total_personas': len(PERSONA_LIST),
             'total_tasks_completed': total_completed,
@@ -307,7 +307,7 @@ class PersonaManager:
 
 class DashboardAPIWithPersona:
     """Dashboard API Server with 7-Persona Support"""
-    
+
     def __init__(self):
         self.app = FastAPI(
             title="Innovator Dashboard v4.1 - 7-Persona Enhanced",
@@ -317,7 +317,7 @@ class DashboardAPIWithPersona:
         self.persona_manager = PersonaManager()
         self.setup_middleware()
         self.setup_routes()
-    
+
     def setup_middleware(self):
         """配置中间件"""
         self.app.add_middleware(
@@ -327,15 +327,15 @@ class DashboardAPIWithPersona:
             allow_methods=["*"],
             allow_headers=["*"],
         )
-    
+
     def setup_routes(self):
         """配置路由"""
-        
+
         # Mount static files (web directory)
         web_dir = WORKSPACE_DIR / 'web'
         if web_dir.exists():
             self.app.mount("/web", StaticFiles(directory=str(web_dir), html=True), name="web")
-        
+
         # Root endpoint - serve frontend
         @self.app.get("/")
         async def root():
@@ -344,7 +344,7 @@ class DashboardAPIWithPersona:
             if index_file.exists():
                 return FileResponse(str(index_file))
             return {"message": "Dashboard API v4.1", "docs": "/docs"}
-        
+
         # Health check
         @self.app.get("/health")
         async def health_check():
@@ -353,14 +353,14 @@ class DashboardAPIWithPersona:
                 "timestamp": datetime.datetime.now().isoformat(),
                 "version": "4.1.0-Persona"
             }
-        
+
         # ============== Persona Endpoints ==============
-        
+
         @self.app.get("/api/personas")
         async def get_all_personas(lang: str = 'zh'):
             """获取所有人格状态 / Get all personas status"""
             return self.persona_manager.get_all_personas_status(lang)
-        
+
         @self.app.get("/api/personas/{persona}")
         async def get_persona_status(persona: str, lang: str = 'zh'):
             """获取特定人格状态 / Get specific persona status"""
@@ -368,28 +368,28 @@ class DashboardAPIWithPersona:
             if not status:
                 raise HTTPException(status_code=404, detail=f"Persona {persona} not found")
             return status
-        
+
         @self.app.post("/api/personas/{persona}/task")
-        async def assign_persona_task(persona: str, task_data: Dict[str, Any], 
+        async def assign_persona_task(persona: str, task_data: Dict[str, Any],
                                      background_tasks: BackgroundTasks, lang: str = 'zh'):
             """分配任务给人格 / Assign task to persona"""
             if persona not in PERSONA_LIST:
                 raise HTTPException(status_code=400, detail=f"Unknown persona: {persona}")
-            
+
             task_id = self.persona_manager.assign_task(
                 persona=persona,
                 action=task_data.get("action", "generic"),
                 payload=task_data.get("payload", {}),
                 priority=task_data.get("priority", "normal")
             )
-            
+
             # Background processing
             background_tasks.add_task(
                 self.persona_manager.process_task,
                 persona,
                 task_id
             )
-            
+
             roles = get_persona_roles(lang)
             return {
                 "task_id": task_id,
@@ -399,13 +399,13 @@ class DashboardAPIWithPersona:
                 "message_en": f"Task assigned to {roles[persona]['name']}",
                 "language": lang
             }
-        
+
         @self.app.get("/api/personas/statistics")
         async def get_persona_statistics(lang: str = 'zh'):
             """获取人格统计信息 / Get persona statistics"""
             stats = self.persona_manager.get_statistics()
             roles = get_persona_roles(lang)
-            
+
             # Add translated labels
             stats['labels'] = {
                 'tasks_completed': t('tasks_completed', lang),
@@ -417,13 +417,13 @@ class DashboardAPIWithPersona:
             stats['personas'] = {p: roles[p]['name'] for p in PERSONA_LIST}
             stats['language'] = lang
             return stats
-        
+
         @self.app.get("/api/personas/queue/{persona}")
         async def get_persona_queue(persona: str, lang: str = 'zh'):
             """获取人格任务队列 / Get persona task queue"""
             if persona not in PERSONA_LIST:
                 raise HTTPException(status_code=400, detail=f"Unknown persona: {persona}")
-            
+
             roles = get_persona_roles(lang)
             tasks = [
                 {
@@ -436,7 +436,7 @@ class DashboardAPIWithPersona:
                 }
                 for t in self.persona_manager.task_queues[persona]
             ]
-            
+
             return {
                 'persona': persona,
                 'persona_name': roles[persona]['name'],
@@ -445,9 +445,9 @@ class DashboardAPIWithPersona:
                 'tasks': tasks,
                 'language': lang
             }
-        
+
         # ============== System Endpoints ==============
-        
+
         @self.app.get("/api/health/system")
         async def get_system_health(lang: str = 'zh'):
             """获取系统健康指标 / Get system health metrics"""
@@ -466,7 +466,7 @@ class DashboardAPIWithPersona:
                 "timestamp": datetime.datetime.now().isoformat(),
                 "language": lang
             }
-        
+
         @self.app.get("/api/dashboard")
         async def get_dashboard_summary(lang: str = 'zh'):
             """获取仪表板汇总 / Get dashboard summary"""
@@ -493,9 +493,9 @@ class DashboardAPIWithPersona:
                 "language": lang,
                 "supported_languages": i18n.get_supported_languages()
             }
-        
+
         # ============== i18n Endpoint ==============
-        
+
         @self.app.get("/api/i18n/languages")
         async def get_supported_languages():
             """获取支持的语言 / Get supported languages"""
@@ -506,18 +506,18 @@ class DashboardAPIWithPersona:
                     'en': {'name': 'English', 'label': 'English'}
                 }
             }
-        
+
         @self.app.get("/api/i18n/translations")
         async def get_translations(lang: str = 'zh'):
             """获取所有翻译 / Get all translations"""
             if lang not in i18n.get_supported_languages():
                 raise HTTPException(status_code=400, detail=f"Unsupported language: {lang}")
-            
+
             return {
                 "language": lang,
                 "translations": {key: t(key, lang) for key in TRANSLATIONS.keys()}
             }
-    
+
     def run(self, host: str = "0.0.0.0", port: int = PORT, workers: int = 4):
         """启动服务器 / Start server"""
         print("\n" + "="*80)
@@ -548,7 +548,7 @@ class DashboardAPIWithPersona:
         print("\n[LANGUAGE] Add ?lang=en to any endpoint for English")
         print("[语言] 在任何端点添加 ?lang=en 获取英文响应")
         print("\n[INFO] Press Ctrl+C to stop | 按 Ctrl+C 停止\n")
-        
+
         uvicorn.run(
             self.app,
             host=host,
@@ -566,22 +566,22 @@ def main():
     parser.add_argument('--workers', type=int, default=1, help='Number of worker processes')
     parser.add_argument('--demo', action='store_true', help='Run demo with sample tasks')
     args = parser.parse_args()
-    
+
     if args.demo:
         # Demo mode
         print("\n[DEMO] Running 7-Persona Demo...\n")
-        
+
         api = DashboardAPIWithPersona()
-        
+
         # Show initial status
         print("Initial Persona Status:")
         status = api.persona_manager.get_all_personas_status()
         for persona, data in status.items():
             print(f"  {data['color']} {persona}: {data['status']}")
-        
+
         # Assign sample tasks
         print("\n[DEMO] Assigning sample tasks...")
-        
+
         tasks = [
             ('planner', 'analyze_requirements', {'project': 'test'}),
             ('executor', 'execute_task', {'action': 'run_test'}),
@@ -591,30 +591,30 @@ def main():
             ('innovator', 'generate_idea', {'domain': 'AI'}),
             ('metacognition', 'monitor_system', {'metrics': ['cpu', 'memory']})
         ]
-        
+
         for persona, action, payload in tasks:
             task_id = api.persona_manager.assign_task(persona, action, payload)
             print(f"  Assigned {action} to {persona}: {task_id}")
-        
+
         # Process tasks
         print("\n[DEMO] Processing tasks...")
-        
+
         async def process_all():
             for persona, _, _ in tasks:
                 task = api.persona_manager.task_queues[persona][0]
                 await api.persona_manager.process_task(persona, task.task_id)
-        
+
         asyncio.run(process_all())
-        
+
         # Show final statistics
         print("\n[DEMO] Final Statistics:")
         stats = api.persona_manager.get_statistics()
         print(f"  Tasks Completed: {stats['total_tasks_completed']}")
         print(f"  Success Rate: {stats['success_rate']*100:.1f}%")
         print(f"  Active Personas: {stats['active_personas']}")
-        
+
         print("\n✅ Demo complete!")
-    
+
     else:
         api = DashboardAPIWithPersona()
         api.run(host=args.host, port=args.port, workers=args.workers)

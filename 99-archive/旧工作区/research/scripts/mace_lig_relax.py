@@ -59,31 +59,31 @@ def create_lig_model(n_atoms=50, density=2.0):
         density: 密度 (g/cm³), LIG 通常 1.5-2.2 g/cm³
     """
     from ase.build import bulk
-    
+
     # 从石墨开始
     graphite = bulk('C', 'hex', a=2.46, c=6.71)
-    
+
     # 扩大超胞
     supercell = graphite * (3, 3, 2)  # 72 原子
-    
+
     # 引入无序 (模拟激光处理)
     positions = supercell.get_positions()
-    
+
     # 随机位移 (模拟缺陷)
     np.random.seed(42)
     displacement = np.random.normal(0, 0.3, positions.shape)  # 0.3 Å 标准差
     positions += displacement
-    
+
     supercell.set_positions(positions)
-    
+
     # 调整密度
     current_volume = supercell.get_volume()
     n_atoms = len(supercell)
     target_volume = n_atoms * 12.01 / (density * 6.022) * 10  # 转换为 Å³
-    
+
     scale = (target_volume / current_volume) ** (1/3)
     supercell.set_cell(supercell.get_cell() * scale, scale_atoms=True)
-    
+
     return supercell
 
 # 创建 LIG 结构

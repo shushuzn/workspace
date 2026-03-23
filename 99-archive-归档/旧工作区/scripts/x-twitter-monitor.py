@@ -94,17 +94,17 @@ def fetch_twitter_via_api(target_type: str, target_name: str) -> List[Dict]:
     if not bearer_token:
         log(f"⚠️ 未配置 TWITTER_BEARER_TOKEN，跳过 {target_name}")
         return []
-    
+
     if target_type == "researchers":
         url = f"https://api.twitter.com/2/users/by/username/{target_name}"
         headers = {"Authorization": f"Bearer {bearer_token}"}
-        
+
         try:
             resp = requests.get(url, headers=headers, timeout=30)
             if resp.status_code == 200:
                 user_data = resp.json()
                 user_id = user_data['data']['id']
-                
+
                 # 获取最近推文
                 tweets_url = f"https://api.twitter.com/2/users/{user_id}/tweets"
                 params = {
@@ -118,7 +118,7 @@ def fetch_twitter_via_api(target_type: str, target_name: str) -> List[Dict]:
                     return tweets_data.get('data', [])
         except Exception as e:
             log(f"❌ API 错误 {target_name}: {e}")
-    
+
     return []
 
 def fetch_twitter_via_nitter(target_name: str) -> List[Dict]:
@@ -131,7 +131,7 @@ def fetch_twitter_via_nitter(target_name: str) -> List[Dict]:
         "https://nitter.privacy.com.de",
         "https://nitter.dark.fail"
     ]
-    
+
     tweets = []
     for instance in nitter_instances:
         try:
@@ -153,7 +153,7 @@ def fetch_twitter_via_nitter(target_name: str) -> List[Dict]:
         except Exception as e:
             log(f"⚠️ Nitter {instance} 失败：{e}")
             continue
-    
+
     return tweets
 
 def search_twitter_topics(topic: str) -> List[Dict]:
@@ -163,7 +163,7 @@ def search_twitter_topics(topic: str) -> List[Dict]:
     """
     nitter = "https://nitter.net"
     tweets = []
-    
+
     try:
         search_url = f"{nitter}/search?q={topic}&f=tweets"
         resp = requests.get(search_url, timeout=30)
@@ -172,7 +172,7 @@ def search_twitter_topics(topic: str) -> List[Dict]:
             log(f"📝 话题 {topic} 搜索结果已获取")
     except Exception as e:
         log(f"❌ 话题搜索失败 {topic}: {e}")
-    
+
     return tweets
 
 # ============ 输出生成 ============
@@ -186,7 +186,7 @@ def generate_markdown(tweets: List[Dict], date_str: str) -> str:
 ---
 
 """
-    
+
     # 按作者分组
     by_author = {}
     for tweet in tweets:
@@ -194,62 +194,62 @@ def generate_markdown(tweets: List[Dict], date_str: str) -> str:
         if author not in by_author:
             by_author[author] = []
         by_author[author].append(tweet)
-    
+
     for author, author_tweets in by_author.items():
         md += f"## @{author}\n\n"
         for tweet in author_tweets[:5]:  # 每个作者最多 5 条
             text = tweet.get('text', '')
             link = tweet.get('link', '')
             published = tweet.get('published', '')
-            
+
             md += f"### {text[:200]}{'...' if len(text) > 200 else ''}\n\n"
             if link:
                 md += f"🔗 [{link}]({link})\n\n"
             if published:
                 md += f"📅 {published}\n\n"
             md += "---\n\n"
-    
+
     md += f"\n**结束时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n"
     return md
 
 # ============ 主流程 ============
 def main():
     log("🚀 启动 X/Twitter 监听")
-    
+
     conn = init_db()
     all_tweets = []
-    
+
     # 收集研究者推文
     for researcher in TARGETS["researchers"]:
         log(f"📝 收集 @{researcher}")
-        
+
         # 优先尝试 Nitter（免 API）
         tweets = fetch_twitter_via_nitter(researcher)
-        
+
         # 过滤已见过的
         new_tweets = [t for t in tweets if not is_seen(conn, t.get('id', ''))]
-        
+
         for tweet in new_tweets:
             mark_seen(conn, tweet.get('id', ''), tweet.get('author', ''), tweet.get('text', ''))
             all_tweets.append(tweet)
-        
+
         log(f"✅ @{researcher}: {len(new_tweets)} 条新推文")
-    
+
     # 生成输出
     if all_tweets:
         today_dir = get_today_dir()
         date_str = datetime.now().strftime("%Y-%m-%d")
         filename = sanitize_filename(f"x-twitter-{date_str}.md")
         filepath = os.path.join(today_dir, filename)
-        
+
         md_content = generate_markdown(all_tweets, date_str)
         with open(filepath, "w", encoding="utf-8") as f:
             f.write(md_content)
-        
+
         log(f"💾 已保存到 {filepath}")
     else:
         log("ℹ️ 无新推文")
-    
+
     conn.close()
     log("✅ 完成")
 

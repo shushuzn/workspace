@@ -71,19 +71,19 @@ Fixes:
 
 Backup specified files"""
     ensure_dir(BACKUP_DIR)
-    
+
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     backup_name = f"backup_{ts}_{label}.zip"
     backup_path = BACKUP_DIR / backup_name
-    
+
     track = load_track()
-    
+
     with zipfile.ZipFile(backup_path, 'w', zipfile.ZIP_DEFLATED) as zf:
         for f in files:
             p = Path(f)
             if p.exists():
                 zf.write(p, p.name)
-    
+
     track["backups"].append({
         "time": datetime.now().isoformat(),
         "label": label,
@@ -91,7 +91,7 @@ Backup specified files"""
         "files": [str(f) for f in files if Path(f).exists()]
     })
     save_track(track)
-    
+
     return backup_path
 
 def restore_latest() -> None:
@@ -99,19 +99,19 @@ def restore_latest() -> None:
     track = load_track()
     if not track["backups"]:
         return None
-    
+
     latest = track["backups"][-1]
     backup_path = Path(latest["path"])
-    
+
     if not backup_path.exists():
         return None
-    
+
     restore_dir = BACKUP_DIR / f"restore_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
     restore_dir.mkdir(exist_ok=True)
-    
+
     with zipfile.ZipFile(backup_path, 'r') as zf:
         zf.extractall(restore_dir)
-    
+
     return restore_dir
 
 def auto_backup_changed() -> None:
@@ -121,14 +121,14 @@ def auto_backup_changed() -> None:
         "30-scripts-tools/workflows.json",
         "workflow.bat"
     ]
-    
+
     files_to_backup = [f for f in important if Path(f).exists()]
-    
+
     if files_to_backup:
         path = backup_files(files_to_backup, "auto")
         print(f"Auto-backup created: {path.name}")
         return path
-    
+
     return None
 
 logging.basicConfig(level=logging.INFO)
@@ -143,9 +143,9 @@ Usage:
   python auto_backup_001.py list
         """)
         return
-    
+
     cmd = sys.argv[1]
-    
+
     if cmd == "backup":
         files = sys.argv[2:] if len(sys.argv) > 2 else []
         if not files:
@@ -153,21 +153,21 @@ Usage:
             return
         path = backup_files([Path(f) for f in files])
         print(f"Backup: {path}")
-    
+
     elif cmd == "auto":
         path = auto_backup_changed()
         if path:
             print(f"OK: {path}")
         else:
             print("No files to backup")
-    
+
     elif cmd == "restore":
         path = restore_latest()
         if path:
             print(f"Restored to: {path}")
         else:
             print("No backup to restore")
-    
+
     elif cmd == "list":
         track = load_track()
         for b in track.get("backups", [])[-10:]:

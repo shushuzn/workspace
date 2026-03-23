@@ -55,7 +55,7 @@ def get(key: str, ttl: int = DEFAULT_TTL) -> Optional[Any]:
     """
     cache = _load_cache()
     entries = cache.get("entries", {})
-    
+
     if key in entries:
         entry = entries[key]
         if time.time() - entry["timestamp"] < ttl:
@@ -64,7 +64,7 @@ def get(key: str, ttl: int = DEFAULT_TTL) -> Optional[Any]:
             return entry["value"]
         else:
             del entries[key]
-    
+
     cache["stats"]["misses"] += 1
     _save_cache(cache)
     return None
@@ -81,7 +81,7 @@ def set(key: str, value: Any) -> None:
     cache = _load_cache()
     if "entries" not in cache:
         cache["entries"] = {}
-    
+
     cache["entries"][key] = {
         "value": value,
         "timestamp": time.time()
@@ -100,7 +100,7 @@ def invalidate(key: Optional[str] = None) -> int:
         Number of entries invalidated
     """
     cache = _load_cache()
-    
+
     if key is None:
         count = len(cache.get("entries", {}))
         cache["entries"] = {}
@@ -109,7 +109,7 @@ def invalidate(key: Optional[str] = None) -> int:
         count = 1
     else:
         count = 0
-    
+
     _save_cache(cache)
     return count
 
@@ -142,7 +142,7 @@ def stats() -> dict:
     cache = _load_cache()
     total = cache["stats"]["hits"] + cache["stats"]["misses"]
     hit_rate = (cache["stats"]["hits"] / total * 100) if total > 0 else 0
-    
+
     return {
         "hits": cache["stats"]["hits"],
         "misses": cache["stats"]["misses"],
@@ -154,14 +154,14 @@ def stats() -> dict:
 def main():
     """CLI interface"""
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="SMART-CACHE-001 智能缓存工具")
     parser.add_argument("--stats", action="store_true", help="显示缓存统计")
     parser.add_argument("--clear", action="store_true", help="清空所有缓存")
     parser.add_argument("--invalidate", metavar="KEY", help="删除指定缓存")
-    
+
     args = parser.parse_args()
-    
+
     if args.stats:
         print(json.dumps(stats(), indent=2, ensure_ascii=False))
     elif args.clear:

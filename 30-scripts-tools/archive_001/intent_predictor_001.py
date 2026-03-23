@@ -69,7 +69,7 @@ class IntentPredictor:
     def __init__(self):
         self.history = self._load_history()
         self.learn_log = self._load_learn_log()
-    
+
     def _load_history(self):
         if HISTORY_FILE.exists():
             try:
@@ -77,11 +77,11 @@ class IntentPredictor:
             except Exception:
                 pass
         return {"intents": [], "commands": [], "transitions": {}, "last_updated": None}
-    
+
     def _save_history(self):
         self.history["last_updated"] = datetime.now().isoformat()
         HISTORY_FILE.write_text(json.dumps(self.history, indent=2, ensure_ascii=False), encoding="utf-8")
-    
+
     def _load_learn_log(self):
         if LEARN_LOG.exists():
             try:
@@ -89,7 +89,7 @@ class IntentPredictor:
             except Exception:
                 pass
         return {"entries": [], "total_learned": 0}
-    
+
     def detect_intent(self, text):
         if not text or not text.strip():
             return "unknown"
@@ -103,7 +103,7 @@ class IntentPredictor:
         if not scores:
             return "unknown"
         return max(scores.items(), key=lambda x: x[1])[0]
-    
+
     def learn(self, intent, action):
         if not intent or not isinstance(intent, str):
             return False
@@ -125,7 +125,7 @@ class IntentPredictor:
         self._save_history()
         LEARN_LOG.write_text(json.dumps(self.learn_log, indent=2, ensure_ascii=False), encoding="utf-8")
         return True
-    
+
     def predict_next(self, current_intent=None):
         if not current_intent:
             intents = self.history.get("intents", [])
@@ -136,10 +136,10 @@ class IntentPredictor:
         if not transitions:
             return None
         return max(transitions.items(), key=lambda x: x[1])[0]
-    
+
     def recommend_action(self, intent):
         return RECOMMENDATIONS.get(intent, [])
-    
+
     def generate_report(self):
         intents = self.history.get("intents", [])
         intent_counts = Counter(intents)
@@ -162,7 +162,7 @@ def main():
     predictor = IntentPredictor()
     print("\n[INTENT-PREDICTOR-001] AI Intent Prediction")
     print("=" * 50)
-    
+
     if "--predict" in sys.argv:
         report = predictor.generate_report()
         print(f"\n[PREDICTION]")
@@ -180,7 +180,7 @@ def main():
                 print(f"\n  Recommended:")
                 for tool, desc in recs:
                     print(f"    - {desc} [{tool}]")
-    
+
     elif "--detect" in sys.argv and len(sys.argv) > 2:
         text = " ".join(sys.argv[2:])
         intent = predictor.detect_intent(text)
@@ -189,14 +189,14 @@ def main():
         recs = predictor.recommend_action(intent)
         if recs:
             print(f"  Recommended: {recs}")
-    
+
     elif "--learn" in sys.argv and len(sys.argv) > 3:
         intent = sys.argv[2]
         action = sys.argv[3]
         if predictor.learn(intent, action):
             print(f"\n  Learned: {intent} -> {action}")
             print(f"  Total learned: {predictor.learn_log['total_learned']}")
-    
+
     else:
         print("\nUsage:")
         print("  --predict        Predict next action")

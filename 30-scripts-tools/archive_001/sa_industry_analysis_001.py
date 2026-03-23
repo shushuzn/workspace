@@ -30,11 +30,11 @@ from typing import Dict, List, Optional
 
 class IndustryAnalyzer:
     """行业地位分析引擎"""
-    
+
     def __init__(self):
         self.cache_dir = Path("60-DATA/stock_industry")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-    
+
     def analyze_market_share(self, company_data: Dict, industry_data: List[Dict]) -> Dict:
         """
         分析市场份额
@@ -48,9 +48,9 @@ class IndustryAnalyzer:
         """
         company_revenue = company_data.get('revenue', 0)
         total_industry_revenue = sum(d.get('revenue', 0) for d in industry_data)
-        
+
         market_share = (company_revenue / total_industry_revenue * 100) if total_industry_revenue > 0 else 0
-        
+
         # 市场份额评级
         if market_share > 30:
             rating = 'dominant'
@@ -64,13 +64,13 @@ class IndustryAnalyzer:
         else:
             rating = 'minor'
             description = '小型参与者'
-        
+
         return {
             'market_share_percent': round(market_share, 2),
             'rating': rating,
             'description': f'{description} (市场份额：{market_share:.2f}%)'
         }
-    
+
     def analyze_competitive_position(self, company_data: Dict, peer_data: List[Dict]) -> Dict:
         """
         分析竞争地位
@@ -85,16 +85,16 @@ class IndustryAnalyzer:
         # 计算各项指标的排名
         metrics = ['revenue', 'net_income', 'gross_margin', 'roe']
         rankings = {}
-        
+
         for metric in metrics:
             company_value = company_data.get(metric, 0)
             peer_values = [p.get(metric, 0) for p in peer_data]
             all_values = [company_value] + peer_values
             rank = all_values.index(max(all_values)) + 1 if company_value == max(all_values) else sorted(all_values, reverse=True).index(company_value) + 1
             rankings[metric] = rank
-        
+
         avg_rank = sum(rankings.values()) / len(rankings) if rankings else 0
-        
+
         # 竞争地位评级
         if avg_rank <= 2:
             position = 'leader'
@@ -108,14 +108,14 @@ class IndustryAnalyzer:
         else:
             position = 'weak'
             description = '竞争力弱'
-        
+
         return {
             'rankings': rankings,
             'average_rank': round(avg_rank, 1),
             'position': position,
             'description': f'{description} (平均排名：{avg_rank:.1f})'
         }
-    
+
     def analyze_industry_ranking(self, company_data: Dict, industry_peers: List[Dict]) -> Dict:
         """
         分析行业排名
@@ -135,16 +135,16 @@ class IndustryAnalyzer:
             score += data.get('roe', 0) * 100 * 0.2  # ROE 权重 20%
             score += data.get('gross_margin', 0) * 100 * 0.2  # 毛利率权重 20%
             return score
-        
+
         company_score = calculate_score(company_data)
         peer_scores = [calculate_score(p) for p in industry_peers]
         all_scores = [company_score] + peer_scores
-        
+
         rank = sorted(all_scores, reverse=True).index(company_score) + 1
         total_companies = len(all_scores)
-        
+
         percentile = (1 - rank / total_companies) * 100 if total_companies > 0 else 0
-        
+
         # 行业排名评级
         if percentile >= 90:
             rating = 'top'
@@ -158,7 +158,7 @@ class IndustryAnalyzer:
         else:
             rating = 'below_average'
             description = '低于平均'
-        
+
         return {
             'rank': rank,
             'total_companies': total_companies,
@@ -170,12 +170,12 @@ class IndustryAnalyzer:
 
 class ReportGenerator:
     """综合报告生成器"""
-    
+
     def __init__(self):
         self.report_dir = Path("21-reports/stock-analysis")
         self.report_dir.mkdir(parents=True, exist_ok=True)
-    
-    def generate_comprehensive_report(self, 
+
+    def generate_comprehensive_report(self,
                                        symbol: str,
                                        technical_analysis: Dict,
                                        fundamental_analysis: Dict,
@@ -205,47 +205,47 @@ class ReportGenerator:
             'investment_recommendation': {},
             'risk_factors': []
         }
-        
+
         # 执行摘要
         report['executive_summary'] = self._generate_executive_summary(report)
-        
+
         # 投资建议
         report['investment_recommendation'] = self._generate_recommendation(report)
-        
+
         # 风险因素
         report['risk_factors'] = self._identify_risks(report)
-        
+
         return report
-    
+
     def _generate_executive_summary(self, report: Dict) -> Dict:
         """生成执行摘要"""
         # 综合评分
         scores = []
-        
+
         # 技术面评分
         tech_score = report['technical_analysis'].get('summary', {}).get('confidence', 0.5) * 100
         scores.append(tech_score)
-        
+
         # 基本面评分
         fundamental_score = report['fundamental_analysis'].get('growth_score', {}).get('score', 50)
         scores.append(fundamental_score)
-        
+
         # 行业地位评分
         industry_score = report['industry_analysis'].get('competitive_position', {}).get('average_rank', 5)
         industry_score = max(0, 100 - (industry_score * 10))
         scores.append(industry_score)
-        
+
         # 估值评分
         valuation_score = 50  # 默认中性
         if report['valuation'].get('upside_potential', 0) > 0.2:
             valuation_score = 80
         elif report['valuation'].get('upside_potential', 0) < -0.2:
             valuation_score = 20
-        
+
         scores.append(valuation_score)
-        
+
         overall_score = sum(scores) / len(scores)
-        
+
         # 总体评级
         if overall_score >= 80:
             rating = 'strong_buy'
@@ -262,7 +262,7 @@ class ReportGenerator:
         else:
             rating = 'strong_sell'
             description = '强烈卖出'
-        
+
         return {
             'overall_score': round(overall_score, 1),
             'rating': rating,
@@ -274,11 +274,11 @@ class ReportGenerator:
                 f"估值：{valuation_score:.1f}/100"
             ]
         }
-    
+
     def _generate_recommendation(self, report: Dict) -> Dict:
         """生成投资建议"""
         summary = report['executive_summary']
-        
+
         recommendation = {
             'action': summary['rating'],
             'confidence': 'medium',
@@ -287,13 +287,13 @@ class ReportGenerator:
             'time_horizon': '6-12 months',
             'rationale': []
         }
-        
+
         # 目标价（基于估值）
         current_price = report.get('current_price', 100)
         upside = report['valuation'].get('upside_potential', 0)
         recommendation['target_price'] = round(current_price * (1 + upside), 2)
         recommendation['stop_loss'] = round(current_price * 0.85, 2)  # 15% 止损
-        
+
         # 投资理由
         if summary['overall_score'] >= 60:
             recommendation['rationale'] = [
@@ -309,13 +309,13 @@ class ReportGenerator:
                 "行业竞争激烈",
                 "估值偏高"
             ]
-        
+
         return recommendation
-    
+
     def _identify_risks(self, report: Dict) -> List[Dict]:
         """识别风险因素"""
         risks = []
-        
+
         # 技术面风险
         tech_trend = report['technical_analysis'].get('summary', {}).get('overall_trend', 'neutral')
         if tech_trend == 'bearish':
@@ -325,7 +325,7 @@ class ReportGenerator:
                 'severity': 'high',
                 'description': '技术指标显示下跌趋势'
             })
-        
+
         # 基本面风险
         growth_score = report['fundamental_analysis'].get('growth_score', {}).get('score', 50)
         if growth_score < 40:
@@ -335,7 +335,7 @@ class ReportGenerator:
                 'severity': 'medium',
                 'description': '营收和利润增长放缓'
             })
-        
+
         # 行业风险
         industry_rank = report['industry_analysis'].get('industry_ranking', {}).get('rank', 5)
         if industry_rank > 10:
@@ -345,7 +345,7 @@ class ReportGenerator:
                 'severity': 'medium',
                 'description': '在行业中排名靠后'
             })
-        
+
         # 估值风险
         upside = report['valuation'].get('upside_potential', 0)
         if upside < -0.2:
@@ -355,30 +355,30 @@ class ReportGenerator:
                 'severity': 'high',
                 'description': '当前价格高于目标价 20% 以上'
             })
-        
+
         return risks
-    
+
     def save_report(self, report: Dict, symbol: str = 'TEST', format: str = 'json'):
         """保存报告"""
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
-        
+
         if format == 'json':
             filename = f"{symbol}_analysis_{timestamp}.json"
             filepath = self.report_dir / filename
-            
+
             with open(filepath, 'w', encoding='utf-8') as f:
                 json.dump(report, f, indent=2, ensure_ascii=False)
-        
+
         elif format == 'html':
             filename = f"{symbol}_analysis_{timestamp}.html"
             filepath = self.report_dir / filename
-            
+
             html_content = self._generate_html(report)
             with open(filepath, 'w', encoding='utf-8') as f:
                 f.write(html_content)
-        
+
         return filepath
-    
+
     def _generate_html(self, report: Dict) -> str:
         """生成 HTML 报告"""
         html = f"""
@@ -432,31 +432,31 @@ def generate_test_data() -> tuple:
         'gross_margin': 0.35,
         'roe': 0.18
     }
-    
+
     industry_peers = [
         {'revenue': 8000000, 'net_income': 1200000, 'gross_margin': 0.40, 'roe': 0.22},
         {'revenue': 6000000, 'net_income': 900000, 'gross_margin': 0.32, 'roe': 0.15},
         {'revenue': 4000000, 'net_income': 500000, 'gross_margin': 0.28, 'roe': 0.12},
         {'revenue': 3000000, 'net_income': 300000, 'gross_margin': 0.25, 'roe': 0.10},
     ]
-    
+
     technical_analysis = {
         'summary': {
             'overall_trend': 'bullish',
             'confidence': 0.75
         }
     }
-    
+
     fundamental_analysis = {
         'growth_score': {
             'score': 75
         }
     }
-    
+
     valuation = {
         'upside_potential': 0.15
     }
-    
+
     return company_data, industry_peers, technical_analysis, fundamental_analysis, valuation
 
 
@@ -508,10 +508,10 @@ Fixes:
     print("=" * 70)
     print(" " * 20 + "SA-012: Industry Analysis & Report Generator")
     print("=" * 70)
-    
+
     industry_analyzer = IndustryAnalyzer()
     report_generator = ReportGenerator()
-    
+
     # 测试模式
     if len(sys.argv) > 1 and sys.argv[1] == '--test':
         print("\n[Test 1] Generate Test Data")
@@ -519,22 +519,22 @@ Fixes:
         company_data, industry_peers, tech, fundamental, valuation = generate_test_data()
         print(f"  Symbol: {company_data['symbol']}")
         print(f"  Revenue: {company_data['revenue']:,.0f}")
-        
+
         print("\n[Test 2] Market Share Analysis")
         print("-" * 70)
         market_share = industry_analyzer.analyze_market_share(company_data, industry_peers)
         print(f"  {market_share['description']}")
-        
+
         print("\n[Test 3] Competitive Position Analysis")
         print("-" * 70)
         comp_position = industry_analyzer.analyze_competitive_position(company_data, industry_peers)
         print(f"  {comp_position['description']}")
-        
+
         print("\n[Test 4] Industry Ranking Analysis")
         print("-" * 70)
         industry_rank = industry_analyzer.analyze_industry_ranking(company_data, industry_peers)
         print(f"  {industry_rank['description']}")
-        
+
         print("\n[Test 5] Generate Comprehensive Report")
         print("-" * 70)
         report = report_generator.generate_comprehensive_report(
@@ -548,25 +548,25 @@ Fixes:
             },
             valuation=valuation
         )
-        
+
         print(f"  Overall Score: {report['executive_summary']['overall_score']:.1f}/100")
         print(f"  Rating: {report['executive_summary']['description']}")
         print(f"  Recommendation: {report['investment_recommendation']['action']}")
-        
+
         print("\n[Test 6] Save JSON Report")
         print("-" * 70)
         json_path = report_generator.save_report(report, 'TEST', format='json')
         print(f"  Saved to: {json_path}")
-        
+
         print("\n[Test 7] Save HTML Report")
         print("-" * 70)
         html_path = report_generator.save_report(report, 'TEST', format='html')
         print(f"  Saved to: {html_path}")
-        
+
         print("\n" + "=" * 70)
         print(" SA-012 Industry Analysis test completed")
         print("=" * 70)
-    
+
     else:
         # 正常使用模式
         print("\nUsage: py sa_012_industry_analysis.py --test")

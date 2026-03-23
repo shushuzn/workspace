@@ -29,7 +29,7 @@ from typing import Dict, List, Tuple
 
 class BrainstormAutoScanner:
     """头脑风暴自动扫描器"""
-    
+
     # 优化工具关键词映射
     OPTIMIZER_KEYWORDS = {
         "smart_compress": ["compress", "compression", "智能压缩", "压缩"],
@@ -46,27 +46,27 @@ class BrainstormAutoScanner:
         "dashboard": ["dashboard", "仪表盘", "视图"],
         "ai_suggest": ["ai_suggest", "ai建议", "智能建议"],
     }
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.tools_dir = self.workspace / "30-scripts-tools"
         self.ideas_file = self.workspace / "13-memory/optimization/optimization_ideas.json"
-        
+
         # 加载现有ideas
         self.ideas = self._load_ideas()
-    
+
     def _load_ideas(self) -> List[Dict]:
         """加载ideas"""
         if self.ideas_file.exists():
             with open(self.ideas_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         return []
-    
+
     def _save_ideas(self):
         """保存ideas"""
         with open(self.ideas_file, 'w', encoding='utf-8') as f:
             json.dump(self.ideas, f, ensure_ascii=False, indent=2)
-    
+
     def scan_tools(self) -> Dict:
         """
 # ==============================================================================
@@ -112,17 +112,17 @@ Fixes:
 
 扫描现有工具"""
         tools_found = {}
-        
+
         # 扫描Python文件
         for py_file in self.tools_dir.glob("*.py"):
             filename = py_file.stem.lower()
-            
+
             # 读取文件内容
             try:
                 content = py_file.read_text(encoding='utf-8')
             except (Exception,):
                 continue
-            
+
             # 匹配优化类型
             matched_types = []
             for opt_type, keywords in self.OPTIMIZER_KEYWORDS.items():
@@ -130,12 +130,12 @@ Fixes:
                     if kw in filename or kw in content[:500]:  # 文件名或开头
                         matched_types.append(opt_type)
                         break
-            
+
             if matched_types:
                 tools_found[py_file.name] = matched_types
-        
+
         return tools_found
-    
+
     def sync_with_ideas(self) -> Dict:
         """同步ideas状态"""
         tools = self.scan_tools()

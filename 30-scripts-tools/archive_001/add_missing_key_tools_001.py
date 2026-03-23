@@ -13,10 +13,10 @@ from datetime import datetime
 def add_missing_tools():
     registry_file = Path("30-scripts-tools/tools_registry.json")
     scripts_dir = Path("30-scripts-tools")
-    
+
     with open(registry_file, "r", encoding="utf-8") as f:
         registry = json.load(f)
-    
+
     # 缺失的关键工具
     missing_tools = [
         "copaw_entry",
@@ -34,22 +34,22 @@ def add_missing_tools():
         "memory_distiller",
         "auto_memory_distiller"
     ]
-    
+
     added = 0
     for tool_name in missing_tools:
         tool_id = tool_name.replace("_", "-")
-        
+
         # 检查是否已存在
         if tool_id in registry["tools"] or tool_name in registry["tools"]:
             print(f"[SKIP] {tool_id} 已存在")
             continue
-        
+
         # 检查文件是否存在
         filepath = scripts_dir / f"{tool_name}.py"
         if not filepath.exists():
             print(f"[MISSING] {tool_name}.py 不存在")
             continue
-        
+
         # 添加工具定义
         registry["tools"][tool_id] = {
             "tool_id": tool_id,
@@ -64,18 +64,18 @@ def add_missing_tools():
         }
         added += 1
         print(f"[ADD] {tool_id}")
-    
+
     # 更新版本
     registry["version"] = "1.11.39-restored"
     registry["last_updated"] = datetime.now().isoformat()
-    
+
     # 保存
     with open(registry_file, "w", encoding="utf-8") as f:
         json.dump(registry, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n添加完成：{added} 个工具")
     print(f"新版本：{registry['version']}")
-    
+
     return {
         "status": "success",
         "added": added,

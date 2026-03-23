@@ -54,31 +54,31 @@ for cnt_ratio in [0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9]:
     # 随机采样 CNT 和 LIG 样本
     cnt_sample = df_cnt.sample(n=15, random_state=42)
     lig_sample = df_lig.sample(n=15, random_state=42)
-    
+
     for idx, (cnt_row, lig_row) in enumerate(zip(cnt_sample.iterrows(), lig_sample.iterrows())):
         cnt_data = cnt_row[1]
         lig_data = lig_row[1]
-        
+
         # CNT 贡献
         cnt_conductivity = cnt_data['conductivity_Sm'] if pd.notna(cnt_data['conductivity_Sm']) else 1e5
-        
+
         # LIG 贡献
         lig_conductivity = lig_data['sigma_Sm'] if 'sigma_Sm' in lig_data and pd.notna(lig_data['sigma_Sm']) else 1000
-        
+
         # 协同效应 (非线性增强)
         # 假设在 30-50% CNT 比例时协同效应最强
         synergy_factor = 1.0 + 0.5 * np.exp(-((cnt_ratio - 0.4) ** 2) / 0.1)
-        
+
         # 复合电导率 (混合规则 + 协同效应)
         composite_conductivity = (
-            cnt_ratio * cnt_conductivity + 
+            cnt_ratio * cnt_conductivity +
             (1 - cnt_ratio) * lig_conductivity
         ) * synergy_factor
-        
+
         # 添加噪声
         noise = np.random.normal(1.0, 0.1)
         composite_conductivity *= noise
-        
+
         composite_data.append({
             'sample_id': f'CNT-LIG-{cnt_ratio:.1f}-{idx:03d}',
             'cnt_ratio': cnt_ratio,

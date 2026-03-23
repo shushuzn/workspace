@@ -79,15 +79,15 @@ def record_outcome(task, persona, success, keywords):
 def orchestrate_task(task_text):
     print("\n[MULTI-AGENT ORCHESTRATOR]")
     print("=" * 50)
-    
+
     print("\n[1] Intent Analysis...")
     intent = analyze_intent(task_text)
     print(f"    Detected: {intent.upper()}")
-    
+
     print("\n[2] Smart Routing...")
     best_persona = get_best_persona(task_text)
     print(f"    Best Persona: {best_persona.upper()} (learned)")
-    
+
     print("\n[3] Execution Plan:")
     steps = [
         {"persona": "planner", "action": "plan"},
@@ -97,7 +97,7 @@ def orchestrate_task(task_text):
     ]
     for i, step in enumerate(steps, 1):
         print(f"    {i}. {step['persona'].upper()} -> {step['action']}")
-    
+
     print("\n[4] Executing via Workflow...")
     wf_map = {
         "planner": "plan", "executor": "dev", "critic": "security",
@@ -105,7 +105,7 @@ def orchestrate_task(task_text):
         "metacognition": "plan"
     }
     wf_id = wf_map.get(best_persona, "quick")
-    
+
     try:
         result = subprocess.run(
             ["python", "30-scripts-tools/workflow_master_001.py", "--run", wf_id],
@@ -116,11 +116,11 @@ def orchestrate_task(task_text):
     except Exception as e:
         success = False
         print(f"    Error: {e}")
-    
+
     print("\n[5] Recording Outcome...")
     keywords = task_text.lower().split()[:5]
     record_outcome(task_text, best_persona, success, keywords)
-    
+
     print("\n" + "=" * 50)
     print("[COMPLETE] Orchestration done")
     return {"intent": intent, "persona": best_persona, "success": success}
@@ -130,7 +130,7 @@ def run_visualization():
     if STATS_FILE.exists():
         stats = json.loads(STATS_FILE.read_text(encoding="utf-8", errors="replace"))
     runs = stats.get("runs", [])
-    
+
     print("\n[MULTI-AGENT COLLABORATION STATUS]")
     print("=" * 50)
     print(f"Updated: {datetime.now().strftime('%H:%M:%S')}")
@@ -154,13 +154,13 @@ def generate_report():
     print("=" * 50)
     print(f"Patterns Learned: {len(history.get('persona_scores', {}))}")
     print("\nTop Combinations:")
-    
+
     combos = []
     for persona, task_scores in history.get("persona_scores", {}).items():
         for task, score in task_scores.items():
             if score > 0:
                 combos.append((persona, task, score))
-    
+
     combos.sort(key=lambda x: x[2], reverse=True)
     for persona, task, score in combos[:5]:
         print(f"  {persona.upper():12} + {task:15} = {score:.1f}")

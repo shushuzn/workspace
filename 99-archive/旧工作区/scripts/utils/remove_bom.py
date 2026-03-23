@@ -8,11 +8,11 @@ with open(filePath, 'rb') as f:
 if content.startswith(b'\xef\xbb\xbf'):
     print("Removing UTF-8 BOM...")
     content = content[3:]
-    
+
 # Write back without BOM
 with open(filePath, 'wb') as f:
     f.write(content)
-    
+
 print("BOM removed. Testing compilation...")
 
 # Test compilation

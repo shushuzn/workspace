@@ -15,7 +15,7 @@ from datetime import datetime
 
 class DynamicGoalAdjuster:
     """动态目标调整器"""
-    
+
     # 调整策略
     ADJUSTMENT_STRATEGIES = {
         "scope_reduction": {
@@ -44,13 +44,13 @@ class DynamicGoalAdjuster:
             "description": "目标模糊，澄清并拆分"
         }
     }
-    
+
     def __init__(self):
         self.adjustment_history = []
-    
+
     def assess_execution_state(self, metrics: Dict) -> Dict:
         """评估执行状态"""
-        
+
         state = {
             "progress_percent": metrics.get("progress_percent", 0),
             "time_elapsed_percent": metrics.get("time_elapsed_percent", 0),
@@ -58,24 +58,24 @@ class DynamicGoalAdjuster:
             "error_count": metrics.get("error_count", 0),
             "confidence_level": metrics.get("confidence_level", 0.8)
         }
-        
+
         # 计算进度偏差
         state["progress_variance"] = state["progress_percent"] - state["time_elapsed_percent"]
-        
+
         # 判断状态
         state["is_behind_schedule"] = state["progress_variance"] < -20
         state["is_ahead_schedule"] = state["progress_variance"] > 20
         state["has_quality_issues"] = state["quality_score"] < 75
         state["has_many_errors"] = state["error_count"] > 3
         state["has_low_confidence"] = state["confidence_level"] < 0.6
-        
+
         return state
-    
+
     def determine_adjustments(self, state: Dict, original_goals: List[Dict]) -> List[Dict]:
         """确定需要的目标调整"""
-        
+
         adjustments = []
-        
+
         # 进度落后
         if state["is_behind_schedule"]:
             adjustments.append({
@@ -86,7 +86,7 @@ class DynamicGoalAdjuster:
                 "adjusted_goal": "完成核心功能 (80%)",
                 "impact": "范围缩减 30%"
             })
-        
+
         # 质量下降
         if state["has_quality_issues"]:
             adjustments.append({
@@ -97,7 +97,7 @@ class DynamicGoalAdjuster:
                 "adjusted_goal": "质量评分>=75",
                 "impact": "质量阈值降低 15 分"
             })
-        
+
         # 信心不足
         if state["has_low_confidence"]:
             adjustments.append({
@@ -108,7 +108,7 @@ class DynamicGoalAdjuster:
                 "adjusted_goal": "人工协助完成",
                 "impact": "引入人工介入"
             })
-        
+
         # 错误过多
         if state["has_many_errors"]:
             adjustments.append({
@@ -119,17 +119,17 @@ class DynamicGoalAdjuster:
                 "adjusted_goal": "分步验证完成",
                 "impact": "增加验证步骤"
             })
-        
+
         return adjustments
-    
+
     def apply_adjustments(self, original_goals: List[Dict], adjustments: List[Dict]) -> List[Dict]:
         """应用目标调整"""
-        
+
         adjusted_goals = []
-        
+
         for goal in original_goals:
             adjusted_goal = goal.copy()
-            
+
             # 查找适用的调整
             for adj in adjustments:
                 if adj["priority"] == "high":
@@ -137,18 +137,18 @@ class DynamicGoalAdjuster:
                     if "adjusted_goal" in adj:
                         adjusted_goal["description"] = adj["adjusted_goal"]
                         adjusted_goal["adjustment_applied"] = adj["strategy"]
-            
+
             adjusted_goals.append(adjusted_goal)
-        
+
         return adjusted_goals
-    
+
     def run(self, metrics: Dict, original_goals: List[Dict]) -> Dict:
         """完整流程：评估 -> 决策 -> 调整"""
-        
+
         print(f"\n{'='*60}")
         print(f"动态目标调整")
         print(f"{'='*60}")
-        
+
         # 评估执行状态
         state = self.assess_execution_state(metrics)
         print(f"\n执行状态:")
@@ -157,7 +157,7 @@ class DynamicGoalAdjuster:
         print(f"  质量：{state['quality_score']} 分")
         print(f"  错误：{state['error_count']} 个")
         print(f"  信心：{state['confidence_level']:.2f}")
-        
+
         # 状态标记
         flags = []
         if state["is_behind_schedule"]:
@@ -168,23 +168,23 @@ class DynamicGoalAdjuster:
             flags.append("⚠️ 信心不足")
         if state["has_many_errors"]:
             flags.append("⚠️ 错误过多")
-        
+
         if flags:
             print(f"  状态标记：{', '.join(flags)}")
-        
+
         # 确定调整
         adjustments = self.determine_adjustments(state, original_goals)
         print(f"\n调整决策：{len(adjustments)} 项")
-        
+
         for adj in adjustments:
             print(f"  [{adj['priority'].upper()}] {adj['strategy']}")
             print(f"       原目标：{adj['original_goal']}")
             print(f"       新目标：{adj['adjusted_goal']}")
             print(f"       影响：{adj['impact']}")
-        
+
         # 应用调整
         adjusted_goals = self.apply_adjustments(original_goals, adjustments)
-        
+
         # 记录历史
         self.adjustment_history.append({
             "timestamp": datetime.now().isoformat(),
@@ -193,9 +193,9 @@ class DynamicGoalAdjuster:
             "original_goals": original_goals,
             "adjusted_goals": adjusted_goals
         })
-        
+
         print(f"\n{'='*60}")
-        
+
         return {
             "state": state,
             "adjustments": adjustments,
@@ -249,7 +249,7 @@ Fixes:
 
 测试入口"""
     adjuster = DynamicGoalAdjuster()
-    
+
     # 测试场景：进度落后 + 质量下降
     metrics = {
         "progress_percent": 40,
@@ -258,15 +258,15 @@ Fixes:
         "error_count": 4,
         "confidence_level": 0.55
     }
-    
+
     original_goals = [
         {"id": 1, "description": "完成所有功能", "priority": "high"},
         {"id": 2, "description": "质量评分>=90", "priority": "high"},
         {"id": 3, "description": "零错误", "priority": "medium"}
     ]
-    
+
     result = adjuster.run(metrics, original_goals)
-    
+
     print(f"\n调整后目标:")
     for goal in result["adjusted_goals"]:
         adj = goal.get("adjustment_applied", "无")

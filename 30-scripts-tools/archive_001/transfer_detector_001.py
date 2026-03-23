@@ -69,36 +69,36 @@ def calculate_transfer_score(data):
         return {"transfer_score": 0, "near_transfer": 0, "far_transfer": 0,
                 "generalization": 0, "status": "insufficient_data",
                 "message": "Need at least 3 tasks for analysis"}
-    
+
     attempts = sorted(attempts, key=lambda x: x["timestamp"])
     n = len(attempts)
     first_third = attempts[:n//3]
     last_third = attempts[-n//3:]
-    
+
     skill_groups = defaultdict(list)
     for a in attempts:
         skill_groups[a["skill_type"]].append(a)
-    
+
     skill_improvement = {}
     for skill, task_list in skill_groups.items():
         if len(task_list) >= 2:
             first = sum(t["performance"] for t in task_list[:len(task_list)//2]) / (len(task_list)//2)
             last = sum(t["performance"] for t in task_list[-len(task_list)//2:]) / (len(task_list)//2)
             skill_improvement[skill] = (last - first) / max(1, first) * 100
-    
+
     near_transfer = sum(skill_improvement.values()) / max(1, len(skill_improvement))
     improved_skills = sum(1 for v in skill_improvement.values() if v > 0)
     far_transfer = (improved_skills / max(1, len(skill_improvement))) * 50 if len(skill_improvement) > 1 else 0
-    
+
     if first_third and last_third:
         first_avg = sum(a["performance"] for a in first_third) / len(first_third)
         last_avg = sum(a["performance"] for a in last_third) / len(last_third)
         generalization = (last_avg - first_avg) / max(1, first_avg) * 100
     else:
         generalization = 0
-    
+
     transfer_score = near_transfer * 0.4 + far_transfer * 0.3 + generalization * 0.3
-    
+
     return {
         "transfer_score": round(transfer_score, 1),
         "near_transfer": round(near_transfer, 1),
@@ -131,13 +131,13 @@ def get_recommendations(analysis):
 def analyze_transfer():
     data = load_transfer_data()
     analysis = calculate_transfer_score(data)
-    
+
     print("=" * 60)
     print("TRANSFER OF TRAINING ANALYSIS")
     print("=" * 60)
     print(f"Status: {analysis['status']}")
     print("-" * 60)
-    
+
     if analysis["status"] == "insufficient_data":
         print(f"\n{analysis['message']}")
         print(f"Current attempts: {len(data['task_attempts'])}/3")

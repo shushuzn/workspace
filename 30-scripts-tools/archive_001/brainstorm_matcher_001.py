@@ -75,25 +75,25 @@ Match brainstormed ideas with existing tools"""
     if not ideas_file.exists():
         print("ERROR: No prioritized ideas found")
         return
-    
+
     with open(ideas_file, encoding="utf-8") as f:
         ideas = json.load(f)
-    
+
     print("="*60)
     print("[BRAINSTORM] Ideas vs Existing Tools")
     print("="*60)
-    
+
     results = []
     for idea in ideas:
         text = idea.get("text", "").lower()
         matched = []
         extension_needed = ""
-        
+
         # Match with existing tools
         for capability, tools in EXISTING_TOOLS.items():
             if capability in text or any(t.replace(".py", "") in text for t in tools):
                 matched.extend(tools)
-        
+
         # Determine status
         if matched:
             status = "[EXISTS - Extend]"
@@ -101,7 +101,7 @@ Match brainstormed ideas with existing tools"""
         else:
             status = "[NEW]"
             extension_needed = "Need to create"
-        
+
         result = {
             "priority": idea.get("priority"),
             "idea": idea.get("text"),
@@ -111,28 +111,28 @@ Match brainstormed ideas with existing tools"""
             "extension": extension_needed
         }
         results.append(result)
-        
+
         print(f"\n{idea.get('priority')}. {idea.get('text')}")
         print(f"   Phase: {idea.get('phase')}")
         print(f"   Status: {status}")
         if matched:
             print(f"   Existing: {', '.join(matched)}")
-    
+
     # Save results
     output_file = Path("flow-archive/brainstorm-current/brainstorm_ideas_matched.json")
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n\n[Saved to] {output_file}")
-    
+
     # Summary
     existing = sum(1 for r in results if "EXISTS" in r["status"])
     new = sum(1 for r in results if "NEW" in r["status"])
-    
+
     print(f"\n[SUMMARY]")
     print(f"  Extend existing: {existing}")
     print(f"  Need new tools: {new}")
-    
+
     return results
 
 if __name__ == "__main__":

@@ -18,11 +18,11 @@ class MemoryItem:
     access_count: int = 0
     last_accessed: Optional[str] = None
     metadata: Dict[str, Any] = None
-    
+
     def __post_init__(self):
         if self.metadata is None:
             self.metadata = {}
-    
+
     def to_dict(self) -> dict:
         return asdict(self)
 

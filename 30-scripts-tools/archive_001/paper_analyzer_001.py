@@ -75,7 +75,7 @@ def analyze_structure(text):
         "results": [],
         "conclusion": []
     }
-    
+
     # Find sections
     patterns = {
         "abstract": r"abstract",
@@ -84,11 +84,11 @@ def analyze_structure(text):
         "results": r"3\.?\s*result|experiment|result|evaluation",
         "conclusion": r"conclusion|conclusions|summary|discussion"
     }
-    
+
     for section, pattern in patterns.items():
         if re.search(pattern, text, re.IGNORECASE):
             sections[section].append(pattern)
-    
+
     return sections
 
 
@@ -101,19 +101,19 @@ def extract_key_info(text):
         "figures_count": 0,
         "tables_count": 0
     }
-    
+
     # Count references
     info["references_count"] = len(re.findall(r'\[?\d+\]?', text[:5000]))
-    
+
     # Count figures/tables
     info["figures_count"] = len(re.findall(r'fig\.?\s*\d+|figure\s*\d+', text, re.I))
     info["tables_count"] = len(re.findall(r'tab\.?\s*\d+|table\s*\d+', text, re.I))
-    
+
     # Extract potential keywords
     keywords = re.findall(r'keyword[s]?[:\s]+([^.]+)', text, re.I)
     if keywords:
         info["keywords"] = [k.strip() for k in keywords[0].split(',')[:10]]
-    
+
     return info
 
 
@@ -121,7 +121,7 @@ def generate_report(pdf_path, text, max_length=5000):
     """Generate analysis report"""
     structure = analyze_structure(text)
     info = extract_key_info(text)
-    
+
     report = []
     report.append("=" * 60)
     report.append("PAPER-ANALYZER-001 Deep Analysis Report")
@@ -131,12 +131,12 @@ def generate_report(pdf_path, text, max_length=5000):
     report.append("Library: " + str(PDF_LIB))
     report.append("Characters: " + str(len(text)))
     report.append("")
-    
+
     report.append("[STRUCTURE]")
     for section, found in structure.items():
         status = "FOUND" if found else "MISSING"
         report.append("  " + section + ": " + status)
-    
+
     report.append("")
     report.append("[KEY INFO]")
     report.append("  References: " + str(info["references_count"]))
@@ -144,14 +144,14 @@ def generate_report(pdf_path, text, max_length=5000):
     report.append("  Tables: " + str(info["tables_count"]))
     if info["keywords"]:
         report.append("  Keywords: " + ", ".join(info["keywords"][:5]))
-    
+
     report.append("")
     report.append("[TEXT PREVIEW]")
     report.append("-" * 40)
     report.append(text[:max_length])
     report.append("")
     report.append("=" * 60)
-    
+
     return "\n".join(report)
 
 
@@ -161,23 +161,23 @@ def main():
         print("  --full    Extract all pages")
         print("  --json    Output as JSON")
         return
-    
+
     pdf_path = sys.argv[1]
     max_pages = 5
-    
+
     if "--full" in sys.argv:
         max_pages = 100
-    
+
     if not PDF_LIB:
         print("[ERROR] No PDF library available")
         print("Install: pip install pypdf pdfplumber")
         return
-    
+
     print("[PAPER-ANALYZER-001] Extracting: " + pdf_path, file=sys.stderr)
-    
+
     try:
         text = extract_text(pdf_path, max_pages)
-        
+
         if "--json" in sys.argv:
             import json
             info = extract_key_info(text)
@@ -190,7 +190,7 @@ def main():
             }, indent=2))
         else:
             print(generate_report(pdf_path, text))
-    
+
     except Exception as e:
         print("[ERROR] " + str(e))
 

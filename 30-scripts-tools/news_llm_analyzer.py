@@ -40,14 +40,14 @@ class LLMAnalyzer:
     def __init__(self):
         self.cfg = self._load()
         self.available = self._check()
-    
+
     def _load(self) -> Dict:
         try:
             with open(CONFIG_PATH, encoding="utf-8") as f:
                 return json.load(f)
         except:
             return {"enabled": False}
-    
+
     def _check(self) -> bool:
         if not self.cfg.get("enabled"): return False
         url = self.cfg.get("providers", {}).get(self.cfg.get("provider", "ollama"), {}).get("url", "")
@@ -58,7 +58,7 @@ class LLMAnalyzer:
             return True
         except:
             return False
-    
+
     def analyze(self, title: str) -> Dict[str, Any]:
         if not self.available:
             return keyword_analyze(title)
@@ -70,32 +70,32 @@ class LLMAnalyzer:
         except Exception as e:
             print(f"LLM: {e}")
         return keyword_analyze(title)
-    
+
     def _call(self, title: str) -> Optional[Dict]:
         provider = self.cfg.get("provider", "ollama")
         cfg = self.cfg.get("providers", {}).get(provider, {})
         url = cfg.get("url", "") + cfg.get("chat_endpoint", "")
-        
+
         prompt = f"""分析新闻标题，输出JSON：
 {{"sentiment":"利好|利空|中性","intensity":1-5,"sector":"科技|新能源|金融|地产|医药|消费|周期|军工|传媒|宏观|通用","keywords":["kw1","kw2"],"companies":["公司"],"urgency":"高|中|低","summary":"一句话"}}
 
 标题：{title}
 只输出JSON。"""
-        
+
         if provider == "ollama":
             data = {"model": cfg.get("model","qwen2.5:7b"), "messages":[{"role":"user","content":prompt}], "stream": False}
         else:
             data = {"model": cfg.get("model","local-model"), "messages":[{"role":"user","content":prompt}], "stream": False}
-        
+
         req = urllib.request.Request(url, data=json.dumps(data).encode(), headers={"Content-Type":"application/json"})
         with urllib.request.urlopen(req, timeout=self.cfg.get("timeout",30)) as resp:
             result = json.loads(resp.read())
-        
+
         if provider == "ollama":
             content = result.get("message",{}).get("content","")
         else:
             content = result.get("choices",[{}])[0].get("message",{}).get("content","")
-        
+
         json_match = re.search(r'\{[^{}]*\}', content, re.DOTALL)
         if json_match:
             return json.loads(json_match.group())

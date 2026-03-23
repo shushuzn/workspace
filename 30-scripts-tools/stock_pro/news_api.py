@@ -28,10 +28,10 @@ def get_news(symbol=None, hours=24, limit=50):
     """Get news from cache (millisecond response)"""
     if not DB.exists():
         return {"error": "No news cache", "count": 0, "news": []}
-    
+
     conn = sqlite3.connect(DB)
     c = conn.cursor()
-    
+
     if symbol:
         kws = KW.get(symbol.upper(), [symbol])
         sql = " OR ".join(["t LIKE ?" for _ in kws])
@@ -40,10 +40,10 @@ def get_news(symbol=None, hours=24, limit=50):
     else:
         query = f"SELECT s,t,u,ts FROM n WHERE ts>datetime('now', ?) ORDER BY ts DESC LIMIT ?"
         params = [f"-{hours} hours", limit]
-    
+
     rows = c.execute(query, params).fetchall()
     conn.close()
-    
+
     return {
         "count": len(rows),
         "news": [
@@ -57,21 +57,21 @@ def get_stats():
     """Get cache statistics"""
     if not DB.exists():
         return {"total": 0}
-    
+
     conn = sqlite3.connect(DB)
     c = conn.cursor()
-    
+
     c.execute("SELECT COUNT(*) FROM n")
     total = c.fetchone()[0]
-    
+
     c.execute("SELECT MAX(ts) FROM n")
     last = c.fetchone()[0]
-    
+
     c.execute("SELECT s, COUNT(*) FROM n GROUP BY s")
     by_source = dict(c.fetchall())
-    
+
     conn.close()
-    
+
     return {
         "total": total,
         "last_update": last,
@@ -101,7 +101,7 @@ def news_report(symbol=None):
         for n in result["news"][:20]:
             report += f"**{n['title']}**\n"
             report += f"[{n['source']}] {n['time'][:16]}\n\n"
-    
+
     return report
 
 

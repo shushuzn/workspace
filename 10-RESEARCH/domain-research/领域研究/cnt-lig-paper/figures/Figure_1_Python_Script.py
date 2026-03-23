@@ -43,7 +43,7 @@ ax.set_facecolor(colors['background'])
 
 # Title
 title_text = "Machine Learning-Guided Design of Multi-Component CNT-LIG Composites"
-ax.text(600, 760, title_text, fontsize=16, fontweight='bold', 
+ax.text(600, 760, title_text, fontsize=16, fontweight='bold',
         ha='center', va='top', color=colors['text'], fontfamily='Arial')
 
 subtitle_text = "Complete Closed-Loop Research Framework (Completed in ~2 hours)"
@@ -105,7 +105,7 @@ phases = [
 # Draw phase boxes
 for i, phase in enumerate(phases):
     x, y = phase['position']
-    
+
     # Box
     box = FancyBboxPatch((x-130, y-80), 260, 160,
                          boxstyle='round,pad=10,rounding_size=15',
@@ -113,21 +113,21 @@ for i, phase in enumerate(phases):
                          facecolor=phase['color'] + '20',  # 20% opacity
                          zorder=2)
     ax.add_patch(box)
-    
+
     # Phase number
     circle = Circle((x-110, y+60), 18, color=phase['color'], zorder=3)
     ax.add_patch(circle)
     ax.text(x-110, y+60, str(i+1), fontsize=11, fontweight='bold',
             color='white', ha='center', va='center', zorder=4)
-    
+
     # Title
     ax.text(x-80, y+65, phase['title'], fontsize=11, fontweight='bold',
             color=phase['color'], ha='left', va='top', fontfamily='Arial')
-    
+
     # Time
     ax.text(x+110, y+65, phase['time'], fontsize=9, fontstyle='italic',
             color='#666666', ha='right', va='top', fontfamily='Arial')
-    
+
     # Items
     for j, item in enumerate(phase['items']):
         y_pos = y + 35 - j * 35

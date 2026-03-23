@@ -31,20 +31,20 @@ CONFIG_FILE = Path("30-scripts-tools/roadmap_001_config.json")
 
 class RoadmapManager:
     """路线图管理器"""
-    
+
     def __init__(self):
         self.roadmap_file = ROADMAP_FILE
         self.config = self._load_config()
-        
+
         self.roadmap = self._load_roadmap()
-    
+
     def _load_config(self) -> dict:
         default = {
             "current_version": "v2.1.0",
             "total_tools": 28,
             "next_phase": 6
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -52,7 +52,7 @@ class RoadmapManager:
             except (Exception,):
                 return default
         return default
-    
+
     def _load_roadmap(self) -> dict:
         """加载或初始化路线图"""
         if self.roadmap_file.exists():
@@ -61,7 +61,7 @@ class RoadmapManager:
                     return json.load(f)
             except (Exception,):
                 pass
-        
+
         # 初始化
         return {
             "version": self.config["current_version"],
@@ -77,23 +77,23 @@ class RoadmapManager:
             "next_tool": "SA-029",
             "next_phase": 6
         }
-    
+
     def _save_roadmap(self):
         """保存路线图"""
         with open(self.roadmap_file, "w", encoding="utf-8") as f:
             json.dump(self.roadmap, f, ensure_ascii=False, indent=2)
-    
+
     def _get_completed_count(self) -> int:
         """获取已完成工具数"""
-        return sum(len(p["tools"]) for p in self.roadmap["phases"].values() 
+        return sum(len(p["tools"]) for p in self.roadmap["phases"].values()
                   if p["status"] == "completed")
-    
+
     def get_status(self) -> dict:
         """获取状态"""
         phases = []
         total = 0
         completed = 0
-        
+
         for phase_id, phase in self.roadmap["phases"].items():
             phase_completed = len(phase["tools"]) if phase["status"] == "completed" else 0
             phases.append({
@@ -106,7 +106,7 @@ class RoadmapManager:
             })
             total += len(phase["tools"])
             completed += phase_completed
-        
+
         return {
             "version": self.roadmap["version"],
             "last_updated": self.roadmap["last_updated"],
@@ -117,7 +117,7 @@ class RoadmapManager:
             "next_tool": self.roadmap.get("next_tool"),
             "next_phase": self.roadmap.get("next_phase")
         }
-    
+
     def mark_complete(self, tool_id: str) -> dict:
         """标记工具完成"""
         # 查找工具所在阶段
@@ -129,23 +129,23 @@ class RoadmapManager:
                     if "completed_tools" not in self.roadmap:
                         self.roadmap["completed_tools"] = []
                     self.roadmap["completed_tools"].append(tool_id)
-                    
+
                     # 检查阶段是否完成
                     all_complete = all(
-                        t in self.roadmap["completed_tools"] 
+                        t in self.roadmap["completed_tools"]
                         for t in phase["tools"]
                     )
                     if all_complete:
                         phase["status"] = "completed"
-                        
+
                         # 更新版本
                         next_p = int(phase_id) + 1
                         self.roadmap["next_phase"] = next_p
                         self.roadmap["version"] = f"v2.{next_p - 1}.0"
-                    
+
                     self.roadmap["last_updated"] = datetime.now().isoformat()
                     self._save_roadmap()
-                    
+
                     return {
                         "status": "success",
                         "tool": tool_id,
@@ -155,7 +155,7 @@ class RoadmapManager:
                     }
                 else:
                     return {"status": "info", "message": f"{tool_id} already completed"}
-        
+
         if not found:
             # 新工具 - 添加到下一阶段
             next_phase = str(self.roadmap.get("next_phase", 6))
@@ -165,29 +165,29 @@ class RoadmapManager:
                     "tools": [],
                     "status": "in_progress"
                 }
-            
+
             self.roadmap["phases"][next_phase]["tools"].append(tool_id)
             self.roadmap["next_tool"] = self._get_next_tool()
             self.roadmap["last_updated"] = datetime.now().isoformat()
             self._save_roadmap()
-            
+
             return {
                 "status": "success",
                 "tool": tool_id,
                 "added_to_phase": next_phase,
                 "next_tool": self.roadmap["next_tool"]
             }
-    
+
     def _get_next_tool(self) -> str:
         """获取下一个工具 ID - 跳过已完成的"""
         completed = set(self.roadmap.get("completed_tools", []))
-        
+
         # 收集所有工具，找第一个未完成的
         for phase in self.roadmap["phases"].values():
             for tool in phase["tools"]:
                 if tool not in completed:
                     return tool
-        
+
         # 如果都完成了，返回下一个新编号
         max_num = 0
         for phase in self.roadmap["phases"].values():
@@ -198,9 +198,9 @@ class RoadmapManager:
                         max_num = max(max_num, num)
                     except (Exception,):
                         pass
-        
+
         return f"SA-{max_num + 1:03d}"
-    
+
     def add_phase(self, phase_name: str, tools: list) -> dict:
         """
 # ==============================================================================
@@ -246,24 +246,24 @@ Fixes:
 
 添加新阶段"""
         next_phase = str(self.roadmap.get("next_phase", 6))
-        
+
         self.roadmap["phases"][next_phase] = {
             "name": phase_name,
             "tools": tools,
             "status": "planned"
         }
-        
+
         self.roadmap["next_phase"] = int(next_phase) + 1
         self.roadmap["last_updated"] = datetime.now().isoformat()
         self._save_roadmap()
-        
+
         return {
             "status": "success",
             "phase": next_phase,
             "name": phase_name,
             "tools": tools
         }
-    
+
     def get_next(self) -> dict:
         """获取下一步"""
         next_tool = self._get_next_tool()

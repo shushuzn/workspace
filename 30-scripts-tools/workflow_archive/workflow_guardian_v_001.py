@@ -20,12 +20,12 @@ import sys
 
 class WorkflowGuardian:
     """工作流守护者 - 强化防护系统"""
-    
+
     def __init__(self):
         self.workflow_file = Path("flow-archive/20260318-universal-workflow-001/workflow.json")
         self.state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
         self.validation_log = Path("flow-archive/20260318-universal-workflow-001/validation-log.jsonl")
-        
+
     def load_json(self, file_path) -> None:
         """
 # ==============================================================================
@@ -72,7 +72,7 @@ Fixes:
 加载 JSON 文件"""
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
-    
+
     def validate_step_types(self) -> None:
         """
         验证 step_id 类型完全匹配

@@ -31,7 +31,7 @@ class BatchProcessorOptimized:
         self.timeout = timeout
         self.results = []
         self.progress = {}
-        
+
     def compress_task_description(self, paper_id: str, task_type: str = "pnote") -> str:
         """
         压缩子代理任务描述
@@ -52,16 +52,16 @@ class BatchProcessorOptimized:
         
         请确保笔记简洁、结构化，便于后续知识图谱构建。
         """
-        
+
         # 压缩版本
         compressed = f"""
         P-Note: arXiv:{paper_id}
         模板：标题 | 问题 | 方法 (3-5) | 结果 | 洞见 | 引用
         要求：简洁/结构化
         """
-        
+
         return compressed.strip()
-    
+
     def create_subagent_task(self, paper_id: str, model: str = "bailian/qwen3.5-plus") -> Dict:
         """创建优化的子代理任务"""
         return {
@@ -73,27 +73,27 @@ class BatchProcessorOptimized:
             "task": self.compress_task_description(paper_id),
             "thinking": "medium"
         }
-    
+
     def process_batch(self, paper_ids: List[str], output_dir: str = "Medium/P-Note/") -> Dict:
         """处理批量论文"""
         batch_id = f"batch-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
-        
+
         print(f"✅ 创建批量任务：{batch_id}")
         print(f"📊 论文数量：{len(paper_ids)}, 并发数：{self.max_concurrent}")
-        
+
         start_time = time.time()
         completed = 0
         failed = 0
-        
+
         for i, paper_id in enumerate(paper_ids, 1):
             print(f"\n[{i}/{len(paper_ids)}] 处理 {paper_id}...")
-            
+
             # 创建子代理任务 (模拟)
             task = self.create_subagent_task(paper_id)
-            
+
             # 实际执行时调用 sessions_spawn
             # result = sessions_spawn(**task)
-            
+
             # 模拟结果
             completed += 1
             self.results.append({
@@ -102,13 +102,13 @@ class BatchProcessorOptimized:
                 "output": f"{output_dir}/P-2026-{paper_id}.md",
                 "duration_seconds": 45
             })
-            
+
             # 进度更新
             progress = completed / len(paper_ids) * 100
             print(f"   进度：{progress:.1f}%")
-        
+
         elapsed = time.time() - start_time
-        
+
         summary = {
             "batch_id": batch_id,
             "started_at": datetime.now().isoformat(),
@@ -124,7 +124,7 @@ class BatchProcessorOptimized:
                 "parallel_processing": f"{self.max_concurrent} workers"
             }
         }
-        
+
         return summary
 
 def main():
@@ -134,16 +134,16 @@ def main():
     parser.add_argument('--max-concurrent', '-c', type=int, default=4, help='最大并发数')
     parser.add_argument('--timeout', '-t', type=int, default=600, help='超时 (秒)')
     parser.add_argument('--dry-run', action='store_true', help='仅测试不执行')
-    
+
     args = parser.parse_args()
-    
+
     paper_ids = [p.strip() for p in args.papers.split(',')]
-    
+
     processor = BatchProcessorOptimized(
         max_concurrent=args.max_concurrent,
         timeout=args.timeout
     )
-    
+
     if args.dry_run:
         print("🔍 Dry-run 模式")
         for paper_id in paper_ids:
@@ -153,7 +153,7 @@ def main():
             print(f"Token 估算：{len(task['task'])} 字符")
     else:
         summary = processor.process_batch(paper_ids, args.output)
-        
+
         print(f"\n{'='*60}")
         print(f"✅ 批量处理完成!")
         print(f"📊 总计：{summary['total_papers']} 篇")
@@ -161,7 +161,7 @@ def main():
         print(f"❌ 失败：{summary['failed']} 篇")
         print(f"⏱️  耗时：{summary['elapsed_seconds']:.1f} 秒")
         print(f"📈 平均：{summary['avg_time_per_paper']:.1f} 秒/篇")
-        
+
         # 保存报告
         report_path = f"batch-summary-{summary['batch_id']}.json"
         with open(report_path, 'w', encoding='utf-8') as f:

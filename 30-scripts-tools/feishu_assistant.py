@@ -68,20 +68,20 @@ def api_request(token, method, url, **kwargs):
         'Authorization': f'Bearer {token}',
         'Content-Type': 'application/json'
     }
-    
+
     data = kwargs.get('data')
     params = kwargs.get('params', {})
-    
+
     if params:
         url += '?' + '&'.join(f"{k}={v}" for k, v in params.items())
-    
+
     req = urllib.request.Request(url, data=json.dumps(data).encode() if data else None,
                                 headers=headers, method=method)
-    
+
     ctx = ssl.create_default_context()
     ctx.check_hostname = False
     ctx.verify_mode = ssl.CERT_NONE
-    
+
     with urllib.request.urlopen(req, timeout=15, context=ctx) as resp:
         return json.loads(resp.read())
 
@@ -99,7 +99,7 @@ def cmd_msg(args):
     client = get_client()
     client.send_text(text)
     print(f"[OK] Sent: {text[:50]}...")
-    
+
     stats = load_stats()
     stats['sent'] = stats.get('sent', 0) + 1
     save_stats(stats)
@@ -154,10 +154,10 @@ def cmd_mention(args):
     if len(args) < 2:
         print("[ERROR] 需要 user_id 和消息")
         return
-    
+
     user_id = args[0]
     text = ' '.join(args[1:])
-    
+
     client = get_client()
     elements = [
         {"tag": "at", "user_id": user_id},
@@ -175,61 +175,61 @@ def cmd_calendar(args):
     """查看今日日程"""
     client = get_client()
     token = client.token_manager.get_token()
-    
+
     today = datetime.now()
     start_ts = int(today.replace(hour=0, minute=0, second=0).timestamp())
     end_ts = int(today.replace(hour=23, minute=59, second=59).timestamp())
     today_str = today.strftime('%Y-%m-%d')
-    
+
     url = "https://open.feishu.cn/open-apis/calendar/v4/calendars/primary/events"
-    
+
     try:
         result = api_request(token, 'GET', url, params={
             "start_time": str(start_ts),
             "end_time": str(end_ts),
             "max_results": 50
         })
-        
+
         if result.get('code') != 0:
             print(f"[WARN] Calendar: {result.get('msg', 'permission denied')}")
             print("[INFO] 日历功能需要日历读写权限")
             client.send_text("Calendar permission required")
             return
-        
+
         events = result.get('items', [])
-        
+
         if not events:
             print(f"[INFO] {today} 没有日程")
             return
-        
+
         print(f"\n📅 {today} 日程 ({len(events)} 个)")
         print("-" * 40)
-        
+
         for e in events:
             st = e.get('start', {}).get('date_time', '')[:16] if e.get('start', {}).get('date_time') else ''
             title = e.get('summary', '无标题')
             loc = e.get('location', {}).get('name', '')
             status = e.get('status', {}).get('overall_status', '')
-            
+
             status_icon = ""
             if status == 'confirmed': status_icon = "✅"
             elif status == 'tentative': status_icon = "❓"
             elif status == 'cancelled': status_icon = "❌"
-            
+
             print(f"  {st} {status_icon} {title}")
             if loc:
                 print(f"       📍 {loc}")
-        
+
         # 发送摘要
         msg_lines = [f"📅 {today} 日程\n"]
         for e in events[:8]:
             st = e.get('start', {}).get('date_time', '')[:16] if e.get('start', {}).get('date_time') else ''
             title = e.get('summary', '无标题')[:25]
             msg_lines.append(f"• {st} {title}")
-        
+
         client.send_text('\n'.join(msg_lines))
         print(f"\n[OK] Sent calendar to Feishu")
-        
+
     except Exception as e:
         print(f"[ERROR] {e}")
 
@@ -238,14 +238,14 @@ def cmd_todos(args):
     """查看/创建待办"""
     client = get_client()
     token = client.token_manager.get_token()
-    
+
     if args and args[0] == 'create':
         # 创建待办
         title = ' '.join(args[1:]) if len(args) > 1 else "新待办"
-        
+
         url = "https://open.feishu.cn/open-apis/task/v2/tasks"
         due = datetime.now() + timedelta(days=7)
-        
+
         data = {
             "summary": title,
             "due": {
@@ -253,7 +253,7 @@ def cmd_todos(args):
                 "is_all_day": True
             }
         }
-        
+
         try:
             result = api_request(token, 'POST', url, data=data)
             task_id = result.get('task', {}).get('guid')
@@ -266,37 +266,37 @@ def cmd_todos(args):
         except Exception as e:
             print(f"[ERROR] {e}")
         return
-    
+
     # 查看待办
     url = "https://open.feishu.cn/open-apis/task/v2/tasks"
-    
+
     try:
         result = api_request(token, 'GET', url, params={"page_size": 20})
         tasks = result.get('items', [])
-        
+
         if not tasks:
             print("[INFO] 没有待办事项")
             return
-        
+
         print(f"\n📋 待办事项 ({len(tasks)} 个)")
         print("-" * 40)
-        
+
         for t in tasks:
             title = t.get('summary', '无标题')
             status = t.get('completed_at')
             due = t.get('due', {})
-            
+
             icon = "✅" if status else "⬜"
             due_str = ""
             if due:
                 ts = int(due.get('timestamp', 0)) / 1000
                 due_str = datetime.fromtimestamp(ts).strftime('%m-%d')
-            
+
             print(f"  {icon} {title} {due_str}")
-        
+
         client.send_text(f"📋 待办 {len(tasks)} 个")
         print(f"\n[OK] Sent to Feishu")
-        
+
     except Exception as e:
         print(f"[ERROR] {e}")
 
@@ -309,20 +309,20 @@ def cmd_contacts(args):
     """查看通讯录"""
     client = get_client()
     token = client.token_manager.get_token()
-    
+
     url = "https://open.feishu.cn/open-apis/contact/v3/users"
-    
+
     try:
         result = api_request(token, 'GET', url, params={"page_size": 50})
         users = result.get('data', {}).get('items', [])
-        
+
         if not users:
             print("[INFO] 没有获取到用户")
             return
-        
+
         print(f"\n👥 通讯录 ({len(users)} 人)")
         print("-" * 40)
-        
+
         for u in users[:20]:
             name = u.get('name', '?')
             en_name = u.get('en_name', '')
@@ -333,17 +333,17 @@ def cmd_contacts(args):
             print(f"     ID: {open_id}")
             if email:
                 print(f"     Email: {email}")
-        
+
         # 发送给自己
         msg = f"👥 通讯录 {len(users)} 人\n"
         for u in users[:10]:
             name = u.get('name', '?')
             open_id = u.get('open_id', '')
             msg += f"• {name} ({open_id})\n"
-        
+
         client.send_text(msg)
         print(f"\n[OK] Sent to Feishu")
-        
+
     except Exception as e:
         print(f"[ERROR] {e}")
 
@@ -357,10 +357,10 @@ def cmd_search(args):
     if not args:
         print("[ERROR] 需要搜索关键词")
         return
-    
+
     keyword = ' '.join(args)
     client = get_client()
-    
+
     # 构造搜索卡片
     elements = [
         {"tag": "div", "text": {"tag": "lark_md", "content": f"**搜索关键词:** {keyword}"}},
@@ -369,7 +369,7 @@ def cmd_search(args):
         {"tag": "hr"},
         {"tag": "note", "elements": [{"tag": "plain_text", "content": f"搜索: {keyword}"}]}
     ]
-    
+
     client.send_poster(f"搜索: {keyword}", elements)
     print(f"[OK] Search card sent: {keyword}")
 
@@ -382,36 +382,36 @@ def cmd_monitor(args):
     """系统监控报告"""
     import psutil
     import platform
-    
+
     client = get_client()
-    
+
     # CPU
     cpu = psutil.cpu_percent(interval=1)
-    
+
     # 内存
     mem = psutil.virtual_memory()
     mem_used = mem.used / (1024**3)
     mem_total = mem.total / (1024**3)
-    
+
     # 磁盘
     disk = psutil.disk_usage('C:')
-    
+
     # 进程
     process_count = len(psutil.pids())
-    
+
     # 网络
     net = psutil.net_io_counters()
-    
+
     # 电池
     battery = psutil.sensors_battery()
-    
+
     # 启动时间
     boot_time = datetime.fromtimestamp(psutil.boot_time())
     uptime = datetime.now() - boot_time
-    
+
     # 构建报告
     time_str = datetime.now().strftime('%H:%M')
-    
+
     elements = [
         {"tag": "div", "text": {"tag": "lark_md", "content": f"**🖥️ 系统监控报告** `{time_str}`"}},
         {"tag": "hr"},
@@ -422,18 +422,18 @@ def cmd_monitor(args):
         {"tag": "div", "text": {"tag": "lark_md", "content": f"**网络:** ↑{net.bytes_sent/1024/1024:.1f}MB ↓{net.bytes_recv/1024/1024:.1f}MB"}},
         {"tag": "hr"},
     ]
-    
+
     if battery:
         icon = "🔌" if battery.power_plugged else "🔋"
         elements.append({"tag": "div", "text": {"tag": "lark_md", "content": f"{icon} **电池:** {battery.percent}% {'已接通电源' if battery.power_plugged else '使用电池'}"}})
-    
+
     elements.extend([
         {"tag": "div", "text": {"tag": "lark_md", "content": f"**运行时间:** {str(uptime).split('.')[0]}"}},
         {"tag": "div", "text": {"tag": "lark_md", "content": f"**系统:** {platform.system()} {platform.release()}"}},
         {"tag": "hr"},
         {"tag": "note", "elements": [{"tag": "plain_text", "content": f"OpenClaw Monitor · {datetime.now().strftime('%Y-%m-%d %H:%M')}"}]}
     ])
-    
+
     client.send_poster("🖥️ 系统监控", elements)
     print("[OK] Monitor report sent")
 
@@ -445,9 +445,9 @@ def cmd_monitor(args):
 def cmd_daily(args):
     """每日综合报告"""
     client = get_client()
-    
+
     now = datetime.now()
-    
+
     # 读取新闻历史
     hist_file = BASE_DIR / "news_history.json"
     news_count = 0
@@ -458,10 +458,10 @@ def cmd_daily(args):
             news_count = len([e for e in hist.get('sent', []) if today in e.get('time', '')])
         except:
             news_count = 0
-    
+
     # 读取统计
     stats = load_stats()
-    
+
     # 构建报告
     elements = [
         {"tag": "div", "text": {"tag": "lark_md", "content": f"**📊 每日报告** `{now.strftime('%Y-%m-%d')}`"}},
@@ -478,7 +478,7 @@ def cmd_daily(args):
         {"tag": "hr"},
         {"tag": "note", "elements": [{"tag": "plain_text", "content": f"OpenClaw Daily · {now.strftime('%Y-%m-%d')}"}]}
     ]
-    
+
     client.send_poster("📊 每日报告", elements)
     print("[OK] Daily report sent")
 
@@ -491,7 +491,7 @@ def cmd_stats(args):
     """发送统计信息"""
     client = get_client()
     stats = load_stats()
-    
+
     elements = [
         {"tag": "div", "text": {"tag": "lark_md", "content": "**📈 Feishu 助手统计**"}},
         {"tag": "hr"},
@@ -500,7 +500,7 @@ def cmd_stats(args):
         {"tag": "hr"},
         {"tag": "note", "elements": [{"tag": "plain_text", "content": f"统计时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}"}]}
     ]
-    
+
     client.send_poster("📈 统计", elements)
     print("[OK] Stats sent")
 
@@ -512,21 +512,21 @@ def cmd_stats(args):
 def cmd_cron_status(args):
     """查看定时任务状态"""
     import subprocess
-    
+
     client = get_client()
-    
+
     try:
         result = subprocess.run(
             ['schtasks', '/query', '/fo', 'list'],
             capture_output=True, text=True, timeout=10
         )
         output = result.stdout
-        
+
         # 筛选 OpenClaw 相关任务
         lines = output.split('\n')
         tasks = []
         current = {}
-        
+
         for line in lines:
             line = line.strip()
             if 'TaskName:' in line:
@@ -539,25 +539,25 @@ def cmd_cron_status(args):
                 current['status'] = line.split('Status:')[1].strip()
                 tasks.append(current)
                 current = {}
-        
+
         if not tasks:
             client.send_text("没有找到 OpenClaw 相关任务")
             print("[INFO] No OpenClaw tasks found")
             return
-        
+
         # 构建报告
         lines = ["**⏰ OpenClaw 定时任务**\n"]
-        
+
         for t in tasks:
             status_icon = "✅" if t.get('status') == 'Ready' else "🔄" if t.get('status') == 'Running' else "❌"
             lines.append(f"{status_icon} **{t['name']}**")
             lines.append(f"   下次: {t.get('next', 'N/A')}")
             lines.append(f"   状态: {t.get('status', 'N/A')}")
             lines.append("")
-        
+
         client.send_text('\n'.join(lines))
         print(f"[OK] Cron status sent: {len(tasks)} tasks")
-        
+
     except Exception as e:
         print(f"[ERROR] {e}")
 
@@ -569,25 +569,25 @@ def cmd_cron_status(args):
 def cmd_weather(args):
     """发送天气预报"""
     client = get_client()
-    
+
     # 简单天气获取
     try:
         url = "https://wttr.in/?format=j1"
         req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
         with urllib.request.urlopen(req, timeout=10) as resp:
             data = json.loads(resp.read())
-        
+
         current = data['current_condition'][0]
         temp_C = current['temp_C']
         desc = current['weatherDesc'][0]['value']
         wind = current['windspeedKmph']
         humidity = current['humidity']
-        
+
         # 今日预报
         tomorrow = data['weather'][1] if len(data['weather']) > 1 else {}
         tomorrow_desc = tomorrow.get('hourly', [{}])[4].get('weatherDesc', [{}])[0].get('value', 'N/A') if tomorrow else 'N/A'
         tomorrow_temp = tomorrow.get('maxTempC', 'N/A') if tomorrow else 'N/A'
-        
+
         elements = [
             {"tag": "div", "text": {"tag": "lark_md", "content": f"**🌤️ 天气预报**"}},
             {"tag": "hr"},
@@ -599,10 +599,10 @@ def cmd_weather(args):
             {"tag": "div", "text": {"tag": "lark_md", "content": "[Weather.com](https://weather.com)"}},
             {"tag": "note", "elements": [{"tag": "plain_text", "content": f"OpenClaw · {datetime.now().strftime('%H:%M')}"}]}
         ]
-        
+
         client.send_poster("🌤️ 天气预报", elements)
         print("[OK] Weather sent")
-        
+
     except Exception as e:
         client.send_text(f"获取天气失败: {e}")
         print(f"[ERROR] {e}")
@@ -617,21 +617,21 @@ def cmd_remind(args):
     if len(args) < 2:
         print("[ERROR] 需要时间和内容: remind <minutes> <message>")
         return
-    
+
     try:
         minutes = int(args[0])
         message = ' '.join(args[1:])
     except ValueError:
         print("[ERROR] 时间必须是数字")
         return
-    
+
     client = get_client()
     remind_time = datetime.now() + timedelta(minutes=minutes)
-    
+
     msg = f"⏰ **提醒** ({remind_time.strftime('%H:%M')})\n\n{message}"
     client.send_text(msg)
     print(f"[OK] Reminder set for {remind_time.strftime('%H:%M')}: {message}")
-    
+
     stats = load_stats()
     stats['sent'] = stats.get('sent', 0) + 1
     save_stats(stats)
@@ -644,7 +644,7 @@ def cmd_remind(args):
 def cmd_menu(args):
     """发送快捷命令菜单"""
     client = get_client()
-    
+
     elements = [
         {"tag": "div", "text": {"tag": "lark_md", "content": "**📋 OpenClaw 快捷命令**\n回复数字使用"}},
         {"tag": "hr"},
@@ -655,7 +655,7 @@ def cmd_menu(args):
         {"tag": "div", "text": {"tag": "lark_md", "content": "发送数字即可执行对应命令"}},
         {"tag": "note", "elements": [{"tag": "plain_text", "content": "OpenClaw Menu"}]}
     ]
-    
+
     client.send_poster("📋 快捷命令", elements)
     print("[OK] Menu sent")
 
@@ -677,17 +677,17 @@ def cmd_clipboard(args):
             capture_output=True, text=True, timeout=5
         )
         content = result.stdout.strip()
-    
+
     if not content:
         print("[INFO] Clipboard is empty")
         return
-    
+
     client = get_client()
-    
+
     # 如果太长，截断
     if len(content) > 2000:
         content = content[:1997] + "..."
-    
+
     client.send_text(f"📋 **剪贴板内容:**\n\n{content}")
     print(f"[OK] Clipboard sent ({len(content)} chars)")
 
@@ -699,28 +699,28 @@ def cmd_clipboard(args):
 def cmd_files(args):
     """发送工作区文件列表"""
     client = get_client()
-    
+
     # 获取指定目录，默认为 30-scripts-tools
     target = BASE_DIR if not args else Path(args[0])
-    
+
     if not target.exists():
         print(f"[ERROR] 目录不存在: {target}")
         return
-    
+
     # 统计
     files = list(target.glob('*'))
     dirs = [f for f in files if f.is_dir()]
     file_count = len([f for f in files if f.is_file()])
-    
+
     # 构建消息
     lines = [f"📁 {target.name or '工作区'}\n"]
     lines.append(f"文件: {file_count} 个, 目录: {len(dirs)} 个\n")
     lines.append("-" * 30)
-    
+
     # 列出子目录
     for d in sorted(dirs)[:10]:
         lines.append(f"📂 {d.name}/")
-    
+
     # 列出 py 文件
     py_files = list(target.glob('*.py'))[:15]
     if py_files:
@@ -729,7 +729,7 @@ def cmd_files(args):
         for f in py_files:
             size = f.stat().st_size
             lines.append(f"  • {f.name} ({size//1024}KB)")
-    
+
     msg = '\n'.join(lines)
     client.send_text(msg)
     print(f"[OK] Files list sent: {file_count} files")
@@ -742,7 +742,7 @@ def cmd_files(args):
 def cmd_interactive(args):
     """发送带按钮的交互卡片"""
     client = get_client()
-    
+
     elements = [
         {"tag": "div", "text": {"tag": "lark_md", "content": "**🎛️ OpenClaw 控制面板**"}},
         {"tag": "hr"},
@@ -756,7 +756,7 @@ def cmd_interactive(args):
         {"tag": "div", "text": {"tag": "lark_md", "content": "点击按钮触发对应功能"}},
         {"tag": "note", "elements": [{"tag": "plain_text", "content": "OpenClaw · Interactive Panel"}]}
     ]
-    
+
     client.send_poster("🎛️ 控制面板", elements)
     print("[OK] Interactive card sent")
 
@@ -769,10 +769,10 @@ def main():
     if len(sys.argv) < 2:
         print(__doc__)
         return
-    
+
     cmd = sys.argv[1].lower()
     args = sys.argv[2:]
-    
+
     commands = {
         'msg': cmd_msg,
         'card': cmd_card,
@@ -801,14 +801,14 @@ def main():
         'clipboard': cmd_clipboard,
         'paste': cmd_clipboard,
     }
-    
+
     if cmd in ('help', '-h', '--help'):
         print(__doc__)
         print("\n可用命令:")
         for c in sorted(commands.keys()):
             print(f"  {c}")
         return
-    
+
     if cmd in commands:
         commands[cmd](args)
     else:

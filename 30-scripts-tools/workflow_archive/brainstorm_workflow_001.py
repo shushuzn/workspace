@@ -28,22 +28,22 @@ if sys.platform == 'win32':
 def show_status() -> None:
     """Show current brainstorm status"""
     base = Path("flow-archive/brainstorm-current")
-    
+
     files = {
         "topic": base / "brainstorm_topic.json",
         "raw": base / "brainstorm_ideas_raw.json",
         "filtered": base / "brainstorm_ideas_filtered.json",
         "prioritized": base / "brainstorm_ideas_prioritized.json"
     }
-    
+
     print("="*60)
     print("[BRAINSTORM] Status")
     print("="*60)
-    
+
     for name, path in files.items():
         status = "[OK]" if path.exists() else "[MISSING]"
         print(f"  {status} {name}")
-    
+
     # Show current topic if exists
     if files["topic"].exists():
         with open(files["topic"], encoding="utf-8") as f:
@@ -95,11 +95,11 @@ Fixes:
 
 Run the full brainstorm workflow"""
     import subprocess
-    
+
     print("="*60)
     print("[BRAINSTORM] Full Workflow")
     print("="*60)
-    
+
     # Step 1: Define
     print("\n[Step 1] Defining problem...")
     result = subprocess.run(
@@ -109,7 +109,7 @@ Run the full brainstorm workflow"""
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
         return
-    
+
     # Step 2: Diverge
     print("\n[Step 2] Generating ideas...")
     result = subprocess.run(
@@ -119,7 +119,7 @@ Run the full brainstorm workflow"""
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
         return
-    
+
     # Step 3: Filter
     print("\n[Step 3] Filtering ideas...")
     result = subprocess.run(
@@ -129,7 +129,7 @@ Run the full brainstorm workflow"""
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
         return
-    
+
     # Step 4: Prioritize
     print("\n[Step 4] Prioritizing...")
     result = subprocess.run(
@@ -139,12 +139,12 @@ Run the full brainstorm workflow"""
     if result.returncode != 0:
         print(f"Error: {result.stderr}")
         return
-    
+
     # Show results
     print("\n" + "="*60)
     print("[BRAINSTORM] Complete!")
     print("="*60)
-    
+
     show_status()
 
 def show_methods() -> None:
@@ -165,76 +165,76 @@ def main():
         show_status()
         show_methods()
         return
-    
+
     if sys.argv[1] == "--status":
         show_status()
         return
-    
+
     if sys.argv[1] == "--scamper":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
         subprocess.run([sys.executable, "30-scripts-tools/brainstorm_scamper.py", topic], timeout=60)
         return
-    
+
     if sys.argv[1] == "--sixhats":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
         subprocess.run([sys.executable, "30-scripts-tools/brainstorm_sixhats.py", topic], timeout=60)
         return
-    
+
     if sys.argv[1] == "--reverse":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
         subprocess.run([sys.executable, "30-scripts-tools/brainstorm_reverse.py", topic], timeout=60)
         return
-    
+
     if sys.argv[1] == "--random":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
         subprocess.run([sys.executable, "30-scripts-tools/brainstorm_random.py", topic], timeout=60)
         return
-    
+
     if sys.argv[1] == "--analogy":
         topic = " ".join(sys.argv[2:]) or "OpenClaw tools"
         import subprocess
         subprocess.run([sys.executable, "30-scripts-tools/brainstorm_analogy.py", topic], timeout=60)
         return
-    
+
     if sys.argv[1] == "--refine":
         topic = " ".join(sys.argv[2:]) or "优化工作流"
         import subprocess
         subprocess.run([sys.executable, "30-scripts-tools/brainstorm_refine.py", topic], timeout=60)
         return
-    
+
     if sys.argv[1] == "--next":
         import subprocess
         subprocess.run([sys.executable, "30-scripts-tools/brainstorm_next.py"], timeout=60)
         return
-    
+
     if sys.argv[1] == "--step":
         step = sys.argv[2] if len(sys.argv) > 2 else "1"
         topic = sys.argv[3] if len(sys.argv) > 3 else None
-        
+
         steps = {
             "1": "brainstorm_001_define.py",
-            "2": "brainstorm_002_diverge.py", 
+            "2": "brainstorm_002_diverge.py",
             "3": "brainstorm_003_filter.py",
             "4": "brainstorm_004_prioritize.py"
         }
-        
+
         script = steps.get(step)
         if not script:
             print(f"Unknown step: {step}")
             return
-        
+
         cmd = [sys.executable, f"30-scripts-tools/{script}"]
         if topic:
             cmd.append(topic)
-        
+
         import subprocess
         subprocess.run(cmd, timeout=60)
         return
-    
+
     # Full workflow with topic
     topic = " ".join(sys.argv[1:])
     run_full_workflow(topic)

@@ -39,7 +39,7 @@ from typing import Dict, List, Optional
 
 class OptimizeMaster:
     """优化大师"""
-    
+
     # 可用优化工具
     OPTIMIZERS = {
         "compress": {
@@ -63,29 +63,29 @@ class OptimizeMaster:
             "description": "分析工作流"
         }
     }
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.tools_dir = self.workspace / "30-scripts-tools"
         self.log_file = self.workspace / "13-memory/optimization/master_log.json"
-        
+
         self._ensure_log()
-    
+
     def _ensure_log(self):
         """确保日志文件存在"""
         if not self.log_file.exists():
             self.log_file.write_text(json.dumps([], ensure_ascii=False, indent=2))
-    
+
     def _load_log(self) -> List[Dict]:
         """加载日志"""
         with open(self.log_file, 'r', encoding='utf-8') as f:
             return json.load(f)
-    
+
     def _save_log(self, log: List[Dict]):
         """保存日志"""
         with open(self.log_file, 'w', encoding='utf-8') as f:
             json.dump(log, f, ensure_ascii=False, indent=2)
-    
+
     def run_optimizer(self, optimizer_name: str) -> Dict:
         """
 # ==============================================================================
@@ -132,13 +132,13 @@ Fixes:
 运行指定的优化器"""
         if optimizer_name not in self.OPTIMIZERS:
             return {"status": "error", "reason": f"Unknown optimizer: {optimizer_name}"}
-        
+
         optimizer = self.OPTIMIZERS[optimizer_name]
         script = self.tools_dir / optimizer["script"]
-        
+
         if not script.exists():
             return {"status": "error", "reason": f"Script not found: {optimizer['script']}"}
-        
+
         try:
             cmd = [sys.executable, str(script)] + optimizer["args"]
             result = subprocess.run(
@@ -148,7 +148,7 @@ Fixes:
                 timeout=60,
                 cwd=str(self.workspace)
             )
-            
+
             # 记录
             log = self._load_log()
             log.append({
@@ -158,18 +158,18 @@ Fixes:
                 "output": result.stdout[:500] if result.returncode == 0 else result.stderr[:200]
             })
             self._save_log(log)
-            
+
             return {
                 "status": "success" if result.returncode == 0 else "error",
                 "optimizer": optimizer_name,
                 "output": result.stdout[:500] if result.returncode == 0 else result.stderr[:200]
             }
-            
+
         except subprocess.TimeoutExpired:
             return {"status": "error", "reason": "timeout"}
         except Exception as e:
             return {"status": "error", "reason": str(e)}
-    
+
     def run_all_optimizers(self) -> Dict:
         """运行所有优化器"""
         results = []

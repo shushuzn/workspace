@@ -31,8 +31,8 @@ class CPUConfig:
 
 class GeneratedMaterial:
     """生成的材料"""
-    
-    def __init__(self, formula: str, elements: List[str], 
+
+    def __init__(self, formula: str, elements: List[str],
                  predicted_properties: Dict = None, validity_score: float = 0.0):
         self.formula = formula
         self.elements = elements
@@ -42,13 +42,13 @@ class GeneratedMaterial:
 
 class VAEModel:
     """VAE 模型 - 材料生成"""
-    
+
     def __init__(self, config: CPUConfig = None):
         self.config = config or CPUConfig()
         self.model = None
         self.mp_client = None
         self.trained = False
-    
+
     def load_model(self, model_path: Optional[str] = None):
         """加载 VAE 模型"""
         if model_path:
@@ -58,25 +58,25 @@ class VAEModel:
             print("[VAE] 模型加载完成")
         else:
             print("[VAE] 需要训练或使用 MP API 数据")
-    
+
     def set_mp_client(self, mp_client):
         """设置 MP API 客户端"""
         self.mp_client = mp_client
         print("[VAE] 已配置 MP API")
-    
+
     def train(self, training_data: List[Dict], epochs: int = 10, batch_size: int = 32):
         """训练 VAE"""
         print(f"[VAE] 训练模型...")
         print(f"  数据量：{len(training_data)}")
         print(f"  Epochs: {epochs}")
-        
+
         # TODO: 实际训练逻辑
         # 需要 PyTorch/TensorFlow 实现
-        
+
         self.trained = True
         print("[VAE] 训练完成")
-    
-    def generate(self, n_samples: int = 5, 
+
+    def generate(self, n_samples: int = 5,
                  conditions: Dict = None) -> List[GeneratedMaterial]:
         """
         生成新材料
@@ -90,11 +90,11 @@ class VAEModel:
         """
         if not self.trained and not self.mp_client:
             raise RuntimeError("[VAE] Model not trained and no MP API available")
-        
+
         # 使用 MP API 获取类似材料作为"生成"结果
         if self.mp_client:
             materials = []
-            
+
             # 根据条件搜索
             if conditions:
                 # 例如：搜索特定带隙范围的材料
@@ -113,7 +113,7 @@ class VAEModel:
                             validity_score=0.8
                         )
                         materials.append(mat_obj)
-            
+
             # 无条件生成：随机搜索
             if not materials:
                 formulas = ['LiFePO4', 'SiO2', 'TiO2', 'LiCoO2', 'LiMn2O4']
@@ -131,12 +131,12 @@ class VAEModel:
                             validity_score=0.9
                         )
                         materials.append(mat_obj)
-            
+
             return materials
-        
+
         # 无模拟数据
         raise RuntimeError("[VAE] No trained model or MP API available")
-    
+
     def get_stats(self) -> Dict:
         """获取统计"""
         return {
@@ -156,10 +156,10 @@ def main():
     print("=" * 60)
     print("VAE Model - Production Version")
     print("=" * 60)
-    
+
     config = CPUConfig()
     model = get_vae_model(config)
-    
+
     # 配置 MP API
     try:
         from materials_project_api_v2 import MaterialsProjectClient
@@ -167,10 +167,10 @@ def main():
         model.set_mp_client(mp_client)
     except Exception as e:
         print(f"[WARN] MP API not available: {e}")
-    
+
     # 测试生成
     print("\nGenerating materials...")
-    
+
     try:
         # 无条件生成
         materials = model.generate(n_samples=3)
@@ -181,10 +181,10 @@ def main():
             print(f"    Band Gap: {mat.predicted_properties.get('band_gap', 'N/A')} eV")
             print(f"    Formation Energy: {mat.predicted_properties.get('formation_energy', 'N/A')} eV/atom")
             print(f"    Validity: {mat.validity_score:.1%}")
-    
+
     except Exception as e:
         print(f"\nGeneration error: {e}")
-    
+
     print("\n" + "=" * 60)
     print("VAE ready (real data)")
     print("=" * 60)

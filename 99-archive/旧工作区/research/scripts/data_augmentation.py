@@ -70,9 +70,9 @@ def lig_physics_model(P, v, co_ratio, seed=42):
     - SSA ~ 1/石墨化程度 (反比)
     """
     np.random.seed(seed)
-    
+
     E = P / (v * 0.01)  # J/cm²
-    
+
     # 电导率模型 (分段函数)
     if E < 3:
         sigma = 100 * (E/3) * (co_ratio/3.3)
@@ -82,21 +82,21 @@ def lig_physics_model(P, v, co_ratio, seed=42):
         sigma = 4500 * (1 - (E-12)/50)
     else:
         sigma = 2000 * (20/E)  # 过度烧蚀衰减
-    
+
     # 添加噪声 (15%)
     sigma *= (1 + np.random.normal(0, 0.15))
     sigma = max(50, min(8000, sigma))
-    
+
     # SSA 模型
     ssa = 400 + 600 * (3.3/co_ratio) * np.exp(-E/15)
     ssa *= (1 + np.random.normal(0, 0.12))  # 12% 噪声
     ssa = max(100, min(2000, ssa))
-    
+
     # ID/IG 模型
     id_ig = 0.5 + 0.12 * E
     id_ig *= (1 + np.random.normal(0, 0.1))  # 10% 噪声
     id_ig = max(0.3, min(3.0, id_ig))
-    
+
     return sigma, ssa, id_ig
 
 # 生成合成数据
@@ -109,14 +109,14 @@ for _ in range(n_synth):
     P = np.random.choice([0.15, 0.25, 0.35, 0.45, 0.55, 0.70])
     v = np.random.choice([20, 35, 50, 65, 80])
     co = np.random.choice([3.3, 2.5, 0.9])
-    
+
     # 添加小扰动
     P *= (1 + np.random.uniform(-0.05, 0.05))
     v *= (1 + np.random.uniform(-0.05, 0.05))
-    
+
     # 计算性能
     sigma, ssa, id_ig = lig_physics_model(P, v, co)
-    
+
     synth_data.append({
         'P_W': round(P, 3),
         'v_mms': round(v, 1),
@@ -176,7 +176,7 @@ active_data = []
 for idx in top_uncertain_idx:
     P, v, E, co = candidates[idx]
     sigma, ssa, id_ig = lig_physics_model(P, v, co, seed=int(P*1000))
-    
+
     active_data.append({
         'P_W': round(P, 3),
         'v_mms': round(v, 1),
@@ -204,14 +204,14 @@ np.random.seed(456)
 for _ in range(20):
     # 随机选择现有样本
     row = df_existing.iloc[np.random.randint(len(df_existing))]
-    
+
     # 添加小噪声
     P_new = row['P_W'] * (1 + np.random.normal(0, 0.03))
     v_new = row['v_mms'] * (1 + np.random.normal(0, 0.05))
     sigma_new = row['sigma_Sm'] * (1 + np.random.normal(0, 0.08))
     ssa_new = row['ssa_m2g'] * (1 + np.random.normal(0, 0.1))
     id_ig_new = row['id_ig'] * (1 + np.random.normal(0, 0.05))
-    
+
     aug_data.append({
         'P_W': round(max(0.05, P_new), 3),
         'v_mms': round(max(5, v_new), 1),

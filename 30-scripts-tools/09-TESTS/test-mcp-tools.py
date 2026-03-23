@@ -23,7 +23,7 @@ async def main():
     print(f"找到 {len(result.get('files', []))} 个文件")
     for f in result.get('files', [])[:5]:
         print(f"  - {f}")
-    
+
     # 测试文件读取
     print("\n📖 测试 filesystem.read_file...")
     result = await call_tool("filesystem.read_file", {
@@ -32,7 +32,7 @@ async def main():
     if 'content' in result:
         print(f"读取成功，内容长度：{len(result['content'])}")
         print(result['content'][:200])
-    
+
     # 测试网页抓取
     print("\n🌐 测试 fetch.get...")
     result = await call_tool("fetch.get", {

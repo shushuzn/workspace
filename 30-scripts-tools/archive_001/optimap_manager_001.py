@@ -24,11 +24,11 @@ ROADMAP_FILE = Path("flow-archive/optimization-roadmap.json")
 
 class OptimizationRoadmapManager:
     """优化路线图管理器"""
-    
+
     def __init__(self):
         self.file = ROADMAP_FILE
         self._ensure_roadmap()
-    
+
     def _ensure_roadmap(self):
         if not self.file.exists():
             default = {
@@ -44,15 +44,15 @@ class OptimizationRoadmapManager:
             }
             with open(self.file, "w", encoding="utf-8") as f:
                 json.dump(default, f, ensure_ascii=False, indent=2)
-    
+
     def _load(self) -> dict:
         with open(self.file, "r", encoding="utf-8") as f:
             return json.load(f)
-    
+
     def _save(self, data: dict):
         with open(self.file, "w", encoding="utf-8") as f:
             json.dump(data, f, ensure_ascii=False, indent=2)
-    
+
     def status(self) -> dict:
         """
 # ==============================================================================
@@ -98,7 +98,7 @@ Fixes:
 
 查看状态"""
         data = self._load()
-        
+
         return {
             "roadmap_id": data["roadmap_id"],
             "name": data["name"],
@@ -109,7 +109,7 @@ Fixes:
             "target": data.get("target", ""),
             "last_updated": data["last_updated"]
         }
-    
+
     def phases(self) -> list:
         """查看所有阶段"""
         data = self._load()

@@ -24,14 +24,14 @@ TOOLS_DIR = Path("30-scripts-tools")
 class ToolNamer:
     def __init__(self):
         self.tools_dir = TOOLS_DIR
-    
+
     def _to_snake(self, name):
         s1 = re.sub('(.)([A-Z][a-z]+)', r'\1_\2', name)
         return re.sub('([a-z0-9])([A-Z])', r'\1_\2', s1).lower()
-    
+
     def _to_pascal(self, name):
         return ''.join(word.capitalize() for word in name.replace("-", "_").split("_"))
-    
+
     def suggest_name(self, name) -> None:
         """
 # ==============================================================================
@@ -82,7 +82,7 @@ Suggest correct naming"""
             "file": f"{snake}_001.py",
             "class": f"{self._to_pascal(snake)}001"
         }
-    
+
     def scan(self):
         results = []
         pattern = re.compile(r'^[a-z][a-z0-9_]*_\d+\.py$')

@@ -76,7 +76,7 @@ MARKETPLACE_TEMPLATES = {
         "rating": 4,
         "installs": 0
     },
-    
+
     # Development Templates
     "dev-cycle": {
         "id": "dev-cycle",
@@ -118,7 +118,7 @@ MARKETPLACE_TEMPLATES = {
         "rating": 4,
         "installs": 0
     },
-    
+
     # Brainstorm Templates
     "brainstorm-quick": {
         "id": "brainstorm-quick",
@@ -143,7 +143,7 @@ MARKETPLACE_TEMPLATES = {
         "rating": 4,
         "installs": 0
     },
-    
+
     # System Templates
     "health-check": {
         "id": "health-check",
@@ -191,58 +191,58 @@ class WorkflowMarket:
         self.installed_file = MARKET_DIR / "installed.json"
         if not self.installed_file.exists():
             self._save_installed({})
-    
+
     def _load_installed(self):
         return json.loads(self.installed_file.read_text(encoding="utf-8", errors="replace"))
-    
+
     def _save_installed(self, data):
         self.installed_file.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def list(self, category=None):
         templates = list(MARKETPLACE_TEMPLATES.values())
         if category:
             templates = [t for t in templates if t.get("category") == category]
-        
+
         installed = self._load_installed()
-        
+
         for t in templates:
             t["installed"] = t["id"] in installed
-        
+
         return {
             "templates": templates,
             "count": len(templates),
             "categories": list(set(t.get("category") for t in templates))
         }
-    
+
     def install(self, template_id):
         if template_id not in MARKETPLACE_TEMPLATES:
             return {"error": f"Template not found: {template_id}"}
-        
+
         installed = self._load_installed()
         installed[template_id] = MARKETPLACE_TEMPLATES[template_id]
         installed[template_id]["installed_at"] = str(Path().resolve())
-        
+
         self._save_installed(installed)
         MARKETPLACE_TEMPLATES[template_id]["installs"] += 1
-        
+
         return {"status": "installed", "template": template_id}
-    
+
     def uninstall(self, template_id):
         installed = self._load_installed()
         if template_id not in installed:
             return {"error": f"Template not installed: {template_id}"}
-        
+
         del installed[template_id]
         self._save_installed(installed)
-        
+
         return {"status": "uninstalled", "template": template_id}
-    
+
     def run(self, template_id) -> None:
         """Run an installed template"""
         installed = self._load_installed()
         if template_id not in installed:
             return {"error": f"Template not installed: {template_id}"}
-        
+
         template = installed[template_id]
         return {
             "template": template_id,
@@ -250,7 +250,7 @@ class WorkflowMarket:
             "steps": len(template["steps"]),
             "workflow": template["steps"]
         }
-    
+
     def categories(self) -> None:
         """List all categories"""
         cats = {}
@@ -260,12 +260,12 @@ class WorkflowMarket:
                 cats[cat] = {"count": 0, "templates": []}
             cats[cat]["count"] += 1
             cats[cat]["templates"].append(t["id"])
-        
+
         return {"categories": cats}
 
 if __name__ == "__main__":
     market = WorkflowMarket()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--list":
@@ -293,8 +293,8 @@ if __name__ == "__main__":
         print()
         print("Categories: stock, development, brainstorm, system, routine")
 
-    
-   
+
+
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计
 

@@ -39,7 +39,7 @@ from .risk import risk_profile, risk_report, diversification_check
 
 # Watchlist v2 (merged from watchlist)
 from .watchlist_v2 import (
-    WatchlistManager, add_to_watchlist, remove_from_watchlist, 
+    WatchlistManager, add_to_watchlist, remove_from_watchlist,
     get_watchlist, list_watchlists,
     watchlist_performance, compare_watchlists
 )
@@ -95,7 +95,7 @@ from .backtest import backtest_report, backtest_all
 
 # EARNINGS ANALYSIS (merged from earnings.py)
 from .earnings_analysis import (
-    predict_earnings_beat, earnings_report, 
+    predict_earnings_beat, earnings_report,
     get_earnings_data, calc_earnings_yield
 )
 

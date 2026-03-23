@@ -27,21 +27,21 @@ def generate_comparison_report(experimental_data_path, predictions_path):
     """生成对比报告"""
     # 加载数据
     df_exp = load_experimental_data(experimental_data_path)
-    
+
     with open(predictions_path, 'r', encoding='utf-8') as f:
         predictions = json.load(f)['recommended']
-    
+
     # 对比分析
     results = []
     for _, row in df_exp.iterrows():
         exp_id = row['实验 ID']
         pred = next((p for p in predictions if f"EXP-2026-03-11-{p['rank']:03d}" == exp_id), None)
-        
+
         if pred:
             predicted_cond = pred['predicted_conductivity']
             experimental_cond = row['电导率_平均']
             error = calculate_error(predicted_cond, experimental_cond)
-            
+
             results.append({
                 '实验 ID': exp_id,
                 '预测电导率': predicted_cond,
@@ -49,18 +49,18 @@ def generate_comparison_report(experimental_data_path, predictions_path):
                 '相对误差 (%)': error,
                 '状态': '合格' if error < 20 else '需优化'
             })
-    
+
     # 生成报告
     report_df = pd.DataFrame(results)
     print(report_df)
-    
+
     # 统计
     avg_error = report_df['相对误差 (%)'].mean()
     pass_rate = (report_df['相对误差 (%)'] < 20).mean() * 100
-    
+
     print(f"\n平均误差：{avg_error:.1f}%")
     print(f"合格率 (<20% 误差): {pass_rate:.1f}%")
-    
+
     return report_df
 
 if __name__ == "__main__":

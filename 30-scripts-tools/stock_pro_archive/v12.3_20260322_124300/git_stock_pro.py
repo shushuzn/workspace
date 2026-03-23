@@ -51,21 +51,21 @@ def git_log(n=5):
 def archive_with_git(version, notes=""):
     """Archive version and commit to git"""
     from archive_stock_pro import archive_version
-    
+
     # Archive first
     dest, count = archive_version(version, notes)
-    
+
     # Git operations
     print(f"Git status: {git_status()}")
-    
+
     # Add and commit
     add_ok, add_msg = git_add_all()
     print(f"Git add: {add_msg}")
-    
+
     commit_msg = f"Stock PRO v{version}: {notes} [{datetime.now().strftime('%Y-%m-%d')}]"
     commit_ok, commit_msg = git_commit(commit_msg)
     print(f"Git commit: {commit_msg}")
-    
+
     if commit_ok:
         push_ok, push_msg = git_push()
         print(f"Git push: {push_msg}")
@@ -76,27 +76,27 @@ def archive_with_git(version, notes=""):
 
 if __name__ == "__main__":
     import sys
-    
+
     action = sys.argv[1] if len(sys.argv) > 1 else "status"
-    
+
     if action == "status":
         print(f"Git status: {git_status()}")
         print(f"\nRecent commits:")
         print(git_log(5))
-    
+
     elif action == "commit":
         msg = sys.argv[2] if len(sys.argv) > 2 else "Update"
         ok, msg = git_commit(msg)
         print(f"[{'OK' if ok else 'FAIL'}] {msg}")
-    
+
     elif action == "push":
         ok, msg = git_push()
         print(f"[{'OK' if ok else 'FAIL'}] {msg}")
-    
+
     elif action == "log":
         n = int(sys.argv[2]) if len(sys.argv) > 2 else 10
         print(git_log(n))
-    
+
     elif action == "archive":
         version = sys.argv[2] if len(sys.argv) > 2 else "unknown"
         notes = sys.argv[3] if len(sys.argv) > 3 else ""

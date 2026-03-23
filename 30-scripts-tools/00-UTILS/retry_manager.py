@@ -45,13 +45,13 @@ def retry(
     """
     if logger_instance is None:
         logger_instance = logger
-    
+
     def decorator(func: Callable) -> Callable:
         @wraps(func)
         def wrapper(*args, **kwargs) -> Any:
             last_exception = None
             current_delay = delay_seconds
-            
+
             for attempt in range(1, max_attempts + 1):
                 try:
                     logger_instance.info(f"Attempt {attempt}/{max_attempts} for {func.__name__}")
@@ -61,21 +61,21 @@ def retry(
                     logger_instance.warning(
                         f"Attempt {attempt}/{max_attempts} failed for {func.__name__}: {e}"
                     )
-                    
+
                     if attempt < max_attempts:
                         logger_instance.info(f"Retrying in {current_delay:.1f} seconds...")
                         time.sleep(current_delay)
                         current_delay *= backoff_factor
-            
+
             logger_instance.error(f"All {max_attempts} attempts failed for {func.__name__}")
             raise RetryError(f"Failed after {max_attempts} attempts: {last_exception}")
-        
+
         return wrapper
     return decorator
 
 class RetryManager:
     """重试管理器"""
-    
+
     def __init__(
         self,
         max_attempts: int = 3,
@@ -99,7 +99,7 @@ class RetryManager:
             'failed_calls': 0,
             'total_retries': 0
         }
-    
+
     def execute(
         self,
         func: Callable,
@@ -124,7 +124,7 @@ class RetryManager:
         """
         self.stats['total_calls'] += 1
         current_delay = self.delay_seconds
-        
+
         for attempt in range(1, self.max_attempts + 1):
             try:
                 logger.info(f"Execute attempt {attempt}/{self.max_attempts} for {func.__name__}")
@@ -136,20 +136,20 @@ class RetryManager:
                 logger.warning(
                     f"Execute attempt {attempt}/{self.max_attempts} failed: {e}"
                 )
-                
+
                 if attempt < self.max_attempts:
                     logger.info(f"Retrying in {current_delay:.1f} seconds...")
                     time.sleep(current_delay)
                     current_delay *= self.backoff_factor
-        
+
         self.stats['failed_calls'] += 1
         logger.error(f"All {self.max_attempts} attempts failed for {func.__name__}")
         raise RetryError(f"Failed after {self.max_attempts} attempts")
-    
+
     def get_stats(self) -> dict:
         """获取重试统计"""
         return self.stats
-    
+
     def reset_stats(self):
         """重置统计"""
         self.stats = {
@@ -168,28 +168,28 @@ if __name__ == "__main__":
         if random.random() < 0.7:
             raise ConnectionError("Network error")
         return "Success"
-    
+
     # 测试
     try:
         result = unstable_api_call()
         print(f"Result: {result}")
     except RetryError as e:
         print(f"Failed: {e}")
-    
+
     # 使用管理器
     manager = RetryManager(max_attempts=3, delay_seconds=1)
-    
+
     def another_unstable_function():
         import random
         if random.random() < 0.5:
             raise TimeoutError("Timeout")
         return "Data"
-    
+
     try:
         result = manager.execute(another_unstable_function, exceptions=(TimeoutError,))
         print(f"Result: {result}")
     except RetryError as e:
         print(f"Failed: {e}")
-    
+
     # 查看统计
     print(f"Stats: {manager.get_stats()}")

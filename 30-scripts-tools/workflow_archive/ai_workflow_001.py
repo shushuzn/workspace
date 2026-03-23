@@ -48,12 +48,12 @@ class AIWorkflow:
             "description": "Development workflow"
         }
     }
-    
+
     def analyze_intent(self, text):
         """Analyze user intent from text"""
         text_lower = text.lower()
         scores = {}
-        
+
         for intent, rule in self.SUGGESTIONS.items():
             score = 0
             for keyword in rule["keywords"]:
@@ -61,23 +61,23 @@ class AIWorkflow:
                     score += 1
             if score > 0:
                 scores[intent] = score
-        
+
         if not scores:
             return {"intent": "unknown", "confidence": 0, "suggestion": None}
-        
+
         best_intent = max(scores, key=scores.get)
         confidence = scores[best_intent] / len(self.SUGGESTIONS[best_intent]["keywords"])
-        
+
         return {
             "intent": best_intent,
             "confidence": min(confidence, 1.0),
             "suggestion": self.SUGGESTIONS[best_intent]
         }
-    
+
     def suggest_workflow(self, context=None):
         """Suggest best workflow based on context"""
         context = context or ""
-        
+
         # Time-based suggestions
         hour = datetime.now().hour
         if 6 <= hour < 9:
@@ -90,20 +90,20 @@ class AIWorkflow:
             time_context = "afternoon work"
         else:
             time_context = "evening review"
-        
+
         full_context = f"{context} {time_context}"
         result = self.analyze_intent(full_context)
-        
+
         return {
             "time": time_context,
             "analysis": result,
             "alternative": self.SUGGESTIONS.get("dev")
         }
-    
+
     def generate_plan(self, goal):
         """Generate a plan to achieve goal"""
         intent = self.analyze_intent(goal)
-        
+
         plans = {
             "stock": [
                 "workflow_stock_001.py --run research {symbol}",
@@ -126,9 +126,9 @@ class AIWorkflow:
                 "brainstorm_scamper_001.py"
             ]
         }
-        
+
         plan = plans.get(intent["intent"], plans["dev"])
-        
+
         return {
             "goal": goal,
             "intent": intent["intent"],
@@ -136,7 +136,7 @@ class AIWorkflow:
             "plan": plan,
             "estimated_steps": len(plan)
         }
-    
+
     def chat_mode(self, message):
         """
 # ==============================================================================
@@ -183,38 +183,38 @@ Fixes:
 Simple chat mode for workflow assistance"""
         # Handle common commands
         message_lower = message.lower()
-        
+
         if any(word in message_lower for word in ["help", "帮助", "?"]):
             return {
                 "response": "I can help with:\n- Stock analysis: 'analyze AAPL'\n- Code generation: 'write a tool'\n- Brainstorm: 'brainstorm ideas'\n- Health check: 'check system'",
                 "action": None
             }
-        
+
         if any(word in message_lower for word in ["analyze", "分析", "stock"]):
             return {
                 "response": "I'll run stock analysis workflow for you.",
                 "action": "workflow_stock_001.py --run full AAPL"
             }
-        
+
         if any(word in message_lower for word in ["health", "状态", "检查"]):
             return {
                 "response": "Running health check...",
                 "action": "workflow_health_001.py"
             }
-        
+
         if any(word in message_lower for word in ["dev", "开发", "工具"]):
             return {
                 "response": "Running development workflow...",
                 "action": "workflow_master_001.py --run dev"
             }
-        
+
         intent = self.analyze_intent(message)
         if intent["suggestion"]:
             return {
                 "response": f"I think you want: {intent['suggestion']['description']}",
                 "action": intent["suggestion"]["workflow"]
             }
-        
+
         return {
             "response": "I'm not sure what you need. Try: 'help' for suggestions.",
             "action": None
@@ -222,7 +222,7 @@ Simple chat mode for workflow assistance"""
 
 if __name__ == "__main__":
     ai = AIWorkflow()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--analyze":

@@ -28,23 +28,23 @@ def main():
     parser.add_argument("action", choices=["add", "list", "search", "stats", "compress", "bridge"],
                        help="Action to perform")
     parser.add_argument("content", nargs="?", help="Content for add/search")
-    parser.add_argument("--type", "-t", default="conversation", 
+    parser.add_argument("--type", "-t", default="conversation",
                        choices=["conversation", "preference", "decision", "fact", "project"],
                        help="Memory type")
     parser.add_argument("--session", "-s", help="Session ID for bridge")
     parser.add_argument("--db", "-d", default="13-memory/memory.db", help="Database path")
     parser.add_argument("--tokens", default="5000", type=int, help="Token budget")
-    
+
     args = parser.parse_args()
-    
+
     # Initialize
     memory = DualLayerMemory(token_budget=args.tokens, db_path=args.db)
-    
+
     if args.action == "add":
         if not args.content:
             print("Error: content required for add action")
             sys.exit(1)
-        
+
         item = memory.add(args.content, args.type)
         print(json.dumps({
             "status": "added",
@@ -52,7 +52,7 @@ def main():
             "importance": round(item.importance, 3),
             "type": item.type
         }, ensure_ascii=False, indent=2))
-    
+
     elif args.action == "list":
         items = memory.get_context()
         print(json.dumps([
@@ -64,12 +64,12 @@ def main():
             }
             for i in items
         ], ensure_ascii=False, indent=2))
-    
+
     elif args.action == "search":
         if not args.content:
             print("Error: query required for search")
             sys.exit(1)
-        
+
         results = memory.search(args.content, top_k=10)
         print(json.dumps([
             {
@@ -79,28 +79,28 @@ def main():
             }
             for r in results
         ], ensure_ascii=False, indent=2))
-    
+
     elif args.action == "stats":
         stats = memory.get_stats()
         # Add archive stats
         archive_stats = memory.archive.get_stats()
         stats["archive"] = archive_stats
         print(json.dumps(stats, indent=2, ensure_ascii=False))
-    
+
     elif args.action == "compress":
         result = memory.compress()
         print(json.dumps(result, indent=2))
-    
+
     elif args.action == "bridge":
         session_id = args.session or f"session_{Path(args.db).stem}"
         essential = memory.bridge_to(session_id)
-        
+
         # Save to file
         save_path = f"13-memory/essential_{session_id}.json"
         Path(save_path).parent.mkdir(parents=True, exist_ok=True)
         with open(save_path, 'w', encoding='utf-8') as f:
             json.dump(essential, f, ensure_ascii=False, indent=2)
-        
+
         print(json.dumps({
             "status": "exported",
             "path": save_path,

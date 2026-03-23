@@ -59,16 +59,16 @@ def cmd_send(args):
     if len(args) < 2:
         print("[ERROR] 用法: py news_to_all.py <title> <url>")
         return
-    
+
     title = args[0]
     url = args[1]
-    
+
     print(f"\n[PUSH] 推送新闻: {title[:40]}...")
     print("-" * 40)
-    
+
     feishu_ok = push_to_feishu(title, url)
     qq_ok = push_to_qq(title, url)
-    
+
     print("-" * 40)
     if feishu_ok and qq_ok:
         print("[OK] 全部推送成功")
@@ -82,7 +82,7 @@ def cmd_digest(args):
     """发送摘要到所有平台"""
     print("\n[PUSH] 推送新闻摘要")
     print("-" * 40)
-    
+
     # QQ 摘要
     print("[QQ]")
     success, out, err = run_cmd('news_to_qq_napcat.py', 'digest', '5')
@@ -90,7 +90,7 @@ def cmd_digest(args):
         print("  [OK] QQ 摘要已发送")
     else:
         print(f"  [FAIL] {err[:100]}")
-    
+
     # 飞书摘要
     print("[Feishu]")
     success, out, err = run_cmd('feishu_assistant.py', 'daily')
@@ -104,7 +104,7 @@ def cmd_test(args):
     """测试所有平台"""
     print("\n[TEST] 测试所有平台连接")
     print("-" * 40)
-    
+
     # 测试 QQ
     print("[QQ]")
     success, out, err = run_cmd('news_to_qq_napcat.py', 'test')
@@ -112,7 +112,7 @@ def cmd_test(args):
         print("  [OK] QQ 连接正常")
     else:
         print(f"  [FAIL] {err[:100] if err else out[:100]}")
-    
+
     # 测试飞书
     print("[Feishu]")
     success, out, err = run_cmd('feishu_assistant.py', 'msg', '🤖 OpenClaw 测试消息')
@@ -126,16 +126,16 @@ def main():
     if len(sys.argv) < 2:
         print(__doc__)
         return
-    
+
     cmd = sys.argv[1].lower()
     args = sys.argv[2:]
-    
+
     commands = {
         'send': cmd_send,
         'digest': cmd_digest,
         'test': cmd_test,
     }
-    
+
     if cmd in commands:
         commands[cmd](args)
     else:

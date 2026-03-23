@@ -85,13 +85,13 @@ Fixes:
             cached = cache.get(symbol, data_type)
             if cached is not None:
                 return cached
-            
+
             # 执行函数
             result = func(symbol, *args, **kwargs)
-            
+
             # 写入缓存
             cache.set(symbol, data_type, result, ttl)
-            
+
             return result
         return wrapper
     return decorator
@@ -102,22 +102,22 @@ logging.basicConfig(level=logging.INFO)
 def main() -> None:
     """命令行接口"""
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Stock Data Cache Manager")
-    parser.add_argument("action", choices=["stats", "clear", "invalidate"], 
+    parser.add_argument("action", choices=["stats", "clear", "invalidate"],
                         help="Action to perform")
     parser.add_argument("--symbol", "-s", type=str, help="Stock symbol (for invalidate)")
     parser.add_argument("--type", "-t", type=str, help="Data type (for invalidate)")
     parser.add_argument("--cache-dir", type=Path, help="Custom cache directory")
-    
+
     args = parser.parse_args()
-    
+
     # 创建缓存实例
     cache = StockDataCache(cache_dir=args.cache_dir)
-    
+
     if args.action == "stats":
         cache.print_stats()
-    
+
     elif args.action == "clear":
         confirm = input("Are you sure you want to clear all cache? [y/N]: ")
         if confirm.lower() == 'y':
@@ -125,7 +125,7 @@ def main() -> None:
             print("[OK] Cache cleared")
         else:
             print("[CANCELLED] Cache clear cancelled")
-    
+
     elif args.action == "invalidate":
         if not args.symbol:
             print("[ERROR] --symbol is required for invalidate action")

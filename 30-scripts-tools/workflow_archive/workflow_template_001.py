@@ -114,16 +114,16 @@ class WorkflowTemplate:
     def generate(self, template_name, name, description=""):
         if template_name not in TEMPLATES:
             return {"error": f"Unknown template: {template_name}"}
-        
+
         template = TEMPLATES[template_name]["template"]
         class_name = "".join(word.capitalize() for word in name.split("_"))
-        
+
         content = template.format(
             name=name,
             description=description or name,
             class_name=class_name
         )
-        
+
         return {
             "status": "generated",
             "template": template_name,
@@ -133,7 +133,7 @@ class WorkflowTemplate:
 
 if __name__ == "__main__":
     tmpl = WorkflowTemplate()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--list":

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 LIG 论文准备 - 自治执行任务 V2
 自动完成语言润色检查、Cover Letter 草稿、推荐审稿人
@@ -33,7 +33,7 @@ paper_path = Path("research/docs/PAPER_DRAFT_V2.md")
 if paper_path.exists():
     with open(paper_path, 'r', encoding='utf-8') as f:
         paper_content = f.read()
-    
+
     # 语言检查
     suggestions = {
         "摘要优化": [
@@ -61,19 +61,19 @@ if paper_path.exists():
             "现状：展望清晰 ✅"
         ]
     }
-    
+
     # 保存语言润色建议
     suggestion_path = Path("research/docs/LANGUAGE_SUGGESTIONS.md")
     with open(suggestion_path, 'w', encoding='utf-8') as f:
         f.write("# 论文语言润色建议\n\n")
         f.write(f"**检查时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-        
+
         for category, items in suggestions.items():
             f.write(f"## {category}\n\n")
             for item in items:
                 f.write(f"- {item}\n")
             f.write("\n")
-        
+
         f.write("## 总体评价\n\n")
         f.write("**语言质量:** [STAR][STAR][STAR][STAR] (4/5)\n\n")
         f.write("**优点:**\n")
@@ -84,9 +84,9 @@ if paper_path.exists():
         f.write("- 部分章节可添加更多具体数据\n")
         f.write("- 建议添加算法伪代码\n")
         f.write("- 可增加统计显著性检验\n\n")
-        
+
         f.write("**建议:** 当前版本已可投稿，上述建议为可选优化项。\n")
-    
+
     print(f"  [OK] 语言润色建议已保存：{suggestion_path}")
     print(f"  总体评价：[STAR][STAR][STAR][STAR] (4/5)")
 else:
@@ -229,7 +229,7 @@ with open(reviewer_path, 'w', encoding='utf-8') as f:
     f.write("# 推荐审稿人列表\n\n")
     f.write(f"**创建时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
     f.write("**注意:** 以下邮箱为示例，投稿前需核实最新联系方式。\n\n")
-    
+
     for category, reviewer_list in reviewers.items():
         f.write(f"## {category}\n\n")
         for i, reviewer in enumerate(reviewer_list, 1):
@@ -238,7 +238,7 @@ with open(reviewer_path, 'w', encoding='utf-8') as f:
             f.write(f"- **研究方向:** {reviewer['研究方向']}\n")
             f.write(f"- **代表论文:** {reviewer['代表论文']}\n")
             f.write(f"- **邮箱:** {reviewer['邮箱']}\n\n")
-    
+
     f.write("## 选择标准\n\n")
     f.write("1. 研究领域与本文高度相关\n")
     f.write("2. 在 LIG、机器学习、材料信息学领域有影响力\n")
@@ -295,7 +295,7 @@ journal_path = Path("research/docs/JOURNAL_SELECTION.md")
 with open(journal_path, 'w', encoding='utf-8') as f:
     f.write("# 期刊选择分析\n\n")
     f.write(f"**更新时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-    
+
     for rank, info in journals.items():
         f.write(f"## {rank}: {info['名称']}\n\n")
         f.write(f"- **影响因子:** {info['影响因子']}\n")
@@ -305,7 +305,7 @@ with open(journal_path, 'w', encoding='utf-8') as f:
         f.write(f"- **理由:** {info['理由']}\n")
         f.write(f"- **投稿费:** {info['投稿费']}\n")
         f.write(f"- **要求:** {info['要求']}\n\n")
-    
+
     f.write("## 推荐策略\n\n")
     f.write("1. **首选:** npj Computational Materials\n")
     f.write("   - 方法创新性强，匹配度高\n")
@@ -361,13 +361,13 @@ package_path = Path("research/docs/SUBMISSION_PACKAGE.md")
 with open(package_path, 'w', encoding='utf-8') as f:
     f.write("# 投稿包清单\n\n")
     f.write(f"**更新时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-    
+
     for category, items in submission_package.items():
         f.write(f"## {category}\n\n")
         for item in items:
             f.write(f"- {item}\n")
         f.write("\n")
-    
+
     f.write("## 投稿步骤\n\n")
     f.write("1. 准备所有必需文件\n")
     f.write("2. 填写 Cover Letter\n")
@@ -377,7 +377,7 @@ with open(package_path, 'w', encoding='utf-8') as f:
     f.write("6. 上传文件\n")
     f.write("7. 确认提交\n")
     f.write("8. 记录投稿编号\n\n")
-    
+
     f.write("## 投稿后\n\n")
     f.write("- 等待编辑初审 (1-2 周)\n")
     f.write("- 等待审稿人评审 (4-8 周)\n")

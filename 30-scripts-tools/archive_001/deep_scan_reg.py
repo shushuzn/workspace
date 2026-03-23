@@ -11,14 +11,14 @@ print('='*70)
 # 读取每个文件的关键信息
 for f in sorted(reg_files):
     content = f.read_text(encoding='utf-8', errors='ignore')
-    
+
     # 提取描述
     desc = ''
     for line in content.split('\n')[:20]:
         if '"""' in line or "'''" in line:
             desc = line.strip().replace('"""', '').replace("'''", '')
             break
-    
+
     # 检查是否被其他文件调用
     called_by = []
     for other in Path('.').glob('*.py'):
@@ -30,9 +30,9 @@ for f in sorted(reg_files):
                 called_by.append(other.name)
         except Exception:
             pass
-    
+
     call_count = len(called_by)
-    
+
     print(f'{f.name}')
     print(f'  Desc: {desc[:60]}')
     print(f'  Called by: {call_count} files')

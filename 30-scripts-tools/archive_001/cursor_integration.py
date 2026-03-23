@@ -22,25 +22,25 @@ def check_cursor_installed():
         Path(os.environ.get('LOCALAPPDATA', '')) / "Programs" / "Cursor" / "Cursor.exe",
         Path(r"C:\Program Files\Cursor\Cursor.exe"),
     ]
-    
+
     for path in cursor_paths:
         if path.exists():
             return True, path
-    
+
     return False, None
 
 def create_cursor_settings():
     """创建 Cursor 配置"""
     settings_path = CURSOR_CONFIG_DIR / "settings.json"
     settings_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     # 读取现有设置
     if settings_path.exists():
         with open(settings_path, 'r', encoding='utf-8') as f:
             settings = json.load(f)
     else:
         settings = {}
-    
+
     # 添加 OpenClaw 配置
     settings.update({
         "openclaw.workspace": str(WORKSPACE),
@@ -50,10 +50,10 @@ def create_cursor_settings():
         "editor.tabSize": 4,
         "files.autoSave": "afterDelay",
     })
-    
+
     with open(settings_path, 'w', encoding='utf-8') as f:
         json.dump(settings, f, ensure_ascii=False, indent=2)
-    
+
     return settings_path
 
 def main():
@@ -61,7 +61,7 @@ def main():
     print("OpenClaw + Cursor IDE Integration")
     print("=" * 50)
     print()
-    
+
     # 1. 检查 Cursor
     print("[1/3] Checking Cursor installation...")
     installed, cursor_path = check_cursor_installed()
@@ -71,7 +71,7 @@ def main():
         print("  [FAIL] Cursor not found!")
         print("  Download from: https://cursor.sh")
         return
-    
+
     # 2. 创建配置
     print("\n[2/3] Creating Cursor settings...")
     try:
@@ -79,7 +79,7 @@ def main():
         print(f"  [OK] Settings: {settings_path}")
     except Exception as e:
         print(f"  [FAIL] {e}")
-    
+
     # 3. 说明
     print("\n[3/3] Setup complete!")
     print()

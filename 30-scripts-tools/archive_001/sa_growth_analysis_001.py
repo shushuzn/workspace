@@ -32,11 +32,11 @@ import math
 
 class GrowthAnalyzer:
     """成长性分析引擎"""
-    
+
     def __init__(self):
         self.cache_dir = Path("60-DATA/stock_growth")
         self.cache_dir.mkdir(parents=True, exist_ok=True)
-    
+
     def calculate_cagr(self, start_value: float, end_value: float, years: int) -> float:
         """
         计算复合年增长率（CAGR）
@@ -51,9 +51,9 @@ class GrowthAnalyzer:
         """
         if start_value <= 0 or years <= 0:
             return 0.0
-        
+
         return (end_value / start_value) ** (1 / years) - 1
-    
+
     def analyze_revenue_growth(self, financial_history: List[Dict]) -> Dict:
         """
         营收增长分析
@@ -66,26 +66,26 @@ class GrowthAnalyzer:
         """
         if len(financial_history) < 2:
             return {'error': '数据不足'}
-        
+
         # 按年份排序
         sorted_data = sorted(financial_history, key=lambda x: x.get('year', 0))
-        
+
         revenues = [d.get('revenue', 0) for d in sorted_data]
         years = len(revenues)
-        
+
         # 计算 CAGR
         cagr_3y = self.calculate_cagr(revenues[0], revenues[-1], min(3, years-1)) if years >= 4 else 0
         cagr_5y = self.calculate_cagr(revenues[0], revenues[-1], min(5, years-1)) if years >= 6 else 0
-        
+
         # 计算同比增长率
         yoy_growth = []
         for i in range(1, len(revenues)):
             if revenues[i-1] > 0:
                 yoy = (revenues[i] - revenues[i-1]) / revenues[i-1]
                 yoy_growth.append(yoy)
-        
+
         avg_yoy = sum(yoy_growth) / len(yoy_growth) if yoy_growth else 0
-        
+
         return {
             'revenue_cagr_3y': round(cagr_3y, 4),
             'revenue_cagr_5y': round(cagr_5y, 4),
@@ -93,7 +93,7 @@ class GrowthAnalyzer:
             'years_analyzed': years,
             'description': f'营收 3 年 CAGR: {cagr_3y:.2%}, 5 年 CAGR: {cagr_5y:.2%}'
         }
-    
+
     def analyze_profit_growth(self, financial_history: List[Dict]) -> Dict:
         """
         利润增长分析
@@ -106,31 +106,31 @@ class GrowthAnalyzer:
         """
         if len(financial_history) < 2:
             return {'error': '数据不足'}
-        
+
         sorted_data = sorted(financial_history, key=lambda x: x.get('year', 0))
         net_incomes = [d.get('net_income', 0) for d in sorted_data]
         years = len(net_incomes)
-        
+
         # 计算 CAGR
         cagr_3y = self.calculate_cagr(net_incomes[0], net_incomes[-1], min(3, years-1)) if years >= 4 else 0
         cagr_5y = self.calculate_cagr(net_incomes[0], net_incomes[-1], min(5, years-1)) if years >= 6 else 0
-        
+
         # 计算同比增长
         yoy_growth = []
         for i in range(1, len(net_incomes)):
             if net_incomes[i-1] > 0:
                 yoy = (net_incomes[i] - net_incomes[i-1]) / net_incomes[i-1]
                 yoy_growth.append(yoy)
-        
+
         avg_yoy = sum(yoy_growth) / len(yoy_growth) if yoy_growth else 0
-        
+
         return {
             'profit_cagr_3y': round(cagr_3y, 4),
             'profit_cagr_5y': round(cagr_5y, 4),
             'avg_yoy_growth': round(avg_yoy, 4),
             'description': f'净利润 3 年 CAGR: {cagr_3y:.2%}, 5 年 CAGR: {cagr_5y:.2%}'
         }
-    
+
     def analyze_cash_flow_growth(self, financial_history: List[Dict]) -> Dict:
         """
         现金流增长分析
@@ -143,22 +143,22 @@ class GrowthAnalyzer:
         """
         if len(financial_history) < 2:
             return {'error': '数据不足'}
-        
+
         sorted_data = sorted(financial_history, key=lambda x: x.get('year', 0))
         ocfs = [d.get('operating_cash_flow', 0) for d in sorted_data]
         years = len(ocfs)
-        
+
         # 计算 CAGR
         cagr_3y = self.calculate_cagr(ocfs[0], ocfs[-1], min(3, years-1)) if years >= 4 else 0
         cagr_5y = self.calculate_cagr(ocfs[0], ocfs[-1], min(5, years-1)) if years >= 6 else 0
-        
+
         return {
             'ocf_cagr_3y': round(cagr_3y, 4),
             'ocf_cagr_5y': round(cagr_5y, 4),
             'description': f'经营现金流 3 年 CAGR: {cagr_3y:.2%}'
         }
-    
-    def calculate_growth_score(self, revenue_analysis: Dict, 
+
+    def calculate_growth_score(self, revenue_analysis: Dict,
                                 profit_analysis: Dict,
                                 cashflow_analysis: Dict) -> Dict:
         """
@@ -174,7 +174,7 @@ class GrowthAnalyzer:
         """
         score = 0
         max_score = 100
-        
+
         # 营收增长（40 分）
         rev_cagr = revenue_analysis.get('revenue_cagr_3y', 0)
         if rev_cagr > 0.30:
@@ -185,7 +185,7 @@ class GrowthAnalyzer:
             score += 20
         elif rev_cagr > 0:
             score += 10
-        
+
         # 利润增长（40 分）
         profit_cagr = profit_analysis.get('profit_cagr_3y', 0)
         if profit_cagr > 0.30:
@@ -196,7 +196,7 @@ class GrowthAnalyzer:
             score += 20
         elif profit_cagr > 0:
             score += 10
-        
+
         # 现金流增长（20 分）
         ocf_cagr = cashflow_analysis.get('ocf_cagr_3y', 0)
         if ocf_cagr > 0.20:
@@ -205,7 +205,7 @@ class GrowthAnalyzer:
             score += 15
         elif ocf_cagr > 0:
             score += 10
-        
+
         # 评级
         if score >= 80:
             rating = 'A'
@@ -222,14 +222,14 @@ class GrowthAnalyzer:
         else:
             rating = 'E'
             description = '负成长'
-        
+
         return {
             'score': score,
             'max_score': max_score,
             'rating': rating,
             'description': f'成长性评分：{score}/{max_score} ({rating}级 - {description})'
         }
-    
+
     def predict_growth_trend(self, historical_growth: List[float], years_ahead: int = 3) -> Dict:
         """
         预测成长趋势（简化版线性回归）
@@ -243,31 +243,31 @@ class GrowthAnalyzer:
         """
         if len(historical_growth) < 2:
             return {'error': '数据不足'}
-        
+
         # 简单线性趋势
         avg_growth = sum(historical_growth) / len(historical_growth)
         trend = 'stable'
-        
+
         # 判断趋势方向
         if len(historical_growth) >= 3:
             first_half = sum(historical_growth[:len(historical_growth)//2]) / (len(historical_growth)//2)
             second_half = sum(historical_growth[len(historical_growth)//2:]) / (len(historical_growth) - len(historical_growth)//2)
-            
+
             if second_half > first_half * 1.1:
                 trend = 'accelerating'
             elif second_half < first_half * 0.9:
                 trend = 'decelerating'
-        
+
         # 预测未来
         predicted_growth = [avg_growth * (0.95 ** i) for i in range(years_ahead)]  # 假设逐年放缓
-        
+
         return {
             'avg_historical_growth': round(avg_growth, 4),
             'trend': trend,
             'predicted_growth': [round(g, 4) for g in predicted_growth],
             'description': f'平均增长率：{avg_growth:.2%}, 趋势：{trend}'
         }
-    
+
     def analyze_all_growth(self, financial_history: List[Dict]) -> Dict:
         """
         综合成长性分析
@@ -287,23 +287,23 @@ class GrowthAnalyzer:
             'growth_score': {},
             'growth_trend': {}
         }
-        
+
         # 1. 营收增长
         result['revenue_growth'] = self.analyze_revenue_growth(financial_history)
-        
+
         # 2. 利润增长
         result['profit_growth'] = self.analyze_profit_growth(financial_history)
-        
+
         # 3. 现金流增长
         result['cashflow_growth'] = self.analyze_cash_flow_growth(financial_history)
-        
+
         # 4. 成长性评分
         result['growth_score'] = self.calculate_growth_score(
             result['revenue_growth'],
             result['profit_growth'],
             result['cashflow_growth']
         )
-        
+
         # 5. 成长趋势预测
         historical_growth_rates = [
             result['revenue_growth'].get('avg_yoy_growth', 0),
@@ -311,18 +311,18 @@ class GrowthAnalyzer:
             result['cashflow_growth'].get('ocf_cagr_3y', 0)
         ]
         result['growth_trend'] = self.predict_growth_trend(historical_growth_rates)
-        
+
         return result
-    
+
     def save_report(self, report: Dict, symbol: str = 'TEST'):
         """保存成长性分析报告"""
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         filename = f"{symbol}_growth_{timestamp}.json"
         filepath = self.cache_dir / filename
-        
+
         with open(filepath, 'w', encoding='utf-8') as f:
             json.dump(report, f, indent=2, ensure_ascii=False)
-        
+
         return filepath
 
     def analyze(self, symbol: str, data: Dict = None) -> Dict:
@@ -406,9 +406,9 @@ Fixes:
     print("=" * 70)
     print(" " * 25 + "SA-011: Growth Analysis")
     print("=" * 70)
-    
+
     analyzer = GrowthAnalyzer()
-    
+
     # 测试模式
     if len(sys.argv) > 1 and sys.argv[1] == '--test':
         print("\n[Test 1] Generate Test Data")
@@ -417,34 +417,34 @@ Fixes:
         print(f"  Symbol: {financial_history[0]['symbol']}")
         print(f"  Years: {len(financial_history)}")
         print(f"  Revenue Range: {financial_history[0]['revenue']:,.0f} - {financial_history[-1]['revenue']:,.0f}")
-        
+
         print("\n[Test 2] Revenue Growth Analysis")
         print("-" * 70)
         rev_growth = analyzer.analyze_revenue_growth(financial_history)
         print(f"  {rev_growth['description']}")
-        
+
         print("\n[Test 3] Profit Growth Analysis")
         print("-" * 70)
         profit_growth = analyzer.analyze_profit_growth(financial_history)
         print(f"  {profit_growth['description']}")
-        
+
         print("\n[Test 4] Cash Flow Growth Analysis")
         print("-" * 70)
         cf_growth = analyzer.analyze_cash_flow_growth(financial_history)
         print(f"  {cf_growth['description']}")
-        
+
         print("\n[Test 5] Growth Score")
         print("-" * 70)
         score = analyzer.calculate_growth_score(rev_growth, profit_growth, cf_growth)
         print(f"  {score['description']}")
-        
+
         print("\n[Test 6] Growth Trend Prediction")
         print("-" * 70)
         historical_rates = [0.30, 0.38, 0.36, 0.29, 0.27]
         trend = analyzer.predict_growth_trend(historical_rates, years_ahead=3)
         print(f"  {trend['description']}")
         print(f"  Predicted: {[f'{g:.2%}' for g in trend['predicted_growth']]}")
-        
+
         print("\n[Test 7] Full Growth Analysis")
         print("-" * 70)
         full_analysis = analyzer.analyze_all_growth(financial_history)
@@ -453,16 +453,16 @@ Fixes:
         print(f"  Profit: {full_analysis['profit_growth']['description']}")
         print(f"  Score: {full_analysis['growth_score']['description']}")
         print(f"  Trend: {full_analysis['growth_trend']['description']}")
-        
+
         print("\n[Test 8] Save Report")
         print("-" * 70)
         report_path = analyzer.save_report(full_analysis, 'TEST')
         print(f"  Report saved to: {report_path}")
-        
+
         print("\n" + "=" * 70)
         print(" SA-011 Growth Analysis test completed")
         print("=" * 70)
-    
+
     else:
         # 正常使用模式
         print("\nUsage: py sa_011_growth_analysis.py --test")

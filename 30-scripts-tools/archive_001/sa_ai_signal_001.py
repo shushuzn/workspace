@@ -29,16 +29,16 @@ CONFIG_FILE = Path("30-scripts-tools/sa_029_config.json")
 
 class AISignalGenerator:
     """AI 信号生成器"""
-    
+
     def __init__(self):
         self.ai_dir = AI_DIR
         self.config = self._load_config()
-        
+
         self.ai_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.history_file = self.ai_dir / "signal_history.json"
         self.signals_file = self.ai_dir / "active_signals.json"
-    
+
     def _load_config(self) -> dict:
         default = {
             "model": "gpt-4",
@@ -47,7 +47,7 @@ class AISignalGenerator:
             "demo_mode": True,
             "signal_threshold": 0.6
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -55,11 +55,11 @@ class AISignalGenerator:
             except (Exception,):
                 return default
         return default
-    
+
     def _generate_demo_data(self, symbol: str) -> dict:
         """生成模拟市场数据"""
         random.seed(hash(symbol) % 10000)
-        
+
         return {
             "symbol": symbol,
             "price": round(random.uniform(100, 500), 2),
@@ -82,16 +82,16 @@ class AISignalGenerator:
             "pattern": random.choice(["上升趋势", "下降趋势", "盘整", "突破", "反弹"]),
             "timestamp": datetime.now().isoformat()
         }
-    
+
     def _analyze_with_llm(self, data: dict) -> dict:
         """使用 LLM 分析 (模拟)"""
         # 实际需要接入 OpenAI API
         # 这里使用规则模拟 LLM 输出
-        
+
         indicators = data["indicators"]
         signals = []
         confidence = 0.5
-        
+
         # RSI 分析
         rsi = indicators["RSI"]
         if rsi < 30:
@@ -100,7 +100,7 @@ class AISignalGenerator:
         elif rsi > 70:
             signals.append({"type": "SELL", "reason": "RSI overbought", "confidence": 0.8})
             confidence += 0.1
-        
+
         # MACD 分析
         if indicators["MACD"]["signal"] == "bullish":
             signals.append({"type": "BUY", "reason": "MACD golden cross", "confidence": 0.7})
@@ -108,7 +108,7 @@ class AISignalGenerator:
         else:
             signals.append({"type": "SELL", "reason": "MACD death cross", "confidence": 0.7})
             confidence += 0.1
-        
+
         # MA 交叉
         ma5 = indicators["MA5"]
         ma20 = indicators["MA20"]
@@ -116,11 +116,11 @@ class AISignalGenerator:
             signals.append({"type": "BUY", "reason": "MA5 above MA20", "confidence": 0.6})
         else:
             signals.append({"type": "SELL", "reason": "MA5 below MA20", "confidence": 0.6})
-        
+
         # 综合判断
         buy_signals = [s for s in signals if s["type"] == "BUY"]
         sell_signals = [s for s in signals if s["type"] == "SELL"]
-        
+
         if len(buy_signals) > len(sell_signals):
             final_signal = "BUY"
             final_confidence = min(confidence, 0.95)
@@ -133,7 +133,7 @@ class AISignalGenerator:
             final_signal = "HOLD"
             final_confidence = 0.5
             action = "HOLD"
-        
+
         return {
             "signal": final_signal,
             "confidence": round(final_confidence, 2),
@@ -141,18 +141,18 @@ class AISignalGenerator:
             "reasoning": signals,
             "summary": f"Based on {len(signals)} indicators, {final_signal} signal with {int(final_confidence*100)}% confidence"
         }
-    
+
     def analyze(self, symbol: str, use_llm: bool = True) -> dict:
         """分析信号"""
         # 获取数据
         data = self._generate_demo_data(symbol)
-        
+
         # 分析
         if use_llm and self.config.get("api_key"):
             analysis = self._analyze_with_llm(data)
         else:
             analysis = self._analyze_with_llm(data)  # 模拟
-        
+
         result = {
             "symbol": symbol,
             "timestamp": datetime.now().isoformat(),
@@ -162,12 +162,12 @@ class AISignalGenerator:
             "confidence": analysis["confidence"],
             "action": analysis.get("action", "HOLD")
         }
-        
+
         # 保存历史
         self._save_signal(result)
-        
+
         return result
-    
+
     def _save_signal(self, signal: dict):
         """
 # ==============================================================================
@@ -219,20 +219,20 @@ Fixes:
                     history = json.load(f)
             except (Exception,):
                 pass
-        
+
         history.append({
             "symbol": signal["symbol"],
             "signal": signal["signal"],
             "confidence": signal["confidence"],
             "timestamp": signal["timestamp"]
         })
-        
+
         # 保留最近100条
         history = history[-100:]
-        
+
         with open(self.history_file, "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
-    
+
     def get_signal_history(self, symbol: str = None, limit: int = 20) -> dict:
         """获取信号历史"""
         if not self.history_file.exists():

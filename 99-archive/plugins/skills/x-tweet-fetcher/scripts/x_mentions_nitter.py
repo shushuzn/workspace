@@ -28,27 +28,27 @@ def parse_mentions(snapshot):
     """从 Nitter 快照中解析 mentions"""
     mentions = []
     lines = snapshot.split('\n')
-    
+
     current = {}
     for line in lines:
         line = line.strip()
-        
+
         # 匹配用户链接 @username
         m = re.search(r'link "@(\w+)"', line)
         if m and m.group(1) != USERNAME:
             current['author'] = m.group(1)
-        
+
         # 匹配时间链接（如 "50m", "1h", "2h", "Feb 26"）
         m = re.search(r'link "(\d+[mhd]|[A-Z][a-z]+ \d+)"', line)
         if m:
             current['time'] = m.group(1)
-        
+
         # 匹配推文链接（/user/status/id#m）
         m = re.search(r'/url: /(\w+)/status/(\d+)#m', line)
         if m:
             current['url'] = f"https://x.com/{m.group(1)}/status/{m.group(2)}"
             current['tweet_id'] = m.group(2)
-        
+
         # 匹配 "Replying to" 后面的文本内容
         if line.startswith('- text: ') and 'Replying to' not in line and current.get('author'):
             text = line[8:].strip()
@@ -58,7 +58,7 @@ def parse_mentions(snapshot):
                 if current.get('url'):
                     mentions.append(dict(current))
                 current = {}
-    
+
     return mentions
 
 
@@ -78,15 +78,15 @@ def save_cache(ids):
 
 def main():
     print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 🔍 Nitter mentions 检查...")
-    
+
     snapshot = camofox_fetch_page(NITTER_URL, "nitter-mentions-check", wait=8)
     if not snapshot:
         print("❌ Nitter 无响应")
         sys.exit(0)
-    
+
     mentions = parse_mentions(snapshot)
     print(f"📊 解析到 {len(mentions)} 条 mentions")
-    
+
     # 对比缓存找新的，且只保留近期（24h内）的
     cache = load_cache()
     RECENT_TIMES = {'m', 'h'}  # 分钟和小时级别算近期
@@ -101,11 +101,11 @@ def main():
         if t and not any(t.endswith(u) for u in ('m', 'h', 'd')):
             continue  # "Feb 26" 这种绝对日期跳过
         new_mentions.append(m)
-    
+
     # 更新缓存
     all_ids = cache | {m['tweet_id'] for m in mentions if 'tweet_id' in m}
     save_cache(all_ids)
-    
+
     # 输出
     output = {
         "timestamp": datetime.now().isoformat(),
@@ -113,12 +113,12 @@ def main():
         "new_count": len(new_mentions),
         "new": new_mentions[:10],
     }
-    
+
     with open(RESULT_FILE, 'w') as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-    
+
     print(json.dumps(output, ensure_ascii=False, indent=2))
-    
+
     if new_mentions:
         print(f"\n⚠️ 发现 {len(new_mentions)} 条新 mentions！")
         sys.exit(1)

@@ -28,7 +28,7 @@ from typing import Dict, List
 
 class PromptOptimizer:
     """提示词优化器"""
-    
+
     # 常见冗余模式
     REDUNDANT_PATTERNS = [
         (r'以下.*请注意[:：]\s*', ''),
@@ -37,7 +37,7 @@ class PromptOptimizer:
         (r'认真.*仔细.*详细', '仔细'),
         (r'\s+', ' '),  # 多余空格
     ]
-    
+
     # 可以简化的模板
     TEMPLATE_SIMPLIFICATIONS = {
         "请创建一个": "创建",
@@ -49,40 +49,40 @@ class PromptOptimizer:
         "请你": "",
         "麻烦你": "",
     }
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
-        
+
     def optimize(self, prompt: str) -> str:
         """优化提示词"""
         lines = prompt.split('\n')
         result_lines = []
-        
+
         for line in lines:
             result = line
-            
+
             # 1. 移除冗余模式
             for pattern, replacement in self.REDUNDANT_PATTERNS:
                 result = re.sub(pattern, replacement, result)
-            
+
             # 2. 简化模板
             for old, new in self.TEMPLATE_SIMPLIFICATIONS.items():
                 result = result.replace(old, new)
-            
+
             # 跳过完全空的行
             if result.strip():
                 result_lines.append(result)
-        
+
         # 3. 移除重复行
         result_lines = self._remove_duplicates_lines(result_lines)
-        
+
         return '\n'.join(result_lines).strip()
-    
+
     def _remove_duplicates_lines(self, lines: List[str]) -> List[str]:
         """移除重复行"""
         seen = set()
         result = []
-        
+
         for line in lines:
             line_stripped = line.strip()
             if line_stripped and line_stripped not in seen:
@@ -92,33 +92,33 @@ class PromptOptimizer:
                 # 保留空行
                 if result and result[-1].strip():
                     result.append(line)
-        
+
         return result
-    
+
     # _remove_duplicates_lines 已在 optimize 中实现
-    
+
     def extract_core_instructions(self, prompt: str) -> List[str]:
         """提取核心指令"""
         instructions = []
-        
+
         # 按行分析
         for line in prompt.split('\n'):
             line = line.strip()
             if not line:
                 continue
-            
+
             # 跳过注释和说明
             if line.startswith('#') or line.startswith('//'):
                 continue
-            
+
             # 提取动词开头的指令
             if re.match(r'^(创建|执行|完成|生成|读取|写入|计算|分析|优化|检查|验证|实现)\s+', line):
                 instructions.append(line)
             elif re.match(r'^(create|execute|complete|generate|read|write|calculate|analyze|optimize|check|implement)\s+', line, re.I):
                 instructions.append(line)
-        
+
         return instructions
-    
+
     def estimate_tokens(self, text: str) -> int:
         """
 # ==============================================================================
@@ -167,7 +167,7 @@ Fixes:
         code = len(re.findall(r'[{}()\[\];=]', text))
         english = len(text) - chinese - code
         return chinese + (english // 4) + (code // 3)
-    
+
     def optimize_file(self, file_path: str) -> Dict:
         """优化文件中的提示词"""
         path = Path(file_path)

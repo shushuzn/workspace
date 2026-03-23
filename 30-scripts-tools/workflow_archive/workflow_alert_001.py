@@ -21,13 +21,13 @@ class WorkflowAlert:
     def __init__(self):
         if not ALERT_FILE.exists():
             ALERT_FILE.write_text(json.dumps({"alerts": []}, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def _load(self):
         return json.loads(ALERT_FILE.read_text(encoding="utf-8", errors="replace"))
-    
+
     def _save(self, data):
         ALERT_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def alert(self, level, message, source="system"):
         data = self._load()
         data["alerts"].append({
@@ -40,7 +40,7 @@ class WorkflowAlert:
             data["alerts"] = data["alerts"][-50:]
         self._save(data)
         return {"status": "alerted", "level": level}
-    
+
     def list(self, level=None):
         alerts = self._load()["alerts"]
         if level:
@@ -49,7 +49,7 @@ class WorkflowAlert:
 
 if __name__ == "__main__":
     alert = WorkflowAlert()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--alert":

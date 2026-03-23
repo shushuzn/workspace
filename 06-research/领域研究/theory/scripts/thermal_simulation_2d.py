@@ -106,7 +106,7 @@ print("\n[5/7] Running simulation...")
 
 for n in range(nt):
     T_new = T.copy()
-    
+
     # Internal nodes (2D diffusion in cylindrical coordinates)
     for i in range(1, nr-1):
         for j in range(1, nz-1):
@@ -117,31 +117,31 @@ for n in range(nt):
                 k_r_imhalf = k
                 r_iphalf = r[i] + dr/2
                 r_imhalf = r[i] - dr/2
-                
-                radial_term = (k_r_iphalf * r_iphalf * (T[i+1,j] - T[i,j]) - 
+
+                radial_term = (k_r_iphalf * r_iphalf * (T[i+1,j] - T[i,j]) -
                               k_r_imhalf * r_imhalf * (T[i,j] - T[i-1,j])) / (r_i * dr**2)
             else:
                 # At r=0, use L'Hopital's rule
                 radial_term = 2 * k * (T[i+1,j] - 2*T[i,j] + T[i-1,j]) / dr**2
-            
+
             # Axial term
             axial_term = k * (T[i,j+1] - 2*T[i,j] + T[i,j-1]) / dz**2
-            
+
             # Update
             T_new[i,j] = T[i,j] + dt / (rho * Cp) * (radial_term + axial_term)
-    
+
     # Boundary conditions
-    
+
     # r = 0 (axisymmetric): dT/dr = 0 (already handled)
-    
+
     # r = R_max (ambient)
     T_new[-1, :] = T_env
-    
+
     # z = 0 (surface with laser heating)
     for i in range(nr):
         # Gaussian laser profile
         q_laser = q_0 * np.exp(-2 * r[i]**2 / (d/2)**2)
-        
+
         # Only heat during dwell time
         if n * dt < t_dwell:
             T_new[i, 0] = T[i, 0] + q_laser * dt / (rho * Cp * dz)
@@ -149,17 +149,17 @@ for n in range(nt):
             # Cooling
             h = 10
             T_new[i, 0] = T[i, 0] - h * (T[i, 0] - T_env) * dt / (rho * Cp * dz)
-    
+
     # z = Z_max (adiabatic)
     T_new[:, -1] = T[:, -1]
-    
+
     T = T_new
-    
+
     # Record
     if n in record_times:
         T_history.append(T.copy())
         time_history.append(n * dt)
-    
+
     # Progress
     if n % 100 == 0:
         print(f"  Step {n}/{nt}...")
@@ -185,7 +185,7 @@ if T_max_1d > 0:
     print(f"\n  Comparison:")
     print(f"    2D vs 1D: {T_max_2d/T_max_1d*100:.1f}%")
     print(f"    Difference: {error:+.1f}%")
-    
+
     if T_max_2d < T_max_1d:
         print(f"    [OK] 2D T_max < 1D T_max (lateral heat dissipation)")
 

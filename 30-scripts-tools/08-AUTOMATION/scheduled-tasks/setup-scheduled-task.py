@@ -41,7 +41,7 @@ print()
 
 try:
     result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, encoding='utf-8', errors='replace')
-    
+
     if result.returncode == 0:
         print("✅ 定时任务创建成功！")
         print()
@@ -59,7 +59,7 @@ try:
         print("💡 提示:")
         print("  1. 请以管理员身份运行 PowerShell 后重试")
         print("  2. 或手动执行上述 schtasks 命令")
-        
+
 except FileNotFoundError:
     print("❌ schtasks 命令未找到")
     print("  请确保在 Windows 系统上运行")

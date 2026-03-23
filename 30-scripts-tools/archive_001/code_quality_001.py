@@ -58,19 +58,19 @@ Fixes:
 
 Scan code quality metrics"""
     tools = list(TOOLS_DIR.glob("*_001.py"))
-    
+
     results = {
         "total": len(tools),
         "issues": [],
         "metrics": {},
         "suggestions": []
     }
-    
+
     # Check each file
     for tool in tools:
         content = tool.read_text(encoding="utf-8", errors="ignore")
         lines = content.split('\n')
-        
+
         # Check for common issues
         if "except Exception as e:
     logger.error(f"Error: {e}")" in content:

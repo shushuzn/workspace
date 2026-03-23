@@ -133,7 +133,7 @@ prediction = model.predict_structure(structure)
 
 ## 5. 实施计划
 
-**时间:** 2026-03-17 ~ 03-21  
+**时间:** 2026-03-17 ~ 03-21
 **优先级:** 🔴 高
 
 ---

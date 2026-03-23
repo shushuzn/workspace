@@ -22,55 +22,55 @@ sys.path.insert(0, str(WORKSPACE / "30-scripts-tools"))
 
 class StockAutoReport:
     """自动报告生成器"""
-    
+
     def __init__(self, symbol: str, output_dir: str = "21-reports/stock-analysis"):
         self.symbol = symbol.upper()
         self.output_dir = WORKSPACE / output_dir
         self.output_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.results = {}
-    
+
     def generate(self, include_sections: list = None) -> Dict:
         """
         生成完整报告
-        
+
         Args:
             include_sections: 需要包含的部分，默认全部
-        
+
         Returns:
             报告数据
         """
         if include_sections is None:
             include_sections = ["summary", "price", "indicators", "trend", "financial", "recommendation"]
-        
+
         print(f"\n{'='*60}")
         print(f"Auto Report Generator v1.0.0 - {self.symbol}")
         print(f"{'='*60}")
-        
+
         # 收集各部分数据
         if "summary" in include_sections:
             self.results["summary"] = self._generate_summary()
-        
+
         if "price" in include_sections:
             self.results["price"] = self._get_price_data()
-        
+
         if "indicators" in include_sections:
             self.results["indicators"] = self._get_indicators()
-        
+
         if "trend" in include_sections:
             self.results["trend"] = self._get_trend()
-        
+
         if "financial" in include_sections:
             self.results["financial"] = self._get_financial()
-        
+
         if "recommendation" in include_sections:
             self.results["recommendation"] = self._generate_recommendation()
-        
+
         # 保存报告
         self._save_report()
-        
+
         return self.results
-    
+
     def _generate_summary(self) -> Dict:
         """生成执行摘要"""
         print("\n[1/6] Generating Summary...")
@@ -80,7 +80,7 @@ class StockAutoReport:
             "report_version": "1.0.0",
             "executive_summary": f"{self.symbol} 股票分析报告 - {datetime.now().strftime('%Y-%m-%d')}"
         }
-    
+
     def _get_price_data(self) -> Dict:
         """获取价格数据"""
         print("[2/6] Fetching Price Data...")
@@ -93,7 +93,7 @@ class StockAutoReport:
             "52w_high": 198.23,
             "52w_low": 124.17
         }
-    
+
     def _get_indicators(self) -> Dict:
         """获取技术指标"""
         print("[3/6] Calculating Indicators...")
@@ -104,7 +104,7 @@ class StockAutoReport:
             "sma_50": 145.00,
             "bollinger": {"upper": 155, "middle": 148, "lower": 141}
         }
-    
+
     def _get_trend(self) -> Dict:
         """获取趋势分析"""
         print("[4/6] Analyzing Trend...")
@@ -115,7 +115,7 @@ class StockAutoReport:
             "resistance": 155.0,
             "outlook": "短期看涨，中期震荡"
         }
-    
+
     def _get_financial(self) -> Dict:
         """获取财务数据"""
         print("[5/6] Fetching Financial Data...")
@@ -126,15 +126,15 @@ class StockAutoReport:
             "revenue_growth": 8.5,
             "profit_margin": 24.2
         }
-    
+
     def _generate_recommendation(self) -> Dict:
         """生成建议"""
         print("[6/6] Generating Recommendation...")
-        
+
         # 简单决策逻辑
         rsi = self.results.get("indicators", {}).get("rsi", {}).get("value", 50)
         trend = self.results.get("trend", {}).get("direction", "neutral")
-        
+
         if rsi < 30:
             signal = "STRONG_BUY"
             reason = "RSI 超卖"
@@ -147,7 +147,7 @@ class StockAutoReport:
         else:
             signal = "HOLD"
             reason = "中性区域"
-        
+
         return {
             "signal": signal,
             "reason": reason,
@@ -155,7 +155,7 @@ class StockAutoReport:
             "stop_loss": 140.0,
             "confidence": 0.75
         }
-    
+
     def _save_report(self):
         """
 # ==============================================================================
@@ -201,20 +201,20 @@ Fixes:
 
 保存报告"""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        
+
         # JSON
         json_file = self.output_dir / f"{self.symbol}_report_{timestamp}.json"
         with open(json_file, "w", encoding="utf-8") as f:
             json.dump(self.results, f, ensure_ascii=False, indent=2)
         print(f"\n[SAVE] JSON: {json_file.name}")
-        
+
         # Markdown
         md_file = self.output_dir / f"{self.symbol}_report_{timestamp}.md"
         md_content = self._to_markdown()
         with open(md_file, "w", encoding="utf-8") as f:
             f.write(md_content)
         print(f"[SAVE] Markdown: {md_file.name}")
-    
+
     def _to_markdown(self) -> str:
         """转换为 Markdown"""
         md = []

@@ -107,13 +107,13 @@ ARXIV_PAPERS = [
 
 def generate_brainstorm_ideas():
     """从 arXiv 论文生成头脑风暴想法"""
-    
+
     print("=" * 70)
     print("arXiv Brainstorm - AI Agent Evolution Ideas")
     print("=" * 70)
-    
+
     ideas = []
-    
+
     # 维度 1: 架构演进
     print("\n【维度 1: 架构演进】")
     ideas.append({
@@ -140,7 +140,7 @@ def generate_brainstorm_ideas():
         "feasibility": "低",
         "action": "实验性任务实现闭环：设计→执行→分析→优化"
     })
-    
+
     # 维度 2: 自主性评估
     print("【维度 2: 自主性评估】")
     ideas.append({
@@ -159,7 +159,7 @@ def generate_brainstorm_ideas():
         "feasibility": "高",
         "action": "定义 10 个能力维度并定期自评"
     })
-    
+
     # 维度 3: 安全性
     print("【维度 3: 安全性】")
     ideas.append({
@@ -186,7 +186,7 @@ def generate_brainstorm_ideas():
         "feasibility": "高",
         "action": "将现有 5 层防护与论文框架对齐"
     })
-    
+
     # 维度 4: 人机协作
     print("【维度 4: 人机协作】")
     ideas.append({
@@ -205,7 +205,7 @@ def generate_brainstorm_ideas():
         "feasibility": "高",
         "action": "根据信任度逐步放权"
     })
-    
+
     # 维度 5: 工具学习
     print("【维度 5: 工具学习】")
     ideas.append({
@@ -224,7 +224,7 @@ def generate_brainstorm_ideas():
         "feasibility": "低",
         "action": "探索工具链自动组合"
     })
-    
+
     # 维度 6: 记忆系统
     print("【维度 6: 记忆系统】")
     ideas.append({
@@ -243,7 +243,7 @@ def generate_brainstorm_ideas():
         "feasibility": "中",
         "action": "分离事件记忆和知识记忆"
     })
-    
+
     # 维度 7: 规划能力
     print("【维度 7: 规划能力】")
     ideas.append({
@@ -262,7 +262,7 @@ def generate_brainstorm_ideas():
         "feasibility": "低",
         "action": "考虑多种可能性的规划策略"
     })
-    
+
     # 维度 8: 自我改进
     print("【维度 8: 自我改进】")
     ideas.append({
@@ -281,7 +281,7 @@ def generate_brainstorm_ideas():
         "feasibility": "高",
         "action": "建立定期性能测试机制"
     })
-    
+
     # 维度 9: 多模态
     print("【维度 9: 多模态】")
     ideas.append({
@@ -292,7 +292,7 @@ def generate_brainstorm_ideas():
         "feasibility": "中",
         "action": "已实现 multimodal_agent.py，继续优化"
     })
-    
+
     # 维度 10: 评估系统
     print("【维度 10: 评估系统】")
     ideas.append({
@@ -303,13 +303,13 @@ def generate_brainstorm_ideas():
         "feasibility": "高",
         "action": "整合 critic 系统为统一评估框架"
     })
-    
+
     # 统计
     print(f"\n{'='*70}")
     print(f"总想法数：{len(ideas)}")
     print(f"高影响力：{sum(1 for i in ideas if i['impact'] in ['高', '极高'])}")
     print(f"高可行性：{sum(1 for i in ideas if i['feasibility'] == '高')}")
-    
+
     # 保存结果
     result = {
         "generated_at": datetime.now().isoformat(),
@@ -324,15 +324,15 @@ def generate_brainstorm_ideas():
             "安全性增强"
         ]
     }
-    
+
     output_file = Path("flow-archive/20260318-universal-workflow-001/flow-arxiv-brainstorm/arxiv_brainstorm_result.json")
     output_file.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(result, f, indent=2, ensure_ascii=False)
-    
+
     print(f"\n结果已保存：{output_file}")
-    
+
     return result
 
 

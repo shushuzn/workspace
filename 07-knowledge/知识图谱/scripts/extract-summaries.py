@@ -16,7 +16,7 @@ def extract_summary_from_pnote(file_path: Path) -> dict:
     except Exception as e:
         print(f"  [ERROR] 读取失败：{e}")
         return None
-    
+
     summary = {
         "title": "",
         "arxiv_id": "",
@@ -26,7 +26,7 @@ def extract_summary_from_pnote(file_path: Path) -> dict:
         "confidence": 0.0,
         "source_file": str(file_path.name)
     }
-    
+
     # 1. 提取标题 (P-Note 格式)
     title_patterns = [
         r'# P-Note:\s*(.+?)(?:\n|$)',
@@ -38,7 +38,7 @@ def extract_summary_from_pnote(file_path: Path) -> dict:
         if match:
             summary["title"] = match.group(1).strip()
             break
-    
+
     # 2. 提取 arXiv ID
     arxiv_patterns = [
         r'arXiv[:\s]+(\d+\.\d+)',
@@ -49,12 +49,12 @@ def extract_summary_from_pnote(file_path: Path) -> dict:
         if match:
             summary["arxiv_id"] = match.group(1)
             break
-    
+
     # 3. 提取作者
     author_match = re.search(r'作者 [：:\s]*(.+?)(?:\n|$)', content, re.IGNORECASE)
     if author_match:
         summary["authors"] = author_match.group(1).strip()
-    
+
     # 4. 提取 10 维度分析 (关键发现)
     dims_section = re.search(r'## 📝 10 维度分析.*?(?=## |$)', content, re.DOTALL)
     if dims_section:
@@ -62,7 +62,7 @@ def extract_summary_from_pnote(file_path: Path) -> dict:
         # 提取各维度标题
         dim_titles = re.findall(r'### \d+\.\s*(.+?)(?:\n|$)', dims_text)
         summary["key_findings"] = [d.strip() for d in dim_titles[:5]]
-    
+
     # 5. 提取核心方法
     method_patterns = [
         r'### 2\. 核心方法\s*\n(.+?)(?=### |$)',
@@ -76,7 +76,7 @@ def extract_summary_from_pnote(file_path: Path) -> dict:
             method_text = re.sub(r'^#+\s*', '', method_text)
             summary["methods"] = [method_text[:300]]
             break
-    
+
     # 6. 计算置信度
     score = 0
     if summary["title"]: score += 0.3
@@ -84,7 +84,7 @@ def extract_summary_from_pnote(file_path: Path) -> dict:
     if summary["key_findings"]: score += 0.2
     if summary["methods"]: score += 0.2
     summary["confidence"] = round(score, 1)
-    
+
     return summary
 
 def enhance_knowledge_graph():
@@ -93,24 +93,24 @@ def enhance_knowledge_graph():
     print("知识图谱增强 - 第 1 阶段：摘要提取")
     print("=" * 50)
     print()
-    
+
     # 扫描 Medium 目录中的 P-Note
     medium_dir = Path("D:/OpenClaw/workspace/Medium")
     summaries = {}
-    
+
     print(f"[INFO] 扫描目录：{medium_dir}")
     print()
-    
+
     if medium_dir.exists():
         # 查找 P-Note 文件
         pnote_files = list(medium_dir.glob("P-*.md"))
         print(f"[INFO] 找到 {len(pnote_files)} 篇 P-Note")
         print()
-        
+
         for pnote_file in pnote_files:
             print(f"[EXTRACT] {pnote_file.stem}")
             summary = extract_summary_from_pnote(pnote_file)
-            
+
             if summary and summary["arxiv_id"]:
                 key = f"paper_{summary['arxiv_id'].replace('.', '_')}"
                 summaries[key] = summary
@@ -122,17 +122,17 @@ def enhance_knowledge_graph():
                 print(f"  [WARN] 缺少 arXiv ID\n")
             else:
                 print(f"  [SKIP] 提取失败\n")
-    
+
     # 保存摘要
     output_file = Path("D:/OpenClaw/workspace/knowledge-graph/paper-summaries.json")
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(summaries, f, indent=2, ensure_ascii=False)
-    
+
     print("=" * 50)
     print(f"[OK] 摘要已保存：{output_file}")
     print(f"[INFO] 共提取 {len(summaries)} 篇论文摘要")
     print("=" * 50)
-    
+
     return summaries
 
 if __name__ == "__main__":

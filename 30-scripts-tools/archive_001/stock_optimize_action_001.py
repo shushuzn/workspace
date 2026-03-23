@@ -13,7 +13,7 @@ def run():
     print("="*60)
     print("股票分析工作流优化 - 行动计划")
     print("="*60)
-    
+
     # 优先级矩阵
     actions = [
         {
@@ -62,7 +62,7 @@ def run():
             "priority": "LOW"
         }
     ]
-    
+
     print("\n📋 行动计划:\n")
     for a in actions:
         print(f"#{a['rank']} [{a['priority']}] {a['title']}")
@@ -70,7 +70,7 @@ def run():
         print(f"   行动: {a['action']}")
         print(f"   时间: {a['timeline']}")
         print()
-    
+
     print("="*60)
     print("预期效果:")
     print("  - 工具调用效率 +50%")

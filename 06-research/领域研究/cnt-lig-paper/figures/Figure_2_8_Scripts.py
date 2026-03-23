@@ -107,8 +107,8 @@ print("Creating Figure 4: SHAP Feature Importance...")
 
 fig4, ax = plt.subplots(figsize=(10, 6), dpi=300)
 
-features = ['diameter_nm', 'cvd_temperature_C', 'length_um', 'layers', 'aspect_ratio', 
-            'log_diameter', 'is_swcnn', 'is_cvd', 'temp_normalized', 'has_catalyst', 
+features = ['diameter_nm', 'cvd_temperature_C', 'length_um', 'layers', 'aspect_ratio',
+            'log_diameter', 'is_swcnn', 'is_cvd', 'temp_normalized', 'has_catalyst',
             'has_carbon_source', 'volume_fraction_est']
 importance = [68, 27, 12, 10, 5, 4, 3, 3, 2, 2, 2, 2]
 colors = plt.cm.Blues(np.linspace(0.4, 0.9, len(features)))[::-1]

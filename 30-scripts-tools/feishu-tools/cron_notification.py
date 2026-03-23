@@ -32,7 +32,7 @@ def create_notification_card(task_name, status, message, timestamp=None):
     """Create a formatted notification card"""
     if timestamp is None:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    
+
     emoji = get_task_emoji(status)
     status_color = {
         "success": "green",
@@ -41,7 +41,7 @@ def create_notification_card(task_name, status, message, timestamp=None):
         "running": "blue",
         "skipped": "gray"
     }.get(status.lower(), "gray")
-    
+
     card = {
         "config": {
             "wide_screen_mode": True
@@ -96,7 +96,7 @@ def create_notification_card(task_name, status, message, timestamp=None):
             }
         ]
     }
-    
+
     return card
 
 def send_notification(task_name, status, message, config_file=None):
@@ -104,28 +104,28 @@ def send_notification(task_name, status, message, config_file=None):
     # Load config
     if config_file is None:
         config_file = os.path.join(os.path.dirname(__file__), "feishu-config.json")
-    
+
     with open(config_file, 'r', encoding='utf-8') as f:
         config = json.load(f)
-    
+
     # Initialize client (loads config automatically)
     client = FeishuAPIClient(config_file=config_file)
-    
+
     # Create card elements for send_poster
     card = create_notification_card(task_name, status, message)
     title = card['header']['title']['content']
     elements = card['elements']
-    
+
     try:
         result = client.send_poster(
             title=title,
             content=elements,
             receive_id=config['default_receive_id']
         )
-        
+
         print(f"[OK] Notification sent: {result.get('message_id', 'unknown')}")
         return True
-        
+
     except Exception as e:
         print(f"[ERROR] Failed to send notification: {e}")
         return False
@@ -135,11 +135,11 @@ def main():
         print(__doc__)
         print(f"\nCurrent args: {sys.argv}")
         sys.exit(1)
-    
+
     task_name = sys.argv[1]
     status = sys.argv[2]
     message = sys.argv[3] if len(sys.argv) > 3 else "No additional details"
-    
+
     success = send_notification(task_name, status, message)
     sys.exit(0 if success else 1)
 

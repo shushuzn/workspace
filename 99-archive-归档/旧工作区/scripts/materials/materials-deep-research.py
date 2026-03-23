@@ -13,17 +13,17 @@ from typing import Dict, List
 
 class MaterialsDeepResearch:
     """材料深度研究分析器"""
-    
+
     def __init__(self):
         self.arxiv_dir = Path(r"D:\obsidian\Vault\Arxiv\daily")
         self.materials_dir = Path(r"D:\obsidian\Vault\Materials")
         self.reports_dir = Path(r"D:\OpenClaw\workspace\reports")
-        
+
     def scan_materials_papers(self, date_str: str = None) -> List[Dict]:
         """扫描材料相关论文"""
         if not date_str:
             date_str = datetime.now().strftime('%Y-%m-%d')
-        
+
         papers = []
         keywords = [
             'battery', 'Battery', 'BATTERY',
@@ -37,30 +37,30 @@ class MaterialsDeepResearch:
             'nanomaterial', 'nanocomposite',
             'graphene', 'perovskite'
         ]
-        
+
         # 尝试多个可能的路径格式
         possible_dirs = [
             self.arxiv_dir / date_str[:4] / date_str[:7] / date_str,
             self.arxiv_dir / date_str,
             Path(r"D:\obsidian\Vault\Arxiv\daily") / date_str[:4] / date_str[:7] / date_str,
         ]
-        
+
         date_dir = None
         for dir_path in possible_dirs:
             if dir_path.exists():
                 date_dir = dir_path
                 break
-        
+
         if not date_dir:
             print(f"Directory not found, using default path")
             date_dir = self.arxiv_dir / date_str[:4] / date_str[:7] / date_str
             date_dir.mkdir(parents=True, exist_ok=True)
-        
+
         for md_file in date_dir.rglob('*.md'):
             try:
                 with open(md_file, 'r', encoding='utf-8') as f:
                     content = f.read()
-                
+
                 # 检查是否包含材料关键词
                 for keyword in keywords:
                     if keyword in content:
@@ -73,9 +73,9 @@ class MaterialsDeepResearch:
                         break
             except Exception as e:
                 continue
-        
+
         return papers
-    
+
     def analyze_research_trends(self, papers: List[Dict]) -> Dict:
         """分析研究趋势"""
         trends = {
@@ -84,16 +84,16 @@ class MaterialsDeepResearch:
             'by_keyword': {},
             'hot_topics': []
         }
-        
+
         # 按类别统计
         for paper in papers:
             category = paper['category']
             trends['by_category'][category] = trends['by_category'].get(category, 0) + 1
-            
+
             # 按关键词统计
             for keyword in paper['keywords']:
                 trends['by_keyword'][keyword] = trends['by_keyword'].get(keyword, 0) + 1
-        
+
         # 热门主题 (按关键词频率排序)
         sorted_keywords = sorted(
             trends['by_keyword'].items(),
@@ -101,9 +101,9 @@ class MaterialsDeepResearch:
             reverse=True
         )
         trends['hot_topics'] = sorted_keywords[:10]
-        
+
         return trends
-    
+
     def generate_deep_research_report(self, trends: Dict) -> str:
         """生成深度研究报告"""
         report = f"""# 材料领域深度研究报告
@@ -121,23 +121,23 @@ class MaterialsDeepResearch:
 | 类别 | 论文数 | 占比 |
 |------|--------|------|
 """
-        
+
         total = trends['total_papers']
         for category, count in sorted(trends['by_category'].items(), key=lambda x: x[1], reverse=True)[:10]:
             percentage = (count / total * 100) if total > 0 else 0
             report += f"| {category} | {count} | {percentage:.1f}% |\n"
-        
+
         report += f"""
 ### 热门研究主题
 
 | 关键词 | 出现次数 | 热度 |
 |--------|----------|------|
 """
-        
+
         for i, (keyword, count) in enumerate(trends['hot_topics'][:10], 1):
             heat = '🔥' * min(5, (count // 5) + 1)
             report += f"| {i}. {keyword} | {count} | {heat} |\n"
-        
+
         report += f"""
 ---
 
@@ -155,12 +155,12 @@ class MaterialsDeepResearch:
 
 **代表论文:**
 """
-        
+
         # 添加相关论文
         energy_papers = [p for p in trends.get('papers', []) if any(k in p['keywords'] for k in ['battery', 'lithium', 'cathode'])][:5]
         for i, paper in enumerate(energy_papers, 1):
             report += f"{i}. {paper['title']}\n"
-        
+
         report += f"""
 ### 2. 纳米材料
 
@@ -385,39 +385,39 @@ class MaterialsDeepResearch:
 
 """
         return report
-    
+
     def run(self, date_str: str = None):
         """运行深度研究分析"""
         print("=" * 60)
         print("Materials Deep Research v1")
         print("=" * 60)
-        
+
         # 扫描论文
         print(f"\n[1/3] Scanning materials papers...")
         papers = self.scan_materials_papers(date_str)
         print(f"  Found {len(papers)} materials-related papers")
-        
+
         # 分析趋势
         print(f"\n[2/3] Analyzing research trends...")
         trends = self.analyze_research_trends(papers)
         print(f"  Analyzed {trends['total_papers']} papers")
         print(f"  Hot topics: {len(trends['hot_topics'])}")
-        
+
         # 生成报告
         print(f"\n[3/3] Generating deep research report...")
         self.reports_dir.mkdir(parents=True, exist_ok=True)
         report_file = self.reports_dir / f"MATERIALS-DEEP-RESEARCH-{datetime.now().strftime('%Y-%m-%d')}.md"
-        
+
         report_content = self.generate_deep_research_report(trends)
         with open(report_file, 'w', encoding='utf-8') as f:
             f.write(report_content)
-        
+
         print(f"  Report saved to: {report_file}")
-        
+
         print("\n" + "=" * 60)
         print("[COMPLETE]")
         print("=" * 60)
-        
+
         return report_file
 
 def demo():

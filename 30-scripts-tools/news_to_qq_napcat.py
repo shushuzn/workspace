@@ -52,21 +52,21 @@ def api_request(endpoint, data=None, method='POST'):
     """发送 API 请求到 NapCat"""
     url = f"{CONFIG['base_url']}{endpoint}"
     headers = get_headers()
-    
+
     req_data = json.dumps(data).encode('utf-8') if data else None
-    
+
     req = urllib.request.Request(
         url,
         data=req_data,
         headers=headers,
         method=method
     )
-    
+
     try:
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
         ctx.verify_mode = ssl.CERT_NONE
-        
+
         with urllib.request.urlopen(req, timeout=15, context=ctx) as resp:
             return json.loads(resp.read().decode('utf-8'))
     except urllib.error.HTTPError as e:
@@ -92,12 +92,12 @@ def send_group_message(group_id, message, auto_escape=False):
         "message": message,
         "auto_escape": auto_escape
     }
-    
+
     result = api_request("/send_group_msg", data=data)
-    
+
     if result.get('status') != 'ok':
         raise Exception(f"Send failed: {result.get('msg', result)}")
-    
+
     return result
 
 
@@ -131,7 +131,7 @@ def build_news_message(title, url, summary=""):
     if summary:
         msg += f"\n{summary}\n"
     msg += f"\n{url}"
-    
+
     return build_text_message(msg)
 
 
@@ -157,7 +157,7 @@ def load_history():
 
 def save_history(history):
     """保存发送历史"""
-    json.dump(history, open(QQ_HISTORY_FILE, 'w', encoding='utf-8'), 
+    json.dump(history, open(QQ_HISTORY_FILE, 'w', encoding='utf-8'),
               ensure_ascii=False, indent=2)
 
 
@@ -177,11 +177,11 @@ def add_to_history(history, title, url):
         "time": datetime.now().isoformat()
     })
     history['count'] = len(history['sent'])
-    
+
     # 只保留最近 500 条
     if len(history['sent']) > 500:
         history['sent'] = history['sent'][-500:]
-    
+
     save_history(history)
 
 
@@ -194,29 +194,29 @@ def cmd_send(args):
     if len(args) < 2:
         print("[ERROR] 用法: py news_to_qq_napcat.py send <title> <url>")
         return
-    
+
     title = args[0]
     url = args[1]
-    
+
     # 检查重复
     history = load_history()
     if is_duplicate(history, title):
         print(f"[SKIP] Duplicate: {title[:30]}...")
         return
-    
+
     try:
         # 构造消息
         message = build_news_message(title, url)
-        
+
         # 发送
         result = send_group_message(CONFIG['group_id'], message)
-        
+
         # 记录历史
         add_to_history(history, title, url)
-        
+
         print(f"[OK] Sent: {title[:40]}...")
         print(f"[INFO] Message ID: {result.get('data', {}).get('message_id', 'N/A')}")
-        
+
     except Exception as e:
         print(f"[ERROR] {e}")
 
@@ -229,12 +229,12 @@ def cmd_test(args):
         print(f"[OK] Connected to NapCat")
         print(f"[INFO] QQ: {login_info.get('data', {}).get('user_id', 'N/A')}")
         print(f"[INFO] Nickname: {login_info.get('data', {}).get('nickname', 'N/A')}")
-        
+
         # 获取群列表
         groups = get_group_list()
         group_list = groups.get('data', [])
         print(f"[INFO] Groups: {len(group_list)}")
-        
+
         # 检查目标群
         target_found = any(str(g.get('group_id')) == CONFIG['group_id'] for g in group_list)
         if target_found:
@@ -244,15 +244,15 @@ def cmd_test(args):
             print(f"[INFO] Available groups:")
             for g in group_list[:5]:
                 print(f"  - {g.get('group_id')}: {g.get('group_name', 'N/A')}")
-        
+
         # 发送测试消息
         test_msg = f"🤖 OpenClaw NapCat Test\n时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
         message = build_text_message(test_msg)
-        
+
         result = send_group_message(CONFIG['group_id'], message)
         print(f"[OK] Test message sent")
         print(f"[INFO] Message ID: {result.get('data', {}).get('message_id', 'N/A')}")
-        
+
     except Exception as e:
         print(f"[ERROR] {e}")
         print("[HINT] 请确认 NapCat 已启动，且地址正确")
@@ -265,33 +265,33 @@ def cmd_digest(args):
     if not hist_file.exists():
         print("[ERROR] 新闻历史文件不存在")
         return
-    
+
     try:
         news_data = json.load(open(hist_file, 'r', encoding='utf-8'))
         all_news = news_data.get('sent', [])
-        
+
         # 取最近的新闻
         count = int(args[0]) if args else 5
         recent = all_news[-count:] if len(all_news) > count else all_news
-        
+
         if not recent:
             print("[INFO] 没有新闻")
             return
-        
+
         # 构造摘要
         lines = [f"📰 新闻摘要 ({datetime.now().strftime('%m-%d %H:%M')})\n"]
         for i, n in enumerate(recent, 1):
             title = n.get('title', '无标题')[:25]
             lines.append(f"{i}. {title}")
-        
+
         msg = '\n'.join(lines)
         message = build_text_message(msg)
-        
+
         result = send_group_message(CONFIG['group_id'], message)
-        
+
         print(f"[OK] Digest sent: {len(recent)} items")
         print(f"[INFO] Message ID: {result.get('data', {}).get('message_id', 'N/A')}")
-        
+
     except Exception as e:
         print(f"[ERROR] {e}")
 
@@ -303,14 +303,14 @@ def cmd_status(args):
         login_info = get_login_info()
         qq_id = login_info.get('data', {}).get('user_id', 'N/A')
         nickname = login_info.get('data', {}).get('nickname', 'N/A')
-        
+
         # 获取群列表
         groups = get_group_list()
         group_count = len(groups.get('data', []))
-        
+
         # 获取历史
         history = load_history()
-        
+
         print(f"\n📊 NapCat QQ 推送状态")
         print(f"  机器人 QQ: {qq_id}")
         print(f"  昵称: {nickname}")
@@ -319,7 +319,7 @@ def cmd_status(args):
         print(f"  NapCat 地址: {CONFIG['base_url']}")
         print(f"  总发送: {history.get('count', 0)}")
         print(f"  今日: {len([x for x in history.get('sent', []) if datetime.now().strftime('%Y-%m-%d') in x.get('time', '')])}")
-        
+
     except Exception as e:
         print(f"[ERROR] {e}")
         print("[HINT] 请确认 NapCat 已启动")
@@ -330,16 +330,16 @@ def cmd_groups(args):
     try:
         groups = get_group_list()
         group_list = groups.get('data', [])
-        
+
         print(f"\n👥 群列表 ({len(group_list)} 个)")
         print("-" * 40)
-        
+
         for g in group_list:
             gid = g.get('group_id', 'N/A')
             name = g.get('group_name', 'N/A')
             member_count = g.get('member_count', '?')
             print(f"  {gid}: {name} ({member_count}人)")
-        
+
     except Exception as e:
         print(f"[ERROR] {e}")
 
@@ -352,10 +352,10 @@ def main():
     if len(sys.argv) < 2:
         print(__doc__)
         return
-    
+
     cmd = sys.argv[1].lower()
     args = sys.argv[2:]
-    
+
     commands = {
         'send': cmd_send,
         'test': cmd_test,
@@ -363,14 +363,14 @@ def main():
         'status': cmd_status,
         'groups': cmd_groups,
     }
-    
+
     if cmd in ('help', '-h', '--help'):
         print(__doc__)
         print("\n命令:")
         for c in commands:
             print(f"  {c}")
         return
-    
+
     if cmd in commands:
         commands[cmd](args)
     else:

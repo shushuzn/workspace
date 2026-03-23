@@ -70,15 +70,15 @@ REWARD_LEVELS = {
 
 def award_reward(reward_type: str, session_id: str, details: dict = None) -> dict:
     """授予奖励"""
-    
+
     if reward_type not in REWARD_TYPES:
         return {
             "status": "error",
             "reason": f"未知奖励类型：{reward_type}"
         }
-    
+
     reward_info = REWARD_TYPES[reward_type]
-    
+
     # 记录奖励
     entry = {
         "id": f"R-{datetime.now().strftime('%Y%m%d%H%M%S')}-{session_id[-6:]}",
@@ -90,14 +90,14 @@ def award_reward(reward_type: str, session_id: str, details: dict = None) -> dic
         "details": details,
         "requirements": reward_info["requirements"]
     }
-    
+
     # 追加到日志
     with open(REWARD_LOG, "a", encoding="utf-8") as f:
         f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-    
+
     # 更新奖励状态
     level_result = update_reward_state(reward_info["points"])
-    
+
     return {
         "status": "awarded",
         "reward": entry,
@@ -107,24 +107,24 @@ def award_reward(reward_type: str, session_id: str, details: dict = None) -> dic
 
 def update_reward_state(new_points: int) -> dict:
     """更新奖励状态"""
-    
+
     # 读取现有状态
     current_points = 0
     if REWARD_STATE.exists():
         with open(REWARD_STATE, "r", encoding="utf-8") as f:
             state = json.load(f)
             current_points = state.get("total_points", 0)
-    
+
     # 累加分数
     total_points = current_points + new_points
-    
+
     # 确定等级
     level = 0
     for threshold in sorted(REWARD_LEVELS.keys(), reverse=True):
         if total_points >= threshold:
             level = REWARD_LEVELS[threshold]["level"]
             break
-    
+
     # 保存状态
     state = {
         "total_points": total_points,
@@ -146,10 +146,10 @@ def update_reward_state(new_points: int) -> dict:
         "last_reward": datetime.now().isoformat(),
         "next_level_threshold": min([t for t in REWARD_LEVELS.keys() if t > total_points] or [1000])
     }
-    
+
     with open(REWARD_STATE, "w", encoding="utf-8") as f:
         json.dump(state, f, ensure_ascii=False, indent=2)
-    
+
     return {
         "total_points": total_points,
         "level": level,
@@ -161,17 +161,17 @@ def update_reward_state(new_points: int) -> dict:
 
 def check_reward_status() -> dict:
     """检查奖励状态"""
-    
+
     if not REWARD_STATE.exists():
         return {
             "status": "new",
             "level": 0,
             "message": "新会话，开始积累奖励积分"
         }
-    
+
     with open(REWARD_STATE, "r", encoding="utf-8") as f:
         state = json.load(f)
-    
+
     return {
         "status": "active",
         "level": state["current_level"],
@@ -185,24 +185,24 @@ def check_reward_status() -> dict:
 
 def verify_workflow_completion(session_id: str) -> dict:
     """验证工作流完成情况 (决定是否给予奖励)"""
-    
+
     state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
-    
+
     if not state_file.exists():
         return {
             "status": "error",
             "reason": "execution-state.json 不存在"
         }
-    
+
     try:
         with open(state_file, "r", encoding="utf-8") as f:
             state = json.load(f)
-        
+
         completion = state.get("completion_percentage", 0)
         compliance = state.get("workflow_compliance", False)
         completed_steps = len(state.get("completed_steps", []))
         total_steps = state.get("total_steps", 20)
-        
+
         # 检查违规
         violation_log = Path("30-scripts-tools/violation_log.jsonl")
         violations = 0
@@ -215,10 +215,10 @@ def verify_workflow_completion(session_id: str) -> dict:
                             violations += 1
                     except Exception:
                         pass
-        
+
         # 判定奖励
         rewards_earned = []
-        
+
         if completion == 100 and compliance:
             rewards_earned.append("complete_workflow_100")
             if violations == 0:
@@ -227,10 +227,10 @@ def verify_workflow_completion(session_id: str) -> dict:
             rewards_earned.append("complete_workflow_80")
         elif completion >= 50:
             rewards_earned.append("complete_workflow_50")
-        
+
         if violations == 0:
             rewards_earned.append("zero_violations")
-        
+
         return {
             "status": "verified",
             "session_id": session_id,
@@ -250,10 +250,10 @@ def verify_workflow_completion(session_id: str) -> dict:
 
 def list_rewards(session_id: str = None, limit: int = 50) -> dict:
     """列出奖励记录"""
-    
+
     if not REWARD_LOG.exists():
         return {"status": "empty", "message": "无奖励记录"}
-    
+
     rewards = []
     with open(REWARD_LOG, "r", encoding="utf-8") as f:
         for line in f:
@@ -264,12 +264,12 @@ def list_rewards(session_id: str = None, limit: int = 50) -> dict:
                 rewards.append(entry)
             except Exception:
                 pass
-    
+
     rewards.sort(key=lambda x: x["timestamp"], reverse=True)
-    
+
     # 统计
     total_points = sum(r.get("points", 0) for r in rewards)
-    
+
     return {
         "status": "success",
         "count": len(rewards),
@@ -331,7 +331,7 @@ def main():
         print("=" * 70)
         print("奖励系统 v1.0")
         print("=" * 70)
-        
+
         # 检查当前状态
         status = check_reward_status()
         print(f"\n当前状态：{status['status']}")
@@ -342,22 +342,22 @@ def main():
                 print(f"特权：{', '.join(status['privileges'])}")
             if status.get('points_to_next'):
                 print(f"距离下一级：{status['points_to_next']}分")
-        
+
         # 列出奖励
         rewards = list_rewards()
         print(f"\n奖励记录：{rewards.get('count', 0)} 条")
         print(f"总授予积分：{rewards.get('total_points_awarded', 0)}")
-        
+
         print("\n" + "=" * 70)
         print("奖励类型列表:")
         print("=" * 70)
         for rtype, info in sorted(REWARD_TYPES.items(), key=lambda x: -x[1]["points"]):
             print(f"  {rtype:30s} +{info['points']:3d}分 - {info['name']}")
-        
+
         return 0
-    
+
     command = sys.argv[1]
-    
+
     if command == "award" and len(sys.argv) >= 4:
         reward_type = sys.argv[2]
         session_id = sys.argv[3]
@@ -381,7 +381,7 @@ def main():
         print("  py reward_system.py list [session_id]")
         print("  py reward_system.py reset")
         sys.exit(1)
-    
+
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result.get("status") in ["awarded", "verified", "success", "reset", "new", "active"] else 1
 

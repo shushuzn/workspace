@@ -14,23 +14,23 @@ from typing import Dict, List, Any, Optional
 
 class UserPreferenceManager:
     """Manage user preferences across sessions"""
-    
+
     def __init__(self, profile_name: str = "default"):
         self.profile_name = profile_name
         self.profiles_dir = Path("03-config/user_profiles")
         self.current_profile = self._load_profile(profile_name)
-    
+
     def _load_profile(self, name: str) -> Dict:
         """Load user profile"""
         profile_file = self.profiles_dir / f"{name}.json"
-        
+
         if profile_file.exists():
             with open(profile_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        
+
         # Create default profile
         return self._create_default_profile(name)
-    
+
     def _create_default_profile(self, name: str) -> Dict:
         """Create default profile"""
         profile = {
@@ -64,76 +64,76 @@ class UserPreferenceManager:
                 "last_active": None,
             }
         }
-        
+
         self._save_profile(profile)
         return profile
-    
+
     def _save_profile(self, profile: Dict = None) -> None:
         """Save profile to file"""
         if profile is None:
             profile = self.current_profile
-        
+
         self.profiles_dir.mkdir(parents=True, exist_ok=True)
         profile_file = self.profiles_dir / f"{self.profile_name}.json"
-        
+
         profile["updated_at"] = datetime.now().isoformat()
-        
+
         with open(profile_file, 'w', encoding='utf-8') as f:
             json.dump(profile, f, ensure_ascii=False, indent=2)
-    
+
     def get_preference(self, key: str, default=None) -> Any:
         """Get a preference value"""
         return self.current_profile["preferences"].get(key, default)
-    
+
     def set_preference(self, key: str, value: Any) -> None:
         """Set a preference value"""
         self.current_profile["preferences"][key] = value
         self._save_profile()
-    
+
     def get_all_preferences(self) -> Dict:
         """Get all preferences"""
         return self.current_profile["preferences"].copy()
-    
+
     def reset_preferences(self) -> None:
         """Reset all preferences to defaults"""
         self.current_profile = self._create_default_profile(self.profile_name)
-    
+
     def get_shortcut(self, name: str) -> str:
         """Get a shortcut command"""
         return self.current_profile["shortcuts"].get(name, f"/{name}")
-    
+
     def set_shortcut(self, name: str, command: str) -> None:
         """Set a shortcut command"""
         self.current_profile["shortcuts"][name] = command
         self._save_profile()
-    
+
     def track_usage(self, command: str) -> None:
         """Track command usage"""
         stats = self.current_profile["usage_stats"]
         stats["total_commands"] += 1
         stats["last_active"] = datetime.now().isoformat()
-        
+
         # Track favorite commands
         if command not in stats["favorite_commands"]:
             stats["favorite_commands"].append(command)
-        
+
         # Keep only top 10
         stats["favorite_commands"] = stats["favorite_commands"][-10:]
-        
+
         self._save_profile()
-    
+
     def increment_session_count(self) -> None:
         """Increment session count"""
         self.current_profile["usage_stats"]["total_sessions"] += 1
         self._save_profile()
-    
+
     def list_profiles(self) -> List[str]:
         """List all available profiles"""
         if not self.profiles_dir.exists():
             return []
-        
+
         return [f.stem for f in self.profiles_dir.glob("*.json")]
-    
+
     def switch_profile(self, name: str) -> bool:
         """
 # ==============================================================================
@@ -179,14 +179,14 @@ Fixes:
 
 Switch to a different profile"""
         profile_file = self.profiles_dir / f"{name}.json"
-        
+
         if not profile_file.exists():
             return False
-        
+
         self.profile_name = name
         self.current_profile = self._load_profile(name)
         return True
-    
+
     def export_profile(self, output_file: str) -> None:
         """Export profile to file"""
         with open(output_file, 'w', encoding='utf-8') as f:

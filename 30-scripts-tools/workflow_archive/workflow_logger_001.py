@@ -23,13 +23,13 @@ class WorkflowLogger:
         LOG_DIR.mkdir(parents=True, exist_ok=True)
         if not LOG_FILE.exists():
             self._save({"logs": []})
-    
+
     def _load(self):
         return json.loads(LOG_FILE.read_text(encoding="utf-8", errors="replace"))
-    
+
     def _save(self, data):
         LOG_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2), encoding="utf-8")
-    
+
     def log(self, workflow, step, status="start", detail=""):
         data = self._load()
         data["logs"].append({
@@ -43,11 +43,11 @@ class WorkflowLogger:
             data["logs"] = data["logs"][-200:]
         self._save(data)
         return {"ok": True}
-    
+
     def list(self, limit=20):
         logs = self._load()["logs"]
         return logs[-limit:]
-    
+
     def stats(self):
         logs = self._load()["logs"]
         return {
@@ -57,7 +57,7 @@ class WorkflowLogger:
 
 if __name__ == "__main__":
     logger = WorkflowLogger()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--log":

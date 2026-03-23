@@ -18,7 +18,7 @@ class ToolCallTracker:
     def __init__(self):
         self.log_file = Path("30-scripts-tools/tool_call_log.jsonl")
         self.log_file.parent.mkdir(parents=True, exist_ok=True)
-    
+
     def log_call(self, tool_id: str, params: dict, result: dict, duration: float):
         """
 # ==============================================================================
@@ -74,7 +74,7 @@ Fixes:
         with open(self.log_file, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
         print(f"[TRACK] {tool_id} - {duration:.2f}s")
-    
+
     def _get_session_id(self) -> str:
         import os
         return os.environ.get("SESSION_ID", "unknown")

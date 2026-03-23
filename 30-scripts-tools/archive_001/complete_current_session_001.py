@@ -29,11 +29,11 @@ print(f"\n完成剩余步骤...")
 
 for i in range(1, total_steps + 1):
     step_id = float(i) if i not in completed_steps else None
-    
+
     # 检查是否已完成
     if i in completed_steps or str(i) in completed_steps or float(i) in completed_steps:
         continue
-    
+
     # 添加步骤
     step_key = str(i) if str(i) in state.get('step_status', {}) else i
     if step_key not in state.get('step_status', {}):

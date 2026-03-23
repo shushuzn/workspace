@@ -21,12 +21,12 @@ class ProtectionMonitor:
         self.current_step = None
         self.last_tool_call = None
         self.violations = []
-    
+
     def start_session(self, session_id: str):
         """开始监控会话"""
         self.session_id = session_id
         start_time = datetime.now().isoformat()
-        
+
         # 检查是否有活跃封锁
         lockdown_file = Path("30-scripts-tools/.lockdown_active")
         if lockdown_file.exists():
@@ -35,13 +35,13 @@ class ProtectionMonitor:
                 "reason": "系统处于封锁状态",
                 "session_id": session_id
             }
-        
+
         # 检查惩罚状态
         penalty_state = Path("30-scripts-tools/penalty_state.json")
         if penalty_state.exists():
             with open(penalty_state, "r", encoding="utf-8") as f:
                 state = json.load(f)
-            
+
             if state.get("current_level", 0) >= 3:
                 return {
                     "status": "restricted",
@@ -49,23 +49,23 @@ class ProtectionMonitor:
                     "restrictions": state.get("restrictions", []),
                     "session_id": session_id
                 }
-        
+
         # 记录会话开始
         self._log_event("session_start", {"session_id": session_id})
-        
+
         return {
             "status": "allowed",
             "session_id": session_id,
             "started_at": start_time
         }
-    
+
     def check_tool_call(self, tool_id: str, command: str = None) -> dict:
         """检查工具调用"""
-        
+
         # 检查封锁
         if self._is_lockdown():
             return self._block_action("系统封锁中，禁止所有操作")
-        
+
         # 检查惩罚等级
         restrictions = self._get_restrictions()
         if restrictions:
@@ -74,13 +74,13 @@ class ProtectionMonitor:
                 read_only_tools = ["risk-assessor", "penalty-system", "context-verify"]
                 if tool_id not in read_only_tools:
                     return self._block_action(f"只读模式，禁止调用 {tool_id}")
-            
+
             # Level 2: 禁止高风险操作
             if "禁止高风险操作" in restrictions:
                 high_risk_tools = ["sync-registry", "cleanup-tools", "delete-tool"]
                 if tool_id in high_risk_tools:
                     return self._block_action(f"限制模式，禁止高风险工具 {tool_id}")
-        
+
         # 记录工具调用
         self.last_tool_call = {
             "tool_id": tool_id,
@@ -88,18 +88,18 @@ class ProtectionMonitor:
             "timestamp": datetime.now().isoformat()
         }
         self._log_event("tool_call", self.last_tool_call)
-        
+
         return {
             "status": "allowed",
             "tool_id": tool_id
         }
-    
+
     def check_workflow_step(self, step_id: int, step_name: str) -> dict:
         """检查工作流步骤"""
-        
+
         if self._is_lockdown():
             return self._block_action("系统封锁中，禁止执行工作流")
-        
+
         # 检查是否按顺序执行
         if self.current_step is not None:
             if step_id != self.current_step + 1:
@@ -111,30 +111,30 @@ class ProtectionMonitor:
                 }
                 self._record_violation(violation)
                 return self._block_action(f"步骤跳跃：期望 Step {self.current_step + 1}, 实际 Step {step_id}")
-        
+
         self.current_step = step_id
         self._log_event("workflow_step", {
             "step_id": step_id,
             "step_name": step_name
         })
-        
+
         return {
             "status": "allowed",
             "step_id": step_id
         }
-    
+
     def check_file_modification(self, file_path: str, operation: str) -> dict:
         """检查文件修改"""
-        
+
         if self._is_lockdown():
             return self._block_action("系统封锁中，禁止修改文件")
-        
+
         restrictions = self._get_restrictions()
-        
+
         # 只读模式禁止所有修改
         if restrictions and "只读模式" in restrictions:
             return self._block_action(f"只读模式，禁止修改 {file_path}")
-        
+
         # 检查是否需要备份
         critical_files = [
             "tools_registry.json",
@@ -142,9 +142,9 @@ class ProtectionMonitor:
             "workflow.json",
             ".py"
         ]
-        
+
         needs_backup = any(cf in file_path for cf in critical_files)
-        
+
         if needs_backup and operation in ["write", "modify", "delete"]:
             # 检查是否有备份
             backup_dir = Path("99-backups/auto")
@@ -152,23 +152,23 @@ class ProtectionMonitor:
                 backups = list(backup_dir.glob(f"*{Path(file_path).name}"))
                 if not backups:
                     return self._warn_action(f"关键文件 {file_path} 修改前未备份")
-        
+
         self._log_event("file_modification", {
             "file_path": file_path,
             "operation": operation
         })
-        
+
         return {
             "status": "allowed",
             "file_path": file_path,
             "needs_backup": needs_backup
         }
-    
+
     def _is_lockdown(self) -> bool:
         """检查是否处于封锁状态"""
         lockdown_file = Path("30-scripts-tools/.lockdown_active")
         return lockdown_file.exists()
-    
+
     def _get_restrictions(self) -> list:
         """获取当前限制措施"""
         penalty_state = Path("30-scripts-tools/penalty_state.json")
@@ -177,7 +177,7 @@ class ProtectionMonitor:
                 state = json.load(f)
             return state.get("restrictions", [])
         return []
-    
+
     def _block_action(self, reason: str) -> dict:
         """阻断操作"""
         self._log_event("blocked", {"reason": reason})
@@ -186,7 +186,7 @@ class ProtectionMonitor:
             "reason": reason,
             "timestamp": datetime.now().isoformat()
         }
-    
+
     def _warn_action(self, warning: str) -> dict:
         """警告"""
         self._log_event("warning", {"warning": warning})
@@ -194,13 +194,13 @@ class ProtectionMonitor:
             "status": "allowed_with_warning",
             "warning": warning
         }
-    
+
     def _record_violation(self, violation: dict):
         """记录违规"""
         violation["session_id"] = self.session_id
         self.violations.append(violation)
         self._log_event("violation", violation)
-    
+
     def _log_event(self, event_type: str, data: dict):
         """
 # ==============================================================================
@@ -251,10 +251,10 @@ Fixes:
             "session_id": self.session_id,
             "data": data
         }
-        
+
         with open(MONITOR_LOG, "a", encoding="utf-8") as f:
             f.write(json.dumps(entry, ensure_ascii=False) + "\n")
-    
+
     def get_session_report(self) -> dict:
         """生成会话报告"""
         return {

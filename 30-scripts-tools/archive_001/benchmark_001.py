@@ -85,15 +85,15 @@ Run full benchmark suite"""
         "30-scripts-tools/multi_agent_router_001.py",
         "30-scripts-tools/multi_agent_viz_001.py"
     ]
-    
+
     results = {
         "timestamp": datetime.now().isoformat(),
         "benchmarks": {}
     }
-    
+
     print("\n[BENCHMARK-001 Performance Benchmark]")
     print("=" * 50)
-    
+
     for tool in tools_to_test:
         tool_path = Path(tool)
         if tool_path.exists():
@@ -103,19 +103,19 @@ Run full benchmark suite"""
             print(f"Avg: {result['avg']*1000:.1f}ms")
         else:
             print(f"Skip: {tool_path.name} (not found)")
-    
+
     # Save results
     BENCHMARK_FILE.parent.mkdir(parents=True, exist_ok=True)
     BENCHMARK_FILE.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
-    
+
     print("\n[TOP 3 FASTEST TOOLS]")
     sorted_tools = sorted(results["benchmarks"].items(), key=lambda x: x[1]["avg"])
     for i, (name, data) in enumerate(sorted_tools[:3], 1):
         print(f"  {i}. {name}: {data['avg']*1000:.1f}ms")
-    
+
     print(f"\n[Results saved to: {BENCHMARK_FILE}]")
     print("=" * 50)
-    
+
     return results
 
 if __name__ == "__main__":

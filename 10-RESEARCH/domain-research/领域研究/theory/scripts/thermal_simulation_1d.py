@@ -90,22 +90,22 @@ time_points = [0, 100, 200, 300, 400, 499]
 # ============================================================================
 for n in range(nt):
     T_new = T.copy()
-    
+
     # Internal nodes (diffusion)
     for i in range(1, nz-1):
         T_new[i] = T[i] + alpha * dt / dz**2 * (T[i+1] - 2*T[i] + T[i-1])
-    
+
     # Surface boundary (laser heating)
     # Only heat during dwell time
     if n * dt < t_dwell:
         # Surface heat flux
         T_new[0] = T[0] + q_laser * dt / (rho * Cp * dz)
-    
+
     # Bottom boundary (adiabatic)
     T_new[nz-1] = T[nz-1]
-    
+
     T = T_new
-    
+
     # Record history
     if n in time_points:
         T_history.append(T.copy())

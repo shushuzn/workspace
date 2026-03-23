@@ -95,28 +95,28 @@ async def extract_pdf(request: PDFExtractRequest):
     - **output_format**: 输出格式 (markdown/json)
     """
     start_time = time.time()
-    
+
     try:
         from pathlib import Path
         pdf_path = Path(request.file_path)
-        
+
         if not pdf_path.exists():
             raise HTTPException(status_code=404, detail=f"文件不存在：{request.file_path}")
-        
+
         # 调用 PDF 提取器
         import subprocess
         extractor_path = Path(__file__).parent.parent / "pdf-extractor" / "simple_pdf_extractor.py"
-        
+
         cmd = [
             "py", str(extractor_path),
             str(pdf_path),
             "-m", str(request.max_pages) if request.max_pages > 0 else "0"
         ]
-        
+
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
-        
+
         processing_time = time.time() - start_time
-        
+
         return PDFExtractResponse(
             success=True,
             data={
@@ -126,7 +126,7 @@ async def extract_pdf(request: PDFExtractRequest):
             message=f"PDF 提取完成 ({processing_time:.2f}s)",
             processing_time=processing_time
         )
-        
+
     except HTTPException:
         raise
     except Exception as e:
@@ -149,23 +149,23 @@ async def enhance_figure(request: FigureEnhanceRequest):
     - **auto_enhance**: 自动增强
     """
     start_time = time.time()
-    
+
     try:
         from pathlib import Path
         image_path = Path(request.image_path)
-        
+
         if not image_path.exists():
             raise HTTPException(status_code=404, detail=f"文件不存在：{request.image_path}")
-        
+
         # 调用质量过滤器
         import subprocess
         enhancer_path = Path(__file__).parent.parent / "figure-enhancer" / "quality_filter.py"
-        
+
         cmd = ["py", str(enhancer_path), str(image_path)]
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=30)
-        
+
         processing_time = time.time() - start_time
-        
+
         stdout_text = result.stdout or ""
         return FigureEnhanceResponse(
             success=True,
@@ -176,7 +176,7 @@ async def enhance_figure(request: FigureEnhanceRequest):
             message=f"质量评估完成 ({processing_time:.2f}s)",
             processing_time=processing_time
         )
-        
+
     except HTTPException:
         raise
     except Exception as e:
@@ -197,23 +197,23 @@ async def generate_brief(request: BriefGenerateRequest):
     - **send**: 是否发送到 Feishu
     """
     start_time = time.time()
-    
+
     try:
         import subprocess
         brief_path = Path(__file__).parent.parent / "daily-brief.py"
-        
+
         cmd = ["py", str(brief_path)]
-        
+
         if request.date:
             cmd.extend(["--date", request.date])
-        
+
         if request.send:
             cmd.append("--send")
-        
+
         result = subprocess.run(cmd, capture_output=True, text=True, timeout=60)
-        
+
         processing_time = time.time() - start_time
-        
+
         return BriefGenerateResponse(
             success=True,
             data={
@@ -223,7 +223,7 @@ async def generate_brief(request: BriefGenerateRequest):
             message=f"简报生成完成 ({processing_time:.2f}s)",
             processing_time=processing_time
         )
-        
+
     except Exception as e:
         return BriefGenerateResponse(
             success=False,

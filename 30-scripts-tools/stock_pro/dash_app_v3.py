@@ -36,14 +36,14 @@ COLORS = {
     'primary': '#6366F1',      # Indigo 500
     'primary_dark': '#4F46E5', # Indigo 600
     'primary_light': '#818CF8', # Indigo 400
-    
+
     # Semantic colors
     'success': '#10B981',      # Emerald 500
     'success_light': '#34D399', # Emerald 400
     'warning': '#F59E0B',      # Amber 500
     'danger': '#EF4444',       # Red 500
     'danger_light': '#F87171', # Red 400
-    
+
     # Neutral colors
     'bg_dark': '#0F172A',      # Slate 900
     'bg_card': '#1E293B',      # Slate 800
@@ -52,7 +52,7 @@ COLORS = {
     'text_secondary': '#94A3B8', # Slate 400
     'text_muted': '#64748B',    # Slate 500
     'border': '#334155',        # Slate 700
-    
+
     # Gradient colors
     'gradient_start': '#6366F1',
     'gradient_end': '#8B5CF6',
@@ -65,7 +65,7 @@ class Cache:
     def __init__(self):
         self.data = {}
         self.lock = threading.Lock()
-    
+
     def get(self, key, ttl=300):
         with self.lock:
             if key in self.data:
@@ -75,7 +75,7 @@ class Cache:
                 else:
                     del self.data[key]
             return None
-    
+
     def set(self, key, value):
         with self.lock:
             self.data[key] = (value, datetime.now())
@@ -129,14 +129,14 @@ def glass_card(children, className="", style=None, id=None):
     }
     if style:
         base_style.update(style)
-    
+
     return html.Div(children, className=f"glass-card {className}", style=base_style, id=id)
 
 def stat_card_v3(title, value, change=None, icon=None, accent=COLORS['primary']):
     """Modern stat card with improved visual hierarchy"""
     change_color = COLORS['success'] if change and change > 0 else COLORS['danger'] if change and change < 0 else COLORS['text_secondary']
     change_icon = "↑" if change and change > 0 else "↓" if change and change < 0 else "→"
-    
+
     return glass_card([
         html.Div([
             # Icon circle
@@ -192,10 +192,10 @@ def stock_row_v3(symbol, data, rank=None):
     score = data.get('score', 0)
     upside = data.get('upside', 0)
     price = data.get('price', 0)
-    
+
     score_color = get_score_color(score)
     upside_color = COLORS['success'] if upside > 0 else COLORS['danger']
-    
+
     return html.Div([
         # Rank badge
         html.Div(str(rank) if rank else "", style={
@@ -211,7 +211,7 @@ def stock_row_v3(symbol, data, rank=None):
             'color': COLORS['text_primary'] if rank and rank <= 3 else COLORS['text_secondary'],
             'marginRight': '16px',
         }) if rank else None,
-        
+
         # Symbol and name
         html.Div([
             html.Div(symbol, style={
@@ -225,7 +225,7 @@ def stock_row_v3(symbol, data, rank=None):
                 'marginTop': '2px',
             }),
         ], style={'flex': '1'}),
-        
+
         # Score badge
         html.Div([
             html.Span(f"{score:.0f}", style={
@@ -239,7 +239,7 @@ def stock_row_v3(symbol, data, rank=None):
             'background': get_score_bg(score),
             'marginRight': '16px',
         }),
-        
+
         # Price
         html.Div([
             html.Div(f"${price:.2f}", style={
@@ -261,7 +261,7 @@ def stock_row_v3(symbol, data, rank=None):
                 'marginTop': '2px',
             }),
         ], style={'minWidth': '80px'}),
-        
+
     ], style={
         'display': 'flex',
         'alignItems': 'center',
@@ -380,7 +380,7 @@ app.layout = html.Div([
             background: #64748B;
         }
     """),
-    
+
     # Main container
     html.Div([
         # Header
@@ -415,7 +415,7 @@ app.layout = html.Div([
             'paddingBottom': '24px',
             'borderBottom': f'1px solid {COLORS["border"]}',
         }),
-        
+
         # Stats row
         html.Div(id="stats-row", style={
             'display': 'grid',
@@ -423,7 +423,7 @@ app.layout = html.Div([
             'gap': '20px',
             'marginBottom': '32px',
         }),
-        
+
         # Search bar
         glass_card([
             html.Div([
@@ -462,13 +462,13 @@ app.layout = html.Div([
                 'gap': '12px',
             }),
         ], style={'marginBottom': '24px'}),
-        
+
         # Loading indicator
         html.Div(id="loading-indicator"),
-        
+
         # Analysis result
         html.Div(id="analysis-result"),
-        
+
         # Tabs
         html.Div([
             html.Button("🏆 Top Picks", id="tab-top", className="tab-btn tab-active", n_clicks=1),
@@ -481,17 +481,17 @@ app.layout = html.Div([
             'marginBottom': '24px',
             'flexWrap': 'wrap',
         }),
-        
+
         # Tab content
         html.Div(id="tab-content"),
-        
+
     ], style={
         'maxWidth': '1400px',
         'margin': '0 auto',
         'padding': '32px',
         'minHeight': '100vh',
     }),
-    
+
 ], style={
     'background': f'linear-gradient(135deg, {COLORS["bg_dark"]} 0%, #1a1f2e 100%)',
     'fontFamily': '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif',
@@ -511,14 +511,14 @@ app.layout = html.Div([
 def update_stats(_):
     cache_key = "stats_v3"
     stats = cache.get(cache_key, ttl=300)
-    
+
     if not stats:
         from stock_pro.core import A, P
         total = len(A)
         scores = [A[s][2] for s in A] if A else [65]
         avg = sum(scores)/len(scores) if scores else 65
         buys = len([s for s in A if A[s][1] in ['Overweight', 'Outperform', 'Strong Buy', 'Buy']]) if A else 0
-        
+
         upsides = []
         for s in A:
             if s in P:
@@ -527,7 +527,7 @@ def update_stats(_):
                 if price > 0:
                     upsides.append((target - price) / price * 100)
         top_up = max(upsides) if upsides else 25
-        
+
         stats = [
             stat_card_v3('Total Stocks', total, icon='📊', accent=COLORS['primary']),
             stat_card_v3('Avg Score', f"{avg:.0f}", chg=2.1, icon='🎯', accent=COLORS['success']),
@@ -535,7 +535,7 @@ def update_stats(_):
             stat_card_v3('Strong Buys', buys, icon='⭐', accent=COLORS['success_light']),
         ]
         cache.set(cache_key, stats)
-    
+
     return stats, f"Last updated: {datetime.now().strftime('%H:%M:%S')}"
 
 # Tab switching
@@ -556,12 +556,12 @@ def update_tab(top, value, growth, dividend):
         tab = "top"
     else:
         tab = ctx.triggered[0]["prop_id"].split(".")[0].replace("tab-", "")
-    
+
     classes = ["tab-btn"] * 4
     tab_map = {"top": 0, "value": 1, "growth": 2, "dividend": 3}
     if tab in tab_map:
         classes[tab_map[tab]] = "tab-btn tab-active"
-    
+
     # Get data
     if tab == "top":
         data = top_picks(15) or []
@@ -579,12 +579,12 @@ def update_tab(top, value, growth, dividend):
         data = dividend_picks() or []
         title = "💵 Dividend Stocks"
         desc = "Stocks with attractive dividend yields"
-    
+
     if not data:
         return html.Div("No data available", style={'color': COLORS['text_secondary']}), *classes
-    
+
     rows = [stock_row_v3(s['symbol'], s, rank=i+1) for i, s in enumerate(data)]
-    
+
     content = glass_card([
         html.Div([
             html.H2(title, style={
@@ -600,7 +600,7 @@ def update_tab(top, value, growth, dividend):
         ], style={'marginBottom': '20px'}),
         html.Div(rows),
     ])
-    
+
     return content, *classes
 
 # Analysis callback
@@ -614,10 +614,10 @@ def update_tab(top, value, growth, dividend):
 def analyze_stock(n_clicks, symbol):
     if not n_clicks or not symbol:
         return None, None
-    
+
     # Show loading
     loading = loading_spinner(f"Analyzing {symbol.upper()}...")
-    
+
     try:
         data = analyze(symbol.upper())
         if not data or 'error' in data:
@@ -634,10 +634,10 @@ def analyze_stock(n_clicks, symbol):
                     'color': COLORS['text_secondary'],
                 }),
             ]), None
-        
+
         score = data.get('score', 0)
         upside = data.get('upside', 0)
-        
+
         result = glass_card([
             # Header
             html.Div([
@@ -681,7 +681,7 @@ def analyze_stock(n_clicks, symbol):
                 'paddingBottom': '20px',
                 'borderBottom': f'1px solid {COLORS["border"]}',
             }),
-            
+
             # Score and rating
             html.Div([
                 html.Div([
@@ -705,7 +705,7 @@ def analyze_stock(n_clicks, symbol):
                         }),
                     ], style={'display': 'flex', 'alignItems': 'baseline'}),
                 ], style={'flex': '1'}),
-                
+
                 html.Div([
                     html.Div("Rating", style={
                         'fontSize': '12px',
@@ -726,7 +726,7 @@ def analyze_stock(n_clicks, symbol):
                 'display': 'flex',
                 'marginBottom': '24px',
             }),
-            
+
             # Metrics grid
             html.Div([
                 metric_badge("P/E Ratio", f"{data.get('pe', 0):.1f}", "x"),
@@ -739,7 +739,7 @@ def analyze_stock(n_clicks, symbol):
                 'gap': '12px',
                 'marginBottom': '20px',
             }),
-            
+
             # Recommendation
             html.Div([
                 html.Div("🎯 Recommendation", style={
@@ -757,11 +757,11 @@ def analyze_stock(n_clicks, symbol):
                     'borderRadius': '10px',
                 }),
             ]),
-            
+
         ], style={'animation': 'fadeIn 0.3s ease'})
-        
+
         return result, None
-        
+
     except Exception as e:
         return glass_card([
             html.Div("❌ Error", style={

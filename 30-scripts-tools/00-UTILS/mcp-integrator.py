@@ -121,10 +121,10 @@ async def call_tool(tool_name: str, arguments: Dict) -> Any:
     """调用 MCP 工具"""
     # 简化实现：模拟工具调用
     # 实际应该使用 @modelcontextprotocol/sdk 连接服务器
-    
+
     log(f"🔧 调用工具：{tool_name}")
     log(f"   参数：{json.dumps(arguments, ensure_ascii=False)}")
-    
+
     # 模拟响应
     if tool_name == "filesystem.read_file":
         path = arguments.get('path', '')
@@ -132,7 +132,7 @@ async def call_tool(tool_name: str, arguments: Dict) -> Any:
             with open(path, 'r', encoding='utf-8') as f:
                 return {"content": f.read()[:1000]}
         return {"error": f"File not found: {path}"}
-    
+
     elif tool_name == "filesystem.write_file":
         path = arguments.get('path', '')
         content = arguments.get('content', '')
@@ -142,7 +142,7 @@ async def call_tool(tool_name: str, arguments: Dict) -> Any:
             return {"success": True, "path": path}
         except Exception as e:
             return {"error": str(e)}
-    
+
     elif tool_name == "fetch.get":
         url = arguments.get('url', '')
         try:
@@ -151,7 +151,7 @@ async def call_tool(tool_name: str, arguments: Dict) -> Any:
             return {"content": resp.text[:2000], "status": resp.status_code}
         except Exception as e:
             return {"error": str(e)}
-    
+
     elif tool_name == "filesystem.search":
         path = arguments.get('path', WORKSPACE)
         pattern = arguments.get('pattern', '*.md')
@@ -165,7 +165,7 @@ async def call_tool(tool_name: str, arguments: Dict) -> Any:
             return {"files": results[:50]}
         except Exception as e:
             return {"error": str(e)}
-    
+
     else:
         return {"error": f"Unknown tool: {tool_name}"}
 
@@ -175,7 +175,7 @@ def cmd_init():
     log("🚀 初始化 MCP 配置")
     config = {"servers": DEFAULT_SERVERS}
     save_config(config)
-    
+
     print("\n✅ MCP 配置已创建")
     print(f"📁 位置：{CONFIG_PATH}")
     print("\n可用服务器:")
@@ -187,7 +187,7 @@ def cmd_list():
     """列出可用工具"""
     log("📋 列出 MCP 工具")
     tools = list_available_tools()
-    
+
     print("\n🔧 可用 MCP 工具:\n")
     for tool in tools:
         print(f"### {tool['name']}")
@@ -198,15 +198,15 @@ def cmd_list():
 def cmd_call(tool_name: str, args_json: str):
     """调用工具"""
     log(f"🔧 调用工具：{tool_name}")
-    
+
     try:
         arguments = json.loads(args_json) if args_json else {}
     except json.JSONDecodeError as e:
         print(f"❌ 参数解析失败：{e}")
         return
-    
+
     result = asyncio.run(call_tool(tool_name, arguments))
-    
+
     print("\n📤 工具返回结果:\n")
     print(json.dumps(result, indent=2, ensure_ascii=False))
 
@@ -214,7 +214,7 @@ def cmd_status():
     """显示 MCP 状态"""
     log("📊 MCP 状态")
     config = load_config()
-    
+
     print("\n📡 MCP 服务器状态:\n")
     for name, server in config.get('servers', {}).items():
         status = "✅" if server.get('enabled', False) else "⏸️"
@@ -227,7 +227,7 @@ def cmd_enable(server_name: str):
     """启用服务器"""
     log(f"✅ 启用服务器：{server_name}")
     config = load_config()
-    
+
     if server_name in config.get('servers', {}):
         config['servers'][server_name]['enabled'] = True
         save_config(config)
@@ -239,7 +239,7 @@ def cmd_disable(server_name: str):
     """禁用服务器"""
     log(f"⏸️ 禁用服务器：{server_name}")
     config = load_config()
-    
+
     if server_name in config.get('servers', {}):
         config['servers'][server_name]['enabled'] = False
         save_config(config)
@@ -250,34 +250,34 @@ def cmd_disable(server_name: str):
 # ============ 主流程 ============
 def main():
     import argparse
-    
+
     parser = argparse.ArgumentParser(description='MCP 工具集成')
     subparsers = parser.add_subparsers(dest='command', help='命令')
-    
+
     # init 命令
     subparsers.add_parser('init', help='初始化 MCP 配置')
-    
+
     # list 命令
     subparsers.add_parser('list', help='列出可用工具')
-    
+
     # status 命令
     subparsers.add_parser('status', help='显示 MCP 状态')
-    
+
     # call 命令
     call_parser = subparsers.add_parser('call', help='调用工具')
     call_parser.add_argument('tool', type=str, help='工具名称')
     call_parser.add_argument('args', type=str, nargs='?', default='{}', help='JSON 参数')
-    
+
     # enable 命令
     enable_parser = subparsers.add_parser('enable', help='启用服务器')
     enable_parser.add_argument('server', type=str, help='服务器名称')
-    
+
     # disable 命令
     disable_parser = subparsers.add_parser('disable', help='禁用服务器')
     disable_parser.add_argument('server', type=str, help='服务器名称')
-    
+
     args = parser.parse_args()
-    
+
     if args.command == 'init':
         cmd_init()
     elif args.command == 'list':

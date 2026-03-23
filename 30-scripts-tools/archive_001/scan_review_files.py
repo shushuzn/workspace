@@ -29,15 +29,15 @@ for f in review:
     if not p.exists():
         print(f'{f:40} | [NOT FOUND]')
         continue
-    
+
     try:
         content = p.read_text(encoding='utf-8', errors='ignore')[:300]
         # 提取函数名
         lines = content.split('\n')
-        funcs = [line.strip().replace('def ', '') for line in lines 
+        funcs = [line.strip().replace('def ', '') for line in lines
                  if line.strip().startswith('def ') and not line.strip().startswith('def _')]
         func_str = ', '.join([f.split('(')[0] for f in funcs[:3]]) if funcs else 'N/A'
-        
+
         # 简单判断
         if 'reg_' in f and '_v_' in f:
             safe_delete.append(f)
@@ -54,7 +54,7 @@ for f in review:
         else:
             needs_review.append(f)
             status = '[NEEDS REVIEW]'
-        
+
         print(f'{f:40} | {func_str[:35]:35} | {status}')
     except Exception as e:
         print(f'{f:40} | ERROR: {e}')

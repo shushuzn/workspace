@@ -97,15 +97,15 @@ class InMemoryTaskQueue:
         self.tasks: Dict[str, Dict] = {}
         self.queue: asyncio.Queue = None
         self.lock = asyncio.Lock()
-    
+
     async def initialize(self):
         self.queue = asyncio.Queue()
-    
+
     async def enqueue(self, task_id: str, task_data: Dict):
         async with self.lock:
             self.tasks[task_id] = task_data
             await self.queue.put(task_id)
-    
+
     async def dequeue(self, timeout: float = 1.0):
         try:
             task_id = await asyncio.wait_for(self.queue.get(), timeout=timeout)
@@ -113,17 +113,17 @@ class InMemoryTaskQueue:
                 return self.tasks.get(task_id)
         except asyncio.TimeoutError:
             return None
-    
+
     async def get_task(self, task_id: str) -> Optional[Dict]:
         async with self.lock:
             return self.tasks.get(task_id)
-    
+
     async def update_task(self, task_id: str, updates: Dict):
         async with self.lock:
             if task_id in self.tasks:
                 self.tasks[task_id].update(updates)
                 self.tasks[task_id]['updated_at'] = datetime.datetime.now().isoformat()
-    
+
     async def list_tasks(self, limit: int = 100) -> List[Dict]:
         async with self.lock:
             tasks = list(self.tasks.values())
@@ -139,20 +139,20 @@ class ConnectionManager:
     def __init__(self):
         self.active_connections: Dict[str, List[WebSocket]] = {}
         self.lock = asyncio.Lock()
-    
+
     async def connect(self, websocket: WebSocket, task_id: str):
         await websocket.accept()
         async with self.lock:
             if task_id not in self.active_connections:
                 self.active_connections[task_id] = []
             self.active_connections[task_id].append(websocket)
-    
+
     def disconnect(self, websocket: WebSocket, task_id: str):
         if task_id in self.active_connections:
             self.active_connections[task_id].remove(websocket)
             if not self.active_connections[task_id]:
                 del self.active_connections[task_id]
-    
+
     async def broadcast(self, task_id: str, message: Dict):
         async with self.lock:
             if task_id in self.active_connections:
@@ -189,10 +189,10 @@ async def get_sessions() -> Dict:
     """Get recent session history"""
     sessions_dir = WORKSPACE_DIR / 'sessions'
     sessions = []
-    
+
     try:
         if sessions_dir.exists():
-            files = sorted([f for f in sessions_dir.iterdir() if f.suffix == '.json'], 
+            files = sorted([f for f in sessions_dir.iterdir() if f.suffix == '.json'],
                           key=lambda x: x.stat().st_mtime, reverse=True)[:10]
             for filepath in files:
                 try:
@@ -210,13 +210,13 @@ async def get_sessions() -> Dict:
                     pass
     except Exception as e:
         return {'error': str(e)}
-    
+
     return {'sessions': sessions, 'total': len(sessions)}
 
 async def get_innovations() -> Dict:
     """Get innovation database"""
     innovations_file = DATA_DIR / 'innovations.json'
-    
+
     if innovations_file.exists():
         with open(innovations_file, 'r', encoding='utf-8') as f:
             return json.load(f)
@@ -250,29 +250,29 @@ async def get_memory_status() -> Dict:
         'recent_insights': [],
         'weekly_progress': 0
     }
-    
+
     try:
         if memory_dir.exists():
             files = [f.name for f in memory_dir.iterdir() if f.suffix == '.md' and f.name[0].isdigit()]
             result['daily_notes'] = len(files)
-            
+
             memory_file = WORKSPACE_DIR / 'MEMORY.md'
             if memory_file.exists():
                 result['memory_file_size'] = memory_file.stat().st_size // 1024
-            
+
             recent_files = sorted(files, reverse=True)[:5]
             result['recent_insights'] = [
                 {'file': f, 'date': f.replace('.md', '')}
                 for f in recent_files
             ]
-            
+
             today = datetime.datetime.now()
             week_ago = today - datetime.timedelta(days=7)
             week_files = [f for f in files if f.replace('.md', '') >= week_ago.strftime('%Y-%m-%d')]
             result['weekly_progress'] = min(100, len(week_files) * 20)
     except Exception as e:
         result['error'] = str(e)
-    
+
     return result
 
 async def get_git_stats() -> Dict:
@@ -284,16 +284,16 @@ async def get_git_stats() -> Dict:
         'recent_commits': [],
         'files_changed': {'created': 0, 'modified': 0, 'deleted': 0}
     }
-    
+
     try:
         os.chdir(WORKSPACE_DIR)
-        
+
         # Total commits
         total = subprocess.run(['git', 'rev-list', '--count', 'HEAD'],
                                capture_output=True, text=True, timeout=10)
         if total.returncode == 0:
             result['total_commits'] = int(total.stdout.strip())
-        
+
         # Recent commits
         log = subprocess.run(['git', 'log', '--oneline', '-10'],
                              capture_output=True, text=True, timeout=10)
@@ -302,14 +302,14 @@ async def get_git_stats() -> Dict:
                 {'hash': line.split()[0], 'message': ' '.join(line.split()[1:])}
                 for line in log.stdout.strip().split('\n') if line
             ]
-        
+
         # Today's commits
         log_today = subprocess.run(['git', 'log', '--since=today', '--oneline'],
                                    capture_output=True, text=True, timeout=10)
         if log_today.returncode == 0:
             commits = [l for l in log_today.stdout.strip().split('\n') if l]
             result['today_commits'] = len(commits)
-        
+
         # Week's commits
         week_ago = (datetime.datetime.now() - datetime.timedelta(days=7)).strftime('%Y-%m-%d')
         log_week = subprocess.run(['git', 'log', f'--since={week_ago}', '--oneline'],
@@ -319,7 +319,7 @@ async def get_git_stats() -> Dict:
             result['week_commits'] = len(commits)
     except Exception as e:
         result['error'] = str(e)
-    
+
     return result
 
 async def get_system_health() -> Dict:
@@ -339,14 +339,14 @@ async def get_system_health() -> Dict:
                 {'name': 'Stock Analyzer', 'port': 8500, 'status': 'unknown'}
             ]
         }
-        
+
         if result['local']['cpu_percent'] < 80 and result['local']['memory_percent'] < 80:
             result['local']['status'] = 'healthy'
         elif result['local']['cpu_percent'] < 90 or result['local']['memory_percent'] < 90:
             result['local']['status'] = 'warning'
         else:
             result['local']['status'] = 'critical'
-        
+
         return result
     except Exception as e:
         return {'error': str(e)}
@@ -365,13 +365,13 @@ async def process_long_task(task_id: str, task_type: str, payload: Dict):
             'status': TaskStatus.RUNNING.value,
             'progress': 0
         })
-        
+
         # Simulate task execution (replace with actual logic)
         steps = payload.get('steps', 10)
         for i in range(steps):
             await asyncio.sleep(0.5)  # Simulate work
             progress = int((i + 1) / steps * 100)
-            
+
             await task_queue.update_task(task_id, {'progress': progress})
             await manager.broadcast(task_id, {
                 'type': 'progress_update',
@@ -379,7 +379,7 @@ async def process_long_task(task_id: str, task_type: str, payload: Dict):
                 'progress': progress,
                 'message': f'Step {i + 1}/{steps}'
             })
-        
+
         # Task completed
         result = {'processed': True, 'steps_completed': steps}
         await task_queue.update_task(task_id, {
@@ -392,7 +392,7 @@ async def process_long_task(task_id: str, task_type: str, payload: Dict):
             'task_id': task_id,
             'result': result
         })
-        
+
     except Exception as e:
         await task_queue.update_task(task_id, {
             'status': TaskStatus.FAILED.value,
@@ -438,14 +438,14 @@ async def api_innovations():
 async def api_add_innovation(innovation: InnovationCreate):
     """Add new innovation"""
     innovations_file = DATA_DIR / 'innovations.json'
-    
+
     # Load existing
     if innovations_file.exists():
         with open(innovations_file, 'r', encoding='utf-8') as f:
             db = json.load(f)
     else:
         db = {'innovations': [], 'total': 0}
-    
+
     # Add new
     new_innovation = {
         'id': f"INNOVATOR-{len(db['innovations']) + 1:03d}",
@@ -456,14 +456,14 @@ async def api_add_innovation(innovation: InnovationCreate):
         'status': 'pending',
         'created_at': datetime.datetime.now().isoformat()
     }
-    
+
     db['innovations'].append(new_innovation)
     db['total'] = len(db['innovations'])
-    
+
     # Save
     with open(innovations_file, 'w', encoding='utf-8') as f:
         json.dump(db, f, ensure_ascii=False, indent=2)
-    
+
     return {'success': True, 'innovation': new_innovation}
 
 @app.get("/api/memory")
@@ -514,7 +514,7 @@ async def create_task(task_data: TaskCreate, background_tasks: BackgroundTasks):
     """Create new async task"""
     task_id = str(uuid.uuid4())
     now = datetime.datetime.now().isoformat()
-    
+
     task = {
         'task_id': task_id,
         'task_type': task_data.task_type,
@@ -527,10 +527,10 @@ async def create_task(task_data: TaskCreate, background_tasks: BackgroundTasks):
         'result': None,
         'error': None
     }
-    
+
     # Enqueue task
     await task_queue.enqueue(task_id, task)
-    
+
     # Start background processing
     background_tasks.add_task(
         process_long_task,
@@ -538,7 +538,7 @@ async def create_task(task_data: TaskCreate, background_tasks: BackgroundTasks):
         task_data.task_type,
         task_data.payload
     )
-    
+
     return {
         'task_id': task_id,
         'status': TaskStatus.PENDING.value,
@@ -551,19 +551,19 @@ async def cancel_task(task_id: str):
     task = await task_queue.get_task(task_id)
     if not task:
         raise HTTPException(status_code=404, detail="Task not found")
-    
+
     if task['status'] in [TaskStatus.COMPLETED.value, TaskStatus.FAILED.value]:
         raise HTTPException(status_code=400, detail="Cannot cancel completed/failed task")
-    
+
     await task_queue.update_task(task_id, {
         'status': TaskStatus.CANCELLED.value
     })
-    
+
     await manager.broadcast(task_id, {
         'type': 'cancelled',
         'task_id': task_id
     })
-    
+
     return {'success': True, 'message': 'Task cancelled'}
 
 # ============== WebSocket Endpoint ==============
@@ -572,7 +572,7 @@ async def cancel_task(task_id: str):
 async def websocket_endpoint(websocket: WebSocket, task_id: str):
     """WebSocket for real-time task updates"""
     await manager.connect(websocket, task_id)
-    
+
     # Send current task status
     task = await task_queue.get_task(task_id)
     if task:
@@ -580,7 +580,7 @@ async def websocket_endpoint(websocket: WebSocket, task_id: str):
             'type': 'initial_status',
             'task': task
         })
-    
+
     try:
         while True:
             # Keep connection alive
@@ -607,15 +607,15 @@ async def serve_dashboard():
 async def startup_event():
     """Initialize on startup"""
     global task_queue, redis_client
-    
+
     print("\n🚀 Innovator Dashboard API v4.0")
     print("=" * 60)
-    
+
     # Initialize task queue
     task_queue = InMemoryTaskQueue()
     await task_queue.initialize()
     print("✅ Task queue initialized (in-memory)")
-    
+
     # Try to connect to Redis
     if REDIS_AVAILABLE:
         try:
@@ -625,7 +625,7 @@ async def startup_event():
         except Exception as e:
             print(f"⚠️  Redis not available: {e}")
             redis_client = None
-    
+
     print(f"📁 Workspace: {WORKSPACE_DIR}")
     print(f"📁 Data: {DATA_DIR}")
     print(f"🌐 Server: http://0.0.0.0:{PORT}")

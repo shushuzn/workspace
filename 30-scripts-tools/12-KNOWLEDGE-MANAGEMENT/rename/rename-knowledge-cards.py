@@ -11,7 +11,7 @@ BASE_DIR = "D:/OpenClaw/workspace/60-knowledge-cards"
 # 学科分类映射 (中文→英文)
 MAPPING = {
     "01-语文": "01-chinese",
-    "02-数学": "02-mathematics", 
+    "02-数学": "02-mathematics",
     "03-英语": "03-english",
     "04-物理": "04-physics",
     "05-化学": "05-chemistry",
@@ -38,7 +38,7 @@ MAPPING = {
 def main():
     folders = os.listdir(BASE_DIR)
     print(f"找到 {len(folders)} 个文件夹")
-    
+
     renamed = 0
     for folder in folders:
         # 尝试匹配中文文件夹
@@ -47,13 +47,13 @@ def main():
                 old_path = os.path.join(BASE_DIR, folder)
                 new_name = folder.replace(cn, en)
                 new_path = os.path.join(BASE_DIR, new_name)
-                
+
                 if old_path != new_path and os.path.exists(old_path):
                     print(f"重命名：{folder} → {new_name}")
                     os.rename(old_path, new_path)
                     renamed += 1
                 break
-    
+
     print(f"\n完成！重命名 {renamed} 个文件夹")
 
 if __name__ == "__main__":

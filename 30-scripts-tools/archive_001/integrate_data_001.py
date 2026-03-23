@@ -20,7 +20,7 @@ from pathlib import Path
 
 class DataConnector:
     """数据连接器"""
-    
+
     @staticmethod
     def read_csv(file_path: str) -> list:
         """读取CSV"""
@@ -30,20 +30,20 @@ class DataConnector:
             for row in reader:
                 data.append(row)
         return data
-    
+
     @staticmethod
     def read_json(file_path: str) -> dict:
         """读取JSON"""
         with open(file_path, 'r', encoding='utf-8') as f:
             return json.load(f)
-    
+
     @staticmethod
     def convert_format(input_data: list, output_format: str = "json") -> str:
         """转换格式"""
         if output_format == "json":
             return json.dumps(input_data, ensure_ascii=False, indent=2)
         return str(input_data)
-    
+
     @staticmethod
     def filter_data(data: list, key: str, value: str) -> list:
         """过滤数据"""
@@ -53,10 +53,10 @@ class DataConnector:
 logging.basicConfig(level=logging.INFO)
 def main():
     connector = DataConnector()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
-        
+
         if cmd == "--csv":
             path = sys.argv[2] if len(sys.argv) > 2 else "data.csv"
             try:
@@ -65,7 +65,7 @@ def main():
             except Exception as e:
                 print(f"Error: {e}")
             return 0
-        
+
         if cmd == "--json":
             path = sys.argv[2] if len(sys.argv) > 2 else "data.json"
             try:
@@ -74,11 +74,11 @@ def main():
             except Exception as e:
                 print(f"Error: {e}")
             return 0
-        
+
         if cmd == "--convert":
             print(connector.convert_format([{"a": 1}, {"b": 2}], "json"))
             return 0
-    
+
     print("INTEGRATE-002 Data Connector")
     print("Usage:")
     print("  py integrate_002.py --csv <path>")

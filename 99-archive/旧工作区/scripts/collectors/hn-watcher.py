@@ -37,7 +37,7 @@ def fetch_hn_stories():
     """获取 HN 故事列表"""
     print(f"Fetching top {MAX_STORIES} stories...")
     story_ids = get_top_stories(MAX_STORIES)
-    
+
     stories = []
     for story_id in story_ids:
         try:
@@ -46,32 +46,32 @@ def fetch_hn_stories():
                 stories.append(story)
         except Exception as e:
             print(f"  [WARN] Story {story_id}: {e}")
-    
+
     return stories
 
 def classify_story(story):
     """AI 分类故事 (简化版：基于标题关键词)"""
     title = story.get('title', '').lower()
-    
+
     ai_keywords = ['ai', 'machine learning', 'llm', 'gpt', 'transformer', 'neural']
     ml_keywords = ['python', 'data', 'algorithm', 'model', 'training']
-    
+
     score = 0
     tags = []
-    
+
     for kw in ai_keywords:
         if kw in title:
             score += 2
             tags.append(kw.upper())
-    
+
     for kw in ml_keywords:
         if kw in title:
             score += 1
             tags.append(kw.title())
-    
+
     # 优先级评分 (1-5)
     priority = min(5, max(1, score))
-    
+
     return {
         'tags': tags,
         'priority': priority,
@@ -83,29 +83,29 @@ def save_stories(stories):
     date_str = datetime.now().strftime('%Y-%m-%d')
     save_dir = HN_SAVE_DIR / date_str
     save_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # 保存为 Markdown
     filename = f"hn-daily-{date_str}.md"
     filepath = save_dir / filename
-    
+
     ai_stories = []
     other_stories = []
-    
+
     for story in stories:
         classification = classify_story(story)
         story['classification'] = classification
-        
+
         if classification['is_ai_related']:
             ai_stories.append(story)
         else:
             other_stories.append(story)
-    
+
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(f"# HackerNews Daily - {date_str}\n\n")
         f.write(f"**收集时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"**总数:** {len(stories)} | **AI 相关:** {len(ai_stories)}\n\n")
         f.write("---\n\n")
-        
+
         # AI 相关文章
         if ai_stories:
             f.write("## 🤖 AI/ML 相关文章\n\n")
@@ -116,13 +116,13 @@ def save_stories(stories):
                 f.write(f"**标签:** {', '.join(story['classification']['tags'])}\n")
                 f.write(f"**优先级:** {'⭐' * story['classification']['priority']}\n\n")
                 f.write("---\n\n")
-        
+
         # 其他文章
         if other_stories:
             f.write("## 📰 其他文章\n\n")
             for i, story in enumerate(other_stories, 1):
                 f.write(f"{i}. [{story['title']}]({story.get('url', '#')}) - {story.get('score', 'N/A')} 分\n\n")
-    
+
     print(f"  [OK] Saved {len(stories)} stories to {filename}")
     print(f"       AI/ML related: {len(ai_stories)}")
     return filepath
@@ -132,20 +132,20 @@ def monitor_hn():
     print("=" * 60)
     print("HackerNews Watcher v1 - Firebase API")
     print("=" * 60)
-    
+
     date_str = datetime.now().strftime('%Y-%m-%d')
     print(f"\nDate: {date_str}")
     print(f"Check interval: {CHECK_INTERVAL_HOURS} hours")
     print("-" * 60)
-    
+
     stories = fetch_hn_stories()
     save_stories(stories)
-    
+
     print("-" * 60)
     print(f"\n[COMPLETE] Total: {len(stories)} stories")
     print(f"Save dir: {HN_SAVE_DIR / date_str}")
     print("=" * 60)
-    
+
     return len(stories)
 
 if __name__ == "__main__":

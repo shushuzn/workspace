@@ -26,16 +26,16 @@ def count_pnotes(workspace: str) -> dict:
     medium_path = Path(workspace) / ".." / ".." / "obsidian" / "Vault" / "Medium"
     if not medium_path.exists():
         medium_path = Path(workspace) / "Medium"
-    
+
     pnotes = list(medium_path.glob("P-*.md")) if medium_path.exists() else []
-    
+
     # 按年份统计
     by_year = defaultdict(int)
     for p in pnotes:
         match = re.search(r"P-(\d{4})", p.name)
         if match:
             by_year[match.group(1)] += 1
-    
+
     # 按标签统计 (需要读取文件)
     by_tag = defaultdict(int)
     for p in pnotes[:10]:  # 限制读取数量
@@ -48,7 +48,7 @@ def count_pnotes(workspace: str) -> dict:
                     by_tag[tag] += 1
         except:
             pass
-    
+
     return {
         "total": len(pnotes),
         "by_year": dict(by_year),
@@ -61,9 +61,9 @@ def count_cnotes(workspace: str) -> dict:
     foundations_path = Path(workspace) / ".." / ".." / "obsidian" / "Vault" / "AI-Research" / "01-Foundations"
     if not foundations_path.exists():
         foundations_path = Path(workspace) / "AI-Research" / "01-Foundations"
-    
+
     cnotes = list(foundations_path.glob("C-*.md")) if foundations_path.exists() else []
-    
+
     return {
         "total": len(cnotes),
         "files": [c.name for c in cnotes[:10]]
@@ -75,9 +75,9 @@ def count_mnotes(workspace: str) -> dict:
     radar_path = Path(workspace) / ".." / ".." / "obsidian" / "Vault" / "AI-Research" / "00-Radar"
     if not radar_path.exists():
         radar_path = Path(workspace) / "AI-Research" / "00-Radar"
-    
+
     mnotes = list(radar_path.glob("M-*.md")) if radar_path.exists() else []
-    
+
     return {
         "total": len(mnotes),
         "files": [m.name for m in mnotes[:10]]
@@ -87,17 +87,17 @@ def count_mnotes(workspace: str) -> dict:
 def count_knowledge_graph(workspace: str) -> dict:
     """统计知识图谱"""
     kg_path = Path(workspace) / "knowledge-graph"
-    
+
     stats = {
         "exists": kg_path.exists(),
         "files": [],
         "entities": 0,
         "relations": 0
     }
-    
+
     if kg_path.exists():
         stats["files"] = [f.name for f in kg_path.glob("*")]
-        
+
         # 读取 JSON 统计
         json_path = kg_path / "graph.json"
         if json_path.exists():
@@ -109,26 +109,26 @@ def count_knowledge_graph(workspace: str) -> dict:
                 stats["entity_types"] = data.get("stats", {}).get("entity_types", {})
             except:
                 pass
-    
+
     return stats
 
 
 def count_memory_files(workspace: str) -> dict:
     """统计记忆文件"""
     memory_path = Path(workspace) / "memory"
-    
+
     if not memory_path.exists():
         return {"total": 0, "recent": []}
-    
+
     files = list(memory_path.glob("*.md"))
-    
+
     # 最近 7 天
     recent = []
     seven_days_ago = datetime.now() - timedelta(days=7)
     for f in files:
         if datetime.fromtimestamp(f.stat().st_mtime) > seven_days_ago:
             recent.append(f.name)
-    
+
     return {
         "total": len(files),
         "recent_7days": len(recent),
@@ -153,17 +153,17 @@ def generate_markdown_report(stats: dict, output_path: str):
 ### 按年份分布
 
 """
-    
+
     for year, count in sorted(stats['pnotes']['by_year'].items(), reverse=True):
         report += f"- **{year}**: {count} 篇\n"
-    
+
     report += f"""
 ### 热门标签
 
 """
     for tag, count in stats['pnotes']['by_tag'].items():
         report += f"- `{tag}`: {count} 篇\n"
-    
+
     report += f"""
 ---
 
@@ -194,17 +194,17 @@ def generate_markdown_report(stats: dict, output_path: str):
 ### 实体类型分布
 
 """
-    
+
     for etype, count in stats['knowledge_graph'].get('entity_types', {}).items():
         report += f"- **{etype}**: {count}\n"
-    
+
     report += f"""
 ### 输出文件
 
 """
     for f in stats['knowledge_graph']['files']:
         report += f"- `{f}`\n"
-    
+
     report += f"""
 ---
 
@@ -231,13 +231,13 @@ def generate_markdown_report(stats: dict, output_path: str):
 
 *报告由 research-stats.py 自动生成*
 """
-    
+
     output = Path(output_path)
     output.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(output, "w", encoding="utf-8") as f:
         f.write(report)
-    
+
     print(f"✅ 已生成统计报告：{output}")
 
 
@@ -248,10 +248,10 @@ def main():
     parser.add_argument("--output", type=str, default="reports\\research-stats.md",
                         help="输出报告路径")
     args = parser.parse_args()
-    
+
     print(f"\n=== Research Statistics Dashboard ===")
     print(f"工作空间：{args.workspace}\n")
-    
+
     # 收集统计
     stats = {
         "pnotes": count_pnotes(args.workspace),
@@ -260,7 +260,7 @@ def main():
         "knowledge_graph": count_knowledge_graph(args.workspace),
         "memory": count_memory_files(args.workspace)
     }
-    
+
     # 打印摘要
     print(f"📊 统计摘要:")
     print(f"  P-Note: {stats['pnotes']['total']} 篇")
@@ -268,7 +268,7 @@ def main():
     print(f"  M-Note: {stats['mnotes']['total']} 篇")
     print(f"  知识图谱：{stats['knowledge_graph']['entities']} 实体，{stats['knowledge_graph']['relations']} 关系")
     print(f"  记忆文件：{stats['memory']['total']} 篇 (最近 7 天：{stats['memory']['recent_7days']})")
-    
+
     # 生成报告
     generate_markdown_report(stats, args.output)
 

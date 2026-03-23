@@ -24,12 +24,12 @@ TRAINING_REPORT = Path("30-scripts-tools/training_report.json")
 
 class AutoTrainingEngine:
     """自动训练引擎 - 防护 v8"""
-    
+
     def __init__(self):
         self.tool_calls = self._load_tool_calls()
         self.violations = self._load_violations()
         self.training_modules = self._load_training_modules()
-    
+
     def _load_tool_calls(self, limit=1000):
         if not TOOL_CALL_LOG.exists():
             return []
@@ -42,7 +42,7 @@ class AutoTrainingEngine:
             except (IOError, OSError, UnicodeDecodeError):
                 pass
         return calls
-    
+
     def _load_violations(self, limit=100):
         if not VIOLATION_LOG.exists():
             return []
@@ -55,7 +55,7 @@ class AutoTrainingEngine:
             except (IOError, OSError, UnicodeDecodeError):
                 pass
         return violations
-    
+
     def _load_training_modules(self) -> list:
         """
 # ==============================================================================
@@ -163,7 +163,7 @@ Fixes:
                 ]
             }
         ]
-    
+
     def analyze_patterns(self) -> dict:
         """分析行为模式"""
         # 成功模式

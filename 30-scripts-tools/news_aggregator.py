@@ -89,7 +89,7 @@ def parse_categories(args):
     """解析命令行参数"""
     if not args or args[0].lower() == "all":
         return list(RSS_SOURCES.keys())
-    
+
     result = []
     for arg in args:
         if arg in NAME_TO_KEY:
@@ -98,14 +98,14 @@ def parse_categories(args):
             result.append(arg)
         elif arg.lower() == "all":
             result.extend(list(RSS_SOURCES.keys()))
-    
+
     return list(set(result)) if result else list(RSS_SOURCES.keys())
 
 
 def fetch_rss(source_key, source_info):
     """通过 RSS 或 JSON API 获取新闻"""
     items = []
-    
+
     # 尝试 JSON API (新浪)
     if source_key in JSON_SOURCES:
         try:
@@ -114,7 +114,7 @@ def fetch_rss(source_key, source_info):
                 return items
         except Exception as e:
             print(f"  [!] JSON API failed: {str(e)[:40]}")
-    
+
     # 尝试主 RSS
     try:
         items = parse_rss(source_info["url"])
@@ -122,7 +122,7 @@ def fetch_rss(source_key, source_info):
             return items
     except Exception as e:
         print(f"  [!] Main RSS failed: {str(e)[:40]}")
-    
+
     # 尝试备用源
     if source_key in BACKUP_SOURCES:
         for backup_url in BACKUP_SOURCES[source_key]:
@@ -132,7 +132,7 @@ def fetch_rss(source_key, source_info):
                     return items
             except:
                 continue
-    
+
     return items
 
 
@@ -142,12 +142,12 @@ def fetch_json_api(url):
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
         'Referer': 'https://news.sina.com.cn/'
     })
-    
+
     with urllib.request.urlopen(req, timeout=15) as response:
         content = response.read()
-    
+
     data = json.loads(content)
-    
+
     items = []
     if 'result' in data and 'data' in data['result']:
         for item in data['result']['data']:
@@ -157,7 +157,7 @@ def fetch_json_api(url):
                     'title': title,
                     'link': item.get('url', '')
                 })
-    
+
     return items[:10]
 
 
@@ -166,7 +166,7 @@ def parse_rss(url):
     req = urllib.request.Request(url, headers={
         'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
     })
-    
+
     with urllib.request.urlopen(req, timeout=15) as response:
         content = response.read()
         # 尝试不同编码
@@ -177,12 +177,12 @@ def parse_rss(url):
                 xml_text = content.decode('gbk')
             except:
                 xml_text = content.decode('latin-1')
-    
+
     # 解析 XML
     root = ET.fromstring(xml_text)
-    
+
     items = []
-    
+
     # 处理 RSS 2.0
     if root.tag == 'rss':
         channel = root.find('channel')
@@ -191,7 +191,7 @@ def parse_rss(url):
                 title = item.find('title')
                 link = item.find('link')
                 desc = item.find('description')
-                
+
                 item_text = ""
                 if title is not None and title.text:
                     item_text = title.text.strip()
@@ -199,67 +199,67 @@ def parse_rss(url):
                     # 去掉 HTML 标签
                     import re
                     item_text = re.sub(r'<[^>]+>', '', desc.text).strip()[:100]
-                
+
                 item_link = link.text if link is not None and link.text else ""
-                
+
                 if item_text:
                     items.append({
                         "title": item_text,
                         "link": item_link
                     })
-    
+
     # 处理 Atom
     elif root.tag.endswith('feed'):
         for entry in root.findall('entry'):
             title = entry.find('title')
             link_elem = entry.find('link')
-            
+
             item_text = title.text if title is not None and title.text else ""
             item_link = ""
             if link_elem is not None:
                 item_link = link_elem.get('href', '')
-            
+
             if item_text:
                 items.append({
                     "title": item_text.strip(),
                     "link": item_link
                 })
-    
+
     return items[:10]  # 限制数量
 
 
 def main():
     categories = parse_categories(sys.argv[1:])
-    
+
     print(f"\n[NEWS] News Aggregator - {datetime.now().strftime('%Y-%m-%d %H:%M')}")
     print("=" * 60)
-    
+
     results = []
-    
+
     for key in categories:
         if key not in RSS_SOURCES:
             continue
-        
+
         source = RSS_SOURCES[key]
         print(f"\n[*] Fetching: {source['name']}...")
-        
+
         items = fetch_rss(key, source)
-        
+
         results.append({
             "key": key,
             "name": source["name"],
             "items": items
         })
-        
+
         if items:
             print(f"  [+] Got {len(items)} items")
         else:
             print(f"  [-] No items")
-    
+
     # 输出结果
     print("\n" + "=" * 60)
     print("[NEWS] News Summary\n")
-    
+
     for r in results:
         print(f"[{r['name']}]")
         if r['items']:
@@ -269,7 +269,7 @@ def main():
         else:
             print("  (no data)")
         print()
-    
+
     total_items = sum(len(r['items']) for r in results)
     print(f"[OK] Done, {len(results)} categories, {total_items} items total")
 

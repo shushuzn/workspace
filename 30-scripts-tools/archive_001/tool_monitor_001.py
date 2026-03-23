@@ -24,12 +24,12 @@ ALERT_THRESHOLDS = {
 
 class ToolMonitor:
     """工具监控器"""
-    
+
     def __init__(self):
         self.log_file = Path("flow-archive/20260318-universal-workflow-001/tool-monitor-log.json")
         self.stats_file = Path("flow-archive/20260318-universal-workflow-001/tool-stats.json")
         self.stats = self._load_stats()
-    
+
     def _load_stats(self) -> Dict:
         """
 # ==============================================================================
@@ -74,11 +74,11 @@ Fixes:
 """
 
 加载统计数据"""
-        
+
         if self.stats_file.exists():
             with open(self.stats_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        
+
         return {
             "total_calls": 0,
             "successful_calls": 0,
@@ -87,7 +87,7 @@ Fixes:
             "fallback_count": 0,
             "tools": {}
         }
-    
+
     def _save_stats(self) -> None:
         """保存统计数据"""
         

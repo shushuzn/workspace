@@ -12,13 +12,13 @@ def update_cron_tasks(workspace: str):
     """更新定时任务配置"""
     workspace_path = Path(workspace)
     cron_file = workspace_path / ".openclaw" / "cron-tasks.json"
-    
+
     if cron_file.exists():
         with open(cron_file, "r", encoding="utf-8") as f:
             cron_config = json.load(f)
     else:
         cron_config = {"tasks": []}
-    
+
     new_tasks = [
         {
             "name": "citation-tracker",
@@ -42,15 +42,15 @@ def update_cron_tasks(workspace: str):
             "enabled": True
         }
     ]
-    
+
     existing_names = {t["name"] for t in cron_config["tasks"]}
     for task in new_tasks:
         if task["name"] not in existing_names:
             cron_config["tasks"].append(task)
-    
+
     with open(cron_file, "w", encoding="utf-8") as f:
         json.dump(cron_config, f, indent=2, ensure_ascii=False)
-    
+
     print(f"✅ 已更新定时任务：{cron_file}")
 
 

@@ -20,7 +20,7 @@ class ImportanceScorer:
     
     输出: 0.0 - 1.0 重要性分数
     """
-    
+
     def __init__(self):
         # 权重配置
         self.weights = {
@@ -28,7 +28,7 @@ class ImportanceScorer:
             'feedback': 0.4,     # 用户反馈
             'uniqueness': 0.3    # 独特性
         }
-        
+
         # 高重要性关键词
         self.high_importance_keywords = {
             'preference': ['我喜欢', '我想要', 'prefer', 'always', 'never'],
@@ -36,14 +36,14 @@ class ImportanceScorer:
             'critical': ['必须', '绝对', 'critical', 'important', '必须不能'],
             'personal': ['我的', '我是', 'i am', 'my name'],
         }
-        
+
         # 唯一性检测词
         self.uniqueness_indicators = [
-            '第一次', '首次', '唯一', 'only', 'unique', 
+            '第一次', '首次', '唯一', 'only', 'unique',
             '第一次出现', 'never before'
         ]
-    
-    def calculate(self, content: str, memory_type: str, 
+
+    def calculate(self, content: str, memory_type: str,
                   metadata: Dict[str, Any] = None) -> float:
         """
         计算重要性分数
@@ -57,19 +57,19 @@ class ImportanceScorer:
             float: 0.0 - 1.0 重要性分数
         """
         metadata = metadata or {}
-        
+
         # 1. 基础分数（基于类型）
         base_score = self._type_base_score(memory_type)
-        
+
         # 2. 关键词匹配分数
         keyword_score = self._keyword_score(content)
-        
+
         # 3. 上下文增强（从metadata）
         context_boost = self._context_boost(metadata)
-        
+
         # 4. 长度惩罚/奖励
         length_score = self._length_score(content)
-        
+
         # 加权计算
         final_score = (
             base_score * 0.3 +
@@ -77,10 +77,10 @@ class ImportanceScorer:
             context_boost * 0.2 +
             length_score * 0.1
         )
-        
+
         # 边界限制
         return min(1.0, max(0.0, final_score))
-    
+
     def _type_base_score(self, memory_type: str) -> float:
         """记忆类型基础分数"""
         type_scores = {
@@ -92,12 +92,12 @@ class ImportanceScorer:
             'system': 0.2,       # 系统信息 - 最低
         }
         return type_scores.get(memory_type, 0.3)
-    
+
     def _keyword_score(self, content: str) -> float:
         """关键词匹配分数"""
         content_lower = content.lower()
         score = 0.0
-        
+
         for category, keywords in self.high_importance_keywords.items():
             for kw in keywords:
                 if kw in content or kw in content_lower:
@@ -109,46 +109,46 @@ class ImportanceScorer:
                         score += 0.25
                     elif category == 'personal':
                         score += 0.2
-        
+
         # 唯一性检测
         for indicator in self.uniqueness_indicators:
             if indicator in content or indicator in content_lower:
                 score += 0.15
-        
+
         return min(1.0, score)
-    
+
     def _context_boost(self, metadata: Dict) -> float:
         """上下文增强"""
         boost = 0.0
-        
+
         # 用户反馈
         if metadata.get('user_feedback') == 'positive':
             boost += 0.5
         elif metadata.get('user_feedback') == 'important':
             boost += 0.4
-        
+
         # 明确标记
         if metadata.get('explicit_important'):
             boost += 0.3
-        
+
         # 引用次数
         ref_count = metadata.get('reference_count', 0)
         if ref_count > 5:
             boost += 0.3
         elif ref_count > 2:
             boost += 0.15
-        
+
         # 来源
         source = metadata.get('source', '')
         if 'memory' in source.lower():  # 来自长期记忆
             boost += 0.1
-        
+
         return min(1.0, boost)
-    
+
     def _length_score(self, content: str) -> float:
         """长度分数 - 适中的长度更有价值"""
         length = len(content)
-        
+
         # 理想长度: 50-500 字符
         if 50 <= length <= 500:
             return 0.8
@@ -161,7 +161,7 @@ class ImportanceScorer:
         else:
             # 500-2000
             return 0.7
-    
+
     def batch_score(self, items: List[Dict]) -> List[float]:
         """批量评分"""
         return [
@@ -172,8 +172,8 @@ class ImportanceScorer:
             )
             for item in items
         ]
-    
-    def rank_items(self, items: List[Dict], 
+
+    def rank_items(self, items: List[Dict],
                    top_k: int = 10) -> List[Dict]:
         """排序并返回top-k"""
         scored = [
@@ -184,10 +184,10 @@ class ImportanceScorer:
             )}
             for item in items
         ]
-        
+
         scored.sort(key=lambda x: x['importance_score'], reverse=True)
         return scored[:top_k]
-    
+
     def get_importance_level(self, score: float) -> str:
         """获取重要性等级"""
         if score >= 0.8:

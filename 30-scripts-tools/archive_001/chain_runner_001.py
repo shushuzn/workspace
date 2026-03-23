@@ -35,7 +35,7 @@ CHAIN_CACHE = Path("13-memory/.chain_cache.json")
 
 class ChainRunner:
     """工具链自动串联器"""
-    
+
     # 预定义工具链模板
     CHAIN_TEMPLATES = {
         "discover-sync": {
@@ -45,7 +45,7 @@ class ChainRunner:
         },
         "brainstorm-full": {
             "name": "Full Brainstorm",
-            "tools": ["brainstorm_001_define", "brainstorm_002_diverge", 
+            "tools": ["brainstorm_001_define", "brainstorm_002_diverge",
                      "brainstorm_003_filter", "brainstorm_004_prioritize"],
             "description": "完整头脑风暴流程"
         },
@@ -55,7 +55,7 @@ class ChainRunner:
             "description": "优化循环"
         }
     }
-    
+
     # 输出类型到工具的映射
     OUTPUT_TO_TOOL = {
         "json": ["export_format_001", "tools_registry"],
@@ -64,11 +64,11 @@ class ChainRunner:
         "report": ["report_001_summary", "report_002_export"],
         "cache": ["smart_cache_001", "data_cache"]
     }
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.tools_dir = self.workspace / "30-scripts-tools"
-    
+
     def run_chain(self, tools: List[str]) -> Dict:
         """
 # ==============================================================================
@@ -114,10 +114,10 @@ Fixes:
 
 执行工具链"""
         results = []
-        
+
         for i, tool in enumerate(tools):
             tool_file = self.tools_dir / f"{tool}.py"
-            
+
             if not tool_file.exists():
                 results.append({
                     "tool": tool,
@@ -125,7 +125,7 @@ Fixes:
                     "error": f"Tool {tool} not found"
                 })
                 continue
-            
+
             try:
                 result = subprocess.run(
                     [sys.executable, str(tool_file, timeout=60)],
@@ -133,14 +133,14 @@ Fixes:
                     text=True,
                     timeout=60
                 )
-                
+
                 results.append({
                     "tool": tool,
                     "status": "success" if result.returncode == 0 else "failed",
                     "output": result.stdout[:500] if result.stdout else None,
                     "error": result.stderr[:200] if result.stderr else None
                 })
-                
+
             except subprocess.TimeoutExpired:
                 results.append({
                     "tool": tool,
@@ -152,7 +152,7 @@ Fixes:
                     "status": "error",
                     "error": str(e)
                 })
-        
+
         return {
             "chain": tools,
             "total": len(tools),
@@ -160,7 +160,7 @@ Fixes:
             "failed": sum(1 for r in results if r["status"] in ["failed", "error", "not_found"]),
             "results": results
         }
-    
+
     def auto_chain(self, start_tool: str) -> Dict:
         """自动串联工具链"""
         chain = [start_tool]

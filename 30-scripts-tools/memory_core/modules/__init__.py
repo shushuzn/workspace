@@ -11,7 +11,7 @@ from .conflict import ConflictModule
 
 __all__ = [
     'DistillerModule',
-    'QualityModule', 
+    'QualityModule',
     'SearchModule',
     'AssociationModule',
     'ForgettingModule',

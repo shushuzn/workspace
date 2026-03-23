@@ -98,37 +98,37 @@ def get_papers():
     """获取论文数据 (带重试和性能分析)"""
     try:
         date = request.args.get('date', '')
-        
+
         # 输入验证
         if date:
             try:
                 validator.validate_date(date)
             except ValidationError as e:
                 abort(400, description=str(e))
-        
+
         cache_key = f'papers:{date}'
-        
+
         # 性能优化：使用优化器加载数据
         def load_papers():
             if date:
                 papers_file = DATA_DIR / 'obsidian-vault' / 'Arxiv' / 'daily' / date / 'quality-controlled' / 'validated_papers.json'
             else:
                 papers_file = DATA_DIR / 'data-lake' / 'analytics' / 'latest_papers.json'
-            
+
             if papers_file.exists():
                 with open(papers_file, 'r', encoding='utf-8') as f:
                     return json.load(f)
             return None
-        
+
         # 尝试从缓存获取
         cached_data = cache.get(cache_key)
         if cached_data is not None:
             app.logger.info(f"Cache hit for {cache_key}")
             return jsonify(cached_data)
-        
+
         # 使用性能优化器加载数据
         papers = perf_optimizer.optimize_data_loading(load_papers, cache_key, ttl=300)
-        
+
         if papers:
             # 保存到缓存
             cache.set(cache_key, papers)
@@ -149,23 +149,23 @@ def get_trends():
     try:
         date = request.args.get('date', '')
         cache_key = f'trends:{date}'
-        
+
         # 尝试从缓存获取
         cached_data = cache.get(cache_key)
         if cached_data is not None:
             app.logger.info(f"Cache hit for {cache_key}")
             return jsonify(cached_data)
-        
+
         # 从文件加载
         if date:
             trends_file = DATA_DIR / 'obsidian-vault' / 'Arxiv' / 'daily' / date / 'trends' / 'trends.json'
         else:
             trends_file = DATA_DIR / 'data-lake' / 'analytics' / 'latest_trends.json'
-        
+
         if trends_file.exists():
             with open(trends_file, 'r', encoding='utf-8') as f:
                 trends = json.load(f)
-            
+
             # 保存到缓存
             cache.set(cache_key, trends)
             return jsonify(trends)
@@ -182,12 +182,12 @@ def get_clusters():
     """获取聚类数据"""
     try:
         date = request.args.get('date', '')
-        
+
         if date:
             clusters_file = DATA_DIR / 'obsidian-vault' / 'Arxiv' / 'daily' / date / 'clusters' / 'clusters.json'
         else:
             clusters_file = DATA_DIR / 'data-lake' / 'analytics' / 'latest_clusters.json'
-        
+
         if clusters_file.exists():
             with open(clusters_file, 'r', encoding='utf-8') as f:
                 clusters = json.load(f)
@@ -205,7 +205,7 @@ def get_knowledge_graph():
     """获取知识图谱数据"""
     try:
         graph_file = DATA_DIR / 'knowledge-graph' / 'materials-kg.json'
-        
+
         if graph_file.exists():
             with open(graph_file, 'r', encoding='utf-8') as f:
                 graph = json.load(f)
@@ -223,7 +223,7 @@ def get_metrics():
     """获取监控指标"""
     try:
         metrics_file = DATA_DIR / 'monitoring' / 'metrics.json'
-        
+
         if metrics_file.exists():
             with open(metrics_file, 'r', encoding='utf-8') as f:
                 metrics = json.load(f)
@@ -241,7 +241,7 @@ def get_alerts():
     """获取告警数据"""
     try:
         alerts_file = DATA_DIR / 'monitoring' / 'alerts.json'
-        
+
         if alerts_file.exists():
             with open(alerts_file, 'r', encoding='utf-8') as f:
                 alerts = json.load(f)
@@ -272,5 +272,5 @@ if __name__ == '__main__':
     print("\nExample:")
     print(f"  curl -H 'X-API-Key: {API_KEY}' http://localhost:5000/api/v1/health")
     print("=" * 60)
-    
+
     app.run(host='0.0.0.0', port=5000, debug=False)

@@ -31,7 +31,7 @@ def get_health_status():
     """Get current health status"""
     tool_count = len(list(TOOLS_DIR.glob("*_001.py")))
     workflow_log = LOGS_DIR / "workflow_stats.json"
-    
+
     success_rate = 100
     if workflow_log.exists():
         try:
@@ -39,7 +39,7 @@ def get_health_status():
             success_rate = stats.get("success_rate", 100)
         except Exception:
             pass
-    
+
     return {
         "tool_count": tool_count,
         "success_rate": success_rate,
@@ -50,24 +50,24 @@ def get_health_status():
 def generate_report():
     """Generate health report"""
     status = get_health_status()
-    
+
     report = {
         "timestamp": datetime.now().isoformat(),
         "tool_count": status["tool_count"],
         "success_rate": status["success_rate"],
         "health_score": status["health_score"]
     }
-    
+
     return report
 
 
 def save_report(report):
     """Save report to file"""
     REPORT_DIR.mkdir(exist_ok=True)
-    
+
     filename = "health_" + datetime.now().strftime("%Y%m%d") + ".json"
     path = REPORT_DIR / filename
-    
+
     path.write_text(json.dumps(report, indent=2, ensure_ascii=False), encoding="utf-8")
     print("  Saved: " + str(path))
 
@@ -75,14 +75,14 @@ def save_report(report):
 def main():
     print("\n[HEALTH-REPORTER-001] Health Report")
     print("=" * 50)
-    
+
     report = generate_report()
-    
+
     print("  Timestamp: " + report["timestamp"])
     print("  Tools: " + str(report["tool_count"]))
     print("  Success Rate: " + str(report["success_rate"]) + "%")
     print("  Health Score: " + str(report["health_score"]) + "%")
-    
+
     if "--save" in sys.argv:
         save_report(report)
 

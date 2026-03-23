@@ -26,10 +26,10 @@ EXPORT_DIR.mkdir(parents=True, exist_ok=True)
 
 class MultiFormatExporter:
     """多格式导出器"""
-    
+
     def __init__(self):
         self.export_dir = EXPORT_DIR
-    
+
     def load_roadmap(self, dimension: str = "stock_analysis") -> dict:
         """
 # ==============================================================================
@@ -75,13 +75,13 @@ Fixes:
 
 加载路线图"""
         roadmap_file = Path(f"flow-archive/roadmaps/{dimension}.json")
-        
+
         if not roadmap_file.exists():
             return {"error": f"Dimension '{dimension}' not found"}
-        
+
         with open(roadmap_file, "r", encoding="utf-8") as f:
             return json.load(f)
-    
+
     def export_json(self, roadmap: dict, dimension: str) -> str:
         """导出为JSON"""
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")

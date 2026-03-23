@@ -50,7 +50,7 @@ for method, endpoint, *data in endpoints:
             response = requests.get(url, timeout=5)
         else:
             response = requests.post(url, json=data[0] if data else {}, timeout=5)
-        
+
         if response.status_code == 200:
             print(f"[OK] {method} {endpoint}")
             success_count += 1

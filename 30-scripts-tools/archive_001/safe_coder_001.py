@@ -53,13 +53,13 @@ if __name__ == "__main__": sys.exit(main())
 
 class SafeCoder:
     def _cls(self, n): return "".join(w.capitalize() for w in n.replace("-","_").split("_"))
-    
+
     def gen(self, tmpl, name, out):
         if tmpl not in TEMPLATES: return {"err": f"Template not found. Available: {', '.join(TEMPLATES.keys())}"}
         code = TEMPLATES[tmpl].replace("{NAME}", name).replace("{CLASS}", self._cls(name)).replace("{FILE}", Path(out).name)
         Path(out).write_text(code, encoding="utf-8")
         return {"ok": True, "file": out}
-    
+
     def check(self, f):
         c = Path(f).read_text(encoding="utf-8", errors="replace") if Path(f).exists() else ""
         issues = []

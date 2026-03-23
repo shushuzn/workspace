@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 LIG 数据质量检查 + GP 核函数优化
@@ -252,7 +252,7 @@ ax.set_ylim(0, 1.0)
 
 # 添加数值标签
 for bar, r2 in zip(bars, r2_vals):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02, 
+    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
             f'R²={r2:.3f}', ha='center', va='bottom', fontsize=10)
 
 # 目标线

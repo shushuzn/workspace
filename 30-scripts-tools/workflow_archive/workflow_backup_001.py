@@ -20,17 +20,17 @@ BACKUP_DIR = Path("13-memory/.backups")
 class WorkflowBackup:
     def create(self, name="default"):
         BACKUP_DIR.mkdir(parents=True, exist_ok=True)
-        
+
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
         backup_name = f"{name}_{timestamp}"
         backup_path = BACKUP_DIR / backup_name
         backup_path.mkdir(exist_ok=True)
-        
+
         # Backup logs
         log_dir = Path("13-memory/.workflow_logs")
         if log_dir.exists():
             shutil.copytree(log_dir, backup_path / "logs", dirs_exist_ok=True)
-        
+
         # Backup config
         config_files = [
             "13-memory/.workflow_market",
@@ -40,13 +40,13 @@ class WorkflowBackup:
             p = Path(f)
             if p.exists():
                 shutil.copytree(p, backup_path / p.name, dirs_exist_ok=True)
-        
+
         return {
             "status": "ok",
             "backup": backup_name,
             "path": str(backup_path)
         }
-    
+
     def list_backups(self):
         if not BACKUP_DIR.exists():
             return []
@@ -54,7 +54,7 @@ class WorkflowBackup:
 
 if __name__ == "__main__":
     backup = WorkflowBackup()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--create":

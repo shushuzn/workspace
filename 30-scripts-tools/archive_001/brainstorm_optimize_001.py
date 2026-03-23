@@ -29,45 +29,45 @@ from typing import Dict, List, Optional
 
 class BrainstormOptimizer:
     """头脑风暴优化器"""
-    
+
     OPTIMIZATION_CATEGORIES = [
         "compression", "caching", "workflow", "prompt", "batch", "parallel", "memory"
     ]
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.optimize_dir = self.workspace / "13-memory/optimization"
         self.optimize_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.ideas_file = self.optimize_dir / "optimization_ideas.json"
         self.results_file = self.optimize_dir / "optimization_results.json"
-        
+
         # 初始化ideas文件
         if not self.ideas_file.exists():
             self._save_ideas([])
-    
+
     def _save_ideas(self, ideas: List[Dict]):
         """保存ideas"""
         with open(self.ideas_file, 'w', encoding='utf-8') as f:
             json.dump(ideas, f, ensure_ascii=False, indent=2)
-    
+
     def _load_ideas(self) -> List[Dict]:
         """加载ideas"""
         if self.ideas_file.exists():
             with open(self.ideas_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         return []
-    
+
     def trigger_brainstorm(self, category: str = "optimization") -> Dict:
         """触发头脑风暴工作流"""
         print(f"[TRIGGER] Brainstorm: {category}")
-        
+
         # 调用头脑风暴脚本
         brainstorm_script = self.workspace / "30-scripts-tools/brainstorm_roadmap_tools.py"
-        
+
         if not brainstorm_script.exists():
             return {"status": "error", "reason": "brainstorm script not found"}
-        
+
         try:
             # 使用 subprocess 运行头脑风暴
             result = subprocess.run(
@@ -77,13 +77,13 @@ class BrainstormOptimizer:
                 timeout=120,
                 cwd=str(self.workspace)
             )
-            
+
             if result.returncode == 0:
                 # 解析输出
                 try:
                     ideas = json.loads(result.stdout)
                     self._save_ideas(ideas)
-                    
+
                     return {
                         "status": "success",
                         "ideas_count": len(ideas),
@@ -93,21 +93,21 @@ class BrainstormOptimizer:
                     return {"status": "success", "raw_output": result.stdout[:500]}
             else:
                 return {"status": "error", "message": result.stderr}
-                
+
         except subprocess.TimeoutExpired:
             return {"status": "error", "reason": "timeout"}
         except Exception as e:
             return {"status": "error", "reason": str(e)}
-    
+
     def evaluate_ideas(self) -> List[Dict]:
         """评估ideas并排序"""
         ideas = self._load_ideas()
-        
+
         if not ideas:
             # 如果没有ideas，生成默认优化ideas
             ideas = self._get_default_optimization_ideas()
             self._save_ideas(ideas)
-        
+
         # 评估每个idea
         evaluated = []
         for idea in ideas:
@@ -115,26 +115,26 @@ class BrainstormOptimizer:
             idea["score"] = score
             idea["priority"] = self._get_priority_label(score)
             evaluated.append(idea)
-        
+
         # 按分数排序
         evaluated.sort(key=lambda x: x.get("score", 0), reverse=True)
-        
+
         return evaluated
-    
+
     def _calculate_score(self, idea: Dict) -> float:
         """计算idea得分"""
         score = 50  # 基础分
-        
+
         # 影响因子
         impact = idea.get("impact", "medium")
         impact_scores = {"high": 30, "medium": 15, "low": 5}
         score += impact_scores.get(impact, 15)
-        
+
         # 难度因子
         difficulty = idea.get("difficulty", "medium")
         difficulty_scores = {"easy": 20, "medium": 10, "hard": -10}
         score += difficulty_scores.get(difficulty, 10)
-        
+
         # 分类权重
         category = idea.get("category", "general")
         category_weights = {
@@ -147,9 +147,9 @@ class BrainstormOptimizer:
             "parallel": 5
         }
         score += category_weights.get(category, 0)
-        
+
         return min(score, 100)  # 上限100
-    
+
     def _get_priority_label(self, score: float) -> str:
         if score >= 80:
             return "[CRITICAL]"
@@ -159,7 +159,7 @@ class BrainstormOptimizer:
             return "[MEDIUM]"
         else:
             return "[LOW]"
-    
+
     def _get_default_optimization_ideas(self) -> List[Dict]:
         """获取默认优化ideas"""
         return [
@@ -173,7 +173,7 @@ class BrainstormOptimizer:
                 "status": "completed"
             },
             {
-                "id": "opt-002", 
+                "id": "opt-002",
                 "name": "Response Caching",
                 "category": "caching",
                 "description": "LLM响应缓存，避免重复调用",
@@ -236,11 +236,11 @@ class BrainstormOptimizer:
                 "status": "pending"
             }
         ]
-    
+
     def implement_top_ideas(self, count: int = 3) -> Dict:
         """实现排名最高的优化ideas"""
         ideas = self.evaluate_ideas()
-        
+
         implemented = []
         for idea in ideas[:count]:
             if idea.get("status") == "pending":
@@ -248,10 +248,10 @@ class BrainstormOptimizer:
                 idea["status"] = "in_progress"
                 idea["implemented_at"] = datetime.now().isoformat()
                 implemented.append(idea["id"])
-        
+
         # 保存更新后的ideas
         self._save_ideas(ideas)
-        
+
         # 记录结果
         results = self._load_results()
         results.append({
@@ -260,25 +260,25 @@ class BrainstormOptimizer:
             "total": len(implemented)
         })
         self._save_results(results)
-        
+
         return {
             "status": "success",
             "implemented": implemented,
             "total": len(implemented)
         }
-    
+
     def _load_results(self) -> List[Dict]:
         """加载结果"""
         if self.results_file.exists():
             with open(self.results_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
         return []
-    
+
     def _save_results(self, results: List[Dict]):
         """保存结果"""
         with open(self.results_file, 'w', encoding='utf-8') as f:
             json.dump(results, f, ensure_ascii=False, indent=2)
-    
+
     def list_ideas(self) -> str:
         """
 # ==============================================================================
@@ -324,13 +324,13 @@ Fixes:
 
 列出未完成的ideas"""
         ideas = self.evaluate_ideas()
-        
+
         # 只显示未完成的
         ideas = [i for i in ideas if i.get("status") != "completed"]
-        
+
         output = ["# PENDING OPTIMIZATION IDEAS\n"]
         output.append(f"Total: {len(ideas)}\n")
-        
+
         for i, idea in enumerate(ideas, 1):
             status = idea.get("status", "pending")
             status_icon = {
@@ -338,7 +338,7 @@ Fixes:
                 "in_progress": "[IN PROGRESS]",
                 "pending": "[PENDING]"
             }.get(status, "[?]")
-            
+
             output.append(f"""
 {i}. [{idea.get('priority', '')}] {idea.get('name', 'Unnamed')}
    - Category: {idea.get('category', 'general')}
@@ -348,9 +348,9 @@ Fixes:
    - Score: {idea.get('score', 0)}
    - Description: {idea.get('description', '')}
 """)
-        
+
         return '\n'.join(output)
-    
+
     def run_full_optimization(self) -> Dict:
         """运行完整优化流程"""
         print("=" * 60)

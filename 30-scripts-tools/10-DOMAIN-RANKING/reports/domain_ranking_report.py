@@ -11,26 +11,26 @@ def find_latest_collected_data(domain: str) -> Path:
     """查找最新的领域收集数据文件"""
     workspace = Path(__file__).parent.parent
     reports_dir = workspace / "21-reports"
-    
+
     if not reports_dir.exists():
         return None
-    
+
     pattern = f"{domain}-domain-data-*.json"
     files = list(reports_dir.glob(pattern))
-    
+
     if not files:
         return None
-    
+
     files.sort(key=lambda f: f.stat().st_mtime, reverse=True)
     return files[0]
 
 
 def generate_html_report(domain: str, data_file: Path, output_path: Path):
     """生成 HTML 可视化报告"""
-    
+
     with open(data_file, 'r', encoding='utf-8-sig') as f:
         data = json.load(f)
-    
+
     # 提取 11 维度数据
     dimensions = {
         '理论基础': data.get('theory', {}).get('xp', 0),
@@ -45,7 +45,7 @@ def generate_html_report(domain: str, data_file: Path, output_path: Path):
         '开源贡献': data.get('open_source', {}).get('xp', 0),
         '产业转化': data.get('industry', {}).get('xp', 0),
     }
-    
+
     # 计算总分和段位
     weights = {
         '理论基础': 0.15, '技术成熟度': 0.15, '学术影响力': 0.12,
@@ -53,12 +53,12 @@ def generate_html_report(domain: str, data_file: Path, output_path: Path):
         '创新能力': 0.10, '国际合作': 0.08, '教育普及': 0.08,
         '开源贡献': 0.07, '产业转化': 0.07
     }
-    
+
     total_xp = sum(dimensions.values())
     weighted_score = sum(dimensions[dim] * weights[dim] for dim in dimensions)
     score = int(weighted_score / 100)  # 0-8000
     level = min(1000, max(1, score))
-    
+
     # 段位
     ranks = [
         ("黑铁", 0, "#2C2C2C"), ("青铜", 1000, "#CD7F32"),
@@ -66,7 +66,7 @@ def generate_html_report(domain: str, data_file: Path, output_path: Path):
         ("铂金", 4000, "#E5E4E2"), ("钻石", 5000, "#B9F2FF"),
         ("大师", 6000, "#9B59B6"), ("宗师", 7000, "#FFD700")
     ]
-    
+
     current_rank = "黑铁"
     rank_color = "#2C2C2C"
     for name, threshold, color in reversed(ranks):
@@ -74,12 +74,12 @@ def generate_html_report(domain: str, data_file: Path, output_path: Path):
             current_rank = name
             rank_color = color
             break
-    
+
     # 生成雷达图数据
     labels = list(dimensions.keys())
     values = list(dimensions.values())
     max_val = 10000
-    
+
     # 颜色映射 (根据 XP 值)
     def get_color(value):
         if value < 500:
@@ -90,9 +90,9 @@ def generate_html_report(domain: str, data_file: Path, output_path: Path):
             return "#10B981"  # 绿 - 稳步发展
         else:
             return "#3B82F6"  # 蓝 - 领域领先
-    
+
     colors = [get_color(v) for v in values]
-    
+
     html = f'''<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -269,17 +269,17 @@ def generate_html_report(domain: str, data_file: Path, output_path: Path):
 </body>
 </html>
 '''
-    
+
     with open(output_path, 'w', encoding='utf-8') as f:
         f.write(html)
-    
+
     return output_path
 
 
 def generate_recommendations_html(dimensions: dict) -> str:
     """生成建议 HTML"""
     sorted_dims = sorted(dimensions.items(), key=lambda x: x[1])
-    
+
     html_parts = []
     for dim, xp in sorted_dims[:6]:  # 最弱的 6 个维度
         if xp < 500:
@@ -294,32 +294,32 @@ def generate_recommendations_html(dimensions: dict) -> str:
         else:
             css_class = "rec-ok"
             label = "🔵 OK"
-        
+
         html_parts.append(f'''
             <div class="rec-item {css_class}">
                 <strong>{label}</strong> {dim}: {xp:.0f}/10000 XP
             </div>
         ''')
-    
+
     return ''.join(html_parts)
 
 
 if __name__ == "__main__":
     import sys
-    
+
     # Windows UTF-8 兼容
     if sys.platform == 'win32':
         sys.stdout.reconfigure(encoding='utf-8')
-    
+
     domain = sys.argv[1] if len(sys.argv) > 1 else "LIG"
     data_file = find_latest_collected_data(domain)
-    
+
     if not data_file:
         print(f"[ERROR] 未找到 {domain} 的收集数据")
         sys.exit(1)
-    
+
     output_dir = Path(__file__).parent.parent / "21-reports"
     output_path = output_dir / f"{domain}-domain-ranking-{datetime.now().strftime('%Y%m%d-%H%M%S')}.html"
-    
+
     generate_html_report(domain, data_file, output_path)
     print(f"[OK] 报告已生成：{output_path}")

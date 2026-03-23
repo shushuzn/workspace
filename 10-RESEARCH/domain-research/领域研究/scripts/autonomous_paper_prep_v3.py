@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 LIG 论文准备 - 自治执行任务 V3 (最终版)
 自动完成 Cover Letter 填写、最终检查、投稿准备
@@ -185,17 +185,17 @@ check_path = Path("research/docs/FINAL_CHECKLIST.md")
 with open(check_path, 'w', encoding='utf-8') as f:
     f.write("# 最终文件检查清单\n\n")
     f.write(f"**检查时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
-    
+
     all_exist = True
     for name, path in required_files.items():
         full_path = Path(path)
         exists = full_path.exists()
         if not exists:
             all_exist = False
-        
+
         status = "[OK]" if exists else "❌"
         f.write(f"- [{status}] {name}: `{path}`\n")
-        
+
         if exists and full_path.is_dir():
             # 统计目录文件数
             file_count = len(list(full_path.glob("*")))
@@ -204,13 +204,13 @@ with open(check_path, 'w', encoding='utf-8') as f:
             # 显示文件大小
             size_kb = full_path.stat().st_size / 1024
             f.write(f"  - 大小：{size_kb:.1f} KB\n")
-    
+
     f.write(f"\n## 总体状态\n\n")
     if all_exist:
         f.write("**状态:** [OK] 所有文件齐全，可以投稿！\n\n")
     else:
         f.write("**状态:** [WARN] 部分文件缺失，请检查！\n\n")
-    
+
     f.write("## 投稿前最后确认\n\n")
     f.write("- [ ] 所有作者已确认稿件\n")
     f.write("- [ ] 所有图表已插入正确位置\n")
@@ -342,7 +342,7 @@ with open(calendar_path, 'w', encoding='utf-8') as f:
     f.write("# 投稿日历\n\n")
     f.write(f"**创建时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}\n\n")
     f.write("## 关键日期\n\n")
-    
+
     # 计算日期
     today = datetime.now()
     dates = {
@@ -352,10 +352,10 @@ with open(calendar_path, 'w', encoding='utf-8') as f:
         "完成准备": today + timedelta(days=8),
         "投稿截止": today + timedelta(days=11)
     }
-    
+
     for event, date in dates.items():
         f.write(f"- **{event}:** {date.strftime('%Y-%m-%d (%A)')}\n")
-    
+
     f.write("\n## 详细计划\n\n")
     f.write("### 今天 (03-06): 自治任务完成\n\n")
     f.write("- [x] 论文初稿 V2 完成\n")
@@ -364,29 +364,29 @@ with open(calendar_path, 'w', encoding='utf-8') as f:
     f.write("- [x] Cover Letter 模板\n")
     f.write("- [x] 推荐审稿人列表\n")
     f.write("- [x] 期刊选择分析\n\n")
-    
+
     f.write("### 明天 (03-07): 填写与核实\n\n")
     f.write("- [ ] 填写 Cover Letter (30 分钟)\n")
     f.write("- [ ] 核实审稿人邮箱 (30 分钟)\n")
     f.write("- [ ] 最终文件检查 (15 分钟)\n\n")
-    
+
     f.write("### 03-10 (周一): 确定期刊\n\n")
     f.write("- [ ] 确认目标期刊 (npj Computational Materials)\n")
     f.write("- [ ] 阅读期刊投稿指南\n")
     f.write("- [ ] 调整论文格式 (如需)\n\n")
-    
+
     f.write("### 03-14 (周五): 完成准备\n\n")
     f.write("- [ ] 所有作者确认\n")
     f.write("- [ ] Cover Letter 最终版\n")
     f.write("- [ ] 补充材料整理\n\n")
-    
+
     f.write("### 03-17 (周一): 投稿日 [TARGET]\n\n")
     f.write("- [ ] 登录投稿系统\n")
     f.write("- [ ] 填写投稿信息\n")
     f.write("- [ ] 上传所有文件\n")
     f.write("- [ ] 确认提交\n")
     f.write("- [ ] 记录投稿编号\n\n")
-    
+
     f.write("## 投稿后时间线\n\n")
     f.write("- **03-17 ~ 03-24:** 编辑初审 (1 周)\n")
     f.write("- **03-24 ~ 05-17:** 审稿人评审 (8 周)\n")
@@ -414,19 +414,19 @@ with open(summary_path, 'w', encoding='utf-8') as f:
     f.write("- 完整在线学习系统\n")
     f.write("- 148 个文件，13,928 行代码\n")
     f.write("- 总用时：~12 小时\n\n")
-    
+
     f.write("## 方法创新\n\n")
     f.write("1. **文献数据挖掘:** 80 个数据点自动提取\n")
     f.write("2. **特征工程优化:** 共线性识别与处理\n")
     f.write("3. **集成学习框架:** GP+RF+GBT Stacking\n")
     f.write("4. **在线学习系统:** 实时模型更新\n\n")
-    
+
     f.write("## 论文信息\n\n")
     f.write("- **标题:** 文献数据挖掘与在线学习结合的 LIG 电导率预测\n")
     f.write("- **版本:** V2 (6000 字，6 图表)\n")
     f.write("- **目标期刊:** npj Computational Materials (IF: 12.8)\n")
     f.write("- **投稿日期:** 2026-03-17 (计划)\n\n")
-    
+
     f.write("## 文件统计\n\n")
     f.write("- **数据文件:** 31 个\n")
     f.write("- **模型文件:** 30+ 个\n")
@@ -434,17 +434,17 @@ with open(summary_path, 'w', encoding='utf-8') as f:
     f.write("- **文档文件:** 20+ 个\n")
     f.write("- **图表文件:** 15+ 个\n")
     f.write("- **总计:** 148+ 个文件\n\n")
-    
+
     f.write("## GitHub 仓库\n\n")
     f.write("https://github.com/shushuzn/obsidian-sync/tree/master/research\n\n")
     f.write("所有数据、代码、模型已开源，确保可复现性。\n\n")
-    
+
     f.write("## 下一步\n\n")
     f.write("1. 填写 Cover Letter (03-07)\n")
     f.write("2. 核实审稿人邮箱 (03-07)\n")
     f.write("3. 最终确认 (03-14)\n")
     f.write("4. 投稿 (03-17) [TARGET]\n\n")
-    
+
     f.write("---\n\n")
     f.write("*项目从启动到论文准备完成，总用时约 12 小时。\n")
     f.write("感谢所有参与者的贡献！*\n")

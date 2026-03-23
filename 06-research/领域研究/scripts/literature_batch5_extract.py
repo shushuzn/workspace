@@ -37,29 +37,29 @@ batch5_samples = [
     {'sample_id': 'LIT-061', 'P_W': 0.58, 'v_mms': 12, 'E_Jcm2': 48.33, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 5200, 'ssa_m2g': 380, 'id_ig': 1.8, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'Record high conductivity'},
     {'sample_id': 'LIT-062', 'P_W': 0.60, 'v_mms': 14, 'E_Jcm2': 42.86, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 5000, 'ssa_m2g': 390, 'id_ig': 1.75, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'Very high power'},
     {'sample_id': 'LIT-063', 'P_W': 0.56, 'v_mms': 13, 'E_Jcm2': 43.08, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4900, 'ssa_m2g': 395, 'id_ig': 1.72, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'Maximum power'},
-    
+
     # 超高电导率组 (4500-5000 S/m)
     {'sample_id': 'LIT-064', 'P_W': 0.54, 'v_mms': 15, 'E_Jcm2': 36.0, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4700, 'ssa_m2g': 405, 'id_ig': 1.68, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'Ultra high'},
     {'sample_id': 'LIT-065', 'P_W': 0.53, 'v_mms': 16, 'E_Jcm2': 33.13, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4550, 'ssa_m2g': 415, 'id_ig': 1.63, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'Ultra high opt'},
-    
+
     # 高电导率组 (4000-4500 S/m)
     {'sample_id': 'LIT-066', 'P_W': 0.50, 'v_mms': 19, 'E_Jcm2': 26.32, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4200, 'ssa_m2g': 450, 'id_ig': 1.52, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'High quality'},
     {'sample_id': 'LIT-067', 'P_W': 0.49, 'v_mms': 20, 'E_Jcm2': 24.5, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4100, 'ssa_m2g': 460, 'id_ig': 1.48, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'High std'},
-    
+
     # 中高电导率组 (3500-4000 S/m)
     {'sample_id': 'LIT-068', 'P_W': 0.47, 'v_mms': 22, 'E_Jcm2': 21.36, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3900, 'ssa_m2g': 475, 'id_ig': 1.43, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'Medium-high opt'},
     {'sample_id': 'LIT-069', 'P_W': 0.45, 'v_mms': 24, 'E_Jcm2': 18.75, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3700, 'ssa_m2g': 495, 'id_ig': 1.4, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'Medium-high'},
     {'sample_id': 'LIT-070', 'P_W': 0.44, 'v_mms': 25, 'E_Jcm2': 17.6, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3550, 'ssa_m2g': 510, 'id_ig': 1.35, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'Medium-high std'},
-    
+
     # 中电导率组 (3000-3500 S/m)
     {'sample_id': 'LIT-071', 'P_W': 0.42, 'v_mms': 27, 'E_Jcm2': 15.56, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3350, 'ssa_m2g': 535, 'id_ig': 1.3, 'method': '4-probe', 'uncertainty': '±7%', 'notes': 'Medium opt'},
     {'sample_id': 'LIT-072', 'P_W': 0.41, 'v_mms': 28, 'E_Jcm2': 14.64, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3200, 'ssa_m2g': 550, 'id_ig': 1.26, 'method': '4-probe', 'uncertainty': '±7%', 'notes': 'Medium std'},
     {'sample_id': 'LIT-073', 'P_W': 0.39, 'v_mms': 30, 'E_Jcm2': 13.0, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3050, 'ssa_m2g': 565, 'id_ig': 1.22, 'method': '4-probe', 'uncertainty': '±7%', 'notes': 'Medium balanced'},
-    
+
     # 中低电导率组 (2500-3000 S/m)
     {'sample_id': 'LIT-074', 'P_W': 0.36, 'v_mms': 34, 'E_Jcm2': 10.59, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2800, 'ssa_m2g': 590, 'id_ig': 1.15, 'method': '4-probe', 'uncertainty': '±7%', 'notes': 'Medium-low'},
     {'sample_id': 'LIT-075', 'P_W': 0.33, 'v_mms': 36, 'E_Jcm2': 9.17, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2600, 'ssa_m2g': 615, 'id_ig': 1.08, 'method': '4-probe', 'uncertainty': '±8%', 'notes': 'Medium-low std'},
-    
+
     # 特殊前驱体和应用
     {'sample_id': 'LIT-076', 'P_W': 0.42, 'v_mms': 24, 'E_Jcm2': 17.5, 'co_ratio': 2.5, 'precursor': 'PET', 'sigma_Sm': 2700, 'ssa_m2g': 640, 'id_ig': 1.25, 'method': '4-probe', 'uncertainty': '±8%', 'notes': 'PET optimized'},
     {'sample_id': 'LIT-077', 'P_W': 0.36, 'v_mms': 29, 'E_Jcm2': 12.41, 'co_ratio': 0.9, 'precursor': 'Wood', 'sigma_Sm': 1950, 'ssa_m2g': 950, 'id_ig': 1.08, 'method': '4-probe', 'uncertainty': '±9%', 'notes': 'Wood high SSA'},

@@ -16,7 +16,7 @@ from intent_schema import EnhancedIntentSchema, BeliefConfig
 
 class BeliefProbe:
     """信念探针包装器"""
-    
+
     def __init__(self, probe_path: str):
         """加载信念探针
         
@@ -25,7 +25,7 @@ class BeliefProbe:
         """
         with open(probe_path, 'rb') as f:
             self.probe = pickle.load(f)
-    
+
     def predict_confidence(self, activation: np.ndarray) -> float:
         """预测置信度
         
@@ -38,7 +38,7 @@ class BeliefProbe:
         # 确保输入形状正确
         if activation.ndim == 1:
             activation = activation.reshape(1, -1)
-        
+
         # 获取正类概率
         proba = self.probe.predict_proba(activation)[0]
         return float(proba[1])  # 返回正类概率
@@ -46,7 +46,7 @@ class BeliefProbe:
 
 class BeliefAwareExecutor:
     """信念感知执行器"""
-    
+
     def __init__(self, probes_path: str = "belief-probes-v2"):
         """初始化执行器
         
@@ -55,20 +55,20 @@ class BeliefAwareExecutor:
         """
         self.probes: List[BeliefProbe] = []
         self._load_probes(probes_path)
-    
+
     def _load_probes(self, probes_path: str):
         """加载 24 层信念探针"""
         base_path = Path(__file__).parent / probes_path
-        
+
         for layer_idx in range(1, 25):
             probe_path = base_path / f"probe_layer_{layer_idx}.pkl"
             if probe_path.exists():
                 self.probes.append(BeliefProbe(str(probe_path)))
             else:
                 raise FileNotFoundError(f"探针文件不存在：{probe_path}")
-        
+
         print(f"已加载 {len(self.probes)} 层信念探针")
-    
+
     async def execute_with_early_exit(
         self,
         intent: EnhancedIntentSchema,
@@ -84,34 +84,34 @@ class BeliefAwareExecutor:
             执行结果字典
         """
         config = intent.belief_config
-        
+
         # 如果不启用早退，直接运行全部层
         if not config.early_exit_enabled:
             return await self._execute_full(intent, get_activation_fn)
-        
+
         # 早退执行
         consecutive_high = 0
         layers_used = 0
         last_confidence = 0.0
-        
+
         for layer_idx in range(1, config.max_layers + 1):
             layers_used = layer_idx
-            
+
             # 获取该层激活
             activation = get_activation_fn(layer_idx)
-            
+
             # 信念探针检测
             confidence = self.probes[layer_idx - 1].predict_confidence(activation)
             last_confidence = confidence
-            
+
             # 检查早退条件
             if confidence >= config.confidence_threshold:
                 consecutive_high += 1
-                
+
                 # 检查是否满足早退条件
-                if (consecutive_high >= config.min_consecutive_layers and 
+                if (consecutive_high >= config.min_consecutive_layers and
                     layer_idx >= config.min_layers):
-                    
+
                     # 早退决策
                     return {
                         "exit_type": "early_exit",
@@ -122,7 +122,7 @@ class BeliefAwareExecutor:
                     }
             else:
                 consecutive_high = 0
-        
+
         # 使用全部层
         return {
             "exit_type": "full_model",
@@ -131,7 +131,7 @@ class BeliefAwareExecutor:
             "consecutive_high": consecutive_high,
             "success": True
         }
-    
+
     async def _execute_full(
         self,
         intent: EnhancedIntentSchema,
@@ -140,11 +140,11 @@ class BeliefAwareExecutor:
         """执行全部 24 层"""
         layers_used = 24
         last_confidence = 0.0
-        
+
         # 获取最后一层置信度
         activation = get_activation_fn(24)
         last_confidence = self.probes[23].predict_confidence(activation)
-        
+
         return {
             "exit_type": "full_model",
             "layers_used": layers_used,
@@ -152,7 +152,7 @@ class BeliefAwareExecutor:
             "consecutive_high": 0,
             "success": True
         }
-    
+
     def calculate_efficiency(self, layers_used: int) -> float:
         """计算效率得分
         
@@ -163,7 +163,7 @@ class BeliefAwareExecutor:
             效率得分 (0-1)
         """
         return 1 - (layers_used / 24)
-    
+
     def generate_report(
         self,
         intent: EnhancedIntentSchema,
@@ -186,10 +186,10 @@ class BeliefAwareExecutor:
             "efficiency_score": None,
             "alignment_score": None
         }
-        
+
         # 计算对齐度
         alignment = intent.calculate_alignment()
-        
+
         # 生成报告
         report = {
             "intent_name": intent.name,
@@ -201,7 +201,7 @@ class BeliefAwareExecutor:
             "alignment_score": alignment,
             "success": execution_result["success"]
         }
-        
+
         return report
 
 
@@ -224,23 +224,23 @@ def mock_get_activation(layer_idx: int) -> np.ndarray:
 async def demo():
     """演示使用"""
     print("=== 信念感知执行器演示 ===\n")
-    
+
     # 创建执行器
     executor = BeliefAwareExecutor()
-    
+
     # 创建搜索意图
     intent = EnhancedIntentSchema.create_search_intent()
     print(f"\n意图：{intent.name}")
     print(f"置信度阈值：{intent.belief_config.confidence_threshold}")
     print(f"最小连续层：{intent.belief_config.min_consecutive_layers}")
     print()
-    
+
     # 执行 (使用模拟激活)
     result = await executor.execute_with_early_exit(intent, mock_get_activation)
-    
+
     # 生成报告
     report = executor.generate_report(intent, result)
-    
+
     print("=== 执行报告 ===")
     print(f"退出类型：{report['exit_type']}")
     print(f"使用层数：{report['layers_used']}/24")

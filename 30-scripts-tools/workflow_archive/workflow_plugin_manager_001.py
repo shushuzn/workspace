@@ -47,42 +47,42 @@ if __name__ == "__main__":
 class PluginManager:
     def __init__(self):
         self.plugins = {}
-    
+
     def install(self, name, description="", author="OpenClaw") -> None:
         """Install a new plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
-        
+
         if plugin_file.exists():
             return {"status": "exists", "plugin": name}
-        
+
         class_name = "".join(word.capitalize() for word in name.split("_"))
         content = PLUGIN_TEMPLATE.format(name=name, class_name=class_name, description=description)
-        
+
         plugin_file.write_text(content, encoding="utf-8")
         return {"status": "installed", "plugin": name, "path": str(plugin_file)}
-    
+
     def uninstall(self, name) -> None:
         """Remove a plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
-        
+
         if not plugin_file.exists():
             return {"status": "not_found", "plugin": name}
-        
+
         plugin_file.unlink()
         return {"status": "uninstalled", "plugin": name}
-    
+
     def load(self, name) -> None:
         """Load and execute a plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
-        
+
         if not plugin_file.exists():
             return {"error": f"Plugin not found: {name}"}
-        
+
         try:
             spec = importlib.util.spec_from_file_location(name, plugin_file)
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
-            
+
             return {
                 "status": "loaded",
                 "plugin": name,
@@ -90,44 +90,44 @@ class PluginManager:
             }
         except Exception as e:
             return {"error": str(e), "traceback": traceback.format_exc()}
-    
+
     def run(self, name, args=None) -> None:
         """Run a plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
-        
+
         if not plugin_file.exists():
             return {"error": f"Plugin not found: {name}"}
-        
+
         try:
             spec = importlib.util.spec_from_file_location(name, plugin_file)
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
-            
+
             if hasattr(module, 'run'):
                 return module.run(args)
             return {"error": "Plugin has no run() function"}
         except Exception as e:
             return {"error": str(e)}
-    
+
     def list(self) -> None:
         """List all installed plugins"""
         plugins = []
         for f in PLUGIN_DIR.glob("*.py"):
             if f.stem in ["__init__", "__pycache__"]:
                 continue
-            
+
             try:
                 spec = importlib.util.spec_from_file_location(f.stem, f)
                 module = importlib.util.module_from_spec(spec)
                 spec.loader.exec_module(module)
-                
+
                 info = module.info() if hasattr(module, 'info') else {"name": f.stem}
                 plugins.append(info)
             except (Exception,):
                 plugins.append({"name": f.stem, "status": "error"})
-        
+
         return {"plugins": plugins, "count": len(plugins)}
-    
+
     def validate(self, name) -> None:
         """
 # ==============================================================================
@@ -173,21 +173,21 @@ Fixes:
 
 Validate a plugin"""
         plugin_file = PLUGIN_DIR / f"{name}.py"
-        
+
         if not plugin_file.exists():
             return {"valid": False, "error": "not_found"}
-        
+
         try:
             spec = importlib.util.spec_from_file_location(name, plugin_file)
             module = importlib.util.module_from_spec(spec)
             spec.loader.exec_module(module)
-            
+
             checks = {
                 "has_run": hasattr(module, 'run'),
                 "has_info": hasattr(module, 'info'),
                 "syntax_ok": True
             }
-            
+
             return {
                 "valid": checks["has_run"],
                 "plugin": name,
@@ -200,7 +200,7 @@ Validate a plugin"""
 
 if __name__ == "__main__":
     pm = PluginManager()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--install":

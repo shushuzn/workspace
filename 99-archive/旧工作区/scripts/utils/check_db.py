@@ -10,7 +10,7 @@ print('Tables:', tables)
 if 'seen_articles' in tables:
     c.execute('SELECT COUNT(*) FROM seen_articles')
     print('Total articles:', c.fetchone()[0])
-    
+
     c.execute('SELECT title FROM seen_articles ORDER BY rowid DESC LIMIT 5')
     print('Latest 5:')
     for row in c.fetchall():

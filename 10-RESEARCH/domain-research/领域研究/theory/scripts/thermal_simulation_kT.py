@@ -121,7 +121,7 @@ print("\n[5/6] Running simulation...")
 for n in range(nt):
     T_new = T.copy()
     T_const_new = T_const.copy()
-    
+
     # === Variable properties ===
     for i in range(1, nz-1):
         # Get properties at current temperature
@@ -129,17 +129,17 @@ for n in range(nt):
         k_ip1 = k_of_T(T[i+1])
         k_im1 = k_of_T(T[i-1])
         Cp_i = Cp_of_T(T[i])
-        
+
         # Interface conductivity (arithmetic mean)
         k_iphalf = (k_i + k_ip1) / 2
         k_imhalf = (k_i + k_im1) / 2
-        
+
         # Diffusion term
         diff_term = (k_iphalf * (T[i+1] - T[i]) - k_imhalf * (T[i] - T[i-1])) / dz**2
-        
+
         # Update temperature
         T_new[i] = T[i] + dt / (rho * Cp_i) * diff_term
-    
+
     # Surface boundary
     if n * dt < t_dwell:
         k_surf = k_of_T(T[0])
@@ -147,25 +147,25 @@ for n in range(nt):
     else:
         h = 10
         T_new[0] = T[0] - h * (T[0] - T_env) * dt / (rho * Cp_of_T(T[0]) * dz)
-    
+
     T_new[nz-1] = T[nz-1]
-    
+
     # === Constant properties (for comparison) ===
     for i in range(1, nz-1):
         T_const_new[i] = T_const[i] + k_0 * dt / (rho * Cp_0) / dz**2 * (T_const[i+1] - 2*T_const[i] + T_const[i-1])
-    
+
     if n * dt < t_dwell:
         T_const_new[0] = T_const[0] + q_laser * dt / (rho * Cp_0 * dz)
     else:
         h = 10
         T_const_new[0] = T_const[0] - h * (T_const[0] - T_env) * dt / (rho * Cp_0 * dz)
-    
+
     T_const_new[nz-1] = T_const[nz-1]
-    
+
     # Update
     T = T_new
     T_const = T_const_new
-    
+
     # Record
     if n in record_times:
         T_history.append(T.copy())
@@ -232,7 +232,7 @@ T_surface_const = []
 for n in range(nt):
     T_new = T.copy()
     T_const_new = T_const.copy()
-    
+
     for i in range(1, nz-1):
         k_i = k_of_T(T[i])
         k_ip1 = k_of_T(T[i+1])
@@ -242,24 +242,24 @@ for n in range(nt):
         k_imhalf = (k_i + k_im1) / 2
         diff_term = (k_iphalf * (T[i+1] - T[i]) - k_imhalf * (T[i] - T[i-1])) / dz**2
         T_new[i] = T[i] + dt / (rho * Cp_i) * diff_term
-    
+
     if n * dt < t_dwell:
         T_new[0] = T[0] + q_laser * dt / (rho * Cp_of_T(T[0]) * dz)
     else:
         h = 10
         T_new[0] = T[0] - h * (T[0] - T_env) * dt / (rho * Cp_of_T(T[0]) * dz)
     T_new[nz-1] = T[nz-1]
-    
+
     for i in range(1, nz-1):
         T_const_new[i] = T_const[i] + k_0 * dt / (rho * Cp_0) / dz**2 * (T_const[i+1] - 2*T_const[i] + T_const[i-1])
-    
+
     if n * dt < t_dwell:
         T_const_new[0] = T_const[0] + q_laser * dt / (rho * Cp_0 * dz)
     else:
         h = 10
         T_const_new[0] = T_const[0] - h * (T_const[0] - T_env) * dt / (rho * Cp_0 * dz)
     T_const_new[nz-1] = T_const[nz-1]
-    
+
     T = T_new
     T_const = T_const_new
     T_surface_var.append(T[0])

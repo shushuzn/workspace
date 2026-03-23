@@ -97,13 +97,13 @@ SIX_HATS = {
 
 def generate_sixhats_ideas(topic: str) -> dict:
     """使用六顶思考帽方法生成ideas"""
-    
+
     results = {
         "topic": topic,
         "method": "Six Thinking Hats",
         "hats": {}
     }
-    
+
     for hat_key, hat_data in SIX_HATS.items():
         results["hats"][hat_key] = {
             "name": hat_data["name"],
@@ -111,24 +111,24 @@ def generate_sixhats_ideas(topic: str) -> dict:
             "focus": hat_data["focus"],
             "questions": [q.replace("this", topic) for q in hat_data["questions"]]
         }
-    
+
     return results
 
 
 def display_sixhats_ideas(results: dict):
     """展示六顶思考帽ideas"""
-    
+
     print("=" * 60)
     print(f"[SIX HATS] Topic: {results['topic']}")
     print("=" * 60)
-    
+
     for hat_key, hat_data in results["hats"].items():
         print(f"\n{hat_data['emoji']} {hat_data['name']}")
         print(f"   Focus: {hat_data['focus']}")
         print("   Questions:")
         for i, q in enumerate(hat_data["questions"], 1):
             print(f"     {i}. {q}")
-    
+
     print("\n" + "=" * 60)
 
 
@@ -177,22 +177,22 @@ Fixes:
 """
 
 主函数"""
-    
+
     if len(sys.argv) > 1:
         topic = " ".join(sys.argv[1:])
     else:
         topic = "OpenClaw tools"
-    
+
     results = generate_sixhats_ideas(topic)
     display_sixhats_ideas(results)
-    
+
     # 保存结果
     output_file = Path(f"flow-archive/brainstorm-current/sixhats_ideas.json")
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n[Saved to] {output_file}")
-    
+
     return 0
 
 

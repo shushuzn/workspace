@@ -37,7 +37,7 @@ class Recommendation:
     paper: Paper
     relevance_score: float
     reason: str
-    
+
     def to_dict(self) -> Dict:
         return {
             'title': self.paper.title,
@@ -51,10 +51,10 @@ class Recommendation:
 
 class PaperRecommender:
     """文献推荐系统"""
-    
+
     def __init__(self):
         self.paper_database = self._load_papers()
-    
+
     def _load_papers(self) -> List[Paper]:
         """加载论文数据库"""
         # 示例论文
@@ -84,17 +84,17 @@ class PaperRecommender:
                 abstract="机器学习加速材料发现..."
             )
         ]
-    
-    def recommend(self, query_keywords: List[str], 
+
+    def recommend(self, query_keywords: List[str],
                  n_recommendations: int = 5) -> List[Recommendation]:
         """推荐文献"""
-        
+
         recommendations = []
-        
+
         for paper in self.paper_database:
             # 计算相似度
             score = self._calculate_similarity(query_keywords, paper.keywords)
-            
+
             if score > 0:
                 reason = self._generate_reason(score, paper)
                 recommendations.append(Recommendation(
@@ -102,32 +102,32 @@ class PaperRecommender:
                     relevance_score=round(score, 2),
                     reason=reason
                 ))
-        
+
         # 排序
         recommendations.sort(key=lambda x: x.relevance_score, reverse=True)
-        
+
         return recommendations[:n_recommendations]
-    
-    def _calculate_similarity(self, query: List[str], 
+
+    def _calculate_similarity(self, query: List[str],
                             keywords: List[str]) -> float:
         """计算相似度"""
         query_set = set(k.lower() for k in query)
         keyword_set = set(k.lower() for k in keywords)
-        
+
         intersection = query_set & keyword_set
         union = query_set | keyword_set
-        
+
         if not union:
             return 0.0
-        
+
         # Jaccard 相似度
         jaccard = len(intersection) / len(union)
-        
+
         # 添加年份因子 (新论文权重高)
         year_factor = random.uniform(0.9, 1.1)
-        
+
         return min(1.0, jaccard * year_factor)
-    
+
     def _generate_reason(self, score: float, paper: Paper) -> str:
         """生成推荐理由"""
         if score > 0.7:
@@ -143,18 +143,18 @@ def main():
     print("=" * 60)
     print("Paper Recommender - 文献推荐系统")
     print("=" * 60)
-    
+
     recommender = PaperRecommender()
-    
+
     # 测试推荐
     query_keywords = ['LiFePO4', 'battery', 'cathode']
-    
+
     print(f"\n查询关键词：{query_keywords}")
-    
+
     recommendations = recommender.recommend(query_keywords, n_recommendations=3)
-    
+
     print(f"\n推荐 {len(recommendations)} 篇文献:\n")
-    
+
     for i, rec in enumerate(recommendations, 1):
         print(f"{i}. {rec.paper.title}")
         print(f"   作者：{', '.join(rec.paper.authors)}")
@@ -162,7 +162,7 @@ def main():
         print(f"   相关度：{rec.relevance_score:.1%}")
         print(f"   理由：{rec.reason}")
         print()
-    
+
     print("=" * 60)
     print("文献推荐系统准备完成！")
     print("=" * 60)

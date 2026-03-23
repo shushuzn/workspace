@@ -37,17 +37,17 @@ for i, b in enumerate(text_blocks[:15]):
     center_x_block = (bbox[0] + bbox[2]) / 2
     width = bbox[2] - bbox[0]
     width_ratio = width / page_width
-    
+
     if width_ratio > 0.5:
         wide_blocks += 1
     else:
         narrow_blocks += 1
-    
+
     text_preview = ""
     for line in b.get("lines", [])[:1]:
         for span in line.get("spans", []):
             text_preview += span.get("text", "")[:40]
-    
+
     print(f"#{i:2d}: X={bbox[0]:6.1f}-{bbox[2]:6.1f} Ctr={center_x_block:6.1f} W={width:6.1f} ({width_ratio:.2f}) Y={bbox[1]:6.1f} | {text_preview}")
 
 print()

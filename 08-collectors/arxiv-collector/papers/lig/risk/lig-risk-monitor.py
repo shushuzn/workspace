@@ -33,7 +33,7 @@ def fetch_pubmed_lig_papers():
         "retmax": 100,
         "retmode": "json"
     }
-    
+
     try:
         response = requests.get(base_url, params=params, timeout=30)
         data = response.json()
@@ -114,30 +114,30 @@ def main():
     print("LIG Risk Monitor")
     print("=" * 50)
     print()
-    
+
     # 1. Fetch PubMed data
     print("[1/3] Fetching PubMed data...")
     papers_count = fetch_pubmed_lig_papers()
     print(f"  + PubMed papers: {papers_count}")
-    
+
     # 2. Assess risk
     print()
     print("[2/3] Assessing risk level...")
     risk_level, risk_message = check_risk_level(papers_count)
     print(f"  + Risk Level: {risk_level}")
     print(f"  + Message: {risk_message}")
-    
+
     # 3. Generate report
     print()
     print("[3/3] Generating report...")
     report = generate_report(papers_count, risk_level, risk_message)
-    
+
     output_file = OUTPUT_DIR / f"lig-risk-report-{datetime.now().strftime('%Y%m%d')}.md"
     with open(output_file, 'w', encoding='utf-8') as f:
         f.write(report)
-    
+
     print(f"  + Report saved: {output_file}")
-    
+
     print()
     print("=" * 50)
     print("LIG Risk Monitor Complete!")

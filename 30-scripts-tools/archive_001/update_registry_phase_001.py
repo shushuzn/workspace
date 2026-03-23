@@ -22,7 +22,7 @@ for i in range(13, 19):
              16: "Multi-source sentiment aggregation",
              17: "Strategy parameter optimization (grid search/walk-forward)",
              18: "Return attribution analysis (factor decomposition)"}
-    
+
     new_tools[tool_id] = {
         "tool_id": tool_id,
         "name": names[i],

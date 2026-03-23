@@ -30,20 +30,20 @@ CONFIG_FILE = Path("30-scripts-tools/sa_023_config.json")
 
 class SimulatedTrader:
     """模拟交易系统"""
-    
+
     def __init__(self):
         self.portfolio_dir = PORTFOLIO_DIR
         self.trades_dir = TRADES_DIR
         self.config = self._load_config()
-        
+
         self.portfolio_dir.mkdir(parents=True, exist_ok=True)
         self.trades_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.portfolio_file = self.portfolio_dir / "portfolio.json"
         self.trades_file = self.trades_dir / "trades.json"
-        
+
         self._load_or_init_portfolio()
-    
+
     def _load_config(self) -> dict:
         default = {
             "initial_capital": 100000,
@@ -52,7 +52,7 @@ class SimulatedTrader:
             "slippage": 0.0005,
             "allow_short": False
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -60,7 +60,7 @@ class SimulatedTrader:
             except (Exception,):
                 return default
         return default
-    
+
     def _load_or_init_portfolio(self):
         """加载或初始化组合"""
         if self.portfolio_file.exists():
@@ -73,24 +73,24 @@ class SimulatedTrader:
                 "created_at": datetime.now().isoformat()
             }
             self._save_portfolio()
-    
+
     def _save_portfolio(self):
         """保存组合"""
         with open(self.portfolio_file, "w", encoding="utf-8") as f:
             json.dump(self.portfolio, f, ensure_ascii=False, indent=2)
-    
+
     def _load_trades(self) -> list:
         """加载交易记录"""
         if self.trades_file.exists():
             with open(self.trades_file, "r", encoding="utf-8") as f:
                 return json.load(f)
         return []
-    
+
     def _save_trades(self, trades: list):
         """保存交易记录"""
         with open(self.trades_file, "w", encoding="utf-8") as f:
             json.dump(trades, f, ensure_ascii=False, indent=2)
-    
+
     def _get_current_price(self, symbol: str) -> float:
         """
 # ==============================================================================
@@ -140,12 +140,12 @@ Fixes:
             "AMZN": 178.0, "TSLA": 245.0, "META": 485.0,
             "NVDA": 780.0, "AMD": 165.0
         }
-        
+
         if symbol in base_prices:
             base = base_prices[symbol]
             return base + random.uniform(-2, 2)
         return 100.0 + random.uniform(-5, 5)
-    
+
     def get_portfolio_status(self) -> dict:
         """获取组合状态"""
         positions_value = 0

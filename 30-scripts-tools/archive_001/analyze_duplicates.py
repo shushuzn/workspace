@@ -11,7 +11,7 @@ from collections import defaultdict
 def main():
     tools_dir = Path("D:/OpenClaw/workspace/30-scripts-tools")
     files = [f.name for f in tools_dir.glob("*.py")]
-    
+
     # 按功能分组
     categories = {
         "stock": [],
@@ -33,7 +33,7 @@ def main():
         "session": [],
         "other": []
     }
-    
+
     for f in sorted(files):
         name_lower = f.lower()
         if "stock_pro" in name_lower or "stock" in name_lower:
@@ -70,31 +70,31 @@ def main():
             categories["session"].append(f)
         else:
             categories["other"].append(f)
-    
+
     print("=" * 70)
     print("TOOL DUPLICATION ANALYSIS")
     print("=" * 70)
     print(f"\nTotal tools: {len(files)}")
-    
+
     # 按数量排序
     sorted_cats = sorted(categories.items(), key=lambda x: -len(x[1]))
-    
+
     print("\n" + "-" * 70)
     print("BY CATEGORY (sorted by count)")
     print("-" * 70)
-    
+
     for cat, tools in sorted_cats:
         if tools:
             print(f"\n[{cat.upper()}] ({len(tools)} tools):")
             for t in tools:
                 size = (tools_dir / t).stat().st_size
                 print(f"  {t:45} {size:>8} bytes")
-    
+
     # 找出可疑的重复
     print("\n" + "=" * 70)
     print("POTENTIAL DUPLICATES (需要人工检查)")
     print("=" * 70)
-    
+
     # 同功能多版本
     for cat, tools in sorted_cats:
         if len(tools) > 2 and cat != "other":

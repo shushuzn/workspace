@@ -10,7 +10,7 @@ from typing import Dict, List, Optional
 
 class MaterialsPropertyPredictor:
     """材料性能预测器"""
-    
+
     def __init__(self):
         # 模拟预训练模型参数
         self.model_params = {
@@ -18,7 +18,7 @@ class MaterialsPropertyPredictor:
             'formation_energy': {'mean': -2.0, 'std': 1.5},
             'bulk_modulus': {'mean': 150.0, 'std': 50.0},
         }
-    
+
     def predict_bandgap(self, formula: str) -> Dict:
         """预测带隙"""
         # 简化预测逻辑
@@ -26,7 +26,7 @@ class MaterialsPropertyPredictor:
             self.model_params['bandgap']['mean'],
             self.model_params['bandgap']['std']
         )
-        
+
         return {
             'formula': formula,
             'property': 'bandgap',
@@ -34,14 +34,14 @@ class MaterialsPropertyPredictor:
             'unit': 'eV',
             'confidence': 0.85 + np.random.random() * 0.1
         }
-    
+
     def predict_formation_energy(self, formula: str) -> Dict:
         """预测形成能"""
         prediction = np.random.normal(
             self.model_params['formation_energy']['mean'],
             self.model_params['formation_energy']['std']
         )
-        
+
         return {
             'formula': formula,
             'property': 'formation_energy',
@@ -49,14 +49,14 @@ class MaterialsPropertyPredictor:
             'unit': 'eV/atom',
             'confidence': 0.80 + np.random.random() * 0.15
         }
-    
+
     def predict_elastic_properties(self, formula: str) -> Dict:
         """预测弹性性能"""
         bulk_modulus = np.random.normal(
             self.model_params['bulk_modulus']['mean'],
             self.model_params['bulk_modulus']['std']
         )
-        
+
         return {
             'formula': formula,
             'bulk_modulus': max(0, bulk_modulus),
@@ -65,7 +65,7 @@ class MaterialsPropertyPredictor:
             'unit': 'GPa',
             'confidence': 0.75 + np.random.random() * 0.15
         }
-    
+
     def predict_all(self, formula: str) -> Dict:
         """预测所有性能"""
         return {
@@ -80,19 +80,19 @@ def demo():
     print("=" * 60)
     print("Materials Property Predictor v1 Demo")
     print("=" * 60)
-    
+
     predictor = MaterialsPropertyPredictor()
-    
+
     # 预测示例材料
     formulas = ["LiCoO2", "LiFePO4", "Si", "Graphene"]
-    
+
     for formula in formulas:
         print(f"\n🔮 预测 {formula}:")
         result = predictor.predict_all(formula)
         print(f"  带隙：{result['bandgap']['prediction']:.2f} eV (置信度：{result['bandgap']['confidence']:.2f})")
         print(f"  形成能：{result['formation_energy']['prediction']:.2f} eV/atom")
         print(f"  体积模量：{result['elastic_properties']['bulk_modulus']:.1f} GPa")
-    
+
     print("-" * 60)
     print("[COMPLETE]")
     print("=" * 60)

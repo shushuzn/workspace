@@ -19,12 +19,12 @@ PLUGIN_DIR = Path("30-scripts-tools/plugins")
 class WorkflowPlugin:
     def __init__(self):
         PLUGIN_DIR.mkdir(exist_ok=True)
-    
+
     def install(self, plugin_name):
         plugin_path = PLUGIN_DIR / f"{plugin_name}.py"
         if plugin_path.exists():
             return {"status": "already_installed", "plugin": plugin_name}
-        
+
         # Create stub plugin
         plugin_path.write_text(f'''#!/usr/bin/env python
 # Plugin: {plugin_name}
@@ -77,16 +77,16 @@ Fixes:
 if __name__ == "__main__":
     print(run())
 ''', encoding="utf-8")
-        
+
         return {"status": "installed", "plugin": plugin_name}
-    
+
     def list(self):
         plugins = [p.stem for p in PLUGIN_DIR.glob("*.py")]
         return {"plugins": plugins, "count": len(plugins)}
 
 if __name__ == "__main__":
     plugin = WorkflowPlugin()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--install":

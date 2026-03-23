@@ -16,12 +16,12 @@ import traceback
 
 class WorkflowAnomalyDetector:
     """自动异常检测器"""
-    
+
     def __init__(self):
         self.log_file = Path("flow-archive/20260318-universal-workflow-001/anomaly-log.json")
         self.config_file = Path("flow-archive/20260318-universal-workflow-001/anomaly-config.json")
         self.config = self._load_config()
-    
+
     def _load_config(self) -> Dict:
         """
 # ==============================================================================
@@ -69,7 +69,7 @@ Fixes:
         if self.config_file.exists():
             with open(self.config_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        
+
         return {
             "timeout_seconds": 300,
             "max_retries": 3,
@@ -77,7 +77,7 @@ Fixes:
             "error_threshold": 3,
             "warnings": []
         }
-    
+
     def _save_config(self) -> None:
         """保存配置"""
         with open(self.config_file, 'w', encoding='utf-8') as f:

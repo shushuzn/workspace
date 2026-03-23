@@ -67,34 +67,34 @@ class DailyReport:
 
 class DailyReportGenerator:
     """Automatic daily report generator"""
-    
+
     def __init__(self, use_llm: bool = True):
         self.use_llm = use_llm
         self.report: Optional[DailyReport] = None
-    
+
     def generate(self, portfolio: List[Dict] = None, market_data: Dict = None) -> DailyReport:
         """Generate comprehensive daily report"""
-        
+
         # Generate market summary
         market_summary = self._generate_market_summary(market_data)
-        
+
         # Generate stock insights
         stock_insights = self._generate_stock_insights(portfolio or [])
-        
+
         # Generate portfolio summary
         portfolio_summary = self._generate_portfolio_summary(portfolio or [])
-        
+
         # Generate risk alerts
         risk_alerts = self._generate_risk_alerts(stock_insights)
-        
+
         # Generate opportunities
         opportunities = self._generate_opportunities(stock_insights)
-        
+
         # Generate AI summary
         ai_summary = self._generate_ai_summary(
             market_summary, stock_insights, portfolio_summary, risk_alerts
         )
-        
+
         # Create report
         self.report = DailyReport(
             report_id=f"DAILY-{datetime.now().strftime('%Y%m%d')}",
@@ -106,9 +106,9 @@ class DailyReportGenerator:
             opportunities=opportunities,
             ai_summary=ai_summary
         )
-        
+
         return self.report
-    
+
     def _generate_market_summary(self, market_data: Dict = None) -> MarketSummary:
         """Generate market summary"""
         # Mock data for demo
@@ -133,11 +133,11 @@ class DailyReportGenerator:
             volume_trend="Above average",
             volatility_level="Moderate"
         )
-    
+
     def _generate_stock_insights(self, portfolio: List[Dict]) -> List[StockInsight]:
         """Generate insights for each stock"""
         insights = []
-        
+
         # Mock data
         mock_data = {
             "AAPL": {"price": 178.5, "change": 2.5, "sentiment": "Positive", "risk": "Low", "signal": "Buy"},
@@ -148,11 +148,11 @@ class DailyReportGenerator:
             "TSLA": {"price": 175.4, "change": -3.5, "sentiment": "Negative", "risk": "High", "signal": "Sell"},
             "JNJ": {"price": 156.2, "change": 0.3, "sentiment": "Neutral", "risk": "Low", "signal": "Hold"},
         }
-        
+
         for position in portfolio:
             ticker = position.get('ticker', 'UNKNOWN')
             data = mock_data.get(ticker, {"price": 100, "change": 0, "sentiment": "Neutral", "risk": "Medium", "signal": "Hold"})
-            
+
             insight = StockInsight(
                 ticker=ticker,
                 price=data['price'],
@@ -165,14 +165,14 @@ class DailyReportGenerator:
                 recommendation=f"{data['signal']} - {data['sentiment']} sentiment, {data['risk']} risk"
             )
             insights.append(insight)
-        
+
         return insights
-    
+
     def _generate_portfolio_summary(self, portfolio: List[Dict]) -> Dict:
         """Generate portfolio summary"""
         total_value = sum(p.get('weight', 0) for p in portfolio) * 1000  # Mock
         daily_change = 1.5  # Mock
-        
+
         return {
             "total_value": total_value,
             "daily_change": daily_change,
@@ -182,48 +182,48 @@ class DailyReportGenerator:
             "top_performer": "NVDA (+5.2%)",
             "worst_performer": "TSLA (-3.5%)"
         }
-    
+
     def _generate_risk_alerts(self, insights: List[StockInsight]) -> List[str]:
         """Generate risk alerts"""
         alerts = []
-        
+
         for insight in insights:
             if insight.risk_level == "High":
                 alerts.append(f"⚠️ {insight.ticker}: High risk level detected")
             elif insight.risk_level == "Critical":
                 alerts.append(f"🚨 {insight.ticker}: CRITICAL risk - consider reducing position")
-            
+
             if insight.change_pct < -3.0:
                 alerts.append(f"📉 {insight.ticker}: Significant decline ({insight.change_pct:.1f}%)")
-        
+
         if not alerts:
             alerts.append("✅ No significant risk alerts")
-        
+
         return alerts
-    
+
     def _generate_opportunities(self, insights: List[StockInsight]) -> List[str]:
         """Generate investment opportunities"""
         opportunities = []
-        
+
         for insight in insights:
             if insight.signal == "Buy" and insight.sentiment == "Positive":
                 opportunities.append(f"🟢 {insight.ticker}: Strong buy signal with positive sentiment")
             elif insight.signal == "Buy" and insight.change_pct < 0:
                 opportunities.append(f"💰 {insight.ticker}: Potential dip buying opportunity")
-        
+
         if not opportunities:
             opportunities.append("⚠️ Limited opportunities in current market")
-        
+
         return opportunities
-    
-    def _generate_ai_summary(self, market: MarketSummary, insights: List[StockInsight], 
+
+    def _generate_ai_summary(self, market: MarketSummary, insights: List[StockInsight],
                             portfolio: Dict, alerts: List[str]) -> str:
         """Generate AI-powered summary"""
-        
+
         # Simple template-based summary (can be enhanced with LLM)
         positive_count = sum(1 for i in insights if i.sentiment == "Positive")
         negative_count = sum(1 for i in insights if i.sentiment == "Negative")
-        
+
         summary = f"""📊 **Daily Market Report - {market.date}**
 
 **Market Overview:**
@@ -245,21 +245,21 @@ Top performer: {portfolio['top_performer']}
 
 **Outlook:**
 Monitor Fed decision and tech earnings. Maintain diversified positions with focus on quality."""
-        
+
         if self.use_llm:
             # TODO: Enhance with local LLM (Ollama)
             summary += "\n\n*Generated with AI assistance*"
-        
+
         return summary
-    
+
     def export_markdown(self, report: DailyReport = None) -> str:
         """Export report as Markdown"""
         if report is None:
             report = self.report
-        
+
         if not report:
             return ""
-        
+
         md = f"""# 📊 Daily Stock Report
 
 **Report ID:** {report.report_id}  
@@ -321,13 +321,13 @@ Monitor Fed decision and tech earnings. Maintain diversified positions with focu
 
 *Report generated automatically by Daily Report Generator*
 """
-        
+
         return md
-    
+
     def export_html(self, report: DailyReport = None) -> str:
         """Export report as HTML"""
         md = self.export_markdown(report)
-        
+
         # Simple Markdown to HTML conversion
         html = f"""<!DOCTYPE html>
 <html>
@@ -353,34 +353,34 @@ Monitor Fed decision and tech earnings. Maintain diversified positions with focu
 </body>
 </html>
 """
-        
+
         return html
-    
+
     def save_report(self, report: DailyReport = None, output_dir: str = "data") -> str:
         """Save report to files"""
         if report is None:
             report = self.report
-        
+
         if not report:
             return ""
-        
+
         os.makedirs(output_dir, exist_ok=True)
-        
+
         # Save Markdown
         md_path = os.path.join(output_dir, f"{report.report_id}.md")
         with open(md_path, 'w', encoding='utf-8') as f:
             f.write(self.export_markdown(report))
-        
+
         # Save HTML
         html_path = os.path.join(output_dir, f"{report.report_id}.html")
         with open(html_path, 'w', encoding='utf-8') as f:
             f.write(self.export_html(report))
-        
+
         # Save JSON
         json_path = os.path.join(output_dir, f"{report.report_id}.json")
         with open(json_path, 'w', encoding='utf-8') as f:
             json.dump(asdict(report), f, indent=2, ensure_ascii=False)
-        
+
         return md_path
 
 
@@ -405,48 +405,48 @@ def main():
     parser.add_argument("--notify", action="store_true", help="Send notification")
     parser.add_argument("--feishu", action="store_true", help="Send via Feishu")
     args = parser.parse_args()
-    
+
     print("="*80)
     print("📰 Automatic Daily Report Generator")
     print("="*80)
-    
+
     # Generate report
     generator = DailyReportGenerator(use_llm=True)
-    
+
     if args.demo or True:  # Default to demo
         print("\n📝 Using demo portfolio (7 positions)")
         portfolio = generate_demo_portfolio()
     else:
         portfolio = []
-    
+
     report = generator.generate(portfolio=portfolio)
-    
+
     # Print summary
     print(f"\n✅ Report generated: {report.report_id}")
     print(f"📊 Market: {report.market_summary.market_status}")
     print(f"📈 Portfolio: ${report.portfolio_summary['total_value']:,.0f} ({report.portfolio_summary['daily_change_pct']:+.1f}%)")
     print(f"⚠️  Alerts: {len(report.risk_alerts)}")
     print(f"💡 Opportunities: {len(report.opportunities)}")
-    
+
     # Save files
     md_path = generator.save_report(report, output_dir=args.output)
     print(f"\n💾 Reports saved to: {args.output}/")
     print(f"   - {report.report_id}.md")
     print(f"   - {report.report_id}.html")
     print(f"   - {report.report_id}.json")
-    
+
     # Print AI summary
     print("\n" + "="*80)
     print("🤖 AI Summary:")
     print("="*80)
     print(report.ai_summary)
-    
+
     # Notification (TODO: integrate with Feishu)
     if args.notify:
         print("\n📬 Sending notification...")
         # TODO: Integrate with feishu_api.py
         print("⚠️  Feishu notification not yet implemented")
-    
+
     print("\n✅ Daily report generation complete!")
 
 

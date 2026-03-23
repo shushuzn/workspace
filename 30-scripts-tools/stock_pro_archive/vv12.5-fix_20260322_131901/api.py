@@ -12,23 +12,23 @@ PORT = 8765
 class APIHandler(BaseHTTPRequestHandler):
     def log_message(self, format, *args):
         pass  # Suppress logging
-    
+
     def send_json(self, data, status=200):
         self.send_response(status)
         self.send_header('Content-Type', 'application/json')
         self.send_header('Access-Control-Allow-Origin', '*')
         self.end_headers()
         self.wfile.write(json.dumps(data).encode('utf-8'))
-    
+
     def do_GET(self):
         parsed = urlparse(self.path)
         path = parsed.path
         query = parse_qs(parsed.query)
-        
+
         if path == '/':
             from datetime import datetime
             self.send_json({"service": "Stock PRO API", "version": "11.0", "timestamp": datetime.now().isoformat(), "endpoints": ["/analyze/<symbol>", "/compare?symbols=NVDA,META", "/screener", "/portfolio"]})
-        
+
         elif path == '/analyze':
             symbol = query.get('symbol', [''])[0]
             if symbol:
@@ -40,7 +40,7 @@ class APIHandler(BaseHTTPRequestHandler):
                     self.send_json({"error": str(e)}, 400)
             else:
                 self.send_json({"error": "Missing symbol parameter"}, 400)
-        
+
         elif path == '/compare':
             symbols = query.get('symbols', [''])[0].split(',')
             if symbols and symbols[0]:
@@ -51,7 +51,7 @@ class APIHandler(BaseHTTPRequestHandler):
                     self.send_json({"error": str(e)}, 400)
             else:
                 self.send_json({"error": "Missing symbols parameter"}, 400)
-        
+
         elif path == '/screener':
             try:
                 min_score = int(query.get('min_score', [60])[0])
@@ -62,26 +62,26 @@ class APIHandler(BaseHTTPRequestHandler):
                 self.send_json({"results": results, "count": len(results)})
             except Exception as e:
                 self.send_json({"error": str(e)}, 400)
-        
+
         elif path == '/portfolio':
             try:
                 pm = PortfolioManager()
                 self.send_json({"positions": pm.positions})
             except Exception as e:
                 self.send_json({"error": str(e)}, 400)
-        
+
         elif path == '/health':
             from datetime import datetime
             self.send_json({"status": "ok", "timestamp": datetime.now().isoformat()})
-        
+
         else:
             self.send_json({"error": "Not found"}, 404)
-    
+
     def do_POST(self):
         parsed = urlparse(self.path)
         path = parsed.path
         content_length = int(self.headers.get('Content-Length', 0))
-        
+
         if path == '/portfolio/add':
             try:
                 body = json.loads(self.rfile.read(content_length))
@@ -90,7 +90,7 @@ class APIHandler(BaseHTTPRequestHandler):
                 self.send_json({"result": result})
             except Exception as e:
                 self.send_json({"error": str(e)}, 400)
-        
+
         else:
             self.send_json({"error": "Not found"}, 404)
 

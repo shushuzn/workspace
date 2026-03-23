@@ -25,36 +25,36 @@ def load_workflows():
 def load_health():
     tools = list(TOOLS_DIR.glob("*_001.py"))
     compliant = sum(1 for t in tools if "_001.py" in t.name)
-    
+
     runs, success = 0, 0
     if LOGS_FILE.exists():
         log = json.loads(LOGS_FILE.read_text(encoding="utf-8", errors="replace"))
         runs = len(log.get("runs", []))
         success = sum(1 for r in log.get("runs", []) if r.get("status") == "ok")
-    
+
     rate = (success / runs * 100) if runs > 0 else 100
     score = 100 if rate >= 99 else 80 if rate >= 95 else 50
-    
+
     return {"score": score, "tools": len(tools), "compliant": compliant, "runs": runs, "success": success}
 
 def get_workflow_status(wf_id, wf) -> None:
     """Get recent status of a workflow"""
     if not LOGS_FILE.exists():
         return "unknown"
-    
+
     log = json.loads(LOGS_FILE.read_text(encoding="utf-8", errors="replace"))
     wf_runs = [r for r in log.get("runs", []) if r.get("workflow") == wf_id or wf_id in str(r)]
-    
+
     if not wf_runs:
         return "not_run"
-    
+
     last = wf_runs[-1]
     return last.get("status", "unknown")
 
 def generate_html():
     workflows = load_workflows()
     health = load_health()
-    
+
     # Group by category
     categories = {}
     for k, v in workflows.items():
@@ -62,7 +62,7 @@ def generate_html():
         if cat not in categories:
             categories[cat] = []
         categories[cat].append({"id": k, **v})
-    
+
     # Build HTML
     html = f"""<!DOCTYPE html>
 <html>
@@ -128,9 +128,9 @@ def generate_html():
     
     <div class="categories">
 """
-    
+
     cat_labels = {"dev": "Development", "plan": "Planning", "qa": "Quality", "ops": "Operations", "research": "Research", "test": "Testing"}
-    
+
     for cat, wfs in categories.items():
         html += f'        <div class="category">\n            <h2>{cat_labels.get(cat, cat.title())}</h2>\n'
         for wf in wfs:
@@ -148,7 +148,7 @@ def generate_html():
             </div>
 '''
         html += "        </div>\n"
-    
+
     html += """    </div>
     
     <div class="footer">
@@ -165,14 +165,14 @@ def generate_html():
     </script>
 </body>
 </html>"""
-    
+
     return html
 
 def generate_markdown() -> None:
     """Generate markdown dashboard"""
     workflows = load_workflows()
     health = load_health()
-    
+
     md = f"""# OpenClaw Workflow Dashboard
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计
@@ -231,7 +231,7 @@ Fixes:
 ## Workflows
 
 """
-    
+
     # Group by category
     categories = {}
     for k, v in workflows.items():
@@ -239,9 +239,9 @@ Fixes:
         if cat not in categories:
             categories[cat] = []
         categories[cat].append({"id": k, **v})
-    
+
     cat_labels = {"dev": "Development", "plan": "Planning", "qa": "Quality", "ops": "Operations", "research": "Research", "test": "Testing"}
-    
+
     for cat, wfs in sorted(categories.items()):
         md += f"### {cat_labels.get(cat, cat.title())}\n\n"
         md += "| ID | Name | Steps | Type |\n"
@@ -251,7 +251,7 @@ Fixes:
             wf_type = "steps" if wf.get("type") == "steps" else "dir"
             md += f"| `{wf['id']}` | {wf['name']} | {steps} | {wf_type} |\n"
         md += "\n"
-    
+
     md += """## Quick Commands
 
 ```bash
@@ -277,13 +277,13 @@ py 30-scripts-tools/workflow_health_001.py
 
 if __name__ == "__main__":
     output_file = Path("workflow_dashboard.html")
-    
+
     if len(sys.argv) > 1 and sys.argv[1] == "--md":
         output_file = Path("workflow_dashboard.md")
         content = generate_markdown()
     else:
         content = generate_html()
-    
+
     output_file.write_text(content, encoding="utf-8", errors="replace")
     print(f"Dashboard generated: {output_file}")
     print(f"Open: file:///{output_file.absolute()}")

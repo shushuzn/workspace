@@ -12,7 +12,7 @@ AI-SUGGEST-001 AI Smart Suggestions
   - 分析进度模式
   - 识别瓶颈
   - 生成行动建议
-  
+
 注意: 此工具需要LLM调用来生成智能建议
 """
 import json
@@ -27,58 +27,58 @@ SUGGEST_DIR.mkdir(parents=True, exist_ok=True)
 
 class AISuggestor:
     """AI智能建议器"""
-    
+
     def __init__(self):
         self.suggest_dir = SUGGEST_DIR
         self.history_file = self.suggest_dir / "suggestion_history.json"
-    
+
     def _load_history(self) -> list:
         if self.history_file.exists():
             with open(self.history_file, "r", encoding="utf-8") as f:
                 return json.load(f)
         return []
-    
+
     def _save_history(self, history: list):
         with open(self.history_file, "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
-    
+
     def load_roadmaps(self) -> dict:
         """加载所有路线图"""
         dimensions = ["stock_analysis", "optimization", "protection", "automation"]
         roadmaps = {}
-        
+
         for dim in dimensions:
             file = Path(f"flow-archive/roadmaps/{dim}.json")
             if file.exists():
                 with open(file, "r", encoding="utf-8") as f:
                     roadmaps[dim] = json.load(f)
-        
+
         return roadmaps
-    
+
     def analyze_progress(self) -> dict:
         """分析进度数据"""
         roadmaps = self.load_roadmaps()
-        
+
         analysis = {
             "dimensions": [],
             "overall": {}
         }
-        
+
         total_tools = 0
         total_completed = 0
-        
+
         for dim, rm in roadmaps.items():
             t = rm.get("total_tools", 0)
             c = rm.get("completed_tools", 0)
             phases = rm.get("phases", [])
-            
+
             total_tools += t
             total_completed += c
-            
+
             # 分析每个维度
             in_progress_phases = [p for p in phases if p.get("status") == "in_progress"]
             completed_phases = [p for p in phases if p.get("status") == "completed"]
-            
+
             analysis["dimensions"].append({
                 "id": dim,
                 "name": rm.get("name", dim),
@@ -89,22 +89,22 @@ class AISuggestor:
                 "completed": c,
                 "remaining": t - c
             })
-        
+
         analysis["overall"] = {
             "total_tools": total_tools,
             "total_completed": total_completed,
             "remaining": total_tools - total_completed,
             "progress_pct": (total_completed / total_tools * 100) if total_tools > 0 else 0
         }
-        
+
         return analysis
-    
+
     def identify_opportunities(self) -> list:
         """识别机会点"""
         analysis = self.analyze_progress()
-        
+
         opportunities = []
-        
+
         for dim in analysis["dimensions"]:
             if dim["remaining"] > 0:
                 opportunities.append({
@@ -113,19 +113,19 @@ class AISuggestor:
                     "remaining": dim["remaining"],
                     "priority": "high" if dim["remaining"] > 10 else ("medium" if dim["remaining"] > 5 else "low")
                 })
-        
+
         # 按优先级排序
         opportunities.sort(key=lambda x: {"high": 0, "medium": 1, "low": 2}.get(x["priority"], 3))
-        
+
         return opportunities
-    
+
     def generate_suggestions(self) -> dict:
         """生成AI建议"""
         analysis = self.analyze_progress()
         opportunities = self.identify_opportunities()
-        
+
         suggestions = []
-        
+
         # 基于分析生成建议
         if analysis["overall"]["progress_pct"] >= 100:
             suggestions.append({
@@ -143,7 +143,7 @@ class AISuggestor:
                 "action": "Focus on completing remaining items",
                 "priority": "high"
             })
-        
+
         # 机会点建议
         for opp in opportunities[:3]:
             suggestions.append({
@@ -153,7 +153,7 @@ class AISuggestor:
                 "action": f"Work on {opp['dimension']} dimension",
                 "priority": opp["priority"]
             })
-        
+
         # 通用建议
         suggestions.extend([
             {
@@ -171,18 +171,18 @@ class AISuggestor:
                 "priority": "low"
             }
         ])
-        
+
         return {
             "analysis": analysis,
             "suggestions": suggestions,
             "opportunities": opportunities,
             "timestamp": datetime.now().isoformat()
         }
-    
+
     def generate_llm_prompt(self) -> str:
         """生成LLM提示词（用于更智能的建议）"""
         analysis = self.analyze_progress()
-        
+
         prompt = f"""Based on the current roadmap analysis:
 
 Overall Progress: {analysis['overall']['progress_pct']:.1f}%
@@ -206,7 +206,7 @@ Please provide:
 Respond in JSON format with keys: priority_actions, risks, optimizations, new_dimensions"""
 
         return prompt
-    
+
     def save_suggestion(self, suggestion: dict):
         """
 # ==============================================================================
@@ -255,7 +255,7 @@ Fixes:
         history.append(suggestion)
         history = history[-20:]
         self._save_history(history)
-    
+
     def export_suggestions(self) -> dict:
         """导出建议"""
         result = self.generate_suggestions()

@@ -31,7 +31,7 @@ if data_file.exists():
     v_data = df['v_mms'].values
     d_data = df['d_um'].values
     sigma_data = df['sigma_Sm'].values
-    
+
     print(f"  Loaded {len(df)} data points from synthetic literature data")
 else:
     print(f"  [!] Data file not found, using sample data")

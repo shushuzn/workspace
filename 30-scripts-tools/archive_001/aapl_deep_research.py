@@ -27,12 +27,12 @@ COMPETITORS = {
 def L1_financial():
     rev = FINANCIALS["revenue"]
     ni = FINANCIALS["net_income"]
-    
+
     rev_growth = (rev["FY2025"] - rev["FY2024"]) / rev["FY2024"] * 100
     gross_margin = FINANCIALS["gross_profit"]["FY2025"] / rev["FY2025"] * 100
     net_margin = ni["FY2025"] / rev["FY2025"] * 100
     eps_growth = (FINANCIALS["eps"]["FY2025"] - FINANCIALS["eps"]["FY2024"]) / FINANCIALS["eps"]["FY2024"] * 100
-    
+
     return {
         "metrics": {
             "revenue_fy25": f"${rev['FY2025']:,}M",
@@ -53,13 +53,13 @@ def L2_valuation():
     price = 247.99
     eps = 7.46
     pe = 31.35
-    
+
     targets = {
         "保守": 27 * eps * 1.10,
         "中性": 30 * eps * 1.12,
         "乐观": 33 * eps * 1.15
     }
-    
+
     return {
         "metrics": {
             "pe_current": pe,
@@ -75,7 +75,7 @@ def L2_valuation():
 
 def L3_competitors():
     avg_pe = sum(c["pe"] for c in COMPETITORS.values()) / len(COMPETITORS)
-    
+
     return {
         "metrics": {
             "aapl_pe": 31.35,
@@ -125,16 +125,16 @@ def main():
     print("=" * 70)
     print("AAPL 深度研报 v1.0")
     print("=" * 70)
-    
+
     f1 = L1_financial()
     f2 = L2_valuation()
     f3 = L3_competitors()
     f4 = L4_risk()
     f5 = L5_forecast()
-    
+
     # 综合评分
     score = f1["score"] * 0.25 + f2["score"] * 0.25 + f3["score"] * 0.2 + f4["score"] * 0.15 + f5["score"] * 0.15
-    
+
     # 保存报告
     report = {
         "symbol": "AAPL",
@@ -146,11 +146,11 @@ def main():
         "forecast": f5,
         "overall_score": round(score, 1)
     }
-    
+
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     with open(f"{SAVE_DIR}/AAPL_deep_{ts}.json", 'w', encoding='utf-8') as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
-    
+
     # 打印报告
     print("\n" + "=" * 70)
     print("L1: 财务分析")
@@ -160,7 +160,7 @@ def main():
     print(f"  评分: {f1['score']}/100")
     print(f"  优势: {', '.join(f1['strengths'])}")
     print(f"  劣势: {', '.join(f1['weaknesses'])}")
-    
+
     print("\n" + "=" * 70)
     print("L2: 估值模型")
     print("=" * 70)
@@ -170,7 +170,7 @@ def main():
     for k, v in f2["targets"].items():
         print(f"    {k}: ${v['price']} ({v['upside']})")
     print(f"  评分: {f2['score']}/100")
-    
+
     print("\n" + "=" * 70)
     print("L3: 行业对比")
     print("=" * 70)
@@ -179,7 +179,7 @@ def main():
     for c in f3["comparison"]:
         print(f"    {c['ticker']}: PE={c['pe']}, 增长={c['growth']}%")
     print(f"  评分: {f3['score']}/100")
-    
+
     print("\n" + "=" * 70)
     print("L4: 风险分析")
     print("=" * 70)
@@ -187,7 +187,7 @@ def main():
         print(f"  [{r['level']}] {r['type']}: {r['desc']}")
     print(f"  对冲: {', '.join(f4['mitigation'])}")
     print(f"  评分: {f4['score']}/100")
-    
+
     print("\n" + "=" * 70)
     print("L5: 业绩预测")
     print("=" * 70)
@@ -198,12 +198,12 @@ def main():
     for scenario, data in f5["scenarios"].items():
         print(f"    {scenario}: ${data['price']} ({data['prob']})")
     print(f"  评分: {f5['score']}/100")
-    
+
     print("\n" + "=" * 70)
     print("综合评分")
     print("=" * 70)
     print(f"  总分: {score:.1f}/100")
-    
+
     if score >= 80:
         verdict = "强烈推荐"
     elif score >= 70:
@@ -212,7 +212,7 @@ def main():
         verdict = "中性观望"
     else:
         verdict = "建议回避"
-    
+
     print(f"  评级: {verdict}")
     print("\n" + "=" * 70)
     print(f"报告已保存至: {SAVE_DIR}")

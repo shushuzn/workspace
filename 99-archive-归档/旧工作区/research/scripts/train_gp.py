@@ -81,7 +81,7 @@ print("\n[3/6] 定义 GP 核函数...")
 
 # RBF 核 + 常数核 + 白噪声核
 kernel = (
-    C(1.0, (1e-3, 1e3)) * 
+    C(1.0, (1e-3, 1e3)) *
     RBF(length_scale=[1.0] * len(feature_cols), length_scale_bounds=(1e-2, 1e2)) +
     WhiteKernel(noise_level=0.1, noise_level_bounds=(1e-10, 1e+1))
 )

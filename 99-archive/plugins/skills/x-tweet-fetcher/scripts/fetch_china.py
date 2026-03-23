@@ -240,7 +240,7 @@ class WeiboParser(PlatformParser):
 
         for i, line in enumerate(lines):
             stripped = line.rstrip()
-            
+
             # Start of article (may have leading spaces)
             if stripped.lstrip().startswith("- article:"):
                 current_article = {
@@ -377,7 +377,7 @@ class WeiboParser(PlatformParser):
             }
 
         first = articles[0]
-        
+
         # Build content: verified text + main content
         full_content = ""
         if first.get("verified_text"):
@@ -498,7 +498,7 @@ class BilibiliParser(PlatformParser):
         heading_found = False
         stats_started = False
         stats_count = 0
-        
+
         i = 0
         while i < len(lines):
             line = lines[i]
@@ -564,7 +564,7 @@ class BilibiliParser(PlatformParser):
                     stats_started = True
                     stats_count = 1
                     likes = parse_wan_number(text_content)
-                    
+
                     # 继续检查接下来的行
                     j = i + 1
                     while j < len(lines) and stats_count < 4:
@@ -587,11 +587,11 @@ class BilibiliParser(PlatformParser):
                         else:
                             break
                         j += 1
-                    
+
                     # 跳过已检查的行
                     i = j
                     continue
-            
+
             # 6. UP主: link "UP主名" [eN]: 且URL包含 space.bilibili.com
             if not author and stripped.startswith("- link "):
                 # 检查下一行是否是 space.bilibili.com URL
@@ -723,11 +723,11 @@ class CSDNParser(PlatformParser):
         views = 0
         likes = 0
         comments_count = 0
-        
+
         # Try to detect page type
         is_download_page = False
         downloads = []
-        
+
         # Check if it's a download list (contains file sizes like "1.69MB", "201KB")
         if "MB" in snapshot or "KB" in snapshot:
             is_download_page = True
@@ -736,7 +736,7 @@ class CSDNParser(PlatformParser):
             # Parse as download list
             for i, line in enumerate(lines):
                 stripped = line.strip()
-                
+
                 # Download items: link with file info
                 if stripped.startswith("- listitem:"):
                     # Check next few lines for link
@@ -759,11 +759,11 @@ class CSDNParser(PlatformParser):
                                                 size = file_match.group(1)
                                                 filename = file_match.group(2)
                                                 date = file_match.group(3)
-                                                
+
                                                 # Extract URL
                                                 url_match = re.search(r'/url:\s*(https?://[^$]+)', url_line)
                                                 file_url = url_match.group(1).strip() if url_match else ""
-                                                
+
                                                 downloads.append({
                                                     "filename": filename,
                                                     "size": size,
@@ -771,7 +771,7 @@ class CSDNParser(PlatformParser):
                                                     "url": file_url,
                                                 })
                                         break
-        
+
         # If not download page, try to parse as article
         if not is_download_page:
             heading_found = False
@@ -813,11 +813,11 @@ class CSDNParser(PlatformParser):
                     views_match = re.search(r'([\d,]+)\s*阅读', text)
                     if views_match and views == 0:
                         views = int(views_match.group(1).replace(",", ""))
-                    
+
                     likes_match = re.search(r'([\d,]+)\s*点赞', text)
                     if likes_match and likes == 0:
                         likes = int(likes_match.group(1).replace(",", ""))
-                    
+
                     comments_match = re.search(r'([\d,]+)\s*评论', text)
                     if comments_match and comments_count == 0:
                         comments_count = int(comments_match.group(1).replace(",", ""))
@@ -1288,7 +1288,7 @@ class XiaohongshuParser(PlatformParser):
         import subprocess
         cmd_queue = "/root/router-agent/cmd-queue"
         cmd_output = "/root/router-agent/cmd-output"
-        
+
         # Write curl command to router queue
         curl_cmd = (
             f'curl -sL "{url}" '
@@ -1298,14 +1298,14 @@ class XiaohongshuParser(PlatformParser):
             f'-H "Accept-Language: zh-CN,zh;q=0.9" '
             f'--max-time 15 2>/dev/null'
         )
-        
+
         try:
             # Clear old output
             subprocess.run(['bash', '-c', f'> {cmd_output}'], timeout=3)
             # Queue command
             with open(cmd_queue, 'w') as f:
                 f.write(curl_cmd)
-            
+
             # Wait for router to execute (polls every minute)
             print("[xiaohongshu] 等待路由器执行抓取（最多90秒）...", file=sys.stderr)
             for _ in range(18):  # 18 * 5s = 90s
@@ -1339,23 +1339,23 @@ class XiaohongshuParser(PlatformParser):
     def _parse_note_from_state(self, state: Dict, url: str) -> Dict[str, Any]:
         """Parse note data from __INITIAL_STATE__."""
         note_data = {}
-        
+
         # Navigate the state tree to find note
         # Structure: noteDetailMap -> note_id -> note
         detail_map = state.get('note', {}).get('noteDetailMap', {})
         if not detail_map:
             detail_map = state.get('noteDetailMap', {})
-        
+
         for note_id, wrapper in detail_map.items():
             note = wrapper.get('note', wrapper)
-            
+
             title = note.get('title', '')
             desc = note.get('desc', '')
-            
+
             # Author
             user = note.get('user', {})
             author = user.get('nickname', user.get('nick_name', ''))
-            
+
             # Images
             image_list = note.get('imageList', note.get('image_list', []))
             images = []
@@ -1363,18 +1363,18 @@ class XiaohongshuParser(PlatformParser):
                 img_url = img.get('urlDefault', img.get('url', img.get('url_default', '')))
                 if img_url:
                     images.append(img_url)
-            
+
             # Stats
             interact = note.get('interactInfo', note.get('interact_info', {}))
             likes = parse_wan_number(str(interact.get('likedCount', interact.get('liked_count', 0))))
             collected = parse_wan_number(str(interact.get('collectedCount', interact.get('collected_count', 0))))
             comments_count = parse_wan_number(str(interact.get('commentCount', interact.get('comment_count', 0))))
             shared = parse_wan_number(str(interact.get('shareCount', interact.get('share_count', 0))))
-            
+
             # Tags
             tag_list = note.get('tagList', note.get('tag_list', []))
             tags = [t_item.get('name', '') for t_item in tag_list if t_item.get('name')]
-            
+
             # Time
             create_time = note.get('time', note.get('createTime', ''))
             if isinstance(create_time, (int, float)) and create_time > 1000000000:
@@ -1382,10 +1382,10 @@ class XiaohongshuParser(PlatformParser):
                     create_time / 1000 if create_time > 1e12 else create_time,
                     tz=timezone(timedelta(hours=8))
                 ).strftime('%Y-%m-%d %H:%M')
-            
+
             # Type
             note_type = note.get('type', '')  # 'normal' (image) or 'video'
-            
+
             note_data = {
                 "url": url,
                 "platform": "xiaohongshu",
@@ -1405,13 +1405,13 @@ class XiaohongshuParser(PlatformParser):
                 },
             }
             break  # Take first note
-        
+
         return note_data
 
     def _parse_snapshot(self, snapshot: str, url: str) -> Dict[str, Any]:
         """Parse Camofox snapshot of XHS page (fallback)."""
         lines = snapshot.split("\n")
-        
+
         title = ""
         author = ""
         content_lines = []
@@ -1419,27 +1419,27 @@ class XiaohongshuParser(PlatformParser):
         comments = 0
         favorites = 0
         shares = 0
-        
+
         for line in lines:
             line = line.strip()
-            
+
             # Title from heading
             m = re.search(r'heading "(.+?)"', line)
             if m and not title:
                 title = m.group(1)
-            
+
             # Author
             if 'user/profile' in line:
                 m2 = re.search(r'link "(.+?)"', line)
                 if m2 and not author:
                     author = m2.group(1)
-            
+
             # Content text
             if line.startswith('- text:') and len(line) > 20:
                 text = line[8:].strip()
                 if text and text not in ('发现', '发布', '通知', '关注', '收藏', '评论', '分享'):
                     content_lines.append(text)
-            
+
             # Stats
             m_likes = re.search(r'(\d+(?:\.\d+)?万?)\s*(?:赞|点赞)', line)
             if m_likes:
@@ -1450,7 +1450,7 @@ class XiaohongshuParser(PlatformParser):
             m_comm = re.search(r'(\d+(?:\.\d+)?万?)\s*评论', line)
             if m_comm:
                 comments = parse_wan_number(m_comm.group(1))
-        
+
         return {
             "url": url,
             "platform": "xiaohongshu",
@@ -1533,13 +1533,13 @@ class XiaohongshuParser(PlatformParser):
         note_id = self._extract_note_id(url)
         if not note_id:
             return {"url": url, "platform": "xiaohongshu", "error": "无法从 URL 提取笔记 ID"}
-        
+
         # Normalize URL
         canonical = f"https://www.xiaohongshu.com/explore/{note_id}"
-        
+
         # Load cookies
         cookie_str = self._load_cookies(cookies)
-        
+
         # Method 0: Proxy + optional cookies (user-provided, fastest)
         if proxy:
             print(f"[xiaohongshu] 尝试通过代理 {proxy[:30]}... 抓取", file=sys.stderr)
@@ -1550,7 +1550,7 @@ class XiaohongshuParser(PlatformParser):
                     data = self._parse_note_from_state(state, url)
                     if data and data.get('content'):
                         return data
-        
+
         # Method 0.5: Cookies without proxy (works if user has domestic IP)
         if cookie_str and not proxy:
             print("[xiaohongshu] 尝试通过 Cookies 直接抓取...", file=sys.stderr)
@@ -1561,7 +1561,7 @@ class XiaohongshuParser(PlatformParser):
                     data = self._parse_note_from_state(state, url)
                     if data and data.get('content'):
                         return data
-        
+
         # Method 1: Try router home IP (bypasses geo-block)
         print("[xiaohongshu] 尝试通过路由器家庭 IP 抓取...", file=sys.stderr)
         html = self._fetch_via_router(canonical)
@@ -1571,7 +1571,7 @@ class XiaohongshuParser(PlatformParser):
                 data = self._parse_note_from_state(state, url)
                 if data and data.get('content'):
                     return data
-                    
+
             # Even without __INITIAL_STATE__, try meta tags
             title_m = re.search(r'<meta[^>]*name="og:title"[^>]*content="([^"]*)"', html)
             desc_m = re.search(r'<meta[^>]*name="description"[^>]*content="([^"]*)"', html)
@@ -1589,7 +1589,7 @@ class XiaohongshuParser(PlatformParser):
                     "published_at": "",
                     "stats": {},
                 }
-        
+
         # Method 2: Try Camofox browser
         if check_camofox(port):
             print(t("opening_via_camofox", url=canonical), file=sys.stderr)
@@ -1598,7 +1598,7 @@ class XiaohongshuParser(PlatformParser):
                 data = self._parse_snapshot(snapshot, url)
                 if data.get('content') or data.get('title'):
                     return data
-        
+
         return {
             "url": url,
             "platform": "xiaohongshu",

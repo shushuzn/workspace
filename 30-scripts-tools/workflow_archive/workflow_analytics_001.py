@@ -22,16 +22,16 @@ class WorkflowAnalytics:
         log_file = LOGS_DIR / "master.json"
         if not log_file.exists():
             return {"error": "No logs found"}
-        
+
         log = json.loads(log_file.read_text(encoding="utf-8", errors="replace"))
         runs = log.get("runs", [])
-        
+
         # Tool usage frequency
         tool_usage = {}
         for run in runs:
             tool = run.get("workflow", "unknown")
             tool_usage[tool] = tool_usage.get(tool, 0) + 1
-        
+
         # Success rate by tool
         tool_success = {}
         for run in runs:
@@ -39,7 +39,7 @@ class WorkflowAnalytics:
             if tool not in tool_success:
                 tool_success[tool] = {"ok": 0, "fail": 0}
             tool_success[tool][run.get("status", "ok")] += 1
-        
+
         return {
             "timestamp": datetime.now().isoformat(),
             "summary": {

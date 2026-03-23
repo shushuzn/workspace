@@ -73,20 +73,20 @@ def get_random_words(category: str = None, count: int = 3) -> list:
         words = []
         for cat_words in RANDOM_WORDS.values():
             words.extend(cat_words)
-    
+
     return random.sample(words, min(count, len(words)))
 
 
 def generate_random_associations(topic: str, random_words: list) -> dict:
     """生成随机联想"""
-    
+
     results = {
         "topic": topic,
         "method": "Random Input",
         "random_words": random_words,
         "associations": []
     }
-    
+
     for word in random_words:
         # 构造关联问题
         associations = {
@@ -103,23 +103,23 @@ def generate_random_associations(topic: str, random_words: list) -> dict:
             ]
         }
         results["associations"].append(associations)
-    
+
     return results
 
 
 def display_random_associations(results: dict):
     """展示随机联想"""
-    
+
     print("=" * 60)
     print(f"[RANDOM INPUT] Topic: {results['topic']}")
     print("=" * 60)
     print(f"\nRandom Words: {', '.join(results['random_words'])}")
-    
+
     for assoc in results["associations"]:
         print(f"\n[{assoc['word']}]")
         for q in assoc["connections"][:4]:  # 只显示前4个
             print(f"  -> {q}")
-    
+
     print("\n" + "=" * 60)
 
 
@@ -168,37 +168,37 @@ Fixes:
 """
 
 主函数"""
-    
+
     # 解析参数
     topic = None
     custom_words = None
-    
+
     for i, arg in enumerate(sys.argv[1:], 1):
         if arg == "--words" and i < len(sys.argv) - 1:
             custom_words = sys.argv[i + 1].split(",")
         elif not arg.startswith("--"):
             topic = arg
-    
+
     if not topic:
         topic = "OpenClaw tools"
-    
+
     # 获取随机词
     if custom_words:
         random_words = custom_words
     else:
         random_words = get_random_words(count=5)
-    
+
     results = generate_random_associations(topic, random_words)
     display_random_associations(results)
-    
+
     # 保存结果
     output_file = Path(f"flow-archive/brainstorm-current/random_ideas.json")
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n[Saved to] {output_file}")
     print(f"\n[Tip] 尝试不同的随机词或使用 --words 指定")
-    
+
     return 0
 
 

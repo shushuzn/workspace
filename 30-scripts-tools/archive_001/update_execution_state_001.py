@@ -27,7 +27,7 @@ for step_id in completed_step_ids:
             if step['step_id'] == step_id:
                 step_name = step['name']
                 break
-        
+
         state['step_status'][step_id] = {
             "name": step_name,
             "status": "completed",

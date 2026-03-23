@@ -20,22 +20,22 @@ class WorkflowOptimizer:
     def benchmark(self, filepath, runs=3):
         import subprocess
         times = []
-        
+
         for _ in range(runs):
             start = time.time()
             subprocess.run([sys.executable, filepath], capture_output=True, timeout=30)
             times.append(time.time() - start)
-        
+
         return {
             "file": Path(filepath).name,
             "avg_time": sum(times) / len(times),
             "min_time": min(times),
             "runs": runs
         }
-    
+
     def optimize(self):
         results = []
-        
+
         # Core tools to benchmark
         core_tools = [
             "tool_validator_001.py",
@@ -43,13 +43,13 @@ class WorkflowOptimizer:
             "tool_namer_001.py",
             "workflow_master_001.py"
         ]
-        
+
         for tool in core_tools:
             path = TOOLS_DIR / tool
             if path.exists():
                 result = self.benchmark(str(path))
                 results.append(result)
-        
+
         return results
 
 if __name__ == "__main__":

@@ -52,12 +52,12 @@ logger = logging.getLogger(__name__)
 
 class FeishuEventFilter:
     """Filter Feishu webhook events to suppress unwanted notifications."""
-    
+
     def __init__(self, config_file: Path = None):
         self.config_file = config_file or FILTER_CONFIG_FILE
         self.filters: Set[str] = set()
         self.load_filters()
-    
+
     def load_filters(self):
         """Load filters from config file."""
         if self.config_file.exists():
@@ -73,19 +73,19 @@ class FeishuEventFilter:
             logger.info("No config file found, using default filters")
             self.filters = DEFAULT_FILTERS.copy()
             self.save_filters()
-    
+
     def save_filters(self):
         """Save filters to config file."""
         config = {
             'filters': list(self.filters),
             'description': 'Feishu webhook event filters - events to ignore',
         }
-        
+
         with open(self.config_file, 'w', encoding='utf-8') as f:
             json.dump(config, f, indent=2, ensure_ascii=False)
-        
+
         logger.info(f"Saved {len(self.filters)} filters to config")
-    
+
     def add_filter(self, event_type: str):
         """Add event type to filter list."""
         if event_type not in self.filters:
@@ -94,7 +94,7 @@ class FeishuEventFilter:
             logger.info(f"✅ Added filter: {event_type}")
         else:
             logger.info(f"ℹ️  Filter already exists: {event_type}")
-    
+
     def remove_filter(self, event_type: str):
         """Remove event type from filter list."""
         if event_type in self.filters:
@@ -103,11 +103,11 @@ class FeishuEventFilter:
             logger.info(f"✅ Removed filter: {event_type}")
         else:
             logger.warning(f"⚠️  Filter not found: {event_type}")
-    
+
     def should_filter(self, event_type: str) -> bool:
         """Check if event type should be filtered out."""
         return event_type in self.filters
-    
+
     def process_event(self, event_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         """
         Process incoming event, return None if filtered.
@@ -119,18 +119,18 @@ class FeishuEventFilter:
             Processed event data or None if filtered
         """
         event_type = event_data.get('type', event_data.get('header', {}).get('event_type', ''))
-        
+
         if self.should_filter(event_type):
             logger.debug(f"🚫 Filtered event: {event_type}")
             return None
-        
+
         logger.debug(f"✅ Passed event: {event_type}")
         return event_data
-    
+
     def list_filters(self) -> List[str]:
         """Get list of active filters."""
         return sorted(list(self.filters))
-    
+
     def get_stats(self) -> Dict[str, Any]:
         """Get filter statistics."""
         return {
@@ -168,7 +168,7 @@ def create_event_processor(filter_instance: FeishuEventFilter):
     """
     def processor(event_data: Dict[str, Any]) -> Optional[Dict[str, Any]]:
         return filter_instance.process_event(event_data)
-    
+
     return processor
 
 
@@ -179,35 +179,35 @@ def patch_lark_oapi_logger():
     This prevents error logs for events that are intentionally filtered.
     """
     import logging
-    
+
     class FilteredEventLogger(logging.Filter):
         def filter(self, record):
             msg = record.getMessage()
-            
+
             # Suppress 'processor not found' for filtered event types
             if 'processor not found' in msg:
                 filtered_types = [
                     'im.message.reaction.created_v1',
                     'im.message.reaction.deleted_v1',
                 ]
-                
+
                 for event_type in filtered_types:
                     if event_type in msg:
                         return False  # Suppress this log
-            
+
             return True  # Allow other logs
-    
+
     # Get lark_oapi logger
     lark_logger = logging.getLogger('lark_oapi')
     lark_logger.addFilter(FilteredEventLogger())
-    
+
     logger.info("✅ Patched lark_oapi logger to suppress filtered event errors")
 
 
 def main():
     """Main entry point."""
     import argparse
-    
+
     parser = argparse.ArgumentParser(description="Feishu Webhook Event Filter")
     parser.add_argument('--add-filter', type=str, help='Add event type to filter')
     parser.add_argument('--remove-filter', type=str, help='Remove event type from filter')
@@ -216,15 +216,15 @@ def main():
     parser.add_argument('--test', action='store_true', help='Test filter with sample events')
     parser.add_argument('--patch-logger', action='store_true', help='Patch lark_oapi logger')
     args = parser.parse_args()
-    
+
     event_filter = FeishuEventFilter()
-    
+
     if args.add_filter:
         event_filter.add_filter(args.add_filter)
-    
+
     elif args.remove_filter:
         event_filter.remove_filter(args.remove_filter)
-    
+
     elif args.list_filters:
         filters = event_filter.list_filters()
         print(f"\n📋 Active Filters ({len(filters)}):")
@@ -232,7 +232,7 @@ def main():
         for f in filters:
             print(f"  • {f}")
         print("=" * 60)
-    
+
     elif args.stats:
         stats = event_filter.get_stats()
         print(f"\n📊 Filter Statistics:")
@@ -243,11 +243,11 @@ def main():
         for f in stats['filters']:
             print(f"  • {f}")
         print("=" * 60)
-    
+
     elif args.test:
         print("\n🧪 Testing Event Filter")
         print("=" * 60)
-        
+
         test_events = [
             {'type': 'im.message.reaction.created_v1', 'data': 'test'},
             {'type': 'im.message.reaction.deleted_v1', 'data': 'test'},
@@ -255,23 +255,23 @@ def main():
             {'type': 'im.chat.updated_v1', 'data': 'test'},
             {'type': 'unknown_event', 'data': 'test'},
         ]
-        
+
         for event in test_events:
             result = event_filter.process_event(event)
             status = '🚫 FILTERED' if result is None else '✅ PASSED'
             print(f"  {status}: {event['type']}")
-        
+
         print("=" * 60)
         print("✅ Test complete!")
-    
+
     elif args.patch_logger:
         patch_lark_oapi_logger()
         print("\n✅ Logger patched successfully!")
         print("   This suppresses 'processor not found' errors for filtered events.")
-    
+
     else:
         parser.print_help()
-        
+
         # Show current filters
         print(f"\n📋 Current Filters ({len(event_filter.list_filters())}):")
         for f in event_filter.list_filters()[:5]:

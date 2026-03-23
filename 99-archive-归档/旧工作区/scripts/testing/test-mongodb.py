@@ -38,24 +38,24 @@ except ImportError:
 try:
     print(f"\n🔌 测试连接 MongoDB...")
     client = MongoClient(mongodb_url, serverSelectionTimeoutMS=5000)
-    
+
     # 测试连接
     client.admin.command('ping')
-    
+
     # 获取数据库信息
     db = client[mongodb_db]
     collections = db.list_collection_names()
-    
+
     print(f"\n✅ MongoDB 连接成功!")
     print(f"   服务器：{client.address}")
     print(f"   数据库：{mongodb_db}")
     print(f"   集合数：{len(collections)}")
-    
+
     if collections:
         print(f"   集合列表：{', '.join(collections[:5])}")
-    
+
     client.close()
-    
+
 except Exception as e:
     print(f"\n⚠️ MongoDB 连接失败:")
     print(f"   {e}")

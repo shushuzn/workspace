@@ -52,7 +52,7 @@ base_time = datetime(2026, 3, 21, 19, 0, 0)
 for step_id in step_ids:
     name = step_names.get(step_id, f"Step {step_id}")
     minute_offset = int(step_id * 2) if isinstance(step_id, int) else int(float(step_id) * 2)
-    
+
     state["step_status"][str(step_id)] = {
         "name": name,
         "status": "completed",

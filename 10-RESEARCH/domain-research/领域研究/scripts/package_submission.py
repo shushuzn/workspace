@@ -10,17 +10,17 @@ from pathlib import Path
 
 def create_submission_package(output_dir='submission_package'):
     """创建投稿文件包"""
-    
+
     # 创建输出目录
     out_path = Path(output_dir)
     if out_path.exists():
         shutil.rmtree(out_path)
     out_path.mkdir(parents=True)
-    
+
     print("=" * 50)
     print("Creating Submission Package")
     print("=" * 50)
-    
+
     # 复制论文文件
     paper_files = [
         '../paper/00_abstract.md',
@@ -33,7 +33,7 @@ def create_submission_package(output_dir='submission_package'):
         '../paper/cover_letter.md',
         '../paper/highlights.md',
     ]
-    
+
     print("\n📄 Copying paper files...")
     for file in paper_files:
         src = Path(file)
@@ -42,19 +42,19 @@ def create_submission_package(output_dir='submission_package'):
             print(f"  [OK] {src.name}")
         else:
             print(f"  [WARN] Not found: {src}")
-    
+
     # 复制图表
     print("\n📊 Copying figures...")
     figures_dir = out_path / 'figures'
     figures_dir.mkdir()
-    
+
     figure_files = [
         '../figures/GP_200samples_prediction.png',
         '../figures/GP_200samples_residuals.png',
         '../figures/GP_200samples_uncertainty.png',
         '../figures/GP_performance_comparison.png',
     ]
-    
+
     for file in figure_files:
         src = Path(file)
         if src.exists():
@@ -62,12 +62,12 @@ def create_submission_package(output_dir='submission_package'):
             print(f"  [OK] {src.name}")
         else:
             print(f"  [WARN] Not found: {src}")
-    
+
     # 复制补充材料
     print("\n📦 Copying supplementary materials...")
     supp_dir = out_path / 'supplementary'
     supp_dir.mkdir()
-    
+
     supp_files = [
         '../data/lig_dataset_200.csv',
         '../data/README.md',
@@ -76,7 +76,7 @@ def create_submission_package(output_dir='submission_package'):
         '../scripts/requirements.txt',
         '../scripts/LICENSE',
     ]
-    
+
     for file in supp_files:
         src = Path(file)
         if src.exists():
@@ -84,7 +84,7 @@ def create_submission_package(output_dir='submission_package'):
             print(f"  [OK] {src.name}")
         else:
             print(f"  [WARN] Not found: {src}")
-    
+
     # 创建 README
     print("\n📝 Creating package README...")
     readme_content = """# Carbon Submission Package
@@ -128,14 +128,14 @@ def create_submission_package(output_dir='submission_package'):
 
 **Contact:** [待填写]
 """
-    
+
     (out_path / 'README.md').write_text(readme_content)
     print("  [OK] README.md")
-    
+
     print("\n" + "=" * 50)
     print(f"Package created: {out_path.absolute()}")
     print("=" * 50)
-    
+
     return out_path
 
 if __name__ == '__main__':

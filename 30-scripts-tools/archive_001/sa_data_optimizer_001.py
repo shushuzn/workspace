@@ -26,11 +26,11 @@ class SADataOptimizer:
             "yahoo": {"timeout": 10, "cache_ttl": 300},
             "cache": {"ttl": 3600}
         }
-    
+
     def get_quote(self, symbol) -> None:
         """Get quote with caching"""
         cache_file = CACHE_DIR / f"{symbol}_quote.json"
-        
+
         # Check cache
         if cache_file.exists():
             age = time.time() - cache_file.stat().st_mtime
@@ -38,30 +38,30 @@ class SADataOptimizer:
                 data = json.loads(cache_file.read_text(encoding="utf-8", errors="replace"))
                 data["from_cache"] = True
                 return data
-        
+
         # Fetch from source
         result = self._fetch_yahoo(symbol)
-        
+
         if result:
             # Save to cache
             cache_file.write_text(json.dumps(result, ensure_ascii=False, indent=2), encoding="utf-8")
             result["from_cache"] = False
-        
+
         return result
-    
+
     def _fetch_yahoo(self, symbol) -> None:
         """Fetch from Yahoo Finance"""
         try:
             import urllib.request
             url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=1d"
-            
+
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
             with urllib.request.urlopen(req, timeout=10) as response:
                 data = json.loads(response.read().decode("utf-8"))
-            
+
             chart = data.get("chart", {}).get("result", [{}])[0]
             meta = chart.get("meta", {})
-            
+
             return {
                 "symbol": symbol.upper(),
                 "price": meta.get("regularMarketPrice", 0),
@@ -73,7 +73,7 @@ class SADataOptimizer:
             }
         except Exception as e:
             return {"error": str(e), "symbol": symbol}
-    
+
     def get_batch(self, symbols) -> None:
         """Get multiple quotes efficiently"""
         results = []
@@ -82,30 +82,30 @@ class SADataOptimizer:
             quote = self.get_quote(symbol)
             quote["fetch_time_ms"] = int((time.time() - start) * 1000)
             results.append(quote)
-        
+
         return {
             "count": len(results),
             "quotes": results
         }
-    
+
     def clear_cache(self, symbol=None) -> None:
         """Clear cache for symbol or all"""
         if symbol:
             files = [CACHE_DIR / f"{symbol}_quote.json"]
         else:
             files = CACHE_DIR.glob("*_quote.json")
-        
+
         count = 0
         for f in files:
             if f.exists():
                 f.unlink()
                 count += 1
-        
+
         return {"cleared": count, "symbol": symbol}
 
 if __name__ == "__main__":
     optimizer = SADataOptimizer()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--quote":

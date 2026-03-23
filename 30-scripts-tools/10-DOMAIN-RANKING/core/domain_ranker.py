@@ -52,7 +52,7 @@ class DomainData:
 
 class DomainRanker:
     """学科学术段位评价器"""
-    
+
     def __init__(self):
         # 权重配置
         self.weights = {
@@ -63,7 +63,7 @@ class DomainRanker:
             'talent': 0.10,
             'funding': 0.05
         }
-    
+
     def calculate_score(self, domain: DomainData) -> Tuple[int, str, int]:
         """
         计算段位分数
@@ -80,16 +80,16 @@ class DomainRanker:
             domain.talent_score * self.weights['talent'] +
             domain.funding_score * self.weights['funding']
         )
-        
+
         # 转换为 1-800 分
         total_score = int(weighted_score * 8)
         total_score = max(1, min(800, total_score))
-        
+
         # 确定段位
         rank_name, level = self.score_to_rank(total_score)
-        
+
         return total_score, rank_name, level
-    
+
     def score_to_rank(self, score: int) -> Tuple[str, int]:
         """分数转换为段位"""
         for rank_name, min_score, max_score, emoji in RANKS:
@@ -97,18 +97,18 @@ class DomainRanker:
                 level = score - min_score
                 return rank_name, level
         return "宗师", 100
-    
+
     def get_rank_info(self, score: int) -> Dict:
         """获取段位详细信息"""
         rank_name, level = self.score_to_rank(score)
-        
+
         # 找到当前段位信息
         for r_name, min_s, max_s, emoji in RANKS:
             if r_name == rank_name:
                 progress = level / 100 * 100
                 next_rank = RANKS[RANKS.index((r_name, min_s, max_s, emoji)) + 1][0] if RANKS.index((r_name, min_s, max_s, emoji)) < len(RANKS) - 1 else None
                 points_to_next = (min_s + 100) - score if next_rank else 0
-                
+
                 return {
                     'rank': rank_name,
                     'level': level,
@@ -117,17 +117,17 @@ class DomainRanker:
                     'next_rank': next_rank,
                     'points_to_next': points_to_next
                 }
-        
+
         return {}
-    
+
     def compare_domains(self, domains: Dict[str, DomainData]) -> List[Dict]:
         """比较多个领域"""
         results = []
-        
+
         for name, data in domains.items():
             score, rank, level = self.calculate_score(data)
             rank_info = self.get_rank_info(score)
-            
+
             results.append({
                 'name': name,
                 'score': score,
@@ -143,12 +143,12 @@ class DomainRanker:
                     'funding': data.funding_score
                 }
             })
-        
+
         # 按总分排序
         results.sort(key=lambda x: x['score'], reverse=True)
-        
+
         return results
-    
+
     def print_ranking(self, results: List[Dict]):
         """打印排名结果"""
         print("\n" + "=" * 70)
@@ -156,27 +156,27 @@ class DomainRanker:
         print("=" * 70)
         print(f"{'排名':<4} {'领域':<20} {'段位':<12} {'分数':<8} {'进度':<20}")
         print("-" * 70)
-        
+
         for i, result in enumerate(results, 1):
             rank_info = result['rank_info']
             emoji = rank_info.get('emoji', '⬛')
             progress_bar = self._create_progress_bar(rank_info.get('progress', 0))
-            
+
             print(f"{i:<4} {result['name']:<20} {emoji} {result['rank']} {result['level']:<3} {result['score']:<8} {progress_bar}")
-        
+
         print("=" * 70)
-    
+
     def _create_progress_bar(self, progress: float, length: int = 20) -> str:
         """创建进度条"""
         filled = int(progress / 100 * length)
         bar = "#" * filled + "-" * (length - filled)
         return f"[{bar}] {progress:.0f}%"
-    
+
     def generate_recommendations(self, domain: DomainData) -> List[str]:
         """生成晋升建议"""
         score, rank, level = self.calculate_score(domain)
         recommendations = []
-        
+
         # 找出最弱的维度
         scores = {
             '理论基础': domain.theory_score,
@@ -186,9 +186,9 @@ class DomainRanker:
             '人才储备': domain.talent_score,
             '资金投入': domain.funding_score
         }
-        
+
         sorted_scores = sorted(scores.items(), key=lambda x: x[1])
-        
+
         # 生成建议
         for dim, score in sorted_scores[:3]:  # 最弱的 3 个维度
             if score < 50:
@@ -197,7 +197,7 @@ class DomainRanker:
                 recommendations.append(f"[FOCUS] 重点加强{dim} (当前{score:.0f}分)")
             else:
                 recommendations.append(f"[OK] 继续保持{dim} (当前{score:.0f}分)")
-        
+
         return recommendations
 
 
@@ -260,9 +260,9 @@ def main():
     parser.add_argument("--export", type=str,
                         help="导出结果到 JSON 文件")
     args = parser.parse_args()
-    
+
     ranker = DomainRanker()
-    
+
     if args.evaluate:
         # 评估指定领域
         domains_to_eval = {}
@@ -280,10 +280,10 @@ def main():
                     talent_score=50,
                     funding_score=50
                 )
-        
+
         results = ranker.compare_domains(domains_to_eval)
         ranker.print_ranking(results)
-        
+
         # 生成建议
         for name in args.evaluate:
             if name in PREDEFINED_DOMAINS:
@@ -291,12 +291,12 @@ def main():
                 recs = ranker.generate_recommendations(PREDEFINED_DOMAINS[name])
                 for rec in recs:
                     print(f"  {rec}")
-    
+
     elif args.compare:
         # 比较所有预定义领域
         results = ranker.compare_domains(PREDEFINED_DOMAINS)
         ranker.print_ranking(results)
-    
+
     else:
         # 默认显示所有领域
         print("学科学术段位评价系统")
@@ -308,7 +308,7 @@ def main():
         for name in PREDEFINED_DOMAINS:
             score, rank, level = ranker.calculate_score(PREDEFINED_DOMAINS[name])
             print(f"  - {name}: {rank} {level}级 ({score}/800)")
-    
+
     return 0
 
 

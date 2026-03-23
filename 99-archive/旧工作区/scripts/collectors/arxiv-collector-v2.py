@@ -36,7 +36,7 @@ CATEGORIES = [
     'cs.CL',   # 计算与语言语言学
     'cs.IR',   # 信息检索
     'cs.NE',   # 神经网络与进化计算
-    
+
     # 系统与架构
     'cs.AR',   # 计算机架构
     'cs.DC',   # 分布式/并行/集群计算
@@ -44,12 +44,12 @@ CATEGORIES = [
     'cs.NI',   # 网络与互联网架构
     'cs.OS',   # 操作系统
     'cs.PF',   # 性能评估
-    
+
     # 软件工程与开发
     'cs.SE',   # 软件工程
     'cs.PL',   # 编程语言
     'cs.CR',   # 密码学与安全
-    
+
     # 理论与数学
     'cs.CC',   # 计算复杂性
     'cs.CE',   # 计算工程/实践/工具
@@ -59,7 +59,7 @@ CATEGORIES = [
     'cs.LO',   # 逻辑与计算机科学
     'cs.IT',   # 信息与编码理论
     'cs.MS',   # 数学软件
-    
+
     # 应用与交叉
     'cs.RO',   # 机器人学
     'cs.SY',   # 系统与控制
@@ -67,13 +67,13 @@ CATEGORIES = [
     'cs.GT',   # 博弈论
     'cs.DB',   # 数据库
     'cs.HC',   # 人机交互
-    
+
     # 其他 cs 领域
     'cs.CY',   # 计算机与社会
     'cs.DL',   # 数字图书馆
     'cs.ET',   # 新兴技术
     'cs.GL',   # 通用文献
-    
+
     # 相关交叉学科
     'stat.ML', # 统计学机器学习
     'eess.SY', # 电气/电子系统工程
@@ -114,7 +114,7 @@ def ensure_daily_structure(date_str):
     if not SETUP_SCRIPT.exists():
         print(f"[WARN] Setup script not found, using fallback mode")
         return create_fallback_structure(date_str)
-    
+
     try:
         cmd = [
             "powershell.exe",
@@ -176,16 +176,16 @@ def check_paper_exists(arxiv_id, date_str):
     '''检查论文是否已存在于今日目录中'''
     if not arxiv_id:
         return False, None
-    
+
     date_path = get_date_path(date_str)
     if not date_path.exists():
         return False, None
-    
+
     # 遍历所有领域目录
     for domain_dir in date_path.iterdir():
         if not domain_dir.is_dir() or domain_dir.name in ['logs']:
             continue
-        
+
         # 检查该领域下是否已有此 arxiv ID 的论文
         for md_file in domain_dir.glob('*.md'):
             # 从文件名或内容中检查 arxiv ID
@@ -199,7 +199,7 @@ def check_paper_exists(arxiv_id, date_str):
                         return True, str(md_file)
             except Exception:
                 pass
-    
+
     return False, None
 
 # ==================== 核心功能 ====================
@@ -235,21 +235,21 @@ def save_paper(paper, date_str):
         if exists:
             print(f"[SKIP] Paper already exists: {arxiv_id} -> {existing_path}")
             return None, None
-    
+
     domain = get_domain_from_categories(paper['categories'])
     date_path = get_date_path(date_str)
     domain_path = date_path / domain
     domain_path.mkdir(parents=True, exist_ok=True)
-    
+
     timestamp = datetime.now().strftime('%H%M%S')
     title_slug = sanitize_filename(paper['title'])[:50]
     filename = f"{timestamp}-{title_slug}.md"
     filepath = domain_path / filename
-    
+
     abstract = extract_abstract(paper['description'])
     authors = ', '.join([a.name for a in paper['authors']]) if paper['authors'] else 'Unknown'
     categories = ', '.join([t.term for t in paper['categories']]) if paper['categories'] else paper['source_category']
-    
+
     content = f"""---
 created: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 tags: [arxiv, {domain.lower()}]
@@ -284,10 +284,10 @@ category: {categories}
 ---
 *Auto-collected by arxiv-collector v2*
 """
-    
+
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     return filepath, domain
 
 def update_status_log(date_str, stats):
@@ -295,7 +295,7 @@ def update_status_log(date_str, stats):
     logs_path = date_path / "logs"
     logs_path.mkdir(parents=True, exist_ok=True)
     status_file = logs_path / f"{date_str}-status.md"
-    
+
     content = f"""---
 updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 tags: [arxiv, log, status]
@@ -317,11 +317,11 @@ tags: [arxiv, log, status]
 | Domain | Count |
 |--------|-------|
 """
-    
+
     for domain, count in sorted(stats['by_domain'].items(), key=lambda x: (x[0] is None, x[0] or '')):
         domain_name = domain if domain else 'Uncategorized'
         content += f"| {domain_name} | {count} |\n"
-    
+
     content += f"""
 ## Last Update
 
@@ -333,22 +333,22 @@ tags: [arxiv, log, status]
 {json.dumps(stats, ensure_ascii=False, indent=2)}
 ```
 """
-    
+
     with open(status_file, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     print(f"[OK] Status log updated: {status_file}")
 
 def update_summary(date_str, papers_data):
     date_path = get_date_path(date_str)
     summary_file = date_path / f"{date_str}-summary.md"
-    
+
     by_domain = {}
     for paper, domain in papers_data:
         if domain not in by_domain:
             by_domain[domain] = []
         by_domain[domain].append(paper)
-    
+
     content = f"""---
 created: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 tags: [arxiv, summary, {date_str}]
@@ -365,7 +365,7 @@ tags: [arxiv, summary, {date_str}]
 ## By Domain
 
 """
-    
+
     for domain in sorted(by_domain.keys(), key=lambda x: (x is None, x or '')):
         domain_name = domain if domain else 'Uncategorized'
         papers = by_domain[domain]
@@ -377,7 +377,7 @@ tags: [arxiv, summary, {date_str}]
         if len(papers) > 5:
             content += f"\n... and {len(papers) - 5} more\n"
         content += "\n"
-    
+
     content += """
 ## Key Papers
 
@@ -390,10 +390,10 @@ tags: [arxiv, summary, {date_str}]
 ---
 *Auto-generated*
 """
-    
+
     with open(summary_file, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     print(f"[OK] Summary updated: {summary_file}")
 
 # ==================== PDF 下载器集成 ====================
@@ -417,14 +417,14 @@ def main():
     print("Arxiv AI Papers Collector v2")
     print("Multi-domain + Auto directory")
     print("=" * 60)
-    
+
     date_str = get_today_date()
     print(f"\nDate: {date_str}")
-    
+
     # 1. Ensure directory
     print("\n[1/4] Creating directory structure...")
     ensure_daily_structure(date_str)
-    
+
     # 2. Fetch papers
     print(f"\n[2/4] Fetching papers ({len(CATEGORIES)} domains)...")
     all_papers = []
@@ -432,9 +432,9 @@ def main():
         papers = fetch_arxiv_papers(category, MAX_PAPERS_PER_CATEGORY)
         print(f"  {category}: {len(papers)} papers")
         all_papers.extend(papers)
-    
+
     print(f"\nTotal: {len(all_papers)} papers")
-    
+
     # 3. Save papers
     print(f"\n[3/4] Saving papers...")
     stats = {
@@ -443,7 +443,7 @@ def main():
         'failed': 0,
         'by_domain': {},
     }
-    
+
     papers_data = []
     for paper in all_papers:
         try:
@@ -455,7 +455,7 @@ def main():
         except Exception as e:
             stats['failed'] += 1
             print(f"  [FAIL] {paper['title'][:40]}... - {e}")
-    
+
     # 4. Download PDFs (新增：自动下载 PDF)
     print(f"\n[4/5] Downloading PDFs...")
     try:
@@ -465,12 +465,12 @@ def main():
         print(f"  [OK] PDF download complete")
     except Exception as e:
         print(f"  [WARN] PDF download failed: {e}")
-    
+
     # 5. Update logs
     print(f"\n[5/5] Updating logs...")
     update_status_log(date_str, stats)
     update_summary(date_str, papers_data)
-    
+
     # Output
     print("\n" + "=" * 60)
     print(f"[SUCCESS] Collection complete")
@@ -480,7 +480,7 @@ def main():
     print(f"  Domains: {len(stats['by_domain'])}")
     print(f"\n  Path: {get_date_path(date_str)}")
     print("=" * 60)
-    
+
     return stats
 
 if __name__ == '__main__':

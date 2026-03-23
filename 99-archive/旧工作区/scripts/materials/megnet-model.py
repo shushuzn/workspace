@@ -49,23 +49,23 @@ CPU_CONFIG = CPUConfig()
 
 class CPUMonitor:
     """CPU 监控"""
-    
+
     def __init__(self, threshold: float = 70.0):
         self.threshold = threshold
         self.history = deque(maxlen=10)
-    
+
     def get_cpu_percent(self) -> float:
         try:
             import psutil
             return psutil.cpu_percent(interval=0.1)
         except Exception:
             return 0.0
-    
+
     def should_wait(self) -> bool:
         cpu = self.get_cpu_percent()
         self.history.append(cpu)
         return cpu > self.threshold
-    
+
     def wait_if_needed(self, timeout: float = 5.0):
         start = time.time()
         while self.should_wait():
@@ -76,18 +76,18 @@ class CPUMonitor:
 
 class CacheManager:
     """缓存管理"""
-    
+
     def __init__(self, max_size: int = 500, ttl: int = 3600):
         self.cache = {}
         self.timestamps = {}
         self.max_size = max_size
         self.ttl = ttl
         self.lock = threading.Lock()
-    
+
     def _generate_key(self, **kwargs) -> str:
         content = json.dumps(kwargs, sort_keys=True)
         return hashlib.md5(content.encode()).hexdigest()
-    
+
     def get(self, **kwargs) -> Optional[Dict]:
         key = self._generate_key(**kwargs)
         with self.lock:
@@ -99,7 +99,7 @@ class CacheManager:
                     del self.cache[key]
                     del self.timestamps[key]
             return None
-    
+
     def set(self, value: Dict, **kwargs):
         key = self._generate_key(**kwargs)
         with self.lock:
@@ -117,20 +117,20 @@ class CacheManager:
 
 class MEGNetModel:
     """MEGNet 模型 - 使用真实 MP API 数据"""
-    
+
     def __init__(self, config: CPUConfig = None):
         self.config = config or CPU_CONFIG
         self.model = None
         self.monitor = CPUMonitor(self.config.cpu_threshold)
         self.cache = CacheManager(self.config.cache_size, self.config.cache_ttl)
         self.semaphore = threading.Semaphore(self.config.max_concurrent)
-        
+
         # MP API 客户端
         self.mp_client = None
-        
+
         os.environ['OMP_NUM_THREADS'] = str(self.config.intra_op_threads)
         os.environ['MKL_NUM_THREADS'] = str(self.config.intra_op_threads)
-    
+
     def load_model(self, model_path: Optional[str] = None):
         """加载 MEGNet 模型 (可选)"""
         if model_path:
@@ -147,12 +147,12 @@ class MEGNetModel:
                 self.model = None
         else:
             print("[MEGNet] 未指定模型，将使用 MP API")
-    
+
     def set_mp_client(self, mp_client):
         """设置 MP API 客户端"""
         self.mp_client = mp_client
         print("[MEGNet] 已配置 MP API 客户端")
-    
+
     def predict(self, material_id: str = None, formula: str = None) -> Optional[Dict]:
         """
         预测材料性能
@@ -167,23 +167,23 @@ class MEGNetModel:
         cached = self.cache.get(**cache_key)
         if cached:
             return cached
-        
+
         # CPU 检查
         self.monitor.wait_if_needed(timeout=5.0)
-        
+
         # 预测
         with self.semaphore:
             result = self._predict_real(material_id, formula)
-        
+
         # 缓存
         if result:
             self.cache.set(result, **cache_key)
-        
+
         return result
-    
+
     def _predict_real(self, material_id: str = None, formula: str = None) -> Optional[Dict]:
         """获取真实数据"""
-        
+
         # 使用 MP API
         if self.mp_client:
             try:
@@ -199,7 +199,7 @@ class MEGNetModel:
                             'source': 'MP_API',
                             'timestamp': time.time()
                         }
-                
+
                 elif formula:
                     results = self.mp_client.search_by_formula(formula, limit=1)
                     if results:
@@ -212,10 +212,10 @@ class MEGNetModel:
                             'source': 'MP_API',
                             'timestamp': time.time()
                         }
-                
+
             except Exception as e:
                 print(f"[MEGNet] MP API 错误：{e}")
-        
+
         # 使用 matgl 模型
         if self.model:
             try:
@@ -224,10 +224,10 @@ class MEGNetModel:
             except Exception as e:
                 print(f"[MEGNet] matgl 错误：{e}")
                 return None
-        
+
         # 无模拟数据
         raise RuntimeError("[MEGNet] No model or MP API available")
-    
+
     def predict_batch(self, materials: List[Dict]) -> List[Optional[Dict]]:
         """批量预测"""
         results = []
@@ -235,7 +235,7 @@ class MEGNetModel:
             result = self.predict(**mat)
             results.append(result)
         return results
-    
+
     def get_stats(self) -> Dict:
         """获取统计"""
         return {
@@ -263,10 +263,10 @@ def main():
     print("=" * 60)
     print("MEGNet Model - Production Version")
     print("=" * 60)
-    
+
     config = CPUConfig()
     model = get_megnet_model(config)
-    
+
     # 配置 MP API
     try:
         from materials_project_api_v2 import MaterialsProjectClient
@@ -275,16 +275,16 @@ def main():
         print("[OK] MP API configured")
     except Exception as e:
         print(f"[WARN] MP API not available: {e}")
-    
+
     # 测试
     print("\nTesting predictions...")
-    
+
     test_materials = [
         {'material_id': 'mp-dqobo'},
         {'formula': 'SiO2'},
         {'formula': 'TiO2'},
     ]
-    
+
     for mat in test_materials:
         try:
             result = model.predict(**mat)
@@ -296,7 +296,7 @@ def main():
                 print(f"    Formation Energy: {result.get('formation_energy', 'N/A')} eV/atom")
         except Exception as e:
             print(f"\n  {mat}: Error - {e}")
-    
+
     print("\n" + "=" * 60)
     print("MEGNet ready (real data only)")
     print("=" * 60)

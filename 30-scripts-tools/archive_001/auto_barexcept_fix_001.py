@@ -27,7 +27,7 @@ COMMON_EXCEPTIONS = {
 def detect_context(content, line_num):
     """Detect what the except block is handling"""
     lines = content.split("\n")
-    
+
     # Look back 5 lines for context
     for i in range(max(0, line_num-6), line_num):
         line = lines[i]
@@ -84,12 +84,12 @@ Fix bare except in a file"""
         content = filepath.read_text(encoding="utf-8", errors="replace")
     except (IOError, OSError):
         return {"file": filepath.name, "status": "skip", "reason": "Cannot read"}
-    
+
     original = content
     fixed_count = 0
     lines = content.split("\n")
     new_lines = []
-    
+
     for i, line in enumerate(lines):
         if re.search(r'except\s*:\s*$', line.rstrip()):
             # Found bare except, fix it
@@ -101,33 +101,33 @@ Fix bare except in a file"""
             fixed_count += 1
         else:
             new_lines.append(line)
-    
+
     if fixed_count > 0:
         filepath.write_text("\n".join(new_lines), encoding="utf-8")
         return {"file": filepath.name, "status": "fixed", "count": fixed_count}
-    
+
     return {"file": filepath.name, "status": "ok", "count": 0}
 
 logging.basicConfig(level=logging.INFO)
 def main():
     dry_run = "--dry-run" in sys.argv
-    
+
     print(f"\n[AUTO-BAREXCEPT-FIX-001] {'Dry-run mode' if dry_run else 'Fixing'}")
     print("=" * 50)
-    
+
     files = list(TOOLS_DIR.glob("*_001.py"))
     results = []
-    
+
     for f in files:
         if f.name.startswith("auto_barexcept_fix"):
             continue
-        
+
         # Check if has bare except
         try:
             content = f.read_text(encoding="utf-8", errors="replace")
         except (IOError, OSError):
             continue
-        
+
         if re.search(r'except\s*:\s*$', content, re.MULTILINE):
             if dry_run:
                 count = len(re.findall(r'except\s*:\s*$', content, re.MULTILINE))
@@ -135,11 +135,11 @@ def main():
             else:
                 result = fix_file(f)
                 results.append(result)
-    
+
     # Summary
     fixed = [r for r in results if r["status"] == "fixed"]
     would_fix = [r for r in results if r["status"] == "would_fix"]
-    
+
     if dry_run:
         print(f"\n[DRY-RUN] Would fix {len(would_fix)} files, {sum(r['count'] for r in would_fix)} occurrences")
         for r in would_fix[:10]:
@@ -148,7 +148,7 @@ def main():
         print(f"\n[FIXED] {len(fixed)} files")
         for r in fixed:
             print(f"  - {r['file']}: {r['count']} fixes")
-    
+
     # Save report
     report = {
         "timestamp": "2026-03-21",
@@ -156,7 +156,7 @@ def main():
         "results": results
     }
     Path("13-memory/.barexcept_fix_report.json").write_text(json.dumps(report, indent=2))
-    
+
     return results
 
 

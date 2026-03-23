@@ -40,19 +40,19 @@ Academic Network Integrator v1 - 设计文档
 class AcademicNetwork:
     def __init__(self):
         self.base_url = "https://api.semanticscholar.org/graph/v1"
-    
+
     def search_author(self, name):
         """搜索作者"""
         pass
-    
+
     def get_author_details(self, author_id):
         """获取作者详情"""
         pass
-    
+
     def get_citation_network(self, paper_id):
         """获取引用网络"""
         pass
-    
+
     def recommend_collaborators(self, author_id):
         """推荐合作者"""
         pass
@@ -70,7 +70,7 @@ class AcademicNetwork:
 
 ## 4. 实施计划
 
-**时间:** 2026-03-21 ~ 03-25  
+**时间:** 2026-03-21 ~ 03-25
 **优先级:** 🟡 中
 
 ---

@@ -54,10 +54,10 @@ def fetch_tweets(username):
     if not rss_url:
         print(f"[WARN] No working Nitter instance for @{username}")
         return []
-    
+
     feed = feedparser.parse(rss_url)
     tweets = []
-    
+
     for entry in feed.entries[:20]:  # 最近 20 条
         tweet = {
             'username': username,
@@ -67,7 +67,7 @@ def fetch_tweets(username):
             'content': entry.summary if hasattr(entry, 'summary') else '',
         }
         tweets.append(tweet)
-    
+
     return tweets
 
 def save_tweets(tweets, username):
@@ -75,24 +75,24 @@ def save_tweets(tweets, username):
     date_str = datetime.now().strftime('%Y-%m-%d')
     save_dir = TWITTER_SAVE_DIR / date_str
     save_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # 保存为 Markdown
     filename = f"{username}-{date_str}.md"
     filepath = save_dir / filename
-    
+
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(f"# @{username} - {date_str}\n\n")
         f.write(f"**来源:** Twitter (via Nitter)\n")
         f.write(f"**收集时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n\n")
         f.write("---\n\n")
-        
+
         for i, tweet in enumerate(tweets, 1):
             f.write(f"## {i}. {tweet['title']}\n\n")
             f.write(f"**时间:** {tweet['published']}\n")
             f.write(f"**链接:** {tweet['link']}\n\n")
             f.write(f"{tweet['content']}\n\n")
             f.write("---\n\n")
-    
+
     print(f"  [OK] Saved {len(tweets)} tweets to {filename}")
     return filepath
 
@@ -101,15 +101,15 @@ def monitor_accounts():
     print("=" * 60)
     print("Twitter Watcher v1 - Nitter RSS")
     print("=" * 60)
-    
+
     date_str = datetime.now().strftime('%Y-%m-%d')
     print(f"\nDate: {date_str}")
     print(f"Accounts: {len(ACCOUNTS)}")
     print(f"Check interval: {CHECK_INTERVAL_HOURS} hours")
     print("-" * 60)
-    
+
     total_tweets = 0
-    
+
     for username in ACCOUNTS:
         print(f"\nFetching @{username}...")
         try:
@@ -119,12 +119,12 @@ def monitor_accounts():
                 total_tweets += len(tweets)
         except Exception as e:
             print(f"  [ERROR] {e}")
-    
+
     print("-" * 60)
     print(f"\n[COMPLETE] Total tweets: {total_tweets}")
     print(f"Save dir: {TWITTER_SAVE_DIR / date_str}")
     print("=" * 60)
-    
+
     return total_tweets
 
 if __name__ == "__main__":

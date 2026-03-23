@@ -34,12 +34,12 @@ def detect_sensitive_content(content):
         'pornographic': [],
         'violent': [],
     }
-    
+
     for category, words in SENSITIVE_WORDS.items():
         for word in words:
             if word in content:
                 found[category].append(word)
-    
+
     return found
 
 def check_all_chapters():
@@ -51,7 +51,7 @@ def check_all_chapters():
     print(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print("=" * 60)
     print()
-    
+
     # Scan draft folder
     draft_files = []
     for file in os.listdir(DRAFTS_FOLDER):
@@ -60,20 +60,20 @@ def check_all_chapters():
             if match:
                 chapter_num = int(match.group(1))
                 draft_files.append((chapter_num, os.path.join(DRAFTS_FOLDER, file)))
-    
+
     draft_files.sort(key=lambda x: x[0])
-    
+
     # Check sensitive content
     issues_found = False
-    
+
     for chapter_num, file_path in draft_files:
         with open(file_path, 'r', encoding='utf-8') as f:
             content = f.read()
-        
+
         found = detect_sensitive_content(content)
-        
+
         has_issues = any(len(v) > 0 for v in found.values())
-        
+
         if has_issues:
             issues_found = True
             print(f"第{chapter_num}章:")
@@ -81,11 +81,11 @@ def check_all_chapters():
                 if words:
                     print(f"  {category}: {', '.join(words)}")
             print()
-    
+
     if not issues_found:
         print("✅ No sensitive content detected!")
         print()
-    
+
     print("Categories:")
     print("  - Political: 政治敏感内容")
     print("  - Pornographic: 色情内容")

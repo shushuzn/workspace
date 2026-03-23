@@ -36,7 +36,7 @@ def analyze():
     data = AAPL_DATA
     pos = (data['price'] - data['52w_low']) / (data['52w_high'] - data['52w_low']) * 100
     upside = (data['analyst_target'] - data['price']) / data['price'] * 100
-    
+
     score = 50
     if pos < 40:
         score += 20
@@ -44,19 +44,19 @@ def analyze():
         score -= 10
     else:
         score += 10
-    
+
     if data['pe'] < 30:
         score += 15
     elif data['pe'] > 40:
         score -= 10
-    
+
     if upside > 15:
         score += 10
     if data['ytd'] < -5:
         score += 10
-    
+
     score = min(100, max(0, score))
-    
+
     signals = []
     if pos < 30:
         signals.append(("[+]", "价格低位"))
@@ -64,12 +64,12 @@ def analyze():
         signals.append(("[-]", "价格高位"))
     else:
         signals.append(("[=]", "价格中部"))
-    
+
     if upside > 15:
         signals.append(("[^]", f"上涨{upside:.0f}%"))
     if data['pe'] < 30:
         signals.append(("[$]", "估值低"))
-    
+
     return {"score": score, "position": pos, "upside": upside, "signals": signals}
 
 
@@ -86,20 +86,20 @@ def recommend(analysis):
 def main():
     analysis = analyze()
     strategy = recommend(analysis)
-    
+
     report = {
         "generated_at": datetime.now().isoformat(),
         "data": AAPL_DATA,
         "analysis": analysis,
         "strategy": strategy
     }
-    
+
     # 保存
     os.makedirs(SAVE_DIR, exist_ok=True)
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     with open(f"{SAVE_DIR}/AAPL_{ts}.json", 'w', encoding='utf-8') as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
-    
+
     # 打印
     print("=" * 60)
     print("AAPL 分析报告")

@@ -12,10 +12,10 @@ def run_git_command(cmd):
     """执行Git命令并返回结果"""
     try:
         result = subprocess.run(
-            cmd, 
-            shell=True, 
-            capture_output=True, 
-            text=True, 
+            cmd,
+            shell=True,
+            capture_output=True,
+            text=True,
             check=False
         )
         return result.returncode, result.stdout, result.stderr
@@ -42,20 +42,20 @@ def check_push_status():
     code, _, stderr = run_git_command("git rev-parse --is-inside-work-tree")
     if code != 0:
         return False, "错误: 当前目录不是Git仓库", None
-    
+
     # 获取当前分支
     branch, err = get_current_branch()
     if not branch:
         return False, f"错误: {err}", None
-    
+
     # 获取远程URL
     remote_url, err = get_remote_url()
     if not remote_url:
         return False, f"错误: {err}", None
-    
+
     # 刷新远程信息
     run_git_command("git fetch")
-    
+
     # 检查远程分支是否存在
     code, stdout, stderr = run_git_command(f"git ls-remote --heads origin {branch}")
     if code != 0 or not stdout.strip():
@@ -65,18 +65,18 @@ def check_push_status():
             "remote_url": remote_url,
             "remote_branch_missing": True
         }
-    
+
     # 检查本地与远程的差异
     # 使用git status命令检查状态
     code, stdout, stderr = run_git_command("git status")
     if code != 0:
         return False, f"错误: {stderr}", None
-    
+
     # 检查是否有未推送的提交
     code, stdout, stderr = run_git_command(f"git log --oneline origin/{branch}..HEAD")
     unpushed_commits = stdout.strip().split('\n') if stdout.strip() else []
     unpushed_commits = [c for c in unpushed_commits if c]
-    
+
     if unpushed_commits:
         status = f"存在 {len(unpushed_commits)} 个未推送的提交"
         return True, status, {
@@ -111,7 +111,7 @@ def format_status_message(status, details):
     messages.append(f"远程仓库: {details.get('remote_url', '未知')}")
     messages.append("")
     messages.append(f"状态: {status}")
-    
+
     if details.get('unpushed_commits', 0) > 0:
         messages.append("")
         messages.append("未推送的提交:")
@@ -119,7 +119,7 @@ def format_status_message(status, details):
             messages.append(f"  - {commit}")
         if details.get('unpushed_commits', 0) > 5:
             messages.append(f"  ... 还有 {details['unpushed_commits'] - 5} 个提交")
-    
+
     messages.append("=" * 60)
     return "\n".join(messages)
 
@@ -163,10 +163,10 @@ Fixes:
 
 主函数"""
     success, status, details = check_push_status()
-    
+
     if success:
         print(format_status_message(status, details))
-        
+
         # 提供推送建议
         if details.get('unpushed_commits', 0) > 0:
             print("\n建议: 执行以下命令推送更改:")

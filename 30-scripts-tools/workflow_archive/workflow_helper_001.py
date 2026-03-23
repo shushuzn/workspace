@@ -90,9 +90,9 @@ Fixes:
 
 完成一个步骤"""
     state = load_state()
-    
+
     step_name = next((name for sid, name, _ in STEPS if sid == step_id), f"Step {step_id}")
-    
+
     state["step_status"][str(step_id)] = {
         "name": step_name,
         "status": "completed",
@@ -100,17 +100,17 @@ Fixes:
         "completed_at": datetime.now().isoformat(),
         "result": result
     }
-    
+
     if step_id not in state["completed_steps"]:
         state["completed_steps"].append(step_id)
-    
+
     state["current_step"] = step_id
     state["completion_percentage"] = round(len(state["completed_steps"]) / 20 * 100, 1)
-    
+
     if len(state["completed_steps"]) == 20:
         state["status"] = "completed"
         state["workflow_compliance"] = True
-    
+
     save_state(state)
     print(f"[OK] Step {step_id} 完成：{step_name}")
     return state

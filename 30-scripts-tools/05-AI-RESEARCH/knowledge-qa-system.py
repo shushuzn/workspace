@@ -35,11 +35,11 @@ def save_qa_system(index):
     """保存 QA 系统配置"""
     date_str = datetime.now().strftime('%Y-%m-%d')
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     config_file = OUTPUT_DIR / f"qa-config-{date_str}.json"
     with open(config_file, 'w', encoding='utf-8') as f:
         json.dump(index, f, indent=2)
-    
+
     print(f"[OK] Saved QA config to {config_file}")
     return config_file
 
@@ -48,18 +48,18 @@ def setup_qa():
     print("=" * 60)
     print("Knowledge QA System v1 - Setup")
     print("=" * 60)
-    
+
     print("\n[1/3] Indexing knowledge...")
     index = index_knowledge()
     print(f"  Topics: {len(index['topics'])}")
-    
+
     print("\n[2/3] Testing Q&A...")
     answer = answer_question("What is Agentic AI?", index)
     print(f"  Sample answer confidence: {answer['confidence']:.2f}")
-    
+
     print("\n[3/3] Saving config...")
     save_qa_system(index)
-    
+
     print("-" * 60)
     print("[COMPLETE]")
     print("=" * 60)

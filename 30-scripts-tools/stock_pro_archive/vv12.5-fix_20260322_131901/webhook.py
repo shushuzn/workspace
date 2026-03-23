@@ -11,7 +11,7 @@ class WebhookManager:
     def __init__(self):
         self.webhooks = {}
         self.load()
-    
+
     def load(self):
         if WEBHOOK_FILE.exists():
             try:
@@ -19,11 +19,11 @@ class WebhookManager:
                     self.webhooks = json.load(f)
             except Exception:
                 self.webhooks = {}
-    
+
     def save(self):
         with open(WEBHOOK_FILE, 'w') as f:
             json.dump(self.webhooks, f, indent=2)
-    
+
     def add(self, name, url, events=None):
         """Add webhook"""
         self.webhooks[name] = {
@@ -33,24 +33,24 @@ class WebhookManager:
         }
         self.save()
         return f"[Webhook] Added '{name}' -> {url}"
-    
+
     def remove(self, name):
         if name in self.webhooks:
             del self.webhooks[name]
             self.save()
             return f"[Webhook] Removed '{name}'"
         return f"[Webhook] '{name}' not found"
-    
+
     def list_webhooks(self):
         if not self.webhooks:
             return "[Webhook] No webhooks configured. Add with: --webhook-add <name> <url>"
-        
+
         lines = ["[Webhook] Configured Webhooks:", "-" * 50]
         for name, wh in self.webhooks.items():
             lines.append(f"  {name}: {wh['url']}")
             lines.append(f"    Events: {', '.join(wh['events'])}")
         return "\n".join(lines)
-    
+
     def send(self, event, payload):
         """Send webhook notification"""
         results = []
@@ -67,7 +67,7 @@ class WebhookManager:
                 except Exception as e:
                     results.append(f"[Webhook] {name}: FAILED ({e})")
         return "\n".join(results) if results else "[Webhook] No matching webhooks"
-    
+
     def notify_alert(self, results, threshold=30):
         """Send alert notification"""
         alerts = [r for r in results if r['upside'] > threshold]
@@ -85,7 +85,7 @@ class WebhookManager:
             }
             return self.send("alert", payload)
         return None
-    
+
     def notify_report(self, symbol, data):
         """Send report notification"""
         payload = {

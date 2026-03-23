@@ -48,20 +48,20 @@ def score_tool(content):
 def enhance_tool(path):
     """Enhance tool with missing four-stage content."""
     content = path.read_text(encoding="utf-8", errors="replace")
-    
+
     score = score_tool(content)
     if score >= 100:
         return False, "fully_compliant"
-    
+
     lines = content.split('\n')
     new_lines = []
     changes = []
-    
+
     i = 0
     while i < len(lines):
         line = lines[i]
         new_lines.append(line)
-        
+
         # Add Purpose: after ARCHITECT header
         if re.match(r'# STAGE.*1.*ARCHITECT', line):
             # Check next few lines for Purpose
@@ -69,36 +69,36 @@ def enhance_tool(path):
             if not re.search(r'Purpose[:\s]', next_content, re.IGNORECASE):
                 new_lines.append("Purpose: Automation workflow tool")
                 changes.append("Purpose")
-        
+
         # Add Data Flow: after Purpose
         if 'Purpose:' in line:
             next_content = '\n'.join(lines[i:i+10])
             if not re.search(r'Data\s*Flow:', next_content, re.IGNORECASE):
                 new_lines.append("Data Flow: input -> process -> output")
                 changes.append("Data Flow")
-        
+
         i += 1
-    
+
     if changes:
         path.write_text('\n'.join(new_lines), encoding="utf-8")
         return True, f"enhanced({','.join(changes)})"
-    
+
     return False, "no_changes"
 
 
 def main():
-    tools = [f for f in TOOLS_DIR.glob("*.py") 
-             if "test_" not in f.name and "add_four_stage" not in f.name 
+    tools = [f for f in TOOLS_DIR.glob("*.py")
+             if "test_" not in f.name and "add_four_stage" not in f.name
              and "fix_four_stage" not in f.name and "enhance_four_stage" not in f.name]
-    
+
     enhanced = 0
-    
+
     for tool in tools:
         ok, status = enhance_tool(tool)
         if ok:
             enhanced += 1
             print(f"+ {tool.name}: {status}")
-    
+
     print(f"\n[SUMMARY] Enhanced: {enhanced}")
 
 

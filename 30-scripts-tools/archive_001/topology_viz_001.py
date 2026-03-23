@@ -29,7 +29,7 @@ LOGS_DIR = Path("13-memory/.workflow_logs")
 
 def scan_dependencies():
     deps = defaultdict(list)
-    
+
     for f in TOOLS_DIR.glob("*_001.py"):
         if f.name.startswith("__"):
             continue
@@ -39,18 +39,18 @@ def scan_dependencies():
             deps[f.name] = imports
         except Exception:
             pass
-    
+
     return deps
 
 
 def calculate_health():
     total = len(list(TOOLS_DIR.glob("*_001.py")))
     workflows = sum(1 for f in TOOLS_DIR.glob("*_workflow_*.py"))
-    
+
     health = 100
     if total > 400:
         health -= (total - 400) * 0.1
-    
+
     return health, total, workflows
 
 
@@ -60,27 +60,27 @@ def render_output(health, total, workflows, deps):
     print("=" * 60)
     print("  Updated: " + datetime.now().strftime("%H:%M:%S"))
     print("")
-    
+
     bar_len = 20
     filled = int(health / 5)
     bar = "#" * filled + "-" * (bar_len - filled)
     print("  Health: [" + bar + "] " + str(int(health)) + "%")
     print("  Workflows: " + str(workflows) + "/" + str(total) + " success")
     print("")
-    
+
     # Category distribution
     cats = defaultdict(list)
     for f in TOOLS_DIR.glob("*_001.py"):
         if "_" in f.stem:
             cat = f.stem.split("_")[0][:4]
             cats[cat].append(f.name)
-    
+
     print("  [Tool Categories]")
     print("  " + "-" * 40)
     for cat, files in sorted(cats.items(), key=lambda x: len(x[1]), reverse=True)[:8]:
         bar = "#" * min(len(files), 20)
         print("  " + cat.ljust(10) + " " + bar + " " + str(len(files)))
-    
+
     print("")
     print("  Total: " + str(total) + " tools")
     print("=" * 60)
@@ -89,7 +89,7 @@ def render_output(health, total, workflows, deps):
 def main():
     deps = scan_dependencies()
     health, total, workflows = calculate_health()
-    
+
     if "--json" in sys.argv:
         print(json.dumps({
             "summary": {

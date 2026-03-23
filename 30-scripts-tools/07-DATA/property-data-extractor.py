@@ -36,7 +36,7 @@ class PropertyData:
     method: Optional[str] = None  # 测量/计算方法
     temperature: Optional[float] = None  # 温度 (K)
     reference: Optional[str] = None  # 来源
-    
+
     def to_dict(self) -> Dict:
         return asdict(self)
 
@@ -47,7 +47,7 @@ class PropertyData:
 
 class UnitConverter:
     """单位转换器"""
-    
+
     # 能量单位转换 (到 eV)
     ENERGY_TO_EV = {
         'eV': 1.0,
@@ -59,7 +59,7 @@ class UnitConverter:
         'Ry': 13.606,
         'Hartree': 27.211,
     }
-    
+
     # 压力/模量单位转换 (到 GPa)
     PRESSURE_TO_GPA = {
         'GPa': 1.0,
@@ -70,7 +70,7 @@ class UnitConverter:
         'bar': 0.0001,
         'psi': 6.895e-6,
     }
-    
+
     # 长度单位转换 (到 Å)
     LENGTH_TO_ANGSTROM = {
         'Å': 1.0,
@@ -81,7 +81,7 @@ class UnitConverter:
         'cm': 1e8,
         'm': 1e10,
     }
-    
+
     # 电导率单位转换 (到 S/m)
     CONDUCTIVITY_TO_S_M = {
         'S/m': 1.0,
@@ -91,7 +91,7 @@ class UnitConverter:
         'Ω^-1·m^-1': 1.0,
         'Ω^-1·cm^-1': 100.0,
     }
-    
+
     # 热导率单位转换 (到 W/m·K)
     THERMAL_TO_W_MK = {
         'W/m·K': 1.0,
@@ -100,7 +100,7 @@ class UnitConverter:
         'mW/cm·K': 10.0,
         'cal/cm·s·K': 418.4,
     }
-    
+
     # 迁移率单位转换 (到 cm²/V·s)
     MOBILITY_TO_CM2_VS = {
         'cm²/V·s': 1.0,
@@ -108,41 +108,41 @@ class UnitConverter:
         'cm^2/V·s': 1.0,
         'm²/V·s': 10000.0,
     }
-    
+
     @classmethod
     def convert(cls, value: float, from_unit: str, to_unit: str) -> Optional[float]:
         """转换单位"""
         from_unit = from_unit.strip()
         to_unit = to_unit.strip()
-        
+
         # 能量转换
         if from_unit in cls.ENERGY_TO_EV and to_unit == 'eV':
             return value * cls.ENERGY_TO_EV[from_unit]
-        
+
         # 压力转换
         if from_unit in cls.PRESSURE_TO_GPA and to_unit == 'GPa':
             return value * cls.PRESSURE_TO_GPA[from_unit]
-        
+
         # 长度转换
         if from_unit in cls.LENGTH_TO_ANGSTROM and to_unit == 'Å':
             return value * cls.LENGTH_TO_ANGSTROM[from_unit]
-        
+
         # 电导率转换
         if from_unit in cls.CONDUCTIVITY_TO_S_M and to_unit == 'S/m':
             return value * cls.CONDUCTIVITY_TO_S_M[from_unit]
-        
+
         # 热导率转换
         if from_unit in cls.THERMAL_TO_W_MK and to_unit == 'W/m·K':
             return value * cls.THERMAL_TO_W_MK[from_unit]
-        
+
         # 迁移率转换
         if from_unit in cls.MOBILITY_TO_CM2_VS and to_unit == 'cm²/V·s':
             return value * cls.MOBILITY_TO_CM2_VS[from_unit]
-        
+
         # 相同单位
         if from_unit.lower() == to_unit.lower():
             return value
-        
+
         return None
 
 
@@ -152,7 +152,7 @@ class UnitConverter:
 
 class PropertyExtractor:
     """性能数据提取器"""
-    
+
     def __init__(self):
         # 性能名称映射 (英文 -> 中文)
         self.property_names = {
@@ -176,7 +176,7 @@ class PropertyExtractor:
             'absorption coefficient': '吸收系数',
             'emission wavelength': '发射波长',
         }
-        
+
         # 性能的标准单位
         self.standard_units = {
             'band gap': 'eV',
@@ -190,88 +190,88 @@ class PropertyExtractor:
             'formation energy': 'eV',
             'dielectric constant': 'dimensionless',
         }
-        
+
         # 提取模式
         self.patterns = [
             # "band gap of 3.2 eV"
             r'(?:band\s*gap|bandgap)\s+(?:of|is|:|=)\s*(\d+(?:\.\d+)?)\s*(eV|meV|keV)',
-            
+
             # "elastic modulus is 70 GPa"
             r'(?:elastic|Young|bulk|shear)\s*modulus\s+(?:is|of|:|=)\s*(\d+(?:\.\d+)?)\s*(GPa|MPa|kPa)',
-            
+
             # "conductivity of 1000 S/m"
             r'(?:thermal|electrical)?\s*conductivity\s+(?:of|is|:|=)\s*(\d+(?:\.\d+)?)\s*(S/m|S/cm|W/m·K|W/mK)',
-            
+
             # "mobility of 1500 cm²/V·s"
             r'(?:carrier|electron|hole)\s*mobility\s+(?:of|is|:|=)\s*(\d+(?:\.\d+)?)\s*(cm²/V·s|cm²/Vs|m²/V·s)',
-            
+
             # "3.2 eV band gap"
             r'(\d+(?:\.\d+)?)\s*(eV|meV|keV)\s+(?:band\s*gap|bandgap)',
-            
+
             # "70 GPa elastic modulus"
             r'(\d+(?:\.\d+)?)\s*(GPa|MPa)\s+(?:elastic|Young|bulk|shear)\s*modulus',
-            
+
             # 中文模式："带隙为 3.2 eV"
             r'(?:带隙 | 带隙)\s*(?:为 | 是|:|=)\s*(\d+(?:\.\d+)?)\s*(eV|meV)',
-            
+
             # 中文模式："弹性模量为 70 GPa"
             r'(?:弹性模量 | 杨氏模量 | 体积模量)\s*(?:为 | 是|:|=)\s*(\d+(?:\.\d+)?)\s*(GPa|MPa)',
         ]
-        
+
         # 材料名称模式
         self.material_pattern = re.compile(r'\b([A-Z][a-z]?\d*)+\b')
-        
+
         # 温度模式
         self.temperature_pattern = re.compile(
             r'(?:at|@)\s*(\d+(?:\.\d+)?)\s*(K|°C|℃|room\s*temperature)',
             re.IGNORECASE
         )
-        
+
         # 方法模式
         self.method_pattern = re.compile(
             r'(?:measured\s*(?:by|using)|calculated\s*(?:by|using)|via)\s+([A-Za-z\s,]+?)(?:\.|,|$)',
             re.IGNORECASE
         )
-    
+
     def extract(self, text: str) -> List[PropertyData]:
         """从文本中提取性能数据"""
         properties = []
-        
+
         # 1. 使用正则模式提取
         properties.extend(self._extract_by_patterns(text))
-        
+
         # 2. 提取材料名称
         for prop in properties:
             if prop.material == 'Unknown':
                 prop.material = self._extract_material(text)
-        
+
         # 3. 提取温度
         for prop in properties:
             prop.temperature = self._extract_temperature(text)
-        
+
         # 4. 提取方法
         for prop in properties:
             prop.method = self._extract_method(text)
-        
+
         # 5. 单位标准化
         for prop in properties:
             prop.unit_standardized = self._standardize_unit(prop.property_name, prop.unit)
-        
+
         return properties
-    
+
     def _extract_by_patterns(self, text: str) -> List[PropertyData]:
         """使用正则模式提取"""
         properties = []
-        
+
         for i, pattern in enumerate(self.patterns):
             for match in re.finditer(pattern, text, re.IGNORECASE):
                 # 确定性能名称
                 prop_name_en, prop_name_cn = self._identify_property(pattern, match, text)
-                
+
                 if prop_name_en:
                     value = float(match.group(1))
                     unit = match.group(2) if len(match.groups()) > 1 else ''
-                    
+
                     properties.append(PropertyData(
                         material='Unknown',
                         property_name=prop_name_en,
@@ -280,53 +280,53 @@ class PropertyExtractor:
                         unit=unit,
                         unit_standardized=unit
                     ))
-        
+
         return properties
-    
+
     def _identify_property(self, pattern: str, match, text: str) -> Tuple[Optional[str], Optional[str]]:
         """识别性能名称"""
         matched_text = match.group(0).lower()
-        
+
         for en_name, cn_name in self.property_names.items():
             if en_name in matched_text or cn_name in matched_text:
                 return en_name, cn_name
-        
+
         return None, None
-    
+
     def _extract_material(self, text: str) -> str:
         """提取材料名称"""
         match = self.material_pattern.search(text)
         return match.group(0) if match else 'Unknown'
-    
+
     def _extract_temperature(self, text: str) -> Optional[float]:
         """提取温度"""
         match = self.temperature_pattern.search(text)
         if match:
             value = float(match.group(1))
             unit = match.group(2).lower()
-            
+
             if 'room' in unit:
                 return 298.15  # 室温
             elif '°c' in unit or '℃' in unit:
                 return value + 273.15
             else:
                 return value
-        
+
         return None
-    
+
     def _extract_method(self, text: str) -> Optional[str]:
         """提取测量/计算方法"""
         match = self.method_pattern.search(text)
         return match.group(1).strip() if match else None
-    
+
     def _standardize_unit(self, property_name: str, unit: str) -> str:
         """标准化单位"""
         standard = self.standard_units.get(property_name, unit)
-        
+
         # 尝试转换
         if property_name == 'band gap' and unit in UnitConverter.ENERGY_TO_EV:
             return 'eV'
-        
+
         return standard
 
 
@@ -339,32 +339,32 @@ def main():
     print("=" * 60)
     print("Property Data Extractor - 性能数据提取器")
     print("=" * 60)
-    
+
     # 1. 测试提取
     print("\n[1/3] 测试性能数据提取...")
-    
+
     extractor = PropertyExtractor()
-    
+
     test_texts = [
         "LiFePO4 has a band gap of 3.2 eV, measured by UV-Vis spectroscopy.",
-        
+
         "The elastic modulus of SiO2 is 70 GPa at room temperature, calculated using DFT.",
-        
+
         "We measured the thermal conductivity to be 50 W/m·K at 300K.",
-        
+
         "The electron mobility of graphene is 15000 cm²/V·s, which is exceptionally high.",
-        
+
         "二氧化钛的带隙为 3.0 eV，通过光吸收谱测量。",
-        
+
         "杨氏模量为 110 GPa，室温下测量。",
     ]
-    
+
     all_properties = []
-    
+
     for text in test_texts:
         print(f"\n文本：{text[:70]}...")
         properties = extractor.extract(text)
-        
+
         for prop in properties:
             print(f"  材料：{prop.material}")
             print(f"  性能：{prop.property_name} ({prop.property_name_cn})")
@@ -373,35 +373,35 @@ def main():
                 print(f"  温度：{prop.temperature} K")
             if prop.method:
                 print(f"  方法：{prop.method}")
-        
+
         all_properties.extend(properties)
-    
+
     # 2. 单位转换测试
     print("\n[2/3] 测试单位转换...")
-    
+
     conversions = [
         (1000, 'meV', 'eV'),
         (100, 'GPa', 'GPa'),
         (1000, 'S/cm', 'S/m'),
         (10, 'nm', 'Å'),
     ]
-    
+
     for value, from_unit, to_unit in conversions:
         converted = UnitConverter.convert(value, from_unit, to_unit)
         print(f"  {value} {from_unit} = {converted} {to_unit}")
-    
+
     # 3. 保存为 JSON
     print("\n[3/3] 保存结构化数据...")
-    
+
     output_data = [prop.to_dict() for prop in all_properties]
     output_path = Path("data/property-data-examples.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(output_path, 'w', encoding='utf-8') as f:
         json.dump(output_data, f, ensure_ascii=False, indent=2)
-    
+
     print(f"保存 {len(output_data)} 条性能数据到 {output_path}")
-    
+
     print("\n" + "=" * 60)
     print("性能数据提取器准备完成！")
     print("=" * 60)

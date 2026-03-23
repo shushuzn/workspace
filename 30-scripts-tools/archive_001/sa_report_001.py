@@ -30,25 +30,25 @@ CONFIG_FILE = Path("30-scripts-tools/sa_031_config.json")
 
 class ReportGenerator:
     """智能报告生成器"""
-    
+
     def __init__(self):
         self.report_dir = REPORT_DIR
         self.template_dir = TEMPLATE_DIR
         self.config = self._load_config()
-        
+
         self.report_dir.mkdir(parents=True, exist_ok=True)
         self.template_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.templates = self._load_templates()
         self.history_file = self.report_dir / "report_history.json"
-    
+
     def _load_config(self) -> dict:
         default = {
             "default_format": "json",
             "output_dir": str(REPORT_DIR),
             "template_dir": str(TEMPLATE_DIR)
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -56,7 +56,7 @@ class ReportGenerator:
             except (Exception,):
                 return default
         return default
-    
+
     def _load_templates(self) -> dict:
         """加载模板"""
         return {
@@ -77,11 +77,11 @@ class ReportGenerator:
                 "sections": ["financials", "valuation", "growth", "risks"]
             }
         }
-    
+
     def _generate_demo_data(self, symbol: str) -> dict:
         """生成模拟数据"""
         random.seed(hash(symbol) % 10000)
-        
+
         return {
             "symbol": symbol,
             "price": round(random.uniform(100, 500), 2),
@@ -100,16 +100,16 @@ class ReportGenerator:
             "recommendation": random.choice(["强烈推荐", "适度关注", "谨慎操作", "观望"]),
             "timestamp": datetime.now().isoformat()
         }
-    
+
     def generate(self, symbol: str, template: str = "daily") -> dict:
         """生成报告"""
         if template not in self.templates:
             return {"status": "error", "message": f"Unknown template: {template}"}
-        
+
         # 获取数据
         data = self._generate_demo_data(symbol)
         tmpl = self.templates[template]
-        
+
         # 构建报告
         report = {
             "report_id": f"rpt_{symbol}_{int(datetime.now().timestamp())}",
@@ -120,16 +120,16 @@ class ReportGenerator:
             "sections": {},
             "data": data
         }
-        
+
         # 生成各章节
         for section in tmpl["sections"]:
             report["sections"][section] = self._generate_section(section, data)
-        
+
         # 保存
         self._save_report(report)
-        
+
         return report
-    
+
     def _generate_section(self, section: str, data: dict) -> dict:
         """生成章节内容"""
         if section == "overview":
@@ -207,7 +207,7 @@ class ReportGenerator:
                 "title": section,
                 "content": f"{section} content"
             }
-    
+
     def _save_report(self, report: dict):
         """
 # ==============================================================================
@@ -259,24 +259,24 @@ Fixes:
                     history = json.load(f)
             except (Exception,):
                 pass
-        
+
         history.append({
             "report_id": report["report_id"],
             "symbol": report["symbol"],
             "template": report["template"],
             "timestamp": report["timestamp"]
         })
-        
+
         history = history[-50:]
-        
+
         with open(self.history_file, "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
-        
+
         # 保存完整报告
         report_file = self.report_dir / f"{report['report_id']}.json"
         with open(report_file, "w", encoding="utf-8") as f:
             json.dump(report, f, ensure_ascii=False, indent=2)
-    
+
     def list_templates(self) -> dict:
         """列出模板"""
         return {

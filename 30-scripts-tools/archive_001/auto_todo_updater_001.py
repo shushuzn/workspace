@@ -27,13 +27,13 @@ from pathlib import Path
 
 class AutoTODOUpdater:
     """自动 TODO 更新器"""
-    
+
     def __init__(self):
         self.workspace = Path("D:/OpenClaw/workspace")
         self.todo_file = self.workspace / "TODO.md"
         self.tools_registry = self.workspace / "30-scripts-tools" / "tools_registry.json"
         self.log_file = self.workspace / "13-memory" / "todo-update-log.jsonl"
-        
+
         # Phase 2 工具清单
         self.phase2_tools = {
             'SA-005': 'sa_indicator_calculator_001.py',
@@ -45,7 +45,7 @@ class AutoTODOUpdater:
             'SA-011': 'sa_growth_analysis_001.py',
             'SA-012': 'sa_report_generator_001.py'
         }
-    
+
     def check_tool_completion(self) -> dict:
         """
         检查工具完成情况
@@ -59,18 +59,18 @@ class AutoTODOUpdater:
             'pending': [],
             'completion_rate': 0
         }
-        
+
         for tool_id, filename in self.phase2_tools.items():
             filepath = self.tools_registry.parent / filename
             if filepath.exists():
                 result['completed'] += 1
             else:
                 result['pending'].append(tool_id)
-        
+
         result['completion_rate'] = round(result['completed'] / result['total'] * 100, 1)
-        
+
         return result
-    
+
     def update_todo(self) -> dict:
         """
         更新 TODO.md
@@ -83,50 +83,50 @@ class AutoTODOUpdater:
             'message': '',
             'changes': []
         }
-        
+
         if not self.todo_file.exists():
             result['message'] = 'TODO.md 不存在'
             return result
-        
+
         # 检查完成情况
         check_result = self.check_tool_completion()
-        
+
         if check_result['completion_rate'] == 100:
             # 读取当前 TODO
             with open(self.todo_file, 'r', encoding='utf-8') as f:
                 content = f.read()
-            
+
             # 检查是否已标记完成
             if 'Phase 2 - 股票分析 100% 完成' in content:
                 result['message'] = 'TODO.md 已是最新'
                 result['success'] = True
                 return result
-            
+
             # 更新 TODO 内容
             new_content = self._generate_completed_todo(check_result)
-            
+
             with open(self.todo_file, 'w', encoding='utf-8') as f:
                 f.write(new_content)
-            
+
             result['success'] = True
             result['message'] = f'Phase 2 100% 完成，已更新 TODO.md'
             result['changes'] = [
                 f'Phase 2: 8/8 工具完成 (100%)',
                 f'统计：待做 0, 完成 10'
             ]
-            
+
             # 记录日志
             self._log_update(result)
-        
+
         else:
             result['message'] = f'Phase 2 进度：{check_result["completion_rate"]}%'
-        
+
         return result
-    
+
     def _generate_completed_todo(self, check_result: dict) -> str:
         """生成已完成的 TODO 内容"""
         timestamp = datetime.now().strftime('%Y-%m-%d %H:%M')
-        
+
         content = f"""# TODO.md - 待办事项
 
 **最后更新:** {timestamp}  
@@ -182,7 +182,7 @@ class AutoTODOUpdater:
 **完整历史:** `13-memory/task-history-*.md`
 """
         return content
-    
+
     def auto_commit(self) -> dict:
         """
         自动提交 Git
@@ -194,7 +194,7 @@ class AutoTODOUpdater:
             'success': False,
             'message': ''
         }
-        
+
         try:
             # Git add
             subprocess.run(
@@ -203,11 +203,11 @@ class AutoTODOUpdater:
                 capture_output=True,
                 timeout=30
             )
-            
+
             # Git commit
             timestamp = datetime.now().strftime('%Y-%m-%d %H:%M')
             msg = f'Auto: TODO.md update - Phase 2 complete ({timestamp})'
-            
+
             result_proc = subprocess.run(
                 ['git', 'commit', '-m', msg],
                 cwd=str(self.workspace, timeout=60),
@@ -215,18 +215,18 @@ class AutoTODOUpdater:
                 text=True,
                 timeout=30
             )
-            
+
             if result_proc.returncode == 0:
                 result['success'] = True
                 result['message'] = 'Git 提交成功'
             else:
                 result['message'] = f'Git 提交失败：{result_proc.stderr}'
-        
+
         except Exception as e:
             result['message'] = str(e)
-        
+
         return result
-    
+
     def _log_update(self, result: dict):
         """记录更新日志"""
         log_entry = {
@@ -235,40 +235,40 @@ class AutoTODOUpdater:
             'message': result.get('message', ''),
             'changes': result.get('changes', [])
         }
-        
+
         try:
             with open(self.log_file, 'a', encoding='utf-8') as f:
                 f.write(json.dumps(log_entry, ensure_ascii=False) + '\n')
         except (IOError, OSError, UnicodeDecodeError):
             pass
-    
+
     def run_auto(self):
         """自动模式"""
         print("=" * 70)
         print(" " * 20 + "自动 TODO 更新器")
         print("=" * 70)
-        
+
         # 检查完成情况
         check_result = self.check_tool_completion()
-        
+
         print(f"\nPhase 2 进度：{check_result['completion_rate']}%")
         print(f"已完成：{check_result['completed']}/{check_result['total']}")
-        
+
         if check_result['pending']:
             print(f"待完成：{', '.join(check_result['pending'])}")
-        
+
         # 如果 100% 完成，更新 TODO
         if check_result['completion_rate'] == 100:
             print("\nPhase 2 100% 完成，更新 TODO.md...")
             update_result = self.update_todo()
-            
+
             print(f"更新结果：{update_result['message']}")
-            
+
             if update_result['success']:
                 print("\n自动提交 Git...")
                 commit_result = self.auto_commit()
                 print(f"提交结果：{commit_result['message']}")
-                
+
                 if commit_result['success']:
                     print("\n自动推送 Git...")
                     subprocess.run(
@@ -328,7 +328,7 @@ Fixes:
 
 主函数"""
     updater = AutoTODOUpdater()
-    
+
     if len(sys.argv) > 1:
         if sys.argv[1] == '--check':
             result = updater.check_tool_completion()
@@ -336,14 +336,14 @@ Fixes:
             print(f"已完成：{result['completed']}/{result['total']}")
             if result['pending']:
                 print(f"待完成：{', '.join(result['pending'])}")
-        
+
         elif sys.argv[1] == '--update':
             result = updater.update_todo()
             print(result['message'])
-        
+
         elif sys.argv[1] == '--auto':
             updater.run_auto()
-        
+
         else:
             print("用法：py auto_todo_updater.py [--check|--update|--auto]")
     else:

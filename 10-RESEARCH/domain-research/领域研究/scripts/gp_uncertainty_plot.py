@@ -108,7 +108,7 @@ ax.fill_between(P 剖面，
                 sigma 剖面 - 2*sigma_std 剖面，
                 sigma 剖面 + 2*sigma_std 剖面，
                 alpha=0.3, label='95% 置信区间')
-ax.scatter(df[df['v_mms'].between(28, 32)]['P_W'], 
+ax.scatter(df[df['v_mms'].between(28, 32)]['P_W'],
            df[df['v_mms'].between(28, 32)]['sigma_Sm'],
            alpha=0.6, s=50, c='red', label='实验数据')
 ax.set_xlabel('激光功率 (W)')

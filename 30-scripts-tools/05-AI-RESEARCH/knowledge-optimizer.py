@@ -45,16 +45,16 @@ def analyze_content(filepath):
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()[:2000]  # 只读前 2000 字符
-        
+
         topics = []
         content_lower = content.lower()
-        
+
         for topic, keywords in TOPIC_KEYWORDS.items():
             for keyword in keywords:
                 if keyword.lower() in content_lower:
                     topics.append(topic)
                     break
-        
+
         return topics
     except Exception as e:
         return ["Uncategorized"]
@@ -63,7 +63,7 @@ def generate_daily_index():
     """生成每日知识索引"""
     today = datetime.now().strftime("%Y-%m-%d")
     index_path = MEMORY_PATH / f"{today}-index.md"
-    
+
     # 收集今日笔记
     today_notes = []
     for path in [MEDIUM_PATH, REDDIT_PATH, X_PATH]:
@@ -76,7 +76,7 @@ def generate_daily_index():
                         'source': path.name,
                         'size': file.stat().st_size
                     })
-    
+
     # 按话题分类
     topic_groups = {}
     for note in today_notes:
@@ -86,7 +86,7 @@ def generate_daily_index():
             if topic not in topic_groups:
                 topic_groups[topic] = []
             topic_groups[topic].append(note)
-    
+
     # 生成索引
     content = f"""# 📚 知识索引 - {today}
 
@@ -97,7 +97,7 @@ def generate_daily_index():
 ## 话题分布
 
 """
-    
+
     for topic, notes in sorted(topic_groups.items(), key=lambda x: -len(x[1])):
         content += f"### {topic} ({len(notes)}篇)\n\n"
         for note in notes[:5]:  # 只显示前 5 篇
@@ -105,7 +105,7 @@ def generate_daily_index():
         if len(notes) > 5:
             content += f"- ... 还有 {len(notes) - 5} 篇\n"
         content += "\n"
-    
+
     content += f"""## 来源统计
 - Medium: {len([n for n in today_notes if n['source'] == 'Medium'])}篇
 - Reddit: {len([n for n in today_notes if n['source'] == 'Reddit'])}篇
@@ -114,10 +114,10 @@ def generate_daily_index():
 ---
 *自动生成于 {datetime.now().strftime("%Y-%m-%d %H:%M")}*
 """
-    
+
     with open(index_path, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     return len(today_notes), topic_groups
 
 def optimize_folder_structure():
@@ -127,7 +127,7 @@ def optimize_folder_structure():
         topic_dir = REDDIT_PATH / topic
         if not topic_dir.exists():
             topic_dir.mkdir(exist_ok=True)
-    
+
     # 移动旧笔记到子文件夹（基于内容分析）
     moved_count = 0
     for file in REDDIT_PATH.glob("*.md"):
@@ -142,28 +142,28 @@ def optimize_folder_structure():
                         if not (target_dir / file.name).exists():
                             file.rename(target_dir / file.name)
                             moved_count += 1
-    
+
     return moved_count
 
 def main():
     print("=" * 60)
     print("Knowledge Optimizer")
     print("=" * 60)
-    
+
     # 生成每日索引
     print("\n[INFO] Generating daily knowledge index...")
     total_notes, topic_groups = generate_daily_index()
     print(f"   Notes processed: {total_notes}")
     print(f"   Topic categories: {len(topic_groups)}")
-    
+
     for topic, notes in sorted(topic_groups.items(), key=lambda x: -len(x[1])):
         print(f"   - {topic}: {len(notes)} notes")
-    
+
     # 优化文件夹结构
     print("\n[INFO] Optimizing folder structure...")
     moved = optimize_folder_structure()
     print(f"   Notes moved: {moved}")
-    
+
     print("\n[SUCCESS] Optimization complete")
     print("=" * 60)
 

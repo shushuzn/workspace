@@ -63,21 +63,21 @@ Fixes:
 """
 
 Execute problem definition"""
-    
+
     print("="*60)
     print("[BRAINSTORM] Step 1: Problem Definition")
     print("="*60)
-    
+
     # Use argument or default
     if topic_arg:
         topic = topic_arg
     else:
         topic = "New tools for OpenClaw"
-    
+
     background = ""
     constraints = ""
     expected = ""
-    
+
     # Build result
     result = {
         "step": "problem_definition",
@@ -87,14 +87,14 @@ Execute problem definition"""
         "expected_output": expected or "Idea list",
         "created_at": datetime.now().isoformat()
     }
-    
+
     # Save file
     output_path = Path("flow-archive/brainstorm-current/brainstorm_topic.json")
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(output_path, "w", encoding="utf-8") as f:
         json.dump(result, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n[Saved] {output_path}")
     print(json.dumps(result, indent=2, ensure_ascii=False))
     return result

@@ -37,7 +37,7 @@ def log(msg: str):
 def get_date_range(report_type: str) -> Tuple[datetime, datetime]:
     """获取报告日期范围"""
     today = datetime.now()
-    
+
     if report_type == "weekly":
         # 本周一到周日
         start = today - timedelta(days=today.weekday())
@@ -53,28 +53,28 @@ def get_date_range(report_type: str) -> Tuple[datetime, datetime]:
         # 默认最近 7 天
         start = today - timedelta(days=7)
         end = today
-    
+
     return start, end
 
 def find_markdown_files(directory: str, start: datetime, end: datetime) -> List[str]:
     """查找指定日期范围内的 Markdown 文件"""
     files = []
-    
+
     if not os.path.exists(directory):
         return files
-    
+
     # 遍历目录
     for root, dirs, filenames in os.walk(directory):
         # 跳过 archive 目录
         if '_archive' in root or 'archive' in root:
             continue
-        
+
         for filename in filenames:
             if not filename.endswith('.md'):
                 continue
-            
+
             filepath = os.path.join(root, filename)
-            
+
             # 检查文件日期
             try:
                 # 从文件名提取日期
@@ -90,7 +90,7 @@ def find_markdown_files(directory: str, start: datetime, end: datetime) -> List[
                         files.append(filepath)
             except Exception as e:
                 log(f"⚠️ 解析 {filename} 失败：{e}")
-    
+
     return sorted(files, reverse=True)
 
 def extract_frontmatter(filepath: str) -> Dict:
@@ -98,7 +98,7 @@ def extract_frontmatter(filepath: str) -> Dict:
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             content = f.read()
-        
+
         if content.startswith('---'):
             end = content.find('---', 3)
             if end > 0:
@@ -111,7 +111,7 @@ def extract_frontmatter(filepath: str) -> Dict:
                 return metadata
     except Exception as e:
         log(f"⚠️ 读取 frontmatter 失败 {filepath}: {e}")
-    
+
     return {}
 
 def extract_content(filepath: str, max_lines: int = 50) -> str:
@@ -119,7 +119,7 @@ def extract_content(filepath: str, max_lines: int = 50) -> str:
     try:
         with open(filepath, 'r', encoding='utf-8') as f:
             lines = f.readlines()
-        
+
         # 跳过 frontmatter
         content_lines = []
         in_frontmatter = False
@@ -129,7 +129,7 @@ def extract_content(filepath: str, max_lines: int = 50) -> str:
                 continue
             if not in_frontmatter:
                 content_lines.append(line)
-        
+
         return ''.join(content_lines[:max_lines])
     except Exception as e:
         log(f"⚠️ 读取内容失败 {filepath}: {e}")
@@ -140,7 +140,7 @@ def generate_weekly_report(start: datetime, end: datetime) -> str:
     """生成周报"""
     report_date = datetime.now().strftime("%Y-%m-%d")
     week_num = start.isocalendar()[1]
-    
+
     report = f"""# 研究周报 - 第{week_num}周 ({start.strftime('%Y-%m-%d')} ~ {end.strftime('%Y-%m-%d')})
 
 **生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
@@ -151,33 +151,33 @@ def generate_weekly_report(start: datetime, end: datetime) -> str:
 ## 📊 概览
 
 """
-    
+
     stats = {}
     for source_name, source_dir in SOURCES.items():
         files = find_markdown_files(source_dir, start, end)
         stats[source_name] = len(files)
         report += f"- **{source_name.capitalize()}:** {len(files)} 篇\n"
-    
+
     total = sum(stats.values())
     report += f"\n**总计:** {total} 篇内容\n\n---\n\n"
-    
+
     # 各来源详情
     for source_name, source_dir in SOURCES.items():
         files = find_markdown_files(source_dir, start, end)
-        
+
         if not files:
             continue
-        
+
         report += f"## 📚 {source_name.capitalize()}\n\n"
-        
+
         for filepath in files[:10]:  # 最多 10 篇
             filename = os.path.basename(filepath)
             metadata = extract_frontmatter(filepath)
-            
+
             title = metadata.get('title', filename.replace('.md', ''))
             tags = metadata.get('tags', '')
             date = metadata.get('date', '')
-            
+
             report += f"### {title}\n\n"
             if tags:
                 report += f"🏷️ {tags}\n\n"
@@ -185,7 +185,7 @@ def generate_weekly_report(start: datetime, end: datetime) -> str:
                 report += f"📅 {date}\n\n"
             report += f"📁 `{filename}`\n\n"
             report += "---\n\n"
-    
+
     # 关键洞察
     report += """## 💡 关键洞察
 
@@ -212,14 +212,14 @@ def generate_weekly_report(start: datetime, end: datetime) -> str:
 
 **报告结束时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
 """.replace('{datetime.now().strftime(\'%Y-%m-%d %H:%M:%S\')}', datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-    
+
     return report
 
 def generate_monthly_report(start: datetime, end: datetime) -> str:
     """生成月报"""
     report_date = datetime.now().strftime("%Y-%m-%d")
     month_name = start.strftime("%Y年%m月")
-    
+
     report = f"""# 研究月报 - {month_name}
 
 **生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
@@ -230,16 +230,16 @@ def generate_monthly_report(start: datetime, end: datetime) -> str:
 ## 📊 月度概览
 
 """
-    
+
     stats = {}
     for source_name, source_dir in SOURCES.items():
         files = find_markdown_files(source_dir, start, end)
         stats[source_name] = len(files)
         report += f"- **{source_name.capitalize()}:** {len(files)} 篇\n"
-    
+
     total = sum(stats.values())
     report += f"\n**月度总计:** {total} 篇内容\n\n---\n\n"
-    
+
     # 每周汇总
     report += "## 📅 周度分解\n\n"
     current = start
@@ -252,9 +252,9 @@ def generate_monthly_report(start: datetime, end: datetime) -> str:
         report += f"- **第{week_num}周** ({current.strftime('%m-%d')} ~ {week_end.strftime('%m-%d')}): {len(week_files)} 篇\n"
         current = week_end + timedelta(days=1)
         week_num += 1
-    
+
     report += "\n---\n\n"
-    
+
     # 热点话题
     report += """## 🔥 热点话题
 
@@ -293,23 +293,23 @@ def generate_monthly_report(start: datetime, end: datetime) -> str:
 ---
 
 **报告结束时间:** """ + datetime.now().strftime('%Y-%m-%d %H:%M:%S')
-    
+
     return report
 
 # ============ 主流程 ============
 def main():
     import sys
-    
+
     report_type = sys.argv[1] if len(sys.argv) > 1 else "weekly"
-    
+
     log(f"🚀 生成{report_type}报告")
-    
+
     start, end = get_date_range(report_type)
     log(f"📅 日期范围：{start.strftime('%Y-%m-%d')} - {end.strftime('%Y-%m-%d')}")
-    
+
     # 创建输出目录
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    
+
     # 生成报告
     if report_type == "monthly":
         report = generate_monthly_report(start, end)
@@ -318,12 +318,12 @@ def main():
         report = generate_weekly_report(start, end)
         week_num = start.isocalendar()[1]
         filename = f"weekly-report-{start.strftime('%Y')}-w{week_num:02d}.md"
-    
+
     filepath = os.path.join(OUTPUT_DIR, filename)
-    
+
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(report)
-    
+
     log(f"💾 报告已保存到 {filepath}")
     log("✅ 完成")
 

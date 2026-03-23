@@ -23,36 +23,36 @@ except ImportError:
 def get_stock_data(symbol):
     """获取股票数据"""
     print(f"[INFO] 获取 {symbol} 数据...")
-    
+
     if not HAS_YF:
         return get_mock_data(symbol)
-    
+
     try:
         stock = yf.Ticker(symbol)
-        
+
         # 实时价格
         info = stock.info
-        
+
         # 最近历史
         hist = stock.history(period="1mo")
-        
+
         # 计算指标
         current_price = info.get('currentPrice', info.get('previousClose', 0))
         prev_close = info.get('previousClose', current_price)
         change = current_price - prev_close
         change_pct = (change / prev_close * 100) if prev_close else 0
-        
+
         # MA
         if len(hist) > 20:
             ma20 = hist['Close'].tail(20).mean()
         else:
             ma20 = current_price
-            
+
         if len(hist) > 50:
             ma50 = hist['Close'].tail(50).mean()
         else:
             ma50 = current_price
-        
+
         # RSI (14)
         if len(hist) >= 14:
             delta = hist['Close'].diff()
@@ -62,7 +62,7 @@ def get_stock_data(symbol):
             rsi = 100 - (100 / (1 + rs)).iloc[-1]
         else:
             rsi = 50
-        
+
         data = {
             "symbol": symbol,
             "price": round(current_price, 2),
@@ -88,10 +88,10 @@ def get_stock_data(symbol):
             "target_price": info.get('targetMeanPrice', 0),
             "updated_at": datetime.now().isoformat()
         }
-        
+
         print(f"[OK] 价格: ${data['price']} ({data['change_pct']:+.2f}%)")
         return data
-        
+
     except Exception as e:
         print(f"[WARN] {e}")
         return get_mock_data(symbol)
@@ -129,10 +129,10 @@ def get_mock_data(symbol):
 def analyze(data):
     """分析股票"""
     print(f"\n[2/4] 分析 {data['symbol']}...")
-    
+
     signals = []
     trend = "震荡"
-    
+
     # 趋势判断
     if data['price'] > data['ma20'] > data['ma50']:
         trend = "上涨"
@@ -140,7 +140,7 @@ def analyze(data):
     elif data['price'] < data['ma20'] < data['ma50']:
         trend = "下跌"
         signals.append("⚠️ 均线空头排列")
-    
+
     # RSI 判断
     rsi = data['rsi']
     if rsi > 70:
@@ -149,11 +149,11 @@ def analyze(data):
         signals.append("✅ RSI超卖")
     else:
         signals.append("📊 RSI正常")
-    
+
     # 相对位置
     pos = (data['price'] - data['52w_low']) / (data['52w_high'] - data['52w_low']) * 100
     signals.append(f"📍 52周位置: {pos:.1f}%")
-    
+
     # 估值
     pe = data['pe']
     if pe < 20:
@@ -162,29 +162,29 @@ def analyze(data):
         signals.append("💎 市盈率偏高（成长）")
     else:
         signals.append("📈 市盈率合理")
-    
+
     result = {
         "trend": trend,
         "signals": signals,
         "score": analyze_score(data)
     }
-    
+
     print(f"[OK] 趋势: {trend}")
     print(f"[OK] 信号: {len(signals)} 条")
-    
+
     return result
 
 
 def analyze_score(data):
     """综合评分"""
     score = 50  # 基础分
-    
+
     # 趋势加分
     if data['price'] > data['ma20']:
         score += 10
     if data['price'] > data['ma50']:
         score += 10
-    
+
     # RSI 加分
     if 40 < data['rsi'] < 60:
         score += 10
@@ -192,21 +192,21 @@ def analyze_score(data):
         score += 15
     elif data['rsi'] > 70:
         score -= 10
-    
+
     # 相对位置
     pos = (data['price'] - data['52w_low']) / (data['52w_high'] - data['52w_low']) * 100
     if pos < 30:
         score += 10
     elif pos > 80:
         score -= 10
-    
+
     return max(0, min(100, score))
 
 
 def recommend(data, analysis):
     """推荐策略"""
     print(f"\n[3/4] 生成策略建议...")
-    
+
     # 自动判断风险偏好
     if analysis['score'] < 40:
         risk_level = "保守"
@@ -214,7 +214,7 @@ def recommend(data, analysis):
         risk_level = "激进"
     else:
         risk_level = "稳健"
-    
+
     strategies = {
         "保守": {
             "action": "观望",
@@ -241,19 +241,19 @@ def recommend(data, analysis):
             "reason": "趋势强劲，顺势而为"
         }
     }
-    
+
     strategy = strategies.get(risk_level, strategies["稳健"])
     strategy["risk_level"] = risk_level
-    
+
     print(f"[OK] 推荐策略: {strategy['action']}")
-    
+
     return strategy
 
 
 def generate_report(symbol, data, analysis, strategy):
     """生成报告"""
     print(f"\n[4/4] 生成报告...")
-    
+
     report = {
         "symbol": symbol,
         "generated_at": datetime.now().isoformat(),
@@ -270,20 +270,20 @@ def generate_report(symbol, data, analysis, strategy):
         "analysis": analysis,
         "strategy": strategy
     }
-    
+
     # 保存
     import os
     report_dir = os.path.dirname(__file__).replace("30-scripts-tools", ".openclaw/stock_analysis/reports")
     os.makedirs(report_dir, exist_ok=True)
-    
+
     ts = datetime.now().strftime("%Y%m%d_%H%M%S")
     report_file = f"{report_dir}/{symbol}_{ts}.json"
-    
+
     with open(report_file, 'w', encoding='utf-8') as f:
         json.dump(report, f, ensure_ascii=False, indent=2)
-    
+
     print(f"[OK] 报告已保存")
-    
+
     return report
 
 
@@ -292,24 +292,24 @@ def print_report(report):
     d = report['data']
     a = report['analysis']
     s = report['strategy']
-    
+
     print("\n" + "=" * 60)
     print(f"📊 AAPL 股票分析报告")
     print("=" * 60)
-    
+
     print(f"\n🏢 公司: {d['company']} ({d['sector']})")
     print(f"💰 当前价格: ${d['price']} ({d['change_pct']:+.2f}%)")
     print(f"📈 52周范围: ${d['52w_low']} - ${d['52w_high']}")
-    
+
     print(f"\n📉 技术指标:")
     print(f"   MA20: ${d['ma20']} | MA50: ${d['ma50']}")
     print(f"   RSI(14): {d['rsi']}")
     print(f"   综合评分: {a['score']}/100")
-    
+
     print(f"\n📊 信号:")
     for signal in a['signals']:
         print(f"   {signal}")
-    
+
     print(f"\n🎯 策略建议 ({s['risk_level']}):")
     print(f"   操作: {s['action']}")
     print(f"   入场: {s['entry']}")
@@ -317,25 +317,25 @@ def print_report(report):
     print(f"   目标: {s['target']}")
     print(f"   仓位: {s['position']}")
     print(f"   理由: {s['reason']}")
-    
+
     print("\n" + "=" * 60)
 
 
 def main():
     symbol = sys.argv[1] if len(sys.argv) > 1 else "AAPL"
-    
+
     # 1. 获取数据
     data = get_stock_data(symbol)
-    
+
     # 2. 分析
     analysis = analyze(data)
-    
+
     # 3. 推荐策略
     strategy = recommend(data, analysis)
-    
+
     # 4. 生成报告
     report = generate_report(symbol, data, analysis, strategy)
-    
+
     # 打印报告
     print_report(report)
 

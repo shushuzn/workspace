@@ -39,13 +39,13 @@ $(document).ready(function () {
     let element = $("#3dmol_viewer");
     let config = { backgroundColor: "white" };
     let viewer = $3Dmol.createViewer(element, config);
-    
+
     // 加载 CIF 文件
     $3Dmol.downloadCIF("material_id", viewer, {
         doAssembly: true,
         doNormalize: true
     });
-    
+
     viewer.setStyle({}, {stick: {}, sphere: {scale: 0.3}});
     viewer.zoomTo();
     viewer.render();
@@ -67,7 +67,7 @@ def plot_band_structure(band_data, k_path):
     plt.figure(figsize=(8, 6))
     for band in band_data:
         plt.plot(k_path, band, 'b-')
-    
+
     plt.xlabel('k-path')
     plt.ylabel('Energy (eV)')
     plt.axhline(y=0, color='r', linestyle='--')  # 费米能级
@@ -93,7 +93,7 @@ def plot_band_structure(band_data, k_path):
 
 ## 6. 实施计划
 
-**时间:** 2026-03-15 ~ 03-19  
+**时间:** 2026-03-15 ~ 03-19
 **优先级:** 🟡 中
 
 ---

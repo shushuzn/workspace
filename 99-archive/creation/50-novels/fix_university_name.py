@@ -15,13 +15,13 @@ files = [
 for file_path in files:
     with open(file_path, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     for old, new in replacements.items():
         content = content.replace(old, new)
-    
+
     with open(file_path, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     print('OK: ' + file_path)
 
 print('Done! All replaced.')

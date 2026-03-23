@@ -26,14 +26,14 @@ class WorkflowDiagnosis:
             "bottlenecks": self._find_bottlenecks()
         }
         return results
-    
+
     def _analyze_tools(self):
         tools = list(TOOLS_DIR.glob("*_001.py"))
         return {
             "total": len(tools),
             "categories": self._categorize(tools)
         }
-    
+
     def _categorize(self, tools):
         cats = {"brainstorm": [], "workflow": [], "tool": [], "data": [], "other": []}
         for t in tools:
@@ -49,7 +49,7 @@ class WorkflowDiagnosis:
             else:
                 cats["other"].append(t.name)
         return {k: len(v) for k, v in cats.items()}
-    
+
     def _analyze_patterns(self):
         issues = []
         for f in TOOLS_DIR.glob("*_001.py"):
@@ -62,7 +62,7 @@ class WorkflowDiagnosis:
             except (IOError, OSError, UnicodeDecodeError):
                 pass
         return issues
-    
+
     def _find_duplicates(self):
         base_names = {}
         for f in TOOLS_DIR.glob("*_001.py"):
@@ -71,7 +71,7 @@ class WorkflowDiagnosis:
                 base_names[base] = []
             base_names[base].append(f.name)
         return [{"base": k, "files": v} for k, v in base_names.items() if len(v) > 1][:10]
-    
+
     def _find_bottlenecks(self):
         return [
             {"type": "manual_dispatch", "description": "工具需要手动选择执行顺序"},

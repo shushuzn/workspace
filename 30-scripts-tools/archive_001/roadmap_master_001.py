@@ -34,14 +34,14 @@ ROADMAPS_DIR.mkdir(parents=True, exist_ok=True)
 
 class RoadmapMaster:
     """多维度路线图管理器"""
-    
+
     def __init__(self):
         self.roadmaps_dir = ROADMAPS_DIR
         self._ensure_default_roadmaps()
-    
+
     def _ensure_default_roadmaps(self):
         """确保默认路线图存在"""
-        
+
         # 股票分析路线图 (已有)
         stock_file = self.roadmaps_dir / "stock_analysis.json"
         if not stock_file.exists():
@@ -69,7 +69,7 @@ class RoadmapMaster:
             }
             with open(stock_file, "w", encoding="utf-8") as f:
                 json.dump(stock_roadmap, f, ensure_ascii=False, indent=2)
-        
+
         # 优化路线图 (已有)
         opt_file = self.roadmaps_dir / "optimization.json"
         if not opt_file.exists():
@@ -94,7 +94,7 @@ class RoadmapMaster:
             }
             with open(opt_file, "w", encoding="utf-8") as f:
                 json.dump(opt_roadmap, f, ensure_ascii=False, indent=2)
-        
+
         # 防护路线图 (新)
         prot_file = self.roadmaps_dir / "protection.json"
         if not prot_file.exists():
@@ -118,7 +118,7 @@ class RoadmapMaster:
             }
             with open(prot_file, "w", encoding="utf-8") as f:
                 json.dump(prot_roadmap, f, ensure_ascii=False, indent=2)
-        
+
         # 自动化路线图 (新)
         auto_file = self.roadmaps_dir / "automation.json"
         if not auto_file.exists():
@@ -142,7 +142,7 @@ class RoadmapMaster:
             }
             with open(auto_file, "w", encoding="utf-8") as f:
                 json.dump(auto_roadmap, f, ensure_ascii=False, indent=2)
-        
+
         # 索引文件
         index_file = self.roadmaps_dir / "index.json"
         if not index_file.exists():
@@ -157,32 +157,32 @@ class RoadmapMaster:
             }
             with open(index_file, "w", encoding="utf-8") as f:
                 json.dump(index, f, ensure_ascii=False, indent=2)
-    
+
     def _get_roadmap_file(self, dimension: str) -> Path:
         return self.roadmaps_dir / f"{dimension}.json"
-    
+
     def list_dimensions(self) -> list:
         """列出所有维度"""
         index_file = self.roadmaps_dir / "index.json"
         with open(index_file, "r", encoding="utf-8") as f:
             index = json.load(f)
         return index["dimensions"]
-    
+
     def get_roadmap(self, dimension: str) -> dict:
         """获取指定维度路线图"""
         file = self._get_roadmap_file(dimension)
         if not file.exists():
             return {"status": "error", "message": f"Dimension '{dimension}' not found"}
-        
+
         with open(file, "r", encoding="utf-8") as f:
             return json.load(f)
-    
+
     def status_all(self) -> dict:
         """所有维度状态"""
         dimensions = self.list_dimensions()
-        
+
         result = {"dimensions": [], "total_tools": 0, "total_completed": 0}
-        
+
         for dim in dimensions:
             roadmap = self.get_roadmap(dim["id"])
             result["dimensions"].append({
@@ -195,26 +195,26 @@ class RoadmapMaster:
             })
             result["total_tools"] += roadmap.get("total_tools", 0)
             result["total_completed"] += roadmap.get("completed_tools", 0)
-        
+
         result["overall_progress"] = (result["total_completed"] / result["total_tools"] * 100) if result["total_tools"] > 0 else 0
-        
+
         return result
-    
+
     def add_tool_to_roadmap(self, dimension: str, tool_id: str, tool_info: dict) -> dict:
         """添加工具到路线图"""
         file = self._get_roadmap_file(dimension)
-        
+
         if not file.exists():
             return {"status": "error", "message": f"Dimension '{dimension}' not found"}
-        
+
         with open(file, "r", encoding="utf-8") as f:
             roadmap = json.load(f)
-        
+
         # 检查是否已存在
         existing = roadmap.get("tools", [])
         if any(t.get("tool_id") == tool_id for t in existing):
             return {"status": "exists", "tool_id": tool_id}
-        
+
         # 添加工具
         existing.append({
             "tool_id": tool_id,
@@ -223,18 +223,18 @@ class RoadmapMaster:
             "added_at": datetime.now().isoformat(),
             "status": "active"
         })
-        
+
         roadmap["tools"] = existing
         roadmap["total_tools"] = len(existing)
         roadmap["completed_tools"] = len(existing)
         roadmap["progress_pct"] = 100.0
         roadmap["last_updated"] = datetime.now().isoformat()
-        
+
         with open(file, "w", encoding="utf-8") as f:
             json.dump(roadmap, f, ensure_ascii=False, indent=2)
-        
+
         return {"status": "added", "tool_id": tool_id, "dimension": dimension}
-    
+
     def sync_from_registry(self):
         """
 # ==============================================================================
@@ -283,12 +283,12 @@ Fixes:
         registry_file = Path("30-scripts-tools/tools_registry.json")
         if not registry_file.exists():
             return {"status": "error", "message": "Registry not found"}
-        
+
         with open(registry_file, "r", encoding="utf-8") as f:
             registry = json.load(f)
-        
+
         tools = registry.get("tools", {})
-        
+
         # 按维度分类
         dimension_map = {
             "stock_analysis": ["sa-"],
@@ -298,9 +298,9 @@ Fixes:
             "utility": ["next-", "test-", "health-", "batch-", "audit-", "integrate-", "optimap"],
             "research": ["research", "critic"]
         }
-        
+
         results = []
-        
+
         for tool_id, tool_info in tools.items():
             # 确定维度
             dimension = "utility"  # 默认
@@ -308,16 +308,16 @@ Fixes:
                 if any(tool_id.startswith(p) or p in tool_id for p in prefixes):
                     dimension = dim
                     break
-            
+
             # 添加到路线图
             result = self.add_tool_to_roadmap(dimension, tool_id, {
                 "name": tool_info.get("name", ""),
                 "file_path": tool_info.get("file_path", "")
             })
             results.append(result)
-        
+
         return {"status": "synced", "count": len(results)}
-    
+
     def next_suggestions(self) -> list:
         """下一步建议"""
         status = self.status_all()

@@ -22,7 +22,7 @@ TOOLS_DIR = Path("30-scripts-tools")
 class ParallelWorkflow:
     def __init__(self):
         self.results = []
-    
+
     def run_parallel(self, tools, max_workers=4, timeout=60) -> None:
         """
 # ==============================================================================
@@ -68,15 +68,15 @@ Fixes:
 
 Run multiple tools in parallel"""
         results = []
-        
+
         with ThreadPoolExecutor(max_workers=max_workers) as executor:
             futures = {}
-            
+
             for tool in tools:
                 cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")]
                 future = executor.submit(self._run_tool, cmd, timeout)
                 futures[future] = tool
-            
+
             for future in as_completed(futures):
                 tool = futures[future]
                 try:
@@ -91,9 +91,9 @@ Run multiple tools in parallel"""
                     results.append({"tool": tool, "status": "TIMEOUT", "elapsed_ms": timeout * 1000})
                 except Exception as e:
                     results.append({"tool": tool, "status": "ERROR", "error": str(e)})
-        
+
         return results
-    
+
     def _run_tool(self, cmd, timeout) -> None:
         """Run a single tool and return result with timing"""
         start = time.time()

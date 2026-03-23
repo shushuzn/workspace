@@ -30,24 +30,24 @@ class WorkflowSecurity:
     def scan(self, tool_name=None):
         results = []
         tools = [TOOLS_DIR / f"{tool_name}.py"] if tool_name else TOOLS_DIR.glob("*_001.py")
-        
+
         for tool in tools:
             if not tool.exists():
                 continue
-            
+
             content = tool.read_text(encoding="utf-8", errors="replace")
             issues = []
-            
+
             for pattern, desc in DANGEROUS_PATTERNS:
                 if re.search(pattern, content):
                     issues.append(desc)
-            
+
             results.append({
                 "tool": tool.stem,
                 "safe": len(issues) == 0,
                 "issues": issues
             })
-        
+
         safe_count = sum(1 for r in results if r["safe"])
         return {
             "total": len(results),

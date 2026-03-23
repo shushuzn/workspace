@@ -110,7 +110,7 @@ print("\n[5/8] Running simulation...")
 for n in range(nt):
     T_new = T.copy()
     T_const_new = T_const.copy()
-    
+
     # === Variable properties ===
     for i in range(1, nr-1):
         for j in range(1, nz-1):
@@ -121,7 +121,7 @@ for n in range(nt):
             k_jp1 = k_of_T(T[i,j+1])
             k_jm1 = k_of_T(T[i,j-1])
             Cp_i = Cp_of_T(T[i,j])
-            
+
             # Radial term (cylindrical)
             r_i = r[i]
             if r_i > 0:
@@ -129,19 +129,19 @@ for n in range(nt):
                 r_imhalf = r[i] - dr/2
                 k_iphalf = (k_i + k_ip1) / 2
                 k_imhalf = (k_i + k_im1) / 2
-                radial_term = (k_iphalf * r_iphalf * (T[i+1,j] - T[i,j]) - 
+                radial_term = (k_iphalf * r_iphalf * (T[i+1,j] - T[i,j]) -
                               k_imhalf * r_imhalf * (T[i,j] - T[i-1,j])) / (r_i * dr**2)
             else:
                 radial_term = 2 * k_i * (T[i+1,j] - 2*T[i,j] + T[i-1,j]) / dr**2
-            
+
             # Axial term
             k_jphalf = (k_jp1 + k_i) / 2
             k_jmhalf = (k_jm1 + k_i) / 2
             axial_term = (k_jphalf * (T[i,j+1] - T[i,j]) - k_jmhalf * (T[i,j] - T[i,j-1])) / dz**2
-            
+
             # Update
             T_new[i,j] = T[i,j] + dt / (rho * Cp_i) * (radial_term + axial_term)
-    
+
     # Surface boundary (z=0)
     for i in range(nr):
         if n * dt < t_dwell:
@@ -152,11 +152,11 @@ for n in range(nt):
             h = 10
             Cp_surf = Cp_of_T(T[i,0])
             T_new[i,0] = T[i,0] - h * (T[i,0] - T_env) * dt / (rho * Cp_surf * dz)
-    
+
     # Boundaries
     T_new[-1, :] = T_env  # r = R_max
     T_new[:, -1] = T[:, -1]  # z = Z_max (adiabatic)
-    
+
     # === Constant properties (for comparison) ===
     for i in range(1, nr-1):
         for j in range(1, nz-1):
@@ -164,14 +164,14 @@ for n in range(nt):
             if r_i > 0:
                 r_iphalf = r[i] + dr/2
                 r_imhalf = r[i] - dr/2
-                radial_term = (0.12 * r_iphalf * (T_const[i+1,j] - T_const[i,j]) - 
+                radial_term = (0.12 * r_iphalf * (T_const[i+1,j] - T_const[i,j]) -
                               0.12 * r_imhalf * (T_const[i,j] - T_const[i-1,j])) / (r_i * dr**2)
             else:
                 radial_term = 2 * 0.12 * (T_const[i+1,j] - 2*T_const[i,j] + T_const[i-1,j]) / dr**2
-            
+
             axial_term = 0.12 * (T_const[i,j+1] - 2*T_const[i,j] + T_const[i,j-1]) / dz**2
             T_const_new[i,j] = T_const[i,j] + dt / (rho * 1100) * (radial_term + axial_term)
-    
+
     for i in range(nr):
         if n * dt < t_dwell:
             q_laser = q_0 * np.exp(-2 * r[i]**2 / (d/2)**2)
@@ -179,20 +179,20 @@ for n in range(nt):
         else:
             h = 10
             T_const_new[i,0] = T_const[i,0] - h * (T_const[i,0] - T_env) * dt / (rho * 1100 * dz)
-    
+
     T_const_new[-1, :] = T_env
     T_const_new[:, -1] = T_const[:, -1]
-    
+
     # Update
     T = T_new
     T_const = T_const_new
-    
+
     # Record
     if n in record_times:
         T_history.append(T.copy())
         T_const_history.append(T_const.copy())
         time_history.append(n * dt)
-    
+
     # Progress
     if n % 100 == 0:
         print(f"  Step {n}/{nt}...")

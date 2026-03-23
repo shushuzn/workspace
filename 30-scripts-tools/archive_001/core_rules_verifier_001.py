@@ -20,9 +20,9 @@ def verify():
             "message": "CORE-EXECUTION-RULES.md 不存在",
             "server_time": datetime.now().isoformat()
         }
-    
+
     content = RULES_FILE.read_text(encoding="utf-8")
-    
+
     # 验证 10 条规则都存在
     required_rules = [
         "纯执行代理",
@@ -36,19 +36,19 @@ def verify():
         "禁止过程描述",
         "终止并上报"
     ]
-    
+
     missing = []
     for rule in required_rules:
         if rule not in content:
             missing.append(rule)
-    
+
     if missing:
         return {
             "status": "error",
             "message": f"缺失规则：{missing}",
             "server_time": datetime.now().isoformat()
         }
-    
+
     return {
         "status": "pass",
         "message": "核心执行规则验证通过",

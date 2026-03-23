@@ -28,24 +28,24 @@ CONFIG_FILE = Path("30-scripts-tools/next_001_config.json")
 
 class NextStepAdvisor:
     """下一步建议器"""
-    
+
     def __init__(self):
         self.advisor_dir = ADVISOR_DIR
         self.roadmap_file = ROADMAP_FILE
         self.config = self._load_config()
-        
+
         self.advisor_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.suggestions_file = self.advisor_dir / "suggestions.json"
         self.history_file = self.advisor_dir / "advisor_history.json"
-    
+
     def _load_config(self) -> dict:
         default = {
             "auto_advice": True,
             "max_suggestions": 5,
             "check_gaps": True
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -53,38 +53,38 @@ class NextStepAdvisor:
             except (Exception,):
                 return default
         return default
-    
+
     def _load_roadmap(self) -> dict:
         """加载路线图"""
         if not self.roadmap_file.exists():
             return None
-        
+
         with open(self.roadmap_file, "r", encoding="utf-8") as f:
             return json.load(f)
-    
+
     def analyze(self) -> dict:
         """分析当前状态并生成建议"""
         roadmap = self._load_roadmap()
-        
+
         if not roadmap:
             return {"status": "error", "message": "Roadmap not found"}
-        
+
         # 分析阶段状态
         phases = roadmap.get("phases", {})
         completed_tools = set(roadmap.get("completed_tools", []))
-        
+
         # 收集所有工具
         all_tools = []
         phase_details = []
-        
+
         for phase_id, phase in sorted(phases.items(), key=lambda x: int(x[0])):
             tools = phase.get("tools", [])
             all_tools.extend(tools)
             status = phase.get("status", "unknown")
-            
+
             # 计算完成数
             completed = sum(1 for t in tools if t in completed_tools)
-            
+
             phase_details.append({
                 "phase": phase_id,
                 "name": phase.get("name", f"Phase {phase_id}"),
@@ -93,10 +93,10 @@ class NextStepAdvisor:
                 "status": status,
                 "progress": round(completed / len(tools) * 100, 1) if tools else 0
             })
-        
+
         total_tools = len(all_tools)
         completed_count = len(completed_tools)
-        
+
         # 找下一个未完成的工具
         next_tool = None
         next_phase = None
@@ -108,12 +108,12 @@ class NextStepAdvisor:
                     break
             if next_tool:
                 break
-        
+
         # 生成建议
         suggestions = self._generate_suggestions(
             phase_details, next_tool, next_phase, completed_count, total_tools
         )
-        
+
         result = {
             "timestamp": datetime.now().isoformat(),
             "summary": {
@@ -131,20 +131,20 @@ class NextStepAdvisor:
             "suggestions": suggestions,
             "actions": self._generate_actions(suggestions)
         }
-        
+
         # 保存
         self._save_suggestions(result)
-        
+
         return result
-    
-    def _generate_suggestions(self, phases: list, next_tool: str, next_phase: str, 
+
+    def _generate_suggestions(self, phases: list, next_tool: str, next_phase: str,
                                completed: int, total: int) -> list:
         """生成建议"""
         suggestions = []
-        
+
         # 1. 进度建议
         progress = completed / total if total > 0 else 0
-        
+
         if progress >= 1.0:
             suggestions.append({
                 "type": "milestone",
@@ -166,7 +166,7 @@ class NextStepAdvisor:
                 "title": "Halfway there",
                 "description": "Good progress! Keep momentum."
             })
-        
+
         # 2. 下一个工具建议
         if next_tool:
             suggestions.append({
@@ -175,14 +175,14 @@ class NextStepAdvisor:
                 "title": f"Next: {next_tool}",
                 "description": f"Continue with {next_tool} in Phase {next_phase}"
             })
-        
+
         # 3. 阶段建议
         in_progress_phase = None
         for p in phases:
             if p["status"] == "in_progress":
                 in_progress_phase = p
                 break
-        
+
         if in_progress_phase:
             remaining = in_progress_phase["total"] - in_progress_phase["completed"]
             if remaining > 0:
@@ -192,7 +192,7 @@ class NextStepAdvisor:
                     "title": f"Phase {in_progress_phase['phase']}: {in_progress_phase['name']}",
                     "description": f"{remaining} tools remaining in this phase"
                 })
-        
+
         # 4. 检查未完成阶段
         for p in phases:
             if p["status"] != "completed" and p["status"] != "in_progress":
@@ -202,7 +202,7 @@ class NextStepAdvisor:
                     "title": f"Phase {p['phase']} pending",
                     "description": f"Phase {p['phase']} ({p['name']}) needs attention"
                 })
-        
+
         # 5. 工具建议
         if next_tool and next_tool.startswith("SA-"):
             suggestions.append({
@@ -211,13 +211,13 @@ class NextStepAdvisor:
                 "title": f"Implement {next_tool}",
                 "description": "Use tool_executor.py for standardized implementation"
             })
-        
+
         return suggestions[:self.config.get("max_suggestions", 5)]
-    
+
     def _generate_actions(self, suggestions: list) -> list:
         """生成具体行动"""
         actions = []
-        
+
         for s in suggestions:
             if s["type"] == "next_tool":
                 actions.append({
@@ -234,9 +234,9 @@ class NextStepAdvisor:
                     "action": "Continue work",
                     "command": "py 30-scripts-tools/roadmap_001_manager.py --next"
                 })
-        
+
         return actions
-    
+
     def _save_suggestions(self, result: dict):
         """
 # ==============================================================================
@@ -283,7 +283,7 @@ Fixes:
 保存建议"""
         with open(self.suggestions_file, "w", encoding="utf-8") as f:
             json.dump(result, f, ensure_ascii=False, indent=2)
-        
+
         # 保存历史
         history = []
         if self.history_file.exists():
@@ -292,18 +292,18 @@ Fixes:
                     history = json.load(f)
             except (Exception,):
                 pass
-        
+
         history.append({
             "timestamp": result["timestamp"],
             "progress_pct": result["summary"]["progress_pct"],
             "next_tool": result["next_step"]["tool"] if result["next_step"] else None
         })
-        
+
         history = history[-20:]
-        
+
         with open(self.history_file, "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
-    
+
     def get_suggestions(self) -> dict:
         """获取上次建议"""
         if not self.suggestions_file.exists():

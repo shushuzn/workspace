@@ -61,7 +61,7 @@ if __name__ == "__main__":
                 token = get_token()
         else:
             token = get_token()
-        
+
         message = "[Security Architecture Confirmed]\n\n[OK] Cloud Server: 8.208.30.28\n[OK] Local Machine: localhost only\n[OK] No port mapping\n[OK] No tunneling\n[OK] Audit passed\n\n[INFO] All public services on cloud\n[INFO] Local dev secure\n\n- OpenClaw"
         send_message(message)
     except Exception as e:

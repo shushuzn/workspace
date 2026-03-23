@@ -1,6 +1,6 @@
 import os
 modules = [
-    'watchlist', 'exporter', 'earnings', 
+    'watchlist', 'exporter', 'earnings',
     'reports', 'integrations', 'cron', 'webhook',
     'cache', 'history', 'sectors', 'risk', 'picks',
     'performance', 'validator', 'correlation', 'benchmark',

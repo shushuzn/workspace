@@ -30,28 +30,28 @@ from typing import Dict, List, Optional
 
 class VersionControl:
     """版本控制工具"""
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.snapshot_dir = self.workspace / "13-memory/.snapshots"
         self.snapshot_dir.mkdir(parents=True, exist_ok=True)
         self.index_file = self.snapshot_dir / "index.json"
-        
+
         self._ensure_index()
-    
+
     def _ensure_index(self):
         """确保索引文件存在"""
         if not self.index_file.exists():
             self.index_file.write_text(json.dumps({"versions": [], "current": None}, indent=2))
-    
+
     def _load_index(self) -> dict:
         with open(self.index_file, encoding="utf-8") as f:
             return json.load(f)
-    
+
     def _save_index(self, index: dict):
         with open(self.index_file, "w", encoding="utf-8") as f:
             json.dump(index, f, ensure_ascii=False, indent=2)
-    
+
     def snapshot(self, name: str = None) -> Dict:
         """
 # ==============================================================================
@@ -97,19 +97,19 @@ Fixes:
 
 创建快照"""
         index = self._load_index()
-        
+
         # 生成版本ID
         version_id = f"v{len(index['versions']) + 1:03d}"
         if name:
             version_id = name.strip().replace('"', '').replace("'", '')
-        
+
         # 快照时间
         timestamp = datetime.now().isoformat()
-        
+
         # 收集关键文件状态
         core_files = ['SOUL.md', 'USER.md', 'AGENTS.md', 'TOOLS.md', 'MEMORY.md']
         files_data = {}
-        
+
         for f in core_files:
             path = self.workspace / f
             if path.exists():
@@ -119,19 +119,19 @@ Fixes:
                     "size": len(content),
                     "lines": len(content.split('\n'))
                 }
-        
+
         # 保存快照文件
         snapshot_file = self.snapshot_dir / f"{version_id}.json"
-        
+
         snapshot = {
             "version": version_id,
             "timestamp": timestamp,
             "files": files_data
         }
-        
+
         with open(snapshot_file, "w", encoding="utf-8") as f:
             json.dump(snapshot, f, ensure_ascii=False, indent=2)
-        
+
         # 更新索引
         index["versions"].append({
             "version": version_id,
@@ -141,9 +141,9 @@ Fixes:
         })
         index["current"] = version_id
         self._save_index(index)
-        
+
         return {"status": "success", "version": version_id, "files": len(files_data)}
-    
+
     def list_versions(self) -> List[Dict]:
         """列出所有版本"""
         index = self._load_index()

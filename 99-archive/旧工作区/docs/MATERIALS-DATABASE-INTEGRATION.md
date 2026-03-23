@@ -26,15 +26,15 @@ class MaterialsProjectAPI:
     def __init__(self, api_key):
         self.api_key = api_key
         self.base_url = "https://api.materialsproject.org"
-    
+
     def search_materials(self, formula):
         """搜索材料"""
         pass
-    
+
     def get_structure(self, material_id):
         """获取晶体结构"""
         pass
-    
+
     def get_properties(self, material_id):
         """获取性能数据"""
         pass
@@ -76,7 +76,7 @@ class MaterialsProjectAPI:
 
 ## 5. 实施计划
 
-**时间:** 2026-03-08 ~ 03-12  
+**时间:** 2026-03-08 ~ 03-12
 **优先级:** 🔴 高
 
 ---

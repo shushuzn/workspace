@@ -31,14 +31,14 @@ CONFIG_FILE = Path("30-scripts-tools/sa_021_config.json")
 
 class StockDashboard:
     """股票监控仪表板"""
-    
+
     def __init__(self):
         self.dashboard_dir = DASHBOARD_DIR
         self.config = self._load_config()
-        
+
         # 确保目录存在
         self.dashboard_dir.mkdir(parents=True, exist_ok=True)
-    
+
     def _load_config(self) -> dict:
         """加载配置"""
         default = {
@@ -53,7 +53,7 @@ class StockDashboard:
             "dashboard_type": "realtime",
             "output_format": "html"
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -61,7 +61,7 @@ class StockDashboard:
             except (Exception,):
                 return default
         return default
-    
+
     def _get_mock_realtime_data(self, symbol: str) -> dict:
         """
 # ==============================================================================
@@ -114,10 +114,10 @@ Fixes:
             "TSLA": 245.0
         }
         base = base_prices.get(symbol, 100.0)
-        
+
         change = random.uniform(-3, 3)
         current = base + change
-        
+
         return {
             "symbol": symbol,
             "timestamp": datetime.now().isoformat(),
@@ -140,7 +140,7 @@ Fixes:
                 "ma_position": random.choice(["above_ma20", "below_ma20"])
             }
         }
-    
+
     def _check_alerts(self, data: dict) -> list:
         """检查告警"""
         alerts = []

@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 GP + MACE 集成预测
 结合 GP 和 MACE 的优势
@@ -72,7 +72,7 @@ if gp_model_path.exists():
     gp_loaded = True
 else:
     print(f"  [WARN] GP 模型不存在，重新训练...")
-    
+
     # 重新训练 GP
     kernel = ConstantKernel(100) * RBF(length_scale=[0.5, 0.5, 1.0]) + WhiteKernel(0.05)
     gp_model = GaussianProcessRegressor(
@@ -82,7 +82,7 @@ else:
         normalize_y=True
     )
     gp_model.fit(X_train_scaled, y_train_scaled)
-    
+
     gp_scaler_X = scaler_X
     gp_scaler_y = scaler_y
     gp_loaded = True
@@ -107,7 +107,7 @@ mace_model_path = Path("research/models/MACE_LIG_regressor.pth")
 if mace_model_path.exists():
     # 加载 MACE 回归器
     import torch.nn as nn
-    
+
     class MACERegressor(nn.Module):
         def __init__(self, input_dim=3, mace_hidden_dim=128, hidden_dim=64, output_dim=1):
             super().__init__()
@@ -125,15 +125,15 @@ if mace_model_path.exists():
                 nn.ReLU(),
                 nn.Linear(hidden_dim, output_dim)
             )
-        
+
         def forward(self, x):
             x = self.mace_encoder(x)
             return self.regressor(x)
-    
+
     mace_model = MACERegressor(input_dim=len(features))
     mace_model.load_state_dict(torch.load(mace_model_path))
     mace_model.eval()
-    
+
     print(f"  [OK] MACE 模型加载成功")
     mace_loaded = True
 else:
@@ -146,7 +146,7 @@ if mace_loaded:
     with torch.no_grad():
         y_pred_mace_scaled = mace_model(X_test_tensor).numpy().flatten()
     y_pred_mace = scaler_y.inverse_transform(y_pred_mace_scaled.reshape(-1, 1)).flatten()
-    
+
     # MACE 评估
     r2_mace = r2_score(y_test, y_pred_mace)
     mae_mace = mean_absolute_error(y_test, y_pred_mace)
@@ -167,10 +167,10 @@ if mace_loaded:
     # 根据 R2 分配权重
     w_gp = r2_gp / (r2_gp + r2_mace) if (r2_gp + r2_mace) > 0 else 0.5
     w_mace = 1 - w_gp
-    
+
     print(f"    GP 权重：{w_gp:.2f}")
     print(f"    MACE 权重：{w_mace:.2f}")
-    
+
     y_pred_ensemble = w_gp * y_pred_gp + w_mace * y_pred_mace
 else:
     # 只有 GP

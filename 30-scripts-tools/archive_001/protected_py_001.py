@@ -61,7 +61,7 @@ Fixes:
 """
 
 强制防护检查 - 失败则退出"""
-    
+
     # 检查 session
     if not STATE_FILE.exists():
         print("=" * 70)
@@ -70,18 +70,18 @@ Fixes:
         print("[FATAL] 直接运行脚本是被禁止的")
         print("=" * 70)
         sys.exit(1)
-    
+
     with open(STATE_FILE, "r", encoding="utf-8") as f:
         state = json.load(f)
-    
+
     if not state.get("session_id"):
         print("[FATAL] session_id 缺失")
         sys.exit(1)
-    
+
     if not state.get("mandatory_execution"):
         print("[FATAL] mandatory_execution 未启用")
         sys.exit(1)
-    
+
     # 检查停止标志
     if STOP_FLAG.exists():
         print("=" * 70)
@@ -91,7 +91,7 @@ Fixes:
         print(f"[BLOCK] 原因：{stop_data.get('reason', '未知')}")
         print("=" * 70)
         sys.exit(1)
-    
+
     print(f"[OK] 防护检查通过：{state['session_id']}")
 
 logging.basicConfig(level=logging.INFO)
@@ -100,18 +100,18 @@ def main():
         print("用法：py protected_py.py <script.py> [args...]")
         print("所有 Python 脚本执行都会自动通过防护检查")
         sys.exit(1)
-    
+
     # 强制防护检查
     force_protection_check()
-    
+
     # 执行实际脚本
     script_path = sys.argv[1]
     script_args = sys.argv[2:]
-    
+
     command = f"py {script_path} {' '.join(script_args)}"
-    
+
     print(f"[EXEC] {command}")
-    
+
     try:
         result = subprocess.run(
             command,
@@ -121,15 +121,15 @@ def main():
             encoding="utf-8",
             timeout=300
         )
-        
+
         # 输出结果
         if result.stdout:
             print(result.stdout)
         if result.stderr:
             print(result.stderr, file=sys.stderr)
-        
+
         sys.exit(result.returncode)
-    
+
     except subprocess.TimeoutExpired:
         print("[ERROR] 执行超时 (>300s)")
         sys.exit(1)

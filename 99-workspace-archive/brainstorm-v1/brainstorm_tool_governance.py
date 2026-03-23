@@ -22,7 +22,7 @@ GOVERNANCE_FRAMEWORK = {
             "自动化程度低"
         ]
     },
-    
+
     "solutions": [
         {
             "layer": "第 1 层：分类整理",
@@ -73,7 +73,7 @@ GOVERNANCE_FRAMEWORK = {
                 }
             ]
         },
-        
+
         {
             "layer": "第 2 层：工具目录",
             "actions": [
@@ -109,7 +109,7 @@ GOVERNANCE_FRAMEWORK = {
                 }
             ]
         },
-        
+
         {
             "layer": "第 3 层：去重合并",
             "actions": [
@@ -143,7 +143,7 @@ GOVERNANCE_FRAMEWORK = {
                 }
             ]
         },
-        
+
         {
             "layer": "第 4 层：自动化提升",
             "actions": [
@@ -180,7 +180,7 @@ GOVERNANCE_FRAMEWORK = {
                 }
             ]
         },
-        
+
         {
             "layer": "第 5 层：质量管控",
             "actions": [
@@ -223,7 +223,7 @@ GOVERNANCE_FRAMEWORK = {
             ]
         }
     ],
-    
+
     "quick_wins": [
         {
             "id": "QW1",
@@ -256,7 +256,7 @@ GOVERNANCE_FRAMEWORK = {
             "impact": "中"
         }
     ],
-    
+
     "metrics": {
         "current": {
             "total_tools": 424,
@@ -278,11 +278,11 @@ GOVERNANCE_FRAMEWORK = {
 
 def generate_governance_report():
     """生成治理方案报告"""
-    
+
     print("=" * 70)
     print("🔧 工具爆炸治理方案")
     print("=" * 70)
-    
+
     problem = GOVERNANCE_FRAMEWORK["problem"]
     print(f"\n📊 问题定义:")
     print(f"  {problem['title']}")
@@ -290,7 +290,7 @@ def generate_governance_report():
     print(f"\n  痛点:")
     for pain in problem["pain_points"]:
         print(f"    - {pain}")
-    
+
     print(f"\n📐 5 层治理框架:")
     for solution in GOVERNANCE_FRAMEWORK["solutions"]:
         print(f"\n  {solution['layer']}:")
@@ -298,40 +298,40 @@ def generate_governance_report():
             print(f"    [{action['id']}] {action['title']}")
             print(f"        {action['description']}")
             print(f"        时间：{action['timeline']}, 影响力：{action['impact']}/5")
-    
+
     print(f"\n🎯 快速致胜 (1-2 周内):")
     for qw in GOVERNANCE_FRAMEWORK["quick_wins"]:
         print(f"  [{qw['id']}] {qw['title']}")
         print(f"      工作量：{qw['effort']}, 影响力：{qw['impact']}")
-    
+
     print(f"\n📈 目标指标 (3 个月):")
     current = GOVERNANCE_FRAMEWORK["metrics"]["current"]
     target = GOVERNANCE_FRAMEWORK["metrics"]["target_3_months"]
-    
+
     print(f"\n  当前状态:")
     print(f"    总工具数：{current['total_tools']}")
     print(f"    已分类：{current['categorized']}")
     print(f"    文件存在：{current['files_exist']}")
     print(f"    有触发器：{current['with_triggers']}")
     print(f"    有版本号：{current['with_version']}")
-    
+
     print(f"\n  3 个月目标:")
     print(f"    总工具数：{target['total_tools']}")
     print(f"    已分类：{target['categorized']}")
     print(f"    文件存在：{target['files_exist']}")
     print(f"    有触发器：{target['with_triggers']}")
     print(f"    有版本号：{target['with_version']}")
-    
+
     # 保存报告
     report = {
         "title": "工具爆炸治理方案",
         "date": datetime.now().isoformat(),
         "framework": GOVERNANCE_FRAMEWORK
     }
-    
+
     report_path = Path("flow-archive/20260318-universal-workflow-001/tool-governance-solution.md")
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     # 生成 Markdown 报告
     markdown = f"""# 🔧 工具爆炸治理方案
 
@@ -349,12 +349,12 @@ def generate_governance_report():
 
 ### 痛点
 """
-    
+
     for pain in problem["pain_points"]:
         markdown += f"- {pain}\n"
-    
+
     markdown += "\n---\n\n## 📐 5 层治理框架\n\n"
-    
+
     for solution in GOVERNANCE_FRAMEWORK["solutions"]:
         markdown += f"### {solution['layer']}\n\n"
         for action in solution["actions"]:
@@ -367,17 +367,17 @@ def generate_governance_report():
             if 'features' in action:
                 markdown += f"**功能:** {', '.join(action['features'])}\n\n"
             markdown += f"**时间:** {action['timeline']} | **影响力:** {action['impact']}/5\n\n"
-    
+
     markdown += "---\n\n## 🎯 快速致胜 (1-2 周)\n\n"
-    
+
     for qw in GOVERNANCE_FRAMEWORK["quick_wins"]:
         markdown += f"### [{qw['id']}] {qw['title']}\n\n"
         markdown += f"**工作量:** {qw['effort']} | **影响力:** {qw['impact']}\n\n"
-    
+
     markdown += "---\n\n## 📈 目标指标\n\n"
     markdown += "| 指标 | 当前 | 3 个月目标 |\n"
     markdown += "|------|------|------------|\n"
-    
+
     metrics_list = [
         ("总工具数", current['total_tools'], target['total_tools']),
         ("已分类", current['categorized'], target['categorized']),
@@ -385,25 +385,25 @@ def generate_governance_report():
         ("有触发器", current['with_triggers'], target['with_triggers']),
         ("有版本号", current['with_version'], target['with_version'])
     ]
-    
+
     for name, curr, tgt in metrics_list:
         markdown += f"| {name} | {curr} | {tgt} |\n"
-    
+
     markdown += "\n---\n\n## 🗓️ 实施路线图\n\n"
     markdown += "### Week 1-2 (快速致胜)\n- [ ] QW1 清理 6 个缺失文件\n- [ ] QW2 分类 27 个未分类工具\n- [ ] QW3 创建工具搜索脚本\n\n"
     markdown += "### Week 3-4 (第 1 层)\n- [ ] G1 重新分类工具库\n- [ ] G3 统一命名规范\n\n"
     markdown += "### Month 2 (第 2-3 层)\n- [ ] G4 工具搜索引擎\n- [ ] G7 识别重复工具\n- [ ] G10 增加触发器覆盖\n\n"
     markdown += "### Month 3 (第 4-5 层)\n- [ ] G12 智能工具推荐\n- [ ] G13 工具创建审批\n- [ ] G14 工具质量评分\n\n"
-    
+
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(markdown)
-    
+
     print(f"\n💾 报告已保存：{report_path}")
-    
+
     print("\n" + "=" * 70)
     print("✅ 治理方案生成完成!")
     print("=" * 70)
-    
+
     return report
 
 

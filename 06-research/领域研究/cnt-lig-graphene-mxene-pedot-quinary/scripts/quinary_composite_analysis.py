@@ -88,17 +88,17 @@ for i in range(steps + 1):
         for k in range(steps + 1 - i - j):
             for l in range(steps + 1 - i - j - k):
                 m = steps - i - j - k - l
-                
+
                 cnt_ratio = i / steps
                 lig_ratio = j / steps
                 graphene_ratio = k / steps
                 mxene_ratio = l / steps
                 pedot_ratio = m / steps
-                
+
                 # 过滤极端比例 (确保每种组分至少 10%)
                 if min(cnt_ratio, lig_ratio, graphene_ratio, mxene_ratio, pedot_ratio) < 0.10:
                     continue
-                
+
                 # 五元协同效应模型
                 # 1. 二元协同 (10 对)
                 synergy_binary = (
@@ -111,7 +111,7 @@ for i in range(steps + 1):
                     0.10 * np.exp(-((cnt_ratio - pedot_ratio) ** 2) / 0.04) +     # CNT-PEDOT
                     0.08 * np.exp(-((lig_ratio - pedot_ratio) ** 2) / 0.05)       # LIG-PEDOT
                 )
-                
+
                 # 2. 三元协同 (10 个三元组合)
                 synergy_ternary = (
                     0.12 * cnt_ratio * graphene_ratio * mxene_ratio +      # CNT-G-MXene
@@ -120,20 +120,20 @@ for i in range(steps + 1):
                     0.08 * graphene_ratio * mxene_ratio * pedot_ratio +    # G-MXene-PEDOT
                     0.08 * cnt_ratio * lig_ratio * pedot_ratio             # CNT-LIG-PEDOT
                 )
-                
+
                 # 3. 四元协同 (5 个四元组合)
                 synergy_quaternary = (
                     0.08 * cnt_ratio * graphene_ratio * mxene_ratio * lig_ratio +
                     0.10 * cnt_ratio * graphene_ratio * mxene_ratio * pedot_ratio
                 )
-                
+
                 # 4. 五元协同 (独特效应)
                 # PEDOT 离子导电 + MXene 赝电容 + 石墨烯电子导电 + CNT 长程 + LIG 柔性
                 synergy_quinary = 0.15 * cnt_ratio * lig_ratio * graphene_ratio * mxene_ratio * pedot_ratio * 50
-                
+
                 # 总协同因子
                 total_synergy = 1.0 + synergy_binary + synergy_ternary + synergy_quaternary + synergy_quinary
-                
+
                 # 复合电导率 (混合规则 + 协同)
                 base_conductivity = (
                     cnt_ratio * material_properties['CNT']['conductivity'] +
@@ -142,13 +142,13 @@ for i in range(steps + 1):
                     mxene_ratio * material_properties['MXene']['conductivity'] +
                     pedot_ratio * material_properties['PEDOT']['conductivity']
                 )
-                
+
                 composite_conductivity = base_conductivity * total_synergy
-                
+
                 # 添加实验噪声
                 noise = np.random.normal(1.0, 0.05)
                 composite_conductivity *= noise
-                
+
                 quinary_data.append({
                     'sample_id': f'Q5-{cnt_ratio:.2f}-{lig_ratio:.2f}-{graphene_ratio:.2f}-{mxene_ratio:.2f}-{pedot_ratio:.2f}',
                     'cnt_ratio': cnt_ratio,

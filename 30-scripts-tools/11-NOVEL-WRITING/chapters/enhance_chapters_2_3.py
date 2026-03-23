@@ -8,7 +8,7 @@ for f in os.listdir(drafts_dir):
         path = os.path.join(drafts_dir, f)
         with open(path, 'r', encoding='utf-8') as file:
             content = file.read()
-        
+
         # 在文件末尾添加场景描写
         addition = """
 ---
@@ -34,10 +34,10 @@ for f in os.listdir(drafts_dir):
 ---
 """
         content += addition
-        
+
         with open(path, 'w', encoding='utf-8') as file:
             file.write(content)
-        
+
         print(f"[OK] Chapter 2 enhanced: {f}")
         break
 
@@ -47,7 +47,7 @@ for f in os.listdir(drafts_dir):
         path = os.path.join(drafts_dir, f)
         with open(path, 'r', encoding='utf-8') as file:
             content = file.read()
-        
+
         addition = """
 ---
 
@@ -74,10 +74,10 @@ for f in os.listdir(drafts_dir):
 ---
 """
         content += addition
-        
+
         with open(path, 'w', encoding='utf-8') as file:
             file.write(content)
-        
+
         print(f"[OK] Chapter 3 enhanced: {f}")
         break
 

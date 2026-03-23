@@ -12,7 +12,7 @@ import json
 
 def generate_stock_analysis_ideas():
     """Generate ideas for stock analysis workflow"""
-    
+
     ideas = {
         "data_collection": {
             "category": "数据收集",
@@ -56,7 +56,7 @@ def generate_stock_analysis_ideas():
                 }
             ]
         },
-        
+
         "technical_analysis": {
             "category": "技术分析",
             "priority": "P0",
@@ -97,7 +97,7 @@ def generate_stock_analysis_ideas():
                 }
             ]
         },
-        
+
         "fundamental_analysis": {
             "category": "基本面分析",
             "priority": "P0",
@@ -137,7 +137,7 @@ def generate_stock_analysis_ideas():
                 }
             ]
         },
-        
+
         "risk_management": {
             "category": "风险管理",
             "priority": "P0",
@@ -168,7 +168,7 @@ def generate_stock_analysis_ideas():
                 }
             ]
         },
-        
+
         "signal_generation": {
             "category": "信号生成",
             "priority": "P0",
@@ -200,7 +200,7 @@ def generate_stock_analysis_ideas():
                 }
             ]
         },
-        
+
         "visualization": {
             "category": "可视化展示",
             "priority": "P1",
@@ -233,7 +233,7 @@ def generate_stock_analysis_ideas():
                 }
             ]
         },
-        
+
         "automation": {
             "category": "自动化",
             "priority": "P1",
@@ -266,7 +266,7 @@ def generate_stock_analysis_ideas():
             ]
         }
     }
-    
+
     return ideas
 
 
@@ -275,26 +275,26 @@ def summarize_ideas(ideas):
     total = 0
     p0_count = 0
     p1_count = 0
-    
+
     summary = []
-    
+
     for category, data in ideas.items():
         count = len(data["components"])
         total += count
-        
+
         p0_in_cat = sum(1 for c in data["components"] if data["priority"] == "P0")
         p1_in_cat = sum(1 for c in data["components"] if data["priority"] == "P1")
-        
+
         p0_count += p0_in_cat
         p1_count += p1_in_cat
-        
+
         summary.append({
             "category": data["category"],
             "priority": data["priority"],
             "count": count,
             "total_effort": sum(int(c["effort"].replace("h", "")) for c in data["components"])
         })
-    
+
     return summary, total, p0_count, p1_count
 
 
@@ -346,22 +346,22 @@ Main entry point"""
     print("=" * 70)
     print(" " * 20 + "Stock Analysis Workflow Brainstorm")
     print("=" * 70)
-    
+
     ideas = generate_stock_analysis_ideas()
     summary, total, p0_count, p1_count = summarize_ideas(ideas)
-    
+
     print(f"\n[Summary]")
     print(f"  Total Components: {total}")
     print(f"  P0 Priority: {p0_count}")
     print(f"  P1 Priority: {p1_count}")
-    
+
     print(f"\n[Categories]")
     for s in summary:
         print(f"  {s['category']:20} | {s['count']:2d} components | {s['priority']:2} | {s['total_effort']:3d}h")
-    
+
     total_effort = sum(s["total_effort"] for s in summary)
     print(f"\n  Total Estimated Effort: {total_effort} hours")
-    
+
     # Save to file
     output = {
         "generated_at": datetime.now().isoformat(),
@@ -372,12 +372,12 @@ Main entry point"""
         "categories": summary,
         "ideas": ideas
     }
-    
+
     with open("30-scripts-tools/brainstock-stock-analysis.json", "w", encoding="utf-8") as f:
         json.dump(output, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n[OK] Ideas saved to: 30-scripts-tools/brainstock-stock-analysis.json")
-    
+
     # Display P0 components
     print(f"\n[P0 Components - Priority Implementation]")
     print("-" * 70)
@@ -386,7 +386,7 @@ Main entry point"""
             print(f"\n  {data['category']}:")
             for comp in data["components"]:
                 print(f"    [{comp['id']}] {comp['name']} ({comp['effort']})")
-    
+
     print("\n" + "=" * 70)
     print("[OK] Brainstorm completed")
 

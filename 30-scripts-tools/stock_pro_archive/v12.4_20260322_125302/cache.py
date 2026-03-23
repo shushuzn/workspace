@@ -14,7 +14,7 @@ class Cache:
         self.ttl = ttl
         self._memory = {}
         self.load()
-    
+
     def load(self):
         """Load cache from file"""
         if CACHE_FILE.exists():
@@ -23,12 +23,12 @@ class Cache:
                     self._memory = json.load(f)
             except Exception:
                 self._memory = {}
-    
+
     def save(self):
         """Save cache to file"""
         with open(CACHE_FILE, 'w') as f:
             json.dump(self._memory, f, indent=2)
-    
+
     def get(self, key):
         """Get cached value"""
         if key in self._memory:
@@ -38,35 +38,35 @@ class Cache:
             else:
                 del self._memory[key]
         return None
-    
+
     def set(self, key, value):
         """Set cache value"""
         self._memory[key] = (value, time.time())
         self.save()
-    
+
     def delete(self, key):
         """Delete cache entry"""
         if key in self._memory:
             del self._memory[key]
             self.save()
-    
+
     def clear(self):
         """Clear all cache"""
         self._memory = {}
         self.save()
         return "[Cache] Cleared"
-    
+
     def stats(self):
         """Get cache statistics"""
         now = time.time()
         valid = sum(1 for _, ts in self._memory.values() if now - ts < self.ttl)
         expired = len(self._memory) - valid
         return f"[Cache] {valid} valid, {expired} expired, {len(self._memory)} total"
-    
+
     def cleanup(self):
         """Remove expired entries"""
         before = len(self._memory)
-        self._memory = {k: v for k, v in self._memory.items() 
+        self._memory = {k: v for k, v in self._memory.items()
                        if time.time() - v[1] < self.ttl}
         removed = before - len(self._memory)
         self.save()
@@ -82,7 +82,7 @@ def get_cached(key, fetch_func):
     data = _cache.get(key)
     if data is not None:
         return data, True  # (data, from_cache)
-    
+
     data = fetch_func()
     _cache.set(key, data)
     return data, False

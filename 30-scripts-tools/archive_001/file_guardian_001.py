@@ -40,11 +40,11 @@ CRITICAL_FILES = [
 
 class FileGuardian:
     """文件守护进程 - 防护 v10"""
-    
+
     def __init__(self):
         self.baseline = self._load_baseline()
         self.alerts = []
-    
+
     def _load_baseline(self) -> None:
         """加载文件基线"""
         baseline_file = Path("30-scripts-tools/file_baseline.json")
@@ -52,7 +52,7 @@ class FileGuardian:
             with open(baseline_file, "r", encoding="utf-8") as f:
                 return json.load(f)
         return self._create_baseline()
-    
+
     def _create_baseline(self) -> None:
         """
 # ==============================================================================
@@ -101,7 +101,7 @@ Fixes:
             "created_at": datetime.now().isoformat(),
             "files": {}
         }
-        
+
         for file_path in CRITICAL_FILES:
             if file_path.exists():
                 with open(file_path, "rb") as f:
@@ -117,14 +117,14 @@ Fixes:
                     "size": 0,
                     "exists": False
                 }
-        
+
         # 保存基线
         baseline_file = Path("30-scripts-tools/file_baseline.json")
         with open(baseline_file, "w", encoding="utf-8") as f:
             json.dump(baseline, f, ensure_ascii=False, indent=2)
-        
+
         return baseline
-    
+
     def check_all(self) -> dict:
         """检查所有文件"""
         results = {

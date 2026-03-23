@@ -218,7 +218,7 @@ figures_dir.mkdir(parents=True, exist_ok=True)
 
 # 图 1: 预测 vs 真实值
 fig1, ax1 = plt.subplots(figsize=(8, 6), dpi=300)
-ax1.errorbar(y_test, y_pred, yerr=y_std, fmt='o', capsize=3, markersize=6, alpha=0.7, 
+ax1.errorbar(y_test, y_pred, yerr=y_std, fmt='o', capsize=3, markersize=6, alpha=0.7,
              color='blue', ecolor='gray', elinewidth=1.5)
 ax1.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], 'r--', linewidth=2, label='理想预测')
 ax1.set_xlabel("实验真实值 (S/m)", fontsize=12)
@@ -259,11 +259,11 @@ print(f"  [OK] 残差图：{figures_dir / 'GP_200samples_residuals.png'}")
 # 图 3: 不确定性分布
 fig3, ax3 = plt.subplots(figsize=(8, 6), dpi=300)
 ax3.hist(y_std, bins=15, edgecolor='black', alpha=0.7, color='lightgreen')
-ax3.axvline(mean_uncertainty, color='red', linestyle='--', linewidth=2, 
+ax3.axvline(mean_uncertainty, color='red', linestyle='--', linewidth=2,
             label=f'平均：±{mean_uncertainty:.1f} S/m')
 ax3.set_xlabel("预测不确定性 (S/m)", fontsize=12)
 ax3.set_ylabel("样本数", fontsize=12)
-ax3.set_title(f"GP 预测不确定性分布\n平均：±{rel_uncertainty:.1f}%, 95% CI 覆盖率：{coverage:.1f}%", 
+ax3.set_title(f"GP 预测不确定性分布\n平均：±{rel_uncertainty:.1f}%, 95% CI 覆盖率：{coverage:.1f}%",
               fontsize=13)
 ax3.legend(fontsize=10)
 ax3.grid(True, alpha=0.3, linestyle='--', axis='y')
@@ -283,7 +283,7 @@ ax4.set_title("GP 模型性能提升", fontsize=14)
 ax4.set_ylim(0, 1.0)
 
 for bar, r2_val in zip(bars, r2_vals):
-    ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02, 
+    ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
             f'R²={r2_val:.2f}', ha='center', va='bottom', fontsize=11)
 
 ax4.axhline(y=0.80, color='red', linestyle='--', linewidth=1.5, label='目标 R²>0.80')

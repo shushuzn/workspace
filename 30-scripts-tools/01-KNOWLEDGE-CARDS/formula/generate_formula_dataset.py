@@ -40,11 +40,11 @@ COMPLEX_FORMULAS = {
 
 def generate_formula_dataset(papers_json, output_dir="formula_dataset"):
     """生成公式数据集"""
-    
+
     # 加载论文数据
     with open(papers_json, 'r', encoding='utf-8-sig') as f:
         data = json.load(f)
-    
+
     # 处理不同格式
     if isinstance(data, list):
         papers = data
@@ -54,19 +54,19 @@ def generate_formula_dataset(papers_json, output_dir="formula_dataset"):
         papers = []
     output_dir = Path(output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     formulas = []
     formula_id = 0
-    
+
     # 为每篇论文生成 2-3 个公式
     for paper in papers:
         num_formulas = random.randint(2, 3)
-        
+
         for _ in range(num_formulas):
             # 随机选择公式类型
             formula_type = random.choice(list(COMPLEX_FORMULAS.keys()))
             latex = random.choice(COMPLEX_FORMULAS[formula_type])
-            
+
             # 生成元数据
             formula = {
                 "id": f"eq_{formula_id:03d}",
@@ -78,15 +78,15 @@ def generate_formula_dataset(papers_json, output_dir="formula_dataset"):
                 "image_path": f"images/eq_{formula_id:03d}.png",
                 "created_at": datetime.now().isoformat()
             }
-            
+
             formulas.append(formula)
             formula_id += 1
-    
+
     # 确保至少 200 个公式
     while len(formulas) < 200:
         formula_type = random.choice(list(COMPLEX_FORMULAS.keys()))
         latex = random.choice(COMPLEX_FORMULAS[formula_type])
-        
+
         formula = {
             "id": f"eq_{formula_id:03d}",
             "paper_id": "synthetic",
@@ -97,31 +97,31 @@ def generate_formula_dataset(papers_json, output_dir="formula_dataset"):
             "image_path": f"images/eq_{formula_id:03d}.png",
             "created_at": datetime.now().isoformat()
         }
-        
+
         formulas.append(formula)
         formula_id += 1
-    
+
     # 保存标注文件
     with open(output_dir / "formulas.json", 'w', encoding='utf-8') as f:
         json.dump(formulas, f, indent=2, ensure_ascii=False)
-    
+
     # 统计
     stats = {
         "total": len(formulas),
         "by_type": {}
     }
-    
+
     for f in formulas:
         t = f["type"]
         stats["by_type"][t] = stats["by_type"].get(t, 0) + 1
-    
+
     with open(output_dir / "stats.json", 'w', encoding='utf-8') as f:
         json.dump(stats, f, indent=2, ensure_ascii=False)
-    
+
     print(f"公式数据集已生成：{output_dir}")
     print(f"  - 总公式数：{stats['total']}")
     print(f"  - 类型分布：{stats['by_type']}")
-    
+
     return output_dir
 
 if __name__ == "__main__":

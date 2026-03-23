@@ -98,21 +98,21 @@ def analyze_patterns() -> None:
     """Analyze past patterns and improve routing"""
     history = load_history()
     patterns = load_patterns()
-    
+
     # Count successful persona-task combinations
     success_counts = defaultdict(lambda: defaultdict(int))
     failure_counts = defaultdict(lambda: defaultdict(int))
-    
+
     for task_info in history.get("tasks", []):
         persona = task_info.get("persona", "")
         success = task_info.get("success", True)
-        
+
         for keyword in task_info.get("keywords", []):
             if success:
                 success_counts[persona][keyword] += 1
             else:
                 failure_counts[persona][keyword] += 1
-    
+
     # Update patterns
     patterns["persona_scores"] = {
         persona: {
@@ -121,14 +121,14 @@ def analyze_patterns() -> None:
         }
         for persona in success_counts.keys()
     }
-    
+
     save_patterns(patterns)
     return patterns
 
 def record_outcome(task, persona, success, keywords) -> None:
     """Record task outcome for learning"""
     history = load_history()
-    
+
     history["tasks"].append({
         "task": task,
         "persona": persona,
@@ -136,27 +136,27 @@ def record_outcome(task, persona, success, keywords) -> None:
         "keywords": keywords,
         "timestamp": datetime.now().isoformat()
     })
-    
+
     # Keep only last 1000 entries
     history["tasks"] = history["tasks"][-1000:]
-    
+
     save_history(history)
 
 def get_best_persona(task_text) -> None:
     """Get best persona based on learned patterns"""
     patterns = load_patterns()
     scores = defaultdict(float)
-    
+
     keywords = task_text.lower().split()
-    
+
     for keyword in keywords:
         for persona, persona_scores in patterns.get("persona_scores", {}).items():
             if keyword in persona_scores:
                 scores[persona] += persona_scores[keyword]
-    
+
     if not scores:
         return "coordinator"
-    
+
     return max(scores.items(), key=lambda x: x[1])[0]
 
 def generate_report() -> None:
@@ -164,13 +164,13 @@ def generate_report() -> None:
     history = load_history()
     patterns = load_patterns()
     stats = {}
-    
+
     if STATS_FILE.exists():
         stats = json.loads(STATS_FILE.read_text(encoding="utf-8", errors="replace"))
-    
+
     total = len(history.get("tasks", []))
     success = sum(1 for t in history.get("tasks", []) if t.get("success"))
-    
+
     report = f"""
 ╔══════════════════════════════════════════════════════════╗
 ║       MULTI-AGENT LEARNING REPORT                         ║
@@ -180,21 +180,21 @@ def generate_report() -> None:
 ║  Patterns Learned: {len(patterns.get('persona_scores', {})):5}                        ║
 ╠══════════════════════════════════════════════════════════╣
 ║  TOP PERSONA-TASK COMBINATIONS                           ║"""
-    
+
     # Find top combinations
     combos = []
     for persona, task_scores in patterns.get("persona_scores", {}).items():
         for task, score in task_scores.items():
             if score > 0:
                 combos.append((persona, task, score))
-    
+
     combos.sort(key=lambda x: x[2], reverse=True)
-    
+
     for persona, task, score in combos[:5]:
         report += f"\n║    {persona.upper():12} + {task:15} = {score:5.1f}        ║"
-    
+
     report += "\n╚══════════════════════════════════════════════════════════╝"
-    
+
     return report
 
 if __name__ == "__main__":

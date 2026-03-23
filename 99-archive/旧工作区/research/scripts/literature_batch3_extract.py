@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 """
 LIG 文献数据第 3 批提取
 目标：再提取 +15 样本
@@ -37,22 +37,22 @@ batch3_samples = [
     {'sample_id': 'LIT-026', 'P_W': 0.48, 'v_mms': 15, 'E_Jcm2': 32.0, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4500, 'ssa_m2g': 420, 'id_ig': 1.6, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'Ultra-high conductivity'},
     {'sample_id': 'LIT-027', 'P_W': 0.45, 'v_mms': 16, 'E_Jcm2': 28.13, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4300, 'ssa_m2g': 440, 'id_ig': 1.55, 'method': '4-probe', 'uncertainty': '±5%', 'notes': 'Very high power'},
     {'sample_id': 'LIT-028', 'P_W': 0.50, 'v_mms': 18, 'E_Jcm2': 27.78, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 4100, 'ssa_m2g': 460, 'id_ig': 1.5, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'High power density'},
-    
+
     # 高电导率组 (3000-4000 S/m)
     {'sample_id': 'LIT-029', 'P_W': 0.40, 'v_mms': 24, 'E_Jcm2': 16.67, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3600, 'ssa_m2g': 520, 'id_ig': 1.3, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'High conductivity'},
     {'sample_id': 'LIT-030', 'P_W': 0.42, 'v_mms': 26, 'E_Jcm2': 16.15, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3400, 'ssa_m2g': 540, 'id_ig': 1.28, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'Optimized high'},
     {'sample_id': 'LIT-031', 'P_W': 0.38, 'v_mms': 25, 'E_Jcm2': 15.2, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 3300, 'ssa_m2g': 550, 'id_ig': 1.25, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'Balanced high'},
-    
+
     # 中电导率组 (2000-3000 S/m)
     {'sample_id': 'LIT-032', 'P_W': 0.35, 'v_mms': 32, 'E_Jcm2': 10.94, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2650, 'ssa_m2g': 610, 'id_ig': 1.08, 'method': '4-probe', 'uncertainty': '±7%', 'notes': 'Medium-high'},
     {'sample_id': 'LIT-033', 'P_W': 0.33, 'v_mms': 34, 'E_Jcm2': 9.71, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2450, 'ssa_m2g': 640, 'id_ig': 0.98, 'method': '4-probe', 'uncertainty': '±7%', 'notes': 'Medium'},
     {'sample_id': 'LIT-034', 'P_W': 0.36, 'v_mms': 31, 'E_Jcm2': 11.61, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 2750, 'ssa_m2g': 595, 'id_ig': 1.12, 'method': '4-probe', 'uncertainty': '±6%', 'notes': 'Medium optimized'},
-    
+
     # 低电导率组 (<2000 S/m)
     {'sample_id': 'LIT-035', 'P_W': 0.24, 'v_mms': 48, 'E_Jcm2': 5.0, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 1550, 'ssa_m2g': 780, 'id_ig': 0.72, 'method': '4-probe', 'uncertainty': '±9%', 'notes': 'Low power'},
     {'sample_id': 'LIT-036', 'P_W': 0.19, 'v_mms': 58, 'E_Jcm2': 3.28, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 1050, 'ssa_m2g': 920, 'id_ig': 0.58, 'method': '4-probe', 'uncertainty': '±11%', 'notes': 'Very low power'},
     {'sample_id': 'LIT-037', 'P_W': 0.21, 'v_mms': 52, 'E_Jcm2': 4.04, 'co_ratio': 3.3, 'precursor': 'PI', 'sigma_Sm': 1250, 'ssa_m2g': 870, 'id_ig': 0.62, 'method': '4-probe', 'uncertainty': '±10%', 'notes': 'Low high SSA'},
-    
+
     # 特殊前驱体
     {'sample_id': 'LIT-038', 'P_W': 0.38, 'v_mms': 27, 'E_Jcm2': 14.07, 'co_ratio': 2.5, 'precursor': 'PET', 'sigma_Sm': 2350, 'ssa_m2g': 660, 'id_ig': 1.18, 'method': '4-probe', 'uncertainty': '±8%', 'notes': 'PET optimized'},
     {'sample_id': 'LIT-039', 'P_W': 0.33, 'v_mms': 31, 'E_Jcm2': 10.65, 'co_ratio': 0.9, 'precursor': 'Bamboo', 'sigma_Sm': 1750, 'ssa_m2g': 1020, 'id_ig': 1.02, 'method': '4-probe', 'uncertainty': '±9%', 'notes': 'Bamboo natural'},

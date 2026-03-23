@@ -14,7 +14,7 @@ def check_similar_tools(new_tool_name, tools_dir="D:/OpenClaw/workspace/30-scrip
     """检查是否有相似的工具"""
     tools = [f.stem for f in Path(tools_dir).glob("*.py")]
     new_base = re.sub(r'_\d+$', '', new_tool_name)  # 移除 _001 后缀
-    
+
     similar = []
     for tool in tools:
         base = re.sub(r'_\d+$', '', tool)
@@ -26,53 +26,53 @@ def check_similar_tools(new_tool_name, tools_dir="D:/OpenClaw/workspace/30-scrip
         # 检查编辑距离
         elif SequenceMatcher(None, base, new_base).ratio() > 0.8:
             similar.append((tool, f"FUZZY ({SequenceMatcher(None, base, new_base).ratio():.0%})"))
-    
+
     return similar
 
 def check_naming_convention(name):
     """检查命名是否符合规范"""
     issues = []
-    
+
     # 检查是否有后缀
     if not re.search(r'_\d+$', name) and name not in ['archive_stock_pro.py', 'release_stock_pro.py']:
         issues.append("Missing _001 suffix")
-    
+
     # 检查是否包含空格
     if ' ' in name:
         issues.append("Contains spaces")
-    
+
     # 检查大小写
     if name != name.lower():
         issues.append("Should be lowercase")
-    
+
     return issues
 
 def suggest_tool_name(base_name, purpose):
     """基于目的推荐工具名"""
     # 标准化名称
     name = base_name.lower().replace(' ', '_')
-    
+
     # 添加 _001 后缀
     if not re.search(r'_\d+$', name):
         name = f"{name}_001"
-    
+
     return name
 
 def main():
     import sys
-    
+
     if len(sys.argv) > 1:
         new_tool = sys.argv[1]
         print(f"Checking: {new_tool}")
         print("-" * 50)
-        
+
         # 检查命名规范
         issues = check_naming_convention(new_tool)
         if issues:
             print("[!] Naming issues:")
             for issue in issues:
                 print(f"    - {issue}")
-        
+
         # 检查相似工具
         similar = check_similar_tools(new_tool)
         if similar:

@@ -32,7 +32,7 @@ def fetch_arxiv_papers(category, max_papers=15):
     """从 arXiv 获取论文"""
     url = f"https://export.arxiv.org/rss/{category}"
     feed = feedparser.parse(url)
-    
+
     papers = []
     for entry in feed.entries[:max_papers]:
         paper = {
@@ -45,28 +45,28 @@ def fetch_arxiv_papers(category, max_papers=15):
             'published': entry.published,
         }
         papers.append(paper)
-    
+
     return papers
 
 def save_materials_paper(paper, date_str):
     """保存材料学论文"""
     date_dir = MATERIALS_DIR / "daily" / date_str[:4] / date_str[:7] / date_str
     date_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # 按领域分类
     domain = paper['categories'][0].split('.')[-1] if '.' in paper['categories'][0] else 'materials'
     domain_dir = date_dir / domain
     domain_dir.mkdir(exist_ok=True)
-    
+
     # 清理 arXiv ID (移除冒号等非法字符)
     safe_id = paper['arxiv_id'].replace(':', '_').replace('v1', '').replace('v2', '')
     # 清理标题 (移除 Windows 文件名非法字符)
     safe_title = paper['title'][:50].replace(':', '-').replace('?', '').replace('/', '-').replace('\\', '-')
-    
+
     # 保存为 Markdown
     filename = f"{safe_id}-{safe_title}.md"
     filepath = domain_dir / filename
-    
+
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(f"---\n")
         f.write(f"arxiv_id: {paper['arxiv_id']}\n")
@@ -81,7 +81,7 @@ def save_materials_paper(paper, date_str):
         f.write(f"**作者:** {', '.join(paper['authors'])}\n\n")
         f.write(f"**类别:** {', '.join(paper['categories'])}\n\n")
         f.write(f"## 摘要\n\n{paper['abstract']}\n\n")
-    
+
     return filepath
 
 def collect_materials():
@@ -89,25 +89,25 @@ def collect_materials():
     print("=" * 60)
     print("Materials Science Collector v1")
     print("=" * 60)
-    
+
     date_str = datetime.now().strftime('%Y-%m-%d')
     print(f"\nDate: {date_str}")
     print(f"Categories: {len(MATERIALS_CATEGORIES)}")
     print("-" * 60)
-    
+
     all_papers = []
     for category in MATERIALS_CATEGORIES:
         print(f"\nFetching {category}...")
         papers = fetch_arxiv_papers(category, MAX_PAPERS_PER_CATEGORY)
         print(f"  Found {len(papers)} papers")
-        
+
         for paper in papers:
             try:
                 save_materials_paper(paper, date_str)
                 all_papers.append(paper)
             except Exception as e:
                 print(f"  [ERROR] {paper['arxiv_id']}: {e}")
-    
+
     print("-" * 60)
     print(f"\n[COMPLETE] Total: {len(all_papers)} papers")
     print(f"Save dir: {MATERIALS_DIR / 'daily' / date_str[:4] / date_str[:7] / date_str}")

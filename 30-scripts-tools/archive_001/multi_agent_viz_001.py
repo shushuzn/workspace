@@ -31,7 +31,7 @@ def generate_ascii():
     """Generate ASCII art visualization"""
     stats = load_stats()
     runs = stats.get("runs", [])
-    
+
     # Count persona usage
     usage = {p: 0 for p in PERSONAS}
     for run in runs:
@@ -39,13 +39,13 @@ def generate_ascii():
         for p in PERSONAS:
             if p in tool.lower():
                 usage[p] += 1
-    
+
     output = []
     output.append("\n" + "="*60)
     output.append("  MULTI-AGENT COLLABORATION STATUS")
     output.append("="*60)
     output.append(f"\n  Updated: {datetime.now().strftime('%H:%M:%S')}\n")
-    
+
     # ASCII persona diagram
     output.append("         [PLANNER]")
     output.append("              ↑↓")
@@ -56,23 +56,23 @@ def generate_ascii():
     output.append("   [LEARNER] [INNOVATOR]")
     output.append("              ↑")
     output.append("      [METACOGNITION]")
-    
+
     # Usage stats
     output.append("\n" + "-"*60)
     output.append("  PERSONA USAGE STATS")
     output.append("-"*60)
-    
+
     max_usage = max(usage.values()) if usage.values() else 1
     for p in PERSONAS:
         bar_len = int(usage[p] / max_usage * 30) if max_usage > 0 else 0
         bar = "█" * bar_len
         pct = (usage[p] / len(runs) * 100) if runs else 0
         output.append(f"  {p.upper():15} {bar:30} {usage[p]:3} ({pct:.1f}%)")
-    
+
     output.append("-"*60)
     output.append(f"  Total Executions: {len(runs)}")
     output.append("="*60 + "\n")
-    
+
     return "\n".join(output)
 
 def generate_json():
@@ -121,7 +121,7 @@ Fixes:
 Generate JSON status"""
     stats = load_stats()
     runs = stats.get("runs", [])
-    
+
     return json.dumps({
         "status": "active",
         "personas": PERSONAS,

@@ -29,33 +29,33 @@ d_mace_dir = d_models_dir / "mace"
 
 if c_mace_cache.exists():
     print(f"  源目录：{c_mace_cache}")
-    
+
     # 创建 D 盘目录
     d_mace_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # 复制所有 MACE 模型文件
     mace_files = list(c_mace_cache.glob("*"))
     if mace_files:
         print(f"  找到 {len(mace_files)} 个文件")
-        
+
         for f in mace_files:
             if f.is_file():
                 dest = d_mace_dir / f.name
                 print(f"  复制：{f.name} ({f.stat().st_size / 1024 / 1024:.1f} MB)")
                 shutil.copy2(f, dest)
-        
+
         print(f"  [OK] MACE 模型已复制到：{d_mace_dir}")
-        
+
         # 创建配置文件
         mace_config = {
             'model_path': str(d_mace_dir / mace_files[0].name),
             'original_cache': str(c_mace_cache),
             'transferred_at': '2026-03-06'
         }
-        
+
         with open(d_mace_dir / "mace_config.json", 'w', encoding='utf-8') as f:
             json.dump(mace_config, f, indent=2, ensure_ascii=False)
-        
+
         print(f"  [OK] 配置文件已保存：{d_mace_dir / 'mace_config.json'}")
     else:
         print(f"  [WARN] C 盘 MACE 缓存为空")
@@ -73,15 +73,15 @@ d_chgnet_dir = d_models_dir / "chgnet"
 
 if c_chgnet_cache.exists():
     print(f"  源目录：{c_chgnet_cache}")
-    
+
     # 创建 D 盘目录
     d_chgnet_dir.mkdir(parents=True, exist_ok=True)
-    
+
     # 复制所有 CHGNet 模型文件
     chgnet_files = list(c_chgnet_cache.glob("**/*"))
     if chgnet_files:
         print(f"  找到 {len(chgnet_files)} 个文件")
-        
+
         for f in chgnet_files:
             if f.is_file():
                 rel_path = f.relative_to(c_chgnet_cache)
@@ -89,7 +89,7 @@ if c_chgnet_cache.exists():
                 dest.parent.mkdir(parents=True, exist_ok=True)
                 print(f"  复制：{rel_path} ({f.stat().st_size / 1024 / 1024:.1f} MB)")
                 shutil.copy2(f, dest)
-        
+
         print(f"  [OK] CHGNet 模型已复制到：{d_chgnet_dir}")
     else:
         print(f"  [WARN] C 盘 CHGNet 缓存为空")

@@ -79,41 +79,41 @@ class BenchmarkResult:
 
 class TestFrameworkEnhancer:
     """Automated testing system"""
-    
+
     def __init__(self):
         self.test_dir = WORKSPACE / "30-scripts-tools" / "tests"
         self.test_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.results_dir = WORKSPACE / "20-data-reports" / "test-results"
         self.results_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.results_file = self.results_dir / "test_results.json"
         self.coverage_file = self.results_dir / "coverage_results.json"
         self.benchmark_file = self.results_dir / "benchmark_results.json"
-        
+
         self.results = []
         self.coverage_results = []
         self.benchmark_results = []
-        
+
         self.load_state()
-    
+
     def load_state(self):
         """Load test state"""
         if self.results_file.exists():
             with open(self.results_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 self.results = data.get('results', [])
-        
+
         if self.coverage_file.exists():
             with open(self.coverage_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 self.coverage_results = data.get('results', [])
-        
+
         if self.benchmark_file.exists():
             with open(self.benchmark_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
                 self.benchmark_results = data.get('results', [])
-    
+
     def save_state(self):
         """Save test state"""
         with open(self.results_file, 'w', encoding='utf-8') as f:
@@ -121,44 +121,44 @@ class TestFrameworkEnhancer:
                 'results': self.results[-100:],
                 'last_updated': datetime.now().isoformat()
             }, f, indent=2, ensure_ascii=False)
-        
+
         with open(self.coverage_file, 'w', encoding='utf-8') as f:
             json.dump({
                 'results': self.coverage_results,
                 'last_updated': datetime.now().isoformat()
             }, f, indent=2, ensure_ascii=False)
-        
+
         with open(self.benchmark_file, 'w', encoding='utf-8') as f:
             json.dump({
                 'results': self.benchmark_results,
                 'last_updated': datetime.now().isoformat()
             }, f, indent=2, ensure_ascii=False)
-    
+
     def generate_tests(self, target_dir: Path = None) -> int:
         """Generate test files for existing tools"""
         print("\n" + "="*60)
         print(" Generating Tests")
         print("="*60 + "\n")
-        
+
         if target_dir is None:
             target_dir = WORKSPACE / "30-scripts-tools"
-        
+
         tests_generated = 0
-        
+
         # Find Python files without tests
         for py_file in target_dir.glob("*.py"):
             if py_file.name.startswith('test_') or py_file.name.startswith('_'):
                 continue
-            
+
             test_file = self.test_dir / f"test_{py_file.name}"
-            
+
             if test_file.exists():
                 print(f"  ⏭️  {test_file.name} (exists)")
                 continue
-            
+
             # Generate test file
             module_name = py_file.stem
-            
+
             test_content = f'''#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
@@ -215,35 +215,35 @@ class Test{module_name.title().replace("_", "")}(unittest.TestCase):
 if __name__ == '__main__':
     unittest.main()
 '''
-            
+
             with open(test_file, 'w', encoding='utf-8') as f:
                 f.write(test_content)
-            
+
             tests_generated += 1
             print(f"  ✅ {test_file.name}")
-        
+
         print(f"\n✅ Generated {tests_generated} test files\n")
-        
+
         return tests_generated
-    
+
     def run_tests(self, test_pattern: str = "test_*.py") -> Dict:
         """Run all tests"""
         print("\n" + "="*60)
         print(" Running Tests")
         print("="*60 + "\n")
-        
+
         # Discover tests
         loader = unittest.TestLoader()
         suite = unittest.TestSuite()
-        
+
         test_files = list(self.test_dir.glob(test_pattern))
-        
+
         if not test_files:
             print("⚠️  No test files found")
             return {'tests': 0, 'passed': 0, 'failed': 0, 'errors': 0}
-        
+
         print(f"Found {len(test_files)} test files\n")
-        
+
         # Load tests
         for test_file in test_files:
             try:
@@ -253,24 +253,24 @@ if __name__ == '__main__':
                 suite.addTests(tests)
             except Exception as e:
                 print(f"  ⚠️  Failed to load {test_file.name}: {e}")
-        
+
         # Run tests
         runner = unittest.TextTestRunner(verbosity=2)
-        
+
         # Capture output
         output = io.StringIO()
         with redirect_stdout(output):
             result = runner.run(suite)
-        
+
         # Process results
         tests_run = result.testsRun
         failures = len(result.failures)
         errors = len(result.errors)
         skipped = len(result.skipped)
         passed = tests_run - failures - errors - skipped
-        
+
         success_rate = (passed / tests_run * 100) if tests_run > 0 else 0
-        
+
         print(f"\n{'='*60}")
         print(" Test Results")
         print(f"{'='*60}")
@@ -281,7 +281,7 @@ if __name__ == '__main__':
         print(f"  Skipped: {skipped}")
         print(f"  Success Rate: {success_rate:.1f}%")
         print(f"{'='*60}\n")
-        
+
         # Record results
         test_result = {
             'timestamp': datetime.now().isoformat(),
@@ -292,58 +292,58 @@ if __name__ == '__main__':
             'skipped': skipped,
             'success_rate': round(success_rate, 1)
         }
-        
+
         self.results.append(test_result)
         self.save_state()
-        
+
         return test_result
-    
+
     def analyze_coverage(self, target_dir: Path = None) -> List[CoverageResult]:
         """Analyze code coverage"""
         print("\n" + "="*60)
         print(" Analyzing Coverage")
         print("="*60 + "\n")
-        
+
         if not COVERAGE_AVAILABLE:
             print("⚠️  Coverage module not available")
             print("Install: pip install coverage\n")
             return []
-        
+
         if target_dir is None:
             target_dir = WORKSPACE / "30-scripts-tools"
-        
+
         # Run coverage
         cov = coverage.Coverage()
         cov.start()
-        
+
         # Import modules
         for py_file in target_dir.glob("*.py"):
             if py_file.name.startswith('test_') or py_file.name.startswith('_'):
                 continue
-            
+
             try:
                 module_name = py_file.stem
                 spec = __import__(module_name)
             except:
                 pass
-        
+
         cov.stop()
-        
+
         # Analyze
         results = []
-        
+
         for py_file in target_dir.glob("*.py"):
             if py_file.name.startswith('test_') or py_file.name.startswith('_'):
                 continue
-            
+
             try:
                 analysis = cov.analysis(str(py_file))
                 total = len(analysis[0])
                 executed = len(analysis[1])
                 missing = analysis[2]
-                
+
                 coverage_pct = (executed / total * 100) if total > 0 else 0
-                
+
                 result = CoverageResult(
                     file=str(py_file.relative_to(WORKSPACE)),
                     total_lines=total,
@@ -351,21 +351,21 @@ if __name__ == '__main__':
                     coverage_percent=round(coverage_pct, 1),
                     missing_lines=[int(m) for m in missing[:20]]  # First 20 missing
                 )
-                
+
                 results.append(result)
-                
+
                 icon = "✅" if coverage_pct >= 80 else "⚠️" if coverage_pct >= 50 else "❌"
                 print(f"  {icon} {py_file.name}: {coverage_pct:.1f}%")
-            
+
             except Exception as e:
                 pass
-        
+
         self.coverage_results = [asdict(r) for r in results]
         self.save_state()
-        
+
         # Summary
         avg_coverage = sum(r.coverage_percent for r in results) / len(results) if results else 0
-        
+
         print(f"\n{'='*60}")
         print(" Coverage Summary")
         print(f"{'='*60}")
@@ -374,41 +374,41 @@ if __name__ == '__main__':
         print(f"  Files ≥80%: {sum(1 for r in results if r.coverage_percent >= 80)}")
         print(f"  Files <50%: {sum(1 for r in results if r.coverage_percent < 50)}")
         print(f"{'='*60}\n")
-        
+
         return results
-    
+
     def run_benchmark(self, function: Callable, iterations: int = 100) -> BenchmarkResult:
         """Run performance benchmark"""
         print(f"\n📊 Benchmarking {function.__name__}...")
-        
+
         times = []
-        
+
         # Warm up
         for _ in range(10):
             function()
-        
+
         # Measure
         profiler = cProfile.Profile()
         profiler.enable()
-        
+
         for i in range(iterations):
             start = time.perf_counter()
             function()
             end = time.perf_counter()
             times.append(end - start)
-        
+
         profiler.disable()
-        
+
         # Calculate stats
         total_time = sum(times)
         avg_time = total_time / len(times)
         min_time = min(times)
         max_time = max(times)
-        
+
         # Memory (approximate)
         stats = pstats.Stats(profiler)
         memory_usage = stats.total_tt * 1024 * 1024  # Rough estimate
-        
+
         result = BenchmarkResult(
             function=function.__name__,
             calls=iterations,
@@ -418,27 +418,27 @@ if __name__ == '__main__':
             max_time=round(max_time * 1000, 3),  # ms
             memory_usage=round(memory_usage, 2)
         )
-        
+
         self.benchmark_results.append(asdict(result))
         self.save_state()
-        
+
         print(f"  Calls: {iterations}")
         print(f"  Total: {total_time:.3f}s")
         print(f"  Average: {avg_time * 1000:.3f}ms")
         print(f"  Min: {min_time * 1000:.3f}ms")
         print(f"  Max: {max_time * 1000:.3f}ms")
-        
+
         return result
-    
+
     def generate_report(self) -> str:
         """Generate test report"""
         timestamp = datetime.now().strftime('%Y%m%d_%H%M%S')
         report_file = self.results_dir / f"test_report_{timestamp}.md"
-        
+
         # Get latest results
         latest_result = self.results[-1] if self.results else None
         avg_coverage = sum(r['coverage_percent'] for r in self.coverage_results) / len(self.coverage_results) if self.coverage_results else 0
-        
+
         report = f"""# Test Report
 
 **Generated:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
@@ -453,45 +453,45 @@ if __name__ == '__main__':
 ## Recent Results
 
 """
-        
+
         for result in self.results[-10:][::-1]:
             icon = "✅" if result['success_rate'] >= 90 else "⚠️" if result['success_rate'] >= 70 else "❌"
             report += f"- {icon} {result['timestamp'][:19]}: {result['passed']}/{result['total']} ({result['success_rate']}%)\n"
-        
+
         report += f"""
 ## Coverage by File
 
 | File | Coverage | Status |
 |------|----------|--------|
 """
-        
+
         for cov in self.coverage_results[:20]:
             status = "✅" if cov['coverage_percent'] >= 80 else "⚠️" if cov['coverage_percent'] >= 50 else "❌"
             report += f"| {Path(cov['file']).name} | {cov['coverage_percent']}% | {status} |\n"
-        
+
         report += f"""
 ## Benchmarks
 
 | Function | Avg Time | Calls | Total |
 |----------|----------|-------|-------|
 """
-        
+
         for bench in self.benchmark_results[-10:]:
             report += f"| {bench['function']} | {bench['avg_time']}ms | {bench['calls']} | {bench['total_time']}s |\n"
-        
+
         report += f"""
 ---
 
 *Report generated by Test Framework Enhancer v1.0*
 """
-        
+
         with open(report_file, 'w', encoding='utf-8') as f:
             f.write(report)
-        
+
         print(f"\n✅ Report saved: {report_file}")
-        
+
         return report
-    
+
     def get_statistics(self) -> Dict:
         """Get test statistics"""
         return {
@@ -505,7 +505,7 @@ if __name__ == '__main__':
 
 def main():
     import argparse
-    
+
     parser = argparse.ArgumentParser(description='Test Framework Enhancer')
     parser.add_argument('--generate', action='store_true', help='Generate tests')
     parser.add_argument('--run', action='store_true', help='Run tests')
@@ -514,32 +514,32 @@ def main():
     parser.add_argument('--report', action='store_true', help='Generate report')
     parser.add_argument('--stats', action='store_true', help='Show statistics')
     args = parser.parse_args()
-    
+
     enhancer = TestFrameworkEnhancer()
-    
+
     if args.generate:
         enhancer.generate_tests()
-    
+
     elif args.run:
         enhancer.run_tests()
-    
+
     elif args.coverage:
         enhancer.analyze_coverage()
-    
+
     elif args.benchmark:
         # Example benchmark
         def example_func():
             sum(range(1000))
-        
+
         enhancer.run_benchmark(example_func)
-    
+
     elif args.report:
         enhancer.generate_report()
-    
+
     elif args.stats:
         stats = enhancer.get_statistics()
         print(json.dumps(stats, indent=2))
-    
+
     else:
         parser.print_help()
 

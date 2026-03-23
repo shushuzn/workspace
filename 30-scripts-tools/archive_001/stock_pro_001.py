@@ -79,14 +79,14 @@ def get_quote(symbol: str) -> Optional[StockQuote]:
         req = urllib.request.Request(url, headers=headers)
         with urllib.request.urlopen(req, timeout=15) as resp:
             data = json.loads(resp.read().decode())
-        
+
         meta = data["chart"]["result"][0]["meta"]
-        
+
         price = meta.get("regularMarketPrice", 0) or 0
         market_cap = meta.get("marketCap", 0) or 0
         pe_ratio = meta.get("trailingPE", 0) or 0
         eps = meta.get("trailingEps", 0) or 0
-        
+
         # 典型股本估算
         known_shares = {
             "AAPL": 15.3e9, "MSFT": 7.43e9, "GOOGL": 12.8e9,
@@ -94,13 +94,13 @@ def get_quote(symbol: str) -> Optional[StockQuote]:
             "TSLA": 3.2e9, "AMD": 1.62e9, "INTC": 4.2e9,
             "A": 2e9, "BABA": 20e9, "NFLX": 4.3e9
         }
-        
+
         # 行业PE中位数
         sector_pe = {
             "AAPL": 30, "MSFT": 35, "NVDA": 65, "TSLA": 50, "AMD": 40,
             "META": 30, "GOOGL": 28, "AMZN": 45, "NFLX": 35
         }
-        
+
         # 52周历史数据
         week52_data = {
             "AAPL": (260.10, 164.08), "MSFT": (430.82, 344.79),
@@ -108,25 +108,25 @@ def get_quote(symbol: str) -> Optional[StockQuote]:
             "AMD": (227.30, 93.12), "META": (531.49, 279.40),
             "GOOGL": (191.75, 125.61), "AMZN": (225.40, 118.35)
         }
-        
+
         # 股息率估算
         dividend_yields = {
             "AAPL": 0.48, "MSFT": 0.72, "NVDA": 0.03, "TSLA": 0,
             "META": 0.35, "GOOGL": 0, "AMZN": 0, "AMD": 0
         }
-        
+
         shares = known_shares.get(symbol.upper(), 1e9)
         if market_cap == 0 and price > 0:
             market_cap = price * shares
-        
+
         if pe_ratio == 0:
             pe_ratio = sector_pe.get(symbol.upper(), 25)
-        
+
         if eps == 0:
             eps = meta.get("earningsPerShare", 0) or (price / pe_ratio)
-        
+
         high_52, low_52 = week52_data.get(symbol.upper(), (price * 1.2, price * 0.8))
-        
+
         quote = StockQuote(
             symbol=symbol.upper(),
             price=price,
@@ -152,35 +152,35 @@ def get_quote(symbol: str) -> Optional[StockQuote]:
 
 def calculate_target_price(quote: StockQuote, growth_rate: float = None, pe_target: float = None) -> ValuationResult:
     """计算目标价 - 基于EPS的合理估值"""
-    
+
     # 根据不同股票类型设置不同参数
     high_growth = ["NVDA", "AMD", "TSLA", "META", "AMZN"]
     medium_growth = ["MSFT", "GOOGL"]
-    
+
     if growth_rate is None:
         growth_rate = 0.15 if quote.symbol in high_growth else 0.08
     if pe_target is None:
         pe_target = 50 if quote.symbol in high_growth else 35
-    
+
     # 当前EPS已经是annual
     eps_current = quote.eps if quote.eps > 0 else (quote.price / (quote.pe_ratio or 30))
-    
+
     # 预测未来12个月EPS
     eps_future = eps_current * (1 + growth_rate)
-    
+
     # PE估值法：未来EPS * 目标PE
     pe_valuation = eps_future * pe_target
-    
+
     # PEG相对估值: 考虑增长
     peg_adjusted_pe = pe_target * (1 - growth_rate * 0.5)
     peg_valuation = eps_future * peg_adjusted_pe
-    
+
     # 综合估值：PE法70% + PEG法30%
     target = pe_valuation * 0.7 + peg_valuation * 0.3
-    
+
     # 上涨空间
     upside = (target - quote.price) / quote.price * 100
-    
+
     # 评级
     if upside > 25:
         rating = "STRONG_BUY"
@@ -190,7 +190,7 @@ def calculate_target_price(quote: StockQuote, growth_rate: float = None, pe_targ
         rating = "HOLD"
     else:
         rating = "SELL"
-    
+
     return ValuationResult(
         pe_current=quote.pe_ratio,
         pe_target=pe_target,
@@ -209,7 +209,7 @@ def technical_analysis(quote: StockQuote) -> Dict[str, Any]:
     """技术分析"""
     pos = (quote.price - quote.week52_low) / (quote.week52_high - quote.week52_low) * 100
     dist_high = (quote.price / quote.week52_high - 1) * 100
-    
+
     # 根据52周位置判断趋势
     if pos > 80:
         trend = "STRONG_UP"
@@ -219,7 +219,7 @@ def technical_analysis(quote: StockQuote) -> Dict[str, Any]:
         trend = "DOWN"
     else:
         trend = "STRONG_DOWN"
-    
+
     return {
         "week52_position": round(pos, 1),
         "dist_from_high": round(dist_high, 1),
@@ -237,12 +237,12 @@ def generate_report(report: AnalysisReport) -> str:
     q = report.quote
     v = report.valuation
     t = report.technical
-    
+
     icons = {"STRONG_BUY": "🟢🟢🟢", "BUY": "🟢🟢", "HOLD": "🟡", "SELL": "🔴"}
     icon = icons.get(v.rating, "⚪")
-    
+
     risks_md = "\n".join([f"{i}. {r}" for i, r in enumerate(report.risks, 1)])
-    
+
     md = f"""# {q.symbol} 投资研报
 
 **生成时间:** {datetime.now().strftime('%Y-%m-%d %H:%M')}  

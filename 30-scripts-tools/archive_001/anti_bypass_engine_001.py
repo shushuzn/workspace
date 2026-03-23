@@ -27,17 +27,17 @@ PENALTY_FILE = Path("30-scripts-tools/penalty_state.json")
 
 class AntiBypassEngine:
     """反绕过引擎 - 防护 v6"""
-    
+
     def __init__(self):
         self.session_id = self._get_session_id()
-    
+
     def _get_session_id(self):
         if not STATE_FILE.exists():
             return None
         with open(STATE_FILE, "r", encoding="utf-8") as f:
             state = json.load(f)
         return state.get("session_id")
-    
+
     def detect_bypass_attempts(self) -> dict:
         """检测绕过尝试"""
         results = {
@@ -50,7 +50,7 @@ class AntiBypassEngine:
             "bypass_detected": False,
             "violations": []
         }
-        
+
         # 检查是否有绕过
         if any([
             results["git_no_verify"]["detected"],
@@ -60,14 +60,14 @@ class AntiBypassEngine:
         ]):
             results["bypass_detected"] = True
             self._handle_bypass(results)
-        
+
         return results
-    
+
     def _detect_git_no_verify(self) -> dict:
         """检测 Git --no-verify 绕过"""
         detected = False
         evidence = []
-        
+
         # 检查 git 日志中是否有 --no-verify
         try:
             result = subprocess.run(
@@ -77,7 +77,7 @@ class AntiBypassEngine:
                 text=True,
                 timeout=30
             )
-            
+
             # 简单启发式：检查是否有可疑的 commit
             # 实际应该检查 reflog
             if "--no-verify" in result.stdout:
@@ -85,17 +85,17 @@ class AntiBypassEngine:
                 evidence.append("Git 日志中发现 --no-verify 使用痕迹")
         except (Exception,):
             pass
-        
+
         return {
             "detected": detected,
             "evidence": evidence
         }
-    
+
     def _detect_direct_file_mod(self) -> dict:
         """检测直接文件修改"""
         detected = False
         evidence = []
-        
+
         # 检查关键文件的修改时间
         critical_files = [
             STATE_FILE,
@@ -103,19 +103,19 @@ class AntiBypassEngine:
             Path("30-scripts-tools/tool_call_log.jsonl"),
             Path("30-scripts-tools/penalty_state.json"),
         ]
-        
+
         for file_path in critical_files:
             if not file_path.exists():
                 continue
-            
+
             # 检查修改时间是否异常（如在非会话时间修改）
             mtime = datetime.fromtimestamp(file_path.stat().st_mtime)
-            
+
             # 如果有 session，检查是否在 session 时间内
             if self.session_id and STATE_FILE.exists():
                 with open(STATE_FILE, "r", encoding="utf-8") as f:
                     state = json.load(f)
-                
+
                 started_at = state.get("started_at", "")
                 if started_at:
                     try:
@@ -126,56 +126,56 @@ class AntiBypassEngine:
                         # 这里可以添加更复杂的逻辑
                     except (Exception,):
                         pass
-        
+
         return {
             "detected": detected,
             "evidence": evidence
         }
-    
+
     def _detect_session_forgery(self) -> dict:
         """检测会话伪造"""
         detected = False
         evidence = []
-        
+
         if not STATE_FILE.exists():
             return {"detected": False, "evidence": []}
-        
+
         with open(STATE_FILE, "r", encoding="utf-8") as f:
             state = json.load(f)
-        
+
         # 检查 session_id 格式
         session_id = state.get("session_id", "")
         if not session_id.startswith("session-"):
             detected = True
             evidence.append(f"session_id 格式错误：{session_id}")
-        
+
         # 检查是否通过 copaw_entry.py 创建
         if state.get("entry_point") != "copaw_entry.py":
             detected = True
             evidence.append(f"入口点错误：{state.get('entry_point')}")
-        
+
         # 检查 mandatory_execution 标志
         if not state.get("mandatory_execution"):
             detected = True
             evidence.append("mandatory_execution 未启用")
-        
+
         return {
             "detected": detected,
             "evidence": evidence
         }
-    
+
     def _detect_log_tampering(self) -> dict:
         """检测日志篡改"""
         detected = False
         evidence = []
-        
+
         log_file = Path("30-scripts-tools/tool_call_log.jsonl")
         if not log_file.exists():
             return {"detected": False, "evidence": []}
-        
+
         with open(log_file, "r", encoding="utf-8") as f:
             lines = f.readlines()
-        
+
         # 检查日志行是否连续
         timestamps = []
         for i, line in enumerate(lines):
@@ -187,23 +187,23 @@ class AntiBypassEngine:
             except (json.JSONDecodeError, IOError, OSError):
                 detected = True
                 evidence.append(f"第 {i+1} 行日志格式错误")
-        
+
         # 检查时间是否连续
         if len(timestamps) >= 2:
             for i in range(1, len(timestamps)):
                 prev_idx, prev_ts = timestamps[i-1]
                 curr_idx, curr_ts = timestamps[i]
-                
+
                 diff = (curr_ts - prev_ts).total_seconds()
                 if diff < -60:  # 时间倒流 >1 分钟
                     detected = True
                     evidence.append(f"日志时间倒流：行 {prev_idx+1} -> {curr_idx+1}")
-        
+
         return {
             "detected": detected,
             "evidence": evidence
         }
-    
+
     def _handle_bypass(self, results: dict) -> None:
         """处理绕过行为"""
         # 记录违规
@@ -215,17 +215,17 @@ class AntiBypassEngine:
             "action": "BLOCKED_AND_PENALIZED",
             "penalty_points": 50
         }
-        
+
         with open(VIOLATION_LOG, "a", encoding="utf-8") as f:
             f.write(json.dumps(violation, ensure_ascii=False) + "\n")
-        
+
         # 增加惩罚分
         self._add_penalty(50)
-        
+
         # 如果严重，触发自动停止
         if self._should_auto_stop():
             self._trigger_auto_stop("bypass_detected")
-    
+
     def _add_penalty(self, points: int) -> None:
         """
 # ==============================================================================
@@ -271,18 +271,18 @@ Fixes:
 
 增加惩罚分"""
         penalty = {"current_level": 0, "total_points": 0, "violations": []}
-        
+
         if PENALTY_FILE.exists():
             with open(PENALTY_FILE, "r", encoding="utf-8") as f:
                 penalty = json.load(f)
-        
+
         penalty["total_points"] += points
         penalty["violations"].append({
             "timestamp": datetime.now().isoformat(),
             "points": points,
             "reason": "bypass_attempt"
         })
-        
+
         # 计算等级
         if penalty["total_points"] >= 50:
             penalty["current_level"] = 4
@@ -292,10 +292,10 @@ Fixes:
             penalty["current_level"] = 2
         elif penalty["total_points"] >= 10:
             penalty["current_level"] = 1
-        
+
         with open(PENALTY_FILE, "w", encoding="utf-8") as f:
             json.dump(penalty, f, ensure_ascii=False, indent=2)
-    
+
     def _should_auto_stop(self) -> bool:
         """是否应该自动停止"""
         if not PENALTY_FILE.exists():

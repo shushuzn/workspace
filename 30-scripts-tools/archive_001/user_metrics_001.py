@@ -61,7 +61,7 @@ def load_metrics():
             return json.loads(METRICS_FILE.read_text(encoding="utf-8"))
         except Exception:
             pass
-    
+
     return {
         "user_id": "default",
         "created_at": datetime.now().isoformat(),
@@ -82,7 +82,7 @@ def save_metrics(data):
 def track_session(session_data):
     """追踪单个会话的表现数据"""
     metrics = load_metrics()
-    
+
     session_record = {
         "session_id": session_data.get("session_id", "unknown"),
         "timestamp": datetime.now().isoformat(),
@@ -92,12 +92,12 @@ def track_session(session_data):
         "errors": session_data.get("errors", 0),
         "tool_count": session_data.get("tool_count", 0),
     }
-    
+
     metrics["session_history"].append(session_record)
     metrics["total_sessions"] += 1
-    
+
     recent = metrics["session_history"][-10:]
-    
+
     # 注意力指标
     if recent:
         times = [s.get("duration", 0) / max(1, s.get("steps_completed", 1)) for s in recent]
@@ -105,20 +105,20 @@ def track_session(session_data):
         metrics["metrics"]["attention"]["attention_shifts"] = len(recent)
         variance = sum((t - metrics["metrics"]["attention"]["avg_response_time"])**2 for t in times) / len(times)
         metrics["metrics"]["attention"]["focus_score"] = max(0, 100 - variance * 10)
-    
+
     # 记忆指标
     if recent:
         rates = [s.get("steps_completed", 0) / max(1, s.get("duration", 1)) for s in recent]
         metrics["metrics"]["memory"]["info_retention_rate"] = sum(rates) / len(rates) * 100
-        metrics["metrics"]["memory"]["working_memory_load"] = min(100, 
+        metrics["metrics"]["memory"]["working_memory_load"] = min(100,
             len(set(s.get("workflow_id", "") for s in recent)) * 10)
-    
+
     # 执行功能
     if recent:
         errors = sum(s.get("errors", 0) for s in recent)
         steps = sum(s.get("steps_completed", 0) for s in recent)
         metrics["metrics"]["executive"]["task_completion_rate"] = (steps - errors) / max(1, steps) * 100
-    
+
     # 训练迁移 (论文核心发现)
     if len(recent) >= 3:
         first = recent[:len(recent)//3]
@@ -130,7 +130,7 @@ def track_session(session_data):
         metrics["metrics"]["transfer"]["skill_retention"] = max(0, min(100, 80 + improvement * 0.5))
         metrics["metrics"]["transfer"]["generalization_score"] = min(100, improvement * 2)
         metrics["metrics"]["transfer"]["learning_velocity"] = improvement / len(recent)
-    
+
     save_metrics(metrics)
     return metrics["metrics"]
 
@@ -138,27 +138,27 @@ def track_session(session_data):
 def analyze_performance():
     """分析用户整体表现"""
     metrics = load_metrics()
-    
+
     print("=" * 60)
     print("USER PERFORMANCE REPORT")
     print("=" * 60)
     print(f"Total Sessions: {metrics['total_sessions']}")
     print("-" * 60)
-    
+
     att = metrics["metrics"]["attention"]
     print("\n[ATTENTION]")
     print(f"  Avg Response: {att['avg_response_time']:.2f}s")
     print(f"  Focus Score: {att['focus_score']:.1f}/100")
-    
+
     mem = metrics["metrics"]["memory"]
     print("\n[MEMORY]")
     print(f"  Retention: {mem['info_retention_rate']:.1f}%")
     print(f"  WM Load: {mem['working_memory_load']:.1f}%")
-    
+
     exe = metrics["metrics"]["executive"]
     print("\n[EXECUTIVE]")
     print(f"  Completion Rate: {exe['task_completion_rate']:.1f}%")
-    
+
     tra = metrics["metrics"]["transfer"]
     print("\n[TRANSFER LEARNING]")
     print(f"  Cross-Task Improvement: {tra['cross_task_improvement']:.1f}%")
@@ -169,13 +169,13 @@ def analyze_performance():
 
 def main():
     import sys
-    
+
     if len(sys.argv) < 2:
         print("USER-METRICS-001 Usage:")
         print("  py user_metrics_001.py --analyze")
         print("  py user_metrics_001.py --track <workflow_id> <duration> <steps>")
         return
-    
+
     if sys.argv[1] == "--analyze":
         analyze_performance()
     elif sys.argv[1] == "--track" and len(sys.argv) >= 5:

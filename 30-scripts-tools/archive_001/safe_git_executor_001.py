@@ -73,7 +73,7 @@ Fixes:
 
 检查 session 存在"""
     state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
-    
+
     if not state_file.exists():
         print("=" * 70, file=sys.stderr)
         print("[BLOCK] Git 命令被拒绝", file=sys.stderr)
@@ -81,7 +81,7 @@ Fixes:
         print("[BLOCK] 请先运行：py 30-scripts-tools/copaw_entry.py <task>", file=sys.stderr)
         print("=" * 70, file=sys.stderr)
         sys.exit(1)
-    
+
     try:
         import json
         with open(state_file, 'r', encoding='utf-8') as f:
@@ -100,7 +100,7 @@ logging.basicConfig(level=logging.INFO)
 def main():
     # 检查 session
     check_session()
-    
+
     # 检查禁止的参数
     for arg in sys.argv[1:]:
         if arg in FORBIDDEN_ARGS:
@@ -110,10 +110,10 @@ def main():
             print("[BLOCK] 不允许绕过 pre-commit hook", file=sys.stderr)
             print("=" * 70, file=sys.stderr)
             sys.exit(1)
-    
+
     # 构建 git 命令
     git_cmd = ['git'] + sys.argv[1:]
-    
+
     # 执行
     try:
         result = subprocess.run(

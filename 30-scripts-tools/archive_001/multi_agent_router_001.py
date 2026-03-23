@@ -33,12 +33,12 @@ def analyze_intent(text):
     """Analyze user intent and return best persona match"""
     text_lower = text.lower()
     scores = {p: 0 for p in ROUTING}
-    
+
     for persona, keywords in ROUTING.items():
         for kw in keywords:
             if kw.lower() in text_lower:
                 scores[persona] += 1
-    
+
     # Return highest scoring persona
     best = max(scores.items(), key=lambda x: x[1])
     if best[1] == 0:
@@ -48,7 +48,7 @@ def analyze_intent(text):
 def route_task(task_text, options=None):
     """Route a task and return execution plan"""
     persona = analyze_intent(task_text)
-    
+
     # Build execution plan
     plan = {
         "task": task_text,
@@ -62,7 +62,7 @@ def route_task(task_text, options=None):
         ],
         "confidence": 0.8
     }
-    
+
     return plan
 
 def run_cli():
@@ -116,10 +116,10 @@ CLI interface"""
         print('  python multi_agent_router_001.py "分析股票趋势"')
         print('  python multi_agent_router_001.py "设计新功能"')
         return
-    
+
     task = " ".join(sys.argv[1:])
     result = route_task(task)
-    
+
     print(f"\n🔀 Task Router Result")
     print(f"{'='*50}")
     print(f"Task: {result['task']}")

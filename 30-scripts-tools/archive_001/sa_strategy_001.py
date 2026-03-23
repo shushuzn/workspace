@@ -79,22 +79,22 @@ STRATEGIES = {
 
 class StrategyEngine:
     """策略推荐引擎"""
-    
+
     def __init__(self):
         self.strategy_dir = STRATEGY_DIR
         self.config = self._load_config()
-        
+
         self.strategy_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.history_file = self.strategy_dir / "recommendation_history.json"
         self.strategies = STRATEGIES
-    
+
     def _load_config(self) -> dict:
         default = {
             "default_strategy": "moderate",
             "risk_tolerance": "moderate"
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -102,11 +102,11 @@ class StrategyEngine:
             except (Exception,):
                 return default
         return default
-    
+
     def _assess_risk(self, profile: dict) -> str:
         """评估风险等级"""
         risk_score = 0
-        
+
         # 年龄因素
         age = profile.get("age", 35)
         if age < 30:
@@ -117,7 +117,7 @@ class StrategyEngine:
             risk_score += 1
         else:
             risk_score += 0
-        
+
         # 投资经验
         exp = profile.get("experience", 3)
         if exp > 10:
@@ -126,7 +126,7 @@ class StrategyEngine:
             risk_score += 2
         else:
             risk_score += 1
-        
+
         # 风险偏好
         pref = profile.get("risk_preference", "moderate")
         if pref == "aggressive":
@@ -135,7 +135,7 @@ class StrategyEngine:
             risk_score += 1
         else:
             risk_score += 0
-        
+
         # 确定风险等级
         if risk_score >= 7:
             return "aggressive"
@@ -143,15 +143,15 @@ class StrategyEngine:
             return "moderate"
         else:
             return "conservative"
-    
+
     def recommend(self, profile: dict) -> dict:
         """推荐策略"""
         # 评估风险
         risk_level = self._assess_risk(profile)
-        
+
         # 获取推荐策略
         strategy = STRATEGIES.get(risk_level, STRATEGIES["moderate"])
-        
+
         result = {
             "timestamp": datetime.now().isoformat(),
             "risk_assessment": risk_level,
@@ -168,12 +168,12 @@ class StrategyEngine:
             },
             "alternatives": self._get_alternatives(risk_level)
         }
-        
+
         # 保存
         self._save_recommendation(result)
-        
+
         return result
-    
+
     def _get_alternatives(self, risk_level: str) -> list:
         """获取备选策略"""
         alternatives = []
@@ -186,7 +186,7 @@ class StrategyEngine:
                     "expected_return": strat["expected_return"]
                 })
         return alternatives[:2]
-    
+
     def _save_recommendation(self, result: dict):
         """
 # ==============================================================================
@@ -238,18 +238,18 @@ Fixes:
                     history = json.load(f)
             except (Exception,):
                 pass
-        
+
         history.append({
             "risk_assessment": result["risk_assessment"],
             "strategy": result["recommended_strategy"]["type"],
             "timestamp": result["timestamp"]
         })
-        
+
         history = history[-50:]
-        
+
         with open(self.history_file, "w", encoding="utf-8") as f:
             json.dump(history, f, ensure_ascii=False, indent=2)
-    
+
     def compare(self, strategies: list) -> dict:
         """比较策略"""
         comparison = []

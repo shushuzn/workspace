@@ -38,35 +38,35 @@ SUBSCRIPTIONS_FILE = EVENT_BUS_DIR / "subscriptions.json"
 
 class EventBus:
     """工具间事件总线"""
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         EVENT_BUS_DIR.mkdir(parents=True, exist_ok=True)
-        
+
         self._ensure_files()
-    
+
     def _ensure_files(self):
         if not EVENT_LOG.exists():
             EVENT_LOG.write_text(json.dumps({"events": []}, ensure_ascii=False, indent=2))
         if not SUBSCRIPTIONS_FILE.exists():
             SUBSCRIPTIONS_FILE.write_text(json.dumps({"subscriptions": {}}, ensure_ascii=False, indent=2))
-    
+
     def _load_events(self) -> dict:
         return json.loads(EVENT_LOG.read_text(encoding="utf-8"))
-    
+
     def _save_events(self, data: dict):
         EVENT_LOG.write_text(json.dumps(data, ensure_ascii=False, indent=2))
-    
+
     def _load_subscriptions(self) -> dict:
         return json.loads(SUBSCRIPTIONS_FILE.read_text(encoding="utf-8"))
-    
+
     def _save_subscriptions(self, data: dict):
         SUBSCRIPTIONS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2))
-    
+
     def publish(self, event_type: str, data: dict = None) -> Dict:
         """发布事件"""
         events_data = self._load_events()
-        
+
         event = {
             "id": len(events_data["events"]) + 1,
             "type": event_type,
@@ -74,45 +74,45 @@ class EventBus:
             "timestamp": datetime.now().isoformat(),
             "source": "cli"
         }
-        
+
         events_data["events"].append(event)
-        
+
         # 限制日志大小
         if len(events_data["events"]) > 1000:
             events_data["events"] = events_data["events"][-500:]
-        
+
         self._save_events(events_data)
-        
+
         # 触发订阅者
         self._trigger_subscribers(event_type, event)
-        
+
         return {
             "status": "success",
             "event_id": event["id"],
             "type": event_type
         }
-    
+
     def subscribe(self, event_type: str, handler: str = None) -> Dict:
         """订阅事件"""
         subs = self._load_subscriptions()
-        
+
         if event_type not in subs["subscriptions"]:
             subs["subscriptions"][event_type] = []
-        
+
         handler_info = {
             "handler": handler or "default",
             "subscribed_at": datetime.now().isoformat()
         }
-        
+
         subs["subscriptions"][event_type].append(handler_info)
         self._save_subscriptions(subs)
-        
+
         return {
             "status": "success",
             "event_type": event_type,
             "subscribers": len(subs["subscriptions"][event_type])
         }
-    
+
     def _trigger_subscribers(self, event_type: str, event: dict):
         """
 # ==============================================================================
@@ -158,11 +158,11 @@ Fixes:
 
 触发订阅者"""
         subs = self._load_subscriptions()
-        
+
         if event_type in subs["subscriptions"]:
             # 这里只是记录，实际触发需要工具主动查询
             pass
-    
+
     def list_events(self, limit: int = 20) -> List:
         """列出最近事件"""
         events_data = self._load_events()

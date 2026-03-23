@@ -16,12 +16,12 @@ def main():
     print("=" * 50)
     print("Installing All Programming Enhancements")
     print("=" * 50)
-    
+
     # 1. 代码片段库
     print("\n[1/6] Creating snippet library...")
     snippets_dir = WORKSPACE / ".openclaw" / "snippets"
     snippets_dir.mkdir(parents=True, exist_ok=True)
-    
+
     snippets = {
         "python": {
             "function": "def {name}({params}):\n    \"\"\"\"\"\"\n    pass",
@@ -33,16 +33,16 @@ def main():
             "class": "class {ClassName} {{\n    constructor() {{\n    }}\n}}",
         }
     }
-    
+
     with open(snippets_dir / "library.json", 'w', encoding='utf-8') as f:
         json.dump(snippets, f, ensure_ascii=False, indent=2)
     print("  [OK] Snippets library created")
-    
+
     # 2. 代码索引器
     print("\n[2/6] Creating code indexer...")
     index_dir = WORKSPACE / ".openclaw" / "code-index"
     index_dir.mkdir(parents=True, exist_ok=True)
-    
+
     indexer = '''#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """代码索引和搜索工具"""
@@ -98,31 +98,31 @@ if __name__ == "__main__":
     if len(sys.argv) > 1: search(sys.argv[1])
     else: index()
 '''
-    
+
     with open(index_dir / "indexer.py", 'w', encoding='utf-8') as f:
         f.write(indexer)
     print("  [OK] Code indexer created")
-    
+
     # 3. 语法检查配置
     print("\n[3/6] Creating linter configs...")
     linter_dir = WORKSPACE / ".openclaw" / "linters"
     linter_dir.mkdir(parents=True, exist_ok=True)
-    
+
     configs = {
         "eslintrc.json": {"env": {"browser": True, "es2021": True}, "extends": "eslint:recommended", "rules": {"no-unused-vars": "warn"}},
         "pylintrc": "[MASTER]\ndisable=C0111,R0903\nmax-line-length=120",
     }
-    
+
     for name, content in configs.items():
         with open(linter_dir / name, 'w', encoding='utf-8') as f:
             json.dump(content, f, ensure_ascii=False, indent=2) if name.endswith('.json') else f.write(content)
     print("  [OK] Linter configs created")
-    
+
     # 4. 项目模板
     print("\n[4/6] Creating project templates...")
     templates_dir = WORKSPACE / ".openclaw" / "templates"
     templates_dir.mkdir(parents=True, exist_ok=True)
-    
+
     templates = {
         "python-project": {
             "description": "Python 项目",
@@ -137,27 +137,27 @@ if __name__ == "__main__":
             "index.html": "<!DOCTYPE html>\n<html>\n<head><meta charset='UTF-8'><title></title></head>\n<body>\n</body>\n</html>",
         }
     }
-    
+
     with open(templates_dir / "library.json", 'w', encoding='utf-8') as f:
         json.dump(templates, f, ensure_ascii=False, indent=2)
     print("  [OK] Project templates created")
-    
+
     # 5. Git 增强
     print("\n[5/6] Creating Git enhancements...")
     git_dir = WORKSPACE / ".openclaw" / "git"
     git_dir.mkdir(parents=True, exist_ok=True)
-    
+
     with open(git_dir / "commit-msg.py", 'w', encoding='utf-8') as f:
         f.write('#!/usr/bin/env python\nimport subprocess\nmsg = subprocess.run(["git", "diff", "--cached", "--stat"], capture_output=True, text=True).stdout\nprint(f"feat: Updated {len(msg.split(chr(10)))-2} files")\n')
     print("  [OK] Git enhancements created")
-    
+
     # 6. 更新 OpenClaw 配置
     print("\n[6/6] Updating OpenClaw config...")
     config_file = Path.home() / ".copaw" / "config.json"
     if config_file.exists():
         with open(config_file, 'r', encoding='utf-8') as f:
             config = json.load(f)
-        
+
         config["programming"] = {
             "snippets_dir": str(snippets_dir),
             "index_dir": str(index_dir),
@@ -165,11 +165,11 @@ if __name__ == "__main__":
             "auto_index": True,
             "auto_lint": True,
         }
-        
+
         with open(config_file, 'w', encoding='utf-8') as f:
             json.dump(config, f, ensure_ascii=False, indent=2)
     print("  [OK] Config updated")
-    
+
     print("\n" + "=" * 50)
     print("All Enhancements Installed!")
     print("=" * 50)

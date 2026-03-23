@@ -20,12 +20,12 @@ if insert_marker in content:
 
 黑暗中，他嘴角微微上扬。
 """
-    
+
     content = content.replace(insert_marker, addition + insert_marker)
-    
+
     with open(path, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     print("[OK] Chapter 5 expanded with inner monologue (+~150 words)")
 else:
     print("[ERROR] Marker not found, appending to end")

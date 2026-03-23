@@ -41,13 +41,13 @@ try:
     print(f"  正在下载：{model_name}...")
     print(f"  (首次下载会自动从 GitHub 获取，约 100-150 MB)")
     print(f"  这可能需要 5-10 分钟...")
-    
+
     # 加载模型 (会自动下载)
     model = matgl.load_model(model_name)
-    
+
     print(f"  [OK] 下载成功！")
     print(f"  模型已缓存到默认位置")
-    
+
 except Exception as e:
     print(f"  [ERROR] 下载失败：{e}")
     print(f"  请检查网络连接")
@@ -63,34 +63,34 @@ c_cache = Path.home() / ".cache" / "matgl"
 
 if c_cache.exists():
     print(f"  源目录：{c_cache}")
-    
+
     # 列出所有文件
     files = list(c_cache.glob("**/*"))
     model_files = [f for f in files if f.is_file()]
-    
+
     if model_files:
         print(f"  找到 {len(model_files)} 个文件:")
         for f in model_files:
             size_mb = f.stat().st_size / 1024 / 1024
             print(f"    - {f.relative_to(c_cache)} ({size_mb:.1f} MB)")
-        
+
         # 复制到 D 盘
         print(f"\n  正在复制到 D 盘...")
         for f in model_files:
             rel_path = f.relative_to(c_cache)
             dest = d_models_dir / rel_path
             dest.parent.mkdir(parents=True, exist_ok=True)
-            
+
             if not dest.exists():
                 print(f"    复制：{rel_path}")
                 shutil.copy2(f, dest)
-        
+
         print(f"  [OK] 模型已复制到：{d_models_dir}")
-        
+
         # 验证
         d_files = list(d_models_dir.glob("**/*"))
         d_model_files = [f for f in d_files if f.is_file()]
-        
+
         total_size = sum(f.stat().st_size for f in d_model_files) / 1024 / 1024
         print(f"  总计：{len(d_model_files)} 个文件，{total_size:.1f} MB")
     else:

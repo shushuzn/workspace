@@ -22,7 +22,7 @@ class Cache:
     def __init__(self):
         self.data = {}
         self.lock = threading.Lock()
-    
+
     def get(self, key, ttl=300):  # 5 minutes default
         with self.lock:
             if key in self.data:
@@ -32,11 +32,11 @@ class Cache:
                 else:
                     del self.data[key]
             return None
-    
+
     def set(self, key, value):
         with self.lock:
             self.data[key] = (value, datetime.now())
-    
+
     def clear(self):
         with self.lock:
             self.data.clear()
@@ -46,13 +46,13 @@ cache = Cache()
 # Theme colors
 light_theme = {
     'bg': '#f8fafc', 'card': 'rgba(255,255,255,0.9)', 'border': 'rgba(0,0,0,0.1)',
-    'text': '#1e293b', 'muted': '#64748b', 'primary': '#6366f1', 'bull': '#10b981', 
+    'text': '#1e293b', 'muted': '#64748b', 'primary': '#6366f1', 'bull': '#10b981',
     'bear': '#ef4444', 'amber': '#f59e0b', 'purple': '#8b5cf6', 'cyan': '#06b6d4'
 }
 
 dark_theme = {
     'bg': '#0f0f23', 'card': 'rgba(30,30,60,0.85)', 'border': 'rgba(255,255,255,0.08)',
-    'text': '#e0e0e0', 'muted': '#8b8b9a', 'primary': '#6366f1', 'bull': '#10b981', 
+    'text': '#e0e0e0', 'muted': '#8b8b9a', 'primary': '#6366f1', 'bull': '#10b981',
     'bear': '#ef4444', 'amber': '#f59e0b', 'purple': '#8b5cf6', 'cyan': '#06b6d4'
 }
 
@@ -60,14 +60,14 @@ dark_theme = {
 C = dark_theme
 
 # Sidebar styles
-SIDEBAR_BASE = {'padding': '16px 24px', 'color': C['muted'], 'cursor': 'pointer', 
+SIDEBAR_BASE = {'padding': '16px 24px', 'color': C['muted'], 'cursor': 'pointer',
                 'fontSize': '14px', 'fontWeight': '500', 'borderLeft': '4px solid transparent',
                 'transition': 'all 0.2s ease', 'borderRadius': '0 12px 12px 0', 'margin': '4px 0'}
 SIDEBAR_HOVER = {'background': 'rgba(99,102,241,0.1)', 'color': C['text']}
 SIDEBAR_ACTIVE = {'background': 'linear-gradient(90deg, rgba(99,102,241,0.25), rgba(99,102,241,0.05))',
                   'color': C['primary'], 'borderLeft': f'4px solid {C["primary"]}'}
 
-def fmt(n, d=2): 
+def fmt(n, d=2):
     if n is None: return "N/A"
     try: return f"{n:,.{d}f}"
     except: return str(n)
@@ -91,7 +91,7 @@ def glass(content, style=None, hover=True, className=None):
     if style: base.update(style)
     if hover:
         base['_hover'] = {
-            'transform': 'translateY(-4px) scale(1.02)', 
+            'transform': 'translateY(-4px) scale(1.02)',
             'boxShadow': '0 12px 40px rgba(99,102,241,0.3)',
             'borderColor': 'rgba(99,102,241,0.3)'
         }
@@ -105,7 +105,7 @@ def stat_card(title, val, chg=None, icon=None, acc=None):
         chg_clr = C['bull'] if chg>=0 else C['bear']
     top = {'borderTop': f'4px solid {acc}'} if acc else {}
     return glass([
-        html.Div([html.Span(icon, style={'fontSize':'28px'}) if icon else html.Div()], 
+        html.Div([html.Span(icon, style={'fontSize':'28px'}) if icon else html.Div()],
                  style={'marginBottom':'12px'}),
         html.Div(title, style={'fontSize':'11px','color':C['muted'],'textTransform':'uppercase',
                                'letterSpacing':'1px','marginBottom':'8px'}),
@@ -135,7 +135,7 @@ def stock_card(sym):
                 data['marketCap'] = f"${mkt/1e6:.0f}M" if mkt > 0 else "N/A"
             # Store in cache
             cache.set(cache_key, data)
-        
+
         # If data is still loading (async case)
         if data == 'loading':
             return glass([
@@ -144,7 +144,7 @@ def stock_card(sym):
                     html.Div(style={'width':'40px','height':'40px','border':'3px solid rgba(99,102,241,0.3)','borderTop':'3px solid #6366f1','borderRadius':'50%','animation':'spin 1s linear infinite','margin':'10px auto'})
                 ], style={'display':'flex','justifyContent':'center'})
             ])
-        
+
         # Check for errors in data
         if not data or 'error' in data:
             return glass([
@@ -152,7 +152,7 @@ def stock_card(sym):
                 html.Div(f"Failed to load {sym}", style={'textAlign':'center','color':C['muted'],'marginTop':'8px'}),
                 html.Div(data.get('error', 'Unknown error'), style={'textAlign':'center','color':C['muted'],'fontSize':'12px','marginTop':'4px'})
             ])
-            
+
         return glass([
             # Header Row
             html.Div([
@@ -166,7 +166,7 @@ def stock_card(sym):
                     html.Div(f"{data.get('upside', 0):+.1f}% upside", style={'fontSize':'12px','color':C['bull'] if data.get('upside', 0)>10 else C['amber'] if data.get('upside', 0)>0 else C['bear'],'fontWeight':'600','textAlign':'right'}),
                 ])
             ], style={'display':'flex','justifyContent':'space-between','alignItems':'flex-start','marginBottom':'20px'}),
-            
+
             # Score Section
             html.Div([
                 html.Div([html.Div(sl(data.get('score', 50)), style={'fontSize':'9px','fontWeight':'700','color':'white','letterSpacing':'1px'}),
@@ -177,25 +177,25 @@ def stock_card(sym):
                                 'background':f'linear-gradient(90deg, {sc(data.get('score', 50))} {data.get('score', 50)}%, rgba(255,255,255,0.15) {data.get('score', 50)}%)'}),
                 ], style={'background':'rgba(0,0,0,0.3)','borderRadius':'5px'}),
             ], style={'marginBottom':'20px'}),
-            
+
             # Key Metrics - 2x2 Grid
             html.Div([
                 html.Div([html.Div('P/E', style={'fontSize':'10px','color':C['muted'],'marginBottom':'4px'}),
-                          html.Div(fmt(data.get('pe', 0)), style={'fontSize':'16px','fontWeight':'700'})], 
+                          html.Div(fmt(data.get('pe', 0)), style={'fontSize':'16px','fontWeight':'700'})],
                          style={'padding':'14px','background':'rgba(0,0,0,0.2)','borderRadius':'12px','textAlign':'center'}),
                 html.Div([html.Div('EPS', style={'fontSize':'10px','color':C['muted'],'marginBottom':'4px'}),
-                          html.Div(f"${fmt(data.get('eps', 0))}", style={'fontSize':'16px','fontWeight':'700'})], 
+                          html.Div(f"${fmt(data.get('eps', 0))}", style={'fontSize':'16px','fontWeight':'700'})],
                          style={'padding':'14px','background':'rgba(0,0,0,0.2)','borderRadius':'12px','textAlign':'center'}),
                 html.Div([html.Div('Target', style={'fontSize':'10px','color':C['muted'],'marginBottom':'4px'}),
-                          html.Div(f"${fmt(data.get('target', 0))}", style={'fontSize':'16px','fontWeight':'700'})], 
+                          html.Div(f"${fmt(data.get('target', 0))}", style={'fontSize':'16px','fontWeight':'700'})],
                          style={'padding':'14px','background':'rgba(0,0,0,0.2)','borderRadius':'12px','textAlign':'center'}),
                 html.Div([html.Div('Market Cap', style={'fontSize':'10px','color':C['muted'],'marginBottom':'4px'}),
-                          html.Div(data.get('marketCap', 'N/A'), style={'fontSize':'16px','fontWeight':'700'})], 
+                          html.Div(data.get('marketCap', 'N/A'), style={'fontSize':'16px','fontWeight':'700'})],
                          style={'padding':'14px','background':'rgba(0,0,0,0.2)','borderRadius':'12px','textAlign':'center'}),
             ], style={'display':'grid','gridTemplateColumns':'repeat(2, 1fr)','gap':'12px','marginBottom':'20px'}),
-            
+
             # Action Button
-            html.Div([html.Button('View Full Analysis', n_clicks=0, 
+            html.Div([html.Button('View Full Analysis', n_clicks=0,
                        style={'width':'100%',
                               'background':f'linear-gradient(135deg, {C["primary"]}, {C["purple"]})',
                               'border':'none','color':'white','padding':'14px','borderRadius':'12px',
@@ -251,7 +251,7 @@ def price_chart(sym, time_range='3mo'):
                     'opens': quote.get("open", [])
                 }
                 cache.set(cache_key, chart_data)
-        
+
         # If data is still loading
         if chart_data == 'loading':
             return glass([
@@ -260,7 +260,7 @@ def price_chart(sym, time_range='3mo'):
                     html.Div(style={'width':'50px','height':'50px','border':'4px solid rgba(99,102,241,0.3)','borderTop':'4px solid #6366f1','borderRadius':'50%','animation':'spin 1s linear infinite','margin':'15px auto'})
                 ], style={'display':'flex','justifyContent':'center'})
             ])
-        
+
         # Extract data from cache or API response
         closes = chart_data.get('closes', [])
         volumes = chart_data.get('volumes', [])
@@ -275,24 +275,24 @@ def price_chart(sym, time_range='3mo'):
             html.Div(f"Failed to load chart for {sym}", style={'textAlign':'center','color':C['muted'],'marginTop':'8px'}),
             html.Div(f"{str(e)[:60]}...", style={'textAlign':'center','color':C['muted'],'fontSize':'12px','marginTop':'4px'})
         ])
-    
+
     if not closes:
         return glass([
             html.Div('📊 No Data', style={'textAlign':'center','padding':'60px','color':C['muted'],'fontSize':'18px','fontWeight':'700'}),
             html.Div(f"No chart data available for {sym}", style={'textAlign':'center','color':C['muted'],'marginTop':'8px'})
         ])
-    
+
     n = min(90, len(closes))
     closes = closes[-n:]
     volumes = volumes[-n:] if volumes else [0]*n
     highs = highs[-n:] if highs else closes
     lows = lows[-n:] if lows else closes
     opens = opens[-n:] if opens else closes
-    
+
     # Moving averages
     ma20 = [sum(closes[max(0,i-19):i+1])/min(i+1,20) for i in range(n)]
     ma50 = [sum(closes[max(0,i-49):i+1])/min(i+1,50) for i in range(n)]
-    
+
     # RSI calculation
     def calculate_rsi(prices, period=14):
         deltas = [prices[i] - prices[i-1] for i in range(1, len(prices))]
@@ -320,14 +320,14 @@ def price_chart(sym, time_range='3mo'):
         # Pad with None for the first period
         rsi = [None] * (period) + rsi
         return rsi[-n:]
-    
+
     rsi = calculate_rsi(closes)
-    
+
     # Price change
     price_change = closes[-1] - closes[0] if len(closes) > 1 else 0
     pct_change = (price_change / closes[0] * 100) if closes[0] > 0 else 0
     change_clr = C['bull'] if pct_change >= 0 else C['bear']
-    
+
     # Main price chart
     price_fig = go.Figure()
     # Candlestick
@@ -336,17 +336,17 @@ def price_chart(sym, time_range='3mo'):
                                   increasing_fillcolor=C['bull'], decreasing_fillcolor=C['bear'],
                                   whiskerwidth=0.8))
     # MA20
-    price_fig.add_trace(go.Scatter(x=list(range(n)), y=ma20, mode='lines', name='MA20', 
+    price_fig.add_trace(go.Scatter(x=list(range(n)), y=ma20, mode='lines', name='MA20',
                              line=dict(color=C['amber'], width=2.5)))
     # MA50
-    price_fig.add_trace(go.Scatter(x=list(range(n)), y=ma50, mode='lines', name='MA50', 
+    price_fig.add_trace(go.Scatter(x=list(range(n)), y=ma50, mode='lines', name='MA50',
                              line=dict(color=C['cyan'], width=2.5)))
-    
+
     # Price annotation
     price_fig.add_annotation(x=n-1, y=closes[-1], text=f"${fmt(closes[-1])}",
                       showarrow=False, font=dict(size=16, color=C['text'], family="Arial Black"),
                       yshift=20)
-    
+
     price_fig.update_layout({
         'plot_bgcolor':'#0f0f23', 'paper_bgcolor':'#0f0f23', 'font':{'color':C['text'], 'size':12},
         'xaxis':{'showgrid':False, 'zeroline':False, 'tickfont':{'color':C['muted'], 'size':10}, 'showticklabels':True},
@@ -358,10 +358,10 @@ def price_chart(sym, time_range='3mo'):
     })
     price_fig.update_xaxes(showspikes=True, spikecolor=C['muted'], spikethickness=1, spikemode='across')
     price_fig.update_yaxes(showspikes=True, spikecolor=C['muted'], spikethickness=1, spikemode='across')
-    
+
     # Volume chart
     volume_fig = go.Figure()
-    volume_fig.add_trace(go.Bar(x=list(range(n)), y=volumes, name='Volume', 
+    volume_fig.add_trace(go.Bar(x=list(range(n)), y=volumes, name='Volume',
                                marker_color=[C['bull'] if closes[i] >= closes[i-1] else C['bear'] for i in range(n)],
                                opacity=0.7))
     volume_fig.update_layout({
@@ -373,10 +373,10 @@ def price_chart(sym, time_range='3mo'):
         'margin':{'l':50, 'r':50, 't':20, 'b':30}, 'height':200,
         'showlegend':False,
     })
-    
+
     # RSI chart
     rsi_fig = go.Figure()
-    rsi_fig.add_trace(go.Scatter(x=list(range(n)), y=rsi, mode='lines', name='RSI', 
+    rsi_fig.add_trace(go.Scatter(x=list(range(n)), y=rsi, mode='lines', name='RSI',
                                 line=dict(color=C['purple'], width=2.5)))
     # RSI thresholds
     rsi_fig.add_shape(type="line", x0=0, y0=70, x1=n-1, y1=70, line=dict(color=C['bear'], width=1, dash="dash"))
@@ -390,11 +390,11 @@ def price_chart(sym, time_range='3mo'):
         'margin':{'l':50, 'r':50, 't':20, 'b':30}, 'height':200,
         'showlegend':True,
     })
-    
+
     return html.Div([
         html.Div([
             html.Div([html.Div(f"${fmt(closes[-1])}", style={'fontSize':'32px','fontWeight':'800'}),
-                     html.Div([f"{'+' if pct_change >= 0 else ''}{pct_change:.2f}%", 
+                     html.Div([f"{'+' if pct_change >= 0 else ''}{pct_change:.2f}%",
                               f"({'↑' if pct_change >= 0 else '↓'} ${abs(price_change):.2f})"],
                              style={'fontSize':'14px','color':change_clr,'fontWeight':'600','marginTop':'4px'})],
                     style={'textAlign':'center'}),
@@ -423,7 +423,7 @@ def get_stats():
                 price = P[s]
                 if price > 0: upsides.append((target - price) / price * 100)
         top_up = max(upsides) if upsides else 25
-        
+
         stats = [
             stat_card('Total Stocks', total, icon='📈', acc=C['primary']),
             stat_card('Avg Score', f"{avg:.0f}", chg=2.1, icon='🎯', acc=C['purple']),
@@ -523,7 +523,7 @@ app.layout = html.Div([
             ''')
         ])
     ]),
-    
+
     # Sidebar
     html.Div([
         # Logo
@@ -537,45 +537,45 @@ app.layout = html.Div([
                 html.Div("v2.1 Enhanced", style={'fontSize':'11px','color':'#8b8b9a','marginTop':'2px'}),
             ])
         ], style={'padding':'15px 24px 30px','borderBottom':'1px solid rgba(255,255,255,0.08)'}),
-        
+
         # Nav Items
         html.Div([
-            html.Div([html.Span('📊', style={'marginRight':'12px'}), 'Dashboard'], 
+            html.Div([html.Span('📊', style={'marginRight':'12px'}), 'Dashboard'],
                     id='nav-dashboard', n_clicks=0, style=SIDEBAR_ACTIVE, className='sidebar-item nav-btn'),
-            html.Div([html.Span('🔍', style={'marginRight':'12px'}), 'Search'], 
+            html.Div([html.Span('🔍', style={'marginRight':'12px'}), 'Search'],
                     id='nav-search', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
-            html.Div([html.Span('⭐', style={'marginRight':'12px'}), 'Top Picks'], 
+            html.Div([html.Span('⭐', style={'marginRight':'12px'}), 'Top Picks'],
                     id='nav-picks', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
-            html.Div([html.Span('💎', style={'marginRight':'12px'}), 'Value Stocks'], 
+            html.Div([html.Span('💎', style={'marginRight':'12px'}), 'Value Stocks'],
                     id='nav-value', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
-            html.Div([html.Span('🚀', style={'marginRight':'12px'}), 'Growth Stocks'], 
+            html.Div([html.Span('🚀', style={'marginRight':'12px'}), 'Growth Stocks'],
                     id='nav-growth', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
-            html.Div([html.Span('💰', style={'marginRight':'12px'}), 'Dividend'], 
+            html.Div([html.Span('💰', style={'marginRight':'12px'}), 'Dividend'],
                     id='nav-dividend', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
         ], style={'marginTop':'20px'}),
-        
+
         # Market Status
         html.Div([
             html.Div('Market Status', style={'fontSize':'11px','color':'#8b8b9a','marginBottom':'10px','letterSpacing':'1px','textTransform':'uppercase'}),
             html.Div([html.Div('●', style={'color':'#10b981','fontSize':'10px','marginRight':'8px'}), 'US Market Open'],
                     style={'fontSize':'13px','color':'#e0e0e0','display':'flex','alignItems':'center'}),
         ], style={'padding':'20px 24px','borderTop':'1px solid rgba(255,255,255,0.08)','marginTop':'auto'}),
-        
+
         # Last Update
-        html.Div(id='last-update', children='Last: --', 
+        html.Div(id='last-update', children='Last: --',
                 style={'padding':'16px 24px','color':'#8b8b9a','fontSize':'12px',
                       'borderTop':'1px solid rgba(255,255,255,0.08)'}),
     ], className='sidebar', style={'position':'fixed','left':'0','top':'0','height':'100vh','width':'280px',
               'background':'rgba(15,15,35,0.98)','backdropFilter':'blur(20px)',
               'borderRight':'1px solid rgba(255,255,255,0.08)','zIndex':'1000',
               'display':'flex','flexDirection':'column','overflowY':'auto'}),
-    
+
     # Main Content
     html.Div([
         # Header
         html.Div([
             html.Div([
-                html.H1(id='page-title', children='📊 Dashboard', 
+                html.H1(id='page-title', children='📊 Dashboard',
                        style={'fontSize':'32px','fontWeight':'800','margin':'0 0 8px 0',
                              'background':'linear-gradient(135deg, #e0e0e0, #fff)','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'}),
                 html.Div(id='page-subtitle', children='Real-time market analysis powered by AI',
@@ -593,11 +593,11 @@ app.layout = html.Div([
                                   'fontSize':'16px','transition':'all 0.3s ease'}),
             ], style={'display':'flex','gap':'12px','alignItems':'center'}),
         ], className='header', style={'display':'flex','justifyContent':'space-between','alignItems':'center','marginBottom':'32px'}),
-        
+
         # Stats Row
         html.Div(id='stats-row', children=get_stats(), className='stats-row',
                 style={'display':'grid','gridTemplateColumns':'repeat(4, 1fr)','gap':'24px','marginBottom':'32px'}),
-        
+
         # Section Title
         html.Div([
             html.Div(id='section-title', children='Featured Stocks',
@@ -605,11 +605,11 @@ app.layout = html.Div([
             html.Div(id='stock-count', children='12 stocks',
                     style={'fontSize':'13px','color':'#8b8b9a','marginLeft':'12px'}),
         ], style={'display':'flex','alignItems':'center','marginBottom':'20px'}),
-        
+
         # Stock Grid
         html.Div(id='stock-grid', children=[stock_card(s) for s in DEFAULT_SYMS], className='stock-grid',
                 style={'display':'grid','gridTemplateColumns':'repeat(auto-fill, minmax(320px, 1fr))','gap':'24px'}),
-        
+
         # Chart Section
         html.Div([
             html.H2('📊 Price Analysis', style={'fontSize':'20px','fontWeight':'700','marginBottom':'20px'}),
@@ -643,26 +643,26 @@ app.layout = html.Div([
 # ============================================================
 # Callbacks
 # ============================================================
-@app.callback([Output('stock-grid','children'), Output('stats-row','children'), 
+@app.callback([Output('stock-grid','children'), Output('stats-row','children'),
                Output('last-update','children'), Output('stock-count','children')],
               [Input('refresh','n_intervals'), Input('nav-picks','n_clicks'),
                Input('nav-value','n_clicks'), Input('nav-growth','n_clicks'), Input('nav-dividend','n_clicks')])
 def update_stocks(n_int, *args):
     ctx = callback_context
     trigger = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else 'refresh'
-    
+
     default_syms = DEFAULT_SYMS
     stocks = default_syms
-    
-    if trigger == 'nav-picks': 
+
+    if trigger == 'nav-picks':
         stocks = top_picks(limit=12) or default_syms
-    elif trigger == 'nav-value': 
+    elif trigger == 'nav-value':
         stocks = value_picks(limit=12) or default_syms
-    elif trigger == 'nav-growth': 
+    elif trigger == 'nav-growth':
         stocks = growth_picks(limit=12) or default_syms
-    elif trigger == 'nav-dividend': 
+    elif trigger == 'nav-dividend':
         stocks = dividend_picks(limit=12) or default_syms
-    
+
     return [stock_card(s) for s in stocks[:12]], get_stats(), f"Updated: {datetime.now().strftime('%H:%M:%S')}", f"{len(stocks[:12])} stocks"
 
 @app.callback(Output('chart-container','children'), [Input('chart-sym','value'), Input('chart-range','value'), Input('refresh-chart','n_clicks')])

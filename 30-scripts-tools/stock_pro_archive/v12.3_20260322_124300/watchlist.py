@@ -11,7 +11,7 @@ class Watchlist:
     def __init__(self):
         self.lists = {}
         self.load()
-    
+
     def load(self):
         """Load watchlists from file"""
         if WATCHLIST_FILE.exists():
@@ -22,12 +22,12 @@ class Watchlist:
                 self.lists = {"default": []}
         else:
             self.lists = {"default": []}
-    
+
     def save(self):
         """Save watchlists to file"""
         with open(WATCHLIST_FILE, 'w') as f:
             json.dump(self.lists, f, indent=2)
-    
+
     def add(self, symbol, list_name="default"):
         """Add symbol to watchlist"""
         if list_name not in self.lists:
@@ -38,7 +38,7 @@ class Watchlist:
             self.save()
             return f"[Watchlist] Added {symbol} to {list_name}"
         return f"[Watchlist] {symbol} already in {list_name}"
-    
+
     def remove(self, symbol, list_name="default"):
         """Remove symbol from watchlist"""
         if list_name in self.lists and symbol.upper() in self.lists[list_name]:
@@ -46,7 +46,7 @@ class Watchlist:
             self.save()
             return f"[Watchlist] Removed {symbol} from {list_name}"
         return f"[Watchlist] {symbol} not in {list_name}"
-    
+
     def list_lists(self):
         """List all watchlists"""
         if not self.lists:
@@ -59,11 +59,11 @@ class Watchlist:
             else:
                 result += "(empty)"
         return result
-    
+
     def get(self, list_name="default"):
         """Get symbols from a watchlist"""
         return self.lists.get(list_name, [])
-    
+
     def create(self, name):
         """Create a new watchlist"""
         if name in self.lists:
@@ -71,7 +71,7 @@ class Watchlist:
         self.lists[name] = []
         self.save()
         return f"[Watchlist] Created {name}"
-    
+
     def delete(self, name):
         """Delete a watchlist"""
         if name == "default":

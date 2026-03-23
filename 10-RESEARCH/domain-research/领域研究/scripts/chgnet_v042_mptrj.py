@@ -39,7 +39,7 @@ if mptrj_files:
         size_mb = f.stat().st_size / 1024 / 1024
         rel_path = f.relative_to(chgnet_pretrained)
         print(f"  - {rel_path} ({size_mb:.1f} MB)")
-    
+
     # 使用最新的 MPtrj 模型
     mptrj_model = mptrj_files[0]
     print(f"\n使用模型：{mptrj_model.name}")
@@ -88,24 +88,24 @@ print(f"\n[3/4] 加载 CHGNet 模型...")
 try:
     from chgnet.model.model import CHGNet
     from chgnet.model.dynamics import Relaxer
-    
+
     # 加载预训练权重
     print(f"  从 {dest} 加载...")
-    
+
     # 使用 CHGNet 的 load 方法
     chgnet_model = CHGNet.from_file(str(dest))
     print(f"  [OK] 模型加载成功！")
-    
+
     # 打印模型信息
     print(f"  原子类型：{chgnet_model.atom_types}")
     print(f"  设备：{next(chgnet_model.parameters()).device}")
-    
+
     model_loaded = True
-    
+
 except Exception as e:
     print(f"  [ERROR] 模型加载失败：{e}")
     print(f"  [INFO] 尝试使用 matgl 加载...")
-    
+
     try:
         # 尝试使用 matgl 加载
         model = matgl.load_model(str(dest))
@@ -118,14 +118,14 @@ except Exception as e:
 # 测试模型
 if model_loaded:
     print(f"\n[4/4] 测试模型...")
-    
+
     try:
         from ase.build import bulk
-        
+
         # 创建测试结构 (石墨)
         graphite = bulk('C', 'hex', a=2.46, c=6.71)
         print(f"  测试结构：石墨 ({len(graphite)} 原子)")
-        
+
         # 使用 CHGNet 计算能量
         if hasattr(chgnet_model, 'predict_structure'):
             result = chgnet_model.predict_structure(graphite)
@@ -134,9 +134,9 @@ if model_loaded:
             print(f"  [OK] 每原子能量：{energy/len(graphite):.4f} eV/atom")
         else:
             print(f"  [INFO] 模型已加载，但未测试能量计算")
-        
+
         test_success = True
-        
+
     except Exception as e:
         print(f"  [WARN] 测试失败：{e}")
         test_success = False

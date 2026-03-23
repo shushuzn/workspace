@@ -123,7 +123,7 @@ html = f'''<!DOCTYPE html>
             try {
                 // Update last updated time
                 document.querySelector('.subtitle').textContent = 'Last updated: ' + new Date().toLocaleString();
-                
+
                 // Here you would typically fetch new data from an API
                 // For now, we'll just refresh the page to get new data
                 location.reload();

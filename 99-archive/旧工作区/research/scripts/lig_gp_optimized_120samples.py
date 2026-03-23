@@ -1,4 +1,4 @@
-﻿#!/usr/bin/env python3
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 LIG GP 模型优化 - 回退 120 样本 + 移除 E_Jcm2
@@ -239,7 +239,7 @@ ax3.set_title("GP 模型优化效果对比", fontsize=13)
 ax3.set_ylim(0, 1.0)
 
 for bar, r2_val in zip(bars, r2_vals):
-    ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02, 
+    ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
             f'R2={r2_val:.3f}', ha='center', va='bottom', fontsize=11)
 
 ax3.axhline(y=0.85, color='orange', linestyle='--', linewidth=1.5, label='目标 R2>0.85')

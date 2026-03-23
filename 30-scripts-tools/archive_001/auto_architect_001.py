@@ -31,11 +31,11 @@ ARCH_DIR.mkdir(exist_ok=True)
 class ToolArchitect:
     def __init__(self):
         self.analysis = {"clusters": [], "dependencies": {}, "orphans": []}
-    
+
     def analyze_topology(self):
         imports = defaultdict(list)
         tools = {}
-        
+
         for f in TOOLS_DIR.glob("*_001.py"):
             if f.name.startswith("__"):
                 continue
@@ -53,15 +53,15 @@ class ToolArchitect:
                     imports[imp].append(f.name)
             except Exception:
                 pass
-        
+
         clusters = defaultdict(list)
         for tool, data in tools.items():
             key = tuple(sorted(data["imports"][:3]))
             clusters[key].append(tool)
-        
-        orphans = [t for t, d in tools.items() if not d["imports"] or 
+
+        orphans = [t for t, d in tools.items() if not d["imports"] or
                    all(i in ["pathlib", "json", "datetime", "subprocess", "sys"] for i in d["imports"])]
-        
+
         self.analysis = {
             "total_tools": len(tools),
             "clusters": {str(k): v for k, v in clusters.items() if len(v) > 1},
@@ -70,18 +70,18 @@ class ToolArchitect:
             "tool_data": tools,
         }
         return self.analysis
-    
+
     def suggest_architecture(self):
         analysis = self.analyze_topology()
         suggestions = []
-        
+
         if len(analysis["orphans"]) > 10:
             suggestions.append({
                 "type": "group_orphans",
                 "count": len(analysis["orphans"]),
                 "action": "Create " + str(len(analysis["orphans"])//10) + " new module groups"
             })
-        
+
         large_tools = [(t, d) for t, d in analysis["tool_data"].items() if d["lines"] > 500]
         if large_tools:
             suggestions.append({
@@ -89,23 +89,23 @@ class ToolArchitect:
                 "tools": [t for t, _ in large_tools[:5]],
                 "action": "Split tools with >500 lines"
             })
-        
+
         if analysis["clusters"]:
             suggestions.append({
                 "type": "extract_common",
                 "clusters": len(analysis["clusters"]),
                 "action": "Extract shared code to base modules"
             })
-        
+
         return suggestions
-    
+
     def generate_blueprint(self):
         analysis = self.analyze_topology()
         suggestions = self.suggest_architecture()
-        
+
         total_lines = sum(d["lines"] for d in analysis["tool_data"].values())
         avg_size = total_lines // max(1, len(analysis["tool_data"]))
-        
+
         blueprint = {
             "timestamp": datetime.now().isoformat(),
             "metrics": {
@@ -119,11 +119,11 @@ class ToolArchitect:
             "large_tools": [(t, d["lines"]) for t, d in analysis["tool_data"].items() if d["lines"] > 300][:10],
         }
         return blueprint
-    
+
     def apply_architecture(self, action):
         blueprint = self.generate_blueprint()
         applied = []
-        
+
         if action == "group_orphans":
             orphans = blueprint["orphans"]
             if orphans:
@@ -133,7 +133,7 @@ class ToolArchitect:
                     content += "# " + str(i) + ". " + orphan + "\n"
                 (TOOLS_DIR / "orphan_utils_001.py").write_text(content, encoding="utf-8")
                 applied.append("orphan_utils_001.py")
-        
+
         elif action == "create_base":
             content = '''#!/usr/bin/env python
 # BASE module
@@ -151,28 +151,28 @@ def load_json(path):
 '''
             (TOOLS_DIR / "base_001.py").write_text(content, encoding="utf-8")
             applied.append("base_001.py")
-        
+
         return applied
 
 def main():
     architect = ToolArchitect()
     print("\n[AUTO-ARCHITECT-001] Tool Architecture Rebuilder")
     print("=" * 50)
-    
+
     if "--analyze" in sys.argv:
         analysis = architect.analyze_topology()
         print("\n[ANALYSIS]")
         print("  Total tools: " + str(analysis["total_tools"]))
         print("  Orphan tools: " + str(len(analysis["orphans"])))
         print("  Clusters: " + str(len(analysis["clusters"])))
-    
+
     elif "--blueprint" in sys.argv:
         blueprint = architect.generate_blueprint()
         print("\n[ARCHITECTURE BLUEPRINT]")
         for k, v in blueprint["metrics"].items():
             print("  " + k + ": " + str(v))
         print("\n  Suggestions: " + str(len(blueprint["suggestions"])))
-    
+
     elif "--apply" in sys.argv:
         idx = sys.argv.index("--apply") if "--apply" in sys.argv else -1
         if idx >= 0 and idx + 1 < len(sys.argv):
@@ -181,7 +181,7 @@ def main():
             print("\n[APPLIED] " + str(applied))
         else:
             print("Usage: --apply <group_orphans|create_base>")
-    
+
     else:
         blueprint = architect.generate_blueprint()
         print("\n[TOPOLOGY SUMMARY]")

@@ -35,7 +35,7 @@ class LoadResult:
 
 class StockParallelLoader:
     """股票数据并行加载器"""
-    
+
     def __init__(self, max_workers: int = 4, strategy: LoadStrategy = LoadStrategy.ADAPTIVE):
         """
         初始化
@@ -46,7 +46,7 @@ class StockParallelLoader:
         """
         self.max_workers = max_workers
         self.strategy = strategy
-        
+
         # 统计
         self.stats = {
             "total_tasks": 0,
@@ -54,11 +54,11 @@ class StockParallelLoader:
             "failed": 0,
             "total_time": 0
         }
-    
+
     def load_sequential(self, tasks: List[Dict]) -> List[LoadResult]:
         """顺序加载"""
         results = []
-        
+
         for task in tasks:
             start = time.time()
             try:
@@ -66,10 +66,10 @@ class StockParallelLoader:
                 key = task.get("key", "unknown")
                 args = task.get("args", ())
                 kwargs = task.get("kwargs", {})
-                
+
                 data = func(*args, **kwargs)
                 duration = time.time() - start
-                
+
                 results.append(LoadResult(
                     key=key,
                     data=data,
@@ -77,7 +77,7 @@ class StockParallelLoader:
                     duration=duration
                 ))
                 self.stats["completed"] += 1
-                
+
             except Exception as e:
                 duration = time.time() - start
                 results.append(LoadResult(
@@ -88,15 +88,15 @@ class StockParallelLoader:
                     error=str(e)
                 ))
                 self.stats["failed"] += 1
-            
+
             self.stats["total_tasks"] += 1
-        
+
         return results
-    
+
     def load_parallel(self, tasks: List[Dict]) -> List[LoadResult]:
         """并行加载"""
         results = []
-        
+
         def execute_task(task):
             start = time.time()
             try:
@@ -104,10 +104,10 @@ class StockParallelLoader:
                 key = task.get("key", "unknown")
                 args = task.get("args", ())
                 kwargs = task.get("kwargs", {})
-                
+
                 data = func(*args, **kwargs)
                 duration = time.time() - start
-                
+
                 return LoadResult(
                     key=key,
                     data=data,
@@ -123,38 +123,38 @@ class StockParallelLoader:
                     duration=duration,
                     error=str(e)
                 )
-        
+
         with concurrent.futures.ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             futures = [executor.submit(execute_task, task) for task in tasks]
-            
+
             for future in concurrent.futures.as_completed(futures):
                 result = future.result()
                 results.append(result)
-                
+
                 if result.success:
                     self.stats["completed"] += 1
                 else:
                     self.stats["failed"] += 1
-                
+
                 self.stats["total_tasks"] += 1
-        
+
         return results
-    
+
     def load_batch(self, tasks: List[Dict], batch_size: int = 3) -> List[LoadResult]:
         """批量加载 (分批并行)"""
         results = []
-        
+
         for i in range(0, len(tasks), batch_size):
             batch = tasks[i:i + batch_size]
             batch_results = self.load_parallel(batch)
             results.extend(batch_results)
-        
+
         return results
-    
+
     def load_adaptive(self, tasks: List[Dict]) -> List[LoadResult]:
         """自适应加载 - 根据任务数量选择策略"""
         task_count = len(tasks)
-        
+
         if task_count <= 2:
             # 任务少，用顺序
             return self.load_sequential(tasks)
@@ -164,11 +164,11 @@ class StockParallelLoader:
         else:
             # 任务多，用并行
             return self.load_parallel(tasks)
-    
+
     def load(self, tasks: List[Dict]) -> List[LoadResult]:
         """通用加载接口"""
         start = time.time()
-        
+
         # 选择策略
         if self.strategy == LoadStrategy.SEQUENTIAL:
             results = self.load_sequential(tasks)
@@ -180,10 +180,10 @@ class StockParallelLoader:
             results = self.load_adaptive(tasks)
         else:
             results = self.load_sequential(tasks)
-        
+
         self.stats["total_time"] = time.time() - start
         return results
-    
+
     def get_stats(self) -> Dict:
         """获取统计"""
         return {
@@ -240,31 +240,31 @@ Fixes:
 
 演示"""
     import random
-    
+
     # 模拟数据加载任务
     def load_stock_data(symbol):
         time.sleep(random.uniform(0.5, 1.5))  # 模拟 IO
         return {"symbol": symbol, "price": random.uniform(100, 200)}
-    
+
     symbols = ["AAPL", "GOOGL", "MSFT", "AMZN", "TSLA"]
-    
+
     tasks = [
         {"func": load_stock_data, "key": s, "args": (s,)}
         for s in symbols
     ]
-    
+
     # 测试不同策略
     print("=" * 50)
     print("Parallel Loader Demo")
     print("=" * 50)
-    
+
     for strategy in [LoadStrategy.SEQUENTIAL, LoadStrategy.PARALLEL, LoadStrategy.ADAPTIVE]:
         loader = StockParallelLoader(max_workers=3, strategy=strategy)
         results = loader.load(tasks)
-        
+
         print(f"\nStrategy: {strategy.value}")
         print(f"  Stats: {loader.get_stats()}")
-        
+
         for r in results:
             status = "✓" if r.success else "✗"
             print(f"  {status} {r.key}: {r.duration:.2f}s")

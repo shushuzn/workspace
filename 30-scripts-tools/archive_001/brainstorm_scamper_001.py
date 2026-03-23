@@ -104,42 +104,42 @@ SCAMPER_OPERATORS = {
 
 def generate_scamper_ideas(topic: str) -> dict:
     """使用SCAMPER方法生成ideas"""
-    
+
     results = {
         "topic": topic,
         "method": "SCAMPER",
         "operators": {}
     }
-    
+
     for op_key, op_data in SCAMPER_OPERATORS.items():
         # 替换X为topic
         questions = []
         for q in op_data["questions"]:
             questions.append(q.replace("X", topic).replace("x", topic))
-        
+
         results["operators"][op_key] = {
             "name": op_data["name"],
             "prompt": op_data["prompt"],
             "questions": questions
         }
-    
+
     return results
 
 
 def display_scamper_ideas(results: dict):
     """展示SCAMPER ideas"""
-    
+
     print("=" * 60)
     print(f"[SCAMPER] Topic: {results['topic']}")
     print("=" * 60)
-    
+
     for op_key, op_data in results["operators"].items():
         print(f"\n[{op_key}] {op_data['name']}")
         print(f"  Prompt: {op_data['prompt']}")
         print("  Questions:")
         for i, q in enumerate(op_data["questions"], 1):
             print(f"    {i}. {q}")
-    
+
     print("\n" + "=" * 60)
 
 
@@ -188,22 +188,22 @@ Fixes:
 """
 
 主函数"""
-    
+
     if len(sys.argv) > 1:
         topic = " ".join(sys.argv[1:])
     else:
         topic = "OpenClaw tools"
-    
+
     results = generate_scamper_ideas(topic)
     display_scamper_ideas(results)
-    
+
     # 保存结果
     output_file = Path(f"flow-archive/brainstorm-current/scamper_ideas_{len(topic)}.json")
     with open(output_file, "w", encoding="utf-8") as f:
         json.dump(results, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n[Saved to] {output_file}")
-    
+
     return 0
 
 

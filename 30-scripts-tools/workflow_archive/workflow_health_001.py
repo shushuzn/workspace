@@ -22,10 +22,10 @@ class WorkflowHealth:
     def check(self):
         # Tool count
         tools = list(TOOLS_DIR.glob("*_001.py"))
-        
+
         # Naming compliance
         compliant = sum(1 for t in tools if "_001.py" in t.name)
-        
+
         # Log status
         log_file = LOGS_DIR / "master.json"
         runs = 0
@@ -34,14 +34,14 @@ class WorkflowHealth:
             log = json.loads(log_file.read_text(encoding="utf-8", errors="replace"))
             runs = len(log.get("runs", []))
             success = sum(1 for r in log.get("runs", []) if r.get("status") == "ok")
-        
+
         # Score
         score = 100
         if compliant < len(tools):
             score -= 10
         if runs > 0 and success < runs:
             score -= (runs - success) * 5
-        
+
         return {
             "timestamp": datetime.now().isoformat(),
             "score": max(0, score),

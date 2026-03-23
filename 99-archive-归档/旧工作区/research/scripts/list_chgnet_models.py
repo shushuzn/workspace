@@ -29,22 +29,22 @@ try:
     if response.status_code == 200:
         items = response.json()
         print(f"\n[OK] 找到 {len(items)} 个预训练模型目录:")
-        
+
         chgnet_models = []
         for item in items:
             if item['type'] == 'dir' and 'CHGNet' in item['name']:
                 chgnet_models.append(item['name'])
                 print(f"  - {item['name']}")
-        
+
         if chgnet_models:
             print(f"\n[OK] 可用 CHGNet 模型:")
             for model in chgnet_models:
                 print(f"  - {model}")
-            
+
             # 使用最新的模型
             latest_model = chgnet_models[0]  # 第一个通常是最新的
             print(f"\n使用模型：{latest_model}")
-            
+
             # 尝试加载
             print(f"\n尝试加载：{latest_model}...")
             try:

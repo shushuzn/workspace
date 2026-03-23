@@ -20,7 +20,7 @@ TASKS_FILE = WORKSPACE / ".openclaw" / "cursor-tasks.json"
 def create_task(description, files=None, instructions=None):
     """创建 Cursor 编辑任务"""
     tasks = load_tasks()
-    
+
     task = {
         "id": len(tasks) + 1,
         "description": description,
@@ -30,10 +30,10 @@ def create_task(description, files=None, instructions=None):
         "created": datetime.now().isoformat(),
         "completed": None
     }
-    
+
     tasks.append(task)
     save_tasks(tasks)
-    
+
     return task
 
 def load_tasks():
@@ -62,15 +62,15 @@ def show_pending_tasks():
     """显示待办任务"""
     tasks = load_tasks()
     pending = [t for t in tasks if t["status"] == "pending"]
-    
+
     if not pending:
         print("\n[OK] No pending tasks")
         return []
-    
+
     print("\n" + "=" * 60)
     print("Cursor Editing Tasks (OpenClaw Analysis)")
     print("=" * 60)
-    
+
     for i, task in enumerate(pending, 1):
         print(f"\n[{i}] Task #{task['id']}")
         print(f"    {task['description']}")
@@ -80,7 +80,7 @@ def show_pending_tasks():
             print(f"    Instructions:")
             for line in task['instructions'].split('\n'):
                 print(f"      {line}")
-    
+
     print("\n" + "=" * 60)
     return pending
 
@@ -96,35 +96,35 @@ def main():
         print("\nExample:")
         print('  py cursor_collab.py new "Add login function" auth.py login.html')
         return
-    
+
     cmd = sys.argv[1]
-    
+
     if cmd == "new":
         if len(sys.argv) < 3:
             print("Usage: py cursor_collab.py new <description> [files...]")
             return
-        
+
         description = sys.argv[2]
         files = sys.argv[3:] if len(sys.argv) > 3 else []
-        
+
         task = create_task(description, files)
         print(f"\n[OK] Created task #{task['id']}")
         print(f"     {task['description']}")
         if files:
             print(f"     Files: {', '.join(files)}")
-    
+
     elif cmd == "list":
         show_pending_tasks()
-    
+
     elif cmd == "done":
         if len(sys.argv) < 3:
             print("Usage: py cursor_collab.py done <task_id>")
             return
-        
+
         task_id = int(sys.argv[2])
         complete_task(task_id)
         print(f"\n[OK] Task #{task_id} marked as completed")
-    
+
     else:
         print(f"Unknown command: {cmd}")
 

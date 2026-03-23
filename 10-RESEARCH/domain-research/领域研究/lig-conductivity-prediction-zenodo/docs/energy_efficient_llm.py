@@ -93,18 +93,18 @@ class EnergyReport:
 
 class QuantizationEngine:
     """Model quantization engine"""
-    
+
     def __init__(self):
         self.quantization_history: List[QuantizationResult] = []
-    
+
     def quantize(self, model: ModelConfig, method: str = "INT8") -> QuantizationResult:
         """Quantize model to lower precision"""
-        
+
         print(f"\n🔢 Quantization ({method})")
         print("-" * 80)
-        
+
         start_time = datetime.now()
-        
+
         if method == "INT8":
             compression = 4.0  # FP32 → INT8
             accuracy_drop = 0.005  # 0.5% drop
@@ -122,9 +122,9 @@ class QuantizationEngine:
             energy_reduction = 0.62
         else:
             raise ValueError(f"Unknown quantization method: {method}")
-        
+
         quant_time = random.uniform(1000, 5000)  # Simulated time
-        
+
         result = QuantizationResult(
             method=method,
             compression_ratio=compression,
@@ -133,31 +133,31 @@ class QuantizationEngine:
             energy_reduction=energy_reduction,
             quantization_time_ms=quant_time
         )
-        
+
         print(f"  Method: {method}")
         print(f"  Compression: {compression}x")
         print(f"  Accuracy Drop: {accuracy_drop:.1%}")
         print(f"  Speedup: {speedup}x")
         print(f"  Energy Reduction: {energy_reduction:.0%}")
         print(f"  Quantization Time: {quant_time:.0f}ms")
-        
+
         self.quantization_history.append(result)
         return result
 
 
 class PruningEngine:
     """Model pruning engine"""
-    
+
     def __init__(self):
         self.pruning_history: List[PruningResult] = []
-    
+
     def prune(self, model: ModelConfig, sparsity: float = 0.6,
               method: str = "structured") -> PruningResult:
         """Prune model to reduce parameters"""
-        
+
         print(f"\n✂️  Pruning ({method}, {sparsity:.0%} sparsity)")
         print("-" * 80)
-        
+
         # Calculate effects based on sparsity
         if method == "structured":
             # Structured pruning: better hardware utilization
@@ -169,9 +169,9 @@ class PruningEngine:
             accuracy_drop = sparsity * 0.015
             speedup = 1 + (sparsity * 0.8)
             energy_reduction = sparsity * 0.5
-        
+
         prune_time = random.uniform(2000, 8000)
-        
+
         result = PruningResult(
             method=method,
             sparsity=sparsity,
@@ -180,21 +180,21 @@ class PruningEngine:
             energy_reduction=energy_reduction,
             pruning_time_ms=prune_time
         )
-        
+
         print(f"  Method: {method}")
         print(f"  Sparsity: {sparsity:.0%}")
         print(f"  Accuracy Drop: {accuracy_drop:.1%}")
         print(f"  Speedup: {speedup:.1f}x")
         print(f"  Energy Reduction: {energy_reduction:.0%}")
         print(f"  Pruning Time: {prune_time:.0f}ms")
-        
+
         self.pruning_history.append(result)
         return result
 
 
 class DVFSController:
     """Dynamic voltage and frequency scaling controller"""
-    
+
     def __init__(self):
         self.config = DVFSConfig(
             voltage_levels=[0.7, 0.8, 0.9, 1.0, 1.1],
@@ -204,13 +204,13 @@ class DVFSController:
             power_state="balanced"
         )
         self.adjustment_history: List[Dict] = []
-    
+
     def adjust_for_workload(self, workload_type: str) -> Tuple[float, float]:
         """Adjust voltage/frequency based on workload"""
-        
+
         print(f"\n⚡ DVFS Adjustment ({workload_type})")
         print("-" * 80)
-        
+
         if workload_type == "inference":
             # High performance for inference
             voltage_idx = 4
@@ -226,23 +226,23 @@ class DVFSController:
             voltage_idx = 1
             frequency_idx = 1
             self.config.power_state = "eco"
-        
+
         old_voltage = self.config.current_voltage
         old_frequency = self.config.current_frequency
-        
+
         self.config.current_voltage = self.config.voltage_levels[voltage_idx]
         self.config.current_frequency = self.config.frequency_levels[frequency_idx]
-        
+
         # Calculate power change (P ∝ V²f)
         old_power = old_voltage ** 2 * old_frequency
         new_power = self.config.current_voltage ** 2 * self.config.current_frequency
         power_change = (new_power - old_power) / old_power
-        
+
         print(f"  Power State: {self.config.power_state}")
         print(f"  Voltage: {old_voltage:.1f}V → {self.config.current_voltage:.1f}V")
         print(f"  Frequency: {old_frequency:.1f}GHz → {self.config.current_frequency:.1f}GHz")
         print(f"  Power Change: {power_change:+.0%}")
-        
+
         self.adjustment_history.append({
             "workload": workload_type,
             "old_voltage": old_voltage,
@@ -251,9 +251,9 @@ class DVFSController:
             "new_frequency": self.config.current_frequency,
             "power_change": power_change
         })
-        
+
         return self.config.current_voltage, self.config.current_frequency
-    
+
     def get_power_state(self) -> str:
         """Get current power state"""
         return self.config.power_state
@@ -261,40 +261,40 @@ class DVFSController:
 
 class EnergyMonitor:
     """Real-time energy monitoring"""
-    
+
     def __init__(self):
         self.measurements: List[Dict] = []
         self.total_energy = 0.0
         self.inference_count = 0
-    
-    def measure_inference(self, model: ModelConfig, 
+
+    def measure_inference(self, model: ModelConfig,
                          quantization: Optional[QuantizationResult] = None,
                          pruning: Optional[PruningResult] = None) -> EnergyReport:
         """Measure energy for inference"""
-        
+
         # Base energy consumption
         base_energy = model.original_energy_j
-        
+
         # Apply optimizations
         if quantization:
             base_energy *= (1 - quantization.energy_reduction)
-        
+
         if pruning:
             base_energy *= (1 - pruning.energy_reduction)
-        
+
         self.total_energy += base_energy
         self.inference_count += 1
-        
+
         # Calculate metrics
         avg_power = base_energy / (model.original_latency_ms / 1000)
         energy_per_inference = self.total_energy / self.inference_count
-        
+
         # Carbon footprint (approximate: 0.5 kg CO2 per kWh)
         carbon = (self.total_energy / 3600000) * 0.5 * 1000  # grams
-        
+
         # Efficiency score (0-1)
         efficiency = min(1.0, (model.original_energy_j / base_energy) * 0.5)
-        
+
         report = EnergyReport(
             total_energy_j=self.total_energy,
             avg_power_w=avg_power,
@@ -303,15 +303,15 @@ class EnergyMonitor:
             carbon_footprint_g=carbon,
             efficiency_score=efficiency
         )
-        
+
         self.measurements.append(asdict(report))
         return report
-    
+
     def get_cumulative_report(self) -> EnergyReport:
         """Get cumulative energy report"""
         if self.inference_count == 0:
             return EnergyReport(0, 0, 0, 0, 0, 0)
-        
+
         return EnergyReport(
             total_energy_j=self.total_energy,
             avg_power_w=self.total_energy / (self.inference_count * 0.1),
@@ -324,19 +324,19 @@ class EnergyMonitor:
 
 class EnergyEfficientLLM:
     """Complete energy-efficient LLM inference system"""
-    
+
     def __init__(self):
         self.quantizer = QuantizationEngine()
         self.pruner = PruningEngine()
         self.dvfs = DVFSController()
         self.monitor = EnergyMonitor()
         self.optimizations: List[Dict] = []
-    
+
     def optimize_model(self, model: ModelConfig,
                       target_speedup: float = 8.0,
                       max_accuracy_drop: float = 0.02) -> Dict:
         """Optimize model for energy efficiency"""
-        
+
         print("\n" + "="*80)
         print("⚡ Energy-Efficient LLM Optimization")
         print("="*80)
@@ -345,62 +345,62 @@ class EnergyEfficientLLM:
         print(f"  Parameters: {model.params_billion:.1f}B")
         print(f"  Target Speedup: {target_speedup}x")
         print(f"  Max Accuracy Drop: {max_accuracy_drop:.1%}")
-        
+
         # Step 1: Quantization
         print("\n" + "="*80)
         print("Step 1: Quantization")
         print("="*80)
         quant_result = self.quantizer.quantize(model, "INT4")
-        
+
         # Step 2: Pruning
         print("\n" + "="*80)
         print("Step 2: Pruning")
         print("="*80)
         prune_result = self.pruner.prune(model, sparsity=0.6, method="structured")
-        
+
         # Step 3: DVFS Optimization
         print("\n" + "="*80)
         print("Step 3: DVFS Optimization")
         print("="*80)
         self.dvfs.adjust_for_workload("inference")
-        
+
         # Step 4: Combined Results
         print("\n" + "="*80)
         print("Step 4: Combined Optimization Results")
         print("="*80)
-        
+
         # Calculate combined effects
         combined_speedup = quant_result.speedup * prune_result.speedup
         combined_accuracy_drop = 1 - (1 - quant_result.accuracy_drop) * (1 - prune_result.accuracy_drop)
         combined_energy_reduction = 1 - (1 - quant_result.energy_reduction) * (1 - prune_result.energy_reduction)
-        
+
         print(f"\n  Combined Speedup: {combined_speedup:.1f}x")
         print(f"  Combined Accuracy Drop: {combined_accuracy_drop:.1%}")
         print(f"  Combined Energy Reduction: {combined_energy_reduction:.0%}")
-        
+
         # Check if targets met
         speedup_met = combined_speedup >= target_speedup
         accuracy_met = combined_accuracy_drop <= max_accuracy_drop
-        
+
         print(f"\n  Target Speedup Met: {'✓' if speedup_met else '✗'} ({combined_speedup:.1f}x / {target_speedup}x)")
         print(f"  Accuracy Constraint Met: {'✓' if accuracy_met else '✗'} ({combined_accuracy_drop:.1%} / {max_accuracy_drop:.1%})")
-        
+
         # Energy monitoring
         print("\n" + "="*80)
         print("Step 5: Energy Monitoring")
         print("="*80)
-        
+
         # Simulate multiple inferences
         for i in range(10):
             self.monitor.measure_inference(model, quant_result, prune_result)
-        
+
         energy_report = self.monitor.get_cumulative_report()
-        
+
         print(f"\n  Total Energy: {energy_report.total_energy_j:.2f} J")
         print(f"  Energy/Inference: {energy_report.energy_per_inference_j:.4f} J")
         print(f"  Carbon Footprint: {energy_report.carbon_footprint_g:.4f} g CO2")
         print(f"  Efficiency Score: {energy_report.efficiency_score:.0%}")
-        
+
         # Record optimization
         optimization = {
             "model": model.name,
@@ -413,24 +413,24 @@ class EnergyEfficientLLM:
             "energy_report": asdict(energy_report),
             "targets_met": speedup_met and accuracy_met
         }
-        
+
         self.optimizations.append(optimization)
-        
+
         return {
             "status": "completed",
             "optimization": optimization,
             "success": speedup_met and accuracy_met
         }
-    
+
     def get_system_stats(self) -> Dict:
         """Get system statistics"""
         if not self.optimizations:
             return {"optimizations": 0}
-        
+
         avg_speedup = sum(o["combined_speedup"] for o in self.optimizations) / len(self.optimizations)
         avg_energy_reduction = sum(o["combined_energy_reduction"] for o in self.optimizations) / len(self.optimizations)
         success_rate = sum(1 for o in self.optimizations if o["targets_met"]) / len(self.optimizations)
-        
+
         return {
             "optimizations_completed": len(self.optimizations),
             "avg_speedup": avg_speedup,
@@ -443,9 +443,9 @@ class EnergyEfficientLLM:
 
 def demo_energy_efficiency():
     """Demo energy-efficient LLM inference"""
-    
+
     system = EnergyEfficientLLM()
-    
+
     # Demo model (simulating Llama-2-7B)
     model = ModelConfig(
         name="Llama-2-7B-Edge",
@@ -456,37 +456,37 @@ def demo_energy_efficiency():
         original_latency_ms=500.0,
         original_energy_j=10.0
     )
-    
+
     # Run optimization
     result = system.optimize_model(
         model,
         target_speedup=8.0,
         max_accuracy_drop=0.02
     )
-    
+
     # Print stats
     print("\n" + "="*80)
     print("📊 System Statistics")
     print("="*80)
-    
+
     stats = system.get_system_stats()
     print(f"\n  Optimizations: {stats['optimizations_completed']}")
     print(f"  Avg Speedup: {stats['avg_speedup']:.1f}x")
     print(f"  Avg Energy Reduction: {stats['avg_energy_reduction']:.0%}")
     print(f"  Success Rate: {stats['success_rate']:.0%}")
-    
+
     # Save results
     import os
     os.makedirs("data", exist_ok=True)
     output_file = "data/energy_efficient_llm_demo.json"
-    
+
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump({
             "timestamp": datetime.now().isoformat(),
             "optimization_result": result,
             "system_stats": stats
         }, f, indent=2, ensure_ascii=False)
-    
+
     print(f"\n💾 Results saved to: {output_file}")
 
 
@@ -498,10 +498,10 @@ def main():
     parser.add_argument("--sparsity", type=float, default=0.6, help="Sparsity level")
     parser.add_argument("--stats", action="store_true", help="Show statistics")
     args = parser.parse_args()
-    
+
     if args.demo or True:  # Default to demo
         demo_energy_efficiency()
-    
+
     print("\n" + "="*80)
     print("✅ Energy-efficient LLM inference complete!")
     print("="*80)

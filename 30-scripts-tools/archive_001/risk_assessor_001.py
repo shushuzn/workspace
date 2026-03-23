@@ -36,25 +36,25 @@ HIGH_RISK_PATTERNS = [
 
 def assess_risk(command: str, file_path: str = None) -> dict:
     """评估操作风险"""
-    
+
     risk_score = 0  # 0-100
     risk_level = "🟢"  # 🟢🟡🔴
     reasons = []
-    
+
     command_lower = command.lower()
-    
+
     # 检查高风险关键词
     for keyword in HIGH_RISK_KEYWORDS:
         if keyword in command_lower:
             risk_score += 30
             reasons.append(f"包含高风险关键词：{keyword}")
-    
+
     # 检查中风险关键词
     for keyword in MEDIUM_RISK_KEYWORDS:
         if keyword in command_lower:
             risk_score += 15
             reasons.append(f"包含中风险关键词：{keyword}")
-    
+
     # 检查文件模式
     if file_path:
         for pattern in HIGH_RISK_PATTERNS:
@@ -62,7 +62,7 @@ def assess_risk(command: str, file_path: str = None) -> dict:
                 risk_score += 20
                 reasons.append(f"修改关键文件：{file_path}")
                 break
-    
+
     # 确定风险等级
     if risk_score >= 40:
         risk_level = "HIGH"
@@ -73,7 +73,7 @@ def assess_risk(command: str, file_path: str = None) -> dict:
     else:
         risk_level = "LOW"
         requires_confirmation = False
-    
+
     result = {
         "risk_level": risk_level,
         "risk_score": risk_score,
@@ -83,7 +83,7 @@ def assess_risk(command: str, file_path: str = None) -> dict:
         "file_path": file_path,
         "timestamp": datetime.now().isoformat()
     }
-    
+
     return result
 
 logging.basicConfig(level=logging.INFO)
@@ -96,11 +96,11 @@ def main():
             ("git checkout HEAD -- file.py", "file.py"),
             ("py check_tool_files.py", None),
         ]
-        
+
         print("=" * 60)
         print("风险评级测试")
         print("=" * 60)
-        
+
         for cmd, path in test_cases:
             result = assess_risk(cmd, path)
             level_cn = {"HIGH": "高风险", "MEDIUM": "中风险", "LOW": "低风险"}
@@ -111,16 +111,16 @@ def main():
                 print("原因:")
                 for r in result['reasons']:
                     print(f"  - {r}")
-        
+
         return 0
-    
+
     # 实际评估模式
     command = sys.argv[1]
     file_path = sys.argv[2] if len(sys.argv) > 2 else None
-    
+
     result = assess_risk(command, file_path)
     print(json.dumps(result, ensure_ascii=False, indent=2))
-    
+
     # 高风险时返回非零退出码
     return 1 if result["requires_confirmation"] else 0
 # ==============================================================================

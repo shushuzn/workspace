@@ -13,16 +13,16 @@ from pathlib import Path
 def check_existing_tools():
     scripts_dir = Path("30-scripts-tools")
     registry_file = Path("30-scripts-tools/tools_registry.json")
-    
+
     # 获取所有实际存在的 .py 文件
     py_files = list(scripts_dir.glob("*.py"))
     py_files = [f for f in py_files if not f.name.startswith("_") and f.parent == scripts_dir]
-    
+
     print(f"=" * 60)
     print(f"30-scripts-tools 目录中的 Python 文件")
     print(f"=" * 60)
     print(f"总数：{len(py_files)}\n")
-    
+
     # 按功能分类
     categories = {
         "critic": [],
@@ -33,7 +33,7 @@ def check_existing_tools():
         "test": [],
         "other": []
     }
-    
+
     for f in py_files:
         name = f.name.lower()
         if "critic" in name:
@@ -50,26 +50,26 @@ def check_existing_tools():
             categories["test"].append(f.name)
         else:
             categories["other"].append(f.name)
-    
+
     # 输出分类结果
     for cat, files in categories.items():
         if files:
             print(f"\n[{cat.upper()}] - {len(files)} 个文件:")
             for f in sorted(files):
                 print(f"  - {f}")
-    
+
     # 加载 registry，检查哪些工具有对应文件
     print(f"\n{'=' * 60}")
     print(f"Registry 工具 vs 实际文件匹配")
     print(f"=" * 60)
-    
+
     with open(registry_file, "r", encoding="utf-8") as f:
         registry = json.load(f)
-    
+
     tools = registry.get("tools", {})
     matched = []
     unmatched = []
-    
+
     for tool_id, info in tools.items():
         command = info.get("command", "")
         if command and "py " in command:
@@ -80,17 +80,17 @@ def check_existing_tools():
                 matched.append((tool_id, filename))
             else:
                 unmatched.append((tool_id, filename))
-    
+
     print(f"\n匹配的工具：{len(matched)}")
     for tool_id, filename in sorted(matched):
         print(f"  ✓ {tool_id} -> {filename}")
-    
+
     print(f"\n不匹配的工具：{len(unmatched)}")
     if unmatched:
         print(f"前 30 个示例:")
         for tool_id, filename in sorted(unmatched)[:30]:
             print(f"  ✗ {tool_id} -> {filename} (不存在)")
-    
+
     return {
         "total_py_files": len(py_files),
         "matched_tools": len(matched),

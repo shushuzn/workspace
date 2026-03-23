@@ -108,7 +108,7 @@ def load_progress():
             return json.loads(PROGRESS_FILE.read_text(encoding="utf-8"))
         except Exception:
             pass
-    
+
     return {
         "user_id": "default",
         "current_level": DifficultyLevel.BEGINNER,
@@ -141,7 +141,7 @@ def calculate_optimal_difficulty(progress):
     current = progress["current_level"]
     consecutive_success = progress["consecutive_success"]
     consecutive_failure = progress["consecutive_failure"]
-    
+
     # 连续成功 -> 提高难度
     if consecutive_success >= 3:
         new_level = min(DifficultyLevel.MASTER, current + 1)
@@ -150,7 +150,7 @@ def calculate_optimal_difficulty(progress):
         new_level = max(DifficultyLevel.BEGINNER, current - 1)
     else:
         new_level = current
-    
+
     return new_level
 
 
@@ -169,14 +169,14 @@ def evaluate_task_result(progress, task_result):
     progress["total_tasks_completed"] += 1
     success = task_result.get("completed", False)
     errors = task_result.get("errors", 0)
-    
+
     if success:
         progress["consecutive_success"] += 1
         progress["consecutive_failure"] = 0
     else:
         progress["consecutive_failure"] += 1
         progress["consecutive_success"] = 0
-    
+
     # 记录历史
     progress["level_history"].append({
         "level": int(progress["current_level"]),
@@ -184,14 +184,14 @@ def evaluate_task_result(progress, task_result):
         "errors": errors,
         "timestamp": datetime.now().isoformat(),
     })
-    
+
     # 只保留最近20条记录
     progress["level_history"] = progress["level_history"][-20:]
-    
+
     # 计算新难度
     new_level = calculate_optimal_difficulty(progress)
     progress["current_level"] = new_level
-    
+
     save_progress(progress)
     return progress
 
@@ -201,7 +201,7 @@ def get_next_task():
     progress = load_progress()
     level = progress["current_level"]
     config = DIFFICULTY_CONFIG[level]
-    
+
     return {
         "difficulty": level,
         "level_name": config["name"],
@@ -219,43 +219,43 @@ def show_progress():
     progress = load_progress()
     level = progress["current_level"]
     config = DIFFICULTY_CONFIG[level]
-    
+
     # 计算成功率
     history = progress["level_history"]
     if history:
         success_rate = sum(1 for h in history if h["success"]) / len(history) * 100
     else:
         success_rate = 0
-    
+
     # 计算平均难度
     if history:
         avg_level = sum(h["level"] for h in history) / len(history)
     else:
         avg_level = level
-    
+
     print("=" * 70)
     print("TASK GRADIENT PROGRESS REPORT")
     print("=" * 70)
     print(f"Current Level: [{level}] {config['name']}")
     print(f"Description: {config['description']}")
     print("-" * 70)
-    
+
     print("\n[STATS]")
     print(f"  Total Tasks: {progress['total_tasks_completed']}")
     print(f"  Success Rate: {success_rate:.1f}%")
     print(f"  Avg Difficulty: {avg_level:.1f}/6")
-    
+
     print("\n[PROGRESSION]")
     print(f"  Consecutive Success: {progress['consecutive_success']}/3 (need 3 to level up)")
     print(f"  Consecutive Failure: {progress['consecutive_failure']}/2 (need 2 to level down)")
-    
+
     print("\n[DIFFICULTY LADDER]")
     for lvl in DifficultyLevel:
         marker = ">>>" if lvl == level else "   "
         name = DIFFICULTY_CONFIG[lvl]["name"]
         desc = DIFFICULTY_CONFIG[lvl]["description"]
         print(f"  {marker} [{lvl}] {name:<10} - {desc}")
-    
+
     print("\n[OPTIMAL CHALLENGE ZONE]")
     if 2 <= progress["consecutive_success"] <= 4:
         print("  [FLOW STATE] You are in the optimal challenge zone!")
@@ -269,7 +269,7 @@ def show_progress():
 
 def main():
     import sys
-    
+
     if len(sys.argv) < 2:
         print("TASK-GRADIENT-001 Usage:")
         print("  py task_gradient_001.py --show")
@@ -277,7 +277,7 @@ def main():
         print("  py task_gradient_001.py --complete")
         print("  py task_gradient_001.py --fail")
         return
-    
+
     if sys.argv[1] == "--show":
         show_progress()
     elif sys.argv[1] == "--next":

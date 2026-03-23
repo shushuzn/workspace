@@ -23,11 +23,11 @@ RESEARCH_DIR = Path("60-DATA/research_001")
 
 class ResearchTopicGenerator:
     """研究主题生成器"""
-    
+
     def __init__(self):
         self.dir = RESEARCH_DIR
         self.dir.mkdir(parents=True, exist_ok=True)
-    
+
     def generate_topics(self, category: str = None) -> list:
         """
 # ==============================================================================
@@ -82,12 +82,12 @@ Fixes:
             {"id": 7, "category": "visualization", "topic": "Real-time Progress Dashboard", "priority": "low"},
             {"id": 8, "category": "integration", "topic": "External API Standardization", "priority": "medium"},
         ]
-        
+
         if category:
             topics = [t for t in topics if t["category"] == category]
-        
+
         return topics
-    
+
     def get_by_priority(self) -> dict:
         """按优先级分组"""
         topics = self.generate_topics()

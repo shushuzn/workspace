@@ -1,4 +1,4 @@
-﻿# medium-rss-collector-jina.py - 混合使用 Jina AI + feedparser
+# medium-rss-collector-jina.py - 混合使用 Jina AI + feedparser
 import feedparser
 import json
 import os
@@ -58,17 +58,17 @@ def fetch_medium_via_jina(conn, feed_info, max_articles):
     url = feed_info["url"]
     name = feed_info["name"]
     log(f"Fetching (Jina): {name}")
-    
+
     try:
         jina_url = 'https://r.jina.ai/' + url
         response = requests.get(jina_url, timeout=30)
         content = response.text
-        
+
         # 提取标题和链接
         articles = []
         lines = content.split('\n')
         current_title = None
-        
+
         for line in lines:
             if line.startswith('<![CDATA[') and ']]>' in line:
                 current_title = line.replace('<![CDATA[', '').replace(']]>', '').strip()
@@ -86,10 +86,10 @@ def fetch_medium_via_jina(conn, feed_info, max_articles):
                         if len(articles) >= max_articles:
                             break
                     current_title = None
-        
+
         log(f"  Found {len(articles)} new articles")
         return articles
-        
+
     except Exception as e:
         log(f"  Error: {e}")
         return []
@@ -99,41 +99,41 @@ def fetch_feed_direct(conn, feed_info, max_articles):
     url = feed_info["url"]
     name = feed_info["name"]
     log(f"Fetching: {name}")
-    
+
     try:
         feed = feedparser.parse(url)
-        
+
         if not feed.entries:
             log(f"  No entries in feed")
             return []
-        
+
         articles = []
         for entry in feed.entries[:max_articles * 2]:
             article_url = entry.get('link', '')
-            
+
             if not article_url:
                 continue
-            
+
             if is_seen(conn, article_url):
                 continue
-            
+
             title = entry.get('title', f"Article ({article_url.split('/')[-1][:30]})")
             published = entry.get('published', '')
-            
+
             articles.append({
                 "url": article_url,
                 "title": title,
                 "published": published
             })
-            
+
             mark_seen(conn, article_url, title)
-            
+
             if len(articles) >= max_articles:
                 break
-        
+
         log(f"  Found {len(articles)} new articles")
         return articles
-        
+
     except Exception as e:
         log(f"  Error: {e}")
         return []
@@ -173,7 +173,7 @@ def main():
     log("RSS Collector (Hybrid: Jina + feedparser) started")
     config = load_config()
     conn = init_db()
-    
+
     all_articles = []
     for feed_info in config["feeds"]:
         if feed_info.get("enabled", True):
@@ -182,16 +182,16 @@ def main():
                 articles = fetch_medium_via_jina(conn, feed_info, config["maxArticlesPerRun"] - len(all_articles))
             else:
                 articles = fetch_feed_direct(conn, feed_info, config["maxArticlesPerRun"] - len(all_articles))
-            
+
             all_articles.extend(articles)
             if len(all_articles) >= config["maxArticlesPerRun"]:
                 break
-    
+
     log(f"Total new articles: {len(all_articles)}")
-    
+
     for article in all_articles[:config["maxArticlesPerRun"]]:
         process_article(article)
-    
+
     conn.close()
     log("Complete")
     log("=" * 50)

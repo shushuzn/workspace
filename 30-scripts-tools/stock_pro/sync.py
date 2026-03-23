@@ -10,7 +10,7 @@ SYNC_FILE = WORKSPACE / "30-scripts-tools" / "stock_pro_sync.json"
 class DataSync:
     def __init__(self):
         self.sync_state = self.load()
-    
+
     def load(self):
         """Load sync state"""
         if SYNC_FILE.exists():
@@ -20,23 +20,23 @@ class DataSync:
             except:
                 pass
         return {"last_sync": None, "sources": {}, "logs": []}
-    
+
     def save(self):
         """Save sync state"""
         with open(SYNC_FILE, 'w') as f:
             json.dump(self.sync_state, f, indent=2)
-    
+
     def sync_yfinance(self, symbols):
         """Sync data from yfinance"""
         try:
             import yfinance as yf
-            
+
             results = []
             for sym in symbols:
                 try:
                     ticker = yf.Ticker(sym)
                     info = ticker.info
-                    
+
                     results.append({
                         "symbol": sym,
                         "price": info.get("currentPrice") or info.get("regularMarketPrice"),
@@ -49,7 +49,7 @@ class DataSync:
                     })
                 except:
                     results.append({"symbol": sym, "error": "Failed to fetch"})
-            
+
             self.sync_state["last_sync"] = datetime.now().isoformat()
             self.sync_state["sources"]["yfinance"] = {
                 "timestamp": datetime.now().isoformat(),
@@ -61,31 +61,31 @@ class DataSync:
                 "symbols": len(symbols)
             })
             self.save()
-            
+
             return results
         except ImportError:
             return [{"error": "yfinance not installed"}]
-    
+
     def sync_alpha_vantage(self, symbols, api_key):
         """Sync data from Alpha Vantage"""
         # Placeholder for Alpha Vantage integration
         return [{"error": "Alpha Vantage not implemented"}]
-    
+
     def get_sync_status(self):
         """Get sync status"""
         report = "# Data Sync Status\n\n"
-        
+
         last_sync = self.sync_state.get("last_sync")
         if last_sync:
             report += f"**Last Sync:** {last_sync}\n"
         else:
             report += "**Last Sync:** Never\n"
-        
+
         if self.sync_state.get("sources"):
             report += "\n## Sources\n\n"
             for source, data in self.sync_state["sources"].items():
                 report += f"- **{source}:** {data['symbols']} symbols ({data['timestamp']})\n"
-        
+
         return report
 
 

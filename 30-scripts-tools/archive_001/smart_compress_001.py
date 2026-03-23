@@ -32,7 +32,7 @@ from collections import defaultdict
 
 class SmartCompressor:
     """智能压缩器 v2.0"""
-    
+
     # 保留关键词 (高优先级)
     PRIORITY_KEYWORDS = {
         'critical': ['goal', 'constraint', 'decision', 'block', 'error', 'fail', 'stop'],
@@ -40,7 +40,7 @@ class SmartCompressor:
         'medium': ['tool', 'file', 'function', 'class', 'method', 'script'],
         'low': ['test', 'check', 'view', 'read', 'list']
     }
-    
+
     # 需要保留的结构标记
     STRUCTURE_MARKERS = [
         r'^#{1,6}\s',           # 标题
@@ -49,55 +49,55 @@ class SmartCompressor:
         r'^[-*]\s',              # 列表项
         r'^\[.*\]:\s*',          # 链接定义
     ]
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.today = datetime.now().strftime('%Y-%m-%d')
         self.compress_dir = self.workspace / '13-memory/.compress_cache'
         self.compress_dir.mkdir(parents=True, exist_ok=True)
-        
+
         # 压缩参数
         self.max_tokens = 2500        # 目标 <2500 tokens (~5KB)
         self.chunk_size = 500         # 分块大小
         self.min_keep_lines = 30      # 最少保留行数
         self.summary_ratio = 0.15     # 摘要比例
-        
+
     def estimate_tokens(self, text: str) -> int:
         """智能Token估算 - 比简单除4更准确"""
         # 中文: 每个字符 ≈ 1 token
         # 英文: 约4字符 = 1 token
         # 代码: 约3字符 = 1 token
-        
+
         chinese = len(re.findall(r'[\u4e00-\u9fff]', text))
         code = len(re.findall(r'[{}()\[\];=]', text))
         english = len(text) - chinese - code
-        
+
         return chinese + (english // 4) + (code // 3)
-    
+
     def calculate_line_priority(self, line: str) -> Tuple[int, str]:
         """计算行的优先级"""
         line_lower = line.lower().strip()
-        
+
         # 检查关键词
         for level, keywords in self.PRIORITY_KEYWORDS.items():
             for kw in keywords:
                 if kw in line_lower:
                     priority = {'critical': 100, 'high': 75, 'medium': 50, 'low': 25}
                     return priority[level], level
-        
+
         # 检查结构标记
         for marker in self.STRUCTURE_MARKERS:
             if re.match(marker, line):
                 return 60, 'structure'
-        
+
         # 检查任务状态标记
         if re.search(r'\[x\]|\[✅\]|\[DONE\]', line):
             return 70, 'completed_task'
         if re.search(r'\[ \]|\[ \]', line):
             return 40, 'pending_task'
-            
+
         return 30, 'normal'
-    
+
     def extract_key_sections(self, content: str) -> Dict[str, str]:
         """
 # ==============================================================================
@@ -145,9 +145,9 @@ Fixes:
         sections = {}
         current_section = 'header'
         current_lines = []
-        
+
         lines = content.split('\n')
-        
+
         for line in lines:
             # 检测章节标题
             if re.match(r'^#{1,3}\s+', line):
@@ -157,12 +157,12 @@ Fixes:
                 current_lines = [line]
             else:
                 current_lines.append(line)
-        
+
         if current_lines:
             sections[current_section] = '\n'.join(current_lines)
-        
+
         return sections
-    
+
     def smart_compress_lines(self, lines: List[str]) -> List[str]:
         """智能压缩行 - 保持原始顺序"""
         total_lines = len(lines)

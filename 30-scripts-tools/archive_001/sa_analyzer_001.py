@@ -29,21 +29,21 @@ CONFIG_FILE = Path("30-scripts-tools/sa_036_config.json")
 
 class PortfolioAnalyzer:
     """组合分析器"""
-    
+
     def __init__(self):
         self.analyze_dir = ANALYZE_DIR
         self.config = self._load_config()
-        
+
         self.analyze_dir.mkdir(parents=True, exist_ok=True)
-        
+
         self.report_file = self.analyze_dir / "analysis_report.json"
-    
+
     def _load_config(self) -> dict:
         default = {
             "risk_free_rate": 0.03,
             "trading_days": 252
         }
-        
+
         if CONFIG_FILE.exists():
             try:
                 with open(CONFIG_FILE, "r", encoding="utf-8") as f:
@@ -51,7 +51,7 @@ class PortfolioAnalyzer:
             except (Exception,):
                 return default
         return default
-    
+
     def _generate_returns(self, symbol: str, days: int = 252) -> list:
         """
 # ==============================================================================
@@ -97,14 +97,14 @@ Fixes:
 
 生成模拟收益率"""
         random.seed(hash(symbol) % 10000)
-        
+
         returns = []
         for _ in range(days):
             ret = random.gauss(0.0005, 0.02)
             returns.append(ret)
-        
+
         return returns
-    
+
     def calculate_returns(self, positions: dict, days: int = 252) -> dict:
         """计算收益率序列"""
         returns_data = {}

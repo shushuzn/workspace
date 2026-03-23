@@ -292,13 +292,13 @@ ARXIV_INSPIRATIONS = [
 
 def generate_research_driven_brainstorm():
     """生成研究驱动的头脑风暴报告"""
-    
+
     print("=" * 70)
     print("🧠 AI Agent 创新头脑风暴 (研究驱动)")
     print("=" * 70)
-    
+
     all_ideas = []
-    
+
     # 收集 GitHub 灵感
     print(f"\n📊 GitHub 项目分析:")
     for proj in GITHUB_INSPIRATIONS:
@@ -307,7 +307,7 @@ def generate_research_driven_brainstorm():
             idea['source_type'] = 'GitHub'
             idea['project'] = proj['project']
             all_ideas.append(idea)
-    
+
     # 收集 arXiv 灵感
     print(f"\n📊 arXiv 研究方向:")
     for area in ARXIV_INSPIRATIONS:
@@ -316,26 +316,26 @@ def generate_research_driven_brainstorm():
             idea['source_type'] = 'arXiv'
             idea['research_area'] = area['research_area']
             all_ideas.append(idea)
-    
+
     # 计算优先级分数
     for idea in all_ideas:
         idea['priority_score'] = idea['impact'] / idea['effort'] if idea['effort'] > 0 else 0
-    
+
     # 排序
     all_ideas.sort(key=lambda x: x['priority_score'], reverse=True)
-    
+
     # 统计
     total_ideas = len(all_ideas)
     github_ideas = sum(1 for i in all_ideas if i['source_type'] == 'GitHub')
     arxiv_ideas = sum(1 for i in all_ideas if i['source_type'] == 'arXiv')
     high_priority = sum(1 for i in all_ideas if i['impact'] >= 4 and i['effort'] <= 3)
-    
+
     print(f"\n📊 总体统计:")
     print(f"  总创意数：{total_ideas}")
     print(f"  GitHub 灵感：{github_ideas} 个")
     print(f"  arXiv 灵感：{arxiv_ideas} 个")
     print(f"  高优先级 (高影响力/低工作量): {high_priority} 个")
-    
+
     # Top 10
     print(f"\n🏆 Top 10 创意 (按优先级分数):")
     for i, idea in enumerate(all_ideas[:10], 1):
@@ -344,19 +344,19 @@ def generate_research_driven_brainstorm():
         print(f"     来源：{source}")
         print(f"     影响力：{idea['impact']}/5, 工作量：{idea['effort']}/5, 分数：{idea['priority_score']:.2f}")
         print(f"     时间：{idea['timeline']}")
-    
+
     # 短期高优先级
     short_term_high = [
         i for i in all_ideas
         if i['impact'] >= 4 and i['effort'] <= 3 and '短期' in i['timeline']
     ]
-    
+
     print(f"\n🎯 短期高优先级实施清单 ({len(short_term_high)} 个):")
     for i, idea in enumerate(short_term_high, 1):
         print(f"  {i}. [{idea['id']}] {idea['title']}")
         print(f"     {idea['description']}")
         print(f"     来源：{idea['source_type']} - {idea.get('project', idea.get('research_area', ''))}")
-    
+
     # 生成报告
     report = {
         "title": "AI Agent 创新头脑风暴 (研究驱动)",
@@ -373,20 +373,20 @@ def generate_research_driven_brainstorm():
         "short_term_high_priority": short_term_high,
         "all_ideas": all_ideas
     }
-    
+
     # 保存报告
     report_path = Path("flow-archive/20260318-universal-workflow-001/brainstorm-research-driven.md")
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    
+
     with open(report_path, 'w', encoding='utf-8') as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
-    
+
     print(f"\n💾 报告已保存：{report_path}")
-    
+
     print("\n" + "=" * 70)
     print("✅ 研究驱动头脑风暴完成!")
     print("=" * 70)
-    
+
     return report
 
 

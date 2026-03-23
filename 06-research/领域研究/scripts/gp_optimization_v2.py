@@ -87,13 +87,13 @@ best_gp = None
 for name, kernel in kernels.items():
     gp = GaussianProcessRegressor(kernel=kernel, n_restarts_optimizer=30, random_state=42, normalize_y=True)
     gp.fit(X_train_s, y_train_s)
-    
+
     y_pred_s, _ = gp.predict(X_test_s, return_std=True)
     y_pred = scaler_y.inverse_transform(y_pred_s.reshape(-1, 1)).flatten()
     r2 = r2_score(y_test, y_pred)
-    
+
     print(f"  {name}: R2 = {r2:.3f}")
-    
+
     if r2 > best_r2:
         best_r2 = r2
         best_kernel = name

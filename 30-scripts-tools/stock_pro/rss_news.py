@@ -59,42 +59,42 @@ def fetch_rss(key):
     config = RSS_FEEDS.get(key)
     if not config:
         return news
-    
+
     data = _fetch(config["url"])
     if not data:
         return news
-    
+
     text = data.decode('utf-8', errors='ignore')
-    
+
     for item_html in re.findall(r'<item[^>]*>(.*?)</item>', text, re.DOTALL):
         title = re.search(r'<title[^>]*><!\[CDATA\[(.*?)\]\]></title>|<title[^>]*>(.*?)</title>', item_html)
         if not title:
             continue
         title = unescape(title.group(1) or title.group(2)).strip()
-        
+
         link = re.search(r'<link[^>]*href=["\'](.*?)["\']', item_html)
         link = link.group(1) if link else ""
-        
+
         desc = re.search(r'<description[^>]*><!\[CDATA\[(.*?)\]\]></description>|<description[^>]*>(.*?)</description>', item_html)
         content = ""
         if desc:
             c = desc.group(1) or desc.group(2) or ""
             content = re.sub(r'<[^>]+>', '', c)
             content = unescape(content).strip()
-        
+
         date = re.search(r'<pubDate>(.*?)</pubDate>', item_html)
         date = date.group(1)[:16] if date else datetime.now().strftime("%H:%M")
-        
+
         if title and len(title) > 10:
             news.append({"source": config["name"], "title": title, "url": link, "content": content, "time": date})
-    
+
     return news
 
 
 def fetch_all_parallel():
     # Fetch Jin10 first (priority)
     jin10_news = fetch_jin10_rss()
-    
+
     # Fetch RSS feeds in parallel
     rss_news = []
     with ThreadPoolExecutor(max_workers=8) as ex:
@@ -104,7 +104,7 @@ def fetch_all_parallel():
                 rss_news.extend(f.result())
             except:
                 pass
-    
+
     # Jin10 first, then RSS
     return jin10_news + rss_news
 
@@ -113,17 +113,17 @@ def fetch_jin10_rss():
     """Fetch Jin10 news for RSS feed"""
     news = []
     cache_file = Path(__file__).parent / "data_jin10_news.json"
-    
+
     # Try to load from cache
     if cache_file.exists():
         try:
             with open(cache_file, 'r', encoding='utf-8') as f:
                 data = json.load(f)
-            
+
             for item in data.get('news', []):
                 title = item.get('title', '')
                 url = item.get('url', '')
-                
+
                 # Jin10 format: title contains headline\n\ncontent
                 if '\n' in title:
                     parts = title.split('\n', 2)
@@ -137,7 +137,7 @@ def fetch_jin10_rss():
                     content = content.strip()
                 else:
                     headline, content = title, ''
-                
+
                 if headline:
                     news.append({
                         "source": "金十数据",
@@ -148,7 +148,7 @@ def fetch_jin10_rss():
                     })
         except:
             pass
-    
+
     # If no cache, fetch fresh
     if not news:
         try:
@@ -156,20 +156,20 @@ def fetch_jin10_rss():
             req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"})
             with urllib.request.urlopen(req, timeout=15) as resp:
                 content = resp.read().decode('utf-8')
-            
+
             # Extract all links
             links = re.findall(r'https://xnews\.jin10\.com/details/\d+', content)
             links = list(dict.fromkeys(links))[:15]
-            
+
             for detail_url in links:
                 try:
                     detail_req = urllib.request.Request(detail_url, headers={"User-Agent": "Mozilla/5.0"})
                     with urllib.request.urlopen(detail_req, timeout=8) as r:
                         page = r.read().decode('utf-8')
-                    
+
                     title_match = re.search(r'<title>([^<]+)</title>', page)
                     title = title_match.group(1).replace('-市场参考-金十数据', '').strip() if title_match else ""
-                    
+
                     if title:
                         news.append({
                             "source": "金十数据",
@@ -183,7 +183,7 @@ def fetch_jin10_rss():
                     pass
         except:
             pass
-    
+
     return news
 
 
@@ -202,7 +202,7 @@ def get_news(symbol=None, limit=100):
         news = filter_stock(fetch_all_parallel(), symbol)
     else:
         news = fetch_all_parallel()
-    
+
     seen = set()
     unique = []
     for n in news:
@@ -217,12 +217,12 @@ def format_report(symbol=None, limit=50):
     news = get_news(symbol, limit=limit)
     ts = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     source_count = len(RSS_FEEDS) + 1  # +1 for Jin10
-    
+
     report = f"#{' ' + symbol if symbol else ''} RSS News\n\n_Feed: {ts} | {source_count} sources (金十+{len(RSS_FEEDS)} RSS)_\n\n"
-    
+
     if not news:
         return report + "_No news_"
-    
+
     for i, n in enumerate(news, 1):
         report += f"## {i}. {n['title']}\n\n"
         report += f"**{n['source']}** | {n['time']}\n\n"
@@ -231,7 +231,7 @@ def format_report(symbol=None, limit=50):
         if n.get("url"):
             report += f"[Read more]({n['url']})\n"
         report += "\n---\n\n"
-    
+
     return report
 
 

@@ -37,7 +37,7 @@ def retry(max_attempts: int = 3, delay: float = 1.0, backoff: float = 2.0):
         def wrapper(*args, **kwargs) -> Any:
             attempts = 0
             current_delay = delay
-            
+
             while attempts < max_attempts:
                 try:
                     return func(*args, **kwargs)
@@ -46,11 +46,11 @@ def retry(max_attempts: int = 3, delay: float = 1.0, backoff: float = 2.0):
                     if attempts >= max_attempts:
                         logger.error(f"{func.__name__} 失败，已达最大重试次数：{e}")
                         raise
-                    
+
                     logger.warning(f"{func.__name__} 失败，{current_delay}秒后重试 ({attempts}/{max_attempts}): {e}")
                     time.sleep(current_delay)
                     current_delay *= backoff
-            
+
             return None
         return wrapper
     return decorator
@@ -74,12 +74,12 @@ class ErrorHandler:
     """
     错误处理器 - 集中管理错误
     """
-    
+
     def __init__(self):
         self.error_count = 0
         self.success_count = 0
         self.errors = []
-    
+
     def record_error(self, error: Exception, context: str = "") -> None:
         """记录错误"""
         self.error_count += 1
@@ -91,11 +91,11 @@ class ErrorHandler:
         }
         self.errors.append(error_info)
         logger.error(f"错误 [{self.error_count}]: {error_info}")
-    
+
     def record_success(self) -> None:
         """记录成功"""
         self.success_count += 1
-    
+
     def get_stats(self) -> dict:
         """获取统计信息"""
         total = self.error_count + self.success_count
@@ -106,7 +106,7 @@ class ErrorHandler:
             'success_rate': self.success_count / total if total > 0 else 0,
             'errors': self.errors[-10:]  # 最近 10 个错误
         }
-    
+
     def should_continue(self, max_error_rate: float = 0.2) -> bool:
         """
         判断是否应该继续
@@ -120,7 +120,7 @@ class ErrorHandler:
         total = self.error_count + self.success_count
         if total == 0:
             return True
-        
+
         error_rate = self.error_count / total
         return error_rate <= max_error_rate
 

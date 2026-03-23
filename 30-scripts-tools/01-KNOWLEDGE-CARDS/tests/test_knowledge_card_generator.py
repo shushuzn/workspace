@@ -30,7 +30,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "core"))
 
 class TestMetadataExtraction(unittest.TestCase):
     """测试 1: 元数据提取功能"""
-    
+
     def setUp(self):
         """测试前准备"""
         self.sample_metadata = {
@@ -40,7 +40,7 @@ class TestMetadataExtraction(unittest.TestCase):
             "arxiv_id": "2401.00001",
             "doi": "10.1234/test.2024.001"
         }
-    
+
     def test_extract_title(self):
         """测试标题提取"""
         # TODO: 实际调用 extract_metadata 函数
@@ -48,14 +48,14 @@ class TestMetadataExtraction(unittest.TestCase):
         self.assertIsNotNone(title)
         self.assertIsInstance(title, str)
         self.assertGreater(len(title), 0)
-    
+
     def test_extract_authors(self):
         """测试作者提取"""
         authors = self.sample_metadata["authors"]
         self.assertIsNotNone(authors)
         self.assertIsInstance(authors, list)
         self.assertGreater(len(authors), 0)
-    
+
     def test_extract_year(self):
         """测试年份提取"""
         year = self.sample_metadata["year"]
@@ -63,7 +63,7 @@ class TestMetadataExtraction(unittest.TestCase):
         self.assertIsInstance(year, int)
         self.assertGreaterEqual(year, 1900)
         self.assertLessEqual(year, datetime.now().year + 1)
-    
+
     def test_extract_arxiv_id(self):
         """测试 arXiv ID 提取"""
         arxiv_id = self.sample_metadata["arxiv_id"]
@@ -72,7 +72,7 @@ class TestMetadataExtraction(unittest.TestCase):
         import re
         pattern = r"^\d{4}\.\d{4,5}(v\d+)?$"
         self.assertRegex(arxiv_id, pattern)
-    
+
     def test_extract_doi(self):
         """测试 DOI 提取"""
         doi = self.sample_metadata["doi"]
@@ -85,7 +85,7 @@ class TestMetadataExtraction(unittest.TestCase):
 
 class TestChapterParsing(unittest.TestCase):
     """测试 2: 章节解析功能"""
-    
+
     def setUp(self):
         """测试前准备"""
         self.sample_chapters = [
@@ -95,17 +95,17 @@ class TestChapterParsing(unittest.TestCase):
             {"title": "Discussion", "start_page": 13, "end_page": 15},
             {"title": "References", "start_page": 16, "end_page": 20}
         ]
-    
+
     def test_chapter_count(self):
         """测试章节数量"""
         self.assertGreater(len(self.sample_chapters), 0)
-    
+
     def test_chapter_order(self):
         """测试章节顺序合理性"""
         expected_order = ["Introduction", "Methods", "Results", "Discussion", "References"]
         actual_order = [c["title"] for c in self.sample_chapters]
         self.assertEqual(actual_order, expected_order)
-    
+
     def test_page_continuity(self):
         """测试页码连续性"""
         for i in range(len(self.sample_chapters) - 1):
@@ -116,7 +116,7 @@ class TestChapterParsing(unittest.TestCase):
 
 class TestReferenceExtraction(unittest.TestCase):
     """测试 3: 参考文献提取功能"""
-    
+
     def setUp(self):
         """测试前准备"""
         self.sample_references = [
@@ -135,11 +135,11 @@ class TestReferenceExtraction(unittest.TestCase):
                 "arxiv_id": "2201.00001"
             }
         ]
-    
+
     def test_reference_count(self):
         """测试参考文献数量"""
         self.assertGreater(len(self.sample_references), 0)
-    
+
     def test_reference_format(self):
         """测试参考文献格式"""
         for ref in self.sample_references:
@@ -148,7 +148,7 @@ class TestReferenceExtraction(unittest.TestCase):
             self.assertIn("year", ref)
             # 至少有 DOI 或 arXiv ID 之一
             self.assertTrue("doi" in ref or "arxiv_id" in ref)
-    
+
     def test_reference_year_range(self):
         """测试参考文献年份范围"""
         for ref in self.sample_references:
@@ -158,7 +158,7 @@ class TestReferenceExtraction(unittest.TestCase):
 
 class TestReferenceValidation(unittest.TestCase):
     """测试 4: 参考文献验证功能"""
-    
+
     def setUp(self):
         """测试前准备"""
         self.mock_cache = {
@@ -174,7 +174,7 @@ class TestReferenceValidation(unittest.TestCase):
                 "year": 2022
             }
         }
-    
+
     @patch("requests.get")
     def test_crossref_validation(self, mock_get):
         """测试 CrossRef API 验证"""
@@ -190,12 +190,12 @@ class TestReferenceValidation(unittest.TestCase):
             }
         }
         mock_get.return_value = mock_response
-        
+
         # TODO: 实际调用 validate_crossref 函数
         # result = validate_crossref("10.1234/test.2024.001")
         # self.assertTrue(result["success"])
         self.assertTrue(True)  # 占位符
-    
+
     @patch("requests.get")
     def test_arxiv_validation(self, mock_get):
         """测试 arXiv API 验证"""
@@ -210,18 +210,18 @@ class TestReferenceValidation(unittest.TestCase):
         </entry>
         """
         mock_get.return_value = mock_response
-        
+
         # TODO: 实际调用 validate_arxiv 函数
         # result = validate_arxiv("2401.00001")
         # self.assertTrue(result["success"])
         self.assertTrue(True)  # 占位符
-    
+
     def test_cache_hit(self):
         """测试缓存命中"""
         doi = "10.1038/nature.2023.001"
         self.assertIn(doi, self.mock_cache)
         self.assertEqual(self.mock_cache[doi]["status"], "verified")
-    
+
     def test_cache_miss(self):
         """测试缓存未命中"""
         doi = "10.1234/new.2024.001"
@@ -230,7 +230,7 @@ class TestReferenceValidation(unittest.TestCase):
 
 class TestHTMLGeneration(unittest.TestCase):
     """测试 5: HTML 卡片生成功能"""
-    
+
     def setUp(self):
         """测试前准备"""
         self.sample_html = """
@@ -248,17 +248,17 @@ class TestHTMLGeneration(unittest.TestCase):
         </body>
         </html>
         """
-    
+
     def test_html_structure(self):
         """测试 HTML 结构完整性"""
         self.assertIn("<!DOCTYPE html>", self.sample_html)
         self.assertIn("<html>", self.sample_html)
         self.assertIn("</html>", self.sample_html)
-    
+
     def test_mathjax_inclusion(self):
         """测试 MathJax 包含"""
         self.assertIn("mathjax", self.sample_html.lower())
-    
+
     def test_responsive_design(self):
         """测试响应式设计"""
         # TODO: 检查是否包含 viewport meta 标签
@@ -267,7 +267,7 @@ class TestHTMLGeneration(unittest.TestCase):
 
 class TestBibTeXExport(unittest.TestCase):
     """测试 6: BibTeX 导出功能"""
-    
+
     def setUp(self):
         """测试前准备"""
         self.sample_bibtex = """
@@ -279,14 +279,14 @@ class TestBibTeXExport(unittest.TestCase):
   doi={10.1038/nature.2024.001}
 }
         """.strip()
-    
+
     def test_bibtex_format(self):
         """测试 BibTeX 格式"""
         self.assertIn("@article", self.sample_bibtex)
         self.assertIn("title=", self.sample_bibtex)
         self.assertIn("author=", self.sample_bibtex)
         self.assertIn("year=", self.sample_bibtex)
-    
+
     def test_bibtex_key_format(self):
         """测试 BibTeX key 格式"""
         # 格式：author+year+title
@@ -297,7 +297,7 @@ class TestBibTeXExport(unittest.TestCase):
 
 class TestConcurrentValidation(unittest.TestCase):
     """测试 7: 并发验证功能"""
-    
+
     def setUp(self):
         """测试前准备"""
         self.test_references = [
@@ -307,13 +307,13 @@ class TestConcurrentValidation(unittest.TestCase):
             {"doi": "10.1002/anie.2023.001"},
             {"doi": "10.1039/cs.2023.001"}
         ]
-    
+
     def test_thread_count(self):
         """测试线程数配置"""
         default_threads = 5
         self.assertGreaterEqual(default_threads, 1)
         self.assertLessEqual(default_threads, 20)
-    
+
     def test_thread_safety(self):
         """测试线程安全性"""
         # TODO: 实际测试并发场景下的缓存锁
@@ -322,7 +322,7 @@ class TestConcurrentValidation(unittest.TestCase):
 
 class TestPerformance(unittest.TestCase):
     """测试 8: 性能测试"""
-    
+
     def test_processing_speed(self):
         """测试处理速度"""
         # 目标：单篇 PDF < 30 秒
@@ -331,7 +331,7 @@ class TestPerformance(unittest.TestCase):
         # actual_time = measure_processing_time()
         # self.assertLess(actual_time, target_time)
         self.assertTrue(True)  # 占位符
-    
+
     def test_memory_usage(self):
         """测试内存使用"""
         # 目标：内存使用 < 500MB
@@ -349,11 +349,11 @@ def run_tests():
     print("="*60)
     print(f"测试时间：{datetime.now().isoformat()}")
     print()
-    
+
     # 创建测试套件
     loader = unittest.TestLoader()
     suite = unittest.TestSuite()
-    
+
     # 添加测试
     test_classes = [
         TestMetadataExtraction,
@@ -365,15 +365,15 @@ def run_tests():
         TestConcurrentValidation,
         TestPerformance
     ]
-    
+
     for test_class in test_classes:
         tests = loader.loadTestsFromTestCase(test_class)
         suite.addTests(tests)
-    
+
     # 运行测试
     runner = unittest.TextTestRunner(verbosity=2)
     result = runner.run(suite)
-    
+
     # 生成报告
     report = {
         "total": result.testsRun,
@@ -383,12 +383,12 @@ def run_tests():
         "success": result.wasSuccessful(),
         "timestamp": datetime.now().isoformat()
     }
-    
+
     # 保存报告
     report_path = Path(__file__).parent / "test_report.json"
     with open(report_path, "w", encoding="utf-8") as f:
         json.dump(report, f, indent=2, ensure_ascii=False)
-    
+
     print()
     print("="*60)
     print(f"测试完成：{report['total']} 个测试")
@@ -396,7 +396,7 @@ def run_tests():
     print(f"成功率：{report['passed']/report['total']*100:.1f}%")
     print(f"报告已保存：{report_path}")
     print("="*60)
-    
+
     return result.wasSuccessful()
 
 

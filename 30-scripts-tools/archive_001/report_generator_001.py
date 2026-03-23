@@ -20,7 +20,7 @@ from pathlib import Path
 
 class ReportGenerator:
     """报告生成器"""
-    
+
     TEMPLATES = {
         "daily": {
             "title": "Daily Report - {date}",
@@ -35,11 +35,11 @@ class ReportGenerator:
             "sections": ["Executive Summary", "Analysis", "Recommendations"]
         }
     }
-    
+
     @staticmethod
     def generate(report_type: str, data: dict = None) -> dict:
         template = ReportGenerator.TEMPLATES.get(report_type, {})
-        
+
         result = {
             "type": report_type,
             "generated_at": datetime.now().isoformat(),
@@ -52,55 +52,55 @@ class ReportGenerator:
             "data": data or {}
         }
         return result
-    
+
     @staticmethod
     def to_markdown(report: dict) -> str:
         md = f"# {report['title']}\n\n"
         md += f"*Generated: {report['generated_at']}*\n\n"
-        
+
         for section in report.get("sections", []):
             md += f"## {section}\n\n"
             md += f"<!-- Content for {section} -->\n\n"
-        
+
         return md
-    
+
     @staticmethod
     def to_html(report: dict) -> str:
         html = f"<h1>{report['title']}</h1>\n"
         html += f"<p><em>Generated: {report['generated_at']}</em></p>\n"
-        
+
         for section in report.get("sections", []):
             html += f"<h2>{section}</h2>\n"
             html += f"<p><!-- Content for {section} --></p>\n"
-        
+
         return html
 
 
 logging.basicConfig(level=logging.INFO)
 def main():
     generator = ReportGenerator()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
-        
+
         if cmd == "--generate":
             rtype = sys.argv[2] if len(sys.argv) > 2 else "daily"
             report = generator.generate(rtype)
             print(json.dumps(report, ensure_ascii=False, indent=2))
             return 0
-        
+
         if cmd == "--markdown":
             rtype = sys.argv[2] if len(sys.argv) > 2 else "daily"
             report = generator.generate(rtype)
             print(generator.to_markdown(report))
             return 0
-        
+
         if cmd == "--html":
             rtype = sys.argv[2] if len(sys.argv) > 2 else "daily"
             report = generator.generate(rtype)
             print(generator.to_html(report))
             return 0
-    
+
     print("REPORT-001 Report Generator")
     print("Usage:")
     print("  py report_001.py --generate <type>")

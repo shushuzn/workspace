@@ -60,22 +60,22 @@ def calculate_score(paper_metadata):
     """计算论文综合评分"""
     scores = {}
     total_score = 0
-    
+
     for criterion_id, criterion in SCORING_CRITERIA.items():
         # 简化版：基于关键词匹配评分
         score = 0.7  # 默认分
         title = paper_metadata.get('title', '').lower()
         abstract = paper_metadata.get('abstract', '').lower()
-        
+
         # 检查指标关键词
         for indicator in criterion['indicators']:
             if indicator.lower() in title or indicator.lower() in abstract:
                 score += 0.1
-        
+
         score = min(1.0, score)  # 上限 1.0
         scores[criterion_id] = round(score, 2)
         total_score += score * criterion['weight']
-    
+
     return {
         'overall': round(total_score, 2),
         'breakdown': scores,
@@ -98,7 +98,7 @@ def get_score_level(score):
 def score_papers(papers):
     """批量评分"""
     results = []
-    
+
     for paper in papers:
         score_result = calculate_score(paper)
         results.append({
@@ -108,7 +108,7 @@ def score_papers(papers):
             'level': score_result['level'],
             'breakdown': score_result['breakdown']
         })
-    
+
     # 按评分排序
     results.sort(key=lambda x: x['score'], reverse=True)
     return results
@@ -117,7 +117,7 @@ def save_scores(results):
     """保存评分结果"""
     date_str = datetime.now().strftime('%Y-%m-%d')
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
-    
+
     # 保存为 JSON
     json_file = OUTPUT_DIR / f"paper-scores-{date_str}.json"
     with open(json_file, 'w', encoding='utf-8') as f:
@@ -133,7 +133,7 @@ def save_scores(results):
             },
             'papers': results
         }, f, ensure_ascii=False, indent=2)
-    
+
     # 保存为 Markdown 报告
     md_file = OUTPUT_DIR / f"paper-scores-{date_str}.md"
     with open(md_file, 'w', encoding='utf-8') as f:
@@ -141,7 +141,7 @@ def save_scores(results):
         f.write(f"**评分时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
         f.write(f"**论文总数:** {len(results)}\n\n")
         f.write("---\n\n")
-        
+
         f.write("## 📊 评分分布\n\n")
         dist = {
             'S': len([r for r in results if r['level'] == 'S']),
@@ -153,7 +153,7 @@ def save_scores(results):
         for level, count in dist.items():
             f.write(f"- **{level}级:** {count} 篇\n")
         f.write("\n---\n\n")
-        
+
         f.write("## 🏆 高评分论文 (S 级)\n\n")
         s_papers = [r for r in results if r['level'] == 'S']
         for i, paper in enumerate(s_papers[:10], 1):
@@ -161,7 +161,7 @@ def save_scores(results):
             f.write(f"**arXiv:** {paper['arxiv_id']}  \n")
             f.write(f"**评分:** {paper['score']:.2f} (S 级)  \n\n")
             f.write("---\n\n")
-    
+
     print(f"[OK] Saved scores to {json_file}")
     print(f"       S 级：{dist['S']}, A 级：{dist['A']}, B 级：{dist['B']}")
     return md_file
@@ -171,7 +171,7 @@ def test_scorer():
     print("=" * 60)
     print("Paper Quality Scorer v1 - Test")
     print("=" * 60)
-    
+
     # 模拟论文数据
     test_papers = [
         {
@@ -190,16 +190,16 @@ def test_scorer():
             'abstract': 'This survey covers recent advances in deep learning...'
         },
     ]
-    
+
     print("\n[1/3] Loading scoring criteria...")
     print(f"  Criteria: {len(SCORING_CRITERIA)}")
-    
+
     print("\n[2/3] Scoring papers...")
     results = score_papers(test_papers)
-    
+
     print("\n[3/3] Saving results...")
     save_scores(results)
-    
+
     print("-" * 60)
     print("[COMPLETE] Test complete!")
     print("=" * 60)

@@ -48,11 +48,11 @@ class Alert:
 
 class StockRealtimeAlert:
     """实时警报系统"""
-    
+
     def __init__(self, symbol: str):
         self.symbol = symbol.upper()
         self.alerts: List[Alert] = []
-        
+
         # 警报阈值配置
         self.config = {
             "price_change_pct": 5.0,      # 价格变动 >5%
@@ -61,11 +61,11 @@ class StockRealtimeAlert:
             "volume_spike": 2.0,           # 成交量 >2倍
             "support_resistance": 2.0,     # 突破 2%
         }
-        
+
         # 存储
         self.alert_log = Path("30-scripts-tools/.cache/alerts")
         self.alert_log.mkdir(parents=True, exist_ok=True)
-    
+
     def check(self, data: Dict) -> List[Alert]:
         """
         检查数据并生成警报
@@ -77,7 +77,7 @@ class StockRealtimeAlert:
             警报列表
         """
         self.alerts = []
-        
+
         # 1. 价格变动检查
         if "price_change_pct" in data:
             change = abs(data["price_change_pct"])
@@ -92,7 +92,7 @@ class StockRealtimeAlert:
                     threshold=self.config["price_change_pct"],
                     timestamp=datetime.now().isoformat()
                 ))
-        
+
         # 2. RSI 检查
         if "rsi" in data:
             rsi = data["rsi"]
@@ -116,7 +116,7 @@ class StockRealtimeAlert:
                     threshold=self.config["rsi_oversold"],
                     timestamp=datetime.now().isoformat()
                 ))
-        
+
         # 3. 成交量检查
         if "volume_ratio" in data:
             ratio = data["volume_ratio"]
@@ -130,7 +130,7 @@ class StockRealtimeAlert:
                     threshold=self.config["volume_spike"],
                     timestamp=datetime.now().isoformat()
                 ))
-        
+
         # 4. 突破检查
         if "price" in data and "resistance" in data:
             price = data["price"]
@@ -145,25 +145,25 @@ class StockRealtimeAlert:
                     threshold=resistance,
                     timestamp=datetime.now().isoformat()
                 ))
-        
+
         # 保存到日志
         self._save_alerts()
-        
+
         return self.alerts
-    
+
     def _save_alerts(self):
         """保存警报到日志"""
         if not self.alerts:
             return
-        
+
         log_file = self.alert_log / f"{self.symbol}_alerts.json"
-        
+
         # 读取现有
         existing = []
         if log_file.exists():
             with open(log_file, "r", encoding="utf-8") as f:
                 existing = json.load(f)
-        
+
         # 添加新警报
         for alert in self.alerts:
             existing.append({
@@ -175,22 +175,22 @@ class StockRealtimeAlert:
                 "threshold": alert.threshold,
                 "timestamp": alert.timestamp
             })
-        
+
         # 只保留最近 100 条
         existing = existing[-100:]
-        
+
         with open(log_file, "w", encoding="utf-8") as f:
             json.dump(existing, f, ensure_ascii=False, indent=2)
-    
+
     def get_history(self, limit: int = 10) -> List[Dict]:
         """获取历史警报"""
         log_file = self.alert_log / f"{self.symbol}_alerts.json"
         if not log_file.exists():
             return []
-        
+
         with open(log_file, "r", encoding="utf-8") as f:
             alerts = json.load(f)
-        
+
         return alerts[-limit:]
 
 
@@ -239,7 +239,7 @@ Fixes:
 
 演示"""
     alert_system = StockRealtimeAlert("AAPL")
-    
+
     # 模拟数据
     test_cases = [
         {
@@ -267,14 +267,14 @@ Fixes:
             "data": {"price_change_pct": 1.5, "rsi": 55.0, "volume_ratio": 1.1}
         }
     ]
-    
+
     print("=" * 60)
     print("Stock Realtime Alert MVP - Demo")
     print("=" * 60)
-    
+
     for test in test_cases:
         alerts = alert_system.check(test["data"])
-        
+
         print(f"\n[{test['name']}]")
         if alerts:
             for a in alerts:
@@ -282,7 +282,7 @@ Fixes:
                 print(f"  {level_emoji[a.level.value]} {a.message}")
         else:
             print("  ✓ 无警报")
-    
+
     # 历史
     print(f"\n{'=' * 60}")
     print("历史警报:")

@@ -31,16 +31,16 @@ def get_earnings_calendar(symbols=None, days=90):
     """Get earnings calendar"""
     if symbols is None:
         symbols = list(A.keys())
-    
+
     today = datetime.now()
     cutoff = today + timedelta(days=days)
-    
+
     calendar = []
     for sym in symbols:
         if sym in EARNINGS_CALENDAR:
             earnings = EARNINGS_CALENDAR[sym]
             date = datetime.strptime(earnings["date"], "%Y-%m-%d")
-            
+
             if today <= date <= cutoff:
                 days_until = (date - today).days
                 calendar.append({
@@ -50,62 +50,62 @@ def get_earnings_calendar(symbols=None, days=90):
                     "estimate": earnings["estimate"],
                     "surprise_rate": earnings["surprise_rate"]
                 })
-    
+
     # Sort by date
     calendar.sort(key=lambda x: x["date"])
-    
+
     return calendar
 
 
 def earnings_report(symbols=None, days=90):
     """Generate earnings report"""
     calendar = get_earnings_calendar(symbols, days)
-    
+
     if not calendar:
         return f"[Earnings] No earnings scheduled in next {days} days"
-    
+
     report = f"# Earnings Calendar (Next {days} Days)\n\n"
     report += f"**Total Events:** {len(calendar)}\n\n"
-    
+
     report += "| Symbol | Date | Days Until | Estimate | Surprise Rate |\n"
     report += "|--------|------|------------|----------|---------------|\n"
-    
+
     high_confidence = []
     for c in calendar:
         estimate = f"${c['estimate']:.2f}" if c['estimate'] else "N/A"
         surprise = "High" if c["surprise_rate"] > 0.75 else "Medium" if c["surprise_rate"] > 0.65 else "Low"
-        
+
         if c["surprise_rate"] > 0.75:
             high_confidence.append(c["symbol"])
-        
+
         report += f"| {c['symbol']} | {c['date']} | {c['days_until']} | {estimate} | {surprise} |\n"
-    
+
     report += f"\n**High Confidence ({len(high_confidence)}):** {', '.join(high_confidence) if high_confidence else 'None'}\n"
-    
+
     return report
 
 
 def predict_earnings_beat(symbols=None):
     """Predict earnings beat probability"""
     from stock_pro.core import analyze_multiple
-    
+
     if symbols is None:
         symbols = list(A.keys())
-    
+
     predictions = []
-    
+
     for sym in symbols:
         if sym in EARNINGS_CALENDAR:
             earnings = EARNINGS_CALENDAR[sym]
             results = analyze_multiple([sym])
-            
+
             if results:
                 r = results[0]
                 score = r["score"]
-                
+
                 # Simple prediction model
                 base_prob = earnings["surprise_rate"]
-                
+
                 # Adjust by score
                 if score >= 80:
                     adj_prob = min(0.95, base_prob + 0.10)
@@ -115,9 +115,9 @@ def predict_earnings_beat(symbols=None):
                     adj_prob = base_prob
                 else:
                     adj_prob = max(0.30, base_prob - 0.15)
-                
+
                 beat = "Beat" if adj_prob > 0.65 else "Miss"
-                
+
                 predictions.append({
                     "symbol": sym,
                     "date": earnings["date"],
@@ -126,21 +126,21 @@ def predict_earnings_beat(symbols=None):
                     "prediction": beat,
                     "score": score
                 })
-    
+
     # Sort by probability
     predictions.sort(key=lambda x: x["beat_probability"], reverse=True)
-    
+
     report = "# Earnings Beat Predictions\n\n"
     report += "| Symbol | Date | Estimate | Beat Prob | Prediction | Score |\n"
     report += "|--------|------|----------|-----------|------------|-------|\n"
-    
+
     beat_count = 0
     for p in predictions:
         estimate_str = f"${p['estimate']:.2f}" if p['estimate'] else "N/A"
         report += f"| {p['symbol']} | {p['date']} | {estimate_str} | {p['beat_probability']:.0%} | {p['prediction']} | {p['score']} |\n"
         if p["prediction"] == "Beat":
             beat_count += 1
-    
+
     report += f"\n**Expected Beats:** {beat_count}/{len(predictions)}\n"
-    
+
     return report

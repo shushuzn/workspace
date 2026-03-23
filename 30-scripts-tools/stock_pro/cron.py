@@ -29,7 +29,7 @@ class CronJob:
         self.schedule = schedule
         self.next_run = parse_cron_next(schedule)
         self.active = True
-    
+
     def to_dict(self):
         return {
             "name": self.name,
@@ -46,7 +46,7 @@ class CronScheduler:
         self.running = False
         self.thread = None
         self.load()
-    
+
     def load(self):
         import json
         if CRON_FILE.exists():
@@ -59,28 +59,28 @@ class CronScheduler:
                         self.jobs.append(job)
             except:
                 pass
-    
+
     def save(self):
         import json
         data = {"jobs": [j.to_dict() for j in self.jobs]}
         with open(CRON_FILE, 'w') as f:
             json.dump(data, f, indent=2)
-    
+
     def add(self, name, symbols, command, schedule):
         job = CronJob(name, symbols, command, schedule)
         self.jobs.append(job)
         self.save()
         return f"[Cron] Added job '{name}' - schedule: {schedule}"
-    
+
     def remove(self, name):
         self.jobs = [j for j in self.jobs if j.name != name]
         self.save()
         return f"[Cron] Removed job '{name}'"
-    
+
     def list_jobs(self):
         if not self.jobs:
             return "[Cron] No jobs scheduled. Add with: --cron-add \"09:00\" NVDA META"
-        
+
         lines = ["[Cron] Scheduled Jobs:", "-" * 50]
         for j in self.jobs:
             status = "ACTIVE" if j.active else "PAUSED"
@@ -88,7 +88,7 @@ class CronScheduler:
             lines.append(f"  [{status}] {j.name} - {j.command} {j.symbols} @ {j.schedule}")
             lines.append(f"           Next: {next_time}")
         return "\n".join(lines)
-    
+
     def pause(self, name):
         for j in self.jobs:
             if j.name == name:
@@ -96,7 +96,7 @@ class CronScheduler:
                 self.save()
                 return f"[Cron] Paused job '{name}'"
         return f"[Cron] Job '{name}' not found"
-    
+
     def resume(self, name):
         for j in self.jobs:
             if j.name == name:
@@ -104,15 +104,15 @@ class CronScheduler:
                 self.save()
                 return f"[Cron] Resumed job '{name}'"
         return f"[Cron] Job '{name}' not found"
-    
+
     def execute_job(self, job):
         """Execute a cron job"""
         from .core import analyze_multiple
         symbols = job.symbols
         command = job.command
-        
+
         results = analyze_multiple(symbols)
-        
+
         if command == "alert":
             from .integrations import check_alerts
             return check_alerts(results)
@@ -126,7 +126,7 @@ class CronScheduler:
             return StockScreener().show()
         else:
             return f"[Cron] Unknown command: {command}"
-    
+
     def run(self):
         """Background runner"""
         while self.running:
@@ -138,7 +138,7 @@ class CronScheduler:
                     print(f"[Cron] Result: {result}")
                     job.next_run = parse_cron_next(job.schedule)
             time.sleep(60)
-    
+
     def start(self):
         if not self.running:
             self.running = True
@@ -146,7 +146,7 @@ class CronScheduler:
             self.thread.start()
             return "[Cron] Scheduler started"
         return "[Cron] Scheduler already running"
-    
+
     def stop(self):
         self.running = False
         return "[Cron] Scheduler stopped"

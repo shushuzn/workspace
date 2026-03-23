@@ -32,14 +32,14 @@ def main():
     print("  [3] Install Dash")
     print("  [4] Run tests")
     print("  [0] Exit")
-    
+
     choice = input("\nChoice: ").strip()
-    
+
     if choice == '1':
         print("\nStarting Simple UI...")
         print("Open: http://127.0.0.1:8080\n")
         subprocess.run([sys.executable, 'simple_ui.py'], cwd=SCRIPT_DIR)
-    
+
     elif choice == '2':
         if not check_dash():
             print("\nDash not installed. Installing...")
@@ -47,17 +47,17 @@ def main():
         print("\nStarting Dash UI...")
         print("Open: http://127.0.0.1:8050\n")
         subprocess.run([sys.executable, 'dash_app.py'], cwd=SCRIPT_DIR)
-    
+
     elif choice == '3':
         install_dash()
-    
+
     elif choice == '4':
         print("\nRunning tests...\n")
         subprocess.run([sys.executable, 'test_all.py'], cwd=SCRIPT_DIR)
-    
+
     elif choice == '0':
         return
-    
+
     else:
         print("Invalid choice")
 

@@ -12,7 +12,7 @@ from datetime import datetime
 def register_tools():
     with open("30-scripts-tools/tools_registry.json", "r", encoding="utf-8") as f:
         registry = json.load(f)
-    
+
     new_tools = [
         {
             "tool_id": "reward-system",
@@ -29,7 +29,7 @@ def register_tools():
             "category": "protection"
         }
     ]
-    
+
     added = 0
     for tool in new_tools:
         tool_id = tool["tool_id"]
@@ -45,16 +45,16 @@ def register_tools():
             print(f"[ADD] {tool_id}")
         else:
             print(f"[SKIP] {tool_id} 已存在")
-    
+
     registry["version"] = "1.11.43-reward-stop-mechanism"
     registry["last_updated"] = datetime.now().isoformat()
-    
+
     with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
         json.dump(registry, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n注册完成：{added} 个工具")
     print(f"新版本：{registry['version']}")
-    
+
     return {"status": "success", "added": added}
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计

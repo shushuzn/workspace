@@ -13,16 +13,16 @@ from datetime import datetime
 def rebuild_registry():
     scripts_dir = Path("30-scripts-tools")
     registry_file = Path("30-scripts-tools/tools_registry.json")
-    
+
     # 获取所有实际存在的 .py 文件（排除辅助脚本）
     exclude_prefixes = ["check_", "debug_", "fix_", "sync_", "reg_", "count_", "list_", "find_", "test_"]
     py_files = []
     for f in scripts_dir.glob("*.py"):
         if not any(f.name.startswith(p) for p in exclude_prefixes):
             py_files.append(f.name)
-    
+
     print(f"实际存在的工具文件：{len(py_files)}")
-    
+
     # 构建新的 registry
     tools = {}
     for filename in sorted(py_files):
@@ -38,7 +38,7 @@ def rebuild_registry():
             "created_at": datetime.now().strftime("%Y-%m-%d"),
             "parameters": {}
         }
-    
+
     registry = {
         "version": "2.0.0-rebuilt",
         "last_updated": datetime.now().isoformat(),
@@ -50,14 +50,14 @@ def rebuild_registry():
         ],
         "tools": tools
     }
-    
+
     with open(registry_file, "w", encoding="utf-8") as f:
         json.dump(registry, f, ensure_ascii=False, indent=2)
-    
+
     print(f"Registry 已重建")
     print(f"版本：{registry['version']}")
     print(f"工具数：{len(tools)}")
-    
+
     # 列出关键工具
     key_tools = ["embedded-critic", "workflow-enforcer", "tool-executor", "copaw-entry", "tool-call-tracker"]
     print(f"\n关键工具检查:")
@@ -65,7 +65,7 @@ def rebuild_registry():
         exists = tool in tools
         status = "[OK]" if exists else "[MISSING]"
         print(f"  {status} {tool}")
-    
+
     return {
         "status": "success",
         "total_tools": len(tools),

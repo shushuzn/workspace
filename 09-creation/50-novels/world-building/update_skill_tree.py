@@ -79,16 +79,16 @@ def main():
     parser.add_argument('--xp', type=int, default=0)
     parser.add_argument('--layer', type=int, default=0)
     args = parser.parse_args()
-    
+
     data = load_data()
     data['current_chapter'] = args.chapter
-    
+
     if args.xp > 0:
         data['layers'][args.layer]['xp'] = min(data['layers'][args.layer]['xp'] + args.xp, 100)
-    
+
     with open(SKILL_TREE_DATA, 'w', encoding='utf-8') as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
-    
+
     output = generate_html(data)
     print(f"[OK] Skill tree updated: Chapter {data['current_chapter']}, Progress {data['total_progress']}%")
     print(f"     Output: {output}")

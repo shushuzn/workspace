@@ -23,11 +23,11 @@ def run_command(cmd: str, cwd: str = None) -> bool:
         capture_output=True,
         text=True
     )
-    
+
     if result.returncode != 0:
         print(f"[FAIL] {result.stderr}")
         return False
-    
+
     print(f"[OK] 成功")
     return True
 
@@ -37,16 +37,16 @@ def setup_test_environment():
     print("=" * 60)
     print("步骤 1: 设置测试环境")
     print("=" * 60)
-    
+
     # 创建测试目录
     test_dir = Path(__file__).parent / "test_intentkit"
     if test_dir.exists():
         print(f"清理旧测试目录：{test_dir}")
         shutil.rmtree(test_dir)
-    
+
     test_dir.mkdir(parents=True)
     print(f"[OK] 创建测试目录：{test_dir}")
-    
+
     return test_dir
 
 
@@ -55,18 +55,18 @@ def clone_intentkit(test_dir: Path) -> bool:
     print("\n" + "=" * 60)
     print("步骤 2: 克隆 intentkit 仓库")
     print("=" * 60)
-    
+
     intentkit_dir = test_dir / "intentkit"
-    
+
     # 克隆仓库
     success = run_command(
         "git clone https://github.com/crestalnetwork/intentkit.git",
         cwd=str(test_dir)
     )
-    
+
     if not success:
         return False
-    
+
     print(f"[OK] intentkit 克隆完成：{intentkit_dir}")
     return True
 
@@ -76,13 +76,13 @@ def apply_integration(intentkit_dir: Path) -> bool:
     print("\n" + "=" * 60)
     print("步骤 3: 应用集成补丁")
     print("=" * 60)
-    
+
     # 复制集成模块
     integration_src = Path(__file__).parent
     integration_dst = intentkit_dir / "belief_integration"
-    
+
     print(f"复制集成模块到：{integration_dst}")
-    
+
     # 复制文件
     files_to_copy = [
         "intent_schema.py",
@@ -90,29 +90,29 @@ def apply_integration(intentkit_dir: Path) -> bool:
         "alignment_calculator.py",
         "README.md"
     ]
-    
+
     integration_dst.mkdir(exist_ok=True)
-    
+
     for filename in files_to_copy:
         src = integration_src / filename
         dst = integration_dst / filename
-        
+
         if src.exists():
             shutil.copy2(src, dst)
             print(f"  [OK] {filename}")
         else:
             print(f"  [WARN] {filename} 不存在")
-    
+
     # 复制探针文件
     probes_src = integration_src / "belief-probes-v2"
     probes_dst = intentkit_dir / "belief_integration" / "probes"
-    
+
     if probes_src.exists():
         shutil.copytree(probes_src, probes_dst)
         print(f"  [OK] 探针文件已复制")
     else:
         print(f"  [WARN] 探针文件不存在")
-    
+
     return True
 
 
@@ -121,10 +121,10 @@ def run_tests(intentkit_dir: Path) -> bool:
     print("\n" + "=" * 60)
     print("步骤 4: 运行集成测试")
     print("=" * 60)
-    
+
     # 创建测试脚本
     test_script = intentkit_dir / "test_belief_integration.py"
-    
+
     test_code = '''
 """
 信念集成测试
@@ -206,19 +206,19 @@ if __name__ == "__main__":
     
     sys.exit(0 if all_passed else 1)
 '''
-    
+
     # 写入测试脚本
     with open(test_script, 'w', encoding='utf-8') as f:
         f.write(test_code)
-    
+
     print(f"创建测试脚本：{test_script}")
-    
+
     # 运行测试
     success = run_command(
         "python test_belief_integration.py",
         cwd=str(intentkit_dir)
     )
-    
+
     return success
 
 
@@ -227,9 +227,9 @@ def generate_report(test_dir: Path, success: bool):
     print("\n" + "=" * 60)
     print("步骤 5: 生成测试报告")
     print("=" * 60)
-    
+
     report_path = test_dir / "test_report.md"
-    
+
     report = f"""# intentkit 集成测试报告
 
 **日期:** 2026-03-07  
@@ -311,12 +311,12 @@ def generate_report(test_dir: Path, success: bool):
 
 *生成时间：2026-03-07*
 """
-    
+
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(report)
-    
+
     print(f"测试报告已生成：{report_path}")
-    
+
     # 打印摘要
     print("\n" + "=" * 60)
     print("测试摘要")
@@ -331,29 +331,29 @@ def main():
     print("\n" + "=" * 60)
     print("intentkit 真实环境集成测试")
     print("=" * 60)
-    
+
     # 1. 设置测试环境
     test_dir = setup_test_environment()
-    
+
     # 2. 克隆 intentkit
     if not clone_intentkit(test_dir):
         print("❌ 克隆 intentkit 失败")
         return False
-    
+
     # 3. 应用集成
     if not apply_integration(test_dir / "intentkit"):
         print("⚠️ 应用集成时出现警告")
-    
+
     # 4. 运行测试
     success = run_tests(test_dir / "intentkit")
-    
+
     # 5. 生成报告
     generate_report(test_dir, success)
-    
+
     print("\n" + "=" * 60)
     print("测试完成!")
     print("=" * 60)
-    
+
     return success
 
 

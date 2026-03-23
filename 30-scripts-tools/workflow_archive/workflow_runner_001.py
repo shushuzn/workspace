@@ -41,15 +41,15 @@ class ChainRunner:
     def run(self, chain_name):
         if chain_name not in CHAINS:
             return {"error": f"Chain not found: {chain_name}", "available": list(CHAINS.keys())}
-        
+
         chain = CHAINS[chain_name]
         results = []
-        
+
         for i, step in enumerate(chain):
             tool = step["tool"]
             args = step["args"]
             cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
-            
+
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=30, encoding="utf-8", errors="replace")
                 results.append({
@@ -60,15 +60,15 @@ class ChainRunner:
                 })
             except Exception as e:
                 results.append({"step": i + 1, "tool": tool, "status": "error", "error": str(e)})
-        
+
         return {"chain": chain_name, "steps": len(chain), "results": results}
-    
+
     def list_chains(self):
         return [{"id": k, "steps": len(v), "tools": [s["tool"] for s in v]} for k, v in CHAINS.items()]
 
 if __name__ == "__main__":
     runner = ChainRunner()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--run":

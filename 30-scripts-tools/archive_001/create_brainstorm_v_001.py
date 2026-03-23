@@ -13,7 +13,7 @@ from datetime import datetime
 
 def create_brainstorm_v3_workflow():
     """创建 v3.0 工作流配置"""
-    
+
     workflow = {
         "flow_id": "20260320-brainstorm-v3",
         "name": "头脑风暴增强工作流 v3.0",
@@ -24,7 +24,7 @@ def create_brainstorm_v3_workflow():
         "parent_workflow": "20260318-universal-workflow-001",
         "estimated_time_minutes": 60,
         "total_steps": 12,
-        
+
         "enhancements": [
             "AI 创意助手集成 (brainstorm_ai_assistant)",
             "思维导图可视化 (brainstorm_mindmap)",
@@ -33,7 +33,7 @@ def create_brainstorm_v3_workflow():
             "缓存加速",
             "性能监控"
         ],
-        
+
         "stages": {
             "preparation": "Step 1-3: 准备阶段 (上下文 + 目标定义)",
             "divergent": "Step 4-6: 发散环 (AI 辅助创意生成)",
@@ -41,7 +41,7 @@ def create_brainstorm_v3_workflow():
             "visualization": "Step 10: 思维导图生成",
             "completion": "Step 11-12: 总结 + 提交"
         },
-        
+
         "steps": [
             {
                 "step_id": 1,
@@ -139,7 +139,7 @@ def create_brainstorm_v3_workflow():
                 "blocking": True
             }
         ],
-        
+
         "quality_gates": {
             "step_6": {
                 "min_ideas": 15,
@@ -153,14 +153,14 @@ def create_brainstorm_v3_workflow():
                 "mindmap_generated": True
             }
         },
-        
+
         "iteration": {
             "max_rounds": 3,
             "continue_if": "excellent_ideas < 3",
             "stop_if": "excellent_ideas >= 5 OR rounds >= 3",
             "recommendation": "If <3 excellent ideas after 3 rounds, consider reframing the problem"
         },
-        
+
         "tools_required": [
             "brainstorm_ai_assistant",
             "brainstorm_mindmap",
@@ -170,14 +170,14 @@ def create_brainstorm_v3_workflow():
             "workflow_cache",
             "git_commit_helper"
         ],
-        
+
         "output_files": [
             "flow-archive/20260320-brainstorm-v3/report.md",
             "flow-archive/20260320-brainstorm-v3/mindmaps/*.md",
             "flow-archive/20260320-brainstorm-v3/ideas.json"
         ]
     }
-    
+
     return workflow
 
 logging.basicConfig(level=logging.INFO)
@@ -226,34 +226,34 @@ Fixes:
 
 测试入口"""
     workflow = create_brainstorm_v3_workflow()
-    
+
     print("Brainstorm Workflow v3.0")
     print("=" * 70)
-    
+
     print(f"\nFlow ID: {workflow['flow_id']}")
     print(f"Version: {workflow['version']}")
     print(f"Total Steps: {workflow['total_steps']}")
     print(f"Estimated Time: {workflow['estimated_time_minutes']} minutes")
-    
+
     print(f"\nEnhancements ({len(workflow['enhancements'])}):")
     for i, enhancement in enumerate(workflow['enhancements'], 1):
         print(f"  {i}. {enhancement}")
-    
+
     print(f"\nStages:")
     for stage, desc in workflow['stages'].items():
         print(f"  - {stage}: {desc}")
-    
+
     print(f"\nQuality Gates: {len(workflow['quality_gates'])}")
     print(f"Max Iterations: {workflow['iteration']['max_rounds']}")
-    
+
     # 保存配置
     output_dir = Path("flow-archive/20260320-brainstorm-v3")
     output_dir.mkdir(parents=True, exist_ok=True)
-    
+
     output_file = output_dir / "workflow.json"
     with open(output_file, 'w', encoding='utf-8') as f:
         json.dump(workflow, f, ensure_ascii=False, indent=2)
-    
+
     print(f"\n[OK] Workflow config saved to: {output_file}")
     print(f"\n[OK] Brainstorm v3 workflow created")
 

@@ -17,12 +17,12 @@ if __name__ == '__main__':
     if len(sys.argv) < 3:
         print("用法: python write_large_file_001.py <file_path> <content_file>")
         sys.exit(1)
-    
+
     file_path = sys.argv[1]
     content_file = sys.argv[2]
-    
+
     with open(content_file, 'r', encoding='utf-8') as f:
         content = f.read()
-    
+
     size = write_large_file(file_path, content)
     print(f"写入成功: {size} bytes -> {file_path}")

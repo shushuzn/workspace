@@ -7,22 +7,22 @@ from pathlib import Path
 
 def generate_large_dataset(n_papers=100):
     """生成大规模测试数据集"""
-    
+
     # 领域关键词
     fields = {
         'NLP': ['BERT', 'transformer', 'attention', 'NLP', 'language model', 'pre-training'],
         'CV': ['CNN', 'ResNet', 'AlexNet', 'ImageNet', 'image classification', 'object detection'],
         'ML': ['deep learning', 'neural network', 'optimization', 'gradient', 'loss function']
     }
-    
+
     papers = []
     for i in range(n_papers):
         # 随机生成论文
         field = random.choice(list(fields.keys()))
         keywords = random.sample(fields[field], min(4, len(fields[field])))
-        
+
         year = random.randint(2010, 2024)
-        
+
         # 生成引用 (引用更早的论文)
         references = []
         if i > 0:
@@ -33,7 +33,7 @@ def generate_large_dataset(n_papers=100):
                     "title": f"Paper {idx}",
                     "doi": f"10.1000/test{idx}"
                 })
-        
+
         papers.append({
             "id": i + 1,
             "title": f"Paper {i + 1}: A Study on {random.choice(keywords)}",
@@ -42,7 +42,7 @@ def generate_large_dataset(n_papers=100):
             "keywords": keywords,
             "references": references
         })
-    
+
     return {"papers": papers, "description": f"{n_papers} 篇测试论文"}
 
 # 生成测试数据

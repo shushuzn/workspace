@@ -133,27 +133,27 @@ class AICodeSuggest:
     def suggest(self, category):
         if category not in CODE_PATTERNS:
             return {"error": f"Unknown category: {category}", "available": list(CODE_PATTERNS.keys())}
-        
+
         pattern = CODE_PATTERNS[category]
         return {
             "category": category,
             "description": pattern["description"],
             "files": pattern["files"]
         }
-    
+
     def generate(self, category, name, description=""):
         if category not in CODE_PATTERNS:
             return {"error": f"Unknown category: {category}"}
-        
+
         pattern = CODE_PATTERNS[category]
         class_name = "".join(word.capitalize() for word in name.split("_"))
-        
+
         content = pattern["template"].format(
             class_name=class_name,
             name=name,
             description=description or name
         )
-        
+
         return {
             "status": "generated",
             "category": category,
@@ -161,34 +161,34 @@ class AICodeSuggest:
             "lines": len(content.split("\n")),
             "preview": content[:300] + "..."
         }
-    
+
     def analyze_tool(self, filepath):
         path = Path(filepath)
         if not path.exists():
             return {"error": f"File not found: {filepath}"}
-        
+
         content = path.read_text(encoding="utf-8", errors="replace")
         suggestions = []
-        
+
         if 'encoding=' not in content and 'open(' in content:
             suggestions.append({"type": "warning", "issue": "Missing encoding", "fix": "Add encoding='utf-8', errors='replace'"})
-        
+
         if 'subprocess.run' in content and 'timeout' not in content:
             suggestions.append({"type": "warning", "issue": "subprocess.run without timeout", "fix": "Add timeout parameter"})
-        
+
         if 'json.loads' in content and 'encoding' not in content:
             suggestions.append({"type": "warning", "issue": "json.loads without encoding", "fix": "Add encoding='utf-8', errors='replace'"})
-        
+
         if not path.name.match(r'^[a-z][a-z0-9_]*_\d+\.py$'):
             suggestions.append({"type": "info", "issue": "File doesn't match naming convention", "fix": "Rename to tool_name_001.py"})
-        
+
         return {
             "file": path.name,
             "lines": len(content.split("\n")),
             "suggestions": suggestions,
             "score": max(0, 100 - len(suggestions) * 20)
         }
-    
+
     def best_practices(self):
         return {
             "encoding": {"rule": "Always use encoding='utf-8', errors='replace'", "example": "open(file, 'r', encoding='utf-8', errors='replace')"},
@@ -200,7 +200,7 @@ class AICodeSuggest:
 
 if __name__ == "__main__":
     suggest = AICodeSuggest()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
         if cmd == "--suggest":

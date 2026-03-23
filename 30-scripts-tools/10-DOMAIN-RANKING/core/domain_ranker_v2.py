@@ -53,17 +53,17 @@ class DomainDataV2:
     education_xp: float  # 0-10000 教育普及
     open_source_xp: float  # 0-10000 开源贡献
     industry_xp: float  # 0-10000 产业转化
-    
+
     @classmethod
     def from_collector(cls, domain_name: str, data_file: Path) -> Optional['DomainDataV2']:
         """从 domain_data_collector 的 JSON 输出加载数据"""
         if not data_file.exists():
             return None
-        
+
         try:
             with open(data_file, 'r', encoding='utf-8-sig') as f:
                 data = json.load(f)
-            
+
             # 映射收集器字段到 DomainDataV2
             return cls(
                 name=domain_name,
@@ -86,7 +86,7 @@ class DomainDataV2:
 
 class DomainRankerV2:
     """学科学术段位评价器 v2.0"""
-    
+
     def __init__(self):
         # 权重配置 v3.0 (11 个维度 - 纯自动化可测量)
         # 所有维度必须可通过 API/爬虫/脚本自动获取数据，无需人工参与
@@ -105,7 +105,7 @@ class DomainRankerV2:
             'open_source': 0.07,    # 开源贡献 - 自动爬取 GitHub/PyPI
             'industry': 0.07        # 产业转化 - 自动统计公司/产品数
         }
-    
+
     def calculate_score(self, domain: DomainDataV2) -> Tuple[int, int, str, int, int, int]:
         """
         计算段位分数 v2.0
@@ -127,19 +127,19 @@ class DomainRankerV2:
             domain.open_source_xp * self.weights['open_source'] +
             domain.industry_xp * self.weights['industry']
         )
-        
+
         # 转换为 1-8000 分
         total_score = int(weighted_xp / 10000 * 8000)
         total_score = max(1, min(8000, total_score))
-        
+
         # 总经验
         total_xp = int(weighted_xp * 8)
-        
+
         # 确定段位
         rank_name, level, xp_current, xp_needed = self.score_to_rank(total_score)
-        
+
         return total_xp, total_score, rank_name, level, xp_current, xp_needed
-    
+
     def score_to_rank(self, score: int) -> Tuple[str, int, int, int]:
         """分数转换为段位 v2.0"""
         for rank_name, min_score, max_score, emoji in RANKS_V2:
@@ -149,11 +149,11 @@ class DomainRankerV2:
                 xp_needed = XP_PER_LEVEL
                 return rank_name, level, xp_current, xp_needed
         return "宗师", 1000, 10000000, 10000000
-    
+
     def get_rank_info(self, score: int) -> Dict:
         """获取段位详细信息"""
         rank_name, level, xp_current, xp_needed = self.score_to_rank(score)
-        
+
         # 找到当前段位信息
         for r_name, min_s, max_s, emoji in RANKS_V2:
             if r_name == rank_name:
@@ -163,9 +163,9 @@ class DomainRankerV2:
                     if name == rank_name and i < len(RANKS_V2) - 1:
                         next_rank = RANKS_V2[i + 1][0]
                         break
-                
+
                 points_to_next = 1000 - level
-                
+
                 return {
                     'rank': rank_name,
                     'level': level,
@@ -177,17 +177,17 @@ class DomainRankerV2:
                     'xp_needed': xp_needed,
                     'total_xp': level * XP_PER_LEVEL
                 }
-        
+
         return {}
-    
+
     def compare_domains(self, domains: Dict[str, DomainDataV2]) -> List[Dict]:
         """比较多个领域"""
         results = []
-        
+
         for name, data in domains.items():
             total_xp, score, rank, level, xp_current, xp_needed = self.calculate_score(data)
             rank_info = self.get_rank_info(score)
-            
+
             results.append({
                 'name': name,
                 'total_xp': total_xp,
@@ -204,12 +204,12 @@ class DomainRankerV2:
                     'funding': data.funding_xp
                 }
             })
-        
+
         # 按总分排序
         results.sort(key=lambda x: x['score'], reverse=True)
-        
+
         return results
-    
+
     def print_ranking(self, results: List[Dict]):
         """打印排名结果 v2.0"""
         print("\n" + "=" * 80)
@@ -217,28 +217,28 @@ class DomainRankerV2:
         print("=" * 80)
         print(f"{'排名':<4} {'领域':<20} {'段位':<15} {'分数':<8} {'经验进度':<30}")
         print("-" * 80)
-        
+
         for i, result in enumerate(results, 1):
             rank_info = result['rank_info']
             emoji = rank_info.get('emoji', '[?]')
             progress_bar = self._create_progress_bar(rank_info.get('progress', 0), length=20)
             xp_text = f"{rank_info.get('xp_current', 0):,} / {rank_info.get('xp_needed', 10000):,}"
-            
+
             print(f"{i:<4} {result['name']:<20} {emoji} {result['rank']} {result['level']:<4} {result['score']:<8} {progress_bar} {xp_text}")
-        
+
         print("=" * 80)
-    
+
     def _create_progress_bar(self, progress: float, length: int = 20) -> str:
         """创建进度条"""
         filled = int(progress / 100 * length)
         bar = "#" * filled + "-" * (length - filled)
         return f"[{bar}] {progress:.1f}%"
-    
+
     def generate_recommendations(self, domain: DomainDataV2) -> List[str]:
         """生成晋升建议 v2.1 (11 维度)"""
         total_xp, score, rank, level, xp_current, xp_needed = self.calculate_score(domain)
         recommendations = []
-        
+
         # 找出最弱的维度 (11 个)
         scores = {
             '理论基础': domain.theory_xp,
@@ -253,9 +253,9 @@ class DomainRankerV2:
             '开源贡献': domain.open_source_xp,
             '产业转化': domain.industry_xp
         }
-        
+
         sorted_scores = sorted(scores.items(), key=lambda x: x[1])
-        
+
         # 生成建议
         for dim, xp in sorted_scores[:5]:  # 最弱的 5 个维度
             if xp < 500:
@@ -266,7 +266,7 @@ class DomainRankerV2:
                 recommendations.append(f"[FOCUS] 继续加强{dim} (当前{xp:.0f}/10000) - 稳步发展")
             else:
                 recommendations.append(f"[OK] 保持优势{dim} (当前{xp:.0f}/10000) - 领域领先")
-        
+
         return recommendations
 
 
@@ -332,7 +332,7 @@ PREDEFINED_DOMAINS_V2 = {
         open_source_xp=500, # 部分开源
         industry_xp=400     # 产业化初期
     ),
-    
+
     # 人工智能
     'DeepLearning': DomainDataV2(
         name='深度学习',
@@ -376,7 +376,7 @@ PREDEFINED_DOMAINS_V2 = {
         open_source_xp=800, # Gym 等
         industry_xp=600     # 应用探索
     ),
-    
+
     # 生物技术
     'CRISPR': DomainDataV2(
         name='CRISPR 基因编辑',
@@ -420,7 +420,7 @@ PREDEFINED_DOMAINS_V2 = {
         open_source_xp=600, # BioBricks
         industry_xp=500     # 产业化初期
     ),
-    
+
     # 量子技术
     'QuantumComputing': DomainDataV2(
         name='量子计算',
@@ -436,7 +436,7 @@ PREDEFINED_DOMAINS_V2 = {
         open_source_xp=650, # Qiskit 等
         industry_xp=450     # 产业化早期
     ),
-    
+
     # 能源技术
     'NuclearFusion': DomainDataV2(
         name='核聚变能源',
@@ -452,7 +452,7 @@ PREDEFINED_DOMAINS_V2 = {
         open_source_xp=300, # 封闭为主
         industry_xp=350     # 商业化早期
     ),
-    
+
     # 信息技术
     'Blockchain': DomainDataV2(
         name='区块链',
@@ -482,7 +482,7 @@ PREDEFINED_DOMAINS_V2 = {
         open_source_xp=500, # 部分开源
         industry_xp=800     # 大规模商用
     ),
-    
+
     # 机器人技术
     'Robotics': DomainDataV2(
         name='机器人技术',
@@ -505,17 +505,17 @@ def find_latest_collected_data(domain: str) -> Optional[Path]:
     """查找最新的领域收集数据文件"""
     workspace = Path(__file__).parent.parent
     reports_dir = workspace / "21-reports"
-    
+
     if not reports_dir.exists():
         return None
-    
+
     # 查找匹配的文件：LIG-domain-data-*.json
     pattern = f"{domain}-domain-data-*.json"
     files = list(reports_dir.glob(pattern))
-    
+
     if not files:
         return None
-    
+
     # 按修改时间排序，返回最新的
     files.sort(key=lambda f: f.stat().st_mtime, reverse=True)
     return files[0]
@@ -532,9 +532,9 @@ def main():
     parser.add_argument("--use-collected", action="store_true",
                         help="优先使用收集器数据 (而非硬编码)")
     args = parser.parse_args()
-    
+
     ranker = DomainRankerV2()
-    
+
     if args.evaluate:
         # 评估指定领域
         domains_to_eval = {}
@@ -546,7 +546,7 @@ def main():
                 if data_file:
                     print(f"📊 加载收集器数据：{data_file.name}")
                     collected_data = DomainDataV2.from_collector(name, data_file)
-            
+
             if collected_data:
                 domains_to_eval[name] = collected_data
             elif name in PREDEFINED_DOMAINS_V2:
@@ -568,10 +568,10 @@ def main():
                     open_source_xp=500,
                     industry_xp=500
                 )
-        
+
         results = ranker.compare_domains(domains_to_eval)
         ranker.print_ranking(results)
-        
+
         # 生成建议
         for name in args.evaluate:
             domain_data = domains_to_eval.get(name)
@@ -580,12 +580,12 @@ def main():
                 recs = ranker.generate_recommendations(domain_data)
                 for rec in recs:
                     print(f"  {rec}")
-    
+
     elif args.compare:
         # 比较所有预定义领域
         results = ranker.compare_domains(PREDEFINED_DOMAINS_V2)
         ranker.print_ranking(results)
-    
+
     else:
         # 默认显示所有领域
         print("学科学术段位评价系统 v2.0")
@@ -597,7 +597,7 @@ def main():
         for name, data in PREDEFINED_DOMAINS_V2.items():
             total_xp, score, rank, level, xp_current, xp_needed = ranker.calculate_score(data)
             print(f"  - {name}: {rank} {level}级 ({score}/8000) - {xp_current:,}/{xp_needed:,} XP")
-    
+
     return 0
 
 

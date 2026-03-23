@@ -16,12 +16,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 class ParallelToolExecutor:
     """并行工具执行器"""
-    
+
     def __init__(self, max_workers: int = 4):
         self.max_workers = max_workers
         self.log_file = Path("flow-archive/20260318-universal-workflow-001/parallel-execution-log.json")
         self.state_file = Path("flow-archive/20260318-universal-workflow-001/execution-state.json")
-    
+
     def execute_parallel(self, tools: List[Dict], timeout_seconds: int = 60) -> Dict:
         """
 # ==============================================================================
@@ -67,7 +67,7 @@ Fixes:
 
 
         并行执行多个工具
-        
+
         Args:
             tools: 工具列表，每项包含：
                 - tool_id: 工具 ID
@@ -75,11 +75,11 @@ Fixes:
                 - args: 位置参数
                 - kwargs: 关键字参数
             timeout_seconds: 超时时间
-        
+
         Returns:
             执行结果
         """
-        
+
         results = {
             "started_at": datetime.now().isoformat(),
             "total_tools": len(tools),
@@ -88,9 +88,9 @@ Fixes:
             "tool_results": {},
             "total_time_seconds": 0
         }
-        
+
         start_time = time.time()
-        
+
         with ThreadPoolExecutor(max_workers=self.max_workers) as executor:
             # 提交所有任务
             future_to_tool = {}
@@ -99,15 +99,15 @@ Fixes:
                 func = tool.get('func')
                 args = tool.get('args', ())
                 kwargs = tool.get('kwargs', {})
-                
+
                 if func:
                     future = executor.submit(func, *args, **kwargs)
                     future_to_tool[future] = tool_id
-            
+
             # 收集结果
             for future in as_completed(future_to_tool, timeout=timeout_seconds):
                 tool_id = future_to_tool[future]
-                
+
                 try:
                     result = future.result()
                     results['tool_results'][tool_id] = {
@@ -123,16 +123,16 @@ Fixes:
                         "error": str(e)
                     }
                     results['failed'] += 1
-        
+
         end_time = time.time()
         results['total_time_seconds'] = end_time - start_time
         results['completed_at'] = datetime.now().isoformat()
-        
+
         # 记录日志
         self._log_execution(results)
-        
+
         return results
-    
+
     def _log_execution(self, results: Dict) -> None:
         """记录执行日志"""
         log = []

@@ -8,7 +8,7 @@ from pathlib import Path
 archive = Path('cleanup_archive/20260322')
 
 orphan = [
-    'reg_guardian_fix_001.py', 
+    'reg_guardian_fix_001.py',
     'reg_task_analyzer_001.py'
 ]
 

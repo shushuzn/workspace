@@ -24,14 +24,14 @@ def search(
     """搜索材料"""
     print(f"🔍 搜索材料: {formula or '全部'}")
     print(f"限制：{limit} 条")
-    
+
     # 模拟搜索结果
     results = [
         {"id": "MP-1234", "formula": "LiCoO2", "band_gap": 2.5},
         {"id": "MP-5678", "formula": "LiFePO4", "band_gap": 3.2},
         {"id": "MP-9012", "formula": "Si", "band_gap": 1.1},
     ][:limit]
-    
+
     if output:
         with open(output, 'w', encoding='utf-8') as f:
             json.dump(results, f, indent=2, ensure_ascii=False)
@@ -50,7 +50,7 @@ def predict(
     """预测材料性能"""
     print(f"🔮 预测性能：{property}")
     print(f"输入文件：{input_file}")
-    
+
     # 模拟预测结果
     result = {
         "file": input_file,
@@ -59,7 +59,7 @@ def predict(
         "unit": "eV" if property == "bandgap" else "GPa",
         "confidence": 0.92
     }
-    
+
     if output:
         with open(output, 'w', encoding='utf-8') as f:
             json.dump(result, f, indent=2, ensure_ascii=False)
@@ -78,7 +78,7 @@ def visualize(
     print(f"🎨 可视化晶体结构")
     print(f"输入：{input_file}")
     print(f"输出：{output}")
-    
+
     # 生成 HTML 文件
     html_content = f"""
 <!DOCTYPE html>
@@ -117,7 +117,7 @@ def synthesize(
     """推荐合成路径"""
     print(f"🧪 推荐合成路径：{target}")
     print(f"优化目标：{optimize}")
-    
+
     # 模拟推荐结果
     pathways = [
         {
@@ -128,7 +128,7 @@ def synthesize(
             "yield": 0.95
         }
     ]
-    
+
     print(f"\n推荐路径:")
     for i, path in enumerate(pathways, 1):
         print(f"  路径 {i}:")
@@ -144,7 +144,7 @@ def db(
 ):
     """数据库管理"""
     print(f"📊 数据库操作：{action}")
-    
+
     if action == "stats":
         print("\n数据库统计:")
         print(f"  材料总数：127")

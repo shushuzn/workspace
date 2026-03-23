@@ -152,30 +152,30 @@ def inverse_design(target_conductivity, n_solutions=5):
     """
     target_log = np.log10(target_conductivity)
     target_scaled = scaler_y.transform([[target_log]])[0, 0]
-    
+
     # 使用差分进化算法优化
     n_features = len(available_features)
     bounds = [(0.1, 0.5) for _ in range(n_features)]
-    
+
     def objective(x):
         """优化目标：最小化预测值与目标值的差异"""
         x_scaled = scaler_X.transform([x])[0]
         pred = gp_model.predict([x_scaled])[0]
         return (pred - target_scaled) ** 2
-    
+
     solutions = []
     for i in range(n_solutions):
         result = differential_evolution(objective, bounds, seed=i*42, maxiter=100, tol=1e-6)
-        
+
         if result.success:
             solution = dict(zip(available_features, result.x))
             solution['predicted_conductivity'] = 10 ** scaler_y.inverse_transform([[result.fun ** 0.5 + target_scaled]])[0, 0]
             solution['confidence'] = 1.0 / (1.0 + result.fun)
             solutions.append(solution)
-    
+
     # 按置信度排序
     solutions.sort(key=lambda x: x['confidence'], reverse=True)
-    
+
     return solutions
 
 # 测试逆向设计
@@ -236,12 +236,12 @@ for _ in range(100):
     w3 = np.random.random()
     total = w1 + w2 + w3
     w1, w2, w3 = w1/total, w2/total, w3/total
-    
+
     def multi_objective(x):
         return w1 * conductivity_objective(x) + w2 * cost_objective(x) + w3 * strength_objective(x)
-    
+
     result = differential_evolution(multi_objective, bounds, maxiter=50)
-    
+
     if result.success:
         x = result.x
         pareto_front.append({

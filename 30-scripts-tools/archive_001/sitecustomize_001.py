@@ -42,7 +42,7 @@ is_tool_script = '30-scripts-tools' in str(script_path)
 if is_tool_script and script_name not in ALLOWED_WITHOUT_SESSION:
     # 工具脚本必须检查 session
     state_file = WORKSPACE_ROOT / "flow-archive/20260318-universal-workflow-001/execution-state.json"
-    
+
     if not state_file.exists():
         print("=" * 70, file=sys.stderr)
         print("[BLOCK] Python 脚本执行被拒绝", file=sys.stderr)
@@ -51,12 +51,12 @@ if is_tool_script and script_name not in ALLOWED_WITHOUT_SESSION:
         print("[BLOCK] 请先运行：py 30-scripts-tools/copaw_entry.py <task>", file=sys.stderr)
         print("=" * 70, file=sys.stderr)
         sys.exit(1)
-    
+
     # 验证 session 有效性
     try:
         with open(state_file, 'r', encoding='utf-8') as f:
             state = json.load(f)
-        
+
         if not state.get('session_id'):
             raise ValueError("session_id missing")
         if not state.get('mandatory_execution'):

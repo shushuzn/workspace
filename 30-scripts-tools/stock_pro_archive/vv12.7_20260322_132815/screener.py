@@ -6,7 +6,7 @@ class StockScreener:
         self.min_score = min_score
         self.min_upside = min_upside
         self.max_pe = max_pe
-    
+
     def screen(self, live=False):
         results = []
         for sym in F.keys():
@@ -31,7 +31,7 @@ class StockScreener:
                 })
         results.sort(key=lambda x: x["score"], reverse=True)
         return results
-    
+
     def show(self, live=False):
         results = self.screen(live)
         if not results:

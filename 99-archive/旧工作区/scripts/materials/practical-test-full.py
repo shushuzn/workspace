@@ -77,7 +77,7 @@ def test_paper_extraction():
     print("\n" + "="*70)
     print("Test 1: Paper Extraction")
     print("="*70)
-    
+
     # Simulated paper abstract
     paper_abstract = """
     LiFePO4 has been synthesized by solid-state reaction method. 
@@ -86,21 +86,21 @@ def test_paper_extraction():
     The band gap was measured to be 3.2 eV by UV-Vis spectroscopy.
     The sample was annealed at 700C for 12 hours in Ar atmosphere.
     """
-    
+
     print(f"\nAbstract:\n{paper_abstract[:200]}...\n")
-    
+
     # NER
     print("1. NER...")
     ner = RuleBasedNER()
     entities = ner.extract_entities(paper_abstract)
     print(f"   Found {len(entities)} entities")
-    
+
     # Property extraction
     print("2. Property extraction...")
     prop_ext = PropertyExtractor()
     properties = prop_ext.extract(paper_abstract)
     print(f"   Found {len(properties)} properties")
-    
+
     # Synthesis conditions
     print("3. Synthesis conditions...")
     synth_ext = SynthesisConditionExtractor()
@@ -109,7 +109,7 @@ def test_paper_extraction():
         print(f"   方法：{cond.method}")
         print(f"   温度：{cond.max_temperature}°C")
         print(f"   时间：{cond.total_time}h")
-    
+
     # 知识图谱构建
     print("\n5. 知识图谱构建...")
     kg_builder = AutoKGBuilder()
@@ -121,7 +121,7 @@ def test_paper_extraction():
     stats = graph.get_stats()
     print(f"   实体数：{stats['total_entities']}")
     print(f"   关系数：{stats['total_relations']}")
-    
+
     return {
         'entities': len(entities),
         'properties': len(properties),
@@ -134,18 +134,18 @@ def test_property_prediction():
     print("\n" + "="*70)
     print("Test 2: Property Prediction (CGCNN)")
     print("="*70)
-    
+
     config = CPUConfig()
     model = get_cgcnn_model(config)
-    
+
     test_materials = ['LiFePO4', 'SiO2', 'TiO2']
-    
+
     print("\nPredicting properties:")
     for mat in test_materials:
         result = model.predict({'material': mat, 'formula': mat})
         if result:
             print(f"   {mat}: band_gap={result.get('band_gap', 'N/A')} eV")
-    
+
     return {'predicted': len(test_materials)}
 
 
@@ -154,24 +154,24 @@ def test_material_generation():
     print("\n" + "="*70)
     print("Test 3: Material Generation (VAE)")
     print("="*70)
-    
+
     vae = get_vae_model(CPUConfig())
     vae.initialize_weights()
-    
+
     # 准备训练数据 (简化)
     training_data = [[random.gauss(0, 1) for _ in range(128)] for _ in range(50)]
-    
+
     # 快速训练
     print("\n训练 VAE (5 epochs)...")
     vae.train(training_data, epochs=5, batch_size=10)
-    
+
     # Generate new materials
     print("\nGenerating materials:")
     generated = vae.generate(n_samples=3)
-    
+
     for i, mat in enumerate(generated, 1):
         print(f"   Material {i}: {mat.formula}, band_gap={mat.predicted_properties.get('band_gap', 'N/A')} eV")
-    
+
     return {'generated': len(generated)}
 
 
@@ -180,16 +180,16 @@ def test_experiment_design():
     print("\n" + "="*70)
     print("Test 4: Experiment Design")
     print("="*70)
-    
+
     designer = ExperimentDesigner()
-    
+
     test_materials = ['LiFePO4', 'SiO2', 'TiO2']
-    
+
     print("\nDesigning experiments:")
     for formula in test_materials:
         plan = designer.design_experiment(formula)
         print(f"   {plan.material}: {plan.method}, {plan.temperature}C")
-    
+
     return {'designed': len(test_materials)}
 
 
@@ -198,25 +198,25 @@ def test_report_generation():
     print("\n" + "="*70)
     print("Test 5: Report Generation")
     print("="*70)
-    
+
     generator = ReportGenerator()
-    
+
     test_data = {
         'title': 'LiFePO4 Research Report',
         'materials': ['LiFePO4', 'SiO2', 'TiO2']
     }
-    
+
     report = generator.generate_report(test_data)
-    
+
     print(f"\nTitle: {report.title}")
     print(f"Summary: {report.summary[:100]}...")
     print(f"Findings: {len(report.key_findings)}")
     print(f"Recommendations: {len(report.recommendations)}")
-    
+
     # Export
     generator.export_markdown(report, 'data/practical-test-report.md')
     generator.export_json(report, 'data/practical-test-report.json')
-    
+
     return {'report': 'generated'}
 
 
@@ -226,33 +226,33 @@ def main():
     print("第十二阶段 - 实战测试")
     print("完整系统端到端验证")
     print("="*70)
-    
+
     start_time = time.time()
-    
+
     results = {}
-    
+
     # 测试 1: 论文信息提取
     results['extraction'] = test_paper_extraction()
-    
+
     # 测试 2: 性能预测
     results['prediction'] = test_property_prediction()
-    
+
     # 测试 3: 材料生成
     results['generation'] = test_material_generation()
-    
+
     # 测试 4: 实验设计
     results['experiment'] = test_experiment_design()
-    
+
     # 测试 5: 报告生成
     results['report'] = test_report_generation()
-    
+
     # 总结
     total_time = time.time() - start_time
-    
+
     print("\n" + "="*70)
     print("实战测试总结")
     print("="*70)
-    
+
     print(f"\nTotal time: {total_time:.1f}s")
     print(f"\nResults:")
     print(f"  [OK] Extraction: {results['extraction']['entities']} entities")
@@ -260,11 +260,11 @@ def main():
     print(f"  [OK] Generation: {results['generation']['generated']} new materials")
     print(f"  [OK] Experiment: {results['experiment']['designed']} plans")
     print(f"  [OK] Report: {results['report']['report']}")
-    
+
     print(f"\nOutput:")
     print(f"  - data/practical-test-report.md")
     print(f"  - data/practical-test-report.json")
-    
+
     print("\n" + "="*70)
     print("[OK] All tests passed! System ready!")
     print("="*70)

@@ -30,14 +30,14 @@ def sanitize_filename(title):
 def fetch_arxiv_papers(category='cs.AI', max_papers=20):
     """Fetch latest papers from arxiv"""
     rss_url = f'https://export.arxiv.org/rss/{category}'
-    
+
     try:
         response = requests.get(rss_url, timeout=30)
         response.raise_for_status()
-        
+
         feed = feedparser.parse(response.content)
         papers = []
-        
+
         for entry in feed.entries[:max_papers]:
             paper = {
                 'title': entry.title,
@@ -48,7 +48,7 @@ def fetch_arxiv_papers(category='cs.AI', max_papers=20):
                 'categories': entry.get('tags', [])
             }
             papers.append(paper)
-        
+
         return papers
     except Exception as e:
         print(f"Error fetching arxiv: {e}")
@@ -60,15 +60,15 @@ def save_paper(paper):
     title_slug = sanitize_filename(paper['title'])[:50]
     filename = f"{timestamp}-{title_slug}.md"
     filepath = os.path.join(OUTPUT_DIR, filename)
-    
+
     # Extract abstract from description
     abstract = paper['description']
     if 'Abstract: ' in abstract:
         abstract = abstract.split('Abstract: ')[1].split('\n')[0]
-    
+
     authors = ', '.join([a.name for a in paper['authors']]) if paper['authors'] else 'Unknown'
     categories = ', '.join([t.term for t in paper['categories']]) if paper['categories'] else 'cs.AI'
-    
+
     content = f"""# {paper['title']}
 
 ## 元数据
@@ -90,31 +90,31 @@ def save_paper(paper):
 ---
 *自动收集*
 """
-    
+
     with open(filepath, 'w', encoding='utf-8') as f:
         f.write(content)
-    
+
     return filename
 
 def main():
     print("=" * 60)
     print("Arxiv AI Papers Collector")
     print("=" * 60)
-    
+
     papers = fetch_arxiv_papers('cs.AI', max_papers=15)
-    
+
     if not papers:
         print("No papers found or error occurred")
         return
-    
+
     print(f"Found {len(papers)} papers")
-    
+
     new_count = 0
     for paper in papers:
         filename = save_paper(paper)
         new_count += 1
         print(f"  Saved: {filename}")
-    
+
     print(f"\n[SUCCESS] Collected {new_count} new papers")
     print("=" * 60)
 

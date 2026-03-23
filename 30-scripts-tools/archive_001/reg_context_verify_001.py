@@ -21,10 +21,10 @@ else:
         "category": "verification",
         "parameters": {}
     }
-    
+
     with open("30-scripts-tools/tools_registry.json", "w", encoding="utf-8") as f:
         json.dump(registry, f, ensure_ascii=False, indent=2)
-    
+
     print("context_verify 已注册")
 
 # ==============================================================================

@@ -14,7 +14,7 @@ class Colors:
     BOLD = '\033[1m' if sys.platform != 'win32' else ''
     DIM = '\033[2m' if sys.platform != 'win32' else ''
     RESET = '\033[0m' if sys.platform != 'win32' else ''
-    
+
     @staticmethod
     def pos(): return Colors.GREEN
     @staticmethod
@@ -122,7 +122,7 @@ def analyze(title):
     else:
         sentiment = "中性"
         intensity = 0
-    
+
     # 2. 板块映射
     sector_scores = {}
     for sec, kws in SECTORS.items():
@@ -130,7 +130,7 @@ def analyze(title):
         if score > 0:
             sector_scores[sec] = score
     sector = max(sector_scores, key=sector_scores.get) if sector_scores else "通用"
-    
+
     # 3. 关键词提取
     keywords = []
     for sec, kws in SECTORS.items():
@@ -141,7 +141,7 @@ def analyze(title):
                     break
         if len(keywords) >= 5:
             break
-    
+
     # 4. 公司识别
     companies = []
     for name, aliases in COMPANIES.items():
@@ -151,12 +151,12 @@ def analyze(title):
                 break
         if len(companies) >= 3:
             break
-    
+
     # 5. 股票代码提取
     codes = re.findall(r'\b[0-9]{6}\b', title)
     codes.extend(re.findall(r'\b[A-Z]{2,5}\b', title))
     codes = list(dict.fromkeys(codes))[:2]
-    
+
     # 6. 紧急程度
     if any(k in title for k in URGENT):
         urgency = "【突发】"
@@ -164,7 +164,7 @@ def analyze(title):
         urgency = "【重要】"
     else:
         urgency = ""
-    
+
     # 7. 趋势判断
     trend = ""
     if any(k in title for k in ["大涨","涨停","暴涨","飙升","创新高","突破"]):
@@ -173,7 +173,7 @@ def analyze(title):
         trend = "下跌"
     elif any(k in title for k in ["震荡","波动","整理"]):
         trend = "震荡"
-    
+
     return {
         "sentiment": sentiment,
         "intensity": intensity,
@@ -190,19 +190,19 @@ def get_summary(news):
     """获取摘要信息"""
     title = news.get("title", "")
     analysis = news.get("analysis", {})
-    
+
     # 优先显示公司
     if analysis.get("companies"):
         return analysis["companies"][0]
-    
+
     # 显示趋势
     if analysis.get("trend"):
         return analysis["trend"]
-    
+
     # 显示关键词
     if analysis.get("keywords"):
         return analysis["keywords"][0]
-    
+
     return ""
 
 def get_signal(news):
@@ -211,7 +211,7 @@ def get_signal(news):
     sent = news.get("sentiment", "")
     analysis = news.get("analysis", {})
     intensity = analysis.get("intensity", 0)
-    
+
     if sent == "利好":
         if intensity >= 4: return "强势买入"
         if intensity >= 3: return "关注买入"
@@ -226,7 +226,7 @@ def get_risk(news_list):
     """多维度风险评估"""
     if not news_list:
         return "低风险"
-    
+
     # 计算风险分数
     score = 0
     for n in news_list:
@@ -234,14 +234,14 @@ def get_risk(news_list):
         analysis = n.get("analysis", {})
         intensity = analysis.get("intensity", 0)
         urgency = analysis.get("urgency", "")
-        
+
         if sent == "利空":
             score += intensity
         if "【突发】" in urgency:
             score += 2
         if analysis.get("sector") in ["金融", "地产"]:
             score += 1
-    
+
     if score >= 10:
         return "高风险"
     elif score >= 5:
@@ -252,14 +252,14 @@ def get_suggestion(news_list):
     """投资建议"""
     if not news_list:
         return "观望"
-    
+
     # 统计情绪
     bullish = sum(1 for n in news_list if n.get("sentiment") == "利好")
     bearish = sum(1 for n in news_list if n.get("sentiment") == "利空")
-    
+
     # 统计紧急
     urgent = sum(1 for n in news_list if "【突发】" in n.get("analysis", {}).get("urgency", ""))
-    
+
     if bullish > bearish * 2 and urgent == 0:
         return "积极布局"
     elif bullish > bearish:
@@ -381,7 +381,7 @@ def get_forex():
 class NewsData:
     def __init__(self):
         self.data = self._load()
-    
+
     def _load(self):
         if DATA_FILE.exists():
             try:
@@ -390,11 +390,11 @@ class NewsData:
             except:
                 pass
         return {"news": [], "sent": [], "stats": {"total": 0, "qq": 0, "feishu": 0}}
-    
+
     def save(self):
         with open(DATA_FILE, "w", encoding="utf-8") as f:
             json.dump(self.data, f, ensure_ascii=False, indent=2)
-    
+
     def add_news(self, title, url, source="", category=""):
         news_id = hash(title + url) & 0xFFFFFFFF
         for n in self.data["news"]:
@@ -403,19 +403,19 @@ class NewsData:
         analysis = smart_analyze(title)
         self.data["news"].append({
             "id": news_id, "title": title, "url": url, "source": source,
-            "category": category, "sentiment": analysis["sentiment"], 
-            "sector": analysis["sector"], "keywords": analysis["keywords"], 
+            "category": category, "sentiment": analysis["sentiment"],
+            "sector": analysis["sector"], "keywords": analysis["keywords"],
             "codes": analysis.get("codes", []), "analysis": analysis,
             "fetched_at": datetime.now().isoformat(), "sent": False
         })
         self.data["stats"]["total"] += 1
         self.save()
         return True
-    
+
     def get_unsent(self, limit=5):
         unsent = [n for n in self.data["news"] if not n.get("sent")]
         return unsent[:limit]
-    
+
     def mark_sent(self, ids):
         for n in self.data["news"]:
             if n["id"] in ids:
@@ -495,22 +495,22 @@ def send_feishu_message(text):
 def cmd_fetch(args):
     now = datetime.now().strftime("%H:%M")
     total_src = len(CONFIG["news"]["sources"])
-    
+
     data = NewsData()
     total_new = 0
     sentiment_stats = {"利好": 0, "利空": 0, "中性": 0}
-    
+
     # 按来源分组
     grouped_news = {}
-    
+
     for idx, source in enumerate(CONFIG["news"]["sources"]):
         cat = source.get("category", "")
-        
+
         if source["type"] == "rss":
             items = fetch_rss(source["url"])
         else:
             items = fetch_json(source["url"])
-        
+
         news_items = []
         for item in items[:CONFIG["news"]["max_per_fetch"]]:
             if data.add_news(item["title"], item["url"], source["name"], cat):
@@ -526,33 +526,33 @@ def cmd_fetch(args):
                     "urgency": analysis["urgency"],
                     "impact": analysis["impact"],
                 })
-        
+
         if news_items:
             grouped_news[cat] = news_items
-    
+
     pos = sentiment_stats['利好']
     neg = sentiment_stats['利空']
-    
+
     # LLM 状态
     llm_status = c(Colors.GREEN, "[LLM]") if is_llm_available() else c(Colors.DIM, "[KW]")
-    
+
     # 华丽输出
     print(f"""
 ╔══════════════════════╗
 ║ {c(Colors.BOLD, 'NEWS FEED')} {llm_status} {total_new} new  {c(Colors.DIM, now)}║
 ╠══════════════════════╣""")
-    
+
     if grouped_news:
         sorted_cats = sorted(grouped_news.items(), key=lambda x: -len(x[1]))
-        
+
         for cat, news_items in sorted_cats[:6]:
             pos_c = sum(1 for n in news_items if n["sentiment"] == "利好")
             neg_c = sum(1 for n in news_items if n["sentiment"] == "利空")
-            
+
             # 分类标题
             bar = f"{cp('+' + str(pos_c))}{cn('-' + str(neg_c))}" if pos_c or neg_c else ""
             print(f"║ {c(Colors.BOLD, cat[:6])} {len(news_items):>2} {bar}{' ' * max(0, 12 - len(bar))}║")
-            
+
             # 显示第一条
             n = news_items[0]
             icon = cp("+") if n["sentiment"] == "利好" else cn("-") if n["sentiment"] == "利空" else cne("=")
@@ -563,16 +563,16 @@ def cmd_fetch(args):
                 print(f"║  {icon} {urgency}{title:<16}{kw:<6}║")
             else:
                 print(f"║  {icon} {title:<28}║")
-            
+
             if len(news_items) > 1:
                 print(f"║  {c(Colors.DIM, '+' + str(len(news_items) - 1) + ' more...')}{' ' * 18}║")
-        
+
         print(f"╠══════════════════════╣")
         print(f"║ {c(Colors.BOLD, 'Summary')}{' ' * 25}║")
         print(f"║  Sources: {len(grouped_news)}/{total_src:<5} Bull: {cp('+' + str(pos))} Bear: {cn('-' + str(neg))}║")
     else:
         print(f"║  {cne('[.] No new news')}{' ' * 19}║")
-    
+
     print(f"╚══════════════════════╝")
     print()
     return total_new
@@ -586,10 +586,10 @@ def cmd_push(args):
 ║ {cn('[!] No news to push')}    ║
 ╚══════════════════════╝""")
         return
-    
+
     risk = get_risk(news_list)
     now = datetime.now().strftime("%H:%M")
-    
+
     # 构建消息 (紧凑格式)
     header = f"[NEWS] {now}"
     body = "\n".join([f"{'+' if n.get('sentiment')=='利好' else '-' if n.get('sentiment')=='利空' else '='} {n.get('title','')[:30]}" for n in news_list])
@@ -599,11 +599,11 @@ def cmd_push(args):
     msg = msg.strip()
     ids = [n["id"] for n in news_list]
     results = []
-    
+
     # 统计
     pos_cnt = sum(1 for n in news_list if n.get("sentiment") == "利好")
     neg_cnt = sum(1 for n in news_list if n.get("sentiment") == "利空")
-    
+
     # 风险评估
     if risk == "高风险":
         risk_icon = cn("![HIGH]")
@@ -611,14 +611,14 @@ def cmd_push(args):
         risk_icon = c(Colors.YELLOW, "~[MED]")
     else:
         risk_icon = cp("*[LOW]")
-    
+
     # 华丽输出
     print(f"""
 ╔══════════════════════╗
 ║ {c(Colors.BOLD, 'PUSH NEWS')}{' ' * (17 - len(str(len(news_list))))}{len(news_list)} items  {c(Colors.DIM, now)}║
 ╠══════════════════════╣
 ║ {c(Colors.BOLD, 'Items')}{' ' * 26}║""")
-    
+
     # 情绪条
     bar_len = 12
     pos_bar = int(pos_cnt / len(news_list) * bar_len) if news_list else 0
@@ -626,7 +626,7 @@ def cmd_push(args):
     sentiment_bar = cp("#" * pos_bar) + cn("#" * neg_bar) + cne("-" * (bar_len - pos_bar - neg_bar))
     print(f"║  [{sentiment_bar}]             ║")
     print(f"║  {cp('+' + str(pos_cnt))} {cn('-' + str(neg_cnt))}  Risk: {risk_icon}  ║")
-    
+
     # 预览
     print(f"╠══════════════════════╣")
     print(f"║ {c(Colors.BOLD, 'Preview')}{' ' * 24}║")
@@ -636,11 +636,11 @@ def cmd_push(args):
         print(f"║  {icon} {title:<24}║")
     if len(news_list) > 3:
         print(f"║  {c(Colors.DIM, '+' + str(len(news_list) - 3) + ' more...')}{' ' * 19}║")
-    
+
     # 发送
     print(f"╠══════════════════════╣")
     print(f"║ {c(Colors.BOLD, 'Sending')}{' ' * 25}║")
-    
+
     if CONFIG["qq"]["enabled"]:
         ok, mid = send_qq_message(CONFIG["qq"]["group_id"], msg)
         status = cp("[OK]") if ok else cn("[FAIL]")
@@ -648,7 +648,7 @@ def cmd_push(args):
         if ok:
             data.data["stats"]["qq"] = data.data["stats"].get("qq", 0) + 1
             results.append("QQ")
-    
+
     if CONFIG["feishu"]["enabled"]:
         ok, mid = send_feishu_message(msg)
         status = cp("[OK]") if ok else cn("[FAIL]")
@@ -656,14 +656,14 @@ def cmd_push(args):
         if ok:
             data.data["stats"]["feishu"] = data.data["stats"].get("feishu", 0) + 1
             results.append("Feishu")
-    
+
     data.mark_sent(ids)
     data.save()
-    
+
     if results:
         print(f"╠══════════════════════╣")
         print(f"║  {cp('[*] Pushed to ' + str(len(results)) + ' platform(s)')}{' ' * 7}║")
-    
+
     print(f"╚══════════════════════╝")
     print()
 
@@ -672,20 +672,20 @@ def cmd_status(args):
     total = len(data.data["news"])
     unsent = len([n for n in data.data["news"] if not n.get("sent")])
     sent = total - unsent
-    
+
     # 统计
     sectors = {}
     sentiments = {"利好": 0, "利空": 0, "中性": 0}
     for n in data.data["news"]:
         sectors[n.get("sector","通用")] = sectors.get(n.get("sector","通用"), 0) + 1
         sentiments[n.get("sentiment","中性")] = sentiments.get(n.get("sentiment","中性"), 0) + 1
-    
+
     now = datetime.now().strftime("%H:%M")
     sent_pct = sent / total * 100 if total > 0 else 0
     pos = sentiments['利好']
     neg = sentiments['利空']
     neu = sentiments['中性']
-    
+
     # 风险评估
     risk_score = neg * 2 - pos
     if risk_score > 10:
@@ -697,40 +697,40 @@ def cmd_status(args):
     else:
         risk_icon = cp("*[LOW]")
         risk_bar = cp("<<")
-    
+
     # 华丽移动端输出
     print(f"""
 ╔══════════════════════╗
 ║ {c(Colors.BOLD, 'NEWS STATUS')}{' ' * (14 - len(now))}{c(Colors.DIM, now)}║
 ╠══════════════════════╣""")
-    
+
     # 迷你仪表盘
     print(f"║ {c(Colors.BOLD, 'Dashboard')}{' ' * 27}║")
-    
+
     # 进度条
     bar_len = 14
     filled = int(sent_pct / 100 * bar_len)
     bar = cp("#" * filled) + c(Colors.DIM, "-" * (bar_len - filled))
     print(f"║  Push: [{bar}] {sent_pct:>4.0f}%║")
-    
+
     # 情绪仪表
     mood_pct = pos / total * 100 if total > 0 else 0
     mood_bar_len = 6
     mood_filled = int(mood_pct / 100 * mood_bar_len)
     mood_bar = cp("#" * mood_filled) + c(Colors.DIM, "-" * (mood_bar_len - mood_filled))
     print(f"║  Mood: [{mood_bar}] {pos:>3} /{total:<3}║")
-    
+
     # 风险指示
     print(f"║  Risk: {risk_icon}{' ' * 18}║")
-    
+
     # 分隔线
     print(f"╠══════════════════════╣")
     print(f"║ {c(Colors.BOLD, 'Statistics')}{' ' * 25}║")
-    
+
     # 数据行
     print(f"║  Total: {total:<5} Sent: {sent:<5} Wait: {unsent:<4}║")
     print(f"║  Bull: {cp('+' + str(pos))}  Bear: {cn('-' + str(neg))}  Neu: {cne(str(neu))}   ║")
-    
+
     # 板块分布
     top_sectors = sorted(sectors.items(), key=lambda x: -x[1])[:3]
     if top_sectors:
@@ -738,7 +738,7 @@ def cmd_status(args):
         sec2 = f"{top_sectors[1][0][:3]}:{top_sectors[1][1]}" if len(top_sectors) > 1 else "---"
         sec3 = f"{top_sectors[2][0][:3]}:{top_sectors[2][1]}" if len(top_sectors) > 2 else "---"
         print(f"║  Top: {sec1:<7} {sec2:<7} {sec3:<7}║")
-    
+
     # 推送统计
     qq_cnt = data.data['stats'].get('qq', 0)
     fs_cnt = data.data['stats'].get('feishu', 0)
@@ -753,32 +753,32 @@ def cmd_digest(args):
     days = int(args.days) if hasattr(args, 'days') else 1
     cutoff = datetime.now() - timedelta(days=days)
     recent = [n for n in data.data["news"] if datetime.fromisoformat(n.get("fetched_at","2000")).replace(tzinfo=None) > cutoff]
-    
+
     if not recent:
         print(f"\n╔══════════════════════╗")
         print(f"║ {cn('[!] No news found')}    ║")
         print(f"╚══════════════════════╝")
         return
-    
+
     now = datetime.now().strftime("%H:%M")
-    
+
     # 统计
     sentiments = {"利好": [], "利空": [], "中性": []}
     for n in recent:
         sentiments[n.get("sentiment","中性")].append(n)
-    
+
     # 关键词统计
     keywords = {}
     for n in recent:
         for kw in n.get('keywords', []):
             keywords[kw] = keywords.get(kw, 0) + 1
     top_keywords = sorted(keywords.items(), key=lambda x: -x[1])[:5]
-    
+
     total = len(recent)
     pos = len(sentiments['利好'])
     neg = len(sentiments['利空'])
     neu = len(sentiments['中性'])
-    
+
     # 风险评估
     risk_score = neg * 2 - pos
     if risk_score > 10:
@@ -787,16 +787,16 @@ def cmd_digest(args):
         risk_icon = c(Colors.YELLOW, "~[MED]")
     else:
         risk_icon = cp("*[LOW]")
-    
+
     # 华丽输出
     print(f"""
 ╔══════════════════════╗
 ║ {c(Colors.BOLD, 'NEWS DIGEST')}{' ' * (16 - len(str(days)))}{days}d  {c(Colors.DIM, now)}║
 ╠══════════════════════╣""")
-    
+
     # 情绪摘要
     print(f"║ {c(Colors.BOLD, 'Sentiment Overview')}{' ' * 16}║")
-    
+
     # 迷你情绪条
     bar_len = 12
     pos_bar = int(pos / total * bar_len) if total > 0 else 0
@@ -804,11 +804,11 @@ def cmd_digest(args):
     sentiment_bar = cp("#" * pos_bar) + cn("#" * neg_bar) + cne("-" * (bar_len - pos_bar - neg_bar))
     print(f"║  [{sentiment_bar}]             ║")
     print(f"║  {cp('+' + str(pos))} {cn('-' + str(neg))} {cne('=' + str(neu))}  Total:{total:<5}║")
-    
+
     # 风险
     print(f"╠══════════════════════╣")
     print(f"║  Risk: {risk_icon}{' ' * 17}║")
-    
+
     # 热门标签
     if top_keywords:
         print(f"╠══════════════════════╣")
@@ -817,25 +817,25 @@ def cmd_digest(args):
         if len(tags_line) > 26:
             tags_line = tags_line[:24] + ".."
         print(f"║  {tags_line:<24}║")
-    
+
     # 热门新闻预览
     print(f"╠══════════════════════╣")
     print(f"║ {c(Colors.BOLD, 'Preview')}{' ' * 24}║")
-    
+
     for sent_type, news_list in sentiments.items():
         if not news_list or len(news_list) < 1:
             continue
         icon = cp("+") if sent_type == "利好" else cn("-") if sent_type == "利空" else cne("=")
         title = news_list[0].get('title', '')[:22]
         print(f"║  {icon} {title:<22}║")
-    
+
     print(f"╚══════════════════════╝")
     print()
 
 def cmd_market(args):
     """显示实时行情 - 华丽移动端"""
     now = datetime.now().strftime("%H:%M")
-    
+
     # 美股
     external = get_external()
     # A股
@@ -844,36 +844,36 @@ def cmd_market(args):
     commodities = get_commodities()
     # VIX
     vix = get_vix()
-    
+
     # 华丽移动端输出
     print(f"""
 ╔══════════════════════╗
 ║ {c(Colors.BOLD, 'MARKET MONITOR')}{' ' * 12}{c(Colors.DIM, now)}║
 ╠══════════════════════╣""")
-    
+
     # US Markets
     if external:
         print(f"║ {c(Colors.BOLD, 'US Markets')}{' ' * 23}║")
         print(f"║  {external:<26}║")
-    
+
     # CN Markets
     if ashare:
         print(f"╠══════════════════════╣")
         print(f"║ {c(Colors.BOLD, 'CN Markets')}{' ' * 23}║")
         print(f"║  {ashare:<26}║")
-    
+
     # Commodities
     if commodities:
         print(f"╠══════════════════════╣")
         print(f"║ {c(Colors.BOLD, 'Commodities')}{' ' * 21}║")
         print(f"║  {commodities:<26}║")
-    
+
     # VIX
     if vix:
         print(f"╠══════════════════════╣")
         print(f"║ {c(Colors.BOLD, 'Volatility')}{' ' * 21}║")
         print(f"║  {vix:<26}║")
-    
+
     # Footer
     print(f"╚══════════════════════╝")
     print(f"{c(Colors.DIM, 'Updated: ' + now)}")
@@ -884,7 +884,7 @@ def cmd_clean(args):
     data = NewsData()
     days = int(args.days) if hasattr(args, 'days') else 7
     before = datetime.now() - timedelta(days=days)
-    
+
     old_count = 0
     old_news = []
     for n in data.data["news"]:
@@ -895,7 +895,7 @@ def cmd_clean(args):
                 old_news.append(n["id"])
         except:
             pass
-    
+
     if old_news:
         data.data["news"] = [n for n in data.data["news"] if n["id"] not in old_news]
         data.save()
@@ -907,12 +907,12 @@ def cmd_clean(args):
 def cmd_sources(args):
     """显示新闻源状态"""
     print(f"\n{c(Colors.header(), '=== NEWS SOURCES ===')}\n")
-    
+
     for src in CONFIG["news"]["sources"]:
         cat = src.get("category", "")
         src_type = "RSS" if src["type"] == "rss" else "JSON"
         print(f"  {c(Colors.BOLD, cat):<8} [{src_type}] {src['name']}")
-    
+
     print(f"\nTotal: {len(CONFIG['news']['sources'])} sources")
     print()
 
@@ -954,7 +954,7 @@ def main():
     parser.add_argument("--days", default="1", help="Days for digest/clean")
     parser.add_argument("-h", "--help", action="store_true")
     args = parser.parse_args()
-    
+
     if args.help or args.cmd == "help":
         cmd_help()
     elif args.cmd == "fetch":

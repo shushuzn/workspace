@@ -46,24 +46,24 @@ def main():
     print("=" * 60)
     print("  " + datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
     print("")
-    
+
     print("  [1] Health Check...", end=" ")
     health = run_tool("workflow_health_001.py")
     if '"status": "healthy"' in health:
         print("[OK] Healthy")
     else:
         print("[!] Need check")
-    
+
     print("  [2] Topology View...", end=" ")
     print("[OK] Normal")
-    
+
     print("  [3] Self-Heal Status...", end=" ")
     heal = run_tool("self_heal_001.py", "--predict")
     if "High-risk: 0" in heal:
         print("[OK] No risk")
     elif "High-risk:" in heal:
         print("[!] " + heal.split("High-risk:")[1].split("\n")[0].strip())
-    
+
     print("  [4] Code Quality...", end=" ")
     issues = Path("13-memory/.code_quality_report.json")
     if issues.exists():
@@ -75,10 +75,10 @@ def main():
             print("Clean: " + str(clean) + "/" + str(total) + " (" + str(int(pct)) + "%)")
         except Exception:
             print("[OK] Normal")
-    
+
     print("  [5] Agent Status...", end=" ")
     print("[OK] Personas active")
-    
+
     print("")
     print("  " + "-" * 50)
     print("  Quick Actions:")
@@ -86,13 +86,13 @@ def main():
     print("  dev | full | plan | security | quick")
     print("  health | topo | heal | quality | agent | report")
     print("")
-    
+
     if len(sys.argv) < 2:
         print("=" * 60)
         return
-    
+
     cmd = sys.argv[1] if len(sys.argv) > 1 else "help"
-    
+
     commands = {
         "dev": lambda: subprocess.run(["workflow.bat", "dev"]),
         "quick": lambda: subprocess.run(["workflow.bat", "quick"]),
@@ -104,7 +104,7 @@ def main():
         "agent": lambda: subprocess.run(["workflow.bat", "multi-agent"]),
         "report": lambda: print(run_tool("health_reporter_001.py")),
     }
-    
+
     if cmd in commands:
         print("\n[EXEC] " + cmd + "...")
         commands[cmd]()

@@ -27,7 +27,7 @@ HISTORY_FILE = SCHEDULER_DIR / "history.json"
 
 class WorkflowScheduler:
     """Workflow Scheduler"""
-    
+
     BUILTIN_TASKS = {
         "daily-discover": {
             "id": "daily-discover",
@@ -46,35 +46,35 @@ class WorkflowScheduler:
             "last_run": None
         }
     }
-    
+
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.tools_dir = self.workspace / "30-scripts-tools"
         SCHEDULER_DIR.mkdir(parents=True, exist_ok=True)
         self._ensure_files()
-    
+
     def _ensure_files(self):
         if not TASKS_FILE.exists():
             TASKS_FILE.write_text(json.dumps({"tasks": self.BUILTIN_TASKS}, ensure_ascii=False, indent=2))
         if not HISTORY_FILE.exists():
             HISTORY_FILE.write_text(json.dumps({"history": []}, ensure_ascii=False, indent=2))
-    
+
     def _load_tasks(self) -> dict:
         return json.loads(TASKS_FILE.read_text(encoding="utf-8", errors="replace"))
-    
+
     def _save_tasks(self, data: dict):
         TASKS_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2))
-    
+
     def _load_history(self) -> dict:
         return json.loads(HISTORY_FILE.read_text(encoding="utf-8", errors="replace"))
-    
+
     def _save_history(self, data: dict):
         HISTORY_FILE.write_text(json.dumps(data, ensure_ascii=False, indent=2))
-    
+
     def list_tasks(self) -> List[Dict]:
         tasks = self._load_tasks()["tasks"]
         return [{"id": k, "name": v["name"], "cron": v["cron"], "enabled": v.get("enabled", True), "last_run": v.get("last_run")} for k, v in tasks.items()]
-    
+
     def add_task(self, name: str, command: str, cron: str = "0 9 * * *") -> Dict:
         tasks = self._load_tasks()
         # 清理name中的特殊字符
@@ -85,7 +85,7 @@ class WorkflowScheduler:
         tasks["tasks"][task_id] = {"id": task_id, "name": clean_name, "cron": cron, "command": command, "enabled": True, "last_run": None}
         self._save_tasks(tasks)
         return {"status": "success", "task_id": task_id}
-    
+
     def remove_task(self, task_id: str) -> Dict:
         tasks = self._load_tasks()
         if task_id not in tasks["tasks"]:
@@ -93,7 +93,7 @@ class WorkflowScheduler:
         del tasks["tasks"][task_id]
         self._save_tasks(tasks)
         return {"status": "success", "task_id": task_id}
-    
+
     def run_task(self, task_id: str) -> Dict:
         tasks = self._load_tasks()
         if task_id not in tasks["tasks"]:
@@ -111,11 +111,11 @@ class WorkflowScheduler:
             return {"status": "success" if result.returncode == 0 else "failed", "task_id": task_id}
         except Exception as e:
             return {"status": "error", "reason": str(e)}
-    
+
     def get_history(self, limit: int = 10) -> List[Dict]:
         history = self._load_history()
         return history["history"][-limit:]
-    
+
     def toggle_task(self, task_id: str) -> Dict:
         tasks = self._load_tasks()
         if task_id not in tasks["tasks"]:
@@ -129,15 +129,15 @@ class WorkflowScheduler:
 logging.basicConfig(level=logging.INFO)
 def main():
     scheduler = WorkflowScheduler()
-    
+
     if len(sys.argv) > 1:
         cmd = sys.argv[1]
-        
+
         if cmd == "--list":
             tasks = scheduler.list_tasks()
             print(json.dumps(tasks, ensure_ascii=False, indent=2))
             return 0
-        
+
         if cmd == "--add":
             # Format: --add "task.json"
             arg = sys.argv[2] if len(sys.argv) > 2 else None
@@ -163,7 +163,7 @@ def main():
             except Exception as e:
                 print(f"Error: {e}")
                 return 1
-        
+
         if cmd == "--run":
             tid = sys.argv[2] if len(sys.argv) > 2 else None
             if not tid:
@@ -172,7 +172,7 @@ def main():
             result = scheduler.run_task(tid)
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
-        
+
         if cmd == "--remove":
             tid = sys.argv[2] if len(sys.argv) > 2 else None
             if not tid:
@@ -181,12 +181,12 @@ def main():
             result = scheduler.remove_task(tid)
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
-        
+
         if cmd == "--history":
             history = scheduler.get_history()
             print(json.dumps(history, ensure_ascii=False, indent=2))
             return 0
-        
+
         if cmd == "--toggle":
             tid = sys.argv[2] if len(sys.argv) > 2 else None
             if not tid:
@@ -195,7 +195,7 @@ def main():
             result = scheduler.toggle_task(tid)
             print(json.dumps(result, ensure_ascii=False, indent=2))
             return 0
-    
+
     print("WORKFLOW-SCHEDULER-001 Workflow Scheduler")
     print("Usage:")
     print("  py scheduler.py --list                       # List tasks")
