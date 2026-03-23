@@ -70,7 +70,7 @@ def index():
                 # 类
                 for m in re.findall(r'class\s+(\w+)', c):
                     data["classes"].append({"name": m, "file": rel})
-            except: pass
+            except Exception: pass
     from datetime import datetime
     data["updated"] = datetime.now().isoformat()
     INDEX_FILE.parent.mkdir(parents=True, exist_ok=True)

@@ -52,7 +52,7 @@ class RelationExtractor:
         
         try:
             content = file_path.read_text(encoding="utf-8")
-        except:
+        except Exception:
             return relations
         
         source = f"paper_{arxiv_id.replace('.', '_')}"

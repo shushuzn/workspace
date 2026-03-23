@@ -106,7 +106,7 @@ def check_data_freshness(data):
             "message": message,
             "age_hours": age
         }
-    except:
+    except Exception:
         return {
             "fresh": False,
             "message": "Invalid timestamp format",

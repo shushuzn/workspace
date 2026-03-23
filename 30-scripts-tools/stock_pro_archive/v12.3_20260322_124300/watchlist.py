@@ -18,7 +18,7 @@ class Watchlist:
             try:
                 with open(WATCHLIST_FILE, 'r') as f:
                     self.lists = json.load(f)
-            except:
+            except Exception:
                 self.lists = {"default": []}
         else:
             self.lists = {"default": []}

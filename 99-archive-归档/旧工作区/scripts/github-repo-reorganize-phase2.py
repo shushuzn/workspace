@@ -130,7 +130,7 @@ def clean_empty_dirs():
                 try:
                     dir_path.rmdir()
                     deleted += 1
-                except:
+                except Exception:
                     pass
     
     print(f"  [OK] 删除 {deleted} 个空目录")

@@ -16,7 +16,7 @@ def get_live_price(symbol):
         ticker = yf.Ticker(symbol)
         info = ticker.fast_info
         return info.last_price
-    except:
+    except Exception:
         return None
 
 def get_live_data(symbol):
@@ -43,7 +43,7 @@ def get_live_data(symbol):
             "analyst_count": info.get("numberOfAnalystOpinions"),
             "recommendation": info.get("recommendationKey"),
         }
-    except:
+    except Exception:
         return None
 
 if YF_AVAILABLE:

@@ -43,7 +43,7 @@ def get_story_comments(story_id, max_comments=50):
                         'text': comment.get('text', '')[:500],
                         'score': comment.get('score', 0),
                     })
-        except:
+        except Exception:
             continue
     
     return comments

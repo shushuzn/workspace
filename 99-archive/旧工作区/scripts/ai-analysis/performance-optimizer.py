@@ -29,7 +29,7 @@ def check_process_resources():
             pinfo = proc.info
             if pinfo['cpu_percent'] is not None and pinfo['memory_percent'] is not None:
                 processes.append(pinfo)
-        except:
+        except Exception:
             continue
     
     # 按 CPU 使用率排序

@@ -18,7 +18,7 @@ class AlertManager:
             try:
                 with open(ALERTS_FILE, 'r') as f:
                     self.alerts = json.load(f)
-            except:
+            except Exception:
                 self.alerts = {}
         else:
             self.alerts = {}

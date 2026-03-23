@@ -21,7 +21,7 @@ class Cache:
             try:
                 with open(CACHE_FILE, 'r') as f:
                     self._memory = json.load(f)
-            except:
+            except Exception:
                 self._memory = {}
     
     def save(self):

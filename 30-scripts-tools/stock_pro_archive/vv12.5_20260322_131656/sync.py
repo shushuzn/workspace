@@ -17,7 +17,7 @@ class DataSync:
             try:
                 with open(SYNC_FILE, 'r') as f:
                     return json.load(f)
-            except:
+            except Exception:
                 pass
         return {"last_sync": None, "sources": {}, "logs": []}
     
@@ -47,7 +47,7 @@ class DataSync:
                         "beta": info.get("beta"),
                         "source": "yfinance"
                     })
-                except:
+                except Exception:
                     results.append({"symbol": sym, "error": "Failed to fetch"})
             
             self.sync_state["last_sync"] = datetime.now().isoformat()

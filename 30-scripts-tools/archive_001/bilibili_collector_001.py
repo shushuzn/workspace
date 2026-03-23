@@ -81,7 +81,7 @@ class BilibiliCollector:
                         "heat": heat.inner_text().strip() if heat else "",
                         "source": "bili_hot"
                     })
-                except: pass
+                except Exception: pass
             
             browser.close()
             p.stop()
@@ -123,7 +123,7 @@ class BilibiliCollector:
                         "views": play.inner_text().strip() if play else "",
                         "category": self.categories.get(category, category)
                     })
-                except: pass
+                except Exception: pass
             
             browser.close()
             p.stop()
@@ -198,7 +198,7 @@ class BilibiliCollector:
                         "duration": dur.inner_text().strip() if dur else "",
                         "uid": uid
                     })
-                except: pass
+                except Exception: pass
             
             browser.close()
             p.stop()
@@ -266,7 +266,7 @@ class BilibiliCollector:
                         "title": title.inner_text().strip() if title else "",
                         "url": link.get_attribute('href') if link else ""
                     })
-                except: pass
+                except Exception: pass
             
             browser.close()
             p.stop()

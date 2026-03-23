@@ -165,7 +165,7 @@ class MediumAnalyzer:
                     scores["timeliness"] = 0.6
                 else:
                     scores["timeliness"] = 0.4
-            except:
+            except Exception:
                 scores["timeliness"] = 0.5
         else:
             scores["timeliness"] = 0.5

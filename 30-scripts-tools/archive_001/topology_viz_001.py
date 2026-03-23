@@ -37,7 +37,7 @@ def scan_dependencies():
             content = f.read_text(encoding="utf-8", errors="replace")
             imports = re.findall(r'import (\w+)', content)
             deps[f.name] = imports
-        except:
+        except Exception:
             pass
     
     return deps

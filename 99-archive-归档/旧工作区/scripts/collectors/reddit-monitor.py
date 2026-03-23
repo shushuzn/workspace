@@ -56,7 +56,7 @@ def log(msg: str):
     try:
         with open(LOG_PATH, "a", encoding="utf-8") as f:
             f.write(line + "\n")
-    except:
+    except Exception:
         pass
 
 def init_db():
@@ -130,7 +130,7 @@ def fetch_subreddit_rss(subreddit: str, limit: int = 25) -> List[Dict]:
                     if response.status_code == 200 and len(response.content) > 500:
                         log(f"  → Libreddit 成功：{instance}")
                         break
-                except:
+                except Exception:
                     continue
         
         if response.status_code != 200:
@@ -164,7 +164,7 @@ def fetch_subreddit_rss(subreddit: str, limit: int = 25) -> List[Dict]:
                 try:
                     created = datetime.strptime(published, '%a, %d %b %Y %H:%M:%S %Z')
                     created_utc = created.isoformat()
-                except:
+                except Exception:
                     created_utc = datetime.now().isoformat()
             else:
                 created_utc = datetime.now().isoformat()

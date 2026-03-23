@@ -9,7 +9,7 @@ new_log = '''def log(msg):
     line = f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {msg}"
     try:
         print(line, flush=True)
-    except:
+    except Exception:
         pass
     open(LOG_PATH, "a", encoding="utf-8").write(line + "\\n")
 '''

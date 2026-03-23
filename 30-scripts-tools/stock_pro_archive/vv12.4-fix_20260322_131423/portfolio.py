@@ -16,7 +16,7 @@ class PortfolioManager:
             try:
                 with open(PORTFOLIO_FILE, 'r', encoding='utf-8') as f:
                     self.positions = json.load(f)
-            except:
+            except Exception:
                 self.positions = {}
     
     def save(self):

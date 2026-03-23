@@ -1,0 +1,26 @@
+[
+  {
+    "session_id": "20260323182804",
+    "task": "测试工作流v3",
+    "project": "NewsHub",
+    "started_at": "2026-03-23T18:28:04.245132",
+    "ended_at": "2026-03-23T18:28:18.966207",
+    "duration": "0:00:14.721081",
+    "decisions_count": 1,
+    "tests_run": 0,
+    "end_description": "工作流v3测试完成",
+    "status": "completed"
+  },
+  {
+    "session_id": "20260323183349",
+    "task": "测试自我迭代",
+    "project": "NewsHub",
+    "started_at": "2026-03-23T18:33:49.530197",
+    "ended_at": "2026-03-23T18:33:57.221547",
+    "duration": "0:00:07.691358",
+    "decisions_count": 1,
+    "tests_run": 0,
+    "end_description": "测试完成",
+    "status": "completed"
+  }
+]

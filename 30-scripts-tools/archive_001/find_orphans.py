@@ -27,7 +27,7 @@ for tool in tools:
             # 检查是否导入或调用
             if name in content:
                 call_count[name] += 1
-        except:
+        except Exception:
             pass
 
 # 找出孤立文件 (被调用次数 = 0)

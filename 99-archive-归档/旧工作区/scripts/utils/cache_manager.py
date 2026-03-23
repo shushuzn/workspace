@@ -176,7 +176,7 @@ class CacheManager:
                 if datetime.now() >= expires_at:
                     cache_file.unlink()
                     count += 1
-            except:
+            except Exception:
                 cache_file.unlink(missing_ok=True)
                 count += 1
         

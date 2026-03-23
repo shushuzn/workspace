@@ -51,7 +51,7 @@ from i18n import i18n, t, get_persona_info, TRANSLATIONS
 if sys.platform == 'win32':
     try:
         sys.stdout.reconfigure(encoding='utf-8')
-    except:
+    except Exception:
         pass
 
 # Configuration

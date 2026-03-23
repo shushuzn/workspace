@@ -14,7 +14,7 @@ def fetch(symbol):
             data = json.loads(resp.read())
             price = data["chart"]["result"][0]["meta"]["regularMarketPrice"]
             return price, "live", datetime.now().isoformat(), datetime.now().isoformat()
-    except:
+    except Exception:
         return P.get(symbol, 0), "cached", datetime.now().isoformat(), datetime.now().isoformat()
 
 def fetch_live(symbols):

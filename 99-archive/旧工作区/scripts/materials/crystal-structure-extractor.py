@@ -153,7 +153,7 @@ class CIFParser:
             return None
         try:
             return int(float(value))
-        except:
+        except Exception:
             return None
     
     def _parse_float(self, value: str) -> Optional[float]:
@@ -162,7 +162,7 @@ class CIFParser:
             return None
         try:
             return float(value)
-        except:
+        except Exception:
             return None
     
     def _extract_lattice(self, tags: Dict) -> Optional[LatticeParameters]:
@@ -177,7 +177,7 @@ class CIFParser:
             
             if all([a, b, c, alpha, beta, gamma]):
                 return LatticeParameters(a=a, b=b, c=c, alpha=alpha, beta=beta, gamma=gamma)
-        except:
+        except Exception:
             pass
         
         return None
@@ -226,7 +226,7 @@ class CIFParser:
                     occupancy=occupancy,
                     u_iso=u_iso
                 ))
-            except:
+            except Exception:
                 continue
         
         return atoms

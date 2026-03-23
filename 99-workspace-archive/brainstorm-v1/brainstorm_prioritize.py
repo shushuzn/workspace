@@ -44,7 +44,7 @@ def load_shortlist():
                         "novelty": novelty,
                         "total": feasibility + impact + novelty
                     })
-                except:
+                except Exception:
                     continue
     return ideas
 

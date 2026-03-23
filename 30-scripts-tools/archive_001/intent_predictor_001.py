@@ -74,7 +74,7 @@ class IntentPredictor:
         if HISTORY_FILE.exists():
             try:
                 return json.loads(HISTORY_FILE.read_text(encoding="utf-8", errors="replace"))
-            except:
+            except Exception:
                 pass
         return {"intents": [], "commands": [], "transitions": {}, "last_updated": None}
     
@@ -86,7 +86,7 @@ class IntentPredictor:
         if LEARN_LOG.exists():
             try:
                 return json.loads(LEARN_LOG.read_text(encoding="utf-8", errors="replace"))
-            except:
+            except Exception:
                 pass
         return {"entries": [], "total_learned": 0}
     

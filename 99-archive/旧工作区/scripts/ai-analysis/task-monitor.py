@@ -45,7 +45,7 @@ def check_task_logs():
                         status = 'running'
                     
                     last_run = datetime.now().strftime('%Y-%m-%d %H:%M')
-            except:
+            except Exception:
                 status = 'error'
         
         results.append({

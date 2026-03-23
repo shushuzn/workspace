@@ -193,7 +193,7 @@ def status():
             click.echo(click.style('  健康状态:', fg='green') + f" ✓ {data.get('version', 'unknown')}")
         else:
             click.echo(click.style('  健康状态:', fg='red') + f" ✗ (状态码：{response.status_code})")
-    except:
+    except Exception:
         click.echo(click.style('  健康状态:', fg='red') + " ✗ (无法连接)")
     
     # 指标
@@ -204,7 +204,7 @@ def status():
             click.echo(click.style('  API 请求:', fg='green') + f" {data.get('counters', {}).get('api_requests_total', 0)}")
             click.echo(click.style('  CPU:', fg='green') + f" {data.get('gauges', {}).get('cpu_usage', 0):.1f}%")
             click.echo(click.style('  内存:', fg='green') + f" {data.get('gauges', {}).get('memory_usage', 0):.1f}%")
-    except:
+    except Exception:
         click.echo(click.style('  指标:', fg='red') + " ✗ (无法获取)")
     
     click.echo("=" * 40)

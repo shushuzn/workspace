@@ -83,7 +83,7 @@ class ServiceManager:
             try:
                 response = requests.get('http://localhost:5000/api/v1/health', timeout=5)
                 return response.status_code == 200
-            except:
+            except Exception:
                 return False
         
         return True

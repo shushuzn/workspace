@@ -141,7 +141,7 @@ class MediumWatcher:
             test_proxies = {"http": proxy, "https": proxy}
             response = requests.get("https://www.google.com", proxies=test_proxies, timeout=timeout)
             return response.status_code == 200
-        except:
+        except Exception:
             return False
     
     def _load_proxy_from_env(self) -> str:
@@ -190,7 +190,7 @@ class MediumWatcher:
                         meta = json.load(f)
                         if "url" in meta:
                             self.seen_urls.add(meta["url"])
-                except:
+                except Exception:
                     pass
     
     def _load_incremental_state(self):
@@ -203,7 +203,7 @@ class MediumWatcher:
                     if "last_update" in state:
                         self.last_update = datetime.fromisoformat(state["last_update"])
                         print(f"[INFO] 增量更新：上次更新时间 {self.last_update.strftime('%Y-%m-%d %H:%M')}")
-            except:
+            except Exception:
                 pass
         else:
             print(f"[INFO] 首次运行，将获取所有文章")
@@ -227,7 +227,7 @@ class MediumWatcher:
                 with open(log_file, "r", encoding="utf-8") as f:
                     self.error_log = json.load(f)
                     print(f"[INFO] 已加载 {len(self.error_log)} 条历史错误")
-            except:
+            except Exception:
                 self.error_log = []
         else:
             self.error_log = []

@@ -36,7 +36,7 @@ def run_tool(tool, args=""):
             capture_output=True, text=True, timeout=60
         )
         return result.stdout[:500] if result.stdout else result.stderr[:200]
-    except:
+    except Exception:
         return "[ERROR]"
 
 
@@ -73,7 +73,7 @@ def main():
             total = data.get("total", 1)
             pct = int(clean)/int(total)*100 if total else 0
             print("Clean: " + str(clean) + "/" + str(total) + " (" + str(int(pct)) + "%)")
-        except:
+        except Exception:
             print("[OK] Normal")
     
     print("  [5] Agent Status...", end=" ")

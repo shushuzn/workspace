@@ -96,7 +96,7 @@ def log(msg: str):
     try:
         with open(LOG_PATH, "a", encoding="utf-8") as f:
             f.write(line + "\n")
-    except:
+    except Exception:
         pass
 
 def extract_text(filepath: str, max_chars: int = 5000) -> str:
@@ -146,7 +146,7 @@ def extract_existing_tags(filepath: str) -> List[str]:
         tags.extend(body_tags)
         
         return list(set(tags))
-    except:
+    except Exception:
         return []
 
 def generate_tags(text: str) -> List[str]:

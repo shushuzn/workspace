@@ -17,7 +17,7 @@ class WebhookManager:
             try:
                 with open(WEBHOOK_FILE, 'r') as f:
                     self.webhooks = json.load(f)
-            except:
+            except Exception:
                 self.webhooks = {}
     
     def save(self):

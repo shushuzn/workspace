@@ -58,7 +58,7 @@ class CPUMonitor:
         try:
             import psutil
             return psutil.cpu_percent(interval=0.1)
-        except:
+        except Exception:
             return 0.0
     
     def should_wait(self) -> bool:

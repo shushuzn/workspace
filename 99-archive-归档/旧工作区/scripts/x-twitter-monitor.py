@@ -47,7 +47,7 @@ def log(msg: str):
     try:
         with open(LOG_PATH, "a", encoding="utf-8") as f:
             f.write(line + "\n")
-    except:
+    except Exception:
         pass
 
 def init_db():

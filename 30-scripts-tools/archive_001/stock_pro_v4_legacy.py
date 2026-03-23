@@ -25,7 +25,7 @@ def load_config():
         try:
             with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        except:
+        except Exception:
             pass
     return {
         "watchlist": ["NVDA", "META", "JPM", "AAPL", "MSFT", "GOOGL", "AMZN", "TSLA"],
@@ -2348,7 +2348,7 @@ def export_to_xlsx(symbols, output_file=None):
             try:
                 if len(str(cell.value)) > max_length:
                     max_length = len(str(cell.value))
-            except:
+            except Exception:
                 pass
         adjusted_width = min(max_length + 2, 20)
         ws.column_dimensions[column_letter].width = adjusted_width
@@ -2986,7 +2986,7 @@ def load_portfolio():
         try:
             with open(portfolio_file, 'r', encoding='utf-8') as f:
                 return json.load(f)
-        except:
+        except Exception:
             pass
     return {"positions": [], "cash": 10000, "currency": "USD"}
 
@@ -3081,7 +3081,7 @@ def fetch_news(symbols):
                 cache_age = datetime.now() - datetime.fromisoformat(news_data["timestamp"])
                 if cache_age < timedelta(hours=1):
                     return news_data["news"]
-        except:
+        except Exception:
             pass
     
     # Fetch fresh news (mock for now - in production would use news API)

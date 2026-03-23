@@ -28,7 +28,7 @@ for f in sorted(reg_files):
             other_content = other.read_text(encoding='utf-8', errors='ignore')
             if f.stem in other_content:
                 called_by.append(other.name)
-        except:
+        except Exception:
             pass
     
     call_count = len(called_by)

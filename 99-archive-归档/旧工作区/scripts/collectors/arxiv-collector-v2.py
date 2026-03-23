@@ -197,7 +197,7 @@ def check_paper_exists(arxiv_id, date_str):
                     file_content = f.read()
                     if f'arxiv.org/abs/{arxiv_id}' in file_content:
                         return True, str(md_file)
-            except:
+            except Exception:
                 pass
     
     return False, None

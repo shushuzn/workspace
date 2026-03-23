@@ -95,7 +95,7 @@ class SecurityManager:
                 100000
             )
             return password_hash_check.hex() == hash_value
-        except:
+        except Exception:
             return False
     
     def _audit_log(self, action: str, user_id: str, details: str = None):

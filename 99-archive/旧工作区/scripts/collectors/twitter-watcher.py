@@ -44,7 +44,7 @@ def get_nitter_url(username):
             response = requests.head(url, timeout=5)
             if response.status_code == 200:
                 return url
-        except:
+        except Exception:
             continue
     return None
 

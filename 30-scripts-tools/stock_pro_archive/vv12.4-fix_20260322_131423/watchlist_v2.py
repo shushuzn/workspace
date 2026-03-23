@@ -20,7 +20,7 @@ class WatchlistManager:
             try:
                 with open(WATCHLIST_FILE, 'r') as f:
                     return json.load(f)
-            except:
+            except Exception:
                 pass
         return {"default": [], "tracked": {}, "performance": {}}
     

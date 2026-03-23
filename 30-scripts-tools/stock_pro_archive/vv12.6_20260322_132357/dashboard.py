@@ -16,7 +16,7 @@ class Dashboard:
         if DASHBOARD_FILE.exists():
             try:
                 return json.loads(DASHBOARD_FILE.read_text())
-            except: pass
+            except Exception: pass
         return {"last_update": None, "portfolio": {}, "sectors": []}
     
     def _save(self):

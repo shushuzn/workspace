@@ -42,7 +42,7 @@ class ReferenceValidator:
         if self.cache_file and self.cache_file.exists():
             try:
                 return json.loads(self.cache_file.read_text(encoding='utf-8'))
-            except:
+            except Exception:
                 pass
         return {}
     
@@ -51,7 +51,7 @@ class ReferenceValidator:
         if self.cache_file:
             try:
                 self.cache_file.write_text(json.dumps(self.cache, indent=2, ensure_ascii=False), encoding='utf-8')
-            except:
+            except Exception:
                 pass
     
     def _cleanup_cache(self):
@@ -93,7 +93,7 @@ class ReferenceValidator:
         try:
             with open(self.log_file, "a", encoding='utf-8') as f:
                 f.write(log_entry)
-        except:
+        except Exception:
             pass
     
     def _validate_doi_with_retry(self, doi: str) -> Dict:
@@ -499,7 +499,7 @@ class KnowledgeCardGenerator:
                         "width": base_image["width"],
                         "height": base_image["height"]
                     })
-                except:
+                except Exception:
                     pass
         
         self.figures = figures

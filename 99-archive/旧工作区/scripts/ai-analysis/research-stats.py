@@ -46,7 +46,7 @@ def count_pnotes(workspace: str) -> dict:
                 tags = [t.strip() for t in tags_match.group(1).split(",")]
                 for tag in tags:
                     by_tag[tag] += 1
-        except:
+        except Exception:
             pass
     
     return {
@@ -107,7 +107,7 @@ def count_knowledge_graph(workspace: str) -> dict:
                 stats["entities"] = len(data.get("entities", []))
                 stats["relations"] = len(data.get("relations", []))
                 stats["entity_types"] = data.get("stats", {}).get("entity_types", {})
-            except:
+            except Exception:
                 pass
     
     return stats

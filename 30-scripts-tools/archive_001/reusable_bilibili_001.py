@@ -97,7 +97,7 @@ class BilibiliCollector:
             browser.close()
             p.stop()
             return result
-        except:
+        except Exception:
             return {k: "" for k in fields.keys()}
     
     # ========== 预设任务（直接调用）==========

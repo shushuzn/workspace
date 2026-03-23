@@ -40,7 +40,7 @@ class UserAuth:
                 100000
             )
             return new_hash.hex() == pwd_hash
-        except:
+        except Exception:
             return False
     
     def register_user(self, username: str, password: str, email: str = None) -> Dict:

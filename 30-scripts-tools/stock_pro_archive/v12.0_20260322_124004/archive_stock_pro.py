@@ -28,7 +28,7 @@ def get_version():
             content = f.read()
         match = re.search(r'__version__\s*=\s*["\']([^"\']+)["\']', content)
         return match.group(1) if match else "unknown"
-    except:
+    except Exception:
         return "unknown"
 
 

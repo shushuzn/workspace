@@ -37,7 +37,7 @@ def get_health_status():
         try:
             stats = json.loads(workflow_log.read_text(encoding="utf-8", errors="replace"))
             success_rate = stats.get("success_rate", 100)
-        except:
+        except Exception:
             pass
     
     return {

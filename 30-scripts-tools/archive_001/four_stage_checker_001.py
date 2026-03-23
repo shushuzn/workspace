@@ -55,7 +55,7 @@ class FourStageChecker:
         if CHECK_LOG.exists():
             try:
                 return json.loads(CHECK_LOG.read_text(encoding="utf-8", errors="replace"))
-            except:
+            except Exception:
                 pass
         return {"checks": [], "compliant": [], "non_compliant": []}
     

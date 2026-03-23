@@ -26,7 +26,7 @@ def log(msg):
     try:
         with open(LOG_PATH, "a", encoding="utf-8") as f:
             f.write(line + "\n")
-    except: pass
+    except Exception: pass
 
 def init_db():
     conn = sqlite3.connect(DB_PATH)

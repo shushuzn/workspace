@@ -92,7 +92,7 @@ def get_bilibili_content(url):
     try:
         subprocess.run(cmd, check=True)
         return f"该B站视频无字幕，已下载音频文件（{audio_file}），请结合音频内容整理笔记。视频链接：{url}"
-    except:
+    except Exception:
         return f"该B站视频无字幕，视频链接：{url}，请根据视频内容整理学习笔记。"
 
 # ==================== 3. 调用豆包API生成笔记 ====================

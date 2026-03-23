@@ -19,7 +19,7 @@ class History:
             try:
                 with open(HISTORY_FILE, 'r') as f:
                     self.records = json.load(f)
-            except:
+            except Exception:
                 self.records = []
     
     def save(self):

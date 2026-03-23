@@ -57,7 +57,7 @@ class CronScheduler:
                         job = CronJob(j["name"], j["symbols"], j["command"], j["schedule"])
                         job.active = j.get("active", True)
                         self.jobs.append(job)
-            except:
+            except Exception:
                 pass
     
     def save(self):

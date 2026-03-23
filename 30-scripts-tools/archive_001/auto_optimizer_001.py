@@ -53,7 +53,7 @@ class AutoOptimizer:
         if OPT_LOG.exists():
             try:
                 self.log = json.loads(OPT_LOG.read_text(encoding="utf-8", errors="replace"))
-            except:
+            except Exception:
                 pass
     
     def save_log(self):
@@ -63,7 +63,7 @@ class AutoOptimizer:
         issues = []
         try:
             content = path.read_text(encoding="utf-8", errors="replace")
-        except:
+        except Exception:
             return issues
         
         if "print(" in content and "logging" not in content:
@@ -104,7 +104,7 @@ class AutoOptimizer:
                 path.write_text(content, encoding="utf-8")
                 return True
             return False
-        except:
+        except Exception:
             return False
     
     def optimize_all(self, dry_run=True):
