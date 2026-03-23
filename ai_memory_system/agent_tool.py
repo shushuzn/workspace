@@ -66,6 +66,31 @@ class MemoryAgentTool:
             return f"❌ 未找到记忆: {key}"
         return f"📝 [{key}]: {result}"
 
+    def recall_all(self) -> str:
+        """查看所有记忆。"""
+        stats = self._ms.stats()
+        short_keys = stats["short_term_keys"]
+        long_keys = stats["long_term_keys"]
+
+        if not short_keys and not long_keys:
+            return "📝 暂无记忆"
+
+        lines = ["📝 所有记忆:"]
+
+        if short_keys:
+            lines.append("  短期记忆:")
+            for k in short_keys:
+                v = self._ms.get(k)
+                lines.append(f"    {k}: {v}")
+
+        if long_keys:
+            lines.append("  长期记忆:")
+            for k in long_keys:
+                v = self._ms.get(k)
+                lines.append(f"    {k}: {v}")
+
+        return "\n".join(lines)
+
     def search_memories(self, query: str, top_k: int = 3) -> str:
         """
         记忆搜索 - 语义搜索相关记忆。
@@ -184,6 +209,7 @@ class MemoryAgentTool:
             "memorize": self.memorize,
             "batch_memorize": self.batch_memorize,
             "recall": self.recall,
+            "recall_all": self.recall_all,
             "search": self.search_memories,
             "context": self.get_context,
             "distill": self.distill_memories,
