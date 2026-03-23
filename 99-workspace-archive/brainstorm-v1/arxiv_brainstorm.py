@@ -305,7 +305,7 @@ def generate_brainstorm_ideas():
     })
 
     # 统计
-    print(f"\n{'='*70}")
+    print(f"\n{'=' *70}")
     print(f"总想法数：{len(ideas)}")
     print(f"高影响力：{sum(1 for i in ideas if i['impact'] in ['高', '极高'])}")
     print(f"高可行性：{sum(1 for i in ideas if i['feasibility'] == '高')}")

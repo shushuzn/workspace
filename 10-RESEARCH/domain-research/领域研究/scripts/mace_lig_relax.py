@@ -81,7 +81,7 @@ def create_lig_model(n_atoms=50, density=2.0):
     n_atoms = len(supercell)
     target_volume = n_atoms * 12.01 / (density * 6.022) * 10  # 转换为 Å³
 
-    scale = (target_volume / current_volume) ** (1/3)
+    scale = (target_volume / current_volume) ** (1 /3)
     supercell.set_cell(supercell.get_cell() * scale, scale_atoms=True)
 
     return supercell
@@ -121,7 +121,7 @@ energy_change = final_energy - initial_energy
 
 print(f"\n  弛豫完成！")
 print(f"  最终能量：{final_energy:.4f} eV")
-print(f"  能量变化：{energy_change:.4f} eV ({energy_change/len(lig_structure)*1000:.1f} meV/atom)")
+print(f"  能量变化：{energy_change:.4f} eV ({energy_change /len(lig_structure) *1000:.1f} meV/atom)")
 print(f"  最终最大力：{max_final_force:.4f} eV/Å")
 
 # 结构分析
@@ -137,8 +137,8 @@ pbc = lig_structure.get_pbc()
 # 计算所有 C-C 距离
 distances = []
 for i in range(len(lig_structure)):
-    for j in range(i+1, len(lig_structure)):
-        d = get_distances(positions[i:i+1], positions[j:j+1], cell, pbc)[0][0]
+    for j in range(i +1, len(lig_structure)):
+        d = get_distances(positions[i:i +1], positions[j:j +1], cell, pbc)[0][0]
         if d < 2.5:  # 只考虑近邻
             distances.append(d)
 

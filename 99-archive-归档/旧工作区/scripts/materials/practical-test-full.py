@@ -74,9 +74,9 @@ ReportGenerator = report_module.ReportGenerator if report_module else None
 
 def test_paper_extraction():
     """Test 1: Paper information extraction"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("Test 1: Paper Extraction")
-    print("="*70)
+    print("=" *70)
 
     # Simulated paper abstract
     paper_abstract = """
@@ -131,9 +131,9 @@ def test_paper_extraction():
 
 def test_property_prediction():
     """Test 2: Property prediction"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("Test 2: Property Prediction (CGCNN)")
-    print("="*70)
+    print("=" *70)
 
     config = CPUConfig()
     model = get_cgcnn_model(config)
@@ -151,9 +151,9 @@ def test_property_prediction():
 
 def test_material_generation():
     """Test 3: Material generation (VAE)"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("Test 3: Material Generation (VAE)")
-    print("="*70)
+    print("=" *70)
 
     vae = get_vae_model(CPUConfig())
     vae.initialize_weights()
@@ -177,9 +177,9 @@ def test_material_generation():
 
 def test_experiment_design():
     """Test 4: Experiment design"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("Test 4: Experiment Design")
-    print("="*70)
+    print("=" *70)
 
     designer = ExperimentDesigner()
 
@@ -195,9 +195,9 @@ def test_experiment_design():
 
 def test_report_generation():
     """Test 5: Report generation"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("Test 5: Report Generation")
-    print("="*70)
+    print("=" *70)
 
     generator = ReportGenerator()
 
@@ -222,10 +222,10 @@ def test_report_generation():
 
 def main():
     """主函数"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("第十二阶段 - 实战测试")
     print("完整系统端到端验证")
-    print("="*70)
+    print("=" *70)
 
     start_time = time.time()
 
@@ -249,9 +249,9 @@ def main():
     # 总结
     total_time = time.time() - start_time
 
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("实战测试总结")
-    print("="*70)
+    print("=" *70)
 
     print(f"\nTotal time: {total_time:.1f}s")
     print(f"\nResults:")
@@ -265,9 +265,9 @@ def main():
     print(f"  - data/practical-test-report.md")
     print(f"  - data/practical-test-report.json")
 
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("[OK] All tests passed! System ready!")
-    print("="*70)
+    print("=" *70)
 
 
 if __name__ == '__main__':

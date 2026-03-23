@@ -436,9 +436,9 @@ def main():
     mga.populate_memory(knowledge_items)
 
     if args.benchmark or True:  # Default to benchmark
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🧠 Memory-Guided Attention Benchmark")
-        print("="*80)
+        print("=" *80)
 
         # Test with different context lengths
         context_lengths = [500, 1000, 2000, 4000, 8000]
@@ -449,9 +449,9 @@ def main():
             results.append(asdict(output))
 
         # Print benchmark summary
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 Benchmark Summary")
-        print("="*80)
+        print("=" *80)
 
         stats = mga.get_system_stats()
         print(f"\n  Queries Processed: {stats['queries_processed']}")
@@ -480,9 +480,9 @@ def main():
     if args.test:
         simulate_long_context_task(mga, args.test)
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ MGA system complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.15001")
     print("🎯 Key Achievements:")
     print("   - 23% quality improvement on long-context tasks")

@@ -153,7 +153,7 @@ class RetryHandler:
         return {
             "total_attempts": total,
             "success_count": success,
-            "success_rate": f"{(success/total*100):.1f}%" if total > 0 else "N/A"
+            "success_rate": f"{(success /total *100):.1f}%" if total > 0 else "N/A"
         }
 
 

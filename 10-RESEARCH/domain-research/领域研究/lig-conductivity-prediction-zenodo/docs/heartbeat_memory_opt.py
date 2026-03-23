@@ -34,9 +34,9 @@ from dynamic_memory_allocation import MemoryPriority
 def optimize_for_heartbeat():
     """Run memory optimization for HEARTBEAT"""
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("🔔 HEARTBEAT Memory Optimization")
-    print("="*80)
+    print("=" *80)
     print(f"⏰ Timestamp: {datetime.now().isoformat()}")
 
     # Initialize integration layer
@@ -52,9 +52,9 @@ def optimize_for_heartbeat():
     setup_default_workflows(integration)
 
     # Optimize each workflow
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Workflow Memory Optimization")
-    print("="*80)
+    print("=" *80)
 
     optimization_results = []
 
@@ -80,9 +80,9 @@ def optimize_for_heartbeat():
             print(f"    GC: {'Triggered' if result.gc_triggered else 'Skipped'}, {result.blocks_evicted} blocks evicted")
 
     # Overall statistics
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Overall Memory Statistics")
-    print("="*80)
+    print("=" *80)
 
     status = integration.get_integration_status()
 
@@ -148,9 +148,9 @@ def optimize_for_heartbeat():
     integration.export_stats("data/heartbeat_memory_stats.json")
 
     # Health check
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Memory Health Check")
-    print("="*80)
+    print("=" *80)
 
     health_status = "✅ HEALTHY"
     health_issues = []
@@ -176,9 +176,9 @@ def optimize_for_heartbeat():
     else:
         print(f"\n  ✅ All metrics within healthy ranges")
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ HEARTBEAT Memory Optimization Complete!")
-    print("="*80)
+    print("=" *80)
 
     return heartbeat_state
 
@@ -186,9 +186,9 @@ def optimize_for_heartbeat():
 def show_status():
     """Show current memory status"""
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 Memory Status (HEARTBEAT)")
-    print("="*80)
+    print("=" *80)
 
     # Load last state
     state_file = "13-memory/heartbeat-memory-state.json"
@@ -218,9 +218,9 @@ def show_status():
 def force_gc():
     """Force garbage collection"""
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("🧹 Forced Garbage Collection")
-    print("="*80)
+    print("=" *80)
 
     config = MemoryIntegrationConfig(
         enabled=True,

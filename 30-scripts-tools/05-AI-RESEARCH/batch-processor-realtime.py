@@ -79,10 +79,10 @@ class StreamingOutput:
         data = event["data"]
 
         if event_type == "batch_start":
-            print(f"\n{'='*60}")
+            print(f"\n{'=' *60}")
             print(f"🚀 批量任务启动：{data.get('batch_id')}")
             print(f"📊 论文数量：{data.get('total_papers')}, 并发数：{data.get('max_concurrent')}")
-            print(f"{'='*60}\n")
+            print(f"{'=' *60}\n")
 
         elif event_type == "paper_start":
             print(f"  [{data.get('current')}/{data.get('total')}] 处理 {data.get('paper_id')}...")
@@ -106,14 +106,14 @@ class StreamingOutput:
             print(f"     进度：[{bar}] {progress:.1f}%")
 
         elif event_type == "batch_complete":
-            print(f"\n{'='*60}")
+            print(f"\n{'=' *60}")
             print(f"✅ 批量处理完成!")
             print(f"📊 总计：{data.get('total_papers')} 篇")
             print(f"✅ 成功：{data.get('completed')} 篇")
             print(f"❌ 失败：{data.get('failed')} 篇")
             print(f"⏱️  耗时：{data.get('elapsed_seconds'):.1f} 秒")
             print(f"📈 平均：{data.get('avg_time_per_paper'):.1f} 秒/篇")
-            print(f"{'='*60}\n")
+            print(f"{'=' *60}\n")
 
 
 class BatchProcessorRealtime:
@@ -299,7 +299,7 @@ P-Note: arXiv:{paper_id}
 
         # 创建任务列表
         tasks = [
-            process_with_semaphore(paper_id, i+1, len(paper_ids))
+            process_with_semaphore(paper_id, i +1, len(paper_ids))
             for i, paper_id in enumerate(paper_ids)
         ]
 
@@ -398,7 +398,7 @@ def main():
             task = processor.create_subagent_task(paper_id)
             print(f"任务：{paper_id}")
             print(f"压缩后描述：{task['task']}")
-            print(f"Token 估算：~{len(task['task'])//4} tokens\n")
+            print(f"Token 估算：~{len(task['task']) //4} tokens\n")
     else:
         # 使用上下文管理器处理流式输出
         with StreamingOutput(

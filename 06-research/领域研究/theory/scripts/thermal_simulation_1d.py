@@ -44,12 +44,12 @@ absorb = 0.8    # (absorption coefficient)
 
 # Derived quantities
 t_dwell = d / v  # s (dwell time)
-q_laser = absorb * P / (np.pi * (d/2)**2)  # W/m² (power density)
+q_laser = absorb * P / (np.pi * (d /2)**2)  # W/m² (power density)
 
 print(f"  Power: {P} W")
-print(f"  Speed: {v*1000:.1f} mm/s")
-print(f"  Spot size: {d*1e6:.0f} um")
-print(f"  Dwell time: {t_dwell*1e6:.1f} us")
+print(f"  Speed: {v *1000:.1f} mm/s")
+print(f"  Spot size: {d *1e6:.0f} um")
+print(f"  Dwell time: {t_dwell *1e6:.1f} us")
 print(f"  Power density: {q_laser:.2e} W/m2")
 
 # ============================================================================
@@ -64,10 +64,10 @@ nt = 500        # number of time steps
 
 # Stability check
 stability = alpha * dt / dz**2
-print(f"  Grid spacing: {dz*1e6:.1f} um")
-print(f"  Time step: {dt*1e6:.1f} us")
-print(f"  Domain depth: {nz*dz*1e6:.1f} um")
-print(f"  Total time: {nt*dt*1e6:.1f} us")
+print(f"  Grid spacing: {dz *1e6:.1f} um")
+print(f"  Time step: {dt *1e6:.1f} us")
+print(f"  Domain depth: {nz *dz *1e6:.1f} um")
+print(f"  Total time: {nt *dt *1e6:.1f} us")
 print(f"  Stability number: {stability:.3f} (should be <= 0.5)")
 
 if stability > 0.5:
@@ -92,8 +92,8 @@ for n in range(nt):
     T_new = T.copy()
 
     # Internal nodes (diffusion)
-    for i in range(1, nz-1):
-        T_new[i] = T[i] + alpha * dt / dz**2 * (T[i+1] - 2*T[i] + T[i-1])
+    for i in range(1, nz -1):
+        T_new[i] = T[i] + alpha * dt / dz**2 * (T[i +1] - 2 *T[i] + T[i -1])
 
     # Surface boundary (laser heating)
     # Only heat during dwell time
@@ -102,7 +102,7 @@ for n in range(nt):
         T_new[0] = T[0] + q_laser * dt / (rho * Cp * dz)
 
     # Bottom boundary (adiabatic)
-    T_new[nz-1] = T[nz-1]
+    T_new[nz -1] = T[nz -1]
 
     T = T_new
 
@@ -121,7 +121,7 @@ z_max = np.argmax(T_history[-1]) * dz
 
 print(f"\n  Simulation Results:")
 print(f"    Maximum temperature: {T_max_sim:.1f} K")
-print(f"    Location: {z_max*1e6:.1f} um depth")
+print(f"    Location: {z_max *1e6:.1f} um depth")
 
 # Analytical estimate
 T_max_analytical = T_env + 0.5 * absorb * P / (rho * Cp * v * d**2)
@@ -151,7 +151,7 @@ fig1, ax1 = plt.subplots(figsize=(8, 6), dpi=300)
 depth = np.arange(nz) * dz * 1e6  # um
 
 for i, t_idx in enumerate(time_points):
-    ax1.plot(T_history[i], depth, label=f't={t_idx*dt*1e6:.1f} μs')
+    ax1.plot(T_history[i], depth, label=f't={t_idx *dt *1e6:.1f} μs')
 
 ax1.set_xlabel('Temperature (K)', fontsize=12)
 ax1.set_ylabel('Depth (μm)', fontsize=12)
@@ -173,16 +173,16 @@ T_surface = np.zeros(nt)
 T = np.ones(nz) * T_env
 for n in range(nt):
     T_new = T.copy()
-    for i in range(1, nz-1):
-        T_new[i] = T[i] + alpha * dt / dz**2 * (T[i+1] - 2*T[i] + T[i-1])
+    for i in range(1, nz -1):
+        T_new[i] = T[i] + alpha * dt / dz**2 * (T[i +1] - 2 *T[i] + T[i -1])
     if n * dt < t_dwell:
         T_new[0] = T[0] + q_laser * dt / (rho * Cp * dz)
-    T_new[nz-1] = T[nz-1]
+    T_new[nz -1] = T[nz -1]
     T = T_new
     T_surface[n] = T[0]
 
 ax2.plot(time, T_surface, 'b-', linewidth=2)
-ax2.axvline(x=t_dwell*1e6, color='r', linestyle='--', label=f'Dwell time={t_dwell*1e6:.1f} μs')
+ax2.axvline(x=t_dwell *1e6, color='r', linestyle='--', label=f'Dwell time={t_dwell *1e6:.1f} μs')
 ax2.set_xlabel('Time (μs)', fontsize=12)
 ax2.set_ylabel('Surface Temperature (K)', fontsize=12)
 ax2.set_title('Surface Temperature vs Time', fontsize=14)

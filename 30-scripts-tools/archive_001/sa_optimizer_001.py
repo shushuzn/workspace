@@ -117,8 +117,8 @@ Fixes:
                 return {"sharpe": 0, "return": 0, "drawdown": 100}
 
             # 模拟
-            sharpe = random.uniform(0.5, 2.5) * (1 - fast/slow)
-            retrn = random.uniform(-5, 15) * (1 + slow/fast)
+            sharpe = random.uniform(0.5, 2.5) * (1 - fast /slow)
+            retrn = random.uniform(-5, 15) * (1 + slow /fast)
             dd = random.uniform(2, 20)
 
         elif strategy == "rsi":
@@ -150,7 +150,7 @@ Fixes:
             "sharpe": round(sharpe, 3),
             "return": round(retrn, 2),
             "drawdown": round(dd, 2),
-            "score": round(sharpe * 0.4 + (retrn/10) * 0.3 - (dd/100) * 0.3, 3)
+            "score": round(sharpe * 0.4 + (retrn /10) * 0.3 - (dd /100) * 0.3, 3)
         }
 
     def grid_search(self, strategy: str, param_grid: dict) -> dict:

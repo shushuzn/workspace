@@ -40,9 +40,9 @@ class WorkflowAutoExecutor:
         step_name = step["name"]
         tool_id = step.get("tool_id", "")
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Step {step_id}: {step_name}")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
         print(f"工具：{tool_id}")
 
         start_time = datetime.now()
@@ -86,9 +86,9 @@ class WorkflowAutoExecutor:
 
     def execute_all(self) -> bool:
         """执行所有步骤"""
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print("开始执行工作流")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         success_count = 0
         fail_count = 0
@@ -100,20 +100,20 @@ class WorkflowAutoExecutor:
             else:
                 fail_count += 1
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print("执行完成")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
         print(f"成功：{success_count}/{len(self.steps)}")
         print(f"失败：{fail_count}/{len(self.steps)}")
-        print(f"{'='*60}\n")
+        print(f"{'=' *60}\n")
 
         return fail_count == 0
 
     def verify_and_commit(self) -> bool:
         """验证并 Git 提交"""
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print("验证 + Git 提交")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         # 1. 运行 workflow_guardian
         print("\n[1] Workflow Guardian 验证...")

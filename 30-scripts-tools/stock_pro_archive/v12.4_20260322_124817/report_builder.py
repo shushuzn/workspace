@@ -132,7 +132,7 @@ def investment_summary(symbols=None):
         f"Total Stocks: {len(results)}",
         f"Current Value: ${total_value:,.2f}",
         f"Target Value: ${total_target:,.2f}",
-        f"Potential Gain: ${potential_gain:,.2f} ({(potential_gain/total_value*100):+.1f}%)"
+        f"Potential Gain: ${potential_gain:,.2f} ({(potential_gain /total_value *100):+.1f}%)"
     ])
 
     top10 = sorted(results, key=lambda x: x["score"], reverse=True)[:10]

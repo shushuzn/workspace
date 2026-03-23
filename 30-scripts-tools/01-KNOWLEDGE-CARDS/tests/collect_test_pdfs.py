@@ -133,9 +133,9 @@ class PDFTestCollection:
 
     def collect_pdfs(self):
         """收集所有测试 PDF"""
-        print("="*60)
+        print("=" *60)
         print("PDF 测试集收集")
-        print("="*60)
+        print("=" *60)
         print(f"开始时间：{datetime.now().isoformat()}")
         print(f"输出目录：{self.output_dir}")
         print()
@@ -145,7 +145,7 @@ class PDFTestCollection:
         for category, config in self.test_categories.items():
             print(f"\n[{category}] {config['description']}")
             print(f"目标数量：{config['target']}")
-            print("-"*60)
+            print("-" *60)
 
             collected = 0
             attempts = 0
@@ -210,12 +210,12 @@ class PDFTestCollection:
             }, f, indent=2, ensure_ascii=False)
 
         print()
-        print("="*60)
+        print("=" *60)
         print("收集完成")
-        print("="*60)
+        print("=" *60)
         print(f"总数量：{total_collected}")
         print(f"元数据：{metadata_path}")
-        print("="*60)
+        print("=" *60)
 
         return total_collected
 

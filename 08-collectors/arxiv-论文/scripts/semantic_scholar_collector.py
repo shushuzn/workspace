@@ -79,7 +79,7 @@ class SemanticScholarAPI:
             if title:
                 citations = self.get_citation_by_search(title)
                 results[title] = citations
-                print(f"[{i+1}/{min(len(papers), max_papers)}] {citations} cites - {title[:60]}...")
+                print(f"[{i +1}/{min(len(papers), max_papers)}] {citations} cites - {title[:60]}...")
                 time.sleep(0.12)  # 遵守速率限制
         return results
 

@@ -88,7 +88,7 @@ class SA_Base:
             try:
                 return func(*args, **kwargs)
             except Exception as e:
-                self.logger.warning(f"Retry {i+1}/{retries}: {e}")
+                self.logger.warning(f"Retry {i +1}/{retries}: {e}")
                 if i < retries - 1:
                     import time
                     time.sleep(delay)

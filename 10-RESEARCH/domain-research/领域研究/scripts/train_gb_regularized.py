@@ -39,7 +39,7 @@ for i, cfg in enumerate(configs):
     gb = GradientBoostingRegressor(**cfg, random_state=42)
     cv_scores = cross_val_score(gb, X_scaled, y, cv=5, scoring='r2')
     mean_cv = cv_scores.mean()
-    print(f"  Config {i+1}: CV R2 = {mean_cv:.4f} (+/- {cv_scores.std():.4f})")
+    print(f"  Config {i +1}: CV R2 = {mean_cv:.4f} (+/- {cv_scores.std():.4f})")
     if mean_cv > best_cv:
         best_cv = mean_cv
         best_config = cfg

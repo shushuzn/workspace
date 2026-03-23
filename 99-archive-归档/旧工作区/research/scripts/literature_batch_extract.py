@@ -324,7 +324,7 @@ report = f"""# LIG 文献数据挖掘进度报告
 - **本次提取:** {len(extracted_samples)} 样本
 - **累计样本:** {len(df_combined) if 'df_combined' in locals() else len(extracted_samples)}
 - **目标:** 200 样本
-- **进度:** {len(df_combined)/200*100 if 'df_combined' in locals() else 0:.0f}%
+- **进度:** {len(df_combined) /200 *100 if 'df_combined' in locals() else 0:.0f}%
 
 ## 📈 数据分布
 
@@ -337,7 +337,7 @@ report = f"""# LIG 文献数据挖掘进度报告
 """
 
 for precursor, count in stats['precursors'].items():
-    report += f"- **{precursor}:** {count} 样本 ({count/len(extracted_samples)*100:.0f}%)\n"
+    report += f"- **{precursor}:** {count} 样本 ({count /len(extracted_samples) *100:.0f}%)\n"
 
 report += f"""
 ## 🎯 下一步计划
@@ -374,7 +374,7 @@ print("=" * 70)
 print(f"\n结果:")
 print(f"  本次提取：{len(extracted_samples)} 样本")
 print(f"  累计样本：{len(df_combined) if 'df_combined' in locals() else len(extracted_samples)}")
-print(f"  进度：{len(df_combined)/200*100 if 'df_combined' in locals() else 0:.0f}% / 200")
+print(f"  进度：{len(df_combined) /200 *100 if 'df_combined' in locals() else 0:.0f}% / 200")
 
 print(f"\n文件:")
 print(f"  {csv_path}")

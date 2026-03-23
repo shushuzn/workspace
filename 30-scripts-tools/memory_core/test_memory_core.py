@@ -79,7 +79,7 @@ def test_performance():
         core.process(f"Memory {i} for performance testing")
     elapsed = time.time() - start
 
-    print(f"[OK] Processed 100 memories in {elapsed:.2f}s ({100/elapsed:.1f} mem/s)")
+    print(f"[OK] Processed 100 memories in {elapsed:.2f}s ({100 /elapsed:.1f} mem/s)")
 
     # Search
     start = time.time()

@@ -24,9 +24,9 @@ from feishu_api import FeishuAPIClient
 
 def example_text_message():
     """Example: Send simple text message."""
-    print("\n" + "="*50)
+    print("\n" + "=" *50)
     print("Example 1: Text Message")
-    print("="*50)
+    print("=" *50)
 
     client = FeishuAPIClient()
 
@@ -46,9 +46,9 @@ def example_text_message():
 
 def example_card_message():
     """Example: Send interactive card message."""
-    print("\n" + "="*50)
+    print("\n" + "=" *50)
     print("Example 2: Card Message")
-    print("="*50)
+    print("=" *50)
 
     client = FeishuAPIClient()
 
@@ -93,9 +93,9 @@ def example_card_message():
 
 def example_alert_message():
     """Example: Send alert/warning message."""
-    print("\n" + "="*50)
+    print("\n" + "=" *50)
     print("Example 3: Alert Message")
-    print("="*50)
+    print("=" *50)
 
     client = FeishuAPIClient()
 
@@ -147,9 +147,9 @@ def example_alert_message():
 
 def example_daily_report():
     """Example: Send daily report."""
-    print("\n" + "="*50)
+    print("\n" + "=" *50)
     print("Example 4: Daily Report")
-    print("="*50)
+    print("=" *50)
 
     client = FeishuAPIClient()
 
@@ -189,9 +189,9 @@ def example_daily_report():
 
 def example_token_management():
     """Example: Token management."""
-    print("\n" + "="*50)
+    print("\n" + "=" *50)
     print("Example 5: Token Management")
-    print("="*50)
+    print("=" *50)
 
     client = FeishuAPIClient()
 
@@ -209,9 +209,9 @@ def example_token_management():
 
 def example_batch_messages():
     """Example: Send batch messages to multiple users."""
-    print("\n" + "="*50)
+    print("\n" + "=" *50)
     print("Example 6: Batch Messages")
-    print("="*50)
+    print("=" *50)
 
     client = FeishuAPIClient()
 
@@ -261,9 +261,9 @@ def main():
         print(f"Available: {', '.join(examples.keys())}")
         sys.exit(1)
 
-    print("\n" + "="*50)
+    print("\n" + "=" *50)
     print("Feishu API Examples - OpenClaw")
-    print("="*50)
+    print("=" *50)
 
     selected_examples = examples[example_name]
 
@@ -274,9 +274,9 @@ def main():
             print(f"\n[✗] Example failed: {e}")
             print("Continue with next example...\n")
 
-    print("\n" + "="*50)
+    print("\n" + "=" *50)
     print("Examples Complete!")
-    print("="*50 + "\n")
+    print("=" *50 + "\n")
 
 
 if __name__ == "__main__":

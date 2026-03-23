@@ -145,9 +145,9 @@ class DynamicGoalAdjuster:
     def run(self, metrics: Dict, original_goals: List[Dict]) -> Dict:
         """完整流程：评估 -> 决策 -> 调整"""
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"动态目标调整")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         # 评估执行状态
         state = self.assess_execution_state(metrics)
@@ -194,7 +194,7 @@ class DynamicGoalAdjuster:
             "adjusted_goals": adjusted_goals
         })
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
 
         return {
             "state": state,

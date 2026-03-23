@@ -43,7 +43,7 @@ class ConflictModule:
         conflicts = []
 
         for i, mem1 in enumerate(memories):
-            for mem2 in memories[i+1:]:
+            for mem2 in memories[i +1:]:
                 conflict = self._check_conflict(mem1, mem2)
 
                 if conflict:

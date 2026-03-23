@@ -122,25 +122,25 @@ class WorkflowMaster:
                 for i, future in enumerate(as_completed(futures)):
                     result = future.result()
                     idx = futures[future]
-                    print(f"[{idx+1}/{len(wf['steps'])}] {result['tool']}... {result['status'].upper()}")
-                    results.append({"step": idx+1, **result})
+                    print(f"[{idx +1}/{len(wf['steps'])}] {result['tool']}... {result['status'].upper()}")
+                    results.append({"step": idx +1, **result})
                     self._log(workflow_id, result["tool"], result["status"])
         else:
             for i, step in enumerate(wf["steps"]):
                 tool, args = step["tool"], step.get("args", [])
                 cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
-                print(f"[{i+1}/{len(wf['steps'])}] {tool}...", end=" ", flush=True)
+                print(f"[{i +1}/{len(wf['steps'])}] {tool}...", end=" ", flush=True)
                 try:
                     result = subprocess.run(cmd, capture_output=True, text=True, timeout=60, encoding="utf-8", errors="replace")
                     status = "ok" if result.returncode == 0 else "fail"
                     print(status.upper())
-                    results.append({"step": i+1, "tool": tool, "status": status})
+                    results.append({"step": i +1, "tool": tool, "status": status})
                 except subprocess.TimeoutExpired:
                     print("TIMEOUT")
-                    results.append({"step": i+1, "tool": tool, "status": "timeout"})
+                    results.append({"step": i +1, "tool": tool, "status": "timeout"})
                 except Exception:
                     print("ERROR")
-                    results.append({"step": i+1, "tool": tool, "status": "error"})
+                    results.append({"step": i +1, "tool": tool, "status": "error"})
                 self._log(workflow_id, tool, results[-1]["status"])
 
         ok = sum(1 for r in results if r["status"] == "ok")
@@ -175,15 +175,15 @@ class WorkflowMaster:
             tool = step.get("tool", step.get("script", ""))
             args = step.get("args", [])
             cmd = [sys.executable, str(tool)] + args if tool.endswith(".py") else [tool] + args
-            print(f"[{i+1}] {Path(tool).name}...", end=" ", flush=True)
+            print(f"[{i +1}] {Path(tool).name}...", end=" ", flush=True)
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, encoding="utf-8", errors="replace")
                 status = "ok" if result.returncode == 0 else "fail"
                 print(status.upper())
-                results.append({"step": i+1, "tool": tool, "status": status})
+                results.append({"step": i +1, "tool": tool, "status": status})
             except Exception:
                 print("ERROR")
-                results.append({"step": i+1, "tool": tool, "status": "error"})
+                results.append({"step": i +1, "tool": tool, "status": "error"})
         ok = sum(1 for r in results if r["status"] == "ok")
         print(f"\nComplete: {ok}/{len(results)} OK")
         return {"workflow": workflow_id, "results": results}

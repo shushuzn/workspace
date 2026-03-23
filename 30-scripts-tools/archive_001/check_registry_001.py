@@ -17,7 +17,7 @@ if registry_file.exists():
         print(f"  {i}. {tool_id}: {path}")
 
     if len(tools) > 50:
-        print(f"\n... 还有 {len(tools)-50} 个工具")
+        print(f"\n... 还有 {len(tools) -50} 个工具")
 else:
     print("ERROR: tools_registry.json 不存在")
 

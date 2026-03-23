@@ -128,11 +128,11 @@ def stock_card(sym):
             # Format market cap
             mkt = data.get('marketCap', 0)
             if mkt > 1e12:
-                data['marketCap'] = f"${mkt/1e12:.1f}T"
+                data['marketCap'] = f"${mkt /1e12:.1f}T"
             elif mkt > 1e9:
-                data['marketCap'] = f"${mkt/1e9:.1f}B"
+                data['marketCap'] = f"${mkt /1e9:.1f}B"
             else:
-                data['marketCap'] = f"${mkt/1e6:.0f}M" if mkt > 0 else "N/A"
+                data['marketCap'] = f"${mkt /1e6:.0f}M" if mkt > 0 else "N/A"
             # Store in cache
             cache.set(cache_key, data)
 
@@ -284,18 +284,18 @@ def price_chart(sym, time_range='3mo'):
 
     n = min(90, len(closes))
     closes = closes[-n:]
-    volumes = volumes[-n:] if volumes else [0]*n
+    volumes = volumes[-n:] if volumes else [0] *n
     highs = highs[-n:] if highs else closes
     lows = lows[-n:] if lows else closes
     opens = opens[-n:] if opens else closes
 
     # Moving averages
-    ma20 = [sum(closes[max(0,i-19):i+1])/min(i+1,20) for i in range(n)]
-    ma50 = [sum(closes[max(0,i-49):i+1])/min(i+1,50) for i in range(n)]
+    ma20 = [sum(closes[max(0,i -19):i +1]) /min(i +1,20) for i in range(n)]
+    ma50 = [sum(closes[max(0,i -49):i +1]) /min(i +1,50) for i in range(n)]
 
     # RSI calculation
     def calculate_rsi(prices, period=14):
-        deltas = [prices[i] - prices[i-1] for i in range(1, len(prices))]
+        deltas = [prices[i] - prices[i -1] for i in range(1, len(prices))]
         gains = [d if d > 0 else 0 for d in deltas]
         losses = [-d if d < 0 else 0 for d in deltas]
         avg_gain = sum(gains[:period]) / period
@@ -343,7 +343,7 @@ def price_chart(sym, time_range='3mo'):
                              line=dict(color=C['cyan'], width=2.5)))
 
     # Price annotation
-    price_fig.add_annotation(x=n-1, y=closes[-1], text=f"${fmt(closes[-1])}",
+    price_fig.add_annotation(x=n -1, y=closes[-1], text=f"${fmt(closes[-1])}",
                       showarrow=False, font=dict(size=16, color=C['text'], family="Arial Black"),
                       yshift=20)
 
@@ -362,7 +362,7 @@ def price_chart(sym, time_range='3mo'):
     # Volume chart
     volume_fig = go.Figure()
     volume_fig.add_trace(go.Bar(x=list(range(n)), y=volumes, name='Volume',
-                               marker_color=[C['bull'] if closes[i] >= closes[i-1] else C['bear'] for i in range(n)],
+                               marker_color=[C['bull'] if closes[i] >= closes[i -1] else C['bear'] for i in range(n)],
                                opacity=0.7))
     volume_fig.update_layout({
         'plot_bgcolor':'#0f0f23', 'paper_bgcolor':'#0f0f23', 'font':{'color':C['text'], 'size':12},
@@ -379,8 +379,8 @@ def price_chart(sym, time_range='3mo'):
     rsi_fig.add_trace(go.Scatter(x=list(range(n)), y=rsi, mode='lines', name='RSI',
                                 line=dict(color=C['purple'], width=2.5)))
     # RSI thresholds
-    rsi_fig.add_shape(type="line", x0=0, y0=70, x1=n-1, y1=70, line=dict(color=C['bear'], width=1, dash="dash"))
-    rsi_fig.add_shape(type="line", x0=0, y0=30, x1=n-1, y1=30, line=dict(color=C['bull'], width=1, dash="dash"))
+    rsi_fig.add_shape(type="line", x0=0, y0=70, x1=n -1, y1=70, line=dict(color=C['bear'], width=1, dash="dash"))
+    rsi_fig.add_shape(type="line", x0=0, y0=30, x1=n -1, y1=30, line=dict(color=C['bull'], width=1, dash="dash"))
     rsi_fig.update_layout({
         'plot_bgcolor':'#0f0f23', 'paper_bgcolor':'#0f0f23', 'font':{'color':C['text'], 'size':12},
         'xaxis':{'showgrid':False, 'zeroline':False, 'tickfont':{'color':C['muted'], 'size':10}, 'showticklabels':True},
@@ -414,7 +414,7 @@ def get_stats():
         from stock_pro.core import A, P
         total = len(A)
         scores = [A[s][2] for s in A]
-        avg = sum(scores)/len(scores) if scores else 65
+        avg = sum(scores) /len(scores) if scores else 65
         buys = len([s for s in A if A[s][1] in ['Overweight', 'Outperform', 'Strong Buy', 'Buy']])
         upsides = []
         for s in A:
@@ -722,8 +722,8 @@ def toggle_theme(n_clicks):
 # Run
 # ============================================================
 if __name__ == '__main__':
-    print("="*50)
+    print("=" *50)
     print("  Stock PRO Dashboard v2.1")
     print("  Open: http://127.0.0.1:8050")
-    print("="*50)
+    print("=" *50)
     app.run(debug=False, port=8050, threaded=True)

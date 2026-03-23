@@ -42,7 +42,7 @@ for i, kernel in enumerate(kernels):
     gp = GaussianProcessRegressor(kernel=kernel, n_restarts_optimizer=10, random_state=42)
     cv_scores = cross_val_score(gp, X_scaled, y_scaled, cv=5, scoring='r2')
     mean_r2 = cv_scores.mean()
-    print(f"  Kernel {i+1}: CV R2 = {mean_r2:.4f} (+/- {cv_scores.std():.4f})")
+    print(f"  Kernel {i +1}: CV R2 = {mean_r2:.4f} (+/- {cv_scores.std():.4f})")
     if mean_r2 > best_r2:
         best_r2 = mean_r2
         best_kernel = kernel

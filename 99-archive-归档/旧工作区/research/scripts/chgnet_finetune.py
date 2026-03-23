@@ -69,7 +69,7 @@ chgnet_model_path = Path("D:/OpenClaw/workspace/research/models/pretrained/chgne
 
 if chgnet_model_path.exists():
     print(f"  模型文件：{chgnet_model_path}")
-    print(f"  大小：{chgnet_model_path.stat().st_size/1024/1024:.1f} MB")
+    print(f"  大小：{chgnet_model_path.stat().st_size /1024 /1024:.1f} MB")
 
     # 尝试加载
     try:
@@ -171,7 +171,7 @@ if model_loaded:
         train_losses.append(loss.item())
 
         if (epoch + 1) % 20 == 0:
-            print(f"    Epoch [{epoch+1}/{n_epochs}], Loss: {loss.item():.4f}")
+            print(f"    Epoch [{epoch +1}/{n_epochs}], Loss: {loss.item():.4f}")
 
     print(f"  [OK] 训练完成！")
     print(f"  最终训练损失：{train_losses[-1]:.4f}")

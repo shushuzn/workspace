@@ -273,7 +273,7 @@ class WorkflowEnforcer:
                 print("[BLOCK] 请先压缩会话笔记！")
                 return False
             else:
-                print(f"[OK] 当日笔记已压缩：{size/1024:.1f}KB")
+                print(f"[OK] 当日笔记已压缩：{size /1024:.1f}KB")
 
         print(f"\n[OK] 完成度：{result['compliance_rate']:.1f}%")
         print("[OK] 允许 Git 提交")

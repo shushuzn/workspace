@@ -184,7 +184,7 @@ for key, value in screening_criteria.items():
     print(f"    {key}: {value}")
 
 print(f"\n  通过筛选：{len(passed_screening)}/{n_recommend}")
-print(f"  通过率：{len(passed_screening)/n_recommend*100:.1f}%")
+print(f"  通过率：{len(passed_screening) /n_recommend *100:.1f}%")
 
 # ============================================================================
 # 6. 实验优先级排序

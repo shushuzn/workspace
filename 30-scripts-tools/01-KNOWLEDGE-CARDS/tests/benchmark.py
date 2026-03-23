@@ -165,7 +165,7 @@ class PerformanceBenchmark:
             "passed": efficiency <= target_efficiency  # 效率不应超过配额
         }
 
-        print(f"   缓存命中率：{cache_hit_rate*100:.1f}%")
+        print(f"   缓存命中率：{cache_hit_rate *100:.1f}%")
         print(f"   实际 API 调用：{actual_api_calls:.0f} 次")
         print(f"   配额限制：{quota_limit} 次/小时")
         print(f"   配额使用率：{efficiency:.1f}%")
@@ -175,9 +175,9 @@ class PerformanceBenchmark:
 
     def run_all_benchmarks(self) -> dict:
         """运行所有基准测试"""
-        print("="*60)
+        print("=" *60)
         print("知识卡片生成器性能基准测试")
-        print("="*60)
+        print("=" *60)
         print(f"测试时间：{datetime.now().isoformat()}")
         print()
 
@@ -189,7 +189,7 @@ class PerformanceBenchmark:
 
         # 测试 1: 处理时间
         print("\n[1/4] 处理时间测试")
-        print("-"*60)
+        print("-" *60)
         # TODO: 使用真实 PDF 文件
         # test_pdfs = list((Path(__file__).parent.parent.parent / "test_pdfs").glob("*.pdf"))
         # for pdf in test_pdfs[:3]:
@@ -207,7 +207,7 @@ class PerformanceBenchmark:
 
         # 测试 2: 内存使用
         print("\n[2/4] 内存使用测试")
-        print("-"*60)
+        print("-" *60)
         results["tests"].append({
             "name": "memory_usage",
             "passed": True,
@@ -218,7 +218,7 @@ class PerformanceBenchmark:
 
         # 测试 3: 并发速度
         print("\n[3/4] 并发速度测试")
-        print("-"*60)
+        print("-" *60)
         result = self.test_concurrent_speedup(num_references=20)
         results["tests"].append({
             "name": "concurrent_speedup",
@@ -230,7 +230,7 @@ class PerformanceBenchmark:
 
         # 测试 4: API 配额效率
         print("\n[4/4] API 配额效率测试")
-        print("-"*60)
+        print("-" *60)
         result = self.test_api_quota_efficiency(num_validations=100)
         results["tests"].append({
             "name": "api_quota_efficiency",
@@ -258,14 +258,14 @@ class PerformanceBenchmark:
 
         # 打印汇总
         print()
-        print("="*60)
+        print("=" *60)
         print("基准测试汇总")
-        print("="*60)
+        print("=" *60)
         print(f"总测试数：{total_tests}")
         print(f"通过：{passed_tests} | 失败：{results['summary']['failed']}")
         print(f"通过率：{results['summary']['pass_rate']:.1f}%")
         print(f"报告已保存：{report_path}")
-        print("="*60)
+        print("=" *60)
 
         return results
 

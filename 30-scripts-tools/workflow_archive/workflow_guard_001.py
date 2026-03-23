@@ -167,7 +167,7 @@ class WorkflowGuard:
             "recent_checks": len(recent),
             "passed": passed,
             "failed": failed,
-            "pass_rate": f"{(passed/len(recent)*100):.0f}%" if recent else "N/A"
+            "pass_rate": f"{(passed /len(recent) *100):.0f}%" if recent else "N/A"
         }
 
 if __name__ == "__main__":

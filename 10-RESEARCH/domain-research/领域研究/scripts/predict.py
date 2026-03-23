@@ -64,7 +64,7 @@ def main():
     print(f"\n预测结果:")
     print(f"  电导率：{conductivity:.1f} S/m")
     print(f"  不确定性 (1σ): ±{uncertainty:.1f} S/m")
-    print(f"  95% CI: [{conductivity - 1.96*uncertainty:.1f}, {conductivity + 1.96*uncertainty:.1f}] S/m")
+    print(f"  95% CI: [{conductivity - 1.96 *uncertainty:.1f}, {conductivity + 1.96 *uncertainty:.1f}] S/m")
 
     # 可视化
     if args.plot:
@@ -82,8 +82,8 @@ def main():
 
         plt.plot(E_range, predictions, 'b-', label='预测')
         plt.fill_between(E_range,
-                         np.array(predictions) - 1.96*np.array(uncertainties),
-                         np.array(predictions) + 1.96*np.array(uncertainties),
+                         np.array(predictions) - 1.96 *np.array(uncertainties),
+                         np.array(predictions) + 1.96 *np.array(uncertainties),
                          alpha=0.3, label='95% CI')
         plt.axvline(args.E, color='r', linestyle='--', label='当前参数')
         plt.scatter([args.E], [conductivity], color='r', s=100, zorder=5)

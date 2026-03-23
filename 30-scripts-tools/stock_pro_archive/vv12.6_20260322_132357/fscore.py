@@ -28,9 +28,9 @@ def calc_fscore(symbol):
     # CFO > 0
     if fcf > 0:
         score += 1
-        details.append(("FCF > 0", 1, f"{fcf*100:.1f}%"))
+        details.append(("FCF > 0", 1, f"{fcf *100:.1f}%"))
     else:
-        details.append(("FCF > 0", 0, f"{fcf*100:.1f}%"))
+        details.append(("FCF > 0", 0, f"{fcf *100:.1f}%"))
 
     # ROA improvement
     if roa > 10:
@@ -65,16 +65,16 @@ def calc_fscore(symbol):
     # Gross margin improvement
     if gm > 0.40:
         score += 1
-        details.append(("GM > 40%", 1, f"{gm*100:.0f}%"))
+        details.append(("GM > 40%", 1, f"{gm *100:.0f}%"))
     else:
-        details.append(("GM > 40%", 0, f"{gm*100:.0f}%"))
+        details.append(("GM > 40%", 0, f"{gm *100:.0f}%"))
 
     # Asset turnover
     if pm > 0.15:
         score += 1
-        details.append(("PM > 15%", 1, f"{pm*100:.0f}%"))
+        details.append(("PM > 15%", 1, f"{pm *100:.0f}%"))
     else:
-        details.append(("PM > 15%", 0, f"{pm*100:.0f}%"))
+        details.append(("PM > 15%", 0, f"{pm *100:.0f}%"))
 
     # Operating leverage
     if gm - pm > 0.20:

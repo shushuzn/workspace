@@ -136,9 +136,9 @@ class TestFrameworkEnhancer:
 
     def generate_tests(self, target_dir: Path = None) -> int:
         """Generate test files for existing tools"""
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print(" Generating Tests")
-        print("="*60 + "\n")
+        print("=" *60 + "\n")
 
         if target_dir is None:
             target_dir = WORKSPACE / "30-scripts-tools"
@@ -228,9 +228,9 @@ if __name__ == '__main__':
 
     def run_tests(self, test_pattern: str = "test_*.py") -> Dict:
         """Run all tests"""
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print(" Running Tests")
-        print("="*60 + "\n")
+        print("=" *60 + "\n")
 
         # Discover tests
         loader = unittest.TestLoader()
@@ -271,16 +271,16 @@ if __name__ == '__main__':
 
         success_rate = (passed / tests_run * 100) if tests_run > 0 else 0
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(" Test Results")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
         print(f"  Total: {tests_run}")
         print(f"  Passed: {passed}")
         print(f"  Failed: {failures}")
         print(f"  Errors: {errors}")
         print(f"  Skipped: {skipped}")
         print(f"  Success Rate: {success_rate:.1f}%")
-        print(f"{'='*60}\n")
+        print(f"{'=' *60}\n")
 
         # Record results
         test_result = {
@@ -300,9 +300,9 @@ if __name__ == '__main__':
 
     def analyze_coverage(self, target_dir: Path = None) -> List[CoverageResult]:
         """Analyze code coverage"""
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print(" Analyzing Coverage")
-        print("="*60 + "\n")
+        print("=" *60 + "\n")
 
         if not COVERAGE_AVAILABLE:
             print("⚠️  Coverage module not available")
@@ -366,14 +366,14 @@ if __name__ == '__main__':
         # Summary
         avg_coverage = sum(r.coverage_percent for r in results) / len(results) if results else 0
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(" Coverage Summary")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
         print(f"  Files analyzed: {len(results)}")
         print(f"  Average coverage: {avg_coverage:.1f}%")
         print(f"  Files ≥80%: {sum(1 for r in results if r.coverage_percent >= 80)}")
         print(f"  Files <50%: {sum(1 for r in results if r.coverage_percent < 50)}")
-        print(f"{'='*60}\n")
+        print(f"{'=' *60}\n")
 
         return results
 

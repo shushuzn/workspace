@@ -65,14 +65,14 @@ def enhance_tool(path):
         # Add Purpose: after ARCHITECT header
         if re.match(r'# STAGE.*1.*ARCHITECT', line):
             # Check next few lines for Purpose
-            next_content = '\n'.join(lines[i:i+10])
+            next_content = '\n'.join(lines[i:i +10])
             if not re.search(r'Purpose[:\s]', next_content, re.IGNORECASE):
                 new_lines.append("Purpose: Automation workflow tool")
                 changes.append("Purpose")
 
         # Add Data Flow: after Purpose
         if 'Purpose:' in line:
-            next_content = '\n'.join(lines[i:i+10])
+            next_content = '\n'.join(lines[i:i +10])
             if not re.search(r'Data\s*Flow:', next_content, re.IGNORECASE):
                 new_lines.append("Data Flow: input -> process -> output")
                 changes.append("Data Flow")

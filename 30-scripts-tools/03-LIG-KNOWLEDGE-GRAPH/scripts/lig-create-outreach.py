@@ -188,7 +188,7 @@ LIG 生物传感器可检测：
 
 ---
 
-**下一篇:** {f'LIG 科普笔记 {topic_id+1:02d}' if topic_id < 32 else '系列完结'} → {TOPICS[topic_id] if topic_id < 32 else '恭喜完成全部 32 篇!'}
+**下一篇:** {f'LIG 科普笔记 {topic_id +1:02d}' if topic_id < 32 else '系列完结'} → {TOPICS[topic_id] if topic_id < 32 else '恭喜完成全部 32 篇!'}
 
 ---
 
@@ -240,7 +240,7 @@ def main():
 """
 
     for i in range(1, 9):
-        index_content += f"| {i:02d} | {TOPICS[i-1]} | ⭐⭐ |\n"
+        index_content += f"| {i:02d} | {TOPICS[i -1]} | ⭐⭐ |\n"
 
     index_content += """
 ## 系列 2: 制备工艺 (09-16)
@@ -250,7 +250,7 @@ def main():
 """
 
     for i in range(9, 17):
-        index_content += f"| {i:02d} | {TOPICS[i-1]} | ⭐⭐⭐ |\n"
+        index_content += f"| {i:02d} | {TOPICS[i -1]} | ⭐⭐⭐ |\n"
 
     index_content += """
 ## 系列 3: 应用领域 (17-26)
@@ -260,7 +260,7 @@ def main():
 """
 
     for i in range(17, 27):
-        index_content += f"| {i:02d} | {TOPICS[i-1]} | ⭐⭐⭐ |\n"
+        index_content += f"| {i:02d} | {TOPICS[i -1]} | ⭐⭐⭐ |\n"
 
     index_content += """
 ## 系列 4: 前景展望 (27-32)
@@ -270,7 +270,7 @@ def main():
 """
 
     for i in range(27, 33):
-        index_content += f"| {i:02d} | {TOPICS[i-1]} | ⭐⭐ |\n"
+        index_content += f"| {i:02d} | {TOPICS[i -1]} | ⭐⭐ |\n"
 
     index_path = os.path.join(OUTREACH_DIR, "README.md")
     with open(index_path, 'w', encoding='utf-8') as f:

@@ -48,12 +48,12 @@ class WorkflowHealth:
             "tools": {
                 "total": len(tools),
                 "compliant": compliant,
-                "percentage": f"{(compliant/len(tools)*100):.0f}%" if tools else "100%"
+                "percentage": f"{(compliant /len(tools) *100):.0f}%" if tools else "100%"
             },
             "workflows": {
                 "total_runs": runs,
                 "successful": success,
-                "rate": f"{(success/runs*100):.0f}%" if runs > 0 else "N/A"
+                "rate": f"{(success /runs *100):.0f}%" if runs > 0 else "N/A"
             },
             "status": "healthy" if score >= 90 else "degraded" if score >= 70 else "critical"
         }

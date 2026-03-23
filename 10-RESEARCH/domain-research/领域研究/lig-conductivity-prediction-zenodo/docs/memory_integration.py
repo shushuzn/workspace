@@ -321,9 +321,9 @@ def setup_default_workflows(integration: MemoryIntegrationLayer):
 def demo_integration():
     """Demo memory integration"""
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("🔗 Dynamic Memory Integration Demo")
-    print("="*80)
+    print("=" *80)
 
     # Initialize integration layer
     config = MemoryIntegrationConfig(
@@ -339,9 +339,9 @@ def demo_integration():
     setup_default_workflows(integration)
 
     # Demo 1: Allocate memory for workflows
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 1: Workflow Memory Allocation")
-    print("="*80)
+    print("=" *80)
 
     block_ids = {}
 
@@ -353,9 +353,9 @@ def demo_integration():
         print(f"  ✓ Allocated {workflow_name}: {block_id}")
 
     # Demo 2: Access memory
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 2: Workflow Memory Access")
-    print("="*80)
+    print("=" *80)
 
     for workflow_name, block_id in block_ids.items():
         content = integration.access_for_workflow(workflow_name, block_id)
@@ -363,9 +363,9 @@ def demo_integration():
             print(f"  ✓ Accessed {workflow_name}: {len(str(content))} bytes")
 
     # Demo 3: Optimize memory
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 3: Memory Optimization")
-    print("="*80)
+    print("=" *80)
 
     result = integration.optimize_workflow_memory("arxiv_research")
     print(f"  Workflow: {result.workflow}")
@@ -375,9 +375,9 @@ def demo_integration():
     print(f"  Blocks Evicted: {result.blocks_evicted}")
 
     # Demo 4: Integration status
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 4: Integration Status")
-    print("="*80)
+    print("=" *80)
 
     status = integration.get_integration_status()
     print(f"\n  📊 Status:")
@@ -396,9 +396,9 @@ def demo_integration():
     # Export stats
     integration.export_stats()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Memory integration demo complete!")
-    print("="*80)
+    print("=" *80)
 
 
 def main():
@@ -412,9 +412,9 @@ def main():
     if args.demo or True:  # Default to demo
         demo_integration()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("🔗 Memory Integration Complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📋 Integration Points:")
     print("   1. ContextDB - Hierarchical memory storage")
     print("   2. Memory Distillation - Tiered compression")

@@ -78,7 +78,7 @@ for gp_weight in np.arange(0.0, 1.05, 0.05):
 
 print(f"\n=== BEST ENSEMBLE ===")
 print(f"GP weight: {best_weight:.2f}")
-print(f"EN weight: {1-best_weight:.2f}")
+print(f"EN weight: {1 -best_weight:.2f}")
 print(f"Ensemble R2: {best_r2:.4f}")
 
 # Compare

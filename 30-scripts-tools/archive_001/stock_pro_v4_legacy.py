@@ -66,7 +66,7 @@ def progress_bar(current, total, prefix='', length=40):
     percent = current / total
     filled = int(length * percent)
     bar = '=' * filled + '-' * (length - filled)
-    print(f'\r{prefix} [{bar}] {percent*100:.0f}%', end='', flush=True)
+    print(f'\r{prefix} [{bar}] {percent *100:.0f}%', end='', flush=True)
     if current >= total:
         print()
 
@@ -285,7 +285,7 @@ def calc_dcf_scenarios(q, fin):
 
         pv_fcf = 0
         for y in range(1, 6):
-            g = near_term_g * params["growth_mult"] * (1 - y/5) + g_term * (y/5)
+            g = near_term_g * params["growth_mult"] * (1 - y /5) + g_term * (y /5)
             g = min(max(g, 0), 0.25)
             eps_y = eps_t * (1 + g) ** y
             pv_fcf += eps_y * 0.7 / (1 + wacc) ** y
@@ -309,7 +309,7 @@ def calc_5y_eps(q, fin):
 
     projections = []
     for y in range(1, 6):
-        g = near_term_g * (1 - y/5) + g_term * (y/5)
+        g = near_term_g * (1 - y /5) + g_term * (y /5)
         g = min(max(g, 0), 0.25)
         eps_y = eps_t * (1 + g) ** y
         projections.append({"year": y, "eps": eps_y, "growth": g * 100})
@@ -1022,7 +1022,7 @@ def risk_level(q, fin):
 
 def generate_report(sym):
     sym = sym.upper().strip()
-    print(f"\n{'='*60}\nStock PRO v10.0 - Analyzing {sym}\n{'='*60}")
+    print(f"\n{'=' *60}\nStock PRO v10.0 - Analyzing {sym}\n{'=' *60}")
 
     q = fetch(sym)
     if not q.get("success"):
@@ -1093,7 +1093,7 @@ def generate_report(sym):
     print(f"Scores: Quality={quality} | Value={value} | Momentum={momentum_s} | Growth={growth}")
     print(f"5Y EPS: ${eps_proj[-1]['eps']:.2f} ({eps_proj[-1]['growth']:.1f}% CAGR)")
     print(f"P/E Percentile: {val_pct['percentile']:.0f}% ({val_pct['assessment']})")
-    print(f"FCF Yield: {cf['fcf_yield']*100:.1f}% | Div Yield: {cf['div_yield']*100:.2f}%")
+    print(f"FCF Yield: {cf['fcf_yield'] *100:.1f}% | Div Yield: {cf['div_yield'] *100:.2f}%")
     print(f"Institutional Ownership: {inst_own}%")
 
     date = datetime.now().strftime("%Y-%m-%d")
@@ -1132,14 +1132,14 @@ def generate_report(sym):
         f.write("### 1.1 Score Breakdown\n\n")
         f.write(f"| Dimension | Score | Weight | Contribution |\n")
         f.write(f"|-----------|-------|--------|--------------|\n")
-        f.write(f"| Quality | {quality} | 30% | {quality*0.30:.0f} |\n")
-        f.write(f"| Value | {value} | 25% | {value*0.25:.0f} |\n")
-        f.write(f"| Growth | {growth} | 25% | {growth*0.25:.0f} |\n")
-        f.write(f"| Momentum | {momentum_s} | 20% | {momentum_s*0.20:.0f} |\n")
+        f.write(f"| Quality | {quality} | 30% | {quality *0.30:.0f} |\n")
+        f.write(f"| Value | {value} | 25% | {value *0.25:.0f} |\n")
+        f.write(f"| Growth | {growth} | 25% | {growth *0.25:.0f} |\n")
+        f.write(f"| Momentum | {momentum_s} | 20% | {momentum_s *0.20:.0f} |\n")
         f.write(f"| **Combined** | **{sc}** | 100% | - |\n\n")
 
         # Score gauge
-        score_bar = "█" * int(sc/5) + "░" * (20 - int(sc/5))
+        score_bar = "█" * int(sc /5) + "░" * (20 - int(sc /5))
         f.write(f"Overall Score: [{score_bar}] {sc}/100\n\n")
 
         f.write("---\n\n")
@@ -1160,7 +1160,7 @@ def generate_report(sym):
             diff = (val - price) / price * 100
             color = "🟢" if diff > 0 else "🔴"
             f.write(f"| {name} | ${val:.2f} | {color} {diff:+.1f}% |\n")
-        f.write(f"| **Analyst** | **${analyst_target:.0f}** | 🟢 {(analyst_target-price)/price*100:+.1f}% |\n\n")
+        f.write(f"| **Analyst** | **${analyst_target:.0f}** | 🟢 {(analyst_target -price) /price *100:+.1f}% |\n\n")
 
         f.write("### 2.3 Target Price Derivation\n\n")
         f.write(f"| Method | Target Price | Weight |\n")
@@ -1204,27 +1204,27 @@ def generate_report(sym):
         f.write("### 4.2 Support & Resistance Levels\n\n")
         f.write(f"| Level | Price | Distance |\n")
         f.write(f"|-------|-------|----------|\n")
-        f.write(f"| Resistance R4 | ${sr_levels['r4']:.2f} | +{(sr_levels['r4']-price)/price*100:.1f}% |\n")
-        f.write(f"| Resistance R3 | ${sr_levels['r3']:.2f} | +{(sr_levels['r3']-price)/price*100:.1f}% |\n")
-        f.write(f"| Resistance R2 | ${sr_levels['r2']:.2f} | +{(sr_levels['r2']-price)/price*100:.1f}% |\n")
-        f.write(f"| Resistance R1 | ${sr_levels['r1']:.2f} | +{(sr_levels['r1']-price)/price*100:.1f}% |\n")
+        f.write(f"| Resistance R4 | ${sr_levels['r4']:.2f} | +{(sr_levels['r4'] -price) /price *100:.1f}% |\n")
+        f.write(f"| Resistance R3 | ${sr_levels['r3']:.2f} | +{(sr_levels['r3'] -price) /price *100:.1f}% |\n")
+        f.write(f"| Resistance R2 | ${sr_levels['r2']:.2f} | +{(sr_levels['r2'] -price) /price *100:.1f}% |\n")
+        f.write(f"| Resistance R1 | ${sr_levels['r1']:.2f} | +{(sr_levels['r1'] -price) /price *100:.1f}% |\n")
         f.write(f"| **Current Price** | **${price:.2f}** | 0.0% |\n")
-        f.write(f"| Support S1 | ${sr_levels['s1']:.2f} | {(sr_levels['s1']-price)/price*100:.1f}% |\n")
-        f.write(f"| Support S2 | ${sr_levels['s2']:.2f} | {(sr_levels['s2']-price)/price*100:.1f}% |\n")
-        f.write(f"| Support S3 | ${sr_levels['s3']:.2f} | {(sr_levels['s3']-price)/price*100:.1f}% |\n\n")
+        f.write(f"| Support S1 | ${sr_levels['s1']:.2f} | {(sr_levels['s1'] -price) /price *100:.1f}% |\n")
+        f.write(f"| Support S2 | ${sr_levels['s2']:.2f} | {(sr_levels['s2'] -price) /price *100:.1f}% |\n")
+        f.write(f"| Support S3 | ${sr_levels['s3']:.2f} | {(sr_levels['s3'] -price) /price *100:.1f}% |\n\n")
 
         f.write("---\n\n")
         f.write("## 5. Financial Health\n\n")
         f.write(f"| Metric | Value | Rating |\n")
         f.write(f"|--------|-------|--------|\n")
         gm_r = "Excellent" if fin["gm"] > 0.60 else "Good" if fin["gm"] > 0.40 else "Average"
-        f.write(f"| Gross Margin | {fin['gm']*100:.1f}% | {gm_r} |\n")
+        f.write(f"| Gross Margin | {fin['gm'] *100:.1f}% | {gm_r} |\n")
         nm_r = "Excellent" if fin["nm"] > 0.25 else "Good" if fin["nm"] > 0.15 else "Average"
-        f.write(f"| Net Margin | {fin['nm']*100:.1f}% | {nm_r} |\n")
+        f.write(f"| Net Margin | {fin['nm'] *100:.1f}% | {nm_r} |\n")
         roe_r = "Excellent" if fin["roe"] > 0.30 else "Good" if fin["roe"] > 0.20 else "Average"
-        f.write(f"| ROE | {fin['roe']*100:.1f}% | {roe_r} |\n")
+        f.write(f"| ROE | {fin['roe'] *100:.1f}% | {roe_r} |\n")
         roic_r = "Excellent" if fin["roic"] > 0.25 else "Good" if fin["roic"] > 0.15 else "Average"
-        f.write(f"| ROIC | {fin['roic']*100:.1f}% | {roic_r} |\n")
+        f.write(f"| ROIC | {fin['roic'] *100:.1f}% | {roic_r} |\n")
         de_r = "Low" if fin["de"] < 0.8 else "Medium" if fin["de"] < 1.5 else "High"
         f.write(f"| Debt/Equity | {fin['de']:.1f}x | {de_r} |\n")
         f.write(f"| Beta | {q['beta']:.2f} | Volatile |\n")
@@ -1234,12 +1234,12 @@ def generate_report(sym):
         f.write("### 5.1 Cash Flow Analysis\n\n")
         f.write(f"| Metric | Value | Assessment |\n")
         f.write(f"|--------|-------|------------|\n")
-        f.write(f"| FCF Yield | {cf['fcf_yield']*100:.1f}% | {'Strong' if cf['fcf_yield'] > 0.04 else 'Average'} |\n")
+        f.write(f"| FCF Yield | {cf['fcf_yield'] *100:.1f}% | {'Strong' if cf['fcf_yield'] > 0.04 else 'Average'} |\n")
         f.write(f"| FCF Value | ${cf['fcf_value']:.2f}/share | Implied annual FCF |\n")
-        f.write(f"| FCF vs Bonds | {cf['fcf_spread']*100:+.1f}% | {'Attractive' if cf['fcf_spread'] > 0 else 'Below bond yield'} |\n")
-        f.write(f"| Dividend Yield | {cf['div_yield']*100:.2f}% | {'Paid' if cf['div_yield'] > 0 else 'No dividend'} |\n")
+        f.write(f"| FCF vs Bonds | {cf['fcf_spread'] *100:+.1f}% | {'Attractive' if cf['fcf_spread'] > 0 else 'Below bond yield'} |\n")
+        f.write(f"| Dividend Yield | {cf['div_yield'] *100:.2f}% | {'Paid' if cf['div_yield'] > 0 else 'No dividend'} |\n")
         if cf['div_yield'] > 0:
-            f.write(f"| Payout Ratio | {cf['payout']*100:.0f}% | {cf['div_safe']} |\n")
+            f.write(f"| Payout Ratio | {cf['payout'] *100:.0f}% | {cf['div_safe']} |\n")
         f.write(f"| EV/EBITDA | {fin.get('ev_ebitda', 'N/A')}x | {'High' if fin.get('ev_ebitda', 0) > 25 else 'Moderate' if fin.get('ev_ebitda', 0) > 15 else 'Low'} |\n\n")
 
         # Balance Sheet Health
@@ -1250,7 +1250,7 @@ def generate_report(sym):
         f.write(f"| Altman Z-Score | {balance['z_score']:.1f} | {z_color_icon} {balance['z_status']} |\n")
         f.write(f"| Current Ratio | {balance['current_ratio']:.1f}x | {'Strong' if balance['current_ratio'] > 1.5 else 'Adequate'} |\n")
         f.write(f"| Debt Capacity | {balance['debt_capacity']} | Headroom: {balance['headroom_pct']}% |\n")
-        f.write(f"| Market Cap | ${q['mc']/1e9:.0f}B | {cap_class} |\n\n")
+        f.write(f"| Market Cap | ${q['mc'] /1e9:.0f}B | {cap_class} |\n\n")
 
         # 52W Price Chart
         f.write("### 5.3 Price Position Chart\n\n")
@@ -1261,7 +1261,7 @@ def generate_report(sym):
         f.write(f"                    {price_chart['chart']}\n")
         f.write(f"52W Low  ${q['w52l']:.0f} ┴\n")
         f.write(f"```\n")
-        f.write(f"Current: ${price:.2f} ({(price - q['w52l'])/(q['w52h'] - q['w52l'])*100:.0f}% of range)\n\n")
+        f.write(f"Current: ${price:.2f} ({(price - q['w52l']) /(q['w52h'] - q['w52l']) *100:.0f}% of range)\n\n")
 
         # Historical Valuation
         f.write("---\n\n")
@@ -1349,8 +1349,8 @@ def generate_report(sym):
             for peer, peer_pe, peer_gm in peers[sym]:
                 pe_diff = "Cheaper" if peer_pe > my_pe else "Expensive"
                 gm_diff = "Higher" if peer_gm > my_gm else "Lower"
-                f.write(f"| {peer} | {peer_pe}x | {peer_gm*100:.0f}% | {pe_diff}, {gm_diff} margin |\n")
-            f.write(f"| **{sym}** | **{q['pe']:.0f}x** | **{fin['gm']*100:.0f}%** | Subject |\n\n")
+                f.write(f"| {peer} | {peer_pe}x | {peer_gm *100:.0f}% | {pe_diff}, {gm_diff} margin |\n")
+            f.write(f"| **{sym}** | **{q['pe']:.0f}x** | **{fin['gm'] *100:.0f}%** | Subject |\n\n")
 
         f.write("---\n\n")
         f.write("## 8. Investment Thesis\n\n")
@@ -1431,9 +1431,9 @@ def generate_report(sym):
         f.write("\n### Fair Value Range\n\n")
         f.write(f"| Level | Price | vs Current |\n")
         f.write(f"|-------|-------|------------|\n")
-        f.write(f"| Bear Case | ${fv_low:.2f} | {(fv_low-price)/price*100:+.1f}% |\n")
+        f.write(f"| Bear Case | ${fv_low:.2f} | {(fv_low -price) /price *100:+.1f}% |\n")
         f.write(f"| **Base Case** | **${target:.2f}** | **{upside:+.1f}%** |\n")
-        f.write(f"| Bull Case | ${fv_high:.2f} | {(fv_high-price)/price*100:+.1f}% |\n\n")
+        f.write(f"| Bull Case | ${fv_high:.2f} | {(fv_high -price) /price *100:+.1f}% |\n\n")
 
         # Key metrics summary
         f.write("\n### Key Metrics\n\n")
@@ -1441,8 +1441,8 @@ def generate_report(sym):
         f.write(f"|--------|-------|\n")
         f.write(f"| P/E | {q['pe']:.0f}x |\n")
         f.write(f"| PEG | {q['peg']:.2f} |\n")
-        f.write(f"| FCF Yield | {cf['fcf_yield']*100:.1f}% |\n")
-        f.write(f"| ROE | {fin['roe']*100:.0f}% |\n\n")
+        f.write(f"| FCF Yield | {cf['fcf_yield'] *100:.1f}% |\n")
+        f.write(f"| ROE | {fin['roe'] *100:.0f}% |\n\n")
 
         f.write("---\n\n")
         f.write("*Generated by Stock PRO v8.0*\n")
@@ -1453,7 +1453,7 @@ def generate_report(sym):
 def generate_report_cn(sym):
     """Generate Chinese stock analysis report"""
     sym = sym.upper().strip()
-    print(f"\n{'='*60}\nStock PRO v9.0 - 分析 {sym}\n{'='*60}")
+    print(f"\n{'=' *60}\nStock PRO v9.0 - 分析 {sym}\n{'=' *60}")
 
     q = fetch(sym)
     if not q.get("success"):
@@ -1556,13 +1556,13 @@ def generate_report_cn(sym):
         f.write("### 1.1 评分明细\n\n")
         f.write(f"| 维度 | 得分 | 权重 | 贡献 |\n")
         f.write(f"|------|------|------|------|\n")
-        f.write(f"| 质量 | {quality} | 30% | {quality*0.30:.0f} |\n")
-        f.write(f"| 价值 | {value} | 25% | {value*0.25:.0f} |\n")
-        f.write(f"| 成长 | {growth} | 25% | {growth*0.25:.0f} |\n")
-        f.write(f"| 动量 | {momentum_s} | 20% | {momentum_s*0.20:.0f} |\n")
+        f.write(f"| 质量 | {quality} | 30% | {quality *0.30:.0f} |\n")
+        f.write(f"| 价值 | {value} | 25% | {value *0.25:.0f} |\n")
+        f.write(f"| 成长 | {growth} | 25% | {growth *0.25:.0f} |\n")
+        f.write(f"| 动量 | {momentum_s} | 20% | {momentum_s *0.20:.0f} |\n")
         f.write(f"| **综合** | **{sc}** | 100% | - |\n\n")
 
-        score_bar = "█" * int(sc/5) + "░" * (20 - int(sc/5))
+        score_bar = "█" * int(sc /5) + "░" * (20 - int(sc /5))
         f.write(f"综合评分: [{score_bar}] {sc}/100\n\n")
         f.write("---\n\n")
 
@@ -1581,9 +1581,9 @@ def generate_report_cn(sym):
         f.write("### 2.1 DCF三情景分析\n\n")
         f.write(f"| 情景 | 目标价 | 上涨空间 |\n")
         f.write(f"|------|--------|----------|\n")
-        f.write(f"| 乐观 (Bull) | ${dcf_scenarios['Bull']:.0f} | +{(dcf_scenarios['Bull']-price)/price*100:.1f}% |\n")
-        f.write(f"| 基准 (Base) | ${dcf_base:.0f} | +{(dcf_base-price)/price*100:.1f}% |\n")
-        f.write(f"| 悲观 (Bear) | ${dcf_scenarios['Bear']:.0f} | +{(dcf_scenarios['Bear']-price)/price*100:.1f}% |\n\n")
+        f.write(f"| 乐观 (Bull) | ${dcf_scenarios['Bull']:.0f} | +{(dcf_scenarios['Bull'] -price) /price *100:.1f}% |\n")
+        f.write(f"| 基准 (Base) | ${dcf_base:.0f} | +{(dcf_base -price) /price *100:.1f}% |\n")
+        f.write(f"| 悲观 (Bear) | ${dcf_scenarios['Bear']:.0f} | +{(dcf_scenarios['Bear'] -price) /price *100:.1f}% |\n\n")
 
         f.write("### 2.2 估值定位\n\n")
         f.write(f"| 分位 | 评估 |\n")
@@ -1591,7 +1591,7 @@ def generate_report_cn(sym):
         f.write(f"| P/E历史分位: **{val_pct['percentile']:.0f}%** | {val_pct['assessment']} |\n\n")
 
         # P/E position bar
-        pct_bar = "█" * int(val_pct['percentile']/5) + "░" * (20 - int(val_pct['percentile']/5))
+        pct_bar = "█" * int(val_pct['percentile'] /5) + "░" * (20 - int(val_pct['percentile'] /5))
         f.write(f"P/E位置: [{pct_bar}] {val_pct['percentile']:.0f}%\n\n")
 
         f.write("---\n\n")
@@ -1631,14 +1631,14 @@ def generate_report_cn(sym):
         f.write("### 4.2 支撑与阻力\n\n")
         f.write(f"| 级别 | 价格 | 距当前 |\n")
         f.write(f"|------|------|--------|\n")
-        f.write(f"| 阻力 R4 | ${sr_levels['r4']:.2f} | +{(sr_levels['r4']-price)/price*100:.1f}% |\n")
-        f.write(f"| 阻力 R3 | ${sr_levels['r3']:.2f} | +{(sr_levels['r3']-price)/price*100:.1f}% |\n")
-        f.write(f"| 阻力 R2 | ${sr_levels['r2']:.2f} | +{(sr_levels['r2']-price)/price*100:.1f}% |\n")
-        f.write(f"| 阻力 R1 | ${sr_levels['r1']:.2f} | +{(sr_levels['r1']-price)/price*100:.1f}% |\n")
+        f.write(f"| 阻力 R4 | ${sr_levels['r4']:.2f} | +{(sr_levels['r4'] -price) /price *100:.1f}% |\n")
+        f.write(f"| 阻力 R3 | ${sr_levels['r3']:.2f} | +{(sr_levels['r3'] -price) /price *100:.1f}% |\n")
+        f.write(f"| 阻力 R2 | ${sr_levels['r2']:.2f} | +{(sr_levels['r2'] -price) /price *100:.1f}% |\n")
+        f.write(f"| 阻力 R1 | ${sr_levels['r1']:.2f} | +{(sr_levels['r1'] -price) /price *100:.1f}% |\n")
         f.write(f"| **当前价格** | **${price:.2f}** | 0.0% |\n")
-        f.write(f"| 支撑 S1 | ${sr_levels['s1']:.2f} | {(sr_levels['s1']-price)/price*100:.1f}% |\n")
-        f.write(f"| 支撑 S2 | ${sr_levels['s2']:.2f} | {(sr_levels['s2']-price)/price*100:.1f}% |\n")
-        f.write(f"| 支撑 S3 | ${sr_levels['s3']:.2f} | {(sr_levels['s3']-price)/price*100:.1f}% |\n\n")
+        f.write(f"| 支撑 S1 | ${sr_levels['s1']:.2f} | {(sr_levels['s1'] -price) /price *100:.1f}% |\n")
+        f.write(f"| 支撑 S2 | ${sr_levels['s2']:.2f} | {(sr_levels['s2'] -price) /price *100:.1f}% |\n")
+        f.write(f"| 支撑 S3 | ${sr_levels['s3']:.2f} | {(sr_levels['s3'] -price) /price *100:.1f}% |\n\n")
         f.write("---\n\n")
 
         # Financial Health
@@ -1646,13 +1646,13 @@ def generate_report_cn(sym):
         f.write(f"| 指标 | 数值 | 评级 |\n")
         f.write(f"|------|------|------|\n")
         gm_assess = "优秀" if fin["gm"] > 0.40 else "良好" if fin["gm"] > 0.25 else "一般"
-        f.write(f"| 毛利率 | {fin['gm']*100:.1f}% | {gm_assess} |\n")
+        f.write(f"| 毛利率 | {fin['gm'] *100:.1f}% | {gm_assess} |\n")
         nm_assess = "优秀" if fin["nm"] > 0.20 else "良好" if fin["nm"] > 0.10 else "一般"
-        f.write(f"| 净利率 | {fin['nm']*100:.1f}% | {nm_assess} |\n")
+        f.write(f"| 净利率 | {fin['nm'] *100:.1f}% | {nm_assess} |\n")
         roe_assess = "优秀" if fin["roe"] > 0.20 else "良好" if fin["roe"] > 0.10 else "一般"
-        f.write(f"| ROE | {fin['roe']*100:.1f}% | {roe_assess} |\n")
+        f.write(f"| ROE | {fin['roe'] *100:.1f}% | {roe_assess} |\n")
         roic_assess = "优秀" if fin["roic"] > 0.15 else "良好" if fin["roic"] > 0.08 else "一般"
-        f.write(f"| ROIC | {fin['roic']*100:.1f}% | {roic_assess} |\n")
+        f.write(f"| ROIC | {fin['roic'] *100:.1f}% | {roic_assess} |\n")
         f.write(f"| 负债率 | {fin['de']:.1f}x | {'低' if fin['de'] < 1 else '中等' if fin['de'] < 2 else '高'} |\n")
         f.write(f"| Beta | {q['beta']:.2f} | {'高波动' if q['beta'] > 1.5 else '中等' if q['beta'] > 0.8 else '低波动'} |\n\n")
 
@@ -1660,10 +1660,10 @@ def generate_report_cn(sym):
         f.write(f"| 指标 | 数值 | 评估 |\n")
         f.write(f"|------|------|------|\n")
         fcf_assess = "良好" if cf['fcf_yield'] > 0.04 else "一般" if cf['fcf_yield'] > 0.02 else "较低"
-        f.write(f"| FCF收益率 | {cf['fcf_yield']*100:.1f}% | {fcf_assess} |\n")
+        f.write(f"| FCF收益率 | {cf['fcf_yield'] *100:.1f}% | {fcf_assess} |\n")
         div_assess = "有" if cf['div_yield'] > 0.02 else "无/低"
-        f.write(f"| 股息率 | {cf['div_yield']*100:.2f}% | {div_assess} |\n")
-        f.write(f"| 派息率 | {fin['payout']*100:.0f}% | {'可持续' if fin['payout'] < 0.6 else '较高'} |\n\n")
+        f.write(f"| 股息率 | {cf['div_yield'] *100:.2f}% | {div_assess} |\n")
+        f.write(f"| 派息率 | {fin['payout'] *100:.0f}% | {'可持续' if fin['payout'] < 0.6 else '较高'} |\n\n")
 
         # Balance Sheet Health
         f.write("### 5.2 资产负债表健康度\n\n")
@@ -1674,7 +1674,7 @@ def generate_report_cn(sym):
         f.write(f"| Altman Z评分 | {balance['z_score']:.1f} | {z_color_icon} {z_status_cn} |\n")
         f.write(f"| 流动比率 | {balance['current_ratio']:.1f}x | {'良好' if balance['current_ratio'] > 1.5 else '一般'} |\n")
         f.write(f"| 负债能力 | {balance['debt_capacity']} | 空间: {balance['headroom_pct']}% |\n")
-        f.write(f"| 市值 | ${q['mc']/1e9:.0f}B | {cap_class} |\n\n")
+        f.write(f"| 市值 | ${q['mc'] /1e9:.0f}B | {cap_class} |\n\n")
 
         # 52W Price Chart
         f.write("### 5.3 价格位置图\n\n")
@@ -1685,7 +1685,7 @@ def generate_report_cn(sym):
         f.write(f"                    {price_chart['chart']}\n")
         f.write(f"52周低点 ${q['w52l']:.0f} ┴\n")
         f.write(f"```\n")
-        f.write(f"当前价格: ${price:.2f} (区间内{(price - q['w52l'])/(q['w52h'] - q['w52l'])*100:.0f}%位置)\n\n")
+        f.write(f"当前价格: ${price:.2f} (区间内{(price - q['w52l']) /(q['w52h'] - q['w52l']) *100:.0f}%位置)\n\n")
 
         f.write("---\n\n")
 
@@ -1745,15 +1745,15 @@ def generate_report_cn(sym):
         f.write(f"|------|------|----------|------|\n")
         f.write(f"| P/E | {sector['stock_pe']:.1f}x | {sector['avg_pe']:.1f}x | {sector['pe_vs']} |\n")
         f.write(f"| PEG | {sector['stock_peg']:.2f} | {sector['avg_peg']:.2f} | {sector['peg_vs']} |\n")
-        f.write(f"| ROE | {fin['roe']*100:.1f}% | {sector['roe_vs']} | - |\n")
-        f.write(f"| FCF Yield | {fin.get('fcf_yield', 0)*100:.1f}% | {sector['fcf_vs']} | - |\n\n")
+        f.write(f"| ROE | {fin['roe'] *100:.1f}% | {sector['roe_vs']} | - |\n")
+        f.write(f"| FCF Yield | {fin.get('fcf_yield', 0) *100:.1f}% | {sector['fcf_vs']} | - |\n\n")
 
         # Dividend
         f.write("### 6.6 分红分析\n\n")
         f.write(f"| 指标 | 数值 |\n")
         f.write(f"|------|------|\n")
-        f.write(f"| 股息率 | {div_info['div_yield']*100:.2f}% |\n")
-        f.write(f"| 派息率 | {div_info['payout']*100:.0f}% |\n")
+        f.write(f"| 股息率 | {div_info['div_yield'] *100:.2f}% |\n")
+        f.write(f"| 派息率 | {div_info['payout'] *100:.0f}% |\n")
         f.write(f"| 状态 | {div_info['status']} |\n")
         f.write(f"| 健康度 | {div_info['health']} |\n\n")
 
@@ -1770,12 +1770,12 @@ def generate_report_cn(sym):
         f.write("### 5.5 盈利预测模型\n\n")
         f.write(f"| P/E情景 | 目标价 | 上涨空间 |\n")
         f.write(f"|---------|--------|----------|\n")
-        f.write(f"| P/E 15x (保守) | ${forecast['pe_15']:.0f} | {(forecast['pe_15']-price)/price*100:+.1f}% |\n")
-        f.write(f"| P/E 20x (平均) | ${forecast['pe_20']:.0f} | {(forecast['pe_20']-price)/price*100:+.1f}% |\n")
-        f.write(f"| P/E 25x (乐观) | ${forecast['pe_25']:.0f} | {(forecast['pe_25']-price)/price*100:+.1f}% |\n")
-        f.write(f"| P/E 30x (激进) | ${forecast['pe_30']:.0f} | {(forecast['pe_30']-price)/price*100:+.1f}% |\n\n")
+        f.write(f"| P/E 15x (保守) | ${forecast['pe_15']:.0f} | {(forecast['pe_15'] -price) /price *100:+.1f}% |\n")
+        f.write(f"| P/E 20x (平均) | ${forecast['pe_20']:.0f} | {(forecast['pe_20'] -price) /price *100:+.1f}% |\n")
+        f.write(f"| P/E 25x (乐观) | ${forecast['pe_25']:.0f} | {(forecast['pe_25'] -price) /price *100:+.1f}% |\n")
+        f.write(f"| P/E 30x (激进) | ${forecast['pe_30']:.0f} | {(forecast['pe_30'] -price) /price *100:+.1f}% |\n\n")
         f.write(f"| 增长率 | EPS: {forecast['eps_growth']:.1f}% | 营收: {forecast['rev_growth']:.1f}% |\n")
-        f.write(f"| 内在价值 | ${forecast['intrinsic']:.0f} | {(forecast['intrinsic']-price)/price*100:+.1f}% |\n\n")
+        f.write(f"| 内在价值 | ${forecast['intrinsic']:.0f} | {(forecast['intrinsic'] -price) /price *100:+.1f}% |\n\n")
 
         # SWOT Analysis
         f.write("### 5.6 SWOT分析\n\n")
@@ -1806,15 +1806,15 @@ def generate_report_cn(sym):
         f.write("### 7.1 概率加权目标价\n\n")
         f.write(f"| 情景 | 概率 | 目标价 | 上涨空间 |\n")
         f.write(f"|------|------|--------|----------|\n")
-        f.write(f"| 悲观 (15%) | 15% | ${prob_target['conservative']:.0f} | {(prob_target['conservative']-price)/price*100:+.1f}% |\n")
+        f.write(f"| 悲观 (15%) | 15% | ${prob_target['conservative']:.0f} | {(prob_target['conservative'] -price) /price *100:+.1f}% |\n")
         f.write(f"| 基准 (50%) | 50% | ${prob_target['base']:.0f} | {upside:+.1f}% |\n")
-        f.write(f"| 乐观 (25%) | 25% | ${prob_target['optimistic']:.0f} | {(prob_target['optimistic']-price)/price*100:+.1f}% |\n\n")
+        f.write(f"| 乐观 (25%) | 25% | ${prob_target['optimistic']:.0f} | {(prob_target['optimistic'] -price) /price *100:+.1f}% |\n\n")
         f.write(f"**期望目标价:** ${prob_target['expected']:.0f} ({prob_target['upside_pct']:+.1f}%)\n\n")
         f.write(f"| 情景 | 目标价 | 上涨空间 | 概率 |\n")
         f.write(f"|------|--------|----------|------|\n")
-        f.write(f"| 悲观 | ${fv_low:.0f} | {(fv_low-price)/price*100:+.1f}% | 15% |\n")
+        f.write(f"| 悲观 | ${fv_low:.0f} | {(fv_low -price) /price *100:+.1f}% | 15% |\n")
         f.write(f"| 基准 | ${target:.0f} | {upside:+.1f}% | 60% |\n")
-        f.write(f"| 乐观 | ${fv_high:.0f} | {(fv_high-price)/price*100:+.1f}% | 25% |\n\n")
+        f.write(f"| 乐观 | ${fv_high:.0f} | {(fv_high -price) /price *100:+.1f}% | 25% |\n\n")
 
         f.write(f"**合理价值区间:** ${fv_low:.0f} - ${fv_high:.0f}\n\n")
 
@@ -1984,9 +1984,9 @@ def calc_competitor_comparison(sym, q, fin):
 
 def generate_comparison(symbols):
     """Generate comparison table for multiple stocks"""
-    print(f"\n{'='*80}")
+    print(f"\n{'=' *80}")
     print(f"Stock PRO v10.0 - Multi-Stock Comparison")
-    print(f"{'='*80}\n")
+    print(f"{'=' *80}\n")
 
     results = []
     for sym in symbols:
@@ -2036,7 +2036,7 @@ def generate_comparison(symbols):
 
     for r in results:
         rating_icon = {"STRONG_BUY": "STRONG_BUY", "BUY": "BUY", "HOLD": "HOLD", "SELL": "SELL", "STRONG_SELL": "STRONG_SELL"}.get(r["rating"], "")
-        print(f"{r['symbol']:<8} ${r['price']:>7.2f} ${r['target']:>7.2f} {r['upside']:>+7.1f}% {r['score']:>5}/100 {r['pe']:>5.1f}x {r['peg']:>4.2f} {r['fcf_yield']*100:>5.1f}% {r['div_yield']*100:>4.2f}% {r['roe']*100:>5.1f}% {rating_icon}")
+        print(f"{r['symbol']:<8} ${r['price']:>7.2f} ${r['target']:>7.2f} {r['upside']:>+7.1f}% {r['score']:>5}/100 {r['pe']:>5.1f}x {r['peg']:>4.2f} {r['fcf_yield'] *100:>5.1f}% {r['div_yield'] *100:>4.2f}% {r['roe'] *100:>5.1f}% {rating_icon}")
 
     print("-" * 100)
     print(f"\nTotal: {len(results)} stocks analyzed")
@@ -2131,7 +2131,7 @@ def print_summary_card(results):
         rating_icon = "[SELL]"
 
     # Score bar
-    score_bar = "=" * int(score/5) + "-" * (20 - int(score/5))
+    score_bar = "=" * int(score /5) + "-" * (20 - int(score /5))
 
     sym = r['symbol']
     price = r['price']
@@ -2221,9 +2221,9 @@ def watch_mode(symbols, interval=30):
     count = 0
     while True:
         count += 1
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Refresh #{count} - {datetime.now().strftime('%H:%M:%S')}")
-        print('='*60)
+        print('=' *60)
 
         generate_comparison(symbols)
 
@@ -2270,9 +2270,9 @@ def export_to_csv(symbols, output_file=None):
                 score,
                 f"{q['pe']:.1f}",
                 f"{q['peg']:.2f}",
-                f"{fin.get('fcf_yield', 0)*100:.1f}",
-                f"{fin.get('div_yield', 0)*100:.2f}",
-                f"{fin['roe']*100:.1f}",
+                f"{fin.get('fcf_yield', 0) *100:.1f}",
+                f"{fin.get('div_yield', 0) *100:.2f}",
+                f"{fin['roe'] *100:.1f}",
                 f"{q['beta']:.2f}",
                 rating(upside),
                 datetime.now().strftime("%Y-%m-%d")
@@ -2333,7 +2333,7 @@ def export_to_xlsx(symbols, output_file=None):
             growth = calc_growth_score(q, fin)
             score = int(quality * 0.30 + value * 0.25 + momentum_s * 0.20 + growth * 0.25)
 
-            data = [sym, q['price'], target, upside/100, score, q['pe'], q['peg'],
+            data = [sym, q['price'], target, upside /100, score, q['pe'], q['peg'],
                    fin.get('fcf_yield', 0), fin.get('div_yield', 0), fin['roe'],
                    q['beta'], rating(upside), datetime.now()]
 
@@ -2396,8 +2396,8 @@ def save_to_db(symbols):
 
             c.execute('''INSERT INTO stocks VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)''',
                      (sym, q['price'], target, upside, score, q['pe'], q['peg'],
-                      fin.get('fcf_yield', 0)*100, fin.get('div_yield', 0)*100,
-                      fin['roe']*100, q['beta'], rating(upside),
+                      fin.get('fcf_yield', 0) *100, fin.get('div_yield', 0) *100,
+                      fin['roe'] *100, q['beta'], rating(upside),
                       datetime.now().isoformat()))
 
     conn.commit()
@@ -2448,8 +2448,8 @@ def generate_chart(symbols, output_file=None):
     x = range(len(symbols_list))
     width = 0.35
 
-    axes[0].bar([i - width/2 for i in x], prices, width, label='Current Price', color='#3498db')
-    axes[0].bar([i + width/2 for i in x], targets, width, label='Target Price', color='#2ecc71')
+    axes[0].bar([i - width /2 for i in x], prices, width, label='Current Price', color='#3498db')
+    axes[0].bar([i + width /2 for i in x], targets, width, label='Target Price', color='#2ecc71')
     axes[0].set_ylabel('Price ($)')
     axes[0].set_title('Stock Price vs Target Price')
     axes[0].set_xticks(x)
@@ -2486,9 +2486,9 @@ def generate_chart(symbols, output_file=None):
 
 def price_alert(symbols, threshold=30):
     """Check price alerts for stocks"""
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("Stock PRO v10.0 - Price Alert System")
-    print("="*60)
+    print("=" *60)
 
     alerts = []
     for sym in symbols:
@@ -2546,18 +2546,18 @@ def sync_to_obsidian(symbols):
             upside_val = upside
             pe_val = q['pe']
             peg_val = q['peg']
-            fpe_val = q['pe']/1.5
+            fpe_val = q['pe'] /1.5
             dcf_bull_val = dcf_scenarios['Bull']
             dcf_base_val = dcf_scenarios['Base']
             dcf_bear_val = dcf_scenarios['Bear']
-            roe_val = fin['roe']*100
-            pm_val = fin.get('profit_margin', 0.25)*100
+            roe_val = fin['roe'] *100
+            pm_val = fin.get('profit_margin', 0.25) *100
             de_val = fin.get('debt_equity', 0.5)
-            fcf_val = fin.get('fcf_yield', 0)*100
-            div_val = fin.get('div_yield', 0)*100
+            fcf_val = fin.get('fcf_yield', 0) *100
+            div_val = fin.get('div_yield', 0) *100
             beta_val = q['beta']
-            high52 = q['price']*1.3
-            low52 = q['price']*0.7
+            high52 = q['price'] *1.3
+            low52 = q['price'] *0.7
             rating_val = rating(upside)
 
             # Build markdown content using concatenation
@@ -3023,11 +3023,11 @@ def show_portfolio():
         print("\n[Portfolio] Empty. Add positions with: --portfolio-add NVDA 100 170")
         return
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Stock PRO Portfolio")
-    print("="*80)
+    print("=" *80)
     print(f"{'Symbol':<8} {'Shares':>8} {'Avg Cost':>10} {'Current':>10} {'Value':>12} {'Gain/Loss':>12}")
-    print("-"*80)
+    print("-" *80)
 
     total_value = portfolio.get("cash", 0)
     total_cost = 0
@@ -3054,7 +3054,7 @@ def show_portfolio():
 
         print(f"{sym:<8} {shares:>8.1f} ${avg_cost:>9.2f} ${current:>9.2f} ${value:>11.2f} {color}{sign}{gain_loss:>10.2f} ({gain_pct:>+5.1f}%){reset}")
 
-    print("-"*80)
+    print("-" *80)
     total_gain_loss = total_value - total_cost
     total_gain_pct = (total_gain_loss / total_cost * 100) if total_cost > 0 else 0
     color = "\033[92m" if total_gain_loss >= 0 else "\033[91m"
@@ -3063,7 +3063,7 @@ def show_portfolio():
 
     print(f"{'Cash':<8} ${portfolio.get('cash', 0):>67.2f}")
     print(f"{'TOTAL':<8} {'':<8} {'':<10} {'':<10} ${total_value:>11.2f} {color}{sign}{total_gain_loss:>10.2f} ({total_gain_pct:>+5.1f}%){reset}")
-    print("="*80)
+    print("=" *80)
 
 def fetch_news(symbols):
     """Fetch news for stocks from cache or API"""
@@ -3106,9 +3106,9 @@ def show_news(symbols):
     """Show news for stocks"""
     news = fetch_news(symbols)
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Stock PRO News Feed")
-    print("="*80 + "\n")
+    print("=" *80 + "\n")
 
     for item in news:
         sentiment_emoji = "🟢" if item["sentiment"] == "positive" else ("🔴" if item["sentiment"] == "negative" else "⚪")
@@ -3184,11 +3184,11 @@ def show_screener(min_score=60, min_upside=15, max_pe=40):
 
     results = screen_stocks(criteria)
 
-    print("\n" + "="*100)
+    print("\n" + "=" *100)
     print(f"Stock Screener (Score>={min_score}, Upside>={min_upside}%, P/E<={max_pe})")
-    print("="*100)
+    print("=" *100)
     print(f"{'Symbol':<8} {'Score':>6} {'Upside':>8} {'P/E':>6} {'PEG':>6} {'ROE':>6} {'FCF':>6} {'Div':>6}")
-    print("-"*100)
+    print("-" *100)
 
     if not results:
         print("No stocks match criteria. Try relaxing filters.")
@@ -3197,7 +3197,7 @@ def show_screener(min_score=60, min_upside=15, max_pe=40):
     for r in results:
         print(f"{r['symbol']:<8} {r['score']:>6} {r['upside']:>+7.1f}% {r['pe']:>5.1f}x {r['peg']:>5.2f} {r['roe']:>5.1f}% {r['fcf']:>5.1f}% {r['div']:>5.2f}%")
 
-    print("-"*100)
+    print("-" *100)
     print(f"Found {len(results)} stocks matching criteria")
 
 def send_email_report(symbols, recipients=None):
@@ -3216,7 +3216,7 @@ def send_email_report(symbols, recipients=None):
 
     # Build email body
     body = "Stock PRO Daily Report\n"
-    body += "="*60 + "\n\n"
+    body += "=" *60 + "\n\n"
 
     for d in data:
         body += f"{d['symbol']}: ${d['price']:.2f} -> ${d['target']:.2f} ({d['upside']:+.1f}%)\n"
@@ -3722,7 +3722,7 @@ if __name__ == "__main__":
     else:
         generate_report(sym)
 
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("Quick Commands:")
     print("   --cn        Chinese report")
     print("   --compare   Multi-stock comparison")
@@ -3742,4 +3742,4 @@ if __name__ == "__main__":
     print("   --skill     Create CoPaw skill")
     print("   --notify    Send notifications")
     print("   --help      Show all options")
-    print("="*60)
+    print("=" *60)

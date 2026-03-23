@@ -90,16 +90,16 @@ if CHGNET_AVAILABLE:
 
         print(f"\n  石墨:")
         print(f"    总能量：{energy:.4f} eV")
-        print(f"    每原子：{energy/len(graphite):.4f} eV/atom")
+        print(f"    每原子：{energy /len(graphite):.4f} eV/atom")
         print(f"    最大力：{np.max(np.abs(forces)):.4f} eV/Å")
 
         # 与 DFT 对比
         dft_ref = -9.17  # MP DFT 参考值
-        error = abs(energy/len(graphite) - dft_ref) * 1000
+        error = abs(energy /len(graphite) - dft_ref) * 1000
 
         print(f"\n  与 DFT 对比:")
         print(f"    DFT 参考：{dft_ref:.4f} eV/atom")
-        print(f"    CHGNet: {energy/len(graphite):.4f} eV/atom")
+        print(f"    CHGNet: {energy /len(graphite):.4f} eV/atom")
         print(f"    误差：{error:.1f} meV/atom")
 
         if error < 10:
@@ -115,19 +115,19 @@ if CHGNET_AVAILABLE:
         # 石墨烯
         graph_graphene = CrystalGraphConverter()(graphene, algorithm='fast')
         e_graphene = chgnet.predict_graph(graph_graphene)['e']
-        print(f"    石墨烯：{e_graphene/len(graphene):.4f} eV/atom")
+        print(f"    石墨烯：{e_graphene /len(graphene):.4f} eV/atom")
 
         # 金刚石
         diamond = bulk('C', 'diamond', a=3.57)
         graph_diamond = CrystalGraphConverter()(diamond, algorithm='fast')
         e_diamond = chgnet.predict_graph(graph_diamond)['e']
-        print(f"    金刚石：{e_diamond/len(diamond):.4f} eV/atom")
+        print(f"    金刚石：{e_diamond /len(diamond):.4f} eV/atom")
 
         # C60
         # 需要转换为 ASE Atoms 对象
         graph_c60 = CrystalGraphConverter()(c60, algorithm='fast')
         e_c60 = chgnet.predict_graph(graph_c60)['e']
-        print(f"    C60: {e_c60/len(c60):.4f} eV/atom")
+        print(f"    C60: {e_c60 /len(c60):.4f} eV/atom")
 
         # 保存结果
         result = {
@@ -136,14 +136,14 @@ if CHGNET_AVAILABLE:
             'structures': {
                 'graphite': {
                     'energy_eV': float(energy),
-                    'energy_per_atom_eV': float(energy/len(graphite)),
+                    'energy_per_atom_eV': float(energy /len(graphite)),
                     'max_force_eV_A': float(np.max(np.abs(forces))),
                     'dft_reference_eV': dft_ref,
                     'error_meV': float(error)
                 },
-                'graphene': float(e_graphene/len(graphene)),
-                'diamond': float(e_diamond/len(diamond)),
-                'c60': float(e_c60/len(c60))
+                'graphene': float(e_graphene /len(graphene)),
+                'diamond': float(e_diamond /len(diamond)),
+                'c60': float(e_c60 /len(c60))
             }
         }
 
@@ -178,7 +178,7 @@ if CHGNET_AVAILABLE:
         print(f"\n  弛豫完成:")
         print(f"    初始体积：{graphite.get_volume():.2f} Å³")
         print(f"    弛豫体积：{relaxed_struct.get_volume():.2f} Å³")
-        print(f"    体积变化：{(relaxed_struct.get_volume() - graphite.get_volume())/graphite.get_volume()*100:+.1f}%")
+        print(f"    体积变化：{(relaxed_struct.get_volume() - graphite.get_volume()) /graphite.get_volume() *100:+.1f}%")
 
         # 保存弛豫结构
         from ase.io import write

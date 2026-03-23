@@ -68,11 +68,11 @@ for exp in top_experiments[:5]:  # 生成前 5 个实验的 SOP
 
 | 组分 | 比例 | 质量 (mg) | 体积 (mL) |
 |------|------|-----------|-----------|
-| CNT | {exp['cnt_ratio']:.0%} | {exp['cnt_ratio']*100:.1f} | - |
-| LIG | {exp['lig_ratio']:.0%} | {exp['lig_ratio']*100:.1f} | - |
-| 石墨烯 | {exp['graphene_ratio']:.0%} | {exp['graphene_ratio']*100:.1f} | - |
-| MXene | {exp['mxene_ratio']:.0%} | {exp['mxene_ratio']*100:.1f} | - |
-| PEDOT | {exp['pedot_ratio']:.0%} | {exp['pedot_ratio']*100:.1f} | - |
+| CNT | {exp['cnt_ratio']:.0%} | {exp['cnt_ratio'] *100:.1f} | - |
+| LIG | {exp['lig_ratio']:.0%} | {exp['lig_ratio'] *100:.1f} | - |
+| 石墨烯 | {exp['graphene_ratio']:.0%} | {exp['graphene_ratio'] *100:.1f} | - |
+| MXene | {exp['mxene_ratio']:.0%} | {exp['mxene_ratio'] *100:.1f} | - |
+| PEDOT | {exp['pedot_ratio']:.0%} | {exp['pedot_ratio'] *100:.1f} | - |
 | **总计** | **100%** | **100.0** | **-** |
 
 **预测电导率:** {exp['predicted_conductivity']:.2e} S/m
@@ -84,7 +84,7 @@ for exp in top_experiments[:5]:  # 生成前 5 个实验的 SOP
 ### 2.1 CNT (碳纳米管)
 - **规格:** SWCNT, 纯度>95%, 直径 1-2nm
 - **供应商:** NanoIntegris 或 equivalent
-- **称量:** {exp['cnt_ratio']*100:.1f} mg
+- **称量:** {exp['cnt_ratio'] *100:.1f} mg
 - **预处理:** 真空干燥 120°C, 2 小时
 
 ### 2.2 LIG (激光诱导石墨烯)
@@ -96,19 +96,19 @@ for exp in top_experiments[:5]:  # 生成前 5 个实验的 SOP
 ### 2.3 石墨烯
 - **规格:** rGO, 层数<5, 片径 1-5μm
 - **供应商:** Graphenea 或 equivalent
-- **称量:** {exp['graphene_ratio']*100:.1f} mg
+- **称量:** {exp['graphene_ratio'] *100:.1f} mg
 - **预处理:** NMP 分散，超声 30 分钟
 
 ### 2.4 MXene (Ti3C2Tx)
 - **规格:** 单层，片径 1-3μm
 - **供应商:** 1T Materials 或 equivalent
-- **称量:** {exp['mxene_ratio']*100:.1f} mg
+- **称量:** {exp['mxene_ratio'] *100:.1f} mg
 - **预处理:** 去离子水清洗，离心纯化
 
 ### 2.5 PEDOT:PSS
 - **规格:** Clevios P VP AI 4083
 - **供应商:** Heraeus
-- **称量:** {exp['pedot_ratio']*100:.1f} mg
+- **称量:** {exp['pedot_ratio'] *100:.1f} mg
 - **预处理:** 过滤 (0.45μm)
 
 ---
@@ -185,11 +185,11 @@ for exp in top_experiments[:5]:  # 生成前 5 个实验的 SOP
 ### 5.2 实际配方
 | 组分 | 理论质量 (mg) | 实际质量 (mg) | 偏差 (%) |
 |------|---------------|---------------|----------|
-| CNT | {exp['cnt_ratio']*100:.1f} | | |
-| LIG | {exp['lig_ratio']*100:.1f} | | |
-| 石墨烯 | {exp['graphene_ratio']*100:.1f} | | |
-| MXene | {exp['mxene_ratio']*100:.1f} | | |
-| PEDOT | {exp['pedot_ratio']*100:.1f} | | |
+| CNT | {exp['cnt_ratio'] *100:.1f} | | |
+| LIG | {exp['lig_ratio'] *100:.1f} | | |
+| 石墨烯 | {exp['graphene_ratio'] *100:.1f} | | |
+| MXene | {exp['mxene_ratio'] *100:.1f} | | |
+| PEDOT | {exp['pedot_ratio'] *100:.1f} | | |
 
 ### 5.3 测试结果
 | 性能 | 测试值 1 | 测试值 2 | 测试值 3 | 平均值 | 标准差 |

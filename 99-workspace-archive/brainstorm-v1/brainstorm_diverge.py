@@ -25,9 +25,9 @@ def load_topic():
 
 def diverge_thinking(topic):
     """自由联想生成想法"""
-    print(f"\n{'='*60}")
+    print(f"\n{'=' *60}")
     print(f"🧠 自由联想 - 主题：{topic['topic']}")
-    print(f"{'='*60}\n")
+    print(f"{'=' *60}\n")
 
     print("💡 提示：不要评判，追求数量，越疯狂越好！\n")
     print("方法建议:")
@@ -40,7 +40,7 @@ def diverge_thinking(topic):
     print("请输入想法 (每行一个，输入空行结束):\n")
 
     while True:
-        idea = input(f"想法 #{len(ideas)+1}: ").strip()
+        idea = input(f"想法 #{len(ideas) +1}: ").strip()
         if not idea:
             if len(ideas) < 5:
                 print("⚠️  至少输入 5 个想法！")
@@ -88,9 +88,9 @@ def main():
     save_ideas(ideas, topic)
 
     # 验证
-    print(f"\n{'='*60}")
+    print(f"\n{'=' *60}")
     print("📊 验证")
-    print(f"{'='*60}")
+    print(f"{'=' *60}")
 
     if len(ideas) >= 20:
         print("✅ 想法数量 ≥20 (优秀)")

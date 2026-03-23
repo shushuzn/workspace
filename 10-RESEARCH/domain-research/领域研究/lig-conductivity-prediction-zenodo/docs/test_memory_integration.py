@@ -363,7 +363,7 @@ class TestPerformanceBenchmarks(unittest.TestCase):
 
         # Should allocate 100 blocks in <1 second
         self.assertLess(elapsed, 1.0)
-        print(f"\n  ⚡ Allocation speed: {100/elapsed:.0f} blocks/sec")
+        print(f"\n  ⚡ Allocation speed: {100 /elapsed:.0f} blocks/sec")
 
     def test_access_speed(self):
         """Test access speed"""
@@ -385,7 +385,7 @@ class TestPerformanceBenchmarks(unittest.TestCase):
 
         # Should access 100 blocks in <0.5 seconds
         self.assertLess(elapsed, 0.5)
-        print(f"\n  ⚡ Access speed: {100/elapsed:.0f} accesses/sec")
+        print(f"\n  ⚡ Access speed: {100 /elapsed:.0f} accesses/sec")
 
     def test_memory_efficiency(self):
         """Test memory efficiency"""
@@ -433,9 +433,9 @@ class TestPerformanceBenchmarks(unittest.TestCase):
 def run_tests():
     """Run all tests"""
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("🧪 Memory Integration Tests")
-    print("="*80)
+    print("=" *80)
 
     # Create test suite
     loader = unittest.TestLoader()
@@ -452,9 +452,9 @@ def run_tests():
     result = runner.run(suite)
 
     # Summary
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 Test Summary")
-    print("="*80)
+    print("=" *80)
     print(f"  Tests Run: {result.testsRun}")
     print(f"  Failures: {len(result.failures)}")
     print(f"  Errors: {len(result.errors)}")

@@ -38,20 +38,20 @@ def get_quote(sym):
             fd = FD.get(sym.upper(), {})
             eps = (fd.get("rev", 1e10) * fd.get("nm", 0.20)) / sh
         fd_data = FD.get(sym.upper(), {})
-        return {"symbol": sym.upper(), "price": p, "mc": m.get("marketCap", 0) or p*sh,
+        return {"symbol": sym.upper(), "price": p, "mc": m.get("marketCap", 0) or p *sh,
                 "pe": pe or fd_data.get("pe_avg", 25), "eps": eps, "eg": fd_data.get("eg", 0.10),
                 "beta": m.get("beta", 1.0) or 1.0,
-                "w52h": m.get("fiftyTwoWeekHigh", p*1.2) or p*1.2,
-                "w52l": m.get("fiftyTwoWeekLow", p*0.8) or p*0.8}
+                "w52h": m.get("fiftyTwoWeekHigh", p *1.2) or p *1.2,
+                "w52l": m.get("fiftyTwoWeekLow", p *0.8) or p *0.8}
     except Exception as e:
         print(f"Error: {e}"); return None
 
 def get_fin(sym, q):
     fd = FD.get(sym.upper(), {})
-    rev = fd.get("rev", q["mc"]/10)
+    rev = fd.get("rev", q["mc"] /10)
     ni = rev * fd.get("nm", 0.15)
     eq = ni / fd["roe"] if fd.get("roe", 0) > 0 else rev * 2
-    return {"rev": rev, "ni": ni, "eq": eq, "ta": eq*2, "debt": eq*fd.get("de", 0.5), "sh": SHARES.get(sym.upper(), 1e9),
+    return {"rev": rev, "ni": ni, "eq": eq, "ta": eq *2, "debt": eq *fd.get("de", 0.5), "sh": SHARES.get(sym.upper(), 1e9),
             "gm": fd.get("gm", 0.40), "om": fd.get("om", 0.20), "nm": fd.get("nm", 0.15),
             "roe": fd.get("roe", 0.15), "roa": fd.get("roa", 0.08), "roic": fd.get("roic", 0.12),
             "cr": fd.get("cr", 1.5), "de": fd.get("de", 0.5),
@@ -70,14 +70,14 @@ def gen_report(sym):
     if not q: return None
     fin = get_fin(sym, q)
     pe = q["pe"]
-    ps = q["mc"]/fin["rev"] if fin["rev"] > 0 else 0
-    pb = q["mc"]/fin["eq"] if fin["eq"] > 0 else 0
+    ps = q["mc"] /fin["rev"] if fin["rev"] > 0 else 0
+    pb = q["mc"] /fin["eq"] if fin["eq"] > 0 else 0
     target, target_pe = calc_target(q["eps"], q["eg"], fin.get("pe_avg", 25))
     upside = (target - q["price"]) / q["price"] * 100
     rating = "STRONG_BUY" if upside > 30 else "BUY" if upside > 15 else "HOLD" if upside > 0 else "SELL"
     var_95 = q["price"] * q["beta"] * 1.65 * 0.05
     max_dd = (q["price"] - q["w52l"]) / q["price"] * 100
-    risk_score = min(q["beta"]*15 + var_95/q["price"]*100 + fin["de"]*8, 100)
+    risk_score = min(q["beta"] *15 + var_95 /q["price"] *100 + fin["de"] *8, 100)
     risk_level = "LOW" if risk_score < 30 else "MEDIUM" if risk_score < 50 else "HIGH"
     score = 50
     score += 15 if q["eg"] > 0.30 else 10 if q["eg"] > 0.15 else 5 if q["eg"] > 0.08 else 0
@@ -92,7 +92,7 @@ def gen_report(sym):
         cq = get_quote(c)
         if cq: comp_data.append({"s": c, "p": cq["price"], "pe": cq["pe"]})
     today = datetime.now().strftime("%Y-%m-%d")
-    pos = (q["price"]-q["w52l"])/(q["w52h"]-q["w52l"])*100 if q["w52h"] > q["w52l"] else 50
+    pos = (q["price"] -q["w52l"]) /(q["w52h"] -q["w52l"]) *100 if q["w52h"] > q["w52l"] else 50
 
     # Build Markdown report
     md = []
@@ -109,7 +109,7 @@ def gen_report(sym):
     md.append("| Metric | Value |")
     md.append("|--------|-------|")
     md.append(f"| Current Price | ${q['price']:.2f} |")
-    md.append(f"| Market Cap | ${q['mc']/1e12:.2f}T |")
+    md.append(f"| Market Cap | ${q['mc'] /1e12:.2f}T |")
     md.append(f"| Target Price | ${target:.2f} |")
     md.append(f"| Upside Potential | {upside:+.1f}% |")
     md.append(f"| Rating | **{rating}** |")
@@ -145,8 +145,8 @@ def gen_report(sym):
     md.append("| Component | Value |")
     md.append("|-----------|-------|")
     md.append(f"| Current EPS | ${q['eps']:.2f} |")
-    md.append(f"| Expected Growth | {q['eg']*100:.0f}% |")
-    md.append(f"| Forward EPS | ${q['eps']*(1+q['eg']):.2f} |")
+    md.append(f"| Expected Growth | {q['eg'] *100:.0f}% |")
+    md.append(f"| Forward EPS | ${q['eps'] *(1 +q['eg']):.2f} |")
     md.append(f"| Target P/E | {target_pe}x |")
     md.append(f"| **Target Price** | **${target:.2f}** |")
     md.append("")
@@ -159,22 +159,22 @@ def gen_report(sym):
     md.append("| Metric | Value | Assessment |")
     md.append("|--------|-------|------------|")
     gm_assess = "Excellent" if fin["gm"] > 0.60 else "Good" if fin["gm"] > 0.40 else "Average"
-    md.append(f"| Gross Margin | {fin['gm']*100:.1f}% | {gm_assess} |")
+    md.append(f"| Gross Margin | {fin['gm'] *100:.1f}% | {gm_assess} |")
     om_assess = "Excellent" if fin["om"] > 0.25 else "Good" if fin["om"] > 0.15 else "Average"
-    md.append(f"| Operating Margin | {fin['om']*100:.1f}% | {om_assess} |")
+    md.append(f"| Operating Margin | {fin['om'] *100:.1f}% | {om_assess} |")
     nm_assess = "Excellent" if fin["nm"] > 0.20 else "Good" if fin["nm"] > 0.10 else "Average"
-    md.append(f"| Net Margin | {fin['nm']*100:.1f}% | {nm_assess} |")
+    md.append(f"| Net Margin | {fin['nm'] *100:.1f}% | {nm_assess} |")
     md.append("")
     md.append("### 4.2 Returns")
     md.append("")
     md.append("| Metric | Value | Assessment |")
     md.append("|--------|-------|------------|")
     roe_assess = "Exceptional" if fin["roe"] > 0.30 else "Strong" if fin["roe"] > 0.20 else "Average"
-    md.append(f"| ROE | {fin['roe']*100:.1f}% | {roe_assess} |")
+    md.append(f"| ROE | {fin['roe'] *100:.1f}% | {roe_assess} |")
     roic_assess = "Excellent" if fin["roic"] > 0.25 else "Good" if fin["roic"] > 0.15 else "Needs Improvement"
-    md.append(f"| ROIC | {fin['roic']*100:.1f}% | {roic_assess} |")
+    md.append(f"| ROIC | {fin['roic'] *100:.1f}% | {roic_assess} |")
     roa_assess = "Strong" if fin["roa"] > 0.15 else "Adequate" if fin["roa"] > 0.05 else "Weak"
-    md.append(f"| ROA | {fin['roa']*100:.1f}% | {roa_assess} |")
+    md.append(f"| ROA | {fin['roa'] *100:.1f}% | {roa_assess} |")
     md.append("")
     md.append("### 4.3 Balance Sheet")
     md.append("")
@@ -217,10 +217,10 @@ def gen_report(sym):
     md.append("## 7. Investment Thesis")
     md.append("")
     md.append("### Strengths")
-    if fin["gm"] > 0.50: md.append(f"- **High Gross Margins ({fin['gm']*100:.0f}%)** - Strong pricing power")
-    if fin["roe"] > 0.25: md.append(f"- **Exceptional ROE ({fin['roe']*100:.0f}%)** - Efficient capital deployment")
-    if fin["nm"] > 0.20: md.append(f"- **Strong Net Margins ({fin['nm']*100:.0f}%)** - Operational excellence")
-    if q["eg"] > 0.15: md.append(f"- **High Growth Rate ({q['eg']*100:.0f}%)** - Strong momentum")
+    if fin["gm"] > 0.50: md.append(f"- **High Gross Margins ({fin['gm'] *100:.0f}%)** - Strong pricing power")
+    if fin["roe"] > 0.25: md.append(f"- **Exceptional ROE ({fin['roe'] *100:.0f}%)** - Efficient capital deployment")
+    if fin["nm"] > 0.20: md.append(f"- **Strong Net Margins ({fin['nm'] *100:.0f}%)** - Operational excellence")
+    if q["eg"] > 0.15: md.append(f"- **High Growth Rate ({q['eg'] *100:.0f}%)** - Strong momentum")
     if fin["cr"] > 2.0: md.append(f"- **Strong Liquidity (CR: {fin['cr']:.1f}x)** - Financial flexibility")
     md.append("")
     md.append("### Concerns")
@@ -259,15 +259,15 @@ def gen_report(sym):
     with open(fname, "w", encoding="utf-8") as f:
         f.write(content)
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' *60}")
     print(f"  Stock PRO v3.0 - {sym} Report Generated")
-    print(f"{'='*60}")
+    print(f"{'=' *60}")
     print(f"  Rating: {rating}")
     print(f"  Target: ${target:.2f} ({upside:+.1f}%)")
     print(f"  Score: {score}/100")
     print(f"  Risk: {risk_level}")
     print(f"\n  Report: {fname}")
-    print(f"{'='*60}\n")
+    print(f"{'=' *60}\n")
     return fname
 
 def main():

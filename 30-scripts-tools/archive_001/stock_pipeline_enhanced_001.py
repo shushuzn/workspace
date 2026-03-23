@@ -81,11 +81,11 @@ class StockPipelineEnhanced:
         Returns:
             分析结果
         """
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Stock Analysis Pipeline Enhanced v1.1.0")
         print(f"Symbol: {self.symbol}")
         print(f"Cache: {'ON' if self.use_cache else 'OFF'} | Parallel: {'ON' if self.use_parallel else 'OFF'}")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         # Stage 1: 数据加载 (使用并行)
         print("\n[Stage 1] Loading Data...")
@@ -105,13 +105,13 @@ class StockPipelineEnhanced:
         # 完成
         self.metrics["total_time"] = time.time() - self.metrics["start_time"]
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Pipeline Complete!")
         print(f"Total Time: {self.metrics['total_time']:.2f}s")
         if self.cache:
             stats = self.cache.get_stats()
             print(f"Cache Stats: {stats['hits']} hits, {stats['misses']} misses, {stats['hit_rate']}")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         return self.results
 
@@ -244,23 +244,23 @@ def main() -> None:
     symbol = sys.argv[1] if len(sys.argv) > 1 else "AAPL"
 
     # 第一次运行 (无缓存)
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("First Run (cold)")
-    print("="*60)
+    print("=" *60)
     pipeline = StockPipelineEnhanced(symbol, use_cache=True, use_parallel=True)
     result = pipeline.run()
 
     # 第二次运行 (有缓存)
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("Second Run (warm)")
-    print("="*60)
+    print("=" *60)
     pipeline2 = StockPipelineEnhanced(symbol, use_cache=True, use_parallel=True)
     result2 = pipeline2.run()
 
     # 统计
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("Cache Statistics")
-    print("="*60)
+    print("=" *60)
     cache = get_cache()
     stats = cache.get_stats()
     print(f"  Hits: {stats['hits']}")

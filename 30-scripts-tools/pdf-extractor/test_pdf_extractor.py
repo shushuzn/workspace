@@ -74,9 +74,9 @@ class PDFTestSuite:
 
     def run_all_tests(self, extractor_class):
         """运行所有测试"""
-        print("="*60)
+        print("=" *60)
         print("PDF 提取器测试集验证")
-        print("="*60)
+        print("=" *60)
         print(f"测试用例数：{len(self.test_cases)}")
         print(f"开始时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print()
@@ -121,9 +121,9 @@ class PDFTestSuite:
         # 汇总
         accuracy = passed / len(self.test_cases) * 100 if self.test_cases else 0
 
-        print("="*60)
+        print("=" *60)
         print("测试结果汇总")
-        print("="*60)
+        print("=" *60)
         print(f"  通过：{passed}/{len(self.test_cases)}")
         print(f"  失败：{failed}/{len(self.test_cases)}")
         print(f"  准确率：{accuracy:.1f}%")

@@ -112,9 +112,9 @@ def track_foreshadowing():
 
         for f_id in found:
             if f_id in tracking_results:
-                if chapter_num in foreshadowing_settings[f_id-1]['plant_chapters']:
+                if chapter_num in foreshadowing_settings[f_id -1]['plant_chapters']:
                     tracking_results[f_id]['plant_status'].append(chapter_num)
-                if chapter_num in foreshadowing_settings[f_id-1]['recover_chapters']:
+                if chapter_num in foreshadowing_settings[f_id -1]['recover_chapters']:
                     tracking_results[f_id]['recover_status'].append(chapter_num)
 
     # Print report

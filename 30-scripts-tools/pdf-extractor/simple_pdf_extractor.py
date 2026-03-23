@@ -121,7 +121,7 @@ class SimplePDFExtractor:
                 "layout": layout,
                 "text": text
             })
-            print(f"   第 {i+1}/{total_pages} 页 ({layout}栏)...", end="\r")
+            print(f"   第 {i +1}/{total_pages} 页 ({layout}栏)...", end="\r")
 
         print(f"\n✅ 处理完成")
         doc.close()
@@ -169,9 +169,9 @@ def main():
         output_file.write_text(markdown, encoding='utf-8')
         print(f"\n📁 已保存：{output_file}")
     elif args.preview:
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("📖 预览 (前 1000 字符):")
-        print("="*60)
+        print("=" *60)
         print(markdown[:1000])
         if len(markdown) > 1000:
             print(f"\n... (共{len(markdown)}字符)")

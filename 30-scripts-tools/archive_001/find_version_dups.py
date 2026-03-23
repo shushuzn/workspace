@@ -68,4 +68,4 @@ for base, names in duplicates.items():
 print("\n[SAFE DELETE LIST]:")
 for f in sorted(set(safe_delete))[:20]:
     print(f"  {f}")
-print(f"... and {max(0, len(set(safe_delete))-20)} more")
+print(f"... and {max(0, len(set(safe_delete)) -20)} more")

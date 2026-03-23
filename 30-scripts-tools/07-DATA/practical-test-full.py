@@ -54,9 +54,9 @@ ReportGenerator = load_module('report', 'report-generator.py').ReportGenerator
 
 def test_paper_extraction():
     """测试 1: 论文信息提取"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("测试 1: 论文信息提取")
-    print("="*70)
+    print("=" *70)
 
     # 模拟论文摘要
     paper_abstract = """
@@ -122,9 +122,9 @@ def test_paper_extraction():
 
 def test_property_prediction():
     """测试 2: 性能预测"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("测试 2: 性能预测 (CGCNN)")
-    print("="*70)
+    print("=" *70)
 
     # 创建模型
     config = CPUConfig()
@@ -150,9 +150,9 @@ def test_property_prediction():
 
 def test_material_generation():
     """测试 3: 材料生成 (VAE)"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("测试 3: 材料生成 (VAE)")
-    print("="*70)
+    print("=" *70)
 
     # 创建模型
     vae = get_vae_model(CPUConfig())
@@ -181,9 +181,9 @@ def test_material_generation():
 
 def test_experiment_design():
     """测试 4: 实验设计"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("测试 4: 实验设计")
-    print("="*70)
+    print("=" *70)
 
     designer = ExperimentDesigner()
 
@@ -204,9 +204,9 @@ def test_experiment_design():
 
 def test_report_generation():
     """测试 5: 报告生成"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("测试 5: 报告生成")
-    print("="*70)
+    print("=" *70)
 
     generator = ReportGenerator()
 
@@ -231,10 +231,10 @@ def test_report_generation():
 
 def main():
     """主函数"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("第十二阶段 - 实战测试")
     print("完整系统端到端验证")
-    print("="*70)
+    print("=" *70)
 
     start_time = time.time()
 
@@ -258,9 +258,9 @@ def main():
     # 总结
     total_time = time.time() - start_time
 
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("实战测试总结")
-    print("="*70)
+    print("=" *70)
 
     print(f"\n总耗时：{total_time:.1f} 秒")
     print(f"\n测试结果:")
@@ -274,10 +274,10 @@ def main():
     print(f"  - data/practical-test-report.md")
     print(f"  - data/practical-test-report.json")
 
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("✅ 实战测试全部通过！")
     print("系统可以投入实际使用！")
-    print("="*70)
+    print("=" *70)
 
 
 if __name__ == '__main__':

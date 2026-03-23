@@ -243,7 +243,7 @@ class MessageSync:
         print(f"📊 飞书用户：{self.feishu_user_id}")
         print(f"🔄 同步间隔：{interval}秒")
         print(f"💾 状态文件：{SYNC_STATE_FILE}")
-        print(f"{'='*60}\n")
+        print(f"{'=' *60}\n")
 
         try:
             while True:

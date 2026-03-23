@@ -66,7 +66,7 @@ class SuperResolution:
             output, _ = self.upsampler.enhance(image, outscale=self.scale)
         else:
             print("🚀 OpenCV BICUBIC 插值中...")
-            output = cv2.resize(image, (w*self.scale, h*self.scale), interpolation=cv2.INTER_CUBIC)
+            output = cv2.resize(image, (w *self.scale, h *self.scale), interpolation=cv2.INTER_CUBIC)
 
         new_h, new_w = output.shape[:2]
         print(f"✅ 增强完成：{new_w}x{new_h} (放大{self.scale}倍)")
@@ -91,7 +91,7 @@ class SuperResolution:
 
         for i, img_file in enumerate(image_files):
             output_file = output_dir / img_file.name
-            print(f"   [{i+1}/{len(image_files)}] {img_file.name}")
+            print(f"   [{i +1}/{len(image_files)}] {img_file.name}")
             self.enhance(img_file, output_file)
 
         print(f"\n✅ 批量处理完成")

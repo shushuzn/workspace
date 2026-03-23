@@ -42,19 +42,19 @@ def generate_chart_data(symbol):
         if i < 19:
             ma20.append(None)
         else:
-            ma20.append(sum(prices[i-19:i+1]) / 20)
+            ma20.append(sum(prices[i -19:i +1]) / 20)
 
     ma50 = []
     for i in range(len(prices)):
         if i < 49:
             ma50.append(None)
         else:
-            ma50.append(sum(prices[i-49:i+1]) / 50)
+            ma50.append(sum(prices[i -49:i +1]) / 50)
 
     # Calculate returns
     returns = []
     for i in range(1, len(prices)):
-        ret = (prices[i] - prices[i-1]) / prices[i-1] * 100
+        ret = (prices[i] - prices[i -1]) / prices[i -1] * 100
         returns.append(round(ret, 2))
 
     return {

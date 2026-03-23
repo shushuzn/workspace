@@ -251,10 +251,10 @@ class InsiderTracker:
     def generate_report(self) -> str:
         """Generate text report"""
         report = []
-        report.append("="*60)
+        report.append("=" *60)
         report.append("📊 Insider Trading Activity Report")
         report.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-        report.append("="*60)
+        report.append("=" *60)
 
         # Summary
         analysis = self.analyze_activity()
@@ -283,9 +283,9 @@ class InsiderTracker:
 
 def main():
     """Demo/test insider tracker"""
-    print("="*60)
+    print("=" *60)
     print("📊 Insider Trading Tracker (SEC Form 4)")
-    print("="*60)
+    print("=" *60)
 
     tracker = InsiderTracker()
 
@@ -313,7 +313,7 @@ def main():
     tracker.save()
 
     print("\n✅ Insider tracking complete!")
-    print("="*60)
+    print("=" *60)
 
 
 if __name__ == "__main__":

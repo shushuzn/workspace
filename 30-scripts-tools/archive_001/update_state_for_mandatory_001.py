@@ -43,8 +43,8 @@ for i, name in enumerate(step_names, 1):
     state["step_status"][str(i)] = {
         "name": name,
         "status": "completed",
-        "started_at": base_time.replace(minute=i*2).isoformat() + "+08:00",
-        "completed_at": base_time.replace(minute=i*2+1).isoformat() + "+08:00",
+        "started_at": base_time.replace(minute=i *2).isoformat() + "+08:00",
+        "completed_at": base_time.replace(minute=i *2 +1).isoformat() + "+08:00",
         "result": f"{name}完成"
     }
     state["completed_steps"].append(i)

@@ -229,7 +229,7 @@ def main():
         model, details = evaluator.evaluate(args.query, args.context_length)
 
         print(f"📊 难度评估结果")
-        print(f"{'='*50}")
+        print(f"{'=' *50}")
         print(f"推荐模型：{model}")
         print(f"难度级别：{details['difficulty']}")
         print(f"综合评分：{details['score']:.2f}")

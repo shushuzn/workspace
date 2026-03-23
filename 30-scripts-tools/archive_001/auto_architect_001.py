@@ -79,7 +79,7 @@ class ToolArchitect:
             suggestions.append({
                 "type": "group_orphans",
                 "count": len(analysis["orphans"]),
-                "action": "Create " + str(len(analysis["orphans"])//10) + " new module groups"
+                "action": "Create " + str(len(analysis["orphans"]) //10) + " new module groups"
             })
 
         large_tools = [(t, d) for t, d in analysis["tool_data"].items() if d["lines"] > 500]

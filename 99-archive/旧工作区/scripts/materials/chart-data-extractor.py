@@ -178,14 +178,14 @@ class AxisParser:
             return 'unknown'
 
         # 检查是否等间距
-        diffs = [tick_labels[i+1] - tick_labels[i] for i in range(len(tick_labels)-1)]
+        diffs = [tick_labels[i +1] - tick_labels[i] for i in range(len(tick_labels) -1)]
         avg_diff = sum(diffs) / len(diffs)
 
         if all(abs(d - avg_diff) / avg_diff < 0.1 for d in diffs if avg_diff > 0):
             return 'linear'
 
         # 检查是否对数刻度
-        ratios = [tick_labels[i+1] / tick_labels[i] for i in range(len(tick_labels)-1) if tick_labels[i] > 0]
+        ratios = [tick_labels[i +1] / tick_labels[i] for i in range(len(tick_labels) -1) if tick_labels[i] > 0]
         if ratios:
             avg_ratio = sum(ratios) / len(ratios)
             if all(abs(r / avg_ratio - 1) < 0.1 for r in ratios if avg_ratio > 0):
@@ -467,7 +467,7 @@ def main():
     print(f"  数据点：{len(chart_data.data_points[0])} 个")
 
     for i, point in enumerate(chart_data.data_points[0][:3]):
-        print(f"    点{i+1}: ({point.x}, {point.y})")
+        print(f"    点{i +1}: ({point.x}, {point.y})")
 
     # 3. 测试图表检测
     print("\n[3/4] 测试图表标题检测...")

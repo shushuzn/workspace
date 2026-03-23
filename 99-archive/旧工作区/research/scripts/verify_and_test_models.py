@@ -31,15 +31,15 @@ try:
     forces = graphite.get_forces()
 
     print(f"  [OK] 石墨能量：{energy:.4f} eV")
-    print(f"  [OK] 每原子能量：{energy/len(graphite):.4f} eV/atom")
+    print(f"  [OK] 每原子能量：{energy /len(graphite):.4f} eV/atom")
     print(f"  [OK] 最大力：{max(abs(forces.flatten())):.4f} eV/A")
 
     # 与 DFT 对比
     dft_ref = -9.17  # MP DFT 参考值
-    error = abs(energy/len(graphite) - dft_ref) * 1000
+    error = abs(energy /len(graphite) - dft_ref) * 1000
     print(f"\n  与 DFT 对比:")
     print(f"    DFT 参考：{dft_ref:.4f} eV/atom")
-    print(f"    MACE-MP: {energy/len(graphite):.4f} eV/atom")
+    print(f"    MACE-MP: {energy /len(graphite):.4f} eV/atom")
     print(f"    误差：{error:.1f} meV/atom")
 
     if error < 10:
@@ -90,7 +90,7 @@ try:
         energy = c60.get_potential_energy()
 
         print(f"  [OK] C60 能量：{energy:.4f} eV")
-        print(f"  [OK] 每原子能量：{energy/len(c60):.4f} eV/atom")
+        print(f"  [OK] 每原子能量：{energy /len(c60):.4f} eV/atom")
 
         chgnet_available = True
     else:
@@ -115,12 +115,12 @@ report = {
     'mace_mp': {
         'available': mace_available,
         'model_path': 'C:\\Users\\***\\.cache\\mace\\20231210mace128L0_energy_epoch249model',
-        'test_energy_per_atom': energy/len(graphite) if mace_available else None,
+        'test_energy_per_atom': energy /len(graphite) if mace_available else None,
         'error_vs_dft_meV': error if mace_available else None
     },
     'chgnet': {
         'available': chgnet_available,
-        'test_energy_per_atom': energy/len(c60) if chgnet_available else None
+        'test_energy_per_atom': energy /len(c60) if chgnet_available else None
     },
     'next_steps': [
         '运行 MACE 迁移学习微调',

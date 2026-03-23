@@ -121,13 +121,13 @@ CLI interface"""
     result = route_task(task)
 
     print(f"\n🔀 Task Router Result")
-    print(f"{'='*50}")
+    print(f"{'=' *50}")
     print(f"Task: {result['task']}")
     print(f"Primary Persona: {result['primary_persona'].upper()}")
     print(f"\nExecution Plan:")
     for i, step in enumerate(result['steps'], 1):
         print(f"  {i}. {step['persona'].upper()} → {step['action']}")
-    print(f"\nConfidence: {result['confidence']*100}%")
+    print(f"\nConfidence: {result['confidence'] *100}%")
 
 if __name__ == "__main__":
     run_cli()

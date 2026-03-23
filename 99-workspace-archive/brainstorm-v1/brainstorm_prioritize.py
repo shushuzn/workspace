@@ -105,9 +105,9 @@ def save_matrix(matrix):
 
 def print_matrix(matrix):
     """打印优先级矩阵"""
-    print(f"\n{'='*60}")
+    print(f"\n{'=' *60}")
     print("📊 优先级矩阵")
-    print(f"{'='*60}\n")
+    print(f"{'=' *60}\n")
 
     priorities = [
         ("P0", "🔴 高价值 + 低难度", "立即执行"),
@@ -126,9 +126,9 @@ def print_matrix(matrix):
         print()
 
 def main():
-    print(f"{'='*60}")
+    print(f"{'=' *60}")
     print("🎯 优先级排序")
-    print(f"{'='*60}\n")
+    print(f"{'=' *60}\n")
 
     ideas = load_shortlist()
 

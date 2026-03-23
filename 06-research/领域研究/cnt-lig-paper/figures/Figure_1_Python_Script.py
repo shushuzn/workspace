@@ -107,7 +107,7 @@ for i, phase in enumerate(phases):
     x, y = phase['position']
 
     # Box
-    box = FancyBboxPatch((x-130, y-80), 260, 160,
+    box = FancyBboxPatch((x -130, y -80), 260, 160,
                          boxstyle='round,pad=10,rounding_size=15',
                          linewidth=2.5, edgecolor=phase['color'],
                          facecolor=phase['color'] + '20',  # 20% opacity
@@ -115,26 +115,26 @@ for i, phase in enumerate(phases):
     ax.add_patch(box)
 
     # Phase number
-    circle = Circle((x-110, y+60), 18, color=phase['color'], zorder=3)
+    circle = Circle((x -110, y +60), 18, color=phase['color'], zorder=3)
     ax.add_patch(circle)
-    ax.text(x-110, y+60, str(i+1), fontsize=11, fontweight='bold',
+    ax.text(x -110, y +60, str(i +1), fontsize=11, fontweight='bold',
             color='white', ha='center', va='center', zorder=4)
 
     # Title
-    ax.text(x-80, y+65, phase['title'], fontsize=11, fontweight='bold',
+    ax.text(x -80, y +65, phase['title'], fontsize=11, fontweight='bold',
             color=phase['color'], ha='left', va='top', fontfamily='Arial')
 
     # Time
-    ax.text(x+110, y+65, phase['time'], fontsize=9, fontstyle='italic',
+    ax.text(x +110, y +65, phase['time'], fontsize=9, fontstyle='italic',
             color='#666666', ha='right', va='top', fontfamily='Arial')
 
     # Items
     for j, item in enumerate(phase['items']):
         y_pos = y + 35 - j * 35
         marker_color = colors['peak'] if '★' in item or '2.40' in item else phase['color']
-        ax.text(x-105, y_pos, '●', fontsize=8, color=marker_color,
+        ax.text(x -105, y_pos, '●', fontsize=8, color=marker_color,
                 ha='left', va='center', fontfamily='Arial')
-        ax.text(x-95, y_pos, item, fontsize=9, color=colors['text'],
+        ax.text(x -95, y_pos, item, fontsize=9, color=colors['text'],
                 ha='left', va='center', fontfamily='Arial')
 
 # Draw arrows (circular flow)
@@ -175,9 +175,9 @@ metrics = [
 for i, (icon, text1, text2) in enumerate(metrics):
     y_pos = metrics_y[i]
     ax.text(470, y_pos, icon, fontsize=14, ha='left', va='center')
-    ax.text(500, y_pos+3, text1, fontsize=10, fontweight='bold',
+    ax.text(500, y_pos +3, text1, fontsize=10, fontweight='bold',
             color=colors['text'], ha='left', va='bottom', fontfamily='Arial')
-    ax.text(500, y_pos-8, text2, fontsize=9, color='#666666',
+    ax.text(500, y_pos -8, text2, fontsize=9, color='#666666',
             ha='left', va='top', fontfamily='Arial')
 
 # Bottom footer

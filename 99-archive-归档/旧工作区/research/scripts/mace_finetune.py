@@ -210,11 +210,11 @@ if mace_loaded:
             patience_counter += 1
 
         if (epoch + 1) % 50 == 0:
-            print(f"    Epoch [{epoch+1}/{n_epochs}], Loss: {loss.item():.4f}, Best: {best_loss:.4f}")
+            print(f"    Epoch [{epoch +1}/{n_epochs}], Loss: {loss.item():.4f}, Best: {best_loss:.4f}")
 
         # 早停
         if patience_counter >= max_patience:
-            print(f"    早停于 Epoch {epoch+1}")
+            print(f"    早停于 Epoch {epoch +1}")
             break
 
     # 加载最佳模型

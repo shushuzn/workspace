@@ -86,7 +86,7 @@ def main():
     print(f"\n  Symbol:          {result['symbol']}")
     print(f"  Aggregate Score: {result['aggregate_score']}")
     print(f"  Sentiment:       {result['sentiment'].upper()}")
-    print(f"  Confidence:      {result['confidence']*100:.0f}%")
+    print(f"  Confidence:      {result['confidence'] *100:.0f}%")
     print(f"\n  Sources:")
     for name, data in result["sources"].items():
         print(f"    {name}: {data['score']} (weight: {data['weight']})")

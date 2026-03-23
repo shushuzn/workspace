@@ -47,9 +47,9 @@ t_dwell = d / v
 q_0 = 2 * absorb * P / (np.pi * d**2)  # Peak power density
 
 print(f"  Power: {P} W")
-print(f"  Speed: {v*1000:.1f} mm/s")
-print(f"  Spot size: {d*1e6:.0f} um")
-print(f"  Dwell time: {t_dwell*1e6:.1f} us")
+print(f"  Speed: {v *1000:.1f} mm/s")
+print(f"  Spot size: {d *1e6:.0f} um")
+print(f"  Dwell time: {t_dwell *1e6:.1f} us")
 print(f"  Peak power density: {q_0:.2e} W/m2")
 
 # ============================================================================
@@ -73,9 +73,9 @@ z = np.linspace(0, Z_max, nz)
 dt = 0.1e-6     # 0.1 us
 nt = 500        # time steps
 
-print(f"  Radial: {nr} points, {R_max*1e6:.0f} um, dr = {dr*1e6:.1f} um")
-print(f"  Axial: {nz} points, {Z_max*1e6:.0f} um, dz = {dz*1e6:.1f} um")
-print(f"  Time: {nt} steps, dt = {dt*1e6:.1f} us")
+print(f"  Radial: {nr} points, {R_max *1e6:.0f} um, dr = {dr *1e6:.1f} um")
+print(f"  Axial: {nz} points, {Z_max *1e6:.0f} um, dz = {dz *1e6:.1f} um")
+print(f"  Time: {nt} steps, dt = {dt *1e6:.1f} us")
 
 # Stability check
 stability_r = alpha * dt / dr**2
@@ -108,24 +108,24 @@ for n in range(nt):
     T_new = T.copy()
 
     # Internal nodes (2D diffusion in cylindrical coordinates)
-    for i in range(1, nr-1):
-        for j in range(1, nz-1):
+    for i in range(1, nr -1):
+        for j in range(1, nz -1):
             # Radial term
             r_i = r[i]
             if r_i > 0:
                 k_r_iphalf = k  # Interface conductivity
                 k_r_imhalf = k
-                r_iphalf = r[i] + dr/2
-                r_imhalf = r[i] - dr/2
+                r_iphalf = r[i] + dr /2
+                r_imhalf = r[i] - dr /2
 
-                radial_term = (k_r_iphalf * r_iphalf * (T[i+1,j] - T[i,j]) -
-                              k_r_imhalf * r_imhalf * (T[i,j] - T[i-1,j])) / (r_i * dr**2)
+                radial_term = (k_r_iphalf * r_iphalf * (T[i +1,j] - T[i,j]) -
+                              k_r_imhalf * r_imhalf * (T[i,j] - T[i -1,j])) / (r_i * dr**2)
             else:
                 # At r=0, use L'Hopital's rule
-                radial_term = 2 * k * (T[i+1,j] - 2*T[i,j] + T[i-1,j]) / dr**2
+                radial_term = 2 * k * (T[i +1,j] - 2 *T[i,j] + T[i -1,j]) / dr**2
 
             # Axial term
-            axial_term = k * (T[i,j+1] - 2*T[i,j] + T[i,j-1]) / dz**2
+            axial_term = k * (T[i,j +1] - 2 *T[i,j] + T[i,j -1]) / dz**2
 
             # Update
             T_new[i,j] = T[i,j] + dt / (rho * Cp) * (radial_term + axial_term)
@@ -140,7 +140,7 @@ for n in range(nt):
     # z = 0 (surface with laser heating)
     for i in range(nr):
         # Gaussian laser profile
-        q_laser = q_0 * np.exp(-2 * r[i]**2 / (d/2)**2)
+        q_laser = q_0 * np.exp(-2 * r[i]**2 / (d /2)**2)
 
         # Only heat during dwell time
         if n * dt < t_dwell:
@@ -183,7 +183,7 @@ print(f"    T_max = {T_max_1d:.1f} K")
 if T_max_1d > 0:
     error = (T_max_2d - T_max_1d) / T_max_1d * 100
     print(f"\n  Comparison:")
-    print(f"    2D vs 1D: {T_max_2d/T_max_1d*100:.1f}%")
+    print(f"    2D vs 1D: {T_max_2d /T_max_1d *100:.1f}%")
     print(f"    Difference: {error:+.1f}%")
 
     if T_max_2d < T_max_1d:
@@ -206,7 +206,7 @@ z_um = z * 1e6
 contour = ax1.contourf(r_um, z_um, T_final.T, levels=50, cmap='hot')
 ax1.set_xlabel('Radial position (um)', fontsize=12)
 ax1.set_ylabel('Depth (um)', fontsize=12)
-ax1.set_title(f'Temperature Distribution at t={time_history[-1]*1e6:.0f} us\nT_max = {T_max_2d:.0f} K', fontsize=14)
+ax1.set_title(f'Temperature Distribution at t={time_history[-1] *1e6:.0f} us\nT_max = {T_max_2d:.0f} K', fontsize=14)
 cbar = plt.colorbar(contour, ax=ax1)
 cbar.set_label('Temperature (K)', fontsize=12)
 ax1.set_aspect('equal')
@@ -217,7 +217,7 @@ print(f"    [OK] temp_2d_contour.png")
 
 # Plot 2: Temperature vs Radial Position (surface)
 fig2, ax2 = plt.subplots(figsize=(8, 6), dpi=300)
-ax2.plot(r_um, T_final[:, 0], 'r-', linewidth=2, label=f't={time_history[-1]*1e6:.0f} us')
+ax2.plot(r_um, T_final[:, 0], 'r-', linewidth=2, label=f't={time_history[-1] *1e6:.0f} us')
 ax2.axhline(y=T_max_1d, color='b', linestyle='--', linewidth=2, label=f'1D estimate={T_max_1d:.0f}K')
 ax2.set_xlabel('Radial position (um)', fontsize=12)
 ax2.set_ylabel('Surface Temperature (K)', fontsize=12)
@@ -231,7 +231,7 @@ print(f"    [OK] temp_vs_r_2d.png")
 
 # Plot 3: Temperature vs Depth (center)
 fig3, ax3 = plt.subplots(figsize=(8, 6), dpi=300)
-ax3.plot(T_final[0, :], z_um, 'b-', linewidth=2, label=f't={time_history[-1]*1e6:.0f} us')
+ax3.plot(T_final[0, :], z_um, 'b-', linewidth=2, label=f't={time_history[-1] *1e6:.0f} us')
 ax3.axvline(x=T_max_1d, color='r', linestyle='--', linewidth=2, label=f'1D estimate={T_max_1d:.0f}K')
 ax3.set_xlabel('Temperature (K)', fontsize=12)
 ax3.set_ylabel('Depth (um)', fontsize=12)
@@ -254,11 +254,11 @@ print("=" * 70)
 print(f"\nKey Results:")
 print(f"  T_max (2D): {T_max_2d:.1f} K")
 print(f"  T_max (1D): {T_max_1d:.1f} K")
-print(f"  Ratio: {T_max_2d/T_max_1d*100:.1f}%")
+print(f"  Ratio: {T_max_2d /T_max_1d *100:.1f}%")
 
 if T_max_2d < T_max_1d:
     print(f"  [OK] 2D model shows lateral heat dissipation effect")
-    print(f"       T_max reduced by {(1 - T_max_2d/T_max_1d)*100:.1f}%")
+    print(f"       T_max reduced by {(1 - T_max_2d /T_max_1d) *100:.1f}%")
 
 print(f"\nFigures saved to: {figures_dir}")
 

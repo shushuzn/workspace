@@ -171,14 +171,14 @@ class TrendAnalyzer:
             # True Range
             tr = max(
                 highs[i] - lows[i],
-                abs(highs[i] - closes[i-1]),
-                abs(lows[i] - closes[i-1])
+                abs(highs[i] - closes[i -1]),
+                abs(lows[i] - closes[i -1])
             )
             tr_list.append(tr)
 
             # +DM and -DM
-            up_move = highs[i] - highs[i-1]
-            down_move = lows[i-1] - lows[i]
+            up_move = highs[i] - highs[i -1]
+            down_move = lows[i -1] - lows[i]
 
             if up_move > down_move and up_move > 0:
                 plus_dm.append(up_move)
@@ -445,7 +445,7 @@ class TrendAnalyzer:
             if i < period - 1:
                 ma.append(None)
             else:
-                avg = sum(prices[i-period+1:i+1]) / period
+                avg = sum(prices[i -period +1:i +1]) / period
                 ma.append(avg)
         return ma
 
@@ -482,7 +482,7 @@ class TrendAnalyzer:
                 avg = sum(prices[:period]) / period
                 ema.append(avg)
             else:
-                ema.append((prices[i] - ema[i-1]) * multiplier + ema[i-1])
+                ema.append((prices[i] - ema[i -1]) * multiplier + ema[i -1])
 
         return ema
 
@@ -676,7 +676,7 @@ def generate_test_data(num_candles: int = 100) -> List[Dict]:
         low_price = min(open_price, close_price) * (1 - random.uniform(0, 0.02))
 
         candles.append({
-            'date': f'2026-01-{i+1:02d}',
+            'date': f'2026-01-{i +1:02d}',
             'open': round(open_price, 2),
             'high': round(high_price, 2),
             'low': round(low_price, 2),

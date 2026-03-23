@@ -100,7 +100,7 @@ Run full benchmark suite"""
             print(f"Benchmarking: {tool_path.name}...", end=" ")
             result = benchmark_tool(tool_path)
             results["benchmarks"][tool_path.name] = result
-            print(f"Avg: {result['avg']*1000:.1f}ms")
+            print(f"Avg: {result['avg'] *1000:.1f}ms")
         else:
             print(f"Skip: {tool_path.name} (not found)")
 
@@ -111,7 +111,7 @@ Run full benchmark suite"""
     print("\n[TOP 3 FASTEST TOOLS]")
     sorted_tools = sorted(results["benchmarks"].items(), key=lambda x: x[1]["avg"])
     for i, (name, data) in enumerate(sorted_tools[:3], 1):
-        print(f"  {i}. {name}: {data['avg']*1000:.1f}ms")
+        print(f"  {i}. {name}: {data['avg'] *1000:.1f}ms")
 
     print(f"\n[Results saved to: {BENCHMARK_FILE}]")
     print("=" * 50)

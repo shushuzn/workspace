@@ -177,7 +177,7 @@ Even more temporal content.
         crystal = TimeCrystalState(
             crystal_id="TC_TEST_001",
             temporal_modes=[mode],
-            drive_frequency=1.0/7.0,
+            drive_frequency=1.0 /7.0,
             subharmonic_response=0.0,
             temporal_order_parameter=0.0,
             symmetry_broken=False,
@@ -210,7 +210,7 @@ Even more temporal content.
         crystal = TimeCrystalState(
             crystal_id="TC_TEST_001",
             temporal_modes=[mode],
-            drive_frequency=1.0/7.0,
+            drive_frequency=1.0 /7.0,
             subharmonic_response=0.5,
             temporal_order_parameter=0.6,
             symmetry_broken=True,
@@ -233,15 +233,15 @@ Even more temporal content.
         from datetime import datetime
 
         modes = [
-            TemporalMode(mode_id=f"TM_{i}", frequency=0.1*i, amplitude=0.5,
-                        phase=0.3*i, coherence_time=30.0, energy=1.0)
+            TemporalMode(mode_id=f"TM_{i}", frequency=0.1 *i, amplitude=0.5,
+                        phase=0.3 *i, coherence_time=30.0, energy=1.0)
             for i in range(3)
         ]
 
         crystal = TimeCrystalState(
             crystal_id="TC_TEST_001",
             temporal_modes=modes,
-            drive_frequency=1.0/7.0,
+            drive_frequency=1.0 /7.0,
             subharmonic_response=0.3,
             temporal_order_parameter=0.5,
             symmetry_broken=False,
@@ -275,7 +275,7 @@ Even more temporal content.
         crystal = TimeCrystalState(
             crystal_id="TC_TEST_001",
             temporal_modes=[mode],
-            drive_frequency=1.0/7.0,
+            drive_frequency=1.0 /7.0,
             subharmonic_response=0.4,
             temporal_order_parameter=0.6,
             symmetry_broken=True,

@@ -153,7 +153,7 @@ def analyze_workflow(workflow_path):
     print(f"\n【基本信息】")
     print(f"  总步骤: {len(steps)}")
     print(f"  必需步骤: {mandatory_count}")
-    print(f"  预计时间: {total_time}秒 ({total_time/60:.1f}分钟)")
+    print(f"  预计时间: {total_time}秒 ({total_time /60:.1f}分钟)")
 
     # 检查问题
     issues = []

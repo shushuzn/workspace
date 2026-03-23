@@ -88,7 +88,7 @@ class SelfHealer:
 
         if not dry_run:
             print("\n  Healed: " + str(healed) + " files")
-            print("  Health: " + str(int(100 - len(self.issues)/10)) + "%")
+            print("  Health: " + str(int(100 - len(self.issues) /10)) + "%")
             self.save_log(healed)
 
     def save_log(self, healed_count):

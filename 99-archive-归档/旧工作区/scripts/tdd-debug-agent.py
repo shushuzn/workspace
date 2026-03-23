@@ -82,9 +82,9 @@ class TDDDebugAgent:
 
     def run(self, problem: str = None, file_path: str = None, issue_url: str = None):
         """运行 Debug 流水线"""
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"🔧 TDD 自动化 Debug 流水线")
-        print(f"{'='*60}\n")
+        print(f"{'=' *60}\n")
 
         self.state['start_time'] = datetime.now()
 
@@ -116,12 +116,12 @@ class TDDDebugAgent:
         self.state['end_time'] = datetime.now()
         duration = (self.state['end_time'] - self.state['start_time']).total_seconds()
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         if success:
             print(f"✅ Debug 完成！耗时：{duration:.1f}秒")
         else:
             print(f"❌ Debug 失败，达到最大重试次数")
-        print(f"{'='*60}\n")
+        print(f"{'=' *60}\n")
 
         return success
 

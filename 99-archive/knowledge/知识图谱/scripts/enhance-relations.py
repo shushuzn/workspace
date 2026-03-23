@@ -102,7 +102,7 @@ class RelationExtractor:
         for author, papers in author_papers.items():
             if len(papers) > 1:
                 for i, p1 in enumerate(papers):
-                    for p2 in papers[i+1:]:
+                    for p2 in papers[i +1:]:
                         relations.append({
                             "source": p1,
                             "target": p2,
@@ -122,7 +122,7 @@ class RelationExtractor:
         for method, papers in method_papers.items():
             if len(papers) > 1:
                 for i, p1 in enumerate(papers):
-                    for p2 in papers[i+1:]:
+                    for p2 in papers[i +1:]:
                         relations.append({
                             "source": p1,
                             "target": p2,

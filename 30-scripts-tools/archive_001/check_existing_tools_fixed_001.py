@@ -95,7 +95,7 @@ def check_existing_tools():
             for f in sorted(files)[:5]:
                 print(f"  - {f}")
             if len(files) > 5:
-                print(f"  ... 还有 {len(files)-5} 个")
+                print(f"  ... 还有 {len(files) -5} 个")
 
     return {
         "total_py_files": len(py_files),

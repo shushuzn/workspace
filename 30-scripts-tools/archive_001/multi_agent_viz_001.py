@@ -41,9 +41,9 @@ def generate_ascii():
                 usage[p] += 1
 
     output = []
-    output.append("\n" + "="*60)
+    output.append("\n" + "=" *60)
     output.append("  MULTI-AGENT COLLABORATION STATUS")
-    output.append("="*60)
+    output.append("=" *60)
     output.append(f"\n  Updated: {datetime.now().strftime('%H:%M:%S')}\n")
 
     # ASCII persona diagram
@@ -58,9 +58,9 @@ def generate_ascii():
     output.append("      [METACOGNITION]")
 
     # Usage stats
-    output.append("\n" + "-"*60)
+    output.append("\n" + "-" *60)
     output.append("  PERSONA USAGE STATS")
-    output.append("-"*60)
+    output.append("-" *60)
 
     max_usage = max(usage.values()) if usage.values() else 1
     for p in PERSONAS:
@@ -69,9 +69,9 @@ def generate_ascii():
         pct = (usage[p] / len(runs) * 100) if runs else 0
         output.append(f"  {p.upper():15} {bar:30} {usage[p]:3} ({pct:.1f}%)")
 
-    output.append("-"*60)
+    output.append("-" *60)
     output.append(f"  Total Executions: {len(runs)}")
-    output.append("="*60 + "\n")
+    output.append("=" *60 + "\n")
 
     return "\n".join(output)
 

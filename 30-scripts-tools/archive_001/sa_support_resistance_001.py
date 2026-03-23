@@ -54,8 +54,8 @@ class SupportResistanceAnalyzer:
         for i in range(window, len(candles) - window):
             # 检测局部高点
             high = candles[i]['high']
-            is_high = all(candles[i-j]['high'] < high for j in range(1, window+1)) and \
-                      all(candles[i+j]['high'] < high for j in range(1, window+1))
+            is_high = all(candles[i -j]['high'] < high for j in range(1, window +1)) and \
+                      all(candles[i +j]['high'] < high for j in range(1, window +1))
 
             if is_high:
                 pivots.append({
@@ -67,8 +67,8 @@ class SupportResistanceAnalyzer:
 
             # 检测局部低点
             low = candles[i]['low']
-            is_low = all(candles[i-j]['low'] > low for j in range(1, window+1)) and \
-                     all(candles[i+j]['low'] > low for j in range(1, window+1))
+            is_low = all(candles[i -j]['low'] > low for j in range(1, window +1)) and \
+                     all(candles[i +j]['low'] > low for j in range(1, window +1))
 
             if is_low:
                 pivots.append({
@@ -527,7 +527,7 @@ def generate_test_data(num_candles: int = 100) -> List[Dict]:
         low_price = min(open_price, close_price) * (1 - random.uniform(0, 0.02))
 
         candles.append({
-            'date': f'2026-01-{i+1:02d}',
+            'date': f'2026-01-{i +1:02d}',
             'open': round(open_price, 2),
             'high': round(high_price, 2),
             'low': round(low_price, 2),

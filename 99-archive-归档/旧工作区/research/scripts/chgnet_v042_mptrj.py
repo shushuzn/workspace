@@ -131,7 +131,7 @@ if model_loaded:
             result = chgnet_model.predict_structure(graphite)
             energy = result['e']
             print(f"  [OK] 石墨能量：{energy:.4f} eV")
-            print(f"  [OK] 每原子能量：{energy/len(graphite):.4f} eV/atom")
+            print(f"  [OK] 每原子能量：{energy /len(graphite):.4f} eV/atom")
         else:
             print(f"  [INFO] 模型已加载，但未测试能量计算")
 

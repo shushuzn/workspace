@@ -6,7 +6,7 @@ from pathlib import Path
 
 reg_files = [f for f in Path('.').glob('reg_*.py')]
 print(f'Found {len(reg_files)} reg_ files')
-print('='*70)
+print('=' *70)
 
 # 读取每个文件的关键信息
 for f in sorted(reg_files):

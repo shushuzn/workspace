@@ -137,7 +137,7 @@ class AlignmentCalculator:
             "avg_alignment": sum(results) / len(results),
             "min_alignment": min(results),
             "max_alignment": max(results),
-            "std_alignment": (sum((x - sum(results)/len(results))**2 for x in results) / len(results)) ** 0.5,
+            "std_alignment": (sum((x - sum(results) /len(results))**2 for x in results) / len(results)) ** 0.5,
             "count": len(results)
         }
 

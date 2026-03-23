@@ -176,7 +176,7 @@ def generate_report() -> None:
 ║       MULTI-AGENT LEARNING REPORT                         ║
 ╠══════════════════════════════════════════════════════════╣
 ║  Total Tasks Recorded: {total:5}                              ║
-║  Successful: {success:5} ({success/total*100 if total else 0:.1f}%)                              ║
+║  Successful: {success:5} ({success /total *100 if total else 0:.1f}%)                              ║
 ║  Patterns Learned: {len(patterns.get('persona_scores', {})):5}                        ║
 ╠══════════════════════════════════════════════════════════╣
 ║  TOP PERSONA-TASK COMBINATIONS                           ║"""

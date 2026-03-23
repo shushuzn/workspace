@@ -100,7 +100,7 @@ class FigureEnhancer:
         skipped_count = 0
 
         for i, img_file in enumerate(image_files):
-            print(f"\n[{i+1}/{len(image_files)}] {img_file.name}")
+            print(f"\n[{i +1}/{len(image_files)}] {img_file.name}")
 
             output_file = output_dir / img_file.name
             result = self.process(img_file, output_file, auto_enhance)
@@ -127,7 +127,7 @@ class FigureEnhancer:
         with open(report_file, 'w', encoding='utf-8') as f:
             json.dump(report, f, indent=2, ensure_ascii=False)
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"✅ 批量处理完成")
         print(f"   总数：{len(image_files)}")
         print(f"   增强：{enhanced_count}")
@@ -170,7 +170,7 @@ def main():
 
         result = enhancer.process(image_path, args.output, not args.no_auto_enhance)
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         if result['success']:
             if result.get('enhanced'):
                 print(f"✅ 增强完成")

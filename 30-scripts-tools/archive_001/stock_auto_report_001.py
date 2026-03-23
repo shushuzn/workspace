@@ -43,9 +43,9 @@ class StockAutoReport:
         if include_sections is None:
             include_sections = ["summary", "price", "indicators", "trend", "financial", "recommendation"]
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Auto Report Generator v1.0.0 - {self.symbol}")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         # 收集各部分数据
         if "summary" in include_sections:

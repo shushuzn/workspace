@@ -56,9 +56,9 @@ Fixes:
 
 执行自由联想"""
 
-    print("="*60)
+    print("=" *60)
     print("🧠 头脑风暴 Step 3: 股票分析工作流优化")
-    print("="*60)
+    print("=" *60)
 
     # 现有问题
     issues = [

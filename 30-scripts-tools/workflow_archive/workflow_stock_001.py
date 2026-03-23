@@ -99,22 +99,22 @@ class WorkflowStock:
                 args = [a.replace("AAPL", symbol) for a in args]
 
             cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
-            print(f"[{i+1}/{len(wf['steps'])}] {tool}...", end=" ", flush=True)
+            print(f"[{i +1}/{len(wf['steps'])}] {tool}...", end=" ", flush=True)
 
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=60, encoding="utf-8", errors="replace")
                 status = "OK" if result.returncode == 0 else "FAIL"
                 print(status)
                 self._log(workflow_id, tool, status)
-                results.append({"step": i+1, "tool": tool, "status": status})
+                results.append({"step": i +1, "tool": tool, "status": status})
             except subprocess.TimeoutExpired:
                 print("TIMEOUT")
                 self._log(workflow_id, tool, "TIMEOUT")
-                results.append({"step": i+1, "tool": tool, "status": "TIMEOUT"})
+                results.append({"step": i +1, "tool": tool, "status": "TIMEOUT"})
             except Exception as e:
                 print(f"ERROR: {e}")
                 self._log(workflow_id, tool, "ERROR")
-                results.append({"step": i+1, "tool": tool, "status": "ERROR"})
+                results.append({"step": i +1, "tool": tool, "status": "ERROR"})
 
         success = sum(1 for r in results if r["status"] == "OK")
         print("=" * 50)
@@ -185,7 +185,7 @@ Check health of stock analysis tools"""
             "sa_tools_total": len(sa_tools),
             "sa_tools_checked": len(results),
             "valid": valid,
-            "health_score": f"{(valid/len(results)*100):.0f}%" if results else "N/A"
+            "health_score": f"{(valid /len(results) *100):.0f}%" if results else "N/A"
         }
 
 if __name__ == "__main__":

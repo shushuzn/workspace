@@ -186,18 +186,18 @@ class AntiBypassEngine:
                     timestamps.append((i, datetime.fromisoformat(ts)))
             except (json.JSONDecodeError, IOError, OSError):
                 detected = True
-                evidence.append(f"第 {i+1} 行日志格式错误")
+                evidence.append(f"第 {i +1} 行日志格式错误")
 
         # 检查时间是否连续
         if len(timestamps) >= 2:
             for i in range(1, len(timestamps)):
-                prev_idx, prev_ts = timestamps[i-1]
+                prev_idx, prev_ts = timestamps[i -1]
                 curr_idx, curr_ts = timestamps[i]
 
                 diff = (curr_ts - prev_ts).total_seconds()
                 if diff < -60:  # 时间倒流 >1 分钟
                     detected = True
-                    evidence.append(f"日志时间倒流：行 {prev_idx+1} -> {curr_idx+1}")
+                    evidence.append(f"日志时间倒流：行 {prev_idx +1} -> {curr_idx +1}")
 
         return {
             "detected": detected,

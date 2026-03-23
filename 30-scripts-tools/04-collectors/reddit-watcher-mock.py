@@ -37,7 +37,7 @@ def generate_mock_posts(subreddit, count=20):
 
         posts.append({
             'subreddit': subreddit,
-            'title': f"{random.choice(SAMPLE_TITLES)} ({i+1})",
+            'title': f"{random.choice(SAMPLE_TITLES)} ({i +1})",
             'score': score,
             'num_comments': comments,
             'url': f"https://reddit.com/r/{subreddit}/mock/{i}",

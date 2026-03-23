@@ -63,7 +63,7 @@ class GraphGenerator:
         # 创建边 (共现关系)
         links = []
         for i, kw1 in enumerate(all_keywords):
-            for kw2 in list(all_keywords)[i+1:]:
+            for kw2 in list(all_keywords)[i +1:]:
                 # 计算共现次数
                 cooccurrence = sum(
                     1 for kws in paper_keywords

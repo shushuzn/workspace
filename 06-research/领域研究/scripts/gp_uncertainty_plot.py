@@ -99,14 +99,14 @@ ax = axes[1, 1]
 v_fixed = 30  # 固定速度
 P剖面 = np.linspace(0.1, 0.5, 50)
 E 剖面 = P 剖面 / (v_fixed * 0.01)
-X 剖面 = np.column_stack([P 剖面，[v_fixed]*len(P 剖面), E 剖面，[3.3]*len(P 剖面)])
+X 剖面 = np.column_stack([P 剖面，[v_fixed] *len(P 剖面), E 剖面，[3.3] *len(P 剖面)])
 X 剖面_scaled = scaler.transform(X 剖面)
 sigma 剖面，sigma_std 剖面 = gp.predict(X 剖面_scaled, return_std=True)
 
 ax.plot(P 剖面，sigma 剖面，'b-', linewidth=2, label='预测')
 ax.fill_between(P 剖面，
-                sigma 剖面 - 2*sigma_std 剖面，
-                sigma 剖面 + 2*sigma_std 剖面，
+                sigma 剖面 - 2 *sigma_std 剖面，
+                sigma 剖面 + 2 *sigma_std 剖面，
                 alpha=0.3, label='95% 置信区间')
 ax.scatter(df[df['v_mms'].between(28, 32)]['P_W'],
            df[df['v_mms'].between(28, 32)]['sigma_Sm'],

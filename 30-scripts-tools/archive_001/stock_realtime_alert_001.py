@@ -135,7 +135,7 @@ class StockRealtimeAlert:
         if "price" in data and "resistance" in data:
             price = data["price"]
             resistance = data["resistance"]
-            if price > resistance * (1 + self.config["support_resistance"]/100):
+            if price > resistance * (1 + self.config["support_resistance"] /100):
                 self.alerts.append(Alert(
                     symbol=self.symbol,
                     alert_type=AlertType.BREAKOUT,

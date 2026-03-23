@@ -227,8 +227,8 @@ class PatternRecognition:
         troughs = []
 
         for i in range(5, len(candles) - 5):
-            window_high = max(c['high'] for c in candles[i-5:i+6])
-            window_low = min(c['low'] for c in candles[i-5:i+6])
+            window_high = max(c['high'] for c in candles[i -5:i +6])
+            window_low = min(c['low'] for c in candles[i -5:i +6])
 
             if candles[i]['high'] == window_high:
                 peaks.append((i, candles[i]['high']))
@@ -238,9 +238,9 @@ class PatternRecognition:
         # 检测头肩顶（3 个峰值，中间最高）
         if len(peaks) >= 3:
             for i in range(1, len(peaks) - 1):
-                left_shoulder = peaks[i-1][1]
+                left_shoulder = peaks[i -1][1]
                 head = peaks[i][1]
-                right_shoulder = peaks[i+1][1]
+                right_shoulder = peaks[i +1][1]
 
                 # 头肩顶条件：中间高，两边低且接近
                 if (head > left_shoulder * 1.02 and
@@ -259,9 +259,9 @@ class PatternRecognition:
         # 检测头肩底（3 个谷值，中间最低）
         if len(troughs) >= 3:
             for i in range(1, len(troughs) - 1):
-                left_shoulder = troughs[i-1][1]
+                left_shoulder = troughs[i -1][1]
                 head = troughs[i][1]
-                right_shoulder = troughs[i+1][1]
+                right_shoulder = troughs[i +1][1]
 
                 if (head < left_shoulder * 0.98 and
                     head < right_shoulder * 0.98 and
@@ -295,8 +295,8 @@ class PatternRecognition:
         troughs = []
 
         for i in range(3, len(candles) - 3):
-            window_high = max(c['high'] for c in candles[i-3:i+4])
-            window_low = min(c['low'] for c in candles[i-3:i+4])
+            window_high = max(c['high'] for c in candles[i -3:i +4])
+            window_low = min(c['low'] for c in candles[i -3:i +4])
 
             if candles[i]['high'] == window_high:
                 peaks.append((i, candles[i]['high']))
@@ -307,7 +307,7 @@ class PatternRecognition:
         if len(peaks) >= 2:
             for i in range(len(peaks) - 1):
                 peak1 = peaks[i][1]
-                peak2 = peaks[i+1][1]
+                peak2 = peaks[i +1][1]
 
                 if abs(peak1 - peak2) / peak1 < 0.03:  # 相差<3%
                     return {
@@ -315,7 +315,7 @@ class PatternRecognition:
                         'name': '双顶 (M 顶)',
                         'signal': 'bearish',
                         'strength': 'strong',
-                        'peak_indices': [peaks[i][0], peaks[i+1][0]],
+                        'peak_indices': [peaks[i][0], peaks[i +1][0]],
                         'description': '顶部双重阻力，看跌信号',
                         'confidence': 0.75
                     }
@@ -324,7 +324,7 @@ class PatternRecognition:
         if len(troughs) >= 2:
             for i in range(len(troughs) - 1):
                 trough1 = troughs[i][1]
-                trough2 = troughs[i+1][1]
+                trough2 = troughs[i +1][1]
 
                 if abs(trough1 - trough2) / trough1 < 0.03:
                     return {
@@ -332,7 +332,7 @@ class PatternRecognition:
                         'name': '双底 (W 底)',
                         'signal': 'bullish',
                         'strength': 'strong',
-                        'trough_indices': [troughs[i][0], troughs[i+1][0]],
+                        'trough_indices': [troughs[i][0], troughs[i +1][0]],
                         'description': '底部双重支撑，看涨信号',
                         'confidence': 0.75
                     }
@@ -357,7 +357,7 @@ class PatternRecognition:
         window_size = 5
 
         for i in range(window_size, len(candles), window_size):
-            window = candles[i-window_size:i]
+            window = candles[i -window_size:i]
             high = max(c['high'] for c in window)
             low = min(c['low'] for c in window)
             volatility = (high - low) / low
@@ -366,7 +366,7 @@ class PatternRecognition:
         if len(recent_volatility) >= 3:
             # 检查波动是否递减
             is_decreasing = all(
-                recent_volatility[i] > recent_volatility[i+1] * 1.1
+                recent_volatility[i] > recent_volatility[i +1] * 1.1
                 for i in range(len(recent_volatility) - 1)
             )
 
@@ -497,7 +497,7 @@ def generate_test_data(num_candles: int = 100) -> List[Dict]:
         low_price = min(open_price, close_price) * (1 - random.uniform(0, 0.02))
 
         candles.append({
-            'date': f'2026-01-{i+1:02d}',
+            'date': f'2026-01-{i +1:02d}',
             'open': round(open_price, 2),
             'high': round(high_price, 2),
             'low': round(low_price, 2),

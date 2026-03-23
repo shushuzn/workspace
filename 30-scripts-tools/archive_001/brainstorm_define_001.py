@@ -64,9 +64,9 @@ Fixes:
 
 Execute problem definition"""
 
-    print("="*60)
+    print("=" *60)
     print("[BRAINSTORM] Step 1: Problem Definition")
-    print("="*60)
+    print("=" *60)
 
     # Use argument or default
     if topic_arg:

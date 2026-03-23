@@ -439,7 +439,7 @@ def brainstorm_performance_efficiency(workflow):
 
     # 计算总超时时间
     total_timeout = sum(s.get("timeout_seconds", 0) for s in steps)
-    print(f"📊 总超时设置：{total_timeout}秒 ({total_timeout/60:.1f}分钟)")
+    print(f"📊 总超时设置：{total_timeout}秒 ({total_timeout /60:.1f}分钟)")
 
     if total_timeout > 3600:
         issues.append({

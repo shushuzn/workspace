@@ -289,9 +289,9 @@ class PrivacyPreservingLearning:
                            num_rounds: int = 5) -> List[CollaborationResult]:
         """Conduct collaborative training with privacy preservation"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🔐 Privacy-Preserving Collaborative Learning")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Parties: {len(parties)}")
         print(f"  Total Data: {sum(p.data_size for p in parties):,} samples")
         print(f"  Privacy Budget (ε): {self.privacy.total_epsilon}")
@@ -300,9 +300,9 @@ class PrivacyPreservingLearning:
         results = []
 
         for round_num in range(1, num_rounds + 1):
-            print(f"\n{'='*80}")
+            print(f"\n{'=' *80}")
             print(f"Round {round_num}/{num_rounds}")
-            print("="*80)
+            print("=" *80)
 
             # Each party computes local gradients
             local_gradients = []
@@ -361,18 +361,18 @@ class PrivacyPreservingLearning:
         results = self.collaborative_train(parties, num_rounds)
 
         # Final audit
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Final Security Audit")
-        print("="*80)
+        print("=" *80)
         audit_report = self.auditor.audit(self.mpc, self.encryption, self.privacy)
 
         # Summary
         final_accuracy = results[-1].aggregated_accuracy if results else 0
         total_privacy_cost = sum(r.privacy_cost for r in results)
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 Collaboration Summary")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Final Accuracy: {final_accuracy:.1%}")
         print(f"  Total Privacy Cost: {total_privacy_cost:.2f}")
         print(f"  Privacy Guarantee: {audit_report.privacy_guarantee:.0%}")
@@ -421,9 +421,9 @@ def demo_privacy_preserving_learning():
     result = system.run_with_audit(parties, num_rounds=5)
 
     # Print stats
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 System Statistics")
-    print("="*80)
+    print("=" *80)
 
     stats = system.get_system_stats()
     print(f"\n  Collaborations: {stats['collaborations']}")
@@ -457,9 +457,9 @@ def main():
     if args.demo or True:  # Default to demo
         demo_privacy_preserving_learning()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Privacy-preserving collaborative learning complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.14005")
     print("🎯 Key Achievements:")
     print("   - 99% privacy guarantee")

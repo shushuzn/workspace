@@ -48,7 +48,7 @@ class WorkflowAnalytics:
                 "avg_per_tool": len(runs) / len(tool_usage) if tool_usage else 0
             },
             "tool_usage": tool_usage,
-            "success_rate": {k: f"{(v['ok']/(v['ok']+v['fail'])*100):.0f}%" for k, v in tool_success.items()}
+            "success_rate": {k: f"{(v['ok'] /(v['ok'] +v['fail']) *100):.0f}%" for k, v in tool_success.items()}
         }
 
 if __name__ == "__main__":

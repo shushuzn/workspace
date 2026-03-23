@@ -10,7 +10,7 @@ tools = [f for f in Path('.').glob('*.py') if f.stem not in ['find_orphans', 'an
 tool_names = set(f.stem for f in tools)
 
 print(f'Total tools: {len(tools)}')
-print('='*70)
+print('=' *70)
 
 # 统计每个工具被其他工具调用的次数
 call_count = {}
@@ -34,15 +34,15 @@ for tool in tools:
 orphans = [(name, count) for name, count in call_count.items() if count == 0]
 
 print(f'Orphan files (0 dependencies): {len(orphans)}')
-print('='*70)
+print('=' *70)
 
 for name, count in sorted(orphans):
     print(f'  {name}')
 
 # 按类别分组
-print('\n' + '='*70)
+print('\n' + '=' *70)
 print('BY CATEGORY')
-print('='*70)
+print('=' *70)
 
 categories = {
     'test_': [],
@@ -89,4 +89,4 @@ for cat, items in sorted(categories.items(), key=lambda x: -len(x[1])):
         for item in sorted(items)[:10]:
             print(f'  {item}')
         if len(items) > 10:
-            print(f'  ... and {len(items)-10} more')
+            print(f'  ... and {len(items) -10} more')

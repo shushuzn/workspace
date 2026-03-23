@@ -120,7 +120,7 @@ class KeywordExtractor:
         cooccurrence = Counter()
 
         for i in range(len(words)):
-            for j in range(i+1, min(i+window_size, len(words))):
+            for j in range(i +1, min(i +window_size, len(words))):
                 word1, word2 = words[i], words[j]
                 if word1 != word2:
                     pair = tuple(sorted([word1, word2]))
@@ -153,16 +153,16 @@ class KeywordExtractor:
         # 提取双词短语
         bigrams = Counter()
         for i in range(len(words) - 1):
-            phrase = f"{words[i]} {words[i+1]}"
+            phrase = f"{words[i]} {words[i +1]}"
             # 过滤包含停用词的短语
-            if words[i] not in self.stopwords and words[i+1] not in self.stopwords:
+            if words[i] not in self.stopwords and words[i +1] not in self.stopwords:
                 bigrams[phrase] += 1
 
         # 提取三词短语
         trigrams = Counter()
         for i in range(len(words) - 2):
-            phrase = f"{words[i]} {words[i+1]} {words[i+2]}"
-            if all(w not in self.stopwords for w in [words[i], words[i+1], words[i+2]]):
+            phrase = f"{words[i]} {words[i +1]} {words[i +2]}"
+            if all(w not in self.stopwords for w in [words[i], words[i +1], words[i +2]]):
                 trigrams[phrase] += 1
 
         # 合并排序

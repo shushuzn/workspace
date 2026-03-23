@@ -113,7 +113,7 @@ class TaskDecomposer:
                 "description": f"{step}: {task}",
                 "estimated_time": min(self.max_subtask_time, 10),
                 "status": "pending",
-                "dependencies": [i-1] if i > 1 else []
+                "dependencies": [i -1] if i > 1 else []
             }
             subtasks.append(subtask)
 

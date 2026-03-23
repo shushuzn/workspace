@@ -67,7 +67,7 @@ def L2_valuation():
             "peg": round(pe / 10, 2),
             "price": price
         },
-        "targets": {k: {"price": round(v, 2), "upside": f"{((v-price)/price*100):.1f}%"} for k, v in targets.items()},
+        "targets": {k: {"price": round(v, 2), "upside": f"{((v -price) /price *100):.1f}%"} for k, v in targets.items()},
         "score": 75,
         "verdict": "估值合理，略高于历史平均"
     }
@@ -193,7 +193,7 @@ def main():
     print("=" * 70)
     for year, data in f5.items():
         if isinstance(data, dict) and "revenue" in data:
-            print(f"  {year}: 营收${data['revenue']/1000:.0f}B, 增长{data['growth']}, EPS${data['eps']}")
+            print(f"  {year}: 营收${data['revenue'] /1000:.0f}B, 增长{data['growth']}, EPS${data['eps']}")
     print("  情景分析:")
     for scenario, data in f5["scenarios"].items():
         print(f"    {scenario}: ${data['price']} ({data['prob']})")

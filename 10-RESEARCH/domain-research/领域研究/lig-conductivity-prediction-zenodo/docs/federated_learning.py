@@ -470,9 +470,9 @@ class FederatedServer:
     def train(self, num_rounds: int = 10, participation_rate: float = 1.0) -> List[Dict]:
         """Run complete federated training"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🔐 Federated Learning Training")
-        print("="*80)
+        print("=" *80)
         print(f"\n📊 Configuration:")
         print(f"   Clients: {self.num_clients}")
         print(f"   Aggregation: {self.aggregation_method.value}")
@@ -534,9 +534,9 @@ def demo_federated_learning():
     """Demo federated learning system"""
 
     # Demo 1: Standard Federated Averaging
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 1: Federated Averaging (FedAvg)")
-    print("="*80)
+    print("=" *80)
 
     server_fedavg = FederatedServer(
         num_clients=4,
@@ -552,9 +552,9 @@ def demo_federated_learning():
     print(f"   Loss: {stats_fedavg['initial_loss']:.3f} → {stats_fedavg['final_loss']:.3f} (-{stats_fedavg['loss_reduction']:.3f})")
 
     # Demo 2: Federated Learning with Differential Privacy
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 2: Federated Learning with Differential Privacy (ε=1.0)")
-    print("="*80)
+    print("=" *80)
 
     server_dp = FederatedServer(
         num_clients=4,
@@ -570,9 +570,9 @@ def demo_federated_learning():
     print(f"   Privacy: {stats_dp['privacy_report']['privacy_guarantee']}")
 
     # Demo 3: Quality-aware Federated Averaging
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 3: Quality-aware Federated Averaging (QFedAvg)")
-    print("="*80)
+    print("=" *80)
 
     server_qfedavg = FederatedServer(
         num_clients=4,
@@ -588,12 +588,12 @@ def demo_federated_learning():
     print(f"   Convergence Rate: {stats_qfedavg['convergence_rate']:.4f}/round")
 
     # Comparison
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 Method Comparison")
-    print("="*80)
+    print("=" *80)
 
     print(f"\n   {'Method':<20} {'Final Accuracy':<18} {'Improvement':<15} {'Privacy'}")
-    print(f"   {'-'*20} {'-'*18} {'-'*15} {'-'*20}")
+    print(f"   {'-' *20} {'-' *18} {'-' *15} {'-' *20}")
     print(f"   {'FedAvg':<20} {stats_fedavg['final_accuracy']:<18.3f} +{stats_fedavg['accuracy_improvement']:<14.3f} None")
     print(f"   {'DP-FedAvg (ε=1)':<20} {stats_dp['final_accuracy']:<18.3f} +{stats_dp['accuracy_improvement']:<14.3f} {stats_dp['privacy_report']['privacy_guarantee']}")
     print(f"   {'QFedAvg':<20} {stats_qfedavg['final_accuracy']:<18.3f} +{stats_qfedavg['accuracy_improvement']:<14.3f} None")
@@ -625,9 +625,9 @@ def main():
     if args.demo or True:  # Default to demo
         demo_federated_learning()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Federated learning system complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.15003")
     print("🎯 Key Features:")
     print("   - Privacy-preserving distributed training")

@@ -17,7 +17,7 @@ review_list = [
 ]
 
 print('REMAINING REVIEW LIST:')
-print('='*60)
+print('=' *60)
 count = 0
 for f in review_list:
     p = Path(f)

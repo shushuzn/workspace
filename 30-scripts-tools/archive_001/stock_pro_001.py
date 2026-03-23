@@ -258,7 +258,7 @@ def generate_report(report: AnalysisReport) -> str:
 | 指标 | 数值 | 评价 |
 |------|------|------|
 | 当前股价 | ${q.price:.2f} | {'上涨' if q.change > 0 else '下跌'} {q.change_pct:+.2f}% |
-| 市值 | ${q.market_cap/1e12:.2f}T | - |
+| 市值 | ${q.market_cap /1e12:.2f}T | - |
 | 市盈率 | {q.pe_ratio:.1f}x | {'低估' if q.pe_ratio < 25 else '合理' if q.pe_ratio < 35 else '高估'} |
 | EPS | ${q.eps:.2f} | - |
 | 股息率 | {q.dividend_yield:.2f}% | - |
@@ -355,10 +355,10 @@ def generate_report(report: AnalysisReport) -> str:
 
 def main(symbol: str):
     """主程序"""
-    print(f"\n{'='*50}")
+    print(f"\n{'=' *50}")
     print(f"  Stock PRO v2.0 - 专业股票分析")
     print(f"  股票: {symbol}")
-    print(f"{'='*50}\n")
+    print(f"{'=' *50}\n")
 
     # 1. 获取行情
     print("[1/3] 获取实时行情...")
@@ -368,7 +368,7 @@ def main(symbol: str):
         return
 
     print(f"   V 价格: ${quote.price:.2f} ({quote.change_pct:+.2f}%)")
-    print(f"   V 市值: ${quote.market_cap/1e12:.2f}T")
+    print(f"   V 市值: ${quote.market_cap /1e12:.2f}T")
     print(f"   V P/E:  {quote.pe_ratio:.1f}x")
 
     # 2. 估值分析
@@ -412,12 +412,12 @@ def main(symbol: str):
         f.write(md)
 
     print(f"""
-{'='*50}
+{'=' *50}
   分析完成!
   评级: {val.rating} ({val.upside_pct:+.1f}%)
   目标价: ${val.target_price:.2f}
   报告: {filepath.name}
-{'='*50}
+{'=' *50}
 """)
     return report
 

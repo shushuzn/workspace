@@ -196,9 +196,9 @@ class IntegrityChecker:
 
             if len(timestamps) >= 2:
                 for i in range(1, len(timestamps)):
-                    diff = (timestamps[i] - timestamps[i-1]).total_seconds()
+                    diff = (timestamps[i] - timestamps[i -1]).total_seconds()
                     if diff < -60:  # 时间倒流 >1 分钟
-                        issues.append(f"日志时间异常：{timestamps[i-1]} -> {timestamps[i]}")
+                        issues.append(f"日志时间异常：{timestamps[i -1]} -> {timestamps[i]}")
 
         return {
             "passed": len(issues) == 0,

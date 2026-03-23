@@ -139,8 +139,8 @@ class LayoutAnalyzer:
         # 单栏特征：大多数块宽度 > 页面宽度的 50%，或跨越中心线
         wide_blocks = sum(1 for b in significant_blocks if b["width"] > page_width * 0.5)
         crossing_blocks = sum(1 for b in significant_blocks
-                             if b["center_x"] - b["width"]/2 < center_x * 0.9
-                             and b["center_x"] + b["width"]/2 > center_x * 1.1)
+                             if b["center_x"] - b["width"] /2 < center_x * 0.9
+                             and b["center_x"] + b["width"] /2 > center_x * 1.1)
 
         # 如果大部分块是宽的或跨越中心，判定为单栏
         total = len(significant_blocks)
@@ -198,7 +198,7 @@ class LayoutAnalyzer:
         current_cluster = [x_positions[0]]
 
         for i in range(1, len(x_positions)):
-            if x_positions[i] - x_positions[i-1] > min_distance:
+            if x_positions[i] - x_positions[i -1] > min_distance:
                 clusters.append(sum(current_cluster) / len(current_cluster))
                 current_cluster = []
             current_cluster.append(x_positions[i])
@@ -395,7 +395,7 @@ class LayoutLMPDFExtractor:
             # 更新统计
             self._update_stats(layout_info)
 
-            print(f"   第 {i+1}/{total_pages} 页 ({layout_info['layout_type']}栏，置信度{layout_info['confidence']:.2f})...", end="\r")
+            print(f"   第 {i +1}/{total_pages} 页 ({layout_info['layout_type']}栏，置信度{layout_info['confidence']:.2f})...", end="\r")
 
         # 计算平均置信度
         self.stats["avg_confidence"] = sum(confidences) / len(confidences) if confidences else 0
@@ -536,9 +536,9 @@ def main():
         output_file.write_text(output_content, encoding='utf-8')
         print(f"\n📁 已保存：{output_file}")
     elif args.preview:
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("📖 预览 (前 1000 字符):")
-        print("="*60)
+        print("=" *60)
         print(output_content[:1000])
         if len(output_content) > 1000:
             print(f"\n... (共{len(output_content)}字符)")
@@ -548,14 +548,14 @@ def main():
     # 显示统计
     if args.stats:
         stats = extractor.get_stats()
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("📊 统计信息:")
-        print("="*60)
+        print("=" *60)
         print(f"  总页数：{stats['total_pages']}")
-        print(f"  单栏：{stats['single_column']} ({stats['single_column']/max(1,stats['total_pages'])*100:.1f}%)")
-        print(f"  双栏：{stats['double_column']} ({stats['double_column']/max(1,stats['total_pages'])*100:.1f}%)")
-        print(f"  多栏：{stats['multi_column']} ({stats['multi_column']/max(1,stats['total_pages'])*100:.1f}%)")
-        print(f"  混合：{stats['mixed']} ({stats['mixed']/max(1,stats['total_pages'])*100:.1f}%)")
+        print(f"  单栏：{stats['single_column']} ({stats['single_column'] /max(1,stats['total_pages']) *100:.1f}%)")
+        print(f"  双栏：{stats['double_column']} ({stats['double_column'] /max(1,stats['total_pages']) *100:.1f}%)")
+        print(f"  多栏：{stats['multi_column']} ({stats['multi_column'] /max(1,stats['total_pages']) *100:.1f}%)")
+        print(f"  混合：{stats['mixed']} ({stats['mixed'] /max(1,stats['total_pages']) *100:.1f}%)")
         print(f"  含表格：{stats['with_tables']}")
         print(f"  含图表：{stats['with_figures']}")
         print(f"  含公式：{stats['with_equations']}")

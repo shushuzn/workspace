@@ -47,9 +47,9 @@ class ConvergentBrainstorm:
         - 可行性 (0-5)
         - 影响力 (0-5)
         """
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Step C1: 初步筛选 (5 分钟)")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         filtered_ideas = []
 
@@ -77,7 +77,7 @@ class ConvergentBrainstorm:
 
         self.ideas = filtered_ideas
         print(f"筛选后保留：{len(filtered_ideas)}/{len(self.idea_pool['ideas'])} 个想法")
-        print(f"淘汰率：{(1 - len(filtered_ideas)/len(self.idea_pool['ideas']))*100:.1f}%")
+        print(f"淘汰率：{(1 - len(filtered_ideas) /len(self.idea_pool['ideas'])) *100:.1f}%")
 
         return filtered_ideas
 
@@ -147,9 +147,9 @@ class ConvergentBrainstorm:
         Step C2: 轻量验证 (5 分钟)
         快速检索≤3 篇文献，检查是否已有类似工作
         """
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Step C2: 轻量验证 (5 分钟)")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         # 简化验证：标记想法的验证状态
         for idea in self.ideas[:max_papers * 2]:  # 仅验证 top 想法
@@ -170,9 +170,9 @@ class ConvergentBrainstorm:
         Step C3: 影响力评估 (5 分钟)
         生成 2x2 优先级矩阵
         """
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Step C3: 影响力评估 (5 分钟)")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         # 重置矩阵
         self.impact_matrix = {
@@ -211,9 +211,9 @@ class ConvergentBrainstorm:
         Step C4: 快速批判 (5 分钟)
         轻量版批判者，仅检查致命问题
         """
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Step C4: 快速批判 (5 分钟)")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         critic_results = []
 
@@ -260,9 +260,9 @@ class ConvergentBrainstorm:
         Step C5: 行动规划 (5 分钟)
         Top 3 想法 → 行动计划
         """
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"Step C5: 行动规划 (5 分钟)")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         # 按评分排序
         sorted_ideas = sorted(
@@ -325,10 +325,10 @@ class ConvergentBrainstorm:
 
     def run(self, output_file=None):
         """运行完整收敛流程"""
-        print(f"\n{'#'*60}")
+        print(f"\n{'#' *60}")
         print(f"# 头脑风暴收敛环 - {self.idea_pool['topic']}")
         print(f"# 输入想法：{len(self.ideas)} 个")
-        print(f"{'#'*60}")
+        print(f"{'#' *60}")
 
         start = time.time()
 

@@ -125,7 +125,7 @@ def main():
         print(f"✅ 压缩完成：{args.output}")
         print(f"   原始：{len(context):,} 字符")
         print(f"   压缩后：{len(compressed):,} 字符")
-        print(f"   压缩率：{(1 - len(compressed)/len(context))*100:.1f}%")
+        print(f"   压缩率：{(1 - len(compressed) /len(context)) *100:.1f}%")
     else:
         print(compressed)
 

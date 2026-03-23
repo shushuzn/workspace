@@ -386,7 +386,7 @@ class FeishuImageCompressor:
                 compressed_size = output_path.stat().st_size
                 ratio = (1 - compressed_size / original_size) * 100
 
-                print(f"[Compress] {image_path.name}: {original_size/1024:.1f}KB → {compressed_size/1024:.1f}KB ({ratio:.1f}% reduction)")
+                print(f"[Compress] {image_path.name}: {original_size /1024:.1f}KB → {compressed_size /1024:.1f}KB ({ratio:.1f}% reduction)")
 
                 return str(output_path)
 
@@ -670,7 +670,7 @@ class FeishuAPIClient:
         results = {"sent": 0, "failed": 0}
 
         for i, msg in enumerate(messages[:max_count]):
-            print(f"\n[{i+1}/{len(messages)}] Processing message {msg['id']}...")
+            print(f"\n[{i +1}/{len(messages)}] Processing message {msg['id']}...")
 
             try:
                 if msg["type"] == "text":

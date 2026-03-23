@@ -71,7 +71,7 @@ def main():
             data = json.loads(issues.read_text())
             clean = data.get("clean_files", 0)
             total = data.get("total", 1)
-            pct = int(clean)/int(total)*100 if total else 0
+            pct = int(clean) /int(total) *100 if total else 0
             print("Clean: " + str(clean) + "/" + str(total) + " (" + str(int(pct)) + "%)")
         except Exception:
             print("[OK] Normal")

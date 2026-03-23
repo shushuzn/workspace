@@ -107,8 +107,8 @@ class DataAnalyzer:
         for i, d in enumerate(data):
             for prop, std in std_values.items():
                 if prop in d and std > 0:
-                    if abs(d[prop] - sum(x.get(prop, 0) for x in data)/len(data)) > 2 * std:
-                        outliers.append(f"样本{i+1}: {prop}")
+                    if abs(d[prop] - sum(x.get(prop, 0) for x in data) /len(data)) > 2 * std:
+                        outliers.append(f"样本{i +1}: {prop}")
 
         return outliers[:5]  # 最多 5 个
 

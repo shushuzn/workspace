@@ -73,7 +73,7 @@ class FormulaModelFinetuner:
             self.model.train()
             train_loss = 0.0
 
-            for images, latex_labels in tqdm(train_loader, desc=f"Epoch {epoch+1}/{epochs}"):
+            for images, latex_labels in tqdm(train_loader, desc=f"Epoch {epoch +1}/{epochs}"):
                 images = images.to(self.device)
 
                 # 前向传播
@@ -94,7 +94,7 @@ class FormulaModelFinetuner:
             # 验证阶段
             val_acc = self.evaluate(val_loader)
 
-            print(f"Epoch {epoch+1}/{epochs}:")
+            print(f"Epoch {epoch +1}/{epochs}:")
             print(f"  Train Loss: {avg_train_loss:.4f}")
             print(f"  Val Accuracy: {val_acc:.2%}")
 

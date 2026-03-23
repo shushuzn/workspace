@@ -129,7 +129,7 @@ class StockChartGenerator:
             if i < period - 1:
                 ma.append(None)
             else:
-                avg = sum(closes[i-period+1:i+1]) / period
+                avg = sum(closes[i -period +1:i +1]) / period
                 ma.append(round(avg, 2))
         return ma
 
@@ -340,7 +340,7 @@ Fixes:
             if "start" in pattern and "end" in pattern:
                 color = colors[idx % len(colors)]
                 ax.axvspan(pattern["start"], pattern["end"],
-                          alpha=0.2, color=color, label=pattern.get("name", f"Pattern {idx+1}"))
+                          alpha=0.2, color=color, label=pattern.get("name", f"Pattern {idx +1}"))
 
     def generate_report(self, data: dict = None) -> dict:
         """生成图表报告"""

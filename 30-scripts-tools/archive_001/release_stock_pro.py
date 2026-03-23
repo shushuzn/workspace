@@ -144,13 +144,13 @@ def verify_archive():
 
 
 def final_summary(version, changes):
-    print("\n" + "="*50)
+    print("\n" + "=" *50)
     print(f"Release v{version} Complete!")
-    print("="*50)
+    print("=" *50)
     print(f"Changes: {changes}")
     print(f"Archived: stock_pro_archive/")
     print(f"Pushed: Git remote")
-    print("="*50)
+    print("=" *50)
 
 
 def main():

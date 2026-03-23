@@ -29,7 +29,7 @@ def get_returns_from_history(symbol, days=30):
 
     returns = []
     for i in range(1, len(prices)):
-        ret = (prices[i][1] - prices[i-1][1]) / prices[i-1][1]
+        ret = (prices[i][1] - prices[i -1][1]) / prices[i -1][1]
         returns.append(ret)
 
     return returns

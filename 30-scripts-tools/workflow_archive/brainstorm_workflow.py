@@ -149,7 +149,7 @@ class BrainstormWorkflow:
             template = random.choice(templates)
             kw = random.choice(keywords) if keywords else "新"
             idea = template.format(keyword=kw, topic=topic[:20])
-            ideas.append(self._create_idea(i+1, idea))
+            ideas.append(self._create_idea(i +1, idea))
         return ideas
 
     def _generate_by_scamper(self, topic: str, keywords: list, domain: str, count: int) -> list:
@@ -171,7 +171,7 @@ class BrainstormWorkflow:
             template = random.choice(templates)
             kw = random.choice(keywords) if keywords else "新"
             idea = template.format(keyword=kw, topic=topic[:20])
-            ideas.append(self._create_idea(i+1, idea, f"SCAMPER-{letter}"))
+            ideas.append(self._create_idea(i +1, idea, f"SCAMPER-{letter}"))
         return ideas
 
     def _generate_by_sixhats(self, topic: str, keywords: list, domain: str, count: int) -> list:
@@ -190,7 +190,7 @@ class BrainstormWorkflow:
             if i >= count:
                 break
             idea_text = template.format(topic=topic[:20], keyword=random.choice(keywords) if keywords else "新")
-            ideas.append(self._create_idea(i+1, f"[{hat}帽] {idea_text}", desc))
+            ideas.append(self._create_idea(i +1, f"[{hat}帽] {idea_text}", desc))
         return ideas
 
     def _generate_by_reverse(self, topic: str, keywords: list, domain: str, count: int) -> list:
@@ -207,7 +207,7 @@ class BrainstormWorkflow:
         for i in range(count):
             template = random.choice(reverses)
             idea = template.format(topic=topic[:20], keyword=random.choice(keywords) if keywords else "新")
-            ideas.append(self._create_idea(i+1, idea, "逆向思维"))
+            ideas.append(self._create_idea(i +1, idea, "逆向思维"))
         return ideas
 
     def _generate_by_analogy(self, topic: str, keywords: list, domain: str, count: int) -> list:
@@ -230,7 +230,7 @@ class BrainstormWorkflow:
             template = random.choice(analogies)
             kw = random.choice(keywords) if keywords else "新"
             idea = template.format(topic=topic[:20], keyword=kw)
-            ideas.append(self._create_idea(i+1, idea, "类比思维"))
+            ideas.append(self._create_idea(i +1, idea, "类比思维"))
         return ideas
 
     def _create_idea(self, id: int, title: str, technique: str = "模板") -> dict:
@@ -374,9 +374,9 @@ class BrainstormWorkflow:
 
     def run_full(self, topic: str, ideas_count: int = 10, keep_count: int = 5) -> Dict:
         """运行完整工作流"""
-        print(f"\n{'='*50}")
+        print(f"\n{'=' *50}")
         print(f"头脑风暴工作流: {topic}")
-        print(f"{'='*50}")
+        print(f"{'=' *50}")
 
         results = {}
 
@@ -406,9 +406,9 @@ class BrainstormWorkflow:
         results["action"] = self.generate_action_plan()
         print(f"  行动项: {results['action'].get('total_ideas', 0)}个")
 
-        print(f"\n{'='*50}")
+        print(f"\n{'=' *50}")
         print("完成! 结果保存在 flow-archive/brainstorm-current/")
-        print(f"{'='*50}")
+        print(f"{'=' *50}")
 
         return results
 

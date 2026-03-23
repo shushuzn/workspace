@@ -361,10 +361,10 @@ def cmd_start(task_name, project_name=None):
         if suggestions:
             print(f"\n💡 建议: {suggestions[0]['suggestion']}")
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' *50}")
     print(f"  🚀 Starting: {task_name}")
     print(f"  📁 Project: {project_name}")
-    print(f"{'='*50}\n")
+    print(f"{'=' *50}\n")
 
     branch = get_git_branch(project_dir)
     unpushed = get_unpushed_commits(project_dir)
@@ -452,9 +452,9 @@ def cmd_test():
     project_dir = Path(state.get("project_dir", WORKSPACE))
     project_name = state.get("project", "unknown")
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' *50}")
     print(f"  🧪 Testing: {project_name}")
-    print(f"{'='*50}\n")
+    print(f"{'=' *50}\n")
 
     results = run_tests(project_dir)
 
@@ -491,9 +491,9 @@ def cmd_status():
     """Show current session status"""
     state = get_state()
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' *50}")
     print(f"  📊 Session Status")
-    print(f"{'='*50}")
+    print(f"{'=' *50}")
 
     if not state:
         print("❌ No active session\n")
@@ -548,7 +548,7 @@ def cmd_status():
     else:
         print(f"\n⏰ Auto-save: OFF")
 
-    print(f"{'='*50}\n")
+    print(f"{'=' *50}\n")
 
 
 def cmd_resume():
@@ -575,9 +575,9 @@ def cmd_log():
         print("\n❌ No session history\n")
         return
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' *50}")
     print(f"  📜 Session History ({len(history)} sessions)")
-    print(f"{'='*50}\n")
+    print(f"{'=' *50}\n")
 
     for i, entry in enumerate(reversed(history[-10:]), 1):
         print(f"{i}. {entry.get('task', 'N/A')}")
@@ -602,9 +602,9 @@ def cmd_end(description):
     if was_auto_save:
         cmd_auto("stop")
 
-    print(f"\n{'='*50}")
+    print(f"\n{'=' *50}")
     print(f"  📋 Ending Session: {state['session_id']}")
-    print(f"{'='*50}\n")
+    print(f"{'=' *50}\n")
 
     duration = datetime.now() - datetime.fromisoformat(state["started_at"])
     duration_minutes = duration.seconds / 60

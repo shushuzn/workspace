@@ -63,7 +63,7 @@ class CNTDataCollector:
         """从文献提取数据"""
         # TODO: 实现数据提取逻辑
         return {
-            "sample_id": f"CNT-{len(self.data)+1:03d}",
+            "sample_id": f"CNT-{len(self.data) +1:03d}",
             "cnt_type": "MWCNT",
             "length": 10.0,
             "diameter": 50.0,
@@ -126,7 +126,7 @@ class CNTDataCollector:
 **收集日期:** {datetime.now().strftime('%Y-%m-%d %H:%M')}
 **目标样本量:** {self.config['target_samples']}
 **当前样本量:** {len(self.data)}
-**完成率:** {len(self.data)/self.config['target_samples']*100:.1f}%
+**完成率:** {len(self.data) /self.config['target_samples'] *100:.1f}%
 
 ---
 

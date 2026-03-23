@@ -187,7 +187,7 @@ class SmartRebalancer:
         if risk > 70:
             reasons.append(f"Low risk score ({risk:.0f}/100)")
         elif risk < 30:
-            reasons.append(f"High risk detected ({100-risk:.0f}/100)")
+            reasons.append(f"High risk detected ({100 -risk:.0f}/100)")
 
         if sentiment > 70:
             reasons.append(f"Positive sentiment ({sentiment:.0f}/100)")
@@ -266,9 +266,9 @@ def generate_demo_portfolio() -> List[Dict]:
 
 def print_suggestions(suggestions: List[RebalanceSuggestion], summary: PortfolioSummary):
     """Print rebalancing suggestions"""
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 SMART PORTFOLIO REBALANCING SUGGESTIONS")
-    print("="*80)
+    print("=" *80)
 
     print(f"\n📈 Portfolio Summary:")
     print(f"  Total Value: ${summary.total_value:,.0f}")
@@ -282,9 +282,9 @@ def print_suggestions(suggestions: List[RebalanceSuggestion], summary: Portfolio
     print(f"  🔴 SELL: {summary.sell_count} positions")
     print(f"  ⚪ HOLD: {summary.hold_count} positions")
 
-    print("\n" + "-"*80)
+    print("\n" + "-" *80)
     print("Detailed Suggestions:")
-    print("-"*80)
+    print("-" *80)
 
     # Sort by change magnitude
     sorted_suggestions = sorted(suggestions, key=lambda s: abs(s.change_pct), reverse=True)
@@ -301,9 +301,9 @@ def print_suggestions(suggestions: List[RebalanceSuggestion], summary: Portfolio
         for reason in s.reasons:
             print(f"    • {reason}")
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("💡 Note: These are suggestions only. Always do your own research.")
-    print("="*80)
+    print("=" *80)
 
 
 def main():
@@ -313,10 +313,10 @@ def main():
     parser.add_argument("--output", type=str, help="Output JSON file path")
     args = parser.parse_args()
 
-    print("="*80)
+    print("=" *80)
     print("🧠 Smart Portfolio Rebalancer")
     print("Multi-factor scoring: Risk(30%) + Sentiment(25%) + Valuation(25%) + Momentum(20%)")
-    print("="*80)
+    print("=" *80)
 
     # Load portfolio
     if args.portfolio:

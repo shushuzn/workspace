@@ -430,9 +430,9 @@ class SciAgentsSystem:
 
     def run_research(self, topic: str) -> ResearchReport:
         """Run complete research workflow"""
-        print("="*80)
+        print("=" *80)
         print("🔬 SciAgents: Multi-Agent Scientific Discovery")
-        print("="*80)
+        print("=" *80)
         print(f"\n📚 Research Topic: {topic}")
 
         # Create session
@@ -445,9 +445,9 @@ class SciAgentsSystem:
         }
 
         # Phase 1: Planning
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 1: Planning")
-        print("="*80)
+        print("=" *80)
         session["phase"] = ResearchPhase.PLANNING.value
 
         planner = self.agents[AgentRole.PLANNER]
@@ -458,9 +458,9 @@ class SciAgentsSystem:
         session["experiment_plan"] = asdict(experiment_plan)
 
         # Phase 2: Data Collection
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 2: Data Collection")
-        print("="*80)
+        print("=" *80)
         session["phase"] = ResearchPhase.DATA_COLLECTION.value
 
         experimenter = self.agents[AgentRole.EXPERIMENTER]
@@ -469,9 +469,9 @@ class SciAgentsSystem:
         session["experiment"] = asdict(experiment)
 
         # Phase 3: Analysis
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 3: Analysis")
-        print("="*80)
+        print("=" *80)
         session["phase"] = ResearchPhase.ANALYSIS.value
 
         analyst = self.agents[AgentRole.ANALYST]
@@ -480,9 +480,9 @@ class SciAgentsSystem:
         session["analysis"] = asdict(analysis)
 
         # Phase 4: Validation
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 4: Validation")
-        print("="*80)
+        print("=" *80)
         session["phase"] = ResearchPhase.VALIDATION.value
 
         critic = self.agents[AgentRole.CRITIC]
@@ -491,9 +491,9 @@ class SciAgentsSystem:
         session["review"] = asdict(review)
 
         # Phase 5: Reporting
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 5: Reporting")
-        print("="*80)
+        print("=" *80)
         session["phase"] = ResearchPhase.REPORTING.value
 
         writer = self.agents[AgentRole.WRITER]
@@ -558,9 +558,9 @@ def main():
         report = system.run_research(topic)
 
         # Print summary
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 Research Summary")
-        print("="*80)
+        print("=" *80)
 
         stats = system.get_session_stats()
         print(f"\n  Sessions: {stats['total_sessions']}")
@@ -581,9 +581,9 @@ def main():
 
         print(f"\n💾 Report saved to: {output_file}")
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ SciAgents complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.15002")
     print("🎯 5 Agents: Planner, Experimenter, Analyst, Critic, Writer")
     print("💡 End-to-end research automation")

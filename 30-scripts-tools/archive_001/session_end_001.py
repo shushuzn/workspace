@@ -79,9 +79,9 @@ class SessionEnd:
         state = self.check_session_state()
 
         summary = []
-        summary.append(f"\n{'='*60}")
+        summary.append(f"\n{'=' *60}")
         summary.append(f"会话结束报告 - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        summary.append(f"{'='*60}")
+        summary.append(f"{'=' *60}")
         summary.append(f"Flow ID: {self.flow_id}")
         summary.append(f"描述: {description}")
         summary.append("")
@@ -121,7 +121,7 @@ class SessionEnd:
         if not check_result['within_limit']:
             summary.append("建议: 运行 py core_files_compressor.py --compress")
 
-        summary.append(f"{'='*60}\n")
+        summary.append(f"{'=' *60}\n")
 
         return "\n".join(summary)
 

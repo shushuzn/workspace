@@ -195,7 +195,7 @@ Test entry point"""
     print("\n[Testing Toggle]")
     for i in range(3):
         new_mode = settings.toggle_verbosity()
-        print(f"  Toggle {i+1}: Mode = {new_mode}")
+        print(f"  Toggle {i +1}: Mode = {new_mode}")
 
     # Test set_verbosity
     print("\n[Testing Set Verbosity]")

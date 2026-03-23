@@ -329,10 +329,10 @@ class SentimentAnalyzer:
     def generate_report(self) -> str:
         """Generate text report"""
         report = []
-        report.append("="*60)
+        report.append("=" *60)
         report.append("📊 Social Media Sentiment Report")
         report.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-        report.append("="*60)
+        report.append("=" *60)
 
         # Trending stocks
         report.append("\n🔥 Trending Stocks:")
@@ -360,9 +360,9 @@ class SentimentAnalyzer:
 
 def main():
     """Demo/test sentiment analyzer"""
-    print("="*60)
+    print("=" *60)
     print("📊 Stock Social Media Sentiment Analyzer")
-    print("="*60)
+    print("=" *60)
 
     analyzer = SentimentAnalyzer()
 
@@ -398,7 +398,7 @@ def main():
 
         analyzer.save()
 
-    print("="*60)
+    print("=" *60)
 
 
 if __name__ == "__main__":

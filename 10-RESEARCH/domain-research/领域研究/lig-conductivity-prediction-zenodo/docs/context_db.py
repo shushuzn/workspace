@@ -478,7 +478,7 @@ class KnowledgeGraphRAG:
             # Auto-detect relationships (simple co-occurrence)
             entity_names = [e['name'] for e in entities]
             for i, e1 in enumerate(entity_names):
-                for e2 in entity_names[i+1:]:
+                for e2 in entity_names[i +1:]:
                     # Infer relationship from context
                     if 'based on' in entry.content.lower():
                         self.add_relationship(e1, e2, 'BASED_ON')
@@ -666,7 +666,7 @@ class ContextDB:
                         start = content.find('"""')
                         end = content.find('"""', start + 3)
                         if end > start:
-                            docstring = content[start+3:end].strip()
+                            docstring = content[start +3:end].strip()
 
                     tools[py_file.stem] = {
                         "path": str(py_file),
@@ -687,7 +687,7 @@ class ContextDB:
         self.usage_stats["total_size_bytes"] = total_size
         self.usage_stats["last_scan"] = datetime.now().isoformat()
 
-        print(f"🔍 Scanned {len(tools)} tools ({total_lines:,} lines, {total_size/1024/1024:.2f} MB)")
+        print(f"🔍 Scanned {len(tools)} tools ({total_lines:,} lines, {total_size /1024 /1024:.2f} MB)")
         return len(tools)
 
     def add_context(self, level: ContextLevel, content: str, metadata: Dict = None) -> str:
@@ -836,9 +836,9 @@ class ContextDB:
 
 def main():
     """Demo/test ContextDB: Distillation + Governance + Trajectory + KG-RAG"""
-    print("="*80)
+    print("=" *80)
     print("🧠 ContextDB: 4-in-1 System (arXiv 2603.13017 + 2603.11768 + 2603.10600 + 2603.10700)")
-    print("="*80)
+    print("=" *80)
 
     # Initialize
     db = ContextDB()
@@ -926,7 +926,7 @@ def main():
     db.save()
 
     print("\n✅ ContextDB complete: Distillation + Governance + Trajectory + KG-RAG!")
-    print("="*80)
+    print("=" *80)
 
 
 if __name__ == "__main__":

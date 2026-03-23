@@ -289,7 +289,7 @@ def print_report(report: TestReport):
     print(f"Passed: {report.passed} [OK]")
     print(f"Failed: {report.failed} [ERR]")
     print(f"Skipped: {report.skipped} [SKIP]")
-    print(f"Total time: {report.total_time_ms:.1f}ms ({report.total_time_ms/1000:.2f}s)")
+    print(f"Total time: {report.total_time_ms:.1f}ms ({report.total_time_ms /1000:.2f}s)")
 
     # 通过率
     pass_rate = report.passed / report.total_scripts * 100 if report.total_scripts > 0 else 0

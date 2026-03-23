@@ -346,9 +346,9 @@ class MultiAgentMemory:
 
 def simulate_collaborative_task():
     """Simulate multi-agent collaborative task"""
-    print("="*80)
+    print("=" *80)
     print("🧠 Multi-Agent Memory System - Collaborative Task Simulation")
-    print("="*80)
+    print("=" *80)
 
     mam = MultiAgentMemory()
 
@@ -433,9 +433,9 @@ def simulate_collaborative_task():
     print(f"   ✅ System monitored: {meta_memory.id}")
 
     # Print consensus statistics
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 Consensus Statistics:")
-    print("="*80)
+    print("=" *80)
 
     stats = mam.get_consensus_stats()
     print(f"  Total Memories: {stats['total_memories']}")
@@ -446,9 +446,9 @@ def simulate_collaborative_task():
     print(f"  Average Agreement Score: {stats['avg_agreement_score']:.2f}")
 
     # Print shared memories
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📚 Shared Memories (Agreed):")
-    print("="*80)
+    print("=" *80)
 
     shared = mam.get_shared_memories()
     for memory in shared:
@@ -457,9 +457,9 @@ def simulate_collaborative_task():
         print(f"     Consensus: {memory.consensus_status.value} ({len(memory.agent_votes)} votes)")
 
     # Export to JSON
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("💾 Exporting to JSON...")
-    print("="*80)
+    print("=" *80)
 
     json_output = mam.export_to_json()
     output_file = "data/multi_agent_memory_demo.json"
@@ -490,9 +490,9 @@ def main():
                 f.write(mam.export_to_json())
             print(f"\n✅ Saved to: {args.output}")
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Multi-Agent Memory System demo complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.12631")
     print("🎯 Key Innovation: Collaborative memory with consensus building")
     print("💡 Next: Implement real agent voting mechanism")

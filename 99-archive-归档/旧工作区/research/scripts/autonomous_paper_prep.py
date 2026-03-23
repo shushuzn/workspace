@@ -100,7 +100,7 @@ if paper_path.exists():
             status = "[OK]" if passed else "❌"
             f.write(f"- [{status}] {item}\n")
 
-        f.write(f"\n**通过率:** {sum(checks.values())}/{len(checks)} ({sum(checks.values())/len(checks)*100:.0f}%)\n")
+        f.write(f"\n**通过率:** {sum(checks.values())}/{len(checks)} ({sum(checks.values()) /len(checks) *100:.0f}%)\n")
 
         if all(checks.values()):
             f.write("\n**状态:** [OK] 所有检查通过！准备投稿！\n")
@@ -108,7 +108,7 @@ if paper_path.exists():
             f.write("\n**状态:** ⚠️ 有待完善项目\n")
 
     print(f"  [OK] 检查报告已保存：{report_path}")
-    print(f"  通过率：{sum(checks.values())}/{len(checks)} ({sum(checks.values())/len(checks)*100:.0f}%)")
+    print(f"  通过率：{sum(checks.values())}/{len(checks)} ({sum(checks.values()) /len(checks) *100:.0f}%)")
 else:
     print(f"  [WARN] 论文文件不存在：{paper_path}")
 

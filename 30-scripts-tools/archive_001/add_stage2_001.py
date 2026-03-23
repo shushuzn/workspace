@@ -20,7 +20,7 @@ def add_stage2(path):
     for i, line in enumerate(lines):
         if 'STAGE 1: ARCHITECT' in line:
             # Find end of STAGE 1 block (next section or blank line after)
-            for j in range(i+1, min(i+20, len(lines))):
+            for j in range(i +1, min(i +20, len(lines))):
                 if 'STAGE 3' in lines[j] or 'Purpose:' in lines[j]:
                     insert_idx = j
                     break

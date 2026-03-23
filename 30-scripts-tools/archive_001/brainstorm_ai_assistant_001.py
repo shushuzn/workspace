@@ -149,7 +149,7 @@ class BrainstormAIAssistant:
         if mode == "divergent":
             return {
                 "ideas": [
-                    {"name": f"Idea {i}", "description": f"Description {i}", "category": f"Cat {i%3}", "impact_score": 7+i%3}
+                    {"name": f"Idea {i}", "description": f"Description {i}", "category": f"Cat {i%3}", "impact_score": 7 +i%3}
                     for i in range(15)
                 ]
             }
@@ -165,7 +165,7 @@ class BrainstormAIAssistant:
         else:  # connection
             return {
                 "connections": [
-                    {"idea_a": f"Idea {i}", "idea_b": f"Idea {i+1}", "combined_value": f"Combined value {i}", "feasibility": "中"}
+                    {"idea_a": f"Idea {i}", "idea_b": f"Idea {i +1}", "combined_value": f"Combined value {i}", "feasibility": "中"}
                     for i in range(5)
                 ]
             }

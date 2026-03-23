@@ -154,7 +154,7 @@ def main():
     else:
         summary = processor.process_batch(paper_ids, args.output)
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"✅ 批量处理完成!")
         print(f"📊 总计：{summary['total_papers']} 篇")
         print(f"✅ 成功：{summary['completed']} 篇")

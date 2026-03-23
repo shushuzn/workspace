@@ -139,7 +139,7 @@ class AISignalGenerator:
             "confidence": round(final_confidence, 2),
             "action": action,
             "reasoning": signals,
-            "summary": f"Based on {len(signals)} indicators, {final_signal} signal with {int(final_confidence*100)}% confidence"
+            "summary": f"Based on {len(signals)} indicators, {final_signal} signal with {int(final_confidence *100)}% confidence"
         }
 
     def analyze(self, symbol: str, use_llm: bool = True) -> dict:

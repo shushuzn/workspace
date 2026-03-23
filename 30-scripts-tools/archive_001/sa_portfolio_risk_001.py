@@ -56,7 +56,7 @@ class PortfolioRiskAnalyzer:
         # 计算平均相关系数
         correlations = []
         for i in range(len(holdings)):
-            for j in range(i+1, len(holdings)):
+            for j in range(i +1, len(holdings)):
                 # 简化：使用模拟相关系数
                 corr = 0.3  # 实际应该计算真实相关性
                 correlations.append(corr)
@@ -108,7 +108,7 @@ class PortfolioRiskAnalyzer:
         var_value = abs(var_return) * portfolio_value
 
         # 计算 CVaR（条件 VaR）
-        cvar_returns = sorted_returns[:var_index+1]
+        cvar_returns = sorted_returns[:var_index +1]
         cvar_return = sum(cvar_returns) / len(cvar_returns) if cvar_returns else 0
         cvar_value = abs(cvar_return) * portfolio_value
 
@@ -117,7 +117,7 @@ class PortfolioRiskAnalyzer:
             'var_95_percent': round(abs(var_return) * 100, 2),
             'cvar_95': round(cvar_value, 2),
             'confidence_level': confidence_level,
-            'description': f'95% VaR: {var_value:,.2f}元 ({abs(var_return)*100:.2f}%)'
+            'description': f'95% VaR: {var_value:,.2f}元 ({abs(var_return) *100:.2f}%)'
         }
 
     def analyze_diversification(self, holdings: List[Dict]) -> Dict:

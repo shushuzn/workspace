@@ -28,9 +28,9 @@ class BrainstormGenerator:
     def scan_system(self) -> Dict:
         """扫描系统状态"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🔍 扫描系统...")
-        print("="*80)
+        print("=" *80)
 
         # 工具统计
         tools_dir = Path("30-scripts-tools")
@@ -73,16 +73,16 @@ class BrainstormGenerator:
     def identify_gaps(self, stats: Dict) -> List[Dict]:
         """识别差距和机会"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("💡 识别创新机会...")
-        print("="*80)
+        print("=" *80)
 
         opportunities = []
 
         # 1. 工具整合机会
         if stats['tools'] > 100:
             opportunities.append({
-                'id': f'BRAIN-{len(opportunities)+1:03d}',
+                'id': f'BRAIN-{len(opportunities) +1:03d}',
                 'category': 'INTEGRATION',
                 'title': '大规模工具整合',
                 'description': f'{stats["tools"]} 个工具过多，整合到 50 个以内',
@@ -96,7 +96,7 @@ class BrainstormGenerator:
         # 2. 文档完善机会
         if stats['docs'] < stats['tools'] / 2:
             opportunities.append({
-                'id': f'BRAIN-{len(opportunities)+1:03d}',
+                'id': f'BRAIN-{len(opportunities) +1:03d}',
                 'category': 'DOCUMENTATION',
                 'title': '文档完善计划',
                 'description': '工具/文档比例失衡，每个工具需要对应文档',
@@ -109,7 +109,7 @@ class BrainstormGenerator:
 
         # 3. 测试覆盖机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'TESTING',
             'title': '自动化测试增强',
             'description': '为核心工具添加集成测试和端到端测试',
@@ -122,7 +122,7 @@ class BrainstormGenerator:
 
         # 4. 性能优化机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'PERFORMANCE',
             'title': '系统性能优化',
             'description': '分析瓶颈，优化关键路径 (启动时间/内存使用/执行速度)',
@@ -135,7 +135,7 @@ class BrainstormGenerator:
 
         # 5. 用户体验机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'UX',
             'title': '统一 CLI 体验优化',
             'description': '改进 openclaw.py，添加交互式菜单/自动补全/智能提示',
@@ -148,7 +148,7 @@ class BrainstormGenerator:
 
         # 6. 自动化机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'AUTOMATION',
             'title': 'HEARTBEAT 任务扩展',
             'description': '增加更多自动任务 (自动备份/自动清理/自动报告)',
@@ -161,7 +161,7 @@ class BrainstormGenerator:
 
         # 7. 可视化机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'VISUALIZATION',
             'title': '统一监控仪表板',
             'description': '整合所有仪表板到一个统一界面，实时显示所有系统状态',
@@ -174,7 +174,7 @@ class BrainstormGenerator:
 
         # 8. AI 增强机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'AI_ENHANCEMENT',
             'title': '本地 LLM 能力扩展',
             'description': '扩展 Ollama 集成，支持更多模型/更复杂任务',
@@ -187,7 +187,7 @@ class BrainstormGenerator:
 
         # 9. 知识管理机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'KNOWLEDGE',
             'title': '知识图谱自动构建 2.0',
             'description': '从代码/文档/对话中自动提取知识，实时更新图谱',
@@ -200,7 +200,7 @@ class BrainstormGenerator:
 
         # 10. 协作增强机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'COLLABORATION',
             'title': '7 人格自主协作 2.0',
             'description': '人格系统更智能的自主触发和协作机制',
@@ -213,7 +213,7 @@ class BrainstormGenerator:
 
         # 11. 部署优化机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'DEPLOYMENT',
             'title': '一键部署增强',
             'description': '支持多云部署 (AWS/Azure/GCP)，自动配置 HTTPS/域名',
@@ -226,7 +226,7 @@ class BrainstormGenerator:
 
         # 12. 安全增强机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'SECURITY',
             'title': '安全审计自动化',
             'description': '自动扫描秘密/漏洞/配置错误，定期安全报告',
@@ -239,7 +239,7 @@ class BrainstormGenerator:
 
         # 13. 数据同步机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'DATA',
             'title': '跨设备数据同步',
             'description': 'Obsidian/Notion/GitHub 多平台自动同步',
@@ -252,7 +252,7 @@ class BrainstormGenerator:
 
         # 14. 插件系统机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'EXTENSIBILITY',
             'title': '插件系统架构',
             'description': '支持第三方插件，扩展系统能力',
@@ -265,7 +265,7 @@ class BrainstormGenerator:
 
         # 15. 学习系统机会
         opportunities.append({
-            'id': f'BRAIN-{len(opportunities)+1:03d}',
+            'id': f'BRAIN-{len(opportunities) +1:03d}',
             'category': 'LEARNING',
             'title': '从历史执行学习',
             'description': '分析成功/失败模式，自动优化工作流和决策',
@@ -388,9 +388,9 @@ class BrainstormGenerator:
         print(f"\n  报告保存到：{report_file}")
 
         # 打印摘要
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🎯 Top 5 创新机会")
-        print("="*80)
+        print("=" *80)
 
         sorted_opps = sorted(opportunities, key=lambda x: x['priority_score'], reverse=True)
 
@@ -400,7 +400,7 @@ class BrainstormGenerator:
             print(f"   描述：{opp['description']}")
             print(f"   工作量：{opp['estimated_hours']}小时")
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
 
         return opportunities
 

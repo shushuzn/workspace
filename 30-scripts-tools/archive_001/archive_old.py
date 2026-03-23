@@ -46,4 +46,4 @@ print(f"Remaining .py files: {len(remaining)}")
 for f in sorted(remaining)[:20]:
     print(f"  {f}")
 if len(remaining) > 20:
-    print(f"  ... and {len(remaining)-20} more")
+    print(f"  ... and {len(remaining) -20} more")

@@ -192,7 +192,7 @@ class StockParallelLoader:
             "completed": self.stats["completed"],
             "failed": self.stats["failed"],
             "total_time": f"{self.stats['total_time']:.2f}s",
-            "avg_time": f"{self.stats['total_time']/max(1, self.stats['total_tasks']):.2f}s" if self.stats['total_tasks'] > 0 else "0s"
+            "avg_time": f"{self.stats['total_time'] /max(1, self.stats['total_tasks']):.2f}s" if self.stats['total_tasks'] > 0 else "0s"
         }
 
 def demo():

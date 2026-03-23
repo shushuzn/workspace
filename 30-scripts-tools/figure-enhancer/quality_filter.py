@@ -115,7 +115,7 @@ class QualityFilter:
         print(f"📊 批量评估：{len(image_files)} 个图像")
 
         for i, img_file in enumerate(image_files):
-            print(f"   [{i+1}/{len(image_files)}] {img_file.name}...", end="\r")
+            print(f"   [{i +1}/{len(image_files)}] {img_file.name}...", end="\r")
             result = self.evaluate(img_file)
             result['file'] = str(img_file)
             results.append(result)
@@ -126,8 +126,8 @@ class QualityFilter:
         passed = sum(1 for r in results if r['pass'])
         failed = len(results) - passed
 
-        print(f"   通过：{passed} ({passed/len(results)*100:.1f}%)")
-        print(f"   失败：{failed} ({failed/len(results)*100:.1f}%)")
+        print(f"   通过：{passed} ({passed /len(results) *100:.1f}%)")
+        print(f"   失败：{failed} ({failed /len(results) *100:.1f}%)")
 
         # 保存结果
         if output_file:

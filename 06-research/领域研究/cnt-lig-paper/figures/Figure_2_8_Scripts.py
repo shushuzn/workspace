@@ -38,7 +38,7 @@ ax1.grid(axis='y', alpha=0.3, linestyle='--')
 
 # Add values
 for bar, cond in zip(bars, conductivity):
-    ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height()*1.1,
+    ax1.text(bar.get_x() + bar.get_width() /2, bar.get_height() *1.1,
              f'{cond:.2e}', ha='center', va='bottom', fontsize=8)
 
 # Synergy line
@@ -81,9 +81,9 @@ ax.grid(axis='y', alpha=0.3, linestyle='--')
 # Add values and mechanism
 mechanisms = ['CNT-LIG\nsynergy', '+Graphene\nbridging', '+MXene\npseudocapacitance\n(+47%)', 'Multi-functional']
 for bar, val, mech in zip(bars, synergy_vals, mechanisms):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.05,
+    ax.text(bar.get_x() + bar.get_width() /2, bar.get_height() + 0.05,
              f'{val:.2f}×', ha='center', va='bottom', fontsize=12, fontweight='bold')
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height()/2,
+    ax.text(bar.get_x() + bar.get_width() /2, bar.get_height() /2,
              mech, ha='center', va='center', fontsize=8, color='white', fontweight='bold')
 
 # Highlight peak
@@ -123,7 +123,7 @@ ax.grid(axis='x', alpha=0.3, linestyle='--')
 
 # Add values
 for bar, val in zip(bars, importance):
-    ax.text(bar.get_width() + 1, bar.get_y() + bar.get_height()/2,
+    ax.text(bar.get_width() + 1, bar.get_y() + bar.get_height() /2,
              f'{val}%', ha='left', va='center', fontsize=9, fontweight='bold')
 
 # Physical interpretation text
@@ -152,12 +152,12 @@ speed = [100, 5, 20, 1]  # ms (lower is better)
 size = [2000, 500, 800, 10]  # KB (lower is better)
 
 # Normalize for radar
-speed_norm = [1/x*100 for x in speed]
-size_norm = [1/x*100 for x in size]
-r2_norm = [x/0.9*100 for x in r2]
+speed_norm = [1 /x *100 for x in speed]
+size_norm = [1 /x *100 for x in size]
+r2_norm = [x /0.9 *100 for x in r2]
 
 categories = ['R²', 'Speed', 'Size']
-angles = np.linspace(0, 2*np.pi, len(categories), endpoint=False).tolist()
+angles = np.linspace(0, 2 *np.pi, len(categories), endpoint=False).tolist()
 angles += angles[:1]
 
 colors = ['#2E86AB', '#26A69A', '#FFA726', '#AB47BC']
@@ -175,9 +175,9 @@ ax1.grid(True, linestyle='--', alpha=0.5)
 ax1.legend(loc='upper right', fontsize=9)
 
 # Pareto scatter
-ax2.scatter(r2, [1/x for x in speed], s=[x/10 for x in size], c=colors, alpha=0.6, edgecolors='black', linewidth=2)
+ax2.scatter(r2, [1 /x for x in speed], s=[x /10 for x in size], c=colors, alpha=0.6, edgecolors='black', linewidth=2)
 for i, model in enumerate(models):
-    ax2.annotate(model, (r2[i], 1/speed[i]), fontsize=10, fontweight='bold',
+    ax2.annotate(model, (r2[i], 1 /speed[i]), fontsize=10, fontweight='bold',
                  xytext=(5, 5), textcoords='offset points')
 
 ax2.set_xlabel('R² Score', fontsize=11, fontweight='bold')

@@ -154,7 +154,7 @@ def batch_analyze(symbols=None):
     results = []
 
     for i, symbol in enumerate(symbols):
-        print(f"[{i+1}/{len(symbols)}] {symbol}")
+        print(f"[{i +1}/{len(symbols)}] {symbol}")
 
         # 获取数据
         stock = get_stock(symbol)

@@ -70,7 +70,7 @@ class TechnicalIndicatorCalculator:
                 if i < period - 1:
                     ma_values.append(None)
                 else:
-                    avg = sum(closes[i-period+1:i+1]) / period
+                    avg = sum(closes[i -period +1:i +1]) / period
                     ma_values.append(round(avg, 2))
 
             result[f"MA{period}"] = ma_values
@@ -170,7 +170,7 @@ class TechnicalIndicatorCalculator:
             losses = []
 
             for j in range(i - period + 1, i + 1):
-                change = closes[j] - closes[j-1]
+                change = closes[j] - closes[j -1]
                 if change > 0:
                     gains.append(change)
                     losses.append(0)
@@ -214,8 +214,8 @@ class TechnicalIndicatorCalculator:
 
         for i in range(n, len(closes)):
             # RSV = (Close - Lowest Low) / (Highest High - Lowest Low) * 100
-            lowest_low = min(lows[i-n+1:i+1])
-            highest_high = max(highs[i-n+1:i+1])
+            lowest_low = min(lows[i -n +1:i +1])
+            highest_high = max(highs[i -n +1:i +1])
 
             if highest_high == lowest_low:
                 rsv = 0
@@ -223,9 +223,9 @@ class TechnicalIndicatorCalculator:
                 rsv = (closes[i] - lowest_low) / (highest_high - lowest_low) * 100
 
             # K = 2/3 * Prev_K + 1/3 * RSV
-            k = round(2/3 * prev_k + 1/3 * rsv, 2)
+            k = round(2 /3 * prev_k + 1 /3 * rsv, 2)
             # D = 2/3 * Prev_D + 1/3 * K
-            d = round(2/3 * prev_d + 1/3 * k, 2)
+            d = round(2 /3 * prev_d + 1 /3 * k, 2)
             # J = 3*K - 2*D
             j = round(3 * k - 2 * d, 2)
 
@@ -262,11 +262,11 @@ class TechnicalIndicatorCalculator:
                 lower_band.append(None)
             else:
                 # Middle = SMA
-                sma = sum(closes[i-period+1:i+1]) / period
+                sma = sum(closes[i -period +1:i +1]) / period
                 middle_band.append(round(sma, 2))
 
                 # Standard deviation
-                variance = sum((closes[j] - sma) ** 2 for j in range(i-period+1, i+1)) / period
+                variance = sum((closes[j] - sma) ** 2 for j in range(i -period +1, i +1)) / period
                 std = math.sqrt(variance)
 
                 upper_band.append(round(sma + std_dev * std, 2))
@@ -298,8 +298,8 @@ class TechnicalIndicatorCalculator:
         for i in range(1, len(closes)):
             tr = max(
                 highs[i] - lows[i],
-                abs(highs[i] - closes[i-1]),
-                abs(lows[i] - closes[i-1])
+                abs(highs[i] - closes[i -1]),
+                abs(lows[i] - closes[i -1])
             )
             true_ranges.append(tr)
 
@@ -331,16 +331,16 @@ class TechnicalIndicatorCalculator:
         true_ranges = []
 
         for i in range(1, len(closes)):
-            high_diff = highs[i] - highs[i-1]
-            low_diff = lows[i-1] - lows[i]
+            high_diff = highs[i] - highs[i -1]
+            low_diff = lows[i -1] - lows[i]
 
             plus_dm.append(high_diff if high_diff > low_diff and high_diff > 0 else 0)
             minus_dm.append(low_diff if low_diff > high_diff and low_diff > 0 else 0)
 
             tr = max(
                 highs[i] - lows[i],
-                abs(highs[i] - closes[i-1]),
-                abs(lows[i] - closes[i-1])
+                abs(highs[i] - closes[i -1]),
+                abs(lows[i] - closes[i -1])
             )
             true_ranges.append(tr)
 
@@ -355,9 +355,9 @@ class TechnicalIndicatorCalculator:
 
         for i in range(period, len(closes)):
             if i > period:
-                smoothed_tr = smoothed_tr - (smoothed_tr / period) + true_ranges[i-1]
-                smoothed_plus = smoothed_plus - (smoothed_plus / period) + plus_dm[i-1]
-                smoothed_minus = smoothed_minus - (smoothed_minus / period) + minus_dm[i-1]
+                smoothed_tr = smoothed_tr - (smoothed_tr / period) + true_ranges[i -1]
+                smoothed_plus = smoothed_plus - (smoothed_plus / period) + plus_dm[i -1]
+                smoothed_minus = smoothed_minus - (smoothed_minus / period) + minus_dm[i -1]
 
             plus_di = (smoothed_plus / smoothed_tr * 100) if smoothed_tr > 0 else 0
             minus_di = (smoothed_minus / smoothed_tr * 100) if smoothed_tr > 0 else 0
@@ -425,9 +425,9 @@ class TechnicalIndicatorCalculator:
         obv_values = [float(volumes[0])]
 
         for i in range(1, len(closes)):
-            if closes[i] > closes[i-1]:
+            if closes[i] > closes[i -1]:
                 obv_values.append(obv_values[-1] + volumes[i])
-            elif closes[i] < closes[i-1]:
+            elif closes[i] < closes[i -1]:
                 obv_values.append(obv_values[-1] - volumes[i])
             else:
                 obv_values.append(obv_values[-1])
@@ -739,7 +739,7 @@ Test entry point"""
         volume = random.randint(5000000, 50000000)
 
         candles.append({
-            "date": f"2026-01-{i%30+1:02d}",
+            "date": f"2026-01-{i%30 +1:02d}",
             "open": round(open_p, 2),
             "high": round(high_p, 2),
             "low": round(low_p, 2),

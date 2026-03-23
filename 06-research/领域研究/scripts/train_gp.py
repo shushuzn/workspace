@@ -145,7 +145,7 @@ mae_sigma = mean_absolute_error(y_test_sigma, sigma_pred)
 print(f"\n  Conductivity model:")
 print(f"    R2: {r2_sigma:.3f}")
 print(f"    MAE: {mae_sigma:.1f} S/m")
-print(f"    Avg uncertainty: +/-{np.mean(sigma_std):.1f} S/m ({np.mean(sigma_std)/np.mean(y_test_sigma)*100:.1f}%)")
+print(f"    Avg uncertainty: +/-{np.mean(sigma_std):.1f} S/m ({np.mean(sigma_std) /np.mean(y_test_sigma) *100:.1f}%)")
 
 # 交叉验证
 cv_scores = cross_val_score(gp_sigma, X_train, y_train_sigma, cv=5, scoring='r2')
@@ -224,7 +224,7 @@ idig_pred, idig_std = gp_idig.predict(X_new_scaled, return_std=True)
 
 print(f"\n工艺参数：P=0.30W, v=30mm/s, E=10.0 J/cm², C/O=3.3")
 print(f"\n预测结果:")
-print(f"  电导率：{sigma_pred[0]:.0f} ± {sigma_std[0]:.0f} S/m (95% CI: [{sigma_pred[0]-2*sigma_std[0]:.0f}, {sigma_pred[0]+2*sigma_std[0]:.0f}])")
+print(f"  电导率：{sigma_pred[0]:.0f} ± {sigma_std[0]:.0f} S/m (95% CI: [{sigma_pred[0] -2 *sigma_std[0]:.0f}, {sigma_pred[0] +2 *sigma_std[0]:.0f}])")
 print(f"  SSA: {ssa_pred[0]:.0f} ± {ssa_std[0]:.0f} m²/g")
 print(f"  ID/IG: {idig_pred[0]:.2f} ± {idig_std[0]:.2f}")
 
@@ -237,7 +237,7 @@ print("=" * 60)
 
 print(f"\nKey Metrics:")
 print(f"  R^2: {r2_sigma:.3f} (target: >0.75)")
-print(f"  Uncertainty: +/-{np.mean(sigma_std)/np.mean(y_test_sigma)*100:.1f}%")
+print(f"  Uncertainty: +/-{np.mean(sigma_std) /np.mean(y_test_sigma) *100:.1f}%")
 print(f"  CV: {cv_scores.mean():.3f} +/- {cv_scores.std():.3f}")
 
 print(f"\nUsage Example:")

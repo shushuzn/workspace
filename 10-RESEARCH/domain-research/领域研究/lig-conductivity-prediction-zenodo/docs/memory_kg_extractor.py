@@ -312,9 +312,9 @@ class MemoryKGExtractor:
 
         lessons = self.extract_lessons()
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📚 MEMORY.md 教训预览")
-        print("="*80)
+        print("=" *80)
 
         for i, lesson in enumerate(lessons[:limit], 1):
             print(f"\n{i}. [{lesson.id}]")
@@ -326,7 +326,7 @@ class MemoryKGExtractor:
         if len(lessons) > limit:
             print(f"\n... 还有 {len(lessons) - limit} 条教训")
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
 
 
 def main():
@@ -348,9 +348,9 @@ def main():
     elif args.extract:
         result = extractor.extract_and_save()
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 提取统计")
-        print("="*80)
+        print("=" *80)
         print(f"  总教训数：{result.total_lessons}")
         print(f"  实体数：{len(result.entities)}")
         print(f"  关系数：{len(result.relations)}")
@@ -361,17 +361,17 @@ def main():
             category_name = extractor.categories.get(category, category)
             print(f"    {category} ({category_name}): {count}")
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("✅ 提取完成！")
-        print("="*80)
+        print("=" *80)
 
     elif args.stats:
         lessons = extractor.extract_lessons()
         stats = extractor.get_stats()
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 MEMORY.md 教训统计")
-        print("="*80)
+        print("=" *80)
         print(f"  总教训数：{stats['total_lessons']}")
         print(f"  平均置信度：{stats['avg_confidence']:.2f}")
         print(f"  唯一标签数：{stats['total_tags']}")
@@ -383,7 +383,7 @@ def main():
             percentage = count / stats['total_lessons'] * 100 if stats['total_lessons'] > 0 else 0
             print(f"    {category} ({category_name}): {count} ({percentage:.1f}%)")
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
 
     else:
         parser.print_help()

@@ -131,7 +131,7 @@ if __name__ == '__main__':
     print("测试 1: 搜索 'transformer'")
     papers = client.search('transformer', max_results=3)
     for i, paper in enumerate(papers):
-        print(f"{i+1}. {paper['title'][:60]}...")
+        print(f"{i +1}. {paper['title'][:60]}...")
         print(f"   作者：{', '.join(paper['authors'][:3])}")
         print(f"   arXiv: {paper['arxiv_id']}")
         print()

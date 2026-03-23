@@ -34,7 +34,7 @@ def main():
         value_match = req == comp
 
         status = "[OK]" if (type_match and value_match) else "[FAIL]"
-        print(f"{status} Step {i+1}: workflow={req} ({type(req).__name__}), state={comp} ({type(comp).__name__})")
+        print(f"{status} Step {i +1}: workflow={req} ({type(req).__name__}), state={comp} ({type(comp).__name__})")
 
         if not (type_match and value_match):
             all_match = False

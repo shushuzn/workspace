@@ -105,7 +105,7 @@ class MarketRegimeDetector:
 
         # 计算滚动标准差
         recent_returns = returns[-window:]
-        volatility = sum((r - sum(recent_returns)/len(recent_returns))**2
+        volatility = sum((r - sum(recent_returns) /len(recent_returns))**2
                         for r in recent_returns) / len(recent_returns)
         volatility = math.sqrt(volatility)
 
@@ -154,7 +154,7 @@ class MarketRegimeDetector:
         # 真实 ADX 需要计算 +DI 和 -DI，这里简化
 
         # 计算价格变化幅度
-        price_changes = [prices[i] - prices[i-1] for i in range(1, len(prices))]
+        price_changes = [prices[i] - prices[i -1] for i in range(1, len(prices))]
         avg_change = sum(abs(c) for c in price_changes) / len(price_changes)
 
         # 计算趋势强度评分（0-100）
@@ -325,7 +325,7 @@ class MarketRegimeDetector:
             result['volatility_analysis'] = self.detect_volatility_regime(returns)
         else:
             # 计算简化收益率
-            returns = [(prices[i] - prices[i-1]) / prices[i-1]
+            returns = [(prices[i] - prices[i -1]) / prices[i -1]
                       for i in range(1, len(prices))]
             result['volatility_analysis'] = self.detect_volatility_regime(returns)
 
@@ -414,10 +414,10 @@ def generate_test_data() -> tuple:
     lows = [p * (1 - random.uniform(0, 0.02)) for p in prices]
     volumes = [random.randint(800000, 1200000) for _ in range(200)]
 
-    ma_short = [sum(prices[max(0, i-19):i+1]) / min(20, i+1) for i in range(200)]
-    ma_long = [sum(prices[max(0, i-59):i+1]) / min(60, i+1) for i in range(200)]
+    ma_short = [sum(prices[max(0, i -19):i +1]) / min(20, i +1) for i in range(200)]
+    ma_long = [sum(prices[max(0, i -59):i +1]) / min(60, i +1) for i in range(200)]
 
-    returns = [(prices[i] - prices[i-1]) / prices[i-1] for i in range(1, len(prices))]
+    returns = [(prices[i] - prices[i -1]) / prices[i -1] for i in range(1, len(prices))]
 
     return prices, highs, lows, volumes, ma_short, ma_long, returns
 

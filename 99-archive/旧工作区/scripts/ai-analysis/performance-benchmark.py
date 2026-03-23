@@ -34,7 +34,7 @@ class PerformanceBenchmark:
                 if response.status_code == 200:
                     latencies.append((end - start) * 1000)  # 转换为毫秒
             except Exception as e:
-                print(f"  Iteration {i+1} failed: {e}")
+                print(f"  Iteration {i +1} failed: {e}")
 
         if not latencies:
             return {"status": "error", "message": "No successful requests"}

@@ -102,9 +102,9 @@ class CopawEntry:
         if WORKFLOW_ENFORCER_ENABLED:
             self.enforcer = WorkflowEnforcer(self.flow_id, self.session_id)
 
-        print("="*60)
+        print("=" *60)
         print("CoPaw Entry Point - 强制工作流入口")
-        print("="*60)
+        print("=" *60)
         print(f"Task: {self.task_name}")
         print(f"Task Type: {self.task_type}")
         print(f"Flow ID: {self.flow_id}")
@@ -114,8 +114,8 @@ class CopawEntry:
             print(f"[防护] 自动防护层已激活")
         if WORKFLOW_ENFORCER_ENABLED:
             print(f"[工作流] 强制执行器已激活")
-        print("="*60)
-        print("="*60)
+        print("=" *60)
+        print("=" *60)
 
     def _generate_session_id(self) -> str:
         """生成会话 ID"""
@@ -178,9 +178,9 @@ class CopawEntry:
 
     def verify_context(self) -> bool:
         """Step 1: 验证上下文加载"""
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print("Step 1: 上下文加载验证")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
         core_files = [
             "SOUL.md", "USER.md", "AGENTS.md", "TOOLS.md", "HEARTBEAT.md",
@@ -206,10 +206,10 @@ class CopawEntry:
         valid = total_size < 100 * 1024 and len(missing) == 0
 
         print(f"加载文件：{len(loaded)}/{len(core_files)}")
-        print(f"总大小：{total_size/1024:.1f}KB (目标<100KB)")
+        print(f"总大小：{total_size /1024:.1f}KB (目标<100KB)")
         print(f"缺失文件：{len(missing)}")
         print(f"验证结果：{'通过' if valid else '失败'}")
-        print(f"{'='*60}\n")
+        print(f"{'=' *60}\n")
 
         return valid
 
@@ -267,14 +267,14 @@ class CopawEntry:
         with open(self.state_file, "w", encoding="utf-8") as f:
             json.dump(state, f, ensure_ascii=False, indent=2)
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print("会话结束")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
         print(f"状态：{'完成' if success else '失败'}")
         print(f"持续时间：{duration:.1f}s")
         print(f"完成率：{state['completion_percentage']}%")
         print(f"工作流合规：{state['workflow_compliance']}")
-        print(f"{'='*60}\n")
+        print(f"{'=' *60}\n")
 
     def run(self) -> None:
         """执行入口点流程"""
@@ -388,17 +388,17 @@ def main() -> None:
     success = entry.run()
 
     # 【新增】自动注册新工具
-    print(f"\n{'='*60}")
+    print(f"\n{'=' *60}")
     print("Step 1.5: 自动注册工具")
-    print(f"{'='*60}")
+    print(f"{'=' *60}")
     auto_register_tools()
 
     # 保持入口点活跃，等待任务完成
     if success:
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("等待任务完成...")
         print("按 Ctrl+C 或调用 entry.finalize() 结束会话")
-        print("="*60)
+        print("=" *60)
 
     return 0 if success else 1
 # ==============================================================================

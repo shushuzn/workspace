@@ -50,7 +50,7 @@ class WorkflowReport:
                 "total_tools": len(tools),
                 "naming_compliant": sum(1 for t in tools if "_001.py" in t.name),
                 "workflow_runs": log_stats["runs"],
-                "success_rate": f"{(log_stats['success']/log_stats['runs']*100):.0f}%" if log_stats["runs"] > 0 else "N/A"
+                "success_rate": f"{(log_stats['success'] /log_stats['runs'] *100):.0f}%" if log_stats["runs"] > 0 else "N/A"
             },
             "categories": categories
         }

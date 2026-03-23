@@ -344,9 +344,9 @@ class TestPerformance(unittest.TestCase):
 
 def run_tests():
     """运行所有测试"""
-    print("="*60)
+    print("=" *60)
     print("知识卡片生成器单元测试套件")
-    print("="*60)
+    print("=" *60)
     print(f"测试时间：{datetime.now().isoformat()}")
     print()
 
@@ -390,12 +390,12 @@ def run_tests():
         json.dump(report, f, indent=2, ensure_ascii=False)
 
     print()
-    print("="*60)
+    print("=" *60)
     print(f"测试完成：{report['total']} 个测试")
     print(f"通过：{report['passed']} | 失败：{report['failed']} | 错误：{report['errors']}")
-    print(f"成功率：{report['passed']/report['total']*100:.1f}%")
+    print(f"成功率：{report['passed'] /report['total'] *100:.1f}%")
     print(f"报告已保存：{report_path}")
-    print("="*60)
+    print("=" *60)
 
     return result.wasSuccessful()
 

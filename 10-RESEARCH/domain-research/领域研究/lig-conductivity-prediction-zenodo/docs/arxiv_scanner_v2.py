@@ -141,7 +141,7 @@ class ArxivScannerV2:
     def scan_simulated(self) -> int:
         """Simulate arXiv scan (in real version, would use arXiv API)"""
         print("\n🔍 Scanning arXiv for new innovations...")
-        print("="*60)
+        print("=" *60)
 
         # Simulate new papers from arXiv (AI/ML/Systems categories)
         new_papers = [
@@ -307,9 +307,9 @@ class ArxivScannerV2:
 
     def print_status(self):
         """Print current status"""
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 arXiv Innovation Scanner Status")
-        print("="*80)
+        print("=" *80)
 
         summary = self.get_status_summary()
 
@@ -327,9 +327,9 @@ class ArxivScannerV2:
             print(f"    Papers: {last_scan['papers_scanned']}, New: {last_scan['new_opportunities']}")
 
         # Print top 5 opportunities
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🎯 Top 5 Opportunities:")
-        print("="*80)
+        print("=" *80)
 
         for i, opp in enumerate(self.get_top_opportunities(5), 1):
             print(f"\n  {i}. [{opp.priority_score:.0f}] {opp.title}")
@@ -363,9 +363,9 @@ def main():
     # Always save
     scanner.save_data()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ arXiv Scanner v2.0 complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📅 Schedule: Daily 7AM automatic scan")
     print("🎯 Priority: Impact(40%) + Novelty(35%) + Feasibility(25%)")
     print("💾 Data: data/arxiv_opportunities.json")

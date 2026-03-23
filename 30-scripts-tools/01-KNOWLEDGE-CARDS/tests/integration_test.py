@@ -199,7 +199,7 @@ class IntegrationTest:
 
         print(f"\n[集成测试] {Path(pdf_path).name}")
         print(f"类别：{category}")
-        print("-"*60)
+        print("-" *60)
 
         results = {
             "pdf": Path(pdf_path).name,
@@ -233,9 +233,9 @@ class IntegrationTest:
 
     def run_all_tests(self):
         """运行所有集成测试"""
-        print("="*60)
+        print("=" *60)
         print("知识卡片生成器集成测试")
-        print("="*60)
+        print("=" *60)
         print(f"开始时间：{datetime.now().isoformat()}")
 
         # 加载测试 PDF
@@ -283,15 +283,15 @@ class IntegrationTest:
 
         # 打印汇总
         print()
-        print("="*60)
+        print("=" *60)
         print("集成测试汇总")
-        print("="*60)
+        print("=" *60)
         print(f"测试 PDF: {summary['total_pdfs']} 个")
         print(f"总测试数：{summary['total_tests']}")
         print(f"通过：{summary['passed_tests']} | 失败：{summary['failed_tests']}")
         print(f"通过率：{summary['pass_rate']:.1f}%")
         print(f"报告已保存：{report_path}")
-        print("="*60)
+        print("=" *60)
 
         return report
 

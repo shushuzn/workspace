@@ -172,9 +172,9 @@ print(f"  最大值：{df_quaternary['composite_conductivity'].max():.2e} S/m")
 print(f"  最小值：{df_quaternary['composite_conductivity'].min():.2e} S/m")
 
 print(f"\n协同效应分解:")
-print(f"  二元协同贡献：{df_quaternary['synergy_binary'].mean():.3f} ({df_quaternary['synergy_binary'].mean()/df_quaternary['total_synergy'].mean()*100:.1f}%)")
-print(f"  三元协同贡献：{df_quaternary['synergy_ternary'].mean():.3f} ({df_quaternary['synergy_ternary'].mean()/df_quaternary['total_synergy'].mean()*100:.1f}%)")
-print(f"  四元协同贡献：{df_quaternary['synergy_quaternary'].mean():.3f} ({df_quaternary['synergy_quaternary'].mean()/df_quaternary['total_synergy'].mean()*100:.1f}%)")
+print(f"  二元协同贡献：{df_quaternary['synergy_binary'].mean():.3f} ({df_quaternary['synergy_binary'].mean() /df_quaternary['total_synergy'].mean() *100:.1f}%)")
+print(f"  三元协同贡献：{df_quaternary['synergy_ternary'].mean():.3f} ({df_quaternary['synergy_ternary'].mean() /df_quaternary['total_synergy'].mean() *100:.1f}%)")
+print(f"  四元协同贡献：{df_quaternary['synergy_quaternary'].mean():.3f} ({df_quaternary['synergy_quaternary'].mean() /df_quaternary['total_synergy'].mean() *100:.1f}%)")
 
 # ============================================================================
 # 3. 一元→二元→三元→四元 演进对比
@@ -202,9 +202,9 @@ try:
     print(f"\n📈 性能演进:")
     print(f"  单一 CNT:   {cnt_conductivity:.2e} S/m")
     print(f"  单一 LIG:   {lig_conductivity:.2e} S/m")
-    print(f"  二元复合：  {binary_conductivity:.2e} S/m (协同 {binary_synergy*100:.1f}%)")
-    print(f"  三元复合：  {ternary_conductivity:.2e} S/m (协同 {ternary_synergy*100:.1f}%)")
-    print(f"  四元复合：  {df_quaternary['composite_conductivity'].mean():.2e} S/m (协同 {(df_quaternary['total_synergy'].mean()-1)*100:.1f}%)")
+    print(f"  二元复合：  {binary_conductivity:.2e} S/m (协同 {binary_synergy *100:.1f}%)")
+    print(f"  三元复合：  {ternary_conductivity:.2e} S/m (协同 {ternary_synergy *100:.1f}%)")
+    print(f"  四元复合：  {df_quaternary['composite_conductivity'].mean():.2e} S/m (协同 {(df_quaternary['total_synergy'].mean() -1) *100:.1f}%)")
 
     # 计算提升
     improvement_binary = (binary_conductivity / cnt_conductivity - 1) * 100

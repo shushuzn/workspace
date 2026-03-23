@@ -121,8 +121,8 @@ def track_session(session_data):
 
     # 训练迁移 (论文核心发现)
     if len(recent) >= 3:
-        first = recent[:len(recent)//3]
-        last = recent[-len(recent)//3:]
+        first = recent[:len(recent) //3]
+        last = recent[-len(recent) //3:]
         first_avg = sum(s.get("steps_completed", 0) / max(1, s.get("duration", 1)) for s in first) / len(first)
         last_avg = sum(s.get("steps_completed", 0) / max(1, s.get("duration", 1)) for s in last) / len(last)
         improvement = (last_avg - first_avg) / max(0.001, first_avg) * 100

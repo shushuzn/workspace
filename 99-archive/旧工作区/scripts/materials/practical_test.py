@@ -69,9 +69,9 @@ if kg_module:
 
 def test_ner():
     """测试 NER 模型"""
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("测试 1: NER 模型")
-    print("="*60)
+    print("=" *60)
 
     ner = RuleBasedNER()
 
@@ -96,9 +96,9 @@ def test_ner():
 
 def test_crystal_structure():
     """Test crystal structure extraction"""
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("Test 2: Crystal Structure")
-    print("="*60)
+    print("=" *60)
 
     extractor = TextStructureExtractor()
 
@@ -124,9 +124,9 @@ def test_crystal_structure():
 
 def test_property_extraction():
     """测试性能数据提取"""
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("测试 3: 性能数据提取")
-    print("="*60)
+    print("=" *60)
 
     extractor = PropertyExtractor()
 
@@ -150,9 +150,9 @@ def test_property_extraction():
 
 def test_synthesis_condition():
     """测试合成条件提取"""
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("测试 4: 合成条件提取")
-    print("="*60)
+    print("=" *60)
 
     extractor = SynthesisConditionExtractor()
 
@@ -182,9 +182,9 @@ def test_synthesis_condition():
 
 def test_kg_builder():
     """测试知识图谱构建"""
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("测试 5: 知识图谱构建")
-    print("="*60)
+    print("=" *60)
 
     builder = AutoKGBuilder()
 
@@ -221,10 +221,10 @@ def test_kg_builder():
 
 def main():
     """主函数"""
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("第十二阶段 - 实战测试")
     print("验证今日完成的 5 个提取器")
-    print("="*70)
+    print("=" *70)
 
     results = {}
 
@@ -236,9 +236,9 @@ def main():
     results['KG'] = test_kg_builder()
 
     # 总结
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print("测试总结")
-    print("="*70)
+    print("=" *70)
 
     passed = sum(1 for v in results.values() if v)
     total = len(results)
@@ -267,7 +267,7 @@ def main():
         }, f, ensure_ascii=False, indent=2)
 
     print(f"\nResults saved to {output_path}")
-    print("="*70)
+    print("=" *70)
 
 
 if __name__ == '__main__':

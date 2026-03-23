@@ -183,9 +183,9 @@ class AutonomousResearchAgent:
 
     def run_scan(self) -> ResearchSession:
         """Run autonomous research scan"""
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🤖 Autonomous Research Agent - Scan")
-        print("="*80)
+        print("=" *80)
         print(f"⏰ Timestamp: {datetime.now().isoformat()}")
 
         session = ResearchSession(
@@ -202,9 +202,9 @@ class AutonomousResearchAgent:
 
         try:
             # Step 1: Scan arXiv
-            print("\n" + "="*80)
+            print("\n" + "=" *80)
             print("Step 1: Scanning arXiv")
-            print("="*80)
+            print("=" *80)
 
             # Use scanner's opportunities list
             opportunities = list(self.scanner.opportunities.values())
@@ -232,9 +232,9 @@ class AutonomousResearchAgent:
             print(f"\n✅ Found {len(opportunities)} opportunities")
 
             # Step 2: Analyze papers
-            print("\n" + "="*80)
+            print("\n" + "=" *80)
             print("Step 2: Analyzing Papers")
-            print("="*80)
+            print("=" *80)
 
             analyzed_papers = []
             for opp in opportunities[:self.config["max_papers_per_scan"]]:
@@ -247,9 +247,9 @@ class AutonomousResearchAgent:
             print(f"\n✅ Analyzed {len(analyzed_papers)} high-priority papers")
 
             # Step 3: Extract insights
-            print("\n" + "="*80)
+            print("\n" + "=" *80)
             print("Step 3: Extracting Insights")
-            print("="*80)
+            print("=" *80)
 
             for paper in analyzed_papers:
                 insights = self.extract_insights(paper)
@@ -261,9 +261,9 @@ class AutonomousResearchAgent:
             print(f"\n✅ Extracted {session.insights_extracted} insights")
 
             # Step 4: Recommend actions
-            print("\n" + "="*80)
+            print("\n" + "=" *80)
             print("Step 4: Recommending Actions")
-            print("="*80)
+            print("=" *80)
 
             for insight in list(self.insights.values())[-session.insights_extracted:]:
                 if insight.actionable:
@@ -289,9 +289,9 @@ class AutonomousResearchAgent:
             self.save_state()
 
             # Print summary
-            print("\n" + "="*80)
+            print("\n" + "=" *80)
             print("📊 Session Summary")
-            print("="*80)
+            print("=" *80)
             print(f"  Papers Scanned: {session.papers_scanned}")
             print(f"  Papers Analyzed: {session.papers_analyzed}")
             print(f"  Insights Extracted: {session.insights_extracted}")
@@ -299,9 +299,9 @@ class AutonomousResearchAgent:
             print(f"  Actions Added to TODO: {session.actions_added_to_todo}")
             print(f"  Duration: {(datetime.fromisoformat(session.end_time) - datetime.fromisoformat(session.start_time)).total_seconds():.1f}s")
 
-            print("\n" + "="*80)
+            print("\n" + "=" *80)
             print("✅ Autonomous Research Session Complete!")
-            print("="*80)
+            print("=" *80)
 
         except Exception as e:
             session.end_time = datetime.now().isoformat()
@@ -499,9 +499,9 @@ def main():
         # TODO: Implement paper analysis
     elif args.status:
         status = agent.get_status()
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🤖 Autonomous Research Agent - Status")
-        print("="*80)
+        print("=" *80)
         print(f"  Total Insights: {status['total_insights']}")
         print(f"  Total Actions: {status['total_actions']}")
         print(f"  Pending Actions: {status['pending_actions']}")
@@ -509,7 +509,7 @@ def main():
         print(f"  Total Sessions: {status['total_sessions']}")
         if status['last_session']:
             print(f"  Last Session: {status['last_session']['status']} ({status['last_session']['papers_scanned']} papers)")
-        print("="*80)
+        print("=" *80)
     elif args.dashboard:
         print("Dashboard not yet implemented. Use --status for now.")
     else:

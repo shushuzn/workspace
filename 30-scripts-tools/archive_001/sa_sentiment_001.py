@@ -78,7 +78,7 @@ class SentimentAnalyzer:
         news = []
         for i, n in enumerate(selected):
             news.append({
-                "id": f"news_{i+1}",
+                "id": f"news_{i +1}",
                 "title": n["title"],
                 "sentiment": n["sentiment"],
                 "source": random.choice(["Reuters", "Bloomberg", "WSJ", "CNBC"]),

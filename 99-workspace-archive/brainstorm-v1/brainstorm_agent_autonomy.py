@@ -375,7 +375,7 @@ def generate_brainstorm_report():
 
     print(f"\n📊 总体统计:")
     print(f"  总创意数：{total_ideas}")
-    print(f"  高优先级：{high_priority} ({high_priority/total_ideas*100:.0f}%)")
+    print(f"  高优先级：{high_priority} ({high_priority /total_ideas *100:.0f}%)")
     print(f"  平均影响力：{avg_impact:.1f}/5")
     print(f"  平均工作量：{avg_effort:.1f}/5")
 

@@ -36,9 +36,9 @@ def show_status() -> None:
         "prioritized": base / "brainstorm_ideas_prioritized.json"
     }
 
-    print("="*60)
+    print("=" *60)
     print("[BRAINSTORM] Status")
-    print("="*60)
+    print("=" *60)
 
     for name, path in files.items():
         status = "[OK]" if path.exists() else "[MISSING]"
@@ -96,9 +96,9 @@ Fixes:
 Run the full brainstorm workflow"""
     import subprocess
 
-    print("="*60)
+    print("=" *60)
     print("[BRAINSTORM] Full Workflow")
-    print("="*60)
+    print("=" *60)
 
     # Step 1: Define
     print("\n[Step 1] Defining problem...")
@@ -141,9 +141,9 @@ Run the full brainstorm workflow"""
         return
 
     # Show results
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("[BRAINSTORM] Complete!")
-    print("="*60)
+    print("=" *60)
 
     show_status()
 

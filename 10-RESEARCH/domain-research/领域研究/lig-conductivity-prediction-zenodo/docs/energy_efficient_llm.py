@@ -337,9 +337,9 @@ class EnergyEfficientLLM:
                       max_accuracy_drop: float = 0.02) -> Dict:
         """Optimize model for energy efficiency"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("⚡ Energy-Efficient LLM Optimization")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Model: {model.name}")
         print(f"  Size: {model.size_gb:.1f} GB")
         print(f"  Parameters: {model.params_billion:.1f}B")
@@ -347,27 +347,27 @@ class EnergyEfficientLLM:
         print(f"  Max Accuracy Drop: {max_accuracy_drop:.1%}")
 
         # Step 1: Quantization
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Step 1: Quantization")
-        print("="*80)
+        print("=" *80)
         quant_result = self.quantizer.quantize(model, "INT4")
 
         # Step 2: Pruning
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Step 2: Pruning")
-        print("="*80)
+        print("=" *80)
         prune_result = self.pruner.prune(model, sparsity=0.6, method="structured")
 
         # Step 3: DVFS Optimization
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Step 3: DVFS Optimization")
-        print("="*80)
+        print("=" *80)
         self.dvfs.adjust_for_workload("inference")
 
         # Step 4: Combined Results
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Step 4: Combined Optimization Results")
-        print("="*80)
+        print("=" *80)
 
         # Calculate combined effects
         combined_speedup = quant_result.speedup * prune_result.speedup
@@ -386,9 +386,9 @@ class EnergyEfficientLLM:
         print(f"  Accuracy Constraint Met: {'✓' if accuracy_met else '✗'} ({combined_accuracy_drop:.1%} / {max_accuracy_drop:.1%})")
 
         # Energy monitoring
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Step 5: Energy Monitoring")
-        print("="*80)
+        print("=" *80)
 
         # Simulate multiple inferences
         for i in range(10):
@@ -465,9 +465,9 @@ def demo_energy_efficiency():
     )
 
     # Print stats
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 System Statistics")
-    print("="*80)
+    print("=" *80)
 
     stats = system.get_system_stats()
     print(f"\n  Optimizations: {stats['optimizations_completed']}")
@@ -502,9 +502,9 @@ def main():
     if args.demo or True:  # Default to demo
         demo_energy_efficiency()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Energy-efficient LLM inference complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.14003")
     print("🎯 Key Achievements:")
     print("   - 8x speedup (target achieved)")

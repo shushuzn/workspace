@@ -57,9 +57,9 @@ Fixes:
 
 执行行动规划"""
 
-    print("="*60)
+    print("=" *60)
     print("🧠 头脑风暴 Step 8: 行动规划")
-    print("="*60)
+    print("=" *60)
 
     # 读取排序结果
     ranked_file = Path("flow-archive/brainstorm-current/ideas_ranked.json")
@@ -121,9 +121,9 @@ Fixes:
         json.dump(result, f, ensure_ascii=False, indent=2)
 
     # 显示摘要
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("📋 行动摘要:")
-    print("="*60)
+    print("=" *60)
     for action in actions:
         print(f"\n#{action['rank']}: {action['idea'][:50]}")
         print(f"  负责人: {action['owner']} | 时间: {action['timeline']}")

@@ -46,7 +46,7 @@ def add_mock_calls():
         exists = any(e["tool_id"] == tool_id and e["session_id"] == session_id for e in entries)
         if not exists:
             entry = {
-                "timestamp": (base_time + timedelta(seconds=i*30)).isoformat(),
+                "timestamp": (base_time + timedelta(seconds=i *30)).isoformat(),
                 "tool_id": tool_id,
                 "params": {},
                 "result_summary": '{"status": "success"}',

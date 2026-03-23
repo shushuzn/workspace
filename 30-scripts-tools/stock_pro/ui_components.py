@@ -184,7 +184,7 @@ def create_line_chart(dates, prices, symbol="", show_volume=False):
 
     # Add moving average
     if len(prices) >= 20:
-        ma20 = [sum(prices[max(0, i-19):i+1])/min(20, i+1) for i in range(len(prices))]
+        ma20 = [sum(prices[max(0, i -19):i +1]) /min(20, i +1) for i in range(len(prices))]
         fig.add_trace(go.Scatter(
             x=dates,
             y=ma20,
@@ -240,14 +240,14 @@ def progress_bar(value, max_val=100, color=None, height=8, show_label=True):
             'width': '100%',
             'height': f'{height}px',
             'background': COLORS['bg_card_hover'],
-            'borderRadius': f'{height//2}px',
+            'borderRadius': f'{height //2}px',
             'overflow': 'hidden',
         }, children=[
             html.Div(style={
                 'width': f'{percentage}%',
                 'height': '100%',
                 'background': f'linear-gradient(90deg, {color}, {color}aa)',
-                'borderRadius': f'{height//2}px',
+                'borderRadius': f'{height //2}px',
                 'transition': 'width 0.5s ease',
             })
         ]),
@@ -429,13 +429,13 @@ def format_number(n, decimals=2):
     if n is None:
         return "N/A"
     if abs(n) >= 1e12:
-        return f"${n/1e12:.{decimals}f}T"
+        return f"${n /1e12:.{decimals}f}T"
     elif abs(n) >= 1e9:
-        return f"${n/1e9:.{decimals}f}B"
+        return f"${n /1e9:.{decimals}f}B"
     elif abs(n) >= 1e6:
-        return f"${n/1e6:.{decimals}f}M"
+        return f"${n /1e6:.{decimals}f}M"
     elif abs(n) >= 1e3:
-        return f"${n/1e3:.{decimals}f}K"
+        return f"${n /1e3:.{decimals}f}K"
     return f"${n:.{decimals}f}"
 
 def format_percentage(n, decimals=1, signed=True):

@@ -38,24 +38,24 @@ for f in core_files:
 results["valid"] = results["total_size"] < 100 * 1024
 results["status"] = "pass" if results["valid"] and len(results["missing"]) == 0 else "fail"
 
-print(f"\n{'='*60}")
+print(f"\n{'=' *60}")
 print("Step 1: 上下文加载验证")
-print(f"{'='*60}")
+print(f"{'=' *60}")
 print(f"加载文件：{len(results['loaded'])}/7")
-print(f"总大小：{results['total_size']/1024:.1f}KB (目标<100KB)")
+print(f"总大小：{results['total_size'] /1024:.1f}KB (目标<100KB)")
 print(f"缺失文件：{len(results['missing'])}")
 if results['missing']:
     for m in results['missing']:
         print(f"  - {m}")
 print(f"验证结果：{'通过' if results['valid'] else '失败'}")
-print(f"{'='*60}\n")
+print(f"{'=' *60}\n")
 
 # 保存结果
 with open("flow-archive/20260318-universal-workflow-001/step1-context-result.json", "w", encoding="utf-8") as f:
     json.dump(results, f, ensure_ascii=False, indent=2)
 
 # 返回结果给执行器
-print(f"RESULT: {json.dumps({'status': results['status'], 'files_loaded': len(results['loaded']), 'total_size_kb': results['total_size']/1024})}")
+print(f"RESULT: {json.dumps({'status': results['status'], 'files_loaded': len(results['loaded']), 'total_size_kb': results['total_size'] /1024})}")
 
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计

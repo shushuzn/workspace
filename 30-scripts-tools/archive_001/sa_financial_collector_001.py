@@ -201,7 +201,7 @@ class FinancialDataCollector:
 
             report = {
                 "period_end": period_end,
-                "filing_date": f"{year}-{quarter*3 if quarter else 12:02d}-15",
+                "filing_date": f"{year}-{quarter *3 if quarter else 12:02d}-15",
                 "currency": "USD" if hash(symbol) % 2 == 0 else "CNY",
 
                 "income_statement": {
@@ -444,9 +444,9 @@ Test entry point"""
             gross = inc.get('gross_profit', 0)
             net = inc.get('net_income', 0)
             eps = inc.get('eps', 0)
-            print(f"    Revenue:          ${revenue/1e9:.2f}B")
-            print(f"    Gross Profit:     ${gross/1e9:.2f}B")
-            print(f"    Net Income:       ${net/1e9:.2f}B")
+            print(f"    Revenue:          ${revenue /1e9:.2f}B")
+            print(f"    Gross Profit:     ${gross /1e9:.2f}B")
+            print(f"    Net Income:       ${net /1e9:.2f}B")
             print(f"    EPS:              ${eps:.2f}")
 
     # Test 3: Get financial ratios
@@ -487,7 +487,7 @@ Test entry point"""
         for report in data.get('reports', []):
             period = report.get('period_end', report.get('period', 'N/A'))
             revenue = report.get('income_statement', {}).get('revenue', report.get('revenue', 0))
-            print(f"  {period}: Revenue ${revenue/1e9:.2f}B")
+            print(f"  {period}: Revenue ${revenue /1e9:.2f}B")
 
     # Test 6: Final stats
     print("\n[Test 5] Final Statistics")

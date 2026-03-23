@@ -79,9 +79,9 @@ Match brainstormed ideas with existing tools"""
     with open(ideas_file, encoding="utf-8") as f:
         ideas = json.load(f)
 
-    print("="*60)
+    print("=" *60)
     print("[BRAINSTORM] Ideas vs Existing Tools")
-    print("="*60)
+    print("=" *60)
 
     results = []
     for idea in ideas:

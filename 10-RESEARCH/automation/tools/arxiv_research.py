@@ -94,9 +94,9 @@ class ArxivResearchTool:
 
     def scan_simulated(self) -> List[PaperAnalysis]:
         """Simulate arXiv scan with detailed papers"""
-        print("="*80)
+        print("=" *80)
         print("📚 arXiv Paper Research - Deep Scan")
-        print("="*80)
+        print("=" *80)
 
         # Simulated papers from different categories
         papers_data = [
@@ -352,9 +352,9 @@ class ArxivResearchTool:
 
     def identify_trends(self) -> List[ResearchTrend]:
         """Identify research trends from analyzed papers"""
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📈 Identifying Research Trends")
-        print("="*80)
+        print("=" *80)
 
         trends_data = [
             {
@@ -412,9 +412,9 @@ class ArxivResearchTool:
 
     def generate_research_report(self, output_file: str = "arxiv_research_report.md") -> str:
         """Generate comprehensive research report"""
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📝 Generating Research Report")
-        print("="*80)
+        print("=" *80)
 
         report = []
         report.append("# arXiv Research Report")
@@ -545,9 +545,9 @@ def main():
     if args.export or True:  # Default to export
         tool.export_data()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ arXiv Research complete!")
-    print("="*80)
+    print("=" *80)
     print(f"\n📊 Papers Analyzed: {len(tool.papers)}")
     print(f"📈 Trends Identified: {len(tool.trends)}")
     print(f"📝 Report: arxiv_research_report.md")

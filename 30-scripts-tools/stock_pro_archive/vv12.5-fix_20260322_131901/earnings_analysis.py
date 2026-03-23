@@ -52,19 +52,19 @@ def predict_earnings_beat(symbol):
     if rg > 0.20:
         factors.append(("Strong Growth", 1, "+20%"))
     elif rg > 0.10:
-        factors.append(("Good Growth", 0.5, f"+{rg*100:.0f}%"))
+        factors.append(("Good Growth", 0.5, f"+{rg *100:.0f}%"))
     elif rg < 0:
-        factors.append(("Declining", -1, f"{rg*100:.0f}%"))
+        factors.append(("Declining", -1, f"{rg *100:.0f}%"))
 
     # Profit margins
     if pm > 0.20:
-        factors.append(("High Margins", 1, f"{pm*100:.0f}%"))
+        factors.append(("High Margins", 1, f"{pm *100:.0f}%"))
     elif pm > 0.10:
-        factors.append(("Good Margins", 0.5, f"{pm*100:.0f}%"))
+        factors.append(("Good Margins", 0.5, f"{pm *100:.0f}%"))
 
     # FCF
     if fcf > 0.03:
-        factors.append(("Strong FCF", 1, f"{fcf*100:.1f}%"))
+        factors.append(("Strong FCF", 1, f"{fcf *100:.1f}%"))
 
     # Estimate probability
     score = sum(f[1] for f in factors)
@@ -102,7 +102,7 @@ def earnings_report(symbols):
         price = P.get(symbol, 0)
         yield_ = calc_earnings_yield(symbol)
 
-        report += f"| {symbol} | ${data['eps_current']:.2f} | ${data['eps_forward']:.2f} | {data['growth']*100:.0f}% | {yield_:.1f}% | {pred['prediction']} ({pred['confidence']:.0f}%) |\n"
+        report += f"| {symbol} | ${data['eps_current']:.2f} | ${data['eps_forward']:.2f} | {data['growth'] *100:.0f}% | {yield_:.1f}% | {pred['prediction']} ({pred['confidence']:.0f}%) |\n"
         predictions.append(pred)
 
     # Best bets

@@ -370,7 +370,7 @@ Test entry point"""
         print(f"  Price:        ${data['price']:.2f}")
         print(f"  Change:       {data['change']:+.2f} ({data['change_percent']:+.2f}%)")
         print(f"  Volume:       {data['volume']:,}")
-        print(f"  Market Cap:   ${data['market_cap']/1e9:.1f}B")
+        print(f"  Market Cap:   ${data['market_cap'] /1e9:.1f}B")
         print(f"  P/E Ratio:    {data['pe_ratio']:.1f}")
         print(f"  Source:       {data['source']}")
 
@@ -392,7 +392,7 @@ Test entry point"""
     results = fetcher.fetch_multiple(symbols, source="yahoo")
 
     print(f"  {'Symbol':<8} {'Price':>10} {'Change':>10} {'Change%':>10}")
-    print(f"  {'-'*8} {'-'*10} {'-'*10} {'-'*10}")
+    print(f"  {'-' *8} {'-' *10} {'-' *10} {'-' *10}")
     for symbol, data in results.items():
         print(f"  {symbol:<8} ${data['price']:>8.2f} {data['change']:>+9.2f} {data['change_percent']:>+9.2f}%")
 

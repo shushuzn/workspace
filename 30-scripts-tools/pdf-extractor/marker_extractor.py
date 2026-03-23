@@ -97,9 +97,9 @@ def main():
 
     if result and args.preview:
         full_text, _, _ = result
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("📖 预览 (前 1000 字符):")
-        print("="*60)
+        print("=" *60)
         print(full_text[:1000])
         if len(full_text) > 1000:
             print(f"\n... (共{len(full_text)}字符)")

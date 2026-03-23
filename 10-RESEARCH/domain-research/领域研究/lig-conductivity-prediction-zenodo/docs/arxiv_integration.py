@@ -92,9 +92,9 @@ class arXivIntegrationLayer:
     def integrate_all(self) -> Dict:
         """Integrate all arXiv innovations"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🔗 arXiv Innovation Integration")
-        print("="*80)
+        print("=" *80)
 
         # Define all integrations
         innovations = [
@@ -203,9 +203,9 @@ class arXivIntegrationLayer:
             "avg_performance_gain": sum(i.performance_gain for i in self.integrations) / len(self.integrations)
         }
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 Integration Summary")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Total Innovations: {report['total_integrations']}")
         print(f"  Daily Usage: {report['daily_usage']}")
         print(f"  Weekly Usage: {report['weekly_usage']}")
@@ -216,9 +216,9 @@ class arXivIntegrationLayer:
     def daily_run(self) -> DailyWorkflowMetrics:
         """Execute daily workflow with all innovations"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📅 Daily Workflow Execution")
-        print("="*80)
+        print("=" *80)
 
         # Simulate daily tasks
         daily_tasks = [
@@ -253,9 +253,9 @@ class arXivIntegrationLayer:
 
         self.daily_metrics.append(metrics)
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 Daily Metrics")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Innovations Used: {metrics.innovations_used}")
         print(f"  Tasks Completed: {metrics.total_tasks}")
         print(f"  Automation Rate: {metrics.automation_rate:.0%}")
@@ -284,9 +284,9 @@ class arXivIntegrationLayer:
             "integrations": [asdict(i) for i in self.integrations]
         }
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 Integration Status")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Total Innovations: {status['total_innovations']}")
         print(f"  Integrated: {status['integrated']}")
         print(f"  Daily Usage: {status['daily_usage']}")
@@ -320,9 +320,9 @@ def main():
     if args.status:
         layer.get_status()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ arXiv integration complete!")
-    print("="*80)
+    print("=" *80)
     print("\n🎯 Integration Principles:")
     print("   1. Every research innovation → workflow integration")
     print("   2. Daily automated usage tracking")

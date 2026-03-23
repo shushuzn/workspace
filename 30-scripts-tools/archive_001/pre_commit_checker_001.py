@@ -82,7 +82,7 @@ Fixes:
         if size > 5120:  # 5KB
             issues.append(f"当日笔记过大：{size} bytes (>5KB)，请压缩")
         else:
-            print(f"[OK] 当日笔记已压缩：{size/1024:.1f}KB")
+            print(f"[OK] 当日笔记已压缩：{size /1024:.1f}KB")
 
     # 检查 3: 检查最近提交消息是否包含工作流步骤
     try:

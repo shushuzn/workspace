@@ -5,7 +5,7 @@ Multi-Agent Executors v1
 具体执行 Agent 实现
 """
 
-from multi-agent-framework import AgentBase, MessageBus, MessageType, Task, TaskStatus
+from multi -agent -framework import AgentBase, MessageBus, MessageType, Task, TaskStatus
 import json
 from pathlib import Path
 
@@ -197,5 +197,5 @@ def test_agents():
 
 if __name__ == "__main__":
     # 需要导入 Message
-    from multi-agent-framework import Message
+    from multi -agent -framework import Message
     test_agents()

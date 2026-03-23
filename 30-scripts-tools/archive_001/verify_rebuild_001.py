@@ -29,7 +29,7 @@ for tool_id, info in tools.items():
 
 print(f"\n文件存在：{found}")
 print(f"文件缺失：{missing}")
-print(f"匹配率：{found/(found+missing)*100:.1f}%")
+print(f"匹配率：{found /(found +missing) *100:.1f}%")
 
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计

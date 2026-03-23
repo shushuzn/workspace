@@ -98,7 +98,7 @@ class PromptGenerator:
         for i in range(num_variants):
             template = templates[i % len(templates)]
             variant = PromptVariant(
-                id=f"variant_{i+1:03d}",
+                id=f"variant_{i +1:03d}",
                 template=template,
                 parameters={"temperature": 0.5 + i * 0.1, "max_tokens": 256 + i * 64},
                 performance_score=random.uniform(0.6, 0.9)
@@ -154,9 +154,9 @@ class PromptOptimizer:
     def optimize(self, prompt: str, iterations: int = 3) -> OptimizationResult:
         """Optimize prompt through iterations"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("⚙️  Automated Prompt Optimization")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Original Prompt: {prompt[:60]}...")
         print(f"  Iterations: {iterations}")
 
@@ -167,9 +167,9 @@ class PromptOptimizer:
         best_prompt = prompt
 
         for i in range(iterations):
-            print(f"\n{'='*80}")
-            print(f"Iteration {i+1}/{iterations}")
-            print("="*80)
+            print(f"\n{'=' *80}")
+            print(f"Iteration {i +1}/{iterations}")
+            print("=" *80)
 
             # Generate variants
             variants = self.generator.generate_variants(current_prompt, num_variants=3)
@@ -208,9 +208,9 @@ class PromptOptimizer:
             optimization_time_ms=(end_time - start_time).total_seconds() * 1000
         )
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Optimization Results")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Original Score: {original_eval.overall_score:.0%}")
         print(f"  Optimized Score: {best_score:.0%}")
         print(f"  Improvement: {improvement:.0%}")
@@ -273,9 +273,9 @@ class AutomatedPromptOptimizer:
     def run_demo(self) -> Dict:
         """Run optimization demo"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🚀 Automated Prompt Optimization System")
-        print("="*80)
+        print("=" *80)
 
         # Demo prompt
         base_prompt = "Explain quantum computing"
@@ -284,9 +284,9 @@ class AutomatedPromptOptimizer:
         opt_result = self.optimizer.optimize(base_prompt, iterations=3)
 
         # A/B test
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("A/B Testing Phase")
-        print("="*80)
+        print("=" *80)
         ab_result = self.ab_tester.run_test(
             opt_result.original_prompt,
             opt_result.optimized_prompt,
@@ -294,9 +294,9 @@ class AutomatedPromptOptimizer:
         )
 
         # Summary
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 Summary")
-        print("="*80)
+        print("=" *80)
 
         avg_improvement = 0.45  # 45% average improvement
         print(f"\n  Avg Improvement: {avg_improvement:.0%}")
@@ -342,9 +342,9 @@ def main():
     if args.demo or True:
         demo_prompt_optimization()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Automated prompt optimization complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.14008")
     print("🎯 Key Achievements:")
     print("   - 45% response quality improvement")

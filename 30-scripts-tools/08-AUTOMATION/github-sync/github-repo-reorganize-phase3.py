@@ -180,7 +180,7 @@ python scripts/arxiv-sync-github.py
     with open(readme_path, 'w', encoding='utf-8') as f:
         f.write(readme)
 
-    print(f"  [OK] scripts/README.md 已创建 ({len(collectors)+len(managers)+len(utils)} 个脚本)")
+    print(f"  [OK] scripts/README.md 已创建 ({len(collectors) +len(managers) +len(utils)} 个脚本)")
 
 def commit_and_push():
     """提交并推送"""

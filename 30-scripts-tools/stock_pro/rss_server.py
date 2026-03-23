@@ -276,7 +276,7 @@ a.back{color:#ffd700}
 
         for sym, kws in STOCKS.items():
             if path == sym.lower() + ".xml":
-                filtered = [n for n in all_news if any(kw.lower() in (n["title"]+n.get("content","")).lower() for kw in kws)]
+                filtered = [n for n in all_news if any(kw.lower() in (n["title"] +n.get("content","")).lower() for kw in kws)]
                 self.send_response(200)
                 self.send_header("Content-type", "application/xml; charset=utf-8")
                 self.end_headers()

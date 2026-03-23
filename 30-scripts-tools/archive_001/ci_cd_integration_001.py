@@ -83,19 +83,19 @@ class CiCdIntegration:
             args = step["args"]
             cmd = [sys.executable, str(TOOLS_DIR / f"{tool}.py")] + args
 
-            print(f"[{i+1}/{len(pipeline['steps'])}] {tool}...", end=" ", flush=True)
+            print(f"[{i +1}/{len(pipeline['steps'])}] {tool}...", end=" ", flush=True)
 
             try:
                 result = subprocess.run(cmd, capture_output=True, text=True, timeout=120, encoding="utf-8", errors="replace")
                 status = "OK" if result.returncode == 0 else "FAIL"
                 print(status)
-                results.append({"step": i+1, "tool": tool, "status": status})
+                results.append({"step": i +1, "tool": tool, "status": status})
             except subprocess.TimeoutExpired:
                 print("TIMEOUT")
-                results.append({"step": i+1, "tool": tool, "status": "TIMEOUT"})
+                results.append({"step": i +1, "tool": tool, "status": "TIMEOUT"})
             except Exception as e:
                 print(f"ERROR: {e}")
-                results.append({"step": i+1, "tool": tool, "status": "ERROR"})
+                results.append({"step": i +1, "tool": tool, "status": "ERROR"})
 
         success = sum(1 for r in results if r["status"] == "OK")
         print("=" * 50)

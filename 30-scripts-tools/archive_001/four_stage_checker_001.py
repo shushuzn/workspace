@@ -121,7 +121,7 @@ class FourStageChecker:
         total = len(results)
         print(f"\n[SUMMARY]")
         print(f"  Total tools: {total}")
-        print(f"  Compliant: {compliant_count} ({compliant_count/total*100:.0f}%)")
+        print(f"  Compliant: {compliant_count} ({compliant_count /total *100:.0f}%)")
         print(f"  Non-compliant: {total - compliant_count}")
 
         # Print top/bottom

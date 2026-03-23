@@ -228,7 +228,7 @@ def recommend(data, analysis):
             "action": "分批建仓",
             "entry": f"现价 ${data['price']:.2f} 可入30%，回调入剩余",
             "stop_loss": f"止损 ${data['ma50']:.2f}",
-            "target": f"目标 ${data['target_price']:.2f} (+{((data['target_price']/data['price'])-1)*100:.1f}%)",
+            "target": f"目标 ${data['target_price']:.2f} (+{((data['target_price'] /data['price']) -1) *100:.1f}%)",
             "position": "30-50% 仓位",
             "reason": "均线多头，回调是机会"
         },

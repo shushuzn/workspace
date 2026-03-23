@@ -34,12 +34,12 @@ class WorkflowOptimizer:
             path = self.workspace / f
             if path.exists():
                 size = path.stat().st_size
-                result['files'].append({'name': f, 'size_kb': round(size/1024, 2)})
+                result['files'].append({'name': f, 'size_kb': round(size /1024, 2)})
                 result['total_size'] += size
             else:
                 result['issues'].append(f"{f} 不存在")
 
-        result['total_size_kb'] = round(result['total_size']/1024, 2)
+        result['total_size_kb'] = round(result['total_size'] /1024, 2)
         result['within_limit'] = result['total_size'] <= self.TOTAL_LIMIT
         return result
 
@@ -77,7 +77,7 @@ class WorkflowOptimizer:
             content = re.sub(r'[ \t]+\n', '\n', content)
 
             compressed_size = len(content)
-            rate = (1 - compressed_size/original_size)*100 if original_size > 0 else 0
+            rate = (1 - compressed_size /original_size) *100 if original_size > 0 else 0
 
             if rate > threshold:
                 with open(path, 'w', encoding='utf-8') as fp:
@@ -90,7 +90,7 @@ class WorkflowOptimizer:
         # 验证压缩后
         after = self.check_core_files()
         result['after_size_kb'] = after['total_size_kb']
-        result['total_rate'] = round((1 - after['total_size']/check['total_size'])*100, 2) if check['total_size'] > 0 else 0
+        result['total_rate'] = round((1 - after['total_size'] /check['total_size']) *100, 2) if check['total_size'] > 0 else 0
         result['within_limit'] = after['within_limit']
 
         return result
@@ -113,7 +113,7 @@ def main():
         # 默认检查
         result = optimizer.run('check')
         print(f"\n核心文件总大小: {result['total_size_kb']:.2f}KB")
-        print(f"限制: {WorkflowOptimizer.TOTAL_LIMIT/1024:.0f}KB")
+        print(f"限制: {WorkflowOptimizer.TOTAL_LIMIT /1024:.0f}KB")
         print(f"状态: {'[OK] 符合' if result['within_limit'] else '[WARN] 超限'}")
         print(f"文件数: {len(result['files'])}")
         return

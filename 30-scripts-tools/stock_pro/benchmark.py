@@ -38,7 +38,7 @@ def benchmark_vs_index(symbols, benchmark="SPY"):
         else:
             report += f"| {sym} | ${r['price']:.2f} | {r['score']} | N/A | N/A |\n"
 
-    report += f"\n**Outperformance Rate:** {outperform}/{len(results)} ({outperform/len(results)*100:.0f}%)\n"
+    report += f"\n**Outperformance Rate:** {outperform}/{len(results)} ({outperform /len(results) *100:.0f}%)\n"
 
     return report
 

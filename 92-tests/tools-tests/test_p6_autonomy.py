@@ -377,12 +377,12 @@ def run_tests():
     runner = unittest.TextTestRunner(verbosity=2)
     result = runner.run(suite)
 
-    print("\n" + "="*70)
+    print("\n" + "=" *70)
     print(f"Tests run: {result.testsRun}")
     print(f"Failures: {len(result.failures)}")
     print(f"Errors: {len(result.errors)}")
     print(f"Success: {result.wasSuccessful()}")
-    print("="*70)
+    print("=" *70)
 
     return 0 if result.wasSuccessful() else 1
 

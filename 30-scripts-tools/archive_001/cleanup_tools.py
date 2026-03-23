@@ -113,9 +113,9 @@ def cleanup_tools(delete_list, review_list, dry_run=True):
         else:
             print(f"[SKIP] Not found: {tool}")
 
-    print(f"\n{'='*60}")
+    print(f"\n{'=' *60}")
     print(f"SUMMARY (dry_run={dry_run})")
-    print(f"{'='*60}")
+    print(f"{'=' *60}")
     print(f"Files to delete: {len(delete_list)}")
     print(f"Files found: {len(deleted)}")
     print(f"Archive location: {archive_dir}")
@@ -128,21 +128,21 @@ def main():
     execute = "--execute" in sys.argv
 
     if dry_run:
-        print("="*60)
+        print("=" *60)
         print("DRY RUN - No files will be deleted")
-        print("="*60)
+        print("=" *60)
         cleanup_tools(PRIORITY_1_DELETE, PRIORITY_2_REVIEW, dry_run=True)
 
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("PRIORITY 2 - NEEDS MANUAL REVIEW")
-        print("="*60)
+        print("=" *60)
         for tool in PRIORITY_2_REVIEW:
             print(f"  {tool}")
 
     elif execute:
-        print("="*60)
+        print("=" *60)
         print("EXECUTE MODE - Files will be moved to archive")
-        print("="*60)
+        print("=" *60)
         cleanup_tools(PRIORITY_1_DELETE, PRIORITY_2_REVIEW, dry_run=False)
     else:
         print("Usage:")

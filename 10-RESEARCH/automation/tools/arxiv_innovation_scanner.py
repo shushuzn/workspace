@@ -45,9 +45,9 @@ def fetch_arxiv_papers(query, max_results=15):
 
 def analyze_innovation(papers):
     """Analyze papers for innovation opportunities"""
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📚 arXiv Innovation Analysis")
-    print("="*80)
+    print("=" *80)
 
     innovations = []
     for i, paper in enumerate(papers, 1):
@@ -112,4 +112,4 @@ if __name__ == "__main__":
     innovations = analyze_innovation(unique_papers[:10])
 
     print(f"\n🎯 Total innovation opportunities: {len(innovations)}")
-    print("="*80)
+    print("=" *80)

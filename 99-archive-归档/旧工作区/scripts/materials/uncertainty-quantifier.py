@@ -346,7 +346,7 @@ def main():
         print(f"    Predicted: {case['predicted_value']} eV")
         print(f"    True Value: {result.get('true_value', 'N/A')} eV")
         if result.get('error') is not None:
-            print(f"    Error: {result['error']:.3f} eV ({result.get('relative_error', 0)*100:.1f}%)")
+            print(f"    Error: {result['error']:.3f} eV ({result.get('relative_error', 0) *100:.1f}%)")
         print(f"    Confidence: {result.get('confidence', 'N/A'):.1%}" if result.get('confidence') else "    Confidence: N/A")
         print(f"    Uncertainty: ±{result.get('uncertainty', 'N/A'):.3f} eV" if result.get('uncertainty') else "    Uncertainty: N/A")
 

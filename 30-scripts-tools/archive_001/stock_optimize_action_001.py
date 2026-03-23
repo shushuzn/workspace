@@ -10,9 +10,9 @@ logger = logging.getLogger(__name__)
 from datetime import datetime
 
 def run():
-    print("="*60)
+    print("=" *60)
     print("股票分析工作流优化 - 行动计划")
-    print("="*60)
+    print("=" *60)
 
     # 优先级矩阵
     actions = [
@@ -71,14 +71,14 @@ def run():
         print(f"   时间: {a['timeline']}")
         print()
 
-    print("="*60)
+    print("=" *60)
     print("预期效果:")
     print("  - 工具调用效率 +50%")
     print("  - 数据 IO -70%")
     print("  - 报告生成时间 -80%")
     print("  - Phase 3 完成度 +30%")
     print("  - Phase 4 启动")
-    print("="*60)
+    print("=" *60)
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计
 

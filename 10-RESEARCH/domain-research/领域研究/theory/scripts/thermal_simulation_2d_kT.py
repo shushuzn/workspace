@@ -61,8 +61,8 @@ t_dwell = d / v
 q_0 = 2 * absorb * P / (np.pi * d**2)
 
 print(f"  Power: {P} W")
-print(f"  Speed: {v*1000:.1f} mm/s")
-print(f"  Spot size: {d*1e6:.0f} um")
+print(f"  Speed: {v *1000:.1f} mm/s")
+print(f"  Spot size: {d *1e6:.0f} um")
 print(f"  Peak power density: {q_0:.2e} W/m2")
 
 # ============================================================================
@@ -83,8 +83,8 @@ z = np.linspace(0, Z_max, nz)
 dt = 0.2e-6
 nt = 500
 
-print(f"  Grid: {nr}x{nz} = {nr*nz} points")
-print(f"  Time: {nt} steps, dt = {dt*1e6:.1f} us")
+print(f"  Grid: {nr}x{nz} = {nr *nz} points")
+print(f"  Time: {nt} steps, dt = {dt *1e6:.1f} us")
 
 # ============================================================================
 # 4. Initialize
@@ -112,32 +112,32 @@ for n in range(nt):
     T_const_new = T_const.copy()
 
     # === Variable properties ===
-    for i in range(1, nr-1):
-        for j in range(1, nz-1):
+    for i in range(1, nr -1):
+        for j in range(1, nz -1):
             # Get properties
             k_i = k_of_T(T[i,j])
-            k_ip1 = k_of_T(T[i+1,j])
-            k_im1 = k_of_T(T[i-1,j])
-            k_jp1 = k_of_T(T[i,j+1])
-            k_jm1 = k_of_T(T[i,j-1])
+            k_ip1 = k_of_T(T[i +1,j])
+            k_im1 = k_of_T(T[i -1,j])
+            k_jp1 = k_of_T(T[i,j +1])
+            k_jm1 = k_of_T(T[i,j -1])
             Cp_i = Cp_of_T(T[i,j])
 
             # Radial term (cylindrical)
             r_i = r[i]
             if r_i > 0:
-                r_iphalf = r[i] + dr/2
-                r_imhalf = r[i] - dr/2
+                r_iphalf = r[i] + dr /2
+                r_imhalf = r[i] - dr /2
                 k_iphalf = (k_i + k_ip1) / 2
                 k_imhalf = (k_i + k_im1) / 2
-                radial_term = (k_iphalf * r_iphalf * (T[i+1,j] - T[i,j]) -
-                              k_imhalf * r_imhalf * (T[i,j] - T[i-1,j])) / (r_i * dr**2)
+                radial_term = (k_iphalf * r_iphalf * (T[i +1,j] - T[i,j]) -
+                              k_imhalf * r_imhalf * (T[i,j] - T[i -1,j])) / (r_i * dr**2)
             else:
-                radial_term = 2 * k_i * (T[i+1,j] - 2*T[i,j] + T[i-1,j]) / dr**2
+                radial_term = 2 * k_i * (T[i +1,j] - 2 *T[i,j] + T[i -1,j]) / dr**2
 
             # Axial term
             k_jphalf = (k_jp1 + k_i) / 2
             k_jmhalf = (k_jm1 + k_i) / 2
-            axial_term = (k_jphalf * (T[i,j+1] - T[i,j]) - k_jmhalf * (T[i,j] - T[i,j-1])) / dz**2
+            axial_term = (k_jphalf * (T[i,j +1] - T[i,j]) - k_jmhalf * (T[i,j] - T[i,j -1])) / dz**2
 
             # Update
             T_new[i,j] = T[i,j] + dt / (rho * Cp_i) * (radial_term + axial_term)
@@ -145,7 +145,7 @@ for n in range(nt):
     # Surface boundary (z=0)
     for i in range(nr):
         if n * dt < t_dwell:
-            q_laser = q_0 * np.exp(-2 * r[i]**2 / (d/2)**2)
+            q_laser = q_0 * np.exp(-2 * r[i]**2 / (d /2)**2)
             Cp_surf = Cp_of_T(T[i,0])
             T_new[i,0] = T[i,0] + q_laser * dt / (rho * Cp_surf * dz)
         else:
@@ -158,23 +158,23 @@ for n in range(nt):
     T_new[:, -1] = T[:, -1]  # z = Z_max (adiabatic)
 
     # === Constant properties (for comparison) ===
-    for i in range(1, nr-1):
-        for j in range(1, nz-1):
+    for i in range(1, nr -1):
+        for j in range(1, nz -1):
             r_i = r[i]
             if r_i > 0:
-                r_iphalf = r[i] + dr/2
-                r_imhalf = r[i] - dr/2
-                radial_term = (0.12 * r_iphalf * (T_const[i+1,j] - T_const[i,j]) -
-                              0.12 * r_imhalf * (T_const[i,j] - T_const[i-1,j])) / (r_i * dr**2)
+                r_iphalf = r[i] + dr /2
+                r_imhalf = r[i] - dr /2
+                radial_term = (0.12 * r_iphalf * (T_const[i +1,j] - T_const[i,j]) -
+                              0.12 * r_imhalf * (T_const[i,j] - T_const[i -1,j])) / (r_i * dr**2)
             else:
-                radial_term = 2 * 0.12 * (T_const[i+1,j] - 2*T_const[i,j] + T_const[i-1,j]) / dr**2
+                radial_term = 2 * 0.12 * (T_const[i +1,j] - 2 *T_const[i,j] + T_const[i -1,j]) / dr**2
 
-            axial_term = 0.12 * (T_const[i,j+1] - 2*T_const[i,j] + T_const[i,j-1]) / dz**2
+            axial_term = 0.12 * (T_const[i,j +1] - 2 *T_const[i,j] + T_const[i,j -1]) / dz**2
             T_const_new[i,j] = T_const[i,j] + dt / (rho * 1100) * (radial_term + axial_term)
 
     for i in range(nr):
         if n * dt < t_dwell:
-            q_laser = q_0 * np.exp(-2 * r[i]**2 / (d/2)**2)
+            q_laser = q_0 * np.exp(-2 * r[i]**2 / (d /2)**2)
             T_const_new[i,0] = T_const[i,0] + q_laser * dt / (rho * 1100 * dz)
         else:
             h = 10
@@ -212,8 +212,8 @@ print(f"    T_max (2D constant k,Cp): {T_max_const:.1f} K")
 print(f"    T_max (1D analytical):    {T_max_1d:.1f} K")
 
 print(f"\n  Comparison:")
-print(f"    Variable vs Constant: {T_max_var/T_max_const*100:.1f}%")
-print(f"    Variable vs 1D:       {T_max_var/T_max_1d*100:.1f}%")
+print(f"    Variable vs Constant: {T_max_var /T_max_const *100:.1f}%")
+print(f"    Variable vs 1D:       {T_max_var /T_max_1d *100:.1f}%")
 
 # ============================================================================
 # 7. Visualization
@@ -284,8 +284,8 @@ print(f"\nKey Results:")
 print(f"  T_max (2D variable): {T_max_var:.1f} K")
 print(f"  T_max (2D constant): {T_max_const:.1f} K")
 print(f"  T_max (1D analytical): {T_max_1d:.1f} K")
-print(f"  Variable/Constant: {T_max_var/T_max_const*100:.1f}%")
-print(f"  Variable/1D: {T_max_var/T_max_1d*100:.1f}%")
+print(f"  Variable/Constant: {T_max_var /T_max_const *100:.1f}%")
+print(f"  Variable/1D: {T_max_var /T_max_1d *100:.1f}%")
 
 print(f"\nFigures saved to: {figures_dir}")
 

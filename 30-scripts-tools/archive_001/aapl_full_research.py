@@ -30,14 +30,14 @@ def L1():
     print("L1: 深度财务分析")
     print("=" * 70)
     fy, fp = "FY2025", "FY2024"
-    rev = INCOME["revenue"][fy]/1e9
-    rev_g = (INCOME["revenue"][fy]-INCOME["revenue"][fp])/INCOME["revenue"][fp]*100
-    gross_m = INCOME["gross_profit"][fy]/INCOME["revenue"][fy]*100
-    net_m = INCOME["net_income"][fy]/INCOME["revenue"][fy]*100
-    roe = INCOME["net_income"][fy]/BALANCE["total_equity"][fy]*100
-    eps_g = (INCOME["eps"][fy]-INCOME["eps"][fp])/INCOME["eps"][fp]*100
-    fcf = FCF[fy]/1e9
-    debt_eq = BALANCE["total_debt"][fy]/BALANCE["total_equity"][fy]*100
+    rev = INCOME["revenue"][fy] /1e9
+    rev_g = (INCOME["revenue"][fy] -INCOME["revenue"][fp]) /INCOME["revenue"][fp] *100
+    gross_m = INCOME["gross_profit"][fy] /INCOME["revenue"][fy] *100
+    net_m = INCOME["net_income"][fy] /INCOME["revenue"][fy] *100
+    roe = INCOME["net_income"][fy] /BALANCE["total_equity"][fy] *100
+    eps_g = (INCOME["eps"][fy] -INCOME["eps"][fp]) /INCOME["eps"][fp] *100
+    fcf = FCF[fy] /1e9
+    debt_eq = BALANCE["total_debt"][fy] /BALANCE["total_equity"][fy] *100
 
     print(f"\n【收益能力】")
     print(f"  营收: ${rev:.1f}B ({rev_g:+.1f}%)")
@@ -59,14 +59,14 @@ def L2():
 
     print(f"\n【PE估值】")
     print(f"  当前PE: {pe_curr:.1f}x | 历史平均: {pe_avg:.1f}x")
-    print(f"  保守目标(${eps*18:.0f}): {eps*18/PRICE*100-100:+.1f}%")
-    print(f"  中性目标(${eps*27:.0f}): {eps*27/PRICE*100-100:+.1f}%")
-    print(f"  乐观目标(${eps*35:.0f}): {eps*35/PRICE*100-100:+.1f}%")
+    print(f"  保守目标(${eps *18:.0f}): {eps *18 /PRICE *100 -100:+.1f}%")
+    print(f"  中性目标(${eps *27:.0f}): {eps *27 /PRICE *100 -100:+.1f}%")
+    print(f"  乐观目标(${eps *35:.0f}): {eps *35 /PRICE *100 -100:+.1f}%")
 
     print(f"\n【其他估值】")
-    print(f"  PEG: {pe_curr/6.4:.2f}")
-    print(f"  P/FCF: {PRICE/(FCF['FY2025']/BALANCE['shares']['FY2025']):.1f}x")
-    print(f"  P/B: {PRICE/(BALANCE['total_equity']['FY2025']/BALANCE['shares']['FY2025']):.1f}x")
+    print(f"  PEG: {pe_curr /6.4:.2f}")
+    print(f"  P/FCF: {PRICE /(FCF['FY2025'] /BALANCE['shares']['FY2025']):.1f}x")
+    print(f"  P/B: {PRICE /(BALANCE['total_equity']['FY2025'] /BALANCE['shares']['FY2025']):.1f}x")
     print(f"  【评分】 75/100")
     return {"score": 75}
 
@@ -104,8 +104,8 @@ def L4():
         print(f"    {icon} {name} ({level}级): {desc}")
 
     print(f"\n  敏感度分析:")
-    print(f"    PE变动10% → 股价${247.99*1.1:.0f} (极端情况)")
-    print(f"    营收下降5% → EPS${7.46*0.95:.2f}")
+    print(f"    PE变动10% → 股价${247.99 *1.1:.0f} (极端情况)")
+    print(f"    营收下降5% → EPS${7.46 *0.95:.2f}")
     print(f"    利率+2% → 科技股估值压缩15-20%")
 
     print(f"  【评分】 65/100")

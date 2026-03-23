@@ -1039,7 +1039,7 @@ def institutional_analysis(symbol):
 
     return {
         "symbol": symbol,
-        "institutional_ownership": f"{io*100:.1f}%",
+        "institutional_ownership": f"{io *100:.1f}%",
         "qoq_change": f"{qoq:+.1f}%",
         "short_interest_ratio": si,
         "score": score,
@@ -1599,7 +1599,7 @@ def institutional_analysis(symbol):
 
     return {
         "symbol": symbol,
-        "institutional_ownership": f"{io*100:.1f}%",
+        "institutional_ownership": f"{io *100:.1f}%",
         "qoq_change": f"{qoq:+.1f}%",
         "short_interest_ratio": si,
         "score": score,

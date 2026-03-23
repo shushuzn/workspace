@@ -239,7 +239,7 @@ ax3.set_title("GP 模型优化效果对比", fontsize=13)
 ax3.set_ylim(0, 1.0)
 
 for bar, r2_val in zip(bars, r2_vals):
-    ax3.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
+    ax3.text(bar.get_x() + bar.get_width() /2, bar.get_height() + 0.02,
             f'R2={r2_val:.3f}', ha='center', va='bottom', fontsize=11)
 
 ax3.axhline(y=0.85, color='orange', linestyle='--', linewidth=1.5, label='目标 R2>0.85')
@@ -264,7 +264,7 @@ y_new_std = y_new_std_scaled * scaler_y.scale_[0]
 
 print(f"\n  工艺参数：P=0.30W, v=30mm/s, C/O=3.3")
 print(f"  预测电导率：{y_new_pred[0]:.0f} +/- {y_new_std[0]:.0f} S/m")
-print(f"  95% 置信区间：[{y_new_pred[0]-2*y_new_std[0]:.0f}, {y_new_pred[0]+2*y_new_std[0]:.0f}] S/m")
+print(f"  95% 置信区间：[{y_new_pred[0] -2 *y_new_std[0]:.0f}, {y_new_pred[0] +2 *y_new_std[0]:.0f}] S/m")
 
 # ============================================================================
 # 总结

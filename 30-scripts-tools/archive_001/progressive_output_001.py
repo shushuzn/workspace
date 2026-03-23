@@ -258,7 +258,7 @@ class ProgressiveOutput:
 def generate_large_text():
     """Generator that yields large text in chunks"""
     for i in range(10):
-        yield f"Chunk {i+1}/10 generated dynamically\n"
+        yield f"Chunk {i +1}/10 generated dynamically\n"
         time.sleep(0.05)
 
 

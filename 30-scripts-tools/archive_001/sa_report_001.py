@@ -140,7 +140,7 @@ class ReportGenerator:
         elif section == "signals":
             return {
                 "title": "AI 信号",
-                "content": f"AI 信号: {data['signals']['ai_signal']}，置信度 {int(data['signals']['confidence']*100)}%"
+                "content": f"AI 信号: {data['signals']['ai_signal']}，置信度 {int(data['signals']['confidence'] *100)}%"
             }
         elif section == "sentiment":
             return {

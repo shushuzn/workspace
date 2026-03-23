@@ -297,7 +297,7 @@ ax1.set_title("GP 模型优化效果\n特征工程 + 核函数优化 + 超参数
 ax1.set_ylim(0, 1.0)
 
 for bar, r2_val in zip(bars, r2_vals):
-    ax1.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
+    ax1.text(bar.get_x() + bar.get_width() /2, bar.get_height() + 0.02,
             f'R2={r2_val:.3f}', ha='center', va='bottom', fontsize=11)
 
 ax1.axhline(y=0.80, color='red', linestyle='--', linewidth=1.5, label='目标 R2>0.80')

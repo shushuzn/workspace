@@ -386,7 +386,7 @@ class KnowledgeCardGenerator:
             # 串行验证 (向后兼容)
             for i, ref in enumerate(self.references):
                 if show_progress:
-                    print(f"   验证参考文献 [{ref['id']}]: {i+1}/{len(self.references)}...")
+                    print(f"   验证参考文献 [{ref['id']}]: {i +1}/{len(self.references)}...")
 
                 result = self.validator.validate_reference(ref["content"])
 
@@ -1068,7 +1068,7 @@ def main():
             report_file.write_text(report_html, encoding='utf-8')
             print(f"\n📊 批量汇总报告：{report_file}")
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"处理完成：{batch_results['success']}/{batch_results['total']} 成功")
         print(f"输出目录：{output_folder}")
 
@@ -1078,9 +1078,9 @@ def main():
             total = batch_results["stats"]["total_refs"]
             if total > 0:
                 print(f"   总参考文献：{total} 篇")
-                print(f"   ✅ 已验证：{batch_results['stats']['verified']} 篇 ({batch_results['stats']['verified']/total*100:.1f}%)")
-                print(f"   🔍 需人工：{batch_results['stats']['manual']} 篇 ({batch_results['stats']['manual']/total*100:.1f}%)")
-                print(f"   ❌ 验证失败：{batch_results['stats']['invalid']} 篇 ({batch_results['stats']['invalid']/total*100:.1f}%)")
+                print(f"   ✅ 已验证：{batch_results['stats']['verified']} 篇 ({batch_results['stats']['verified'] /total *100:.1f}%)")
+                print(f"   🔍 需人工：{batch_results['stats']['manual']} 篇 ({batch_results['stats']['manual'] /total *100:.1f}%)")
+                print(f"   ❌ 验证失败：{batch_results['stats']['invalid']} 篇 ({batch_results['stats']['invalid'] /total *100:.1f}%)")
                 print(f"   📦 缓存命中：{batch_results['stats']['cache_hits']} 篇")
                 print(f"   🌐 API 调用：{batch_results['stats']['api_calls']} 篇")
 
@@ -1120,11 +1120,11 @@ def main():
         # 打印统计报告
         print(f"\n📊 验证统计报告")
         print(f"   总参考文献：{stats['total']} 篇")
-        print(f"   ✅ 已验证：{stats['verified']} 篇 ({stats['verified']/stats['total']*100:.1f}%)")
-        print(f"   🔍 需人工：{stats['manual']} 篇 ({stats['manual']/stats['total']*100:.1f}%)")
-        print(f"   ❌ 验证失败：{stats['invalid']} 篇 ({stats['invalid']/stats['total']*100:.1f}%)")
+        print(f"   ✅ 已验证：{stats['verified']} 篇 ({stats['verified'] /stats['total'] *100:.1f}%)")
+        print(f"   🔍 需人工：{stats['manual']} 篇 ({stats['manual'] /stats['total'] *100:.1f}%)")
+        print(f"   ❌ 验证失败：{stats['invalid']} 篇 ({stats['invalid'] /stats['total'] *100:.1f}%)")
         print(f"\n   性能统计:")
-        print(f"   📦 缓存命中：{stats['cache_hits']} 篇 ({stats['cache_hits']/stats['total']*100:.1f}%)")
+        print(f"   📦 缓存命中：{stats['cache_hits']} 篇 ({stats['cache_hits'] /stats['total'] *100:.1f}%)")
         print(f"   🌐 API 调用：{stats['api_calls']} 篇")
         if stats['api_calls'] > 0:
             print(f"   ⏱️  平均耗时：{stats['api_calls'] * 6.0:.1f} 秒 (理论值)")
@@ -1146,9 +1146,9 @@ def main():
         output_file.write_text(html, encoding='utf-8')
         print(f"\n📁 已保存：{output_file}")
     elif args.preview:
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("📖 HTML 预览 (前 2000 字符):")
-        print("="*60)
+        print("=" *60)
         print(html[:2000])
         print(f"\n... (共{len(html)}字符)")
     else:

@@ -33,7 +33,7 @@ def calc_rsi(prices, period=14):
     losses = []
 
     for i in range(1, len(prices)):
-        change = prices[i] - prices[i-1]
+        change = prices[i] - prices[i -1]
         if change > 0:
             gains.append(change)
             losses.append(0)
@@ -87,8 +87,8 @@ def calc_beta_vs_spy(prices, spy_prices):
         return None
 
     # Calculate returns
-    stock_returns = [prices[i] / prices[i-1] - 1 for i in range(1, len(prices))]
-    spy_returns = [spy_prices[i] / spy_prices[i-1] - 1 for i in range(1, len(spy_prices))]
+    stock_returns = [prices[i] / prices[i -1] - 1 for i in range(1, len(prices))]
+    spy_returns = [spy_prices[i] / spy_prices[i -1] - 1 for i in range(1, len(spy_prices))]
 
     min_len = min(len(stock_returns), len(spy_returns))
     stock_returns = stock_returns[-min_len:]

@@ -137,8 +137,8 @@ class PerformanceAnalyzer:
             return {"error": "Insufficient timing data"}
 
         # 计算趋势
-        avg_first_half = sum(total_times[:len(total_times)//2]) / (len(total_times)//2)
-        avg_second_half = sum(total_times[len(total_times)//2:]) / (len(total_times) - len(total_times)//2)
+        avg_first_half = sum(total_times[:len(total_times) //2]) / (len(total_times) //2)
+        avg_second_half = sum(total_times[len(total_times) //2:]) / (len(total_times) - len(total_times) //2)
 
         trend = "improving" if avg_second_half < avg_first_half else "degrading"
         improvement = ((avg_first_half - avg_second_half) / avg_first_half * 100) if avg_first_half > 0 else 0

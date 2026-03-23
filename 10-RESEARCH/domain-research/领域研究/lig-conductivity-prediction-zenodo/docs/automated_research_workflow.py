@@ -518,55 +518,55 @@ class AutomatedResearchWorkflow:
                     hypothesis: str, methodology: str) -> Dict:
         """Run complete research workflow"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🔬 Automated Research Workflow")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Title: {title}")
         print(f"  Question: {research_question}")
 
         # Phase 1: Planning
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 1: Planning")
-        print("="*80)
+        print("=" *80)
         project = self.planner.create_project(title, research_question, hypothesis, methodology)
         print(f"  Project ID: {project.id}")
         print(f"  Tasks Generated: {len(project.tasks)}")
 
         # Phase 2: Literature Review
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 2: Literature Review")
-        print("="*80)
+        print("=" *80)
         literature = self.literature.search_and_review(title, research_question)
 
         # Phase 3: Data Collection
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 3: Data Collection")
-        print("="*80)
+        print("=" *80)
         dataset = self.data.collect_data(["arXiv", "GitHub", "OpenData"], research_question)
         dataset = self.data.preprocess(dataset)
 
         # Phase 4: Analysis
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 4: Analysis")
-        print("="*80)
+        print("=" *80)
         analysis = self.analysis.analyze(dataset, research_question)
 
         # Phase 5: Writing
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 5: Writing")
-        print("="*80)
+        print("=" *80)
         paper = self.writing.draft_paper(project, literature, analysis)
 
         # Phase 6: Quality Review
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("Phase 6: Quality Review")
-        print("="*80)
+        print("=" *80)
         review = self.quality.review_paper(paper, analysis)
 
         # Final summary
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 Workflow Summary")
-        print("="*80)
+        print("=" *80)
 
         workflow_result = {
             "project_id": project.id,
@@ -622,9 +622,9 @@ def demo_workflow():
     )
 
     # Print stats
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 System Statistics")
-    print("="*80)
+    print("=" *80)
 
     stats = system.get_workflow_stats()
     print(f"\n  Workflows Completed: {stats['workflows_completed']}")
@@ -657,9 +657,9 @@ def main():
     if args.demo or True:  # Default to demo
         demo_workflow()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Automated research workflow complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.14004")
     print("🎯 Key Features:")
     print("   - 6-phase research automation")

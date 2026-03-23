@@ -521,7 +521,7 @@ Test entry point"""
     print(f"    Neutral:     {conf['neutral_indicators']}")
 
     print(f"\n  Recommendation: {result['recommendation']}")
-    print(f"  Confidence:     {result['confidence']*100:.0f}%")
+    print(f"  Confidence:     {result['confidence'] *100:.0f}%")
 
     # Test 3: Final stats
     print("\n[Test 2] Final Statistics")

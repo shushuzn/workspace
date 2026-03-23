@@ -245,10 +245,10 @@ class PeerComparator:
     def generate_report(self) -> str:
         """Generate comparison report"""
         report = []
-        report.append("="*70)
+        report.append("=" *70)
         report.append("📊 Industry Peer Comparison Report")
         report.append(f"Generated: {datetime.now().strftime('%Y-%m-%d %H:%M')}")
-        report.append("="*70)
+        report.append("=" *70)
 
         # Sector summary
         sectors = set(c.sector for c in self.companies.values())
@@ -257,9 +257,9 @@ class PeerComparator:
 
         # By sector rankings
         for sector in sorted(sectors):
-            report.append(f"\n{'='*70}")
+            report.append(f"\n{'=' *70}")
             report.append(f"🏢 {sector} Sector Ranking")
-            report.append("="*70)
+            report.append("=" *70)
 
             rankings = self.sector_ranking(sector)
 
@@ -268,9 +268,9 @@ class PeerComparator:
                 report.append(f"  {medal} #{r['rank']} ${r['ticker']} - {r['name'][:30]:30} Score: {r['score']:3.0f}/100 ({r['rating']})")
 
         # Detailed comparison for top companies
-        report.append(f"\n{'='*70}")
+        report.append(f"\n{'=' *70}")
         report.append("📋 Detailed Metric Comparison")
-        report.append("="*70)
+        report.append("=" *70)
 
         for ticker in list(self.companies.keys())[:5]:
             comparison = self.compare_metrics(ticker)
@@ -308,9 +308,9 @@ class PeerComparator:
 
 def main():
     """Demo/test peer comparator"""
-    print("="*70)
+    print("=" *70)
     print("📊 Industry Peer Comparison Analyzer")
-    print("="*70)
+    print("=" *70)
 
     comparator = PeerComparator()
     comparator.load_demo_data()
@@ -323,7 +323,7 @@ def main():
     comparator.save()
 
     print("\n✅ Peer comparison complete!")
-    print("="*70)
+    print("=" *70)
 
 
 if __name__ == "__main__":

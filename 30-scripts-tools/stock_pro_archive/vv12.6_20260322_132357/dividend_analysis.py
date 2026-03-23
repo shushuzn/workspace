@@ -121,7 +121,7 @@ def dividend_report(symbols):
         if d["yield"] > 0:
             score = calc_dividend_score(symbol)
             results.append(score)
-            report += f"| {symbol} | {d['yield']*100:.1f}% | {d['payout']*100:.0f}% | {d['growth']*100:.1f}% | {d['streak']}y | {score['score']} | {score['grade']} |\n"
+            report += f"| {symbol} | {d['yield'] *100:.1f}% | {d['payout'] *100:.0f}% | {d['growth'] *100:.1f}% | {d['streak']}y | {score['score']} | {score['grade']} |\n"
 
     if not results:
         return report + "\nNo dividend data for selected symbols."

@@ -418,11 +418,11 @@ def ultimate_analysis(symbol):
 ### Score Breakdown
 | Factor | Score | Weight | Weighted |
 |--------|-------|--------|----------|
-| Technical | {tech_score} | 25% | {tech_score*0.25:.1f} |
-| Momentum | {momentum_score:.0f} | 20% | {momentum_score*0.20:.1f} |
-| Institutional | {inst_score} | 15% | {inst_score*0.15:.1f} |
-| Sentiment | {sentiment_score:.0f} | 20% | {sentiment_score*0.20:.1f} |
-| Risk | {risk_score} | 20% | {risk_score*0.20:.1f} |
+| Technical | {tech_score} | 25% | {tech_score *0.25:.1f} |
+| Momentum | {momentum_score:.0f} | 20% | {momentum_score *0.20:.1f} |
+| Institutional | {inst_score} | 15% | {inst_score *0.15:.1f} |
+| Sentiment | {sentiment_score:.0f} | 20% | {sentiment_score *0.20:.1f} |
+| Risk | {risk_score} | 20% | {risk_score *0.20:.1f} |
 
 ### Key Signals
 """

@@ -121,9 +121,9 @@ class DynamicStepSkipper:
     def run(self, context: Dict) -> Dict:
         """完整流程：评估 -> 决策 -> 应用"""
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"动态步骤跳过决策")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
         print(f"上下文:")
         print(f"  剩余时间：{context.get('time_remaining_minutes', 'N/A')} 分钟")
         print(f"  任务复杂度：{context.get('task_complexity', 'N/A')}")
@@ -142,7 +142,7 @@ class DynamicStepSkipper:
         # 应用跳过逻辑
         adapted = self.apply_skip_logic(steps_to_skip)
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
 
         return {
             "applicable_rules": applicable_rules,

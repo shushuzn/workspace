@@ -410,7 +410,7 @@ Test entry point"""
     trend = monitor.get_sentiment_trend("AAPL", days=3)
     if trend:
         print(f"  {'Date':<12} {'Overall':<10} {'Score':>8} {'Articles':>10}")
-        print(f"  {'-'*12} {'-'*10} {'-'*8} {'-'*10}")
+        print(f"  {'-' *12} {'-' *10} {'-' *8} {'-' *10}")
         for day in trend:
             print(f"  {day['date']:<12} {day['overall']:<10} {day['score']:>+8.3f} {day['article_count']:>10}")
 

@@ -38,6 +38,6 @@ for i, p in enumerate(recent[:10]):
     source = p.get('source', 'N/A')
     date = p.get('collected_at', 'N/A')[:10]
     pmid = p.get('pmid', p.get('arxiv_id', 'N/A'))
-    print(f'{i+1}. [{source}] {title}')
+    print(f'{i +1}. [{source}] {title}')
     print(f'   ID: {pmid} | Date: {date}')
     print()

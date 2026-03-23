@@ -107,7 +107,7 @@ class PDFLayoutExtractor:
 
         results = []
         for i in range(total_pages):
-            print(f"   第 {i+1}/{total_pages} 页...", end="\r")
+            print(f"   第 {i +1}/{total_pages} 页...", end="\r")
             result = self.extract_page(pdf_path, i)
             results.append(result)
 
@@ -164,7 +164,7 @@ def main():
         output_file.write_text(markdown, encoding="utf-8")
         print(f"\n📁 已保存：{output_file}")
     else:
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print(markdown[:2000])  # 只显示前 2000 字符
         if len(markdown) > 2000:
             print(f"\n... (共{len(markdown)}字符，使用 -o 参数保存完整内容)")

@@ -89,7 +89,7 @@ def augment_lig_data(X, y, n_aug=100, noise_level=0.015):
 
 # 如果训练集<150 样本，进行增强
 if len(X_train) < 150:
-    X_train_aug, y_train_aug = augment_lig_data(X_train, y_train, n_aug=150-len(X_train))
+    X_train_aug, y_train_aug = augment_lig_data(X_train, y_train, n_aug=150 -len(X_train))
     print(f"  增强后训练集：{len(X_train_aug)} 样本")
 else:
     X_train_aug, y_train_aug = X_train, y_train
@@ -111,7 +111,7 @@ y_train_scaled = scaler_y.fit_transform(y_train_aug.reshape(-1, 1)).flatten()
 y_test_scaled = scaler_y.transform(y_test.reshape(-1, 1)).flatten()
 
 # 适配 LIG 数据的核函数
-kernel = ConstantKernel(1.0) * RBF(length_scale=[1.0]*len(feature_cols)) + WhiteKernel(noise_level=0.1)
+kernel = ConstantKernel(1.0) * RBF(length_scale=[1.0] *len(feature_cols)) + WhiteKernel(noise_level=0.1)
 
 gp_model = GaussianProcessRegressor(
     kernel=kernel,
@@ -241,7 +241,7 @@ y_new_std = y_new_std_scaled * scaler_y.scale_[0]
 
 print(f"\n  工艺参数：P=0.30W, v=30mm/s, E=10.0 J/cm2, C/O=3.3")
 print(f"  预测电导率：{y_new_pred[0]:.0f} +/- {y_new_std[0]:.0f} S/m")
-print(f"  95% 置信区间：[{y_new_pred[0]-2*y_new_std[0]:.0f}, {y_new_pred[0]+2*y_new_std[0]:.0f}] S/m")
+print(f"  95% 置信区间：[{y_new_pred[0] -2 *y_new_std[0]:.0f}, {y_new_pred[0] +2 *y_new_std[0]:.0f}] S/m")
 
 # ============================================================================
 # 总结

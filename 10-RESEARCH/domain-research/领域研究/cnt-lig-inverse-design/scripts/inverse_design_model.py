@@ -165,7 +165,7 @@ def inverse_design(target_conductivity, n_solutions=5):
 
     solutions = []
     for i in range(n_solutions):
-        result = differential_evolution(objective, bounds, seed=i*42, maxiter=100, tol=1e-6)
+        result = differential_evolution(objective, bounds, seed=i *42, maxiter=100, tol=1e-6)
 
         if result.success:
             solution = dict(zip(available_features, result.x))
@@ -235,7 +235,7 @@ for _ in range(100):
     w2 = np.random.random()
     w3 = np.random.random()
     total = w1 + w2 + w3
-    w1, w2, w3 = w1/total, w2/total, w3/total
+    w1, w2, w3 = w1 /total, w2 /total, w3 /total
 
     def multi_objective(x):
         return w1 * conductivity_objective(x) + w2 * cost_objective(x) + w3 * strength_objective(x)

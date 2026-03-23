@@ -221,16 +221,16 @@ print(f"\n📈 性能演进:")
 print(f"{'体系':<25} {'电导率 (S/m)':<15} {'协同效应':<12} {'样本数':<8}")
 print("-" * 60)
 for system, data in evolution_data.items():
-    print(f"{system:<25} {data['conductivity']:.2e}  {data['synergy']*100:>6.1f}%      {data['samples']:<8}")
+    print(f"{system:<25} {data['conductivity']:.2e}  {data['synergy'] *100:>6.1f}%      {data['samples']:<8}")
 
 # 计算逐级提升
 systems = list(evolution_data.keys())
 print(f"\n📊 逐级提升:")
 for i in range(1, len(systems)):
-    prev_cond = evolution_data[systems[i-1]]['conductivity']
+    prev_cond = evolution_data[systems[i -1]]['conductivity']
     curr_cond = evolution_data[systems[i]]['conductivity']
     improvement = (curr_cond / prev_cond - 1) * 100
-    print(f"  {systems[i-1]} → {systems[i]}: {improvement:+.1f}%")
+    print(f"  {systems[i -1]} → {systems[i]}: {improvement:+.1f}%")
 
 # ============================================================================
 # 4. 最优比例发现

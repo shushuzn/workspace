@@ -225,10 +225,10 @@ class RuleBasedNER:
                     if pos == -1:
                         break
                     entities.append(EntityMention(
-                        text=text[pos:pos+len(entity)],
+                        text=text[pos:pos +len(entity)],
                         label=label,
                         start=pos,
-                        end=pos+len(entity)
+                        end=pos +len(entity)
                     ))
                     start = pos + 1
 

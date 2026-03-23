@@ -520,9 +520,9 @@ class DashboardAPIWithPersona:
 
     def run(self, host: str = "0.0.0.0", port: int = PORT, workers: int = 4):
         """启动服务器 / Start server"""
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("[INNOVATOR] Dashboard API v4.1 - 7-Persona Enhanced | 7 人格增强版")
-        print("="*80)
+        print("=" *80)
         print(f"[SERVER] Running on http://{host}:{port}")
         print(f"[FRONTEND] http://localhost:{port}")
         print(f"[WORKERS] {workers} worker processes | 工作进程数")
@@ -610,7 +610,7 @@ def main():
         print("\n[DEMO] Final Statistics:")
         stats = api.persona_manager.get_statistics()
         print(f"  Tasks Completed: {stats['total_tasks_completed']}")
-        print(f"  Success Rate: {stats['success_rate']*100:.1f}%")
+        print(f"  Success Rate: {stats['success_rate'] *100:.1f}%")
         print(f"  Active Personas: {stats['active_personas']}")
 
         print("\n✅ Demo complete!")

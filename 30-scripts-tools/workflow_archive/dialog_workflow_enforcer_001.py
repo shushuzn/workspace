@@ -225,9 +225,9 @@ if __name__ == '__main__':
         "运行这个脚本",
     ]
 
-    print("="*70)
+    print("=" *70)
     print("对话工作流强制器测试")
-    print("="*70)
+    print("=" *70)
 
     for test_input in test_inputs:
         result = enforce_workflow(test_input)

@@ -59,9 +59,9 @@ def save_prioritized(prioritized) -> None:
 
 def run(top_n=5) -> None:
     """Execute prioritize step"""
-    print("="*60)
+    print("=" *60)
     print("[BRAINSTORM] Step 4: Prioritize - Rank & Plan")
-    print("="*60)
+    print("=" *60)
 
     # Load filtered ideas
     ideas = load_filtered()

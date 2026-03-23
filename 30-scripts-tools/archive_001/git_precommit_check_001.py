@@ -108,7 +108,7 @@ def check_workflow_completion() -> bool:
             print(f"  - {step_id}")
 
         if len(missing) > 10:
-            print(f"  ... 还有 {len(missing)-10} 个")
+            print(f"  ... 还有 {len(missing) -10} 个")
 
         print("\n[ACTION] 请完成所有必需步骤后再提交")
         print("=" * 80)
@@ -124,7 +124,7 @@ def check_workflow_completion() -> bool:
             print("=" * 80)
             return False
         else:
-            print(f"\n[OK] 当日笔记大小：{size/1024:.1f}KB (<5KB)")
+            print(f"\n[OK] 当日笔记大小：{size /1024:.1f}KB (<5KB)")
 
     # 检查 6: 状态是否为 completed
     if state.get('status') != 'completed':

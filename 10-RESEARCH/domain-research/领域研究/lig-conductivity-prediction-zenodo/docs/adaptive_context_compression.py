@@ -312,7 +312,7 @@ class AdaptiveCompressor:
         elif len(sentences) == 1:
             # Keep first half
             words = content.split()
-            summary = " ".join(words[:len(words)//2]) + "..."
+            summary = " ".join(words[:len(words) //2]) + "..."
         else:
             summary = content[:100] + "..."
 
@@ -362,9 +362,9 @@ class AdaptiveContextCompression:
     def compress_context(self, task_description: str, context: str) -> Dict:
         """Complete compression pipeline"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🗜️  Adaptive Context Compression")
-        print("="*80)
+        print("=" *80)
 
         # Step 1: Analyze task
         print("\n📊 Step 1: Task Analysis")
@@ -427,9 +427,9 @@ class AdaptiveContextCompression:
         self.sessions.append(session)
 
         # Print summary
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 Compression Summary")
-        print("="*80)
+        print("=" *80)
         print(f"\n  Session ID: {session['id']}")
         print(f"  Compression: {result.compression_ratio:.0%} reduction")
         print(f"  Retention: {result.retention_score:.0%} information preserved")
@@ -528,9 +528,9 @@ This work builds on previous studies by Smith et al. (2024), Johnson et al. (202
         system.compress_context(task_desc, demo_context)
 
     # Print final stats
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 Final System Statistics")
-    print("="*80)
+    print("=" *80)
 
     stats = system.get_system_stats()
     print(f"\n  Sessions: {stats['sessions']}")
@@ -562,9 +562,9 @@ def main():
     if args.demo or True:  # Default to demo
         demo_compression()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Adaptive context compression complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.14001")
     print("🎯 Key Achievements:")
     print("   - 60% average compression ratio")

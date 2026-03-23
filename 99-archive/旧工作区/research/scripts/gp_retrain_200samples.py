@@ -283,7 +283,7 @@ ax4.set_title("GP 模型性能提升", fontsize=14)
 ax4.set_ylim(0, 1.0)
 
 for bar, r2_val in zip(bars, r2_vals):
-    ax4.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
+    ax4.text(bar.get_x() + bar.get_width() /2, bar.get_height() + 0.02,
             f'R²={r2_val:.2f}', ha='center', va='bottom', fontsize=11)
 
 ax4.axhline(y=0.80, color='red', linestyle='--', linewidth=1.5, label='目标 R²>0.80')

@@ -45,7 +45,7 @@ if __name__ == '__main__':
     for i in range(100):
         time.sleep(0.02)
         progress_bar.progress(i + 1)
-        status_text.text(f"生成中... {i+1}%")
+        status_text.text(f"生成中... {i +1}%")
 
     # 生成结果
     generated_materials = [
@@ -109,8 +109,8 @@ with col2:
         materials = st.session_state.generated
 
         st.metric("生成数量", len(materials))
-        st.metric("平均有效性", f"{sum(m['validity'] for m in materials)/len(materials):.1%}")
-        st.metric("平均新颖性", f"{sum(m['novelty'] for m in materials)/len(materials):.1%}")
+        st.metric("平均有效性", f"{sum(m['validity'] for m in materials) /len(materials):.1%}")
+        st.metric("平均新颖性", f"{sum(m['novelty'] for m in materials) /len(materials):.1%}")
 
         # 性能分布
         st.subheader("性能分布")

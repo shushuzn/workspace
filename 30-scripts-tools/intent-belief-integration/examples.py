@@ -167,7 +167,7 @@ async def example_custom_weights():
             case["achieved"], case["confidence"], case["layers"]
         )
 
-        scenario = f"场景 {i+1}"
+        scenario = f"场景 {i +1}"
         print(f"{scenario:<20} {result_intent.alignment_score:.4f}      "
               f"{result_belief.alignment_score:.4f}      "
               f"{result_eff.alignment_score:.4f}")
@@ -226,7 +226,7 @@ async def example_realistic():
     # 总体统计
     print(f"\n总体统计:")
     print(f"  总查询数：{len(queries)}")
-    print(f"  总使用层数：{total_layers}/576 ({total_layers/len(queries):.1f} 平均)")
+    print(f"  总使用层数：{total_layers}/576 ({total_layers /len(queries):.1f} 平均)")
     print(f"  总节省层数：{total_saved}")
     print(f"  整体效率：{total_saved / (24 * len(queries)):.2%}")
 

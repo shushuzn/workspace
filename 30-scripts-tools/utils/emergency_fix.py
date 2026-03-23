@@ -23,7 +23,7 @@ for i, line in enumerate(lines):
             # Reconstruct the line
             indent = len(line) - len(line.lstrip())
             lines[i] = ' ' * indent + f'pack_list("{key}", result.get("{key.lower()}", [])) + "\\n"\n'
-            print(f"Fixed pack_list at line {i+1}")
+            print(f"Fixed pack_list at line {i +1}")
 
 fixed = 0
 for line_num, fix in fixes.items():

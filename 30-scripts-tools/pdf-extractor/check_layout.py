@@ -31,7 +31,7 @@ for b in text_blocks:
             "height": height
         })
 
-print(f"Page {page_num+1}: {len(significant)} significant blocks")
+print(f"Page {page_num +1}: {len(significant)} significant blocks")
 print(f"Center X: {center_x}")
 print()
 
@@ -43,11 +43,11 @@ print(f"Right blocks: {len(right)}")
 
 if left:
     left_avg = sum(b["width"] for b in left) / len(left)
-    print(f"Left avg width: {left_avg:.1f} ({left_avg/page_width:.2f})")
+    print(f"Left avg width: {left_avg:.1f} ({left_avg /page_width:.2f})")
 
 if right:
     right_avg = sum(b["width"] for b in right) / len(right)
-    print(f"Right avg width: {right_avg:.1f} ({right_avg/page_width:.2f})")
+    print(f"Right avg width: {right_avg:.1f} ({right_avg /page_width:.2f})")
 
     if left:
         ratio = right_avg / left_avg

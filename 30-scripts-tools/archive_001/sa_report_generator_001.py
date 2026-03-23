@@ -311,7 +311,7 @@ class ReportGenerator:
         lines.append("-" * 70)
         lines.append(f" Rating: {report['overall_rating']}")
         lines.append(f" Recommendation: {report['recommendation']}")
-        lines.append(f" Confidence: {report['confidence']*100:.0f}%")
+        lines.append(f" Confidence: {report['confidence'] *100:.0f}%")
         lines.append("")
 
         # Add sections
@@ -508,7 +508,7 @@ Test entry point"""
     print(f"  Generated:       {result['generated_at']}")
     print(f"  Overall Rating:  {result['overall_rating']}")
     print(f"  Recommendation:  {result['recommendation']}")
-    print(f"  Confidence:      {result['confidence']*100:.0f}%")
+    print(f"  Confidence:      {result['confidence'] *100:.0f}%")
 
     print(f"\n  Sections Generated:")
     for section in result["sections"].keys():

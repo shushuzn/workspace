@@ -104,7 +104,7 @@ class QuestionGenerator:
                 priority=priority,
                 feasibility=feasibility,
                 expected_impact=impact,
-                related_work=[f"相关工作{i+1}"]
+                related_work=[f"相关工作{i +1}"]
             ))
 
         return questions

@@ -105,7 +105,7 @@ class SmartTaskDecomposer:
         for i, subtask in enumerate(subtasks, 1):
             subtask["id"] = i
             subtask["priority"] = "high" if i <= 2 else "medium"
-            subtask["dependencies"] = [i-1] if i > 1 else []
+            subtask["dependencies"] = [i -1] if i > 1 else []
 
         return subtasks
 
@@ -138,9 +138,9 @@ class SmartTaskDecomposer:
     def print_plan(self, plan: Dict):
         """打印分解计划"""
 
-        print(f"\n{'='*60}")
+        print(f"\n{'=' *60}")
         print(f"任务分解计划")
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
         print(f"原任务：{plan['original_task'][:50]}...")
         print(f"复杂度：{plan['complexity']}")
         print(f"子任务数：{plan['total_subtasks']}")
@@ -152,7 +152,7 @@ class SmartTaskDecomposer:
             print(f"  [{st['id']}] {st['name']} - {st['estimated_minutes']} 分钟{deps}")
             print(f"      {st['description']}")
 
-        print(f"{'='*60}")
+        print(f"{'=' *60}")
 
     def run(self, task_description: str) -> Dict:
         """完整流程：评估 -> 分解 -> 输出"""

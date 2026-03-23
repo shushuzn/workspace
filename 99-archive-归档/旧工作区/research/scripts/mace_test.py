@@ -35,7 +35,7 @@ except ImportError as e:
 print("\n[2/4] 检查模型文件...")
 model_path = Path("research/models/mace/mace-mp-0.model")
 if model_path.exists():
-    print(f"  模型：✅ 已存在 ({model_path.stat().st_size/1024/1024:.1f} MB)")
+    print(f"  模型：✅ 已存在 ({model_path.stat().st_size /1024 /1024:.1f} MB)")
 else:
     print(f"  模型：❌ 不存在")
     print(f"  位置：{model_path}")
@@ -70,7 +70,7 @@ try:
         forces = graphite.get_forces()
 
         print(f"  总能量：{energy:.4f} eV")
-        print(f"  每原子能量：{energy/len(graphite):.4f} eV/atom")
+        print(f"  每原子能量：{energy /len(graphite):.4f} eV/atom")
         print(f"  最大力：{np.max(np.abs(forces)):.4f} eV/Å")
 
         # 与 DFT 参考值对比
@@ -81,7 +81,7 @@ try:
         print(f"\n  与 DFT 对比:")
         print(f"    DFT 参考：{dft_ref:.4f} eV/atom")
         print(f"    MACE: {mace_energy_per_atom:.4f} eV/atom")
-        print(f"    误差：{error*1000:.1f} meV/atom")
+        print(f"    误差：{error *1000:.1f} meV/atom")
 
         if error < 0.010:
             print(f"    精度：✅ 优秀 (<10 meV/atom)")

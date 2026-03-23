@@ -31,9 +31,9 @@ FILES_TO_DEPLOY = [
 
 def print_step(step, message):
     """Print formatted step message"""
-    print(f"\n{'='*60}")
+    print(f"\n{'=' *60}")
     print(f"Step {step}: {message}")
-    print('='*60)
+    print('=' *60)
 
 def connect_ssh():
     """Connect to cloud server via SSH"""

@@ -161,7 +161,7 @@ class RiskManager:
         return {
             "var": round(var * 100, 2),
             "confidence": confidence,
-            "interpretation": f"{int(confidence*100)}% confidence: max loss is {round(var*100, 2)}%"
+            "interpretation": f"{int(confidence *100)}% confidence: max loss is {round(var *100, 2)}%"
         }
 
     def check_daily_loss(self, daily_pnl: float, total_value: float) -> dict:

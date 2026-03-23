@@ -178,7 +178,7 @@ class BilibiliCollector:
         results = []
 
         if not HAS_PLAYWRIGHT:
-            return [{"title": f"视频{i+1}", "bvid": f"BV{i+1}"} for i in range(10)]
+            return [{"title": f"视频{i +1}", "bvid": f"BV{i +1}"} for i in range(10)]
 
         try:
             p, browser, context, page = self._init_browser()
@@ -204,7 +204,7 @@ class BilibiliCollector:
             p.stop()
         except Exception as e:
             print(f"[WARN] {e}")
-            results = [{"title": f"视频{i+1}"} for i in range(10)]
+            results = [{"title": f"视频{i +1}"} for i in range(10)]
 
         print(f"[OK] 获取 {len(results)} 个视频")
         return results
@@ -248,7 +248,7 @@ class BilibiliCollector:
         results = []
 
         if not HAS_PLAYWRIGHT:
-            return [{"title": f"【{keyword}】视频{i+1}"} for i in range(10)]
+            return [{"title": f"【{keyword}】视频{i +1}"} for i in range(10)]
 
         try:
             p, browser, context, page = self._init_browser()
@@ -272,7 +272,7 @@ class BilibiliCollector:
             p.stop()
         except Exception as e:
             print(f"[WARN] {e}")
-            results = [{"title": f"【{keyword}】视频{i+1}"} for i in range(10)]
+            results = [{"title": f"【{keyword}】视频{i +1}"} for i in range(10)]
 
         print(f"[OK] 找到 {len(results)} 个视频")
         return results
@@ -333,7 +333,7 @@ class BilibiliCollector:
     def _mock_hot(self, limit, category):
         cats = ["科技", "知识", "游戏", "生活", "音乐", "美食"]
         return [
-            {"rank": i+1, "title": f"{cats[i%6]}热门{i+1}", "views": f"{100-i*2}万"}
+            {"rank": i +1, "title": f"{cats[i%6]}热门{i +1}", "views": f"{100 -i *2}万"}
             for i in range(min(limit, 20))
         ]
 

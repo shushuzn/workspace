@@ -86,7 +86,7 @@ Analyze workflow statistics"""
         "total": len(runs),
         "success": success,
         "failed": failed,
-        "rate": f"{success/len(runs)*100:.1f}%",
+        "rate": f"{success /len(runs) *100:.1f}%",
         "workflows": workflows,
         "top_tools": dict(sorted(tools.items(), key=lambda x: x[1], reverse=True)[:10])
     }

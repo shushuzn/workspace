@@ -20,7 +20,7 @@ print(f"\nMissing values:")
 for col in data.columns:
     missing = data[col].isna().sum()
     if missing > 0:
-        print(f"  {col}: {missing} ({missing/len(data)*100:.1f}%)")
+        print(f"  {col}: {missing} ({missing /len(data) *100:.1f}%)")
 
 # Correlation analysis
 print(f"\n=== CORRELATION WITH TARGET (sigma_Sm) ===")

@@ -141,7 +141,7 @@ class FederatedMemorySystem:
         self.round += 1
 
         print(f"\n🔄 Federated Aggregation Round {self.round}")
-        print("="*60)
+        print("=" *60)
 
         # Collect gradients from all nodes
         all_gradients = {}
@@ -297,9 +297,9 @@ class FederatedMemorySystem:
 
 def simulate_federated_learning():
     """Simulate federated memory learning scenario"""
-    print("="*80)
+    print("=" *80)
     print("🌐 Federated Memory System - Distributed Learning Simulation")
-    print("="*80)
+    print("=" *80)
 
     # Initialize system
     fed = FederatedMemorySystem()
@@ -347,9 +347,9 @@ def simulate_federated_learning():
     aggregated = fed.aggregate_knowledge(aggregation_method="federated_avg")
 
     # Print results
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 Aggregation Results:")
-    print("="*80)
+    print("=" *80)
 
     print(f"\n  Global Knowledge Version: {aggregated.version}")
     print(f"  Participating Nodes: {len(aggregated.participating_nodes)}")
@@ -360,22 +360,22 @@ def simulate_federated_learning():
     print(f"    Avg per Node: {aggregated.knowledge_summary['avg_memories_per_node']:.1f}")
 
     # Print node statistics
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📈 Node Statistics:")
-    print("="*80)
+    print("=" *80)
 
     for node_id, node in fed.nodes.items():
         stats = node.get_memory_stats()
         print(f"\n  {node_id} ({node.location}):")
         print(f"    Memories: {stats['total_memories']}")
-        print(f"    Encrypted: {stats['encrypted_count']} ({stats['encrypted_count']/max(stats['total_memories'],1):.0%})")
+        print(f"    Encrypted: {stats['encrypted_count']} ({stats['encrypted_count'] /max(stats['total_memories'],1):.0%})")
         print(f"    Avg Confidence: {stats['avg_confidence']:.2f}")
         print(f"    Types: {stats['memory_types']}")
 
     # Print federation stats
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("🌐 Federation Statistics:")
-    print("="*80)
+    print("=" *80)
 
     fed_stats = fed.get_federation_stats()
     print(f"  Total Rounds: {fed_stats['rounds']}")
@@ -384,9 +384,9 @@ def simulate_federated_learning():
     print(f"  Avg Privacy Score: {fed_stats['avg_privacy_score']:.2f}")
 
     # Export state
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("💾 Exporting federation state...")
-    print("="*80)
+    print("=" *80)
 
     import os
     os.makedirs("data", exist_ok=True)
@@ -414,9 +414,9 @@ def main():
                 f.write(fed.export_state())
             print(f"\n✅ Saved to: {args.output}")
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Federated Memory System demo complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.09845")
     print("🎯 Key Innovation: Privacy-preserving distributed memory learning")
     print("💡 Benefits:")

@@ -82,7 +82,7 @@ class BlockchainLogger:
         # 分层计算
         next_level = []
         for i in range(0, len(hashes), 2):
-            combined = hashes[i] + hashes[i+1]
+            combined = hashes[i] + hashes[i +1]
             next_level.append(hashlib.sha256(combined.encode()).hexdigest())
 
         return self._compute_merkle_root(next_level)
@@ -159,17 +159,17 @@ class BlockchainLogger:
 
                 # 检查 prev_hash 链
                 if entry.get("prev_hash") != prev_hash:
-                    issues.append(f"Block {i+1}: prev_hash mismatch")
+                    issues.append(f"Block {i +1}: prev_hash mismatch")
 
                 # 验证当前哈希
                 computed_hash = self._compute_hash(entry)
                 if entry.get("hash") != computed_hash:
-                    issues.append(f"Block {i+1}: hash mismatch")
+                    issues.append(f"Block {i +1}: hash mismatch")
 
                 prev_hash = entry.get("hash", "")
 
             except Exception as e:
-                issues.append(f"Block {i+1}: parse error - {str(e)}")
+                issues.append(f"Block {i +1}: parse error - {str(e)}")
 
         return {
             "valid": len(issues) == 0,

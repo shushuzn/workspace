@@ -145,7 +145,7 @@ def compare_papers(papers: List[Dict]) -> Dict:
     # 关键差异（简化：基于标签差异）
     paper_tags = {p['name']: set(p.get('metadata', {}).get('tags', [])) for p in papers}
     for i, p1 in enumerate(papers):
-        for p2 in papers[i+1:]:
+        for p2 in papers[i +1:]:
             tags1 = paper_tags[p1['name']]
             tags2 = paper_tags[p2['name']]
             diff1 = tags1 - tags2

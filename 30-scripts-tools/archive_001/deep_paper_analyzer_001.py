@@ -46,7 +46,7 @@ def extract_full_text(pdf_path):
         for i, page in enumerate(pdf.pages):
             text = page.extract_text()
             if text:
-                full_text.append(f"[PAGE {i+1}]\n{text}")
+                full_text.append(f"[PAGE {i +1}]\n{text}")
 
     return "\n\n".join(full_text)
 
@@ -80,7 +80,7 @@ def parse_sections(text):
     # Extract text for each section
     for i, (pos, name) in enumerate(sorted_sections):
         start = pos
-        end = sorted_sections[i+1][0] if i+1 < len(sorted_sections) else len(text)
+        end = sorted_sections[i +1][0] if i +1 < len(sorted_sections) else len(text)
         section_text = text[start:end].strip()
         sections[name] = section_text[:5000]  # Limit size
 

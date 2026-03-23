@@ -419,7 +419,7 @@ def cmd_monitor(args):
         {"tag": "div", "text": {"tag": "lark_md", "content": f"**内存:** {mem_used:.1f}/{mem_total:.1f} GB ({mem.percent}%)"}},
         {"tag": "div", "text": {"tag": "lark_md", "content": f"**磁盘:** {disk.percent}% used"}},
         {"tag": "div", "text": {"tag": "lark_md", "content": f"**进程:** {process_count} 个运行中"}},
-        {"tag": "div", "text": {"tag": "lark_md", "content": f"**网络:** ↑{net.bytes_sent/1024/1024:.1f}MB ↓{net.bytes_recv/1024/1024:.1f}MB"}},
+        {"tag": "div", "text": {"tag": "lark_md", "content": f"**网络:** ↑{net.bytes_sent /1024 /1024:.1f}MB ↓{net.bytes_recv /1024 /1024:.1f}MB"}},
         {"tag": "hr"},
     ]
 
@@ -728,7 +728,7 @@ def cmd_files(args):
         lines.append("🐍 Python 文件:")
         for f in py_files:
             size = f.stat().st_size
-            lines.append(f"  • {f.name} ({size//1024}KB)")
+            lines.append(f"  • {f.name} ({size //1024}KB)")
 
     msg = '\n'.join(lines)
     client.send_text(msg)

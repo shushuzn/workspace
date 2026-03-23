@@ -471,9 +471,9 @@ class DynamicMemoryAllocator:
 def demo_dynamic_memory():
     """Demo dynamic memory allocation"""
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("🧠 Dynamic Memory Allocation System")
-    print("="*80)
+    print("=" *80)
 
     # Initialize with 512MB capacity
     allocator = DynamicMemoryAllocator(total_capacity_mb=512)
@@ -485,9 +485,9 @@ def demo_dynamic_memory():
     print(f"   L3 Cache: 51.2 MB (10%)")
 
     # Demo 1: Allocate memory blocks
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 1: Memory Allocation")
-    print("="*80)
+    print("=" *80)
 
     allocations = []
     for i in range(20):
@@ -509,9 +509,9 @@ def demo_dynamic_memory():
     print(f"  ... ({len(allocations)} total allocations)")
 
     # Demo 2: Access patterns
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 2: Memory Access Patterns")
-    print("="*80)
+    print("=" *80)
 
     # Access some blocks (simulate hot/cold pattern)
     access_sequence = allocations[:5] + allocations[10:15] + allocations[:3]
@@ -521,9 +521,9 @@ def demo_dynamic_memory():
             print(f"  ✓ Accessed {block.id} (tier={block.tier}, accesses={block.access_count})")
 
     # Demo 3: Garbage collection
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 3: Garbage Collection")
-    print("="*80)
+    print("=" *80)
 
     gc_results = allocator.run_gc()
     for result in gc_results:
@@ -531,9 +531,9 @@ def demo_dynamic_memory():
               f"freed {result.bytes_freed:,} bytes in {result.collection_time_ms:.1f}ms")
 
     # Demo 4: Memory statistics
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 4: Memory Statistics")
-    print("="*80)
+    print("=" *80)
 
     stats = allocator.get_stats()
     print(f"\n  📊 Overall Statistics:")
@@ -551,9 +551,9 @@ def demo_dynamic_memory():
     print(f"     Total GC Runs: {stats.gc_count}")
 
     # Demo 5: Memory optimization impact
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("Demo 5: Memory Optimization Impact")
-    print("="*80)
+    print("=" *80)
 
     # Simulate without optimization (flat memory)
     flat_memory_used = sum(a.size_bytes for a in allocations)
@@ -599,9 +599,9 @@ def main():
     if args.demo or True:  # Default to demo
         demo_dynamic_memory()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Dynamic memory allocation complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv Research:")
     print("   - Memory-Efficient Long-Context LLMs (2603.15001)")
     print("   - Adaptive Context Compression (2603.14001)")

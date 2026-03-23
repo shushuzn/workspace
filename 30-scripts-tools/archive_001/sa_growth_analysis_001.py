@@ -74,14 +74,14 @@ class GrowthAnalyzer:
         years = len(revenues)
 
         # 计算 CAGR
-        cagr_3y = self.calculate_cagr(revenues[0], revenues[-1], min(3, years-1)) if years >= 4 else 0
-        cagr_5y = self.calculate_cagr(revenues[0], revenues[-1], min(5, years-1)) if years >= 6 else 0
+        cagr_3y = self.calculate_cagr(revenues[0], revenues[-1], min(3, years -1)) if years >= 4 else 0
+        cagr_5y = self.calculate_cagr(revenues[0], revenues[-1], min(5, years -1)) if years >= 6 else 0
 
         # 计算同比增长率
         yoy_growth = []
         for i in range(1, len(revenues)):
-            if revenues[i-1] > 0:
-                yoy = (revenues[i] - revenues[i-1]) / revenues[i-1]
+            if revenues[i -1] > 0:
+                yoy = (revenues[i] - revenues[i -1]) / revenues[i -1]
                 yoy_growth.append(yoy)
 
         avg_yoy = sum(yoy_growth) / len(yoy_growth) if yoy_growth else 0
@@ -112,14 +112,14 @@ class GrowthAnalyzer:
         years = len(net_incomes)
 
         # 计算 CAGR
-        cagr_3y = self.calculate_cagr(net_incomes[0], net_incomes[-1], min(3, years-1)) if years >= 4 else 0
-        cagr_5y = self.calculate_cagr(net_incomes[0], net_incomes[-1], min(5, years-1)) if years >= 6 else 0
+        cagr_3y = self.calculate_cagr(net_incomes[0], net_incomes[-1], min(3, years -1)) if years >= 4 else 0
+        cagr_5y = self.calculate_cagr(net_incomes[0], net_incomes[-1], min(5, years -1)) if years >= 6 else 0
 
         # 计算同比增长
         yoy_growth = []
         for i in range(1, len(net_incomes)):
-            if net_incomes[i-1] > 0:
-                yoy = (net_incomes[i] - net_incomes[i-1]) / net_incomes[i-1]
+            if net_incomes[i -1] > 0:
+                yoy = (net_incomes[i] - net_incomes[i -1]) / net_incomes[i -1]
                 yoy_growth.append(yoy)
 
         avg_yoy = sum(yoy_growth) / len(yoy_growth) if yoy_growth else 0
@@ -149,8 +149,8 @@ class GrowthAnalyzer:
         years = len(ocfs)
 
         # 计算 CAGR
-        cagr_3y = self.calculate_cagr(ocfs[0], ocfs[-1], min(3, years-1)) if years >= 4 else 0
-        cagr_5y = self.calculate_cagr(ocfs[0], ocfs[-1], min(5, years-1)) if years >= 6 else 0
+        cagr_3y = self.calculate_cagr(ocfs[0], ocfs[-1], min(3, years -1)) if years >= 4 else 0
+        cagr_5y = self.calculate_cagr(ocfs[0], ocfs[-1], min(5, years -1)) if years >= 6 else 0
 
         return {
             'ocf_cagr_3y': round(cagr_3y, 4),
@@ -250,8 +250,8 @@ class GrowthAnalyzer:
 
         # 判断趋势方向
         if len(historical_growth) >= 3:
-            first_half = sum(historical_growth[:len(historical_growth)//2]) / (len(historical_growth)//2)
-            second_half = sum(historical_growth[len(historical_growth)//2:]) / (len(historical_growth) - len(historical_growth)//2)
+            first_half = sum(historical_growth[:len(historical_growth) //2]) / (len(historical_growth) //2)
+            second_half = sum(historical_growth[len(historical_growth) //2:]) / (len(historical_growth) - len(historical_growth) //2)
 
             if second_half > first_half * 1.1:
                 trend = 'accelerating'

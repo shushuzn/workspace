@@ -116,7 +116,7 @@ class TestRunner:
 
         for result in self.results:
             icon = "[PASS]" if result.status == TestStatus.PASSED else "[FAIL]"
-            print(f"{icon} {result.name}: {result.duration*1000:.2f}ms")
+            print(f"{icon} {result.name}: {result.duration *1000:.2f}ms")
 
             if result.error:
                 print(f"   Error: {result.error}")
@@ -227,7 +227,7 @@ class ReportGenerator:
         <tr>
             <td>{result.name}</td>
             <td class="{status_class}">{result.status.value}</td>
-            <td>{result.duration*1000:.2f}</td>
+            <td>{result.duration *1000:.2f}</td>
             <td>{error_text}</td>
         </tr>
 """

@@ -75,20 +75,20 @@ def lig_physics_model(P, v, co_ratio, seed=42):
 
     # 电导率模型 (分段函数)
     if E < 3:
-        sigma = 100 * (E/3) * (co_ratio/3.3)
+        sigma = 100 * (E /3) * (co_ratio /3.3)
     elif E < 12:
-        sigma = 500 * (E/3)**1.5 * (co_ratio/3.3)**2
+        sigma = 500 * (E /3)**1.5 * (co_ratio /3.3)**2
     elif E < 20:
-        sigma = 4500 * (1 - (E-12)/50)
+        sigma = 4500 * (1 - (E -12) /50)
     else:
-        sigma = 2000 * (20/E)  # 过度烧蚀衰减
+        sigma = 2000 * (20 /E)  # 过度烧蚀衰减
 
     # 添加噪声 (15%)
     sigma *= (1 + np.random.normal(0, 0.15))
     sigma = max(50, min(8000, sigma))
 
     # SSA 模型
-    ssa = 400 + 600 * (3.3/co_ratio) * np.exp(-E/15)
+    ssa = 400 + 600 * (3.3 /co_ratio) * np.exp(-E /15)
     ssa *= (1 + np.random.normal(0, 0.12))  # 12% 噪声
     ssa = max(100, min(2000, ssa))
 
@@ -145,7 +145,7 @@ scaler = StandardScaler()
 X_scaled = scaler.fit_transform(X_existing)
 
 # GP 模型
-kernel = C(1.0, (1e-3, 1e3)) * RBF(length_scale=[1.0]*4, length_scale_bounds=(1e-2, 1e2))
+kernel = C(1.0, (1e-3, 1e3)) * RBF(length_scale=[1.0] *4, length_scale_bounds=(1e-2, 1e2))
 gp = GaussianProcessRegressor(kernel=kernel, n_restarts_optimizer=10, random_state=42)
 gp.fit(X_scaled, y_existing)
 
@@ -175,7 +175,7 @@ top_uncertain_idx = np.argsort(std)[-n_active:]
 active_data = []
 for idx in top_uncertain_idx:
     P, v, E, co = candidates[idx]
-    sigma, ssa, id_ig = lig_physics_model(P, v, co, seed=int(P*1000))
+    sigma, ssa, id_ig = lig_physics_model(P, v, co, seed=int(P *1000))
 
     active_data.append({
         'P_W': round(P, 3),

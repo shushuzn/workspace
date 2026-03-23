@@ -14,9 +14,9 @@ BASE_URL = "http://localhost:8000"
 
 def test_health():
     """测试健康检查端点"""
-    print("="*60)
+    print("=" *60)
     print("测试 1: 健康检查")
-    print("="*60)
+    print("=" *60)
 
     start = time.time()
     response = requests.get(f"{BASE_URL}/api/v1/health")
@@ -33,9 +33,9 @@ def test_health():
 
 def test_pdf_extract():
     """测试 PDF 提取端点"""
-    print("="*60)
+    print("=" *60)
     print("测试 2: PDF 提取")
-    print("="*60)
+    print("=" *60)
 
     # 使用测试 PDF 文件
     test_pdf = "D:/OpenClaw/workspace/10-ai-research/02-Models/_assets/2401.00001/2401.00001.pdf"
@@ -65,9 +65,9 @@ def test_pdf_extract():
 
 def test_figure_quality():
     """测试图表质量评估端点"""
-    print("="*60)
+    print("=" *60)
     print("测试 3: 图表质量评估")
-    print("="*60)
+    print("=" *60)
 
     # 使用测试图像
     test_image = "D:/OpenClaw/workspace/11-research/cnt-research/figures/active_learning_best_conductivity.png"
@@ -96,9 +96,9 @@ def test_figure_quality():
 
 def test_throughput():
     """测试吞吐量 (并发请求)"""
-    print("="*60)
+    print("=" *60)
     print("测试 4: 吞吐量测试 (10 并发健康检查)")
-    print("="*60)
+    print("=" *60)
 
     start = time.time()
 
@@ -120,18 +120,18 @@ def test_throughput():
     print(f"总耗时：{elapsed:.2f}ms")
     print(f"平均耗时：{avg_time:.2f}ms/请求")
     print(f"成功：{success_count}/10")
-    print(f"吞吐量：{1000/avg_time:.1f} 请求/秒")
+    print(f"吞吐量：{1000 /avg_time:.1f} 请求/秒")
 
     passed = success_count == 10 and avg_time < 200
     print(f"结果：{'✅ 通过' if passed else '❌ 失败'}\n")
 
-    return {'name': 'throughput', 'passed': passed, 'response_time': avg_time, 'requests_per_sec': 1000/avg_time}
+    return {'name': 'throughput', 'passed': passed, 'response_time': avg_time, 'requests_per_sec': 1000 /avg_time}
 
 def test_api_docs():
     """测试 API 文档"""
-    print("="*60)
+    print("=" *60)
     print("测试 5: API 文档可用性")
-    print("="*60)
+    print("=" *60)
 
     endpoints = [
         ("/docs", "Swagger UI"),
@@ -157,9 +157,9 @@ def test_api_docs():
 
 def run_all_tests():
     """运行所有测试"""
-    print("="*60)
+    print("=" *60)
     print("🧪 OpenClaw API 性能测试 - todo-036")
-    print("="*60)
+    print("=" *60)
     print(f"开始时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"API 地址：{BASE_URL}\n")
 
@@ -173,9 +173,9 @@ def run_all_tests():
     results.append(test_throughput())
 
     # 汇总
-    print("="*60)
+    print("=" *60)
     print("测试结果汇总")
-    print("="*60)
+    print("=" *60)
 
     passed = sum(1 for r in results if r.get('passed', False))
     total = len(results)
@@ -188,9 +188,9 @@ def run_all_tests():
     print(f"通过：{passed}/{total}")
 
     # 验收标准检查
-    print("\n" + "="*60)
+    print("\n" + "=" *60)
     print("验收标准验证")
-    print("="*60)
+    print("=" *60)
 
     avg_response = sum(r.get('response_time', 0) for r in results if 'response_time' in r) / len(results)
 

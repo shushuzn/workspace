@@ -334,7 +334,7 @@ class MediumWatcher:
                 break  # 成功则退出重试循环
 
             except requests.exceptions.Timeout:
-                self._log_error("TIMEOUT", f"标签 #{tag} 请求超时", {"attempt": attempt+1, "max_retries": max_retries})
+                self._log_error("TIMEOUT", f"标签 #{tag} 请求超时", {"attempt": attempt +1, "max_retries": max_retries})
                 # 代理池自动切换
                 if self.proxy_pool and self.proxies:
                     current_proxy = self.proxies.get('http')
@@ -345,7 +345,7 @@ class MediumWatcher:
                     return []
                 time.sleep(2 ** attempt)  # 指数退避
             except requests.exceptions.RequestException as e:
-                self._log_error("NETWORK", f"标签 #{tag} 网络错误", {"attempt": attempt+1, "error": str(e)})
+                self._log_error("NETWORK", f"标签 #{tag} 网络错误", {"attempt": attempt +1, "error": str(e)})
                 # 代理池自动切换
                 if self.proxy_pool and self.proxies:
                     current_proxy = self.proxies.get('http')
@@ -415,13 +415,13 @@ class MediumWatcher:
                 break  # 成功则退出重试循环
 
             except requests.exceptions.Timeout:
-                self._log_error("TIMEOUT", f"作者 {author_url} 请求超时", {"attempt": attempt+1, "max_retries": max_retries})
+                self._log_error("TIMEOUT", f"作者 {author_url} 请求超时", {"attempt": attempt +1, "max_retries": max_retries})
                 if attempt >= max_retries - 1:
                     print(f"[ERROR] 作者 {author_url} 获取失败：超时")
                     return []
                 time.sleep(2 ** attempt)
             except requests.exceptions.RequestException as e:
-                self._log_error("NETWORK", f"作者 {author_url} 网络错误", {"attempt": attempt+1, "error": str(e)})
+                self._log_error("NETWORK", f"作者 {author_url} 网络错误", {"attempt": attempt +1, "error": str(e)})
                 if attempt >= max_retries - 1:
                     print(f"[ERROR] 作者 {author_url} 获取失败：{e}")
                     return []
@@ -785,7 +785,7 @@ def main():
 
                 working = 0
                 for i, proxy in enumerate(proxy_pool[:10]):  # 测试前 10 个
-                    print(f"[{i+1}/{len(proxy_pool)}] 测试 {proxy}...", end=" ")
+                    print(f"[{i +1}/{len(proxy_pool)}] 测试 {proxy}...", end=" ")
                     watcher_temp = MediumWatcher(args.output)
                     if watcher_temp._test_proxy(proxy):
                         print("✅ OK")

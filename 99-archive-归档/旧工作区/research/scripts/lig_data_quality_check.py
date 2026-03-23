@@ -48,8 +48,8 @@ print("\n  异常值检测 (3σ原则):")
 for col in ['P_W', 'v_mms', 'E_Jcm2', 'co_ratio', 'sigma_Sm']:
     mean = df[col].mean()
     std = df[col].std()
-    outliers = df[(df[col] < mean - 3*std) | (df[col] > mean + 3*std)]
-    print(f"    {col}: {len(outliers)} 个异常值 ({len(outliers)/len(df)*100:.1f}%)")
+    outliers = df[(df[col] < mean - 3 *std) | (df[col] > mean + 3 *std)]
+    print(f"    {col}: {len(outliers)} 个异常值 ({len(outliers) /len(df) *100:.1f}%)")
 
 # 2.3 共线性检查
 print("\n  共线性检查 (Pearson 相关系数):")
@@ -59,7 +59,7 @@ print(corr_matrix.round(2))
 # 高共线性警告
 high_corr = []
 for i in range(len(corr_matrix.columns)):
-    for j in range(i+1, len(corr_matrix.columns)):
+    for j in range(i +1, len(corr_matrix.columns)):
         if abs(corr_matrix.iloc[i, j]) > 0.7:
             high_corr.append((corr_matrix.columns[i], corr_matrix.columns[j], corr_matrix.iloc[i, j]))
 
@@ -110,7 +110,7 @@ X_test_B_scaled = scaler_B.transform(X_test_B)
 print("\n  训练 GP 模型...")
 
 # 核函数 1: 基础 RBF
-kernel1 = ConstantKernel(100) * RBF(length_scale=[1.0]*4) + WhiteKernel(0.1)
+kernel1 = ConstantKernel(100) * RBF(length_scale=[1.0] *4) + WhiteKernel(0.1)
 gp1 = GaussianProcessRegressor(kernel=kernel1, n_restarts_optimizer=20, random_state=42, normalize_y=True)
 gp1.fit(X_train_A_scaled, y_train)
 
@@ -252,7 +252,7 @@ ax.set_ylim(0, 1.0)
 
 # 添加数值标签
 for bar, r2 in zip(bars, r2_vals):
-    ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.02,
+    ax.text(bar.get_x() + bar.get_width() /2, bar.get_height() + 0.02,
             f'R²={r2:.3f}', ha='center', va='bottom', fontsize=10)
 
 # 目标线

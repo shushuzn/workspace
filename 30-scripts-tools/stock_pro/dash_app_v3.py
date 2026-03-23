@@ -106,11 +106,11 @@ def get_score_bg(score):
 def fmt(n):
     """Format numbers with K/M/B suffixes"""
     if n >= 1e9:
-        return f"{n/1e9:.1f}B"
+        return f"{n /1e9:.1f}B"
     elif n >= 1e6:
-        return f"{n/1e6:.1f}M"
+        return f"{n /1e6:.1f}M"
     elif n >= 1e3:
-        return f"{n/1e3:.1f}K"
+        return f"{n /1e3:.1f}K"
     return f"{n:.2f}"
 
 # ============================================
@@ -516,7 +516,7 @@ def update_stats(_):
         from stock_pro.core import A, P
         total = len(A)
         scores = [A[s][2] for s in A] if A else [65]
-        avg = sum(scores)/len(scores) if scores else 65
+        avg = sum(scores) /len(scores) if scores else 65
         buys = len([s for s in A if A[s][1] in ['Overweight', 'Outperform', 'Strong Buy', 'Buy']]) if A else 0
 
         upsides = []
@@ -583,7 +583,7 @@ def update_tab(top, value, growth, dividend):
     if not data:
         return html.Div("No data available", style={'color': COLORS['text_secondary']}), *classes
 
-    rows = [stock_row_v3(s['symbol'], s, rank=i+1) for i, s in enumerate(data)]
+    rows = [stock_row_v3(s['symbol'], s, rank=i +1) for i, s in enumerate(data)]
 
     content = glass_card([
         html.Div([

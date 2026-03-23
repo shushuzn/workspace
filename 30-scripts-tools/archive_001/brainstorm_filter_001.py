@@ -44,9 +44,9 @@ def save_filtered(filtered) -> None:
 
 def run(min_score=6) -> None:
     """Execute filter step"""
-    print("="*60)
+    print("=" *60)
     print("[BRAINSTORM] Step 3: Filter - Evaluate Ideas")
-    print("="*60)
+    print("=" *60)
 
     # Load ideas
     ideas = load_ideas()

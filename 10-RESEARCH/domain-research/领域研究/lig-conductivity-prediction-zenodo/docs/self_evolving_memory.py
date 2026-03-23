@@ -171,7 +171,7 @@ class SelfEvolvingMemorySystem:
     def run_evolution_cycle(self) -> Dict:
         """Run one evolution cycle"""
         print("\n🔄 Running evolution cycle...")
-        print("="*60)
+        print("=" *60)
 
         evolved_count = 0
         expired_count = 0
@@ -314,9 +314,9 @@ class SelfEvolvingMemorySystem:
 
 def simulate_self_evolution():
     """Simulate self-evolving memory system"""
-    print("="*80)
+    print("=" *80)
     print("🧬 Self-Evolving Memory System - Simulation")
-    print("="*80)
+    print("=" *80)
 
     # Initialize system
     sems = SelfEvolvingMemorySystem()
@@ -385,9 +385,9 @@ def simulate_self_evolution():
         sems.run_evolution_cycle()
 
     # Print system statistics
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 System Statistics:")
-    print("="*80)
+    print("=" *80)
 
     stats = sems.get_system_stats()
     print(f"\n  Total Memories: {stats['total_memories']}")
@@ -405,9 +405,9 @@ def simulate_self_evolution():
         print(f"    {tier}: {count}")
 
     # Print individual memory details
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📝 Memory Details:")
-    print("="*80)
+    print("=" *80)
 
     for memory_id, memory in sorted(sems.memories.items(), key=lambda x: x[1].quality_score, reverse=True):
         print(f"\n  {memory_id} [{memory.quality_tier.value}]")
@@ -419,9 +419,9 @@ def simulate_self_evolution():
             print(f"    Related: {len(memory.related_memories)} memories")
 
     # Export state
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("💾 Exporting system state...")
-    print("="*80)
+    print("=" *80)
 
     import os
     os.makedirs("data", exist_ok=True)
@@ -449,9 +449,9 @@ def main():
                 f.write(sems.export_state())
             print(f"\n✅ Saved to: {args.output}")
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ Self-Evolving Memory System demo complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Combines 4 arXiv papers:")
     print("   - 2603.13017 (Memory Distillation)")
     print("   - 2603.12631 (Multi-Agent Memory)")

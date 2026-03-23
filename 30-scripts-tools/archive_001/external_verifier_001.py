@@ -157,7 +157,7 @@ class ExternalVerifier:
         report["overall"] = {
             "passed": passed_checks,
             "total": total_checks,
-            "rate": f"{passed_checks/total_checks*100:.1f}%" if total_checks > 0 else "N/A"
+            "rate": f"{passed_checks /total_checks *100:.1f}%" if total_checks > 0 else "N/A"
         }
 
         # 保存报告

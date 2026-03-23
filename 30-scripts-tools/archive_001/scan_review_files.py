@@ -19,7 +19,7 @@ review = [
 ]
 
 print('SCANNING 31 FILES...')
-print('='*70)
+print('=' *70)
 
 safe_delete = []
 needs_review = []
@@ -59,10 +59,10 @@ for f in review:
     except Exception as e:
         print(f'{f:40} | ERROR: {e}')
 
-print('\n' + '='*70)
+print('\n' + '=' *70)
 print(f'SAFE TO DELETE: {len(safe_delete)}')
 print(f'NEEDS REVIEW: {len(needs_review)}')
-print('='*70)
+print('=' *70)
 
 if safe_delete:
     print('\nSAFE DELETE LIST:')

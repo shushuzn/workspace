@@ -116,7 +116,7 @@ def fill_pnote_template(metadata, contributions, methods, experiments):
         template = template.replace(key, str(value))
 
     # 替换列表占位符 (核心贡献)
-    contributions_text = '\n'.join([f"{i+1}. {c}" for i, c in enumerate(contributions)])
+    contributions_text = '\n'.join([f"{i +1}. {c}" for i, c in enumerate(contributions)])
     template = template.replace('{{core_contributions}}', contributions_text)
 
     # 替换方法列表

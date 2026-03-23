@@ -6,9 +6,9 @@ import json
 
 base = 'http://127.0.0.1:8000'
 
-print('='*60)
+print('=' *60)
 print('OpenClaw API 完整测试')
-print('='*60)
+print('=' *60)
 
 # 测试 1: 健康检查
 print('\n1. 健康检查...')
@@ -47,6 +47,6 @@ data = r.json()
 print(f'   成功：{data["success"]}')
 print(f'   时间：{data["processing_time"]:.2f}s')
 
-print('\n' + '='*60)
+print('\n' + '=' *60)
 print('[OK] 所有端点测试完成!')
-print('='*60)
+print('=' *60)

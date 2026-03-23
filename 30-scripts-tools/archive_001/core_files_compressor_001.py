@@ -130,7 +130,7 @@ class CoreFilesCompressor:
 
         if result['total_size'] > self.TOTAL_LIMIT:
             result['issues'].append(
-                f"总大小超过限制: {result['total_size_kb']}KB > {self.TOTAL_LIMIT/1024}KB"
+                f"总大小超过限制: {result['total_size_kb']}KB > {self.TOTAL_LIMIT /1024}KB"
             )
 
         return result
@@ -308,7 +308,7 @@ class CoreFilesCompressor:
                 before['total_size'],
                 self.TOTAL_LIMIT * 0.9  # 目标90%
             )
-            print(f"[AUTO] 超限{excess/1024:.1f}KB，自动阈值: {result['auto_threshold']:.1f}%")
+            print(f"[AUTO] 超限{excess /1024:.1f}KB，自动阈值: {result['auto_threshold']:.1f}%")
 
             result['compressions']['SOUL.md'] = self.compress_soul_md(result['auto_threshold'])
             result['compressions']['AGENTS.md'] = self.compress_agents_md(result['auto_threshold'])
@@ -388,8 +388,8 @@ class CoreFilesCompressor:
         report.append("-" * 60)
         report.append(
             f"总计: {check_result['total_size_kb']:>6.2f}KB / "
-            f"{self.TOTAL_LIMIT/1024:>5.2f}KB "
-            f"({check_result['total_size']/self.TOTAL_LIMIT*100:>5.1f}%)"
+            f"{self.TOTAL_LIMIT /1024:>5.2f}KB "
+            f"({check_result['total_size'] /self.TOTAL_LIMIT *100:>5.1f}%)"
         )
         report.append("")
 

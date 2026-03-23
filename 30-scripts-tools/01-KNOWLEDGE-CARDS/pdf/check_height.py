@@ -32,7 +32,7 @@ for b in text_blocks:
             "y": bbox[1]
         })
 
-print(f"Page {page_num+1}: {len(significant)} significant blocks")
+print(f"Page {page_num +1}: {len(significant)} significant blocks")
 print(f"Center X: {center_x}")
 print()
 

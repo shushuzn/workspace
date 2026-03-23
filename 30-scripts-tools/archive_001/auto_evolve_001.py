@@ -136,7 +136,7 @@ DEBUG:
         results = []
 
         for i in range(iterations):
-            print(f"\n[Generation {i+1}]")
+            print(f"\n[Generation {i +1}]")
 
             patterns = self.analyze_patterns()
             print(f"  Patterns found: {sum(len(v) for v in patterns.values())}")
@@ -150,8 +150,8 @@ DEBUG:
             new_tools = []
             if i == 0:
                 tool_spec = {
-                    "name": f"evolved_tool_{i+1}",
-                    "purpose": f"Auto-evolved capability from generation {i+1}"
+                    "name": f"evolved_tool_{i +1}",
+                    "purpose": f"Auto-evolved capability from generation {i +1}"
                 }
                 path = self.create_new_tool(tool_spec)
                 new_tools.append(path.name)

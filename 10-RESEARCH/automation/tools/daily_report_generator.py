@@ -406,9 +406,9 @@ def main():
     parser.add_argument("--feishu", action="store_true", help="Send via Feishu")
     args = parser.parse_args()
 
-    print("="*80)
+    print("=" *80)
     print("📰 Automatic Daily Report Generator")
-    print("="*80)
+    print("=" *80)
 
     # Generate report
     generator = DailyReportGenerator(use_llm=True)
@@ -436,9 +436,9 @@ def main():
     print(f"   - {report.report_id}.json")
 
     # Print AI summary
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("🤖 AI Summary:")
-    print("="*80)
+    print("=" *80)
     print(report.ai_summary)
 
     # Notification (TODO: integrate with Feishu)

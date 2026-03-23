@@ -101,9 +101,9 @@ def generate_daily_report(date: datetime = None) -> dict:
 
 def send_daily_report():
     """Send daily report via Feishu."""
-    print(f"\n{'='*60}")
+    print(f"\n{'=' *60}")
     print(f"Daily Report Automation")
-    print(f"{'='*60}")
+    print(f"{'=' *60}")
     print(f"Date: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Timezone: {REPORT_CONFIG['timezone']}")
     print()
@@ -142,9 +142,9 @@ def send_daily_report():
 
 def test_report():
     """Test daily report without sending."""
-    print(f"\n{'='*60}")
+    print(f"\n{'=' *60}")
     print(f"Daily Report Test")
-    print(f"{'='*60}\n")
+    print(f"{'=' *60}\n")
 
     report = generate_daily_report()
 

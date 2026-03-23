@@ -188,7 +188,7 @@ report = f"""# LIG 文献数据挖掘最终报告
 """
 
 for precursor, count in stats['precursors'].items():
-    report += f"- **{precursor}:** {count} 样本 ({count/len(batch5_samples)*100:.0f}%)\n"
+    report += f"- **{precursor}:** {count} 样本 ({count /len(batch5_samples) *100:.0f}%)\n"
 
 report += f"""
 ## [TARGET] 最终性能预测

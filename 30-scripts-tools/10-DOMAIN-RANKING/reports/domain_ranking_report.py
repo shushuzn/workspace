@@ -187,7 +187,7 @@ def generate_html_report(domain: str, data_file: Path, output_path: Path):
                 数据源：{data_file.name}
             </div>
             <div class="rank-badge">
-                {current_rank} {level}级 | 总分：{score}/8000 | 进度：{level/10:.1f}%
+                {current_rank} {level}级 | 总分：{score}/8000 | 进度：{level /10:.1f}%
             </div>
         </div>
         

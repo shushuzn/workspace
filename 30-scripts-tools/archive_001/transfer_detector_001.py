@@ -72,8 +72,8 @@ def calculate_transfer_score(data):
 
     attempts = sorted(attempts, key=lambda x: x["timestamp"])
     n = len(attempts)
-    first_third = attempts[:n//3]
-    last_third = attempts[-n//3:]
+    first_third = attempts[:n //3]
+    last_third = attempts[-n //3:]
 
     skill_groups = defaultdict(list)
     for a in attempts:
@@ -82,8 +82,8 @@ def calculate_transfer_score(data):
     skill_improvement = {}
     for skill, task_list in skill_groups.items():
         if len(task_list) >= 2:
-            first = sum(t["performance"] for t in task_list[:len(task_list)//2]) / (len(task_list)//2)
-            last = sum(t["performance"] for t in task_list[-len(task_list)//2:]) / (len(task_list)//2)
+            first = sum(t["performance"] for t in task_list[:len(task_list) //2]) / (len(task_list) //2)
+            last = sum(t["performance"] for t in task_list[-len(task_list) //2:]) / (len(task_list) //2)
             skill_improvement[skill] = (last - first) / max(1, first) * 100
 
     near_transfer = sum(skill_improvement.values()) / max(1, len(skill_improvement))

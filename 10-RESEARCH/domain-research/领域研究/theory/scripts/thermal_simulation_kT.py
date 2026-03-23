@@ -72,13 +72,13 @@ d = 100e-6      # m (100 um)
 absorb = 0.8    # absorption
 
 t_dwell = d / v
-area = np.pi * (d/2)**2
+area = np.pi * (d /2)**2
 q_laser = absorb * P / area
 
 print(f"  Power: {P} W")
-print(f"  Speed: {v*1000:.1f} mm/s")
-print(f"  Spot size: {d*1e6:.0f} um")
-print(f"  Dwell time: {t_dwell*1e6:.1f} us")
+print(f"  Speed: {v *1000:.1f} mm/s")
+print(f"  Spot size: {d *1e6:.0f} um")
+print(f"  Dwell time: {t_dwell *1e6:.1f} us")
 print(f"  Power density: {q_laser:.2e} W/m2")
 
 # ============================================================================
@@ -91,10 +91,10 @@ dt = 0.5e-6     # 0.5 us
 nz = 150        # 150 um depth
 nt = int(t_dwell / dt) + 100
 
-print(f"  Grid spacing: {dz*1e6:.1f} um")
-print(f"  Time step: {dt*1e6:.1f} us")
-print(f"  Domain depth: {nz*dz*1e6:.1f} um")
-print(f"  Total time: {nt*dt*1e6:.1f} us")
+print(f"  Grid spacing: {dz *1e6:.1f} um")
+print(f"  Time step: {dt *1e6:.1f} us")
+print(f"  Domain depth: {nz *dz *1e6:.1f} um")
+print(f"  Total time: {nt *dt *1e6:.1f} us")
 
 # ============================================================================
 # 4. Initialize
@@ -108,7 +108,7 @@ T = np.ones(nz) * T_env
 T_const = np.ones(nz) * T_env
 
 # Record history
-record_times = [0, int(0.25*nt), int(0.5*nt), int(0.75*nt), nt-1]
+record_times = [0, int(0.25 *nt), int(0.5 *nt), int(0.75 *nt), nt -1]
 T_history = []
 T_const_history = []
 time_history = []
@@ -123,11 +123,11 @@ for n in range(nt):
     T_const_new = T_const.copy()
 
     # === Variable properties ===
-    for i in range(1, nz-1):
+    for i in range(1, nz -1):
         # Get properties at current temperature
         k_i = k_of_T(T[i])
-        k_ip1 = k_of_T(T[i+1])
-        k_im1 = k_of_T(T[i-1])
+        k_ip1 = k_of_T(T[i +1])
+        k_im1 = k_of_T(T[i -1])
         Cp_i = Cp_of_T(T[i])
 
         # Interface conductivity (arithmetic mean)
@@ -135,7 +135,7 @@ for n in range(nt):
         k_imhalf = (k_i + k_im1) / 2
 
         # Diffusion term
-        diff_term = (k_iphalf * (T[i+1] - T[i]) - k_imhalf * (T[i] - T[i-1])) / dz**2
+        diff_term = (k_iphalf * (T[i +1] - T[i]) - k_imhalf * (T[i] - T[i -1])) / dz**2
 
         # Update temperature
         T_new[i] = T[i] + dt / (rho * Cp_i) * diff_term
@@ -148,11 +148,11 @@ for n in range(nt):
         h = 10
         T_new[0] = T[0] - h * (T[0] - T_env) * dt / (rho * Cp_of_T(T[0]) * dz)
 
-    T_new[nz-1] = T[nz-1]
+    T_new[nz -1] = T[nz -1]
 
     # === Constant properties (for comparison) ===
-    for i in range(1, nz-1):
-        T_const_new[i] = T_const[i] + k_0 * dt / (rho * Cp_0) / dz**2 * (T_const[i+1] - 2*T_const[i] + T_const[i-1])
+    for i in range(1, nz -1):
+        T_const_new[i] = T_const[i] + k_0 * dt / (rho * Cp_0) / dz**2 * (T_const[i +1] - 2 *T_const[i] + T_const[i -1])
 
     if n * dt < t_dwell:
         T_const_new[0] = T_const[0] + q_laser * dt / (rho * Cp_0 * dz)
@@ -160,7 +160,7 @@ for n in range(nt):
         h = 10
         T_const_new[0] = T_const[0] - h * (T_const[0] - T_env) * dt / (rho * Cp_0 * dz)
 
-    T_const_new[nz-1] = T_const[nz-1]
+    T_const_new[nz -1] = T_const[nz -1]
 
     # Update
     T = T_new
@@ -184,7 +184,7 @@ T_max_const = max([T.max() for T in T_const_history])
 print(f"\n  Simulation Results:")
 print(f"    T_max (variable k,Cp): {T_max_var:.1f} K")
 print(f"    T_max (constant k,Cp): {T_max_const:.1f} K")
-print(f"    Difference: {T_max_var - T_max_const:.1f} K ({(T_max_var/T_max_const - 1)*100:+.1f}%)")
+print(f"    Difference: {T_max_var - T_max_const:.1f} K ({(T_max_var /T_max_const - 1) *100:+.1f}%)")
 
 # Analytical estimate
 T_max_analytical = T_env + 0.5 * absorb * P / (rho * Cp_0 * v * d**2)
@@ -233,14 +233,14 @@ for n in range(nt):
     T_new = T.copy()
     T_const_new = T_const.copy()
 
-    for i in range(1, nz-1):
+    for i in range(1, nz -1):
         k_i = k_of_T(T[i])
-        k_ip1 = k_of_T(T[i+1])
-        k_im1 = k_of_T(T[i-1])
+        k_ip1 = k_of_T(T[i +1])
+        k_im1 = k_of_T(T[i -1])
         Cp_i = Cp_of_T(T[i])
         k_iphalf = (k_i + k_ip1) / 2
         k_imhalf = (k_i + k_im1) / 2
-        diff_term = (k_iphalf * (T[i+1] - T[i]) - k_imhalf * (T[i] - T[i-1])) / dz**2
+        diff_term = (k_iphalf * (T[i +1] - T[i]) - k_imhalf * (T[i] - T[i -1])) / dz**2
         T_new[i] = T[i] + dt / (rho * Cp_i) * diff_term
 
     if n * dt < t_dwell:
@@ -248,17 +248,17 @@ for n in range(nt):
     else:
         h = 10
         T_new[0] = T[0] - h * (T[0] - T_env) * dt / (rho * Cp_of_T(T[0]) * dz)
-    T_new[nz-1] = T[nz-1]
+    T_new[nz -1] = T[nz -1]
 
-    for i in range(1, nz-1):
-        T_const_new[i] = T_const[i] + k_0 * dt / (rho * Cp_0) / dz**2 * (T_const[i+1] - 2*T_const[i] + T_const[i-1])
+    for i in range(1, nz -1):
+        T_const_new[i] = T_const[i] + k_0 * dt / (rho * Cp_0) / dz**2 * (T_const[i +1] - 2 *T_const[i] + T_const[i -1])
 
     if n * dt < t_dwell:
         T_const_new[0] = T_const[0] + q_laser * dt / (rho * Cp_0 * dz)
     else:
         h = 10
         T_const_new[0] = T_const[0] - h * (T_const[0] - T_env) * dt / (rho * Cp_0 * dz)
-    T_const_new[nz-1] = T_const[nz-1]
+    T_const_new[nz -1] = T_const[nz -1]
 
     T = T_new
     T_const = T_const_new
@@ -267,7 +267,7 @@ for n in range(nt):
 
 ax2.plot(time_us, T_surface_var, 'r-', linewidth=2, label='Variable k(T), Cp(T)')
 ax2.plot(time_us, T_surface_const, 'b--', linewidth=2, label='Constant k, Cp')
-ax2.axvline(x=t_dwell*1e6, color='k', linestyle=':', linewidth=2, label=f'Dwell time={t_dwell*1e6:.0f} us')
+ax2.axvline(x=t_dwell *1e6, color='k', linestyle=':', linewidth=2, label=f'Dwell time={t_dwell *1e6:.0f} us')
 ax2.axhline(y=T_max_analytical, color='g', linestyle=':', linewidth=2, label=f'Analytical={T_max_analytical:.0f}K')
 ax2.set_xlabel('Time (us)', fontsize=12)
 ax2.set_ylabel('Surface Temperature (K)', fontsize=12)
@@ -313,7 +313,7 @@ print("=" * 70)
 print(f"\nKey Results:")
 print(f"  T_max (variable k,Cp): {T_max_var:.1f} K")
 print(f"  T_max (constant k,Cp): {T_max_const:.1f} K")
-print(f"  Difference: {T_max_var - T_max_const:.1f} K ({(T_max_var/T_max_const - 1)*100:+.1f}%)")
+print(f"  Difference: {T_max_var - T_max_const:.1f} K ({(T_max_var /T_max_const - 1) *100:+.1f}%)")
 
 print(f"\nFigures saved to: {figures_dir}")
 

@@ -89,9 +89,9 @@ def save_ideas(ideas) -> None:
 
 def run(count=15) -> None:
     """Execute diverge step"""
-    print("="*60)
+    print("=" *60)
     print("[BRAINSTORM] Step 2: Diverge - Generate Ideas")
-    print("="*60)
+    print("=" *60)
 
     # Load topic
     topic_data = load_topic()

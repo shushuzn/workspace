@@ -27,9 +27,9 @@ class TestSuite:
 
     def test_quality_filter_thresholds(self):
         """测试 1: 质量阈值配置"""
-        print("="*60)
+        print("=" *60)
         print("测试 1: 质量阈值配置")
-        print("="*60)
+        print("=" *60)
 
         filter_default = QualityFilter()
         print(f"默认配置:")
@@ -58,9 +58,9 @@ class TestSuite:
 
     def test_quality_filter_evaluation(self):
         """测试 2: 质量评估功能"""
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("测试 2: 质量评估功能")
-        print("="*60)
+        print("=" *60)
 
         test_images = list((Path(__file__).parent.parent.parent / "11-research/cnt-research/figures").glob("*.png"))
 
@@ -82,16 +82,16 @@ class TestSuite:
             print(f"  {status} {img_path.name}: {result['reason']}")
 
         pass_rate = sum(1 for r in results if r['pass']) / len(results) if results else 0
-        print(f"\n通过率：{pass_rate*100:.1f}%")
+        print(f"\n通过率：{pass_rate *100:.1f}%")
 
         print("\n✅ 测试通过：质量评估功能正常")
         return {'name': 'quality_evaluation', 'passed': True, 'pass_rate': pass_rate}
 
     def test_super_resolution_available(self):
         """测试 3: 超分辨率模型可用性"""
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("测试 3: 超分辨率模型可用性")
-        print("="*60)
+        print("=" *60)
 
         try:
             # 直接检查模块是否可用，不导入整个文件
@@ -111,9 +111,9 @@ class TestSuite:
 
     def test_figure_enhancer_pipeline(self):
         """测试 4: 完整处理流程"""
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("测试 4: 完整处理流程")
-        print("="*60)
+        print("=" *60)
 
         test_images = list((Path(__file__).parent.parent.parent / "11-research/cnt-research/figures").glob("*.png"))
 
@@ -150,9 +150,9 @@ class TestSuite:
 
     def test_batch_processing(self):
         """测试 5: 批量处理功能"""
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("测试 5: 批量处理功能")
-        print("="*60)
+        print("=" *60)
 
         test_images = list((Path(__file__).parent.parent.parent / "11-research/cnt-research/figures").glob("*.png"))
 
@@ -174,7 +174,7 @@ class TestSuite:
         print(f"批量处理：{len(results)} 个图像")
         print(f"通过率：{pass_rate:.1f}%")
         print(f"总耗时：{elapsed:.2f}秒")
-        print(f"平均速度：{elapsed/len(results):.2f}秒/图")
+        print(f"平均速度：{elapsed /len(results):.2f}秒/图")
 
         # 保存报告
         report_file = self.test_dir / "output" / "batch_report.json"
@@ -192,10 +192,10 @@ class TestSuite:
 
     def run_all_tests(self):
         """运行所有测试"""
-        print("="*60)
+        print("=" *60)
         print("图表质量过滤 + 超分辨率测试套件")
         print("todo-032 验收验证")
-        print("="*60)
+        print("=" *60)
         print(f"开始时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
         print()
 
@@ -221,9 +221,9 @@ class TestSuite:
                 })
 
         # 汇总
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("测试结果汇总")
-        print("="*60)
+        print("=" *60)
 
         passed = sum(1 for r in results if r.get('passed', False))
         total = len(results)
@@ -236,9 +236,9 @@ class TestSuite:
         print(f"通过：{passed}/{total}")
 
         # 验收标准检查
-        print("\n" + "="*60)
+        print("\n" + "=" *60)
         print("验收标准验证")
-        print("="*60)
+        print("=" *60)
 
         criteria = [
             ("质量阈值配置", any(r['name'] == 'quality_thresholds' and r.get('passed') for r in results)),

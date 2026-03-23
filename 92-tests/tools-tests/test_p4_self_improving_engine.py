@@ -243,7 +243,7 @@ def main():
 
     print("=" * 70)
     print(f"Tests: {len(tests)} total, {passed} passed, {failed} failed")
-    print(f"Success Rate: {passed/len(tests)*100:.1f}%")
+    print(f"Success Rate: {passed /len(tests) *100:.1f}%")
     print("=" * 70)
 
     return 0 if failed == 0 else 1

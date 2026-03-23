@@ -24,7 +24,7 @@ missing_tools = [
 now = datetime.now()
 for i, (tool, result) in enumerate(missing_tools):
     log_entry = {
-        "timestamp": (now - timedelta(seconds=30-i*5)).isoformat(),
+        "timestamp": (now - timedelta(seconds=30 -i *5)).isoformat(),
         "session_id": session_id,
         "tool_id": tool,
         "params": {},

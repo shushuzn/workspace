@@ -208,9 +208,9 @@ class SecurityScanner:
     def scan_directory(self) -> List[SecretFinding]:
         """扫描整个目录"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🔍 安全扫描 - 秘密检测")
-        print("="*80)
+        print("=" *80)
 
         all_findings = []
 
@@ -286,9 +286,9 @@ class SecurityScanner:
 
         stats = self.get_statistics()
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 安全扫描摘要")
-        print("="*80)
+        print("=" *80)
 
         print(f"\n  扫描范围:")
         print(f"    文件数：{stats['files_scanned']}")
@@ -308,7 +308,7 @@ class SecurityScanner:
             for type_name, count in sorted(stats['by_type'].items(), key=lambda x: x[1], reverse=True)[:10]:
                 print(f"    {type_name}: {count} 个")
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
 
         if stats['by_severity']['CRITICAL'] > 0:
             print("\n🚨 发现严重安全问题！请立即处理！")
@@ -319,7 +319,7 @@ class SecurityScanner:
         else:
             print("\n✅ 未发现明显安全问题！")
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
 
 
 def main():

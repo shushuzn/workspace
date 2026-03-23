@@ -39,7 +39,7 @@ class PortfolioOptimizer:
             if sym in self.history:
                 prices = [p[1] for p in self.history.get(sym, [])[-days:]]
                 if len(prices) >= 5:
-                    daily_returns = [(prices[i] - prices[i-1]) / prices[i-1] for i in range(1, len(prices))]
+                    daily_returns = [(prices[i] - prices[i -1]) / prices[i -1] for i in range(1, len(prices))]
                     mean = sum(daily_returns) / len(daily_returns)
                     variance = sum((r - mean) ** 2 for r in daily_returns) / len(daily_returns)
                     volatilities[sym] = (variance ** 0.5) * (252 ** 0.5)  # Annualized
@@ -56,7 +56,7 @@ class PortfolioOptimizer:
             return {"error": "Not enough stocks with score >= 50"}
 
         # Equal weight as simple optimization
-        weights = {r["symbol"]: 1/len(valid) for r in valid}
+        weights = {r["symbol"]: 1 /len(valid) for r in valid}
 
         # Calculate portfolio metrics
         returns = self.get_returns(symbols, days=30)
@@ -121,7 +121,7 @@ class PortfolioOptimizer:
             n_stocks = max(3, len(valid) - i * 2)
             top_n = valid[:n_stocks]
 
-            weights = {r["symbol"]: 1/n_stocks for r in top_n}
+            weights = {r["symbol"]: 1 /n_stocks for r in top_n}
 
             port_return = sum(weights[s] * returns.get(s, 0.02) for s in weights)
             port_vol = sum(weights[s] ** 2 * (volatilities.get(s, 0.3) ** 2) for s in weights) ** 0.5
@@ -163,6 +163,6 @@ def optimize_report(symbols=None, method="max_sharpe"):
 
     for sym, weight in sorted(result["weights"].items(), key=lambda x: x[1], reverse=True):
         data = analyze_multiple([sym])[0]
-        report += f"| {sym} | {weight*100:.1f}% | {data['score']} |\n"
+        report += f"| {sym} | {weight *100:.1f}% | {data['score']} |\n"
 
     return report

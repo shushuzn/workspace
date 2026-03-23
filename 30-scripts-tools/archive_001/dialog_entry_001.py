@@ -97,9 +97,9 @@ def main():
     # 步骤 1: 检查工作流状态
     result = enforce_workflow(user_input)
 
-    print("="*70)
+    print("=" *70)
     print("对话工作流检查")
-    print("="*70)
+    print("=" *70)
     print(f"用户输入：{user_input[:100]}")
     print(f"检查结果：{result['action']}")
     print(f"原因：{result['reason']}")
@@ -126,7 +126,7 @@ def main():
     log_dialog_response(user_input, "allowed", result.get('workflow_type', 'none'))
 
     print("\n[OK] 对话已记录")
-    print("="*70)
+    print("=" *70)
 
     # 继续处理对话（这里应该调用 LLM）
     # 实际使用时，这里会调用 LLM 并返回响应

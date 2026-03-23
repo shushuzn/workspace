@@ -81,8 +81,8 @@ Content about consciousness.
 
         for i in range(5):
             module = CognitiveModule(
-                module_id=f"CM_{i+1:03d}",
-                function=f"Function {i+1}",
+                module_id=f"CM_{i +1:03d}",
+                function=f"Function {i +1}",
                 activation=0.5,
                 connectivity=[],
                 information_content=1.0,
@@ -107,10 +107,10 @@ Content about consciousness.
 
         for i in range(4):
             module = CognitiveModule(
-                module_id=f"CM_{i+1:03d}",
-                function=f"Function {i+1}",
+                module_id=f"CM_{i +1:03d}",
+                function=f"Function {i +1}",
                 activation=0.6,
-                connectivity=[f"CM_{j+1:03d}" for j in range(4) if j != i],
+                connectivity=[f"CM_{j +1:03d}" for j in range(4) if j != i],
                 information_content=1.0,
                 causal_power=0.7
             )
@@ -151,8 +151,8 @@ Content about consciousness.
 
         for i in range(3):
             module = CognitiveModule(
-                module_id=f"CM_{i+1:03d}",
-                function=f"Function {i+1}",
+                module_id=f"CM_{i +1:03d}",
+                function=f"Function {i +1}",
                 activation=0.5,
                 connectivity=[],
                 information_content=1.0,
@@ -179,10 +179,10 @@ Content about consciousness.
 
         for i in range(5):
             module = CognitiveModule(
-                module_id=f"CM_{i+1:03d}",
-                function=f"Function {i+1}",
+                module_id=f"CM_{i +1:03d}",
+                function=f"Function {i +1}",
                 activation=0.6,
-                connectivity=[f"CM_{j+1:03d}" for j in range(5) if j != i],
+                connectivity=[f"CM_{j +1:03d}" for j in range(5) if j != i],
                 information_content=1.0,
                 causal_power=0.7
             )

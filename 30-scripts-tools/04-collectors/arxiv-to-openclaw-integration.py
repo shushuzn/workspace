@@ -84,7 +84,7 @@ def batch_download_pdfs(papers, max_downloads=10):
     print(f"\n[INFO] Downloading up to {max_downloads} PDFs...")
 
     for i, paper in enumerate(papers[:max_downloads]):
-        print(f"[{i+1}/{max_downloads}] {paper['title'][:60]}...")
+        print(f"[{i +1}/{max_downloads}] {paper['title'][:60]}...")
         filepath = download_pdf(paper, PDF_OUTPUT_DIR)
         if filepath:
             downloaded.append({

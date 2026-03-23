@@ -29,7 +29,7 @@ def detect_context(content, line_num):
     lines = content.split("\n")
 
     # Look back 5 lines for context
-    for i in range(max(0, line_num-6), line_num):
+    for i in range(max(0, line_num -6), line_num):
         line = lines[i]
         for pattern, exc_type in COMMON_EXCEPTIONS.items():
             if pattern in line:

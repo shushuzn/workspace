@@ -30,9 +30,9 @@ class AutoKGBuilder:
     def extract_from_memory(self) -> Dict:
         """从 MEMORY.md 提取教训"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("阶段 1: 从 MEMORY.md 提取教训")
-        print("="*80)
+        print("=" *80)
 
         result = subprocess.run(
             ['python', 'memory_kg_extractor.py', '--extract'],
@@ -64,9 +64,9 @@ class AutoKGBuilder:
     def merge_with_existing(self, new_entities: List, new_relations: List) -> Dict:
         """合并到现有知识图谱"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("阶段 2: 合并到现有知识图谱")
-        print("="*80)
+        print("=" *80)
 
         # 加载现有知识图谱
         kg_file = self.kg_dir / "knowledge_graph.json"
@@ -146,9 +146,9 @@ class AutoKGBuilder:
         )
 
         # 阶段 3: 可视化
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("阶段 3: 生成可视化")
-        print("="*80)
+        print("=" *80)
 
         viz_result = self.generate_visualization()
 
@@ -217,9 +217,9 @@ class AutoKGBuilder:
             rel_type = relation.get('type', 'Unknown')
             by_relation_type[rel_type] = by_relation_type.get(rel_type, 0) + 1
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("📊 知识图谱统计")
-        print("="*80)
+        print("=" *80)
         print(f"  总实体数：{len(entities)}")
         print(f"  总关系数：{len(relations)}")
         print(f"  实体类型数：{len(by_type)}")
@@ -233,7 +233,7 @@ class AutoKGBuilder:
         for rel_type, count in sorted(by_relation_type.items(), key=lambda x: x[1], reverse=True)[:10]:
             print(f"    {rel_type}: {count}")
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
 
 
 def main():
@@ -252,9 +252,9 @@ def main():
     if args.build:
         report = builder.build()
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🎉 自动知识图谱构建完成！")
-        print("="*80)
+        print("=" *80)
         print(f"  提取实体：{report['extraction']['count']}")
         print(f"  合并后实体：{report['merge']['total_entities']}")
         print(f"  新增实体：{report['merge']['new_entities']}")
@@ -262,7 +262,7 @@ def main():
         print(f"  新增关系：{report['merge']['new_relations']}")
         print(f"  耗时：{report['duration_seconds']:.2f}秒")
         print(f"\n  报告保存到：data/auto_kg_build_report.json")
-        print("="*80)
+        print("=" *80)
 
     elif args.extract_only:
         builder.extract_from_memory()

@@ -4,9 +4,9 @@ import json
 with open("flow-archive/20260318-universal-workflow-001/workflow.json", "r", encoding="utf-8") as f:
     w = json.load(f)
 
-print("="*60)
+print("=" *60)
 print("workflow.json 验证")
-print("="*60)
+print("=" *60)
 print(f"版本：{w['version']}")
 print(f"规则数：{len(w['enforcement']['rules'])}")
 print(f"\nEnforcement 配置:")
@@ -20,9 +20,9 @@ for i, rule in enumerate(w['enforcement']['rules'], 1):
     clean_rule = rule.replace("🛡️", "[PROTECT]")
     print(f"  {i}. {clean_rule}")
 
-print("\n" + "="*60)
+print("\n" + "=" *60)
 print("[OK] 验证通过")
-print("="*60)
+print("=" *60)
 
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计

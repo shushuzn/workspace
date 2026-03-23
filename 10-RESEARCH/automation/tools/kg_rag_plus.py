@@ -266,7 +266,7 @@ class FactVerifier:
         # Check if entities are connected in KG
         evidence_paths = []
         for i, entity1 in enumerate(claim_entities):
-            for entity2 in claim_entities[i+1:]:
+            for entity2 in claim_entities[i +1:]:
                 paths = self.kg.find_path(entity1, entity2, max_hops=3)
                 evidence_paths.extend(paths)
 
@@ -391,9 +391,9 @@ class KGRAGPlus:
     def process_query(self, query: str) -> Dict:
         """Complete KG-RAG+ pipeline"""
 
-        print("\n" + "="*80)
+        print("\n" + "=" *80)
         print("🕸️  KG-RAG+ Pipeline")
-        print("="*80)
+        print("=" *80)
         print(f"\n📝 Query: {query}")
 
         # Step 1: Multi-hop retrieval
@@ -477,9 +477,9 @@ def demo_kg_rag():
         system.process_query(query)
 
     # Print final stats
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("📊 Final System Statistics")
-    print("="*80)
+    print("=" *80)
 
     stats = system.get_system_stats()
     print(f"\n  Sessions: {stats['sessions']}")
@@ -517,9 +517,9 @@ def main():
     if args.demo or True:  # Default to demo
         demo_kg_rag()
 
-    print("\n" + "="*80)
+    print("\n" + "=" *80)
     print("✅ KG-RAG+ system complete!")
-    print("="*80)
+    print("=" *80)
     print("\n📚 Based on arXiv: 2603.15005")
     print("🎯 Key Achievements:")
     print("   - 58% hallucination reduction (paper target)")

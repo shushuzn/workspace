@@ -101,7 +101,7 @@ Fixes:
             print(f"  - {f}")
 
         if len(unregistered) > 10:
-            print(f"  ... 还有 {len(unregistered)-10} 个")
+            print(f"  ... 还有 {len(unregistered) -10} 个")
 
         print("\n[ACTION] 请运行以下命令注册:")
         print("  py 30-scripts-tools/register_tool.py <工具文件名>")

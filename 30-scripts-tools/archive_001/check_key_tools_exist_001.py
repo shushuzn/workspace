@@ -48,7 +48,7 @@ for tool in key_tools:
 print(f"\n总结:")
 print(f"  存在：{found}")
 print(f"  缺失：{missing}")
-print(f"  可用率：{found/(found+missing)*100:.1f}%")
+print(f"  可用率：{found /(found +missing) *100:.1f}%")
 
 # ==============================================================================
 # STAGE 1: ARCHITECT 架构设计

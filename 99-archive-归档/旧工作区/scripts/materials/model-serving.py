@@ -360,7 +360,7 @@ def main():
             print(f"    Band Gap: {result.predictions.get('band_gap', 'N/A')} eV")
             print(f"    Formation Energy: {result.predictions.get('formation_energy', 'N/A')} eV/atom")
             print(f"    Source: {result.source}")
-            print(f"    Time: {result.inference_time*1000:.1f}ms")
+            print(f"    Time: {result.inference_time *1000:.1f}ms")
         except Exception as e:
             print(f"\n  {inp.material.material_id or inp.material.formula}: Error - {e}")
 
