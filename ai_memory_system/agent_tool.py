@@ -143,3 +143,17 @@ class MemoryAgentTool:
         if stats["long_term_keys"]:
             lines.append(f"  长期 Key: {', '.join(stats['long_term_keys'][:5])}")
         return "\n".join(lines)
+
+    def run(self, action: str, **kwargs) -> str:
+        actions = {
+            "memorize": self.memorize,
+            "recall": self.recall,
+            "search": self.search_memories,
+            "context": self.get_context,
+            "distill": self.distill_memories,
+            "clear": self.clear_short_term,
+            "status": self.get_status,
+        }
+        if action not in actions:
+            return f"❌ 未知动作: {action}"
+        return actions[action](**kwargs)
