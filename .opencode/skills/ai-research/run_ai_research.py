@@ -13,7 +13,7 @@ import json
 sys.stdout.reconfigure(encoding="utf-8")
 
 # Use ai_memory_system
-ai_memory = Path("D:/ai_memory_system")
+ai_memory = Path(__file__).parent.parent.parent.parent / "ai_memory_system"
 sys.path.insert(0, str(ai_memory))
 
 from ai_memory_system.ai_research_tool import ResearchTool, get_research_tool
