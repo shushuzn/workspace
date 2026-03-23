@@ -35,6 +35,9 @@ py active_skills/memory-assistant/run_memory.py recall '{"key": "key_name"}'
 # 搜索记忆
 py active_skills/memory-assistant/run_memory.py search '{"query": "关键词", "top_k": 3}'
 
+# 语义搜索 (需要 sentence-transformers)
+py active_skills/memory-assistant/run_memory.py semantic_search '{"query": "自然语言查询", "top_k": 3}'
+
 # 获取上下文 (RAG)
 py active_skills/memory-assistant/run_memory.py context '{"query": "query", "max_items": 5}'
 
@@ -88,3 +91,16 @@ py active_skills/memory-assistant/run_memory.py context '{"query": "user prefere
 环境变量：
 - `LOCAL_LLM_MODEL` - LLM 模型 (default: qwen2.5:1.5b)
 - `LOCAL_LLM_BASE_URL` - LLM API (default: http://localhost:11434)
+
+## Dependencies
+
+```bash
+pip install sentence-transformers numpy
+```
+
+## Search Types
+
+| Type | 说明 | 示例 |
+|------|------|------|
+| search | 关键词匹配 | "python" → 包含 python 的记忆 |
+| semantic_search | 语义理解 | "programming" → 找到 coding 相关记忆 |
