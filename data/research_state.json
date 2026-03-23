@@ -1,0 +1,150 @@
+{
+  "sessions": [
+    {
+      "task": "研究 AI Agent",
+      "result": {
+        "success": true,
+        "task": "研究 AI Agent",
+        "started_at": "2026-03-23T22:58:14.303518",
+        "steps": [
+          {
+            "name": "plan",
+            "status": "completed",
+            "actions_count": 4,
+            "committed": 2
+          },
+          {
+            "name": "execute",
+            "status": "completed",
+            "subgoals_count": 4
+          },
+          {
+            "name": "memory_save",
+            "status": "completed"
+          }
+        ],
+        "plan": {
+          "task": "研究 AI Agent",
+          "actions": [
+            {
+              "id": "a0",
+              "description": "Scan and gather relevant papers/sources",
+              "action_type": "research",
+              "expected_outcome": null,
+              "enabling_conditions": [],
+              "risk_factors": [],
+              "commitment_level": "full",
+              "locked": true,
+              "value_score": 1.2315014999999998,
+              "metadata": {}
+            },
+            {
+              "id": "a1",
+              "description": "Analyze and extract key insights",
+              "action_type": "analyze",
+              "expected_outcome": null,
+              "enabling_conditions": [],
+              "risk_factors": [],
+              "commitment_level": "full",
+              "locked": true,
+              "value_score": 0.8690499999999999,
+              "metadata": {}
+            },
+            {
+              "id": "a2",
+              "description": "Synthesize findings into structured report",
+              "action_type": "write",
+              "expected_outcome": null,
+              "enabling_conditions": [],
+              "risk_factors": [],
+              "commitment_level": "soft",
+              "locked": false,
+              "value_score": 0.535,
+              "metadata": {}
+            },
+            {
+              "id": "a3",
+              "description": "Review and refine the report",
+              "action_type": "review",
+              "expected_outcome": null,
+              "enabling_conditions": [],
+              "risk_factors": [],
+              "commitment_level": "soft",
+              "locked": false,
+              "value_score": 0.5,
+              "metadata": {}
+            }
+          ],
+          "metadata": {
+            "iterations": 10,
+            "final_value_scores": {
+              "a0": 1.2315014999999998,
+              "a1": 0.8690499999999999,
+              "a2": 0.535,
+              "a3": 0.5
+            },
+            "committed_count": 2,
+            "flexible_count": 0
+          }
+        },
+        "blueprint": {
+          "task": "研究 AI Agent",
+          "subgoals": [
+            {
+              "id": "sg_0",
+              "description": "Gather and scan relevant sources",
+              "goal_conditions": {
+                "sources_found": true,
+                "count": ">0"
+              },
+              "status": "pending",
+              "replan_count": 0,
+              "value_score": 0.0,
+              "metadata": {}
+            },
+            {
+              "id": "sg_1",
+              "description": "Analyze and extract key insights",
+              "goal_conditions": {
+                "insights_extracted": true,
+                "count": ">0"
+              },
+              "status": "pending",
+              "replan_count": 0,
+              "value_score": 0.0,
+              "metadata": {}
+            },
+            {
+              "id": "sg_2",
+              "description": "Synthesize into structured report",
+              "goal_conditions": {
+                "report_created": true
+              },
+              "status": "pending",
+              "replan_count": 0,
+              "value_score": 0.0,
+              "metadata": {}
+            },
+            {
+              "id": "sg_3",
+              "description": "Review and refine output",
+              "goal_conditions": {
+                "review_completed": true
+              },
+              "status": "pending",
+              "replan_count": 0,
+              "value_score": 0.0,
+              "metadata": {}
+            }
+          ],
+          "macro_plan": "Generated 4 subgoals for: 研究 AI Agent",
+          "created_at": "2026-03-23T22:58:14.303704",
+          "metadata": {}
+        },
+        "completed_at": "2026-03-23T22:58:14.303759"
+      },
+      "timestamp": "2026-03-23T22:58:14.303935"
+    }
+  ],
+  "memories": []
+}

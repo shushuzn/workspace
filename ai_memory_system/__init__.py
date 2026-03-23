@@ -18,3 +18,10 @@ __all__ = [
     "MemoryRetriever",
     "OpenClawMemoryTool",
 ]
+
+try:
+    from .ai_research_tool import ResearchTool, get_research_tool
+
+    __all__.extend(["ResearchTool", "get_research_tool"])
+except ImportError:
+    pass

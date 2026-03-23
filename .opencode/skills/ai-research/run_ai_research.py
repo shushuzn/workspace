@@ -1,108 +1,126 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""
-AI Research Tool - OpenClaw Skill Runner
-
-Integrates FLARE planner, MEMORA memory, and AutoTool selection.
-"""
-
 import sys
 from pathlib import Path
-import json
 
-sys.stdout.reconfigure(encoding="utf-8")
+workspace_root = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(workspace_root / "30-scripts-tools" / "05-AI-RESEARCH"))
+sys.path.insert(0, str(workspace_root / "30-scripts-tools" / "13-memory"))
+sys.path.insert(0, str(workspace_root / "ai_memory_system"))
 
-# Use ai_memory_system
-ai_memory = Path(__file__).parent.parent.parent.parent / "ai_memory_system"
-sys.path.insert(0, str(ai_memory))
-
-from ai_memory_system.ai_research_tool import ResearchTool, get_research_tool
-
-
-def format_research_result(result):
-    """Format research result for display"""
-    lines = [
-        f"🔬 研究任务: {result['task']}",
-        f"✅ 成功: {result['success']}",
-        f"📋 计划动作: {len(result['plan']['actions'])} 个",
-    ]
-
-    for action in result["plan"]["actions"]:
-        lines.append(f"  - [{action['action_type']}] {action['description']}")
-
-    if result.get("tool_sequence"):
-        lines.append(f"\n🔧 工具序列 (AutoTool 惯性):")
-        for t in result["tool_sequence"]:
-            lines.append(f"  - {t['tool']} (via {t['method']})")
-
-    stats = result.get("tool_registry_stats", {})
-    if stats:
-        lines.append(f"\n📊 工具效率: {stats.get('efficiency_score', 0):.1%}")
-
-    return "\n".join(lines)
+from flare_planner import FLAREPlanner
+from harmonic_memory import HarmonicMemoryStore
+from autotool_selector import ToolRegistry, AutoTool
 
 
-def format_add_result(result):
-    """Format add memory result"""
-    if result["success"]:
-        return f"✅ 已添加研究记忆 [{result['memory_id'][:8]}]: 长度 {result.get('stats', {}).get('total_memories', '?')} 条记忆"
-    return "❌ 添加失败"
+def get_research_tool():
+    class ResearchTool:
+        def __init__(self):
+            self.planner = FLAREPlanner(
+                lookahead_steps=3, value_propagation=True, commitment_threshold=0.7
+            )
+            self.memory = HarmonicMemoryStore()
+            self.tool_registry = ToolRegistry()
+            self._setup_tool_registry()
+
+        def _setup_tool_registry(self):
+            self.tool_registry.register("research_scan", "Scan papers", "research")
+            self.tool_registry.register(
+                "research_analyze", "Analyze content", "analysis"
+            )
+            self.tool_registry.register("research_write", "Write report", "writing")
+            self.tool_registry.register("memory_save", "Save to memory", "memory")
+            self.tool_registry.register("memory_search", "Search memory", "memory")
+            self.tool_registry.learn_from_trajectory(
+                ["research_scan", "research_analyze", "research_write", "memory_save"]
+            )
+
+        def research(self, task, use_planner=True):
+            if use_planner:
+                plan = self.planner.plan(task)
+                plan_dict = plan.to_dict()
+            else:
+                plan_dict = {"actions": [], "metadata": {}}
+
+            tool_sequence = []
+            current = None
+            for i in range(min(5, len(plan_dict.get("actions", [])))):
+                next_tool, method = (
+                    self.tool_registry.select_next(current)
+                    if current
+                    else (None, "start")
+                )
+                if next_tool:
+                    tool_sequence.append({"tool": next_tool, "method": method})
+                    current = next_tool
+                else:
+                    break
+
+            return {
+                "task": task,
+                "success": True,
+                "plan": plan_dict,
+                "tool_sequence": tool_sequence,
+                "tool_registry_stats": self.tool_registry.get_stats(),
+                "memory_stats": self.memory.stats(),
+            }
+
+        def add_research_memory(self, content, entities=None, source="research"):
+            memory_id = self.memory.add(content, entities=entities or [], source=source)
+            return {
+                "success": True,
+                "memory_id": memory_id,
+                "stats": self.memory.stats(),
+            }
+
+        def search_research_memory(self, query, mode="harmonic", limit=5):
+            results = self.memory.retrieve(query, mode=mode, limit=limit)
+            return {
+                "success": True,
+                "query": query,
+                "count": len(results),
+                "results": [
+                    {
+                        "abstraction": r.primary_abstraction,
+                        "cue_anchors": r.cue_anchors,
+                        "entities": r.entities,
+                    }
+                    for r in results
+                ],
+            }
+
+        def get_next_tool(self, current_tool):
+            next_tool, method = self.tool_registry.select_next(current_tool)
+            return {
+                "current": current_tool,
+                "next": next_tool,
+                "method": method,
+                "efficiency": self.tool_registry.autotool.get_efficiency_score(),
+            }
+
+    return ResearchTool()
 
 
-def format_search_result(result):
-    """Format search result"""
-    if not result["results"]:
-        return f"🔍 无研究记忆结果: {result['query']}"
+tool = get_research_tool()
+action = sys.argv[1] if len(sys.argv) > 1 else "stats"
 
-    lines = [f"🔍 研究记忆搜索 '{result['query']}' ({result['count']} 条):"]
-    for r in result["results"]:
-        lines.append(f"  • {r['abstraction'][:60]}...")
-        if r.get("cue_anchors"):
-            lines.append(f"    锚点: {', '.join(r['cue_anchors'][:3])}")
-    return "\n".join(lines)
-
-
-def format_next_result(result):
-    """Format next tool result"""
-    if result["next"]:
-        return f"🔧 {result['current']} → {result['next']} (via {result['method']}, 效率 {result['efficiency']:.1%})"
-    return f"🔧 {result['current']} → 无惯性建议 (使用 LLM)"
-
-
-def main():
-    """CLI entry point"""
-    action = sys.argv[1] if len(sys.argv) > 1 else "stats"
-    params = json.loads(sys.argv[2]) if len(sys.argv) > 2 else {}
-
-    tool = get_research_tool()
-
-    if action == "research":
-        result = tool.research(**params)
-        print(format_research_result(result))
-
-    elif action == "add":
-        result = tool.add_research_memory(**params)
-        print(format_add_result(result))
-
-    elif action == "search":
-        result = tool.search_research_memory(**params)
-        print(format_search_result(result))
-
-    elif action == "next":
-        result = tool.get_next_tool(**params)
-        print(format_next_result(result))
-
-    elif action == "stats":
-        stats = tool.memory.stats()
-        print("📊 AI Research 系统状态:")
-        print(f"  总记忆数: {stats.get('total_memories', 0)}")
-        print(f"  平均token节省: {stats.get('avg_token_savings', 0):.1%}")
-        print(f"  检索模式: harmonic")
-
-    else:
-        print(f"❌ 未知动作: {action}")
-        print("可用: research, add, search, next, stats")
-
-
-if __name__ == "__main__":
-    main()
+if action == "stats":
+    stats = tool.memory.stats()
+    print(f"AI Research System Status:")
+    print(f"  Total memories: {stats.get('total_memories', 0)}")
+    print(f"  Avg token savings: {stats.get('avg_token_savings', 0):.1%}")
+elif action == "research":
+    task = sys.argv[2] if len(sys.argv) > 2 else "general research"
+    result = tool.research(task)
+    print(f"Research Task: {result['task']}")
+    print(f"Success: {result['success']}")
+    print(f"Plan actions: {len(result['plan']['actions'])}")
+elif action == "next":
+    current = sys.argv[2] if len(sys.argv) > 2 else "research_scan"
+    result = tool.get_next_tool(current)
+    print(
+        f"{result['current']} -> {result['next']} (via {result['method']}, eff {result['efficiency']:.1%})"
+    )
+else:
+    print(f"Unknown action: {action}")
+    print("Available: stats, research, next")
