@@ -36,6 +36,21 @@ class MemoryAgentTool:
         self._ms.save()
         return f"✅ 已记忆 [{memory_type}]: {key} = {value}"
 
+    def batch_memorize(self, memories: list, memory_type: str = "short") -> str:
+        """批量记忆存储 - 一次添加多条记忆。"""
+        if not memories:
+            return "❌ 记忆列表为空"
+        count = 0
+        for m in memories:
+            if isinstance(m, dict) and "key" in m and "value" in m:
+                self._ms.add(m["key"], m["value"], memory_type)
+                count += 1
+            elif isinstance(m, (list, tuple)) and len(m) >= 2:
+                self._ms.add(str(m[0]), str(m[1]), memory_type)
+                count += 1
+        self._ms.save()
+        return f"✅ 已批量记忆 {count} 条 [{memory_type}]"
+
     def recall(self, key: str) -> str:
         """
         记忆召回 - 根据 key 获取记忆。
@@ -149,8 +164,9 @@ class MemoryAgentTool:
         return """🧠 AI Memory System 帮助
 
 可用命令:
-  memorize  添加记忆    memorize '{"key": "name", "value": "Alice", "memory_type": "short"}'
-  recall   召回记忆    recall '{"key": "name"}'
+  memorize      添加记忆      memorize '{"key": "name", "value": "Alice", "memory_type": "short"}'
+  batch_memorize 批量添加    batch_memorize '{"memories": [{"key": "k1", "value": "v1"}], "memory_type": "short"}'
+  recall       召回记忆    recall '{"key": "name"}'
   search   搜索记忆    search '{"query": "关键词", "top_k": 5}'
   context  RAG上下文   context '{"query": "query", "max_items": 5}'
   distill  蒸馏压缩    distill
@@ -166,6 +182,7 @@ class MemoryAgentTool:
     def run(self, action: str, **kwargs) -> str:
         actions = {
             "memorize": self.memorize,
+            "batch_memorize": self.batch_memorize,
             "recall": self.recall,
             "search": self.search_memories,
             "context": self.get_context,
