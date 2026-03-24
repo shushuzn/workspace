@@ -6,6 +6,9 @@ Collects latest AI/ML papers from arxiv.org and saves to Obsidian vault
 
 import feedparser
 import requests
+import subprocess
+import sys
+from pathlib import Path
 from datetime import datetime
 import os
 import re
@@ -13,23 +16,25 @@ import re
 # ============ 代理配置 (Clash) ============
 # 解决 Python 进程无法继承系统代理的问题
 PROXY_ADDR = "http://127.0.0.1:7897"
-os.environ['HTTP_PROXY'] = PROXY_ADDR
-os.environ['HTTPS_PROXY'] = PROXY_ADDR
+os.environ["HTTP_PROXY"] = PROXY_ADDR
+os.environ["HTTPS_PROXY"] = PROXY_ADDR
 # ==========================================
 
 OUTPUT_DIR = r"D:\obsidian\Vault\Arxiv"
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+
 def sanitize_filename(title):
     """Remove invalid characters from filename"""
-    title = re.sub(r'[<>:"/\\|？*]', '', title)
-    title = title.replace('&', 'and')
+    title = re.sub(r'[<>:"/\\|？*]', "", title)
+    title = title.replace("&", "and")
     title = title[:100]  # Limit length
     return title.strip()
 
-def fetch_arxiv_papers(category='cs.AI', max_papers=20):
+
+def fetch_arxiv_papers(category="cs.AI", max_papers=20):
     """Fetch latest papers from arxiv"""
-    rss_url = f'https://export.arxiv.org/rss/{category}'
+    rss_url = f"https://export.arxiv.org/rss/{category}"
 
     try:
         response = requests.get(rss_url, timeout=30)
@@ -40,12 +45,12 @@ def fetch_arxiv_papers(category='cs.AI', max_papers=20):
 
         for entry in feed.entries[:max_papers]:
             paper = {
-                'title': entry.title,
-                'link': entry.link,
-                'description': entry.description,
-                'published': entry.get('published', ''),
-                'authors': entry.get('authors', []),
-                'categories': entry.get('tags', [])
+                "title": entry.title,
+                "link": entry.link,
+                "description": entry.description,
+                "published": entry.get("published", ""),
+                "authors": entry.get("authors", []),
+                "categories": entry.get("tags", []),
             }
             papers.append(paper)
 
@@ -54,30 +59,37 @@ def fetch_arxiv_papers(category='cs.AI', max_papers=20):
         print(f"Error fetching arxiv: {e}")
         return []
 
+
 def save_paper(paper):
     """Save paper as markdown note"""
-    timestamp = datetime.now().strftime('%Y%m%d-%H%M%S')
-    title_slug = sanitize_filename(paper['title'])[:50]
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M%S")
+    title_slug = sanitize_filename(paper["title"])[:50]
     filename = f"{timestamp}-{title_slug}.md"
     filepath = os.path.join(OUTPUT_DIR, filename)
 
     # Extract abstract from description
-    abstract = paper['description']
-    if 'Abstract: ' in abstract:
-        abstract = abstract.split('Abstract: ')[1].split('\n')[0]
+    abstract = paper["description"]
+    if "Abstract: " in abstract:
+        abstract = abstract.split("Abstract: ")[1].split("\n")[0]
 
-    authors = ', '.join([a.name for a in paper['authors']]) if paper['authors'] else 'Unknown'
-    categories = ', '.join([t.term for t in paper['categories']]) if paper['categories'] else 'cs.AI'
+    authors = (
+        ", ".join([a.name for a in paper["authors"]]) if paper["authors"] else "Unknown"
+    )
+    categories = (
+        ", ".join([t.term for t in paper["categories"]])
+        if paper["categories"]
+        else "cs.AI"
+    )
 
-    content = f"""# {paper['title']}
+    content = f"""# {paper["title"]}
 
 ## 元数据
 - **来源:** Arxiv
-- **链接:** {paper['link']}
+- **链接:** {paper["link"]}
 - **作者:** {authors}
 - **分类:** {categories}
-- **发布日期:** {paper['published']}
-- **抓取时间:** {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}
+- **发布日期:** {paper["published"]}
+- **抓取时间:** {datetime.now().strftime("%Y-%m-%d %H:%M:%S")}
 
 ## 摘要
 
@@ -91,17 +103,30 @@ def save_paper(paper):
 *自动收集*
 """
 
-    with open(filepath, 'w', encoding='utf-8') as f:
+    with open(filepath, "w", encoding="utf-8") as f:
         f.write(content)
 
     return filename
 
+
 def main():
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+
+    print("[OK] Critic Review Passed")
+
     print("=" * 60)
     print("Arxiv AI Papers Collector")
     print("=" * 60)
 
-    papers = fetch_arxiv_papers('cs.AI', max_papers=15)
+    papers = fetch_arxiv_papers("cs.AI", max_papers=15)
 
     if not papers:
         print("No papers found or error occurred")
@@ -118,5 +143,6 @@ def main():
     print(f"\n[SUCCESS] Collected {new_count} new papers")
     print("=" * 60)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
