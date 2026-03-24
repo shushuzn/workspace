@@ -4,7 +4,8 @@
 
 import sys
 import io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 import argparse
 import fitz  # PyMuPDF
@@ -12,6 +13,7 @@ import json
 import re
 import time
 import urllib.request
+import subprocess
 import threading
 from pathlib import Path
 from datetime import datetime, timedelta
@@ -22,7 +24,12 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 class ReferenceValidator:
     """参考文献验证器 v2.2 - 支持并发验证、缓存管理、日志"""
 
-    def __init__(self, cache_file: Optional[str] = None, max_cache_size: int = 1000, max_workers: int = 5):
+    def __init__(
+        self,
+        cache_file: Optional[str] = None,
+        max_cache_size: int = 1000,
+        max_workers: int = 5,
+    ):
         self.crossref_base = "https://api.crossref.org/works/"
         self.arxiv_base = "http://export.arxiv.org/api/query?id_list="
         self.rate_limit_delay = 6.0  # CrossRef: 10 请求/分钟
@@ -41,7 +48,7 @@ class ReferenceValidator:
         """加载缓存"""
         if self.cache_file and self.cache_file.exists():
             try:
-                return json.loads(self.cache_file.read_text(encoding='utf-8'))
+                return json.loads(self.cache_file.read_text(encoding="utf-8"))
             except:
                 pass
         return {}
@@ -50,7 +57,10 @@ class ReferenceValidator:
         """保存缓存"""
         if self.cache_file:
             try:
-                self.cache_file.write_text(json.dumps(self.cache, indent=2, ensure_ascii=False), encoding='utf-8')
+                self.cache_file.write_text(
+                    json.dumps(self.cache, indent=2, ensure_ascii=False),
+                    encoding="utf-8",
+                )
             except:
                 pass
 
@@ -63,21 +73,26 @@ class ReferenceValidator:
         sorted_items = sorted(
             self.cache.items(),
             key=lambda x: x[1].get("cached_at", "2000-01-01"),
-            reverse=True
+            reverse=True,
         )
 
         # 保留最近的 max_cache_size 条
         if len(sorted_items) > self.max_cache_size:
             removed_count = len(sorted_items) - self.max_cache_size
-            self.cache = dict(sorted_items[:self.max_cache_size])
+            self.cache = dict(sorted_items[: self.max_cache_size])
             self._save_cache()
-            self._log(f"缓存清理：删除 {removed_count} 条旧记录，保留 {self.max_cache_size} 条", "INFO")
+            self._log(
+                f"缓存清理：删除 {removed_count} 条旧记录，保留 {self.max_cache_size} 条",
+                "INFO",
+            )
 
         # 清理过期缓存 (>24 小时)
         now = datetime.now()
         expired_keys = [
-            key for key, value in self.cache.items()
-            if datetime.fromisoformat(value.get("cached_at", "2000-01-01")) < now - timedelta(hours=24)
+            key
+            for key, value in self.cache.items()
+            if datetime.fromisoformat(value.get("cached_at", "2000-01-01"))
+            < now - timedelta(hours=24)
         ]
 
         if expired_keys:
@@ -91,7 +106,7 @@ class ReferenceValidator:
         timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         log_entry = f"[{timestamp}] [{level}] {message}\n"
         try:
-            with open(self.log_file, "a", encoding='utf-8') as f:
+            with open(self.log_file, "a", encoding="utf-8") as f:
                 f.write(log_entry)
         except:
             pass
@@ -101,10 +116,12 @@ class ReferenceValidator:
         for attempt in range(1, self.max_retries + 1):
             try:
                 url = f"{self.crossref_base}{doi}"
-                req = urllib.request.Request(url, headers={"User-Agent": "KnowledgeCardGenerator/2.1"})
+                req = urllib.request.Request(
+                    url, headers={"User-Agent": "KnowledgeCardGenerator/2.1"}
+                )
 
                 with urllib.request.urlopen(req, timeout=15) as response:
-                    data = json.loads(response.read().decode('utf-8'))
+                    data = json.loads(response.read().decode("utf-8"))
 
                 if data["status"] == "ok":
                     message = data["message"]
@@ -113,16 +130,22 @@ class ReferenceValidator:
                         "title": message.get("title", [""])[0],
                         "author": self._format_authors(message.get("author", [])),
                         "journal": message.get("container-title", [""])[0],
-                        "year": str(message.get("created", {}).get("date-parts", [[None]])[0][0] or ""),
+                        "year": str(
+                            message.get("created", {}).get("date-parts", [[None]])[0][0]
+                            or ""
+                        ),
                         "cited_by": message.get("is-referenced-by-count", 0),
                         "publisher": message.get("publisher", ""),
-                        "verified_at": datetime.now().isoformat()
+                        "verified_at": datetime.now().isoformat(),
                     }
                     self._log(f"DOI {doi} 验证成功", "INFO")
                     return result
 
             except Exception as e:
-                self._log(f"DOI {doi} 验证失败 (尝试 {attempt}/{self.max_retries}): {e}", "WARNING")
+                self._log(
+                    f"DOI {doi} 验证失败 (尝试 {attempt}/{self.max_retries}): {e}",
+                    "WARNING",
+                )
                 if attempt < self.max_retries:
                     wait_time = self.rate_limit_delay * (2 ** (attempt - 1))  # 指数退避
                     time.sleep(wait_time)
@@ -137,7 +160,9 @@ class ReferenceValidator:
         if cache_key in self.cache:
             cached = self.cache[cache_key]
             # 缓存有效期 24 小时
-            if datetime.fromisoformat(cached.get("cached_at", "2000-01-01")) > datetime.now() - timedelta(hours=24):
+            if datetime.fromisoformat(
+                cached.get("cached_at", "2000-01-01")
+            ) > datetime.now() - timedelta(hours=24):
                 self._log(f"DOI {doi} 使用缓存", "INFO")
                 cached["from_cache"] = True
                 return cached
@@ -161,17 +186,24 @@ class ReferenceValidator:
             arxiv_id = arxiv_id.replace("arXiv:", "").strip()
             url = f"{self.arxiv_base}{arxiv_id}"
 
-            req = urllib.request.Request(url, headers={"User-Agent": "KnowledgeCardGenerator/2.0"})
+            req = urllib.request.Request(
+                url, headers={"User-Agent": "KnowledgeCardGenerator/2.0"}
+            )
             with urllib.request.urlopen(req, timeout=10) as response:
-                xml = response.read().decode('utf-8')
+                xml = response.read().decode("utf-8")
 
             # 简单 XML 解析
-            title_match = re.search(r'<title>(.*?)</title>', xml, re.DOTALL)
-            author_match = re.findall(r'<name><surname>(.*?)</surname>.*?<given>(.*?)</given>', xml, re.DOTALL)
-            published_match = re.search(r'<published>(.*?)</published>', xml)
+            title_match = re.search(r"<title>(.*?)</title>", xml, re.DOTALL)
+            author_match = re.findall(
+                r"<name><surname>(.*?)</surname>.*?<given>(.*?)</given>", xml, re.DOTALL
+            )
+            published_match = re.search(r"<published>(.*?)</published>", xml)
 
             if title_match:
-                authors = [f"{given.strip()} {surname.strip()}" for surname, given in author_match]
+                authors = [
+                    f"{given.strip()} {surname.strip()}"
+                    for surname, given in author_match
+                ]
                 return {
                     "valid": True,
                     "title": title_match.group(1).strip(),
@@ -180,7 +212,7 @@ class ReferenceValidator:
                     "year": published_match.group(1)[:4] if published_match else "",
                     "cited_by": 0,  # arXiv 不提供引用数
                     "publisher": "arXiv",
-                    "verified_at": datetime.now().isoformat()
+                    "verified_at": datetime.now().isoformat(),
                 }
         except Exception as e:
             pass
@@ -203,19 +235,23 @@ class ReferenceValidator:
     def validate_reference(self, ref_content: str) -> Dict:
         """智能验证参考文献（自动检测 DOI 或 arXiv ID）"""
         # 检测 DOI
-        doi_match = re.search(r'10\.\d{4,}/\S+', ref_content)
+        doi_match = re.search(r"10\.\d{4,}/\S+", ref_content)
         if doi_match:
             time.sleep(self.rate_limit_delay)
             return self.validate_doi(doi_match.group(0))
 
         # 检测 arXiv ID
-        arxiv_match = re.search(r'arXiv[:\s]+(\d+\.\d+)', ref_content, re.IGNORECASE)
+        arxiv_match = re.search(r"arXiv[:\s]+(\d+\.\d+)", ref_content, re.IGNORECASE)
         if arxiv_match:
             time.sleep(self.rate_limit_delay)
             return self.validate_arxiv(arxiv_match.group(1))
 
         # 无 DOI/arXiv，返回待验证
-        return {"valid": False, "error": "No DOI or arXiv ID found", "needs_manual_check": True}
+        return {
+            "valid": False,
+            "error": "No DOI or arXiv ID found",
+            "needs_manual_check": True,
+        }
 
 
 class KnowledgeCardGenerator:
@@ -240,7 +276,7 @@ class KnowledgeCardGenerator:
             "journal": "",
             "year": "",
             "doi": "",
-            "arxiv_id": ""
+            "arxiv_id": "",
         }
 
         # 从 PDF 元数据提取
@@ -267,17 +303,23 @@ class KnowledgeCardGenerator:
                 lower = line.lower()
                 if "abstract" in lower or "摘要" in lower:
                     abstract_start = i + 1
-                elif abstract_start > 0 and len(line.strip()) < 10 and i > abstract_start + 3:
+                elif (
+                    abstract_start > 0
+                    and len(line.strip()) < 10
+                    and i > abstract_start + 3
+                ):
                     abstract_end = i
                     break
 
             if abstract_start > 0:
                 if abstract_end < 0:
                     abstract_end = min(abstract_start + 10, len(lines))
-                metadata["abstract"] = "\n".join(lines[abstract_start:abstract_end]).strip()
+                metadata["abstract"] = "\n".join(
+                    lines[abstract_start:abstract_end]
+                ).strip()
 
             # 提取 arXiv ID
-            arxiv_match = re.search(r'arXiv[:\s]+(\d+\.\d+)', text, re.IGNORECASE)
+            arxiv_match = re.search(r"arXiv[:\s]+(\d+\.\d+)", text, re.IGNORECASE)
             if arxiv_match:
                 metadata["arxiv_id"] = arxiv_match.group(1)
 
@@ -290,9 +332,9 @@ class KnowledgeCardGenerator:
         current_section = {"title": "Introduction", "content": [], "page": 1}
 
         section_patterns = [
-            r'^(\d+\.)\s+(.+)$',  # 1. Introduction
-            r'^(I+\.?)\s+(.+)$',  # I. Introduction
-            r'^(Introduction|Methods|Results|Discussion|Conclusion|References)$',  # 无编号
+            r"^(\d+\.)\s+(.+)$",  # 1. Introduction
+            r"^(I+\.?)\s+(.+)$",  # I. Introduction
+            r"^(Introduction|Methods|Results|Discussion|Conclusion|References)$",  # 无编号
         ]
 
         for page_num in range(len(doc)):
@@ -320,7 +362,7 @@ class KnowledgeCardGenerator:
                         current_section = {
                             "title": section_title,
                             "content": [],
-                            "page": page_num + 1
+                            "page": page_num + 1,
                         }
                         is_section = True
                         break
@@ -341,13 +383,16 @@ class KnowledgeCardGenerator:
 
         # 查找参考文献章节
         for section in self.sections:
-            if "reference" in section["title"].lower() or "bibliography" in section["title"].lower():
+            if (
+                "reference" in section["title"].lower()
+                or "bibliography" in section["title"].lower()
+            ):
                 ref_text = "\n".join(section["content"])
 
                 # 匹配参考文献格式
                 ref_patterns = [
-                    r'\[(\d+)\]\s+(.+?)(?=\[\d+\]|$)',  # [1] Author. Title.
-                    r'^(\d+)\.\s+(.+?)(?=\n\d+\.|$)',  # 1. Author. Title.
+                    r"\[(\d+)\]\s+(.+?)(?=\[\d+\]|$)",  # [1] Author. Title.
+                    r"^(\d+)\.\s+(.+?)(?=\n\d+\.|$)",  # 1. Author. Title.
                 ]
 
                 for pattern in ref_patterns:
@@ -356,20 +401,24 @@ class KnowledgeCardGenerator:
                         ref_id = match[0]
                         ref_content = match[1].strip()
 
-                        references.append({
-                            "id": ref_id,
-                            "content": ref_content,
-                            "verified": False,
-                            "verification_status": "pending",  # pending/verified/invalid/manual
-                            "verification_details": {}
-                        })
+                        references.append(
+                            {
+                                "id": ref_id,
+                                "content": ref_content,
+                                "verified": False,
+                                "verification_status": "pending",  # pending/verified/invalid/manual
+                                "verification_details": {},
+                            }
+                        )
 
                 break
 
         self.references = references
         return references
 
-    def validate_references(self, show_progress: bool = True, use_concurrent: bool = True) -> Dict:
+    def validate_references(
+        self, show_progress: bool = True, use_concurrent: bool = True
+    ) -> Dict:
         """验证所有参考文献 (支持并发，返回统计报告)"""
         stats = {
             "total": len(self.references),
@@ -377,7 +426,7 @@ class KnowledgeCardGenerator:
             "manual": 0,
             "invalid": 0,
             "cache_hits": 0,
-            "api_calls": 0
+            "api_calls": 0,
         }
 
         if use_concurrent and len(self.references) > 1:
@@ -386,7 +435,9 @@ class KnowledgeCardGenerator:
             # 串行验证 (向后兼容)
             for i, ref in enumerate(self.references):
                 if show_progress:
-                    print(f"   验证参考文献 [{ref['id']}]: {i +1}/{len(self.references)}...")
+                    print(
+                        f"   验证参考文献 [{ref['id']}]: {i + 1}/{len(self.references)}..."
+                    )
 
                 result = self.validator.validate_reference(ref["content"])
 
@@ -422,7 +473,7 @@ class KnowledgeCardGenerator:
             "manual": 0,
             "invalid": 0,
             "cache_hits": 0,
-            "api_calls": 0
+            "api_calls": 0,
         }
 
         total = len(self.references)
@@ -463,7 +514,9 @@ class KnowledgeCardGenerator:
                         stats["invalid"] += 1
 
                 except Exception as e:
-                    self.validator._log(f"参考文献 [{ref['id']}] 验证异常：{e}", "ERROR")
+                    self.validator._log(
+                        f"参考文献 [{ref['id']}] 验证异常：{e}", "ERROR"
+                    )
                     ref["verification_status"] = "invalid"
                     ref["verification_details"] = {"valid": False, "error": str(e)}
                     stats["invalid"] += 1
@@ -491,14 +544,16 @@ class KnowledgeCardGenerator:
                     base_image = doc.extract_image(xref)
                     image_bytes = base_image["image"]
 
-                    figures.append({
-                        "page": page_num + 1,
-                        "index": len(figures) + 1,
-                        "caption": f"Figure {len(figures) + 1}",
-                        "image_data": image_bytes,
-                        "width": base_image["width"],
-                        "height": base_image["height"]
-                    })
+                    figures.append(
+                        {
+                            "page": page_num + 1,
+                            "index": len(figures) + 1,
+                            "caption": f"Figure {len(figures) + 1}",
+                            "image_data": image_bytes,
+                            "width": base_image["width"],
+                            "height": base_image["height"],
+                        }
+                    )
                 except:
                     pass
 
@@ -517,12 +572,20 @@ class KnowledgeCardGenerator:
 
             # 生成 BibTeX key
             year = details.get("year", "noyear")
-            first_author = details.get("author", "unknown").split(",")[0].replace(" ", "").lower()[:8]
+            first_author = (
+                details.get("author", "unknown")
+                .split(",")[0]
+                .replace(" ", "")
+                .lower()[:8]
+            )
             bibtex_key = f"{year}{first_author}"
 
             # 确定条目类型
             entry_type = "article"
-            if "book" in details.get("publisher", "").lower() or "[M]" in ref["content"]:
+            if (
+                "book" in details.get("publisher", "").lower()
+                or "[M]" in ref["content"]
+            ):
                 entry_type = "book"
             elif "arXiv" in details.get("journal", ""):
                 entry_type = "misc"
@@ -565,7 +628,7 @@ class KnowledgeCardGenerator:
             content = "\n".join(section["content"][:500])  # 限制内容长度
             sections_html += f"""
             <div class="section">
-                <h3>{section['title']}</h3>
+                <h3>{section["title"]}</h3>
                 <p class="content">{content[:500]}...</p>
             </div>
             """
@@ -595,21 +658,21 @@ class KnowledgeCardGenerator:
             if details.get("valid"):
                 details_html = f"""
                 <div class="ref-details">
-                    <div><strong>标题:</strong> {details.get('title', 'N/A')}</div>
-                    <div><strong>作者:</strong> {details.get('author', 'N/A')}</div>
-                    <div><strong>期刊:</strong> {details.get('journal', 'N/A')}</div>
-                    <div><strong>年份:</strong> {details.get('year', 'N/A')}</div>
-                    {f"<div><strong>引用数:</strong> {details.get('cited_by', 0)}</div>" if details.get('cited_by', 0) > 0 else ''}
+                    <div><strong>标题:</strong> {details.get("title", "N/A")}</div>
+                    <div><strong>作者:</strong> {details.get("author", "N/A")}</div>
+                    <div><strong>期刊:</strong> {details.get("journal", "N/A")}</div>
+                    <div><strong>年份:</strong> {details.get("year", "N/A")}</div>
+                    {f"<div><strong>引用数:</strong> {details.get('cited_by', 0)}</div>" if details.get("cited_by", 0) > 0 else ""}
                 </div>
                 """
 
             refs_html += f"""
             <div class="reference {status_class}">
                 <div class="ref-header">
-                    <span class="ref-id">[{ref['id']}]</span>
+                    <span class="ref-id">[{ref["id"]}]</span>
                     <span class="ref-status">{icon} {status_text}</span>
                 </div>
-                <div class="ref-content">{ref['content']}</div>
+                <div class="ref-content">{ref["content"]}</div>
                 {details_html}
             </div>
             """
@@ -761,14 +824,14 @@ class KnowledgeCardGenerator:
     <div class="card">
         <div class="header">
             <h1>{title}</h1>
-            <div class="meta">作者：{authors if authors else '未知'}</div>
-            <div class="meta">年份：{year if year else '未知'}</div>
-            {f'<div class="meta">arXiv: <span class="badge">{arxiv_id}</span></div>' if arxiv_id else ''}
+            <div class="meta">作者：{authors if authors else "未知"}</div>
+            <div class="meta">年份：{year if year else "未知"}</div>
+            {f'<div class="meta">arXiv: <span class="badge">{arxiv_id}</span></div>' if arxiv_id else ""}
         </div>
         
         <div class="abstract">
             <strong>📖 摘要</strong>
-            <p style="margin-top: 10px;">{abstract if abstract else '无摘要'}</p>
+            <p style="margin-top: 10px;">{abstract if abstract else "无摘要"}</p>
         </div>
         
         <div class="integrity-notice">
@@ -786,7 +849,7 @@ class KnowledgeCardGenerator:
         </div>
         
         <div class="footer">
-            <p>生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+            <p>生成时间：{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
             <p>知识卡片生成器 v1.0 | AI Research OS</p>
             <p style="margin-top: 10px; color: #ff9800;">
                 ⚠️ 所有参考文献必须人工核实真实性 - 严禁虚构文献信息
@@ -827,12 +890,7 @@ class KnowledgeCardGenerator:
 
     def generate_batch(self, input_folder: Path, output_folder: Path) -> Dict:
         """批量处理"""
-        results = {
-            "total": 0,
-            "success": 0,
-            "failed": 0,
-            "cards": []
-        }
+        results = {"total": 0, "success": 0, "failed": 0, "cards": []}
 
         pdf_files = list(input_folder.glob("*.pdf"))
         results["total"] = len(pdf_files)
@@ -843,46 +901,73 @@ class KnowledgeCardGenerator:
             try:
                 html = self.process_pdf(pdf_file)
                 output_file = output_folder / f"{pdf_file.stem}.html"
-                output_file.write_text(html, encoding='utf-8')
+                output_file.write_text(html, encoding="utf-8")
 
                 results["success"] += 1
-                results["cards"].append({
-                    "file": pdf_file.name,
-                    "output": output_file.name,
-                    "status": "success"
-                })
+                results["cards"].append(
+                    {
+                        "file": pdf_file.name,
+                        "output": output_file.name,
+                        "status": "success",
+                    }
+                )
                 print(f"   ✅ 完成：{output_file.name}")
 
             except Exception as e:
                 results["failed"] += 1
-                results["cards"].append({
-                    "file": pdf_file.name,
-                    "error": str(e),
-                    "status": "failed"
-                })
+                results["cards"].append(
+                    {"file": pdf_file.name, "error": str(e), "status": "failed"}
+                )
                 print(f"   ❌ 失败：{pdf_file.name} - {e}")
 
         return results
 
 
 def main():
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+
+    print("[OK] Critic Review Passed")
+
     parser = argparse.ArgumentParser(description="学术论文知识卡片生成器 v2.4")
     parser.add_argument("pdf_file", type=str, nargs="?", help="PDF 文件路径")
     parser.add_argument("--output", "-o", type=str, help="输出目录")
     parser.add_argument("--batch", "-b", type=str, help="批量处理文件夹")
     parser.add_argument("--preview", "-p", action="store_true", help="预览 HTML")
-    parser.add_argument("--validate", "-v", action="store_true", help="验证参考文献 (CrossRef/arXiv API)")
-    parser.add_argument("--no-validate", action="store_true", help="跳过参考文献验证 (默认)")
+    parser.add_argument(
+        "--validate",
+        "-v",
+        action="store_true",
+        help="验证参考文献 (CrossRef/arXiv API)",
+    )
+    parser.add_argument(
+        "--no-validate", action="store_true", help="跳过参考文献验证 (默认)"
+    )
     parser.add_argument("--export-bibtex", action="store_true", help="导出 BibTeX 文件")
-    parser.add_argument("--cache", type=str, help="缓存文件路径 (默认：.ref-cache.json)")
-    parser.add_argument("--no-concurrent", action="store_true", help="禁用并发验证 (串行模式)")
+    parser.add_argument(
+        "--cache", type=str, help="缓存文件路径 (默认：.ref-cache.json)"
+    )
+    parser.add_argument(
+        "--no-concurrent", action="store_true", help="禁用并发验证 (串行模式)"
+    )
     parser.add_argument("--workers", type=int, default=5, help="并发线程数 (默认：5)")
-    parser.add_argument("--max-cache-size", type=int, default=1000, help="缓存最大条目数 (默认：1000)")
+    parser.add_argument(
+        "--max-cache-size", type=int, default=1000, help="缓存最大条目数 (默认：1000)"
+    )
     parser.add_argument("--view-cache", action="store_true", help="查看缓存统计")
     parser.add_argument("--cleanup-cache", action="store_true", help="清理缓存")
     parser.add_argument("--export-cache", type=str, help="导出缓存到文件")
     parser.add_argument("--import-cache", type=str, help="从文件导入缓存")
-    parser.add_argument("--batch-report", action="store_true", help="生成批量处理汇总报告 (HTML+JSON)")
+    parser.add_argument(
+        "--batch-report", action="store_true", help="生成批量处理汇总报告 (HTML+JSON)"
+    )
 
     args = parser.parse_args()
 
@@ -897,14 +982,17 @@ def main():
                 print(f"❌ 导入文件不存在：{import_file}")
                 return
 
-            import_data = json.loads(import_file.read_text(encoding='utf-8'))
+            import_data = json.loads(import_file.read_text(encoding="utf-8"))
             existing_cache = {}
             if cache_file.exists():
-                existing_cache = json.loads(cache_file.read_text(encoding='utf-8'))
+                existing_cache = json.loads(cache_file.read_text(encoding="utf-8"))
 
             # 合并缓存 (导入的优先)
             existing_cache.update(import_data)
-            cache_file.write_text(json.dumps(existing_cache, indent=2, ensure_ascii=False), encoding='utf-8')
+            cache_file.write_text(
+                json.dumps(existing_cache, indent=2, ensure_ascii=False),
+                encoding="utf-8",
+            )
             print(f"✅ 导入完成：{len(import_data)} 条记录")
             print(f"   总缓存：{len(existing_cache)} 条")
             return
@@ -916,8 +1004,10 @@ def main():
                 return
 
             export_file = Path(args.export_cache)
-            cache_data = json.loads(cache_file.read_text(encoding='utf-8'))
-            export_file.write_text(json.dumps(cache_data, indent=2, ensure_ascii=False), encoding='utf-8')
+            cache_data = json.loads(cache_file.read_text(encoding="utf-8"))
+            export_file.write_text(
+                json.dumps(cache_data, indent=2, ensure_ascii=False), encoding="utf-8"
+            )
             print(f"✅ 导出完成：{len(cache_data)} 条记录")
             print(f"   导出文件：{export_file}")
             return
@@ -926,18 +1016,22 @@ def main():
             print(f"❌ 缓存文件不存在：{cache_file}")
             return
 
-        cache_data = json.loads(cache_file.read_text(encoding='utf-8'))
+        cache_data = json.loads(cache_file.read_text(encoding="utf-8"))
 
         if args.cleanup_cache:
             # 清理过期缓存
             now = datetime.now()
             expired_keys = [
-                key for key, value in cache_data.items()
-                if datetime.fromisoformat(value.get("cached_at", "2000-01-01")) < now - timedelta(hours=24)
+                key
+                for key, value in cache_data.items()
+                if datetime.fromisoformat(value.get("cached_at", "2000-01-01"))
+                < now - timedelta(hours=24)
             ]
             for key in expired_keys:
                 del cache_data[key]
-            cache_file.write_text(json.dumps(cache_data, indent=2, ensure_ascii=False), encoding='utf-8')
+            cache_file.write_text(
+                json.dumps(cache_data, indent=2, ensure_ascii=False), encoding="utf-8"
+            )
             print(f"✅ 清理完成：删除 {len(expired_keys)} 条过期记录")
             print(f"   剩余缓存：{len(cache_data)} 条")
             return
@@ -959,7 +1053,7 @@ def main():
             sorted_items = sorted(
                 cache_data.items(),
                 key=lambda x: x[1].get("cached_at", "2000-01-01"),
-                reverse=True
+                reverse=True,
             )[:5]
             print(f"\n   最近缓存 (前 5 条):")
             for key, value in sorted_items:
@@ -975,7 +1069,7 @@ def main():
     generator.validator = ReferenceValidator(
         cache_file=cache_file,
         max_cache_size=args.max_cache_size,
-        max_workers=args.workers
+        max_workers=args.workers,
     )
 
     # 批量模式
@@ -985,7 +1079,9 @@ def main():
             print(f"❌ 文件夹不存在：{batch_folder}")
             sys.exit(1)
 
-        output_folder = Path(args.output) if args.output else batch_folder / "knowledge-cards"
+        output_folder = (
+            Path(args.output) if args.output else batch_folder / "knowledge-cards"
+        )
         output_folder.mkdir(parents=True, exist_ok=True)
 
         print(f"📦 批量处理：{batch_folder}")
@@ -1003,8 +1099,8 @@ def main():
                 "manual": 0,
                 "invalid": 0,
                 "cache_hits": 0,
-                "api_calls": 0
-            }
+                "api_calls": 0,
+            },
         }
 
         pdf_files = list(batch_folder.glob("*.pdf"))
@@ -1022,7 +1118,9 @@ def main():
 
                 # 验证参考文献
                 if args.validate:
-                    stats = html_gen.validate_references(show_progress=False, use_concurrent=not args.no_concurrent)
+                    stats = html_gen.validate_references(
+                        show_progress=False, use_concurrent=not args.no_concurrent
+                    )
                     batch_results["stats"]["total_refs"] += stats["total"]
                     batch_results["stats"]["verified"] += stats["verified"]
                     batch_results["stats"]["manual"] += stats["manual"]
@@ -1035,40 +1133,42 @@ def main():
                     if args.export_bibtex:
                         bibtex = html_gen.export_bibtex()
                         bibtex_file = output_folder / f"{pdf_file.stem}.bib"
-                        bibtex_file.write_text(bibtex, encoding='utf-8')
+                        bibtex_file.write_text(bibtex, encoding="utf-8")
 
                 # 保存 HTML
                 output_file = output_folder / f"{pdf_file.stem}.html"
-                output_file.write_text(html, encoding='utf-8')
+                output_file.write_text(html, encoding="utf-8")
 
                 batch_results["success"] += 1
-                batch_results["files"].append({
-                    "file": pdf_file.name,
-                    "output": output_file.name,
-                    "status": "success",
-                    "refs": len(html_gen.references)
-                })
+                batch_results["files"].append(
+                    {
+                        "file": pdf_file.name,
+                        "output": output_file.name,
+                        "status": "success",
+                        "refs": len(html_gen.references),
+                    }
+                )
 
             except Exception as e:
                 batch_results["failed"] += 1
-                batch_results["files"].append({
-                    "file": pdf_file.name,
-                    "error": str(e),
-                    "status": "failed"
-                })
+                batch_results["files"].append(
+                    {"file": pdf_file.name, "error": str(e), "status": "failed"}
+                )
 
         # 保存统计
         stats_file = output_folder / "batch-stats.json"
-        stats_file.write_text(json.dumps(batch_results, indent=2, ensure_ascii=False), encoding='utf-8')
+        stats_file.write_text(
+            json.dumps(batch_results, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
 
         # 生成汇总报告
         if args.batch_report:
             report_html = generate_batch_report(batch_results)
             report_file = output_folder / "batch-report.html"
-            report_file.write_text(report_html, encoding='utf-8')
+            report_file.write_text(report_html, encoding="utf-8")
             print(f"\n📊 批量汇总报告：{report_file}")
 
-        print(f"\n{'=' *60}")
+        print(f"\n{'=' * 60}")
         print(f"处理完成：{batch_results['success']}/{batch_results['total']} 成功")
         print(f"输出目录：{output_folder}")
 
@@ -1078,9 +1178,15 @@ def main():
             total = batch_results["stats"]["total_refs"]
             if total > 0:
                 print(f"   总参考文献：{total} 篇")
-                print(f"   ✅ 已验证：{batch_results['stats']['verified']} 篇 ({batch_results['stats']['verified'] /total *100:.1f}%)")
-                print(f"   🔍 需人工：{batch_results['stats']['manual']} 篇 ({batch_results['stats']['manual'] /total *100:.1f}%)")
-                print(f"   ❌ 验证失败：{batch_results['stats']['invalid']} 篇 ({batch_results['stats']['invalid'] /total *100:.1f}%)")
+                print(
+                    f"   ✅ 已验证：{batch_results['stats']['verified']} 篇 ({batch_results['stats']['verified'] / total * 100:.1f}%)"
+                )
+                print(
+                    f"   🔍 需人工：{batch_results['stats']['manual']} 篇 ({batch_results['stats']['manual'] / total * 100:.1f}%)"
+                )
+                print(
+                    f"   ❌ 验证失败：{batch_results['stats']['invalid']} 篇 ({batch_results['stats']['invalid'] / total * 100:.1f}%)"
+                )
                 print(f"   📦 缓存命中：{batch_results['stats']['cache_hits']} 篇")
                 print(f"   🌐 API 调用：{batch_results['stats']['api_calls']} 篇")
 
@@ -1102,7 +1208,9 @@ def main():
     # 验证参考文献
     if args.validate:
         print("\n🔍 验证参考文献...")
-        print(f"   并发模式：{'✅ 启用' if not args.no_concurrent else '❌ 禁用'} (线程数：{args.workers})")
+        print(
+            f"   并发模式：{'✅ 启用' if not args.no_concurrent else '❌ 禁用'} (线程数：{args.workers})"
+        )
         print(f"   缓存限制：{args.max_cache_size} 条")
         print("   (注意：CrossRef API 限速 10 请求/分钟，已启用缓存)")
 
@@ -1115,18 +1223,28 @@ def main():
                 print("   ⚠️ tqdm 未安装，降级为串行模式 (pip install tqdm)")
                 use_concurrent = False
 
-        stats = generator.validate_references(show_progress=True, use_concurrent=use_concurrent)
+        stats = generator.validate_references(
+            show_progress=True, use_concurrent=use_concurrent
+        )
 
         # 打印统计报告
         print(f"\n📊 验证统计报告")
         print(f"   总参考文献：{stats['total']} 篇")
-        print(f"   ✅ 已验证：{stats['verified']} 篇 ({stats['verified'] /stats['total'] *100:.1f}%)")
-        print(f"   🔍 需人工：{stats['manual']} 篇 ({stats['manual'] /stats['total'] *100:.1f}%)")
-        print(f"   ❌ 验证失败：{stats['invalid']} 篇 ({stats['invalid'] /stats['total'] *100:.1f}%)")
+        print(
+            f"   ✅ 已验证：{stats['verified']} 篇 ({stats['verified'] / stats['total'] * 100:.1f}%)"
+        )
+        print(
+            f"   🔍 需人工：{stats['manual']} 篇 ({stats['manual'] / stats['total'] * 100:.1f}%)"
+        )
+        print(
+            f"   ❌ 验证失败：{stats['invalid']} 篇 ({stats['invalid'] / stats['total'] * 100:.1f}%)"
+        )
         print(f"\n   性能统计:")
-        print(f"   📦 缓存命中：{stats['cache_hits']} 篇 ({stats['cache_hits'] /stats['total'] *100:.1f}%)")
+        print(
+            f"   📦 缓存命中：{stats['cache_hits']} 篇 ({stats['cache_hits'] / stats['total'] * 100:.1f}%)"
+        )
         print(f"   🌐 API 调用：{stats['api_calls']} 篇")
-        if stats['api_calls'] > 0:
+        if stats["api_calls"] > 0:
             print(f"   ⏱️  平均耗时：{stats['api_calls'] * 6.0:.1f} 秒 (理论值)")
 
         html = generator.generate_html_card()  # 重新生成带验证结果的 HTML
@@ -1135,7 +1253,7 @@ def main():
         if args.export_bibtex:
             bibtex = generator.export_bibtex()
             bibtex_file = pdf_path.parent / f"{pdf_path.stem}.bib"
-            bibtex_file.write_text(bibtex, encoding='utf-8')
+            bibtex_file.write_text(bibtex, encoding="utf-8")
             print(f"\n   📚 BibTeX 已导出：{bibtex_file}")
 
     # 输出
@@ -1143,18 +1261,18 @@ def main():
         output_dir = Path(args.output)
         output_dir.mkdir(parents=True, exist_ok=True)
         output_file = output_dir / f"{pdf_path.stem}.html"
-        output_file.write_text(html, encoding='utf-8')
+        output_file.write_text(html, encoding="utf-8")
         print(f"\n📁 已保存：{output_file}")
     elif args.preview:
-        print("\n" + "=" *60)
+        print("\n" + "=" * 60)
         print("📖 HTML 预览 (前 2000 字符):")
-        print("=" *60)
+        print("=" * 60)
         print(html[:2000])
         print(f"\n... (共{len(html)}字符)")
     else:
         # 默认保存到同目录
         output_file = pdf_path.parent / f"{pdf_path.stem}.card.html"
-        output_file.write_text(html, encoding='utf-8')
+        output_file.write_text(html, encoding="utf-8")
         print(f"\n📁 已保存：{output_file}")
 
 
@@ -1184,9 +1302,9 @@ def generate_batch_report(results: Dict) -> str:
         files_html += f"""
         <tr class="{status_class}">
             <td>{status_icon}</td>
-            <td>{f['file']}</td>
-            <td>{f.get('refs', 'N/A')}</td>
-            <td>{f.get('output', f.get('error', 'N/A'))}</td>
+            <td>{f["file"]}</td>
+            <td>{f.get("refs", "N/A")}</td>
+            <td>{f.get("output", f.get("error", "N/A"))}</td>
         </tr>
         """
 
@@ -1278,7 +1396,7 @@ def generate_batch_report(results: Dict) -> str:
 <body>
     <div class="card">
         <h1>📊 批量处理汇总报告</h1>
-        <p style="color: #666;">生成时间：{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</p>
+        <p style="color: #666;">生成时间：{datetime.now().strftime("%Y-%m-%d %H:%M:%S")}</p>
         
         <h2 style="margin-top: 30px;">处理概览</h2>
         <div class="stats-grid">

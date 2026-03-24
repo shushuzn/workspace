@@ -4,12 +4,14 @@
 
 import sys
 import io
-sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8", errors="replace")
 
 from flask import Flask, request, jsonify, send_file, render_template_string
 from werkzeug.utils import secure_filename
 import os
 import json
+import subprocess
 import threading
 from pathlib import Path
 from datetime import datetime
@@ -19,14 +21,17 @@ import shutil
 # 导入知识卡片生成器
 sys.path.insert(0, str(Path(__file__).parent))
 import importlib.util
-spec = importlib.util.spec_from_file_location("knowledge_card_generator", Path(__file__).parent / "knowledge-card-generator.py")
+
+spec = importlib.util.spec_from_file_location(
+    "knowledge_card_generator", Path(__file__).parent / "knowledge-card-generator.py"
+)
 knowledge_card_generator = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(knowledge_card_generator)
 KnowledgeCardGenerator = knowledge_card_generator.KnowledgeCardGenerator
 ReferenceValidator = knowledge_card_generator.ReferenceValidator
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB max
+app.config["MAX_CONTENT_LENGTH"] = 100 * 1024 * 1024  # 100MB max
 
 # 全局状态
 processing_status = {
@@ -36,7 +41,7 @@ processing_status = {
     "total_files": 0,
     "completed": 0,
     "failed": 0,
-    "result": None
+    "result": None,
 }
 
 # 临时目录
@@ -48,13 +53,13 @@ api_quota = {
     "crossref": {
         "requests": 0,
         "limit": 600,  # 10 请求/分钟 × 60 分钟
-        "reset_at": datetime.now().replace(minute=0, second=0, microsecond=0)
+        "reset_at": datetime.now().replace(minute=0, second=0, microsecond=0),
     },
     "arxiv": {
         "requests": 0,
         "limit": 600,
-        "reset_at": datetime.now().replace(minute=0, second=0, microsecond=0)
-    }
+        "reset_at": datetime.now().replace(minute=0, second=0, microsecond=0),
+    },
 }
 
 
@@ -367,33 +372,33 @@ HTML_INDEX = """
 """
 
 
-@app.route('/')
+@app.route("/")
 def index():
     return render_template_string(HTML_INDEX)
 
 
-@app.route('/api/quota')
+@app.route("/api/quota")
 def get_quota():
     return jsonify(api_quota)
 
 
-@app.route('/api/status')
+@app.route("/api/status")
 def get_status():
     return jsonify(processing_status)
 
 
-@app.route('/api/process', methods=['POST'])
+@app.route("/api/process", methods=["POST"])
 def process_files():
     global processing_status
 
-    if 'files' not in request.files:
+    if "files" not in request.files:
         return jsonify({"error": "No files uploaded"}), 400
 
-    files = request.files.getlist('files')
-    validate = request.form.get('validate', 'false') == 'true'
-    export_bibtex = request.form.get('exportBibtex', 'false') == 'true'
-    concurrent = request.form.get('concurrent', 'false') == 'true'
-    workers = int(request.form.get('workers', 5))
+    files = request.files.getlist("files")
+    validate = request.form.get("validate", "false") == "true"
+    export_bibtex = request.form.get("exportBibtex", "false") == "true"
+    concurrent = request.form.get("concurrent", "false") == "true"
+    workers = int(request.form.get("workers", 5))
 
     # 创建临时工作目录
     work_dir = TEMP_DIR / datetime.now().strftime("%Y%m%d_%H%M%S")
@@ -402,7 +407,7 @@ def process_files():
     # 保存上传的文件
     pdf_paths = []
     for f in files:
-        if f.filename.endswith('.pdf'):
+        if f.filename.endswith(".pdf"):
             pdf_path = work_dir / secure_filename(f.filename)
             f.save(str(pdf_path))
             pdf_paths.append(pdf_path)
@@ -426,8 +431,8 @@ def process_files():
                 "manual": 0,
                 "invalid": 0,
                 "cache_hits": 0,
-                "api_calls": 0
-            }
+                "api_calls": 0,
+            },
         }
 
         generator = KnowledgeCardGenerator()
@@ -443,7 +448,9 @@ def process_files():
 
                 # 验证参考文献
                 if validate:
-                    stats = generator.validate_references(show_progress=False, use_concurrent=concurrent)
+                    stats = generator.validate_references(
+                        show_progress=False, use_concurrent=concurrent
+                    )
                     results["stats"]["total_refs"] += stats["total"]
                     results["stats"]["verified"] += stats["verified"]
                     results["stats"]["manual"] += stats["manual"]
@@ -458,41 +465,44 @@ def process_files():
 
                 # 保存 HTML
                 output_file = work_dir / f"{pdf_path.stem}.html"
-                output_file.write_text(html, encoding='utf-8')
+                output_file.write_text(html, encoding="utf-8")
 
                 # 导出 BibTeX
                 if export_bibtex:
                     bibtex = generator.export_bibtex()
                     bibtex_file = work_dir / f"{pdf_path.stem}.bib"
-                    bibtex_file.write_text(bibtex, encoding='utf-8')
+                    bibtex_file.write_text(bibtex, encoding="utf-8")
 
                 results["success"] += 1
-                results["files"].append({
-                    "file": pdf_path.name,
-                    "output": output_file.name,
-                    "status": "success"
-                })
+                results["files"].append(
+                    {
+                        "file": pdf_path.name,
+                        "output": output_file.name,
+                        "status": "success",
+                    }
+                )
 
             except Exception as e:
                 results["failed"] += 1
-                results["files"].append({
-                    "file": pdf_path.name,
-                    "error": str(e),
-                    "status": "failed"
-                })
+                results["files"].append(
+                    {"file": pdf_path.name, "error": str(e), "status": "failed"}
+                )
 
             processing_status["completed"] = results["success"]
             processing_status["failed"] = results["failed"]
 
         # 保存统计
         stats_file = work_dir / "batch-stats.json"
-        stats_file.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding='utf-8')
+        stats_file.write_text(
+            json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8"
+        )
 
         # 压缩结果
         import zipfile
+
         zip_path = work_dir.parent / f"{work_dir.name}.zip"
-        with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-            for file in work_dir.rglob('*'):
+        with zipfile.ZipFile(zip_path, "w", zipfile.ZIP_DEFLATED) as zipf:
+            for file in work_dir.rglob("*"):
                 zipf.write(file, file.relative_to(work_dir))
 
         processing_status["active"] = False
@@ -504,7 +514,7 @@ def process_files():
             "verified": results["stats"]["verified"],
             "manual": results["stats"]["manual"],
             "invalid": results["stats"]["invalid"],
-            "download_url": f"/api/download/{zip_path.name}"
+            "download_url": f"/api/download/{zip_path.name}",
         }
 
     thread = threading.Thread(target=process_background)
@@ -513,7 +523,7 @@ def process_files():
     return jsonify({"status": "started"})
 
 
-@app.route('/api/download/<filename>')
+@app.route("/api/download/<filename>")
 def download(filename):
     file_path = TEMP_DIR / filename
     if not file_path.exists():
@@ -522,10 +532,25 @@ def download(filename):
 
 
 if __name__ == "__main__":
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        sys.exit(1)
+
+    print("[OK] Critic Review Passed")
+
     import argparse
+
     parser = argparse.ArgumentParser(description="知识卡片生成器 Web UI")
     parser.add_argument("--port", type=int, default=5000, help="服务端口 (默认：5000)")
-    parser.add_argument("--host", type=str, default="127.0.0.1", help="监听地址 (默认：127.0.0.1)")
+    parser.add_argument(
+        "--host", type=str, default="127.0.0.1", help="监听地址 (默认：127.0.0.1)"
+    )
     args = parser.parse_args()
 
     try:
@@ -537,7 +562,10 @@ if __name__ == "__main__":
 
     # 禁用 Flask banner 避免后台运行错误
     import logging
-    log = logging.getLogger('werkzeug')
+
+    log = logging.getLogger("werkzeug")
     log.setLevel(logging.ERROR)
 
-    app.run(host=args.host, port=args.port, debug=False, threaded=True, use_reloader=False)
+    app.run(
+        host=args.host, port=args.port, debug=False, threaded=True, use_reloader=False
+    )
