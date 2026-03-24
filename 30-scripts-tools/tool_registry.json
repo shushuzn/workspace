@@ -1,0 +1,4116 @@
+{
+  "tools": {
+    "feishu_assistant": {
+      "path": "feishu_assistant.py",
+      "description": "Feishu Assistant - 飞书全能助手",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 820
+    },
+    "news_aggregator": {
+      "path": "news_aggregator.py",
+      "description": "News Aggregator - 新闻聚合器 v2",
+      "category": "utils",
+      "tags": [
+        "utils",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 278
+    },
+    "news_llm_analyzer": {
+      "path": "news_llm_analyzer.py",
+      "description": "智能新闻分析器 - 支持本地 LLM",
+      "category": "utils",
+      "tags": [
+        "utils",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 133
+    },
+    "news_manager": {
+      "path": "news_manager.py",
+      "description": "News Manager v3.0 - 统一新闻推送",
+      "category": "utils",
+      "tags": [
+        "utils",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 976
+    },
+    "news_to_all": {
+      "path": "news_to_all.py",
+      "description": "News to All - 推送到所有平台",
+      "category": "utils",
+      "tags": [
+        "utils",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 147
+    },
+    "news_to_qq": {
+      "path": "news_to_qq.py",
+      "description": "News to QQ - QQ机器人新闻推送 (QQ Bot API v2)",
+      "category": "utils",
+      "tags": [
+        "utils",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 298
+    },
+    "news_to_qq_napcat": {
+      "path": "news_to_qq_napcat.py",
+      "description": "News to QQ (NapCat) - 基于 NapCat 的 QQ 群推送",
+      "category": "utils",
+      "tags": [
+        "utils",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 382
+    },
+    "run_tests": {
+      "path": "run_tests.py",
+      "description": "Quick test runner for workspace",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 38
+    },
+    "start_stock_pro": {
+      "path": "start_stock_pro.py",
+      "description": "Stock PRO - One-Click Launcher",
+      "category": "analysis",
+      "tags": [
+        "analysis",
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 65
+    },
+    "test_sina_news": {
+      "path": "test_sina_news.py",
+      "description": "抓取新浪财经新闻",
+      "category": "test",
+      "tags": [
+        "test",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 43
+    },
+    "unified_arxiv": {
+      "path": "unified_arxiv.py",
+      "description": "Unified arXiv Tool - Combines best features from scattered arXiv tools",
+      "category": "utils",
+      "tags": [
+        "utils",
+        "arxiv"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 659
+    },
+    "unified_social_monitor": {
+      "path": "unified_social_monitor.py",
+      "description": "Unified Social Monitor - Monitor Reddit and Twitter/X for AI/LLM content.",
+      "category": "monitor",
+      "tags": [
+        "monitor",
+        "social"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 640
+    },
+    "workflow": {
+      "path": "workflow.py",
+      "description": "==============================================================================",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 780
+    },
+    "workflow_insights": {
+      "path": "workflow_insights.py",
+      "description": "==============================================================================",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 561
+    },
+    "cache_manager": {
+      "path": "utils\\cache_manager.py",
+      "description": "Cache Manager",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 235
+    },
+    "check_bom": {
+      "path": "utils\\check_bom.py",
+      "description": "Check if file has UTF-8 BOM",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 22
+    },
+    "check_db": {
+      "path": "utils\\check_db.py",
+      "description": "Python tool",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 19
+    },
+    "check_line220": {
+      "path": "utils\\check_line220.py",
+      "description": "Check for specific bytes",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 13
+    },
+    "debug_line220": {
+      "path": "utils\\debug_line220.py",
+      "description": "Python tool",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 18
+    },
+    "emergency_fix": {
+      "path": "utils\\emergency_fix.py",
+      "description": "Fix all lines with syntax errors",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 47
+    },
+    "find_all_bad": {
+      "path": "utils\\find_all_bad.py",
+      "description": "Look for lines with pack_list and corrupted strings",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 18
+    },
+    "find_bad_char": {
+      "path": "utils\\find_bad_char.py",
+      "description": "Check each character",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 16
+    },
+    "fix_watcher": {
+      "path": "utils\\fix_watcher.py",
+      "description": "def log(msg):",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 21
+    },
+    "fix_watcher2": {
+      "path": "utils\\fix_watcher2.py",
+      "description": "# 去掉未配对的右括？方括？花括？    pairs = ((\")\", \"(\"), (\"]\", \"[\"), (\"}\", \"{\"))",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 29
+    },
+    "fix_watcher3": {
+      "path": "utils\\fix_watcher3.py",
+      "description": "找到有问题的行并修复",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 27
+    },
+    "input_validator": {
+      "path": "utils\\input_validator.py",
+      "description": "Input Validator",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 273
+    },
+    "mcp-integrator": {
+      "path": "utils\\mcp-integrator.py",
+      "description": "MCP Tool Integrator - MCP 工具集成",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 297
+    },
+    "performance_optimizer": {
+      "path": "utils\\performance_optimizer.py",
+      "description": "Performance Optimizer",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 263
+    },
+    "plugin_system": {
+      "path": "utils\\plugin_system.py",
+      "description": "Plugin System",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 262
+    },
+    "remove_bom": {
+      "path": "utils\\remove_bom.py",
+      "description": "Read file as binary",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 24
+    },
+    "retry_manager": {
+      "path": "utils\\retry_manager.py",
+      "description": "Retry Manager",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 195
+    },
+    "test_compile": {
+      "path": "utils\\test_compile.py",
+      "description": "Python tool",
+      "category": "utils",
+      "tags": [
+        "utils",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 12
+    },
+    "test_framework": {
+      "path": "tools\\test_framework.py",
+      "description": "Generic Test Framework",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 293
+    },
+    "multimodal_kg": {
+      "path": "multimodal-kg\\multimodal_kg.py",
+      "description": "多模态知识图谱核心模块",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 152
+    },
+    "arxiv-collector-v2": {
+      "path": "04-collectors\\arxiv-collector-v2.py",
+      "description": "Arxiv AI Papers Collector v2.0",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "arxiv"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 251
+    },
+    "arxiv-collector": {
+      "path": "04-collectors\\arxiv-collector.py",
+      "description": "Arxiv AI Papers Collector",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "arxiv"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 122
+    },
+    "arxiv-migrate-recovery": {
+      "path": "04-collectors\\arxiv-migrate-recovery.py",
+      "description": "Arxiv Old Data Migration Script - Recovery Version",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "arxiv"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 199
+    },
+    "arxiv-migrate": {
+      "path": "04-collectors\\arxiv-migrate.py",
+      "description": "Arxiv Old Data Migration Script",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "arxiv"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 268
+    },
+    "arxiv-sync-github": {
+      "path": "04-collectors\\arxiv-sync-github.py",
+      "description": "Obsidian Sync to GitHub",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "arxiv"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 202
+    },
+    "arxiv-to-openclaw-integration": {
+      "path": "04-collectors\\arxiv-to-openclaw-integration.py",
+      "description": "arXiv to OpenClaw Integration",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "arxiv"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 172
+    },
+    "bili2obsidian_final": {
+      "path": "04-collectors\\bili2obsidian_final.py",
+      "description": "你是专业的知识整理助手，将以下B站视频内容整理成符合Obsidian规范的Markdown结构化学习笔记，逻辑清晰、重点突出，适合后续复习和二次编辑。",
+      "category": "collector",
+      "tags": [
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 179
+    },
+    "detect_sensitive_content": {
+      "path": "04-collectors\\detect_sensitive_content.py",
+      "description": "Sensitive Content Detector",
+      "category": "collector",
+      "tags": [
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 100
+    },
+    "github-link-extractor": {
+      "path": "04-collectors\\github-link-extractor.py",
+      "description": "GitHub Link Extractor v1",
+      "category": "collector",
+      "tags": [
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 128
+    },
+    "github-repo-reorganize-phase2": {
+      "path": "08-AUTOMATION\\github-sync\\github-repo-reorganize-phase2.py",
+      "description": "GitHub 仓库深度整理 - 第二阶段",
+      "category": "automation",
+      "tags": [
+        "automation"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 249
+    },
+    "github-repo-reorganize-phase3": {
+      "path": "08-AUTOMATION\\github-sync\\github-repo-reorganize-phase3.py",
+      "description": "GitHub 仓库整理 - Phase 3",
+      "category": "automation",
+      "tags": [
+        "automation"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 260
+    },
+    "github-repo-reorganize-phase4": {
+      "path": "08-AUTOMATION\\github-sync\\github-repo-reorganize-phase4.py",
+      "description": "GitHub 仓库整理 - Phase 4 (最终清理)",
+      "category": "automation",
+      "tags": [
+        "automation"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 137
+    },
+    "github-repo-reorganize": {
+      "path": "08-AUTOMATION\\github-sync\\github-repo-reorganize.py",
+      "description": "GitHub 仓库整理脚本",
+      "category": "automation",
+      "tags": [
+        "automation"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 353
+    },
+    "hackernews-collector": {
+      "path": "04-collectors\\hackernews-collector.py",
+      "description": "Hacker News Collector",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 129
+    },
+    "hn-watcher": {
+      "path": "04-collectors\\hn-watcher.py",
+      "description": "HackerNews Watcher v1",
+      "category": "collector",
+      "tags": [
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 152
+    },
+    "medium-rss-collector-jina": {
+      "path": "04-collectors\\medium-rss-collector-jina.py",
+      "description": "CREATE TABLE IF NOT EXISTS seen (",
+      "category": "collector",
+      "tags": [
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 200
+    },
+    "reddit-monitor": {
+      "path": "04-collectors\\reddit-monitor.py",
+      "description": "Reddit AI/ML Monitor (RSS version)",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "monitor"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 277
+    },
+    "reddit-watcher-mock": {
+      "path": "04-collectors\\reddit-watcher-mock.py",
+      "description": "Reddit Watcher v1 - 模拟数据版本",
+      "category": "collector",
+      "tags": [
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 131
+    },
+    "reddit-watcher": {
+      "path": "04-collectors\\reddit-watcher.py",
+      "description": "Reddit Watcher v1",
+      "category": "collector",
+      "tags": [
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 253
+    },
+    "twitter-watcher": {
+      "path": "04-collectors\\twitter-watcher.py",
+      "description": "Twitter Watcher v1",
+      "category": "collector",
+      "tags": [
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 131
+    },
+    "ai-contribution-extractor": {
+      "path": "05-AI-RESEARCH\\ai-contribution-extractor.py",
+      "description": "AI 核心贡献提取器",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 224
+    },
+    "auto-report-generator": {
+      "path": "05-AI-RESEARCH\\auto-report-generator.py",
+      "description": "Auto Report Generator v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 90
+    },
+    "auto-survey-generator": {
+      "path": "05-AI-RESEARCH\\auto-survey-generator.py",
+      "description": "Auto Survey Generator v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 90
+    },
+    "auto-tagger": {
+      "path": "05-AI-RESEARCH\\auto-tagger.py",
+      "description": "Auto Tagger - 自动标签系统",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 369
+    },
+    "autotool_selector": {
+      "path": "05-AI-RESEARCH\\autotool_selector.py",
+      "description": "AutoTool: Efficient Tool Selection for LLM Agents",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 377
+    },
+    "batch-processor-optimized": {
+      "path": "05-AI-RESEARCH\\batch-processor-optimized.py",
+      "description": "Batch Processor with Context Compression + Streaming Output",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 351
+    },
+    "batch-processor-realtime": {
+      "path": "05-AI-RESEARCH\\batch-processor-realtime.py",
+      "description": "Batch Processor with Real sessions_spawn Integration",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 431
+    },
+    "cache-mechanism": {
+      "path": "05-AI-RESEARCH\\cache-mechanism.py",
+      "description": "Cache Mechanism v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 159
+    },
+    "collaboration-network": {
+      "path": "05-AI-RESEARCH\\collaboration-network.py",
+      "description": "Collaboration Network Builder v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 145
+    },
+    "collaboration-recommender": {
+      "path": "05-AI-RESEARCH\\collaboration-recommender.py",
+      "description": "Collaboration Recommender v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 104
+    },
+    "context-compressor": {
+      "path": "05-AI-RESEARCH\\context-compressor.py",
+      "description": "Context Compressor - 上下文压缩工具",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 133
+    },
+    "data-quality-checker": {
+      "path": "05-AI-RESEARCH\\data-quality-checker.py",
+      "description": "Data Quality Checker v1",
+      "category": "research",
+      "tags": [
+        "research",
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 142
+    },
+    "flare_memory_integration": {
+      "path": "05-AI-RESEARCH\\flare_memory_integration.py",
+      "description": "AI Agent Research Integration Module",
+      "category": "research",
+      "tags": [
+        "research",
+        "memory"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 127
+    },
+    "flare_planner": {
+      "path": "05-AI-RESEARCH\\flare_planner.py",
+      "description": "FLARE Planner: Future-Aware Lookahead with Reward Estimation",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 654
+    },
+    "generate-stats": {
+      "path": "05-AI-RESEARCH\\generate-stats.py",
+      "description": "Research Statistics Generator",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 83
+    },
+    "himac_executor": {
+      "path": "05-AI-RESEARCH\\himac_executor.py",
+      "description": "HiMAC: Hierarchical Macro-Micro Learning Executor",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 446
+    },
+    "himac_workflow_integration": {
+      "path": "05-AI-RESEARCH\\himac_workflow_integration.py",
+      "description": "HiMAC Workflow Integration for OpenClaw",
+      "category": "research",
+      "tags": [
+        "research",
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 160
+    },
+    "knowledge-optimizer": {
+      "path": "05-AI-RESEARCH\\knowledge-optimizer.py",
+      "description": "知识分布优化器",
+      "category": "research",
+      "tags": [
+        "research",
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 171
+    },
+    "knowledge-qa-system": {
+      "path": "05-AI-RESEARCH\\knowledge-qa-system.py",
+      "description": "Knowledge QA System v1",
+      "category": "research",
+      "tags": [
+        "research",
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 68
+    },
+    "paper-classifier": {
+      "path": "05-AI-RESEARCH\\paper-classifier.py",
+      "description": "Paper Classification and Annotation",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 207
+    },
+    "paper-comparator": {
+      "path": "05-AI-RESEARCH\\paper-comparator.py",
+      "description": "Paper Comparator - 论文对比分析",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 351
+    },
+    "paper-quality-scorer": {
+      "path": "05-AI-RESEARCH\\paper-quality-scorer.py",
+      "description": "Paper Quality Scorer v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 208
+    },
+    "pdf-downloader": {
+      "path": "05-AI-RESEARCH\\pdf-downloader.py",
+      "description": "PDF 批量下载器",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 137
+    },
+    "pdf-metadata-extractor": {
+      "path": "05-AI-RESEARCH\\pdf-metadata-extractor.py",
+      "description": "PDF 元数据提取器",
+      "category": "research",
+      "tags": [
+        "research",
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 128
+    },
+    "performance-benchmark": {
+      "path": "05-AI-RESEARCH\\performance-benchmark.py",
+      "description": "Performance Benchmark v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 130
+    },
+    "performance-optimizer": {
+      "path": "05-AI-RESEARCH\\performance-optimizer.py",
+      "description": "Performance Optimizer v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 115
+    },
+    "performance_optimization": {
+      "path": "05-AI-RESEARCH\\performance_optimization.py",
+      "description": "Performance Optimization",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 119
+    },
+    "pnote-auto-fill": {
+      "path": "05-AI-RESEARCH\\pnote-auto-fill.py",
+      "description": "P-Note 自动填充主流程",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 60
+    },
+    "report-generator": {
+      "path": "07-DATA\\report-generator.py",
+      "description": "Report Generator - 研究报告自动生成",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 179
+    },
+    "research-doc-generator": {
+      "path": "05-AI-RESEARCH\\research-doc-generator.py",
+      "description": "Research Documentation Generator",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 137
+    },
+    "research-question-discovery": {
+      "path": "05-AI-RESEARCH\\research-question-discovery.py",
+      "description": "Research Question Discovery v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 202
+    },
+    "research-stats": {
+      "path": "05-AI-RESEARCH\\research-stats.py",
+      "description": "Research Statistics Dashboard - 研究统计看板",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 277
+    },
+    "research_workflow_cli": {
+      "path": "05-AI-RESEARCH\\research_workflow_cli.py",
+      "description": "Research Workflow CLI - AI Agent 研究工作流 v2.0",
+      "category": "research",
+      "tags": [
+        "research",
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 199
+    },
+    "research_workflow_v2": {
+      "path": "05-AI-RESEARCH\\research_workflow_v2.py",
+      "description": "Research Workflow v2.0 - with FLARE + MEMORA + HiMAC",
+      "category": "research",
+      "tags": [
+        "research",
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 206
+    },
+    "sync-arxiv-papers": {
+      "path": "05-AI-RESEARCH\\sync-arxiv-papers.py",
+      "description": "ArXiv Papers Sync for Research",
+      "category": "research",
+      "tags": [
+        "research",
+        "arxiv"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 60
+    },
+    "task-monitor": {
+      "path": "05-AI-RESEARCH\\task-monitor.py",
+      "description": "Task Monitor v1",
+      "category": "research",
+      "tags": [
+        "research",
+        "monitor"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 127
+    },
+    "tech-trend-predictor": {
+      "path": "05-AI-RESEARCH\\tech-trend-predictor.py",
+      "description": "Tech Trend Predictor v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 114
+    },
+    "topic-clusterer": {
+      "path": "05-AI-RESEARCH\\topic-clusterer.py",
+      "description": "Topic Clustering (Level 4)",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 148
+    },
+    "trend-analyzer": {
+      "path": "05-AI-RESEARCH\\trend-analyzer.py",
+      "description": "Trend Analysis (Level 3)",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 177
+    },
+    "update-progress": {
+      "path": "05-AI-RESEARCH\\update-progress.py",
+      "description": "Research Progress Update",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 62
+    },
+    "user-authentication": {
+      "path": "05-AI-RESEARCH\\user-authentication.py",
+      "description": "User Authentication System v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 175
+    },
+    "enhanced_monitoring": {
+      "path": "06-MONITORING\\enhanced_monitoring.py",
+      "description": "Enhanced Monitoring System",
+      "category": "monitor",
+      "tags": [
+        "monitor"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 347
+    },
+    "monitoring-system": {
+      "path": "06-MONITORING\\monitoring-system.py",
+      "description": "Monitoring & Alerting System",
+      "category": "monitor",
+      "tags": [
+        "monitor"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 201
+    },
+    "api-gateway": {
+      "path": "07-DATA\\api-gateway.py",
+      "description": "API Gateway Service with Authentication",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 276
+    },
+    "auto-kg-builder": {
+      "path": "07-DATA\\auto-kg-builder.py",
+      "description": "Auto Knowledge Graph Builder - 知识图谱自动构建器",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 384
+    },
+    "automated-research-workflow": {
+      "path": "07-DATA\\automated-research-workflow.py",
+      "description": "Automated Materials Research Workflow v1",
+      "category": "data",
+      "tags": [
+        "data",
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 211
+    },
+    "cgcnn-model": {
+      "path": "07-DATA\\cgcnn-model.py",
+      "description": "CGCNN Model - CPU Optimized Version",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 436
+    },
+    "cif-parser": {
+      "path": "07-DATA\\cif-parser.py",
+      "description": "CIF Parser v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 171
+    },
+    "conditional-vae": {
+      "path": "07-DATA\\conditional-vae.py",
+      "description": "Conditional VAE - CPU Optimized",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 628
+    },
+    "crystal-structure-extractor": {
+      "path": "07-DATA\\crystal-structure-extractor.py",
+      "description": "Crystal Structure Extractor - 晶体结构提取器",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 512
+    },
+    "data-analyzer": {
+      "path": "07-DATA\\data-analyzer.py",
+      "description": "Data Analyzer - 数据分析助手",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 212
+    },
+    "data-lake-manager": {
+      "path": "07-DATA\\data-lake-manager.py",
+      "description": "Data Lake Management",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 182
+    },
+    "experiment-designer": {
+      "path": "07-DATA\\experiment-designer.py",
+      "description": "Experiment Designer - 实验设计助手",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 159
+    },
+    "inverse-design-ui": {
+      "path": "07-DATA\\inverse-design-ui.py",
+      "description": "Inverse Design Web UI - Streamlit",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 143
+    },
+    "main": {
+      "path": "stock_pro\\main.py",
+      "description": "Stock PRO v20.0 - Modular Stock Analysis Tool",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 912
+    },
+    "materials-api-service-v2": {
+      "path": "07-DATA\\materials-api-service-v2.py",
+      "description": "Materials API Service v2 - Extended",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 238
+    },
+    "materials-api-service": {
+      "path": "07-DATA\\materials-api-service.py",
+      "description": "Materials API Service v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 144
+    },
+    "materials-cli": {
+      "path": "07-DATA\\materials-cli.py",
+      "description": "Materials CLI Tool v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 165
+    },
+    "materials-collector": {
+      "path": "07-DATA\\materials-collector.py",
+      "description": "Materials Science Collector v1",
+      "category": "data",
+      "tags": [
+        "data",
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 117
+    },
+    "materials-database": {
+      "path": "07-DATA\\materials-database.py",
+      "description": "Materials Database v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 198
+    },
+    "materials-deep-research": {
+      "path": "07-DATA\\materials-deep-research.py",
+      "description": "Materials Deep Research v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 430
+    },
+    "materials-knowledge-graph": {
+      "path": "07-DATA\\materials-knowledge-graph.py",
+      "description": "Materials Knowledge Graph Builder v1",
+      "category": "data",
+      "tags": [
+        "data",
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 159
+    },
+    "materials-ner-model": {
+      "path": "07-DATA\\materials-ner-model.py",
+      "description": "Materials NER Model - 材料学论文命名实体识别",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 480
+    },
+    "materials-project-api": {
+      "path": "07-DATA\\materials-project-api.py",
+      "description": "Materials Project API Client v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 100
+    },
+    "materials-property-prediction": {
+      "path": "07-DATA\\materials-property-prediction.py",
+      "description": "Materials Property Prediction v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 101
+    },
+    "materials-system-integration": {
+      "path": "07-DATA\\materials-system-integration.py",
+      "description": "Materials System Integration v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 149
+    },
+    "materials-testing": {
+      "path": "07-DATA\\materials-testing.py",
+      "description": "Materials Testing Suite v1",
+      "category": "data",
+      "tags": [
+        "data",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 131
+    },
+    "materials-web-dashboard": {
+      "path": "07-DATA\\materials-web-dashboard.py",
+      "description": "Materials Web Dashboard Generator v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 73
+    },
+    "megnet-model": {
+      "path": "07-DATA\\megnet-model.py",
+      "description": "MEGNet Model - CPU Optimized Version",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 422
+    },
+    "model-serving": {
+      "path": "07-DATA\\model-serving.py",
+      "description": "Model Serving - CPU Optimized",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 387
+    },
+    "multiobjective-optimizer": {
+      "path": "07-DATA\\multiobjective-optimizer.py",
+      "description": "Multi-Objective Optimizer - CPU Optimized",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 601
+    },
+    "multitask-model": {
+      "path": "07-DATA\\multitask-model.py",
+      "description": "Multi-Task Learning Model - CPU Optimized",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 436
+    },
+    "paper-recommender": {
+      "path": "07-DATA\\paper-recommender.py",
+      "description": "Paper Recommender - 文献推荐系统",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 172
+    },
+    "practical-test-full": {
+      "path": "07-DATA\\practical-test-full.py",
+      "description": "Phase 12 - Practical Test",
+      "category": "data",
+      "tags": [
+        "data",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 285
+    },
+    "practical_test": {
+      "path": "07-DATA\\practical_test.py",
+      "description": "Phase 12 - Practical Test",
+      "category": "data",
+      "tags": [
+        "data",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 249
+    },
+    "property-data-extractor": {
+      "path": "07-DATA\\property-data-extractor.py",
+      "description": "Property Data Extractor - 性能数据提取器",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 411
+    },
+    "question-generator": {
+      "path": "07-DATA\\question-generator.py",
+      "description": "Research Question Generator - 研究问题生成器",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 160
+    },
+    "rl-optimizer": {
+      "path": "07-DATA\\rl-optimizer.py",
+      "description": "RL Optimizer - CPU Optimized",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 604
+    },
+    "synthesis-condition-extractor": {
+      "path": "07-DATA\\synthesis-condition-extractor.py",
+      "description": "Synthesis Condition Extractor - 合成条件提取器",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 494
+    },
+    "synthesis-pathway-recommender": {
+      "path": "07-DATA\\synthesis-pathway-recommender.py",
+      "description": "Synthesis Pathway Recommender v1",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 131
+    },
+    "test_api": {
+      "path": "07-DATA\\test_api.py",
+      "description": "!/usr/bin/env python3",
+      "category": "data",
+      "tags": [
+        "data",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 52
+    },
+    "test_api_performance": {
+      "path": "07-DATA\\test_api_performance.py",
+      "description": "API 性能测试脚本",
+      "category": "data",
+      "tags": [
+        "data",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 250
+    },
+    "uncertainty-quantifier": {
+      "path": "07-DATA\\uncertainty-quantifier.py",
+      "description": "Uncertainty Quantification - CPU Optimized",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 544
+    },
+    "vae-model": {
+      "path": "07-DATA\\vae-model.py",
+      "description": "VAE (Variational Autoencoder) - CPU Optimized",
+      "category": "data",
+      "tags": [
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 546
+    },
+    "test-extended-api": {
+      "path": "09-TESTS\\test-extended-api.py",
+      "description": "Test Extended API",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 71
+    },
+    "test-materials-api": {
+      "path": "09-TESTS\\test-materials-api.py",
+      "description": "Materials API Tests",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 213
+    },
+    "test-materials-database": {
+      "path": "09-TESTS\\test-materials-database.py",
+      "description": "Materials Database Tests",
+      "category": "test",
+      "tags": [
+        "test",
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 131
+    },
+    "test-mcp-tools": {
+      "path": "09-TESTS\\test-mcp-tools.py",
+      "description": "MCP 工具调用测试脚本",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 46
+    },
+    "test-mongodb": {
+      "path": "09-TESTS\\test-mongodb.py",
+      "description": "MongoDB Connection Test",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 75
+    },
+    "test-mp-api": {
+      "path": "09-TESTS\\test-mp-api.py",
+      "description": "Test Materials Project API",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 65
+    },
+    "test_memory_distillation_v2": {
+      "path": "92-tests\\test_memory_distillation_v2.py",
+      "description": "Memory Distillation System v2.0 - Test Suite",
+      "category": "memory",
+      "tags": [
+        "memory",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 506
+    },
+    "alignment_calculator": {
+      "path": "intent-belief-integration\\alignment_calculator.py",
+      "description": "意图 - 信念对齐度计算",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 201
+    },
+    "belief_executor": {
+      "path": "intent-belief-integration\\belief_executor.py",
+      "description": "信念感知执行器 - 实现早退逻辑",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 256
+    },
+    "early_exit": {
+      "path": "early_exit_framework\\early_exit.py",
+      "description": "Generic Early Exit Framework",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 243
+    },
+    "examples": {
+      "path": "intent-belief-integration\\examples.py",
+      "description": "intentkit 集成示例项目",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 255
+    },
+    "feedback-loop": {
+      "path": "feedback\\feedback-loop.py",
+      "description": "Feedback Loop System",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 198
+    },
+    "intent_schema": {
+      "path": "intent-belief-integration\\intent_schema.py",
+      "description": "意图 Schema 扩展 - 支持信念探针集成",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 256
+    },
+    "quality-controller": {
+      "path": "level-0\\quality-controller.py",
+      "description": "Level 0: Quality Control",
+      "category": "utils",
+      "tags": [
+        "utils"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 292
+    },
+    "test_integration": {
+      "path": "intent-belief-integration\\test_integration.py",
+      "description": "intentkit 真实环境集成测试",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 362
+    },
+    "test_simple": {
+      "path": "intent-belief-integration\\test_simple.py",
+      "description": "intentkit 集成测试 - 简化版",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 138
+    },
+    "cron_notification": {
+      "path": "feishu-tools\\cron_notification.py",
+      "description": "Cron Task Notification Hook for Feishu",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 147
+    },
+    "daily-report": {
+      "path": "feishu-tools\\daily-report.py",
+      "description": "Daily Report Automation - Feishu",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 182
+    },
+    "feishu_api": {
+      "path": "feishu-tools\\feishu_api.py",
+      "description": "Feishu API Client - OpenClaw Integration",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 491
+    },
+    "feishu_api_enhanced": {
+      "path": "feishu-tools\\feishu_api_enhanced.py",
+      "description": "Feishu API Client - Enhanced Version",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 953
+    },
+    "feishu_webhook_filter": {
+      "path": "feishu-tools\\feishu_webhook_filter.py",
+      "description": "Feishu Webhook Event Filter - Filter unwanted events",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 284
+    },
+    "notify-integration": {
+      "path": "feishu-tools\\notify-integration.py",
+      "description": "[Innovator Dashboard Integrated!]",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 30
+    },
+    "notify-phase1": {
+      "path": "feishu-tools\\notify-phase1.py",
+      "description": "Phase 1 Completion Notification",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 86
+    },
+    "notify-security": {
+      "path": "feishu-tools\\notify-security.py",
+      "description": "Security Architecture Notification",
+      "category": "workflow",
+      "tags": [
+        "workflow",
+        "security"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 68
+    },
+    "figure_enhancer": {
+      "path": "01-KNOWLEDGE-CARDS\\figures\\figure_enhancer.py",
+      "description": "图表增强器 - 质量过滤 + 超分辨率",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 187
+    },
+    "quality_filter": {
+      "path": "01-KNOWLEDGE-CARDS\\figures\\quality_filter.py",
+      "description": "图表质量过滤器",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 186
+    },
+    "super_resolution": {
+      "path": "01-KNOWLEDGE-CARDS\\figures\\super_resolution.py",
+      "description": "图像超分辨率增强器",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 135
+    },
+    "test_suite": {
+      "path": "01-KNOWLEDGE-CARDS\\figures\\test_suite.py",
+      "description": "图表质量过滤 + 超分辨率测试套件",
+      "category": "knowledge",
+      "tags": [
+        "knowledge",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 290
+    },
+    "analyze_pdf": {
+      "path": "01-KNOWLEDGE-CARDS\\pdf\\analyze_pdf.py",
+      "description": "!/usr/bin/env python3",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 57
+    },
+    "check_height": {
+      "path": "01-KNOWLEDGE-CARDS\\pdf\\check_height.py",
+      "description": "!/usr/bin/env python3",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 58
+    },
+    "check_layout": {
+      "path": "01-KNOWLEDGE-CARDS\\pdf\\check_layout.py",
+      "description": "!/usr/bin/env python3",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 56
+    },
+    "layoutlm_extractor": {
+      "path": "01-KNOWLEDGE-CARDS\\pdf\\layoutlm_extractor.py",
+      "description": "PDF 布局分析提取器",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 174
+    },
+    "layoutlm_pdf_extractor": {
+      "path": "01-KNOWLEDGE-CARDS\\pdf\\layoutlm_pdf_extractor.py",
+      "description": "LayoutLM-enhanced PDF Extractor v2.0",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 566
+    },
+    "marker_extractor": {
+      "path": "01-KNOWLEDGE-CARDS\\pdf\\marker_extractor.py",
+      "description": "提取 PDF 内容为 Markdown",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 109
+    },
+    "simple_pdf_extractor": {
+      "path": "01-KNOWLEDGE-CARDS\\pdf\\simple_pdf_extractor.py",
+      "description": "简易 PDF 提取器 - 支持双栏检测",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 183
+    },
+    "test_pdf_extractor": {
+      "path": "01-KNOWLEDGE-CARDS\\pdf\\test_pdf_extractor.py",
+      "description": "PDF 提取器测试集验证脚本",
+      "category": "knowledge",
+      "tags": [
+        "knowledge",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 200
+    },
+    "news_alert": {
+      "path": "plugins\\news_alert.py",
+      "description": "NewsAlert Plugin",
+      "category": "workflow",
+      "tags": [
+        "workflow",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 23
+    },
+    "stock_checker": {
+      "path": "plugins\\stock_checker.py",
+      "description": "StockChecker Plugin",
+      "category": "workflow",
+      "tags": [
+        "workflow",
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 23
+    },
+    "advanced_metrics": {
+      "path": "stock_pro\\advanced_metrics.py",
+      "description": "Advanced Metrics - Enhanced financial analysis",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 152
+    },
+    "alerts": {
+      "path": "stock_pro\\alerts.py",
+      "description": "Alert management for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 162
+    },
+    "api": {
+      "path": "stock_pro\\api.py",
+      "description": "REST API server for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 115
+    },
+    "backtest": {
+      "path": "stock_pro\\backtest.py",
+      "description": "Backtesting Module - Historical strategy testing",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 173
+    },
+    "benchmark": {
+      "path": "01-KNOWLEDGE-CARDS\\tests\\benchmark.py",
+      "description": "知识卡片生成器性能基准测试",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 285
+    },
+    "big_test": {
+      "path": "stock_pro\\big_test.py",
+      "description": "Python tool",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 1
+    },
+    "build_ui": {
+      "path": "stock_pro\\build_ui.py",
+      "description": "Build the complete simple_ui.py file",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 156
+    },
+    "cache": {
+      "path": "stock_pro\\cache.py",
+      "description": "Cache system for Stock PRO v12.5 - Optimized",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 137
+    },
+    "charts": {
+      "path": "stock_pro\\charts.py",
+      "description": "Stock PRO Chart Module - Generate trading charts",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 137
+    },
+    "check_jin10_detail": {
+      "path": "stock_pro\\check_jin10_detail.py",
+      "description": "Check a flash news detail page",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 42
+    },
+    "check_jin10_flash": {
+      "path": "stock_pro\\check_jin10_flash.py",
+      "description": "Check flash.jin10.com for RSS/API",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 79
+    },
+    "check_jin10_flash_page": {
+      "path": "stock_pro\\check_jin10_flash_page.py",
+      "description": "Check the main flash.jin10.com page",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 51
+    },
+    "check_jin10_free_api": {
+      "path": "stock_pro\\check_jin10_free_api.py",
+      "description": "Try different API approaches",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 63
+    },
+    "check_jin10_subdomains": {
+      "path": "stock_pro\\check_jin10_subdomains.py",
+      "description": "Check news.jin10.com",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 46
+    },
+    "compare": {
+      "path": "stock_pro\\compare.py",
+      "description": "Stock Comparison Tool - Compare multiple stocks side by side",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 177
+    },
+    "config": {
+      "path": "stock_pro\\config.py",
+      "description": "Configuration and caching utilities",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 58
+    },
+    "core": {
+      "path": "stock_pro\\core.py",
+      "description": "Core stock analysis engine - Optimized v12.8",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 480
+    },
+    "correlation": {
+      "path": "stock_pro\\correlation.py",
+      "description": "Correlation analysis for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 164
+    },
+    "cron": {
+      "path": "stock_pro\\cron.py",
+      "description": "Cron scheduler for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 152
+    },
+    "dashboard": {
+      "path": "stock_pro\\dashboard.py",
+      "description": "Dashboard - Real-time monitoring dashboard",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 85
+    },
+    "dash_app": {
+      "path": "stock_pro\\dash_app.py",
+      "description": "Stock PRO Dashboard v2.2 - Enhanced UI with Performance Optimizations",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 729
+    },
+    "dash_app_v3": {
+      "path": "stock_pro\\dash_app_v3.py",
+      "description": "Stock PRO Dashboard v3.0 - Modern UI/UX Optimized",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 786
+    },
+    "data_financial": {
+      "path": "stock_pro\\data_financial.py",
+      "description": "Stock financials: (gm, pm, roe, roic, de, rev_g, fcf, div)",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 2
+    },
+    "data_price": {
+      "path": "stock_pro\\data_price.py",
+      "description": "Stock prices",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 4
+    },
+    "data_target": {
+      "path": "stock_pro\\data_target.py",
+      "description": "Stock targets: (target, rating, num_analysts)",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 2
+    },
+    "dividend_analysis": {
+      "path": "stock_pro\\dividend_analysis.py",
+      "description": "Dividend Analysis Module - Dividend safety and growth analysis",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "analysis"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 146
+    },
+    "earnings_analysis": {
+      "path": "stock_pro\\earnings_analysis.py",
+      "description": "Earnings Analysis Module - Earnings forecast and beat prediction",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "analysis"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 121
+    },
+    "exporters": {
+      "path": "stock_pro\\exporters.py",
+      "description": "Enhanced Export Module - Multiple format exporters",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 151
+    },
+    "fast_news": {
+      "path": "stock_pro\\fast_news.py",
+      "description": "Fast News v1.0 - Async RSS + Article Content (Windows compatible)",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 249
+    },
+    "fetch_jin10_flash_news": {
+      "path": "stock_pro\\fetch_jin10_flash_news.py",
+      "description": "Detail IDs from flash.jin10.com",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 80
+    },
+    "fscore": {
+      "path": "stock_pro\\fscore.py",
+      "description": "Piotroski F-Score Module - Financial strength assessment",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 136
+    },
+    "history": {
+      "path": "stock_pro\\history.py",
+      "description": "History tracking for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 130
+    },
+    "insights": {
+      "path": "stock_pro\\insights.py",
+      "description": "Portfolio Insights - AI-powered portfolio insights",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 113
+    },
+    "install_dash": {
+      "path": "stock_pro\\install_dash.py",
+      "description": "Install Dash for Stock PRO UI",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 31
+    },
+    "integrations": {
+      "path": "stock_pro\\integrations.py",
+      "description": "Integration utilities: CSV, Excel, Dashboard, Charts",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 114
+    },
+    "market": {
+      "path": "stock_pro\\market.py",
+      "description": "Market Overview - Market-wide analysis and trends",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 131
+    },
+    "news_api": {
+      "path": "stock_pro\\news_api.py",
+      "description": "News API - Real-time news from local cache",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 111
+    },
+    "news_collector": {
+      "path": "stock_pro\\news_collector.py",
+      "description": "News Collector v1.0 - SQLite backed real-time news",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "news",
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 76
+    },
+    "optimizer": {
+      "path": "stock_pro\\optimizer.py",
+      "description": "Portfolio Optimizer - Modern Portfolio Theory",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 168
+    },
+    "pdf_export": {
+      "path": "stock_pro\\pdf_export.py",
+      "description": "PDF export module for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 143
+    },
+    "performance": {
+      "path": "stock_pro\\performance.py",
+      "description": "Performance metrics for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 187
+    },
+    "picks": {
+      "path": "stock_pro\\picks.py",
+      "description": "Quick stock picks - Fast screening",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 138
+    },
+    "portfolio": {
+      "path": "stock_pro\\portfolio.py",
+      "description": "Portfolio management",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 74
+    },
+    "realtime_news": {
+      "path": "stock_pro\\realtime_news.py",
+      "description": "Realtime News v3.0 - Full content, no rate limits",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 237
+    },
+    "rebuild": {
+      "path": "stock_pro\\rebuild.py",
+      "description": "Rebuild simple_ui.py from scratch",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 133
+    },
+    "reports": {
+      "path": "stock_pro\\reports.py",
+      "description": "Report generation",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 77
+    },
+    "report_builder": {
+      "path": "stock_pro\\report_builder.py",
+      "description": "Report Builder - Create custom reports with templates",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 149
+    },
+    "risk": {
+      "path": "stock_pro\\risk.py",
+      "description": "Risk analysis for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 149
+    },
+    "rss_news": {
+      "path": "stock_pro\\rss_news.py",
+      "description": "RSS News v1.0 - Unlimited, no rate limits",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "news"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 243
+    },
+    "rss_server": {
+      "path": "stock_pro\\rss_server.py",
+      "description": "RSS Aggregator Server - Your own RSS feeds",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 310
+    },
+    "scoring_v2": {
+      "path": "stock_pro\\scoring_v2.py",
+      "description": "Scoring Engine v2 - Enhanced scoring with multiple models",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 175
+    },
+    "screener": {
+      "path": "stock_pro\\screener.py",
+      "description": "Stock screener - Optimized v12.8",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 59
+    },
+    "screener_v2": {
+      "path": "stock_pro\\screener_v2.py",
+      "description": "Advanced Screener - Multi-factor stock screening",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 186
+    },
+    "sectors": {
+      "path": "stock_pro\\sectors.py",
+      "description": "Sector classification for stocks",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 163
+    },
+    "sector_rotation": {
+      "path": "stock_pro\\sector_rotation.py",
+      "description": "Sector Rotation Analysis - Lightweight version",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 90
+    },
+    "sentiment": {
+      "path": "stock_pro\\sentiment.py",
+      "description": "News and Sentiment Analysis + Research Reports + Jin10 News",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 1609
+    },
+    "show_all_rss": {
+      "path": "stock_pro\\show_all_rss.py",
+      "description": "Get all news",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 40
+    },
+    "show_jin10_all": {
+      "path": "stock_pro\\show_jin10_all.py",
+      "description": "Python tool",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 23
+    },
+    "show_jin10_rss": {
+      "path": "stock_pro\\show_jin10_rss.py",
+      "description": "Python tool",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 22
+    },
+    "simple_ui": {
+      "path": "stock_pro\\simple_ui.py",
+      "description": "Stock PRO Simple UI v2.0",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 41
+    },
+    "start_ui": {
+      "path": "stock_pro\\start_ui.py",
+      "description": "Stock PRO UI Launcher",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 78
+    },
+    "sync": {
+      "path": "stock_pro\\sync.py",
+      "description": "Data sync module for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 109
+    },
+    "technical": {
+      "path": "stock_pro\\technical.py",
+      "description": "Technical Analysis Module - Chart patterns and indicators",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 244
+    },
+    "test": {
+      "path": "stock_pro\\test.py",
+      "description": "Stock PRO v12.0 - Test Suite",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 88
+    },
+    "test_all": {
+      "path": "stock_pro\\test_all.py",
+      "description": "Stock PRO v12.9 - Full Module Test",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 67
+    },
+    "test_new_jin10": {
+      "path": "stock_pro\\test_new_jin10.py",
+      "description": "Python tool",
+      "category": "stock",
+      "tags": [
+        "stock",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 19
+    },
+    "ui_components": {
+      "path": "stock_pro\\ui_components.py",
+      "description": "Stock PRO UI Components v3.0",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 454
+    },
+    "validator": {
+      "path": "stock_pro\\validator.py",
+      "description": "Data validation for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 155
+    },
+    "watchlist_v2": {
+      "path": "stock_pro\\watchlist_v2.py",
+      "description": "Watchlist Manager v2 - Enhanced watchlist with alerts and tracking",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 205
+    },
+    "webhook": {
+      "path": "stock_pro\\webhook.py",
+      "description": "Webhook notifications for Stock PRO",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 99
+    },
+    "yfinance_wrapper": {
+      "path": "stock_pro\\yfinance_wrapper.py",
+      "description": "yfinance wrapper for live data",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 52
+    },
+    "__init__": {
+      "path": "stock_pro\\__init__.py",
+      "description": "Stock PRO - Modular Stock Analysis Tool v14.0",
+      "category": "stock",
+      "tags": [
+        "stock"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 125
+    },
+    "test_multimodal_kg": {
+      "path": "multimodal-kg\\tests\\test_multimodal_kg.py",
+      "description": "多模态知识图谱单元测试套件",
+      "category": "knowledge",
+      "tags": [
+        "knowledge",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 316
+    },
+    "dump_cognitive": {
+      "path": "15-COGNITIVE-SYSTEM\\debug\\dump_cognitive.py",
+      "description": "Find cognitive skill tree files",
+      "category": "memory",
+      "tags": [
+        "memory"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 26
+    },
+    "read_cognitive_system": {
+      "path": "15-COGNITIVE-SYSTEM\\debug\\read_cognitive_system.py",
+      "description": "Read the cognitive skill tree file (index 2 or 3 based on earlier output)",
+      "category": "memory",
+      "tags": [
+        "memory"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 19
+    },
+    "plugin_marketplace": {
+      "path": "14-PLUGIN\\marketplace\\plugin_marketplace.py",
+      "description": "Plugin Marketplace",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 140
+    },
+    "security_hardening": {
+      "path": "13-SECURITY\\scripts\\security_hardening.py",
+      "description": "Security Hardening",
+      "category": "security",
+      "tags": [
+        "security"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 180
+    },
+    "rename-knowledge-cards-v2": {
+      "path": "12-KNOWLEDGE-MANAGEMENT\\rename\\rename-knowledge-cards-v2.py",
+      "description": "60-knowledge-cards 文件夹规范化 - 按序号重命名",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 57
+    },
+    "rename-knowledge-cards": {
+      "path": "12-KNOWLEDGE-MANAGEMENT\\rename\\rename-knowledge-cards.py",
+      "description": "60-knowledge-cards 文件夹规范化 - 中文→英文",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 60
+    },
+    "check_word_count": {
+      "path": "11-NOVEL-WRITING\\analysis\\check_word_count.py",
+      "description": "Chapter Word Count Checker",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 153
+    },
+    "detect_ai_style": {
+      "path": "11-NOVEL-WRITING\\analysis\\detect_ai_style.py",
+      "description": "AI Writing Style Detector (Optimized Version)",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 296
+    },
+    "difficulty-evaluator": {
+      "path": "11-NOVEL-WRITING\\analysis\\difficulty-evaluator.py",
+      "description": "Difficulty Evaluator - 问题难度评估器",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 243
+    },
+    "optimize_ai_rate": {
+      "path": "11-NOVEL-WRITING\\analysis\\optimize_ai_rate.py",
+      "description": "粉笔灰在阳光里飘着，像雪。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 94
+    },
+    "track_writing_progress": {
+      "path": "11-NOVEL-WRITING\\analysis\\track_writing_progress.py",
+      "description": "Writing Progress Tracker",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 123
+    },
+    "deep_optimize_chapter4": {
+      "path": "11-NOVEL-WRITING\\chapters\\deep_optimize_chapter4.py",
+      "description": "---",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 65
+    },
+    "enhance_chapters_2_3": {
+      "path": "11-NOVEL-WRITING\\chapters\\enhance_chapters_2_3.py",
+      "description": "---",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 84
+    },
+    "expand_chapter10": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter10.py",
+      "description": "林砚深吸一口气。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 130
+    },
+    "expand_chapter11": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter11.py",
+      "description": "前桌的王雨薇，转过身来。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 124
+    },
+    "expand_chapter12": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter12.py",
+      "description": "她想起三个月前。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 182
+    },
+    "expand_chapter13": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter13.py",
+      "description": "洗漱完毕，走到客厅。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 200
+    },
+    "expand_chapter14": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter14.py",
+      "description": "穿上衣服，走到客厅。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 228
+    },
+    "expand_chapter15": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter15.py",
+      "description": "早自习结束，林砚还在想江越的话。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 220
+    },
+    "expand_chapter16": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter16.py",
+      "description": "早上六点，闹钟响了。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 214
+    },
+    "expand_chapter17": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter17.py",
+      "description": "早上六点，林砚起床。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 182
+    },
+    "expand_chapter18": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter18.py",
+      "description": "洗漱完毕，走到客厅。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 186
+    },
+    "expand_chapter19": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter19.py",
+      "description": "母亲走进来。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 232
+    },
+    "expand_chapter20": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter20.py",
+      "description": "走到教室门口，林砚停住了。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 302
+    },
+    "expand_chapter21": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter21.py",
+      "description": "早上六点，林砚起床。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 204
+    },
+    "expand_chapter22": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter22.py",
+      "description": "早上六点，林砚起床。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 188
+    },
+    "expand_chapter23": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter23.py",
+      "description": "早上六点，林砚起床。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 220
+    },
+    "expand_chapter24": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter24.py",
+      "description": "早上六点，林砚起床。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 216
+    },
+    "expand_chapter25": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter25.py",
+      "description": "早上六点，林砚起床。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 216
+    },
+    "expand_chapter5": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter5.py",
+      "description": "---",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 32
+    },
+    "expand_chapter5_final": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter5_final.py",
+      "description": "他想起今天发生的每一件事。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 49
+    },
+    "expand_chapter6": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter6.py",
+      "description": "母亲在对面坐下，又开始发呆。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 84
+    },
+    "expand_chapter7": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter7.py",
+      "description": "他把卷子摊开在桌上。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 128
+    },
+    "expand_chapter7_final": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter7_final.py",
+      "description": "---",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 52
+    },
+    "expand_chapter8": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter8.py",
+      "description": "林砚不说话了。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 140
+    },
+    "expand_chapter9": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapter9.py",
+      "description": "他想起一个月前。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 130
+    },
+    "expand_chapters": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapters.py",
+      "description": "扩展小说章节字数 - 使用索引访问",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 90
+    },
+    "expand_chapters_5_6": {
+      "path": "11-NOVEL-WRITING\\chapters\\expand_chapters_5_6.py",
+      "description": "---",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 155
+    },
+    "manage_chapters": {
+      "path": "11-NOVEL-WRITING\\chapters\\manage_chapters.py",
+      "description": "Chapter Manager",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 173
+    },
+    "optimize_chapter3": {
+      "path": "11-NOVEL-WRITING\\chapters\\optimize_chapter3.py",
+      "description": "粉笔灰在阳光里飘着，像雪。",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 33
+    },
+    "optimize_chapter7": {
+      "path": "11-NOVEL-WRITING\\chapters\\optimize_chapter7.py",
+      "description": "---",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 67
+    },
+    "track_foreshadowing": {
+      "path": "11-NOVEL-WRITING\\foreshadowing\\track_foreshadowing.py",
+      "description": "Foreshadowing Tracker",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 162
+    },
+    "fix_chapter5_count": {
+      "path": "11-NOVEL-WRITING\\utils\\fix_chapter5_count.py",
+      "description": "**字数统计:** 约 3050 字 ✅",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 22
+    },
+    "read_chapter": {
+      "path": "11-NOVEL-WRITING\\utils\\read_chapter.py",
+      "description": "Try different encodings",
+      "category": "novel",
+      "tags": [
+        "novel"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 21
+    },
+    "domain_ranker": {
+      "path": "10-DOMAIN-RANKING\\core\\domain_ranker.py",
+      "description": "学科学术段位评价系统",
+      "category": "analysis",
+      "tags": [
+        "analysis"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 316
+    },
+    "domain_ranker_v2": {
+      "path": "10-DOMAIN-RANKING\\core\\domain_ranker_v2.py",
+      "description": "学科学术段位评价系统 v2.0",
+      "category": "analysis",
+      "tags": [
+        "analysis"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 605
+    },
+    "domain_ranking_report": {
+      "path": "10-DOMAIN-RANKING\\reports\\domain_ranking_report.py",
+      "description": "学科学术段位可视化报告生成器",
+      "category": "analysis",
+      "tags": [
+        "analysis"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 325
+    },
+    "check_classical_ratio": {
+      "path": "09-TESTS\\scripts\\check_classical_ratio.py",
+      "description": "Classical/Modern Chinese Ratio Detector",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 109
+    },
+    "check_recent": {
+      "path": "09-TESTS\\scripts\\check_recent.py",
+      "description": "!/usr/bin/env python3",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 41
+    },
+    "check_recent_papers": {
+      "path": "09-TESTS\\scripts\\check_recent_papers.py",
+      "description": "Check recent LIG papers from last 3 days",
+      "category": "test",
+      "tags": [
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 43
+    },
+    "auto-pnote": {
+      "path": "08-AUTOMATION\\auto-pnote\\auto-pnote.py",
+      "description": "P-Note 自动化生成器",
+      "category": "automation",
+      "tags": [
+        "automation"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 249
+    },
+    "setup-scheduled-task": {
+      "path": "08-AUTOMATION\\scheduled-tasks\\setup-scheduled-task.py",
+      "description": "!/usr/bin/env python3",
+      "category": "automation",
+      "tags": [
+        "automation"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 70
+    },
+    "auto_recovery": {
+      "path": "08-AUTOMATION\\scripts\\auto_recovery.py",
+      "description": "Auto Recovery System",
+      "category": "automation",
+      "tags": [
+        "automation"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 252
+    },
+    "organize-reports-folder": {
+      "path": "08-AUTOMATION\\scripts\\organize-reports-folder.py",
+      "description": "21-reports 文件夹整理脚本",
+      "category": "automation",
+      "tags": [
+        "automation"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 163
+    },
+    "organize_workspace": {
+      "path": "08-AUTOMATION\\scripts\\organize_workspace.py",
+      "description": "Workspace 文件整合脚本",
+      "category": "automation",
+      "tags": [
+        "automation"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 308
+    },
+    "test_jina": {
+      "path": "07-DATA\\api\\test_jina.py",
+      "description": "测试 Jina AI 是否能正确解析 Medium RSS",
+      "category": "data",
+      "tags": [
+        "data",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 28
+    },
+    "test_rss": {
+      "path": "07-DATA\\api\\test_rss.py",
+      "description": "Python tool",
+      "category": "data",
+      "tags": [
+        "data",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 15
+    },
+    "domain_data_collector": {
+      "path": "07-DATA\\domain\\domain_data_collector.py",
+      "description": "领域数据自动收集器 v3.0",
+      "category": "data",
+      "tags": [
+        "data",
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 569
+    },
+    "integrate-advanced-skills": {
+      "path": "05-AI-RESEARCH\\integration\\integrate-advanced-skills.py",
+      "description": "高级技能集成脚本 - citation-tracker + batch-processor + pdf-extractor",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 61
+    },
+    "integrate-collectors": {
+      "path": "05-AI-RESEARCH\\integration\\integrate-collectors.py",
+      "description": "技能集成脚本 - arxiv-daily + medium-watcher + memory-distiller",
+      "category": "research",
+      "tags": [
+        "research",
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 328
+    },
+    "multi-agent-executors": {
+      "path": "05-AI-RESEARCH\\multi-agent\\multi-agent-executors.py",
+      "description": "Multi-Agent Executors v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 201
+    },
+    "multi-agent-framework": {
+      "path": "05-AI-RESEARCH\\multi-agent\\multi-agent-framework.py",
+      "description": "Multi-Agent Framework Core v1",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 341
+    },
+    "tdd-debug-agent": {
+      "path": "05-AI-RESEARCH\\tdd\\tdd-debug-agent.py",
+      "description": "TDD 自动化 Debug 流水线",
+      "category": "research",
+      "tags": [
+        "research"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 362
+    },
+    "arxiv_ops_cli": {
+      "path": "04-collectors\\arxiv\\arxiv_ops_cli.py",
+      "description": "arxiv-ops CLI",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "arxiv"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 213
+    },
+    "hn-comment-analyzer": {
+      "path": "04-collectors\\hn\\hn-comment-analyzer.py",
+      "description": "HackerNews Comment Analyzer v1",
+      "category": "collector",
+      "tags": [
+        "collector"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 124
+    },
+    "x-twitter-monitor": {
+      "path": "04-collectors\\x-twitter\\x-twitter-monitor.py",
+      "description": "X/Twitter AI Research Monitor",
+      "category": "collector",
+      "tags": [
+        "collector",
+        "monitor"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 258
+    },
+    "train_lig_stability_model": {
+      "path": "03-LIG-KNOWLEDGE-GRAPH\\ml\\train_lig_stability_model.py",
+      "description": "LIG 稳定性预测模型训练脚本",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 314
+    },
+    "fix-lig-outreach": {
+      "path": "03-LIG-KNOWLEDGE-GRAPH\\scripts\\fix-lig-outreach.py",
+      "description": "修复 LIG 科普笔记命名 - 安全版本",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 44
+    },
+    "lig-collect-industry": {
+      "path": "03-LIG-KNOWLEDGE-GRAPH\\scripts\\lig-collect-industry.py",
+      "description": "LIG 产业数据收集脚本",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 260
+    },
+    "lig-create-outreach": {
+      "path": "03-LIG-KNOWLEDGE-GRAPH\\scripts\\lig-create-outreach.py",
+      "description": "LIG 科普笔记批量创作脚本",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 282
+    },
+    "organize-lig-outreach": {
+      "path": "03-LIG-KNOWLEDGE-GRAPH\\scripts\\organize-lig-outreach.py",
+      "description": "整理 LIG 科普笔记 - 去重 + 统一命名",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 82
+    },
+    "daily-brief": {
+      "path": "02-DAILY-BRIEF\\core\\daily-brief.py",
+      "description": "统计目录中文件数量",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 661
+    },
+    "console-feishu-sync": {
+      "path": "02-DAILY-BRIEF\\feishu\\console-feishu-sync.py",
+      "description": "Console 会话 → 飞书 同步工具",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 223
+    },
+    "feishu-ui-sync": {
+      "path": "02-DAILY-BRIEF\\feishu\\feishu-ui-sync.py",
+      "description": "Feishu ↔ Control UI 消息同步工具",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 294
+    },
+    "process-feishu-queue": {
+      "path": "02-DAILY-BRIEF\\feishu\\process-feishu-queue.py",
+      "description": "记录发送日志",
+      "category": "workflow",
+      "tags": [
+        "workflow"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 105
+    },
+    "error_handler": {
+      "path": "01-KNOWLEDGE-CARDS\\core\\error_handler.py",
+      "description": "错误处理模块 - 知识卡片生成器",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 134
+    },
+    "knowledge-card-generator": {
+      "path": "01-KNOWLEDGE-CARDS\\core\\knowledge-card-generator.py",
+      "description": "参考文献验证器 v2.2 - 支持并发验证、缓存管理、日志",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 1381
+    },
+    "knowledge-card-webui": {
+      "path": "01-KNOWLEDGE-CARDS\\core\\knowledge-card-webui.py",
+      "description": "跟踪 API 调用",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 543
+    },
+    "finetune-formula-model": {
+      "path": "01-KNOWLEDGE-CARDS\\formula\\finetune-formula-model.py",
+      "description": "公式识别模型微调脚本",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 190
+    },
+    "generate_formula_dataset": {
+      "path": "01-KNOWLEDGE-CARDS\\formula\\generate_formula_dataset.py",
+      "description": "复杂公式数据集生成器",
+      "category": "knowledge",
+      "tags": [
+        "knowledge",
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 128
+    },
+    "generate_handwritten_formulas": {
+      "path": "01-KNOWLEDGE-CARDS\\formula\\generate_handwritten_formulas.py",
+      "description": "手写公式数据集生成器",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 121
+    },
+    "prepare-formula-dataset": {
+      "path": "01-KNOWLEDGE-CARDS\\formula\\prepare-formula-dataset.py",
+      "description": "LIG 公式数据集准备脚本",
+      "category": "knowledge",
+      "tags": [
+        "knowledge",
+        "data"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 197
+    },
+    "prepare_complex_formulas": {
+      "path": "01-KNOWLEDGE-CARDS\\formula\\prepare_complex_formulas.py",
+      "description": "复杂公式数据集准备脚本",
+      "category": "knowledge",
+      "tags": [
+        "knowledge"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 53
+    },
+    "collect_test_pdfs": {
+      "path": "01-KNOWLEDGE-CARDS\\tests\\collect_test_pdfs.py",
+      "description": "PDF 测试集收集脚本",
+      "category": "knowledge",
+      "tags": [
+        "knowledge",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 232
+    },
+    "integration_test": {
+      "path": "01-KNOWLEDGE-CARDS\\tests\\integration_test.py",
+      "description": "知识卡片生成器集成测试",
+      "category": "knowledge",
+      "tags": [
+        "knowledge",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 312
+    },
+    "test_knowledge_card_generator": {
+      "path": "01-KNOWLEDGE-CARDS\\tests\\test_knowledge_card_generator.py",
+      "description": "知识卡片生成器单元测试套件",
+      "category": "knowledge",
+      "tags": [
+        "knowledge",
+        "test"
+      ],
+      "created": "2026-03-24",
+      "last_used": "2026-03-24",
+      "use_count": 0,
+      "lines": 405
+    }
+  },
+  "categories": [
+    "analysis",
+    "automation",
+    "collector",
+    "data",
+    "knowledge",
+    "memory",
+    "monitor",
+    "novel",
+    "research",
+    "security",
+    "stock",
+    "test",
+    "utils",
+    "workflow"
+  ],
+  "total_tools": 335,
+  "generated": "2026-03-24T09:58:32.532861",
+  "total_lines": 78671
+}
