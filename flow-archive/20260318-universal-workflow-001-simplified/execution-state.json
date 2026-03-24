@@ -1,36 +1,20 @@
 {
   "flow_id": "20260318-universal-workflow-001-simplified",
-  "task": "\"Push P4 to GitHub\"",
+  "task": "--check",
   "description": "Task started via copaw_entry.py",
-  "started_at": "2026-03-20T17:14:16.382102+08:00",
-  "current_step": 6.1,
+  "started_at": "2026-03-24T00:14:27.664988+08:00",
+  "current_step": 0,
   "total_steps": 5,
-  "status": "initializing",
-  "step_status": {
-    "1": {
-      "name": "上下文加载验证",
-      "status": "completed",
-      "started_at": "2026-03-20T17:14:16.387151+08:00",
-      "completed_at": "2026-03-20T17:14:16.387157+08:00",
-      "result": "验证通过"
-    },
-    "6.1": {
-      "name": "工具调用：safe_shell_executor",
-      "status": "completed",
-      "started_at": "2026-03-20T17:14:24.140580",
-      "completed_at": "2026-03-20T17:14:24.140585",
-      "result": "error"
-    }
-  },
-  "completed_steps": [
-    1,
-    6.1
-  ],
-  "completion_percentage": 40.0,
+  "status": "failed",
+  "step_status": {},
+  "completed_steps": [],
+  "completion_percentage": 0,
   "workflow_compliance": false,
-  "session_id": "session-20260320171416",
+  "session_id": "session-20260324001427",
   "entry_point": "copaw_entry.py",
   "mandatory_execution": true,
-  "signature": "f3c4cbf3fd57bca23141d5fe96fcf2a6a49d86d320cb4ecf07ac1758860adeed",
-  "protection_enabled": true
+  "signature": "287d997b4076fd01917990c963a0e7637d4edd20615737c784b05932a137d918",
+  "protection_enabled": true,
+  "ended_at": "2026-03-24T00:14:27.678091+08:00",
+  "duration_seconds": 0.013103
 }

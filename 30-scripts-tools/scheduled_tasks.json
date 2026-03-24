@@ -1,0 +1,1 @@
+[{"name":"NewsHub","command":"cd D:\OpenClaw\workspace\80-PROJECTS\NewsHub && python push/news_feishu.py digest --limit 6","interval":300,"enabled":true}]  

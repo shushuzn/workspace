@@ -22,9 +22,9 @@
 ### 📝 Text > Brain
 **Tags:** #principle #high
 - "Mental notes" die on session restart. **Files survive.**
-- When I learn something important → write it to `13-memory/`
+- When I learn something important → write it to `10-MEMORY/00-CORE/`
 - When I make a mistake → document it so future-me doesn't repeat it
-- My memory is `13-memory/MEMORY.md` — curated insights
+- My memory is `10-MEMORY/00-CORE/MEMORY.md` — curated insights
 
 ### 🔧 Efficiency > Brute Force
 **Tags:** #principle #system #high

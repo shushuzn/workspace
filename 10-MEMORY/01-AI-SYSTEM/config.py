@@ -7,7 +7,7 @@ from pathlib import Path
 
 # Base paths
 WORKSPACE = Path("D:/OpenClaw/workspace")
-DATA_DIR = WORKSPACE / "ai-memory-system" / "data"
+DATA_DIR = WORKSPACE / "10-MEMORY" / "01-AI-SYSTEM" / "data"
 DATA_DIR.mkdir(parents=True, exist_ok=True)
 
 # Short-term memory config
