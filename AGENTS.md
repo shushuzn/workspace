@@ -31,7 +31,7 @@ py 30-scripts-tools/workflow.py end "完成描述"
 
 1. ✅ **Load only 7 core files** (<100KB)
    - SOUL.md, USER.md, AGENTS.md, TOOLS.md, HEARTBEAT.md
-   - MEMORY.md, 13-memory/YYYY-MM-DD.md (today)
+   - MEMORY.md, 10-MEMORY/00-CORE/YYYY-MM-DD.md (today)
 
 2. ❌ **NEVER scan full workspace** (560MB → 50KB = 11562x faster)
 
