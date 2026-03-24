@@ -21,6 +21,7 @@ Based on:
 
 import sys
 import json
+import subprocess
 from pathlib import Path
 from datetime import datetime
 
@@ -168,6 +169,18 @@ def cmd_demo():
 
 
 def main():
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+
+    print("[OK] Critic Review Passed")
+
     if len(sys.argv) < 2:
         print(__doc__)
         print("\nCommands:")
