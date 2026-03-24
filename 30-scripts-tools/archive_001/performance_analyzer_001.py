@@ -7,8 +7,10 @@ logger = logging.getLogger(__name__)
 性能瓶颈分析器 - 自动识别工作流瓶颈步骤
 """
 
-import json
+import subprocess
+import sys
 from pathlib import Path
+import json
 from datetime import datetime
 from typing import Dict, List, Optional
 from collections import defaultdict
@@ -153,6 +155,17 @@ class PerformanceAnalyzer:
 
     def generate_report(self, report_type: str = "full") -> Dict:
         """生成性能报告"""
+        # Run Critic review before generating report
+        critic_result = subprocess.run(
+            [sys.executable, 'critic_v5_review.py', '--scenario', 'tool_optimize'],
+            cwd=str(Path(__file__).parent),
+            timeout=300
+        )
+        if critic_result.returncode != 0:
+            print("[ERROR] Critic Review Failed. Aborting.")
+            return {}
+        print("[OK] Critic Review Passed")
+        
         step_analysis = self.analyze_step_performance()
         trend_analysis = self.analyze_workflow_trend()
 

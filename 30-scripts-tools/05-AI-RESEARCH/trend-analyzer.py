@@ -5,18 +5,25 @@ Trend Analysis (Level 3)
 趋势分析
 """
 
+import subprocess
+import sys
+from pathlib import Path
 import os
 import json
-from pathlib import Path
 from datetime import datetime, timedelta
 from collections import Counter
+
 
 class TrendAnalyzer:
     """趋势分析器"""
 
     def __init__(self):
-        self.classified_dir = Path(r"D:\obsidian\Vault\Arxiv\daily\2026\03\2026-03-05\classified")
-        self.output_dir = Path(r"D:\obsidian\Vault\Arxiv\daily\2026\03\2026-03-05\trends")
+        self.classified_dir = Path(
+            r"D:\obsidian\Vault\Arxiv\daily\2026\03\2026-03-05\classified"
+        )
+        self.output_dir = Path(
+            r"D:\obsidian\Vault\Arxiv\daily\2026\03\2026-03-05\trends"
+        )
 
     def analyze_trends(self):
         """分析趋势"""
@@ -24,10 +31,21 @@ class TrendAnalyzer:
         print("Trend Analysis (Level 3)")
         print("=" * 60)
 
+        # Run Critic review before analysis
+        critic_result = subprocess.run(
+            [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+            cwd=str(Path(__file__).parent),
+            timeout=300,
+        )
+        if critic_result.returncode != 0:
+            print("[ERROR] Critic Review Failed. Aborting.")
+            return {}
+        print("[OK] Critic Review Passed")
+
         # 读取分类后的论文
         print(f"\n[1/4] Loading classified papers...")
         classified_file = self.classified_dir / "all_classified.json"
-        with open(classified_file, 'r', encoding='utf-8') as f:
+        with open(classified_file, "r", encoding="utf-8") as f:
             papers = json.load(f)
         print(f"  Loaded {len(papers)} papers")
 
@@ -50,15 +68,15 @@ class TrendAnalyzer:
         self.output_dir.mkdir(parents=True, exist_ok=True)
 
         trends = {
-            'date': datetime.now().strftime('%Y-%m-%d'),
-            'total_papers': len(papers),
-            'hot_topics': hot_topics,
-            'emerging_fields': emerging_fields,
-            'technology_evolution': tech_evolution
+            "date": datetime.now().strftime("%Y-%m-%d"),
+            "total_papers": len(papers),
+            "hot_topics": hot_topics,
+            "emerging_fields": emerging_fields,
+            "technology_evolution": tech_evolution,
         }
 
         output_file = self.output_dir / "trends.json"
-        with open(output_file, 'w', encoding='utf-8') as f:
+        with open(output_file, "w", encoding="utf-8") as f:
             json.dump(trends, f, indent=2, ensure_ascii=False)
         print(f"\n  Saved to trends.json")
 
@@ -73,17 +91,19 @@ class TrendAnalyzer:
         # 统计关键词频率
         keyword_counter = Counter()
         for paper in papers:
-            keywords = paper.get('keywords', [])
+            keywords = paper.get("keywords", [])
             keyword_counter.update(keywords)
 
         # 获取前 10 个热点
         hot_topics = []
         for keyword, count in keyword_counter.most_common(10):
-            hot_topics.append({
-                'topic': keyword,
-                'count': count,
-                'percentage': count / len(papers) * 100
-            })
+            hot_topics.append(
+                {
+                    "topic": keyword,
+                    "count": count,
+                    "percentage": count / len(papers) * 100,
+                }
+            )
 
         return hot_topics
 
@@ -95,53 +115,50 @@ class TrendAnalyzer:
         # 统计材料体系分布
         material_counter = Counter()
         for paper in papers:
-            material = paper['classification']['material_system']
+            material = paper["classification"]["material_system"]
             material_counter[material] += 1
 
         # 新兴方向：数量少但重要性高
         for paper in papers:
-            if paper['importance_score'] >= 8.0:
-                material = paper['classification']['material_system']
+            if paper["importance_score"] >= 8.0:
+                material = paper["classification"]["material_system"]
                 if material_counter[material] < 10:  # 少于 10 篇
-                    if not any(e['field'] == material for e in emerging):
-                        emerging.append({
-                            'field': material,
-                            'papers': material_counter[material],
-                            'trend': 'emerging'
-                        })
+                    if not any(e["field"] == material for e in emerging):
+                        emerging.append(
+                            {
+                                "field": material,
+                                "papers": material_counter[material],
+                                "trend": "emerging",
+                            }
+                        )
 
         return emerging
 
     def _analyze_tech_evolution(self, papers):
         """分析技术演进"""
         # 技术成熟度分析
-        tech_stages = {
-            'emerging': [],
-            'growing': [],
-            'mature': []
-        }
+        tech_stages = {"emerging": [], "growing": [], "mature": []}
 
         # 统计各技术的论文数量和时间分布
         # TODO: 需要历史数据
 
         # 简化版本：基于关键词
         for paper in papers:
-            keywords = paper.get('keywords', [])
-            if any(kw in keywords for kw in ['machine learning', 'AI', 'deep learning']):
-                tech_stages['emerging'].append('AI-designed materials')
-            elif any(kw in keywords for kw in ['composite', 'hybrid']):
-                tech_stages['growing'].append('composite electrolyte')
-            elif any(kw in keywords for kw in ['sulfide', 'LGPS']):
-                tech_stages['mature'].append('sulfide electrolyte')
+            keywords = paper.get("keywords", [])
+            if any(
+                kw in keywords for kw in ["machine learning", "AI", "deep learning"]
+            ):
+                tech_stages["emerging"].append("AI-designed materials")
+            elif any(kw in keywords for kw in ["composite", "hybrid"]):
+                tech_stages["growing"].append("composite electrolyte")
+            elif any(kw in keywords for kw in ["sulfide", "LGPS"]):
+                tech_stages["mature"].append("sulfide electrolyte")
 
         # 去重
         result = []
         for stage, techs in tech_stages.items():
             for tech in set(techs):
-                result.append({
-                    'technology': tech,
-                    'stage': stage
-                })
+                result.append({"technology": tech, "stage": stage})
 
         return result
 
@@ -149,10 +166,12 @@ class TrendAnalyzer:
         """运行趋势分析"""
         return self.analyze_trends()
 
+
 def demo():
     """演示使用"""
     analyzer = TrendAnalyzer()
     analyzer.run()
+
 
 if __name__ == "__main__":
     demo()

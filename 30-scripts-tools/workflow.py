@@ -26,6 +26,7 @@
     - 会话历史
 ==============================================================================
 """
+
 import sys
 import json
 import subprocess
@@ -37,14 +38,23 @@ from datetime import datetime, timedelta
 # 导入自我迭代模块
 sys.path.insert(0, str(Path(__file__).parent))
 try:
-    from workflow_insights import track_command, track_session_duration, track_decision, save_decision, get_similar_decisions, generate_suggestions, cmd_report
+    from workflow_insights import (
+        track_command,
+        track_session_duration,
+        track_decision,
+        save_decision,
+        get_similar_decisions,
+        generate_suggestions,
+        cmd_report,
+    )
+
     INSIGHTS_AVAILABLE = True
 except ImportError:
     INSIGHTS_AVAILABLE = False
 
 # Fix Windows encoding
-if sys.platform == 'win32':
-    sys.stdout.reconfigure(encoding='utf-8')
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding="utf-8")
 
 WORKSPACE = Path(__file__).parent.parent
 STATE_FILE = WORKSPACE / "execution-state.json"
@@ -64,7 +74,7 @@ DEFAULT_CONFIG = {
     "auto_save_interval": 300,  # 5分钟
     "auto_push": False,
     "max_history": 20,
-    "projects": PROJECT_CONFIGS
+    "projects": PROJECT_CONFIGS,
 }
 
 
@@ -72,7 +82,7 @@ def load_config():
     """加载配置"""
     if CONFIG_FILE.exists():
         try:
-            return json.loads(CONFIG_FILE.read_text(encoding='utf-8'))
+            return json.loads(CONFIG_FILE.read_text(encoding="utf-8"))
         except:
             pass
     return DEFAULT_CONFIG.copy()
@@ -80,14 +90,16 @@ def load_config():
 
 def save_config(config):
     """保存配置"""
-    CONFIG_FILE.write_text(json.dumps(config, indent=2, ensure_ascii=False), encoding='utf-8')
+    CONFIG_FILE.write_text(
+        json.dumps(config, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
 
 
 def get_state():
     """获取当前会话状态"""
     if STATE_FILE.exists():
         try:
-            return json.loads(STATE_FILE.read_text(encoding='utf-8'))
+            return json.loads(STATE_FILE.read_text(encoding="utf-8"))
         except:
             pass
     return None
@@ -95,14 +107,16 @@ def get_state():
 
 def save_state(state):
     """保存会话状态"""
-    STATE_FILE.write_text(json.dumps(state, indent=2, ensure_ascii=False), encoding='utf-8')
+    STATE_FILE.write_text(
+        json.dumps(state, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
 
 
 def get_history():
     """获取会话历史"""
     if HISTORY_FILE.exists():
         try:
-            return json.loads(HISTORY_FILE.read_text(encoding='utf-8'))
+            return json.loads(HISTORY_FILE.read_text(encoding="utf-8"))
         except:
             pass
     return []
@@ -112,8 +126,10 @@ def save_history(history):
     """保存会话历史"""
     config = load_config()
     # 只保留最近 N 条
-    history = history[-config.get("max_history", 20):]
-    HISTORY_FILE.write_text(json.dumps(history, indent=2, ensure_ascii=False), encoding='utf-8')
+    history = history[-config.get("max_history", 20) :]
+    HISTORY_FILE.write_text(
+        json.dumps(history, indent=2, ensure_ascii=False), encoding="utf-8"
+    )
 
 
 def add_to_history(state, end_description=None):
@@ -129,7 +145,7 @@ def add_to_history(state, end_description=None):
         "decisions_count": len(state.get("decisions", [])),
         "tests_run": state.get("tests_run", 0),
         "end_description": end_description,
-        "status": "completed"
+        "status": "completed",
     }
     history.append(entry)
     save_history(history)
@@ -138,7 +154,11 @@ def add_to_history(state, end_description=None):
 def detect_project():
     """自动检测当前项目"""
     for name, files in PROJECT_CONFIGS.items():
-        project_dir = PROJECTS_DIR / name if name != "stock_pro" else WORKSPACE / "30-scripts-tools" / name
+        project_dir = (
+            PROJECTS_DIR / name
+            if name != "stock_pro"
+            else WORKSPACE / "30-scripts-tools" / name
+        )
         if project_dir.exists():
             if all((project_dir / f).exists() for f in files):
                 return name, project_dir
@@ -165,14 +185,14 @@ def get_git_changes(directory):
             cwd=str(directory),
             capture_output=True,
             text=True,
-            timeout=10
+            timeout=10,
         )
         if result.returncode != 0:
             return [], []
 
         modified = []
         untracked = []
-        for line in result.stdout.strip().split('\n'):
+        for line in result.stdout.strip().split("\n"):
             if not line:
                 continue
             status = line[:2]
@@ -197,7 +217,7 @@ def get_git_branch(directory):
             cwd=str(directory),
             capture_output=True,
             text=True,
-            timeout=10
+            timeout=10,
         )
         return result.stdout.strip() if result.returncode == 0 else "N/A"
     except:
@@ -215,9 +235,9 @@ def get_unpushed_commits(directory):
             cwd=str(directory),
             capture_output=True,
             text=True,
-            timeout=10
+            timeout=10,
         )
-        return len(result.stdout.strip().split('\n')) if result.stdout.strip() else 0
+        return len(result.stdout.strip().split("\n")) if result.stdout.strip() else 0
     except:
         return 0
 
@@ -230,7 +250,9 @@ def discover_tests(project_dir):
         tests.append(("pytest", ["pytest", str(pytest_dir), "-v", "--tb=short"]))
 
     if project_dir.name == "NewsHub":
-        tests.append(("newshub", ["pytest", str(project_dir / "tests"), "-v", "--tb=line"]))
+        tests.append(
+            ("newshub", ["pytest", str(project_dir / "tests"), "-v", "--tb=line"])
+        )
 
     return tests
 
@@ -243,14 +265,16 @@ def run_tests(project_dir):
     for name, cmd in tests:
         try:
             result = subprocess.run(
-                cmd,
-                cwd=str(project_dir),
-                capture_output=True,
-                text=True,
-                timeout=120
+                cmd, cwd=str(project_dir), capture_output=True, text=True, timeout=120
             )
             passed = result.returncode == 0
-            results.append((name, "passed" if passed else "failed", result.stdout[-300:] if result.stdout else ""))
+            results.append(
+                (
+                    name,
+                    "passed" if passed else "failed",
+                    result.stdout[-300:] if result.stdout else "",
+                )
+            )
         except Exception as e:
             results.append((name, "error", str(e)))
 
@@ -274,7 +298,7 @@ def git_push(directory):
             cwd=str(directory),
             capture_output=True,
             text=True,
-            timeout=60
+            timeout=60,
         )
         if result.returncode == 0:
             print(f"✅ 推送成功 ({unpushed} commits)")
@@ -352,7 +376,11 @@ def cmd_start(task_name, project_name=None):
         cmd_auto("stop")
 
     project_name = project_name or detect_project()[0]
-    project_dir = PROJECTS_DIR / project_name if project_name not in ("workspace", "unknown") else WORKSPACE
+    project_dir = (
+        PROJECTS_DIR / project_name
+        if project_name not in ("workspace", "unknown")
+        else WORKSPACE
+    )
 
     # 追踪
     if INSIGHTS_AVAILABLE:
@@ -361,10 +389,10 @@ def cmd_start(task_name, project_name=None):
         if suggestions:
             print(f"\n💡 建议: {suggestions[0]['suggestion']}")
 
-    print(f"\n{'=' *50}")
+    print(f"\n{'=' * 50}")
     print(f"  🚀 Starting: {task_name}")
     print(f"  📁 Project: {project_name}")
-    print(f"{'=' *50}\n")
+    print(f"{'=' * 50}\n")
 
     branch = get_git_branch(project_dir)
     unpushed = get_unpushed_commits(project_dir)
@@ -382,7 +410,7 @@ def cmd_start(task_name, project_name=None):
         "files_modified": [],
         "tests_run": 0,
         "last_saved": datetime.now().isoformat(),
-        "auto_saved": False
+        "auto_saved": False,
     }
     save_state(state)
 
@@ -417,11 +445,13 @@ def cmd_save(description):
     state["last_saved"] = datetime.now().isoformat()
     state["files_modified"] = modified
     state["untracked"] = untracked
-    state["decisions"].append({
-        "time": datetime.now().isoformat(),
-        "action": "save",
-        "description": description
-    })
+    state["decisions"].append(
+        {
+            "time": datetime.now().isoformat(),
+            "action": "save",
+            "description": description,
+        }
+    )
     state["auto_saved"] = False
     save_state(state)
 
@@ -432,7 +462,7 @@ def cmd_save(description):
         save_decision(
             context=f"{state.get('task')} - {state.get('project')}",
             decision=description,
-            result="saved"
+            result="saved",
         )
 
     print(f"✅ Saved: {description}")
@@ -452,9 +482,9 @@ def cmd_test():
     project_dir = Path(state.get("project_dir", WORKSPACE))
     project_name = state.get("project", "unknown")
 
-    print(f"\n{'=' *50}")
+    print(f"\n{'=' * 50}")
     print(f"  🧪 Testing: {project_name}")
-    print(f"{'=' *50}\n")
+    print(f"{'=' * 50}\n")
 
     results = run_tests(project_dir)
 
@@ -491,9 +521,9 @@ def cmd_status():
     """Show current session status"""
     state = get_state()
 
-    print(f"\n{'=' *50}")
+    print(f"\n{'=' * 50}")
     print(f"  📊 Session Status")
-    print(f"{'=' *50}")
+    print(f"{'=' * 50}")
 
     if not state:
         print("❌ No active session\n")
@@ -548,7 +578,7 @@ def cmd_status():
     else:
         print(f"\n⏰ Auto-save: OFF")
 
-    print(f"{'=' *50}\n")
+    print(f"{'=' * 50}\n")
 
 
 def cmd_resume():
@@ -575,9 +605,9 @@ def cmd_log():
         print("\n❌ No session history\n")
         return
 
-    print(f"\n{'=' *50}")
+    print(f"\n{'=' * 50}")
     print(f"  📜 Session History ({len(history)} sessions)")
-    print(f"{'=' *50}\n")
+    print(f"{'=' * 50}\n")
 
     for i, entry in enumerate(reversed(history[-10:]), 1):
         print(f"{i}. {entry.get('task', 'N/A')}")
@@ -602,9 +632,9 @@ def cmd_end(description):
     if was_auto_save:
         cmd_auto("stop")
 
-    print(f"\n{'=' *50}")
+    print(f"\n{'=' * 50}")
     print(f"  📋 Ending Session: {state['session_id']}")
-    print(f"{'=' *50}\n")
+    print(f"{'=' * 50}\n")
 
     duration = datetime.now() - datetime.fromisoformat(state["started_at"])
     duration_minutes = duration.seconds / 60
@@ -631,7 +661,7 @@ def cmd_end(description):
             git_push(project_dir)
         else:
             response = input("推送? (y/n): ").strip().lower()
-            if response == 'y':
+            if response == "y":
                 git_push(project_dir)
 
     # Save to daily memory
@@ -641,9 +671,9 @@ def cmd_end(description):
     state["end_description"] = description
 
     summary = f"""
-## Session: {state['task']}
-**Project:** {state.get('project', 'N/A')}
-**Time:** {state['started_at']} - {state['ended_at']}
+## Session: {state["task"]}
+**Project:** {state.get("project", "N/A")}
+**Time:** {state["started_at"]} - {state["ended_at"]}
 **Duration:** {duration}
 **Status:** {description}
 
@@ -655,10 +685,10 @@ def cmd_end(description):
     summary += f"\n### Tests Run: {state['tests_run']}\n"
 
     if memory_file.exists():
-        content = memory_file.read_text(encoding='utf-8')
-        memory_file.write_text(content + "\n" + summary, encoding='utf-8')
+        content = memory_file.read_text(encoding="utf-8")
+        memory_file.write_text(content + "\n" + summary, encoding="utf-8")
     else:
-        memory_file.write_text(summary, encoding='utf-8')
+        memory_file.write_text(summary, encoding="utf-8")
 
     print(f"\n✅ Session saved to {memory_file}")
 
@@ -705,6 +735,17 @@ def cmd_help():
 
 
 def main():
+    # Critic v5.0 integration for workflow optimization tools
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+    print("[OK] Critic Review Passed")
+
     if len(sys.argv) < 2:
         cmd_help()
         return

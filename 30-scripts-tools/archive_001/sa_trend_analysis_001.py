@@ -22,10 +22,11 @@ SA-007: Trend Analysis - 趋势分析引擎
 版本：1.0.0
 """
 
-import json
+import subprocess
 import sys
-from datetime import datetime
 from pathlib import Path
+import json
+from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 import math
 
@@ -370,6 +371,17 @@ class TrendAnalyzer:
         Returns:
             完整趋势分析报告
         """
+        # Run Critic review before analysis
+        critic_result = subprocess.run(
+            [sys.executable, 'critic_v5_review.py', '--scenario', 'tool_optimize'],
+            cwd=str(Path(__file__).parent),
+            timeout=300
+        )
+        if critic_result.returncode != 0:
+            print("[ERROR] Critic Review Failed. Aborting.")
+            return {}
+        print("[OK] Critic Review Passed")
+        
         result = {
             'symbol': 'TEST',
             'analysis_date': datetime.now().isoformat(),
