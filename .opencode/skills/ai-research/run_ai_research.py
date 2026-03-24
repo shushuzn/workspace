@@ -5,8 +5,8 @@ from pathlib import Path
 
 workspace_root = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(workspace_root / "30-scripts-tools" / "05-AI-RESEARCH"))
-sys.path.insert(0, str(workspace_root / "30-scripts-tools" / "13-memory"))
-sys.path.insert(0, str(workspace_root / "ai_memory_system"))
+sys.path.insert(0, str(workspace_root / "10-MEMORY" / "00-CORE"))
+sys.path.insert(0, str(workspace_root / "10-MEMORY" / "01-AI-SYSTEM"))
 
 from flare_planner import FLAREPlanner
 from harmonic_memory import HarmonicMemoryStore

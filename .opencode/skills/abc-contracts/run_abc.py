@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 
 workspace_root = Path(__file__).resolve().parents[3]
-sys.path.insert(0, str(workspace_root / "30-scripts-tools" / "13-memory"))
+sys.path.insert(0, str(workspace_root / "10-MEMORY" / "00-CORE"))
 
 from agent_contracts import ContractBuilder
 

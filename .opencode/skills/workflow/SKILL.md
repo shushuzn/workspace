@@ -239,7 +239,7 @@ edit_file(old_text, new_text)
 |------|---------|----------|
 | `execution-state.json` | Current session | ✅ |
 | `session_temp.json` | Decision history | ❌ (temp) |
-| `13-memory/YYYY-MM-DD.md` | Daily log | ✅ |
+| `10-MEMORY/00-CORE/YYYY-MM-DD.md` | Daily log | ✅ |
 | `MEMORY.md` | Long-term memory | ✅ |
 
 ## 4.2 Session Template
@@ -301,7 +301,7 @@ All operations go through:
 ```
 SOUL.md, USER.md, AGENTS.md, TOOLS.md
 HEARTBEAT.md, MEMORY.md
-13-memory/YYYY-MM-DD.md (today)
+10-MEMORY/00-CORE/YYYY-MM-DD.md (today)
 ```
 
 ## 6.2 Ignore Patterns
