@@ -19,7 +19,7 @@ if sys.platform == 'win32':
         pass
 
 PERSONAS = ["planner", "executor", "critic", "learner", "coordinator", "innovator", "metacognition"]
-STATS_FILE = Path("13-memory/.workflow_logs/master.json")
+STATS_FILE = Path("10-MEMORY/00-CORE/.workflow_logs/master.json")
 
 def load_stats():
     """Load workflow execution stats"""

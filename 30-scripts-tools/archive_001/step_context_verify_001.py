@@ -16,12 +16,12 @@ core_files = [
     "AGENTS.md",
     "TOOLS.md",
     "HEARTBEAT.md",
-    "13-memory/MEMORY.md",
+    "10-MEMORY/00-CORE/MEMORY.md",
 ]
 
 # 添加今日笔记
 today = datetime.now().strftime("%Y-%m-%d")
-core_files.append(f"13-memory/{today}.md")
+core_files.append(f"10-MEMORY/00-CORE/{today}.md")
 
 results = {"loaded": [], "missing": [], "total_size": 0}
 

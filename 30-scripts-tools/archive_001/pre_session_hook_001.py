@@ -44,7 +44,7 @@ class PreSessionHook:
 
     # 可选文件
     OPTIONAL_FILES = [
-        '13-memory/YYYY-MM-DD.md',  # 今日笔记
+        '10-MEMORY/00-CORE/YYYY-MM-DD.md',  # 今日笔记
     ]
 
     # 检查规则
@@ -87,7 +87,7 @@ class PreSessionHook:
 
     def check_daily_note(self) -> Dict:
         """检查今日笔记"""
-        daily_note = self.workspace / f'13-memory/{self.today}.md'
+        daily_note = self.workspace / f'10-MEMORY/00-CORE/{self.today}.md'
 
         result = {
             'exists': daily_note.exists(),
@@ -179,7 +179,7 @@ class PreSessionHook:
         report.append("今日笔记:")
         dn = validation['checks']['daily_note']
         status = "[OK]" if dn['exists'] else "[MISSING]"
-        report.append(f"  {status} {dn['path'] or f'13-memory/{self.today}.md':<25} {dn['size_kb']:>6.2f}KB")
+        report.append(f"  {status} {dn['path'] or f'10-MEMORY/00-CORE/{self.today}.md':<25} {dn['size_kb']:>6.2f}KB")
         report.append("")
 
         # 总大小

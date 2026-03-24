@@ -33,7 +33,7 @@ class VersionControl:
 
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
-        self.snapshot_dir = self.workspace / "13-memory/.snapshots"
+        self.snapshot_dir = self.workspace / "10-MEMORY/00-CORE/.snapshots"
         self.snapshot_dir.mkdir(parents=True, exist_ok=True)
         self.index_file = self.snapshot_dir / "index.json"
 

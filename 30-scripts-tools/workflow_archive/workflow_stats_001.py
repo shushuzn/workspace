@@ -11,7 +11,7 @@ import json
 from pathlib import Path
 from datetime import datetime, timedelta
 
-STATS_FILE = Path("13-memory/.workflow_logs/master.json")
+STATS_FILE = Path("10-MEMORY/00-CORE/.workflow_logs/master.json")
 
 def analyze_stats():
     """

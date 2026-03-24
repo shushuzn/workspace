@@ -28,8 +28,8 @@ class WorkflowGuard:
     ]
 
     def __init__(self):
-        self.log_file = Path("13-memory/.workflow_guard_log.json")
-        self.enforce_log = Path("13-memory/.workflow_guard_enforce.json")
+        self.log_file = Path("10-MEMORY/00-CORE/.workflow_guard_log.json")
+        self.enforce_log = Path("10-MEMORY/00-CORE/.workflow_guard_enforce.json")
 
     def _log(self, tool, status, message=""):
         logs = []

@@ -17,7 +17,7 @@ class SelfCorrector:
     """自我纠错能力"""
 
     def __init__(self):
-        self.error_log_file = Path("13-memory/error_log.json")
+        self.error_log_file = Path("10-MEMORY/00-CORE/error_log.json")
         self.correction_patterns = self._load_correction_patterns()
         self.error_log = self._load_error_log()
 
@@ -208,7 +208,7 @@ class SelfCorrector:
         }
 
         # 保存学习记录
-        learning_file = Path("13-memory/correction_learnings.json")
+        learning_file = Path("10-MEMORY/00-CORE/correction_learnings.json")
         learnings = []
         if learning_file.exists():
             with open(learning_file, 'r', encoding='utf-8') as f:

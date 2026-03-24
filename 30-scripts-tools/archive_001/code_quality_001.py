@@ -138,7 +138,7 @@ def main():
     print(f"  Too Long: {results['metrics']['long_files']}")
     
     # Save report
-    report_file = Path("13-memory/.code_quality_report.json")
+    report_file = Path("10-MEMORY/00-CORE/.code_quality_report.json")
     report_file.parent.mkdir(exist_ok=True)
     report_file.write_text(json.dumps(results, indent=2, ensure_ascii=False), encoding="utf-8")
     

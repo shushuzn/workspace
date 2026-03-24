@@ -31,7 +31,7 @@ class ProgressiveOutput:
         self.chunk_delay = chunk_delay
         self.show_progress = show_progress
 
-        self.output_log_file = Path("13-memory/progressive_output_log.json")
+        self.output_log_file = Path("10-MEMORY/00-CORE/progressive_output_log.json")
         self.output_log = self._load_output_log()
 
     def _load_output_log(self) -> dict:

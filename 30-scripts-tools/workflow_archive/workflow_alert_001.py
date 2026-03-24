@@ -15,7 +15,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-ALERT_FILE = Path("13-memory/.workflow_alerts.json")
+ALERT_FILE = Path("10-MEMORY/00-CORE/.workflow_alerts.json")
 
 class WorkflowAlert:
     def __init__(self):

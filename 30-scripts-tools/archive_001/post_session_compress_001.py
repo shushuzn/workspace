@@ -35,7 +35,7 @@ class PostSessionCompress:
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.today = datetime.now().strftime('%Y-%m-%d')
-        self.compression_log = self.workspace / '13-memory/compression_log.json'
+        self.compression_log = self.workspace / '10-MEMORY/00-CORE/compression_log.json'
 
     def compress_core_files(self) -> Dict:
         """压缩核心文件"""
@@ -44,7 +44,7 @@ class PostSessionCompress:
 
     def compress_daily_note(self) -> Dict:
         """压缩今日笔记"""
-        daily_note = self.workspace / f'13-memory/{self.today}.md'
+        daily_note = self.workspace / f'10-MEMORY/00-CORE/{self.today}.md'
 
         if not daily_note.exists():
             return {'status': 'skipped', 'reason': 'Daily note not found'}

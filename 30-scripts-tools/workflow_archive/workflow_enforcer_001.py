@@ -265,7 +265,7 @@ class WorkflowEnforcer:
             return False
 
         # 检查会话压缩
-        daily_note = Path("13-memory/2026-03-20.md")
+        daily_note = Path("10-MEMORY/00-CORE/2026-03-20.md")
         if daily_note.exists():
             size = daily_note.stat().st_size
             if size > 5120:  # 5KB

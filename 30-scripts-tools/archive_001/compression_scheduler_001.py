@@ -25,7 +25,7 @@ class CompressionScheduler:
         self.session_compressor = SessionCompressor()
         self.memory_distiller = MemoryDistiller()
         self.note_summarizer = NoteSummarizer()
-        self.log_file = Path("13-memory/compression_log.json")
+        self.log_file = Path("10-MEMORY/00-CORE/compression_log.json")
 
     def check_all_thresholds(self) -> Dict:
         """检查所有压缩阈值"""
@@ -33,7 +33,7 @@ class CompressionScheduler:
             "timestamp": datetime.now().isoformat(),
             "session": self.session_compressor.check_threshold(),
             "memory": self.memory_distiller.check_threshold(),
-            "note": self.note_summarizer.check_note(Path(f"13-memory/{datetime.now().strftime('%Y-%m-%d')}.md"))
+            "note": self.note_summarizer.check_note(Path(f"10-MEMORY/00-CORE/{datetime.now().strftime('%Y-%m-%d')}.md"))
         }
 
     def run_compression(self, channel: str = "all", force: bool = False) -> Dict:

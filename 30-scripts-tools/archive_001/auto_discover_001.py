@@ -19,7 +19,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-CACHE_FILE = Path("13-memory/.tool_discover_cache.json")
+CACHE_FILE = Path("10-MEMORY/00-CORE/.tool_discover_cache.json")
 CACHE_TTL = 300  # 5 minutes
 
 class ToolAutoDiscover:

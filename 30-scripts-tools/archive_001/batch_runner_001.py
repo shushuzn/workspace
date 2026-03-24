@@ -75,11 +75,11 @@ def main():
         "passed": passed,
         "total": total
     }
-    Path("13-memory/.batch_report.json").write_text(
+    Path("10-MEMORY/00-CORE/.batch_report.json").write_text(
         json.dumps(report, indent=2, ensure_ascii=False),
         encoding="utf-8"
     )
-    print("  Report: 13-memory/.batch_report.json")
+    print("  Report: 10-MEMORY/00-CORE/.batch_report.json")
 
 
 if __name__ == "__main__":

@@ -2,7 +2,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 import os
-files = ['SOUL.md', 'USER.md', 'AGENTS.md', 'TOOLS.md', 'HEARTBEAT.md', '13-memory/MEMORY.md']
+files = ['SOUL.md', 'USER.md', 'AGENTS.md', 'TOOLS.md', 'HEARTBEAT.md', '10-MEMORY/00-CORE/MEMORY.md']
 print("核心文件检查:")
 for f in files:
     exists = os.path.exists(f)

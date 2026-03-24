@@ -18,7 +18,7 @@ if sys.platform == 'win32':
 class WorkflowMonitor:
     def __init__(self):
         self.tools_dir = Path("30-scripts-tools")
-        self.log_dir = Path("13-memory/.workflow_logs")
+        self.log_dir = Path("10-MEMORY/00-CORE/.workflow_logs")
 
     def health_check(self):
         checks = []

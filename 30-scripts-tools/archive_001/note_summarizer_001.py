@@ -110,7 +110,7 @@ class NoteSummarizer:
     def compress_daily_notes(self) -> Dict:
         """压缩所有当日笔记"""
         today = datetime.now().strftime('%Y-%m-%d')
-        daily_note = Path(f"13-memory/{today}.md")
+        daily_note = Path(f"10-MEMORY/00-CORE/{today}.md")
 
         result = {
             "timestamp": datetime.now().isoformat(),
@@ -159,7 +159,7 @@ class NoteSummarizer:
             check = self.check_note(note_file)
         else:
             today = datetime.now().strftime('%Y-%m-%d')
-            daily_note = Path(f"13-memory/{today}.md")
+            daily_note = Path(f"10-MEMORY/00-CORE/{today}.md")
             check = self.check_note(daily_note) if daily_note.exists() else {"reason": ["No daily note"]}
 
         output = []

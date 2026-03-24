@@ -17,8 +17,8 @@ class ToolSelfLearner:
     """工具自学习能力"""
 
     def __init__(self):
-        self.tool_knowledge_file = Path("13-memory/tool_knowledge.json")
-        self.learning_log_file = Path("13-memory/tool_learning_log.json")
+        self.tool_knowledge_file = Path("10-MEMORY/00-CORE/tool_knowledge.json")
+        self.learning_log_file = Path("10-MEMORY/00-CORE/tool_learning_log.json")
         self.registry_file = Path("30-scripts-tools/tools_registry.json")
         self.knowledge = self._load_knowledge()
 

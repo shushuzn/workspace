@@ -38,17 +38,17 @@ class TempFileCleaner:
             'file_pattern': '*.txt'
         },
         'session_temp': {
-            'path': '13-memory',
+            'path': '10-MEMORY/00-CORE',
             'max_age_days': 1,
             'file_pattern': 'session_temp.json'
         },
         'compression_log': {
-            'path': '13-memory',
+            'path': '10-MEMORY/00-CORE',
             'max_age_days': 30,
             'file_pattern': 'compression_log.json'
         },
         'task_temp': {
-            'path': '13-memory',
+            'path': '10-MEMORY/00-CORE',
             'max_age_days': 1,
             'file_pattern': 'task_temp.json'
         },
@@ -61,7 +61,7 @@ class TempFileCleaner:
 
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
-        self.cleanup_log = self.workspace / '13-memory/cleanup_log.jsonl'
+        self.cleanup_log = self.workspace / '10-MEMORY/00-CORE/cleanup_log.jsonl'
 
     def check_cleanup_needed(self) -> Dict:
         """检查是否需要清理"""

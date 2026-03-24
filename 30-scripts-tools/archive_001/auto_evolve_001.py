@@ -25,7 +25,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 TOOLS_DIR = Path("30-scripts-tools")
-EVOLUTION_DIR = Path("13-memory/.evolution")
+EVOLUTION_DIR = Path("10-MEMORY/00-CORE/.evolution")
 EVOLUTION_DIR.mkdir(exist_ok=True)
 
 class SelfEvolution:

@@ -32,7 +32,7 @@ class AutoTODOUpdater:
         self.workspace = Path("D:/OpenClaw/workspace")
         self.todo_file = self.workspace / "TODO.md"
         self.tools_registry = self.workspace / "30-scripts-tools" / "tools_registry.json"
-        self.log_file = self.workspace / "13-memory" / "todo-update-log.jsonl"
+        self.log_file = self.workspace / "10-MEMORY/00-CORE" / "todo-update-log.jsonl"
 
         # Phase 2 工具清单
         self.phase2_tools = {
@@ -179,7 +179,7 @@ class AutoTODOUpdater:
 
 ---
 
-**完整历史:** `13-memory/task-history-*.md`
+**完整历史:** `10-MEMORY/00-CORE/task-history-*.md`
 """
         return content
 

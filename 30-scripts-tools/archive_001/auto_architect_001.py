@@ -25,7 +25,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 TOOLS_DIR = Path("30-scripts-tools")
-ARCH_DIR = Path("13-memory/.architecture")
+ARCH_DIR = Path("10-MEMORY/00-CORE/.architecture")
 ARCH_DIR.mkdir(exist_ok=True)
 
 class ToolArchitect:

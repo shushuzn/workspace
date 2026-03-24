@@ -49,7 +49,7 @@ if sys.platform == 'win32':
 WORKSPACE = Path(__file__).parent.parent
 STATE_FILE = WORKSPACE / "execution-state.json"
 HISTORY_FILE = WORKSPACE / "execution-history.json"
-MEMORY_DIR = WORKSPACE / "13-memory"
+MEMORY_DIR = WORKSPACE / "10-MEMORY/00-CORE"
 PROJECTS_DIR = WORKSPACE / "80-PROJECTS"
 CONFIG_FILE = WORKSPACE / "30-scripts-tools" / "workflow_config.json"
 

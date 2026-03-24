@@ -17,7 +17,7 @@ if sys.platform == 'win32':
 
 TOOLS_DIR = Path("30-scripts-tools")
 WORKFLOWS_FILE = TOOLS_DIR / "workflows.json"
-LOGS_FILE = Path("13-memory/.workflow_logs/master.json")
+LOGS_FILE = Path("10-MEMORY/00-CORE/.workflow_logs/master.json")
 
 def load_workflows():
     return json.loads(WORKFLOWS_FILE.read_text(encoding="utf-8", errors="replace"))

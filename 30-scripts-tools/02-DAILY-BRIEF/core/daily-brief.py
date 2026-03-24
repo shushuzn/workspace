@@ -14,7 +14,7 @@ from pathlib import Path
 
 WORKSPACE = Path("D:/OpenClaw/workspace")
 BRIEF_DIR = WORKSPACE / "21-reports/daily-briefs"
-MEMORY_DIR = WORKSPACE / "13-memory"
+MEMORY_DIR = WORKSPACE / "10-MEMORY/00-CORE"
 
 def get_date(args_date):
     if args_date:
@@ -242,7 +242,7 @@ def get_calendar_events():
     today_display = datetime.now().strftime("%m 月%d 日")
 
     # 源 1: 本地 Markdown 日历文件
-    calendar_file = WORKSPACE / "13-memory" / "calendar.md"
+    calendar_file = WORKSPACE / "10-MEMORY/00-CORE" / "calendar.md"
     if calendar_file.exists():
         try:
             lines = calendar_file.read_text(encoding="utf-8").split("\n")
@@ -301,7 +301,7 @@ def get_calendar_events():
     # 添加明日预告
     try:
         tomorrow = (datetime.now() + timedelta(days=1)).strftime("%Y-%m-%d")
-        tomorrow_file = WORKSPACE / "13-memory" / "calendar.md"
+        tomorrow_file = WORKSPACE / "10-MEMORY/00-CORE" / "calendar.md"
         if tomorrow_file.exists():
             content = tomorrow_file.read_text(encoding="utf-8")
             tomorrow_section = f"## {tomorrow}"
@@ -612,7 +612,7 @@ def send_to_feishu(content, brief_file):
         print(f"  └─ ⚠️ 发送异常：{e}")
 
     # 方法 2: 写入发送队列文件，由 heartbeat 处理
-    queue_file = WORKSPACE / "13-memory" / "feishu-queue.json"
+    queue_file = WORKSPACE / "10-MEMORY/00-CORE" / "feishu-queue.json"
     import json
     try:
         queue = []

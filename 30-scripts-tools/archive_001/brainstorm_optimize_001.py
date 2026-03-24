@@ -36,7 +36,7 @@ class BrainstormOptimizer:
 
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
-        self.optimize_dir = self.workspace / "13-memory/optimization"
+        self.optimize_dir = self.workspace / "10-MEMORY/00-CORE/optimization"
         self.optimize_dir.mkdir(parents=True, exist_ok=True)
 
         self.ideas_file = self.optimize_dir / "optimization_ideas.json"

@@ -24,7 +24,7 @@ class WorkflowOptimizer:
     def check_core_files(self) -> Dict:
         """检查核心文件状态"""
         files = ['SOUL.md', 'USER.md', 'AGENTS.md', 'TOOLS.md', 'HEARTBEAT.md', 'MEMORY.md']
-        daily = self.workspace / f'13-memory/{self.today}.md'
+        daily = self.workspace / f'10-MEMORY/00-CORE/{self.today}.md'
         if daily.exists():
             files.append(str(daily.relative_to(self.workspace)))
 

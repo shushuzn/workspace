@@ -65,7 +65,7 @@ def main():
         print("[!] " + heal.split("High-risk:")[1].split("\n")[0].strip())
 
     print("  [4] Code Quality...", end=" ")
-    issues = Path("13-memory/.code_quality_report.json")
+    issues = Path("10-MEMORY/00-CORE/.code_quality_report.json")
     if issues.exists():
         try:
             data = json.loads(issues.read_text())

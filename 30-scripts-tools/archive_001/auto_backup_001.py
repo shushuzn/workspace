@@ -11,8 +11,8 @@ import json, sys, shutil, zipfile
 from pathlib import Path
 from datetime import datetime
 
-BACKUP_DIR = Path("13-memory/.backups")
-TRACK_FILE = Path("13-memory/.backup_track.json")
+BACKUP_DIR = Path("10-MEMORY/00-CORE/.backups")
+TRACK_FILE = Path("10-MEMORY/00-CORE/.backup_track.json")
 
 def ensure_dir(p):
     p.mkdir(parents=True, exist_ok=True)

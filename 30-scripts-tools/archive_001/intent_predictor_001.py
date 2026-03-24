@@ -38,8 +38,8 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-HISTORY_FILE = Path("13-memory/.intent_history.json")
-LEARN_LOG = Path("13-memory/.intent_learn_log.json")
+HISTORY_FILE = Path("10-MEMORY/00-CORE/.intent_history.json")
+LEARN_LOG = Path("10-MEMORY/00-CORE/.intent_learn_log.json")
 
 INTENT_PATTERNS = {
     "optimize": ["optimize", "improve", "fix", "better", "youhua", "gaishan"],

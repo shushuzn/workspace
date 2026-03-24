@@ -30,7 +30,7 @@ if sys.platform == 'win32':
 # 配置
 GATEWAY_URL = "http://127.0.0.1:18789"
 FEISHU_USER_ID = "ou_72a847b95fc25870dcdd8ce56d929252"
-SYNC_STATE_FILE = Path(__file__).parent.parent / "13-memory" / "feishu-ui-sync-state.json"
+SYNC_STATE_FILE = Path(__file__).parent.parent / "10-MEMORY/00-CORE" / "feishu-ui-sync-state.json"
 
 
 class MessageSync:

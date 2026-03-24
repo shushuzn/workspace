@@ -63,7 +63,7 @@ Fixes:
     print("=" * 60)
 
     workflow_file = Path("flow-archive/20260318-universal-workflow-001/workflow.json")
-    daily_note = Path("13-memory/2026-03-20.md")
+    daily_note = Path("10-MEMORY/00-CORE/2026-03-20.md")
 
     issues = []
     warnings = []

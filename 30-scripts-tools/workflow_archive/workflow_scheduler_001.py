@@ -20,7 +20,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 
-SCHEDULER_DIR = Path("13-memory/.scheduler")
+SCHEDULER_DIR = Path("10-MEMORY/00-CORE/.scheduler")
 TASKS_FILE = SCHEDULER_DIR / "tasks.json"
 HISTORY_FILE = SCHEDULER_DIR / "history.json"
 

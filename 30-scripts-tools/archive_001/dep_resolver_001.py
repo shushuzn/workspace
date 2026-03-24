@@ -30,7 +30,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 
-DEPENDENCY_FILE = Path("13-memory/.dependencies.json")
+DEPENDENCY_FILE = Path("10-MEMORY/00-CORE/.dependencies.json")
 
 
 class DependencyResolver:

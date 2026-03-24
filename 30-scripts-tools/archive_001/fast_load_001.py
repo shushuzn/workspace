@@ -64,7 +64,7 @@ Fixes:
         'TOOLS.md',
         'HEARTBEAT.md',
         'MEMORY.md',
-        '13-memory/2026-03-20.md'  # 今日笔记
+        '10-MEMORY/00-CORE/2026-03-20.md'  # 今日笔记
     ]
 
     total_size = 0

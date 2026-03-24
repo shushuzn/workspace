@@ -19,8 +19,8 @@ if sys.platform == 'win32':
     except (AttributeError, ValueError):
         pass
 
-LEARN_DIR = Path("13-memory/.multi_agent_learn")
-STATS_FILE = Path("13-memory/.workflow_logs/master.json")
+LEARN_DIR = Path("10-MEMORY/00-CORE/.multi_agent_learn")
+STATS_FILE = Path("10-MEMORY/00-CORE/.workflow_logs/master.json")
 LEARN_FILE = LEARN_DIR / "collaboration_history.json"
 PATTERNS_FILE = LEARN_DIR / "routing_patterns.json"
 

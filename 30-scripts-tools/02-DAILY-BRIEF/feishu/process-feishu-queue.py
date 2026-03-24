@@ -13,7 +13,7 @@ from pathlib import Path
 from datetime import datetime
 
 WORKSPACE = Path("D:/OpenClaw/workspace")
-QUEUE_FILE = WORKSPACE / "13-memory" / "feishu-queue.json"
+QUEUE_FILE = WORKSPACE / "10-MEMORY/00-CORE" / "feishu-queue.json"
 LOG_FILE = WORKSPACE / "21-reports" / "feishu-send-log.jsonl"
 
 def log_send(result, content_preview=""):
@@ -34,7 +34,7 @@ def send_via_sessions_send(content, file_path):
     # 这需要调用 OpenClaw 的内部 API
 
     # 方法：创建一个临时会话消息文件，由 OpenClaw 处理
-    message_file = WORKSPACE / "13-memory" / f"feishu-msg-{datetime.now().strftime('%Y%m%d%H%M%S')}.json"
+    message_file = WORKSPACE / "10-MEMORY/00-CORE" / f"feishu-msg-{datetime.now().strftime('%Y%m%d%H%M%S')}.json"
 
     message = {
         "action": "send",

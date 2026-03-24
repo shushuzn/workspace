@@ -17,8 +17,8 @@ class SessionCompressor:
     """会话压缩器"""
 
     def __init__(self):
-        self.session_file = Path("13-memory/session_temp.json")
-        self.daily_note = Path(f"13-memory/{datetime.now().strftime('%Y-%m-%d')}.md")
+        self.session_file = Path("10-MEMORY/00-CORE/session_temp.json")
+        self.daily_note = Path(f"10-MEMORY/00-CORE/{datetime.now().strftime('%Y-%m-%d')}.md")
         self.threshold_tokens = 10000
         self.threshold_lines = 200
         self.target_size_kb = 5
@@ -74,7 +74,7 @@ class SessionCompressor:
         }
 
         # 保存到压缩文件
-        compressed_file = Path("13-memory/session_compressed.json")
+        compressed_file = Path("10-MEMORY/00-CORE/session_compressed.json")
         with open(compressed_file, 'w', encoding='utf-8') as f:
             json.dump(compressed, f, ensure_ascii=False, indent=2)
 

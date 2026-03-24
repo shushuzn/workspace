@@ -72,7 +72,7 @@ WORKFLOWS = load_workflows()
 
 class WorkflowMaster:
     def __init__(self):
-        self.logger_path = Path("13-memory/.workflow_logs/master.json")
+        self.logger_path = Path("10-MEMORY/00-CORE/.workflow_logs/master.json")
         self.logger_path.parent.mkdir(parents=True, exist_ok=True)
 
     def _log(self, workflow, step, status):

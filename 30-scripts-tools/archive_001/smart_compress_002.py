@@ -61,7 +61,7 @@ class SuperCompressor:
 
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
-        self.cache_dir = self.workspace / '13-memory/.compress_cache'
+        self.cache_dir = self.workspace / '10-MEMORY/00-CORE/.compress_cache'
         self.cache_dir.mkdir(parents=True, exist_ok=True)
 
         # 压缩级别配置
@@ -466,7 +466,7 @@ Fixes:
         
         # 今日笔记
         if target in ['all', 'daily']:
-            daily = self.workspace / f'13-memory/{datetime.now().strftime("%Y-%m-%d")}.md'
+            daily = self.workspace / f'10-MEMORY/00-CORE/{datetime.now().strftime("%Y-%m-%d")}.md'
             if daily.exists():
                 res = self.compress_file(str(daily), method, level)
                 result["files"].append({"file": daily.name, **res})

@@ -13,7 +13,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 TOOLS_DIR = Path("30-scripts-tools")
-CHECK_LOG = Path("13-memory/.four_stage_check_log.json")
+CHECK_LOG = Path("10-MEMORY/00-CORE/.four_stage_check_log.json")
 
 REQUIRED_SECTIONS = {
     "ARCHITECT": [

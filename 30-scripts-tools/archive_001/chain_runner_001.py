@@ -30,7 +30,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 
-CHAIN_CACHE = Path("13-memory/.chain_cache.json")
+CHAIN_CACHE = Path("10-MEMORY/00-CORE/.chain_cache.json")
 
 
 class ChainRunner:

@@ -131,7 +131,7 @@ def main():
     for r in results[:10]:
         print(f"  - {r['file']}: {r['status']}")
 
-    Path("13-memory/.argv_fix_report.json").write_text(json.dumps({
+    Path("10-MEMORY/00-CORE/.argv_fix_report.json").write_text(json.dumps({
         "results": results,
         "total": len(results)
     }, indent=2))

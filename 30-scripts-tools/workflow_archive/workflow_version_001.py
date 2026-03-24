@@ -15,7 +15,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-VERSION_FILE = Path("13-memory/.workflow_version.json")
+VERSION_FILE = Path("10-MEMORY/00-CORE/.workflow_version.json")
 
 class WorkflowVersion:
     def __init__(self):

@@ -36,7 +36,7 @@ class AutoRetry:
         self.exponential = exponential
         self.jitter = jitter
 
-        self.retry_log_file = Path("13-memory/retry_log.json")
+        self.retry_log_file = Path("10-MEMORY/00-CORE/retry_log.json")
         self.retry_log = self._load_retry_log()
 
     def _load_retry_log(self) -> Dict:

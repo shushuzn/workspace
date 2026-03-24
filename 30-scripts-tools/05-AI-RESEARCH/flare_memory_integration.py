@@ -33,7 +33,7 @@ def get_flare_planner():
 def get_harmonic_memory():
     """Get Harmonic Memory Store instance for dual-layer memory"""
     try:
-        sys.path.insert(0, str(SCRIPT_DIR / "13-memory"))
+        sys.path.insert(0, str(SCRIPT_DIR / "10-MEMORY/00-CORE"))
         from harmonic_memory import HarmonicMemoryStore
 
         return HarmonicMemoryStore()
@@ -45,7 +45,7 @@ def get_harmonic_memory():
 def get_agent_contract(name: str = "openclaw"):
     """Get Agent Contract for runtime enforcement"""
     try:
-        sys.path.insert(0, str(SCRIPT_DIR / "13-memory"))
+        sys.path.insert(0, str(SCRIPT_DIR / "10-MEMORY/00-CORE"))
         from agent_contracts import ContractBuilder, ViolationType, Severity
 
         return ContractBuilder(name=name).build()

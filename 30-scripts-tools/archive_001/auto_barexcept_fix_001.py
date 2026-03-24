@@ -155,7 +155,7 @@ def main():
         "mode": "dry-run" if dry_run else "fix",
         "results": results
     }
-    Path("13-memory/.barexcept_fix_report.json").write_text(json.dumps(report, indent=2))
+    Path("10-MEMORY/00-CORE/.barexcept_fix_report.json").write_text(json.dumps(report, indent=2))
 
     return results
 

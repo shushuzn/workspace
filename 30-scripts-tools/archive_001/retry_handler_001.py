@@ -26,8 +26,8 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 
-RETRY_LOG = Path("13-memory/.retry_log.json")
-TOOL_ALTERNATIVES = Path("13-memory/.tool_alternatives.json")
+RETRY_LOG = Path("10-MEMORY/00-CORE/.retry_log.json")
+TOOL_ALTERNATIVES = Path("10-MEMORY/00-CORE/.tool_alternatives.json")
 
 
 class RetryHandler:

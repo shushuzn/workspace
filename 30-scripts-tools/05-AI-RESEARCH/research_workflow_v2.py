@@ -44,7 +44,7 @@ class ResearchWorkflow:
             from flare_planner import FLAREPlanner
             from himac_executor import HiMACExecutor, MacroPlanner, MicroExecutor
 
-            sys.path.insert(0, str(PARENT_DIR / "13-memory"))
+            sys.path.insert(0, str(PARENT_DIR / "10-MEMORY/00-CORE"))
             from harmonic_memory import HarmonicMemoryStore
 
             self.planner = FLAREPlanner(

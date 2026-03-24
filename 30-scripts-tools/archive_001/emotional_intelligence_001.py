@@ -19,7 +19,7 @@ class EmotionalIntelligence:
     def __init__(self):
         self.emotion_lexicon = self._load_emotion_lexicon()
         self.response_templates = self._load_response_templates()
-        self.history_file = Path("13-memory/emotion_history.json")
+        self.history_file = Path("10-MEMORY/00-CORE/emotion_history.json")
         self.history = self._load_history()
 
     def _load_emotion_lexicon(self) -> Dict:

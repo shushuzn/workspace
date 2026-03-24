@@ -32,7 +32,7 @@ class AutoSessionCompressor:
         self.workspace = Path("D:/OpenClaw/workspace")
         self.compress_script = self.workspace / "30-scripts-tools/post_session_compress.py"
         self.checker_script = self.workspace / "30-scripts-tools/session_end_checker.py"
-        self.log_file = self.workspace / "13-memory/session-compression-log.jsonl"
+        self.log_file = self.workspace / "10-MEMORY/00-CORE/session-compression-log.jsonl"
         self.config = {
             "check_interval_hours": 2,
             "max_context_size_kb": 100,
@@ -56,7 +56,7 @@ class AutoSessionCompressor:
 
         # 检查今日笔记文件
         today = datetime.now().strftime("%Y-%m-%d")
-        daily_note = self.workspace / f"13-memory/{today}.md"
+        daily_note = self.workspace / f"10-MEMORY/00-CORE/{today}.md"
 
         if daily_note.exists():
             size_kb = daily_note.stat().st_size / 1024
@@ -100,7 +100,7 @@ class AutoSessionCompressor:
 
         # 检查压缩前大小
         today = datetime.now().strftime("%Y-%m-%d")
-        daily_note = self.workspace / f"13-memory/{today}.md"
+        daily_note = self.workspace / f"10-MEMORY/00-CORE/{today}.md"
 
         if daily_note.exists():
             result["before_size_kb"] = round(daily_note.stat().st_size / 1024, 2)

@@ -50,7 +50,7 @@ class BrainstormAutoScanner:
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.tools_dir = self.workspace / "30-scripts-tools"
-        self.ideas_file = self.workspace / "13-memory/optimization/optimization_ideas.json"
+        self.ideas_file = self.workspace / "10-MEMORY/00-CORE/optimization/optimization_ideas.json"
 
         # 加载现有ideas
         self.ideas = self._load_ideas()

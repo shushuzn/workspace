@@ -40,9 +40,9 @@ class SessionEnd:
         self.workspace = Path(__file__).parent.parent
         self.today = datetime.now().strftime('%Y-%m-%d')
         self.flow_id = flow_id or f"{self.today.replace('-', '')}-universal-workflow-001"
-        self.session_file = self.workspace / '13-memory/session_temp.json'
+        self.session_file = self.workspace / '10-MEMORY/00-CORE/session_temp.json'
         self.execution_state = self.workspace / f'flow-archive/{self.flow_id}/execution-state.json'
-        self.daily_note = self.workspace / f'13-memory/{self.today}.md'
+        self.daily_note = self.workspace / f'10-MEMORY/00-CORE/{self.today}.md'
 
     def check_session_state(self) -> Dict:
         """检查会话状态"""
@@ -128,7 +128,7 @@ class SessionEnd:
     def cleanup_temp_files(self) -> Dict:
         """清理临时文件"""
         temp_files = [
-            self.workspace / '13-memory/session_temp.json',
+            self.workspace / '10-MEMORY/00-CORE/session_temp.json',
             self.workspace / 'tool_result',
         ]
 

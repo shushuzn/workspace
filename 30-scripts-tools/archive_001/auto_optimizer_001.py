@@ -25,7 +25,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 TOOLS_DIR = Path("30-scripts-tools")
-OPT_LOG = Path("13-memory/.auto_optimizer_log.json")
+OPT_LOG = Path("10-MEMORY/00-CORE/.auto_optimizer_log.json")
 
 OPTIMIZATIONS = {
     "add_logging": [

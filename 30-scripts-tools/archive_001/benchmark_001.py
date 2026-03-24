@@ -11,7 +11,7 @@ import json, sys, time, subprocess
 from pathlib import Path
 from datetime import datetime
 
-BENCHMARK_FILE = Path("13-memory/.benchmark_results.json")
+BENCHMARK_FILE = Path("10-MEMORY/00-CORE/.benchmark_results.json")
 
 def benchmark_tool(tool_path, runs=5):
     """Benchmark a single tool"""

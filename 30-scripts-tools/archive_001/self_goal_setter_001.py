@@ -16,8 +16,8 @@ class SelfGoalSetter:
     """自我目标设定器"""
 
     def __init__(self):
-        self.goals_file = Path("13-memory/self_goals.json")
-        self.progress_file = Path("13-memory/goal_progress.json")
+        self.goals_file = Path("10-MEMORY/00-CORE/self_goals.json")
+        self.progress_file = Path("10-MEMORY/00-CORE/goal_progress.json")
         self.goals = self._load_goals()
 
     def _load_goals(self) -> Dict:

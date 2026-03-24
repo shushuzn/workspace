@@ -15,7 +15,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-LOGS_DIR = Path("13-memory/.workflow_logs")
+LOGS_DIR = Path("10-MEMORY/00-CORE/.workflow_logs")
 
 class WorkflowAnalytics:
     def analyze(self):

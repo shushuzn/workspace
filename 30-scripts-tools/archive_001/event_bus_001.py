@@ -31,7 +31,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 
-EVENT_BUS_DIR = Path("13-memory/.event_bus")
+EVENT_BUS_DIR = Path("10-MEMORY/00-CORE/.event_bus")
 EVENT_LOG = EVENT_BUS_DIR / "events.json"
 SUBSCRIPTIONS_FILE = EVENT_BUS_DIR / "subscriptions.json"
 

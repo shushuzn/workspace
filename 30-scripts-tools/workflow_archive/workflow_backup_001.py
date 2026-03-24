@@ -15,7 +15,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-BACKUP_DIR = Path("13-memory/.backups")
+BACKUP_DIR = Path("10-MEMORY/00-CORE/.backups")
 
 class WorkflowBackup:
     def create(self, name="default"):
@@ -27,14 +27,14 @@ class WorkflowBackup:
         backup_path.mkdir(exist_ok=True)
 
         # Backup logs
-        log_dir = Path("13-memory/.workflow_logs")
+        log_dir = Path("10-MEMORY/00-CORE/.workflow_logs")
         if log_dir.exists():
             shutil.copytree(log_dir, backup_path / "logs", dirs_exist_ok=True)
 
         # Backup config
         config_files = [
-            "13-memory/.workflow_market",
-            "13-memory/.scheduler"
+            "10-MEMORY/00-CORE/.workflow_market",
+            "10-MEMORY/00-CORE/.scheduler"
         ]
         for f in config_files:
             p = Path(f)

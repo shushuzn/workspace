@@ -18,7 +18,7 @@ class HumanIntentUnderstanding:
 
     def __init__(self):
         self.intent_patterns = self._load_intent_patterns()
-        self.history_file = Path("13-memory/intent_history.json")
+        self.history_file = Path("10-MEMORY/00-CORE/intent_history.json")
         self.history = self._load_history()
 
     def _load_intent_patterns(self) -> Dict:

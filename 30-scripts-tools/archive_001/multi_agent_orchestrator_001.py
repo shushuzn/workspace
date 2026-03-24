@@ -24,8 +24,8 @@ ROUTING = {
     "metacognition": ["reflect", "think", "improve", "evaluate", "思考", "反思", "评估"]
 }
 
-STATS_FILE = Path("13-memory/.workflow_logs/master.json")
-LEARN_FILE = Path("13-memory/.multi_agent_learn/collaboration_history.json")
+STATS_FILE = Path("10-MEMORY/00-CORE/.workflow_logs/master.json")
+LEARN_FILE = Path("10-MEMORY/00-CORE/.multi_agent_learn/collaboration_history.json")
 
 def ensure_dir(p):
     p.mkdir(parents=True, exist_ok=True)

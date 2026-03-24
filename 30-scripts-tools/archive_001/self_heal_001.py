@@ -24,7 +24,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 TOOLS_DIR = Path("30-scripts-tools")
-HEAL_LOG = Path("13-memory/.self_heal_log.json")
+HEAL_LOG = Path("10-MEMORY/00-CORE/.self_heal_log.json")
 
 
 class SelfHealer:

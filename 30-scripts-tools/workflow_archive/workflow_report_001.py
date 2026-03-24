@@ -37,7 +37,7 @@ class WorkflowReport:
             categories[cat] = categories.get(cat, 0) + 1
 
         # Workflow stats
-        log_file = Path("13-memory/.workflow_logs/master.json")
+        log_file = Path("10-MEMORY/00-CORE/.workflow_logs/master.json")
         log_stats = {"runs": 0, "success": 0}
         if log_file.exists():
             log = json.loads(log_file.read_text(encoding="utf-8", errors="replace"))

@@ -24,7 +24,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 TOOLS_DIR = Path("30-scripts-tools")
-LOGS_DIR = Path("13-memory/.workflow_logs")
+LOGS_DIR = Path("10-MEMORY/00-CORE/.workflow_logs")
 
 
 def scan_dependencies():

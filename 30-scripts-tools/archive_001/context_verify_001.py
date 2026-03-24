@@ -17,8 +17,8 @@ def verify():
         "AGENTS.md",
         "TOOLS.md",
         "HEARTBEAT.md",
-        "13-memory/MEMORY.md",
-        "13-memory/2026-03-20.md"
+        "10-MEMORY/00-CORE/MEMORY.md",
+        "10-MEMORY/00-CORE/2026-03-20.md"
     ]
 
     results = []

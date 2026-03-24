@@ -19,7 +19,7 @@ logger = logging.getLogger(__name__)
 - TOOLS.md
 - HEARTBEAT.md
 - MEMORY.md
-- 13-memory/YYYY-MM-DD.md (今日笔记)
+- 10-MEMORY/00-CORE/YYYY-MM-DD.md (今日笔记)
 
 使用：
   py core_files_compressor.py --check
@@ -65,8 +65,8 @@ class CoreFilesCompressor:
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.today = datetime.now().strftime('%Y-%m-%d')
-        self.daily_note = self.workspace / f'13-memory/{self.today}.md'
-        self.compression_log = self.workspace / '13-memory/compression_log.json'
+        self.daily_note = self.workspace / f'10-MEMORY/00-CORE/{self.today}.md'
+        self.compression_log = self.workspace / '10-MEMORY/00-CORE/compression_log.json'
 
     def get_all_core_files(self) -> List[Path]:
         """获取所有核心文件路径"""

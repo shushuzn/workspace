@@ -18,7 +18,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-CACHE_DIR = Path("13-memory/.perf_cache")
+CACHE_DIR = Path("10-MEMORY/00-CORE/.perf_cache")
 CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 class PerformanceOptimizer:

@@ -29,7 +29,7 @@ class SessionEndAuditor:
     def __init__(self, session_id: str = None):
         self.workspace = Path("D:/OpenClaw/workspace")
         self.tool_call_log = self.workspace / "30-scripts-tools/tool_call_log.jsonl"
-        self.memory_file = self.workspace / "13-memory/MEMORY.md"
+        self.memory_file = self.workspace / "10-MEMORY/00-CORE/MEMORY.md"
         self.session_id = session_id
         self.report = {}
 

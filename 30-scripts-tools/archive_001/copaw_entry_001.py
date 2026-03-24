@@ -184,11 +184,11 @@ class CopawEntry:
 
         core_files = [
             "SOUL.md", "USER.md", "AGENTS.md", "TOOLS.md", "HEARTBEAT.md",
-            "13-memory/MEMORY.md"
+            "10-MEMORY/00-CORE/MEMORY.md"
         ]
 
         today = datetime.now().strftime("%Y-%m-%d")
-        core_files.append(f"13-memory/{today}.md")
+        core_files.append(f"10-MEMORY/00-CORE/{today}.md")
 
         loaded = []
         missing = []

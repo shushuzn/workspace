@@ -67,7 +67,7 @@ class OptimizeMaster:
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.tools_dir = self.workspace / "30-scripts-tools"
-        self.log_file = self.workspace / "13-memory/optimization/master_log.json"
+        self.log_file = self.workspace / "10-MEMORY/00-CORE/optimization/master_log.json"
 
         self._ensure_log()
 
@@ -215,7 +215,7 @@ Fixes:
                     suggestions.append(f"{f}: {tokens} tokens - consider compression")
         
         # 加载优化ideas
-        ideas_file = self.workspace / "13-memory/optimization/optimization_ideas.json"
+        ideas_file = self.workspace / "10-MEMORY/00-CORE/optimization/optimization_ideas.json"
         if ideas_file.exists():
             with open(ideas_file, 'r', encoding='utf-8') as f:
                 ideas = json.load(f)
@@ -254,7 +254,7 @@ Fixes:
         recent = log[-5:] if len(log) > 5 else log
         
         # 优化ideas
-        ideas_file = self.workspace / "13-memory/optimization/optimization_ideas.json"
+        ideas_file = self.workspace / "10-MEMORY/00-CORE/optimization/optimization_ideas.json"
         ideas_status = {"completed": 0, "in_progress": 0, "pending": 0}
         if ideas_file.exists():
             with open(ideas_file, 'r', encoding='utf-8') as f:

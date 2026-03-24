@@ -35,7 +35,7 @@ class UndoRedo:
 
     def __init__(self, max_depth: int = None):
         self.workspace = Path(__file__).parent.parent
-        self.history_dir = self.workspace / "13-memory/.undoredo"
+        self.history_dir = self.workspace / "10-MEMORY/00-CORE/.undoredo"
         self.history_dir.mkdir(parents=True, exist_ok=True)
         self.history_file = self.history_dir / "history.json"
 

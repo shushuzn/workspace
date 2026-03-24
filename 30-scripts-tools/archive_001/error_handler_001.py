@@ -18,7 +18,7 @@ class FriendlyErrorHandler:
 
     def __init__(self):
         self.error_patterns = self._load_error_patterns()
-        self.log_file = Path("13-memory/error_log.json")
+        self.log_file = Path("10-MEMORY/00-CORE/error_log.json")
         self.error_log = self._load_error_log()
 
     def _load_error_patterns(self) -> Dict:

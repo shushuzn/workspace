@@ -31,7 +31,7 @@ class ContextAwareAssistant:
 
             # 目录名 → 推荐工具
             "30-scripts-tools": ["tool_creator", "tool_tester", "tool_registry_updater"],
-            "13-memory": ["memory_distiller", "note_summarizer", "session_compressor"],
+            "10-MEMORY/00-CORE": ["memory_distiller", "note_summarizer", "session_compressor"],
             "flow-archive": ["workflow_validator", "flow_visualizer"],
             "32-workflows": ["workflow_creator", "workflow_tester"],
 

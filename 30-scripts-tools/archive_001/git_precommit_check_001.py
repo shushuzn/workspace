@@ -115,7 +115,7 @@ def check_workflow_completion() -> bool:
         return False
 
     # 检查 5: 当日笔记大小
-    daily_note = Path("13-memory/2026-03-19.md")
+    daily_note = Path("10-MEMORY/00-CORE/2026-03-19.md")
     if daily_note.exists():
         size = daily_note.stat().st_size
         if size > 5120:  # 5KB

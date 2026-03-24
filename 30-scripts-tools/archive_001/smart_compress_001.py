@@ -53,7 +53,7 @@ class SmartCompressor:
     def __init__(self):
         self.workspace = Path(__file__).parent.parent
         self.today = datetime.now().strftime('%Y-%m-%d')
-        self.compress_dir = self.workspace / '13-memory/.compress_cache'
+        self.compress_dir = self.workspace / '10-MEMORY/00-CORE/.compress_cache'
         self.compress_dir.mkdir(parents=True, exist_ok=True)
 
         # 压缩参数
@@ -266,7 +266,7 @@ Fixes:
             "output": str(compressed_file)
         }
     
-    def compress_session(self, session_file: str = "13-memory/session_temp.json") -> Dict:
+    def compress_session(self, session_file: str = "10-MEMORY/00-CORE/session_temp.json") -> Dict:
         """压缩会话文件"""
         session_path = Path(session_file)
         
@@ -375,7 +375,7 @@ Fixes:
                     result["files"].append({"file": f.name, **res})
         
         if target in ["all", "daily"]:
-            daily = self.workspace / f'13-memory/{self.today}.md'
+            daily = self.workspace / f'10-MEMORY/00-CORE/{self.today}.md'
             if daily.exists():
                 res = self.compress_with_delta(str(daily), force)
                 result["files"].append({"file": daily.name, **res})
@@ -415,7 +415,7 @@ def main():
             files = [
                 'SOUL.md', 'USER.md', 'AGENTS.md', 'TOOLS.md',
                 'HEARTBEAT.md', 'MEMORY.md',
-                f'13-memory/{datetime.now().strftime("%Y-%m-%d")}.md'
+                f'10-MEMORY/00-CORE/{datetime.now().strftime("%Y-%m-%d")}.md'
             ]
             
             status = []

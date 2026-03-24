@@ -15,7 +15,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-REGISTRY_FILE = Path("13-memory/.workflow_registry.json")
+REGISTRY_FILE = Path("10-MEMORY/00-CORE/.workflow_registry.json")
 
 class WorkflowRegistry:
     def __init__(self):

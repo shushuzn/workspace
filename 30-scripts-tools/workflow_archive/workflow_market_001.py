@@ -16,7 +16,7 @@ if sys.platform == 'win32':
     import io
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
-MARKET_DIR = Path("13-memory/.workflow_market")
+MARKET_DIR = Path("10-MEMORY/00-CORE/.workflow_market")
 MARKET_DIR.mkdir(parents=True, exist_ok=True)
 
 MARKETPLACE_TEMPLATES = {

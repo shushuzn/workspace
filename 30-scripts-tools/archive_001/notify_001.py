@@ -11,7 +11,7 @@ import json, sys
 from pathlib import Path
 from datetime import datetime
 
-NOTIFY_FILE = Path("13-memory/.notifications.json")
+NOTIFY_FILE = Path("10-MEMORY/00-CORE/.notifications.json")
 
 def load_notifications():
     if NOTIFY_FILE.exists():

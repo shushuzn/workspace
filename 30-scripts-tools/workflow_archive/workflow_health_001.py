@@ -16,7 +16,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 TOOLS_DIR = Path("30-scripts-tools")
-LOGS_DIR = Path("13-memory/.workflow_logs")
+LOGS_DIR = Path("10-MEMORY/00-CORE/.workflow_logs")
 
 class WorkflowHealth:
     def check(self):

@@ -64,7 +64,7 @@ STOCK_WORKFLOWS = {
 
 class WorkflowStock:
     def __init__(self):
-        self.log_path = Path("13-memory/.workflow_logs/stock.json")
+        self.log_path = Path("10-MEMORY/00-CORE/.workflow_logs/stock.json")
         self.log_path.parent.mkdir(parents=True, exist_ok=True)
 
     def _log(self, workflow, step, status):

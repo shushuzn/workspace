@@ -18,7 +18,7 @@ if sys.platform == 'win32':
     sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 TOOLS_DIR = Path("30-scripts-tools")
-CI_CONFIG = Path("13-memory/.ci_config.json")
+CI_CONFIG = Path("10-MEMORY/00-CORE/.ci_config.json")
 
 PIPELINES = {
     "pre-commit": {
