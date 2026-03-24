@@ -6,6 +6,7 @@ import json
 import logging
 import os
 import sqlite3
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -588,6 +589,18 @@ def cmd_stats(args):
 
 
 def main():
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+
+    print("[OK] Critic Review Passed")
+
     parser = argparse.ArgumentParser(
         prog="unified_social_monitor",
         description="Unified Social Monitor - Monitor Reddit and Twitter/X for AI/LLM content",

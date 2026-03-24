@@ -18,6 +18,7 @@ Usage:
 import sys
 import json
 import argparse
+import subprocess
 import os
 from datetime import datetime, timedelta
 from pathlib import Path
@@ -580,6 +581,18 @@ def cmd_stats(args):
 
 
 def main():
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+
+    print("[OK] Critic Review Passed")
+
     """Main CLI entry point"""
     parser = argparse.ArgumentParser(
         description="Unified arXiv Tool - Search, collect, and archive papers",
