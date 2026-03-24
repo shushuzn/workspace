@@ -24,7 +24,7 @@
 ## 🔒 文件操作保护 (最高优先级)
 
 **允许创建:**
-- ✅ `13-memory/YYYY-MM-DD.md` (日常笔记)
+- ✅ `10-MEMORY/00-CORE/YYYY-MM-DD.md` (日常笔记)
 - ✅ `21-reports/lig-risk/lig-risk-report-*.md` (风险报告)
 - ✅ `learner-notes.md` (更新)
 
@@ -256,7 +256,7 @@ py 30-scripts-tools\session_end_checker.py --auto
 
 - ✅ 直接执行明确下一步
 - ✅ 更新现有文件 (learner-notes.md)
-- ✅ 创建日常笔记 (13-memory/YYYY-MM-DD.md)
+- ✅ 创建日常笔记 (10-MEMORY/00-CORE/YYYY-MM-DD.md)
 - ✅ 风险报告 (21-reports/lig-risk/)
 - ✅ 自动修复常见问题
 - ✅ 缓存统计监控
