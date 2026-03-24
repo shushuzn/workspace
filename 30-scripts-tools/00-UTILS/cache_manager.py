@@ -7,10 +7,13 @@ Cache Manager
 
 import json
 import hashlib
+import subprocess
+import sys
 from pathlib import Path
 from datetime import datetime, timedelta
 from typing import Any, Optional
 from functools import wraps
+
 
 class CacheManager:
     """缓存管理器"""
@@ -18,13 +21,13 @@ class CacheManager:
     def __init__(self, cache_dir: str = None, ttl_seconds: int = 3600):
         """
         初始化缓存管理器
-        
+
         Args:
             cache_dir: 缓存目录
             ttl_seconds: 默认 TTL (秒)
         """
         if cache_dir is None:
-            cache_dir = Path(__file__).parent.parent / 'cache'
+            cache_dir = Path(__file__).parent.parent / "cache"
 
         self.cache_dir = Path(cache_dir)
         self.cache_dir.mkdir(parents=True, exist_ok=True)
@@ -38,19 +41,19 @@ class CacheManager:
     def get(self, key: str, default: Any = None) -> Any:
         """
         获取缓存
-        
+
         Args:
             key: 缓存键
             default: 默认值
-            
+
         Returns:
             缓存值或默认值
         """
         # 先检查内存缓存
         if key in self.memory_cache:
             cached = self.memory_cache[key]
-            if datetime.now() < cached['expires_at']:
-                return cached['value']
+            if datetime.now() < cached["expires_at"]:
+                return cached["value"]
             else:
                 del self.memory_cache[key]
 
@@ -60,14 +63,14 @@ class CacheManager:
 
         if cache_file.exists():
             try:
-                with open(cache_file, 'r', encoding='utf-8') as f:
+                with open(cache_file, "r", encoding="utf-8") as f:
                     cached = json.load(f)
 
-                expires_at = datetime.fromisoformat(cached['expires_at'])
+                expires_at = datetime.fromisoformat(cached["expires_at"])
                 if datetime.now() < expires_at:
                     # 加载到内存缓存
                     self.memory_cache[key] = cached
-                    return cached['value']
+                    return cached["value"]
                 else:
                     # 过期删除
                     cache_file.unlink()
@@ -80,12 +83,12 @@ class CacheManager:
     def set(self, key: str, value: Any, ttl_seconds: int = None) -> bool:
         """
         设置缓存
-        
+
         Args:
             key: 缓存键
             value: 缓存值
             ttl_seconds: TTL (秒)
-            
+
         Returns:
             是否成功
         """
@@ -96,10 +99,10 @@ class CacheManager:
             expires_at = datetime.now() + timedelta(seconds=ttl_seconds)
 
             cached = {
-                'key': key,
-                'value': value,
-                'created_at': datetime.now().isoformat(),
-                'expires_at': expires_at.isoformat()
+                "key": key,
+                "value": value,
+                "created_at": datetime.now().isoformat(),
+                "expires_at": expires_at.isoformat(),
             }
 
             # 保存到内存缓存
@@ -109,7 +112,7 @@ class CacheManager:
             cache_key = self._generate_key(key)
             cache_file = self.cache_dir / f"{cache_key}.json"
 
-            with open(cache_file, 'w', encoding='utf-8') as f:
+            with open(cache_file, "w", encoding="utf-8") as f:
                 json.dump(cached, f, indent=2, ensure_ascii=False)
 
             return True
@@ -133,7 +136,7 @@ class CacheManager:
     def clear(self) -> int:
         """
         清空缓存
-        
+
         Returns:
             删除的缓存文件数
         """
@@ -151,7 +154,7 @@ class CacheManager:
     def cleanup_expired(self) -> int:
         """
         清理过期缓存
-        
+
         Returns:
             删除的缓存文件数
         """
@@ -159,8 +162,9 @@ class CacheManager:
 
         # 清理内存缓存
         expired_keys = [
-            key for key, cached in self.memory_cache.items()
-            if datetime.now() >= cached['expires_at']
+            key
+            for key, cached in self.memory_cache.items()
+            if datetime.now() >= cached["expires_at"]
         ]
         for key in expired_keys:
             del self.memory_cache[key]
@@ -169,10 +173,10 @@ class CacheManager:
         # 清理文件缓存
         for cache_file in self.cache_dir.glob("*.json"):
             try:
-                with open(cache_file, 'r', encoding='utf-8') as f:
+                with open(cache_file, "r", encoding="utf-8") as f:
                     cached = json.load(f)
 
-                expires_at = datetime.fromisoformat(cached['expires_at'])
+                expires_at = datetime.fromisoformat(cached["expires_at"])
                 if datetime.now() >= expires_at:
                     cache_file.unlink()
                     count += 1
@@ -185,13 +189,15 @@ class CacheManager:
     def get_stats(self) -> dict:
         """获取缓存统计"""
         return {
-            'memory_cache_size': len(self.memory_cache),
-            'file_cache_size': len(list(self.cache_dir.glob("*.json"))),
-            'ttl_seconds': self.ttl_seconds
+            "memory_cache_size": len(self.memory_cache),
+            "file_cache_size": len(list(self.cache_dir.glob("*.json"))),
+            "ttl_seconds": self.ttl_seconds,
         }
+
 
 def cached(ttl_seconds: int = 3600):
     """缓存装饰器"""
+
     def decorator(func):
         @wraps(func)
         def wrapper(*args, **kwargs):
@@ -212,18 +218,33 @@ def cached(ttl_seconds: int = 3600):
             cache_manager.set(cache_key, result, ttl_seconds)
 
             return result
+
         return wrapper
+
     return decorator
 
+
 if __name__ == "__main__":
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        sys.exit(1)
+
+    print("[OK] Critic Review Passed")
+
     # 测试缓存
     cache = CacheManager(ttl_seconds=60)
 
     # 设置缓存
-    cache.set('test_key', {'data': 'test_data'})
+    cache.set("test_key", {"data": "test_data"})
 
     # 获取缓存
-    value = cache.get('test_key')
+    value = cache.get("test_key")
     print(f"Cache value: {value}")
 
     # 获取统计

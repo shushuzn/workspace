@@ -7,9 +7,12 @@ Plugin System
 
 import importlib
 import json
+import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 from abc import ABC, abstractmethod
+
 
 class BasePlugin(ABC):
     """插件基类"""
@@ -33,18 +36,19 @@ class BasePlugin(ABC):
         """关闭插件"""
         pass
 
+
 class PluginManager:
     """插件管理器"""
 
     def __init__(self, plugins_dir: str = None):
         """
         初始化插件管理器
-        
+
         Args:
             plugins_dir: 插件目录
         """
         if plugins_dir is None:
-            plugins_dir = Path(__file__).parent.parent / 'plugins'
+            plugins_dir = Path(__file__).parent.parent / "plugins"
 
         self.plugins_dir = Path(plugins_dir)
         self.plugins_dir.mkdir(parents=True, exist_ok=True)
@@ -54,7 +58,7 @@ class PluginManager:
     def discover_plugins(self) -> List[str]:
         """
         发现可用插件
-        
+
         Returns:
             插件名称列表
         """
@@ -69,7 +73,11 @@ class PluginManager:
                 # 查找插件类
                 for attr_name in dir(module):
                     attr = getattr(module, attr_name)
-                    if isinstance(attr, type) and issubclass(attr, BasePlugin) and attr != BasePlugin:
+                    if (
+                        isinstance(attr, type)
+                        and issubclass(attr, BasePlugin)
+                        and attr != BasePlugin
+                    ):
                         plugin_names.append(attr.name)
             except Exception as e:
                 print(f"Error discovering plugin {plugin_file}: {e}")
@@ -79,11 +87,11 @@ class PluginManager:
     def load_plugin(self, plugin_name: str, config: Dict = None) -> bool:
         """
         加载插件
-        
+
         Args:
             plugin_name: 插件名称
             config: 插件配置
-            
+
         Returns:
             是否成功
         """
@@ -98,7 +106,11 @@ class PluginManager:
                 # 查找插件类
                 for attr_name in dir(module):
                     attr = getattr(module, attr_name)
-                    if isinstance(attr, type) and issubclass(attr, BasePlugin) and attr != BasePlugin:
+                    if (
+                        isinstance(attr, type)
+                        and issubclass(attr, BasePlugin)
+                        and attr != BasePlugin
+                    ):
                         if attr.name == plugin_name:
                             # 实例化插件
                             plugin = attr()
@@ -117,10 +129,10 @@ class PluginManager:
     def unload_plugin(self, plugin_name: str) -> bool:
         """
         卸载插件
-        
+
         Args:
             plugin_name: 插件名称
-            
+
         Returns:
             是否成功
         """
@@ -140,10 +152,10 @@ class PluginManager:
     def process_all(self, data: Dict) -> Dict:
         """
         使用所有插件处理数据
-        
+
         Args:
             data: 输入数据
-            
+
         Returns:
             处理后的数据
         """
@@ -160,27 +172,27 @@ class PluginManager:
     def get_plugin_info(self, plugin_name: str) -> Optional[Dict]:
         """
         获取插件信息
-        
+
         Args:
             plugin_name: 插件名称
-            
+
         Returns:
             插件信息
         """
         if plugin_name in self.plugins:
             plugin = self.plugins[plugin_name]
             return {
-                'name': plugin.name,
-                'version': plugin.version,
-                'description': plugin.description,
-                'config': self.config.get(plugin_name, {})
+                "name": plugin.name,
+                "version": plugin.version,
+                "description": plugin.description,
+                "config": self.config.get(plugin_name, {}),
             }
         return None
 
     def list_plugins(self) -> List[Dict]:
         """
         列出所有插件
-        
+
         Returns:
             插件信息列表
         """
@@ -189,9 +201,10 @@ class PluginManager:
     def get_stats(self) -> Dict:
         """获取插件统计"""
         return {
-            'total_plugins': len(self.plugins),
-            'plugins': list(self.plugins.keys())
+            "total_plugins": len(self.plugins),
+            "plugins": list(self.plugins.keys()),
         }
+
 
 # 示例插件
 class ExamplePlugin(BasePlugin):
@@ -206,11 +219,12 @@ class ExamplePlugin(BasePlugin):
 
     def process(self, data: Dict) -> Dict:
         # 添加处理标记
-        data['processed_by'] = self.name
+        data["processed_by"] = self.name
         return data
 
     def shutdown(self) -> None:
         print("ExamplePlugin shutdown")
+
 
 class DataEnrichmentPlugin(BasePlugin):
     """数据增强插件"""
@@ -226,15 +240,28 @@ class DataEnrichmentPlugin(BasePlugin):
         from datetime import datetime
 
         # 添加元数据
-        data['enriched_at'] = datetime.now().isoformat()
-        data['enriched_by'] = self.name
+        data["enriched_at"] = datetime.now().isoformat()
+        data["enriched_by"] = self.name
 
         return data
 
     def shutdown(self) -> None:
         print("DataEnrichmentPlugin shutdown")
 
+
 if __name__ == "__main__":
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        sys.exit(1)
+
+    print("[OK] Critic Review Passed")
+
     # 测试插件系统
     manager = PluginManager()
 

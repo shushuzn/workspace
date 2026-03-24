@@ -7,6 +7,8 @@ Performance Optimizer
 
 import time
 import logging
+import subprocess
+import sys
 from pathlib import Path
 from typing import Dict, List, Any, Callable
 from functools import wraps
@@ -15,6 +17,7 @@ from contextlib import contextmanager
 # 配置日志
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
 
 class PerformanceProfiler:
     """性能分析器"""
@@ -26,10 +29,10 @@ class PerformanceProfiler:
     def profile(self, name: str):
         """
         性能分析上下文
-        
+
         Args:
             name: 分析名称
-            
+
         Example:
             with profiler.profile('database_query'):
                 # 执行数据库查询
@@ -56,11 +59,11 @@ class PerformanceProfiler:
         for name, durations in self.profiles.items():
             if durations:
                 stats[name] = {
-                    'count': len(durations),
-                    'total': sum(durations),
-                    'min': min(durations),
-                    'max': max(durations),
-                    'avg': sum(durations) / len(durations)
+                    "count": len(durations),
+                    "total": sum(durations),
+                    "min": min(durations),
+                    "max": max(durations),
+                    "avg": sum(durations) / len(durations),
                 }
 
         return stats
@@ -69,13 +72,14 @@ class PerformanceProfiler:
         """重置分析"""
         self.profiles = {}
 
+
 class CacheOptimizer:
     """缓存优化器"""
 
     def __init__(self, max_size: int = 1000, ttl_seconds: int = 300):
         """
         初始化缓存优化器
-        
+
         Args:
             max_size: 最大缓存大小
             ttl_seconds: 默认 TTL (秒)
@@ -90,9 +94,9 @@ class CacheOptimizer:
         """获取缓存"""
         if key in self.cache:
             entry = self.cache[key]
-            if time.time() < entry['expires_at']:
+            if time.time() < entry["expires_at"]:
                 self.hits += 1
-                return entry['value']
+                return entry["value"]
             else:
                 del self.cache[key]
 
@@ -110,21 +114,24 @@ class CacheOptimizer:
         # 检查大小限制
         if len(self.cache) >= self.max_size:
             # 删除最旧的缓存
-            oldest_key = min(self.cache.keys(), key=lambda k: self.cache[k]['created_at'])
+            oldest_key = min(
+                self.cache.keys(), key=lambda k: self.cache[k]["created_at"]
+            )
             del self.cache[oldest_key]
 
         self.cache[key] = {
-            'value': value,
-            'created_at': time.time(),
-            'expires_at': time.time() + ttl_seconds
+            "value": value,
+            "created_at": time.time(),
+            "expires_at": time.time() + ttl_seconds,
         }
 
     def _cleanup(self):
         """清理过期缓存"""
         current_time = time.time()
         expired_keys = [
-            key for key, entry in self.cache.items()
-            if current_time >= entry['expires_at']
+            key
+            for key, entry in self.cache.items()
+            if current_time >= entry["expires_at"]
         ]
 
         for key in expired_keys:
@@ -136,11 +143,11 @@ class CacheOptimizer:
         hit_rate = (self.hits / total * 100) if total > 0 else 0
 
         return {
-            'size': len(self.cache),
-            'max_size': self.max_size,
-            'hits': self.hits,
-            'misses': self.misses,
-            'hit_rate': hit_rate
+            "size": len(self.cache),
+            "max_size": self.max_size,
+            "hits": self.hits,
+            "misses": self.misses,
+            "hit_rate": hit_rate,
         }
 
     def clear(self):
@@ -148,6 +155,7 @@ class CacheOptimizer:
         self.cache = {}
         self.hits = 0
         self.misses = 0
+
 
 def cached(ttl_seconds: int = 300):
     """缓存装饰器"""
@@ -171,11 +179,15 @@ def cached(ttl_seconds: int = 300):
             cache.set(cache_key, result, ttl_seconds)
 
             return result
+
         return wrapper
+
     return decorator
+
 
 def timed(func: Callable) -> Callable:
     """计时装饰器"""
+
     @wraps(func)
     def wrapper(*args, **kwargs):
         start_time = time.time()
@@ -185,7 +197,9 @@ def timed(func: Callable) -> Callable:
             end_time = time.time()
             duration = end_time - start_time
             logger.info(f"Function '{func.__name__}' executed in {duration:.3f}s")
+
     return wrapper
+
 
 class PerformanceOptimizer:
     """性能优化器"""
@@ -194,7 +208,9 @@ class PerformanceOptimizer:
         self.profiler = PerformanceProfiler()
         self.cache = CacheOptimizer()
 
-    def optimize_data_loading(self, data_loader: Callable, cache_key: str, ttl: int = 300):
+    def optimize_data_loading(
+        self, data_loader: Callable, cache_key: str, ttl: int = 300
+    ):
         """优化数据加载"""
         # 尝试缓存
         cached_data = self.cache.get(cache_key)
@@ -203,7 +219,7 @@ class PerformanceOptimizer:
             return cached_data
 
         # 加载数据
-        with self.profiler.profile(f'data_loading:{cache_key}'):
+        with self.profiler.profile(f"data_loading:{cache_key}"):
             data = data_loader()
 
         # 保存缓存
@@ -211,15 +227,17 @@ class PerformanceOptimizer:
 
         return data
 
-    def optimize_batch_processing(self, items: List, processor: Callable, batch_size: int = 100):
+    def optimize_batch_processing(
+        self, items: List, processor: Callable, batch_size: int = 100
+    ):
         """优化批量处理"""
         results = []
 
-        with self.profiler.profile('batch_processing'):
+        with self.profiler.profile("batch_processing"):
             for i in range(0, len(items), batch_size):
-                batch = items[i:i + batch_size]
+                batch = items[i : i + batch_size]
 
-                with self.profiler.profile(f'batch_{i // batch_size}'):
+                with self.profiler.profile(f"batch_{i // batch_size}"):
                     batch_results = [processor(item) for item in batch]
                     results.extend(batch_results)
 
@@ -227,12 +245,22 @@ class PerformanceOptimizer:
 
     def get_optimization_report(self) -> Dict:
         """获取优化报告"""
-        return {
-            'profiler': self.profiler.get_stats(),
-            'cache': self.cache.get_stats()
-        }
+        return {"profiler": self.profiler.get_stats(), "cache": self.cache.get_stats()}
+
 
 if __name__ == "__main__":
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        sys.exit(1)
+
+    print("[OK] Critic Review Passed")
+
     # 测试性能优化器
     optimizer = PerformanceOptimizer()
 
