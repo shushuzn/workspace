@@ -1,112 +1,545 @@
 # -*- coding: utf-8 -*-
 """News Manager v3.0 - 统一新闻推送"""
+
 import sys, json, ssl, re, urllib.request, subprocess
 from datetime import datetime, timedelta
 from pathlib import Path
 from typing import List, Tuple
 
+
 # 颜色支持 (Windows兼容)
 class Colors:
-    RED = '\033[91m' if sys.platform != 'win32' else ''
-    GREEN = '\033[92m' if sys.platform != 'win32' else ''
-    YELLOW = '\033[93m' if sys.platform != 'win32' else ''
-    BLUE = '\033[94m' if sys.platform != 'win32' else ''
-    BOLD = '\033[1m' if sys.platform != 'win32' else ''
-    DIM = '\033[2m' if sys.platform != 'win32' else ''
-    RESET = '\033[0m' if sys.platform != 'win32' else ''
+    RED = "\033[91m" if sys.platform != "win32" else ""
+    GREEN = "\033[92m" if sys.platform != "win32" else ""
+    YELLOW = "\033[93m" if sys.platform != "win32" else ""
+    BLUE = "\033[94m" if sys.platform != "win32" else ""
+    BOLD = "\033[1m" if sys.platform != "win32" else ""
+    DIM = "\033[2m" if sys.platform != "win32" else ""
+    RESET = "\033[0m" if sys.platform != "win32" else ""
 
     @staticmethod
-    def pos(): return Colors.GREEN
+    def pos():
+        return Colors.GREEN
+
     @staticmethod
-    def neg(): return Colors.RED
+    def neg():
+        return Colors.RED
+
     @staticmethod
-    def neu(): return Colors.DIM
+    def neu():
+        return Colors.DIM
+
     @staticmethod
-    def risk_high(): return Colors.RED
+    def risk_high():
+        return Colors.RED
+
     @staticmethod
-    def risk_low(): return Colors.GREEN
+    def risk_low():
+        return Colors.GREEN
+
     @staticmethod
-    def header(): return Colors.BOLD + Colors.BLUE
+    def header():
+        return Colors.BOLD + Colors.BLUE
+
     @staticmethod
-    def reset(): return Colors.RESET
+    def reset():
+        return Colors.RESET
+
 
 def c(color, text):
     """带颜色输出"""
     return f"{color}{text}{Colors.RESET}"
 
+
 def cp(text):
     """利好(绿)"""
     return f"{Colors.pos()}{text}{Colors.RESET}"
+
 
 def cn(text):
     """利空(红)"""
     return f"{Colors.neg()}{text}{Colors.RESET}"
 
+
 def cne(text):
     """中性(灰)"""
     return f"{Colors.neu()}{text}{Colors.RESET}"
 
-CONFIG = {"qq": {"enabled": True, "base_url": "http://127.0.0.1:3000", "token": "", "group_id": "597818978"}, "feishu": {"enabled": True}, "news": {"sources": [{"name": "sina_finance", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2517", "type": "json", "category": "新浪财"}, {"name": "sina_stock", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2515", "type": "json", "category": "新浪股"}, {"name": "sina_business", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2518", "type": "json", "category": "新浪产"}, {"name": "sina_hkstock", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2513", "type": "json", "category": "新浪港"}, {"name": "sina_usstock", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2510", "type": "json", "category": "新浪美"}, {"name": "sina_tech", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516", "type": "json", "category": "新浪科"}, {"name": "sina_macro", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2519", "type": "json", "category": "新浪宏"}, {"name": "eeo", "url": "https://www.eeo.com.cn/rss.xml", "type": "rss", "category": "经观"}, {"name": "bloomberg", "url": "https://feeds.bloomberg.com/markets/news.rss", "type": "rss", "category": "彭博"}, {"name": "cnbc", "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html", "type": "rss", "category": "CNBC"}, {"name": "marketwatch", "url": "https://www.marketwatch.com/rss/topstories", "type": "rss", "category": "MW"}, {"name": "yahoo_finance", "url": "https://finance.yahoo.com/news/rssindex", "type": "rss", "category": "Yahoo"}, {"name": "investing", "url": "https://www.investing.com/rss/news.rss", "type": "rss", "category": "Inv"}, {"name": "ft_chinese", "url": "https://www.ftchinese.com/rss/feed", "type": "rss", "category": "FT"}, {"name": "bbc_biz", "url": "http://feeds.bbci.co.uk/news/business/rss.xml", "type": "rss", "category": "BBC"}, {"name": "guardian_biz", "url": "https://www.theguardian.com/business/rss", "type": "rss", "category": "卫报"}], "max_per_fetch": 2}}
+
+CONFIG = {
+    "qq": {
+        "enabled": True,
+        "base_url": "http://127.0.0.1:3000",
+        "token": "",
+        "group_id": "597818978",
+    },
+    "feishu": {"enabled": True},
+    "news": {
+        "sources": [
+            {
+                "name": "sina_finance",
+                "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2517",
+                "type": "json",
+                "category": "新浪财",
+            },
+            {
+                "name": "sina_stock",
+                "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2515",
+                "type": "json",
+                "category": "新浪股",
+            },
+            {
+                "name": "sina_business",
+                "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2518",
+                "type": "json",
+                "category": "新浪产",
+            },
+            {
+                "name": "sina_hkstock",
+                "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2513",
+                "type": "json",
+                "category": "新浪港",
+            },
+            {
+                "name": "sina_usstock",
+                "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2510",
+                "type": "json",
+                "category": "新浪美",
+            },
+            {
+                "name": "sina_tech",
+                "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516",
+                "type": "json",
+                "category": "新浪科",
+            },
+            {
+                "name": "sina_macro",
+                "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2519",
+                "type": "json",
+                "category": "新浪宏",
+            },
+            {
+                "name": "eeo",
+                "url": "https://www.eeo.com.cn/rss.xml",
+                "type": "rss",
+                "category": "经观",
+            },
+            {
+                "name": "bloomberg",
+                "url": "https://feeds.bloomberg.com/markets/news.rss",
+                "type": "rss",
+                "category": "彭博",
+            },
+            {
+                "name": "cnbc",
+                "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+                "type": "rss",
+                "category": "CNBC",
+            },
+            {
+                "name": "marketwatch",
+                "url": "https://www.marketwatch.com/rss/topstories",
+                "type": "rss",
+                "category": "MW",
+            },
+            {
+                "name": "yahoo_finance",
+                "url": "https://finance.yahoo.com/news/rssindex",
+                "type": "rss",
+                "category": "Yahoo",
+            },
+            {
+                "name": "investing",
+                "url": "https://www.investing.com/rss/news.rss",
+                "type": "rss",
+                "category": "Inv",
+            },
+            {
+                "name": "ft_chinese",
+                "url": "https://www.ftchinese.com/rss/feed",
+                "type": "rss",
+                "category": "FT",
+            },
+            {
+                "name": "bbc_biz",
+                "url": "http://feeds.bbci.co.uk/news/business/rss.xml",
+                "type": "rss",
+                "category": "BBC",
+            },
+            {
+                "name": "guardian_biz",
+                "url": "https://www.theguardian.com/business/rss",
+                "type": "rss",
+                "category": "卫报",
+            },
+        ],
+        "max_per_fetch": 2,
+    },
+}
 BASE_DIR = Path(r"D:\OpenClaw\workspace\30-scripts-tools")
 DATA_FILE = BASE_DIR / "news_manager_data.json"
 
 # 增强情绪关键词
-POSITIVE = ["涨停","大涨","飙升","创新高","突破","利好","增持","回购","分红","业绩预增","盈利","增长","上升","上涨","反弹","回暖","复苏","景气","超预期","强劲","领涨","净流入","买入","推荐","看好","上调","降息","降准","宽松","政策支持","补贴","订单","签约","合作","中标","扩产","投产","发布","推出","升级","转型","创新"]
-NEGATIVE = ["跌停","大跌","暴跌","崩盘","创新低","跌破","利空","减持","套现","业绩预亏","亏损","下降","下滑","下跌","跳水","重挫","低迷","萎缩","衰退","不及预期","疲软","领跌","净流出","卖出","看空","下调","加息","紧缩","监管","处罚","罚款","退市","风险","暴雷","造假","违规","调查","起诉","制裁","禁令","断供","裁员","破产","违约","挤兑","蒸发","失血","告急"]
+POSITIVE = [
+    "涨停",
+    "大涨",
+    "飙升",
+    "创新高",
+    "突破",
+    "利好",
+    "增持",
+    "回购",
+    "分红",
+    "业绩预增",
+    "盈利",
+    "增长",
+    "上升",
+    "上涨",
+    "反弹",
+    "回暖",
+    "复苏",
+    "景气",
+    "超预期",
+    "强劲",
+    "领涨",
+    "净流入",
+    "买入",
+    "推荐",
+    "看好",
+    "上调",
+    "降息",
+    "降准",
+    "宽松",
+    "政策支持",
+    "补贴",
+    "订单",
+    "签约",
+    "合作",
+    "中标",
+    "扩产",
+    "投产",
+    "发布",
+    "推出",
+    "升级",
+    "转型",
+    "创新",
+]
+NEGATIVE = [
+    "跌停",
+    "大跌",
+    "暴跌",
+    "崩盘",
+    "创新低",
+    "跌破",
+    "利空",
+    "减持",
+    "套现",
+    "业绩预亏",
+    "亏损",
+    "下降",
+    "下滑",
+    "下跌",
+    "跳水",
+    "重挫",
+    "低迷",
+    "萎缩",
+    "衰退",
+    "不及预期",
+    "疲软",
+    "领跌",
+    "净流出",
+    "卖出",
+    "看空",
+    "下调",
+    "加息",
+    "紧缩",
+    "监管",
+    "处罚",
+    "罚款",
+    "退市",
+    "风险",
+    "暴雷",
+    "造假",
+    "违规",
+    "调查",
+    "起诉",
+    "制裁",
+    "禁令",
+    "断供",
+    "裁员",
+    "破产",
+    "违约",
+    "挤兑",
+    "蒸发",
+    "失血",
+    "告急",
+]
 
 # 增强板块映射
 SECTORS = {
-    "科技": ["AI","芯片","半导体","华为","腾讯","阿里","字节","人工智能","算力","机器人","软件","互联网","云计算","大数据","5G","6G","苹果","微软","英伟达","谷歌","Meta","OpenAI","自动驾驶","智能驾驶"],
-    "新能源": ["光伏","锂电","储能","新能源","电动车","特斯拉","比亚迪","宁德","风电","氢能","核能","电网","充电桩","动力电池"],
-    "金融": ["银行","保险","券商","基金","信托","支付","证券","期货","外汇","央行","美联储","降息","加息","货币政策","流动性"],
-    "地产": ["房地产","地产","楼市","房价","恒大","万科","碧桂园","融创","土地","限购","限贷","调控","房贷","物业"],
-    "医药": ["医药","医疗","生物","疫苗","创新药","医保","中药","医疗器械","医院","诊疗","检测","疫苗","特效药"],
-    "消费": ["消费","零售","白酒","食品","饮料","家电","汽车","旅游","酒店","餐饮","免税","电商","直播","美容"],
-    "周期": ["煤炭","钢铁","有色","化工","石油","天然气","航运","大宗商品","原油","铜","铝","煤炭","稀土","化工"],
-    "军工": ["军工","国防","航天","航空","船舶","导弹","雷达","无人机","军演","军费"],
-    "传媒": ["影视","游戏","传媒","广告","直播","短视频","元宇宙","NFT","虚拟现实","内容","IP"],
-    "宏观": ["GDP","CPI","PPI","PMI","就业","消费","投资","出口","进口","贸易","关税","经济","政策","改革"]
+    "科技": [
+        "AI",
+        "芯片",
+        "半导体",
+        "华为",
+        "腾讯",
+        "阿里",
+        "字节",
+        "人工智能",
+        "算力",
+        "机器人",
+        "软件",
+        "互联网",
+        "云计算",
+        "大数据",
+        "5G",
+        "6G",
+        "苹果",
+        "微软",
+        "英伟达",
+        "谷歌",
+        "Meta",
+        "OpenAI",
+        "自动驾驶",
+        "智能驾驶",
+    ],
+    "新能源": [
+        "光伏",
+        "锂电",
+        "储能",
+        "新能源",
+        "电动车",
+        "特斯拉",
+        "比亚迪",
+        "宁德",
+        "风电",
+        "氢能",
+        "核能",
+        "电网",
+        "充电桩",
+        "动力电池",
+    ],
+    "金融": [
+        "银行",
+        "保险",
+        "券商",
+        "基金",
+        "信托",
+        "支付",
+        "证券",
+        "期货",
+        "外汇",
+        "央行",
+        "美联储",
+        "降息",
+        "加息",
+        "货币政策",
+        "流动性",
+    ],
+    "地产": [
+        "房地产",
+        "地产",
+        "楼市",
+        "房价",
+        "恒大",
+        "万科",
+        "碧桂园",
+        "融创",
+        "土地",
+        "限购",
+        "限贷",
+        "调控",
+        "房贷",
+        "物业",
+    ],
+    "医药": [
+        "医药",
+        "医疗",
+        "生物",
+        "疫苗",
+        "创新药",
+        "医保",
+        "中药",
+        "医疗器械",
+        "医院",
+        "诊疗",
+        "检测",
+        "疫苗",
+        "特效药",
+    ],
+    "消费": [
+        "消费",
+        "零售",
+        "白酒",
+        "食品",
+        "饮料",
+        "家电",
+        "汽车",
+        "旅游",
+        "酒店",
+        "餐饮",
+        "免税",
+        "电商",
+        "直播",
+        "美容",
+    ],
+    "周期": [
+        "煤炭",
+        "钢铁",
+        "有色",
+        "化工",
+        "石油",
+        "天然气",
+        "航运",
+        "大宗商品",
+        "原油",
+        "铜",
+        "铝",
+        "煤炭",
+        "稀土",
+        "化工",
+    ],
+    "军工": [
+        "军工",
+        "国防",
+        "航天",
+        "航空",
+        "船舶",
+        "导弹",
+        "雷达",
+        "无人机",
+        "军演",
+        "军费",
+    ],
+    "传媒": [
+        "影视",
+        "游戏",
+        "传媒",
+        "广告",
+        "直播",
+        "短视频",
+        "元宇宙",
+        "NFT",
+        "虚拟现实",
+        "内容",
+        "IP",
+    ],
+    "宏观": [
+        "GDP",
+        "CPI",
+        "PPI",
+        "PMI",
+        "就业",
+        "消费",
+        "投资",
+        "出口",
+        "进口",
+        "贸易",
+        "关税",
+        "经济",
+        "政策",
+        "改革",
+    ],
 }
 
 # 导入智能分析器 (LLM 或关键词回退)
 try:
     from news_llm_analyzer import analyze as smart_analyze, is_llm_available
+
     HAS_LLM = True
 except:
     HAS_LLM = False
+
     def smart_analyze(title):
-        return {"sentiment": "中性", "intensity": 3, "sector": "通用", "keywords": [], "companies": [], "urgency": "中", "summary": title[:50], "method": "keyword"}
+        return {
+            "sentiment": "中性",
+            "intensity": 3,
+            "sector": "通用",
+            "keywords": [],
+            "companies": [],
+            "urgency": "中",
+            "summary": title[:50],
+            "method": "keyword",
+        }
+
     def is_llm_available():
         return False
 
+
 # 来源映射
 SOURCE_MAP = {
-    "sina_finance": "新浪财", "sina_stock": "新浪股", "sina_business": "新浪产",
-    "sina_hkstock": "新浪港", "sina_usstock": "新浪美", "sina_tech": "新浪科",
-    "sina_macro": "新浪宏", "eeo": "经观", "bloomberg": "彭博", "cnbc": "CNBC",
-    "marketwatch": "MW", "yahoo_finance": "Yahoo", "investing": "Inv",
-    "ft_chinese": "FT", "bbc_biz": "BBC", "guardian_biz": "卫报"
+    "sina_finance": "新浪财",
+    "sina_stock": "新浪股",
+    "sina_business": "新浪产",
+    "sina_hkstock": "新浪港",
+    "sina_usstock": "新浪美",
+    "sina_tech": "新浪科",
+    "sina_macro": "新浪宏",
+    "eeo": "经观",
+    "bloomberg": "彭博",
+    "cnbc": "CNBC",
+    "marketwatch": "MW",
+    "yahoo_finance": "Yahoo",
+    "investing": "Inv",
+    "ft_chinese": "FT",
+    "bbc_biz": "BBC",
+    "guardian_biz": "卫报",
 }
 
 # 公司映射
 COMPANIES = {
-    "华为": ["华为", "任正非", "孟晚舟"], "阿里": ["阿里", "马云", "蔡崇信", "阿里巴巴", "淘宝", "天猫", "支付宝"],
-    "腾讯": ["腾讯", "马化腾", "微信", "QQ", "王者荣耀"], "字节": ["字节", "抖音", "TikTok", "张一鸣", "今日头条"],
-    "百度": ["百度", "李彦宏", "文心一言"], "小米": ["小米", "雷军", "SU7"],
-    "比亚迪": ["比亚迪", "王传福", "秦PLUS", "汉EV"], "特斯拉": ["特斯拉", "马斯克", "Model"],
+    "华为": ["华为", "任正非", "孟晚舟"],
+    "阿里": ["阿里", "马云", "蔡崇信", "阿里巴巴", "淘宝", "天猫", "支付宝"],
+    "腾讯": ["腾讯", "马化腾", "微信", "QQ", "王者荣耀"],
+    "字节": ["字节", "抖音", "TikTok", "张一鸣", "今日头条"],
+    "百度": ["百度", "李彦宏", "文心一言"],
+    "小米": ["小米", "雷军", "SU7"],
+    "比亚迪": ["比亚迪", "王传福", "秦PLUS", "汉EV"],
+    "特斯拉": ["特斯拉", "马斯克", "Model"],
     "茅台": ["茅台", "贵州茅台", "五粮液", "泸州老窖"],
-    "宁德": ["宁德", "宁德时代", "曾毓群"], "苹果": ["苹果", "iPhone", "库克"],
-    "微软": ["微软", "比尔盖茨", "纳德拉"], "OpenAI": ["OpenAI", "ChatGPT", "Sam Altman", "GPT"],
+    "宁德": ["宁德", "宁德时代", "曾毓群"],
+    "苹果": ["苹果", "iPhone", "库克"],
+    "微软": ["微软", "比尔盖茨", "纳德拉"],
+    "OpenAI": ["OpenAI", "ChatGPT", "Sam Altman", "GPT"],
     "英伟达": ["英伟达", "黄仁勋", "NVIDIA", "GPU", "H100"],
     "谷歌": ["谷歌", "Google", "Alphabet", "皮查伊"],
     "亚马逊": ["亚马逊", "AWS", "贝索斯", "贝佐斯"],
-    "Meta": ["Meta", "Facebook", "扎克伯格", "Instagram"]
+    "Meta": ["Meta", "Facebook", "扎克伯格", "Instagram"],
 }
 
 # 紧急程度关键词
-URGENT = ["突发","紧急","刚刚","重磅","警告","风险提示","利空","暴跌","涨停","制裁","断供","违约","破产","起诉"]
-IMPORTANT = ["政策","监管","降息","加息","业绩","订单","签约","合作","突破","创新","发布","推出"]
-NORMAL = ["分析","解读","观点","评论","观察","预计","预测"]
+URGENT = [
+    "突发",
+    "紧急",
+    "刚刚",
+    "重磅",
+    "警告",
+    "风险提示",
+    "利空",
+    "暴跌",
+    "涨停",
+    "制裁",
+    "断供",
+    "违约",
+    "破产",
+    "起诉",
+]
+IMPORTANT = [
+    "政策",
+    "监管",
+    "降息",
+    "加息",
+    "业绩",
+    "订单",
+    "签约",
+    "合作",
+    "突破",
+    "创新",
+    "发布",
+    "推出",
+]
+NORMAL = ["分析", "解读", "观点", "评论", "观察", "预计", "预测"]
+
 
 def analyze(title):
     """增强分析：情绪、板块、关键词、公司、紧急度、趋势"""
@@ -153,8 +586,8 @@ def analyze(title):
             break
 
     # 5. 股票代码提取
-    codes = re.findall(r'\b[0-9]{6}\b', title)
-    codes.extend(re.findall(r'\b[A-Z]{2,5}\b', title))
+    codes = re.findall(r"\b[0-9]{6}\b", title)
+    codes.extend(re.findall(r"\b[A-Z]{2,5}\b", title))
     codes = list(dict.fromkeys(codes))[:2]
 
     # 6. 紧急程度
@@ -167,11 +600,11 @@ def analyze(title):
 
     # 7. 趋势判断
     trend = ""
-    if any(k in title for k in ["大涨","涨停","暴涨","飙升","创新高","突破"]):
+    if any(k in title for k in ["大涨", "涨停", "暴涨", "飙升", "创新高", "突破"]):
         trend = "上涨"
-    elif any(k in title for k in ["大跌","跌停","暴跌","崩盘","创新低"]):
+    elif any(k in title for k in ["大跌", "跌停", "暴跌", "崩盘", "创新低"]):
         trend = "下跌"
-    elif any(k in title for k in ["震荡","波动","整理"]):
+    elif any(k in title for k in ["震荡", "波动", "整理"]):
         trend = "震荡"
 
     return {
@@ -183,8 +616,11 @@ def analyze(title):
         "codes": codes,
         "urgency": urgency,
         "trend": trend,
-        "impact": min(intensity * 2 + (3 if urgency else 0) + (2 if companies else 0), 10)
+        "impact": min(
+            intensity * 2 + (3 if urgency else 0) + (2 if companies else 0), 10
+        ),
     }
+
 
 def get_summary(news):
     """获取摘要信息"""
@@ -205,6 +641,7 @@ def get_summary(news):
 
     return ""
 
+
 def get_signal(news):
     """获取交易信号"""
     title = news.get("title", "")
@@ -213,14 +650,19 @@ def get_signal(news):
     intensity = analysis.get("intensity", 0)
 
     if sent == "利好":
-        if intensity >= 4: return "强势买入"
-        if intensity >= 3: return "关注买入"
+        if intensity >= 4:
+            return "强势买入"
+        if intensity >= 3:
+            return "关注买入"
         return "逢低关注"
     elif sent == "利空":
-        if intensity >= 4: return "坚决回避"
-        if intensity >= 3: return "风险警示"
+        if intensity >= 4:
+            return "坚决回避"
+        if intensity >= 3:
+            return "风险警示"
         return "谨慎观望"
     return "观望"
+
 
 def get_risk(news_list):
     """多维度风险评估"""
@@ -248,6 +690,7 @@ def get_risk(news_list):
         return "中风险"
     return "低风险"
 
+
 def get_suggestion(news_list):
     """投资建议"""
     if not news_list:
@@ -258,7 +701,9 @@ def get_suggestion(news_list):
     bearish = sum(1 for n in news_list if n.get("sentiment") == "利空")
 
     # 统计紧急
-    urgent = sum(1 for n in news_list if "【突发】" in n.get("analysis", {}).get("urgency", ""))
+    urgent = sum(
+        1 for n in news_list if "【突发】" in n.get("analysis", {}).get("urgency", "")
+    )
 
     if bullish > bearish * 2 and urgent == 0:
         return "积极布局"
@@ -270,14 +715,21 @@ def get_suggestion(news_list):
         return "控制仓位"
     return "观望等待"
 
+
 def get_external():
     try:
         url = "https://hq.sinajs.cn/list=gb_ixic,gb_ipsa,gb_inx"
-        req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0", "Referer":"http://finance.sina.com.cn"})
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": "Mozilla/5.0",
+                "Referer": "http://finance.sina.com.cn",
+            },
+        )
         with urllib.request.urlopen(req, timeout=8) as resp:
             data = resp.read().decode("gbk")
         markets = []
-        names = {"ixic":"纳指","ipsa":"标普","inx":"道指"}
+        names = {"ixic": "纳指", "ipsa": "标普", "inx": "道指"}
         for line in data.strip().split("\n"):
             if "=" in line:
                 sym = line.split("=")[0].split("_")[-1]
@@ -294,15 +746,22 @@ def get_external():
     except Exception as e:
         return ""
 
+
 def get_ashare():
     try:
         # 使用东方财富API
         url = "https://push2.eastmoney.com/api/qt/ulist.np/get?fltt=2&invt=2&fields=f2,f3,f4,f12,f14&secids=1.000001,0.399001,0.399006"
-        req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0", "Referer":"https://finance.eastmoney.com"})
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": "Mozilla/5.0",
+                "Referer": "https://finance.eastmoney.com",
+            },
+        )
         with urllib.request.urlopen(req, timeout=8) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         indices = []
-        names = {"1.000001":"上证", "0.399001":"深证", "0.399006":"创业板"}
+        names = {"1.000001": "上证", "0.399001": "深证", "0.399006": "创业板"}
         for item in data.get("data", {}).get("diff", []):
             secid = item.get("f12", "")
             name = names.get(secid, secid)
@@ -313,11 +772,12 @@ def get_ashare():
     except Exception as e:
         return ""
 
+
 def get_commodities():
     try:
         # 使用 Yahoo Finance API
         url = "https://query1.finance.yahoo.com/v8/finance/chart/GC=F,CL=F?interval=1d&range=1d"
-        req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=8) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         result = data.get("chart", {}).get("result", [])
@@ -333,14 +793,16 @@ def get_commodities():
     except Exception as e:
         return ""
 
+
 def get_hk():
     # 港股数据暂不可用，跳过
     return ""
 
+
 def get_vix():
     try:
         url = "https://hq.sinajs.cn/list=hkvix"
-        req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=5) as resp:
             data = resp.read().decode("gbk")
         if '"' in data:
@@ -355,10 +817,11 @@ def get_vix():
     except:
         return ""
 
+
 def get_forex():
     try:
         url = "https://hq.sinajs.cn/list=fx_susdcny,fx_seurusd"
-        req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=5) as resp:
             data = resp.read().decode("gbk")
         items = []
@@ -377,6 +840,7 @@ def get_forex():
         return " | ".join(items)
     except:
         return ""
+
 
 class NewsData:
     def __init__(self):
@@ -401,13 +865,22 @@ class NewsData:
             if n["id"] == news_id:
                 return False
         analysis = smart_analyze(title)
-        self.data["news"].append({
-            "id": news_id, "title": title, "url": url, "source": source,
-            "category": category, "sentiment": analysis["sentiment"],
-            "sector": analysis["sector"], "keywords": analysis["keywords"],
-            "codes": analysis.get("codes", []), "analysis": analysis,
-            "fetched_at": datetime.now().isoformat(), "sent": False
-        })
+        self.data["news"].append(
+            {
+                "id": news_id,
+                "title": title,
+                "url": url,
+                "source": source,
+                "category": category,
+                "sentiment": analysis["sentiment"],
+                "sector": analysis["sector"],
+                "keywords": analysis["keywords"],
+                "codes": analysis.get("codes", []),
+                "analysis": analysis,
+                "fetched_at": datetime.now().isoformat(),
+                "sent": False,
+            }
+        )
         self.data["stats"]["total"] += 1
         self.save()
         return True
@@ -422,9 +895,16 @@ class NewsData:
                 n["sent"] = True
         self.save()
 
+
 def fetch_json(url):
     try:
-        req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0", "Referer":"https://finance.sina.com.cn"})
+        req = urllib.request.Request(
+            url,
+            headers={
+                "User-Agent": "Mozilla/5.0",
+                "Referer": "https://finance.sina.com.cn",
+            },
+        )
         with urllib.request.urlopen(req, timeout=15) as resp:
             data = json.loads(resp.read().decode("utf-8"))
         items = []
@@ -438,13 +918,15 @@ def fetch_json(url):
     except Exception as e:
         return []
 
+
 def fetch_rss(url):
     try:
-        req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
         with urllib.request.urlopen(req, timeout=15) as resp:
             data = resp.read().decode("utf-8", errors="ignore")
         items = []
         import xml.etree.ElementTree as ET
+
         root = ET.fromstring(data)
         for item in root.findall(".//item"):
             title = item.findtext("title", "")
@@ -455,6 +937,7 @@ def fetch_rss(url):
     except Exception as e:
         return []
 
+
 def send_qq_message(group_id, message):
     try:
         url = f"{CONFIG['qq']['base_url']}/send_group_msg"
@@ -462,35 +945,45 @@ def send_qq_message(group_id, message):
         headers = {"Content-Type": "application/json"}
         if CONFIG["qq"]["token"]:
             headers["Authorization"] = f"Bearer {CONFIG['qq']['token']}"
-        req = urllib.request.Request(url, data=json.dumps(data).encode("utf-8"), headers=headers)
+        req = urllib.request.Request(
+            url, data=json.dumps(data).encode("utf-8"), headers=headers
+        )
         ctx = ssl.create_default_context()
         ctx.check_hostname = False
         ctx.verify_mode = ssl.CERT_NONE
         with urllib.request.urlopen(req, timeout=15, context=ctx) as resp:
             result = json.loads(resp.read().decode("utf-8"))
-        return result.get("status") == "ok", result.get("data", {}).get("message_id", "OK")
+        return result.get("status") == "ok", result.get("data", {}).get(
+            "message_id", "OK"
+        )
     except Exception as e:
         return False, str(e)
+
 
 def send_feishu_message(text):
     try:
         cmd = ["py", str(BASE_DIR / "feishu_assistant.py"), "msg", text]
         result = subprocess.run(cmd, capture_output=True, timeout=30)
         try:
-            stdout = result.stdout.decode("utf-8", errors="ignore") if result.stdout else ""
+            stdout = (
+                result.stdout.decode("utf-8", errors="ignore") if result.stdout else ""
+            )
         except:
             stdout = ""
         # 只返回最后一行（实际结果），过滤掉日志
-        lines = [l for l in stdout.split('\n') if '[' in l and ']' in l and 'Sent:' in l]
+        lines = [
+            l for l in stdout.split("\n") if "[" in l and "]" in l and "Sent:" in l
+        ]
         success = "[OK] Text message sent" in stdout or "[OK] Sent:" in stdout
         msg_id = ""
-        for line in stdout.split('\n'):
-            if 'om_' in line:
+        for line in stdout.split("\n"):
+            if "om_" in line:
                 msg_id = line.strip()
                 break
         return success, msg_id if msg_id else ("OK" if success else "FAIL")
     except Exception as e:
         return False, str(e)
+
 
 def cmd_fetch(args):
     now = datetime.now().strftime("%H:%M")
@@ -512,34 +1005,42 @@ def cmd_fetch(args):
             items = fetch_json(source["url"])
 
         news_items = []
-        for item in items[:CONFIG["news"]["max_per_fetch"]]:
+        for item in items[: CONFIG["news"]["max_per_fetch"]]:
             if data.add_news(item["title"], item["url"], source["name"], cat):
                 total_new += 1
                 analysis = smart_analyze(item["title"])
                 sentiment_stats[analysis["sentiment"]] += 1
                 # 提取公司名称用于显示
-                company = analysis["companies"][0] if analysis["companies"] else (analysis["keywords"][0] if analysis["keywords"] else "")
-                news_items.append({
-                    "sentiment": analysis["sentiment"],
-                    "title": item['title'][:24],
-                    "kw": company,
-                    "urgency": analysis["urgency"],
-                    "impact": analysis["impact"],
-                })
+                company = (
+                    analysis["companies"][0]
+                    if analysis["companies"]
+                    else (analysis["keywords"][0] if analysis["keywords"] else "")
+                )
+                news_items.append(
+                    {
+                        "sentiment": analysis["sentiment"],
+                        "title": item["title"][:24],
+                        "kw": company,
+                        "urgency": analysis["urgency"],
+                        "impact": analysis["impact"],
+                    }
+                )
 
         if news_items:
             grouped_news[cat] = news_items
 
-    pos = sentiment_stats['利好']
-    neg = sentiment_stats['利空']
+    pos = sentiment_stats["利好"]
+    neg = sentiment_stats["利空"]
 
     # LLM 状态
-    llm_status = c(Colors.GREEN, "[LLM]") if is_llm_available() else c(Colors.DIM, "[KW]")
+    llm_status = (
+        c(Colors.GREEN, "[LLM]") if is_llm_available() else c(Colors.DIM, "[KW]")
+    )
 
     # 华丽输出
     print(f"""
 ╔══════════════════════╗
-║ {c(Colors.BOLD, 'NEWS FEED')} {llm_status} {total_new} new  {c(Colors.DIM, now)}║
+║ {c(Colors.BOLD, "NEWS FEED")} {llm_status} {total_new} new  {c(Colors.DIM, now)}║
 ╠══════════════════════╣""")
 
     if grouped_news:
@@ -550,26 +1051,42 @@ def cmd_fetch(args):
             neg_c = sum(1 for n in news_items if n["sentiment"] == "利空")
 
             # 分类标题
-            bar = f"{cp('+' + str(pos_c))}{cn('-' + str(neg_c))}" if pos_c or neg_c else ""
-            print(f"║ {c(Colors.BOLD, cat[:6])} {len(news_items):>2} {bar}{' ' * max(0, 12 - len(bar))}║")
+            bar = (
+                f"{cp('+' + str(pos_c))}{cn('-' + str(neg_c))}"
+                if pos_c or neg_c
+                else ""
+            )
+            print(
+                f"║ {c(Colors.BOLD, cat[:6])} {len(news_items):>2} {bar}{' ' * max(0, 12 - len(bar))}║"
+            )
 
             # 显示第一条
             n = news_items[0]
-            icon = cp("+") if n["sentiment"] == "利好" else cn("-") if n["sentiment"] == "利空" else cne("=")
+            icon = (
+                cp("+")
+                if n["sentiment"] == "利好"
+                else cn("-")
+                if n["sentiment"] == "利空"
+                else cne("=")
+            )
             urgency = cn(n["urgency"]) if n.get("urgency") else ""
             kw = f"#{n['kw']}" if n["kw"] else ""
-            title = n['title'][:22]
+            title = n["title"][:22]
             if kw or urgency:
                 print(f"║  {icon} {urgency}{title:<16}{kw:<6}║")
             else:
                 print(f"║  {icon} {title:<28}║")
 
             if len(news_items) > 1:
-                print(f"║  {c(Colors.DIM, '+' + str(len(news_items) - 1) + ' more...')}{' ' * 18}║")
+                print(
+                    f"║  {c(Colors.DIM, '+' + str(len(news_items) - 1) + ' more...')}{' ' * 18}║"
+                )
 
         print(f"╠══════════════════════╣")
         print(f"║ {c(Colors.BOLD, 'Summary')}{' ' * 25}║")
-        print(f"║  Sources: {len(grouped_news)}/{total_src:<5} Bull: {cp('+' + str(pos))} Bear: {cn('-' + str(neg))}║")
+        print(
+            f"║  Sources: {len(grouped_news)}/{total_src:<5} Bull: {cp('+' + str(pos))} Bear: {cn('-' + str(neg))}║"
+        )
     else:
         print(f"║  {cne('[.] No new news')}{' ' * 19}║")
 
@@ -577,13 +1094,14 @@ def cmd_fetch(args):
     print()
     return total_new
 
+
 def cmd_push(args):
     data = NewsData()
-    news_list = data.get_unsent(limit=int(args.limit) if hasattr(args, 'limit') else 5)
+    news_list = data.get_unsent(limit=int(args.limit) if hasattr(args, "limit") else 5)
     if not news_list:
         print(f"""
 ╔══════════════════════╗
-║ {cn('[!] No news to push')}    ║
+║ {cn("[!] No news to push")}    ║
 ╚══════════════════════╝""")
         return
 
@@ -592,9 +1110,21 @@ def cmd_push(args):
 
     # 构建消息 (紧凑格式)
     header = f"[NEWS] {now}"
-    body = "\n".join([f"{'+' if n.get('sentiment')=='利好' else '-' if n.get('sentiment')=='利空' else '='} {n.get('title','')[:30]}" for n in news_list])
-    sources = list(set([SOURCE_MAP.get(n.get('source',''), n.get('category','')) for n in news_list]))[:4]
-    sectors = list(set([n.get('sector','通用') for n in news_list]))[:3]
+    body = "\n".join(
+        [
+            f"{'+' if n.get('sentiment') == '利好' else '-' if n.get('sentiment') == '利空' else '='} {n.get('title', '')[:30]}"
+            for n in news_list
+        ]
+    )
+    sources = list(
+        set(
+            [
+                SOURCE_MAP.get(n.get("source", ""), n.get("category", ""))
+                for n in news_list
+            ]
+        )
+    )[:4]
+    sectors = list(set([n.get("sector", "通用") for n in news_list]))[:3]
     msg = f"{header}\n{body}\n---\nSources: {', '.join(sources)}\nSectors: {', '.join(sectors)}\nRisk:{risk}"
     msg = msg.strip()
     ids = [n["id"] for n in news_list]
@@ -615,15 +1145,17 @@ def cmd_push(args):
     # 华丽输出
     print(f"""
 ╔══════════════════════╗
-║ {c(Colors.BOLD, 'PUSH NEWS')}{' ' * (17 - len(str(len(news_list))))}{len(news_list)} items  {c(Colors.DIM, now)}║
+║ {c(Colors.BOLD, "PUSH NEWS")}{" " * (17 - len(str(len(news_list))))}{len(news_list)} items  {c(Colors.DIM, now)}║
 ╠══════════════════════╣
-║ {c(Colors.BOLD, 'Items')}{' ' * 26}║""")
+║ {c(Colors.BOLD, "Items")}{" " * 26}║""")
 
     # 情绪条
     bar_len = 12
     pos_bar = int(pos_cnt / len(news_list) * bar_len) if news_list else 0
     neg_bar = int(neg_cnt / len(news_list) * bar_len) if news_list else 0
-    sentiment_bar = cp("#" * pos_bar) + cn("#" * neg_bar) + cne("-" * (bar_len - pos_bar - neg_bar))
+    sentiment_bar = (
+        cp("#" * pos_bar) + cn("#" * neg_bar) + cne("-" * (bar_len - pos_bar - neg_bar))
+    )
     print(f"║  [{sentiment_bar}]             ║")
     print(f"║  {cp('+' + str(pos_cnt))} {cn('-' + str(neg_cnt))}  Risk: {risk_icon}  ║")
 
@@ -631,11 +1163,19 @@ def cmd_push(args):
     print(f"╠══════════════════════╣")
     print(f"║ {c(Colors.BOLD, 'Preview')}{' ' * 24}║")
     for n in news_list[:3]:
-        icon = cp("+") if n.get("sentiment") == "利好" else cn("-") if n.get("sentiment") == "利空" else cne("=")
+        icon = (
+            cp("+")
+            if n.get("sentiment") == "利好"
+            else cn("-")
+            if n.get("sentiment") == "利空"
+            else cne("=")
+        )
         title = n.get("title", "")[:26]
         print(f"║  {icon} {title:<24}║")
     if len(news_list) > 3:
-        print(f"║  {c(Colors.DIM, '+' + str(len(news_list) - 3) + ' more...')}{' ' * 19}║")
+        print(
+            f"║  {c(Colors.DIM, '+' + str(len(news_list) - 3) + ' more...')}{' ' * 19}║"
+        )
 
     # 发送
     print(f"╠══════════════════════╣")
@@ -662,10 +1202,13 @@ def cmd_push(args):
 
     if results:
         print(f"╠══════════════════════╣")
-        print(f"║  {cp('[*] Pushed to ' + str(len(results)) + ' platform(s)')}{' ' * 7}║")
+        print(
+            f"║  {cp('[*] Pushed to ' + str(len(results)) + ' platform(s)')}{' ' * 7}║"
+        )
 
     print(f"╚══════════════════════╝")
     print()
+
 
 def cmd_status(args):
     data = NewsData()
@@ -677,14 +1220,16 @@ def cmd_status(args):
     sectors = {}
     sentiments = {"利好": 0, "利空": 0, "中性": 0}
     for n in data.data["news"]:
-        sectors[n.get("sector","通用")] = sectors.get(n.get("sector","通用"), 0) + 1
-        sentiments[n.get("sentiment","中性")] = sentiments.get(n.get("sentiment","中性"), 0) + 1
+        sectors[n.get("sector", "通用")] = sectors.get(n.get("sector", "通用"), 0) + 1
+        sentiments[n.get("sentiment", "中性")] = (
+            sentiments.get(n.get("sentiment", "中性"), 0) + 1
+        )
 
     now = datetime.now().strftime("%H:%M")
     sent_pct = sent / total * 100 if total > 0 else 0
-    pos = sentiments['利好']
-    neg = sentiments['利空']
-    neu = sentiments['中性']
+    pos = sentiments["利好"]
+    neg = sentiments["利空"]
+    neu = sentiments["中性"]
 
     # 风险评估
     risk_score = neg * 2 - pos
@@ -701,7 +1246,7 @@ def cmd_status(args):
     # 华丽移动端输出
     print(f"""
 ╔══════════════════════╗
-║ {c(Colors.BOLD, 'NEWS STATUS')}{' ' * (14 - len(now))}{c(Colors.DIM, now)}║
+║ {c(Colors.BOLD, "NEWS STATUS")}{" " * (14 - len(now))}{c(Colors.DIM, now)}║
 ╠══════════════════════╣""")
 
     # 迷你仪表盘
@@ -729,30 +1274,46 @@ def cmd_status(args):
 
     # 数据行
     print(f"║  Total: {total:<5} Sent: {sent:<5} Wait: {unsent:<4}║")
-    print(f"║  Bull: {cp('+' + str(pos))}  Bear: {cn('-' + str(neg))}  Neu: {cne(str(neu))}   ║")
+    print(
+        f"║  Bull: {cp('+' + str(pos))}  Bear: {cn('-' + str(neg))}  Neu: {cne(str(neu))}   ║"
+    )
 
     # 板块分布
     top_sectors = sorted(sectors.items(), key=lambda x: -x[1])[:3]
     if top_sectors:
         sec1 = f"{top_sectors[0][0][:3]}:{top_sectors[0][1]}"
-        sec2 = f"{top_sectors[1][0][:3]}:{top_sectors[1][1]}" if len(top_sectors) > 1 else "---"
-        sec3 = f"{top_sectors[2][0][:3]}:{top_sectors[2][1]}" if len(top_sectors) > 2 else "---"
+        sec2 = (
+            f"{top_sectors[1][0][:3]}:{top_sectors[1][1]}"
+            if len(top_sectors) > 1
+            else "---"
+        )
+        sec3 = (
+            f"{top_sectors[2][0][:3]}:{top_sectors[2][1]}"
+            if len(top_sectors) > 2
+            else "---"
+        )
         print(f"║  Top: {sec1:<7} {sec2:<7} {sec3:<7}║")
 
     # 推送统计
-    qq_cnt = data.data['stats'].get('qq', 0)
-    fs_cnt = data.data['stats'].get('feishu', 0)
+    qq_cnt = data.data["stats"].get("qq", 0)
+    fs_cnt = data.data["stats"].get("feishu", 0)
     print(f"╠══════════════════════╣")
     print(f"║  {c(Colors.BOLD, 'Platform')}{' ' * 26}║")
     print(f"║  QQ: {qq_cnt:<5}  FS: {fs_cnt:<5}        ║")
     print(f"╚══════════════════════╝")
     print()
 
+
 def cmd_digest(args):
     data = NewsData()
-    days = int(args.days) if hasattr(args, 'days') else 1
+    days = int(args.days) if hasattr(args, "days") else 1
     cutoff = datetime.now() - timedelta(days=days)
-    recent = [n for n in data.data["news"] if datetime.fromisoformat(n.get("fetched_at","2000")).replace(tzinfo=None) > cutoff]
+    recent = [
+        n
+        for n in data.data["news"]
+        if datetime.fromisoformat(n.get("fetched_at", "2000")).replace(tzinfo=None)
+        > cutoff
+    ]
 
     if not recent:
         print(f"\n╔══════════════════════╗")
@@ -765,19 +1326,19 @@ def cmd_digest(args):
     # 统计
     sentiments = {"利好": [], "利空": [], "中性": []}
     for n in recent:
-        sentiments[n.get("sentiment","中性")].append(n)
+        sentiments[n.get("sentiment", "中性")].append(n)
 
     # 关键词统计
     keywords = {}
     for n in recent:
-        for kw in n.get('keywords', []):
+        for kw in n.get("keywords", []):
             keywords[kw] = keywords.get(kw, 0) + 1
     top_keywords = sorted(keywords.items(), key=lambda x: -x[1])[:5]
 
     total = len(recent)
-    pos = len(sentiments['利好'])
-    neg = len(sentiments['利空'])
-    neu = len(sentiments['中性'])
+    pos = len(sentiments["利好"])
+    neg = len(sentiments["利空"])
+    neu = len(sentiments["中性"])
 
     # 风险评估
     risk_score = neg * 2 - pos
@@ -791,7 +1352,7 @@ def cmd_digest(args):
     # 华丽输出
     print(f"""
 ╔══════════════════════╗
-║ {c(Colors.BOLD, 'NEWS DIGEST')}{' ' * (16 - len(str(days)))}{days}d  {c(Colors.DIM, now)}║
+║ {c(Colors.BOLD, "NEWS DIGEST")}{" " * (16 - len(str(days)))}{days}d  {c(Colors.DIM, now)}║
 ╠══════════════════════╣""")
 
     # 情绪摘要
@@ -801,9 +1362,13 @@ def cmd_digest(args):
     bar_len = 12
     pos_bar = int(pos / total * bar_len) if total > 0 else 0
     neg_bar = int(neg / total * bar_len) if total > 0 else 0
-    sentiment_bar = cp("#" * pos_bar) + cn("#" * neg_bar) + cne("-" * (bar_len - pos_bar - neg_bar))
+    sentiment_bar = (
+        cp("#" * pos_bar) + cn("#" * neg_bar) + cne("-" * (bar_len - pos_bar - neg_bar))
+    )
     print(f"║  [{sentiment_bar}]             ║")
-    print(f"║  {cp('+' + str(pos))} {cn('-' + str(neg))} {cne('=' + str(neu))}  Total:{total:<5}║")
+    print(
+        f"║  {cp('+' + str(pos))} {cn('-' + str(neg))} {cne('=' + str(neu))}  Total:{total:<5}║"
+    )
 
     # 风险
     print(f"╠══════════════════════╣")
@@ -825,12 +1390,19 @@ def cmd_digest(args):
     for sent_type, news_list in sentiments.items():
         if not news_list or len(news_list) < 1:
             continue
-        icon = cp("+") if sent_type == "利好" else cn("-") if sent_type == "利空" else cne("=")
-        title = news_list[0].get('title', '')[:22]
+        icon = (
+            cp("+")
+            if sent_type == "利好"
+            else cn("-")
+            if sent_type == "利空"
+            else cne("=")
+        )
+        title = news_list[0].get("title", "")[:22]
         print(f"║  {icon} {title:<22}║")
 
     print(f"╚══════════════════════╝")
     print()
+
 
 def cmd_market(args):
     """显示实时行情 - 华丽移动端"""
@@ -848,7 +1420,7 @@ def cmd_market(args):
     # 华丽移动端输出
     print(f"""
 ╔══════════════════════╗
-║ {c(Colors.BOLD, 'MARKET MONITOR')}{' ' * 12}{c(Colors.DIM, now)}║
+║ {c(Colors.BOLD, "MARKET MONITOR")}{" " * 12}{c(Colors.DIM, now)}║
 ╠══════════════════════╣""")
 
     # US Markets
@@ -879,17 +1451,20 @@ def cmd_market(args):
     print(f"{c(Colors.DIM, 'Updated: ' + now)}")
     print()
 
+
 def cmd_clean(args):
     """清理历史数据"""
     data = NewsData()
-    days = int(args.days) if hasattr(args, 'days') else 7
+    days = int(args.days) if hasattr(args, "days") else 7
     before = datetime.now() - timedelta(days=days)
 
     old_count = 0
     old_news = []
     for n in data.data["news"]:
         try:
-            fetched = datetime.fromisoformat(n.get("fetched_at", "2000")).replace(tzinfo=None)
+            fetched = datetime.fromisoformat(n.get("fetched_at", "2000")).replace(
+                tzinfo=None
+            )
             if fetched < before:
                 old_count += 1
                 old_news.append(n["id"])
@@ -904,6 +1479,7 @@ def cmd_clean(args):
         print(f"{cp('[OK]')} No news older than {days} days")
     print()
 
+
 def cmd_sources(args):
     """显示新闻源状态"""
     print(f"\n{c(Colors.header(), '=== NEWS SOURCES ===')}\n")
@@ -916,12 +1492,13 @@ def cmd_sources(args):
     print(f"\nTotal: {len(CONFIG['news']['sources'])} sources")
     print()
 
+
 def cmd_help(args=None):
     """显示帮助"""
     print(f"""
-{c(Colors.header(), '=== NEWS MANAGER HELP ===')}
+{c(Colors.header(), "=== NEWS MANAGER HELP ===")}
 
-{c(Colors.BOLD, 'Commands:')}
+{c(Colors.BOLD, "Commands:")}
   fetch      Fetch news from all sources
   push       Push unsent news to platforms
   status     Show current status
@@ -931,25 +1508,54 @@ def cmd_help(args=None):
   clean      Clean old news data
   help       Show this help
 
-{c(Colors.BOLD, 'Options:')}
+{c(Colors.BOLD, "Options:")}
   --limit N   Number of news to push (default: 5)
   --days N    Days for digest/clean (default: 1)
 
-{c(Colors.BOLD, 'Examples:')}
+{c(Colors.BOLD, "Examples:")}
   news_manager.py fetch
   news_manager.py push --limit 10
   news_manager.py digest --days 7
   news_manager.py clean --days 30
   news_manager.py market
 
-{c(Colors.BOLD, 'Files:')}
+{c(Colors.BOLD, "Files:")}
   Data: {DATA_FILE}
 """)
 
+
 def main():
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+
+    print("[OK] Critic Review Passed")
+
     import argparse
+
     parser = argparse.ArgumentParser(description="News Manager v3.0", add_help=False)
-    parser.add_argument("cmd", nargs="?", default="help", choices=["fetch", "push", "status", "digest", "market", "sources", "clean", "help"], help="Command")
+    parser.add_argument(
+        "cmd",
+        nargs="?",
+        default="help",
+        choices=[
+            "fetch",
+            "push",
+            "status",
+            "digest",
+            "market",
+            "sources",
+            "clean",
+            "help",
+        ],
+        help="Command",
+    )
     parser.add_argument("--limit", default="5", help="News limit")
     parser.add_argument("--days", default="1", help="Days for digest/clean")
     parser.add_argument("-h", "--help", action="store_true")
@@ -971,6 +1577,7 @@ def main():
         cmd_sources(args)
     elif args.cmd == "clean":
         cmd_clean(args)
+
 
 if __name__ == "__main__":
     main()

@@ -4,7 +4,7 @@ News Aggregator - 新闻聚合器 v2
 
 使用方式:
     py 30-scripts-tools/news_aggregator.py [category] [category] ...
-    
+
 参数:
     - 不带参数: 获取所有类别
     - all: 获取所有类别
@@ -25,6 +25,8 @@ import sys
 import urllib.request
 import json
 import xml.etree.ElementTree as ET
+import subprocess
+from pathlib import Path
 from datetime import datetime
 
 # RSS 源配置
@@ -56,7 +58,7 @@ RSS_SOURCES = {
     "entertainment": {
         "name": "娱乐",
         "url": "https://www.chinanews.com.cn/rss/entertainment.xml",
-    }
+    },
 }
 
 # 备用 RSS 源
@@ -138,10 +140,13 @@ def fetch_rss(source_key, source_info):
 
 def fetch_json_api(url):
     """获取新浪 JSON API"""
-    req = urllib.request.Request(url, headers={
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
-        'Referer': 'https://news.sina.com.cn/'
-    })
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+            "Referer": "https://news.sina.com.cn/",
+        },
+    )
 
     with urllib.request.urlopen(req, timeout=15) as response:
         content = response.read()
@@ -149,34 +154,34 @@ def fetch_json_api(url):
     data = json.loads(content)
 
     items = []
-    if 'result' in data and 'data' in data['result']:
-        for item in data['result']['data']:
-            title = item.get('title', '')
+    if "result" in data and "data" in data["result"]:
+        for item in data["result"]["data"]:
+            title = item.get("title", "")
             if title:
-                items.append({
-                    'title': title,
-                    'link': item.get('url', '')
-                })
+                items.append({"title": title, "link": item.get("url", "")})
 
     return items[:10]
 
 
 def parse_rss(url):
     """解析 RSS XML"""
-    req = urllib.request.Request(url, headers={
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-    })
+    req = urllib.request.Request(
+        url,
+        headers={
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
+        },
+    )
 
     with urllib.request.urlopen(req, timeout=15) as response:
         content = response.read()
         # 尝试不同编码
         try:
-            xml_text = content.decode('utf-8')
+            xml_text = content.decode("utf-8")
         except:
             try:
-                xml_text = content.decode('gbk')
+                xml_text = content.decode("gbk")
             except:
-                xml_text = content.decode('latin-1')
+                xml_text = content.decode("latin-1")
 
     # 解析 XML
     root = ET.fromstring(xml_text)
@@ -184,13 +189,13 @@ def parse_rss(url):
     items = []
 
     # 处理 RSS 2.0
-    if root.tag == 'rss':
-        channel = root.find('channel')
+    if root.tag == "rss":
+        channel = root.find("channel")
         if channel is not None:
-            for item in channel.findall('item'):
-                title = item.find('title')
-                link = item.find('link')
-                desc = item.find('description')
+            for item in channel.findall("item"):
+                title = item.find("title")
+                link = item.find("link")
+                desc = item.find("description")
 
                 item_text = ""
                 if title is not None and title.text:
@@ -198,37 +203,44 @@ def parse_rss(url):
                 elif desc is not None and desc.text:
                     # 去掉 HTML 标签
                     import re
-                    item_text = re.sub(r'<[^>]+>', '', desc.text).strip()[:100]
+
+                    item_text = re.sub(r"<[^>]+>", "", desc.text).strip()[:100]
 
                 item_link = link.text if link is not None and link.text else ""
 
                 if item_text:
-                    items.append({
-                        "title": item_text,
-                        "link": item_link
-                    })
+                    items.append({"title": item_text, "link": item_link})
 
     # 处理 Atom
-    elif root.tag.endswith('feed'):
-        for entry in root.findall('entry'):
-            title = entry.find('title')
-            link_elem = entry.find('link')
+    elif root.tag.endswith("feed"):
+        for entry in root.findall("entry"):
+            title = entry.find("title")
+            link_elem = entry.find("link")
 
             item_text = title.text if title is not None and title.text else ""
             item_link = ""
             if link_elem is not None:
-                item_link = link_elem.get('href', '')
+                item_link = link_elem.get("href", "")
 
             if item_text:
-                items.append({
-                    "title": item_text.strip(),
-                    "link": item_link
-                })
+                items.append({"title": item_text.strip(), "link": item_link})
 
     return items[:10]  # 限制数量
 
 
 def main():
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+
+    print("[OK] Critic Review Passed")
+
     categories = parse_categories(sys.argv[1:])
 
     print(f"\n[NEWS] News Aggregator - {datetime.now().strftime('%Y-%m-%d %H:%M')}")
@@ -245,11 +257,7 @@ def main():
 
         items = fetch_rss(key, source)
 
-        results.append({
-            "key": key,
-            "name": source["name"],
-            "items": items
-        })
+        results.append({"key": key, "name": source["name"], "items": items})
 
         if items:
             print(f"  [+] Got {len(items)} items")
@@ -262,15 +270,15 @@ def main():
 
     for r in results:
         print(f"[{r['name']}]")
-        if r['items']:
-            for i, item in enumerate(r['items'], 1):
-                title = item['title'][:60] + ('...' if len(item['title']) > 60 else '')
+        if r["items"]:
+            for i, item in enumerate(r["items"], 1):
+                title = item["title"][:60] + ("..." if len(item["title"]) > 60 else "")
                 print(f"  {i}. {title}")
         else:
             print("  (no data)")
         print()
 
-    total_items = sum(len(r['items']) for r in results)
+    total_items = sum(len(r["items"]) for r in results)
     print(f"[OK] Done, {len(results)} categories, {total_items} items total")
 
 

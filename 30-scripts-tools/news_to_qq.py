@@ -13,6 +13,7 @@ News to QQ - QQ机器人新闻推送 (QQ Bot API v2)
 """
 
 import sys
+import subprocess
 import json
 import ssl
 import urllib.request
@@ -36,13 +37,14 @@ QQ_API_BASE = "https://api.sgroup.qq.com"  # 正式环境
 # QQ_API_BASE = "https://sandbox.api.sgroup.qq.com"  # 沙箱环境
 GET_TOKEN_URL = "https://bots.qq.com/app/getAppAccessToken"
 
-BASE_DIR = Path(r'D:\OpenClaw\workspace\30-scripts-tools')
+BASE_DIR = Path(r"D:\OpenClaw\workspace\30-scripts-tools")
 QQ_HISTORY_FILE = BASE_DIR / "qq_news_history.json"
 
 
 # ============================================================
 # 工具函数
 # ============================================================
+
 
 def get_ssl_context():
     ctx = ssl.create_default_context()
@@ -51,41 +53,33 @@ def get_ssl_context():
     return ctx
 
 
-def api_request(url, data=None, headers=None, method='POST'):
+def api_request(url, data=None, headers=None, method="POST"):
     """发送 API 请求"""
     req_headers = headers or {}
-    req_headers['Content-Type'] = 'application/json'
+    req_headers["Content-Type"] = "application/json"
 
-    req_data = json.dumps(data).encode('utf-8') if data else None
+    req_data = json.dumps(data).encode("utf-8") if data else None
 
-    req = urllib.request.Request(
-        url,
-        data=req_data,
-        headers=req_headers,
-        method=method
-    )
+    req = urllib.request.Request(url, data=req_data, headers=req_headers, method=method)
 
     try:
         with urllib.request.urlopen(req, timeout=15, context=get_ssl_context()) as resp:
-            return json.loads(resp.read().decode('utf-8'))
+            return json.loads(resp.read().decode("utf-8"))
     except urllib.error.HTTPError as e:
-        error_body = e.read().decode('utf-8')
+        error_body = e.read().decode("utf-8")
         raise Exception(f"HTTP {e.code}: {error_body[:500]}")
 
 
 def get_access_token():
     """获取 Access Token"""
-    data = {
-        "appId": CONFIG['app_id'],
-        "clientSecret": CONFIG['client_secret']
-    }
+    data = {"appId": CONFIG["app_id"], "clientSecret": CONFIG["client_secret"]}
 
     result = api_request(GET_TOKEN_URL, data=data)
 
-    if result.get('code') != 0 and 'access_token' not in result:
+    if result.get("code") != 0 and "access_token" not in result:
         raise Exception(f"Token error: {result}")
 
-    return result.get('access_token')
+    return result.get("access_token")
 
 
 def send_group_message(access_token, group_openid, content, msg_type=0):
@@ -93,18 +87,18 @@ def send_group_message(access_token, group_openid, content, msg_type=0):
     url = f"{QQ_API_BASE}/v2/groups/{group_openid}/messages"
 
     headers = {
-        'Authorization': f"QQBot {access_token}",
-        'Content-Type': 'application/json'
+        "Authorization": f"QQBot {access_token}",
+        "Content-Type": "application/json",
     }
 
     data = {
         "content": content,
-        "msg_type": msg_type  # 0=文本, 2=markdown
+        "msg_type": msg_type,  # 0=文本, 2=markdown
     }
 
     result = api_request(url, data=data, headers=headers)
 
-    if result.get('code') != 0:
+    if result.get("code") != 0:
         raise Exception(f"Send error: {result.get('message', result)}")
 
     return result
@@ -114,11 +108,12 @@ def send_group_message(access_token, group_openid, content, msg_type=0):
 # 历史记录管理
 # ============================================================
 
+
 def load_history():
     """加载发送历史"""
     if QQ_HISTORY_FILE.exists():
         try:
-            return json.load(open(QQ_HISTORY_FILE, 'r', encoding='utf-8'))
+            return json.load(open(QQ_HISTORY_FILE, "r", encoding="utf-8"))
         except:
             pass
     return {"sent": [], "count": 0}
@@ -126,30 +121,32 @@ def load_history():
 
 def save_history(history):
     """保存发送历史"""
-    json.dump(history, open(QQ_HISTORY_FILE, 'w', encoding='utf-8'),
-              ensure_ascii=False, indent=2)
+    json.dump(
+        history,
+        open(QQ_HISTORY_FILE, "w", encoding="utf-8"),
+        ensure_ascii=False,
+        indent=2,
+    )
 
 
 def is_duplicate(history, title):
     """检查是否重复"""
-    for item in history.get('sent', []):
-        if item.get('title') == title:
+    for item in history.get("sent", []):
+        if item.get("title") == title:
             return True
     return False
 
 
 def add_to_history(history, title, url):
     """添加到历史"""
-    history['sent'].append({
-        "title": title,
-        "url": url,
-        "time": datetime.now().isoformat()
-    })
-    history['count'] = len(history['sent'])
+    history["sent"].append(
+        {"title": title, "url": url, "time": datetime.now().isoformat()}
+    )
+    history["count"] = len(history["sent"])
 
     # 只保留最近 500 条
-    if len(history['sent']) > 500:
-        history['sent'] = history['sent'][-500:]
+    if len(history["sent"]) > 500:
+        history["sent"] = history["sent"][-500:]
 
     save_history(history)
 
@@ -157,6 +154,7 @@ def add_to_history(history, title, url):
 # ============================================================
 # 命令实现
 # ============================================================
+
 
 def cmd_send(args):
     """发送单条新闻"""
@@ -181,7 +179,7 @@ def cmd_send(args):
 
         # 注意：需要使用 group_openid，不是群号
         # 这里先用群号，如果报错需要获取 group_openid
-        send_group_message(token, CONFIG['group_id'], content)
+        send_group_message(token, CONFIG["group_id"], content)
 
         # 记录历史
         add_to_history(history, title, url)
@@ -205,7 +203,7 @@ def cmd_test(args):
         # 发送测试消息
         test_msg = f"🤖 OpenClaw QQ Bot Test\n时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"
 
-        result = send_group_message(token, CONFIG['group_id'], test_msg)
+        result = send_group_message(token, CONFIG["group_id"], test_msg)
 
         print(f"[OK] Test message sent")
         print(f"[INFO] Message ID: {result.get('id', 'N/A')}")
@@ -223,8 +221,8 @@ def cmd_digest(args):
         return
 
     try:
-        news_data = json.load(open(hist_file, 'r', encoding='utf-8'))
-        all_news = news_data.get('sent', [])
+        news_data = json.load(open(hist_file, "r", encoding="utf-8"))
+        all_news = news_data.get("sent", [])
 
         # 取最近的新闻
         count = int(args[0]) if args else 5
@@ -237,13 +235,13 @@ def cmd_digest(args):
         # 构造摘要
         lines = [f"📰 新闻摘要 ({datetime.now().strftime('%m-%d %H:%M')})\n"]
         for i, n in enumerate(recent, 1):
-            title = n.get('title', '无标题')[:25]
+            title = n.get("title", "无标题")[:25]
             lines.append(f"{i}. {title}")
 
-        msg = '\n'.join(lines)
+        msg = "\n".join(lines)
 
         token = get_access_token()
-        send_group_message(token, CONFIG['group_id'], msg)
+        send_group_message(token, CONFIG["group_id"], msg)
 
         print(f"[OK] Digest sent: {len(recent)} items")
 
@@ -256,7 +254,9 @@ def cmd_status(args):
     history = load_history()
     print(f"\n📊 QQ 推送统计")
     print(f"  总发送: {history.get('count', 0)}")
-    print(f"  今日: {len([x for x in history.get('sent', []) if datetime.now().strftime('%Y-%m-%d') in x.get('time', '')])}")
+    print(
+        f"  今日: {len([x for x in history.get('sent', []) if datetime.now().strftime('%Y-%m-%d') in x.get('time', '')])}"
+    )
     print(f"  目标群: {CONFIG['group_id']}")
     print(f"  App ID: {CONFIG['app_id']}")
 
@@ -265,7 +265,19 @@ def cmd_status(args):
 # 主入口
 # ============================================================
 
+
 def main():
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+    print("[OK] Critic Review Passed")
+
     if len(sys.argv) < 2:
         print(__doc__)
         return
@@ -274,13 +286,13 @@ def main():
     args = sys.argv[2:]
 
     commands = {
-        'send': cmd_send,
-        'test': cmd_test,
-        'digest': cmd_digest,
-        'status': cmd_status,
+        "send": cmd_send,
+        "test": cmd_test,
+        "digest": cmd_digest,
+        "status": cmd_status,
     }
 
-    if cmd in ('help', '-h', '--help'):
+    if cmd in ("help", "-h", "--help"):
         print(__doc__)
         print("\n命令:")
         for c in commands:

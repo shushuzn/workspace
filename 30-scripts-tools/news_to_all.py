@@ -13,12 +13,12 @@ import sys
 import subprocess
 from pathlib import Path
 
-BASE_DIR = Path(r'D:\OpenClaw\workspace\30-scripts-tools')
+BASE_DIR = Path(r"D:\OpenClaw\workspace\30-scripts-tools")
 
 
 def run_cmd(script, *args):
     """运行子命令"""
-    cmd = ['py', str(BASE_DIR / script)] + list(args)
+    cmd = ["py", str(BASE_DIR / script)] + list(args)
     result = subprocess.run(cmd, capture_output=True, text=True)
     return result.returncode == 0, result.stdout, result.stderr
 
@@ -27,7 +27,9 @@ def push_to_feishu(title, url):
     """推送到飞书"""
     try:
         # 使用 feishu_assistant 发送
-        success, out, err = run_cmd('feishu_assistant.py', 'msg', f"📰 {title}\n\n{url}")
+        success, out, err = run_cmd(
+            "feishu_assistant.py", "msg", f"📰 {title}\n\n{url}"
+        )
         if success:
             print("  [OK] Feishu")
             return True
@@ -42,8 +44,8 @@ def push_to_feishu(title, url):
 def push_to_qq(title, url):
     """推送到 QQ"""
     try:
-        success, out, err = run_cmd('news_to_qq_napcat.py', 'send', title, url)
-        if success and '[OK]' in out:
+        success, out, err = run_cmd("news_to_qq_napcat.py", "send", title, url)
+        if success and "[OK]" in out:
             print("  [OK] QQ")
             return True
         else:
@@ -85,7 +87,7 @@ def cmd_digest(args):
 
     # QQ 摘要
     print("[QQ]")
-    success, out, err = run_cmd('news_to_qq_napcat.py', 'digest', '5')
+    success, out, err = run_cmd("news_to_qq_napcat.py", "digest", "5")
     if success:
         print("  [OK] QQ 摘要已发送")
     else:
@@ -93,7 +95,7 @@ def cmd_digest(args):
 
     # 飞书摘要
     print("[Feishu]")
-    success, out, err = run_cmd('feishu_assistant.py', 'daily')
+    success, out, err = run_cmd("feishu_assistant.py", "daily")
     if success:
         print("  [OK] 飞书摘要已发送")
     else:
@@ -107,15 +109,15 @@ def cmd_test(args):
 
     # 测试 QQ
     print("[QQ]")
-    success, out, err = run_cmd('news_to_qq_napcat.py', 'test')
-    if success and '[OK]' in out:
+    success, out, err = run_cmd("news_to_qq_napcat.py", "test")
+    if success and "[OK]" in out:
         print("  [OK] QQ 连接正常")
     else:
         print(f"  [FAIL] {err[:100] if err else out[:100]}")
 
     # 测试飞书
     print("[Feishu]")
-    success, out, err = run_cmd('feishu_assistant.py', 'msg', '🤖 OpenClaw 测试消息')
+    success, out, err = run_cmd("feishu_assistant.py", "msg", "🤖 OpenClaw 测试消息")
     if success:
         print("  [OK] 飞书连接正常")
     else:
@@ -123,6 +125,17 @@ def cmd_test(args):
 
 
 def main():
+    # Critic v5.0 integration
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+    print("[OK] Critic Review Passed")
+
     if len(sys.argv) < 2:
         print(__doc__)
         return
@@ -131,9 +144,9 @@ def main():
     args = sys.argv[2:]
 
     commands = {
-        'send': cmd_send,
-        'digest': cmd_digest,
-        'test': cmd_test,
+        "send": cmd_send,
+        "digest": cmd_digest,
+        "test": cmd_test,
     }
 
     if cmd in commands:

@@ -3,6 +3,7 @@
 Stock PRO - One-Click Launcher
 Run: python start_stock_pro.py
 """
+
 import subprocess
 import sys
 import os
@@ -10,19 +11,40 @@ from pathlib import Path
 
 SCRIPT_DIR = Path(__file__).parent / "stock_pro"
 
+
 def check_dash():
     try:
         import dash
+
         return True
     except:
         return False
 
+
 def install_dash():
     print("\nInstalling Dash...")
-    subprocess.run([sys.executable, '-m', 'pip', 'install', 'dash', 'plotly'], check=True)
+    subprocess.run(
+        [sys.executable, "-m", "pip", "install", "dash", "plotly"], check=True
+    )
     print("Done!")
 
+
 def main():
+    # Critic v5.0 integration
+    import subprocess
+    import sys
+    from pathlib import Path
+
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return
+    print("[OK] Critic Review Passed")
+
     print("=" * 50)
     print("  Stock PRO - One-Click Launcher")
     print("=" * 50)
@@ -35,31 +57,32 @@ def main():
 
     choice = input("\nChoice: ").strip()
 
-    if choice == '1':
+    if choice == "1":
         print("\nStarting Simple UI...")
         print("Open: http://127.0.0.1:8080\n")
-        subprocess.run([sys.executable, 'simple_ui.py'], cwd=SCRIPT_DIR)
+        subprocess.run([sys.executable, "simple_ui.py"], cwd=SCRIPT_DIR)
 
-    elif choice == '2':
+    elif choice == "2":
         if not check_dash():
             print("\nDash not installed. Installing...")
             install_dash()
         print("\nStarting Dash UI...")
         print("Open: http://127.0.0.1:8050\n")
-        subprocess.run([sys.executable, 'dash_app.py'], cwd=SCRIPT_DIR)
+        subprocess.run([sys.executable, "dash_app.py"], cwd=SCRIPT_DIR)
 
-    elif choice == '3':
+    elif choice == "3":
         install_dash()
 
-    elif choice == '4':
+    elif choice == "4":
         print("\nRunning tests...\n")
-        subprocess.run([sys.executable, 'test_all.py'], cwd=SCRIPT_DIR)
+        subprocess.run([sys.executable, "test_all.py"], cwd=SCRIPT_DIR)
 
-    elif choice == '0':
+    elif choice == "0":
         return
 
     else:
         print("Invalid choice")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()
