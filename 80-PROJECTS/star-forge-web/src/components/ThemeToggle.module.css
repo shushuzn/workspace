@@ -1,0 +1,30 @@
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--bg-tertiary);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.toggle:hover {
+  border-color: var(--accent-gold);
+  background: var(--bg-hover);
+}
+
+.toggle.collapsed {
+  padding: 6px 10px;
+}
+
+.icon {
+  font-size: 14px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+}

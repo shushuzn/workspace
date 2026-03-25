@@ -1,0 +1,27 @@
+.container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.particle {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  background: var(--accent-gold);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-gold-glow);
+  animation: particleBurst 0.6s ease-out forwards;
+}
+
+@keyframes particleBurst {
+  0% {
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--vx), var(--vy)) scale(0);
+    opacity: 0;
+  }
+}

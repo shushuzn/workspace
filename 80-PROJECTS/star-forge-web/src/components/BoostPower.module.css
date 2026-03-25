@@ -1,0 +1,79 @@
+.container {
+  padding: 12px;
+  background: var(--bg-tertiary);
+  border-radius: 10px;
+  margin-top: 12px;
+}
+
+.title {
+  font-size: 14px;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+}
+
+.active {
+  padding: 10px;
+  background: var(--bg-secondary);
+  border-radius: 8px;
+  margin-bottom: 12px;
+}
+
+.activeTitle {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
+
+.activeItem {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--accent-green);
+  padding: 4px 0;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.boostBtn {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s;
+  text-align: left;
+}
+
+.boostBtn:hover:not(.disabled) {
+  border-color: var(--accent-gold);
+  background: var(--bg-hover);
+}
+
+.boostBtn.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.boostName {
+  flex: 1;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.boostDuration {
+  font-size: 10px;
+  color: var(--accent-cyan);
+}
+
+.boostCost {
+  font-size: 11px;
+  color: var(--accent-gold);
+}

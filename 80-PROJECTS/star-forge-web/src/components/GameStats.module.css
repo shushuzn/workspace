@@ -1,0 +1,180 @@
+.container {
+  padding: 20px;
+  background: var(--bg-secondary);
+  border-radius: 12px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: 'Orbitron', sans-serif;
+  text-shadow: 0 0 20px var(--accent-gold-dim);
+}
+
+.section {
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.section:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 10px 12px;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+}
+
+.statLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.statValue {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.tierList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.tierItem {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  background: var(--bg-tertiary);
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+.tierItem.unlocked {
+  background: linear-gradient(135deg, var(--bg-tertiary) 0%, rgba(255, 193, 7, 0.1) 100%);
+  border: 1px solid rgba(255, 193, 7, 0.3);
+}
+
+.tierItem.locked {
+  opacity: 0.5;
+}
+
+.tierDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.tierName {
+  color: var(--text-secondary);
+}
+
+.tierBadge {
+  color: var(--accent-gold);
+  font-weight: bold;
+}
+
+.progressBar {
+  height: 8px;
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-top: 12px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent-gold) 0%, var(--accent-green) 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.progressText {
+  display: block;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+}
+
+.playTime {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px;
+  background: var(--bg-tertiary);
+  border-radius: 12px;
+}
+
+.timeValue {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.timeLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.comboStats {
+  display: flex;
+  justify-content: center;
+}
+
+.comboItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 16px 32px;
+  background: linear-gradient(135deg, rgba(255, 69, 0, 0.2) 0%, rgba(255, 0, 255, 0.1) 100%);
+  border: 1px solid rgba(255, 69, 0, 0.3);
+  border-radius: 12px;
+}
+
+.comboValue {
+  font-size: 32px;
+  font-weight: 800;
+  color: #ff4500;
+  text-shadow: 0 0 20px rgba(255, 69, 0, 0.5);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.comboLabel {
+  font-size: 12px;
+  color: var(--text-secondary);
+}

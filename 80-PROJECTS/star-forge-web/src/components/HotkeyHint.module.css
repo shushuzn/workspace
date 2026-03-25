@@ -1,0 +1,104 @@
+.container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+}
+
+.toggleBtn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--bg-tertiary);
+  border: 2px solid var(--accent-gold);
+  color: var(--accent-gold);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.toggleBtn:hover {
+  transform: scale(1.1);
+  background: var(--accent-gold);
+  color: var(--bg-primary);
+}
+
+.hintsPanel {
+  position: absolute;
+  bottom: 54px;
+  right: 0;
+  width: 280px;
+  background: var(--bg-secondary);
+  border: 2px solid var(--accent-gold);
+  border-radius: 12px;
+  padding: 16px;
+  animation: slideIn 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+  text-align: center;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.hintList {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.hintItem {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 6px 8px;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+}
+
+.key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+  height: 28px;
+  padding: 0 8px;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  font-size: 11px;
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-primary);
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.action {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.footer {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 11px;
+  color: var(--text-muted);
+  padding-top: 8px;
+  border-top: 1px solid var(--border-color);
+}

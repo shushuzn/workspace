@@ -1,0 +1,59 @@
+.progressContainer {
+  width: 100%;
+  padding: 8px 16px;
+  background: var(--bg-tertiary);
+  border-radius: 8px;
+}
+
+.tierInfo {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.currentTier {
+  font-size: 12px;
+  font-weight: 700;
+  font-family: 'Orbitron', sans-serif;
+}
+
+.nextTier {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.progressBar {
+  height: 6px;
+  background: var(--bg-primary);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.progressFill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.5s ease;
+  box-shadow: 0 0 10px currentColor;
+}
+
+.tierDots {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 4px;
+}
+
+.tierDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.tierDot.active {
+  box-shadow: 0 0 8px currentColor;
+  transform: scale(1.2);
+}

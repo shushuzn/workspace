@@ -1,0 +1,131 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(4px);
+  z-index: 150;
+  animation: fadeIn 0.3s ease;
+}
+
+.tutorial {
+  max-width: 400px;
+  width: 90%;
+  padding: 24px;
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  border: 1px solid var(--accent-gold);
+  border-radius: 16px;
+  box-shadow: 0 0 40px var(--accent-gold-dim);
+  animation: scaleIn 0.3s ease;
+}
+
+@keyframes scaleIn {
+  from { transform: scale(0.9); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+.content {
+  text-align: center;
+}
+
+.icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  animation: iconBounce 1s ease-in-out infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-gold);
+  margin-bottom: 12px;
+  text-shadow: 0 0 20px var(--accent-gold-dim);
+}
+
+.text {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+.progress {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-color);
+  transition: all 0.2s;
+}
+
+.dot.active {
+  background: var(--accent-gold);
+  box-shadow: 0 0 8px var(--accent-gold-glow);
+}
+
+.dot.completed {
+  background: var(--accent-green);
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.btnPrimary, .btnSecondary, .btnSkip {
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btnPrimary {
+  background: linear-gradient(135deg, var(--accent-gold) 0%, var(--accent-green) 100%);
+  border: none;
+  color: #000;
+}
+
+.btnPrimary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px var(--accent-gold-glow);
+}
+
+.btnSecondary {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+}
+
+.btnSecondary:hover {
+  border-color: var(--accent-gold);
+  color: var(--accent-gold);
+}
+
+.btnSkip {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+}
+
+.btnSkip:hover {
+  color: var(--text-secondary);
+}

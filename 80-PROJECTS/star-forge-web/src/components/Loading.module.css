@@ -1,0 +1,84 @@
+.loading {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #0d0d18 0%, #080810 100%);
+  z-index: 9999;
+}
+
+.content {
+  text-align: center;
+  padding: 40px;
+}
+
+.icon {
+  font-size: 80px;
+  margin-bottom: 20px;
+  animation: bounce 1s ease-in-out infinite;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+.title {
+  font-size: 48px;
+  font-weight: 800;
+  color: #ffc107;
+  margin: 0 0 8px 0;
+  letter-spacing: 4px;
+  text-shadow: 0 0 30px rgba(255, 193, 7, 0.5);
+}
+
+.subtitle {
+  font-size: 18px;
+  color: #888899;
+  margin: 0 0 40px 0;
+  letter-spacing: 8px;
+}
+
+.progressContainer {
+  width: 300px;
+  margin: 0 auto 30px;
+}
+
+.progressBar {
+  height: 8px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.progressFill {
+  height: 100%;
+  background: linear-gradient(90deg, #ffc107, #ff9800);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+}
+
+.progressText {
+  font-size: 14px;
+  color: #ffc107;
+  font-weight: 600;
+}
+
+.tips {
+  margin-top: 20px;
+}
+
+.tips p {
+  font-size: 14px;
+  color: #555566;
+  margin: 0;
+  animation: fadeIn 2s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+  0%, 100% { opacity: 0.5; }
+  50% { opacity: 1; }
+}

@@ -1,0 +1,16 @@
+.btn {
+  padding: 8px 16px;
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
+  border: none;
+  border-radius: 20px;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 16px rgba(0, 188, 212, 0.4);
+}

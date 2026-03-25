@@ -1,0 +1,74 @@
+.milestoneToast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-tertiary) 100%);
+  border: 2px solid var(--accent-gold);
+  border-radius: 16px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 1000;
+  animation: milestoneSlideIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 8px 32px rgba(255, 193, 7, 0.3);
+}
+
+@keyframes milestoneSlideIn {
+  from {
+    transform: translateX(-50%) translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+}
+
+.icon {
+  font-size: 48px;
+  animation: iconBounce 0.6s ease infinite;
+}
+
+@keyframes iconBounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.1) rotate(-5deg); }
+  75% { transform: scale(1.1) rotate(5deg); }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.title {
+  font-size: 12px;
+  color: var(--accent-gold);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: 'Orbitron', sans-serif;
+}
+
+.desc {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.reward {
+  font-size: 14px;
+  color: var(--accent-green);
+  font-weight: 600;
+  margin-top: 4px;
+  padding: 4px 8px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 8px;
+}
