@@ -1,0 +1,426 @@
+{
+  "symbol": "TEST",
+  "backtested_at": "2026-03-21T01:21:03.352517",
+  "strategy": {
+    "entry_signal": "ma_crossover",
+    "exit_signal": "reverse_crossover",
+    "position_size": 0.2,
+    "stop_loss": 0.05,
+    "take_profit": 0.1
+  },
+  "initial_capital": 100000,
+  "final_equity": 100000.0,
+  "total_return_pct": 0.0,
+  "total_trades": 0,
+  "winning_trades": 0,
+  "losing_trades": 0,
+  "win_rate_pct": 0,
+  "avg_win": 0,
+  "avg_loss": 0,
+  "profit_factor": 999,
+  "max_drawdown_pct": 0,
+  "sharpe_ratio": 0,
+  "trades": [],
+  "equity_curve": [
+    {
+      "index": 150,
+      "date": "2026-01-01",
+      "price": 29611.92,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 151,
+      "date": "2026-01-02",
+      "price": 31709.53,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 152,
+      "date": "2026-01-03",
+      "price": 33460.93,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 153,
+      "date": "2026-01-04",
+      "price": 36085.87,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 154,
+      "date": "2026-01-05",
+      "price": 38768.23,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 155,
+      "date": "2026-01-06",
+      "price": 41138.44,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 156,
+      "date": "2026-01-07",
+      "price": 44141.35,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 157,
+      "date": "2026-01-08",
+      "price": 47576.39,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 158,
+      "date": "2026-01-09",
+      "price": 49844.49,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 159,
+      "date": "2026-01-10",
+      "price": 55345.05,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 160,
+      "date": "2026-01-11",
+      "price": 58826.04,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 161,
+      "date": "2026-01-12",
+      "price": 63251.59,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 162,
+      "date": "2026-01-13",
+      "price": 69108.63,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 163,
+      "date": "2026-01-14",
+      "price": 75585.76,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 164,
+      "date": "2026-01-15",
+      "price": 81007.07,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 165,
+      "date": "2026-01-16",
+      "price": 86704.97,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 166,
+      "date": "2026-01-17",
+      "price": 94227.74,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 167,
+      "date": "2026-01-18",
+      "price": 102550.59,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 168,
+      "date": "2026-01-19",
+      "price": 109958.68,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 169,
+      "date": "2026-01-20",
+      "price": 116374.95,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 170,
+      "date": "2026-01-21",
+      "price": 129854.45,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 171,
+      "date": "2026-01-22",
+      "price": 140852.35,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 172,
+      "date": "2026-01-23",
+      "price": 154051.24,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 173,
+      "date": "2026-01-24",
+      "price": 166238.41,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 174,
+      "date": "2026-01-25",
+      "price": 184123.47,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 175,
+      "date": "2026-01-26",
+      "price": 198160.76,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 176,
+      "date": "2026-01-27",
+      "price": 212194.9,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 177,
+      "date": "2026-01-28",
+      "price": 231068.25,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 178,
+      "date": "2026-01-29",
+      "price": 256353.75,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 179,
+      "date": "2026-01-30",
+      "price": 276219.64,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 180,
+      "date": "2026-01-01",
+      "price": 294476.91,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 181,
+      "date": "2026-01-02",
+      "price": 326423.39,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 182,
+      "date": "2026-01-03",
+      "price": 357243.23,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 183,
+      "date": "2026-01-04",
+      "price": 384517.65,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 184,
+      "date": "2026-01-05",
+      "price": 421038.7,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 185,
+      "date": "2026-01-06",
+      "price": 462566.04,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 186,
+      "date": "2026-01-07",
+      "price": 510370.87,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 187,
+      "date": "2026-01-08",
+      "price": 568752.61,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 188,
+      "date": "2026-01-09",
+      "price": 628532.85,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 189,
+      "date": "2026-01-10",
+      "price": 695212.63,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 190,
+      "date": "2026-01-11",
+      "price": 760394.97,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 191,
+      "date": "2026-01-12",
+      "price": 852637.04,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 192,
+      "date": "2026-01-13",
+      "price": 950138.56,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 193,
+      "date": "2026-01-14",
+      "price": 1037718.47,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 194,
+      "date": "2026-01-15",
+      "price": 1140929.87,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 195,
+      "date": "2026-01-16",
+      "price": 1251067.37,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 196,
+      "date": "2026-01-17",
+      "price": 1390985.48,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 197,
+      "date": "2026-01-18",
+      "price": 1550160.27,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 198,
+      "date": "2026-01-19",
+      "price": 1704093.7,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    },
+    {
+      "index": 199,
+      "date": "2026-01-20",
+      "price": 1880974.14,
+      "equity": 100000.0,
+      "capital": 100000,
+      "position_value": 0.0
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-22T09:59:58.740873
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 1175-1200 of 1306)
+        # Risk
+        f.write("## 4. 风险分析\n\n")
+        f.write(f"| 风险指标 | 数值 | 说明 |\n")
+        f.write(f"|----------|------|------|\n")
+        f.write(f"| VaR (95%) | ${risk_m['var']:.2f} | 价格波动风险 |\n")
+        f.write(f"| 最大回撤风险 | {risk_m['max_drawdown']:.1f}% | 从52周高点 |\n")
+        f.write(f"| 夏普比率 | {risk_m['sharpe']:.2f} | 风险调整收益 |\n")
+        f.write(f"| 52周位置 | {tech['range_pos']:.0f}% | 距低点百分比 |\n\n")
+        f.write(f"| 52周区间 | ${q['w52l']:.0f} - ${q['w52h']:.0f} | 当前: ${price:.2f} |\n\n")
+        
+        f.write("### 4.1 技术指标\n\n")
+        f.write(f"| 指标 | 数值 |\n")
+        f.write(f"|------|------|\n")
+        f.write(f"| 趋势 | {tech['trend']} |\n")
+        f.write(f"| 距52周高点 | {tech['dist_from_high']:.1f}% |\n")
+        f.write(f"| 距52周低点 | +{tech['dist_from_low']:.1f}% |\n")
+        f.write(f"| 均线位置 | {tech['ma_status']} |\n\n")
+        
+        f.write("### 4.2 风险指标\n\n")
+        f.write(f"| 指标 | 数值 | 说明 |\n")
+        f.write(f"|------|------|------|\n")
+        f.write(f"| VaR (95%) | ${risk_m['var_95']:.2f} ({risk_m['var_95_pct']:.1f}%) | 单日最大损失 |\n")
+        f.write(f"| 最大回撤风险 | {risk_m['max_dd_pct']:.1f}% | 从52周高点 |\n")
+        f.write(f"| 夏普比率 | {risk_m['sharpe']:.2f} | 风险调整收益 |\n")
+        f.write(f"| 52周位置 | {risk_m['range_pos']:.0f}% | 距低点百分比 |\n\n")
+        f.write(f"| 52周区间 | ${q['w52l']:.0f} - ${q['w52h']:.0f} | 当前: ${price:.2f} |\n\n")
+
+[106 more lines. Use start_line=1201 to continue.]

@@ -1,0 +1,49 @@
+# tool_name: read_file
+# created_at: 2026-03-21T13:34:12.817078
+# ---
+    
+    pdf_path = sys.argv[1]
+    
+    if not PDF_LIB:
+        print("[ERROR] pdfplumber not available")
+        return
+    
+    print(f"[DEEP-PAPER-ANALYZER-001] Extracting: {pdf_path}", file=sys.stderr)
+    
+    text = extract_full_text(pdf_path)
+    if not text:
+        print("[ERROR] Could not extract text")
+        return
+    
+    sections = parse_sections(text)
+    methods = analyze_methods(sections.get("methods", text))
+    results = analyze_results(sections.get("results", text))
+    arguments = analyze_arguments(text)
+    
+    if "--json" in sys.argv:
+        print(json.dumps({
+            "sections": list(sections.keys()),
+            "methods": methods,
+            "results": {k: v[:10] for k, v in results.items()},
+            "arguments": {k: v[:5] if isinstance(v, list) else v for k, v in arguments.items()}
+        }, indent=2))
+    else:
+        print(generate_deep_report(pdf_path, text))
+
+
+if __name__ == "__main__":
+    main()
+
+# STAGE 3: ASK
+"""
+ASK: Run verification
+    py deep_paper_analyzer_001.py <pdf_path>
+    py deep_paper_analyzer_001.py <pdf_path> --json
+"""
+
+# STAGE 4: DEBUG
+"""
+DEBUG:
+    - 2026-03-21: Created deep paper analyzer
+    - 2026-03-21: Extracting full content from 2603.09753
+"""

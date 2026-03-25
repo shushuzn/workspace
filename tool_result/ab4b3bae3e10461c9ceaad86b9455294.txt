@@ -1,0 +1,55 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T11:35:59.084908
+# ---
+Command failed with exit code 1.
+[stdout]
+"=== OPTIMIZE ===" 
+
++==============================================================+
+|                    Stock PRO v11.0                          |
+|            Modular Stock Analysis Tool                      |
++==============================================================+
+
+# Portfolio Optimization: Maximum Sharpe
+
+**Stocks:** 10
+**Expected Return:** 2.0%
+**Volatility:** 9.7%
+**Sharpe Ratio:** 0.17
+
+## Recommended Allocation
+
+| Symbol | Weight | Score |
+|--------|--------|-------|
+| NVDA | 14.1% | 87 |
+| GOOGL | 13.5% | 83 |
+| META | 12.2% | 75 |
+| AMD | 10.2% | 63 |
+| NFLX | 9.3% | 57 |
+| MSFT | 9.1% | 56 |
+| QCOM | 8.4% | 52 |
+| AMZN | 8.3% | 51 |
+| TSLA | 7.6% | 47 |
+| JPM | 7.3% | 45 |
+
+"" 
+"=== EARNINGS PREDICT ===" 
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py", line 547, in <module>
+    main()
+    ~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py", line 531, in main
+    print(predict_earnings_beat(symbols))
+          ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\earnings.py", line 139, in predict_earnings_beat
+    report += f"| {p['symbol']} | {p['date']} | ${p['estimate']:.2f} | {p['beat_probability']:.0%} | {p['prediction']} | {p['score']} |\n"
+                                                 ^^^^^^^^^^^^^^^^^^^
+TypeError: unsupported format string passed to NoneType.__format__
+
++==============================================================+
+|                    Stock PRO v11.0                          |
+|            Modular Stock Analysis Tool                      |
++==============================================================+
+

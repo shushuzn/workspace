@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-23T01:26:54.898437
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_feishu.py  (lines 150-200 of 228)
+        icon = "🔹" if "金十" in source else ("🔸" if "Investing" in source else "🔶")
+        items.append({
+            "tag": "markdown",
+            "content": f"**{i}.** {title}\n> {icon} {source}"
+        })
+    
+    time_str = datetime.now().strftime("%H:%M")
+    
+    return {
+        "header": {
+            "title": {"tag": "plain_text", "content": f"📊 财经速报 {time_str}"},
+            "template": "green"
+        },
+        "elements": [
+            *items,
+            {"tag": "hr"},
+            {"tag": "div", "text": {"tag": "lark_md", "content": "📱 NewsHub · 自动推送"}}
+        ]
+    }
+
+
+def build_alert_card(title, url, source="", keywords=None):
+    """告警卡片"""
+    kw_list = keywords or []
+    highlight = ""
+    for kw in kw_list:
+        if kw in title:
+            highlight = f"🔔 命中: `{kw}`"
+            break
+    
+    return {
+        "header": {
+            "title": {"tag": "plain_text", "content": "⚠️ 重要告警"},
+            "template": "red"
+        },
+        "elements": [
+            {"tag": "div", "text": {"tag": "lark_md", "content": highlight}},
+            {"tag": "markdown", "content": f"**{title}**"},
+            {"tag": "hr"},
+            {"tag": "markdown", "content": f"[🔗 查看详情]({url})"}
+        ]
+    }
+
+
+def build_daily_summary(all_news):
+    """日报卡片"""
+    sources = {}
+    for n in all_news:
+        s = n.get('source', 'Other')
+        sources[s] = sources.get(s, 0) + 1
+    
+
+[28 more lines. Use start_line=201 to continue.]

@@ -1,0 +1,16 @@
+{
+  "symbol": "TEST",
+  "detected_at": "2026-03-20T01:00:44.594982",
+  "lookback": 60,
+  "current_price": 150.76843473149486,
+  "metrics": {
+    "trend": 0.2432,
+    "volatility": 0.0779,
+    "momentum": 0.0938
+  },
+  "regime": {
+    "type": "highly_volatile",
+    "description": "High volatility regime - expect large price swings"
+  },
+  "confidence": 1.0
+}

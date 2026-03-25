@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T17:04:01.952004
+# ---
+D:\OpenClaw\workspace\active_skills\stock-pro\SKILL.md  (lines 30-70 of 424)
+## CLI Usage (main.py)
+
+```bash
+# Single stock analysis
+python stock_pro/main.py NVDA
+
+# With options
+python stock_pro/main.py NVDA --json        # JSON output
+python stock_pro/main.py NVDA --technical    # Technical analysis
+python stock_pro/main.py NVDA --fscore       # Piotroski F-Score
+python stock_pro/main.py NVDA --earnings-predict  # Earnings prediction
+
+# Multi-stock
+python stock_pro/main.py --compare NVDA META JPM
+python stock_pro/main.py --summary NVDA META JPM
+
+# Export
+python stock_pro/main.py NVDA META --csv
+python stock_pro/main.py NVDA META --xlsx
+
+# Tools
+python stock_pro/main.py --screener          # Stock screener
+python stock_pro/main.py --portfolio         # Portfolio view
+python stock_pro/main.py --dashboard NVDA    # HTML dashboard
+python stock_pro/main.py --sentiment NVDA    # News sentiment
+```
+
+## Skill Structure
+
+```
+stock-pro/
+├── SKILL.md              # This file
+├── core.py               # Analysis engine
+├── cache.py              # Caching system
+├── data/                 # Stock data
+│   ├── prices.py         # Price data (54 stocks)
+│   ├── targets.py        # Price targets
+│   └── financials.py     # Financial metrics
+├── modules/              # Analysis modules
+│   ├── technical.py      # RSI, MA, MACD
+│   ├── risk.py          # Risk profiles
+
+[354 more lines. Use start_line=71 to continue.]

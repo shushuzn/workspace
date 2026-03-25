@@ -1,0 +1,26 @@
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "task": "Default Task",
+  "description": "Task started via copaw_entry.py",
+  "started_at": "2026-03-20T08:19:06.821951+08:00",
+  "current_step": 1,
+  "total_steps": 12,
+  "status": "initializing",
+  "step_status": {
+    "1": {
+      "name": "上下文加载验证",
+      "status": "completed",
+      "started_at": "2026-03-20T08:19:06.826001+08:00",
+      "completed_at": "2026-03-20T08:19:06.826007+08:00",
+      "result": "验证通过"
+    }
+  },
+  "completed_steps": [
+    1
+  ],
+  "completion_percentage": 8,
+  "workflow_compliance": false,
+  "session_id": "session-20260320081906",
+  "entry_point": "copaw_entry.py",
+  "mandatory_execution": true
+}

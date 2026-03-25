@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:51:19.829386
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 1020-1070 of 1247)
+    if policy_impact:
+        lines.append(f"{policy_impact}")
+    lines.append(f"建议: {suggestion}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    if external_markets:
+        lines.append(f"外盘: {external_markets}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    
+    # 头部
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"  [NEWS] {now}")
+    lines.append(f"  情绪: {score_str}")
+    lines.append(f"  {sentiment_bar}")
+    lines.append(f"  +{len(positive)} -{len(negative)} ={len(neutral)} | {len(news_list)}条")
+    lines.append(f"  风险: [{risk_icon}]{risk_level}")
+    if impact_prediction:
+        lines.append(f"  {impact_prediction}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"板块: {sector_str}")
+    lines.append(f"来源: {source_str}")
+    lines.append(f"热词: {top_keywords}")
+    if codes_str != "-":
+        lines.append(f"个股: {codes_str}")
+    if sector_impact_str:
+        lines.append(f"影响: {sector_impact_str}")
+    lines.append(f"景气: {outlook_str}")
+    lines.append(f"建议: {suggestion}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append("")
+    
+    # 利好
+    if positive:
+        lines.append(">>> 利好 (+)")
+        for news in positive:
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            keywords = news.get('keywords', [])
+            codes = news.get('codes', [])
+            summary = extract_summary(news['title'], '利好')
+            signal = get_trade_signal(news)
+            timeliness = get_timeliness(news['title'])
+            
+            lines.append(f"  + {timeliness}{news['title'][:42]}")
+            meta = f"[{sector}][{source}]"
+            if keywords:
+                meta += " " + " ".join([f"#{k}" for k in keywords[:2]])
+            if codes:
+                meta += f" ${codes[0]}"
+            lines.append(f"    {meta}")
+            if summary:
+                lines.append(f"    -> {summary}")
+
+[177 more lines. Use start_line=1071 to continue.]

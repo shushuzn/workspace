@@ -1,0 +1,25 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T21:05:59.635624
+# ---
+fontdrvhost.exe               1680 Services                   0        160 K
+aTrustAgent.exe               5536 Services                   0      9,268 K
+IntelAudioService.exe         5692 Services                   0      4,608 K
+IntelGraphicsSoftware.Ser     5788 Services                   0      7,036 K
+PresentMonService.exe         8432 Services                   0      2,328 K
+eaio_agent.exe               11144 Services                   0      2,032 K
+Intel_PIE_Service.exe        20976 Services                   0      2,788 K
+fontdrvhost.exe               8260 Console                    3     10,712 K
+MBAMessageCenter.exe         11884 Console                    3     59,708 K
+HwMdcCenter.exe              26424 Console                    3     39,664 K
+eaio_agent.exe               19468 Console                    3      2,888 K
+ECAgent.exe                  20256 Console                    3     20,492 K
+PcOptimizationCenter.exe      8168 Console                    3     18,960 K
+aTrustAgent.exe              19420 Console                    3     31,936 K
+RuntimeBroker.exe             1892 Console                    3      1,692 K
+MessageCenterUI.exe          23168 Console                    3     11,692 K
+RuntimeBroker.exe            25992 Console                    3     51,708 K
+IntelGraphicsSoftware.exe     9316 Console                    3     45,768 K
+dllhost.exe                  15420 Console                    3        596 K
+IntelSoftwareAssetManager    28208 Services                   0        992 K
+RuntimeBroker.exe             1248 Console                    3        760 K
+RuntimeBroker.exe            16400 Console                    3     11,204 K

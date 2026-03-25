@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:38:57.062260
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 2040-2140 of 3774)
+    
+    print("-" * 100)
+    print(f"\nTotal: {len(results)} stocks analyzed")
+    return results
+
+def print_banner():
+    """Print banner"""
+    print("""
++==============================================================+
+|                    Stock PRO v10.0                         |
+|              Professional Stock Analysis Tool               |
++==============================================================+
+    """)
+
+def print_help():
+    """Print help menu"""
+    print("""
+Stock PRO v10.0 - Professional Stock Analysis Tool
+=====================================================
+
+Usage:
+   py stock_pro_v4.py <SYMBOL> [OPTIONS]
+
+Analysis Modes:
+   NVDA             English report
+   NVDA --cn        Chinese report
+   NVDA --json      JSON output
+   NVDA --chart     Generate chart
+   NVDA --news      Show news
+
+Multi-Stock:
+   --compare SYM...  Compare multiple stocks
+   --summary SYM...  Summary cards
+
+Data Export:
+   --csv SYM...      Export to CSV
+   --xlsx SYM...     Export to Excel
+   --db SYM...       Save to SQLite
+
+Automation:
+   --watch SYM...    Auto-refresh (30s)
+   --alert SYM...    Price alerts
+   --cron "expr"    Setup cron job
+   --notify SYM...   Send notifications
+
+Portfolio:
+   --portfolio        View portfolio
+   --portfolio-add SYM SHARES COST  Add position
+   --portfolio-remove SYM          Remove position
+
+Screener:
+   --screener              Show all qualifying stocks
+   --screener --min-score 80  Custom score threshold
+   --screener --min-upside 20 Custom upside threshold
+
+Email/Notifications:
+   --email --to user@email.com  Send report
+   --webhook --url URL          Send webhook
+
+Advanced:
+   --api          Start REST API server
+   --dashboard    Create HTML dashboard
+   --pipeline     Create batch pipeline
+   --skill        Create CoPaw skill
+   --config       Show config
+   --news SYM...  Show news
+
+Examples:
+   py stock_pro_v4.py NVDA                    # Single stock
+   py stock_pro_v4.py --compare NVDA META    # Compare
+   py stock_pro_v4.py --screener             # Stock screener
+   py stock_pro_v4.py --portfolio            # View portfolio
+   py stock_pro_v4.py --portfolio-add NVDA 100 170
+   py stock_pro_v4.py --news NVDA META       # News
+   py stock_pro_v4.py --alert --notify       # Alerts + notify
+""")
+
+Integrations:
+   --obsidian        Sync to Obsidian vault
+   --db              Save to SQLite database
+   --notify          Send notification
+
+Options:
+   -cn, --cn         Chinese report
+   -c, --compare     Compare mode
+   -w, --watch       Watch mode
+   -l, --live        Use live price
+   -j, --json        JSON output
+   -s, --summary     Summary mode
+   -h, --help        This help
+
+Examples:
+   py stock_pro_v4.py NVDA META JPM
+   py stock_pro_v4.py --compare NVDA META JPM AAPL
+   py stock_pro_v4.py --csv NVDA META > stocks.csv
+   py stock_pro_v4.py --watch NVDA META --alert
+   py stock_pro_v4.py --cron "0 9 * * 1-5" --compare NVDA JPM
+   py stock_pro_v4.py --obsidian NVDA
+""")
+
+def print_summary_card(results):
+
+[1634 more lines. Use start_line=2141 to continue.]

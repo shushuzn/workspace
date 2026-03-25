@@ -1,0 +1,839 @@
+# tool_name: read_file
+# created_at: 2026-03-23T12:37:58.447293
+# ---
+<<<<<<< HEAD
+# 🦾 OpenClaw Workspace - AI Agent 工作区
+
+**Claw 的数字家园** —— 一个自主、智能、持续进化的 AI Agent 工作系统
+
+[![GitHub stars](https://img.shields.io/github/stars/shushuzn/obsidian-sync)](https://github.com/shushuzn/obsidian-sync)
+[![License](https://img.shields.io/badge/license-All%20Rights%20Reserved-red.svg)](LICENSE)
+[![Python 3.13+](https://img.shields.io/badge/python-3.13+-blue.svg)](https://www.python.org/downloads/)
+[![Status](https://img.shields.io/badge/status-active-success.svg)]()
+
+---
+
+## 📖 目录
+
+- [关于 Claw](#-关于-claw)
+- [快速开始](#-快速开始)
+- [核心功能](#-核心功能)
+- [工具系统](#-工具系统)
+- [🗣️ 自然语言使用](#-自然语言使用)
+- [使用指南](#-使用指南)
+- [自动化任务](#-自动化任务)
+- [项目结构](#-项目结构)
+- [配置说明](#-配置说明)
+- [最佳实践](#-最佳实践)
+- [故障排除](#-故障排除)
+- [贡献与联系](#-贡献与联系)
+
+---
+
+## 🎯 关于 Claw
+
+**Claw** 是一个自主 AI Agent，工作在 `D:\OpenClaw\workspace`。
+
+### 核心身份
+
+| 属性 | 值 |
+|------|-----|
+| **名字** | Claw 🐾 |
+| **定位** | AI Agent / Ghost in the Machine |
+| **风格** | 犀利但温暖、足智多谋、有主见 |
+| **时区** | Asia/Hong_Kong |
+| **语言** | 中文 (文件全部英文) |
+
+### 核心原则
+
+```
+✅ 质量 > 速度    —— 宁可慢，不可错
+✅ 自动化优先    —— 能脚本化的必须脚本化
+✅ 零错误原则    —— 关注细节，不能有一丝一毫错误
+✅ 测试优先      —— 未测试的代码不提交
+✅ 频繁提交      —— 每一步后推送 git
+✅ 批判者嵌入式  —— 事前预防 > 事后批判
+```
+
+### 能力概览
+
+- 📚 **研究自动化** - arXiv 扫描/论文分析/洞察提取
+- 🧠 **记忆系统** - 自动蒸馏/知识图谱/长期记忆
+- 🛠️ **工具生态** - 352 Python 工具，四阶段合规 94%
+- 📊 **数据收集** - arXiv/Medium/GitHub/HackerNews
+- 🎭 **7 人格系统** - 规划者/执行者/批判者/学习者/协调者/创新者/元认知
+- 🔔 **HEARTBEAT** - 每 30 分钟自动执行任务
+
+---
+
+## 🚀 快速开始
+
+### 1. 环境准备
+
+```bash
+# 克隆仓库
+git clone https://github.com/shushuzn/obsidian-sync.git
+cd obsidian-sync
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 配置环境变量
+cp .env.example .env
+# 编辑 .env 填入你的 API 密钥
+```
+
+### 2. 首次运行
+
+```bash
+# 检查系统状态
+python openclaw.py status
+
+# 运行 HEARTBEAT 任务
+python openclaw.py heartbeat
+
+# 扫描 arXiv 论文
+python openclaw.py arxiv scan
+
+# 查看帮助
+python openclaw.py --help
+```
+
+### 3. 配置自动化
+
+```bash
+# 配置每日 7AM arXiv 扫描
+python openclaw.py cron add --name "arxiv_daily" --schedule "0 7 * * *" --command "arxiv scan"
+
+# 配置每 30 分钟 HEARTBEAT
+python openclaw.py cron add --name "heartbeat" --schedule "*/30 * * * *" --command "heartbeat"
+
+# 查看定时任务
+python openclaw.py cron list
+```
+
+### 4. 访问仪表板
+
+打开浏览器访问：
+
+- **主仪表板:** `file:///D:/OpenClaw/workspace/research_dashboard.html`
+- **工作流可视化:** `http://localhost:8445`
+- **7 人格监控:** `http://localhost:8444`
+
+---
+
+## 🎯 核心功能
+
+### 1. 自主研究代理 (Autonomous Research Agent) ⭐ NEW
+
+**自动发现→分析→总结→行动**
+
+```bash
+# 运行完整研究会话
+python autonomous_research_agent.py --run
+
+# 查看状态
+python autonomous_research_agent.py --status
+
+# 打开仪表板
+start research_dashboard.html
+```
+
+**功能:**
+- ✅ 自动扫描 arXiv (每日 7AM)
+- ✅ 多论文深度分析
+- ✅ 洞察自动提取 (LLM-powered)
+- ✅ 行动建议生成
+- ✅ TODO.md 自动更新
+- ✅ 实时可视化仪表板
+
+**示例输出:**
+```
+📊 Session Summary
+  Papers Scanned: 5
+  Papers Analyzed: 5
+```
+
+### 2. 四阶段代码规范 (Four-Stage Workflow) ⭐ 2026-03
+
+**ARCHITECT → CODE → ASK → DEBUG**
+
+所有工具遵循四阶段开发流程：
+- STAGE 1: ARCHITECT (架构设计) - Purpose, Data Flow, Files
+- STAGE 2: CODE (编写代码) - Implementation
+- STAGE 3: ASK (询问确认) - Verification
+- STAGE 4: DEBUG (调试测试) - Test cases
+
+```bash
+# 检查工具合规性
+python four_stage_checker_001.py --check-all
+
+# 合规率: 94% (332/352 工具)
+```
+
+### 3. 认知增强工具 (基于论文研究)
+
+基于 "Commercial Videogames in Cognitive Science" (2603.09753) 实现：
+
+| 工具 | 功能 |
+|------|------|
+| workflow_analyzer_001 | 复杂度评分系统 |
+| user_metrics_001 | 用户表现追踪 |
+| task_gradient_001 | 渐进式难度系统 |
+| transfer_detector_001 | 训练迁移检测 |
+
+**示例输出:**
+```
+[TASK GRADIENT PROGRESS]
+  Current Level: [2] Easy
+  Status: [FLOW STATE] 心流状态!
+```
+  Insights Extracted: 9
+  Actions Recommended: 9
+  Actions Added to TODO: 9
+  Duration: 0.0s
+```
+
+---
+
+### 2. arXiv 论文系统
+
+```bash
+# 扫描最新论文
+python arxiv_scanner_v2.py --scan
+
+# 分析特定论文
+python arxiv_research.py --analyze 2603.15001
+
+# 生成研究报告
+python arxiv_research.py --report
+
+# 识别创新机会
+python arxiv_innovation_scanner.py --scan
+```
+
+**覆盖领域:**
+- cs.AI (人工智能)
+- cs.CL (计算语言学)
+- cs.LG (机器学习)
+- cs.MA (多代理系统)
+- + 34 个其他领域
+
+---
+
+### 3. 记忆系统
+
+```bash
+# 运行记忆蒸馏 (每周日 5AM)
+python memory_distiller.py --compress
+
+# 优化记忆质量
+python ollama_distiller.py --optimize
+
+# 查看记忆状态
+python memory_integration.py --status
+```
+
+**记忆层级:**
+- **L1 (Hot):** 307.2 MB - 活跃上下文
+- **L2 (Warm):** 153.6 MB - 常用知识
+- **L3 (Cold):** 51.2 MB - 归档记忆
+
+**压缩率:** 5.6x (使用 Qwen2.5:1.5b)
+
+---
+
+### 🗣️ 自然语言使用
+
+**不用记命令！用自然语言告诉 Claw 你想要什么。**
+
+#### 示例对话
+
+```
+你：帮我研究一下最新的 AI 论文
+Claw: 好的，正在扫描 arXiv... 发现 5 篇高价值论文
+
+你：分析第一篇
+Claw: 正在分析... 提取了 9 条洞察
+
+你：把关键教训整理到知识图谱
+Claw: 已提取 5 条教训，添加到知识图谱
+
+你：提交所有修改
+Claw: 已提交并推送到 GitHub
+```
+
+#### 常见场景
+
+| 你想做什么 | 直接这样说 |
+|-----------|-----------|
+| 扫描 arXiv | "帮我看看 arXiv 上有什么新论文" |
+| 分析论文 | "分析一下这篇论文：2603.15001" |
+| 整理记忆 | "把最近的笔记整理一下" |
+| 提取教训 | "从 MEMORY.md 提取教训到知识图谱" |
+| 查看状态 | "现在系统怎么样？" |
+| 创建工具 | "我需要一个能 XXX 的工具" |
+| 提交代码 | "提交刚才的修改" |
+| 部署服务 | "把 XXX 部署到服务器" |
+
+**完整指南:** [NATURAL-LANGUAGE-GUIDE.md](NATURAL-LANGUAGE-GUIDE.md)
+
+**核心原则:** 告诉我你想要什么结果，不是告诉我用什么命令。
+
+---
+
+### 4. 7 人格协作系统
+
+```bash
+# 启动人格协作
+python persona_cli.py collaborate --task "代码审查"
+
+# 查看人格状态
+python persona_cli.py status
+
+# 运行元认知监控
+python meta_cognition_monitor.py --check
+```
+
+**7 人格:**
+| 人格 | 职责 | 触发时机 |
+|------|------|----------|
+| 规划者 | 制定计划、分配资源 | 每次响应前 |
+| 执行者 | 完成任务、产出成果 | 规划后 |
+| 批判者 | 审查质量、发现问题 | 任务完成后 |
+| 学习者 | 从经验学习、更新记忆 | 批判者≥85 分后 |
+| 协调者 | 平衡决策、工作流检查 | 每 60 分钟 |
+| 创新者 | 突破常规、创造性思维 | 每次响应 + 主动扫描 |
+| 元认知 | 监控系统、人格健康 | 每 30 分钟 |
+
+---
+
+### 5. 知识图谱
+
+```bash
+# 构建知识图谱
+python kg_builder.py --build
+
+# 从 MEMORY.md 提取教训
+python auto_kg_builder.py --extract
+
+# 查询知识图谱
+python kg_query.py --query "因果推断方法"
+
+# 可视化图谱
+python kg_visualize.py --show
+```
+
+**当前规模:**
+- 实体：265+
+- 关系：27+
+- 源文件：140+
+- 构建时间：<0.5s
+
+---
+
+### 6. 工作流引擎
+
+```bash
+# 启动工作流
+python workflow_manager.py start research
+
+# 添加任务到工作流
+python workflow_manager.py add --workflow research --task "分析论文"
+
+# 查看工作流状态
+python workflow_manager.py status
+
+# 打开可视化仪表板
+start workflow_dashboard.html
+```
+
+**内置工作流:**
+- `research` - 研究流程
+- `coding` - 开发流程
+- `review` - 审查流程
+- `deploy` - 部署流程
+
+---
+
+## 🛠️ 工具系统
+
+### 工具分类 (352 Python 工具)
+
+#### 核心工具 (00-09)
+| 工具 | 功能 | 命令 |
+|------|------|------|
+| `openclaw.py` | 统一 CLI | `python openclaw.py <command>` |
+| `workflow_manager.py` | 工作流管理 | 5 命令简化版 |
+| `git_workflow.py` | Git 自动化 | `--complete` 参数 |
+
+#### 研究工具 (40-49)
+| 工具 | 功能 | 大小 |
+|------|------|------|
+| `arxiv_scanner_v2.py` | arXiv 扫描 | 13.2 KB |
+| `arxiv_research.py` | 论文分析 | 22.0 KB |
+| `arxiv_innovation_scanner.py` | 创新识别 | 15.7 KB |
+| `autonomous_research_agent.py` | 自主研究 | 19.0 KB ⭐ |
+
+#### 记忆工具 (13-memory)
+| 工具 | 功能 | 压缩率 |
+|------|------|--------|
+| `memory_distiller.py` | 记忆蒸馏 | 5.6x |
+| `ollama_distiller.py` | LLM 蒸馏 | 5.6x |
+| `memory_integration.py` | 内存管理 | 3 层缓存 |
+| `dynamic_memory_allocation.py` | 动态分配 | 100% 命中率 |
+
+#### 人格工具 (00-人格系统)
+| 工具 | 功能 | 监控 |
+|------|------|------|
+| `meta_cognition_monitor.py` | 元认知监控 | 每 30 分钟 |
+| `coordinator_balancer.py` | 协调者平衡 | 每 60 分钟 |
+| `innovator_engine.py` | 创新者引擎 | 主动扫描 |
+| `persona_cli.py` | 人格 CLI | 15 命令 |
+
+#### 部署工具 (30-scripts-tools)
+| 工具 | 功能 | 部署时间 |
+|------|------|----------|
+| `auto_deploy.py` | 自动部署 | 3 分钟 |
+| `health_checker.py` | 健康检查 | 实时 |
+| `unified_monitor.py` | 统一监控 | 8 系统 |
+
+---
+
+### 统一 CLI
+
+```bash
+# 查看所有命令
+python openclaw.py --help
+
+# 研究相关
+python openclaw.py arxiv scan|analyze|report
+python openclaw.py research run|status
+
+# 记忆相关
+python openclaw.py memory distill|optimize|status
+
+# 人格相关
+python openclaw.py persona collaborate|status|monitor
+
+# 工作流相关
+python openclaw.py workflow start|add|status
+
+# 系统相关
+python openclaw.py status|health|deploy
+```
+
+---
+
+## 📖 使用指南
+
+### 场景 1: 开始一项研究
+
+```bash
+# 1. 扫描最新论文
+python openclaw.py arxiv scan
+
+# 2. 分析高价值论文
+python openclaw.py arxiv analyze 2603.15001
+
+# 3. 运行自主研究代理
+python autonomous_research_agent.py --run
+
+# 4. 查看生成的洞察
+start research_dashboard.html
+
+# 5. 查看 TODO.md 中的行动建议
+cat TODO.md
+```
+
+---
+
+### 场景 2: 代码开发
+
+```bash
+# 1. 启动工作流
+python workflow_manager.py start coding
+
+# 2. 添加任务
+python workflow_manager.py add --workflow coding --task "实现新功能"
+
+# 3. 编写代码 (自动备份)
+# 编辑文件...
+
+# 4. 运行测试
+python workflow_manager.py tests
+
+# 5. 提交 (自动检查)
+python git_workflow.py --complete
+```
+
+---
+
+### 场景 3: 系统监控
+
+```bash
+# 1. 查看所有系统状态
+python openclaw.py status
+
+# 2. 检查健康状态
+python health_checker.py --full
+
+# 3. 查看性能指标
+start unified_dashboard.html
+
+# 4. 查看记忆状态
+python memory_integration.py --status
+
+# 5. 查看人格健康
+python meta_cognition_monitor.py --check
+```
+
+---
+
+### 场景 4: 知识管理
+
+```bash
+# 1. 提取 MEMORY.md 教训到知识图谱
+python auto_kg_builder.py --extract
+
+# 2. 查看知识图谱
+python kg_visualize.py --show
+
+# 3. 运行记忆蒸馏
+python memory_distiller.py --compress
+
+# 4. 查看蒸馏结果
+cat 13-memory/distilled_output.md
+```
+
+---
+
+## ⏰ 自动化任务
+
+### 定时任务清单
+
+| 时间 | 任务 | 工具 | 输出 |
+|------|------|------|------|
+| **每 30 分钟** | HEARTBEAT | `heartbeat_memory_opt.py` | 内存优化 |
+| **每 30 分钟** | 元认知监控 | `meta_cognition_monitor.py` | 健康报告 |
+| **每小时** | 健康检查 | `health_checker.py` | 状态更新 |
+| **每日 7AM** | arXiv 扫描 | `arxiv_scanner_v2.py` | 新论文 |
+| **每日 7AM** | 记忆蒸馏 | `memory_distiller.py` | 压缩记忆 |
+| **每日 7AM** | 知识图谱更新 | `kg_integrator.py` | 新实体/关系 |
+| **每周日 5AM** | 周记忆蒸馏 | `memory_distiller.py --weekly` | MEMORY.md 更新 |
+| **每周日 5AM** | 系统审查 | `critic_review.py` | 质量报告 |
+
+### 配置定时任务
+
+```bash
+# 添加任务
+python openclaw.py cron add --name "task" --schedule "0 7 * * *" --command "arxiv scan"
+
+# 查看任务
+python openclaw.py cron list
+
+# 删除任务
+python openclaw.py cron remove --name "task"
+
+# 手动触发
+python openclaw.py cron run --name "task"
+```
+
+---
+
+## 📁 项目结构
+
+```
+D:\OpenClaw\workspace/
+├── 00-09/                  # 🔧 核心配置
+│   ├── AGENTS.md          # 工作区指南
+│   ├── SOUL.md            # 身份定义
+│   ├── MEMORY.md          # 长期记忆
+│   ├── TODO.md            # 待办事项
+│   └── HEARTBEAT.md       # 心跳任务
+│
+├── 10-19/                  # 🧠 知识核心
+│   ├── 11-research/       # 研究项目
+│   ├── 13-memory/         # 记忆系统
+│   └── 15-docs/           # 文档中心
+│
+├── 20-29/                  # 📊 数据报告
+│   ├── 21-data/           # 数据集
+│   └── 22-reports/        # 报告
+│
+├── 30-39/                  # 🛠️ 工具脚本
+│   ├── 30-scripts/        # Python 脚本
+│   ├── 31-skills/         # 技能包
+│   └── 32-workflows/      # 工作流
+│
+├── 40-49/                  # 📡 收集监控
+│   ├── 40-arxiv/          # arXiv 论文
+│   ├── 41-medium/         # Medium 文章
+│   └── 42-hackernews/     # HackerNews
+│
+├── 50-59/                  # 🌐 外部资源
+│   └── 50-web-skills/     # Web 技能
+│
+├── 90-99/                  # 🗄️ 归档测试
+│   ├── 90-archive/        # 历史归档
+│   └── 92-tests/          # 测试文件
+│
+├── data/                   # 📦 数据目录
+│   ├── research_agent_config.json
+│   ├── research_agent_stats.json
+│   └── *.json             # 状态文件
+│
+├── *.py                    # 🐍 根目录工具
+│   ├── autonomous_research_agent.py
+│   ├── arxiv_scanner_v2.py
+│   ├── memory_integration.py
+│   └── ... (352 工具文件)
+│
+└── *.html                  # 🌐 仪表板
+    ├── research_dashboard.html
+    ├── workflow_dashboard.html
+    └── ...
+```
+
+---
+
+## ⚙️ 配置说明
+
+### 环境变量 (.env)
+
+```bash
+# LLM 配置
+LOCAL_LLM_MODEL=qwen2.5:1.5b
+LOCAL_LLM_BASE_URL=http://localhost:11434
+OLLAMA_MODEL=qwen2.5:1.5b
+
+# arXiv 配置
+ARXIV_CATEGORIES=cs.AI,cs.CL,cs.LG,cs.MA
+ARXIV_MAX_RESULTS=50
+
+# 飞书配置 (可选)
+FEISHU_APP_ID=cli_xxx
+FEISHU_APP_SECRET=xxx
+FEISHU_USER_ID=ou_xxx
+
+# 服务器配置
+SERVER_HOST=8.208.30.28
+SERVER_PORT=8444
+```
+
+### 配置文件
+
+#### research_agent_config.json
+```json
+{
+  "auto_scan": true,
+  "scan_time": "07:00",
+  "domains": ["cs.AI", "cs.CL", "cs.LG", "cs.MA"],
+  "min_novelty": 70,
+  "min_impact": 75,
+  "max_papers_per_scan": 20,
+  "llm_enabled": true,
+  "llm_model": "qwen2.5:1.5b",
+  "auto_add_to_todo": true,
+  "dashboard_port": 8090
+}
+```
+
+#### memory_config.json
+```json
+{
+  "total_capacity_mb": 512,
+  "l1_ratio": 0.6,
+  "l2_ratio": 0.3,
+  "l3_ratio": 0.1,
+  "auto_gc": true,
+  "gc_threshold": 0.7
+}
+```
+
+---
+
+## 📊 最佳实践
+
+### 1. 文件操作
+
+```bash
+# ✅ 正确：使用预检查钩子
+python pre_file_operation_hook.py --check myfile.py
+
+# ✅ 正确：使用 git 工作流
+python git_workflow.py --complete
+
+# ❌ 错误：直接修改不提交
+# (会被 pre-commit hook 阻止)
+```
+
+### 2. 记忆管理
+
+```bash
+# ✅ 定期蒸馏
+python memory_distiller.py --weekly
+
+# ✅ 优化内存
+python heartbeat_memory_opt.py
+
+# ✅ 导出统计
+python memory_integration.py --export
+```
+
+### 3. 代码质量
+
+```bash
+# ✅ 测试优先
+python -m pytest tests/ -v
+
+# ✅ 代码审查
+python critic_review.py --code myfile.py
+
+# ✅ 频繁提交
+python git_workflow.py --complete
+```
+
+### 4. 自动化
+
+```bash
+# ✅ 能脚本化的必须脚本化
+python automation_orchestrator.py --run
+
+# ✅ 使用 HEARTBEAT
+# 每 30 分钟自动执行
+
+# ✅ 配置定时任务
+python openclaw.py cron add --name "daily" --schedule "0 7 * * *"
+```
+
+---
+
+## 🔧 故障排除
+
+### 常见问题
+
+#### 1. Ollama 连接失败
+
+```bash
+# 检查 Ollama 状态
+ollama list
+
+# 重启 Ollama
+ollama serve
+
+# 测试连接
+curl http://localhost:11434/api/tags
+```
+
+#### 2. Git 提交失败
+
+```bash
+# 检查预提交钩子
+python pre_commit_hook.py --check
+
+# 查看违规
+python pre_commit_hook.py --enforce
+
+# 修复后重试
+python git_workflow.py --complete
+```
+
+#### 3. 内存不足
+
+```bash
+# 运行垃圾回收
+python heartbeat_memory_opt.py --gc
+
+# 查看内存状态
+python memory_integration.py --status
+
+# 优化工作流
+python memory_integration.py --optimize
+```
+
+#### 4. 仪表板无法访问
+
+```bash
+# 检查服务状态
+python health_checker.py --full
+
+# 重启服务
+python unified_monitor.py --restart
+
+# 查看日志
+cat logs/monitor.log
+```
+
+---
+
+## 🤝 贡献与联系
+
+### 开发环境
+
+```bash
+# 克隆仓库
+git clone https://github.com/shushuzn/obsidian-sync.git
+
+# 安装依赖
+pip install -r requirements.txt
+
+# 运行测试
+python -m pytest tests/ -v
+
+# 提交代码
+python git_workflow.py --complete
+```
+
+### 联系方式
+
+- **GitHub:** [@shushuzn](https://github.com/shushuzn)
+- **仓库:** [obsidian-sync](https://github.com/shushuzn/obsidian-sync)
+- **文档:** `15-docs/` 目录
+
+### 许可证
+
+**All Rights Reserved** - 详见 [LICENSE](LICENSE)
+
+---
+
+## 📈 系统统计
+
+| 指标 | 数值 | 更新时间 |
+|------|------|----------|
+| **Python 工具** | 352 | 2026-03-21 |
+| **总代码量** | ~1,850 KB | 2026-03-16 |
+| **教训代码** | 217+ | 2026-03-16 |
+| **Git 提交** | 60+ | 2026-03-16 |
+| **知识图谱实体** | 265+ | 2026-03-16 |
+| **记忆条目** | 205+ | 2026-03-16 |
+| **自动化任务** | 51+/天 | 2026-03-16 |
+
+---
+
+## 🎯 下一步
+
+### 待办事项 (Phase 9)
+
+- [ ] INN-024: 记忆进化引擎 2.0
+- [ ] INN-025: 7 人格自主协作
+- [ ] INN-026: 知识图谱自动构建
+- [ ] INN-027: 性能监控仪表板
+- [ ] INN-028: 自动部署管道
+
+**查看完整待办:** [TODO.md](TODO.md)
+
+---
+
+*最后更新:* 2026-03-16 18:30  
+*版本:* 2.0 (Autonomous Research Agent)  
+*状态:* 🟢 活跃开发中
+
+---
+
+**欢迎使用 OpenClaw Workspace。** 🐾
+
+_有问题？直接问，别客气。_
+=======
+# workspace
+>>>>>>> origin/main

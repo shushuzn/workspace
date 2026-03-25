@@ -1,0 +1,82 @@
+# tool_name: read_file
+# created_at: 2026-03-22T11:04:36.158387
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\integrations.py  (lines 95-170 of 260)
+
+
+def gen_dashboard(results):
+    """Generate HTML dashboard"""
+    html = '''<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Stock PRO Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, sans-serif; background: #0a0a0a; color: #fff; padding: 20px; }
+        .header { display: flex; justify-content: space-between; margin-bottom: 30px; }
+        .header h1 { color: #00d4ff; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
+        .stat-card { background: #1a1a2e; padding: 20px; border-radius: 10px; }
+        .stat-card .label { color: #888; font-size: 14px; }
+        .stat-card .value { font-size: 32px; font-weight: bold; color: #00d4ff; }
+        table { width: 100%; border-collapse: collapse; }
+        th { background: #1a1a2e; padding: 12px; text-align: left; }
+        td { padding: 12px; border-bottom: 1px solid #333; }
+        .buy { color: #4ade80; }
+        .hold { color: #fbbf24; }
+        .sell { color: #f87171; }
+        .positive { color: #4ade80; }
+        .negative { color: #f87171; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Stock PRO Dashboard</h1>
+        <div class="time">''' + datetime.now().strftime('%Y-%m-%d %H:%M') + '''</div>
+    </div>
+    <div class="stats>
+        <div class="stat-card">
+            <div class="label">Total Stocks</div>
+            <div class="value">''' + str(len(results)) + '''</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Avg Score</div>
+            <div class="value">''' + str(round(sum(r['score'] for r in results) / len(results))) + '''</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Avg Upside</div>
+            <div class="value">''' + str(round(sum(r['upside'] for r in results) / len(results), 1)) + '''%</div>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Price</th>
+                <th>Target</th>
+                <th>Upside</th>
+                <th>Score</th>
+                <th>Rating</th>
+                <th>P/E</th>
+                <th>ROE</th>
+            </tr>
+        </thead>
+        <tbody>
+'''
+    
+    for r in results:
+        rating_class = "buy" if r["upside"] > 30 else ("hold" if r["upside"] > 0 else "sell")
+        upside_class = "positive" if r["upside"] > 0 else "negative"
+        html += f'''            <tr>
+                <td><strong>{r["symbol"]}</strong></td>
+                <td>${r["price"]:.2f}</td>
+                <td>${r["target"]:.2f}</td>
+                <td class="{upside_class}">{r["upside"]:+.1f}%</td>
+                <td>{r["score"]}/100</td>
+                <td class="{rating_class}">{r["rating"]}</td>
+                <td>{r["pe"]:.1f}x</td>
+                <td>{r["roe"]:.1f}%</td>
+            </tr>
+
+[90 more lines. Use start_line=171 to continue.]

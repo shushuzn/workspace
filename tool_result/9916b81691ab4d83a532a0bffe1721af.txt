@@ -1,0 +1,67 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T12:06:58.781303
+# ---
+20:def c(s, t): return f"{s}{t}{S.END}" if sys.stdout.isatty() else t
+21:def B(t): return c(S.BOLD, t)
+22:def R(t): return c(S.RED, t)
+23:def G(t): return c(S.GREEN, t)
+24:def Y(t): return c(S.YELLOW, t)
+25:def L(t): return c(S.BLUE, t)
+26:def C(t): return c(S.CYAN, t)
+28:def info(m): print(f"  {L('▶')} {m}")
+29:def ok(m): print(f"  {G('✓')} {G(m)}")
+30:def warn(m): print(f"  {Y('⚠')} {Y(m)}")
+31:def error(m): print(f"  {R('✗')} {R(m)}")
+33:def banner(t, i="📡"):
+40:def sep(): print(C("  " + "─" * 46))
+42:def stats_box(cnt, new, srcs):
+54:def result_box(mode, sent, total, elapsed, cached=False):
+63:def bar(cur, tot, w=25):
+67:def prog(cur, tot, pre=""):
+70:def compact_view(news_list, limit=10):
+81:def load_feishu_config():
+87:def load_history():
+94:def save_history(hist):
+98:def load_log():
+104:def save_log(logs):
+108:def add_log(mode, sent, total):
+114:def get_access_token():
+119:    ctx = ssl.create_default_context()
+123:def send_card(token, receive_id, card):
+128:    ctx = ssl.create_default_context()
+138:def build_news_card(title, url, source=""):
+142:def build_digest_card(news_list):
+154:def build_category_card(news_list, category):
+171:def build_sentiment_card(pos_news, neg_news):
+191:def build_alert_card(title, url, source="", keywords=None):
+200:def build_daily_summary(all_news):
+212:def build_test_card():
+215:def build_welcome_card():
+219:def cmd_test():
+227:    result = send_card(token, feishu.get('default_receive_id', ''), card)
+236:def cmd_welcome():
+244:    result = send_card(token, feishu.get('default_receive_id', ''), card)
+253:def cmd_stats():
+277:def cmd_daily():
+291:    result = send_card(token, feishu.get('default_receive_id', ''), card)
+303:def cmd_digest():
+326:    result = send_card(token, feishu.get('default_receive_id', ''), card)
+338:def cmd_alert():
+362:        result = send_card(token, feishu.get('default_receive_id', ''), card)
+373:def cmd_all():
+392:        result = send_card(token, feishu.get('default_receive_id', ''), card)
+402:def cmd_preview():
+424:def cmd_compact():
+442:def cmd_category():
+476:    result = send_card(token, feishu.get('default_receive_id', ''), card)
+489:def cmd_sentiment():
+511:    result = send_card(token, feishu.get('default_receive_id', ''), card)
+524:def build_summary_card(news_list):
+560:def cmd_sentiment_market():
+624:    result = send_card(token, feishu.get('default_receive_id', ''), card)
+634:def build_market_sentiment_card(sentiment, news_list):
+686:def cmd_summary():
+700:    result = send_card(token, feishu.get('default_receive_id', ''), card)
+710:def cmd_smart():
+752:            result = send_card(token, feishu.get('default_receive_id', ''), card)
+769:    parser.add_argument('mode', nargs='?', default='stats', help='模式')

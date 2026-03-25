@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:51:02.706945
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 400-450 of 1141)
+    outlook = {}
+    for sector, score in sector_scores.items():
+        if score >= 2:
+            outlook[sector] = "景气"
+        elif score <= -2:
+            outlook[sector] = "低迷"
+        else:
+            outlook[sector] = "平稳"
+    
+    return outlook
+
+
+# 获取外盘行情（模拟数据，实际可接API）
+def get_external_markets() -> str:
+    """获取外盘行情摘要"""
+    try:
+        # 尝试获取真实数据
+        url = "https://hq.sinajs.cn/list=gb_ixic,gb_ipsa,gb_inx"
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = resp.read().decode('gbk')
+        
+        markets = []
+        for line in data.strip().split('\n'):
+            if '=' in line:
+                symbol = line.split('=')[0].split('_')[-1]
+                values = line.split('"')[1].split(',')
+                if len(values) >= 4:
+                    name = {"ixic": "纳指", "ipsa": "标普", "inx": "道指"}.get(symbol, symbol)
+                    price = float(values[0])
+                    change = float(values[1])
+                    pct = float(values[2])
+                    direction = "+" if change >= 0 else ""
+                    markets.append(f"{name}:{direction}{change:.0f}({direction}{pct:.2f}%)")
+        
+        return " | ".join(markets[:3])
+    except:
+        return "外盘: 获取失败"
+
+
+# 重要财经事件日历（简化版）
+def get_financial_calendar() -> str:
+    """获取近期重要财经事件"""
+    # 基于新闻内容推断重要事件
+    return ""
+
+
+# 历史情绪对比
+def compare_with_history(data, current_score: int) -> str:
+    """与历史情绪对比"""
+    try:
+
+[691 more lines. Use start_line=451 to continue.]

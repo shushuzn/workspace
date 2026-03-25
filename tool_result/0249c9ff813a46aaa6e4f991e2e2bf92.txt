@@ -1,0 +1,27 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:51:53.908327
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py  (lines 140-160 of 771)
+    parser.add_argument('--quick-report', action='store_true', help='Quick summary report')
+    parser.add_argument('--investment-summary', action='store_true', help='Investment summary')
+    parser.add_argument('--export-json', action='store_true', help='Export to JSON')
+    parser.add_argument('--export-md', action='store_true', help='Export to Markdown')
+    parser.add_argument('--export-html', action='store_true', help='Export to HTML')
+    parser.add_argument('--export-all-formats', action='store_true', help='Export all formats')
+    parser.add_argument('--quality-report', action='store_true', help='Quality analysis report')
+    parser.add_argument('--risk-return', action='store_true', help='Risk-return analysis')
+    parser.add_argument('--value-growth', action='store_true', help='Value vs growth comparison')
+    parser.add_argument('--metrics', metavar='SYMBOL', help='Advanced metrics for symbol')
+    parser.add_argument('--compare-all', action='store_true', help='Compare all metrics')
+    parser.add_argument('--compare-risk', action='store_true', help='Compare risk metrics')
+    parser.add_argument('--winners', metavar='CRITERIA', help='Find winners (score/upside/pe/roe/beta)')
+    parser.add_argument('--earnings-report', action='store_true', help='Earnings analysis report')
+    parser.add_argument('--dividend-report', action='store_true', help='Dividend analysis report')
+    parser.add_argument('--fscore', action='store_true', help='Piotroski F-Score report')
+    
+    args = parser.parse_args()
+    
+    print(BANNER)
+    
+
+[611 more lines. Use start_line=161 to continue.]

@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:12:08.355770
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 1690-1720 of 1978)
+        f.write(f"| 指标 | 数值 |\n")
+        f.write(f"|------|------|\n")
+        f.write(f"| 股息率 | {div_info['div_yield']*100:.2f}% |\n")
+        f.write(f"| 派息率 | {div_info['payout']*100:.0f}% |\n")
+        f.write(f"| 状态 | {div_info['status']} |\n")
+        f.write(f"| 健康度 | {div_info['health']} |\n\n")
+        
+        # Money Flow
+        f.write("### 5.4 资金流向分析\n\n")
+        f.write(f"| 指标 | 数值 | 信号 |\n")
+        f.write(f"|------|------|------|\n")
+        flow_icon = {"Bullish": "↑", "Bearish": "↓", "Neutral": "→"}.get(money_flow['signal'], "")
+        f.write(f"| 资金流向 | {money_flow['flow']} | {flow_icon} {money_flow['signal']} |\n")
+        f.write(f"| 积累/分配 | {money_flow['accum_dist']} | - |\n")
+        f.write(f"| 成交量权重 | {money_flow['vol_weight']} | - |\n\n")
+        
+        # Fundamental Forecast
+        f.write("### 5.5 盈利预测模型\n\n")
+        f.write(f"| P/E情景 | 目标价 | 上涨空间 |\n")
+        f.write(f"|---------|--------|----------|\n")
+        f.write(f"| P/E 15x (保守) | ${forecast['pe_15']:.0f} | {(forecast['pe_15']-price)/price*100:+.1f}% |\n")
+        f.write(f"| P/E 20x (平均) | ${forecast['pe_20']:.0f} | {(forecast['pe_20']-price)/price*100:+.1f}% |\n")
+        f.write(f"| P/E 25x (乐观) | ${forecast['pe_25']:.0f} | {(forecast['pe_25']-price)/price*100:+.1f}% |\n")
+        f.write(f"| P/E 30x (激进) | ${forecast['pe_30']:.0f} | {(forecast['pe_30']-price)/price*100:+.1f}% |\n\n")
+        f.write(f"| 增长率 | EPS: {forecast['eps_growth']:.1f}% | 营收: {forecast['rev_growth']:.1f}% |\n")
+        f.write(f"| 内在价值 | ${forecast['intrinsic']:.0f} | {(forecast['intrinsic']-price)/price*100:+.1f}% |\n\n")
+        
+        f.write("---\n\n")
+        
+        # Investment Recommendation
+        f.write("## 7. 投资建议\n\n")
+
+[258 more lines. Use start_line=1721 to continue.]

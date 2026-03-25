@@ -1,0 +1,1437 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-21T11:01:25.012531
+# ---
+
+[AUTO-OPTIMIZER-001] Self-Optimization
+==================================================
+  Mode: DRY RUN
+
+[aai_scorer_001.py]
+  - Uses print, no logging
+
+[adaptive_workflow_001.py]
+  - Uses print, no logging
+
+[add_core_rules_to_workflow_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[add_missing_key_tools_001.py]
+  - Uses print, no logging
+
+[add_missing_tool_calls_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[add_mock_tool_calls_001.py]
+  - Uses print, no logging
+
+[add_phase_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[add_security_rules_to_registry_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[agent_tool_monitor_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[ai_code_suggest_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[ai_suggest_001.py]
+  - Uses print, no logging
+
+[ai_workflow_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[analyze_cats_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[anti_bypass_engine_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[audit_analyzer_001.py]
+  - Uses print, no logging
+
+[auto_argv_fix_001.py]
+  - Uses print, no logging
+
+[auto_automator_001.py]
+  - Uses print, no logging
+
+[auto_backup_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[auto_barexcept_fix_001.py]
+  - Uses print, no logging
+  - Uses bare except
+
+[auto_discover_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[auto_doc_generator_001.py]
+  - Uses print, no logging
+
+[auto_evolve_001.py]
+  - Uses bare except
+  - Missing type hints
+
+[auto_fix_engine_001.py]
+  - Uses print, no logging
+
+[auto_format_detector_001.py]
+  - Uses print, no logging
+
+[auto_memory_distiller_001.py]
+  - Uses print, no logging
+
+[auto_optimizer_001.py]
+  - Missing type hints
+
+[auto_protection_layer_001.py]
+  - Uses print, no logging
+
+[auto_recovery_001.py]
+  - Uses print, no logging
+
+[auto_retry_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[auto_session_compressor_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[auto_step_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[auto_todo_updater_001.py]
+  - Uses print, no logging
+
+[auto_training_engine_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[bad_test_001.py]
+  - Uses bare except
+  - Missing docstring
+
+[batch_rename_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[batch_runner_001.py]
+  - Uses print, no logging
+
+[batch_tools_001.py]
+  - Uses print, no logging
+
+[behavior_analyzer_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[benchmark_001.py]
+  - Uses print, no logging
+
+[blockchain_logger_001.py]
+  - Uses print, no logging
+
+[brainstorm_action_001.py]
+  - Uses print, no logging
+
+[brainstorm_ai_assistant_001.py]
+  - Uses print, no logging
+
+[brainstorm_analogy_001.py]
+  - Uses print, no logging
+
+[brainstorm_auto_scanner_001.py]
+  - Uses print, no logging
+
+[brainstorm_define_001.py]
+  - Uses print, no logging
+
+[brainstorm_diverge_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[brainstorm_filter_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[brainstorm_matcher_001.py]
+  - Uses print, no logging
+
+[brainstorm_mindmap_001.py]
+  - Uses print, no logging
+
+[brainstorm_new_dimensions_001.py]
+  - Uses print, no logging
+
+[brainstorm_next_001.py]
+  - Uses print, no logging
+
+[brainstorm_optimize_001.py]
+  - Uses print, no logging
+
+[brainstorm_prioritize_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[brainstorm_quality_predictor_001.py]
+  - Uses print, no logging
+
+[brainstorm_quick_001.py]
+  - Uses print, no logging
+
+[brainstorm_random_001.py]
+  - Uses print, no logging
+
+[brainstorm_refine_001.py]
+  - Uses print, no logging
+
+[brainstorm_reverse_001.py]
+  - Uses print, no logging
+
+[brainstorm_roadmap_tools_001.py]
+  - Uses print, no logging
+
+[brainstorm_scamper_001.py]
+  - Uses print, no logging
+
+[brainstorm_sixhats_001.py]
+  - Uses print, no logging
+
+[brainstorm_stock_analysis_001.py]
+  - Uses print, no logging
+
+[brainstorm_stock_optimize_001.py]
+  - Uses print, no logging
+
+[brainstorm_workflow_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[chain_runner_001.py]
+  - Uses print, no logging
+
+[check_all_existing_tools_001.py]
+  - Uses print, no logging
+
+[check_core_files_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_current_state_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_existing_tools_fixed_001.py]
+  - Uses print, no logging
+
+[check_git_version_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_kept_tools_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_key_tools_exist_001.py]
+  - Uses print, no logging
+
+[check_log_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_missing_tools_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_registry_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_registry_count_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_registry_format_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_registry_structure_001.py]
+  - Uses print, no logging
+
+[check_restored_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_session_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_state_files_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_step_ids_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_tool_bypass_001.py]
+  - Uses print, no logging
+
+[check_tool_files_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_tool_log_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_tool_registration_001.py]
+  - Uses print, no logging
+
+[check_tool_registry_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_tool_structure_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_workflow_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[check_workflow_steps_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[ci_cd_integration_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[code_quality_001.py]
+  - Uses print, no logging
+  - Uses bare except
+
+[compare_count_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[complete_current_session_001.py]
+  - Uses print, no logging
+
+[compliance_booster_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[compliance_dashboard_001.py]
+  - Uses print, no logging
+
+[compression_scheduler_001.py]
+  - Uses print, no logging
+
+[confirmation_gate_001.py]
+  - Uses print, no logging
+
+[content_validator_001.py]
+  - Uses print, no logging
+
+[context_aware_assistant_001.py]
+  - Uses print, no logging
+
+[context_verify_001.py]
+  - Uses print, no logging
+
+[copaw_entry_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[core_files_compressor_001.py]
+  - Uses print, no logging
+
+[core_rules_verifier_001.py]
+  - Uses print, no logging
+
+[count_py_files_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[count_real_tools_001.py]
+  - Uses print, no logging
+
+[create_brainstorm_v_001.py]
+  - Uses print, no logging
+
+[create_dialogue_workflow_001.py]
+  - Uses print, no logging
+
+[create_dirs_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[create_dir_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[cron_enhanced_001.py]
+  - Uses print, no logging
+
+[cron_scheduler_001.py]
+  - Uses print, no logging
+
+[cross_session_memory_001.py]
+  - Uses print, no logging
+
+[dashboard_view_001.py]
+  - Uses print, no logging
+
+[data_cache_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[data_source_manager_001.py]
+  - Uses print, no logging
+
+[debug_registry_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[debug_step_match_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[debug_workflow_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[debug_workflow_steps_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[dep_resolver_001.py]
+  - Uses print, no logging
+
+[diagnose_registry_001.py]
+  - Uses print, no logging
+
+[dialog_entry_001.py]
+  - Uses print, no logging
+
+[dialog_workflow_enforcer_001.py]
+  - Uses print, no logging
+
+[do_commit_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[dynamic_goal_adjuster_001.py]
+  - Uses print, no logging
+
+[dynamic_step_skipper_001.py]
+  - Uses print, no logging
+
+[embedded_critic_001.py]
+  - Uses print, no logging
+
+[emergency_stop_001.py]
+  - Uses print, no logging
+
+[emotional_intelligence_001.py]
+  - Uses print, no logging
+
+[error_handler_001.py]
+  - Uses print, no logging
+
+[event_bus_001.py]
+  - Uses print, no logging
+
+[evolution_dashboard_001.py]
+  - Uses print, no logging
+
+[evolved_tool_1_001.py]
+  - Uses print, no logging
+
+[exec_protection_task_001.py]
+  - Uses print, no logging
+
+[export_format_001.py]
+  - Uses print, no logging
+
+[external_verifier_001.py]
+  - Uses print, no logging
+
+[fast_load_001.py]
+  - Uses print, no logging
+
+[file_guardian_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[file_integrity_001.py]
+  - Uses print, no logging
+
+[finalize_current_session_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[finalize_session_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[find_copaw_tool_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[find_critic_tools_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[fix_execution_state_001.py]
+  - Uses print, no logging
+
+[fix_execution_state_v_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[fix_missing_steps_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[fix_registry_format_001.py]
+  - Uses print, no logging
+
+[fix_state_signature_001.py]
+  - Uses print, no logging
+
+[fix_state_with_substeps_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[fix_step_id_type_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[forced_protection_executor_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[gantt_chart_001.py]
+  - Uses print, no logging
+
+[get_workflow_steps_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[git_commit_helper_001.py]
+  - Uses print, no logging
+
+[git_precommit_check_001.py]
+  - Uses print, no logging
+
+[git_precommit_check_v_001.py]
+  - Uses print, no logging
+
+[guardian_auto_fix_001.py]
+  - Uses print, no logging
+
+[health_checker_001.py]
+  - Uses print, no logging
+
+[health_reporter_001.py]
+  - Uses print, no logging
+
+[human_intent_understanding_001.py]
+  - Uses print, no logging
+
+[improvement_executor_001.py]
+  - Uses print, no logging
+
+[integrate_api_001.py]
+  - Uses print, no logging
+
+[integrate_data_001.py]
+  - Uses print, no logging
+
+[integrate_suite_001.py]
+  - Uses print, no logging
+
+[integrity_checker_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[intent_predictor_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[list_git_files_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[list_tools_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[llm_guide_001.py]
+  - Uses print, no logging
+
+[mark_all_completed_001.py]
+  - Uses print, no logging
+
+[mark_meta_task_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[mark_simplified_execution_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[memory_distiller_001.py]
+  - Uses print, no logging
+
+[metacognition_monitor_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[multi_agent_learn_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[multi_agent_orchestrator_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[multi_agent_router_001.py]
+  - Uses print, no logging
+
+[multi_agent_viz_001.py]
+  - Uses print, no logging
+
+[next_advisor_001.py]
+  - Uses print, no logging
+
+[nl_workflow_001.py]
+  - Uses print, no logging
+
+[note_summarizer_001.py]
+  - Uses print, no logging
+
+[notify_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[ops_panel_001.py]
+  - Uses print, no logging
+  - Uses bare except
+
+[optimap_manager_001.py]
+  - Uses print, no logging
+
+[optimize_master_001.py]
+  - Uses print, no logging
+
+[parallel_tool_executor_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[parallel_workflow_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[penalty_system_001.py]
+  - Uses print, no logging
+
+[penalty_system_v_001.py]
+  - Uses print, no logging
+
+[performance_analyzer_001.py]
+  - Uses print, no logging
+
+[performance_optimizer_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[permission_validator_001.py]
+  - Uses print, no logging
+
+[phase_planner_001.py]
+  - Uses print, no logging
+
+[post_session_compress_001.py]
+  - Uses print, no logging
+
+[pre_commit_checker_001.py]
+  - Uses print, no logging
+
+[pre_session_hook_001.py]
+  - Uses print, no logging
+
+[progressive_output_001.py]
+  - Uses print, no logging
+
+[progress_bar_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[prompt_optimizer_001.py]
+  - Uses print, no logging
+
+[protected_py_001.py]
+  - Uses print, no logging
+
+[protection_monitor_001.py]
+  - Uses print, no logging
+
+[query_tools_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[quick_complete_workflow_001.py]
+  - Uses print, no logging
+
+[read_steps_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[rebuild_registry_001.py]
+  - Uses print, no logging
+
+[reg_agent_monitor_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_antibypass_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_auto_backup_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_auto_critic_v_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_auto_protection_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_confirmation_gate_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_context_verify_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_dashboard_fix_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_diagnose_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_fix_state_v_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_forced_protection_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_guardian_fix_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_mark_all_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_phase_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_protection_phase_001.py]
+  - Uses print, no logging
+
+[reg_reward_stop_001.py]
+  - Uses print, no logging
+
+[reg_risk_assessor_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_rules_verifier_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_safe_shell_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_task_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_task_analyzer_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_tool_executor_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_tool_selector_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_update_step_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_v_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[reg_workflow_scheduler_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[renumber_steps_001.py]
+  - Uses print, no logging
+
+[report_export_001.py]
+  - Uses print, no logging
+
+[report_generator_001.py]
+  - Uses print, no logging
+
+[report_template_001.py]
+  - Uses print, no logging
+
+[research_literature_001.py]
+  - Uses print, no logging
+
+[research_topic_001.py]
+  - Uses print, no logging
+
+[restore_state_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[result_verifier_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[retry_handler_001.py]
+  - Uses print, no logging
+
+[reward_system_001.py]
+  - Uses print, no logging
+
+[risk_assessor_001.py]
+  - Uses print, no logging
+
+[roadmap_manager_001.py]
+  - Uses print, no logging
+
+[roadmap_master_001.py]
+  - Uses print, no logging
+
+[safe_coder_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[safe_git_executor_001.py]
+  - Uses print, no logging
+
+[safe_shell_executor_001.py]
+  - Uses print, no logging
+
+[sa_ai_signal_001.py]
+  - Uses print, no logging
+
+[sa_analyzer_001.py]
+  - Uses print, no logging
+
+[sa_api_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[sa_backtesting_001.py]
+  - Uses print, no logging
+
+[sa_backtest_001.py]
+  - Uses print, no logging
+
+[sa_backtest_optimizer_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[sa_chart_generator_001.py]
+  - Uses print, no logging
+
+[sa_dashboard_001.py]
+  - Uses print, no logging
+
+[sa_datasource_001.py]
+  - Uses print, no logging
+
+[sa_data_optimizer_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[sa_executor_001.py]
+  - Uses print, no logging
+
+[sa_financial_collector_001.py]
+  - Uses print, no logging
+
+[sa_financial_ratios_001.py]
+  - Uses print, no logging
+
+[sa_growth_analysis_001.py]
+  - Uses print, no logging
+
+[sa_historical_downloader_001.py]
+  - Uses print, no logging
+
+[sa_indicator_calculator_001.py]
+  - Uses print, no logging
+
+[sa_industry_analysis_001.py]
+  - Uses print, no logging
+
+[sa_market_regime_001.py]
+  - Uses print, no logging
+
+[sa_optimizer_001.py]
+  - Uses print, no logging
+
+[sa_pattern_recognition_001.py]
+  - Uses print, no logging
+
+[sa_performance_attribution_001.py]
+  - Uses print, no logging
+
+[sa_portfolio_risk_001.py]
+  - Uses print, no logging
+
+[sa_realtime_001.py]
+  - Uses print, no logging
+
+[sa_realtime_fetcher_001.py]
+  - Uses print, no logging
+
+[sa_report_001.py]
+  - Uses print, no logging
+
+[sa_report_generator_001.py]
+  - Uses print, no logging
+
+[sa_risk_001.py]
+  - Uses print, no logging
+
+[sa_risk_management_001.py]
+  - Uses print, no logging
+
+[sa_sentiment_001.py]
+  - Uses print, no logging
+
+[sa_sentiment_aggregator_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[sa_sentiment_monitor_001.py]
+  - Uses print, no logging
+
+[sa_signal_generator_001.py]
+  - Uses print, no logging
+
+[sa_strategy_001.py]
+  - Uses print, no logging
+
+[sa_strategy_optimizer_001.py]
+  - Uses print, no logging
+
+[sa_support_resistance_001.py]
+  - Uses print, no logging
+
+[sa_trader_001.py]
+  - Uses print, no logging
+
+[sa_trend_analysis_001.py]
+  - Uses print, no logging
+
+[sa_valuation_model_001.py]
+  - Uses print, no logging
+
+[search_shell_tools_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[self_corrector_001.py]
+  - Uses print, no logging
+
+[self_goal_setter_001.py]
+  - Uses print, no logging
+
+[self_heal_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[session_compressor_001.py]
+  - Uses print, no logging
+
+[session_end_001.py]
+  - Uses print, no logging
+
+[session_end_audit_001.py]
+  - Uses print, no logging
+
+[session_token_validator_001.py]
+  - Uses print, no logging
+
+[show_new_registry_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[single_step_lock_001.py]
+  - Uses print, no logging
+
+[sitecustomize_001.py]
+  - Uses print, no logging
+
+[smart_cache_001.py]
+  - Uses print, no logging
+
+[smart_compress_001.py]
+  - Uses print, no logging
+
+[smart_task_decomposer_001.py]
+  - Uses print, no logging
+
+[snippet_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[state_monitor_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[state_protector_001.py]
+  - Uses print, no logging
+
+[state_snapshot_001.py]
+  - Uses print, no logging
+
+[step_context_verify_001.py]
+  - Uses print, no logging
+
+[step_tracker_001.py]
+  - Uses print, no logging
+
+[stock_analysis_pipeline_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[stock_analysis_quality_predictor_001.py]
+  - Uses print, no logging
+
+[stock_auto_report_001.py]
+  - Uses print, no logging
+
+[stock_dashboard_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[stock_data_cache_001.py]
+  - Uses print, no logging
+
+[stock_optimize_action_001.py]
+  - Uses print, no logging
+
+[stock_parallel_loader_001.py]
+  - Uses print, no logging
+
+[stock_pipeline_enhanced_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[stock_realtime_alert_001.py]
+  - Uses print, no logging
+
+[summary_generator_001.py]
+  - Uses print, no logging
+
+[sync_registry_001.py]
+  - Uses print, no logging
+
+[sync_registry_smart_001.py]
+  - Uses print, no logging
+
+[task_analyzer_001.py]
+  - Uses print, no logging
+
+[task_classifier_001.py]
+  - Uses print, no logging
+
+[task_decomposer_001.py]
+  - Uses print, no logging
+
+[temp_file_cleaner_001.py]
+  - Uses print, no logging
+
+[test_auto_step_tracking_001.py]
+  - Uses print, no logging
+
+[test_bypass_protection_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[test_cache_enhanced_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[test_copaw_entry_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[test_data_cache_001.py]
+  - Missing type hints
+
+[test_data_source_manager_001.py]
+  - Missing type hints
+
+[test_integration_001.py]
+  - Uses print, no logging
+
+[test_permission_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[test_protection_001.py]
+  - Uses print, no logging
+
+[test_runner_001.py]
+  - Uses print, no logging
+
+[test_runtime_intercept_001.py]
+  - Uses print, no logging
+
+[test_stock_analysis_pipeline_001.py]
+  - Missing type hints
+
+[test_unit_001.py]
+  - Uses print, no logging
+
+[test_wrapper_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[test_wrapper_no_session_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[test_wrapper_strict_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[tool_call_interceptor_001.py]
+  - Uses print, no logging
+
+[tool_call_interceptor_v_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[tool_call_tracker_001.py]
+  - Uses print, no logging
+
+[tool_executor_001.py]
+  - Uses print, no logging
+
+[tool_monitor_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[tool_namer_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[tool_selector_001.py]
+  - Uses print, no logging
+
+[tool_self_learner_001.py]
+  - Uses print, no logging
+
+[tool_validator_001.py]
+  - Uses bare except
+
+[tool_wrapper_001.py]
+  - Uses print, no logging
+
+[topology_viz_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[typing_indicator_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[undo_redo_001.py]
+  - Uses print, no logging
+
+[update_execution_state_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[update_mandatory_workflow_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[update_registry_phase_001.py]
+  - Uses print, no logging
+
+[update_registry_sa_phase_001.py]
+  - Uses print, no logging
+
+[update_registry_sa_phase_complete_001.py]
+  - Uses print, no logging
+
+[update_registry_sa_phase_final_001.py]
+  - Uses print, no logging
+
+[update_registry_stock_brainstorm_001.py]
+  - Uses print, no logging
+
+[update_state_for_mandatory_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[update_step_state_001.py]
+  - Uses print, no logging
+
+[user_preferences_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[util_datetime_001.py]
+  - Uses print, no logging
+
+[util_file_001.py]
+  - Uses print, no logging
+
+[util_string_001.py]
+  - Uses print, no logging
+
+[ux_settings_001.py]
+  - Uses print, no logging
+
+[velocity_predict_001.py]
+  - Uses print, no logging
+
+[verify_rebuild_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[verify_registry_update_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[verify_sa_tools_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[verify_state_types_001.py]
+  - Uses print, no logging
+
+[verify_workflow_complete_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[verify_workflow_update_001.py]
+  - Missing docstring
+
+[version_ctrl_001.py]
+  - Uses print, no logging
+
+[view_safe_shell_001.py]
+  - Uses print, no logging
+  - Missing docstring
+
+[workflow_alert_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_analytics_001.py]
+  - Uses print, no logging
+
+[workflow_analyzer_001.py]
+  - Uses print, no logging
+
+[workflow_anomaly_detector_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_autoloader_001.py]
+  - Uses print, no logging
+
+[workflow_auto_executor_001.py]
+  - Uses print, no logging
+
+[workflow_backup_001.py]
+  - Uses print, no logging
+
+[workflow_cache_001.py]
+  - Uses print, no logging
+
+[workflow_completion_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_dashboard_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_deploy_001.py]
+  - Uses print, no logging
+
+[workflow_diagnosis_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_enforcer_001.py]
+  - Uses print, no logging
+
+[workflow_enforcer_v_001.py]
+  - Uses print, no logging
+
+[workflow_evolver_001.py]
+  - Uses print, no logging
+
+[workflow_fix_001.py]
+  - Uses print, no logging
+
+[workflow_guardian_v_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_guard_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_health_001.py]
+  - Uses print, no logging
+
+[workflow_health_dashboard_001.py]
+  - Uses print, no logging
+
+[workflow_helper_001.py]
+  - Uses print, no logging
+
+[workflow_integration_001.py]
+  - Uses print, no logging
+
+[workflow_logger_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_market_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_master_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_menu_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_monitor_001.py]
+  - Uses print, no logging
+
+[workflow_optimizer_001.py]
+  - Uses print, no logging
+
+[workflow_performance_monitor_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_plugin_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_plugin_manager_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_progress_bar_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_recovery_001.py]
+  - Uses print, no logging
+
+[workflow_registry_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_report_001.py]
+  - Uses print, no logging
+
+[workflow_runner_001.py]
+  - Uses print, no logging
+
+[workflow_scheduler_001.py]
+  - Uses print, no logging
+
+[workflow_schedule_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_security_001.py]
+  - Uses print, no logging
+
+[workflow_self_test_001.py]
+  - Uses print, no logging
+
+[workflow_stats_001.py]
+  - Uses print, no logging
+
+[workflow_stock_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+[workflow_templates_001.py]
+  - Uses print, no logging
+
+[workflow_template_001.py]
+  - Uses print, no logging
+
+[workflow_test_001.py]
+  - Uses print, no logging
+
+[workflow_version_001.py]
+  - Uses print, no logging
+  - Missing type hints
+
+==================================================
+[SUMMARY]
+  Tools analyzed: 423
+  Issues found: 584
+  Would fix: 584

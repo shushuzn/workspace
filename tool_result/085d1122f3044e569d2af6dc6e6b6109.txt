@@ -1,0 +1,137 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:35:58.892229
+# ---
+        # 新闻聚类
+        if args.cluster:
+            clusters = cluster_news(news)
+            show_clusters(clusters)
+        
+        # LLM分析 (需要 Ollama 运行)
+        if args.llm:
+            news = enrich_with_llm(news, max_items=args.limit)
+        
+        # 显示LLM深度分析结果
+        llm_news = [n for n in news if n.get('llm_summary')]
+        if llm_news:
+            print()
+            
+            # 市场情绪分析
+            if llm_news:
+                sentiment = get_market_sentiment(llm_news)
+                if sentiment:
+                    print("  📊 市场情绪:")
+                    overall = sentiment.get('overall', 'neutral')
+                    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+                    print(f"     {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+                    print(f"     📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)}")
+                    print()
+            print("=" * 50)
+            print("  🤖 LLM 深度分析")
+            print("=" * 50)
+            
+            # 统计
+            scores = [n.get('llm_score', 0) for n in llm_news]
+            avg_score = sum(scores) / len(scores) if scores else 0
+            bull_count = sum(1 for n in llm_news if n.get('llm_advice') == 'bullish')
+            bear_count = sum(1 for n in llm_news if n.get('llm_advice') == 'bearish')
+            
+            print()
+            
+            # 市场情绪分析
+            if llm_news:
+                sentiment = get_market_sentiment(llm_news)
+                if sentiment:
+                    print("  📊 市场情绪:")
+                    overall = sentiment.get('overall', 'neutral')
+                    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+                    print(f"     {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+                    print(f"     📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)}")
+                    print()
+            print(f"  📊 市场情绪: {avg_score:+.0f} ({'偏多' if avg_score > 10 else ('偏空' if avg_score < -10 else '中性')})")
+            print(f"  📈 利好信号: {bull_count} | 📉 利空信号: {bear_count}")
+            
+            # 市场影响统计
+            market_counts = {}
+            for n in llm_news:
+                for m in n.get('llm_markets', []):
+                    market_counts[m] = market_counts.get(m, 0) + 1
+            
+            if market_counts:
+                market_names = {"stock": "📈 股市", "forex": "💱 外汇", "commodity": "🛢️ 大宗商品", "bond": "📉 债市", "crypto": "₿ 加密"}
+                print()
+            
+            # 市场情绪分析
+            if llm_news:
+                sentiment = get_market_sentiment(llm_news)
+                if sentiment:
+                    print("  📊 市场情绪:")
+                    overall = sentiment.get('overall', 'neutral')
+                    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+                    print(f"     {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+                    print(f"     📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)}")
+                    print()
+                print("  🎯 影响市场:")
+                for m, cnt in sorted(market_counts.items(), key=lambda x: -x[1]):
+                    print(f"     {market_names.get(m, m)}: {cnt}")
+            
+            # 热门实体
+            entities = []
+            for n in llm_news:
+                entities.extend(n.get('llm_entities', []))
+            entity_counts = {}
+            for e in entities:
+                entity_counts[e] = entity_counts.get(e, 0) + 1
+            top_entities = sorted(entity_counts.items(), key=lambda x: -x[1])[:5]
+            if top_entities:
+                print()
+            
+            # 市场情绪分析
+            if llm_news:
+                sentiment = get_market_sentiment(llm_news)
+                if sentiment:
+                    print("  📊 市场情绪:")
+                    overall = sentiment.get('overall', 'neutral')
+                    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+                    print(f"     {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+                    print(f"     📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)}")
+                    print()
+                print("  👤 热门公司/人物:")
+                print(f"     {', '.join([f'{e}({c})' for e, c in top_entities])}")
+            
+            # 详细分析
+            print()
+            
+            # 市场情绪分析
+            if llm_news:
+                sentiment = get_market_sentiment(llm_news)
+                if sentiment:
+                    print("  📊 市场情绪:")
+                    overall = sentiment.get('overall', 'neutral')
+                    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+                    print(f"     {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+                    print(f"     📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)}")
+                    print()
+            print("  📝 新闻分析:")
+            for i, n in enumerate(llm_news[:5], 1):
+                score = n.get('llm_score', 0)
+                score_bar = "▓" * max(0, (score + 100) // 25) + "░" * (4 - max(0, (score + 100) // 25))
+                advice_icon = "📈" if n.get('llm_advice') == 'bullish' else ("📉" if n.get('llm_advice') == 'bearish' else "➖")
+                sentiment_icon = "🟢" if n.get('llm_sentiment') == 'positive' else ("🔴" if n.get('llm_sentiment') == 'negative' else "⚪")
+                
+                print(f"  {i}. {sentiment_icon} {advice_icon} [{score:+3d}] {n.get('llm_summary', '')[:35]}...")
+                markets = n.get('llm_markets', [])[:2]
+                if markets:
+                    print(f"     → {', '.join(markets)}")
+            
+            print()
+            
+            # 市场情绪分析
+            if llm_news:
+                sentiment = get_market_sentiment(llm_news)
+                if sentiment:
+                    print("  📊 市场情绪:")
+                    overall = sentiment.get('overall', 'neutral')
+                    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+                    print(f"     {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+                    print(f"     📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)}")
+                    print()

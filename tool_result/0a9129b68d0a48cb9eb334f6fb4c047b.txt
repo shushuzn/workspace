@@ -1,0 +1,97 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:00:53.267516
+# ---
+"""Integration utilities: CSV, Excel, Dashboard, Charts"""
+try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    PLT_AVAILABLE = True
+except ImportError:
+    PLT_AVAILABLE = False
+import json, csv, sqlite3
+from pathlib import Path
+from datetime import datetime
+
+WORKSPACE = Path("D:/OpenClaw/workspace")
+OUTPUT = WORKSPACE / "50-reports" / "stocks"
+OUTPUT.mkdir(parents=True, exist_ok=True)
+DB_FILE = WORKSPACE / "30-scripts-tools" / "stock_pro.db"
+
+def export_csv(results, filename=None):
+    if not filename: filename = OUTPUT / f"stocks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    if not results: return "[CSV] No data"
+    with open(filename, 'w', newline='', encoding='utf-8') as f:
+        w = csv.writer(f)
+        w.writerow(["Symbol", "Price", "Target", "Upside", "Score", "Rating", "P/E", "ROE", "Source"])
+        for r in results:
+            w.writerow([r['symbol'], r['price'], r['target'], f"{r['upside']:.1f}%", r['score'], r['rating'], f"{r['pe']:.1f}", f"{r['roe']:.1f}", r.get('source', 'unknown')])
+    return f"[CSV] Exported {len(results)} stocks"
+
+def export_xlsx(results, filename=None):
+    try: import openpyxl
+    except ImportError: return "[Excel] pip install openpyxl"
+    if not filename: filename = OUTPUT / f"stocks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+    wb = openpyxl.Workbook(); ws = wb.active
+    ws.append(["Symbol", "Price", "Target", "Upside", "Score", "Rating"])
+    for r in results: ws.append([r['symbol'], r['price'], r['target'], r['upside'], r['score'], r['rating']])
+    wb.save(filename)
+    return f"[Excel] Exported {len(results)} stocks"
+
+def save_db(results):
+    conn = sqlite3.connect(DB_FILE); c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS stocks (symbol TEXT, price REAL, target REAL, upside REAL, score INTEGER, rating TEXT, fetched_at TEXT)''')
+    for r in results:
+        c.execute('''INSERT INTO stocks VALUES (?,?,?,?,?,?,?)''', (r['symbol'], r['price'], r['target'], r['upside'], r['score'], r['rating'], r.get('fetched_at', datetime.now().isoformat())))
+    conn.commit(); conn.close()
+    return f"[DB] Saved {len(results)} stocks"
+
+def gen_dashboard(results):
+    if not results: return "[Dashboard] No data"
+    fetched = results[0].get('fetched_at', datetime.now().isoformat())
+    avg_score = sum(r['score'] for r in results) / len(results)
+    avg_upside = sum(r['upside'] for r in results) / len(results)
+    rows = ""
+    for r in results:
+        cls = "buy" if r["score"] >= 65 else "hold" if r["score"] >= 50 else "sell"
+        upcls = "positive" if r["upside"] > 0 else "negative"
+        rows += f'<tr><td><strong>{r["symbol"]}</strong></td><td>${r["price"]:.2f}</td><td>${r["target"]:.2f}</td><td class="{upcls}">{r["upside"]:+.1f}%</td><td>{r["score"]}</td><td class="{cls}">{r["rating"]}</td><td>{r["pe"]:.0f}x</td></tr>'
+    html = f'''<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Stock Dashboard</title><style>
+body{{font-family:Arial;background:#0a0a0a;color:#fff;padding:20px}}
+.header{{display:flex;justify-content:space-between;margin-bottom:20px}}
+h1{{color:#00d4ff}}.stats{{display:grid;grid-template-columns:repeat(3,200px);gap:15px;margin-bottom:20px}}
+.stat{{background:#1a1a2e;padding:15px;border-radius:8px}}
+.stat .label{{color:#888;font-size:12px}}.stat .value{{font-size:24px;font-weight:bold;color:#00d4ff}}
+table{{width:100%;border-collapse:collapse}}
+th{{background:#1a1a2e;padding:10px;text-align:left}}td{{padding:10px;border-bottom:1px solid #333}}
+.buy{{color:#4ade80}}.hold{{color:#fbbf24}}.sell{{color:#f87171}}.positive{{color:#4ade80}}.negative{{color:#f87171}}
+</style></head><body><div class="header"><h1>Stock Dashboard</h1><div>Data: {fetched}</div></div>
+<div class="stats"><div class="stat"><div class="label">Stocks</div><div class="value">{len(results)}</div></div>
+<div class="stat"><div class="label">Avg Score</div><div class="value">{avg_score:.0f}</div></div>
+<div class="stat"><div class="label">Avg Upside</div><div class="value">{avg_upside:+.1f}%</div></div></div>
+<table><thead><tr><th>Symbol</th><th>Price</th><th>Target</th><th>Upside</th><th>Score</th><th>Rating</th><th>P/E</th></tr></thead><tbody>{rows}</tbody></table></body></html>'''
+    out = OUTPUT / "dashboard.html"
+    open(out, 'w', encoding='utf-8').write(html)
+    return f"[Dashboard] Generated {out}"
+
+def check_alerts(results, threshold=30):
+    alerts = [f"{r['symbol']}: {r['upside']:+.1f}%" for r in results if r['upside'] > threshold]
+    return f"[Alert] {len(alerts)} alerts" if alerts else f"[Alert] No alerts"
+
+def gen_chart(results, filename=None):
+    if not PLT_AVAILABLE: return "[Chart] pip install matplotlib"
+    if not filename: filename = OUTPUT / f"chart_{datetime.now().strftime('%Y%m%d_%H%M%S')}.png"
+    fig, axes = plt.subplots(2, 2, figsize=(12, 8))
+    syms = [r['symbol'] for r in results]
+    scores = [r['score'] for r in results]
+    upsides = [r['upside'] for r in results]
+    colors = ['#4ade80' if s >= 65 else '#fbbf24' if s >= 50 else '#f87171' for s in scores]
+    axes[0,0].barh(syms, scores, color=colors); axes[0,0].set_xlabel('Score'); axes[0,0].set_title('Score'); axes[0,0].set_xlim(0,100)
+    axes[0,1].barh(syms, upsides, color=['#4ade80' if u > 0 else '#f87171' for u in upsides]); axes[0,1].set_xlabel('Upside (%)'); axes[0,1].set_title('Upside')
+    axes[1,0].scatter([r['pe'] for r in results], [r['roe'] for r in results], s=80, c=scores, cmap='RdYlGn'); axes[1,0].set_xlabel('P/E'); axes[1,0].set_ylabel('ROE'); axes[1,0].set_title('P/E vs ROE'); axes[1,0].grid(True, alpha=0.3)
+    ratings = {}
+    for r in results:
+        rt = r['rating'].split()[0]; ratings[rt] = ratings.get(rt, 0) + 1
+    if ratings: axes[1,1].pie(ratings.values(), labels=ratings.keys(), autopct='%1.0f%%'); axes[1,1].set_title('Ratings')
+    plt.tight_layout(); plt.savefig(filename, dpi=150, bbox_inches='tight'); plt.close()
+    return f"[Chart] Generated {filename}"

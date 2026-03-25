@@ -1,0 +1,54 @@
+# tool_name: read_file
+# created_at: 2026-03-22T17:02:59.878008
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\sentiment.py  (lines 203-250 of 515)
+def research_report(symbols=None):
+    """Generate research reports summary"""
+    if symbols is None:
+        symbols = ["NVDA", "MSFT", "GOOGL", "AAPL", "META", "AMZN", "TSLA", "AMD"]
+    
+    report = "# Research Reports Summary\n\n"
+    
+    strong_buys = []
+    upgrades = []
+    downgrades = []
+    
+    for sym in symbols:
+        reports = get_research_reports(sym)
+        if not reports:
+            continue
+        
+        # Aggregate
+        actions = [r["action"] for r in reports]
+        avg_target = sum(r["target"] for r in reports) / len(reports)
+        
+        for r in reports:
+            if r["action"] in ("Upgrade", "Outperform", "Strong Buy", "Buy"):
+                strong_buys.append((sym, r))
+            elif r["action"] in ("Downgrade", "Underperform", "Sell"):
+                downgrades.append((sym, r))
+    
+    # Sort by conviction
+    strong_buys.sort(key=lambda x: x[1]["conviction"] == "High", reverse=True)
+    downgrades.sort(key=lambda x: x[1]["conviction"] == "High", reverse=True)
+    
+    report += "## Upgrades & Initiations\n"
+    report += "| Date | Symbol | Firm | Action | Target | Note |\n"
+    report += "|------|--------|------|--------|--------|------|\n"
+    for sym, r in strong_buys[:10]:
+        report += f"| {r['date']} | {sym} | {r['firm']} | {r['action']} | ${r['target']} | {r['note']} |\n"
+    
+    report += "\n## Downgrades\n"
+    report += "| Date | Symbol | Firm | Action | Target | Note |\n"
+    report += "|------|--------|------|--------|--------|------|\n"
+    for sym, r in downgrades[:10]:
+        report += f"| {r['date']} | {sym} | {r['firm']} | {r['action']} | ${r['target']} | {r['note']} |\n"
+    
+    return report
+
+
+def combined_analysis(symbol):
+    """Combined technical + news + research analysis"""
+    from stock_pro.core import detect_trend, analyze
+
+[265 more lines. Use start_line=251 to continue.]

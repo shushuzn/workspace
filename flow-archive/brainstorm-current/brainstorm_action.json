@@ -1,0 +1,41 @@
+{
+  "total_ideas": 5,
+  "actions": [
+    {
+      "priority": 1,
+      "title": "使用改进ai助手工作流效率改进改进AI助手工作流效率",
+      "score": 8.1,
+      "status": "pending",
+      "next_action": "开始实施: 使用改进ai助手工作流效率改进改进AI助手工作流效率..."
+    },
+    {
+      "priority": 2,
+      "title": "为改进AI助手工作流效率添加改进ai助手工作流效率功能",
+      "score": 7.4,
+      "status": "pending",
+      "next_action": "开始实施: 为改进AI助手工作流效率添加改进ai助手工作流效率功能..."
+    },
+    {
+      "priority": 3,
+      "title": "通过改进ai助手工作流效率优化改进AI助手工作流效率体验",
+      "score": 6.5,
+      "status": "pending",
+      "next_action": "开始实施: 通过改进ai助手工作流效率优化改进AI助手工作流效率体验..."
+    },
+    {
+      "priority": 4,
+      "title": "基于改进ai助手工作流效率的数据驱动改进AI助手工作流效率",
+      "score": 6.5,
+      "status": "pending",
+      "next_action": "开始实施: 基于改进ai助手工作流效率的数据驱动改进AI助手工作流效率..."
+    },
+    {
+      "priority": 5,
+      "title": "使用改进ai助手工作流效率改进改进AI助手工作流效率",
+      "score": 5.5,
+      "status": "pending",
+      "next_action": "开始实施: 使用改进ai助手工作流效率改进改进AI助手工作流效率..."
+    }
+  ],
+  "timestamp": "2026-03-22T00:24:56.604864"
+}

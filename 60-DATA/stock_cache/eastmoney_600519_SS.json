@@ -1,0 +1,16 @@
+{
+  "symbol": "600519.SS",
+  "source": "eastmoney",
+  "price": 136.5,
+  "change": 1.2,
+  "change_percent": 1.21,
+  "volume": 8500000,
+  "market_cap": 500000000000,
+  "pe_ratio": 15.2,
+  "high": 101.8,
+  "low": 99.2,
+  "open": 99.8,
+  "previous_close": 99.3,
+  "timestamp": "2026-03-20T00:24:50.679620",
+  "currency": "CNY"
+}

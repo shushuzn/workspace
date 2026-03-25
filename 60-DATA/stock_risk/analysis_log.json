@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "analyses": [
+    {
+      "timestamp": "2026-03-20T00:44:54.167436",
+      "symbol": "TEST",
+      "rr_ratio": 2.0,
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_analyses": 1,
+    "positions_calculated": 1
+  }
+}

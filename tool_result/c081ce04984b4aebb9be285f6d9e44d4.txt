@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-21T13:42:30.024010
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\four_stage_checker_001.py  (lines 60-100 of 210)
+        return {"checks": [], "compliant": [], "non_compliant": []}
+    
+    def _save_log(self):
+        CHECK_LOG.write_text(json.dumps(self.log, indent=2, ensure_ascii=False), encoding="utf-8")
+    
+    def check_file(self, file_path):
+        """检查单个文件"""
+        try:
+            content = file_path.read_text(encoding="utf-8", errors="replace")
+        except Exception as e:
+            return {"file": str(file_path), "error": str(e), "score": 0, "stages": {}}
+        
+        results = {"file": str(file_path), "stages": {}, "score": 0, "missing": []}
+        total_score = 0
+        
+        for stage, patterns in REQUIRED_SECTIONS.items():
+            stage_score = 0
+            matched = 0
+            for pattern in patterns:
+                if re.search(pattern, content, re.IGNORECASE):
+                    matched += 1
+            stage_score = (matched / len(patterns)) * SECTION_WEIGHTS[stage]
+            results["stages"][stage] = {
+                "matched": matched,
+                "total": len(patterns),
+                "score": stage_score
+            }
+            total_score += stage_score
+            
+            if matched < len(patterns):
+                results["missing"].append(stage)
+        
+        results["score"] = total_score
+        results["compliant"] = total_score >= 80
+        
+        return results
+    
+    def check_all(self):
+        """检查所有工具"""
+        print("\n[FOUR-STAGE-CHECKER-001] 四阶段流程检查")
+        print("=" * 50)
+
+[110 more lines. Use start_line=101 to continue.]

@@ -1,0 +1,33 @@
+# tool_name: read_file
+# created_at: 2026-03-22T17:08:10.234094
+# ---
+        (20 - min(si, 10)) * 2  # Low short interest bonus
+    ))
+    
+    return {
+        "symbol": symbol,
+        "institutional_ownership": f"{io*100:.1f}%",
+        "qoq_change": f"{qoq:+.1f}%",
+        "short_interest_ratio": si,
+        "score": score,
+        "signals": signals,
+        "top_holders": data["top_holders"][:3],
+    }
+
+
+def institutional_report(symbols=None):
+    """Generate institutional ownership report"""
+    if symbols is None:
+        symbols = ["NVDA", "MSFT", "GOOGL", "AAPL", "META", "AMZN", "TSLA", "AMD"]
+    
+    results = [institutional_analysis(sym) for sym in symbols]
+    results.sort(key=lambda x: x["score"], reverse=True)
+    
+    report = "# Institutional Ownership Analysis\n\n"
+    report += "## Institutional Activity\n\n"
+    report += "| Symbol | IO % | QoQ | Short | Score | Key Signal |\n"
+    report += "|--------|------|-----|-------|-------|------------|\n"
+    
+    for r in results:
+        signal = r["signals"][0][0] if r["signals"] else "N/A"
+        report += f"| {r['symbol']} | {r['institutional_ownership']} | {r['qoq_change']} | {r['short_interest_ratio']} | {r['score']} | {

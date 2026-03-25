@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T15:47:25.428113
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\screener_v2.py  (lines 60-90 of 187)
+            symbols = list(A.keys())
+        
+        self.results = analyze_multiple_parallel(symbols, max_workers=10)
+        return self
+    
+    def top(self, n=10):
+        """Return top N results"""
+        return self.results[:n]
+
+
+def advanced_screener_report(criteria=None):
+    """Generate advanced screener report"""
+    screener = AdvancedScreener()
+    screener.execute()
+    
+    if criteria:
+        # Apply filters
+        if "min_score" in criteria:
+            screener.filter_by_score(criteria["min_score"])
+        if "min_upside" in criteria:
+            screener.filter_by_upside(criteria["min_upside"])
+        if "max_pe" in criteria:
+            screener.filter_by_pe(criteria["max_pe"])
+        if "max_peg" in criteria:
+            screener.filter_by_peg(criteria["max_peg"])
+        if "min_roe" in criteria:
+            screener.filter_by_roe(criteria["min_roe"])
+        if "sector" in criteria:
+            screener.filter_by_sector(criteria["sector"])
+    
+    screener.sort_by("score", reverse=True)
+
+[97 more lines. Use start_line=91 to continue.]

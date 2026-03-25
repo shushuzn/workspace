@@ -1,0 +1,44 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T11:00:36.520440
+# ---
+
++==============================================================+
+|                    Stock PRO v11.0                          |
+|            Modular Stock Analysis Tool                      |
++==============================================================+
+
+
+Stock PRO v11.0 - Usage
+=======================
+
+Analysis:
+   stock_pro.bat NVDA              Single stock (English)
+   stock_pro.bat NVDA --cn         Chinese report
+   stock_pro.bat NVDA --json       JSON output
+   stock_pro.bat NVDA --live       Use live price
+
+Multi-Stock:
+   stock_pro.bat --compare NVDA META JPM   Compare stocks
+   stock_pro.bat --summary NVDA META JPM   Summary cards
+
+Export:
+   stock_pro.bat --csv NVDA META           Export to CSV
+   stock_pro.bat --xlsx NVDA META          Export to Excel
+   stock_pro.bat --db NVDA META            Save to SQLite
+   stock_pro.bat --dashboard NVDA META     Generate HTML dashboard
+   stock_pro.bat --chart NVDA META         Generate chart
+
+Tools:
+   stock_pro.bat --screener               Run screener
+   stock_pro.bat --alert NVDA META         Check alerts
+   stock_pro.bat --portfolio              Show portfolio
+   stock_pro.bat --portfolio-add NVDA 100 150   Add position
+   stock_pro.bat --portfolio-remove NVDA      Remove position
+
+Automation:
+   stock_pro.bat --cron                  List cron jobs
+   stock_pro.bat --cron-add "09:00" alert NVDA META   Add job
+   stock_pro.bat --webhook               List webhooks
+   stock_pro.bat --webhook-add slack https://... alert   Add webhook
+   stock_pro.bat --api                  Start API server (port 8765)
+

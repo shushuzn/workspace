@@ -1,0 +1,21 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T16:51:39.481788
+# ---
+main.py:79:      parser.add_argument('--alert', nargs='*', help='Price alerts')
+main.py:80:      parser.add_argument('--chart', nargs='*', help='Generate chart')
+main.py:81:>     parser.add_argument('--screener', action='store_true', help='Run screener')
+main.py:82:      parser.add_argument('--portfolio', action='store_true', help='Show portfolio')
+main.py:83:      parser.add_argument('--portfolio-add', nargs=3, help='Add position: SYMBOL SHARES COST')
+---
+main.py:125:      parser.add_argument('--sentiment', action='store_true', help='News sentiment')
+main.py:126:      parser.add_argument('--sector-sentiment', action='store_true', help='Sector sentiment')
+main.py:127:>     parser.add_argument('--screener-advanced', action='store_true', help='Advanced screener')
+main.py:128:      parser.add_argument('--value', action='store_true', help='Value stock picks')
+main.py:129:      parser.add_argument('--growth', action='store_true', help='Growth stock picks')
+---
+main.py:183:  
+main.py:184:  Tools:
+main.py:185:>    stock_pro.bat --screener               Run screener
+main.py:186:     stock_pro.bat --alert NVDA META         Check alerts
+main.py:187:     stock_pro.bat --portfolio              Show portfolio
+---

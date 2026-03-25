@@ -1,0 +1,38 @@
+[
+  {
+    "symbol": "AAPL",
+    "type": "price_change",
+    "level": "medium",
+    "message": "价格变动 +8.50%",
+    "value": 8.5,
+    "threshold": 5.0,
+    "timestamp": "2026-03-20T16:28:40.483672"
+  },
+  {
+    "symbol": "AAPL",
+    "type": "rsi_overbought",
+    "level": "medium",
+    "message": "RSI 超买: 75.0",
+    "value": 75.0,
+    "threshold": 70,
+    "timestamp": "2026-03-20T16:28:40.484504"
+  },
+  {
+    "symbol": "AAPL",
+    "type": "rsi_oversold",
+    "level": "medium",
+    "message": "RSI 超卖: 25.0",
+    "value": 25.0,
+    "threshold": 30,
+    "timestamp": "2026-03-20T16:28:40.485335"
+  },
+  {
+    "symbol": "AAPL",
+    "type": "volume_spike",
+    "level": "high",
+    "message": "成交量突增 3.2x",
+    "value": 3.2,
+    "threshold": 2.0,
+    "timestamp": "2026-03-20T16:28:40.485946"
+  }
+]

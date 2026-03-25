@@ -1,0 +1,36 @@
+# tool_name: read_file
+# created_at: 2026-03-22T12:52:34.158247
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\exporters.py  (lines 1-30 of 152)
+"""Enhanced Export Module - Multiple format exporters"""
+import json
+import csv
+from pathlib import Path
+from datetime import datetime
+from stock_pro.core import A, analyze_multiple
+
+WORKSPACE = Path("D:/OpenClaw/workspace")
+EXPORT_DIR = WORKSPACE / "30-scripts-tools" / "exports"
+
+
+def ensure_export_dir():
+    """Ensure export directory exists"""
+    if not EXPORT_DIR.exists():
+        EXPORT_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def export_json(symbols, filename=None):
+    """Export to JSON format"""
+    ensure_export_dir()
+    
+    if filename is None:
+        filename = f"stock_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+    
+    results = analyze_multiple(symbols)
+    filepath = EXPORT_DIR / filename
+    with open(filepath, 'w', encoding='utf-8') as f:
+        json.dump({
+            "generated": datetime.now().isoformat(),
+            "count": len(results),
+
+[122 more lines. Use start_line=31 to continue.]

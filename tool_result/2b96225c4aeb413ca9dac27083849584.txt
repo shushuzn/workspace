@@ -1,0 +1,86 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:22:27.099672
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\push\news_feishu.py  (lines 1-80 of 415)
+﻿#!/usr/bin/env python3
+"""NewsHub 飞书推送 v3.2 - 使用 push_base"""
+
+import sys
+sys.stdout.reconfigure(encoding="utf-8")
+from pathlib import Path
+
+# 添加项目根目录到路径
+sys.path.insert(0, str(Path(__file__).parent.parent))
+sys.path.insert(0, str(Path(__file__).parent))
+
+from datetime import datetime
+import json
+import ssl
+import time
+import urllib.request
+
+# 导入公共模块
+from push.push_base import (
+    PROJECT_ROOT, CONFIG_DIR, PUSH_DIR,
+    S, c, B, G, Y, L, C, R,
+    info, ok, warn, error, banner,
+    load_json_file, save_json_file, load_history, save_history,
+    load_log as _load_log, save_log as _save_log,
+    load_counter, save_counter,
+    get_ssl_context, http_get, http_post
+)
+
+# 路径配置
+CONFIG_FILE = CONFIG_DIR / "feishu-config.json"
+HISTORY_FILE = PUSH_DIR / "sent_history.json"
+LOG_FILE = PUSH_DIR / "send_log.json"
+TEMPLATE_FILE = PUSH_DIR / "feishu_templates.json"
+NO_NEWS_COUNTER_FILE = PUSH_DIR / "no_news_counter.json"
+NO_NEWS_THRESHOLD = 3
+
+# 历史/日志封装 (兼容原有接口)
+def load_history():
+    return load_json_file(HISTORY_FILE, [])
+
+def save_history(hist):
+    save_json_file(HISTORY_FILE, hist[-2000:] if isinstance(hist, list) else hist)
+
+def load_log():
+    return load_json_file(LOG_FILE, [])
+
+def save_log(logs):
+    save_json_file(LOG_FILE, logs[-200:] if isinstance(logs, list) else logs)
+
+def add_log(mode, sent, total, group=None):
+    logs = load_log()
+    logs.append({
+        "time": datetime.now().isoformat(),
+        "mode": mode,
+        "sent": sent,
+        "total": total,
+        "group": group
+    })
+    save_log(logs)
+
+
+# ========== 飞书配置 ==========
+def load_feishu_config():
+    """加载飞书配置（支持外部路径）"""
+    config_json = CONFIG_DIR / "config.json"
+    if config_json.exists():
+        try:
+            with open(config_json, "r", encoding="utf-8") as f:
+                cfg = json.load(f)
+                external_path = cfg.get("feishu_config", "")
+                if external_path and Path(external_path).exists():
+                    with open(external_path, "r", encoding="utf-8") as f:
+                        return json.load(f)
+        except Exception:
+            pass
+    return load_json_file(CONFIG_FILE, {})
+
+
+# ========== 模板管理 ==========
+def load_templates():
+
+[335 more lines. Use start_line=81 to continue.]

@@ -1,0 +1,64 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:07:31.333433
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 1118-1175 of 1727)
+        
+        f.write("---\n\n")
+        f.write("## 5. Financial Health\n\n")
+        f.write(f"| Metric | Value | Rating |\n")
+        f.write(f"|--------|-------|--------|\n")
+        gm_r = "Excellent" if fin["gm"] > 0.60 else "Good" if fin["gm"] > 0.40 else "Average"
+        f.write(f"| Gross Margin | {fin['gm']*100:.1f}% | {gm_r} |\n")
+        nm_r = "Excellent" if fin["nm"] > 0.25 else "Good" if fin["nm"] > 0.15 else "Average"
+        f.write(f"| Net Margin | {fin['nm']*100:.1f}% | {nm_r} |\n")
+        roe_r = "Excellent" if fin["roe"] > 0.30 else "Good" if fin["roe"] > 0.20 else "Average"
+        f.write(f"| ROE | {fin['roe']*100:.1f}% | {roe_r} |\n")
+        roic_r = "Excellent" if fin["roic"] > 0.25 else "Good" if fin["roic"] > 0.15 else "Average"
+        f.write(f"| ROIC | {fin['roic']*100:.1f}% | {roic_r} |\n")
+        de_r = "Low" if fin["de"] < 0.8 else "Medium" if fin["de"] < 1.5 else "High"
+        f.write(f"| Debt/Equity | {fin['de']:.1f}x | {de_r} |\n")
+        f.write(f"| Beta | {q['beta']:.2f} | Volatile |\n")
+        f.write(f"| 52W Range | ${q['w52l']:.0f}-${q['w52h']:.0f} | - |\n\n")
+        
+        # Cash Flow Analysis
+        f.write("### 5.1 Cash Flow Analysis\n\n")
+        f.write(f"| Metric | Value | Assessment |\n")
+        f.write(f"|--------|-------|------------|\n")
+        f.write(f"| FCF Yield | {cf['fcf_yield']*100:.1f}% | {'Strong' if cf['fcf_yield'] > 0.04 else 'Average'} |\n")
+        f.write(f"| FCF Value | ${cf['fcf_value']:.2f}/share | Implied annual FCF |\n")
+        f.write(f"| FCF vs Bonds | {cf['fcf_spread']*100:+.1f}% | {'Attractive' if cf['fcf_spread'] > 0 else 'Below bond yield'} |\n")
+        f.write(f"| Dividend Yield | {cf['div_yield']*100:.2f}% | {'Paid' if cf['div_yield'] > 0 else 'No dividend'} |\n")
+        if cf['div_yield'] > 0:
+            f.write(f"| Payout Ratio | {cf['payout']*100:.0f}% | {cf['div_safe']} |\n")
+        f.write(f"| EV/EBITDA | {fin.get('ev_ebitda', 'N/A')}x | {'High' if fin.get('ev_ebitda', 0) > 25 else 'Moderate' if fin.get('ev_ebitda', 0) > 15 else 'Low'} |\n\n")
+        
+        # Historical Valuation
+        f.write("---\n\n")
+        f.write("## 6. Historical Valuation Analysis\n\n")
+        f.write("| Metric | Value | Context |\n")
+        f.write(f"|--------|-------|---------|\n")
+        f.write(f"| Current P/E | {val_pct['curr_pe']:.0f}x | - |\n")
+        f.write(f"| 5Y Low P/E | {val_pct['low_pe']:.0f}x | Historical bottom |\n")
+        f.write(f"| 5Y Avg P/E | {val_pct['avg_pe']:.0f}x | Historical mean |\n")
+        f.write(f"| 5Y High P/E | {val_pct['high_pe']:.0f}x | Historical peak |\n")
+        f.write(f"| **Percentile** | **{val_pct['percentile']:.0f}%** | {val_pct['assessment']} |\n\n")
+        
+        # Visual P/E gauge
+        bar_len = 30
+        filled = int(val_pct['percentile'] / 100 * bar_len)
+        bar = "█" * filled + "░" * (bar_len - filled)
+        f.write(f"P/E Position: [{bar}]\n\n")
+        f.write(f"```\n")
+        f.write(f"  {val_pct['low_pe']:.0f}x (Low) ---- {val_pct['avg_pe']:.0f}x (Avg) ---- {val_pct['high_pe']:.0f}x (High)\n")
+        f.write(f"                 ↑\n")
+        f.write(f"            Current: {val_pct['curr_pe']:.0f}x ({val_pct['percentile']:.0f}%)\n")
+        f.write(f"```\n\n")
+        
+        # Analyst Consensus
+        f.write("### 6.1 Analyst Consensus\n\n")
+        f.write(f"| Rating | % of Analysts | Description |\n")
+        f.write(f"|--------|---------------|-------------|\n")
+        f.write(f"| Buy/Outperform | {analyst_ratings['buy']}% | Strong conviction |\n")
+        f.write(f"| Hold | {analyst_ratings['hold']}% | Neutral outlook |\n")
+
+[552 more lines. Use start_line=1176 to continue.]

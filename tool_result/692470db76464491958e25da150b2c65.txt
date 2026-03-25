@@ -1,0 +1,209 @@
+# tool_name: grep_search
+# created_at: 2026-03-24T00:03:15.290988
+# ---
+rss_server.py:29:      "META": ["Meta"],
+rss_server.py:30:      "AMZN": ["Amazon"],
+rss_server.py:31:  }
+rss_server.py:32:  
+rss_server.py:33:  
+rss_server.py:34:> def fetch_jin10():
+rss_server.py:35:      """Fetch free flash news from flash.jin10.com"""
+rss_server.py:36:      news = []
+rss_server.py:37:  
+rss_server.py:38:      try:
+rss_server.py:39:          url = "https://flash.jin10.com/"
+---
+rss_server.py:30:      "AMZN": ["Amazon"],
+rss_server.py:31:  }
+rss_server.py:32:  
+rss_server.py:33:  
+rss_server.py:34:  def fetch_jin10():
+rss_server.py:35:>     """Fetch free flash news from flash.jin10.com"""
+rss_server.py:36:      news = []
+rss_server.py:37:  
+rss_server.py:38:      try:
+rss_server.py:39:          url = "https://flash.jin10.com/"
+rss_server.py:40:          req = urllib.request.Request(url, headers={
+---
+rss_server.py:34:  def fetch_jin10():
+rss_server.py:35:      """Fetch free flash news from flash.jin10.com"""
+rss_server.py:36:      news = []
+rss_server.py:37:  
+rss_server.py:38:      try:
+rss_server.py:39:>         url = "https://flash.jin10.com/"
+rss_server.py:40:          req = urllib.request.Request(url, headers={
+rss_server.py:41:              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+rss_server.py:42:              'Referer': 'https://flash.jin10.com/',
+rss_server.py:43:          })
+rss_server.py:44:  
+---
+rss_server.py:37:  
+rss_server.py:38:      try:
+rss_server.py:39:          url = "https://flash.jin10.com/"
+rss_server.py:40:          req = urllib.request.Request(url, headers={
+rss_server.py:41:              'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+rss_server.py:42:>             'Referer': 'https://flash.jin10.com/',
+rss_server.py:43:          })
+rss_server.py:44:  
+rss_server.py:45:          with urllib.request.urlopen(req, timeout=15) as r:
+rss_server.py:46:              content = r.read().decode('utf-8')
+rss_server.py:47:  
+---
+rss_server.py:48:          # Extract detail IDs
+rss_server.py:49:          ids = re.findall(r'/detail/(\d{17,20})', content)
+rss_server.py:50:          ids = list(dict.fromkeys(ids))[:50]  # Dedupe, limit to 50
+rss_server.py:51:  
+rss_server.py:52:          for id in ids:
+rss_server.py:53:>             detail_url = f"https://flash.jin10.com/detail/{id}"
+rss_server.py:54:              try:
+rss_server.py:55:                  req2 = urllib.request.Request(detail_url, headers={
+rss_server.py:56:                      'User-Agent': 'Mozilla/5.0',
+rss_server.py:57:                  })
+rss_server.py:58:                  with urllib.request.urlopen(req2, timeout=8) as r2:
+---
+rss_server.py:82:  
+rss_server.py:83:  class Cache:
+rss_server.py:84:      def __init__(self):
+rss_server.py:85:          CACHE_DIR.mkdir(exist_ok=True)
+rss_server.py:86:          self.news = []
+rss_server.py:87:>         self.jin10_news = []
+rss_server.py:88:          self.last_update = 0
+rss_server.py:89:  
+rss_server.py:90:      def save(self, news):
+rss_server.py:91:          self.news = news
+rss_server.py:92:          self.last_update = time.time()
+---
+rss_server.py:98:              with open(CACHE_DIR / "cache.json", "r", encoding="utf-8") as f:
+rss_server.py:99:                  d = json.load(f)
+rss_server.py:100:              self.news = d.get("news", [])
+rss_server.py:101:              self.last_update = d.get("t", 0)
+rss_server.py:102:              # Load Jin10 news
+rss_server.py:103:>             self.jin10_news = fetch_jin10()
+rss_server.py:104:              return True
+rss_server.py:105:          except:
+rss_server.py:106:              return False
+rss_server.py:107:  
+rss_server.py:108:      def get_all_news(self):
+---
+rss_server.py:105:          except:
+rss_server.py:106:              return False
+rss_server.py:107:  
+rss_server.py:108:      def get_all_news(self):
+rss_server.py:109:          """Return all news: Jin10 first, then RSS"""
+rss_server.py:110:>         return self.jin10_news + self.news
+rss_server.py:111:  
+rss_server.py:112:  async def fetch(session, url):
+rss_server.py:113:      try:
+rss_server.py:114:          async with session.get(url, timeout=aiohttp.ClientTimeout(total=15)) as r:
+rss_server.py:115:              return await r.text()
+---
+rss_server.py:188:      cache = None
+rss_server.py:189:  
+rss_server.py:190:      def do_GET(self):
+rss_server.py:191:          path = self.path.strip("/").lower()
+rss_server.py:192:          cache.load()
+rss_server.py:193:>         jin10_news = fetch_jin10()  # 实时获取！
+rss_server.py:194:          rss_news = self.cache.news
+rss_server.py:195:          all_news = jin10_news + rss_news  # 金十在前
+rss_server.py:196:  
+rss_server.py:197:          if self.cache.last_update:
+rss_server.py:198:              last = datetime.fromtimestamp(self.cache.last_update).strftime("%H:%M:%S")
+---
+rss_server.py:190:      def do_GET(self):
+rss_server.py:191:          path = self.path.strip("/").lower()
+rss_server.py:192:          cache.load()
+rss_server.py:193:          jin10_news = fetch_jin10()  # 实时获取！
+rss_server.py:194:          rss_news = self.cache.news
+rss_server.py:195:>         all_news = jin10_news + rss_news  # 金十在前
+rss_server.py:196:  
+rss_server.py:197:          if self.cache.last_update:
+rss_server.py:198:              last = datetime.fromtimestamp(self.cache.last_update).strftime("%H:%M:%S")
+rss_server.py:199:          else:
+rss_server.py:200:              last = "Never"
+---
+rss_server.py:204:              self.send_header("Content-type", "text/html; charset=utf-8")
+rss_server.py:205:              self.end_headers()
+rss_server.py:206:              h = '<html><head><meta charset="utf-8"><title>RSS Server</title>'
+rss_server.py:207:              h += '<style>body{font:14px sans-serif;max-width:600px;margin:50px auto;padding:20px}a{display:block;padding:10px;background:#f5f5f5;margin:5px 0;text-decoration:none;border-radius:5px}h1{margin-bottom:5px}p{color:#888}h3{margin-top:20px}</style>'
+rss_server.py:208:              h += '</head><body><h1>RSS Aggregator</h1>'
+rss_server.py:209:>             h += '<p>Total: ' + str(len(all_news)) + ' | RSS: ' + str(len(rss_news)) + ' | Jin10: ' + str(len(jin10_news)) + ' | Last: ' + last + '</p>'
+rss_server.py:210:              h += '<h3>Chinese News (金十数据)</h3>'
+rss_server.py:211:              h += '<a href="/jin10">金十快讯 (网页版) 🔥</a>'
+rss_server.py:212:              h += '<a href="/jin10.xml">金十 RSS (XML)</a>'
+rss_server.py:213:              h += '<h3>All News</h3>'
+rss_server.py:214:              h += '<a href="/all.xml">All News (RSS)</a><a href="/all.html">All News (HTML)</a>'
+---
+rss_server.py:206:              h = '<html><head><meta charset="utf-8"><title>RSS Server</title>'
+rss_server.py:207:              h += '<style>body{font:14px sans-serif;max-width:600px;margin:50px auto;padding:20px}a{display:block;padding:10px;background:#f5f5f5;margin:5px 0;text-decoration:none;border-radius:5px}h1{margin-bottom:5px}p{color:#888}h3{margin-top:20px}</style>'
+rss_server.py:208:              h += '</head><body><h1>RSS Aggregator</h1>'
+rss_server.py:209:              h += '<p>Total: ' + str(len(all_news)) + ' | RSS: ' + str(len(rss_news)) + ' | Jin10: ' + str(len(jin10_news)) + ' | Last: ' + last + '</p>'
+rss_server.py:210:              h += '<h3>Chinese News (金十数据)</h3>'
+rss_server.py:211:>             h += '<a href="/jin10">金十快讯 (网页版) 🔥</a>'
+rss_server.py:212:              h += '<a href="/jin10.xml">金十 RSS (XML)</a>'
+rss_server.py:213:              h += '<h3>All News</h3>'
+rss_server.py:214:              h += '<a href="/all.xml">All News (RSS)</a><a href="/all.html">All News (HTML)</a>'
+rss_server.py:215:              h += '<h3>By Stock</h3>'
+rss_server.py:216:              for s in STOCKS:
+---
+rss_server.py:207:              h += '<style>body{font:14px sans-serif;max-width:600px;margin:50px auto;padding:20px}a{display:block;padding:10px;background:#f5f5f5;margin:5px 0;text-decoration:none;border-radius:5px}h1{margin-bottom:5px}p{color:#888}h3{margin-top:20px}</style>'
+rss_server.py:208:              h += '</head><body><h1>RSS Aggregator</h1>'
+rss_server.py:209:              h += '<p>Total: ' + str(len(all_news)) + ' | RSS: ' + str(len(rss_news)) + ' | Jin10: ' + str(len(jin10_news)) + ' | Last: ' + last + '</p>'
+rss_server.py:210:              h += '<h3>Chinese News (金十数据)</h3>'
+rss_server.py:211:              h += '<a href="/jin10">金十快讯 (网页版) 🔥</a>'
+rss_server.py:212:>             h += '<a href="/jin10.xml">金十 RSS (XML)</a>'
+rss_server.py:213:              h += '<h3>All News</h3>'
+rss_server.py:214:              h += '<a href="/all.xml">All News (RSS)</a><a href="/all.html">All News (HTML)</a>'
+rss_server.py:215:              h += '<h3>By Stock</h3>'
+rss_server.py:216:              for s in STOCKS:
+rss_server.py:217:                  h += '<a href="/' + s.lower() + '.xml">' + s + '</a>'
+---
+rss_server.py:217:                  h += '<a href="/' + s.lower() + '.xml">' + s + '</a>'
+rss_server.py:218:              self.wfile.write(h.encode())
+rss_server.py:219:              return
+rss_server.py:220:  
+rss_server.py:221:          # Jin10 RSS (Chinese financial news)
+rss_server.py:222:>         if path == "jin10.xml":
+rss_server.py:223:              self.send_response(200)
+rss_server.py:224:              self.send_header("Content-type", "application/xml; charset=utf-8")
+rss_server.py:225:              self.end_headers()
+rss_server.py:226:              self.wfile.write(rss(jin10_news, "金十数据").encode())
+rss_server.py:227:              return
+---
+rss_server.py:221:          # Jin10 RSS (Chinese financial news)
+rss_server.py:222:          if path == "jin10.xml":
+rss_server.py:223:              self.send_response(200)
+rss_server.py:224:              self.send_header("Content-type", "application/xml; charset=utf-8")
+rss_server.py:225:              self.end_headers()
+rss_server.py:226:>             self.wfile.write(rss(jin10_news, "金十数据").encode())
+rss_server.py:227:              return
+rss_server.py:228:  
+rss_server.py:229:          # Jin10 HTML page (flash news)
+rss_server.py:230:          if path == "jin10":
+rss_server.py:231:              self.send_response(200)
+---
+rss_server.py:225:              self.end_headers()
+rss_server.py:226:              self.wfile.write(rss(jin10_news, "金十数据").encode())
+rss_server.py:227:              return
+rss_server.py:228:  
+rss_server.py:229:          # Jin10 HTML page (flash news)
+rss_server.py:230:>         if path == "jin10":
+rss_server.py:231:              self.send_response(200)
+rss_server.py:232:              self.send_header("Content-type", "text/html; charset=utf-8")
+rss_server.py:233:              self.end_headers()
+rss_server.py:234:              h = '''<!DOCTYPE html>
+rss_server.py:235:  <html><head><meta charset="utf-8"><title>金十快讯</title>
+---
+rss_server.py:243:  .item a:hover{text-decoration:underline}
+rss_server.py:244:  .stats{text-align:center;color:#888;margin:20px 0}
+rss_server.py:245:  a.back{color:#ffd700}
+rss_server.py:246:  </style></head><body>
+rss_server.py:247:  <h1>📰 金十快讯</h1>
+rss_server.py:248:> <p class="stats">实时快讯 · 免费内容 · ''' + str(len(jin10_news)) + ''' 条</p>
+rss_server.py:249:  <a href="/" class="back">← 返回首页</a>
+rss_server.py:250:  '''
+rss_server.py:251:              for n in jin10_news:
+rss_server.py:252:                  link = n.get('link', '#')
+rss_server.py:253:                  title = n.get('title', '')
+---
+
+(Results truncated at 200 matches.)

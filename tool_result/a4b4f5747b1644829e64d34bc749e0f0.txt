@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:20:41.318215
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_hub.py  (lines 50-100 of 122)
+        run("news_fetcher.py", *extra_args)
+    
+    elif cmd == "test":
+        header("Test All")
+        print(f"{YELLOW}Testing Feishu...{RESET}\n")
+        run("news_feishu.py", "all", *extra_args)
+        print(f"\n{YELLOW}Testing QQ...{RESET}\n")
+        run("news_to_qq.py", "status")
+    
+    elif cmd == "quick":
+        header("Quick Mode")
+        run("news_fetcher.py", "--quick")
+    
+    elif cmd == "export":
+        header("Export News")
+        run("news_fetcher.py", *sys.argv[2:])
+    
+    elif cmd == "server":
+        header("RSS Server")
+        import subprocess
+        subprocess.Popen([sys.executable, Path(__file__).parent / "rss_server.py"])
+        print(f"  {GREEN}✓{RESET} Server started")
+    
+    elif cmd == "help":
+        header("NewsHub Help")
+        print(f"""
+  {BOLD}用法:{RESET}
+    python news_hub.py <command> [options]
+
+  {BOLD}命令:{RESET}
+    {GREEN}fetch{RESET}     抓取新闻（不推送）
+    {GREEN}feishu{RESET}    飞书推送
+    {GREEN}qq{RESET}        QQ推送
+    {GREEN}test{RESET}     测试所有
+    {GREEN}quick{RESET}    快速模式
+    {GREEN}server{RESET}   启动RSS服务
+    {GREEN}export{RESET}   导出新闻(JSON/CSV)
+    {GREEN}help{RESET}     显示帮助
+
+  {BOLD}飞书子命令:{RESET}
+    compact    紧凑视图（纯文本）
+    preview    预览新闻（不发送）
+    digest     摘要推送（6条）
+    alert      关键词告警
+    all        全部推送（8条）
+    daily      日报
+    stats      统计信息
+    summary    摘要卡片（统计概览）
+    sentiment  情感分析
+    cat <类型> 分类推送 (stock/forex/commodity/macro/trade/tech/china/us/crypto/energy)
+    test       连接测试
+
+[22 more lines. Use start_line=101 to continue.]

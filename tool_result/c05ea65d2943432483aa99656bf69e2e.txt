@@ -1,0 +1,39 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T23:05:47.268921
+# ---
+Command failed with exit code 1.
+[stdout]
+
+╔══════════════════════════════════════════════════════╗
+║              NEWS MANAGER STATUS                     ║
+║              2026-03-22 23:05                    ║
+╚══════════════════════════════════════════════════════╝
+
+[Summary]
+  Total News:        280
+  Sent:              127 ( 45.4%)
+  Unsent:            153
+  Progress:       [=============-----------------] 45.4%
+
+[Platforms]
+  QQ:                117 pushes
+  Feishu:             90 pushes
+
+[Sentiments]
+  +     9 positive (利好)
+  -    12 negative (利空)
+  =   259 neutral  (中性)
+
+[Sectors]
+[stderr]
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\news_manager.py", line 483, in <module>
+    main()
+    ~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\news_manager.py", line 478, in main
+    cmd_status(args)
+    ~~~~~~~~~~^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\news_manager.py", line 379, in cmd_status
+    print(f"  {sec:<6} {bar} {cnt:>4} ({pct:>4.1f}%)")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2591' in position 26: illegal multibyte sequence

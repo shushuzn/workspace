@@ -1,0 +1,37 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-24T00:18:22.322514
+# ---
+Command failed with exit code 1.
+[stdout]
+00:18:16 [INFO] 加载金十数据: 11 条
+00:18:16 [INFO] 开始并发抓取 7 个源 (限流: 30/min)...
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\async_fetcher.py", line 575, in <module>
+    fetch_all(quiet=args.quiet)
+    ~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\async_fetcher.py", line 552, in fetch_all
+    return asyncio.run(async_fetch_news(quiet))
+           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py", line 195, in run
+    return runner.run(main)
+           ~~~~~~~~~~^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\asyncio\runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\async_fetcher.py", line 524, in async_fetch_news
+    news_list = await fetcher.fetch_all_sources()
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\async_fetcher.py", line 463, in fetch_all_sources
+    news_list = self.convert_jin10_to_news(jin10_news)
+  File "D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\async_fetcher.py", line 403, in convert_jin10_to_news
+    category=self.categorize(title),
+             ^^^^^^^^^^^^^^^
+AttributeError: 'AsyncNewsFetcher' object has no attribute 'categorize'
+00:18:17 [ERROR] Unclosed client session
+client_session: <aiohttp.client.ClientSession object at 0x0000023C9863D6A0>
+00:18:17 [ERROR] Unclosed connector
+connections: ['deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023C9864A4B0>, 861594.0943872)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023C9864A930>, 861594.1988229)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023C9864A330>, 861594.4147909)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023C98649A90>, 861594.7317957)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023C9864A630>, 861594.7374571)])', 'deque([(<aiohttp.client_proto.ResponseHandler object at 0x0000023C9864AED0>, 861594.9826365)])']
+connector: <aiohttp.connector.TCPConnector object at 0x0000023C9863CD70>

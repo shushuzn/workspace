@@ -1,0 +1,69 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T10:38:02.861231
+# ---
+
+==================================================
+  NewsHub Fetcher
+==================================================
+
+  ▶ Time: 2026-03-23 10:37:55
+
+  ▶ 并行抓取 6 个源...
+  ✓ 同花顺: +10
+  ✓ 东方财富: +10
+  ✓ 新浪财经: +15
+  ✓ Investing: +10
+  ✓ Seeking Alpha: +7
+  ✓ CNBC: +15
+
+──────────────────────────────────────────────────
+  📊 Total: 67  ⏱️ 1.7s
+     同花顺: 10
+     东方财富: 10
+     新浪财经: 15
+     Investing: 10
+     Seeking Alpha: 7
+     CNBC: 15
+──────────────────────────────────────────────────
+
+  1. CNBC
+     OpenClaw's ChatGPT moment sparks concern that AI models are ...
+     https://www.cnbc.com/2026/03/21/openclaw-chatgpt-moment-sparks-concern-ai-models-becoming-commodities.html
+  2. CNBC
+     David Zaslav’s WBD-Paramount deal payout highlights new 'gol...
+     https://www.cnbc.com/2026/03/20/wbd-david-zaslav-pay-paramount.html
+  🤖 启用本地LLM并行分析...
+    缓存命中: 2/2
+  ✅ LLM分析完成: 2条 (0.0s)
+
+==================================================
+  🤖 LLM 深度分析
+==================================================
+
+  📊 市场情绪:
+     ➡️ 整体: NEUTRAL
+     📈 利好: 0 | 📉 利空: 0
+     📊 分数: +0.0
+  💡 建议分布:
+     ➡️ 观望: 2
+
+  📝 新闻分析:
+  1. ⚪ ➖ [ +0] OpenClaw's ChatGPT moment raises co...
+  2. ⚪ ➖ [ +0] David Zaslav's WBD-Paramount deal p...
+
+
+==================================================
+  🤖 LLM 深度分析
+==================================================
+
+  📊 市场情绪:
+     ➡️ 整体: NEUTRAL
+     📈 利好: 0 | 📉 利空: 0
+     📊 分数: +0.0
+  💡 建议分布:
+     ➡️ 观望: 2
+
+  📝 新闻分析:
+  1. ⚪ ➖ [ +0] OpenClaw's ChatGPT moment raises co...
+  2. ⚪ ➖ [ +0] David Zaslav's WBD-Paramount deal p...
+

@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:27:22.945635
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 3010-3050 of 3203)
+        .stat-card .value {{ font-size: 32px; font-weight: bold; color: #00d4ff; }}
+        .stat-card.top .value {{ color: #00ff88; }}
+        table {{ width: 100%; border-collapse: collapse; background: #1a1a2e; border-radius: 10px; overflow: hidden; }}
+        th {{ background: #2d2d4a; padding: 15px; text-align: left; color: #888; }}
+        td {{ padding: 15px; border-bottom: 1px solid #2d2d4a; }}
+        tr:hover {{ background: #252540; }}
+        .buy {{ color: #00ff88; }}
+        .hold {{ color: #ffcc00; }}
+        .sell {{ color: #ff4444; }}
+        .positive {{ color: #00ff88; }}
+        .negative {{ color: #ff4444; }}
+        .refresh {{ background: #00d4ff; color: #000; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }}
+        .refresh:hover {{ background: #00ffcc; }}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Stock PRO Dashboard</h1>
+        <div>
+            <span class="time">Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</span>
+            <button class="refresh" onclick="location.reload()">Refresh</button>
+        </div>
+    </div>
+    
+    
+    
+    return {
+        "symbol": sym,
+        "price": price,
+        "target": target,
+        "upside": upside,
+        "score": sc,
+        "rating": rating(upside),
+        "metrics": {
+            "pe": q["pe"],
+            "peg": q["peg"],
+            "fcf_yield": fin.get("fcf_yield", 0),
+            "div_yield": fin.get("div_yield", 0),
+            "roe": fin["roe"],
+            "beta": q["beta"],
+        },
+
+[153 more lines. Use start_line=3051 to continue.]

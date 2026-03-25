@@ -1,0 +1,22 @@
+{
+  "model": "GaussianProcessRegressor",
+  "dataset": "lig_dataset_100.csv",
+  "n_samples": 120,
+  "n_train": 96,
+  "n_test": 24,
+  "features": [
+    "P_W",
+    "v_mms",
+    "co_ratio"
+  ],
+  "target": "sigma_Sm",
+  "kernel": "0.679**2 * RBF(length_scale=[0.722, 4.28, 1e-05]) + WhiteKernel(noise_level=0.49)",
+  "performance": {
+    "r2": 0.5011449343906281,
+    "mae": 672.2842256708736,
+    "rmse": 913.2986860252155,
+    "mean_uncertainty_Sm": 955.7350779782738,
+    "relative_uncertainty_pct": 105.27638253629057,
+    "level": "NEEDS_IMPROVEMENT"
+  }
+}

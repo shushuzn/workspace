@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:10:58.677042
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\screener_v2.py  (lines 50-80 of 187)
+    
+    def sort_by(self, key="score", reverse=True):
+        """Sort results"""
+        self.results.sort(key=lambda x: x.get(key, 0), reverse=reverse)
+        return self
+    
+    def execute(self, symbols=None):
+        """Execute screener"""
+        from stock_pro.core import A
+        if symbols is None:
+            symbols = list(A.keys())
+        
+        self.results = analyze_multiple(symbols)
+        return self
+    
+    def top(self, n=10):
+        """Return top N results"""
+        return self.results[:n]
+
+
+def advanced_screener_report(criteria=None):
+    """Generate advanced screener report"""
+    screener = AdvancedScreener()
+    screener.execute()
+    
+    if criteria:
+        # Apply filters
+        if "min_score" in criteria:
+            screener.filter_by_score(criteria["min_score"])
+        if "min_upside" in criteria:
+            screener.filter_by_upside(criteria["min_upside"])
+
+[107 more lines. Use start_line=81 to continue.]

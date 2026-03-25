@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:06:51.961464
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 345-380 of 1592)
+        "TSLA": {"buy_30d": 1, "sell_30d": 8, "sentiment": "Bearish"},
+        "AMD": {"buy_30d": 5, "sell_30d": 2, "sentiment": "Bullish"},
+    }
+    return INSIDER.get(sym, {"buy_30d": 3, "sell_30d": 3, "sentiment": "Neutral"})
+
+def calc_technical_indicators(q, fin):
+    """Calculate RSI and other technical indicators"""
+    price = q["price"]
+    w52h = q["w52h"]
+    w52l = q["w52l"]
+    
+    # RSI estimate based on price position
+    range_pos = (price - w52l) / (w52h - w52l) if w52h > w52l else 50
+    rsi = 50 + (range_pos - 50) * 0.8  # Estimate RSI
+    
+    # MACD signal
+    macd_signal = "Buy" if range_pos > 40 and range_pos < 70 else "Sell" if range_pos < 30 else "Neutral"
+    
+    # Moving averages
+    ma_50 = price * 0.95  # Estimate
+    ma_200 = price * 0.85  # Estimate
+    price_vs_ma50 = "Above" if price > ma_50 else "Below"
+    price_vs_ma200 = "Above" if price > ma_200 else "Below"
+    
+    return {
+        "rsi": min(max(rsi, 10), 90),
+        "rsi_signal": "Overbought" if rsi > 70 else "Oversold" if rsi < 30 else "Neutral",
+        "macd": macd_signal,
+        "ma_50": ma_50,
+        "ma_200": ma_200,
+        "price_vs_ma50": price_vs_ma50,
+        "price_vs_ma200": price_vs_ma200,
+    }
+
+def calc_sector_comparison(sym, q, fin):
+    """Compare stock metrics against sector average"""
+
+[1212 more lines. Use start_line=381 to continue.]

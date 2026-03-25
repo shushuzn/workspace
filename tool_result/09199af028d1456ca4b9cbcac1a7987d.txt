@@ -1,0 +1,71 @@
+# tool_name: read_file
+# created_at: 2026-03-22T09:15:52.461302
+# ---
+#!/usr/bin/env py
+# Stock PRO v3.0 - Professional Stock Analysis System
+import os, sys, json, math
+from datetime import datetime
+
+FD = {
+    "AAPL": {"rev": 416e9, "gm": 0.47, "om": 0.30, "nm": 0.24, "roe": 0.45, "roa": 0.22, "roic": 0.35, "de": 1.8, "cr": 1.05, "pe_avg": 28, "eg": 0.10},
+    "MSFT": {"rev": 237e9, "gm": 0.70, "om": 0.43, "nm": 0.35, "roe": 0.38, "roa": 0.18, "roic": 0.28, "de": 0.5, "cr": 1.3, "pe_avg": 32, "eg": 0.12},
+    "NVDA": {"rev": 80e9, "gm": 0.73, "om": 0.53, "nm": 0.49, "roe": 0.58, "roa": 0.35, "roic": 0.45, "de": 0.4, "cr": 4.2, "pe_avg": 55, "eg": 0.50},
+    "TSLA": {"rev": 98e9, "gm": 0.17, "om": 0.09, "nm": 0.15, "roe": 0.24, "roa": 0.08, "roic": 0.12, "de": 0.2, "cr": 1.8, "pe_avg": 60, "eg": 0.20},
+    "META": {"rev": 135e9, "gm": 0.81, "om": 0.38, "nm": 0.32, "roe": 0.28, "roa": 0.15, "roic": 0.22, "de": 0.3, "cr": 2.7, "pe_avg": 28, "eg": 0.25},
+    "GOOGL": {"rev": 307e9, "gm": 0.57, "om": 0.28, "nm": 0.24, "roe": 0.30, "roa": 0.14, "roic": 0.20, "de": 0.1, "cr": 2.1, "pe_avg": 26, "eg": 0.15},
+    "AMZN": {"rev": 620e9, "gm": 0.48, "om": 0.11, "nm": 0.09, "roe": 0.18, "roa": 0.08, "roic": 0.15, "de": 0.6, "cr": 1.2, "pe_avg": 50, "eg": 0.18},
+    "AMD": {"rev": 23e9, "gm": 0.47, "om": 0.08, "nm": 0.07, "roe": 0.10, "roa": 0.05, "roic": 0.08, "de": 0.3, "cr": 2.0, "pe_avg": 35, "eg": 0.30},
+    "JPM": {"rev": 160e9, "gm": 0.0, "om": 0.40, "nm": 0.30, "roe": 0.17, "roa": 0.01, "roic": 0.18, "de": 1.5, "cr": 0, "pe_avg": 12, "eg": 0.08},
+    "JNJ": {"rev": 88e9, "gm": 0.68, "om": 0.28, "nm": 0.20, "roe": 0.23, "roa": 0.10, "roic": 0.20, "de": 0.5, "cr": 1.2, "pe_avg": 18, "eg": 0.06},
+}
+SHARES = {"AAPL": 15.3e9, "MSFT": 7.43e9, "NVDA": 24.5e9, "TSLA": 3.2e9, "META": 2.5e9, "GOOGL": 12.8e9, "AMZN": 10.5e9, "AMD": 1.6e9, "JPM": 2.9e9, "JNJ": 2.4e9}
+COMP = {"AAPL": ["MSFT", "GOOGL", "AMZN", "META"], "NVDA": ["AMD", "INTC"], "MSFT": ["AAPL", "GOOGL"], "TSLA": ["F", "GM"], "META": ["GOOGL", "SNAP"], "AMZN": ["WMT", "TGT"], "AMD": ["INTC", "NVDA"], "JPM": ["BAC", "WFC"], "JNJ": ["PFE", "UNH"]}
+
+def get_quote(sym):
+    try:
+        import urllib.request
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15) as r:
+            d = json.loads(r.read().decode())
+        m = d["chart"]["result"][0]["meta"]
+        p = m.get("regularMarketPrice", 0) or 0
+        sh = SHARES.get(sym.upper(), 1e9)
+        pe = m.get("trailingPE", 0) or 0
+        eps = m.get("trailingEps", 0) or 0
+        if eps == 0:
+            fd = FD.get(sym.upper(), {})
+            eps = (fd.get("rev", 1e10) * fd.get("nm", 0.20)) / sh
+        fd_data = FD.get(sym.upper(), {})
+        return {"symbol": sym.upper(), "price": p, "mc": m.get("marketCap", 0) or p*sh,
+                "pe": pe or fd_data.get("pe_avg", 25), "eps": eps, "eg": fd_data.get("eg", 0.10),
+                "beta": m.get("beta", 1.0) or 1.0,
+                "w52h": m.get("fiftyTwoWeekHigh", p*1.2) or p*1.2,
+                "w52l": m.get("fiftyTwoWeekLow", p*0.8) or p*0.8}
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
+
+def get_fin(sym, q):
+    fd = FD.get(sym.upper(), {})
+    rev = fd.get("rev", q["mc"]/10)
+    ni = rev * fd.get("nm", 0.15)
+    eq = ni / fd["roe"] if fd.get("roe", 0) > 0 else rev * 2
+    return {"rev": rev, "ni": ni, "eq": eq, "ta": eq*2, "debt": eq*fd.get("de", 0.5), "sh": SHARES.get(sym.upper(), 1e9),
+            "gm": fd.get("gm", 0.40), "om": fd.get("om", 0.20), "nm": fd.get("nm", 0.15),
+            "roe": fd.get("roe", 0.15), "roa": fd.get("roa", 0.08), "roic": fd.get("roic", 0.12),
+            "cr": fd.get("cr", 1.5), "de": fd.get("de", 0.5)}
+
+def calc_target(eps, gr):
+    if gr < 0.05: base_pe = 18
+    elif gr < 0.10: base_pe = 22
+    elif gr < 0.15: base_pe = 28
+    elif gr < 0.25: base_pe = 35
+    else: base_pe = 45
+    return eps * (1 + gr) * base_pe, base_pe
+
+def score_stock(q, fin, upside, risk_score):
+    """Professional scoring (0-100)"""
+    score = 50
+    # Growth scoring
+    if q["eg"] > 0.30: score +=

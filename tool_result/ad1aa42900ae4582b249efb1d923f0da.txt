@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:42:48.287368
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\core.py  (lines 60-95 of 205)
+
+def fetch_live(symbols):
+    """Get live prices"""
+    results = fetch_batch(symbols)
+    return [{"symbol": s, "price": results.get(s, (0,))[0]} for s in symbols]
+
+def calc_dcf(symbol, price, shares=5e9, wacc=0.09, growth=0.12):
+    """DCF valuation - simplified Gordon Growth Model"""
+    # Get FCF yield from financial data
+    _, _, _, _, _, rev_g, fcf_yield, _ = F.get(symbol, (0,0,0,0,0,0.1,0.03,0))
+    eps = E.get(symbol, 0)
+    
+    # FCF per share = EPS * FCF margin
+    fcf_per_share = eps * fcf_yield if eps > 0 else price * fcf_yield
+    
+    # FCF projection (in billions if shares=5e9)
+    fcf_y1 = fcf_per_share * shares / 1e9
+    
+    # Project cash flows
+    cash_flows = []
+    for y in range(1, 6):
+        cf = fcf_y1 * ((1 + growth) ** y) / ((1 + wacc) ** y)
+        cash_flows.append(cf)
+    
+    # Terminal value
+    tv = cash_flows[-1] * (1 + growth) / (wacc - growth)
+    terminal = tv / ((1 + wacc) ** 5)
+    
+    # Equity value
+    equity = sum(cash_flows) + terminal
+    intrinsic = equity / shares * 1e9  # Per share
+    
+    upside = (intrinsic - price) / price * 100 if price > 0 else 0
+    
+    return {
+        "dcf_base": round(intrinsic, 2), 
+
+[110 more lines. Use start_line=96 to continue.]

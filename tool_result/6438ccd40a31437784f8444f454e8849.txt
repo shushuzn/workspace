@@ -1,0 +1,38 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T10:01:38.776751
+# ---
+D:\Ollama\.ollama
+D:\Ollama\lib
+D:\Ollama\models
+D:\Ollama\ollama app.exe
+D:\Ollama\ollama.exe
+D:\Ollama\unins000.dat
+D:\Ollama\unins000.exe
+D:\Ollama\lib\ollama
+D:\Ollama\lib\ollama\cuda_v12
+D:\Ollama\lib\ollama\cuda_v13
+D:\Ollama\lib\ollama\ggml-base.dll
+D:\Ollama\lib\ollama\ggml-cpu-alderlake.dll
+D:\Ollama\lib\ollama\ggml-cpu-haswell.dll
+D:\Ollama\lib\ollama\ggml-cpu-icelake.dll
+D:\Ollama\lib\ollama\ggml-cpu-sandybridge.dll
+D:\Ollama\lib\ollama\ggml-cpu-skylakex.dll
+D:\Ollama\lib\ollama\ggml-cpu-sse42.dll
+D:\Ollama\lib\ollama\ggml-cpu-x64.dll
+D:\Ollama\lib\ollama\mlx_cuda_v13
+D:\Ollama\lib\ollama\cuda_v12\cublas64_12.dll
+D:\Ollama\lib\ollama\cuda_v12\cublasLt64_12.dll
+D:\Ollama\lib\ollama\cuda_v12\cudart64_12.dll
+D:\Ollama\lib\ollama\cuda_v12\ggml-cuda.dll
+D:\Ollama\lib\ollama\cuda_v13\cublas64_13.dll
+D:\Ollama\lib\ollama\cuda_v13\cublasLt64_13.dll
+D:\Ollama\lib\ollama\cuda_v13\ggml-cuda.dll
+D:\Ollama\lib\ollama\mlx_cuda_v13\cublasLt64_13.dll
+D:\Ollama\lib\ollama\mlx_cuda_v13\cudnn64_9.dll
+D:\Ollama\lib\ollama\mlx_cuda_v13\dl.dll
+D:\Ollama\lib\ollama\mlx_cuda_v13\libopenblas.dll
+D:\Ollama\lib\ollama\mlx_cuda_v13\mlx.dll
+D:\Ollama\lib\ollama\mlx_cuda_v13\mlxc.dll
+D:\Ollama\models\data
+D:\Ollama\models\data\blobs
+D:\Ollama\models\data\manifests

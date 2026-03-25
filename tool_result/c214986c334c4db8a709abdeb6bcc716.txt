@@ -1,0 +1,35 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T18:10:24.666753
+# ---
+sentiment.py:151:      for source in ["sina", "netease", "ifeng"]:
+sentiment.py:152:          news = fetch_cn_news(source, max_items=100)
+sentiment.py:153:          
+sentiment.py:154:          for n in news:
+sentiment.py:155:              title = n["title"]
+sentiment.py:156:              for keyword in keywords:
+sentiment.py:157:                  if keyword.lower() in title.lower():
+sentiment.py:158:                      if title not in seen_titles:
+sentiment.py:159:                          seen_titles.add(title)
+sentiment.py:160:                          all_news.append(n)
+sentiment.py:161:                      break
+sentiment.py:162:      
+sentiment.py:163:      return all_news
+sentiment.py:164:  
+sentiment.py:165:  
+sentiment.py:166:> def fetch_jin10_news():
+sentiment.py:167:      """Fetch latest news from Jin10 (xnews.jin10.com)"""
+sentiment.py:168:      global _JIN10_NEWS_CACHE, _JIN10_CACHE_TIME
+sentiment.py:169:      
+sentiment.py:170:      now = datetime.now()
+sentiment.py:171:      
+sentiment.py:172:      # Check cache
+sentiment.py:173:      if _JIN10_NEWS_CACHE is not None and _JIN10_CACHE_TIME is not None:
+sentiment.py:174:          if (now - _JIN10_CACHE_TIME).total_seconds() < _JIN10_CACHE_TTL:
+sentiment.py:175:              return _JIN10_NEWS_CACHE
+sentiment.py:176:      
+sentiment.py:177:      try:
+sentiment.py:178:          url = "https://xnews.jin10.com/"
+sentiment.py:179:          req = urllib.request.Request(url, headers={
+sentiment.py:180:              "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36",
+sentiment.py:181:          })
+---

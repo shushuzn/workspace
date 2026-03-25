@@ -1,0 +1,692 @@
+{
+  "version": "1.7.1-fixed",
+  "last_updated": "2026-03-20T01:02:19.995489",
+  "changes": [
+    "v1.11.3: Cleanup old brainstorm tools (backup 3 tools to brainstorm-v1)",
+    "v1.11.2: Added brainstorm-workflow-v2 to workflow category",
+    "v1.11.1: Added brainstorm workflow v2.0 tools (divergent, convergent, facilitator, critic-lite)",
+    "Added workflow-enforcer tool for mandatory workflow compliance",
+    "v1.5.0: Added workflow-research sub-workflow tool (research-001)",
+    "Added workflow-project sub-workflow tool (project-001)",
+    "Updated workflows section with research-001 and project-001",
+    "v1.4.0: Added auto-critic-v7 with issue detection and remediation tracking",
+    "Added issue-scanner for comprehensive code scanning",
+    "Added critical-issue-detector for high-risk issue detection",
+    "Added remediation-tracker for FAIL item tracking",
+    "Added quality-gate for code quality checks",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement",
+    "Added p1-issue-fixer for automated os.system/eval/exec replacement",
+    "Added brainstorm workflow tools (define, diverge, prioritize, action)",
+    "Added brainstorm workflow tools (define, diverge, prioritize, action)",
+    "Brainstorm workflow archived in flow-archive/20260318-brainstorm-001/",
+    "Added sub-workflows as tools (session-end, brainstorm)"
+  ],
+  "description": "唯一工具库 - 全系统唯一真值来源",
+  "principles": [
+    "唯一数据源原则：所有工具只允许有一份唯一定义",
+    "引用优先原则：工作流只引用 tool_id，禁止硬编码",
+    "实时生效原则：工具修改后引用自动同步生效",
+    "禁止重写工具原则：所有工具脚本禁止被其他脚本重写或修改",
+    "统一调用原则：所有工具只能通过 tool_executor.py 调用，禁止直接调用工具脚本"
+  ],
+  "enforcement_rules": {
+    "tool_calling": {
+      "rule": "所有工具必须通过 tool_executor.py 调用",
+      "reason": "确保步骤追踪、强制检查、日志记录统一生效",
+      "violation": "直接调用工具脚本（如 subprocess.run(['py', 'tool.py'])）",
+      "compliance": "通过 tool_executor 调用（subprocess.run(['tool_executor.py', 'tool_id'])）"
+    },
+    "tool_modification": {
+      "rule": "禁止重写或修改工具脚本",
+      "reason": "保持工具稳定性和一致性",
+      "violation": "修改工具脚本文件内容",
+      "compliance": "通过 tools_registry.json 配置调整工具行为"
+    },
+    "tool_registration": {
+      "rule": "新工具必须注册到 tools_registry.json",
+      "reason": "确保工具可追踪、可验证、可审计",
+      "violation": "未注册的工具脚本",
+      "compliance": "使用 register_tools.py 批量注册或手动添加到 registry"
+    }
+  },
+  "tools": {
+    "anomaly_detector": {
+      "tool_id": "anomaly_detector",
+      "command": "py 30-scripts-tools/anomaly_detector.py ${args}",
+      "description": "anomaly_detector 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "analysis",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/anomaly_detector.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "anomaly_detector.py",
+        "health_monitor_ai.py",
+        "predictive_analytics.py",
+        "workflow_generator.py",
+        "workflow_optimizer_ai.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013638",
+      "recategorized_at": "2026-03-19T17:34:42.034448",
+      "recategorized_from": "general",
+      "quality_score": 49.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "中频使用 (10 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "doc_generator": {
+      "tool_id": "doc_generator",
+      "command": "py 30-scripts-tools/doc_generator.py ${args}",
+      "description": "doc_generator 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "documentation",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/doc_generator.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 8,
+      "usage_files": [
+        "doc_generator.py",
+        "tool_integration.py",
+        "unified_cli_v3.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013904",
+      "recategorized_at": "2026-03-19T17:34:42.035139",
+      "recategorized_from": "general",
+      "quality_score": 46.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "低频使用 (8 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "memory_distiller_llm": {
+      "tool_id": "memory_distiller_llm",
+      "command": "py 30-scripts-tools/memory_distiller_llm.py ${args}",
+      "description": "记忆蒸馏 - 提炼要点",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "memory",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/memory_distiller_llm.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 2,
+      "usage_files": [
+        "do_rename.py",
+        "rename-memory-scripts.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013917",
+      "quality_score": 46.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "低频使用 (2 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "memory_distiller_v2": {
+      "tool_id": "memory_distiller_v2",
+      "command": "py 30-scripts-tools/memory_distiller_v2.py ${args}",
+      "description": "记忆蒸馏 - 提炼要点",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "memory",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/memory_distiller_v2.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 22,
+      "usage_files": [
+        "heartbeat_lite.py",
+        "memory_distillation_runner.py",
+        "memory_distiller_v2.py",
+        "memory_immune_system.py",
+        "memory_neural_network.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013971",
+      "quality_score": 49.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:True, 示例:True",
+        "usage": "中频使用 (22 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "performance_analyzer": {
+      "tool_id": "performance_analyzer",
+      "command": "py 30-scripts-tools/performance_analyzer.py ${args}",
+      "description": "performance_analyzer 工具",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "category": "performance",
+      "parameters": {
+        "args": {
+          "type": "string",
+          "description": "工具参数",
+          "required": false
+        }
+      },
+      "examples": [
+        "py 30-scripts-tools/performance_analyzer.py --help"
+      ],
+      "validation": {
+        "workspace_check": true
+      },
+      "output": {
+        "format": "console",
+        "log_to_flow": true
+      },
+      "usage_count": 10,
+      "usage_files": [
+        "auto_optimizer.py",
+        "doc_generator.py",
+        "performance_analyzer.py",
+        "unified_cli_v3.py",
+        "workflow_optimizer_ai.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013753",
+      "recategorized_at": "2026-03-19T17:34:42.036216",
+      "recategorized_from": "general",
+      "quality_score": 68.5,
+      "quality_details": {
+        "functionality": "有独特功能描述",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "中频使用 (10 次)",
+        "maintenance": "无时间戳"
+      }
+    },
+    "tool_executor": {
+      "tool_id": "tool_executor",
+      "command": "py 30-scripts-tools/tool_executor.py ${args}",
+      "description": "工具执行器 - 统一工具调用入口（唯一合法方式）",
+      "category": "core",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "critical",
+      "usage_count": 77,
+      "usage_files": [
+        "auto-critic.py",
+        "auto_execute_workflow.py",
+        "check_core_tools.py",
+        "check_key_tools.py",
+        "check_missing_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013690",
+      "quality_score": 49.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:False, 示例:False",
+        "usage": "中频使用 (77 次)",
+        "maintenance": "无时间戳"
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "task_assigned",
+          "description": "任务分配自动执行"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515263"
+    },
+    "workflow_enforcer": {
+      "tool_id": "workflow_enforcer",
+      "command": "py 30-scripts-tools/workflow_enforcer.py ${args}",
+      "description": "工作流强制检查 - 确保步骤合规",
+      "category": "core",
+      "version": "1.0.0",
+      "created_at": "2026-03-19",
+      "priority": "critical",
+      "usage_count": 23,
+      "usage_files": [
+        "auto_execute_workflow.py",
+        "check_core_tools.py",
+        "execute_step_fixed.py",
+        "register_core_tools.py",
+        "register_tools.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013743",
+      "quality_score": 39.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:False, 参数:False, 示例:False",
+        "usage": "中频使用 (23 次)",
+        "maintenance": "无时间戳"
+      },
+      "triggers": [
+        {
+          "type": "event",
+          "event": "workflow_start",
+          "description": "工作流开始自动检查"
+        },
+        {
+          "type": "event",
+          "event": "step_complete",
+          "description": "步骤完成自动验证"
+        }
+      ],
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515225"
+    },
+    "session_compress": {
+      "tool_id": "session-compress",
+      "name": "Post-Session Compressor",
+      "description": "会话压缩工具 - 将完整会话日志压缩为结构化摘要，减少 96% token 使用",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\post_session_compress.py --auto",
+      "parameters": [
+        {
+          "name": "session_file",
+          "type": "string",
+          "required": true,
+          "description": "会话文件路径"
+        },
+        {
+          "name": "compression_ratio",
+          "type": "float",
+          "required": false,
+          "description": "目标压缩率 (0-1)"
+        }
+      ],
+      "validation": {
+        "context_size_limit_kb": 100,
+        "daily_note_lines_limit": 100,
+        "verify_with": "fast_load.py"
+      },
+      "triggers": [
+        "session_end",
+        {
+          "type": "cron",
+          "schedule": "*/30 * * * *",
+          "description": "每 30 分钟压缩会话"
+        },
+        {
+          "type": "event",
+          "event": "session_end",
+          "description": "会话结束自动压缩"
+        }
+      ],
+      "review_required": true,
+      "blocking": true,
+      "timeout_seconds": 30,
+      "category": "memory",
+      "categorized_at": "2026-03-19T17:20:34.330670",
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013803",
+      "renamed_from": "session-compress",
+      "renamed_at": "2026-03-19T17:33:50.992565",
+      "naming_standard": "underscore",
+      "quality_score": 56.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (2 次)",
+        "maintenance": "无时间戳"
+      },
+      "examples": [
+        "py session_compress.py --session_file \"session.json\"",
+        "py session_compress.py --session_file \"xxx.json\" --compression_ratio 0.96"
+      ],
+      "improved_at": "2026-03-19T18:20:28.908503",
+      "improvement_version": "1.1.0",
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.514098"
+    },
+    "context_verify": {
+      "tool_id": "context-verify",
+      "name": "Fast Load Context Verifier",
+      "description": "上下文验证工具 - 验证加载的上下文是否完整正确，包括 7 个核心文件检查、大小验证、编码检测，确保会话正常启动",
+      "version": "1.0",
+      "command": "py 30-scripts-tools\\fast_load.py",
+      "parameters": [
+        {
+          "name": "strict_mode",
+          "type": "boolean",
+          "required": false,
+          "description": "严格模式：是/否"
+        },
+        {
+          "name": "output_detail",
+          "type": "boolean",
+          "required": false,
+          "description": "是否输出详情"
+        },
+        {
+          "name": "fix_issues",
+          "type": "boolean",
+          "required": false,
+          "description": "是否自动修复问题"
+        }
+      ],
+      "validation": {
+        "max_size_kb": 100,
+        "core_files": [
+          "SOUL.md",
+          "USER.md",
+          "AGENTS.md",
+          "TOOLS.md",
+          "HEARTBEAT.md",
+          "13-memory/MEMORY.md",
+          "13-memory/YYYY-MM-DD.md"
+        ]
+      },
+      "triggers": [
+        "session_start",
+        "session_end",
+        {
+          "type": "event",
+          "event": "session_start",
+          "description": "会话开始验证上下文"
+        }
+      ],
+      "review_required": true,
+      "blocking": true,
+      "timeout_seconds": 10,
+      "category": "quality",
+      "categorized_at": "2026-03-19T17:20:34.330673",
+      "categorized_method": "auto",
+      "usage_count": 2,
+      "usage_files": [
+        "check_key_tools.py",
+        "fix_workflow_tool_ids.py"
+      ],
+      "usage_tracked_at": "2026-03-19T17:28:52.013804",
+      "renamed_from": "context-verify",
+      "renamed_at": "2026-03-19T17:33:50.992746",
+      "naming_standard": "underscore",
+      "quality_score": 56.5,
+      "quality_details": {
+        "functionality": "功能描述一般",
+        "code_quality": "文件不存在或无文件",
+        "documentation": "描述:True, 参数:True, 示例:True",
+        "usage": "低频使用 (2 次)",
+        "maintenance": "无时间戳"
+      },
+      "examples": [
+        "py context_verify.py",
+        "py context_verify.py --strict_mode true --output_detail true --fix_issues true"
+      ],
+      "improved_at": "2026-03-19T18:33:55.349205",
+      "improvement_version": "1.3.0",
+      "automation_enabled": true,
+      "automation_updated_at": "2026-03-19T18:42:25.515285"
+    }
+  },
+  "workflows": {
+    "session-end": {
+      "workflow_id": "session-end",
+      "description": "会话结束工作流 - 8 步自动化流程"
+    },
+    "research-001": {
+      "workflow_id": "research-001",
+      "description": "深度研究工作流 - 文献调研、数据分析、论文写作",
+      "flow_id": "20260318-research-001",
+      "total_steps": 10,
+      "estimated_time_minutes": 60
+    },
+    "project-001": {
+      "workflow_id": "project-001",
+      "description": "项目管理工作流 - 任务分解、进度跟踪、资源协调",
+      "flow_id": "20260318-project-001",
+      "total_steps": 8,
+      "estimated_time_minutes": 30
+    },
+    "task-complete": {
+      "workflow_id": "task-complete",
+      "description": "任务完成工作流 - 待创建"
+    }
+  },
+  "compliance_rules": {
+    "zero_score_items": [
+      {
+        "id": "ZS-001",
+        "rule": "禁止为任何工具创建多份定义、副本、冗余内容",
+        "check": "grep 重复 tool_id",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-002",
+        "rule": "禁止在工作流中硬编码工具的执行逻辑、完整命令",
+        "check": "grep 'py 30-scripts' in workflow files",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-003",
+        "rule": "禁止修改工具引用时私自变更工具的核心逻辑",
+        "check": "对比工具定义与工作流参数",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-004",
+        "rule": "禁止绕过唯一工具库直接创建、执行未注册的工具",
+        "check": "检查执行日志中的 tool_id",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-005",
+        "rule": "禁止事后补录工具定义、补全引用",
+        "check": "检查 Git 历史时间戳",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "ZS-006",
+        "rule": "工具的「有效使用」判定：tool_id 被正式工作流引用",
+        "check": "检查 workflow JSON 中的 tool_id 引用",
+        "consequence": "未使用工具标记"
+      },
+      {
+        "id": "ZS-007",
+        "rule": "工具修改后必须自动触发变更标记和合规重审",
+        "check": "检查变更日志和审查记录",
+        "consequence": "0 分 + 阻断"
+      },
+      {
+        "id": "CRITICAL-001",
+        "rule": "创建的工具必须在 tools_registry.json 注册",
+        "check": "critical_checks.py --verify",
+        "consequence": "0 分 + 阻断",
+        "enforcement": "blocker-007"
+      },
+      {
+        "id": "CRITICAL-002",
+        "rule": "中文必须用 UTF-8 编码",
+        "check": "critical_checks.py --verify",
+        "consequence": "0 分 + 阻断",
+        "enforcement": "blocker-008"
+      }
+    ],
+    "review_checkpoints": {
+      "pre_execution": [
+        "工具是否在 tools_registry.json 中唯一定义",
+        "tool_id 是否全局唯一（无重复）",
+        "是否先定义再引用（顺序正确）"
+      ],
+      "during_execution": [
+        "是否只引用 tool_id（无硬编码）",
+        "是否实时读取工具库（无缓存）",
+        "参数是否只覆盖非核心配置"
+      ],
+      "post_execution": [
+        "是否有工具多份定义",
+        "工作流是否硬编码命令",
+        "是否绕过工具库",
+        "是否事后补录定义",
+        "工具修改是否触发变更标记",
+        "执行是否使用最新版本"
+      ]
+    }
+  },
+  "updated_at": "2026-03-20T00:00:17.220261",
+  "total_tools": 372,
+  "recovery_note": "Recovered 6 missing file tools",
+  "categorized_count": 27,
+  "manual_fixes": 5,
+  "deprecated_count": 88,
+  "naming_standard": {
+    "standardized_at": "2026-03-19T17:33:50.994168",
+    "renamed_tools": 25,
+    "renamed_files": 0,
+    "skipped": 30,
+    "compliance_rate": 93.13501144164759
+  },
+  "category_distribution": {
+    "quality": 30,
+    "memory": 67,
+    "optimization": 26,
+    "analysis": 14,
+    "code-quality": 1,
+    "workflow": 31,
+    "quality-gate": 1,
+    "automation": 29,
+    "performance": 13,
+    "reporting": 11,
+    "tool": 17,
+    "general": 77,
+    "integration": 10,
+    "backup": 3,
+    "security": 7,
+    "brainstorm": 7,
+    "utility": 13,
+    "context": 8,
+    "testing": 3,
+    "ui": 12,
+    "documentation": 5,
+    "execution": 3,
+    "learning": 3,
+    "git": 9,
+    "monitoring": 10,
+    "kg": 5,
+    "session": 8,
+    "task": 2,
+    "core": 4,
+    "logging": 2,
+    "assistant": 2,
+    "interaction": 1,
+    "multimodal": 1,
+    "validation": 1,
+    "cache": 1
+  },
+  "deletion_record": {
+    "deleted_at": "2026-03-19T17:40:49.903334",
+    "deleted_count": 86,
+    "files_backed_up": 0,
+    "backup_location": "99-backups/deprecated-tools/"
+  },
+  "merge_record": {
+    "merged_at": "2026-03-19T17:46:16.435043",
+    "deleted_count": 9,
+    "reason": "duplicate_merge"
+  },
+  "restoration_record": {
+    "restored_at": "2026-03-19T17:52:47.262538",
+    "restored_count": 29,
+    "reason": "quality_over_quantity - 质量优先于数量"
+  },
+  "quality_assessment": {
+    "assessed_at": "2026-03-19T18:40:56.885976",
+    "total_tools": 372,
+    "average_score": 51.3,
+    "distribution": {
+      "excellent": 0,
+      "good": 24,
+      "fair": 324,
+      "poor": 24
+    }
+  },
+  "improvement_record": {
+    "improved_at": "2026-03-19T18:20:28.908511",
+    "improved_count": 8,
+    "target": "tool_quality_improvement_phase1"
+  },
+  "improvement_record_phase2": {
+    "improved_at": "2026-03-19T18:21:33.493776",
+    "improved_count": 12,
+    "target": "tool_quality_improvement_phase2"
+  },
+  "improvement_record_phase3": {
+    "improved_at": "2026-03-19T18:33:55.349230",
+    "improved_count": 12,
+    "target": "tool_quality_improvement_phase3"
+  },
+  "automation_stats": {
+    "total_tools": 372,
+    "automated_tools": 23,
+    "automation_rate": 6.18,
+    "phase2_added": 7,
+    "updated_at": "2026-03-19T18:47:43.500055"
+  }
+}

@@ -1,0 +1,44 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:14:44.891216
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 203-240 of 873)
+# 本地LLM分析 (可选) - 并行优化
+# ============================================================
+
+LLM_CACHE_FILE = Path('.llm_cache.json')
+LLM_CACHE_TTL = 3600  # 1小时缓存
+
+def load_llm_cache():
+    """加载LLM缓存"""
+    if LLM_CACHE_FILE.exists():
+        try:
+            with open(LLM_CACHE_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            pass
+    return {}
+
+def save_llm_cache(cache):
+    """保存LLM缓存"""
+    try:
+        with open(LLM_CACHE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(cache, f, ensure_ascii=False)
+    except:
+        pass
+
+def check_ollama_status():
+    """检查Ollama服务状态"""
+    try:
+        req = urllib.request.Request(
+            "http://localhost:11434/api/tags",
+            headers={'Content-Type': 'application/json'}
+        )
+        with urllib.request.urlopen(req, timeout=3, context=get_ssl()) as resp:
+            return True
+    except:
+        return False
+
+def analyze_with_llm(title):
+    """使用本地LLM分析新闻"""
+
+[633 more lines. Use start_line=241 to continue.]

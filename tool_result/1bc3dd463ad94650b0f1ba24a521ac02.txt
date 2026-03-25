@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:23:08.113579
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 150-180 of 381)
+
+def fetch_json(url: str) -> List[Dict]:
+    try:
+        req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+        with urllib.request.urlopen(req, timeout=10) as resp:
+            data = json.loads(resp.read().decode('utf-8'))
+        items = []
+        if 'result' in data and 'data' in data['result']:
+            for item in data['result']['data']:
+                title = item.get('title', '')
+                url = item.get('url', '')
+                if title and url:
+                    items.append({"title": title, "url": url})
+        return items
+    except Exception as e:
+        print(f"[WARN] JSON failed: {e}")
+        return []
+
+def cmd_fetch(args):
+    print("[INFO] Fetching news...")
+    data = NewsData()
+    total_new = 0
+    
+    for source in CONFIG["news"]["sources"]:
+        print(f"  From {source['name']}...")
+        if source["type"] == "rss":
+            items = fetch_rss(source["url"])
+        else:
+            items = fetch_json(source["url"])
+        
+        for item in items[:CONFIG["news"]["max_per_fetch"]]:
+
+[201 more lines. Use start_line=181 to continue.]

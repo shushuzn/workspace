@@ -1,0 +1,65 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T23:52:52.630898
+# ---
+news_manager.py:368:          sorted_cats = sorted(grouped_news.items(), key=lambda x: -len(x[1]))
+news_manager.py:369:          
+news_manager.py:370:          for cat, news_items in sorted_cats[:8]:  # 最多8个分类
+news_manager.py:371:              pos = sum(1 for n in news_items if n["sentiment"] == "利好")
+news_manager.py:372:              neg = sum(1 for n in news_items if n["sentiment"] == "利空")
+news_manager.py:373:              
+news_manager.py:374:              # 单行: [财经] 3条 (+2-1)
+news_manager.py:375:              bar = f"{cp('+' + str(pos))}{cn('-' + str(neg))}" if pos or neg else ""
+news_manager.py:376:              print(f"{c(Colors.BOLD, cat[:4])} {len(news_items)} {bar}")
+news_manager.py:377:              
+news_manager.py:378:              # 只显示第一条
+news_manager.py:379:              n = news_items[0]
+news_manager.py:380:              icon = cp("+") if n["sentiment"] == "利好" else cn("-") if n["sentiment"] == "利空" else cne("=")
+news_manager.py:381:              kw = f" #{n['kw']}" if n["kw"] else ""
+news_manager.py:382:              print(f" {icon} {n['title'][:32]}{kw}")
+news_manager.py:383:              
+news_manager.py:384:              if len(news_items) > 1:
+news_manager.py:385:                  print(f" {c(Colors.DIM, '+' + str(len(news_items) - 1))}")
+news_manager.py:386:      else:
+news_manager.py:387:          print(f"\n{cne('[.] No new news')}")
+news_manager.py:388:      
+news_manager.py:389:      # 底部统计 - 单行
+news_manager.py:390:      pos = sentiment_stats['利好']
+news_manager.py:391:      neg = sentiment_stats['利空']
+news_manager.py:392:      
+news_manager.py:393:      print(f"\n{c(Colors.DIM, '-'*28)}")
+news_manager.py:394:      print(f"New:{total_new} {cp('+' + str(pos))}{cn('-' + str(neg))} ({len(grouped_news)} src)")
+news_manager.py:395:      print()
+news_manager.py:396:      return total_new
+news_manager.py:397:  
+news_manager.py:398:> def cmd_push(args):
+news_manager.py:399:      data = NewsData()
+news_manager.py:400:      news_list = data.get_unsent(limit=int(args.limit) if hasattr(args, 'limit') else 5)
+news_manager.py:401:      if not news_list:
+news_manager.py:402:          print(f"{cn('[!] No news to push')}")
+news_manager.py:403:          return
+news_manager.py:404:      
+news_manager.py:405:      # 分析
+news_manager.py:406:      risk = get_risk(news_list)
+news_manager.py:407:      now = datetime.now().strftime("%m-%d %H:%M")
+news_manager.py:408:      
+news_manager.py:409:      # 构建消息 (紧凑格式)
+news_manager.py:410:      header = f"[NEWS] {now}"
+news_manager.py:411:      body = "\n".join([f"{'+' if n.get('sentiment')=='利好' else '-' if n.get('sentiment')=='利空' else '='} {n.get('title','')[:30]}" for n in news_list])
+news_manager.py:412:      sources = list(set([SOURCE_MAP.get(n.get('source',''), n.get('category','')) for n in news_list]))[:4]
+news_manager.py:413:      sectors = list(set([n.get('sector','通用') for n in news_list]))[:3]
+news_manager.py:414:      msg = f"{header}\n{body}\n---\nSources: {', '.join(sources)}\nSectors: {', '.join(sectors)}\nRisk:{risk}"
+news_manager.py:415:      msg = msg.strip()
+news_manager.py:416:      ids = [n["id"] for n in news_list]
+news_manager.py:417:      results = []
+news_manager.py:418:      
+news_manager.py:419:      # 统计
+news_manager.py:420:      pos_cnt = sum(1 for n in news_list if n.get("sentiment") == "利好")
+news_manager.py:421:      neg_cnt = sum(1 for n in news_list if n.get("sentiment") == "利空")
+news_manager.py:422:      
+news_manager.py:423:      # 打印
+news_manager.py:424:      risk_color = Colors.risk_high() if risk == "高风险" else Colors.risk_low()
+news_manager.py:425:      print(f"\n{c(Colors.header(), '=== PUSH @ ' + now + ' ===')}")
+news_manager.py:426:      print(f"Items: {len(news_list)} | {cp('+' + str(pos_cnt))} {cn('-' + str(neg_cnt))} | {c(risk_color, risk)}")
+news_manager.py:427:      
+news_manager.py:428:      # 发送
+---

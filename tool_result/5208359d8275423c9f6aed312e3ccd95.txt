@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-23T22:45:07.292008
+# ---
+D:\OpenClaw\workspace\memory\2026-03-23.md  (lines 200-300 of 580)
+2. User sees that I still violate them in practice
+3. Solution: Must change WORKFLOW, not just documentation
+
+### When User Criticizes My Methods
+- User: "你除了write其他的方法写文件都非常糟糕，无法使用"
+- Meaning: All my alternative methods failed in practice
+- Response: Find the ONE method that actually works, use only that
+
+### When User Gives Direct Instruction
+- User: "就用这个，写入工作流"
+- Action: Immediately implement, update docs, and stick to it
+- Don't add more options or "helpful" alternatives
+
+### Trust Hierarchy
+1. User's explicit instruction > Documentation > My judgment
+2. When I fail repeatedly, stop trying clever solutions
+3. The simplest working solution is the correct one
+
+### Git Merge Protocol
+1. NEVER merge remote branch without checking content first
+2. User feedback: "你到底拉取了什么" = I merged without understanding
+3. Required checks BEFORE merge:
+   - `git log --oneline origin/branch -5`
+   - `git diff --stat HEAD..origin/branch`
+   - `git show --stat origin/branch`
+4. If unrelated history: use `--allow-unrelated-histories` cautiously
+5. Keep force-push as last resort for recovery
+
+---
+
+## SKILL Loading Rule - 2026-03-23 (Critical Fix)
+
+### Problem Identified
+User: "你不会看skill" (You don't read SKILL files)
+
+I write documentation but never actually READ them before executing tasks.
+
+### Solution Implemented
+Added to `AGENTS.md` (lines ~50-70):
+```
+**SKILL Loading (每次会话必须 - 2026-03-23):**
+
+任务类型          → 必须读取的 SKILL
+─────────────────────────────────────
+写文件            → active_skills/file-handling/SKILL.md
+写代码            → active_skills/coding/SKILL.md
+定时任务          → active_skills/cron/SKILL.md
+...
+```
+
+### Behavior Change Required
+**Before any task, read the relevant SKILL file first.**
+
+---
+
+## NewsHub Optimization Round 2 - 2026-03-23
+
+### LLM Enhanced Analyzer v3.0
+File: `llm_enhanced.py` (9.7KB)
+
+Features:
+- `analyze_news()`: Full analysis (summary, key_points, sentiment, confidence, impact, sectors, entities, risk, action)
+- `analyze_batch()`: Parallel analysis with ThreadPoolExecutor
+- `generate_report()`: Formatted report output
+- `market_sentiment()`: Overall market sentiment calculation
+
+### New Commands Added
+```bash
+python news_hub.py analyze 10    # LLM智能分析
+python news_hub.py sentiment     # 市场情绪分析
+```
+
+### News Sources Expanded (7 → 14)
+```
+国内财经: 新浪财经, 财联社, 第一财经, 澎湃财经, 界面新闻
+国际财经: Investing, Seeking Alpha, CNBC, 华尔街日报
+科技媒体: TechCrunch, 36氪, 虎嗅
+加密货币: CoinDesk
+```
+
+### Smart Deduplication
+- Uses Jaccard similarity (threshold 0.8)
+- Removes duplicate news across sources
+- `dedup_news()` function in news_fetcher.py
+
+### Category System Expanded
+- 20+ categories (stock, forex, commodity, macro, tech, crypto, etc.)
+- Added `SECTOR_MAPPING` for sector classification
+- Sub-categories: stock_cn, stock_hk, stock_us, energy, metal, ev, biotech
+
+### Scheduled Tasks
+Files: `scheduled_tasks.py`, `scheduled.bat`
+
+Commands:
+```bash
+python scheduled_tasks.py digest   # 摘要推送
+python scheduled_tasks.py analyze  # LLM分析
+python scheduled_tasks.py alert    # 关键词告警
+python scheduled_tasks.py stats    # 统计
+```
+
+
+[280 more lines. Use start_line=301 to continue.]

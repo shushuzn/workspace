@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:41:18.080587
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 125-175 of 563)
+    
+    # 分析板块
+    sector = "通用"
+    for sec, keywords in SECTOR_MAPPING.items():
+        if any(k in title for k in keywords):
+            sector = sec
+            break
+    
+    return sentiment, sector
+
+
+# ============================================================
+# 数据管理
+# ============================================================
+
+class NewsData:
+    def __init__(self):
+        self.data = self._load()
+    
+    def _load(self) -> Dict:
+        if DATA_FILE.exists():
+            try:
+                with open(DATA_FILE, 'r', encoding='utf-8') as f:
+                    return json.load(f)
+            except:
+                pass
+        return {"news": [], "sent": [], "stats": {"total": 0, "qq": 0, "feishu": 0, "last_fetch": None}}
+    
+    def save(self):
+        with open(DATA_FILE, 'w', encoding='utf-8') as f:
+            json.dump(self.data, f, ensure_ascii=False, indent=2)
+    
+    def add_news(self, title: str, url: str, source: str = "", category: str = ""):
+        news_id = hash(title + url) & 0xFFFFFFFF
+        for n in self.data["news"]:
+            if n["id"] == news_id:
+                return False
+        
+        # 分析情感和板块
+        sentiment, sector = analyze_sentiment(title)
+        
+        self.data["news"].append({
+            "id": news_id,
+            "title": title,
+            "url": url,
+            "source": source,
+            "category": category,
+            "sentiment": sentiment,
+            "sector": sector,
+            "fetched_at": datetime.now().isoformat(),
+            "sent": False
+
+[388 more lines. Use start_line=176 to continue.]

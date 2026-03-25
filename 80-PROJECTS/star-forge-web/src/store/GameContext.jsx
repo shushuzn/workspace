@@ -1,4 +1,4 @@
-import { createContext, useContext, useReducer, useCallback, useRef } from 'react';
+import { createContext, useContext, useReducer, useCallback, useRef, useMemo, useEffect } from 'react';
 import { BUILDINGS, TIERS, getBuildingProduction, getBuildingCost } from '../data/buildings';
 import { UPGRADES, getUpgradeEffect } from '../data/upgrades';
 import { ACHIEVEMENTS, checkAchievements } from '../data/achievements';
@@ -376,10 +376,21 @@ export function GameProvider({ children }) {
   const clearNewAchievements = useCallback(() => dispatch({ type: 'CLEAR_NEW_ACHIEVEMENTS' }), []);
   const completeQuest = useCallback((questId) => dispatch({ type: 'COMPLETE_QUEST', questId }), []);
 
-  const energyPerSecond = calculateEnergyPerSecond(state);
-  const eternityPointsForPrestige = calculateEternityPoints(state.totalEnergyEarned);
+  // Memoize expensive calculations - only recalculate when relevant state changes
+  const energyPerSecond = useMemo(() => calculateEnergyPerSecond(state), [
+    state.buildings,
+    state.buildingEfficiency,
+    state.buildingCostReduction,
+    state.globalEfficiency,
+    state.globalMultiplier,
+    state.eternityFactor,
+    state.unlockedTiers
+  ]);
 
-  const value = {
+  const eternityPointsForPrestige = useMemo(() => calculateEternityPoints(state.totalEnergyEarned), [state.totalEnergyEarned]);
+
+  // Memoize value object to prevent unnecessary re-renders
+  const value = useMemo(() => ({
     state,
     click,
     tick,
@@ -394,7 +405,7 @@ export function GameProvider({ children }) {
     completeQuest,
     energyPerSecond,
     eternityPointsForPrestige,
-  };
+  }), [state, click, tick, buyBuilding, buyUpgrade, unlockTier, prestige, loadState, updateTime, checkAchievements, clearNewAchievements, completeQuest, energyPerSecond, eternityPointsForPrestige]);
 
   return <GameContext.Provider value={value}>{children}</GameContext.Provider>;
 }

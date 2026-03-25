@@ -1,0 +1,140 @@
+# tool_name: read_file
+# created_at: 2026-03-22T19:29:25.837650
+# ---
+"""
+Stock PRO Chart Module - Generate trading charts
+"""
+import json
+from pathlib import Path
+from datetime import datetime
+from stock_pro.core import A, P, B, E, F
+
+def get_price_history(symbol, days=365):
+    """Get price history for charting"""
+    from .core import fetch
+    price, *_ = fetch(symbol)
+    current = price
+    
+    # Simulate price history (in production, use yfinance)
+    import random
+    base = P.get(symbol, current)
+    history = []
+    for i in range(min(days, 252)):
+        date = (datetime.now().timestamp() - (days - i) * 86400)
+        variance = random.uniform(0.95, 1.05)
+        hist_price = base * variance * (current / base) ** (i / days)
+        history.append({
+            "date": datetime.fromtimestamp(date).strftime("%Y-%m-%d"),
+            "price": round(hist_price, 2)
+        })
+    
+    return history
+
+def generate_chart_data(symbol):
+    """Generate chart data for a symbol"""
+    price, *_ = A.get(symbol, (0, "", ""))
+    
+    history = get_price_history(symbol)
+    
+    # Technical indicators
+    prices = [h["price"] for h in history]
+    
+    # Simple moving average
+    ma20 = []
+    for i in range(len(prices)):
+        if i < 19:
+            ma20.append(None)
+        else:
+            ma20.append(sum(prices[i-19:i+1]) / 20)
+    
+    ma50 = []
+    for i in range(len(prices)):
+        if i < 49:
+            ma50.append(None)
+        else:
+            ma50.append(sum(prices[i-49:i+1]) / 50)
+    
+    # Calculate returns
+    returns = []
+    for i in range(1, len(prices)):
+        ret = (prices[i] - prices[i-1]) / prices[i-1] * 100
+        returns.append(round(ret, 2))
+    
+    return {
+        "symbol": symbol,
+        "current_price": price,
+        "history": history,
+        "ma20": [{"date": history[i]["date"], "value": ma20[i]} for i in range(len(ma20)) if ma20[i]],
+        "ma50": [{"date": history[i]["date"], "value": ma50[i]} for i in range(len(ma50)) if ma50[i]],
+        "returns": returns[-30:],  # Last 30 days
+        "updated": datetime.now().isoformat()
+    }
+
+def get_stock_data_json(symbol):
+    """Get full stock data as JSON for frontend"""
+    from .core import analyze
+    
+    try:
+        data = analyze(symbol)
+        if not data:
+            return {"error": f"Stock {symbol} not found"}
+        
+        chart = generate_chart_data(symbol)
+        
+        return {
+            "symbol": data["symbol"],
+            "name": data.get("name", ""),
+            "price": data["price"],
+            "target": data["target"],
+            "upside": data["upside"],
+            "score": data["score"],
+            "rating": data.get("rating_int", ""),
+            "pe": data["pe"],
+            "eps": data["eps"],
+            "beta": data["beta"],
+            "roe": data["roe"],
+            "roic": data["roic"],
+            "div": data["div"],
+            "rg": data.get("rg", 0) * 100,
+            "gm": data["gm"],
+            "pm": data["pm"],
+            "chart": chart,
+            "updated": datetime.now().isoformat()
+        }
+    except Exception as e:
+        return {"error": str(e)}
+
+def generate_portfolio_chart(portfolio):
+    """Generate portfolio allocation chart data"""
+    # portfolio = {"AAPL": 10, "NVDA": 5, "MSFT": 8}
+    from .core import analyze
+    
+    holdings = []
+    total_value = 0
+    
+    for symbol, shares in portfolio.items():
+        try:
+            data = analyze(symbol)
+            if data:
+                value = data["price"] * shares
+                total_value += value
+                holdings.append({
+                    "symbol": symbol,
+                    "shares": shares,
+                    "price": data["price"],
+                    "value": value,
+                    "weight": 0,
+                    "gain": data["upside"]
+                })
+        except:
+            pass
+    
+    # Calculate weights
+    for h in holdings:
+        h["weight"] = round(h["value"] / total_value * 100, 1) if total_value > 0 else 0
+    
+    return {
+        "holdings": holdings,
+        "total_value": round(total_value, 2),
+        "updated": datetime.now().isoformat()
+    }

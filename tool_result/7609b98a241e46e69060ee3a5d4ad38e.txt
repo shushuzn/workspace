@@ -1,0 +1,39 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T17:48:01.658888
+# ---
+Command failed with exit code 1.
+[stdout]
+[17:47:56] Fetching...
+Traceback (most recent call last):
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages\aiodns\__init__.py", line 58, in __init__
+    import winloop
+ModuleNotFoundError: No module named 'winloop'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\fast_news.py", line 213, in <module>
+    print(format_report(symbol, with_content=not no_content))
+          ~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\fast_news.py", line 182, in format_report
+    news = get_news(symbol, with_content)
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\fast_news.py", line 173, in get_news
+    return loop.run_until_complete(main_async(symbol, with_content, limit))
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\asyncio\base_events.py", line 725, in run_until_complete
+    return future.result()
+           ~~~~~~~~~~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\fast_news.py", line 130, in main_async
+    connector = aiohttp.TCPConnector(limit=10)
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages\aiohttp\connector.py", line 1007, in __init__
+    self._resolver = DefaultResolver(loop=self._loop)
+                     ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages\aiohttp\resolver.py", line 107, in __init__
+    self._resolver = self._manager.get_resolver(self, self._loop)
+                     ~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages\aiohttp\resolver.py", line 240, in get_resolver
+    resolver = aiodns.DNSResolver(loop=loop)
+  File "C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages\aiodns\__init__.py", line 63, in __init__
+    raise RuntimeError(
+        'aiodns needs a SelectorEventLoop on Windows. See more: https://github.com/saghul/aiodns/issues/86')
+RuntimeError: aiodns needs a SelectorEventLoop on Windows. See more: https://github.com/saghul/aiodns/issues/86

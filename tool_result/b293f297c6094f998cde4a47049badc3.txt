@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:42:33.983521
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_feishu.py  (lines 350-380 of 469)
+        warn("无匹配")
+        return 0
+    info(f"关键词: {len(keywords)} | 匹配: {len(items)}")
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    feishu = load_feishu_config()
+    sent = 0
+    for i, n in enumerate(items, 1):
+        prog(i, len(items), C("发送: "))
+        card = build_alert_card(n['title'], n['url'], n.get('source', ''), keywords)
+        result = send_card(token, feishu.get('default_receive_id', ''), card)
+        if result.get('code') == 0:
+            history.append(n['title'])
+            ok(n['title'][:40] + "...")
+            sent += 1
+        time.sleep(0.2)
+    print()
+    save_history(history)
+    add_log('alert', sent, len(items))
+    return sent
+
+def cmd_all():
+    banner("全部新闻", "📰")
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    new_news = [n for n in all_news if n['title'] not in history]
+    if not new_news:
+        warn("无新新闻")
+        return 0
+
+[89 more lines. Use start_line=381 to continue.]

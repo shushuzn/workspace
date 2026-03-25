@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:52:48.396633
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 30-60 of 82)
+def fs():
+    try:
+        u='https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516&num=15&page=1'
+        d=json.loads(urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=10,context=s()).read().decode('utf-8'))
+        return [{'title':i.get('title','').strip(),'url':i.get('url',''),'source':'新浪','ts':time.time(),'category':cl(i.get('title','')),} for i in d.get('result',{}).get('data',[])[:15] if i.get('title','')]
+    except: return []
+
+def fe():
+    try:
+        u='https://feed.eastmoney.com/more?type=globalnews&pageSize=10&page=1'
+        d=json.loads(urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=10,context=s()).read().decode('utf-8'))
+        return [{'title':i.get('title','').strip(),'url':'https://www.eastmoney.com/a/'+str(i.get('id','')),'source':'东财','ts':time.time(),'category':cl(i.get('title','')),} for i in d.get('data',{}).get('list',[])[:10] if i.get('title','')]
+    except: return []
+
+def fr(u,n,l=10):
+    try:
+        r=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
+        root=ET.fromstring(urllib.request.urlopen(r,timeout=10,context=s()).read().decode('utf-8'))
+        return [{'title':i.findtext('title','').strip(),'url':i.findtext('link',''),'source':n,'ts':time.time(),'category':cl(i.findtext('title','')),} for i in root.findall('.//item')[:l] if i.findtext('title','')]
+    except: return []
+
+SRC=[('新浪',fs),('东财',fe),('Investing',lambda:fr('https://www.investing.com/rss/news.rss','Investing',10)),('CNBC',lambda:fr('https://www.cnbc.com/id/10000664/device/rss/rss.html','CNBC',15))]
+
+def fetch(quiet=False):
+    try:
+        c=json.load(open(C,encoding='utf-8'))
+        if c.get('news') and time.time()-c.get('t',0)<CACHE_TTL:
+            if not quiet: print('  [C] '+str(len(c['news'])))
+            return c['news']
+    except: pass
+    r=[]; t0=time.time()
+
+[22 more lines. Use start_line=61 to continue.]

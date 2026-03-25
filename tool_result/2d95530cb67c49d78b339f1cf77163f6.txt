@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-22T18:21:02.122762
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\rss_news.py  (lines 60-120 of 154)
+        return news
+    
+    text = data.decode('utf-8', errors='ignore')
+    
+    for item_html in re.findall(r'<item[^>]*>(.*?)</item>', text, re.DOTALL):
+        title = re.search(r'<title[^>]*><!\[CDATA\[(.*?)\]\]></title>|<title[^>]*>(.*?)</title>', item_html)
+        if not title:
+            continue
+        title = unescape(title.group(1) or title.group(2)).strip()
+        
+        link = re.search(r'<link[^>]*href=["\'](.*?)["\']', item_html)
+        link = link.group(1) if link else ""
+        
+        desc = re.search(r'<description[^>]*><!\[CDATA\[(.*?)\]\]></description>|<description[^>]*>(.*?)</description>', item_html)
+        content = ""
+        if desc:
+            c = desc.group(1) or desc.group(2) or ""
+            content = re.sub(r'<[^>]+>', '', c)
+            content = unescape(content).strip()
+        
+        date = re.search(r'<pubDate>(.*?)</pubDate>', item_html)
+        date = date.group(1)[:16] if date else datetime.now().strftime("%H:%M")
+        
+        if title and len(title) > 10:
+            news.append({"source": config["name"], "title": title, "url": link, "content": content, "time": date})
+    
+    return news
+
+
+def fetch_all_parallel():
+    news = []
+    with ThreadPoolExecutor(max_workers=6) as ex:
+        futures = [ex.submit(fetch_rss, k) for k in RSS_FEEDS]
+        for f in as_completed(futures):
+            try:
+                news.extend(f.result())
+            except:
+                pass
+    return news
+
+
+def filter_stock(news, symbol):
+    kws = STOCK_KW.get(symbol.upper(), [symbol.upper()])
+    result = []
+    for n in news:
+        t = n["title"].lower() + n.get("content", "").lower()
+        if any(kw.lower() in t for kw in kws):
+            result.append(n)
+    return result
+
+
+def get_news(symbol=None, limit=30):
+    if symbol:
+        news = filter_stock(fetch_all_parallel(), symbol)
+    else:
+        news = fetch_all_parallel()
+    
+    seen = set()
+    unique = []
+    for n in news:
+        k = n["title"][:80]
+
+[34 more lines. Use start_line=121 to continue.]

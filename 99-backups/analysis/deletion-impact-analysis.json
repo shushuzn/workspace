@@ -1,0 +1,36 @@
+{
+  "analyzed_at": "2026-03-19T17:55:42.514979",
+  "tool_ids": [
+    "critical-issue-detector",
+    "analyze_memory_scripts",
+    "context_db"
+  ],
+  "dependencies": [
+    {
+      "tool_id": "critical-issue-detector",
+      "dependents": [],
+      "has_alternative": true,
+      "alternative_tools": [
+        "api_gateway"
+      ]
+    },
+    {
+      "tool_id": "analyze_memory_scripts",
+      "dependents": [],
+      "has_alternative": true,
+      "alternative_tools": [
+        "api_gateway"
+      ]
+    },
+    {
+      "tool_id": "context_db",
+      "dependents": [],
+      "has_alternative": true,
+      "alternative_tools": [
+        "api_gateway"
+      ]
+    }
+  ],
+  "alternatives": [],
+  "impact_level": "low"
+}

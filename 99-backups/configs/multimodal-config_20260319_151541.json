@@ -1,0 +1,33 @@
+{
+  "enabled": true,
+  "cache_enabled": true,
+  "cache_ttl_hours": 24,
+  "max_file_size_mb": 100,
+  "supported_formats": {
+    "image": [
+      "jpg",
+      "jpeg",
+      "png",
+      "gif",
+      "bmp",
+      "webp"
+    ],
+    "audio": [
+      "mp3",
+      "wav",
+      "ogg",
+      "m4a",
+      "flac"
+    ],
+    "document": [
+      "pdf",
+      "docx",
+      "xlsx",
+      "pptx",
+      "txt",
+      "md"
+    ]
+  },
+  "ocr_language": "zh+en",
+  "auto_cache": true
+}

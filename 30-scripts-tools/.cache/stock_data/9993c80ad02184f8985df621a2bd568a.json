@@ -1,0 +1,21 @@
+{
+  "symbol": "AAPL_indicators",
+  "data_type": "indicators",
+  "cached_at": 1773994461.0840957,
+  "data": {
+    "rsi": 65.5,
+    "macd": {
+      "value": 0.5,
+      "signal": 0.3,
+      "histogram": 0.2
+    },
+    "sma_20": 148.5,
+    "sma_50": 145.0,
+    "bollinger": {
+      "upper": 155,
+      "middle": 148,
+      "lower": 141
+    }
+  },
+  "size": 162
+}

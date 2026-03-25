@@ -1,0 +1,40 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:26:32.448724
+# ---
+    print("  📬 关键词订阅")
+    print("=" * 50)
+    print(f"\n总计: {stats['total']} 个关键词\n")
+    
+    print("按级别:")
+    print(f"  🔴 critical: {stats['by_level']['critical']}")
+    print(f"  🟠 high:    {stats['by_level']['high']}")
+    print(f"  🟡 medium:  {stats['by_level']['medium']}")
+    print(f"  ⚪ low:     {stats['by_level']['low']}")
+    
+    print("\n关键词列表:")
+    for kw in stats['keywords']:
+        print(f"  • {kw}")
+
+def cmd_add(keyword, level="medium", desc=""):
+    """添加订阅"""
+    if add_subscription(keyword, level, desc):
+        print(f"✓ 已添加: {keyword} ({level})")
+    else:
+        print(f"✗ 已存在: {keyword}")
+
+def cmd_remove(keyword):
+    """移除订阅"""
+    if remove_subscription(keyword):
+        print(f"✓ 已移除: {keyword}")
+    else:
+        print(f"✗ 未找到: {keyword}")
+
+def cmd_check(news):
+    """检查新闻"""
+    subs = load_subscriptions().get("watch", [])
+    matched = match_news(news, subs)
+    
+    print(f"\n📬 订阅匹配: {len(matched)} 条")
+    
+    if matched:
+        by_level = {"critical": [], "high": [], "medium": [], "

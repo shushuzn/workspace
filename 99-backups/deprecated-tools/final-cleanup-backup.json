@@ -1,0 +1,56 @@
+[
+  {
+    "tool_id": "critical-issue-detector",
+    "name": "Critical Issue Detector",
+    "deleted_at": "2026-03-19T17:47:17.241349",
+    "reason": "final_cleanup_target_20_percent"
+  },
+  {
+    "tool_id": "critical-checks",
+    "name": "Critical Checks Verifier",
+    "deleted_at": "2026-03-19T17:47:17.241382",
+    "reason": "final_cleanup_target_20_percent"
+  },
+  {
+    "tool_id": "analyze_memory_scripts",
+    "name": "",
+    "deleted_at": "2026-03-19T17:47:17.241386",
+    "reason": "final_cleanup_target_20_percent"
+  },
+  {
+    "tool_id": "analyze_memory_tools",
+    "name": "",
+    "deleted_at": "2026-03-19T17:47:17.241388",
+    "reason": "final_cleanup_target_20_percent"
+  },
+  {
+    "tool_id": "context_db",
+    "name": "",
+    "deleted_at": "2026-03-19T17:47:17.241389",
+    "reason": "final_cleanup_target_20_percent"
+  },
+  {
+    "tool_id": "critic_daily_note_pollution",
+    "name": "",
+    "deleted_at": "2026-03-19T17:47:17.241391",
+    "reason": "final_cleanup_target_20_percent"
+  },
+  {
+    "tool_id": "git_workflow",
+    "name": "",
+    "deleted_at": "2026-03-19T17:47:17.241392",
+    "reason": "final_cleanup_target_20_percent"
+  },
+  {
+    "tool_id": "memory_fix_tools",
+    "name": "",
+    "deleted_at": "2026-03-19T17:47:17.241394",
+    "reason": "final_cleanup_target_20_percent"
+  },
+  {
+    "tool_id": "memory_rollback",
+    "name": "",
+    "deleted_at": "2026-03-19T17:47:17.241395",
+    "reason": "final_cleanup_target_20_percent"
+  }
+]

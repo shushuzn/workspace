@@ -1,0 +1,16 @@
+{
+  "symbol": "TSLA",
+  "source": "yahoo",
+  "price": 159.75,
+  "change": 2.35,
+  "change_percent": 1.58,
+  "volume": 12500000,
+  "market_cap": 2500000000000,
+  "pe_ratio": 28.5,
+  "high": 152.1,
+  "low": 148.9,
+  "open": 149.5,
+  "previous_close": 147.9,
+  "timestamp": "2026-03-20T00:24:50.692471",
+  "currency": "USD"
+}

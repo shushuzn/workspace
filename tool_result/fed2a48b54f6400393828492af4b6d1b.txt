@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-21T13:15:31.553899
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\auto_architect_001.py  (lines 145-180 of 259)
+        applied = []
+        
+        if action == "group_orphans":
+            # Create a grouped utility tool
+            orphans = blueprint["orphans"]
+            if orphans:
+                content = '''#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+ORPHAN-UTILS-001
+Orphan tools grouped by AUTO-ARCHITECT-001
+Generated: {}
+Orphans: {}
+""".format(datetime.now().isoformat(), len(orphans))
+'''
+                for i, orphan in enumerate(orphans[:10], 1):
+                    content += f'# {i}. {orphan}\n'
+                
+                (TOOLS_DIR / "orphan_utils_001.py").write_text(content, encoding="utf-8")
+                applied.append("orphan_utils_001.py")
+        
+        elif action == "create_base":
+            # Create base module
+            content = '''#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+BASE-001 Base Module
+Created by AUTO-ARCHITECT-001
+Common utilities for all tools
+"""
+import logging
+import json
+from pathlib import Path
+from datetime import datetime
+
+logging.basicConfig(level=logging.INFO)
+
+[79 more lines. Use start_line=181 to continue.]

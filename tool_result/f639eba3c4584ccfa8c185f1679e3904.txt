@@ -1,0 +1,430 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T18:22:58.575837
+# ---
+
++==============================================================+
+|                    Stock PRO v20.0                          |
+|          Professional Stock Analysis Suite                  |
++==============================================================+
+
+# RSS News
+
+_Feed: 2026-03-22 18:22:01 | 6 sources_
+
+## 1. Beijing vows broader market access as goods trade surplus hits record levels
+
+**Investing.com** | 2026-03-22 09:53
+
+
+---
+
+## 2. Trump, Iran threaten power, energy targets as war escalates
+
+**Investing.com** | 2026-03-22 09:48
+
+
+---
+
+## 3. Tencent integrates WeChat with OpenClaw AI agent amid China tech battle
+
+**Investing.com** | 2026-03-22 09:36
+
+
+---
+
+## 4. Will the Middle East Conflict Speed Up the Energy Transition?
+
+**Investing.com** | 2026-03-22 09:19
+
+
+---
+
+## 5. UK minister says Trump speaks for himself on his deadline for Iran
+
+**Investing.com** | 2026-03-22 09:12
+
+
+---
+
+## 6. This country will be one of the first to face a key disruption linked to diesel
+
+**Investing.com** | 2026-03-22 08:39
+
+
+---
+
+## 7. US-China AI race: one goal, two very different approaches
+
+**Investing.com** | 2026-03-22 07:56
+
+
+---
+
+## 8. Patriot missile involved in Bahrain blast likely US-operated, analysis finds
+
+**Investing.com** | 2026-03-22 06:48
+
+
+---
+
+## 9. Investigation connects U.S. missile to residential blast in Bahrain - Reuters
+
+**Investing.com** | 2026-03-22 06:37
+
+
+---
+
+## 10. Street Calls of the Week
+
+**Investing.com** | 2026-03-22 06:29
+
+
+---
+
+## 11. Trump says U.S. will 'obliterate' Iran's power plants if Strait of Hormuz not opened in 48 hours
+
+**Seeking Alpha** | Sat, 21 Mar 2026
+
+
+---
+
+## 12. SA Asks: Will healthier food options jump-start Kraft Heinz?
+
+**Seeking Alpha** | Sat, 21 Mar 2026
+
+
+---
+
+## 13. SA Asks: What's the best robotaxi stock play right now?
+
+**Seeking Alpha** | Sat, 21 Mar 2026
+
+
+---
+
+## 14. Key deals this week: Ecolab, Novartis, 3M and more
+
+**Seeking Alpha** | Sat, 21 Mar 2026
+
+
+---
+
+## 15. Bulls vs. Bears: Micron revisited after Q2 results
+
+**Seeking Alpha** | Sat, 21 Mar 2026
+
+
+---
+
+## 16. Musk offers to pay TSA while Trump threatens to deploy ICE in airports
+
+**Seeking Alpha** | Sat, 21 Mar 2026
+
+
+---
+
+## 17. Trump administration reportedly shortlisting CDC nominees
+
+**Seeking Alpha** | Sat, 21 Mar 2026
+
+
+---
+
+## 18. 'Club vibes without the hangover': The twenty-somethings going out - in the gym
+
+**BBC Business** | Sun, 22 Mar 2026
+
+Young people are driving a gym boom as more fitness spaces are transformed into vibrant hangouts....
+
+
+---
+
+## 19. Home working, long leases and rise of parking apps - what went wrong for NCP
+
+**BBC Business** | Sat, 21 Mar 2026
+
+How could a company that charged as much as £65 for a day's parking fail to turn a profit?...
+
+
+---
+
+## 20. Energy bills forecast to rise by £332 a year in July
+
+**BBC Business** | Fri, 20 Mar 2026
+
+Cornwall Insight says the recent surge in energy prices due to the Iran war is set to push up household bills....
+
+
+---
+
+## 21. Work from home and drive more slowly to save energy, global body urges
+
+**BBC Business** | Fri, 20 Mar 2026
+
+People should change how they travel, work and cook to tackle the energy price crisis, the International Energy Agency says....
+
+
+---
+
+## 22. UK borrowing costs hit highest since 2008 financial crisis
+
+**BBC Business** | Fri, 20 Mar 2026
+
+The interest rate on government debt is climbing over fears about inflation, interest rates, and public spending, experts have said....
+
+
+---
+
+## 23. Colombia's budding tech scene needs a cash boost
+
+**BBC Business** | Fri, 20 Mar 2026
+
+Colombia has become a tech hub for Latin America, but attracting investors is a challenge....
+
+
+---
+
+## 24. Hargreaves Lansdown resolves IT issues affecting thousands
+
+**BBC Business** | Fri, 20 Mar 2026
+
+The finance firm has apologised for the disruption to its website and app, which has angered many customers....
+
+
+---
+
+## 25. Trump-backed television merger moves forward
+
+**BBC Business** | Fri, 20 Mar 2026
+
+Critics fear the consolidation will add to strains facing local news and degrade coverage....
+
+
+---
+
+## 26. Russia, China and the US – the global winners and losers of the Iran war
+
+**BBC Business** | Fri, 20 Mar 2026
+
+As the conflict triggers economic disruption some risk being hit hard, while others stand to benefit....
+
+
+---
+
+## 27. Faisal Islam: Iran war is having a dramatic effect on the UK economy
+
+**BBC Business** | Thu, 19 Mar 2026
+
+The knock-on effects of the war in the Gulf go beyond a hold on interest rates and are set to reverberate for months....
+
+
+---
+
+## 28. Stock markets rattled and energy prices soar after strikes on Qatar gas hub
+
+**BBC Business** | Thu, 19 Mar 2026
+
+Oil and gas prices have risen again after fresh strikes hit key infrastructure in the Middle East....
+
+
+---
+
+## 29. Bank ready to raise interest rates if Iran war price 'shock' persists
+
+**BBC Business** | Thu, 19 Mar 2026
+
+Policymakers vote unanimously to hold rates at 3.75% after the Iran war prompts a reversal in the debate over borrowing costs....
+
+
+---
+
+## 30. US lifts sanctions on some Iranian oil as energy prices soar
+
+**BBC Business** | Sat, 21 Mar 2026
+
+The treasury secretary says the move will quickly bring about 140m barrels of oil to global markets....
+
+
+---
+
+## 31. Trio charged over alleged plot to smuggle Nvidia chips from US to China
+
+**BBC Business** | Fri, 20 Mar 2026
+
+They allegedly used fake papers and dummy gear as part of a plan to sell billions in tech to China....
+
+
+---
+
+## 32. Why are gas prices soaring and how could it affect you?
+
+**BBC Business** | Fri, 20 Mar 2026
+
+Analysts fear the disruption to supply could continue for longer than initially thought....
+
+
+---
+
+## 33. How the Iran war may affect your money and bills
+
+**BBC Business** | Fri, 20 Mar 2026
+
+The conflict in the Middle East has increased pressure on the cost of petrol, household energy bills and even food....
+
+
+---
+
+## 34. Nearly 400 firms fined over failure to pay minimum wage
+
+**BBC Business** | Thu, 19 Mar 2026
+
+The official minimum rates of pay will rise for 2.7 million workers in April 2026....
+
+
+---
+
+## 35. Pay grows at slowest rate in more than five years
+
+**BBC Business** | Thu, 19 Mar 2026
+
+Annual earnings grew at an annual rate of 3.8% in the November to January period, the Office for National Statistics says....
+
+
+---
+
+## 36. UK sets target to boost steel making and cut imports
+
+**BBC Business** | Thu, 19 Mar 2026
+
+Up to half of steel used in Britain should be made there, the government says, as it announces its steel strategy....
+
+
+---
+
+## 37. Labubu film is official with Paddington director at the helm
+
+**BBC Business** | Thu, 19 Mar 2026
+
+The film will combine live action and computer-generated animation and is in "early development"....
+
+
+---
+
+## 38. US holds interest rates as Iran war triggers inflation fears
+
+**BBC Business** | Wed, 18 Mar 2026
+
+The US central bank is moving cautiously, despite pressure from the president to cut interest rates....
+
+
+---
+
+## 39. How high could UK petrol and diesel prices go?
+
+**BBC Business** | Wed, 18 Mar 2026
+
+For every $10 rise in oil prices, motorists face paying roughly 7p per litre more in the UK....
+
+
+---
+
+## 40. Computer says no. Are AI interviews making it harder to get a job?
+
+**BBC Business** | Wed, 18 Mar 2026
+
+Bhuvana Chilukuri has sent more than 100 job applications and is convinced very few have been seen by a human....
+
+
+---
+
+## 41. The Iran war is causing a global energy crisis - can China withstand it?
+
+**BBC Business** | Wed, 18 Mar 2026
+
+With oil supply disrupted, Beijing's oil reserves and renewable energy push are being put to the test....
+
+
+---
+
+## 42. Average age of first time buyer climbs to 34
+
+**BBC Business** | Wed, 18 Mar 2026
+
+A new report looks at how conditions have changed for first time buyers since the 1990s....
+
+
+---
+
+## 43. Bentley workers 'shocked and angry' at job cuts
+
+**BBC Business** | Wed, 18 Mar 2026
+
+A union says the announcement came as a blow to employees with up to 275 positions at risk....
+
+
+---
+
+## 44. Ad for AI editing app which said it could 'remove anything' banned
+
+**BBC Business** | Wed, 18 Mar 2026
+
+The UK regulator said the ad condoned "digitally altering and exposing women's bodies without their consent."...
+
+
+---
+
+## 45. How Finnish supermarkets are central to the country's defence
+
+**BBC Business** | Thu, 19 Mar 2026
+
+The chains all have detailed plans to follow in the event of the nation going to war....
+
+
+---
+
+## 46. Is it possible to build a plastic-free home?
+
+**BBC Business** | Tue, 17 Mar 2026
+
+Using plastic in construction is cheap and easy, but some are trying to radically cut back its use....
+
+
+---
+
+## 47. Ukraine's urgent fight on the financial frontline
+
+**BBC Business** | Mon, 16 Mar 2026
+
+The war-torn country is battling to secure crucial funding from the IMF and EU, as well as putting up taxes....
+
+
+---
+
+## 48. Can plastic-eating fungi help clean up nappy waste?
+
+**BBC Business** | Fri, 13 Mar 2026
+
+Cost and convenience have made disposable nappies dominant - can start-ups compete?...
+
+
+---
+
+## 49. Why has Trump eased sanctions on Russian oil - and will it help Putin?
+
+**BBC Business** | Fri, 13 Mar 2026
+
+The US said easing sanctions on Russian oil would provide only a limited financial boost to Putin....
+
+
+---
+
+## 50. Dharshini David: Economy on shaky ground even before Iran war
+
+**BBC Business** | Fri, 13 Mar 2026
+
+The government's hopes that 2026 would be the year when growth picks up are at risk of being scuppered....
+
+
+---
+
+

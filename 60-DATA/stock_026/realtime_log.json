@@ -1,0 +1,32 @@
+[
+  {
+    "timestamp": "2026-03-20T20:51:00.143923",
+    "symbol": "AAPL",
+    "price": 249.39,
+    "change": -0.09,
+    "change_pct": -0.04,
+    "bid": 249.38,
+    "ask": 249.4,
+    "volume": 808007
+  },
+  {
+    "timestamp": "2026-03-20T20:51:01.145741",
+    "symbol": "AAPL",
+    "price": 250.51,
+    "change": 0.46,
+    "change_pct": 0.18,
+    "bid": 250.5,
+    "ask": 250.52,
+    "volume": 249627
+  },
+  {
+    "timestamp": "2026-03-20T20:51:02.148085",
+    "symbol": "AAPL",
+    "price": 249.38,
+    "change": -0.12,
+    "change_pct": -0.05,
+    "bid": 249.37,
+    "ask": 249.39,
+    "volume": 183778
+  }
+]

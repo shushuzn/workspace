@@ -1,0 +1,665 @@
+{
+  "config": {
+    "tier": "MEDIUM",
+    "base_ttl": 600,
+    "current_ttl": 600,
+    "min_ttl": 30,
+    "max_ttl": 172800
+  },
+  "metrics": {
+    "hit_rate": 0.76,
+    "avg_freshness": 0.7387181473711706,
+    "total_accesses": 50
+  },
+  "episode_history": [
+    {
+      "episode": 1,
+      "state": "high_fresh_medium",
+      "action": "maintain",
+      "old_ttl": 600,
+      "new_ttl": 600,
+      "hit_rate": 0.9398464530760527,
+      "freshness": 0.9410744349011211,
+      "reward": 0.9403376458060801
+    },
+    {
+      "episode": 2,
+      "state": "medium_aging_high",
+      "action": "decrease",
+      "old_ttl": 600,
+      "new_ttl": 420,
+      "hit_rate": 0.875901574305964,
+      "freshness": 0.9506993351408365,
+      "reward": 0.905820678639913
+    },
+    {
+      "episode": 3,
+      "state": "high_fresh_medium",
+      "action": "maintain",
+      "old_ttl": 420,
+      "new_ttl": 420,
+      "hit_rate": 0.9987317280345646,
+      "freshness": 0.9506993351408365,
+      "reward": 0.9795187708770734
+    },
+    {
+      "episode": 4,
+      "state": "medium_aging_medium",
+      "action": "maintain",
+      "old_ttl": 420,
+      "new_ttl": 420,
+      "hit_rate": 0.8391943574105758,
+      "freshness": 0.9506993351408365,
+      "reward": 0.8837963485026801
+    },
+    {
+      "episode": 5,
+      "state": "low_aging_low",
+      "action": "maintain",
+      "old_ttl": 420,
+      "new_ttl": 420,
+      "hit_rate": 0.8295679177585188,
+      "freshness": 0.9506993351408365,
+      "reward": 0.8780204847114459
+    },
+    {
+      "episode": 6,
+      "state": "medium_aging_medium",
+      "action": "maintain",
+      "old_ttl": 420,
+      "new_ttl": 420,
+      "hit_rate": 0.9095169819853758,
+      "freshness": 0.9506993351408365,
+      "reward": 0.9259899232475601
+    },
+    {
+      "episode": 7,
+      "state": "high_aging_medium",
+      "action": "maintain",
+      "old_ttl": 420,
+      "new_ttl": 420,
+      "hit_rate": 0.9387271500916569,
+      "freshness": 0.9506993351408365,
+      "reward": 0.9435160241113287
+    },
+    {
+      "episode": 8,
+      "state": "medium_stale_low",
+      "action": "increase",
+      "old_ttl": 420,
+      "new_ttl": 630,
+      "hit_rate": 0.8392423556119029,
+      "freshness": 0.939619263557544,
+      "reward": 0.8793931187901592
+    },
+    {
+      "episode": 9,
+      "state": "high_fresh_medium",
+      "action": "maintain",
+      "old_ttl": 630,
+      "new_ttl": 630,
+      "hit_rate": 0.9286650522897093,
+      "freshness": 0.939619263557544,
+      "reward": 0.9330467367968431
+    },
+    {
+      "episode": 10,
+      "state": "low_stale_low",
+      "action": "maintain",
+      "old_ttl": 630,
+      "new_ttl": 630,
+      "hit_rate": 0.8016219089148792,
+      "freshness": 0.939619263557544,
+      "reward": 0.856820850771945
+    },
+    {
+      "episode": 11,
+      "state": "low_fresh_low",
+      "action": "decrease",
+      "old_ttl": 630,
+      "new_ttl": 441,
+      "hit_rate": 0.8232600600791048,
+      "freshness": 0.9494818514459078,
+      "reward": 0.8737487766258261
+    },
+    {
+      "episode": 12,
+      "state": "medium_fresh_medium",
+      "action": "decrease",
+      "old_ttl": 441,
+      "new_ttl": 308,
+      "hit_rate": 0.8615413100472474,
+      "freshness": 0.9577814329067481,
+      "reward": 0.9000373591910478
+    },
+    {
+      "episode": 13,
+      "state": "high_aging_low",
+      "action": "maintain",
+      "old_ttl": 308,
+      "new_ttl": 308,
+      "hit_rate": 0.9456645784569386,
+      "freshness": 0.9577814329067481,
+      "reward": 0.9505113202368625
+    },
+    {
+      "episode": 14,
+      "state": "high_stale_high",
+      "action": "decrease",
+      "old_ttl": 308,
+      "new_ttl": 215,
+      "hit_rate": 0.9281596759388584,
+      "freshness": 0.9647265969466658,
+      "reward": 0.9427864443419813
+    },
+    {
+      "episode": 15,
+      "state": "high_fresh_medium",
+      "action": "maintain",
+      "old_ttl": 215,
+      "new_ttl": 215,
+      "hit_rate": 0.9960571449371171,
+      "freshness": 0.9647265969466658,
+      "reward": 0.9835249257409365
+    },
+    {
+      "episode": 16,
+      "state": "high_fresh_low",
+      "action": "increase",
+      "old_ttl": 215,
+      "new_ttl": 322,
+      "hit_rate": 0.9416332321795129,
+      "freshness": 0.956832582589111,
+      "reward": 0.9477129723433522
+    },
+    {
+      "episode": 17,
+      "state": "high_aging_high",
+      "action": "increase",
+      "old_ttl": 322,
+      "new_ttl": 483,
+      "hit_rate": 0.9570845095737863,
+      "freshness": 0.9471309269147936,
+      "reward": 0.9531030765101892
+    },
+    {
+      "episode": 18,
+      "state": "high_stale_medium",
+      "action": "maintain",
+      "old_ttl": 483,
+      "new_ttl": 483,
+      "hit_rate": 0.9790140937321801,
+      "freshness": 0.9471309269147936,
+      "reward": 0.9662608270052255
+    },
+    {
+      "episode": 19,
+      "state": "low_aging_medium",
+      "action": "maintain",
+      "old_ttl": 483,
+      "new_ttl": 483,
+      "hit_rate": 0.8151652077350531,
+      "freshness": 0.9471309269147936,
+      "reward": 0.8679514954069494
+    },
+    {
+      "episode": 20,
+      "state": "medium_fresh_high",
+      "action": "decrease",
+      "old_ttl": 483,
+      "new_ttl": 338,
+      "hit_rate": 0.9160282977406055,
+      "freshness": 0.9557731018664148,
+      "reward": 0.9319262193909292
+    },
+    {
+      "episode": 21,
+      "state": "medium_stale_high",
+      "action": "decrease",
+      "old_ttl": 338,
+      "new_ttl": 236,
+      "hit_rate": 0.8791384330610563,
+      "freshness": 0.9630440702898609,
+      "reward": 0.9127006879525782
+    },
+    {
+      "episode": 22,
+      "state": "low_aging_high",
+      "action": "decrease",
+      "old_ttl": 236,
+      "new_ttl": 165,
+      "hit_rate": 0.8392329061101438,
+      "freshness": 0.9690991729704347,
+      "reward": 0.8911794128542601
+    },
+    {
+      "episode": 23,
+      "state": "medium_aging_high",
+      "action": "decrease",
+      "old_ttl": 165,
+      "new_ttl": 115,
+      "hit_rate": 0.8499622716449652,
+      "freshness": 0.9742025338597129,
+      "reward": 0.8996583765308642
+    },
+    {
+      "episode": 24,
+      "state": "low_fresh_high",
+      "action": "increase",
+      "old_ttl": 115,
+      "new_ttl": 172,
+      "hit_rate": 0.8066414281520491,
+      "freshness": 0.9684505091899984,
+      "reward": 0.8713650605672288
+    },
+    {
+      "episode": 25,
+      "state": "medium_fresh_low",
+      "action": "maintain",
+      "old_ttl": 172,
+      "new_ttl": 172,
+      "hit_rate": 0.8717057279167971,
+      "freshness": 0.9684505091899984,
+      "reward": 0.9104036404260776
+    },
+    {
+      "episode": 26,
+      "state": "high_aging_low",
+      "action": "decrease",
+      "old_ttl": 172,
+      "new_ttl": 120,
+      "hit_rate": 0.9681988096772647,
+      "freshness": 0.9736476861652635,
+      "reward": 0.9703783602724643
+    },
+    {
+      "episode": 27,
+      "state": "medium_fresh_high",
+      "action": "decrease",
+      "old_ttl": 120,
+      "new_ttl": 84,
+      "hit_rate": 0.8556047168896899,
+      "freshness": 0.977952072407795,
+      "reward": 0.9045436590969319
+    },
+    {
+      "episode": 28,
+      "state": "high_aging_medium",
+      "action": "maintain",
+      "old_ttl": 84,
+      "new_ttl": 84,
+      "hit_rate": 0.9961695153415167,
+      "freshness": 0.977952072407795,
+      "reward": 0.988882538168028
+    },
+    {
+      "episode": 29,
+      "state": "high_fresh_high",
+      "action": "increase",
+      "old_ttl": 84,
+      "new_ttl": 126,
+      "hit_rate": 0.9608581327152106,
+      "freshness": 0.9729969137566339,
+      "reward": 0.9657136451317798
+    },
+    {
+      "episode": 30,
+      "state": "medium_stale_high",
+      "action": "decrease",
+      "old_ttl": 126,
+      "new_ttl": 88,
+      "hit_rate": 0.8673632673493277,
+      "freshness": 0.977433226653789,
+      "reward": 0.9113912510711122
+    },
+    {
+      "episode": 31,
+      "state": "medium_aging_medium",
+      "action": "maintain",
+      "old_ttl": 88,
+      "new_ttl": 88,
+      "hit_rate": 0.9019912264308516,
+      "freshness": 0.977433226653789,
+      "reward": 0.9321680265200265
+    },
+    {
+      "episode": 32,
+      "state": "high_fresh_low",
+      "action": "increase",
+      "old_ttl": 88,
+      "new_ttl": 132,
+      "hit_rate": 0.9271146188438243,
+      "freshness": 0.9723614600803717,
+      "reward": 0.9452133553384433
+    },
+    {
+      "episode": 33,
+      "state": "low_stale_low",
+      "action": "maintain",
+      "old_ttl": 132,
+      "new_ttl": 132,
+      "hit_rate": 0.8079226677868957,
+      "freshness": 0.9723614600803717,
+      "reward": 0.8736981847042862
+    },
+    {
+      "episode": 34,
+      "state": "medium_stale_high",
+      "action": "decrease",
+      "old_ttl": 132,
+      "new_ttl": 92,
+      "hit_rate": 0.8914024971549863,
+      "freshness": 0.9769260448252276,
+      "reward": 0.9256119162230828
+    },
+    {
+      "episode": 35,
+      "state": "medium_fresh_high",
+      "action": "decrease",
+      "old_ttl": 92,
+      "new_ttl": 64,
+      "hit_rate": 0.8692169783327833,
+      "freshness": 0.9807549910270125,
+      "reward": 0.913832183410475
+    },
+    {
+      "episode": 36,
+      "state": "medium_aging_medium",
+      "action": "maintain",
+      "old_ttl": 64,
+      "new_ttl": 64,
+      "hit_rate": 0.8789257596189743,
+      "freshness": 0.9807549910270125,
+      "reward": 0.9196574521821895
+    },
+    {
+      "episode": 37,
+      "state": "low_stale_medium",
+      "action": "maintain",
+      "old_ttl": 64,
+      "new_ttl": 64,
+      "hit_rate": 0.8069477748061399,
+      "freshness": 0.9807549910270125,
+      "reward": 0.8764706612944889
+    },
+    {
+      "episode": 38,
+      "state": "medium_aging_low",
+      "action": "maintain",
+      "old_ttl": 64,
+      "new_ttl": 64,
+      "hit_rate": 0.8591222284568005,
+      "freshness": 0.9807549910270125,
+      "reward": 0.9077753334848853
+    },
+    {
+      "episode": 39,
+      "state": "low_aging_medium",
+      "action": "maintain",
+      "old_ttl": 64,
+      "new_ttl": 64,
+      "hit_rate": 0.8198718604195834,
+      "freshness": 0.9807549910270125,
+      "reward": 0.884225112662555
+    },
+    {
+      "episode": 40,
+      "state": "medium_stale_low",
+      "action": "increase",
+      "old_ttl": 64,
+      "new_ttl": 96,
+      "hit_rate": 0.913283055162755,
+      "freshness": 0.9764297739604484,
+      "reward": 0.9385417426818323
+    },
+    {
+      "episode": 41,
+      "state": "low_stale_high",
+      "action": "decrease",
+      "old_ttl": 96,
+      "new_ttl": 67,
+      "hit_rate": 0.8020736988621906,
+      "freshness": 0.9803091015572808,
+      "reward": 0.8733678599402266
+    },
+    {
+      "episode": 42,
+      "state": "medium_fresh_medium",
+      "action": "decrease",
+      "old_ttl": 67,
+      "new_ttl": 46,
+      "hit_rate": 0.8728656209086602,
+      "freshness": 0.983684249827124,
+      "reward": 0.9171930724760458
+    },
+    {
+      "episode": 43,
+      "state": "medium_aging_medium",
+      "action": "maintain",
+      "old_ttl": 46,
+      "new_ttl": 46,
+      "hit_rate": 0.8901730978792308,
+      "freshness": 0.983684249827124,
+      "reward": 0.9275775586583881
+    },
+    {
+      "episode": 44,
+      "state": "medium_fresh_medium",
+      "action": "decrease",
+      "old_ttl": 46,
+      "new_ttl": 32,
+      "hit_rate": 0.9106400494895559,
+      "freshness": 0.9863917236512045,
+      "reward": 0.9409407191542154
+    },
+    {
+      "episode": 45,
+      "state": "medium_aging_low",
+      "action": "maintain",
+      "old_ttl": 32,
+      "new_ttl": 32,
+      "hit_rate": 0.8553781550431954,
+      "freshness": 0.9863917236512045,
+      "reward": 0.907783582486399
+    },
+    {
+      "episode": 46,
+      "state": "low_fresh_medium",
+      "action": "increase",
+      "old_ttl": 32,
+      "new_ttl": 48,
+      "hit_rate": 0.8308435109846386,
+      "freshness": 0.9833333333333333,
+      "reward": 0.8918394399241165
+    },
+    {
+      "episode": 47,
+      "state": "high_aging_high",
+      "action": "maintain",
+      "old_ttl": 48,
+      "new_ttl": 48,
+      "hit_rate": 0.9417141786477851,
+      "freshness": 0.9833333333333333,
+      "reward": 0.9583618405220043
+    },
+    {
+      "episode": 48,
+      "state": "medium_fresh_medium",
+      "action": "decrease",
+      "old_ttl": 48,
+      "new_ttl": 33,
+      "hit_rate": 0.8762511889248549,
+      "freshness": 0.9861807300401858,
+      "reward": 0.9202230053709872
+    },
+    {
+      "episode": 49,
+      "state": "medium_aging_high",
+      "action": "decrease",
+      "old_ttl": 33,
+      "new_ttl": 30,
+      "hit_rate": 0.8440704588175143,
+      "freshness": 0.9868238430826317,
+      "reward": 0.9011718125235613
+    },
+    {
+      "episode": 50,
+      "state": "low_aging_medium",
+      "action": "maintain",
+      "old_ttl": 30,
+      "new_ttl": 30,
+      "hit_rate": 0.8330506375457519,
+      "freshness": 0.9868238430826317,
+      "reward": 0.8945599197605039
+    }
+  ],
+  "agent_data": {
+    "q_table": {
+      "high_fresh_medium": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.33021833370611575
+      },
+      "high_stale_high": {
+        "increase": 0.0,
+        "decrease": 0.10219318250330958,
+        "maintain": 0.0
+      },
+      "medium_aging_high": {
+        "increase": 0.0,
+        "decrease": 0.270134268136998,
+        "maintain": 0.0
+      },
+      "medium_stale_medium": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.0
+      },
+      "medium_aging_medium": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.4246360833290608
+      },
+      "high_fresh_high": {
+        "increase": 0.09657136451317799,
+        "decrease": 0.0,
+        "maintain": 0.0
+      },
+      "low_aging_low": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.08780204847114459
+      },
+      "medium_stale_high": {
+        "increase": 0.0,
+        "decrease": 0.2852928669670122,
+        "maintain": 0.0
+      },
+      "high_aging_medium": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.18380469598682242
+      },
+      "medium_stale_low": {
+        "increase": 0.19115016409784483,
+        "decrease": 0.0,
+        "maintain": 0.0
+      },
+      "medium_fresh_medium": {
+        "increase": 0.0,
+        "decrease": 0.35337601907898375,
+        "maintain": 0.0
+      },
+      "low_fresh_medium": {
+        "increase": 0.10572636663122569,
+        "decrease": 0.0,
+        "maintain": 0.0
+      },
+      "low_stale_low": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.18263430417845092
+      },
+      "high_fresh_low": {
+        "increase": 0.20167343487274725,
+        "decrease": 0.0,
+        "maintain": 0.0
+      },
+      "low_fresh_low": {
+        "increase": 0.0,
+        "decrease": 0.10286753739468235,
+        "maintain": 0.0
+      },
+      "low_stale_high": {
+        "increase": 0.0,
+        "decrease": 0.08733678599402267,
+        "maintain": 0.0
+      },
+      "high_aging_low": {
+        "increase": 0.0,
+        "decrease": 0.10696159215422558,
+        "maintain": 0.09505113202368626
+      },
+      "high_stale_medium": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.09662608270052256
+      },
+      "high_aging_high": {
+        "increase": 0.10456838601654034,
+        "decrease": 0.0,
+        "maintain": 0.12151254207923153
+      },
+      "low_aging_medium": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.2865307920525489
+      },
+      "medium_fresh_high": {
+        "increase": 0.0,
+        "decrease": 0.2798508883434332,
+        "maintain": 0.0
+      },
+      "low_aging_high": {
+        "increase": 0.0,
+        "decrease": 0.09831532771072388,
+        "maintain": 0.0
+      },
+      "low_stale_medium": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.11332342415648
+      },
+      "low_fresh_high": {
+        "increase": 0.08713650605672289,
+        "decrease": 0.0,
+        "maintain": 0.0
+      },
+      "medium_fresh_low": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.12076001407615818
+      },
+      "high_stale_low": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.0
+      },
+      "medium_aging_low": {
+        "increase": 0.0,
+        "decrease": 0.0,
+        "maintain": 0.18963960033580538
+      }
+    },
+    "hyperparameters": {
+      "learning_rate": 0.1,
+      "discount_factor": 0.9,
+      "epsilon": 0.1
+    },
+    "statistics": {
+      "episodes": 50,
+      "total_reward": 45.92025341043837
+    }
+  },
+  "created_at": "2026-03-16T21:40:13.649160"
+}

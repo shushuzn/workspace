@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:48:45.155061
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 520-560 of 1140)
+    sector_impact = {
+        "科技": ["科技", "数字", "互联网", "AI"],
+        "金融": ["银行", "保险", "券商", "金融"],
+        "地产": ["房地产", "地产", "楼市"],
+        "消费": ["消费", "零售", "家电", "汽车"],
+        "新能源": ["新能源", "光伏", "锂电", "储能"],
+    }
+    
+    policy_news = []
+    for news in news_list:
+        title = news.get('title', '')
+        for kw in policy_keywords:
+            if kw in title:
+                policy_news.append(news)
+                break
+    
+    if not policy_news:
+        return ""
+    
+    # 分析政策影响的行业
+    affected_sectors = set()
+    for news in policy_news:
+        sector = news.get('sector', '通用')
+        title = news.get('title', '')
+        
+        for sec, keywords in sector_impact.items():
+            for kw in keywords:
+                if kw in title:
+                    affected_sectors.add(sec)
+                    break
+    
+    if affected_sectors:
+        return f"政策关注: {', '.join(list(affected_sectors)[:3]})"
+    return ""
+
+
+# ============================================================
+# 数据管理
+# ============================================================
+
+class NewsData:
+
+[580 more lines. Use start_line=561 to continue.]

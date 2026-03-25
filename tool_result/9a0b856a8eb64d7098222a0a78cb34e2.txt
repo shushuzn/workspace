@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:46:35.351460
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_hub.py  (lines 450-520 of 546)
+    {GREEN}db{RESET}        数据库管理 (stats/recent/cleanup/export)
+    {GREEN}cache{RESET}     缓存管理 (stats/clear/cleanup)
+
+  {BOLD}抓取:{RESET}
+    {GREEN}fetch{RESET}     抓取新闻（不推送）
+    {GREEN}quick{RESET}     快速模式
+    {GREEN}server{RESET}    启动RSS服务
+    {GREEN}export{RESET}    导出新闻(JSON/CSV)
+
+  {BOLD}推送:{RESET}
+    {GREEN}feishu{RESET}    飞书推送
+    {GREEN}qq{RESET}        QQ推送
+    {GREEN}wechat{RESET}    微信企业推送
+    {GREEN}telegram{RESET}  Telegram推送
+    {GREEN}discord{RESET}   Discord推送
+    {GREEN}slack{RESET}     Slack推送
+    {GREEN}email{RESET}     邮件推送
+    {GREEN}webhook{RESET}   通用Webhook
+
+  {BOLD}分析:{RESET}
+    {GREEN}analyze{RESET}   LLM分析
+    {GREEN}sentiment{RESET} 市场情绪
+    {GREEN}hot{RESET}       热点话题
+    {GREEN}trends{RESET}    趋势分析
+    {GREEN}score{RESET}     新闻评分
+
+  {BOLD}管理:{RESET}
+    {GREEN}db{RESET}        数据库
+    {GREEN}cache{RESET}     缓存
+    {GREEN}config{RESET}    配置
+    {GREEN}history{RESET}   历史
+    {GREEN}search{RESET}    搜索
+    {GREEN}schedule{RESET}  定时任务
+
+  {BOLD}其他:{RESET}
+    {GREEN}test{RESET}      测试所有
+    {GREEN}dashboard{RESET} Web仪表盘
+    {GREEN}report{RESET}   每日简报
+    {GREEN}shortcuts{RESET} 快捷方式
+    {GREEN}api{RESET}       REST API
+    {GREEN}process{RESET}   新闻处理
+    {GREEN}telegram{RESET}  Telegram推送
+    {GREEN}discord{RESET}   Discord推送
+    {GREEN}slack{RESET}     Slack推送
+    {GREEN}email{RESET}     邮件推送
+    {GREEN}webhook{RESET}   通用Webhook
+    {GREEN}api{RESET}       启动REST API服务器
+    {GREEN}process{RESET}   新闻处理(去重/分类)
+    {GREEN}config{RESET}    配置管理
+    {GREEN}history{RESET}   通知历史
+    {GREEN}score{RESET}     新闻评分排行
+    {GREEN}shortcuts{RESET} CLI快捷方式
+    {GREEN}sub{RESET}       订阅管理
+    {GREEN}watch{RESET}     关键词监控
+    {GREEN}analyze{RESET}   LLM智能分析 [条数]
+    {GREEN}sentiment{RESET} 市场情绪分析
+    {GREEN}help{RESET}      显示帮助
+
+  {BOLD}飞书子命令:{RESET}
+    test       测试连接
+    digest     摘要推送 (推荐)
+    rich       深度分析 (带统计图表)
+    hourly     整点简报
+    multigroup 多群组推送
+    stats      发送统计
+    template   模板管理
+    alert      关键词告警
+    all        全部推送 (8条)
+    compact    紧凑视图 (纯文本)
+    preview    预览新闻 (不发送)
+    daily      日报
+
+[26 more lines. Use start_line=521 to continue.]

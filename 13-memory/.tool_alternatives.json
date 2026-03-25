@@ -1,0 +1,22 @@
+{
+  "alternatives": {
+    "brainstorm_workflow": [
+      "brainstorm_quick",
+      "brainstorm_scamper"
+    ],
+    "auto_discover": [
+      "tools_registry"
+    ],
+    "export_format": [
+      "report_002_export"
+    ],
+    "optimize_master": [
+      "smart_cache",
+      "batch_tools"
+    ],
+    "roadmap_master": [
+      "gantt_chart",
+      "dashboard_view"
+    ]
+  }
+}

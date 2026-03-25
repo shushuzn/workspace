@@ -1,0 +1,103 @@
+# tool_name: read_file
+# created_at: 2026-03-21T12:59:49.706727
+# ---
+# Python
+__pycache__/
+*.py[cod]
+*.so
+.Python
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+npm-debug.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# 日志文件
+*.log
+*.jsonl
+logs/
+
+# 测试输出
+tests/test_output/
+
+# 大文件
+*.pdf
+*.zip
+*.tar.gz
+*.mp4
+*.mov
+
+# 临时文件
+*.tmp
+*.bak
+
+# 环境变量 (敏感信息)
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# 实时会话数据 (不提交)
+token_usage.json
+chats.json
+config.json
+sessions/
+*.session.json
+
+# 缓存
+data/cache/
+embedding_cache/
+file_store/
+50-cache/
+
+# 模型文件
+models/
+
+# 备份
+security_backups/
+99-backups/
+
+# 子仓库 (独立上下文)
+80-PROJECTS/
+
+# 数据收集器
+40-arxiv/
+41-medium/
+42-hackernews/
+60-DATA/
+08-collectors/
+
+# 归档
+99-archive-归档/
+90-archive/
+91-logs/
+tool_result/  
+21-reports/stock-analysis/  
+workflow_dashboard.html  
+start.bat 
+13-memory/.compress_cache/  
+13-memory/.snapshots/  
+13-memory/.undoredo/  
+13-memory/.tool_discover*.json  
+memory/  
+flow-archive/ 
+13-memory/.ci_config.json  
+13-memory/.dependencies.json  
+13-memory/.retry_log.json  
+13-memory/.tool_alternatives.json  
+13-memory/.workflow_alerts.json  
+13-memory/.workflow_guard_log.json  
+13-memory/.workflow_schedule.json  
+13-memory/.workflow_version.json  
+13-memory/.workflow_registry.json 

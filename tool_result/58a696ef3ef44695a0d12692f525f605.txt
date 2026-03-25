@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T11:16:25.859497
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py  (lines 290-320 of 322)
+            print("-" * 60)
+            for t in trends[:10]:
+                arrow = "↑" if t["change_pct"] > 0 else "↓"
+                print(f"{t['symbol']:8} {arrow} {t['change_pct']:+7.1f}%  ${t['price_start']:.2f} → ${t['price_end']:.2f}")
+        else:
+            print("[Trends] No data")
+        return
+
+
+    # Sectors
+    if args.sectors:
+        sectors = get_all_sectors()
+        print("\n# Available Sectors")
+        for s in sectors:
+            count = len(get_symbols_by_sector(s))
+            print(f"  - {s}: {count} stocks")
+        return
+    
+    if args.sector:
+        sector_name = args.sector[0]
+        symbols = get_symbols_by_sector(sector_name)
+        if not symbols:
+            print(f"[Sector] Unknown sector: {sector_name}")
+            print("Use --sectors to see available sectors")
+            return
+        results = analyze_multiple(symbols)
+        print(sector_report(results))
+        return
+
+
+if __name__ == "__main__":
+
+[2 more lines. Use start_line=321 to continue.]

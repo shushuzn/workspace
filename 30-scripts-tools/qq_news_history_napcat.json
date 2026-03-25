@@ -1,0 +1,25 @@
+{
+  "sent": [
+    {
+      "title": "测试新闻标题",
+      "url": "https://example.com/news",
+      "time": "2026-03-22T21:46:38.577575"
+    },
+    {
+      "title": "OpenClaw 新闻推送测试",
+      "url": "https://github.com/openclaw",
+      "time": "2026-03-22T21:47:47.266338"
+    },
+    {
+      "title": "OpenClaw 新闻推送系统上线",
+      "url": "https://github.com/openclaw",
+      "time": "2026-03-22T21:49:12.305104"
+    },
+    {
+      "title": "36氪：AI芯片领域新突破，国产算力迎来春天",
+      "url": "https://36kr.com/p/12345678",
+      "time": "2026-03-22T21:49:26.123001"
+    }
+  ],
+  "count": 4
+}

@@ -1,0 +1,72 @@
+{
+  "topic": "\"工作站优化\"",
+  "method": "Six Thinking Hats",
+  "hats": {
+    "WHITE": {
+      "name": "White Hat (白帽)",
+      "emoji": "[W]",
+      "focus": "Facts and Information",
+      "questions": [
+        "What facts do we know?",
+        "What information is missing?",
+        "What do we need to find out?",
+        "What are the key data points?"
+      ]
+    },
+    "RED": {
+      "name": "Red Hat (红帽)",
+      "emoji": "[R]",
+      "focus": "Emotions and Intuition",
+      "questions": [
+        "What do I feel about \"工作站优化\"?",
+        "What are my gut reactions?",
+        "What does my intuition tell me?",
+        "What emotions does \"工作站优化\" topic evoke?"
+      ]
+    },
+    "BLACK": {
+      "name": "Black Hat (黑帽)",
+      "emoji": "[B]",
+      "focus": "Critical Judgment and Risks",
+      "questions": [
+        "What are the dangers?",
+        "What might go wrong?",
+        "What are the weaknesses?",
+        "Why might \"工作站优化\" fail?"
+      ]
+    },
+    "YELLOW": {
+      "name": "Yellow Hat (黄帽)",
+      "emoji": "[Y]",
+      "focus": "Optimism and Benefits",
+      "questions": [
+        "What are the benefits?",
+        "What is the best case scenario?",
+        "What value does \"工作站优化\" create?",
+        "Why could \"工作站优化\" work?"
+      ]
+    },
+    "GREEN": {
+      "name": "Green Hat (绿帽)",
+      "emoji": "[G]",
+      "focus": "Creative and Possibilities",
+      "questions": [
+        "What are new possibilities?",
+        "What are alternatives?",
+        "What wild ideas emerge?",
+        "What if we think outside the box?"
+      ]
+    },
+    "BLUE": {
+      "name": "Blue Hat (蓝帽)",
+      "emoji": "[L]",
+      "focus": "Process Control and Summary",
+      "questions": [
+        "What is our next step?",
+        "What have we achieved?",
+        "How should we proceed?",
+        "What summary can we make?"
+      ]
+    }
+  }
+}

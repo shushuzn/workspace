@@ -1,0 +1,16 @@
+{
+  "model": "GaussianProcessRegressor",
+  "features": [
+    "E_Jcm2",
+    "v_mms",
+    "co_ratio"
+  ],
+  "kernel": "RBF_v2",
+  "performance": {
+    "r2": 0.7722940431161971,
+    "mae": 495.4742997682397,
+    "uncertainty_pct": 53.78513417565739,
+    "level": "GOOD"
+  },
+  "optimization_date": "2026-03-06T11:09:13.247444"
+}

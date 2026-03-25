@@ -1,0 +1,54 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T00:53:28.730388
+# ---
+
+[1m[36m──────────────────────────────────────────────────[0m
+[1m[36m  NewsHub Feishu[0m
+[1m[36m──────────────────────────────────────────────────[0m
+
+[34m[INFO][0m Mode: digest
+[34m[INFO][0m Time: 2026-03-23 00:52:01
+
+[1m[36m──────────────────────────────────────────────────[0m
+[1m[36m  NewsHub Fetcher[0m
+[1m[36m──────────────────────────────────────────────────[0m
+
+[34m[INFO][0m Time: 2026-03-23 00:52:01
+[34m[INFO][0m Fetching 金十快讯...
+[32m[OK]  [0m金十快讯: +20 items
+[34m[INFO][0m Fetching Investing...
+[32m[OK]  [0mInvesting: +10 items
+[34m[INFO][0m Fetching Seeking Alpha...
+[32m[OK]  [0mSeeking Alpha: +7 items
+
+[1m[36m──────────────────────────────────────────────────[0m
+[1m[36m  Results[0m
+[1m[36m──────────────────────────────────────────────────[0m
+
+  Total: [1m37[0m items
+
+[34m[INFO][0m Total: 37 | New: 27
+[34m[INFO][0m Token: t-g1043n0t2YJI5...
+
+[32m[OK]  [0mZelenskiy urges allies to keep up pressure on...
+[32m[OK]  [0mTreasury’s Bessent says US has ’plenty’ of fu...
+[32m[OK]  [0mIran, U.S. trade barbs as Hormuz tensions gro...
+[32m[OK]  [0mIsrael strikes main bridge in south Lebanon, ...
+[32m[OK]  [0mCuba begins recovery efforts after second gri...
+
+
+[1m[36m──────────────────────────────────────────────────[0m
+[1m[36m  Summary[0m
+[1m[36m──────────────────────────────────────────────────[0m
+
+  Mode:     digest
+  Fetched:  37
+  New:      27
+  Sent:     [1m5[0m
+
+  [32mAll messages sent successfully![0m
+
+[1m[36m──────────────────────────────────────────────────[0m
+[1m[36m  Feishu Push[0m
+[1m[36m──────────────────────────────────────────────────[0m
+

@@ -1,0 +1,62 @@
+# tool_name: read_file
+# created_at: 2026-03-22T01:56:45.088849
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_001.py  (lines 120-175 of 396)
+            week52_high=meta.get("fiftyTwoWeekHigh", price * 1.2) or price * 1.2,
+            week52_low=meta.get("fiftyTwoWeekLow", price * 0.8) or price * 0.8,
+            beta=meta.get("beta", 1.0) or 1.0
+        )
+        return quote
+    except Exception as e:
+        print(f"   X 行情获取失败: {e}")
+        return None
+
+# ============================================================
+# 估值模型
+# ============================================================
+
+def calculate_target_price(quote: StockQuote, growth_rate: float = 0.12, pe_target: float = 30.0) -> ValuationResult:
+    """计算目标价 - 基于EPS的合理估值"""
+    
+    # 当前EPS已经是annual
+    eps_current = quote.eps if quote.eps > 0 else (quote.price / (quote.pe_ratio or 30))
+    
+    # 预测未来EPS
+    eps_future = eps_current * (1 + growth_rate)
+    
+    # PE估值法：未来EPS * 目标PE
+    pe_valuation = eps_future * pe_target
+    
+    # 简化DCF：使用Gordon Growth Model
+    # 假设 FCF/EPS = 0.85 (85% conversion)
+    fcf_per_share = eps_current * 0.85
+    dcf_value = fcf_per_share * (1 + growth_rate) / (0.10 - 0.03)
+    
+    # 综合估值：PE法60% + DCF法40%
+    target = pe_valuation * 0.6 + dcf_value * 0.4
+    
+    # 上涨空间
+    upside = (target - quote.price) / quote.price * 100
+    
+    # 评级
+    if upside > 25:
+        rating = "STRONG_BUY"
+    elif upside > 15:
+        rating = "BUY"
+    elif upside > -5:
+        rating = "HOLD"
+    return ValuationResult(
+        pe_current=quote.pe_ratio,
+        pe_target=pe_target,
+        pe_valuation=round(pe_valuation, 2),
+        dcf_value=round(dcf_value, 2),
+        target_price=round(target, 2),
+        upside_pct=round(upside, 1),
+        rating=rating
+    )
+
+# ============================================================
+# 技术分析
+# ============================================================
+
+[221 more lines. Use start_line=176 to continue.]

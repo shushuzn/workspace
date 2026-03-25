@@ -1,0 +1,187 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T20:59:50.891599
+# ---
+1:        {"tag": "hr"},
+2:    }
+3:    
+4:    if battery:
+5:        icon = "🔌" if battery.power_plugged else "🔋"
+6:        elements.append({"tag": "div", "text": {"tag": "lark_md", "content": f"{icon} **电池:** {battery.percent}% {'已接通电源' if battery.power_plugged else '使用电池'}"}})
+7:    
+8:    elements.extend([
+9:        {"tag": "div", "text": {"tag": "lark_md", "content": f"**运行时间:** {str(uptime).split('.')[0]}"}},
+10:        {"tag": "div", "text": {"tag": "lark_md", "content": f"**系统:** {platform.system()} {platform.release()}"}},
+11:        {"tag": "hr"},
+12:        {"tag": "note", "elements": [{"tag": "plain_text", "content": f"OpenClaw Monitor · {datetime.now().strftime('%Y-%m-%d %H:%M')}"}]}
+13:    ])
+14:    
+15:    client.send_poster("🖥️ 系统监控", elements)
+16:    print("[OK] Monitor report sent")
+19:# ============================================================
+20:# 6. 每日报告
+21:# ============================================================
+23:def cmd_daily(args):
+24:    """每日综合报告"""
+25:    client = get_client()
+26:    
+27:    now = datetime.now()
+28:    
+29:    # 读取新闻历史
+30:    hist_file = BASE_DIR / "news_history.json"
+31:    news_count = 0
+32:    if hist_file.exists():
+33:        try:
+34:            hist = json.load(open(hist_file, 'r', encoding='utf-8'))
+35:            today = now.strftime('%Y-%m-%d')
+36:            news_count = len([e for e in hist.get('sent', []) if today in e.get('time', '')])
+37:        except:
+38:            news_count = 0
+39:    
+40:    # 读取统计
+41:    stats = load_stats()
+42:    
+43:    # 构建报告
+44:    elements = [
+45:        {"tag": "div", "text": {"tag": "lark_md", "content": f"**📊 每日报告** `{now.strftime('%Y-%m-%d')}`"}},
+46:        {"tag": "hr"},
+47:        {"tag": "div", "text": {"tag": "lark_md", "content": f"**📰 新闻推送:** {news_count} 条今日已发"}},
+48:        {"tag": "div", "text": {"tag": "lark_md", "content": f"**📨 消息统计:** 共发送 {stats.get('sent', 0)} 条"}},
+49:        {"tag": "hr"},
+50:        {"tag": "div", "text": {"tag": "lark_md", "content": "**⏰ 定时任务状态**"}},
+51:        {"tag": "div", "text": {"tag": "lark_md", "content": "• 每5分钟: 新闻推送"}},
+52:        {"tag": "div", "text": {"tag": "lark_md", "content": "• 08/12/18/21点: 新闻摘要"}},
+53:        {"tag": "hr"},
+54:        {"tag": "div", "text": {"tag": "lark_md", "content": f"**📁 文件数:** {len(list(BASE_DIR.glob('*')))}"}},
+55:        {"tag": "div", "text": {"tag": "lark_md", "content": f"**⏱️ 报告时间:** {now.strftime('%H:%M')}"}},
+56:        {"tag": "hr"},
+57:        {"tag": "note", "elements": [{"tag": "plain_text", "content": f"OpenClaw Daily · {now.strftime('%Y-%m-%d')}"}]}
+58:    ]
+59:    
+60:    client.send_poster("📊 每日报告", elements)
+61:    print("[OK] Daily report sent")
+64:# ============================================================
+65:# 7. 统计
+66:# ============================================================
+68:def cmd_stats(args):
+69:    """发送统计信息"""
+70:    client = get_client()
+71:    stats = load_stats()
+72:    
+73:    elements = [
+74:        {"tag": "div", "text": {"tag": "lark_md", "content": "**📈 Feishu 助手统计**"}},
+75:        {"tag": "hr"},
+76:        {"tag": "div", "text": {"tag": "lark_md", "content": f"**✅ 发送成功:** {stats.get('sent', 0)}"}},
+77:        {"tag": "div", "text": {"tag": "lark_md", "content": f"**❌ 发送失败:** {stats.get('failed', 0)}"}},
+78:        {"tag": "hr"},
+79:        {"tag": "note", "elements": [{"tag": "plain_text", "content": f"统计时间: {datetime.now().strftime('%Y-%m-%d %H:%M')}"}]}
+80:    ]
+81:    
+82:    client.send_poster("📈 统计", elements)
+83:    print("[OK] Stats sent")
+86:# ============================================================
+87:# ============================================================
+89:def cmd_files(args):
+90:    """发送工作区文件列表"""
+91:    client = get_client()
+92:    
+93:    # 获取指定目录，默认为 30-scripts-tools
+94:    target = BASE_DIR if not args else Path(args[0])
+95:    
+96:    if not target.exists():
+97:        print(f"[ERROR] 目录不存在: {target}")
+98:        return
+99:    
+100:    # 统计
+101:    files = list(target.glob('*'))
+102:    dirs = [f for f in files if f.is_dir()]
+103:    file_count = len([f for f in files if f.is_file()])
+104:    
+105:    # 构建消息
+106:    lines = [f"📁 {target.name or '工作区'}\n"]
+107:    lines.append(f"文件: {file_count} 个, 目录: {len(dirs)} 个\n")
+108:    lines.append("-" * 30)
+109:    
+110:    # 列出子目录
+111:    for d in sorted(dirs)[:10]:
+112:        lines.append(f"📂 {d.name}/")
+113:    
+114:    # 列出 py 文件
+115:    py_files = list(target.glob('*.py'))[:15]
+116:    if py_files:
+117:        lines.append("")
+118:        lines.append("🐍 Python 文件:")
+119:        for f in py_files:
+120:            size = f.stat().st_size
+121:            lines.append(f"  • {f.name} ({size//1024}KB)")
+122:    
+123:    msg = '\n'.join(lines)
+124:    client.send_text(msg)
+125:    print(f"[OK] Files list sent: {file_count} files")
+128:# ============================================================
+129:# ============================================================
+131:def cmd_interactive(args):
+132:    """发送带按钮的交互卡片"""
+133:    client = get_client()
+134:    
+135:    elements = [
+136:        {"tag": "div", "text": {"tag": "lark_md", "content": "**🎛️ OpenClaw 控制面板**"}},
+137:        {"tag": "hr"},
+138:        {"tag": "action",
+139:         "actions": [
+140:             {"tag": "button", "text": {"tag": "plain_text", "content": "📰 新闻"}, "type": "primary", "value": {"action": "news"}},
+141:             {"tag": "button", "text": {"tag": "plain_text", "content": "📊 监控"}, "type": "default", "value": {"action": "monitor"}},
+142:             {"tag": "button", "text": {"tag": "plain_text", "content": "📋 日程"}, "type": "default", "value": {"action": "calendar"}},
+143:         ]},
+144:        {"tag": "hr"},
+145:        {"tag": "div", "text": {"tag": "lark_md", "content": "点击按钮触发对应功能"}},
+146:        {"tag": "note", "elements": [{"tag": "plain_text", "content": "OpenClaw · Interactive Panel"}]}
+147:    ]
+148:    
+149:    client.send_poster("🎛️ 控制面板", elements)
+150:    print("[OK] Interactive card sent")
+153:# ============================================================
+154:# ============================================================
+156:def main():
+157:    if len(sys.argv) < 2:
+158:        print(__doc__)
+159:        return
+160:    
+161:    cmd = sys.argv[1].lower()
+162:    args = sys.argv[2:]
+163:    
+164:    commands = {
+165:        'msg': cmd_msg,
+166:        'card': cmd_card,
+167:        'img': cmd_img,
+168:        'image': cmd_img,
+169:        'file': cmd_file,
+170:        'mention': cmd_mention,
+171:        'calendar': cmd_calendar,
+172:        'cal': cmd_calendar,
+173:        'contacts': cmd_contacts,
+174:        'users': cmd_contacts,
+175:        'search': cmd_search,
+176:        'monitor': cmd_monitor,
+177:        'daily': cmd_daily,
+178:        'stats': cmd_stats,
+179:        'files': cmd_files,
+180:        'interactive': cmd_interactive,
+181:        'interactive': cmd_interactive,
+182:        'todos': cmd_todos,
+183:        'todo': cmd_todos,
+184:    }
+185:    
+186:    if cmd in ('help', '-h', '--help'):
+187:        print(__doc__)
+188:        print("\n可用命令:")
+189:        for c in sorted(commands.keys()):
+190:            print(f"  {c}")
+191:        return
+192:    
+193:    if cmd in commands:
+194:        commands[cmd](args)
+195:    else:
+196:        print(f"[ERROR] 未知命令: {cmd}")
+197:        print("使用 `py feishu_assistant.py help` 查看帮助")
+200:if __name__ == "__main__":
+201:    main()

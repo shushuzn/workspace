@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "recognitions": [
+    {
+      "timestamp": "2026-03-20T00:38:59.555126",
+      "symbol": "TEST",
+      "patterns_found": 1,
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_recognitions": 1,
+    "patterns_found": 1
+  }
+}

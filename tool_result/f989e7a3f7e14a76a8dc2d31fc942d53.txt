@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:10:48.682080
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\screener_v2.py  (lines 80-120 of 187)
+            screener.filter_by_upside(criteria["min_upside"])
+        if "max_pe" in criteria:
+            screener.filter_by_pe(criteria["max_pe"])
+        if "max_peg" in criteria:
+            screener.filter_by_peg(criteria["max_peg"])
+        if "min_roe" in criteria:
+            screener.filter_by_roe(criteria["min_roe"])
+        if "sector" in criteria:
+            screener.filter_by_sector(criteria["sector"])
+    
+    screener.sort_by("score", reverse=True)
+    results = screener.top(20)
+    
+    if not results:
+        return "[Screener] No stocks match criteria"
+    
+    report = "# Advanced Screener Results\n\n"
+    
+    if criteria:
+        report += "## Criteria\n\n"
+        for k, v in criteria.items():
+            report += f"- **{k}:** {v}\n"
+        report += "\n"
+    
+    report += f"**Matches:** {len(results)}\n\n"
+    
+    report += "| Rank | Symbol | Score | Upside | P/E | PEG | ROE | Sector |\n"
+    report += "|------|--------|-------|--------|-----|-----|-----|--------|\n"
+    
+    for i, r in enumerate(results, 1):
+        from stock_pro.sectors import get_sector
+        sector = get_sector(r["symbol"])
+        report += f"| {i} | {r['symbol']} | {r['score']} | {r['upside']:+.1f}% | {r.get('pe', 'N/A')} | {r.get('peg', 'N/A')} | {r.get('roe', 'N/A')} | {sector} |\n"
+    
+    return report
+
+
+def value_picks():
+    """Find value stocks (low PE, high ROE)"""
+    screener = AdvancedScreener()
+    screener.execute()
+
+[67 more lines. Use start_line=121 to continue.]

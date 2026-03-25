@@ -1,0 +1,41 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T12:38:38.887587
+# ---
+ Volume in drive D has no label.
+ Volume Serial Number is 0E0F-B1B8
+
+ Directory of D:\OpenClaw\workspace\00-CORE
+
+2026/03/23  12:37    <DIR>          .
+2026/03/23  12:37    <DIR>          ..
+2026/03/23  12:37             7,874 AGENTS.md
+2026/03/23  12:37               168 HEARTBEAT.md
+2026/03/23  12:37               636 IDENTITY.md
+2026/03/23  12:37            10,928 MEMORY.md
+2026/03/23  12:37             1,673 SOUL.md
+2026/03/23  12:37            24,352 TODO.md
+2026/03/23  12:37               860 TOOLS.md
+2026/03/23  12:37               477 USER.md
+2026/03/23  12:37             5,021 WORKSPACE.md
+               9 File(s)         51,989 bytes
+
+ Directory of D:\OpenClaw\workspace\01-CONFIG
+
+2026/03/23  12:37    <DIR>          .
+2026/03/23  12:37    <DIR>          ..
+2026/03/17  23:47             4,560 .autonomous_config.json
+2026/03/17  23:47             7,839 .decision_log.json
+2026/03/17  23:47               192 .health_history.json
+2026/03/23  12:37               358 chats.json
+2026/03/23  12:37             7,709 config.json
+2026/03/18  07:45             2,258 DOMAIN-CONFIG.md
+2026/03/23  12:37               194 feishu_receive_ids.json
+2026/03/18  07:45             4,819 FELIXXII-DOMAIN-CONFIG.md
+2026/03/23  12:37    <DIR>          git-hooks
+2026/03/23  12:37    <DIR>          i18n
+2026/03/23  12:37    <DIR>          obsidian
+2026/03/23  12:37               401 requirements.txt
+2026/03/23  12:37    <DIR>          templates
+2026/03/23  12:37               251 token_usage.json
+              10 File(s)         28,581 bytes
+               6 Dir(s)  356,685,643,776 bytes free

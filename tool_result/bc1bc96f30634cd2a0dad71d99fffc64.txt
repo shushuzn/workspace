@@ -1,0 +1,287 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:42:23.249605
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 270-550 of 3745)
+    roic = fin["roic"]
+    
+    # Base case
+    near_term_g = min((eps_f - eps_t) / eps_t, 0.30) if eps_t > 0 else 0.15
+    
+    scenarios = {
+        "Bull": {"growth_mult": 1.3, "wacc_mult": 0.9},   # Higher growth, lower discount
+        "Base": {"growth_mult": 1.0, "wacc_mult": 1.0},
+        "Bear": {"growth_mult": 0.6, "wacc_mult": 1.2},   # Lower growth, higher discount
+    }
+    
+    results = {}
+    for name, params in scenarios.items():
+        wacc = max(0.07, min(0.045 + 0.055 * beta * 0.5 * params["wacc_mult"], 0.15))
+        g_term = min(roic * 0.4, 0.035)
+        
+        pv_fcf = 0
+        for y in range(1, 6):
+            g = near_term_g * params["growth_mult"] * (1 - y/5) + g_term * (y/5)
+            g = min(max(g, 0), 0.25)
+            eps_y = eps_t * (1 + g) ** y
+            pv_fcf += eps_y * 0.7 / (1 + wacc) ** y
+        
+        eps_5y = eps_t * (1 + near_term_g * params["growth_mult"]) ** 5
+        tv = eps_5y * 1.03 / (wacc - g_term)
+        pv_tv = tv / (1 + wacc) ** 5
+        
+        results[name] = pv_fcf + pv_tv
+    
+    return results
+
+def calc_5y_eps(q, fin):
+    """Calculate 5-year EPS projection"""
+    eps_t = q["eps_t"]
+    eps_f = q["eps_f"]
+    roic = fin["roic"]
+    
+    near_term_g = min((eps_f - eps_t) / eps_t, 0.30) if eps_t > 0 else 0.15
+    g_term = min(roic * 0.4, 0.035)
+    
+    projections = []
+    for y in range(1, 6):
+        g = near_term_g * (1 - y/5) + g_term * (y/5)
+        g = min(max(g, 0), 0.25)
+        eps_y = eps_t * (1 + g) ** y
+        projections.append({"year": y, "eps": eps_y, "growth": g * 100})
+    
+    return projections
+
+def calc_risk_metrics(q):
+    """Calculate risk metrics"""
+    price = q["price"]
+    beta = q["beta"]
+    w52h = q["w52h"]
+    w52l = q["w52l"]
+    
+    # VaR (Value at Risk) - 95% confidence
+    daily_var = price * beta * 0.02  # 2% daily vol estimate
+    var_95 = daily_var * 1.65  # 95% confidence
+    
+    # Max Drawdown from 52W high
+    max_dd_pct = (price - w52h) / w52h * 100
+    
+    # Distance from 52W low (upside if buying now)
+    from_low_pct = (price - w52l) / w52l * 100
+    
+    # Sharpe-like ratio (simplified)
+    sharpe = (q["eps_t"] / price) / (beta * 0.20) if beta > 0 else 0
+    
+    # Position in 52W range
+    range_pos = (price - w52l) / (w52h - w52l) * 100 if w52h > w52l else 50
+    
+    return {
+        "var_95": var_95,
+        "var_95_pct": var_95 / price * 100,
+        "max_dd_pct": max_dd_pct,
+        "from_low_pct": from_low_pct,
+        "sharpe": sharpe,
+        "range_pos": range_pos,
+    }
+
+def calc_technical(q):
+    """Simple technical analysis"""
+    price = q["price"]
+    w52h = q["w52h"]
+    w52l = q["w52l"]
+    
+    # Distance from key levels
+    dist_from_high = (w52h - price) / price * 100
+    dist_from_low = (price - w52l) / price * 100
+    
+    # Simple MA approximation (using 52W range)
+    # Assume price oscillates around midpoint
+    midpoint = (w52h + w52l) / 2
+    ma_status = "Above Average" if price > midpoint else "Below Average"
+    
+    # Trend assessment
+    range_pos = (price - w52l) / (w52h - w52l) if w52h > w52l else 0.5
+    if range_pos > 0.7:
+        trend = "Strong (Near High)"
+    elif range_pos > 0.4:
+        trend = "Neutral"
+    else:
+        trend = "Weak (Near Low)"
+    
+    return {
+        "dist_from_high": dist_from_high,
+        "dist_from_low": dist_from_low,
+        "midpoint": midpoint,
+        "ma_status": ma_status,
+        "trend": trend,
+        "range_pos": range_pos * 100,
+        "support": w52l * 1.1,  # Approximate support at 52W low + 10%
+        "resistance": w52h * 0.95,  # Approximate resistance at 52W high - 5%
+    }
+
+def calc_support_resistance(q):
+    """Calculate support and resistance levels"""
+    price = q["price"]
+    w52h = q["w52h"]
+    w52l = q["w52l"]
+    
+    range_size = w52h - w52l
+    
+    # Pivot points
+    pivot = (w52h + w52l + price) / 3
+    r1 = 2 * pivot - w52l
+    r2 = pivot + range_size * 0.382
+    r3 = pivot + range_size * 0.618
+    r4 = w52h  # 52W high as final resistance
+    
+    s1 = 2 * pivot - w52h
+    s2 = pivot - range_size * 0.382
+    s3 = pivot - range_size * 0.618
+    s4 = w52l  # 52W low as final support
+    
+    return {
+        "pivot": pivot,
+        "r1": r1, "r2": r2, "r3": r3, "r4": r4,
+        "s1": s1, "s2": s2, "s3": s3, "s4": s4,
+    }
+
+def calc_earnings_calendar(sym):
+    """Earnings calendar by sector"""
+    CALENDAR = {
+        "META": {"month": "Feb/May/Aug/Nov", "days_before": 14, "impact": "HIGH"},
+        "NVDA": {"month": "Feb/May/Aug/Nov", "days_before": 21, "impact": "VERY HIGH"},
+        "AAPL": {"month": "Jan/Apr/Jul/Oct", "days_before": 7, "impact": "MEDIUM"},
+        "MSFT": {"month": "Jan/Apr/Jul/Oct", "days_before": 14, "impact": "MEDIUM"},
+        "GOOGL": {"month": "Jan/Apr/Jul/Oct", "days_before": 14, "impact": "MEDIUM"},
+        "AMZN": {"month": "Jan/Apr/Jul/Oct", "days_before": 21, "impact": "HIGH"},
+        "JPM": {"month": "Jan/Apr/Jul/Oct", "days_before": 7, "impact": "LOW"},
+        "JNJ": {"month": "Jan/Apr/Jul/Oct", "days_before": 7, "impact": "LOW"},
+        "AMD": {"month": "Feb/May/Aug/Nov", "days_before": 21, "impact": "HIGH"},
+        "TSLA": {"month": "Jan/Apr/Jul/Oct", "days_before": 28, "impact": "VERY HIGH"},
+        "NFLX": {"month": "Jan/Apr/Jul/Oct", "days_before": 14, "impact": "HIGH"},
+        "COST": {"month": "Sep/Dec/Mar/Jun", "days_before": 7, "impact": "LOW"},
+        "KO": {"month": "Feb/May/Aug/Nov", "days_before": 7, "impact": "LOW"},
+        "WMT": {"month": "Mar/Jun/Aug/Nov", "days_before": 7, "impact": "LOW"},
+    }
+    return CALENDAR.get(sym, {"month": "Quarterly", "days_before": 14, "impact": "MEDIUM"})
+
+def calc_insider_sentiment(sym):
+    """Mock insider trading sentiment"""
+    INSIDER = {
+        "META": {"buy_30d": 12, "sell_30d": 2, "sentiment": "Very Bullish"},
+        "NVDA": {"buy_30d": 8, "sell_30d": 1, "sentiment": "Very Bullish"},
+        "AAPL": {"buy_30d": 3, "sell_30d": 5, "sentiment": "Neutral"},
+        "MSFT": {"buy_30d": 5, "sell_30d": 2, "sentiment": "Bullish"},
+        "GOOGL": {"buy_30d": 4, "sell_30d": 1, "sentiment": "Bullish"},
+        "AMZN": {"buy_30d": 6, "sell_30d": 3, "sentiment": "Bullish"},
+        "JPM": {"buy_30d": 2, "sell_30d": 1, "sentiment": "Bullish"},
+        "TSLA": {"buy_30d": 1, "sell_30d": 8, "sentiment": "Bearish"},
+        "AMD": {"buy_30d": 5, "sell_30d": 2, "sentiment": "Bullish"},
+    }
+    return INSIDER.get(sym, {"buy_30d": 3, "sell_30d": 3, "sentiment": "Neutral"})
+
+def calc_technical_indicators(q, fin):
+    """Calculate RSI and other technical indicators"""
+    price = q["price"]
+    w52h = q["w52h"]
+    w52l = q["w52l"]
+    beta = q["beta"]
+    
+    # RSI estimate based on price position
+    range_pos = (price - w52l) / (w52h - w52l) if w52h > w52l else 50
+    rsi = 50 + (range_pos - 50) * 0.8  # Estimate RSI
+    
+    # MACD signal
+    macd_signal = "Buy" if range_pos > 40 and range_pos < 70 else "Sell" if range_pos < 30 else "Neutral"
+    
+    # Moving averages (estimate based on typical trends)
+    if range_pos > 60:
+        ma_50 = price * 0.97
+        ma_200 = price * 0.88
+    elif range_pos < 40:
+        ma_50 = price * 1.03
+        ma_200 = price * 1.12
+    else:
+        ma_50 = price * 1.00
+        ma_200 = price * 1.00
+    
+    price_vs_ma50 = "Above" if price > ma_50 else "Below"
+    price_vs_ma200 = "Above" if price > ma_200 else "Below"
+    
+    # Bollinger Bands (estimate)
+    range_size = w52h - w52l
+    bb_upper = price + 0.1 * range_size
+    bb_lower = price - 0.1 * range_size
+    bb_width = (bb_upper - bb_lower) / price * 100
+    
+    # ATR (Average True Range) estimate
+    atr = price * 0.02 * beta  # Scaled by volatility
+    
+    # Price Momentum (12-month)
+    mom_12m = (price - w52l) / w52l * 100 - 50  # Relative position
+    
+    return {
+        "rsi": min(max(rsi, 10), 90),
+        "rsi_signal": "Overbought" if rsi > 70 else "Oversold" if rsi < 30 else "Neutral",
+        "macd": macd_signal,
+        "ma_50": ma_50,
+        "ma_200": ma_200,
+        "price_vs_ma50": price_vs_ma50,
+        "price_vs_ma200": price_vs_ma200,
+        "bb_upper": bb_upper,
+        "bb_middle": price,
+        "bb_lower": bb_lower,
+        "bb_width": bb_width,
+        "atr": atr,
+        "mom_12m": mom_12m,
+    }
+
+def calc_balance_sheet_health(fin, q):
+    """Balance sheet health analysis"""
+    de = fin["de"]
+    roe = fin["roe"]
+    nm = fin["nm"]
+    
+    # Altman Z-Score approximation for public companies
+    # Z = 1.2*X1 + 1.4*X2 + 3.3*X3 + 0.6*X4 + 1.0*X5
+    # Simplified: X1=WC/TA, X2=RE/TA, X3=EBIT/TA, X4=Equity/DEBT, X5=Sales/TA
+    z_score = 2.5 + 0.5 * (1 - de) + 0.3 * roe  # Simplified
+    
+    if z_score > 3:
+        zd_status = "Safe Zone"
+        zd_color = "Green"
+    elif z_score > 1.8:
+        zd_status = "Grey Zone"
+        zd_color = "Yellow"
+    else:
+        zd_status = "Distress Zone"
+        zd_color = "Red"
+    
+    # Current ratio estimate
+    if de < 0.5:
+        current_ratio = 2.0
+    elif de < 1.5:
+        current_ratio = 1.5
+    else:
+        current_ratio = 1.0
+    
+    # Debt capacity
+    if de < 0.5:
+        debt_capacity = "Strong"
+        headroom = 100
+    elif de < 1.5:
+        debt_capacity = "Moderate"
+        headroom = 50
+    else:
+        debt_capacity = "Limited"
+        headroom = 20
+    
+    return {
+        "z_score": z_score,
+        "z_status": zd_status,
+        "z_color": zd_color,
+        "current_ratio": current_ratio,
+        "debt_capacity": debt_capacity,
+        "headroom_pct": headroom,
+    }
+
+[3195 more lines. Use start_line=551 to continue.]

@@ -1,0 +1,20 @@
+{
+  "model": "GaussianProcessRegressor",
+  "n_samples_total": 220,
+  "n_samples_train": 176,
+  "n_samples_test": 44,
+  "features": [
+    "P_W",
+    "v_mms",
+    "E_Jcm2",
+    "co_ratio"
+  ],
+  "target": "sigma_Sm",
+  "performance": {
+    "r2": 0.3343691757092734,
+    "mae": 506.9852947189574,
+    "mean_uncertainty_Sm": 663.9729996119985,
+    "relative_uncertainty_pct": 94.89256590063508
+  },
+  "kernel": "1.31**2 * RBF(length_scale=[0.00776, 1.94e+03, 0.443, 0.00645]) + WhiteKernel(noise_level=1e-05)"
+}

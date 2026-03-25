@@ -1,0 +1,45 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T17:36:24.756973
+# ---
+
++==============================================================+
+|                    Stock PRO v20.0                          |
+|          Professional Stock Analysis Suite                  |
++==============================================================+
+
+# NVDA Analysis
+**时间:** 2026-03-22T17:36:19.200484 | **来源:** live
+
+## Valuation
+| Metric | Value | Assessment |
+|------|------|------|--------------------
+| Price | $172.70 | - |
+| Target | $269.00 | - |
+| Upside | +55.8% | Outperform |
+| Score | 65/100 | 良好 |
+| P/E | 35.2x | Strong Buy |
+
+## DCF Valuation
+| Scenario | Value | vs Price |
+| |-----------|-------|----------
+| Bull | $412.37 | +138.8% |
+| Base | $274.91 | +59.2% |
+| Bear | $137.46 | -20.4% |
+
+## Financial Metrics
+| Metric | Value |
+|------|------|
+| ROE | 58.0% |
+| Net Margin | 49.0% |
+| Gross Margin | 73.0% |
+| ROIC | 45.0% |
+| Rev Growth | 50.0% |
+
+## Risk Metrics
+| Beta | 1.70 |
+| Dividend | 0.00% |
+| Analyst | Outperform (25) |
+
+**Recommendation:** Outperform - Strong Buy
+
+*Stock PRO v12.0*

@@ -1,0 +1,29 @@
+# tool_name: read_file
+# created_at: 2026-03-22T23:29:24.294887
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 488-510 of 517)
+    for sent_type, news_list in sentiments.items():
+        if not news_list:
+            continue
+        icon = cp("+") if sent_type == "利好" else cn("-") if sent_type == "利空" else cne("=")
+        print(f"{icon} {c(Colors.BOLD, sent_type)} ({len(news_list)}):")
+        for n in news_list[:2]:
+            title = n.get('title', '')[:38]
+            print(f"  {title}")
+        if len(news_list) > 2:
+            print(f"  {cne('... +' + str(len(news_list) - 2) + ' more')}")
+    print()
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="News Manager v3.0")
+    parser.add_argument("cmd", choices=["fetch", "push", "status", "digest"], help="Command")
+    parser.add_argument("--limit", default="5", help="News limit")
+    parser.add_argument("--days", default="1", help="Days for digest")
+    args = parser.parse_args()
+    if args.cmd == "fetch":
+        cmd_fetch(args)
+    elif args.cmd == "push":
+        cmd_push(args)
+
+[7 more lines. Use start_line=511 to continue.]

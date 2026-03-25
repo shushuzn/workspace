@@ -1,0 +1,44 @@
+# tool_name: read_file
+# created_at: 2026-03-22T17:00:53.513532
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\sentiment.py  (lines 193-230 of 515)
+    
+    reports = RESEARCH_REPORTS.get(symbol, [])
+    filtered = []
+    for r in reports:
+        date = datetime.strptime(r["date"], "%Y-%m-%d")
+        if date >= cutoff:
+            filtered.append(r)
+    return filtered
+
+
+def research_report(symbols=None):
+    """Generate research reports summary"""
+    if symbols is None:
+        symbols = list(A.keys())[:20]
+    
+    report = "# Research Reports Summary\n\n"
+    
+    strong_buys = []
+    upgrades = []
+    downgrades = []
+    
+    for sym in symbols:
+        reports = get_research_reports(sym)
+        if not reports:
+            continue
+        
+        # Aggregate
+        actions = [r["action"] for r in reports]
+        avg_target = sum(r["target"] for r in reports) / len(reports)
+        
+        for r in reports:
+            if r["action"] in ("Upgrade", "Outperform", "Strong Buy", "Buy"):
+                strong_buys.append((sym, r))
+            elif r["action"] in ("Downgrade", "Underperform", "Sell"):
+                downgrades.append((sym, r))
+    
+    # Sort by conviction
+    strong_buys.sort(key=lambda x: x[1]["conviction"] == "High", reverse=True)
+
+[285 more lines. Use start_line=231 to continue.]

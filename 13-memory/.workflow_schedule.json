@@ -1,0 +1,10 @@
+{
+  "schedules": [
+    {
+      "workflow": "full",
+      "interval": 30,
+      "added": "2026-03-21T00:47:47.762331",
+      "last_run": null
+    }
+  ]
+}

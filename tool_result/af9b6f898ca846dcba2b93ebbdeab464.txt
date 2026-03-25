@@ -1,0 +1,84 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-21T13:28:24.436354
+# ---
+============================================================
+PAPER-ANALYZER-001 Deep Analysis Report
+============================================================
+
+Paper: 40-TOOLS/knowledge-cards/01-KNOWLEDGE-CARDS/tests/test_pdfs/2603.09753v1.pdf
+Library: pdfplumber
+Characters: 11833
+
+[STRUCTURE]
+  title: MISSING
+  abstract: FOUND
+  introduction: MISSING
+  methods: FOUND
+  results: FOUND
+  conclusion: FOUND
+
+[KEY INFO]
+  References: 18
+  Figures: 0
+  Tables: 0
+
+[TEXT PREVIEW]
+----------------------------------------
+The Richest Paradigm You're Not Using: Commercial Videogames at the Intersection of Human-
+Computer Interaction and Cognitive Science
+Jaap Munneke1, Jennifer E. Corbett2,3
+Affiliations
+1. Institute for Cognitive and Brain Health, Northeastern University
+2. Institute for Medical Engineering & Science, Massachusetts Institute of Technology
+3. Computer Science and Artificial Intelligence Lab, Massachusetts Institute of Technology
+
+Abstract
+Synthesizing from Corbett and Munneke (2025), who demonstrated that questions originating in human-
+computer interaction (HCI) and game design can be answered through the theoretical toolkit of cognitive
+science, this perspective argues that commercial videogames represent a largely underutilized research
+environment at the intersection of these two fields. Cognitive science has long relied on carefully controlled
+laboratory paradigms to study perception, attention, and executive functioning, raising persistent questions
+about ecological validity. HCI, by contrast, has spent decades developing methods for studying behavior in
+rich, complex, interactive environments, but has been less concerned with what that behavior reveals about
+underlying cognitive mechanisms. Commercial videogames sit precisely at this intersection. They are
+cognitively demanding by design, motivating by nature, and consistent enough across players to support
+systematic behavioral comparison. The affordance structure of a game does the work that experimental
+manipulations typically require of the researcher, instantiating cognitive demands that are genuine,
+sustained, and meaningful to the player. We argue that perception, attention, and executive functioning can
+be meaningfully studied within commercial games using a minimal observational toolkit of screen
+recording, eye tracking, and behavioral timing. We propose an affordance-cognition mapping framework
+as a systematic basis for game selection and research design and offer practical methodological
+recommendations for researchers wishing to work in this space.
+
+Commercial Videogames as a Testing Ground
+Every year, cognitive scientists publish thousands of studies on perception, attention, memory, and
+executive functioning in various academic journals. The vast majority of these studies share a common
+methodological approach. A participant sits in front of a screen and responds to stimuli that have been
+carefully stripped of real-world complexity, such as a flanker task (Eriksen & Eriksen, 1974), a spatial
+cueing paradigm (Posner et al., 1980) or an N-back sequence (Kirchner, 1958). The logic is the same
+independent of the used paradigm. By reducing the complex world to its essential, barebones variables, it
+is possible to isolate cognitive mechanisms with high precision. However, this reductionist approach raises
+a question of whether we are studying cognition as it actually operates in the real world, or are we studying
+a poor simulation of it? This question is not novel. Nearly 50 years ago, Neisser (1976) asked whether
+laboratory psychology was producing findings that could ever speak to cognition as it unfolds in the real
+world. This problem is not simply philosophical in nature as converging evidence shows that performance
+on certain cognitive tasks fails to predict real-world functioning that relies on the studied cognitive
+mechanism (Burgess et al., 2006; Chaytor et al., 2006; Chaytor & Schmitter-Edgecombe, 2003; Rosenholtz,
+2025). Attention, memory, and executive control as measured in the laboratory may not fully capture how
+these mechanisms operate when motivation is high, environmental demands are rich, and the consequences
+of performance are meaningful. This ecological validity question, long present in methodological
+discussions, points toward a push for expanding the experimental toolkit rather than replacing what already
+works. Commercial videogames represent a promising, if perhaps unexpected, candidate for bridging this
+gap.
+On any given day, millions of hours of gameplay are logged across the world (Bavelier et al., 2010;
+Przybylski & Weinstein, 2019). Players navigate three-dimensional environments under time pressure,
+track multiple moving objects simultaneously, switch rapidly between tasks, form and update spatial
+representations of vast virtual worlds, and make sequential decisions whose consequences play out across
+hundreds of subsequent events. Crucially, each of these demands is a direct reflection of deliberate game
+design choices. From the perspective of a cognitive scientist, this is extraordinary. In a single session of a
+modern action game such as Call of Duty or Elden Ring, a player may exercise selective attention, sustained
+vigilance, working memory, inhibitory control, and prospective planning. This all happens within a context
+that is genuinely engaging to the person gaming. The motivational problem that plagues laboratory research
+virtually disappears. Participants do not need to be externally motivated into sustain
+
+============================================================

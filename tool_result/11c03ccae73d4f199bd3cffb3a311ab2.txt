@@ -1,0 +1,147 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:17:03.052107
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\simple_ui.py  (lines 180-320 of 514)
+    </div>
+    
+    <script>
+        async function analyze() {
+            const sym = document.getElementById('symbol').value.toUpperCase();
+            const result = document.getElementById('result');
+            result.innerHTML = '<p>Loading...</p>';
+            result.style.display = 'block';
+            
+            try {
+                const resp = await fetch('/api/analyze/' + sym);
+                const data = await resp.json();
+                
+                if (data.error) {
+                    result.innerHTML = '<p style="color:#ff4757">Error: ' + data.error + '</p>';
+                } else {
+                    const scoreColor = data.score >= 75 ? '#00d26a' : data.score >= 60 ? '#7bed9f' : '#ffa502';
+                    result.innerHTML = `
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px">
+                            <div>
+                                <h3>${data.symbol} - ${data.name || ''}</h3>
+                                <div style="margin-top:15px">
+                                    <div style="margin:10px 0">
+                                        <span>Score:</span>
+                                        <span style="font-size:24px; color:${scoreColor}; font-weight:bold">${data.score}</span>
+                                    </div>
+                                    <div style="margin:10px 0">
+                                        <span>Upside:</span>
+                                        <span style="font-size:20px; color:${data.upside >= 0 ? '#00d26a' : '#ff4757'}">${data.upside?.toFixed(1)}%</span>
+                                    </div>
+                                    <div style="margin:10px 0">
+                                        <span>Price:</span>
+                                        <span style="font-size:20px">$${data.price?.toFixed(2)}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div style="margin:10px 0"><span>P/E:</span> <span>${data.pe?.toFixed(1)}x</span></div>
+                                <div style="margin:10px 0"><span>ROE:</span> <span>${data.roe?.toFixed(1)}%</span></div>
+                                <div style="margin:10px 0"><span>Dividend:</span> <span>${data.div?.toFixed(2)}%</span></div>
+                            </div>
+                        </div>
+                    `;
+                    loadChart(sym);
+                }
+            } catch (e) {
+                result.innerHTML = '<p style="color:#ff4757">Error: ' + e.message + '</p>';
+            }
+        }
+        
+        function loadChart(symbol) {
+            fetch('/api/chart/' + symbol)
+                .then(r => r.json())
+                .then(data => { if (!data.error) drawChart(data); });
+        }
+        
+        function drawChart(data) {
+            const canvas = document.getElementById('priceChart');
+            const ctx = canvas.getContext('2d');
+            const container = document.getElementById('chart-container');
+            container.style.display = 'block';
+            
+            const prices = data.history.map(h => h.price);
+            const width = container.clientWidth - 30;
+            canvas.width = width;
+            canvas.height = 200;
+            
+            const min = Math.min(...prices) * 0.98;
+            const max = Math.max(...prices) * 1.02;
+            const height = canvas.height - 40;
+            
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            // Grid
+            ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+            ctx.lineWidth = 1;
+            for (let i = 0; i <= 4; i++) {
+                const y = 20 + (height / 4) * i;
+                ctx.beginPath(); ctx.moveTo(50, y); ctx.lineTo(width - 10, y); ctx.stroke();
+            }
+            
+            // Price line
+            ctx.strokeStyle = '#00d26a';
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            prices.forEach((p, i) => {
+                const x = 50 + (width - 60) / (prices.length - 1) * i;
+                const y = 20 + height - ((p - min) / (max - min)) * height;
+                i === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+            });
+            ctx.stroke();
+        }
+        
+        document.getElementById('symbol').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') analyze();
+        });
+    </script>
+</body>
+</html>"""><th>Div</th></tr>
+                {''.join(make_row(s) for s in top)}
+            </table>
+        </div>
+    
+        <div class="card">
+            <h2>💰 Value Picks</h2>
+            <table>
+                <tr><th>Symbol</th><th>Score</th><th>Upside</th><th>Price</th><th>P/E</th><th>ROE</th><th>Div</th></tr>
+                {''.join(make_row(s) for s in growth)}
+            </table>
+        </div>
+        
+        <div class="card">
+            <h2>💵 Dividend Picks</h2>
+            <table>
+                <tr><th>Symbol</th><th>Score</th><th>Upside</th><th>Price</th><th>P/E</th><th>ROE</th><th>Div</th></tr>
+                {''.join(make_row(s) for s in dividend)}
+            </table>
+        </div>
+    </div>
+    
+    <script>
+        async function analyze() {
+            const sym = document.getElementById('symbol').value.toUpperCase();
+            const result = document.getElementById('result');
+            result.innerHTML = '<p>Loading...</p>';
+            result.style.display = 'block';
+            
+            try {
+                const resp = await fetch('/api/analyze/' + sym);
+                const data = await resp.json();
+                
+                if (data.error) {
+                    result.innerHTML = '<p style="color:#ff4757">Error: ' + data.error + '</p>';
+                } else {
+                    const scoreColor = data.score >= 75 ? '#00d26a' : data.score >= 60 ? '#7bed9f' : '#ffa502';
+                    result.innerHTML = `
+                        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px">
+                            <div>
+                                <h3>${data.symbol} - ${data.name || ''}</h3>
+                                <div style="margin-top:15px">
+                                    <div style="margin:10px 0">
+
+[194 more lines. Use start_line=321 to continue.]

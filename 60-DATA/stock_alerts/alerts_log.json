@@ -1,0 +1,49 @@
+{
+  "version": "1.0",
+  "alerts": [
+    {
+      "alert_id": "price_TEST_1",
+      "type": "price",
+      "symbol": "TEST",
+      "triggered_at": "2026-03-20T00:59:27.848295",
+      "details": {
+        "alert_id": "price_TEST_1",
+        "type": "price",
+        "symbol": "TEST",
+        "alert_type": "above",
+        "threshold": 105.0,
+        "current_price": 103.5,
+        "status": "triggered",
+        "created_at": "2026-03-20T00:59:27.842783",
+        "expires_at": "2026-12-31T23:59:59",
+        "triggered_at": "2026-03-20T00:59:27.848295",
+        "triggered_price": 106.0
+      }
+    },
+    {
+      "alert_id": "indicator_TEST_RSI_2",
+      "type": "indicator",
+      "symbol": "TEST",
+      "triggered_at": "2026-03-20T00:59:27.850256",
+      "details": {
+        "alert_id": "indicator_TEST_RSI_2",
+        "type": "indicator",
+        "symbol": "TEST",
+        "indicator": "RSI",
+        "condition": "below",
+        "threshold": 30.0,
+        "current_value": 35.0,
+        "status": "triggered",
+        "created_at": "2026-03-20T00:59:27.844696",
+        "triggered_at": "2026-03-20T00:59:27.850256",
+        "triggered_value": 28.0
+      }
+    }
+  ],
+  "stats": {
+    "total_alerts": 2,
+    "price_alerts": 1,
+    "indicator_alerts": 1,
+    "pattern_alerts": 0
+  }
+}

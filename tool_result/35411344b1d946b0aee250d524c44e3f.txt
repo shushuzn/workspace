@@ -1,0 +1,229 @@
+# tool_name: read_file
+# created_at: 2026-03-21T09:11:18.756987
+# ---
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+MULTI-AGENT-ORCHESTRATOR-001 Unified Multi-Agent Orchestrator
+Integrates all multi-agent capabilities with workflow system
+"""
+import json, sys, subprocess
+from pathlib import Path
+from datetime import datetime
+
+PERSONAS = ["planner", "executor", "critic", "learner", "coordinator", "innovator", "metacognition"]
+WORKFLOWS_FILE = Path("30-scripts-tools/workflows.json")
+
+# Routing rules
+ROUTING = {
+    "planner": ["plan", "analyze", "strategy", "roadmap", "设计", "规划", "分析"],
+    "executor": ["implement", "code", "build", "create", "run", "执行", "写代码", "实现"],
+    "critic": ["review", "check", "validate", "test", "审查", "检查", "测试", "验证"],
+    "learner": ["learn", "research", "study", "discover", "研究", "学习", "发现"],
+    "coordinator": ["orchestrate", "coordinate", "manage", "schedule", "协调", "管理", "调度"],
+    "innovator": ["innovate", "creative", "improve", "optimize", "创新", "改进", "优化"],
+    "metacognition": ["reflect", "think", "improve", "evaluate", "思考", "反思", "评估"]
+}
+
+STATS_FILE = Path("13-memory/.workflow_logs/master.json")
+LEARN_FILE = Path("13-memory/.multi_agent_learn/collaboration_history.json")
+
+def ensure_dir(p):
+    p.mkdir(parents=True, exist_ok=True)
+
+def analyze_intent(text):
+    """Analyze user intent and return best persona match"""
+    text_lower = text.lower()
+    scores = {p: 0 for p in ROUTING}
+    
+    for persona, keywords in ROUTING.items():
+        for kw in keywords:
+            if kw.lower() in text_lower:
+                scores[persona] += 1
+    
+    best = max(scores.items(), key=lambda x: x[1])
+    if best[1] == 0:
+        return "coordinator"
+    return best[0]
+
+def load_learn_history():
+    """Load learned history"""
+    if LEARN_FILE.exists():
+        return json.loads(LEARN_FILE.read_text(encoding="utf-8", errors="replace"))
+    return {"persona_scores": {}, "task_keywords": {}}
+
+def save_learn_history(history):
+    """Save learned history"""
+    ensure_dir(LEARN_FILE.parent)
+    LEARN_FILE.write_text(json.dumps(history, indent=2, ensure_ascii=False), encoding="utf-8")
+
+def get_best_persona(task_text):
+    """Get best persona based on learned patterns"""
+    history = load_learn_history()
+    scores = {}
+    
+    keywords = task_text.lower().split()
+    persona_scores = history.get("persona_scores", {})
+    
+    for keyword in keywords:
+        for persona, pscores in persona_scores.items():
+            if keyword in pscores:
+                scores[persona] = scores.get(persona, 0) + pscores[keyword]
+    
+    if not scores:
+        return analyze_intent(task_text)
+    
+    return max(scores.items(), key=lambda x: x[1])[0]
+
+def record_outcome(task, persona, success, keywords):
+    """Record task outcome for learning"""
+    history = load_learn_history()
+    
+    # Update persona-task scores
+    if "persona_scores" not in history:
+        history["persona_scores"] = {}
+    
+    for kw in keywords:
+        if persona not in history["persona_scores"]:
+            history["persona_scores"][persona] = {}
+        if kw not in history["persona_scores"][persona]:
+            history["persona_scores"][persona][kw] = 0
+        
+        if success:
+            history["persona_scores"][persona][kw] += 1
+        else:
+            history["persona_scores"][persona][kw] -= 0.5
+    
+    save_learn_history(history)
+
+def load_workflows():
+    """Load workflow configurations"""
+    if WORKFLOWS_FILE.exists():
+        return json.loads(WORKFLOWS_FILE.read_text(encoding="utf-8", errors="replace"))
+    return {}
+
+def orchestrate_task(task_text):
+    """Main orchestration entry point"""
+    print(f"\n[MULTI-AGENT ORCHESTRATOR]")
+    print(f"{'='*50}")
+    
+    # Step 1: Intent Analysis
+    print(f"\n[1] Intent Analysis...")
+    intent = analyze_intent(task_text)
+    print(f"    Detected: {intent.upper()}")
+    
+    # Step 2: Smart Routing (with learning)
+    print(f"\n[2] Smart Routing...")
+    best_persona = get_best_persona(task_text)
+    print(f"    Best Persona: {best_persona.upper()} (learned)")
+    
+    # Step 3: Execution Plan
+    print(f"\n[3] Execution Plan:")
+    steps = [
+        {"persona": "planner", "action": "plan"},
+        {"persona": best_persona, "action": "execute"},
+        {"persona": "critic", "action": "review"},
+        {"persona": "metacognition", "action": "reflect"}
+    ]
+    for i, step in enumerate(steps, 1):
+        print(f"    {i}. {step['persona'].upper()} -> {step['action']}")
+    
+    # Step 4: Execute via workflow
+    print(f"\n[4] Executing via Workflow...")
+    wf_map = {
+        "planner": "plan", "executor": "dev", "critic": "security",
+        "learner": "research", "coordinator": "full", "innovator": "quick",
+        "metacognition": "plan"
+    }
+    
+    wf_id = wf_map.get(best_persona, "quick")
+    
+    try:
+        result = subprocess.run(
+            ["python", "30-scripts-tools/workflow_master_001.py", "--run", wf_id],
+            capture_output=True, text=True, timeout=60
+        )
+        success = result.returncode == 0
+        print(f"    Workflow '{wf_id}': {'OK' if success else 'FAIL'}")
+    except Exception as e:
+        success = False
+        print(f"    Error: {e}")
+    
+    # Step 5: Record outcome
+    print(f"\n[5] Recording Outcome...")
+    keywords = task_text.lower().split()[:5]
+    record_outcome(task_text, best_persona, success, keywords)
+    
+    print(f"\n{'='*50}")
+    print(f"[COMPLETE] Orchestration done")
+    
+    return {"intent": intent, "persona": best_persona, "success": success}
+
+def run_visualization():
+    """Run collaboration visualization"""
+    stats = {}
+    if STATS_FILE.exists():
+        stats = json.loads(STATS_FILE.read_text(encoding="utf-8", errors="replace"))
+    
+    runs = stats.get("runs", [])
+    
+    print(f"\n[MULTI-AGENT COLLABORATION STATUS]")
+    print(f"{'='*50}")
+    print(f"Updated: {datetime.now().strftime('%H:%M:%S')}")
+    
+    print(f"""
+         [PLANNER]
+              |
+    [CRITIC]--+--[EXECUTOR]
+              |
+      [COORDINATOR]
+         |     |
+   [LEARNER] [INNOVATOR]
+              |
+      [METACOGNITION]
+    """)
+    
+    print(f"Total Executions: {len(runs)}")
+    print(f"{'='*50}\n")
+
+def generate_report():
+    """Generate learning report"""
+    history = load_learn_history()
+    
+    print(f"""
+[MULTI-AGENT LEARNING REPORT]
+{'='*50}
+Patterns Learned: {len(history.get('persona_scores', {}))}
+
+Top Combinations:
+""")
+    
+    combos = []
+    for persona, task_scores in history.get("persona_scores", {}).items():
+        for task, score in task_scores.items():
+            if score > 0:
+                combos.append((persona, task, score))
+    
+    combos.sort(key=lambda x: x[2], reverse=True)
+    
+    for persona, task, score in combos[:5]:
+        print(f"  {persona.upper():12} + {task:15} = {score:.1f}")
+    
+    print(f"{'='*50}\n")
+
+def main():
+    """CLI interface"""
+    if len(sys.argv) < 2:
+        print("""
+[MULTI-AGENT ORCHESTRATOR v1.0]
+================================
+Usage:
+  python multi_agent_orchestrator_001.py <task>
+  python multi_agent_orchestrator_001.py --viz
+  python multi_agent_orchestrator_001.py --report
+
+Examples:
+  python multi_agent_orchestrator_001.py "优化代码性能"
+  python multi_agent_orchestrator_001.py "分析股票"
+  python multi_agent_orchestrator_001.py --viz
+        ""

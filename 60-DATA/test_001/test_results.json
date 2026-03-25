@@ -1,0 +1,43 @@
+{
+  "summary": {
+    "total": 6,
+    "passed": 6,
+    "failed": 0,
+    "timeout": 0,
+    "pass_rate": 100.0,
+    "timestamp": "2026-03-20T21:32:04.062524"
+  },
+  "results": [
+    {
+      "tool_id": "sa-029-ai-signal",
+      "status": "PASS",
+      "timestamp": "2026-03-20T21:32:03.520000"
+    },
+    {
+      "tool_id": "sa-030-sentiment",
+      "status": "PASS",
+      "timestamp": "2026-03-20T21:32:03.629445"
+    },
+    {
+      "tool_id": "sa-031-report",
+      "status": "PASS",
+      "timestamp": "2026-03-20T21:32:03.736757"
+    },
+    {
+      "tool_id": "sa-032-strategy",
+      "status": "PASS",
+      "timestamp": "2026-03-20T21:32:03.844764"
+    },
+    {
+      "tool_id": "roadmap-001-manager",
+      "status": "PASS",
+      "timestamp": "2026-03-20T21:32:03.944506"
+    },
+    {
+      "tool_id": "next-001-advisor",
+      "status": "PASS",
+      "timestamp": "2026-03-20T21:32:04.062480"
+    }
+  ],
+  "timestamp": "2026-03-20T21:32:04.062527"
+}

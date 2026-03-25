@@ -1,0 +1,188 @@
+# tool_name: read_file
+# created_at: 2026-03-21T10:41:11.146036
+# ---
+{
+  "total": 416,
+  "issues": [
+    {
+      "file": "agent_tool_monitor_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "auto_argv_fix_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "auto_barexcept_fix_001.py",
+      "type": "bare_except",
+      "line": 5
+    },
+    {
+      "file": "auto_barexcept_fix_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "bad_test_001.py",
+      "type": "bare_except",
+      "line": 8
+    },
+    {
+      "file": "batch_runner_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "brainstorm_analogy_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "brainstorm_define_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "brainstorm_random_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "brainstorm_refine_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "brainstorm_reverse_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "brainstorm_scamper_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "brainstorm_sixhats_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "code_quality_001.py",
+      "type": "bare_except",
+      "line": 30
+    },
+    {
+      "file": "copaw_entry_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "data_source_manager_001.py",
+      "type": "too_long",
+      "lines": 587
+    },
+    {
+      "file": "health_reporter_001.py",
+      "type": "bare_except",
+      "line": 29
+    },
+    {
+      "file": "multi_agent_router_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "penalty_system_v_001.py",
+      "type": "too_long",
+      "lines": 541
+    },
+    {
+      "file": "post_session_compress_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "pre_session_hook_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "safe_git_executor_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "safe_shell_executor_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "sa_indicator_calculator_001.py",
+      "type": "too_long",
+      "lines": 756
+    },
+    {
+      "file": "sa_industry_analysis_001.py",
+      "type": "too_long",
+      "lines": 540
+    },
+    {
+      "file": "sa_pattern_recognition_001.py",
+      "type": "too_long",
+      "lines": 568
+    },
+    {
+      "file": "sa_support_resistance_001.py",
+      "type": "too_long",
+      "lines": 617
+    },
+    {
+      "file": "sa_trend_analysis_001.py",
+      "type": "too_long",
+      "lines": 762
+    },
+    {
+      "file": "session_end_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "sitecustomize_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "tool_executor_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "tool_validator_001.py",
+      "type": "bare_except",
+      "line": 29
+    },
+    {
+      "file": "workflow_auto_executor_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    },
+    {
+      "file": "workflow_fix_001.py",
+      "type": "missing_argv_check",
+      "line": 0
+    }
+  ],
+  "metrics": {
+    "bare_except_count": 5,
+    "missing_argv_count": 22,
+    "long_files": 7,
+    "clean_files": 382
+  },
+  "suggestions": [
+    "Use specific exception types instead of bare except",
+    "Add argv validation for CLI tools"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "symbol": "GOOGL",
+  "source": "yahoo-api",
+  "price": 307.13,
+  "change": -0.56,
+  "change_percent": -0.18,
+  "volume": 24934204,
+  "market_cap": 0,
+  "pe_ratio": null,
+  "high": 308.04,
+  "low": 302.35,
+  "open": 307.13,
+  "previous_close": 307.69,
+  "timestamp": "2026-03-20T19:51:54.961844",
+  "currency": "USD"
+}

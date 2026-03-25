@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:17:17.141708
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\async_fetcher.py  (lines 410-435 of 540)
+        # 新浪财经 API 已失效，移除
+        # tasks.append(self.fetch_sina())
+        # source_info.append(("新浪财经", 15))
+
+        rss_sources = get_rss_sources()
+        for name, url, limit in rss_sources:
+            tasks.append(self.fetch_rss(name, url, limit))
+            source_info.append((name, limit))
+
+        logger.info(f"开始并发抓取 {len(tasks)} 个源 (限流: {self.rate_limit}/min)...")
+        start_time = time.time()
+
+        try:
+            results = await asyncio.wait_for(
+                asyncio.gather(*tasks, return_exceptions=True), timeout=60.0
+            )
+        except asyncio.TimeoutError:
+            logger.warning("抓取超时 (60s)，部分源未完成")
+            results = [Exception("Timeout") for _ in tasks]
+        elapsed = time.time() - start_time
+
+        stats = {}
+        for (name, limit), result in zip(source_info, results):
+            if isinstance(result, Exception):
+                stats[name] = 0
+                logger.error(f"[{name}] 异常: {result}")
+
+[105 more lines. Use start_line=436 to continue.]

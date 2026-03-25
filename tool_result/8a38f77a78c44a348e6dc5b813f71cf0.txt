@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:27:35.618008
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_db.py  (lines 85-120 of 303)
+                n.get('url', ''),
+                n.get('source', ''),
+                n.get('category', ''),
+                n.get('sentiment', ''),
+                n.get('llm_score', 0),
+                n.get('importance_level', ''),
+                n.get('ts', time.time())
+            ))
+            saved += 1
+        except:
+            pass
+    
+    conn.commit()
+    conn.close()
+    return saved
+
+def get_news(days=7, limit=100):
+    """获取历史新闻"""
+    conn = sqlite3.connect(DB_FILE)
+    c = conn.cursor()
+    
+    since = time.time() - (days * 86400)
+    
+    c.execute('''
+        SELECT title, url, source, category, sentiment, sentiment_score, importance, ts
+        FROM news
+        WHERE ts > ?
+        ORDER BY ts DESC
+        LIMIT ?
+    ''', (since, limit))
+    
+    results = []
+    for row in c.fetchall():
+        results.append({
+            'title': row[0],
+            'url': row[1],
+
+[183 more lines. Use start_line=121 to continue.]

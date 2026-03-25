@@ -1,0 +1,35 @@
+# tool_name: grep_search
+# created_at: 2026-03-21T17:26:54.924188
+# ---
+game.js:328:          progressEl.style.display = 'none';
+game.js:329:      }
+game.js:330:  }
+game.js:331:  
+game.js:332:  function updateStats() {
+game.js:333:      if (!G) return;
+game.js:334:      document.getElementById('stat-buildings').textContent = getTotalBuildings(G);
+game.js:335:      renderStats();
+game.js:336:  }
+game.js:337:      document.getElementById('stat-achievements').textContent = (G.achievements || []).length + '/' + ACHIEVEMENTS.length;
+game.js:338:      var bossEl = document.getElementById('stat-bosses');
+game.js:339:      if (bossEl) bossEl.textContent = G.bossesDefeated || 0;
+game.js:340:  }
+game.js:341:  
+game.js:342:  var lastTick = Date.now();
+game.js:343:> function gameLoop() {
+game.js:344:      var now = Date.now();
+game.js:345:      var delta = (now - lastTick) / 1000;
+game.js:346:      lastTick = now;
+game.js:347:      if (!G) return;
+game.js:348:      var gps = getTotalProduction(G);
+game.js:349:      G.gold += gps * delta;
+game.js:350:      G.totalEarned += gps * delta;
+game.js:351:      updateUI();
+game.js:352:      if (Math.random() < 0.02) { renderBuildings(); renderStats(); }
+game.js:353:      checkAchievements();
+game.js:354:  }
+game.js:355:  
+game.js:356:  function startGameLoop() {
+game.js:357:      setInterval(gameLoop, 100);
+game.js:358:  }
+---

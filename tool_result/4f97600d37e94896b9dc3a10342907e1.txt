@@ -1,0 +1,25 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T22:58:57.562396
+# ---
+async_fetcher.py:149:  def get_rss_sources() -> List[tuple]:
+async_fetcher.py:150:      config = load_config()
+async_fetcher.py:151:      sources = []
+async_fetcher.py:152:      for key, src in config.get("news_sources", {}).items():
+async_fetcher.py:153:          if src.get("type") == "rss" and src.get("enable", True):
+async_fetcher.py:154:              sources.append((src["name"], src.get("url", ""), src.get("limit", 20)))
+async_fetcher.py:155:      return sources
+async_fetcher.py:156:  
+async_fetcher.py:157:  
+async_fetcher.py:158:  # ========== 工具函数 ==========
+async_fetcher.py:159:> def load_hashes() -> set:
+async_fetcher.py:160:      if HASH_FILE.exists():
+async_fetcher.py:161:          try:
+async_fetcher.py:162:              with open(HASH_FILE, "r", encoding="utf-8") as f:
+async_fetcher.py:163:                  return set(json.load(f))
+async_fetcher.py:164:          except Exception as e:
+async_fetcher.py:165:              logger.warning(f"哈希文件加载失败: {e}")
+async_fetcher.py:166:      return set()
+async_fetcher.py:167:  
+async_fetcher.py:168:  
+async_fetcher.py:169:  def save_hashes(hashes: set):
+---

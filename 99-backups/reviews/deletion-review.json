@@ -1,0 +1,45 @@
+{
+  "review_id": "20260319175542",
+  "reviewed_at": "2026-03-19T17:55:42.514113",
+  "action": "deletion",
+  "tool_ids": [
+    "critical-issue-detector",
+    "analyze_memory_scripts",
+    "context_db"
+  ],
+  "reason": "质量审查 - 低频工具评估",
+  "reviewer": "待填写",
+  "status": "pending",
+  "tools_reviewed": [
+    {
+      "tool_id": "critical-issue-detector",
+      "name": "Critical Issue Detector",
+      "category": "general",
+      "usage_count": 0,
+      "has_file": false,
+      "quality_score": null,
+      "reviewer_decision": "待审查",
+      "reviewer_comment": ""
+    },
+    {
+      "tool_id": "analyze_memory_scripts",
+      "name": "",
+      "category": "general",
+      "usage_count": 0,
+      "has_file": false,
+      "quality_score": null,
+      "reviewer_decision": "待审查",
+      "reviewer_comment": ""
+    },
+    {
+      "tool_id": "context_db",
+      "name": "",
+      "category": "general",
+      "usage_count": 0,
+      "has_file": false,
+      "quality_score": null,
+      "reviewer_decision": "待审查",
+      "reviewer_comment": ""
+    }
+  ]
+}

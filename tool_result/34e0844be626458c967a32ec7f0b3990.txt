@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:50:59.324076
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 220-280 of 476)
+    ('CoinDesk', lambda: fetch_rss('https://www.coindesk.com/arc/outboundfeeds/rss/', 'CoinDesk', 5)),
+]
+
+def fetch_all(quiet=False, dedup=True):
+    cache = load_cache()
+    now = time.time()
+    if cache.get('news') and now - cache.get('time', 0) < CACHE_TTL:
+        if not quiet:
+            elapsed = int((now - cache.get('time', 0)) / 60)
+            print(f'  💾 缓存: {len(cache["news"])} 条 ({elapsed}m前)')
+        return cache['news']
+
+    results = []
+    start = now
+    if not quiet:
+        print('  ▶ 并行抓取...')
+
+    with ThreadPoolExecutor(max_workers=FETCH_WORKERS) as executor:
+        futures = {executor.submit(fetcher): name for name, fetcher in SOURCES}
+        for future in as_completed(futures):
+            name = futures[future]
+            try:
+                news = future.result()
+                results.extend(news)
+                if not quiet:
+                    print(f'  ✓ {name}: +{len(news)}')
+            except Exception:
+                if not quiet:
+                    print(f'  ⚠ {name}: 失败')
+
+    if dedup:
+        original_count = len(results)
+        results = dedup_news(results)
+        if not quiet and original_count != len(results):
+            print(f'  🔃 去重: {original_count} → {len(results)}')
+
+    save_cache({'news': results, 'time': time.time()})
+    elapsed = time.time() - start
+    if not quiet:
+        print(f'  ⏱️ {elapsed:.1f}s | {len(results)}条')
+    return results
+
+def dedup_news(news_list, threshold=0.8):
+    """基于标题相似度去重。
+
+    这里预先缓存分词结果，避免在 N² 比较里重复正则分词，
+    批量抓取时能明显减少 CPU 开销。
+    """
+    if len(news_list) < 2:
+        return news_list
+
+    token_cache = {}
+
+    def get_tokens(title):
+        if title not in token_cache:
+            token_cache[title] = set(TOKEN_PATTERN.findall(title.lower()))
+        return token_cache[title]
+
+    unique = []
+    unique_tokens = []
+    for news in news_list:
+
+[196 more lines. Use start_line=281 to continue.]

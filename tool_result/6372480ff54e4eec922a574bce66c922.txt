@@ -1,0 +1,52 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:17:27.637662
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\async_fetcher.py  (lines 425-470 of 546)
+        logger.info(f"开始并发抓取 {len(tasks)} 个源 (限流: {self.rate_limit}/min)...")
+        start_time = time.time()
+
+        try:
+            results = await asyncio.wait_for(
+                asyncio.gather(*tasks, return_exceptions=True), timeout=60.0
+            )
+        except asyncio.TimeoutError:
+            logger.warning("抓取超时 (60s)，部分源未完成")
+            results = [Exception("Timeout") for _ in tasks]
+        elapsed = time.time() - start_time
+
+        stats = {}
+        for (name, limit), result in zip(source_info, results):
+            if isinstance(result, Exception):
+                stats[name] = 0
+                logger.error(f"[{name}] 异常: {result}")
+            else:
+                news_list = result
+                stats[name] = len(news_list)
+                all_news.extend(news_list)
+
+        await self.close_session()
+
+        print(f"\n  ▶ 并发抓取完成 ({elapsed:.2f}s)")
+        for name, count in stats.items():
+            icon = "✓" if count > 0 else "✗"
+            print(f"    {icon} {name}: {count}")
+
+        summary = self.stats.get_summary()
+        logger.info(
+            f"抓取统计: 成功 {summary['successful']}, 失败 {summary['failed']}, 重试 {summary['retried']}"
+        )
+
+        return all_news
+
+    def deduplicate(self, news_list: List[NewsItem]) -> List[NewsItem]:
+        unique = []
+        new_hashes = set()
+
+        for news in news_list:
+            if news.hash not in self.existing_hashes and news.hash not in new_hashes:
+                unique.append(news)
+                new_hashes.add(news.hash)
+
+        return unique
+
+[76 more lines. Use start_line=471 to continue.]

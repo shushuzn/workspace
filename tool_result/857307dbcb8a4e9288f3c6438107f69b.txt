@@ -1,0 +1,28 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:31:18.450506
+# ---
+        sources[s] = sources.get(s, 0) + 1
+    stats_box(len(all_news), len(new_news), sources)
+    info(f"新新闻: {len(new_news)} 条")
+    print()
+    print(C("  ┌─ 最新消息 ──────────────────────────────────┐"))
+    for i, n in enumerate(new_news[:10], 1):
+        title = n['title'][:40] + "..." if len(n['title']) > 40 else n['title']
+        s = n.get('source', '')
+        icon = "🔹" if "金十" in s else ("🔸" if "Investing" in s else "🔶")
+        print(C("  │") + f"  {i:>2}. {icon} {title}")
+    print(C("  └" + "─" * 46 + "┘"))
+    print()
+    return 1
+
+# 主程序
+if __name__ == "__main__":
+    import time as t
+    start = t.time()
+    mode = sys.argv[1] if len(sys.argv) > 1 else "stats"
+    cmds = {"test": cmd_test, "welcome": cmd_welcome, "stats": cmd_stats, "daily": cmd_daily, "digest": cmd_digest, "alert": cmd_alert, "all": cmd_all, "preview": cmd_preview}
+    cmd = cmds.get(mode, cmd_stats)
+    sent = cmd()
+    elapsed = t.time() - start
+    if sent > 0:
+        result_box(mode, sent if sent > 1 else 1, sent if sent == 1 else sent, elapsed)

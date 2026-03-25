@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "analyses": [
+    {
+      "timestamp": "2026-03-20T01:00:44.597531",
+      "symbol": "TEST",
+      "regime": "highly_volatile",
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_analyses": 1
+  }
+}

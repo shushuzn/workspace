@@ -1,0 +1,52 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:37:44.028060
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 395-440 of 1143)
+def enrich_with_llm(news_list, max_items=10, use_cache=True):
+    """使用LLM并行丰富新闻数据"""
+    if not check_ollama_status():
+        print("  ⚠ Ollama未运行，跳过LLM分析")
+        return news_list
+    
+    print("  🤖 启用本地LLM并行分析...")
+    start = time.time()
+    
+    # 预加载缓存
+    cache = {}
+    if use_cache:
+        cache = load_llm_cache()
+    
+    # 使用MD5保证hash一致性
+    import hashlib
+    
+    # 准备任务 - 跳过已缓存的
+    uncached_tasks = []
+    cached_results = {}
+    for i, news in enumerate(news_list[:max_items]):
+        title = news.get('title', '')
+        title_hash = hashlib.md5(title.encode()).hexdigest()
+        if title_hash in cache:
+            cached_results[i] = cache[title_hash]
+        else:
+            uncached_tasks.append((i, title))
+    
+    print(f"    缓存命中: {len(cached_results)}/{max_items}")
+    
+    # 并行分析未缓存的
+    new_results = {}
+    if uncached_tasks:
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            futures = {executor.submit(analyze_llm_parallel, task): task for task in uncached_tasks}
+            for future in as_completed(futures):
+                idx, analysis = future.result()
+                if analysis:
+                    new_results[idx] = analysis
+    
+    # 合并结果
+    all_results = {**cached_results, **new_results}
+    
+    # 应用结果
+    llm_count = 0
+    for idx, news in enumerate(news_list[:max_items]):
+
+[703 more lines. Use start_line=441 to continue.]

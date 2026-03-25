@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:11:08.041413
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 1440-1490 of 1953)
+    balance = calc_balance_sheet_health(fin, q)
+    competitors = calc_competitors(sym)
+    cap_class, cap_range = calc_market_cap_class(q["mc"])
+    price_chart = calc_price_chart(q)
+    
+    rating_cn = {"STRONG_BUY": "强烈买入", "BUY": "买入", "HOLD": "持有", "SELL": "卖出", "STRONG_SELL": "强烈卖出"}.get(rating(upside), rating(upside))
+    risk_cn = {"LOW": "低风险", "MEDIUM": "中等风险", "HIGH": "高风险"}.get(risk, risk)
+    
+    print(f"\n价格: ${price:.2f}")
+    print(f"EPS: 追踪 ${q['eps_t']:.2f} | 预测 ${q['eps_f']:.2f}")
+    print(f"P/E: 当前 {q['pe']:.1f}x | 预测 {pe_f:.1f}x")
+    print(f"\nDCF情景: 乐观=${dcf_scenarios['Bull']:.0f} | 基准=${dcf_base:.0f} | 悲观=${dcf_scenarios['Bear']:.0f}")
+    print(f"分析师目标: ${analyst_target:.0f} ({analyst['rating']})")
+    print(f"综合目标: ${target:.2f} ({upside:+.1f}%)")
+    print(f"\n评级: {rating_cn} | 得分: {sc}/100 | 风险: {risk_cn}")
+    print(f"得分: 质量={quality} | 价值={value} | 动量={momentum_s} | 成长={growth}")
+    
+    date = datetime.now().strftime("%Y-%m-%d")
+    md_path = Path(f"50-reports/stocks/{sym}_{date}.md")
+    md_path.parent.mkdir(parents=True, exist_ok=True)
+    
+    with open(md_path, "w", encoding="utf-8") as f:
+        # Header
+        rating_icon = {"STRONG_BUY": "🟢", "BUY": "🟢", "HOLD": "🟡", "SELL": "🔴", "STRONG_SELL": "🔴"}.get(rating(upside), "⚪")
+        f.write(f"# {sym} 股票分析报告\n\n")
+        f.write(f"**生成日期:** {date} | **版本:** v8.0\n\n")
+        f.write("---\n\n")
+        f.write(f"## {rating_icon} 投资评级: {rating_cn}\n\n")
+        f.write(f"| 关键指标 | 数值 |\n")
+        f.write(f"|---------|------|\n")
+        f.write(f"| 当前价格 | **${price:.2f}** |\n")
+        f.write(f"| 12个月目标 | **${target:.2f}** |\n")
+        f.write(f"| 上涨空间 | **{upside:+.1f}%** |\n")
+        f.write(f"| 综合评分 | **{sc}/100** |\n")
+        f.write(f"| 风险等级 | {risk_cn} |\n\n")
+        f.write("---\n\n")
+        
+        # Score Breakdown
+        f.write("## 1. 执行摘要\n\n")
+        f.write(f"| 指标 | 数值 | 评估 |\n")
+        f.write(f"|------|------|------|\n")
+        f.write(f"| 当前价格 | ${price:.2f} | - |\n")
+        f.write(f"| 分析师目标 | ${analyst_target:.0f} | {analyst['rating']} |\n")
+        f.write(f"| DCF基准 | ${dcf_base:.2f} | 内在价值 |\n")
+        f.write(f"| 综合目标 | ${target:.2f} | **最佳估算** |\n")
+        f.write(f"| 上涨/下跌 | {upside:+.1f}% | {rating_cn} |\n")
+        f.write(f"| 风险 | {risk_cn} | - |\n\n")
+        
+        f.write("### 1.1 评分明细\n\n")
+        f.write(f"| 维度 | 得分 | 权重 | 贡献 |\n")
+        f.write(f"|------|------|------|------|\n")
+
+[463 more lines. Use start_line=1491 to continue.]

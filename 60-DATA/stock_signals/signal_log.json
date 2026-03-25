@@ -1,0 +1,35 @@
+{
+  "version": "1.0",
+  "signals": [
+    {
+      "timestamp": "2026-03-20T00:46:06.851388",
+      "symbol": "TEST",
+      "signal": "buy",
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T00:58:13.395132",
+      "symbol": "TEST",
+      "signal": "buy",
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T00:59:32.240151",
+      "symbol": "TEST",
+      "signal": "buy",
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:08:10.428917",
+      "symbol": "TEST",
+      "signal": "buy",
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_signals": 4,
+    "buy_signals": 4,
+    "sell_signals": 0,
+    "neutral_signals": 0
+  }
+}

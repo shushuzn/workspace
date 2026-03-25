@@ -1,0 +1,56 @@
+{
+  "symbol": "TEST",
+  "analysis_date": "2026-03-20T13:37:39.849753",
+  "current_price": 50.0,
+  "valuations": {
+    "dcf": {
+      "method": "DCF",
+      "enterprise_value": 2095753.61,
+      "equity_value": 1895753.61,
+      "value_per_share": 189.58,
+      "assumptions": {
+        "growth_rate": 0.15,
+        "discount_rate": 0.1,
+        "terminal_growth": 0.03,
+        "years": 5
+      },
+      "description": "DCF 估值：189.58元/股"
+    },
+    "relative": {
+      "method": "Relative Valuation",
+      "company_pe": 25.0,
+      "industry_pe": 24.25,
+      "company_pb": 3.0,
+      "industry_pb": 2.95,
+      "company_ps": 5.0,
+      "industry_ps": 4.88,
+      "pe_premium": 0.0309,
+      "pb_premium": 0.0169,
+      "ps_premium": 0.0256,
+      "valuation": "fair",
+      "description": "相对估值：合理 (行业平均 PE: 24.25)"
+    },
+    "peg": {
+      "method": "PEG",
+      "pe_ratio": 25.0,
+      "growth_rate": 0.2,
+      "peg_ratio": 1.25,
+      "valuation": "fair",
+      "description": "PEG: 1.25 - 合理"
+    },
+    "ddm": {
+      "method": "DDM",
+      "current_dividend": 2.0,
+      "next_dividend": 2.1,
+      "value_per_share": 42.0,
+      "assumptions": {
+        "growth_rate": 0.05,
+        "required_return": 0.1
+      },
+      "description": "DDM 估值：42.00元/股"
+    }
+  },
+  "target_price": 115.79,
+  "upside_potential": 1.3158,
+  "recommendation": "buy"
+}

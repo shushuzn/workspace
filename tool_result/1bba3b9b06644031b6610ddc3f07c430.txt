@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:59:41.786906
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py  (lines 30-60 of 183)
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Stock PRO v11.0", add_help=False)
+    parser.add_argument('symbols', nargs='*', help='Stock symbols')
+    parser.add_argument('--help', '-h', action='store_true')
+    parser.add_argument('--cn', action='store_true', help='Chinese report')
+    parser.add_argument('--json', action='store_true', help='JSON output')
+    parser.add_argument('--live', '-l', action='store_true', help='Use live price')
+    parser.add_argument('--compare', nargs='*', help='Compare stocks')
+    parser.add_argument('--summary', nargs='*', help='Summary cards')
+    parser.add_argument('--csv', nargs='*', help='Export CSV')
+    parser.add_argument('--xlsx', nargs='*', help='Export Excel')
+    parser.add_argument('--db', nargs='*', help='Save to DB')
+    parser.add_argument('--dashboard', nargs='*', help='Generate dashboard')
+    parser.add_argument('--alert', nargs='*', help='Price alerts')
+    parser.add_argument('--chart', nargs='*', help='Generate chart')
+    parser.add_argument('--screener', action='store_true', help='Run screener')
+    parser.add_argument('--portfolio', action='store_true', help='Show portfolio')
+    parser.add_argument('--portfolio-add', nargs=3, help='Add position: SYMBOL SHARES COST')
+    parser.add_argument('--portfolio-remove', nargs=1, help='Remove position')
+    
+    args = parser.parse_args()
+    
+    print(BANNER)
+    
+    # Help
+    if args.help or (not args.symbols and not any(vars(args).values())):
+        print("""
+Stock PRO v11.0 - Usage
+=======================
+
+[123 more lines. Use start_line=61 to continue.]

@@ -1,0 +1,556 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-21T09:04:52.939141
+# ---
+ m 10-RESEARCH/domain-research/领域研究/cnt-research
+ M 13-memory/.workflow_logs/master.json
+ M 30-scripts-tools/tools_registry.json
+ M agent.json
+ M flow-archive/20260318-universal-workflow-001/workflow.json
+ M flow-archive/20260320-main-workflow-brainstorm/aai-scores.json
+ M flow-archive/stock-analysis-roadmap.json
+ D tool_result/00631b7e2fd548c08e763b4279465cc9.txt
+ D tool_result/007cdf54017d4936909cbec7aa55c6fe.txt
+ D tool_result/00fca03e0a004a16a7aeecc0f1a73b6a.txt
+ D tool_result/0104f59f70e8437fb8a65e8b6f47fa54.txt
+ D tool_result/0130b447ba9a4f0db08d1e399206a614.txt
+ D tool_result/02ba67fec12446c2958a3a900b12ebf5.txt
+ D tool_result/02f6db22e2724e98b256dbd1c0ddba0f.txt
+ D tool_result/03bbe8e1d080436ebd4356d7e9705dcd.txt
+ D tool_result/041e17102fc343deb8196801896d0dc6.txt
+ D tool_result/04dc6fddedbc4b32be0ea3ad8abb45a0.txt
+ D tool_result/050c47a901084f35807cd779e4725ce8.txt
+ D tool_result/0581d3cb4bdc4c72ab294bd384597b62.txt
+ D tool_result/05c162ef713c476780b4fd62c1fbbae2.txt
+ D tool_result/061445fee2aa4d8ca18a6dfcd032abf4.txt
+ D tool_result/0627d2b652b740028f877740342fed4b.txt
+ D tool_result/0691e9bd971b45c1a6bf1b5fc0302e4e.txt
+ D tool_result/073343458c714f71a81427fb94174445.txt
+ D tool_result/077ad26d287949b896d00b93eaf3dbbc.txt
+ D tool_result/0926d239b3604d3e927f89898c16b42f.txt
+ D tool_result/096dfade09ff47fabee8548fa87c3a20.txt
+ D tool_result/09928dadec2344e0bb5b45c60dbc3f70.txt
+ D tool_result/0b7217a816ad4f3ca4bfa6e0b1c28377.txt
+ D tool_result/0c67b018161e491fbf8085354d0fbb53.txt
+ D tool_result/0cc0ddbb56c74f059fdc74ea7498c9ad.txt
+ D tool_result/0d5fe403569445648229668da4ce96b0.txt
+ D tool_result/0e3afa3671704469a8adcf712e0590d9.txt
+ D tool_result/0e4c593925884bb4b6465f7c32155bab.txt
+ D tool_result/102013f4316d4070a37743eb217a83e7.txt
+ D tool_result/11375acc00454a489404df83dc73437d.txt
+ D tool_result/1202f17a45e6499e92bb127baa45e7e1.txt
+ D tool_result/12460f83aa574926832971c9125b094b.txt
+ D tool_result/12c32340e0744a1b9d2dbc69ada63488.txt
+ D tool_result/130250b93b3247a28e0fb007a2c4e098.txt
+ D tool_result/1329ed38b4b84ce1b703dc6b8dd465c4.txt
+ D tool_result/1359489c1997480f980431ab27c82592.txt
+ D tool_result/13e6586ec19043b7bbc428194cb494c0.txt
+ D tool_result/1408cf0a7a934bd8b08455c1c21c3a98.txt
+ D tool_result/147d93eb389843b99dbfde519196e4ab.txt
+ D tool_result/14f909931dea4733a50b8b1942163a9c.txt
+ D tool_result/1517484337fd43bdb0ffa75a0955a29d.txt
+ D tool_result/15d55b5aa51d4f298f6a56cd0a750e1c.txt
+ D tool_result/1703941ddd194d3ab88aac17e9a13796.txt
+ D tool_result/172f9bda759245c393268e47c32306cd.txt
+ D tool_result/184aa3643fee42f1adf2b7c23a187917.txt
+ D tool_result/187a4fc19e564074b8ca537020a25967.txt
+ D tool_result/18845ff48c6d49a7891aed188e4d4c85.txt
+ D tool_result/18c8f16d390c493c9b456f3ebe0e3a80.txt
+ D tool_result/18e9b286d4034e04b13649df8c1e6d22.txt
+ D tool_result/1931b6cc13ee4827a7fd6b8c766faa5a.txt
+ D tool_result/1934fefcbcb3488cae6ac11ee1d8e06f.txt
+ D tool_result/197b1479c6854660831e090eb7d8576e.txt
+ D tool_result/1a26122e94a449929ead5ad60542f00e.txt
+ D tool_result/1bdb13ee5470449cb558b562a5fb8519.txt
+ D tool_result/1beb42e933324dc387457f2259b73fdf.txt
+ D tool_result/1cda5b725dfc4ca1be386eacb2fc6551.txt
+ D tool_result/1d0fc0cd842e4773a571a6c5fceeae38.txt
+ D tool_result/1daddbc31ee245bfa8c089525b735ab1.txt
+ D tool_result/1e12e5db2e1243e79c4a957d63810994.txt
+ D tool_result/1e9a0ffc0991459a8063a36a07508d7a.txt
+ D tool_result/1f20630f18574a74b6b4a4f7c130f56e.txt
+ D tool_result/1f9abe633b1e438a8c1a1a853bc94e35.txt
+ D tool_result/2008f34be03549ac9c5b0c0a1bb44068.txt
+ D tool_result/20b759ead88f46b4a21f18ecc75d0da5.txt
+ D tool_result/2101dd6a7f9c45cb88ed95c0050cddf8.txt
+ D tool_result/2107781bc0b04ddd9ff6418ab0b74829.txt
+ D tool_result/21307fbb46704bf8ae15d9a7fc79722b.txt
+ D tool_result/216513cdf82943769e7fabe1dbaae820.txt
+ D tool_result/22d1c5ece7134b7db62a423af9660f1e.txt
+ D tool_result/238d160a671f4fc0b400da67686d3def.txt
+ D tool_result/244a9bb0631e4509832100f1ba5aa273.txt
+ D tool_result/248ef9ed72de42fcb535f6d417715bf4.txt
+ D tool_result/2579d410b980425499235c51700d305b.txt
+ D tool_result/25ec3798fd774274b11777963f400651.txt
+ D tool_result/26785328b5034e9e97b7b5cba1d1a294.txt
+ D tool_result/268f03b42abf469396f2eb909e32df53.txt
+ D tool_result/272137ac194d40c4b7cd66bf4b447256.txt
+ D tool_result/273f4151cd594b1490eafb94d56e6b4d.txt
+ D tool_result/27565134784b4d53b176988a41398e75.txt
+ D tool_result/275f48205de34e2b8e554f6359fdde01.txt
+ D tool_result/27680b85acb243e59474ee632d59dd6e.txt
+ D tool_result/27c52c7c188041fe80184fc420b73b79.txt
+ D tool_result/287e19f980f249189b01029cc43ce9bc.txt
+ D tool_result/29a109fbe809400db47f1c4b4339ddc5.txt
+ D tool_result/2a9bd11b5f58405398bf9cdb2a1d7e7c.txt
+ D tool_result/2b09aebae7e84b23aa5e4474a72db253.txt
+ D tool_result/2cd2b28ea50a46f3ae780a668b93a833.txt
+ D tool_result/2f62b25e2289464e8607dcf3850bca17.txt
+ D tool_result/3058603657be468dabeb7b642e656619.txt
+ D tool_result/30dcb13fbe9e4217acf5221f2f2382d4.txt
+ D tool_result/3113fa76f4b14d72b91291d93c0220eb.txt
+ D tool_result/3145830993ff44419b3347b2780b146a.txt
+ D tool_result/337350772bc548ca8c388f678ebd6fbf.txt
+ D tool_result/33c6e231360b409dad8bda560d5d7f52.txt
+ D tool_result/33e69488f0b047cdb72eaff5e940ea5a.txt
+ D tool_result/344ef790172846cda1e9634497b5ea17.txt
+ D tool_result/348d17989caa48c8a7e3e13ec3497db6.txt
+ D tool_result/353ba1277c414f6fabdfabb1d2434209.txt
+ D tool_result/35ec7ec98b0b4bbaafd8556460004d00.txt
+ D tool_result/3668e7898863430eae649cbde34e2ea8.txt
+ D tool_result/36a7977d44834ef690cb50b0653f4faa.txt
+ D tool_result/36adadcc84fc49a991d5dd0b14a6cc9f.txt
+ D tool_result/36c5af7ccf944303b943861eb72954db.txt
+ D tool_result/3764c985af184a1b8f38fa0929353d91.txt
+ D tool_result/377d35a05cc24df0baae49eebfc97244.txt
+ D tool_result/3a0901617fe74c6fa0b150901a243825.txt
+ D tool_result/3a35f175bf1843d3bd6e18d8689f080e.txt
+ D tool_result/3ad9dac227dd47048f0d9dec30092275.txt
+ D tool_result/3ae7d56c95fc42718525a105d7735c2a.txt
+ D tool_result/3b09349148c44c34b2d47f1baff4ea99.txt
+ D tool_result/3b361592ec974bafa50272519c875db5.txt
+ D tool_result/3b58147ae8f44cfab5f73fcf74304f07.txt
+ D tool_result/3bf00e90e62641e29dd11b76633056fa.txt
+ D tool_result/3c0dcde0cc674b14a5a7e4183a4a592a.txt
+ D tool_result/3cb85ddb804844a784219001da464baf.txt
+ D tool_result/3d01817e5ba942f1b603e5f7e121b491.txt
+ D tool_result/3d395c1092dc44f09974635070fc59b8.txt
+ D tool_result/3dcf28f6f1304173b73ea49fa20138b0.txt
+ D tool_result/3e125b7a45904527b2d71b4b931787f8.txt
+ D tool_result/3e30f3ff5aa84c3e8bde5eb12f4348ec.txt
+ D tool_result/3f3c1b7a871f4fd38bfc4e68f9807fb4.txt
+ D tool_result/4077b7d3da344cb6b8b92b5ae961de12.txt
+ D tool_result/4119bb6c9fb2457ca277acc1879459f4.txt
+ D tool_result/42720fa448674f4d99ef20ea21c18df9.txt
+ D tool_result/429369d82f9245e2ad21169b3662f4dd.txt
+ D tool_result/43d1795cad2c44319f693d7701277a2e.txt
+ D tool_result/442712e7988a40afa23569b0c9422243.txt
+ D tool_result/448b397117cf43b2b0385c0ec4340c82.txt
+ D tool_result/44bc14cc2cb948d480a8f51994a38f41.txt
+ D tool_result/45a1d731bb224f5494159e4882d7fd40.txt
+ D tool_result/4655a8db60f349948df97ad40e7b4dd8.txt
+ D tool_result/4683dbd81c1646948dd523c3b4628bca.txt
+ D tool_result/46bfdae98fa64119a6826bf8747eadb3.txt
+ D tool_result/46d884d069c54ccd8ca6285e9357b208.txt
+ D tool_result/471cd490ccdf40ee9948aac5191f868f.txt
+ D tool_result/4747388c85204cae9bc7522e768a8051.txt
+ D tool_result/4778fa4574554098959f3e93a43e1e59.txt
+ D tool_result/47fd0be614f64f0bb04448e50e4b76c3.txt
+ D tool_result/4900beb169da4a9cbf1f750326aaa574.txt
+ D tool_result/4935ebc79a3343e084a298772b0091e2.txt
+ D tool_result/49d491f14471499994f5467eeadb626f.txt
+ D tool_result/4a40dbb8d1814b6a8816bac6d683ed56.txt
+ D tool_result/4a79546f021f485192f91340cb3886a6.txt
+ D tool_result/4ad797309eb4417ca2165d2fa6443c5b.txt
+ D tool_result/4b5c0a21f7bb4adc8b9c28388cad5d97.txt
+ D tool_result/4b6e7ef4785e46d69dedb884703285eb.txt
+ D tool_result/4bbaf858baf247b6944111af26a3c0c0.txt
+ D tool_result/4bcf42fb00a54f2d9be86000fcd472a1.txt
+ D tool_result/4c21ff5e873945d18490c388b97585f7.txt
+ D tool_result/4d1ef11a29af46e0a3e5f2016a37736f.txt
+ D tool_result/4db3267144d8441689fbb1efb4895e3c.txt
+ D tool_result/4f2bb7638a864afca9eaf8bdd2eef6fa.txt
+ D tool_result/4f2ddef9fd5a48ed9936d6b593a9d62a.txt
+ D tool_result/4f6bcbb8b101459ab332316c08877fb8.txt
+ D tool_result/4fc67c2001884d02bc90b3692ecc5a2d.txt
+ D tool_result/50c242f96f15447a938d9a34331c74b1.txt
+ D tool_result/50c25c430c5c47328dc6ccfd04df0eb7.txt
+ D tool_result/510c11ac981947b9b4763c6fef2e31f1.txt
+ D tool_result/51dd0d2f39864e6eb7e25db37cb19ef7.txt
+ D tool_result/52051b01feea4ffda55b474e94e752fd.txt
+ D tool_result/521f4b4871804aeaa9d757f5856bd82d.txt
+ D tool_result/523717012dce4f1e816ff456780c00cf.txt
+ D tool_result/52e0be7fd0f84b7b976ec7814e3420dd.txt
+ D tool_result/530177dabddd4986aafa39e922621229.txt
+ D tool_result/542630fdc252488cad6625f127bd4d93.txt
+ D tool_result/5537502062f9411dba08cfb68ff64c9c.txt
+ D tool_result/554c9380d92546679660f74572d09578.txt
+ D tool_result/56a65b9219b44e099af5bfeab02a9d91.txt
+ D tool_result/5729fc3d2be24776bf05df4e164ce3b4.txt
+ D tool_result/577a7297edce450fbe74d35cb36cfc31.txt
+ D tool_result/57a3155cd59841d1833993c6686a7594.txt
+ D tool_result/57f90a4caa62463bb051df583f3f2092.txt
+ D tool_result/580c00d26fe54868b1a20bc4e71fe7e6.txt
+ D tool_result/5993a6cff21d48a79ecf407f5433bdb3.txt
+ D tool_result/59c520c0ad3841ba85bd31c3f0e5266b.txt
+ D tool_result/5a5b64ec2418444f95c853744e6a4854.txt
+ D tool_result/5cfb0c818275498aa552ed75a33b69ca.txt
+ D tool_result/5d1bf97fbd60481ba89e6cc2887dae5d.txt
+ D tool_result/5d53b0cb6a714f62b57a6e3cbdf8704b.txt
+ D tool_result/5e108517dafb4c8db599453975296ee4.txt
+ D tool_result/5fce5e70593b44f1bb63082e2f5e0772.txt
+ D tool_result/5fecdba2055343a49522cc5fa85e56ea.txt
+ D tool_result/604a0fffcf03426b9d08286044817021.txt
+ D tool_result/6285f6e92ee74d62bd7d8dd33bcf55b4.txt
+ D tool_result/64300d208ad14a8dbf18f9933bbadff7.txt
+ D tool_result/64a16be4f4ee4a109bf5d060b4423fa1.txt
+ D tool_result/65285b66dc4d4ceaacb39f3c1b8923c4.txt
+ D tool_result/659489bd674a414a93d7da05d304dc87.txt
+ D tool_result/6663abc0ae0f4010bd65a6760a173575.txt
+ D tool_result/66aff53847a846338b9d1d68b84f8c55.txt
+ D tool_result/671ceabc7bc84152a9d7bbdb659be72f.txt
+ D tool_result/6800e7f5c3f340dba95d347066730f01.txt
+ D tool_result/68b69515458d4258b595ae1c25d5a735.txt
+ D tool_result/68e7dc4c2419450c92f0354b6f24b3d9.txt
+ D tool_result/692d5a53831c4ac0b77d27b34ebe4ec8.txt
+ D tool_result/69ab2ed039a5460581f414c611e73b10.txt
+ D tool_result/69b5194be5ae419c8f1a6ce9fc7039f5.txt
+ D tool_result/6a69a0a7f3eb4d7b9b0fe2c9d8129206.txt
+ D tool_result/6b2d307c9e7b4f288158c28fe9be1f9d.txt
+ D tool_result/6c1a5754841c41be9207d9b913e8303d.txt
+ D tool_result/6c6dbaf5fcea4d5faadbbf9f4b1fc586.txt
+ D tool_result/6cb85ff366824df7a938cb2c12d68db6.txt
+ D tool_result/6dff428a558740f88d512077db9651a9.txt
+ D tool_result/6e98381962334d30889bead4b6e2d3b3.txt
+ D tool_result/6f3cbdb9d2534b1dbf74167f18f9c4ca.txt
+ D tool_result/7193a494ae994f0ab86f24fd4fdabd74.txt
+ D tool_result/7199db8a9e344d5d98d880242a7e8f6e.txt
+ D tool_result/728aeea67f28498baaa5bd370efa8aea.txt
+ D tool_result/74113fc2de0340ee8b52a819d62a8c3b.txt
+ D tool_result/75834e5cac464014a3abe267d213e00a.txt
+ D tool_result/76830aa8c773461d9c07815eca436ec5.txt
+ D tool_result/7685e5f3a1bc4758916cae3e3f12aa52.txt
+ D tool_result/76b2765ca2de4c32a6a1f8a5adea67aa.txt
+ D tool_result/7836f04f14234b059a46b6856d7abece.txt
+ D tool_result/7863606be2174ca094720dd243a975e8.txt
+ D tool_result/78aa87b7b7b14d5798c7b8e2992ec4cf.txt
+ D tool_result/79792b2bfec44f7889c238db2adabcf3.txt
+ D tool_result/79848b626d71410185fa623ddccd2701.txt
+ D tool_result/79ad3aceec934377bb141c96bbbc6fd6.txt
+ D tool_result/79dbf28d314947efb52f3788362ae10c.txt
+ D tool_result/7a986dca8d1e46449aa148b6424deae8.txt
+ D tool_result/7bff8966a2fa4363ac77eef56fdfa3f4.txt
+ D tool_result/7c17573404a945b692a7c62903b7befa.txt
+ D tool_result/7c1d31067168412eb7f6e73de389034a.txt
+ D tool_result/7c9fd37536194905a3d02cfe7c8d0458.txt
+ D tool_result/7cb697624f8243cfbaa5edc287cec802.txt
+ D tool_result/7d0d6b6148164dd59d82b7363787e9ad.txt
+ D tool_result/7d19f0d37a784af4bba8537f65a8e4a5.txt
+ D tool_result/7e8d08e6c10745178f42dcea05fa86c1.txt
+ D tool_result/7ea74dae5f514a18a66a387e15ade436.txt
+ D tool_result/7ee2b6f8785546b2a5707e7da6a80cd8.txt
+ D tool_result/806dd05ee02e4368b84cf88fac85cdf6.txt
+ D tool_result/8102b4adeb004bd6816833fddc4087b0.txt
+ D tool_result/812486805f1249cab29193e2a7ef2a3b.txt
+ D tool_result/819aa9db570b4e229adb6cb837e8b5ad.txt
+ D tool_result/82bc93b96ed64ab2ae95b05179b88962.txt
+ D tool_result/830771b63f9c488389cb7d5b6d4099f7.txt
+ D tool_result/8309f8b66d7e4708a4cc377299d63f8d.txt
+ D tool_result/83627fdd56264a65b6f3adf831d2e705.txt
+ D tool_result/83b34c1cd9e34c41b570453c25d65877.txt
+ D tool_result/848b638cedf84f5fbf8fd3d75bdde2da.txt
+ D tool_result/84b049301aad4c31832679ef54aeb0de.txt
+ D tool_result/860f3e263a804ab8b684a3b296c66136.txt
+ D tool_result/8663e54b1159430a841f50463564cd91.txt
+ D tool_result/872ccaefbbab40faa04bccf9772e0939.txt
+ D tool_result/874da6c5c8b34e119ff06a47c00b6222.txt
+ D tool_result/87ff77413bd5421999555e50d0777579.txt
+ D tool_result/88cba92555bc4f4fb548310f924590aa.txt
+ D tool_result/89174504b86c4ad18cb9b1cc12ed1625.txt
+ D tool_result/8ac954dd83bd4fe38550d40c848581dc.txt
+ D tool_result/8b0df8d786a343d4b55c64fa92683964.txt
+ D tool_result/8b26eb63caec4c1fa535cd144a2516ca.txt
+ D tool_result/8b8279e1969e40bcb02daf36d5cd2a27.txt
+ D tool_result/8b9868e560ba480d85c8bfc6b8794933.txt
+ D tool_result/8baa5f8763e844ffb74c6053ca6f3b41.txt
+ D tool_result/8bdc1a2c26fa469fa5505c78d5aa7aeb.txt
+ D tool_result/8c5e86063f754944b9432f4aa93e8d15.txt
+ D tool_result/8d398c9d28f944c5bb3ff18965c8f571.txt
+ D tool_result/8d678ec6c6ff4e6dad7a51676c84febd.txt
+ D tool_result/8db7b41e49ee4d67bdac57e56a9c8ee6.txt
+ D tool_result/8e2eedcf96184167938f9865240fe90d.txt
+ D tool_result/8e89f7398eda474b8adbdd8cc705d057.txt
+ D tool_result/8ecbd246e91845b2976c4a45d76a2f72.txt
+ D tool_result/8fef92e7f91043a688193260d10d109c.txt
+ D tool_result/8ff266bbadfe45ffa20726e15d39a84d.txt
+ D tool_result/905800c381b44bd0896503e7ce1b78f4.txt
+ D tool_result/9099847ec12a462e9f763c2a1e34653a.txt
+ D tool_result/912a93710a7b4793a38bea7c094f77c0.txt
+ D tool_result/9130ff0f57b6493987fc63b8e4a9e795.txt
+ D tool_result/924c288de3f345fe83a298ce9638c6fc.txt
+ D tool_result/92573efcf7604edf8d4e651231a2379f.txt
+ D tool_result/92a32527c94f48d9abfeb8db66bbaf94.txt
+ D tool_result/92ae0d4c28c44fb9a99358c0cc1f2b81.txt
+ D tool_result/93d57fd6d96e4d418232cacefc7071d5.txt
+ D tool_result/94a395ed928b405b9848a747599ac898.txt
+ D tool_result/95469a0723064ddd915a2bd6612ec081.txt
+ D tool_result/95591ddfc4854692aa78927067d826f3.txt
+ D tool_result/96098d882b864694bf114288ce4c3ad1.txt
+ D tool_result/96a4ee31cccf4b07b6fa6a7a16abac7d.txt
+ D tool_result/96b0ad4867ef42aca87443474d0e99ce.txt
+ D tool_result/96c2bb2895504d70b431fc8328354d80.txt
+ D tool_result/97b60399efe14516af80b7a7a752ab70.txt
+ D tool_result/989d034c8abf4abf9e3ed19d35e5fbf9.txt
+ D tool_result/98e333e404f8491d937f1c08d3eeb4a1.txt
+ D tool_result/994c13497d7f4299a30f61606b2774b1.txt
+ D tool_result/996ac0f756514428a52108f3688f6a7d.txt
+ D tool_result/99abb67e358c4512b7f87a30e8ee24ef.txt
+ D tool_result/99fd815c43c346b2801513ee076b12cc.txt
+ D tool_result/9ab728a2deb842349c0cf80307174d59.txt
+ D tool_result/9c30af4368c6444c839ddcee78fb16be.txt
+ D tool_result/9d1413f3f5db45a1886452f0ceb26a62.txt
+ D tool_result/9d37dd9d2af84738ba0d54502dea5754.txt
+ D tool_result/9d74c91b063f4606bd6c91ec4b6cf2a3.txt
+ D tool_result/9d8e849785464426b50346d17a95ccce.txt
+ D tool_result/9e6bad8b55dd44018ba1093e0e26b6b1.txt
+ D tool_result/9ef041473e614acd8f08737116f7f943.txt
+ D tool_result/9f75d670ed714dcf846d0ee94b8dd5b3.txt
+ D tool_result/9ff7e6e74f174c729cb06a8081d59285.txt
+ D tool_result/a230193e19b94570a2f8b49cbfaddd89.txt
+ D tool_result/a27989ac13c047f78b7ae6cf5dc8894d.txt
+ D tool_result/a3acb32083594be48edbe04ce2740b53.txt
+ D tool_result/a43c1dd0ed674a698d097bf283b2d9e1.txt
+ D tool_result/a4f6096cd6774be083893f2ee666a884.txt
+ D tool_result/a527c55967a8470e802d339d24a9f294.txt
+ D tool_result/a571014fb85548a8b15dc4e4558618df.txt
+ D tool_result/a5b9399d41d2408997cea1ed1ba54a65.txt
+ D tool_result/a743a75c78f4421dacb1d4ee5ceea246.txt
+ D tool_result/a83d983fde2f4d31b4f58069cfbac565.txt
+ D tool_result/a85e7711c3e6478abdf9b1adcad16a3a.txt
+ D tool_result/a8cf2f3b03bb4f5ba78ff34284613c4e.txt
+ D tool_result/aacf6cfbc8a14b6aa223f378be8db0ba.txt
+ D tool_result/ab2ba303d46344238ea3dd6682c7d067.txt
+ D tool_result/ac560f2dc49e40ebb1317a168fc9d3fe.txt
+ D tool_result/ad5367d7cda34d08a3380838af00c6a5.txt
+ D tool_result/ad5bc3b1ed454a20bcf7d3637eeb518f.txt
+ D tool_result/ade3f29161274ba9b24a6ac141d9c4dc.txt
+ D tool_result/ade4e63f739c4d38baa260672cf6d08b.txt
+ D tool_result/ae026ba2a3a441b4beb6cb31e8ae2678.txt
+ D tool_result/ae1ac1fdae304a57ae7feec73fb573bd.txt
+ D tool_result/aec9f7c57d354fb19030f6e66dbf0921.txt
+ D tool_result/aecf08857046415a8cbe48809b45f4c2.txt
+ D tool_result/af165a66388e453597c2e6862f474141.txt
+ D tool_result/b0f1a9cbd0c842948a6fd7c71fe7de9e.txt
+ D tool_result/b196f8700cac488fa432307a2ab4cbde.txt
+ D tool_result/b1db2dd9810e4574ac56f86292a095b0.txt
+ D tool_result/b1ea5ae1cfc34872913e0478014111af.txt
+ D tool_result/b27b649e559d40118bde578ef6ce450a.txt
+ D tool_result/b2be48a331c94a66b578e4c87f1efbf3.txt
+ D tool_result/b3006c19aaf24fc38567283c8097c76e.txt
+ D tool_result/b34ed30d46e1434db17add81641419a0.txt
+ D tool_result/b37303644f5e421ea93891bbc6bff050.txt
+ D tool_result/b4496e2f944840beb7f221483b1aa9fc.txt
+ D tool_result/b44bd79cc1b140d7b39b0bab1345f08b.txt
+ D tool_result/b45988b9bca9433e96191843b8610180.txt
+ D tool_result/b72afba68a504c5aa4e5472d8fa188e1.txt
+ D tool_result/b73efac46b664e118770b3b823634acc.txt
+ D tool_result/b87bae4f9a8a40b3881a966a9c367bc7.txt
+ D tool_result/b8fcb545cdf547019a8892b9a49c548d.txt
+ D tool_result/ba148429d5d2411d9919ca5f588eff8a.txt
+ D tool_result/bacac1919e0e4de2b835ddd2d007c2d7.txt
+ D tool_result/bb2bcf1158da4567b8e11ed02582495e.txt
+ D tool_result/bbe4e79630fa4feb9c577bc3fb177ba1.txt
+ D tool_result/bd2091f10eb64fa4882e542455b0c0ec.txt
+ D tool_result/bd4db7710ebe4e3e950454c126ca5072.txt
+ D tool_result/bdb5186142024e12956d0e608fa5a6d8.txt
+ D tool_result/be48f280812d48d687cee6c0f27de969.txt
+ D tool_result/bebb1e86b4e94525a7e8dc9752358cb5.txt
+ D tool_result/beda389f5ffe453291601912ca353468.txt
+ D tool_result/bef969ad24af4160be120516e2eebeaa.txt
+ D tool_result/befd731d4d9b40b5994da418077e9b42.txt
+ D tool_result/bfa207e3d2014549904cabc7a7c9deeb.txt
+ D tool_result/bfa272255bf94fa2ae0f9ee1a1896287.txt
+ D tool_result/c0d34c4bbe1f403396370317a5761ca0.txt
+ D tool_result/c101677fb84b4e1d9fde106a171b650a.txt
+ D tool_result/c1523e7b3ab04a44866601c412f41aba.txt
+ D tool_result/c157cb6ac61b492aab291e8886820334.txt
+ D tool_result/c16321e837644d7693b5f0068f524936.txt
+ D tool_result/c24eef6c22e24db8a1590b78729df028.txt
+ D tool_result/c2772de643054081b19d2e535a6632eb.txt
+ D tool_result/c2b4f50beaf4410ba523ef1fd89f8099.txt
+ D tool_result/c30e59347361433594bc49f80fcfd08c.txt
+ D tool_result/c47b0464ee1e486db78d2de8c1658b17.txt
+ D tool_result/c47b4c2ec7164e18b3b540511f5a818c.txt
+ D tool_result/c5023cfcf4fd4e11999bd2431a8e1447.txt
+ D tool_result/c5212cee27fe4f5ab72973a7be9ac130.txt
+ D tool_result/c559bfeba4bd4a08b72af2f8084af861.txt
+ D tool_result/c5c71b896d6345b1babd7b1df367131e.txt
+ D tool_result/c627c8abc75b4961b3593b781dbca2f2.txt
+ D tool_result/c6666940f87140d49d94fbcef0247c39.txt
+ D tool_result/c826361bc75c4dc98e6b03d8c90b308b.txt
+ D tool_result/c9cbf00230984fc194dc1dcc46eef04f.txt
+ D tool_result/ca11d775878642e58ff240e94139651a.txt
+ D tool_result/ca967575f10940e2b7ecd2c14f4d29e4.txt
+ D tool_result/cb2b8889089044a880dd8386f0ddc52c.txt
+ D tool_result/cb2bf2f150b048209d75565a7e1421c2.txt
+ D tool_result/cb92475009ff4afd8d0c80633466e47f.txt
+ D tool_result/cbd55f90d80b4b39826e7ce95ec963fd.txt
+ D tool_result/cc8638a3f2104d37bf8f66168397cdea.txt
+ D tool_result/cdd1955e64a24df7a8a1b9dc08e1c4ca.txt
+ D tool_result/ce766f9573d541ec8ee5d7f6b4122894.txt
+ D tool_result/ced6aff944c848f5bb294ca351415ae6.txt
+ D tool_result/ced928a089104230abb2709d3338c45d.txt
+ D tool_result/cfeead3dd8484c19921555b3d7692f50.txt
+ D tool_result/d0b979097e9c4867bfcc2c8884a76347.txt
+ D tool_result/d0cadaaaa33942628aecb227fd8adfc5.txt
+ D tool_result/d1273dd2bcc04e43883dccf8f389088e.txt
+ D tool_result/d12aa9beed2a4f5f8bb99e83237d48f3.txt
+ D tool_result/d1cf9c6c8bc14c7f9193b6b3b73b1efc.txt
+ D tool_result/d1d4f3595f524e1b9d65ec236c607e04.txt
+ D tool_result/d36a330854ba4ecc98c4eb3859a7e8ea.txt
+ D tool_result/d37017084d2448b6901c00a700c5de52.txt
+ D tool_result/d40bdd7b28264c2cb4a404b2134bbbb8.txt
+ D tool_result/d4556f211a9b4f27b657d2e3334e3945.txt
+ D tool_result/d4dd5f0308104d89895a979001a19ca3.txt
+ D tool_result/d63f1c86886844968a9a6fd63ce4e5bd.txt
+ D tool_result/d66577b9ac0b4fcf92af5b71245a2e7b.txt
+ D tool_result/d68b108fd7ca4a39942004175791d32c.txt
+ D tool_result/d6a63ef5c4004c5a866038c5d511696a.txt
+ D tool_result/d777e9d24db64fe08aea7e75d0d03572.txt
+ D tool_result/d81c260461b140a3a919bee557795309.txt
+ D tool_result/d891c46411c34c5f882f3208ccefaeca.txt
+ D tool_result/da1106feace84724a045e598eb7d5665.txt
+ D tool_result/daf614ff14314a1aa711650bf5be6f48.txt
+ D tool_result/daf81623e2204615b308216cedd1f130.txt
+ D tool_result/db5b78e81cab45728d5986c912341186.txt
+ D tool_result/dcbcc5a2556947da9213b22a60b8f3c6.txt
+ D tool_result/dda45258d95444bba8a37e44e21a7c2a.txt
+ D tool_result/def0a28dd02f4cb7b89c59b7b4f68b58.txt
+ D tool_result/deffe36b01614a64a923dcabf8a9eaeb.txt
+ D tool_result/df2e7419766c4fccb20ca9c6a17dd287.txt
+ D tool_result/dfc59b11ff8b48f39d065bc3b3b210a0.txt
+ D tool_result/e08b8bcf3e6144ea8e10518d7dda60ca.txt
+ D tool_result/e0cc992360d845918d60485eb24ababc.txt
+ D tool_result/e0f6e4593e9c4601967eb1863d47e333.txt
+ D tool_result/e177ee9ccd284e05adf686ee15e53ddb.txt
+ D tool_result/e2484a21d8b5419c9f3dd433db695c56.txt
+ D tool_result/e26877034d714cffa4ea6e608f4020b1.txt
+ D tool_result/e322c98043dd408f9a7bd2fb087cbd48.txt
+ D tool_result/e370a77eb35b4f4dafac1f163a2c6bac.txt
+ D tool_result/e386833dcdab408b806b95636f846172.txt
+ D tool_result/e407e2a0e8074a288b5c06e0676cc303.txt
+ D tool_result/e50bb6c2daba416ca610e11e5ed94736.txt
+ D tool_result/e5f8520574cf44eba7284ae93505c72d.txt
+ D tool_result/e6fbeff1dd184c23867490b74b3cee3b.txt
+ D tool_result/e78b4d46f3f24b9f8e1eda5c12335d97.txt
+ D tool_result/e82e5049d3aa4d1a93ebb83cf93df942.txt
+ D tool_result/e8b467bab920492b881ccd646f771e43.txt
+ D tool_result/e9baad2369a04d83a3307b9d4d72eb38.txt
+ D tool_result/e9bfcfa8d3cb48aebde54e08ff5054a8.txt
+ D tool_result/ea1f94f138854c839e17f483d59cb482.txt
+ D tool_result/eb1bcfe5220041089096007aacb16bd7.txt
+ D tool_result/eb592ce9815a43d3883a561b867fadca.txt
+ D tool_result/ebc2e9836aa445bf8ce479d5ca7c3bb5.txt
+ D tool_result/ebda89df540f4d549d5c1de58672442d.txt
+ D tool_result/ed4833a89003425aa798ae0c26c6cefa.txt
+ D tool_result/ed745c1d0bd5443d8bb658138d0eb624.txt
+ D tool_result/edb864524c154a26b24cc020cbc22355.txt
+ D tool_result/ef7f9ee2d76e4ea1a21ccaf8e2a33305.txt
+ D tool_result/f0baf7ed8a1a4645a9a51971d07fa8bf.txt
+ D tool_result/f0e16a38fb1142f3be367fd4c191a90b.txt
+ D tool_result/f12cb031ab1549ccbc711c8094aef638.txt
+ D tool_result/f1c0f22fc9b5453492ee616293795052.txt
+ D tool_result/f1f4d299243842479523ad6a363d8c4b.txt
+ D tool_result/f28329c1b8d245a798dee533261490e8.txt
+ D tool_result/f2c3246798534b8a81a7c277da7e8fcd.txt
+ D tool_result/f2def1927d3e4b93901c7280bab461bb.txt
+ D tool_result/f326c4e8740840258f468430a19083fd.txt
+ D tool_result/f3367f274bdd40d38cc3159cb7dff094.txt
+ D tool_result/f3da2494195641cb975936b437f807e5.txt
+ D tool_result/f4892bc032c447848b1d11c27a4635b6.txt
+ D tool_result/f4d9a38514084d15b00c886d35870e12.txt
+ D tool_result/f60d535565dd4f3483d2cb8266e85b29.txt
+ D tool_result/f62011c6716c48109b1f81c2a5b421b7.txt
+ D tool_result/f757681321ed440e9ad418c2f43e7cc6.txt
+ D tool_result/f795c6fe4e124ea69846ddbeb33333e3.txt
+ D tool_result/f7afba76309f47eebc8ab28e198de2a8.txt
+ D tool_result/f7b71e023b344cf3b9cf0c5707a71d25.txt
+ D tool_result/f87c15c66da44a8da6ab921fcc6bd538.txt
+ D tool_result/f91dd7f6747146a79854127c0817ebe3.txt
+ D tool_result/f92969834fac4708ae06a171e9452001.txt
+ D tool_result/fae851c849a34b70bf825ebed5f11d04.txt
+ D tool_result/fbc6f24054a8440ebdaed764b532b877.txt
+ D tool_result/fcd4dc4c3f7d4f4eb054e2900672763b.txt
+ D tool_result/fd2e7e5632de4c598398a5535fd28985.txt
+ D tool_result/fe4f9521c4a044ad8fa336a407270f32.txt
+ D tool_result/feb490598b5d45e087ddcebc7280b69b.txt
+ D tool_result/ff6693cc48dd46c29aef28be08acecf7.txt
+?? 13-memory/.ci_config.json
+?? 13-memory/.compress_cache/
+?? 13-memory/.dependencies.json
+?? 13-memory/.event_bus/
+?? 13-memory/.retry_log.json
+?? 13-memory/.scheduler/
+?? 13-memory/.snapshots/
+?? 13-memory/.tool_alternatives.json
+?? 13-memory/.tool_discover.json
+?? 13-memory/.tool_discover_cache.json
+?? 13-memory/.undoredo/
+?? 13-memory/.workflow_alerts.json
+?? 13-memory/.workflow_guard_log.json
+?? 13-memory/.workflow_logs/executions.json
+?? 13-memory/.workflow_logs/stock.json
+?? 13-memory/.workflow_market/
+?? 13-memory/.workflow_registry.json
+?? 13-memory/.workflow_schedule.json
+?? 13-memory/.workflow_version.json
+?? 15-docs/auto-generated/auto_doc_generator_001_docs.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_193335.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_193335.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_193335.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_193514.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_193514.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_193514.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_193905.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_193905.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_193905.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194100.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194100.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194100.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194432.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194432.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194432.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194445.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194445.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194445.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194700.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194700.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194700.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194755.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194755.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194755.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194808.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194808.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194808.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194927.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194927.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_194927.md
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_195004.html
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_195004.json
+?? 21-reports/stock-analysis/AAPL_analysis_20260320_195004.md
+?? 21-reports/stock-analysis/GOOGL_analysis_20260320_195156.html
+?? 21-reports/stock-analysis/GOOGL_analysis_20260320_195156.json
+?? 21-reports/stock-analysis/GOOGL_analysis_20260320_195156.md
+?? 21-reports/stock-analysis/META_analysis_20260320_195913.html
+?? 21-reports/stock-analysis/META_analysis_20260320_195913.json
+?? 21-reports/stock-analysis/META_analysis_20260320_195913.md
+?? 21-reports/stock-analysis/META_report_20260320_195913.html
+?? 21-reports/stock-analysis/MSFT_analysis_20260320_195257.html
+?? 21-reports/stock-analysis/MSFT_analysis_20260320_195257.json
+?? 21-reports/stock-analysis/MSFT_analysis_20260320_195257.md
+?? 21-reports/stock-analysis/NVDA_analysis_20260320_195409.html
+?? 21-reports/stock-analysis/NVDA_analysis_20260320_195409.json
+?? 21-reports/stock-analysis/NVDA_analysis_20260320_195409.md
+?? 21-reports/stock-analysis/TSLA_analysis_20260320_194135.html
+?? 21-reports/stock-analysis/TSLA_analysis_20260320_194135.json
+?? 21-reports/stock-analysis/TSLA_analysis_20260320_194135.md
+?? COMMIT.bat
+?? dialog/2026-03-21.jsonl
+?? flow-archive/20260320-new-dimensions-001/
+?? flow-archive/brainstorm-current/brainstorm_ideas_filtered.json
+?? flow-archive/brainstorm-current/brainstorm_ideas_prioritized.json
+?? flow-archive/brainstorm-current/brainstorm_ideas_raw.json
+?? flow-archive/brainstorm-current/brainstorm_topic.json
+?? flow-archive/brainstorm-current/scamper_ideas_9.json
+?? memory/2026-03-21.md
+?? memory/commit_mem.bat
+?? tool_result/98bf427982e749fca666a0eeb922e5a0.txt

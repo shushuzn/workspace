@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sector Rotation by Factor Model and Fundamental Analysis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        .header {
+            border-bottom: 3px solid #4a9eff;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #1a1a1a;
+            font-size: 24px;
+            margin-bottom: 10px;
+        }
+        .meta {
+            color: #666;
+            font-size: 14px;
+            margin: 5px 0;
+        }
+        .abstract {
+            background: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #4a9eff;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .section {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fafafa;
+            border-radius: 8px;
+        }
+        .section h3 {
+            color: #4a9eff;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        .section .content {
+            color: #333;
+            font-size: 14px;
+            white-space: pre-wrap;
+        }
+        .references {
+            margin-top: 30px;
+        }
+        .reference {
+            padding: 12px;
+            margin: 10px 0;
+            background: #fff;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 13px;
+        }
+        .reference.unverified {
+            border-left: 3px solid #ff9800;
+            background: #fff8e1;
+        }
+        .reference.verified {
+            border-left: 3px solid #4caf50;
+            background: #e8f5e9;
+        }
+        .reference.manual {
+            border-left: 3px solid #2196f3;
+            background: #e3f2fd;
+        }
+        .ref-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .ref-id {
+            font-weight: bold;
+            color: #4a9eff;
+            margin-right: 8px;
+        }
+        .ref-status {
+            font-size: 12px;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #f0f0f0;
+        }
+        .ref-content {
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        .ref-details {
+            margin-top: 10px;
+            padding: 8px;
+            background: #f5f5f5;
+            border-radius: 4px;
+            font-size: 12px;
+        }
+        .ref-details div {
+            margin: 4px 0;
+        }
+        .badge {
+            display: inline-block;
+            padding: 3px 8px;
+            background: #4a9eff;
+            color: white;
+            border-radius: 12px;
+            font-size: 12px;
+            margin: 5px 5px 5px 0;
+        }
+        .footer {
+            text-align: center;
+            color: #999;
+            font-size: 12px;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e0e0e0;
+        }
+        .integrity-notice {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="header">
+            <h1>Sector Rotation by Factor Model and Fundamental Analysis</h1>
+            <div class="meta">作者：未知</div>
+            <div class="meta">年份：D:20</div>
+            <div class="meta">arXiv: <span class="badge">2401.00001</span></div>
+        </div>
+        
+        <div class="abstract">
+            <strong>📖 摘要</strong>
+            <p style="margin-top: 10px;">This study presents an analytical approach to sector rotation, leveraging both factor models and fundamental
+metrics. We initiate with a systematic classification of sectors, followed by an empirical investigation into
+their returns. Through factor analysis, the paper underscores the significance of momentum and short-term
+reversion in dictating sectoral shifts. A subsequent in-depth fundamental analysis evaluates metrics such
+as PE, PB, EV-to-EBITDA, Dividend Yield, among others. Our primary contribution lies in developing a
+predictive framework based on these fundamental indicators. The constructed models, post rigorous training,
+exhibit noteworthy predictive capabilities. The findings furnish a nuanced understanding of sector rotation
+strategies, with implications for asset management and portfolio construction in the financial domain.
+Keywords: US Industrial Sectors, Factor Analysis, Fundamental Analysis, Trading Strategy.</p>
+        </div>
+        
+        <div class="integrity-notice">
+            <strong>🔒 学术诚信声明：</strong>
+            本卡片内容由 AI 辅助生成，所有参考文献需人工核实真实性。
+            请勿直接引用未验证的文献信息。
+        </div>
+        
+        <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📑 核心章节</h2>
+        
+            <div class="section">
+                <h3>Introduction</h3>
+                <p class="content">Sector Rotation by Factor Model and Fundamental Analysis
+Runjia Yang1 and Beining Shi2
+1University of California, Davis
+2University of California, Davis
+Sept 2023
+Abstract
+This study presents an analytical approach to sector rotation, leveraging both factor models and fundamental
+metrics. We initiate with a systematic classification of sectors, followed by an empirical investigation into
+their returns. Through factor analysis, the paper underscores the significance of momentum and short-term
+rev...</p>
+            </div>
+            
+            <div class="section">
+                <h3>Introduction</h3>
+                <p class="content">Sector is composed by a basket of stocks that representing companies in certain business class, which has
+unique features according to the business. Under certain conditions, such as economic cycles, sectors may
+behave accordingly due to the different characteristics of businesses. In this report, we are exploring how to
+capture returns by finding the hidden features behind different sectors and determining the leading sectors
+in some particular market conditions or social environments. Generall...</p>
+            </div>
+            
+            <div class="section">
+                <h3>The momentum premium is established on the observation that assets that have performed well in the</h3>
+                <p class="content">past have the trend to persist good performance in the future. Though the momentum effect is considered
+to be a market anomaly, it has been recognized widely among many asset classes.
+We will explore the
+momentum effect based on the sector indices introduced above.
+Factor Construction
+First of all, we need to construct the momentum factor. Typically, the momentum factor is constructed by
+the past 6 or 12 months cumulative return and excludes the most recent month’s return, considering that
+there...</p>
+            </div>
+            
+            <div class="section">
+                <h3>It now includes at least eighteen companies from IT and Consumer Discretionary sectors. Due to this</h3>
+                <p class="content">reshuffling, dividend yield of this sector is impacted.
+Gross Margin
+Gross margin equals net sales less the cost of goods sold (COGS). Net sales are equivalent to the total
+revenue from sales, and COGS is the direct cost associated with producing goods. By calculating gross
+margin, we could measure one company’s retain revenue after subtracting the production cost. The higher
+the gross margin, the more capital a company retains, which it can then use to pay other costs or satisfy debt
+obligation...</p>
+            </div>
+            
+            <div class="section">
+                <h3>Returns to Buying Winners and Selling Losers: Implications for Stock Market Efficiency Narasimhan</h3>
+                <p class="content">Jegadeesh; Sheridan Titman The Journal of Finance, Vol. 48, No. 1. (Mar., 1993), pp. 65-91.
+2.The Global Industry Classification Standard, MSCI (1999)...</p>
+            </div>
+            
+        
+        <div class="references">
+            <h2 style="margin: 30px 0 20px; color: #1a1a1a;">📚 参考文献</h2>
+            <p style="color: #999;">未检测到参考文献</p>
+        </div>
+        
+        <div class="footer">
+            <p>生成时间：2026-03-11 18:34:34</p>
+            <p>知识卡片生成器 v1.0 | AI Research OS</p>
+            <p style="margin-top: 10px; color: #ff9800;">
+                ⚠️ 所有参考文献必须人工核实真实性 - 严禁虚构文献信息
+            </p>
+        </div>
+    </div>
+</body>
+</html>

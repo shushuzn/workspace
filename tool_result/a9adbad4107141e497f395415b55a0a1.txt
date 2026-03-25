@@ -1,0 +1,267 @@
+# tool_name: read_file
+# created_at: 2026-03-22T20:51:11.572655
+# ---
+"""
+News to Feishu v2 - 新闻推送优化版
+- 飞书卡片格式
+- 30分钟去重
+- 历史记录
+"""
+
+import sys
+import json
+import ssl
+import hashlib
+import urllib.request
+import xml.etree.ElementTree as ET
+from datetime import datetime, timedelta
+from pathlib import Path
+
+sys.path.insert(0, r'D:\OpenClaw\workspace\30-scripts-tools\feishu-tools')
+from feishu_api import FeishuAPIClient
+
+# ============================================================
+# 配置
+# ============================================================
+CONFIG = {
+    "categories": ["tech", "finance", "world", "sports", "society"],
+    "items_per_category": 5,
+    "dedup_minutes": 30,
+    "history_file": r"D:\OpenClaw\workspace\30-scripts-tools\news_history.json",
+}
+
+NEWS_SOURCES = {
+    "tech":    ("36kr",       "https://www.36kr.com/feed"),
+    "finance": ("新浪财经",   "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2517&num=10&page=1"),
+    "world":   ("新浪国际",   "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2514&num=10&page=1"),
+    "sports":  ("新浪体育",   "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2512&num=10&page=1"),
+    "society": ("新浪社会",   "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2511&num=10&page=1"),
+}
+
+BACKUP = {
+    "finance": "https://www.36kr.com/feed",
+    "world":   "https://www.36kr.com/feed",
+    "sports":  "https://www.36kr.com/feed",
+    "society": "https://www.36kr.com/feed",
+}
+
+NAMES = {
+    "tech": "科技", "finance": "财经",
+    "world": "国际", "sports": "体育", "society": "社会",
+}
+
+
+# ============================================================
+# 核心函数
+# ============================================================
+
+def get_ssl_ctx():
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    return ctx
+
+
+def fetch_json(url):
+    req = urllib.request.Request(url, headers={
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)',
+        'Referer': 'https://news.sina.com.cn/'
+    })
+    with urllib.request.urlopen(req, timeout=15, context=get_ssl_ctx()) as r:
+        data = json.loads(r.read())
+    items = []
+    if 'result' in data and 'data' in data['result']:
+        for item in data['result']['data']:
+            t = item.get('title', '').strip()
+            if t:
+                items.append(t)
+    return items
+
+
+def fetch_rss(url):
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    with urllib.request.urlopen(req, timeout=15, context=get_ssl_ctx()) as r:
+        content = r.read()
+    try:
+        xml_text = content.decode('utf-8')
+    except:
+        try:
+            xml_text = content.decode('gbk')
+        except:
+            xml_text = content.decode('latin-1')
+    root = ET.fromstring(xml_text)
+    items = []
+    if root.tag == 'rss':
+        ch = root.find('.//channel') or root
+        for item in ch.findall('item'):
+            t = item.find('title')
+            if t is not None and t.text:
+                items.append(t.text.strip())
+    return items
+
+
+def fetch_news(cat):
+    _, url = NEWS_SOURCES.get(cat, ("", ""))
+    backup_url = BACKUP.get(cat, "")
+    for src in [url, backup_url]:
+        if not src:
+            continue
+        try:
+            items = fetch_rss(src) if '36kr' in src else fetch_json(src)
+            if items:
+                return items
+        except:
+            continue
+    return []
+
+
+def load_history():
+    p = Path(CONFIG["history_file"])
+    if p.exists():
+        try:
+            with open(p, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            pass
+    return {"sent": [], "last_run": ""}
+
+
+def save_history(history):
+    p = Path(CONFIG["history_file"])
+    p.parent.mkdir(parents=True, exist_ok=True)
+    with open(p, 'w', encoding='utf-8') as f:
+        json.dump(history, f, ensure_ascii=False, indent=2)
+
+
+def normalize_hash(text):
+    return hashlib.md5(text.encode('utf-8')).hexdigest()[:12]
+
+
+def filter_new(items, history):
+    """过滤30分钟内已发送的新闻"""
+    cutoff = datetime.now() - timedelta(minutes=CONFIG["dedup_minutes"])
+    recent = set()
+    
+    for entry in history.get("sent", []):
+        try:
+            if datetime.fromisoformat(entry["time"]) > cutoff:
+                recent.add(entry["hash"])
+        except:
+            pass
+    
+    new_items = []
+    for item in items:
+        h = normalize_hash(item)
+        if h not in recent:
+            new_items.append({"text": item, "hash": h})
+    
+    return new_items
+
+
+def build_card(results, new_count):
+    """构建飞书卡片的 elements (header 由 send_poster 处理)"""
+    time_str = datetime.now().strftime('%H:%M')
+    total = sum(len(r['items']) for r in results)
+    
+    elements = [
+        {
+            "tag": "div",
+            "text": {
+                "tag": "lark_md",
+                "content": f"**{time_str}** · 新鲜 {new_count} 条 · 共 {total} 条\n"
+            }
+        },
+        {"tag": "hr"},
+    ]
+    
+    for r in results:
+        if not r['items']:
+            continue
+        elements.append({
+            "tag": "div",
+            "text": {"tag": "lark_md", "content": f"**【{r['name']}】**"}
+        })
+        for item in r['items'][:CONFIG["items_per_category"]]:
+            text = item['text']
+            if len(text) > 55:
+                text = text[:52] + "..."
+            elements.append({
+                "tag": "div",
+                "text": {"tag": "lark_md", "content": f"• {text}"}
+            })
+        elements.append({"tag": "hr"})
+    
+    elements.append({
+        "tag": "note",
+        "elements": [
+            {"tag": "plain_text", "content": f"OpenClaw · {datetime.now().strftime('%Y-%m-%d %H:%M')}"}
+        ]
+    })
+    
+    return elements
+
+
+def send_news_card(results, new_count):
+    """用 send_poster 发送新闻卡片"""
+    feishu = FeishuAPIClient()
+    title = f"📰 新闻速报 · {datetime.now().strftime('%H:%M')}"
+    content = build_card(results, new_count)
+    return feishu.send_poster(title, content)
+
+
+def main():
+    print(f"\n[{datetime.now().strftime('%H:%M:%S')}] [NEWS] Fetching...")
+    
+    history = load_history()
+    results = []
+    all_new = []
+    stats = {"fetched": 0, "new": 0, "skipped": 0}
+    
+    for cat in CONFIG["categories"]:
+        name = NAMES.get(cat, cat)
+        items = fetch_news(cat)
+        stats["fetched"] += len(items)
+        
+        new_items = filter_new(items, history)
+        stats["new"] += len(new_items)
+        stats["skipped"] += len(items) - len(new_items)
+        
+        results.append({"name": name, "items": new_items})
+        print(f"  [*] {name}: {len(items)} fetched, {len(new_items)} new")
+    
+    # 如果没有新内容，跳过发送
+    if stats["new"] == 0:
+        print(f"\n[SKIP] No new items (skipped {stats['skipped']} duplicates)")
+        return
+    
+    # 更新历史
+    now = datetime.now().isoformat()
+    for r in results:
+        for item in r['items']:
+            history["sent"].append({
+                "text": item["text"][:100],
+                "hash": item["hash"],
+                "time": now,
+                "category": r["name"]
+            })
+    
+    # 清理超过2小时的记录
+    cutoff = datetime.now() - timedelta(hours=2)
+    history["sent"] = [
+        e for e in history["sent"]
+        if datetime.fromisoformat(e["time"]) > cutoff
+    ]
+    history["last_run"] = now
+    save_history(history)
+    
+    # 发送飞书卡片
+    try:
+        send_news_card(results, stats["new"])
+        print(f"\n[OK] Sent {stats['new']} new items to Feishu")
+        print(f"     (skipped {stats['skipped']} duplicates, fetched {stats['fetched']} total)")
+    except Exception as e:
+        print(f"\n[ERROR] Failed to send: {e}")
+
+
+if __name__ == "__main__":
+    main()

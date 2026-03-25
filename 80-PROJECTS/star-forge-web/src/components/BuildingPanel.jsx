@@ -1,14 +1,48 @@
+import { useMemo, memo } from 'react';
 import { useGame, BUILDINGS, TIERS, getBuildingCost, getBuildingProduction } from '../store/GameContext';
 import { formatNumber } from '../utils/format';
 import styles from './BuildingPanel.module.css';
 
-export default function BuildingPanel() {
+const BuildingItem = memo(function BuildingItem({ building, owned, efficiencyBonus, costReduction, prestigeMultiplier, globalEfficiency, globalMultiplier, energy, onBuy }) {
+  const cost = Math.floor(getBuildingCost(building, owned, prestigeMultiplier, costReduction));
+  const production = getBuildingProduction(building, 1, efficiencyBonus) * prestigeMultiplier * (1 + globalEfficiency) * globalMultiplier;
+  const totalProduction = getBuildingProduction(building, owned, efficiencyBonus) * prestigeMultiplier * (1 + globalEfficiency) * globalMultiplier;
+  const canAfford = energy >= cost;
+
+  return (
+    <div
+      className={`${styles.building} ${canAfford ? styles.affordable : ''}`}
+      onClick={() => canAfford && onBuy(building.id)}
+    >
+      <div className={styles.buildingIcon}>{building.emoji}</div>
+      <div className={styles.buildingInfo}>
+        <div className={styles.buildingName}>{building.name}</div>
+        <div className={styles.buildingOwned}>×{owned}</div>
+      </div>
+      <div className={styles.buildingStats}>
+        <div className={styles.buildingProduction}>
+          {owned > 0 ? formatNumber(totalProduction) : formatNumber(production)}/s
+        </div>
+        <div className={canAfford ? styles.costAffordable : styles.costExpensive}>
+          ⚡ {formatNumber(cost)}
+        </div>
+      </div>
+    </div>
+  );
+});
+
+export default memo(function BuildingPanel() {
   const { state, buyBuilding, unlockTier } = useGame();
 
-  const buildingsByTier = {};
-  for (const tier of TIERS) {
-    buildingsByTier[tier.id] = BUILDINGS.filter(b => b.tier === tier.id);
-  }
+  const buildingsByTier = useMemo(() => {
+    const result = {};
+    for (const tier of TIERS) {
+      result[tier.id] = BUILDINGS.filter(b => b.tier === tier.id);
+    }
+    return result;
+  }, []);
+
+  const prestigeMultiplier = 1 + state.eternityFactor * 0.1;
 
   return (
     <div className={styles.container}>
@@ -41,42 +75,20 @@ export default function BuildingPanel() {
 
             {isUnlocked && (
               <div className={styles.list}>
-                {buildings.map((building) => {
-                  const owned = state.buildings[building.id] || 0;
-                  const efficiencyBonus = state.buildingEfficiency[building.id] || 0;
-                  const costReduction = state.buildingCostReduction[building.id] || 0;
-                  const prestigeMultiplier = 1 + state.eternityFactor * 0.1;
-                  const cost = Math.floor(
-                    getBuildingCost(building, owned, prestigeMultiplier, costReduction)
-                  );
-                  const production = getBuildingProduction(building, 1, efficiencyBonus) * prestigeMultiplier * (1 + state.globalEfficiency) * state.globalMultiplier;
-                  const totalProduction = getBuildingProduction(building, owned, efficiencyBonus) * prestigeMultiplier * (1 + state.globalEfficiency) * state.globalMultiplier;
-                  const canAfford = state.energy >= cost;
-
-                  return (
-                    <div
-                      key={building.id}
-                      className={`${styles.building} ${canAfford ? styles.affordable : ''}`}
-                      onClick={() => canAfford && buyBuilding(building.id)}
-                    >
-                      <div className={styles.buildingIcon}>{building.emoji}</div>
-
-                      <div className={styles.buildingInfo}>
-                        <div className={styles.buildingName}>{building.name}</div>
-                        <div className={styles.buildingOwned}>×{owned}</div>
-                      </div>
-
-                      <div className={styles.buildingStats}>
-                        <div className={styles.buildingProduction}>
-                          {owned > 0 ? formatNumber(totalProduction) : formatNumber(production)}/s
-                        </div>
-                        <div className={canAfford ? styles.costAffordable : styles.costExpensive}>
-                          ⚡ {formatNumber(cost)}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
+                {buildings.map((building) => (
+                  <BuildingItem
+                    key={building.id}
+                    building={building}
+                    owned={state.buildings[building.id] || 0}
+                    efficiencyBonus={state.buildingEfficiency[building.id] || 0}
+                    costReduction={state.buildingCostReduction[building.id] || 0}
+                    prestigeMultiplier={prestigeMultiplier}
+                    globalEfficiency={state.globalEfficiency}
+                    globalMultiplier={state.globalMultiplier}
+                    energy={state.energy}
+                    onBuy={buyBuilding}
+                  />
+                ))}
               </div>
             )}
           </div>
@@ -84,4 +96,4 @@ export default function BuildingPanel() {
       })}
     </div>
   );
-}
+});

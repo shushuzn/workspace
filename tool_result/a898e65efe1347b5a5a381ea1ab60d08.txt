@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T09:47:56.482789
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 180-230 of 510)
+        "var_95_pct": var_95 / price * 100,
+        "max_dd_pct": max_dd_pct,
+        "from_low_pct": from_low_pct,
+        "sharpe": sharpe,
+        "range_pos": range_pos,
+    }
+
+def calc_technical(q):
+    """Simple technical analysis"""
+    price = q["price"]
+    w52h = q["w52h"]
+    w52l = q["w52l"]
+    
+    # Distance from key levels
+    dist_from_high = (w52h - price) / price * 100
+    dist_from_low = (price - w52l) / price * 100
+    
+    # Simple MA approximation (using 52W range)
+    # Assume price oscillates around midpoint
+    midpoint = (w52h + w52l) / 2
+    ma_status = "Above Average" if price > midpoint else "Below Average"
+    
+    # Trend assessment
+    range_pos = (price - w52l) / (w52h - w52l) if w52h > w52l else 0.5
+    if range_pos > 0.7:
+        trend = "Strong (Near High)"
+    elif range_pos > 0.4:
+        trend = "Neutral"
+    else:
+        trend = "Weak (Near Low)"
+    
+    return {
+        "dist_from_high": dist_from_high,
+        "dist_from_low": dist_from_low,
+        "midpoint": midpoint,
+        "ma_status": ma_status,
+        "trend": trend,
+        "range_pos": range_pos * 100,
+    }
+
+def score_stock(q, fin):
+    """Improved scoring with more dimensions"""
+    s = 50
+    # Profitability (max 35)
+    s += 10 if fin["gm"] > 0.60 else 5 if fin["gm"] > 0.40 else 0
+    s += 15 if fin["nm"] > 0.25 else 10 if fin["nm"] > 0.15 else 0
+    s += 10 if fin["roe"] > 0.30 else 5 if fin["roe"] > 0.20 else 0
+    # Efficiency (max 15)
+    s += 10 if fin["roic"] > 0.25 else 5 if fin["roic"] > 0.15 else 0
+    s += 5 if fin["roic"] > fin["roe"] * 0.8 else 0  # Good capital allocation
+    # Balance Sheet (max 15)
+
+[280 more lines. Use start_line=231 to continue.]

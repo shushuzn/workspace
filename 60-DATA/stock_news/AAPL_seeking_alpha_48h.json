@@ -1,0 +1,80 @@
+{
+  "symbol": "AAPL",
+  "monitoring_period": "48h",
+  "sources": [
+    "seeking_alpha"
+  ],
+  "total_articles": 5,
+  "sentiment_summary": {
+    "overall": "neutral",
+    "score": -0.034,
+    "distribution": {
+      "positive": 1,
+      "neutral": 3,
+      "negative": 1
+    },
+    "percentages": {
+      "positive": 20.0,
+      "neutral": 60.0,
+      "negative": 20.0
+    }
+  },
+  "articles": [
+    {
+      "title": "AAPL holds annual shareholder meeting",
+      "source": "seeking_alpha",
+      "source_name": "Seeking Alpha",
+      "published_at": "2026-03-19T22:30:47.220368",
+      "hours_ago": 2,
+      "url": "https://seeking_alpha.com/article/24842",
+      "sentiment": "neutral",
+      "sentiment_score": -0.151,
+      "relevance_score": 0.61
+    },
+    {
+      "title": "Analysts upgrade AAPL to buy",
+      "source": "seeking_alpha",
+      "source_name": "Seeking Alpha",
+      "published_at": "2026-03-18T07:30:47.220398",
+      "hours_ago": 41,
+      "url": "https://seeking_alpha.com/article/34333",
+      "sentiment": "positive",
+      "sentiment_score": 0.798,
+      "relevance_score": 0.88
+    },
+    {
+      "title": "AAPL sector performance review",
+      "source": "seeking_alpha",
+      "source_name": "Seeking Alpha",
+      "published_at": "2026-03-18T23:30:47.220411",
+      "hours_ago": 25,
+      "url": "https://seeking_alpha.com/article/2678",
+      "sentiment": "neutral",
+      "sentiment_score": -0.225,
+      "relevance_score": 0.62
+    },
+    {
+      "title": "AAPL trading volume increases",
+      "source": "seeking_alpha",
+      "source_name": "Seeking Alpha",
+      "published_at": "2026-03-18T20:30:47.220421",
+      "hours_ago": 28,
+      "url": "https://seeking_alpha.com/article/98950",
+      "sentiment": "neutral",
+      "sentiment_score": 0.299,
+      "relevance_score": 0.67
+    },
+    {
+      "title": "AAPL faces regulatory scrutiny",
+      "source": "seeking_alpha",
+      "source_name": "Seeking Alpha",
+      "published_at": "2026-03-18T23:30:47.220429",
+      "hours_ago": 25,
+      "url": "https://seeking_alpha.com/article/96885",
+      "sentiment": "negative",
+      "sentiment_score": -0.89,
+      "relevance_score": 0.8
+    }
+  ],
+  "monitored_at": "2026-03-20T00:30:47.220455"
+}

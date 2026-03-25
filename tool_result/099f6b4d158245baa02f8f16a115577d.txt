@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:10:42.237624
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\screener_v2.py  (lines 1-50 of 187)
+"""Advanced Screener - Multi-factor stock screening"""
+from stock_pro.core import A, F, P, analyze_multiple
+
+
+class AdvancedScreener:
+    """Multi-factor stock screener"""
+    
+    def __init__(self):
+        self.results = []
+    
+    def filter_by_score(self, min_score=60, max_score=100):
+        """Filter by score range"""
+        self.results = [r for r in self.results if min_score <= r["score"] <= max_score]
+        return self
+    
+    def filter_by_upside(self, min_upside=10):
+        """Filter by minimum upside"""
+        self.results = [r for r in self.results if r["upside"] >= min_upside]
+        return self
+    
+    def filter_by_pe(self, max_pe=30):
+        """Filter by max P/E ratio"""
+        self.results = [r for r in self.results if r.get("pe", 999) <= max_pe]
+        return self
+    
+    def filter_by_peg(self, max_peg=1.5):
+        """Filter by max PEG ratio"""
+        self.results = [r for r in self.results if r.get("peg", 999) <= max_peg]
+        return self
+    
+    def filter_by_roe(self, min_roe=15):
+        """Filter by minimum ROE"""
+        self.results = [r for r in self.results if r.get("roe", 0) >= min_roe]
+        return self
+    
+    def filter_by_sector(self, sector):
+        """Filter by sector"""
+        from stock_pro.sectors import get_sector
+        self.results = [r for r in self.results if get_sector(r["symbol"]) == sector]
+        return self
+    
+    def filter_by_market_cap(self, min_cap=None, max_cap=None):
+        """Filter by market cap (in billions)"""
+        # Placeholder - would need real market cap data
+        return self
+    
+    def filter_by_volume(self, min_volume=1000000):
+        """Filter by minimum trading volume"""
+        return self
+    
+
+[137 more lines. Use start_line=51 to continue.]

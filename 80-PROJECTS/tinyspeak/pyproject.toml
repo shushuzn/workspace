@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "tinyspeak"
+version = "0.1.0"
+description = "Lightweight Local-First TTS Tool"
+readme = "README.md"
+license = {text = "MIT"}
+authors = [
+    {name = "OpenClaw", email = "openclaw@example.com"}
+]
+keywords = ["tts", "text-to-speech", "edge-tts", "audio"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+]
+
+dependencies = [
+    "edge-tts>=6.1.0",
+    "click>=8.1.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "pydub>=0.25.0",
+    "aiofiles>=23.0.0",
+    "python-dotenv>=1.0.0",
+    "tqdm>=4.65.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+]
+
+[project.scripts]
+tinyspeak = "tinyspeak.cli:cli"
+tinyspeak-api = "tinyspeak.api:run_server"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["tinyspeak*"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]

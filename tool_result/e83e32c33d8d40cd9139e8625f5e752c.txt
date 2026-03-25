@@ -1,0 +1,75 @@
+# tool_name: grep_search
+# created_at: 2026-03-24T00:23:13.670869
+# ---
+analyze\ai_summarizer.py:349:      import argparse
+analyze\ai_summarizer.py:350:  
+analyze\ai_summarizer.py:351:      parser = argparse.ArgumentParser(description="AI 摘要")
+analyze\ai_summarizer.py:352:>     parser.add_argument("action", choices=["analyze", "batch", "sentiment", "cache"])
+analyze\ai_summarizer.py:353:      parser.add_argument("--title", "-t", help="新闻标题")
+analyze\ai_summarizer.py:354:      parser.add_argument("--limit", "-n", type=int, default=10, help="数量")
+analyze\ai_summarizer.py:355:  
+---
+analyze\ai_summarizer.py:400:          print(f"    Neutral: {d['neutral']}")
+analyze\ai_summarizer.py:401:          print(f"    Negative: {d['negative']}")
+analyze\ai_summarizer.py:402:  
+analyze\ai_summarizer.py:403:>     elif args.action == "cache":
+analyze\ai_summarizer.py:404:          stats = summarizer.cache_stats()
+analyze\ai_summarizer.py:405:          print("\n  Cache Stats")
+analyze\ai_summarizer.py:406:          print(f"  Total: {stats['total']}")
+---
+core\unified_config.py:165:                  ssl_verify=ft.get("ssl_verify", True),
+core\unified_config.py:166:              )
+core\unified_config.py:167:  
+core\unified_config.py:168:>         if "cache" in data:
+core\unified_config.py:169:              ca = data["cache"]
+core\unified_config.py:170:              config.cache = CacheConfig(
+core\unified_config.py:171:                  enabled=ca.get("enabled", True),
+---
+core\unified_config.py:166:              )
+core\unified_config.py:167:  
+core\unified_config.py:168:          if "cache" in data:
+core\unified_config.py:169:>             ca = data["cache"]
+core\unified_config.py:170:              config.cache = CacheConfig(
+core\unified_config.py:171:                  enabled=ca.get("enabled", True),
+core\unified_config.py:172:                  ttl=ca.get("ttl", 300),
+---
+core\unified_config.py:231:              f"{_env_prefix}DB_PATH": ("database", "path"),
+core\unified_config.py:232:              f"{_env_prefix}LOG_LEVEL": ("logging", "level"),
+core\unified_config.py:233:              f"{_env_prefix}DRY_RUN": ("push", "dry_run"),
+core\unified_config.py:234:>             f"{_env_prefix}CACHE_TTL": ("cache", "ttl"),
+core\unified_config.py:235:              f"{_env_prefix}FETCH_TIMEOUT": ("fetcher", "timeout"),
+core\unified_config.py:236:              f"{_env_prefix}RATE_LIMIT": ("fetcher", "rate_limit"),
+core\unified_config.py:237:          }
+---
+news_hub.py:178:              print("  用法: python news_hub.py db [stats|recent|cleanup|export]")
+news_hub.py:179:  
+news_hub.py:180:      # 缓存
+news_hub.py:181:>     elif cmd == "cache":
+news_hub.py:182:          action = sys.argv[2] if len(sys.argv) > 2 else "stats"
+news_hub.py:183:          if action == "stats":
+news_hub.py:184:              run_cache_stats()
+---
+news_hub.py:236:              results = summarizer.analyze_batch(news)
+news_hub.py:237:              sentiment = summarizer.get_market_sentiment(results)
+news_hub.py:238:              print(f"\n  市场情绪: {sentiment['score']} ({sentiment['label']})")
+news_hub.py:239:>         elif action == "cache":
+news_hub.py:240:              stats = summarizer.cache_stats()
+news_hub.py:241:              print(f"\n  AI 缓存: {stats['total']} 条 (活跃: {stats['active']})")
+news_hub.py:242:          elif action == "clear":
+---
+search_tools\search.py:315:      parser.add_argument("--regex", help="正则搜索")
+search_tools\search.py:316:      parser.add_argument("--group", help="预设组（科技/金融/加密/能源/地产/医疗/汽车）")
+search_tools\search.py:317:      parser.add_argument("--limit", type=int, default=20, help="显示数量")
+search_tools\search.py:318:>     parser.add_argument("--no-cache", action="store_true", help="禁用缓存")
+search_tools\search.py:319:  
+search_tools\search.py:320:      args = parser.parse_args()
+search_tools\search.py:321:  
+---
+tools\health_check.py:82:  
+tools\health_check.py:83:  @check("缓存目录")
+tools\health_check.py:84:  def check_cache():
+tools\health_check.py:85:>     cache_dir = Path(__file__).parent.parent / "cache"
+tools\health_check.py:86:      if not cache_dir.exists():
+tools\health_check.py:87:          cache_dir.mkdir(parents=True, exist_ok=True)
+tools\health_check.py:88:      return cache_dir.exists()
+---

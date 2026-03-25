@@ -1,0 +1,82 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:32:01.178393
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 395-470 of 1039)
+def enrich_with_llm(news_list, max_items=10, use_cache=True):
+    """使用LLM并行丰富新闻数据"""
+    if not check_ollama_status():
+        print("  ⚠ Ollama未运行，跳过LLM分析")
+        return news_list
+    
+    print("  🤖 启用本地LLM并行分析...")
+    start = time.time()
+    
+    # 预加载缓存
+    cache = {}
+    if use_cache:
+        cache = load_llm_cache()
+    
+    # 使用MD5保证hash一致性
+    import hashlib
+    
+    # 准备任务 - 跳过已缓存的
+    uncached_tasks = []
+    cached_results = {}
+    for i, news in enumerate(news_list[:max_items]):
+        title = news.get('title', '')
+        title_hash = hashlib.md5(title.encode()).hexdigest()
+        if title_hash in cache:
+            cached_results[i] = cache[title_hash]
+        else:
+            uncached_tasks.append((i, title))
+    
+    print(f"    缓存命中: {len(cached_results)}/{max_items}")
+    
+    # 并行分析未缓存的
+    new_results = {}
+    if uncached_tasks:
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            futures = {executor.submit(analyze_llm_parallel, task): task for task in uncached_tasks}
+            for future in as_completed(futures):
+                idx, analysis = future.result()
+                if analysis:
+                    new_results[idx] = analysis
+    
+    # 合并结果
+    all_results = {**cached_results, **new_results}
+    
+    # 应用结果
+    llm_count = 0
+    for idx, news in enumerate(news_list[:max_items]):
+        if idx in all_results:
+            analysis = all_results[idx]
+            news['llm_sentiment'] = analysis.get('sentiment', 'neutral')
+            news['llm_summary'] = analysis.get('summary', '')
+            news['llm_urgency'] = analysis.get('urgency', 'medium')
+            news['llm_score'] = analysis.get('sentiment_score', 0)  # 情感分数
+            news['llm_markets'] = analysis.get('markets', [])  # 影响市场
+            news['llm_entities'] = analysis.get('entities', [])  # 关键实体
+            news['llm_keywords'] = analysis.get('keywords', [])  # 关键词
+            news['llm_impact'] = analysis.get('impact', 'medium')  # 影响程度
+            news['llm_advice'] = analysis.get('advice', 'neutral')  # 投资建议
+            
+            # 覆盖规则分析结果
+            if analysis.get('sentiment') in ['positive', 'negative']:
+                news['sentiment'] = analysis['sentiment']
+            llm_count += 1
+    
+    elapsed = time.time() - start
+    print(f"  ✅ LLM分析完成: {llm_count}条 ({elapsed:.1f}s)")
+    return news_list
+
+def filter_by_category(news_list, category):
+    """按分类筛选"""
+    if category == 'all':
+        return news_list
+    return [n for n in news_list if n.get('category') == category]
+
+def filter_by_sentiment(news_list, sentiment):
+    """按情感筛选"""
+    return [n for n in news_list if n.get('sentiment') == sentiment]
+
+[569 more lines. Use start_line=471 to continue.]

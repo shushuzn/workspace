@@ -1,0 +1,83 @@
+{
+  "symbol": "TEST",
+  "analysis_date": "2026-03-20T13:05:40.695263",
+  "candle_count": 100,
+  "ma_trend": {
+    "ma5": {
+      "direction": "upward",
+      "strength": 0.9878576699659568,
+      "slope": 81896.916,
+      "slope_percent": 14.639534887229527,
+      "description": "MA 趋势：上涨 (斜率：14.64%)"
+    },
+    "ma10": {
+      "direction": "upward",
+      "strength": 0.988331460831612,
+      "slope": 57013.740000000005,
+      "slope_percent": 14.539222145048669,
+      "description": "MA 趋势：上涨 (斜率：14.54%)"
+    },
+    "ma20": {
+      "direction": "upward",
+      "strength": 0.9883505183609494,
+      "slope": 32805.823200000006,
+      "slope_percent": 14.20708721545982,
+      "description": "MA 趋势：上涨 (斜率：14.21%)"
+    }
+  },
+  "macd_trend": {
+    "current_macd": 214251.79524563544,
+    "current_signal": 85351.21804016353,
+    "current_histogram": 128900.57720547191,
+    "crossover": null,
+    "divergence": "none",
+    "signal": "bullish",
+    "description": "MACD: 看涨"
+  },
+  "adx": {
+    "adx": 100.0,
+    "plus_di": 89.86,
+    "minus_di": 0.0,
+    "trend_strength": "very_strong",
+    "trend_direction": "upward",
+    "description": "ADX: 100.00 (极强) - 上涨"
+  },
+  "trend_stage": {
+    "stage": "strong_uptrend",
+    "confidence": 1.0,
+    "price": 1084420.2,
+    "ma_short": 547669.365,
+    "ma_long": 133763.2486,
+    "description": "趋势阶段：强势上涨 (置信度：100%)"
+  },
+  "continuation_probability": {
+    "continuation_probability": 0.85,
+    "continuation_direction": "upward",
+    "factors": [
+      {
+        "name": "price_above_ma",
+        "impact": 0.1,
+        "direction": "bullish"
+      },
+      {
+        "name": "ma_upward",
+        "impact": 0.15,
+        "direction": "bullish"
+      },
+      {
+        "name": "volume_increase",
+        "impact": 0.1,
+        "direction": "confirm"
+      }
+    ],
+    "description": "趋势延续概率：85% (上涨)"
+  },
+  "summary": {
+    "overall_trend": "bullish",
+    "confidence": 1.0,
+    "recommendation": "buy",
+    "bullish_signals": 6,
+    "bearish_signals": 0,
+    "description": "综合趋势：看涨 - 建议：买入"
+  }
+}

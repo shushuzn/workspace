@@ -1,0 +1,88 @@
+{
+  "version": "1.0",
+  "calculations": [
+    {
+      "timestamp": "2026-03-20T00:35:55.680870",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T12:44:14.506645",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T12:59:35.802060",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:52:57.403880",
+      "symbol": "MSFT",
+      "candles": 252,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:54:09.252329",
+      "symbol": "NVDA",
+      "candles": 252,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:59:13.361314",
+      "symbol": "META",
+      "candles": 252,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:01:31.512088",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:01:39.268805",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:02:35.522800",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:04:43.342633",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:05:05.070104",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:05:10.919138",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:05:38.947533",
+      "symbol": "TEST",
+      "candles": 100,
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_calculations": 13,
+    "successful": 13,
+    "failed": 0
+  }
+}

@@ -1,0 +1,56 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T11:18:05.494508
+# ---
+
++==============================================================+
+|                    Stock PRO v11.0                          |
+|            Modular Stock Analysis Tool                      |
++==============================================================+
+
+# Top Picks Report
+
+## Top 10 by Score
+
+| # | Symbol | Price | Score | Upside | Rating | P/E |
+|---|--------|-------|-------|--------|--------|-----|
+| 1 | NVDA | $172.00 | 87 | +56.4% | STRONG BUY | 34.9x |
+| 2 | GOOGL | $190.00 | 83 | +92.1% | STRONG BUY | 26.8x |
+| 3 | META | $575.00 | 75 | +50.3% | STRONG BUY | 26.7x |
+| 4 | AVGO | $1500.00 | 65 | +20.0% | BUY | 37.5x |
+| 5 | AMD | $130.00 | 63 | +42.3% | BUY | 28.9x |
+| 6 | ASML | $980.00 | 62 | +22.4% | HOLD | 28.0x |
+| 7 | NFLX | $570.00 | 57 | +22.8% | HOLD | 31.7x |
+| 8 | MA | $460.00 | 57 | +13.0% | HOLD | 15.3x |
+| 9 | MSFT | $415.00 | 56 | +19.3% | HOLD | 36.1x |
+| 10 | ADBE | $530.00 | 56 | +17.0% | HOLD | 24.1x |
+
+## Best Value
+
+| Symbol | Price | Score | Upside | Rating |
+|--------|-------|-------|--------|--------|
+| GOOGL | $190.00 | 83 | +92.1% | STRONG BUY |
+| NVDA | $172.00 | 87 | +56.4% | STRONG BUY |
+| AMZN | $225.00 | 51 | +77.8% | BUY |
+| META | $575.00 | 75 | +50.3% | STRONG BUY |
+| AMD | $130.00 | 63 | +42.3% | BUY |
+
+## Growth Picks
+
+| Symbol | Price | Score | Rev Growth | Rating |
+|--------|-------|-------|------------|--------|
+| NVDA | $172.00 | 87 | +50.0% | STRONG BUY |
+| META | $575.00 | 75 | +25.0% | STRONG BUY |
+| GOOGL | $190.00 | 83 | +12.0% | STRONG BUY |
+| AVGO | $1500.00 | 65 | +20.0% | BUY |
+| AMD | $130.00 | 63 | +20.0% | BUY |
+
+## Defensive Picks (Low Risk)
+
+| Symbol | Price | Beta | Dividend | Rating |
+|--------|-------|------|----------|--------|
+| PFE | $28.00 | 0.7 | 6.00% | SELL |
+| ABBV | $175.00 | 0.6 | 4.00% | HOLD |
+| CVX | $150.00 | 0.9 | 3.80% | SELL |
+| XOM | $115.00 | 0.8 | 3.50% | SELL |
+| JNJ | $155.00 | 0.6 | 3.00% | BUY |
+

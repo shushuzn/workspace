@@ -1,0 +1,25 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T23:41:43.847216
+# ---
+news_manager.py:181:              if len(vals) >= 2:
+news_manager.py:182:                  vix = float(vals[0])
+news_manager.py:183:                  chg = float(vals[1])
+news_manager.py:184:                  direction = "+" if chg >= 0 else ""
+news_manager.py:185:                  status = "恐慌" if vix > 20 else "平稳"
+news_manager.py:186:                  return f"VIX:{vix:.1f}({direction}{chg:.1f}) [{status}]"
+news_manager.py:187:          return ""
+news_manager.py:188:      except:
+news_manager.py:189:          return ""
+news_manager.py:190:  
+news_manager.py:191:> def get_forex():
+news_manager.py:192:      try:
+news_manager.py:193:          url = "https://hq.sinajs.cn/list=fx_susdcny,fx_seurusd"
+news_manager.py:194:          req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
+news_manager.py:195:          with urllib.request.urlopen(req, timeout=5) as resp:
+news_manager.py:196:              data = resp.read().decode("gbk")
+news_manager.py:197:          items = []
+news_manager.py:198:          names = {"susdcny": "USD/CNY", "seurusd": "EUR/USD"}
+news_manager.py:199:          for line in data.strip().split("\n"):
+news_manager.py:200:              if "=" in line:
+news_manager.py:201:                  sym = line.split("=")[0].split("_")[-1]
+---

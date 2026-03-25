@@ -1,0 +1,377 @@
+# tool_name: read_file
+# created_at: 2026-03-21T19:21:02.794631
+# ---
+// Idle Empire - 收藏品系统 v1.0
+
+const COLLECTIBLES = [
+    {
+        id: 'artifact_gold_coin',
+        name: '黄金硬币',
+        desc: '一枚古老的金币，散发着神秘的光芒',
+        icon: '🪙',
+        rarity: 'common',
+        effect: { type: 'gold', value: 0.05 },
+        unlock: { type: 'gold', target: 100000 }
+    },
+    {
+        id: 'artifact_diamond',
+        name: '钻石',
+        desc: '纯净的钻石，象征着财富与权力',
+        icon: '💎',
+        rarity: 'rare',
+        effect: { type: 'global', value: 0.1 },
+        unlock: { type: 'gold', target: 1000000 }
+    },
+    {
+        id: 'artifact_crown',
+        name: '王者皇冠',
+        desc: '象征统治与权威的皇冠',
+        icon: '👑',
+        rarity: 'epic',
+        effect: { type: 'dynasty', value: 0.2 },
+        unlock: { type: 'dynasty', target: 5 }
+    },
+    {
+        id: 'artifact_sword',
+        name: '勇者之剑',
+        desc: '能够轻易斩杀Boss的传奇武器',
+        icon: '⚔️',
+        rarity: 'rare',
+        effect: { type: 'boss', value: 0.25 },
+        unlock: { type: 'boss', target: 20 }
+    },
+    {
+        id: 'artifact_wand',
+        name: '魔法杖',
+        desc: '蕴含强大魔法力量的法杖',
+        icon: '🪄',
+        rarity: 'epic',
+        effect: { type: 'click', value: 0.3 },
+        unlock: { type: 'click', target: 10000 }
+    },
+    {
+        id: 'artifact_book',
+        name: '知识之书',
+        desc: '记载着古老智慧的魔法书',
+        icon: '📚',
+        rarity: 'common',
+        effect: { type: 'upgrade', value: 0.15 },
+        unlock: { type: 'upgrade', target: 10 }
+    },
+    {
+        id: 'artifact_ring',
+        name: '命运之戒',
+        desc: '能够改变命运的神奇戒指',
+        icon: '💍',
+        rarity: 'legendary',
+        effect: { type: 'all', value: 0.15 },
+        unlock: { type: 'gold', target: 1000000000 }
+    },
+    {
+        id: 'artifact_potion',
+        name: '生命药水',
+        desc: '能够恢复生命力的神奇药水',
+        icon: '🧪',
+        rarity: 'common',
+        effect: { type: 'offline', value: 0.2 },
+        unlock: { type: 'gold', target: 500000 }
+    },
+    {
+        id: 'artifact_scroll',
+        name: '远古卷轴',
+        desc: '记载着古老咒语的神秘卷轴',
+        icon: '📜',
+        rarity: 'rare',
+        effect: { type: 'event', value: 0.3 },
+        unlock: { type: 'gold', target: 5000000 }
+    },
+    {
+        id: 'artifact_gem',
+        name: '能量宝石',
+        desc: '蕴含强大能量的神秘宝石',
+        icon: '💎',
+        rarity: 'epic',
+        effect: { type: 'gps', value: 0.2 },
+        unlock: { type: 'gps', target: 100000 }
+    },
+    {
+        id: 'artifact_amulet',
+        name: '守护符',
+        desc: '能够带来好运的神秘护身符',
+        icon: '🧿',
+        rarity: 'legendary',
+        effect: { type: 'lucky', value: 0.4 },
+        unlock: { type: 'gold', target: 5000000000 }
+    },
+    {
+        id: 'artifact_map',
+        name: '藏宝图',
+        desc: '指引财富所在地的古老地图',
+        icon: '🗺️',
+        rarity: 'rare',
+        effect: { type: 'gold', value: 0.1 },
+        unlock: { type: 'building', target: 100 }
+    }
+];
+
+var collectibles = [];
+var collectiblesDisplay = null;
+
+function getCollectibleData() {
+    var data = localStorage.getItem('idle_empire_collectibles');
+    if (data) {
+        try {
+            return JSON.parse(data);
+        } catch (e) {
+            return [];
+        }
+    }
+    return [];
+}
+
+function saveCollectibleData() {
+    localStorage.setItem('idle_empire_collectibles', JSON.stringify(collectibles));
+}
+
+function checkCollectibleUnlock() {
+    if (!G) return;
+    
+    var changed = false;
+    COLLECTIBLES.forEach(function(collectible) {
+        if (collectibles.find(c => c.id === collectible.id)) return;
+        
+        var unlocked = false;
+        switch (collectible.unlock.type) {
+            case 'gold':
+                unlocked = G.totalEarned >= collectible.unlock.target;
+                break;
+            case 'boss':
+                unlocked = (G.bossesDefeated || 0) >= collectible.unlock.target;
+                break;
+            case 'building':
+                unlocked = getTotalBuildings(G) >= collectible.unlock.target;
+                break;
+            case 'click':
+                unlocked = (G.totalClicks || 0) >= collectible.unlock.target;
+                break;
+            case 'upgrade':
+                unlocked = (G.upgrades || []).length >= collectible.unlock.target;
+                break;
+            case 'dynasty':
+                unlocked = (G.dynastyLevel || 1) >= collectible.unlock.target;
+                break;
+            case 'gps':
+                unlocked = getCurrentGps() >= collectible.unlock.target;
+                break;
+        }
+        
+        if (unlocked) {
+            collectibles.push({
+                id: collectible.id,
+                collected: Date.now()
+            });
+            changed = true;
+            showMsg('✨ 收藏品解锁: ' + collectible.name, 'achievement');
+        }
+    });
+    
+    if (changed) {
+        saveCollectibleData();
+        renderCollectibles();
+        invalidateDerivedData();
+    }
+}
+
+function getCollectibleById(id) {
+    return COLLECTIBLES.find(c => c.id === id);
+}
+
+function getCollectibleEffectMultiplier() {
+    var multipliers = {
+        gold: 1,
+        global: 1,
+        dynasty: 1,
+        boss: 1,
+        click: 1,
+        upgrade: 1,
+        offline: 1,
+        event: 1,
+        gps: 1,
+        lucky: 1,
+        all: 1
+    };
+    
+    collectibles.forEach(function(c) {
+        var collectible = getCollectibleById(c.id);
+        if (collectible) {
+            if (collectible.effect.type === 'all') {
+                for (var key in multipliers) {
+                    multipliers[key] *= (1 + collectible.effect.value);
+                }
+            } else if (multipliers[collectible.effect.type] !== undefined) {
+                multipliers[collectible.effect.type] *= (1 + collectible.effect.value);
+            }
+        }
+    });
+    
+    return multipliers;
+}
+
+function getCollectibleBonus(type) {
+    var multipliers = getCollectibleEffectMultiplier();
+    return multipliers[type] || 1;
+}
+
+function initCollectibleSystem() {
+    collectibles = getCollectibleData();
+    checkCollectibleUnlock();
+    addCollectiblesTabToUI();
+    renderCollectibles();
+}
+
+function addCollectiblesTabToUI() {
+    var mainContent = document.querySelector('.main-content');
+    if (!mainContent) return;
+    
+    var existingTab = document.getElementById('tab-collectibles');
+    if (existingTab) return;
+    
+    var tabsNav = document.querySelector('.nav-tabs');
+    if (!tabsNav) return;
+    
+    var collectiblesTab = document.createElement('button');
+    collectiblesTab.className = 'nav-tab';
+    collectiblesTab.setAttribute('data-tab', 'collectibles');
+    collectiblesTab.innerHTML = '<span class="nav-tab-icon">📦</span><span class="nav-tab-text">收藏</span>';
+    tabsNav.appendChild(collectiblesTab);
+    
+    var collectiblesSection = document.createElement('section');
+    collectiblesSection.id = 'tab-collectibles';
+    collectiblesSection.className = 'content-section';
+    collectiblesSection.innerHTML = '<div class="section-header"><h1 class="section-title">📦 收藏品</h1><p class="section-subtitle">收集稀有物品获得永久加成</p></div><div id="collectibles-list" class="collectibles-grid"></div>';
+    mainContent.appendChild(collectiblesSection);
+    
+    collectiblesTab.onclick = function() {
+        var allTabs = document.querySelectorAll('.nav-tab');
+        var allContent = document.querySelectorAll('.content-section');
+        for (var j = 0; j < allTabs.length; j++) allTabs[j].classList.remove('active');
+        for (var k = 0; k < allContent.length; k++) allContent[k].classList.remove('active');
+        this.classList.add('active');
+        document.getElementById('tab-collectibles').classList.add('active');
+    };
+}
+
+function renderCollectibles() {
+    var container = document.getElementById('collectibles-list');
+    if (!container) return;
+    
+    var html = '';
+    var collectedCount = collectibles.length;
+    var totalCount = COLLECTIBLES.length;
+    
+    html += '<div class="collectibles-header">';
+    html += '<div class="collectibles-progress">已收集: ' + collectedCount + ' / ' + totalCount + '</div>';
+    html += '<div class="collectibles-bonus">总加成: ' + Math.round((getCollectibleBonus('all') - 1) * 100) + '%</div>';
+    html += '</div>';
+    
+    COLLECTIBLES.forEach(function(collectible) {
+        var collected = collectibles.find(c => c.id === collectible.id);
+        var rarityClass = 'rarity-' + collectible.rarity;
+        var statusClass = collected ? 'collected' : 'locked';
+        
+        var effectText = '';
+        switch (collectible.effect.type) {
+            case 'gold':
+                effectText = '+5% 金币收益';
+                break;
+            case 'global':
+                effectText = '+10% 全局收益';
+                break;
+            case 'dynasty':
+                effectText = '+20% 王朝增益';
+                break;
+            case 'boss':
+                effectText = '+25% Boss伤害';
+                break;
+            case 'click':
+                effectText = '+30% 点击收益';
+                break;
+            case 'upgrade':
+                effectText = '+15% 升级效果';
+                break;
+            case 'offline':
+                effectText = '+20% 离线收益';
+                break;
+            case 'event':
+                effectText = '+30% 事件收益';
+                break;
+            case 'gps':
+                effectText = '+20% 产量';
+                break;
+            case 'lucky':
+                effectText = '+40% 幸运值';
+                break;
+            case 'all':
+                effectText = '+15% 所有收益';
+                break;
+        }
+        
+        var unlockText = '';
+        switch (collectible.unlock.type) {
+            case 'gold':
+                unlockText = '需要 ' + formatNumber(collectible.unlock.target) + ' 金币';
+                break;
+            case 'boss':
+                unlockText = '需要击败 ' + collectible.unlock.target + ' 个Boss';
+                break;
+            case 'building':
+                unlockText = '需要购买 ' + collectible.unlock.target + ' 个建筑';
+                break;
+            case 'click':
+                unlockText = '需要点击 ' + collectible.unlock.target + ' 次';
+                break;
+            case 'upgrade':
+                unlockText = '需要购买 ' + collectible.unlock.target + ' 个升级';
+                break;
+            case 'dynasty':
+                unlockText = '需要王朝 Lv' + collectible.unlock.target;
+                break;
+            case 'gps':
+                unlockText = '需要达到 ' + formatNumber(collectible.unlock.target) + '/s';
+                break;
+        }
+        
+        html += '<div class="collectible-card ' + statusClass + ' ' + rarityClass + '">';
+        html += '<div class="collectible-icon">' + collectible.icon + '</div>';
+        html += '<div class="collectible-info">';
+        html += '<div class="collectible-name">' + collectible.name + '</div>';
+        html += '<div class="collectible-desc">' + collectible.desc + '</div>';
+        html += '<div class="collectible-effect">' + effectText + '</div>';
+        if (!collected) {
+            html += '<div class="collectible-unlock">' + unlockText + '</div>';
+        }
+        html += '</div>';
+        html += '<div class="collectible-rarity ' + rarityClass + '">' + getRarityText(collectible.rarity) + '</div>';
+        if (collected) {
+            html += '<div class="collectible-date">收集于: ' + new Date(collected.collected).toLocaleDateString() + '</div>';
+        }
+        html += '</div>';
+    });
+    
+    container.innerHTML = html;
+}
+
+function getRarityText(rarity) {
+    switch (rarity) {
+        case 'common': return '普通';
+        case 'rare': return '稀有';
+        case 'epic': return '史诗';
+        case 'legendary': return '传说';
+        default: return '未知';
+    }
+}
+
+function updateCollectibles() {
+    checkCollectibleUnlock();
+    renderCollectibles();
+}

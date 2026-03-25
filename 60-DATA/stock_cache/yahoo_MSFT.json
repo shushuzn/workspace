@@ -1,0 +1,16 @@
+{
+  "symbol": "MSFT",
+  "source": "yahoo-api",
+  "price": 389.02,
+  "change": -2.77,
+  "change_percent": -0.71,
+  "volume": 24689447,
+  "market_cap": 0,
+  "pe_ratio": null,
+  "high": 392.49,
+  "low": 387.06,
+  "open": 389.02,
+  "previous_close": 391.79,
+  "timestamp": "2026-03-20T19:52:55.819169",
+  "currency": "USD"
+}

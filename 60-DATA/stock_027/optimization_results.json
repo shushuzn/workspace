@@ -1,0 +1,68 @@
+{
+  "strategy": "rsi",
+  "method": "genetic_algorithm",
+  "generations": 10,
+  "population": 20,
+  "best_params": {
+    "fast_period": 24,
+    "slow_period": 20
+  },
+  "best_performance": {
+    "sharpe": 1.813,
+    "return": 9.04,
+    "drawdown": 13.03,
+    "score": 0.957
+  },
+  "history": [
+    {
+      "generation": 0,
+      "best_score": 0.957,
+      "avg_score": 0.47585
+    },
+    {
+      "generation": 1,
+      "best_score": 0.957,
+      "avg_score": 0.6382
+    },
+    {
+      "generation": 2,
+      "best_score": 0.957,
+      "avg_score": 0.74005
+    },
+    {
+      "generation": 3,
+      "best_score": 0.957,
+      "avg_score": 0.8010999999999999
+    },
+    {
+      "generation": 4,
+      "best_score": 0.957,
+      "avg_score": 0.842
+    },
+    {
+      "generation": 5,
+      "best_score": 0.957,
+      "avg_score": 0.90785
+    },
+    {
+      "generation": 6,
+      "best_score": 0.957,
+      "avg_score": 0.94465
+    },
+    {
+      "generation": 7,
+      "best_score": 0.957,
+      "avg_score": 0.9570000000000001
+    },
+    {
+      "generation": 8,
+      "best_score": 0.957,
+      "avg_score": 0.9570000000000001
+    },
+    {
+      "generation": 9,
+      "best_score": 0.957,
+      "avg_score": 0.9570000000000001
+    }
+  ]
+}

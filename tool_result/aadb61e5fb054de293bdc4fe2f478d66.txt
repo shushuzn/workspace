@@ -1,0 +1,19 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T15:38:12.225916
+# ---
+reports.py:27:               f"| {'目标价' if cn else 'Target'} | ${data['target']:.2f} | - |",
+reports.py:28:               f"| {'上涨空间' if cn else 'Upside'} | {data['upside']:+.1f}% | {data['rating']} |",
+reports.py:29:               f"| {'评分' if cn else 'Score'} | {data['score']}/100 | {'优秀' if data['score'] >= 75 else '良好' if data['score'] >= 60 else '一般'} |",
+reports.py:30:>              f"| P/E | {data['pe']:.1f}x | {data['recommend']} |",
+reports.py:31:               "",
+reports.py:32:               "## DCF估值" if cn else "## DCF Valuation",
+reports.py:33:               f"| {'情景' if cn else 'Scenario'} | {'估值' if cn else 'Value'} | vs Price |",
+---
+reports.py:50:               f"| {'股息率' if cn else 'Dividend'} | {data['div']:.2f}% |",
+reports.py:51:               f"| {'分析师评级' if cn else 'Analyst'} | {data['analyst_rating']} ({data['num_analysts']}) |",
+reports.py:52:               "",
+reports.py:53:>              f"**{'建议' if cn else 'Recommendation'}:** {data['rating']} - {data['recommend']}",
+reports.py:54:               f"\n*Stock PRO v12.0*"]
+reports.py:55:      return "\n".join(lines)
+reports.py:56:  
+---

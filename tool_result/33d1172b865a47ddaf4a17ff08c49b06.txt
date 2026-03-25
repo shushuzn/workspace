@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:26:07.596335
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_subscriptions.py  (lines 130-200 of 237)
+    
+    for s in watch:
+        level = s.get("level", "medium")
+        if level in stats["by_level"]:
+            stats["by_level"][level] += 1
+        stats["keywords"].append(s.get("keyword", ""))
+    
+    return stats
+
+def format_subscription_report(matched_news):
+    """格式化订阅报告"""
+    if not matched_news:
+        return None
+    
+    # 按级别分组
+    by_level = {"critical": [], "high": [], "medium": [], "low": []}
+    
+    for n in matched_news:
+        level = n.get("matched_level", "medium")
+        if level in by_level:
+            by_level[level].append(n)
+    
+    # 生成卡片内容
+    elements = [
+        {
+            "tag": "markdown",
+            "content": f"**📬 关键词订阅** ({len(matched_news)}条匹配)\n根据您的订阅关键词，检测到以下新闻:"
+        }
+    ]
+    
+    # 最高级别
+    if by_level["critical"]:
+        elements.append({"tag": "hr"})
+        elements.append({"tag": "markdown", "content": "### 🔴 最高级别"})
+        for n in by_level["critical"][:5]:
+            keyword = n.get("matched_keyword", "")
+            elements.append({
+                "tag": "markdown",
+                "content": f"📌 **{keyword}**\n[{n.get('title', '')[:40]}...]({n.get('url', '')})\n📍{n.get('source', '')}"
+            })
+    
+    # 高级别
+    if by_level["high"]:
+        elements.append({"tag": "hr"})
+        elements.append({"tag": "markdown", "content": "### 🟠 重要"})
+        for n in by_level["high"][:5]:
+            keyword = n.get("matched_keyword", "")
+            elements.append({
+                "tag": "markdown",
+                "content": f"📌 **{keyword}**\n[{n.get('title', '')[:35]}...]({n.get('url', '')})\n📍{n.get('source', '')}"
+            })
+    
+    # 中级别
+    if by_level["medium"]:
+        elements.append({"tag": "hr"})
+        elements.append({"tag": "markdown", "content": "### 🟡 普通"})
+        for n in by_level["medium"][:5]:
+            keyword = n.get("matched_keyword", "")
+            elements.append({
+                "tag": "markdown",
+                "content": f"📌 {keyword}: [{n.get('title', '')[:30]}...]({n.get('url', '')})"
+            })
+    
+    return {"elements": elements}
+
+# CLI命令
+def cmd_list():
+    """列出所有订阅"""
+    stats = get_subscription_stats()
+    
+    print("=" * 50)
+
+[37 more lines. Use start_line=201 to continue.]

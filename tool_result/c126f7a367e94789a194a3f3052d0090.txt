@@ -1,0 +1,22 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T09:51:27.813662
+# ---
+D:\.ollama\.ollama
+D:\.ollama\.ollama\id_ed25519
+D:\.ollama\.ollama\id_ed25519.pub
+D:\.ollama\.ollama\models
+D:\.ollama\.ollama\models\blobs
+D:\.ollama\.ollama\models\manifests
+D:\.ollama\.ollama\models\blobs\sha256-22ed9da9beb29aeb127131cad8ddc08a3417873a077cf581d08f57a6f92ed6a3
+D:\.ollama\.ollama\models\blobs\sha256-35dc0df070f979a8161576b3bc6befe6dd79c4c5e435b98edc6bfe0c3f9f2f8d
+D:\.ollama\.ollama\models\blobs\sha256-5044b1e1d48328060c1cbf80d747de75a8b4bbdb722b5dc86cd4b6cc393d8ece
+D:\.ollama\.ollama\models\blobs\sha256-61850cddf54562020a091521814bebb9160ed2f08841217da398625c309c70c2
+D:\.ollama\.ollama\models\blobs\sha256-b46661073c18e5b56a41fa320975f866a00def1ff08feef4718e013258896f8c
+D:\.ollama\.ollama\models\blobs\sha256-c3ef5827b322c4be08a3a26ce424460d8b37daf593356c2cc1f4e40a7ab0581b
+D:\.ollama\.ollama\models\manifests\registry.ollama.ai
+D:\.ollama\.ollama\models\manifests\registry.ollama.ai\library
+D:\.ollama\.ollama\models\manifests\registry.ollama.ai\library\qwen2.5
+D:\.ollama\.ollama\models\manifests\registry.ollama.ai\library\qwen3.5
+D:\.ollama\.ollama\models\manifests\registry.ollama.ai\library\qwen2.5\1.5b
+D:\.ollama\.ollama\models\manifests\registry.ollama.ai\library\qwen3.5\0.8b
+D:\.ollama\.ollama\models\manifests\registry.ollama.ai\library\qwen3.5\2b

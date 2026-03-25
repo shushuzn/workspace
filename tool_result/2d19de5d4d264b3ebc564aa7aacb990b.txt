@@ -1,0 +1,61 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-21T09:42:46.214937
+# ---
+
+========================================
+Running workflow: quick
+========================================
+
+[MULTI-AGENT COLLABORATION]
+  Workflow: Quick Check
+  Primary Persona: INNOVATOR
+  Category: qa
+==================================================
+Running: Quick Check
+==================================================
+[1/4] multi_agent_router_001... OK
+[2/4] tool_validator_001... OK
+[3/4] workflow_health_001... OK
+[4/4] multi_agent_learn_001... OK
+
+Complete: 4/4 OK
+{
+  "workflow": "quick",
+  "results": [
+    {
+      "step": 1,
+      "tool": "multi_agent_router_001",
+      "status": "ok"
+    },
+    {
+      "step": 2,
+      "tool": "tool_validator_001",
+      "status": "ok"
+    },
+    {
+      "step": 3,
+      "tool": "workflow_health_001",
+      "status": "ok"
+    },
+    {
+      "step": 4,
+      "tool": "multi_agent_learn_001",
+      "status": "ok"
+    }
+  ]
+}
+{
+  "timestamp": "2026-03-21T09:42:42.464891",
+  "score": 100,
+  "tools": {
+    "total": 410,
+    "compliant": 410,
+    "percentage": "100%"
+  },
+  "workflows": {
+    "total_runs": 50,
+    "successful": 50,
+    "rate": "100%"
+  },
+  "status": "healthy"
+}

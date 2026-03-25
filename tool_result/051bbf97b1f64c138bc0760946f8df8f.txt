@@ -1,0 +1,86 @@
+# tool_name: read_file
+# created_at: 2026-03-23T00:54:49.864949
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\workflow.py  (lines 1-80 of 269)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+==============================================================================
+  UNIFIED WORKFLOW ENTRY - 统一工作流入口
+  用法: py workflow.py <command> [args]
+  
+  Commands:
+    start <task>     - 开始新任务 (自动初始化会话)
+    test             - 运行测试
+    save <desc>      - 保存当前进度
+    end <desc>       - 结束会话并压缩
+    status           - 查看当前状态
+    help             - 显示帮助
+==============================================================================
+"""
+import sys
+import json
+import os
+from pathlib import Path
+from datetime import datetime
+
+# Fix Windows encoding
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
+
+WORKSPACE = Path(__file__).parent.parent
+STATE_FILE = WORKSPACE / "execution-state.json"
+SESSION_FILE = WORKSPACE / "session_temp.json"
+MEMORY_DIR = WORKSPACE / "13-memory"
+
+def get_state():
+    """Get current session state"""
+    if STATE_FILE.exists():
+        try:
+            return json.loads(STATE_FILE.read_text())
+        except:
+            pass
+    return None
+
+def save_state(state):
+    """Save session state"""
+    STATE_FILE.write_text(json.dumps(state, indent=2, ensure_ascii=False))
+
+def cmd_start(task_name):
+    """Start a new task session"""
+    print(f"\n{'='*50}")
+    print(f"  🚀 Starting: {task_name}")
+    print(f"{'='*50}\n")
+    
+    # Create session state
+    state = {
+        "session_id": datetime.now().strftime("%Y%m%d%H%M%S"),
+        "task": task_name,
+        "started_at": datetime.now().isoformat(),
+        "status": "active",
+        "decisions": [],
+        "files_modified": [],
+        "tests_run": 0
+    }
+    save_state(state)
+    
+    # Create session temp file
+    session_data = {
+        "task": task_name,
+        "start_time": datetime.now().isoformat(),
+        "decisions": []
+    }
+    SESSION_FILE.write_text(json.dumps(session_data, indent=2))
+    
+    print(f"✅ Session initialized: {state['session_id']}")
+    print(f"📝 Task: {task_name}")
+    print(f"\nReady to work! Use these commands:")
+    print(f"  - workflow.py save <desc>   - Save progress")
+    print(f"  - workflow.py test          - Run tests")
+    print(f"  - workflow.py end <desc>    - End session")
+    return state
+
+def cmd_save(description):
+    """Save current progress"""
+
+[189 more lines. Use start_line=81 to continue.]

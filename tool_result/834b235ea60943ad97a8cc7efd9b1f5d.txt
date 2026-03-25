@@ -1,0 +1,51 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:46:27.725089
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 70-114 of 623)
+CATEGORIES = {
+    "stock": ["股市", "A股", "港股", "美股", "创业板", "沪指", "深成", "上证", "纳斯达克", "道琼斯", "标普", "股票", "板块", "涨跌", "IPO", "ETF"],
+    "forex": ["汇率", "美元", "欧元", "英镑", "日元", "人民币", "外汇", "贬值", "升值", "货币", "央行", "美联储"],
+    "commodity": ["黄金", "原油", "石油", "铜", "铝", "天然气", "大宗商品", "期货", "WTI", "布伦特"],
+    "macro": ["GDP", "通胀", "CPI", "PPI", "非农", "就业", "加息", "降息", "经济", "衰退", "增长"],
+    "trade": ["贸易", "关税", "制裁", "出口", "进口", "WTO", "关税", "毛衣战"],
+    "tech": ["科技", "AI", "芯片", "半导体", "华为", "苹果", "谷歌", "英伟达", "特斯拉", "电动车"],
+    "china": ["中国", "A股", "央行", "发改委", "商务部", "统计局"],
+    "us": ["美国", "特朗普", "拜登", "美联储", "Fed", "USTR"],
+}
+
+SENTIMENT_KEYWORDS = {
+    "positive": ["上涨", "增长", "利好", "突破", "新高", "超预期", "强劲", "反弹", "复苏", "增长", "乐观"],
+    "negative": ["下跌", "暴跌", "利空", "违约", "衰退", "危机", "风险", "警告", "疲软", "恶化", "崩盘"],
+}
+
+def categorize(news):
+    """给新闻添加分类"""
+    title = news.get('title', '')
+    for cat, keywords in CATEGORIES.items():
+        for kw in keywords:
+            if kw in title:
+                news['category'] = cat
+                return cat
+    news['category'] = 'other'
+    return 'other'
+
+def analyze_sentiment(news):
+    """分析新闻情感"""
+    title = news.get('title', '')
+    pos_count = sum(1 for kw in SENTIMENT_KEYWORDS['positive'] if kw in title)
+    neg_count = sum(1 for kw in SENTIMENT_KEYWORDS['negative'] if kw in title)
+    
+    if pos_count > neg_count:
+        news['sentiment'] = 'positive'
+        news['sentiment_score'] = pos_count - neg_count
+    elif neg_count > pos_count:
+        news['sentiment'] = 'negative'
+        news['sentiment_score'] = neg_count - pos_count
+    else:
+        news['sentiment'] = 'neutral'
+        news['sentiment_score'] = 0
+    return news
+
+def enrich_news(news_list):
+
+[509 more lines. Use start_line=115 to continue.]

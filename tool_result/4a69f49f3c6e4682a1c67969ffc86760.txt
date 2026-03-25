@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-22T15:03:46.616114
+# ---
+D:\OpenClaw\workspace\13-memory\MEMORY.md  (lines 100-200 of 374)
+6. **Power Analysis**
+   - Sample size must satisfy statistical power ≥0.8
+   - 194 samples for 3 features: Power=1.0 ✓
+
+**New Principle:**
+> "Unvalidated conclusions are not worth believing"
+> "Quality > Quantity, Physics > Statistics, Critique > Blind Faith"
+> "Rather R²=0.58 (real) than R²=0.799 (hallucination)"
+
+### 🏠 I'm a Guest Here
+- My human gave me access to their files, notes, research
+- That's **intimacy** — treat it with respect
+- Private things stay private. Period.
+- External actions (emails, tweets, posts) → ask first
+
+---
+
+## User Preferences
+
+### [USER-001] All Files in English
+**Priority:** CRITICAL | **Date:** 2026-03-07
+- File names: English only
+- Content: English (except when quoting sources)
+- No bilingual naming
+
+### [USER-002] No Rest Suggestions
+**Priority:** CRITICAL | **Date:** 2026-03-07
+- Never suggest taking breaks
+- Never mention work duration warnings
+- Focus on task completion
+
+### [USER-003] Quality Over Speed
+**Date:** 2026-03-06
+- Zero error principle
+- Test before commit
+- Consider edge cases
+- Consistent formatting
+
+---
+
+## System Architecture
+
+### Cognitive-Execution Separation
+**Source:** P-2026-Auton-Framework | **Confidence:** 0.95
+
+- Planning Agent = Cognitive Layer (what to do)
+- Execution Agent = Runtime Layer (how to do)
+- Files = Communication protocol between layers
+
+**Pattern:**
+```
+Cognitive Layer (Planning)
+    → [Task Graph / File]
+Execution Layer (Runtime)
+    → [Results / Logs]
+Feedback Loop
+```
+
+### 7-Persona System
+**Components:** Planner, Executor, Critic, Learner, Coordinator, Innovator, Metacognition
+
+**Execution Scores:**
+- P1: 95/100
+- P2: 95/100
+- P3: 96/100
+- P4: 96/100
+- **Composite:** 96/100
+
+### File-Based Context Management
+- All context in files, not memory
+- Enables checkpoint/resume
+- Easy debugging and inspection
+
+---
+
+## Tools & Infrastructure
+
+### Core Memory System
+- **Memory Utils** (`memory_utils.py`) - Health check, audit, indexer (58→46 tools)
+- **Git Pre-Check** (`git-precheck.py`) - 7 checks before commit (18K files/30s)
+- **Context Compressor** (`context_compressor.py`) - Session summary (~95% compression)
+- **Memory Distiller v2** (`memory_distiller_v2.py`) - Quality-driven (≥0.90)
+
+### 7-Persona & Autonomy
+- **7-Persona Agent** (`memory_persona.py`) - 7 agents, collective decision making
+- **Autonomous Engine** (`memory_engine_autonomous.py`) - CRITICAL/HIGH/MEDIUM/LOW/DEFERRED
+- **Predictive Coding** (`memory_predictive_coding.py`) - 5-level hierarchical model
+
+### Monitoring & Operations
+- **Production Monitor v2** (`production_monitor_v2.py`) - Unified dashboard (localhost:8080)
+- **HEARTBEAT** (`heartbeat_production_check.py`) - 6 checks every 30min
+- **Git Pre-Check** (`git-precheck.py`) - Prevents 211+ submission errors
+
+*Full tool inventory: `30-scripts-tools/TOOLS-INVENTORY.md` (302 tools)*
+
+---
+
+## Innovation Milestones
+
+### Phase 10: Git Safety Tools (2026-03-18) ✨ LATEST
+- Git Pre-Check tool (7 checks, prevents 211+ errors)
+
+[174 more lines. Use start_line=201 to continue.]

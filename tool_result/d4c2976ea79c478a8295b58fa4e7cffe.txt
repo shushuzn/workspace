@@ -1,0 +1,66 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T11:27:00.538054
+# ---
+"=== FINAL VERIFICATION ===" 
+==================================================
+Stock PRO v11.0 - Test Suite
+==================================================
+
+Testing data coverage...
+  Stocks: 54
+  Analysts: 54
+  Prices: 54
+  PASS: All data sets aligned (54 stocks)
+
+Testing analyze()...
+  PASS: NVDA score=87, upside=56.4%
+  Data: fetched_at=2026-03-22T11:26:25.177243, source=cached
+
+Testing analyze_multiple()...
+  PASS: Analyzed 3 stocks
+
+Testing StockScreener...
+  PASS: Found 10 stocks matching criteria
+
+Testing PortfolioManager...
+  PASS: PortfolioManager initialized
+
+==================================================
+Results: 5 passed, 0 failed
+==================================================
+"" 
+"=== STOCKS ===" 
+
++==============================================================+
+|                    Stock PRO v11.0                          |
+|            Modular Stock Analysis Tool                      |
++==============================================================+
+
+
+# Available Sectors
+  - Consumer: 3 stocks
+  - ETF: 2 stocks
+  - Energy: 2 stocks
+  - Finance: 5 stocks
+  - Healthcare: 6 stocks
+  - Industrial: 3 stocks
+  - Technology: 31 stocks
+  - Technology/Auto: 2 stocks
+"" 
+"=== TOP PICKS ===" 
+
++==============================================================+
+|                    Stock PRO v11.0                          |
+|            Modular Stock Analysis Tool                      |
++==============================================================+
+
+# Quick Picks
+
+| Symbol | Price | Score | Upside | Why |
+|--------|-------|-------|--------|-----|
+| NVDA | $172.00 | 87 | +56.4% | Excellent, High ROE |
+| GOOGL | $190.00 | 83 | +92.1% | Excellent, Strong FCF |
+| META | $575.00 | 75 | +50.3% | High Upside, Strong FCF |
+| DASH | $110.00 | 71 | +63.6% | High Upside |
+| COIN | $180.00 | 66 | +55.6% | High Upside, Strong FCF |
+

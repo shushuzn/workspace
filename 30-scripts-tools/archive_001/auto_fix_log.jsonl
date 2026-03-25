@@ -1,0 +1,5 @@
+{"timestamp": "2026-03-20T09:26:16.485851", "session_id": "session-20260320092253", "fix_type": "backup_violations", "result": "success", "message": "违规日志已备份"}
+{"timestamp": "2026-03-20T09:26:16.493457", "session_id": "session-20260320092253", "fix_type": "generate_report", "result": "success", "message": "报告已生成"}
+{"timestamp": "2026-03-20T09:26:40.893253", "session_id": "session-20260320092253", "fix_type": "backup_violations", "result": "success", "message": "违规日志已备份"}
+{"timestamp": "2026-03-20T09:26:40.900192", "session_id": "session-20260320092253", "fix_type": "generate_report", "result": "success", "message": "报告已生成"}
+{"timestamp": "2026-03-20T09:35:16.314367", "session_id": "session-20260320092818", "fix_type": "reset_penalty", "result": "success", "message": "惩罚状态已重置"}

@@ -1,0 +1,87 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T10:32:02.180629
+# ---
+stock_pro_v4.py:1085:>     print(f"\nPrice: ${price:.2f}")
+stock_pro_v4.py:1086:>     print(f"EPS: Trailing ${q['eps_t']:.2f} | Forward ${q['eps_f']:.2f}")
+stock_pro_v4.py:1088:>     print(f"PEG: {q['peg']:.2f} | Beta: {q['beta']:.2f}")
+stock_pro_v4.py:1091:>     print(f"Combined Target: ${target:.2f} ({upside:+.1f}%)")
+stock_pro_v4.py:1094:>     print(f"5Y EPS: ${eps_proj[-1]['eps']:.2f} ({eps_proj[-1]['growth']:.1f}% CAGR)")
+stock_pro_v4.py:1096:>     print(f"FCF Yield: {cf['fcf_yield']*100:.1f}% | Div Yield: {cf['div_yield']*100:.2f}%")
+stock_pro_v4.py:1112:>         f.write(f"| Current Price | **${price:.2f}** |\n")
+stock_pro_v4.py:1113:>         f.write(f"| 12-Month Target | **${target:.2f}** |\n")
+stock_pro_v4.py:1123:>         f.write(f"| Current Price | ${price:.2f} | - |\n")
+stock_pro_v4.py:1125:>         f.write(f"| DCF Base Case | ${dcf_base:.2f} | Intrinsic Value |\n")
+stock_pro_v4.py:1126:>         f.write(f"| Combined Target | ${target:.2f} | **Best Estimate** |\n")
+stock_pro_v4.py:1155:>         f.write(f"| PEG Ratio | {q['peg']:.2f} | {peg_assess} |\n\n")
+stock_pro_v4.py:1162:>             f.write(f"| {name} | ${val:.2f} | {color} {diff:+.1f}% |\n")
+stock_pro_v4.py:1169:>         f.write(f"| DCF Base Case | ${dcf_base:.2f} | 40% |\n")
+stock_pro_v4.py:1170:>         f.write(f"| **Combined** | **${target:.2f}** | 100% |\n\n")
+stock_pro_v4.py:1179:>             f.write(f"| Y{proj['year']} | ${proj['eps']:.2f} | {proj['growth']:.1f}% | {note} |\n")
+stock_pro_v4.py:1187:>         f.write(f"| VaR (95%) | ${risk_m['var_95']:.2f} | {risk_m['var_95_pct']:.1f}% of price |\n")
+stock_pro_v4.py:1189:>         f.write(f"| Sharpe Ratio (est) | {risk_m['sharpe']:.2f} | Risk-adjusted return |\n")
+stock_pro_v4.py:1191:>         f.write(f"| 52W Range | ${q['w52l']:.0f} - ${q['w52h']:.0f} | Current: ${price:.2f} |\n\n")
+stock_pro_v4.py:1201:>         f.write(f"| Fair Value Midpoint | ${tech['midpoint']:.2f} |\n\n")
+stock_pro_v4.py:1207:>         f.write(f"| Resistance R4 | ${sr_levels['r4']:.2f} | +{(sr_levels['r4']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1208:>         f.write(f"| Resistance R3 | ${sr_levels['r3']:.2f} | +{(sr_levels['r3']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1209:>         f.write(f"| Resistance R2 | ${sr_levels['r2']:.2f} | +{(sr_levels['r2']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1210:>         f.write(f"| Resistance R1 | ${sr_levels['r1']:.2f} | +{(sr_levels['r1']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1211:>         f.write(f"| **Current Price** | **${price:.2f}** | 0.0% |\n")
+stock_pro_v4.py:1212:>         f.write(f"| Support S1 | ${sr_levels['s1']:.2f} | {(sr_levels['s1']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1213:>         f.write(f"| Support S2 | ${sr_levels['s2']:.2f} | {(sr_levels['s2']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1214:>         f.write(f"| Support S3 | ${sr_levels['s3']:.2f} | {(sr_levels['s3']-price)/price*100:.1f}% |\n\n")
+stock_pro_v4.py:1230:>         f.write(f"| Beta | {q['beta']:.2f} | Volatile |\n")
+stock_pro_v4.py:1238:>         f.write(f"| FCF Value | ${cf['fcf_value']:.2f}/share | Implied annual FCF |\n")
+stock_pro_v4.py:1240:>         f.write(f"| Dividend Yield | {cf['div_yield']*100:.2f}% | {'Paid' if cf['div_yield'] > 0 else 'No dividend'} |\n")
+stock_pro_v4.py:1264:>         f.write(f"Current: ${price:.2f} ({(price - q['w52l'])/(q['w52h'] - q['w52l'])*100:.0f}% of range)\n\n")
+stock_pro_v4.py:1434:>         f.write(f"| Bear Case | ${fv_low:.2f} | {(fv_low-price)/price*100:+.1f}% |\n")
+stock_pro_v4.py:1435:>         f.write(f"| **Base Case** | **${target:.2f}** | **{upside:+.1f}%** |\n")
+stock_pro_v4.py:1436:>         f.write(f"| Bull Case | ${fv_high:.2f} | {(fv_high-price)/price*100:+.1f}% |\n\n")
+stock_pro_v4.py:1443:>         f.write(f"| PEG | {q['peg']:.2f} |\n")
+stock_pro_v4.py:1515:>     print(f"\n价格: ${price:.2f}")
+stock_pro_v4.py:1516:>     print(f"EPS: 追踪 ${q['eps_t']:.2f} | 预测 ${q['eps_f']:.2f}")
+stock_pro_v4.py:1520:>     print(f"综合目标: ${target:.2f} ({upside:+.1f}%)")
+stock_pro_v4.py:1538:>         f.write(f"| 当前价格 | **${price:.2f}** |\n")
+stock_pro_v4.py:1539:>         f.write(f"| 12个月目标 | **${target:.2f}** |\n")
+stock_pro_v4.py:1549:>         f.write(f"| 当前价格 | ${price:.2f} | - |\n")
+stock_pro_v4.py:1551:>         f.write(f"| DCF基准 | ${dcf_base:.2f} | 内在价值 |\n")
+stock_pro_v4.py:1552:>         f.write(f"| 综合目标 | ${target:.2f} | **最佳估算** |\n")
+stock_pro_v4.py:1578:>         f.write(f"| PEG | {q['peg']:.2f} | {peg_assess} |\n")
+stock_pro_v4.py:1605:>             f.write(f"| Y{proj['year']} | ${proj['eps']:.2f} | {proj['growth']:.1f}% | {note} |\n")
+stock_pro_v4.py:1623:>         f.write(f"| VaR (95%) | ${risk_m['var_95']:.2f} ({risk_m['var_95_pct']:.1f}%) | 单日最大损失 |\n")
+stock_pro_v4.py:1625:>         f.write(f"| 夏普比率 | {risk_m['sharpe']:.2f} | 风险调整收益 |\n")
+stock_pro_v4.py:1627:>         f.write(f"| 52周区间 | ${q['w52l']:.0f} - ${q['w52h']:.0f} | 当前: ${price:.2f} |\n\n")
+stock_pro_v4.py:1634:>         f.write(f"| 阻力 R4 | ${sr_levels['r4']:.2f} | +{(sr_levels['r4']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1635:>         f.write(f"| 阻力 R3 | ${sr_levels['r3']:.2f} | +{(sr_levels['r3']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1636:>         f.write(f"| 阻力 R2 | ${sr_levels['r2']:.2f} | +{(sr_levels['r2']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1637:>         f.write(f"| 阻力 R1 | ${sr_levels['r1']:.2f} | +{(sr_levels['r1']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1638:>         f.write(f"| **当前价格** | **${price:.2f}** | 0.0% |\n")
+stock_pro_v4.py:1639:>         f.write(f"| 支撑 S1 | ${sr_levels['s1']:.2f} | {(sr_levels['s1']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1640:>         f.write(f"| 支撑 S2 | ${sr_levels['s2']:.2f} | {(sr_levels['s2']-price)/price*100:.1f}% |\n")
+stock_pro_v4.py:1641:>         f.write(f"| 支撑 S3 | ${sr_levels['s3']:.2f} | {(sr_levels['s3']-price)/price*100:.1f}% |\n\n")
+stock_pro_v4.py:1657:>         f.write(f"| Beta | {q['beta']:.2f} | {'高波动' if q['beta'] > 1.5 else '中等' if q['beta'] > 0.8 else '低波动'} |\n\n")
+stock_pro_v4.py:1665:>         f.write(f"| 股息率 | {cf['div_yield']*100:.2f}% | {div_assess} |\n")
+stock_pro_v4.py:1688:>         f.write(f"当前价格: ${price:.2f} (区间内{(price - q['w52l'])/(q['w52h'] - q['w52l'])*100:.0f}%位置)\n\n")
+stock_pro_v4.py:1739:>         f.write(f"| MA50 | ${tech_ind['ma_50']:.2f} | Price {tech_ind['price_vs_ma50']} |\n")
+stock_pro_v4.py:1740:>         f.write(f"| MA200 | ${tech_ind['ma_200']:.2f} | Price {tech_ind['price_vs_ma200']} |\n\n")
+stock_pro_v4.py:1747:>         f.write(f"| PEG | {sector['stock_peg']:.2f} | {sector['avg_peg']:.2f} | {sector['peg_vs']} |\n")
+stock_pro_v4.py:1755:>         f.write(f"| 股息率 | {div_info['div_yield']*100:.2f}% |\n")
+stock_pro_v4.py:2290:>                 f"{q['price']:.2f}",
+stock_pro_v4.py:2291:>                 f"{target:.2f}",
+stock_pro_v4.py:2295:>                 f"{q['peg']:.2f}",
+stock_pro_v4.py:2297:>                 f"{fin.get('div_yield', 0)*100:.2f}",
+stock_pro_v4.py:2299:>                 f"{q['beta']:.2f}",
+stock_pro_v4.py:2579:> | Price | ${q['price']:.2f} |
+stock_pro_v4.py:2580:> | Target | ${target:.2f} |
+stock_pro_v4.py:2590:> | PEG | {q['peg']:.2f} |
+stock_pro_v4.py:2591:> | DCF Bull | ${dcf_scenarios['Bull']:.2f} |
+stock_pro_v4.py:2592:> | DCF Base | ${dcf_scenarios['Base']:.2f} |
+stock_pro_v4.py:2593:> | DCF Bear | ${dcf_scenarios['Bear']:.2f} |
+stock_pro_v4.py:2600:> | Debt/Equity | {fin.get('debt_equity', 0.5):.2f} |
+stock_pro_v4.py:2602:> | Div Yield | {fin.get('div_yield', 0)*100:.2f}% |
+stock_pro_v4.py:2607:> | Beta | {q['beta']:.2f} |
+stock_pro_v4.py:2608:> | 52W High | ${q['price']*1.3:.2f} |
+stock_pro_v4.py:2609:> | 52W Low | ${q['price']*0.7:.2f} |
+stock_pro_v4.py:2612:> - Target: ${analyst['target']:.2f}
+stock_pro_v4.py:3235:>         body += f"{d['symbol']}: ${d['price']:.2f} -> ${d['target']:.2f} ({d['upside']:+.1f}%)\n"
+stock_pro_v4.py:3409:>                 <td>${d["price"]:.2f}</td>
+stock_pro_v4.py:3410:>                 <td>${d["target"]:.2f}</td>

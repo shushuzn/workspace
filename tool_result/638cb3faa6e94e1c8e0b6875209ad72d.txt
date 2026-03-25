@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:26:22.663501
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 2950-2980 of 3079)
+        interactive_mode()
+        sys.exit(0)
+    
+    # Check for watch mode
+    if "--watch" in sys.argv or "-w" in sys.argv:
+        watch_mode(symbols)
+        sys.exit(0)
+    
+    # Check for alert mode
+    if "--alert" in sys.argv or "-a" in sys.argv:
+        threshold = 30
+        if "--threshold" in sys.argv:
+            idx = sys.argv.index("--threshold") + 1
+            if idx < len(sys.argv):
+                threshold = float(sys.argv[idx])
+        price_alert(symbols, threshold)
+        sys.exit(0)
+    
+    # Check for JSON mode
+    if "--json" in sys.argv or "-j" in sys.argv:
+        import json
+        result = generate_json_report(symbols[0])
+        print(json.dumps(result, indent=2))
+        sys.exit(0)
+    
+    # Check for comparison mode
+    if "--compare" in sys.argv or "-c" in sys.argv:
+        generate_comparison(symbols)
+        sys.exit(0)
+    
+    # Check for CSV export
+
+[99 more lines. Use start_line=2981 to continue.]

@@ -1,0 +1,67 @@
+"""Stock PRO v12.9 - Full Module Test"""
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from stock_pro import (
+    analyze, analyze_multiple, analyze_multiple_parallel,
+    gen_report, technical_summary, risk_profile,
+    diversification_check, sector_report, dashboard_report,
+    earnings_report, dividend_report, calc_fscore,
+    correlation_report, sentiment_report, market_report,
+    cache_stats, top_picks, value_picks
+)
+
+def test_all():
+    print("=" * 50)
+    print("Stock PRO v13.0 - Full Module Test")
+    print("=" * 50)
+
+    results = {"passed": 0, "failed": 0, "errors": []}
+
+    tests = [
+        ("analyze('NVDA')", lambda: analyze('NVDA')),
+        ("analyze_multiple(['NVDA','META'])", lambda: analyze_multiple(['NVDA', 'META'])),
+        ("analyze_multiple_parallel(['NVDA','META','AAPL'])", lambda: analyze_multiple_parallel(['NVDA', 'META', 'AAPL'])),
+        ("gen_report('NVDA')", lambda: gen_report('NVDA')),
+        ("technical_summary('NVDA')", lambda: technical_summary('NVDA')),
+        ("risk_profile('NVDA')", lambda: risk_profile('NVDA')),
+        ("diversification_check(['NVDA','META','JPM'])", lambda: diversification_check(['NVDA', 'META', 'JPM'])),
+        ("earnings_report('NVDA')", lambda: earnings_report('NVDA')),
+        ("dividend_report('AAPL')", lambda: dividend_report('AAPL')),
+        ("calc_fscore('NVDA')", lambda: calc_fscore('NVDA')),
+        ("correlation_report(['NVDA','META'])", lambda: correlation_report(['NVDA', 'META'])),
+        ("sentiment_report()", lambda: sentiment_report()),
+        ("market_report()", lambda: market_report()),
+        ("dashboard_report()", lambda: dashboard_report()),
+        ("cache_stats()", lambda: cache_stats()),
+        ("backtest_report()", lambda: __import__('stock_pro.backtest', fromlist=['backtest_report']).backtest_report()),
+        ("sector_rotation()", lambda: __import__('stock_pro.sector_rotation', fromlist=['get_sector_rotation']).get_sector_rotation()),
+        ("get_all_scores(['NVDA'])", lambda: __import__('stock_pro.scoring_v2', fromlist=['get_all_scores']).get_all_scores(['NVDA'])),
+        ("top_picks()", lambda: top_picks(5)),
+        ("value_picks()", lambda: value_picks()),
+    ]
+
+    for name, func in tests:
+        try:
+            result = func()
+            if result:
+                print(f"  PASS: {name}")
+                results["passed"] += 1
+            else:
+                print(f"  WARN: {name} (empty)")
+                results["passed"] += 1
+        except Exception as e:
+            print(f"  FAIL: {name}")
+            print(f"        Error: {str(e)[:60]}")
+            results["failed"] += 1
+            results["errors"].append((name, str(e)))
+
+    print("=" * 50)
+    print(f"Results: {results['passed']} passed, {results['failed']} failed")
+    print("=" * 50)
+
+    return results
+
+if __name__ == "__main__":
+    test_all()

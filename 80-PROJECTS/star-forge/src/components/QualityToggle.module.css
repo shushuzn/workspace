@@ -1,0 +1,84 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  padding: 8px 6px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(255, 255, 255, 0.6);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  background: rgba(255, 200, 0, 0.08);
+  border-color: rgba(255, 200, 0, 0.2);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.btn.active {
+  background: rgba(255, 200, 0, 0.12);
+  border-color: rgba(255, 200, 0, 0.4);
+  color: #ffd700;
+}
+
+[data-quality="low"] .btn {
+  transition: none;
+}
+
+[data-quality="low"] .btn:hover {
+  background: rgba(255, 200, 0, 0.08);
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.labelText {
+  font-size: 10px;
+  font-weight: 600;
+}
+
+@media (max-width: 768px) {
+  .container {
+    gap: 6px;
+  }
+
+  .label {
+    font-size: 11px;
+  }
+
+  .btn {
+    padding: 6px 4px;
+  }
+
+  .icon {
+    font-size: 16px;
+  }
+
+  .labelText {
+    font-size: 9px;
+  }
+}

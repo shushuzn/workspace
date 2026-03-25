@@ -1,0 +1,68 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T10:32:40.276357
+# ---
+  💾 缓存: 67 条 (4m前)
+  1. CNBC
+     OpenClaw's ChatGPT moment sparks concern that AI models are ...
+     https://www.cnbc.com/2026/03/21/openclaw-chatgpt-moment-sparks-concern-ai-models-becoming-commodities.html
+  2. CNBC
+     David Zaslav’s WBD-Paramount deal payout highlights new 'gol...
+     https://www.cnbc.com/2026/03/20/wbd-david-zaslav-pay-paramount.html
+  3. CNBC
+     From satellites to space data centers: Why low earth orbit i...
+     https://www.cnbc.com/2026/03/22/why-low-earth-orbit-is-attracting-billions-in-investment.html
+  4. CNBC
+     Why Spotify AI more than music will be the secret to keeping...
+     https://www.cnbc.com/2026/03/22/spotify-apple-amazon-streaming-music-ai.html
+  5. CNBC
+     A Netflix cooking show is changing how people travel — and r...
+     https://www.cnbc.com/2026/03/23/culinary-class-wars-netflix-show-causes-food-tourism-increase.html
+  🤖 启用本地LLM并行分析...
+    缓存命中: 4/5
+  ✅ LLM分析完成: 5条 (11.8s)
+
+  📊 市场情绪:
+     📈 整体: BULLISH
+     📈 利好: 3 | 📉 利空: 0
+
+==================================================
+  🤖 LLM 深度分析
+==================================================
+
+  📊 市场情绪:
+     📈 整体: BULLISH
+     📈 利好: 3 | 📉 利空: 0
+
+  📊 市场情绪: +20 (偏多)
+  📈 利好信号: 1 | 📉 利空信号: 0
+
+  📊 市场情绪:
+     📈 整体: BULLISH
+     📈 利好: 3 | 📉 利空: 0
+
+  🎯 影响市场:
+     📈 股市: 1
+
+  📊 市场情绪:
+     📈 整体: BULLISH
+     📈 利好: 3 | 📉 利空: 0
+
+  👤 热门公司/人物:
+     Spotify(1), AI(1)
+
+  📊 市场情绪:
+     📈 整体: BULLISH
+     📈 利好: 3 | 📉 利空: 0
+
+  📝 新闻分析:
+  1. ⚪ ➖ [ +0] OpenClaw's ChatGPT moment raises co...
+  2. ⚪ ➖ [ +0] David Zaslav's WBD-Paramount deal p...
+  3. 🟢 ➖ [ +0] Low Earth Orbit is attracting billi...
+  4. 🟢 📈 [+100] Spotify将人工智能技术应用于音乐订阅，有望成为其保持用户的关键因...
+     → stock
+  5. 🟢 ➖ [ +0] Netflix cooking show boosts travel ...
+
+  📊 市场情绪:
+     📈 整体: BULLISH
+     📈 利好: 3 | 📉 利空: 0
+

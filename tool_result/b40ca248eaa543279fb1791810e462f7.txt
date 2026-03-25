@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T17:20:17.244689
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\sentiment.py  (lines 220-260 of 1337)
+        "latest": news[0] if news else None
+    }
+
+
+def sentiment_report(symbols=None):
+    """Generate sentiment report"""
+    from stock_pro.sectors import get_sector
+    
+    if symbols is None:
+        symbols = list(A.keys())
+    
+    results = []
+    
+    for sym in symbols:
+        sentiment = calculate_sentiment(sym)
+        analysis = analyze_multiple([sym])[0] if sym in A else None
+        
+        results.append({
+            "symbol": sym,
+            "sector": get_sector(sym),
+            "sentiment": sentiment["sentiment"],
+            "news_count": sentiment["news_count"],
+            "trend": sentiment["trend"],
+            "score": analysis["score"] if analysis else 0,
+            "latest_news": sentiment.get("latest")
+        })
+    
+    # Sort by sentiment
+    results.sort(key=lambda x: x["sentiment"], reverse=True)
+    
+    report = "# News Sentiment Analysis\n\n"
+    report += "| Symbol | Sector | Sentiment | Trend | News | Score |\n"
+    report += "|--------|--------|-----------|-------|------|-------|\n"
+    
+    bullish = bearish = neutral = 0
+    
+    for r in results:
+        if r["sentiment"] >= 0.65:
+            sentiment_label = "Bullish"
+            bullish += 1
+        elif r["sentiment"] <= 0.45:
+
+[1077 more lines. Use start_line=261 to continue.]

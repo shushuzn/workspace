@@ -1,0 +1,43 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T01:12:41.582327
+# ---
+
+==================================================
+  NewsHub Feishu
+==================================================
+
+  ▶ Mode: digest
+  ▶ Time: 2026-03-23 01:12:09
+
+
+==================================================
+  NewsHub Fetcher
+==================================================
+
+  ▶ Time: 2026-03-23 01:12:09
+
+  ▶ Fetching 金十快讯...
+  ✓ 金十快讯: +20
+  ▶ Fetching Investing...
+  ✓ Investing: +10
+  ▶ Fetching Seeking Alpha...
+  ✓ Seeking Alpha: +7
+
+──────────────────────────────────────────────────
+  📊 Total: 37
+     金十快讯: 20
+     Investing: 10
+     Seeking Alpha: 7
+──────────────────────────────────────────────────
+
+  ▶ Digest: 2 items
+
+  ▶ Card: {"header": {"title": {"tag": "plain_text", "content": "财经速报 01:12"}, "template": "green"}, "elements": [{"tag": "div", "text": {"tag": "plain_text", "content": "1. 美国农业部长罗林斯：将公布更多与增加化肥运输量相关的公告。 [金十快讯]
+  ▶ Sending card to ou_72a847b95fc25870d...
+  ✓ Digest sent: 2 items
+
+──────────────────────────────────────────────────
+  Mode:   digest
+  Sent:   1
+──────────────────────────────────────────────────
+

@@ -1,0 +1,36 @@
+# tool_name: read_file
+# created_at: 2026-03-21T19:23:19.947235
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\idle-empire\js\buildings.js  (lines 1-30 of 146)
+// Idle Empire v2.0 - 建筑数据 (全面进化版)
+
+const BUILDINGS = [
+    // 基础建筑
+    { id: 'mine', name: '金矿', description: '开采珍贵的金矿', baseCost: 10, baseProduction: 1.5, icon: '⛏️', color: '#ffd700' },
+    { id: 'lumber', name: '伐木场', description: '砍伐木材出售', baseCost: 100, baseProduction: 6, icon: '🪓', unlockAt: 100, color: '#8b4513' },
+    { id: 'farm', name: '农场', description: '种植农作物', baseCost: 500, baseProduction: 22, icon: '🌾', unlockAt: 500, color: '#90ee90' },
+    { id: 'factory', name: '工厂', description: '批量生产商品', baseCost: 3000, baseProduction: 100, icon: '🏭', unlockAt: 3000, color: '#808080' },
+    { id: 'bank', name: '银行', description: '钱生钱的秘诀', baseCost: 50000, baseProduction: 500, icon: '🏦', unlockAt: 50000, color: '#4169e1' },
+    { id: 'castle', name: '城堡', description: '帝国的心脏', baseCost: 500000, baseProduction: 2500, icon: '🏰', unlockAt: 500000, color: '#9370db' },
+    { id: 'temple', name: '神殿', description: '祈福带来财富', baseCost: 5000000, baseProduction: 15000, icon: '🛕', unlockAt: 5000000, color: '#ffdab9' },
+    { id: 'spaceship', name: '太空站', description: '星际贸易帝国', baseCost: 50000000, baseProduction: 100000, icon: '🚀', unlockAt: 50000000, color: '#00ffff' },
+    { id: 'quantum_lab', name: '量子实验室', description: '量子技术驱动收益爆发', baseCost: 800000000, baseProduction: 1200000, icon: '⚛️', unlockAt: 500000000, color: '#7c3aed' },
+    { id: 'dyson_ring', name: '戴森环', description: '围绕恒星收集能量', baseCost: 12000000000, baseProduction: 15000000, icon: '☀️', unlockAt: 8000000000, color: '#f59e0b' },
+    { id: 'time_machine', name: '时间机器', description: '穿越时空获取财富', baseCost: 200000000000, baseProduction: 200000000, icon: '⏰', unlockAt: 80000000000, color: '#9f7aea' },
+    { id: 'multiverse', name: '多元宇宙门户', description: '跨维度能量收集', baseCost: 3000000000000, baseProduction: 3000000000, icon: '🌀', unlockAt: 2000000000000, color: '#667eea' }
+];
+
+const UPGRADES = [
+    { id: 'click_power', name: '点击强化', desc: '手动点击金币x2', icon: '👆', cost: 1000, type: 'click', effect: 2 },
+    { id: 'offline_boost', name: '离线加成', desc: '离线收益提升至80%', icon: '📱', cost: 50000, type: 'offline', effect: 0.8 },
+    { id: 'global_boost', name: '全局加成', desc: '所有产量+50%', icon: '⚡', cost: 100000, type: 'global', effect: 1.5 },
+    { id: 'mine_boost', name: '金矿强化', desc: '金矿产量x2', icon: '⛏️', cost: 500, target: 'mine', effect: 2 },
+    { id: 'lumber_boost', name: '伐木强化', desc: '伐木场产量x2', icon: '🪓', cost: 5000, target: 'lumber', effect: 2 },
+    { id: 'farm_boost', name: '农场强化', desc: '农场产量x2', icon: '🌾', cost: 25000, target: 'farm', effect: 2 },
+    { id: 'factory_boost', name: '工厂强化', desc: '工厂产量x2', icon: '🏭', cost: 250000, target: 'factory', effect: 2 },
+    { id: 'bank_boost', name: '银行强化', desc: '银行产量x2', icon: '🏦', cost: 2500000, target: 'bank', effect: 2 },
+    { id: 'castle_boost', name: '城堡强化', desc: '城堡产量x2', icon: '🏰', cost: 25000000, target: 'castle', effect: 2 },
+    { id: 'boss_mastery', name: 'Boss精通', desc: '对Boss伤害提升100%', icon: '⚔️', cost: 1500000, type: 'boss', effect: 2 },
+    { id: 'spaceship_boost', name: '太空强化', desc: '太空站产量x2', icon: '🚀', cost: 350000000, target: 'spaceship', effect: 2 },
+
+[116 more lines. Use start_line=31 to continue.]

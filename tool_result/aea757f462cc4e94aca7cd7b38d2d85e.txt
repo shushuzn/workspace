@@ -1,0 +1,222 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:57:21.665721
+# ---
+#!/usr/bin/env python3
+"""生成news_fetcher组件"""
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+
+def gen_fetcher_core():
+    """生成抓取核心模块"""
+    content = '''"""
+NewsHub Fetcher Core - 核心抓取功能
+"""
+import re
+import json
+import time
+import ssl
+import urllib.request
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
+
+CACHE_FILE = ".news_cache.json"
+CACHE_TTL = 300
+
+def get_ssl():
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    return ctx
+
+def load_config():
+    config_file = "config.json"
+    try:
+        with open(config_file, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return {}
+
+def load_cache():
+    try:
+        with open(CACHE_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return {"news": [], "time": 0}
+
+def save_cache(data):
+    with open(CACHE_FILE, "w", encoding="utf-8") as f:
+        json.dump(data, f, ensure_ascii=False)
+
+def fetch_sina():
+    """抓取新浪财经"""
+    news = []
+    try:
+        url = "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516&k=&num=15&page=1&r=0.5"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0", "Referer": "https://finance.sina.com.cn"})
+        with urllib.request.urlopen(req, timeout=10, context=get_ssl()) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            for item in data.get("result", {}).get("data", [])[:15]:
+                title = item.get("title", "").strip()
+                if title:
+                    news.append({
+                        "title": title,
+                        "url": item.get("url", ""),
+                        "source": "新浪财经",
+                        "category": classify_news(title),
+                        "ts": time.time()
+                    })
+    except Exception as e:
+        print(f"  ⚠ 新浪失败: {e}")
+    return news
+
+def fetch_eastmoney():
+    """抓取东方财富"""
+    news = []
+    try:
+        url = "https://feed.eastmoney.com/more?type=globalnews&pageSize=10&page=1&endTime=&isr=&ut=&deviceid=&version="
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=10, context=get_ssl()) as resp:
+            data = json.loads(resp.read().decode("utf-8"))
+            for item in data.get("data", {}).get("list", [])[:10]:
+                title = item.get("title", "").strip()
+                if title:
+                    news.append({
+                        "title": title,
+                        "url": f"https://www.eastmoney.com/a/{item.get('id', '')}",
+                        "source": "东方财富",
+                        "category": classify_news(title),
+                        "ts": time.time()
+                    })
+    except:
+        pass
+    return news
+
+def classify_news(title):
+    """分类新闻"""
+    cats = {
+        "stock": ["A股", "上证", "深证", "港股", "美股", "股价", "涨停", "跌停", "大盘", "指数"],
+        "forex": ["汇率", "美元", "欧元", "人民币", "外汇", "货币"],
+        "commodity": ["原油", "黄金", "白银", "铜", "大宗商品", "期货"],
+        "macro": ["GDP", "CPI", "PPI", "非农", "美联储", "央行", "加息", "降息"],
+        "trade": ["关税", "贸易", "WTO", "出口", "进口", "协议"],
+        "tech": ["AI", "科技", "芯片", "半导体", "互联网", "5G", "人工智能"],
+        "china": ["中国", "北京", "上海", "两会", "政策"],
+        "us": ["美国", "华盛顿", "拜登", "特朗普", "美联储"],
+        "crypto": ["比特币", "以太坊", "加密货币", "区块链", "BTC", "ETH"],
+        "energy": ["能源", "石油", "天然气", "新能源", "光伏", "风电"]
+    }
+    title_lower = title.lower()
+    for cat, keywords in cats.items():
+        if any(kw.lower() in title_lower for kw in keywords):
+            return cat
+    return "other"
+
+def fetch_parallel(sources):
+    """并行抓取多个源"""
+    results = []
+    start = time.time()
+    with ThreadPoolExecutor(max_workers=5) as executor:
+        futures = {executor.submit(src): src["name"] for src in sources}
+        for future in futures:
+            name = futures[future]
+            try:
+                news = future.result()
+                results.extend(news)
+                print(f"  ✓ {name}: +{len(news)}")
+            except Exception as e:
+                print(f"  ⚠ {name}: 失败")
+    return results, time.time() - start
+'''
+    return content
+
+def gen_analyzer():
+    """生成分析模块"""
+    content = '''"""
+NewsHub Analyzer - 分析功能
+"""
+import re
+import hashlib
+import time
+import json
+from concurrent.futures import ThreadPoolExecutor
+
+OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "qwen2.5:1.5b"
+LLM_CACHE_FILE = ".llm_cache.json"
+LLM_CACHE_TTL = 3600
+
+def load_llm_cache():
+    try:
+        with open(LLM_CACHE_FILE, "r", encoding="utf-8") as f:
+            return json.load(f)
+    except:
+        return {}
+
+def save_llm_cache(cache):
+    with open(LLM_CACHE_FILE, "w", encoding="utf-8") as f:
+        json.dump(cache, f, ensure_ascii=False)
+
+def check_ollama_status():
+    import ssl, urllib.request
+    try:
+        req = urllib.request.Request("http://localhost:11434/api/tags", headers={"Content-Type": "application/json"})
+        with urllib.request.urlopen(req, timeout=5, context=ssl.create_default_context()) as resp:
+            return json.loads(resp.read().decode("utf-8")).get("models", []) != []
+    except:
+        return False
+
+def call_ollama(prompt):
+    import ssl, urllib.request
+    try:
+        data = {
+            "model": OLLAMA_MODEL,
+            "prompt": prompt,
+            "stream": False,
+            "options": {"num_predict": 200, "temperature": 0.3}
+        }
+        req = urllib.request.Request(OLLAMA_URL, data=json.dumps(data).encode("utf-8"), headers={"Content-Type": "application/json"}, method="POST")
+        with urllib.request.urlopen(req, timeout=30, context=ssl.create_default_context()) as resp:
+            return json.loads(resp.read().decode("utf-8")).get("response", "")
+    except Exception as e:
+        return ""
+
+def analyze_with_llm(title):
+    title_hash = hashlib.md5(title.encode()).hexdigest()
+    cache = load_llm_cache()
+    if title_hash in cache:
+        return cache[title_hash]
+    if not check_ollama_status():
+        return None
+    prompt = f"""分析新闻: {title}
+返回JSON: {{"sentiment":"positive|negative|neutral","sentiment_score":-100到100,"urgency":"high|medium|low","markets":["stock"],"entities":[],"keywords":[],"summary":"15字摘要","advice":"bullish|bearish|neutral"}}"""
+    response = call_ollama(prompt)
+    if response:
+        try:
+            import json as j
+            for line in response.split("\n"):
+                line = line.strip()
+                if line.startswith("{") and line.endswith("}"):
+                    result = j.loads(line)
+                    cache[title_hash] = result
+                    save_llm_cache(cache)
+                    return result
+        except:
+            pass
+    return None
+
+def enrich_with_llm(news_list, max_items=10):
+    if not check_ollama_status():
+        return news_list
+    cache = load_llm_cache()
+    uncached = []
+    for i, news in enumerate(news_list[:max_items]):
+        title = news.get("title", "")
+        title_hash = hashlib.md5(title.encode()).hexdigest()
+        if title_hash in cache:
+            analysis = cache[title_hash]
+            news["llm_sentiment"] = analysis.get("sentiment", "neutral")
+            news["llm_score"] = analysis.get("sentiment_score", 0)
+            news["llm_summary"] = analysis.get("summary", "")
+        else:
+            uncached.append((i, title))
+    if

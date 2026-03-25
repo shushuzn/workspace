@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:32:47.677714
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 1055-1080 of 1213)
+            export_csv(news)
+        else:
+            show_news(news, 10)
+        
+        # 热点检测
+        hot = detect_hot_topics(news)
+        if hot:
+            print()
+            
+            # 市场情绪分析
+            if llm_news:
+                sentiment = get_market_sentiment(llm_news)
+                if sentiment:
+                    print("  📊 市场情绪:")
+                    overall = sentiment.get('overall', 'neutral')
+                    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+                    print(f"     {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+                    print(f"     📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)}")
+                    print()
+            print("🔥 热点话题:")
+            for word, count in hot:
+                bar = "█" * count
+                print(f"  {word}: {count} {bar}")
+        
+        # 新闻聚类
+        if args.cluster:
+
+[133 more lines. Use start_line=1081 to continue.]

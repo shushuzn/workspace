@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:24:03.298150
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\push\news_feishu.py  (lines 230-260 of 415)
+        source = n.get("source", "")
+        items.append({"tag": "div", "text": {"tag": "lark_md", "content": f"{i}. {title}\n   📰 {source}"}})
+
+    header = {"tag": "div", "text": {"tag": "plain_text", "content": f"📅 第{week_num}周周报"}}
+    elements = [header] + items + [{"tag": "hr"}]
+    return {"config": {"wide_screen_mode": True}, "elements": elements}
+
+
+# ========== 命令 ==========
+def cmd_digest(limit=6):
+    banner("飞书摘要推送")
+    config = load_feishu_config()
+    if not config.get("app_id"):
+        error("未配置飞书应用")
+        return
+
+    from core.async_fetcher import fetch_all
+    from analyze.quality_scorer import rank_news_by_quality
+
+    info("抓取新闻...")
+    news = fetch_all(quiet=True)
+    info(f"获取 {len(news)} 条新闻")
+
+    if not news:
+        warn("无新闻数据")
+        return
+
+    # 按质量评分排序，选取高质量新闻
+    ranked = rank_news_by_quality(news)
+    news = ranked[:limit]
+
+
+[155 more lines. Use start_line=261 to continue.]

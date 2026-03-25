@@ -1,0 +1,210 @@
+{
+  "symbol": "TEST",
+  "candle_count": 100,
+  "analyzed_at": "2026-03-20T00:41:50.642599",
+  "current_price": 132.14,
+  "pivot_points": {
+    "pivot": 135.32,
+    "resistance_1": 136.53,
+    "resistance_2": 137.91,
+    "resistance_3": 139.12,
+    "support_1": 133.94,
+    "support_2": 132.73,
+    "support_3": 131.35
+  },
+  "fibonacci_levels": {
+    "0.0%": 140.17,
+    "23.6%": 133.38,
+    "38.2%": 129.17,
+    "50.0%": 125.77,
+    "61.8%": 122.38,
+    "78.6%": 117.54,
+    "100.0%": 111.38,
+    "127.2%": 103.55,
+    "161.8%": 93.59
+  },
+  "price_clusters": [
+    {
+      "type": "resistance",
+      "price": 135.89,
+      "touches": 9,
+      "strength": 1.0,
+      "last_touch": "recent"
+    },
+    {
+      "type": "support",
+      "price": 122.03,
+      "touches": 7,
+      "strength": 1.0,
+      "last_touch": "recent"
+    },
+    {
+      "type": "support",
+      "price": 127.48,
+      "touches": 6,
+      "strength": 1.0,
+      "last_touch": "recent"
+    },
+    {
+      "type": "resistance",
+      "price": 139.74,
+      "touches": 3,
+      "strength": 0.76,
+      "last_touch": "recent"
+    },
+    {
+      "type": "resistance",
+      "price": 117.25,
+      "touches": 2,
+      "strength": 0.64,
+      "last_touch": "recent"
+    },
+    {
+      "type": "resistance",
+      "price": 131.69,
+      "touches": 2,
+      "strength": 0.64,
+      "last_touch": "recent"
+    },
+    {
+      "type": "support",
+      "price": 111.63,
+      "touches": 2,
+      "strength": 0.64,
+      "last_touch": "recent"
+    }
+  ],
+  "volume_profile": {
+    "high_volume_nodes": [
+      {
+        "price": 113.54,
+        "volume": 269195188,
+        "volume_ratio": 3.02,
+        "type": "HVN"
+      },
+      {
+        "price": 132.25,
+        "volume": 239962587,
+        "volume_ratio": 2.69,
+        "type": "HVN"
+      },
+      {
+        "price": 114.98,
+        "volume": 189045787,
+        "volume_ratio": 2.12,
+        "type": "HVN"
+      }
+    ],
+    "low_volume_nodes": [
+      {
+        "price": 119.3,
+        "volume": 0,
+        "volume_ratio": 0.0,
+        "type": "LVN"
+      },
+      {
+        "price": 120.74,
+        "volume": 0,
+        "volume_ratio": 0.0,
+        "type": "LVN"
+      },
+      {
+        "price": 139.45,
+        "volume": 0,
+        "volume_ratio": 0.0,
+        "type": "LVN"
+      },
+      {
+        "price": 125.06,
+        "volume": 23731761,
+        "volume_ratio": 0.27,
+        "type": "LVN"
+      }
+    ],
+    "avg_volume": 89208847.0,
+    "price_range": 28.79
+  },
+  "key_levels": [
+    {
+      "price": 135.89,
+      "type": "resistance",
+      "source": "cluster",
+      "name": "Resistance (9 touches)",
+      "distance_pct": 2.84,
+      "strength": 1.0
+    },
+    {
+      "price": 122.03,
+      "type": "support",
+      "source": "cluster",
+      "name": "Support (7 touches)",
+      "distance_pct": -7.65,
+      "strength": 1.0
+    },
+    {
+      "price": 127.48,
+      "type": "support",
+      "source": "cluster",
+      "name": "Support (6 touches)",
+      "distance_pct": -3.53,
+      "strength": 1.0
+    },
+    {
+      "price": 113.54,
+      "type": "support/resistance",
+      "source": "volume",
+      "name": "HVN (vol ratio 3.02)",
+      "distance_pct": -14.08,
+      "strength": 0.9059999999999999
+    },
+    {
+      "price": 132.25,
+      "type": "support/resistance",
+      "source": "volume",
+      "name": "HVN (vol ratio 2.69)",
+      "distance_pct": 0.08,
+      "strength": 0.8069999999999999
+    },
+    {
+      "price": 139.74,
+      "type": "resistance",
+      "source": "cluster",
+      "name": "Resistance (3 touches)",
+      "distance_pct": 5.75,
+      "strength": 0.76
+    },
+    {
+      "price": 137.91,
+      "type": "resistance",
+      "source": "pivot",
+      "name": "Resistance 2",
+      "distance_pct": 4.37,
+      "strength": 0.7
+    },
+    {
+      "price": 133.94,
+      "type": "resistance",
+      "source": "pivot",
+      "name": "Support 1",
+      "distance_pct": 1.36,
+      "strength": 0.7
+    },
+    {
+      "price": 117.25,
+      "type": "resistance",
+      "source": "cluster",
+      "name": "Resistance (2 touches)",
+      "distance_pct": -11.27,
+      "strength": 0.64
+    },
+    {
+      "price": 111.63,
+      "type": "support",
+      "source": "cluster",
+      "name": "Support (2 touches)",
+      "distance_pct": -15.52,
+      "strength": 0.64
+    }
+  ],
+  "recommendation": "RESISTANCE TEST - Price near resistance at 132.25 (0.1% below)"
+}

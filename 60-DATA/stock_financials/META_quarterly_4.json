@@ -1,0 +1,20 @@
+{
+  "symbol": "META",
+  "report_type": "quarterly",
+  "periods": 1,
+  "reports": [
+    {
+      "period": "2026-03-20",
+      "revenue": 0,
+      "gross_profit": 0,
+      "operating_income": 0,
+      "net_income": 0,
+      "eps": 0,
+      "ebitda": 0,
+      "total_assets": 0,
+      "total_liabilities": 0,
+      "shareholders_equity": 0
+    }
+  ],
+  "source": "yahoo-api"
+}

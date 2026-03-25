@@ -1,0 +1,59 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T17:36:48.757792
+# ---
+main.py:174:      print(BANNER)
+main.py:175:      
+main.py:176:      # Help
+main.py:177:>     if args.help or (not args.symbols and not any(vars(args).values())):
+main.py:178:          print("""
+main.py:179:  Stock PRO v20.0 - Usage
+main.py:180:  =======================
+---
+main.py:237:          args.signal, args.risk is not None, args.trends
+main.py:238:      ])
+main.py:239:      
+main.py:240:>     if args.symbols and not skip_single:
+main.py:241:          sym = args.symbols[0]
+main.py:242:          lang = "cn" if args.cn else "en"
+main.py:243:          data = analyze(sym)
+---
+main.py:652:      
+main.py:653:      # Ultimate Analysis
+main.py:654:      if args.ultimate:
+main.py:655:>         if args.symbols and len(args.symbols) == 1:
+main.py:656:              print(ultimate_analysis(args.symbols[0]))
+main.py:657:          else:
+main.py:658:              symbols = args.symbols if args.symbols else None
+---
+main.py:661:      
+main.py:662:      # Jin10 News
+main.py:663:      if args.jin10:
+main.py:664:>         if args.symbols and len(args.symbols) == 1:
+main.py:665:              print(jin10_stock_news(args.symbols[0]))
+main.py:666:          else:
+main.py:667:              print(jin10_news_report())
+---
+main.py:669:      
+main.py:670:      # Chinese Financial News
+main.py:671:      if args.cnnews:
+main.py:672:>         if args.symbols and len(args.symbols) == 1:
+main.py:673:              news = get_cn_news_for_stock(args.symbols[0])
+main.py:674:              report = f"# Chinese News: {args.symbols[0]}\n\n"
+main.py:675:              report += f"_Sources: Sina Finance, NetEase Money, Phoenix Finance_\n\n"
+---
+main.py:692:      
+main.py:693:      # Live News (from SQLite cache)
+main.py:694:      if args.news:
+main.py:695:>         if args.symbols and len(args.symbols) == 1:
+main.py:696:              print(live_news_report(args.symbols[0]))
+main.py:697:          else:
+main.py:698:              stats = get_news_stats()
+---
+main.py:701:      
+main.py:702:      # Realtime News (direct API - zero latency)
+main.py:703:      if args.rt:
+main.py:704:>         if args.symbols and len(args.symbols) == 1:
+main.py:705:              print(realtime_news_report(args.symbols[0]))
+main.py:706:          else:
+main.py:707:              print(realtime_news_report())
+---

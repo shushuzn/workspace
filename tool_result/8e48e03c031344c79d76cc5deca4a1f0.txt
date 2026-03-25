@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-23T00:32:32.274601
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_feishu.py  (lines 50-120 of 459)
+    "world":   ("新浪国际",   "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2514&num=20&page=1", "https://news.sina.com.cn/world"),
+    "sports":  ("新浪体育",   "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2512&num=20&page=1", "https://sports.sina.com.cn"),
+    "society": ("新浪社会",   "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2511&num=20&page=1", "https://news.sina.com.cn/society"),
+}
+
+BACKUP = {cat: "https://www.36kr.com/feed" for cat in ["finance", "world", "sports", "society"]}
+NAMES = {"tech": "科技", "finance": "财经", "world": "国际", "sports": "体育", "society": "社会"}
+
+
+# ============================================================
+# 工具
+# ============================================================
+
+def get_ssl():
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    return ctx
+
+
+def hash_text(t):
+    return hashlib.md5(t.encode('utf-8')).hexdigest()[:12]
+
+
+def load_history():
+    p = Path(CONFIG["history_file"])
+    return json.load(open(p, 'r', encoding='utf-8')) if p.exists() else {"sent": [], "alerts": [], "daily": []}
+
+
+def save_history(h):
+    p = Path(CONFIG["history_file"])
+    p.parent.mkdir(parents=True, exist_ok=True)
+    json.dump(h, open(p, 'w', encoding='utf-8'), ensure_ascii=False, indent=2)
+
+
+def is_dup(text, hist, mins=30):
+    h = hash_text(text)
+    cutoff = datetime.now() - timedelta(minutes=mins)
+    for key in ["sent", "alerts"]:
+        for e in hist.get(key, []):
+            if e.get("hash") == h:
+                try:
+                    if datetime.fromisoformat(e["time"]) > cutoff:
+                        return True
+                except: pass
+    return False
+
+
+def cleanup(h, hrs=2):
+    cutoff = datetime.now() - timedelta(hours=hrs)
+    for key in ["sent", "alerts"]:
+        h[key] = [e for e in h.get(key, []) 
+                   if datetime.fromisoformat(e.get("time", "2000")).replace(tzinfo=None) > cutoff]
+    return h
+
+
+# ============================================================
+# 抓取
+# ============================================================
+
+def fetch_json(url):
+    req = urllib.request.Request(url, headers={'User-Agent': 'Mozilla/5.0', 'Referer': 'https://news.sina.com.cn/'})
+    with urllib.request.urlopen(req, timeout=15, context=get_ssl()) as r:
+        data = json.loads(r.read())
+    items = []
+    for item in data.get('result', {}).get('data', []):
+        t = item.get('title', '').strip()
+        l = item.get('url', '').strip()
+        if t: items.append({"title": t, "link": l})
+    return items
+
+
+[339 more lines. Use start_line=121 to continue.]

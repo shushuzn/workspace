@@ -1,0 +1,88 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T09:10:36.027063
+# ---
+
+=======================================================
+  Stock PRO v3.0 - AAPL
+=======================================================
+
+[QUOTE]
+  Price: $247.99
+  Market Cap: $3.79T
+  P/E: 28.0x
+  EPS: $6.53 (Growth: 10%)
+  Beta: 1.00
+
+[FINANCIALS]
+  Revenue: $416.2B
+  Gross Margin: 47.0%
+  Net Margin: 24.0%
+  ROE: 45.0%
+  ROIC: 35.0%
+
+[VALUATION]
+  P/E: 28.0x, P/S: 9.1x, P/B: 17.1x
+  PEG: 2.80
+  DCF: Bear=$134.04, Base=$137.11, Bull=$145.16
+  DCF Weighted: $138.11
+
+[TARGET]
+  Target Price: $138.11
+  Upside: -44.3%
+  Rating: SELL
+
+[RISK]
+  Risk Level: LOW (Score: 27/100)
+  VaR(95%): $20.46
+  Max Drawdown: 31.8%
+
+[COMPETITORS]
+  MSFT: $381.87 (P/E: 32.0x)
+  GOOGL: $301.00 (P/E: 26.0x)
+  AMZN: $205.37 (P/E: 25.0x)
+  META: $593.66 (P/E: 28.0x)
+
+=======================================================
+
+ 
+
+=======================================================
+  Stock PRO v3.0 - NVDA
+=======================================================
+
+[QUOTE]
+  Price: $172.70
+  Market Cap: $4.23T
+  P/E: 55.0x
+  EPS: $1.60 (Growth: 50%)
+  Beta: 1.00
+
+[FINANCIALS]
+  Revenue: $79.8B
+  Gross Margin: 73.0%
+  Net Margin: 49.0%
+  ROE: 58.0%
+  ROIC: 45.0%
+
+[VALUATION]
+  P/E: 55.0x, P/S: 53.0x, P/B: 62.8x
+  PEG: 1.10
+  DCF: Bear=$79.61, Base=$124.96, Bull=$230.57
+  DCF Weighted: $137.01
+
+[TARGET]
+  Target Price: $137.01
+  Upside: -20.7%
+  Rating: SELL
+
+[RISK]
+  Risk Level: LOW (Score: 27/100)
+  VaR(95%): $14.25
+  Max Drawdown: 49.8%
+
+[COMPETITORS]
+  AMD: $201.33 (P/E: 25.0x)
+  INTC: $43.87 (P/E: 25.0x)
+
+=======================================================
+

@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T09:41:46.156403
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 230-280 of 318)
+        de_r = "Low" if fin["de"] < 0.8 else "Medium" if fin["de"] < 1.5 else "High"
+        f.write(f"| Debt/Equity | {fin['de']:.1f}x | {de_r} |\n")
+        f.write(f"| Beta | {q['beta']:.2f} | Volatile |\n")
+        f.write(f"| 52W Range | ${q['w52l']:.0f}-${q['w52h']:.0f} | - |\n\n")
+        f.write("---\n\n")
+        f.write("## 4. Investment Thesis\n\n")
+        f.write("### Strengths\n")
+        
+        if sym == "META":
+            f.write("- Exceptional 81% gross margin, industry-leading\n")
+            f.write("- AI-driven ad targeting improving ROI\n")
+            f.write("- Reels monetization gaining traction\n")
+            f.write("- WhatsApp monetization potential\n")
+        elif sym == "NVDA":
+            f.write("- Dominant GPU market share in AI/ML\n")
+            f.write("- CUDA ecosystem moat\n")
+            f.write("- Exceptional 73% gross margin\n")
+            f.write("- Data center revenue accelerating\n")
+        elif sym == "MSFT":
+            f.write("- Cloud leader with Azure growth\n")
+            f.write("- Enterprise software lock-in\n")
+            f.write("- AI integration across products\n")
+        elif sym == "AAPL":
+            f.write("- Premium brand moat\n")
+            f.write("- Services revenue growth\n")
+            f.write("- Strong ecosystem lock-in\n")
+        elif sym == "JPM":
+            f.write("- Market leader in investment banking\n")
+            f.write("- Diversified revenue streams\n")
+            f.write("- Strong risk management\n")
+        elif sym == "JNJ":
+            f.write("- Diversified healthcare portfolio\n")
+            f.write("- Strong dividend growth\n")
+            f.write("- Pipeline of new drugs\n")
+        f.write("\n### Concerns\n")
+        
+        if sym == "META":
+            f.write("- Regulatory scrutiny\n")
+            f.write("- Heavy AI capex spending\n")
+            f.write("- Competition from TikTok\n")
+        elif sym == "NVDA":
+            f.write("- Valuation extremely demanding\n")
+            f.write("- Competition from AMD/custom silicon\n")
+            f.write("- Cyclical semiconductor risk\n")
+        elif sym == "MSFT":
+            f.write("- Valuation at historical highs\n")
+            f.write("- Regulatory scrutiny\n")
+        elif sym == "AAPL":
+            f.write("- China revenue dependence\n")
+            f.write("- Mature smartphone market\n")
+        elif sym == "JPM":
+
+[38 more lines. Use start_line=281 to continue.]

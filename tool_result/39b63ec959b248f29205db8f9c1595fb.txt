@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:01:25.260571
+# ---
+D:\OpenClaw\workspace\memory\2026-03-22.md  (lines 1350-1450 of 1785)
+      }
+    ]
+  }
+}
+```
+
+### QQ Bot Credentials
+
+| Field | Value |
+|-------|-------|
+| QQ | 3523424986 |
+| Group | 597818978 |
+| HTTP | http://127.0.0.1:3000 |
+
+### News Manager Features
+
+| Feature | Status |
+|---------|--------|
+| Multi-source fetch | ✅ |
+| Auto deduplication | ✅ |
+| Merge push (no spam) | ✅ |
+| QQ + Feishu dual push | ✅ |
+| Financial news only | ✅ |
+| No links in message | ✅ |
+
+### Financial News Sources
+
+| Source | Status |
+|--------|--------|
+| 新浪财经-财经 | ✅ |
+| 新浪财经-股票 | ✅ |
+| 新浪财经-产经 | ✅ |
+| 新浪财经-港股 | ✅ |
+| 新浪财经-美股 | ✅ |
+
+### Message Format
+
+```
+[NEWS] 今日新闻 (5条)
+
+1. 伊朗议会议长警告若发电厂遭袭...
+2. 业绩变脸，002932触及退市风险...
+3. 引爆！创近四年新高...
+4. 阿里巴巴集团主席蔡崇信...
+5. 华为杨超斌：行业智能化...
+```
+
+### Commands
+
+```bash
+# Fetch news
+py news_manager.py fetch
+
+# Push (merged, no spam)
+py news_manager.py push
+
+# Force push all
+py news_manager.py push-all
+
+# Send digest
+py news_manager.py digest
+
+# Test connections
+py news_manager.py test
+
+# View status
+py news_manager.py status
+```
+
+### Technical Issues Fixed
+
+| Issue | Solution |
+|-------|----------|
+| NapCat HTTP not enabled | Edit config to enable httpServers |
+| subprocess encoding error | Use `errors='ignore'` in decode |
+| Feishu output detection | Check both stdout and stderr |
+| Message spam | Merge 5 news into 1 message |
+
+### Key Lessons
+
+1. **NapCat requires HTTP enabled** in config
+2. **Windows subprocess** needs explicit encoding handling
+3. **Merge messages** to avoid spam in groups
+4. **Financial sources only** - user specifically requested
+5. **No links** - user requested text-only
+
+---
+
+## Session Reflections - 2026-03-22
+
+### Success Patterns
+
+1. **Modular architecture** - Stock PRO grew from single file to 50+ modules
+2. **Incremental development** - Each feature tested before next
+3. **Multiple output formats** - JSON, CSV, XLSX, HTML, RSS
+4. **Caching strategy** - SQLite for news, JSON for stock data
+5. **Dual platform** - Feishu + QQ both supported
+
+### Technical Insights
+
+1. **write_file 8KB limit** - Use Python generators for large files
+
+[335 more lines. Use start_line=1451 to continue.]

@@ -1,0 +1,43 @@
+{
+  "report_id": "rpt_AAPL_1774013373",
+  "symbol": "AAPL",
+  "template": "daily",
+  "template_name": "Daily Report",
+  "timestamp": "2026-03-20T21:29:33.177039",
+  "sections": {
+    "overview": {
+      "title": "市场概览",
+      "content": "AAPL 当前价格 372.44，涨跌 -4.11%。"
+    },
+    "signals": {
+      "title": "AI 信号",
+      "content": "AI 信号: BUY，置信度 86%"
+    },
+    "sentiment": {
+      "title": "情绪分析",
+      "content": "市场情绪: NEGATIVE"
+    },
+    "recommendation": {
+      "title": "操作建议",
+      "content": "推荐: 谨慎操作"
+    }
+  },
+  "data": {
+    "symbol": "AAPL",
+    "price": 372.44,
+    "change": -4.11,
+    "volume": 33485151,
+    "signals": {
+      "ai_signal": "BUY",
+      "sentiment": "NEGATIVE",
+      "confidence": 0.86
+    },
+    "indicators": {
+      "rsi": 61.3,
+      "macd": "bullish",
+      "trend": "盘整"
+    },
+    "recommendation": "谨慎操作",
+    "timestamp": "2026-03-20T21:29:33.177019"
+  }
+}

@@ -1,0 +1,80 @@
+{
+  "symbol": "AAPL",
+  "monitoring_period": "48h",
+  "sources": [
+    "sina"
+  ],
+  "total_articles": 5,
+  "sentiment_summary": {
+    "overall": "negative",
+    "score": -0.432,
+    "distribution": {
+      "positive": 0,
+      "neutral": 2,
+      "negative": 3
+    },
+    "percentages": {
+      "positive": 0.0,
+      "neutral": 40.0,
+      "negative": 60.0
+    }
+  },
+  "articles": [
+    {
+      "title": "AAPL loses key customer",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-19T21:30:47.216968",
+      "hours_ago": 3,
+      "url": "https://sina.com/article/31251",
+      "sentiment": "negative",
+      "sentiment_score": -0.721,
+      "relevance_score": 0.75
+    },
+    {
+      "title": "Analysts downgrade AAPL",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-19T22:30:47.217008",
+      "hours_ago": 2,
+      "url": "https://sina.com/article/87440",
+      "sentiment": "negative",
+      "sentiment_score": -0.836,
+      "relevance_score": 0.63
+    },
+    {
+      "title": "AAPL faces regulatory scrutiny",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-19T03:30:47.217067",
+      "hours_ago": 21,
+      "url": "https://sina.com/article/96885",
+      "sentiment": "negative",
+      "sentiment_score": -0.765,
+      "relevance_score": 0.73
+    },
+    {
+      "title": "AAPL announces dividend payment",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-18T07:30:47.217083",
+      "hours_ago": 41,
+      "url": "https://sina.com/article/55389",
+      "sentiment": "neutral",
+      "sentiment_score": 0.058,
+      "relevance_score": 0.82
+    },
+    {
+      "title": "AAPL sector performance review",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-18T02:30:47.217095",
+      "hours_ago": 46,
+      "url": "https://sina.com/article/2678",
+      "sentiment": "neutral",
+      "sentiment_score": 0.102,
+      "relevance_score": 0.96
+    }
+  ],
+  "monitored_at": "2026-03-20T00:30:47.217132"
+}

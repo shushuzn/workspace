@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:30:54.041269
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 2020-2080 of 3713)
+            "score": sc,
+            "pe": q["pe"],
+            "peg": q["peg"],
+            "fcf_yield": fin.get("fcf_yield", 0),
+            "div_yield": fin.get("div_yield", 0),
+            "roe": fin["roe"],
+            "beta": q["beta"],
+            "rating": rating(upside),
+        })
+    
+    # Sort by upside
+    results.sort(key=lambda x: x["upside"], reverse=True)
+    
+    # Print comparison table
+    print(f"{'Symbol':<8} {'Price':>8} {'Target':>8} {'Upside':>8} {'Score':>6} {'P/E':>6} {'PEG':>5} {'FCF':>6} {'Div':>5} {'ROE':>6} {'Rating'}")
+    print("-" * 100)
+    
+    for r in results:
+        rating_icon = {"STRONG_BUY": "STRONG_BUY", "BUY": "BUY", "HOLD": "HOLD", "SELL": "SELL", "STRONG_SELL": "STRONG_SELL"}.get(r["rating"], "")
+        print(f"{r['symbol']:<8} ${r['price']:>7.2f} ${r['target']:>7.2f} {r['upside']:>+7.1f}% {r['score']:>5}/100 {r['pe']:>5.1f}x {r['peg']:>4.2f} {r['fcf_yield']*100:>5.1f}% {r['div_yield']*100:>4.2f}% {r['roe']*100:>5.1f}% {rating_icon}")
+    
+    print("-" * 100)
+    print(f"\nTotal: {len(results)} stocks analyzed")
+    return results
+
+def print_banner():
+    """Print banner"""
+    print("""
++==============================================================+
+|                    Stock PRO v10.0                         |
+|              Professional Stock Analysis Tool               |
++==============================================================+
+    """)
+
+def print_help():
+    """Print help menu"""
+    print("""
+Stock PRO v10.0 - Professional Stock Analysis Tool
+=====================================================
+
+Usage:
+   py stock_pro_v4.py <SYMBOL> [OPTIONS]
+
+Analysis Modes:
+   NVDA             English report
+   NVDA --cn        Chinese report
+   NVDA --json      JSON output
+   NVDA --chart     Generate chart
+
+Multi-Stock:
+   --compare SYM...  Compare multiple stocks
+   --summary SYM...  Summary cards
+
+Data Export:
+   --csv SYM...      Export to CSV
+   --xlsx SYM...     Export to Excel
+
+Automation:
+   --watch SYM...    Auto-refresh (30s)
+   --alert SYM...    Price alerts
+   --cron "expr"    Setup cron job
+
+[1633 more lines. Use start_line=2081 to continue.]

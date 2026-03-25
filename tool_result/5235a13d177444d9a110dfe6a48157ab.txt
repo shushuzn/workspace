@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:38:25.716829
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_feishu.py  (lines 395-425 of 429)
+        icon = "📰" if "新浪" in s else ("💹" if "股票" in s else ("🌐" if "Investing" in s else ("📊" if "Seeking" in s else "📱")))
+        print(f"{i:>2}. {icon} {title}")
+    if len(new_news) > 15:
+        print(f"... 还有 {len(new_news) - 15} 条")
+    print()
+    return 1
+
+# 主程序
+if __name__ == "__main__":
+    import time as t
+    
+    parser = argparse.ArgumentParser(description='NewsHub Feishu')
+    parser.add_argument('mode', nargs='?', default='stats', help='模式')
+    parser.add_argument('--no-cache', action='store_true', help='禁用缓存')
+    parser.add_argument('--cache-only', action='store_true', help='仅使用缓存')
+    args = parser.parse_args(sys.argv[1:2] or ['stats'])
+    
+    # 全局缓存设置
+    import news_fetcher
+    news_fetcher.CACHE_TTL = 0 if args.no_cache else (999999 if args.cache_only else 300)
+    
+    start = t.time()
+    mode = args.mode
+    cmds = {"test": cmd_test, "welcome": cmd_welcome, "stats": cmd_stats, "daily": cmd_daily, "digest": cmd_digest, "alert": cmd_alert, "all": cmd_all, "preview": cmd_preview}
+    cmd = cmds.get(mode, cmd_stats)
+    sent = cmd()
+    elapsed = t.time() - start
+    
+    # 检测是否使用了缓存
+    cached = news_fetcher.CACHE_TTL > 0 and t.time() - news_fetcher.load_cache().get('time', 0) < news_fetcher.CACHE_TTL
+    
+
+[4 more lines. Use start_line=426 to continue.]

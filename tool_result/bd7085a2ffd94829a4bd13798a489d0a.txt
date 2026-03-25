@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:07:55.594808
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 1430-1480 of 1752)
+        f.write(f"# {sym} 股票分析报告\n\n")
+        f.write(f"**生成日期:** {date} | **版本:** v8.0\n\n")
+        f.write("---\n\n")
+        f.write(f"## {rating_icon} 投资评级: {rating_cn}\n\n")
+        f.write(f"| 关键指标 | 数值 |\n")
+        f.write(f"|---------|------|\n")
+        f.write(f"| 当前价格 | **${price:.2f}** |\n")
+        f.write(f"| 12个月目标 | **${target:.2f}** |\n")
+        f.write(f"| 上涨空间 | **{upside:+.1f}%** |\n")
+        f.write(f"| 综合评分 | **{sc}/100** |\n")
+        f.write(f"| 风险等级 | {risk_cn} |\n\n")
+        f.write("---\n\n")
+        
+        # Score Breakdown
+        f.write("## 1. 执行摘要\n\n")
+        f.write(f"| 指标 | 数值 | 评估 |\n")
+        f.write(f"|------|------|------|\n")
+        f.write(f"| 当前价格 | ${price:.2f} | - |\n")
+        f.write(f"| 分析师目标 | ${analyst_target:.0f} | {analyst['rating']} |\n")
+        f.write(f"| DCF基准 | ${dcf_base:.2f} | 内在价值 |\n")
+        f.write(f"| 综合目标 | ${target:.2f} | **最佳估算** |\n")
+        f.write(f"| 上涨/下跌 | {upside:+.1f}% | {rating_cn} |\n")
+        f.write(f"| 风险 | {risk_cn} | - |\n\n")
+        
+        f.write("### 1.1 评分明细\n\n")
+        f.write(f"| 维度 | 得分 | 权重 | 贡献 |\n")
+        f.write(f"|------|------|------|------|\n")
+        f.write(f"| 质量 | {quality} | 30% | {quality*0.30:.0f} |\n")
+        f.write(f"| 价值 | {value} | 25% | {value*0.25:.0f} |\n")
+        f.write(f"| 成长 | {growth} | 25% | {growth*0.25:.0f} |\n")
+        f.write(f"| 动量 | {momentum_s} | 20% | {momentum_s*0.20:.0f} |\n")
+        f.write(f"| **综合** | **{sc}** | 100% | - |\n\n")
+        
+        score_bar = "█" * int(sc/5) + "░" * (20 - int(sc/5))
+        f.write(f"综合评分: [{score_bar}] {sc}/100\n\n")
+        f.write("---\n\n")
+        
+        # Valuation
+        f.write("## 2. 估值分析\n\n")
+        f.write(f"| 指标 | 数值 | 评估 |\n")
+        f.write(f"|------|------|------|\n")
+        pe_assess = "偏高" if q["pe"] > 30 else "合理" if q["pe"] > 15 else "偏低"
+        f.write(f"| 市盈率 (TTM) | {q['pe']:.1f}x | {pe_assess} |\n")
+        pe_f_assess = "偏高" if pe_f > 25 else "合理" if pe_f > 15 else "偏低"
+        f.write(f"| 市盈率 (预测) | {pe_f:.1f}x | {pe_f_assess} |\n")
+        peg_assess = "成长性强" if q["peg"] < 1 else "合理" if q["peg"] < 2 else "偏高"
+        f.write(f"| PEG | {q['peg']:.2f} | {peg_assess} |\n")
+        f.write(f"| EV/EBITDA | {fin['ev_ebitda']:.1f}x | - |\n\n")
+        
+        f.write("### 2.1 DCF三情景分析\n\n")
+        f.write(f"| 情景 | 目标价 | 上涨空间 |\n")
+
+[272 more lines. Use start_line=1481 to continue.]

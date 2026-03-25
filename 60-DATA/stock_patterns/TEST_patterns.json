@@ -1,0 +1,24 @@
+{
+  "symbol": "TEST",
+  "candle_count": 100,
+  "scanned_at": "2026-03-20T00:38:59.552971",
+  "patterns_found": [
+    {
+      "pattern": "double_bottom",
+      "type": "reversal",
+      "direction": "bullish",
+      "trough1": {
+        "index": 65,
+        "price": 158.8
+      },
+      "trough2": {
+        "index": 79,
+        "price": 158.96
+      },
+      "neckline": 172.81,
+      "confidence": 0.63,
+      "target": 186.82,
+      "detected_at": "2026-03-20T00:38:59.553189"
+    }
+  ]
+}

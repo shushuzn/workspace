@@ -1,0 +1,27 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:07:28.684699
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\simple_ui.py  (lines 180-200 of 213)
+            const result = document.getElementById('result');
+            result.innerHTML = 'Loading...';
+            
+            try {{
+                const resp = await fetch('/api/analyze/' + sym);
+                const data = await resp.json();
+                
+                if (data.error) {{
+                    result.innerHTML = '<div class="card">Error: ' + data.error + '</div>';
+                }} else {{
+                    const scoreColor = data.score >= 75 ? '#00d26a' : data.score >= 60 ? '#7bed9f' : '#ffa502';
+                    result.innerHTML = `
+                        <div class="card">
+                            <h3>${{data.symbol}} - ${{data.name || ''}}</h3>
+                            <div style="margin-top:15px">
+                                <span class="metric">Score: <span class="metric-value" style="color:${{scoreColor}}">${{data.score}}</span></span>
+                                <span class="metric">Upside: <span class="metric-value">${{data.upside?.toFixed(1)}}%</span></span>
+                                <span class="metric">Price: <span class="metric-value">$${{data.price?.toFixed(2)}}</span></span>
+                            </div>
+                            <div style="margin-top:15px">
+                                <span class="metric">P/E: ${{data.pe?.toFixed(1)}}x</span>
+
+[13 more lines. Use start_line=201 to continue.]

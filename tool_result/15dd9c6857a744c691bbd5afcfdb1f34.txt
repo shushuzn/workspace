@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:30:35.053078
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_analyzer.py  (lines 1-100 of 264)
+"""
+NewsHub LLM Analyzer - 本地LLM驱动的新闻分析
+支持 Ollama API 和 llama.cpp GGUF 模型
+"""
+import json
+import time
+import urllib.request
+import urllib.error
+from pathlib import Path
+
+# ============================================================
+# 配置
+# ============================================================
+
+# Ollama 配置
+OLLAMA_URL = "http://localhost:11434/api/generate"
+OLLAMA_MODEL = "qwen2.5:1.5b"  # 可选: qwen3.5:0.8b, qwen3.5:2b
+
+# llama.cpp 配置 (可选)
+LLAMA_CPP_MODEL = r"D:\AI-Models\Qwen3.5-2B\qwen3.5-2b-fp16.gguf"
+
+# 分析模式
+USE_OLLAMA = True  # True: 使用 Ollama API, False: 使用 llama.cpp
+TIMEOUT = 30  # 超时秒数
+
+# ============================================================
+# 提示词
+# ============================================================
+
+ANALYZE_PROMPT = """分析以下金融新闻的:
+1. 情感 (positive/negative/neutral)
+2. 影响市场 (股票/外汇/商品/宏观)
+3. 紧急程度 (high/medium/low)
+4. 一句话摘要
+
+新闻: {title}
+
+只返回JSON格式:
+{{"sentiment":"positive|negative|neutral","market":"stock|forex|commodity|macro|all","urgency":"high|medium|low","summary":"简短摘要"}}
+"""
+
+SUMMARIZE_PROMPT = """用一句话总结以下新闻（最多20字）:
+{title}
+"""
+
+# ============================================================
+# 工具函数
+# ============================================================
+
+def get_ssl_context():
+    """获取SSL上下文"""
+    import ssl
+    return ssl.create_default_context()
+
+def call_ollama(prompt: str, model: str = OLLAMA_MODEL) -> str:
+    """调用 Ollama API"""
+    data = {
+        "model": model,
+        "prompt": prompt,
+        "stream": False,
+        "options": {
+            "temperature": 0.1,
+            "num_predict": 200
+        }
+    }
+    
+    req = urllib.request.Request(
+        OLLAMA_URL,
+        data=json.dumps(data).encode('utf-8'),
+        headers={'Content-Type': 'application/json'},
+        method='POST'
+    )
+    
+    try:
+        with urllib.request.urlopen(req, timeout=TIMEOUT, context=get_ssl_context()) as resp:
+            result = json.loads(resp.read().decode('utf-8'))
+            return result.get('response', '').strip()
+    except Exception as e:
+        print(f"  ⚠ Ollama错误: {e}")
+        return ""
+
+def parse_llm_response(response: str) -> dict:
+    """解析LLM响应"""
+    try:
+        # 尝试提取JSON
+        for line in response.split('\n'):
+            line = line.strip()
+            if line.startswith('{') and line.endswith('}'):
+                return json.loads(line)
+        
+        # 尝试从文本中提取
+        import re
+        match = re.search(r'\{[^}]+\}', response)
+        if match:
+            return json.loads(match.group())
+    except:
+        pass
+    return {"sentiment": "neutral", "market": "all", "urgency": "medium", "summary": ""}
+
+# ============================================================
+
+[164 more lines. Use start_line=101 to continue.]

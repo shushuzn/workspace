@@ -1,0 +1,27 @@
+# tool_name: grep_search
+# created_at: 2026-03-21T10:31:43.129450
+# ---
+auto_barexcept_fix_001.py:2:  # -*- coding: utf-8 -*-
+auto_barexcept_fix_001.py:3:  """
+auto_barexcept_fix_001.py:4:  AUTO-BAREXCEPT-FIX-001 Auto-fix bare except statements
+auto_barexcept_fix_001.py:5:> Scans and fixes bare except: with specific exception types
+auto_barexcept_fix_001.py:6:  """
+auto_barexcept_fix_001.py:7:  import json, re, sys
+auto_barexcept_fix_001.py:8:  from pathlib import Path
+---
+auto_barexcept_fix_001.py:36:      """Fix bare except in a file"""
+auto_barexcept_fix_001.py:37:      try:
+auto_barexcept_fix_001.py:38:          content = filepath.read_text(encoding="utf-8", errors="replace")
+auto_barexcept_fix_001.py:39:>     except:
+auto_barexcept_fix_001.py:40:          return {"file": filepath.name, "status": "skip", "reason": "Cannot read"}
+auto_barexcept_fix_001.py:41:      
+auto_barexcept_fix_001.py:42:      original = content
+---
+auto_barexcept_fix_001.py:78:          # Check if has bare except
+auto_barexcept_fix_001.py:79:          try:
+auto_barexcept_fix_001.py:80:              content = f.read_text(encoding="utf-8", errors="replace")
+auto_barexcept_fix_001.py:81:>         except:
+auto_barexcept_fix_001.py:82:              continue
+auto_barexcept_fix_001.py:83:          
+auto_barexcept_fix_001.py:84:          if re.search(r'except\s*:\s*$', content, re.MULTILINE):
+---

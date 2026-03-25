@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:15:01.030901
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 710-750 of 903)
+                    else:
+                        warn(f"{name}: 0")
+    else:
+        # 串行抓取
+        for key, src in tasks:
+            name = src.get('name', key)
+            if not quiet:
+                info(f"Fetching {name}...")
+            
+            news = fetch_source(key, src)[1]
+            sources[name] = len(news)
+            all_news.extend(news)
+            
+            if not quiet:
+                if news:
+                    ok(f"{name}: +{len(news)}")
+                else:
+                    warn(f"{name}: 0")
+    
+    # 去重
+    original_count = len(all_news)
+    if dedup:
+        all_news = deduplicate(all_news)
+    
+    # 丰富数据：分类 + 情感
+    all_news = enrich_news(all_news)
+    
+    # 排序
+    all_news.sort(key=lambda x: x.get('ts', 0), reverse=True)
+    elapsed = time.time() - start
+    
+    # 保存缓存
+    save_cache(all_news)
+    
+    if not quiet:
+        dup_removed = original_count - len(all_news)
+        summary(len(all_news), sources, elapsed, dup_removed)
+    
+    return all_news
+
+def fetch_quick():
+
+[153 more lines. Use start_line=751 to continue.]

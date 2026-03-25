@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:09:38.178197
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_hub.py  (lines 115-165 of 271)
+    elif cmd == "schedule":
+        header("定时任务")
+        import scheduler
+        action = sys.argv[2] if len(sys.argv) > 2 else "list"
+        if action == "list":
+            scheduler.list_tasks()
+        elif action == "cron":
+            scheduler.export_cron()
+        elif action == "windows":
+            scheduler.export_windows()
+        else:
+            print("  用法: python news_hub.py schedule [list|cron|windows]")
+    
+    elif cmd == "telegram":
+        header("Telegram 推送")
+        mode = sys.argv[2] if len(sys.argv) > 2 else "test"
+        import news_telegram
+        if mode == "setup":
+            news_telegram.setup_bot()
+        else:
+            run("news_telegram.py", mode)
+    
+    elif cmd == "api":
+        header("启动 API 服务器")
+        import api_server
+        port = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 8449
+        api_server.run_server(port)
+    
+    elif cmd == "process":
+        header("新闻处理")
+        import news_processor
+        from news_fetcher import fetch_all
+        news = fetch_all(quiet=True)
+        news_processor.enrich_news(news)
+        print(f"\n  ✓ 处理完成: {len(news)} 条新闻")
+    
+    elif cmd == "analyze":
+        header("LLM 智能分析")
+        from llm_enhanced import analyze_batch, generate_report, market_sentiment
+        from news_fetcher import fetch_all
+        
+        # 抓取新闻
+        limit = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 10
+        print(f"  抓取新闻...")
+        news = fetch_all(quiet=True)[:limit]
+        
+        # LLM 分析
+        print(f"  LLM 分析中...")
+        analyzed = analyze_batch(news)
+        
+        # 生成报告
+
+[106 more lines. Use start_line=166 to continue.]

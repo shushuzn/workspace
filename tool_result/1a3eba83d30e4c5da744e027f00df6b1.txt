@@ -1,0 +1,35 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T23:31:11.602215
+# ---
+news_manager.py:92:          if any(k in title for k in ["跌停","暴跌"]): return "坚决回避"
+news_manager.py:93:          if any(k in title for k in ["亏损","造假"]): return "风险警示"
+news_manager.py:94:      return ""
+news_manager.py:95:  
+news_manager.py:96:  def get_risk(news_list):
+news_manager.py:97:      score = sum(2 if n.get("sentiment")=="利空" else 0 for n in news_list)
+news_manager.py:98:      return "高风险" if score >= 8 else ("中风险" if score >= 4 else "低风险")
+news_manager.py:99:  
+news_manager.py:100:  def get_suggestion(news_list):
+news_manager.py:101:      parts = []
+news_manager.py:102:      for n in news_list[:5]:
+news_manager.py:103:          s = get_summary(n.get("title",""))
+news_manager.py:104:          if s: parts.append(s)
+news_manager.py:105:      return " | ".join(parts[:3]) if parts else "观望"
+news_manager.py:106:  
+news_manager.py:107:> def get_external():
+news_manager.py:108:      try:
+news_manager.py:109:          url = "https://hq.sinajs.cn/list=gb_ixic,gb_ipsa,gb_inx"
+news_manager.py:110:          req = urllib.request.Request(url, headers={"User-Agent":"Mozilla/5.0"})
+news_manager.py:111:          with urllib.request.urlopen(req, timeout=5) as resp:
+news_manager.py:112:              data = resp.read().decode("gbk")
+news_manager.py:113:          markets = []
+news_manager.py:114:          names = {"ixic":"纳指","ipsa":"标普","inx":"道指"}
+news_manager.py:115:          for line in data.strip().split("\n"):
+news_manager.py:116:              if "=" in line:
+news_manager.py:117:                  sym = line.split("=")[0].split("_")[-1]
+news_manager.py:118:                  vals = line.split('"')[1].split(",")
+news_manager.py:119:                  if len(vals) >= 3:
+news_manager.py:120:                      name = names.get(sym, sym)
+news_manager.py:121:                      chg = float(vals[1])
+news_manager.py:122:                      pct = float(vals[2])
+---

@@ -1,0 +1,42 @@
+[
+  {
+    "id": 1,
+    "name": "research",
+    "display": "Research Tools",
+    "description": "研究相关工具",
+    "tool_prefix": "research-",
+    "priority": 1
+  },
+  {
+    "id": 2,
+    "name": "utility",
+    "display": "Utility Tools",
+    "description": "通用工具",
+    "tool_prefix": "util-",
+    "priority": 1
+  },
+  {
+    "id": 3,
+    "name": "integration",
+    "display": "Integration Tools",
+    "description": "集成工具",
+    "tool_prefix": "integrate-",
+    "priority": 2
+  },
+  {
+    "id": 4,
+    "name": "reporting",
+    "display": "Reporting Tools",
+    "description": "报告生成工具",
+    "tool_prefix": "report-",
+    "priority": 2
+  },
+  {
+    "id": 5,
+    "name": "testing",
+    "display": "Testing Tools",
+    "description": "测试工具",
+    "tool_prefix": "test-",
+    "priority": 1
+  }
+]

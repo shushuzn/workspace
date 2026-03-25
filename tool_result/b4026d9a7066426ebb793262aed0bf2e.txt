@@ -1,0 +1,101 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:03:48.641811
+# ---
+"""Cache system for Stock PRO"""
+import json
+import time
+from pathlib import Path
+from datetime import datetime, timedelta
+
+WORKSPACE = Path("D:/OpenClaw/workspace")
+CACHE_FILE = WORKSPACE / "30-scripts-tools" / "stock_pro_cache.json"
+
+DEFAULT_TTL = 300  # 5 minutes
+
+class Cache:
+    def __init__(self, ttl=DEFAULT_TTL):
+        self.ttl = ttl
+        self._memory = {}
+        self.load()
+    
+    def load(self):
+        """Load cache from file"""
+        if CACHE_FILE.exists():
+            try:
+                with open(CACHE_FILE, 'r') as f:
+                    self._memory = json.load(f)
+            except:
+                self._memory = {}
+    
+    def save(self):
+        """Save cache to file"""
+        with open(CACHE_FILE, 'w') as f:
+            json.dump(self._memory, f, indent=2)
+    
+    def get(self, key):
+        """Get cached value"""
+        if key in self._memory:
+            data, timestamp = self._memory[key]
+            if time.time() - timestamp < self.ttl:
+                return data
+            else:
+                del self._memory[key]
+        return None
+    
+    def set(self, key, value):
+        """Set cache value"""
+        self._memory[key] = (value, time.time())
+        self.save()
+    
+    def delete(self, key):
+        """Delete cache entry"""
+        if key in self._memory:
+            del self._memory[key]
+            self.save()
+    
+    def clear(self):
+        """Clear all cache"""
+        self._memory = {}
+        self.save()
+        return "[Cache] Cleared"
+    
+    def stats(self):
+        """Get cache statistics"""
+        now = time.time()
+        valid = sum(1 for _, ts in self._memory.values() if now - ts < self.ttl)
+        expired = len(self._memory) - valid
+        return f"[Cache] {valid} valid, {expired} expired, {len(self._memory)} total"
+    
+    def cleanup(self):
+        """Remove expired entries"""
+        before = len(self._memory)
+        self._memory = {k: v for k, v in self._memory.items() 
+                       if time.time() - v[1] < self.ttl}
+        removed = before - len(self._memory)
+        self.save()
+        return f"[Cache] Removed {removed} expired entries"
+
+
+# Global cache instance
+_cache = Cache()
+
+
+def get_cached(key, fetch_func):
+    """Get from cache or fetch"""
+    data = _cache.get(key)
+    if data is not None:
+        return data, True  # (data, from_cache)
+    
+    data = fetch_func()
+    _cache.set(key, data)
+    return data, False
+
+
+def clear_cache():
+    """Clear all cache"""
+    return _cache.clear()
+
+
+def cache_stats():
+    """Get cache stats"""
+    return _cache.stats()

@@ -1,0 +1,39 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T23:26:51.739417
+# ---
+news_processor.py:13:  
+news_processor.py:14:  _sys.path.insert(0, str(Path(__file__).parent.parent / "core"))
+news_processor.py:15:  from shared import (
+news_processor.py:16:      normalize_title,
+news_processor.py:17:      compute_hash,
+news_processor.py:18:>     classify_news,
+news_processor.py:19:      get_importance,
+news_processor.py:20:      get_sentiment_score,
+news_processor.py:21:  )
+news_processor.py:22:  
+news_processor.py:23:  logger = logging.getLogger("NewsHub.Processor")
+---
+news_processor.py:66:          title = news.get("title", "")
+news_processor.py:67:  
+news_processor.py:68:          item = dict(news)
+news_processor.py:69:  
+news_processor.py:70:          if not item.get("category"):
+news_processor.py:71:>             item["category"] = classify_news(title)
+news_processor.py:72:  
+news_processor.py:73:          if not item.get("importance"):
+news_processor.py:74:              item["importance"] = get_importance(title)
+news_processor.py:75:  
+news_processor.py:76:          if item.get("score", None) is None:
+---
+news_processor.py:93:  
+news_processor.py:94:      def process_one(news: Dict) -> Dict:
+news_processor.py:95:          title = news.get("title", "")
+news_processor.py:96:          item = dict(news)
+news_processor.py:97:  
+news_processor.py:98:>         item["category"] = classify_news(title)
+news_processor.py:99:          item["importance"] = get_importance(title)
+news_processor.py:100:          item["score"] = get_sentiment_score(title)
+news_processor.py:101:          item["hash"] = compute_hash(title)
+news_processor.py:102:  
+news_processor.py:103:          return item
+---

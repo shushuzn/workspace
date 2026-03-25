@@ -1,0 +1,88 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:47:42.996991
+# ---
+"""Dashboard - Real-time monitoring dashboard"""
+import json
+from pathlib import Path
+from datetime import datetime
+from stock_pro.core import A, analyze_multiple
+from stock_pro.sectors import get_all_sectors, get_symbols_by_sector
+
+WORKSPACE = Path("D:/OpenClaw/workspace")
+DASHBOARD_FILE = WORKSPACE / "30-scripts-tools" / "stock_pro_dashboard.json"
+
+class Dashboard:
+    def __init__(self):
+        self.data = self._load()
+    
+    def _load(self):
+        if DASHBOARD_FILE.exists():
+            try:
+                return json.loads(DASHBOARD_FILE.read_text())
+            except: pass
+        return {"last_update": None, "portfolio": {}, "sectors": []}
+    
+    def _save(self):
+        self.data["last_update"] = datetime.now().isoformat()
+        DASHBOARD_FILE.write_text(json.dumps(self.data, indent=2))
+    
+    def update_all(self):
+        symbols = list(A.keys())
+        results = analyze_multiple(symbols)
+        total_value = sum(r["price"] for r in results)
+        total_target = sum(r["target"] for r in results)
+        
+        self.data["portfolio"] = {"stocks": len(results), "total_value": total_value, "total_target": total_target, "avg_upside": (total_target - total_value) / total_value * 100, "avg_score": sum(r["score"] for r in results) / len(results)}
+        self.data["top_gainers"] = [{"symbol": r["symbol"], "upside": r["upside"]} for r in sorted(results, key=lambda x: x["upside"], reverse=True)[:5]]
+        self.data["top_scores"] = [{"symbol": r["symbol"], "score": r["score"]} for r in sorted(results, key=lambda x: x["score"], reverse=True)[:5]]
+        
+        sectors = []
+        for s in get_all_sectors():
+            syms = get_symbols_by_sector(s)
+            sr = [r for r in results if r["symbol"] in syms]
+            if sr: sectors.append({"name": s, "stocks": len(sr), "avg_score": sum(r["score"] for r in sr) / len(sr), "avg_upside": sum(r["upside"] for r in sr) / len(sr)})
+        sectors.sort(key=lambda x: x["avg_score"], reverse=True)
+        self.data["sectors"] = sectors
+        self._save()
+        return self.data
+    
+    def get_summary(self):
+        p = self.data.get("portfolio", {})
+        return f"Stocks: {p.get('stocks', 0)}, Avg Score: {p.get('avg_score', 0):.0f}, Avg Upside: {p.get('avg_upside', 0):+.1f}%, Last Update: {self.data.get('last_update', 'Never')}"
+
+def dashboard_report(symbols=None):
+    d = Dashboard()
+    d.update_all()
+    p = d.data["portfolio"]
+    report = "# Dashboard Report\n\n"
+    report += f"- **Stocks:** {p['stocks']}\n- **Total Value:** ${p['total_value']:,.2f}\n- **Target Value:** ${p['total_target']:,.2f}\n"
+    report += f"- **Avg Score:** {p['avg_score']:.0f}\n- **Avg Upside:** {p['avg_upside']:+.1f}%\n"
+    report += "\n## Top Gainers\n\n| Symbol | Upside |\n|--------|--------|\n"
+    for g in d.data.get("top_gainers", []):
+        report += f"| {g['symbol']} | {g['upside']:+.1f}% |\n"
+    report += "\n## Sectors\n\n| Sector | Stocks | Score | Upside |\n|--------|--------|-------|--------|\n"
+    for s in d.data.get("sectors", []):
+        report += f"| {s['name']} | {s['stocks']} | {s['avg_score']:.0f} | {s['avg_upside']:+.1f}% |\n"
+    return report
+
+def dashboard_html(symbols=None):
+    d = Dashboard()
+    d.update_all()
+    p = d.data["portfolio"]
+    rows = ""
+    for g in d.data.get("top_gainers", []):
+        rows += f"<tr><td>{g['symbol']}</td><td>{g['upside']:+.1f}%</td></tr>"
+    html = f'''<!DOCTYPE html><html><head><title>Dashboard</title><meta charset="UTF-8"><style>
+body{{font-family:Arial;padding:20px}}table{{border-collapse:collapse;width:100%}}th,td{{border:1px solid #ddd;padding:8px;text-align:left}}
+</style></head><body><h1>Stock Dashboard</h1>
+<p>Stocks: {p['stocks']} | Avg Score: {p['avg_score']:.0f} | Avg Upside: {p['avg_upside']:+.1f}%</p>
+<h2>Top Gainers</h2><table><thead><tr><th>Symbol</th><th>Upside</th></tr></thead><tbody>{rows}</tbody></table></body></html>'''
+    return html
+
+def dashboard_csv(symbols=None):
+    d = Dashboard()
+    d.update_all()
+    lines = "Symbol,Score,Upside\n"
+    for g in d.data.get("top_gainers", []):
+        lines += f"{g['symbol']},{g.get('score',0)},{g['upside']:.1f}\n"
+    return lines

@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:48:57.898132
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_feishu.py  (lines 435-470 of 611)
+        icon = "📰" if "新浪" in s else ("💹" if "股票" in s else ("🌐" if "Investing" in s else ("📊" if "Seeking" in s else "📱")))
+        print(f"{i:>2}. {icon} {title}")
+    if len(new_news) > 15:
+        print(f"... 还有 {len(new_news) - 15} 条")
+    print()
+    return 1
+
+def cmd_category():
+    """按分类推送"""
+    import sys
+    cat = sys.argv[2] if len(sys.argv) > 2 else 'stock'
+    
+    banner(f"分类: {cat}", "📊")
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    
+    # 分类统计
+    categories = {}
+    for n in all_news:
+        cat_name = n.get('category', 'other')
+        categories[cat_name] = categories.get(cat_name, 0) + 1
+    
+    info(f"分类统计: {categories}")
+    
+    # 筛选分类
+    items = [n for n in all_news if n.get('category') == cat]
+    new_items = [n for n in items if n['title'] not in history]
+    
+    if not new_items:
+        warn(f"无新{cat}新闻")
+        return 0
+    
+    info(f"推送: {len(new_items)} 条{cat}新闻")
+    
+    token = get_access_token()
+    if not token:
+
+[141 more lines. Use start_line=471 to continue.]

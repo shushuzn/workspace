@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-23T01:08:43.492456
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_feishu.py  (lines 70-120 of 301)
+    card = {
+        "config": {"wide_screen_mode": True},
+        "header": {
+            "title": {"tag": "plain_text", "content": source or "NewsHub"},
+            "template": "blue"
+        },
+        "elements": [
+            {"tag": "div", "text": {"tag": "lark_md", "content": title}},
+            {"tag": "hr"},
+            {"tag": "a", "text": {"tag": "lark_md", "content": "查看详情"}, "href": url}
+        ]
+    }
+    return {"msg_type": "interactive", "card": card}
+
+
+def build_digest_card(news_list):
+    """摘要卡片 - 移动端优化"""
+    items = []
+    for i, n in enumerate(news_list[:6], 1):
+        title = n['title'][:40] + "..." if len(n['title']) > 40 else n['title']
+        source = n.get('source', '')
+        items.append({"tag": "div", "text": {"tag": "lark_md", "content": f"**{i}. {title}** [{source}]"}})
+    
+    time_str = datetime.now().strftime("%H:%M")
+    
+    card = {
+        "config": {"wide_screen_mode": True},
+        "header": {
+            "title": {"tag": "plain_text", "content": f"财经速报 {time_str}"},
+            "template": "green"
+        },
+        "elements": items + [
+            {"tag": "hr"},
+            {"tag": "div", "text": {"tag": "lark_md", "content": "NewsHub"}}
+        ]
+    }
+    return {"msg_type": "interactive", "card": card}
+
+
+def send_card(token, receive_id, card):
+    cfg = load_feishu_config()
+    api_url = "https://open.feishu.cn/open-apis/im/v1/messages"
+    params = f"?receive_id_type={cfg.get('receive_id_type', 'open_id')}"
+    
+    payload = {
+        "receive_id": receive_id,
+        "msg_type": "interactive",
+        "content": json.dumps(card, ensure_ascii=False)
+    }
+    
+    req = urllib.request.Request(
+
+[181 more lines. Use start_line=121 to continue.]

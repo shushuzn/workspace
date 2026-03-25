@@ -1,0 +1,138 @@
+{
+  "symbol": "AAPL",
+  "monitoring_period": "24h",
+  "sources": [
+    "sina",
+    "xueqiu",
+    "seeking_alpha",
+    "twitter"
+  ],
+  "total_articles": 31,
+  "sentiment_summary": {
+    "overall": "negative",
+    "score": -0.235,
+    "distribution": {
+      "positive": 9,
+      "neutral": 4,
+      "negative": 18
+    },
+    "percentages": {
+      "positive": 29.0,
+      "neutral": 12.9,
+      "negative": 58.1
+    }
+  },
+  "articles": [
+    {
+      "title": "AAPL faces regulatory scrutiny",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-19T03:30:47.210746",
+      "hours_ago": 21,
+      "url": "https://sina.com/article/96885",
+      "sentiment": "negative",
+      "sentiment_score": -0.898,
+      "relevance_score": 0.66
+    },
+    {
+      "title": "AAPL expands market share",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-19T04:30:47.211204",
+      "hours_ago": 20,
+      "url": "https://sina.com/article/65555",
+      "sentiment": "positive",
+      "sentiment_score": 0.516,
+      "relevance_score": 0.85
+    },
+    {
+      "title": "AAPL stock drops on weak guidance",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-19T23:30:47.211230",
+      "hours_ago": 1,
+      "url": "https://sina.com/article/52321",
+      "sentiment": "negative",
+      "sentiment_score": -0.549,
+      "relevance_score": 0.77
+    },
+    {
+      "title": "AAPL misses earnings estimates",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-19T19:30:47.211246",
+      "hours_ago": 5,
+      "url": "https://sina.com/article/57302",
+      "sentiment": "negative",
+      "sentiment_score": -0.602,
+      "relevance_score": 0.66
+    },
+    {
+      "title": "AAPL announces new product launch",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-19T20:30:47.211259",
+      "hours_ago": 4,
+      "url": "https://sina.com/article/47023",
+      "sentiment": "positive",
+      "sentiment_score": 0.973,
+      "relevance_score": 0.75
+    },
+    {
+      "title": "AAPL expands market share",
+      "source": "sina",
+      "source_name": "新浪财经",
+      "published_at": "2026-03-19T06:30:47.211271",
+      "hours_ago": 18,
+      "url": "https://sina.com/article/65555",
+      "sentiment": "positive",
+      "sentiment_score": 0.659,
+      "relevance_score": 0.67
+    },
+    {
+      "title": "AAPL misses earnings estimates",
+      "source": "xueqiu",
+      "source_name": "雪球",
+      "published_at": "2026-03-19T10:30:47.211289",
+      "hours_ago": 14,
+      "url": "https://xueqiu.com/article/57302",
+      "sentiment": "negative",
+      "sentiment_score": -0.623,
+      "relevance_score": 0.79
+    },
+    {
+      "title": "AAPL trading volume increases",
+      "source": "xueqiu",
+      "source_name": "雪球",
+      "published_at": "2026-03-19T05:30:47.211301",
+      "hours_ago": 19,
+      "url": "https://xueqiu.com/article/98950",
+      "sentiment": "neutral",
+      "sentiment_score": 0.052,
+      "relevance_score": 0.93
+    },
+    {
+      "title": "AAPL beats earnings expectations",
+      "source": "xueqiu",
+      "source_name": "雪球",
+      "published_at": "2026-03-19T13:30:47.211313",
+      "hours_ago": 11,
+      "url": "https://xueqiu.com/article/65906",
+      "sentiment": "positive",
+      "sentiment_score": 0.911,
+      "relevance_score": 0.66
+    },
+    {
+      "title": "AAPL stock drops on weak guidance",
+      "source": "xueqiu",
+      "source_name": "雪球",
+      "published_at": "2026-03-19T10:30:47.211324",
+      "hours_ago": 14,
+      "url": "https://xueqiu.com/article/52321",
+      "sentiment": "negative",
+      "sentiment_score": -0.87,
+      "relevance_score": 0.78
+    }
+  ],
+  "monitored_at": "2026-03-20T00:30:47.212092"
+}

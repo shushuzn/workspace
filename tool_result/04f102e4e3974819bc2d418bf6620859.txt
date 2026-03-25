@@ -1,0 +1,27 @@
+# tool_name: grep_search
+# created_at: 2026-03-24T00:16:48.698680
+# ---
+async_fetcher.py:144:      except Exception as e:
+async_fetcher.py:145:          logger.warning(f"配置加载失败: {e}")
+async_fetcher.py:146:          return {}
+async_fetcher.py:147:  
+async_fetcher.py:148:  
+async_fetcher.py:149:> def get_rss_sources() -> List[tuple]:
+async_fetcher.py:150:      config = load_config()
+async_fetcher.py:151:      sources = []
+async_fetcher.py:152:      
+async_fetcher.py:153:      # 读取内置源
+async_fetcher.py:154:      for key, src in config.get("news_sources", {}).items():
+---
+async_fetcher.py:394:  
+async_fetcher.py:395:          # 新浪财经 API 已失效，移除
+async_fetcher.py:396:          # tasks.append(self.fetch_sina())
+async_fetcher.py:397:          # source_info.append(("新浪财经", 15))
+async_fetcher.py:398:  
+async_fetcher.py:399:>         rss_sources = get_rss_sources()
+async_fetcher.py:400:          for name, url, limit in rss_sources:
+async_fetcher.py:401:              tasks.append(self.fetch_rss(name, url, limit))
+async_fetcher.py:402:              source_info.append((name, limit))
+async_fetcher.py:403:  
+async_fetcher.py:404:          logger.info(f"开始并发抓取 {len(tasks)} 个源 (限流: {self.rate_limit}/min)...")
+---

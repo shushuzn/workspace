@@ -1,0 +1,62 @@
+# tool_name: read_file
+# created_at: 2026-03-22T19:04:13.443023
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\dash_app.py  (lines 120-175 of 327)
+                 style={'display':'flex'})
+    ])
+
+def price_chart(sym):
+    meta, data, err = fetch(sym)
+    if err: return glass([html.Div(f"❌ Error: {err}", style={'textAlign':'center','padding':'60px','color':C['bear']}),
+                          html.Div("Try another symbol", style={'textAlign':'center','color':C['muted']})])
+    
+    closes = data.get('indicators',{}).get('quote',[{}])[0].get('close',[])
+    volumes = data.get('indicators',{}).get('quote',[{}])[0].get('volume',[])
+    if not closes: return glass([html.Div("No data available", style={'textAlign':'center','padding':'60px'})])
+    
+    # Use last 60 days for chart
+    n = min(60, len(closes))
+    closes = closes[-n:]
+    volumes = volumes[-n:] if volumes else [0]*n
+    
+    # Calculate moving averages
+    ma20 = []
+    for i in range(len(closes)):
+        start = max(0, i-19)
+        ma20.append(sum(closes[start:i+1])/min(i+1,20))
+    
+    fig = go.Figure()
+    # Price line with fill
+    fig.add_trace(go.Scatter(x=list(range(n)), y=closes, mode='lines', name='Price',
+                             line=dict(color=C['primary'], width=2.5), fill='tozeroy',
+                             fillcolor='rgba(99,102,241,0.15)'))
+    # MA20
+    fig.add_trace(go.Scatter(x=list(range(n)), y=ma20, mode='lines', name='MA20',
+                             line=dict(color=C['amber'], width=1.5, dash='dot')))
+    
+    # Volume bars
+    colors = [C['bull'] if closes[i]>closes[max(0,i-1)] else C['bear'] for i in range(n)]
+    fig.add_trace(go.Bar(x=list(range(n)), y=volumes, name='Volume', marker_color=colors, 
+                        opacity=0.5, yaxis='y2'))
+    
+    fig.update_layout({
+        'plot_bgcolor':'transparent', 'paper_bgcolor':'transparent', 'font':{'color':C['text'], 'size':12},
+        'xaxis':{'showgrid':False, 'zeroline':False, 'tickfont':{'color':C['muted']}},
+        'yaxis':{'showgrid':True, 'gridcolor':'rgba(255,255,255,0.05)', 'zeroline':False, 
+                 'tickfont':{'color':C['muted']}, 'title':{'text':'Price','font':{'color':C['text']}}},
+        'yaxis2':{'showgrid':False, 'zeroline':False, 'overlaying':'y', 'side':'right',
+                  'tickfont':{'color':C['muted']}, 'title':{'text':'Volume','font':{'color':C['text']}}},
+        'legend':{'orientation':'h', 'y':1.12, 'x':0.5, 'xanchor':'center',
+                  'font':{'color':C['text']}, 'bgcolor':'rgba(0,0,0,0)'},
+        'margin':{'l':60, 'r':60, 't':20, 'b':40}, 'height':380,
+        'hovermode':'x unified', 'barmode':'relative',
+        'hoverlabel':{'bgcolor':'rgba(30,30,60,0.95)', 'bordercolor':C['primary']}
+    })
+    return dcc.Graph(figure=fig, config={'displayModeBar':True, 'responsive':True, 'displaylogo':False})
+
+def get_stats():
+    from stock_pro.core import A, P
+    total = len(A)
+    scores = [A[s][2] for s in A]
+
+[152 more lines. Use start_line=176 to continue.]

@@ -1,0 +1,48 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T12:57:58.314924
+# ---
+
+[1m[36m──────────────────────────────────────────────────[0m
+[1m[36m  热点话题检测[0m
+[1m[36m──────────────────────────────────────────────────[0m
+
+
+╔════════════════════════════════════════════════╗
+║  🔥 热点话题检测                                      
+╚════════════════════════════════════════════════╝
+
+⏰ 时间: 2026-03-23 12:57
+📰 分析: 81 条新闻
+
+【TOP 10 热点】
+
+1. 🔥🔥🔥 AI
+   出现: 7次 | 热度: 24 | 来源: TechCrunch, 36氪, Investing
+   └ 马斯克官宣史上最大造芯计划：年算力产能1太瓦，用于机器人和太空AI项目...
+2. 🔥🔥 Iran
+   出现: 4次 | 热度: 10 | 来源: CNBC, Investing, Seeking Alpha
+   └ Stock index futures in red as Trump...
+3. 🔥 Fed
+   出现: 7次 | 热度: 9 | 来源: CNBC
+   └ Fed Governor Waller urges caution f...
+4. 🔥 SEC
+   出现: 3次 | 热度: 9 | 来源: CNBC, CoinDesk, TechCrunch
+   └ SEC Commissioner Hester Peirce on E...
+5. 🔥 The
+   出现: 3次 | 热度: 9 | 来源: CNBC, CoinDesk, TechCrunch
+   └ The Fed issues its latest interest ...
+6. 🔥 Here
+   出现: 4次 | 热度: 8 | 来源: CNBC, Seeking Alpha
+   └ Here are the major earnings before ...
+7. 🔥 Musk
+   出现: 2次 | 热度: 6 | 来源: TechCrunch, Investing
+   └ Musk says SpaceX and Tesla to build...
+8. 🔥 Space
+   出现: 2次 | 热度: 6 | 来源: TechCrunch, Investing
+   └ Musk says SpaceX and Tesla to build...
+9. 🔥 Tesla
+   出现: 2次 | 热度: 6 | 来源: TechCrunch, Investing
+   └ Musk says SpaceX and Tesla to build...
+10. 🔥 Stocks
+   出现: 2次 | 热度: 6 | 来源: 华尔街日报, Investing
+   └ Stocks skid to four-month low as oi...

@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T18:30:03.500289
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\rss_server.py  (lines 180-220 of 253)
+
+class Handler(BaseHTTPRequestHandler):
+    cache = None
+    
+    def do_GET(self):
+        path = self.path.strip("/").lower()
+        news = self.cache.news
+        if self.cache.last_update:
+            last = datetime.fromtimestamp(self.cache.last_update).strftime("%H:%M:%S")
+        else:
+            last = "Never"
+        
+        if path in ["", "index", "index.html"]:
+            self.send_response(200)
+            self.send_header("Content-type", "text/html; charset=utf-8")
+            self.end_headers()
+            h = '<html><head><meta charset="utf-8"><title>RSS Server</title>'
+            h += '<style>body{font:14px sans-serif;max-width:600px;margin:50px auto;padding:20px}a{display:block;padding:10px;background:#f5f5f5;margin:5px 0;text-decoration:none;border-radius:5px}h1{margin-bottom:5px}p{color:#888}</style>'
+            h += '</head><body><h1>RSS Aggregator</h1>'
+            h += '<p>' + str(len(news)) + ' items | Last: ' + last + '</p>'
+            h += '<a href="/all.xml">All News (RSS)</a><a href="/all.html">All News (HTML)</a>'
+            h += '<h3>By Stock</h3>'
+            for s in STOCKS:
+                h += '<a href="/' + s.lower() + '.xml">' + s + '</a>'
+            self.wfile.write(h.encode())
+            return
+        
+        if path == "all.xml":
+            self.send_response(200)
+            self.send_header("Content-type", "application/xml; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(rss(news, "All News").encode())
+            return
+        if path == "all.html":
+            self.send_response(200)
+            self.send_header("Content-type", "text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(html_page(news, "All News").encode())
+            return
+        
+        for sym, kws in STOCKS.items():
+
+[33 more lines. Use start_line=221 to continue.]

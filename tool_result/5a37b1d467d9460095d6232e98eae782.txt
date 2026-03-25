@@ -1,0 +1,160 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:49:14.784402
+# ---
+#!/usr/bin/env python3
+"""NewsHub Dashboard API v2.0"""
+import sys; sys.stdout.reconfigure(encoding='utf-8')
+from flask import Flask, jsonify, request, render_template_string
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app)
+
+# 简化的 HTML
+HTML = '''<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>NewsHub v3.0</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@3"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <style>
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:system-ui;background:#0f0f1a;color:#e0e0e0;min-height:100vh}
+        .c{max-width:1400px;margin:0 auto;padding:20px}
+        h1{color:#00d4aa;margin-bottom:20px}
+        .stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:15px;margin-bottom:20px}
+        .stat{background:#1a1a2e;padding:20px;border-radius:12px;border:1px solid #2a2a4a}
+        .stat .v{font-size:28px;font-weight:bold;color:#00d4aa}
+        .stat .l{font-size:13px;color:#888;margin-top:5px}
+        nav{display:flex;gap:10px;margin-bottom:20px}
+        nav button{padding:10px 20px;border-radius:8px;border:none;background:#2a2a4a;color:#e0e0e0;cursor:pointer}
+        nav button.active{background:#00d4aa;color:#000}
+        .news{background:#1a1a2e;border-radius:12px;overflow:hidden}
+        .n{padding:15px 20px;border-bottom:1px solid #2a2a4a;cursor:pointer}
+        .n:hover{background:#222244}
+        .n:last-child{border-bottom:none}
+        .t{font-size:15px;margin-bottom:8px}
+        .m{font-size:13px;color:#888;display:flex;gap:15px}
+        .s{color:#00d4aa}
+        .chart{background:#1a1a2e;padding:20px;border-radius:12px;margin-bottom:20px}
+        .bars{display:flex;align-items:flex-end;gap:5px;height:150px}
+        .bar{flex:1;background:#00d4aa;border-radius:4px 4px 0 0;min-height:5px}
+        .bl{font-size:11px;color:#888;text-align:center;margin-top:5px}
+        .search input{width:100%;max-width:400px;padding:12px 15px;border-radius:8px;border:1px solid #2a2a4a;background:#1a1a2e;color:#fff}
+    </style>
+</head>
+<body>
+<div id="app" class="c">
+    <h1>NewsHub v3.0 Dashboard</h1>
+    <div class="stats">
+        <div class="stat"><div class="v">{{ s.total||0 }}</div><div class="l">Total</div></div>
+        <div class="stat"><div class="v">{{ s.sentiment?.positive||0 }}</div><div class="l">Positive</div></div>
+        <div class="stat"><div class="v">{{ s.sentiment?.negative||0 }}</div><div class="l">Negative</div></div>
+        <div class="stat"><div class="v">{{ score }}</div><div class="l">Score</div></div>
+    </div>
+    <nav>
+        <button :class="{active:v==='news'}" @click="v='news';load()">News</button>
+        <button :class="{active:v==='hot'}" @click="v='hot';loadHot()">Hot</button>
+        <button :class="{active:v==='src'}" @click="v='src';load()">Sources</button>
+    </nav>
+    <div v-if="v==='news'" class="search" style="margin-bottom:20px">
+        <input v-model="q" @keyup.enter="search" placeholder="Search...">
+    </div>
+    <div v-if="v==='news'" class="news">
+        <div v-for="n in news" :key="n.id" class="n" @click="open(n)">
+            <div class="t">{{ n.title }}</div>
+            <div class="m"><span class="s">{{ n.source }}</span><span>{{ n.category }}</span><span>{{ n.score }}</span></div>
+        </div>
+    </div>
+    <div v-if="v==='hot'" class="chart">
+        <h2 style="color:#00d4aa;margin-bottom:15px">Hot Topics</h2>
+        <div class="bars">
+            <div v-for="(t,i) in hot" :key="i" class="bar" :style="{height:(t.count/max*100)+'%'}">
+                <div class="bl">{{ t.word }}</div>
+            </div>
+        </div>
+    </div>
+    <div v-if="v==='src'" class="chart">
+        <h2 style="color:#00d4aa;margin-bottom:15px">Sources</h2>
+        <div class="bars">
+            <div v-for="(c,src) in s.by_source" :key="src" class="bar" :style="{height:(c/maxS*100)+'%'}">
+                <div class="bl">{{ src }}</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+const{createApp}=Vue.createApp({
+    data(){return{v:'news',s:{},news:[],hot:[],q:''}},
+    computed:{
+        score(){return this.s.sentiment?(this.s.sentiment.positive-this.s.sentiment.negative):0},
+        max(){return Math.max(...this.hot.map(t=>t.count),1)},
+        maxS(){return Math.max(...Object.values(this.s.by_source||{}),1)}
+    },
+    methods:{
+        async load(){this.s=(await axios.get('/api/stats')).data;this.news=(await axios.get('/api/news?limit=50')).data},
+        async loadHot(){this.s=(await axios.get('/api/stats')).data;this.hot=(await axios.get('/api/hot')).data},
+        async search(){this.news=(await axios.get('/api/search?q='+this.q)).data},
+        open(n){if(n.url)window.open(n.url,'_blank')}
+    },
+    mounted(){this.load()}
+}).mount('#app')
+</script>
+</body>
+</html>'''
+
+@app.route('/')
+def index():
+    return render_template_string(HTML)
+
+@app.route('/api/stats')
+def stats():
+    from database import db
+    return jsonify(db.get_stats())
+
+@app.route('/api/news')
+def news():
+    from database import db
+    limit = int(request.args.get('limit', 50))
+    return jsonify(db.get_news(limit=limit))
+
+@app.route('/api/search')
+def search():
+    from database import db
+    q = request.args.get('q', '')
+    return jsonify(db.search(q, 50) if q else [])
+
+@app.route('/api/hot')
+def hot():
+    from database import db
+    return jsonify(db.get_top_keywords(20))
+
+@app.route('/api/sources')
+def sources():
+    from database import db
+    return jsonify(db.get_sources())
+
+@app.route('/api/fetch', methods=['POST'])
+def fetch():
+    from async_fetcher import fetch_all
+    news = fetch_all(quiet=True)
+    return jsonify({'fetched': len(news)})
+
+@app.route('/api/analyze', methods=['POST'])
+def analyze():
+    from ai_summarizer import summarizer
+    from async_fetcher import fetch_all
+    news = fetch_all(quiet=True)[:20]
+    results = summarizer.analyze_batch(news)
+    return jsonify({'analyzed': len(results), 'sentiment': summarizer.get_market_sentiment(results)})
+
+def run(port=8450):
+    print(f'\n  NewsHub Dashboard: http://localhost:{port}\n')
+    app.run(host='0.0.0.0', port=port, debug=False)
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--port', type=int, default=8450)
+    run(parser.parse_args().port)

@@ -1,0 +1,18 @@
+{
+  "model": "GaussianProcessRegressor",
+  "features": [
+    "E_Jcm2",
+    "v_mms",
+    "co_ratio"
+  ],
+  "target": "sigma_Sm",
+  "kernel": "0.665**2 * RBF(length_scale=[0.598, 6.68e+03, 0.44]) + WhiteKernel(noise_level=0.527)",
+  "performance": {
+    "r2": 0.39434939790474266,
+    "mae": 815.2134186870284,
+    "rmse": 1006.3214182181872,
+    "nrmse_pct": 110.84858243657416,
+    "uncertainty_pct": 108.16513995589077,
+    "ci_coverage": 91.66666666666666
+  }
+}

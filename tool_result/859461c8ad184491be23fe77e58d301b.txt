@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:55:22.666497
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\push\news_feishu.py  (lines 250-285 of 431)
+    raw_news = fetch_all(quiet=True)
+    info(f"获取 {len(raw_news)} 条新闻")
+
+    if not raw_news:
+        warn("无新闻数据")
+        return
+
+    # 转换 NewsItem dataclass 为 dict
+    news = []
+    for n in raw_news:
+        if hasattr(n, '__dict__'):
+            news.append({
+                'title': n.title,
+                'url': n.url,
+                'source': n.source,
+                'category': getattr(n, 'category', 'other'),
+                'score': getattr(n, 'score', 0),
+                'time': getattr(n, 'time', ''),
+                'quality_score': 0
+            })
+        else:
+            news.append(n)
+
+    # 按质量评分排序，选取高质量新闻
+    ranked = rank_news_by_quality(news)
+    news = ranked[:limit]
+
+    # 显示质量分布
+    avg_quality = sum(n.get("quality_score", 0) for n in news) / len(news) if news else 0
+    info(f"平均质量: {avg_quality:.1f}/100")
+
+    card = build_digest_card(news)
+
+    token = get_access_token()
+    if not token:
+        error("获取 access_token 失败")
+
+[146 more lines. Use start_line=286 to continue.]

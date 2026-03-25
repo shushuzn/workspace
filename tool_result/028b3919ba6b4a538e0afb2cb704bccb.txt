@@ -1,0 +1,48 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-21T10:09:04.812091
+# ---
+{
+  "timestamp": "2026-03-21T10:09:01.183402",
+  "score": 100,
+  "tools": {
+    "total": 413,
+    "compliant": 413,
+    "percentage": "100%"
+  },
+  "workflows": {
+    "total_runs": 70,
+    "successful": 70,
+    "rate": "100%"
+  },
+  "status": "healthy"
+}
+
+[CODE QUALITY REPORT]
+==================================================
+Total Tools: 413
+Clean Files: 325
+Files with Issues: 88
+
+[ISSUES FOUND]
+  [missing_argv_check] agent_tool_monitor_001.py
+  [bare_except] anti_bypass_engine_001.py
+  [bare_except] audit_analyzer_001.py
+  [bare_except] auto_automator_001.py
+  [bare_except] auto_discover_001.py
+  [bare_except] auto_fix_engine_001.py
+  [bare_except] auto_todo_updater_001.py
+  [bare_except] auto_training_engine_001.py
+  [bare_except] bad_test_001.py
+  [missing_argv_check] batch_runner_001.py
+
+[SUGGESTIONS]
+  - Use specific exception types instead of bare except
+  - Add argv validation for CLI tools
+
+[METRICS]
+  Bare Except: 61
+  Missing ARGV: 20
+  Too Long: 7
+
+[Report saved to: 13-memory\.code_quality_report.json]
+==================================================

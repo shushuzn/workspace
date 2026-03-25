@@ -1,0 +1,18 @@
+{
+  "model": "GaussianProcessRegressor (Online Learning)",
+  "features": [
+    "E_Jcm2",
+    "v_mms",
+    "co_ratio"
+  ],
+  "n_base_samples": 200,
+  "n_experiment_samples": 3,
+  "n_total_samples": 203,
+  "performance": {
+    "r2": 0.8007888856198212,
+    "mae": 458.91420528436976,
+    "uncertainty_pct": 50.38657688956959,
+    "level": "EXCELLENT"
+  },
+  "update_date": "2026-03-06T11:35:51.387935"
+}

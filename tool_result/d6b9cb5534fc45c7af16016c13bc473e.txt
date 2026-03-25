@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:35:51.773332
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 3360-3410 of 3770)
+        td {{ padding: 15px; border-bottom: 1px solid #2d2d4a; }}
+        tr:hover {{ background: #252540; }}
+        .buy {{ color: #00ff88; }}
+        .hold {{ color: #ffcc00; }}
+        .sell {{ color: #ff4444; }}
+        .positive {{ color: #00ff88; }}
+        .negative {{ color: #ff4444; }}
+        .refresh {{ background: #00d4ff; color: #000; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; }}
+        .refresh:hover {{ background: #00ffcc; }}
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Stock PRO Dashboard</h1>
+        <div>
+            <span class="time">Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}</span>
+            <button class="refresh" onclick="location.reload()">Refresh</button>
+        </div>
+    </div>
+    
+    <div class="stats">
+        <div class="stat-card top">
+            <div class="label">Top Pick</div>
+            <div class="value">{top_pick['symbol'] if top_pick else 'N/A'}</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Avg Upside</div>
+            <div class="value">{avg_upside:.1f}%</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Strong Buys</div>
+            <div class="value">{strong_buys}</div>
+        </div>
+        <div class="stat-card">
+            <div class="label">Stocks</div>
+            <div class="value">{len(data)}</div>
+        </div>
+    </div>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Symbol</th>
+                <th>Price</th>
+                <th>Target</th>
+                <th>Upside</th>
+                <th>Score</th>
+                <th>Rating</th>
+                <th>P/E</th>
+                <th>ROE</th>
+                <th>FCF</th>
+
+[360 more lines. Use start_line=3411 to continue.]

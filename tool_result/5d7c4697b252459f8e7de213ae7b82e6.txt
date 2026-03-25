@@ -1,0 +1,47 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T09:45:05.289094
+# ---
+
+[1m[36m──────────────────────────────────────────────────[0m
+[1m[36m  NewsHub Help[0m
+[1m[36m──────────────────────────────────────────────────[0m
+
+
+  [1m用法:[0m
+    python news_hub.py <command> [options]
+
+  [1m命令:[0m
+    [32mfetch[0m     抓取新闻（不推送）
+    [32mfeishu[0m    飞书推送
+    [32mqq[0m        QQ推送
+    [32mtest[0m     测试所有
+    [32mquick[0m    快速模式
+    [32mserver[0m   启动RSS服务
+    [32mexport[0m   导出新闻(JSON/CSV)
+    [32mhelp[0m     显示帮助
+
+  [1m飞书子命令:[0m
+    compact   紧凑视图（纯文本）
+    preview   预览新闻（不发送）
+    digest    摘要推送（6条）
+    alert     关键词告警
+    all       全部推送（8条）
+    daily     日报
+    stats     统计信息
+    sentiment 情感分析
+    cat <类型> 分类推送 (stock/forex/commodity/macro/trade/tech/china/us)
+    test      连接测试
+    welcome   欢迎卡片
+
+  [1m选项:[0m
+    --no-cache    禁用缓存，强制重新抓取
+    --cache-only  仅使用缓存
+
+  [1m示例:[0m
+    python news_hub.py fetch
+    python news_hub.py feishu compact
+    python news_hub.py feishu digest --no-cache
+    python news_hub.py feishu alert
+    python news_hub.py export csv --limit 20
+    python news_hub.py server
+

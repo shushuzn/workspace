@@ -1,0 +1,31 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T12:55:22.383924
+# ---
+ Volume in drive D has no label.
+ Volume Serial Number is 0E0F-B1B8
+
+ Directory of D:\OpenClaw\workspace\.git\hooks
+
+2026/03/21  08:32    <DIR>          .
+2026/03/17  23:42               478 applypatch-msg.sample
+2026/03/18  00:59             6,393 check-encoding
+2026/03/17  23:42               896 commit-msg.sample
+2026/03/17  23:47               360 post-checkout
+2026/03/17  23:47               356 post-commit
+2026/03/17  23:47               354 post-merge
+2026/03/17  23:42               189 post-update.sample
+2026/03/17  23:42               424 pre-applypatch.sample
+2026/03/21  13:00             2,008 pre-commit
+2026/03/20  13:10             8,182 pre-commit-v4.py
+2026/03/17  23:42             1,649 pre-commit.sample
+2026/03/17  23:42               416 pre-merge-commit.sample
+2026/03/17  23:47               350 pre-push
+2026/03/17  23:42             1,374 pre-push.sample
+2026/03/17  23:42             4,898 pre-rebase.sample
+2026/03/17  23:42               544 pre-receive.sample
+2026/03/17  23:42             1,492 prepare-commit-msg.sample
+2026/03/17  23:42             2,783 push-to-checkout.sample
+2026/03/17  23:42             2,308 sendemail-validate.sample
+2026/03/17  23:42             3,650 update.sample
+              20 File(s)         39,104 bytes
+               1 Dir(s)  377,290,407,936 bytes free

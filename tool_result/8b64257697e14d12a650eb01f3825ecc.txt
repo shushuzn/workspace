@@ -1,0 +1,318 @@
+# tool_name: read_file
+# created_at: 2026-03-21T19:21:25.741336
+# ---
+// Idle Empire - 随机事件系统 v1.0
+
+const RANDOM_EVENTS = [
+    {
+        id: 'gold_rain',
+        name: '金币雨',
+        icon: '💰',
+        desc: '天降金币！',
+        duration: 10,
+        effect: function() {
+            var bonus = Math.floor(G.totalEarned * 0.01);
+            if (bonus < 100) bonus = 100;
+            G.gold += bonus;
+            G.totalEarned += bonus;
+            showMsg('💰 金币雨降临！获得 ' + formatNumber(bonus) + ' 金币！', 'success');
+            invalidateDerivedData();
+            requestUiUpdate({ heavy: true });
+        }
+    },
+    {
+        id: 'double_production',
+        name: '产量翻倍',
+        icon: '⬆️',
+        desc: '产量提升100%',
+        duration: 30,
+        effect: function() {
+            if (!G.eventBuffs) G.eventBuffs = {};
+            G.eventBuffs.doubleProduction = Date.now() + this.duration * 1000;
+            showMsg('⬆️ 产量翻倍！持续 ' + this.duration + ' 秒', 'info');
+            invalidateDerivedData();
+            requestUiUpdate({ heavy: true });
+        }
+    },
+    {
+        id: 'click_crit',
+        name: '点击暴击',
+        icon: '💥',
+        desc: '点击伤害x5',
+        duration: 20,
+        effect: function() {
+            if (!G.eventBuffs) G.eventBuffs = {};
+            G.eventBuffs.clickCrit = Date.now() + this.duration * 1000;
+            showMsg('💥 点击暴击！持续 ' + this.duration + ' 秒', 'info');
+            invalidateDerivedData();
+            requestUiUpdate({ heavy: true });
+        }
+    },
+    {
+        id: 'boss_weak',
+        name: 'Boss虚弱',
+        icon: '😈',
+        desc: 'Boss伤害降低50%',
+        duration: 45,
+        effect: function() {
+            if (!G.eventBuffs) G.eventBuffs = {};
+            G.eventBuffs.bossWeak = Date.now() + this.duration * 1000;
+            showMsg('😈 Boss虚弱！持续 ' + this.duration + ' 秒', 'info');
+            invalidateDerivedData();
+            requestUiUpdate({ heavy: true });
+        }
+    },
+    {
+        id: 'lucky_day',
+        name: '幸运降临',
+        icon: '🍀',
+        desc: '所有收益+25%',
+        duration: 60,
+        effect: function() {
+            if (!G.eventBuffs) G.eventBuffs = {};
+            G.eventBuffs.luckyDay = Date.now() + this.duration * 1000;
+            showMsg('🍀 幸运降临！持续 ' + this.duration + ' 秒', 'info');
+            invalidateDerivedData();
+            requestUiUpdate({ heavy: true });
+        }
+    },
+    {
+        id: 'building_bonus',
+        name: '建筑祝福',
+        icon: '🏗️',
+        desc: '随机建筑收益+50%',
+        duration: 40,
+        effect: function() {
+            var randomBuilding = BUILDINGS[Math.floor(Math.random() * BUILDINGS.length)];
+            if (!G.eventBuffs) G.eventBuffs = {};
+            if (!G.eventBuffs.buildingBonus) G.eventBuffs.buildingBonus = {};
+            G.eventBuffs.buildingBonus[randomBuilding.id] = {
+                endTime: Date.now() + this.duration * 1000,
+                multiplier: 1.5
+            };
+            showMsg('🏗️ ' + randomBuilding.name + ' 收益+50%！持续 ' + this.duration + ' 秒', 'info');
+            invalidateDerivedData();
+            requestUiUpdate({ heavy: true });
+        }
+    },
+    {
+        id: 'instant_gold',
+        name: '意外之财',
+        icon: '💎',
+        desc: '获得大量金币',
+        duration: 0,
+        effect: function() {
+            var bonus = Math.floor(Math.sqrt(G.totalEarned) * 10);
+            if (bonus < 1000) bonus = 1000;
+            G.gold += bonus;
+            G.totalEarned += bonus;
+            showMsg('💎 意外之财！获得 ' + formatNumber(bonus) + ' 金币！', 'success');
+            invalidateDerivedData();
+            requestUiUpdate({ heavy: true });
+        }
+    },
+    {
+        id: 'boss_rush',
+        name: 'Boss来袭',
+        icon: '👹',
+        desc: '连续击败3个Boss',
+        duration: 0,
+        effect: function() {
+            if (typeof defeatBoss === 'function') {
+                var reward1 = getScaledBossReward(currentBoss);
+                G.gold += reward1;
+                G.totalEarned += reward1;
+                G.bossesDefeated = (G.bossesDefeated || 0) + 1;
+                showMsg('👹 Boss来袭！击杀获得 ' + formatNumber(reward1) + ' 金币！', 'success');
+                defeatBoss();
+                invalidateDerivedData();
+                requestUiUpdate({ heavy: true });
+            }
+        }
+    }
+];
+
+var eventCooldown = 120000;
+var lastEventTime = 0;
+var eventTimer = null;
+var activeBuffsDisplay = null;
+
+function getEventBonusMultiplier(state) {
+    var mult = 1;
+    if (state.eventBuffs) {
+        if (state.eventBuffs.doubleProduction && Date.now() < state.eventBuffs.doubleProduction) {
+            mult *= 2;
+        }
+        if (state.eventBuffs.luckyDay && Date.now() < state.eventBuffs.luckyDay) {
+            mult *= 1.25;
+        }
+        if (state.eventBuffs.buildingBonus) {
+            var now = Date.now();
+            for (var bid in state.eventBuffs.buildingBonus) {
+                if (state.eventBuffs.buildingBonus[bid].endTime > now) {
+                    var building = BUILDINGS.find(b => b.id === bid);
+                    if (building) {
+                        var count = state.buildings[bid] || 0;
+                        var baseProduction = building.baseProduction * count * getBuildingMultiplier(state, bid);
+                        mult += (state.eventBuffs.buildingBonus[bid].multiplier - 1) * baseProduction / (getBaseTotalProduction(state) || 1);
+                    }
+                }
+            }
+        }
+    }
+    return mult;
+}
+
+function getBaseTotalProduction(gameState) {
+    let total = 0;
+    BUILDINGS.forEach(b => {
+        const count = gameState.buildings[b.id] || 0;
+        total += b.baseProduction * count * getBuildingMultiplier(gameState, b.id);
+    });
+    return total * getDynastyMultiplier(gameState) * getPrestigeMultiplier(gameState);
+}
+
+var originalGetTotalProduction = getTotalProduction;
+getTotalProduction = function(gameState) {
+    var base = originalGetTotalProduction(gameState);
+    return base * getEventBonusMultiplier(gameState);
+};
+
+function getClickCritMultiplier(state) {
+    if (state.eventBuffs && state.eventBuffs.clickCrit && Date.now() < state.eventBuffs.clickCrit) {
+        return 5;
+    }
+    return 1;
+}
+
+function getBossDamageModifier(state) {
+    if (state.eventBuffs && state.eventBuffs.bossWeak && Date.now() < state.eventBuffs.bossWeak) {
+        return 0.5;
+    }
+    return 1;
+}
+
+function triggerRandomEvent() {
+    if (!G) return;
+    if (Date.now() - lastEventTime < eventCooldown) return;
+    if (G.totalEarned < 10000) return;
+
+    lastEventTime = Date.now();
+    var availableEvents = RANDOM_EVENTS.filter(function(e) {
+        if (e.id === 'boss_rush' && (!currentBoss || typeof defeatBoss !== 'function')) return false;
+        return true;
+    });
+
+    if (availableEvents.length === 0) return;
+
+    var event = availableEvents[Math.floor(Math.random() * availableEvents.length)];
+    event.effect();
+
+    updateActiveBuffsDisplay();
+}
+
+function updateActiveBuffsDisplay() {
+    if (!G || !G.eventBuffs) return;
+
+    var buffs = [];
+    var now = Date.now();
+
+    if (G.eventBuffs.doubleProduction && now < G.eventBuffs.doubleProduction) {
+        var remaining = Math.ceil((G.eventBuffs.doubleProduction - now) / 1000);
+        buffs.push({ icon: '⬆️', name: '产量翻倍', remaining: remaining });
+    }
+    if (G.eventBuffs.clickCrit && now < G.eventBuffs.clickCrit) {
+        var remaining = Math.ceil((G.eventBuffs.clickCrit - now) / 1000);
+        buffs.push({ icon: '💥', name: '点击暴击', remaining: remaining });
+    }
+    if (G.eventBuffs.bossWeak && now < G.eventBuffs.bossWeak) {
+        var remaining = Math.ceil((G.eventBuffs.bossWeak - now) / 1000);
+        buffs.push({ icon: '😈', name: 'Boss虚弱', remaining: remaining });
+    }
+    if (G.eventBuffs.luckyDay && now < G.eventBuffs.luckyDay) {
+        var remaining = Math.ceil((G.eventBuffs.luckyDay - now) / 1000);
+        buffs.push({ icon: '🍀', name: '幸运降临', remaining: remaining });
+    }
+    if (G.eventBuffs.buildingBonus) {
+        for (var bid in G.eventBuffs.buildingBonus) {
+            if (now < G.eventBuffs.buildingBonus[bid].endTime) {
+                var building = BUILDINGS.find(b => b.id === bid);
+                var remaining = Math.ceil((G.eventBuffs.buildingBonus[bid].endTime - now) / 1000);
+                buffs.push({ icon: building ? building.icon : '🏗️', name: (building ? building.name : '建筑') + '+50%', remaining: remaining });
+            }
+        }
+    }
+
+    if (buffs.length === 0) {
+        if (activeBuffsDisplay) {
+            activeBuffsDisplay.style.display = 'none';
+        }
+        return;
+    }
+
+    if (!activeBuffsDisplay) {
+        activeBuffsDisplay = document.createElement('div');
+        activeBuffsDisplay.className = 'active-buffs';
+        activeBuffsDisplay.id = 'active-buffs';
+        var bossSection = document.querySelector('.boss-section');
+        if (bossSection) {
+            bossSection.parentNode.insertBefore(activeBuffsDisplay, bossSection.nextSibling);
+        }
+    }
+
+    var html = '<div class="buffs-title">🎁 活动增益</div>';
+    buffs.forEach(function(buff) {
+        html += '<div class="buff-item"><span class="buff-icon">' + buff.icon + '</span><span class="buff-name">' + buff.name + '</span><span class="buff-time">' + buff.remaining + 's</span></div>';
+    });
+    activeBuffsDisplay.innerHTML = html;
+    activeBuffsDisplay.style.display = 'block';
+}
+
+function startEventSystem() {
+    if (eventTimer) clearInterval(eventTimer);
+
+    eventTimer = setInterval(function() {
+        triggerRandomEvent();
+        updateActiveBuffsDisplay();
+    }, 60000);
+
+    setTimeout(triggerRandomEvent, 30000);
+}
+
+function ensureEventBuffsState() {
+    if (!G) return;
+    if (!G.eventBuffs) G.eventBuffs = {};
+
+    var now = Date.now();
+    var changed = false;
+
+    if (G.eventBuffs.doubleProduction && now >= G.eventBuffs.doubleProduction) {
+        delete G.eventBuffs.doubleProduction;
+        changed = true;
+    }
+    if (G.eventBuffs.clickCrit && now >= G.eventBuffs.clickCrit) {
+        delete G.eventBuffs.clickCrit;
+        changed = true;
+    }
+    if (G.eventBuffs.bossWeak && now >= G.eventBuffs.bossWeak) {
+        delete G.eventBuffs.bossWeak;
+        changed = true;
+    }
+    if (G.eventBuffs.luckyDay && now >= G.eventBuffs.luckyDay) {
+        delete G.eventBuffs.luckyDay;
+        changed = true;
+    }
+    if (G.eventBuffs.buildingBonus) {
+        for (var bid in G.eventBuffs.buildingBonus) {
+            if (now >= G.eventBuffs.buildingBonus[bid].endTime) {
+                delete G.eventBuffs.buildingBonus[bid];
+                changed = true;
+            }
+        }
+    }
+
+    if (changed) {
+        invalidateDerivedData();
+        requestUiUpdate({ heavy: true });
+    }
+}

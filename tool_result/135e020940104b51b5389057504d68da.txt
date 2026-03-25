@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:51:16.045197
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 990-1040 of 1247)
+    
+    # 政策解读
+    policy_impact = analyze_policy_impact(news_list)
+    
+    # 时间戳
+    now = datetime.now().strftime('%m-%d %H:%M')
+    
+    # ==================== 构建消息 ====================
+    lines = []
+    
+    # 头部
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"  [NEWS] {now}")
+    lines.append(f"  情绪: {score_str}")
+    lines.append(f"  {sentiment_bar}")
+    lines.append(f"  +{len(positive)} -{len(negative)} ={len(neutral)} | {len(news_list)}条")
+    lines.append(f"  风险: [{risk_icon}]{risk_level}")
+    if history_compare:
+        lines.append(f"  {history_compare}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"板块: {sector_str}")
+    lines.append(f"来源: {source_str}")
+    lines.append(f"热词: {top_keywords}")
+    if codes_str != "-":
+        lines.append(f"个股: {codes_str}")
+    if sector_impact_str:
+        lines.append(f"影响: {sector_impact_str}")
+    lines.append(f"景气: {outlook_str}")
+    if fund_flow:
+        lines.append(f"资金: {fund_flow}")
+    if policy_impact:
+        lines.append(f"{policy_impact}")
+    lines.append(f"建议: {suggestion}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    if external_markets:
+        lines.append(f"外盘: {external_markets}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    
+    # 头部
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"  [NEWS] {now}")
+    lines.append(f"  情绪: {score_str}")
+    lines.append(f"  {sentiment_bar}")
+    lines.append(f"  +{len(positive)} -{len(negative)} ={len(neutral)} | {len(news_list)}条")
+    lines.append(f"  风险: [{risk_icon}]{risk_level}")
+    if impact_prediction:
+        lines.append(f"  {impact_prediction}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"板块: {sector_str}")
+    lines.append(f"来源: {source_str}")
+    lines.append(f"热词: {top_keywords}")
+
+[207 more lines. Use start_line=1041 to continue.]

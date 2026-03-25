@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:35:36.407562
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\exporters.py  (lines 30-60 of 152)
+            "count": len(results),
+            "stocks": results
+        }, f, indent=2)
+    
+    return f"[Export] JSON saved to: {filepath}"
+
+
+def export_csv(symbols, filename=None):
+    """Export to CSV format"""
+    ensure_export_dir()
+    
+    if filename is None:
+        filename = f"stock_data_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    
+    results = analyze_multiple(symbols)
+    filepath = EXPORT_DIR / filename
+    
+    with open(filepath, 'w', newline='', encoding='utf-8') as f:
+        writer = csv.writer(f)
+        writer.writerow(["Symbol", "Price", "Target", "Upside", "Score", "P/E", "PEG", "ROE", "Sector"])
+        
+        from stock_pro.sectors import get_sector
+        for r in results:
+            writer.writerow([
+                r["symbol"], r["price"], r["target"], r["upside"], r["score"],
+                r.get("pe", ""), r.get("peg", ""), r.get("roe", ""),
+                get_sector(r["symbol"])
+            ])
+    
+    return f"[Export] CSV saved to: {filepath}"
+
+
+[92 more lines. Use start_line=61 to continue.]

@@ -1,0 +1,22 @@
+{
+    "enabled": true,
+    "provider": "ollama",
+    "model": "qwen2.5:7b",
+    "fallback_to_keyword": true,
+    "timeout": 30,
+    "max_tokens": 200,
+    "temperature": 0.1,
+    "providers": {
+        "ollama": {
+            "url": "http://localhost:11434",
+            "model": "qwen2.5:7b",
+            "chat_endpoint": "/api/chat"
+        },
+        "lm_studio": {
+            "url": "http://localhost:1234/v1",
+            "model": "local-model",
+            "chat_endpoint": "/chat/completions"
+        }
+    },
+    "prompt_template": "你是一个专业的金融新闻分析师。请分析以下新闻标题，输出JSON格式的分析结果。\n\n新闻标题：{title}\n\n请输出：\n{{\n  \"sentiment\": \"利好|利空|中性\",\n  \"intensity\": 1-5的数字,\n  \"sector\": \"科技|新能源|金融|地产|医药|消费|周期|军工|传媒|宏观|通用\",\n  \"keywords\": [\"关键词1\", \"关键词2\", \"关键词3\"],\n  \"companies\": [\"公司1\", \"公司2\"],\n  \"urgency\": \"高|中|低\",\n  \"summary\": \"一句话总结\"\n}}\n\n只输出JSON，不要其他内容。"
+}

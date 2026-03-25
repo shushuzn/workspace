@@ -1,0 +1,68 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:47:36.671845
+# ---
+        CACHE_TTL = 0
+    elif args.cache_only:
+        CACHE_TTL = 999999
+    
+    if args.quick:
+        news = fetch_quick()
+        show_news(news, 5)
+    else:
+        news = fetch_all(quiet=False, dedup=not args.no_dedup)
+        
+        # 分类筛选
+        if args.cat != 'all':
+            news = filter_by_category(news, args.cat)
+        
+        # 情感筛选
+        if args.sentiment != 'all':
+            news = filter_by_sentiment(news, args.sentiment)
+        
+        # 关键词筛选
+        if args.keywords:
+            kw_list = [k.strip() for k in args.keywords.split(',')]
+            news = filter_by_keywords(news, kw_list)
+            news = sort_by_relevance(news, kw_list)
+        
+        # 限制数量
+        news = news[:args.limit] if args.limit else news
+        
+        # 分类统计
+        if args.stats:
+            categories = {}
+            sentiments = {'positive': 0, 'negative': 0, 'neutral': 0}
+            for n in news:
+                cat = n.get('category', 'other')
+                categories[cat] = categories.get(cat, 0) + 1
+                sent = n.get('sentiment', 'neutral')
+                sentiments[sent] = sentiments.get(sent, 0) + 1
+            
+            print()
+            print("📊 分类统计:")
+            for cat, cnt in sorted(categories.items(), key=lambda x: -x[1]):
+                icon = "📈" if cat == 'stock' else ("💰" if cat == 'forex' else ("🛢️" if cat == 'commodity' else ("🏛️" if cat == 'macro' else ("🔧" if cat == 'tech' else "📰"))))
+                print(f"  {icon} {cat}: {cnt}")
+            
+            print()
+            print("💡 情感分析:")
+            print(f"  🟢 利好: {sentiments['positive']}")
+            print(f"  🔴 利空: {sentiments['negative']}")
+            print(f"  ⚪ 中性: {sentiments['neutral']}")
+            print()
+        
+        if args.export == 'json':
+            export_json(news)
+        elif args.export == 'csv':
+            export_csv(news)
+        else:
+            show_news(news, 10)
+        
+        # 热点检测
+        hot = detect_hot_topics(news)
+        if hot:
+            print()
+            print("🔥 热点话题:")
+            for word, count in hot:
+                bar = "█" * count
+                print(f"  {word}: {count} {bar}")

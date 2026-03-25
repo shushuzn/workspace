@@ -1,0 +1,49 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T23:06:53.129143
+# ---
+
++============================================+
+|          NEWS FETCH REPORT                 |
+|          2026-03-22 23:06           |
++============================================+
+
+    [=][通用] 长线资金“扫货”，重仓股曝光
+    [=][金融] A股当前良性调整何时结束？十大券商策略来了 #券商
+    [=][科技] 阿里巴巴集团主席蔡崇信：中国科技的成果将惠及全球 #阿里
+    [=][科技] 华为杨超斌：行业智能化正驶入加速期，携手伙伴共同深耕三大类AI核心场景 #AI
+    [+][通用] 中东战争升级，周一油价或将进一步上涨
+    [=][通用] 伊朗议会议长警告若发电厂遭袭，中东地区基础设施将遭到“不可逆转的摧毁”
+    [=][通用] 洪大哥电影武术项目开机 洪金宝洪天明等出席
+    [=][通用] 动画电影《笑傲江湖·曲一》传统武侠江湖风云
+    [=][通用] 西北“枢纽”，集体起飞？
+    [=][科技] 春晚带火机器人，这个春节多地景区机器人“很忙” #机器人
+    [-][新能源] 五天三板！马斯克带火的光伏牛股，要爆了？亏损收窄，公司拟收购电站 #光伏
+    [=][通用] 1700亿元央企投资落地新疆，92个能源项目重塑国家能源安全格局
+    [=][科技] 多能互补新体系成型：新疆打造‘煤电+新能源+算力’协同发展样板 #算力 #新能源
+    [=][通用] Fannie, Freddie Place Large Bids fo
+    [=][通用] Bessent Says US to Press Ahead in I
+    [=][科技] OpenAI's data center pivot undersco #AI
+    [=][通用] ICE agents will be deployed to U.S.
+    [=][通用] Big tech’s cause for hope: Link bet
+    [=][通用] 'The energy tax': Analysts weigh im
+    [=][通用] Allegations against ICC war crimes 
+    [=][通用] Israel strikes main bridge in south
+    [=][通用] 伊朗战争下，欧盟呼吁家庭走上“能源自主”之路
+    [=][通用] 比特币的困局(二)
+    [=][通用] Energy bills rise 'inescapable' if 
+    [=][通用] 'Club vibes without the hangover': 
+    [=][通用] Starmer adviser urges ministers to 
+    [=][通用] ‘Trumpflation’: how the Iran war’s 
+
++============================================+
+|          FETCH SUMMARY                      |
++============================================+
+  Total New:    27 items
+  Sources:      16
+  ------------------------------------------------
+  新浪财    +2   (10 fetched)
+  新浪股    +2   (10 fetched)
+  新浪产    +2   (10 fetched)
+  新浪港    +2   (10 fetched)
+  新浪美    +2   (10 fetched)
+

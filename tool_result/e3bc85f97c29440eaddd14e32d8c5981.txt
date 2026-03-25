@@ -1,0 +1,66 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:34:58.713394
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\integrations.py  (lines 1-60 of 103)
+"""Integration utilities: CSV, Excel, Dashboard, Charts"""
+try:
+    import matplotlib
+    matplotlib.use('Agg')
+    import matplotlib.pyplot as plt
+    PLT_AVAILABLE = True
+except ImportError:
+    PLT_AVAILABLE = False
+import json, csv, sqlite3
+from pathlib import Path
+from datetime import datetime
+
+WORKSPACE = Path("D:/OpenClaw/workspace")
+OUTPUT = WORKSPACE / "50-reports" / "stocks"
+OUTPUT.mkdir(parents=True, exist_ok=True)
+DB_FILE = WORKSPACE / "30-scripts-tools" / "stock_pro.db"
+
+def export_csv(results, filename=None):
+    if not filename: filename = OUTPUT / f"stocks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    if not results: return "[CSV] No data"
+    with open(filename, 'w', newline='', encoding='utf-8') as f:
+        w = csv.writer(f)
+        w.writerow(["Symbol", "Price", "Target", "Upside", "Score", "Rating", "P/E", "ROE", "Source"])
+        for r in results:
+            w.writerow([r['symbol'], r['price'], r['target'], f"{r['upside']:.1f}%", r['score'], r['rating'], f"{r['pe']:.1f}", f"{r['roe']:.1f}", r.get('source', 'unknown')])
+    return f"[CSV] Exported {len(results)} stocks"
+
+def export_xlsx(results, filename=None):
+    try: import openpyxl
+    except ImportError: return "[Excel] pip install openpyxl"
+    if not filename: filename = OUTPUT / f"stocks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+    wb = openpyxl.Workbook(); ws = wb.active
+    ws.append(["Symbol", "Price", "Target", "Upside", "Score", "Rating"])
+    for r in results: ws.append([r['symbol'], r['price'], r['target'], r['upside'], r['score'], r['rating']])
+    wb.save(filename)
+    return f"[Excel] Exported {len(results)} stocks"
+
+def save_db(results):
+    conn = sqlite3.connect(DB_FILE); c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS stocks (symbol TEXT, price REAL, target REAL, upside REAL, score INTEGER, rating TEXT, fetched_at TEXT)''')
+    for r in results:
+        c.execute('''INSERT INTO stocks VALUES (?,?,?,?,?,?,?)''', (r['symbol'], r['price'], r['target'], r['upside'], r['score'], r['rating'], r.get('fetched_at', datetime.now().isoformat())))
+    conn.commit(); conn.close()
+    return f"[DB] Saved {len(results)} stocks"
+
+def gen_dashboard(results):
+    if not results: return "[Dashboard] No data"
+    fetched = results[0].get('fetched_at', datetime.now().isoformat())
+    avg_score = sum(r['score'] for r in results) / len(results)
+    avg_upside = sum(r['upside'] for r in results) / len(results)
+    rows = ""
+    for r in results:
+        cls = "buy" if r["score"] >= 65 else "hold" if r["score"] >= 50 else "sell"
+        upcls = "positive" if r["upside"] > 0 else "negative"
+        rows += f'<tr><td><strong>{r["symbol"]}</strong></td><td>${r["price"]:.2f}</td><td>${r["target"]:.2f}</td><td class="{upcls}">{r["upside"]:+.1f}%</td><td>{r["score"]}</td><td class="{cls}">{r["rating"]}</td><td>{r["pe"]:.0f}x</td></tr>'
+    html = f'''<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Stock Dashboard</title><style>
+body{{font-family:Arial;background:#0a0a0a;color:#fff;padding:20px}}
+.header{{display:flex;justify-content:space-between;margin-bottom:20px}}
+h1{{color:#00d4ff}}.stats{{display:grid;grid-template-columns:repeat(3,200px);gap:15px;margin-bottom:20px}}
+.stat{{background:#1a1a2e;padding:15px;border-radius:8px}}
+
+[43 more lines. Use start_line=61 to continue.]

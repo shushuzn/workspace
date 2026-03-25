@@ -1,0 +1,31 @@
+# tool_name: read_file
+# created_at: 2026-03-22T23:31:02.086181
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 66-90 of 620)
+    codes = re.findall(r'[0-9]{6}', title)
+    codes.extend(re.findall(r'\b[A-Z]{2,5}\b', title))
+    codes = list(dict.fromkeys(codes))[:2]
+    keywords = []
+    for sec, kws in SECTORS.items():
+        for kw in kws:
+            if kw in title:
+                keywords.append(kw)
+                break
+    return sentiment, sector, keywords[:3], codes
+
+def get_summary(title):
+    for p in ["华为","阿里","腾讯","小米","比亚迪","特斯拉","茅台","OpenAI","英伟达","苹果","微软"]:
+        if p in title: return p
+    if any(k in title for k in ["上涨","大涨"]): return "上涨"
+    if any(k in title for k in ["下跌","大跌"]): return "下跌"
+    if "突破" in title: return "突破"
+    if any(k in title for k in ["风险","警告"]): return "警示"
+    return ""
+
+def get_signal(news):
+    title, sent = news.get("title",""), news.get("sentiment","")
+    if sent == "利好":
+        if any(k in title for k in ["涨停","暴涨"]): return "强势买入"
+        if any(k in title for k in ["突破","创新高"]): return "关注买入"
+
+[530 more lines. Use start_line=91 to continue.]

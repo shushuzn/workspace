@@ -1,0 +1,69 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T13:16:07.288967
+# ---
+main.py:26:> from stock_pro.sectors import get_sector, get_symbols_by_sector, get_all_sectors, sector_report
+main.py:68:>     parser.add_argument('symbols', nargs='*', help='Stock symbols')
+main.py:86:>     parser.add_argument('--cron-add', nargs=4, help='Add cron: schedule command symbols...')
+main.py:162:>     if args.help or (not args.symbols and not any(vars(args).values())):
+main.py:202:>         sym = args.symbols[0] if args.symbols else "NVDA"
+main.py:214:>     if args.symbols and not any([
+main.py:218:>         sym = args.symbols[0]
+main.py:266:>         symbols = args.csv if args.csv else args.symbols
+main.py:267:>         results = analyze_multiple(symbols, live=args.live)
+main.py:273:>         symbols = args.xlsx if args.xlsx else args.symbols
+main.py:274:>         results = analyze_multiple(symbols, live=args.live)
+main.py:280:>         symbols = args.db if args.db else args.symbols
+main.py:281:>         results = analyze_multiple(symbols, live=args.live)
+main.py:287:>         symbols = args.dashboard if args.dashboard else args.symbols
+main.py:288:>         results = analyze_multiple(symbols, live=args.live)
+main.py:294:>         symbols = args.chart if args.chart else args.symbols
+main.py:295:>         results = analyze_multiple(symbols, live=args.live)
+main.py:301:>         symbols = args.alert if args.alert else args.symbols
+main.py:302:>         results = analyze_multiple(symbols, live=args.live)
+main.py:405:>             count = len(get_symbols_by_sector(s))
+main.py:411:>         symbols = get_symbols_by_sector(sector_name)
+main.py:412:>         if not symbols:
+main.py:416:>         results = analyze_multiple(symbols)
+main.py:422:>         symbols = args.risk if args.risk else ["NVDA", "META", "JPM"]
+main.py:423:>         results = analyze_multiple(symbols)
+main.py:429:>         symbols = args.diversify if args.diversify else args.symbols
+main.py:430:>         if not symbols:
+main.py:433:>         results = analyze_multiple(symbols)
+main.py:463:>         results = analyze_multiple(args.symbols if args.symbols else list(A.keys()))
+main.py:468:>         results = analyze_multiple(args.symbols if args.symbols else list(A.keys()))
+main.py:474:>         symbols = args.symbols if args.symbols else list(A.keys())
+main.py:475:>         results = analyze_multiple(symbols)
+main.py:481:>         results = analyze_multiple(args.symbols if args.symbols else list(A.keys()))
+main.py:487:>         symbols = args.symbols if args.symbols else list(A.keys())
+main.py:488:>         print(full_report(symbols))
+main.py:493:>         symbols = args.symbols if args.symbols else list(A.keys())
+main.py:494:>         outputs = export_all(symbols)
+main.py:501:>         symbols = args.symbols if args.symbols else list(A.keys())[:10]
+main.py:502:>         print(correlation_report(symbols))
+main.py:507:>         symbols = args.symbols if args.symbols else list(A.keys())[:10]
+main.py:508:>         print(benchmark_vs_index(symbols))
+main.py:523:>         symbols = args.symbols if args.symbols else ['NVDA', 'META', 'GOOGL', 'MSFT', 'AMZN']
+main.py:524:>         print(backtest_report(symbols))
+main.py:548:>         if args.symbols:
+main.py:549:>             print(full_pdf_report(args.symbols))
+main.py:563:>         symbols = args.symbols if args.symbols else list(A.keys())[:15]
+main.py:564:>         print(optimize_report(symbols))
+main.py:569:>         symbols = args.symbols if args.symbols else None
+main.py:570:>         print(earnings_report(symbols))
+main.py:575:>         sym = args.symbols[0] if args.symbols else "NVDA"
+main.py:581:>         symbols = args.symbols if args.symbols else None
+main.py:582:>         print(sentiment_report(symbols))
+main.py:635:>     symbols = args.symbols if args.symbols else list(A.keys())[:20]
+main.py:638:>         print(export_json(symbols))
+main.py:642:>         print(export_markdown(symbols))
+main.py:646:>         print(export_html(symbols))
+main.py:650:>         for output in export_all(symbols):
+main.py:694:>         print(quality_report(args.symbols or None))
+main.py:699:>         print(risk_return_report(args.symbols or None))
+main.py:704:>         print(value_vs_growth_report(args.symbols or None))
+main.py:725:>         print(compare_stocks(args.symbols or None))
+main.py:730:>         print(compare_risk(args.symbols or None))
+main.py:736:>         print(find_winners(args.symbols or None, criteria))
+main.py:741:>         print(earnings_report(args.symbols or None))
+main.py:746:>         print(dividend_report(args.symbols or None))
+main.py:751:>         print(fscore_report(args.symbols or None))

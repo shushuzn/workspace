@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-22T18:41:05.650399
+# ---
+        
+        if path in ["", "index", "index.html"]:
+            self.send_response(200)
+            self.send_header("Content-type", "text/html; charset=utf-8")
+            self.end_headers()
+            h = '<html><head><meta charset="utf-8"><title>RSS Server</title>'
+            h += '<style>body{font:14px sans-serif;max-width:600px;margin:50px auto;padding:20px}a{display:block;padding:10px;background:#f5f5f5;margin:5px 0;text-decoration:none;border-radius:5px}h1{margin-bottom:5px}p{color:#888}h3{margin-top:20px}</style>'
+            h += '</head><body><h1>RSS Aggregator</h1>'
+            h += '<p>Total: ' + str(len(all_news)) + ' | RSS: ' + str(len(rss_news)) + ' | Jin10: ' + str(len(jin10_news)) + ' | Last: ' + last + '</p>'
+            h += '<h3>Chinese News (金十数据)</h3>'
+            h += '<a href="/jin10.xml">金十 RSS (Chinese)</a>'
+            h += '<h3>All News</h3>'
+            h += '<a href="/all.xml">All News (RSS)</a><a href="/all.html">All News (HTML)</a>'
+            h += '<h3>By Stock</h3>'
+            for s in STOCKS:
+                h += '<a href="/' + s.lower() + '.xml">' + s + '</a>'
+            self.wfile.write(h.encode())
+            return
+        
+        # Jin10 RSS (Chinese financial news)
+        if path == "jin10.xml":
+            self.send_response(200)
+            self.send_header("Content-type", "application/xml; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(rss(jin10_news, "金十数据").encode())
+            return
+        
+        if path == "all.xml":
+            self.send_response(200)
+            self.send_header("Content-type", "application/xml; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(rss(all_news, "All News").encode())
+            return
+        if path == "all.html":
+            self.send_response(200)
+            self.send_header("Content-type", "text/html; charset=utf-8")
+            self.end_headers()
+            self.wfile.write(html_page(all_news, "All News").encode())
+            return
+        
+        for sym, kws in STOCKS.items():
+            if path == sym.lower() + ".xml":
+                filtered = [n for n in all_news if any(kw.lower() in (n["title"]+n.get("content","")).lower() for kw in kws)]
+                self.send_response(200)
+                self.send_header("Content-type", "application/xml; charset=utf-8")
+                self.end_headers()
+                self.wfile.write(rss(filtered, sym + " News").encode())
+                return
+        
+        self.send_response(404)
+        self.end_headers()
+        self.wfile.write(b"Not Found")
+    
+    def log_message(self, format, *args):
+        pass
+
+if __name__ == "__main__":
+    cache = Cache()
+    cache.load()
+    
+    if len(sys.argv) > 1 and sys.argv[1] == "update":
+        print("Updating...")
+        import platform
+        if platform.system() == "Windows":
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+        count = asyncio.run(update(cache))
+        print(f"Updated {count} news")
+    else:
+        print(f"Starting RSS server on http://localhost:{PORT}")
+        print(f"Endpoints: / /all.xml /all.html /nvda.xml /tsla.xml ...")
+        Handler.cache = cache
+        server = HTTPServer(("0.0.0.0", PORT), Handler)
+        print(f"Server running. Press Ctrl+C to stop.")
+        server.serve_forever()

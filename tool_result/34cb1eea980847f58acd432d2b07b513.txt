@@ -1,0 +1,205 @@
+# tool_name: grep_search
+# created_at: 2026-03-24T00:22:20.608969
+# ---
+.git\hooks\pre-push.sample:1:  #!/bin/sh
+.git\hooks\pre-push.sample:2:  
+.git\hooks\pre-push.sample:3:  # An example hook script to verify what is about to be pushed.  Called by "git
+.git\hooks\pre-push.sample:4:> # push" after it has checked the remote status, but before anything has been
+.git\hooks\pre-push.sample:5:  # pushed.  If this script exits with a non-zero status nothing will be pushed.
+.git\hooks\pre-push.sample:6:  #
+.git\hooks\pre-push.sample:7:  # This hook is called with the following parameters:
+---
+core\paths.py:9:  # Core paths
+core\paths.py:10:  CORE_DIR = PROJECT_ROOT / "core"
+core\paths.py:11:  ANALYZE_DIR = PROJECT_ROOT / "analyze"
+core\paths.py:12:> PUSH_DIR = PROJECT_ROOT / "push"
+core\paths.py:13:  TOOLS_DIR = PROJECT_ROOT / "tools"
+core\paths.py:14:  SEARCH_DIR = PROJECT_ROOT / "search_tools"
+core\paths.py:15:  CONFIG_DIR = PROJECT_ROOT / "config"
+---
+core\unified_config.py:181:                  file=lg.get("file", "logs/newshub.log"),
+core\unified_config.py:182:              )
+core\unified_config.py:183:  
+core\unified_config.py:184:>         if "push" in data:
+core\unified_config.py:185:              ph = data["push"]
+core\unified_config.py:186:              config.push = PushConfig(
+core\unified_config.py:187:                  dry_run=ph.get("dry_run", False),
+---
+core\unified_config.py:182:              )
+core\unified_config.py:183:  
+core\unified_config.py:184:          if "push" in data:
+core\unified_config.py:185:>             ph = data["push"]
+core\unified_config.py:186:              config.push = PushConfig(
+core\unified_config.py:187:                  dry_run=ph.get("dry_run", False),
+core\unified_config.py:188:              )
+---
+core\unified_config.py:230:          env_mappings = {
+core\unified_config.py:231:              f"{_env_prefix}DB_PATH": ("database", "path"),
+core\unified_config.py:232:              f"{_env_prefix}LOG_LEVEL": ("logging", "level"),
+core\unified_config.py:233:>             f"{_env_prefix}DRY_RUN": ("push", "dry_run"),
+core\unified_config.py:234:              f"{_env_prefix}CACHE_TTL": ("cache", "ttl"),
+core\unified_config.py:235:              f"{_env_prefix}FETCH_TIMEOUT": ("fetcher", "timeout"),
+core\unified_config.py:236:              f"{_env_prefix}RATE_LIMIT": ("fetcher", "rate_limit"),
+---
+news_hub.py:197:              print("  用法: python news_hub.py cache [stats|clear|cleanup]")
+news_hub.py:198:  
+news_hub.py:199:      # 统一推送
+news_hub.py:200:>     elif cmd == "push":
+news_hub.py:201:          header("Push to All Channels")
+news_hub.py:202:          from push.push_manager import push_manager
+news_hub.py:203:          from core.async_fetcher import fetch_all
+---
+push\news_discord.py:154:      import argparse
+push\news_discord.py:155:  
+push\news_discord.py:156:      parser = argparse.ArgumentParser(description="Discord 推送")
+push\news_discord.py:157:>     parser.add_argument("action", choices=["test", "push", "digest", "alert", "setup"])
+push\news_discord.py:158:      parser.add_argument("--title", default="告警", help="告警标题")
+push\news_discord.py:159:      parser.add_argument("--content", default="", help="告警内容")
+push\news_discord.py:160:  
+---
+push\news_discord.py:165:      elif args.action == "test":
+push\news_discord.py:166:          success = push_alert("测试消息", "这是一条测试消息")
+push\news_discord.py:167:          ok("测试成功") if success else error("测试失败")
+push\news_discord.py:168:>     elif args.action == "push":
+push\news_discord.py:169:          from async_fetcher import fetch_all
+push\news_discord.py:170:          news = fetch_all(quiet=True)
+push\news_discord.py:171:          success = push_news(news[:10])
+---
+push\news_email.py:219:      import argparse
+push\news_email.py:220:  
+push\news_email.py:221:      parser = argparse.ArgumentParser(description="邮件推送")
+push\news_email.py:222:>     parser.add_argument("action", choices=["test", "push", "alert", "setup"])
+push\news_email.py:223:      parser.add_argument("--to", help="收件人")
+push\news_email.py:224:      parser.add_argument("--subject", default="📰 新闻速递", help="邮件主题")
+push\news_email.py:225:      parser.add_argument("--plain", action="store_true", help="纯文本格式")
+---
+push\news_email.py:263:          success = send_email(config.get("to_addr", ""), "NewsHub 测试", "✅ 配置成功！", config=config)
+push\news_email.py:264:          ok("测试成功") if success else error("测试失败")
+push\news_email.py:265:  
+push\news_email.py:266:>     elif args.action == "push":
+push\news_email.py:267:          from async_fetcher import fetch_all
+push\news_email.py:268:          news = fetch_all(quiet=True)
+push\news_email.py:269:          success = push_news(news[:15], to_addr=args.to, subject=args.subject, html=not args.plain)
+---
+push\news_slack.py:171:      import argparse
+push\news_slack.py:172:  
+push\news_slack.py:173:      parser = argparse.ArgumentParser(description="Slack 推送")
+push\news_slack.py:174:>     parser.add_argument("action", choices=["test", "push", "digest", "alert", "setup"])
+push\news_slack.py:175:      parser.add_argument("--title", default="告警", help="告警标题")
+push\news_slack.py:176:      parser.add_argument("--content", default="", help="告警内容")
+push\news_slack.py:177:  
+---
+push\news_slack.py:182:      elif args.action == "test":
+push\news_slack.py:183:          success = push_alert("测试消息", "这是一条测试消息")
+push\news_slack.py:184:          ok("测试成功") if success else error("测试失败")
+push\news_slack.py:185:>     elif args.action == "push":
+push\news_slack.py:186:          from async_fetcher import fetch_all
+push\news_slack.py:187:          news = fetch_all(quiet=True)
+push\news_slack.py:188:          success = push_news(news[:10])
+---
+push\news_telegram.py:180:      import argparse
+push\news_telegram.py:181:  
+push\news_telegram.py:182:      parser = argparse.ArgumentParser(description="Telegram 推送")
+push\news_telegram.py:183:>     parser.add_argument("action", choices=["test", "push", "digest", "alert", "setup"])
+push\news_telegram.py:184:      parser.add_argument("--title", default="告警", help="告警标题")
+push\news_telegram.py:185:      parser.add_argument("--content", default="", help="告警内容")
+push\news_telegram.py:186:  
+---
+push\news_telegram.py:191:      elif args.action == "test":
+push\news_telegram.py:192:          success = push_alert("测试消息", "这是一条测试消息")
+push\news_telegram.py:193:          ok("测试成功") if success else error("测试失败")
+push\news_telegram.py:194:>     elif args.action == "push":
+push\news_telegram.py:195:          from async_fetcher import fetch_all
+push\news_telegram.py:196:          news = fetch_all(quiet=True)
+push\news_telegram.py:197:          success = push_news(news[:10])
+---
+push\news_webhook.py:197:      import argparse
+push\news_webhook.py:198:  
+push\news_webhook.py:199:      parser = argparse.ArgumentParser(description="Webhook 推送")
+push\news_webhook.py:200:>     parser.add_argument("action", choices=["test", "push", "list", "add", "remove"])
+push\news_webhook.py:201:      parser.add_argument("name", nargs="?", help="预设名称")
+push\news_webhook.py:202:      parser.add_argument("url", nargs="?", help="Webhook URL")
+push\news_webhook.py:203:      parser.add_argument("--description", "-d", default="", help="预设说明")
+---
+push\news_webhook.py:212:  
+push\news_webhook.py:213:      if args.action == "test":
+push\news_webhook.py:214:          test_webhook(args.url, args.preset)
+push\news_webhook.py:215:>     elif args.action == "push":
+push\news_webhook.py:216:          from async_fetcher import fetch_all
+push\news_webhook.py:217:          news = fetch_all(quiet=True)
+push\news_webhook.py:218:  
+---
+push\news_wechat.py:141:      import argparse
+push\news_wechat.py:142:  
+push\news_wechat.py:143:      parser = argparse.ArgumentParser(description="微信企业推送")
+push\news_wechat.py:144:>     parser.add_argument("action", choices=["test", "push", "digest", "alert"])
+push\news_wechat.py:145:      parser.add_argument("--key", help="webhook key")
+push\news_wechat.py:146:  
+push\news_wechat.py:147:      args = parser.parse_args()
+---
+push\news_wechat.py:149:      if args.action == "test":
+push\news_wechat.py:150:          success = push_alert("测试消息", "这是一条测试消息", args.key)
+push\news_wechat.py:151:          ok("测试成功") if success else error("测试失败")
+push\news_wechat.py:152:>     elif args.action == "push":
+push\news_wechat.py:153:          from async_fetcher import fetch_all
+push\news_wechat.py:154:          news = fetch_all(quiet=True)
+push\news_wechat.py:155:          success = push_news(news[:10], args.key)
+---
+push\push_manager.py:550:  
+push\push_manager.py:551:      parser = argparse.ArgumentParser(description="推送管理")
+push\push_manager.py:552:      parser.add_argument(
+push\push_manager.py:553:>         "action", choices=["status", "config", "enable", "disable", "test", "push"]
+push\push_manager.py:554:      )
+push\push_manager.py:555:      parser.add_argument("channel", nargs="?", help="渠道名称")
+push\push_manager.py:556:  
+---
+push\push_manager.py:576:              print(f"  {'✓ 成功' if success else '✗ 失败'}")
+push\push_manager.py:577:          else:
+push\push_manager.py:578:              print("  用法: push_manager.py test <channel>")
+push\push_manager.py:579:>     elif args.action == "push":
+push\push_manager.py:580:          from async_fetcher import fetch_all
+push\push_manager.py:581:  
+push\push_manager.py:582:          news = fetch_all(quiet=True)
+---
+tools\cli_aliases.json:7:    "ft": "feishu test",
+tools\cli_aliases.json:8:    "fr": "feishu rich",
+tools\cli_aliases.json:9:    "fh": "feishu hourly",
+tools\cli_aliases.json:10:>   "q": "qq push",
+tools\cli_aliases.json:11:    "qt": "qq test",
+tools\cli_aliases.json:12:    "w": "wechat push",
+tools\cli_aliases.json:13:    "wt": "wechat test",
+---
+tools\cli_aliases.json:9:    "fh": "feishu hourly",
+tools\cli_aliases.json:10:    "q": "qq push",
+tools\cli_aliases.json:11:    "qt": "qq test",
+tools\cli_aliases.json:12:>   "w": "wechat push",
+tools\cli_aliases.json:13:    "wt": "wechat test",
+tools\cli_aliases.json:14:    "tg": "telegram push",
+tools\cli_aliases.json:15:    "tgt": "telegram test",
+---
+tools\cli_aliases.json:11:    "qt": "qq test",
+tools\cli_aliases.json:12:    "w": "wechat push",
+tools\cli_aliases.json:13:    "wt": "wechat test",
+tools\cli_aliases.json:14:>   "tg": "telegram push",
+tools\cli_aliases.json:15:    "tgt": "telegram test",
+tools\cli_aliases.json:16:    "dc": "discord push",
+tools\cli_aliases.json:17:    "dct": "discord test",
+---
+tools\cli_aliases.json:13:    "wt": "wechat test",
+tools\cli_aliases.json:14:    "tg": "telegram push",
+tools\cli_aliases.json:15:    "tgt": "telegram test",
+tools\cli_aliases.json:16:>   "dc": "discord push",
+tools\cli_aliases.json:17:    "dct": "discord test",
+tools\cli_aliases.json:18:    "sl": "slack push",
+tools\cli_aliases.json:19:    "slt": "slack test",
+---
+tools\cli_aliases.json:15:    "tgt": "telegram test",
+tools\cli_aliases.json:16:    "dc": "discord push",
+tools\cli_aliases.json:17:    "dct": "discord test",
+tools\cli_aliases.json:18:>   "sl": "slack push",
+tools\cli_aliases.json:19:    "slt": "slack test",
+tools\cli_aliases.json:20:    "em": "email push",
+tools\cli_aliases.json:21:    "emt": "email test",
+---
+
+(Results truncated at 200 matches.)

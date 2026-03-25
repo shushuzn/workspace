@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-22T09:56:22.773793
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 295-320 of 1035)
+    # Fibonacci retracement levels
+    range_size = w52h - w52l
+    
+    r1 = w52h - 0.236 * range_size  # 23.6% retracement
+    r2 = w52h - 0.382 * range_size  # 38.2% retracement
+    r3 = w52h - 0.500 * range_size  # 50% retracement
+    r4 = w52h - 0.618 * range_size  # 61.8% retracement
+    
+    return {
+        "pivot": (w52h + w52l + price) / 3,  # Classic pivot
+        "r1": r1, "r2": r2, "r3": r3, "r4": r4,
+        "s1": w52h - 0.236 * range_size,
+        "s2": w52h - 0.382 * range_size,
+        "s3": w52h - 0.618 * range_size,
+    }
+
+def calc_analyst_consensus(sym):
+    """Get analyst consensus details"""
+    return ANALYST_RATINGS.get(sym, {"buy": 50, "hold": 35, "sell": 15})
+
+def calc_institutional_ownership(sym):
+    """Institutional ownership estimates by sector"""
+    INST_OWNERSHIP = {
+        "META": 78, "NVDA": 75, "AAPL": 60, "MSFT": 65, "GOOGL": 65,
+        "AMZN": 55, "JPM": 70, "JNJ": 55, "AMD": 65, "TSLA": 45,
+        "NFLX": 70, "INTC": 60, "BAC": 65, "KO": 60, "WMT": 55,
+
+[715 more lines. Use start_line=321 to continue.]

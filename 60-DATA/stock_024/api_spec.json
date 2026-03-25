@@ -1,0 +1,217 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "Stock Analysis API",
+    "description": "股票分析 API 服务",
+    "version": "1.0.0",
+    "contact": {
+      "name": "API Support",
+      "email": "support@example.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080",
+      "description": "Local server"
+    },
+    {
+      "url": "https://api.stockanalysis.example.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api/v1/quote/{symbol}": {
+      "get": {
+        "summary": "获取实时行情",
+        "description": "获取指定股票的实时价格和成交量",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "AAPL"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "content": {
+              "application/json": {
+                "example": {
+                  "symbol": "AAPL",
+                  "price": 185.42,
+                  "change": 2.35,
+                  "change_pct": 1.28,
+                  "volume": 52340000,
+                  "timestamp": "2026-03-20T12:00:00Z"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/history/{symbol}": {
+      "get": {
+        "summary": "获取历史数据",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "period",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1d",
+                "1w",
+                "1m",
+                "3m",
+                "1y"
+              ]
+            }
+          },
+          {
+            "name": "interval",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "enum": [
+                "1m",
+                "5m",
+                "1h",
+                "1d"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/indicators/{symbol}": {
+      "get": {
+        "summary": "获取技术指标",
+        "parameters": [
+          {
+            "name": "symbol",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "indicators",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "/api/v1/signals/{symbol}": {
+      "get": {
+        "summary": "获取交易信号",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "symbol": "AAPL",
+                  "signal": "BUY",
+                  "confidence": 75,
+                  "indicators": {
+                    "rsi": 62.5,
+                    "macd": "bullish",
+                    "ma_cross": "golden"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/portfolio": {
+      "get": {
+        "summary": "获取投资组合",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "更新投资组合",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "action": "buy",
+                "symbol": "AAPL",
+                "shares": 10
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/backtest": {
+      "post": {
+        "summary": "策略回测",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "example": {
+                "strategy": "ma_cross",
+                "symbol": "AAPL",
+                "period": "1y",
+                "initial_capital": 100000
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/alerts": {
+      "get": {
+        "summary": "获取告警列表",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      },
+      "post": {
+        "summary": "创建告警",
+        "security": [
+          {
+            "ApiKeyAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-API-Key"
+      },
+      "HMACAuth": {
+        "type": "apiKey",
+        "in": "header",
+        "name": "X-Signature"
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+[
+  {
+    "rank": 1,
+    "name": "research",
+    "display": "Research Tools",
+    "reason": "研究是核心需求"
+  },
+  {
+    "rank": 2,
+    "name": "utility",
+    "display": "Utility Tools",
+    "reason": "通用工具最实用"
+  },
+  {
+    "rank": 3,
+    "name": "testing",
+    "display": "Testing Tools",
+    "reason": "质量保障基础"
+  },
+  {
+    "rank": 4,
+    "name": "integration",
+    "display": "Integration Tools",
+    "reason": "工具协作必需"
+  },
+  {
+    "rank": 5,
+    "name": "reporting",
+    "display": "Reporting Tools",
+    "reason": "可视化输出"
+  }
+]

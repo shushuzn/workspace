@@ -1,0 +1,38 @@
+{
+  "symbol": "TEST",
+  "analysis_date": "2026-03-20T13:45:48.649107",
+  "revenue_growth": {
+    "revenue_cagr_3y": 0.4095,
+    "revenue_cagr_5y": 0,
+    "avg_yoy_growth": 0.2936,
+    "years_analyzed": 5,
+    "description": "营收 3 年 CAGR: 40.95%, 5 年 CAGR: 0.00%"
+  },
+  "profit_growth": {
+    "profit_cagr_3y": 0.5874,
+    "profit_cagr_5y": 0,
+    "avg_yoy_growth": 0.4159,
+    "description": "净利润 3 年 CAGR: 58.74%, 5 年 CAGR: 0.00%"
+  },
+  "cashflow_growth": {
+    "ocf_cagr_3y": 0.5536,
+    "ocf_cagr_5y": 0,
+    "description": "经营现金流 3 年 CAGR: 55.36%"
+  },
+  "growth_score": {
+    "score": 100,
+    "max_score": 100,
+    "rating": "A",
+    "description": "成长性评分：100/100 (A级 - 高成长)"
+  },
+  "growth_trend": {
+    "avg_historical_growth": 0.421,
+    "trend": "accelerating",
+    "predicted_growth": [
+      0.421,
+      0.4,
+      0.38
+    ],
+    "description": "平均增长率：42.10%, 趋势：accelerating"
+  }
+}

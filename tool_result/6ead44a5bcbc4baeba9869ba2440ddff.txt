@@ -1,0 +1,204 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:33:54.374120
+# ---
+#!/usr/bin/env python3
+"""NewsHub CLI 快捷方式 v1.0"""
+import sys; sys.stdout.reconfigure(encoding='utf-8')
+import json
+from pathlib import Path
+
+ALIASES_FILE = Path(__file__).parent / 'cli_aliases.json'
+
+# 默认别名
+DEFAULT_ALIASES = {
+    # 快捷推送
+    'f': 'feishu digest',
+    'ft': 'feishu test',
+    'fr': 'feishu rich',
+    'fh': 'feishu hourly',
+    
+    'q': 'qq push',
+    'qt': 'qq test',
+    
+    'w': 'wechat push',
+    'wt': 'wechat test',
+    
+    'tg': 'telegram push',
+    'tgt': 'telegram test',
+    
+    'dc': 'discord push',
+    'dct': 'discord test',
+    
+    'sl': 'slack push',
+    'slt': 'slack test',
+    
+    'em': 'email push',
+    'emt': 'email test',
+    
+    # 快捷分析
+    'a': 'analyze 10',
+    'a5': 'analyze 5',
+    'a20': 'analyze 20',
+    
+    's': 'sentiment',
+    'h': 'hot',
+    't': 'trends',
+    
+    'sc': 'score rank',
+    'sr': 'score recommend',
+    
+    # 快捷查询
+    'sn': 'search',
+    'db': 'db stats',
+    'cfg': 'config list',
+    
+    # 快捷服务
+    'api': 'api 8449',
+    'dash': 'dashboard',
+    'rpt': 'report',
+}
+
+def load_aliases() -> dict:
+    """加载别名"""
+    if ALIASES_FILE.exists():
+        with open(ALIASES_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def save_aliases(aliases: dict):
+    """保存别名"""
+    with open(ALIASES_FILE, 'w', encoding='utf-8') as f:
+        json.dump(aliases, f, ensure_ascii=False, indent=2)
+
+def init_aliases():
+    """初始化默认别名"""
+    aliases = DEFAULT_ALIASES.copy()
+    save_aliases(aliases)
+    return aliases
+
+def get_alias(name: str) -> str:
+    """获取别名对应的命令"""
+    aliases = load_aliases()
+    return aliases.get(name)
+
+def add_alias(name: str, command: str):
+    """添加别名"""
+    aliases = load_aliases()
+    aliases[name] = command
+    save_aliases(aliases)
+    print(f"  ✓ 已添加: {name} -> {command}")
+
+def remove_alias(name: str):
+    """删除别名"""
+    aliases = load_aliases()
+    if name in aliases:
+        del aliases[name]
+        save_aliases(aliases)
+        print(f"  ✓ 已删除: {name}")
+    else:
+        print(f"  ✗ 别名不存在: {name}")
+
+def list_aliases():
+    """列出所有别名"""
+    aliases = load_aliases()
+    
+    if not aliases:
+        aliases = init_aliases()
+    
+    print("\n  📋 CLI 快捷方式")
+    print("  " + "─" * 50)
+    
+    # 分类显示
+    categories = {
+        '推送': ['f', 'ft', 'fr', 'fh', 'q', 'qt', 'w', 'wt', 'tg', 'tgt', 'dc', 'dct', 'sl', 'slt', 'em', 'emt'],
+        '分析': ['a', 'a5', 'a20', 's', 'h', 't', 'sc', 'sr'],
+        '查询': ['sn', 'db', 'cfg'],
+        '服务': ['api', 'dash', 'rpt'],
+    }
+    
+    for cat, keys in categories.items():
+        print(f"\n  {cat}:")
+        for key in keys:
+            if key in aliases:
+                cmd = aliases[key]
+                print(f"    {key:5} → {cmd}")
+    
+    # 其他别名
+    shown_keys = set()
+    for keys in categories.values():
+        shown_keys.update(keys)
+    
+    others = {k: v for k, v in aliases.items() if k not in shown_keys}
+    if others:
+        print("\n  其他:")
+        for key, cmd in others.items():
+            print(f"    {key:5} → {cmd}")
+
+def expand_alias(args: list) -> list:
+    """展开别名"""
+    if not args:
+        return args
+    
+    aliases = load_aliases()
+    first_arg = args[0]
+    
+    if first_arg in aliases:
+        expanded = aliases[first_arg].split()
+        return expanded + args[1:]
+    
+    return args
+
+def print_usage():
+    """打印使用说明"""
+    print("""
+  🚀 CLI 快捷方式使用方法
+  
+  在 news_hub.py 中使用快捷命令:
+  
+  # 推送
+  python news_hub.py f       # 飞书摘要推送
+  python news_hub.py ft      # 飞书测试
+  python news_hub.py q       # QQ推送
+  python news_hub.py w       # 微信推送
+  python news_hub.py tg      # Telegram推送
+  
+  # 分析
+  python news_hub.py a       # LLM分析 (10条)
+  python news_hub.py s       # 情感分析
+  python news_hub.py h       # 热点检测
+  python news_hub.py sc      # 新闻评分
+  
+  # 查询
+  python news_hub.py sn AI   # 搜索AI新闻
+  python news_hub.py db      # 数据库统计
+  
+  # 管理
+  python cli_shortcuts.py list     # 查看所有快捷方式
+  python cli_shortcuts.py add f2 feishu digest  # 添加
+  python cli_shortcuts.py remove f2           # 删除
+""")
+
+# 命令行入口
+if __name__ == "__main__":
+    import argparse
+    
+    parser = argparse.ArgumentParser(description='CLI 快捷方式管理')
+    parser.add_argument('action', nargs='?', choices=['list', 'add', 'remove', 'init', 'help'])
+    parser.add_argument('name', nargs='?', help='别名名称')
+    parser.add_argument('command', nargs='?', help='对应命令')
+    
+    args = parser.parse_args()
+    
+    if args.action == 'list' or not args.action:
+        list_aliases()
+    elif args.action == 'add' and args.name and args.command:
+        add_alias(args.name, args.command)
+    elif args.action == 'remove' and args.name:
+        remove_alias(args.name)
+    elif args.action == 'init':
+        aliases = init_aliases()
+        print(f"  ✓ 已初始化 {len(aliases)} 个快捷方式")
+    elif args.action == 'help':
+        print_usage()
+    else:
+        print_usage()

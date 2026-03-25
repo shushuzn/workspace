@@ -1,0 +1,18 @@
+{
+  "timestamp": "2026-03-06T01:03:05.410271",
+  "mace_mp": {
+    "available": false,
+    "model_path": "C:\\Users\\***\\.cache\\mace\\20231210mace128L0_energy_epoch249model",
+    "test_energy_per_atom": null,
+    "error_vs_dft_meV": null
+  },
+  "chgnet": {
+    "available": false,
+    "test_energy_per_atom": null
+  },
+  "next_steps": [
+    "运行 MACE 迁移学习微调",
+    "运行 CHGNet 迁移学习微调",
+    "集成预测 (GP + MACE + CHGNet)"
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "symbol": "TEST",
+  "analysis_date": "2026-03-20T12:59:59.103834",
+  "candle_count": 100,
+  "candlestick_patterns": [
+    {
+      "index": 37,
+      "date": "2026-01-38",
+      "type": "candlestick",
+      "signals": [
+        {
+          "name": "光头光脚",
+          "signal": "bullish",
+          "strength": "strong",
+          "description": "强势上涨信号"
+        }
+      ]
+    },
+    {
+      "index": 45,
+      "date": "2026-01-46",
+      "type": "candlestick",
+      "signals": [
+        {
+          "name": "光头光脚",
+          "signal": "bullish",
+          "strength": "strong",
+          "description": "强势上涨信号"
+        }
+      ]
+    }
+  ],
+  "trend_patterns": [
+    {
+      "type": "trend",
+      "name": "双底 (W 底)",
+      "signal": "bullish",
+      "strength": "strong",
+      "trough_indices": [
+        13,
+        19
+      ],
+      "description": "底部双重支撑，看涨信号",
+      "confidence": 0.75
+    }
+  ],
+  "summary": {
+    "bullish_count": 3,
+    "bearish_count": 0,
+    "neutral_count": 0,
+    "dominant_signal": "bullish",
+    "confidence": 0.3
+  }
+}

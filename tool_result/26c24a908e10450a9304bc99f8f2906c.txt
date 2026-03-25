@@ -1,0 +1,30 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T17:04:42.829978
+# ---
+
++==============================================================+
+|                    Stock PRO v12.0                          |
+|          Professional Stock Analysis Suite                  |
++==============================================================+
+
+# Research Reports Summary
+
+## Upgrades & Initiations
+| Date | Symbol | Firm | Action | Target | Note |
+|------|--------|------|--------|--------|------|
+| 2026-03-22 | NVDA | Morgan Stanley | Upgrade | $280 | AI Chip Demand Strong |
+| 2026-03-15 | NVDA | Bank of America | Buy | $270 | Gaming & AI |
+| 2026-03-21 | MSFT | BofA | Buy | $520 | Cloud Momentum |
+| 2026-03-17 | MSFT | Deutsche Bank | Buy | $510 | Enterprise Strength |
+| 2026-03-22 | GOOGL | Deutsche Bank | Buy | $400 | AI Search Improvement |
+| 2026-03-22 | META | Wedbush | Outperform | $900 | AI Ad Targeting |
+| 2026-03-22 | AMZN | Evercore | Outperform | $450 | AWS AI Services |
+| 2026-03-18 | AMZN | UBS | Buy | $430 | Cloud Expansion |
+| 2026-03-20 | NVDA | Goldman Sachs | Buy | $275 | Data Center Growth |
+| 2026-03-19 | MSFT | UBS | Buy | $500 | AI Integration |
+
+## Downgrades
+| Date | Symbol | Firm | Action | Target | Note |
+|------|--------|------|--------|--------|------|
+| 2026-03-19 | TSLA | Goldman Sachs | Sell | $220 | Competition Concerns |
+

@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T17:07:35.383292
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\sentiment.py  (lines 980-1010 of 1223)
+        report += f"\n## Top Bullish ({len(top_bullish)} stocks)\n\n"
+        for r in top_bullish:
+            report += f"- **{r['symbol']}**: Score {r['message_score']:.0f} ({r['trend']})\n"
+
+    # Top bearish
+    top_bearish = [r for r in results if r["message_score"] <= 45][:5]
+    if top_bearish:
+        report += f"\n## Top Bearish ({len(top_bearish)} stocks)\n\n"
+        for r in top_bearish:
+            report += f"- **{r['symbol']}**: Score {r['message_score']:.0f} ({r['trend']})\n"
+
+    # Methodology
+    report += "\n## Methodology\n\n"
+    report += "- **News Sentiment (35%):** Average sentiment from recent news articles\n"
+    report += "- **Research Sentiment (35%):** Based on analyst actions (Buy/Sell ratings)\n"
+    report += "- **Trend Signal (30%):** Based on technical signals (undervalued/overvalued)\n"
+    report += "- **Composite Score:** 0-100 (higher = more bullish)\n"
+
+    return report
+
+
+def message_sentiment_json(symbols=None, days=7):
+    """Get message sentiment as JSON for API/integration"""
+    if symbols is None:
+        symbols = list(A.keys())[:20]
+
+    results = []
+    for sym in symbols:
+        if sym not in A:
+            continue
+
+
+[213 more lines. Use start_line=1011 to continue.]

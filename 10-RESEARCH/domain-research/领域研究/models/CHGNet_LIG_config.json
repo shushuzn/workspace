@@ -1,0 +1,23 @@
+{
+  "model": "CHGNetRegressor",
+  "input_dim": 3,
+  "hidden_dim": 64,
+  "output_dim": 1,
+  "features": [
+    "P_W",
+    "v_mms",
+    "co_ratio"
+  ],
+  "target": "sigma_Sm",
+  "training": {
+    "epochs": 100,
+    "learning_rate": 0.001,
+    "final_loss": 2513340.75
+  },
+  "performance": {
+    "r2": -0.3816403209817991,
+    "mae": 848.1145971345373,
+    "rmse": 1519.9284317863373,
+    "train_loss": 2513340.75
+  }
+}

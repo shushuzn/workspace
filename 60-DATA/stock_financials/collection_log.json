@@ -1,0 +1,116 @@
+{
+  "version": "1.0",
+  "collections": [
+    {
+      "timestamp": "2026-03-20T00:29:28.589275",
+      "symbol": "AAPL",
+      "report_type": "quarterly",
+      "reports": 4,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T00:29:28.593381",
+      "symbol": "AAPL",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T00:29:28.596364",
+      "symbol": "AAPL",
+      "report_type": "quarterly",
+      "reports": 2,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T00:29:28.598654",
+      "symbol": "AAPL",
+      "report_type": "annual",
+      "reports": 2,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:48:08.402932",
+      "symbol": "AAPL",
+      "report_type": "quarterly",
+      "reports": 4,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:49:27.316309",
+      "symbol": "AAPL",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:51:56.115547",
+      "symbol": "GOOGL",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:52:57.395443",
+      "symbol": "MSFT",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:54:09.233688",
+      "symbol": "NVDA",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:59:13.351663",
+      "symbol": "META",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:03:09.643608",
+      "symbol": "AAPL",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:03:49.870897",
+      "symbol": "AAPL",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:03:51.701673",
+      "symbol": "AAPL",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:04:23.748156",
+      "symbol": "AAPL",
+      "report_type": "quarterly",
+      "reports": 1,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:04:25.357921",
+      "symbol": "AAPL",
+      "report_type": "annual",
+      "reports": 1,
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_collections": 15,
+    "successful": 15,
+    "failed": 0,
+    "total_reports": 23
+  }
+}

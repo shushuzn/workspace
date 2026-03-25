@@ -1,0 +1,26 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T10:48:37.585348
+# ---
+Command failed with exit code 1.
+[stdout]
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py", line 171, in <module>
+    main()
+    ~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py", line 122, in main
+    results = analyze_multiple(args.compare, live=args.live)
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\core.py", line 86, in analyze_multiple
+    return [analyze(s, live) for s in symbols]
+            ~~~~~~~^^^^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\core.py", line 79, in analyze
+    "rating": rating, "pe": pe, "fpe": fin[6] * 100, "peg": peg, "dcf_bull": dcf["Bull"],
+                                                            ^^^
+NameError: name 'peg' is not defined. Did you mean: 'pe'?
+
++==============================================================+
+|                    Stock PRO v11.0                          |
+|            Modular Stock Analysis Tool                      |
++==============================================================+
+

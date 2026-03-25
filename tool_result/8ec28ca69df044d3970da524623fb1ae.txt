@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:46:28.923495
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_hub.py  (lines 400-450 of 546)
+        
+        # 生成报告
+        report = generate_report(analyzed)
+        print(report)
+    
+    elif cmd == "sentiment":
+        header("市场情绪分析")
+        from llm_enhanced import analyze_batch, market_sentiment
+        from news_fetcher import fetch_all
+        
+        news = fetch_all(quiet=True)[:10]
+        print(f"  分析 {len(news)} 条新闻...")
+        analyzed = analyze_batch(news)
+        sentiment = market_sentiment(analyzed)
+        
+        print(f"""
+  情绪指数: {sentiment['score']}
+  市场判断: {sentiment['label']}
+  
+  分布:
+    📈 正面: {sentiment['distribution']['positive']}
+    ➖ 中性: {sentiment['distribution']['neutral']}
+    📉 负面: {sentiment['distribution']['negative']}
+""")
+
+    elif cmd == "hot":
+        header("热点话题检测")
+        from hot_topics import generate_hot_report
+        from news_fetcher import fetch_all
+        news = fetch_all(quiet=True)
+        print(generate_hot_report(news))
+
+    elif cmd == "dashboard":
+        header("生成 Web 仪表盘")
+        import dashboard
+        from news_fetcher import fetch_all
+        news = fetch_all(quiet=True)
+        path = dashboard.save_dashboard(news)
+        print(f"  ✓ 仪表盘已生成: {path}")
+        print(f"  在浏览器中打开查看")
+
+    elif cmd == "help":
+        header("NewsHub v3.0 Help")
+        print(f"""
+  {BOLD}用法:{RESET}
+    python news_hub.py <command> [options]
+
+  {BOLD}性能优化 (v3.0):{RESET}
+    {GREEN}async{RESET}     异步抓取 (并发，速度提升2-3x)
+    {GREEN}af{RESET}        同上 (快捷)
+    {GREEN}db{RESET}        数据库管理 (stats/recent/cleanup/export)
+
+[96 more lines. Use start_line=451 to continue.]

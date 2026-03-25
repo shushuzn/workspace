@@ -1,0 +1,17 @@
+{
+  "versions": [
+    {
+      "version": "test-v1",
+      "timestamp": "2026-03-20T23:32:07.196828",
+      "snapshot_file": "D:\\OpenClaw\\workspace\\13-memory\\.snapshots\\test-v1.json",
+      "files": [
+        "SOUL.md",
+        "USER.md",
+        "AGENTS.md",
+        "TOOLS.md",
+        "MEMORY.md"
+      ]
+    }
+  ],
+  "current": "test-v1"
+}

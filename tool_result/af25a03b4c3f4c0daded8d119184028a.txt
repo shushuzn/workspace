@@ -1,0 +1,35 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T12:53:48.272589
+# ---
+news_hub.py:124:          news = fetch_all(quiet=True)[:10]
+news_hub.py:125:          print(f"  分析 {len(news)} 条新闻...")
+news_hub.py:126:          analyzed = analyze_batch(news)
+news_hub.py:127:          sentiment = market_sentiment(analyzed)
+news_hub.py:128:          
+news_hub.py:129:          print(f"""
+news_hub.py:130:    情绪指数: {sentiment['score']}
+news_hub.py:131:    市场判断: {sentiment['label']}
+news_hub.py:132:    
+news_hub.py:133:    分布:
+news_hub.py:134:      📈 正面: {sentiment['distribution']['positive']}
+news_hub.py:135:      ➖ 中性: {sentiment['distribution']['neutral']}
+news_hub.py:136:      📉 负面: {sentiment['distribution']['negative']}
+news_hub.py:137:  """)
+news_hub.py:138:      
+news_hub.py:139:>     elif cmd == "help":
+news_hub.py:140:          header("NewsHub Help")
+news_hub.py:141:          print(f"""
+news_hub.py:142:    {BOLD}用法:{RESET}
+news_hub.py:143:      python news_hub.py <command> [options]
+news_hub.py:144:  
+news_hub.py:145:    {BOLD}命令:{RESET}
+news_hub.py:146:      {GREEN}fetch{RESET}     抓取新闻（不推送）
+news_hub.py:147:      {GREEN}feishu{RESET}    飞书推送
+news_hub.py:148:      {GREEN}qq{RESET}        QQ推送
+news_hub.py:149:      {GREEN}test{RESET}      测试所有
+news_hub.py:150:      {GREEN}quick{RESET}     快速模式
+news_hub.py:151:      {GREEN}server{RESET}    启动RSS服务
+news_hub.py:152:      {GREEN}export{RESET}    导出新闻(JSON/CSV)
+news_hub.py:153:      {GREEN}report{RESET}    生成每日简报
+news_hub.py:154:      {GREEN}db{RESET}        数据库管理
+---

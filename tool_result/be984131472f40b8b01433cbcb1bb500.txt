@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-21T10:43:24.111526
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\multi_agent_router_001.py  (lines 1-50 of 89)
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+MULTI-AGENT-ROUTER-001 Smart Task Router
+Automatically routes tasks to appropriate personas
+"""
+import json, sys, re
+from pathlib import Path
+from datetime import datetime
+
+if sys.platform == 'win32':
+    import io
+    try:
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    except (AttributeError, ValueError):
+        pass
+
+# Persona routing rules
+ROUTING = {
+    "planner": ["plan", "analyze", "strategy", "roadmap", "设计", "规划", "分析"],
+    "executor": ["implement", "code", "build", "create", "run", "执行", "写代码", "实现"],
+    "critic": ["review", "check", "validate", "test", "criticize", "审查", "检查", "测试", "验证"],
+    "learner": ["learn", "research", "study", "discover", "研究", "学习", "发现"],
+    "coordinator": ["orchestrate", "coordinate", "manage", "schedule", "协调", "管理", "调度"],
+    "innovator": ["innovate", "creative", "improve", "optimize", "创新", "改进", "优化"],
+    "metacognition": ["reflect", "think", "improve", "evaluate", "思考", "反思", "评估"]
+}
+
+def analyze_intent(text):
+    """Analyze user intent and return best persona match"""
+    text_lower = text.lower()
+    scores = {p: 0 for p in ROUTING}
+    
+    for persona, keywords in ROUTING.items():
+        for kw in keywords:
+            if kw.lower() in text_lower:
+                scores[persona] += 1
+    
+    # Return highest scoring persona
+    best = max(scores.items(), key=lambda x: x[1])
+    if best[1] == 0:
+        return "coordinator"  # Default
+    return best[0]
+
+def route_task(task_text, options=None):
+    """Route a task and return execution plan"""
+    persona = analyze_intent(task_text)
+    
+    # Build execution plan
+    plan = {
+
+[39 more lines. Use start_line=51 to continue.]

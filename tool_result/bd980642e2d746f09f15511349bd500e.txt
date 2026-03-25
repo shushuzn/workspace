@@ -1,0 +1,105 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T23:41:12.565192
+# ---
+news_manager.py:404:          print(f"{cn('[!] No news to push')}")
+news_manager.py:405:          return
+news_manager.py:406:      
+news_manager.py:407:      # 分析
+news_manager.py:408:      risk = get_risk(news_list)
+news_manager.py:409:      now = datetime.now().strftime("%m-%d %H:%M")
+news_manager.py:410:      
+news_manager.py:411:      # 构建消息 (紧凑格式)
+news_manager.py:412:      header = f"[NEWS] {now}"
+news_manager.py:413:      body = "\n".join([f"{'+' if n.get('sentiment')=='利好' else '-' if n.get('sentiment')=='利空' else '='} {n.get('title','')[:30]}" for n in news_list])
+news_manager.py:414:      sources = list(set([SOURCE_MAP.get(n.get('source',''), n.get('category','')) for n in news_list]))[:4]
+news_manager.py:415:      sectors = list(set([n.get('sector','通用') for n in news_list]))[:3]
+news_manager.py:416:      msg = f"{header}\n{body}\n---\nSources: {', '.join(sources)}\nSectors: {', '.join(sectors)}\nRisk:{risk}"
+news_manager.py:417:      msg = msg.strip()
+news_manager.py:418:      ids = [n["id"] for n in news_list]
+news_manager.py:419:      results = []
+news_manager.py:420:      
+news_manager.py:421:      # 统计
+news_manager.py:422:      pos_cnt = sum(1 for n in news_list if n.get("sentiment") == "利好")
+news_manager.py:423:      neg_cnt = sum(1 for n in news_list if n.get("sentiment") == "利空")
+news_manager.py:424:      
+news_manager.py:425:      # 打印
+news_manager.py:426:      risk_color = Colors.risk_high() if risk == "高风险" else Colors.risk_low()
+news_manager.py:427:      print(f"\n{c(Colors.header(), '=== PUSH @ ' + now + ' ===')}")
+news_manager.py:428:      print(f"Items: {len(news_list)} | {cp('+' + str(pos_cnt))} {cn('-' + str(neg_cnt))} | {c(risk_color, risk)}")
+news_manager.py:429:      
+news_manager.py:430:      # 发送
+news_manager.py:431:      if CONFIG["qq"]["enabled"]:
+news_manager.py:432:          ok, mid = send_qq_message(CONFIG["qq"]["group_id"], msg)
+news_manager.py:433:          status = cp("OK") if ok else cn("FAIL")
+news_manager.py:434:          print(f"  QQ: {status}")
+news_manager.py:435:          if ok:
+news_manager.py:436:              data.data["stats"]["qq"] = data.data["stats"].get("qq", 0) + 1
+news_manager.py:437:              results.append("QQ")
+news_manager.py:438:      
+news_manager.py:439:      if CONFIG["feishu"]["enabled"]:
+news_manager.py:440:          ok, mid = send_feishu_message(msg)
+news_manager.py:441:          status = cp("OK") if ok else cn("FAIL")
+news_manager.py:442:          print(f"  Feishu: {status}")
+news_manager.py:443:          if ok:
+news_manager.py:444:              data.data["stats"]["feishu"] = data.data["stats"].get("feishu", 0) + 1
+news_manager.py:445:              results.append("Feishu")
+news_manager.py:446:      
+news_manager.py:447:      data.mark_sent(ids)
+news_manager.py:448:      data.save()
+news_manager.py:449:      
+news_manager.py:450:      if results:
+news_manager.py:451:          print(c(Colors.GREEN, f"\n[Pushed to {len(results)} platform(s)]"))
+news_manager.py:452:      print()
+news_manager.py:453:  
+news_manager.py:454:> def cmd_status(args):
+news_manager.py:455:      data = NewsData()
+news_manager.py:456:      total = len(data.data["news"])
+news_manager.py:457:      unsent = len([n for n in data.data["news"] if not n.get("sent")])
+news_manager.py:458:      sent = total - unsent
+news_manager.py:459:      
+news_manager.py:460:      # 统计
+news_manager.py:461:      sectors = {}
+news_manager.py:462:      sentiments = {"利好": 0, "利空": 0, "中性": 0}
+news_manager.py:463:      for n in data.data["news"]:
+news_manager.py:464:          sectors[n.get("sector","通用")] = sectors.get(n.get("sector","通用"), 0) + 1
+news_manager.py:465:          sentiments[n.get("sentiment","中性")] = sentiments.get(n.get("sentiment","中性"), 0) + 1
+news_manager.py:466:      
+news_manager.py:467:      # 格式化
+news_manager.py:468:      now = datetime.now().strftime("%m-%d %H:%M")
+news_manager.py:469:      sent_pct = sent / total * 100 if total > 0 else 0
+news_manager.py:470:      
+news_manager.py:471:      # 移动端优化
+news_manager.py:472:      print(f"\n{c(Colors.header(), '=== STATUS @ ' + now + ' ===')}\n")
+news_manager.py:473:      
+news_manager.py:474:      # 进度条
+news_manager.py:475:      bar_len = 16
+news_manager.py:476:      filled = int(sent_pct / 100 * bar_len)
+news_manager.py:477:      bar = c(Colors.GREEN, "#" * filled) + "-" * (bar_len - filled)
+news_manager.py:478:      print(f"Progress: [{bar}] {sent_pct:.0f}%")
+news_manager.py:479:      print(f"News: {total} | Sent: {sent} | Unsent: {unsent}")
+news_manager.py:480:      print(f"Push: QQ={data.data['stats'].get('qq',0)} FS={data.data['stats'].get('feishu',0)}")
+news_manager.py:481:      
+news_manager.py:482:      # 情感
+news_manager.py:483:      print(f"Sentiment: {cp('+' + str(sentiments['利好']))} {cn('-' + str(sentiments['利空']))} {cne('=' + str(sentiments['中性']))}")
+news_manager.py:484:      
+news_manager.py:485:      # 风险
+news_manager.py:486:      risk_score = sentiments["利空"] * 2 - sentiments["利好"]
+news_manager.py:487:      if risk_score > 10:
+news_manager.py:488:          risk_text = cn("HIGH")
+news_manager.py:489:      elif risk_score > 5:
+news_manager.py:490:          risk_text = c(Colors.YELLOW, "MEDIUM")
+news_manager.py:491:      else:
+news_manager.py:492:          risk_text = cp("LOW")
+news_manager.py:493:      print(f"\nRisk: {risk_text} (score: {risk_score:+d})")
+news_manager.py:494:      print()
+news_manager.py:495:  
+news_manager.py:496:  def cmd_digest(args):
+news_manager.py:497:      data = NewsData()
+news_manager.py:498:      days = int(args.days) if hasattr(args, 'days') else 1
+news_manager.py:499:      cutoff = datetime.now() - timedelta(days=days)
+news_manager.py:500:      recent = [n for n in data.data["news"] if datetime.fromisoformat(n.get("fetched_at","2000")).replace(tzinfo=None) > cutoff]
+news_manager.py:501:      
+news_manager.py:502:      if not recent:
+news_manager.py:503:          print(f"{cn('[!] No news in last ' + str(days) + ' day(s)')}")
+news_manager.py:504:          return
+---

@@ -1,0 +1,52 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:35:00.668217
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 85-130 of 294)
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    return ctx
+
+# ============================================================
+# 金十快讯 (快速版)
+# ============================================================
+
+def fetch_jin10(limit=20):
+    news = []
+    try:
+        req = urllib.request.Request("https://flash.jin10.com/", headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        })
+        with urllib.request.urlopen(req, timeout=10, context=get_ssl()) as r:
+            content = r.read().decode('utf-8')
+        
+        # 快速提取: 直接从列表页提取标题
+        items = re.findall(r'<div class="news-item[^"]*".*?<p class="text">(.*?)</p>', content, re.DOTALL)
+        urls = re.findall(r'/detail/(\d{17,20})', content)
+        
+        for i, (url, title) in enumerate(zip(urls[:limit], items[:limit])):
+            if not title or len(title) < 10:
+                continue
+            title = re.sub(r'<[^>]+>', '', title).strip()
+            title = re.sub(r'^【金十数据】', '', title)
+            if title:
+                news.append({
+                    "title": title,
+                    "url": f"https://flash.jin10.com/detail/{url}",
+                    "source": "金十快讯",
+                    "ts": time.time()
+                })
+    except Exception as e:
+        error(f"Jin10: {e}")
+    return news
+
+# ============================================================
+# RSS 源
+# ============================================================
+
+def fetch_rss(url, name=""):
+    news = []
+    try:
+        req = urllib.request.Request(url, headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+
+[164 more lines. Use start_line=131 to continue.]

@@ -1,0 +1,21 @@
+{
+  "name": "OpenClaw Workspace",
+  "version": "1.0.0",
+  "cursor_mode": true,
+  "auto_execute": true,
+  "mcp_enabled": true,
+  "allowed_commands": [
+    "python", "npm", "pnpm", "yarn", "node",
+    "git", "cargo", "go", "rustc", "javac",
+    "cd", "dir", "type", "echo", "copy", "del"
+  ],
+  "blocked_patterns": [
+    "rm -rf /",
+    "del /F /Q /S \*",
+    "format",
+    "shutdown"
+  ],
+  "auto_run_tests": true,
+  "auto_fix_errors": true,
+  "max_retries": 3
+}

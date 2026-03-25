@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T19:08:31.751152
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\dash_app.py  (lines 300-330 of 422)
+        ], style={'padding':'20px 24px','borderTop':'1px solid rgba(255,255,255,0.08)','marginTop':'auto'}),
+        
+        # Last Update
+        html.Div(id='last-update', children='Last: --', 
+                style={'padding':'16px 24px','color':'#8b8b9a','fontSize':'12px',
+                      'borderTop':'1px solid rgba(255,255,255,0.08)'}),
+    ], style={'position':'fixed','left':'0','top':'0','height':'100vh','width':'280px',
+              'background':'rgba(15,15,35,0.98)','backdropFilter':'blur(20px)',
+              'borderRight':'1px solid rgba(255,255,255,0.08)','zIndex':'1000',
+              'display':'flex','flexDirection':'column','overflowY':'auto'}),
+    
+    # Main Content
+    html.Div([
+        # Header
+        html.Div([
+            html.Div([
+                html.H1(id='page-title', children='📊 Dashboard', 
+                       style={'fontSize':'32px','fontWeight':'800','margin':'0 0 8px 0',
+                             'background':'linear-gradient(135deg, #e0e0e0, #fff)','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'}),
+                html.Div(id='page-subtitle', children='Real-time market analysis powered by AI',
+                        style={'color':'#8b8b9a','fontSize':'14px'})
+            ]),
+            # Quick Search
+            html.Div([
+                dcc.Input(id='quick-search', type='text', placeholder='Symbol (e.g. AAPL)...',
+                         style={'padding':'12px 18px','borderRadius':'12px','border':'1px solid rgba(255,255,255,0.1)',
+                                'background':'rgba(30,30,60,0.85)','color':'#e0e0e0','fontSize':'14px',
+                                'width':'220px','outline':'none'}),
+            ], style={'display':'flex','gap':'12px','alignItems':'center'}),
+        ], style={'display':'flex','justifyContent':'space-between','alignItems':'center','marginBottom':'32px'}),
+        
+
+[92 more lines. Use start_line=331 to continue.]

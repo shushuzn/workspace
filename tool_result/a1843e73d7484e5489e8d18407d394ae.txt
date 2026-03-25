@@ -1,0 +1,50 @@
+# tool_name: memory_search
+# created_at: 2026-03-23T23:33:31.986142
+# ---
+[
+  {
+    "path": "D:\\OpenClaw\\workspace\\memory\\2026-03-22.md",
+    "start_line": 1257,
+    "end_line": 1293,
+    "score": 0.6666666666666666,
+    "snippet": "# Jin10 + Stock analysis together\npython main.py NVDA TSLA --refresh-jin10\n```\n\n### Key Technical Decisions\n\n| Decision | Rationale |\n|----------|-----------|\n| Jin10 integrated into RSS | User wanted unified news feed |\n| Jin10 first in list | Chinese content priority |\n| Jin10 cache in `data_jin10_news.json` | Persistent storage |\n| RSS limit increased to 100 | Match user's request for \"全部新闻\" |\n| RSS display limit 50 | Balance between completeness and readability |\n\n### User Feedback Patterns\n\n1. **\"是完整的新闻吗\"** → Realized RSS only has summaries, not full articles\n2. **\"为什么会被封\"** → Explained rate limiting and anti-scraping measures\n3. **\"还有办法吗\"** → Discussed Finnhub API, limiting, full RSS sources\n4. **\"金十数据不是不用进去正文就能抓正文吗\"** → Confirmed Jin10 embeds content in title\n5. **\"用rss是不是同样的效果\"** → Compared Jin10 vs RSS content\n6. **\"rss能抓全部新闻吗\"** → Increased limit from 15 to 50\n7. **\"为什么rss不加入金十\"** → Integrated Jin10 into RSS\n8. **\"为什么金十的数据不是普通的新闻而是文章\"** → Explained Jin10's embedding strategy\n9. **\"我是说金十也用rss\"** → Confirmed Jin10 has no RSS, but can convert to RSS format\n\n### Technical Patterns Observed\n\n1. **Windows asyncio**: Need `asyncio.WindowsSelectorEventLoopPolicy()` explicitly\n2. **File write truncation**: `write_file` has ~8KB limit, use Python scripts for larger files\n3. **Jin10 API**: xnews.jin10.com has embedded content in title field (not separate description)\n4. **RSS parsing**: Use `<!\\[CDATA\\[...\\]\\]>` and regular `<title>` fallback\n5. **RSS content**: Standard RSS only has 100-200 char descriptions, not full articles\n\n### rss_server.py Architecture\n\n```python",
+    "source": "memory",
+    "metadata": {}
+  },
+  {
+    "path": "D:\\OpenClaw\\workspace\\memory\\2026-03-22.md",
+    "start_line": 871,
+    "end_line": 922,
+    "score": 0.3333333333333333,
+    "snippet": "├── start_ui.py        # UI launcher\n├── start_ui.bat       # Windows batch\n├── charts.py          # Chart data generation\n├── picks.py           # Quick stock picks\n├── install_dash.py    # Dash installer helper\n└── [47+ other modules]\n```\n\n### Lessons Learned\n\n1. **UI without dependencies**: Simple HTML+JS server works without pip install\n2. **One-click launching**: Batch and Python launchers improve UX\n3. **Quick picks pattern**: Pre-filtered stock screens save user time\n4. **MiniMax skill format**: YAML frontmatter is the standard\n\n### Archive Statistics\n\n| Directory | Files |\n|-----------|-------|\n| 30-scripts-tools/archive_001 | 435 |\n| 30-scripts-tools/workflow_archive | 65 |\n| 99-archive | 2,068 |\n| 99-backups | 1,697 |\n| **Total** | **4,265** |\n\n### Active Skills (16)\n\n```\nworkflow, coding, stock-pro, pdf, xlsx, docx, pptx\ncron, browser_visible, file_reader, file-handling\nguidance, himalaya, news, agent-spectrum, dingtalk_channel\n```\n\n---\n\n## News Aggregator + Feishu System (Session 2026-03-22 Evening)\n\n### Created Files\n\n| File | Purpose |\n|------|---------|\n| `30-scripts-tools/news_aggregator.py` | Standalone news fetcher (RSS/JSON) |\n| `30-scripts-tools/news_feishu.py` | News → Feishu push system |\n| `30-scripts-tools/news_loop.bat` | 5-minute loop wrapper |\n| `30-scripts-tools/news_history.json` | Deduplication history |\n| `30-scripts-tools/feishu_assistant.py` | Universal Feishu assistant |\n\n### News Sources\n\n| Category | Source | URL |\n|----------|--------|-----|\n| 科技 | 36kr RSS | https://www.36kr.com/feed |",
+    "source": "memory",
+    "metadata": {}
+  },
+  {
+    "path": "D:\\OpenClaw\\workspace\\memory\\2026-03-22.md",
+    "start_line": 913,
+    "end_line": 966,
+    "score": 0.3333333333333333,
+    "snippet": "| `30-scripts-tools/news_feishu.py` | News → Feishu push system |\n| `30-scripts-tools/news_loop.bat` | 5-minute loop wrapper |\n| `30-scripts-tools/news_history.json` | Deduplication history |\n| `30-scripts-tools/feishu_assistant.py` | Universal Feishu assistant |\n\n### News Sources\n\n| Category | Source | URL |\n|----------|--------|-----|\n| 科技 | 36kr RSS | https://www.36kr.com/feed |\n| 财经 | 新浪 JSON | https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2517 |\n| 国际 | 新浪 JSON | https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2514 |\n| 体育 | 新浪 JSON | https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2512 |\n| 社会 | 新浪 JSON | https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2511 |\n\n### Feishu API Config\n\n**File:** `30-scripts-tools/feishu-tools/feishu-config.json`\n```json\n{\n  \"app_id\": \"cli_a93a6936eff81bcd\",\n  \"app_secret\": \"vWIWGFZPYBi6clKb1IV5JfDGnWrT1bra\",\n  \"receive_id_type\": \"open_id\",\n  \"default_receive_id\": \"ou_72a847b95fc25870dcdd8ce56d929252\"\n}\n```\n\n### News Feishu System Features\n\n| Feature | Status | Details |\n|---------|--------|---------|\n| 卡片带链接 | ✅ | 点击跳转新闻页 |\n| 关键词告警 | ✅ | AI/芯片/制裁/突破/重磅等 |\n| 每日摘要 | ✅ | 08:00/12:00/18:00/21:00 |\n| 多用户推送 | ✅ | 配置receivers |\n| 去重 | ✅ | 30分钟窗口 |\n| 历史记录 | ✅ | news_history.json |\n\n### Usage Commands\n\n```bash\n# 手动推送\npy 30-scripts-tools/news_feishu.py update   # 即时更新\npy 30-scripts-tools/news_feishu.py alert    # 关键词告警\npy 30-scripts-tools/news_feishu.py digest    # 摘要\n\n# 自动运行\nschtasks /query | findstr News\n```\n\n### Windows Scheduled Tasks\n\n| Task | Trigger | Action |\n|------|---------|--------|",
+    "source": "memory",
+    "metadata": {}
+  },
+  {
+    "path": "D:\\OpenClaw\\workspace\\memory\\2026-03-22.md",
+    "start_line": 949,
+    "end_line": 1011,
+    "score": 0.3333333333333333,
+    "snippet": "| 历史记录 | ✅ | news_history.json |\n\n### Usage Commands\n\n```bash\n# 手动推送\npy 30-scripts-tools/news_feishu.py update   # 即时更新\npy 30-scripts-tools/news_feishu.py alert    # 关键词告警\npy 30-scripts-tools/news_feishu.py digest    # 摘要\n\n# 自动运行\nschtasks /query | findstr News\n```\n\n### Windows Scheduled Tasks\n\n| Task | Trigger | Action |\n|------|---------|--------|\n| OpenClaw-NewsFeed | Every 5 min | news_feishu.py all |\n| OpenClaw-NewsDigest | 08:00 daily | news_feishu.py digest |\n| OpenClaw-NewsDigest2 | 12:00 daily | news_feishu.py digest |\n| OpenClaw-NewsDigest3 | 18:00 daily | news_feishu.py digest |\n| OpenClaw-NewsDigest4 | 21:00 daily | news_feishu.py digest |\n\n### Feishu API Methods Available\n\n| Method | Purpose |\n|--------|---------|\n| send_text() | 文本消息 |\n| send_poster() | 交互卡片 |\n| send_image() | 图片 |\n| send_file() | 文件 |\n| send_queued_messages() | 批量发送 |\n| get_token_info() | 权限状态 |\n\n### Feishu Assistant (feishu_assistant.py)\n\n```\nmsg <text>              发送文本\ncard <json_file>        发送卡片\nimg <path>              发图片\nfile <path>             发文件\nmention <user_id> <msg> @用户\nbatch <file>            批量发\nmonitor                 系统监控\ndaily                  每日报告\nstats                  统计\n```\n\n### Key Lessons\n\n1. **RSS vs JSON API**: 36kr用RSS，新浪用JSON API (lid参数)\n2. **飞书卡片**: 用send_poster()，header由方法自动生成，只传elements\n3. **去重策略**: hash(title[:100]) + 30分钟窗口\n4. **Windows编码**: 去掉emoji，用ASCII符号\n5. **SSL**: ctx = ssl.create_default_context(); ctx.check_hostname=False\n\n---\n\n## Stock PRO v20.0 - News System Complete (Session 2026-03-22 17:25-17:52)\n\n### News Sources Tested & Integrated\n",
+    "source": "memory",
+    "metadata": {}
+  },
+  {
+    "path": "D:\\OpenClaw\\workspace\\memory\\2026-03-22.md",
+    "start_line": 1001,
+    "end_line": 1041,
+    "score": 0.3333333333333333,
+    "snippet": "2. **飞书卡片**: 用send_poster()，header由方法自动生成，只传elements\n3. **去重策略**: hash(title[:100]) + 30分钟窗口\n4. **Windows编码**: 去掉emoji，用ASCII符号\n5. **SSL**: ctx = ssl.create_default_context(); ctx.check_hostname=False\n\n---\n\n## Stock PRO v20.0 - News System Complete (Session 2026-03-22 17:25-17:52)\n\n### News Sources Tested & Integrated\n\n| Source | Status | Quality | Notes |\n|--------|--------|---------|-------|\n| Jin10 (xnews.jin10.com) | ✅ Working | ⭐⭐⭐⭐⭐ | Fast, reliable, no auth |\n| 新浪财经 (finance.sina.com.cn) | ✅ Working | ⭐⭐⭐⭐ | No auth required |\n| 网易财经 (money.163.com) | ✅ Working | ⭐⭐⭐⭐ | No auth required |\n| 凤凰网财经 | ✅ Working | ⭐⭐⭐ | No auth required |\n| Yahoo Finance API | ⚠️ Rate limited | ⭐⭐⭐⭐ | 429 errors |\n| MarketWatch | ❌ Blocked | - | JS challenge blocking |\n| RSS feeds | ✅ Working | ⭐⭐⭐⭐ | Standardized |\n\n### News Modules Created\n\n| Module | Lines | Purpose |\n|--------|-------|---------|\n| `sentiment.py` | ~500 | Jin10 + Chinese news with sentiment |\n| `news_collector.py` | ~120 | SQLite-backed cache collector |\n| `news_api.py` | ~130 | SQLite cache API (fast) |\n| `realtime_news.py` | ~260 | Yahoo + Sina direct API |\n| `rss_news.py` | ~160 | RSS feeds aggregator |\n| `fast_news.py` | ~270 | Async RSS + article content |\n| `rss_server.py` | ~240 | Self-hosted RSS aggregator (in progress) |\n\n### CLI Commands for News\n\n```bash\n# Jin10 (fast, reliable)\npython stock_pro/main.py --jin10              # Latest Jin10 news\npython stock_pro/main.py TSLA --jin10         # TSLA news from Jin10\n\n# Chinese news (Sina + 163 + Phoenix)",
+    "source": "memory",
+    "metadata": {}
+  }
+]

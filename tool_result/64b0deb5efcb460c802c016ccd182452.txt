@@ -1,0 +1,64 @@
+# tool_name: read_file
+# created_at: 2026-03-21T16:29:27.466382
+# ---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎮 Idle Empire - 挂机放置游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部状态栏 -->
+        <header class="header">
+            <div class="header-top">
+                <h1>🏰 Idle Empire</h1>
+                <button id="theme-btn" class="theme-btn" title="切换主题">🌙</button>
+            </div>
+            <div class="stats">
+                <div class="stat">
+                    <span class="label">💰 金币</span>
+                    <span id="gold" class="value">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">⚡ 产量/秒</span>
+                    <span id="gps" class="value">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 主游戏区域 -->
+        <main class="main">
+            <!-- 建筑列表 -->
+            <section class="buildings">
+                <h2>🏗️ 建筑</h2>
+                <div id="building-list" class="building-list">
+                    <!-- 动态生成 -->
+                </div>
+            </section>
+
+            <!-- 升级列表 -->
+            <section class="upgrades">
+                <h2>⬆️ 升级</h2>
+                <div id="upgrade-list" class="upgrade-list">
+                    <!-- 动态生成 -->
+                </div>
+            </section>
+        </main>
+
+        <!-- 底部统计 -->
+        <footer class="footer">
+            <span id="save-status" class="save-status">💾 已保存</span>
+            <button id="save-btn" class="btn">💾 手动保存</button>
+            <button id="reset-btn" class="btn btn-danger">🔄 重置</button>
+            <span id="status" class="status"></span>
+        </footer>
+    </div>
+
+    <script src="js/buildings.js"></script>
+    <script src="js/save.js"></script>
+    <script src="js/game.js"></script>
+</body>
+</html>

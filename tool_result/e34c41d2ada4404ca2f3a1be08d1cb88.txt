@@ -1,0 +1,254 @@
+# tool_name: read_file
+# created_at: 2026-03-22T18:56:47.621609
+# ---
+"""
+Stock PRO Dash UI v1.0
+Run: python dash_app.py
+Open: http://127.0.0.1:8050
+"""
+import dash
+from dash import dcc, html, Input, Output, State, callback_context
+import plotly.graph_objects as go
+import plotly.express as px
+from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from stock_pro import (
+    analyze, analyze_multiple_parallel, top_picks,
+    value_picks, growth_picks, dividend_picks,
+    gen_report, dashboard_report
+)
+
+# Initialize Dash app
+app = dash.Dash(__name__)
+app.title = "Stock PRO Dashboard"
+
+# Color scheme
+COLORS = {
+    'background': '#1a1a2e',
+    'card_bg': '#16213e',
+    'text': '#eaeaea',
+    'accent': '#0f3460',
+    'buy': '#00d26a',
+    'sell': '#ff4757',
+    'hold': '#ffa502'
+}
+
+# Styles
+STYLE = {
+    'backgroundColor': COLORS['background'],
+    'color': COLORS['text'],
+    'fontFamily': 'Arial, sans-serif',
+    'padding': '20px'
+}
+
+CARD_STYLE = {
+    'backgroundColor': COLORS['card_bg'],
+    'borderRadius': '10px',
+    'padding': '20px',
+    'margin': '10px',
+    'boxShadow': '0 4px 6px rgba(0,0,0,0.3)'
+}
+
+def get_fig_color(score):
+    """Get color based on score"""
+    if score >= 75: return COLORS['buy']
+    elif score >= 60: return '#7bed9f'
+    elif score >= 40: return COLORS['hold']
+    else: return COLORS['sell']
+
+def create_stock_card(data):
+    """Create stock info card"""
+    if not data:
+        return html.Div("No data", style=CARD_STYLE)
+    
+    score_color = get_fig_color(data['score'])
+    
+    return html.Div([
+        html.H3(f"{data['symbol']} - {data.get('name', '')}", 
+                style={'color': COLORS['text'], 'marginBottom': '10px'}),
+        html.Div([
+            html.Div([
+                html.Span("Score: ", style={'fontWeight': 'bold'}),
+                html.Span(f"{data['score']}", style={'color': score_color, 'fontSize': '24px'})
+            ], style={'display': 'inline-block', 'marginRight': '20px'}),
+            html.Div([
+                html.Span("Upside: ", style={'fontWeight': 'bold'}),
+                html.Span(f"{data['upside']:.1f}%", 
+                         style={'color': COLORS['buy'] if data['upside'] > 0 else COLORS['sell']})
+            ], style={'display': 'inline-block'}),
+        ]),
+        html.Hr(style={'borderColor': COLORS['accent']}),
+        html.Table([
+            html.Tr([html.Td("Price"), html.Td(f"${data['price']:.2f}")]),
+            html.Tr([html.Td("Target"), html.Td(f"${data['target']:.2f}")]),
+            html.Tr([html.Td("P/E"), html.Td(f"{data['pe']:.1f}x")]),
+            html.Tr([html.Td("ROE"), html.Td(f"{data['roe']:.1f}%")]),
+            html.Tr([html.Td("Div"), html.Td(f"{data['div']:.2f}%")]),
+        ], style={'width': '100%', 'fontSize': '14px'}),
+    ], style=CARD_STYLE)
+
+def create_bar_chart(stocks, metric='score'):
+    """Create bar chart"""
+    if not stocks:
+        return go.Figure()
+    
+    symbols = [s['symbol'] for s in stocks]
+    values = [s.get(metric, 0) for s in stocks]
+    colors = [get_fig_color(s.get('score', 50)) for s in stocks]
+    
+    fig = go.Figure(data=[
+        go.Bar(x=symbols, y=values, marker_color=colors)
+    ])
+    
+    fig.update_layout(
+        paper_bgcolor=COLORS['card_bg'],
+        plot_bgcolor=COLORS['card_bg'],
+        font_color=COLORS['text'],
+        title=dict(text=metric.upper(), font=dict(size=16)),
+        margin=dict(l=20, r=20, t=40, b=20),
+        xaxis=dict(gridcolor='#2a2a4a'),
+        yaxis=dict(gridcolor='#2a2a4a'),
+    )
+    
+    return fig
+
+# Layout
+app.layout = html.Div([
+    # Header
+    html.H1("📈 Stock PRO Dashboard", 
+            style={'textAlign': 'center', 'color': COLORS['text']}),
+    html.Hr(),
+    
+    # Stock Input
+    html.Div([
+        html.H3("Analyze Stock", style={'color': COLORS['text']}),
+        dcc.Input(id='stock-input', type='text', value='NVDA',
+                  style={'padding': '10px', 'fontSize': '16px', 'borderRadius': '5px'}),
+        html.Button('Analyze', id='analyze-btn', n_clicks=0,
+                   style={'padding': '10px 20px', 'marginLeft': '10px', 'cursor': 'pointer'}),
+    ], style={'textAlign': 'center', 'marginBottom': '30px'}),
+    
+    # Stock Info Card
+    html.Div(id='stock-card', style={'maxWidth': '600px', 'margin': '0 auto'}),
+    
+    # Tabs for different views
+    dcc.Tabs([
+        dcc.Tab(label='Top Picks', children=[
+            html.Div(id='top-picks-container', children=[
+                dcc.Loading(id="loading-top", children=[
+                    html.Div(id='top-picks-chart'),
+                    html.Div(id='top-picks-table', style={'display': 'flex', 'flexWrap': 'wrap'})
+                ], type='circle')
+            ])
+        ]),
+        dcc.Tab(label='Value', children=[
+            html.Div(id='value-picks-container', children=[
+                dcc.Loading(id="loading-value", children=[
+                    html.Div(id='value-picks-chart'),
+                    html.Div(id='value-picks-table', style={'display': 'flex', 'flexWrap': 'wrap'})
+                ], type='circle')
+            ])
+        ]),
+        dcc.Tab(label='Growth', children=[
+            html.Div(id='growth-picks-container', children=[
+                dcc.Loading(id="loading-growth", children=[
+                    html.Div(id='growth-picks-chart'),
+                    html.Div(id='growth-picks-table', style={'display': 'flex', 'flexWrap': 'wrap'})
+                ], type='circle')
+            ])
+        ]),
+        dcc.Tab(label='Dividend', children=[
+            html.Div(id='dividend-picks-container', children=[
+                dcc.Loading(id="loading-dividend", children=[
+                    html.Div(id='dividend-picks-chart'),
+                    html.Div(id='dividend-picks-table', style={'display': 'flex', 'flexWrap': 'wrap'})
+                ], type='circle')
+            ])
+        ]),
+    ], colors={'border': COLORS['accent'], 'primary': COLORS['buy']}),
+    
+], style=STYLE)
+
+# Callbacks
+@app.callback(
+    Output('stock-card', 'children'),
+    Input('analyze-btn', 'n_clicks'),
+    State('stock-input', 'value')
+)
+def update_stock_card(n_clicks, symbol):
+    if not symbol or n_clicks == 0:
+        return html.Div("Enter a stock symbol and click Analyze", 
+                       style={'textAlign': 'center', **CARD_STYLE})
+    
+    try:
+        data = analyze(symbol.upper())
+        if data:
+            return create_stock_card(data)
+        return html.Div(f"Stock {symbol} not found", style=CARD_STYLE)
+    except Exception as e:
+        return html.Div(f"Error: {str(e)}", style=CARD_STYLE)
+
+@app.callback(
+    [Output('top-picks-chart', 'children'),
+     Output('top-picks-table', 'children')],
+    Input('top-picks-container', 'id')
+)
+def update_top_picks(_):
+    try:
+        picks = top_picks(10)
+        fig = create_bar_chart(picks, 'score')
+        cards = [create_stock_card(p) for p in picks[:5]]
+        return dcc.Graph(figure=fig), cards
+    except Exception as e:
+        return html.Div(f"Error: {str(e)}"), []
+
+@app.callback(
+    [Output('growth-picks-chart', 'children'),
+     Output('growth-picks-table', 'children')],
+    Input('growth-picks-container', 'id')
+)
+def update_growth_picks(_):
+    try:
+        picks = growth_picks()
+        fig = create_bar_chart(picks, 'rg')
+        cards = [create_stock_card(p) for p in picks[:5]]
+        return dcc.Graph(figure=fig), cards
+    except Exception as e:
+        return html.Div(f"Error: {str(e)}"), []
+
+@app.callback(
+    [Output('dividend-picks-chart', 'children'),
+     Output('dividend-picks-table', 'children')],
+    Input('dividend-picks-container', 'id')
+)
+def update_dividend_picks(_):
+    try:
+        picks = dividend_picks()
+        fig = create_bar_chart(picks, 'div')
+        cards = [create_stock_card(p) for p in picks[:5]]
+        return dcc.Graph(figure=fig), cards
+    except Exception as e:
+        return html.Div(f"Error: {str(e)}"), []
+
+if __name__ == '__main__':
+    print("=" * 50)
+    print("Stock PRO Dashboard")
+    print("=" * 50)
+    print("Open: http://127.0.0.1:8050")
+    print("=" * 50)
+    app.run(debug=False, port=8050)
+
+@app.callback(
+    [Output('value-picks-chart', 'children'),
+     Output('value-picks-table', 'children')],
+    Input('value-picks-container', 'id')
+)
+def update_value_picks(_):
+    try:
+        picks = value_picks()
+        fig = create_bar_chart(picks, 'upside')
+        cards = [create_stock_card(p) for p in picks[:5]]
+        return dcc.Graph(figure=fig), cards
+    except Exception as

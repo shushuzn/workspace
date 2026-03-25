@@ -1,0 +1,59 @@
+{
+  "backup_id": "20260319175542",
+  "backed_up_at": "2026-03-19T17:55:42.516878",
+  "tool_ids": [
+    "critical-issue-detector",
+    "analyze_memory_scripts",
+    "context_db"
+  ],
+  "tools": [
+    {
+      "tool_id": "critical-issue-detector",
+      "name": "Critical Issue Detector",
+      "description": "待补充",
+      "category": "general",
+      "file": "",
+      "metadata": {
+        "name": "Critical Issue Detector",
+        "description": "待补充",
+        "category": "general",
+        "status": "active",
+        "restored_at": "2026-03-19T17:52:47.261980",
+        "restored_from": "week4_final_cleanup"
+      },
+      "file_exists": false
+    },
+    {
+      "tool_id": "analyze_memory_scripts",
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "file": "",
+      "metadata": {
+        "name": "",
+        "description": "待补充",
+        "category": "general",
+        "status": "active",
+        "restored_at": "2026-03-19T17:52:47.262011",
+        "restored_from": "week4_final_cleanup"
+      },
+      "file_exists": false
+    },
+    {
+      "tool_id": "context_db",
+      "name": "",
+      "description": "待补充",
+      "category": "general",
+      "file": "",
+      "metadata": {
+        "name": "",
+        "description": "待补充",
+        "category": "general",
+        "status": "active",
+        "restored_at": "2026-03-19T17:52:47.262014",
+        "restored_from": "week4_final_cleanup"
+      },
+      "file_exists": false
+    }
+  ]
+}

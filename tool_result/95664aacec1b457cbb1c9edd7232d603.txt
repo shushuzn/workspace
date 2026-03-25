@@ -1,0 +1,38 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:38:45.265705
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 3414-3445 of 3774)
+                <th>FCF</th>
+            </tr>
+        </thead>
+        <tbody>
+'''
+    
+    for d in data:
+        rating_class = "buy" if d["upside"] > 30 else ("hold" if d["upside"] > 0 else "sell")
+        upside_class = "positive" if d["upside"] > 0 else "negative"
+        html += f'''            <tr>
+                <td><strong>{d["symbol"]}</strong></td>
+                <td>${d["price"]:.2f}</td>
+                <td>${d["target"]:.2f}</td>
+                <td class="{upside_class}">{d["upside"]:+.1f}%</td>
+                <td>{d["score"]}/100</td>
+                <td class="{rating_class}">{d["rating"]}</td>
+                <td>{d["pe"]:.1f}x</td>
+                <td>{d["roe"]:.1f}%</td>
+                <td>{d["fcf"]:.1f}%</td>
+            </tr>
+'''
+    
+    html += '''        </tbody>
+    </table>
+    
+    <script>
+        // Auto-refresh every 5 minutes
+        setTimeout(() => location.reload(), 300000);
+    </script>
+</body>
+</html>
+'''
+
+[329 more lines. Use start_line=3446 to continue.]

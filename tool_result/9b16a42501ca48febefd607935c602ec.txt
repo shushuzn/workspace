@@ -1,0 +1,86 @@
+# tool_name: read_file
+# created_at: 2026-03-21T17:13:46.727182
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\idle-empire\js\game.js  (lines 1-80 of 291)
+// Idle Empire v0.5 - Complete File
+
+var G = null;
+
+function init() {
+    initTheme();
+    G = loadGame();
+    renderBuildings();
+    renderUpgrades();
+    renderAchievements();
+    renderStats();
+    updateUI();
+    updateStats();
+    initTabs();
+    initBossSystem();
+    renderBossList();
+    startGameLoop();
+    startAutoSave(G);
+    document.getElementById('gold-click-area').onclick = clickGold;
+    document.getElementById('save-btn').onclick = function() { saveGame(G); showMsg('已保存!', 'success'); };
+    document.getElementById('reset-btn').onclick = function() { if(confirm('重置游戏?')) location.reload(); };
+    document.getElementById('theme-btn').onclick = toggleTheme;
+}
+
+function clickGold(e) {
+    var v = (G.upgrades && G.upgrades.indexOf('click_power') !== -1) ? 2 : 1;
+    G.gold += v;
+    G.totalEarned += v;
+    G.totalClicks = (G.totalClicks || 0) + 1;
+    var el = document.createElement('div');
+    el.className = 'floating-number';
+    el.textContent = '+' + v;
+    el.style.left = (e.clientX - 20) + 'px';
+    el.style.top = (e.clientY - 20) + 'px';
+    document.body.appendChild(el);
+    setTimeout(function() { if(el.parentNode) el.parentNode.removeChild(el); }, 1000);
+    updateUI();
+    checkAchievements();
+}
+
+function initTabs() {
+    var tabs = document.querySelectorAll('.tab');
+    for (var i = 0; i < tabs.length; i++) {
+        tabs[i].onclick = function() {
+            var allTabs = document.querySelectorAll('.tab');
+            var allContent = document.querySelectorAll('.tab-content');
+            for (var j = 0; j < allTabs.length; j++) allTabs[j].classList.remove('active');
+            for (var k = 0; k < allContent.length; k++) allContent[k].classList.remove('active');
+            this.classList.add('active');
+            document.getElementById('tab-' + this.getAttribute('data-tab')).classList.add('active');
+        };
+    }
+}
+
+function renderBuildings() {
+    var c = document.getElementById('building-list');
+    if (!c || !G) return;
+    c.innerHTML = '';
+    for (var i = 0; i < BUILDINGS.length; i++) {
+        var b = BUILDINGS[i];
+        var owned = G.buildings[b.id] || 0;
+        var cost = Math.floor(b.baseCost * Math.pow(1.15, owned));
+        var prod = b.baseProduction * owned * getBuildingMultiplier(G, b.id);
+        var unlocked = !b.unlockAt || G.totalEarned >= b.unlockAt;
+        var affordable = G.gold >= cost;
+        var div = document.createElement('div');
+        div.className = 'building' + (!unlocked ? ' locked' : '') + (owned > 0 ? ' owned' : '') + (affordable ? ' affordable' : '');
+        div.innerHTML = '<span class="building-icon" style="color:' + b.color + '">' + b.icon + '</span>' +
+            '<div class="building-info"><div class="building-name">' + b.icon + ' ' + b.name + '</div><div class="building-desc">' + b.description + '</div></div>' +
+            '<div class="building-production">+' + formatNumber(prod) + '/s</div>' +
+            '<div class="building-count">' + owned + '</div>' +
+            '<div class="building-cost">' + formatNumber(cost) + '</div>';
+        if (unlocked) div.onclick = (function(bb) { return function() { buyBuilding(bb); }; })(b);
+        c.appendChild(div);
+    }
+}
+
+function buyBuilding(b) {
+    var owned = G.buildings[b.id] || 0;
+    var cost = Math.floor(b.baseCost * Math.pow(1.15, owned));
+
+[211 more lines. Use start_line=81 to continue.]

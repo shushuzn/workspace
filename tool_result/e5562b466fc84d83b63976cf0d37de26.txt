@@ -1,0 +1,112 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:46:31.699899
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 595-700 of 827)
+    for n in news_list:
+        all_codes.extend(n.get('codes', []))
+    codes_str = " ".join(all_codes[:8]) if all_codes else "-"
+    
+    # 情绪条形图
+    total = len(news_list)
+    bar_len = 20
+    if total > 0:
+        pos_len = int(len(positive) / total * bar_len)
+        neg_len = int(len(negative) / total * bar_len)
+        neu_len = bar_len - pos_len - neg_len
+        sentiment_bar = "[+" + "+" * pos_len + "=" * max(0, neu_len) + "-" * neg_len + "]"
+    else:
+        sentiment_bar = "[...]"
+    
+    # 市场影响预测
+    impact_prediction = ""
+    hot_sectors = [s for s, c in sorted(sector_count.items(), key=lambda x: -x[1]) if c >= 2]
+    if hot_sectors:
+        impact_prediction = "关注: " + " ".join(hot_sectors[:3])
+    
+    # 时间戳
+    now = datetime.now().strftime('%m-%d %H:%M')
+    
+    # ==================== 构建消息 ====================
+    lines = []
+    
+    # 头部
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"  [NEWS] {now}")
+    lines.append(f"  情绪: {score_str}")
+    lines.append(f"  {sentiment_bar}")
+    lines.append(f"  +{len(positive)} -{len(negative)} ={len(neutral)} | {len(news_list)}条")
+    if impact_prediction:
+        lines.append(f"  {impact_prediction}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"板块: {sector_str}")
+    lines.append(f"来源: {source_str}")
+    lines.append(f"热词: {top_keywords}")
+    if codes_str != "-":
+        lines.append(f"个股: {codes_str}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append("")
+    
+    # 利好
+    if positive:
+        lines.append(">>> 利好 (+)")
+        for news in positive:
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            keywords = news.get('keywords', [])
+            codes = news.get('codes', [])
+            summary = extract_summary(news['title'], '利好')
+            
+            lines.append(f"  + {news['title'][:42]}")
+            meta = f"[{sector}][{source}]"
+            if keywords:
+                meta += " " + " ".join([f"#{k}" for k in keywords[:2]])
+            if codes:
+                meta += f" ${codes[0]}"
+            lines.append(f"    {meta}")
+            if summary:
+                lines.append(f"    -> {summary}")
+        lines.append("")
+    
+    # 利空
+    if negative:
+        lines.append(">>> 利空 (-)")
+        for news in negative:
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            keywords = news.get('keywords', [])
+            codes = news.get('codes', [])
+            summary = extract_summary(news['title'], '利空')
+            
+            lines.append(f"  - {news['title'][:42]}")
+            meta = f"[{sector}][{source}]"
+            if keywords:
+                meta += " " + " ".join([f"#{k}" for k in keywords[:2]])
+            if codes:
+                meta += f" ${codes[0]}"
+            lines.append(f"    {meta}")
+            if summary:
+                lines.append(f"    -> {summary}")
+        lines.append("")
+    
+    # 中性
+    if neutral:
+        lines.append(">>> 中性 (=)")
+        for news in neutral[:3]:
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            keywords = news.get('keywords', [])
+            codes = news.get('codes', [])
+            summary = extract_summary(news['title'], '中性')
+            
+            lines.append(f"  = {news['title'][:42]}")
+            meta = f"[{sector}][{source}]"
+            if keywords:
+                meta += " " + " ".join([f"#{k}" for k in keywords[:2]])
+            if codes:
+                meta += f" ${codes[0]}"
+            lines.append(f"    {meta}")
+            if summary:
+                lines.append(f"    -> {summary}")
+        if len(neutral) > 3:
+
+[127 more lines. Use start_line=701 to continue.]

@@ -1,0 +1,93 @@
+{
+  "symbol": "TEST",
+  "analysis_date": "2026-03-20T12:46:49.136146",
+  "candle_count": 100,
+  "candlestick_patterns": [
+    {
+      "index": 29,
+      "date": "2026-01-30",
+      "type": "candlestick",
+      "signals": [
+        {
+          "name": "光头光脚",
+          "signal": "bullish",
+          "strength": "strong",
+          "description": "强势上涨信号"
+        }
+      ]
+    },
+    {
+      "index": 41,
+      "date": "2026-01-42",
+      "type": "candlestick",
+      "signals": [
+        {
+          "name": "光头光脚",
+          "signal": "bearish",
+          "strength": "strong",
+          "description": "强势下跌信号"
+        }
+      ]
+    },
+    {
+      "index": 67,
+      "date": "2026-01-68",
+      "type": "candlestick",
+      "signals": [
+        {
+          "name": "光头光脚",
+          "signal": "bullish",
+          "strength": "strong",
+          "description": "强势上涨信号"
+        }
+      ]
+    },
+    {
+      "index": 88,
+      "date": "2026-01-89",
+      "type": "candlestick",
+      "signals": [
+        {
+          "name": "锤子线",
+          "signal": "bullish",
+          "strength": "medium",
+          "description": "底部反转信号，可能有上涨"
+        }
+      ]
+    },
+    {
+      "index": 94,
+      "date": "2026-01-95",
+      "type": "candlestick",
+      "signals": [
+        {
+          "name": "光头光脚",
+          "signal": "bearish",
+          "strength": "strong",
+          "description": "强势下跌信号"
+        }
+      ]
+    }
+  ],
+  "trend_patterns": [
+    {
+      "type": "trend",
+      "name": "双顶 (M 顶)",
+      "signal": "bearish",
+      "strength": "strong",
+      "peak_indices": [
+        35,
+        40
+      ],
+      "description": "顶部双重阻力，看跌信号",
+      "confidence": 0.75
+    }
+  ],
+  "summary": {
+    "bullish_count": 3,
+    "bearish_count": 3,
+    "neutral_count": 0,
+    "dominant_signal": "neutral",
+    "confidence": 0.6
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "enabled": true,
+  "check_interval_minutes": 30,
+  "reminder_lead_time_minutes": 60,
+  "enable_suggestions": true,
+  "enable_alerts": true,
+  "enable_context_awareness": true,
+  "enable_learning": true,
+  "quiet_hours": {
+    "start": 23,
+    "end": 8
+  }
+}

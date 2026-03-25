@@ -1,0 +1,23 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T11:48:18.516447
+# ---
+"=== EXPORT JSON ===" 
+
++==============================================================+
+|                    Stock PRO v12.0                          |
+|          Professional Stock Analysis Suite                  |
++==============================================================+
+
+[Export] JSON saved to: D:\OpenClaw\workspace\30-scripts-tools\exports\stock_data_20260322_114812.json
+"" 
+"=== EXPORT ALL FORMATS ===" 
+
++==============================================================+
+|                    Stock PRO v12.0                          |
+|          Professional Stock Analysis Suite                  |
++==============================================================+
+
+[Export] JSON saved to: D:\OpenClaw\workspace\30-scripts-tools\exports\stocks_20260322_114813.json
+[Export] CSV saved to: D:\OpenClaw\workspace\30-scripts-tools\exports\stocks_20260322_114813.csv
+[Export] Markdown saved to: D:\OpenClaw\workspace\30-scripts-tools\exports\report_20260322_114813.md
+[Export] HTML saved to: D:\OpenClaw\workspace\30-scripts-tools\exports\report_20260322_114813.html

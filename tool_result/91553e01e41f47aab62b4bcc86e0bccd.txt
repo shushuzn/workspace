@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:40:37.758934
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\README.md  (lines 1-100 of 188)
+# NewsHub v2.1 - 金融新闻聚合推送系统
+
+## 概述
+
+NewsHub 是一个模块化的金融新闻聚合和推送系统，支持多源抓取、智能分类、情感分析、LLM深度分析、智能告警、关键词订阅和市场情绪分析。
+
+## 核心功能
+
+### 多源新闻聚合 (6源 = 67条)
+| 来源 | 数量 | 类型 |
+|------|------|------|
+| 新浪财经 | 15 | 中文财经 |
+| 东方财富 | 10 | A股资讯 |
+| 同花顺 | 10 | 股市新闻 |
+| Investing | 10 | 全球市场 |
+| Seeking Alpha | 7 | 投资分析 |
+| CNBC | 15 | 美国商业 |
+
+### LLM深度分析 (v2.0) ⭐
+**多维度分析:**
+- **情感分数**: -100到+100
+- **市场影响**: 股市/外汇/商品/加密/债券/房地产
+- **关键实体**: 公司/人名提取
+- **紧急程度**: critical/high/medium/low
+- **时间范围**: immediate/short/medium/long
+- **风险等级**: high/medium/low
+- **投资建议**: buy/sell/hold/watch
+- **一句话摘要**: <30字
+
+**性能优化:**
+- 并行处理: 5线程并发
+- 结果缓存: MD5哈希，1小时TTL
+- 平均速度: ~2s/条
+
+### 市场情绪分析 ⭐
+基于LLM分析结果计算整体市场情绪:
+- **bullish/bearish/neutral**: 整体趋势
+- **市场分布**: 各市场新闻占比
+- **建议分布**: 买入/卖出/观望比例
+
+### 智能告警 (4级)
+| 级别 | 关键词示例 |
+|------|-----------|
+| 🔴 critical | 崩盘/危机/crash/FED降息 |
+| 🟠 high | CPI/Trump/Nvidia/关税 |
+| 🟡 medium | 财报/earnings/EV |
+| ⚪ low | 突破/breakout/fear |
+
+### 关键词订阅
+自定义关键词，14个默认关键词:
+- `🔴 critical`: 降息, FED, tariff
+- `🟠 high`: 涨停, Nvidia, CPI, Trump
+- `🟡 medium`: 人民币, Tesla, AI, 原油, gold
+
+## 快速开始
+
+```bash
+cd D:\OpenClaw\workspace\80-PROJECTS\NewsHub
+
+# 基础抓取
+python news_hub.py fetch
+
+# LLM深度分析
+python news_hub.py fetch --llm --limit 10
+
+# 市场情绪分析
+python news_hub.py fetch --llm --stats
+
+# 飞书推送
+python news_hub.py feishu market
+python news_hub.py feishu smart
+python news_hub.py feishu digest
+```
+
+## 命令列表
+
+### 主命令
+```bash
+python news_hub.py <command>
+
+fetch      抓取新闻
+feishu     飞书推送
+quick      快速模式
+export     导出新闻
+report     生成简报
+db         数据库
+trends     趋势分析
+sub        订阅管理
+watch      关键词监控
+```
+
+### 飞书推送子命令
+```bash
+python news_hub.py feishu <mode>
+
+compact    紧凑视图
+digest     摘要推送
+smart      智能告警
+market     市场情绪 ⭐
+all        全部推送
+
+[88 more lines. Use start_line=101 to continue.]
