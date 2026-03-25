@@ -1,0 +1,21 @@
+# Render Blueprint for Star Forge Web
+# https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: star-forge-web
+    runtime: static
+    repo: https://github.com/shushuzn/star-forge-web
+    branch: main
+    rootDir: 80-PROJECTS/star-forge-web
+    buildCommand: npm run build
+    staticPublishPath: dist
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=0, must-revalidate
+    envVars:
+      - key: NODE_VERSION
+        value: "18"
+      - key: NPM_VERSION
+        value: "9"
