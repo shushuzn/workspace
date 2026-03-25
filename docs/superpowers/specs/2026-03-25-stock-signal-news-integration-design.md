@@ -1,19 +1,22 @@
 # Stock Signal + News Integration Design
 
 **Date:** 2026-03-25
-**Status:** Draft
+**Status:** Draft → Revised after review
 **Project:** newshub-observability + stock-analysis-mcp-test integration
 
 ---
 
 ## 1. Overview
 
-**Goal:** Bidirectional enhancement between news and stock signals
+**Goal:** Unidirectional stock signal annotation of news cards (Phase 1)
 
-- News events trigger stock technical indicator recalculation (event-driven)
 - Stock trend signals annotate news cards (signal labeling)
+- News → MCP → Card annotation (one direction only)
 
-**Architecture:** API call (MCP JSON-RPC over HTTP)
+**Future Phase 2 (out of scope):**
+- News events trigger stock technical indicator recalculation
+
+**Architecture:** MCP JSON-RPC over stdio (subprocess)
 
 ---
 
@@ -26,7 +29,7 @@ Classification + Deduplication
     ↓
 [Signal Annotation Step] ← new integration point
     ↓
-MCP: get_summary(symbol) for each related stock
+MCP: get_summary(symbol) via subprocess stdio
     ↓
 Render trend tag on card: "AAPL: ↑强势" / "腾讯: ↓弱势"
     ↓
@@ -57,30 +60,126 @@ async def annotate_with_stock_signals(card, news_item):
     """Add stock trend tags to news card."""
     symbols = resolve_symbols(news_item)  # Priority 1→2→3
 
-    for symbol in symbols[:3]:  # Max 3 symbols per card
-        try:
-            summary = await mcp_client.call("get_summary", {"symbol": symbol, "period": "1d"})
-            trend = summarize_trend(summary)  # "↑强势" / "↓弱势" / "→盘整"
-            card.add_tag(f"{symbol}: {trend}")
-        except Exception:
-            card.add_tag(f"{symbol}: 信号待更新")
+    # Fire all MCP calls concurrently
+    tasks = [
+        mcp_client.call("get_summary", {"symbol": sym, "period": "1d"})
+        for sym in symbols[:3]  # Max 3 symbols per card
+    ]
+
+    results = await asyncio.gather(*tasks, return_exceptions=True)
+
+    for sym, result in zip(symbols[:3], results):
+        if isinstance(result, Exception):
+            card.add_tag(f"{sym}: 信号待更新")
+        else:
+            trend = summarize_trend(result)  # Defined in Section 4.3
+            card.add_tag(f"{sym}: {trend}")
 ```
 
 ### 4.2 mcp_client.py (NEW)
-**Purpose:** HTTP client for MCP JSON-RPC calls
+**Purpose:** Subprocess-based MCP client using stdio transport
 
 ```python
+import asyncio
+import json
+import subprocess
+import sys
+from pathlib import Path
+
 class MCPClient:
-    def __init__(self, base_url: str = "http://localhost:8000"):
-        self.base_url = base_url
+    """MCP client using subprocess + stdio transport."""
+
+    def __init__(self, mcp_server_path: str = None, timeout: float = 3.0):
+        self.mcp_server_path = mcp_server_path or self._find_mcp_server()
+        self.timeout = timeout
+
+    def _find_mcp_server(self) -> str:
+        # Search for stock-analysis-mcp-test/src/server.py
+        candidates = [
+            Path(__file__).parent.parent / "stock-analysis-mcp-test" / "src" / "server.py",
+            Path.home() / "stock-analysis-mcp-test" / "src" / "server.py",
+        ]
+        for p in candidates:
+            if p.exists():
+                return f"python {p}"
+        raise FileNotFoundError("stock-analysis-mcp-test server.py not found")
 
     async def call(self, tool: str, arguments: dict) -> dict:
-        # JSON-RPC 2.0 request over HTTP
-        # Timeout: 3s
-        # On failure: raise MCPError (caller handles degradation)
+        """Call MCP tool via subprocess stdin/stdout."""
+        request = {
+            "jsonrpc": "2.0",
+            "id": 1,
+            "method": "tools/call",
+            "params": {
+                "name": tool,
+                "arguments": arguments
+            }
+        }
+
+        proc = await asyncio.create_subprocess_exec(
+            *self.mcp_server_path.split(),
+            stdin=asyncio.subprocess.PIPE,
+            stdout=asyncio.subprocess.PIPE,
+            stderr=asyncio.subprocess.PIPE,
+        )
+
+        try:
+            stdout, stderr = await asyncio.wait_for(
+                proc.communicate(input=json.dumps(request).encode()),
+                timeout=self.timeout
+            )
+        except asyncio.TimeoutError:
+            proc.kill()
+            raise MCPError(f"Timeout calling {tool}") from None
+
+        if proc.returncode != 0:
+            raise MCPError(f"MCP server error: {stderr.decode()}")
+
+        response = json.loads(stdout.decode())
+        if "error" in response:
+            raise MCPError(f"MCP tool error: {response['error']}")
+
+        # Parse MCP response content wrapper
+        content = response.get("result", {}).get("content", [])
+        if not content:
+            raise MCPError("Empty response from MCP")
+
+        return json.loads(content[0]["text"])
+
+
+class MCPError(Exception):
+    """MCP client error for degradation handling."""
+    pass
 ```
 
-### 4.3 Keyword Fallback Map
+### 4.3 summarize_trend() Definition
+
+**Purpose:** Map `get_summary` output to Chinese trend labels.
+
+```python
+TREND_MAP = {
+    "uptrend": "↑强势",
+    "downtrend": "↓弱势",
+    "sideways": "→盘整",
+}
+
+def summarize_trend(summary: dict) -> str:
+    """
+    Convert get_summary response to trend label.
+
+    Input: get_summary returns dict with:
+        - symbol: str
+        - trend.direction: "uptrend" | "downtrend" | "sideways"
+        - trend.signal: "buy" | "sell" | "hold"
+        - rsi: float (optional)
+
+    Output: Chinese trend label, e.g. "↑强势"
+    """
+    direction = summary.get("trend", {}).get("direction", "sideways")
+    return TREND_MAP.get(direction, "→盘整")
+```
+
+### 4.4 Keyword Fallback Map
 **File:** `config/stock_keyword_map.json`
 
 ```json
@@ -103,6 +202,7 @@ class MCPClient:
 | Symbol resolution failed | Skip annotation, card renders normally |
 | MCP call timeout (3s) | Skip annotation, no error shown |
 | Invalid symbol | Log warning, skip |
+| Application-level error in response | Check `summary.get("error")`, show "信号待更新" |
 
 **Principle:** Never block card rendering due to stock signals.
 
@@ -111,8 +211,8 @@ class MCPClient:
 ## 6. Performance
 
 - **Max symbols per card:** 3 (prevents card overflow)
-- **MCP timeout:** 3 seconds
-- **Parallel calls:** Fire all symbol calls concurrently, render when all resolve or timeout
+- **MCP timeout:** 3 seconds per call
+- **Parallel calls:** `asyncio.gather()` fires all calls concurrently
 - **No caching in v1** (accept slight staleness for simplicity)
 
 ---
@@ -123,7 +223,7 @@ class MCPClient:
 
 ```json
 {
-  "mcp_server_url": "http://localhost:8000",
+  "mcp_server_command": "python /path/to/stock-analysis-mcp-test/src/server.py",
   "timeout_seconds": 3,
   "max_symbols_per_card": 3,
   "enabled": true
@@ -135,8 +235,9 @@ class MCPClient:
 ## 8. Testing
 
 1. Unit test: `resolve_symbols()` with mock news item
-2. Integration test: MCP client calls against live stock-analysis-mcp
-3. E2E test: Render card with known stock-related news, verify tag appears
+2. Unit test: `summarize_trend()` with mock summary dicts
+3. Integration test: MCP client calls against live stock-analysis-mcp
+4. E2E test: Render card with known stock-related news, verify tag appears
 
 ---
 
@@ -146,6 +247,7 @@ class MCPClient:
 - Event-driven technical indicator recalculation
 - Real-time streaming / WebSocket
 - Caching layer
+- Bidirectional enhancement (Phase 2)
 
 ---
 
@@ -154,7 +256,7 @@ class MCPClient:
 | File | Action |
 |------|--------|
 | `card_builder.py` | Modify - add annotation method |
-| `mcp_client.py` | New - MCP HTTP client |
+| `mcp_client.py` | New - MCP subprocess/stdio client |
 | `config/mcp_integration.json` | New - integration config |
 | `config/stock_keyword_map.json` | New - symbol keyword mapping |
 
@@ -162,13 +264,16 @@ class MCPClient:
 
 ## 11. Dependencies
 
-- `aiohttp` (already in newshub-observability)
-- `stock-analysis-mcp-test` running on localhost:8000
+- `asyncio` (stdlib)
+- `subprocess` (stdlib)
+- `json` (stdlib)
+- `pathlib` (stdlib)
+- No new external dependencies required
 
 ---
 
-## 12. Open Questions
+## 12. Open Questions - RESOLVED
 
-1. **MCP transport:** Is stdin/stdout or HTTP? (HTTP assumed for network calls)
-2. **Service discovery:** How does newshub find stock-analysis-mcp? localhost:8000 hardcoded for now
-3. **Authentication:** Any auth needed for MCP calls? (Assumed no for v1)
+1. ~~**MCP transport:** Is stdin/stdout or HTTP?~~ → **Resolved: stdio/subprocess**
+2. **Service discovery:** How does newshub find stock-analysis-mcp? → Config file path, no auto-discovery
+3. **Authentication:** Not needed for v1 (localhost only)
