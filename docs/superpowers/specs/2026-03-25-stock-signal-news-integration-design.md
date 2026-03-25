@@ -69,7 +69,7 @@ async def annotate_with_stock_signals(card, news_item):
     results = await asyncio.gather(*tasks, return_exceptions=True)
 
     for sym, result in zip(symbols[:3], results):
-        if isinstance(result, Exception):
+        if isinstance(result, Exception) or (isinstance(result, dict) and "error" in result):
             card.add_tag(f"{sym}: 信号待更新")
         else:
             trend = summarize_trend(result)  # Defined in Section 4.3
