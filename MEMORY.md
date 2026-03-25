@@ -367,6 +367,25 @@ Feedback Loop
 - Time saved: 14 minutes → 1 minute (93% faster)
 - Ensured no critical principles or lessons were missed
 
+### Cleanup Without Dependency Analysis (2026-03-25)
+**Problem:** commit `95ee95d` "Cleanup intermediate docs" deleted 100+ files but broke 3 critical systems
+**Impact:**
+- `critic_v5_review.py` deleted → 13+ tools failed
+- `workspace_comparator.py` deleted → pre-commit hook failed
+- `tool_validator_001.py` + `tool_namer_001.py` deleted → commit validation failed
+- **Result:** 20% error rate in monitoring system
+**Solution:**
+1. Restored files from git history: `git show <commit>:path/to/file`
+2. Added `--auto` mode to critic_v5_review.py for non-interactive execution
+3. Updated 30+ files to use the new `--auto` flag
+4. Fixed path issues in subprocess calls
+**Lesson:**
+- **NEVER delete files without first checking `grep -r "filename" .` for references**
+- "Intermediate" files that are dependencies are NOT intermediate
+- Before cleanup: Run `grep -r "deleted_file" .` on ALL referencing files
+- After restore: Add functionality to make dependencies more robust (e.g., `--auto` mode)
+**Files Restored:** critic_v5_review.py, workspace_comparator.py, tool_validator_001.py, tool_namer_001.py
+
 ---
 
 ## Research Principles
