@@ -393,7 +393,7 @@ git commit -m "feat: add MCP integration config and stock keyword map"
 - Modify: `newshub-observability/card_builder.py`
 - Test: `newshub-observability/tests/test_card_builder_annotation.py`
 
-- [ ] **Step 1: Write failing test for annotate_with_stock_signals**
+- [ ] **Step 1: Write failing tests for annotate_with_stock_signals**
 
 Create `tests/test_card_builder_annotation.py`:
 
@@ -401,7 +401,7 @@ Create `tests/test_card_builder_annotation.py`:
 import pytest
 import asyncio
 from unittest.mock import Mock, AsyncMock, patch
-from card_builder import CardBuilder, Card
+from card_builder import CardBuilder
 
 
 @pytest.fixture
@@ -416,35 +416,96 @@ def mock_news_item():
 
 
 @pytest.fixture
-def mock_mcp_client():
-    """Create a mock MCP client."""
-    client = Mock()
-    client.call = AsyncMock(return_value={"trend": {"direction": "uptrend"}})
-    return client
-
-
-def test_card_has_tags_after_annotation():
-    """Test card gets stock trend tag after annotation."""
-    card = Card()
+def mock_card():
+    """Create a mock card with add_tag method."""
+    card = Mock()
     card.tags = []
+    card.add_tag = Mock()
+    return card
 
-    # Mock resolve_symbols to return AAPL
+
+def test_annotate_adds_trend_tag(mock_card, mock_news_item):
+    """Test annotation adds stock trend tag to card."""
+    builder = CardBuilder()
+
+    mock_client = Mock()
+    mock_client.call = AsyncMock(return_value={"trend": {"direction": "uptrend"}})
+
     with patch("card_builder.resolve_symbols", return_value=["AAPL"]):
-        with patch("card_builder.MCPClient", return_value=mock_mcp_client()):
-            # This would need the actual function to be added
-            pass  # Will be implemented
+        with patch("card_builder.MCPClient", return_value=mock_client):
+            result_card = asyncio.run(
+                builder.annotate_with_stock_signals(mock_card, mock_news_item)
+            )
+
+    mock_card.add_tag.assert_called_with("AAPL: ↑强势")
 
 
-def test_annotation_degrades_gracefully_on_error():
+def test_annotate_degrades_on_mcp_error(mock_card, mock_news_item):
     """Test annotation shows '信号待更新' on MCP error."""
-    # Will be implemented with actual function
-    pass
+    builder = CardBuilder()
+
+    mock_client = Mock()
+    mock_client.call = AsyncMock(side_effect=Exception("MCP failed"))
+
+    with patch("card_builder.resolve_symbols", return_value=["AAPL"]):
+        with patch("card_builder.MCPClient", return_value=mock_client):
+            result_card = asyncio.run(
+                builder.annotate_with_stock_signals(mock_card, mock_news_item)
+            )
+
+    mock_card.add_tag.assert_called_with("AAPL: 信号待更新")
 
 
-def test_max_3_symbols_per_card():
+def test_annotate_max_3_symbols(mock_card):
     """Test annotation limits to 3 symbols."""
-    # Will be implemented with actual function
-    pass
+    builder = CardBuilder()
+
+    item = Mock()
+    item.stock_codes = ["A", "B", "C", "D", "E"]  # 5 symbols
+    item.symbols = []
+    item.title = ""
+    item.content = ""
+
+    mock_client = Mock()
+    mock_client.call = AsyncMock(return_value={"trend": {"direction": "uptrend"}})
+
+    with patch("card_builder.resolve_symbols", return_value=["A", "B", "C", "D", "E"]):
+        with patch("card_builder.MCPClient", return_value=mock_client):
+            result_card = asyncio.run(
+                builder.annotate_with_stock_signals(mock_card, item)
+            )
+
+    # Only 3 calls should be made
+    assert mock_client.call.call_count == 3
+
+
+def test_annotate_skips_when_disabled(mock_card, mock_news_item):
+    """Test annotation skipped when disabled in config."""
+    builder = CardBuilder()
+
+    with patch("card_builder.CardBuilder._load_mcp_config", return_value={"enabled": False}):
+        result_card = asyncio.run(
+            builder.annotate_with_stock_signals(mock_card, mock_news_item)
+        )
+
+    mock_card.add_tag.assert_not_called()
+
+
+def test_annotate_skips_when_no_symbols(mock_card):
+    """Test annotation skipped when no symbols resolved."""
+    builder = CardBuilder()
+
+    item = Mock()
+    item.stock_codes = []
+    item.symbols = []
+    item.title = ""
+    item.content = ""
+
+    result_card = asyncio.run(
+        builder.annotate_with_stock_signals(mock_card, item)
+    )
+
+    mock_card.add_tag.assert_not_called()
 ```
 
 - [ ] **Step 2: Run tests to verify they fail**
@@ -454,13 +515,7 @@ Expected: FAIL — function not defined
 
 - [ ] **Step 3: Add annotate_with_stock_signals to card_builder.py**
 
-First, read existing `card_builder.py` to find the right place to add the method:
-
-```bash
-head -100 card_builder.py
-```
-
-Then add method to `CardBuilder` class:
+Find `card_builder.py` in `newshub-observability/` directory, then add method to `CardBuilder` class:
 
 ```python
 async def annotate_with_stock_signals(self, card, news_item):
@@ -504,7 +559,8 @@ async def annotate_with_stock_signals(self, card, news_item):
     return card
 
 
-def _load_mcp_config(self) -> dict:
+@staticmethod
+def _load_mcp_config() -> dict:
     """Load MCP integration config."""
     import json
     from pathlib import Path
@@ -520,129 +576,12 @@ def _load_mcp_config(self) -> dict:
     return {"enabled": False}
 ```
 
-- [ ] **Step 4: Write comprehensive tests**
-
-Update `tests/test_card_builder_annotation.py` with full tests:
-
-```python
-import pytest
-import asyncio
-from unittest.mock import Mock, AsyncMock, patch, MagicMock
-from card_builder import CardBuilder
-
-
-@pytest.fixture
-def mock_news_item():
-    item = Mock()
-    item.stock_codes = ["AAPL"]
-    item.title = "Apple news"
-    item.content = ""
-    item.symbols = []
-    return item
-
-
-@pytest.fixture
-def mock_card():
-    card = Mock()
-    card.tags = []
-    card.add_tag = Mock()
-    return card
-
-
-def test_annotate_adds_trend_tag(mock_card, mock_news_item):
-    """Test annotation adds stock trend tag to card."""
-    builder = CardBuilder()
-
-    mock_client = Mock()
-    mock_client.call = AsyncMock(
-        return_value={"trend": {"direction": "uptrend"}}
-    )
-
-    with patch("card_builder.resolve_symbols", return_value=["AAPL"]):
-        with patch("card_builder.MCPClient", return_value=mock_client):
-            result_card = asyncio.run(
-                builder.annotate_with_stock_signals(mock_card, mock_news_item)
-            )
-
-    mock_card.add_tag.assert_called_with("AAPL: ↑强势")
-
-
-def test_annotate_degrades_on_mcp_error(mock_card, mock_news_item):
-    """Test annotation shows '信号待更新' on MCP error."""
-    builder = CardBuilder()
-
-    mock_client = Mock()
-    mock_client.call = AsyncMock(reraises=Exception("MCP failed"))
-
-    with patch("card_builder.resolve_symbols", return_value=["AAPL"]):
-        with patch("card_builder.MCPClient", return_value=mock_client):
-            result_card = asyncio.run(
-                builder.annotate_with_stock_signals(mock_card, mock_news_item)
-            )
-
-    mock_card.add_tag.assert_called_with("AAPL: 信号待更新")
-
-
-def test_annotate_max_3_symbols(mock_card):
-    """Test annotation limits to 3 symbols."""
-    builder = CardBuilder()
-
-    item = Mock()
-    item.stock_codes = ["A", "B", "C", "D", "E"]  # 5 symbols
-    item.symbols = []
-    item.title = ""
-    item.content = ""
-
-    mock_client = Mock()
-    mock_client.call = AsyncMock(
-        return_value={"trend": {"direction": "uptrend"}}
-    )
-
-    with patch("card_builder.resolve_symbols", return_value=["A", "B", "C", "D", "E"]):
-        with patch("card_builder.MCPClient", return_value=mock_client):
-            result_card = asyncio.run(
-                builder.annotate_with_stock_signals(mock_card, item)
-            )
-
-    # Only 3 calls should be made
-    assert mock_client.call.call_count == 3
-
-
-def test_annotate_skips_when_disabled(mock_card, mock_news_item):
-    """Test annotation skipped when disabled in config."""
-    builder = CardBuilder()
-
-    with patch("card_builder.CardBuilder._load_mcp_config", return_value={"enabled": False}):
-        result_card = asyncio.run(
-            builder.annotate_with_stock_signals(mock_card, mock_news_item)
-        )
-
-    mock_card.add_tag.assert_not_called()
-
-
-def test_annotate_skips_when_no_symbols(mock_card):
-    """Test annotation skipped when no symbols resolved."""
-    builder = CardBuilder()
-
-    item = Mock()
-    item.stock_codes = []
-    item.symbols = []
-    item.title = ""
-    item.content = ""
-
-    result_card = asyncio.run(
-        builder.annotate_with_stock_signals(mock_card, item)
-    )
-
-    mock_card.add_tag.assert_not_called()
-```
-
-- [ ] **Step 5: Run tests to verify they pass**
+- [ ] **Step 4: Run tests to verify they pass**
 
 Run: `pytest tests/test_card_builder_annotation.py -v`
 Expected: PASS
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
 git add card_builder.py tests/test_card_builder_annotation.py
