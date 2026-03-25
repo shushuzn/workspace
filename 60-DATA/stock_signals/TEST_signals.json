@@ -1,0 +1,43 @@
+{
+  "symbol": "TEST",
+  "generated_at": "2026-03-21T01:08:10.427780",
+  "price": 105.0,
+  "individual_signals": {
+    "MA": {
+      "signal": "strong_buy",
+      "strength": 1.0,
+      "detail": "Price above all MAs"
+    },
+    "MACD": {
+      "signal": "buy",
+      "strength": 0.5,
+      "detail": "MACD above signal"
+    },
+    "RSI": {
+      "signal": "neutral",
+      "strength": 0,
+      "detail": "RSI neutral"
+    },
+    "KDJ": {
+      "signal": "buy",
+      "strength": 0.3,
+      "detail": "K above D"
+    },
+    "BOLL": {
+      "signal": "neutral",
+      "strength": 0.2,
+      "detail": "Price above middle band"
+    }
+  },
+  "confluence_signal": {
+    "signal": "buy",
+    "strength": 0.43,
+    "confluence": "4/5",
+    "buy_indicators": 4,
+    "sell_indicators": 0,
+    "neutral_indicators": 1,
+    "detail": "Confluence: 4 buy, 0 sell, 1 neutral"
+  },
+  "recommendation": "BUY - Moderate conviction long (4/5 confluence)",
+  "confidence": 0.61
+}

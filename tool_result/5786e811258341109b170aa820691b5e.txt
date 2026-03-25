@@ -1,0 +1,20 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T13:11:18.332718
+# ---
+watchlist_v2.py:14:>     def __init__(self):
+watchlist_v2.py:17:>     def _load(self):
+watchlist_v2.py:27:>     def _save(self):
+watchlist_v2.py:32:>     def add(self, symbol, list_name="default"):
+watchlist_v2.py:51:>     def remove(self, symbol, list_name="default"):
+watchlist_v2.py:60:>     def list_all(self):
+watchlist_v2.py:70:>     def get_watchlist(self, list_name="default"):
+watchlist_v2.py:74:>     def update_prices(self, list_name="default"):
+watchlist_v2.py:97:>     def performance_report(self, list_name="default"):
+watchlist_v2.py:127:>     def compare_lists(self, list1="default", list2="growth"):
+watchlist_v2.py:151:>     def create_from_screener(self, name, criteria):
+watchlist_v2.py:178:> def add_to_watchlist(symbol, list_name="default"):
+watchlist_v2.py:183:> def remove_from_watchlist(symbol, list_name="default"):
+watchlist_v2.py:188:> def get_watchlist(list_name="default"):
+watchlist_v2.py:193:> def list_watchlists():
+watchlist_v2.py:198:> def watchlist_performance(list_name="default"):
+watchlist_v2.py:203:> def compare_watchlists(list1="default", list2="growth"):

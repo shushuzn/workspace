@@ -1,0 +1,43 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:08:48.023135
+# ---
+{
+  "name": "NewsHub",
+  "version": "1.5",
+  "description": "金融新闻聚合推送 (v1.5: 增强分类 + 热点检测)",
+  
+  "news_sources": {
+    "sina": {
+      "enable": true,
+      "name": "新浪财经",
+      "limit": 15,
+      "type": "sina"
+    },
+    "investing": {
+      "enable": true,
+      "name": "Investing",
+      "url": "https://www.investing.com/rss/news.rss",
+      "type": "rss"
+    },
+    "seeking": {
+      "enable": true,
+      "name": "Seeking Alpha",
+      "url": "https://seekingalpha.com/market_currents.xml",
+      "type": "rss"
+    },
+    "cnbc": {
+      "enable": true,
+      "name": "CNBC",
+      "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html",
+      "type": "rss"
+    },
+    "ft": {
+      "enable": false,
+      "name": "Financial Times",
+      "url": "https://www.ft.com/?format=rss",
+      "type": "rss"
+    }
+  },
+  
+  "keywords": ["黄金", "原油", "美联储", "加息", "降息", "美元", "人民币", "股市", "A股", "港股", "美股", "央行", "通胀", "GDP", "制裁", "战", "石油", "经济", "贸易", "Fed", "gold", "oil", "ECB", "CPI", "trade", "伊朗", "能源", "AI"]
+}

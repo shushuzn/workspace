@@ -1,0 +1,8 @@
+{
+  "step": "problem_definition",
+  "topic": "新增路线图维度ideas",
+  "background": "现有4维度: stock_analysis, optimization, protection, automation",
+  "constraints": "需要覆盖更多工具场景，保持实用性",
+  "expected_output": "5-8个新维度ideas，带优先级和实施计划",
+  "created_at": "2026-03-20T22:26:48.604588"
+}

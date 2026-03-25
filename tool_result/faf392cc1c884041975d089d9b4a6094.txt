@@ -1,0 +1,40 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T11:38:14.720435
+# ---
+Command failed with exit code 1.
+[stdout]
+warning: in the working copy of '13-memory/2026-03-22.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/__init__.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/build_ui.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/core.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/dash_app.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/main.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/sentiment.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'AGENTS.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'SOUL.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'active_skills/file-handling/SKILL.md', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of 'active_skills/stock-pro/SKILL.md', CRLF will be replaced by LF the next time Git touches it
+The following paths are ignored by one of your .gitignore files:
+80-PROJECTS
+hint: Use -f if you really want to add them.
+hint: Disable this message with "git config set advice.addIgnoredFile false"
+warning: in the working copy of '30-scripts-tools/stock_pro/check_jin10_detail.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/check_jin10_flash.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/check_jin10_flash_page.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/check_jin10_free_api.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/check_jin10_subdomains.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/dash_app_v3.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/data_jin10_flash.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/data_jin10_news.json', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/fast_news.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/fetch_jin10_flash_news.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/jin10_all.txt', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/news_api.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/news_collector.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/realtime_news.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/rss_news.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/rss_server.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/show_all_rss.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/show_jin10_all.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/show_jin10_rss.py', CRLF will be replaced by LF the next time Git touches it
+warning: in the working copy of '30-scripts-tools/stock_pro/ui_components.py', CRLF will be replaced by LF the next time Git touches it

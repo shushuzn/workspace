@@ -1,0 +1,8 @@
+{
+  "enabled": true,
+  "default_ttl": 3600,
+  "max_size_mb": 100,
+  "compression_enabled": true,
+  "auto_clean": true,
+  "compression_threshold": 1024
+}

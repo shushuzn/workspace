@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-22T23:19:03.511700
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 440-500 of 532)
+
+def cmd_digest(args):
+    data = NewsData()
+    days = int(args.days) if hasattr(args, 'days') else 1
+    cutoff = datetime.now() - timedelta(days=days)
+    recent = [n for n in data.data["news"] if datetime.fromisoformat(n.get("fetched_at","2000")).replace(tzinfo=None) > cutoff]
+    
+    if not recent:
+        print(f"No news in last {days} day(s)")
+        return
+    
+    now = datetime.now().strftime("%m-%d %H:%M")
+    
+    # 统计
+    sentiments = {"利好": [], "利空": [], "中性": []}
+    for n in recent:
+        sentiments[n.get("sentiment","中性")].append(n)
+    
+    # 板块统计
+    sectors = {}
+    for n in recent:
+        sectors[n.get("sector","通用")] = sectors.get(n.get("sector","通用"), 0) + 1
+    top_sectors = sorted(sectors.items(), key=lambda x: -x[1])[:4]
+    
+    # 关键词统计
+    keywords = {}
+    for n in recent:
+        for kw in n.get('keywords', []):
+            keywords[kw] = keywords.get(kw, 0) + 1
+    top_keywords = sorted(keywords.items(), key=lambda x: -x[1])[:5]
+    
+    # 风险评估
+    risk_score = len(sentiments["利空"]) * 2 - len(sentiments["利好"])
+    if risk_score > 10:
+        risk = "HIGH"
+    elif risk_score > 5:
+        risk = "MEDIUM"
+    else:
+        risk = "LOW"
+    
+    total = len(recent)
+    pos = len(sentiments['利好'])
+    neg = len(sentiments['利空'])
+    
+    # 移动端优化输出
+    print(f"\n=== DIGEST @ {now} ===")
+    print(f"Total: {total} | +{pos} -{neg} | Risk: {risk}")
+    print("-" * 32)
+    
+    # 板块
+    print("Sectors:")
+    for sec, cnt in top_sectors:
+        pct = cnt / total * 100
+        bar = "#" * int(pct / 10) + "-" * (10 - int(pct / 10))
+        print(f"  {sec:<4} [{bar}] {pct:.0f}%")
+    
+    # 热门标签
+    if top_keywords:
+        tags = " ".join([f"#{k}" for k, _ in top_keywords])
+        print(f"Tags: {tags}")
+    
+
+[32 more lines. Use start_line=501 to continue.]

@@ -1,0 +1,35 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T23:27:36.547040
+# ---
+shared.py:173:      """标准化标题"""
+shared.py:174:      title = title.lower()
+shared.py:175:      title = NORMALIZE_REGEX.sub("", title)
+shared.py:176:      title = WHITESPACE_REGEX.sub(" ", title).strip()
+shared.py:177:      return title
+shared.py:178:  
+shared.py:179:  
+shared.py:180:  @lru_cache(maxsize=1024)
+shared.py:181:  def compute_hash(title: str) -> str:
+shared.py:182:      """计算标题哈希 (带缓存)"""
+shared.py:183:      normalized = normalize_title(title)
+shared.py:184:      return hashlib.md5(normalized.encode("utf-8")).hexdigest()[:8]
+shared.py:185:  
+shared.py:186:  
+shared.py:187:  @lru_cache(maxsize=1024)
+shared.py:188:> def classify_news(title: str) -> str:
+shared.py:189:      """智能分类新闻 (带缓存)"""
+shared.py:190:      title_lower = title.lower()
+shared.py:191:      best_category = "other"
+shared.py:192:      best_score = 0
+shared.py:193:      for category, keyword_set in CATEGORY_KEYWORD_SETS.items():
+shared.py:194:          score = sum(1 for kw in keyword_set if kw in title_lower)
+shared.py:195:          if score > best_score:
+shared.py:196:              best_score = score
+shared.py:197:              best_category = category
+shared.py:198:      return best_category
+shared.py:199:  
+shared.py:200:  
+shared.py:201:  @lru_cache(maxsize=1024)
+shared.py:202:  def get_importance(title: str) -> str:
+shared.py:203:      """判断新闻重要性 (带缓存)"""
+---

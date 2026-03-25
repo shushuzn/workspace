@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-22T11:53:19.397814
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py  (lines 125-150 of 646)
+    parser.add_argument('--dashboard-html', action='store_true', help='Generate HTML dashboard')
+    parser.add_argument('--watchlist-perf', metavar='NAME', help='Watchlist performance')
+    parser.add_argument('--compare-lists', nargs=2, metavar=('LIST1', 'LIST2'), help='Compare two watchlists')
+    parser.add_argument('--insights', action='store_true', help='Portfolio insights')
+    parser.add_argument('--themes', action='store_true', help='Investment themes')
+    parser.add_argument('--export-json', action='store_true', help='Export to JSON')
+    parser.add_argument('--export-md', action='store_true', help='Export to Markdown')
+    parser.add_argument('--export-html', action='store_true', help='Export to HTML')
+    parser.add_argument('--export-all-formats', action='store_true', help='Export all formats')
+    
+    args = parser.parse_args()
+    
+    print(BANNER)
+    
+    # Help
+    if args.help or (not args.symbols and not any(vars(args).values())):
+        print("""
+Stock PRO v11.0 - Usage
+=======================
+
+Analysis:
+   stock_pro.bat NVDA              Single stock (English)
+   stock_pro.bat NVDA --cn         Chinese report
+   stock_pro.bat NVDA --json       JSON output
+   stock_pro.bat NVDA --live       Use live price
+
+
+[496 more lines. Use start_line=151 to continue.]

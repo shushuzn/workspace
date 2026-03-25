@@ -1,0 +1,2198 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-21T14:08:01.768700
+# ---
+{
+  "timestamp": "2026-03-21T14:08:01.695533",
+  "tools": {
+    "total": 741,
+    "exists": 374,
+    "missing": 367,
+    "missing_tools": [
+      "sa-019-chart-generator",
+      "sa-020-report-generator",
+      "sa-021-dashboard",
+      "sa-022-backtest",
+      "sa-023-trader",
+      "sa-024-api",
+      "cron-001-scheduler",
+      "sa-025-datasource",
+      "sa-026-realtime",
+      "sa-027-optimizer",
+      "sa-028-portfolio",
+      "roadmap-001-manager",
+      "sa-029-ai-signal",
+      "sa-030-sentiment",
+      "sa-031-report",
+      "sa-032-strategy",
+      "next-001-advisor",
+      "test-001-runner",
+      "health-001-checker",
+      "batch-001-runner",
+      "audit-001-analyzer",
+      "integrate-001-suite",
+      "sa-033-backtest",
+      "sa-034-risk",
+      "sa-035-executor",
+      "sa-036-analyzer",
+      "auto-001-automator",
+      "optimap-001",
+      "brainstorm-roadmap-tools",
+      "research-001-topic",
+      "research-002-literature",
+      "util-001-string",
+      "util-002-file",
+      "util-003-datetime",
+      "test-001-unit",
+      "test-002-integration",
+      "integrate-001-api",
+      "integrate-002-data",
+      "report-001-generator",
+      "report-002-export",
+      "report-003-template",
+      "aai_scorer",
+      "adaptive_workflow",
+      "add_core_rules_to_workflow",
+      "add_missing_key_tools",
+      "add_missing_tool_calls",
+      "add_mock_tool_calls",
+      "SA-029",
+      "add_security_rules_to_registry",
+      "agent_tool_monitor",
+      "analyze_cats",
+      "anti_bypass_engine",
+      "audit_001_analyzer",
+      "auto_001_automator",
+      "auto_backup",
+      "auto_doc_generator",
+      "auto_fix_engine",
+      "auto_format_detector",
+      "auto_memory_distiller",
+      "auto_protection_layer",
+      "auto_retry",
+      "auto_session_compressor",
+      "auto_step",
+      "SA-005",
+      "auto_training_engine",
+      "batch_001_runner",
+      "behavior_analyzer",
+      "blockchain_logger",
+      "brainstorm_001_define",
+      "brainstorm_002_diverge",
+      "brainstorm_003_filter",
+      "brainstorm_004_prioritize",
+      "brainstorm_ai_assistant",
+      "brainstorm_analogy",
+      "brainstorm_filter",
+      "brainstorm_matcher",
+      "brainstorm_mindmap",
+      "brainstorm_new_dimensions",
+      "brainstorm_next",
+      "brainstorm_prioritize",
+      "brainstorm_quality_predictor",
+      "brainstorm_quick",
+      "brainstorm_random",
+      "brainstorm_refine",
+      "brainstorm_reverse",
+      "brainstorm_roadmap_tools",
+      "brainstorm_scamper",
+      "brainstorm_sixhats",
+      "SA-001",
+      "brainstorm_stock_optimize",
+      "brainstorm_workflow",
+      "check_all_existing_tools",
+      "check_core_files",
+      "check_current_state",
+      "check_existing_tools_fixed",
+      "check_git_version",
+      "check_kept_tools",
+      "check_kept_tools2",
+      "check_key_tools_exist",
+      "check_log",
+      "check_missing_tools",
+      "check_registry",
+      "check_registry_count",
+      "check_registry_format",
+      "check_registry_structure",
+      "check_restored",
+      "check_session",
+      "check_state_files",
+      "check_step_ids",
+      "check_tool_bypass",
+      "check_tool_files",
+      "check_tool_log",
+      "check_tool_registration",
+      "check_tool_registry",
+      "check_tool_structure",
+      "check_workflow",
+      "compare_count",
+      "complete_current_session",
+      "compliance_booster",
+      "compliance_dashboard",
+      "compression_scheduler",
+      "confirmation_gate",
+      "content_validator",
+      "context_aware_assistant",
+      "copaw_entry",
+      "core_files_compressor",
+      "core_rules_verifier",
+      "count_py_files",
+      "count_real_tools",
+      "create_brainstorm_v3",
+      "create_dialogue_workflow",
+      "create_dir",
+      "create_dirs",
+      "cron_001_scheduler",
+      "cron_enhanced",
+      "cross_session_memory",
+      "data_cache",
+      "data_source_manager",
+      "debug_registry",
+      "debug_step_match",
+      "debug_workflow",
+      "debug_workflow_steps",
+      "diagnose_registry",
+      "dialog_entry",
+      "dialog_workflow_enforcer",
+      "do_commit",
+      "dynamic_goal_adjuster",
+      "dynamic_step_skipper",
+      "embedded_critic",
+      "emergency_stop",
+      "emotional_intelligence",
+      "error_handler",
+      "evolution_dashboard",
+      "exec_protection_task",
+      "external_verifier",
+      "file_guardian",
+      "finalize_current_session",
+      "finalize_session",
+      "find_copaw_tool",
+      "find_critic_tools",
+      "fix_execution_state",
+      "fix_execution_state_v2",
+      "fix_execution_state_v3",
+      "fix_missing_steps",
+      "fix_registry_format",
+      "fix_state_signature",
+      "fix_state_with_substeps",
+      "fix_step_id_type",
+      "forced_protection_executor",
+      "get_workflow_steps",
+      "git_commit_helper",
+      "git_precommit_check",
+      "git_precommit_check_v4",
+      "guardian_auto_fix",
+      "health_001_checker",
+      "human_intent_understanding",
+      "improvement_executor",
+      "integrate_001_api",
+      "integrate_001_suite",
+      "integrate_002_data",
+      "integrity_checker",
+      "list_git_files",
+      "list_tools",
+      "mark_all_completed",
+      "mark_meta_task",
+      "mark_simplified_execution",
+      "memory_distiller",
+      "metacognition_monitor",
+      "next_001_advisor",
+      "note_summarizer",
+      "optimap_001_manager",
+      "parallel_tool_executor",
+      "penalty_system",
+      "penalty_system_v2",
+      "permission_validator",
+      "phase5_planner",
+      "pre_commit_checker",
+      "progressive_output",
+      "progress_bar",
+      "protected_py",
+      "protection_monitor",
+      "query_tools",
+      "quick_complete_workflow",
+      "read_steps",
+      "rebuild_registry",
+      "reg_agent_monitor",
+      "reg_antibypass",
+      "reg_auto_backup",
+      "reg_auto_critic_v7",
+      "reg_auto_protection",
+      "reg_confirmation_gate",
+      "reg_context_verify",
+      "reg_dashboard_fix",
+      "reg_diagnose",
+      "reg_fix_state_v3",
+      "reg_forced_protection",
+      "reg_guardian_fix",
+      "reg_mark_all",
+      "reg_phase4",
+      "reg_protection_phase2",
+      "reg_protection_phase3",
+      "reg_reward_stop",
+      "reg_risk_assessor",
+      "reg_rules_verifier",
+      "reg_safe_shell",
+      "reg_task",
+      "reg_task_analyzer",
+      "reg_tool_executor",
+      "reg_tool_selector",
+      "reg_update_step",
+      "reg_v10.1",
+      "reg_v10",
+      "reg_v7",
+      "reg_v8",
+      "reg_v9",
+      "reg_workflow_scheduler",
+      "renumber_steps",
+      "report_001_generator",
+      "report_002_export",
+      "report_003_template",
+      "research_001_topic",
+      "research_002_literature",
+      "restore_state",
+      "result_verifier",
+      "reward_system",
+      "risk_assessor",
+      "safe_git_executor",
+      "safe_shell_executor",
+      "sa_001_realtime_fetcher",
+      "sa_002_historical_downloader",
+      "sa_003_financial_collector",
+      "sa_004_sentiment_monitor",
+      "sa_005_indicator_calculator",
+      "sa_006_pattern_recognition",
+      "sa_007_trend_analysis",
+      "sa_008_support_resistance",
+      "sa_009_financial_ratios",
+      "sa_009_risk_management",
+      "sa_010_signal_generator",
+      "sa_010_valuation_model",
+      "sa_011_growth_analysis",
+      "sa_012_industry_analysis",
+      "sa_012_report_generator",
+      "sa_013_portfolio_risk",
+      "sa_014_alert_system",
+      "sa_015_market_regime",
+      "sa_016_sentiment_aggregator",
+      "sa_017_strategy_optimizer",
+      "sa_018_performance_attribution",
+      "sa_019_chart_generator",
+      "sa_020_report_generator",
+      "sa_021_dashboard",
+      "sa_023_trader",
+      "sa_024_api",
+      "sa_025_datasource",
+      "sa_026_realtime",
+      "sa_027_optimizer",
+      "sa_028_optimizer",
+      "sa_029_ai_signal",
+      "sa_030_sentiment",
+      "sa_031_report",
+      "sa_032_strategy",
+      "sa_034_risk",
+      "sa_035_executor",
+      "sa_036_analyzer",
+      "sa_037_api",
+      "search_shell_tools",
+      "self_corrector",
+      "self_goal_setter",
+      "session_compressor",
+      "session_end_audit",
+      "session_token_validator",
+      "show_new_registry",
+      "single_step_lock",
+      "smart_task_decomposer",
+      "state_monitor",
+      "state_protector",
+      "step1_context_verify",
+      "step_tracker",
+      "stock_analysis_quality_predictor",
+      "stock_auto_report",
+      "stock_dashboard",
+      "stock_data_cache",
+      "stock_optimize_action",
+      "stock_parallel_loader",
+      "stock_pipeline_enhanced",
+      "stock_realtime_alert",
+      "summary_generator",
+      "sync_registry",
+      "sync_registry_smart",
+      "task_analyzer",
+      "task_classifier",
+      "task_decomposer",
+      "temp_file_cleaner",
+      "tool_call_interceptor",
+      "tool_call_interceptor_v2",
+      "tool_call_tracker",
+      "tool_monitor",
+      "tool_selector",
+      "tool_self_learner",
+      "tool_wrapper",
+      "typing_indicator",
+      "update_execution_state",
+      "update_mandatory_workflow",
+      "update_registry_phase3",
+      "SA-003",
+      "update_registry_sa_phase2",
+      "update_registry_sa_phase2_final",
+      "update_registry_stock_brainstorm",
+      "update_registry_ux_phase3",
+      "update_state_for_mandatory",
+      "update_step_state",
+      "update_workflow_enforcement",
+      "user_preferences",
+      "util_001_string",
+      "util_002_file",
+      "util_003_datetime",
+      "ux_settings",
+      "verify_rebuild",
+      "verify_registry_update",
+      "verify_sa_tools",
+      "verify_state_types",
+      "verify_workflow_complete",
+      "verify_workflow_update",
+      "view_safe_shell",
+      "workflow_anomaly_detector",
+      "workflow_autoloader",
+      "workflow_auto_executor",
+      "workflow_cache",
+      "workflow_enforcer_v2",
+      "workflow_evolver",
+      "workflow_guardian_v2",
+      "workflow_health_dashboard",
+      "workflow_helper",
+      "workflow_integration",
+      "workflow_menu",
+      "workflow_optimizer",
+      "workflow_performance_monitor",
+      "workflow_progress_bar",
+      "workflow_recovery",
+      "workflow_scheduler",
+      "workflow_stats",
+      "research-001",
+      "sa_011_backtesting",
+      "sa_022_backtest",
+      "sa_033_backtest",
+      "workflow_self_test"
+    ]
+  },
+  "registry": {
+    "total_tools": 741,
+    "active": 58,
+    "inactive": 683,
+    "invalid": 291,
+    "invalid_tools": [
+      {
+        "tool_id": "brainstorm-define",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm-action",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm-filter",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm-prioritize",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto_recovery",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm_action",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm_define",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm_diverge",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fast_load",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "performance_analyzer",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "post_session_compress",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "pre_session_hook",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "session_end",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow_analyzer",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "tool_executor",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow_enforcer",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check_workflow_steps",
+        "missing_fields": [
+          "name",
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "context_verify",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fix-execution-state-v3",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "add-core-rules-to-workflow",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "add-missing-key-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "add-missing-tool-calls",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "add-mock-tool-calls",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "add-security-rules-to-registry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-doc-generator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-format-detector",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-retry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-todo-updater",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm-ai-assistant",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm-diverge",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm-mindmap",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm-quality-predictor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm-stock-analysis",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-all-existing-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-core-files",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-current-state",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-existing-tools-fixed",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-git-version",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-kept-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-kept-tools2",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-key-tools-exist",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-log",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-missing-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-registry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-registry-count",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-registry-format",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-registry-structure",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-restored",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-session",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-state-files",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-step-ids",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-tool-bypass",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-tool-files",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-tool-log",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-tool-registry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-tool-structure",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-workflow",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "check-workflow-steps",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "compare-count",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "complete-current-session",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "compression-scheduler",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "content-validator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "context-aware-assistant",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "context-verify",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "core-files-compressor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "core-rules-verifier",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "count-py-files",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "count-real-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "create-brainstorm-v3",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "create-dialogue-workflow",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "cross-session-memory",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "data-cache",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "data-source-manager",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "debug-registry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "debug-step-match",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "debug-workflow",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "debug-workflow-steps",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "diagnose-registry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "dialog-entry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "dialog-workflow-enforcer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "emotional-intelligence",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "error-handler",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "evolution-dashboard",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "exec-protection-task",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fast-load",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "finalize-current-session",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "finalize-session",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "find-copaw-tool",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "find-critic-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fix-execution-state",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fix-execution-state-v2",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fix-missing-steps",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fix-registry-format",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fix-state-signature",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fix-state-with-substeps",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "fix-step-id-type",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "get-workflow-steps",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "git-precommit-check-v4",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "guardian-auto-fix",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "human-intent-understanding",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "list-git-files",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "list-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "mark-all-completed",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "mark-meta-task",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "mark-simplified-execution",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "memory-distiller",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "note-summarizer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "phase5-planner",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "post-session-compress",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "pre-session-hook",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "progressive-output",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "progress-bar",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "query-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "quick-complete-workflow",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "read-steps",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "rebuild-registry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-agent-monitor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-antibypass",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-auto-backup",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-auto-critic-v7",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-auto-protection",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-confirmation-gate",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-context-verify",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-dashboard-fix",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-diagnose",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-fix-state-v3",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-forced-protection",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-guardian-fix",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-mark-all",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-protection-phase2",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-protection-phase3",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-reward-stop",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-risk-assessor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-rules-verifier",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-safe-shell",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-task",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-task-analyzer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-tool-executor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-tool-selector",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-update-step",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-v10.1",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-v10",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-v7",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-v8",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-v9",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reg-workflow-scheduler",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "renumber-steps",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "restore-state",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "safe-git-executor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-001-realtime-fetcher",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-002-historical-downloader",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-003-financial-collector",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-004-sentiment-monitor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-005-indicator-calculator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-006-pattern-recognition",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-007-trend-analysis",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-008-support-resistance",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-009-financial-ratios",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-009-risk-management",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-010-signal-generator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-010-valuation-model",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-011-backtesting",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-011-growth-analysis",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-012-industry-analysis",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-012-report-generator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-013-portfolio-risk",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-014-alert-system",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-015-market-regime",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-016-sentiment-aggregator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-017-strategy-optimizer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sa-018-performance-attribution",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "search-shell-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "self-corrector",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "self-goal-setter",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "session-compressor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "session-end",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "session-end-audit",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "show-new-registry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sitecustomize",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "state-monitor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "state-protector",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "step1-context-verify",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "stock-analysis-pipeline",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "stock-analysis-quality-predictor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "summary-generator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sync-registry",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "sync-registry-smart",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "task-classifier",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "task-decomposer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "temp-file-cleaner",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "tool-call-interceptor-v2",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "tool-executor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "tool-selector",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "tool-self-learner",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "tool-wrapper",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "typing-indicator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-execution-state",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-mandatory-workflow",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-registry-phase3",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-registry-sa-phase1",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-registry-sa-phase1-complete",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-registry-sa-phase2",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-registry-sa-phase2-final",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-registry-stock-brainstorm",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-registry-ux-phase3",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-state-for-mandatory",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-step-state",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "update-workflow-enforcement",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "user-preferences",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "ux-settings",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "verify-rebuild",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "verify-registry-update",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "verify-sa-tools",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "verify-state-types",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "verify-workflow-complete",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "verify-workflow-update",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "view-safe-shell",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-analyzer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-enforcer-v2",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-evolver",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-helper",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-optimizer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-performance-monitor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-scheduler",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-self-test",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "aai-scorer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "adaptive-workflow",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "agent-tool-monitor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "anti-bypass-engine",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-backup",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-fix-engine",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-memory-distiller",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-recovery",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-session-compressor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-training-engine",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "behavior-analyzer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "blockchain-logger",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "compliance-booster",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "compliance-dashboard",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "confirmation-gate",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "cron-enhanced",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "dynamic-goal-adjuster",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "dynamic-step-skipper",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "embedded-critic",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "emergency-stop",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "external-verifier",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "file-guardian",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "git-commit-helper",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "git-precommit-check",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "improvement-executor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "integrity-checker",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "metacognition-monitor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "parallel-tool-executor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "penalty-system",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "penalty-system-v2",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "performance-analyzer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "permission-validator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "pre-commit-checker",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "protected-py",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "protection-monitor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "result-verifier",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "reward-system",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "risk-assessor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "session-token-validator",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "single-step-lock",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "smart-task-decomposer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "state-snapshot",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "step-tracker",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "task-analyzer",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "tool-call-tracker",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "tool-monitor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-anomaly-detector",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-autoloader",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-auto-executor",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-cache",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-guardian-v2",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-health-dashboard",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-progress-bar",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-recovery",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-templates",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "brainstorm-stock-optimize",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "stock-optimize-action",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "stock-data-cache",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "stock-parallel-loader",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "stock-pipeline-enhanced",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "stock-auto-report",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "stock-realtime-alert",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "stock-dashboard",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "auto-step",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-menu",
+        "missing_fields": [
+          "file_path"
+        ]
+      },
+      {
+        "tool_id": "workflow-stats",
+        "missing_fields": [
+          "file_path"
+        ]
+      }
+    ]
+  },
+  "workflow": {
+    "files": [
+      {
+        "file": "workflow.json",
+        "status": "OK"
+      },
+      {
+        "file": "roadmap.json",
+        "status": "OK"
+      }
+    ],
+    "all_present": true
+  },
+  "protection": {
+    "files": [
+      {
+        "file": "30-scripts-tools/copaw_entry.py",
+        "exists": false,
+        "status": "MISSING"
+      },
+      {
+        "file": "30-scripts-tools/tool_executor.py",
+        "exists": false,
+        "status": "MISSING"
+      },
+      {
+        "file": "30-scripts-tools/auto_protection_layer.py",
+        "exists": false,
+        "status": "MISSING"
+      },
+      {
+        "file": ".STOP_FLAG",
+        "exists": false,
+        "status": "MISSING"
+      },
+      {
+        "file": ".lockdown_active",
+        "exists": false,
+        "status": "MISSING"
+      }
+    ],
+    "all_present": false
+  },
+  "health_score": 52.8,
+  "score_breakdown": {
+    "tools": 50.472334682860996,
+    "registry": 60.72874493927125,
+    "workflow": 100,
+    "protection": 0
+  },
+  "status": "CRITICAL"
+}

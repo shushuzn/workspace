@@ -1,0 +1,62 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-21T13:51:21.880588
+# ---
+[DEEP-PAPER-ANALYZER-001] Extracting: 40-TOOLS/knowledge-cards/01-KNOWLEDGE-CARDS/tests/test_pdfs/2603.09753v1.pdf
+================================================================================
+DEEP PAPER ANALYSIS REPORT
+================================================================================
+
+Paper: 40-TOOLS/knowledge-cards/01-KNOWLEDGE-CARDS/tests/test_pdfs/2603.09753v1.pdf
+Library: pdfplumber
+Total length: 63034 chars
+
+--------------------------------------------------------------------------------
+SECTION STRUCTURE
+--------------------------------------------------------------------------------
+  ABSTRACT: 3330 chars
+  DISCUSSION: 726 chars
+  METHODS: 5000 chars
+  RESULTS: 2780 chars
+  CONCLUSION: 5000 chars
+  REFERENCES: 5000 chars
+
+--------------------------------------------------------------------------------
+MAIN ARGUMENT (Abstract)
+--------------------------------------------------------------------------------
+Synthesizing from Corbett and Munneke (2025), who demonstrated that questions originating in human-
+computer interaction (HCI) and game design can be answered through the theoretical toolkit of cognitive
+science, this perspective argues that commercial videogames represent a largely underutilized research
+environment at the intersection of these two fields
+
+--------------------------------------------------------------------------------
+METHODOLOGY
+--------------------------------------------------------------------------------
+  Paradigm: experiment
+  Sample Size: Not specified
+  Cognitive Measures (5):
+    - attention
+    - memory
+    - working memory
+    - executive function
+    - precision
+
+--------------------------------------------------------------------------------
+KEY FINDINGS
+--------------------------------------------------------------------------------
+  - marked improvements on
+these tasks, while those trained on Tetris (a visually simple puzzle game) did not....
+  - this learning
+transferred broadly to untrained task....
+  - perceptual learning from commercial gameplay but showed that this learning
+transferred broadly to untrained task....
+
+--------------------------------------------------------------------------------
+LIMITATIONS & COUNTERARGUMENTS
+--------------------------------------------------------------------------------
+  - but an asset....
+  - this reductionist approach raises
+a question of whether we are studying cognition as it actually operates in the real world, or are we studying
+a poor...
+  - our focus is different....
+
+================================================================================

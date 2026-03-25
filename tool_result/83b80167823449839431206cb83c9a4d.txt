@@ -1,0 +1,44 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T00:45:38.743614
+# ---
+feishu-event-filters.json:8:>   "description": "Feishu webhook event filters - events to ignore"
+FEISHU-WEBHOOK-FILTER-GUIDE.md:5:> **Tool:** `feishu_webhook_filter.py`
+FEISHU-WEBHOOK-FILTER-GUIDE.md:17:> **Cause:** Feishu webhook receives emoji reaction events but has no processor for them.
+FEISHU-WEBHOOK-FILTER-GUIDE.md:25:> ### feishu_webhook_filter.py (9.7 KB)
+FEISHU-WEBHOOK-FILTER-GUIDE.md:46:> python feishu_webhook_filter.py --test
+FEISHU-WEBHOOK-FILTER-GUIDE.md:64:> python feishu_webhook_filter.py --list-filters
+FEISHU-WEBHOOK-FILTER-GUIDE.md:80:> python feishu_webhook_filter.py --add-filter "custom.event.type_v1"
+FEISHU-WEBHOOK-FILTER-GUIDE.md:85:> python feishu_webhook_filter.py --patch-logger
+FEISHU-WEBHOOK-FILTER-GUIDE.md:94:> **In your Feishu webhook handler:**
+FEISHU-WEBHOOK-FILTER-GUIDE.md:97:> from feishu_webhook_filter import FeishuEventFilter
+FEISHU-WEBHOOK-FILTER-GUIDE.md:102:> @app.route('/feishu/webhook', methods=['POST'])
+FEISHU-WEBHOOK-FILTER-GUIDE.md:103:> def webhook():
+FEISHU-WEBHOOK-FILTER-GUIDE.md:121:> from feishu_webhook_filter import patch_lark_oapi_logger
+FEISHU-WEBHOOK-FILTER-GUIDE.md:134:> from feishu_webhook_filter import FeishuEventFilter, create_event_processor
+FEISHU-WEBHOOK-FILTER-GUIDE.md:139:> @app.route('/feishu/webhook', methods=['POST'])
+FEISHU-WEBHOOK-FILTER-GUIDE.md:140:> def webhook():
+FEISHU-WEBHOOK-FILTER-GUIDE.md:165:>   "description": "Feishu webhook event filters - events to ignore"
+FEISHU-WEBHOOK-FILTER-GUIDE.md:181:> from feishu_webhook_filter import FeishuEventFilter
+FEISHU-WEBHOOK-FILTER-GUIDE.md:191:>     def handle_webhook(self, event_data):
+FEISHU-WEBHOOK-FILTER-GUIDE.md:216:> python feishu_webhook_filter.py --test
+FEISHU-WEBHOOK-FILTER-GUIDE.md:221:> from feishu_webhook_filter import FeishuEventFilter
+FEISHU-WEBHOOK-FILTER-GUIDE.md:279:> python feishu_webhook_filter.py --add-filter "dev.event.type_v1"
+FEISHU-WEBHOOK-FILTER-GUIDE.md:285:> python feishu_webhook_filter.py --patch-logger
+FEISHU-WEBHOOK-FILTER-GUIDE.md:291:> python 30-scripts-tools/feishu-tools/feishu_webhook_filter.py --patch-logger
+FEISHU-WEBHOOK-FILTER-GUIDE.md:321:> python feishu_webhook_filter.py --test
+FEISHU-WEBHOOK-FILTER-GUIDE.md:324:> python feishu_webhook_filter.py --list-filters
+FEISHU-WEBHOOK-FILTER-GUIDE.md:327:> python feishu_webhook_filter.py --patch-logger
+FEISHU-WEBHOOK-FILTER-GUIDE.md:329:> # 4. Integrate into your webhook handler
+FEISHU-WEBHOOK-FILTER-GUIDE.md:336:> **Impact:** Eliminates false error logs from Feishu webhook  
+feishu_api.py:35:>     from feishu_webhook_filter import FeishuEventFilter, patch_lark_oapi_logger
+feishu_webhook_filter.py:13:>     python feishu_webhook_filter.py --add-filter im.message.reaction.created_v1
+feishu_webhook_filter.py:14:>     python feishu_webhook_filter.py --list-filters
+feishu_webhook_filter.py:15:>     python feishu_webhook_filter.py --test
+feishu_webhook_filter.py:54:>     """Filter Feishu webhook events to suppress unwanted notifications."""
+feishu_webhook_filter.py:81:>             'description': 'Feishu webhook event filters - events to ignore',
+feishu_webhook_filter.py:116:>             event_data: Raw event data from Feishu webhook
+feishu_webhook_filter.py:145:>     Create event processor function for Feishu webhook.
+feishu_webhook_filter.py:147:>     This function should be integrated into your Feishu webhook handler.
+feishu_webhook_filter.py:151:>     from feishu_webhook_filter import FeishuEventFilter, create_event_processor
+feishu_webhook_filter.py:156:>     @app.route('/feishu/webhook', methods=['POST'])
+feishu_webhook_filter.py:157:>     def webhook():

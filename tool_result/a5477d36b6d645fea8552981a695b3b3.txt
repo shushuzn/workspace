@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-22T18:18:05.421563
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py  (lines 670-695 of 913)
+        return
+    
+    # Jin10 News
+    if args.jin10:
+        if args.symbols and len(args.symbols) == 1:
+            print(jin10_stock_news(args.symbols[0]))
+        else:
+            print(jin10_news_report())
+        return
+    
+    # Refresh Jin10 Cache
+    if args.refresh_jin10:
+        print("Refreshing Jin10 cache...")
+        from stock_pro.sentiment import fetch_jin10_news
+        news = fetch_jin10_news()
+        print(f"Refreshed {len(news)} Jin10 news items")
+        return
+    
+    # Chinese Financial News
+    if args.cnnews:
+        if args.symbols and len(args.symbols) == 1:
+            news = get_cn_news_for_stock(args.symbols[0])
+            report = f"# Chinese News: {args.symbols[0]}\n\n"
+            report += f"_Sources: Sina Finance, NetEase Money, Phoenix Finance_\n\n"
+            if news:
+                for i, n in enumerate(news[:15], 1):
+
+[218 more lines. Use start_line=696 to continue.]

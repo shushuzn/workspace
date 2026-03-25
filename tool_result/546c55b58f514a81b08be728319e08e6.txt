@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:48:28.923582
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 810-880 of 1100)
+        sector_count[s] = sector_count.get(s, 0) + 1
+    sector_str = " ".join([f"{k}({v})" for k, v in sorted(sector_count.items(), key=lambda x: -x[1])])
+    
+    # 来源统计
+    source_count = {}
+    for n in news_list:
+        src = source_map.get(n.get('source', ''), n.get('source', '')[:4])
+        source_count[src] = source_count.get(src, 0) + 1
+    source_str = " ".join([f"{k}({v})" for k, v in sorted(source_count.items(), key=lambda x: -x[1])[:5]])
+    
+    # 关键词统计
+    all_keywords = []
+    for n in news_list:
+        all_keywords.extend(n.get('keywords', []))
+    kw_count = {}
+    for kw in all_keywords:
+        kw_count[kw] = kw_count.get(kw, 0) + 1
+    top_keywords = " ".join([f"#{k}" for k, v in sorted(kw_count.items(), key=lambda x: -x[1])[:6]])
+    
+    # 股票代码统计
+    all_codes = []
+    for n in news_list:
+        all_codes.extend(n.get('codes', []))
+    codes_str = " ".join(all_codes[:8]) if all_codes else "-"
+    
+    # 情绪条形图
+    total = len(news_list)
+    bar_len = 20
+    if total > 0:
+        pos_len = int(len(positive) / total * bar_len)
+        neg_len = int(len(negative) / total * bar_len)
+        neu_len = bar_len - pos_len - neg_len
+        sentiment_bar = "[+" + "+" * pos_len + "=" * max(0, neu_len) + "-" * neg_len + "]"
+    else:
+        sentiment_bar = "[...]"
+    
+    # 市场影响预测
+    impact_prediction = ""
+    hot_sectors = [s for s, c in sorted(sector_count.items(), key=lambda x: -x[1]) if c >= 2]
+    if hot_sectors:
+        impact_prediction = "关注: " + " ".join(hot_sectors[:3])
+    
+    # 板块影响分析
+    sector_impact_list = analyze_sector_impact(news_list)
+    sector_impact_str = ""
+    if sector_impact_list:
+        impact_parts = []
+        for sector, score, impact in sector_impact_list[:3]:
+            if score > 0:
+                impact_parts.append(f"{sector}+{score}")
+            elif score < 0:
+                impact_parts.append(f"{sector}{score}")
+        sector_impact_str = " | ".join(impact_parts)
+    
+    # 风险等级
+    risk_level = get_risk_level(news_list)
+    risk_icon = "!" if risk_level == "高风险" else "~" if risk_level == "中风险" else "o"
+    
+    # 投资建议
+    suggestion = get_investment_suggestion(news_list)
+    
+    # 行业景气度
+    outlook = get_sector_outlook(news_list)
+    outlook_str = " ".join([f"{k}({v})" for k, v in outlook.items()]) if outlook else "-"
+    
+    # 时间戳
+    now = datetime.now().strftime('%m-%d %H:%M')
+    
+    # ==================== 构建消息 ====================
+    lines = []
+    
+
+[220 more lines. Use start_line=881 to continue.]

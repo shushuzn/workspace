@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-21T13:57:22.208418
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\user_metrics_001.py  (lines 170-200 of 209)
+        last_avg = sum(s.get("steps_completed", 0) / max(1, s.get("duration", 1)) 
+                      for s in last_third) / len(last_third)
+        
+        # 跨任务改进率
+        improvement = (last_avg - first_avg) / max(0.001, first_avg) * 100
+        metrics["metrics"]["transfer"]["cross_task_improvement"] = improvement
+        metrics["metrics"]["transfer"]["skill_retention"] = max(0, min(100, 80 + improvement * 0.5))
+        metrics["metrics"]["transfer"]["generalization_score"] = min(100, improvement * 2)
+        metrics["metrics"]["transfer"]["learning_velocity"] = improvement / len(recent_sessions)
+    
+    save_metrics(metrics)
+    return metrics["metrics"]
+
+
+def analyze_performance():
+    """
+    分析用户整体表现并生成报告
+    """
+    metrics = load_metrics()
+    
+    print("=" * 70)
+    print("用户表现分析报告")
+    print("=" * 70)
+    print(f"用户: {metrics['user_id']}")
+    print(f"总会话数: {metrics['total_sessions']}")
+    print(f"创建时间: {metrics['created_at']}")
+    print("-" * 70)
+    
+    # 注意力指标
+    att = metrics["metrics"]["attention"]
+    print("\n【注意力指标 (Attention)】")
+
+[9 more lines. Use start_line=201 to continue.]

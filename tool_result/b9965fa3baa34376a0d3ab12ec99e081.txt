@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:37:14.482526
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 1-50 of 325)
+#!/usr/bin/env python3
+"""
+NewsHub Core - 新闻抓取 (优化版)
+- 并行抓取
+- 缓存支持
+- 快速模式
+"""
+import sys
+import json
+import ssl
+import re
+import time
+import hashlib
+import urllib.request
+import xml.etree.ElementTree as ET
+from datetime import datetime
+from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor, as_completed
+
+sys.stdout.reconfigure(encoding='utf-8')
+BASE_DIR = Path(__file__).parent
+CONFIG_FILE = BASE_DIR / "sources.json"
+CACHE_FILE = BASE_DIR / ".news_cache.json"
+
+# 缓存 TTL: 5分钟
+CACHE_TTL = 300
+
+# ============================================================
+# 缓存
+# ============================================================
+
+def load_cache():
+    if CACHE_FILE.exists():
+        try:
+            with open(CACHE_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            pass
+    return {"data": [], "time": 0}
+
+def save_cache(news):
+    with open(CACHE_FILE, 'w', encoding='utf-8') as f:
+        json.dump({"data": news, "time": time.time()}, f, ensure_ascii=False)
+
+def get_cached(quiet=False):
+    cache = load_cache()
+    age = time.time() - cache.get('time', 0)
+    if age < CACHE_TTL:
+        if not quiet:
+            print(f"  💾 缓存: {len(cache['data'])} 条 ({age:.0f}s前)")
+
+[275 more lines. Use start_line=51 to continue.]

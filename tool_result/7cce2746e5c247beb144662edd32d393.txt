@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-22T20:47:43.692669
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\feishu-tools\feishu_api.py  (lines 195-230 of 492)
+        """Make API request with retry logic."""
+        last_error = None
+        
+        for attempt in range(retry):
+            try:
+                if method == 'GET':
+                    response = requests.get(url, params=params, headers=self._get_headers(), timeout=30)
+                elif method == 'POST':
+                    if files:
+                        response = requests.post(url, params=params, files=files, timeout=60)
+                    else:
+                        response = requests.post(url, params=params, json=data, headers=self._get_headers(), timeout=30)
+                else:
+                    raise ValueError(f"Unsupported method: {method}")
+                
+                response.raise_for_status()
+                result = response.json()
+                
+                # Check for API-level errors
+                if result.get('code') not in [0, '0']:
+                    if result.get('code') == 99991663:  # Token expired
+                        self.token_manager._token = None  # Force refresh
+                        if attempt < retry - 1:
+                            print(f"[API] Token expired, retrying with fresh token...")
+                            continue
+                    raise Exception(f"API error {result.get('code')}: {result.get('msg', 'Unknown error')}")
+                
+                return result
+                
+            except Exception as e:
+                last_error = e
+                print(f"[API] Attempt {attempt + 1}/{retry} failed: {e}")
+                if attempt < retry - 1:
+                    time.sleep(2 ** attempt)  # Exponential backoff
+        
+        raise Exception(f"All {retry} attempts failed. Last error: {last_error}")
+
+[262 more lines. Use start_line=231 to continue.]

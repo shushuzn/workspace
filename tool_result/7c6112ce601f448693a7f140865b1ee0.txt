@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-23T22:44:52.225896
+# ---
+D:\OpenClaw\workspace\memory\2026-03-23.md  (lines 1-100 of 580)
+# Memory - 2026-03-23
+
+## NewsHub Project - v2.1 Optimization Complete
+
+### Project Location
+`D:\OpenClaw\workspace\80-PROJECTS\NewsHub\`
+
+### Core Files
+- `news_fetcher.py` - Core news fetching (1138+ lines)
+- `news_feishu.py` - Feishu push integration
+- `news_analyzer.py` - LLM analyzer v2.0
+- `news_alerts.py` - Smart alerts system
+- `news_db.py` - SQLite history database
+- `news_report.py` - Daily report generator
+- `news_trends.py` - Trend analysis
+- `news_subscriptions.py` - Keyword subscriptions
+- `news_hub.py` - Unified entry point
+
+### Features Added Today
+
+| Feature | File | Status |
+|---------|------|--------|
+| News Clustering | news_fetcher.py | ✅ |
+| LLM Deep Analysis | news_analyzer.py | ✅ |
+| Smart Alerts (4-level) | news_alerts.py | ✅ |
+| SQLite Database | news_db.py | ✅ |
+| Daily Reports (HTML/MD) | news_report.py | ✅ |
+| Keyword Subscriptions | news_subscriptions.py | ✅ |
+| Trend Analysis | news_trends.py | ✅ |
+| Market Sentiment | news_fetcher.py | ✅ |
+| Watch Mode | news_hub.py | ✅ |
+
+### LLM Analysis Dimensions
+- sentiment: positive/negative/neutral
+- score: -100 to +100
+- markets: stock/forex/commodity/crypto/bond
+- urgency: critical/high/medium/low
+- timeframe: immediate/short/medium/long
+- entities: companies/people
+- risk_level: high/medium/low
+- action: buy/sell/hold/watch
+
+### Key Commands
+```bash
+# LLM Analysis
+python news_hub.py fetch --llm --limit 10
+
+# Market Sentiment
+python news_hub.py feishu market
+
+# Smart Alerts
+python news_hub.py feishu smart
+
+# Watch Mode
+python news_hub.py watch
+
+# Trends
+python news_hub.py trends
+```
+
+### Bugs Fixed
+- UnicodeEncodeError: Added `sys.stdout.reconfigure(encoding='utf-8')`
+- SQLite date function: Changed `date(ts, 'unixepoch')` to `strftime('%Y-%m-%d', ts, 'unixepoch')`
+- Duplicate code blocks in news_fetcher.py
+
+### Technical Notes
+- Ollama URL: `http://localhost:11434/api/generate`
+- Cache files: `.llm_cache.json`, `.news_cache.json`
+- Database: `news_history.db` (40KB)
+- Default subscriptions: 14 keywords
+
+### Session Notes
+- User asked to continue optimization multiple times
+- Added news clustering, smart alerts, database, reports, subscriptions, trends
+- Enhanced LLM analyzer with market sentiment analysis
+- Added "market" command to feishu push
+
+---
+
+## ⚠️ CRITICAL LESSON - 2026-03-23 (Late Session)
+
+### What Happened
+I accidentally BROKE news_fetcher.py while trying to fix an 8KB write_file limit issue.
+
+### Root Cause
+1. Tried to use `write_file` for a 42KB file (exceeds 8KB limit)
+2. File got truncated, causing syntax errors
+3. Multiple attempts to fix made it worse
+4. Eventually deleted the file trying to recreate it
+
+### User Response
+用户非常生气：「你把程序弄坏了，禁止使用write，写入soul」
+
+### Recovery Actions
+1. Created simplified 3.6KB version that partially works
+2. Fixed compatibility issues with news_feishu.py imports
+3. Working commands: `news_hub.py feishu test`, `stats`, `preview`
+
+### User's Final Demand
+「使用原来完整的程序，禁止精简，禁止write，严格执行」
+
+[480 more lines. Use start_line=101 to continue.]

@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:54:33.296352
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\analyze\quality_scorer.py  (lines 170-200 of 234)
+def rank_news_by_quality(news_list: List[Dict]) -> List[Dict]:
+    """按质量评分排序新闻"""
+    for news in news_list:
+        news["quality_score"] = calculate_quality_score(news)
+
+    return sorted(news_list, key=lambda x: x.get("quality_score", 0), reverse=True)
+
+
+def get_top_quality_news(news_list: List[Dict], limit: int = 10) -> List[Dict]:
+    """获取高质量新闻"""
+    ranked = rank_news_by_quality(news_list)
+    return ranked[:limit]
+
+
+def explain_score(news: Dict) -> str:
+    """解释评分细节"""
+    title = news.get("title", "")
+
+    parts = [
+        f"📰 {title[:40]}...",
+        f"",
+        f"质量总分: {news.get('quality_score', 0):.1f}/100",
+        f"",
+    ]
+
+    source_score = score_source_weight(news.get("source", ""))
+    parts.append(f"  来源权重: {source_score:.2f} ({news.get('source', '未知')})")
+
+    keyword_score = score_keyword_match(title)
+    parts.append(f"  关键词: {keyword_score:.2f}")
+
+
+[34 more lines. Use start_line=201 to continue.]

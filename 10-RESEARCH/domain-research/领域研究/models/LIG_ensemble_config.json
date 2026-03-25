@@ -1,0 +1,25 @@
+{
+  "ensemble_method": "Stacking",
+  "base_models": [
+    "GP",
+    "RF_MACE",
+    "GBT_CHGNet"
+  ],
+  "weights": {
+    "GP": 0.3620877127578168,
+    "RF_MACE": 0.32039663303303956,
+    "GBT_CHGNet": 0.3175156542091437
+  },
+  "best_strategy": "Stacking",
+  "performance": {
+    "r2": 0.7950804496215013,
+    "mae": 484.59762909208183,
+    "level": "GOOD"
+  },
+  "individual_performance": {
+    "GP": 0.7722940431161971,
+    "RF_MACE": 0.6833714661049648,
+    "GBT_CHGNet": 0.677226648963581
+  },
+  "optimization_date": "2026-03-06T11:18:51.385580"
+}

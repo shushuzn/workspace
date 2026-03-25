@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "analyses": [
+    {
+      "timestamp": "2026-03-20T00:57:46.469641",
+      "portfolio": "TEST_PORTFOLIO",
+      "rating": "Fair",
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_analyses": 1,
+    "portfolios_analyzed": 1
+  }
+}

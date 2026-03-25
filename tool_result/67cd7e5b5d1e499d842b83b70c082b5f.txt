@@ -1,0 +1,86 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:29:37.177771
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_hub.py  (lines 1-80 of 84)
+#!/usr/bin/env python3
+"""
+NewsHub - 新闻聚合推送入口
+"""
+import sys
+import subprocess
+from pathlib import Path
+
+sys.stdout.reconfigure(encoding='utf-8')
+
+BASE_DIR = Path(__file__).parent
+
+# 颜色
+CYAN = '\033[36m'
+GREEN = '\033[32m'
+YELLOW = '\033[33m'
+RESET = '\033[0m'
+BOLD = '\033[1m'
+
+
+def header(text):
+    print(f"\n{BOLD}{CYAN}{'─' * 50}{RESET}")
+    print(f"{BOLD}{CYAN}  {text}{RESET}")
+    print(f"{BOLD}{CYAN}{'─' * 50}{RESET}\n")
+
+
+def run(script, *args):
+    cmd = [sys.executable, BASE_DIR / script, *args]
+    return subprocess.run(cmd).returncode == 0
+
+
+def main():
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "help"
+    
+    if cmd == "feishu":
+        mode = sys.argv[2] if len(sys.argv) > 2 else "all"
+        header("Feishu Push")
+        run("news_feishu.py", mode)
+    
+    elif cmd == "qq":
+        mode = sys.argv[2] if len(sys.argv) > 2 else "status"
+        header("QQ Push")
+        run("news_to_qq.py", mode)
+    
+    elif cmd == "fetch":
+        header("Fetch News")
+        run("news_fetcher.py")
+    
+    elif cmd == "test":
+        header("Test All")
+        print(f"{YELLOW}Testing Feishu...{RESET}\n")
+        run("news_feishu.py", "all")
+        print(f"\n{YELLOW}Testing QQ...{RESET}\n")
+        run("news_to_qq.py", "status")
+    
+    elif cmd == "help":
+        header("NewsHub Help")
+        print(f"""
+  {BOLD}用法:{RESET}
+    python news_hub.py <command> [options]
+
+  {BOLD}命令:{RESET}
+    {GREEN}fetch{RESET}     抓取新闻（不推送）
+    {GREEN}feishu{RESET}    飞书推送
+    {GREEN}qq{RESET}        QQ推送
+    {GREEN}test{RESET}     测试所有
+    {GREEN}help{RESET}     显示帮助
+
+  {BOLD}示例:{RESET}
+    python news_hub.py fetch
+    python news_hub.py feishu all
+    python news_hub.py feishu digest
+    python news_hub.py feishu alert
+    python news_hub.py qq test
+    python news_hub.py qq jin10
+""")
+    else:
+        print(f"{YELLOW}Unknown: {cmd}{RESET}")
+        print(f"Run: {GREEN}python news_hub.py help{RESET}")
+
+
+[4 more lines. Use start_line=81 to continue.]

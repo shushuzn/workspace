@@ -1,0 +1,24 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T16:45:20.631127
+# ---
+Command failed with exit code 1.
+[stdout]
+
++==============================================================+
+|                    Stock PRO v12.0                          |
+|          Professional Stock Analysis Suite                  |
++==============================================================+
+
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py", line 767, in <module>
+    main()
+    ~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py", line 468, in main
+    print(get_top_picks_report(results))
+          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\picks.py", line 89, in get_top_picks_report
+    picks = top_picks(n)
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\picks.py", line 81, in top_picks
+    return sorted(picks, key=lambda x: x["score"], reverse=True)[:n]
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^
+TypeError: slice indices must be integers or None or have an __index__ method

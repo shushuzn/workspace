@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-21T19:25:43.658047
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\idle-empire\index.html  (lines 140-180 of 275)
+                </button>
+                <button class="nav-tab" data-tab="stats">
+                    <span class="nav-tab-icon">📊</span>
+                    <span class="nav-tab-text">统计</span>
+                </button>
+            </nav>
+            
+            <!-- Footer Actions -->
+            <div class="footer-actions">
+                <button class="btn btn-save" onclick="manualSave()">
+                    <span>💾</span> 保存游戏
+                </button>
+                <button class="btn btn-prestige" onclick="performPrestige()">
+                    <span>👑</span> 王朝重铸
+                </button>
+                <button class="btn btn-reset" onclick="if(confirm('确定要重置游戏吗？所有进度将丢失！')) resetGame()">
+                    <span>🔄</span> 重置游戏
+                </button>
+                <div id="save-status" class="save-status">未保存</div>
+            </div>
+        </aside>
+        
+        <!-- Main Content Area -->
+        <main class="main-content">
+            
+            <!-- Buildings Tab -->
+            <section id="tab-buildings" class="content-section active">
+                <div class="section-header">
+                    <h1 class="section-title">🏗️ 建筑</h1>
+                    <p class="section-subtitle">购买建筑自动获得金币收益</p>
+                    <div class="buy-mode-toolbar">
+                        <span class="buy-mode-label">购买模式</span>
+                        <button id="buy-mode-x1" class="buy-mode-btn active" onclick="setBuyMode('x1')">x1 (Q)</button>
+                        <button id="buy-mode-x10" class="buy-mode-btn" onclick="setBuyMode('x10')">x10 (W)</button>
+                        <button id="buy-mode-max" class="buy-mode-btn" onclick="setBuyMode('max')">MAX (E)</button>
+                    </div>
+                </div>
+                <div id="building-list" class="item-grid">
+                    <!-- Rendered by JS -->
+                </div>
+            </section>
+
+[95 more lines. Use start_line=181 to continue.]

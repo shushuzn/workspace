@@ -1,0 +1,35 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T10:38:09.193211
+# ---
+news_fetcher.py:316:          return False
+news_fetcher.py:317:  
+news_fetcher.py:318:  def analyze_with_llm(title):
+news_fetcher.py:319:>     """使用本地LLM深度分析新闻"""
+news_fetcher.py:320:      # 检查缓存 - 使用MD5保证一致性
+news_fetcher.py:321:      import hashlib
+news_fetcher.py:322:      title_hash = hashlib.md5(title.encode()).hexdigest()
+---
+news_fetcher.py:1044:          if args.llm:
+news_fetcher.py:1045:              news = enrich_with_llm(news, max_items=args.limit)
+news_fetcher.py:1046:          
+news_fetcher.py:1047:>         # 显示LLM深度分析结果
+news_fetcher.py:1048:          llm_news = [n for n in news if n.get('llm_summary')]
+news_fetcher.py:1049:          if llm_news:
+news_fetcher.py:1050:              print()
+---
+news_fetcher.py:1049:          if llm_news:
+news_fetcher.py:1050:              print()
+news_fetcher.py:1051:              print("=" * 50)
+news_fetcher.py:1052:>             print("  🤖 LLM 深度分析")
+news_fetcher.py:1053:              print("=" * 50)
+news_fetcher.py:1054:              
+news_fetcher.py:1055:              # 市场情绪
+---
+news_fetcher.py:1096:          if llm_news:
+news_fetcher.py:1097:              print()
+news_fetcher.py:1098:              print("=" * 50)
+news_fetcher.py:1099:>             print("  🤖 LLM 深度分析")
+news_fetcher.py:1100:              print("=" * 50)
+news_fetcher.py:1101:              
+news_fetcher.py:1102:              # 市场情绪
+---

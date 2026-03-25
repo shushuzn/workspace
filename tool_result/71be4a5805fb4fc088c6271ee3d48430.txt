@@ -1,0 +1,84 @@
+# tool_name: read_file
+# created_at: 2026-03-22T15:33:11.587014
+# ---
+# Active Skills Index
+
+| Skill | Version | Category | Description |
+|-------|---------|----------|-------------|
+| [workflow](workflow/) | v1.0.0 | workflow | Session management |
+| [coding](coding/) | v1.0.0 | programming | Universal coding workflow |
+| [stock-pro](stock-pro/) | v12.7 | finance | Stock analysis toolkit |
+| [pdf](pdf/) | - | document | PDF manipulation |
+| [xlsx](xlsx/) | - | document | Spreadsheet operations |
+| [docx](docx/) | - | document | Word document operations |
+| [pptx](pptx/) | - | document | PowerPoint operations |
+| [cron](cron/) | - | automation | Scheduled tasks |
+| [browser_visible](browser_visible/) | - | browser | Visible browser control |
+| [file_reader](file_reader/) | - | utility | File content reading |
+| [file-handling](file-handling/) | - | utility | File operations |
+| [guidance](guidance/) | - | utility | Installation guidance |
+| [himalaya](himalaya/) | - | communication | Email management |
+| [news](news/) | - | information | News lookup |
+| [agent-spectrum](agent-spectrum/) | - | analysis | Agent scoring framework |
+| [dingtalk_channel](dingtalk_channel/) | - | integration | DingTalk integration |
+
+---
+
+## Quick Reference
+
+### Invoke a Skill
+
+Skills are automatically loaded when relevant. Key phrases:
+
+| Skill | Trigger Phrases |
+|-------|-----------------|
+| coding | "write code", "debug", "refactor" |
+| stock-pro | "stock", "analyze", "portfolio" |
+| pdf | "pdf", "merge", "split" |
+| xlsx | "spreadsheet", "excel", "xlsx" |
+| docx | "word", "docx", "document" |
+| pptx | "powerpoint", "presentation", "slides" |
+| cron | "schedule", "cron", "automate" |
+| browser | "browser", "open page" |
+| news | "news", "latest" |
+| email | "email", "himalaya" |
+
+---
+
+## Skill Development
+
+### Create New Skill
+
+1. Create directory: `active_skills/<skill-name>/`
+2. Create `SKILL.md` with frontmatter:
+
+```yaml
+---
+name: skill-name
+description: |
+  Brief description. Use when: scenarios.
+license: MIT
+metadata:
+  version: "1.0.0"
+  category: category
+---
+
+# Skill Name
+
+## Content...
+```
+
+3. Add to this index
+
+### Skill Template
+
+See [coding/SKILL.md](coding/) for template.
+
+---
+
+## Updates
+
+| Date | Skill | Change |
+|------|-------|--------|
+| 2026-03-22 | coding | Created |
+| 2026-03-22 | stock-pro | v12.7 - 20 fixes |

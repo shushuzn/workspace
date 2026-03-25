@@ -1,0 +1,29 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T11:31:18.118333
+# ---
+ Volume in drive D has no label.
+ Volume Serial Number is 0E0F-B1B8
+
+ Directory of D:\OpenClaw\workspace\80-PROJECTS\NewsHub
+
+2026/03/23  10:05               461 download_model.py
+2026/03/23  01:23            13,356 feishu_tools.py
+2026/03/23  11:16               128 gen_new.py
+2026/03/23  10:23             8,319 news_alerts.py
+2026/03/23  10:31            14,421 news_analyzer.py
+2026/03/23  10:27             8,240 news_db.py
+2026/03/23  10:34            32,772 news_feishu.py
+2026/03/23  11:25            14,784 news_fetcher.py
+2026/03/23  10:28             4,412 news_hub.py
+2026/03/23  10:19            11,012 news_report.py
+2026/03/23  10:26             7,838 news_subscriptions.py
+2026/03/23  00:58             5,297 news_to_qq.py
+2026/03/23  10:27             6,251 news_trends.py
+2026/03/23  11:15                56 nf.py
+2026/03/23  11:13                 8 p.py
+2026/03/23  09:43             9,126 rss_server.py
+2026/03/23  09:45             4,806 scheduler.py
+2026/03/23  11:18                14 temp_gen.py
+2026/03/23  11:13                 3 test2.py
+              19 File(s)        141,304 bytes
+               0 Dir(s)  356,598,697,984 bytes free

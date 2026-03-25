@@ -1,0 +1,20 @@
+{
+  "flow_id": "20260318-universal-workflow-001",
+  "task": "\"Optimize Phase 4\"",
+  "description": "Task started via copaw_entry.py",
+  "started_at": "2026-03-20T18:10:15.319970+08:00",
+  "current_step": 0,
+  "total_steps": 17,
+  "status": "failed",
+  "step_status": {},
+  "completed_steps": [],
+  "completion_percentage": 0,
+  "workflow_compliance": false,
+  "session_id": "session-20260320181015",
+  "entry_point": "copaw_entry.py",
+  "mandatory_execution": true,
+  "signature": "8c15088039d137acdb8f8077ba30703569ba2e5d9dcaa9beb94cf8582f2daff3",
+  "protection_enabled": true,
+  "ended_at": "2026-03-20T18:10:15.332044+08:00",
+  "duration_seconds": 0.012074
+}

@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-22T01:56:24.472881
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_001.py  (lines 145-180 of 411)
+    # 简化DCF：使用Gordon Growth Model
+    # 假设 FCF/EPS = 0.85 (85% conversion)
+    fcf_per_share = eps_current * 0.85
+    dcf_value = fcf_per_share * (1 + growth_rate) / (0.10 - 0.03)
+    
+    # 综合估值：PE法60% + DCF法40%
+    target = pe_valuation * 0.6 + dcf_value * 0.4
+    
+    # 上涨空间
+    upside = (target - quote.price) / quote.price * 100
+    
+    # 评级
+    if upside > 25:
+        rating = "STRONG_BUY"
+    elif upside > 15:
+        rating = "BUY"
+    elif upside > -5:
+        rating = "HOLD"
+    else:
+        rating = "SELL"
+    
+    target = (dcf * 0.6 + pe_valuation * 0.4)
+    upside = (target - quote.price) / quote.price * 100
+    
+    if upside > 20:
+        rating = "STRONG_BUY"
+    elif upside > 10:
+        rating = "BUY"
+    elif upside > -10:
+        rating = "HOLD"
+    else:
+        rating = "SELL"
+    
+    return ValuationResult(
+        pe_current=quote.pe_ratio,
+        pe_target=pe_target,
+
+[231 more lines. Use start_line=181 to continue.]

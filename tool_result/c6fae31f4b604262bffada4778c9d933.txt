@@ -1,0 +1,52 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T15:22:31.144546
+# ---
+Command failed with exit code 1.
+[stdout]
+  Archived: aapl_deep_research.py
+  Archived: aapl_full_research.py
+  Archived: analyze_duplicates.py
+  Archived: archive_stock_pro.py
+  Archived: build_pro.py
+  Archived: build_report.py
+  Archived: check_remaining.py
+  Archived: cleanup_final.py
+  Archived: cleanup_tools.py
+  Archived: compare_reg_funcs.py
+  Archived: create_stock_pro_v4.py
+  Archived: cursor_code_executor.py
+  Archived: cursor_collab.py
+  Archived: cursor_integration.py
+  Archived: debug_args.py
+  Archived: deep_scan_reg.py
+  Archived: detailed_review.py
+  Archived: enhance_coding.py
+  Archived: find_orphans.py
+  Archived: find_version_dups.py
+  Archived: FOUR_STAGE_TEMPLATE.py
+  Archived: git_push_status.py
+  Archived: git_stock_pro.py
+  Archived: install_all_enhancements.py
+  Archived: phase2_delete.py
+  Archived: phase3_delete.py
+  Archived: phase4_delete.py
+  Archived: release_stock_pro.py
+  Archived: review_list.py
+  Archived: sa_aapl_analysis.py
+  Archived: scan_review_files.py
+  Archived: set_cursor_default.py
+  Archived: set_cursor_default_editor.py
+  Archived: test_fetch.py
+  Archived: test_nargs.py
+  Archived: tool_call_interceptor.py
+  Archived: tool_naming_convention.py
+  Archived: verify_cursor_default.py
+  Archived: write_helper.py
+
+Archived 39 files
+
+Remaining in 30-scripts-tools/:
+[stderr]
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\cleanup_final.py", line 36, in <module>
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f4c1' in position 2: illegal multibyte sequence

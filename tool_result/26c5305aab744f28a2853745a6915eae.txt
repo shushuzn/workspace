@@ -1,0 +1,35 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:50:03.394943
+# ---
+    """Get all unique sectors"""
+    return sorted(set(SECTORS.values()))
+
+
+def sector_report(results):
+    """Generate sector analysis report"""
+    sectors = {}
+    
+    for r in results:
+        sym = r["symbol"]
+        sector = get_sector(sym)
+        if sector not in sectors:
+            sectors[sector] = []
+        sectors[sector].append(r)
+    
+    report = "# Sector Analysis\n\n"
+    
+    for sector in sorted(sectors.keys()):
+        stocks = sectors[sector]
+        avg_score = sum(s["score"] for s in stocks) / len(stocks)
+        best = max(stocks, key=lambda x: x["score"])
+        
+        report += f"## {sector} ({len(stocks)} stocks)\n"
+        report += f"- Avg Score: {avg_score:.0f}\n"
+        report += f"- Best: {best['symbol']} ({best['score']}/100)\n"
+        report += "| Symbol | Price | Score | Upside | Rating |\n"
+        report += "|--------|-------|-------|--------|--------|\n"
+        for s in sorted(stocks, key=lambda x: x["score"], reverse=True):
+            report += f"| {s['symbol']} | ${s['price']:.2f} | {s['score']} | {s['upside']:+.1f}% | {s['rating']} |\n"
+        report += "\n"
+    
+    return report

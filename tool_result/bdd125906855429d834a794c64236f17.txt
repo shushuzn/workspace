@@ -1,0 +1,23 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T11:44:29.276872
+# ---
+[master 24c4918] feat: stock_pro 新闻聚合和实时数据功能
+ 19 files changed, 2927 insertions(+)
+ create mode 100644 30-scripts-tools/stock_pro/check_jin10_detail.py
+ create mode 100644 30-scripts-tools/stock_pro/check_jin10_flash.py
+ create mode 100644 30-scripts-tools/stock_pro/check_jin10_flash_page.py
+ create mode 100644 30-scripts-tools/stock_pro/check_jin10_free_api.py
+ create mode 100644 30-scripts-tools/stock_pro/check_jin10_subdomains.py
+ create mode 100644 30-scripts-tools/stock_pro/dash_app_v3.py
+ create mode 100644 30-scripts-tools/stock_pro/fast_news.py
+ create mode 100644 30-scripts-tools/stock_pro/fetch_jin10_flash_news.py
+ create mode 100644 30-scripts-tools/stock_pro/news_api.py
+ create mode 100644 30-scripts-tools/stock_pro/news_collector.py
+ create mode 100644 30-scripts-tools/stock_pro/realtime_news.py
+ create mode 100644 30-scripts-tools/stock_pro/rss_news.py
+ create mode 100644 30-scripts-tools/stock_pro/rss_server.py
+ create mode 100644 30-scripts-tools/stock_pro/show_all_rss.py
+ create mode 100644 30-scripts-tools/stock_pro/show_jin10_all.py
+ create mode 100644 30-scripts-tools/stock_pro/show_jin10_rss.py
+ create mode 100644 30-scripts-tools/stock_pro/test_server.bat
+ create mode 100644 30-scripts-tools/stock_pro/ui_components.py

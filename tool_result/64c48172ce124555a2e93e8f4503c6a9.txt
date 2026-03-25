@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T09:56:00.882894
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 440-490 of 1005)
+    if q["peg"] < 1.0:
+        score += 15
+    elif q["peg"] < 1.5:
+        score += 8
+    
+    return min(max(score, 0), 100)
+
+def calc_technical(q):
+    """Calculate where current valuation sits in historical context"""
+    pe_hist = PE_HIST.get(sym, {"curr": q["pe"], "low": 15, "high": 35, "avg": 25})
+    
+    curr_pe = q["pe"]
+    low_pe = pe_hist["low"]
+    high_pe = pe_hist["high"]
+    avg_pe = pe_hist["avg"]
+    
+    # Percentile position
+    if high_pe > low_pe:
+        pct = (curr_pe - low_pe) / (high_pe - low_pe) * 100
+        pct = max(0, min(100, pct))
+    else:
+        pct = 50
+    
+    # Assessment
+    if pct < 20:
+        assessment = "Deep Value (Historical Discount)"
+    elif pct < 40:
+        assessment = "Below Average (Attractive)"
+    elif pct < 60:
+        assessment = "Fair Value"
+    elif pct < 80:
+        assessment = "Above Average (Expensive)"
+    else:
+        assessment = "Premium (Very Expensive)"
+    
+    return {
+        "curr_pe": curr_pe,
+        "low_pe": low_pe,
+        "avg_pe": avg_pe,
+        "high_pe": high_pe,
+        "percentile": pct,
+        "assessment": assessment,
+    }
+
+def calc_cash_flow_analysis(q, fin):
+    """Analyze cash flow quality"""
+    price = q["price"]
+    fcf_yield = fin.get("fcf_yield", 0.03)
+    div_yield = fin.get("div_yield", 0)
+    payout = fin.get("payout", 0)
+    
+
+[515 more lines. Use start_line=491 to continue.]

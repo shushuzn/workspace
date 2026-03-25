@@ -1,0 +1,58 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:33:18.245265
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_feishu.py  (lines 509-560 of 665)
+    feishu = load_feishu_config()
+    card = build_sentiment_card(pos_news, neg_news)
+    result = send_card(token, feishu.get('default_receive_id', ''), card)
+    
+    if result.get('code') == 0:
+        for n in pos_news + neg_news:
+            history.append(n['title'])
+        save_history(history)
+        ok("情感分析已发送")
+        add_log('sentiment', 1, len(pos_news) + len(neg_news))
+        return 1
+    else:
+        error(f"发送失败: {result.get('msg', 'Unknown')}")
+        return 0
+
+def build_summary_card(news_list):
+    """构建摘要卡片"""
+    # 分类统计
+    cats = {}
+    for n in news_list:
+        cat = n.get('category', 'other')
+        cats[cat] = cats.get(cat, 0) + 1
+    
+    # 情感统计
+    sentiments = {'positive': 0, 'negative': 0, 'neutral': 0}
+    for n in news_list:
+        s = n.get('sentiment', 'neutral')
+        sentiments[s] = sentiments.get(s, 0) + 1
+    
+    # 重要性统计
+    imps = {'critical': 0, 'high': 0, 'medium': 0, 'low': 0}
+    for n in news_list:
+        imp = n.get('importance_level', 'low')
+        imps[imp] = imps.get(imp, 0) + 1
+    
+    cat_names = {"stock": "📈股市", "forex": "💱外汇", "commodity": "🛢️商品", "macro": "🏛️宏观", "trade": "⚖️贸易", "tech": "💻科技", "china": "🇨🇳中国", "us": "🇺🇸美国", "crypto": "₿加密", "energy": "⚡能源"}
+    cat_list = [f"{cat_names.get(k, k)}: {v}" for k, v in sorted(cats.items(), key=lambda x: -x[1])[:5]]
+    
+    return {
+        "header": {"title": {"tag": "plain_text", "content": f"📊 {datetime.now().strftime('%H:%M')} 新闻摘要"}, "template": "blue"},
+        "elements": [
+            {"tag": "markdown", "content": f"**总新闻:** {len(news_list)} 条"},
+            {"tag": "markdown", "content": f"**🟢 利好:** {sentiments['positive']} | **🔴 利空:** {sentiments['negative']} | **⚪ 中性:** {sentiments['neutral']}"},
+            {"tag": "markdown", "content": f"**🔴 危机:** {imps['critical']} | **🟠 重要:** {imps['high']} | **🟡 一般:** {imps['medium']}"},
+            {"tag": "hr"},
+            {"tag": "markdown", "content": "**分类:** " + " | ".join(cat_list[:4])},
+            {"tag": "hr"},
+            {"tag": "div", "text": {"tag": "lark_md", "content": "📱 NewsHub · 自动摘要"}}
+        ]
+    }
+
+def cmd_summary():
+
+[105 more lines. Use start_line=561 to continue.]

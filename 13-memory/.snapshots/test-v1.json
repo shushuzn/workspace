@@ -1,0 +1,31 @@
+{
+  "version": "test-v1",
+  "timestamp": "2026-03-20T23:32:07.196828",
+  "files": {
+    "SOUL.md": {
+      "hash": "538908fa64be3451b787bd61a746b919",
+      "size": 914,
+      "lines": 70
+    },
+    "USER.md": {
+      "hash": "bedd8c40ffaf72a97c449c3e71b3fc8e",
+      "size": 7717,
+      "lines": 307
+    },
+    "AGENTS.md": {
+      "hash": "0121daeeeb7c569ce56acf81639258fc",
+      "size": 5199,
+      "lines": 204
+    },
+    "TOOLS.md": {
+      "hash": "183cc1780015ad28f12c986f9c3af619",
+      "size": 5019,
+      "lines": 220
+    },
+    "MEMORY.md": {
+      "hash": "74c858c50e2d26683f6b52fc4281ce7a",
+      "size": 12318,
+      "lines": 417
+    }
+  }
+}

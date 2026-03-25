@@ -1,0 +1,80 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T09:47:52.858163
+# ---
+
+==================================================
+  NewsHub Fetcher
+==================================================
+
+  ▶ Time: 2026-03-23 09:47:47
+
+  ▶ 并行抓取 4 个源...
+  ✓ 新浪财经: +15
+  ✓ Investing: +10
+  ✓ Seeking Alpha: +7
+  ✓ CNBC: +15
+
+──────────────────────────────────────────────────
+  📊 Total: 47  ⏱️ 1.4s
+     新浪财经: 15
+     Investing: 10
+     Seeking Alpha: 7
+     CNBC: 15
+──────────────────────────────────────────────────
+
+
+📊 分类统计:
+  📰 other: 39
+  💻 tech: 2
+  🇺🇸 us: 2
+  🇨🇳 china: 2
+  📈 stock: 1
+  ⚖️ trade: 1
+
+💡 情感分析:
+  🟢 利好: 0
+  🔴 利空: 1
+  ⚪ 中性: 46
+
+⚡ 重要性:
+  🔴 critical: 2
+  🟠 high: 0
+  🟡 medium: 0
+  ⚪ low: 45
+
+📰 来源统计:
+  CNBC: 15
+  新浪财经: 15
+  Investing: 10
+  Seeking Alpha: 7
+
+  1. CNBC
+     OpenClaw's ChatGPT moment sparks concern that AI models are ...
+     https://www.cnbc.com/2026/03/21/openclaw-chatgpt-moment-sparks-concern-ai-models-becoming-commodities.html
+  2. CNBC
+     David Zaslav’s WBD-Paramount deal payout highlights new 'gol...
+     https://www.cnbc.com/2026/03/20/wbd-david-zaslav-pay-paramount.html
+  3. CNBC
+     From satellites to space data centers: Why low earth orbit i...
+     https://www.cnbc.com/2026/03/22/why-low-earth-orbit-is-attracting-billions-in-investment.html
+  4. CNBC
+     Why Spotify AI more than music will be the secret to keeping...
+     https://www.cnbc.com/2026/03/22/spotify-apple-amazon-streaming-music-ai.html
+  5. CNBC
+     A Netflix cooking show is changing how people travel — and r...
+     https://www.cnbc.com/2026/03/23/culinary-class-wars-netflix-show-causes-food-tourism-increase.html
+  6. CNBC
+     Wealthy consumers are turning to jewelry as an investment, e...
+     https://www.cnbc.com/2026/03/22/wealthy-consumers-invest-in-jewelry-amid-rising-uncertainty-market-volatility.html
+  7. CNBC
+     Not just buying 'things': Why China's emotional economy is o...
+     https://www.cnbc.com/2026/03/23/chinas-emotional-economy-is-on-the-rise.html
+  8. CNBC
+     How CNBC Cures is bringing rare disease stories to a nationa...
+     https://www.cnbc.com/2026/03/20/how-cnbc-cures-is-bringing-rare-disease-stories-to-a-national-audience.html
+  9. CNBC
+     Former special counsel Robert Mueller has died at 81...
+     https://www.cnbc.com/2026/03/21/robert-mueller-died-at-81.html
+  10. CNBC
+     Here are 4 big things we're watching in the stock market thi...
+     https://www.cnbc.com/2026/03/22/here-are-4-big-things-were-watching-in-the-stock-market-this-week.html

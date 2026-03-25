@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T18:29:44.365121
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\rss_server.py  (lines 70-120 of 246)
+                        "source": "金十数据"
+                    })
+        except:
+            pass
+    
+    return news
+
+class Cache:
+    def __init__(self):
+        CACHE_DIR.mkdir(exist_ok=True)
+        self.news = []
+        self.last_update = 0
+    
+    def save(self, news):
+        self.news = news
+        self.last_update = time.time()
+        with open(CACHE_DIR / "cache.json", "w", encoding="utf-8") as f:
+            json.dump({"news": news, "t": self.last_update}, f, ensure_ascii=False)
+    
+    def load(self):
+        try:
+            with open(CACHE_DIR / "cache.json", "r", encoding="utf-8") as f:
+                d = json.load(f)
+            self.news = d.get("news", [])
+            self.last_update = d.get("t", 0)
+            return True
+        except:
+            return False
+
+async def fetch(session, url):
+    try:
+        async with session.get(url, timeout=aiohttp.ClientTimeout(total=15)) as r:
+            return await r.text()
+    except:
+        return ""
+
+def parse(text):
+    news = []
+    for item in re.findall(r'<item[^>]*>(.*?)</item>', text, re.DOTALL):
+        t = re.search(r'<title[^>]*>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</title>', item)
+        if not t:
+            continue
+        title = unescape(t.group(1)).strip()
+        if len(title) < 10:
+            continue
+        l = re.search(r'<link[^>]*href=["\']([^"\']+)["\']', item)
+        d = re.search(r'<description[^>]*>(?:<!\[CDATA\[)?(.*?)(?:\]\]>)?</description>', item)
+        p = re.search(r'<pubDate>(.*?)</pubDate>', item)
+        content = unescape(re.sub(r'<[^>]+>', '', d.group(1) if d else "")).strip()
+        date = p.group(1)[:25] if p else ""
+        try:
+
+[126 more lines. Use start_line=121 to continue.]

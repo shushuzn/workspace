@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:27:59.659236
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 230-270 of 465)
+        
+        # 网易格式: 直接是数组
+        elif isinstance(data, list):
+            for item in data:
+                title = item.get('title', '')
+                url = item.get('docurl', '') or item.get('url', '')
+                if title and url:
+                    items.append({"title": title, "url": url})
+        
+        # 通用格式
+        elif 'data' in data and isinstance(data['data'], list):
+            for item in data['data']:
+                title = item.get('title', '')
+                url = item.get('url', '') or item.get('link', '')
+                if title and url:
+                    items.append({"title": title, "url": url})
+        
+        return items
+    except Exception as e:
+        print(f"[WARN] JSON failed: {e}")
+        return []
+
+def cmd_fetch(args):
+    print("[INFO] Fetching news...")
+    data = NewsData()
+    total_new = 0
+    
+    for source in CONFIG["news"]["sources"]:
+        print(f"  From {source['name']}...")
+        if source["type"] == "rss":
+            items = fetch_rss(source["url"])
+        else:
+            items = fetch_json(source["url"])
+        
+        for item in items[:CONFIG["news"]["max_per_fetch"]]:
+            if data.add_news(item["title"], item["url"], source["name"]):
+                total_new += 1
+                print(f"    + {item['title'][:40]}...")
+    
+    data.data["stats"]["last_fetch"] = datetime.now().isoformat()
+    data.save()
+
+[195 more lines. Use start_line=271 to continue.]

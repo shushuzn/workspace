@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:45:05.330487
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\screener.py  (lines 1-50 of 60)
+"""Stock screener - Optimized v12.8"""
+from .core import A, F, P, B, E, calc_score, analyze_multiple_parallel
+
+class StockScreener:
+    def __init__(self, min_score=60, min_upside=15, max_pe=40):
+        self.min_score = min_score
+        self.min_upside = min_upside
+        self.max_pe = max_pe
+    
+    def screen(self, live=True):
+        """Screen stocks using parallel analysis"""
+        symbols = list(F.keys())
+        
+        # Use parallel analysis for speed
+        if live:
+            results_dict = analyze_multiple_parallel(symbols, max_workers=10)
+        else:
+            results_dict = {}
+            for sym in symbols:
+                from .core import analyze
+                results_dict[sym] = analyze(sym)
+        
+        results = []
+        for sym, data in results_dict.items():
+            if not data:
+                continue
+            score = data.get("score", 0)
+            upside = data.get("upside", 0)
+            pe = data.get("pe", 999)
+            
+            if score >= self.min_score and upside >= self.min_upside and pe <= self.max_pe:
+                results.append({
+                    "symbol": sym,
+                    "price": data.get("price", 0),
+                    "target": data.get("target", 0),
+                    "upside": upside,
+                    "score": score,
+                    "pe": pe,
+                    "peg": data.get("peg", 5),
+                    "roe": data.get("roe", 0),
+                    "fcf": data.get("fcf", 0) * 100,
+                    "div": data.get("div", 0),
+                    "rating": data.get("rating_int", "HOLD"),
+                })
+        
+        results.sort(key=lambda x: x["score"], reverse=True)
+        return results
+    
+    def show(self, live=False):
+        results = self.screen(live)
+
+[10 more lines. Use start_line=51 to continue.]

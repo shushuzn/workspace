@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-22T13:23:29.676783
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\integrations.py  (lines 25-50 of 95)
+            w.writerow([r['symbol'], r['price'], r['target'], f"{r['upside']:.1f}%", r['score'], r['rating'], f"{r['pe']:.1f}", f"{r['roe']:.1f}", r.get('source', 'unknown')])
+    return f"[CSV] Exported {len(results)} stocks"
+
+def export_xlsx(results, filename=None):
+    try: import openpyxl
+    except ImportError: return "[Excel] pip install openpyxl"
+    if not filename: filename = OUTPUT / f"stocks_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+    wb = openpyxl.Workbook(); ws = wb.active
+    ws.append(["Symbol", "Price", "Target", "Upside", "Score", "Rating"])
+    for r in results: ws.append([r['symbol'], r['price'], r['target'], r['upside'], r['score'], r['rating']])
+    wb.save(filename)
+    return f"[Excel] Exported {len(results)} stocks"
+
+def save_db(results):
+    conn = sqlite3.connect(DB_FILE); c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS stocks (symbol TEXT, price REAL, target REAL, upside REAL, score INTEGER, rating TEXT, fetched_at TEXT)''')
+    for r in results:
+        c.execute('''INSERT INTO stocks VALUES (?,?,?,?,?,?,?)''', (r['symbol'], r['price'], r['target'], r['upside'], r['score'], r['rating'], r.get('fetched_at', datetime.now().isoformat())))
+    conn.commit(); conn.close()
+    return f"[DB] Saved {len(results)} stocks"
+
+def gen_dashboard(results):
+    if not results: return "[Dashboard] No data"
+    fetched = results[0].get('fetched_at', datetime.now().isoformat())
+    avg_score = sum(r['score'] for r in results) / len(results)
+    avg_upside = sum(r['upside'] for r in results) / len(results)
+
+[45 more lines. Use start_line=51 to continue.]

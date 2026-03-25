@@ -1,0 +1,33 @@
+{
+  "version": "1.0",
+  "monitoring_sessions": [
+    {
+      "timestamp": "2026-03-20T00:30:47.214809",
+      "symbol": "AAPL",
+      "articles": 31,
+      "sentiment": "negative",
+      "score": -0.235
+    },
+    {
+      "timestamp": "2026-03-20T00:30:47.218904",
+      "symbol": "AAPL",
+      "articles": 5,
+      "sentiment": "negative",
+      "score": -0.432
+    },
+    {
+      "timestamp": "2026-03-20T00:30:47.222250",
+      "symbol": "AAPL",
+      "articles": 5,
+      "sentiment": "neutral",
+      "score": -0.034
+    }
+  ],
+  "stats": {
+    "total_sessions": 3,
+    "total_articles": 41,
+    "positive": 10,
+    "neutral": 9,
+    "negative": 22
+  }
+}

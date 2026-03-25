@@ -1,0 +1,61 @@
+# tool_name: read_file
+# created_at: 2026-03-22T20:51:19.612351
+# ---
+    backup = BACKUP_SOURCES.get(cat, "")
+    
+    for src in [url, backup]:
+        if not src:
+            continue
+        try:
+            items = fetch_rss_with_url(src) if '36kr' in src else fetch_json_with_url(src)
+            if items:
+                return items
+        except Exception as e:
+            print(f"    [!] {cat}: {e}")
+    return []
+
+
+def filter_duplicates(items, history):
+    """过滤重复"""
+    new_items = []
+    for item in items:
+        if not is_duplicate(item["title"], history):
+            item["hash"] = hash_text(item["title"])
+            new_items.append(item)
+    return new_items
+
+
+def check_keywords(items, keywords):
+    """检查关键词匹配"""
+    alerts = []
+    for item in items:
+        for kw in keywords:
+            if kw.lower() in item["title"].lower():
+                item["keyword"] = kw
+                alerts.append(item)
+                break
+    return alerts
+
+
+# ============================================================
+# 飞书发送
+# ============================================================
+
+def get_receivers():
+    """获取接收者列表"""
+    # 优先使用配置的receivers
+    if CONFIG["receivers"]:
+        return CONFIG["receivers"]
+    
+    # 读取飞书配置中的默认接收者
+    try:
+        with open(FEISHU_CONFIG, 'r') as f:
+            cfg = json.load(f)
+            rid = cfg.get("default_receive_id")
+            return [rid] if rid else []
+    except:
+        return []
+
+
+def send_card(title: str, elements: List, receive_id: str = None):
+   

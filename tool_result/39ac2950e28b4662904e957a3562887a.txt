@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:19:31.218271
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 1-100 of 2270)
+#!/usr/bin/env python3
+import json, urllib.request
+from pathlib import Path
+from datetime import datetime
+
+WORKSPACE = Path("D:/OpenClaw/workspace")
+OUTPUT = WORKSPACE / "50-reports" / "stocks"
+OUTPUT.mkdir(parents=True, exist_ok=True)
+
+ANALYST = {
+    # Technology
+    "META":  {"target": 864, "rating": "Overweight", "num": 55},
+    "NVDA":  {"target": 269, "rating": "Outperform", "num": 52},
+    "AAPL":  {"target": 275, "rating": "Overweight", "num": 48},
+    "MSFT":  {"target": 495, "rating": "Buy", "num": 54},
+    "GOOGL": {"target": 365, "rating": "Buy", "num": 56},
+    "AMZN":  {"target": 400, "rating": "Buy", "num": 55},
+    "AMD":   {"target": 185, "rating": "Outperform", "num": 45},
+    "TSLA":  {"target": 250, "rating": "Hold", "num": 40},
+    "NFLX":  {"target": 700, "rating": "Hold", "num": 42},
+    "CRM":   {"target": 320, "rating": "Buy", "num": 38},
+    "ORCL":  {"target": 180, "rating": "Buy", "num": 35},
+    "INTC":  {"target": 45, "rating": "Underperform", "num": 40},
+    "QCOM":  {"target": 200, "rating": "Overweight", "num": 38},
+    # Finance
+    "JPM":   {"target": 370, "rating": "Overweight", "num": 42},
+    "BAC":   {"target": 55, "rating": "Buy", "num": 38},
+    "GS":    {"target": 650, "rating": "Buy", "num": 30},
+    # Healthcare
+    "JNJ":   {"target": 225, "rating": "Neutral", "num": 38},
+    "UNH":   {"target": 600, "rating": "Buy", "num": 35},
+    "PFE":   {"target": 32, "rating": "Hold", "num": 35},
+    # Consumer
+    "WMT":   {"target": 220, "rating": "Buy", "num": 35},
+    "COST":  {"target": 950, "rating": "Buy", "num": 32},
+    "KO":    {"target": 75, "rating": "Buy", "num": 30},
+}
+
+FD = {
+    # Extended Financial Data: gm, nm, roe, roic, de, rev_g (revenue growth), fcf_yield, div_yield, payout, ev_ebitda
+    "META":  {"gm": 0.81, "nm": 0.32, "roe": 0.25, "roic": 0.22, "de": 0.1, "rev_g": 0.25, "fcf_yield": 0.035, "div_yield": 0, "payout": 0, "ev_ebitda": 18},
+    "NVDA":  {"gm": 0.73, "nm": 0.49, "roe": 0.58, "roic": 0.45, "de": 0.4, "rev_g": 0.50, "fcf_yield": 0.028, "div_yield": 0, "payout": 0, "ev_ebitda": 35},
+    "AAPL":  {"gm": 0.47, "nm": 0.24, "roe": 0.45, "roic": 0.35, "de": 1.8, "rev_g": 0.04, "fcf_yield": 0.055, "div_yield": 0.0055, "payout": 0.15, "ev_ebitda": 22},
+    "MSFT":  {"gm": 0.70, "nm": 0.35, "roe": 0.38, "roic": 0.28, "de": 0.5, "rev_g": 0.15, "fcf_yield": 0.030, "div_yield": 0.0075, "payout": 0.25, "ev_ebitda": 28},
+    "GOOGL": {"gm": 0.56, "nm": 0.24, "roe": 0.28, "roic": 0.20, "de": 0.1, "rev_g": 0.12, "fcf_yield": 0.045, "div_yield": 0, "payout": 0, "ev_ebitda": 17},
+    "AMZN":  {"gm": 0.48, "nm": 0.09, "roe": 0.22, "roic": 0.15, "de": 0.6, "rev_g": 0.11, "fcf_yield": 0.065, "div_yield": 0, "payout": 0, "ev_ebitda": 22},
+    "JPM":   {"gm": 0.65, "nm": 0.34, "roe": 0.17, "roic": 0.12, "de": 1.3, "rev_g": 0.08, "fcf_yield": 0.085, "div_yield": 0.024, "payout": 0.30, "ev_ebitda": 10},
+    "JNJ":   {"gm": 0.68, "nm": 0.20, "roe": 0.22, "roic": 0.16, "de": 0.5, "rev_g": 0.05, "fcf_yield": 0.060, "div_yield": 0.030, "payout": 0.45, "ev_ebitda": 14},
+    "AMD":   {"gm": 0.47, "nm": 0.09, "roe": 0.18, "roic": 0.14, "de": 0.3, "rev_g": 0.20, "fcf_yield": 0.035, "div_yield": 0, "payout": 0, "ev_ebitda": 25},
+    # Additional Stocks
+    "TSLA":  {"gm": 0.18, "nm": 0.15, "roe": 0.25, "roic": 0.18, "de": 0.1, "rev_g": 0.20, "fcf_yield": 0.025, "div_yield": 0, "payout": 0, "ev_ebitda": 45},
+    "NFLX":  {"gm": 0.42, "nm": 0.20, "roe": 0.30, "roic": 0.25, "de": 0.5, "rev_g": 0.15, "fcf_yield": 0.040, "div_yield": 0, "payout": 0, "ev_ebitda": 20},
+    "CRM":   {"gm": 0.73, "nm": 0.12, "roe": 0.15, "roic": 0.10, "de": 0.3, "rev_g": 0.10, "fcf_yield": 0.035, "div_yield": 0, "payout": 0, "ev_ebitda": 30},
+    "INTC":  {"gm": 0.40, "nm": 0.08, "roe": 0.10, "roic": 0.08, "de": 0.4, "rev_g": -0.02, "fcf_yield": 0.030, "div_yield": 0.015, "payout": 0.50, "ev_ebitda": 15},
+    "BAC":   {"gm": 0.60, "nm": 0.28, "roe": 0.12, "roic": 0.08, "de": 1.0, "rev_g": 0.05, "fcf_yield": 0.075, "div_yield": 0.025, "payout": 0.30, "ev_ebitda": 12},
+    "GS":    {"gm": 0.55, "nm": 0.25, "roe": 0.15, "roic": 0.10, "de": 4.0, "rev_g": 0.08, "fcf_yield": 0.060, "div_yield": 0.025, "payout": 0.25, "ev_ebitda": 14},
+    "UNH":   {"gm": 0.24, "nm": 0.08, "roe": 0.22, "roic": 0.15, "de": 0.8, "rev_g": 0.08, "fcf_yield": 0.045, "div_yield": 0.015, "payout": 0.30, "ev_ebitda": 18},
+    "WMT":   {"gm": 0.25, "nm": 0.03, "roe": 0.20, "roic": 0.15, "de": 0.6, "rev_g": 0.05, "fcf_yield": 0.055, "div_yield": 0.015, "payout": 0.40, "ev_ebitda": 12},
+    "COST":  {"gm": 0.13, "nm": 0.03, "roe": 0.28, "roic": 0.18, "de": 0.3, "rev_g": 0.06, "fcf_yield": 0.035, "div_yield": 0.005, "payout": 0.25, "ev_ebitda": 20},
+    "KO":    {"gm": 0.60, "nm": 0.22, "roe": 0.40, "roic": 0.12, "de": 1.7, "rev_g": 0.05, "fcf_yield": 0.050, "div_yield": 0.030, "payout": 0.70, "ev_ebitda": 16},
+}
+
+# Historical P/E percentiles (5-year)
+PE_HIST = {
+    "META":  {"curr": 35, "low": 15, "high": 45, "avg": 28},
+    "NVDA":  {"curr": 35, "low": 15, "high": 120, "avg": 55},
+    "AAPL":  {"curr": 32, "low": 20, "high": 40, "avg": 28},
+    "MSFT":  {"curr": 36, "low": 22, "high": 45, "avg": 32},
+    "GOOGL": {"curr": 25, "low": 18, "high": 35, "avg": 26},
+    "AMZN":  {"curr": 45, "low": 30, "high": 120, "avg": 65},
+    "JPM":   {"curr": 12, "low": 8, "high": 18, "avg": 12},
+    "JNJ":   {"curr": 22, "low": 15, "high": 28, "avg": 20},
+    "AMD":   {"curr": 28, "low": 10, "high": 80, "avg": 40},
+    "TSLA":  {"curr": 65, "low": 30, "high": 200, "avg": 80},
+    "NFLX":  {"curr": 35, "low": 20, "high": 60, "avg": 40},
+    "CRM":   {"curr": 45, "low": 25, "high": 70, "avg": 50},
+    "INTC":  {"curr": 25, "low": 10, "high": 35, "avg": 18},
+    "BAC":   {"curr": 12, "low": 8, "high": 18, "avg": 12},
+    "GS":    {"curr": 14, "low": 8, "high": 22, "avg": 14},
+    "UNH":   {"curr": 22, "low": 18, "high": 35, "avg": 25},
+    "WMT":   {"curr": 28, "low": 20, "high": 35, "avg": 28},
+    "COST":  {"curr": 45, "low": 30, "high": 55, "avg": 40},
+    "KO":    {"curr": 22, "low": 18, "high": 30, "avg": 24},
+}
+
+# Analyst ratings distribution (buy/hold/underperform percentages)
+ANALYST_RATINGS = {
+    "META":  {"buy": 75, "hold": 20, "sell": 5},
+    "NVDA":  {"buy": 80, "hold": 15, "sell": 5},
+    "AAPL":  {"buy": 60, "hold": 30, "sell": 10},
+    "MSFT":  {"buy": 70, "hold": 25, "sell": 5},
+    "GOOGL": {"buy": 65, "hold": 28, "sell": 7},
+    "AMZN":  {"buy": 68, "hold": 25, "sell": 7},
+    "JPM":   {"buy": 70, "hold": 25, "sell": 5},
+    "JNJ":   {"buy": 45, "hold": 40, "sell": 15},
+    "AMD":   {"buy": 70, "hold": 20, "sell": 10},
+    "TSLA":  {"buy": 40, "hold": 35, "sell": 25},
+    "NFLX":  {"buy": 50, "hold": 35, "sell": 15},
+    "INTC":  {"buy": 30, "hold": 40, "sell": 30},
+    "BAC":   {"buy": 55, "hold": 35, "sell": 10},
+
+[2170 more lines. Use start_line=101 to continue.]

@@ -1,0 +1,86 @@
+# tool_name: read_file
+# created_at: 2026-03-22T01:20:33.288459
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\sa_strategy_001.py  (lines 1-80 of 413)
+import logging
+logger = logging.getLogger(__name__)
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+SA-032 策略推荐引擎
+【Phase 6 - AI 增强】
+
+功能:
+  - 智能策略推荐
+  - 风险匹配
+  - 个性化建议
+  - 策略比较
+
+依赖: numpy, pandas (可选)
+"""
+import json
+import sys
+import os
+from pathlib import Path
+from datetime import datetime
+import random
+
+# 配置
+STRATEGY_DIR = Path("60-DATA/stock_032")
+CONFIG_FILE = Path("30-scripts-tools/sa_032_config.json")
+
+
+# 策略库
+STRATEGIES = {
+    "conservative": {
+        "name": "保守型",
+        "description": "低风险、稳健收益",
+        "max_drawdown": 0.05,
+        "expected_return": 0.08,
+        "suitable_for": ["保守投资者", "退休计划"],
+        "indicators": ["MA200", "RSI(14)", "BOLL"],
+        "position_size": "10-20%"
+    },
+    "moderate": {
+        "name": "稳健型",
+        "description": "平衡风险与收益",
+        "max_drawdown": 0.10,
+        "expected_return": 0.15,
+        "suitable_for": ["稳健投资者", "长期投资"],
+        "indicators": ["MA60", "MACD", "RSI"],
+        "position_size": "30-50%"
+    },
+    "aggressive": {
+        "name": "激进型",
+        "description": "追求高收益",
+        "max_drawdown": 0.20,
+        "expected_return": 0.25,
+        "suitable_for": ["激进投资者", "短期交易"],
+        "indicators": ["MA5", "KDJ", "RSI(6)"],
+        "position_size": "60-80%"
+    },
+    "swing": {
+        "name": "趋势交易",
+        "description": "跟随趋势",
+        "max_drawdown": 0.15,
+        "expected_return": 0.20,
+        "suitable_for": ["趋势投资者"],
+        "indicators": ["MA(20,60)", "MACD", "ADX"],
+        "position_size": "40-60%"
+    },
+    "contrarian": {
+        "name": "逆向投资",
+        "description": "左侧交易",
+        "max_drawdown": 0.25,
+        "expected_return": 0.30,
+        "suitable_for": ["逆向投资者"],
+        "indicators": ["PE", "PB", "RSI(<30)"],
+        "position_size": "20-40%"
+    }
+}
+
+
+class StrategyEngine:
+
+[333 more lines. Use start_line=81 to continue.]

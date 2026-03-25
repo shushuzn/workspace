@@ -1,0 +1,61 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:38:23.324908
+# ---
+            for i, n in enumerate(llm_news[:5], 1):
+                score = n.get('llm_score', 0)
+                advice_icon = "📈" if n.get('llm_advice') == 'bullish' else ("📉" if n.get('llm_advice') == 'bearish' else "➖")
+                sentiment_icon = "🟢" if n.get('llm_sentiment') == 'positive' else ("🔴" if n.get('llm_sentiment') == 'negative' else "⚪")
+                
+                print(f"  {i}. {sentiment_icon} {advice_icon} [{score:+3d}] {n.get('llm_summary', '')[:35]}...")
+                markets = n.get('llm_markets', [])[:2]
+                if markets:
+                    print(f"     → {', '.join(markets)}")
+            
+            print()
+        if llm_news:
+            print()
+            print("=" * 50)
+            print("  🤖 LLM 深度分析")
+            print("=" * 50)
+            
+            # 市场情绪
+            sentiment = get_market_sentiment(llm_news)
+            if sentiment:
+                overall = sentiment.get('overall', 'neutral')
+                icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+                print()
+                print("  📊 市场情绪:")
+                print(f"     {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+                print(f"     📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)}")
+                print(f"     📊 分数: {sentiment.get('avg_score', 0):+.1f}")
+                
+                # 市场分布
+                market_dist = sentiment.get('markets', {})
+                if market_dist:
+                    market_names = {"stock": "📈 股市", "forex": "💱 外汇", "commodity": "🛢️ 大宗", "crypto": "₿ 加密", "bond": "📉 债市"}
+                    print("  🎯 影响市场:")
+                    for m, cnt in sorted(market_dist.items(), key=lambda x: -x[1])[:4]:
+                        print(f"     {market_names.get(m, m)}: {cnt}")
+                
+                # 投资建议
+                advice = sentiment.get('advice', {})
+                if advice:
+                    advice_names = {'bullish': '📈 买入', 'bearish': '📉 卖出', 'neutral': '➡️ 观望'}
+                    print("  💡 建议分布:")
+                    for a, cnt in sorted(advice.items(), key=lambda x: -x[1]):
+                        print(f"     {advice_names.get(a, a)}: {cnt}")
+            
+            # 详细分析
+            print()
+            print("  📝 新闻分析:")
+            for i, n in enumerate(llm_news[:5], 1):
+                score = n.get('llm_score', 0)
+                advice_icon = "📈" if n.get('llm_advice') == 'bullish' else ("📉" if n.get('llm_advice') == 'bearish' else "➖")
+                sentiment_icon = "🟢" if n.get('llm_sentiment') == 'positive' else ("🔴" if n.get('llm_sentiment') == 'negative' else "⚪")
+                
+                print(f"  {i}. {sentiment_icon} {advice_icon} [{score:+3d}] {n.get('llm_summary', '')[:35]}...")
+                markets = n.get('llm_markets', [])[:2]
+                if markets:
+                    print(f"     → {', '.join(markets)}")
+            
+            print()

@@ -1,0 +1,39 @@
+{
+  "symbol": "TEST",
+  "analysis_date": "2026-03-20T13:35:38.115679",
+  "liquidity_ratios": {
+    "current_ratio": 1.67,
+    "quick_ratio": 1.33,
+    "debt_to_asset": 0.5,
+    "description": "流动比率：1.67, 速动比率：1.33, 资产负债率：50.00%"
+  },
+  "profitability_ratios": {
+    "gross_margin": 0.4,
+    "net_margin": 0.1333,
+    "roa": 0.1,
+    "roe": 0.2,
+    "description": "毛利率：40.00%, 净利率：13.33%, ROA: 10.00%, ROE: 20.00%"
+  },
+  "efficiency_ratios": {
+    "inventory_turnover": 7.5,
+    "receivables_turnover": 5.0,
+    "description": "存货周转率：7.50, 应收账款周转率：5.00"
+  },
+  "growth_ratios": {
+    "revenue_growth": 0.25,
+    "net_income_growth": 0.3333,
+    "description": "营收增长率：25.00%, 净利润增长率：33.33%"
+  },
+  "valuation_ratios": {
+    "pe_ratio": 20.0,
+    "pb_ratio": 4.0,
+    "ps_ratio": 1.33,
+    "description": "PE: 20.00, PB: 4.00, PS: 1.33"
+  },
+  "comprehensive_score": {
+    "score": 90,
+    "max_score": 100,
+    "rating": "A",
+    "description": "综合评分：90/100 (A级 - 优秀)"
+  }
+}

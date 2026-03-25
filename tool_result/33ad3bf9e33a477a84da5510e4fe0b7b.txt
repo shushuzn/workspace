@@ -1,0 +1,72 @@
+# tool_name: read_file
+# created_at: 2026-03-22T15:00:51.150268
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\compare.py  (lines 75-140 of 172)
+def compare_sectors(symbols):
+    """Compare stocks by sector"""
+    from stock_pro.sectors import get_sector
+    
+    results = analyze_multiple(symbols)
+    
+    # Group by sector
+    sectors = {}
+    for r in results:
+        sector = get_sector(r['symbol'])
+        if sector not in sectors:
+            sectors[sector] = []
+        sectors[sector].append(r)
+    
+    report = "# Sector Comparison\n\n"
+    
+    for sector, stocks in sorted(sectors.items(), key=lambda x: sum(r['score'] for r in x[1]) / len(x[1]) if x[1] else 0, reverse=True):
+        avg_score = sum(s['score'] for s in stocks) / len(stocks)
+        avg_upside = sum(s['upside'] for s in stocks) / len(stocks)
+        
+        report += f"## {sector}\n\n"
+        report += f"Average Score: {avg_score:.0f} | Average Upside: {avg_upside:+.1f}%\n\n"
+        report += "| Symbol | Score | Upside | P/E | ROE |\n"
+        report += "|--------|-------|--------|-----|-----|\n"
+        for s in sorted(stocks, key=lambda x: x['score'], reverse=True):
+            report += f"| {s['symbol']} | {s['score']} | {s['upside']:+.1f}% | {s['pe']:.1f}x | {s['roe']:.1f}% |\n"
+        report += "\n"
+    
+    return report
+
+
+def compare_risk(symbols):
+    """Compare risk metrics"""
+    results = analyze_multiple(symbols)
+    
+    report = "# Risk Comparison\n\n"
+    report += "| Symbol | Beta | Debt/Eq | P/E | Score | Risk Level |\n"
+    report += "|--------|------|---------|-----|-------|------------|\n"
+    
+    for r in sorted(results, key=lambda x: x['beta'], reverse=True):
+        if r['beta'] > 1.5:
+            risk = "High"
+        elif r['beta'] > 1.0:
+            risk = "Medium"
+        else:
+            risk = "Low"
+        
+        report += f"| {r['symbol']} | {r['beta']:.1f} | {r['de']:.1f} | {r['pe']:.1f}x | {r['score']} | {risk} |\n"
+    
+    # Low risk winners
+    low_beta = [r for r in results if r['beta'] <= 1.0]
+    if low_beta:
+        report += "\n## Low Risk Options (Beta <= 1.0)\n\n"
+        for r in sorted(low_beta, key=lambda x: x['score'], reverse=True):
+            report += f"- {r['symbol']}: Score {r['score']}, Upside {r['upside']:+.1f}%\n"
+    
+    return report
+
+
+def find_winners(symbols, criteria='score'):
+    """Find best stocks by criteria"""
+    results = analyze_multiple(symbols)
+    
+    if criteria == 'score':
+        results.sort(key=lambda x: x['score'], reverse=True)
+        label = "Score"
+
+[32 more lines. Use start_line=141 to continue.]

@@ -1,0 +1,78 @@
+{
+  "symbol": "TEST",
+  "analysis_date": "2026-03-20T13:34:09.739458",
+  "candle_count": 100,
+  "ma_trend": {
+    "ma5": {
+      "direction": "upward",
+      "strength": 0.9874896883631605,
+      "slope": 97281.1964,
+      "slope_percent": 14.213682866842884,
+      "description": "MA 趋势：上涨 (斜率：14.21%)"
+    },
+    "ma10": {
+      "direction": "upward",
+      "strength": 0.9880568656263172,
+      "slope": 67440.54519999998,
+      "slope_percent": 13.88048969057911,
+      "description": "MA 趋势：上涨 (斜率：13.88%)"
+    },
+    "ma20": {
+      "direction": "upward",
+      "strength": 0.9886543563790505,
+      "slope": 39425.9085,
+      "slope_percent": 13.563070738108818,
+      "description": "MA 趋势：上涨 (斜率：13.56%)"
+    }
+  },
+  "macd_trend": {
+    "current_macd": 258081.99109876936,
+    "current_signal": 105031.50816951563,
+    "current_histogram": 153050.48292925372,
+    "crossover": null,
+    "divergence": "none",
+    "signal": "bullish",
+    "description": "MACD: 看涨"
+  },
+  "adx": {
+    "adx": 100.0,
+    "plus_di": 90.41,
+    "minus_di": 0.0,
+    "trend_strength": "very_strong",
+    "trend_direction": "upward",
+    "description": "ADX: 100.00 (极强) - 上涨"
+  },
+  "trend_stage": {
+    "stage": "strong_uptrend",
+    "confidence": 1.0,
+    "price": 1322489.14,
+    "ma_short": 670049.0399999999,
+    "ma_long": 166878.6014,
+    "description": "趋势阶段：强势上涨 (置信度：100%)"
+  },
+  "continuation_probability": {
+    "continuation_probability": 0.75,
+    "continuation_direction": "upward",
+    "factors": [
+      {
+        "name": "price_above_ma",
+        "impact": 0.1,
+        "direction": "bullish"
+      },
+      {
+        "name": "ma_upward",
+        "impact": 0.15,
+        "direction": "bullish"
+      }
+    ],
+    "description": "趋势延续概率：75% (上涨)"
+  },
+  "summary": {
+    "overall_trend": "bullish",
+    "confidence": 1.0,
+    "recommendation": "buy",
+    "bullish_signals": 6,
+    "bearish_signals": 0,
+    "description": "综合趋势：看涨 - 建议：买入"
+  }
+}

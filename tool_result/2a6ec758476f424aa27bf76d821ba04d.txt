@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:07:38.756099
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 225-260 of 741)
+{{"sentiment":"positive|negative|neutral","urgency":"high|medium|low","summary":"20字摘要"}}
+只返回JSON，不要其他内容。"""
+    
+    try:
+        data = {
+            "model": "qwen2.5:1.5b",
+            "prompt": prompt,
+            "stream": False,
+            "options": {"temperature": 0.1, "num_predict": 100}
+        }
+        req = urllib.request.Request(
+            "http://localhost:11434/api/generate",
+            data=json.dumps(data).encode('utf-8'),
+            headers={'Content-Type': 'application/json'},
+            method='POST'
+        )
+        with urllib.request.urlopen(req, timeout=10, context=get_ssl()) as resp:
+            result = json.loads(resp.read().decode('utf-8'))
+            response = result.get('response', '').strip()
+            
+            # 解析JSON
+            match = re.search(r'\{[^}]+\}', response)
+            if match:
+                return json.loads(match.group())
+    except:
+        pass
+    return None
+
+def enrich_with_llm(news_list, max_items=10):
+    """使用LLM丰富新闻数据"""
+    if not check_ollama_status():
+        print("  ⚠ Ollama未运行，跳过LLM分析")
+        return news_list
+    
+    print("  🤖 启用本地LLM分析...")
+    llm_count = 0
+
+[481 more lines. Use start_line=261 to continue.]

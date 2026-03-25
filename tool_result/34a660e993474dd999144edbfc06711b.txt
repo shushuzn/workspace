@@ -1,0 +1,25 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T23:30:01.377914
+# ---
+async_fetcher.py:139:  # ========== 配置加载 ==========
+async_fetcher.py:140:  def load_config() -> dict:
+async_fetcher.py:141:      try:
+async_fetcher.py:142:          with open(SOURCES_FILE, "r", encoding="utf-8") as f:
+async_fetcher.py:143:              return json.load(f)
+async_fetcher.py:144:      except Exception as e:
+async_fetcher.py:145:          logger.warning(f"配置加载失败: {e}")
+async_fetcher.py:146:          return {}
+async_fetcher.py:147:  
+async_fetcher.py:148:  
+async_fetcher.py:149:> def get_rss_sources() -> List[tuple]:
+async_fetcher.py:150:      config = load_config()
+async_fetcher.py:151:      sources = []
+async_fetcher.py:152:      for key, src in config.get("news_sources", {}).items():
+async_fetcher.py:153:          if src.get("type") == "rss" and src.get("enable", True):
+async_fetcher.py:154:              sources.append((src["name"], src.get("url", ""), src.get("limit", 20)))
+async_fetcher.py:155:      return sources
+async_fetcher.py:156:  
+async_fetcher.py:157:  
+async_fetcher.py:158:  # ========== 工具函数 ==========
+async_fetcher.py:159:  def load_hashes() -> set:
+---

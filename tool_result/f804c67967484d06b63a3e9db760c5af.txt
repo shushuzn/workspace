@@ -1,0 +1,43 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T01:09:22.368978
+# ---
+
+==================================================
+  NewsHub Feishu
+==================================================
+
+  ▶ Mode: digest
+  ▶ Time: 2026-03-23 01:08:49
+
+
+==================================================
+  NewsHub Fetcher
+==================================================
+
+  ▶ Time: 2026-03-23 01:08:49
+
+  ▶ Fetching 金十快讯...
+  ✓ 金十快讯: +20
+  ▶ Fetching Investing...
+  ✓ Investing: +10
+  ▶ Fetching Seeking Alpha...
+  ✓ Seeking Alpha: +7
+
+──────────────────────────────────────────────────
+  📊 Total: 37
+     金十快讯: 20
+     Investing: 10
+     Seeking Alpha: 7
+──────────────────────────────────────────────────
+
+  ▶ Digest: 2 items
+
+  ▶ Card: {"msg_type": "interactive", "card": {"header": {"title": {"tag": "plain_text", "content": "财经速报 01:09"}, "template": "green"}, "elements": [{"tag": "div", "text": {"tag": "lark_md", "content": "1. 美国农
+  ✗ HTTP 400: {"code":230099,"msg":"Failed to create card content, ext=ErrCode: 200621; ErrMsg: parse card json err, please check whether the card json is correct; ","error":{"log_id":"20260323010910EA026F6F6470ABEC7BDB","troubleshooter":"排查建议查看(Troubleshooting suggestions): https://open.feishu.cn/search?from=openapi&log_id=20260323010910EA026F6F6470ABEC7BDB&code=230099&method_id=6936075528891154460"}}
+  ✗ Code 400
+
+──────────────────────────────────────────────────
+  Mode:   digest
+  Sent:   0
+──────────────────────────────────────────────────
+

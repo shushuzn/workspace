@@ -1,0 +1,112 @@
+# tool_name: read_file
+# created_at: 2026-03-21T16:59:17.003541
+# ---
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏰 Idle Empire v0.6 - 挂机放置游戏</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <!-- 顶部状态栏 -->
+        <header class="header">
+            <div class="header-top">
+                <h1>🏰 Idle Empire</h1>
+                <button id="theme-btn" class="theme-btn" title="切换主题">🌙</button>
+            </div>
+            <div class="stats">
+                <div class="stat gold-stat" id="gold-click-area">
+                    <span class="label">💰 金币 <small>(点击获取)</small></span>
+                    <span id="gold" class="value">0</span>
+                </div>
+                <div class="stat">
+                    <span class="label">⚡ 产量/秒</span>
+                    <span id="gps" class="value">0</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- 统计面板 -->
+        <div class="stats-panel">
+            <div class="stat-item">
+                <span class="stat-label">🏗️ 建筑</span>
+                <span id="stat-buildings" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">💎 累计</span>
+                <span id="stat-total" class="stat-value">0</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">⏱️ 游玩</span>
+                <span id="stat-time" class="stat-value">0秒</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">🏆 成就</span>
+                <span id="stat-achievements" class="stat-value">0/8</span>
+            </div>
+        </div>
+
+        <!-- Boss 区域 -->
+        <div id="boss-container"></div>
+
+        <!-- 标签页 -->
+        <div class="tabs">
+            <button class="tab active" data-tab="buildings">🏗️ 建筑</button>
+            <button class="tab" data-tab="upgrades">⬆️ 升级</button>
+            <button class="tab" data-tab="boss">👹 Boss</button>
+            <button class="tab" data-tab="achievements">🏆 成就</button>
+            <button class="tab" data-tab="stats">📊 统计</button>
+        </div>
+
+        <!-- 主游戏区域 -->
+        <main class="main">
+            <!-- 建筑列表 -->
+            <section id="tab-buildings" class="tab-content active">
+                <h2>🏗️ 建筑</h2>
+                <div id="building-list" class="building-list"></div>
+            </section>
+
+            <!-- 升级列表 -->
+            <section id="tab-upgrades" class="tab-content">
+                <h2>⬆️ 升级</h2>
+                <div id="upgrade-list" class="upgrade-list"></div>
+            </section>
+
+            <!-- Boss 战斗 -->
+            <section id="tab-boss" class="tab-content">
+                <h2>👹 Boss 战斗</h2>
+                <p>击败Boss获得大量金币! 每10秒Boss会受到伤害.</p>
+                <div id="boss-list"></div>
+            </section>
+
+            <!-- 成就列表 -->
+            <section id="tab-achievements" class="tab-content">
+                <h2>🏆 成就</h2>
+                <div id="achievement-list" class="achievement-list"></div>
+            </section>
+
+            <!-- 统计详情 -->
+            <section id="tab-stats" class="tab-content">
+                <h2>📊 详细统计</h2>
+                <div id="stats-detail" class="stats-detail"></div>
+            </section>
+        </main>
+
+        <!-- 底部 -->
+        <footer class="footer">
+            <span id="save-status" class="save-status">💾 已保存</span>
+            <button id="save-btn" class="btn">💾 保存</button>
+            <button id="reset-btn" class="btn btn-danger">🔄 重置</button>
+            <span id="status" class="status"></span>
+        </footer>
+    </div>
+
+    <script src="js/buildings.js" charset="UTF-8"></script>
+    <script src="js/save.js" charset="UTF-8"></script>
+    <script src="js/boss.js" charset="UTF-8"></script>
+    <script src="js/game.js" charset="UTF-8"></script>
+</body>
+</html>

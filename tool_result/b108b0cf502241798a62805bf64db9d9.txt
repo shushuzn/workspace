@@ -1,0 +1,27 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T23:00:28.472757
+# ---
+Command failed with exit code 1.
+[stdout]
+[INFO] Pushing news...
+  QQ [OK] 2008581807
+[stderr]
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\news_manager.py", line 329, in cmd_push
+    print(f"  {r}")
+    ~~~~~^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 23: illegal multibyte sequence
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\news_manager.py", line 389, in <module>
+    main()
+    ~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\news_manager.py", line 382, in main
+    cmd_push(args)
+    ~~~~~~~~^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\news_manager.py", line 331, in cmd_push
+    print(f"  {r.encode('utf-8', errors='ignore').decode('utf-8')}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 23: illegal multibyte sequence

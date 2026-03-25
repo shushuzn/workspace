@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:31:54.526549
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 950-1020 of 1039)
+            print("📰 来源统计:")
+            for src, cnt in sorted(sources.items(), key=lambda x: -x[1]):
+                print(f"  {src}: {cnt}")
+            print()
+        
+        if args.export == 'json':
+            export_json(news)
+        elif args.export == 'csv':
+            export_csv(news)
+        else:
+            show_news(news, 10)
+        
+        # 热点检测
+        hot = detect_hot_topics(news)
+        if hot:
+            print()
+            print("🔥 热点话题:")
+            for word, count in hot:
+                bar = "█" * count
+                print(f"  {word}: {count} {bar}")
+        
+        # 新闻聚类
+        if args.cluster:
+            clusters = cluster_news(news)
+            show_clusters(clusters)
+        
+        # LLM分析 (需要 Ollama 运行)
+        if args.llm:
+            news = enrich_with_llm(news, max_items=args.limit)
+        
+        # 显示LLM深度分析结果
+        llm_news = [n for n in news if n.get('llm_summary')]
+        if llm_news:
+            print()
+            print("=" * 50)
+            print("  🤖 LLM 深度分析")
+            print("=" * 50)
+            
+            # 统计
+            scores = [n.get('llm_score', 0) for n in llm_news]
+            avg_score = sum(scores) / len(scores) if scores else 0
+            bull_count = sum(1 for n in llm_news if n.get('llm_advice') == 'bullish')
+            bear_count = sum(1 for n in llm_news if n.get('llm_advice') == 'bearish')
+            
+            print()
+            print(f"  📊 市场情绪: {avg_score:+.0f} ({'偏多' if avg_score > 10 else ('偏空' if avg_score < -10 else '中性')})")
+            print(f"  📈 利好信号: {bull_count} | 📉 利空信号: {bear_count}")
+            
+            # 市场影响统计
+            market_counts = {}
+            for n in llm_news:
+                for m in n.get('llm_markets', []):
+                    market_counts[m] = market_counts.get(m, 0) + 1
+            
+            if market_counts:
+                market_names = {"stock": "📈 股市", "forex": "💱 外汇", "commodity": "🛢️ 大宗商品", "bond": "📉 债市", "crypto": "₿ 加密"}
+                print()
+                print("  🎯 影响市场:")
+                for m, cnt in sorted(market_counts.items(), key=lambda x: -x[1]):
+                    print(f"     {market_names.get(m, m)}: {cnt}")
+            
+            # 热门实体
+            entities = []
+            for n in llm_news:
+                entities.extend(n.get('llm_entities', []))
+            entity_counts = {}
+            for e in entities:
+                entity_counts[e] = entity_counts.get(e, 0) + 1
+            top_entities = sorted(entity_counts.items(), key=lambda x: -x[1])[:5]
+            if top_entities:
+                print()
+
+[19 more lines. Use start_line=1021 to continue.]

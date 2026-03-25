@@ -1,0 +1,50 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T17:49:45.459701
+# ---
+[17:49:26] Fetching...
+# TSLA News
+
+_Feed: 2026-03-22 17:49:37 | 5 items_
+
+## 1. ‘Healthcare is important to me’: I’m worried about relocating to Florida from New Jersey. Are hospitals there under stress?
+
+**marketwatch** | Sun, 22 Mar 2026
+
+“The issue is not the weather, high insurance premiums or high maintenance fees.”...
+
+
+---
+
+## 2. ‘I’m completely gobsmacked’: My elderly brother has a reverse mortgage — yet he still ran out of money. Do I help?
+
+**marketwatch** | Sat, 21 Mar 2026
+
+“My husband and I are both retired and have saved for years — we simply can’t afford to take on his financial situation.”...
+
+
+---
+
+## 3. The stock market actually doesn’t care as much about oil prices as you think
+
+**marketwatch** | Sat, 21 Mar 2026
+
+Predicting the S&P 500’s direction based on oil moves is an empty bet....
+
+
+---
+
+## 4. Bulls vs. Bears: Micron revisited after Q2 results
+
+**seekingalpha** | Sat, 21 Mar 2026
+
+
+---
+
+## 5. Musk offers to pay TSA while Trump threatens to deploy ICE in airports
+
+**seekingalpha** | Sat, 21 Mar 2026
+
+
+---
+
+

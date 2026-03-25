@@ -1,0 +1,44 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:09:01.139903
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 603-640 of 851)
+def fetch_source(key, src):
+    name = src.get('name', key)
+    fetch_fn = src.get('fetch_fn')
+    
+    if fetch_fn:
+        return name, fetch_fn(src.get('limit', 10))
+    elif key == 'sina':
+        return name, fetch_sina_news(src.get('limit', 20))
+    elif key == 'sina_stock':
+        return name, fetch_sina_stock(src.get('limit', 10))
+    elif key == 'eastmoney':
+        return name, fetch_eastmoney(src.get('limit', 10))
+    elif src.get('url'):
+        return name, fetch_rss(src['url'], name)
+    return name, []
+
+def fetch_all(quiet=False, use_cache=True, parallel=True, dedup=True):
+    config = load_config()
+    
+    # 检查缓存
+    if use_cache:
+        cached = get_cached(quiet)
+        if cached:
+            return cached
+    
+    start = time.time()
+    all_news = []
+    sources = {}
+    
+    if not quiet:
+        banner("NewsHub Fetcher")
+        info(f"Time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+        print()
+    
+    # 构建任务列表
+    tasks = []
+    for key, src in config.get('news_sources', {}).items():
+        if src.get('enable', True):
+
+[211 more lines. Use start_line=641 to continue.]

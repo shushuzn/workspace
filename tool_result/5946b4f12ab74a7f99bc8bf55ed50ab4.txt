@@ -1,0 +1,42 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:13:20.846817
+# ---
+    {GREEN}analyze{RESET}   LLM智能分析 [条数]
+    {GREEN}sentiment{RESET} 市场情绪分析
+    {GREEN}help{RESET}      显示帮助
+
+  {BOLD}飞书子命令:{RESET}
+    compact    紧凑视图（纯文本）
+    preview    预览新闻（不发送）
+    digest     摘要推送（6条）
+    alert      关键词告警
+    all        全部推送（8条）
+    daily      日报
+    stats      统计信息
+    summary    摘要卡片（统计概览）
+    sentiment  情感分析
+    cat <类型> 分类推送 (stock/forex/commodity/macro/trade/tech/china/us/crypto/energy)
+    test       连接测试
+    welcome    欢迎卡片
+
+  {BOLD}选项:{RESET}
+    --no-cache    禁用缓存，强制重新抓取
+    --cache-only  仅使用缓存
+
+  {BOLD}示例:{RESET}
+    python news_hub.py fetch
+    python news_hub.py feishu compact
+    python news_hub.py feishu digest --no-cache
+    python news_hub.py analyze 10
+    python news_hub.py sentiment
+    python news_hub.py export csv --limit 20
+    python news_hub.py server
+    python news_hub.py report
+""")
+    else:
+        print(f"{YELLOW}Unknown: {cmd}{RESET}")
+        print(f"Run: {GREEN}python news_hub.py help{RESET}")
+
+
+if __name__ == "__main__":
+    main()

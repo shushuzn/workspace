@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:03:15.591938
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\core.py  (lines 1-50 of 101)
+"""Core stock analysis engine"""
+import json, urllib.request
+from datetime import datetime
+from stock_pro.data_target import A
+from stock_pro.data_financial import F
+from stock_pro.data_price import P, B, E
+
+def fetch(symbol):
+    """Get current price from API"""
+    try:
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=1d"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read())
+            price = data["chart"]["result"][0]["meta"]["regularMarketPrice"]
+            return price, "live", datetime.now().isoformat(), datetime.now().isoformat()
+    except:
+        return P.get(symbol, 0), "cached", datetime.now().isoformat(), datetime.now().isoformat()
+
+def fetch_live(symbols):
+    return [{"symbol": s, "price": fetch(s)[0]} for s in symbols]
+
+def calc_dcf(symbol, price, shares=15, wacc=0.10, growth=0.15, de=0):
+    """DCF valuation"""
+    fcf = F.get(symbol, (0,0,0,0,0,0,0,0))[6] or 0.03
+    fcf_y1 = price * shares * fcf
+    cash_flows = []
+    for y in range(1, 6):
+        cf = fcf_y1 * ((1 + growth) ** y) / ((1 + wacc) ** y)
+        cash_flows.append(cf)
+    tv = cash_flows[-1] * (1 + growth) / (wacc - growth)
+    terminal = tv / ((1 + wacc) ** 5)
+    equity = sum(cash_flows) + terminal
+    intrinsic = equity / shares
+    upside = (intrinsic - price) / price * 100 if price else 0
+    return {"base": intrinsic, "upside": upside, "bear": intrinsic * 0.7, "bull": intrinsic * 1.3}
+
+def calc_score(symbol, price, data):
+    """Calculate composite score"""
+    t, r, n = data
+    upside = (t - price) / price * 100 if price else 0
+    gm, pm, roe, roic, de, rg, fcf, div = F.get(symbol, (0,0,0,0,0,0,0,0))
+    beta = B.get(symbol, 1.0)
+    eps = E.get(symbol, 0)
+    
+    pe = price / eps if eps > 0 else 100
+    v_score = min(100, max(0, 100 - pe * 2)) if eps > 0 else 50
+    g_score = min(100, rg * 4) if rg > 0 else max(0, 50 + rg * 5)
+    p_score = min(100, (pm * 100 + gm * 0.5 + roic * 0.5))
+    b_score = max(0, 100 - de * 15)
+
+[51 more lines. Use start_line=51 to continue.]

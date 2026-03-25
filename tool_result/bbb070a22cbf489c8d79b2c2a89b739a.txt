@@ -1,0 +1,26 @@
+# tool_name: read_file
+# created_at: 2026-03-22T23:17:33.895985
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 1-20 of 482)
+# -*- coding: utf-8 -*-
+"""News Manager v3.0 - 统一新闻推送"""
+import sys, json, ssl, re, urllib.request, subprocess
+from datetime import datetime, timedelta
+from pathlib import Path
+from typing import List, Tuple
+
+CONFIG = {"qq": {"enabled": True, "base_url": "http://127.0.0.1:3000", "token": "", "group_id": "597818978"}, "feishu": {"enabled": True}, "news": {"sources": [{"name": "sina_finance", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2517", "type": "json", "category": "新浪财"}, {"name": "sina_stock", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2515", "type": "json", "category": "新浪股"}, {"name": "sina_business", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2518", "type": "json", "category": "新浪产"}, {"name": "sina_hkstock", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2513", "type": "json", "category": "新浪港"}, {"name": "sina_usstock", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2510", "type": "json", "category": "新浪美"}, {"name": "sina_tech", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516", "type": "json", "category": "新浪科"}, {"name": "sina_macro", "url": "https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2519", "type": "json", "category": "新浪宏"}, {"name": "eeo", "url": "https://www.eeo.com.cn/rss.xml", "type": "rss", "category": "经观"}, {"name": "bloomberg", "url": "https://feeds.bloomberg.com/markets/news.rss", "type": "rss", "category": "彭博"}, {"name": "cnbc", "url": "https://www.cnbc.com/id/100003114/device/rss/rss.html", "type": "rss", "category": "CNBC"}, {"name": "marketwatch", "url": "https://www.marketwatch.com/rss/topstories", "type": "rss", "category": "MW"}, {"name": "yahoo_finance", "url": "https://finance.yahoo.com/news/rssindex", "type": "rss", "category": "Yahoo"}, {"name": "investing", "url": "https://www.investing.com/rss/news.rss", "type": "rss", "category": "Inv"}, {"name": "ft_chinese", "url": "https://www.ftchinese.com/rss/feed", "type": "rss", "category": "FT"}, {"name": "bbc_biz", "url": "http://feeds.bbci.co.uk/news/business/rss.xml", "type": "rss", "category": "BBC"}, {"name": "guardian_biz", "url": "https://www.theguardian.com/business/rss", "type": "rss", "category": "卫报"}], "max_per_fetch": 2}}
+BASE_DIR = Path(r"D:\OpenClaw\workspace\30-scripts-tools")
+DATA_FILE = BASE_DIR / "news_manager_data.json"
+POSITIVE = ["涨停","大涨","飙升","创新高","突破","利好","增持","回购","分红","业绩预增","盈利","增长","上升","上涨","反弹","回暖","复苏","景气","超预期","强劲","领涨","净流入","买入","推荐","看好","上调","降息","降准","宽松"]
+NEGATIVE = ["跌停","大跌","暴跌","崩盘","创新低","跌破","利空","减持","套现","业绩预亏","亏损","下降","下滑","下跌","跳水","重挫","低迷","萎缩","衰退","不及预期","疲软","领跌","净流出","卖出","看空","下调","加息","紧缩","监管","处罚","罚款","退市","风险","暴雷","造假","违规","调查"]
+SECTORS = {"科技": ["AI","芯片","半导体","华为","腾讯","阿里","字节","人工智能","算力","机器人"], "新能源": ["光伏","锂电","储能","新能源","电动车","特斯拉","比亚迪","宁德"], "金融": ["银行","保险","券商","基金","信托","支付"], "地产": ["房地产","地产","楼市","房价","恒大","万科"], "医药": ["医药","医疗","生物","疫苗","创新药","医保"], "消费": ["消费","零售","白酒","食品","饮料","家电","汽车"], "周期": ["煤炭","钢铁","有色","化工","石油","天然气","航运"], "军工": ["军工","国防","航天","航空","船舶"], "传媒": ["影视","游戏","传媒","广告","直播"]}
+SOURCE_MAP = {"sina_finance":"新浪财","sina_stock":"新浪股","sina_business":"新浪产","sina_hkstock":"新浪港","sina_usstock":"新浪美","sina_tech":"新浪科","sina_macro":"新浪宏","eeo":"经观","ft_chinese":"FT","bloomberg":"彭博","cnbc":"CNBC","marketwatch":"MW","yahoo_finance":"Yahoo","investing":"Inv","bbc_biz":"BBC","guardian_biz":"卫报"}
+
+def analyze(title):
+    pos = sum(1 for k in POSITIVE if k in title)
+    neg = sum(1 for k in NEGATIVE if k in title)
+    sentiment = "利好" if pos > neg else ("利空" if neg > pos else "中性")
+    sector = "通用"
+
+[462 more lines. Use start_line=21 to continue.]

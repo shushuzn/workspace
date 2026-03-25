@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-22T18:40:53.640717
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\rss_server.py  (lines 140-200 of 273)
+            "content": content,
+            "date": date,
+            "ts": ts,
+        })
+    return news
+
+async def update(cache):
+    import platform
+    if platform.system() == "Windows":
+        asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    connector = aiohttp.TCPConnector(limit=10)
+    async with aiohttp.ClientSession(connector=connector) as session:
+        texts = await asyncio.gather(*[fetch(session, u) for u in SOURCES])
+    all_news = []
+    for t in texts:
+        all_news.extend(parse(t))
+    seen, unique = set(), []
+    for n in all_news:
+        k = n["title"][:80]
+        if k not in seen:
+            seen.add(k)
+            unique.append(n)
+    unique.sort(key=lambda x: x["ts"], reverse=True)
+    cache.save(unique)
+    return len(unique)
+
+def rss(news, title):
+    now = datetime.now().strftime("%a, %d %b %Y %H:%M:%S +0000")
+    items = ""
+    for n in news[:50]:
+        c = n["content"][:500].replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;")
+        d = datetime.fromtimestamp(n["ts"]).strftime("%a, %d %b %Y %H:%M:%S +0000")
+        items += f'<item><title><![CDATA[{n["title"]}]]></title><link>{n["link"]}</link><description><![CDATA[{c}]]></description><pubDate>{d}</pubDate></item>'
+    return f'<?xml version="1.0"?><rss version="2.0"><channel><title>{title}</title><lastBuildDate>{now}</lastBuildDate><ttl>5</ttl>{items}</channel></rss>'
+
+def html_page(news, title):
+    h = '<html><head><meta charset="utf-8"><title>' + title + '</title>'
+    h += '<style>body{font:16px sans-serif;max-width:900px;margin:0 auto;padding:20px}.item{border-bottom:1px solid #eee;padding:12px 0}.title{font-size:18px;font-weight:bold}.meta{color:#888;font-size:12px}.content{margin-top:5px;color:#555}</style>'
+    h += '</head><body>'
+    h += '<h1>' + title + '</h1><p>Updated: ' + datetime.now().strftime("%Y-%m-%d %H:%M:%S") + '</p>'
+    for n in news[:30]:
+        h += '<div class="item"><div class="title">' + n["title"] + '</div><div class="meta">' + n["date"] + '</div>'
+        if n["content"]:
+            h += '<div class="content">' + n["content"][:200] + '...</div>'
+        h += '</div>'
+    return h + '</body></html>'
+
+class Handler(BaseHTTPRequestHandler):
+    cache = None
+    
+    def do_GET(self):
+        path = self.path.strip("/").lower()
+        all_news = self.cache.get_all_news()
+        jin10_news = self.cache.jin10_news
+        rss_news = self.cache.news
+        
+        if self.cache.last_update:
+            last = datetime.fromtimestamp(self.cache.last_update).strftime("%H:%M:%S")
+        else:
+            last = "Never"
+        
+
+[73 more lines. Use start_line=201 to continue.]

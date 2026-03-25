@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "analyses": [
+    {
+      "timestamp": "2026-03-20T00:41:50.651770",
+      "symbol": "TEST",
+      "levels_detected": 10,
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_analyses": 1,
+    "levels_detected": 10
+  }
+}

@@ -1,0 +1,45 @@
+# tool_name: read_file
+# created_at: 2026-03-22T15:01:58.188123
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\correlation.py  (lines 62-100 of 161)
+def correlation_report(symbols=None, days=30):
+    """Generate correlation report"""
+    from stock_pro.core import A
+    
+    if symbols is None:
+        symbols = list(A.keys())[:10]  # Limit to 10 for readability
+    
+    matrix = correlation_matrix(symbols, days)
+    
+    if not matrix:
+        return "[Correlation] Not enough historical data"
+    
+    report = f"# Correlation Analysis (last {days} days)\n\n"
+    
+    # Header
+    report += "| Symbol | " + " | ".join([s[:4] for s in symbols]) + " |\n"
+    report += "|--------|" + "|".join(["------" for _ in symbols]) + "|\n"
+    
+    # Data
+    for sym1 in symbols:
+        row = [f"| {sym1[:4]}"]
+        for sym2 in symbols:
+            corr = matrix.get(sym1, {}).get(sym2, 0)
+            if corr is None:
+                row.append("-")
+            elif corr > 0.7:
+                row.append(f"**{corr:.2f}**")
+            elif corr > 0.3:
+                row.append(f"*{corr:.2f}*")
+            else:
+                row.append(f"{corr:.2f}")
+        report += " ".join(row) + " |\n"
+    
+    report += "\n*Bold = Strong positive (>0.7), Italic = Moderate (>0.3)*\n"
+    
+    # Find highly correlated pairs
+    report += "\n## Highly Correlated Pairs (>0.7)\n\n"
+    pairs = []
+    for sym1 in matrix:
+
+[61 more lines. Use start_line=101 to continue.]

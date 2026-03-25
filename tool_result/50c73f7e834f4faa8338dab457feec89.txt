@@ -1,0 +1,83 @@
+# tool_name: grep_search
+# created_at: 2026-03-24T00:39:19.480945
+# ---
+data_jin10_news.json:1:  {
+data_jin10_news.json:2:>   "source": "jin10",
+data_jin10_news.json:3:    "fetched_at": "2026-03-22T17:18:30.750860",
+data_jin10_news.json:4:    "news": [
+data_jin10_news.json:5:      {
+data_jin10_news.json:6:        "url": "https://xnews.jin10.com/details/214086",
+data_jin10_news.json:7:        "title": "技术刘报告（3月20日美盘）"
+---
+news_collector.py:46:  
+news_collector.py:47:  def fetch():
+news_collector.py:48:      news = []
+news_collector.py:49:      for url, src, pat in [
+news_collector.py:50:          ("https://finance.sina.com.cn/", "sina", r'href="(https?://finance\.sina\.com\.cn/[^"]+)"[^>]*>\s*([^<]{15,150})\s*<'),
+news_collector.py:51:>         ("https://xnews.jin10.com/", "jin10", r'href="(https://xnews\.jin10\.com/details/\d+)"[^>]*>(.*?)</a>'),
+news_collector.py:52:      ]:
+news_collector.py:53:          try:
+news_collector.py:54:              req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+news_collector.py:55:              with urllib.request.urlopen(req, timeout=15) as r:
+news_collector.py:56:                  html = r.read().decode("utf-8", errors="ignore")
+---
+news_collector.py:52:      ]:
+news_collector.py:53:          try:
+news_collector.py:54:              req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+news_collector.py:55:              with urllib.request.urlopen(req, timeout=15) as r:
+news_collector.py:56:                  html = r.read().decode("utf-8", errors="ignore")
+news_collector.py:57:>             for m in re.findall(pat, html, re.DOTALL if "jin10" in src else 0):
+news_collector.py:58:                  title = m[1].strip() if len(m) > 1 else m[0]
+news_collector.py:59:                  if "jin10" in src:
+news_collector.py:60:                      title = re.sub("<[^>]+>", "", title)[:200]
+news_collector.py:61:                  if len(title) > 15:
+news_collector.py:62:                      news.append({"s": src, "t": title, "u": m[0], "ts": datetime.now().isoformat()})
+---
+news_collector.py:54:              req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+news_collector.py:55:              with urllib.request.urlopen(req, timeout=15) as r:
+news_collector.py:56:                  html = r.read().decode("utf-8", errors="ignore")
+news_collector.py:57:              for m in re.findall(pat, html, re.DOTALL if "jin10" in src else 0):
+news_collector.py:58:                  title = m[1].strip() if len(m) > 1 else m[0]
+news_collector.py:59:>                 if "jin10" in src:
+news_collector.py:60:                      title = re.sub("<[^>]+>", "", title)[:200]
+news_collector.py:61:                  if len(title) > 15:
+news_collector.py:62:                      news.append({"s": src, "t": title, "u": m[0], "ts": datetime.now().isoformat()})
+news_collector.py:63:          except Exception as e:
+news_collector.py:64:              print(f"{src}: {e}")
+---
+rss_server.py:206:              h = '<html><head><meta charset="utf-8"><title>RSS Server</title>'
+rss_server.py:207:              h += '<style>body{font:14px sans-serif;max-width:600px;margin:50px auto;padding:20px}a{display:block;padding:10px;background:#f5f5f5;margin:5px 0;text-decoration:none;border-radius:5px}h1{margin-bottom:5px}p{color:#888}h3{margin-top:20px}</style>'
+rss_server.py:208:              h += '</head><body><h1>RSS Aggregator</h1>'
+rss_server.py:209:              h += '<p>Total: ' + str(len(all_news)) + ' | RSS: ' + str(len(rss_news)) + ' | Jin10: ' + str(len(jin10_news)) + ' | Last: ' + last + '</p>'
+rss_server.py:210:              h += '<h3>Chinese News (金十数据)</h3>'
+rss_server.py:211:>             h += '<a href="/jin10">金十快讯 (网页版) 🔥</a>'
+rss_server.py:212:              h += '<a href="/jin10.xml">金十 RSS (XML)</a>'
+rss_server.py:213:              h += '<h3>All News</h3>'
+rss_server.py:214:              h += '<a href="/all.xml">All News (RSS)</a><a href="/all.html">All News (HTML)</a>'
+rss_server.py:215:              h += '<h3>By Stock</h3>'
+rss_server.py:216:              for s in STOCKS:
+---
+rss_server.py:225:              self.end_headers()
+rss_server.py:226:              self.wfile.write(rss(jin10_news, "金十数据").encode())
+rss_server.py:227:              return
+rss_server.py:228:  
+rss_server.py:229:          # Jin10 HTML page (flash news)
+rss_server.py:230:>         if path == "jin10":
+rss_server.py:231:              self.send_response(200)
+rss_server.py:232:              self.send_header("Content-type", "text/html; charset=utf-8")
+rss_server.py:233:              self.end_headers()
+rss_server.py:234:              h = '''<!DOCTYPE html>
+rss_server.py:235:  <html><head><meta charset="utf-8"><title>金十快讯</title>
+---
+sentiment.py:229:  def _save_jin10_cache(news_items):
+sentiment.py:230:      """Save Jin10 news to file cache for persistent storage"""
+sentiment.py:231:      try:
+sentiment.py:232:          cache_file = Path(__file__).parent / "data_jin10_news.json"
+sentiment.py:233:          cached_data = {
+sentiment.py:234:>             "source": "jin10",
+sentiment.py:235:              "fetched_at": datetime.now().isoformat(),
+sentiment.py:236:              "news": [{"url": n["url"], "title": n["title"]} for n in news_items]
+sentiment.py:237:          }
+sentiment.py:238:          with open(cache_file, 'w', encoding='utf-8') as f:
+sentiment.py:239:              json.dump(cached_data, f, ensure_ascii=False, indent=2)
+---

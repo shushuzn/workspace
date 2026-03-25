@@ -1,0 +1,46 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:53:45.090660
+# ---
+        "score": int(total),
+        "grade": grade,
+        "safety": safety,
+        "growth": growth_score,
+        "yield_score": yield_score,
+        "streak": streak,
+        "yield": data["yield"] * 100,
+        "payout": data["payout"] * 100,
+        "dgr": data["growth"] * 100
+    }
+
+
+def dividend_report(symbols):
+    """Generate dividend report"""
+    report = "# Dividend Analysis Report\n\n"
+    report += "| Symbol | Yield | Payout | Growth | Streak | Score | Grade |\n"
+    report += "|--------|-------|--------|--------|--------|-------|-------|\n"
+    
+    results = []
+    for symbol in symbols:
+        d = get_dividend_data(symbol)
+        if d["yield"] > 0:
+            score = calc_dividend_score(symbol)
+            results.append(score)
+            report += f"| {symbol} | {d['yield']*100:.1f}% | {d['payout']*100:.0f}% | {d['growth']*100:.1f}% | {d['streak']}y | {score['score']} | {score['grade']} |\n"
+    
+    if not results:
+        return report + "\nNo dividend data for selected symbols."
+    
+    # Best dividend stocks
+    report += "\n## Top Dividend Picks\n\n"
+    top = sorted(results, key=lambda x: x["score"], reverse=True)[:5]
+    for i, t in enumerate(top, 1):
+        report += f"{i}. **{t['symbol']}**: {t['grade']} (Score: {t['score']}, Yield: {t['yield']:.1f}%)\n"
+    
+    # Dividend aristocrats
+    aristocrats = [r for r in results if r["streak"] >= 25]
+    if aristocrats:
+        report += "\n## Dividend Aristocrats (25+ years)\n\n"
+        for a in sorted(aristocrats, key=lambda x: x["score"], reverse=True):
+            report += f"- {a['symbol']}: {a['streak']} years, {a['yield']:.1f}% yield\n"
+    
+    return report

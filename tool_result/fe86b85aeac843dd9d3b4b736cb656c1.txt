@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:51:41.882181
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 1110-1160 of 1247)
+            
+            lines.append(f"  = {timeliness}{news['title'][:42]}")
+            meta = f"[{sector}][{source}]"
+            if keywords:
+                meta += " " + " ".join([f"#{k}" for k in keywords[:2]])
+            if codes:
+                meta += f" ${codes[0]}"
+            lines.append(f"    {meta}")
+            if summary:
+                lines.append(f"    -> {summary}")
+        if len(neutral) > 3:
+            lines.append(f"  ... 还有{len(neutral)-3}条中性新闻")
+    
+    lines.append("")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    
+    merged_msg = '\n'.join(lines)
+    platforms = []
+    news_ids = [n["id"] for n in news_list]
+    
+    # QQ
+    if CONFIG["qq"]["enabled"]:
+        ok, info = send_qq_message(CONFIG["qq"]["group_id"], merged_msg)
+        if ok:
+            print("  [OK] QQ")
+            platforms.append("qq")
+        else:
+            print(f"  [FAIL] QQ: {info}")
+    
+    # Feishu
+    if CONFIG["feishu"]["enabled"]:
+        ok, info = send_feishu_message(merged_msg)
+        if ok:
+            print("  [OK] Feishu")
+            platforms.append("feishu")
+        else:
+            print(f"  [FAIL] Feishu: {info}")
+    
+    # 标记已发送
+    if platforms:
+        data.mark_sent(news_ids, platforms)
+        print(f"[OK] Sent to {', '.join(platforms)}")
+    else:
+        print("[FAIL] No platform succeeded")
+
+def cmd_digest(args):
+    data = NewsData()
+    recent = [n for n in data.data["news"] 
+              if datetime.now() - datetime.fromisoformat(n["fetched_at"]) < timedelta(hours=24)]
+    
+    if not recent:
+
+[87 more lines. Use start_line=1161 to continue.]

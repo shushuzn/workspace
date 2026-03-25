@@ -1,0 +1,35 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T23:38:44.833348
+# ---
+rss_server.py:85:          sent_stats[sent] = sent_stats.get(sent, 0) + 1
+rss_server.py:86:  
+rss_server.py:87:      # RSS链接
+rss_server.py:88:>     feeds_html = f'''
+rss_server.py:89:      <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin-bottom:20px;">
+rss_server.py:90:          <b>📡 RSS 订阅:</b>
+rss_server.py:91:          <a href="/news.xml">📰 全部新闻 ({len(news_list)})</a>
+---
+rss_server.py:106:      sentiment_html += '</div>'
+rss_server.py:107:  
+rss_server.py:108:      # RSS订阅链接
+rss_server.py:109:>     feeds_html = f'''
+rss_server.py:110:      <div class="feeds" style="background:#16213e;padding:15px;border-radius:8px;margin-bottom:20px;">
+rss_server.py:111:          <b>📡 RSS 订阅:</b>
+rss_server.py:112:          <a href="/news.xml">📰 全部新闻 ({len(news_list)})</a>
+---
+rss_server.py:142:      <a class="rss-link" href="/news.xml">📡 RSS订阅</a>
+rss_server.py:143:      {sentiment_html}
+rss_server.py:144:      {stats_html}
+rss_server.py:145:>     {feeds_html}
+rss_server.py:146:  """.format(sentiment_html=sentiment_html, stats_html=stats_html, feeds_html=feeds_html)
+rss_server.py:147:  
+rss_server.py:148:      for n in news_list[:30]:
+---
+rss_server.py:143:      {sentiment_html}
+rss_server.py:144:      {stats_html}
+rss_server.py:145:      {feeds_html}
+rss_server.py:146:> """.format(sentiment_html=sentiment_html, stats_html=stats_html, feeds_html=feeds_html)
+rss_server.py:147:  
+rss_server.py:148:      for n in news_list[:30]:
+rss_server.py:149:          source = n.get('source', '')
+---

@@ -1,0 +1,56 @@
+[
+  {
+    "tool_id": "memory-importance-assessor",
+    "name": "Memory Importance Assessor",
+    "deleted_at": "2026-03-19T17:46:16.435005",
+    "reason": "duplicate_merge"
+  },
+  {
+    "tool_id": "memory-tag-search",
+    "name": "Memory Tag Search",
+    "deleted_at": "2026-03-19T17:46:16.435030",
+    "reason": "duplicate_merge"
+  },
+  {
+    "tool_id": "memory-incremental-compressor",
+    "name": "Memory Incremental Compressor",
+    "deleted_at": "2026-03-19T17:46:16.435032",
+    "reason": "duplicate_merge"
+  },
+  {
+    "tool_id": "memory-benchmark",
+    "name": "Memory Benchmark",
+    "deleted_at": "2026-03-19T17:46:16.435034",
+    "reason": "duplicate_merge"
+  },
+  {
+    "tool_id": "auto-test-runner",
+    "name": "Auto Test Runner",
+    "deleted_at": "2026-03-19T17:46:16.435035",
+    "reason": "duplicate_merge"
+  },
+  {
+    "tool_id": "memory-cleanup-compress",
+    "name": "Memory Cleanup & Deduplication",
+    "deleted_at": "2026-03-19T17:46:16.435037",
+    "reason": "duplicate_merge"
+  },
+  {
+    "tool_id": "memory-index-generator",
+    "name": "Memory Index Generator",
+    "deleted_at": "2026-03-19T17:46:16.435038",
+    "reason": "duplicate_merge"
+  },
+  {
+    "tool_id": "auto-critic-v7",
+    "name": "Auto-Critic v7.0 Enhanced",
+    "deleted_at": "2026-03-19T17:46:16.435039",
+    "reason": "duplicate_merge"
+  },
+  {
+    "tool_id": "memory-hybrid-pipeline",
+    "name": "Memory Hybrid Compression Pipeline",
+    "deleted_at": "2026-03-19T17:46:16.435041",
+    "reason": "duplicate_merge"
+  }
+]

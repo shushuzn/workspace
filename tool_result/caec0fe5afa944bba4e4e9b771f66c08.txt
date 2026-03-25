@@ -1,0 +1,58 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-21T10:09:08.340913
+# ---
+============================================================
+[SIX HATS] Topic: "工作站优化"
+============================================================
+
+[W] White Hat (白帽)
+   Focus: Facts and Information
+   Questions:
+     1. What facts do we know?
+     2. What information is missing?
+     3. What do we need to find out?
+     4. What are the key data points?
+
+[R] Red Hat (红帽)
+   Focus: Emotions and Intuition
+   Questions:
+     1. What do I feel about "工作站优化"?
+     2. What are my gut reactions?
+     3. What does my intuition tell me?
+     4. What emotions does "工作站优化" topic evoke?
+
+[B] Black Hat (黑帽)
+   Focus: Critical Judgment and Risks
+   Questions:
+     1. What are the dangers?
+     2. What might go wrong?
+     3. What are the weaknesses?
+     4. Why might "工作站优化" fail?
+
+[Y] Yellow Hat (黄帽)
+   Focus: Optimism and Benefits
+   Questions:
+     1. What are the benefits?
+     2. What is the best case scenario?
+     3. What value does "工作站优化" create?
+     4. Why could "工作站优化" work?
+
+[G] Green Hat (绿帽)
+   Focus: Creative and Possibilities
+   Questions:
+     1. What are new possibilities?
+     2. What are alternatives?
+     3. What wild ideas emerge?
+     4. What if we think outside the box?
+
+[L] Blue Hat (蓝帽)
+   Focus: Process Control and Summary
+   Questions:
+     1. What is our next step?
+     2. What have we achieved?
+     3. How should we proceed?
+     4. What summary can we make?
+
+============================================================
+
+[Saved to] flow-archive\brainstorm-current\sixhats_ideas.json

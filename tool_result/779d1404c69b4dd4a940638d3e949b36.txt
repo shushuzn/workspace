@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T09:58:03.764965
+# ---
+D:\OpenClaw\workspace\50-reports\stocks\NVDA_2026-03-22.md  (lines 145-185 of 253)
+---
+
+## 6. Historical Valuation Analysis
+
+| Metric | Value | Context |
+|--------|-------|---------|
+| Current P/E | 35x | - |
+| 5Y Low P/E | 15x | Historical bottom |
+| 5Y Avg P/E | 55x | Historical mean |
+| 5Y High P/E | 120x | Historical peak |
+| **Percentile** | **19%** | Deep Value (Historical Discount) |
+
+P/E Position: [█████░░░░░░░░░░░░░░░░░░░░░░░░░]
+
+```
+  15x (Low) ---- 55x (Avg) ---- 120x (High)
+                 ↑
+            Current: 35x (19%)
+```
+
+### 6.1 Analyst Consensus
+
+| Rating | % of Analysts | Description |
+|--------|---------------|-------------|
+| Buy/Outperform | 80% | Strong conviction |
+| Hold | 15% | Neutral outlook |
+| Sell/Underperform | 5% | Negative view |
+
+Rating Distribution: [████████████████](80% Buy) [███](15% Hold) [█](5% Sell)
+
+| Metric | Value |
+|--------|-------|
+| Analysts Covering | 52 | - |
+| Consensus Rating | Outperform | - |
+| 12M Target | $269 | +47.5% upside |
+
+### 6.2 Institutional Ownership
+
+| Metric | Value |
+|--------|-------|
+| Inst. Ownership | 75% | High (stable) |
+
+[68 more lines. Use start_line=186 to continue.]

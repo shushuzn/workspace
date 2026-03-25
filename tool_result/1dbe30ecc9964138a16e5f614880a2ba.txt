@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T11:00:09.824106
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py  (lines 45-85 of 243)
+    parser.add_argument('--alert', nargs='*', help='Price alerts')
+    parser.add_argument('--chart', nargs='*', help='Generate chart')
+    parser.add_argument('--screener', action='store_true', help='Run screener')
+    parser.add_argument('--portfolio', action='store_true', help='Show portfolio')
+    parser.add_argument('--portfolio-add', nargs=3, help='Add position: SYMBOL SHARES COST')
+    parser.add_argument('--portfolio-remove', nargs=1, help='Remove position')
+    parser.add_argument('--cron', nargs='*', help='Cron jobs: list/add/remove/pause/resume')
+    parser.add_argument('--cron-add', nargs=4, help='Add cron: schedule command symbols...')
+    parser.add_argument('--webhook', nargs='*', help='Webhook: list/add/remove')
+    parser.add_argument('--webhook-add', nargs=3, help='Add webhook: name url events...')
+    parser.add_argument('--api', action='store_true', help='Start API server')
+    
+    args = parser.parse_args()
+    
+    print(BANNER)
+    
+    # Help
+    if args.help or (not args.symbols and not any(vars(args).values())):
+        print("""
+Stock PRO v11.0 - Usage
+=======================
+
+Analysis:
+   py -m stock_pro.main NVDA              Single stock (English)
+   py -m stock_pro.main NVDA --cn         Single stock (Chinese)
+   py -m stock_pro.main NVDA --json        JSON output
+   py -m stock_pro.main NVDA --live       Use live price
+
+Multi-Stock:
+   py -m stock_pro.main --compare NVDA META JPM   Compare stocks
+   py -m stock_pro.main --summary NVDA META JPM   Summary cards
+
+Export:
+   py -m stock_pro.main --csv NVDA META           Export to CSV
+   py -m stock_pro.main --xlsx NVDA META          Export to Excel
+   py -m stock_pro.main --db NVDA META            Save to SQLite
+   py -m stock_pro.main --dashboard NVDA META     Generate HTML dashboard
+
+Tools:
+   py -m stock_pro.main --screener               Run screener
+   py -m stock_pro.main --alert NVDA META         Check alerts
+
+[158 more lines. Use start_line=86 to continue.]

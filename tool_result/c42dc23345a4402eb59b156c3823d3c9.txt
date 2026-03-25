@@ -1,0 +1,86 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:25:57.691165
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\scheduler.py  (lines 1-80 of 139)
+#!/usr/bin/env python3
+"""
+NewsHub Scheduler - 定时任务
+自动抓取新闻并推送到飞书
+"""
+import sys
+import time
+import subprocess
+import json
+from pathlib import Path
+from datetime import datetime
+
+sys.stdout.reconfigure(encoding='utf-8')
+BASE_DIR = Path(__file__).parent
+LOG_FILE = BASE_DIR / ".scheduler.log"
+STATE_FILE = BASE_DIR / ".scheduler_state.json"
+
+class Scheduler:
+    def __init__(self):
+        self.load_state()
+    
+    def load_state(self):
+        if STATE_FILE.exists():
+            with open(STATE_FILE, 'r', encoding='utf-8') as f:
+                self.state = json.load(f)
+        else:
+            self.state = {
+                "last_fetch": None,
+                "last_digest": None,
+                "last_alert": None,
+                "fetch_count": 0
+            }
+    
+    def save_state(self):
+        with open(STATE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(self.state, f, ensure_ascii=False, indent=2)
+    
+    def log(self, msg):
+        timestamp = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        log_line = f"[{timestamp}] {msg}"
+        print(log_line)
+        with open(LOG_FILE, 'a', encoding='utf-8') as f:
+            f.write(log_line + "\n")
+    
+    def run_command(self, script, *args):
+        cmd = [sys.executable, BASE_DIR / script, *args]
+        result = subprocess.run(cmd, capture_output=True, text=True)
+        return result.returncode == 0
+    
+    def should_run(self, task, interval_minutes):
+        last = self.state.get(f"last_{task}")
+        if not last:
+            return True
+        last_time = datetime.fromisoformat(last)
+        elapsed = (datetime.now() - last_time).total_seconds() / 60
+        return elapsed >= interval_minutes
+    
+    def mark_done(self, task):
+        self.state[f"last_{task}"] = datetime.now().isoformat()
+        self.state["fetch_count"] = self.state.get("fetch_count", 0) + 1
+        self.save_state()
+    
+    def run_cycle(self):
+        """运行一个完整周期"""
+        self.log("=" * 40)
+        self.log("开始抓取周期")
+        
+        # 每30分钟: 抓取+预览
+        if self.should_run("fetch", 30):
+            self.log("执行: 抓取新闻")
+            if self.run_command("news_fetcher.py", "--no-cache"):
+                self.mark_done("fetch")
+                self.log("✓ 抓取成功")
+            else:
+                self.log("✗ 抓取失败")
+        
+        # 每2小时: 摘要推送
+        if self.should_run("digest", 120):
+            self.log("执行: 摘要推送")
+            if self.run_command("news_feishu.py", "digest"):
+
+[59 more lines. Use start_line=81 to continue.]

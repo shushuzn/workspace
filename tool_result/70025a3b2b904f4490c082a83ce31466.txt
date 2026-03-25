@@ -1,0 +1,39 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T10:16:18.471771
+# ---
+  💾 缓存: 67 条 (27s前)
+  1. Investing
+     Oil prices volatile, pinned above $110/bbl after Trump’s 48-...
+     https://www.investing.com/news/commodities-news/oil-prices-volatile-pinned-above-110bbl-after-trumps-48hr-deadline-on-iran-4574162
+  2. Investing
+     Earnings call transcript: Fonterra’s H1 2026 sees strong res...
+     https://www.investing.com/news/transcripts/earnings-call-transcript-fonterras-h1-2026-sees-strong-results-amid-geopolitical-caution-93CH-4574164
+  3. Investing
+     Dollar poised for rally as escalating Middle East conflict s...
+     https://www.investing.com/news/economy-news/dollar-poised-for-rally-as-escalating-middle-east-conflict-spurs-haven-demand-4574166
+  🤖 启用本地LLM并行分析...
+    缓存命中: 1/3
+  ✅ LLM分析完成: 3条 (18.1s)
+
+==================================================
+  🤖 LLM 深度分析
+==================================================
+
+  📊 市场情绪: +100 (偏多)
+  📈 利好信号: 3 | 📉 利空信号: 0
+
+  🎯 影响市场:
+     📈 股市: 3
+     💱 外汇: 2
+
+  👤 热门公司/人物:
+     Trump(1), Iran(1), Fonterra(1), H1 2026(1), Middle East conflict(1)
+
+  📝 新闻分析:
+  1. 🟢 📈 [+100] 油价波动，因特朗普48小时对伊朗的最后期限导致价格超过110美元/桶。...
+     → stock, forex
+  2. 🟢 📈 [+100] Fonterra在H1 2026财报显示强劲业绩，尽管面临地缘政治不确...
+     → stock
+  3. 🟢 📈 [+100] 美元有望上涨，因中东冲突加剧避险需求。...
+     → stock, forex
+

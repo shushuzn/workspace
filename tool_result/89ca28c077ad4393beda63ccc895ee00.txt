@@ -1,0 +1,39 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T16:34:27.556247
+# ---
+main.py:211:          return
+main.py:212:      
+main.py:213:      # Single stock analysis
+main.py:214:      # Skip single-stock analysis if other analysis modes are requested
+main.py:215:      skip_single = any([
+main.py:216:          args.technical, args.sync_status,
+main.py:217:          args.export_json, args.export_md, args.export_html, args.export_all_formats,
+main.py:218:          args.earnings_predict, args.fscore, args.dividend_report,
+main.py:219:>         args.summary is not None, args.compare, args.csv, args.xlsx, args.db,
+main.py:220:          args.dashboard is not None, args.insights, args.sentiment, args.sector_sentiment
+main.py:221:      ])
+main.py:222:      
+main.py:223:      if args.symbols and not skip_single:
+main.py:224:          sym = args.symbols[0]
+main.py:225:          lang = "cn" if args.cn else "en"
+main.py:226:          data = analyze(sym)
+main.py:227:          
+---
+main.py:264:      # Summary
+main.py:265:      if args.summary is not None:
+main.py:266:          symbols = args.summary if args.summary else args.symbols
+main.py:267:          results = analyze_multiple(symbols)
+main.py:268:          print(gen_summary_card(results))
+main.py:269:          return
+main.py:270:      
+main.py:271:      # CSV
+main.py:272:>     if args.csv:
+main.py:273:          symbols = args.symbols if args.symbols else ["NVDA"]
+main.py:274:          results = analyze_multiple(symbols)
+main.py:275:          print(export_csv(results))
+main.py:276:          return
+main.py:277:      
+main.py:278:      # Excel
+main.py:279:      if args.xlsx:
+main.py:280:          symbols = args.symbols if args.symbols else ["NVDA"]
+---

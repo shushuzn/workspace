@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:25:29.598681
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 2600-2650 of 2838)
+    symbols_str = " ".join(symbols)
+    cmd = f'py "{WORKSPACE}\\30-scripts-tools\\stock_pro_v4.py" --compare {symbols_str}'
+    
+    # Read existing cron skill
+    cron_skill = WORKSPACE / "active_skills" / "cron" / "SKILL.md"
+    if cron_skill.exists():
+        with open(cron_skill, 'r', encoding='utf-8') as f:
+            content = f.read()
+        
+        # Parse cron expression
+        parts = cron_expr.split()
+        if len(parts) >= 5:
+            minute, hour, day, month, dow = parts[:5]
+            desc = f"Stock analysis at {hour}:{minute.zfill(2)} on {dow}"
+            
+            # Add task entry
+            task_entry = f"""
+### Stock Analysis - {datetime.now().strftime('%Y-%m-%d')}
+- Command: `{cmd}`
+- Schedule: {cron_expr}
+- Description: {desc}
+- Status: PENDING
+"""
+            
+            # Save to cron log
+            log_file = WORKSPACE / "30-scripts-tools" / "cron_log.md"
+            with open(log_file, 'a', encoding='utf-8') as f:
+                f.write(task_entry)
+            
+            print(f"\n[Cron] Task scheduled:")
+            print(f"  Command: {cmd}")
+            print(f"  Schedule: {cron_expr}")
+            print(f"  Log: {log_file}")
+            return True
+    else:
+        print(f"\n[Cron] Cron skill not found. Using Task Scheduler...")
+        
+        # Windows Task Scheduler alternative
+        task_name = "StockPRO_AutoAnalysis"
+        schedule_cmd = f'schtasks /create /tn "{task_name}" /tr "{cmd}" /sc daily /st {hour}:{minute}'
+        
+        with open(cron_file, 'w', encoding='utf-8') as f:
+            f.write(f'@echo off\n{schedule_cmd}\npause')
+        
+        print(f"\n[Cron] Created scheduler script: {cron_file}")
+        print("Run as Administrator to create the scheduled task.")
+        return True
+
+def generate_json_report(sym):
+    import json
+    
+
+[188 more lines. Use start_line=2651 to continue.]

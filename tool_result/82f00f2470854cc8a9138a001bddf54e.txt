@@ -1,0 +1,61 @@
+# tool_name: read_file
+# created_at: 2026-03-22T23:04:37.660014
+# ---
+    return results
+
+def cmd_status(args):
+    data = NewsData()
+    total = len(data.data["news"])
+    unsent = len([n for n in data.data["news"] if not n.get("sent")])
+    sent = total - unsent
+    sectors = {}
+    sentiments = {"利好": 0, "利空": 0, "中性": 0}
+    for n in data.data["news"]:
+        sectors[n.get("sector","通用")] = sectors.get(n.get("sector","通用"), 0) + 1
+        sentiments[n.get("sentiment","中性")] = sentiments.get(n.get("sentiment","中性"), 0) + 1
+    print(f"=== News Manager Status ===")
+    print(f"Total: {total} | Sent: {sent} | Unsent: {unsent}")
+    print(f"Stats: QQ={data.data['stats'].get('qq',0)}, Feishu={data.data['stats'].get('feishu',0)}")
+    print(f"Sentiments: {sentiments}")
+    print(f"Top Sectors: {sorted(sectors.items(), key=lambda x: -x[1])[:5]}")
+
+def cmd_digest(args):
+    data = NewsData()
+    days = int(args.days) if hasattr(args, 'days') else 1
+    cutoff = datetime.now() - timedelta(days=days)
+    recent = [n for n in data.data["news"] if datetime.fromisoformat(n.get("fetched_at","2000")).replace(tzinfo=None) > cutoff]
+    if not recent:
+        print(f"No news in last {days} day(s)")
+        return
+    sentiments = {"利好": [], "利空": [], "中性": []}
+    for n in recent:
+        sentiments[n.get("sentiment","中性")].append(n)
+    print(f"=== Digest ({len(recent)} news in {days} day(s)) ===")
+    for sent, news in sentiments.items():
+        if news:
+            print(f"\n{sent} ({len(news)}):")
+            for n in news[:3]:
+                print(f"  - {n.get('title','')[:40]}")
+    sectors = {}
+    for n in recent:
+        sectors[n.get("sector","通用")] = sectors.get(n.get("sector","通用"), 0) + 1
+    print(f"\nSector Distribution: {dict(sorted(sectors.items(), key=lambda x: -x[1])[:5])}")
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="News Manager v3.0")
+    parser.add_argument("cmd", choices=["fetch", "push", "status", "digest"], help="Command")
+    parser.add_argument("--limit", default="5", help="News limit")
+    parser.add_argument("--days", default="1", help="Days for digest")
+    args = parser.parse_args()
+    if args.cmd == "fetch":
+        cmd_fetch(args)
+    elif args.cmd == "push":
+        cmd_push(args)
+    elif args.cmd == "status":
+        cmd_status(args)
+    elif args.cmd == "digest":
+        cmd_digest(args)
+
+if __name__ == "__main__":
+    main()

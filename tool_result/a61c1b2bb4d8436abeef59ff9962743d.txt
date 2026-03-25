@@ -1,0 +1,95 @@
+# tool_name: read_file
+# created_at: 2026-03-22T12:25:13.280362
+# ---
+# Stock PRO Skill v12.0
+
+## Description
+Modular stock analysis tool with DCF valuation, portfolio management, screening, automation, and REST API.
+
+## Usage
+```
+stock-pro <symbol> [--cn] [--json] [--live]
+stock-pro --compare <symbols...>
+stock-pro --summary <symbols...>
+stock-pro --screener
+stock-pro --portfolio [--add <sym> <shares> <cost>] [--remove <sym>]
+stock-pro --alert <symbols...>
+stock-pro --chart <symbols...>
+stock-pro --csv <symbols...>
+stock-pro --xlsx <symbols...>
+stock-pro --db <symbols...>
+stock-pro --dashboard <symbols...>
+stock-pro --cron [--add <schedule> <cmd> <symbols>]
+stock-pro --webhook [--add <name> <url> <events>]
+stock-pro --api
+stock-pro --market
+stock-pro --sector-rotation
+stock-pro --market-breadth
+stock-pro --quick-report
+stock-pro --investment-summary
+stock-pro --insights
+stock-pro --themes
+```
+
+## Examples
+```bash
+# Analysis
+stock-pro NVDA              # English report
+stock-pro NVDA --cn         # Chinese report
+stock-pro NVDA --json       # JSON output
+stock-pro NVDA --live       # Live price
+
+# Multi-stock
+stock-pro --compare NVDA META JPM
+stock-pro --summary NVDA META JPM
+
+# Market Analysis
+stock-pro --market
+stock-pro --sector-rotation
+stock-pro --market-breadth
+stock-pro --quick-report
+stock-pro --investment-summary
+
+# Insights
+stock-pro --insights
+stock-pro --themes
+
+# Tools
+stock-pro --screener
+stock-pro --portfolio
+stock-pro --portfolio-add NVDA 100 150
+stock-pro --alert NVDA META JPM
+stock-pro --chart NVDA META JPM
+
+# Automation
+stock-pro --cron-add "09:00" alert NVDA META
+stock-pro --webhook-add slack https://hooks.slack.com/... alert
+stock-pro --api
+```
+
+## REST API
+```bash
+GET  /analyze?symbol=NVDA
+GET  /compare?symbols=NVDA,META
+GET  /screener?min_score=60
+GET  /portfolio
+POST /portfolio/add {"symbol": "NVDA", "shares": 100, "cost": 150}
+```
+
+## Output
+| Type | Location |
+|------|----------|
+| Reports | `50-reports/stocks/*.md` |
+| Charts | `50-reports/stocks/*.png` |
+| CSV | `50-reports/stocks/*.csv` |
+| Database | `30-scripts-tools/stock_pro.db` |
+| Dashboard | `50-reports/stocks/dashboard.html` |
+
+## CoPaw Triggers
+- "analyze NVDA"
+- "stock comparison NVDA META"
+- "screen stocks"
+- "show portfolio"
+- "NVDA chart"
+- "NVDA alert"
+- "start stock api"

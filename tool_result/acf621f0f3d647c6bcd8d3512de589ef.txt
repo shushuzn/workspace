@@ -1,0 +1,58 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T10:39:19.051470
+# ---
+
+==================================================
+  NewsHub Fetcher
+==================================================
+
+  ▶ Time: 2026-03-23 10:38:52
+
+  ▶ 并行抓取 6 个源...
+  ✓ 同花顺: +10
+  ✓ 东方财富: +10
+  ✓ 新浪财经: +15
+  ✓ Seeking Alpha: +7
+  ✓ Investing: +10
+  ✓ CNBC: +15
+
+──────────────────────────────────────────────────
+  📊 Total: 67  ⏱️ 1.8s
+     同花顺: 10
+     东方财富: 10
+     新浪财经: 15
+     Seeking Alpha: 7
+     Investing: 10
+     CNBC: 15
+──────────────────────────────────────────────────
+
+  1. CNBC
+     OpenClaw's ChatGPT moment sparks concern that AI models are ...
+     https://www.cnbc.com/2026/03/21/openclaw-chatgpt-moment-sparks-concern-ai-models-becoming-commodities.html
+  2. CNBC
+     David Zaslav’s WBD-Paramount deal payout highlights new 'gol...
+     https://www.cnbc.com/2026/03/20/wbd-david-zaslav-pay-paramount.html
+  🤖 启用本地LLM并行分析...
+    缓存命中: 0/2
+  ✅ LLM分析完成: 2条 (17.3s)
+
+==================================================
+  🤖 LLM 深度分析
+==================================================
+
+  📊 市场情绪:
+     📈 整体: BULLISH
+     📈 利好: 1 | 📉 利空: 1
+     📊 分数: +25.0
+  🎯 影响市场:
+     📈 股市: 2
+  💡 建议分布:
+     ➡️ 观望: 1
+     Bullish: 1
+
+  📝 新闻分析:
+  1. 🔴 ➖ [-50] 金融新闻指出，OpenClaw的ChatGPT时刻引发了对AI模型成为...
+     → stock
+  2. 🟢 ➖ [+100] CEO David Zaslav's payout from WBD-...
+     → stock
+

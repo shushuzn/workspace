@@ -1,0 +1,66 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:59:40.939978
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\advanced_metrics.py  (lines 1-60 of 150)
+"""Advanced Metrics - Enhanced financial analysis"""
+from stock_pro.data_target import A
+from stock_pro.data_financial import F
+from stock_pro.data_price import P, B, E
+
+
+def get_advanced_metrics(symbol):
+    """Calculate advanced financial metrics"""
+    if symbol not in A:
+        return None
+    
+    price = P.get(symbol, 0)
+    eps = E.get(symbol, 0)
+    gm, pm, roe, roic, de, rg, fcf, div = F.get(symbol, (0,0,0,0,0,0,0,0))
+    beta = B.get(symbol, 1.0)
+    target, rating, num_analysts = A[symbol]
+    
+    # Basic metrics
+    pe = price / eps if eps > 0 else 0
+    upside = (target - price) / price * 100 if price else 0
+    
+    # Advanced metrics
+    roa = roe * (1 - de / 10)  # ROA approximation
+    ev_ebitda = (price * 10) / (gm * price * 0.2) if gm > 0 else 0  # Simplified EV/EBITDA
+    pb = pe * (1 / roe) if roe > 0 else 0  # P/B approximation
+    ps = pm * price if pm > 0 else 0  # P/S approximation
+    debt_equity = de
+    current_ratio = 2.0 - (de * 0.1)  # Approximation
+    quick_ratio = current_ratio * 0.8  # Approximation
+    
+    # Growth metrics
+    peg = pe / (rg * 100) if rg > 0 else 0
+    earnings_yield = (eps / price * 100) if price > 0 else 0
+    fcf_yield = (fcf * price / 100) / price * 100 if price > 0 else 0
+    
+    # Risk metrics
+    sharpe = (rg * 100 - 2) / (beta * 15) if beta > 0 else 0  # Simplified Sharpe
+    sortino = sharpe * 1.2  # Approximation
+    
+    # Quality scores
+    profitability_score = min(100, (pm * 200 + gm * 50 + roic * 100) / 3)
+    balance_sheet_score = min(100, max(0, 100 - de * 20))
+    growth_score = min(100, rg * 400) if rg > 0 else max(0, 50 + rg * 200)
+    valuation_score = min(100, max(0, 100 - pe * 2)) if pe > 0 else 50
+    
+    overall_quality = (profitability_score * 0.3 + balance_sheet_score * 0.2 + 
+                       growth_score * 0.25 + valuation_score * 0.25)
+    
+    return {
+        "symbol": symbol,
+        "price": price,
+        "eps": eps,
+        "pe": pe,
+        "upside": upside,
+        # Profitability
+        "gm": gm * 100,
+        "pm": pm * 100,
+        "roe": roe * 100,
+        "roic": roic * 100,
+        "roa": roa * 100,
+
+[90 more lines. Use start_line=61 to continue.]

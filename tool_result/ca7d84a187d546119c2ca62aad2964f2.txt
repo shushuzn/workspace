@@ -1,0 +1,20 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T10:04:20.288944
+# ---
+Command failed with exit code 1.
+[stdout]
+
+================================================================================
+Stock PRO v8.0 - Multi-Stock Comparison
+================================================================================
+
+Symbol      Price   Target   Upside  Score    P/E   PEG    FCF   Div    ROE Rating
+----------------------------------------------------------------------------------------------------
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py", line 1584, in <module>
+    generate_comparison(symbols)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py", line 1570, in generate_comparison
+    print(f"{r['symbol']:<8} ${r['price']:>7.2f} ${r['target']:>7.2f} {r['upside']:>+7.1f}% {r['score']:>5}/100 {r['pe']:>5.1f}x {r['peg']:>4.2f} {r['fcf_yield']*100:>5.1f}% {r['div_yield']*100:>4.2f}% {r['roe']*100:>5.1f}% {rating_icon}")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\U0001f7e2' in position 78: illegal multibyte sequence

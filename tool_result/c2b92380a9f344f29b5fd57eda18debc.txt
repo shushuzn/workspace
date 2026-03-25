@@ -1,0 +1,770 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:12:50.294673
+# ---
+#!/usr/bin/env python3
+"""NewsHub Feishu - 飞书推送 (专业版 v2)"""
+import sys
+sys.stdout.reconfigure(encoding='utf-8')
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent))
+from news_fetcher import fetch_all, load_config
+from datetime import datetime
+import json, ssl, time, urllib.request
+import argparse
+
+BASE_DIR = Path(r"D:\OpenClaw\workspace\30-scripts-tools")
+CONFIG_FILE = BASE_DIR / "feishu-tools" / "feishu-config.json"
+HISTORY_FILE = BASE_DIR / "news_history.json"
+LOG_FILE = Path(__file__).parent / "send_log.json"
+
+class S:
+    HEADER, BLUE, CYAN, GREEN, YELLOW, RED, BOLD, END = "\033[95m", "\033[94m", "\033[96m", "\033[92m", "\033[93m", "\033[91m", "\033[1m", "\033[0m"
+
+def c(s, t): return f"{s}{t}{S.END}" if sys.stdout.isatty() else t
+def B(t): return c(S.BOLD, t)
+def R(t): return c(S.RED, t)
+def G(t): return c(S.GREEN, t)
+def Y(t): return c(S.YELLOW, t)
+def L(t): return c(S.BLUE, t)
+def C(t): return c(S.CYAN, t)
+
+def info(m): print(f"  {L('▶')} {m}")
+def ok(m): print(f"  {G('✓')} {G(m)}")
+def warn(m): print(f"  {Y('⚠')} {Y(m)}")
+def error(m): print(f"  {R('✗')} {R(m)}")
+
+def banner(t, i="📡"):
+    print()
+    print(C("╔" + "═" * 48 + "╗"))
+    print(C("║") + f"  {i} {B(t)}".ljust(48) + C("║"))
+    print(C("╚" + "═" * 48 + "╝"))
+    print()
+
+def sep(): print(C("  " + "─" * 46))
+
+def stats_box(cnt, new, srcs):
+    print()
+    print(C("  ┌─") + f" 新闻统计 {C('─'*32)}┐")
+    print(C("  │") + f"  📰 总数: {cnt:<6}  🆕 新: {new:<6}  {C('│')}")
+    print(C("  ├") + f" {C('─'*44)} {C('├')}")
+    for s, n in srcs.items():
+        icon = "🔹" if "金十" in s else ("🔸" if "Investing" in s else "🔶")
+        bar = "█" * min(n // 2, 10)
+        print(C("  │") + f"  {icon} {s:<12} {n:>2} 条 {bar:<10} {C('│')}")
+    print(C("  └") + f" {C('─'*44)} {C('┘')}")
+    print()
+
+def result_box(mode, sent, total, elapsed, cached=False):
+    print()
+    print(C("  ┌─") + f" 结果 {C('─'*40)}┐")
+    print(C("  │") + f"  📊 Mode: {mode:<10}  📤 Sent: {sent}/{total}      {C('│')}")
+    cache_tag = " ✅" if cached else ""
+    print(C("  │") + f"  ⏱️ 耗时: {elapsed:.1f}s{cache_tag:<20} {C('│')}")
+    print(C("  └") + f" {C('─'*46)} {C('┘')}")
+    print()
+
+def bar(cur, tot, w=25):
+    f = int(w * cur / tot) if tot > 0 else 0
+    return f"[{'█'*f}{'─'*(w-f)}] {cur}/{tot}"
+
+def prog(cur, tot, pre=""):
+    print(f"\r  {pre}{bar(cur, tot)}", end="", flush=True)
+
+def compact_view(news_list, limit=10):
+    """紧凑视图"""
+    for i, n in enumerate(news_list[:limit], 1):
+        title = n['title'][:45] + "..." if len(n['title']) > 45 else n['title']
+        s = n.get('source', '')
+        icon = "📰" if "金十" in s else ("💹" if "股票" in s else ("🌐" if "Investing" in s else ("📊" if "Seeking" in s else "📱")))
+        print(f"  {i:>2}. {icon} {title}")
+    if len(news_list) > limit:
+        print(f"  ... 还有 {len(news_list) - limit} 条")
+
+# 配置
+def load_feishu_config():
+    if CONFIG_FILE.exists():
+        with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def load_history():
+    if HISTORY_FILE.exists():
+        with open(HISTORY_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data if isinstance(data, list) else data.get('sent', [])
+    return []
+
+def save_history(hist):
+    with open(HISTORY_FILE, 'w', encoding='utf-8') as f:
+        json.dump(hist[-1000:], f, ensure_ascii=False)
+
+def load_log():
+    if LOG_FILE.exists():
+        with open(LOG_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return []
+
+def save_log(logs):
+    with open(LOG_FILE, 'w', encoding='utf-8') as f:
+        json.dump(logs[-100:], f, ensure_ascii=False)
+
+def add_log(mode, sent, total):
+    logs = load_log()
+    logs.append({"time": datetime.now().isoformat(), "mode": mode, "sent": sent, "total": total})
+    save_log(logs)
+
+# API
+def get_access_token():
+    cfg = load_feishu_config()
+    url = "https://open.feishu.cn/open-apis/auth/v3/tenant_access_token/internal"
+    data = json.dumps({"app_id": cfg['app_id'], "app_secret": cfg['app_secret']}).encode()
+    req = urllib.request.Request(url, data=data, headers={'Content-Type': 'application/json'}, method='POST')
+    ctx = ssl.create_default_context()
+    with urllib.request.urlopen(req, timeout=10, context=ctx) as r:
+        return json.loads(r.read()).get('tenant_access_token', '')
+
+def send_card(token, receive_id, card):
+    cfg = load_feishu_config()
+    url = f"https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type={cfg.get('receive_id_type', 'open_id')}"
+    payload = json.dumps({"receive_id": receive_id, "msg_type": "interactive", "content": json.dumps(card)}).encode('utf-8')
+    req = urllib.request.Request(url, data=payload, headers={'Content-Type': 'application/json', 'Authorization': f'Bearer {token}'}, method='POST')
+    ctx = ssl.create_default_context()
+    for _ in range(2):
+        try:
+            with urllib.request.urlopen(req, timeout=30, context=ctx) as r:
+                return json.loads(r.read())
+        except:
+            time.sleep(0.5)
+    return {"code": -1}
+
+# 卡片
+def build_news_card(title, url, source=""):
+    icon = "📰" if "金十" in source else ("📊" if "Investing" in source else "📱")
+    return {"header": {"title": {"tag": "plain_text", "content": f"{icon} {source}" if source else f"{icon} NewsHub"}, "template": "blue"}, "elements": [{"tag": "div", "text": {"tag": "lark_md", "content": title}}, {"tag": "hr"}, {"tag": "markdown", "content": f"[🔗 查看详情]({url})"}, {"tag": "div", "text": {"tag": "lark_md", "content": f"🕐 {datetime.now().strftime('%H:%M')}"}}]}
+
+def build_digest_card(news_list):
+    items = []
+    for i, n in enumerate(news_list[:6], 1):
+        title = n['title'][:30] + "..." if len(n['title']) > 30 else n['title']
+        s = n.get('source', '')
+        icon = "🔹" if "金十" in s else ("🔸" if "Investing" in s else "🔶")
+        # 添加情感标签
+        sent = n.get('sentiment', '')
+        sent_icon = "🟢" if sent == 'positive' else ("🔴" if sent == 'negative' else "")
+        items.append({"tag": "markdown", "content": f"**{i}.** {sent_icon} {title}\n> {icon} {s}"})
+    return {"header": {"title": {"tag": "plain_text", "content": f"📊 财经速报 {datetime.now().strftime('%H:%M')}"}, "template": "green"}, "elements": [*items, {"tag": "hr"}, {"tag": "div", "text": {"tag": "lark_md", "content": "📱 NewsHub · 自动推送"}}]}
+
+def build_category_card(news_list, category):
+    """按分类构建卡片"""
+    cat_names = {"stock": "股市", "forex": "外汇", "commodity": "大宗商品", "macro": "宏观", "trade": "贸易", "tech": "科技", "china": "中国", "us": "美国"}
+    cat_icons = {"stock": "📈", "forex": "💱", "commodity": "🛢️", "macro": "🏛️", "trade": "⚖️", "tech": "💻", "china": "🇨🇳", "us": "🇺🇸"}
+    cat_name = cat_names.get(category, category)
+    cat_icon = cat_icons.get(category, "📰")
+    
+    items = []
+    for i, n in enumerate(news_list[:8], 1):
+        title = n['title'][:35] + "..." if len(n['title']) > 35 else n['title']
+        sent = n.get('sentiment', '')
+        sent_icon = "🟢" if sent == 'positive' else ("🔴" if sent == 'negative' else "")
+        s = n.get('source', '')
+        items.append({"tag": "markdown", "content": f"**{i}.** {sent_icon} {title}\n> {s}"})
+    
+    return {"header": {"title": {"tag": "plain_text", "content": f"{cat_icon} {cat_name}要闻 {datetime.now().strftime('%H:%M')}"}, "template": "blue"}, "elements": [*items, {"tag": "hr"}, {"tag": "div", "text": {"tag": "lark_md", "content": f"📱 NewsHub · {len(news_list)}条"}}]}
+
+def build_sentiment_card(pos_news, neg_news):
+    """情感分析卡片"""
+    items = []
+    
+    if pos_news:
+        items.append({"tag": "markdown", "content": f"## 🟢 利好 ({len(pos_news)})"})
+        for n in pos_news[:3]:
+            title = n['title'][:40] + "..." if len(n['title']) > 40 else n['title']
+            items.append({"tag": "markdown", "content": f"- {title}"})
+    
+    if neg_news:
+        if items:
+            items.append({"tag": "hr"})
+        items.append({"tag": "markdown", "content": f"## 🔴 利空 ({len(neg_news)})"})
+        for n in neg_news[:3]:
+            title = n['title'][:40] + "..." if len(n['title']) > 40 else n['title']
+            items.append({"tag": "markdown", "content": f"- {title}"})
+    
+    return {"header": {"title": {"tag": "plain_text", "content": f"💡 情感分析 {datetime.now().strftime('%H:%M')}"}, "template": "orange"}, "elements": items}
+
+def build_alert_card(title, url, source="", keywords=None):
+    kw_list = keywords or []
+    highlight = ""
+    for kw in kw_list:
+        if kw in title:
+            highlight = f"🔔 命中: `{kw}`"
+            break
+    return {"header": {"title": {"tag": "plain_text", "content": "⚠️ 重要告警"}, "template": "red"}, "elements": [{"tag": "div", "text": {"tag": "lark_md", "content": highlight}}, {"tag": "markdown", "content": f"**{title}**"}, {"tag": "hr"}, {"tag": "markdown", "content": f"[🔗 查看详情]({url})"}]}
+
+def build_daily_summary(all_news):
+    sources = {}
+    for n in all_news:
+        s = n.get('source', 'Other')
+        sources[s] = sources.get(s, 0) + 1
+    lines = [f"📰 **今日共 {len(all_news)} 条新闻**", ""]
+    for s, c in sources.items():
+        icon = "🔹" if "金十" in s else ("🔸" if "Investing" in s else "🔶")
+        bar = "█" * min(c // 2, 15)
+        lines.append(f"{icon} {s:<12} {c:>2} 条 {bar}")
+    return {"header": {"title": {"tag": "plain_text", "content": f"📊 {datetime.now().strftime('%Y-%m-%d')} 日报"}, "template": "purple"}, "elements": [{"tag": "markdown", "content": "\n".join(lines)}, {"tag": "hr"}, {"tag": "div", "text": {"tag": "lark_md", "content": "🤖 NewsHub · 自动生成"}}]}
+
+def build_test_card():
+    return {"header": {"title": {"tag": "plain_text", "content": "✅ 连接测试"}, "template": "blue"}, "elements": [{"tag": "div", "text": {"tag": "lark_md", "content": "**飞书推送功能正常！**"}}, {"tag": "hr"}, {"tag": "div", "text": {"tag": "lark_md", "content": f"🕐 {datetime.now().strftime('%H:%M:%S')}"}}]}
+
+def build_welcome_card():
+    return {"header": {"title": {"tag": "plain_text", "content": "🎉 NewsHub 已连接"}, "template": "green"}, "elements": [{"tag": "markdown", "content": "**✅ 飞书推送服务正常运行**\n\n"}, {"tag": "hr"}, {"tag": "div", "text": {"tag": "lark_md", "content": f"🕐 {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}"}}]}
+
+# 命令处理
+def cmd_test():
+    banner("连接测试", "🔧")
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    feishu = load_feishu_config()
+    card = build_test_card()
+    result = send_card(token, feishu.get('default_receive_id', ''), card)
+    if result.get('code') == 0:
+        ok("连接成功")
+        add_log('test', 1, 1)
+        return 1
+    else:
+        error(f"发送失败: {result.get('msg', 'Unknown')}")
+        return 0
+
+def cmd_welcome():
+    banner("欢迎卡片", "🎉")
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    feishu = load_feishu_config()
+    card = build_welcome_card()
+    result = send_card(token, feishu.get('default_receive_id', ''), card)
+    if result.get('code') == 0:
+        ok("欢迎卡片已发送")
+        add_log('welcome', 1, 1)
+        return 1
+    else:
+        error(f"发送失败: {result.get('msg', 'Unknown')}")
+        return 0
+
+def cmd_stats():
+    banner("统计信息", "📊")
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    new_news = [n for n in all_news if n['title'] not in history]
+    sources = {}
+    for n in all_news:
+        s = n.get('source', 'Other')
+        sources[s] = sources.get(s, 0) + 1
+    print(f"  📰 总数: {len(all_news)}")
+    print(f"  🆕 新: {len(new_news)}")
+    print(f"  📋 历史: {len(history)}")
+    print()
+    for s, c in sources.items():
+        icon = "🔹" if "金十" in s else ("🔸" if "Investing" in s else "🔶")
+        print(f"  {icon} {s}: {c}")
+    logs = load_log()
+    if logs:
+        print()
+        print(f"  📤 已发送: {len(logs)} 条")
+        last = logs[-1]
+        print(f"  ⏰ 上次: {last['time'][:16]} ({last['mode']})")
+    return 1
+
+def cmd_daily():
+    banner("日报", "📊")
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    info(f"获取到 {len(all_news)} 条新闻")
+    if not all_news:
+        warn("无新闻")
+        return 0
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    feishu = load_feishu_config()
+    card = build_daily_summary(all_news)
+    result = send_card(token, feishu.get('default_receive_id', ''), card)
+    if result.get('code') == 0:
+        for n in all_news:
+            history.append(n['title'])
+        save_history(history)
+        ok(f"日报已发送 ({len(all_news)} 条)")
+        add_log('daily', 1, len(all_news))
+        return 1
+    else:
+        error(f"发送失败: {result.get('msg', 'Unknown')}")
+        return 0
+
+def cmd_digest():
+    banner("摘要", "📊")
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    new_news = [n for n in all_news if n['title'] not in history]
+    if not new_news:
+        warn("无新新闻")
+        return 0
+    items = new_news[:6]
+    info(f"摘要: {len(items)} 条")
+    print()
+    print(C("  ┌─ 预览 ─────────────────────────────────────┐"))
+    for i, n in enumerate(items, 1):
+        title = n['title'][:38] + "..." if len(n['title']) > 38 else n['title']
+        print(C("  │") + f"  {i}. {title}")
+    print(C("  └" + "─" * 46 + "┘"))
+    print()
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    feishu = load_feishu_config()
+    card = build_digest_card(items)
+    result = send_card(token, feishu.get('default_receive_id', ''), card)
+    if result.get('code') == 0:
+        for n in items:
+            history.append(n['title'])
+        save_history(history)
+        ok(f"摘要已发送 ({len(items)} 条)")
+        add_log('digest', len(items), len(all_news))
+        return 1
+    else:
+        error(f"发送失败: {result.get('msg', 'Unknown')}")
+        return 0
+
+def cmd_alert():
+    banner("关键词告警", "🔔")
+    config = load_config()
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    keywords = config.get('keywords', [])
+    if not keywords:
+        warn("无关键词配置")
+        return 0
+    new_news = [n for n in all_news if n['title'] not in history]
+    items = [n for n in new_news if any(kw in n['title'] for kw in keywords)]
+    if not items:
+        warn("无匹配")
+        return 0
+    info(f"关键词: {len(keywords)} | 匹配: {len(items)}")
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    feishu = load_feishu_config()
+    sent = 0
+    for i, n in enumerate(items, 1):
+        prog(i, len(items), C("发送: "))
+        card = build_alert_card(n['title'], n['url'], n.get('source', ''), keywords)
+        result = send_card(token, feishu.get('default_receive_id', ''), card)
+        if result.get('code') == 0:
+            history.append(n['title'])
+            ok(n['title'][:40] + "...")
+            sent += 1
+        time.sleep(0.2)
+    print()
+    save_history(history)
+    add_log('alert', sent, len(items))
+    return sent
+
+def cmd_all():
+    banner("全部新闻", "📰")
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    new_news = [n for n in all_news if n['title'] not in history]
+    if not new_news:
+        warn("无新新闻")
+        return 0
+    items = new_news[:8]
+    info(f"全部: {len(items)} 条")
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    feishu = load_feishu_config()
+    sent = 0
+    for i, n in enumerate(items, 1):
+        prog(i, len(items), C("发送: "))
+        card = build_news_card(n['title'], n['url'], n.get('source', ''))
+        result = send_card(token, feishu.get('default_receive_id', ''), card)
+        if result.get('code') == 0:
+            history.append(n['title'])
+            sent += 1
+        time.sleep(0.2)
+    print()
+    save_history(history)
+    add_log('all', sent, len(items))
+    return sent
+
+def cmd_preview():
+    banner("预览", "👁️")
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    new_news = [n for n in all_news if n['title'] not in history]
+    sources = {}
+    for n in all_news:
+        s = n.get('source', 'Other')
+        sources[s] = sources.get(s, 0) + 1
+    stats_box(len(all_news), len(new_news), sources)
+    info(f"新新闻: {len(new_news)} 条")
+    print()
+    print(C("  ┌─ 最新消息 ──────────────────────────────────┐"))
+    for i, n in enumerate(new_news[:10], 1):
+        title = n['title'][:40] + "..." if len(n['title']) > 40 else n['title']
+        s = n.get('source', '')
+        icon = "🔹" if "金十" in s else ("🔸" if "Investing" in s else "🔶")
+        print(C("  │") + f"  {i:>2}. {icon} {title}")
+    print(C("  └" + "─" * 46 + "┘"))
+    print()
+    return 1
+
+def cmd_compact():
+    """紧凑视图 - 纯文本无边框"""
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    new_news = [n for n in all_news if n['title'] not in history]
+    print()
+    print(f"📊 NewsHub | 总数: {len(all_news)} | 新: {len(new_news)}")
+    print("-" * 50)
+    for i, n in enumerate(new_news[:15], 1):
+        title = n['title'][:50] + "..." if len(n['title']) > 50 else n['title']
+        s = n.get('source', '')
+        icon = "📰" if "新浪" in s else ("💹" if "股票" in s else ("🌐" if "Investing" in s else ("📊" if "Seeking" in s else "📱")))
+        print(f"{i:>2}. {icon} {title}")
+    if len(new_news) > 15:
+        print(f"... 还有 {len(new_news) - 15} 条")
+    print()
+    return 1
+
+def cmd_category():
+    """按分类推送"""
+    import sys
+    cat = sys.argv[2] if len(sys.argv) > 2 else 'stock'
+    
+    banner(f"分类: {cat}", "📊")
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    
+    # 分类统计
+    categories = {}
+    for n in all_news:
+        cat_name = n.get('category', 'other')
+        categories[cat_name] = categories.get(cat_name, 0) + 1
+    
+    info(f"分类统计: {categories}")
+    
+    # 筛选分类
+    items = [n for n in all_news if n.get('category') == cat]
+    new_items = [n for n in items if n['title'] not in history]
+    
+    if not new_items:
+        warn(f"无新{cat}新闻")
+        return 0
+    
+    info(f"推送: {len(new_items)} 条{cat}新闻")
+    
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    
+    feishu = load_feishu_config()
+    card = build_category_card(new_items[:8], cat)
+    result = send_card(token, feishu.get('default_receive_id', ''), card)
+    
+    if result.get('code') == 0:
+        for n in new_items[:8]:
+            history.append(n['title'])
+        save_history(history)
+        ok(f"{cat}推送成功 ({len(new_items[:8])} 条)")
+        add_log(f'cat_{cat}', len(new_items[:8]), len(new_items))
+        return 1
+    else:
+        error(f"发送失败: {result.get('msg', 'Unknown')}")
+        return 0
+
+def cmd_sentiment():
+    """情感分析推送"""
+    banner("情感分析", "💡")
+    all_news = fetch_all(quiet=True)
+    history = load_history()
+    
+    pos_news = [n for n in all_news if n.get('sentiment') == 'positive' and n['title'] not in history]
+    neg_news = [n for n in all_news if n.get('sentiment') == 'negative' and n['title'] not in history]
+    
+    if not pos_news and not neg_news:
+        warn("无情感新闻")
+        return 0
+    
+    info(f"🟢 利好: {len(pos_news)} | 🔴 利空: {len(neg_news)}")
+    
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    
+    feishu = load_feishu_config()
+    card = build_sentiment_card(pos_news, neg_news)
+    result = send_card(token, feishu.get('default_receive_id', ''), card)
+    
+    if result.get('code') == 0:
+        for n in pos_news + neg_news:
+            history.append(n['title'])
+        save_history(history)
+        ok("情感分析已发送")
+        add_log('sentiment', 1, len(pos_news) + len(neg_news))
+        return 1
+    else:
+        error(f"发送失败: {result.get('msg', 'Unknown')}")
+        return 0
+
+def build_summary_card(news_list):
+    """构建摘要卡片"""
+    # 分类统计
+    cats = {}
+    for n in news_list:
+        cat = n.get('category', 'other')
+        cats[cat] = cats.get(cat, 0) + 1
+    
+    # 情感统计
+    sentiments = {'positive': 0, 'negative': 0, 'neutral': 0}
+    for n in news_list:
+        s = n.get('sentiment', 'neutral')
+        sentiments[s] = sentiments.get(s, 0) + 1
+    
+    # 重要性统计
+    imps = {'critical': 0, 'high': 0, 'medium': 0, 'low': 0}
+    for n in news_list:
+        imp = n.get('importance_level', 'low')
+        imps[imp] = imps.get(imp, 0) + 1
+    
+    cat_names = {"stock": "📈股市", "forex": "💱外汇", "commodity": "🛢️商品", "macro": "🏛️宏观", "trade": "⚖️贸易", "tech": "💻科技", "china": "🇨🇳中国", "us": "🇺🇸美国", "crypto": "₿加密", "energy": "⚡能源"}
+    cat_list = [f"{cat_names.get(k, k)}: {v}" for k, v in sorted(cats.items(), key=lambda x: -x[1])[:5]]
+    
+    return {
+        "header": {"title": {"tag": "plain_text", "content": f"📊 {datetime.now().strftime('%H:%M')} 新闻摘要"}, "template": "blue"},
+        "elements": [
+            {"tag": "markdown", "content": f"**总新闻:** {len(news_list)} 条"},
+            {"tag": "markdown", "content": f"**🟢 利好:** {sentiments['positive']} | **🔴 利空:** {sentiments['negative']} | **⚪ 中性:** {sentiments['neutral']}"},
+            {"tag": "markdown", "content": f"**🔴 危机:** {imps['critical']} | **🟠 重要:** {imps['high']} | **🟡 一般:** {imps['medium']}"},
+            {"tag": "hr"},
+            {"tag": "markdown", "content": "**分类:** " + " | ".join(cat_list[:4])},
+            {"tag": "hr"},
+            {"tag": "div", "text": {"tag": "lark_md", "content": "📱 NewsHub · 自动摘要"}}
+        ]
+    }
+
+def cmd_sentiment_market():
+    """发送LLM市场情绪分析"""
+    from news_fetcher import fetch_all, get_market_sentiment
+    
+    banner("市场情绪", "📊")
+    all_news = fetch_all(quiet=True)
+    
+    info(f"新闻: {len(all_news)} 条")
+    
+    # 检查是否有LLM分析数据
+    llm_news = [n for n in all_news if n.get('llm_sentiment')]
+    
+    if not llm_news:
+        warn("没有LLM分析数据，请先运行: python news_hub.py fetch --llm")
+        # 使用基础情感分析
+        for n in all_news:
+            n['llm_sentiment'] = n.get('sentiment', 'neutral')
+            n['llm_score'] = 10 if n.get('sentiment') == 'positive' else (-10 if n.get('sentiment') == 'negative' else 0)
+        llm_news = all_news
+    
+    sentiment = get_market_sentiment(llm_news)
+    
+    if not sentiment:
+        warn("无法获取情绪数据")
+        return 0
+    
+    info(f"情绪: {sentiment.get('overall', 'neutral')}")
+    
+    print()
+    print(C("  ┌─ 市场情绪 ────────────────────────────────┐"))
+    overall = sentiment.get('overall', 'neutral')
+    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+    print(C("  │") + f"  {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+    print(C("  │") + f"  📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)} | ⚪ 中性: {sentiment.get('neutral', 0)}")
+    print(C("  │") + f"  📊 分数: {sentiment.get('avg_score', 0):+.1f}")
+    
+    # 市场分布
+    markets = sentiment.get('markets', {})
+    if markets:
+        print(C("  │"))
+        print(C("  │") + "  📊 市场分布:")
+        for mkt, cnt in sorted(markets.items(), key=lambda x: -x[1])[:5]:
+            print(C("  │") + f"    • {mkt}: {cnt}")
+    
+    # 投资建议
+    advice = sentiment.get('advice', {})
+    if advice:
+        print(C("  │"))
+        print(C("  │") + "  💡 建议分布:")
+        advice_names = {'bullish': '买入', 'bearish': '卖出', 'neutral': '观望'}
+        for adv, cnt in sorted(advice.items(), key=lambda x: -x[1]):
+            print(C("  │") + f"    • {advice_names.get(adv, adv)}: {cnt}")
+    
+    print(C("  └" + "─" * 46 + "┘"))
+    print()
+    
+    # 发送飞书卡片
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    
+    feishu = load_feishu_config()
+    card = build_market_sentiment_card(sentiment, llm_news[:10])
+    result = send_card(token, feishu.get('default_receive_id', ''), card)
+    
+    if result.get('code') == 0:
+        ok("市场情绪已发送")
+        add_log('market_sentiment', 1, len(llm_news))
+        return 1
+    else:
+        error(f"发送失败: {result.get('msg', 'Unknown')}")
+        return 0
+
+def build_market_sentiment_card(sentiment, news_list):
+    """构建市场情绪卡片"""
+    overall = sentiment.get('overall', 'neutral')
+    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+    colors = {'bullish': 'green', 'bearish': 'red', 'neutral': 'grey'}
+    
+    elements = [
+        {"tag": "markdown", "content": f"**{icons.get(overall, '➡️')} 市场情绪分析**"},
+        {"tag": "markdown", "content": f"**整体趋势:** {overall.upper()}"},
+        {"tag": "markdown", "content": f"**情绪分数:** {sentiment.get('avg_score', 0):+.1f}"},
+        {"tag": "hr"},
+        {"tag": "markdown", "content": "**📊 情感分布:**"},
+        {"tag": "markdown", "content": f"🟢 利好: {sentiment.get('positive', 0)} | 🔴 利空: {sentiment.get('negative', 0)} | ⚪ 中性: {sentiment.get('neutral', 0)}"},
+    ]
+    
+    # 市场分布
+    markets = sentiment.get('markets', {})
+    if markets:
+        elements.append({"tag": "hr"})
+        elements.append({"tag": "markdown", "content": "**📊 市场分布:**"})
+        market_names = {'stock': '📈 股市', 'forex': '💱 外汇', 'commodity': '🛢️ 大宗商品', 'crypto': '₿ 加密', 'bond': '📉 债券', 'realestate': '🏠 房地产'}
+        for mkt, cnt in sorted(markets.items(), key=lambda x: -x[1])[:5]:
+            name = market_names.get(mkt, mkt)
+            elements.append({"tag": "markdown", "content": f"{name}: {cnt}"})
+    
+    # 投资建议
+    advice = sentiment.get('advice', {})
+    if advice:
+        elements.append({"tag": "hr"})
+        elements.append({"tag": "markdown", "content": "**💡 建议分布:**"})
+        advice_names = {'bullish': '📈 买入', 'bearish': '📉 卖出', 'neutral': '➡️ 观望'}
+        for adv, cnt in sorted(advice.items(), key=lambda x: -x[1]):
+            name = advice_names.get(adv, adv)
+            elements.append({"tag": "markdown", "content": f"{name}: {cnt}"})
+    
+    # 最新分析新闻
+    if news_list:
+        elements.append({"tag": "hr"})
+        elements.append({"tag": "markdown", "content": "**📰 最新分析:**"})
+        for n in news_list[:5]:
+            score = n.get('llm_score', 0)
+            sentiment_icon = '🟢' if n.get('llm_sentiment') == 'positive' else ('🔴' if n.get('llm_sentiment') == 'negative' else '⚪')
+            elements.append({
+                "tag": "markdown",
+                "content": f"{sentiment_icon} [{score:+d}] [{n.get('title', '')[:25]}...]({n.get('url', '')})"
+            })
+    
+    elements.append({"tag": "hr"})
+    elements.append({"tag": "div", "text": {"tag": "lark_md", "content": "🤖 NewsHub LLM情绪分析"}})
+    
+    return {"elements": elements}
+
+def cmd_summary():
+    """发送摘要卡片"""
+    banner("摘要卡片", "📊")
+    all_news = fetch_all(quiet=True)
+    
+    info(f"新闻: {len(all_news)} 条")
+    
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    
+    feishu = load_feishu_config()
+    card = build_summary_card(all_news)
+    result = send_card(token, feishu.get('default_receive_id', ''), card)
+    
+    if result.get('code') == 0:
+        ok("摘要已发送")
+        add_log('summary', 1, len(all_news))
+        return 1
+    else:
+        error(f"发送失败: {result.get('msg', 'Unknown')}")
+        return 0
+
+def cmd_smart():
+    """智能告警 - 基于关键词规则自动检测"""
+    from news_alerts import analyze_news, generate_alert_card, get_alert_summary, classify_alert
+    
+    banner("智能告警", "🚨")
+    all_news = fetch_all(quiet=True)
+    
+    info(f"新闻: {len(all_news)} 条")
+    
+    # 分析告警
+    alerts = analyze_news(all_news)
+    total = sum(len(v) for v in alerts.values())
+    
+    info(f"告警: {total} 条")
+    print()
+    
+    # 显示告警摘要
+    if total > 0:
+        print(C("  ┌─ 告警摘要 ────────────────────────────────┐"))
+        
+        if alerts['critical']:
+            print(C("  │") + f"  🔴 最高: {len(alerts['critical'])}")
+        if alerts['high']:
+            print(C("  │") + f"  🟠 重要: {len(alerts['high'])}")
+        if alerts['medium']:
+            print(C("  │") + f"  🟡 关注: {len(alerts['medium'])}")
+        if alerts['low']:
+            print(C("  │") + f"  ⚪ 普通: {len(alerts['low'])}")
+        
+        print(C("  └" + "─" * 46 + "┘"))
+        print()
+        
+        # 发送飞书卡片
+        token = get_access_token()
+        if not token:
+            error("认证失败")
+            return 0
+        
+        feishu = load_feishu_config()
+        card = generate_alert_card(alerts)
+        
+        if card:
+            result = send_card(token, feishu.get('default_receive_id', ''), card)
+            if result.get('code') == 0:
+                ok("告警已发送")
+                add_log('smart', 1, total)
+                return 1
+            else:
+                error(f"发送失败: {result.get('msg', 'Unknown')}")
+                return 0
+    else:
+        ok("无告警")
+        return 1
+
+# 主程序
+if __name__ == "__main__":
+
+[Output truncated: showing lines 1-765 of 791 (30KB limit). Use start_line=766 to continue.]

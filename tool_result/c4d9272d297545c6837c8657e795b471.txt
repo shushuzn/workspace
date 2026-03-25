@@ -1,0 +1,77 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:33:30.681264
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_hub.py  (lines 350-420 of 476)
+        # 抓取新闻
+        limit = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 10
+        print(f"  抓取新闻...")
+        news = fetch_all(quiet=True)[:limit]
+        
+        # LLM 分析
+        print(f"  LLM 分析中...")
+        analyzed = analyze_batch(news)
+        
+        # 生成报告
+        report = generate_report(analyzed)
+        print(report)
+    
+    elif cmd == "sentiment":
+        header("市场情绪分析")
+        from llm_enhanced import analyze_batch, market_sentiment
+        from news_fetcher import fetch_all
+        
+        news = fetch_all(quiet=True)[:10]
+        print(f"  分析 {len(news)} 条新闻...")
+        analyzed = analyze_batch(news)
+        sentiment = market_sentiment(analyzed)
+        
+        print(f"""
+  情绪指数: {sentiment['score']}
+  市场判断: {sentiment['label']}
+  
+  分布:
+    📈 正面: {sentiment['distribution']['positive']}
+    ➖ 中性: {sentiment['distribution']['neutral']}
+    📉 负面: {sentiment['distribution']['negative']}
+""")
+
+    elif cmd == "hot":
+        header("热点话题检测")
+        from hot_topics import generate_hot_report
+        from news_fetcher import fetch_all
+        news = fetch_all(quiet=True)
+        print(generate_hot_report(news))
+
+    elif cmd == "dashboard":
+        header("生成 Web 仪表盘")
+        import dashboard
+        from news_fetcher import fetch_all
+        news = fetch_all(quiet=True)
+        path = dashboard.save_dashboard(news)
+        print(f"  ✓ 仪表盘已生成: {path}")
+        print(f"  在浏览器中打开查看")
+
+    elif cmd == "help":
+        header("NewsHub Help")
+        print(f"""
+  {BOLD}用法:{RESET}
+    python news_hub.py <command> [options]
+
+  {BOLD}命令:{RESET}
+    {GREEN}fetch{RESET}     抓取新闻（不推送）
+    {GREEN}feishu{RESET}    飞书推送
+    {GREEN}qq{RESET}        QQ推送
+    {GREEN}wechat{RESET}    微信企业推送
+    {GREEN}test{RESET}      测试所有
+    {GREEN}quick{RESET}     快速模式
+    {GREEN}server{RESET}    启动RSS服务
+    {GREEN}export{RESET}    导出新闻(JSON/CSV)
+    {GREEN}report{RESET}    生成每日简报
+    {GREEN}db{RESET}        数据库管理
+    {GREEN}trends{RESET}    趋势分析
+    {GREEN}hot{RESET}       热点话题检测
+    {GREEN}dashboard{RESET} Web仪表盘
+    {GREEN}search{RESET}    搜索新闻 <关键词>
+    {GREEN}schedule{RESET}  定时任务管理
+
+[56 more lines. Use start_line=421 to continue.]

@@ -1,0 +1,150 @@
+{
+  "symbol": "TEST",
+  "analysis_date": "2026-03-20T13:07:40.559664",
+  "candle_count": 100,
+  "current_price": 95.23,
+  "support_resistance": {
+    "supports": [
+      {
+        "level": 93.37,
+        "strength": 1,
+        "touches": 1,
+        "type": "support",
+        "rank": 1
+      },
+      {
+        "level": 95.88,
+        "strength": 2,
+        "touches": 2,
+        "type": "support",
+        "rank": 2
+      },
+      {
+        "level": 99.59,
+        "strength": 2,
+        "touches": 2,
+        "type": "support",
+        "rank": 3
+      }
+    ],
+    "resistances": [
+      {
+        "level": 108.02,
+        "strength": 4,
+        "touches": 4,
+        "type": "resistance",
+        "rank": 1
+      },
+      {
+        "level": 102.4,
+        "strength": 3,
+        "touches": 3,
+        "type": "resistance",
+        "rank": 2
+      }
+    ],
+    "current_price": 95.23,
+    "description": "识别到 3 个支撑位，2 个阻力位"
+  },
+  "psychological_levels": [
+    {
+      "level": 95.2,
+      "type": "psychological",
+      "rounding": 0.1,
+      "distance_percent": 0.03150267772760804
+    },
+    {
+      "level": 95.3,
+      "type": "psychological",
+      "rounding": 0.1,
+      "distance_percent": 0.0735062480310904
+    },
+    {
+      "level": 95,
+      "type": "psychological",
+      "rounding": 5,
+      "distance_percent": 0.24152052924498998
+    },
+    {
+      "level": 95.5,
+      "type": "psychological",
+      "rounding": 0.5,
+      "distance_percent": 0.2835240995484574
+    },
+    {
+      "level": 96,
+      "type": "psychological",
+      "rounding": 1,
+      "distance_percent": 0.8085687283419049
+    },
+    {
+      "level": 100,
+      "type": "psychological",
+      "rounding": 100,
+      "distance_percent": 5.008925758689484
+    },
+    {
+      "level": 90,
+      "type": "psychological",
+      "rounding": 10,
+      "distance_percent": 5.491966817179464
+    },
+    {
+      "level": 50,
+      "type": "psychological",
+      "rounding": 50,
+      "distance_percent": 47.49553712065526
+    }
+  ],
+  "previous_highs_lows": {
+    "previous_high": {
+      "price": 108.14,
+      "distance_percent": 13.55665231544681
+    },
+    "previous_low": {
+      "price": 94.84,
+      "distance_percent": 0.4095348104588896
+    },
+    "all_time_high": {
+      "price": 109.07,
+      "distance_percent": 14.533235325002615
+    },
+    "all_time_low": {
+      "price": 93.37,
+      "distance_percent": 1.9531660191116236
+    },
+    "description": "前高：108.14, 前低：94.84"
+  },
+  "volume_profile": {
+    "poc": {
+      "price": 98.86,
+      "volume": 143696499
+    },
+    "value_area": {
+      "low": 98.08,
+      "high": 104.36
+    },
+    "description": "POC: 98.86, 价值区域：98.08-104.36"
+  },
+  "breakouts": {
+    "breakouts": [
+      {
+        "type": "support_breakdown",
+        "level": 95.88,
+        "strength": 2,
+        "direction": "bearish",
+        "significance": "medium"
+      }
+    ],
+    "current_price": 95.23,
+    "description": "检测到 1 个突破信号"
+  },
+  "summary": {
+    "nearest_support": 93.37,
+    "nearest_resistance": 102.4,
+    "support_distance": 1.95,
+    "resistance_distance": 7.53,
+    "trend": "neutral",
+    "description": "支撑：93.37, 阻力：102.40"
+  }
+}

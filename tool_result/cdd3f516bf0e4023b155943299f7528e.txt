@@ -1,0 +1,39 @@
+# tool_name: grep_search
+# created_at: 2026-03-24T00:37:32.741609
+# ---
+news_feishu.py:153:          time.sleep(interval)
+news_feishu.py:154:      return results
+news_feishu.py:155:  
+news_feishu.py:156:  
+news_feishu.py:157:  # ========== 卡片构建 ==========
+news_feishu.py:158:> def build_digest_card(news_list, template=None):
+news_feishu.py:159:      tmpl = template or DEFAULT_TEMPLATES["digest"]
+news_feishu.py:160:      items = []
+news_feishu.py:161:      for i, n in enumerate(news_list[:tmpl.get("max_items", 6)], 1):
+news_feishu.py:162:          title = n["title"][:50] + "…" if len(n["title"]) > 50 else n["title"]
+news_feishu.py:163:          source = n.get("source", "")
+---
+news_feishu.py:276:  
+news_feishu.py:277:      # 显示质量分布
+news_feishu.py:278:      avg_quality = sum(n.get("quality_score", 0) for n in news) / len(news) if news else 0
+news_feishu.py:279:      info(f"平均质量: {avg_quality:.1f}/100")
+news_feishu.py:280:  
+news_feishu.py:281:>     card = build_digest_card(news)
+news_feishu.py:282:  
+news_feishu.py:283:      token = get_access_token()
+news_feishu.py:284:      if not token:
+news_feishu.py:285:          error("获取 access_token 失败")
+news_feishu.py:286:          return
+---
+news_feishu.py:341:          error("未配置群ID")
+news_feishu.py:342:          return
+news_feishu.py:343:  
+news_feishu.py:344:      from core.async_fetcher import fetch_all
+news_feishu.py:345:      news = fetch_all(quiet=True)[:6]
+news_feishu.py:346:>     card = build_digest_card(news)
+news_feishu.py:347:      token = get_access_token()
+news_feishu.py:348:  
+news_feishu.py:349:      success = 0
+news_feishu.py:350:      for rid in receive_ids:
+news_feishu.py:351:          if send_card(token, rid, card).get("code") == 0:
+---

@@ -1,0 +1,45 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T10:32:54.034291
+# ---
+news_feishu.py:469:      token = get_access_token()
+news_feishu.py:470:      if not token:
+news_feishu.py:471:          error("认证失败")
+news_feishu.py:472:          return 0
+news_feishu.py:473:      
+news_feishu.py:474:      feishu = load_feishu_config()
+news_feishu.py:475:      card = build_category_card(new_items[:8], cat)
+news_feishu.py:476:      result = send_card(token, feishu.get('default_receive_id', ''), card)
+news_feishu.py:477:      
+news_feishu.py:478:      if result.get('code') == 0:
+news_feishu.py:479:          for n in new_items[:8]:
+news_feishu.py:480:              history.append(n['title'])
+news_feishu.py:481:          save_history(history)
+news_feishu.py:482:          ok(f"{cat}推送成功 ({len(new_items[:8])} 条)")
+news_feishu.py:483:          add_log(f'cat_{cat}', len(new_items[:8]), len(new_items))
+news_feishu.py:484:          return 1
+news_feishu.py:485:      else:
+news_feishu.py:486:          error(f"发送失败: {result.get('msg', 'Unknown')}")
+news_feishu.py:487:          return 0
+news_feishu.py:488:  
+news_feishu.py:489:> def cmd_sentiment():
+news_feishu.py:490:      """情感分析推送"""
+news_feishu.py:491:      banner("情感分析", "💡")
+news_feishu.py:492:      all_news = fetch_all(quiet=True)
+news_feishu.py:493:      history = load_history()
+news_feishu.py:494:      
+news_feishu.py:495:      pos_news = [n for n in all_news if n.get('sentiment') == 'positive' and n['title'] not in history]
+news_feishu.py:496:      neg_news = [n for n in all_news if n.get('sentiment') == 'negative' and n['title'] not in history]
+news_feishu.py:497:      
+news_feishu.py:498:      if not pos_news and not neg_news:
+news_feishu.py:499:          warn("无情感新闻")
+news_feishu.py:500:          return 0
+news_feishu.py:501:      
+news_feishu.py:502:      info(f"🟢 利好: {len(pos_news)} | 🔴 利空: {len(neg_news)}")
+news_feishu.py:503:      
+news_feishu.py:504:      token = get_access_token()
+news_feishu.py:505:      if not token:
+news_feishu.py:506:          error("认证失败")
+news_feishu.py:507:          return 0
+news_feishu.py:508:      
+news_feishu.py:509:      feishu = load_feishu_config()
+---

@@ -1,0 +1,22 @@
+{
+  "summary": {
+    "total": 1,
+    "success": 0,
+    "failed": 1,
+    "timeout": 0,
+    "pass_rate": 0.0,
+    "parallel": false,
+    "timestamp": "2026-03-20T21:34:04.747343"
+  },
+  "results": [
+    {
+      "command": "\"py",
+      "status": "FAILED",
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Python 3.13.2 (tags/v3.13.2:4f8bb39, Feb  4 2025, 15:23:48) [MSC v.1942 64 bit (AMD64)] on win32\nType \"help\", \"copyright\", \"credits\" or \"license\" for more information.\nCould not open PYTHONSTARTUP\nFileNotFoundError: [Errno 2] No such file or directory: 'D:\\\\OpenClaw\\\\workspace\\\\python_startup.py'\nFailed calling sys.__interactivehook__\nTraceback (most recent call last):\n  File \"<frozen site>\", line 535, in register_readline\nAttributeError: module 'readline' has no attribute 'backend'\nTraceback (m",
+      "timestamp": "2026-03-20T21:34:04.747298"
+    }
+  ],
+  "timestamp": "2026-03-20T21:34:04.747346"
+}

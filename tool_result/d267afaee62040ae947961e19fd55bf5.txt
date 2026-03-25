@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-22T01:20:13.636399
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\sa_analyzer_001.py  (lines 1-50 of 362)
+import logging
+logger = logging.getLogger(__name__)
+
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+SA-036 Portfolio Analyzer
+【Phase 7 - 高级功能】
+
+功能:
+  - 组合绩效分析
+  - 风险指标计算
+  - 相关性分析
+  - 最优权重计算
+
+依赖: numpy, pandas (optional)
+"""
+import json
+import sys
+from pathlib import Path
+from datetime import datetime
+import random
+import math
+
+# 配置
+ANALYZE_DIR = Path("60-DATA/stock_036")
+CONFIG_FILE = Path("30-scripts-tools/sa_036_config.json")
+
+
+class PortfolioAnalyzer:
+    """组合分析器"""
+    
+    def __init__(self):
+        self.analyze_dir = ANALYZE_DIR
+        self.config = self._load_config()
+        
+        self.analyze_dir.mkdir(parents=True, exist_ok=True)
+        
+        self.report_file = self.analyze_dir / "analysis_report.json"
+    
+    def _load_config(self) -> dict:
+        default = {
+            "risk_free_rate": 0.03,
+            "trading_days": 252
+        }
+        
+        if CONFIG_FILE.exists():
+            try:
+                with open(CONFIG_FILE, "r", encoding="utf-8") as f:
+                    return {**default, **json.load(f)}
+
+[312 more lines. Use start_line=51 to continue.]

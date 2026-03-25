@@ -1,0 +1,44 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:52:18.576463
+# ---
+        for n in negative:
+            if n in title_lower:
+                sentiment = 'negative'
+                break
+    
+    # 市场
+    market = 'all'
+    if any(w in title_lower for w in ['股票', '股', 'stock', 'index']):
+        market = 'stock'
+    elif any(w in title_lower for w in ['外汇', '美元', '欧元', 'forex', 'currency']):
+        market = 'forex'
+    elif any(w in title_lower for w in ['黄金', '原油', 'oil', 'gold', 'commodity']):
+        market = 'commodity'
+    
+    # 紧急程度
+    urgency = 'medium'
+    if any(w in title_lower for w in ['战争', '核', '危机', '崩盘', 'crisis', 'war', 'crash']):
+        urgency = 'high'
+    elif any(w in title_lower for w in ['预计', '可能', '分析', '评论', 'may', 'might', 'could']):
+        urgency = 'low'
+    
+    return {
+        "sentiment": sentiment,
+        "market": market,
+        "urgency": urgency,
+        "summary": title[:40] + "..." if len(title) > 40 else title
+    }
+
+# ============================================================
+# 检查 Ollama 状态
+# ============================================================
+
+def check_ollama_status() -> bool:
+    """检查 Ollama 服务状态"""
+    try:
+        req = urllib.request.Request(
+            "http://localhost:11434/api/tags",
+            headers={'Content-Type': 'application/json'}
+        )
+        with urllib.request.urlopen(req, timeout=5, context=get_ssl_context()) as resp:
+            models = json.loads(resp.read

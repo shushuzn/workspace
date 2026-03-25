@@ -1,0 +1,56 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""
+Quick test runner for workspace
+"""
+
+import subprocess
+import sys
+from pathlib import Path
+
+
+def run_tests():
+    # Critic v5.0 integration
+    import subprocess
+    import sys
+    from pathlib import Path
+
+    critic_result = subprocess.run(
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize", "--auto"],
+        cwd=str(Path(__file__).parent),
+        timeout=300,
+    )
+    if critic_result.returncode != 0:
+        print("[ERROR] Critic Review Failed. Aborting.")
+        return 1
+    print("[OK] Critic Review Passed")
+
+    print("=" * 50)
+    print("Running Workspace Tests")
+    print("=" * 50)
+
+    # Stock PRO tests
+    print("\n[1/1] Stock PRO v12.7")
+    print("-" * 30)
+
+    result = subprocess.run(
+        [sys.executable, "30-scripts-tools/stock_pro/test_all.py"],
+        capture_output=True,
+        text=True,
+    )
+
+    print(result.stdout)
+    if result.stderr:
+        print("STDERR:", result.stderr)
+
+    # Summary
+    if "18 passed" in result.stdout:
+        print("\n[PASS] All tests passed!")
+        return 0
+    else:
+        print("\n[FAIL] Some tests failed")
+        return 1
+
+
+if __name__ == "__main__":
+    sys.exit(run_tests())

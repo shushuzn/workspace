@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:31:37.951283
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_analyzer.py  (lines 160-200 of 244)
+            return {"status": "ok", "models": models}
+    
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+def list_available_models() -> list:
+    """列出可用模型"""
+    status = check_ollama_status()
+    if status["status"] == "ok":
+        return status["models"]
+    return []
+
+# ============================================================
+# 分析函数
+# ============================================================
+
+def analyze_news_deep(title: str, model: str = None) -> dict:
+    """深度分析单条新闻"""
+    prompt = DEEP_ANALYZE_PROMPT.format(title=title)
+    response = call_ollama(prompt, model)
+    
+    if response:
+        try:
+            # 提取JSON
+            json_str = extract_json(response)
+            if json_str:
+                result = json.loads(json_str)
+                # 验证并补充默认值
+                return validate_analysis_result(result)
+        except json.JSONDecodeError:
+            pass
+    
+    return get_default_analysis()
+
+def analyze_news_batch(news_list: list, model: str = None) -> list:
+    """批量分析新闻（并行）"""
+    available_models = list_available_models()
+    if not available_models:
+        print("  ⚠ Ollama未运行，请先启动:")
+        print("     D:\Ollama\ollama.exe serve")
+        return news_list
+
+[44 more lines. Use start_line=201 to continue.]

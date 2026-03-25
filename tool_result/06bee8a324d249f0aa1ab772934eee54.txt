@@ -1,0 +1,15 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T19:00:51.352214
+# ---
+Command failed with exit code 1.
+[stderr]
+WARNING: Ignoring invalid distribution ~andas (C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages)
+WARNING: Ignoring invalid distribution ~andas (C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages)
+  WARNING: The scripts dash-generate-components.exe, dash-update-components.exe, plotly.exe and renderer.exe are installed in 'C:\Users\华为\AppData\Local\Programs\Python\Python313\Scripts' which is not on PATH.
+  Consider adding this directory to PATH or, if you prefer to suppress this warning, use --no-warn-script-location.
+WARNING: Ignoring invalid distribution ~andas (C:\Users\华为\AppData\Local\Programs\Python\Python313\Lib\site-packages)
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import dash; print(f'\u2705 Dash {dash.__version__} installed')
+                 ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'gbk' codec can't encode character '\u2705' in position 0: illegal multibyte sequence

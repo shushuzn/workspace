@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:26:38.752811
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_feishu.py  (lines 330-360 of 361)
+    info(f"全部: {len(items)} 条")
+    token = get_access_token()
+    if not token:
+        error("认证失败")
+        return 0
+    feishu = load_feishu_config()
+    sent = 0
+    for i, n in enumerate(items, 1):
+        prog(i, len(items), C("发送: "))
+        card = build_news_card(n['title'], n['url'], n.get('source', ''))
+        result = send_card(token, feishu.get('default_receive_id', ''), card)
+        if result.get('code') == 0:
+            history.append(n['title'])
+            sent += 1
+        time.sleep(0.2)
+    print()
+    save_history(history)
+    add_log('all', sent, len(items))
+    return sent
+
+# 主程序
+if __name__ == "__main__":
+    import time as t
+    start = t.time()
+    mode = sys.argv[1] if len(sys.argv) > 1 else "stats"
+    cmds = {"test": cmd_test, "welcome": cmd_welcome, "stats": cmd_stats, "daily": cmd_daily, "digest": cmd_digest, "alert": cmd_alert, "all": cmd_all}
+    cmd = cmds.get(mode, cmd_stats)
+    sent = cmd()
+    elapsed = t.time() - start
+    if sent > 0:
+        result_box(mode, sent if sent > 1 else 1, sent if sent == 1 else sent, elapsed)
+
+[1 more lines. Use start_line=361 to continue.]

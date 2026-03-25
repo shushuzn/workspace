@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:30:49.730580
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 50-100 of 175)
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    return ctx
+
+
+# ============================================================
+# 金十快讯
+# ============================================================
+def fetch_jin10(limit=20):
+    news = []
+    try:
+        req = urllib.request.Request("https://flash.jin10.com/", headers={
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
+        })
+        with urllib.request.urlopen(req, timeout=15, context=get_ssl()) as r:
+            content = r.read().decode('utf-8')
+        
+        ids = list(dict.fromkeys(re.findall(r'/detail/(\d{17,20})', content)))[:limit]
+        
+        for id in ids:
+            try:
+                req2 = urllib.request.Request(f"https://flash.jin10.com/detail/{id}",
+                    headers={'User-Agent': 'Mozilla/5.0'})
+                with urllib.request.urlopen(req2, timeout=8, context=get_ssl()) as r2:
+                    detail = r2.read().decode('utf-8')
+                
+                m = re.search(r'<title>([^<]+)</title>', detail)
+                if m:
+                    title = m.group(1).replace(' - 金十数据', '').strip()
+                    title = re.sub(r'^【金十数据】', '', title)
+                    news.append({
+                        "title": title,
+                        "url": f"https://flash.jin10.com/detail/{id}",
+                        "source": "金十快讯",
+                        "ts": time.time()
+                    })
+                time.sleep(0.2)
+            except:
+                pass
+    except Exception as e:
+        error(f"Jin10: {e}")
+    return news
+
+
+# ============================================================
+# RSS 源
+# ============================================================
+def fetch_rss(url, name=""):
+    news = []
+    try:
+
+[75 more lines. Use start_line=101 to continue.]

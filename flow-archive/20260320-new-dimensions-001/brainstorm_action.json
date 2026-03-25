@@ -1,0 +1,28 @@
+[
+  {
+    "phase": 1,
+    "dimensions": [
+      "research",
+      "utility"
+    ],
+    "tools_to_create": 5,
+    "llm_calls": 1
+  },
+  {
+    "phase": 2,
+    "dimensions": [
+      "testing",
+      "integration"
+    ],
+    "tools_to_create": 4,
+    "llm_calls": 1
+  },
+  {
+    "phase": 3,
+    "dimensions": [
+      "reporting"
+    ],
+    "tools_to_create": 3,
+    "llm_calls": 1
+  }
+]

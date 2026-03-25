@@ -1,0 +1,41 @@
+# tool_name: read_file
+# created_at: 2026-03-21T16:43:02.063185
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\idle-empire\js\game.js  (lines 1-35 of 178)
+// Idle Empire - 游戏核心
+
+let gameState;
+
+function initGame() {
+    initTheme();
+    gameState = loadGame();
+    renderBuildings();
+    renderUpgrades();
+    renderAchievements();
+    renderStatsDetail();
+    updateUI();
+    updateStats();
+    initTabs();
+    startGameLoop();
+    startAutoSave(gameState);
+    
+    document.getElementById('gold-click-area').onclick = handleClick;
+    document.getElementById('save-btn').onclick = () => { saveGame(gameState); showMessage('已保存!', 'success'); };
+    document.getElementById('reset-btn').onclick = resetGame;
+    document.getElementById('theme-btn').onclick = toggleTheme;
+    document.addEventListener('keydown', e => { if (e.key === 's' && e.ctrlKey) { e.preventDefault(); saveGame(gameState); showMessage('已保存!', 'success'); } });
+}
+
+function handleClick(e) {
+    const v = getClickMultiplier(gameState);
+    gameState.gold += v;
+    gameState.totalEarned += v;
+    gameState.totalClicks = (gameState.totalClicks || 0) + 1;
+    
+    const el = document.createElement('div');
+    el.className = 'floating-number';
+    el.textContent = `+${formatNumber(v)}`;
+    el.style.left = e.clientX + 'px';
+    el.style.top = e.clientY + 'px';
+
+[143 more lines. Use start_line=36 to continue.]

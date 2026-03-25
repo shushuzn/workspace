@@ -1,0 +1,32 @@
+{
+  "models": {
+    "GP": {
+      "r2": 0.5011449343906281,
+      "mae": 672.2842256708736,
+      "weight": 0.5415014719581481
+    },
+    "MACE": {
+      "r2": 0.42432795966894876,
+      "mae": 719.3703995380629,
+      "weight": 0.45849852804185187
+    }
+  },
+  "ensemble": {
+    "r2": 0.4847597805167444,
+    "mae": 688.696678725819,
+    "rmse": 928.1763915263361,
+    "mean_uncertainty": 971.956761906924,
+    "relative_uncertainty_pct": 107.06323774544319,
+    "ci_95_coverage": 91.66666666666666
+  },
+  "strategy": "weighted_average",
+  "features": [
+    "P_W",
+    "v_mms",
+    "co_ratio"
+  ],
+  "target": "sigma_Sm",
+  "n_samples": 120,
+  "test_size": 0.2,
+  "random_state": 42
+}

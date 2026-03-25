@@ -1,0 +1,27 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T17:03:09.740785
+# ---
+main.py:220:      skip_single = any([
+main.py:221:          args.technical, args.sync_status,
+main.py:222:          args.export_json, args.export_md, args.export_html, args.export_all_formats,
+main.py:223:          args.earnings_predict, args.fscore, args.dividend_report,
+main.py:224:          args.summary is not None, args.compare, args.csv, args.xlsx, args.db,
+main.py:225:>         args.dashboard is not None, args.insights, args.sentiment, args.sector_sentiment, args.research, args.combined,
+main.py:226:          args.signal, args.risk is not None, args.trends
+main.py:227:      ])
+main.py:228:      
+main.py:229:      if args.symbols and not skip_single:
+main.py:230:          sym = args.symbols[0]
+---
+main.py:614:      if args.sector_sentiment:
+main.py:615:          print(sector_sentiment())
+main.py:616:          return
+main.py:617:      
+main.py:618:      # Research Reports
+main.py:619:>     if args.research:
+main.py:620:          print(research_report(args.symbols))
+main.py:621:          return
+main.py:622:      
+main.py:623:      # Combined Analysis
+main.py:624:      if args.combined:
+---

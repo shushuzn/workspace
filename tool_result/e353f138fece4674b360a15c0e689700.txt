@@ -1,0 +1,26 @@
+# tool_name: read_file
+# created_at: 2026-03-22T23:06:12.802680
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 256-275 of 484)
+def cmd_fetch(args):
+    print("[INFO] Fetching news...")
+    data = NewsData()
+    total_new = 0
+    for source in CONFIG["news"]["sources"]:
+        print(f"  From {source['name']}...")
+        if source["type"] == "rss":
+            items = fetch_rss(source["url"])
+        else:
+            items = fetch_json(source["url"])
+        category = source.get("category", "")
+        for item in items[:CONFIG["news"]["max_per_fetch"]]:
+            if data.add_news(item["title"], item["url"], source["name"], category):
+                total_new += 1
+                sentiment, sector, keywords, codes = analyze(item["title"])
+                icon = "+" if sentiment == "利好" else "-" if sentiment == "利空" else "="
+                info = f"    + [{icon}][{sector}] {item['title'][:30]}"
+                if keywords: info += f" #{' #'.join(keywords)}"
+                print(info)
+    print(f"Total new: {total_new}")
+
+[209 more lines. Use start_line=276 to continue.]

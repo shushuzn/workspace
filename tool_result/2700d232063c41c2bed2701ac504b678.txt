@@ -1,0 +1,54 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:18:47.938624
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\async_fetcher.py  (lines 203-250 of 576)
+def parse_rss_feed(xml_text: str, source: str, limit: int = 20) -> List[NewsItem]:
+    items = []
+    item_pattern = r"<item>(.*?)</item>"
+    title_pattern = r"<title><!\[CDATA\[(.*?)\]\]></title>|<title>(.*?)</title>"
+    link_pattern = r"<link>(.*?)</link>"
+
+    for match in re.finditer(item_pattern, xml_text, re.DOTALL):
+        if len(items) >= limit:
+            break
+        item_text = match.group(1)
+
+        title_match = re.search(title_pattern, item_text)
+        title = title_match.group(1) or title_match.group(2) if title_match else ""
+        title = title.strip()
+
+        link_match = re.search(link_pattern, item_text)
+        url = link_match.group(1).strip() if link_match else ""
+
+        if title and len(title) > 10:
+            items.append(
+                NewsItem(
+                    title=title[:200],
+                    url=url[:500],
+                    source=source,
+                    time=datetime.now().isoformat(),
+                    hash=compute_hash(title),
+                )
+            )
+    return items
+
+
+def parse_sina_json(data: dict) -> List[NewsItem]:
+    items = []
+    result = data.get("result", {})
+    data_list = result.get("data", []) if isinstance(result, dict) else []
+
+    for item in data_list[:20]:
+        title = item.get("title", "")
+        url = item.get("url", "")
+        if title:
+            items.append(
+                NewsItem(
+                    title=title[:200],
+                    url=url[:500],
+                    source="新浪财经",
+                    time=datetime.now().isoformat(),
+                    hash=compute_hash(title),
+                )
+
+[326 more lines. Use start_line=251 to continue.]

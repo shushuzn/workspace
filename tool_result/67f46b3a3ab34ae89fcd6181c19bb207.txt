@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:38:08.049088
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_feishu.py  (lines 60-90 of 401)
+    print(C("  └") + f" {C('─'*46)} {C('┘')}")
+    print()
+
+def bar(cur, tot, w=25):
+    f = int(w * cur / tot) if tot > 0 else 0
+    return f"[{'█'*f}{'─'*(w-f)}] {cur}/{tot}"
+
+def prog(cur, tot, pre=""):
+    print(f"\r  {pre}{bar(cur, tot)}", end="", flush=True)
+
+# 配置
+def load_feishu_config():
+    if CONFIG_FILE.exists():
+        with open(CONFIG_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    return {}
+
+def load_history():
+    if HISTORY_FILE.exists():
+        with open(HISTORY_FILE, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+            return data if isinstance(data, list) else data.get('sent', [])
+    return []
+
+def save_history(hist):
+    with open(HISTORY_FILE, 'w', encoding='utf-8') as f:
+        json.dump(hist[-1000:], f, ensure_ascii=False)
+
+def load_log():
+    if LOG_FILE.exists():
+        with open(LOG_FILE, 'r', encoding='utf-8') as f:
+
+[311 more lines. Use start_line=91 to continue.]

@@ -1,0 +1,205 @@
+# tool_name: grep_search
+# created_at: 2026-03-21T16:51:43.363150
+# ---
+00-UTILS\current-files-full.json:6078:>         "FullName":  "D:\\OpenClaw\\workspace\\30-scripts\\intent-belief-integration\\test_intentkit\\intentkit\\tests\\core\\test_agent_safe_token_spending_limit.py",
+00-UTILS\current-files-full.json:6338:>         "FullName":  "D:\\OpenClaw\\workspace\\30-scripts\\intent-belief-integration\\test_intentkit\\intentkit\\tests\\wallets\\test_privy_spending_limit_sync.py",
+00-UTILS\FILE_INDEX_2026-03-07.csv:314:> "D:\OpenClaw\workspace\15-docs\reports\context-limit-config.md","2134","2026/3/6 14:12:46"
+00-UTILS\FILE_INDEX_2026-03-07.csv:1756:> "D:\OpenClaw\workspace\43-reddit\daily\2026\2026-03\2026-03-02\20260302-204629-These dudes are gonna run once they see Claude Code limits.md","1336","2026/3/6 14:12:14"
+00-UTILS\performance_optimizer.py:75:>     def __init__(self, max_size: int = 1000, ttl_seconds: int = 300):
+00-UTILS\performance_optimizer.py:80:>             max_size: 最大缓存大小
+00-UTILS\performance_optimizer.py:84:>         self.max_size = max_size
+00-UTILS\performance_optimizer.py:111:>         if len(self.cache) >= self.max_size:
+00-UTILS\performance_optimizer.py:140:>             'max_size': self.max_size,
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:25:>     def __init__(self, cache_file: Optional[str] = None, max_cache_size: int = 1000, max_workers: int = 5):
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:28:>         self.rate_limit_delay = 6.0  # CrossRef: 10 请求/分钟
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:31:>         self.max_cache_size = max_cache_size
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:58:>         """清理缓存 (LRU 淘汰，保留最近的 max_cache_size 条)"""
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:69:>         # 保留最近的 max_cache_size 条
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:70:>         if len(sorted_items) > self.max_cache_size:
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:71:>             removed_count = len(sorted_items) - self.max_cache_size
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:72:>             self.cache = dict(sorted_items[:self.max_cache_size])
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:74:>             self._log(f"缓存清理：删除 {removed_count} 条旧记录，保留 {self.max_cache_size} 条", "INFO")
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:127:>                     wait_time = self.rate_limit_delay * (2 ** (attempt - 1))  # 指数退避
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:208:>             time.sleep(self.rate_limit_delay)
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:214:>             time.sleep(self.rate_limit_delay)
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:880:>     parser.add_argument("--max-cache-size", type=int, default=1000, help="缓存最大条目数 (默认：1000)")
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:977:>         max_cache_size=args.max_cache_size,
+01-KNOWLEDGE-CARDS\core\knowledge-card-generator.py:1106:>         print(f"   缓存限制：{args.max_cache_size} 条")
+01-KNOWLEDGE-CARDS\core\knowledge-card-webui.py:29:> app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB max
+01-KNOWLEDGE-CARDS\core\knowledge-card-webui.py:50:>         "limit": 600,  # 10 请求/分钟 × 60 分钟
+01-KNOWLEDGE-CARDS\core\knowledge-card-webui.py:55:>         "limit": 600,
+01-KNOWLEDGE-CARDS\core\knowledge-card-webui.py:81:>     return quota["requests"] < quota["limit"]
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:188:> | `--max-size` | int | `100` | ❌ | 最大上传文件 (MB) |
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:230:>     "limit": 600,
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:235:>     "limit": 600,
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:351:> | `MAX_CONTENT_LENGTH` | 最大上传大小 (字节) | `104857600` (100MB) | ❌ |
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:378:> app.config['MAX_CONTENT_LENGTH'] = 100 * 1024 * 1024  # 100MB
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:474:> from flask_limiter import Limiter
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:475:> from flask_limiter.util import get_remote_address
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:477:> limiter = Limiter(
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:480:>     default_limits=["100 per hour", "10 per minute"]
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:484:> @limiter.limit("5 per minute")  # 每分钟最多 5 次处理请求
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:532:>         limits:
+01-KNOWLEDGE-CARDS\core\README-WEBUI.md:628:> app.config['MAX_CONTENT_LENGTH'] = 200 * 1024 * 1024  # 200MB
+01-KNOWLEDGE-CARDS\docs\API.md:189:>     "limit": 600,
+01-KNOWLEDGE-CARDS\docs\API.md:195:>     "limit": 600,
+01-KNOWLEDGE-CARDS\docs\FAQ.md:258:> ### Q15: 遇到 "API rate limit exceeded" 怎么办？
+01-KNOWLEDGE-CARDS\docs\README.md:96:> py knowledge-card-generator.py paper.pdf --validate --max-cache-size 2000
+01-KNOWLEDGE-CARDS\docs\README.md:330:> py knowledge-card-generator.py paper.pdf --validate --max-cache-size 2000
+01-KNOWLEDGE-CARDS\PRODUCT-README.md:82:> | `MAX_CONTENT_LENGTH` | 最大上传 | 100MB |
+01-KNOWLEDGE-CARDS\README.md:130:> | `--max-cache-size` | 缓存最大条目数 | 1000 |
+01-KNOWLEDGE-CARDS\tests\benchmark.py:152:>         quota_limit = 600
+01-KNOWLEDGE-CARDS\tests\benchmark.py:155:>         efficiency = (actual_api_calls / quota_limit) * 100 if quota_limit > 0 else 0
+01-KNOWLEDGE-CARDS\tests\benchmark.py:162:>             "quota_limit": quota_limit,
+01-KNOWLEDGE-CARDS\tests\benchmark.py:170:>         print(f"   配额限制：{quota_limit} 次/小时")
+01-KNOWLEDGE-CARDS\tests\test_output\batch\2603.09806v1.html:228:> expressiveness limitations. Our results show that all inclusions in Figure 1 are strict.
+01-KNOWLEDGE-CARDS\tests\test_output\batch\2603.09832v1.html:163:> processing, offering insights into current generative models’ limitations in addressing color accessibility.
+01-KNOWLEDGE-CARDS\tests\test_output\batch\2603.09889v1.html:164:> problems, mountain pass arguments, and a limiting procedure in which Harnack’s inequality plays a
+01-KNOWLEDGE-CARDS\tests\test_output\batch\2603.09955v1.html:185:> inherent, almost opposing, limitations that curtail their ability to
+01-KNOWLEDGE-CARDS\tests\test_output\batch\2603.09955v1.html:193:> inherently limits the capture of fine-grained spatial information.
+01-KNOWLEDGE-CARDS\tests\test_output\batch\2603.09955v1.html:194:> The loss of low-level detail can limit its performance on
+01-KNOWLEDGE-CARDS\tests\test_output\batch\2603.09955v1.html:225:> inherent, almost opposing, limitations that curtail their ability to
+01-KNOWLEDGE-CARDS\tests\test_output\batch\2603.09968v1.html:166:> hybrid KV cache compression strategy combining early-layer truncation
+01-KNOWLEDGE-CARDS\tests\test_output\batch\2603.09968v1.html:204:> based Gaussian Splatting [12] requires lengthy per-scene training, limiting real-
+01-KNOWLEDGE-CARDS\tests\test_output\batch_final\2603.09806v1.html:228:> expressiveness limitations. Our results show that all inclusions in Figure 1 are strict.
+01-KNOWLEDGE-CARDS\tests\test_output\batch_final\2603.09832v1.html:163:> processing, offering insights into current generative models’ limitations in addressing color accessibility.
+01-KNOWLEDGE-CARDS\tests\test_output\batch_final\2603.09889v1.html:164:> problems, mountain pass arguments, and a limiting procedure in which Harnack’s inequality plays a
+01-KNOWLEDGE-CARDS\tests\test_output\batch_final\2603.09955v1.html:185:> inherent, almost opposing, limitations that curtail their ability to
+01-KNOWLEDGE-CARDS\tests\test_output\batch_final\2603.09955v1.html:193:> inherently limits the capture of fine-grained spatial information.
+01-KNOWLEDGE-CARDS\tests\test_output\batch_final\2603.09955v1.html:194:> The loss of low-level detail can limit its performance on
+01-KNOWLEDGE-CARDS\tests\test_output\batch_final\2603.09955v1.html:225:> inherent, almost opposing, limitations that curtail their ability to
+01-KNOWLEDGE-CARDS\tests\test_output\batch_final\2603.09968v1.html:166:> hybrid KV cache compression strategy combining early-layer truncation
+01-KNOWLEDGE-CARDS\tests\test_output\batch_final\2603.09968v1.html:204:> based Gaussian Splatting [12] requires lengthy per-scene training, limiting real-
+02-DAILY-BRIEF\feishu\console-feishu-sync.py:64:>     def get_recent_sessions(self, limit: int = 5) -> List[Path]:
+02-DAILY-BRIEF\feishu\console-feishu-sync.py:73:>         return session_files[:limit]
+02-DAILY-BRIEF\feishu\console-feishu-sync.py:123:>     def sync_once(self, limit: int = 10):
+02-DAILY-BRIEF\feishu\console-feishu-sync.py:127:>         session_files = self.get_recent_sessions(limit)
+02-DAILY-BRIEF\feishu\console-feishu-sync.py:211:>         sync.sync_once(limit=args.sync_last)
+02-DAILY-BRIEF\feishu\feishu-ui-sync.py:66:>     def get_feishu_messages(self, limit: int = 10) -> List[Dict]:
+02-DAILY-BRIEF\feishu\feishu-ui-sync.py:77:>                         "page_size": limit
+02-DAILY-BRIEF\feishu\feishu-ui-sync.py:91:>     def get_ui_messages(self, limit: int = 10) -> List[Dict]:
+02-DAILY-BRIEF\feishu\feishu-ui-sync.py:101:>                         "limit": limit
+02-DAILY-BRIEF\feishu\feishu-ui-sync.py:226:>         feishu_msgs = self.get_feishu_messages(limit=5)
+02-DAILY-BRIEF\feishu\feishu-ui-sync.py:227:>         ui_msgs = self.get_ui_messages(limit=5)
+03-LIG-KNOWLEDGE-GRAPH\html\LIG-Data-Export.html:22:>         pre{background:#f8f8f8;padding:15px;border-radius:4px;overflow:auto;max-height:400px;font-size:12px;font-family:'Consolas','Monaco',monospace}
+03-LIG-KNOWLEDGE-GRAPH\ml\train_lig_stability_model.py:260:>         print("Model training may be unreliable with limited data.")
+03-LIG-KNOWLEDGE-GRAPH\scripts\lig-opportunity-discovery.ps1:207:>             rationale = "Low device diversity limits application potential"
+03-LIG-KNOWLEDGE-GRAPH\scripts\lig-opportunity-discovery.ps1:372:>             rationale = "Device application scope limited"
+03-LIG-KNOWLEDGE-GRAPH\scripts\lig-opportunity-discovery.ps1:505:> $report += "1. **Under-connected Applications** - Identify applications with limited device support`n"
+03-LIG-KNOWLEDGE-GRAPH\scripts\lig-opportunity-discovery.ps1:508:> $report += "4. **Signal Detection Gaps** - Identify signals with limited detection capabilities`n"
+04-collectors\arxiv\arxiv_ops_cli.py:93:> @click.option('--limit', default=10, help='显示数量')
+04-collectors\arxiv\arxiv_ops_cli.py:94:> def alerts(severity, limit):
+04-collectors\arxiv\arxiv_ops_cli.py:99:>         url = f'http://localhost:5000/api/v1/alerts?limit={limit}'
+04-collectors\arxiv-collector-v2.py:49:> MAX_PAPERS = 50
+04-collectors\arxiv-collector-v2.py:192:>         papers = fetch_arxiv_papers(category=category, max_papers=MAX_PAPERS)
+04-collectors\arxiv-collector-v2.py:217:>         papers = fetch_arxiv_papers(keyword=keyword, max_papers=MAX_PAPERS)
+04-collectors\ARXIV-INTEGRATION-ROADMAP.md:117:> MAX_PAPERS = 50  # 每类别/关键词
+04-collectors\hn\hn-comment-analyzer.py:16:> def get_top_stories(limit=10):
+04-collectors\hn\hn-comment-analyzer.py:20:>     return response.json()[:limit]
+04-collectors\hn-watcher.py:16:> MAX_STORIES = 30  # 每次获取 30 篇
+04-collectors\hn-watcher.py:21:> def get_top_stories(limit=30):
+04-collectors\hn-watcher.py:26:>     return response.json()[:limit]
+04-collectors\hn-watcher.py:38:>     print(f"Fetching top {MAX_STORIES} stories...")
+04-collectors\hn-watcher.py:39:>     story_ids = get_top_stories(MAX_STORIES)
+04-collectors\INTEGRATION-COMPLETE.md:131:> MAX_PAPERS = 50
+04-collectors\README.md:119:> MAX_PAPERS = 50
+04-collectors\README.md:294:> 3. Reduce MAX_PAPERS
+04-collectors\reddit-monitor.py:102:> def fetch_subreddit_rss(subreddit: str, limit: int = 25) -> List[Dict]:
+04-collectors\reddit-monitor.py:108:>     rss_url = f"https://www.reddit.com/r/{subreddit}/hot.rss?limit={limit}"
+04-collectors\reddit-monitor.py:144:>         for entry in feed.entries[:limit]:
+04-collectors\reddit-monitor.py:248:>         posts = fetch_subreddit_rss(subreddit, limit=25)
+04-collectors\reddit-watcher.py:29:> def get_hot_posts(subreddit, limit=20):
+04-collectors\reddit-watcher.py:33:>     params = {'limit': limit}
+05-AI-RESEARCH\auto-tagger.py:302:>     parser.add_argument('--limit', type=int, default=0, help='限制处理文件数 (0=全部)')
+05-AI-RESEARCH\auto-tagger.py:324:>         if args.limit > 0 and total_files >= args.limit:
+05-AI-RESEARCH\auto-tagger.py:328:>             if args.limit > 0 and total_files >= args.limit:
+05-AI-RESEARCH\paper-comparator.py:34:>     "limitation": ["limitation", "future work", "局限", "未来工作"],
+05-AI-RESEARCH\paper-comparator.py:162:> def find_related_papers(topic: str, limit: int = 5) -> List[str]:
+05-AI-RESEARCH\paper-comparator.py:181:>         if len(papers) >= limit:
+05-AI-RESEARCH\paper-comparator.py:184:>     return papers[:limit]
+05-AI-RESEARCH\paper-comparator.py:234:>         "limitation": "局限性",
+05-AI-RESEARCH\paper-comparator.py:293:>     parser.add_argument('--limit', type=int, default=5, help='最大论文数')
+05-AI-RESEARCH\paper-comparator.py:303:>         filepaths = find_related_papers(args.topic, limit=args.limit)
+05-AI-RESEARCH\pdf-downloader.py:16:> MAX_WORKERS = 10  # 最大并发数
+05-AI-RESEARCH\pdf-downloader.py:17:> MAX_RETRIES = 3   # 最大重试次数
+05-AI-RESEARCH\pdf-downloader.py:29:>     for attempt in range(MAX_RETRIES):
+05-AI-RESEARCH\pdf-downloader.py:42:>             if attempt < MAX_RETRIES - 1:
+05-AI-RESEARCH\pdf-downloader.py:64:>     print(f"并发数：{MAX_WORKERS}")
+05-AI-RESEARCH\pdf-downloader.py:67:>     with ThreadPoolExecutor(max_workers=MAX_WORKERS) as executor:
+06-MONITORING\enhanced_monitoring.py:151:>     def get_alerts(self, severity: str = None, limit: int = 100) -> List[Dict]:
+06-MONITORING\enhanced_monitoring.py:153:>         alerts = self.alerts[-limit:]
+06-MONITORING\enhanced_monitoring.py:299:>             'recent_alerts': self.alert_manager.get_alerts(limit=10)
+07-DATA\api-gateway.py:55:> def rate_limit(f):
+07-DATA\api-gateway.py:94:> @rate_limit
+07-DATA\api-gateway.py:146:> @rate_limit
+07-DATA\api-gateway.py:180:> @rate_limit
+07-DATA\api-gateway.py:203:> @rate_limit
+07-DATA\api-gateway.py:221:> @rate_limit
+07-DATA\api-gateway.py:239:> @rate_limit
+07-DATA\cgcnn-model.py:116:>     def __init__(self, max_size: int = 500, ttl: int = 3600):
+07-DATA\cgcnn-model.py:119:>         self.max_size = max_size
+07-DATA\cgcnn-model.py:155:>             if len(self.cache) >= self.max_size:
+07-DATA\cgcnn-model.py:173:>             'max_size': self.max_size
+07-DATA\materials-api-service-v2.py:33:>     limit: int = 10
+07-DATA\materials-api-service-v2.py:86:>     limit: int = Query(10, description="返回数量限制")
+07-DATA\materials-api-service-v2.py:89:>     results = MATERIALS_DB[:limit]
+07-DATA\materials-api-service-v2.py:126:>     return results[:search.limit]
+07-DATA\materials-api-service.py:29:>     limit: int = 10
+07-DATA\materials-api-service.py:65:>     limit: int = Query(10, description="返回数量限制")
+07-DATA\materials-api-service.py:68:>     results = MATERIALS_DB[:limit]
+07-DATA\materials-cli.py:21:>     limit: int = typer.Option(10, "--limit", "-l", help="返回数量限制"),
+07-DATA\materials-cli.py:26:>     print(f"限制：{limit} 条")
+07-DATA\materials-cli.py:33:>     ][:limit]
+07-DATA\materials-collector.py:29:> MAX_PAPERS_PER_CATEGORY = 15
+07-DATA\materials-collector.py:101:>         papers = fetch_arxiv_papers(category, MAX_PAPERS_PER_CATEGORY)
+07-DATA\materials-database.py:80:>     def find_materials(self, query: Dict = None, limit: int = 10) -> List[Dict]:
+07-DATA\materials-database.py:89:>         results = list(collection.find(query).limit(limit))
+07-DATA\materials-database.py:189:>         materials = db.find_materials(limit=5)
+07-DATA\materials-project-api.py:26:>     def search_materials(self, formula: str = None, limit: int = 10) -> List[Dict]:
+07-DATA\materials-project-api.py:29:>         params = {"formula": formula, "limit": limit} if formula else {"limit": limit}
+07-DATA\materials-project-api.py:76:>     materials = client.search_materials(formula="LiCoO2", limit=5)
+07-DATA\megnet-model.py:112:>     def __init__(self, max_size: int = 500, ttl: int = 3600):
+07-DATA\megnet-model.py:115:>         self.max_size = max_size
+07-DATA\megnet-model.py:148:>             if len(self.cache) >= self.max_size:
+07-DATA\megnet-model.py:166:>             'max_size': self.max_size
+07-DATA\multitask-model.py:85:>     def __init__(self, max_size: int = 500, ttl: int = 3600):
+07-DATA\multitask-model.py:88:>         self.max_size = max_size
+07-DATA\multitask-model.py:115:>             if len(self.cache) >= self.max_size:
+07-DATA\uncertainty-quantifier.py:87:>     def __init__(self, max_size: int = 500, ttl: int = 3600):
+07-DATA\uncertainty-quantifier.py:90:>         self.max_size = max_size
+07-DATA\uncertainty-quantifier.py:117:>             if len(self.cache) >= self.max_size:
+08-AUTOMATION\auto-pnote\auto-pnote.py:51:>             "limitations": "待分析",
+08-AUTOMATION\auto-pnote\auto-pnote.py:141:> {dimensions.get('limitations', '待补充')}
+08-AUTOMATION\auto-pnote\README.md:188:>     rate_limit: 3  # 请求/秒
+08-AUTOMATION\REORGANIZE-PLAN-DETAILED.md:233:> │   ├── cpu-limiter.ps1
+08-AUTOMATION\REORGANIZE-PLAN-DETAILED.md:245:> - `cpu-limiter.ps1` (在 SCRIPT_ 文件中) → `06-MONITORING/scripts/`
+08-AUTOMATION\REORGANIZE-PLAN-ULTIMATE.md:204:> │   │   ├── cpu-limiter.ps1
+08-AUTOMATION\REORGANIZE-PLAN.md:78:> │   ├── cpu-limiter.ps1
+08-AUTOMATION\scheduled-tasks\SCRIPT_CPU_Limiter_v1.0.ps1:2:> # 用法：.\cpu-limiter.ps1
+08-AUTOMATION\scheduled-tasks\SCRIPT_Setup_Tasks_v1.0.ps1:35:>         Args = "auto-tagger.py --dir all --limit 50"
+08-AUTOMATION\scripts\auto_recovery.py:215:>     def get_recovery_history(self, limit: int = 10) -> List[Dict]:
+08-AUTOMATION\scripts\auto_recovery.py:217:>         return self.recovery_history[-limit:]
+09-TESTS\test-extended-api.py:25:>     ("POST", "/materials/search", {"formula": "Li", "limit": 5}),
+09-TESTS\test-materials-api.py:72:>         payload = {"formula": "Li", "band_gap_min": 2.0, "limit": 5}
+09-TESTS\test-mp-api.py:50:>     # materials = client.search_materials(formula="LiCoO2", limit=1)
+13-SECURITY\scripts\security_hardening.py:27:>         self.rate_limits = {}
+13-SECURITY\scripts\security_hardening.py:54:>     def check_rate_limit(self, user_id: str, limit: int = 100, window: int = 60) -> bool:
+13-SECURITY\scripts\security_hardening.py:58:>         if user_id not in self.rate_limits:
+13-SECURITY\scripts\security_hardening.py:59:>             self.rate_limits[user_id] = []
+13-SECURITY\scripts\security_hardening.py:63:>         self.rate_limits[user_id] = [
+13-SECURITY\scripts\security_hardening.py:64:>             t for t in self.rate_limits[user_id] if t > window_start
+13-SECURITY\scripts\security_hardening.py:68:>         if len(self.rate_limits[user_id]) >= limit:
+13-SECURITY\scripts\security_hardening.py:69:>             self._audit_log('rate_limit_exceeded', user_id)
+13-SECURITY\scripts\security_hardening.py:73:>         self.rate_limits[user_id].append(now)
+13-SECURITY\scripts\security_hardening.py:114:>     def get_audit_log(self, limit: int = 100) -> list:
+13-SECURITY\scripts\security_hardening.py:116:>         return self.audit_log[-limit:]
+13-SECURITY\scripts\security_hardening.py:122:>             'rate_limits_count': len(self.rate_limits),
+13-SECURITY\scripts\security_hardening.py:143:> def rate_limit(limit: int = 100, window: int = 60):
+13-SECURITY\scripts\security_hardening.py:151:>             if not security_manager.check_rate_limit(user_id, limit, window):
+13-SECURITY\scripts\security_hardening.py:152:>                 return {'error': 'Rate limit exceeded'}, 429
+99-ARCHIVE\early_exit.py:21:>     MAX_ITERATIONS = "max_iterations"     # 最大迭代
+99-ARCHIVE\early_exit.py:200:>             reason=ExitReason.MAX_ITERATIONS,
+audit_analyzer_001.py:92:>     def analyze(self, event_type: str = None, limit: int = 100) -> dict:
+audit_analyzer_001.py:118:>             "events": events[-limit:]
+
+(Results truncated at 200 matches.)

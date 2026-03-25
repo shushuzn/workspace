@@ -1,0 +1,25 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T17:10:42.959024
+# ---
+Command failed with exit code 1.
+[stdout]
+
++==============================================================+
+|                    Stock PRO v17.0                          |
+|          Professional Stock Analysis Suite                  |
++==============================================================+
+
+Traceback (most recent call last):
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py", line 817, in <module>
+    main()
+    ~~~~^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py", line 641, in main
+    print(momentum_report(symbols))
+          ~~~~~~~~~~~~~~~^^^^^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\core.py", line 366, in momentum_report
+    results = [calc_momentum(sym) for sym in symbols]
+               ~~~~~~~~~~~~~^^^^^
+  File "D:\OpenClaw\workspace\30-scripts-tools\stock_pro\core.py", line 310, in calc_momentum
+    hist_prices = B.get(symbol, {}).get("prices", [])
+                  ^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'float' object has no attribute 'get'

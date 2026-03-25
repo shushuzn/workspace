@@ -1,0 +1,66 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:51:19.444497
+# ---
+#!/usr/bin/env python3
+import sys; sys.stdout.reconfigure(encoding='utf-8')
+import json, time, ssl
+from concurrent.futures import ThreadPoolExecutor
+import urllib.request, xml.etree.ElementTree as ET
+
+C='.news_cache.json'
+POS=['涨','升','利多']; NEG=['跌','降','利空']
+
+def s(): c=ssl.create_default_context(); c.check_hostname=c.verify_mode=0; return c
+
+def cl(t):
+    if 'A股' in t or '上证' in t: return 'stock'
+    if '美元' in t or '欧元' in t: return 'forex'
+    if 'AI' in t or '科技' in t: return 'tech'
+    return 'other'
+
+def sn(t):
+    p=sum(1 for w in POS if w in t); n=sum(1 for w in NEG if w in t)
+    return ('positive',20) if p>n else ('negative',-20) if n>p else ('neutral',0)
+
+def fs():
+    try:
+        u='https://feed.mix.sina.com.cn/api/roll/get?pageid=153&lid=2516&num=15&page=1'
+        d=json.loads(urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=10,context=s()).read().decode('utf-8'))
+        return [{'title':i.get('title','').strip(),'url':i.get('url',''),'source':'新浪','ts':time.time(),'category':cl(i.get('title','')),} for i in d.get('result',{}).get('data',[])[:15] if i.get('title','')]
+    except: return []
+
+def fe():
+    try:
+        u='https://feed.eastmoney.com/more?type=globalnews&pageSize=10&page=1'
+        d=json.loads(urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'}),timeout=10,context=s()).read().decode('utf-8'))
+        return [{'title':i.get('title','').strip(),'url':'https://www.eastmoney.com/a/'+str(i.get('id','')),'source':'东财','ts':time.time(),'category':cl(i.get('title','')),} for i in d.get('data',{}).get('list',[])[:10] if i.get('title','')]
+    except: return []
+
+def fr(u,n,l=10):
+    try:
+        r=urllib.request.Request(u,headers={'User-Agent':'Mozilla/5.0'})
+        root=ET.fromstring(urllib.request.urlopen(r,timeout=10,context=s()).read().decode('utf-8'))
+        return [{'title':i.findtext('title','').strip(),'url':i.findtext('link',''),'source':n,'ts':time.time(),'category':cl(i.findtext('title','')),} for i in root.findall('.//item')[:l] if i.findtext('title','')]
+    except: return []
+
+SRC=[('新浪',fs),('东财',fe),('Investing',lambda:fr('https://www.investing.com/rss/news.rss','Investing',10)),('CNBC',lambda:fr('https://www.cnbc.com/id/10000664/device/rss/rss.html','CNBC',15))]
+
+def fetch(q=False):
+    try:
+        c=json.load(open(C,encoding='utf-8'))
+        if c.get('news') and time.time()-c.get('t',0)<300:
+            if not q: print('  [C] '+str(len(c['news'])))
+            return c['news']
+    except: pass
+    r=[]; t0=time.time()
+    if not q: print('  [>] Fetching...')
+    with ThreadPoolExecutor(max_workers=5) as ex:
+        for f in ex.map(lambda s:s[1](),SRC):
+            r.extend(f)
+    json.dump({'news':r,'t':time.time()},open(C,'w',encoding='utf-8'))
+    if not q: print('  [OK] '+str(len(r))+' in '+str(round(time.time()-t0,1))+'s')
+    return r
+
+if __name__=='__main__':
+    for i,n in enumerate(fetch()[:10],1):
+        print(str(i)+'. ['+n['source']+'] '+n['title'])

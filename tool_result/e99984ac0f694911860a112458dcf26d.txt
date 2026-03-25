@@ -1,0 +1,64 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T01:32:30.238529
+# ---
+======================================================================
+批量股票分析
+======================================================================
+股票数量: 8
+
+[1/8] AAPL
+  AAPL... Error: Too Many Requests. Rate limited. Try after a while.
+  价格: $384.31 (+0.75%) | 评分: 50 | 持有
+
+[2/8] MSFT
+  MSFT... Error: Too Many Requests. Rate limited. Try after a while.
+  价格: $171.17 (-0.40%) | 评分: 40 | 观望
+
+[3/8] GOOGL
+  GOOGL... Error: Too Many Requests. Rate limited. Try after a while.
+  价格: $343.04 (+1.65%) | 评分: 30 | 观望
+
+[4/8] AMZN
+  AMZN... Error: Too Many Requests. Rate limited. Try after a while.
+  价格: $212.83 (-3.14%) | 评分: 20 | 观望
+
+[5/8] TSLA
+  TSLA... Error: Too Many Requests. Rate limited. Try after a while.
+  价格: $387.51 (+1.41%) | 评分: 30 | 观望
+
+[6/8] NVDA
+  NVDA... Error: Too Many Requests. Rate limited. Try after a while.
+  价格: $175.01 (-3.45%) | 评分: 30 | 观望
+
+[7/8] META
+  META... Error: Too Many Requests. Rate limited. Try after a while.
+  价格: $405.29 (-3.48%) | 评分: 30 | 观望
+
+[8/8] BRK-B
+  BRK-B... Error: Too Many Requests. Rate limited. Try after a while.
+  价格: $301.39 (+3.87%) | 评分: 50 | 持有
+
+
+======================================================================
+汇总排名
+======================================================================
+排名   代码       价格         涨跌         评分     建议    
+----------------------------------------------------------------------
+1    AAPL     $384.31    +0.75%     50     持有
+2    BRK-B    $301.39    +3.87%     50     持有
+3    MSFT     $171.17    -0.40%     40     观望
+4    GOOGL    $343.04    +1.65%     30     观望
+5    TSLA     $387.51    +1.41%     30     观望
+6    NVDA     $175.01    -3.45%     30     观望
+7    META     $405.29    -3.48%     30     观望
+8    AMZN     $212.83    -3.14%     20     观望
+
+----------------------------------------------------------------------
+统计:
+  总数: 8
+  买入: 0
+  持有: 2
+  观望: 6
+  平均评分: 35.0
+
+[OK] 保存: D:\OpenClaw\workspace\.openclaw\stock_analysis\reports/batch_20260322_013119.json

@@ -1,0 +1,61 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T00:15:44.656254
+# ---
+Command failed with exit code -1.
+[stdout]
+========================================
+  OpenClaw Cursor Mode 配置安装
+========================================
+
+[1/5] 检查 Node.js 安装...
+[✓] Node.js 已安装
+
+[2/5] 安装 MCP 服务器...
+
+安装 @modelcontextprotocol/server-filesystem...
+
+added 131 packages in 39s
+
+42 packages are looking for funding
+  run `npm fund` for details
+安装 @modelcontextprotocol/server-git...
+[警告] git MCP 安装失败，继续其他安装
+安装 @modelcontextprotocol/server-memory...
+
+added 92 packages in 11s
+
+28 packages are looking for funding
+  run `npm fund` for details
+
+[3/5] 配置环境变量...
+
+SUCCESS: Specified value was saved.
+
+SUCCESS: Specified value was saved.
+
+SUCCESS: Specified value was saved.
+[✓] 环境变量已设置
+
+[4/5] 创建工作区配置文件...
+[✓] 工作区配置已创建
+
+[5/5] 创建快速启动脚本...
+[✓] 启动脚本已创建
+
+========================================
+  安装完成!
+========================================
+
+使用方法:
+  1. 运行 cursor-mode.bat 查看使用说明
+  2. 运行 copaw.bat "你的任务" 开始编程
+  3. 或在对话中说 "启用 Cursor 模式"
+
+配置文件位置:
+  - 主配置：C:\Users\华为\.copaw\config-cursor.json
+  - 工作区：D:\OpenClaw\workspace\.openclaw\config.json
+  - 模式说明：C:\Users\华为\.copaw\CURSOR-MODE.md
+
+Press any key to continue . . . 
+[stderr]
+Command execution exceeded the timeout of 120 seconds.

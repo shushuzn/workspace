@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:11:34.965253
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 1730-1770 of 1978)
+        f.write(f"| 情景 | 目标价 | 上涨空间 | 概率 |\n")
+        f.write(f"|------|--------|----------|------|\n")
+        f.write(f"| 悲观 | ${fv_low:.0f} | {(fv_low-price)/price*100:+.1f}% | 15% |\n")
+        f.write(f"| 基准 | ${target:.0f} | {upside:+.1f}% | 60% |\n")
+        f.write(f"| 乐观 | ${fv_high:.0f} | {(fv_high-price)/price*100:+.1f}% | 25% |\n\n")
+        
+        f.write(f"**合理价值区间:** ${fv_low:.0f} - ${fv_high:.0f}\n\n")
+        
+        if upside > 25:
+            f.write(f"**{rating_cn}** - 目标上涨空间 {upside:+.1f}%，具备显著投资价值\n\n")
+        elif upside > 10:
+            f.write(f"**{rating_cn}** - 目标上涨空间 {upside:+.1f}%，建议适度配置\n\n")
+        else:
+            f.write(f"**{rating_cn}** - 目标上涨空间有限，建议观望\n\n")
+        
+        # Value traps
+        if traps:
+            f.write("### 7.1 风险提示\n\n")
+            for trap in traps:
+                f.write(f"- ⚠️ {trap['type']}: {trap['detail']}\n")
+            f.write("\n")
+        
+        f.write("---\n\n")
+        f.write(f"*由 Stock PRO v8.0 生成*\n")
+    
+    print(f"\n报告已保存: {md_path}")
+    return md_path
+
+def calc_fundamental_forecast(q, fin):
+    """Calculate fundamental-based price targets"""
+    price = q["price"]
+    eps_t = q["eps_t"]
+    eps_f = q["eps_f"]
+    pe = q["pe"]
+    
+    # Earnings-based targets
+    pe_15 = eps_f * 15  # Conservative P/E
+    pe_20 = eps_f * 20  # Average P/E
+    pe_25 = eps_f * 25  # Bullish P/E
+    pe_30 = eps_f * 30  # Aggressive P/E
+    
+
+[208 more lines. Use start_line=1771 to continue.]

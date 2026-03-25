@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-23T09:45:55.887237
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 200-250 of 623)
+def filter_by_category(news_list, category):
+    """按分类筛选"""
+    if category == 'all':
+        return news_list
+    return [n for n in news_list if n.get('category') == category]
+
+def filter_by_sentiment(news_list, sentiment):
+    """按情感筛选"""
+    return [n for n in news_list if n.get('sentiment') == sentiment]
+
+def filter_by_keywords(news_list, keywords):
+    """按关键词筛选（AND/OR）"""
+    if not keywords:
+        return news_list
+    result = []
+    for n in news_list:
+        title = n.get('title', '')
+        if any(kw in title for kw in keywords):
+            result.append(n)
+    return result
+
+def sort_by_relevance(news_list, keywords):
+    """按关键词相关性排序"""
+    if not keywords:
+        return news_list
+    scored = []
+    for n in news_list:
+        title = n.get('title', '')
+        score = sum(1 for kw in keywords if kw in title)
+        n['relevance'] = score
+        scored.append(n)
+    return sorted(scored, key=lambda x: x.get('relevance', 0), reverse=True)
+
+# ============================================================
+# 缓存
+# ============================================================
+
+def load_cache():
+    if CACHE_FILE.exists():
+        try:
+            with open(CACHE_FILE, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        except:
+            pass
+    return {"data": [], "time": 0}
+
+def save_cache(news):
+    with open(CACHE_FILE, 'w', encoding='utf-8') as f:
+        json.dump({"data": news, "time": time.time()}, f, ensure_ascii=False)
+
+def get_cached(quiet=False):
+
+[373 more lines. Use start_line=251 to continue.]

@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-22T12:43:22.960800
+# ---
+D:\OpenClaw\workspace\active_skills\stock-pro\SKILL.md  (lines 1-50 of 155)
+# Stock PRO Skill v12.3
+
+## Description
+Modular stock analysis tool with DCF valuation, portfolio management, screening, automation, and REST API.
+
+## Version History
+| **12.3** | 2026-03-22 | Test release workflow v2 |
+| Version | Date | Changes |
+|---------|------|---------|
+| **12.3** | 2026-03-22 | Enhanced archive workflow v2, scoring_v2, technical, sector_rotation, backtest |
+| 12.2 | 2026-03-22 | Added git auto-push to archive workflow |
+| 12.1 | 2026-03-22 | Added scoring_v2, technical, sector_rotation, backtest, compare |
+| 12.0 | 2026-03-22 | Modular refactor with 39+ modules |
+
+## Archive + Git Workflow v2
+```bash
+# 1. 鵵 (Զ汾//)
+python archive_stock_pro.py archive [version] [notes]
+
+# 2. 鿴鵵б
+python archive_stock_pro.py list
+
+# 3. ֤鵵
+python archive_stock_pro.py verify <name>
+
+# 4. ָɰ汾 (Զ+commit)
+python archive_stock_pro.py restore <name>
+
+# 5. ɾ鵵
+python archive_stock_pro.py delete <name>
+
+# 6. Git ״̬
+python archive_stock_pro.py status    # ״̬
+python archive_stock_pro.py test <name>  # Իָ
+```
+
+### Զ
+|  | ˵ |
+|------|------|
+| 汾 | Զ `__init__.py` ȡ |
+|  | Զ `git diff --name-only` |
+| Commit  | feat / fix / refactor / docs / revert |
+| ժҪ | Զ `+n new, ~m modified` |
+| У | MD5 checksum ֤ |
+| ع | Զ `pre_restore_TIMESTAMP` |
+
+### Commit ʽ
+```
+{type}(stock-pro): {notes} | v{version} [{date}]
+
+
+[105 more lines. Use start_line=51 to continue.]

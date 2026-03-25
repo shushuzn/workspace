@@ -1,0 +1,7 @@
+[
+  "http://127.0.0.1:7890",
+  "http://127.0.0.1:7891",
+  "http://127.0.0.1:8080",
+  "http://proxy1.example.com:8080",
+  "http://proxy2.example.com:8080"
+]

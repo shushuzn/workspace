@@ -1,0 +1,157 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T13:07:47.588327
+# ---
+================================================================================
+DETAILED REVIEW OF 23 FILES
+================================================================================
+
+[UNSURE] reg_agent_monitor_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 44
+
+[UNSURE] reg_antibypass_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 61
+
+[UNSURE] reg_auto_backup_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 37
+
+[UNSURE] reg_auto_protection_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 39
+
+[UNSURE] reg_confirmation_gate_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 37
+
+[UNSURE] reg_context_verify_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 39
+
+[UNSURE] reg_dashboard_fix_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 61
+
+[UNSURE] reg_diagnose_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 36
+
+[UNSURE] reg_forced_protection_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 61
+
+[UNSURE] reg_mark_all_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 36
+
+[UNSURE] reg_phase_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 73
+
+[KEEP] reg_protection_phase_001.py
+  Desc: 注册 Phase 2 工具到 registry
+  Funcs: ['register_tools']
+  Lines: 83
+
+[KEEP] reg_reward_stop_001.py
+  Desc: 注册奖励系统和立即停止机制到 registry
+  Funcs: ['register_tools']
+  Lines: 69
+
+[UNSURE] reg_risk_assessor_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 37
+
+[UNSURE] reg_rules_verifier_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 39
+
+[UNSURE] reg_safe_shell_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 61
+
+[UNSURE] reg_task_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 35
+
+[UNSURE] reg_tool_executor_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 36
+
+[UNSURE] reg_tool_selector_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 39
+
+[UNSURE] reg_update_step_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 36
+
+[UNSURE] reg_workflow_scheduler_001.py
+  Desc: ASK: Run verification
+  Funcs: []
+  Lines: 39
+
+[KEEP] smart_compress_001.py
+  Desc: SMART-COMPRESS-001 智能压缩器 v2.0
+  Funcs: ['__init__', 'estimate_tokens', 'calculate_line_priority', 'extract_key_sections', 'smart_compress_lines', 'compress_with_delta', 'compress_session', '_create_summary', 'run_compression', 'main']
+  Lines: 322
+
+[KEEP] sa_backtest_001.py
+  Desc: SA-022 股票策略回测系统
+  Funcs: ['__init__', '_load_config', '_generate_sample_data', '_calculate_indicators', '_generate_signals', 'run_backtest', 'compare_strategies', 'walk_forward_test', 'main']
+  Lines: 273
+
+================================================================================
+SUMMARY
+================================================================================
+KEEP:    4
+DELETE:  0
+UNSURE:  19
+
+[DELETE LIST]:
+
+[KEEP LIST]:
+  reg_protection_phase_001.py
+  reg_reward_stop_001.py
+  smart_compress_001.py
+  sa_backtest_001.py
+
+[UNSURE - NEED MANUAL CHECK]:
+  reg_agent_monitor_001.py
+  reg_antibypass_001.py
+  reg_auto_backup_001.py
+  reg_auto_protection_001.py
+  reg_confirmation_gate_001.py
+  reg_context_verify_001.py
+  reg_dashboard_fix_001.py
+  reg_diagnose_001.py
+  reg_forced_protection_001.py
+  reg_mark_all_001.py
+  reg_phase_001.py
+  reg_risk_assessor_001.py
+  reg_rules_verifier_001.py
+  reg_safe_shell_001.py
+  reg_task_001.py
+  reg_tool_executor_001.py
+  reg_tool_selector_001.py
+  reg_update_step_001.py
+  reg_workflow_scheduler_001.py

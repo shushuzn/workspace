@@ -1,0 +1,41 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T10:18:48.893784
+# ---
+
++==============================================================+
+|                    Stock PRO v10.0                         |
+|              Professional Stock Analysis Tool               |
++==============================================================+
+    
+
+============================================================
+Stock PRO v10.0 - Analyzing NVDA
+============================================================
+
+Price: $172.00
+EPS: Trailing $4.90 | Forward $7.50
+P/E: Current 35.0x | Forward 22.9x
+PEG: 0.90 | Beta: 1.70
+
+DCF Scenarios: Bull=$350 | Base=$231 | Bear=$124
+Analyst Target: $269 (Outperform)
+Combined Target: $253.74 (+47.5%)
+
+Rating: STRONG_BUY | Score: 84/100 | Risk: MEDIUM
+Scores: Quality=80 | Value=85 | Momentum=70 | Growth=100
+5Y EPS: $5.82 (3.5% CAGR)
+P/E Percentile: 19% (Deep Value (Historical Discount))
+FCF Yield: 2.8% | Div Yield: 0.00%
+Institutional Ownership: 75%
+
+Report saved: D:\OpenClaw\workspace\50-reports\stocks\NVDA_2026-03-22.md
+
+============================================================
+Quick Commands:
+   --cn      Chinese report
+   --compare Multi-stock comparison
+   --watch   Watch mode
+   --json    JSON output
+   --summary Summary mode
+   --help    Help
+============================================================

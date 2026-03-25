@@ -1,0 +1,101 @@
+{
+  "status": "success",
+  "strategy": "ma_cross",
+  "period": {
+    "start": "2025-01-01",
+    "end": "2025-09-07",
+    "days": 250
+  },
+  "performance": {
+    "initial_capital": 100000,
+    "final_capital": 10491.42,
+    "total_return_pct": 2.98,
+    "annualized_return_pct": 3.0,
+    "volatility_pct": 2.77,
+    "sharpe_ratio": 0.36,
+    "max_drawdown_pct": -1.61,
+    "win_rate_pct": 25.0,
+    "total_trades": 12
+  },
+  "trades": [
+    {
+      "date": "2025-03-05",
+      "action": "BUY",
+      "price": 99.73417449649352,
+      "shares": 100.0,
+      "cost": 9988.377575823824
+    },
+    {
+      "date": "2025-04-03",
+      "action": "SELL",
+      "price": 101.5088957007912,
+      "shares": 100.0,
+      "revenue": 10135.663235724001,
+      "profit": 162.245786074649
+    },
+    {
+      "date": "2025-04-11",
+      "action": "BUY",
+      "price": 110.40609995951262,
+      "shares": 90.0,
+      "cost": 9951.453819850669
+    },
+    {
+      "date": "2025-06-09",
+      "action": "SELL",
+      "price": 121.59299332990304,
+      "shares": 90.0,
+      "revenue": 10926.954345591737,
+      "profit": 990.4053492356015
+    },
+    {
+      "date": "2025-06-25",
+      "action": "BUY",
+      "price": 124.61788748495685,
+      "shares": 81.0,
+      "cost": 10109.189959610927
+    },
+    {
+      "date": "2025-07-12",
+      "action": "SELL",
+      "price": 119.88970657112024,
+      "shares": 81.0,
+      "revenue": 9696.49963291235,
+      "profit": -397.54925336915585
+    },
+    {
+      "date": "2025-07-17",
+      "action": "BUY",
+      "price": 125.5241088417949,
+      "shares": 80.0,
+      "cost": 10056.991600404606
+    },
+    {
+      "date": "2025-08-28",
+      "action": "SELL",
+      "price": 152.2900678888761,
+      "shares": 80.0,
+      "revenue": 12164.930622963424,
+      "profit": 2123.0019156198323
+    },
+    {
+      "date": "2025-08-31",
+      "action": "BUY",
+      "price": 154.64740987855023,
+      "shares": 66.0,
+      "cost": 10222.03914556229
+    },
+    {
+      "date": "2025-09-07",
+      "action": "SELL",
+      "price": 159.11998374384956,
+      "shares": 66.0,
+      "revenue": 10491.417008166978
+    }
+  ],
+  "equity_curve": {
+    "start": 100000.0,
+    "peak": 103162.7,
+    "end": 102977.27
+  }
+}

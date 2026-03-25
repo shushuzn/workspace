@@ -1,0 +1,267 @@
+{
+  "collection_date": "2026-03-10",
+  "sources": {
+    "arxiv": 11,
+    "pubmed": 0
+  },
+  "total_papers": 11,
+  "high_priority": 2,
+  "papers": [
+    {
+      "arxiv_id": "2603.06576v1",
+      "title": "BEVLM: Distilling Semantic Knowledge from LLMs into Bird's-Eye View Representations",
+      "authors": [
+        "Thomas Monninger",
+        "Shaoyuan Xie",
+        "Qi Alfred Chen",
+        "Sihao Ding"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "abstract": "The integration of Large Language Models (LLMs) into autonomous driving has attracted growing interest for their strong reasoning and semantic understanding abilities, which are essential for handling complex decision-making and long-tail scenarios. However, existing methods typically feed LLMs with tokens from multi-view and multi-frame images independently, leading to redundant computation and limited spatial consistency. This separation in visual processing hinders accurate 3D spatial reasoning and fails to maintain geometric coherence across views. On the other hand, Bird's-Eye View (BEV) representations learned from geometrically annotated tasks (e.g., object detection) provide spatial structure but lack the semantic richness of foundation vision encoders. To bridge this gap, we propose BEVLM, a framework that connects a spatially consistent and semantically distilled BEV representation with LLMs. Through extensive experiments, we show that BEVLM enables LLMs to reason more effectively in cross-view driving scenes, improving accuracy by 46%, by leveraging BEV features as unified inputs. Furthermore, by distilling semantic knowledge from LLMs into BEV representations, BEVLM significantly improves closed-loop end-to-end driving performance by 29% in safety-critical scenarios.",
+      "published": "2026-03-06T18:59:55Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06576v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06576v1",
+      "source": "arXiv",
+      "priority_score": 3.0
+    },
+    {
+      "arxiv_id": "2603.06573v1",
+      "title": "Fly360: Omnidirectional Obstacle Avoidance within Drone View",
+      "authors": [
+        "Xiangkai Zhang",
+        "Dizhe Zhang",
+        "WenZhuo Cao",
+        "Zhaoliang Wan",
+        "Yingjie Niu",
+        "Lu Qi",
+        "Xu Yang",
+        "Zhiyong Liu"
+      ],
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "abstract": "Obstacle avoidance in unmanned aerial vehicles (UAVs), as a fundamental capability, has gained increasing attention with the growing focus on spatial intelligence. However, current obstacle-avoidance methods mainly depend on limited field-of-view sensors and are ill-suited for UAV scenarios which require full-spatial awareness when the movement direction differs from the UAV's heading. This limitation motivates us to explore omnidirectional obstacle avoidance for panoramic drones with full-view perception. We first study an under explored problem setting in which a UAV must generate collision-free motion in environments with obstacles from arbitrary directions, and then construct a benchmark that consists of three representative flight tasks. Based on such settings, we propose Fly360, a two-stage perception-decision pipeline with a fixed random-yaw training strategy. At the perception stage, panoramic RGB observations are input and converted into depth maps as a robust intermediate representation. For the policy network, it is lightweight and used to output body-frame velocity commands from depth inputs. Extensive simulation and real-world experiments demonstrate that Fly360 achieves stable omnidirectional obstacle avoidance and outperforms forward-view baselines across all tasks. Our model is available at https://zxkai.github.io/fly360/",
+      "published": "2026-03-06T18:59:43Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06573v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06573v1",
+      "source": "arXiv",
+      "priority_score": 1.0
+    },
+    {
+      "arxiv_id": "2603.06570v1",
+      "title": "SUREON: A Benchmark and Vision-Language-Model for Surgical Reasoning",
+      "authors": [
+        "Alejandra Perez",
+        "Anita Rau",
+        "Lee White",
+        "Busisiwe Mlambo",
+        "Chinedu Nwoye",
+        "Muhammad Abdullah Jamal",
+        "Omid Mohareri"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "abstract": "Surgeons don't just see -- they interpret. When an expert observes a surgical scene, they understand not only what instrument is being used, but why it was chosen, what risk it poses, and what comes next. Current surgical AI cannot answer such questions, largely because training data that explicitly encodes surgical reasoning is immensely difficult to annotate at scale. Yet surgical video lectures already contain exactly this -- explanations of intent, rationale, and anticipation, narrated by experts for the purpose of teaching. Though inherently noisy and unstructured, these narrations encode the reasoning that surgical AI currently lacks. We introduce SUREON, a large-scale video QA dataset that systematically harvests this training signal from surgical academic videos. SUREON defines 12 question categories covering safety assessment, decision rationale, and forecasting, and uses a multi-agent pipeline to extract and structure supervision at scale. Across 134.7K clips and 170 procedure types, SUREON yields 206.8k QA pairs and an expert-validated benchmark of 354 examples. To evaluate the extent to which this supervision translates to surgical reasoning ability, we introduce two models: SureonVLM, a vision-language model adapted through supervised fine-tuning, and SureonVLM-R1, a reasoning model trained with Group Relative Policy Optimization. Both models can answer complex questions about surgery and substantially outperform larger general-domain models, exceeding 84% accuracy on the SUREON benchmark while outperforming general-domain models on standard surgical perception tasks. Qualitative analysis of SureonVLM-R1 reveals explicit reasoning behavior, such as inferring operative intent from visual context.",
+      "published": "2026-03-06T18:58:36Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06570v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06570v1",
+      "source": "arXiv",
+      "priority_score": 3.0
+    },
+    {
+      "arxiv_id": "2603.06565v1",
+      "title": "Boosting deep Reinforcement Learning using pretraining with Logical Options",
+      "authors": [
+        "Zihan Ye",
+        "Phil Chau",
+        "Raban Emunds",
+        "Jannis Blüml",
+        "Cedric Derstroff",
+        "Quentin Delfosse",
+        "Oleg Arenz",
+        "Kristian Kersting"
+      ],
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "abstract": "Deep reinforcement learning agents are often misaligned, as they over-exploit early reward signals. Recently, several symbolic approaches have addressed these challenges by encoding sparse objectives along with aligned plans. However, purely symbolic architectures are complex to scale and difficult to apply to continuous settings. Hence, we propose a hybrid approach, inspired by humans' ability to acquire new skills. We use a two-stage framework that injects symbolic structure into neural-based reinforcement learning agents without sacrificing the expressivity of deep policies. Our method, called Hybrid Hierarchical RL (H^2RL), introduces a logical option-based pretraining strategy to steer the learning policy away from short-term reward loops and toward goal-directed behavior while allowing the final policy to be refined via standard environment interaction. Empirically, we show that this approach consistently improves long-horizon decision-making and yields agents that outperform strong neural, symbolic, and neuro-symbolic baselines.",
+      "published": "2026-03-06T18:55:15Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06565v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06565v1",
+      "source": "arXiv",
+      "priority_score": 2.0
+    },
+    {
+      "arxiv_id": "2603.06545v1",
+      "title": "LiveSense: A Real-Time Wi-Fi Sensing Platform for Range-Doppler on COTS Laptop",
+      "authors": [
+        "Jessica Sanson",
+        "Rahul C. Shah",
+        "Maximilian Pinaroc",
+        "Cagri Tanriover",
+        "Valerio Frascolla"
+      ],
+      "categories": [
+        "eess.SP",
+        "cs.AI"
+      ],
+      "abstract": "We present LiveSense - a cross-platform that transforms a commercial off-the-shelf (COTS) Wi-Fi Network Interface Card (NIC) on a laptop into a centimeter-level Range-Doppler sensor while preserving simultaneous communication capability. The laptops are equipped with COTS Intel AX211 (Wi-Fi 6E) or Intel BE201 (Wi-Fi 7) NICs. LiveSense can (i) Extract fully-synchronized channel state information (CSI) at >= 40 Hz, (ii) Perform time-phase alignment and self-interference cancellation on-device, and (iii) Provide a real-time stream of range, Doppler, subcarrier magnitude/phase and annotated video frames to a Python/Qt Graphical User Interface (GUI). The demo will showcase the ability to detect (i) Distance and radial velocity of attendees within a few meters of the device, (ii) Micro-motion (respiration), and (iii) Hand-gesture ranging. To the best of our knowledge, this is the first-ever demo to obtain accurate range information of targets from commercial Wi-Fi, despite the limited 160 MHz bandwidth.",
+      "published": "2026-03-06T18:33:14Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06545v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06545v1",
+      "source": "arXiv",
+      "priority_score": 1.5
+    },
+    {
+      "arxiv_id": "2603.06542v1",
+      "title": "RAMoEA-QA: Hierarchical Specialization for Robust Respiratory Audio Question Answering",
+      "authors": [
+        "Gaia A. Bertolino",
+        "Yuwei Zhang",
+        "Tong Xia",
+        "Domenico Talia",
+        "Cecilia Mascolo"
+      ],
+      "categories": [
+        "cs.SD",
+        "cs.AI"
+      ],
+      "abstract": "Conversational generative AI is rapidly entering healthcare, where general-purpose models must integrate heterogeneous patient signals and support diverse interaction styles while producing clinically meaningful outputs. In respiratory care, non-invasive audio, such as recordings captured via mobile microphones, enables scalable screening and longitudinal monitoring, but the heterogeneity challenge is particularly acute: recordings vary widely across devices, environments, and acquisition protocols, and questions span multiple intents and question formats. Existing biomedical audio-language QA systems are typically monolithic, without any specialization mechanisms for tackling diverse respiratory corpora and query intents. They are also only validated in limited settings, leaving it unclear how reliably they handle the shifts encountered in real-world settings.\n  To address these limitations, we introduce RAMoEA-QA, a hierarchically routed generative model for respiratory audio question answering that unifies multiple question types and supports both discrete and continuous targets within a single multimodal system. RAMoEA-QA applies two-stage conditional specialization: an Audio Mixture-of-Experts routes each recording to a suitable pre-trained audio encoder, and a Language Mixture-of-Adapters selects a LoRA adapter on a shared frozen LLM to match the query intent and answer format. By specializing both acoustic representations and generation behaviour per example, RAMoEA-QA consistently outperforms strong baselines and routing ablations with minimal parameter overhead, improving in-domain test accuracy to 0.72 (vs. 0.61 and 0.67 for state-of-the-art baselines) and exhibiting the strongest generalization for diagnosis under domain, modality, and task shifts.",
+      "published": "2026-03-06T18:29:15Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06542v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06542v1",
+      "source": "arXiv",
+      "priority_score": 2.5
+    },
+    {
+      "arxiv_id": "2603.06572v1",
+      "title": "SCOPE: Scene-Contextualized Incremental Few-Shot 3D Segmentation",
+      "authors": [
+        "Vishal Thengane",
+        "Zhaochong An",
+        "Tianjin Huang",
+        "Son Lam Phung",
+        "Abdesselam Bouzerdoum",
+        "Lu Yin",
+        "Na Zhao",
+        "Xiatian Zhu"
+      ],
+      "categories": [
+        "cs.CV",
+        "cs.LG"
+      ],
+      "abstract": "Incremental Few-Shot (IFS) segmentation aims to learn new categories over time from only a few annotations. Although widely studied in 2D, it remains underexplored for 3D point clouds. Existing methods suffer from catastrophic forgetting or fail to learn discriminative prototypes under sparse supervision, and often overlook a key cue: novel categories frequently appear as unlabelled background in base-training scenes. We introduce SCOPE (Scene-COntextualised Prototype Enrichment), a plug-and-play background-guided prototype enrichment framework that integrates with any prototype-based 3D segmentation method. After base training, a class-agnostic segmentation model extracts high-confidence pseudo-instances from background regions to build a prototype pool. When novel classes arrive with few labelled samples, relevant background prototypes are retrieved and fused with few-shot prototypes to form enriched representations without retraining the backbone or adding parameters. Experiments on ScanNet and S3DIS show that SCOPE achieves SOTA performance, improving novel-class IoU by up to 6.98% and 3.61%, and mean IoU by 2.25% and 1.70%, respectively, while maintaining low forgetting. Code is available https://github.com/Surrey-UP-Lab/SCOPE.",
+      "published": "2026-03-06T18:59:36Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06572v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06572v1",
+      "source": "arXiv",
+      "priority_score": 2.0
+    },
+    {
+      "arxiv_id": "2603.06567v1",
+      "title": "A recipe for scalable attention-based MLIPs: unlocking long-range accuracy with all-to-all node attention",
+      "authors": [
+        "Eric Qu",
+        "Brandon M. Wood",
+        "Aditi S. Krishnapriyan",
+        "Zachary W. Ulissi"
+      ],
+      "categories": [
+        "cs.LG",
+        "cond-mat.mtrl-sci",
+        "cs.CE",
+        "physics.chem-ph",
+        "q-bio.QM"
+      ],
+      "abstract": "Machine-learning interatomic potentials (MLIPs) have advanced rapidly, with many top models relying on strong physics-based inductive biases. However, as models scale to larger systems like biomolecules and electrolytes, they struggle to accurately capture long-range (LR) interactions, leading current approaches to rely on explicit physics-based terms or components. In this work, we propose AllScAIP, a straightforward, attention-based, and energy-conserving MLIP model that scales to O(100 million) training samples. It addresses the long-range challenge using an all-to-all node attention component that is data-driven. Extensive ablations reveal that in low-data/small-model regimes, inductive biases improve sample efficiency. However, as data and model size scale, these benefits diminish or even reverse, while all-to-all attention remains critical for capturing LR interactions. Our model achieves state-of-the-art energy/force accuracy on molecular systems, as well as a number of physics-based evaluations (OMol25), while being competitive on materials (OMat24) and catalysts (OC20). Furthermore, it enables stable, long-timescale MD simulations that accurately recover experimental observables, including density and heat of vaporization predictions.",
+      "published": "2026-03-06T18:57:04Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06567v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06567v1",
+      "source": "arXiv",
+      "priority_score": 1.5
+    },
+    {
+      "arxiv_id": "2603.06557v1",
+      "title": "Causal Interpretation of Neural Network Computations with Contribution Decomposition",
+      "authors": [
+        "Joshua Brendan Melander",
+        "Zaki Alaoui",
+        "Shenghua Liu",
+        "Surya Ganguli",
+        "Stephen A. Baccus"
+      ],
+      "categories": [
+        "cs.LG",
+        "q-bio.NC"
+      ],
+      "abstract": "Understanding how neural networks transform inputs into outputs is crucial for interpreting and manipulating their behavior. Most existing approaches analyze internal representations by identifying hidden-layer activation patterns correlated with human-interpretable concepts. Here we take a direct approach to examine how hidden neurons act to drive network outputs. We introduce CODEC (Contribution Decomposition), a method that uses sparse autoencoders to decompose network behavior into sparse motifs of hidden-neuron contributions, revealing causal processes that cannot be determined by analyzing activations alone. Applying CODEC to benchmark image-classification networks, we find that contributions grow in sparsity and dimensionality across layers and, unexpectedly, that they progressively decorrelate positive and negative effects on network outputs. We further show that decomposing contributions into sparse modes enables greater control and interpretation of intermediate layers, supporting both causal manipulations of network output and human-interpretable visualizations of distinct image components that combine to drive that output. Finally, by analyzing state-of-the-art models of neural activity in the vertebrate retina, we demonstrate that CODEC uncovers combinatorial actions of model interneurons and identifies the sources of dynamic receptive fields. Overall, CODEC provides a rich and interpretable framework for understanding how nonlinear computations evolve across hierarchical layers, establishing contribution modes as an informative unit of analysis for mechanistic insights into artificial neural networks.",
+      "published": "2026-03-06T18:46:06Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06557v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06557v1",
+      "source": "arXiv",
+      "priority_score": 1.0
+    },
+    {
+      "arxiv_id": "2603.06555v1",
+      "title": "Hierarchical Industrial Demand Forecasting with Temporal and Uncertainty Explanations",
+      "authors": [
+        "Harshavardhan Kamarthi",
+        "Shangqing Xu",
+        "Xinjie Tong",
+        "Xingyu Zhou",
+        "James Peters",
+        "Joseph Czyzyk",
+        "B. Aditya Prakash"
+      ],
+      "categories": [
+        "cs.LG"
+      ],
+      "abstract": "Hierarchical time-series forecasting is essential for demand prediction across various industries. While machine learning models have obtained significant accuracy and scalability on such forecasting tasks, the interpretability of their predictions, informed by application, is still largely unexplored. To bridge this gap, we introduce a novel interpretability method for large hierarchical probabilistic time-series forecasting, adapting generic interpretability techniques while addressing challenges associated with hierarchical structures and uncertainty. Our approach offers valuable interpretative insights in response to real-world industrial supply chain scenarios, including 1) the significance of various time-series within the hierarchy and external variables at specific time points, 2) the impact of different variables on forecast uncertainty, and 3) explanations for forecast changes in response to modifications in the training dataset. To evaluate the explainability method, we generate semi-synthetic datasets based on real-world scenarios of explaining hierarchical demands for over ten thousand products at a large chemical company. The experiments showed that our explainability method successfully explained state-of-the-art industrial forecasting methods with significantly higher explainability accuracy. Furthermore, we provide multiple real-world case studies that show the efficacy of our approach in identifying important patterns and explanations that help stakeholders better understand the forecasts. Additionally, our method facilitates the identification of key drivers behind forecasted demand, enabling more informed decision-making and strategic planning. Our approach helps build trust and confidence among users, ultimately leading to better adoption and utilization of hierarchical forecasting models in practice.",
+      "published": "2026-03-06T18:44:37Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06555v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06555v1",
+      "source": "arXiv",
+      "priority_score": 1.5
+    },
+    {
+      "arxiv_id": "2603.06552v1",
+      "title": "KCLarity at SemEval-2026 Task 6: Encoder and Zero-Shot Approaches to Political Evasion Detection",
+      "authors": [
+        "Archie Sage",
+        "Salvatore Greco"
+      ],
+      "categories": [
+        "cs.CL"
+      ],
+      "abstract": "This paper describes the KCLarity team's participation in CLARITY, a shared task at SemEval 2026 on classifying ambiguity and evasion techniques in political discourse. We investigate two modelling formulations: (i) directly predicting the clarity label, and (ii) predicting the evasion label and deriving clarity through the task taxonomy hierarchy. We further explore several auxiliary training variants and evaluate decoder-only models in a zero-shot setting under the evasion-first formulation. Overall, the two formulations yield comparable performance. Among encoder-based models, RoBERTa-large achieves the strongest results on the public test set, while zero-shot GPT-5.2 generalises better on the hidden evaluation set.",
+      "published": "2026-03-06T18:39:37Z",
+      "pdf_url": "http://arxiv.org/pdf/2603.06552v1.pdf",
+      "abs_url": "http://arxiv.org/abs/2603.06552v1",
+      "source": "arXiv",
+      "priority_score": 1.5
+    }
+  ],
+  "categories": [
+    "cond-mat.mtrl-sci",
+    "cs.CV",
+    "cs.RO",
+    "physics.chem-ph",
+    "cs.SD",
+    "cs.LG",
+    "cs.CE",
+    "q-bio.QM",
+    "eess.SP",
+    "q-bio.NC",
+    "cs.CL",
+    "cs.AI"
+  ]
+}

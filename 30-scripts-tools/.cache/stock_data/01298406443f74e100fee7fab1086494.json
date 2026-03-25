@@ -1,0 +1,12 @@
+{
+  "symbol": "AAPL_trend",
+  "data_type": "trend",
+  "cached_at": 1773994461.0846634,
+  "data": {
+    "direction": "bullish",
+    "strength": 0.7,
+    "support": 145.0,
+    "resistance": 155.0
+  },
+  "size": 80
+}

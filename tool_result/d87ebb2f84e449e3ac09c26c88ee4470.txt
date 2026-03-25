@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-23T00:04:50.275291
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 515-545 of 948)
+║ {c(Colors.BOLD, 'NEWS FEED')}{' ' * (17 - len(str(total_new)))}{total_new} new  {c(Colors.DIM, now)}║
+╠══════════════════════╣""")
+    
+    if grouped_news:
+        sorted_cats = sorted(grouped_news.items(), key=lambda x: -len(x[1]))
+        
+        for cat, news_items in sorted_cats[:6]:
+            pos_c = sum(1 for n in news_items if n["sentiment"] == "利好")
+            neg_c = sum(1 for n in news_items if n["sentiment"] == "利空")
+            
+            # 分类标题
+            bar = f"{cp('+' + str(pos_c))}{cn('-' + str(neg_c))}" if pos_c or neg_c else ""
+            print(f"║ {c(Colors.BOLD, cat[:6])} {len(news_items):>2} {bar}{' ' * max(0, 12 - len(bar))}║")
+            
+            # 显示第一条
+            n = news_items[0]
+            icon = cp("+") if n["sentiment"] == "利好" else cn("-") if n["sentiment"] == "利空" else cne("=")
+            kw = f"#{n['kw']}" if n["kw"] else ""
+            title = n['title'][:24]
+            if kw:
+                print(f"║  {icon} {title:<20} {kw:<6}║")
+            else:
+                print(f"║  {icon} {title:<28}║")
+            
+            if len(news_items) > 1:
+                print(f"║  {c(Colors.DIM, '+' + str(len(news_items) - 1) + ' more...')}{' ' * 18}║")
+        
+        print(f"╠══════════════════════╣")
+        print(f"║ {c(Colors.BOLD, 'Summary')}{' ' * 25}║")
+        print(f"║  Sources: {len(grouped_news)}/{total_src:<5} Bull: {cp('+' + str(pos))} Bear: {cn('-' + str(neg))}║")
+    else:
+
+[403 more lines. Use start_line=546 to continue.]

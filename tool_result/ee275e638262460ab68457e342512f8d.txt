@@ -1,0 +1,91 @@
+# tool_name: grep_search
+# created_at: 2026-03-24T00:01:45.319357
+# ---
+2026-03-22.md:1266:  | Jin10 first in list | Chinese content priority |
+2026-03-22.md:1267:  | Jin10 cache in `data_jin10_news.json` | Persistent storage |
+2026-03-22.md:1268:  | RSS limit increased to 100 | Match user's request for "全部新闻" |
+2026-03-22.md:1269:  | RSS display limit 50 | Balance between completeness and readability |
+2026-03-22.md:1270:  
+2026-03-22.md:1271:  ### User Feedback Patterns
+2026-03-22.md:1272:  
+2026-03-22.md:1273:  1. **"是完整的新闻吗"** → Realized RSS only has summaries, not full articles
+2026-03-22.md:1274:  2. **"为什么会被封"** → Explained rate limiting and anti-scraping measures
+2026-03-22.md:1275:  3. **"还有办法吗"** → Discussed Finnhub API, limiting, full RSS sources
+2026-03-22.md:1276:> 4. **"金十数据不是不用进去正文就能抓正文吗"** → Confirmed Jin10 embeds content in title
+2026-03-22.md:1277:  5. **"用rss是不是同样的效果"** → Compared Jin10 vs RSS content
+2026-03-22.md:1278:  6. **"rss能抓全部新闻吗"** → Increased limit from 15 to 50
+2026-03-22.md:1279:  7. **"为什么rss不加入金十"** → Integrated Jin10 into RSS
+2026-03-22.md:1280:  8. **"为什么金十的数据不是普通的新闻而是文章"** → Explained Jin10's embedding strategy
+2026-03-22.md:1281:  9. **"我是说金十也用rss"** → Confirmed Jin10 has no RSS, but can convert to RSS format
+2026-03-22.md:1282:  
+2026-03-22.md:1283:  ### Technical Patterns Observed
+2026-03-22.md:1284:  
+2026-03-22.md:1285:  1. **Windows asyncio**: Need `asyncio.WindowsSelectorEventLoopPolicy()` explicitly
+2026-03-22.md:1286:  2. **File write truncation**: `write_file` has ~8KB limit, use Python scripts for larger files
+---
+2026-03-22.md:1269:  | RSS display limit 50 | Balance between completeness and readability |
+2026-03-22.md:1270:  
+2026-03-22.md:1271:  ### User Feedback Patterns
+2026-03-22.md:1272:  
+2026-03-22.md:1273:  1. **"是完整的新闻吗"** → Realized RSS only has summaries, not full articles
+2026-03-22.md:1274:  2. **"为什么会被封"** → Explained rate limiting and anti-scraping measures
+2026-03-22.md:1275:  3. **"还有办法吗"** → Discussed Finnhub API, limiting, full RSS sources
+2026-03-22.md:1276:  4. **"金十数据不是不用进去正文就能抓正文吗"** → Confirmed Jin10 embeds content in title
+2026-03-22.md:1277:  5. **"用rss是不是同样的效果"** → Compared Jin10 vs RSS content
+2026-03-22.md:1278:  6. **"rss能抓全部新闻吗"** → Increased limit from 15 to 50
+2026-03-22.md:1279:> 7. **"为什么rss不加入金十"** → Integrated Jin10 into RSS
+2026-03-22.md:1280:  8. **"为什么金十的数据不是普通的新闻而是文章"** → Explained Jin10's embedding strategy
+2026-03-22.md:1281:  9. **"我是说金十也用rss"** → Confirmed Jin10 has no RSS, but can convert to RSS format
+2026-03-22.md:1282:  
+2026-03-22.md:1283:  ### Technical Patterns Observed
+2026-03-22.md:1284:  
+2026-03-22.md:1285:  1. **Windows asyncio**: Need `asyncio.WindowsSelectorEventLoopPolicy()` explicitly
+2026-03-22.md:1286:  2. **File write truncation**: `write_file` has ~8KB limit, use Python scripts for larger files
+2026-03-22.md:1287:  3. **Jin10 API**: xnews.jin10.com has embedded content in title field (not separate description)
+2026-03-22.md:1288:  4. **RSS parsing**: Use `<!\[CDATA\[...\]\]>` and regular `<title>` fallback
+2026-03-22.md:1289:  5. **RSS content**: Standard RSS only has 100-200 char descriptions, not full articles
+---
+2026-03-22.md:1270:  
+2026-03-22.md:1271:  ### User Feedback Patterns
+2026-03-22.md:1272:  
+2026-03-22.md:1273:  1. **"是完整的新闻吗"** → Realized RSS only has summaries, not full articles
+2026-03-22.md:1274:  2. **"为什么会被封"** → Explained rate limiting and anti-scraping measures
+2026-03-22.md:1275:  3. **"还有办法吗"** → Discussed Finnhub API, limiting, full RSS sources
+2026-03-22.md:1276:  4. **"金十数据不是不用进去正文就能抓正文吗"** → Confirmed Jin10 embeds content in title
+2026-03-22.md:1277:  5. **"用rss是不是同样的效果"** → Compared Jin10 vs RSS content
+2026-03-22.md:1278:  6. **"rss能抓全部新闻吗"** → Increased limit from 15 to 50
+2026-03-22.md:1279:  7. **"为什么rss不加入金十"** → Integrated Jin10 into RSS
+2026-03-22.md:1280:> 8. **"为什么金十的数据不是普通的新闻而是文章"** → Explained Jin10's embedding strategy
+2026-03-22.md:1281:  9. **"我是说金十也用rss"** → Confirmed Jin10 has no RSS, but can convert to RSS format
+2026-03-22.md:1282:  
+2026-03-22.md:1283:  ### Technical Patterns Observed
+2026-03-22.md:1284:  
+2026-03-22.md:1285:  1. **Windows asyncio**: Need `asyncio.WindowsSelectorEventLoopPolicy()` explicitly
+2026-03-22.md:1286:  2. **File write truncation**: `write_file` has ~8KB limit, use Python scripts for larger files
+2026-03-22.md:1287:  3. **Jin10 API**: xnews.jin10.com has embedded content in title field (not separate description)
+2026-03-22.md:1288:  4. **RSS parsing**: Use `<!\[CDATA\[...\]\]>` and regular `<title>` fallback
+2026-03-22.md:1289:  5. **RSS content**: Standard RSS only has 100-200 char descriptions, not full articles
+2026-03-22.md:1290:  
+---
+2026-03-22.md:1271:  ### User Feedback Patterns
+2026-03-22.md:1272:  
+2026-03-22.md:1273:  1. **"是完整的新闻吗"** → Realized RSS only has summaries, not full articles
+2026-03-22.md:1274:  2. **"为什么会被封"** → Explained rate limiting and anti-scraping measures
+2026-03-22.md:1275:  3. **"还有办法吗"** → Discussed Finnhub API, limiting, full RSS sources
+2026-03-22.md:1276:  4. **"金十数据不是不用进去正文就能抓正文吗"** → Confirmed Jin10 embeds content in title
+2026-03-22.md:1277:  5. **"用rss是不是同样的效果"** → Compared Jin10 vs RSS content
+2026-03-22.md:1278:  6. **"rss能抓全部新闻吗"** → Increased limit from 15 to 50
+2026-03-22.md:1279:  7. **"为什么rss不加入金十"** → Integrated Jin10 into RSS
+2026-03-22.md:1280:  8. **"为什么金十的数据不是普通的新闻而是文章"** → Explained Jin10's embedding strategy
+2026-03-22.md:1281:> 9. **"我是说金十也用rss"** → Confirmed Jin10 has no RSS, but can convert to RSS format
+2026-03-22.md:1282:  
+2026-03-22.md:1283:  ### Technical Patterns Observed
+2026-03-22.md:1284:  
+2026-03-22.md:1285:  1. **Windows asyncio**: Need `asyncio.WindowsSelectorEventLoopPolicy()` explicitly
+2026-03-22.md:1286:  2. **File write truncation**: `write_file` has ~8KB limit, use Python scripts for larger files
+2026-03-22.md:1287:  3. **Jin10 API**: xnews.jin10.com has embedded content in title field (not separate description)
+2026-03-22.md:1288:  4. **RSS parsing**: Use `<!\[CDATA\[...\]\]>` and regular `<title>` fallback
+2026-03-22.md:1289:  5. **RSS content**: Standard RSS only has 100-200 char descriptions, not full articles
+2026-03-22.md:1290:  
+2026-03-22.md:1291:  ### rss_server.py Architecture
+---

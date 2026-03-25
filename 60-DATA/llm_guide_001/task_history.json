@@ -1,0 +1,134 @@
+[
+  {
+    "task": "分析需求",
+    "decision": "LLM_REQUIRED",
+    "reason": "任务包含创意/分析/判断元素",
+    "llm_score": 1,
+    "auto_score": 0,
+    "workflow": [
+      "1. 分析需求",
+      "2. LLM思考方案",
+      "3. 人工确认",
+      "4. 执行实施"
+    ],
+    "timestamp": "2026-03-20T21:53:56.082886"
+  },
+  {
+    "task": "运行测试",
+    "decision": "AUTOMATABLE",
+    "reason": "任务主要是执行/验证/重复性工作",
+    "llm_score": 0,
+    "auto_score": 1,
+    "workflow": [
+      "1. 编写脚本",
+      "2. 自动化执行",
+      "3. 结果验证"
+    ],
+    "timestamp": "2026-03-20T21:53:56.083820"
+  },
+  {
+    "task": "编写代码",
+    "decision": "MIXED",
+    "reason": "任务混合了LLM和自动化元素",
+    "llm_score": 0,
+    "auto_score": 0,
+    "workflow": [
+      "1. LLM规划",
+      "2. 自动化执行",
+      "3. LLM审核"
+    ],
+    "timestamp": "2026-03-20T21:53:56.084833"
+  },
+  {
+    "task": "验证格式",
+    "decision": "AUTOMATABLE",
+    "reason": "任务主要是执行/验证/重复性工作",
+    "llm_score": 0,
+    "auto_score": 1,
+    "workflow": [
+      "1. 编写脚本",
+      "2. 自动化执行",
+      "3. 结果验证"
+    ],
+    "timestamp": "2026-03-20T21:53:56.085601"
+  },
+  {
+    "task": "提交代码",
+    "decision": "AUTOMATABLE",
+    "reason": "任务主要是执行/验证/重复性工作",
+    "llm_score": 0,
+    "auto_score": 1,
+    "workflow": [
+      "1. 编写脚本",
+      "2. 自动化执行",
+      "3. 结果验证"
+    ],
+    "timestamp": "2026-03-20T21:53:56.086286"
+  },
+  {
+    "task": "分析需求",
+    "decision": "LLM_REQUIRED",
+    "reason": "任务包含创意/分析/判断元素",
+    "llm_score": 1,
+    "auto_score": 0,
+    "workflow": [
+      "1. 分析需求",
+      "2. LLM思考方案",
+      "3. 人工确认",
+      "4. 执行实施"
+    ],
+    "timestamp": "2026-03-20T21:55:46.298351"
+  },
+  {
+    "task": "运行测试",
+    "decision": "AUTOMATABLE",
+    "reason": "任务主要是执行/验证/重复性工作",
+    "llm_score": 0,
+    "auto_score": 1,
+    "workflow": [
+      "1. 编写脚本",
+      "2. 自动化执行",
+      "3. 结果验证"
+    ],
+    "timestamp": "2026-03-20T21:55:46.300224"
+  },
+  {
+    "task": "编写代码",
+    "decision": "MIXED",
+    "reason": "任务混合了LLM和自动化元素",
+    "llm_score": 0,
+    "auto_score": 0,
+    "workflow": [
+      "1. LLM规划",
+      "2. 自动化执行",
+      "3. LLM审核"
+    ],
+    "timestamp": "2026-03-20T21:55:46.301303"
+  },
+  {
+    "task": "验证格式",
+    "decision": "AUTOMATABLE",
+    "reason": "任务主要是执行/验证/重复性工作",
+    "llm_score": 0,
+    "auto_score": 1,
+    "workflow": [
+      "1. 编写脚本",
+      "2. 自动化执行",
+      "3. 结果验证"
+    ],
+    "timestamp": "2026-03-20T21:55:46.302189"
+  },
+  {
+    "task": "提交代码",
+    "decision": "AUTOMATABLE",
+    "reason": "任务主要是执行/验证/重复性工作",
+    "llm_score": 0,
+    "auto_score": 1,
+    "workflow": [
+      "1. 编写脚本",
+      "2. 自动化执行",
+      "3. 结果验证"
+    ],
+    "timestamp": "2026-03-20T21:55:46.302867"
+  }
+]

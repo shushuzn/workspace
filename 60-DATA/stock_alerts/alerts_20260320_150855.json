@@ -1,0 +1,81 @@
+{
+  "active_alerts": [
+    {
+      "id": "price_AAPL_150855",
+      "type": "price",
+      "symbol": "AAPL",
+      "alert_type": "above",
+      "target_price": 150.0,
+      "current_price": 145.0,
+      "created_at": "2026-03-20T15:08:55.644607",
+      "status": "active",
+      "triggered": true,
+      "triggered_at": "2026-03-20T15:08:55.644642",
+      "trigger_price": 152.0
+    },
+    {
+      "id": "price_AAPL_150855",
+      "type": "price",
+      "symbol": "AAPL",
+      "alert_type": "below",
+      "target_price": 140.0,
+      "current_price": 145.0,
+      "created_at": "2026-03-20T15:08:55.644617",
+      "status": "active",
+      "triggered": false
+    },
+    {
+      "id": "indicator_AAPL_RSI_150855",
+      "type": "indicator",
+      "symbol": "AAPL",
+      "indicator": "RSI",
+      "condition": "above",
+      "threshold": 70,
+      "current_value": 65,
+      "created_at": "2026-03-20T15:08:55.644623",
+      "status": "active",
+      "triggered": true,
+      "triggered_at": "2026-03-20T15:08:55.645545",
+      "trigger_value": 75
+    },
+    {
+      "id": "indicator_AAPL_RSI_150855",
+      "type": "indicator",
+      "symbol": "AAPL",
+      "indicator": "RSI",
+      "condition": "below",
+      "threshold": 30,
+      "current_value": 35,
+      "created_at": "2026-03-20T15:08:55.644627",
+      "status": "active",
+      "triggered": false
+    },
+    {
+      "id": "indicator_AAPL_MACD_150855",
+      "type": "indicator",
+      "symbol": "AAPL",
+      "indicator": "MACD",
+      "condition": "cross_over",
+      "threshold": 0,
+      "current_value": -0.5,
+      "created_at": "2026-03-20T15:08:55.644630",
+      "status": "active",
+      "triggered": false
+    },
+    {
+      "id": "volume_AAPL_150855",
+      "type": "volume",
+      "symbol": "AAPL",
+      "volume_ratio": 0,
+      "avg_volume": 1000000,
+      "trigger_threshold": 2.0,
+      "created_at": "2026-03-20T15:08:55.644635",
+      "status": "active",
+      "triggered": true,
+      "triggered_at": "2026-03-20T15:08:55.646369",
+      "trigger_volume": 2500000,
+      "trigger_ratio": 2.5
+    }
+  ],
+  "saved_at": "2026-03-20T15:08:55.647301"
+}

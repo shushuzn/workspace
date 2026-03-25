@@ -1,0 +1,31 @@
+---
+source: medium
+url: https://medium.com/@systexdatalab/%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E7%9A%84%E4%BC%81%E6%A5%AD-ai-%E8%80%81%E6%98%AF%E7%AD%94%E9%8C%AF-%E4%B8%80%E5%80%8B%E6%A6%82%E5%BF%B5%E8%AE%93%E6%BA%96%E7%A2%BA%E7%8E%87%E5%BE%9E-60-%E8%B7%B3%E5%88%B0-95-16a3e60279b2?source=rss------llm-5
+author: SYSTEX Data Lab
+date: Sat, 07 Ma
+tags: ['llm']
+quality_score: 4.0
+collected_date: 2026-03-07
+---
+
+# 為什麼你的企業 AI 老是答錯？一個概念讓準確率從 60% 跳到 95%
+
+**作者:** SYSTEX Data Lab  
+**发布:** Sat, 07 Ma  
+**来源:** [https://medium.com/@systexdatalab/%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E7%9A%84%E4%BC%81%E6%A5%AD-ai-%E8%80%81%E6%98%AF%E7%AD%94%E9%8C%AF-%E4%B8%80%E5%80%8B%E6%A6%82%E5%BF%B5%E8%AE%93%E6%BA%96%E7%A2%BA%E7%8E%87%E5%BE%9E-60-%E8%B7%B3%E5%88%B0-95-16a3e60279b2?source=rss------llm-5](https://medium.com/@systexdatalab/%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E7%9A%84%E4%BC%81%E6%A5%AD-ai-%E8%80%81%E6%98%AF%E7%AD%94%E9%8C%AF-%E4%B8%80%E5%80%8B%E6%A6%82%E5%BF%B5%E8%AE%93%E6%BA%96%E7%A2%BA%E7%8E%87%E5%BE%9E-60-%E8%B7%B3%E5%88%B0-95-16a3e60279b2?source=rss------llm-5)
+
+---
+
+## 摘要
+
+<div class="medium-feed-item"><p class="medium-feed-image"><a href="https://medium.com/@systexdatalab/%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E7%9A%84%E4%BC%81%E6%A5%AD-ai-%E8%80%81%E6%98%AF%E7%AD%94%E9%8C%AF-%E4%B8%80%E5%80%8B%E6%A6%82%E5%BF%B5%E8%AE%93%E6%BA%96%E7%A2%BA%E7%8E%87%E5%BE%9E-60-%E8%B7%B3%E5%88%B0-95-16a3e60279b2?source=rss------llm-5"><img src="https://cdn-images-1.medium.com/max/1200/0*zVivceaCijeN9WEv.png" width="1200" /></a></p><p class="medium-feed-snippet">&#x4e0d;&#x662f; AI &#x4e0d;&#x5920;&#x8070;&#x660e;&#xff0c;&#x662f;&#x4f60;&#x6c92;&#x7d66;&#x5b83;&#x300c;&#x770b;&#x61c2;&#x6578;&#x64da;&#x300d;&#x7684;&#x80fd;&#x529b;</p><p class="medium-feed-link"><a href="https://medium.com/@systexdatalab/%E7%82%BA%E4%BB%80%E9%BA%BC%E4%BD%A0%E7%9A%84%E4%BC%81%E6%A5%AD-ai-%E8%80%81%E6%98%AF%E7%AD%94%E9%8C%AF-%E4%B8%80%E5%80%8B%E6%A6%82%E5%BF%B5%E8%AE%93%E6%BA%96%E7%A2%BA%E7%8E%87%E5%BE%9E-60-%E8%B7%B3%E5%88%B0-95-16a3e60279b2?source=rss------llm-5">Continue reading on Medium »</a></p></div>
+
+---
+
+## 正文
+
+[内容待提取]
+
+---
+
+*原始文件，待处理*

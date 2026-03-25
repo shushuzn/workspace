@@ -1,0 +1,150 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-21T09:37:47.846992
+# ---
+
+========================================
+Running workflow: dev
+========================================
+
+[MULTI-AGENT COLLABORATION]
+  Workflow: Development Workflow
+  Primary Persona: EXECUTOR
+  Category: dev
+==================================================
+Running: Development Workflow
+==================================================
+[1/5] multi_agent_router_001... OK
+[2/5] auto_discover_001... OK
+[3/5] tool_validator_001... OK
+[4/5] tool_namer_001... OK
+[5/5] multi_agent_learn_001... OK
+
+Complete: 5/5 OK
+{
+  "workflow": "dev",
+  "results": [
+    {
+      "step": 1,
+      "tool": "multi_agent_router_001",
+      "status": "ok"
+    },
+    {
+      "step": 2,
+      "tool": "auto_discover_001",
+      "status": "ok"
+    },
+    {
+      "step": 3,
+      "tool": "tool_validator_001",
+      "status": "ok"
+    },
+    {
+      "step": 4,
+      "tool": "tool_namer_001",
+      "status": "ok"
+    },
+    {
+      "step": 5,
+      "tool": "multi_agent_learn_001",
+      "status": "ok"
+    }
+  ]
+}
+
+========================================
+Running workflow: full
+========================================
+
+[MULTI-AGENT COLLABORATION]
+  Workflow: Full System Check
+  Primary Persona: COORDINATOR
+  Category: qa
+==================================================
+Running: Full System Check
+==================================================
+[1/5] multi_agent_router_001... OK
+[2/5] workflow_diagnosis_001... OK
+[3/5] auto_discover_001... OK
+[4/5] workflow_health_001... OK
+[5/5] multi_agent_learn_001... OK
+
+Complete: 5/5 OK
+{
+  "workflow": "full",
+  "results": [
+    {
+      "step": 1,
+      "tool": "multi_agent_router_001",
+      "status": "ok"
+    },
+    {
+      "step": 2,
+      "tool": "workflow_diagnosis_001",
+      "status": "ok"
+    },
+    {
+      "step": 3,
+      "tool": "auto_discover_001",
+      "status": "ok"
+    },
+    {
+      "step": 4,
+      "tool": "workflow_health_001",
+      "status": "ok"
+    },
+    {
+      "step": 5,
+      "tool": "multi_agent_learn_001",
+      "status": "ok"
+    }
+  ]
+}
+
+========================================
+Running workflow: plan
+========================================
+
+[MULTI-AGENT COLLABORATION]
+  Workflow: Planning Workflow
+  Primary Persona: PLANNER
+  Category: plan
+==================================================
+Running: Planning Workflow
+==================================================
+[1/5] multi_agent_router_001... OK
+[2/5] workflow_diagnosis_001... OK
+[3/5] workflow_health_001... OK
+[4/5] workflow_optimizer_001... OK
+[5/5] multi_agent_learn_001... OK
+
+Complete: 5/5 OK
+{
+  "workflow": "plan",
+  "results": [
+    {
+      "step": 1,
+      "tool": "multi_agent_router_001",
+      "status": "ok"
+    },
+    {
+      "step": 2,
+      "tool": "workflow_diagnosis_001",
+      "status": "ok"
+    },
+    {
+      "step": 3,
+      "tool": "workflow_health_001",
+      "status": "ok"
+    },
+    {
+      "step": 4,
+      "tool": "workflow_optimizer_001",
+      "status": "ok"
+    },
+    {
+      "step": 5,
+      "tool": "multi_agent_learn_001",
+      "status": "ok"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:30:48.012523
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\shared.py  (lines 1-50 of 186)
+#!/usr/bin/env python3
+"""NewsHub 共享常量和工具函数"""
+
+import re
+import hashlib
+from functools import lru_cache
+from typing import Tuple
+
+CATEGORY_RULES = {
+    "stock": [
+        "股票", "股价", "A股", "港股", "美股", "涨停", "跌停", "IPO", "上市", "股东", "回购", "分红",
+        "stock", "shares", "earnings", "quarterly", "revenue", "profit", "nasdaq", "dow jones", "sp500",
+    ],
+    "crypto": [
+        "比特币", "BTC", "ETH", "以太坊", "加密", "区块链", "Web3", "NFT", "DeFi", "代币", "币安",
+        "bitcoin", "ethereum", "crypto", "blockchain", "coinbase", "binance", "solana", "dogecoin",
+    ],
+    "tech": [
+        "AI", "GPT", "芯片", "半导体", "科技", "互联网", "软件", "硬件", "云计算", "大数据", "人工智能", "大模型", "算力", "GPU",
+        "apple", "google", "microsoft", "meta", "nvidia", "openai", "startup", "app", "software", "chip", "semiconductor", "robotics",
+    ],
+    "finance": [
+        "银行", "利率", "央行", "金融", "债券", "基金", "投资", "理财", "信贷",
+        "fed", "federal reserve", "interest rate", "bank", "bond", "fund", "invest", "hedge fund",
+    ],
+    "energy": [
+        "原油", "石油", "天然气", "能源", "新能源", "光伏", "风电", "锂电池", "电动车", "储能", "电池",
+        "oil", "gas", "energy", "solar", "ev", "battery", "opec",
+    ],
+    "forex": [
+        "汇率", "美元", "欧元", "日元", "人民币", "外汇", "Fed", "美联储",
+        "dollar", "euro", "yen", "yuan", "forex", "currency", "trading",
+    ],
+    "commodity": [
+        "黄金", "铜", "铝", "大宗商品", "期货", "农产品",
+        "gold", "silver", "oil", "commodity", "copper", "wheat",
+    ],
+    "realestate": [
+        "房地产", "房价", "地产", "住房", "商业地产", "恒大", "碧桂园", "房企", "楼盘",
+        "real estate", "housing", "home", "mortgage",
+    ],
+    "auto": [
+        "汽车", "新能源车", "特斯拉", "电动车", "自动驾驶", "比亚迪", "蔚来", "理想", "小鹏",
+        "car", "auto", "vehicle", "ford", "toyota", "gm", "tesla ev",
+    ],
+    "health": [
+        "医疗", "医药", "医院", "健康", "生物", "制药", "疫苗", "创新药",
+        "health", "pharma", "medical", "biotech", "vaccine", "fda",
+    ],
+    "geopolitics": [
+
+[136 more lines. Use start_line=51 to continue.]

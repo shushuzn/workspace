@@ -1,0 +1,33 @@
+# tool_name: read_file
+# created_at: 2026-03-22T20:56:50.837135
+# ---
+#!/usr/bin/env python3
+import json
+import requests
+from pathlib import Path
+
+TOKEN = Path(r'D:\OpenClaw\workspace\30-scripts-tools\feishu-tools\feishu-token-cache.json')
+CFG = Path(r'D:\OpenClaw\workspace\30-scripts-tools\feishu-tools\feishu-config.json')
+
+c = json.load(open(CFG, encoding='utf-8'))
+t = json.load(open(TOKEN, encoding='utf-8'))['token']
+u = f"https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type={c['receive_id_type']}"
+h = {'Authorization': f'Bearer {t}', 'Content-Type': 'application/json'}
+msg = """[Innovator Dashboard Integrated!]
+
+[OK] Domain: innovator.felixxii.xyz
+[OK] DNS: CNAME -> felixxii.xyz
+[OK] Cloud: 8.208.30.28:8443
+[OK] SSL: Let's Encrypt (pending)
+
+[INFO] Dashboard now part of felixxii.xyz
+[INFO] Cloud First enforced
+
+- OpenClaw"""
+p = {'receive_id': c['default_receive_id'], 'msg_type': 'text', 'content': json.dumps({'text': msg})}
+r = requests.post(u, headers=h, json=p, timeout=10)
+d = r.json()
+if d.get('code') == 0:
+    print(f"[OK] Sent: {d['data']['message_id']}")
+else:
+    print(f"[FAIL] {d}")

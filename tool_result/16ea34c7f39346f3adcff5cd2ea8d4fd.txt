@@ -1,0 +1,48 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T01:21:33.675422
+# ---
+
+==================================================
+  NewsHub Feishu
+==================================================
+
+  ▶ Mode: all
+  ▶ Time: 2026-03-23 01:20:59
+
+
+==================================================
+  NewsHub Fetcher
+==================================================
+
+  ▶ Time: 2026-03-23 01:20:59
+
+  ▶ Fetching 金十快讯...
+  ✓ 金十快讯: +20
+  ▶ Fetching Investing...
+  ✓ Investing: +10
+  ▶ Fetching Seeking Alpha...
+  ✓ Seeking Alpha: +7
+
+──────────────────────────────────────────────────
+  📊 Total: 37
+     金十快讯: 20
+     Investing: 10
+     Seeking Alpha: 7
+──────────────────────────────────────────────────
+
+  ▶ Total: 37 | New: 37
+
+  ✓ UBS highlights top industrial stocks wit...
+  ✓ Bessent defends Iran strikes amid oil pr...
+  ✓ Tencent expands AI strategy with WeChat ...
+  ✓ Crypto slides as Iran conflict shakes ri...
+  ✓ 'Project Hail Mary' tops box office with...
+  ✓ WTI crude hits $100 in weekend trading...
+  ✓ ICE agents deployed to airports amid TSA...
+  ✓ Oil prices to rise further on Monday as ...
+
+──────────────────────────────────────────────────
+  Mode:   all
+  Sent:   8
+──────────────────────────────────────────────────
+

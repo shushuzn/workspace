@@ -1,0 +1,233 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.5s ease;
+}
+
+[data-quality="low"] .container {
+  animation: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--text-primary) 0%, var(--accent-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.currentStats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  background: var(--input-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+}
+
+.statRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+  transition: all 0.3s ease;
+}
+
+[data-quality="low"] .statRow {
+  transition: none;
+}
+
+.statRow:hover {
+  background: var(--accent-bg);
+  padding: 6px 12px;
+  border-radius: 6px;
+}
+
+.statLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+[data-quality="low"] .statLabel {
+  transition: none;
+}
+
+.statRow:hover .statLabel {
+  color: var(--accent-color);
+}
+
+.statValue {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-quality="low"] .statValue {
+  transition: none;
+}
+
+.statRow:hover .statValue {
+  color: var(--accent-color);
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-color), transparent);
+  opacity: 0.2;
+}
+
+.prestigePreview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 20px;
+  background: var(--accent-bg);
+  border-radius: 14px;
+  border: 1px solid var(--accent-color);
+  animation: glow 2s ease-in-out infinite;
+}
+
+[data-quality="low"] .prestigePreview,
+[data-quality="medium"] .prestigePreview {
+  animation: none;
+}
+
+@keyframes glow {
+  0%, 100% { box-shadow: 0 0 15px var(--shadow-color); }
+  50% { box-shadow: 0 0 25px var(--shadow-color); }
+}
+
+.previewLabel {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 500;
+}
+
+.previewValue {
+  font-size: 28px;
+  font-weight: 800;
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-dark) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+[data-quality="low"] .previewValue,
+[data-quality="medium"] .previewValue {
+  animation: none;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+.previewEffect {
+  font-size: 13px;
+  color: var(--accent-color);
+  font-weight: 500;
+  text-align: center;
+  line-height: 1.4;
+}
+
+.prestigeButton {
+  padding: 16px 28px;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: not-allowed;
+  background: var(--input-bg);
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+[data-quality="low"] .prestigeButton {
+  transition: none;
+}
+
+.prestigeButton.available {
+  cursor: pointer;
+  background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-color-dark) 100%);
+  color: #000;
+  border-color: var(--accent-color);
+  box-shadow: 0 4px 20px var(--shadow-color);
+  animation: buttonGlow 2s ease-in-out infinite;
+}
+
+[data-quality="low"] .prestigeButton.available,
+[data-quality="medium"] .prestigeButton.available {
+  animation: none;
+}
+
+@keyframes buttonGlow {
+  0%, 100% { box-shadow: 0 4px 20px var(--shadow-color); }
+  50% { box-shadow: 0 6px 25px var(--shadow-color); }
+}
+
+.prestigeButton.available:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px var(--shadow-color);
+  background: linear-gradient(135deg, var(--accent-color-light) 0%, var(--accent-color) 100%);
+}
+
+[data-quality="low"] .prestigeButton.available:hover {
+  transform: none;
+}
+
+.prestigeButton.available:active {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 20px var(--shadow-color);
+}
+
+.hint {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  font-style: italic;
+  padding: 12px;
+  background: var(--input-bg);
+  border-radius: 8px;
+  border: 1px dashed var(--border-color);
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 16px;
+  }
+
+  .prestigeButton {
+    padding: 12px 20px;
+    font-size: 13px;
+  }
+
+  .previewValue {
+    font-size: 24px;
+  }
+}

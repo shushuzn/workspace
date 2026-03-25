@@ -1,0 +1,21 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T18:14:40.062123
+# ---
+
+Trying: https://xnews.jin10.com/get_flash_news?max_id=0&channel_id=-2
+  Error: HTTP Error 500: Internal Server Error
+
+Trying: https://xnews.jin10.com/get_flash_news?channel_id=-2&category=&direction=1
+  Error: HTTP Error 500: Internal Server Error
+
+Trying: https://api.jin10.com/get_news
+  Error: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+
+Trying: https://xnews.jin10.com/news/list
+  Error: HTTP Error 404: Not Found
+
+
+Searching for JSON in main page...
+
+Script 9 (65117 chars):
+window.__NUXT__=(function(a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p,q,r,s,t,u,v,w,x,y,z,A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z,_,$,aa,ab,ac,ad,ae,af,ag,ah,ai,aj,ak,al,am,an,ao,ap,aq,ar,as,at,au,av,aw,ax,ay,az,aA,aB,aC,aD,aE,aF,aG,aH,aI,aJ,aK,aL,aM,aN,aO,aP,aQ,aR,aS,aT,aU,aV,aW,aX,aY,aZ,a_,a$,ba,bb,bc,bd,be,bf,bg,bh,bi,bj,bk,bl,bm,bn,bo,bp,bq,br,bs,bt,bu,bv,bw,bx,by,bz,bA,bB,bC,bD,bE,bF,bG,bH,bI,bJ,bK,bL,bM,bN,bO,bP,bQ,bR,bS,bT,bU,bV,bW,bX,bY,bZ,b_,b$,ca,cb,cc,cd,ce,cf,cg,ch,ci,cj,ck,cl,cm,cn,

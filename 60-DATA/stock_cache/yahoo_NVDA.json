@@ -1,0 +1,16 @@
+{
+  "symbol": "NVDA",
+  "source": "yahoo-api",
+  "price": 178.56,
+  "change": -1.84,
+  "change_percent": -1.02,
+  "volume": 168466737,
+  "market_cap": 0,
+  "pe_ratio": null,
+  "high": 179.98,
+  "low": 175.78,
+  "open": 178.56,
+  "previous_close": 180.4,
+  "timestamp": "2026-03-20T19:54:07.917951",
+  "currency": "USD"
+}

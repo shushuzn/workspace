@@ -1,0 +1,52 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:52:10.512630
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 1015-1060 of 1247)
+    if sector_impact_str:
+        lines.append(f"影响: {sector_impact_str}")
+    lines.append(f"景气: {outlook_str}")
+    if fund_flow:
+        lines.append(f"资金: {fund_flow}")
+    if policy_impact:
+        lines.append(f"{policy_impact}")
+    lines.append(f"建议: {suggestion}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    if external_markets:
+        lines.append(f"外盘: {external_markets}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    
+    # 头部
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"  [NEWS] {now}")
+    lines.append(f"  情绪: {score_str}")
+    lines.append(f"  {sentiment_bar}")
+    lines.append(f"  +{len(positive)} -{len(negative)} ={len(neutral)} | {len(news_list)}条")
+    lines.append(f"  风险: [{risk_icon}]{risk_level}")
+    if impact_prediction:
+        lines.append(f"  {impact_prediction}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append(f"板块: {sector_str}")
+    lines.append(f"来源: {source_str}")
+    lines.append(f"热词: {top_keywords}")
+    if codes_str != "-":
+        lines.append(f"个股: {codes_str}")
+    if sector_impact_str:
+        lines.append(f"影响: {sector_impact_str}")
+    lines.append(f"景气: {outlook_str}")
+    lines.append(f"建议: {suggestion}")
+    lines.append("━━━━━━━━━━━━━━━━━━━━")
+    lines.append("")
+    
+    # 利好
+    if positive:
+        lines.append(">>> 利好 (+)")
+        for news in positive:
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            keywords = news.get('keywords', [])
+            codes = news.get('codes', [])
+            summary = extract_summary(news['title'], '利好')
+            signal = get_trade_signal(news)
+            timeliness = get_timeliness(news['title'])
+
+[187 more lines. Use start_line=1061 to continue.]

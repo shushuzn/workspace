@@ -1,0 +1,27 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:11:27.453434
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 1690-1710 of 1958)
+        f.write(f"| 指标 | 数值 |\n")
+        f.write(f"|------|------|\n")
+        f.write(f"| 股息率 | {div_info['div_yield']*100:.2f}% |\n")
+        f.write(f"| 派息率 | {div_info['payout']*100:.0f}% |\n")
+        f.write(f"| 状态 | {div_info['status']} |\n")
+        f.write(f"| 健康度 | {div_info['health']} |\n\n")
+        
+        f.write("---\n\n")
+        
+        # Investment Recommendation
+        f.write("## 7. 投资建议\n\n")
+        
+        # Probability-weighted target
+        f.write("### 7.1 概率加权目标价\n\n")
+        f.write(f"| 情景 | 概率 | 目标价 | 上涨空间 |\n")
+        f.write(f"|------|------|--------|----------|\n")
+        f.write(f"| 悲观 (15%) | 15% | ${prob_target['conservative']:.0f} | {(prob_target['conservative']-price)/price*100:+.1f}% |\n")
+        f.write(f"| 基准 (50%) | 50% | ${prob_target['base']:.0f} | {upside:+.1f}% |\n")
+        f.write(f"| 乐观 (25%) | 25% | ${prob_target['optimistic']:.0f} | {(prob_target['optimistic']-price)/price*100:+.1f}% |\n\n")
+        f.write(f"**期望目标价:** ${prob_target['expected']:.0f} ({prob_target['upside_pct']:+.1f}%)\n\n")
+        f.write(f"| 情景 | 目标价 | 上涨空间 | 概率 |\n")
+
+[248 more lines. Use start_line=1711 to continue.]

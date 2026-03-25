@@ -1,0 +1,18 @@
+{
+  "model": "MACERegressor",
+  "mace_version": "0.3.15",
+  "input_dim": 3,
+  "mace_hidden_dim": 128,
+  "hidden_dim": 64,
+  "output_dim": 1,
+  "features": [
+    "P_W",
+    "v_mms",
+    "co_ratio"
+  ],
+  "target": "sigma_Sm",
+  "training": {
+    "epochs": 157,
+    "learning_rate": 0.001,
+    "final_loss": 0.3099042475223541,
+    "best_loss": 

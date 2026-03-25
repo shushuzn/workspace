@@ -1,0 +1,27 @@
+# tool_name: read_file
+# created_at: 2026-03-22T15:46:21.874497
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\reports.py  (lines 30-50 of 78)
+             f"| P/E | {data['pe']:.1f}x | {data['recommend']} |",
+             "",
+             "## DCF估值" if cn else "## DCF Valuation",
+             f"| {'情景' if cn else 'Scenario'} | {'估值' if cn else 'Value'} | vs Price |",
+             f"| {'------|------|----------' if cn else '|-----------|-------|----------'}",
+             f"| {'牛市' if cn else 'Bull'} | ${data['dcf_bull']:.2f} | {(data['dcf_bull']/data['price']-1)*100:+.1f}% |",
+             f"| {'基准' if cn else 'Base'} | ${data['dcf_base']:.2f} | {(data['dcf_base']/data['price']-1)*100:+.1f}% |",
+             f"| {'熊市' if cn else 'Bear'} | ${data['dcf_bear']:.2f} | {(data['dcf_bear']/data['price']-1)*100:+.1f}% |",
+             "",
+             "## 财务指标" if cn else "## Financial Metrics",
+             f"| {'指标' if cn else 'Metric'} | {'数值' if cn else 'Value'} |",
+             f"|------|------|",
+             f"| ROE | {data['roe']:.1f}% |",
+             f"| {'净利率' if cn else 'Net Margin'} | {data['pm']:.1f}% |",
+             f"| {'毛利率' if cn else 'Gross Margin'} | {data['gm']:.1f}% |",
+             f"| ROIC | {data['roic']:.1f}% |",
+             f"| {'营收增长' if cn else 'Rev Growth'} | {data['rev_g']:.1f}% |",
+             "",
+             "## 风险指标" if cn else "## Risk Metrics",
+             f"| Beta | {data['beta']:.2f} |",
+             f"| {'股息率' if cn else 'Dividend'} | {data['div']:.2f}% |",
+
+[28 more lines. Use start_line=51 to continue.]

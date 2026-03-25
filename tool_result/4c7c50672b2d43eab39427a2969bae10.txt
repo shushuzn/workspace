@@ -1,0 +1,390 @@
+# tool_name: read_file
+# created_at: 2026-03-21T19:21:02.790322
+# ---
+// Idle Empire - 每日任务系统 v1.0
+
+const QUEST_TEMPLATES = [
+    {
+        id: 'quest_gold_1k',
+        name: '金币收集者',
+        desc: '累计获得 1K 金币',
+        icon: '💰',
+        type: 'gold',
+        target: 1000,
+        reward: { type: 'gold', amount: 5000 },
+        difficulty: 'easy'
+    },
+    {
+        id: 'quest_gold_100k',
+        name: '金币大亨',
+        desc: '累计获得 100K 金币',
+        icon: '💎',
+        type: 'gold',
+        target: 100000,
+        reward: { type: 'gold', amount: 50000 },
+        difficulty: 'medium'
+    },
+    {
+        id: 'quest_gold_1m',
+        name: '百万梦想',
+        desc: '累计获得 1M 金币',
+        icon: '👑',
+        type: 'gold',
+        target: 1000000,
+        reward: { type: 'shard', amount: 1 },
+        difficulty: 'hard'
+    },
+    {
+        id: 'quest_boss_1',
+        name: 'Boss猎人',
+        desc: '击败 1 个 Boss',
+        icon: '🗡️',
+        type: 'boss',
+        target: 1,
+        reward: { type: 'gold', amount: 10000 },
+        difficulty: 'easy'
+    },
+    {
+        id: 'quest_boss_5',
+        name: 'Boss杀手',
+        desc: '击败 5 个 Boss',
+        icon: '💀',
+        type: 'boss',
+        target: 5,
+        reward: { type: 'gold', amount: 100000 },
+        difficulty: 'medium'
+    },
+    {
+        id: 'quest_building_10',
+        name: '初具规模',
+        desc: '购买 10 个建筑',
+        icon: '🏗️',
+        type: 'building',
+        target: 10,
+        reward: { type: 'gold', amount: 10000 },
+        difficulty: 'easy'
+    },
+    {
+        id: 'quest_building_50',
+        name: '建筑大亨',
+        desc: '购买 50 个建筑',
+        icon: '🏢',
+        type: 'building',
+        target: 50,
+        reward: { type: 'shard', amount: 1 },
+        difficulty: 'medium'
+    },
+    {
+        id: 'quest_click_100',
+        name: '点击达人',
+        desc: '点击 100 次',
+        icon: '🖱️',
+        type: 'click',
+        target: 100,
+        reward: { type: 'gold', amount: 5000 },
+        difficulty: 'easy'
+    },
+    {
+        id: 'quest_click_500',
+        name: '点击狂人',
+        desc: '点击 500 次',
+        icon: '💥',
+        type: 'click',
+        target: 500,
+        reward: { type: 'gold', amount: 25000 },
+        difficulty: 'medium'
+    },
+    {
+        id: 'quest_gps_1k',
+        name: '日进斗金',
+        desc: '达到 1K/s 产量',
+        icon: '⚡',
+        type: 'gps',
+        target: 1000,
+        reward: { type: 'gold', amount: 50000 },
+        difficulty: 'medium'
+    },
+    {
+        id: 'quest_gps_100k',
+        name: '财源滚滚',
+        desc: '达到 100K/s 产量',
+        icon: '🌊',
+        type: 'gps',
+        target: 100000,
+        reward: { type: 'shard', amount: 2 },
+        difficulty: 'hard'
+    },
+    {
+        id: 'quest_upgrade_3',
+        name: '升级新手',
+        desc: '购买 3 个升级',
+        icon: '⬆️',
+        type: 'upgrade',
+        target: 3,
+        reward: { type: 'gold', amount: 15000 },
+        difficulty: 'easy'
+    }
+];
+
+var questList = [];
+var questTimer = null;
+
+function getDailyQuestSeed() {
+    var now = new Date();
+    var seed = now.getFullYear() * 10000 + (now.getMonth() + 1) * 100 + now.getDate();
+    return seed;
+}
+
+function generateDailyQuests() {
+    var seed = getDailyQuestSeed();
+    var random = seededRandom(seed);
+    
+    var quests = [];
+    var usedIndices = {};
+    
+    while (quests.length < 4) {
+        var idx = Math.floor(random() * QUEST_TEMPLATES.length);
+        if (!usedIndices[idx]) {
+            usedIndices[idx] = true;
+            var template = QUEST_TEMPLATES[idx];
+            quests.push({
+                id: template.id + '_' + Date.now(),
+                templateId: template.id,
+                name: template.name,
+                desc: template.desc,
+                icon: template.icon,
+                type: template.type,
+                target: template.target,
+                reward: template.reward,
+                difficulty: template.difficulty,
+                progress: 0,
+                completed: false,
+                claimed: false
+            });
+        }
+    }
+    
+    return quests;
+}
+
+function seededRandom(seed) {
+    var m = 0x80000000;
+    var a = 1103515245;
+    var c = 12345;
+    var state = seed;
+    
+    return function() {
+        state = (a * state + c) % m;
+        return state / m;
+    };
+}
+
+function getQuestProgress(quest) {
+    if (!G) return 0;
+    
+    switch (quest.type) {
+        case 'gold':
+            return G.totalEarned || 0;
+        case 'boss':
+            return G.bossesDefeated || 0;
+        case 'building':
+            return getTotalBuildings(G) || 0;
+        case 'click':
+            return G.totalClicks || 0;
+        case 'gps':
+            return getCurrentGps() || 0;
+        case 'upgrade':
+            return (G.upgrades || []).length;
+        default:
+            return 0;
+    }
+}
+
+function checkQuestCompletion() {
+    if (!G) return;
+    
+    var changed = false;
+    questList.forEach(function(quest) {
+        if (quest.completed || quest.claimed) return;
+        
+        var progress = getQuestProgress(quest);
+        quest.progress = Math.min(progress, quest.target);
+        
+        if (progress >= quest.target && !quest.completed) {
+            quest.completed = true;
+            changed = true;
+            showMsg('🎯 任务完成: ' + quest.name, 'achievement');
+        }
+    });
+    
+    if (changed) {
+        saveQuestData();
+        renderQuests();
+        updateQuestTabBadge();
+    }
+}
+
+function claimQuestReward(questIndex) {
+    if (!G) return;
+    if (questIndex < 0 || questIndex >= questList.length) return;
+    
+    var quest = questList[questIndex];
+    if (!quest.completed || quest.claimed) return;
+    
+    if (quest.reward.type === 'gold') {
+        G.gold += quest.reward.amount;
+        G.totalEarned += quest.reward.amount;
+        showMsg('💰 获得 ' + formatNumber(quest.reward.amount) + ' 金币！', 'success');
+    } else if (quest.reward.type === 'shard') {
+        G.prestigeShards = (G.prestigeShards || 0) + quest.reward.amount;
+        showMsg('🔮 获得 ' + quest.reward.amount + ' 重铸碎片！', 'success');
+    }
+    
+    quest.claimed = true;
+    changed = true;
+    saveQuestData();
+    renderQuests();
+    invalidateDerivedData();
+    requestUiUpdate({ heavy: true });
+}
+
+function getQuestData() {
+    var data = localStorage.getItem('idle_empire_quests');
+    if (data) {
+        try {
+            return JSON.parse(data);
+        } catch (e) {
+            return null;
+        }
+    }
+    return null;
+}
+
+function saveQuestData() {
+    var data = {
+        date: getDailyQuestSeed(),
+        quests: questList
+    };
+    localStorage.setItem('idle_empire_quests', JSON.stringify(data));
+}
+
+function initQuestSystem() {
+    var savedData = getQuestData();
+    var today = getDailyQuestSeed();
+    
+    if (savedData && savedData.date === today) {
+        questList = savedData.quests;
+    } else {
+        questList = generateDailyQuests();
+        saveQuestData();
+    }
+    
+    updateQuestTabBadge();
+    
+    if (questTimer) clearInterval(questTimer);
+    questTimer = setInterval(checkQuestCompletion, 5000);
+}
+
+function updateQuestTabBadge() {
+    if (!G) return;
+    
+    var incomplete = questList.filter(function(q) {
+        return q.completed && !q.claimed;
+    }).length;
+    
+    var badge = document.getElementById('tab-quests-count');
+    if (!badge) {
+        badge = document.createElement('span');
+        badge.className = 'nav-tab-badge';
+        badge.id = 'tab-quests-count';
+        var tab = document.querySelector('.nav-tab[data-tab="quests"]');
+        if (tab) tab.appendChild(badge);
+    }
+    
+    if (incomplete > 0) {
+        badge.textContent = incomplete;
+        badge.style.display = 'inline-flex';
+    } else {
+        badge.style.display = 'none';
+    }
+}
+
+function renderQuests() {
+    var container = document.getElementById('quest-list');
+    if (!container) return;
+    
+    var html = '';
+    var tomorrow = new Date();
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    tomorrow.setHours(0, 0, 0, 0);
+    var msUntilReset = tomorrow.getTime() - Date.now();
+    var hoursUntilReset = Math.floor(msUntilReset / (1000 * 60 * 60));
+    var minutesUntilReset = Math.floor((msUntilReset % (1000 * 60 * 60)) / (1000 * 60));
+    
+    html += '<div class="quest-header">';
+    html += '<div class="quest-timer">⏰ 重置于 ' + hoursUntilReset + '小时' + minutesUntilReset + '分后</div>';
+    html += '</div>';
+    
+    questList.forEach(function(quest, index) {
+        var progress = getQuestProgress(quest);
+        var percent = Math.min(100, (progress / quest.target) * 100);
+        var statusClass = quest.claimed ? 'claimed' : (quest.completed ? 'ready' : 'progress');
+        var rewardText = quest.reward.type === 'gold' ? formatNumber(quest.reward.amount) + ' 💰' : quest.reward.amount + ' 🔮';
+        
+        html += '<div class="quest-card ' + statusClass + '">';
+        html += '<div class="quest-icon">' + quest.icon + '</div>';
+        html += '<div class="quest-info">';
+        html += '<div class="quest-name">' + quest.name + '</div>';
+        html += '<div class="quest-desc">' + quest.desc + '</div>';
+        html += '<div class="quest-progress-bar">';
+        html += '<div class="quest-progress-fill" style="width: ' + percent + '%"></div>';
+        html += '</div>';
+        html += '<div class="quest-progress-text">' + formatNumber(Math.min(progress, quest.target)) + ' / ' + formatNumber(quest.target) + '</div>';
+        html += '</div>';
+        html += '<div class="quest-reward">' + rewardText + '</div>';
+        
+        if (quest.claimed) {
+            html += '<div class="quest-claimed-badge">已领取</div>';
+        } else if (quest.completed) {
+            html += '<button class="quest-claim-btn" onclick="claimQuestReward(' + index + ')">领取</button>';
+        } else {
+            html += '<div class="quest-locked">进行中</div>';
+        }
+        
+        html += '</div>';
+    });
+    
+    container.innerHTML = html;
+}
+
+function addQuestsTabToUI() {
+    var mainContent = document.querySelector('.main-content');
+    if (!mainContent) return;
+    
+    var existingTab = document.getElementById('tab-quests');
+    if (existingTab) return;
+    
+    var tabsNav = document.querySelector('.nav-tabs');
+    if (!tabsNav) return;
+    
+    var questTab = document.createElement('button');
+    questTab.className = 'nav-tab';
+    questTab.setAttribute('data-tab', 'quests');
+    questTab.innerHTML = '<span class="nav-tab-icon">📋</span><span class="nav-tab-text">任务</span>';
+    tabsNav.appendChild(questTab);
+    
+    var questSection = document.createElement('section');
+    questSection.id = 'tab-quests';
+    questSection.className = 'content-section';
+    questSection.innerHTML = '<div class="section-header"><h1 class="section-title">📋 每日任务</h1><p class="section-subtitle">完成每日任务获得丰厚奖励</p></div><div id="quest-list" class="quest-grid"></div>';
+    mainContent.appendChild(questSection);
+    
+    questTab.onclick = function() {
+        var allTabs = document.querySelectorAll('.nav-tab');
+        var allContent = document.querySelectorAll('.content-section');
+        for (var j = 0; j < allTabs.length; j++) allTabs[j].classList.remove('active');
+        for (var k = 0; k < allContent.length; k++) allContent[k].classList.remove('active');
+        this.classList.add('active');
+        document.getElementById('tab-quests').classList.add('active');
+    };
+}

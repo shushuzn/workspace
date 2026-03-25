@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T11:53:01.475307
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py  (lines 30-60 of 644)
+from stock_pro.exporter import full_report, export_all
+from stock_pro.correlation import correlation_report
+from stock_pro.benchmark import benchmark_vs_index, sector_benchmark, score_distribution
+from stock_pro.backtest import backtest_report, compare_strategies
+from stock_pro.alerts import add_alert, remove_alert, list_alerts, check_alerts
+from stock_pro.technical import technical_report
+from stock_pro.sync import sync_yfinance, get_sync_status
+from stock_pro.pdf_export import export_pdf, full_pdf_report
+from stock_pro.optimizer import optimize_report
+from stock_pro.earnings import earnings_report, predict_earnings_beat
+from stock_pro.sentiment import sentiment_report, sector_sentiment
+from stock_pro.screener_v2 import advanced_screener_report, value_picks, growth_picks, dividend_picks
+from stock_pro.dashboard import dashboard_report, Dashboard
+from stock_pro.watchlist_v2 import watchlist_performance, compare_watchlists
+from stock_pro.exporters import export_json, export_csv, export_markdown, export_html, export_all
+from stock_pro.insights import get_portfolio_insights, generate_investment_themes
+from stock_pro.core import A  # For picks
+
+
+BANNER = """
++==============================================================+
+|                    Stock PRO v12.0                          |
+|          Professional Stock Analysis Suite                  |
++==============================================================+
+"""
+
+
+def main():
+    parser = argparse.ArgumentParser(description="Stock PRO v11.0", add_help=False)
+    parser.add_argument('symbols', nargs='*', help='Stock symbols')
+    parser.add_argument('--help', '-h', action='store_true')
+
+[584 more lines. Use start_line=61 to continue.]

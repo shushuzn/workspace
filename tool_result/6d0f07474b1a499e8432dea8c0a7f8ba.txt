@@ -1,0 +1,36 @@
+# tool_name: grep_search
+# created_at: 2026-03-21T14:21:02.800323
+# ---
+08-AUTOMATION\scheduled-tasks\SCRIPT_Weather_Simple_v1.0.ps1:2:> # Uses wttr.in directly with caching
+99-ARCHIVE\INTEGRATION_EN.md:397:>     """Executor with caching"""
+auto_discover_001.py:8:> - Added caching
+auto_evolve_001.py:78:>             "add_caching": '# Auto-evolution: Added caching (lru_cache)',
+auto_evolve_001.py:146:>                 improvements.append("Add caching")
+auto_evolve_001.py:193:>             suggestions.append(f"Optimize {len(patterns['optimization_points'])} tools (add caching)")
+brainstorm_auto_scanner_001.py:36:>         "smart_cache": ["cache", "caching", "缓存"],
+brainstorm_diverge_001.py:53:>         f"Implement caching for {topic}",
+brainstorm_matcher_001.py:24:>     "caching": ["smart_cache_001.py", "data_cache.py", "workflow_cache.py"],
+brainstorm_optimize_001.py:34:>         "compression", "caching", "workflow", "prompt", "batch", "parallel", "memory"
+brainstorm_optimize_001.py:142:>             "caching": 20,
+brainstorm_optimize_001.py:178:>                 "category": "caching",
+commit_cache.bat:13:>   - Tool execution result caching
+commit_msg2.txt:1:> Enhance monitoring and caching tools
+feishu-tools\feishu_api.py:7:> - Auto token refresh with caching
+feishu-tools\feishu_api.py:56:>     """Manages Feishu tenant access token with automatic refresh and caching."""
+feishu-tools\feishu_api_enhanced.py:7:> - Auto token refresh with caching
+feishu-tools\feishu_api_enhanced.py:247:>     """Manages Feishu tenant access token with automatic refresh and caching."""
+feishu-tools\README-ENHANCED.md:290:>    - Automatic token caching enabled
+intent-belief-integration\INTEGRATION_EN.md:397:>     """Executor with caching"""
+MEMORY-QUICKSTART.md:298:>     'enable_caching': True,         # 启用缓存
+MEMORY-SEARCH-IMPLEMENTATION.md:185:> - **Index caching** - Build once, reuse many times
+orchestration_dashboard.html:321:>                         <div class="recommendation-title">📈 Implement caching layer</div>
+performance_optimizer_001.py:205:>         # Check for caching opportunities
+performance_optimizer_001.py:207:>             suggestions.append({"type": "cache", "priority": "medium", "fix": "Consider adding HTTP caching"})
+PHASE2-DAY1-COMPLETE.md:175:> - Search memories with caching
+sa_data_optimizer_001.py:9:> Optimize stock data collection with caching and fallback
+sa_data_optimizer_001.py:31:>         """Get quote with caching"""
+sa_data_optimizer_001.py:123:>         print("  --quote <symbol>     Get quote with caching")
+smart_compress_001.py:449:> - [x] SMART-CACHE-001 response caching
+smart_compress_002.py:534:>                 "decisions": ["Use JSON format", "Implement caching"],
+update_registry_sa_phase_001.py:72:>             "Auto-caching"
+update_registry_sa_phase_complete_001.py:72:>             "Article caching"

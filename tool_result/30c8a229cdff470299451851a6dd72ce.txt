@@ -1,0 +1,35 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T09:20:02.698511
+# ---
+[QUOTE] Price: $247.99  MC: $3.79T
+  Target Price: $200.99  Upside: -19.0%
+  Rating: SELL  Score: 55/100
+  Risk Level: MEDIUM (Score: 38/100)
+[QUOTE] Price: $381.87  MC: $2.84T
+  Target Price: $350.11  Upside: -8.3%
+  Rating: SELL  Score: 70/100
+  Risk Level: LOW (Score: 27/100)
+[QUOTE] Price: $172.70  MC: $4.23T
+  Target Price: $108.00  Upside: -37.5%
+  Rating: SELL  Score: 80/100
+  Risk Level: LOW (Score: 26/100)
+[QUOTE] Price: $593.66  MC: $1.48T
+  Target Price: $972.00  Upside: +63.7%
+  Rating: STRONG_BUY  Score: 95/100
+  Risk Level: LOW (Score: 26/100)
+[QUOTE] Price: $301.00  MC: $3.85T
+  Target Price: $231.69  Upside: -23.0%
+  Rating: SELL  Score: 60/100
+  Risk Level: LOW (Score: 24/100)
+[QUOTE] Price: $205.37  MC: $2.16T
+  Target Price: $219.48  Upside: +6.9%
+  Rating: HOLD  Score: 75/100
+  Risk Level: LOW (Score: 28/100)
+[QUOTE] Price: $286.56  MC: $0.83T
+  Target Price: $393.27  Upside: +37.2%
+  Rating: STRONG_BUY  Score: 65/100
+  Risk Level: MEDIUM (Score: 35/100)
+[QUOTE] Price: $235.37  MC: $0.56T
+  Target Price: $171.01  Upside: -27.3%
+  Rating: SELL  Score: 60/100
+  Risk Level: LOW (Score: 27/100)

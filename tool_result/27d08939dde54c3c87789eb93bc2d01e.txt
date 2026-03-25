@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-22T17:12:53.154223
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\core.py  (lines 370-430 of 480)
+_POPULAR_STOCKS = ["AAPL", "MSFT", "GOOGL", "AMZN", "NVDA"]
+
+def prewarm_cache():
+    """Pre-warm cache - call manually or after hours"""
+    fetch_batch(_POPULAR_STOCKS)
+    return len(_POPULAR_STOCKS)
+
+
+def ultimate_analysis(symbol):
+    """Comprehensive analysis combining all features"""
+    from stock_pro.sentiment import institutional_analysis, calculate_sentiment, get_research_reports
+    from stock_pro.risk import risk_profile
+    
+    # Get all analyses
+    tech = analyze(symbol) if symbol in A else None
+    momentum = calc_momentum(symbol)
+    inst = institutional_analysis(symbol)
+    sent = calculate_sentiment(symbol)
+    reports = get_research_reports(symbol)
+    risk = risk_profile(symbol)
+    
+    # Calculate composite score
+    tech_score = tech["score"] if tech else 50
+    momentum_score = momentum["short_momentum"] if momentum else 50
+    inst_score = inst["score"]
+    sentiment_score = sent["sentiment"] * 100
+    risk_score = 100 - (risk["risk_level"] == "HIGH" and 30 or risk["risk_level"] == "MEDIUM" and 15 or 0)
+    
+    # Weighted composite
+    composite = (
+        tech_score * 0.25 +
+        momentum_score * 0.20 +
+        inst_score * 0.15 +
+        sentiment_score * 0.20 +
+        risk_score * 0.20
+    )
+    
+    # Recommendation
+    if composite >= 80: recommendation = "STRONG BUY"
+    elif composite >= 70: recommendation = "BUY"
+    elif composite >= 60: recommendation = "HOLD"
+    elif composite >= 50: recommendation = "WEAK HOLD"
+    else: recommendation = "SELL/AVOID"
+    
+    report = f"""# ULTIMATE ANALYSIS: {symbol}
+
+## Overall Score: {composite:.0f}/100 - **{recommendation}**
+
+### Score Breakdown
+| Factor | Score | Weight | Weighted |
+|--------|-------|--------|----------|
+| Technical | {tech_score} | 25% | {tech_score*0.25:.1f} |
+| Momentum | {momentum_score:.0f} | 20% | {momentum_score*0.20:.1f} |
+| Institutional | {inst_score} | 15% | {inst_score*0.15:.1f} |
+| Sentiment | {sentiment_score:.0f} | 20% | {sentiment_score*0.20:.1f} |
+| Risk | {risk_score} | 20% | {risk_score*0.20:.1f} |
+
+### Key Signals
+"""
+    # Add signals
+    signals = []
+
+[50 more lines. Use start_line=431 to continue.]

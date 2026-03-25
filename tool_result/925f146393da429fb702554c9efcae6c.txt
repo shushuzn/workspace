@@ -1,0 +1,156 @@
+# tool_name: read_file
+# created_at: 2026-03-22T19:29:36.311148
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\dash_app.py  (lines 1-150 of 670)
+"""
+Stock PRO Dashboard v2.2 - Enhanced UI with Performance Optimizations
+Run: python dash_app.py | Open: http://127.0.0.1:8050
+"""
+import dash
+from dash import dcc, html, Input, Output, callback_context
+import plotly.graph_objects as go
+from pathlib import Path
+import sys
+from datetime import datetime, timedelta
+import threading
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from stock_pro import analyze, top_picks, value_picks, growth_picks, dividend_picks
+from stock_pro.core import A, P
+
+app = dash.Dash(__name__, suppress_callback_exceptions=True)
+app.title = "Stock PRO v2.2"
+
+# Cache system
+class Cache:
+    def __init__(self):
+        self.data = {}
+        self.lock = threading.Lock()
+    
+    def get(self, key, ttl=300):  # 5 minutes default
+        with self.lock:
+            if key in self.data:
+                data, timestamp = self.data[key]
+                if datetime.now() - timestamp < timedelta(seconds=ttl):
+                    return data
+                else:
+                    del self.data[key]
+            return None
+    
+    def set(self, key, value):
+        with self.lock:
+            self.data[key] = (value, datetime.now())
+    
+    def clear(self):
+        with self.lock:
+            self.data.clear()
+
+cache = Cache()
+
+# Colors
+C = {'bg': '#0f0f23', 'card': 'rgba(30,30,60,0.85)', 'border': 'rgba(255,255,255,0.08)',
+     'text': '#e0e0e0', 'muted': '#8b8b9a', 'primary': '#6366f1', 'bull': '#10b981', 
+     'bear': '#ef4444', 'amber': '#f59e0b', 'purple': '#8b5cf6', 'cyan': '#06b6d4'}
+
+# Sidebar styles
+SIDEBAR_BASE = {'padding': '16px 24px', 'color': C['muted'], 'cursor': 'pointer', 
+                'fontSize': '14px', 'fontWeight': '500', 'borderLeft': '4px solid transparent',
+                'transition': 'all 0.2s ease', 'borderRadius': '0 12px 12px 0', 'margin': '4px 0'}
+SIDEBAR_HOVER = {'background': 'rgba(99,102,241,0.1)', 'color': C['text']}
+SIDEBAR_ACTIVE = {'background': 'linear-gradient(90deg, rgba(99,102,241,0.25), rgba(99,102,241,0.05))',
+                  'color': C['primary'], 'borderLeft': f'4px solid {C["primary"]}'}
+
+def fmt(n, d=2): 
+    if n is None: return "N/A"
+    try: return f"{n:,.{d}f}"
+    except: return str(n)
+
+def sc(s):
+    return '#059669' if s>=80 else '#10b981' if s>=70 else '#f59e0b' if s>=50 else '#f97316' if s>=30 else '#ef4444'
+
+def sl(s):
+    return "STRONG BUY" if s>=80 else "BUY" if s>=70 else "HOLD" if s>=50 else "SELL" if s>=30 else "STRONG SELL"
+
+# Card with hover effect
+def glass(content, style=None, hover=True, className=None):
+    base = {'background': C['card'], 'backdropFilter': 'blur(20px)', 'borderRadius': '20px',
+            'border': f'1px solid {C["border"]}', 'padding': '24px', 'marginBottom': '20px',
+            'boxShadow': '0 8px 32px rgba(0,0,0,0.3)', 'transition': 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
+            'position': 'relative', 'overflow': 'hidden'}
+    # Add subtle gradient overlay
+    overlay = html.Div(style={'position': 'absolute', 'top': 0, 'left': 0, 'right': 0, 'bottom': 0,
+                              'background': 'linear-gradient(135deg, rgba(99,102,241,0.05), rgba(139,92,246,0.05))',
+                              'pointerEvents': 'none'})
+    if style: base.update(style)
+    if hover:
+        base['_hover'] = {
+            'transform': 'translateY(-4px) scale(1.02)', 
+            'boxShadow': '0 12px 40px rgba(99,102,241,0.3)',
+            'borderColor': 'rgba(99,102,241,0.3)'
+        }
+    return html.Div([overlay] + content, style=base, className=className)
+
+# Enhanced Stat Card
+def stat_card(title, val, chg=None, icon=None, acc=None):
+    chg_str, chg_clr = "", C['muted']
+    if chg is not None:
+        chg_str = f"{'↑' if chg>=0 else '↓'} {abs(chg):.1f}%"
+        chg_clr = C['bull'] if chg>=0 else C['bear']
+    top = {'borderTop': f'4px solid {acc}'} if acc else {}
+    return glass([
+        html.Div([html.Span(icon, style={'fontSize':'28px'}) if icon else html.Div()], 
+                 style={'marginBottom':'12px'}),
+        html.Div(title, style={'fontSize':'11px','color':C['muted'],'textTransform':'uppercase',
+                               'letterSpacing':'1px','marginBottom':'8px'}),
+        html.Div(val, style={'fontSize':'32px','fontWeight':'800','background':f'linear-gradient(135deg, {C["text"]}, #fff)',
+                            '-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'}),
+        html.Div(chg_str, style={'fontSize':'13px','marginTop':'8px','color':chg_clr,'fontWeight':'600'}) if chg is not None else html.Div(),
+    ], {**top, 'textAlign':'left', 'padding':'28px'})
+
+# Enhanced Stock Card
+def stock_card(sym):
+    try:
+        # Check cache first
+        cache_key = f"stock_{sym}"
+        data = cache.get(cache_key)
+        if not data:
+            # Set loading state in cache
+            cache.set(cache_key, 'loading')
+            # Fetch data
+            data = analyze(sym)
+            # Format market cap
+            mkt = data.get('marketCap', 0)
+            if mkt > 1e12:
+                data['marketCap'] = f"${mkt/1e12:.1f}T"
+            elif mkt > 1e9:
+                data['marketCap'] = f"${mkt/1e9:.1f}B"
+            else:
+                data['marketCap'] = f"${mkt/1e6:.0f}M" if mkt > 0 else "N/A"
+            # Store in cache
+            cache.set(cache_key, data)
+        
+        # If data is still loading (async case)
+        if data == 'loading':
+            return glass([
+                html.Div('Loading...', style={'textAlign':'center','padding':'40px','color':C['muted']}),
+                html.Div([
+                    html.Div(style={'width':'40px','height':'40px','border':'3px solid rgba(99,102,241,0.3)','borderTop':'3px solid #6366f1','borderRadius':'50%','animation':'spin 1s linear infinite','margin':'10px auto'})
+                ], style={'display':'flex','justifyContent':'center'})
+            ])
+        
+        # Check for errors in data
+        if not data or 'error' in data:
+            return glass([
+                html.Div('❌ Error', style={'textAlign':'center','padding':'40px','color':C['bear'],'fontSize':'18px','fontWeight':'700'}),
+                html.Div(f"Failed to load {sym}", style={'textAlign':'center','color':C['muted'],'marginTop':'8px'}),
+                html.Div(data.get('error', 'Unknown error'), style={'textAlign':'center','color':C['muted'],'fontSize':'12px','marginTop':'4px'})
+            ])
+            
+        return glass([
+            # Header Row
+            html.Div([
+                html.Div([
+                    html.Div(sym, style={'fontSize':'22px','fontWeight':'800','letterSpacing':'0.5px','marginBottom':'4px'}),
+                    html.Div(data.get('recommend', data.get('rating', 'N/A')), style={'fontSize':'11px','color':sc(data.get('score', 50)),'fontWeight':'700',
+
+[520 more lines. Use start_line=151 to continue.]

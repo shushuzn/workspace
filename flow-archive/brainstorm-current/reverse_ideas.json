@@ -1,0 +1,30 @@
+{
+  "topic": "\"工作站优化\"",
+  "method": "Reverse Brainstorming",
+  "steps": {
+    "step1_problems": [
+      "How to make \"工作站优化\" slower?",
+      "How to make \"工作站优化\" more expensive?",
+      "How to make users confused?",
+      "How to add more steps?",
+      "How to reduce quality?",
+      "How to make it harder to use?",
+      "How to introduce bugs?",
+      "How to create bottlenecks?",
+      "How to increase complexity?",
+      "How to make it unreliable?"
+    ],
+    "step2_solutions": [
+      "How to make \"工作站优化\" faster?",
+      "How to make \"工作站优化\" cheaper?",
+      "How to make \"工作站优化\" clear?",
+      "How to make \"工作站优化\" fewer steps?",
+      "How to make \"工作站优化\" improve quality?",
+      "How to make \"工作站优化\" easier to use?",
+      "How to make \"工作站优化\" reliability?",
+      "How to make \"工作站优化\" parallel?",
+      "How to make \"工作站优化\" simplicity?",
+      "How to make \"工作站优化\" reliable?"
+    ]
+  }
+}

@@ -1,0 +1,55 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T09:46:57.343059
+# ---
+
+==================================================
+  NewsHub Fetcher
+==================================================
+
+  ▶ Time: 2026-03-23 09:46:39
+
+  ▶ 并行抓取 4 个源...
+  ✓ 新浪财经: +15
+  ✓ Investing: +10
+  ✓ Seeking Alpha: +7
+  ✗ Reuters: <urlopen error [SSL: UNEXPECTED_EOF_WHILE_READING] EOF occurred in violation of protocol (_ssl.c:1028)>
+  ⚠ Reuters: 0
+
+──────────────────────────────────────────────────
+  📊 Total: 32  ⏱️ 4.3s
+     新浪财经: 15
+     Investing: 10
+     Seeking Alpha: 7
+     Reuters: 0
+──────────────────────────────────────────────────
+
+  1. Seeking Alpha
+     Fannie, Freddie are said to step in as MBS market volatility...
+     https://seekingalpha.com/news/4567178-fannie-freddie-are-said-to-step-in-as-mbs-market-volatility-spikes?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news
+  2. Seeking Alpha
+     Top global stories this week: Alibaba, UniCredit, Unilever a...
+     https://seekingalpha.com/news/4567179-top-global-stories-this-week-alibaba-unicredit-unilever-among-notable-names?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news
+  3. Seeking Alpha
+     Markets now see one in three chance of Fed hike by October...
+     https://seekingalpha.com/news/4567177-markets-now-see-one-in-three-chance-of-fed-hike-by-october?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news
+  4. Seeking Alpha
+     Claro moves to acquire controlling stake in Desktop in $750M...
+     https://seekingalpha.com/news/4567180-claro-moves-to-acquire-controlling-stake-in-desktop-in-750m-deal?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news
+  5. Seeking Alpha
+     Markets on edge as U.S.-Iran conflict deepens, energy risks ...
+     https://seekingalpha.com/news/4567181-markets-on-edge-as-u-s-iran-conflict-deepens-energy-risks-mount?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news
+  6. Seeking Alpha
+     Lument Finance Trust Q4 2025 Earnings Preview...
+     https://seekingalpha.com/news/4566938-lument-finance-trust-q4-2025-earnings-preview?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news
+  7. Seeking Alpha
+     Here are the major earnings before the open Monday...
+     https://seekingalpha.com/news/4567150-here-are-the-major-earnings-before-the-open-monday?utm_source=feed_news_all&utm_medium=referral&feed_item_type=news
+  8. Investing
+     Iran threatens to retaliate against Gulf energy and water af...
+     https://www.investing.com/news/commodities-news/trump-and-iran-trade-threats-over-energy-targets-as-war-escalates-4574105
+  9. Investing
+     Oil prices volatile, pinned above $110/bbl after Trump’s 48-...
+     https://www.investing.com/news/commodities-news/oil-prices-volatile-pinned-above-110bbl-after-trumps-48hr-deadline-on-iran-4574162
+  10. Investing
+     Earnings call transcript: Fonterra’s H1 2026 sees strong res...
+     https://www.investing.com/news/transcripts/earnings-call-transcript-fonterras-h1-2026-sees-strong-results-amid-geopolitical-caution-93CH-4574164

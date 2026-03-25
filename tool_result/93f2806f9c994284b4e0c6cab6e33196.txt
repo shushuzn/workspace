@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T09:56:41.206917
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 800-830 of 1039)
+        f.write(f"|--------|-------|\n")
+        f.write(f"| Trend | {tech['trend']} |\n")
+        f.write(f"| Distance from 52W High | {tech['dist_from_high']:.1f}% |\n")
+        f.write(f"| Distance from 52W Low | +{tech['dist_from_low']:.1f}% |\n")
+        f.write(f"| Position vs Average | {tech['ma_status']} |\n")
+        f.write(f"| Fair Value Midpoint | ${tech['midpoint']:.2f} |\n\n")
+        
+        # Support/Resistance
+        f.write("### 4.2 Support & Resistance Levels\n\n")
+        f.write(f"| Level | Price | Distance |\n")
+        f.write(f"|-------|-------|----------|\n")
+        f.write(f"| Resistance R4 | ${sr_levels['r4']:.2f} | +{(sr_levels['r4']-price)/price*100:.1f}% |\n")
+        f.write(f"| Resistance R3 | ${sr_levels['r3']:.2f} | +{(sr_levels['r3']-price)/price*100:.1f}% |\n")
+        f.write(f"| Resistance R2 | ${sr_levels['r2']:.2f} | +{(sr_levels['r2']-price)/price*100:.1f}% |\n")
+        f.write(f"| Resistance R1 | ${sr_levels['r1']:.2f} | +{(sr_levels['r1']-price)/price*100:.1f}% |\n")
+        f.write(f"| **Current Price** | **${price:.2f}** | 0.0% |\n")
+        f.write(f"| Support S1 | ${sr_levels['s1']:.2f} | {(sr_levels['s1']-price)/price*100:.1f}% |\n")
+        f.write(f"| Support S2 | ${sr_levels['s2']:.2f} | {(sr_levels['s2']-price)/price*100:.1f}% |\n")
+        f.write(f"| Support S3 | ${sr_levels['s3']:.2f} | {(sr_levels['s3']-price)/price*100:.1f}% |\n\n")
+        
+        f.write("---\n\n")
+        f.write("## 5. Financial Health\n\n")
+        f.write(f"| Metric | Value | Rating |\n")
+        f.write(f"|--------|-------|--------|\n")
+        gm_r = "Excellent" if fin["gm"] > 0.60 else "Good" if fin["gm"] > 0.40 else "Average"
+        f.write(f"| Gross Margin | {fin['gm']*100:.1f}% | {gm_r} |\n")
+        nm_r = "Excellent" if fin["nm"] > 0.25 else "Good" if fin["nm"] > 0.15 else "Average"
+        f.write(f"| Net Margin | {fin['nm']*100:.1f}% | {nm_r} |\n")
+        roe_r = "Excellent" if fin["roe"] > 0.30 else "Good" if fin["roe"] > 0.20 else "Average"
+        f.write(f"| ROE | {fin['roe']*100:.1f}% | {roe_r} |\n")
+        roic_r = "Excellent" if fin["roic"] > 0.25 else "Good" if fin["roic"] > 0.15 else "Average"
+
+[209 more lines. Use start_line=831 to continue.]

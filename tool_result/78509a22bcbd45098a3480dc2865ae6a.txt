@@ -1,0 +1,52 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:46:20.901180
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_hub.py  (lines 115-160 of 504)
+            from database import db
+            news = db.get_recent(days * 24)
+            print(f"\n  最近 {days} 天: {len(news)} 条")
+        elif action == "cleanup":
+            days = int(sys.argv[3]) if len(sys.argv) > 3 else 30
+            from database import db
+            deleted = db.delete_old(days)
+            print(f"  ✓ 已删除 {deleted} 条旧新闻")
+        elif action == "export":
+            from database import db
+            import json
+            news = db.get_news(limit=10000)
+            with open('news_export.json', 'w', encoding='utf-8') as f:
+                json.dump(news, f, ensure_ascii=False, indent=2)
+            print(f"  ✓ 已导出 {len(news)} 条到 news_export.json")
+    
+    # 缓存
+    elif cmd == "cache":
+        action = sys.argv[2] if len(sys.argv) > 2 else "stats"
+        if action == "stats":
+            run_cache_stats()
+        elif action == "clear":
+            from cache import cache
+            cache.invalidate()
+            print("  ✓ 缓存已清空")
+        elif action == "cleanup":
+            from cache import cache
+            cache.cleanup()
+            print("  ✓ 过期缓存已清理")
+    
+    # ========== 原有命令 ==========
+    
+    elif cmd == "feishu":
+        mode = sys.argv[2] if len(sys.argv) > 2 else "all"
+        header("Feishu Push")
+        run("news_feishu.py", mode, *extra_args)
+    
+    elif cmd == "qq":
+        mode = sys.argv[2] if len(sys.argv) > 2 else "status"
+        header("QQ Push")
+        run("news_to_qq.py", mode)
+    
+    elif cmd == "wechat":
+        mode = sys.argv[2] if len(sys.argv) > 2 else "test"
+        header("WeChat Push")
+        run("news_wechat.py", mode)
+
+[344 more lines. Use start_line=161 to continue.]

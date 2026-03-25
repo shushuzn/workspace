@@ -1,0 +1,52 @@
+# tool_name: read_file
+# created_at: 2026-03-22T23:14:58.667094
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 350-395 of 494)
+    
+    data.mark_sent(ids)
+    data.save()
+    
+    print(f"Sent: {len(results)} platform(s)\n")
+    return results
+
+def cmd_status(args):
+    data = NewsData()
+    total = len(data.data["news"])
+    unsent = len([n for n in data.data["news"] if not n.get("sent")])
+    sent = total - unsent
+    
+    # 统计
+    sectors = {}
+    sentiments = {"利好": 0, "利空": 0, "中性": 0}
+    for n in data.data["news"]:
+        sectors[n.get("sector","通用")] = sectors.get(n.get("sector","通用"), 0) + 1
+        sentiments[n.get("sentiment","中性")] = sentiments.get(n.get("sentiment","中性"), 0) + 1
+    
+    # 格式化
+    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+    bar_len = 30
+    sent_pct = sent / total * 100 if total > 0 else 0
+    bar = "=" * int(sent_pct / 100 * bar_len) + "-" * (bar_len - int(sent_pct / 100 * bar_len))
+    
+    print(f"""
+╔══════════════════════════════════════════════════════╗
+║              NEWS MANAGER STATUS                     ║
+║              {now}                    ║
+╚══════════════════════════════════════════════════════╝
+
+[Summary]
+  Total News:     {total:>6}
+  Sent:           {sent:>6} ({sent_pct:>5.1f}%)
+  Unsent:         {unsent:>6}
+  Progress:       [{bar}] {sent_pct:.1f}%
+
+[Platforms]
+  QQ:             {data.data['stats'].get('qq',0):>6} pushes
+  Feishu:         {data.data['stats'].get('feishu',0):>6} pushes
+
+[Sentiments]
+  + {sentiments['利好']:>5} positive (利好)
+  - {sentiments['利空']:>5} negative (利空)
+  = {sentiments['中性']:>5} neutral  (中性)
+
+[99 more lines. Use start_line=396 to continue.]

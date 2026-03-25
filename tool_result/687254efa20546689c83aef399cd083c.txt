@@ -1,0 +1,46 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:23:58.510856
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\push\news_feishu.py  (lines 251-290 of 415)
+    info(f"获取 {len(news)} 条新闻")
+
+    if not news:
+        warn("无新闻数据")
+        return
+
+    # 按质量评分排序，选取高质量新闻
+    ranked = rank_news_by_quality(news)
+    news = ranked[:limit]
+
+    # 显示质量分布
+    avg_quality = sum(n.get("quality_score", 0) for n in news) / len(news) if news else 0
+    info(f"平均质量: {avg_quality:.1f}/100")
+
+    card = build_digest_card(news)
+
+    token = get_access_token()
+    if not token:
+        error("获取 access_token 失败")
+        return
+
+    receive_id = config.get("default_receive_id", config.get("chat_id", ""))
+    if send_card(token, receive_id, card).get("code") == 0:
+        ok(f"摘要已发送 ({len(news)} 条)")
+        add_log("digest", len(news), len(news))
+    else:
+        error("发送失败")
+
+
+def cmd_rich(limit=8):
+    banner("飞书富文本推送")
+    config = load_feishu_config()
+    if not config.get("app_id"):
+        error("未配置飞书应用")
+        return
+
+    from core.async_fetcher import fetch_all
+    news = fetch_all(quiet=True)[:limit]
+    card = build_rich_card(news)
+    token = get_access_token()
+
+[125 more lines. Use start_line=291 to continue.]

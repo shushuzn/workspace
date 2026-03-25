@@ -1,0 +1,20 @@
+[
+  {
+    "symbol": "AAPL",
+    "score": -0.12,
+    "label": "NEUTRAL",
+    "timestamp": "2026-03-20T21:19:05.375543"
+  },
+  {
+    "symbol": "AAPL",
+    "score": 0.1,
+    "label": "NEUTRAL",
+    "timestamp": "2026-03-20T21:29:33.076025"
+  },
+  {
+    "symbol": "AAPL",
+    "score": -0.23,
+    "label": "NEUTRAL",
+    "timestamp": "2026-03-20T21:32:03.611128"
+  }
+]

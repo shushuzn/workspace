@@ -1,0 +1,518 @@
+[
+  {
+    "tool_id": "issue-scanner",
+    "name": "Issue Scanner",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903202"
+  },
+  {
+    "tool_id": "active_learning_trigger",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903232"
+  },
+  {
+    "tool_id": "adaptive_ttl_cache",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903235"
+  },
+  {
+    "tool_id": "ai_tool_suggester",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903236"
+  },
+  {
+    "tool_id": "analyze_causal",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903238"
+  },
+  {
+    "tool_id": "async_executor",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903239"
+  },
+  {
+    "tool_id": "automation_enhancer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903240"
+  },
+  {
+    "tool_id": "backup_strategy_restructure",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903242"
+  },
+  {
+    "tool_id": "batch_security_fixer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903243"
+  },
+  {
+    "tool_id": "brainstorm_prioritize",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903244"
+  },
+  {
+    "tool_id": "capacity_planner",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903245"
+  },
+  {
+    "tool_id": "causal_split_plan",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903247"
+  },
+  {
+    "tool_id": "ci_cd_pipeline",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903248"
+  },
+  {
+    "tool_id": "clean_duplicates_safe",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903249"
+  },
+  {
+    "tool_id": "clean_feishu_cache",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903250"
+  },
+  {
+    "tool_id": "cleanup_60_data_sensitive",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903251"
+  },
+  {
+    "tool_id": "cleanup_60data_sensitive",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903252"
+  },
+  {
+    "tool_id": "cleanup_precheck_issues",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903253"
+  },
+  {
+    "tool_id": "cluster_manager",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903254"
+  },
+  {
+    "tool_id": "complete_path_fixer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903255"
+  },
+  {
+    "tool_id": "compress_tiff_to_png",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903257"
+  },
+  {
+    "tool_id": "coordinator_balancer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903258"
+  },
+  {
+    "tool_id": "delete_all_reports",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903259"
+  },
+  {
+    "tool_id": "demo_tool",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903260"
+  },
+  {
+    "tool_id": "deploy_production",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903261"
+  },
+  {
+    "tool_id": "dialog_integrator",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903262"
+  },
+  {
+    "tool_id": "disaster_recovery_cleanup",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903263"
+  },
+  {
+    "tool_id": "distributed_search",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903264"
+  },
+  {
+    "tool_id": "do_rename",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903266"
+  },
+  {
+    "tool_id": "error_predictor",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903267"
+  },
+  {
+    "tool_id": "execute_cleanup",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903268"
+  },
+  {
+    "tool_id": "feishu_analytics_dashboard",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903269"
+  },
+  {
+    "tool_id": "feishu_persona_notify",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903270"
+  },
+  {
+    "tool_id": "file_organizer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903271"
+  },
+  {
+    "tool_id": "find_feishu",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903272"
+  },
+  {
+    "tool_id": "find_actual_os_system",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903273"
+  },
+  {
+    "tool_id": "find_unsafe_calls",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903274"
+  },
+  {
+    "tool_id": "fix_remaining_bom",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903276"
+  },
+  {
+    "tool_id": "git_pre_commit_hook",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903277"
+  },
+  {
+    "tool_id": "git_precheck",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903278"
+  },
+  {
+    "tool_id": "health_monitor_ai",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903279"
+  },
+  {
+    "tool_id": "health_predictor",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903280"
+  },
+  {
+    "tool_id": "incremental_indexer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903281"
+  },
+  {
+    "tool_id": "innovator_auto_executor",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903282"
+  },
+  {
+    "tool_id": "innovator_engine",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903283"
+  },
+  {
+    "tool_id": "insight_generator",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903284"
+  },
+  {
+    "tool_id": "install_git_hooks",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903285"
+  },
+  {
+    "tool_id": "install_requirements",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903286"
+  },
+  {
+    "tool_id": "iteration_manager",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903287"
+  },
+  {
+    "tool_id": "learner_assistant_v2",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903288"
+  },
+  {
+    "tool_id": "learning_quality_assessor",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903289"
+  },
+  {
+    "tool_id": "maintenance_scheduler",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903290"
+  },
+  {
+    "tool_id": "metrics_tracker",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903292"
+  },
+  {
+    "tool_id": "neural_embedding",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903293"
+  },
+  {
+    "tool_id": "obsidian_tools",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903295"
+  },
+  {
+    "tool_id": "optimize_causal",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903296"
+  },
+  {
+    "tool_id": "optimize_tools_analyzer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903297"
+  },
+  {
+    "tool_id": "optimize_tools_deep",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903298"
+  },
+  {
+    "tool_id": "optimize_tools_executor",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903299"
+  },
+  {
+    "tool_id": "optimize_tools_quick",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903300"
+  },
+  {
+    "tool_id": "organize_root_files_v2",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903301"
+  },
+  {
+    "tool_id": "path_security_fixer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903302"
+  },
+  {
+    "tool_id": "plan_auto_optimizer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903303"
+  },
+  {
+    "tool_id": "pm_duplicate_analyzer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903304"
+  },
+  {
+    "tool_id": "pm_merge_folders",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903305"
+  },
+  {
+    "tool_id": "predictive_analytics",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903307"
+  },
+  {
+    "tool_id": "query_predictor",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903309"
+  },
+  {
+    "tool_id": "quick_cleanup_571_errors",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903310"
+  },
+  {
+    "tool_id": "quick_security_fix",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903311"
+  },
+  {
+    "tool_id": "redis_integration",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903312"
+  },
+  {
+    "tool_id": "register_p1_fixer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903313"
+  },
+  {
+    "tool_id": "resilience_analyzer",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903314"
+  },
+  {
+    "tool_id": "scan_p1_issues",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903315"
+  },
+  {
+    "tool_id": "security_reporter",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903317"
+  },
+  {
+    "tool_id": "setup_git_hooks",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903318"
+  },
+  {
+    "tool_id": "smart_review_reminder",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903319"
+  },
+  {
+    "tool_id": "smart_tool_finder",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903320"
+  },
+  {
+    "tool_id": "test_real_time_distill",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903322"
+  },
+  {
+    "tool_id": "tool_consolidator",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903323"
+  },
+  {
+    "tool_id": "tool_similarity_engine",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903324"
+  },
+  {
+    "tool_id": "update_p1_remediation",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903325"
+  },
+  {
+    "tool_id": "usage_pattern_miner",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903327"
+  },
+  {
+    "tool_id": "verify_cli_aliases",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903328"
+  },
+  {
+    "tool_id": "verify_deployment",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903329"
+  },
+  {
+    "tool_id": "verify_p1_fix",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903330"
+  },
+  {
+    "tool_id": "verify_p6_quick",
+    "name": "",
+    "file": "",
+    "deleted_at": "2026-03-19T17:40:49.903331"
+  }
+]

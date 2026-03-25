@@ -1,0 +1,92 @@
+# tool_name: read_file
+# created_at: 2026-03-23T11:53:41.420097
+# ---
+        
+        # 抓取新闻
+        limit = int(sys.argv[2]) if len(sys.argv) > 2 and sys.argv[2].isdigit() else 10
+        print(f"  抓取新闻...")
+        news = fetch_all(quiet=True)[:limit]
+        
+        # LLM 分析
+        print(f"  LLM 分析中...")
+        analyzed = analyze_batch(news)
+        
+        # 生成报告
+        report = generate_report(analyzed)
+        print(report)
+    
+    elif cmd == "sentiment":
+        header("市场情绪分析")
+        from llm_enhanced import analyze_batch, market_sentiment
+        from news_fetcher import fetch_all
+        
+        news = fetch_all(quiet=True)[:20]
+        analyzed = analyze_batch(news)
+        sentiment = market_sentiment(analyzed)
+        
+        print(f"""
+  情绪指数: {sentiment['score']}
+  市场判断: {sentiment['label']}
+  
+  分布:
+    📈 正面: {sentiment['distribution']['positive']}
+    ➖ 中性: {sentiment['distribution']['neutral']}
+    📉 负面: {sentiment['distribution']['negative']}
+""")
+    
+    elif cmd == "help":
+        header("NewsHub Help")
+        print(f"""
+  {BOLD}用法:{RESET}
+    python news_hub.py <command> [options]
+
+  {BOLD}命令:{RESET}
+    {GREEN}fetch{RESET}     抓取新闻（不推送）
+    {GREEN}feishu{RESET}    飞书推送
+    {GREEN}qq{RESET}        QQ推送
+    {GREEN}test{RESET}     测试所有
+    {GREEN}quick{RESET}    快速模式
+    {GREEN}server{RESET}   启动RSS服务
+    {GREEN}export{RESET}   导出新闻(JSON/CSV)
+    {GREEN}report{RESET}    生成每日简报
+    {GREEN}db{RESET}        数据库管理
+    {GREEN}trends{RESET}    趋势分析
+    {GREEN}sub{RESET}       订阅管理
+    {GREEN}watch{RESET}     关键词监控
+    {GREEN}help{RESET}     显示帮助
+
+  {BOLD}飞书子命令:{RESET}
+    compact    紧凑视图（纯文本）
+    preview    预览新闻（不发送）
+    digest     摘要推送（6条）
+    alert      关键词告警
+    all        全部推送（8条）
+    daily      日报
+    stats      统计信息
+    summary    摘要卡片（统计概览）
+    sentiment  情感分析
+    cat <类型> 分类推送 (stock/forex/commodity/macro/trade/tech/china/us/crypto/energy)
+    test       连接测试
+    welcome    欢迎卡片
+
+  {BOLD}选项:{RESET}
+    --no-cache    禁用缓存，强制重新抓取
+    --cache-only  仅使用缓存
+
+  {BOLD}示例:{RESET}
+    python news_hub.py fetch
+    python news_hub.py feishu compact
+    python news_hub.py feishu digest --no-cache
+    python news_hub.py feishu alert
+    python news_hub.py export csv --limit 20
+    python news_hub.py server
+    python news_hub.py report
+    python news_hub.py db
+""")
+    else:
+        print(f"{YELLOW}Unknown: {cmd}{RESET}")
+        print(f"Run: {GREEN}python news_hub.py help{RESET}")
+
+
+if __name__ == "__main__":
+    main()

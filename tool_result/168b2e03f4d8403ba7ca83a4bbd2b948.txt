@@ -1,0 +1,105 @@
+# tool_name: read_file
+# created_at: 2026-03-23T11:59:39.682520
+# ---
+
+def load_llm_cache():
+    try:
+        with open(LLM_CACHE_FILE, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except:
+        return {}
+
+def save_llm_cache(cache):
+    with open(LLM_CACHE_FILE, 'w', encoding='utf-8') as f:
+        json.dump(cache, f, ensure_ascii=False, indent=2)
+
+def analyze_with_llm(title):
+    title_hash = hashlib.md5(title.encode()).hexdigest()
+    cache = load_llm_cache()
+    if title_hash in cache:
+        return cache[title_hash]
+    if not check_ollama_status():
+        return None
+    prompt = f"""分析以下金融新闻，返回详细分析结果:
+
+新闻: {title}
+
+请返回JSON格式（只返回JSON，不要其他内容）:
+{{"sentiment": "positive|negative|neutral", "sentiment_score": -100到100的整数, "urgency": "high|medium|low", "markets": ["affected markets"], "entities": ["关键公司/人"], "keywords": ["关键词"], "summary": "15字中文摘要", "impact": "high|medium|low", "advice": "bullish|bearish|neutral"}}
+只返回JSON，不要解释。"""
+    response = call_ollama(prompt)
+    if response:
+        try:
+            for line in response.split('\n'):
+                line = line.strip()
+                if line.startswith('{') and line.endswith('}'):
+                    result = json.loads(line)
+                    cache[title_hash] = result
+                    save_llm_cache(cache)
+                    return result
+        except:
+            pass
+    return None
+
+def enrich_with_llm(news_list, max_items=10):
+    if not check_ollama_status():
+        return news_list
+    start = time.time()
+    print(f'  🤖 启用本地LLM并行分析...')
+    cache = load_llm_cache()
+    llm_count = 0
+    all_results = {}
+    uncached = []
+    for i, news in enumerate(news_list[:max_items]):
+        title = news.get('title', '')
+        title_hash = hashlib.md5(title.encode()).hexdigest()
+        if title_hash in cache:
+            all_results[i] = cache[title_hash]
+        else:
+            uncached.append((i, title))
+    if uncached:
+        with ThreadPoolExecutor(max_workers=5) as executor:
+            futures = {executor.submit(analyze_with_llm, title): (i, title) for i, title in uncached}
+            for future in futures:
+                i, title = futures[future]
+                try:
+                    result = future.result()
+                    if result:
+                        all_results[i] = result
+                        llm_count += 1
+                except:
+                    pass
+    for idx, news in enumerate(news_list[:max_items]):
+        if idx in all_results:
+            analysis = all_results[idx]
+            news['llm_sentiment'] = analysis.get('sentiment', 'neutral')
+            news['llm_summary'] = analysis.get('summary', '')
+            news['llm_urgency'] = analysis.get('urgency', 'medium')
+            news['llm_score'] = analysis.get('sentiment_score', 0)
+            news['llm_markets'] = analysis.get('markets', [])
+            news['llm_entities'] = analysis.get('entities', [])
+            news['llm_keywords'] = analysis.get('keywords', [])
+            news['llm_impact'] = analysis.get('impact', 'medium')
+            news['llm_advice'] = analysis.get('advice', 'neutral')
+            if analysis.get('sentiment') in ['positive', 'negative']:
+                news['sentiment'] = analysis['sentiment']
+    elapsed = time.time() - start
+    print(f'  ✅ LLM分析完成: {llm_count}条 ({elapsed:.1f}s)')
+    return news_list
+
+if __name__ == '__main__':
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--llm', action='store_true', help='启用LLM分析')
+    parser.add_argument('--limit', type=int, default=10, help='限制条数')
+    args = parser.parse_args()
+    
+    news = fetch_all()
+    if args.llm:
+        news = enrich_with_llm(news, args.limit)
+    
+    for i, n in enumerate(news[:args.limit], 1):
+        score = n.get('llm_score', n.get('score', 0))
+        sentiment = n.get('llm_sentiment', n.get('sentiment', 'neutral'))
+        emoji = '🟢' if sentiment == 'positive' else '🔴' if sentiment == 'negative' else '⚪'
+        print(f'{i}. {emoji} [{score:+3d}] [{n["source"]}] {n["title"]}')

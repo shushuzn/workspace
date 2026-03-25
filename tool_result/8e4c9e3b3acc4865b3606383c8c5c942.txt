@@ -1,0 +1,36 @@
+# tool_name: read_file
+# created_at: 2026-03-22T15:01:45.271219
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\correlation.py  (lines 1-30 of 161)
+"""Correlation analysis for Stock PRO"""
+
+def calc_correlation(returns1, returns2):
+    """Calculate Pearson correlation between two return series"""
+    if len(returns1) != len(returns2) or len(returns1) < 2:
+        return None
+    
+    n = len(returns1)
+    mean1 = sum(returns1) / n
+    mean2 = sum(returns2) / n
+    
+    numerator = sum((r1 - mean1) * (r2 - mean2) for r1, r2 in zip(returns1, returns2))
+    denom1 = sum((r - mean1) ** 2 for r in returns1) ** 0.5
+    denom2 = sum((r - mean2) ** 2 for r in returns2) ** 0.5
+    
+    if denom1 == 0 or denom2 == 0:
+        return None
+    
+    return numerator / (denom1 * denom2)
+
+
+def get_returns_from_history(symbol, days=30):
+    """Get returns from history"""
+    from stock_pro.history import _history
+    
+    prices = _history.get_price_history(symbol, days)
+    if len(prices) < 3:
+        return []
+    
+    returns = []
+
+[131 more lines. Use start_line=31 to continue.]

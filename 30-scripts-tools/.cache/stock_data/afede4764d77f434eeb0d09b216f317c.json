@@ -1,0 +1,22 @@
+{
+  "symbol": "AAPL",
+  "data_type": "stock",
+  "cached_at": 1773994461.0827653,
+  "data": {
+    "price": 1000000,
+    "volume": 150.0,
+    "news": [
+      {
+        "title": "News 1"
+      },
+      {
+        "title": "News 2"
+      }
+    ],
+    "financials": {
+      "pe": 25.5,
+      "eps": 5.8
+    }
+  },
+  "size": 127
+}

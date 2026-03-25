@@ -1,0 +1,32 @@
+# tool_name: read_file
+# created_at: 2026-03-22T09:52:37.211290
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro_v4.py  (lines 105-130 of 765)
+    # Fallback database for when API fails
+    FALLBACK = {
+        "META":  {"price": 593, "mc": 1.5e12, "pe": 35, "beta": 1.2, "eps_t": 23.5, "eps_f": 27.5, "peg": 1.4, "w52h": 740, "w52l": 350},
+        "NVDA":  {"price": 172, "mc": 840e9, "pe": 35, "beta": 1.7, "eps_t": 4.90, "eps_f": 7.50, "peg": 0.9, "w52h": 974, "w52l": 138},
+        "AAPL":  {"price": 248, "mc": 3.8e12, "pe": 32, "beta": 1.2, "eps_t": 7.75, "eps_f": 8.50, "peg": 3.0, "w52h": 315, "w52l": 164},
+        "MSFT":  {"price": 382, "mc": 2.8e12, "pe": 36, "beta": 0.9, "eps_t": 10.5, "eps_f": 12.0, "peg": 2.5, "w52h": 468, "w52l": 275},
+        "GOOGL": {"price": 301, "mc": 1.9e12, "pe": 25, "beta": 1.1, "eps_t": 6.5, "eps_f": 7.8, "peg": 1.2, "w52h": 420, "w52l": 275},
+        "AMZN":  {"price": 205, "mc": 2.1e12, "pe": 45, "beta": 1.1, "eps_t": 4.55, "eps_f": 6.0, "peg": 2.0, "w52h": 360, "w52l": 185},
+        "JPM":   {"price": 287, "mc": 415e9, "pe": 12, "beta": 1.1, "eps_t": 23.5, "eps_f": 25.5, "peg": 1.8, "w52h": 430, "w52l": 280},
+        "JNJ":   {"price": 235, "mc": 565e9, "pe": 22, "beta": 0.5, "eps_t": 10.7, "eps_f": 11.5, "peg": 3.0, "w52h": 380, "w52l": 315},
+        "AMD":   {"price": 165, "mc": 265e9, "pe": 28, "beta": 1.6, "eps_t": 4.90, "eps_f": 6.0, "peg": 1.2, "w52h": 500, "w52l": 120},
+    }
+    
+    fb = FALLBACK.get(sym.upper().strip())
+    if fb:
+        return {**fb, "success": True}
+    
+    try:
+        import ssl
+        ctx = ssl.create_default_context()
+        ctx.check_hostname = False
+        ctx.verify_mode = ssl.CERT_NONE
+        
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{sym}?interval=1d&range=5d"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=15, context=ctx) as r:
+
+[635 more lines. Use start_line=131 to continue.]

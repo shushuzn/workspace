@@ -1,0 +1,16 @@
+{
+  "symbol": "META",
+  "source": "yahoo-api",
+  "price": 606.7,
+  "change": -8.98,
+  "change_percent": -1.46,
+  "volume": 12389745,
+  "market_cap": 0,
+  "pe_ratio": null,
+  "high": 613.0,
+  "low": 602.26,
+  "open": 606.7,
+  "previous_close": 615.68,
+  "timestamp": "2026-03-20T19:59:11.874747",
+  "currency": "USD"
+}

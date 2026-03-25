@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-22T18:21:25.869927
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\main.py  (lines 40-70 of 913)
+from stock_pro.benchmark import benchmark_vs_index, sector_benchmark, score_distribution
+from stock_pro.backtest import backtest_report, backtest_all
+from stock_pro.alerts import add_alert, remove_alert, list_alerts, check_alerts
+from stock_pro.technical import technical_report
+from stock_pro.sync import sync_yfinance, get_sync_status
+from stock_pro.pdf_export import export_pdf, full_pdf_report
+from stock_pro.optimizer import optimize_report
+from stock_pro.earnings_analysis import earnings_report, predict_earnings_beat
+from stock_pro.sentiment import sentiment_report, sector_sentiment, research_report, combined_analysis, sentiment_report_full, institutional_report, institutional_analysis, fetch_jin10_news, jin10_news_report, jin10_stock_news, fetch_cn_news, get_cn_news_for_stock
+from stock_pro.news_api import get_news as get_live_news, news_report as live_news_report, get_stats as get_news_stats
+from stock_pro.realtime_news import format_report as realtime_news_report, get_realtime_news, format_report
+from stock_pro.rss_news import format_report as rss_report, get_news as rss_get_news
+from stock_pro.fast_news import format_report as fast_news_report, get_news as fast_get_news
+from stock_pro.screener_v2 import advanced_screener_report, value_picks, growth_picks, dividend_picks
+from stock_pro.dashboard import dashboard_report, Dashboard
+from stock_pro.watchlist_v2 import watchlist_performance, compare_watchlists
+from stock_pro.exporters import export_json, export_csv, export_markdown, export_html, export_all
+from stock_pro.insights import get_portfolio_insights, generate_investment_themes
+from stock_pro.report_builder import ReportBuilder, quick_report, investment_summary
+from stock_pro.market import get_market_overview, market_report, sector_rotation_report, market_breadth_indicator
+from stock_pro.advanced_metrics import quality_report, risk_return_report, value_vs_growth_report, get_advanced_metrics
+from stock_pro.compare import compare_stocks, compare_risk, find_winners
+from stock_pro.earnings_analysis import earnings_report, predict_earnings_beat
+from stock_pro.dividend_analysis import calc_dividend_score
+from stock_pro.picks import dividend_report
+from stock_pro.fscore import fscore_report, calc_fscore
+from stock_pro.core import A  # For picks
+
+
+BANNER = """
++==============================================================+
+
+[843 more lines. Use start_line=71 to continue.]

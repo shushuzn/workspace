@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-23T22:58:41.269532
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\core\async_fetcher.py  (lines 1-50 of 514)
+#!/usr/bin/env python3
+"""NewsHub 异步新闻抓取器 v3.2 - 限流 + 指数退避 + 详细统计"""
+
+import sys
+
+sys.stdout.reconfigure(encoding="utf-8")
+import asyncio
+import aiohttp
+import json
+import ssl
+from datetime import datetime
+from pathlib import Path
+from typing import List, Dict, Optional
+from dataclasses import dataclass, asdict
+import time
+import hashlib
+import re
+import platform
+import logging
+from collections import defaultdict
+
+# 导入共享的 hash 计算函数
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).parent))
+from shared import compute_hash
+
+# 导入新闻处理器（用于分类和情感分析）
+_sys.path.insert(0, str(Path(__file__).parent.parent))
+try:
+    from analyze.news_processor import classify_news, get_sentiment_score
+except ImportError:
+    from news_processor import classify_news, get_sentiment_score
+
+if platform.system() == "Windows":
+    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+CACHE_FILE = Path(__file__).parent.parent / ".news_cache.json"
+HASH_FILE = Path(__file__).parent.parent / ".news_hashes.json"
+SOURCES_FILE = Path(__file__).parent.parent / "config" / "sources.json"
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    datefmt="%H:%M:%S",
+    force=True,
+)
+logger = logging.getLogger("NewsHub.Fetcher")
+
+if sys.platform == "win32":
+    sys.stderr.reconfigure(encoding="utf-8")
+
+[464 more lines. Use start_line=51 to continue.]

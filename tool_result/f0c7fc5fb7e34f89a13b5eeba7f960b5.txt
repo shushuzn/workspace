@@ -1,0 +1,106 @@
+# tool_name: glob_search
+# created_at: 2026-03-23T00:08:57.912395
+# ---
+08-collectors\arxiv-collector\archive\2026-03-02-llm-own-words.md
+08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csAI\125205-An Agentic LLM Framework for Adverse Media Screeni.md
+08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csAI\125206-ODAR Principled Adaptive Routing for LLM Reasoning.md
+08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csCL\125206-Humans and LLMs Diverge on Probabilistic Inference.md
+08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csLG\125206-Detoxifying LLMs via Representation Erasure-Based .md
+08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csSE\125206-SGAgent Suggestion-Guided LLM-Based Multi-Agent Fr.md
+08-collectors\hackernews-技术\daily\2026\2026-03\2026-03-02\20260302-211744-Right-sizes LLM models to your system's RAM, CPU, .md
+08-collectors\medium-文章\Medium\Archive\2026-03-05\2026-03-05_2603.05471v1_Leveraging-LLM-Parametric-Knowledge-for-Fact-Check.md
+08-collectors\medium-文章\Medium\Archive\2026-03-05\2026-03-05_2603.05500v1_POET-X-Memory-efficient-LLM-Training-by-Scaling-Or.md
+08-collectors\medium-文章\Medium\Archive\2026-03-06\medium-2026-03-06-We-Put-Our-Stories-In-The-Training-Data-One-LLM-A.md
+08-collectors\medium-文章\Medium\Raw\medium-2026-03-07-Need-to-Know-When-an-LLM-Decides-Who-Gets-the-Ful.md
+08-collectors\medium-文章\Medium\Raw\medium-2026-03-07-Need-to-Know-When-an-LLM-Decides-Who-Gets-the-Ful.meta.json
+08-collectors\medium-文章\Medium\Raw\medium-2026-03-08-Are-Local-LLMs-Actually-Fast-Enough-I-Benchmarked.md
+08-collectors\medium-文章\Medium\Raw\medium-2026-03-08-Are-Local-LLMs-Actually-Fast-Enough-I-Benchmarked.meta.json
+08-collectors\medium-文章\Medium\Raw\medium-2026-03-08-Your-LLM-Is-Smart-So-Why-Cant-It-Do-Anything.md
+08-collectors\medium-文章\Medium\Raw\medium-2026-03-08-Your-LLM-Is-Smart-So-Why-Cant-It-Do-Anything.meta.json
+08-collectors\medium-文章\Medium\Raw\medium-2026-03-10-Why-SKILLmd-Matters-More-Than-You-Think-in-Agenti.md
+08-collectors\medium-文章\Medium\Raw\medium-2026-03-10-Why-SKILLmd-Matters-More-Than-You-Think-in-Agenti.meta.json
+08-collectors\medium-文章\Raw\AI-Technical\medium-2026-03-07-Context-Pollution-Do-LLMs-Benefit-From-Their-Own-.meta.json
+08-collectors\medium-文章\Raw\medium-2026-03-07-Context-Pollution-Do-LLMs-Benefit-From-Their-Own-.meta.json
+08-collectors\medium-文章\Raw\medium-2026-03-07-LLMs-see-shadows-World-models-see-reality.meta.json
+08-collectors\medium-文章\Raw\medium-2026-03-07-This-one-math-trick-could-make-LLMs-remember-100x-.meta.json
+08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-201524-R Benchmarked 94 LLM endpoints for jan 2026 open source is now within 5 quality .md
+08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-201636-I used steelman prompting to audit bias across six major LLMs The default-to-ste.md
+08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-201659-A panel of top LLMs iteratively refines a creative short story After hundreds of.md
+08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-201729-New method could increase LLM training efficiency.md
+08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-224711-P Compare GPU and LLM pricing across all major providers.md
+08-collectors\twitter-推特\daily\2026\2026-03\2026-03-02\20260302-201514-AndrewYNg-Impressive inference speed from Inception Labs diffusion LLM.md
+08-collectors\twitter-推特\daily\2026\2026-03\2026-03-02\20260302-201519-huggingface-RT by huggingface What happens when you make an LLM drive a .md
+10-data\报告输出\comparisons\comparison-llm-20260304-0302.md
+10-RESEARCH\domain-research\领域研究\lig-conductivity-prediction-zenodo\docs\energy_efficient_llm.py
+30-scripts-tools\archive_001\llm_guide_001.py
+40-TOOLS\scripts\intent-belief-integration\test_intentkit\intentkit\intentkit\models\llm.csv
+40-TOOLS\scripts\intent-belief-integration\test_intentkit\intentkit\LLM.md
+60-DATA\collectors\08-collectors\arxiv-collector\archive\2026-03-02-llm-own-words.md
+60-DATA\collectors\08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csAI\125205-An Agentic LLM Framework for Adverse Media Screeni.md
+60-DATA\collectors\08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csAI\125206-ODAR Principled Adaptive Routing for LLM Reasoning.md
+60-DATA\collectors\08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csCL\125206-Humans and LLMs Diverge on Probabilistic Inference.md
+60-DATA\collectors\08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csLG\125206-Detoxifying LLMs via Representation Erasure-Based .md
+60-DATA\collectors\08-collectors\arxiv-论文\Archive\2026-03\2026-03-03\csSE\125206-SGAgent Suggestion-Guided LLM-Based Multi-Agent Fr.md
+60-DATA\collectors\08-collectors\hackernews-技术\daily\2026\2026-03\2026-03-02\20260302-211744-Right-sizes LLM models to your system's RAM, CPU, .md
+60-DATA\collectors\08-collectors\medium-文章\Raw\AI-Technical\medium-2026-03-07-Context-Pollution-Do-LLMs-Benefit-From-Their-Own-.meta.json
+60-DATA\collectors\08-collectors\medium-文章\Raw\medium-2026-03-07-Context-Pollution-Do-LLMs-Benefit-From-Their-Own-.meta.json
+60-DATA\collectors\08-collectors\medium-文章\Raw\medium-2026-03-07-LLMs-see-shadows-World-models-see-reality.meta.json
+60-DATA\collectors\08-collectors\medium-文章\Raw\medium-2026-03-07-This-one-math-trick-could-make-LLMs-remember-100x-.meta.json
+60-DATA\collectors\08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-201524-R Benchmarked 94 LLM endpoints for jan 2026 open source is now within 5 quality .md
+60-DATA\collectors\08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-201659-A panel of top LLMs iteratively refines a creative short story After hundreds of.md
+60-DATA\collectors\08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-201729-New method could increase LLM training efficiency.md
+60-DATA\collectors\08-collectors\reddit-社区\daily\2026\2026-03\2026-03-02\20260302-224711-P Compare GPU and LLM pricing across all major providers.md
+60-DATA\collectors\08-collectors\twitter-推特\daily\2026\2026-03\2026-03-02\20260302-201519-huggingface-RT by huggingface What happens when you make an LLM drive a .md
+60-DATA\llm_guide_001/
+60-DATA\processed\报告输出\comparisons\comparison-llm-20260304-0302.md
+60-DATA\raw\主题\llm-reasoning.md
+80-PROJECTS\rl-trading\Megatron-LM\examples\export\trtllm_export/
+80-PROJECTS\rl-trading\Megatron-LM\megatron\core\export\trtllm/
+80-PROJECTS\rl-trading\Megatron-LM\megatron\core\export\trtllm\engine_builder\trtllm_engine_builder.py
+80-PROJECTS\rl-trading\Megatron-LM\megatron\core\export\trtllm\model_to_trllm_mapping/
+80-PROJECTS\rl-trading\Megatron-LM\megatron\core\export\trtllm\trtllm_helper.py
+80-PROJECTS\rl-trading\Megatron-LM\megatron\core\export\trtllm\trtllm_layers.py
+80-PROJECTS\rl-trading\Megatron-LM\megatron\core\export\trtllm\trtllm_weights_converter/
+80-PROJECTS\rl-trading\Megatron-LM\megatron\core\export\trtllm\trtllm_weights_converter\distributed_trtllm_model_weights_converter.py
+80-PROJECTS\rl-trading\Megatron-LM\megatron\core\export\trtllm\trtllm_weights_converter\single_device_trtllm_model_weights_converter.py
+80-PROJECTS\rl-trading\Megatron-LM\tests\unit_tests\export\trtllm/
+80-PROJECTS\rl-trading\Megatron-LM\tests\unit_tests\export\trtllm\test_trtllm_distributed_gpu_converter.py
+80-PROJECTS\rl-trading\Megatron-LM\tests\unit_tests\export\trtllm\test_trtllm_helper.py
+80-PROJECTS\rl-trading\Megatron-LM\tests\unit_tests\export\trtllm\test_trtllm_layers.py
+80-PROJECTS\rl-trading\Megatron-LM\tests\unit_tests\export\trtllm\test_trtllm_single_device_converter.py
+80-PROJECTS\rl-trading\openclaw\docs\providers\litellm.md
+80-PROJECTS\rl-trading\openclaw\docs\providers\vllm.md
+80-PROJECTS\rl-trading\openclaw\docs\tools\llm-task.md
+80-PROJECTS\rl-trading\openclaw\docs\zh-CN\tools\llm-task.md
+80-PROJECTS\rl-trading\openclaw\extensions\llm-task/
+80-PROJECTS\rl-trading\openclaw\extensions\llm-task\src\llm-task-tool.test.ts
+80-PROJECTS\rl-trading\openclaw\extensions\llm-task\src\llm-task-tool.ts
+80-PROJECTS\rl-trading\openclaw\src\commands\auth-choice.apply.vllm.ts
+80-PROJECTS\rl-trading\openclaw\src\commands\onboard-auth.config-litellm.ts
+80-PROJECTS\rl-trading\openclaw\src\commands\vllm-setup.ts
+80-PROJECTS\rl-trading\openclaw\src\hooks\llm-slug-generator.ts
+80-PROJECTS\rl-trading\openclaw\src\plugins\wired-hooks-llm.test.ts
+80-PROJECTS\rl-trading\openclaw-test\launch_user_llm.sh
+80-PROJECTS\rl-trading\swe-rl\litellm.json
+80-PROJECTS\rl-trading\swe-rl\mini-swe-agent\docs\reference\models\litellm.md
+80-PROJECTS\rl-trading\swe-rl\mini-swe-agent\src\minisweagent\models\litellm_model.py
+80-PROJECTS\rl-trading\swe-rl\mini-swe-agent\tests\models\test_litellm_model.py
+92-tests\tools-tests\test_p5_llm_hypothesis.py
+99-archive\third-party\intentkit-test\intentkit\intentkit\core\manager\skills\llm.py
+99-archive\third-party\intentkit-test\intentkit\LLM.md
+99-archive\third-party\intentkit-test\intentkit\tests\core\test_llm.py
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Archive\2026-03-05\2026-03-05_2603.05471v1_Leveraging-LLM-Parametric-Knowledge-for-Fact-Check.md
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Archive\2026-03-06\medium-2026-03-06-We-Put-Our-Stories-In-The-Training-Data-One-LLM-A.md
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Raw\medium-2026-03-07-Need-to-Know-When-an-LLM-Decides-Who-Gets-the-Ful.md
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Raw\medium-2026-03-07-Need-to-Know-When-an-LLM-Decides-Who-Gets-the-Ful.meta.json
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Raw\medium-2026-03-08-Are-Local-LLMs-Actually-Fast-Enough-I-Benchmarked.md
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Raw\medium-2026-03-08-Are-Local-LLMs-Actually-Fast-Enough-I-Benchmarked.meta.json
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Raw\medium-2026-03-08-Your-LLM-Is-Smart-So-Why-Cant-It-Do-Anything.md
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Raw\medium-2026-03-08-Your-LLM-Is-Smart-So-Why-Cant-It-Do-Anything.meta.json
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Raw\medium-2026-03-10-Why-SKILLmd-Matters-More-Than-You-Think-in-Agenti.md
+99-backups\data-cleanup-20260318\60-DATA\collectors\08-collectors\medium-文章\Medium\Raw\medium-2026-03-10-Why-SKILLmd-Matters-More-Than-You-Think-in-Agenti.meta.json
+99-backups\data-cleanup-20260318-104422\60-DATA\collectors\08-collectors\medium-文章\medium-2026-03-06-We-Put-Our-Stories-In-The-Training-Data-One-LLM-A.meta.json
+99-backups\data-cleanup-20260318-104422\60-DATA\collectors\08-collectors\twitter-推特\daily\2026\2026-03\2026-03-02\20260302-201514-AndrewYNg-Impressive inference speed from Inception Labs diffusion LLM.md
+99-backups\precheck-quick-cleanup-20260318-103907\08-collectors\medium-文章\Medium\Archive\2026-03-05\2026-03-05_2603.05494v1_Censored-LLMs-as-a-Natural-Testbed-for-Secret-Know.md
+99-backups\report-cleanup-20260318-103015\30-scripts-tools\P5-1-LLM-HYPOTHESIS-REPORT.md
+99-backups\report-cleanup-20260318-103015\40-TOOLS\scripts\utils\P5-1-LLM-HYPOTHESIS-REPORT.md

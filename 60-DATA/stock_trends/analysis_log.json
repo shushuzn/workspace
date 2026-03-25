@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "analyses": [
+    {
+      "timestamp": "2026-03-20T00:40:20.516069",
+      "symbol": "TEST",
+      "trend": "bullish",
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_analyses": 1,
+    "trends_identified": 1
+  }
+}

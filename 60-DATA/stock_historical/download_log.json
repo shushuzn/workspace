@@ -1,0 +1,81 @@
+{
+  "version": "1.0",
+  "downloads": [
+    {
+      "timestamp": "2026-03-20T00:25:35.855242",
+      "symbol": "AAPL",
+      "timeframe": "1d",
+      "records": 262,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T00:25:35.862897",
+      "symbol": "600519.SS",
+      "timeframe": "1w",
+      "records": 105,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:48:07.621187",
+      "symbol": "AAPL",
+      "timeframe": "1d",
+      "records": 262,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:49:26.395817",
+      "symbol": "AAPL",
+      "timeframe": "1d",
+      "records": 252,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:51:55.545538",
+      "symbol": "GOOGL",
+      "timeframe": "1d",
+      "records": 252,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:52:56.524800",
+      "symbol": "MSFT",
+      "timeframe": "1d",
+      "records": 252,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:54:08.605271",
+      "symbol": "NVDA",
+      "timeframe": "1d",
+      "records": 252,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-20T19:59:12.686270",
+      "symbol": "META",
+      "timeframe": "1d",
+      "records": 252,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:08:08.747214",
+      "symbol": "AAPL",
+      "timeframe": "1d",
+      "records": 252,
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:08:10.127080",
+      "symbol": "600519.SS",
+      "timeframe": "1w",
+      "records": 105,
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_downloads": 10,
+    "successful": 10,
+    "failed": 0,
+    "total_records": 2246
+  }
+}

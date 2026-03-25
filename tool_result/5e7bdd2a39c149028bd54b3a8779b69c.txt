@@ -1,0 +1,24 @@
+# tool_name: read_file
+# created_at: 2026-03-22T20:59:00.771936
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\feishu_assistant.py  (lines 408-425 of 619)
+    elements = [
+        {"tag": "div", "text": {"tag": "lark_md", "content": f"**🖥️ 系统监控报告** `{time_str}`"}},
+        {"tag": "hr"},
+        {"tag": "div", "text": {"tag": "lark_md", "content": f"**CPU:** {cpu}%"}},
+        {"tag": "div", "text": {"tag": "lark_md", "content": f"**内存:** {mem_used:.1f}/{mem_total:.1f} GB ({mem.percent}%)"}},
+        {"tag": "div", "text": {"tag": "lark_md", "content": f"**磁盘:** {disk.percent}% used"}},
+        {"tag": "div", "text": {"tag": "lark_md", "content": f"**进程:** {process_count} 个运行中"}},
+        {"tag": "div", "text": {"tag": "lark_md", "content": f"**网络:** ↑{net.bytes_sent/1024/1024:.1f}MB ↓{net.bytes_recv/1024/1024:.1f}MB"}},
+        {"tag": "hr"},
+    }
+    
+    if battery:
+        icon = "🔌" if battery.power_plugged else "🔋"
+        elements.append({"tag": "div", "text": {"tag": "lark_md", "content": f"{icon} **电池:** {battery.percent}% {'已接通电源' if battery.power_plugged else '使用电池'}"}})
+    
+    elements.extend([
+        {"tag": "div", "text": {"tag": "lark_md", "content": f"**运行时间:** {str(uptime).split('.')[0]}"}},
+        {"tag": "div", "text": {"tag": "lark_md", "content": f"**系统:** {platform.system()} {platform.release()}"}},
+
+[194 more lines. Use start_line=426 to continue.]

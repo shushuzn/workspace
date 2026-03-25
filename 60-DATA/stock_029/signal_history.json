@@ -1,0 +1,44 @@
+[
+  {
+    "symbol": "AAPL",
+    "signal": "SELL",
+    "confidence": 0.7,
+    "timestamp": "2026-03-20T21:14:42.953701"
+  },
+  {
+    "symbol": "AAPL",
+    "signal": "BUY",
+    "confidence": 0.6,
+    "timestamp": "2026-03-20T21:15:16.409040"
+  },
+  {
+    "symbol": "AAPL",
+    "signal": "BUY",
+    "confidence": 0.6,
+    "timestamp": "2026-03-20T21:15:20.922708"
+  },
+  {
+    "symbol": "GOOGL",
+    "signal": "SELL",
+    "confidence": 0.7,
+    "timestamp": "2026-03-20T21:15:20.923873"
+  },
+  {
+    "symbol": "MSFT",
+    "signal": "SELL",
+    "confidence": 0.7,
+    "timestamp": "2026-03-20T21:15:20.924490"
+  },
+  {
+    "symbol": "AAPL",
+    "signal": "HOLD",
+    "confidence": 0.5,
+    "timestamp": "2026-03-20T21:29:32.959697"
+  },
+  {
+    "symbol": "AAPL",
+    "signal": "BUY",
+    "confidence": 0.6,
+    "timestamp": "2026-03-20T21:32:03.505638"
+  }
+]

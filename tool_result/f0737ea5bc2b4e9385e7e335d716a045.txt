@@ -1,0 +1,27 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:33:35.850466
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\core.py  (lines 20-40 of 190)
+    
+    try:
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=1d"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read())
+            price = data["chart"]["result"][0]["meta"]["regularMarketPrice"]
+            now = datetime.now().isoformat()
+            cache.set(cache_key, (price, now, now), ttl=LIVE_CACHE_TTL)
+            return price, "live", now, now
+    except:
+        fallback = P.get(symbol, 0), "fallback", datetime.now().isoformat(), datetime.now().isoformat()
+        cache.set(cache_key, fallback, ttl=LIVE_CACHE_TTL)
+        return fallback
+
+def fetch_batch(symbols):
+    """Batch fetch - cache first, then fetch remaining"""
+    results = {}
+    uncached = []
+    
+    # Check cache
+
+[150 more lines. Use start_line=41 to continue.]

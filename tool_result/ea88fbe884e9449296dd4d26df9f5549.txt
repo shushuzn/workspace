@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-23T22:59:12.000357
+# ---
+
+    if not quiet:
+        print(f"\n  ⏱️ 耗时: {elapsed:.1f}s")
+        print(f"  📰 总数: {len(news_list)} → 去重后: {len(enriched)}")
+
+    try:
+        cache_data = {
+            "updated": datetime.now().isoformat(),
+            "total": len(enriched),
+            "news": [n.to_dict() for n in enriched],
+        }
+        with open(CACHE_FILE, "w", encoding="utf-8") as f:
+            json.dump(cache_data, f, ensure_ascii=False, indent=2)
+    except Exception as e:
+        logger.error(f"缓存保存失败: {e}")
+
+    return [n.to_dict() for n in enriched]
+
+
+def fetch_all(quiet: bool = False) -> List[dict]:
+    return asyncio.run(async_fetch_news(quiet))
+
+
+if __name__ == "__main__":
+    import argparse
+
+    parser = argparse.ArgumentParser(description="异步新闻抓取")
+    parser.add_argument("--quiet", "-q", action="store_true", help="静默模式")
+    parser.add_argument("--benchmark", "-b", action="store_true", help="性能测试")
+
+    args = parser.parse_args()
+
+    if args.benchmark:
+        print("\n  🔬 性能测试")
+        print("  " + "─" * 40)
+
+        start = time.time()
+        news = fetch_all(quiet=True)
+        async_time = time.time() - start
+
+        print(f"\n  异步版本: {async_time:.2f}s ({len(news)} 条)")
+        print(f"  平均每源: {async_time / 9:.2f}s")
+    else:
+        fetch_all(quiet=args.quiet)

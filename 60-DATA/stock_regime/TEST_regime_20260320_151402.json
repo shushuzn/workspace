@@ -1,0 +1,33 @@
+{
+  "analysis_date": "2026-03-20T15:14:02.187404",
+  "data_points": 200,
+  "trend_analysis": {
+    "regime": "sideways",
+    "confidence": 0.6,
+    "ma_diff_percent": 1.89,
+    "description": "震荡市 - 均线粘合，无明显趋势 (均线差：1.89%)"
+  },
+  "volatility_analysis": {
+    "regime": "medium",
+    "volatility": 1.98,
+    "annualized_vol": 31.48,
+    "description": "中等波动率市场 (年化波动率：31.48%)"
+  },
+  "strength_analysis": {
+    "strength": "weak",
+    "trend_score": 4.6,
+    "description": "弱趋势/震荡 (趋势强度评分：4.6/100)"
+  },
+  "sentiment_analysis": {
+    "sentiment": "bearish",
+    "volume_trend": "increasing",
+    "price_trend": "down",
+    "description": "看跌情绪 - 放量下跌"
+  },
+  "overall_regime": "sideways_market",
+  "confidence": 0.7,
+  "recommendations": [
+    "震荡市，适合高抛低吸",
+    "等待明确突破信号"
+  ]
+}

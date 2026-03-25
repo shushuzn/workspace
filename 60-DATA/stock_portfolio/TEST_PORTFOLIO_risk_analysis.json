@@ -1,0 +1,138 @@
+{
+  "portfolio_name": "TEST_PORTFOLIO",
+  "analyzed_at": "2026-03-20T00:57:46.465276",
+  "positions": {
+    "AAPL": {
+      "value": 40000,
+      "weight": 0.4
+    },
+    "GOOGL": {
+      "value": 30000,
+      "weight": 0.3
+    },
+    "MSFT": {
+      "value": 20000,
+      "weight": 0.2
+    },
+    "AMZN": {
+      "value": 10000,
+      "weight": 0.1
+    }
+  },
+  "total_value": 100000,
+  "correlation_analysis": {
+    "symbols": [
+      "AAPL",
+      "GOOGL",
+      "MSFT",
+      "AMZN"
+    ],
+    "correlation_matrix": {
+      "AAPL": {
+        "AAPL": 1.0,
+        "GOOGL": -0.154,
+        "MSFT": -0.026,
+        "AMZN": -0.126
+      },
+      "GOOGL": {
+        "AAPL": -0.154,
+        "GOOGL": 1.0,
+        "MSFT": 0.006,
+        "AMZN": 0.076
+      },
+      "MSFT": {
+        "AAPL": -0.026,
+        "GOOGL": 0.006,
+        "MSFT": 1.0,
+        "AMZN": 0.015
+      },
+      "AMZN": {
+        "AAPL": -0.126,
+        "GOOGL": 0.076,
+        "MSFT": 0.015,
+        "AMZN": 1.0
+      }
+    },
+    "periods": 100,
+    "calculated_at": "2026-03-20T00:57:46.465852"
+  },
+  "var_analysis": {
+    "individual_var": {
+      "AAPL": {
+        "method": "historical",
+        "confidence": 0.95,
+        "var": -0.0178,
+        "var_pct": -1.78,
+        "interpretation": "95% confident max loss won't exceed -1.78%"
+      },
+      "GOOGL": {
+        "method": "historical",
+        "confidence": 0.95,
+        "var": -0.016,
+        "var_pct": -1.6,
+        "interpretation": "95% confident max loss won't exceed -1.60%"
+      },
+      "MSFT": {
+        "method": "historical",
+        "confidence": 0.95,
+        "var": -0.0156,
+        "var_pct": -1.56,
+        "interpretation": "95% confident max loss won't exceed -1.56%"
+      },
+      "AMZN": {
+        "method": "historical",
+        "confidence": 0.95,
+        "var": -0.0151,
+        "var_pct": -1.51,
+        "interpretation": "95% confident max loss won't exceed -1.51%"
+      }
+    },
+    "portfolio_var": {
+      "confidence": 0.95,
+      "portfolio_std": 0.006,
+      "portfolio_var": 983.17,
+      "portfolio_var_pct": 0.98,
+      "total_value": 100000,
+      "interpretation": "95% confident max 1-day loss won't exceed $983.17"
+    }
+  },
+  "diversification_analysis": {
+    "diversification_score": 48.5,
+    "rating": "Fair",
+    "avg_correlation": -0.035,
+    "correlation_score": 25.9,
+    "concentration_score": 22.6,
+    "hhi": 0.3,
+    "num_positions": 4,
+    "interpretation": "Moderate diversification, consider adding uncorrelated assets"
+  },
+  "risk_concentration": {
+    "contributions": {
+      "AAPL": {
+        "weight": 0.4,
+        "risk": 0.000141,
+        "contribution": 0.0047
+      },
+      "GOOGL": {
+        "weight": 0.3,
+        "risk": 0.000138,
+        "contribution": 0.0035
+      },
+      "MSFT": {
+        "weight": 0.2,
+        "risk": 0.000143,
+        "contribution": 0.0024
+      },
+      "AMZN": {
+        "weight": 0.1,
+        "risk": 0.000138,
+        "contribution": 0.0012
+      }
+    },
+    "largest_contributor": "AAPL",
+    "largest_contribution": 0.0047
+  },
+  "recommendations": [
+    "Portfolio risk metrics within acceptable ranges"
+  ]
+}

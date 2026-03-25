@@ -1,0 +1,45 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T22:59:00.709090
+# ---
+async_fetcher.py:409:                  logger.error(f"[{name}] 异常: {result}")
+async_fetcher.py:410:              else:
+async_fetcher.py:411:                  news_list = result
+async_fetcher.py:412:                  stats[name] = len(news_list)
+async_fetcher.py:413:                  all_news.extend(news_list)
+async_fetcher.py:414:  
+async_fetcher.py:415:          await self.close_session()
+async_fetcher.py:416:  
+async_fetcher.py:417:          print(f"\n  ▶ 并发抓取完成 ({elapsed:.2f}s)")
+async_fetcher.py:418:          for name, count in stats.items():
+async_fetcher.py:419:              icon = "✓" if count > 0 else "✗"
+async_fetcher.py:420:              print(f"    {icon} {name}: {count}")
+async_fetcher.py:421:  
+async_fetcher.py:422:          summary = self.stats.get_summary()
+async_fetcher.py:423:          logger.info(
+async_fetcher.py:424:              f"抓取统计: 成功 {summary['successful']}, 失败 {summary['failed']}, 重试 {summary['retried']}"
+async_fetcher.py:425:          )
+async_fetcher.py:426:  
+async_fetcher.py:427:          return all_news
+async_fetcher.py:428:  
+async_fetcher.py:429:>     def deduplicate(self, news_list: List[NewsItem]) -> List[NewsItem]:
+async_fetcher.py:430:          unique = []
+async_fetcher.py:431:          new_hashes = set()
+async_fetcher.py:432:  
+async_fetcher.py:433:          for news in news_list:
+async_fetcher.py:434:              if news.hash not in self.existing_hashes and news.hash not in new_hashes:
+async_fetcher.py:435:                  unique.append(news)
+async_fetcher.py:436:                  new_hashes.add(news.hash)
+async_fetcher.py:437:  
+async_fetcher.py:438:          return unique
+async_fetcher.py:439:  
+async_fetcher.py:440:      def enrich(self, news_list: List[NewsItem]) -> List[NewsItem]:
+async_fetcher.py:441:          for news in news_list:
+async_fetcher.py:442:              news.category = classify_news(news.title)
+async_fetcher.py:443:              news.score = get_sentiment_score(news.title)
+async_fetcher.py:444:          return news_list
+async_fetcher.py:445:  
+async_fetcher.py:446:  
+async_fetcher.py:447:  # ========== 主函数 ==========
+async_fetcher.py:448:  async def async_fetch_news(quiet: bool = False) -> List[dict]:
+async_fetcher.py:449:      config = load_config()
+---

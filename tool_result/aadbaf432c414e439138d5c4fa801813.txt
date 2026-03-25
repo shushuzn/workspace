@@ -1,0 +1,71 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T13:25:45.450612
+# ---
+
+[1m[36m──────────────────────────────────────────────────[0m
+[1m[36m  新闻评分[0m
+[1m[36m──────────────────────────────────────────────────[0m
+
+
+  🏆 新闻排行榜 (Top 15)
+  ──────────────────────────────────────────────────────────────────────
+
+   1. 🔴 [S]  90分
+      印度可口可乐装瓶商SLMG称中东战争恐推高价格
+      📰 新浪财经 | 📊 critical
+
+   2. 🟠 [A]  75分
+      IEA称中东40多项能源资产“严重受损” 冲突的影响为三次能源危机之和
+      📰 新浪财经 | 📊 critical
+
+   3. 🟡 [B]  47分
+      美国关税砸遍的废墟上，站着中国车企
+      📰 虎嗅 | 📊 low
+
+   4. 🟡 [B]  45分
+      Stocks Sink in Broad AI Rout Sparked by ...
+      📰 华尔街日报 | 📊 low
+
+   5. 🟡 [B]  45分
+      DeepSeek Won't Sink U.S. AI Titans
+      📰 华尔街日报 | 📊 low
+
+   6. 🟡 [B]  45分
+      中国海外宏洋集团发布年度业绩 股东应占溢利3.05亿元同比减少68.07%
+      📰 新浪财经 | 📊 medium
+
+   7. 🟡 [B]  45分
+      华润啤酒发布年度业绩 股东应占溢利33.71亿元同比减少28.87%
+      📰 新浪财经 | 📊 medium
+
+   8. 🟡 [B]  45分
+      嘉里建设发布年度业绩 股东应占溢利9.38亿港元同比增加16%
+      📰 新浪财经 | 📊 medium
+
+   9. 🟡 [B]  45分
+      泸州银行发布年度业绩 归母净利润15.41亿元同比增加20.83%
+      📰 新浪财经 | 📊 medium
+
+  10. 🟡 [B]  45分
+      港股午评：三大指数均跌超3% 科网股、黄金股普跌 航空股下挫 赤峰黄金跌近25%
+      📰 新浪财经 | 📊 low
+
+  11. 🟡 [B]  40分
+      Comex Gold, Silver Settle Lower
+      📰 华尔街日报 | 📊 low
+
+  12. 🟡 [B]  40分
+      Financial Services Roundup: Market Talk
+      📰 华尔街日报 | 📊 low
+
+  13. 🟡 [B]  40分
+      Arabica Coffee Prices Hit Record on U.S....
+      📰 华尔街日报 | 📊 low
+
+  14. 🟡 [B]  40分
+      Swiss franc, Japanese yen Rise as DeepSe...
+      📰 华尔街日报 | 📊 low
+
+  15. 🟡 [B]  40分
+      Natural Gas Falls on Shifting Weather Fo...
+      📰 华尔街日报 | 📊 low

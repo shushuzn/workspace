@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-21T17:11:47.680023
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\idle-empire\css\style.css  (lines 1-100 of 1555)
+/* ===================================
+   Idle Empire v0.6 - Horizontal Layout
+   =================================== */
+
+:root {
+    --primary: #4CAF50;
+    --secondary: #2196F3;
+    --danger: #f44336;
+    --gold: #FFD700;
+    --gold-dark: #B8860B;
+    --bg: #0f0f1a;
+    --bg2: #1a1a2e;
+    --card: #16213e;
+    --card-hover: #1e2a4a;
+    --text: #eee;
+    --muted: #888;
+    --border: rgba(255,255,255,0.1);
+    --glow: rgba(255,215,0,0.4);
+}
+
+[data-theme="light"] {
+    --bg: #f5f7fa;
+    --bg2: #e8ecf1;
+    --card: #ffffff;
+    --card-hover: #f8f9fa;
+    --text: #2c3e50;
+    --muted: #7f8c8d;
+    --border: rgba(0,0,0,0.1);
+    --glow: rgba(255,215,0,0.6);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Segoe UI', 'Microsoft YaHei', system-ui, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* ========== Main Layout - Horizontal ========== */
+.game-layout {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height: 100vh;
+    gap: 0;
+}
+
+/* ========== Left Panel ========== */
+.left-panel {
+    grid-row: 1 / 3;
+    background: var(--card);
+    border-right: 1px solid var(--border);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    background: var(--card-hover);
+    color: var(--text);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--gold) 0%, #ff9500 100%);
+    color: #000;
+    border: none;
+}
+
+.btn-danger {
+    background: rgba(244,67,54,0.1);
+    border-color: rgba(244,67,54,0.3);
+    color: var(--danger);
+}
+
+.save-status { font-size: 0.8rem; color: var(--muted); text-align: center; }
+.status { font-size: 0.85rem; color: var(--primary); text-align: center; }
+
+/* ========== Main Content Area ========== */
+.main {
+
+[1455 more lines. Use start_line=101 to continue.]

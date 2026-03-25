@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-23T22:58:31.882345
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\analyze\quality_scorer.py  (lines 1-50 of 234)
+#!/usr/bin/env python3
+"""NewsHub 新闻质量评分系统 v1.0 - 多维度评分"""
+
+import sys
+sys.stdout.reconfigure(encoding="utf-8")
+import re
+from typing import Dict, List
+from datetime import datetime, timedelta
+
+# 来源权重配置 (越高越权威)
+SOURCE_WEIGHTS = {
+    "华尔街日报": 1.0,
+    "华尔街见闻": 0.95,
+    "路透": 0.95,
+    "Bloomberg": 0.95,
+    "Reuters": 0.95,
+    "CNBC": 0.9,
+    "TechCrunch": 0.85,
+    "36氪": 0.8,
+    "虎嗅": 0.8,
+    "Seeking Alpha": 0.75,
+    "CoinTelegraph": 0.7,
+    "新浪财经": 0.65,
+    "东方财富": 0.65,
+}
+
+# 高价值关键词 (匹配加分)
+HIGH_VALUE_KEYWORDS = [
+    "暴涨", "暴跌", "涨停", "跌停", "突破", "新高", "新低",
+    "首富", "首提", "首家", "首款",
+    "突发", "紧急", "重磅", "刚刚",
+    "超预期", "不及预期", "创新高", "历史首次",
+    "加息", "降息", "QE", "缩表",
+    "制裁", "禁令", "调查", "反腐",
+]
+
+# 低价值关键词 (匹配减分)
+LOW_VALUE_KEYWORDS = [
+    "广告", "推广", "免责声明", "，本文仅", "转发",
+    "视频", "图文", "直播", "回顾",
+]
+
+# 数字/数据模式 (加分)
+DATA_PATTERNS = [
+    r'\d+%',
+    r'\d+\.\d+%',
+    r'\$\d+[亿万千]?',
+    r'¥\d+[亿万千]?',
+    r'\d+亿',
+    r'\d+万',
+
+[184 more lines. Use start_line=51 to continue.]

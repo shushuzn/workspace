@@ -1,0 +1,216 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T18:14:11.007638
+# ---
+__init__.py:75:  
+__init__.py:76:  # Optimizer
+__init__.py:77:  from .optimizer import optimize_report, PortfolioOptimizer
+__init__.py:78:  
+__init__.py:79:  # Sentiment
+__init__.py:80:> from .sentiment import sentiment_report, sector_sentiment, calculate_sentiment, research_report, combined_analysis, sentiment_report_full, institutional_report, institutional_analysis, fetch_jin10_news, jin10_news_report, jin10_stock_news, fetch_cn_news, get_cn_news_for_stock
+__init__.py:81:  
+__init__.py:82:  # Dashboard
+__init__.py:83:  from .dashboard import Dashboard, dashboard_report
+__init__.py:84:  
+__init__.py:85:  # Market
+---
+data_jin10_news.json:1:  {
+data_jin10_news.json:2:>   "source": "jin10",
+data_jin10_news.json:3:    "fetched_at": "2026-03-22T17:18:30.750860",
+data_jin10_news.json:4:    "news": [
+data_jin10_news.json:5:      {
+data_jin10_news.json:6:        "url": "https://xnews.jin10.com/details/214086",
+data_jin10_news.json:7:        "title": "技术刘报告（3月20日美盘）"
+---
+data_jin10_news.json:1:  {
+data_jin10_news.json:2:    "source": "jin10",
+data_jin10_news.json:3:    "fetched_at": "2026-03-22T17:18:30.750860",
+data_jin10_news.json:4:    "news": [
+data_jin10_news.json:5:      {
+data_jin10_news.json:6:>       "url": "https://xnews.jin10.com/details/214086",
+data_jin10_news.json:7:        "title": "技术刘报告（3月20日美盘）"
+data_jin10_news.json:8:      },
+data_jin10_news.json:9:      {
+data_jin10_news.json:10:        "url": "https://xnews.jin10.com/details/214118",
+data_jin10_news.json:11:        "title": "黄金洗盘式下跌的元凶并非通胀担忧？双底成型后反弹可期\n \n通胀担忧只是烟雾弹！黄金洗盘式下跌的真相是什么？金价大概率将测试中期低点，双重底形态呼之欲出，上涨趋势尚未因波动终结.....\n HOT    6小时前 \n来自：\n\n订阅黄金市场动态"
+---
+data_jin10_news.json:5:      {
+data_jin10_news.json:6:        "url": "https://xnews.jin10.com/details/214086",
+data_jin10_news.json:7:        "title": "技术刘报告（3月20日美盘）"
+data_jin10_news.json:8:      },
+data_jin10_news.json:9:      {
+data_jin10_news.json:10:>       "url": "https://xnews.jin10.com/details/214118",
+data_jin10_news.json:11:        "title": "黄金洗盘式下跌的元凶并非通胀担忧？双底成型后反弹可期\n \n通胀担忧只是烟雾弹！黄金洗盘式下跌的真相是什么？金价大概率将测试中期低点，双重底形态呼之欲出，上涨趋势尚未因波动终结.....\n HOT    6小时前 \n来自：\n\n订阅黄金市场动态"
+data_jin10_news.json:12:      },
+data_jin10_news.json:13:      {
+data_jin10_news.json:14:        "url": "https://xnews.jin10.com/details/214017",
+data_jin10_news.json:15:        "title": "一周热榜精选：战火下主要央行一夜转鹰，黄金创43年最差单周表现\n \n从降息预期到加息押注，全球利率风向大变！从“斩首行动”到能源命脉争夺，中东冲突第三周升级！美元失势遭非美反攻，黄金创43年最大周跌幅。本周你错过哪些刺激行情？\n HOT  \n原创\n  19小时前 \n来自：\n\n订阅特朗普动态"
+---
+data_jin10_news.json:9:      {
+data_jin10_news.json:10:        "url": "https://xnews.jin10.com/details/214118",
+data_jin10_news.json:11:        "title": "黄金洗盘式下跌的元凶并非通胀担忧？双底成型后反弹可期\n \n通胀担忧只是烟雾弹！黄金洗盘式下跌的真相是什么？金价大概率将测试中期低点，双重底形态呼之欲出，上涨趋势尚未因波动终结.....\n HOT    6小时前 \n来自：\n\n订阅黄金市场动态"
+data_jin10_news.json:12:      },
+data_jin10_news.json:13:      {
+data_jin10_news.json:14:>       "url": "https://xnews.jin10.com/details/214017",
+data_jin10_news.json:15:        "title": "一周热榜精选：战火下主要央行一夜转鹰，黄金创43年最差单周表现\n \n从降息预期到加息押注，全球利率风向大变！从“斩首行动”到能源命脉争夺，中东冲突第三周升级！美元失势遭非美反攻，黄金创43年最大周跌幅。本周你错过哪些刺激行情？\n HOT  \n原创\n  19小时前 \n来自：\n\n订阅特朗普动态"
+data_jin10_news.json:16:      },
+data_jin10_news.json:17:      {
+data_jin10_news.json:18:        "url": "https://xnews.jin10.com/details/214108",
+data_jin10_news.json:19:        "title": "一周展望：伊朗战事进入第四周，加息押注“疯长”，黄金下一站4000？\n \n“美军增兵”真相成谜，伊朗战争长期化风险加剧，乱世黄金失灵，最糟糕的情况还未到来？技术面被层层“破防”，美股接下来要看美债脸色？\n HOT  \n原创\n  1天前 \n来自：\n\n订阅黄金市场动态"
+---
+data_jin10_news.json:13:      {
+data_jin10_news.json:14:        "url": "https://xnews.jin10.com/details/214017",
+data_jin10_news.json:15:        "title": "一周热榜精选：战火下主要央行一夜转鹰，黄金创43年最差单周表现\n \n从降息预期到加息押注，全球利率风向大变！从“斩首行动”到能源命脉争夺，中东冲突第三周升级！美元失势遭非美反攻，黄金创43年最大周跌幅。本周你错过哪些刺激行情？\n HOT  \n原创\n  19小时前 \n来自：\n\n订阅特朗普动态"
+data_jin10_news.json:16:      },
+data_jin10_news.json:17:      {
+data_jin10_news.json:18:>       "url": "https://xnews.jin10.com/details/214108",
+data_jin10_news.json:19:        "title": "一周展望：伊朗战事进入第四周，加息押注“疯长”，黄金下一站4000？\n \n“美军增兵”真相成谜，伊朗战争长期化风险加剧，乱世黄金失灵，最糟糕的情况还未到来？技术面被层层“破防”，美股接下来要看美债脸色？\n HOT  \n原创\n  1天前 \n来自：\n\n订阅黄金市场动态"
+data_jin10_news.json:20:      },
+data_jin10_news.json:21:      {
+data_jin10_news.json:22:        "url": "https://xnews.jin10.com/details/214011",
+data_jin10_news.json:23:        "title": "中东战火已造成14国至少2500人死亡｜财料\n \n被战火席卷的不只美以伊，中东多地都被殃及……\n HOT    03-21 14:18 \n来自：\n\n订阅原油市场资讯"
+---
+data_jin10_news.json:17:      {
+data_jin10_news.json:18:        "url": "https://xnews.jin10.com/details/214108",
+data_jin10_news.json:19:        "title": "一周展望：伊朗战事进入第四周，加息押注“疯长”，黄金下一站4000？\n \n“美军增兵”真相成谜，伊朗战争长期化风险加剧，乱世黄金失灵，最糟糕的情况还未到来？技术面被层层“破防”，美股接下来要看美债脸色？\n HOT  \n原创\n  1天前 \n来自：\n\n订阅黄金市场动态"
+data_jin10_news.json:20:      },
+data_jin10_news.json:21:      {
+data_jin10_news.json:22:>       "url": "https://xnews.jin10.com/details/214011",
+data_jin10_news.json:23:        "title": "中东战火已造成14国至少2500人死亡｜财料\n \n被战火席卷的不只美以伊，中东多地都被殃及……\n HOT    03-21 14:18 \n来自：\n\n订阅原油市场资讯"
+data_jin10_news.json:24:      },
+data_jin10_news.json:25:      {
+data_jin10_news.json:26:        "url": "https://xnews.jin10.com/details/213841",
+data_jin10_news.json:27:        "title": "“你好通胀，再见降息”，值金价10%的跌幅？｜大师复盘\n \n通胀预期上修、降息预期退潮、美元同步走强，三个变量同时锁定方向。“美元奶昔理论”提出者解码，金价下跌只是第一脚，下一脚往哪踩，取决于...\n HOT    03-21 11:35 \n来自：\n\n订阅原油市场资讯"
+---
+data_jin10_news.json:21:      {
+data_jin10_news.json:22:        "url": "https://xnews.jin10.com/details/214011",
+data_jin10_news.json:23:        "title": "中东战火已造成14国至少2500人死亡｜财料\n \n被战火席卷的不只美以伊，中东多地都被殃及……\n HOT    03-21 14:18 \n来自：\n\n订阅原油市场资讯"
+data_jin10_news.json:24:      },
+data_jin10_news.json:25:      {
+data_jin10_news.json:26:>       "url": "https://xnews.jin10.com/details/213841",
+data_jin10_news.json:27:        "title": "“你好通胀，再见降息”，值金价10%的跌幅？｜大师复盘\n \n通胀预期上修、降息预期退潮、美元同步走强，三个变量同时锁定方向。“美元奶昔理论”提出者解码，金价下跌只是第一脚，下一脚往哪踩，取决于...\n HOT    03-21 11:35 \n来自：\n\n订阅原油市场资讯"
+data_jin10_news.json:28:      },
+data_jin10_news.json:29:      {
+data_jin10_news.json:30:        "url": "https://xnews.jin10.com/details/213847",
+data_jin10_news.json:31:        "title": "【品种交易逻辑】SC原油连续三周上涨，多国释放战略储备能否对冲地缘风险？\n \n金十期货APP整理多家期货公司研报观点，一文总结SC原油、甲醇、多晶硅、沪银、生猪、棕榈油期货多个品种逻辑分析及重点关注事件。\n     03-20 23:23"
+---
+data_jin10_news.json:25:      {
+data_jin10_news.json:26:        "url": "https://xnews.jin10.com/details/213841",
+data_jin10_news.json:27:        "title": "“你好通胀，再见降息”，值金价10%的跌幅？｜大师复盘\n \n通胀预期上修、降息预期退潮、美元同步走强，三个变量同时锁定方向。“美元奶昔理论”提出者解码，金价下跌只是第一脚，下一脚往哪踩，取决于...\n HOT    03-21 11:35 \n来自：\n\n订阅原油市场资讯"
+data_jin10_news.json:28:      },
+data_jin10_news.json:29:      {
+data_jin10_news.json:30:>       "url": "https://xnews.jin10.com/details/213847",
+data_jin10_news.json:31:        "title": "【品种交易逻辑】SC原油连续三周上涨，多国释放战略储备能否对冲地缘风险？\n \n金十期货APP整理多家期货公司研报观点，一文总结SC原油、甲醇、多晶硅、沪银、生猪、棕榈油期货多个品种逻辑分析及重点关注事件。\n     03-20 23:23"
+data_jin10_news.json:32:      },
+data_jin10_news.json:33:      {
+data_jin10_news.json:34:        "url": "https://xnews.jin10.com/details/213972",
+data_jin10_news.json:35:        "title": "美联储降息概率犹存 贵金属为何上演“闪崩行情”？| 3月20日分析汇总\n  VIP    03-20 23:13 \n来自：\n\n订阅黄金市场动态"
+---
+data_jin10_news.json:29:      {
+data_jin10_news.json:30:        "url": "https://xnews.jin10.com/details/213847",
+data_jin10_news.json:31:        "title": "【品种交易逻辑】SC原油连续三周上涨，多国释放战略储备能否对冲地缘风险？\n \n金十期货APP整理多家期货公司研报观点，一文总结SC原油、甲醇、多晶硅、沪银、生猪、棕榈油期货多个品种逻辑分析及重点关注事件。\n     03-20 23:23"
+data_jin10_news.json:32:      },
+data_jin10_news.json:33:      {
+data_jin10_news.json:34:>       "url": "https://xnews.jin10.com/details/213972",
+data_jin10_news.json:35:        "title": "美联储降息概率犹存 贵金属为何上演“闪崩行情”？| 3月20日分析汇总\n  VIP    03-20 23:13 \n来自：\n\n订阅黄金市场动态"
+data_jin10_news.json:36:      },
+data_jin10_news.json:37:      {
+data_jin10_news.json:38:        "url": "https://xnews.jin10.com/details/214096",
+data_jin10_news.json:39:        "title": "美军一周两度增兵中东！美欧股债齐崩，金银又开启暴跌\n \n美军增兵中东消息引发市场恐慌，交易员预计美联储有五成概率在10月前加息。全球债市遭遇无差别抛售，美股欧股集体重挫，“三巫日”进一步加剧市场波动。\n HOT  \n原创\n  03-20 23:00 \n来自：\n\n订阅华尔街热议"
+---
+data_jin10_news.json:33:      {
+data_jin10_news.json:34:        "url": "https://xnews.jin10.com/details/213972",
+data_jin10_news.json:35:        "title": "美联储降息概率犹存 贵金属为何上演“闪崩行情”？| 3月20日分析汇总\n  VIP    03-20 23:13 \n来自：\n\n订阅黄金市场动态"
+data_jin10_news.json:36:      },
+data_jin10_news.json:37:      {
+data_jin10_news.json:38:>       "url": "https://xnews.jin10.com/details/214096",
+data_jin10_news.json:39:        "title": "美军一周两度增兵中东！美欧股债齐崩，金银又开启暴跌\n \n美军增兵中东消息引发市场恐慌，交易员预计美联储有五成概率在10月前加息。全球债市遭遇无差别抛售，美股欧股集体重挫，“三巫日”进一步加剧市场波动。\n HOT  \n原创\n  03-20 23:00 \n来自：\n\n订阅华尔街热议"
+data_jin10_news.json:40:      },
+data_jin10_news.json:41:      {
+data_jin10_news.json:42:        "url": "https://xnews.jin10.com/details/214095",
+data_jin10_news.json:43:        "title": "碳酸锂期价再度跌破15万元/吨关口，贸易商称基本面无忧但加工成本反涨？原因为何？\n \n受能源与石化板块资金分流影响，广期所碳酸锂合约持续走低，北方现货市场承压明显，天津某正极材料商直言需求不振导致库存积压，下游买盘寥寥。\n HOT    03-20 22:51"
+---
+data_jin10_news.json:37:      {
+data_jin10_news.json:38:        "url": "https://xnews.jin10.com/details/214096",
+data_jin10_news.json:39:        "title": "美军一周两度增兵中东！美欧股债齐崩，金银又开启暴跌\n \n美军增兵中东消息引发市场恐慌，交易员预计美联储有五成概率在10月前加息。全球债市遭遇无差别抛售，美股欧股集体重挫，“三巫日”进一步加剧市场波动。\n HOT  \n原创\n  03-20 23:00 \n来自：\n\n订阅华尔街热议"
+data_jin10_news.json:40:      },
+data_jin10_news.json:41:      {
+data_jin10_news.json:42:>       "url": "https://xnews.jin10.com/details/214095",
+data_jin10_news.json:43:        "title": "碳酸锂期价再度跌破15万元/吨关口，贸易商称基本面无忧但加工成本反涨？原因为何？\n \n受能源与石化板块资金分流影响，广期所碳酸锂合约持续走低，北方现货市场承压明显，天津某正极材料商直言需求不振导致库存积压，下游买盘寥寥。\n HOT    03-20 22:51"
+data_jin10_news.json:44:      },
+data_jin10_news.json:45:      {
+data_jin10_news.json:46:        "url": "https://xnews.jin10.com/details/214094",
+data_jin10_news.json:47:        "title": "沃什也无力回天？中东乱局下美联储恐难逃加息宿命\n \n麦格理预测，美联储下一次动作将是加息，最有可能是明年上半年，即使届时沃什可能已经上位，但他毕竟只有一票......\n HOT  \n原创\n  03-20 22:14 \n来自：\n\n订阅美联储动态"
+---
+data_jin10_news.json:41:      {
+data_jin10_news.json:42:        "url": "https://xnews.jin10.com/details/214095",
+data_jin10_news.json:43:        "title": "碳酸锂期价再度跌破15万元/吨关口，贸易商称基本面无忧但加工成本反涨？原因为何？\n \n受能源与石化板块资金分流影响，广期所碳酸锂合约持续走低，北方现货市场承压明显，天津某正极材料商直言需求不振导致库存积压，下游买盘寥寥。\n HOT    03-20 22:51"
+data_jin10_news.json:44:      },
+data_jin10_news.json:45:      {
+data_jin10_news.json:46:>       "url": "https://xnews.jin10.com/details/214094",
+data_jin10_news.json:47:        "title": "沃什也无力回天？中东乱局下美联储恐难逃加息宿命\n \n麦格理预测，美联储下一次动作将是加息，最有可能是明年上半年，即使届时沃什可能已经上位，但他毕竟只有一票......\n HOT  \n原创\n  03-20 22:14 \n来自：\n\n订阅美联储动态"
+data_jin10_news.json:48:      }
+data_jin10_news.json:49:    ]
+data_jin10_news.json:50:  }
+---
+main.py:43:  from stock_pro.technical import technical_report
+main.py:44:  from stock_pro.sync import sync_yfinance, get_sync_status
+main.py:45:  from stock_pro.pdf_export import export_pdf, full_pdf_report
+main.py:46:  from stock_pro.optimizer import optimize_report
+main.py:47:  from stock_pro.earnings_analysis import earnings_report, predict_earnings_beat
+main.py:48:> from stock_pro.sentiment import sentiment_report, sector_sentiment, research_report, combined_analysis, sentiment_report_full, institutional_report, institutional_analysis, fetch_jin10_news, jin10_news_report, jin10_stock_news, fetch_cn_news, get_cn_news_for_stock
+main.py:49:  from stock_pro.news_api import get_news as get_live_news, news_report as live_news_report, get_stats as get_news_stats
+main.py:50:  from stock_pro.realtime_news import format_report as realtime_news_report, get_realtime_news, format_report
+main.py:51:  from stock_pro.rss_news import format_report as rss_report, get_news as rss_get_news
+main.py:52:  from stock_pro.fast_news import format_report as fast_news_report, get_news as fast_get_news
+main.py:53:  from stock_pro.screener_v2 import advanced_screener_report, value_picks, growth_picks, dividend_picks
+---
+main.py:139:      parser.add_argument('--research', action='store_true', help='Research reports summary')
+main.py:140:      parser.add_argument('--combined', action='store_true', help='Combined analysis (tech+sentiment+research)')
+main.py:141:      parser.add_argument('--institutional', action='store_true', help='Institutional ownership analysis')
+main.py:142:      parser.add_argument('--momentum', action='store_true', help='Momentum analysis')
+main.py:143:      parser.add_argument('--ultimate', action='store_true', help='Ultimate analysis (all features)')
+main.py:144:>     parser.add_argument('--jin10', action='store_true', help='Jin10 latest news')
+main.py:145:      parser.add_argument('--cnnews', action='store_true', help='Chinese financial news (Sina/Netease)')
+main.py:146:      parser.add_argument('--news', action='store_true', help='Real-time news (Yahoo + Sina)')
+main.py:147:      parser.add_argument('--rt', action='store_true', help='Realtime news (zero latency)')
+main.py:148:      parser.add_argument('--content', action='store_true', help='Fetch full article content')
+main.py:149:      parser.add_argument('--rss', action='store_true', help='RSS feeds (unlimited, no rate limits)')
+---
+main.py:240:          args.technical, args.sync_status,
+main.py:241:          args.export_json, args.export_md, args.export_html, args.export_all_formats,
+main.py:242:          args.earnings_predict, args.fscore, args.dividend_report,
+main.py:243:          args.summary is not None, args.compare, args.csv, args.xlsx, args.db,
+main.py:244:          args.dashboard is not None, args.insights, args.sentiment, args.sector_sentiment, args.research, args.combined,
+main.py:245:>         args.institutional, args.momentum, args.ultimate, args.jin10, args.cnnews, args.news, args.rt, args.rss, args.fast,
+main.py:246:          args.signal, args.risk is not None, args.trends
+main.py:247:      ])
+main.py:248:      
+main.py:249:      if args.symbols and not skip_single:
+main.py:250:          sym = args.symbols[0]
+---
+main.py:667:              symbols = args.symbols if args.symbols else None
+main.py:668:              print(ultimate_report(symbols))
+main.py:669:          return
+main.py:670:      
+main.py:671:      # Jin10 News
+main.py:672:>     if args.jin10:
+main.py:673:          if args.symbols and len(args.symbols) == 1:
+main.py:674:              print(jin10_stock_news(args.symbols[0]))
+main.py:675:          else:
+main.py:676:              print(jin10_news_report())
+main.py:677:          return
+---
+main.py:669:          return
+main.py:670:      
+main.py:671:      # Jin10 News
+main.py:672:      if args.jin10:
+main.py:673:          if args.symbols and len(args.symbols) == 1:
+main.py:674:>             print(jin10_stock_news(args.symbols[0]))
+main.py:675:          else:
+main.py:676:              print(jin10_news_report())
+main.py:677:          return
+main.py:678:      
+main.py:679:      # Chinese Financial News
+---
+
+(Results truncated at 200 matches.)

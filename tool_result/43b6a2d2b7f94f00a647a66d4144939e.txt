@@ -1,0 +1,36 @@
+# tool_name: glob_search
+# created_at: 2026-03-21T13:26:55.044088
+# ---
+10-RESEARCH\domain-research\AI-研究\02-Models\_assets\2401.00001\2401.00001.pdf
+10-RESEARCH\domain-research\AI-研究\02-Models\_assets\2602.23958\2602.23958.pdf
+10-RESEARCH\domain-research\领域研究\cnt-research\literature\pdfs\adma202008432-sup-0001-suppmat.pdf
+10-RESEARCH\domain-research\领域研究\cnt-research\literature\pdfs\Advanced Materials - 2021 - Bulmer - A Meta‐Analysis of Conductive and Strong Carbon Nanotube Materials.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09753v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09756v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09806v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09832v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09889v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09927v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09929v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09953v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09955v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09957v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09961v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09963v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09964v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09967v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09968v1.pdf
+40-TOOLS\knowledge-cards\01-KNOWLEDGE-CARDS\tests\test_pdfs\2603.09972v1.pdf
+60-DATA\collectors\08-collectors\arxiv\pdfs\1002.1144v1_A CHAID Based Performance Prediction Model in Educ.pdf
+60-DATA\collectors\08-collectors\arxiv\pdfs\1008.2944v3_Universal thermal and electrical conductivity from.pdf
+60-DATA\collectors\08-collectors\arxiv\pdfs\1301.6146v3_Majorana fermions on the Abrikosov flux lattice in.pdf
+60-DATA\collectors\08-collectors\arxiv\pdfs\1605.01471v2_The unexpected thermal conductivity from graphene .pdf
+60-DATA\collectors\08-collectors\arxiv\pdfs\2211.05409v1_Radiomics-enhanced Deep Multi-task Learning for Ou.pdf
+60-DATA\collectors\08-collectors\arxiv\pdfs\2211.05761v3_Geometrical interpretation of Hall conductivity in.pdf
+80-PROJECTS\rl-trading\assets\framework.pdf
+99-archive\PDFs\2026-03\2602.23373.pdf
+99-archive\PDFs\2026-03\2602.23668.pdf
+99-archive\PDFs\2026-03\2602.23681.pdf
+99-archive\PDFs\2026-03\2602.23701.pdf
+99-archive\PDFs\2026-03\2602.23716.pdf
+99-archive\PDFs\2026-03\2602.23720.pdf

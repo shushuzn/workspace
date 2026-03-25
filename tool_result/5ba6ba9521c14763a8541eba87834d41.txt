@@ -1,0 +1,54 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T09:37:58.009369
+# ---
+
+==================================================
+  NewsHub Fetcher
+==================================================
+
+  ▶ Time: 2026-03-23 09:37:53
+
+  ▶ 并行抓取 4 个源...
+  ⚠ 新浪股市: 0
+  ✓ 新浪财经: +15
+  ✓ Seeking Alpha: +7
+  ✓ Investing: +10
+
+──────────────────────────────────────────────────
+  📊 Total: 32  ⏱️ 1.4s
+     新浪股市: 0
+     新浪财经: 15
+     Seeking Alpha: 7
+     Investing: 10
+──────────────────────────────────────────────────
+
+  1. Investing
+     Iran threatens to retaliate against Gulf energy and water af...
+     https://www.investing.com/news/commodities-news/trump-and-iran-trade-threats-over-energy-targets-as-war-escalates-4574105
+  2. Investing
+     Oil prices volatile, pinned above $110/bbl after Trump’s 48-...
+     https://www.investing.com/news/commodities-news/oil-prices-volatile-pinned-above-110bbl-after-trumps-48hr-deadline-on-iran-4574162
+  3. Investing
+     Earnings call transcript: Fonterra’s H1 2026 sees strong res...
+     https://www.investing.com/news/transcripts/earnings-call-transcript-fonterras-h1-2026-sees-strong-results-amid-geopolitical-caution-93CH-4574164
+  4. Investing
+     Dollar poised for rally as escalating Middle East conflict s...
+     https://www.investing.com/news/economy-news/dollar-poised-for-rally-as-escalating-middle-east-conflict-spurs-haven-demand-4574166
+  5. Investing
+     Fonterra H1 2026 slides: strong results drive $3.9B cash dis...
+     https://www.investing.com/news/company-news/fonterra-h1-2026-slides-strong-results-drive-39b-cash-distribution-93CH-4574167
+  6. Investing
+     US stock futures fall after Trump issues 48-hr deadline on I...
+     https://www.investing.com/news/stock-market-news/us-stock-futures-fall-after-trump-issues-48hr-deadline-on-iran-4574168
+  7. Investing
+     Asia shares skid, yields rise as Gulf war escalates...
+     https://www.investing.com/news/economy-news/asia-shares-slip-oil-choppy-as-gulf-war-escalates-4574161
+  8. Investing
+     Trump ties DHS funding deal to approval of voter bill, NewsN...
+     https://www.investing.com/news/economy-news/trump-ties-dhs-funding-deal-to-approval-of-voter-bill-newsnation-reports-4574170
+  9. Investing
+     Staff absences soar at some US airports as ICE agents prepar...
+     https://www.investing.com/news/world-news/trump-deploys-ice-agents-to-assist-tsa-at-us-airports-4574111
+  10. Investing
+     Activist Elliott takes multibillion-dollar stake in Synopsys...
+     https://www.investing.com/news/stock-market-news/activist-elliott-takes-multibilliondollar-stake-in-synopsys-wsj-reports-4574160

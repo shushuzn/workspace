@@ -1,0 +1,28 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T10:45:37.870830
+# ---
+1: '#!/usr/bin/env python3\n'
+2: '"""NewsHub Fetcher v2.1"""\n'
+3: "import sys; sys.stdout.reconfigure(encoding='utf-8')\n"
+4: 'import re, json, time, ssl, argparse\n'
+5: 'from concurrent.futures import ThreadPoolExecutor\n'
+6: 'from pathlib import Path\n'
+7: 'import urllib.request, xml.etree.ElementTree as ET\n'
+8: '\n'
+9: 'CACHE, TTL = ".news_cache.json", 300\n'
+10: 'CATS = {"stock":["A股","上证","股价","大盘","指数"],"forex":["汇率","美元","欧元","人民币"],"commodity":["原油","黄金","期货"],"macro":["GDP","CPI","PPI","非农","美联储","降息"],"trade":["关税","贸易"],"tech":["AI","科技","芯片","互联网"],"crypto":["比特币","以太坊","BTC"],"energy":["能源","石油","光伏"]}\n'
+11: 'POS=["涨","升","利多","利好","上涨","突破","牛市"]\n'
+12: 'NEG=["跌","降","利空","下跌","崩盘","熊市"]\n'
+13: '\n'
+14: 'def sctx(): c=ssl.create_default_context(); c.check_hostname=c.verify_mode=0; return c\n'
+15: 'def lc(): return json.load(open(CACHE,encoding="utf-8")) if Path(CACHE).exists() else {"news":[],"time":0}\n'
+16: 'def sc(d): json.dump(d,open(CACHE,"w",encoding="utf-8"),ensure_ascii=False,indent=2)\n'
+17: 'def cls(t): tl=t.lower()\n'
+18: '    for c,ks in CATS.items():\n'
+19: '        if any(k.lower() in tl for k in ks): return c\n'
+20: '    return "other"\n'
+21: 'def sent(t): tl=t.lower(); p=sum(1 for w in POS if w in tl); n=sum(1 for w in NEG if w in tl)\n'
+22: '    return ("positive",20) if p>n else ("negative",-20) if n>p else ("neutral",0)\n'
+23: '\n'
+24: 'def fetch_sina():\n'
+25: '    news=[]\n'

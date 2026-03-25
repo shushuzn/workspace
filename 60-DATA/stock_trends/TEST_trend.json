@@ -1,0 +1,54 @@
+{
+  "symbol": "TEST",
+  "candle_count": 100,
+  "analyzed_at": "2026-03-20T00:40:20.513421",
+  "current_price": 231.91,
+  "timeframes": {
+    "short": {
+      "direction": "sideways",
+      "strength": "weak",
+      "price_change_pct": 1.65,
+      "volatility": 0.65,
+      "slope": 0.0009,
+      "start_price": 228.14,
+      "end_price": 231.91
+    },
+    "medium": {
+      "direction": "bullish",
+      "strength": "moderate",
+      "price_change_pct": 15.36,
+      "volatility": 4.13,
+      "slope": 0.0045,
+      "start_price": 201.03,
+      "end_price": 231.91
+    },
+    "long": {
+      "direction": "bullish",
+      "strength": "strong",
+      "price_change_pct": 58.82,
+      "volatility": 18.07,
+      "slope": 0.0132,
+      "start_price": 146.02,
+      "end_price": 231.91
+    }
+  },
+  "moving_averages": {
+    "MA5": 230.49,
+    "MA10": 230.4,
+    "MA20": 229.1,
+    "MA30": 223.69,
+    "MA50": 201.13,
+    "MA60": 191.77
+  },
+  "trend_indicators": {
+    "adx": {
+      "adx": 89.16,
+      "plus_di": 50.54,
+      "minus_di": 2.9,
+      "trend_strength": "very_strong"
+    }
+  },
+  "overall_trend": "bullish",
+  "trend_strength": "strong",
+  "recommendation": "BUY - Bullish trend, watch MA support"
+}

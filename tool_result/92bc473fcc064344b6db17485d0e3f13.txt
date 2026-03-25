@@ -1,0 +1,38 @@
+# tool_name: read_file
+# created_at: 2026-03-22T10:28:04.815986
+# ---
+                    "roe": fin["roe"],
+                    "beta": q["beta"],
+                    "rating": rating(upside),
+                })
+        
+        results.sort(key=lambda x: x["upside"], reverse=True)
+        for r in results:
+            print_summary_card(r)
+        sys.exit(0)
+    
+    # Default: single stock report
+    sym = sys.argv[1].upper() if len(sys.argv) > 1 else "META"
+    
+    # Check for Chinese flag
+    if "--cn" in sys.argv or "-cn" in sys.argv:
+        generate_report_cn(sym)
+    else:
+        generate_report(sym)
+    
+    print("\n" + "="*60)
+    print("Quick Commands:")
+    print("   --cn        Chinese report")
+    print("   --compare   Multi-stock comparison")
+    print("   --watch     Watch mode (auto-refresh)")
+    print("   --json      JSON output")
+    print("   --summary   Summary mode")
+    print("   --csv       Export to CSV")
+    print("   --xlsx      Export to Excel")
+    print("   --chart     Generate chart")
+    print("   --db        Save to database")
+    print("   --alert     Price alerts")
+    print("   --obsidian  Sync to Obsidian")
+    print("   --cron      Setup cron job")
+    print("   --help      Show all options")
+    print("="*60)

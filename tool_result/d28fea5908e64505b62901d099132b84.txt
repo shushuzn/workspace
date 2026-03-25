@@ -1,0 +1,26 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T22:57:29.791221
+# ---
+
+╔════════════════════════════════════════════════╗
+║  📡 飞书摘要推送                                      ║
+╚════════════════════════════════════════════════╝
+
+22:57:21 [INFO] 开始并发抓取 7 个源 (限流: 30/min)...
+22:57:25 [INFO] 抓取统计: 成功 12, 失败 0, 重试 0
+  ▶ 抓取新闻...
+
+  ▶ 并发抓取完成 (3.61s)
+    ✗ 新浪财经: 0
+    ✓ 华尔街日报: 20
+    ✓ TechCrunch: 20
+    ✓ 36氪: 30
+    ✓ 虎嗅: 10
+    ✓ Seeking Alpha: 7
+    ✓ CoinTelegraph: 10
+  ▶ 获取 39 条新闻
+  ▶ 平均质量: 46.6/100
+  HTTP 400: {"code":230001,"msg":"Your request contains an invalid request parameter, ext=invalid receive_id","error":{"log_id":"2026032322572705A245085B54857F0BA0","troubleshooter":"排查建议查看(Troubleshooting sugges
+  HTTP 400: {"code":230001,"msg":"Your request contains an invalid request parameter, ext=invalid receive_id","error":{"log_id":"202603232257278AFAD89B1B8C998D7D91","troubleshooter":"排查建议查看(Troubleshooting sugges
+  HTTP 400: {"code":230001,"msg":"Your request contains an invalid request parameter, ext=invalid receive_id","error":{"log_id":"20260323225728744D2DA5B15D9287EA18","troubleshooter":"排查建议查看(Troubleshooting sugges
+  ✗ 发送失败

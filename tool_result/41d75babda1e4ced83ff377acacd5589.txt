@@ -1,0 +1,41 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:53:34.212287
+# ---
+        confidence = max(30, 50 - abs(score) * 15)
+    
+    return {
+        "symbol": symbol,
+        "prediction": prediction,
+        "confidence": confidence,
+        "factors": factors,
+        "eps_current": data["eps_current"],
+        "eps_forward": data["eps_forward"]
+    }
+
+
+def earnings_report(symbols):
+    """Generate earnings report"""
+    report = "# Earnings Analysis Report\n\n"
+    report += "| Symbol | Current EPS | Forward EPS | Growth | Yield | Beat Prob |\n"
+    report += "|--------|-------------|-------------|--------|--------|------------|\n"
+    
+    predictions = []
+    for symbol in symbols:
+        data = get_earnings_data(symbol)
+        pred = predict_earnings_beat(symbol)
+        price = P.get(symbol, 0)
+        yield_ = calc_earnings_yield(symbol)
+        
+        report += f"| {symbol} | ${data['eps_current']:.2f} | ${data['eps_forward']:.2f} | {data['growth']*100:.0f}% | {yield_:.1f}% | {pred['prediction']} ({pred['confidence']:.0f}%) |\n"
+        predictions.append(pred)
+    
+    # Best bets
+    report += "\n## Best Earnings Bets\n\n"
+    beats = [p for p in predictions if p["prediction"] == "Beat"]
+    if beats:
+        for p in sorted(beats, key=lambda x: x["confidence"], reverse=True)[:5]:
+            report += f"- **{p['symbol']}**: {p['prediction']} ({p['confidence']:.0f}% confidence)\n"
+    else:
+        report += "No strong earnings beat predictions.\n"
+    
+    return report

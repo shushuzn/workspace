@@ -1,0 +1,274 @@
+# tool_name: read_file
+# created_at: 2026-03-22T19:29:32.028979
+# ---
+    cache_key = "stats"
+    stats = cache.get(cache_key, ttl=300)  # 5 minutes for stats
+    if not stats:
+        from stock_pro.core import A, P
+        total = len(A)
+        scores = [A[s][2] for s in A]
+        avg = sum(scores)/len(scores) if scores else 65
+        buys = len([s for s in A if A[s][1] in ['Overweight', 'Outperform', 'Strong Buy', 'Buy']])
+        upsides = []
+        for s in A:
+            if s in P:
+                target, _, _ = A[s]
+                price = P[s]
+                if price > 0: upsides.append((target - price) / price * 100)
+        top_up = max(upsides) if upsides else 25
+        
+        stats = [
+            stat_card('Total Stocks', total, icon='📈', acc=C['primary']),
+            stat_card('Avg Score', f"{avg:.0f}", chg=2.1, icon='🎯', acc=C['purple']),
+            stat_card('Top Upside', f"+{top_up:.1f}%", icon='🚀', acc=C['bull']),
+            stat_card('Strong Buys', buys, icon='⭐', acc=C['amber']),
+        ]
+        cache.set(cache_key, stats)
+    return stats
+
+# ============================================================
+# Layout
+# ============================================================
+DEFAULT_SYMS = ['AAPL', 'MSFT', 'GOOGL', 'AMZN', 'META', 'NVDA', 'TSLA', 'AMD', 'INTC', 'NFLX', 'CRM', 'ORCL']
+
+app.layout = html.Div([
+    dcc.Location(id='url', refresh=False),
+    dcc.Interval(id='refresh', interval=30000, n_intervals=0),
+    dcc.Store(id='active-nav', data='dashboard'),
+    # Custom CSS using inline style approach
+    html.Div(id='custom-css', style={'display': 'none'}),
+    # Responsive CSS
+    html.Div([
+        html.Style('''
+            @media (max-width: 768px) {
+                .sidebar {
+                    width: 100% !important;
+                    height: auto !important;
+                    position: relative !important;
+                    border-right: none !important;
+                    border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+                    padding-bottom: 20px !important;
+                }
+                .main-content {
+                    margin-left: 0 !important;
+                    padding: 20px !important;
+                }
+                .stats-row {
+                    grid-template-columns: repeat(2, 1fr) !important;
+                    gap: 16px !important;
+                }
+                .stock-grid {
+                    grid-template-columns: 1fr !important;
+                    gap: 16px !important;
+                }
+                .header {
+                    flex-direction: column !important;
+                    align-items: flex-start !important;
+                    gap: 16px !important;
+                }
+                .chart-controls {
+                    flex-direction: column !important;
+                    align-items: stretch !important;
+                    gap: 12px !important;
+                }
+                .chart-controls > * {
+                    width: 100% !important;
+                }
+                .chart-section {
+                    padding: 20px !important;
+                }
+                h1 {
+                    font-size: 24px !important;
+                }
+                .stat-card {
+                    padding: 20px !important;
+                }
+                .stock-card {
+                    padding: 20px !important;
+                }
+            }
+            
+            @media (max-width: 480px) {
+                .stats-row {
+                    grid-template-columns: 1fr !important;
+                }
+                .main-content {
+                    padding: 16px !important;
+                }
+                h1 {
+                    font-size: 20px !important;
+                }
+                .chart-section {
+                    padding: 16px !important;
+                }
+            }
+        ''')
+    ]),
+    
+    # Sidebar
+    html.Div([
+        # Logo
+        html.Div([
+            html.Span("📈", style={'fontSize':'32px','marginRight':'14px'}),
+            html.Div([
+                html.Div("Stock PRO", style={'fontSize':'22px','fontWeight':'800',
+                    'background':'linear-gradient(135deg, #6366f1, #8b5cf6, #06b6d4)',
+                    '-webkit-background-clip':'text','-webkit-text-fill-color':'transparent',
+                    'background-clip':'text'}),
+                html.Div("v2.1 Enhanced", style={'fontSize':'11px','color':'#8b8b9a','marginTop':'2px'}),
+            ])
+        ], style={'padding':'15px 24px 30px','borderBottom':'1px solid rgba(255,255,255,0.08)'}),
+        
+        # Nav Items
+        html.Div([
+            html.Div([html.Span('📊', style={'marginRight':'12px'}), 'Dashboard'], 
+                    id='nav-dashboard', n_clicks=0, style=SIDEBAR_ACTIVE, className='sidebar-item nav-btn'),
+            html.Div([html.Span('🔍', style={'marginRight':'12px'}), 'Search'], 
+                    id='nav-search', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
+            html.Div([html.Span('⭐', style={'marginRight':'12px'}), 'Top Picks'], 
+                    id='nav-picks', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
+            html.Div([html.Span('💎', style={'marginRight':'12px'}), 'Value Stocks'], 
+                    id='nav-value', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
+            html.Div([html.Span('🚀', style={'marginRight':'12px'}), 'Growth Stocks'], 
+                    id='nav-growth', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
+            html.Div([html.Span('💰', style={'marginRight':'12px'}), 'Dividend'], 
+                    id='nav-dividend', n_clicks=0, style={**SIDEBAR_BASE, **SIDEBAR_HOVER}, className='sidebar-item nav-btn'),
+        ], style={'marginTop':'20px'}),
+        
+        # Market Status
+        html.Div([
+            html.Div('Market Status', style={'fontSize':'11px','color':'#8b8b9a','marginBottom':'10px','letterSpacing':'1px','textTransform':'uppercase'}),
+            html.Div([html.Div('●', style={'color':'#10b981','fontSize':'10px','marginRight':'8px'}), 'US Market Open'],
+                    style={'fontSize':'13px','color':'#e0e0e0','display':'flex','alignItems':'center'}),
+        ], style={'padding':'20px 24px','borderTop':'1px solid rgba(255,255,255,0.08)','marginTop':'auto'}),
+        
+        # Last Update
+        html.Div(id='last-update', children='Last: --', 
+                style={'padding':'16px 24px','color':'#8b8b9a','fontSize':'12px',
+                      'borderTop':'1px solid rgba(255,255,255,0.08)'}),
+    ], className='sidebar', style={'position':'fixed','left':'0','top':'0','height':'100vh','width':'280px',
+              'background':'rgba(15,15,35,0.98)','backdropFilter':'blur(20px)',
+              'borderRight':'1px solid rgba(255,255,255,0.08)','zIndex':'1000',
+              'display':'flex','flexDirection':'column','overflowY':'auto'}),
+    
+    # Main Content
+    html.Div([
+        # Header
+        html.Div([
+            html.Div([
+                html.H1(id='page-title', children='📊 Dashboard', 
+                       style={'fontSize':'32px','fontWeight':'800','margin':'0 0 8px 0',
+                             'background':'linear-gradient(135deg, #e0e0e0, #fff)','-webkit-background-clip':'text','-webkit-text-fill-color':'transparent'}),
+                html.Div(id='page-subtitle', children='Real-time market analysis powered by AI',
+                        style={'color':'#8b8b9a','fontSize':'14px'})
+            ]),
+            # Quick Search
+            html.Div([
+                dcc.Input(id='quick-search', type='text', placeholder='Symbol (e.g. AAPL)...',
+                         style={'padding':'12px 18px','borderRadius':'12px','border':'1px solid rgba(255,255,255,0.1)',
+                                'background':'rgba(30,30,60,0.85)','color':'#e0e0e0','fontSize':'14px',
+                                'width':'220px','outline':'none'}),
+            ], style={'display':'flex','gap':'12px','alignItems':'center'}),
+        ], className='header', style={'display':'flex','justifyContent':'space-between','alignItems':'center','marginBottom':'32px'}),
+        
+        # Stats Row
+        html.Div(id='stats-row', children=get_stats(), className='stats-row',
+                style={'display':'grid','gridTemplateColumns':'repeat(4, 1fr)','gap':'24px','marginBottom':'32px'}),
+        
+        # Section Title
+        html.Div([
+            html.Div(id='section-title', children='Featured Stocks',
+                    style={'fontSize':'18px','fontWeight':'700','color':'#e0e0e0'}),
+            html.Div(id='stock-count', children='12 stocks',
+                    style={'fontSize':'13px','color':'#8b8b9a','marginLeft':'12px'}),
+        ], style={'display':'flex','alignItems':'center','marginBottom':'20px'}),
+        
+        # Stock Grid
+        html.Div(id='stock-grid', children=[stock_card(s) for s in DEFAULT_SYMS], className='stock-grid',
+                style={'display':'grid','gridTemplateColumns':'repeat(auto-fill, minmax(320px, 1fr))','gap':'24px'}),
+        
+        # Chart Section
+        html.Div([
+            html.H2('📊 Price Analysis', style={'fontSize':'20px','fontWeight':'700','marginBottom':'20px'}),
+            html.Div([dcc.Dropdown(id='chart-sym', value='AAPL', clearable=False,
+                        options=[{'label':s,'value':s} for s in DEFAULT_SYMS],
+                        style={'width':'200px','color':'#0f0f23'}),
+                      dcc.Dropdown(id='chart-range', value='3mo', clearable=False,
+                        options=[
+                            {'label':'1 Week', 'value':'1wk'},
+                            {'label':'1 Month', 'value':'1mo'},
+                            {'label':'3 Months', 'value':'3mo'},
+                            {'label':'6 Months', 'value':'6mo'},
+                            {'label':'1 Year', 'value':'1y'},
+                            {'label':'5 Years', 'value':'5y'}
+                        ],
+                        style={'width':'150px','color':'#0f0f23'}),
+                      html.Button([html.Span('🔄', style={'marginRight':'8px'}), 'Refresh'],
+                                 id='refresh-chart', n_clicks=0,
+                                 style={'background':'linear-gradient(135deg, #6366f1, #8b5cf6)',
+                                        'border':'none','color':'white','padding':'10px 20px',
+                                        'borderRadius':'10px','cursor':'pointer','fontWeight':'600','marginLeft':'auto'})],
+                     className='chart-controls', style={'display':'flex','alignItems':'center','gap':'16px','marginBottom':'24px'}),
+            html.Div(id='chart-container', children=price_chart('AAPL', '3mo')),
+        ], className='chart-section', style={'marginTop':'40px','padding':'28px','background':'rgba(30,30,60,0.5)',
+                 'borderRadius':'24px','border':'1px solid rgba(255,255,255,0.08)'}),
+    ], className='main-content', style={'marginLeft':'300px','padding':'40px 50px','minHeight':'100vh',
+              'background':'linear-gradient(135deg, #0f0f23 0%, #16162a 50%, #1a1a2e 100%)'}),
+], style={'background':'#0f0f23','minHeight':'100vh',
+          'fontFamily':"Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif",'color':'#e0e0e0'})
+
+# ============================================================
+# Callbacks
+# ============================================================
+@app.callback([Output('stock-grid','children'), Output('stats-row','children'), 
+               Output('last-update','children'), Output('stock-count','children')],
+              [Input('refresh','n_intervals'), Input('nav-picks','n_clicks'),
+               Input('nav-value','n_clicks'), Input('nav-growth','n_clicks'), Input('nav-dividend','n_clicks')])
+def update_stocks(n_int, *args):
+    ctx = callback_context
+    trigger = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else 'refresh'
+    
+    default_syms = DEFAULT_SYMS
+    stocks = default_syms
+    
+    if trigger == 'nav-picks': 
+        stocks = top_picks(limit=12) or default_syms
+    elif trigger == 'nav-value': 
+        stocks = value_picks(limit=12) or default_syms
+    elif trigger == 'nav-growth': 
+        stocks = growth_picks(limit=12) or default_syms
+    elif trigger == 'nav-dividend': 
+        stocks = dividend_picks(limit=12) or default_syms
+    
+    return [stock_card(s) for s in stocks[:12]], get_stats(), f"Updated: {datetime.now().strftime('%H:%M:%S')}", f"{len(stocks[:12])} stocks"
+
+@app.callback(Output('chart-container','children'), [Input('chart-sym','value'), Input('chart-range','value'), Input('refresh-chart','n_clicks')])
+def update_chart(sym, time_range, n):
+    return price_chart(sym, time_range)
+
+@app.callback([Output('page-title','children'), Output('page-subtitle','children'), Output('section-title','children')],
+              [Input('nav-dashboard','n_clicks'), Input('nav-search','n_clicks'),
+               Input('nav-picks','n_clicks'), Input('nav-value','n_clicks'),
+               Input('nav-growth','n_clicks'), Input('nav-dividend','n_clicks')])
+def update_nav(*args):
+    ctx = callback_context
+    trigger = ctx.triggered[0]['prop_id'].split('.')[0] if ctx.triggered else 'nav-dashboard'
+    views = {
+        'nav-dashboard': ('📊 Dashboard', 'Real-time market analysis powered by AI', 'Featured Stocks'),
+        'nav-search': ('🔍 Search', 'Find and analyze any stock', 'Search Results'),
+        'nav-picks': ('⭐ Top Picks', 'Best opportunities by AI score', 'Top Rated Stocks'),
+        'nav-value': ('💎 Value', 'Undervalued stocks with strong fundamentals', 'Value Opportunities'),
+        'nav-growth': ('🚀 Growth', 'High growth potential stocks', 'Growth Stocks'),
+        'nav-dividend': ('💰 Dividend', 'Income-generating stocks', 'Dividend Stocks'),
+    }
+    return views.get(trigger, views['nav-dashboard'])
+
+# ============================================================
+# Run
+# ============================================================
+if __name__ == '__main__':
+    print("="*50)
+    print("  Stock PRO Dashboard v2.1")
+    print("  Open: http://127.0.0.1:8050")
+    print("="*50)
+    app.run(debug=False, port=8050, threaded=True)

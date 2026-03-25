@@ -1,0 +1,107 @@
+# tool_name: read_file
+# created_at: 2026-03-21T19:31:55.128969
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\idle-empire\js\game.js  (lines 900-1000 of 1073)
+            progressCache.visible = true;
+        }
+        var progress = Math.min(100, (G.gold / nextBuilding.cost) * 100);
+        var progressWidth = progress + '%';
+        if (progressCache.width !== progressWidth) {
+            fillEl.style.width = progressWidth;
+            progressCache.width = progressWidth;
+        }
+        var targetText = formatNumber(G.gold) + ' / ' + formatNumber(nextBuilding.cost);
+        if (progressCache.targetText !== targetText) {
+            targetEl.textContent = targetText;
+            progressCache.targetText = targetText;
+        }
+    } else {
+        if (progressCache.visible !== false) {
+            progressEl.style.display = 'none';
+            progressCache.visible = false;
+        }
+    }
+}
+
+function updateStats() {
+    if (!G) return;
+    setTextIfChanged(document.getElementById('stat-buildings'), 'statBuildings', String(getTotalBuildings(G)));
+    renderSignatures.stats = '';
+}
+
+var lastTick = Date.now();
+var lastCheckTime = Date.now();
+var CHECK_INTERVAL = 2000; // 2秒检查一次成就和里程碑
+
+function gameLoop() {
+    var now = Date.now();
+    var delta = (now - lastTick) / 1000;
+    lastTick = now;
+    if (!G) return;
+    var gps = getCurrentGps();
+    G.gold += gps * delta;
+    G.totalEarned += gps * delta;
+    requestUiUpdate({ heavy: false });
+    
+    // 减少成就和里程碑的检查频率
+    if (now - lastCheckTime >= CHECK_INTERVAL) {
+        checkAchievements();
+        if (typeof updateMilestones === 'function') updateMilestones();
+        lastCheckTime = now;
+    }
+}
+
+function startGameLoop() {
+    if (gameLoopTimer) {
+        clearTimeout(gameLoopTimer);
+        gameLoopTimer = null;
+    }
+
+    function scheduleNextLoop() {
+        var delay = document.hidden ? GAME_LOOP_HIDDEN_MS : GAME_LOOP_VISIBLE_MS;
+        gameLoopTimer = setTimeout(function() {
+            gameLoop();
+            scheduleNextLoop();
+        }, delay);
+    }
+
+    document.addEventListener('visibilitychange', function() {
+        lastTick = Date.now();
+
+        if (!document.hidden) {
+            requestUiUpdate({ heavy: true });
+        }
+    });
+
+    scheduleNextLoop();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+
+// ========== 缺失的函数 ==========
+
+function showMsg(text, type) {
+    var container = document.getElementById('toast-container');
+    if (!container) {
+        // Fallback to old method
+        var el = document.createElement('div');
+        el.className = 'message ' + type;
+        el.textContent = text;
+        document.body.appendChild(el);
+        setTimeout(function() { if(el.parentNode) el.parentNode.removeChild(el); }, 3000);
+        return;
+    }
+    
+    var icons = {
+        'success': '✓',
+        'error': '✗',
+        'warning': '⚠',
+        'info': 'ℹ',
+        'achievement': '🏆'
+    };
+    
+    var toast = document.createElement('div');
+    toast.className = 'toast ' + type;
+    toast.innerHTML = '<span class="toast-icon">' + (icons[type] || '') + '</span><span>' + text + '</span>';
+
+[73 more lines. Use start_line=1001 to continue.]

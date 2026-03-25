@@ -1,0 +1,33 @@
+# tool_name: read_file
+# created_at: 2026-03-22T16:36:47.940083
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\integrations.py  (lines 44-70 of 109)
+def save_db(results):
+    conn = sqlite3.connect(DB_FILE); c = conn.cursor()
+    c.execute('''CREATE TABLE IF NOT EXISTS stocks (symbol TEXT, price REAL, target REAL, upside REAL, score INTEGER, rating TEXT, fetched_at TEXT)''')
+    for r in results:
+        c.execute('''INSERT INTO stocks VALUES (?,?,?,?,?,?,?)''', (r['symbol'], r['price'], r['target'], r['upside'], r['score'], r['rating'], r.get('fetched_at', datetime.now().isoformat())))
+    conn.commit(); conn.close()
+    return f"[DB] Saved {len(results)} stocks"
+
+def gen_dashboard(results):
+    if not results: return "[Dashboard] No data"
+    fetched = results[0].get('fetched_at', datetime.now().isoformat())
+    avg_score = sum(r['score'] for r in results) / len(results)
+    avg_upside = sum(r['upside'] for r in results) / len(results)
+    rows = ""
+    for r in results:
+        cls = "buy" if r["score"] >= 65 else "hold" if r["score"] >= 50 else "sell"
+        upcls = "positive" if r["upside"] > 0 else "negative"
+        rows += f'<tr><td><strong>{r["symbol"]}</strong></td><td>${r["price"]:.2f}</td><td>${r["target"]:.2f}</td><td class="{upcls}">{r["upside"]:+.1f}%</td><td>{r["score"]}</td><td class="{cls}">{r["rating"]}</td><td>{r["pe"]:.0f}x</td></tr>'
+    html = f'''<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Stock Dashboard</title><style>
+body{{font-family:Arial;background:#0a0a0a;color:#fff;padding:20px}}
+.header{{display:flex;justify-content:space-between;margin-bottom:20px}}
+h1{{color:#00d4ff}}.stats{{display:grid;grid-template-columns:repeat(3,200px);gap:15px;margin-bottom:20px}}
+.stat{{background:#1a1a2e;padding:15px;border-radius:8px}}
+.stat .label{{color:#888;font-size:12px}}.stat .value{{font-size:24px;font-weight:bold;color:#00d4ff}}
+table{{width:100%;border-collapse:collapse}}
+th{{background:#1a1a2e;padding:10px;text-align:left}}td{{padding:10px;border-bottom:1px solid #333}}
+.buy{{color:#4ade80}}.hold{{color:#fbbf24}}.sell{{color:#f87171}}.positive{{color:#4ade80}}.negative{{color:#f87171}}
+
+[39 more lines. Use start_line=71 to continue.]

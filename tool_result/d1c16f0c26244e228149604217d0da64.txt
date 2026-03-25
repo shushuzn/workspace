@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-23T12:53:33.087424
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_hub.py  (lines 40-80 of 192)
+        header("Feishu Push")
+        run("news_feishu.py", mode, *extra_args)
+    
+    elif cmd == "qq":
+        mode = sys.argv[2] if len(sys.argv) > 2 else "status"
+        header("QQ Push")
+        run("news_to_qq.py", mode)
+    
+    elif cmd == "fetch":
+        header("Fetch News")
+        run("news_fetcher.py", *extra_args)
+    
+    elif cmd == "test":
+        header("Test All")
+        print(f"{YELLOW}Testing Feishu...{RESET}\n")
+        run("news_feishu.py", "all", *extra_args)
+        print(f"\n{YELLOW}Testing QQ...{RESET}\n")
+        run("news_to_qq.py", "status")
+    
+    elif cmd == "quick":
+        header("Quick Mode")
+        run("news_fetcher.py", "--quick")
+    
+    elif cmd == "export":
+        header("Export News")
+        run("news_fetcher.py", *sys.argv[2:])
+    
+    elif cmd == "server":
+        header("RSS Server")
+        import subprocess
+        subprocess.Popen([sys.executable, Path(__file__).parent / "rss_server.py"])
+        print(f"  {GREEN}✓{RESET} Server started")
+    
+    elif cmd == "report":
+        header("Generate Report")
+        run("news_report.py")
+    
+    elif cmd == "db":
+        header("Database")
+        run("news_db.py")
+    
+
+[112 more lines. Use start_line=81 to continue.]

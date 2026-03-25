@@ -1,0 +1,452 @@
+# tool_name: read_file
+# created_at: 2026-03-23T11:50:11.760261
+# ---
+"""
+NewsHub LLM Analyzer v2.0 - 增强版本地LLM新闻分析
+支持多模型、深度分析、流式输出
+"""
+import json
+import time
+import ssl
+import urllib.request
+import urllib.error
+from pathlib import Path
+from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
+
+# ============================================================
+# 配置
+# ============================================================
+
+class Config:
+    # Ollama 配置
+    OLLAMA_URL = "http://localhost:11434/api/generate"
+    OLLAMA_MODEL = "qwen2.5:1.5b"
+    
+    # 可用模型列表
+    AVAILABLE_MODELS = [
+        ("qwen2.5:1.5b", "Qwen 1.5B (快速)"),
+        ("qwen2.5:3b", "Qwen 3B (平衡)"),
+        ("qwen2.5:7b", "Qwen 7B (高质量)"),
+        ("llama3.2:1b", "Llama 3.2 1B (快速)"),
+        ("llama3.2:3b", "Llama 3.2 3B (平衡)"),
+        ("phi3:3.8b", "Phi-3 3.8B (微软)"),
+    ]
+    
+    # 分析选项
+    TIMEOUT = 30
+    MAX_TOKENS = 200
+    TEMPERATURE = 0.3  # 低温度保证一致性
+    STREAM = False
+    
+    # 并行配置
+    MAX_WORKERS = 5
+    BATCH_DELAY = 0.3
+
+# ============================================================
+# 增强提示词
+# ============================================================
+
+# 多维度分析提示词
+DEEP_ANALYZE_PROMPT = """你是专业的金融新闻分析师。深度分析以下新闻，返回JSON格式:
+
+新闻: {title}
+
+分析维度:
+1. sentiment: 情感 (positive/negative/neutral)
+2. score: 情感分数 (-100到+100)
+3. markets: 影响市场列表 (stock/forex/commodity/crypto/bond/realestate)
+4. urgency: 紧急程度 (critical/high/medium/low)
+5. timeframe: 影响时间 (immediate/short/medium/long)
+6. entities: 关键实体 (公司/人/组织)
+7. keywords: 关键词 (3-5个)
+8. risk_level: 风险等级 (high/medium/low)
+9. action: 建议行动 (buy/sell/hold/watch)
+10. summary: 一句话摘要 (<30字)
+
+返回纯JSON:
+{{"sentiment":"","score":0,"markets":[],"urgency":"","timeframe":"","entities":[],"keywords":[],"risk_level":"","action":"","summary":""}}"""
+
+# 批量分析提示词
+BATCH_ANALYZE_PROMPT = """分析以下多条金融新闻，返回JSON数组格式:
+
+{news_list}
+
+返回JSON数组，每条包含:
+- title: 原标题
+- sentiment: 情感
+- score: 分数 (-100到+100)
+- markets: 影响市场
+- urgency: 紧急程度
+- summary: 摘要
+
+纯JSON数组:
+"""
+
+# 市场情绪摘要
+MARKET_SENTIMENT_PROMPT = """分析以下新闻的市场情绪，返回JSON:
+
+新闻列表:
+{news_list}
+
+返回:
+1. overall_sentiment: 整体情绪 (bullish/bearish/neutral)
+2. confidence: 信心指数 (0-100)
+3. key_drivers: 主要驱动因素
+4. risk_factors: 风险因素
+5. outlook: 短期展望
+
+纯JSON:
+"""
+
+# ============================================================
+# SSL上下文
+# ============================================================
+
+def get_ssl_context():
+    """获取SSL上下文"""
+    ctx = ssl.create_default_context()
+    ctx.check_hostname = False
+    ctx.verify_mode = ssl.CERT_NONE
+    return ctx
+
+# ============================================================
+# Ollama API 调用
+# ============================================================
+
+def call_ollama(prompt: str, model: str = None, options: dict = None) -> str:
+    """调用Ollama API"""
+    url = Config.OLLAMA_URL
+    model = model or Config.OLLAMA_MODEL
+    
+    data = {
+        "model": model,
+        "prompt": prompt,
+        "stream": Config.STREAM,
+        "options": {
+            "num_predict": Config.MAX_TOKENS,
+            "temperature": Config.TEMPERATURE,
+            "stop": ["```", "\n\n"]
+        }
+    }
+    
+    if options:
+        data["options"].update(options)
+    
+    try:
+        req = urllib.request.Request(
+            url,
+            data=json.dumps(data).encode('utf-8'),
+            headers={'Content-Type': 'application/json'},
+            method='POST'
+        )
+        
+        with urllib.request.urlopen(req, timeout=Config.TIMEOUT, context=get_ssl_context()) as resp:
+            result = json.loads(resp.read().decode('utf-8'))
+            return result.get('response', '')
+    
+    except Exception as e:
+        print(f"    ⚠ LLM调用失败: {e}")
+        return ''
+
+def check_ollama_status() -> dict:
+    """检查Ollama状态"""
+    try:
+        req = urllib.request.Request(
+            "http://localhost:11434/api/tags",
+            headers={'Content-Type': 'application/json'}
+        )
+        
+        with urllib.request.urlopen(req, timeout=5, context=get_ssl_context()) as resp:
+            result = json.loads(resp.read().decode('utf-8'))
+            models = [m['name'] for m in result.get('models', [])]
+            return {"status": "ok", "models": models}
+    
+    except Exception as e:
+        return {"status": "error", "error": str(e)}
+
+def list_available_models() -> list:
+    """列出可用模型"""
+    status = check_ollama_status()
+    if status["status"] == "ok":
+        return status["models"]
+    return []
+
+# ============================================================
+# 分析函数
+# ============================================================
+
+def analyze_news_deep(title: str, model: str = None) -> dict:
+    """深度分析单条新闻"""
+    prompt = DEEP_ANALYZE_PROMPT.format(title=title)
+    response = call_ollama(prompt, model)
+    
+    if response:
+        try:
+            # 提取JSON
+            json_str = extract_json(response)
+            if json_str:
+                result = json.loads(json_str)
+                # 验证并补充默认值
+                return validate_analysis_result(result)
+        except json.JSONDecodeError:
+            pass
+    
+    return get_default_analysis()
+
+def analyze_news_batch(news_list: list, model: str = None) -> list:
+    """批量分析新闻（并行）"""
+    available_models = list_available_models()
+    if not available_models:
+        print("  ⚠ Ollama未运行，请先启动:")
+        print("     D:\Ollama\ollama.exe serve")
+        return news_list
+    
+    print(f"  🤖 启动LLM分析 ({len(news_list)}条, 模型: {Config.OLLAMA_MODEL})...")
+    start = time.time()
+    
+    def process(news):
+        title = news.get('title', '')
+        result = analyze_news_deep(title, model)
+        
+        # 合并结果
+        news['llm_sentiment'] = result.get('sentiment', 'neutral')
+        news['llm_score'] = result.get('score', 0)
+        news['llm_markets'] = result.get('markets', [])
+        news['llm_urgency'] = result.get('urgency', 'medium')
+        news['llm_timeframe'] = result.get('timeframe', 'short')
+        news['llm_entities'] = result.get('entities', [])
+        news['llm_keywords'] = result.get('keywords', [])
+        news['llm_risk'] = result.get('risk_level', 'low')
+        news['llm_action'] = result.get('action', 'watch')
+        news['llm_summary'] = result.get('summary', '')
+        news['llm_ts'] = time.time()
+        
+        # 更新基础字段
+        if result.get('sentiment') in ['positive', 'negative']:
+            news['sentiment'] = result['sentiment']
+        
+        return news
+    
+    # 并行处理
+    with ThreadPoolExecutor(max_workers=Config.MAX_WORKERS) as executor:
+        results = list(executor.map(process, news_list))
+    
+    elapsed = time.time() - start
+    print(f"  ✅ LLM分析完成: {len(results)}条 ({elapsed:.1f}s)")
+    print(f"  📊 平均: {elapsed/len(results):.2f}s/条")
+    
+    return results
+
+def analyze_market_sentiment(news_list: list) -> dict:
+    """分析市场整体情绪"""
+    titles = [n.get('title', '')[:80] for n in news_list[:20]]
+    news_str = '\n'.join([f"- {t}" for t in titles])
+    
+    prompt = MARKET_SENTIMENT_PROMPT.format(news_list=news_str)
+    response = call_ollama(prompt)
+    
+    if response:
+        try:
+            json_str = extract_json(response)
+            if json_str:
+                return json.loads(json_str)
+        except json.JSONDecodeError:
+            pass
+    
+    return get_default_sentiment()
+
+# ============================================================
+# 工具函数
+# ============================================================
+
+def extract_json(text: str) -> str:
+    """从文本中提取JSON"""
+    # 尝试直接解析
+    text = text.strip()
+    
+    # 查找JSON开始和结束
+    start = text.find('{')
+    if start == -1:
+        start = text.find('[')
+    
+    if start != -1:
+        # 找到匹配的结束括号
+        depth = 0
+        end = start
+        in_string = False
+        escape = False
+        
+        for i, c in enumerate(text[start:], start):
+            if escape:
+                escape = False
+                continue
+            if c == '\\':
+                escape = True
+                continue
+            if c == '"' and not escape:
+                in_string = not in_string
+                continue
+            if in_string:
+                continue
+            
+            if c == '{' or c == '[':
+                depth += 1
+            elif c == '}' or c == ']':
+                depth -= 1
+                if depth == 0:
+                    end = i + 1
+                    break
+        
+        return text[start:end]
+    
+    return ''
+
+def validate_analysis_result(result: dict) -> dict:
+    """验证并补充分析结果"""
+    defaults = {
+        'sentiment': 'neutral',
+        'score': 0,
+        'markets': ['stock'],
+        'urgency': 'medium',
+        'timeframe': 'short',
+        'entities': [],
+        'keywords': [],
+        'risk_level': 'low',
+        'action': 'watch',
+        'summary': ''
+    }
+    
+    for key, default in defaults.items():
+        if key not in result or not result[key]:
+            result[key] = default
+    
+    # 验证类型
+    if not isinstance(result.get('markets'), list):
+        result['markets'] = [result['markets']]
+    if not isinstance(result.get('entities'), list):
+        result['entities'] = [result['entities']]
+    if not isinstance(result.get('keywords'), list):
+        result['keywords'] = [result['keywords']]
+    
+    # 验证分数范围
+    if isinstance(result.get('score'), (int, float)):
+        result['score'] = max(-100, min(100, result['score']))
+    
+    return result
+
+def get_default_analysis() -> dict:
+    """获取默认分析结果"""
+    return {
+        'sentiment': 'neutral',
+        'score': 0,
+        'markets': ['stock'],
+        'urgency': 'medium',
+        'timeframe': 'short',
+        'entities': [],
+        'keywords': [],
+        'risk_level': 'low',
+        'action': 'watch',
+        'summary': ''
+    }
+
+def get_default_sentiment() -> dict:
+    """获取默认情绪分析"""
+    return {
+        'overall_sentiment': 'neutral',
+        'confidence': 50,
+        'key_drivers': [],
+        'risk_factors': [],
+        'outlook': 'neutral'
+    }
+
+# ============================================================
+# 格式化输出
+# ============================================================
+
+def format_analysis_card(news: dict) -> str:
+    """格式化分析结果为文本"""
+    lines = []
+    lines.append(f"📰 {news.get('title', '')[:50]}...")
+    lines.append(f"   情感: {news.get('llm_sentiment', 'N/A')} ({news.get('llm_score', 0):+d})")
+    
+    markets = news.get('llm_markets', [])
+    if markets:
+        lines.append(f"   市场: {', '.join(markets)}")
+    
+    urgency = news.get('llm_urgency', 'medium')
+    icons = {'critical': '🔴', 'high': '🟠', 'medium': '🟡', 'low': '⚪'}
+    lines.append(f"   紧急: {icons.get(urgency, '⚪')} {urgency}")
+    
+    action = news.get('llm_action', 'watch')
+    actions = {'buy': '📈 买入', 'sell': '📉 卖出', 'hold': '➡️ 持有', 'watch': '👀 观望'}
+    lines.append(f"   建议: {actions.get(action, action)}")
+    
+    if news.get('llm_summary'):
+        lines.append(f"   摘要: {news.get('llm_summary')}")
+    
+    return '\n'.join(lines)
+
+def format_market_sentiment(sentiment: dict) -> str:
+    """格式化市场情绪"""
+    lines = []
+    lines.append("=" * 50)
+    lines.append("  市场情绪分析")
+    lines.append("=" * 50)
+    
+    overall = sentiment.get('overall_sentiment', 'neutral')
+    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+    lines.append(f"\n{icons.get(overall, '➡️')} 整体: {overall.upper()}")
+    
+    confidence = sentiment.get('confidence', 0)
+    lines.append(f"📊 信心: {confidence}%")
+    
+    drivers = sentiment.get('key_drivers', [])
+    if drivers:
+        lines.append(f"\n📈 驱动因素:")
+        for d in drivers[:3]:
+            lines.append(f"   • {d}")
+    
+    risks = sentiment.get('risk_factors', [])
+    if risks:
+        lines.append(f"\n⚠️ 风险因素:")
+        for r in risks[:3]:
+            lines.append(f"   • {r}")
+    
+    outlook = sentiment.get('outlook', 'neutral')
+    lines.append(f"\n🔮 展望: {outlook}")
+    
+    return '\n'.join(lines)
+
+# ============================================================
+# 入口
+# ============================================================
+
+if __name__ == "__main__":
+    import sys
+    sys.stdout.reconfigure(encoding='utf-8')
+    
+    print("=" * 50)
+    print("  NewsHub LLM Analyzer v2.0")
+    print("=" * 50)
+    
+    # 检查状态
+    status = check_ollama_status()
+    if status["status"] == "ok":
+        print(f"\n✅ Ollama已连接")
+        print(f"   可用模型: {', '.join(status['models'])}")
+        print(f"   当前模型: {Config.OLLAMA_MODEL}")
+    else:
+        print(f"\n❌ Ollama未运行")
+        print("   请启动: D:\\Ollama\\ollama.exe serve")
+    
+    print(f"\n📋 可用模型:")
+    for model, desc in Config.AVAILABLE_MODELS:
+        current = " ← 当前" if model == Config.OLLAMA_MODEL else ""
+        print(f"   {model}: {desc}{current}")
+    
+    print(f"\n⚙️  配置:")
+    print(f"   超时: {Config.TIMEOUT}s")
+    print(f"   最大Token: {Config.MAX_TOKENS}")
+    print(f"   温度: {Config.TEMPERATURE}")
+    print(f"   并行线程: {Config.MAX_WORKERS}")

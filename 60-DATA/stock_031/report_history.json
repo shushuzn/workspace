@@ -1,0 +1,20 @@
+[
+  {
+    "report_id": "rpt_AAPL_1774012881",
+    "symbol": "AAPL",
+    "template": "daily",
+    "timestamp": "2026-03-20T21:21:21.352792"
+  },
+  {
+    "report_id": "rpt_AAPL_1774013373",
+    "symbol": "AAPL",
+    "template": "daily",
+    "timestamp": "2026-03-20T21:29:33.177039"
+  },
+  {
+    "report_id": "rpt_AAPL_1774013523",
+    "symbol": "AAPL",
+    "template": "daily",
+    "timestamp": "2026-03-20T21:32:03.719227"
+  }
+]

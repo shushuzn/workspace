@@ -1,0 +1,71 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T09:40:51.640960
+# ---
+
+============================================================
+Stock PRO v4.0 - Analyzing META
+============================================================
+
+Price: $593.00
+EPS: Trailing $23.50 | Forward $27.50
+P/E: Current 35.0x | Forward 21.6x
+PEG: 1.40 | Beta: 1.20
+
+Analyst Target: $864 (Overweight)
+DCF Value: $1138.51
+Combined Target: $946.35 (+59.6%)
+
+Rating: STRONG_BUY | Score: 100/100 | Risk: LOW
+
+Report saved: D:\OpenClaw\workspace\50-reports\stocks\META_2026-03-22.md
+
+============================================================
+Stock PRO v4.0 - Analyzing JPM
+============================================================
+
+Price: $287.00
+EPS: Trailing $23.50 | Forward $25.50
+P/E: Current 12.0x | Forward 11.3x
+PEG: 1.80 | Beta: 1.10
+
+Analyst Target: $370 (Overweight)
+DCF Value: $610.57
+Combined Target: $442.17 (+54.1%)
+
+Rating: STRONG_BUY | Score: 80/100 | Risk: MEDIUM
+
+Report saved: D:\OpenClaw\workspace\50-reports\stocks\JPM_2026-03-22.md
+
+============================================================
+Stock PRO v4.0 - Analyzing AAPL
+============================================================
+
+Price: $248.00
+EPS: Trailing $7.75 | Forward $8.50
+P/E: Current 32.0x | Forward 29.2x
+PEG: 3.00 | Beta: 1.20
+
+Analyst Target: $275 (Overweight)
+DCF Value: $357.10
+Combined Target: $299.63 (+20.8%)
+
+Rating: BUY | Score: 80/100 | Risk: MEDIUM
+
+Report saved: D:\OpenClaw\workspace\50-reports\stocks\AAPL_2026-03-22.md
+
+============================================================
+Stock PRO v4.0 - Analyzing MSFT
+============================================================
+
+Price: $382.00
+EPS: Trailing $10.50 | Forward $12.00
+P/E: Current 36.0x | Forward 31.8x
+PEG: 2.50 | Beta: 0.90
+
+Analyst Target: $495 (Buy)
+DCF Value: $915.49
+Combined Target: $621.15 (+62.6%)
+
+Rating: STRONG_BUY | Score: 100/100 | Risk: LOW
+
+Report saved: D:\OpenClaw\workspace\50-reports\stocks\MSFT_2026-03-22.md

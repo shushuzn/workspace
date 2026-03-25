@@ -1,0 +1,20 @@
+{
+  "snapshot_id": "session-test_test-001_20260320-083339",
+  "step_id": "test-001",
+  "session_id": "session-test",
+  "timestamp": "2026-03-20T08:33:39.075574",
+  "files": {
+    "flow-archive/20260318-universal-workflow-001/execution-state.json": {
+      "backed_up": "99-backups\\snapshots\\session-test_test-001_20260320-083339_execution-state.json",
+      "size": 733
+    },
+    "30-scripts-tools/tools_registry.json": {
+      "backed_up": "99-backups\\snapshots\\session-test_test-001_20260320-083339_tools_registry.json",
+      "size": 504924
+    },
+    "30-scripts-tools/tool_call_log.jsonl": {
+      "backed_up": "99-backups\\snapshots\\session-test_test-001_20260320-083339_tool_call_log.jsonl",
+      "size": 9025
+    }
+  }
+}

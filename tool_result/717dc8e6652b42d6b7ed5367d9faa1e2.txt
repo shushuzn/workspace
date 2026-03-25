@@ -1,0 +1,63 @@
+# tool_name: read_file
+# created_at: 2026-03-22T14:59:52.845583
+# ---
+
+def get_all_advanced_metrics(symbols=None):
+    """Get advanced metrics for multiple symbols"""
+    symbols = symbols or list(A.keys())
+    return [m for m in (get_advanced_metrics(s) for s in symbols) if m]
+
+
+def quality_report(symbols=None):
+    """Generate quality-focused report"""
+    metrics = get_all_advanced_metrics(symbols)
+    metrics.sort(key=lambda x: x["overall_quality"], reverse=True)
+    
+    report = "# Quality Analysis Report\n\n"
+    report += "| Symbol | Quality | Profit | Growth | Valuation | Balance | Recommend |\n"
+    report += "|--------|---------|--------|--------|-----------|---------|----------|\n"
+    
+    for m in metrics[:20]:
+        report += f"| {m['symbol']} | {m['overall_quality']:.0f} | {m['profitability_score']:.0f} | "
+        report += f"{m['growth_score']:.0f} | {m['valuation_score']:.0f} | {m['balance_sheet_score']:.0f} | "
+        report += f"{m['recommend']} |\n"
+    
+    return report
+
+
+def risk_return_report(symbols=None):
+    """Generate risk-return analysis"""
+    metrics = get_all_advanced_metrics(symbols)
+    
+    report = "# Risk-Return Analysis\n\n"
+    report += "| Symbol | Beta | Sharpe | Upside | Risk Level |\n"
+    report += "|--------|------|--------|--------|------------|\n"
+    
+    for m in sorted(metrics, key=lambda x: x["sharpe"], reverse=True):
+        risk = "High" if m["beta"] > 1.5 else "Medium" if m["beta"] > 1.0 else "Low"
+        report += f"| {m['symbol']} | {m['beta']:.1f} | {m['sharpe']:.2f} | {m['upside']:+.1f}% | {risk} |\n"
+    
+    return report
+
+
+def value_vs_growth_report(symbols=None):
+    """Compare value vs growth stocks"""
+    metrics = get_all_advanced_metrics(symbols)
+    
+    value_stocks = [m for m in metrics if m["valuation_score"] > 60]
+    growth_stocks = [m for m in metrics if m["growth_score"] > 60]
+    
+    report = "# Value vs Growth Analysis\n\n"
+    report += "## Value Stocks (Low Valuation)\n\n"
+    report += "| Symbol | P/E | P/B | Upside | Quality |\n"
+    report += "|--------|-----|-----|--------|---------|\n"
+    for m in sorted(value_stocks, key=lambda x: x["pe"])[:10]:
+        report += f"| {m['symbol']} | {m['pe']:.1f} | {m['pb']:.1f} | {m['upside']:+.1f}% | {m['overall_quality']:.0f} |\n"
+    
+    report += "\n## Growth Stocks (High Growth)\n\n"
+    report += "| Symbol | Rev Growth | PEG | Upside | Quality |\n"
+    report += "|--------|------------|-----|--------|---------|\n"
+    for m in sorted(growth_stocks, key=lambda x: x["rg"], reverse=True)[:10]:
+        report += f"| {m['symbol']} | {m['rg']:.1f}% | {m['peg']:.2f} | {m['upside']:+.1f}% | {m['overall_quality']:.0f} |\n"
+    
+    return report

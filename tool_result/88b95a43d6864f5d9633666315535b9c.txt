@@ -1,0 +1,29 @@
+# tool_name: glob_search
+# created_at: 2026-03-21T09:55:28.112925
+# ---
+30-scripts-tools\brainstorm_action_001.py
+30-scripts-tools\brainstorm_ai_assistant_001.py
+30-scripts-tools\brainstorm_analogy_001.py
+30-scripts-tools\brainstorm_auto_scanner_001.py
+30-scripts-tools\brainstorm_define_001.py
+30-scripts-tools\brainstorm_diverge_001.py
+30-scripts-tools\brainstorm_filter_001.py
+30-scripts-tools\brainstorm_matcher_001.py
+30-scripts-tools\brainstorm_mindmap_001.py
+30-scripts-tools\brainstorm_new_dimensions_001.py
+30-scripts-tools\brainstorm_next_001.py
+30-scripts-tools\brainstorm_optimize_001.py
+30-scripts-tools\brainstorm_prioritize_001.py
+30-scripts-tools\brainstorm_quality_predictor_001.py
+30-scripts-tools\brainstorm_quick_001.py
+30-scripts-tools\brainstorm_random_001.py
+30-scripts-tools\brainstorm_refine_001.py
+30-scripts-tools\brainstorm_reverse_001.py
+30-scripts-tools\brainstorm_roadmap_tools_001.py
+30-scripts-tools\brainstorm_scamper_001.py
+30-scripts-tools\brainstorm_sixhats_001.py
+30-scripts-tools\brainstorm_stock_analysis_001.py
+30-scripts-tools\brainstorm_stock_optimize_001.py
+30-scripts-tools\brainstorm_workflow_001.py
+30-scripts-tools\create_brainstorm_v_001.py
+30-scripts-tools\update_registry_stock_brainstorm_001.py

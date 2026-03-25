@@ -1,0 +1,25 @@
+{
+  "flow_id": "20260321-workspace-check-001",
+  "version": "1.0.0",
+  "total_steps": 12,
+  "stages": {
+    "phase1": "初始化与上下文加载",
+    "phase2": "任务执行",
+    "phase3": "验证与提交",
+    "phase4": "收尾与归档"
+  },
+  "steps": [
+    {"step_id": 1, "name": "上下文加载验证", "tool_id": "context_search", "stage": "phase1"},
+    {"step_id": 2, "name": "Flow ID 绑定", "tool_id": "flow_manager", "stage": "phase1"},
+    {"step_id": 3, "name": "任务解析", "tool_id": "task_analyzer", "stage": "phase1"},
+    {"step_id": 4, "name": "安全扫描", "tool_id": "security_scanner", "stage": "phase2"},
+    {"step_id": 5, "name": "MCP Token 修复", "tool_id": "token_fixer", "stage": "phase2"},
+    {"step_id": 6, "name": "文档更新", "tool_id": "doc_updater", "stage": "phase2"},
+    {"step_id": 7, "name": "Git 状态检查", "tool_id": "git_checker", "stage": "phase3"},
+    {"step_id": 8, "name": "Git 提交", "tool_id": "git_commit", "stage": "phase3"},
+    {"step_id": 9, "name": "Git 推送", "tool_id": "git_push", "stage": "phase3"},
+    {"step_id": 10, "name": "执行日志记录", "tool_id": "logger", "stage": "phase4"},
+    {"step_id": 11, "name": "会话压缩", "tool_id": "compressor", "stage": "phase4"},
+    {"step_id": 12, "name": "状态更新", "tool_id": "state_updater", "stage": "phase4"}
+  ]
+}

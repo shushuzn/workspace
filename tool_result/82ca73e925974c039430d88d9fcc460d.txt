@@ -1,0 +1,69 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-22T23:34:09.201098
+# ---
+
+=== FETCH @ 03-22 23:33 ===
+
+新浪财 (2):
+  - 中微半导拟斥1.6亿元增资珠海博雅，后者已连续三年亏损
+  = 梅向荣自首，其妹梅亚萍“代理人”现身接待点，传达两套偿付方案！实
+
+新浪股 (2):
+  = 阿里巴巴集团主席蔡崇信：中国科技的成果将惠及全球 #阿里
+  = 华为杨超斌：行业智能化正驶入加速期，携手伙伴共同深耕三大类AI核 #AI
+
+新浪产 (2):
+  + 中东战争升级，周一油价或将进一步上涨
+  = 伊朗议会议长警告若发电厂遭袭，中东地区基础设施将遭到“不可逆转的
+
+新浪港 (2):
+  = 洪大哥电影武术项目开机 洪金宝洪天明等出席
+  = 动画电影《笑傲江湖·曲一》传统武侠江湖风云
+
+新浪美 (2):
+  = 西北“枢纽”，集体起飞？
+  = 春晚带火机器人，这个春节多地景区机器人“很忙” #机器人
+
+新浪科 (1):
+  - 五天三板！马斯克带火的光伏牛股，要爆了？亏损收窄，公司拟收购电站 #光伏
+
+经观 (2):
+  = 1700亿元央企投资落地新疆，92个能源项目重塑国家能源安全格局
+  = 多能互补新体系成型：新疆打造‘煤电+新能源+算力’协同发展样板 #算力
+
+彭博 (2):
+  = Fannie, Freddie Place Large Bids
+  = Bessent Says US to Press Ahead i
+
+CNBC (2):
+  = OpenAI's data center pivot under #AI
+  = ICE agents will be deployed to U
+
+MW (2):
+  = Americans are about to get a cra
+  = Retirees, steel yourselves: Glob
+
+Yahoo (2):
+  = 2 Brilliant Energy Stocks to Buy
+  = 'The energy tax': Analysts weigh
+
+Inv (2):
+  = Zelenskiy urges allies to keep u
+  = Iran, U.S. trade barbs as Hormuz
+
+FT (2):
+  = 伊朗战争下，欧盟呼吁家庭走上“能源自主”之路
+  = 比特币的困局(二)
+
+BBC (2):
+  = Energy bills rise 'inescapable' 
+  = 'Club vibes without the hangover
+
+卫报 (2):
+  = Starmer adviser urges ministers 
+  = ‘Trumpflation’: how the Iran war
+
+--------------------------------
+Total: 29 new | +1 -2 =26
+Sources: 15/16
+

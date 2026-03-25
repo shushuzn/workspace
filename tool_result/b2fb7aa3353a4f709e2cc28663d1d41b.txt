@@ -1,0 +1,27 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T00:04:26.820087
+# ---
+news_manager.py:377:      def add_news(self, title, url, source="", category=""):
+news_manager.py:378:          news_id = hash(title + url) & 0xFFFFFFFF
+news_manager.py:379:          for n in self.data["news"]:
+news_manager.py:380:              if n["id"] == news_id:
+news_manager.py:381:                  return False
+news_manager.py:382:>         sentiment, sector, keywords, codes = analyze(title)
+news_manager.py:383:          self.data["news"].append({
+news_manager.py:384:              "id": news_id, "title": title, "url": url, "source": source,
+news_manager.py:385:              "category": category, "sentiment": sentiment, "sector": sector,
+news_manager.py:386:              "keywords": keywords, "codes": codes, "fetched_at": datetime.now().isoformat(), "sent": False
+news_manager.py:387:          })
+---
+news_manager.py:490:          
+news_manager.py:491:          news_items = []
+news_manager.py:492:          for item in items[:CONFIG["news"]["max_per_fetch"]]:
+news_manager.py:493:              if data.add_news(item["title"], item["url"], source["name"], cat):
+news_manager.py:494:                  total_new += 1
+news_manager.py:495:>                 sentiment, sector, keywords, codes = analyze(item["title"])
+news_manager.py:496:                  sentiment_stats[sentiment] += 1
+news_manager.py:497:                  news_items.append({
+news_manager.py:498:                      "sentiment": sentiment,
+news_manager.py:499:                      "title": item['title'][:26],
+news_manager.py:500:                      "kw": keywords[0] if keywords else "",
+---

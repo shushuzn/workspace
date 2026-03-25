@@ -1,0 +1,67 @@
+# tool_name: read_file
+# created_at: 2026-03-23T13:43:01.554927
+# ---
+            pusher = TelegramPusher()
+            success = pusher.push(news)
+            
+            return PushResult('telegram', success, len(news))
+        except Exception as e:
+            return PushResult('telegram', False, 0, str(e))
+    
+    def _push_discord(self, news: List[Dict]) -> PushResult:
+        """Discord推送"""
+        try:
+            from news_discord import DiscordPusher
+            
+            pusher = DiscordPusher()
+            success = pusher.push(news)
+            
+            return PushResult('discord', success, len(news))
+        except Exception as e:
+            return PushResult('discord', False, 0, str(e))
+    
+    def _push_slack(self, news: List[Dict]) -> PushResult:
+        """Slack推送"""
+        try:
+            from news_slack import SlackPusher
+            
+            pusher = SlackPusher()
+            success = pusher.push(news)
+            
+            return PushResult('slack', success, len(news))
+        except Exception as e:
+            return PushResult('slack', False, 0, str(e))
+    
+    def _push_email(self, news: List[Dict]) -> PushResult:
+        """邮件推送"""
+        try:
+            from news_email import EmailPusher
+            
+            pusher = EmailPusher()
+            success = pusher.push(news)
+            
+            return PushResult('email', success, len(news))
+        except Exception as e:
+            return PushResult('email', False, 0, str(e))
+    
+    def _push_webhook(self, news: List[Dict]) -> PushResult:
+        """Webhook推送"""
+        try:
+            from news_webhook import WebhookPusher
+            
+            pusher = WebhookPusher()
+            success = pusher.push(news)
+            
+            return PushResult('webhook', success, len(news))
+        except Exception as e:
+            return PushResult('webhook', False, 0, str(e))
+    
+    def _save_notification(self):
+        """保存通知记录"""
+        try:
+            from database import db
+            
+            for result in self.results:
+                db.add_notification(
+                    channel=result.channel,
+                    mode='batch

@@ -1,0 +1,66 @@
+# tool_name: read_file
+# created_at: 2026-03-24T00:01:53.700161
+# ---
+D:\OpenClaw\workspace\memory\2026-03-22.md  (lines 1291-1350 of 1785)
+### rss_server.py Architecture
+
+```python
+# Key classes
+class Cache:  # JSON file cache with TTL
+class Handler:  # HTTP request handler
+
+# Key functions
+def fetch(session, url):  # Async HTTP fetch
+def parse(text):  # RSS/XML parsing
+def rss(news, title):  # Generate RSS XML
+def html_page(news, title):  # Generate HTML page
+async def update(cache):  # Refresh all feeds
+```
+
+### Pending: Jin10 RSS Feed Endpoint
+
+**User requested:** `curl http://localhost:8888/jin10.xml`
+
+**Status:** In progress - need to add `jin10.xml` endpoint to rss_server.py that:
+1. Reads from `data_jin10_news.json`
+2. Converts Jin10 format to standard RSS XML
+3. Serves at `/jin10.xml` endpoint
+
+---
+
+## QQ Bot News Push System (Session 2026-03-22 Evening)
+
+### Problem
+User wanted to push news to QQ groups in addition to Feishu.
+
+### Solution
+Implemented NapCat-based QQ bot integration.
+
+### Files Created
+
+| File | Purpose |
+|------|---------|
+| `news_to_qq_napcat.py` | QQ push via NapCat |
+| `news_to_all.py` | Unified push to QQ + Feishu |
+| `news_manager.py` | Unified news manager |
+| `news_auto.bat` | Auto fetch + push |
+| `news_digest.bat` | Daily digest push |
+
+### NapCat Configuration
+
+**Config file:** `D:\natcap\config\onebot11_3523424986.json`
+```json
+{
+  "network": {
+    "httpServers": [
+      {
+        "name": "http",
+        "enable": true,
+        "port": 3000,
+        "host": "127.0.0.1",
+        "enableCors": true,
+        "enableHeartBeat": false,
+        "token": ""
+      }
+
+[435 more lines. Use start_line=1351 to continue.]

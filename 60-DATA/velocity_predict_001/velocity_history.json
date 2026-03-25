@@ -1,0 +1,36 @@
+{
+  "records": [
+    {
+      "dimension": "stock_analysis",
+      "completed": 45,
+      "total": 45,
+      "progress_pct": 100.0,
+      "date": "2026-03-20",
+      "timestamp": "2026-03-20T22:18:03.182957"
+    },
+    {
+      "dimension": "optimization",
+      "completed": 5,
+      "total": 5,
+      "progress_pct": 100.0,
+      "date": "2026-03-20",
+      "timestamp": "2026-03-20T22:18:03.184363"
+    },
+    {
+      "dimension": "protection",
+      "completed": 17,
+      "total": 17,
+      "progress_pct": 100.0,
+      "date": "2026-03-20",
+      "timestamp": "2026-03-20T22:18:03.185330"
+    },
+    {
+      "dimension": "automation",
+      "completed": 2,
+      "total": 2,
+      "progress_pct": 100.0,
+      "date": "2026-03-20",
+      "timestamp": "2026-03-20T22:18:03.186266"
+    }
+  ]
+}

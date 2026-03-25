@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-21T13:39:25.193537
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\add_four_stage_001.py  (lines 100-140 of 238)
+# STAGE 1: ARCHITECT 架构设计
+# ==============================================================================
+"""
+        new_content += header
+    
+    new_content += f"""
+# ==============================================================================
+# STAGE 3: ASK 询问确认
+# ==============================================================================
+\"\"\"
+ASK: Run verification
+
+Test Commands:
+    py {tool_name}
+
+Expected Output:
+    - Tool runs without errors
+    - Shows usage or performs intended action
+\"\"\"
+"""
+    
+    new_content += f"""
+# ==============================================================================
+# STAGE 4: DEBUG 调试测试
+# ==============================================================================
+\"\"\"
+DEBUG: Test cases and fixes
+
+Test Cases:
+    1. Basic invocation → Works
+    2. --help flag → Shows usage
+
+Fixes:
+    - (none yet)
+\"\"\"
+"""
+    
+    if insert_point < len(content):
+        new_content += '\n' + content[insert_point:]
+    
+    return new_content, "updated"
+
+[98 more lines. Use start_line=141 to continue.]

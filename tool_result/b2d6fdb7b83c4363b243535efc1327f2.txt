@@ -1,0 +1,62 @@
+# tool_name: read_file
+# created_at: 2026-03-22T23:53:19.189570
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 395-450 of 697)
+    print()
+    return total_new
+
+def cmd_push(args):
+    data = NewsData()
+    news_list = data.get_unsent(limit=int(args.limit) if hasattr(args, 'limit') else 5)
+    if not news_list:
+        print(f"{cn('[!] No news to push')}")
+        return
+    
+    # 分析
+    risk = get_risk(news_list)
+    now = datetime.now().strftime("%m-%d %H:%M")
+    
+    # 构建消息 (紧凑格式)
+    header = f"[NEWS] {now}"
+    body = "\n".join([f"{'+' if n.get('sentiment')=='利好' else '-' if n.get('sentiment')=='利空' else '='} {n.get('title','')[:30]}" for n in news_list])
+    sources = list(set([SOURCE_MAP.get(n.get('source',''), n.get('category','')) for n in news_list]))[:4]
+    sectors = list(set([n.get('sector','通用') for n in news_list]))[:3]
+    msg = f"{header}\n{body}\n---\nSources: {', '.join(sources)}\nSectors: {', '.join(sectors)}\nRisk:{risk}"
+    msg = msg.strip()
+    ids = [n["id"] for n in news_list]
+    results = []
+    
+    # 统计
+    pos_cnt = sum(1 for n in news_list if n.get("sentiment") == "利好")
+    neg_cnt = sum(1 for n in news_list if n.get("sentiment") == "利空")
+    
+    # 打印
+    risk_color = Colors.risk_high() if risk == "高风险" else Colors.risk_low()
+    print(f"\n{c(Colors.header(), '=== PUSH @ ' + now + ' ===')}")
+    print(f"Items: {len(news_list)} | {cp('+' + str(pos_cnt))} {cn('-' + str(neg_cnt))} | {c(risk_color, risk)}")
+    
+    # 发送
+    if CONFIG["qq"]["enabled"]:
+        ok, mid = send_qq_message(CONFIG["qq"]["group_id"], msg)
+        status = cp("OK") if ok else cn("FAIL")
+        print(f"  QQ: {status}")
+        if ok:
+            data.data["stats"]["qq"] = data.data["stats"].get("qq", 0) + 1
+            results.append("QQ")
+    
+    if CONFIG["feishu"]["enabled"]:
+        ok, mid = send_feishu_message(msg)
+        status = cp("OK") if ok else cn("FAIL")
+        print(f"  Feishu: {status}")
+        if ok:
+            data.data["stats"]["feishu"] = data.data["stats"].get("feishu", 0) + 1
+            results.append("Feishu")
+    
+    data.mark_sent(ids)
+    data.save()
+    
+    if results:
+        print(c(Colors.GREEN, f"\n[Pushed to {len(results)} platform(s)]"))
+    print()
+
+[247 more lines. Use start_line=451 to continue.]

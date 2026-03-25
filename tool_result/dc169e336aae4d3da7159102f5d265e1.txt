@@ -1,0 +1,47 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:51:23.547398
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 1070-1110 of 1247)
+                lines.append(f"    -> {summary}")
+            if signal:
+                lines.append(f"    [信号: {signal}]")
+        lines.append("")
+    
+    # 利空
+    if negative:
+        lines.append(">>> 利空 (-)")
+        for news in negative:
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            keywords = news.get('keywords', [])
+            codes = news.get('codes', [])
+            summary = extract_summary(news['title'], '利空')
+            signal = get_trade_signal(news)
+            timeliness = get_timeliness(news['title'])
+            
+            lines.append(f"  - {timeliness}{news['title'][:42]}")
+            meta = f"[{sector}][{source}]"
+            if keywords:
+                meta += " " + " ".join([f"#{k}" for k in keywords[:2]])
+            if codes:
+                meta += f" ${codes[0]}"
+            lines.append(f"    {meta}")
+            if summary:
+                lines.append(f"    -> {summary}")
+            if signal:
+                lines.append(f"    [信号: {signal}]")
+        lines.append("")
+    
+    # 中性
+    if neutral:
+        lines.append(">>> 中性 (=)")
+        for news in neutral[:3]:
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            keywords = news.get('keywords', [])
+            codes = news.get('codes', [])
+            summary = extract_summary(news['title'], '中性')
+            timeliness = get_timeliness(news['title'])
+            
+
+[137 more lines. Use start_line=1111 to continue.]

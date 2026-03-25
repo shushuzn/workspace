@@ -1,0 +1,45 @@
+# tool_name: grep_search
+# created_at: 2026-03-23T10:31:57.392418
+# ---
+news_fetcher.py:375:                  analysis.setdefault('entities', [])
+news_fetcher.py:376:                  analysis.setdefault('keywords', [])
+news_fetcher.py:377:                  analysis.setdefault('impact', 'medium')
+news_fetcher.py:378:                  analysis.setdefault('advice', 'neutral')
+news_fetcher.py:379:                  analysis.setdefault('summary', title[:20])
+news_fetcher.py:380:                  
+news_fetcher.py:381:                  # 缓存结果
+news_fetcher.py:382:                  cache[title_hash] = analysis
+news_fetcher.py:383:                  save_llm_cache(cache)
+news_fetcher.py:384:                  return analysis
+news_fetcher.py:385:      except:
+news_fetcher.py:386:          pass
+news_fetcher.py:387:      return None
+news_fetcher.py:388:  
+news_fetcher.py:389:  def analyze_llm_parallel(args):
+news_fetcher.py:390:      """并行LLM分析worker"""
+news_fetcher.py:391:      idx, title = args
+news_fetcher.py:392:      result = analyze_with_llm(title)
+news_fetcher.py:393:      return idx, result
+news_fetcher.py:394:  
+news_fetcher.py:395:> def enrich_with_llm(news_list, max_items=10, use_cache=True):
+news_fetcher.py:396:      """使用LLM并行丰富新闻数据"""
+news_fetcher.py:397:      if not check_ollama_status():
+news_fetcher.py:398:          print("  ⚠ Ollama未运行，跳过LLM分析")
+news_fetcher.py:399:          return news_list
+news_fetcher.py:400:      
+news_fetcher.py:401:      print("  🤖 启用本地LLM并行分析...")
+news_fetcher.py:402:      start = time.time()
+news_fetcher.py:403:      
+news_fetcher.py:404:      # 预加载缓存
+news_fetcher.py:405:      cache = {}
+news_fetcher.py:406:      if use_cache:
+news_fetcher.py:407:          cache = load_llm_cache()
+news_fetcher.py:408:      
+news_fetcher.py:409:      # 使用MD5保证hash一致性
+news_fetcher.py:410:      import hashlib
+news_fetcher.py:411:      
+news_fetcher.py:412:      # 准备任务 - 跳过已缓存的
+news_fetcher.py:413:      uncached_tasks = []
+news_fetcher.py:414:      cached_results = {}
+news_fetcher.py:415:      for i, news in enumerate(news_list[:max_items]):
+---

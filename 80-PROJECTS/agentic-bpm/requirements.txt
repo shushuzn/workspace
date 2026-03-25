@@ -1,0 +1,14 @@
+# Agentic BPM
+aiagent-bpm>=0.1.0
+
+# Core
+click>=8.1.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+
+# Utils
+python-dotenv>=1.0.0
+
+# Dev
+pytest>=7.4.0
+pytest-asyncio>=0.21.0

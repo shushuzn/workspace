@@ -1,0 +1,51 @@
+# tool_name: read_file
+# created_at: 2026-03-22T18:10:53.868948
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\sentiment.py  (lines 216-260 of 1485)
+            _JIN10_NEWS_CACHE = unique_news[:50]
+            _JIN10_CACHE_TIME = now
+            
+            return _JIN10_NEWS_CACHE
+    
+    except Exception as e:
+        print(f"Jin10 fetch error: {e}")
+        return _JIN10_NEWS_CACHE or []
+
+
+def get_jin10_news_for_stock(symbol):
+    """Get Jin10 news related to a specific stock"""
+    keywords = _STOCK_KEYWORDS.get(symbol.upper(), [])
+    if not keywords:
+        return []
+    
+    all_news = fetch_jin10_news()
+    matched_news = []
+    
+    for news in all_news:
+        title = news['title']
+        for keyword in keywords:
+            if keyword.lower() in title.lower():
+                matched_news.append(news)
+                break
+    
+    return matched_news
+
+
+def get_news(symbol, days=7):
+    """Get recent news for a symbol (combines local + Jin10)"""
+    today = datetime.now()
+    cutoff = today - timedelta(days=days)
+    
+    # Get local news
+    news = NEWS_DATA.get(symbol, [])
+    
+    # Get Jin10 news
+    jin10_news = get_jin10_news_for_stock(symbol)
+    
+    # Combine and dedupe
+    all_news = []
+    seen_titles = set()
+    
+    # Add local news first
+
+[1225 more lines. Use start_line=261 to continue.]

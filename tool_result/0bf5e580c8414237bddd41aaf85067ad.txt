@@ -1,0 +1,25 @@
+# tool_name: grep_search
+# created_at: 2026-03-21T17:22:19.745082
+# ---
+game.js:173:              '<div class="boss-card-info"><div class="boss-card-name">' + b.name + '</div>' +
+game.js:174:              '<div class="boss-card-stats">HP: ' + formatNumber(b.hp) + ' | 奖励: ' + formatNumber(b.reward) + '</div></div>' +
+game.js:175:              '<div class="boss-card-status">' + 
+game.js:176:              (!isUnlocked ? '<div class="boss-card-hp">🔒 需要 ' + formatNumber(b.unlockGold) + '</div>' : 
+game.js:177:               isCurrent ? '<div class="boss-card-reward">⚔️ 进行中</div>' : '<div class="boss-card-reward">✓ 已解锁</div>') +
+game.js:178:              '</div>';
+game.js:179:          c.appendChild(div);
+game.js:180:      });
+game.js:181:  }
+game.js:182:  
+game.js:183:> function updateUI() {
+game.js:184:      if (!G) return;
+game.js:185:      document.getElementById('gold').textContent = formatNumber(G.gold);
+game.js:186:      document.getElementById('gps').textContent = formatNumber(getTotalProduction(G));
+game.js:187:  }
+game.js:188:  
+game.js:189:  function updateStats() {
+game.js:190:      if (!G) return;
+game.js:191:      document.getElementById('stat-buildings').textContent = getTotalBuildings(G);
+game.js:192:      document.getElementById('stat-total').textContent = formatNumber(G.totalEarned);
+game.js:193:      document.getElementById('stat-time').textContent = formatTime(Math.floor((Date.now() - G.startTime) / 1000));
+---

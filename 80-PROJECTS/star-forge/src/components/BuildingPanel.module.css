@@ -1,0 +1,252 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px;
+  background: var(--card-bg);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  animation: fadeIn 0.5s ease;
+}
+
+[data-quality="low"] .container {
+  animation: none;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.title {
+  font-size: 14px;
+  font-weight: 600;
+  background: linear-gradient(90deg, var(--text-primary) 0%, var(--accent-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin: 0;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+[data-quality="low"] .list {
+  gap: 8px;
+}
+
+.building {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px;
+  background: var(--input-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  cursor: not-allowed;
+  opacity: 0.6;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-quality="low"] .building {
+  transition: none;
+  padding: 12px;
+}
+
+[data-quality="low"] .building::before {
+  display: none;
+}
+
+.building::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--accent-bg), transparent);
+  transition: left 0.5s ease;
+}
+
+.building.affordable {
+  cursor: pointer;
+  opacity: 1;
+  background: var(--accent-bg);
+  border-color: var(--accent-color);
+}
+
+[data-quality="low"] .building.affordable {
+  background: var(--input-bg);
+}
+
+.building.affordable:hover {
+  background: var(--accent-bg-hover);
+  border-color: var(--accent-color);
+  transform: translateX(4px);
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+[data-quality="low"] .building.affordable:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.building.affordable:hover::before {
+  left: 100%;
+}
+
+[data-quality="low"] .building.affordable:hover::before {
+  left: -100%;
+}
+
+.buildingIcon {
+  font-size: 32px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+[data-quality="low"] .buildingIcon {
+  transition: none;
+  font-size: 28px;
+  width: 44px;
+  height: 44px;
+}
+
+.building.affordable:hover .buildingIcon {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px var(--shadow-color);
+}
+
+[data-quality="low"] .building.affordable:hover .buildingIcon {
+  transform: none;
+  box-shadow: none;
+}
+
+.buildingInfo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.buildingName {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+[data-quality="low"] .buildingName {
+  transition: none;
+  font-size: 14px;
+}
+
+.building.affordable:hover .buildingName {
+  color: var(--accent-color);
+}
+
+[data-quality="low"] .building.affordable:hover .buildingName {
+  color: var(--text-primary);
+}
+
+.buildingOwned {
+  font-size: 12px;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+[data-quality="low"] .buildingOwned {
+  transition: none;
+  font-size: 11px;
+}
+
+.building.affordable:hover .buildingOwned {
+  color: var(--text-secondary);
+}
+
+[data-quality="low"] .building.affordable:hover .buildingOwned {
+  color: var(--text-muted);
+}
+
+.buildingStats {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 4px;
+}
+
+.buildingProduction {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-color);
+  font-variant-numeric: tabular-nums;
+  transition: all 0.3s ease;
+}
+
+[data-quality="low"] .buildingProduction {
+  transition: none;
+  font-size: 12px;
+}
+
+.building.affordable:hover .buildingProduction {
+  color: var(--accent-color);
+}
+
+[data-quality="low"] .building.affordable:hover .buildingProduction {
+  color: var(--accent-color);
+}
+
+.buildingCost {
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+[data-quality="low"] .buildingCost {
+  transition: none;
+  font-size: 11px;
+}
+
+.costAffordable {
+  color: var(--success-color);
+}
+
+.costExpensive {
+  color: var(--danger-color);
+  opacity: 0.7;
+}
+
+.container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: var(--scrollbar-bg);
+  border-radius: 3px;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 3px;
+  transition: all 0.3s ease;
+}
+
+.container::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}

@@ -1,0 +1,38 @@
+{
+  "version": "1.0",
+  "reports": [
+    {
+      "timestamp": "2026-03-20T00:48:30.548152",
+      "symbol": "TEST",
+      "rating": "A+ (Strong Buy)",
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:01:31.906456",
+      "symbol": "TEST",
+      "rating": "A+ (Strong Buy)",
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:02:35.929470",
+      "symbol": "TEST",
+      "rating": "A+ (Strong Buy)",
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:05:11.303180",
+      "symbol": "TEST",
+      "rating": "A+ (Strong Buy)",
+      "success": true
+    },
+    {
+      "timestamp": "2026-03-21T01:05:39.312248",
+      "symbol": "TEST",
+      "rating": "A+ (Strong Buy)",
+      "success": true
+    }
+  ],
+  "stats": {
+    "total_reports": 5
+  }
+}

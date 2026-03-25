@@ -1,0 +1,48 @@
+# tool_name: execute_shell_command
+# created_at: 2026-03-23T13:25:38.705729
+# ---
+
+[1m[36m──────────────────────────────────────────────────[0m
+[1m[36m  热点话题检测[0m
+[1m[36m──────────────────────────────────────────────────[0m
+
+
+╔════════════════════════════════════════════════╗
+║  🔥 热点话题检测                                      
+╚════════════════════════════════════════════════╝
+
+⏰ 时间: 2026-03-23 13:25
+📰 分析: 81 条新闻
+
+【TOP 10 热点】
+
+1. 🔥🔥🔥 AI
+   出现: 5次 | 热度: 20 | 来源: TechCrunch, 36氪, 新浪财经
+   └ Stocks Sink in Broad AI Rout Sparke...
+2. 🔥🔥 Iran
+   出现: 5次 | 热度: 11 | 来源: Investing, CNBC, Seeking Alpha
+   └ Fed votes to hold rates steady, not...
+3. 🔥 Fed
+   出现: 7次 | 热度: 9 | 来源: CNBC
+   └ Fed Governor Waller urges caution f...
+4. 🔥 China
+   出现: 2次 | 热度: 6 | 来源: CNBC, 华尔街日报
+   └ Stocks Sink in Broad AI Rout Sparke...
+5. 🔥 SLMG
+   出现: 2次 | 热度: 6 | 来源: Investing, 新浪财经
+   └ 印度可口可乐装瓶商SLMG称中东战争恐推高价格...
+6. 🔥 SEC
+   出现: 2次 | 热度: 6 | 来源: TechCrunch, CNBC
+   └ SEC Commissioner Hester Peirce on E...
+7. 🔥 The
+   出现: 2次 | 热度: 6 | 来源: TechCrunch, CNBC
+   └ The Fed issues its latest interest ...
+8. 🔥 Korea
+   出现: 2次 | 热度: 6 | 来源: Investing, CoinDesk
+   └ ING sees incoming Bank of Korea gov...
+9. 🔥 EV
+   出现: 2次 | 热度: 6 | 来源: TechCrunch, Investing
+   └ Some U.S. car buyers envy what they...
+10. 🔥 Musk
+   出现: 2次 | 热度: 6 | 来源: TechCrunch, Investing
+   └ Musk says SpaceX and Tesla to build...

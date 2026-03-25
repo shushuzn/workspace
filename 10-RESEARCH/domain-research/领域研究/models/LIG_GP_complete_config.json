@@ -1,0 +1,28 @@
+{
+  "model": "GaussianProcessRegressor",
+  "features": [
+    "P_W",
+    "v_mms",
+    "E_Jcm2",
+    "co_ratio"
+  ],
+  "target": "sigma_Sm",
+  "kernel": "1.06**2 * RBF(length_scale=[0.0271, 2.05e+03, 0.408, 1.4]) + WhiteKernel(noise_level=0.0135)",
+  "dataset": {
+    "source": "research\\data\\lig_dataset_100.csv",
+    "n_samples": 120,
+    "n_train": 96,
+    "n_test": 24,
+    "test_size": 0.2,
+    "random_state": 42
+  },
+  "performance": {
+    "r2": 0.18707163012433192,
+    "mae": 930.6774624569513,
+    "rmse": 1165.8744355575666,
+    "nrmse_pct": 128.42370850997517,
+    "mean_uncertainty": 908.0301414286987,
+    "relative_uncertainty_pct": 100.0215757757327,
+    "ci_95_coverage": 79.16666666666666
+  }
+}

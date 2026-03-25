@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Dashboard</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #1a1a2e; color: #eee; padding: 20px; }
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header h1 { color: #00d4ff; }
+        .timestamp { color: #888; font-size: 14px; }
+        .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .card { background: #16213e; border-radius: 12px; padding: 20px; }
+        .card h2 { color: #00d4ff; margin-bottom: 15px; font-size: 18px; }
+        
+        .stock-item { display: flex; justify-content: space-between; align-items: center; padding: 12px; background: #0f3460; border-radius: 8px; margin-bottom: 10px; }
+        .stock-symbol { font-weight: bold; font-size: 16px; }
+        .stock-price { font-size: 18px; }
+        .positive { color: #00ff88; }
+        .negative { color: #ff4757; }
+        
+        .alert-item { padding: 10px; background: #2d1b1b; border-left: 3px solid #ff4757; margin-bottom: 8px; border-radius: 4px; }
+        .alert-high { border-left-color: #ff4757; }
+        .alert-medium { border-left-color: #ffa502; }
+        
+        .summary-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; }
+        .summary-item { background: #0f3460; padding: 15px; border-radius: 8px; text-align: center; }
+        .summary-value { font-size: 24px; font-weight: bold; }
+        .summary-label { color: #888; font-size: 12px; margin-top: 5px; }
+        
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Stock Dashboard</h1>
+        <div class="timestamp">更新时间: 2026-03-20T20:13:06.010148</div>
+    </div>
+    
+    <div class="grid">
+        <div class="card">
+            <h2>Watchlist (5)</h2>
+            <div class="stock-item">
+                <div>
+                    <div class="stock-symbol">AAPL</div>
+                    <div style="color:#888;font-size:12px;">Vol: 35,375,500</div>
+                </div>
+                <div class="stock-price">
+                    <div>$184.74</div>
+                    <div class="negative">-0.14%</div>
+                </div>
+            </div><div class="stock-item">
+                <div>
+                    <div class="stock-symbol">GOOGL</div>
+                    <div style="color:#888;font-size:12px;">Vol: 27,706,866</div>
+                </div>
+                <div class="stock-price">
+                    <div>$140.62</div>
+                    <div class="negative">-0.97%</div>
+                </div>
+            </div><div class="stock-item">
+                <div>
+                    <div class="stock-symbol">MSFT</div>
+                    <div style="color:#888;font-size:12px;">Vol: 15,882,733</div>
+                </div>
+                <div class="stock-price">
+                    <div>$414.80</div>
+                    <div class="negative">-0.05%</div>
+                </div>
+            </div><div class="stock-item">
+                <div>
+                    <div class="stock-symbol">AMZN</div>
+                    <div style="color:#888;font-size:12px;">Vol: 44,881,330</div>
+                </div>
+                <div class="stock-price">
+                    <div>$180.40</div>
+                    <div class="positive">+1.35%</div>
+                </div>
+            </div><div class="stock-item">
+                <div>
+                    <div class="stock-symbol">TSLA</div>
+                    <div style="color:#888;font-size:12px;">Vol: 33,000,925</div>
+                </div>
+                <div class="stock-price">
+                    <div>$242.69</div>
+                    <div class="negative">-0.94%</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Alerts (0)</h2>
+            <div style="color:#888;">No alerts</div>
+        </div>
+        
+        <div class="card">
+            <h2>Portfolio Summary</h2>
+            <div class="summary-grid">
+                <div class="summary-item">
+                    <div class="summary-value">$43,510</div>
+                    <div class="summary-label">Total Value</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value">$40,550</div>
+                    <div class="summary-label">Total Cost</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value class="positive">$2,960</div>
+                    <div class="summary-label">P/L</div>
+                </div>
+                <div class="summary-item">
+                    <div class="summary-value class="positive">+7.30%</div>
+                    <div class="summary-label">Return</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card">
+            <h2>Positions</h2>
+            <div class="stock-item">
+                <div>
+                    <div class="stock-symbol">AAPL</div>
+                    <div style="color:#888;font-size:12px;">100 shares @ $175.00</div>
+                </div>
+                <div class="stock-price">
+                    <div>$18,500</div>
+                    <div class="positive">+5.71%</div>
+                </div>
+            </div><div class="stock-item">
+                <div>
+                    <div class="stock-symbol">MSFT</div>
+                    <div style="color:#888;font-size:12px;">50 shares @ $380.00</div>
+                </div>
+                <div class="stock-price">
+                    <div>$20,750</div>
+                    <div class="positive">+9.21%</div>
+                </div>
+            </div><div class="stock-item">
+                <div>
+                    <div class="stock-symbol">GOOGL</div>
+                    <div style="color:#888;font-size:12px;">30 shares @ $135.00</div>
+                </div>
+                <div class="stock-price">
+                    <div>$4,260</div>
+                    <div class="positive">+5.19%</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

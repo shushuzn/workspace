@@ -1,0 +1,56 @@
+# tool_name: read_file
+# created_at: 2026-03-22T17:09:42.328283
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\stock_pro\core.py  (lines 1-50 of 304)
+"""Core stock analysis engine - Optimized v12.8"""
+import json
+import urllib.request
+from datetime import datetime
+from concurrent.futures import ThreadPoolExecutor, as_completed
+from stock_pro.data_target import A
+from stock_pro.data_financial import F
+from stock_pro.data_price import P, B, E
+from stock_pro.cache import cache
+
+# Cache TTL: 15 minutes
+LIVE_CACHE_TTL = 900
+
+def fetch(symbol):
+    """Get current price with caching"""
+    cache_key = f"price:{symbol}"
+    cached = cache.get(cache_key)
+    if cached:
+        return cached[0], "cached", cached[1], cached[2]
+    
+    try:
+        url = f"https://query1.finance.yahoo.com/v8/finance/chart/{symbol}?interval=1d&range=1d"
+        req = urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"})
+        with urllib.request.urlopen(req, timeout=5) as resp:
+            data = json.loads(resp.read())
+            price = data["chart"]["result"][0]["meta"]["regularMarketPrice"]
+            now = datetime.now().isoformat()
+            cache.set(cache_key, (price, now, now), ttl=LIVE_CACHE_TTL)
+            return price, "live", now, now
+    except:
+        fallback = P.get(symbol, 0), "fallback", datetime.now().isoformat(), datetime.now().isoformat()
+        cache.set(cache_key, fallback, ttl=LIVE_CACHE_TTL)
+        return fallback
+
+def fetch_batch(symbols):
+    """Batch fetch - cache first, then fetch remaining"""
+    results = {}
+    uncached = []
+    
+    # Check cache
+    for sym in symbols:
+        cached = cache.get(f"price:{sym}")
+        if cached:
+            results[sym] = (cached[0], "cached", cached[1], cached[2])
+        else:
+            uncached.append(sym)
+    
+    # Fetch uncached in parallel
+    if uncached:
+        with ThreadPoolExecutor(max_workers=5) as executor:
+
+[254 more lines. Use start_line=51 to continue.]

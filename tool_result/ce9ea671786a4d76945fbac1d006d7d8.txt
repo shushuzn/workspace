@@ -1,0 +1,205 @@
+# tool_name: grep_search
+# created_at: 2026-03-22T18:17:51.273684
+# ---
+main.py:224:      
+main.py:225:      # Technical Analysis (check before single stock)
+main.py:226:      if args.technical:
+main.py:227:>         sym = args.symbols[0] if args.symbols else "NVDA"
+main.py:228:          output = technical_report([sym])
+main.py:229:          print(BANNER)
+main.py:230:          print(output)
+---
+main.py:247:          args.signal, args.risk is not None, args.trends
+main.py:248:      ])
+main.py:249:      
+main.py:250:>     if args.symbols and not skip_single:
+main.py:251:          sym = args.symbols[0]
+main.py:252:          lang = "cn" if args.cn else "en"
+main.py:253:          data = analyze(sym)
+---
+main.py:297:      
+main.py:298:      # CSV
+main.py:299:      if args.csv:
+main.py:300:>         symbols = args.symbols if args.symbols else ["NVDA"]
+main.py:301:          results = analyze_multiple(symbols)
+main.py:302:          print(export_csv(symbols))
+main.py:303:          return
+---
+main.py:304:      
+main.py:305:      # Excel
+main.py:306:      if args.xlsx:
+main.py:307:>         symbols = args.symbols if args.symbols else ["NVDA"]
+main.py:308:          print(export_xlsx(symbols))
+main.py:309:          return
+main.py:310:      
+---
+main.py:429:      
+main.py:430:      # Signal Analysis
+main.py:431:      if args.signal:
+main.py:432:>         symbols = args.symbols if args.symbols else ["NVDA"]
+main.py:433:          print("\n# Technical Signals\n")
+main.py:434:          for sym in symbols:
+main.py:435:              data = analyze(sym)
+---
+main.py:520:      
+main.py:521:      # Performance Analysis
+main.py:522:      if args.performance:
+main.py:523:>         symbols = args.symbols if args.symbols else list(A.keys())
+main.py:524:          results = analyze_multiple(symbols)
+main.py:525:          print(performance_report(results))
+main.py:526:          return
+---
+main.py:527:      
+main.py:528:      # Data Quality
+main.py:529:      if args.quality:
+main.py:530:>         results = analyze_multiple(args.symbols if args.symbols else list(A.keys()))
+main.py:531:          print(data_quality_report(results))
+main.py:532:          return
+main.py:533:      
+---
+main.py:533:      
+main.py:534:      # Full Report
+main.py:535:      if args.full_report:
+main.py:536:>         symbols = args.symbols if args.symbols else list(A.keys())
+main.py:537:          print(full_report(symbols))
+main.py:538:          return
+main.py:539:      
+---
+main.py:539:      
+main.py:540:      # Export All
+main.py:541:      if args.export_all:
+main.py:542:>         symbols = args.symbols if args.symbols else list(A.keys())
+main.py:543:          outputs = export_all(symbols)
+main.py:544:          for o in outputs:
+main.py:545:              print(o)
+---
+main.py:547:      
+main.py:548:      # Correlation Analysis
+main.py:549:      if args.correlation:
+main.py:550:>         symbols = args.symbols if args.symbols else list(A.keys())[:10]
+main.py:551:          print(correlation_report(symbols))
+main.py:552:          return
+main.py:553:      
+---
+main.py:553:      
+main.py:554:      # Benchmark Analysis
+main.py:555:      if args.benchmark:
+main.py:556:>         symbols = args.symbols if args.symbols else list(A.keys())[:10]
+main.py:557:          print(benchmark_vs_index(symbols))
+main.py:558:          return
+main.py:559:      
+---
+main.py:569:      
+main.py:570:      # Backtest
+main.py:571:      if args.backtest:
+main.py:572:>         symbols = args.symbols if args.symbols else ['NVDA', 'META', 'GOOGL', 'MSFT', 'AMZN']
+main.py:573:          print(backtest_report(symbols))
+main.py:574:          return
+main.py:575:      
+---
+main.py:594:      
+main.py:595:      # PDF Export
+main.py:596:      if args.pdf:
+main.py:597:>         if args.symbols:
+main.py:598:              print(full_pdf_report(args.symbols))
+main.py:599:          else:
+main.py:600:              results = analyze_multiple(list(A.keys())[:10])
+---
+main.py:609:      
+main.py:610:      # Portfolio Optimization
+main.py:611:      if args.optimize:
+main.py:612:>         symbols = args.symbols if args.symbols else list(A.keys())[:15]
+main.py:613:          print(optimize_report(symbols))
+main.py:614:          return
+main.py:615:      
+---
+main.py:615:      
+main.py:616:      # Earnings Calendar
+main.py:617:      if args.earnings:
+main.py:618:>         symbols = args.symbols if args.symbols else None
+main.py:619:          print(earnings_report(symbols))
+main.py:620:          return
+main.py:621:      
+---
+main.py:621:      
+main.py:622:      # Earnings Predictions
+main.py:623:      if args.earnings_predict:
+main.py:624:>         sym = args.symbols[0] if args.symbols else "NVDA"
+main.py:625:          print(predict_earnings_beat(sym))
+main.py:626:          return
+main.py:627:      
+---
+main.py:627:      
+main.py:628:      # Sentiment Analysis
+main.py:629:      if args.sentiment:
+main.py:630:>         symbols = args.symbols if args.symbols else None
+main.py:631:          print(sentiment_report(symbols))
+main.py:632:          return
+main.py:633:      
+---
+main.py:638:      
+main.py:639:      # Research Reports
+main.py:640:      if args.research:
+main.py:641:>         symbols = args.symbols if args.symbols else None
+main.py:642:          print(research_report(symbols))
+main.py:643:          return
+main.py:644:      
+---
+main.py:644:      
+main.py:645:      # Combined Analysis
+main.py:646:      if args.combined:
+main.py:647:>         symbols = args.symbols if args.symbols else ["NVDA", "MSFT", "GOOGL", "AAPL", "META"]
+main.py:648:          print(sentiment_report_full(symbols))
+main.py:649:          return
+main.py:650:      
+---
+main.py:650:      
+main.py:651:      # Institutional Ownership
+main.py:652:      if args.institutional:
+main.py:653:>         symbols = args.symbols if args.symbols else None
+main.py:654:          print(institutional_report(symbols))
+main.py:655:          return
+main.py:656:      
+---
+main.py:656:      
+main.py:657:      # Momentum Analysis
+main.py:658:      if args.momentum:
+main.py:659:>         symbols = args.symbols if args.symbols else None
+main.py:660:          print(momentum_report(symbols))
+main.py:661:          return
+main.py:662:      
+---
+main.py:662:      
+main.py:663:      # Ultimate Analysis
+main.py:664:      if args.ultimate:
+main.py:665:>         if args.symbols and len(args.symbols) == 1:
+main.py:666:              print(ultimate_analysis(args.symbols[0]))
+main.py:667:          else:
+main.py:668:              symbols = args.symbols if args.symbols else None
+---
+main.py:665:          if args.symbols and len(args.symbols) == 1:
+main.py:666:              print(ultimate_analysis(args.symbols[0]))
+main.py:667:          else:
+main.py:668:>             symbols = args.symbols if args.symbols else None
+main.py:669:              print(ultimate_report(symbols))
+main.py:670:          return
+main.py:671:      
+---
+main.py:671:      
+main.py:672:      # Jin10 News
+main.py:673:      if args.jin10:
+main.py:674:>         if args.symbols and len(args.symbols) == 1:
+main.py:675:              print(jin10_stock_news(args.symbols[0]))
+main.py:676:          else:
+main.py:677:              print(jin10_news_report())
+---
+main.py:687:      
+main.py:688:      # Chinese Financial News
+main.py:689:      if args.cnnews:
+main.py:690:>         if args.symbols and len(args.symbols) == 1:
+main.py:691:              news = get_cn_news_for_stock(args.symbols[0])
+main.py:692:              report = f"# Chinese News: {args.symbols[0]}\n\n"
+main.py:693:              report += f"_Sources: Sina Finance, NetEase Money, Phoenix Finance_\n\n"
+---
+
+(Results truncated at 200 matches.)

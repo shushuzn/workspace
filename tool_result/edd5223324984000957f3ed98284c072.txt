@@ -1,0 +1,87 @@
+# tool_name: read_file
+# created_at: 2026-03-22T22:40:28.029460
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 340-420 of 521)
+    data = NewsData()
+    
+    if force:
+        news_list = data.data["news"][-5:]
+    else:
+        news_list = data.get_unsent(5)
+    
+    if not news_list:
+        print("[INFO] No news to push")
+        return
+    
+    print(f"[INFO] Pushing {len(news_list)} items as single message...")
+    
+    # 统计
+    positive = [n for n in news_list if n.get('sentiment') == '利好']
+    negative = [n for n in news_list if n.get('sentiment') == '利空']
+    neutral = [n for n in news_list if n.get('sentiment') == '中性']
+    
+    # 来源简称映射
+    source_map = {
+        'sina_finance': '新浪财', 'sina_stock': '新浪股', 'sina_business': '新浪产',
+        'sina_hkstock': '新浪港', 'sina_usstock': '新浪美', 'sina_tech': '新浪科',
+        'sina_macro': '新浪宏', 'eeo': '经观', 'ft_chinese': 'FT', 
+        'bloomberg': '彭博', 'cnbc': 'CNBC', 'marketwatch': 'MW',
+        'yahoo_finance': 'Yahoo', 'investing': 'Inv', 'seekingalpha': 'SA',
+        'bbc_biz': 'BBC', 'guardian_biz': '卫报'
+    }
+    
+    # 时间戳
+    now = datetime.now().strftime('%m-%d %H:%M')
+    
+    # 构建消息
+    lines = [f"[NEWS] {now} ({len(news_list)}条) | +{len(positive)} -{len(negative)} ={len(neutral)}\n"]
+    
+    # 利好
+    if positive:
+        lines.append("=== 利好 ===")
+        for i, news in enumerate(positive, 1):
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            lines.append(f"{i}. [+][{sector}][{source}] {news['title'][:38]}")
+        lines.append("")
+    
+    # 利空
+    if negative:
+        lines.append("=== 利空 ===")
+        for i, news in enumerate(negative, 1):
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            lines.append(f"{i}. [-][{sector}][{source}] {news['title'][:38]}")
+        lines.append("")
+    
+    # 中性
+    if neutral:
+        lines.append("=== 中性 ===")
+        for i, news in enumerate(neutral, 1):
+            source = source_map.get(news.get('source', ''), news.get('source', '')[:4])
+            sector = news.get('sector', '通用')
+            lines.append(f"{i}. [=][{sector}][{source}] {news['title'][:38]}")
+    
+    merged_msg = '\n'.join(lines)
+    platforms = []
+    news_ids = [n["id"] for n in news_list]
+    
+    # QQ
+    if CONFIG["qq"]["enabled"]:
+        ok, info = send_qq_message(CONFIG["qq"]["group_id"], merged_msg)
+        if ok:
+            print("  [OK] QQ")
+            platforms.append("qq")
+        else:
+            print(f"  [FAIL] QQ: {info}")
+    
+    # Feishu
+    if CONFIG["feishu"]["enabled"]:
+        ok, info = send_feishu_message(merged_msg)
+        if ok:
+            print("  [OK] Feishu")
+            platforms.append("feishu")
+        else:
+            print(f"  [FAIL] Feishu: {info}")
+
+[101 more lines. Use start_line=421 to continue.]

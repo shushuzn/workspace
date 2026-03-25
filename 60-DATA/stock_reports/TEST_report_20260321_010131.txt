@@ -1,0 +1,68 @@
+======================================================================
+ STOCK ANALYSIS REPORT - TEST
+======================================================================
+ Generated: 2026-03-21T01:01:31.896660
+ Report Type: comprehensive
+
+----------------------------------------------------------------------
+ EXECUTIVE SUMMARY
+----------------------------------------------------------------------
+TEST is trading at $105.50 (+2.23%) | overall trend is bullish | technical signal: buy
+
+----------------------------------------------------------------------
+ OVERALL RATING
+----------------------------------------------------------------------
+ Rating: A+ (Strong Buy)
+ Recommendation: STRONG BUY - Multiple bullish signals with high confidence
+ Confidence: 72%
+
+----------------------------------------------------------------------
+ Price Analysis
+----------------------------------------------------------------------
+  current_price: 105.5
+  change: 2.3
+  change_pct: 2.23
+  high_52w: 0
+  low_52w: 0
+  volume: 15000000
+  avg_volume: 0
+
+----------------------------------------------------------------------
+ Trend Analysis
+----------------------------------------------------------------------
+  overall_trend: bullish
+  trend_strength: strong
+  timeframes:
+  recommendation: BUY - Uptrend confirmed
+
+----------------------------------------------------------------------
+ Pattern Recognition
+----------------------------------------------------------------------
+  patterns_detected: 1
+  patterns: [{'pattern': 'double_bottom', 'confidence': 0.75}]
+
+----------------------------------------------------------------------
+ Trading Signals
+----------------------------------------------------------------------
+  confluence_signal:
+    signal: buy
+    strength: 0.65
+    confluence: 4/5
+  individual_signals:
+  recommendation: 
+  confidence: 0.72
+
+----------------------------------------------------------------------
+ Risk Analysis
+----------------------------------------------------------------------
+  position_sizing:
+  stop_loss:
+  take_profit:
+  risk_reward:
+    risk_reward_ratio: 2.5
+    quality: good
+  recommendation: 
+
+======================================================================
+ END OF REPORT
+======================================================================

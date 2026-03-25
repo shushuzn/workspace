@@ -1,0 +1,37 @@
+# tool_name: read_file
+# created_at: 2026-03-23T10:36:29.159613
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\NewsHub\news_fetcher.py  (lines 960-990 of 1138)
+            
+            for n in news:
+                cat = n.get('category', 'other')
+                categories[cat] = categories.get(cat, 0) + 1
+                sent = n.get('sentiment', 'neutral')
+                sentiments[sent] = sentiments.get(sent, 0) + 1
+                imp = n.get('importance_level', 'low')
+                importance_levels[imp] = importance_levels.get(imp, 0) + 1
+                src = n.get('source', 'Other')
+                sources[src] = sources.get(src, 0) + 1
+            
+            print()
+            
+            # 市场情绪分析
+            if llm_news:
+                sentiment = get_market_sentiment(llm_news)
+                if sentiment:
+                    print("  📊 市场情绪:")
+                    overall = sentiment.get('overall', 'neutral')
+                    icons = {'bullish': '📈', 'bearish': '📉', 'neutral': '➡️'}
+                    print(f"     {icons.get(overall, '➡️')} 整体: {overall.upper()}")
+                    print(f"     📈 利好: {sentiment.get('positive', 0)} | 📉 利空: {sentiment.get('negative', 0)}")
+                    print()
+            print("📊 分类统计:")
+            cat_icons = {"stock": "📈", "forex": "💱", "commodity": "🛢️", "macro": "🏛️", "trade": "⚖️", "tech": "💻", "china": "🇨🇳", "us": "🇺🇸", "crypto": "₿", "energy": "⚡"}
+            for cat, cnt in sorted(categories.items(), key=lambda x: -x[1]):
+                icon = cat_icons.get(cat, "📰")
+                print(f"  {icon} {cat}: {cnt}")
+            
+            print()
+            
+
+[148 more lines. Use start_line=991 to continue.]

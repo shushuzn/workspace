@@ -1,0 +1,45 @@
+# tool_name: read_file
+# created_at: 2026-03-21T10:02:20.887838
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\tool_validator_001.py  (lines 54-92 of 154)
+    
+    def check_patterns(self, filepath: str) -> List[Dict]:
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                content = f.read()
+        except:
+            return [{"error": "Cannot read file"}]
+        
+        issues = []
+        lines = content.split("\n")
+        
+        for name, info in COMMON_PATTERNS.items():
+            for i, line in enumerate(lines, 1):
+                if re.search(info["pattern"], line):
+                    issues.append({
+                        "type": name,
+                        "line": i,
+                        "severity": info["severity"],
+                        "message": info["message"]
+                    })
+        
+        return issues
+    
+    def check_encoding(self, filepath: str) -> Dict:
+        try:
+            with open(filepath, "r", encoding="utf-8") as f:
+                content = f.read()
+            has_unicode = any(ord(c) > 127 for c in content)
+            has_codecs = "import io" in content and "sys.stdout" in content
+            if has_unicode and not has_codecs:
+                return {"status": "warning", "issues": ["Missing Unicode fix for Windows"]}
+            return {"status": "ok", "issues": []}
+        except:
+            return {"status": "error", "issues": ["Cannot read file"]}
+    
+    def validate(self, filepath: str) -> Dict:
+        path = Path(filepath)
+        if not path.exists():
+            return {"status": "error", "reason": "File not found"}
+
+[62 more lines. Use start_line=93 to continue.]

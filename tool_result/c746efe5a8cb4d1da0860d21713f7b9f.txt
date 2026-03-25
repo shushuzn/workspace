@@ -1,0 +1,106 @@
+# tool_name: read_file
+# created_at: 2026-03-21T19:25:05.719745
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\idle-empire\index.html  (lines 1-100 of 271)
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🏰 Idle Empire - 挂机帝国</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Particle Background -->
+    <div id="particles-container"></div>
+    
+    <!-- Toast Notifications -->
+    <div id="toast-container" class="toast-container"></div>
+    
+    <!-- Main Game Layout -->
+    <div class="game-layout">
+        
+        <!-- Left Panel - Stats & Navigation -->
+        <aside class="left-panel">
+            
+            <!-- Logo Section -->
+            <div class="logo-section">
+                <div class="logo">
+                    <div class="logo-badge">
+                        <div class="logo-icon">🏰</div>
+                    </div>
+                    <div class="logo-content">
+                        <div class="logo-title">Idle Empire</div>
+                        <div class="logo-subtitle">挂机帝国 v1.0</div>
+                    </div>
+                </div>
+                <button id="theme-btn" class="theme-btn" onclick="toggleTheme()" title="切换主题">🌙</button>
+            </div>
+            
+            <!-- Resources -->
+            <div class="resources">
+                <div class="resource-card gold-card" onclick="clickGold(event)">
+                    <div class="resource-icon-wrapper">
+                        <div class="resource-icon gold-coin">💰</div>
+                    </div>
+                    <div class="resource-info">
+                        <div class="resource-label">当前金币</div>
+                        <div class="resource-value gold-value" id="gold-display">0</div>
+                        <div class="resource-hint">点击获取金币 | 按空格</div>
+                    </div>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon-wrapper">
+                        <div class="resource-icon">⚡</div>
+                    </div>
+                    <div class="resource-info">
+                        <div class="resource-label">产量/秒</div>
+                        <div class="resource-value gps-value" id="gps-display">0</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Next Building Progress -->
+            <div class="next-building-progress" id="next-building-progress" style="display: none;">
+                <div class="progress-label">
+                    <span>下一个建筑</span>
+                    <span id="progress-target">0 / 0</span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <!-- Stats Bar -->
+            <div class="stats-bar">
+                <div class="stat-item">
+                    <div class="stat-icon">🏗️</div>
+                    <span class="stat-label">建筑</span>
+                    <div class="stat-value" id="stat-buildings">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">👆</div>
+                    <span class="stat-label">点击</span>
+                    <div class="stat-value" id="stat-clicks">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">🏆</div>
+                    <span class="stat-label">成就</span>
+                    <div class="stat-value" id="stat-achievements">0/12</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">👹</div>
+                    <span class="stat-label">Boss</span>
+                    <div class="stat-value" id="stat-bosses">0</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon">👑</div>
+                    <span class="stat-label">王朝</span>
+                    <div class="stat-value" id="stat-dynasty">Lv1</div>
+                </div>
+            </div>
+            
+            <!-- Boss Section -->
+            <div class="boss-section">
+
+[171 more lines. Use start_line=101 to continue.]

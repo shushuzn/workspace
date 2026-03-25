@@ -1,0 +1,57 @@
+# tool_name: read_file
+# created_at: 2026-03-21T19:32:37.963363
+# ---
+D:\OpenClaw\workspace\80-PROJECTS\idle-empire\js\game.js  (lines 40-90 of 1073)
+    '5': 'stats',
+    's': 'save',
+    'r': 'prestige',
+    'q': 'buy_x1',
+    'w': 'buy_x10',
+    'e': 'buy_max',
+    'Space': 'click'
+};
+
+function init() {
+    initTheme();
+    G = loadGame();
+    ensureEventBuffsState();
+    addQuestsTabToUI();
+    initQuestSystem();
+    initCollectibleSystem();
+    initMilestoneSystem();
+    renderBuildings();
+    renderUpgrades();
+    renderAchievements();
+    renderStats();
+    renderQuests();
+    renderCollectibles();
+    renderMilestones();
+    updateUI();
+    updateStats();
+    initTabs();
+    initBossSystem();
+    renderBossList();
+    startGameLoop();
+    startAutoSave(G);
+    initKeyboardShortcuts();
+    initClickRipple();
+    cacheUiElements();
+    ensureDynastyState();
+    updateTabCounts();
+    setBuyMode(G.buyMode || 'x1', true);
+    startEventSystem();
+}
+
+function cacheUiElements() {
+    uiElements = {
+        goldDisplay: document.getElementById('gold-display'),
+        gpsDisplay: document.getElementById('gps-display'),
+        statBuildings: document.getElementById('stat-buildings'),
+        statClicks: document.getElementById('stat-clicks'),
+        statAchievements: document.getElementById('stat-achievements'),
+        statBosses: document.getElementById('stat-bosses'),
+        statDynasty: document.getElementById('stat-dynasty'),
+        buyModeX1: document.getElementById('buy-mode-x1'),
+        buyModeX10: document.getElementById('buy-mode-x10'),
+
+[983 more lines. Use start_line=91 to continue.]

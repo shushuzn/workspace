@@ -1,0 +1,82 @@
+# tool_name: read_file
+# created_at: 2026-03-22T23:13:31.503654
+# ---
+D:\OpenClaw\workspace\30-scripts-tools\news_manager.py  (lines 305-380 of 553)
+    data = NewsData()
+    news_list = data.get_unsent(limit=int(args.limit) if hasattr(args, 'limit') else 5)
+    if not news_list:
+        print("[INFO] No new news to push")
+        return
+    
+    # 分析
+    sentiment_sum = sum(1 if n.get("sentiment")=="利好" else -1 for n in news_list)
+    risk = get_risk(news_list)
+    suggestion = get_suggestion(news_list)
+    now = datetime.now().strftime("%Y-%m-%d %H:%M")
+    
+    # 构建消息
+    header = f"[NEWS] {now}"
+    sent_bar = "[++===----]" if sentiment_sum > 0 else "[==++----]" if sentiment_sum > 3 else "[====----]"
+    body = "\n".join([f"{'+' if n.get('sentiment')=='利好' else '-' if n.get('sentiment')=='利空' else '='} {n.get('title','')[:35]}" for n in news_list])
+    sources = list(set([SOURCE_MAP.get(n.get('source',''), n.get('category','')) for n in news_list]))[:5]
+    sectors = list(set([n.get('sector','通用') for n in news_list]))[:5]
+    external = get_external()
+    ashare = get_ashare()
+    commodities = get_commodities()
+    vix = get_vix()
+    footer = f"Risk:{risk} | {suggestion}"
+    msg = f"""{header}
+Sentiment: {sentiment_sum:+d} {sent_bar}
+Sectors: {', '.join(sectors)}
+Sources: {', '.join(sources)}
+{body}
+---
+Markets: {external}
+A-share: {ashare}
+Commodities: {commodities}
+{vix}
+{footer}"""
+    msg = msg.strip()
+    ids = [n["id"] for n in news_list]
+    results = []
+    
+    # 情感统计
+    pos_cnt = sum(1 for n in news_list if n.get("sentiment") == "利好")
+    neg_cnt = sum(1 for n in news_list if n.get("sentiment") == "利空")
+    neu_cnt = sum(1 for n in news_list if n.get("sentiment") == "中性")
+    
+    # 打印摘要
+    print(f"""
++--- NEWS PUSH @ {now} --------------------------------+
+|  Items: {len(news_list):>3}  [+利好]{pos_cnt:>2}  [-利空]{neg_cnt:>2}  [=中性]{neu_cnt:>3}  |
+|  Risk: {risk:<10}  Sectors: {', '.join(sectors[:3]):<25}  |
++----------------------------------------------------+
+""")
+    
+    # 发送
+    if CONFIG["qq"]["enabled"]:
+        print(f"  [QQ]     Sending...", end=" ", flush=True)
+        ok, mid = send_qq_message(CONFIG["qq"]["group_id"], msg)
+        print("[OK]" if ok else "[FAIL]")
+        if ok:
+            data.data["stats"]["qq"] = data.data["stats"].get("qq", 0) + 1
+            results.append(f"QQ [OK]")
+    
+    if CONFIG["feishu"]["enabled"]:
+        print(f"  [Feishu] Sending...", end=" ", flush=True)
+        ok, mid = send_feishu_message(msg)
+        print("[OK]" if ok else "[FAIL]")
+        if ok:
+            data.data["stats"]["feishu"] = data.data["stats"].get("feishu", 0) + 1
+            results.append(f"Feishu [OK]")
+    
+    data.mark_sent(ids)
+    data.save()
+    
+    print(f"""
++----------------------------------------------------+
+  Total sent: {len(results)} platform(s)
++----------------------------------------------------+
+""")
+
+[173 more lines. Use start_line=381 to continue.]
