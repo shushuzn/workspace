@@ -252,7 +252,7 @@ class DataEnrichmentPlugin(BasePlugin):
 if __name__ == "__main__":
     # Critic v5.0 integration
     critic_result = subprocess.run(
-        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
+        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize", "--auto"],
         cwd=str(Path(__file__).parent),
         timeout=300,
     )

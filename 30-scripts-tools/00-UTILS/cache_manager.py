@@ -226,9 +226,10 @@ def cached(ttl_seconds: int = 3600):
 
 if __name__ == "__main__":
     # Critic v5.0 integration
+    critic_path = Path(__file__).parent.parent / "critic_v5_review.py"
     critic_result = subprocess.run(
-        [sys.executable, "critic_v5_review.py", "--scenario", "tool_optimize"],
-        cwd=str(Path(__file__).parent),
+        [sys.executable, str(critic_path), "--scenario", "tool_optimize", "--auto"],
+        cwd=str(Path(__file__).parent.parent),
         timeout=300,
     )
     if critic_result.returncode != 0:
