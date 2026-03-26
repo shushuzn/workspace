@@ -6,6 +6,9 @@ import {
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
 import { fetch, ProxyAgent } from 'undici';
+import fs from 'fs';
+import os from 'os';
+import path from 'path';
 
 // ─── 配置 ───────────────────────────────────────────
 const API_KEY = process.env.MINIMAX_API_KEY!;
@@ -69,28 +72,61 @@ async function callMinimax(
   return text;
 }
 
-// ─── 全局中止控制器 ──────────────────────────────────────────
+// ─── chain 持久化 ───────────────────────────────────────
+const CHAIN_FILE = path.join(os.tmpdir(), 'ai-roundtable-chain.json');
+
+interface ChainEntry {
+  persona: { id: string; name: string; icon: string };
+  text: string;
+  round: number;
+  order: number;
+}
+
+interface ChainState {
+  topic: string;
+  totalRounds: number;
+  chain: ChainEntry[];
+  currentRound: number;
+  currentOrder: number;
+}
+
+function readChain(): ChainState | null {
+  try {
+    if (!fs.existsSync(CHAIN_FILE)) return null;
+    return JSON.parse(fs.readFileSync(CHAIN_FILE, 'utf8'));
+  } catch { return null; }
+}
+
+function writeChain(state: ChainState): void {
+  fs.writeFileSync(CHAIN_FILE, JSON.stringify(state, null, 2), 'utf8');
+}
+
 let globalAbort = new AbortController();
 
 // ─── MCP Server ───────────────────────────────────────────
 const server = new Server(
-  { name: 'ai-roundtable', version: '1.6.0' },
+  { name: 'ai-roundtable', version: '2.0.0' },
   { capabilities: { tools: {} } }
 );
 
 server.setRequestHandler(ListToolsRequestSchema, () => ({
   tools: [
     {
-      name: 'roundtable_discuss',
-      description: '开始 AI 圆桌讨论。6种人格按顺序发言，后发言者能看到前面所有人的具体内容，形成真正的讨论。',
+      name: 'roundtable_start',
+      description: '开始圆桌讨论。传入话题和轮数，初始化链条并返回第一个人格的发言。',
       inputSchema: {
         type: 'object',
         properties: {
           topic: { type: 'string', description: '讨论话题' },
-          rounds: { type: 'number', description: '轮数，默认3轮', default: 3, minimum: 1, maximum: 10 },
+          rounds: { type: 'number', description: '轮数', default: 3, minimum: 1, maximum: 10 },
         },
         required: ['topic'],
       },
+    },
+    {
+      name: 'roundtable_next',
+      description: '获取下一个发言。每次调用返回一条发言内容。',
+      inputSchema: { type: 'object', properties: {} },
     },
     {
       name: 'roundtable_stop',
@@ -103,90 +139,106 @@ server.setRequestHandler(ListToolsRequestSchema, () => ({
 server.setRequestHandler(CallToolRequestSchema, async (request) => {
   const { name, arguments: args } = request.params;
 
+  // ─── roundtable_stop ────────────────────────────────
   if (name === 'roundtable_stop') {
     globalAbort.abort();
     globalAbort = new AbortController();
+    try { fs.unlinkSync(CHAIN_FILE); } catch {}
     return { content: [{ type: 'text', text: '讨论已停止。' }] };
   }
 
-  if (name === 'roundtable_discuss') {
-    const topic = args?.topic as string;
-    const rounds = Math.min(Math.max((args?.rounds as number) || 3, 1), 10);
+  // ─── roundtable_start ───────────────────────────
+  if (name === 'roundtable_start') {
+    const topic = (args as { topic?: string })?.topic || '';
+    const rounds = Math.min(Math.max((args as { rounds?: number })?.rounds || 3, 1), 10);
 
-    if (!topic?.trim()) {
-      return { content: [{ type: 'text', text: '请提供讨论话题。' }], isError: true };
-    }
-    if (!API_KEY) {
-      return { content: [{ type: 'text', text: '错误：未设置 MINIMAX_API_KEY' }], isError: true };
-    }
+    if (!topic.trim()) return { content: [{ type: 'text', text: '请提供讨论话题。' }], isError: true };
+    if (!API_KEY) return { content: [{ type: 'text', text: '错误：未设置 MINIMAX_API_KEY' }], isError: true };
 
     globalAbort.abort();
     globalAbort = new AbortController();
-    const abortSignal = globalAbort.signal;
 
-    // 发言链条：按时间顺序记录所有发言
-    const chain: { persona: typeof personas[0]; text: string }[] = [];
+    const chain: ChainEntry[] = [];
+    const state: ChainState = { topic, totalRounds: rounds, chain, currentRound: 0, currentOrder: 0 };
+    writeChain(state);
 
-    let output = `🔥 AI 圆桌讨论\n话题：${topic}\n轮数：${rounds}\n${'─'.repeat(50)}\n\n`;
+    const firstPersona = personas[0];
+    const systemFull = `${firstPersona.systemPrompt}\n\n重要：直接输出你的观点，不要使用括号、不要输出思考过程、不要输出引号、不要解释。只输出纯文本。严格控制在2句话以内。`;
+    const content = `话题：${topic}\n\n以下是之前的发言（按时间顺序）：\n（暂无）\n\n现在轮到 ${firstPersona.name} 发言：`;
 
+    let answer: string;
     try {
-      for (let round = 0; round < rounds; round++) {
-        if (abortSignal.aborted) {
-          return { content: [{ type: 'text', text: '讨论已中止。' }] };
-        }
+      answer = await callMinimax(systemFull, content, globalAbort.signal);
+    } catch (err) {
+      answer = `⚠ ${err instanceof Error ? err.message : String(err)}`;
+    }
 
-        output += `📍 第 ${round + 1} / ${rounds} 轮\n`;
-        console.error(`\n${'═'.repeat(50)}\n[AI圆桌] 第 ${round + 1} / ${rounds} 轮开始\n${'═'.repeat(50)}`);
+    chain.push({ persona: { id: firstPersona.id, name: firstPersona.name, icon: firstPersona.icon }, text: answer, round: 0, order: 0 });
+    state.currentOrder = 1;
+    writeChain(state);
 
-        // 按顺序遍历每轮中的 6 个人格
-        for (const persona of personas) {
-          if (abortSignal.aborted) {
-            return { content: [{ type: 'text', text: '讨论已中止。' }] };
-          }
+    return {
+      content: [{ type: 'text', text: `🔥 AI 圆桌讨论\n话题：${topic}\n轮数：${rounds}\n${'─'.repeat(50)}\n\n📍 第 1 / ${rounds} 轮\n\n  ${firstPersona.icon} ${firstPersona.name}：${answer}` }]
+    };
+  }
 
-          // 构建之前所有发言的文本（链条历史）
-          const priorStatements = chain.length > 0
-            ? chain.map(e => `${e.persona.name}：${e.text}`).join('\n')
-            : '（暂无）';
+  // ─── roundtable_next ─────────────────────────────
+  if (name === 'roundtable_next') {
+    const state = readChain();
+    if (!state) return { content: [{ type: 'text', text: '无进行中的讨论，请先调用 roundtable_start。' }], isError: true };
 
-          // 完整的 system prompt
-          const systemFull = `${persona.systemPrompt}\n\n重要：直接输出你的观点，不要使用括号、不要输出思考过程、不要输出引号、不要解释。只输出纯文本。`;
+    const { topic, totalRounds, chain, currentRound, currentOrder } = state;
 
-          // 用户消息 = 话题 + 链条历史
-          const content = `话题：${topic}\n\n以下是之前的发言（按时间顺序）：\n${priorStatements}\n\n现在轮到 ${persona.name} 发言：`;
+    // 当前轮已结束，进入下一轮
+    if (currentOrder >= personas.length) {
+      const newRound = currentRound + 1;
+      if (newRound >= totalRounds) {
+        try { fs.unlinkSync(CHAIN_FILE); } catch {}
+        return { content: [{ type: 'text', text: `${'─'.repeat(50)}\n✅ 讨论结束（共 ${totalRounds} 轮，共 ${chain.length} 条发言）` }] };
+      }
+      // 输出轮次分隔并立即执行第一个人格
+      const roundHeader = `📍 第 ${newRound + 1} / ${totalRounds} 轮\n`;
+      state.currentRound = newRound;
+      state.currentOrder = 0;
+      writeChain(state);
 
-          try {
-            const answer = await callMinimax(systemFull, content, abortSignal);
-            chain.push({ persona, text: answer });
-            output += `  ${persona.icon} ${persona.name}：${answer}\n`;
-            // 立即输出到会话（stderr 不干扰 MCP 协议）
-            console.error(`[AI发言] ${persona.icon} ${persona.name}：${answer}`);
-          } catch (err) {
-            if (err instanceof Error && err.name === 'AbortError') {
-              return { content: [{ type: 'text', text: '讨论已中止。' }] };
-            }
-            const errMsg = err instanceof Error ? err.message : String(err);
-            chain.push({ persona, text: `⚠ ${errMsg}` });
-            output += `  ${persona.icon} ${persona.name}：⚠ ${errMsg}\n`;
-            console.error(`[AI发言] ${persona.icon} ${persona.name}：⚠ ${errMsg}`);
-          }
-        }
+      const firstPersona = personas[0];
+      const priorStatements = chain.map(e => `${e.persona.name}：${e.text}`).join('\n');
+      const systemFull = `${firstPersona.systemPrompt}\n\n重要：直接输出你的观点，不要使用括号、不要输出思考过程、不要输出引号、不要解释。只输出纯文本。严格控制在2句话以内。`;
+      const content = `话题：${topic}\n\n以下是之前的发言（按时间顺序）：\n${priorStatements}\n\n现在轮到 ${firstPersona.name} 发言：`;
 
-        output += '\n';
+      let answer: string;
+      try {
+        answer = await callMinimax(systemFull, content, globalAbort.signal);
+      } catch (err) {
+        answer = `⚠ ${err instanceof Error ? err.message : String(err)}`;
       }
 
-      output += `${'─'.repeat(50)}\n✅ 讨论结束（共 ${rounds} 轮，共 ${chain.length} 条发言）`;
-      console.error(`\n${'═'.repeat(50)}\n[AI圆桌] 讨论结束，共 ${rounds} 轮，${chain.length} 条发言\n${'═'.repeat(50)}\n`);
-      return { content: [{ type: 'text', text: output }] };
-    } catch (err) {
-      return {
-        content: [{
-          type: 'text',
-          text: `讨论出错：${err instanceof Error ? err.message : String(err)}`,
-        }],
-        isError: true,
-      };
+      chain.push({ persona: { id: firstPersona.id, name: firstPersona.name, icon: firstPersona.icon }, text: answer, round: newRound, order: 0 });
+      state.currentOrder = 1;
+      writeChain(state);
+
+      return { content: [{ type: 'text', text: `${roundHeader}\n  ${firstPersona.icon} ${firstPersona.name}：${answer}` }] };
     }
+
+    // 获取下一个发言
+    const nextPersona = personas[currentOrder];
+    const priorStatements = chain.map(e => `${e.persona.name}：${e.text}`).join('\n');
+    const systemFull = `${nextPersona.systemPrompt}\n\n重要：直接输出你的观点，不要使用括号、不要输出思考过程、不要输出引号、不要解释。只输出纯文本。严格控制在2句话以内。`;
+    const content = `话题：${topic}\n\n以下是之前的发言（按时间顺序）：\n${priorStatements}\n\n现在轮到 ${nextPersona.name} 发言：`;
+
+    let answer: string;
+    try {
+      answer = await callMinimax(systemFull, content, globalAbort.signal);
+    } catch (err) {
+      answer = `⚠ ${err instanceof Error ? err.message : String(err)}`;
+    }
+
+    chain.push({ persona: { id: nextPersona.id, name: nextPersona.name, icon: nextPersona.icon }, text: answer, round: currentRound, order: currentOrder });
+    state.currentOrder++;
+    writeChain(state);
+
+    return { content: [{ type: 'text', text: `  ${nextPersona.icon} ${nextPersona.name}：${answer}` }] };
   }
 
   return { content: [{ type: 'text', text: `未知工具：${name}` }], isError: true };
@@ -195,7 +247,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
-  console.error('ai-roundtable MCP Server 已启动 (v1.6.0)', { mode: 'stdio' });
+  console.error('ai-roundtable MCP Server 已启动 (v2.0.0)', { mode: 'stdio' });
 }
 
 main().catch((err) => {
