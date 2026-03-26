@@ -136,6 +136,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         }
 
         output += `📍 第 ${round + 1} / ${rounds} 轮\n`;
+        console.error(`\n${'═'.repeat(50)}\n[AI圆桌] 第 ${round + 1} / ${rounds} 轮开始\n${'═'.repeat(50)}`);
 
         // 按顺序遍历每轮中的 6 个人格
         for (const persona of personas) {
@@ -158,6 +159,8 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             const answer = await callMinimax(systemFull, content, abortSignal);
             chain.push({ persona, text: answer });
             output += `  ${persona.icon} ${persona.name}：${answer}\n`;
+            // 立即输出到会话（stderr 不干扰 MCP 协议）
+            console.error(`[AI发言] ${persona.icon} ${persona.name}：${answer}`);
           } catch (err) {
             if (err instanceof Error && err.name === 'AbortError') {
               return { content: [{ type: 'text', text: '讨论已中止。' }] };
@@ -165,6 +168,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
             const errMsg = err instanceof Error ? err.message : String(err);
             chain.push({ persona, text: `⚠ ${errMsg}` });
             output += `  ${persona.icon} ${persona.name}：⚠ ${errMsg}\n`;
+            console.error(`[AI发言] ${persona.icon} ${persona.name}：⚠ ${errMsg}`);
           }
         }
 
@@ -172,6 +176,7 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
       }
 
       output += `${'─'.repeat(50)}\n✅ 讨论结束（共 ${rounds} 轮，共 ${chain.length} 条发言）`;
+      console.error(`\n${'═'.repeat(50)}\n[AI圆桌] 讨论结束，共 ${rounds} 轮，${chain.length} 条发言\n${'═'.repeat(50)}\n`);
       return { content: [{ type: 'text', text: output }] };
     } catch (err) {
       return {
