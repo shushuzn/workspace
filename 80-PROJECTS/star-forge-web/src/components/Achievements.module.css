@@ -1,113 +1,174 @@
 .container {
-  padding: 12px;
+  padding: 16px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .title {
-  font-size: 16px;
+  font-size: 18px;
   color: var(--accent-gold);
+  text-shadow: 0 0 15px var(--accent-gold-dim);
+  letter-spacing: 2px;
 }
 
 .progress {
   font-size: 12px;
   color: var(--text-muted);
+  padding: 4px 12px;
+  background: rgba(255, 193, 7, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(255, 193, 7, 0.2);
 }
 
 .filters {
   display: flex;
   gap: 8px;
-  margin-bottom: 12px;
+  margin-bottom: 16px;
 }
 
 .filterBtn {
-  padding: 6px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 6px;
-  background: var(--bg-tertiary);
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  background: rgba(18, 18, 31, 0.6);
+  backdrop-filter: blur(10px);
   color: var(--text-muted);
-  font-size: 11px;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  letter-spacing: 0.5px;
 }
 
 .filterBtn:hover {
   border-color: var(--accent-gold);
   color: var(--text-secondary);
+  background: rgba(255, 193, 7, 0.05);
 }
 
 .filterBtn.active {
-  background: var(--accent-gold);
+  background: linear-gradient(135deg, var(--accent-gold), #ff8c00);
   border-color: var(--accent-gold);
   color: #000;
+  box-shadow: 0 0 20px var(--accent-gold-dim);
 }
 
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 10px;
 }
 
 .card {
   display: flex;
-  gap: 10px;
-  padding: 10px;
-  background: var(--bg-tertiary);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  transition: all 0.2s;
+  gap: 12px;
+  padding: 14px;
+  background: rgba(13, 13, 24, 0.6);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 193, 7, 0.3), transparent);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .card:hover {
-  border-color: var(--border-hover);
-  transform: translateY(-2px);
+  border-color: rgba(255, 193, 7, 0.3);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card.earned {
-  border-color: var(--accent-gold);
-  background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, transparent 100%);
+  border-color: rgba(255, 193, 7, 0.4);
+  background: linear-gradient(135deg, rgba(255, 193, 7, 0.12) 0%, rgba(13, 13, 24, 0.8) 100%);
+  box-shadow: 0 0 20px rgba(255, 193, 7, 0.1);
+}
+
+.card.earned:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3), 0 0 30px rgba(255, 193, 7, 0.15);
 }
 
 .icon {
-  font-size: 24px;
-  opacity: 0.5;
+  font-size: 28px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 10px;
+  opacity: 0.4;
+  transition: all 0.3s;
 }
 
 .card.earned .icon {
   opacity: 1;
-  animation: bounce 0.5s ease;
+  animation: trophyBounce 0.6s ease;
+  filter: drop-shadow(0 0 10px var(--accent-gold));
 }
 
-@keyframes bounce {
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.2); }
+@keyframes trophyBounce {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  25% { transform: scale(1.2) rotate(-5deg); }
+  50% { transform: scale(1.1) rotate(5deg); }
+  75% { transform: scale(1.15) rotate(-3deg); }
+}
+
+.card:hover .icon {
+  transform: scale(1.1);
 }
 
 .info {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .name {
-  font-size: 12px;
-  font-weight: 600;
+  font-size: 13px;
+  font-weight: 700;
   color: var(--text-primary);
+  letter-spacing: 0.3px;
 }
 
 .desc {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text-muted);
+  line-height: 1.4;
 }
 
 .reward {
-  font-size: 9px;
+  font-size: 10px;
   color: var(--accent-green);
-  margin-top: 2px;
+  margin-top: 4px;
+  padding: 3px 8px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 10px;
+  display: inline-block;
+  width: fit-content;
+  text-shadow: 0 0 8px rgba(76, 175, 80, 0.3);
 }

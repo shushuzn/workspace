@@ -155,6 +155,13 @@ function GameBoardInner({ click, state, offlineInfo, onDismissOffline }) {
 
   return (
     <div className={styles.game}>
+      {/* 多层动态星空背景 */}
+      <div className={styles.starfield}>
+        <div className={styles.starLayer1} />
+        <div className={styles.starLayer2} />
+        <div className={styles.starLayer3} />
+      </div>
+
       <AchievementToast />
 
       {offlineInfo && (
@@ -198,12 +205,25 @@ function GameBoardInner({ click, state, offlineInfo, onDismissOffline }) {
               ))}
             </div>
             <div className={`${styles.sunContainer} ${sunShake ? styles.sunShake : ''}`}>
+              {/* 太阳外层光晕 */}
+              <div className={styles.sunAura} />
+              <div className={styles.sunAura2} />
+              <div className={styles.sunAura3} />
+
+              {/* 能量流动环 */}
+              <div className={styles.energyRing} />
+              <div className={styles.energyRing2} />
+
               <div className={styles.sunOrbit1}>
                 <div className={styles.orbitPlanet}></div>
               </div>
               <div className={styles.sunOrbit2}>
                 <div className={styles.orbitPlanet2}></div>
               </div>
+
+              {/* 日冕外层发光 */}
+              <div className={styles.coronaGlow} />
+
               <div className={`${styles.sunCorona} ${sunFlash ? styles.sunCoronaFlash : ''}`}>
                 {CORONA_RAYS.map((angle, i) => (
                   <div
