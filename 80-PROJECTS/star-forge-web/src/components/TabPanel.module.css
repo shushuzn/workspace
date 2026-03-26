@@ -1,17 +1,18 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   width: 100%;
 }
 
 .tabBar {
   display: flex;
   gap: 6px;
-  padding: 6px;
-  background: var(--bg-secondary);
-  border-radius: 8px;
-  border: 1px solid var(--border-color);
+  padding: 8px;
+  background: rgba(18, 18, 31, 0.6);
+  backdrop-filter: blur(15px);
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .tab {
@@ -19,53 +20,80 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
-  padding: 8px 12px;
+  gap: 8px;
+  padding: 10px 14px;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   background: transparent;
   color: var(--text-muted);
   font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.tab::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 193, 7, 0.1) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.25s;
 }
 
 .tab:hover {
-  background: var(--bg-hover);
   color: var(--text-secondary);
 }
 
+.tab:hover::before {
+  opacity: 0.5;
+}
+
 .tab.active {
-  background: var(--accent-gold-dim);
+  background: rgba(255, 193, 7, 0.15);
   color: var(--accent-gold);
+  text-shadow: 0 0 10px var(--accent-gold-dim);
+}
+
+.tab.active::before {
+  opacity: 1;
 }
 
 .icon {
-  font-size: 14px;
+  font-size: 16px;
+  transition: transform 0.25s;
+}
+
+.tab:hover .icon {
+  transform: scale(1.1);
 }
 
 .label {
-  font-weight: 500;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .content {
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  padding-right: 4px;
 }
 
 @media (max-width: 768px) {
   .tabBar {
     gap: 4px;
-    padding: 4px;
+    padding: 6px;
   }
 
   .tab {
-    padding: 6px 8px;
+    padding: 8px 10px;
     font-size: 11px;
   }
 
   .icon {
-    font-size: 12px;
+    font-size: 14px;
   }
 }

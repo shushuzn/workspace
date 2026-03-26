@@ -1,11 +1,15 @@
+import { useMemo, memo } from 'react';
 import { useGame } from '../store/GameContext';
 import { formatNumber, formatPercent } from '../utils/format';
 import styles from './ResourceDisplay.module.css';
 
-export default function ResourceDisplay() {
+export default memo(function ResourceDisplay() {
   const { state, energyPerSecond } = useGame();
 
-  const totalCps = energyPerSecond + (state.autoClickPower * state.clickPower);
+  const totalCps = useMemo(() =>
+    energyPerSecond + (state.autoClickPower * state.clickPower),
+    [energyPerSecond, state.autoClickPower, state.clickPower]
+  );
 
   return (
     <div className={styles.container}>
@@ -28,4 +32,4 @@ export default function ResourceDisplay() {
       )}
     </div>
   );
-}
+});

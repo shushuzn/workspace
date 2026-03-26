@@ -4,6 +4,71 @@
   color: var(--text-primary);
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 多层动态星空背景 → 熔炉虚空背景 */
+.starfield {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+/* 底层：极深黑，近乎虚无 */
+.starLayer {
+  position: absolute;
+  inset: 0;
+}
+
+/* 远景余烬层 */
+.starLayer1 {
+  background-image:
+    radial-gradient(1px 1px at 20px 30px, rgba(255, 140, 60, 0.15), transparent),
+    radial-gradient(1px 1px at 40px 70px, rgba(255, 100, 50, 0.1), transparent),
+    radial-gradient(1.5px 1.5px at 50px 160px, rgba(255, 140, 60, 0.12), transparent),
+    radial-gradient(1px 1px at 90px 40px, rgba(255, 120, 80, 0.08), transparent),
+    radial-gradient(2px 2px at 200px 50px, rgba(255, 80, 30, 0.18), transparent);
+  background-size: 300px 250px;
+  animation: starDrift1 90s linear infinite;
+}
+
+/* 中景余烬层 */
+.starLayer2 {
+  background-image:
+    radial-gradient(1px 1px at 25px 25px, rgba(255, 100, 50, 0.08), transparent),
+    radial-gradient(2px 2px at 175px 175px, rgba(200, 60, 20, 0.12), transparent),
+    radial-gradient(1px 1px at 225px 25px, rgba(255, 120, 60, 0.1), transparent);
+  background-size: 400px 200px;
+  animation: starDrift2 130s linear infinite;
+  opacity: 0.6;
+}
+
+/* 近景：极少量的余烬飘浮 */
+.starLayer3 {
+  background-image:
+    radial-gradient(1.5px 1.5px at 100px 50px, rgba(255, 140, 60, 0.1), transparent),
+    radial-gradient(2px 2px at 500px 120px, rgba(255, 100, 40, 0.08), transparent);
+  background-size: 700px 200px;
+  animation: starDrift3 200s linear infinite;
+  opacity: 0.4;
+}
+
+@keyframes starDrift1 {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(-250px) translateX(-30px); }
+}
+
+@keyframes starDrift2 {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(-200px) translateX(20px); }
+}
+
+@keyframes starDrift3 {
+  from { transform: translateY(0) translateX(0); }
+  to { transform: translateY(-200px) translateX(-15px); }
 }
 
 .offlineBanner {
@@ -54,11 +119,25 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 24px;
-  border-bottom: 1px solid var(--border-color);
-  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+  padding: 14px 24px;
+  border-bottom: 1px solid rgba(255, 140, 60, 0.08);
+  background: rgba(10, 8, 6, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   gap: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  position: relative;
+  z-index: 100;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.6);
+}
+
+.header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 140, 60, 0.25), transparent);
 }
 
 .headerLeft {
@@ -68,12 +147,16 @@
 }
 
 .title {
-  font-size: 22px;
+  font-size: 20px;
   font-weight: 800;
-  color: var(--accent-gold);
-  letter-spacing: 0.15em;
+  color: var(--accent-amber);
+  letter-spacing: 0.3em;
   white-space: nowrap;
-  text-shadow: 0 0 30px var(--accent-gold-dim), 0 0 60px var(--accent-gold-glow);
+  text-shadow:
+    0 0 20px rgba(255, 140, 60, 0.6),
+    0 0 40px rgba(255, 100, 40, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.8);
+  font-family: 'Cinzel', serif;
 }
 
 .headerRight {
@@ -99,10 +182,10 @@
 
 .iconBtn:hover {
   background: var(--bg-hover);
-  border-color: var(--accent-gold);
-  color: var(--accent-gold);
+  border-color: rgba(255, 140, 60, 0.5);
+  color: var(--accent-amber);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 120, 40, 0.2);
 }
 
 .btn {
@@ -120,10 +203,10 @@
 
 .btn:hover {
   background: var(--bg-hover);
-  color: var(--text-primary);
-  border-color: var(--accent-gold);
+  color: var(--accent-amber);
+  border-color: rgba(255, 140, 60, 0.5);
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.15);
+  box-shadow: 0 4px 12px rgba(255, 120, 40, 0.15);
 }
 
 .btn.danger:hover {
@@ -147,10 +230,27 @@
   align-items: center;
   justify-content: center;
   padding: 24px;
-  background: radial-gradient(ellipse at center, var(--accent-gold-dim) 0%, transparent 70%);
   gap: 16px;
   position: relative;
   overflow: hidden;
+  z-index: 1;
+}
+
+.clickSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 50%, rgba(255, 120, 40, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse at 30% 30%, rgba(200, 60, 15, 0.06) 0%, transparent 40%),
+    radial-gradient(ellipse at 70% 70%, rgba(255, 160, 60, 0.04) 0%, transparent 40%);
+  pointer-events: none;
+  animation: backgroundPulse 8s ease-in-out infinite;
+}
+
+@keyframes backgroundPulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
 }
 
 .energyPerSec {
@@ -168,14 +268,14 @@
 .comboDisplay {
   font-size: 18px;
   font-weight: 800;
-  color: var(--accent-gold);
-  text-shadow: 0 0 20px var(--accent-gold), 0 0 40px var(--accent-gold-glow);
+  color: var(--accent-amber);
+  text-shadow: 0 0 20px rgba(255, 140, 60, 0.9), 0 0 40px rgba(255, 100, 30, 0.5);
   animation: comboPulse 0.4s ease-in-out infinite;
   margin-top: 10px;
   padding: 6px 14px;
-  background: linear-gradient(135deg, rgba(255, 193, 7, 0.2), rgba(255, 193, 7, 0.05));
+  background: linear-gradient(135deg, rgba(255, 140, 60, 0.2), rgba(255, 100, 30, 0.05));
   border-radius: 16px;
-  border: 1px solid var(--accent-gold);
+  border: 1px solid rgba(255, 140, 60, 0.5);
 }
 
 @keyframes comboPulse {
@@ -202,19 +302,45 @@
   flex: 1.2;
   display: flex;
   flex-direction: column;
-  border-left: 2px solid var(--border-color);
+  border-left: 1px solid rgba(255, 140, 60, 0.08);
   min-width: 400px;
   max-width: 520px;
-  background: linear-gradient(180deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
-  box-shadow: -4px 0 20px rgba(0, 0, 0, 0.2);
+  background: rgba(12, 10, 8, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    -4px 0 30px rgba(0, 0, 0, 0.5),
+    inset 1px 0 0 rgba(255, 140, 60, 0.04);
+  position: relative;
+  z-index: 10;
+}
+
+.rightSection::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 120, 40, 0.04) 0%, transparent 30%);
+  pointer-events: none;
 }
 
 .tabs {
   display: flex;
-  background: var(--bg-tertiary);
-  border-bottom: 2px solid var(--border-color);
+  background: rgba(14, 11, 8, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 140, 60, 0.08);
   padding: 0 8px;
   gap: 4px;
+  position: relative;
+}
+
+.tabs::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 140, 60, 0.2), transparent);
 }
 
 .tab {
@@ -223,44 +349,54 @@
   border: none;
   background: none;
   color: var(--text-muted);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 600;
   cursor: pointer;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   position: relative;
   text-transform: capitalize;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
   border-radius: 8px 8px 0 0;
+  overflow: hidden;
 }
 
-.tab::after {
+.tab::before {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 5%;
-  right: 5%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent-gold), var(--accent-gold-glow), var(--accent-gold));
-  transform: scaleX(0);
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-  border-radius: 4px 4px 0 0;
-  box-shadow: 0 0 15px var(--accent-gold-glow);
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 140, 60, 0.08) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .tab:hover {
   color: var(--text-secondary);
-  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab:hover::before {
+  opacity: 0.5;
 }
 
 .tab.active {
-  color: var(--accent-gold);
-  background: linear-gradient(180deg, rgba(255, 193, 7, 0.15) 0%, transparent 100%);
-  text-shadow: 0 0 15px var(--accent-gold-dim);
-  font-weight: 800;
+  color: var(--accent-amber);
+  text-shadow: 0 0 15px rgba(255, 140, 60, 0.4);
+  font-weight: 700;
+}
+
+.tab.active::before {
+  opacity: 1;
 }
 
 .tab.active::after {
-  transform: scaleX(1);
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 10%;
+  right: 10%;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, rgba(255, 140, 60, 0.7), transparent);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 0 15px rgba(255, 120, 40, 0.5);
 }
 
 .tabContent {
@@ -288,39 +424,125 @@
 
 .clickHint {
   margin-top: 16px;
-  font-size: 11px;
+  font-size: 10px;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 3px;
-  opacity: 0.7;
+  letter-spacing: 4px;
+  opacity: 0.6;
   transition: all 0.3s;
+  font-family: 'Space Grotesk', sans-serif;
 }
 
 .clickArea:hover .clickHint {
   opacity: 1;
-  color: var(--accent-gold);
-  text-shadow: 0 0 10px var(--accent-gold-dim);
+  color: var(--accent-amber);
+  text-shadow: 0 0 10px rgba(255, 140, 60, 0.4);
 }
 
 /* Sun Container - 性能优化：使用 GPU 加速 */
 .sunContainer {
   position: relative;
-  width: 200px;
-  height: 200px;
+  width: 240px;
+  height: 240px;
   z-index: 1;
   contain: layout paint;
   will-change: transform;
 }
 
+/* 外层光晕 → 炉火气罩 */
+.sunAura {
+  position: absolute;
+  inset: -40px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    transparent 25%,
+    rgba(255, 100, 30, 0.2) 50%,
+    rgba(200, 60, 10, 0.08) 70%,
+    transparent 85%
+  );
+  animation: auraPulse 4s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+.sunAura2 {
+  position: absolute;
+  inset: -60px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    transparent 35%,
+    rgba(255, 80, 20, 0.1) 55%,
+    rgba(200, 50, 10, 0.05) 70%,
+    transparent 85%
+  );
+  animation: auraPulse2 6s ease-in-out infinite;
+  opacity: 0.5;
+}
+
+.sunAura3 {
+  position: absolute;
+  inset: -80px;
+  border-radius: 50%;
+  background: radial-gradient(circle,
+    transparent 45%,
+    rgba(180, 50, 10, 0.08) 60%,
+    transparent 78%
+  );
+  animation: auraPulse3 8s ease-in-out infinite;
+  opacity: 0.35;
+}
+
+@keyframes auraPulse {
+  0%, 100% { transform: scale(1); opacity: 0.6; }
+  50% { transform: scale(1.15); opacity: 0.8; }
+}
+
+@keyframes auraPulse2 {
+  0%, 100% { transform: scale(1); opacity: 0.4; }
+  50% { transform: scale(1.1); opacity: 0.5; }
+}
+
+@keyframes auraPulse3 {
+  0%, 100% { transform: scale(1); opacity: 0.3; }
+  50% { transform: scale(1.08); opacity: 0.4; }
+}
+
+/* 能量流动环 */
+.energyRing {
+  position: absolute;
+  inset: -20px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+              linear-gradient(90deg, transparent, rgba(255, 120, 40, 0.5), transparent) border-box;
+  animation: energyRotate 10s linear infinite;
+  opacity: 0.45;
+}
+
+.energyRing2 {
+  position: absolute;
+  inset: -30px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  background: linear-gradient(var(--bg-primary), var(--bg-primary)) padding-box,
+              linear-gradient(270deg, transparent, rgba(200, 60, 20, 0.35), transparent) border-box;
+  animation: energyRotate 15s linear infinite reverse;
+  opacity: 0.35;
+}
+
+@keyframes energyRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 /* 太阳核心 */
 .sun {
   position: absolute;
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   left: 50%;
   top: 50%;
-  margin-left: -40px;
-  margin-top: -40px;
+  margin-left: -45px;
+  margin-top: -45px;
   z-index: 10;
   will-change: transform, opacity;
 }
@@ -328,61 +550,139 @@
 .sunCore {
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, #fff 0%, var(--accent-gold) 40%, var(--accent-gold) 100%);
+  /* 熔炉：从中心亮白 → 橙黄 → 深橙红 → 暗红边缘 */
+  background: radial-gradient(circle at 40% 40%,
+    #fff8e8 0%,
+    #ffe8b0 15%,
+    #ff9040 40%,
+    #cc4400 65%,
+    #661a00 85%,
+    #2a0800 100%
+  );
   border-radius: 50%;
   box-shadow:
-    0 0 60px var(--accent-gold-glow),
-    0 0 100px var(--accent-gold-dim);
+    0 0 40px rgba(255, 120, 40, 0.9),
+    0 0 80px rgba(255, 80, 20, 0.6),
+    0 0 120px rgba(200, 50, 10, 0.3),
+    0 0 160px rgba(150, 30, 0, 0.15),
+    inset 0 0 40px rgba(255, 220, 160, 0.4);
   animation: sunPulse 3s ease-in-out infinite;
   transform-origin: center center;
   will-change: transform, box-shadow;
+  position: relative;
+}
+
+/* 熔炉内部的暗纹：冷凝外壳形成的纹理 */
+.sunCore::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background:
+    radial-gradient(ellipse 60% 20% at 30% 30%, rgba(0,0,0,0.35) 0%, transparent 100%),
+    radial-gradient(ellipse 40% 15% at 60% 55%, rgba(0,0,0,0.25) 0%, transparent 100%),
+    radial-gradient(ellipse 50% 25% at 50% 75%, rgba(0,0,0,0.2) 0%, transparent 100%);
+}
+
+/* 内层高光：炉火反光 */
+.sunCore::after {
+  content: '';
+  position: absolute;
+  top: 12%;
+  left: 18%;
+  width: 35%;
+  height: 25%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.55) 0%, transparent 70%);
+  border-radius: 50%;
+  filter: blur(3px);
+}
+
+@keyframes sunSpotlight {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50% { opacity: 1; transform: scale(1.2); }
 }
 
 /* 画质分级 - 太阳核心 */
 [data-quality="low"] .sunCore {
   animation: none;
-  box-shadow: 0 0 20px var(--accent-gold-glow);
+  box-shadow:
+    0 0 20px rgba(255, 120, 40, 0.7),
+    0 0 40px rgba(200, 60, 10, 0.4);
   transform: scale(1);
 }
 
 [data-quality="medium"] .sunCore {
   animation: sunPulse 4s ease-in-out infinite;
   box-shadow:
-    0 0 40px var(--accent-gold-glow),
-    0 0 60px var(--accent-gold-dim);
+    0 0 30px rgba(255, 120, 40, 0.8),
+    0 0 60px rgba(200, 60, 10, 0.5);
 }
 
 [data-quality="high"] .sunCore {
   animation: sunPulse 3s ease-in-out infinite;
   box-shadow:
-    0 0 60px var(--accent-gold-glow),
-    0 0 100px var(--accent-gold-dim);
+    0 0 40px rgba(255, 120, 40, 0.9),
+    0 0 80px rgba(255, 80, 20, 0.6),
+    0 0 120px rgba(200, 50, 10, 0.3);
 }
 
-/* 日冕光芒 - 使用 GPU 加速 */
+/* 日冕光芒 → 火焰舌头 */
 .sunCorona {
   position: absolute;
-  width: 120px;
-  height: 120px;
+  width: 160px;
+  height: 160px;
   left: 50%;
   top: 50%;
-  margin-left: -60px;
-  margin-top: -60px;
+  margin-left: -80px;
+  margin-top: -80px;
   z-index: 4;
-  animation: coronaRotate 20s linear infinite;
+  animation: coronaRotate 25s linear infinite;
   will-change: transform;
+  filter: blur(1px);
 }
 
 .coronaRay {
   position: absolute;
   top: 0;
   left: 50%;
-  margin-left: -1px;
-  width: 2px;
-  height: 60px;
-  background: linear-gradient(to top, transparent, var(--accent-gold-glow), transparent);
+  margin-left: -2px;
+  width: 4px;
+  height: 80px;
+  background: linear-gradient(to top,
+    rgba(255, 80, 20, 0.9) 0%,
+    rgba(255, 140, 40, 0.7) 30%,
+    rgba(255, 180, 80, 0.4) 60%,
+    rgba(255, 200, 120, 0.1) 85%,
+    transparent 100%
+  );
   transform-origin: bottom center;
-  opacity: 0.6;
+  opacity: 0.75;
+  border-radius: 2px 2px 50% 50%;
+  filter: blur(1px);
+}
+
+/* 日冕外层光芒 → 炉火气罩 */
+.coronaGlow {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  left: 50%;
+  top: 50%;
+  margin-left: -100px;
+  margin-top: -100px;
+  z-index: 3;
+  background: radial-gradient(circle,
+    rgba(255, 100, 30, 0.2) 0%,
+    rgba(200, 60, 10, 0.12) 40%,
+    transparent 65%
+  );
+  animation: coronaGlowPulse 3s ease-in-out infinite;
+  opacity: 0.7;
+}
+
+@keyframes coronaGlowPulse {
+  0%, 100% { transform: scale(1); opacity: 0.5; }
+  50% { transform: scale(1.1); opacity: 0.7; }
 }
 
 /* 画质分级 - 日冕光芒 */
@@ -413,7 +713,7 @@
   opacity: 0.6;
 }
 
-/* 轨道 - 简化动画 */
+/* 轨道 → 余烬环 */
 .sunOrbit1 {
   position: absolute;
   width: 120px;
@@ -422,7 +722,7 @@
   top: 50%;
   margin-left: -60px;
   margin-top: -60px;
-  border: 1px dashed rgba(255, 193, 7, 0.25);
+  border: 1px dashed rgba(255, 120, 40, 0.2);
   border-radius: 50%;
   animation: orbitRotate 30s linear infinite;
   z-index: 5;
@@ -433,12 +733,14 @@
   position: absolute;
   top: -5px;
   left: 50%;
-  margin-left: -4px;
-  width: 8px;
-  height: 8px;
-  background: var(--accent-gold);
+  margin-left: -5px;
+  width: 9px;
+  height: 9px;
+  background: radial-gradient(circle at 40% 40%, #ffe0a0, #ff8030, #cc3000);
   border-radius: 50%;
-  box-shadow: 0 0 10px var(--accent-gold-glow);
+  box-shadow:
+    0 0 8px rgba(255, 120, 40, 0.9),
+    0 0 16px rgba(200, 60, 10, 0.5);
 }
 
 .sunOrbit2 {
@@ -449,7 +751,7 @@
   top: 50%;
   margin-left: -80px;
   margin-top: -80px;
-  border: 1px solid rgba(157, 107, 207, 0.2);
+  border: 1px solid rgba(180, 50, 15, 0.18);
   border-radius: 50%;
   animation: orbitRotate 40s linear infinite reverse;
   z-index: 5;
@@ -460,12 +762,14 @@
   position: absolute;
   top: -4px;
   left: 50%;
-  margin-left: -4px;
-  width: 8px;
-  height: 8px;
-  background: linear-gradient(135deg, var(--accent-purple) 0%, var(--accent-pink) 100%);
+  margin-left: -5px;
+  width: 9px;
+  height: 9px;
+  background: radial-gradient(circle at 40% 40%, #ffa060, #dd4010, #881500);
   border-radius: 50%;
-  box-shadow: 0 0 12px var(--accent-purple);
+  box-shadow:
+    0 0 10px rgba(220, 70, 20, 0.8),
+    0 0 20px rgba(180, 40, 10, 0.4);
 }
 
 /* 画质分级 - 轨道 */
@@ -550,7 +854,7 @@
   to { transform: rotate(360deg); }
 }
 
-/* Floating ambient particles - 性能优化 */
+/* Floating ambient particles → 升起的余烬 */
 .ambientParticles {
   position: absolute;
   inset: 0;
@@ -562,13 +866,14 @@
 
 .particle {
   position: absolute;
-  width: 3px;
-  height: 3px;
-  background: var(--accent-gold);
+  width: 2px;
+  height: 2px;
+  background: radial-gradient(circle, #ffb060 0%, #ff6020 50%, transparent 100%);
   border-radius: 50%;
   opacity: 0;
   animation: particleFloat 8s ease-in-out infinite;
   will-change: transform, opacity;
+  box-shadow: 0 0 4px rgba(255, 120, 40, 0.6);
 }
 
 @keyframes particleFloat {
@@ -592,10 +897,13 @@
   position: absolute;
   font-size: 18px;
   font-weight: 800;
-  color: var(--accent-gold);
+  color: var(--accent-amber);
   pointer-events: none;
   animation: floatUp 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  text-shadow: 0 0 20px var(--accent-gold), 0 0 40px var(--accent-gold-glow), 0 2px 4px rgba(0,0,0,0.8);
+  text-shadow:
+    0 0 20px rgba(255, 140, 60, 1),
+    0 0 40px rgba(255, 100, 30, 0.6),
+    0 2px 4px rgba(0,0,0,0.9);
   z-index: 100;
   will-change: transform, opacity;
   letter-spacing: 1px;
@@ -604,19 +912,22 @@
 .clickEffectBig {
   font-size: 28px;
   color: #fff;
-  text-shadow: 0 0 30px var(--accent-gold), 0 0 60px var(--accent-gold-glow), 0 0 90px rgba(255, 193, 7, 0.5);
+  text-shadow:
+    0 0 30px rgba(255, 140, 60, 1),
+    0 0 60px rgba(255, 100, 30, 0.6),
+    0 0 90px rgba(255, 80, 20, 0.4);
   animation: floatUpBig 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
 }
 
-/* 点击粒子效果 */
+/* 点击粒子效果 → 炉火星花 */
 .clickParticle {
   position: absolute;
-  background: radial-gradient(circle, #fff 0%, var(--accent-gold) 50%, transparent 100%);
+  background: radial-gradient(circle, #fff 0%, #ffe0a0 30%, #ff8030 60%, transparent 100%);
   border-radius: 50%;
   pointer-events: none;
   z-index: 50;
   animation: particleExplode 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
-  box-shadow: 0 0 10px var(--accent-gold);
+  box-shadow: 0 0 8px rgba(255, 120, 40, 0.9);
 }
 
 @keyframes particleExplode {
@@ -673,35 +984,37 @@
 
 /* 连击等级样式 */
 .comboMedium {
-  color: #ffa500;
-  border-color: #ffa500;
-  background: linear-gradient(135deg, rgba(255, 165, 0, 0.25), rgba(255, 165, 0, 0.05));
+  color: #ff9040;
+  border-color: rgba(255, 144, 64, 0.5);
+  background: linear-gradient(135deg, rgba(255, 144, 64, 0.2), rgba(255, 100, 30, 0.05));
 }
 
 .comboHigh {
-  color: #ff4500;
-  border-color: #ff4500;
-  background: linear-gradient(135deg, rgba(255, 69, 0, 0.3), rgba(255, 69, 0, 0.05));
+  color: #ff5020;
+  border-color: rgba(255, 80, 32, 0.6);
+  background: linear-gradient(135deg, rgba(255, 80, 32, 0.25), rgba(200, 50, 10, 0.05));
   animation: comboPulseHigh 0.3s ease-in-out infinite !important;
 }
 
 .comboMax {
-  color: #ff00ff;
-  border-color: #ff00ff;
-  background: linear-gradient(135deg, rgba(255, 0, 255, 0.35), rgba(255, 0, 255, 0.05));
+  color: #fff0e0;
+  border-color: rgba(255, 200, 120, 0.7);
+  background: linear-gradient(135deg, rgba(255, 160, 80, 0.35), rgba(255, 100, 30, 0.1));
   animation: comboPulseMax 0.2s ease-in-out infinite !important;
   font-size: 22px;
-  text-shadow: 0 0 30px #ff00ff, 0 0 60px rgba(255, 0, 255, 0.5);
+  text-shadow:
+    0 0 30px rgba(255, 140, 60, 1),
+    0 0 60px rgba(255, 100, 30, 0.6);
 }
 
 @keyframes comboPulseHigh {
-  0%, 100% { transform: scale(1); text-shadow: 0 0 25px #ff4500; }
-  50% { transform: scale(1.1); text-shadow: 0 0 40px #ff4500, 0 0 60px rgba(255, 69, 0, 0.5); }
+  0%, 100% { transform: scale(1); text-shadow: 0 0 25px rgba(255, 80, 32, 0.8); }
+  50% { transform: scale(1.1); text-shadow: 0 0 40px rgba(255, 80, 32, 1), 0 0 60px rgba(200, 50, 10, 0.5); }
 }
 
 @keyframes comboPulseMax {
-  0%, 100% { transform: scale(1); text-shadow: 0 0 35px #ff00ff, 0 0 70px rgba(255, 0, 255, 0.5); }
-  50% { transform: scale(1.15); text-shadow: 0 0 50px #ff00ff, 0 0 100px rgba(255, 0, 255, 0.7); }
+  0%, 100% { transform: scale(1); text-shadow: 0 0 35px rgba(255, 160, 80, 1), 0 0 70px rgba(255, 120, 40, 0.6); }
+  50% { transform: scale(1.15); text-shadow: 0 0 50px rgba(255, 160, 80, 1), 0 0 100px rgba(255, 120, 40, 0.8); }
 }
 
 @keyframes floatUp {
@@ -769,8 +1082,8 @@
   overflow-y: auto;
   animation: scaleIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   border-radius: 16px;
-  border: 2px solid var(--accent-gold);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 40px var(--accent-gold-dim);
+  border: 2px solid rgba(255, 140, 60, 0.4);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 30px rgba(255, 120, 40, 0.1);
 }
 
 @keyframes scaleIn {

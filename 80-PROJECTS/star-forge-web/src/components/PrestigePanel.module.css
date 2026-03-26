@@ -1,8 +1,8 @@
 .container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  padding: 12px;
+  gap: 18px;
+  padding: 16px;
 }
 
 .title { display: none; }
@@ -10,11 +10,25 @@
 .currentStats {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  padding: 12px;
-  background: var(--bg-tertiary);
-  border-radius: 10px;
-  border: 1px solid var(--border-color);
+  gap: 10px;
+  padding: 16px;
+  background: rgba(13, 13, 24, 0.7);
+  backdrop-filter: blur(15px);
+  border-radius: 14px;
+  border: 1px solid rgba(0, 188, 212, 0.15);
+  position: relative;
+  overflow: hidden;
+}
+
+.currentStats::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
+  opacity: 0.5;
 }
 
 .statRow {
@@ -24,80 +38,162 @@
 }
 
 .statLabel {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--text-muted);
+  letter-spacing: 0.3px;
 }
 
 .statValue {
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 16px;
+  font-weight: 800;
   color: var(--accent-cyan);
+  text-shadow: 0 0 15px rgba(0, 188, 212, 0.5);
+  font-family: 'JetBrains Mono', monospace;
 }
 
 .divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border-color), transparent);
+  background: linear-gradient(90deg, transparent, rgba(0, 188, 212, 0.3), transparent);
+  margin: 4px 0;
 }
 
 .prestigePreview {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 16px;
-  background: linear-gradient(135deg, rgba(0, 255, 255, 0.1) 0%, transparent 100%);
-  border: 1px solid var(--accent-cyan);
-  border-radius: 10px;
+  gap: 10px;
+  padding: 24px 20px;
+  background: rgba(13, 13, 24, 0.8);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 188, 212, 0.3);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  box-shadow:
+    0 0 40px rgba(0, 188, 212, 0.15),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.prestigePreview::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg, transparent, rgba(0, 188, 212, 0.08), transparent, rgba(156, 39, 176, 0.05), transparent);
+  animation: prestigeRotate 10s linear infinite;
+}
+
+@keyframes prestigeRotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }
 
 .previewLabel {
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 3px;
+  position: relative;
+  z-index: 1;
 }
 
 .previewValue {
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 32px;
+  font-weight: 900;
   color: var(--accent-cyan);
-  text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  text-shadow:
+    0 0 20px var(--accent-cyan),
+    0 0 40px rgba(0, 188, 212, 0.5),
+    0 0 60px rgba(0, 188, 212, 0.3);
+  position: relative;
+  z-index: 1;
+  animation: prestigeGlow 2s ease-in-out infinite;
+}
+
+@keyframes prestigeGlow {
+  0%, 100% {
+    text-shadow: 0 0 20px var(--accent-cyan), 0 0 40px rgba(0, 188, 212, 0.5);
+  }
+  50% {
+    text-shadow: 0 0 30px var(--accent-cyan), 0 0 60px rgba(0, 188, 212, 0.7), 0 0 80px rgba(0, 188, 212, 0.4);
+  }
 }
 
 .previewEffect {
-  font-size: 11px;
+  font-size: 12px;
   color: var(--accent-green);
+  padding: 6px 14px;
+  background: rgba(76, 175, 80, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(76, 175, 80, 0.3);
+  position: relative;
+  z-index: 1;
+  text-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
 }
 
 .prestigeButton {
-  padding: 12px 24px;
-  border: 2px solid var(--accent-cyan);
-  border-radius: 8px;
-  background: transparent;
+  padding: 16px 28px;
+  border: 2px solid rgba(0, 188, 212, 0.3);
+  border-radius: 12px;
+  background: rgba(13, 13, 24, 0.6);
   color: var(--text-muted);
-  font-size: 14px;
-  font-weight: 700;
+  font-size: 15px;
+  font-weight: 800;
   cursor: not-allowed;
-  transition: all 0.2s;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.prestigeButton::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
+  opacity: 0;
+  transition: opacity 0.3s;
 }
 
 .prestigeButton.available {
-  background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-purple) 100%);
-  color: #000;
+  border-color: var(--accent-cyan);
+  background: linear-gradient(135deg, rgba(0, 188, 212, 0.2) 0%, rgba(156, 39, 176, 0.2) 100%);
+  color: #fff;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+  box-shadow: 0 0 30px rgba(0, 188, 212, 0.3);
+  animation: buttonReady 2s ease-in-out infinite;
+}
+
+@keyframes buttonReady {
+  0%, 100% { box-shadow: 0 0 30px rgba(0, 188, 212, 0.3); }
+  50% { box-shadow: 0 0 50px rgba(0, 188, 212, 0.5), 0 0 80px rgba(156, 39, 176, 0.2); }
 }
 
 .prestigeButton.available:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+  transform: scale(1.05) translateY(-2px);
+  box-shadow: 0 0 50px rgba(0, 188, 212, 0.5), 0 0 80px rgba(156, 39, 176, 0.3);
+}
+
+.prestigeButton.available:hover::before {
+  opacity: 1;
+}
+
+.prestigeButton.available span,
+.prestigeButton.available {
+  position: relative;
+  z-index: 1;
 }
 
 .hint {
   text-align: center;
-  font-size: 10px;
+  font-size: 11px;
   color: var(--text-muted);
-  padding: 8px;
+  padding: 10px 14px;
+  background: rgba(18, 18, 31, 0.6);
+  border-radius: 10px;
+  border: 1px dashed rgba(255, 255, 255, 0.1);
+  line-height: 1.5;
 }
