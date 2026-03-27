@@ -16,7 +16,7 @@ const defaultToolTimeout = 35 * time.Second // slightly longer than tool's 30s
 // ToolClient manages remote tool invocations and correlates responses
 type ToolClient struct {
 	client  *transport.Client
-	pending map[string]chan *proto.AgentMessage
+	pending map[string]interface{} // chan *proto.AgentMessage or bool (sentinel)
 	mu      sync.RWMutex
 	agentID string
 }
@@ -25,7 +25,7 @@ type ToolClient struct {
 func NewToolClient(client *transport.Client, agentID string) *ToolClient {
 	tc := &ToolClient{
 		client:  client,
-		pending: make(map[string]chan *proto.AgentMessage),
+		pending: make(map[string]interface{}),
 		agentID: agentID,
 	}
 	// Start listening for responses in background
@@ -67,16 +67,21 @@ func (tc *ToolClient) InvokeTool(tool string, args map[string]string) (map[strin
 		return nil, fmt.Errorf("failed to send: %w", err)
 	}
 
-	// Wait for result with timeout
+	// Wait for result with timeout using timer to avoid time.After() leak
+	timer := time.NewTimer(defaultToolTimeout)
+	defer timer.Stop()
+
 	select {
 	case resp := <-ch:
 		tc.mu.Lock()
-		delete(tc.pending, invokeID)
+		// Mark as done (sentinel) to signal deliver() to skip sending
+		tc.pending[invokeID] = true
 		tc.mu.Unlock()
 		return tc.parseResult(resp)
-	case <-time.After(defaultToolTimeout):
+	case <-timer.C:
 		tc.mu.Lock()
-		delete(tc.pending, invokeID)
+		// Mark as done (sentinel) to signal deliver() to skip sending
+		tc.pending[invokeID] = true
 		tc.mu.Unlock()
 		return nil, fmt.Errorf("tool invocation timeout after %v", defaultToolTimeout)
 	}
@@ -102,14 +107,26 @@ func (tc *ToolClient) deliver(msg *proto.AgentMessage) {
 	}
 
 	tc.mu.RLock()
-	ch, ok := tc.pending[payload.InvokeID]
+	val, ok := tc.pending[payload.InvokeID]
 	tc.mu.RUnlock()
 
-	if ok {
-		select {
-		case ch <- msg:
-		default:
-		}
+	if !ok {
+		return
+	}
+
+	// If sentinel (true), InvokeTool already consumed the response or timed out; skip send
+	if _, isSentinel := val.(bool); isSentinel {
+		return
+	}
+
+	ch, ok := val.(chan *proto.AgentMessage)
+	if !ok {
+		return
+	}
+
+	select {
+	case ch <- msg:
+	default:
 	}
 }
 

@@ -11,6 +11,7 @@ const (
 	MessageType_RESPONSE  MessageType = 3
 	MessageType_FORWARD   MessageType = 4
 	MessageType_HEARTBEAT  MessageType = 5
+	MessageType_INVOKE_TOOL MessageType = 10
 )
 
 func (x MessageType) String() string {
@@ -21,6 +22,7 @@ func (x MessageType) String() string {
 	case 3:  return "RESPONSE"
 	case 4:  return "FORWARD"
 	case 5:  return "HEARTBEAT"
+	case 10: return "INVOKE_TOOL"
 	default: return "UNKNOWN"
 	}
 }
