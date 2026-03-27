@@ -148,20 +148,16 @@ export function saveState(state) {
   }
 }
 
-export function getStatePath() {
-  return getStatePath();
-}
+// getStatePath is local — no exported version needed
 ```
 
 - [ ] **Step 2: Create test file `test/state.js`** (minimal smoke test)
 
 ```javascript
 // test/state.test.js
-import { loadState, saveState, getStatePath } from '../src/state.js';
-import { existsSync, unlinkSync } from 'fs';
+import { loadState, saveState } from '../src/state.js';
+import { existsSync } from 'fs';
 import { ok, equal } from 'assert';
-
-const path = getStatePath();
 
 // loadState returns object with expected fields
 const state = loadState();
@@ -373,9 +369,11 @@ export function hasWorkingTreeChanges(files) {
   if (!files || files.length === 0) return false;
 
   const status = git('status --porcelain', WORKSPACE_ROOT);
+  // git status --porcelain format: XY filename (X=index, Y=working tree)
+  // Y != ' ' means working tree has changes (M, D, A, etc.)
   const modifiedFiles = status
     .split('\n')
-    .filter(line => line.startsWith(' M ') || line.startsWith(' M'))
+    .filter(line => line.length > 3 && line[1] !== ' ') // unstaged changes
     .map(line => line.slice(3).trim());
 
   for (const file of files) {
@@ -783,8 +781,8 @@ async function runLoop() {
     }
   }
 
-  // ─── 2. Check and fix lint errors ───────────────────────────────────────
-  if (!didWork || loopCount % 1 === 0) { // Always check if no plan was run
+  // ─── 2. Check lint errors (every loop — fast check) ───────────────────
+  if (!didWork) { // Only check lint if no plan was executed
     const lintResults = checkLint();
     const projectsWithErrors = lintResults.filter(r => r.errors > 0);
 
