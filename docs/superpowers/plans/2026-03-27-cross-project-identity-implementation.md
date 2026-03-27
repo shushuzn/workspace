@@ -96,23 +96,6 @@ export function retireIdentity(agentId) {
     saveIdentityState(state);
   }
 }
-
-// Check if a specific cross-scenario reward is unlocked
-export function isRewardUnlocked(agentId, rewardId) {
-  const state = loadIdentityState();
-  const identity = state.identities.find(i => i.id === agentId);
-  return identity?.seasonUnlocks.includes(rewardId) ?? false;
-}
-
-// Add an unlocked reward to an identity
-export function unlockReward(agentId, rewardId) {
-  const state = loadIdentityState();
-  const identity = state.identities.find(i => i.id === agentId);
-  if (identity && !identity.seasonUnlocks.includes(rewardId)) {
-    identity.seasonUnlocks.push(rewardId);
-    saveIdentityState(state);
-  }
-}
 ```
 
 > Note: This file lives in a shared location accessible to all three projects. The exact path depends on the project structure. For now, implement it in `agent-arena/src/` first (as `src/shared/identityStore.js`), then copy/symlink to the other two projects.
@@ -221,99 +204,10 @@ After discussion ends, call `addRoundtableUse(selectedIdentity.id)`.
 
 ---
 
-## Phase 4: star-forge-web Integration
+## Phase 4: Testing & Polish
 
-**Files to create:**
-
-- `src/data/seasonRewards.js` — add cross-scenario reward configs
-- `src/data/seasonTasks.js` — add identity-related tasks
-
-**Files to modify:**
-
-- `src/components/SeasonPanel.jsx` — display cross-scenario achievement group
-
-### `src/data/seasonRewards.js`
-
-Add a new section/config for cross-scenario rewards:
-
-```javascript
-// In seasonRewards.js, add after existing reward definitions:
-export const CROSS_SCENARIO_REWARDS = [
-  {
-    id: 'identity_arena_5wins',
-    type: 'identity_milestone',
-    name: '竞技冠军',
-    description: '在竞技场累计获胜 5 次',
-    unlockAt: 50,
-    requirement: { type: 'arenaWins', value: 5 },
-    effect: { skinId: 'arena_champion_skin' }
-  },
-  {
-    id: 'identity_roundtable_5uses',
-    type: 'identity_milestone',
-    name: '圆桌常客',
-    description: '以跨世界身份参与 5 次圆桌讨论',
-    unlockAt: 50,
-    requirement: { type: 'roundtableUses', value: 5 },
-    effect: { featureKey: 'roundtable_badge' }
-  },
-  {
-    id: 'identity_cross_champion',
-    type: 'identity_milestone',
-    name: '跨界冠军',
-    description: '同时满足：竞技场 3 胜 + 圆桌 3 次',
-    unlockAt: 80,
-    requirement: { type: 'cross_champion' },
-    effect: { title: '跨界冠军', skinId: 'cross_champion_skin' }
-  }
-];
-```
-
-### `src/data/seasonTasks.js`
-
-Add identity-related season tasks:
-
-```javascript
-{
-  id: 'identity_arena_battle',
-  type: 'manual',
-  tags: ['arena', 'identity'],
-  title: '以跨世界身份出战',
-  description: '在竞技场使用一个已有关身份进行对战',
-  target: 1,
-  points: 20
-}
-```
-
-### Reward eligibility check
-
-In `SeasonContext.jsx` or `useSeason.js`, when checking if a reward is unlocked:
-
-```javascript
-function isCrossRewardUnlocked(reward) {
-  const identities = getActiveIdentities();
-  const { requirement } = reward;
-
-  if (requirement.type === 'arenaWins') {
-    return identities.some(i => i.arenaWins >= requirement.value);
-  }
-  if (requirement.type === 'roundtableUses') {
-    return identities.some(i => i.roundtableUses >= requirement.value);
-  }
-  if (requirement.type === 'cross_champion') {
-    return identities.some(i => i.arenaWins >= 3 && i.roundtableUses >= 3);
-  }
-  return false;
-}
-```
-
----
-
-## Phase 5: Testing & Polish
-
-- Verify identity syncs correctly across all three projects
-- Test soft-delete: retire an identity, verify it disappears from UI but rewards stay valid
-- Test star-forge cross rewards: meet a condition, verify reward becomes claimable
+- Verify identity syncs correctly across agent-arena and ai-roundtable
+- Test soft-delete: retire an identity, verify it disappears from UI
 - Edge case: localStorage unavailable — all identity functions should fail silently (no crash)
 
 ---
@@ -323,14 +217,7 @@ function isCrossRewardUnlocked(reward) {
 | Action | File | Note |
 |--------|------|------|
 | CREATE | `agent-arena/src/shared/identityStore.js` | Phase 1 |
-| MODIFY | `agent-arena/src/game/gameStore.js` | Phase 2 |
-| MODIFY | `agent-arena/src/components/AgentCard.jsx` | Phase 2 (optional) |
-| MODIFY | `ai-roundtable/index.js` | Phase 3 |
-| CREATE | `ai-roundtable/src/shared/identityStore.js` | Copy from Phase 1 |
-| MODIFY | `ai-roundtable/data/personas.js` | Add rarity temperature map |
-| MODIFY | `ai-roundtable/index.js` | After discussion: addRoundtableUse |
-| CREATE | `star-forge-web/src/data/seasonRewards.js` | Add CROSS_SCENARIO_REWARDS |
-| MODIFY | `star-forge-web/src/data/seasonTasks.js` | Add identity tasks |
-| CREATE | `star-forge-web/src/shared/identityStore.js` | Copy from Phase 1 |
-| MODIFY | `star-forge-web/src/components/SeasonPanel.jsx` | Display cross rewards |
-| MODIFY | `star-forge-web/src/hooks/useSeason.js` | Add reward eligibility check |
+| MODIFY | `agent-arena/src/game/gameStore.js` | Phase 1 — sync on match end |
+| MODIFY | `agent-arena/src/components/AgentCard.jsx` | Phase 1 (optional) |
+| COPY | `ai-roundtable/shared/identityStore.js` | Copy from Phase 1 |
+| MODIFY | `ai-roundtable/index.js` | Phase 2 — identity selection + addRoundtableUse |
