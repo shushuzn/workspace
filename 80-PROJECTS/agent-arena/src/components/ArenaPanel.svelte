@@ -172,6 +172,17 @@
     const updatedOpponent = { ...opp, result, rewards };
     arenaStore.setCurrentOpponent(updatedOpponent);
     arenaStore.addToHistory(updatedOpponent);
+
+    // Update global battle stats
+    gameStore.update(state => ({
+      ...state,
+      stats: {
+        ...state.stats,
+        totalBattles: (state.stats.totalBattles || 0) + 1,
+        totalWins: (state.stats.totalWins || 0) + (result === 'win' ? 1 : 0)
+      }
+    }));
+
     arenaStore.setStage('STAGE_RESULT');
   }
 
