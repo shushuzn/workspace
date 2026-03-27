@@ -1,0 +1,3 @@
+node_modules/
+patrol-state.json
+*.log
