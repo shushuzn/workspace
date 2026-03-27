@@ -7,6 +7,7 @@ import UpgradePanel from './UpgradePanel';
 import PrestigePanel from './PrestigePanel';
 import StatsPanel from './StatsPanel';
 import AchievementToast from './AchievementToast';
+import QuestToast from './QuestToast';
 import SettingsPanel from './SettingsPanel';
 import SaveLoadPanel from './SaveLoadPanel';
 import QuestPanel from './QuestPanel';
@@ -14,6 +15,7 @@ import DailyRewards from './DailyRewards';
 import Tutorial from './Tutorial';
 import Leaderboard from './Leaderboard';
 import Milestone from './Milestone';
+import SeasonPanel from './SeasonPanel';
 import ProgressBar from './ProgressBar';
 import styles from './GameBoard.module.css';
 
@@ -149,6 +151,7 @@ function GameBoardInner({ click, state, offlineInfo, onDismissOffline }) {
       case 'upgrades': return <><ProgressBar /><UpgradePanel /></>;
       case 'prestige': return <><ProgressBar /><PrestigePanel /></>;
       case 'quests': return <><ProgressBar /><QuestPanel /></>;
+      case 'season': return <><ProgressBar /><SeasonPanel /></>;
       default: return null;
     }
   }, [activeTab]);
@@ -163,6 +166,7 @@ function GameBoardInner({ click, state, offlineInfo, onDismissOffline }) {
       </div>
 
       <AchievementToast />
+      <QuestToast />
 
       {offlineInfo && (
         <div className={styles.offlineBanner}>
@@ -277,7 +281,7 @@ function GameBoardInner({ click, state, offlineInfo, onDismissOffline }) {
 
         <div className={styles.rightSection}>
           <div className={styles.tabs}>
-            {['buildings', 'upgrades', 'prestige', 'quests'].map(tab => (
+            {['buildings', 'upgrades', 'prestige', 'quests', 'season'].map(tab => (
               <button
                 key={tab}
                 className={`${styles.tab} ${activeTab === tab ? styles.active : ''}`}
