@@ -53,6 +53,7 @@ type Tool struct {
 	Description string
 	Params      []string
 	Execute     func(params map[string]interface{}) (interface{}, error)
+	Timeout     time.Duration // per-tool timeout, 0 = use default
 }
 
 // Executor executes tasks for an agent
@@ -71,10 +72,10 @@ func NewExecutor(agentID string) *Executor {
 }
 
 // RegisterTool registers a tool with the executor
-func (e *Executor) RegisterTool(tool Tool) {
+func (e *Executor) RegisterTool(tool *Tool) {
 	e.mu.Lock()
 	defer e.mu.Unlock()
-	e.tools[tool.Name] = tool
+	e.tools[tool.Name] = *tool
 }
 
 // ListTools returns a list of all registered tools
@@ -88,6 +89,17 @@ func (e *Executor) ListTools() []*Tool {
 		tools = append(tools, &t)
 	}
 	return tools
+}
+
+// FindTool returns a tool by name and whether it was found
+func (e *Executor) FindTool(name string) (*Tool, bool) {
+	e.mu.RLock()
+	defer e.mu.RUnlock()
+	t, ok := e.tools[name]
+	if !ok {
+		return nil, false
+	}
+	return &t, true
 }
 
 // CanHandle returns true if the executor can handle the given task type
