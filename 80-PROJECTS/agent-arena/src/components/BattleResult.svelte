@@ -10,10 +10,9 @@
     // Apply coin reward
     gameStore.addCoins(rewards.coins);
 
-    // Apply XP to selected agent using updateAgent
+    // Apply XP to selected agent using addAgentXP for proper level-up handling
     if ($selectedAgent) {
-      const currentXP = $selectedAgent.xp || 0;
-      gameStore.updateAgent($selectedAgent.id, { xp: currentXP + rewards.xp });
+      gameStore.addAgentXP($selectedAgent.id, rewards.xp);
     }
   });
 
