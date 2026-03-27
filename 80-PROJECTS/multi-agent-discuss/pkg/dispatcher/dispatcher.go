@@ -66,9 +66,10 @@ func (d DecisionType) String() string {
 
 // Decision represents a decision made by the dispatcher about how to handle a message
 type Decision struct {
-	Type    DecisionType
-	Message *proto.AgentMessage
-	Action  interface{}
+	Type         DecisionType
+	Message      *proto.AgentMessage
+	Action       interface{}
+	ResponseType proto.MessageType // Set when Type is DecisionRespond to specify outgoing message type
 }
 
 // Task represents a task to be executed
@@ -368,33 +369,36 @@ func (d *Dispatcher) executeToolInvoke(msg *proto.AgentMessage, invokeID, toolNa
 	case result := <-resultCh:
 		resultJSON, _ := json.Marshal(result)
 		return &Decision{
-			Type:    DecisionRespond,
-			Message: msg,
+			Type:         DecisionRespond,
+			Message:      msg,
 			Action: map[string]interface{}{
 				"invoke_id": invokeID,
 				"success":   true,
 				"result":    string(resultJSON),
 			},
+			ResponseType: proto.MessageType_TOOL_RESULT,
 		}
 	case err := <-errorCh:
 		return &Decision{
-			Type:    DecisionRespond,
-			Message: msg,
+			Type:         DecisionRespond,
+			Message:      msg,
 			Action: map[string]interface{}{
 				"invoke_id": invokeID,
 				"success":   false,
 				"error":     err.Error(),
 			},
+			ResponseType: proto.MessageType_TOOL_RESULT,
 		}
 	case <-time.After(timeout):
 		return &Decision{
-			Type:    DecisionRespond,
-			Message: msg,
+			Type:         DecisionRespond,
+			Message:      msg,
 			Action: map[string]interface{}{
 				"invoke_id": invokeID,
 				"success":   false,
 				"error":     fmt.Sprintf("tool execution timeout after %v", timeout),
 			},
+			ResponseType: proto.MessageType_TOOL_RESULT,
 		}
 	}
 }

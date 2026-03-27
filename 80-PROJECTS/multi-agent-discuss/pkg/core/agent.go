@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"sync"
 
+	"github.com/openclaw/multi-agent-discuss/pkg/executor"
 	"github.com/openclaw/multi-agent-discuss/pkg/proto"
 	"github.com/openclaw/multi-agent-discuss/pkg/toolclient"
 	"github.com/openclaw/multi-agent-discuss/pkg/transport"
@@ -20,17 +21,21 @@ type Agent struct {
 	Port         int
 	Capabilities []proto.Capability
 	Peers        map[string]*PeerConnection
+	exec        *executor.Executor
 	toolClient   *toolclient.ToolClient
 	mu           sync.RWMutex
 }
 
 func NewAgent(id, name string, port int, caps []proto.Capability) *Agent {
+	exec := executor.NewExecutor(id)
+	exec.SetupTools()
 	return &Agent{
 		ID:           id,
 		Name:         name,
 		Port:         port,
 		Capabilities: caps,
 		Peers:        make(map[string]*PeerConnection),
+		exec:        exec,
 	}
 }
 
@@ -57,6 +62,11 @@ func (a *Agent) GetPeer(id string) (*PeerConnection, bool) {
 	defer a.mu.RUnlock()
 	p, ok := a.Peers[id]
 	return p, ok
+}
+
+// GetExecutor returns the agent's executor for use with the dispatcher.
+func (a *Agent) GetExecutor() *executor.Executor {
+	return a.exec
 }
 
 // AgentInfo returns the agent's own AgentInfo for sharing with peers.
