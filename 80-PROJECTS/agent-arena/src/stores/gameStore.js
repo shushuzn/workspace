@@ -1,4 +1,5 @@
 import { writable, derived, get } from 'svelte/store';
+import { calculatePower } from '../game/agentFactory.js';
 
 // Initial state - matches game.js structure
 const initialState = {
@@ -118,12 +119,14 @@ function createGameStore() {
       const updates = { xp: currentXP, level: currentLevel };
 
       if (leveledUp) {
-        updates.stats = {
+        const newStats = {
           intelligence: (agent.stats.intelligence || 0) + 2,
           speed: (agent.stats.speed || 0) + 2,
           creativity: (agent.stats.creativity || 0) + 2,
           endurance: (agent.stats.endurance || 0) + 2,
         };
+        updates.stats = newStats;
+        updates.power = calculatePower(newStats);
       }
 
       update(state => ({
