@@ -46,3 +46,23 @@ export function createBranch(branchName) {
 export function getCurrentBranch() {
   return git("rev-parse --abbrev-ref HEAD", WORKSPACE_ROOT).trim();
 }
+
+/**
+ * Compute SHA256 hash of a file's content using git hash-object.
+ * Returns empty string if file doesn't exist or can't be read.
+ * @param {string} filePath
+ * @returns {string}
+ */
+export function fileHash(filePath) {
+  try {
+    const absPath = filePath.replace(/\\/g, '/');
+    const result = execSync(`git hash-object "${absPath}"`, {
+      cwd: WORKSPACE_ROOT,
+      encoding: 'utf-8',
+      timeout: 10000,
+    });
+    return result.trim();
+  } catch {
+    return '';
+  }
+}
