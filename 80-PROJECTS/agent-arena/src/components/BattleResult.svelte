@@ -1,26 +1,21 @@
 <script>
-  import { onMount } from 'svelte';
   import { arenaStore } from '../stores/arenaStore.js';
   import { gameStore, selectedAgent } from '../stores/gameStore.js';
 
   export let result = 'win'; // 'win' | 'lose'
   export let opponent = null;
 
-  onMount(() => {
-    // Apply coin reward
-    gameStore.addCoins(rewards.coins);
-
-    // Apply XP to selected agent using addAgentXP for proper level-up handling
-    if ($selectedAgent) {
-      gameStore.addAgentXP($selectedAgent.id, rewards.xp);
-    }
-  });
-
-  $: difficulty = opponent?.difficulty || 1.0;
-  $: rewards = result === 'win'
-    ? { xp: Math.floor(50 * difficulty), coins: Math.floor(20 * difficulty) }
-    : { xp: 10, coins: 5 };
+  // Use rewards already computed and stored by ArenaPanel.resolveBattle()
+  $: rewards = opponent?.rewards || (result === 'win'
+    ? { xp: 50, coins: 20 }
+    : { xp: 10, coins: 5 });
   $: isWin = result === 'win';
+
+  // Apply rewards once when opponent.rewards becomes available
+  $: if (opponent?.rewards && $selectedAgent) {
+    gameStore.addCoins(rewards.coins);
+    gameStore.addAgentXP($selectedAgent.id, rewards.xp);
+  }
 
   function playAgain() {
     arenaStore.reset();
