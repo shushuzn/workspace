@@ -2,10 +2,12 @@
 
 ## 概述
 
-在 `agent-arena`、`ai-roundtable`、`star-forge-web` 三个项目之间建立轻量级的"叙事身份共享"机制。玩家在 `agent-arena` 中创建和培养的 Agent，可以作为"跨世界身份"出现在其他两个项目中，为玩家提供统一的叙事体验。
+在 `agent-arena`、`ai-roundtable` 两个项目之间建立轻量级的"叙事身份共享"机制。玩家在 `agent-arena` 中创建的 Agent，可以作为"跨世界身份"出现在圆桌讨论中，提供统一的叙事体验。
+
+**star-forge-web 联动（Phase 3）**：已从本版本移除，需要单独设计。核心障碍是 `agent-arena` 和 `star-forge-web` 的 localStorage 完全隔离，无法跨项目传递事件。详见"Phase 3 待研究问题"章节。
 
 **核心原则：**
-- 三个项目的数据模型完全独立，不做强制统一
+- 两个项目的数据模型完全独立，不做强制统一
 - 只共享 Agent 的**叙事属性**（名字、背景故事、稀有度）
 - 跨场景的影响力通过"身份层"（identity layer）传递
 - 实现成本低，不破坏现有项目结构
@@ -31,9 +33,8 @@ interface CrossProjectIdentity {
   avatar: string;                // 头像标识符
 
   // 跨场景影响力计数
-  arenaWins: number;            // 在竞技场获胜次数
-  roundtableUses: number;        // 在圆桌被选为发言者次数
-  seasonUnlocks: string[];      // 已解锁的跨场景奖励 ID 列表
+  arenaWins: number;            // 在竞技场获胜次数（仅 agent-arena 写入）
+  roundtableUses: number;       // 在圆桌被选为发言者次数
 
   // 元数据
   createdAt: number;              // 创建时间戳
@@ -42,7 +43,6 @@ interface CrossProjectIdentity {
 
 interface IdentityState {
   identities: CrossProjectIdentity[];
-  activeIdentityId: string | null;  // 当前选中的身份（用于快速访问）
 }
 ```
 
@@ -52,7 +52,6 @@ interface IdentityState {
 |------|---------|---------|
 | `arena_match_end` | 竞技场对战结算后 | `arenaWins++`（如胜利） |
 | `roundtable_session_end` | 圆桌讨论结束后 | `roundtableUses++`（使用的身份） |
-| `season_reward_claimed` | 赛季奖励领取时 | `seasonUnlocks.push(rewardId)` |
 
 ---
 
@@ -120,58 +119,6 @@ function onArenaMatchEnd(result, agent) {
 
 ---
 
-### 3. star-forge-web（身份奖励消费者）
-
-**改动范围：** 赛季奖励配置中新增"跨世界身份"奖励线。
-
-**新增奖励类型：**
-
-```typescript
-// 在 seasonRewards.js 中新增奖励类型
-{
-  id: "identity_arena_5wins",
-  type: "identity_milestone",
-  name: "竞技冠军",
-  description: "在竞技场累计获胜 5 次",
-  unlockAt: 50,           // 赛季进度阈值
-  requirement: {
-    type: "arenaWins",
-    value: 5
-  },
-  effect: {
-    // 奖励效果：比如解锁一个特殊赛季皮肤
-    skinId: "arena_champion_skin"
-  }
-}
-```
-
-**赛季奖励分类：** 在奖励面板新增一个 Tab 或分组，展示"跨世界成就"类奖励。
-
-```
-┌─ 跨世界成就 ──────────────────────────┐
-│  🔒 竞技冠军（需 arenaWins >= 5）   │
-│  🔒 圆桌常客（需 roundtableUses >= 10）│
-│  🔒 全能冠军（arenaWins >= 3 && roundtableUses >= 3）│
-└─────────────────────────────────────┘
-```
-
-**赛季任务新增身份相关任务：**
-
-```javascript
-// 在 seasonTasks.js 中
-{
-  id: "identity_battle_1",
-  type: "manual",
-  tags: ["arena", "identity"],
-  title: "以跨世界身份出战",
-  description: "在竞技场使用一个已有关身份进行对战",
-  target: 1,
-  points: 20
-}
-```
-
----
-
 ## 身份生命周期管理
 
 ### Agent 删除场景
@@ -192,35 +139,37 @@ function retireIdentity(agentId: string) {
 
   // arenaWins 保留——这些成就是真实发生的
   // roundtableUses 保留——圆桌里的发言记录依然有效
-  // seasonUnlocks 保留——已解锁的奖励不能回收
 
   saveIdentityState(state);
 }
 ```
 
 **读取规则：**
-- `getActiveIdentities()` 只返回 `status === 'active'` 的身份
-- 圆桌选择列表和赛季奖励检查**不显示**已退役身份（避免困惑）
-- 但已解锁的赛季奖励**仍然有效**（奖励发给玩家后不撤回）
+- `getActiveIdentities()` 只返回 `status !== 'retired'` 的身份
+- 圆桌选择列表**不显示**已退役身份（避免困惑）
 
 ### 空状态处理
 
 | 场景 | 无身份时的处理 |
 |------|-------------|
 | ai-roundtable | 显示"新身份（无跨世界身份）"选项，走现有 6 人格逻辑 |
-| star-forge 跨世界奖励 | 条件不满足时不显示该奖励（玩家看不到锁定的目标） |
 | agent-arena 详情页 | 如关联 identity 已退役，显示"该身份已退役，竞技记录保留" |
 
 ---
 
-## 奖励联动机制
+## Phase 3 待研究问题
 
-| 奖励 ID | 触发条件 | 奖励内容 | 生效场景 |
-|---------|---------|---------|---------|
-| `identity_arena_5wins` | arenaWins >= 5 | 赛季限定头像框 | 全局 |
-| `identity_roundtable_5uses` | roundtableUses >= 5 | 圆桌特殊发言气泡 | ai-roundtable |
-| `identity_cross_champion` | arenaWins>=3 && roundtableUses>=3 | "跨界冠军"称号 | 全局 |
-| `identity_legendary_unlocks` | 拥有 1 个 legendary+ 身份 | 解锁传说级专属赛季奖励线 | star-forge |
+star-forge-web 联动因架构原因暂不纳入本版本：
+
+1. **跨项目 localStorage 隔离**：`agent-arena` 和 `star-forge-web` 各有独立的 localStorage 命名空间，`arenaMatchEnd` 事件无法传递到 star-forge 的奖励系统
+
+2. **赛季奖励 reducer 不兼容**：`SeasonContext.jsx` 的 `CLAIM_REWARD` reducer 按章节进度解锁，不支持按 `arenaWins` 计数解锁的奖励类型
+
+3. **`arenaWins` 是 lifetime 而非赛季内计数**：如果要在赛季奖励中使用，需要在 `identityStore` 中记录每个赛季的胜场快照
+
+**可行的简化方案**（未来探索）：
+- 用 shared storage（同一域名下的 localStorage 或 postMessage API）实现跨项目事件通知
+- 或者 star-forge 的身份奖励只在赛季结算时检查一次（不再实时联动）
 
 ---
 
@@ -229,10 +178,8 @@ function retireIdentity(agentId: string) {
 ### 新增文件
 
 ```
-// 独立于三个项目之外的共享模块
 src/shared/
   identityStore.js      # 身份层 localStorage 读写封装
-  identityConfig.js     # 身份相关静态配置（稀有度效果映射等）
 ```
 
 ### agent-arena 改动
@@ -246,30 +193,19 @@ src/components/AgentCard.jsx  # 新增：跨世界身份状态徽章
 
 ```
 index.js                        # 新增：讨论前身份选择流程
-data/personas.js               # 新增：基于稀有度的发言风格配置
-```
-
-### star-forge-web 改动
-
-```
-src/data/seasonRewards.js      # 新增：跨世界成就奖励配置
-src/data/seasonTasks.js        # 新增：身份相关赛季任务
-src/components/SeasonPanel.jsx # 新增：跨世界成就 Tab
 ```
 
 ---
 
 ## 优先级
 
-1. **Phase 1（身份层基础）：** `identityStore.js` + 基础 CRUD + agent-arena 对战结算同步
+1. **Phase 1（身份层基础）：** `identityStore.js` + agent-arena 对战结算同步
 2. **Phase 2（圆桌身份消费）：** ai-roundtable 身份选择 UI + 稀有度发言风格
-3. **Phase 3（赛季奖励联动）：** star-forge 跨世界成就奖励线
-4. **Phase 4（高级联动）：** 传说级身份专属奖励、称号系统
 
 ---
 
 ## 后续扩展方向
 
 - **身份成长叙事：** 当某个身份的 `arenaWins` 或 `roundtableUses` 达到特定阈值时，解锁更长的背景故事（由 AI 生成）
-- **身份技能树：** 跨场景使用的被动技能，比如"在圆桌中+10%说服力"作为奖励
 - **PVP 身份展示：** 在 agent-arena 的对手遇到拥有特殊身份的玩家时，对手 AI 会提及玩家的名声
+- **star-forge 联动：** 见"Phase 3 待研究问题"
