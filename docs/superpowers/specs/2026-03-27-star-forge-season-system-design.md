@@ -27,14 +27,32 @@
 存储位置：`localStorage key = "starforge_season"`
 
 ```typescript
+// 静态配置（不变动）
+interface SeasonConfig {
+  seasonDurationDays: number;      // 30
+  chapters: ChapterConfig[];       // 每赛季章节配置
+  chapterUnlockThresholds: number[]; // [0, 50, 80] 每章节解锁进度阈值(%)
+  taskPointValues: Record<string, number>; // 每任务完成的进度点数值
+}
+
+interface ChapterConfig {
+  id: number;              // 1-3
+  name: string;            // "第1章「星辰苏醒」"
+  description: string;
+  tasks: Omit<SeasonTask, 'progress' | 'claimed'>[];
+  freeRewards: Omit<SeasonReward, 'claimed' | 'unlockAt'>[];
+  premiumRewards: Omit<SeasonReward, 'claimed'>[];
+}
+
+// 运行时状态
 interface SeasonState {
   seasonId: string;          // "2026-04"
   chapter: number;           // 当前章节 1-3
-  tasks: SeasonTask[];
-  rewards: SeasonReward[];
+  tasks: SeasonTask[];       // 含运行时 progress/claimed
+  rewards: SeasonReward[];   // 含运行时 claimed
+  // 进度 = sum(已完成任务的点数) / sum(所有任务点数) * 100
   freeProgress: number;      // 免费通行证进度 (0-100)
   premiumProgress: number;   // 高级通行证进度 (0-100)
-  premiumOwned: boolean;      // 是否拥有高级通行证
   startTime: number;         // UTC 毫秒时间戳
   endTime: number;          // UTC 毫秒时间戳
   lastSaved: number;         // 最后保存时间戳
@@ -42,12 +60,15 @@ interface SeasonState {
 
 interface SeasonTask {
   id: string;
+  chapter: number;           // ★ 新增：任务所属章节
   type: 'auto' | 'manual';  // auto = 后台自动追踪, manual = 需玩家主动触发
-  category: 'build' | 'click' | 'prestige' | 'special';
+  tags: string[];            // ★ 改：用 tags 数组代替单一 category，支持多标签
+  // tags 示例：'build', 'click', 'produce', 'use-item', 'daily', 'achievement', 'prestige', 'progress'
   title: string;            // 任务名称
   description: string;
   target: number;           // 目标值
   progress: number;          // 当前进度
+  points: number;            // ★ 新增：完成后获得的进度点
   claimed: boolean;          // 是否已领奖
 }
 
@@ -59,7 +80,13 @@ interface SeasonReward {
   name: string;
   description: string;
   claimed: boolean;
-  unlockAt: number;         // 进度阈值
+  unlockAt: number;         // 进度阈值 (0-100)
+  effect: {                 // ★ 新增：奖励具体效果描述
+    resourceAmount?: number;
+    buffId?: string;        // 永久加成 ID，关联 buff 系统
+    skinId?: string;        // 外观皮肤 ID
+    featureKey?: string;    // 功能解锁的 key
+  };
 }
 ```
 
@@ -69,35 +96,39 @@ interface SeasonReward {
 
 每个赛季包含 **3个章节**，每章有独立主题、任务线、奖励。
 
+每章节进度 = `Σ已完成任务点数 / Σ所有任务点数 * 100`，达到阈值自动解锁下一章节。
+
+章节解锁阈值：`[0, 50, 80]`（第一章0%，第二章50%，第三章80%）。
+
 ### 第1章「星辰苏醒」
 
 - **主题**：建造基础
 - **任务**：
-  1. 建造任意5个不同建筑（auto, build）
-  2. 累计生产 10,000 资源（auto, produce）
-  3. 升级任意建筑到10级（manual, build）
+  1. 建造任意5个不同建筑（auto, tags: ['build', 'construction']，points: 20）
+  2. 累计生产 10,000 资源（auto, tags: ['produce'], points: 15）
+  3. 升级任意建筑到10级（manual, tags: ['build', 'upgrade'], points: 15）
 - **免费奖励**：500 游戏货币、经验药水 x3
-- **高级奖励**：+5% 离线收益永久加成（buff）、高级皮肤箱 x1
+- **高级奖励**：+5% 离线收益永久加成（buffId: 'offline_boost_5'）、高级皮肤箱 x1
 
 ### 第2章「星际征途」
 
 - **主题**：活跃参与
 - **任务**：
-  1. 累计点击 500 次（manual, click）
-  2. 使用加速道具 10 次（manual, use-item）
-  3. 完成5次每日挑战（auto, daily）
+  1. 累计点击 500 次（manual, tags: ['click'], points: 20）
+  2. 使用加速道具 10 次（manual, tags: ['use-item'], points: 15）
+  3. 完成5次每日挑战（auto, tags: ['daily'], points: 15）
 - **免费奖励**：1000 游戏货币、加速药水 x5
-- **高级奖励**：+10% 点击加成永久加成（buff）、新功能解锁（仓库容量+20）
+- **高级奖励**：+10% 点击加成永久加成（buffId: 'click_boost_10'）、新功能解锁（featureKey: 'inventory_expand_20'）
 
 ### 第3章「宇宙主宰」
 
 - **主题**：终极挑战
 - **任务**：
-  1. 完成一次声望重置（manual, prestige）
-  2. 收集 100 颗成就星（auto, achievement）
-  3. 在赛季结束前达到章节3（auto, progress）
-- **免费奖励**：2000 游戏货币、限定头像框
-- **高级奖励**：赛季专属「星环」建筑皮肤（外观）、称号「宇宙主宰」
+  1. 完成一次声望重置（manual, tags: ['prestige'], points: 30）
+  2. 收集 100 颗成就星（auto, tags: ['achievement'], points: 15）
+  3. 在赛季结束前达到章节3（auto, tags: ['progress'], points: 15）
+- **免费奖励**：2000 游戏货币、限定头像框（skinId: 'avatar_frame_season1'）
+- **高级奖励**：赛季专属「星环」建筑皮肤（skinId: 'building_skin_ring'）、称号「宇宙主宰」（skinId: 'title_cosmic_ruler'）
 
 ---
 
@@ -105,14 +136,17 @@ interface SeasonReward {
 
 ### 进度系统
 
-- 任务完成后获得进度点数（每任务 10-30 点）
-- 免费层：完成任务自动获得进度，解锁免费奖励
-- 高级层：需要玩家主动购买高级通行证（游戏内货币购买），解锁高级奖励
+- **每任务有独立点数**（15-30点，由 `seasonConfig.taskPointValues` 定义）
+- **章节进度** = `Σ已完成任务点数 / Σ所有任务点数 * 100`
+- 免费层与高级层共用同一进度条，高级层奖励在 `premiumOwned=true` 时才可领取
+- 高级通行证购买后永久解锁，后续所有赛季自动拥有高级层资格
+- **`premiumOwned` 存于账号级 key**：`localStorage.starforge_account`（与赛季数据分离），后续接云端同步时优先同步此 key
 
 ### 奖励领取
 
-- **基础奖励（免费层）**：自动发放到背包/直接到账，无需手动操作
-- **高阶奖励（高级层）**：需玩家在赛季界面手动点击领取
+- **所有奖励均为手动领取** — 进度达到解锁阈值后显示 `[可领取]`，玩家点击后到账
+- 已领取奖励显示 `[已领取]`；未达到解锁阈值的显示当前进度 `🔒 [30/100]`
+- 赛季结束后未领取的奖励自动作废
 
 ### 高级通行证定价
 
@@ -162,16 +196,18 @@ interface SeasonReward {
 ┌─ 免费奖励 ──────────────────────────┐
 │  ☑ 500 游戏货币      [已领取]       │
 │  ☑ 经验药水 x3       [已领取]       │
-│  🔓 +5% 离线收益     [可领取!]  ← 点击│
+│  🔓 +5% 离线收益     [可领取!] ← 点击│
 └─────────────────────────────────────┘
 ┌─ 高级奖励 ──────────────────────────┐
-│  🔒 +10% 点击加成   [进度 30/100]   │
-│  🔒 仓库容量+20      [进度 30/100]   │
-│  🔒 赛季专属皮肤     [进度 80/100]   │
+│  🔒 +10% 点击加成   [30/100]        │
+│  🔒 仓库容量+20      [30/100]        │
+│  🔒 赛季专属皮肤     [80/100]        │
 │                                     │
 │  [购买高级通行证 - 5000 星尘]        │
 └─────────────────────────────────────┘
 ```
+
+> 每章进度独立计算，达到 `unlockAt` 阈值后点击领取。
 
 ---
 
@@ -208,11 +244,13 @@ function isSeasonEnded(endTime) {
 
 | 数据 | 存储位置 | 频率 |
 |------|---------|------|
-| 赛季进度 | `localStorage.starforge_season` | 每分钟 + 关键操作 |
-| 赛季任务进度 | 同上 | 每次进度变化时 |
-| 已领取奖励记录 | 同上 | 每次领取时 |
+| 赛季进度 | `localStorage.starforge_season` | **防抖：每 5 秒最多写一次**，或关键操作时（领奖、完成章节） |
+| 赛季任务进度 | 同上 | 同上（批量合并，避免一次点击触发多次写入） |
+| 已领取奖励记录 | 同上 | 实时写入（关键操作） |
 
-> **注意**：与主存档 `localStorage.starforge_save` 完全独立，互不影响。
+> **注意**：`premiumOwned: boolean` 为账号级权益，购买后永久存储在独立 key `starforge_account`（区别于赛季数据），支持后续跨设备同步。
+
+**防抖策略**：`useSeason` 内部维护一个 `dirty` 标志和 `flush` 定时器（5秒），所有 `setProgress` 操作只标记 dirty，不立即写入。5秒超时或手动调用 `flush()` 时一次性写入 localStorage。
 
 ---
 
@@ -235,16 +273,16 @@ src/store/
   SeasonContext.jsx         # 赛季独立 Context
 
 src/data/
-  seasonTasks.js            # 赛季任务配置
-  seasonRewards.js          # 赛季奖励配置
+  seasonConfig.js           # ★ 赛季静态配置（章节数、时长、解锁阈值、任务点数）
+  seasonTasks.js            # 赛季任务配置（由 seasonConfig 引用）
+  seasonRewards.js          # 赛季奖励配置（由 seasonConfig 引用）
 ```
 
 ### 修改文件
 
 ```
 src/App.jsx                  # 注入 SeasonContext
-src/components/TabPanel.jsx  # 赛季入口按钮
-src/components/GameBoard.jsx # 赛季数据 onSave 时同步
+src/components/GameBoard.jsx # 赛季入口按钮 + 赛季数据同步
 src/hooks/useSaveLoad.js     # 保存时同时持久化赛季数据
 ```
 
