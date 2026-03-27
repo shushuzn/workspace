@@ -1,9 +1,12 @@
 package core
 
 import (
+	"fmt"
 	"sync"
 
 	"github.com/openclaw/multi-agent-discuss/pkg/proto"
+	"github.com/openclaw/multi-agent-discuss/pkg/toolclient"
+	"github.com/openclaw/multi-agent-discuss/pkg/transport"
 )
 
 type PeerConnection struct {
@@ -17,6 +20,7 @@ type Agent struct {
 	Port         int
 	Capabilities []proto.Capability
 	Peers        map[string]*PeerConnection
+	toolClient   *toolclient.ToolClient
 	mu           sync.RWMutex
 }
 
@@ -53,4 +57,36 @@ func (a *Agent) GetPeer(id string) (*PeerConnection, bool) {
 	defer a.mu.RUnlock()
 	p, ok := a.Peers[id]
 	return p, ok
+}
+
+// AgentInfo returns the agent's own AgentInfo for sharing with peers.
+func (a *Agent) AgentInfo() *proto.AgentInfo {
+	return &proto.AgentInfo{
+		Id:           a.ID,
+		Name:         a.Name,
+		Port:         int32(a.Port),
+		Capabilities: a.Capabilities,
+	}
+}
+
+// InvokeTool invokes a tool on a peer agent by ID.
+// It dials the peer, creates a temporary ToolClient, invokes the tool, and returns.
+func (a *Agent) InvokeTool(peerID, tool string, args map[string]string) (map[string]interface{}, error) {
+	// Find peer by ID from discovery
+	peer, ok := a.GetPeer(peerID)
+	if !ok {
+		return nil, fmt.Errorf("peer not found: %s", peerID)
+	}
+
+	// Dial peer via transport
+	addr := fmt.Sprintf("localhost:%d", peer.Info.Port)
+	client, err := transport.DialAgent(addr, a.AgentInfo())
+	if err != nil {
+		return nil, fmt.Errorf("dial peer %s: %w", peerID, err)
+	}
+	defer client.Close()
+
+	// Create ToolClient and invoke tool
+	tc := toolclient.NewToolClient(client, a.ID)
+	return tc.InvokeTool(tool, args)
 }
