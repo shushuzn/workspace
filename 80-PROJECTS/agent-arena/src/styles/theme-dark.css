@@ -1,0 +1,60 @@
+[data-theme="dark"] {
+  /* 背景层次 */
+  --bg-void: #08080F;
+  --bg-base: #0D0D16;
+  --bg-surface: #14141F;
+  --bg-elevated: #1C1C2A;
+  --bg-overlay: #262638;
+
+  /* 主色调 - 赛博朋克紫 */
+  --primary-dim: #6B4F9E;
+  --primary-muted: #8B6FCC;
+  --primary-bright: #A78BFA;
+  --primary-glow: #C4B5FD;
+
+  /* 金色 - 稀有度 */
+  --gold-dim: #8B7355;
+  --gold-muted: #C9A227;
+  --gold-bright: #E8C547;
+  --gold-glow: #FFD966;
+
+  /* 稀有度颜色 */
+  --rarity-common: #9CA3AF;
+  --rarity-rare: #60A5FA;
+  --rarity-epic: #A78BFA;
+  --rarity-legendary: #FBBF24;
+
+  /* 语义色 */
+  --crimson: #EF4444;
+  --crimson-bg: rgba(239, 68, 68, 0.12);
+  --emerald: #10B981;
+  --emerald-bg: rgba(16, 185, 129, 0.12);
+  --sapphire: #3B82F6;
+  --sapphire-bg: rgba(59, 130, 246, 0.12);
+  --amber: #F59E0B;
+  --amber-bg: rgba(245, 158, 11, 0.12);
+
+  /* 属性颜色 */
+  --stat-intelligence: #60A5FA;
+  --stat-speed: #34D399;
+  --stat-creativity: #F472B6;
+  --stat-endurance: #FB923C;
+
+  /* 文字 */
+  --text-bright: #F5F5F7;
+  --text-base: #C8C8D0;
+  --text-muted: #7A7A88;
+  --text-faint: #4A4A55;
+
+  /* 边框 */
+  --border-subtle: rgba(255, 255, 255, 0.05);
+  --border-default: rgba(255, 255, 255, 0.1);
+  --border-strong: rgba(255, 255, 255, 0.18);
+
+  /* 阴影 */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.5);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.6);
+  --shadow-primary: 0 0 24px rgba(167, 139, 250, 0.25);
+  --shadow-gold: 0 0 24px rgba(232, 197, 71, 0.25);
+}
