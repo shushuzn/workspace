@@ -11,6 +11,7 @@
   let battleLog = [];
   let battleResult = null;
   let battleReward = 0;
+  let isAutoBattle = false;
   
   $: state = $gameStore;
   $: player = state.agents.find(a => a.id === state.selectedAgentId);
@@ -49,10 +50,10 @@
   }
 
   function startAutoBattle() {
+    isAutoBattle = true;
     battleState = 'preparing';
     battleLog = [];
 
-    // Create two random AI agents
     const rarities = ['common', 'uncommon', 'rare', 'epic', 'legendary', 'mythic'];
     const rarity1 = rarities[Math.floor(Math.random() * rarities.length)];
     const rarity2 = rarities[Math.floor(Math.random() * rarities.length)];
@@ -60,7 +61,6 @@
     playerAgent = createAgent({ rarity: rarity1, autoName: true });
     enemyAgent = createAgent({ rarity: rarity2, autoName: true });
 
-    // Random levels for balance
     playerAgent.level = Math.floor(Math.random() * 20) + 1;
     enemyAgent.level = Math.floor(Math.random() * 20) + 1;
 
@@ -71,6 +71,17 @@
       battleState = 'fighting';
       runAutoBattle();
     }, 1500);
+  }
+
+  let autoBattleTimer = null;
+
+  function stopAutoBattle() {
+    isAutoBattle = false;
+    if (autoBattleTimer) {
+      clearTimeout(autoBattleTimer);
+      autoBattleTimer = null;
+    }
+    resetBattle();
   }
 
   async function runAutoBattle() {
@@ -86,6 +97,7 @@
     const maxRounds = 20;
 
     while (playerHP > 0 && enemyHP > 0 && round < maxRounds) {
+      if (!isAutoBattle) break;
       round++;
       await new Promise(resolve => setTimeout(resolve, 600));
 
@@ -124,6 +136,10 @@
     battleLog = [...battleLog, { round: round + 1, message: playerWon ? `🏆 ${playerAgent.name} 获胜!` : `🏆 ${enemyAgent.name} 获胜!` }];
 
     battleState = 'result';
+
+    if (isAutoBattle) {
+      autoBattleTimer = setTimeout(() => startAutoBattle(), 3000);
+    }
   }
   
   function getEnemyRarity(level) {
@@ -243,8 +259,12 @@
     {/if}
 
     <div class="auto-battle-section">
-      <button class="auto-battle-btn" on:click={startAutoBattle}>🤖 AI vs AI 自动战斗</button>
-      <p class="auto-battle-hint">观看两个AI随机Agent自动对战</p>
+      {#if isAutoBattle}
+        <button class="auto-battle-btn stop" on:click={stopAutoBattle}>⏹ 停止观战</button>
+      {:else}
+        <button class="auto-battle-btn" on:click={startAutoBattle}>🤖 AI vs AI 自动战斗</button>
+        <p class="auto-battle-hint">观看两个AI随机Agent自动对战</p>
+      {/if}
     </div>
     
   {:else if battleState === 'preparing'}
@@ -335,5 +355,6 @@
   .auto-battle-section { margin-top: 1rem; padding-top: 1rem; border-top: 1px solid rgba(255, 255, 255, 0.1); text-align: center; }
   .auto-battle-btn { width: 100%; padding: 0.75rem; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; border-radius: 0.75rem; color: #fff; font-weight: 600; font-size: 1rem; cursor: pointer; transition: all 0.2s; }
   .auto-battle-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); }
+  .auto-battle-btn.stop { background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%); }
   .auto-battle-hint { font-size: 0.75rem; color: #a0a0a0; margin-top: 0.5rem; }
 </style>
