@@ -1,4 +1,5 @@
 import { GameProvider } from './store/GameContext';
+import { SeasonProvider } from './store/SeasonContext';
 import { QualityProvider } from './store/QualityContext';
 import { LanguageProvider } from './i18n/LanguageContext';
 import { useGameLoop } from './hooks/useGameLoop';
@@ -19,9 +20,11 @@ export default function App() {
     <LanguageProvider>
       <QualityProvider>
         <GameProvider>
-          <GameInitializer />
-          <GameBoard />
-          <HotkeyHint />
+          <SeasonProvider>
+            <GameInitializer />
+            <GameBoard />
+            <HotkeyHint />
+          </SeasonProvider>
         </GameProvider>
       </QualityProvider>
     </LanguageProvider>
