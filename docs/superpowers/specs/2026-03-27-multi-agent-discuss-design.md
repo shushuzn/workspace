@@ -203,7 +203,7 @@ Agent 在以下情况可能触发讨论邀请：
 message AgentMessage {
   // ... 其他字段
   uint32 hop_count = 8;       // 跳数计数
-  uint32 max_hops = 16;       // 最大跳数，默认 8
+  uint32 max_hops = 8;        // 最大跳数，默认 8
   repeated string visited = 9; // 访问过的节点 ID 列表
 }
 ```
@@ -282,5 +282,6 @@ type AgentInfo struct {
 ## 未来扩展
 
 - 持久化消息历史
-- Agent 能力注册与发现
 - 讨论结果总结生成
+- 消息 catchup 同步机制（断线重连后补发丢失消息）
+- 群组规模自动调控（防止广播风暴）
