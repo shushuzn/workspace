@@ -1,7 +1,10 @@
 package dispatcher
 
 import (
+	"encoding/json"
+	"fmt"
 	"log"
+	"strings"
 	"sync"
 	"time"
 
@@ -186,6 +189,9 @@ func (d *Dispatcher) makeDecision(msg *proto.AgentMessage) *Decision {
 			Action:  map[string]interface{}{"heartbeat": true},
 		}
 
+	case proto.MessageType_INVOKE_TOOL:
+		return d.handleInvokeTool(msg)
+
 	default:
 		return &Decision{
 			Type:    DecisionIgnore,
@@ -277,6 +283,120 @@ func (d *Dispatcher) canHandleTask(task *Task) bool {
 	// Default implementation: agents can handle basic text tasks
 	// This can be extended with capability matching
 	return true
+}
+
+func (d *Dispatcher) handleInvokeTool(msg *proto.AgentMessage) *Decision {
+	// Parse JSON payload (transport uses json.Marshal, not proto)
+	var payload struct {
+		InvokeID string            `json:"invoke_id"`
+		Tool    string            `json:"tool"`
+		Args    map[string]string `json:"args"`
+	}
+	if err := json.Unmarshal(msg.Payload, &payload); err != nil {
+		return &Decision{
+			Type:    DecisionRespond,
+			Message: msg,
+			Action:  map[string]interface{}{"error": fmt.Sprintf("failed to parse payload: %v", err)},
+		}
+	}
+
+	return d.executeToolInvoke(msg, payload.InvokeID, payload.Tool, payload.Args)
+}
+
+func (d *Dispatcher) executeToolInvoke(msg *proto.AgentMessage, invokeID, toolName string, args map[string]string) *Decision {
+	if d.executor == nil {
+		return &Decision{
+			Type:    DecisionRespond,
+			Message: msg,
+			Action: map[string]interface{}{
+				"invoke_id": invokeID,
+				"success":   false,
+				"error":     "no executor configured",
+			},
+		}
+	}
+
+	// Strip "tool:" prefix if present
+	name := toolName
+	if strings.HasPrefix(name, "tool:") {
+		name = strings.TrimPrefix(name, "tool:")
+	}
+
+	tool, found := d.executor.FindTool(name)
+	if !found {
+		return &Decision{
+			Type:    DecisionRespond,
+			Message: msg,
+			Action: map[string]interface{}{
+				"invoke_id": invokeID,
+				"success":   false,
+				"error":     fmt.Sprintf("tool not found: %s", name),
+			},
+		}
+	}
+
+	timeout := 30 * time.Second
+	if tool.Timeout > 0 {
+		timeout = tool.Timeout
+	}
+
+	// Convert args to interface{}
+	ifaceArgs := make(map[string]interface{})
+	for k, v := range args {
+		ifaceArgs[k] = v
+	}
+
+	// Execute with timeout and panic recovery
+	resultCh := make(chan interface{}, 1)
+	errorCh := make(chan error, 1)
+
+	go func() {
+		defer func() {
+			if r := recover(); r != nil {
+				errorCh <- fmt.Errorf("panic: %v", r)
+			}
+		}()
+		result, err := tool.Execute(ifaceArgs)
+		if err != nil {
+			errorCh <- err
+			return
+		}
+		resultCh <- result
+	}()
+
+	select {
+	case result := <-resultCh:
+		resultJSON, _ := json.Marshal(result)
+		return &Decision{
+			Type:    DecisionRespond,
+			Message: msg,
+			Action: map[string]interface{}{
+				"invoke_id": invokeID,
+				"success":   true,
+				"result":    string(resultJSON),
+			},
+		}
+	case err := <-errorCh:
+		return &Decision{
+			Type:    DecisionRespond,
+			Message: msg,
+			Action: map[string]interface{}{
+				"invoke_id": invokeID,
+				"success":   false,
+				"error":     err.Error(),
+			},
+		}
+	case <-time.After(timeout):
+		return &Decision{
+			Type:    DecisionRespond,
+			Message: msg,
+			Action: map[string]interface{}{
+				"invoke_id": invokeID,
+				"success":   false,
+				"error":     fmt.Sprintf("tool execution timeout after %v", timeout),
+			},
+		}
+	}
 }
 
 // SetDecisionCallback sets the callback function to be called when a decision is made
