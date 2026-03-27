@@ -6,11 +6,21 @@ import { getPendingPlans, markPlanDone, markPlanSkipped } from './plans.js';
 import { hasWorkingTreeChanges, createBranch, getCurrentBranch } from './git.js';
 import { checkLint, hasLintErrors } from './lint.js';
 import { executePlan, fixLintErrors } from './executor.js';
+import { deepResearch } from './research.js';
+import { writePlanFromResearch } from './planWriter.js';
 import { setTimeout as sleep } from 'timers/promises';
 
 const WORKSPACE_ROOT = 'D:/OpenClaw/workspace';
 const LOOP_INTERVAL_MS = 5 * 60 * 1000; // 5 minutes
 const MAX_RETRIES = 2;
+const RESEARCH_INTERVAL = 50; // loops
+const RESEARCH_CONFIDENCE_THRESHOLD = 0.7;
+const RESEARCH_TOPICS = [
+  'agent arena game implementation github trending',
+  'LLM multi-agent roundtable discussion',
+  'cross-project identity system patterns',
+  'autonomous coding agent architecture',
+];
 
 let running = true;
 let loopCount = 0;
@@ -116,8 +126,31 @@ async function runLoop() {
   }
 
   // ─── 4. Research (every 50 loops) ─────────────────────────────────────
-  if (loopCount % 50 === 0) {
-    log(`[patrol] Research scan #${loopCount} (deferred to Phase 2)`);
+  if (loopCount % RESEARCH_INTERVAL === 0) {
+    const topicIdx = (loopCount / RESEARCH_INTERVAL - 1) % RESEARCH_TOPICS.length;
+    const topic = RESEARCH_TOPICS[topicIdx];
+
+    // Skip if already researched this topic
+    const alreadyResearched = state.research_topics.some(t => t.topic === topic);
+    if (!alreadyResearched) {
+      log(`🔬 Researching: "${topic}"...`);
+      const ideas = await deepResearch(topic);
+      let newPlans = 0;
+      for (const idea of ideas) {
+        if (idea.confidence > RESEARCH_CONFIDENCE_THRESHOLD) {
+          const result = writePlanFromResearch(idea);
+          if (result.success) {
+            newPlans++;
+            actions.push(`🆕 New plan: ${idea.title} (${idea.source}, conf ${idea.confidence.toFixed(2)})`);
+            log(`  🆕 New plan from research: "${idea.title}" (conf ${idea.confidence.toFixed(2)})`);
+          }
+        }
+      }
+      state.research_topics.push({ topic, searched_at: new Date().toISOString(), ideas_generated: newPlans });
+      if (newPlans > 0) didWork = true;
+    } else {
+      log(`🔬 Research: "${topic}" already done, skipping.`);
+    }
   }
 
   // ─── 5. Patrol log ───────────────────────────────────────────────────
