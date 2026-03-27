@@ -28,7 +28,7 @@
       const { intelligence, speed, creativity, endurance } = a.stats;
       // Power formula matches agentFactory.calculatePower
       return Math.floor(
-        (intelligence * 1.5 + speed * 1.2 + creativity * 1.0 + endurance * 1.8) *
+        (intelligence * 2 + speed * 1.5 + creativity * 1.8 + endurance * 1.2) *
         (1 + a.level * 0.1)
       );
     });
@@ -99,7 +99,7 @@
       // Scale stats to match target power
       const targetPower = calculateOpponentPower(playerAvg, difficulty);
       const currentPower = Math.floor(
-        stats.intelligence * 1.5 + stats.speed * 1.2 + stats.creativity * 1.0 + stats.endurance * 1.8
+        stats.intelligence * 2 + stats.speed * 1.5 + stats.creativity * 1.8 + stats.endurance * 1.2
       );
       const scale = targetPower / currentPower;
       Object.keys(stats).forEach(k => stats[k] = Math.floor(stats[k] * scale));
@@ -153,8 +153,8 @@
 
     // Calculate player power with level bonus
     const playerPower = Math.floor(
-      (player.stats.intelligence * 1.5 + player.stats.speed * 1.2 +
-       player.stats.creativity * 1.0 + player.stats.endurance * 1.8) *
+      (player.stats.intelligence * 2 + player.stats.speed * 1.5 +
+       player.stats.creativity * 1.8 + player.stats.endurance * 1.2) *
       (1 + player.level * 0.1)
     );
     const opponentPower = opp.power;
