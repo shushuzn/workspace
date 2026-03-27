@@ -1,6 +1,6 @@
 <script>
   import { gameStore } from '../stores/gameStore.js';
-  import { createAgent } from '../game/agentFactory.js';
+  import { createAgent, selectGachaRarity } from '../game/agentFactory.js';
   import { GACHA_CONFIG } from '../game/constants.js';
   import AgentCard from './AgentCard.svelte';
   
@@ -84,8 +84,8 @@
       
       for (let i = 0; i < count; i++) {
         const rarity = type === 'ten' 
-          ? (i === 9 ? 'rare' : getRandomRarity(type))
-          : getRandomRarity(type);
+          ? (i === 9 ? 'rare' : selectGachaRarity(type))
+          : selectGachaRarity(type);
         
         const agent = createAgent({ rarity });
         results.push(agent);
@@ -112,31 +112,6 @@
         }
       }
     }, 500);
-  }
-  
-  function getRandomRarity(type) {
-    const rand = Math.random() * 100;
-    
-    if (type === 'premium') {
-      if (rand < 5) return 'mythic';
-      if (rand < 20) return 'legendary';
-      if (rand < 50) return 'epic';
-      if (rand < 80) return 'rare';
-      return 'uncommon';
-    }
-    
-    if (type === 'legend') {
-      if (rand < 30) return 'legendary';
-      if (rand < 70) return 'epic';
-      return 'rare';
-    }
-    
-    if (rand < 0.1) return 'mythic';
-    if (rand < 1) return 'legendary';
-    if (rand < 5) return 'epic';
-    if (rand < 20) return 'rare';
-    if (rand < 50) return 'uncommon';
-    return 'common';
   }
   
   function closeResult() {
