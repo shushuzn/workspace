@@ -26,10 +26,10 @@ export async function generateOpponentNarrative() {
       body: JSON.stringify({
         model: 'MiniMax-M2.7-highspeed',
         max_tokens: 200,
-        messages: [{
-          role: 'user',
-          content: '生成一个竞技场对手的叙事信息。严格按格式返回：\n名字: [角色名]\n性格: [性格]\n故事: [故事]'
-        }]
+        messages: [
+          { role: 'system', content: SYSTEM_PROMPT },
+          { role: 'user', content: '生成一个竞技场对手的叙事信息。严格按格式返回：\n名字: [角色名]\n性格: [性格]\n故事: [故事]' }
+        ]
       })
     });
 
