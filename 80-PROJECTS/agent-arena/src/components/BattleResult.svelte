@@ -1,8 +1,21 @@
 <script>
+  import { onMount } from 'svelte';
   import { arenaStore } from '../stores/arenaStore.js';
+  import { gameStore, selectedAgent } from '../stores/gameStore.js';
 
   export let result = 'win'; // 'win' | 'lose'
   export let opponent = null;
+
+  onMount(() => {
+    // Apply coin reward
+    gameStore.addCoins(rewards.coins);
+
+    // Apply XP to selected agent using updateAgent
+    if ($selectedAgent) {
+      const currentXP = $selectedAgent.xp || 0;
+      gameStore.updateAgent($selectedAgent.id, { xp: currentXP + rewards.xp });
+    }
+  });
 
   $: difficulty = opponent?.difficulty || 1.0;
   $: rewards = result === 'win'
@@ -17,8 +30,8 @@
 
   function goHome() {
     arenaStore.reset();
-    // Navigate back to home - use gameStore.setTab if available
-    import('../stores/gameStore.js').then(m => m.gameStore.setTab('home'));
+    // Navigate back to home
+    gameStore.setTab('home');
   }
 </script>
 
