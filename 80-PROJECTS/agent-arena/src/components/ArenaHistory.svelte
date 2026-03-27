@@ -35,7 +35,7 @@
   {:else}
     <div class="history-list">
       {#each history as record (record.id)}
-        <div class="history-item" on:click={() => toggleExpand(record.id)}>
+        <div class="history-item" role="button" tabindex="0" on:click={() => toggleExpand(record.id)} on:keydown={(e) => e.key === 'Enter' && toggleExpand(record.id)}>
           <div class="item-main">
             <div class="item-left">
               <span class="opponent-avatar">{record.avatar}</span>
