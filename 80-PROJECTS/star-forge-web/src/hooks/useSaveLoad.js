@@ -1,6 +1,11 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useGame } from '../store/GameContext';
 
+// === 赛季数据 ===
+// 赛季数据存储在独立的 localStorage key: "starforge_season"
+// 由 SeasonContext 自行管理，无需 useSaveLoad 处理
+// 账号级权益（如 premiumOwned）存储在 "starforge_account" key，同样独立
+
 export function useSaveLoad() {
   const { state, loadState } = useGame();
   const lastAutoSaveRef = useRef(0);
