@@ -185,7 +185,8 @@ export const agentPower = derived(
   $agent => {
     if (!$agent) return 0;
     const { intelligence, speed, creativity, endurance } = $agent.stats;
-    return Math.floor((intelligence * 2 + speed * 1.5 + creativity * 1.8 + endurance * 1.2) * (1 + $agent.level * 0.1));
+    // Power formula matches agentFactory.calculatePower: I*1.5 + S*1.2 + C*1.0 + E*1.8
+    return Math.floor((intelligence * 1.5 + speed * 1.2 + creativity * 1.0 + endurance * 1.8) * (1 + $agent.level * 0.1));
   }
 );
 
