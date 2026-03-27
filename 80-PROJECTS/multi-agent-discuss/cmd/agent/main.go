@@ -14,6 +14,7 @@ import (
 	"github.com/openclaw/multi-agent-discuss/pkg/dispatcher"
 	"github.com/openclaw/multi-agent-discuss/pkg/executor"
 	"github.com/openclaw/multi-agent-discuss/pkg/group"
+	"github.com/openclaw/multi-agent-discuss/pkg/ipc"
 	"github.com/openclaw/multi-agent-discuss/pkg/proto"
 	"github.com/openclaw/multi-agent-discuss/pkg/transport"
 )
@@ -72,14 +73,18 @@ func main() {
 	switch cmd {
 	case "start":
 		handleStart()
+	case "run":
+		handleRun()
 	case "peers":
 		handlePeers()
 	case "send":
 		handleSend()
-	case "group":
-		handleGroup()
 	case "groups":
 		handleGroups()
+	case "group":
+		handleGroup()
+	case "status":
+		handleStatus()
 	case "help":
 		printUsage()
 	default:
@@ -94,30 +99,27 @@ func printUsage() {
 
 Usage:
   agent start --name <name> --port <port>
-                          Start agent with name and port, begin discovery
+                          Start agent with name and port, begin discovery (stateless)
+  agent run --name <name> --port <port>
+                          Start agent in persistent running mode (with IPC server)
   agent peers              Show discovered peers with capabilities
   agent send <peer-id> <message>
                           Send TEXT message to specific peer
-  agent group create <name>
-                          Create a new group
-  agent group invite <group-id> <peer-id>
-                          Invite peer to group
-  agent group join <group-id>
-                          Join an existing group
   agent groups             Show all groups agent is in
-  agent group leave <group-id>
-                          Leave a group
+  agent status             Show agent status via IPC (for running agents)
   agent help               Show this help message
+
+IPC Commands (for running agents via 'agent run'):
+  agent peers              List discovered peers
+  agent send <id> <msg>   Send message to peer
+  agent groups             List groups
 
 Examples:
   agent start --name Alice --port 9001
+  agent run --name Alice --port 9001
   agent peers
   agent send peer-123 "Hello peer"
-  agent group create "Team Alpha"
-  agent group invite group-456 peer-789
-  agent group join group-456
   agent groups
-  agent group leave group-456
 `)
 }
 
@@ -244,12 +246,47 @@ func (h *serverHandler) HandleMessage(msg *proto.AgentMessage, reply func(*proto
 }
 
 func handlePeers() {
-	if ctx == nil || ctx.disc == nil {
-		fmt.Println("Agent not started. Run 'agent start' first.")
+	// Check if we have a local context (start mode)
+	if ctx != nil && ctx.disc != nil {
+		peers := ctx.disc.GetPeers()
+		if len(peers) == 0 {
+			fmt.Println("No peers discovered yet.")
+			return
+		}
+
+		fmt.Printf("Discovered %d peer(s):\n\n", len(peers))
+		for _, peer := range peers {
+			fmt.Printf("  ID:       %s\n", peer.Id)
+			fmt.Printf("  Name:     %s\n", peer.Name)
+			fmt.Printf("  Port:     %d\n", peer.Port)
+			if len(peer.Capabilities) > 0 {
+				fmt.Printf("  Capabilities:\n")
+				for _, cap := range peer.Capabilities {
+					fmt.Printf("    - %s: %s\n", cap.Name, cap.Description)
+				}
+			}
+			fmt.Println()
+		}
+		return
+	}
+
+	// Try IPC client mode (run mode)
+	fs := flag.NewFlagSet("peers", flag.ContinueOnError)
+	port := fs.Int("port", 0, "Agent port (required for remote)")
+	fs.Parse(os.Args[2:])
+
+	if *port == 0 {
+		fmt.Println("Agent not started. Run 'agent start' first, or use 'agent peers --port <port>'")
 		os.Exit(1)
 	}
 
-	peers := ctx.disc.GetPeers()
+	client := ipc.NewClient(*port)
+	peers, err := client.Peers()
+	if err != nil {
+		fmt.Printf("Failed to get peers: %v\n", err)
+		os.Exit(1)
+	}
+
 	if len(peers) == 0 {
 		fmt.Println("No peers discovered yet.")
 		return
@@ -257,15 +294,9 @@ func handlePeers() {
 
 	fmt.Printf("Discovered %d peer(s):\n\n", len(peers))
 	for _, peer := range peers {
-		fmt.Printf("  ID:       %s\n", peer.Id)
-		fmt.Printf("  Name:     %s\n", peer.Name)
-		fmt.Printf("  Port:     %d\n", peer.Port)
-		if len(peer.Capabilities) > 0 {
-			fmt.Printf("  Capabilities:\n")
-			for _, cap := range peer.Capabilities {
-				fmt.Printf("    - %s: %s\n", cap.Name, cap.Description)
-			}
-		}
+		fmt.Printf("  ID:       %s\n", peer["id"])
+		fmt.Printf("  Name:     %s\n", peer["name"])
+		fmt.Printf("  Port:     %d\n", int(peer["port"].(float64)))
 		fmt.Println()
 	}
 }
@@ -460,12 +491,49 @@ func handleGroupLeave() {
 }
 
 func handleGroups() {
-	if ctx == nil || ctx.grpMgr == nil {
-		fmt.Println("Agent not started. Run 'agent start' first.")
+	// Check if we have a local context (start mode)
+	if ctx != nil && ctx.grpMgr != nil {
+		groups := ctx.grpMgr.GetGroups()
+		if len(groups) == 0 {
+			fmt.Println("Not a member of any groups.")
+			return
+		}
+
+		fmt.Printf("Member of %d group(s):\n\n", len(groups))
+		for _, g := range groups {
+			isOwner := g.OwnerID == ctx.agent.ID
+			role := "member"
+			if isOwner {
+				role = "owner"
+			}
+
+			fmt.Printf("  Group ID:   %s\n", g.ID)
+			fmt.Printf("  Name:       %s\n", g.Name)
+			fmt.Printf("  Role:       %s\n", role)
+			fmt.Printf("  Members:    %d\n", g.MemberCount())
+			fmt.Printf("  Created:    %s\n", g.Created.Format(time.RFC1123))
+			fmt.Println()
+		}
+		return
+	}
+
+	// Try IPC client mode (run mode)
+	fs := flag.NewFlagSet("groups", flag.ContinueOnError)
+	port := fs.Int("port", 0, "Agent port (required for remote)")
+	fs.Parse(os.Args[2:])
+
+	if *port == 0 {
+		fmt.Println("Agent not started. Run 'agent start' first, or use 'agent groups --port <port>'")
 		os.Exit(1)
 	}
 
-	groups := ctx.grpMgr.GetGroups()
+	client := ipc.NewClient(*port)
+	groups, err := client.Groups()
+	if err != nil {
+		fmt.Printf("Failed to get groups: %v\n", err)
+		os.Exit(1)
+	}
+
 	if len(groups) == 0 {
 		fmt.Println("Not a member of any groups.")
 		return
@@ -473,17 +541,166 @@ func handleGroups() {
 
 	fmt.Printf("Member of %d group(s):\n\n", len(groups))
 	for _, g := range groups {
-		isOwner := g.OwnerID == ctx.agent.ID
-		role := "member"
-		if isOwner {
-			role = "owner"
-		}
-
-		fmt.Printf("  Group ID:   %s\n", g.ID)
-		fmt.Printf("  Name:       %s\n", g.Name)
-		fmt.Printf("  Role:       %s\n", role)
-		fmt.Printf("  Members:    %d\n", g.MemberCount())
-		fmt.Printf("  Created:    %s\n", g.Created.Format(time.RFC1123))
+		fmt.Printf("  Group ID:   %s\n", g["id"])
+		fmt.Printf("  Name:       %s\n", g["name"])
 		fmt.Println()
+	}
+}
+
+// handleRun starts the agent in persistent mode with IPC server
+func handleRun() {
+	fs := flag.NewFlagSet("run", flag.ContinueOnError)
+	name := fs.String("name", "Agent", "Agent name")
+	port := fs.Int("port", 9000, "Port for gRPC transport server")
+	fs.Parse(os.Args[2:])
+
+	// Initialize agent
+	agent := core.NewAgent("", *name, *port, []proto.Capability{
+		{Name: "text", Description: "Text messaging capability"},
+		{Name: "task", Description: "Task execution capability"},
+	})
+	agent.ID = fmt.Sprintf("agent-%d", time.Now().UnixNano())
+
+	info := &proto.AgentInfo{
+		Id:   agent.ID,
+		Name: agent.Name,
+		Capabilities: []*proto.Capability{
+			{Name: "text", Description: "Text messaging capability"},
+			{Name: "task", Description: "Task execution capability"},
+		},
+		Port: int32(*port),
+	}
+
+	// Create components
+	disc := discovery.NewDiscovery(agent.ID, *port)
+	disp := dispatcher.NewDispatcher(agent.ID, func() []*proto.AgentInfo {
+		return disc.GetPeers()
+	})
+	exec := executor.NewExecutor(agent.ID)
+	grpMgr := group.NewGroupManager(agent.ID)
+
+	// Create cancellable context
+	runCtx, cancel := context.WithCancel(context.Background())
+
+	// Setup dispatcher with executor
+	disp.SetDecisionCallback(func(decision *dispatcher.Decision) {
+		fmt.Printf("[dispatcher] decision: %s for message from %s\n",
+			decision.Type.String(), decision.Message.SenderId)
+	})
+
+	// Setup group event handler
+	grpMgr.SetEventHandler(func(event group.GroupEvent, groupID string, agentID string) {
+		fmt.Printf("[group] event: %s on group %s by %s\n",
+			event.String(), groupID, agentID)
+	})
+
+	// Setup signal handling for graceful shutdown
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, os.Interrupt, syscall.SIGTERM)
+
+	// Start mDNS discovery
+	fmt.Printf("[discovery] Starting mDNS discovery on agent %s (port %d)\n", agent.Name, *port)
+	if err := disc.Start(runCtx, info, func(peer *proto.AgentInfo) {
+		fmt.Printf("[discovery] Peer discovered: %s (%s) on port %d\n",
+			peer.Name, peer.Id, peer.Port)
+	}, func(peerID string) {
+		fmt.Printf("[discovery] Peer removed: %s\n", peerID)
+	}); err != nil {
+		fmt.Printf("[discovery] Failed to start: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Start gRPC transport server
+	fmt.Printf("[transport] Starting gRPC server on port %d\n", *port)
+	server, err := transport.StartServer(*port, &persistentServerHandler{agent: agent, disp: disp, exec: exec})
+	if err != nil {
+		fmt.Printf("[transport] Failed to start server: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Start IPC server
+	ipcSrv := ipc.NewServer(*port, agent, disc, grpMgr)
+	fmt.Printf("[ipc] Starting IPC server on port %d (tcp:%d)\n", *port+10000, *port+10000)
+	if err := ipcSrv.Start(); err != nil {
+		fmt.Printf("[ipc] Failed to start IPC server: %v\n", err)
+		os.Exit(1)
+	}
+
+	// Write PID file
+	pid := os.Getpid()
+	pidFile := fmt.Sprintf("agent-%s.pid", agent.ID)
+	if err := os.WriteFile(pidFile, []byte(fmt.Sprintf("%d", pid)), 0644); err != nil {
+		fmt.Printf("[agent] Warning: failed to write PID file: %v\n", err)
+	}
+
+	fmt.Printf("[agent] Started successfully in persistent mode!\n")
+	fmt.Printf("  Agent ID:   %s\n", agent.ID)
+	fmt.Printf("  Name:       %s\n", agent.Name)
+	fmt.Printf("  Port:       %d\n", *port)
+	fmt.Printf("  IPC Port:   %d\n", *port+10000)
+	fmt.Printf("  PID File:   %s\n", pidFile)
+	fmt.Printf("\nAgent is running. Press Ctrl+C to shutdown.\n")
+
+	// Block until signal received
+	<-sigCh
+
+	fmt.Println("\n[agent] Shutting down...")
+	cancel()
+
+	server.Close()
+	disc.Stop()
+	ipcSrv.Stop()
+	os.Remove(pidFile)
+
+	fmt.Println("[agent] Shutdown complete")
+}
+
+// handleStatus shows status via IPC client (for running agents)
+func handleStatus() {
+	if len(os.Args) < 3 {
+		// Interactive: need to specify port
+		fmt.Println("Usage: agent status --port <port>")
+		os.Exit(1)
+	}
+
+	fs := flag.NewFlagSet("status", flag.ContinueOnError)
+	port := fs.Int("port", 9000, "Agent port")
+	fs.Parse(os.Args[2:])
+
+	client := ipc.NewClient(*port)
+	status, err := client.Status()
+	if err != nil {
+		fmt.Printf("Failed to get status: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Agent Status:\n")
+	fmt.Printf("  Agent ID:   %v\n", status["agentId"])
+	fmt.Printf("  Agent Name: %v\n", status["agentName"])
+	fmt.Printf("  Port:       %v\n", status["agentPort"])
+	fmt.Printf("  Peers:      %v\n", status["peerCount"])
+	fmt.Printf("  Groups:     %v\n", status["groupCount"])
+	fmt.Printf("  History:    %v messages\n", status["msgHistoryCount"])
+}
+
+// serverHandler implements transport.MessageHandler for persistent mode
+type persistentServerHandler struct {
+	agent *core.Agent
+	disp  *dispatcher.Dispatcher
+	exec  *executor.Executor
+}
+
+func (h *persistentServerHandler) HandleMessage(msg *proto.AgentMessage, reply func(*proto.AgentMessage)) {
+	adapter := &executorAdapter{exec: h.exec}
+	h.disp.HandleMessage(msg, adapter)
+
+	if msg.Type == proto.MessageType_TEXT {
+		reply(&proto.AgentMessage{
+			Id:        fmt.Sprintf("reply-%d", time.Now().UnixNano()),
+			Timestamp: time.Now().Unix(),
+			SenderId:  h.agent.ID,
+			Type:      proto.MessageType_RESPONSE,
+			Payload:   []byte(`{"ack":true,"text":"message received"}`),
+		})
 	}
 }

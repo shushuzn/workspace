@@ -2,9 +2,14 @@ package discovery
 
 import (
 	"context"
+	"encoding/binary"
+	"encoding/json"
 	"fmt"
+	"io"
+	"log"
 	"net"
 	"sync"
+	"time"
 
 	"github.com/openclaw/multi-agent-discuss/pkg/proto"
 )
@@ -43,10 +48,26 @@ func (d *Discovery) Start(ctx context.Context, info *proto.AgentInfo, onDiscover
 
 	go d.acceptLoop(ctx, info)
 
-	// Broadcast our presence
-	go d.announce(info)
+	// Broadcast our presence periodically
+	go d.announcePeriodic(info)
 
 	return nil
+}
+
+func (d *Discovery) announcePeriodic(info *proto.AgentInfo) {
+	// Announce immediately
+	d.announce(info)
+	// Then repeat every 2 seconds
+	ticker := time.NewTicker(2 * time.Second)
+	defer ticker.Stop()
+	for {
+		select {
+		case <-d.stopCh:
+			return
+		case <-ticker.C:
+			d.announce(info)
+		}
+	}
 }
 
 func (d *Discovery) acceptLoop(ctx context.Context, localInfo *proto.AgentInfo) {
@@ -62,52 +83,127 @@ func (d *Discovery) acceptLoop(ctx context.Context, localInfo *proto.AgentInfo) 
 				continue
 			}
 		}
-		go d.handleConnection(conn.(*net.TCPConn), localInfo)
+		go d.handleConnection(conn, localInfo)
 	}
 }
 
 func (d *Discovery) handleConnection(conn net.Conn, localInfo *proto.AgentInfo) {
 	defer conn.Close()
 
-	// Send our info
-	fmt.Fprintf(conn, "AGENT:%s:%d:%s\n", localInfo.Id, localInfo.Port, localInfo.Name)
-
-	// Read peer info
-	buf := make([]byte, 1024)
-	n, err := conn.Read(buf)
-	if err != nil {
+	// Read length-prefixed message
+	var length [4]byte
+	if _, err := io.ReadFull(conn, length[:]); err != nil {
+		return
+	}
+	size := binary.BigEndian.Uint32(length[:])
+	if size > 4096 {
 		return
 	}
 
-	var peerID string
-	var peerPort int
-	var peerName string
-	if _, err := fmt.Sscanf(string(buf[:n]), "AGENT:%s:%d:%s", &peerID, &peerPort, &peerName); err == nil {
-		if peerID != localInfo.Id {
-			peerInfo := &proto.AgentInfo{
-				Id:   peerID,
-				Name: peerName,
-				Port: int32(peerPort),
-			}
-			d.addPeer(peerInfo)
-		}
+	data := make([]byte, size)
+	if _, err := io.ReadFull(conn, data); err != nil {
+		return
 	}
+
+	var peerInfo proto.AgentInfo
+	if err := json.Unmarshal(data, &peerInfo); err != nil {
+		return
+	}
+
+	if peerInfo.Id == localInfo.Id {
+		return
+	}
+
+	// Add peer
+	d.addPeer(&peerInfo)
+
+	// Send our info back
+	selfData, _ := json.Marshal(&proto.AgentInfo{
+		Id:   localInfo.Id,
+		Name: localInfo.Name,
+		Port: localInfo.Port,
+	})
+	var selfLen [4]byte
+	binary.BigEndian.PutUint32(selfLen[:], uint32(len(selfData)))
+	if _, err := conn.Write(selfLen[:]); err != nil {
+		return
+	}
+	conn.Write(selfData)
 }
 
 func (d *Discovery) announce(info *proto.AgentInfo) {
-	// Try to connect to known discovery ports on localhost
-	for i := 0; i < 10; i++ {
-		discPort := 5353 + i*10
-		if discPort == 5353+(d.port%1000) {
-			continue // skip our own port
-		}
-		conn, err := net.Dial("tcp", fmt.Sprintf("localhost:%d", discPort))
-		if err != nil {
+	concurrency := 100
+	sem := make(chan struct{}, concurrency)
+	var wg sync.WaitGroup
+	found := 0
+	connected := 0
+
+	for port := 5000; port < 6000; port++ {
+		if port == 5353+(d.port%1000) {
 			continue
 		}
-		fmt.Fprintf(conn, "AGENT:%s:%d:%s\n", info.Id, info.Port, info.Name)
-		conn.Close()
+
+		wg.Add(1)
+		go func(p int) {
+			defer wg.Done()
+			sem <- struct{}{}
+			defer func() { <-sem }()
+
+			conn, err := net.DialTimeout("tcp", fmt.Sprintf("localhost:%d", p), 50*time.Millisecond)
+			if err != nil {
+				return
+			}
+			connected++
+
+			// Send our info as JSON length-prefixed message
+			data, _ := json.Marshal(info)
+			var length [4]byte
+			binary.BigEndian.PutUint32(length[:], uint32(len(data)))
+
+			if _, err := conn.Write(length[:]); err != nil {
+				conn.Close()
+				return
+			}
+			if _, err := conn.Write(data); err != nil {
+				conn.Close()
+				return
+			}
+
+			// Read peer's response (length-prefixed)
+			var peerLen [4]byte
+			conn.SetReadDeadline(time.Now().Add(100 * time.Millisecond))
+			if _, err := io.ReadFull(conn, peerLen[:]); err != nil {
+				conn.Close()
+				return
+			}
+
+			peerSize := binary.BigEndian.Uint32(peerLen[:])
+			if peerSize > 4096 {
+				conn.Close()
+				return
+			}
+
+			peerData := make([]byte, peerSize)
+			if _, err := io.ReadFull(conn, peerData); err != nil {
+				conn.Close()
+				return
+			}
+			conn.Close()
+
+			var peerInfo proto.AgentInfo
+			if err := json.Unmarshal(peerData, &peerInfo); err != nil {
+				return
+			}
+
+			if peerInfo.Id != info.Id {
+				d.addPeer(&peerInfo)
+				found++
+				log.Printf("[discovery] [%s] Found peer %s at port %d", info.Name, peerInfo.Name, peerInfo.Port)
+			}
+		}(port)
 	}
+	wg.Wait()
+	log.Printf("[discovery] [%s] Broadcast complete, connected=%d found=%d", info.Name, connected, found)
 }
 
 func (d *Discovery) addPeer(info *proto.AgentInfo) {
