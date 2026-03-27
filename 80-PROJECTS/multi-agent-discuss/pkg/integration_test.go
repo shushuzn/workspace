@@ -633,11 +633,8 @@ func TestGroupManagerQueries(t *testing.T) {
 }
 
 // --- TestGroupDissolve ---
-// NOTE: DissolveGroup has a deadlock bug - it holds gm.mu.Lock() then calls emitEvent
-// which tries to acquire gm.mu.RLock(). Skipping to avoid test hang.
 
 func TestGroupDissolve(t *testing.T) {
-	t.Skip("DissolveGroup has a deadlock bug - holding lock while emitting event")
 	agent := group.NewGroupManager("dissolve-agent")
 
 	// Create a group
