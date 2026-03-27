@@ -1,9 +1,10 @@
 import { useMemo, memo } from 'react';
 import { useGame, BUILDINGS, TIERS, getBuildingCost, getBuildingProduction } from '../store/GameContext';
+import { useSeason } from '../store/SeasonContext';
 import { formatNumber } from '../utils/format';
 import styles from './BuildingPanel.module.css';
 
-const BuildingItem = memo(function BuildingItem({ building, owned, efficiencyBonus, costReduction, prestigeMultiplier, globalEfficiency, globalMultiplier, energy, onBuy }) {
+const BuildingItem = memo(function BuildingItem({ building, owned, efficiencyBonus, costReduction, prestigeMultiplier, globalEfficiency, globalMultiplier, energy, onBuy, autoBuyRate }) {
   const cost = Math.floor(getBuildingCost(building, owned, prestigeMultiplier, costReduction));
   const production = getBuildingProduction(building, 1, efficiencyBonus) * prestigeMultiplier * (1 + globalEfficiency) * globalMultiplier;
   const totalProduction = getBuildingProduction(building, owned, efficiencyBonus) * prestigeMultiplier * (1 + globalEfficiency) * globalMultiplier;
@@ -17,7 +18,10 @@ const BuildingItem = memo(function BuildingItem({ building, owned, efficiencyBon
       <div className={styles.buildingIcon}>{building.emoji}</div>
       <div className={styles.buildingInfo}>
         <div className={styles.buildingName}>{building.name}</div>
-        <div className={styles.buildingOwned}>×{owned}</div>
+        <div className={styles.buildingOwned}>
+          ×{owned}
+          {autoBuyRate > 0 && <span className={styles.autoBuyRate}> ⚡+{autoBuyRate}/s</span>}
+        </div>
       </div>
       <div className={styles.buildingStats}>
         <div className={styles.buildingProduction}>
@@ -33,6 +37,13 @@ const BuildingItem = memo(function BuildingItem({ building, owned, efficiencyBon
 
 export default memo(function BuildingPanel() {
   const { state, buyBuilding, unlockTier } = useGame();
+  const season = useSeason();
+
+  const handleBuy = (buildingId) => {
+    buyBuilding(buildingId);
+    // TODO: ch1_upgrade_10 is better triggered from UpgradePanel when upgrade is purchased
+    season?.setTaskProgress('ch1_upgrade_10', 1);
+  };
 
   const buildingsByTier = useMemo(() => {
     const result = {};
@@ -86,7 +97,8 @@ export default memo(function BuildingPanel() {
                     globalEfficiency={state.globalEfficiency}
                     globalMultiplier={state.globalMultiplier}
                     energy={state.energy}
-                    onBuy={buyBuilding}
+                    onBuy={handleBuy}
+                    autoBuyRate={state.autoBuyBuildings?.[building.id] || 0}
                   />
                 ))}
               </div>
