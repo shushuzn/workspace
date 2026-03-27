@@ -155,6 +155,12 @@
     color: #888;
     margin-top: 0.5rem;
     font-style: italic;
+    animation: fadeIn 1s ease-in;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
   }
 
   .stats-section {
