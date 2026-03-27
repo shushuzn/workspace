@@ -6,7 +6,7 @@ export function generateId() {
 }
 
 // 计算属性点
-function calculateBaseStats(rarity) {
+export function calculateBaseStats(rarity) {
   const rarityConfig = RARITIES[rarity.toUpperCase()];
   const basePoints = 20;
   const bonusPoints = Math.floor(basePoints * (rarityConfig?.multiplier || 1));
