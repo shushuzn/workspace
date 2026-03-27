@@ -66,3 +66,22 @@ export function fileHash(filePath) {
     return '';
   }
 }
+
+/**
+ * If files have uncommitted working-tree changes, create a branch for patrol changes.
+ * Returns branch name if created, null if no conflict or already on a patrol branch.
+ * @param {string[]} files
+ * @returns {string|null}
+ */
+export function autoBranchForConflict(files) {
+  if (!hasWorkingTreeChanges(files)) return null;
+
+  const currentBranch = getCurrentBranch();
+  // Don't branch if already on a patrol branch
+  if (currentBranch.startsWith('patrol/')) return null;
+
+  const timestamp = new Date().toISOString().slice(0, 19).replace(/[T:]/g, '-');
+  const branchName = `patrol/auto-${timestamp}`;
+  createBranch(branchName);
+  return branchName;
+}
