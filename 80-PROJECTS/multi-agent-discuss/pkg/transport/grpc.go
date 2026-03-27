@@ -197,6 +197,17 @@ func (s *Server) handleConn(conn net.Conn) {
 		}
 	}()
 
+	// Send initial ACK to client to unblock handshake
+	ack := &proto.AgentMessage{
+		Id:        fmt.Sprintf("ack-%d", time.Now().UnixNano()),
+		Type:      proto.MessageType_HEARTBEAT,
+		SenderId:  "server",
+		Timestamp: time.Now().UnixNano(),
+	}
+	if err := writeMessage(conn, ack); err != nil {
+		return
+	}
+
 	// Handle messages using the handler
 	s.handleMessages(client, info)
 }

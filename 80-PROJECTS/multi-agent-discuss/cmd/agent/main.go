@@ -90,7 +90,7 @@ func main() {
 }
 
 func printUsage() {
-	fmt.Println(`agent - Multi-Agent Discuss CLI
+	fmt.Print(`agent - Multi-Agent Discuss CLI
 
 Usage:
   agent start --name <name> --port <port>
