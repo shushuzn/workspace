@@ -15,6 +15,7 @@ import (
 	"github.com/openclaw/multi-agent-discuss/pkg/executor"
 	"github.com/openclaw/multi-agent-discuss/pkg/group"
 	"github.com/openclaw/multi-agent-discuss/pkg/ipc"
+	"github.com/openclaw/multi-agent-discuss/pkg/orchestrator"
 	"github.com/openclaw/multi-agent-discuss/pkg/proto"
 	"github.com/openclaw/multi-agent-discuss/pkg/transport"
 )
@@ -571,6 +572,30 @@ func handleRun() {
 	})
 	exec := executor.NewExecutor(agent.ID)
 	grpMgr := group.NewGroupManager(agent.ID)
+
+	// Create orchestrator with LLM-based task decomposition
+	peersProvider := func() map[string]*orchestrator.PeerConnection {
+		result := make(map[string]*orchestrator.PeerConnection)
+		for id, conn := range agent.GetPeers() {
+			result[id] = &orchestrator.PeerConnection{
+				Info: struct{ ID, Name string }{
+					ID:   conn.Info.Id,
+					Name: conn.Info.Name,
+				},
+			}
+		}
+		return result
+	}
+	invokeFn := func(peerID, tool string, args map[string]string) (map[string]interface{}, error) {
+		return agent.InvokeTool(peerID, tool, args)
+	}
+	orch := orchestrator.NewOrchestratorAgent(
+		agent.ID,
+		orchestrator.NewOllamaDecomposer(""),
+		invokeFn,
+		peersProvider,
+	)
+	agent.SetOrchestrator(orch)
 
 	// Create cancellable context
 	runCtx, cancel := context.WithCancel(context.Background())
