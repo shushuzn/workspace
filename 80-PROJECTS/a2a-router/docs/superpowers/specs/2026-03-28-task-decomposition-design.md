@@ -398,7 +398,7 @@ export class SubtaskManager {
 2. Router.decomposeTask()
    ├─▶ TaskDecomposer.decompose() → subtasks[]
    ├─▶ SubtaskManager.createParentTask()
-   └─▶ capabilityRoute() for each subtask
+   └─▶ capabilityRoute() for each subtask (parallel strategy: all at once via map)
 
 3. Subtask Agents (parallel)
    └─▶ execute and send SUB_RESULT
@@ -423,9 +423,16 @@ export class SubtaskManager {
 | Scenario | Handling |
 |----------|----------|
 | No agents available for capability | Enqueue subtask, wait for agent registration |
-| Subtask timeout (no result) | Mark as failed after `subtaskTimeout`, continue aggregation |
+| Subtask timeout (no result) | Mark as failed after `subtaskTimeout` (default: 5 minutes), continue aggregation |
 | All subtasks fail | Return `TASK_AGGREGATED` with `success: false` |
 | Parent task canceled | Cancel pending subtasks, cleanup |
+
+### Configuration
+
+| Parameter | Default | Description |
+|----------|---------|-------------|
+| `subtaskTimeout` | 300000 (5 min) | Max time to wait for a subtask result before marking as failed |
+| `maxSubTasks` | 5 | Max number of subtasks to decompose into |
 
 ---
 
