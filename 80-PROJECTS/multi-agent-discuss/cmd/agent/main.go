@@ -546,6 +546,7 @@ func handleRun() {
 	fs := flag.NewFlagSet("run", flag.ContinueOnError)
 	name := fs.String("name", "Agent", "Agent name")
 	port := fs.Int("port", 9000, "Port for gRPC transport server")
+	enableOrchestrate := fs.Bool("orchestrate", false, "Enable orchestrator (requires ollama running)")
 	fs.Parse(os.Args[2:])
 
 	// Initialize agent
@@ -573,29 +574,33 @@ func handleRun() {
 	exec := executor.NewExecutor(agent.ID)
 	grpMgr := group.NewGroupManager(agent.ID)
 
-	// Create orchestrator with LLM-based task decomposition
-	peersProvider := func() map[string]*orchestrator.PeerConnection {
-		result := make(map[string]*orchestrator.PeerConnection)
-		for id, conn := range agent.GetPeers() {
-			result[id] = &orchestrator.PeerConnection{
-				Info: struct{ ID, Name string }{
-					ID:   conn.Info.Id,
-					Name: conn.Info.Name,
-				},
+	// Optionally create orchestrator with task decomposition
+	if *enableOrchestrate {
+		peersProvider := func() map[string]*orchestrator.PeerConnection {
+			result := make(map[string]*orchestrator.PeerConnection)
+			for id, conn := range agent.GetPeers() {
+				result[id] = &orchestrator.PeerConnection{
+					Info: struct{ ID, Name string }{
+						ID:   conn.Info.Id,
+						Name: conn.Info.Name,
+					},
+				}
 			}
+			return result
 		}
-		return result
+		invokeFn := func(peerID, tool string, args map[string]string) (map[string]interface{}, error) {
+			return agent.InvokeTool(peerID, tool, args)
+		}
+		decomp := orchestrator.NewOllamaDecomposer("")
+		orch := orchestrator.NewOrchestratorAgent(
+			agent.ID,
+			decomp,
+			invokeFn,
+			peersProvider,
+		)
+		agent.SetOrchestrator(orch)
+		fmt.Println("[orchestrator] Orchestrator enabled (requires ollama running)")
 	}
-	invokeFn := func(peerID, tool string, args map[string]string) (map[string]interface{}, error) {
-		return agent.InvokeTool(peerID, tool, args)
-	}
-	orch := orchestrator.NewOrchestratorAgent(
-		agent.ID,
-		orchestrator.NewOllamaDecomposer(""),
-		invokeFn,
-		peersProvider,
-	)
-	agent.SetOrchestrator(orch)
 
 	// Create cancellable context
 	runCtx, cancel := context.WithCancel(context.Background())
