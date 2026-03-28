@@ -731,10 +731,10 @@ this.maintenanceIntervals.push(setInterval(() => this.checkSubtaskTimeouts(), 30
 ```javascript
 checkSubtaskTimeouts() {
   const now = Date.now();
-  for (const [taskId, parentTask] of this.parentTasks) {
+  for (const [taskId, parentTask] of this.subtaskManager.parentTasks) {
     if (parentTask.status !== 'in_progress') continue;
 
-    const results = this.subtaskResults.get(taskId);
+    const results = this.subtaskManager.subtaskResults.get(taskId);
     if (!results) continue;
 
     for (const [subtaskId, result] of results) {
@@ -749,7 +749,7 @@ checkSubtaskTimeouts() {
     }
 
     // Check if all subtasks are now complete (including timed out ones)
-    if (this.isTaskComplete(taskId)) {
+    if (this.subtaskManager.isTaskComplete(taskId)) {
       this.aggregateResults(taskId);
     }
   }
