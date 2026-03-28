@@ -39,6 +39,7 @@ enum MessageType {
   HEARTBEAT = 5;
   INVOKE_TOOL = 10;  // New: request remote tool execution
   TOOL_RESULT = 11;  // New: tool execution result
+  ORCHESTRATE = 12;  // New: P2P task orchestration
 }
 
 service AgentService {
@@ -57,4 +58,8 @@ message ToolResultPayload {
   bool success = 2;
   bytes result = 3;
   string error = 4;
+}
+
+message OrchestratePayload {
+  string task = 1;  // High-level task description
 }
