@@ -8,6 +8,7 @@ import { EventEmitter } from 'events';
 import { v4 as uuidv4 } from 'uuid';
 import { CapabilityRegistry } from './protocols/capability-registry.js';
 import { MessageStore } from './protocols/persistence/message-store.js';
+import { QueueMonitor } from './protocols/monitoring/queue-monitor.js';
 
 export class A2ARouter extends EventEmitter {
   constructor(options = {}) {
@@ -37,6 +38,11 @@ export class A2ARouter extends EventEmitter {
 
     // Initialize message store for persistence
     this.messageStore = new MessageStore(options.dbPath || ':memory:');
+
+    // Initialize queue monitor for backlog monitoring
+    this.queueMonitor = new QueueMonitor(this, {
+      thresholds: options.queueThresholds || undefined
+    });
 
     // Start maintenance loop
     this.startMaintenance();
@@ -335,18 +341,27 @@ export class A2ARouter extends EventEmitter {
   enqueue(message) {
     const priority = message.priority || 'NORMAL';
     const queue = this.queues.get(priority);
-    
+
     if (queue.length >= this.maxQueueSize) {
       console.warn(`[Router] Queue ${priority} full, dropping message ${message.id}`);
       this.stats.messagesDropped++;
       return false;
     }
 
+    // Set enqueuedAt timestamp on message before enqueueing
+    message.enqueuedAt = Date.now();
+
     queue.push({
       message,
-      enqueuedAt: Date.now(),
+      enqueuedAt: message.enqueuedAt,
       retryCount: 0
     });
+
+    // Check thresholds after enqueue
+    const alerts = this.queueMonitor.checkThresholds();
+    if (alerts.length > 0) {
+      console.warn('[Router] Queue threshold alerts:', alerts);
+    }
 
     return true;
   }
@@ -490,6 +505,13 @@ export class A2ARouter extends EventEmitter {
         LOW: this.queues.get('LOW').length
       }
     };
+  }
+
+  /**
+   * Get queue statistics from queue monitor
+   */
+  getQueueStats() {
+    return this.queueMonitor.getQueueStats();
   }
 
   /**
