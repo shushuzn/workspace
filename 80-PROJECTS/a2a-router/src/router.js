@@ -9,6 +9,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { CapabilityRegistry } from './protocols/capability-registry.js';
 import { MessageStore } from './protocols/persistence/message-store.js';
 import { QueueMonitor } from './protocols/monitoring/queue-monitor.js';
+import { TaskDecomposer } from './protocols/task-decomposition/task-decomposer.js';
+import { ResultAggregator } from './protocols/task-decomposition/result-aggregator.js';
+import { SubtaskManager } from './protocols/task-decomposition/subtask-manager.js';
 
 export class A2ARouter extends EventEmitter {
   constructor(options = {}) {
@@ -43,6 +46,11 @@ export class A2ARouter extends EventEmitter {
     this.queueMonitor = new QueueMonitor(this, {
       thresholds: options.queueThresholds || undefined
     });
+
+    // Initialize task decomposition components
+    this.taskDecomposer = new TaskDecomposer();
+    this.resultAggregator = new ResultAggregator();
+    this.subtaskManager = new SubtaskManager();
 
     // Track maintenance interval IDs for cleanup
     this.maintenanceIntervals = [];
@@ -277,7 +285,13 @@ export class A2ARouter extends EventEmitter {
       
       case 'QUERY':
         return this.handleQuery(message);
-      
+
+      case 'TASK_DECOMPOSE':
+        return this.decomposeTask(message);
+
+      case 'SUB_RESULT':
+        return this.handleSubResult(message);
+
       default:
         return { success: false, error: 'UNKNOWN_ROUTER_COMMAND' };
     }
@@ -362,6 +376,68 @@ export class A2ARouter extends EventEmitter {
       default:
         return { success: false, error: 'UNKNOWN_QUERY' };
     }
+  }
+
+  /**
+   * Decompose a task into subtasks
+   */
+  decomposeTask(message) {
+    const { taskId, description, strategy, capabilities, maxSubTasks } = message.payload;
+
+    const subtasks = this.taskDecomposer.decompose(description, {
+      strategy,
+      capabilities,
+      maxSubTasks
+    });
+
+    this.subtaskManager.createParentTask(taskId, subtasks.length, strategy);
+
+    const results = subtasks.map(subtask => {
+      const routed = this.capabilityRoute({
+        ...subtask,
+        parentTaskId: taskId,
+        type: 'SUB_TASK'
+      });
+      return routed;
+    });
+
+    return { success: true, taskId, subtaskCount: subtasks.length };
+  }
+
+  /**
+   * Handle sub-task result
+   */
+  handleSubResult(message) {
+    const { parentTaskId, subtaskId, success, payload } = message;
+
+    this.subtaskManager.recordSubtaskResult(parentTaskId, subtaskId, success, payload);
+
+    if (this.subtaskManager.isTaskComplete(parentTaskId)) {
+      return this.aggregateResults(parentTaskId);
+    }
+
+    return { success: true, aggregated: false };
+  }
+
+  /**
+   * Aggregate results from subtasks
+   */
+  aggregateResults(taskId) {
+    const parentTask = this.subtaskManager.getParentTask(taskId);
+    const subtaskResults = this.subtaskManager.getSubtaskResults(taskId);
+
+    const aggregated = this.resultAggregator.aggregate(subtaskResults, {
+      taskId,
+      strategy: parentTask.strategy
+    });
+
+    this.subtaskManager.completeTask(taskId);
+
+    return {
+      success: true,
+      aggregated: true,
+      payload: aggregated
+    };
   }
 
   /**
@@ -463,7 +539,7 @@ export class A2ARouter extends EventEmitter {
       }
     }
 
-    const validTypes = ['TASK', 'TASK_ACK', 'TASK_RESULT', 'QUERY', 'RESPONSE', 'EVENT', 'HEARTBEAT', 'REGISTER', 'UNREGISTER', 'DISCOVER'];
+    const validTypes = ['TASK', 'TASK_ACK', 'TASK_RESULT', 'QUERY', 'RESPONSE', 'EVENT', 'HEARTBEAT', 'REGISTER', 'UNREGISTER', 'DISCOVER', 'TASK_DECOMPOSE', 'SUB_TASK', 'SUB_RESULT', 'TASK_AGGREGATED', 'TASK_CANCEL'];
     if (!validTypes.includes(message.type)) {
       return { valid: false, error: `Invalid message type: ${message.type}` };
     }
