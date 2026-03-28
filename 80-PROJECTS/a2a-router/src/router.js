@@ -395,6 +395,10 @@ export class A2ARouter extends EventEmitter {
     const results = subtasks.map(subtask => {
       const routed = this.capabilityRoute({
         ...subtask,
+        id: uuidv4(),
+        from: 'router',
+        to: `capability:${subtask.capability}`,
+        timestamp: Date.now(),
         parentTaskId: taskId,
         type: 'SUB_TASK'
       });
