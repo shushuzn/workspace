@@ -190,6 +190,19 @@ External ACP agent receives response
 | `src/router.js` | Modify: add ACPGateway integration |
 | `test/acp-parser.test.js` | Create |
 | `test/acp-gateway.test.js` | Create |
+| `test/integration/acp-a2a.test.js` | Create |
+
+## ACP Method Namespace
+
+Initial implementation supports core ACP methods:
+
+| Method | Direction | Description |
+|--------|-----------|-------------|
+| `agent.request` | ACP → A2A | Request routing to target agent |
+| `agent.notify` | ACP → A2A | Fire-and-forget notification |
+| `agent.cancel` | ACP → A2A | Cancel pending request |
+
+Additional methods (agent.list, agent.cancel, etc.) can be added incrementally.
 
 ## Implementation Notes
 
