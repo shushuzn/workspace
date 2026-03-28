@@ -472,6 +472,8 @@ decomposeTask(message) {
 }
 ```
 
+Note: `capabilityRoute()` already handles "No agents available" by enqueueing the message (returns `{ queued: true }`). This satisfies the spec requirement for enqueuing when agents are unavailable.
+
 - [ ] **Step 4: Add handleSubResult() method**
 
 ```javascript
