@@ -5,6 +5,7 @@ import (
 	"sync"
 
 	"github.com/openclaw/multi-agent-discuss/pkg/executor"
+	"github.com/openclaw/multi-agent-discuss/pkg/orchestrator"
 	"github.com/openclaw/multi-agent-discuss/pkg/proto"
 	"github.com/openclaw/multi-agent-discuss/pkg/toolclient"
 	"github.com/openclaw/multi-agent-discuss/pkg/transport"
@@ -23,6 +24,7 @@ type Agent struct {
 	Peers        map[string]*PeerConnection
 	exec        *executor.Executor
 	toolClient   *toolclient.ToolClient
+	orchestrator *orchestrator.OrchestratorAgent
 	mu           sync.RWMutex
 }
 
@@ -67,6 +69,11 @@ func (a *Agent) GetPeer(id string) (*PeerConnection, bool) {
 // GetExecutor returns the agent's executor for use with the dispatcher.
 func (a *Agent) GetExecutor() *executor.Executor {
 	return a.exec
+}
+
+// GetOrchestrator returns the agent's orchestrator for task decomposition and parallel execution.
+func (a *Agent) GetOrchestrator() *orchestrator.OrchestratorAgent {
+	return a.orchestrator
 }
 
 // AgentInfo returns the agent's own AgentInfo for sharing with peers.
