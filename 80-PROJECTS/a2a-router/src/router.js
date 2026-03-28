@@ -12,6 +12,8 @@ import { QueueMonitor } from './protocols/monitoring/queue-monitor.js';
 import { TaskDecomposer } from './protocols/task-decomposition/task-decomposer.js';
 import { ResultAggregator } from './protocols/task-decomposition/result-aggregator.js';
 import { SubtaskManager } from './protocols/task-decomposition/subtask-manager.js';
+import { SecurityManager } from './protocols/security/security-manager.js';
+import { AccessControl } from './protocols/security/access-control.js';
 
 export class A2ARouter extends EventEmitter {
   constructor(options = {}) {
@@ -29,6 +31,9 @@ export class A2ARouter extends EventEmitter {
     this.heartbeatTimeout = options.heartbeatTimeout || 60000; // 60s
     this.maxQueueSize = options.maxQueueSize || 1000;
     this.defaultTTL = options.defaultTTL || 3600; // 1 hour
+
+    // Security database
+    this.securityDb = options.securityDb; // SQLite DB for security tables
     
     // Initialize priority queues
     this.queues.set('CRITICAL', []);
@@ -51,6 +56,17 @@ export class A2ARouter extends EventEmitter {
     this.taskDecomposer = new TaskDecomposer();
     this.resultAggregator = new ResultAggregator();
     this.subtaskManager = new SubtaskManager();
+
+    // Initialize security manager
+    this.securityManager = new SecurityManager({
+      db: options.securityDb,
+      securityConfig: options.security || {}
+    });
+
+    // Initialize access control
+    this.accessControl = new AccessControl(this.securityManager, {
+      defaultAclPolicy: options.security?.defaultAclPolicy || 'allow'
+    });
 
     // Task decomposition configuration
     this.subtaskTimeout = options.subtaskTimeout || 300000; // 5 minutes default
@@ -134,6 +150,12 @@ export class A2ARouter extends EventEmitter {
     const validation = this.validateMessage(message);
     if (!validation.valid) {
       return { success: false, error: validation.error };
+    }
+
+    // Security check
+    const securityResult = this.securityManager.verifyMessage(message);
+    if (!securityResult.valid) {
+      return { success: false, error: securityResult.error };
     }
 
     // Persist message to store
@@ -720,6 +742,31 @@ export class A2ARouter extends EventEmitter {
    */
   archiveMessages(olderThan) {
     return this.messageStore.archive(olderThan);
+  }
+
+  createApiKey(agentId, expiresIn) {
+    return this.securityManager.createApiKey(agentId, expiresIn);
+  }
+
+  revokeApiKey(keyId) {
+    return this.securityManager.revokeApiKey(keyId);
+  }
+
+  listApiKeys(agentId) {
+    return this.securityManager.listApiKeys(agentId);
+  }
+
+  rotateApiKey(agentId, keyId) {
+    return this.securityManager.rotateApiKey(agentId, keyId);
+  }
+
+  setAclRule(capability, allowedAgents, deniedAgents) {
+    this.accessControl.setRule(capability, allowedAgents, deniedAgents);
+    return { success: true };
+  }
+
+  checkPermission(fromAgent, toTarget) {
+    return this.accessControl.checkPermission(fromAgent, toTarget);
   }
 
   /**
