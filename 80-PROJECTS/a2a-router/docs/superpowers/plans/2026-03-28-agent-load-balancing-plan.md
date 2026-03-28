@@ -369,7 +369,7 @@ Replace `else` clause:
 
 - [ ] **Step 5: Run test to verify it passes**
 
-Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/unit/router.test.js --testNamePattern="capabilityRoute"`
+Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/unit/capability-routing.test.js --testNamePattern="capabilityRoute"`
 Expected: PASS
 
 - [ ] **Step 6: Write failing test — queues when no agents available**
@@ -448,11 +448,11 @@ git commit -m "feat(router): add capabilityRoute() for capability-based routing
 
 **Files:**
 - Modify: `src/server.js` (add tool definition and handler)
-- Test: `test/integration/load-balancing.test.js` (extend with MCP tool tests)
+- Create: `test/integration/mcp-loads.test.js`
 
 - [ ] **Step 1: Write failing test — tool definition exists**
 
-Add to `test/integration/load-balancing.test.js`:
+Create `test/integration/mcp-loads.test.js`:
 
 ```javascript
 test('a2a_get_agent_loads tool is registered', async () => {
@@ -464,7 +464,7 @@ test('a2a_get_agent_loads tool is registered', async () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/integration/load-balancing.test.js --testNamePattern="a2a_get_agent_loads tool is registered"`
+Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/integration/mcp-loads.test.js --testNamePattern="a2a_get_agent_loads tool is registered"`
 Expected: FAIL — tool not in list
 
 - [ ] **Step 3: Add tool definition to TOOLS array**
@@ -514,13 +514,13 @@ import { LoadBalancer } from './protocols/load-balancing/load-balancer.js';
 
 - [ ] **Step 6: Run test to verify it passes**
 
-Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/integration/load-balancing.test.js --testNamePattern="a2a_get_agent_loads tool is registered"`
+Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/integration/mcp-loads.test.js --testNamePattern="a2a_get_agent_loads tool is registered"`
 Expected: PASS
 
 - [ ] **Step 7: Commit**
 
 ```bash
-git add src/server.js
+git add src/server.js test/integration/mcp-loads.test.js
 git commit -m "feat(server): add a2a_get_agent_loads MCP tool
 
 - Returns load scores for all agents or filtered by capability
