@@ -267,12 +267,23 @@ git commit -m "feat(load-balancing): add LoadBalancer class
 
 **Files:**
 - Modify: `src/router.js` (add capabilityRoute, modify routeMessage)
-- Test: `test/unit/router.test.js` or new `test/unit/capability-routing.test.js`
+- Test: `test/unit/capability-routing.test.js` (create new)
 
 - [ ] **Step 1: Write failing test — capabilityRoute() selects best agent**
 
+First, create `test/unit/capability-routing.test.js` with the test:
+
 ```javascript
-test('capabilityRoute() routes to best matching agent', () => {
+import { A2ARouter } from '../../src/router.js';
+
+describe('Capability Routing', () => {
+  let router;
+
+  beforeEach(() => {
+    router = new A2ARouter({ heartbeatTimeout: 60000 });
+  });
+
+  test('capabilityRoute() routes to best matching agent', () => {
   router.registerAgent('alice', ['coding']);
   router.registerAgent('bob', ['coding']);
   router.heartbeat('alice', 'idle', 0.2, 0); // lower load
@@ -296,7 +307,7 @@ test('capabilityRoute() routes to best matching agent', () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/unit/router.test.js --testNamePattern="capabilityRoute"`
+Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/unit/capability-routing.test.js`
 Expected: FAIL — capabilityRoute not defined
 
 - [ ] **Step 3: Add capabilityRoute() to router**
@@ -363,6 +374,8 @@ Expected: PASS
 
 - [ ] **Step 6: Write failing test — queues when no agents available**
 
+Add to `test/unit/capability-routing.test.js`:
+
 ```javascript
 test('capabilityRoute() queues when no agents match', () => {
   router.registerAgent('alice', ['review']); // no coding capability
@@ -385,10 +398,12 @@ test('capabilityRoute() queues when no agents match', () => {
 
 - [ ] **Step 7: Run test to verify it passes**
 
-Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/unit/router.test.js --testNamePattern="queues when no agents"`
+Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/unit/capability-routing.test.js --testNamePattern="queues when no agents"`
 Expected: PASS
 
 - [ ] **Step 8: Write failing test — queues when agent offline**
+
+Add to `test/unit/capability-routing.test.js`:
 
 ```javascript
 test('capabilityRoute() queues when matching agent offline', () => {
@@ -413,13 +428,13 @@ test('capabilityRoute() queues when matching agent offline', () => {
 
 - [ ] **Step 9: Run test to verify it passes**
 
-Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/unit/router.test.js --testNamePattern="queues when matching agent offline"`
+Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/unit/capability-routing.test.js --testNamePattern="queues when matching agent offline"`
 Expected: PASS
 
 - [ ] **Step 10: Commit**
 
 ```bash
-git add src/router.js test/unit/router.test.js
+git add src/router.js test/unit/capability-routing.test.js
 git commit -m "feat(router): add capabilityRoute() for capability-based routing
 
 - routeMessage() detects to.startsWith('capability:') pattern
@@ -433,9 +448,11 @@ git commit -m "feat(router): add capabilityRoute() for capability-based routing
 
 **Files:**
 - Modify: `src/server.js` (add tool definition and handler)
-- Test: `test/integration/server.test.js` or manual test
+- Test: `test/integration/load-balancing.test.js` (extend with MCP tool tests)
 
 - [ ] **Step 1: Write failing test — tool definition exists**
+
+Add to `test/integration/load-balancing.test.js`:
 
 ```javascript
 test('a2a_get_agent_loads tool is registered', async () => {
@@ -447,7 +464,7 @@ test('a2a_get_agent_loads tool is registered', async () => {
 
 - [ ] **Step 2: Run test to verify it fails**
 
-Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/integration/server.test.js --testNamePattern="a2a_get_agent_loads tool is registered"`
+Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/integration/load-balancing.test.js --testNamePattern="a2a_get_agent_loads tool is registered"`
 Expected: FAIL — tool not in list
 
 - [ ] **Step 3: Add tool definition to TOOLS array**
@@ -497,7 +514,7 @@ import { LoadBalancer } from './protocols/load-balancing/load-balancer.js';
 
 - [ ] **Step 6: Run test to verify it passes**
 
-Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/integration/server.test.js --testNamePattern="a2a_get_agent_loads tool is registered"`
+Run: `node --experimental-vm-modules ./node_modules/jest/bin/jest.js test/integration/load-balancing.test.js --testNamePattern="a2a_get_agent_loads tool is registered"`
 Expected: PASS
 
 - [ ] **Step 7: Commit**
