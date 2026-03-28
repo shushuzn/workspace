@@ -4,9 +4,6 @@ import (
 	"context"
 	"testing"
 	"time"
-
-	"github.com/openclaw/multi-agent-discuss/pkg/core"
-	"github.com/openclaw/multi-agent-discuss/pkg/proto"
 )
 
 // MockDecomposer always returns the same subtasks
@@ -30,10 +27,10 @@ func TestOrchestratorAgent_Process(t *testing.T) {
 	}
 
 	// Create mock peers
-	mockPeers := func() map[string]*core.PeerConnection {
-		return map[string]*core.PeerConnection{
-			"peer1": {Info: &proto.AgentInfo{Id: "peer1", Name: "Peer1"}},
-			"peer2": {Info: &proto.AgentInfo{Id: "peer2", Name: "Peer2"}},
+	mockPeers := func() map[string]*PeerConnection {
+		return map[string]*PeerConnection{
+			"peer1": {Info: struct{ ID, Name string }{ID: "peer1", Name: "Peer1"}},
+			"peer2": {Info: struct{ ID, Name string }{ID: "peer2", Name: "Peer2"}},
 		}
 	}
 
@@ -61,8 +58,8 @@ func TestOrchestratorAgent_NoPeers(t *testing.T) {
 		return nil, nil
 	}
 
-	mockPeers := func() map[string]*core.PeerConnection {
-		return map[string]*core.PeerConnection{} // No peers
+	mockPeers := func() map[string]*PeerConnection {
+		return map[string]*PeerConnection{} // No peers
 	}
 
 	orch := NewOrchestratorAgent(
@@ -85,9 +82,9 @@ func TestOrchestratorAgent_DecomposeError(t *testing.T) {
 		return nil, nil
 	}
 
-	mockPeers := func() map[string]*core.PeerConnection {
-		return map[string]*core.PeerConnection{
-			"peer1": {Info: &proto.AgentInfo{Id: "peer1"}},
+	mockPeers := func() map[string]*PeerConnection {
+		return map[string]*PeerConnection{
+			"peer1": {Info: struct{ ID, Name string }{ID: "peer1"}},
 		}
 	}
 
@@ -113,9 +110,9 @@ func TestOrchestratorAgent_EmptySubtasks(t *testing.T) {
 		return nil, nil
 	}
 
-	mockPeers := func() map[string]*core.PeerConnection {
-		return map[string]*core.PeerConnection{
-			"peer1": {Info: &proto.AgentInfo{Id: "peer1"}},
+	mockPeers := func() map[string]*PeerConnection {
+		return map[string]*PeerConnection{
+			"peer1": {Info: struct{ ID, Name string }{ID: "peer1"}},
 		}
 	}
 

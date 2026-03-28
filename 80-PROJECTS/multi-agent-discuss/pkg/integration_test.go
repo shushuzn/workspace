@@ -43,7 +43,7 @@ func startTestComponents(t *testing.T, name string, port int) *testComponents {
 	disc := discovery.NewDiscovery(agent.ID, port)
 
 	exec := executor.NewExecutor(agent.ID)
-	exec.RegisterTool(executor.Tool{
+	exec.RegisterTool(&executor.Tool{
 		Name:        "test_tool",
 		Description: "A test tool",
 		Params:      []string{"param1"},
@@ -102,6 +102,10 @@ func (m *mockExecutor) Execute(task *dispatcher.Task) (*dispatcher.TaskResult, e
 		Success: true,
 		Output:  []byte("mock execution result"),
 	}, nil
+}
+
+func (m *mockExecutor) FindTool(name string) (interface{}, bool) {
+	return nil, false
 }
 
 // --- TestDiscovery ---
@@ -320,7 +324,7 @@ func TestDispatcher(t *testing.T) {
 			decisions = nil
 			mu.Unlock()
 
-			disp.HandleMessage(tc.msg, exec)
+			disp.HandleMessage(tc.msg, exec, nil)
 
 			// Give decision callback time to fire
 			time.Sleep(100 * time.Millisecond)
@@ -412,7 +416,7 @@ func TestDispatcherTaskExecution(t *testing.T) {
 	})
 
 	exec := &mockExecutor{}
-	disp.HandleMessage(msg, exec)
+	disp.HandleMessage(msg, exec, nil)
 
 	// Give decision callback time to fire
 	time.Sleep(100 * time.Millisecond)
@@ -704,7 +708,7 @@ func TestExecutor(t *testing.T) {
 	exec := executor.NewExecutor(agentID)
 
 	// Register a test tool
-	exec.RegisterTool(executor.Tool{
+	exec.RegisterTool(&executor.Tool{
 		Name:        "echo",
 		Description: "Echoes the input",
 		Params:      []string{"input"},
@@ -828,7 +832,7 @@ func TestExecutorToolNotFound(t *testing.T) {
 	agentID := "tool-notfound-agent"
 	exec := executor.NewExecutor(agentID)
 
-	exec.RegisterTool(executor.Tool{
+	exec.RegisterTool(&executor.Tool{
 		Name:        "existing_tool",
 		Description: "An existing tool",
 		Params:      []string{"param1"},
@@ -869,13 +873,13 @@ func TestExecutorListTools(t *testing.T) {
 	}
 
 	// Register some tools
-	exec.RegisterTool(executor.Tool{
+	exec.RegisterTool(&executor.Tool{
 		Name:        "tool1",
 		Description: "Tool 1",
 		Params:      []string{"a"},
 		Execute:     func(params map[string]interface{}) (interface{}, error) { return nil, nil },
 	})
-	exec.RegisterTool(executor.Tool{
+	exec.RegisterTool(&executor.Tool{
 		Name:        "tool2",
 		Description: "Tool 2",
 		Params:      []string{"b"},
@@ -1046,7 +1050,7 @@ func TestIntegrationDispatcherWithExecutor(t *testing.T) {
 		Payload:  []byte("hello from integration test"),
 	}
 
-	comp.dispatcher.HandleMessage(msg, &mockExecutor{})
+	comp.dispatcher.HandleMessage(msg, &mockExecutor{}, nil)
 
 	// Wait for decision
 	time.Sleep(200 * time.Millisecond)

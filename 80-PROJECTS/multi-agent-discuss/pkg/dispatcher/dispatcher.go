@@ -8,6 +8,7 @@ import (
 	"sync"
 	"time"
 
+	"github.com/openclaw/multi-agent-discuss/pkg/executor"
 	"github.com/openclaw/multi-agent-discuss/pkg/proto"
 )
 
@@ -97,6 +98,7 @@ type TaskResult struct {
 type TaskExecutor interface {
 	CanExecute(task *Task) bool
 	Execute(task *Task) (*TaskResult, error)
+	FindTool(name string) (interface{}, bool) // Returns *executor.Tool, found
 }
 
 // Dispatcher is the brain of each agent that decides how to handle messages
@@ -355,9 +357,22 @@ func (d *Dispatcher) executeToolInvoke(msg *proto.AgentMessage, invokeID, toolNa
 		}
 	}
 
+	execTool, ok := tool.(*executor.Tool)
+	if !ok {
+		return &Decision{
+			Type:    DecisionRespond,
+			Message: msg,
+			Action: map[string]interface{}{
+				"invoke_id": invokeID,
+				"success":   false,
+				"error":     fmt.Sprintf("invalid tool type"),
+			},
+		}
+	}
+
 	timeout := 30 * time.Second
-	if tool.Timeout > 0 {
-		timeout = tool.Timeout
+	if execTool.Timeout > 0 {
+		timeout = execTool.Timeout
 	}
 
 	// Convert args to interface{}
@@ -376,7 +391,7 @@ func (d *Dispatcher) executeToolInvoke(msg *proto.AgentMessage, invokeID, toolNa
 				errorCh <- fmt.Errorf("panic: %v", r)
 			}
 		}()
-		result, err := tool.Execute(ifaceArgs)
+		result, err := execTool.Execute(ifaceArgs)
 		if err != nil {
 			errorCh <- err
 			return

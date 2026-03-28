@@ -5,9 +5,15 @@ import (
 	"fmt"
 	"sync"
 	"time"
-
-	"github.com/openclaw/multi-agent-discuss/pkg/core"
 )
+
+// PeerConnection holds peer info needed by orchestrator
+type PeerConnection struct {
+	Info struct {
+		ID   string
+		Name string
+	}
+}
 
 // TaskRequest represents a single task invocation request
 type TaskRequest struct {
@@ -21,7 +27,7 @@ type OrchestratorAgent struct {
 	agentID    string
 	decomposer LLMDecomposer
 	invokeFn   func(peerID, tool string, args map[string]string) (map[string]interface{}, error)
-	peers      func() map[string]*core.PeerConnection
+	peers      func() map[string]*PeerConnection
 }
 
 // NewOrchestratorAgent creates a new OrchestratorAgent
@@ -29,7 +35,7 @@ func NewOrchestratorAgent(
 	agentID string,
 	decomposer LLMDecomposer,
 	invokeFn func(peerID, tool string, args map[string]string) (map[string]interface{}, error),
-	peers func() map[string]*core.PeerConnection,
+	peers func() map[string]*PeerConnection,
 ) *OrchestratorAgent {
 	return &OrchestratorAgent{
 		agentID:    agentID,
@@ -133,11 +139,12 @@ func raceResults(
 			}
 			defer func() { <-sem }()
 
-			execCtx, cancel := context.WithTimeout(ctx, timeout)
-			defer cancel()
-
 			res, err := invokeFn(r.PeerID, r.Tool, r.Args)
 			if err != nil {
+				select {
+				case resultCh <- result{err: err}:
+				default:
+				}
 				return
 			}
 

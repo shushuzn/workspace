@@ -2,7 +2,6 @@ package core
 
 import (
 	"fmt"
-	"os"
 	"sync"
 
 	"github.com/openclaw/multi-agent-discuss/pkg/executor"
@@ -31,8 +30,7 @@ type Agent struct {
 
 func NewAgent(id, name string, port int, caps []*proto.Capability) *Agent {
 	exec := executor.NewExecutor(id)
-	exec.SetupTools()
-	agent := &Agent{
+	return &Agent{
 		ID:           id,
 		Name:         name,
 		Port:         port,
@@ -40,17 +38,6 @@ func NewAgent(id, name string, port int, caps []*proto.Capability) *Agent {
 		Peers:        make(map[string]*PeerConnection),
 		exec:        exec,
 	}
-
-	// Wire up orchestrator with LLM decomposer and invoke function
-	ollamaHost := os.Getenv("OLLAMA_HOST")
-	agent.orchestrator = orchestrator.NewOrchestratorAgent(
-		id,
-		orchestrator.NewOllamaDecomposer(ollamaHost),
-		agent.InvokeTool,
-		agent.GetPeers,
-	)
-
-	return agent
 }
 
 func (a *Agent) AddPeer(peer *PeerConnection) {
@@ -86,6 +73,11 @@ func (a *Agent) GetExecutor() *executor.Executor {
 // GetOrchestrator returns the agent's orchestrator for task decomposition and parallel execution.
 func (a *Agent) GetOrchestrator() *orchestrator.OrchestratorAgent {
 	return a.orchestrator
+}
+
+// SetOrchestrator sets the agent's orchestrator. Called by IPC server to wire up after agent creation.
+func (a *Agent) SetOrchestrator(orch *orchestrator.OrchestratorAgent) {
+	a.orchestrator = orch
 }
 
 // AgentInfo returns the agent's own AgentInfo for sharing with peers.

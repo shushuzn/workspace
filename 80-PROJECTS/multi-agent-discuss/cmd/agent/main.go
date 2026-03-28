@@ -47,6 +47,10 @@ func (a *executorAdapter) Execute(task *dispatcher.Task) (*dispatcher.TaskResult
 	}, nil
 }
 
+func (a *executorAdapter) FindTool(name string) (interface{}, bool) {
+	return a.exec.FindTool(name)
+}
+
 // CLI context holds all components wired together
 type CLIContext struct {
 	agent     *core.Agent

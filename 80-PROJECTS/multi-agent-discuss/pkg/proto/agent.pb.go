@@ -5,13 +5,15 @@ package proto
 type MessageType int32
 
 const (
-	MessageType_TEXT       MessageType = 0
-	MessageType_TASK       MessageType = 1
-	MessageType_INVITE     MessageType = 2
-	MessageType_RESPONSE  MessageType = 3
-	MessageType_FORWARD   MessageType = 4
-	MessageType_HEARTBEAT  MessageType = 5
+	MessageType_TEXT        MessageType = 0
+	MessageType_TASK        MessageType = 1
+	MessageType_INVITE      MessageType = 2
+	MessageType_RESPONSE   MessageType = 3
+	MessageType_FORWARD    MessageType = 4
+	MessageType_HEARTBEAT   MessageType = 5
 	MessageType_INVOKE_TOOL MessageType = 10
+	MessageType_TOOL_RESULT MessageType = 11
+	MessageType_ORCHESTRATE MessageType = 12
 )
 
 func (x MessageType) String() string {
@@ -23,6 +25,8 @@ func (x MessageType) String() string {
 	case 4:  return "FORWARD"
 	case 5:  return "HEARTBEAT"
 	case 10: return "INVOKE_TOOL"
+	case 11: return "TOOL_RESULT"
+	case 12: return "ORCHESTRATE"
 	default: return "UNKNOWN"
 	}
 }
