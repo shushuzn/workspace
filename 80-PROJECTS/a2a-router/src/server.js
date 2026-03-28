@@ -335,6 +335,32 @@ const TOOLS = [
       type: 'object',
       properties: {}
     }
+  },
+  // Message Persistence Tools
+  {
+    name: 'a2a_query_messages',
+    description: 'Query message history for an agent',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        agentId: { type: 'string', description: 'Agent ID to query' },
+        limit: { type: 'number', default: 100 },
+        since: { type: 'number', description: 'Start timestamp (ms)' },
+        until: { type: 'number', description: 'End timestamp (ms)' }
+      },
+      required: ['agentId']
+    }
+  },
+  {
+    name: 'a2a_archive_messages',
+    description: 'Delete messages older than timestamp',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        olderThan: { type: 'number', description: 'Delete messages before this timestamp (ms)' }
+      },
+      required: ['olderThan']
+    }
   }
 ];
 
@@ -615,6 +641,23 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
               }
             }, null, 2)
           }]
+        };
+      }
+
+      // Message Persistence Handlers
+      case 'a2a_query_messages': {
+        const { agentId, limit, since, until } = args;
+        const results = router.queryMessages(agentId, { limit: limit || 100, since, until });
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ success: true, messages: results }, null, 2) }]
+        };
+      }
+
+      case 'a2a_archive_messages': {
+        const { olderThan } = args;
+        const deleted = router.archiveMessages(olderThan);
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ success: true, deleted }, null, 2) }]
         };
       }
 
