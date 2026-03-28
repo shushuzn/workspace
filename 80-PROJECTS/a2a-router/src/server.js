@@ -361,6 +361,14 @@ const TOOLS = [
       },
       required: ['olderThan']
     }
+  },
+  {
+    name: 'a2a_get_queue_stats',
+    description: 'Get queue backlog statistics and threshold alerts',
+    inputSchema: {
+      type: 'object',
+      properties: {}
+    }
   }
 ];
 
@@ -658,6 +666,13 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const deleted = router.archiveMessages(olderThan);
         return {
           content: [{ type: 'text', text: JSON.stringify({ success: true, deleted }, null, 2) }]
+        };
+      }
+
+      case 'a2a_get_queue_stats': {
+        const stats = router.getQueueStats();
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ success: true, ...stats }, null, 2) }]
         };
       }
 
