@@ -29,4 +29,24 @@ describe('LoadBalancer', () => {
     expect(result.length).toBe(1);
     expect(result[0].id).toBe('alice');
   });
+
+  test('getAgentLoads handles malformed queueStats gracefully', () => {
+    router.agents.set('charlie', { id: 'charlie', capabilities: new Set(['test']), status: 'idle', load: 0.2, lastHeartbeat: Date.now() });
+    router.queueMonitor = { getQueueStats: () => null };
+
+    const result = loadBalancer.getAgentLoads();
+    expect(result.length).toBe(1);
+    expect(result[0].queueSize).toBe(0);
+    expect(result[0].avgWaitTime).toBe(0);
+  });
+
+  test('getAgentLoads handles missing queues in queueStats', () => {
+    router.agents.set('diana', { id: 'diana', capabilities: new Set(['dev']), status: 'busy', load: 0.6, lastHeartbeat: Date.now() });
+    router.queueMonitor = { getQueueStats: () => ({}) };
+
+    const result = loadBalancer.getAgentLoads();
+    expect(result.length).toBe(1);
+    expect(result[0].queueSize).toBe(0);
+    expect(result[0].avgWaitTime).toBe(0);
+  });
 });
