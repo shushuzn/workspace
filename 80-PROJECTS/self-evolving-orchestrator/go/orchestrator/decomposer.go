@@ -1,8 +1,11 @@
 package orchestrator
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"fmt"
+	"net/http"
 	"strings"
 )
 
@@ -46,9 +49,73 @@ func NewLLMBasedDecomposer(endpoint, model string) *LLMBasedDecomposer {
 }
 
 func (d *LLMBasedDecomposer) Decompose(ctx context.Context, task string) ([]string, error) {
-	// Fallback to simple decomposer for now
-	decomposer := &SimpleDecomposer{}
-	return decomposer.Decompose(ctx, task)
+	prompt := fmt.Sprintf(`Break down this task into 2-5 subtasks. Return ONLY a JSON array of strings, nothing else.
+Task: %s
+
+Response format: ["subtask 1", "subtask 2", ...]`, task)
+
+	reqBody := map[string]interface{}{
+		"model":  d.model,
+		"prompt": prompt,
+		"stream": false,
+	}
+
+	reqJSON, err := json.Marshal(reqBody)
+	if err != nil {
+		return nil, err
+	}
+
+	req, err := http.NewRequestWithContext(ctx, "POST", d.endpoint+"/api/generate", bytes.NewReader(reqJSON))
+	if err != nil {
+		return nil, err
+	}
+	req.Header.Set("Content-Type", "application/json")
+
+	resp, err := http.DefaultClient.Do(req)
+	if err != nil {
+		// Fallback to simple decomposer on error
+		decomposer := &SimpleDecomposer{}
+		return decomposer.Decompose(ctx, task)
+	}
+	defer resp.Body.Close()
+
+	var result map[string]interface{}
+	if err := json.NewDecoder(resp.Body).Decode(&result); err != nil {
+		return nil, err
+	}
+
+	response, ok := result["response"].(string)
+	if !ok {
+		return nil, fmt.Errorf("unexpected response format")
+	}
+
+	// Parse JSON array from response
+	start := strings.Index(response, "[")
+	end := strings.LastIndex(response, "]")
+
+	if start == -1 || end == -1 {
+		// Fallback: split by newlines
+		lines := strings.Split(response, "\n")
+		subtasks := make([]string, 0)
+		for _, line := range lines {
+			line = strings.TrimSpace(line)
+			if len(line) > 10 {
+				subtasks = append(subtasks, line)
+			}
+		}
+		if len(subtasks) == 0 {
+			return []string{task}, nil
+		}
+		return subtasks, nil
+	}
+
+	jsonStr := response[start : end+1]
+	var subtasks []string
+	if err := json.Unmarshal([]byte(jsonStr), &subtasks); err != nil {
+		return []string{task}, nil
+	}
+
+	return subtasks, nil
 }
 
 // DecomposerWrapper wraps a decomposer with strategy hints
