@@ -10,6 +10,10 @@ describe('Router Queue Monitoring', () => {
     router = new A2ARouter({ heartbeatTimeout: 60000 });
   });
 
+  afterEach(() => {
+    router.close();
+  });
+
   test('router has queueMonitor', () => {
     expect(router.queueMonitor).toBeDefined();
   });

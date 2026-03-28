@@ -44,6 +44,9 @@ export class A2ARouter extends EventEmitter {
       thresholds: options.queueThresholds || undefined
     });
 
+    // Track maintenance interval IDs for cleanup
+    this.maintenanceIntervals = [];
+
     // Start maintenance loop
     this.startMaintenance();
   }
@@ -360,7 +363,7 @@ export class A2ARouter extends EventEmitter {
     // Check thresholds after enqueue
     const alerts = this.queueMonitor.checkThresholds();
     if (alerts.length > 0) {
-      console.warn('[Router] Queue threshold alerts:', alerts);
+      this.emit('queue:threshold', alerts);
     }
 
     return true;
@@ -435,10 +438,10 @@ export class A2ARouter extends EventEmitter {
    */
   startMaintenance() {
     // Process queues every 5 seconds
-    setInterval(() => this.processQueues(), 5000);
+    this.maintenanceIntervals.push(setInterval(() => this.processQueues(), 5000));
 
     // Check agent health every 10 seconds
-    setInterval(() => this.checkAgentHealth(), 10000);
+    this.maintenanceIntervals.push(setInterval(() => this.checkAgentHealth(), 10000));
   }
 
   /**
@@ -509,6 +512,7 @@ export class A2ARouter extends EventEmitter {
 
   /**
    * Get queue statistics from queue monitor
+   * @returns {Object} Queue statistics including sizes and threshold status
    */
   getQueueStats() {
     return this.queueMonitor.getQueueStats();
@@ -532,6 +536,10 @@ export class A2ARouter extends EventEmitter {
    * Close router and cleanup resources
    */
   close() {
+    // Clear maintenance intervals
+    this.maintenanceIntervals.forEach(clearInterval);
+    this.maintenanceIntervals = [];
+
     if (this.messageStore) {
       this.messageStore.close();
     }
