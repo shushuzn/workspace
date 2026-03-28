@@ -519,15 +519,16 @@ case 'TASK_DECOMPOSE':
   return this.decomposeTask(message);
 ```
 
-- [ ] **Step 7: Handle SUB_RESULT in message routing**
+- [ ] **Step 7: Handle SUB_RESULT in handleRouterMessage()**
 
-In `routeMessage()`, add handling for SUB_RESULT after the `message.to === 'router'` check:
+In `handleRouterMessage()` switch, add:
 
 ```javascript
-if (message.type === 'SUB_RESULT') {
+case 'SUB_RESULT':
   return this.handleSubResult(message);
-}
 ```
+
+Also remove the SUB_RESULT pre-check from `routeMessage()` if it was added in error.
 
 - [ ] **Step 8: Run tests to verify nothing is broken**
 
@@ -791,7 +792,46 @@ handleSubResult(message) {
 }
 ```
 
-- [ ] **Step 6: Commit**
+- [ ] **Step 6: Add TASK_CANCEL message type to validTypes**
+
+In `validateMessage()`, add `'TASK_CANCEL'` to validTypes.
+
+- [ ] **Step 7: Add cancelParentTask() for parent task canceled scenario**
+
+Add to SubtaskManager:
+
+```javascript
+cancelParentTask(taskId) {
+  const parent = this.parentTasks.get(taskId);
+  if (parent) {
+    parent.status = 'canceled';
+    parent.canceledAt = Date.now();
+  }
+  // Clean up tracking data
+  this.subtaskResults.delete(taskId);
+  // Note: Individual subtasks already sent cannot be recalled;
+  // agents will handle cancellation on next heartbeat
+}
+```
+
+In A2ARouter, add handler:
+
+```javascript
+cancelTask(message) {
+  const { taskId } = message.payload;
+  this.subtaskManager.cancelParentTask(taskId);
+  return { success: true, canceled: true };
+}
+```
+
+And add to handleRouterMessage switch:
+
+```javascript
+case 'TASK_CANCEL':
+  return this.cancelTask(message);
+```
+
+- [ ] **Step 8: Commit**
 
 ```bash
 git add src/router.js
@@ -799,6 +839,7 @@ git commit -m "feat: add subtask timeout handling for task decomposition
 
 Adds subtaskTimeout configuration (default 5 minutes).
 Adds checkSubtaskTimeouts() to detect and handle hung subtasks.
+Adds cancelParentTask() for graceful task cancellation.
 
 Co-Authored-By: claude-flow <ruv@ruv.net>"
 ```
