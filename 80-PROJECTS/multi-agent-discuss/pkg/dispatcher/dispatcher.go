@@ -45,6 +45,7 @@ const (
 	DecisionRequestHelp
 	DecisionRespond
 	DecisionIgnore
+	DecisionOrchestrate // New: handle ORCHESTRATE messages
 )
 
 func (d DecisionType) String() string {
@@ -59,6 +60,8 @@ func (d DecisionType) String() string {
 		return "RESPOND"
 	case DecisionIgnore:
 		return "IGNORE"
+	case DecisionOrchestrate:
+		return "ORCHESTRATE"
 	default:
 		return "UNKNOWN"
 	}
@@ -103,6 +106,7 @@ type Dispatcher struct {
 	peers      func() []*proto.AgentInfo
 	executor   TaskExecutor
 	onDecision func(decision *Decision)
+	replyFn    func(*proto.AgentMessage) // function to send reply to peer
 
 	mu         sync.RWMutex
 	activeTask *Task
@@ -118,11 +122,13 @@ func NewDispatcher(agentID string, peersProvider func() []*proto.AgentInfo) *Dis
 }
 
 // HandleMessage processes an incoming message and returns a decision
-func (d *Dispatcher) HandleMessage(msg *proto.AgentMessage, executor TaskExecutor) {
+// replyFn is called to send responses back to the peer (may be nil)
+func (d *Dispatcher) HandleMessage(msg *proto.AgentMessage, executor TaskExecutor, replyFn func(*proto.AgentMessage)) {
 	d.mu.Lock()
 	defer d.mu.Unlock()
 
 	d.executor = executor
+	d.replyFn = replyFn
 
 	decision := d.makeDecision(msg)
 
@@ -132,6 +138,16 @@ func (d *Dispatcher) HandleMessage(msg *proto.AgentMessage, executor TaskExecuto
 			d.onDecision(decision)
 		}
 	}()
+
+	// Send reply if decision requires response
+	if decision.Type == DecisionRespond && d.replyFn != nil && decision.ResponseType != 0 {
+		response := d.buildResponse(decision)
+		if response != nil {
+			go func() {
+				d.replyFn(response)
+			}()
+		}
+	}
 }
 
 // makeDecision implements the decision logic based on message type and state
@@ -192,6 +208,9 @@ func (d *Dispatcher) makeDecision(msg *proto.AgentMessage) *Decision {
 
 	case proto.MessageType_INVOKE_TOOL:
 		return d.handleInvokeTool(msg)
+
+	case proto.MessageType_ORCHESTRATE:
+		return d.handleOrchestrateMessage(msg)
 
 	default:
 		return &Decision{
@@ -403,6 +422,28 @@ func (d *Dispatcher) executeToolInvoke(msg *proto.AgentMessage, invokeID, toolNa
 	}
 }
 
+// buildResponse constructs an AgentMessage from a Decision
+func (d *Dispatcher) buildResponse(decision *Decision) *proto.AgentMessage {
+	action, ok := decision.Action.(map[string]interface{})
+	if !ok {
+		return nil
+	}
+
+	payloadJSON, err := json.Marshal(action)
+	if err != nil {
+		log.Printf("[dispatcher:%s] failed to marshal response action: %v", d.agentID, err)
+		return nil
+	}
+
+	return &proto.AgentMessage{
+		Id:        fmt.Sprintf("reply-%d", time.Now().UnixNano()),
+		Timestamp: time.Now().Unix(),
+		SenderId:  d.agentID,
+		Type:      decision.ResponseType,
+		Payload:   payloadJSON,
+	}
+}
+
 // SetDecisionCallback sets the callback function to be called when a decision is made
 func (d *Dispatcher) SetDecisionCallback(callback func(*Decision)) {
 	d.mu.Lock()
@@ -442,4 +483,27 @@ func (d *Dispatcher) ClearActiveTask() {
 // TransitionState performs a state transition with logging
 func (d *Dispatcher) TransitionState(newState State) {
 	d.SetState(newState)
+}
+
+// handleOrchestrateMessage handles ORCHESTRATE message type
+func (d *Dispatcher) handleOrchestrateMessage(msg *proto.AgentMessage) *Decision {
+	// Parse task from payload
+	var payload struct {
+		Task string `json:"task"`
+	}
+	if err := json.Unmarshal(msg.Payload, &payload); err != nil {
+		return &Decision{
+			Type:    DecisionRespond,
+			Message: msg,
+			Action:  map[string]interface{}{"error": fmt.Sprintf("failed to parse payload: %v", err)},
+		}
+	}
+
+	// Orchestrator is typically used via IPC, not P2P dispatcher
+	// Return an error indicating this path is not supported
+	return &Decision{
+		Type:    DecisionRespond,
+		Message: msg,
+		Action:  map[string]interface{}{"error": "orchestrator not available via P2P, use IPC command instead"},
+	}
 }
