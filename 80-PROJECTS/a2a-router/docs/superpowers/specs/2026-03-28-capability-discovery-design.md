@@ -47,10 +47,12 @@ Maintains:
 **Changes:**
 - Add `this.capabilityRegistry = new CapabilityRegistry(this)`
 - In `registerAgent()`: call `capabilityRegistry.register()`
-- In `unregisterAgent()`: call `capabilityRegistry.unregister()`
-- Extend `heartbeat()`: recompute scores on load change
+- In `unregisterAgent()`: call `capabilityRegistry.unregister()` (handles subscription cleanup)
+- Extend `heartbeat()`: recompute scores on load change (optional, for display only)
 - New method: `matchBestAgent(query, constraints)` — delegate to registry with load awareness
-- New method: `subscribeCapabilities(agentId, capabilities)` — subscription management
+- New method: `subscribeCapabilities(agentId, capabilities)` — add subscription
+- New method: `unsubscribeCapabilities(agentId, capabilities)` — remove subscription
+- New method: `updateAgentCapabilities(agentId, capabilities)` — call registry.updateCapabilities()
 
 ### 2.3 MCP Tools
 
@@ -82,6 +84,13 @@ Maintains:
       limit: { type: 'number', default: 5, description: 'Max results' }
     },
     required: ['query']
+  },
+  returns: {
+    success: true,
+    matches: [
+      { agentId: 'coder', score: 9, capabilities: ['coding'], status: 'idle', load: 0.2 },
+      ...
+    ]
   }
 },
 {
@@ -142,7 +151,7 @@ Agent calls a2a_subscribe_capabilities({ agentId: 'X', capabilities: ['coding'] 
 
 ## 4. Matching Algorithm
 
-**Score = matchScore - loadPenalty + recencyBonus**
+**Score = matchScore + recencyBonus - (load × 10)**
 
 | Factor | Weight | Description |
 |--------|--------|-------------|
@@ -196,3 +205,5 @@ Agent calls a2a_subscribe_capabilities({ agentId: 'X', capabilities: ['coding'] 
 - **Cleanup on unregister:** `CapabilityRegistry.unregister()` removes agent from `capabilityIndex` AND iterates `subscriptions` to remove agent from all subscribed capability sets.
 - **No `agentScores` cache:** Scores computed on-the-fly in `match()`, no persistent caching.
 - **Subscriptions inverted index:** `subscriptions` maps `capability → Set<agentId>` (not agent → capabilities) for O(1) broadcast lookup.
+- **Offline subscriber handling:** `notifySubscribers()` checks if subscriber exists in router.agents and status !== 'offline' before emitting `message:deliver`. Silently skips offline/dead subscribers — no error emitted.
+- **Partial update failure:** If emit fails mid-update (e.g., transport error), continue with remaining subscribers. No rollback — events are fire-and-forget.
