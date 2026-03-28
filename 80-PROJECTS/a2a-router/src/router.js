@@ -140,6 +140,8 @@ export class A2ARouter extends EventEmitter {
       return this.broadcast(message);
     } else if (message.to === 'router') {
       return this.handleRouterMessage(message);
+    } else if (message.to.startsWith('capability:')) {
+      return this.capabilityRoute(message);
     } else {
       return this.directRoute(message);
     }
@@ -177,6 +179,42 @@ export class A2ARouter extends EventEmitter {
       success: true,
       delivered: true,
       agent: targetAgent.id
+    };
+  }
+
+  /**
+   * Route message by capability requirement
+   */
+  capabilityRoute(message) {
+    const capability = message.to.replace('capability:', '');
+
+    // Find best agent by capability using existing match()
+    const matches = this.capabilityRegistry.match(capability, {
+      loadThreshold: 1.0,
+      limit: 10
+    });
+
+    if (matches.length === 0) {
+      this.enqueue(message);
+      return { success: true, queued: true, reason: 'NO_AGENTS_FOR_CAPABILITY' };
+    }
+
+    // Select agent with best score (matches are already sorted)
+    const best = matches[0];
+    const agent = this.agents.get(best.agentId);
+
+    if (!agent || agent.status === 'offline') {
+      this.enqueue(message);
+      return { success: true, queued: true, reason: 'AGENT_OFFLINE' };
+    }
+
+    // Deliver message
+    this.deliver(message, agent);
+
+    return {
+      success: true,
+      delivered: true,
+      agent: best.agentId
     };
   }
 
