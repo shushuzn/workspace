@@ -178,6 +178,43 @@ const TOOLS = [
       properties: {}
     }
   },
+  {
+    name: 'a2a_subscribe_capabilities',
+    description: 'Subscribe to capability change notifications',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        agentId: { type: 'string', description: 'Agent subscribing' },
+        capabilities: { type: 'array', items: { type: 'string' } }
+      },
+      required: ['agentId', 'capabilities']
+    }
+  },
+  {
+    name: 'a2a_match_agent',
+    description: 'Find best agent by capabilities with load scoring',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        query: { type: 'string', description: 'Capability to search for' },
+        loadThreshold: { type: 'number', default: 0.9 },
+        limit: { type: 'number', default: 5 }
+      },
+      required: ['query']
+    }
+  },
+  {
+    name: 'a2a_update_agent_capabilities',
+    description: 'Update an agent capabilities after initial registration',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        agentId: { type: 'string' },
+        capabilities: { type: 'array', items: { type: 'string' } }
+      },
+      required: ['agentId', 'capabilities']
+    }
+  },
   // RuFlo Bridge Tools
   {
     name: 'ruflo_list_agents',
@@ -420,6 +457,45 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
 
       case 'a2a_get_stats': {
         const result = { success: true, stats: router.getStats() };
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'a2a_subscribe_capabilities': {
+        const result = router.subscribeCapabilities(args.agentId, args.capabilities || []);
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify(result, null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'a2a_match_agent': {
+        const result = router.matchBestAgent(args.query, {
+          loadThreshold: args.loadThreshold || 0.9,
+          limit: args.limit || 5
+        });
+        return {
+          content: [
+            {
+              type: 'text',
+              text: JSON.stringify({ success: true, matches: result }, null, 2),
+            },
+          ],
+        };
+      }
+
+      case 'a2a_update_agent_capabilities': {
+        const result = router.updateAgentCapabilities(args.agentId, args.capabilities || []);
         return {
           content: [
             {
