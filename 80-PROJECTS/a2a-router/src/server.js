@@ -14,6 +14,7 @@ import {
 import { v4 as uuidv4 } from 'uuid';
 import { A2ARouter } from './router.js';
 import { ACPGateway } from './protocols/acp-gateway.js';
+import { LoadBalancer } from './protocols/load-balancing/load-balancer.js';
 
 // Create router instance
 const router = new A2ARouter({
@@ -213,6 +214,19 @@ const TOOLS = [
         capabilities: { type: 'array', items: { type: 'string' } }
       },
       required: ['agentId', 'capabilities']
+    }
+  },
+  {
+    name: 'a2a_get_agent_loads',
+    description: 'Get load scores for all registered agents',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        capability: {
+          type: 'string',
+          description: 'Filter agents by capability'
+        }
+      }
     }
   },
   // RuFlo Bridge Tools
@@ -537,6 +551,18 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
               text: JSON.stringify(result, null, 2),
             },
           ],
+        };
+      }
+
+      case 'a2a_get_agent_loads': {
+        const { capability } = args;
+        const loadBalancer = new LoadBalancer(router);
+        const agents = loadBalancer.getAgentLoads(capability || null);
+        return {
+          content: [{
+            type: 'text',
+            text: JSON.stringify({ success: true, agents }, null, 2)
+          }]
         };
       }
 
