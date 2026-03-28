@@ -28,17 +28,17 @@ The A2A router currently supports capability-based discovery through a simple su
 
 Maintains:
 - `capabilityIndex: Map<capability, Set<agentId>>` — inverted index for fast lookup
-- `subscriptions: Map<agentId, Set<capability>>` — who subscribed to what
-- `agentScores: Map<agentId, number>` — last computed match score
+- `subscriptions: Map<capability, Set<agentId>>` — capability → subscribers (inverted subscription index)
+- `router: A2ARouter` — reference to router for event emission
 
 **Methods:**
-- `register(agentId, capabilities)` — update index, emit `capability:added`
-- `unregister(agentId)` — remove from index, emit `capability:removed`
-- `updateCapabilities(agentId, newCapabilities)` — diff and emit changes
-- `match(query, options)` — weighted scoring: exact match > prefix match > fuzzy, load factor, recency
-- `subscribe(agentId, capabilities)` — add to subscription list
-- `unsubscribe(agentId, capabilities)` — remove from subscription list
-- `broadcast(agentId, event)` — notify all subscribers of capability change
+- `register(agentId, capabilities)` — update index, emit `capability:added` via router
+- `unregister(agentId)` — remove from index + clean subscriptions, emit `capability:removed`
+- `updateCapabilities(agentId, newCapabilities)` — diff and emit `capability:updated`
+- `match(query, options)` — weighted scoring + hard filter by loadThreshold, return top-N
+- `subscribe(agentId, capabilities)` — add to subscription index (capability → Set<agentId>)
+- `unsubscribe(agentId, capabilities)` — remove from subscription index
+- `notifySubscribers(capability, event)` — emit `message:deliver` to all subscribers
 
 ### 2.2 Router Changes
 
@@ -64,11 +64,12 @@ Maintains:
   inputSchema: {
     type: 'object',
     properties: {
-      agentId: { type: 'string' },
+      agentId: { type: 'string', description: 'Agent subscribing (must be the requesting agent)' },
       capabilities: { type: 'array', items: { type: 'string' } }
     },
     required: ['agentId', 'capabilities']
-  }
+  },
+  note: 'Validation: agentId must match the authenticated requesting agent to prevent subscription spoofing'
 },
 {
   name: 'a2a_match_agent',
@@ -77,10 +78,22 @@ Maintains:
     type: 'object',
     properties: {
       query: { type: 'string', description: 'Capability to search for' },
-      loadThreshold: { type: 'number', default: 0.9, description: 'Max load to consider' },
+      loadThreshold: { type: 'number', default: 0.9, description: 'Max load to consider (hard filter)' },
       limit: { type: 'number', default: 5, description: 'Max results' }
     },
     required: ['query']
+  }
+},
+{
+  name: 'a2a_update_agent_capabilities',
+  description: 'Update an agent capabilities after initial registration',
+  inputSchema: {
+    type: 'object',
+    properties: {
+      agentId: { type: 'string', description: 'Agent to update' },
+      capabilities: { type: 'array', items: { type: 'string' } }
+    },
+    required: ['agentId', 'capabilities']
   }
 }
 ```
@@ -88,10 +101,11 @@ Maintains:
 ### 2.4 Event Types
 
 **New events emitted by router:**
-- `capability:added` — `{ agentId, capabilities }`
-- `capability:removed` — `{ agentId, capabilities }`
-- `capability:updated` — `{ agentId, oldCapabilities, newCapabilities }`
-- `agent:matched` — `{ requesterId, matchedAgent, score }`
+- `capability:added` — `{ agentId, capabilities[] }` — emitted when agent registers or updates capabilities
+- `capability:removed` — `{ agentId, capabilities[] }` — emitted on unregister or capability removal
+- `capability:updated` — `{ agentId, oldCapabilities[], newCapabilities[] }` — emitted on capability changes
+
+**Note:** Events are emitted via the router's EventEmitter. CapabilityRegistry stores a reference to the router and calls `router.emit()` for propagation to MCP transport layer.
 
 ---
 
@@ -136,11 +150,14 @@ Agent calls a2a_subscribe_capabilities({ agentId: 'X', capabilities: ['coding'] 
 | prefixMatch | 5 | capability.startsWith(query) |
 | containsMatch | 3 | capability.includes(query) |
 | loadPenalty | -load * 10 | Lower load = higher score |
-| recencyBonus | +1 | If agent active in last 30s |
+| recencyBonus | +1 | If `lastHeartbeat` within last 30s, else 0; fallback to `registeredAt` if no heartbeat |
 
-**Example:** Query "code", agents:
-- `coder`: exact match + low load (0.2) = 10 - 2 + 1 = **9**
-- `code-review`: contains match + high load (0.8) = 3 - 8 + 0 = **-5**
+**Threshold semantics:** `loadThreshold` is a **hard filter** — agents with load > threshold are excluded entirely from results. `match()` returns top-N results sorted by score descending.
+
+**Edge cases:**
+- Agent with no `lastHeartbeat`: use `registeredAt` for recency bonus
+- Agent with load=0.9 and threshold=0.9: included (exact match on boundary)
+- Agent with load=0.91 and threshold=0.9: excluded (above threshold)
 
 ---
 
@@ -167,9 +184,15 @@ Agent calls a2a_subscribe_capabilities({ agentId: 'X', capabilities: ['coding'] 
 
 | File | Action |
 |------|--------|
-| `src/protocols/capability-registry.js` | Create |
+| `src/protocols/capability-registry.js` | Create — CapabilityRegistry class |
 | `src/router.js` | Modify — add registry, matchBestAgent, subscribeCapabilities |
-| `src/server.js` | Modify — add 2 new MCP tools |
+| `src/server.js` | Modify — add 3 new MCP tools |
 | `test/unit/capability-registry.test.js` | Create |
 | `test/unit/router-discovery.test.js` | Create |
 | `test/integration/capability-discovery.test.js` | Create |
+
+## 8. Implementation Notes
+
+- **Cleanup on unregister:** `CapabilityRegistry.unregister()` removes agent from `capabilityIndex` AND iterates `subscriptions` to remove agent from all subscribed capability sets.
+- **No `agentScores` cache:** Scores computed on-the-fly in `match()`, no persistent caching.
+- **Subscriptions inverted index:** `subscriptions` maps `capability → Set<agentId>` (not agent → capabilities) for O(1) broadcast lookup.
