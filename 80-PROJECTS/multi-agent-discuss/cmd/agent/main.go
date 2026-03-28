@@ -130,7 +130,7 @@ func handleStart() {
 	fs.Parse(os.Args[2:])
 
 	ctx = &CLIContext{
-		agent: core.NewAgent("", *name, *port, []proto.Capability{
+		agent: core.NewAgent("", *name, *port, []*proto.Capability{
 			{Name: "text", Description: "Text messaging capability"},
 			{Name: "task", Description: "Task execution capability"},
 		}),
@@ -231,18 +231,7 @@ type serverHandler struct {
 func (h *serverHandler) HandleMessage(msg *proto.AgentMessage, reply func(*proto.AgentMessage)) {
 	// Route to dispatcher with adapter
 	adapter := &executorAdapter{exec: h.ctx.exec}
-	h.ctx.disp.HandleMessage(msg, adapter)
-
-	// Auto-acknowledge text messages
-	if msg.Type == proto.MessageType_TEXT {
-		reply(&proto.AgentMessage{
-			Id:        fmt.Sprintf("reply-%d", time.Now().UnixNano()),
-			Timestamp: time.Now().Unix(),
-			SenderId:  h.ctx.agent.ID,
-			Type:      proto.MessageType_RESPONSE,
-			Payload:   []byte(`{"ack":true,"text":"message received"}`),
-		})
-	}
+	h.ctx.disp.HandleMessage(msg, adapter, reply)
 }
 
 func handlePeers() {
@@ -555,7 +544,7 @@ func handleRun() {
 	fs.Parse(os.Args[2:])
 
 	// Initialize agent
-	agent := core.NewAgent("", *name, *port, []proto.Capability{
+	agent := core.NewAgent("", *name, *port, []*proto.Capability{
 		{Name: "text", Description: "Text messaging capability"},
 		{Name: "task", Description: "Task execution capability"},
 	})
@@ -692,15 +681,5 @@ type persistentServerHandler struct {
 
 func (h *persistentServerHandler) HandleMessage(msg *proto.AgentMessage, reply func(*proto.AgentMessage)) {
 	adapter := &executorAdapter{exec: h.exec}
-	h.disp.HandleMessage(msg, adapter)
-
-	if msg.Type == proto.MessageType_TEXT {
-		reply(&proto.AgentMessage{
-			Id:        fmt.Sprintf("reply-%d", time.Now().UnixNano()),
-			Timestamp: time.Now().Unix(),
-			SenderId:  h.agent.ID,
-			Type:      proto.MessageType_RESPONSE,
-			Payload:   []byte(`{"ack":true,"text":"message received"}`),
-		})
-	}
+	h.disp.HandleMessage(msg, adapter, reply)
 }

@@ -19,14 +19,14 @@ type Agent struct {
 	ID           string
 	Name         string
 	Port         int
-	Capabilities []proto.Capability
+	Capabilities []*proto.Capability
 	Peers        map[string]*PeerConnection
 	exec        *executor.Executor
 	toolClient   *toolclient.ToolClient
 	mu           sync.RWMutex
 }
 
-func NewAgent(id, name string, port int, caps []proto.Capability) *Agent {
+func NewAgent(id, name string, port int, caps []*proto.Capability) *Agent {
 	exec := executor.NewExecutor(id)
 	exec.SetupTools()
 	return &Agent{

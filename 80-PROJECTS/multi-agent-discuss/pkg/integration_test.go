@@ -37,7 +37,7 @@ func startTestComponents(t *testing.T, name string, port int) *testComponents {
 		fmt.Sprintf("agent-%s", name),
 		name,
 		port,
-		[]proto.Capability{{Name: "test", Description: "test capability"}},
+		[]*proto.Capability{{Name: "test", Description: "test capability"}},
 	)
 
 	disc := discovery.NewDiscovery(agent.ID, port)
@@ -891,7 +891,7 @@ func TestExecutorListTools(t *testing.T) {
 // --- TestCoreAgent ---
 
 func TestCoreAgent(t *testing.T) {
-	agent := core.NewAgent("agent-1", "Test Agent", 8080, []proto.Capability{
+	agent := core.NewAgent("agent-1", "Test Agent", 8080, []*proto.Capability{
 		{Name: "cap1", Description: "Capability 1"},
 	})
 
