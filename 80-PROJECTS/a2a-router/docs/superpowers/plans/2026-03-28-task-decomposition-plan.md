@@ -711,6 +711,7 @@ In the router constructor, add:
 // Task decomposition configuration
 this.subtaskTimeout = options.subtaskTimeout || 300000; // 5 minutes default
 this.subtaskTimeouts = new Map(); // taskId -> timeoutId
+this.subtaskStartTimes = new Map(); // subtaskId -> startTime
 ```
 
 - [ ] **Step 2: Add timeout checker in startMaintenance()**
@@ -730,16 +731,23 @@ checkSubtaskTimeouts() {
   for (const [taskId, parentTask] of this.parentTasks) {
     if (parentTask.status !== 'in_progress') continue;
 
-    // Find subtasks that have timed out
     const results = this.subtaskResults.get(taskId);
     if (!results) continue;
 
     for (const [subtaskId, result] of results) {
-      if (result.timedOut) continue;
-      // Check if this subtask's result has been waiting too long
-      const elapsed = now - parentTask.createdAt;
-      // Mark individual subtask as timed out if no result received after subtaskTimeout
-      // This is a simplified check - real implementation would track each subtask's start time
+      if (result.timedOut || result.success !== undefined) continue;
+      // Check if this subtask has been waiting longer than subtaskTimeout
+      const startTime = this.subtaskStartTimes.get(subtaskId);
+      if (startTime && (now - startTime) > this.subtaskTimeout) {
+        results.set(subtaskId, { ...result, timedOut: true, success: false, payload: { error: 'Subtask timeout' } });
+        parentTask.completedCount++;
+        console.log(`[Router] Subtask ${subtaskId} timed out after ${this.subtaskTimeout}ms`);
+      }
+    }
+
+    // Check if all subtasks are now complete (including timed out ones)
+    if (this.isTaskComplete(taskId)) {
+      this.aggregateResults(taskId);
     }
   }
 }
@@ -808,4 +816,3 @@ Co-Authored-By: claude-flow <ruv@ruv.net>"
 | 5 | Integration Test | ⬜ |
 | 6 | MCP Tool (optional) | ⬜ |
 | 7 | Timeout Handling | ⬜ |
-| 6 | MCP Tool (optional) | ⬜ |
