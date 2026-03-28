@@ -383,6 +383,78 @@ const TOOLS = [
       type: 'object',
       properties: {}
     }
+  },
+  // Security Tools
+  {
+    name: 'a2a_create_api_key',
+    description: 'Create API key for agent authentication',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        agentId: { type: 'string' },
+        expiresIn: { type: 'number', description: 'Expiration in ms, 0 = never' }
+      },
+      required: ['agentId']
+    }
+  },
+  {
+    name: 'a2a_revoke_api_key',
+    description: 'Revoke an API key',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        agentId: { type: 'string' },
+        keyId: { type: 'string' }
+      },
+      required: ['agentId', 'keyId']
+    }
+  },
+  {
+    name: 'a2a_set_acl',
+    description: 'Set access control rules for capabilities',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        capability: { type: 'string' },
+        allowedAgents: { type: 'array', items: { type: 'string' } },
+        deniedAgents: { type: 'array', items: { type: 'string' } }
+      },
+      required: ['capability']
+    }
+  },
+  {
+    name: 'a2a_verify_message',
+    description: 'Verify message signature and security',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        message: { type: 'object', description: 'Message to verify' }
+      },
+      required: ['message']
+    }
+  },
+  {
+    name: 'a2a_list_api_keys',
+    description: 'List all API keys for an agent (metadata only, no secrets)',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        agentId: { type: 'string' }
+      },
+      required: ['agentId']
+    }
+  },
+  {
+    name: 'a2a_rotate_api_key',
+    description: 'Rotate an API key (revoke old, create new)',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        agentId: { type: 'string' },
+        keyId: { type: 'string' }
+      },
+      required: ['agentId', 'keyId']
+    }
   }
 ];
 
@@ -699,6 +771,55 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         const stats = router.getQueueStats();
         return {
           content: [{ type: 'text', text: JSON.stringify({ success: true, ...stats }, null, 2) }]
+        };
+      }
+
+      // Security Handlers
+      case 'a2a_create_api_key': {
+        const { agentId, expiresIn = 0 } = args;
+        const result = router.securityManager.createApiKey(agentId, expiresIn);
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ success: true, ...result }, null, 2) }]
+        };
+      }
+
+      case 'a2a_revoke_api_key': {
+        const { agentId, keyId } = args;
+        const result = router.securityManager.revokeApiKey(agentId, keyId);
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ success: true, ...result }, null, 2) }]
+        };
+      }
+
+      case 'a2a_list_api_keys': {
+        const { agentId } = args;
+        const result = router.securityManager.listApiKeys(agentId);
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ success: true, keys: result }, null, 2) }]
+        };
+      }
+
+      case 'a2a_rotate_api_key': {
+        const { agentId, keyId } = args;
+        const result = router.securityManager.rotateApiKey(agentId, keyId);
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ success: true, ...result }, null, 2) }]
+        };
+      }
+
+      case 'a2a_set_acl': {
+        const { capability, allowedAgents = [], deniedAgents = [] } = args;
+        const result = router.securityManager.setAclRule(capability, allowedAgents, deniedAgents);
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ success: true, ...result }, null, 2) }]
+        };
+      }
+
+      case 'a2a_verify_message': {
+        const { message } = args;
+        const result = router.securityManager.verifyMessage(message);
+        return {
+          content: [{ type: 'text', text: JSON.stringify({ success: true, ...result }, null, 2) }]
         };
       }
 
