@@ -52,6 +52,11 @@ export class A2ARouter extends EventEmitter {
     this.resultAggregator = new ResultAggregator();
     this.subtaskManager = new SubtaskManager();
 
+    // Task decomposition configuration
+    this.subtaskTimeout = options.subtaskTimeout || 300000; // 5 minutes default
+    this.subtaskTimeouts = new Map(); // taskId -> timeoutId
+    this.subtaskStartTimes = new Map(); // subtaskId -> startTime
+
     // Track maintenance interval IDs for cleanup
     this.maintenanceIntervals = [];
 
@@ -292,6 +297,9 @@ export class A2ARouter extends EventEmitter {
       case 'SUB_RESULT':
         return this.handleSubResult(message);
 
+      case 'TASK_CANCEL':
+        return this.cancelTask(message);
+
       default:
         return { success: false, error: 'UNKNOWN_ROUTER_COMMAND' };
     }
@@ -413,6 +421,14 @@ export class A2ARouter extends EventEmitter {
    */
   handleSubResult(message) {
     const { parentTaskId, subtaskId, success, payload } = message;
+
+    // Check if this subtask already timed out
+    const existingResults = this.subtaskManager.getSubtaskResults(parentTaskId);
+    const existing = existingResults.find(r => r.subtaskId === subtaskId);
+    if (existing && existing.timedOut) {
+      // Result arrived after timeout, skip
+      return { success: true, aggregated: false, reason: 'SUBTASK_ALREADY_TIMED_OUT' };
+    }
 
     this.subtaskManager.recordSubtaskResult(parentTaskId, subtaskId, success, payload);
 
@@ -560,6 +576,9 @@ export class A2ARouter extends EventEmitter {
 
     // Check agent health every 10 seconds
     this.maintenanceIntervals.push(setInterval(() => this.checkAgentHealth(), 10000));
+
+    // Check subtask timeouts every 30 seconds
+    this.maintenanceIntervals.push(setInterval(() => this.checkSubtaskTimeouts(), 30000));
   }
 
   /**
@@ -571,13 +590,66 @@ export class A2ARouter extends EventEmitter {
 
     for (const [agentId, agent] of this.agents) {
       const lastSeen = now - agent.lastHeartbeat;
-      
+
       if (lastSeen > offlineThreshold && agent.status !== 'offline') {
         console.log(`[Router] Agent ${agentId} marked offline (last seen ${Math.round(lastSeen / 1000)}s ago)`);
         agent.status = 'offline';
         this.emit('agent:offline', agent);
       }
     }
+  }
+
+  /**
+   * Check subtask timeouts and mark timed out subtasks
+   */
+  checkSubtaskTimeouts() {
+    const now = Date.now();
+    for (const [taskId, parentTask] of this.subtaskManager.parentTasks) {
+      if (parentTask.status !== 'in_progress') continue;
+
+      const results = this.subtaskManager.subtaskResults.get(taskId);
+      if (!results) continue;
+
+      for (const [subtaskId, result] of results) {
+        if (result.timedOut || result.success !== undefined) continue;
+        // Check if this subtask has been waiting longer than subtaskTimeout
+        const startTime = this.subtaskStartTimes.get(subtaskId);
+        if (startTime && (now - startTime) > this.subtaskTimeout) {
+          results.set(subtaskId, { ...result, timedOut: true, success: false, payload: { error: 'Subtask timeout' } });
+          parentTask.completedCount++;
+          console.log(`[Router] Subtask ${subtaskId} timed out after ${this.subtaskTimeout}ms`);
+        }
+      }
+
+      // Check if all subtasks are now complete (including timed out ones)
+      if (this.subtaskManager.isTaskComplete(taskId)) {
+        this.aggregateResults(taskId);
+      }
+    }
+  }
+
+  /**
+   * Cancel a parent task and clean up tracking data
+   */
+  cancelParentTask(taskId) {
+    const parent = this.parentTasks.get(taskId);
+    if (parent) {
+      parent.status = 'canceled';
+      parent.canceledAt = Date.now();
+    }
+    // Clean up tracking data
+    this.subtaskResults.delete(taskId);
+    // Note: Individual subtasks already sent cannot be recalled;
+    // agents will handle cancellation on next heartbeat
+  }
+
+  /**
+   * Handle task cancellation request
+   */
+  cancelTask(message) {
+    const { taskId } = message.payload;
+    this.subtaskManager.cancelParentTask(taskId);
+    return { success: true, canceled: true };
   }
 
   /**

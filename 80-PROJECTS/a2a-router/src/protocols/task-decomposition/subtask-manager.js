@@ -51,4 +51,14 @@ export class SubtaskManager {
     parent.status = 'completed';
     parent.completedAt = new Date();
   }
+
+  cancelParentTask(taskId) {
+    const parent = this.parentTasks.get(taskId);
+    if (parent) {
+      parent.status = 'canceled';
+      parent.canceledAt = new Date();
+    }
+    // Clean up tracking data
+    this.subtaskResults.delete(taskId);
+  }
 }
