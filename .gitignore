@@ -42,7 +42,6 @@ node_modules/
 .claude-flow/
 .omc/
 .swarm/
-.remember/
 .ruff_cache/
 .pytest_cache/
 checkpoints.db
@@ -66,3 +65,13 @@ skill-github-links.txt
 # === Claude Code ===
 .claude/settings.local.json
 claude-desktop.json
+
+# Session & temp data
+sessions/
+logs/
+memory/
+dialog/
+threads/
+execution_results.json
+.obsidian/
+awesome-openclaw-agents/
