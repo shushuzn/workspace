@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": ["Bash", "Read", "Edit", "Write", "Glob", "Grep"]
+  },
+  "project": {
+    "name": "self-evolving-orchestrator",
+    "type": "go-ts"
+  }
+}

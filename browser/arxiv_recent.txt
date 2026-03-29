@@ -1,0 +1,2011 @@
+- document:
+  - banner:
+    - link "Skip to main content" [ref=e1]:
+      - /url: "#content"
+    - link "Cornell University" [ref=e2]:
+      - /url: https://www.cornell.edu/
+      - img "Cornell University"
+    - link "Learn about arXiv becoming an independent nonprofit." [ref=e3]:
+      - /url: https://tech.cornell.edu/arxiv/
+    - text: We gratefully acknowledge support from the Simons Foundation,
+    - link "member institutions" [ref=e4]:
+      - /url: https://info.arxiv.org/about/ourmembers.html
+    - text: ", and all contributors."
+    - link "Donate" [ref=e5]:
+      - /url: https://info.arxiv.org/about/donate.html
+    - link "arxiv logo" [ref=e6]:
+      - /url: /
+      - img "arxiv logo"
+    - text: ">"
+    - link "cs.AI" [ref=e7]:
+      - /url: /list/cs.AI/recent
+    - textbox "Search term or terms" [ref=e8]:
+      - /placeholder: Search...
+    - paragraph:
+      - link "Help" [ref=e9]:
+        - /url: https://info.arxiv.org/help
+      - text: "|"
+      - link "Advanced Search" [ref=e10]:
+        - /url: https://arxiv.org/search/advanced
+    - combobox "Field to search" [ref=e11]:
+      - option "All fields" [ref=e12] [selected]
+      - option "Title" [ref=e13]
+      - option "Author" [ref=e14]
+      - option "Abstract" [ref=e15]
+      - option "Comments" [ref=e16]
+      - option "Journal reference" [ref=e17]
+      - option "ACM classification" [ref=e18]
+      - option "MSC classification" [ref=e19]
+      - option "Report number" [ref=e20]
+      - option "arXiv identifier" [ref=e21]
+      - option "DOI" [ref=e22]
+      - option "ORCID" [ref=e23]
+      - option "arXiv author ID" [ref=e24]
+      - option "Help pages" [ref=e25]
+      - option "Full text" [ref=e26]
+    - button "Search" [ref=e27]
+  - main:
+    - heading "Artificial Intelligence" [ref=e28] [level=1]
+    - heading "Authors and titles for recent submissions" [ref=e29] [level=2]
+    - list:
+      - listitem:
+        - link "Fri, 27 Mar 2026" [ref=e30]:
+          - /url: /list/cs.AI/recent?skip=0&show=50
+      - listitem:
+        - link "Thu, 26 Mar 2026" [ref=e31]:
+          - /url: /list/cs.AI/recent?skip=177&show=50
+      - listitem:
+        - link "Wed, 25 Mar 2026" [ref=e32]:
+          - /url: /list/cs.AI/recent?skip=342&show=50
+      - listitem:
+        - link "Tue, 24 Mar 2026" [ref=e33]:
+          - /url: /list/cs.AI/recent?skip=554&show=50
+      - listitem:
+        - link "Mon, 23 Mar 2026" [ref=e34]:
+          - /url: /list/cs.AI/recent?skip=916&show=50
+    - paragraph:
+      - text: See today's
+      - link "new" [ref=e35]:
+        - /url: /list/cs.AI/new
+      - text: changes
+    - text: "Total of 1083 entries : 1-50"
+    - link "51-100" [ref=e36]:
+      - /url: /list/cs.AI/recent?skip=50&show=50
+    - link "101-150" [ref=e37]:
+      - /url: /list/cs.AI/recent?skip=100&show=50
+    - link "151-200" [ref=e38]:
+      - /url: /list/cs.AI/recent?skip=150&show=50
+    - text: ...
+    - link "1051-1083" [ref=e39]:
+      - /url: /list/cs.AI/recent?skip=1050&show=50
+    - text: "Showing up to 50 entries per page:"
+    - link "fewer" [ref=e40]:
+      - /url: /list/cs.AI/recent?skip=0&show=25
+    - text: "|"
+    - link "more" [ref=e41]:
+      - /url: /list/cs.AI/recent?skip=0&show=100
+    - text: "|"
+    - link "all" [ref=e42]:
+      - /url: /list/cs.AI/recent?skip=0&show=2000
+    - heading "Fri, 27 Mar 2026 (showing first 50 of 177 entries )" [ref=e43] [level=3]
+    - term:
+      - text: "[1]"
+      - link "arXiv:2603.25737" [ref=e44]:
+        - /url: /abs/2603.25737
+      - text: "["
+      - link "pdf" [ref=e45]:
+        - /url: /pdf/2603.25737
+      - text: ","
+      - link "other" [ref=e46]:
+        - /url: /format/2603.25737
+      - text: "]"
+    - definition:
+      - text: Training the Knowledge Base through Evidence Distillation and Write-Back Enrichment
+      - link "Yuxing Lu" [ref=e47]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lu,+Y
+      - text: ","
+      - link "Xukai Zhao" [ref=e48]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhao,+X
+      - text: ","
+      - link "Wei Wu" [ref=e49]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wu,+W
+      - text: ","
+      - link "Jinzhuo Wang" [ref=e50]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+J
+      - text: "Comments: 15 pages Subjects: Artificial Intelligence (cs.AI); Computation and Language (cs.CL); Information Retrieval (cs.IR)"
+    - term:
+      - text: "[2]"
+      - link "arXiv:2603.25727" [ref=e51]:
+        - /url: /abs/2603.25727
+      - text: "["
+      - link "pdf" [ref=e52] [nth=1]:
+        - /url: /pdf/2603.25727
+      - text: ","
+      - link "html" [ref=e53]:
+        - /url: https://arxiv.org/html/2603.25727v1
+      - text: ","
+      - link "other" [ref=e54] [nth=1]:
+        - /url: /format/2603.25727
+      - text: "]"
+    - definition:
+      - text: "Back to Basics: Revisiting ASR in the Age of Voice Agents"
+      - link "Geeyang Tay" [ref=e55]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tay,+G
+      - text: ","
+      - link "Wentao Ma" [ref=e56]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ma,+W
+      - text: ","
+      - link "Jaewon Lee" [ref=e57]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lee,+J
+      - text: ","
+      - link "Yuzhi Tang" [ref=e58]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tang,+Y
+      - text: ","
+      - link "Daniel Lee" [ref=e59]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lee,+D
+      - text: ","
+      - link "Weisu Yin" [ref=e60]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yin,+W
+      - text: ","
+      - link "Dongming Shen" [ref=e61]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Shen,+D
+      - text: ","
+      - link "Silin Meng" [ref=e62]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Meng,+S
+      - text: ","
+      - link "Yi Zhu" [ref=e63]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhu,+Y
+      - text: ","
+      - link "Mu Li" [ref=e64]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+M
+      - text: ","
+      - link "Alex Smola" [ref=e65]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Smola,+A
+      - text: "Comments: 10 pages, 5 figures Subjects: Artificial Intelligence (cs.AI); Multimedia (cs.MM)"
+    - term:
+      - text: "[3]"
+      - link "arXiv:2603.25720" [ref=e66]:
+        - /url: /abs/2603.25720
+      - text: "["
+      - link "pdf" [ref=e67] [nth=2]:
+        - /url: /pdf/2603.25720
+      - text: ","
+      - link "html" [ref=e68] [nth=1]:
+        - /url: https://arxiv.org/html/2603.25720v1
+      - text: ","
+      - link "other" [ref=e69] [nth=2]:
+        - /url: /format/2603.25720
+      - text: "]"
+    - definition:
+      - text: "R-C2: Cycle-Consistent Reinforcement Learning Improves Multimodal Reasoning"
+      - link "Zirui Zhang" [ref=e70]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+Z
+      - text: ","
+      - link "Haoyu Dong" [ref=e71]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Dong,+H
+      - text: ","
+      - link "Kexin Pei" [ref=e72]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Pei,+K
+      - text: ","
+      - link "Chengzhi Mao" [ref=e73]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Mao,+C
+      - text: "Subjects: Artificial Intelligence (cs.AI); Computer Vision and Pattern Recognition (cs.CV)"
+    - term:
+      - text: "[4]"
+      - link "arXiv:2603.25719" [ref=e74]:
+        - /url: /abs/2603.25719
+      - text: "["
+      - link "pdf" [ref=e75] [nth=3]:
+        - /url: /pdf/2603.25719
+      - text: ","
+      - link "html" [ref=e76] [nth=2]:
+        - /url: https://arxiv.org/html/2603.25719v1
+      - text: ","
+      - link "other" [ref=e77] [nth=3]:
+        - /url: /format/2603.25719
+      - text: "]"
+    - definition:
+      - text: "Agent Factories for High Level Synthesis: How Far Can General-Purpose Coding Agents Go in Hardware Optimization?"
+      - link "Abhishek Bhandwaldar" [ref=e78]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Bhandwaldar,+A
+      - text: ","
+      - link "Mihir Choudhury" [ref=e79]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Choudhury,+M
+      - text: ","
+      - link "Ruchir Puri" [ref=e80]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Puri,+R
+      - text: ","
+      - link "Akash Srivastava" [ref=e81]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Akash
+      - text: "Subjects: Artificial Intelligence (cs.AI); Hardware Architecture (cs.AR); Machine Learning (cs.LG)"
+    - term:
+      - text: "[5]"
+      - link "arXiv:2603.25633" [ref=e82]:
+        - /url: /abs/2603.25633
+      - text: "["
+      - link "pdf" [ref=e83] [nth=4]:
+        - /url: /pdf/2603.25633
+      - text: ","
+      - link "html" [ref=e84] [nth=3]:
+        - /url: https://arxiv.org/html/2603.25633v1
+      - text: ","
+      - link "other" [ref=e85] [nth=4]:
+        - /url: /format/2603.25633
+      - text: "]"
+    - definition:
+      - text: Is Mathematical Problem-Solving Expertise in Large Language Models Associated with Assessment Performance?
+      - link "Liang Zhang" [ref=e86]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+L
+      - text: ","
+      - link "Yu Fu" [ref=e87]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Fu,+Y
+      - text: ","
+      - link "Xinyi Jin" [ref=e88]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Jin,+X
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[6]"
+      - link "arXiv:2603.25551" [ref=e89]:
+        - /url: /abs/2603.25551
+      - text: "["
+      - link "pdf" [ref=e90] [nth=5]:
+        - /url: /pdf/2603.25551
+      - text: ","
+      - link "html" [ref=e91] [nth=4]:
+        - /url: https://arxiv.org/html/2603.25551v1
+      - text: ","
+      - link "other" [ref=e92] [nth=5]:
+        - /url: /format/2603.25551
+      - text: "]"
+    - definition:
+      - text: Voxtral TTS
+      - link "Alexander H. Liu" [ref=e93]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+A+H
+      - text: ","
+      - link "Alexis Tacnet" [ref=e94]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tacnet,+A
+      - text: ","
+      - link "Andy Ehrenberg" [ref=e95]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ehrenberg,+A
+      - text: ","
+      - link "Andy Lo" [ref=e96]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lo,+A
+      - text: ","
+      - link "Chen-Yo Sun" [ref=e97]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sun,+C
+      - text: ","
+      - link "Guillaume Lample" [ref=e98]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lample,+G
+      - text: ","
+      - link "Henry Lagarde" [ref=e99]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lagarde,+H
+      - text: ","
+      - link "Jean-Malo Delignon" [ref=e100]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Delignon,+J
+      - text: ","
+      - link "Jaeyoung Kim" [ref=e101]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kim,+J
+      - text: ","
+      - link "John Harvill" [ref=e102]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Harvill,+J
+      - text: ","
+      - link "Khyathi Raghavi Chandu" [ref=e103]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Chandu,+K+R
+      - text: ","
+      - link "Lorenzo Signoretti" [ref=e104]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Signoretti,+L
+      - text: ","
+      - link "Margaret Jennings" [ref=e105]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Jennings,+M
+      - text: ","
+      - link "Patrick von Platen" [ref=e106]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=von+Platen,+P
+      - text: ","
+      - link "Pavankumar Reddy Muddireddy" [ref=e107]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Muddireddy,+P+R
+      - text: ","
+      - link "Rohin Arora" [ref=e108]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Arora,+R
+      - text: ","
+      - link "Sanchit Gandhi" [ref=e109]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gandhi,+S
+      - text: ","
+      - link "Samuel Humeau" [ref=e110]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Humeau,+S
+      - text: ","
+      - link "Soham Ghosh" [ref=e111]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ghosh,+S
+      - text: ","
+      - link "Srijan Mishra" [ref=e112]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Mishra,+S
+      - text: ","
+      - link "Van Phung" [ref=e113]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Phung,+V
+      - text: ","
+      - link "Abdelaziz Bounhar" [ref=e114]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Bounhar,+A
+      - text: ","
+      - link "Abhinav Rastogi" [ref=e115]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Rastogi,+A
+      - text: ","
+      - link "Adrien Sadé" [ref=e116]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sad%C3%A9,+A
+      - text: ","
+      - link "Alan Jeffares" [ref=e117]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Jeffares,+A
+      - text: ","
+      - link "Albert Jiang" [ref=e118]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Jiang,+A
+      - text: ","
+      - link "Alexandre Cahill" [ref=e119]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Cahill,+A
+      - text: ","
+      - link "Alexandre Gavaudan" [ref=e120]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gavaudan,+A
+      - text: ","
+      - link "Alexandre Sablayrolles" [ref=e121]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sablayrolles,+A
+      - text: ","
+      - link "Amélie Héliou" [ref=e122]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=H%C3%A9liou,+A
+      - text: ","
+      - link "Amos You" [ref=e123]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=You,+A
+      - text: ","
+      - link "Andrew Bai" [ref=e124]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Bai,+A
+      - text: ","
+      - link "Andrew Zhao" [ref=e125]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhao,+A
+      - text: ","
+      - link "Angele Lenglemetz" [ref=e126]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lenglemetz,+A
+      - text: ","
+      - link "Anmol Agarwal" [ref=e127]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Agarwal,+A
+      - text: ","
+      - link "Anton Eliseev" [ref=e128]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Eliseev,+A
+      - text: ","
+      - link "Antonia Calvi" [ref=e129]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Calvi,+A
+      - text: ","
+      - link "Arjun Majumdar" [ref=e130]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Majumdar,+A
+      - text: ","
+      - link "Arthur Fournier" [ref=e131]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Fournier,+A
+      - text: ","
+      - link "Artjom Joosen" [ref=e132]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Joosen,+A
+      - text: ","
+      - link "Avi Sooriyarachchi" [ref=e133]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sooriyarachchi,+A
+      - text: ","
+      - link "Aysenur Karaduman Utkur" [ref=e134]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Utkur,+A+K
+      - text: ","
+      - link "Baptiste Bout" [ref=e135]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Bout,+B
+      - text: ","
+      - link "Baptiste Rozière" [ref=e136]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Rozi%C3%A8re,+B
+      - text: ","
+      - link "Baudouin De Monicault" [ref=e137]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=De+Monicault,+B
+      - text: ","
+      - link "Benjamin Tibi" [ref=e138]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tibi,+B
+      - text: ","
+      - link "Bowen Yang" [ref=e139]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yang,+B
+      - text: ","
+      - link "Charlotte Cronjäger" [ref=e140]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Cronj%C3%A4ger,+C
+      - text: ","
+      - link "Clémence Lanfranchi" [ref=e141]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lanfranchi,+C
+      - text: ","
+      - link "Connor Chen" [ref=e142]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Chen,+C
+      - text: ","
+      - link "Corentin Barreau" [ref=e143]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Barreau,+C
+      - text: ","
+      - link "Corentin Sautier" [ref=e144]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sautier,+C
+      - text: ","
+      - link "Cyprien Courtot" [ref=e145]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Courtot,+C
+      - text: ","
+      - link "Darius Dabert" [ref=e146]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Dabert,+D
+      - text: ","
+      - link "Diego de las Casas" [ref=e147]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=de+las+Casas,+D
+      - text: ","
+      - link "Elizaveta Demyanenko" [ref=e148]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Demyanenko,+E
+      - text: ","
+      - link "Elliot Chane-Sane" [ref=e149]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Chane-Sane,+E
+      - text: ","
+      - link "Emmanuel Gottlob" [ref=e150]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gottlob,+E
+      - text: ","
+      - link "Enguerrand Paquin" [ref=e151]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Paquin,+E
+      - text: ","
+      - link "Etienne Goffinet" [ref=e152]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Goffinet,+E
+      - text: ","
+      - link "Fabien Niel" [ref=e153]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Niel,+F
+      - text: ","
+      - link "Faruk Ahmed" [ref=e154]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ahmed,+F
+      - text: ","
+      - link "Federico Baldassarre" [ref=e155]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Baldassarre,+F
+      - text: ","
+      - link "Gabrielle Berrada" [ref=e156]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Berrada,+G
+      - text: ","
+      - link "Gaëtan Ecrepont" [ref=e157]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ecrepont,+G
+      - text: ","
+      - link "Gauthier Guinet" [ref=e158]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Guinet,+G
+      - text: ","
+      - link "Genevieve Hayes" [ref=e159]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Hayes,+G
+      - text: ","
+      - link "Georgii Novikov" [ref=e160]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Novikov,+G
+      - text: ","
+      - link "Giada Pistilli" [ref=e161]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Pistilli,+G
+      - text: ","
+      - link "Guillaume Kunsch" [ref=e162]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kunsch,+G
+      - text: ","
+      - link "Guillaume Martin" [ref=e163]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Martin,+G
+      - text: ","
+      - link "Guillaume Raille" [ref=e164]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Raille,+G
+      - text: ","
+      - link "Gunjan Dhanuka" [ref=e165]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Dhanuka,+G
+      - text: ","
+      - link "Gunshi Gupta" [ref=e166]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gupta,+G
+      - text: ","
+      - link "Han Zhou" [ref=e167]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhou,+H
+      - text: ","
+      - link "Harshil Shah" [ref=e168]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Shah,+H
+      - text: ","
+      - link "Hope McGovern" [ref=e169]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=McGovern,+H
+      - text: ","
+      - link "Hugo Thimonier" [ref=e170]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Thimonier,+H
+      - text: ","
+      - link "Indraneel Mukherjee" [ref=e171]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Mukherjee,+I
+      - text: ","
+      - link "Irene Zhang" [ref=e172]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+I
+      - text: ","
+      - link "Jacques Sun" [ref=e173]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sun,+J
+      - text: ","
+      - link "Jan Ludziejewski" [ref=e174]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ludziejewski,+J
+      - text: ","
+      - link "Jason Rute" [ref=e175]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Rute,+J
+      - text: ","
+      - link "Jérémie Dentan" [ref=e176]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Dentan,+J
+      - text: ","
+      - link "Joachim Studnia" [ref=e177]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Studnia,+J
+      - text: ","
+      - link "Jonas Amar" [ref=e178]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Amar,+J
+      - text: ","
+      - link "Joséphine Delas" [ref=e179]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Delas,+J
+      - text: ","
+      - link "Josselin Somerville Roberts" [ref=e180]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Roberts,+J+S
+      - text: ","
+      - link "Julien Tauran" [ref=e181]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tauran,+J
+      - text: ","
+      - link "Karmesh Yadav" [ref=e182]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yadav,+K
+      - text: ","
+      - link "Kartik Khandelwal" [ref=e183]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Khandelwal,+K
+      - text: ","
+      - link "Kilian Tep" [ref=e184]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tep,+K
+      - text: ","
+      - link "Kush Jain" [ref=e185]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Jain,+K
+      - text: ","
+      - link "Laurence Aitchison" [ref=e186]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Aitchison,+L
+      - text: ","
+      - link "Laurent Fainsin" [ref=e187]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Fainsin,+L
+      - text: ","
+      - link "Léonard Blier" [ref=e188]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Blier,+L
+      - text: ","
+      - link "Lingxiao Zhao" [ref=e189]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhao,+L
+      - text: ","
+      - link "Louis Martin" [ref=e190]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Martin,+L
+      - text: ","
+      - link "Lucile Saulnier" [ref=e191]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Saulnier,+L
+      - text: ","
+      - link "Luyu Gao" [ref=e192]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gao,+L
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[7]"
+      - link "arXiv:2603.25498" [ref=e193]:
+        - /url: /abs/2603.25498
+      - text: "["
+      - link "pdf" [ref=e194] [nth=6]:
+        - /url: /pdf/2603.25498
+      - text: ","
+      - link "html" [ref=e195] [nth=5]:
+        - /url: https://arxiv.org/html/2603.25498v1
+      - text: ","
+      - link "other" [ref=e196] [nth=6]:
+        - /url: /format/2603.25498
+      - text: "]"
+    - definition:
+      - text: "EcoThink: A Green Adaptive Inference Framework for Sustainable and Accessible Agents"
+      - link "Linxiao Li" [ref=e197]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+L
+      - text: ","
+      - link "Zhixiang Lu" [ref=e198]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lu,+Z
+      - text: "Comments: Accepted by WWW 2026 Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[8]"
+      - link "arXiv:2603.25480" [ref=e199]:
+        - /url: /abs/2603.25480
+      - text: "["
+      - link "pdf" [ref=e200] [nth=7]:
+        - /url: /pdf/2603.25480
+      - text: ","
+      - link "other" [ref=e201] [nth=7]:
+        - /url: /format/2603.25480
+      - text: "]"
+    - definition:
+      - text: Retraining as Approximate Bayesian Inference
+      - link "Harrison Katz" [ref=e202]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Katz,+H
+      - text: "Subjects: Artificial Intelligence (cs.AI); Statistics Theory (math.ST)"
+    - term:
+      - text: "[9]"
+      - link "arXiv:2603.25450" [ref=e203]:
+        - /url: /abs/2603.25450
+      - text: "["
+      - link "pdf" [ref=e204] [nth=8]:
+        - /url: /pdf/2603.25450
+      - text: ","
+      - link "html" [ref=e205] [nth=6]:
+        - /url: https://arxiv.org/html/2603.25450v1
+      - text: ","
+      - link "other" [ref=e206] [nth=8]:
+        - /url: /format/2603.25450
+      - text: "]"
+    - definition:
+      - text: Cross-Model Disagreement as a Label-Free Correctness Signal
+      - link "Matt Gorbett" [ref=e207]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gorbett,+M
+      - text: ","
+      - link "Suman Jana" [ref=e208]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Jana,+S
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[10]"
+      - link "arXiv:2603.25415" [ref=e209]:
+        - /url: /abs/2603.25415
+      - text: "["
+      - link "pdf" [ref=e210] [nth=9]:
+        - /url: /pdf/2603.25415
+      - text: ","
+      - link "html" [ref=e211] [nth=7]:
+        - /url: https://arxiv.org/html/2603.25415v1
+      - text: ","
+      - link "other" [ref=e212] [nth=9]:
+        - /url: /format/2603.25415
+      - text: "]"
+    - definition:
+      - text: Modernising Reinforcement Learning-Based Navigation for Embodied Semantic Scene Graph Generation
+      - link "Roman Kueble" [ref=e213]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kueble,+R
+      - text: ","
+      - link "Marco Hueller" [ref=e214]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Hueller,+M
+      - text: ","
+      - link "Mrunmai Phatak" [ref=e215]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Phatak,+M
+      - text: ","
+      - link "Rainer Lienhart" [ref=e216]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lienhart,+R
+      - text: ","
+      - link "Joerg Haehner" [ref=e217]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Haehner,+J
+      - text: "Subjects: Artificial Intelligence (cs.AI); Robotics (cs.RO)"
+    - term:
+      - text: "[11]"
+      - link "arXiv:2603.25412" [ref=e218]:
+        - /url: /abs/2603.25412
+      - text: "["
+      - link "pdf" [ref=e219] [nth=10]:
+        - /url: /pdf/2603.25412
+      - text: ","
+      - link "html" [ref=e220] [nth=8]:
+        - /url: https://arxiv.org/html/2603.25412v1
+      - text: ","
+      - link "other" [ref=e221] [nth=10]:
+        - /url: /format/2603.25412
+      - text: "]"
+    - definition:
+      - text: "Beyond Content Safety: Real-Time Monitoring for Reasoning Vulnerabilities in Large Language Models"
+      - link "Xunguang Wang" [ref=e222]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+X
+      - text: ","
+      - link "Yuguang Zhou" [ref=e223]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhou,+Y
+      - text: ","
+      - link "Qingyue Wang" [ref=e224]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+Q
+      - text: ","
+      - link "Zongjie Li" [ref=e225]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+Z
+      - text: ","
+      - link "Ruixuan Huang" [ref=e226]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Huang,+R
+      - text: ","
+      - link "Zhenlan Ji" [ref=e227]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ji,+Z
+      - text: ","
+      - link "Pingchuan Ma" [ref=e228]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ma,+P
+      - text: ","
+      - link "Shuai Wang" [ref=e229]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+S
+      - text: "Subjects: Artificial Intelligence (cs.AI); Cryptography and Security (cs.CR)"
+    - term:
+      - text: "[12]"
+      - link "arXiv:2603.25379" [ref=e230]:
+        - /url: /abs/2603.25379
+      - text: "["
+      - link "pdf" [ref=e231] [nth=11]:
+        - /url: /pdf/2603.25379
+      - text: ","
+      - link "other" [ref=e232] [nth=11]:
+        - /url: /format/2603.25379
+      - text: "]"
+    - definition:
+      - text: Does Structured Intent Representation Generalize? A Cross-Language, Cross-Model Empirical Study of 5W3H Prompting
+      - link "Peng Gang" [ref=e233]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gang,+P
+      - text: "Comments: 28 pages, figures, tables, and appendix. Follow-up empirical study extending prior work on PPS and 5W3H structured prompting to cross-language, cross-model, and AI-assisted authoring settings Subjects: Artificial Intelligence (cs.AI); Human-Computer Interaction (cs.HC)"
+    - term:
+      - text: "[13]"
+      - link "arXiv:2603.25356" [ref=e234]:
+        - /url: /abs/2603.25356
+      - text: "["
+      - link "pdf" [ref=e235] [nth=12]:
+        - /url: /pdf/2603.25356
+      - text: ","
+      - link "html" [ref=e236] [nth=9]:
+        - /url: https://arxiv.org/html/2603.25356v1
+      - text: ","
+      - link "other" [ref=e237] [nth=12]:
+        - /url: /format/2603.25356
+      - text: "]"
+    - definition:
+      - text: "4OPS: Structural Difficulty Modeling in Integer Arithmetic Puzzles"
+      - link "Yunus E. Zeytuncu" [ref=e238]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zeytuncu,+Y+E
+      - text: "Comments: Accepted at AIED 2026 Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[14]"
+      - link "arXiv:2603.25334" [ref=e239]:
+        - /url: /abs/2603.25334
+      - text: "["
+      - link "pdf" [ref=e240] [nth=13]:
+        - /url: /pdf/2603.25334
+      - text: ","
+      - link "html" [ref=e241] [nth=10]:
+        - /url: https://arxiv.org/html/2603.25334v1
+      - text: ","
+      - link "other" [ref=e242] [nth=13]:
+        - /url: /format/2603.25334
+      - text: "]"
+    - definition:
+      - text: Agentic Trust Coordination for Federated Learning through Adaptive Thresholding and Autonomous Decision Making in Sustainable and Resilient Industrial Networks
+      - link "Paul Shepherd" [ref=e243]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Shepherd,+P
+      - text: ","
+      - link "Tasos Dagiuklas" [ref=e244]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Dagiuklas,+T
+      - text: ","
+      - link "Bugra Alkan" [ref=e245]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Alkan,+B
+      - text: ","
+      - link "Jonathan Rodriguez" [ref=e246]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Rodriguez,+J
+      - text: "Subjects: Artificial Intelligence (cs.AI); Machine Learning (cs.LG)"
+    - term:
+      - text: "[15]"
+      - link "arXiv:2603.25328" [ref=e247]:
+        - /url: /abs/2603.25328
+      - text: "["
+      - link "pdf" [ref=e248] [nth=14]:
+        - /url: /pdf/2603.25328
+      - text: ","
+      - link "html" [ref=e249] [nth=11]:
+        - /url: https://arxiv.org/html/2603.25328v1
+      - text: ","
+      - link "other" [ref=e250] [nth=14]:
+        - /url: /format/2603.25328
+      - text: "]"
+    - definition:
+      - text: Macroscopic Characteristics of Mixed Traffic Flow with Deep Reinforcement Learning Based Automated and Human-Driven Vehicles
+      - link "Pankaj Kumar" [ref=e251]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kumar,+P
+      - text: ","
+      - link "Pranamesh Chakraborty" [ref=e252]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Chakraborty,+P
+      - text: ","
+      - link "Subrahmanya Swamy Peruru" [ref=e253]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Peruru,+S+S
+      - text: "Comments: Total 5 figures and 2 table Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[16]"
+      - link "arXiv:2603.25326" [ref=e254]:
+        - /url: /abs/2603.25326
+      - text: "["
+      - link "pdf" [ref=e255] [nth=15]:
+        - /url: /pdf/2603.25326
+      - text: ","
+      - link "html" [ref=e256] [nth=12]:
+        - /url: https://arxiv.org/html/2603.25326v1
+      - text: ","
+      - link "other" [ref=e257] [nth=15]:
+        - /url: /format/2603.25326
+      - text: "]"
+    - definition:
+      - text: Evaluating Language Models for Harmful Manipulation
+      - link "Canfer Akbulut" [ref=e258]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Akbulut,+C
+      - text: ","
+      - link "Rasmi Elasmar" [ref=e259]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Elasmar,+R
+      - text: ","
+      - link "Abhishek Roy" [ref=e260]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Roy,+A
+      - text: ","
+      - link "Anthony Payne" [ref=e261]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Payne,+A
+      - text: ","
+      - link "Priyanka Suresh" [ref=e262]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Suresh,+P
+      - text: ","
+      - link "Lujain Ibrahim" [ref=e263]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ibrahim,+L
+      - text: ","
+      - link "Seliem El-Sayed" [ref=e264]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=El-Sayed,+S
+      - text: ","
+      - link "Charvi Rastogi" [ref=e265]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Rastogi,+C
+      - text: ","
+      - link "Ashyana Kachra" [ref=e266]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kachra,+A
+      - text: ","
+      - link "Will Hawkins" [ref=e267]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Hawkins,+W
+      - text: ","
+      - link "Kristian Lum" [ref=e268]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lum,+K
+      - text: ","
+      - link "Laura Weidinger" [ref=e269]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Weidinger,+L
+      - text: "Subjects: Artificial Intelligence (cs.AI); Computers and Society (cs.CY)"
+    - term:
+      - text: "[17]"
+      - link "arXiv:2603.25293" [ref=e270]:
+        - /url: /abs/2603.25293
+      - text: "["
+      - link "pdf" [ref=e271] [nth=16]:
+        - /url: /pdf/2603.25293
+      - text: ","
+      - link "html" [ref=e272] [nth=13]:
+        - /url: https://arxiv.org/html/2603.25293v1
+      - text: ","
+      - link "other" [ref=e273] [nth=16]:
+        - /url: /format/2603.25293
+      - text: "]"
+    - definition:
+      - text: "DAGverse: Building Document-Grounded Semantic DAGs from Scientific Papers"
+      - link "Shu Wan" [ref=e274]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wan,+S
+      - text: ","
+      - link "Saketh Vishnubhatla" [ref=e275]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Vishnubhatla,+S
+      - text: ","
+      - link "Iskander Kushbay" [ref=e276]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kushbay,+I
+      - text: ","
+      - link "Tom Heffernan" [ref=e277]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Heffernan,+T
+      - text: ","
+      - link "Aaron Belikoff" [ref=e278]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Belikoff,+A
+      - text: ","
+      - link "Raha Moraffah" [ref=e279]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Moraffah,+R
+      - text: ","
+      - link "Huan Liu" [ref=e280]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+H
+      - text: "Subjects: Artificial Intelligence (cs.AI); Computation and Language (cs.CL)"
+    - term:
+      - text: "[18]"
+      - link "arXiv:2603.25284" [ref=e281]:
+        - /url: /abs/2603.25284
+      - text: "["
+      - link "pdf" [ref=e282] [nth=17]:
+        - /url: /pdf/2603.25284
+      - text: ","
+      - link "html" [ref=e283] [nth=14]:
+        - /url: https://arxiv.org/html/2603.25284v1
+      - text: ","
+      - link "other" [ref=e284] [nth=17]:
+        - /url: /format/2603.25284
+      - text: "]"
+    - definition:
+      - text: "SliderQuant: Accurate Post-Training Quantization for LLMs"
+      - link "Shigeng Wang" [ref=e285]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+S
+      - text: ","
+      - link "Chao Li" [ref=e286]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+C
+      - text: ","
+      - link "Yangyuxuan Kang" [ref=e287]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kang,+Y
+      - text: ","
+      - link "Jiawei Fan" [ref=e288]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Fan,+J
+      - text: ","
+      - link "Zhonghong Ou" [ref=e289]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ou,+Z
+      - text: ","
+      - link "Anbang Yao" [ref=e290]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yao,+A
+      - text: "Comments: This work is accepted to ICLR 2026. Code is available at"
+      - link "this https URL" [ref=e291]:
+        - /url: https://github.com/deep-optimization/SliderQuant
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[19]"
+      - link "arXiv:2603.25283" [ref=e292]:
+        - /url: /abs/2603.25283
+      - text: "["
+      - link "pdf" [ref=e293] [nth=18]:
+        - /url: /pdf/2603.25283
+      - text: ","
+      - link "other" [ref=e294] [nth=18]:
+        - /url: /format/2603.25283
+      - text: "]"
+    - definition:
+      - text: A Gait Foundation Model Predicts Multi-System Health Phenotypes from 3D Skeletal Motion
+      - link "Adam Gabet" [ref=e295]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gabet,+A
+      - text: ","
+      - link "Sarah Kohn" [ref=e296]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kohn,+S
+      - text: ","
+      - link "Guy Lutsker" [ref=e297]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lutsker,+G
+      - text: ","
+      - link "Shira Gelman" [ref=e298]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gelman,+S
+      - text: ","
+      - link "Anastasia Godneva" [ref=e299]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Godneva,+A
+      - text: ","
+      - link "Gil Sasson" [ref=e300]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sasson,+G
+      - text: ","
+      - link "Arad Zulti" [ref=e301]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zulti,+A
+      - text: ","
+      - link "David Krongauz" [ref=e302]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Krongauz,+D
+      - text: ","
+      - link "Rotem Shaulitch" [ref=e303]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Shaulitch,+R
+      - text: ","
+      - link "Assaf Rotem" [ref=e304]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Rotem,+A
+      - text: ","
+      - link "Ohad Doron" [ref=e305]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Doron,+O
+      - text: ","
+      - link "Yuval Brodsky" [ref=e306]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Brodsky,+Y
+      - text: ","
+      - link "Adina Weinberger" [ref=e307]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Weinberger,+A
+      - text: ","
+      - link "Eran Segal" [ref=e308]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Segal,+E
+      - text: "Comments: Preprint. Under review Subjects: Artificial Intelligence (cs.AI); Quantitative Methods (q-bio.QM)"
+    - term:
+      - text: "[20]"
+      - link "arXiv:2603.25273" [ref=e309]:
+        - /url: /abs/2603.25273
+      - text: "["
+      - link "pdf" [ref=e310] [nth=19]:
+        - /url: /pdf/2603.25273
+      - text: ","
+      - link "other" [ref=e311] [nth=19]:
+        - /url: /format/2603.25273
+      - text: "]"
+    - definition:
+      - text: Distribution and Clusters Approximations as Abstract Domains in Probabilistic Abstract Interpretation to Neural Network Analysis
+      - link "Zhuofan Zhang" [ref=e312]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+Z
+      - text: ","
+      - link "Herbert Wiklicky" [ref=e313]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wiklicky,+H
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[21]"
+      - link "arXiv:2603.25266" [ref=e314]:
+        - /url: /abs/2603.25266
+      - text: "["
+      - link "pdf" [ref=e315] [nth=20]:
+        - /url: /pdf/2603.25266
+      - text: ","
+      - link "html" [ref=e316] [nth=15]:
+        - /url: https://arxiv.org/html/2603.25266v1
+      - text: ","
+      - link "other" [ref=e317] [nth=20]:
+        - /url: /format/2603.25266
+      - text: "]"
+    - definition:
+      - text: Probabilistic Abstract Interpretation on Neural Networks via Grids Approximation
+      - link "Zhuofan Zhang" [ref=e318] [nth=1]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+Z
+      - text: ","
+      - link "Herbert Wiklicky" [ref=e319] [nth=1]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wiklicky,+H
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[22]"
+      - link "arXiv:2603.25197" [ref=e320]:
+        - /url: /abs/2603.25197
+      - text: "["
+      - link "pdf" [ref=e321] [nth=21]:
+        - /url: /pdf/2603.25197
+      - text: ","
+      - link "html" [ref=e322] [nth=16]:
+        - /url: https://arxiv.org/html/2603.25197v1
+      - text: ","
+      - link "other" [ref=e323] [nth=21]:
+        - /url: /format/2603.25197
+      - text: "]"
+    - definition:
+      - text: "The Competence Shadow: Theory and Bounds of AI Assistance in Safety Engineering"
+      - link "Umair Siddique" [ref=e324]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Siddique,+U
+      - text: "Comments: 8 Pages, 3 Figures, 2 table Subjects: Artificial Intelligence (cs.AI); Emerging Technologies (cs.ET); Human-Computer Interaction (cs.HC); Robotics (cs.RO); Software Engineering (cs.SE)"
+    - term:
+      - text: "[23]"
+      - link "arXiv:2603.25158" [ref=e325]:
+        - /url: /abs/2603.25158
+      - text: "["
+      - link "pdf" [ref=e326] [nth=22]:
+        - /url: /pdf/2603.25158
+      - text: ","
+      - link "html" [ref=e327] [nth=17]:
+        - /url: https://arxiv.org/html/2603.25158v1
+      - text: ","
+      - link "other" [ref=e328] [nth=22]:
+        - /url: /format/2603.25158
+      - text: "]"
+    - definition:
+      - text: "Trace2Skill: Distill Trajectory-Local Lessons into Transferable Agent Skills"
+      - link "Jingwei Ni" [ref=e329]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ni,+J
+      - text: ","
+      - link "Yihao Liu" [ref=e330]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+Y
+      - text: ","
+      - link "Xinpeng Liu" [ref=e331]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+X
+      - text: ","
+      - link "Yutao Sun" [ref=e332]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sun,+Y
+      - text: ","
+      - link "Mengyu Zhou" [ref=e333]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhou,+M
+      - text: ","
+      - link "Pengyu Cheng" [ref=e334]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Cheng,+P
+      - text: ","
+      - link "Dexin Wang" [ref=e335]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+D
+      - text: ","
+      - link "Xiaoxi Jiang" [ref=e336]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Jiang,+X
+      - text: ","
+      - link "Guanjun Jiang" [ref=e337]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Jiang,+G
+      - text: "Comments: Work in Progress Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[24]"
+      - link "arXiv:2603.25152" [ref=e338]:
+        - /url: /abs/2603.25152
+      - text: "["
+      - link "pdf" [ref=e339] [nth=23]:
+        - /url: /pdf/2603.25152
+      - text: ","
+      - link "html" [ref=e340] [nth=18]:
+        - /url: https://arxiv.org/html/2603.25152v1
+      - text: ","
+      - link "other" [ref=e341] [nth=23]:
+        - /url: /format/2603.25152
+      - text: "]"
+    - definition:
+      - text: "UniAI-GraphRAG: Synergizing Ontology-Guided Extraction, Multi-Dimensional Clustering, and Dual-Channel Fusion for Robust Multi-Hop Reasoning"
+      - link "Jie Wang" [ref=e342]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+J
+      - text: ","
+      - link "Honghua Huang" [ref=e343]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Huang,+H
+      - text: ","
+      - link "Xi Ge" [ref=e344]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ge,+X
+      - text: ","
+      - link "Jianhui Su" [ref=e345]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Su,+J
+      - text: ","
+      - link "Wen Liu" [ref=e346]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+W
+      - text: ","
+      - link "Shiguo Lian" [ref=e347]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lian,+S
+      - text: "Subjects: Artificial Intelligence (cs.AI); Information Retrieval (cs.IR)"
+    - term:
+      - text: "[25]"
+      - link "arXiv:2603.25133" [ref=e348]:
+        - /url: /abs/2603.25133
+      - text: "["
+      - link "pdf" [ref=e349] [nth=24]:
+        - /url: /pdf/2603.25133
+      - text: ","
+      - link "html" [ref=e350] [nth=19]:
+        - /url: https://arxiv.org/html/2603.25133v1
+      - text: ","
+      - link "other" [ref=e351] [nth=24]:
+        - /url: /format/2603.25133
+      - text: "]"
+    - definition:
+      - text: "RubricEval: A Rubric-Level Meta-Evaluation Benchmark for LLM Judges in Instruction Following"
+      - link "Tianjun Pan" [ref=e352]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Pan,+T
+      - text: ","
+      - link "Xuan Lin" [ref=e353]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lin,+X
+      - text: ","
+      - link "Wenyan Yang" [ref=e354]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yang,+W
+      - text: ","
+      - link "Qianyu He" [ref=e355]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=He,+Q
+      - text: ","
+      - link "Shisong Chen" [ref=e356]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Chen,+S
+      - text: ","
+      - link "Licai Qi" [ref=e357]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Qi,+L
+      - text: ","
+      - link "Wanqing Xu" [ref=e358]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Xu,+W
+      - text: ","
+      - link "Hongwei Feng" [ref=e359]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Feng,+H
+      - text: ","
+      - link "Bo Xu" [ref=e360]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Xu,+B
+      - text: ","
+      - link "Yanghua Xiao" [ref=e361]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Xiao,+Y
+      - text: "Comments: 9 pages, 5 figures Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[26]"
+      - link "arXiv:2603.25115" [ref=e362]:
+        - /url: /abs/2603.25115
+      - text: "["
+      - link "pdf" [ref=e363] [nth=25]:
+        - /url: /pdf/2603.25115
+      - text: ","
+      - link "html" [ref=e364] [nth=20]:
+        - /url: https://arxiv.org/html/2603.25115v1
+      - text: ","
+      - link "other" [ref=e365] [nth=25]:
+        - /url: /format/2603.25115
+      - text: "]"
+    - definition:
+      - text: "When Sensing Varies with Contexts: Context-as-Transform for Tactile Few-Shot Class-Incremental Learning"
+      - link "Yifeng Lin" [ref=e366]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lin,+Y
+      - text: ","
+      - link "Aiping Huang" [ref=e367]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Huang,+A
+      - text: ","
+      - link "Wenxi Liu" [ref=e368]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+W
+      - text: ","
+      - link "Si Wu" [ref=e369]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wu,+S
+      - text: ","
+      - link "Tiesong Zhao" [ref=e370]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhao,+T
+      - text: ","
+      - link "Zheng-Jun Zha" [ref=e371]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zha,+Z
+      - text: "Comments: 11 pages, 6 figures Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[27]"
+      - link "arXiv:2603.25097" [ref=e372]:
+        - /url: /abs/2603.25097
+      - text: "["
+      - link "pdf" [ref=e373] [nth=26]:
+        - /url: /pdf/2603.25097
+      - text: ","
+      - link "html" [ref=e374] [nth=21]:
+        - /url: https://arxiv.org/html/2603.25097v1
+      - text: ","
+      - link "other" [ref=e375] [nth=26]:
+        - /url: /format/2603.25097
+      - text: "]"
+    - definition:
+      - text: "ElephantBroker: A Knowledge-Grounded Cognitive Runtime for Trustworthy AI Agents"
+      - link "Cristian Lupascu" [ref=e376]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lupascu,+C
+      - text: ","
+      - link "Alexandru Lupascu" [ref=e377]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lupascu,+A
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[28]"
+      - link "arXiv:2603.25075" [ref=e378]:
+        - /url: /abs/2603.25075
+      - text: "["
+      - link "pdf" [ref=e379] [nth=27]:
+        - /url: /pdf/2603.25075
+      - text: ","
+      - link "html" [ref=e380] [nth=22]:
+        - /url: https://arxiv.org/html/2603.25075v1
+      - text: ","
+      - link "other" [ref=e381] [nth=27]:
+        - /url: /format/2603.25075
+      - text: "]"
+    - definition:
+      - text: Sparse Visual Thought Circuits in Vision-Language Models
+      - link "Yunpeng Zhou" [ref=e382]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhou,+Y
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[29]"
+      - link "arXiv:2603.25046" [ref=e383]:
+        - /url: /abs/2603.25046
+      - text: "["
+      - link "pdf" [ref=e384] [nth=28]:
+        - /url: /pdf/2603.25046
+      - text: ","
+      - link "html" [ref=e385] [nth=23]:
+        - /url: https://arxiv.org/html/2603.25046v1
+      - text: ","
+      - link "other" [ref=e386] [nth=28]:
+        - /url: /format/2603.25046
+      - text: "]"
+    - definition:
+      - text: "MP-MoE: Matrix Profile-Guided Mixture of Experts for Precipitation Forecasting"
+      - link "Huyen Ngoc Tran" [ref=e387]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tran,+H+N
+      - text: ","
+      - link "Dung Trung Tran" [ref=e388]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tran,+D+T
+      - text: ","
+      - link "Hong Nguyen" [ref=e389]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Nguyen,+H
+      - text: ","
+      - link "Xuan Vu Phan" [ref=e390]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Phan,+X+V
+      - text: ","
+      - link "Nam-Phong Nguyen" [ref=e391]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Nguyen,+N
+      - text: "Subjects: Artificial Intelligence (cs.AI); Machine Learning (cs.LG)"
+    - term:
+      - text: "[30]"
+      - link "arXiv:2603.25035" [ref=e392]:
+        - /url: /abs/2603.25035
+      - text: "["
+      - link "pdf" [ref=e393] [nth=29]:
+        - /url: /pdf/2603.25035
+      - text: ","
+      - link "html" [ref=e394] [nth=24]:
+        - /url: https://arxiv.org/html/2603.25035v1
+      - text: ","
+      - link "other" [ref=e395] [nth=29]:
+        - /url: /format/2603.25035
+      - text: "]"
+    - definition:
+      - text: Mechanistically Interpreting Compression in Vision-Language Models
+      - link "Veeraraju Elluru" [ref=e396]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Elluru,+V
+      - text: ","
+      - link "Arth Singh" [ref=e397]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Singh,+A
+      - text: ","
+      - link "Roberto Aguero" [ref=e398]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Aguero,+R
+      - text: ","
+      - link "Ajay Agarwal" [ref=e399]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Agarwal,+A
+      - text: ","
+      - link "Debojyoti Das" [ref=e400]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Das,+D
+      - text: ","
+      - link "Hreetam Paul" [ref=e401]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Paul,+H
+      - text: "Comments: 15 pages, 7 figures, 12 tables Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[31]"
+      - link "arXiv:2603.25031" [ref=e402]:
+        - /url: /abs/2603.25031
+      - text: "["
+      - link "pdf" [ref=e403] [nth=30]:
+        - /url: /pdf/2603.25031
+      - text: ","
+      - link "html" [ref=e404] [nth=25]:
+        - /url: https://arxiv.org/html/2603.25031v1
+      - text: ","
+      - link "other" [ref=e405] [nth=30]:
+        - /url: /format/2603.25031
+      - text: "]"
+    - definition:
+      - text: "From Stateless to Situated: Building a Psychological World for LLM-Based Emotional Support"
+      - link "Boning Zhao" [ref=e406]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhao,+B
+      - text: ","
+      - link "Clover Hu" [ref=e407]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Hu,+C
+      - text: ","
+      - link "Xinnuo Li" [ref=e408]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+X
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[32]"
+      - link "arXiv:2603.25025" [ref=e409]:
+        - /url: /abs/2603.25025
+      - text: "["
+      - link "pdf" [ref=e410] [nth=31]:
+        - /url: /pdf/2603.25025
+      - text: ","
+      - link "html" [ref=e411] [nth=26]:
+        - /url: https://arxiv.org/html/2603.25025v1
+      - text: ","
+      - link "other" [ref=e412] [nth=31]:
+        - /url: /format/2603.25025
+      - text: "]"
+    - definition:
+      - text: System-Anchored Knee Estimation for Low-Cost Context Window Selection in PDE Forecasting
+      - link "Wenshuo Wang" [ref=e413]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+W
+      - text: ","
+      - link "Fan Zhang" [ref=e414]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+F
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[33]"
+      - link "arXiv:2603.25022" [ref=e415]:
+        - /url: /abs/2603.25022
+      - text: "["
+      - link "pdf" [ref=e416] [nth=32]:
+        - /url: /pdf/2603.25022
+      - text: ","
+      - link "html" [ref=e417] [nth=27]:
+        - /url: https://arxiv.org/html/2603.25022v1
+      - text: ","
+      - link "other" [ref=e418] [nth=32]:
+        - /url: /format/2603.25022
+      - text: "]"
+    - definition:
+      - text: A Public Theory of Distillation Resistance via Constraint-Coupled Reasoning Architectures
+      - link "Peng Wei" [ref=e419]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wei,+P
+      - text: ","
+      - link "Wesley Shu" [ref=e420]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Shu,+W
+      - text: "Subjects: Artificial Intelligence (cs.AI); Cryptography and Security (cs.CR); Computers and Society (cs.CY); Machine Learning (cs.LG)"
+    - term:
+      - text: "[34]"
+      - link "arXiv:2603.25001" [ref=e421]:
+        - /url: /abs/2603.25001
+      - text: "["
+      - link "pdf" [ref=e422] [nth=33]:
+        - /url: /pdf/2603.25001
+      - text: ","
+      - link "html" [ref=e423] [nth=28]:
+        - /url: https://arxiv.org/html/2603.25001v1
+      - text: ","
+      - link "other" [ref=e424] [nth=33]:
+        - /url: /format/2603.25001
+      - text: "]"
+    - definition:
+      - text: "Rethinking Failure Attribution in Multi-Agent Systems: A Multi-Perspective Benchmark and Evaluation"
+      - link "Yeonjun In" [ref=e425]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=In,+Y
+      - text: ","
+      - link "Mehrab Tanjim" [ref=e426]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tanjim,+M
+      - text: ","
+      - link "Jayakumar Subramanian" [ref=e427]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Subramanian,+J
+      - text: ","
+      - link "Sungchul Kim" [ref=e428]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kim,+S
+      - text: ","
+      - link "Uttaran Bhattacharya" [ref=e429]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Bhattacharya,+U
+      - text: ","
+      - link "Wonjoong Kim" [ref=e430]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kim,+W
+      - text: ","
+      - link "Sangwu Park" [ref=e431]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Park,+S
+      - text: ","
+      - link "Somdeb Sarkhel" [ref=e432]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sarkhel,+S
+      - text: ","
+      - link "Chanyoung Park" [ref=e433]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Park,+C
+      - text: "Comments: Under review Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[35]"
+      - link "arXiv:2603.24967" [ref=e434]:
+        - /url: /abs/2603.24967
+      - text: "["
+      - link "pdf" [ref=e435] [nth=34]:
+        - /url: /pdf/2603.24967
+      - text: ","
+      - link "html" [ref=e436] [nth=29]:
+        - /url: https://arxiv.org/html/2603.24967v1
+      - text: ","
+      - link "other" [ref=e437] [nth=34]:
+        - /url: /format/2603.24967
+      - text: "]"
+    - definition:
+      - text: The Anatomy of Uncertainty in LLMs
+      - link "Aditya Taparia" [ref=e438]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Taparia,+A
+      - text: ","
+      - link "Ransalu Senanayake" [ref=e439]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Senanayake,+R
+      - text: ","
+      - link "Kowshik Thopalli" [ref=e440]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Thopalli,+K
+      - text: ","
+      - link "Vivek Narayanaswamy" [ref=e441]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Narayanaswamy,+V
+      - text: "Comments: 10 pages, 6 figures Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[36]"
+      - link "arXiv:2603.24963" [ref=e442]:
+        - /url: /abs/2603.24963
+      - text: "["
+      - link "pdf" [ref=e443] [nth=35]:
+        - /url: /pdf/2603.24963
+      - text: ","
+      - link "html" [ref=e444] [nth=30]:
+        - /url: https://arxiv.org/html/2603.24963v1
+      - text: ","
+      - link "other" [ref=e445] [nth=35]:
+        - /url: /format/2603.24963
+      - text: "]"
+    - definition:
+      - text: "Design Once, Deploy at Scale: Template-Driven ML Development for Large Model Ecosystems"
+      - link "Jiang Liu" [ref=e446]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+J
+      - text: ","
+      - link "John Martabano Landy" [ref=e447]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Landy,+J+M
+      - text: ","
+      - link "Yao Xuan" [ref=e448]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Xuan,+Y
+      - text: ","
+      - link "Swamy Muddu" [ref=e449]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Muddu,+S
+      - text: ","
+      - link "Nhat Le" [ref=e450]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Le,+N
+      - text: ","
+      - link "Munaf Sahaf" [ref=e451]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sahaf,+M
+      - text: ","
+      - link "Luc Kien Hang" [ref=e452]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Hang,+L+K
+      - text: ","
+      - link "Rupinder Khandpour" [ref=e453]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Khandpour,+R
+      - text: ","
+      - link "Kevin De Angeli" [ref=e454]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=De+Angeli,+K
+      - text: ","
+      - link "Chang Yang" [ref=e455]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yang,+C
+      - text: ","
+      - link "Shouyuan Chen" [ref=e456]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Chen,+S
+      - text: ","
+      - link "Shiblee Sadik" [ref=e457]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sadik,+S
+      - text: ","
+      - link "Ani Agrawal" [ref=e458]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Agrawal,+A
+      - text: ","
+      - link "Djordje Gligorijevic" [ref=e459]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Gligorijevic,+D
+      - text: ","
+      - link "Jingzheng Qin" [ref=e460]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Qin,+J
+      - text: ","
+      - link "Peggy Yao" [ref=e461]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yao,+P
+      - text: ","
+      - link "Alireza Vahdatpour" [ref=e462]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Vahdatpour,+A
+      - text: "Subjects: Artificial Intelligence (cs.AI); Machine Learning (cs.LG)"
+    - term:
+      - text: "[37]"
+      - link "arXiv:2603.24961" [ref=e463]:
+        - /url: /abs/2603.24961
+      - text: "["
+      - link "pdf" [ref=e464] [nth=36]:
+        - /url: /pdf/2603.24961
+      - text: ","
+      - link "html" [ref=e465] [nth=31]:
+        - /url: https://arxiv.org/html/2603.24961v1
+      - text: ","
+      - link "other" [ref=e466] [nth=36]:
+        - /url: /format/2603.24961
+      - text: "]"
+    - definition:
+      - text: Can MLLMs Read Students' Minds? Unpacking Multimodal Error Analysis in Handwritten Math
+      - link "Dingjie Song" [ref=e467]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Song,+D
+      - text: ","
+      - link "Tianlong Xu" [ref=e468]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Xu,+T
+      - text: ","
+      - link "Yi-Fan Zhang" [ref=e469]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+Y
+      - text: ","
+      - link "Hang Li" [ref=e470]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+H
+      - text: ","
+      - link "Zhiling Yan" [ref=e471]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yan,+Z
+      - text: ","
+      - link "Xing Fan" [ref=e472]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Fan,+X
+      - text: ","
+      - link "Haoyang Li" [ref=e473]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+H
+      - text: ","
+      - link "Lichao Sun" [ref=e474]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sun,+L
+      - text: ","
+      - link "Qingsong Wen" [ref=e475]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wen,+Q
+      - text: "Comments: Accepted by the 27th International Conference on Artificial Intelligence in Education (AIED'26) Subjects: Artificial Intelligence (cs.AI); Computation and Language (cs.CL); Computer Vision and Pattern Recognition (cs.CV)"
+    - term:
+      - text: "[38]"
+      - link "arXiv:2603.24947" [ref=e476]:
+        - /url: /abs/2603.24947
+      - text: "["
+      - link "pdf" [ref=e477] [nth=37]:
+        - /url: /pdf/2603.24947
+      - text: ","
+      - link "html" [ref=e478] [nth=32]:
+        - /url: https://arxiv.org/html/2603.24947v1
+      - text: ","
+      - link "other" [ref=e479] [nth=37]:
+        - /url: /format/2603.24947
+      - text: "]"
+    - definition:
+      - text: "Shopping with a Platform AI Assistant: Who Adopts, When in the Journey, and What For"
+      - link "Se Yan" [ref=e480]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yan,+S
+      - text: ","
+      - link "Han Zhong" [ref=e481]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhong,+H
+      - text: ","
+      - link "Zemin" [ref=e482]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zemin
+      - text: (Zachary)
+      - link "Zhong" [ref=e483]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhong
+      - text: ","
+      - link "Wenyu Zhou" [ref=e484]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhou,+W
+      - text: "Subjects: Artificial Intelligence (cs.AI); General Economics (econ.GN)"
+    - term:
+      - text: "[39]"
+      - link "arXiv:2603.24943" [ref=e485]:
+        - /url: /abs/2603.24943
+      - text: "["
+      - link "pdf" [ref=e486] [nth=38]:
+        - /url: /pdf/2603.24943
+      - text: ","
+      - link "html" [ref=e487] [nth=33]:
+        - /url: https://arxiv.org/html/2603.24943v1
+      - text: ","
+      - link "other" [ref=e488] [nth=38]:
+        - /url: /format/2603.24943
+      - text: "]"
+    - definition:
+      - text: "FinMCP-Bench: Benchmarking LLM Agents for Real-World Financial Tool Use under the Model Context Protocol"
+      - link "Jie Zhu" [ref=e489]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhu,+J
+      - text: ","
+      - link "Yimin Tian" [ref=e490]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tian,+Y
+      - text: ","
+      - link "Boyang Li" [ref=e491]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+B
+      - text: ","
+      - link "Kehao Wu" [ref=e492]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wu,+K
+      - text: ","
+      - link "Zhongzhi Liang" [ref=e493]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liang,+Z
+      - text: ","
+      - link "Junhui Li" [ref=e494]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Li,+J
+      - text: ","
+      - link "Xianyin Zhang" [ref=e495]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+X
+      - text: ","
+      - link "Lifan Guo" [ref=e496]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Guo,+L
+      - text: ","
+      - link "Feng Chen" [ref=e497]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Chen,+F
+      - text: ","
+      - link "Yong Liu" [ref=e498]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+Y
+      - text: ","
+      - link "Chi Zhang" [ref=e499]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zhang,+C
+      - text: "Comments: Accepted by ICASSP 2026 Subjects: Artificial Intelligence (cs.AI); Computation and Language (cs.CL)"
+    - term:
+      - text: "[40]"
+      - link "arXiv:2603.24933" [ref=e500]:
+        - /url: /abs/2603.24933
+      - text: "["
+      - link "pdf" [ref=e501] [nth=39]:
+        - /url: /pdf/2603.24933
+      - text: ","
+      - link "other" [ref=e502] [nth=39]:
+        - /url: /format/2603.24933
+      - text: "]"
+    - definition:
+      - text: Decoding Market Emotions in Cryptocurrency Tweets via Predictive Statement Classification with Machine Learning and Transformers
+      - link "Moein Shahiki Tash" [ref=e503]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tash,+M+S
+      - text: ","
+      - link "Zahra Ahani" [ref=e504]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ahani,+Z
+      - text: ","
+      - link "Mohim Tash" [ref=e505]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tash,+M
+      - text: ","
+      - link "Mostafa Keikhay Farzaneh" [ref=e506]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Farzaneh,+M+K
+      - text: ","
+      - link "Ari Y. Barrera-Animas" [ref=e507]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Barrera-Animas,+A+Y
+      - text: ","
+      - link "Olga Kolesnikova" [ref=e508]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Kolesnikova,+O
+      - text: "Subjects: Artificial Intelligence (cs.AI); Computational Engineering, Finance, and Science (cs.CE)"
+    - term:
+      - text: "[41]"
+      - link "arXiv:2603.24929" [ref=e509]:
+        - /url: /abs/2603.24929
+      - text: "["
+      - link "pdf" [ref=e510] [nth=40]:
+        - /url: /pdf/2603.24929
+      - text: ","
+      - link "html" [ref=e511] [nth=34]:
+        - /url: https://arxiv.org/html/2603.24929v1
+      - text: ","
+      - link "other" [ref=e512] [nth=40]:
+        - /url: /format/2603.24929
+      - text: "]"
+    - definition:
+      - text: "LogitScope: A Framework for Analyzing LLM Uncertainty Through Information Metrics"
+      - link "Farhan Ahmed" [ref=e513]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ahmed,+F
+      - text: ","
+      - link "Yuya Jeremy Ong" [ref=e514]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ong,+Y+J
+      - text: ","
+      - link "Chad DeLuca" [ref=e515]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=DeLuca,+C
+      - text: "Subjects: Artificial Intelligence (cs.AI); Computation and Language (cs.CL); Information Theory (cs.IT)"
+    - term:
+      - text: "[42]"
+      - link "arXiv:2603.24904" [ref=e516]:
+        - /url: /abs/2603.24904
+      - text: "["
+      - link "pdf" [ref=e517] [nth=41]:
+        - /url: /pdf/2603.24904
+      - text: ","
+      - link "other" [ref=e518] [nth=41]:
+        - /url: /format/2603.24904
+      - text: "]"
+    - definition:
+      - text: On the Foundations of Trustworthy Artificial Intelligence
+      - link "TJ Dunham" [ref=e519]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Dunham,+T
+      - text: "Comments: 26 pages, 10 tables, 1 figure, 17 theorems/definitions/corollaries Subjects: Artificial Intelligence (cs.AI); Cryptography and Security (cs.CR)"
+    - term:
+      - text: "[43]"
+      - link "arXiv:2603.24866" [ref=e520]:
+        - /url: /abs/2603.24866
+      - text: "["
+      - link "pdf" [ref=e521] [nth=42]:
+        - /url: /pdf/2603.24866
+      - text: ","
+      - link "html" [ref=e522] [nth=35]:
+        - /url: https://arxiv.org/html/2603.24866v1
+      - text: ","
+      - link "other" [ref=e523] [nth=42]:
+        - /url: /format/2603.24866
+      - text: "]"
+    - definition:
+      - text: How Far Are Vision-Language Models from Constructing the Real World? A Benchmark for Physical Generative Reasoning
+      - link "Luyu Yang" [ref=e524]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yang,+L
+      - text: ","
+      - link "Yutong Dai" [ref=e525]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Dai,+Y
+      - text: ","
+      - link "An Yan" [ref=e526]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Yan,+A
+      - text: ","
+      - link "Viraj Prabhu" [ref=e527]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Prabhu,+V
+      - text: ","
+      - link "Ran Xu" [ref=e528]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Xu,+R
+      - text: ","
+      - link "Zeyuan Chen" [ref=e529]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Chen,+Z
+      - text: "Subjects: Artificial Intelligence (cs.AI); Computation and Language (cs.CL); Computer Vision and Pattern Recognition (cs.CV)"
+    - term:
+      - text: "[44]"
+      - link "arXiv:2603.24856" [ref=e530]:
+        - /url: /abs/2603.24856
+      - text: "["
+      - link "pdf" [ref=e531] [nth=43]:
+        - /url: /pdf/2603.24856
+      - text: ","
+      - link "html" [ref=e532] [nth=36]:
+        - /url: https://arxiv.org/html/2603.24856v1
+      - text: ","
+      - link "other" [ref=e533] [nth=43]:
+        - /url: /format/2603.24856
+      - text: "]"
+    - definition:
+      - text: "SentinelAI: A Multi-Agent Framework for Structuring and Linking NG9-1-1 Emergency Incident Data"
+      - link "Kliment Ho" [ref=e534]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ho,+K
+      - text: ","
+      - link "Ilya Zaslavsky" [ref=e535]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zaslavsky,+I
+      - text: "Comments: 10 pages, 5 figures Subjects: Artificial Intelligence (cs.AI); Computers and Society (cs.CY); Emerging Technologies (cs.ET); Multiagent Systems (cs.MA)"
+    - term:
+      - text: "[45]"
+      - link "arXiv:2603.24853" [ref=e536]:
+        - /url: /abs/2603.24853
+      - text: "["
+      - link "pdf" [ref=e537] [nth=44]:
+        - /url: /pdf/2603.24853
+      - text: ","
+      - link "html" [ref=e538] [nth=37]:
+        - /url: https://arxiv.org/html/2603.24853v1
+      - text: ","
+      - link "other" [ref=e539] [nth=44]:
+        - /url: /format/2603.24853
+      - text: "]"
+    - definition:
+      - text: "Resisting Humanization: Ethical Front-End Design Choices in AI for Sensitive Contexts"
+      - link "Silvia Rossi" [ref=e540]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Rossi,+S
+      - text: ","
+      - link "Diletta Huyskes" [ref=e541]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Huyskes,+D
+      - text: ","
+      - link "Mackenzie Jorgensen" [ref=e542]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Jorgensen,+M
+      - text: "Comments: Accepted at the Proceedings of the CHI 2026 Workshop: Ethics at the Front-End Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[46]"
+      - link "arXiv:2603.24787" [ref=e543]:
+        - /url: /abs/2603.24787
+      - text: "["
+      - link "pdf" [ref=e544] [nth=45]:
+        - /url: /pdf/2603.24787
+      - text: ","
+      - link "html" [ref=e545] [nth=38]:
+        - /url: https://arxiv.org/html/2603.24787v1
+      - text: ","
+      - link "other" [ref=e546] [nth=45]:
+        - /url: /format/2603.24787
+      - text: "]"
+    - definition:
+      - text: "ReLope: KL-Regularized LoRA Probes for Multimodal LLM Routing"
+      - link "Yaopei Zeng" [ref=e547]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Zeng,+Y
+      - text: ","
+      - link "Congchao Wang" [ref=e548]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Wang,+C
+      - text: ","
+      - link "Blake JianHang Chen" [ref=e549]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Chen,+B+J
+      - text: ","
+      - link "Lu Lin" [ref=e550]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Lin,+L
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[47]"
+      - link "arXiv:2603.24768" [ref=e551]:
+        - /url: /abs/2603.24768
+      - text: "["
+      - link "pdf" [ref=e552] [nth=46]:
+        - /url: /pdf/2603.24768
+      - text: ","
+      - link "html" [ref=e553] [nth=39]:
+        - /url: https://arxiv.org/html/2603.24768v1
+      - text: ","
+      - link "other" [ref=e554] [nth=46]:
+        - /url: /format/2603.24768
+      - text: "]"
+    - definition:
+      - text: "Supervising Ralph Wiggum: Exploring a Metacognitive Co-Regulation Agentic AI Loop for Engineering Design"
+      - link "Zeda Xu" [ref=e555]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Xu,+Z
+      - text: ","
+      - link "Nikolas Martelaro" [ref=e556]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Martelaro,+N
+      - text: ","
+      - link "Christopher McComb" [ref=e557]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=McComb,+C
+      - text: "Subjects: Artificial Intelligence (cs.AI)"
+    - term:
+      - text: "[48]"
+      - link "arXiv:2603.24747" [ref=e558]:
+        - /url: /abs/2603.24747
+      - text: "["
+      - link "pdf" [ref=e559] [nth=47]:
+        - /url: /pdf/2603.24747
+      - text: ","
+      - link "html" [ref=e560] [nth=40]:
+        - /url: https://arxiv.org/html/2603.24747v1
+      - text: ","
+      - link "other" [ref=e561] [nth=47]:
+        - /url: /format/2603.24747
+      - text: "]"
+    - definition:
+      - text: "Formal Semantics for Agentic Tool Protocols: A Process Calculus Approach"
+      - link "Andreas Schlapbach" [ref=e562]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Schlapbach,+A
+      - text: "Comments: 18 pages. Companion to"
+      - link "arXiv:2602.18764" [ref=e563]:
+        - /url: https://arxiv.org/abs/2602.18764
+      - text: "Subjects: Artificial Intelligence (cs.AI); Multiagent Systems (cs.MA)"
+    - term:
+      - text: "[49]"
+      - link "arXiv:2603.24742" [ref=e564]:
+        - /url: /abs/2603.24742
+      - text: "["
+      - link "pdf" [ref=e565] [nth=48]:
+        - /url: /pdf/2603.24742
+      - text: ","
+      - link "html" [ref=e566] [nth=41]:
+        - /url: https://arxiv.org/html/2603.24742v1
+      - text: ","
+      - link "other" [ref=e567] [nth=48]:
+        - /url: /format/2603.24742
+      - text: "]"
+    - definition:
+      - text: "Trust as Monitoring: Evolutionary Dynamics of User Trust and AI Developer Behaviour"
+      - link "Adeela Bashir" [ref=e568]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Bashir,+A
+      - text: ","
+      - link "Zhao Song" [ref=e569]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Song,+Z
+      - text: ","
+      - link "Ndidi Bianca Ogbo" [ref=e570]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ogbo,+N+B
+      - text: ","
+      - link "Nataliya Balabanova" [ref=e571]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Balabanova,+N
+      - text: ","
+      - link "Martin Smit" [ref=e572]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Smit,+M
+      - text: ","
+      - link "Chin-wing Leung" [ref=e573]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Leung,+C
+      - text: ","
+      - link "Paolo Bova" [ref=e574]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Bova,+P
+      - text: ","
+      - link "Manuel Chica Serrano" [ref=e575]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Serrano,+M+C
+      - text: ","
+      - link "Dhanushka Dissanayake" [ref=e576]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Dissanayake,+D
+      - text: ","
+      - link "Manh Hong Duong" [ref=e577]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Duong,+M+H
+      - text: ","
+      - link "Elias Fernandez Domingos" [ref=e578]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Domingos,+E+F
+      - text: ","
+      - link "Nikita Huber-Kralj" [ref=e579]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Huber-Kralj,+N
+      - text: ","
+      - link "Marcus Krellner" [ref=e580]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Krellner,+M
+      - text: ","
+      - link "Andrew Powell" [ref=e581]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Powell,+A
+      - text: ","
+      - link "Stefan Sarkadi" [ref=e582]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Sarkadi,+S
+      - text: ","
+      - link "Fernando P. Santos" [ref=e583]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Santos,+F+P
+      - text: ","
+      - link "Zia Ush Shamszaman" [ref=e584]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Shamszaman,+Z+U
+      - text: ","
+      - link "Chaimaa Tarzi" [ref=e585]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Tarzi,+C
+      - text: ","
+      - link "Paolo Turrini" [ref=e586]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Turrini,+P
+      - text: ","
+      - link "Grace Ibukunoluwa Ufeoshi" [ref=e587]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ufeoshi,+G+I
+      - text: ","
+      - link "Victor A. Vargas-Perez" [ref=e588]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Vargas-Perez,+V+A
+      - text: ","
+      - link "Alessandro Di Stefano" [ref=e589]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Di+Stefano,+A
+      - text: ","
+      - link "Simon T. Powers" [ref=e590]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Powers,+S+T
+      - text: ", The"
+      - link "Anh Han" [ref=e591]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Han,+A
+      - text: "Subjects: Artificial Intelligence (cs.AI); Machine Learning (cs.LG); Multiagent Systems (cs.MA); Adaptation and Self-Organizing Systems (nlin.AO)"
+    - term:
+      - text: "[50]"
+      - link "arXiv:2603.24736" [ref=e592]:
+        - /url: /abs/2603.24736
+      - text: "["
+      - link "pdf" [ref=e593] [nth=49]:
+        - /url: /pdf/2603.24736
+      - text: ","
+      - link "html" [ref=e594] [nth=42]:
+        - /url: https://arxiv.org/html/2603.24736v1
+      - text: ","
+      - link "other" [ref=e595] [nth=49]:
+        - /url: /format/2603.24736
+      - text: "]"
+    - definition:
+      - text: "AutoSAM: an Agentic Framework for Automating Input File Generation for the SAM Code with Multi-Modal Retrieval-Augmented Generation"
+      - link "Zaid Abulawi" [ref=e596]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Abulawi,+Z
+      - text: (1 and 2),
+      - link "Zavier Ndum Ndum" [ref=e597]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Ndum,+Z+N
+      - text: (1 and 2),
+      - link "Eric Cervi" [ref=e598]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Cervi,+E
+      - text: (2),
+      - link "Rui Hu" [ref=e599]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Hu,+R
+      - text: (2),
+      - link "Yang Liu" [ref=e600]:
+        - /url: https://arxiv.org/search/cs?searchtype=author&query=Liu,+Y
+      - text: "(1) ((1) Department of Nuclear Engineering, Texas A&amp;M University, (2) Nuclear Science and Engineering Division, Argonne National Laboratory) Comments: 34 Pages, 14 Figures Subjects: Artificial Intelligence (cs.AI); Machine Learning (cs.LG)"
+    - text: "Total of 1083 entries : 1-50"
+    - link "51-100" [ref=e601] [nth=1]:
+      - /url: /list/cs.AI/recent?skip=50&show=50
+    - link "101-150" [ref=e602] [nth=1]:
+      - /url: /list/cs.AI/recent?skip=100&show=50
+    - link "151-200" [ref=e603] [nth=1]:
+      - /url: /list/cs.AI/recent?skip=150&show=50
+    - text: ...
+    - link "1051-1083" [ref=e604] [nth=1]:
+      - /url: /list/cs.AI/recent?skip=1050&show=50
+    - text: "Showing up to 50 entries per page:"
+    - link "fewer" [ref=e605] [nth=1]:
+      - /url: /list/cs.AI/recent?skip=0&show=25
+    - text: "|"
+    - link "more" [ref=e606] [nth=1]:
+      - /url: /list/cs.AI/recent?skip=0&show=100
+    - text: "|"
+    - link "all" [ref=e607] [nth=1]:
+      - /url: /list/cs.AI/recent?skip=0&show=2000
+  - contentinfo:
+    - navigation "Secondary" [ref=e608]:
+      - list:
+        - listitem:
+          - link "About" [ref=e609]:
+            - /url: https://info.arxiv.org/about
+        - listitem:
+          - link "Help" [ref=e610] [nth=1]:
+            - /url: https://info.arxiv.org/help
+      - list:
+        - listitem:
+          - link "Contact" [ref=e611]:
+            - /url: https://info.arxiv.org/help/contact.html
+        - listitem:
+          - link "Subscribe" [ref=e612]:
+            - /url: https://info.arxiv.org/help/subscribe
+      - list:
+        - listitem:
+          - link "Copyright" [ref=e613]:
+            - /url: https://info.arxiv.org/help/license/index.html
+        - listitem:
+          - link "Privacy Policy" [ref=e614]:
+            - /url: https://info.arxiv.org/help/policies/privacy_policy.html
+      - list:
+        - listitem:
+          - link "Web Accessibility Assistance" [ref=e615]:
+            - /url: https://info.arxiv.org/help/web_accessibility.html
+        - listitem:
+          - paragraph:
+            - link "arXiv Operational Status" [ref=e616]:
+              - /url: https://status.arxiv.org

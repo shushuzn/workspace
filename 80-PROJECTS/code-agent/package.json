@@ -1,0 +1,24 @@
+{
+  "name": "code-agent",
+  "version": "1.0.0",
+  "description": "Code Intelligence Agent - Semgrep + Tree-sitter analysis",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node tests/test-agent.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "tree-sitter": "^0.21.0",
+    "tree-sitter-javascript": "^0.21.0",
+    "tree-sitter-typescript": "^0.21.0",
+    "tree-sitter-python": "^0.21.0",
+    "uuid": "^9.0.0",
+    "yaml": "^2.3.0"
+  },
+  "keywords": ["mcp", "code-analysis", "semgrep", "tree-sitter", "security", "quality"],
+  "author": "Feishu",
+  "license": "MIT",
+  "repository": "https://github.com/shushuzn/code-agent.git"
+}

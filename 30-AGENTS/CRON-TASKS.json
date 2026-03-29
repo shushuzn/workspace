@@ -1,0 +1,43 @@
+{
+  "version": "1.0",
+  "agent_id": "nWyDpW",
+  "tasks": [
+    {
+      "id": "daily-briefing-08",
+      "name": "每日早报",
+      "description": "每天早上8点生成今日简报",
+      "schedule": "0 8 * * *",
+      "action": "generate_briefing",
+      "enabled": true
+    },
+    {
+      "id": "news-curation-morning",
+      "name": "早间新闻",
+      "description": "每天早上9点推送科技新闻",
+      "schedule": "0 9 * * *",
+      "action": "news_tech",
+      "enabled": true
+    },
+    {
+      "id": "news-curation-evening",
+      "name": "晚间新闻",
+      "description": "每天晚上8点推送行业新闻",
+      "schedule": "0 20 * * *",
+      "action": "news_business",
+      "enabled": true
+    },
+    {
+      "id": "security-scan-weekly",
+      "name": "每周安全扫描",
+      "description": "每周一早上9点执行安全扫描",
+      "schedule": "0 9 * * 1",
+      "action": "security_scan",
+      "enabled": true
+    }
+  ],
+  "notes": [
+    "Cron 任务需要在 CoPaw Web UI 中配置",
+    "Shell 环境限制导致 CLI 配置不可用",
+    "建议通过 CoPaw Web UI 设置定时任务"
+  ]
+}

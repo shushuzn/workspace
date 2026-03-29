@@ -1,0 +1,185 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fopencode-ai
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Corg-login%3E&source=header
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - img "@opencode-ai"
+    - heading "OpenCode" [ref=e15] [level=1]
+    - list:
+      - listitem
+    - navigation "Organization" [ref=e16]:
+      - list:
+        - listitem:
+          - link "Overview" [ref=e17]:
+            - /url: /opencode-ai
+        - listitem:
+          - link "Repositories 2" [ref=e18]:
+            - /url: /orgs/opencode-ai/repositories
+        - listitem:
+          - link "Projects" [ref=e19]:
+            - /url: /orgs/opencode-ai/projects
+        - listitem:
+          - link "Packages" [ref=e20]:
+            - /url: /orgs/opencode-ai/packages
+        - listitem:
+          - link "People" [ref=e21]:
+            - /url: /orgs/opencode-ai/people
+    - heading "Popular repositories Loading" [ref=e22] [level=2]:
+      - text: Popular repositories Loading
+      - status
+    - list:
+      - listitem:
+        - link "opencode" [ref=e23]:
+          - /url: /opencode-ai/opencode
+        - text: Public archive
+        - paragraph: A powerful AI coding agent. Built for the terminal.
+        - paragraph:
+          - text: Go
+          - link "stars 11.6k" [ref=e24]:
+            - /url: /opencode-ai/opencode/stargazers
+            - img "stars"
+            - text: 11.6k
+          - link "forks 1.2k" [ref=e25]:
+            - /url: /opencode-ai/opencode/forks
+            - img "forks"
+            - text: 1.2k
+      - listitem:
+        - link "homebrew-tap" [ref=e26]:
+          - /url: /opencode-ai/homebrew-tap
+        - text: Public
+        - paragraph
+        - paragraph:
+          - text: Ruby
+          - link "stars 6" [ref=e27]:
+            - /url: /opencode-ai/homebrew-tap/stargazers
+            - img "stars"
+            - text: "6"
+          - link "forks 2" [ref=e28]:
+            - /url: /opencode-ai/homebrew-tap/forks
+            - img "forks"
+            - text: "2"
+    - heading "Repositories" [ref=e29] [level=3]
+    - search:
+      - searchbox "Find a repository…" [ref=e30]
+      - text: Loading
+      - group:
+        - button "Type" [ref=e31]
+      - group:
+        - button "Language" [ref=e32]
+      - group:
+        - button "Sort" [ref=e33]
+    - text: Showing 2 of 2 repositories
+    - list:
+      - listitem:
+        - link "opencode" [ref=e34] [nth=1]:
+          - /url: /opencode-ai/opencode
+        - text: Public archive
+        - paragraph: A powerful AI coding agent. Built for the terminal.
+        - link "opencode-ai/opencode’s past year of commit activity" [ref=e35]:
+          - /url: /opencode-ai/opencode/graphs/commit-activity
+        - link [ref=e36]:
+          - /url: /opencode-ai/opencode/graphs/commit-activity
+        - text: Go
+        - link "11615 stars" [ref=e37]:
+          - /url: /opencode-ai/opencode/stargazers
+          - text: 11,615
+        - text: MIT
+        - link "1153 forks" [ref=e38]:
+          - /url: /opencode-ai/opencode/forks
+          - text: 1,153
+        - link "116 issues" [ref=e39]:
+          - /url: /opencode-ai/opencode/issues
+          - text: "116"
+        - link "42 pull requests" [ref=e40]:
+          - /url: /opencode-ai/opencode/pulls
+          - text: "42"
+        - text: Updated Sep 18, 2025on Sep 18, 2025
+      - listitem:
+        - link "homebrew-tap" [ref=e41] [nth=1]:
+          - /url: /opencode-ai/homebrew-tap
+        - text: Public
+        - link "opencode-ai/homebrew-tap’s past year of commit activity" [ref=e42]:
+          - /url: /opencode-ai/homebrew-tap/graphs/commit-activity
+        - link [ref=e43] [nth=1]:
+          - /url: /opencode-ai/homebrew-tap/graphs/commit-activity
+        - text: Ruby
+        - link "6 stars" [ref=e44]:
+          - /url: /opencode-ai/homebrew-tap/stargazers
+          - text: "6"
+        - link "2 forks" [ref=e45]:
+          - /url: /opencode-ai/homebrew-tap/forks
+          - text: "2"
+        - link "0 issues" [ref=e46]:
+          - /url: /opencode-ai/homebrew-tap/issues
+          - text: "0"
+        - link "0 pull requests" [ref=e47]:
+          - /url: /opencode-ai/homebrew-tap/pulls
+          - text: "0"
+        - text: Updated Jun 27, 2025on Jun 27, 2025
+    - link "People" [ref=e48] [nth=1]:
+      - /url: /orgs/opencode-ai/people
+      - heading "People" [ref=e49] [level=4]
+    - paragraph: This organization has no public members. You must be a member to see who’s a part of this organization.
+    - heading "Top languages" [ref=e50] [level=4]
+    - link "Ruby" [ref=e51]:
+      - /url: /orgs/opencode-ai/repositories?language=ruby&type=all
+    - link "Go" [ref=e52]:
+      - /url: /orgs/opencode-ai/repositories?language=go&type=all
+  - contentinfo:
+    - heading "Footer" [ref=e53] [level=2]
+    - link "GitHub Homepage" [ref=e54]:
+      - /url: https://github.com
+    - text: © 2026 GitHub, Inc.
+    - navigation "Footer" [ref=e55]:
+      - heading "Footer navigation" [ref=e56] [level=3]
+      - list "Footer navigation":
+        - listitem:
+          - link "Terms" [ref=e57]:
+            - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+        - listitem:
+          - link "Privacy" [ref=e58]:
+            - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+        - listitem:
+          - link "Security" [ref=e59]:
+            - /url: https://github.com/security
+        - listitem:
+          - link "Status" [ref=e60]:
+            - /url: https://www.githubstatus.com/
+        - listitem:
+          - link "Community" [ref=e61]:
+            - /url: https://github.community/
+        - listitem:
+          - link "Docs" [ref=e62]:
+            - /url: https://docs.github.com/
+        - listitem:
+          - link "Contact" [ref=e63]:
+            - /url: https://support.github.com?tags=dotcom-footer
+        - listitem:
+          - button "Manage cookies" [ref=e64]
+        - listitem:
+          - button "Do not share my personal information" [ref=e65]

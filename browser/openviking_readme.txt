@@ -1,0 +1,762 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fvolcengine%2FOpenViking%2Fblob%2Fmain%2FREADME_CN.md
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fblob%2Fshow&source=header-repo&source_repo=volcengine%2FOpenViking
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - link "volcengine" [ref=e15]:
+      - /url: /volcengine
+    - text: /
+    - strong:
+      - link "OpenViking" [ref=e16]:
+        - /url: /volcengine/OpenViking
+    - text: Public
+    - list:
+      - listitem:
+        - link "You must be signed in to change notification settings" [ref=e17]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Notifications
+      - listitem:
+        - link "Fork 1.4k" [ref=e18]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+      - listitem:
+        - link "You must be signed in to star a repository" [ref=e19]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Star 19.5k
+    - navigation "Repository" [ref=e20]:
+      - list:
+        - listitem:
+          - link "Code" [ref=e21]:
+            - /url: /volcengine/OpenViking
+        - listitem:
+          - link "Issues 63" [ref=e22]:
+            - /url: /volcengine/OpenViking/issues
+        - listitem:
+          - link "Pull requests 40" [ref=e23]:
+            - /url: /volcengine/OpenViking/pulls
+        - listitem:
+          - link "Discussions" [ref=e24]:
+            - /url: /volcengine/OpenViking/discussions
+        - listitem:
+          - link "Actions" [ref=e25]:
+            - /url: /volcengine/OpenViking/actions
+        - listitem:
+          - link "Projects" [ref=e26]:
+            - /url: /volcengine/OpenViking/projects
+        - listitem:
+          - link "Security" [ref=e27]:
+            - /url: /volcengine/OpenViking/security
+        - listitem:
+          - link "Insights" [ref=e28]:
+            - /url: /volcengine/OpenViking/pulse
+    - heading "Collapse file tree" [ref=e29] [level=2]:
+      - button "Collapse file tree" [ref=e30] [expanded]
+    - heading "Files" [ref=e31] [level=2]
+    - button "main branch" [ref=e32]: main
+    - button "Search this repository (forward slash)" [ref=e33]
+    - combobox "Go to file" [ref=e34]
+    - navigation "File Tree Navigation" [ref=e35]:
+      - tree "Files":
+        - treeitem ".github" [ref=e36] [level=1]
+        - treeitem "bot" [ref=e37] [level=1]
+        - treeitem "build_support" [ref=e38] [level=1]
+        - treeitem "crates" [ref=e39] [level=1]
+        - treeitem "deploy" [ref=e40] [level=1]
+        - treeitem "docs" [ref=e41] [level=1]
+        - treeitem "examples" [ref=e42] [level=1]
+        - treeitem "openviking" [ref=e43] [level=1]
+        - treeitem "openviking_cli" [ref=e44] [level=1]
+        - treeitem "src" [ref=e45] [level=1]
+        - treeitem "tests" [ref=e46] [level=1]
+        - treeitem "third_party" [ref=e47] [level=1]
+        - treeitem ".clang-format" [ref=e48] [level=1]
+        - treeitem ".gitignore" [ref=e49] [level=1]
+        - treeitem ".pr_agent.toml" [ref=e50] [level=1]
+        - treeitem ".pre-commit-config.yaml" [ref=e51] [level=1]
+        - treeitem "CONTRIBUTING.md" [ref=e52] [level=1]
+        - treeitem "CONTRIBUTING_CN.md" [ref=e53] [level=1]
+        - treeitem "CONTRIBUTING_JA.md" [ref=e54] [level=1]
+        - treeitem "Cargo.lock" [ref=e55] [level=1]
+        - treeitem "Cargo.toml" [ref=e56] [level=1]
+        - treeitem "Dockerfile" [ref=e57] [level=1]
+        - treeitem "LICENSE" [ref=e58] [level=1]
+        - treeitem "MANIFEST.in" [ref=e59] [level=1]
+        - treeitem "Makefile" [ref=e60] [level=1]
+        - treeitem "README.md" [ref=e61] [level=1]
+        - treeitem "README_CN.md" [ref=e62] [level=1]
+        - treeitem "README_JA.md" [ref=e63] [level=1]
+        - treeitem "docker-compose.yml" [ref=e64] [level=1]
+        - treeitem "pyproject.toml" [ref=e65] [level=1]
+        - treeitem "setup.py" [ref=e66] [level=1]
+        - treeitem "uv.lock" [ref=e67] [level=1]
+    - slider "Draggable pane splitter" [ref=e68]
+    - navigation "Breadcrumbs" [ref=e69]:
+      - heading "Breadcrumbs" [ref=e70] [level=2]
+      - list:
+        - listitem:
+          - link "OpenViking" [ref=e71] [nth=1]:
+            - /url: /volcengine/OpenViking/tree/main
+    - heading "README_CN.md" [ref=e72] [level=1]
+    - button "Copy path" [ref=e73]
+    - button "More file actions" [ref=e74]
+    - heading "Latest commit" [ref=e75] [level=2]
+    - link "SCPZ24" [ref=e76]:
+      - /url: /SCPZ24
+      - img "SCPZ24"
+    - link "commits by SCPZ24" [ref=e77]:
+      - /url: /volcengine/OpenViking/commits?author=SCPZ24
+      - text: SCPZ24
+    - 'link "docs: Add Chinese README translations for OpenCode and OpenClaw plugi…"':
+      - /url: /volcengine/OpenViking/commit/f09060c64f972943e155fdd17d6d32b9347b55c9
+    - button "Open commit details" [ref=e78]
+    - link "Commit f09060c" [ref=e79]:
+      - /url: /volcengine/OpenViking/commit/f09060c64f972943e155fdd17d6d32b9347b55c9
+      - text: f09060c
+    - text: · Mar 22, 20265 days ago
+    - heading "History" [ref=e80] [level=2]
+    - link "History" [ref=e81]:
+      - /url: /volcengine/OpenViking/commits/main/README_CN.md
+    - heading "File metadata and controls" [ref=e82] [level=2]
+    - list "File view":
+      - listitem:
+        - button "Preview" [ref=e83]
+      - listitem:
+        - button "Code" [ref=e84]
+      - listitem:
+        - button "Blame" [ref=e85]
+    - link "Raw" [ref=e86]:
+      - /url: https://github.com/volcengine/OpenViking/raw/refs/heads/main/README_CN.md
+    - button "Copy raw file" [ref=e87]
+    - button "Download raw file" [ref=e88]
+    - button "You must be signed in to make or propose changes" [ref=e89] [disabled]
+    - button "More edit options" [ref=e90]
+    - button "Outline" [ref=e91]
+    - region "README_CN.md" [ref=e92]:
+      - article:
+        - link "OpenViking" [ref=e93] [nth=2]:
+          - /url: https://openviking.ai/
+          - img "OpenViking"
+        - heading "OpenViking：AI 智能体的上下文数据库" [ref=e94] [level=3]
+        - 'link "Permalink: OpenViking：AI 智能体的上下文数据库"':
+          - /url: "#openvikingai-智能体的上下文数据库"
+        - paragraph:
+          - link "English" [ref=e95]:
+            - /url: /volcengine/OpenViking/blob/main/README.md
+          - text: / 中文 /
+          - link "日本語" [ref=e96]:
+            - /url: /volcengine/OpenViking/blob/main/README_JA.md
+        - paragraph:
+          - link "官网" [ref=e97]:
+            - /url: https://www.openviking.ai
+          - text: ·
+          - link "GitHub" [ref=e98]:
+            - /url: https://github.com/volcengine/OpenViking
+          - text: ·
+          - link "问题反馈" [ref=e99]:
+            - /url: https://github.com/volcengine/OpenViking/issues
+          - text: ·
+          - link "文档" [ref=e100]:
+            - /url: https://www.openviking.ai/docs
+        - paragraph:
+          - link [ref=e101]:
+            - /url: https://github.com/volcengine/OpenViking/releases
+          - link [ref=e102] [nth=1]:
+            - /url: https://github.com/volcengine/OpenViking
+          - link [ref=e103] [nth=2]:
+            - /url: https://github.com/volcengine/OpenViking/issues
+          - link [ref=e104] [nth=3]:
+            - /url: https://github.com/volcengine/OpenViking/graphs/contributors
+          - link [ref=e105] [nth=4]:
+            - /url: https://github.com/volcengine/OpenViking/blob/main/LICENSE
+          - link [ref=e106] [nth=5]:
+            - /url: https://github.com/volcengine/OpenViking/commcommits/main
+        - paragraph: 👋 加入我们的社区
+        - paragraph:
+          - text: 📱
+          - link "飞书群" [ref=e107]:
+            - /url: /volcengine/OpenViking/blob/main/docs/en/about/01-about-us.md#lark-group
+          - text: ·
+          - link "微信群" [ref=e108]:
+            - /url: /volcengine/OpenViking/blob/main/docs/en/about/01-about-us.md#wechat-group
+          - text: ·
+          - link "Discord" [ref=e109]:
+            - /url: https://discord.com/invite/eHvx8E9XF3
+          - text: ·
+          - link "X" [ref=e110]:
+            - /url: https://x.com/openvikingai
+        - separator
+        - heading "概述" [ref=e111] [level=2]
+        - 'link "Permalink: 概述"':
+          - /url: "#概述"
+        - heading "智能体开发面临的挑战" [ref=e112] [level=3]
+        - 'link "Permalink: 智能体开发面临的挑战"':
+          - /url: "#智能体开发面临的挑战"
+        - paragraph: 在 AI 时代，数据丰富，但高质量的上下文却难以获得。在构建 AI 智能体时，开发者经常面临以下挑战：
+        - list:
+          - listitem:
+            - strong: 上下文碎片化
+            - text: ：记忆存储在代码中，资源在向量数据库中，技能分散在各处，难以统一管理。
+          - listitem:
+            - strong: 上下文需求激增
+            - text: ：智能体的长运行任务在每次执行时都会产生上下文。简单的截断或压缩会导致信息丢失。
+          - listitem:
+            - strong: 检索效果不佳
+            - text: ：传统 RAG 使用扁平化存储，缺乏全局视图，难以理解信息的完整上下文。
+          - listitem:
+            - strong: 上下文不可观察
+            - text: ：传统 RAG 的隐式检索链像黑盒，出错时难以调试。
+          - listitem:
+            - strong: 记忆迭代有限
+            - text: ：当前记忆只是用户交互的记录，缺乏智能体相关的任务记忆。
+        - heading "OpenViking 解决方案" [ref=e113] [level=3]
+        - 'link "Permalink: OpenViking 解决方案"':
+          - /url: "#openviking-解决方案"
+        - paragraph:
+          - strong: OpenViking
+          - text: 是专为 AI 智能体设计的开源
+          - strong: 上下文数据库
+          - text: 。
+        - paragraph:
+          - text: 我们的目标是为智能体定义一个极简的上下文交互范式，让开发者完全告别上下文管理的烦恼。OpenViking 抛弃了传统 RAG 的碎片化向量存储模型，创新性地采用
+          - strong: "\"文件系统范式\""
+          - text: 来统一组织智能体所需的记忆、资源和技能。
+        - paragraph: 使用 OpenViking，开发者可以像管理本地文件一样构建智能体的大脑：
+        - list:
+          - listitem:
+            - strong: 文件系统管理范式
+            - text: →
+            - strong: 解决碎片化
+            - text: ：基于文件系统范式统一管理记忆、资源和技能。
+          - listitem:
+            - strong: 分层上下文加载
+            - text: →
+            - strong: 降低 Token 消耗
+            - text: ：L0/L1/L2 三层结构，按需加载，显著节省成本。
+          - listitem:
+            - strong: 目录递归检索
+            - text: →
+            - strong: 提升检索效果
+            - text: ：支持原生文件系统检索方式，结合目录定位和语义搜索，实现递归精准的上下文获取。
+          - listitem:
+            - strong: 可视化检索轨迹
+            - text: →
+            - strong: 可观察上下文
+            - text: ：支持目录检索轨迹可视化，让用户清晰观察问题根源，指导检索逻辑优化。
+          - listitem:
+            - strong: 自动会话管理
+            - text: →
+            - strong: 上下文自迭代
+            - text: ：自动压缩对话中的内容、资源引用、工具调用等，提取长期记忆，让智能体越用越聪明。
+        - separator
+        - heading "快速开始" [ref=e114] [level=2]
+        - 'link "Permalink: 快速开始"':
+          - /url: "#快速开始"
+        - heading "前置条件" [ref=e115] [level=3]
+        - 'link "Permalink: 前置条件"':
+          - /url: "#前置条件"
+        - paragraph: 在开始使用 OpenViking 之前，请确保您的环境满足以下要求：
+        - list:
+          - listitem:
+            - strong: Python 版本
+            - text: ：3.10 或更高版本
+          - listitem:
+            - strong: Go 版本
+            - text: ：1.22 或更高（从源码构建 AGFS 组件需要）
+          - listitem:
+            - strong: C++ 编译器
+            - text: ：GCC 9+ 或 Clang 11+（构建核心扩展需要，必须支持 C++17）
+          - listitem:
+            - strong: 操作系统
+            - text: ：Linux、macOS、Windows
+          - listitem:
+            - strong: 网络连接
+            - text: ：需要稳定的网络连接（用于下载依赖和访问模型服务）
+        - heading "1. 安装" [ref=e116] [level=3]
+        - 'link "Permalink: 1. 安装"':
+          - /url: "#1-安装"
+        - heading "Python 包" [ref=e117] [level=4]
+        - 'link "Permalink: Python 包"':
+          - /url: "#python-包"
+        - text: pip install openviking --upgrade --force-reinstall
+        - button "Copy" [ref=e118]
+        - heading "Rust CLI（可选）" [ref=e119] [level=4]
+        - 'link "Permalink: Rust CLI（可选）"':
+          - /url: "#rust-cli可选"
+        - text: curl -fsSL https://raw.githubusercontent.com/volcengine/OpenViking/main/crates/ov_cli/install.sh | bash
+        - button "Copy" [ref=e120] [nth=1]
+        - paragraph: 或从源码构建：
+        - text: cargo install --git https://github.com/volcengine/OpenViking ov_cli
+        - button "Copy" [ref=e121] [nth=2]
+        - heading "2. 模型准备" [ref=e122] [level=3]
+        - 'link "Permalink: 2. 模型准备"':
+          - /url: "#2-模型准备"
+        - paragraph: OpenViking 需要以下模型能力：
+        - list:
+          - listitem:
+            - strong: VLM 模型
+            - text: ：用于图像和内容理解
+          - listitem:
+            - strong: Embedding 模型
+            - text: ：用于向量化和语义检索
+        - heading "支持的 VLM 提供商" [ref=e123] [level=4]
+        - 'link "Permalink: 支持的 VLM 提供商"':
+          - /url: "#支持的-vlm-提供商"
+        - paragraph: OpenViking 支持三种 VLM 提供商：
+        - table:
+          - rowgroup:
+            - row "提供商 描述 获取 API Key":
+              - columnheader "提供商" [ref=e124]
+              - columnheader "描述" [ref=e125]
+              - columnheader "获取 API Key" [ref=e126]
+          - rowgroup:
+            - row "volcengine 火山引擎豆包模型 Volcengine 控制台":
+              - cell "volcengine" [ref=e127]:
+                - code: volcengine
+              - cell "火山引擎豆包模型" [ref=e128]
+              - cell "Volcengine 控制台" [ref=e129]:
+                - link "Volcengine 控制台" [ref=e130]:
+                  - /url: https://console.volcengine.com/ark/region:ark+cn-beijing/overview?briefPage=0&briefType=introduce&type=new&utm_content=OpenViking&utm_medium=devrel&utm_source=OWO&utm_term=OpenViking
+            - row "openai OpenAI 官方 API OpenAI 平台":
+              - cell "openai" [ref=e131]:
+                - code: openai
+              - cell "OpenAI 官方 API" [ref=e132]
+              - cell "OpenAI 平台" [ref=e133]:
+                - link "OpenAI 平台" [ref=e134]:
+                  - /url: https://platform.openai.com
+            - row "azure Azure OpenAI 服务 Azure OpenAI 服务":
+              - cell "azure" [ref=e135]:
+                - code: azure
+              - cell "Azure OpenAI 服务" [ref=e136]
+              - cell "Azure OpenAI 服务" [ref=e137] [nth=1]:
+                - link "Azure OpenAI 服务" [ref=e138]:
+                  - /url: https://portal.azure.com
+            - row "litellm 统一调用多种第三方模型 (Anthropic, DeepSeek, Gemini, vLLM, Ollama 等) 参见 LiteLLM 提供商":
+              - cell "litellm" [ref=e139]:
+                - code: litellm
+              - cell "统一调用多种第三方模型 (Anthropic, DeepSeek, Gemini, vLLM, Ollama 等)" [ref=e140]
+              - cell "参见 LiteLLM 提供商" [ref=e141]:
+                - text: 参见
+                - link "LiteLLM 提供商" [ref=e142]:
+                  - /url: https://docs.litellm.ai/docs/providers
+        - blockquote:
+          - paragraph:
+            - text: 💡
+            - strong: 提示
+            - text: ：
+          - list:
+            - listitem:
+              - code: litellm
+              - text: 支持通过统一接口调用多种模型，model 字段需遵循
+              - link "LiteLLM 格式规范" [ref=e143]:
+                - /url: https://docs.litellm.ai/docs/providers
+            - listitem:
+              - text: 系统自动检测常见模型（如
+              - code: claude-*
+              - text: ","
+              - code: deepseek-*
+              - text: ","
+              - code: gemini-*
+              - text: ","
+              - code: hosted_vllm/*
+              - text: ","
+              - code: ollama/*
+              - text: 等），其他模型需按 LiteLLM 格式填写完整前缀
+        - heading "提供商特定说明" [ref=e144] [level=4]
+        - 'link "Permalink: 提供商特定说明"':
+          - /url: "#提供商特定说明"
+        - group: Volcengine (豆包)
+        - group: OpenAI
+        - group: Azure OpenAI
+        - group: LiteLLM (Anthropic, DeepSeek, Gemini, Qwen, vLLM, Ollama 等)
+        - heading "3. 环境配置" [ref=e145] [level=3]
+        - 'link "Permalink: 3. 环境配置"':
+          - /url: "#3-环境配置"
+        - heading "服务器配置模板" [ref=e146] [level=4]
+        - 'link "Permalink: 服务器配置模板"':
+          - /url: "#服务器配置模板"
+        - paragraph:
+          - text: 创建配置文件
+          - code: ~/.openviking/ov.conf
+          - text: ，复制前请删除注释：
+        - text: "{ \"storage\": { \"workspace\": \"/home/your-name/openviking_workspace\" }, \"log\": { \"level\": \"INFO\", \"output\": \"stdout\" // 日志输出：\"stdout\" 或 \"file\" }, \"embedding\": { \"dense\": { \"api_base\" : \"<api-endpoint>\", // API 端点地址 \"api_key\" : \"<your-api-key>\", // 模型服务 API Key \"provider\" : \"<provider-type>\", // 提供商类型：\"volcengine\"、\"openai\"、\"azure\" 等 \"api_version\": \"2025-01-01-preview\", // （仅 azure）API 版本，可选，默认 \"2025-01-01-preview\" \"dimension\": 1024, // 向量维度 \"model\" : \"<model-name>\" // Embedding 模型名称或 Azure 部署名（如 doubao-embedding-vision-250615 或 text-embedding-3-large） }, \"max_concurrent\": 10 // 最大并发 embedding 请求（默认：10） }, \"vlm\": { \"api_base\" : \"<api-endpoint>\", // API 端点地址 \"api_key\" : \"<your-api-key>\", // 模型服务 API Key \"provider\" : \"<provider-type>\", // 提供商类型 (volcengine, openai, azure, litellm 等) \"api_version\": \"2025-01-01-preview\", // （仅 azure）API 版本，可选，默认 \"2025-01-01-preview\" \"model\" : \"<model-name>\", // VLM 模型名称或 Azure 部署名（如 doubao-seed-2-0-pro-260215 或 gpt-4-vision-preview） \"max_concurrent\": 100 // 语义处理的最大并发 LLM 调用（默认：100） } }"
+        - button "Copy" [ref=e147] [nth=3]
+        - blockquote:
+          - paragraph:
+            - strong: 注意
+            - text: ：对于 embedding 模型，目前支持
+            - code: volcengine
+            - text: （豆包）、
+            - code: openai
+            - text: 、
+            - code: azure
+            - text: 、
+            - code: jina
+            - text: 等提供商。对于 VLM 模型，我们支持
+            - code: volcengine
+            - text: 、
+            - code: openai
+            - text: 、
+            - code: azure
+            - text: 和
+            - code: litellm
+            - text: 提供商。
+            - code: litellm
+            - text: 提供商支持各种模型，包括 Anthropic (Claude)、DeepSeek、Gemini、Moonshot、Zhipu、DashScope、MiniMax、vLLM、Ollama 等。
+        - heading "服务器配置示例" [ref=e148] [level=4]
+        - 'link "Permalink: 服务器配置示例"':
+          - /url: "#服务器配置示例"
+        - paragraph: 👇 展开查看您的模型服务的配置示例：
+        - group: 示例 1：使用 Volcengine（豆包模型）
+        - group: 示例 2：使用 OpenAI 模型
+        - group: 示例 3：使用 Azure OpenAI 模型
+        - heading "设置服务器配置环境变量" [ref=e149] [level=4]
+        - 'link "Permalink: 设置服务器配置环境变量"':
+          - /url: "#设置服务器配置环境变量"
+        - paragraph: 创建配置文件后，设置环境变量指向它（Linux/macOS）：
+        - text: "export OPENVIKING_CONFIG_FILE=~/.openviking/ov.conf # 默认值"
+        - button "Copy" [ref=e150] [nth=4]
+        - paragraph: 在 Windows 上，使用以下任一方式：
+        - paragraph: PowerShell：
+        - text: $env:OPENVIKING_CONFIG_FILE = "$HOME/.openviking/ov.conf"
+        - button "Copy" [ref=e151] [nth=5]
+        - paragraph: 命令提示符 (cmd.exe)：
+        - text: set "OPENVIKING_CONFIG_FILE=%USERPROFILE%\.openviking\ov.conf"
+        - button "Copy" [ref=e152] [nth=6]
+        - blockquote:
+          - paragraph:
+            - text: 💡
+            - strong: 提示
+            - text: ：您也可以将配置文件放在其他位置，只需在环境变量中指定正确路径。
+        - heading "CLI/客户端配置示例" [ref=e153] [level=4]
+        - 'link "Permalink: CLI/客户端配置示例"':
+          - /url: "#cli客户端配置示例"
+        - paragraph: 👇 展开查看您的 CLI/客户端的配置示例：
+        - paragraph: 示例：用于访问本地服务器的 ovcli.conf
+        - text: "{ \"url\": \"http://localhost:1933\", \"timeout\": 60.0, \"output\": \"table\" }"
+        - button "Copy" [ref=e154] [nth=7]
+        - paragraph: 创建配置文件后，设置环境变量指向它（Linux/macOS）：
+        - text: "export OPENVIKING_CLI_CONFIG_FILE=~/.openviking/ovcli.conf # 默认值"
+        - button "Copy" [ref=e155] [nth=8]
+        - paragraph: 在 Windows 上，使用以下任一方式：
+        - paragraph: PowerShell：
+        - text: $env:OPENVIKING_CLI_CONFIG_FILE = "$HOME/.openviking/ovcli.conf"
+        - button "Copy" [ref=e156] [nth=9]
+        - paragraph: 命令提示符 (cmd.exe)：
+        - text: set "OPENVIKING_CLI_CONFIG_FILE=%USERPROFILE%\.openviking\ovcli.conf"
+        - button "Copy" [ref=e157] [nth=10]
+        - heading "4. 运行您的第一个示例" [ref=e158] [level=3]
+        - 'link "Permalink: 4. 运行您的第一个示例"':
+          - /url: "#4-运行您的第一个示例"
+        - blockquote:
+          - paragraph:
+            - text: 📝
+            - strong: 前置条件
+            - text: ：确保您已完成上一步的配置（ov.conf 和 ovcli.conf）。
+        - paragraph: 现在让我们运行一个完整的示例，体验 OpenViking 的核心功能。
+        - heading "启动服务器" [ref=e159] [level=4]
+        - 'link "Permalink: 启动服务器"':
+          - /url: "#启动服务器"
+        - text: openviking-server
+        - button "Copy" [ref=e160] [nth=11]
+        - paragraph: 或者您可以在后台运行
+        - text: nohup openviking-server > /data/log/openviking.log 2>&1 &
+        - button "Copy" [ref=e161] [nth=12]
+        - heading "运行 CLI" [ref=e162] [level=4]
+        - 'link "Permalink: 运行 CLI"':
+          - /url: "#运行-cli"
+        - text: "ov status ov add-resource https://github.com/volcengine/OpenViking # --wait ov ls viking://resources/ ov tree viking://resources/volcengine -L 2 # 如果没有使用 --wait，等待一段时间以进行语义处理 ov find \"what is openviking\" ov grep \"openviking\" --uri viking://resources/volcengine/OpenViking/docs/zh"
+        - button "Copy" [ref=e163] [nth=13]
+        - paragraph: 恭喜！您已成功运行 OpenViking 🎉
+        - heading "VikingBot 快速开始" [ref=e164] [level=3]
+        - 'link "Permalink: VikingBot 快速开始"':
+          - /url: "#vikingbot-快速开始"
+        - paragraph: VikingBot 是构建在 OpenViking 之上的 AI 智能体框架。以下是快速开始指南：
+        - text: "# 选项 1：从 PyPI 安装 VikingBot（推荐大多数用户使用） pip install \"openviking[bot]\" # 选项 2：从源码安装 VikingBot（用于开发） uv pip install -e \".[bot]\" # 启动 OpenViking 服务器（同时启动 Bot） openviking-server --with-bot # 在另一个终端启动交互式聊天 ov chat"
+        - button "Copy" [ref=e165] [nth=14]
+        - separator
+        - heading "服务器部署详情" [ref=e166] [level=2]
+        - 'link "Permalink: 服务器部署详情"':
+          - /url: "#服务器部署详情"
+        - paragraph: 对于生产环境，我们建议将 OpenViking 作为独立的 HTTP 服务运行，为您的 AI 智能体提供持久、高性能的上下文支持。
+        - paragraph:
+          - text: 🚀
+          - strong: 在云端部署 OpenViking
+          - text: ： 为确保最佳的存储性能和数据安全，我们建议在
+          - strong: 火山引擎弹性计算服务 (ECS)
+          - text: 上使用
+          - strong: veLinux
+          - text: 操作系统进行部署。我们准备了详细的分步指南，帮助您快速上手。
+        - paragraph:
+          - text: 👉
+          - strong:
+            - link "查看：服务器部署与 ECS 设置指南" [ref=e167]:
+              - /url: /volcengine/OpenViking/blob/main/docs/zh/getting-started/03-quickstart-server.md
+        - heading "OpenClaw 上下文插件详情" [ref=e168] [level=2]
+        - 'link "Permalink: OpenClaw 上下文插件详情"':
+          - /url: "#openclaw-上下文插件详情"
+        - list:
+          - listitem:
+            - text: 测试集：基于 LoCoMo10(
+            - link "https://github.com/snap-research/locomo" [ref=e169]:
+              - /url: https://github.com/snap-research/locomo
+            - text: ) 的长程对话进行效果测试（去除无真值的 category5 后，共 1540 条 case）
+          - listitem: 实验组：因用户在使用 OpenViking 时可能不关闭 OpenClaw 原生记忆，所以增加是否开关原生记忆的实验组
+          - listitem: OpenViking 版本：0.1.18
+          - listitem: 模型：seed-2.0-code
+          - listitem:
+            - text: 评测脚本：
+            - link "https://github.com/ZaynJarvis/openclaw-eval/tree/main" [ref=e170]:
+              - /url: https://github.com/ZaynJarvis/openclaw-eval/tree/main
+        - table:
+          - rowgroup:
+            - row "实验组 任务完成率 成本：输入 token (总计)":
+              - columnheader "实验组" [ref=e171]
+              - columnheader "任务完成率" [ref=e172]
+              - columnheader "成本：输入 token (总计)" [ref=e173]
+          - rowgroup:
+            - row "OpenClaw(memory-core) 35.65% 24,611,530":
+              - cell "OpenClaw(memory-core)" [ref=e174]
+              - cell "35.65%" [ref=e175]
+              - cell "24,611,530" [ref=e176]
+            - row "OpenClaw + LanceDB (-memory-core) 44.55% 51,574,530":
+              - cell "OpenClaw + LanceDB (-memory-core)" [ref=e177]
+              - cell "44.55%" [ref=e178]
+              - cell "51,574,530" [ref=e179]
+            - row "OpenClaw + OpenViking Plugin (-memory-core) 52.08% 4,264,396":
+              - cell "OpenClaw + OpenViking Plugin (-memory-core)" [ref=e180]
+              - cell "52.08%" [ref=e181]
+              - cell "4,264,396" [ref=e182]
+            - row "OpenClaw + OpenViking Plugin (+memory-core) 51.23% 2,099,622":
+              - cell "OpenClaw + OpenViking Plugin (+memory-core)" [ref=e183]
+              - cell "51.23%" [ref=e184]
+              - cell "2,099,622" [ref=e185]
+        - list:
+          - listitem: 实验结论： 结合 OpenViking 后，若仍开启原生记忆，效果在原 OpenClaw 上提升 43%，输入 token 成本降低 91%；在 LanceDB 上效果提升 15%，输入 token 降低 96%。若关闭原生记忆，效果在原 OpenClaw 上提升 49%，输入 token 成本降低 83%；在 LanceDB 上效果提升 17%，输入 token 降低 92%。
+        - paragraph:
+          - text: 👉
+          - strong:
+            - link "查看：OpenClaw 上下文插件" [ref=e186]:
+              - /url: /volcengine/OpenViking/blob/main/examples/openclaw-plugin/README_CN.md
+        - paragraph:
+          - text: 👉
+          - strong:
+            - link "查看：OpenCode 记忆插件示例" [ref=e187]:
+              - /url: /volcengine/OpenViking/blob/main/examples/opencode-memory-plugin/README_CN.md
+        - heading "VikingBot 部署详情" [ref=e188] [level=2]
+        - 'link "Permalink: VikingBot 部署详情"':
+          - /url: "#vikingbot-部署详情"
+        - paragraph: OpenViking 有一个类似 nanobot 的机器人用于交互工作，现已可用。
+        - paragraph:
+          - text: 👉
+          - strong:
+            - link "查看：使用 VikingBot 部署服务器" [ref=e189]:
+              - /url: /volcengine/OpenViking/blob/main/bot/README_CN.md
+        - paragraph: "--"
+        - heading "核心概念" [ref=e190] [level=2]
+        - 'link "Permalink: 核心概念"':
+          - /url: "#核心概念"
+        - paragraph: 运行第一个示例后，让我们深入了解 OpenViking 的设计理念。这五个核心概念与前面提到的解决方案一一对应，共同构建了一个完整的上下文管理系统：
+        - heading "1. 文件系统管理范式 → 解决碎片化" [ref=e191] [level=3]
+        - 'link "Permalink: 1. 文件系统管理范式 → 解决碎片化"':
+          - /url: "#1-文件系统管理范式--解决碎片化"
+        - paragraph:
+          - text: 我们不再将上下文视为扁平的文本切片，而是将它们统一到一个抽象的虚拟文件系统中。无论是记忆、资源还是能力，都映射到
+          - code: viking://
+          - text: 协议下的虚拟目录中，每个都有唯一的 URI。
+        - paragraph:
+          - text: 这种范式赋予智能体前所未有的上下文操作能力，使它们能够像开发者一样，通过
+          - code: ls
+          - text: 和
+          - code: find
+          - text: 等标准命令精确、确定地定位、浏览和操作信息。这将上下文管理从模糊的语义匹配转变为直观、可追踪的"文件操作"。了解更多：
+          - link "Viking URI" [ref=e192]:
+            - /url: /volcengine/OpenViking/blob/main/docs/zh/concepts/04-viking-uri.md
+          - text: "|"
+          - link "上下文类型" [ref=e193]:
+            - /url: /volcengine/OpenViking/blob/main/docs/zh/concepts/02-context-types.md
+        - code: "viking:// ├── resources/ # 资源：项目文档、代码库、网页等 │ ├── my_project/ │ │ ├── docs/ │ │ │ ├── api/ │ │ │ └── tutorials/ │ │ └── src/ │ └── ... ├── user/ # 用户：个人偏好、习惯等 │ └── memories/ │ ├── preferences/ │ │ ├── writing_style │ │ └── coding_habits │ └── ... └── agent/ # 智能体：技能、指令、任务记忆等 ├── skills/ │ ├── search_code │ ├── analyze_data │ └── ... ├── memories/ └── instructions/"
+        - button "Copy" [ref=e194] [nth=15]
+        - heading "2. 分层上下文加载 → 降低 Token 消耗" [ref=e195] [level=3]
+        - 'link "Permalink: 2. 分层上下文加载 → 降低 Token 消耗"':
+          - /url: "#2-分层上下文加载--降低-token-消耗"
+        - paragraph: 一次性将大量上下文塞入提示不仅昂贵，而且容易超出模型窗口并引入噪声。OpenViking 在写入时自动将上下文处理为三个级别：
+        - list:
+          - listitem:
+            - strong: L0 (摘要)
+            - text: ：一句话摘要，用于快速检索和识别。
+          - listitem:
+            - strong: L1 (概览)
+            - text: ：包含核心信息和使用场景，用于智能体在规划阶段的决策。
+          - listitem:
+            - strong: L2 (详情)
+            - text: ：完整的原始数据，供智能体在绝对必要时深度阅读。
+        - paragraph:
+          - text: 了解更多：
+          - link "上下文分层" [ref=e196]:
+            - /url: /volcengine/OpenViking/blob/main/docs/zh/concepts/03-context-layers.md
+        - code: "viking://resources/my_project/ ├── .abstract # L0 层：摘要（~100 tokens）- 快速相关性检查 ├── .overview # L1 层：概览（~2k tokens）- 理解结构和关键点 ├── docs/ │ ├── .abstract # 每个目录都有对应的 L0/L1 层 │ ├── .overview │ ├── api/ │ │ ├── .abstract │ │ ├── .overview │ │ ├── auth.md # L2 层：完整内容 - 按需加载 │ │ └── endpoints.md │ └── ... └── src/ └── ..."
+        - button "Copy" [ref=e197] [nth=16]
+        - heading "3. 目录递归检索 → 提升检索效果" [ref=e198] [level=3]
+        - 'link "Permalink: 3. 目录递归检索 → 提升检索效果"':
+          - /url: "#3-目录递归检索--提升检索效果"
+        - paragraph:
+          - text: 单一向量检索难以应对复杂的查询意图。OpenViking 设计了创新的
+          - strong: 目录递归检索策略
+          - text: ，深度集成多种检索方法：
+        - list:
+          - listitem:
+            - strong: 意图分析
+            - text: ：通过意图分析生成多个检索条件。
+          - listitem:
+            - strong: 初始定位
+            - text: ：使用向量检索快速定位初始切片所在的高分目录。
+          - listitem:
+            - strong: 精细探索
+            - text: ：在该目录内进行二次检索，并将高分结果更新到候选集。
+          - listitem:
+            - strong: 递归深入
+            - text: ：如果存在子目录，则逐层递归重复二次检索步骤。
+          - listitem:
+            - strong: 结果聚合
+            - text: ：最终获取最相关的上下文返回。
+        - paragraph:
+          - text: 这种"先锁定高分目录，再精细化内容探索"的策略不仅找到语义最佳匹配的片段，还能理解信息所在的完整上下文，从而提高检索的全局性和准确性。了解更多：
+          - link "检索机制" [ref=e199]:
+            - /url: /volcengine/OpenViking/blob/main/docs/zh/concepts/07-retrieval.md
+        - heading "4. 可视化检索轨迹 → 可观察上下文" [ref=e200] [level=3]
+        - 'link "Permalink: 4. 可视化检索轨迹 → 可观察上下文"':
+          - /url: "#4-可视化检索轨迹--可观察上下文"
+        - paragraph:
+          - text: OpenViking 的组织采用分层虚拟文件系统结构。所有上下文以统一格式集成，每个条目对应一个唯一的 URI（如
+          - code: viking://
+          - text: 路径），打破了传统的扁平黑盒管理模式，具有清晰易懂的层次结构。
+        - paragraph:
+          - text: 检索过程采用目录递归策略。每次检索的目录浏览和文件定位轨迹被完整保留，让用户能够清晰观察问题的根源，指导检索逻辑的优化。了解更多：
+          - link "检索机制" [ref=e201] [nth=1]:
+            - /url: /volcengine/OpenViking/blob/main/docs/zh/concepts/07-retrieval.md
+        - heading "5. 自动会话管理 → 上下文自迭代" [ref=e202] [level=3]
+        - 'link "Permalink: 5. 自动会话管理 → 上下文自迭代"':
+          - /url: "#5-自动会话管理--上下文自迭代"
+        - paragraph: OpenViking 内置了记忆自迭代循环。在每个会话结束时，开发者可以主动触发记忆提取机制。系统将异步分析任务执行结果和用户反馈，并自动更新到用户和智能体记忆目录。
+        - list:
+          - listitem:
+            - strong: 用户记忆更新
+            - text: ：更新与用户偏好相关的记忆，使智能体响应更好地适应用户需求。
+          - listitem:
+            - strong: 智能体经验积累
+            - text: ：从任务执行经验中提取操作技巧和工具使用经验等核心内容，辅助后续任务的高效决策。
+        - paragraph:
+          - text: 这使得智能体能够通过与世界的交互"越用越聪明"，实现自我进化。了解更多：
+          - link "会话管理" [ref=e203]:
+            - /url: /volcengine/OpenViking/blob/main/docs/zh/concepts/08-session.md
+        - separator
+        - heading "深入阅读" [ref=e204] [level=2]
+        - 'link "Permalink: 深入阅读"':
+          - /url: "#深入阅读"
+        - heading "文档" [ref=e205] [level=3]
+        - 'link "Permalink: 文档"':
+          - /url: "#文档"
+        - paragraph:
+          - text: 更多详情，请访问我们的
+          - link "完整文档" [ref=e206]:
+            - /url: /volcengine/OpenViking/blob/main/docs/zh
+          - text: 。
+        - heading "社区与团队" [ref=e207] [level=3]
+        - 'link "Permalink: 社区与团队"':
+          - /url: "#社区与团队"
+        - paragraph:
+          - text: 更多详情，请参见：
+          - strong:
+            - link "关于我们" [ref=e208]:
+              - /url: /volcengine/OpenViking/blob/main/docs/zh/about/01-about-us.md
+        - heading "加入社区" [ref=e209] [level=3]
+        - 'link "Permalink: 加入社区"':
+          - /url: "#加入社区"
+        - paragraph: OpenViking 仍处于早期阶段，有许多改进和探索的空间。我们真诚邀请每一位对 AI 智能体技术充满热情的开发者：
+        - list:
+          - listitem:
+            - text: 为我们点亮一颗珍贵的
+            - strong: Star
+            - text: ，给我们前进的动力。
+          - listitem:
+            - text: 访问我们的
+            - link "官网" [ref=e210] [nth=1]:
+              - /url: https://www.openviking.ai
+              - strong: 官网
+            - text: 了解我们传达的理念，并通过
+            - link "文档" [ref=e211] [nth=1]:
+              - /url: https://www.openviking.ai/docs
+              - strong: 文档
+            - text: 在您的项目中使用它。感受它带来的变化，并给我们最真实的体验反馈。
+          - listitem:
+            - text: 加入我们的社区，分享您的见解，帮助回答他人的问题，共同创造开放互助的技术氛围：
+            - list:
+              - listitem:
+                - text: 📱
+                - strong: 飞书群
+                - text: ：扫码加入 →
+                - link "查看二维码" [ref=e212]:
+                  - /url: /volcengine/OpenViking/blob/main/docs/en/about/01-about-us.md#lark-group
+              - listitem:
+                - text: 💬
+                - strong: 微信群
+                - text: ：扫码添加助手 →
+                - link "查看二维码" [ref=e213] [nth=1]:
+                  - /url: /volcengine/OpenViking/blob/main/docs/en/about/01-about-us.md#wechat-group
+              - listitem:
+                - text: 🎮
+                - strong: Discord
+                - text: ：
+                - link "加入 Discord 服务器" [ref=e214]:
+                  - /url: https://discord.com/invite/eHvx8E9XF3
+              - listitem:
+                - text: 🐦
+                - strong: X (Twitter)
+                - text: ：
+                - link "关注我们" [ref=e215]:
+                  - /url: https://x.com/openvikingai
+          - listitem:
+            - text: 成为
+            - strong: 贡献者
+            - text: ，无论是提交错误修复还是贡献新功能，您的每一行代码都将是 OpenViking 成长的重要基石。
+        - paragraph: 让我们共同努力，定义和构建 AI 智能体上下文管理的未来。旅程已经开始，期待您的参与！
+        - heading "Star 趋势" [ref=e216] [level=3]
+        - 'link "Permalink: Star 趋势"':
+          - /url: "#star-趋势"
+        - paragraph:
+          - link "Star History Chart" [ref=e217]:
+            - /url: https://www.star-history.com/#volcengine/OpenViking&type=timeline&legend=top-left
+            - img "Star History Chart"
+        - heading "许可证" [ref=e218] [level=2]
+        - 'link "Permalink: 许可证"':
+          - /url: "#许可证"
+        - paragraph:
+          - text: 本项目采用 Apache License 2.0 许可证 - 详情请参见
+          - link "LICENSE" [ref=e219]:
+            - /url: /volcengine/OpenViking/blob/main/LICENSE
+          - text: 文件。
+  - alert

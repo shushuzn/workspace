@@ -1,0 +1,262 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fobra%2Fsuperpowers%2Fblob%2Fmain%2F.opencode%2FINSTALL.md
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fblob%2Fshow&source=header-repo&source_repo=obra%2Fsuperpowers
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - link "obra" [ref=e15]:
+      - /url: /obra
+    - text: /
+    - strong:
+      - link "superpowers" [ref=e16]:
+        - /url: /obra/superpowers
+    - text: Public
+    - list:
+      - listitem:
+        - link "Sponsor @obra" [ref=e17]:
+          - /url: /sponsors/obra
+          - text: Sponsor
+      - listitem:
+        - link "You must be signed in to change notification settings" [ref=e18]:
+          - /url: /login?return_to=%2Fobra%2Fsuperpowers
+          - text: Notifications
+      - listitem:
+        - link "Fork 9.5k" [ref=e19]:
+          - /url: /login?return_to=%2Fobra%2Fsuperpowers
+      - listitem:
+        - link "You must be signed in to star a repository" [ref=e20]:
+          - /url: /login?return_to=%2Fobra%2Fsuperpowers
+          - text: Star 118k
+    - navigation "Repository" [ref=e21]:
+      - list:
+        - listitem:
+          - link "Code" [ref=e22]:
+            - /url: /obra/superpowers
+        - listitem:
+          - link "Issues 74" [ref=e23]:
+            - /url: /obra/superpowers/issues
+        - listitem:
+          - link "Pull requests 96" [ref=e24]:
+            - /url: /obra/superpowers/pulls
+        - listitem:
+          - link "Actions" [ref=e25]:
+            - /url: /obra/superpowers/actions
+        - listitem:
+          - link "Projects" [ref=e26]:
+            - /url: /obra/superpowers/projects
+        - listitem:
+          - link "Security" [ref=e27]:
+            - /url: /obra/superpowers/security
+        - listitem:
+          - link "Insights" [ref=e28]:
+            - /url: /obra/superpowers/pulse
+    - heading "Collapse file tree" [ref=e29] [level=2]:
+      - button "Collapse file tree" [ref=e30] [expanded]
+    - heading "Files" [ref=e31] [level=2]
+    - button "main branch" [ref=e32]: main
+    - button "Search this repository (forward slash)" [ref=e33]
+    - combobox "Go to file" [ref=e34]
+    - navigation "File Tree Navigation" [ref=e35]:
+      - tree "Files":
+        - treeitem ".claude-plugin" [ref=e36] [level=1]
+        - treeitem ".codex" [ref=e37] [level=1]
+        - treeitem ".cursor-plugin" [ref=e38] [level=1]
+        - treeitem ".github" [ref=e39] [level=1]
+        - treeitem ".opencode" [ref=e40] [expanded] [level=1]:
+          - text: .opencode
+          - group ".opencode":
+            - treeitem "plugins" [ref=e41] [level=2]
+            - treeitem "INSTALL.md" [ref=e42] [level=2]
+        - treeitem "agents" [ref=e43] [level=1]
+        - treeitem "commands" [ref=e44] [level=1]
+        - treeitem "docs" [ref=e45] [level=1]
+        - treeitem "hooks" [ref=e46] [level=1]
+        - treeitem "skills" [ref=e47] [level=1]
+        - treeitem "tests" [ref=e48] [level=1]
+        - treeitem ".gitattributes" [ref=e49] [level=1]
+        - treeitem ".gitignore" [ref=e50] [level=1]
+        - treeitem "CHANGELOG.md" [ref=e51] [level=1]
+        - treeitem "CODE_OF_CONDUCT.md" [ref=e52] [level=1]
+        - treeitem "GEMINI.md" [ref=e53] [level=1]
+        - treeitem "LICENSE" [ref=e54] [level=1]
+        - treeitem "README.md" [ref=e55] [level=1]
+        - treeitem "RELEASE-NOTES.md" [ref=e56] [level=1]
+        - treeitem "gemini-extension.json" [ref=e57] [level=1]
+        - treeitem "package.json" [ref=e58] [level=1]
+    - slider "Draggable pane splitter" [ref=e59]
+    - navigation "Breadcrumbs" [ref=e60]:
+      - heading "Breadcrumbs" [ref=e61] [level=2]
+      - list:
+        - listitem:
+          - link "superpowers" [ref=e62] [nth=1]:
+            - /url: /obra/superpowers/tree/main
+        - listitem:
+          - link ".opencode" [ref=e63]:
+            - /url: /obra/superpowers/tree/main/.opencode
+    - heading "INSTALL.md" [ref=e64] [level=1]
+    - button "Copy path" [ref=e65]
+    - button "More file actions" [ref=e66]
+    - heading "Latest commit" [ref=e67] [level=2]
+    - img "jesse"
+    - img "claude"
+    - text: jesse and
+    - link "commits by claude" [ref=e68]:
+      - /url: /obra/superpowers/commits?author=claude
+      - text: claude
+    - link "Auto-register skills from plugin, simplify OpenCode install to one line" [ref=e69]:
+      - /url: /obra/superpowers/commit/f4b54a17171e4cf90601db6b6fc4ba3ab1c1f206
+    - button "Open commit details" [ref=e70]
+    - link "Commit f4b54a1" [ref=e71]:
+      - /url: /obra/superpowers/commit/f4b54a17171e4cf90601db6b6fc4ba3ab1c1f206
+      - text: f4b54a1
+    - text: · Mar 16, 20262 weeks ago
+    - heading "History" [ref=e72] [level=2]
+    - link "History" [ref=e73]:
+      - /url: /obra/superpowers/commits/main/.opencode/INSTALL.md
+    - heading "File metadata and controls" [ref=e74] [level=2]
+    - list "File view":
+      - listitem:
+        - button "Preview" [ref=e75]
+      - listitem:
+        - button "Code" [ref=e76]
+      - listitem:
+        - button "Blame" [ref=e77]
+    - link "Raw" [ref=e78]:
+      - /url: https://github.com/obra/superpowers/raw/refs/heads/main/.opencode/INSTALL.md
+    - button "Copy raw file" [ref=e79]
+    - button "Download raw file" [ref=e80]
+    - button "You must be signed in to make or propose changes" [ref=e81] [disabled]
+    - button "More edit options" [ref=e82]
+    - button "Outline" [ref=e83]
+    - region "INSTALL.md" [ref=e84]:
+      - article:
+        - heading "Installing Superpowers for OpenCode" [ref=e85] [level=1]
+        - 'link "Permalink: Installing Superpowers for OpenCode"':
+          - /url: "#installing-superpowers-for-opencode"
+        - heading "Prerequisites" [ref=e86] [level=2]
+        - 'link "Permalink: Prerequisites"':
+          - /url: "#prerequisites"
+        - list:
+          - listitem:
+            - link "OpenCode.ai" [ref=e87]:
+              - /url: https://opencode.ai
+            - text: installed
+        - heading "Installation" [ref=e88] [level=2]
+        - 'link "Permalink: Installation"':
+          - /url: "#installation"
+        - paragraph:
+          - text: Add superpowers to the
+          - code: plugin
+          - text: array in your
+          - code: opencode.json
+          - text: "(global or project-level):"
+        - text: "{ \"plugin\": [\"superpowers@git+https://github.com/obra/superpowers.git\"] }"
+        - button "Copy" [ref=e89]
+        - paragraph: Restart OpenCode. That's it — the plugin auto-installs and registers all skills.
+        - paragraph: "Verify by asking: \"Tell me about your superpowers\""
+        - heading "Migrating from the old symlink-based install" [ref=e90] [level=2]
+        - 'link "Permalink: Migrating from the old symlink-based install"':
+          - /url: "#migrating-from-the-old-symlink-based-install"
+        - paragraph:
+          - text: If you previously installed superpowers using
+          - code: git clone
+          - text: "and symlinks, remove the old setup:"
+        - text: "# Remove old symlinks rm -f ~/.config/opencode/plugins/superpowers.js rm -rf ~/.config/opencode/skills/superpowers # Optionally remove the cloned repo rm -rf ~/.config/opencode/superpowers # Remove skills.paths from opencode.json if you added one for superpowers"
+        - button "Copy" [ref=e91] [nth=1]
+        - paragraph: Then follow the installation steps above.
+        - heading "Usage" [ref=e92] [level=2]
+        - 'link "Permalink: Usage"':
+          - /url: "#usage"
+        - paragraph:
+          - text: Use OpenCode's native
+          - code: skill
+          - text: "tool:"
+        - code: use skill tool to list skills use skill tool to load superpowers/brainstorming
+        - button "Copy" [ref=e93] [nth=2]
+        - heading "Updating" [ref=e94] [level=2]
+        - 'link "Permalink: Updating"':
+          - /url: "#updating"
+        - paragraph: Superpowers updates automatically when you restart OpenCode.
+        - paragraph: "To pin a specific version:"
+        - text: "{ \"plugin\": [\"superpowers@git+https://github.com/obra/superpowers.git#v5.0.3\"] }"
+        - button "Copy" [ref=e95] [nth=3]
+        - heading "Troubleshooting" [ref=e96] [level=2]
+        - 'link "Permalink: Troubleshooting"':
+          - /url: "#troubleshooting"
+        - heading "Plugin not loading" [ref=e97] [level=3]
+        - 'link "Permalink: Plugin not loading"':
+          - /url: "#plugin-not-loading"
+        - list:
+          - listitem:
+            - text: "Check logs:"
+            - code: opencode run --print-logs "hello" 2>&1 | grep -i superpowers
+          - listitem:
+            - text: Verify the plugin line in your
+            - code: opencode.json
+          - listitem: Make sure you're running a recent version of OpenCode
+        - heading "Skills not found" [ref=e98] [level=3]
+        - 'link "Permalink: Skills not found"':
+          - /url: "#skills-not-found"
+        - list:
+          - listitem:
+            - text: Use
+            - code: skill
+            - text: tool to list what's discovered
+          - listitem: Check that the plugin is loading (see above)
+        - heading "Tool mapping" [ref=e99] [level=3]
+        - 'link "Permalink: Tool mapping"':
+          - /url: "#tool-mapping"
+        - paragraph: "When skills reference Claude Code tools:"
+        - list:
+          - listitem:
+            - code: TodoWrite
+            - text: →
+            - code: todowrite
+          - listitem:
+            - code: Task
+            - text: with subagents →
+            - code: "@mention"
+            - text: syntax
+          - listitem:
+            - code: Skill
+            - text: tool → OpenCode's native
+            - code: skill
+            - text: tool
+          - listitem: File operations → your native tools
+        - heading "Getting Help" [ref=e100] [level=2]
+        - 'link "Permalink: Getting Help"':
+          - /url: "#getting-help"
+        - list:
+          - listitem:
+            - text: "Report issues:"
+            - link "https://github.com/obra/superpowers/issues" [ref=e101]:
+              - /url: https://github.com/obra/superpowers/issues
+          - listitem:
+            - text: "Full documentation:"
+            - link "https://github.com/obra/superpowers/blob/main/docs/README.opencode.md" [ref=e102]:
+              - /url: https://github.com/obra/superpowers/blob/main/docs/README.opencode.md
+  - alert

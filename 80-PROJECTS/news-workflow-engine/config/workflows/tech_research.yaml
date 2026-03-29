@@ -1,0 +1,23 @@
+description: 针对科技新闻自动调研相关 GitHub 项目
+id: tech_research
+name: 科技新闻调研
+tasks:
+- action: github_search
+  description: 根据新闻关键词搜索相关 GitHub 项目
+  name: 搜索 GitHub 项目
+  priority: 10
+- action: analyze_project
+  depends_on:
+  - 0
+  description: 分析项目的 stars、commit 频率、issue 活跃度
+  name: 分析项目活跃度
+  priority: 8
+- action: generate_report
+  depends_on:
+  - 1
+  description: 生成包含项目对比和分析的调研报告
+  name: 生成调研报告
+  priority: 6
+trigger:
+  category: tech
+  min_importance: 0.7

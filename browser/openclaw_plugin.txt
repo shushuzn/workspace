@@ -1,0 +1,782 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fvolcengine%2FOpenViking%2Fblob%2Fmain%2Fexamples%2Fopenclaw-plugin%2FREADME_CN.md
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fblob%2Fshow&source=header-repo&source_repo=volcengine%2FOpenViking
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - link "volcengine" [ref=e15]:
+      - /url: /volcengine
+    - text: /
+    - strong:
+      - link "OpenViking" [ref=e16]:
+        - /url: /volcengine/OpenViking
+    - text: Public
+    - list:
+      - listitem:
+        - link "You must be signed in to change notification settings" [ref=e17]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Notifications
+      - listitem:
+        - link "Fork 1.4k" [ref=e18]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+      - listitem:
+        - link "You must be signed in to star a repository" [ref=e19]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Star 19.5k
+    - navigation "Repository" [ref=e20]:
+      - list:
+        - listitem:
+          - link "Code" [ref=e21]:
+            - /url: /volcengine/OpenViking
+        - listitem:
+          - link "Issues 63" [ref=e22]:
+            - /url: /volcengine/OpenViking/issues
+        - listitem:
+          - link "Pull requests 40" [ref=e23]:
+            - /url: /volcengine/OpenViking/pulls
+        - listitem:
+          - link "Discussions" [ref=e24]:
+            - /url: /volcengine/OpenViking/discussions
+        - listitem:
+          - link "Actions" [ref=e25]:
+            - /url: /volcengine/OpenViking/actions
+        - listitem:
+          - link "Projects" [ref=e26]:
+            - /url: /volcengine/OpenViking/projects
+        - listitem:
+          - link "Security" [ref=e27]:
+            - /url: /volcengine/OpenViking/security
+        - listitem:
+          - link "Insights" [ref=e28]:
+            - /url: /volcengine/OpenViking/pulse
+    - heading "Collapse file tree" [ref=e29] [level=2]:
+      - button "Collapse file tree" [ref=e30] [expanded]
+    - heading "Files" [ref=e31] [level=2]
+    - button "main branch" [ref=e32]: main
+    - button "Search this repository (forward slash)" [ref=e33]
+    - combobox "Go to file" [ref=e34]
+    - navigation "File Tree Navigation" [ref=e35]:
+      - tree "Files":
+        - treeitem ".github" [ref=e36] [level=1]
+        - treeitem "bot" [ref=e37] [level=1]
+        - treeitem "build_support" [ref=e38] [level=1]
+        - treeitem "crates" [ref=e39] [level=1]
+        - treeitem "deploy" [ref=e40] [level=1]
+        - treeitem "docs" [ref=e41] [level=1]
+        - treeitem "examples" [ref=e42] [expanded] [level=1]:
+          - text: examples
+          - group "examples":
+            - treeitem "basic-usage" [ref=e43] [level=2]
+            - treeitem "claude-code-memory-plugin" [ref=e44] [level=2]
+            - treeitem "claude-memory-plugin" [ref=e45] [level=2]
+            - treeitem "cloud" [ref=e46] [level=2]
+            - treeitem "common" [ref=e47] [level=2]
+            - treeitem "k8s-helm" [ref=e48] [level=2]
+            - treeitem "mcp-query" [ref=e49] [level=2]
+            - treeitem "misc" [ref=e50] [level=2]
+            - treeitem "multi_tenant" [ref=e51] [level=2]
+            - treeitem "openclaw-plugin" [ref=e52] [expanded] [level=2]:
+              - text: openclaw-plugin
+              - group "openclaw-plugin":
+                - treeitem "__tests__" [ref=e53] [level=3]
+                - treeitem "setup-helper" [ref=e54] [level=3]
+                - treeitem "skills" [ref=e55] [level=3]
+                - treeitem "upgrade_scripts" [ref=e56] [level=3]
+                - treeitem ".gitignore" [ref=e57] [level=3]
+                - treeitem "INSTALL-AGENT.md" [ref=e58] [level=3]
+                - treeitem "INSTALL-ZH.md" [ref=e59] [level=3]
+                - treeitem "INSTALL.md" [ref=e60] [level=3]
+                - treeitem "README.md" [ref=e61] [level=3]
+                - treeitem "README_CN.md" [ref=e62] [level=3]
+                - treeitem "client.ts" [ref=e63] [level=3]
+                - treeitem "config.ts" [ref=e64] [level=3]
+                - treeitem "context-engine.ts" [ref=e65] [level=3]
+                - treeitem "demo-memory-ajie.py" [ref=e66] [level=3]
+                - treeitem "demo-memory-xiaomei.py" [ref=e67] [level=3]
+                - treeitem "index.ts" [ref=e68] [level=3]
+                - treeitem "install-manifest.json" [ref=e69] [level=3]
+                - treeitem "install.sh" [ref=e70] [level=3]
+                - treeitem "memory-ranking.ts" [ref=e71] [level=3]
+                - treeitem "openclaw.plugin.json" [ref=e72] [level=3]
+                - treeitem "package-lock.json" [ref=e73] [level=3]
+                - treeitem "package.json" [ref=e74] [level=3]
+                - treeitem "process-manager.ts" [ref=e75] [level=3]
+                - treeitem "text-utils.ts" [ref=e76] [level=3]
+                - treeitem "tsconfig.json" [ref=e77] [level=3]
+                - treeitem "vitest.config.ts" [ref=e78] [level=3]
+            - treeitem "opencode-memory-plugin" [ref=e79] [level=2]
+            - treeitem "opencode" [ref=e80] [level=2]
+            - treeitem "server_client" [ref=e81] [level=2]
+            - treeitem "skills" [ref=e82] [nth=1] [level=2]
+            - treeitem "ov.conf.example" [ref=e83] [level=2]
+            - treeitem "ovcli.conf.example" [ref=e84] [level=2]
+            - treeitem "quick_start.py" [ref=e85] [level=2]
+            - treeitem "watch_resource_example.py" [ref=e86] [level=2]
+        - treeitem "openviking" [ref=e87] [level=1]
+        - treeitem "openviking_cli" [ref=e88] [level=1]
+        - treeitem "src" [ref=e89] [level=1]
+        - treeitem "tests" [ref=e90] [level=1]
+        - treeitem "third_party" [ref=e91] [level=1]
+        - treeitem ".clang-format" [ref=e92] [level=1]
+        - treeitem ".gitignore" [ref=e93] [nth=1] [level=1]
+        - treeitem ".pr_agent.toml" [ref=e94] [level=1]
+        - treeitem ".pre-commit-config.yaml" [ref=e95] [level=1]
+        - treeitem "CONTRIBUTING.md" [ref=e96] [level=1]
+        - treeitem "CONTRIBUTING_CN.md" [ref=e97] [level=1]
+        - treeitem "CONTRIBUTING_JA.md" [ref=e98] [level=1]
+        - treeitem "Cargo.lock" [ref=e99] [level=1]
+        - treeitem "Cargo.toml" [ref=e100] [level=1]
+        - treeitem "Dockerfile" [ref=e101] [level=1]
+        - treeitem "LICENSE" [ref=e102] [level=1]
+        - treeitem "MANIFEST.in" [ref=e103] [level=1]
+        - treeitem "Makefile" [ref=e104] [level=1]
+        - treeitem "README.md" [ref=e105] [nth=1] [level=1]
+        - treeitem "README_CN.md" [ref=e106] [nth=1] [level=1]
+        - treeitem "README_JA.md" [ref=e107] [level=1]
+        - treeitem "docker-compose.yml" [ref=e108] [level=1]
+        - treeitem "pyproject.toml" [ref=e109] [level=1]
+        - treeitem "setup.py" [ref=e110] [level=1]
+        - treeitem "uv.lock" [ref=e111] [level=1]
+    - slider "Draggable pane splitter" [ref=e112]
+    - navigation "Breadcrumbs" [ref=e113]:
+      - heading "Breadcrumbs" [ref=e114] [level=2]
+      - list:
+        - listitem:
+          - link "OpenViking" [ref=e115] [nth=1]:
+            - /url: /volcengine/OpenViking/tree/main
+        - listitem:
+          - link "examples" [ref=e116]:
+            - /url: /volcengine/OpenViking/tree/main/examples
+        - listitem:
+          - link "openclaw-plugin" [ref=e117]:
+            - /url: /volcengine/OpenViking/tree/main/examples/openclaw-plugin
+    - heading "README_CN.md" [ref=e118] [level=1]
+    - button "Copy path" [ref=e119]
+    - button "More file actions" [ref=e120]
+    - heading "Latest commit" [ref=e121] [level=2]
+    - link "yuyaoyoyo-svg" [ref=e122]:
+      - /url: /yuyaoyoyo-svg
+      - img "yuyaoyoyo-svg"
+    - link "commits by yuyaoyoyo-svg" [ref=e123]:
+      - /url: /volcengine/OpenViking/commits?author=yuyaoyoyo-svg
+      - text: yuyaoyoyo-svg
+    - link "Update README_CN.md (" [ref=e124]:
+      - /url: /volcengine/OpenViking/commit/933dbbdaea8fa90a41430e348b35b56ac7af6161
+    - link "#920" [ref=e125]:
+      - /url: https://github.com/volcengine/OpenViking/pull/920
+    - link ")" [ref=e126]:
+      - /url: /volcengine/OpenViking/commit/933dbbdaea8fa90a41430e348b35b56ac7af6161
+    - button "Open commit details" [ref=e127]
+    - link "Commit 933dbbd" [ref=e128]:
+      - /url: /volcengine/OpenViking/commit/933dbbdaea8fa90a41430e348b35b56ac7af6161
+      - text: 933dbbd
+    - text: · Mar 24, 20263 days ago
+    - heading "History" [ref=e129] [level=2]
+    - link "History" [ref=e130]:
+      - /url: /volcengine/OpenViking/commits/main/examples/openclaw-plugin/README_CN.md
+    - heading "File metadata and controls" [ref=e131] [level=2]
+    - list "File view":
+      - listitem:
+        - button "Preview" [ref=e132]
+      - listitem:
+        - button "Code" [ref=e133]
+      - listitem:
+        - button "Blame" [ref=e134]
+    - link "Raw" [ref=e135]:
+      - /url: https://github.com/volcengine/OpenViking/raw/refs/heads/main/examples/openclaw-plugin/README_CN.md
+    - button "Copy raw file" [ref=e136]
+    - button "Download raw file" [ref=e137]
+    - button "You must be signed in to make or propose changes" [ref=e138] [disabled]
+    - button "More edit options" [ref=e139]
+    - button "Outline" [ref=e140]
+    - region "README_CN.md" [ref=e141]:
+      - article:
+        - heading "OpenClaw + OpenViking 上下文引擎插件" [ref=e142] [level=1]
+        - 'link "Permalink: OpenClaw + OpenViking 上下文引擎插件"':
+          - /url: "#openclaw--openviking-上下文引擎插件"
+        - paragraph:
+          - text: 使用
+          - link "OpenViking" [ref=e143] [nth=2]:
+            - /url: https://github.com/volcengine/OpenViking
+          - text: 作为
+          - link "OpenClaw" [ref=e144]:
+            - /url: https://github.com/openclaw/openclaw
+          - text: 的长期记忆后端。在 OpenClaw 中，此插件注册为
+          - code: openviking
+          - text: 上下文引擎。安装后，OpenClaw 将自动
+          - strong: 记忆
+          - text: 对话中的重要信息，并在响应前
+          - strong: 召回
+          - text: 相关上下文。
+        - blockquote:
+          - paragraph:
+            - strong: ℹ️ 历史兼容性说明
+          - paragraph:
+            - text: 传统的 OpenViking/OpenClaw 集成在 OpenClaw
+            - code: 2026.3.12
+            - text: 附近存在一个已知问题，即对话可能在插件加载后挂起。 该问题仅影响传统插件路径；本文档中描述的当前上下文引擎插件 2.0 不受此影响，因此新安装无需因此降级 OpenClaw。 插件 2.0 也不向后兼容传统的
+            - code: memory-openviking
+            - text: 插件及其配置，因此升级必须替换旧设置，而不是混合使用两个版本。 插件 2.0 还依赖于 OpenClaw 的上下文引擎功能，不支持旧版 OpenClaw；使用此插件前请先升级 OpenClaw。 如果您正在排查传统部署的问题，请参阅
+            - link "#591" [ref=e145]:
+              - /url: https://github.com/volcengine/OpenViking/issues/591
+            - text: 和上游修复 PR：
+            - link "openclaw/openclaw#34673" [ref=e146]:
+              - /url: https://github.com/openclaw/openclaw/pull/34673
+            - text: 、
+            - link "openclaw/openclaw#33547" [ref=e147]:
+              - /url: https://github.com/openclaw/openclaw/pull/33547
+            - text: 。
+        - blockquote:
+          - paragraph:
+            - strong: 🚀 插件 2.0（上下文引擎架构）
+          - paragraph:
+            - text: 本文档涵盖当前基于上下文引擎架构的 OpenViking 插件 2.0，这是 AI 编码助手的推荐集成路径。 有关设计背景和早期讨论，请参阅：
+            - link "#525" [ref=e148]:
+              - /url: https://github.com/volcengine/OpenViking/discussions/525
+        - separator
+        - heading "目录" [ref=e149] [level=2]
+        - 'link "Permalink: 目录"':
+          - /url: "#目录"
+        - list:
+          - listitem:
+            - link "一键安装" [ref=e150]:
+              - /url: "#%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85"
+          - listitem:
+            - link "手动设置" [ref=e151]:
+              - /url: "#%E6%89%8B%E5%8A%A8%E8%AE%BE%E7%BD%AE"
+            - list:
+              - listitem:
+                - link "前置要求" [ref=e152]:
+                  - /url: "#%E5%89%8D%E7%BD%AE%E8%A6%81%E6%B1%82"
+              - listitem:
+                - link "本地模式（个人使用）" [ref=e153]:
+                  - /url: "#%E6%9C%AC%E5%9C%B0%E6%A8%A1%E5%BC%8F%E4%B8%AA%E4%BA%BA%E4%BD%BF%E7%94%A8"
+              - listitem:
+                - link "远程模式（团队共享）" [ref=e154]:
+                  - /url: "#%E8%BF%9C%E7%A8%8B%E6%A8%A1%E5%BC%8F%E5%9B%A2%E9%98%9F%E5%85%B1%E4%BA%AB"
+              - listitem:
+                - link "火山引擎 ECS 部署" [ref=e155]:
+                  - /url: "#%E7%81%AB%E5%B1%B1%E5%BC%95%E6%93%8E-ecs-%E9%83%A8%E7%BD%B2"
+          - listitem:
+            - link "启动与验证" [ref=e156]:
+              - /url: "#%E5%90%AF%E5%8A%A8%E4%B8%8E%E9%AA%8C%E8%AF%81"
+          - listitem:
+            - link "配置参考" [ref=e157]:
+              - /url: "#%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83"
+          - listitem:
+            - link "日常使用" [ref=e158]:
+              - /url: "#%E6%97%A5%E5%B8%B8%E4%BD%BF%E7%94%A8"
+          - listitem:
+            - link "Web 控制台（可视化）" [ref=e159]:
+              - /url: "#web-%E6%8E%A7%E5%88%B6%E5%8F%B0%E5%8F%AF%E8%A7%86%E5%8C%96"
+          - listitem:
+            - link "故障排除" [ref=e160]:
+              - /url: "#%E6%95%85%E9%9A%9C%E6%8E%92%E9%99%A4"
+          - listitem:
+            - link "卸载" [ref=e161]:
+              - /url: "#%E5%8D%B8%E8%BD%BD"
+        - separator
+        - heading "一键安装" [ref=e162] [level=2]
+        - 'link "Permalink: 一键安装"':
+          - /url: "#一键安装"
+        - paragraph: 适用于想要快速获得本地体验的用户。安装助手会自动处理环境检测、依赖安装和配置文件生成。
+        - heading "方法 A：npm 安装（推荐，跨平台）" [ref=e163] [level=3]
+        - 'link "Permalink: 方法 A：npm 安装（推荐，跨平台）"':
+          - /url: "#方法-anpm-安装推荐跨平台"
+        - text: npm install -g openclaw-openviking-setup-helper ov-install
+        - button "Copy" [ref=e164]
+        - heading "方法 B：curl 一键安装（Linux / macOS）" [ref=e165] [level=3]
+        - 'link "Permalink: 方法 B：curl 一键安装（Linux / macOS）"':
+          - /url: "#方法-bcurl-一键安装linux--macos"
+        - text: curl -fsSL https://raw.githubusercontent.com/volcengine/OpenViking/main/examples/openclaw-plugin/install.sh | bash
+        - button "Copy" [ref=e166] [nth=1]
+        - paragraph: 安装助手将引导您完成：
+        - list:
+          - listitem:
+            - strong: 环境检查
+            - text: — 检测 Python >= 3.10、Node.js、cmake 等
+          - listitem:
+            - strong: 选择 OpenClaw 实例
+            - text: — 如果本地安装了多个实例，列出供您选择
+          - listitem:
+            - strong: 选择部署模式
+            - text: — 本地或远程（见下文）
+          - listitem:
+            - strong: 生成配置
+            - text: — 自动写入
+            - code: ~/.openviking/ov.conf
+            - text: 和
+            - code: ~/.openclaw/openviking.env
+        - group: 安装助手选项
+        - separator
+        - heading "手动设置" [ref=e167] [level=2]
+        - 'link "Permalink: 手动设置"':
+          - /url: "#手动设置"
+        - heading "前置要求" [ref=e168] [level=3]
+        - 'link "Permalink: 前置要求"':
+          - /url: "#前置要求"
+        - table:
+          - rowgroup:
+            - row "组件 版本 用途":
+              - columnheader "组件" [ref=e169]
+              - columnheader "版本" [ref=e170]
+              - columnheader "用途" [ref=e171]
+          - rowgroup:
+            - row "Python >= 3.10 OpenViking 运行时（本地模式）":
+              - cell "Python" [ref=e172]:
+                - strong: Python
+              - cell ">= 3.10" [ref=e173]
+              - cell "OpenViking 运行时（本地模式）" [ref=e174]
+            - row "Node.js >= 22 OpenClaw 运行时":
+              - cell "Node.js" [ref=e175]:
+                - strong: Node.js
+              - cell ">= 22" [ref=e176]
+              - cell "OpenClaw 运行时" [ref=e177]
+            - row "火山引擎 Ark API Key — Embedding + VLM 模型调用":
+              - cell "火山引擎 Ark API Key" [ref=e178]:
+                - strong: 火山引擎 Ark API Key
+              - cell "—" [ref=e179]
+              - cell "Embedding + VLM 模型调用" [ref=e180]
+        - text: "python3 --version # >= 3.10 node -v # >= v22 openclaw --version # 已安装"
+        - button "Copy" [ref=e181] [nth=2]
+        - list:
+          - listitem:
+            - text: "Python:"
+            - link "https://www.python.org/downloads/" [ref=e182]:
+              - /url: https://www.python.org/downloads/
+          - listitem:
+            - text: "Node.js:"
+            - link "https://nodejs.org/" [ref=e183]:
+              - /url: https://nodejs.org/
+          - listitem:
+            - text: "OpenClaw:"
+            - code: npm install -g openclaw && openclaw onboard
+        - separator
+        - heading "本地模式个人使用" [ref=e184] [level=3]
+        - 'link "Permalink: 本地模式个人使用"':
+          - /url: "#本地模式个人使用"
+        - paragraph: 最简单的选项 — 几乎无需配置。记忆服务与您的OpenClaw一起在本地运行。您只需要一个火山引擎Ark API Key。
+        - heading "步骤 1：安装 OpenViking" [ref=e185] [level=4]
+        - 'link "Permalink: 步骤 1：安装 OpenViking"':
+          - /url: "#步骤-1安装-openviking"
+        - text: python3 -m pip install openviking --upgrade
+        - button "Copy" [ref=e186] [nth=3]
+        - paragraph:
+          - text: 验证：
+          - code: python3 -c "import openviking; print('ok')"
+        - blockquote:
+          - paragraph:
+            - text: 遇到
+            - code: externally-managed-environment
+            - text: ？使用一键安装程序（自动处理 venv）或手动创建一个：
+          - text: python3 -m venv ~/.openviking/venv && ~/.openviking/venv/bin/pip install openviking
+          - button "Copy" [ref=e187] [nth=4]
+        - heading "步骤 2：运行安装助手" [ref=e188] [level=4]
+        - 'link "Permalink: 步骤 2：运行安装助手"':
+          - /url: "#步骤-2运行安装助手"
+        - text: "# 方法 A：npm 安装（推荐，跨平台） npm install -g openclaw-openviking-setup-helper ov-install # 方法 B：curl 一键安装（Linux / macOS） curl -fsSL https://raw.githubusercontent.com/volcengine/OpenViking/main/examples/openclaw-plugin/install.sh | bash"
+        - button "Copy" [ref=e189] [nth=5]
+        - paragraph:
+          - text: 选择
+          - strong: 本地
+          - text: 模式，保持默认设置，并输入您的 Ark API Key。
+        - paragraph: 生成的配置文件：
+        - list:
+          - listitem:
+            - code: ~/.openviking/ov.conf
+            - text: — OpenViking 服务配置
+          - listitem:
+            - code: ~/.openclaw/openviking.env
+            - text: — 环境变量（Python 路径等）
+        - heading "步骤 3：启动" [ref=e190] [level=4]
+        - 'link "Permalink: 步骤 3：启动"':
+          - /url: "#步骤-3启动"
+        - text: source ~/.openclaw/openviking.env && openclaw gateway restart
+        - button "Copy" [ref=e191] [nth=6]
+        - blockquote:
+          - paragraph:
+            - text: 在本地模式下，您必须先
+            - code: source
+            - text: 环境文件 — 插件会自动启动一个 OpenViking子进程。
+        - heading "步骤 4：验证" [ref=e192] [level=4]
+        - 'link "Permalink: 步骤 4：验证"':
+          - /url: "#步骤-4验证"
+        - text: "openclaw status # ContextEngine 行应显示：enabled (plugin openviking)"
+        - button "Copy" [ref=e193] [nth=7]
+        - separator
+        - heading "远程模式团队共享" [ref=e194] [level=3]
+        - 'link "Permalink: 远程模式团队共享"':
+          - /url: "#远程模式团队共享"
+        - paragraph:
+          - text: 适用于多个OpenClaw实例或团队使用。部署一个独立的OpenViking服务，供多个agents共享。
+          - strong: 客户端无需 Python/OpenViking。
+        - heading "步骤 1：部署 OpenViking 服务" [ref=e195] [level=4]
+        - 'link "Permalink: 步骤 1：部署 OpenViking 服务"':
+          - /url: "#步骤-1部署-openviking-服务"
+        - paragraph:
+          - text: 编辑
+          - code: ~/.openviking/ov.conf
+          - text: — 设置
+          - code: root_api_key
+          - text: 以启用多租户：
+        - text: "{ \"server\": { \"host\": \"127.0.0.1\", \"port\": 1933, \"root_api_key\": \"<your-root-api-key>\", \"cors_origins\": [\"*\"] }, \"storage\": { \"workspace\": \"~/.openviking/data\", \"vectordb\": { \"name\": \"context\", \"backend\": \"local\" }, \"agfs\": { \"log_level\": \"warn\", \"backend\": \"local\" } }, \"embedding\": { \"dense\": { \"provider\": \"volcengine\", \"api_key\": \"<your-ark-api-key>\", \"model\": \"doubao-embedding-vision-251215\", \"api_base\": \"https://ark.cn-beijing.volces.com/api/v3\", \"dimension\": 1024, \"input\": \"multimodal\" } }, \"vlm\": { \"provider\": \"volcengine\", \"api_key\": \"<your-ark-api-key>\", \"model\": \"doubao-seed-2-0-pro-260215\", \"api_base\": \"https://ark.cn-beijing.volces.com/api/v3\", \"temperature\": 0.1, \"max_retries\": 3 } }"
+        - button "Copy" [ref=e196] [nth=8]
+        - paragraph: 启动服务：
+        - text: openviking-server
+        - button "Copy" [ref=e197] [nth=9]
+        - heading "步骤 2：创建团队和用户" [ref=e198] [level=4]
+        - 'link "Permalink: 步骤 2：创建团队和用户"':
+          - /url: "#步骤-2创建团队和用户"
+        - text: "# 创建团队 + 管理员 curl -X POST http://localhost:1933/api/v1/admin/accounts \\ -H \"Content-Type: application/json\" \\ -H \"X-API-Key: <root-api-key>\" \\ -d '{ \"account_id\": \"my-team\", \"admin_user_id\": \"admin\" }' # 添加成员 curl -X POST http://localhost:1933/api/v1/admin/accounts/my-team/users \\ -H \"Content-Type: application/json\" \\ -H \"X-API-Key: <root-or-admin-key>\" \\ -d '{ \"user_id\": \"xiaomei\", \"role\": \"user\" }'"
+        - button "Copy" [ref=e199] [nth=10]
+        - heading "步骤 3：配置 OpenClaw 插件" [ref=e200] [level=4]
+        - 'link "Permalink: 步骤 3：配置 OpenClaw 插件"':
+          - /url: "#步骤-3配置-openclaw-插件"
+        - text: openclaw plugins enable openviking openclaw config set gateway.mode local openclaw config set plugins.slots.contextEngine openviking openclaw config set plugins.entries.openviking.config.mode remote openclaw config set plugins.entries.openviking.config.baseUrl "http://your-server:1933" openclaw config set plugins.entries.openviking.config.apiKey "<user-api-key>" openclaw config set plugins.entries.openviking.config.agentId "<agent-id>" openclaw config set plugins.entries.openviking.config.autoRecall true --json openclaw config set plugins.entries.openviking.config.autoCapture true --json
+        - button "Copy" [ref=e201] [nth=11]
+        - heading "步骤 4：启动与验证" [ref=e202] [level=4]
+        - 'link "Permalink: 步骤 4：启动与验证"':
+          - /url: "#步骤-4启动与验证"
+        - text: "# 远程模式 — 无需 source 环境文件 openclaw gateway restart openclaw status"
+        - button "Copy" [ref=e203] [nth=12]
+        - separator
+        - heading "火山引擎 ECS 部署" [ref=e204] [level=3]
+        - 'link "Permalink: 火山引擎 ECS 部署"':
+          - /url: "#火山引擎-ecs-部署"
+        - paragraph:
+          - text: 在火山引擎 ECS 上部署 OpenClaw + OpenViking。详见
+          - link "火山引擎文档" [ref=e205]:
+            - /url: https://www.volcengine.com/docs/6396/2249500?lang=zh
+          - text: 。
+        - blockquote:
+          - paragraph: ECS 实例限制在 root 下全局 pip 安装以保护系统 Python。请先创建 venv。
+        - text: "# 1. 安装 npm install -g openclaw-openviking-setup-helper ov-install # 2. 加载环境 source /root/.openclaw/openviking.env # 3. 启动 OpenViking 服务器 python -m openviking.server.bootstrap # 4. 启动 Web 控制台（确保入站安全组允许 TCP 8020） python -m openviking.console.bootstrap --host 0.0.0.0 --port 8020 --openviking-url http://127.0.0.1:1933"
+        - button "Copy" [ref=e206] [nth=13]
+        - paragraph:
+          - text: 访问
+          - code: http://<public-ip>:8020
+          - text: 使用 Web 控制台。
+        - separator
+        - heading "启动与验证" [ref=e207] [level=2]
+        - 'link "Permalink: 启动与验证"':
+          - /url: "#启动与验证"
+        - heading "本地模式" [ref=e208] [level=3]
+        - 'link "Permalink: 本地模式"':
+          - /url: "#本地模式"
+        - text: source ~/.openclaw/openviking.env && openclaw gateway restart
+        - button "Copy" [ref=e209] [nth=14]
+        - heading "远程模式" [ref=e210] [level=3]
+        - 'link "Permalink: 远程模式"':
+          - /url: "#远程模式"
+        - text: openclaw gateway restart
+        - button "Copy" [ref=e211] [nth=15]
+        - heading "检查插件状态" [ref=e212] [level=3]
+        - 'link "Permalink: 检查插件状态"':
+          - /url: "#检查插件状态"
+        - text: "openclaw status # ContextEngine 行应显示：enabled (plugin openviking)"
+        - button "Copy" [ref=e213] [nth=16]
+        - heading "查看插件配置" [ref=e214] [level=3]
+        - 'link "Permalink: 查看插件配置"':
+          - /url: "#查看插件配置"
+        - text: openclaw config get plugins.entries.openviking.config
+        - button "Copy" [ref=e215] [nth=17]
+        - separator
+        - heading "配置参考" [ref=e216] [level=2]
+        - 'link "Permalink: 配置参考"':
+          - /url: "#配置参考"
+        - heading "~/.openviking/ov.conf（本地模式）" [ref=e217] [level=3]:
+          - code: ~/.openviking/ov.conf
+          - text: （本地模式）
+        - 'link "Permalink: ~/.openviking/ov.conf（本地模式）"':
+          - /url: "#openvikingovconf本地模式"
+        - text: "{ \"root_api_key\": null, \"server\": { \"host\": \"127.0.0.1\", \"port\": 1933 }, \"storage\": { \"workspace\": \"~/.openviking/data\", \"vectordb\": { \"backend\": \"local\" }, \"agfs\": { \"backend\": \"local\", \"port\": 1833 } }, \"embedding\": { \"dense\": { \"provider\": \"volcengine\", \"api_key\": \"<your-ark-api-key>\", \"model\": \"doubao-embedding-vision-251215\", \"api_base\": \"https://ark.cn-beijing.volces.com/api/v3\", \"dimension\": 1024, \"input\": \"multimodal\" } }, \"vlm\": { \"provider\": \"volcengine\", \"api_key\": \"<your-ark-api-key>\", \"model\": \"doubao-seed-2-0-pro-260215\", \"api_base\": \"https://ark.cn-beijing.volces.com/api/v3\" } }"
+        - button "Copy" [ref=e218] [nth=18]
+        - blockquote:
+          - paragraph:
+            - code: root_api_key
+            - text: ：设置后，所有 HTTP 请求必须包含
+            - code: X-API-Key
+            - text: 头。本地模式下默认为
+            - code: "null"
+            - text: （禁用身份验证）。
+        - heading "插件配置选项" [ref=e219] [level=3]
+        - 'link "Permalink: 插件配置选项"':
+          - /url: "#插件配置选项"
+        - table:
+          - rowgroup:
+            - row "选项 默认值 描述":
+              - columnheader "选项" [ref=e220]
+              - columnheader "默认值" [ref=e221]
+              - columnheader "描述" [ref=e222]
+          - rowgroup:
+            - row "mode remote local（启动本地服务器）或 remote（连接远程服务器）":
+              - cell "mode" [ref=e223]:
+                - code: mode
+              - cell "remote" [ref=e224]:
+                - code: remote
+              - cell "local（启动本地服务器）或 remote（连接远程服务器）" [ref=e225]:
+                - code: local
+                - text: （启动本地服务器）或
+                - code: remote
+                - text: （连接远程服务器）
+            - row "baseUrl http://127.0.0.1:1933 OpenViking 服务器 URL（远程模式）":
+              - cell "baseUrl" [ref=e226]:
+                - code: baseUrl
+              - cell "http://127.0.0.1:1933" [ref=e227]:
+                - code: http://127.0.0.1:1933
+              - cell "OpenViking 服务器 URL（远程模式）" [ref=e228]
+            - row "apiKey — OpenViking API Key（可选）":
+              - cell "apiKey" [ref=e229]:
+                - code: apiKey
+              - cell "—" [ref=e230] [nth=1]
+              - cell "OpenViking API Key（可选）" [ref=e231]
+            - row "agentId 自动生成 agent标识符，用于区分 OpenClaw 实例。如果未设置则自动生成 openclaw-<hostname>-<random>":
+              - cell "agentId" [ref=e232]:
+                - code: agentId
+              - cell "自动生成" [ref=e233]
+              - cell "agent标识符，用于区分 OpenClaw 实例。如果未设置则自动生成 openclaw-<hostname>-<random>" [ref=e234]:
+                - text: agent标识符，用于区分 OpenClaw 实例。如果未设置则自动生成
+                - code: openclaw-<hostname>-<random>
+            - row "configPath ~/.openviking/ov.conf 配置文件路径（本地模式）":
+              - cell "configPath" [ref=e235]:
+                - code: configPath
+              - cell "~/.openviking/ov.conf" [ref=e236]:
+                - code: ~/.openviking/ov.conf
+              - cell "配置文件路径（本地模式）" [ref=e237]
+            - row "port 1933 本地服务器端口（本地模式）":
+              - cell "port" [ref=e238]:
+                - code: port
+              - cell "1933" [ref=e239]:
+                - code: "1933"
+              - cell "本地服务器端口（本地模式）" [ref=e240]
+            - row "targetUri viking://user/memories 默认记忆搜索范围":
+              - cell "targetUri" [ref=e241]:
+                - code: targetUri
+              - cell "viking://user/memories" [ref=e242]:
+                - code: viking://user/memories
+              - cell "默认记忆搜索范围" [ref=e243]
+            - row "autoCapture true 对话后自动提取记忆":
+              - cell "autoCapture" [ref=e244]:
+                - code: autoCapture
+              - cell "true" [ref=e245]:
+                - code: "true"
+              - cell "对话后自动提取记忆" [ref=e246]
+            - row "captureMode semantic 提取模式：semantic（完整语义）/ keyword（仅触发词）":
+              - cell "captureMode" [ref=e247]:
+                - code: captureMode
+              - cell "semantic" [ref=e248]:
+                - code: semantic
+              - cell "提取模式：semantic（完整语义）/ keyword（仅触发词）" [ref=e249]:
+                - text: 提取模式：
+                - code: semantic
+                - text: （完整语义）/
+                - code: keyword
+                - text: （仅触发词）
+            - row "captureMaxLength 24000 每次提取的最大文本长度":
+              - cell "captureMaxLength" [ref=e250]:
+                - code: captureMaxLength
+              - cell "24000" [ref=e251]:
+                - code: "24000"
+              - cell "每次提取的最大文本长度" [ref=e252]
+            - row "autoRecall true 对话前自动召回相关记忆":
+              - cell "autoRecall" [ref=e253]:
+                - code: autoRecall
+              - cell "true" [ref=e254] [nth=1]:
+                - code: "true"
+              - cell "对话前自动召回相关记忆" [ref=e255]
+            - row "recallLimit 6 自动召回期间注入的最大记忆数":
+              - cell "recallLimit" [ref=e256]:
+                - code: recallLimit
+              - cell "6" [ref=e257]:
+                - code: "6"
+              - cell "自动召回期间注入的最大记忆数" [ref=e258]
+            - row "recallScoreThreshold 0.01 召回的最低相关性分数":
+              - cell "recallScoreThreshold" [ref=e259]:
+                - code: recallScoreThreshold
+              - cell "0.01" [ref=e260]:
+                - code: "0.01"
+              - cell "召回的最低相关性分数" [ref=e261]
+            - row "ingestReplyAssist true 检测到多方对话文本时添加回复指导":
+              - cell "ingestReplyAssist" [ref=e262]:
+                - code: ingestReplyAssist
+              - cell "true" [ref=e263] [nth=2]:
+                - code: "true"
+              - cell "检测到多方对话文本时添加回复指导" [ref=e264]
+        - heading "~/.openclaw/openviking.env" [ref=e265] [level=3]:
+          - code: ~/.openclaw/openviking.env
+        - 'link "Permalink: ~/.openclaw/openviking.env"':
+          - /url: "#openclawopenvikingenv"
+        - paragraph: 由安装助手自动生成，存储环境变量（如 Python 路径）：
+        - text: export OPENVIKING_PYTHON='/usr/local/bin/python3'
+        - button "Copy" [ref=e266] [nth=19]
+        - separator
+        - heading "日常使用" [ref=e267] [level=2]
+        - 'link "Permalink: 日常使用"':
+          - /url: "#日常使用"
+        - text: "# 启动（本地模式 — 先 source 环境文件） source ~/.openclaw/openviking.env && openclaw gateway # 启动（远程模式 — 无需环境文件） openclaw gateway # 禁用上下文引擎 openclaw config set plugins.slots.contextEngine legacy # 重新启用 OpenViking 作为上下文引擎 openclaw config set plugins.slots.contextEngine openviking"
+        - button "Copy" [ref=e268] [nth=20]
+        - blockquote:
+          - paragraph: 更改上下文引擎插槽后请重启网关。
+        - separator
+        - heading "Web-控制台可视化" [ref=e269] [level=2]
+        - 'link "Permalink: Web-控制台可视化"':
+          - /url: "#web-控制台可视化"
+        - paragraph: OpenViking 提供 Web 控制台用于调试和检查存储的记忆。
+        - text: python -m openviking.console.bootstrap \ --host 127.0.0.1 \ --port 8020 \ --openviking-url http://127.0.0.1:1933 \ --write-enabled
+        - button "Copy" [ref=e270] [nth=21]
+        - paragraph:
+          - text: 在浏览器中打开
+          - link "http://127.0.0.1:8020。" [ref=e271]:
+            - /url: http://127.0.0.1:8020%E3%80%82
+        - separator
+        - heading "故障排除" [ref=e272] [level=2]
+        - 'link "Permalink: 故障排除"':
+          - /url: "#故障排除"
+        - heading "常见问题" [ref=e273] [level=3]
+        - 'link "Permalink: 常见问题"':
+          - /url: "#常见问题"
+        - table:
+          - rowgroup:
+            - row "症状 原因 解决方案":
+              - columnheader "症状" [ref=e274]
+              - columnheader "原因" [ref=e275]
+              - columnheader "解决方案" [ref=e276]
+          - rowgroup:
+            - 'row "对话挂起，无响应 通常是受历史 OpenClaw 2026.3.12 问题影响的 2.0 之前传统集成 如果您使用传统路径，请参阅 #591 并临时降级到 2026.3.11；对于当前安装，请迁移到插件 2.0"':
+              - cell "对话挂起，无响应" [ref=e277]
+              - cell "通常是受历史 OpenClaw 2026.3.12 问题影响的 2.0 之前传统集成" [ref=e278]:
+                - text: 通常是受历史 OpenClaw
+                - code: 2026.3.12
+                - text: 问题影响的 2.0 之前传统集成
+              - 'cell "如果您使用传统路径，请参阅 #591 并临时降级到 2026.3.11；对于当前安装，请迁移到插件 2.0"':
+                - text: 如果您使用传统路径，请参阅
+                - link "#591" [ref=e279] [nth=1]:
+                  - /url: https://github.com/volcengine/OpenViking/issues/591
+                - text: 并临时降级到
+                - code: 2026.3.11
+                - text: ；对于当前安装，请迁移到插件 2.0
+            - row "日志中出现 registerContextEngine is unavailable OpenClaw 版本过旧，未暴露插件 2.0 所需的上下文引擎 API 升级 OpenClaw 到当前版本，然后重启网关并验证 openclaw status 显示 openviking 作为 ContextEngine":
+              - cell "日志中出现 registerContextEngine is unavailable" [ref=e280]:
+                - text: 日志中出现
+                - code: registerContextEngine is unavailable
+              - cell "OpenClaw 版本过旧，未暴露插件 2.0 所需的上下文引擎 API" [ref=e281]
+              - cell "升级 OpenClaw 到当前版本，然后重启网关并验证 openclaw status 显示 openviking 作为 ContextEngine" [ref=e282]:
+                - text: 升级 OpenClaw 到当前版本，然后重启网关并验证
+                - code: openclaw status
+                - text: 显示
+                - code: openviking
+                - text: 作为 ContextEngine
+            - 'row "agent静默挂起，无输出 自动召回缺少超时保护 临时禁用自动召回：openclaw config set plugins.entries.openviking.config.autoRecall false --json，或应用 #673 中的补丁"':
+              - cell "agent静默挂起，无输出" [ref=e283]
+              - cell "自动召回缺少超时保护" [ref=e284]
+              - 'cell "临时禁用自动召回：openclaw config set plugins.entries.openviking.config.autoRecall false --json，或应用 #673 中的补丁"':
+                - text: 临时禁用自动召回：
+                - code: openclaw config set plugins.entries.openviking.config.autoRecall false --json
+                - text: ，或应用
+                - link "#673" [ref=e285]:
+                  - /url: https://github.com/volcengine/OpenViking/issues/673
+                - text: 中的补丁
+            - row "ContextEngine 不是 openviking 插件插槽未配置 openclaw config set plugins.slots.contextEngine openviking":
+              - cell "ContextEngine 不是 openviking" [ref=e286]:
+                - text: ContextEngine 不是
+                - code: openviking
+              - cell "插件插槽未配置" [ref=e287]
+              - cell "openclaw config set plugins.slots.contextEngine openviking" [ref=e288]:
+                - code: openclaw config set plugins.slots.contextEngine openviking
+            - 'row "memory_store failed: fetch failed OpenViking 未运行 检查 ov.conf 和 Python 路径；验证服务是否运行"':
+              - 'cell "memory_store failed: fetch failed"':
+                - code: "memory_store failed: fetch failed"
+              - cell "OpenViking 未运行" [ref=e289]
+              - cell "检查 ov.conf 和 Python 路径；验证服务是否运行" [ref=e290]:
+                - text: 检查
+                - code: ov.conf
+                - text: 和 Python 路径；验证服务是否运行
+            - row "health check timeout 端口被陈旧进程占用 lsof -ti tcp:1933 | xargs kill -9，然后重启":
+              - cell "health check timeout" [ref=e291]:
+                - code: health check timeout
+              - cell "端口被陈旧进程占用" [ref=e292]
+              - cell "lsof -ti tcp:1933 | xargs kill -9，然后重启" [ref=e293]:
+                - code: lsof -ti tcp:1933 | xargs kill -9
+                - text: ，然后重启
+            - row "extracted 0 memories API Key 或模型名称错误 检查 ov.conf 中的 api_key 和 model":
+              - cell "extracted 0 memories" [ref=e294]:
+                - code: extracted 0 memories
+              - cell "API Key 或模型名称错误" [ref=e295]
+              - cell "检查 ov.conf 中的 api_key 和 model" [ref=e296]:
+                - text: 检查
+                - code: ov.conf
+                - text: 中的
+                - code: api_key
+                - text: 和
+                - code: model
+            - row "port occupied 端口被其他进程占用 更改端口：openclaw config set plugins.entries.openviking.config.port 1934":
+              - cell "port occupied" [ref=e297]:
+                - code: port occupied
+              - cell "端口被其他进程占用" [ref=e298]
+              - cell "更改端口：openclaw config set plugins.entries.openviking.config.port 1934" [ref=e299]:
+                - text: 更改端口：
+                - code: openclaw config set plugins.entries.openviking.config.port 1934
+            - row "插件未加载 环境文件未 source 启动前运行 source ~/.openclaw/openviking.env":
+              - cell "插件未加载" [ref=e300]
+              - cell "环境文件未 source" [ref=e301]
+              - cell "启动前运行 source ~/.openclaw/openviking.env" [ref=e302]:
+                - text: 启动前运行
+                - code: source ~/.openclaw/openviking.env
+            - row "externally-managed-environment Python PEP 668 限制 使用 venv 或一键安装程序":
+              - cell "externally-managed-environment" [ref=e303]:
+                - code: externally-managed-environment
+              - cell "Python PEP 668 限制" [ref=e304]
+              - cell "使用 venv 或一键安装程序" [ref=e305]
+            - 'row "TypeError: unsupported operand type(s) for | Python < 3.10 升级 Python 到 3.10+"':
+              - 'cell "TypeError: unsupported operand type(s) for |"':
+                - code: "TypeError: unsupported operand type(s) for |"
+              - cell "Python < 3.10" [ref=e306]
+              - cell "升级 Python 到 3.10+" [ref=e307]
+        - heading "查看日志" [ref=e308] [level=3]
+        - 'link "Permalink: 查看日志"':
+          - /url: "#查看日志"
+        - text: "# OpenViking 日志 cat ~/.openviking/data/log/openviking.log # OpenClaw 网关日志 cat ~/.openclaw/logs/gateway.log cat ~/.openclaw/logs/gateway.err.log # 检查 OpenViking 进程是否存活 lsof -i:1933 # 快速连接检查 curl http://localhost:1933 # 预期：{\"detail\":\"Not Found\"}"
+        - button "Copy" [ref=e309] [nth=22]
+        - separator
+        - heading "卸载" [ref=e310] [level=2]
+        - 'link "Permalink: 卸载"':
+          - /url: "#卸载"
+        - text: lsof -ti tcp:1933 tcp:1833 tcp:18789 | xargs kill -9 python3 -m pip uninstall openviking -y && rm -rf ~/.openviking
+        - button "Copy" [ref=e311] [nth=23]
+        - separator
+        - paragraph:
+          - strong: 另见：
+          - link "INSTALL-ZH.md" [ref=e312]:
+            - /url: /volcengine/OpenViking/blob/main/examples/openclaw-plugin/INSTALL-ZH.md
+          - text: （中文详细安装指南）·
+          - link "INSTALL.md" [ref=e313]:
+            - /url: /volcengine/OpenViking/blob/main/examples/openclaw-plugin/INSTALL.md
+          - text: （英文安装指南）·
+          - link "INSTALL-AGENT.md" [ref=e314]:
+            - /url: /volcengine/OpenViking/blob/main/examples/openclaw-plugin/INSTALL-AGENT.md
+          - text: （Agent 安装指南）
+  - alert

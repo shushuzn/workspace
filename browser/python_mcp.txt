@@ -1,0 +1,149 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fvolcengine%2FOpenViking%2Ftree%2Fmain%2Fexamples%2Fpython-mcp
+    - heading "Sign in to GitHub" [ref=e13] [level=4]
+    - text: Username or email address
+    - textbox "Username or email address" [ref=e14]
+    - text: Password
+    - textbox "Password" [ref=e15]
+    - link "Forgot password?" [ref=e16]:
+      - /url: /password_reset
+    - button "Sign in" [ref=e17]
+    - link "or continue with other methods" [ref=e18]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fvolcengine%2FOpenViking%2Ftree%2Fmain%2Fexamples%2Fpython-mcp
+    - link "Sign up" [ref=e19]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Ffiles%2Fdisambiguate&source=header-repo&source_repo=volcengine%2FOpenViking
+    - button "Appearance settings" [ref=e20]
+  - main:
+    - link "volcengine" [ref=e21]:
+      - /url: /volcengine
+    - text: /
+    - strong:
+      - link "OpenViking" [ref=e22]:
+        - /url: /volcengine/OpenViking
+    - text: Public
+    - list:
+      - listitem:
+        - link "You must be signed in to change notification settings" [ref=e23]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Notifications
+      - listitem:
+        - link "Fork 1.4k" [ref=e24]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+      - listitem:
+        - link "You must be signed in to star a repository" [ref=e25]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Star 19.5k
+    - navigation "Repository" [ref=e26]:
+      - list:
+        - listitem:
+          - link "Code" [ref=e27]:
+            - /url: /volcengine/OpenViking
+        - listitem:
+          - link "Issues 63" [ref=e28]:
+            - /url: /volcengine/OpenViking/issues
+        - listitem:
+          - link "Pull requests 40" [ref=e29]:
+            - /url: /volcengine/OpenViking/pulls
+        - listitem:
+          - link "Discussions" [ref=e30]:
+            - /url: /volcengine/OpenViking/discussions
+        - listitem:
+          - link "Actions" [ref=e31]:
+            - /url: /volcengine/OpenViking/actions
+        - listitem:
+          - link "Projects" [ref=e32]:
+            - /url: /volcengine/OpenViking/projects
+        - listitem:
+          - link "Security" [ref=e33]:
+            - /url: /volcengine/OpenViking/security
+        - listitem:
+          - link "Insights" [ref=e34]:
+            - /url: /volcengine/OpenViking/pulse
+    - heading "Collapse file tree" [ref=e35] [level=2]:
+      - button "Collapse file tree" [ref=e36] [expanded]
+    - heading "Files" [ref=e37] [level=2]
+    - button "main branch" [ref=e38]: main
+    - button "Search this repository (forward slash)" [ref=e39]
+    - combobox "Go to file" [ref=e40]
+    - navigation "File Tree Navigation" [ref=e41]:
+      - tree "Files":
+        - treeitem ".github" [ref=e42] [level=1]
+        - treeitem "bot" [ref=e43] [level=1]
+        - treeitem "build_support" [ref=e44] [level=1]
+        - treeitem "crates" [ref=e45] [level=1]
+        - treeitem "deploy" [ref=e46] [level=1]
+        - treeitem "docs" [ref=e47] [level=1]
+        - treeitem "examples" [ref=e48] [level=1]
+        - treeitem "openviking" [ref=e49] [level=1]
+        - treeitem "openviking_cli" [ref=e50] [level=1]
+        - treeitem "src" [ref=e51] [level=1]
+        - treeitem "tests" [ref=e52] [level=1]
+        - treeitem "third_party" [ref=e53] [level=1]
+        - treeitem ".clang-format" [ref=e54] [level=1]
+        - treeitem ".gitignore" [ref=e55] [level=1]
+        - treeitem ".pr_agent.toml" [ref=e56] [level=1]
+        - treeitem ".pre-commit-config.yaml" [ref=e57] [level=1]
+        - treeitem "CONTRIBUTING.md" [ref=e58] [level=1]
+        - treeitem "CONTRIBUTING_CN.md" [ref=e59] [level=1]
+        - treeitem "CONTRIBUTING_JA.md" [ref=e60] [level=1]
+        - treeitem "Cargo.lock" [ref=e61] [level=1]
+        - treeitem "Cargo.toml" [ref=e62] [level=1]
+        - treeitem "Dockerfile" [ref=e63] [level=1]
+        - treeitem "LICENSE" [ref=e64] [level=1]
+        - treeitem "MANIFEST.in" [ref=e65] [level=1]
+        - treeitem "Makefile" [ref=e66] [level=1]
+        - treeitem "README.md" [ref=e67] [level=1]
+        - treeitem "README_CN.md" [ref=e68] [level=1]
+        - treeitem "README_JA.md" [ref=e69] [level=1]
+        - treeitem "docker-compose.yml" [ref=e70] [level=1]
+        - treeitem "pyproject.toml" [ref=e71] [level=1]
+        - treeitem "setup.py" [ref=e72] [level=1]
+        - treeitem "uv.lock" [ref=e73] [level=1]
+    - slider "Draggable pane splitter" [ref=e74]
+    - navigation "Breadcrumbs" [ref=e75]:
+      - heading "Breadcrumbs" [ref=e76] [level=2]
+      - list:
+        - listitem:
+          - link "OpenViking" [ref=e77] [nth=1]:
+            - /url: /volcengine/OpenViking/tree/main
+        - listitem:
+          - link "examples" [ref=e78]:
+            - /url: /volcengine/OpenViking/tree/main/examples
+    - heading "python-mcp" [ref=e79] [level=1]
+    - button "Copy path" [ref=e80]
+    - heading "Directory actions" [ref=e81] [level=2]
+    - heading "More options" [ref=e82] [level=2]
+    - button "More options" [ref=e83]
+    - text: 404 - page not found The
+    - paragraph: main
+    - text: branch of
+    - paragraph: OpenViking
+    - text: does not contain the path
+    - paragraph: examples/python-mcp.
+    - link "go to Overview" [ref=e84]:
+      - /url: /volcengine/OpenViking
+      - text: Return to the repository overview

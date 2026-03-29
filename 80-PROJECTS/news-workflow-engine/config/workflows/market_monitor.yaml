@@ -1,0 +1,25 @@
+description: 监控市场动态并更新仪表板
+id: market_monitor
+name: 市场监控
+tasks:
+- action: extract_data
+  description: 从新闻中提取关键市场数据
+  name: 提取关键数据
+  priority: 10
+- action: update_dashboard
+  depends_on:
+  - 0
+  description: 更新市场监控仪表板数据
+  name: 更新监控仪表板
+  priority: 8
+- action: check_anomaly
+  depends_on:
+  - 1
+  description: 检查是否有异常波动并告警
+  name: 检查异常波动
+  priority: 7
+trigger:
+  category:
+  - finance
+  - market
+  min_importance: 0.6

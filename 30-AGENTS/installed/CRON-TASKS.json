@@ -1,0 +1,50 @@
+{
+  "cron_tasks": [
+    {
+      "id": "cron-001",
+      "name": "每日早报",
+      "agent_id": "nWyDpW",
+      "schedule": "0 7 * * 1-5",
+      "prompt": "执行 Morning Briefing，整理今日邮件、日历、任务和行业新闻摘要，控制在 2 分钟阅读量",
+      "target_channel": "console",
+      "timezone": "Asia/Shanghai",
+      "enabled": true,
+      "description": "工作日早上 7 点推送个性化早报"
+    },
+    {
+      "id": "cron-002",
+      "name": "早间资讯",
+      "agent_id": "nWyDpW",
+      "schedule": "0 8 * * *",
+      "prompt": "执行 News Curator，抓取 techcrunch/hackernews/reddit 的今日热点，整理成 5 条摘要",
+      "target_channel": "console",
+      "timezone": "Asia/Shanghai",
+      "enabled": true,
+      "description": "每日早 8 点行业资讯推送"
+    },
+    {
+      "id": "cron-003",
+      "name": "晚间资讯",
+      "agent_id": "nWyDpW",
+      "schedule": "0 18 * * *",
+      "prompt": "执行 News Curator Evening，整理当日行业动态和值得关注的事件",
+      "target_channel": "console",
+      "timezone": "Asia/Shanghai",
+      "enabled": true,
+      "description": "每日晚 6 点晚间资讯汇总"
+    },
+    {
+      "id": "cron-004",
+      "name": "周安全扫描",
+      "agent_id": "nWyDpW",
+      "schedule": "0 2 * * 0",
+      "prompt": "执行 Vuln Scanner，扫描 workspace 下所有项目的依赖漏洞，生成修复优先级报告",
+      "target_channel": "console",
+      "timezone": "Asia/Shanghai",
+      "enabled": true,
+      "description": "每周日凌晨 2 点全量安全扫描"
+    }
+  ],
+  "import_command": "copaw cron import --file 30-AGENTS/installed/CRON-TASKS.json",
+  "note": "需要在 CoPaw 运行状态下导入，或通过 Web 面板配置"
+}

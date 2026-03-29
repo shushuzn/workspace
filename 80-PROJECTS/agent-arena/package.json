@@ -1,0 +1,22 @@
+{
+  "name": "agent-arena",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "AI Agent 养成竞技游戏",
+  "repository": "https://github.com/shushuzn/agent-arena.git",
+  "keywords": ["game", "AI", "agents", "battle", "arena", "svelte"],
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^4.0.0",
+    "svelte": "^5.0.0",
+    "vite": "^5.4.0",
+    "vitest": "^4.1.2"
+  }
+}

@@ -1,0 +1,171 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fobra%2Fsuperpowers%2Ftree%2Fmain%2F.opencode
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Ffiles%2Fdisambiguate&source=header-repo&source_repo=obra%2Fsuperpowers
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - link "obra" [ref=e15]:
+      - /url: /obra
+    - text: /
+    - strong:
+      - link "superpowers" [ref=e16]:
+        - /url: /obra/superpowers
+    - text: Public
+    - list:
+      - listitem:
+        - link "Sponsor @obra" [ref=e17]:
+          - /url: /sponsors/obra
+          - text: Sponsor
+      - listitem:
+        - link "You must be signed in to change notification settings" [ref=e18]:
+          - /url: /login?return_to=%2Fobra%2Fsuperpowers
+          - text: Notifications
+      - listitem:
+        - link "Fork 9.5k" [ref=e19]:
+          - /url: /login?return_to=%2Fobra%2Fsuperpowers
+      - listitem:
+        - link "You must be signed in to star a repository" [ref=e20]:
+          - /url: /login?return_to=%2Fobra%2Fsuperpowers
+          - text: Star 118k
+    - navigation "Repository" [ref=e21]:
+      - list:
+        - listitem:
+          - link "Code" [ref=e22]:
+            - /url: /obra/superpowers
+        - listitem:
+          - link "Issues 74" [ref=e23]:
+            - /url: /obra/superpowers/issues
+        - listitem:
+          - link "Pull requests 96" [ref=e24]:
+            - /url: /obra/superpowers/pulls
+        - listitem:
+          - link "Actions" [ref=e25]:
+            - /url: /obra/superpowers/actions
+        - listitem:
+          - link "Projects" [ref=e26]:
+            - /url: /obra/superpowers/projects
+        - listitem:
+          - link "Security" [ref=e27]:
+            - /url: /obra/superpowers/security
+        - listitem:
+          - link "Insights" [ref=e28]:
+            - /url: /obra/superpowers/pulse
+    - heading "Collapse file tree" [ref=e29] [level=2]:
+      - button "Collapse file tree" [ref=e30] [expanded]
+    - heading "Files" [ref=e31] [level=2]
+    - button "main branch" [ref=e32]: main
+    - button "Search this repository (forward slash)" [ref=e33]
+    - combobox "Go to file" [ref=e34]
+    - navigation "File Tree Navigation" [ref=e35]:
+      - tree "Files":
+        - treeitem ".claude-plugin" [ref=e36] [level=1]
+        - treeitem ".codex" [ref=e37] [level=1]
+        - treeitem ".cursor-plugin" [ref=e38] [level=1]
+        - treeitem ".github" [ref=e39] [level=1]
+        - treeitem ".opencode" [ref=e40] [expanded] [level=1]:
+          - text: .opencode
+          - group ".opencode":
+            - treeitem "plugins" [ref=e41] [level=2]
+            - treeitem "INSTALL.md" [ref=e42] [level=2]
+        - treeitem "agents" [ref=e43] [level=1]
+        - treeitem "commands" [ref=e44] [level=1]
+        - treeitem "docs" [ref=e45] [level=1]
+        - treeitem "hooks" [ref=e46] [level=1]
+        - treeitem "skills" [ref=e47] [level=1]
+        - treeitem "tests" [ref=e48] [level=1]
+        - treeitem ".gitattributes" [ref=e49] [level=1]
+        - treeitem ".gitignore" [ref=e50] [level=1]
+        - treeitem "CHANGELOG.md" [ref=e51] [level=1]
+        - treeitem "CODE_OF_CONDUCT.md" [ref=e52] [level=1]
+        - treeitem "GEMINI.md" [ref=e53] [level=1]
+        - treeitem "LICENSE" [ref=e54] [level=1]
+        - treeitem "README.md" [ref=e55] [level=1]
+        - treeitem "RELEASE-NOTES.md" [ref=e56] [level=1]
+        - treeitem "gemini-extension.json" [ref=e57] [level=1]
+        - treeitem "package.json" [ref=e58] [level=1]
+    - slider "Draggable pane splitter" [ref=e59]
+    - navigation "Breadcrumbs" [ref=e60]:
+      - heading "Breadcrumbs" [ref=e61] [level=2]
+      - list:
+        - listitem:
+          - link "superpowers" [ref=e62] [nth=1]:
+            - /url: /obra/superpowers/tree/main
+    - heading ".opencode" [ref=e63] [level=1]
+    - button "Copy path" [ref=e64]
+    - heading "Directory actions" [ref=e65] [level=2]
+    - heading "More options" [ref=e66] [level=2]
+    - button "More options" [ref=e67]
+    - heading "Latest commit" [ref=e68] [level=2]
+    - img "jesse"
+    - img "claude"
+    - text: jesse and
+    - link "commits by claude" [ref=e69]:
+      - /url: /obra/superpowers/commits?author=claude
+      - text: claude
+    - link "Auto-register skills from plugin, simplify OpenCode install to one line" [ref=e70]:
+      - /url: /obra/superpowers/commit/f4b54a17171e4cf90601db6b6fc4ba3ab1c1f206
+    - button "Open commit details" [ref=e71]
+    - link "Commit f4b54a1" [ref=e72]:
+      - /url: /obra/superpowers/commit/f4b54a17171e4cf90601db6b6fc4ba3ab1c1f206
+      - text: f4b54a1
+    - text: · Mar 16, 20262 weeks ago
+    - heading "History" [ref=e73] [level=2]
+    - link "History" [ref=e74]:
+      - /url: /obra/superpowers/commits/main/.opencode
+    - heading "Folders and files" [ref=e75] [level=2]
+    - table "Folders and files":
+      - rowgroup:
+        - row "Name Last commit message Last commit date":
+          - columnheader "Name" [ref=e76]
+          - columnheader "Last commit message" [ref=e77]
+          - columnheader "Last commit date" [ref=e78]
+      - rowgroup:
+        - row "parent directory Parent directory":
+          - cell "parent directory Parent directory" [ref=e79]:
+            - heading "parent directory" [ref=e80] [level=3]
+            - link "Parent directory" [ref=e81]:
+              - /url: /obra/superpowers/tree/main
+              - text: ..
+        - row "plugins, (Directory) Auto-register skills from plugin, simplify OpenCode install to one line Mar 16, 20262 weeks ago":
+          - cell "plugins, (Directory)" [ref=e82]:
+            - link "plugins, (Directory)" [ref=e83]:
+              - /url: /obra/superpowers/tree/main/.opencode/plugins
+              - text: plugins
+          - cell "Auto-register skills from plugin, simplify OpenCode install to one line" [ref=e84]:
+            - link "Auto-register skills from plugin, simplify OpenCode install to one line" [ref=e85] [nth=1]:
+              - /url: /obra/superpowers/commit/f4b54a17171e4cf90601db6b6fc4ba3ab1c1f206
+          - cell "Mar 16, 20262 weeks ago" [ref=e86]
+        - row "INSTALL.md, (File) Auto-register skills from plugin, simplify OpenCode install to one line Mar 16, 20262 weeks ago":
+          - cell "INSTALL.md, (File)" [ref=e87]:
+            - link "INSTALL.md, (File)" [ref=e88]:
+              - /url: /obra/superpowers/blob/main/.opencode/INSTALL.md
+              - text: INSTALL.md
+          - cell "Auto-register skills from plugin, simplify OpenCode install to one line" [ref=e89] [nth=1]:
+            - link "Auto-register skills from plugin, simplify OpenCode install to one line" [ref=e90] [nth=2]:
+              - /url: /obra/superpowers/commit/f4b54a17171e4cf90601db6b6fc4ba3ab1c1f206
+          - cell "Mar 16, 20262 weeks ago" [ref=e91] [nth=1]
+  - alert

@@ -1,0 +1,502 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Ftrending
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2Ftrending&source=header
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - navigation "Explore navigation" [ref=e15]:
+      - link "Explore" [ref=e16]:
+        - /url: /explore
+      - link "Topics" [ref=e17]:
+        - /url: /topics
+      - link "Trending" [ref=e18]:
+        - /url: /trending
+      - link "Collections" [ref=e19]:
+        - /url: /collections
+      - link "Events" [ref=e20]:
+        - /url: /events
+      - link "GitHub Sponsors" [ref=e21]:
+        - /url: /sponsors/explore
+    - heading "Trending" [ref=e22] [level=1]
+    - paragraph: See what the GitHub community is most excited about today.
+    - navigation "Trending" [ref=e23]:
+      - link "Repositories" [ref=e24]:
+        - /url: /trending
+      - link "Developers" [ref=e25]:
+        - /url: /trending/developers
+    - group:
+      - 'button "Spoken Language: Any"'
+    - group:
+      - 'button "Language: Any"'
+    - group:
+      - 'button "Date range: Today"'
+    - article:
+      - link "You must be signed in to star a repository" [ref=e26]:
+        - /url: /login?return_to=%2Fmvanhorn%2Flast30days-skill
+        - text: Star
+      - heading "mvanhorn / last30days-skill" [ref=e27] [level=2]:
+        - link "mvanhorn / last30days-skill" [ref=e28]:
+          - /url: /mvanhorn/last30days-skill
+      - paragraph: AI agent skill that researches any topic across Reddit, X, YouTube, HN, Polymarket, and the web - then synthesizes a grounded summary
+      - text: Python
+      - link "star 11,815" [ref=e29]:
+        - /url: /mvanhorn/last30days-skill/stargazers
+        - img "star"
+        - text: 11,815
+      - link "fork 959" [ref=e30]:
+        - /url: /mvanhorn/last30days-skill/forks
+        - img "fork"
+        - text: "959"
+      - text: Built by
+      - link "@mvanhorn" [ref=e31]:
+        - /url: /mvanhorn
+        - img "@mvanhorn"
+      - link "@claude" [ref=e32]:
+        - /url: /claude
+        - img "@claude"
+      - link "@j-sperling" [ref=e33]:
+        - /url: /j-sperling
+        - img "@j-sperling"
+      - link "@phjlljp" [ref=e34]:
+        - /url: /phjlljp
+        - img "@phjlljp"
+      - link "@iliaal" [ref=e35]:
+        - /url: /iliaal
+        - img "@iliaal"
+      - text: 2,824 stars today
+    - article:
+      - link "Sponsor @hacksider" [ref=e36]:
+        - /url: /sponsors/hacksider
+        - text: Sponsor
+      - link "You must be signed in to star a repository" [ref=e37] [nth=1]:
+        - /url: /login?return_to=%2Fhacksider%2FDeep-Live-Cam
+        - text: Star
+      - heading "hacksider / Deep-Live-Cam" [ref=e38] [level=2]:
+        - link "hacksider / Deep-Live-Cam" [ref=e39]:
+          - /url: /hacksider/Deep-Live-Cam
+      - paragraph: real time face swap and one-click video deepfake with only a single image
+      - text: Python
+      - link "star 82,135" [ref=e40]:
+        - /url: /hacksider/Deep-Live-Cam/stargazers
+        - img "star"
+        - text: 82,135
+      - link "fork 11,995" [ref=e41]:
+        - /url: /hacksider/Deep-Live-Cam/forks
+        - img "fork"
+        - text: 11,995
+      - text: Built by
+      - link "@hacksider" [ref=e42]:
+        - /url: /hacksider
+        - img "@hacksider"
+      - link "@KRSHH" [ref=e43]:
+        - /url: /KRSHH
+        - img "@KRSHH"
+      - link "@vic4key" [ref=e44]:
+        - /url: /vic4key
+        - img "@vic4key"
+      - link "@laurigates" [ref=e45]:
+        - /url: /laurigates
+        - img "@laurigates"
+      - link "@pereiraroland26" [ref=e46]:
+        - /url: /pereiraroland26
+        - img "@pereiraroland26"
+      - text: 1,546 stars today
+    - article:
+      - link "You must be signed in to star a repository" [ref=e47] [nth=2]:
+        - /url: /login?return_to=%2FSakanaAI%2FAI-Scientist-v2
+        - text: Star
+      - heading "SakanaAI / AI-Scientist-v2" [ref=e48] [level=2]:
+        - link "SakanaAI / AI-Scientist-v2" [ref=e49]:
+          - /url: /SakanaAI/AI-Scientist-v2
+      - paragraph: "The AI Scientist-v2: Workshop-Level Automated Scientific Discovery via Agentic Tree Search"
+      - text: Python
+      - link "star 2,660" [ref=e50]:
+        - /url: /SakanaAI/AI-Scientist-v2/stargazers
+        - img "star"
+        - text: 2,660
+      - link "fork 463" [ref=e51]:
+        - /url: /SakanaAI/AI-Scientist-v2/forks
+        - img "fork"
+        - text: "463"
+      - text: Built by
+      - link "@conglu1997" [ref=e52]:
+        - /url: /conglu1997
+        - img "@conglu1997"
+      - link "@kotama7" [ref=e53]:
+        - /url: /kotama7
+        - img "@kotama7"
+      - link "@runopti" [ref=e54]:
+        - /url: /runopti
+        - img "@runopti"
+      - link "@RobertTLange" [ref=e55]:
+        - /url: /RobertTLange
+        - img "@RobertTLange"
+      - link "@Shawn-Hwang" [ref=e56]:
+        - /url: /Shawn-Hwang
+        - img "@Shawn-Hwang"
+      - text: 125 stars today
+    - article:
+      - link "You must be signed in to star a repository" [ref=e57] [nth=3]:
+        - /url: /login?return_to=%2Fmicrosoft%2FVibeVoice
+        - text: Star
+      - heading "microsoft / VibeVoice" [ref=e58] [level=2]:
+        - link "microsoft / VibeVoice" [ref=e59]:
+          - /url: /microsoft/VibeVoice
+      - paragraph: Open-Source Frontier Voice AI
+      - text: Python
+      - link "star 24,428" [ref=e60]:
+        - /url: /microsoft/VibeVoice/stargazers
+        - img "star"
+        - text: 24,428
+      - link "fork 2,685" [ref=e61]:
+        - /url: /microsoft/VibeVoice/forks
+        - img "fork"
+        - text: 2,685
+      - text: Built by
+      - link "@YaoyaoChang" [ref=e62]:
+        - /url: /YaoyaoChang
+        - img "@YaoyaoChang"
+      - link "@MSLDCherryPick" [ref=e63]:
+        - /url: /MSLDCherryPick
+        - img "@MSLDCherryPick"
+      - link "@Damon-Salvetore" [ref=e64]:
+        - /url: /Damon-Salvetore
+        - img "@Damon-Salvetore"
+      - link "@pengzhiliang" [ref=e65]:
+        - /url: /pengzhiliang
+        - img "@pengzhiliang"
+      - link "@Copilot" [ref=e66]:
+        - /url: /apps/github-copilot-cli
+        - img "@Copilot"
+      - text: 320 stars today
+    - article:
+      - link "You must be signed in to star a repository" [ref=e67] [nth=4]:
+        - /url: /login?return_to=%2Ftwentyhq%2Ftwenty
+        - text: Star
+      - heading "twentyhq / twenty" [ref=e68] [level=2]:
+        - link "twentyhq / twenty" [ref=e69]:
+          - /url: /twentyhq/twenty
+      - paragraph: Building a modern alternative to Salesforce, powered by the community.
+      - text: TypeScript
+      - link "star 41,695" [ref=e70]:
+        - /url: /twentyhq/twenty/stargazers
+        - img "star"
+        - text: 41,695
+      - link "fork 5,539" [ref=e71]:
+        - /url: /twentyhq/twenty/forks
+        - img "fork"
+        - text: 5,539
+      - text: Built by
+      - link "@charlesBochet" [ref=e72]:
+        - /url: /charlesBochet
+        - img "@charlesBochet"
+      - link "@github-actions" [ref=e73]:
+        - /url: /apps/github-actions
+        - img "@github-actions"
+      - link "@FelixMalfait" [ref=e74]:
+        - /url: /FelixMalfait
+        - img "@FelixMalfait"
+      - link "@lucasbordeau" [ref=e75]:
+        - /url: /lucasbordeau
+        - img "@lucasbordeau"
+      - link "@Weiko" [ref=e76]:
+        - /url: /Weiko
+        - img "@Weiko"
+      - text: 661 stars today
+    - article:
+      - link "You must be signed in to star a repository" [ref=e77] [nth=5]:
+        - /url: /login?return_to=%2Fdatalab-to%2Fchandra
+        - text: Star
+      - heading "datalab-to / chandra" [ref=e78] [level=2]:
+        - link "datalab-to / chandra" [ref=e79]:
+          - /url: /datalab-to/chandra
+      - paragraph: OCR model that handles complex tables, forms, handwriting with full layout.
+      - text: Python
+      - link "star 6,682" [ref=e80]:
+        - /url: /datalab-to/chandra/stargazers
+        - img "star"
+        - text: 6,682
+      - link "fork 707" [ref=e81]:
+        - /url: /datalab-to/chandra/forks
+        - img "fork"
+        - text: "707"
+      - text: Built by
+      - link "@VikParuchuri" [ref=e82]:
+        - /url: /VikParuchuri
+        - img "@VikParuchuri"
+      - link "@sandy0kwon" [ref=e83]:
+        - /url: /sandy0kwon
+        - img "@sandy0kwon"
+      - link "@zanussbaum" [ref=e84]:
+        - /url: /zanussbaum
+        - img "@zanussbaum"
+      - text: 913 stars today
+    - article:
+      - link "Sponsor @obra" [ref=e85]:
+        - /url: /sponsors/obra
+        - text: Sponsor
+      - link "You must be signed in to star a repository" [ref=e86] [nth=6]:
+        - /url: /login?return_to=%2Fobra%2Fsuperpowers
+        - text: Star
+      - heading "obra / superpowers" [ref=e87] [level=2]:
+        - link "obra / superpowers" [ref=e88]:
+          - /url: /obra/superpowers
+      - paragraph: An agentic skills framework & software development methodology that works.
+      - text: Shell
+      - link "star 117,568" [ref=e89]:
+        - /url: /obra/superpowers/stargazers
+        - img "star"
+        - text: 117,568
+      - link "fork 9,456" [ref=e90]:
+        - /url: /obra/superpowers/forks
+        - img "fork"
+        - text: 9,456
+      - text: Built by
+      - link "@obra" [ref=e91]:
+        - /url: /obra
+        - img "@obra"
+      - link "@claude" [ref=e92] [nth=1]:
+        - /url: /claude
+        - img "@claude"
+      - link "@arittr" [ref=e93]:
+        - /url: /arittr
+        - img "@arittr"
+      - link "@clkao" [ref=e94]:
+        - /url: /clkao
+        - img "@clkao"
+      - link "@jjshanks" [ref=e95]:
+        - /url: /jjshanks
+        - img "@jjshanks"
+      - text: 2,993 stars today
+    - article:
+      - link "You must be signed in to star a repository" [ref=e96] [nth=7]:
+        - /url: /login?return_to=%2Fvirattt%2Fdexter
+        - text: Star
+      - heading "virattt / dexter" [ref=e97] [level=2]:
+        - link "virattt / dexter" [ref=e98]:
+          - /url: /virattt/dexter
+      - paragraph: An autonomous agent for deep financial research
+      - text: TypeScript
+      - link "star 19,394" [ref=e99]:
+        - /url: /virattt/dexter/stargazers
+        - img "star"
+        - text: 19,394
+      - link "fork 2,368" [ref=e100]:
+        - /url: /virattt/dexter/forks
+        - img "fork"
+        - text: 2,368
+      - text: Built by
+      - link "@virattt" [ref=e101]:
+        - /url: /virattt
+        - img "@virattt"
+      - link "@MkDev11" [ref=e102]:
+        - /url: /MkDev11
+        - img "@MkDev11"
+      - link "@cursoragent" [ref=e103]:
+        - /url: /cursoragent
+        - img "@cursoragent"
+      - link "@gupta-8" [ref=e104]:
+        - /url: /gupta-8
+        - img "@gupta-8"
+      - link "@sjhddh" [ref=e105]:
+        - /url: /sjhddh
+        - img "@sjhddh"
+      - text: 673 stars today
+    - article:
+      - link "Sponsor @Yeachan-Heo" [ref=e106]:
+        - /url: /sponsors/Yeachan-Heo
+        - text: Sponsor
+      - link "You must be signed in to star a repository" [ref=e107] [nth=8]:
+        - /url: /login?return_to=%2FYeachan-Heo%2Foh-my-claudecode
+        - text: Star
+      - heading "Yeachan-Heo / oh-my-claudecode" [ref=e108] [level=2]:
+        - link "Yeachan-Heo / oh-my-claudecode" [ref=e109]:
+          - /url: /Yeachan-Heo/oh-my-claudecode
+      - paragraph: Teams-first Multi-agent orchestration for Claude Code
+      - text: TypeScript
+      - link "star 13,443" [ref=e110]:
+        - /url: /Yeachan-Heo/oh-my-claudecode/stargazers
+        - img "star"
+        - text: 13,443
+      - link "fork 878" [ref=e111]:
+        - /url: /Yeachan-Heo/oh-my-claudecode/forks
+        - img "fork"
+        - text: "878"
+      - text: Built by
+      - link "@Yeachan-Heo" [ref=e112]:
+        - /url: /Yeachan-Heo
+        - img "@Yeachan-Heo"
+      - link "@claude" [ref=e113] [nth=2]:
+        - /url: /claude
+        - img "@claude"
+      - link "@shaun0927" [ref=e114]:
+        - /url: /shaun0927
+        - img "@shaun0927"
+      - link "@AlexU-A" [ref=e115]:
+        - /url: /AlexU-A
+        - img "@AlexU-A"
+      - link "@junhoyeo" [ref=e116]:
+        - /url: /junhoyeo
+        - img "@junhoyeo"
+      - text: 1,402 stars today
+    - article:
+      - link "Sponsor @FreeCAD" [ref=e117]:
+        - /url: /sponsors/FreeCAD
+        - text: Sponsor
+      - link "You must be signed in to star a repository" [ref=e118] [nth=9]:
+        - /url: /login?return_to=%2FFreeCAD%2FFreeCAD
+        - text: Star
+      - heading "FreeCAD / FreeCAD" [ref=e119] [level=2]:
+        - link "FreeCAD / FreeCAD" [ref=e120]:
+          - /url: /FreeCAD/FreeCAD
+      - paragraph: Official source code of FreeCAD, a free and opensource multiplatform 3D parametric modeler.
+      - text: C++
+      - link "star 29,438" [ref=e121]:
+        - /url: /FreeCAD/FreeCAD/stargazers
+        - img "star"
+        - text: 29,438
+      - link "fork 5,312" [ref=e122]:
+        - /url: /FreeCAD/FreeCAD/forks
+        - img "fork"
+        - text: 5,312
+      - text: Built by
+      - link "@wwmayer" [ref=e123]:
+        - /url: /wwmayer
+        - img "@wwmayer"
+      - link "@yorikvanhavre" [ref=e124]:
+        - /url: /yorikvanhavre
+        - img "@yorikvanhavre"
+      - link "@berndhahnebach" [ref=e125]:
+        - /url: /berndhahnebach
+        - img "@berndhahnebach"
+      - link "@chennes" [ref=e126]:
+        - /url: /chennes
+        - img "@chennes"
+      - link "@WandererFan" [ref=e127]:
+        - /url: /WandererFan
+        - img "@WandererFan"
+      - text: 99 stars today
+    - article:
+      - link "You must be signed in to star a repository" [ref=e128] [nth=10]:
+        - /url: /login?return_to=%2FVaibhavs10%2Finsanely-fast-whisper
+        - text: Star
+      - heading "Vaibhavs10 / insanely-fast-whisper" [ref=e129] [level=2]:
+        - link "Vaibhavs10 / insanely-fast-whisper" [ref=e130]:
+          - /url: /Vaibhavs10/insanely-fast-whisper
+      - text: Jupyter Notebook
+      - link "star 11,660" [ref=e131]:
+        - /url: /Vaibhavs10/insanely-fast-whisper/stargazers
+        - img "star"
+        - text: 11,660
+      - link "fork 838" [ref=e132]:
+        - /url: /Vaibhavs10/insanely-fast-whisper/forks
+        - img "fork"
+        - text: "838"
+      - text: Built by
+      - link "@Vaibhavs10" [ref=e133]:
+        - /url: /Vaibhavs10
+        - img "@Vaibhavs10"
+      - link "@patrick91" [ref=e134]:
+        - /url: /patrick91
+        - img "@patrick91"
+      - link "@pcuenca" [ref=e135]:
+        - /url: /pcuenca
+        - img "@pcuenca"
+      - link "@felixcarmona" [ref=e136]:
+        - /url: /felixcarmona
+        - img "@felixcarmona"
+      - link "@kadirnar" [ref=e137]:
+        - /url: /kadirnar
+        - img "@kadirnar"
+      - text: 1,075 stars today
+    - article:
+      - link "You must be signed in to star a repository" [ref=e138] [nth=11]:
+        - /url: /login?return_to=%2Fonyx-dot-app%2Fonyx
+        - text: Star
+      - heading "onyx-dot-app / onyx" [ref=e139] [level=2]:
+        - link "onyx-dot-app / onyx" [ref=e140]:
+          - /url: /onyx-dot-app/onyx
+      - paragraph: Open Source AI Platform - AI Chat with advanced features that works with every LLM
+      - text: Python
+      - link "star 18,686" [ref=e141]:
+        - /url: /onyx-dot-app/onyx/stargazers
+        - img "star"
+        - text: 18,686
+      - link "fork 2,555" [ref=e142]:
+        - /url: /onyx-dot-app/onyx/forks
+        - img "fork"
+        - text: 2,555
+      - text: Built by
+      - link "@Weves" [ref=e143]:
+        - /url: /Weves
+        - img "@Weves"
+      - link "@github-merge-queue" [ref=e144]:
+        - /url: /apps/github-merge-queue
+        - img "@github-merge-queue"
+      - link "@yuhongsun96" [ref=e145]:
+        - /url: /yuhongsun96
+        - img "@yuhongsun96"
+      - link "@pablonyx" [ref=e146]:
+        - /url: /pablonyx
+        - img "@pablonyx"
+      - link "@jmelahman" [ref=e147]:
+        - /url: /jmelahman
+        - img "@jmelahman"
+      - text: 512 stars today
+  - contentinfo:
+    - heading "Footer" [ref=e148] [level=2]
+    - link "GitHub Homepage" [ref=e149]:
+      - /url: https://github.com
+    - text: © 2026 GitHub, Inc.
+    - navigation "Footer" [ref=e150]:
+      - heading "Footer navigation" [ref=e151] [level=3]
+      - list "Footer navigation":
+        - listitem:
+          - link "Terms" [ref=e152]:
+            - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+        - listitem:
+          - link "Privacy" [ref=e153]:
+            - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+        - listitem:
+          - link "Security" [ref=e154]:
+            - /url: https://github.com/security
+        - listitem:
+          - link "Status" [ref=e155]:
+            - /url: https://www.githubstatus.com/
+        - listitem:
+          - link "Community" [ref=e156]:
+            - /url: https://github.community/
+        - listitem:
+          - link "Docs" [ref=e157]:
+            - /url: https://docs.github.com/
+        - listitem:
+          - link "Contact" [ref=e158]:
+            - /url: https://support.github.com?tags=dotcom-footer
+        - listitem:
+          - button "Manage cookies" [ref=e159]
+        - listitem:
+          - button "Do not share my personal information" [ref=e160]

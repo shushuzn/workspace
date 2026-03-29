@@ -1,0 +1,785 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fvolcengine%2FOpenViking%2Fblob%2Fmain%2Fexamples%2Fopenclaw-plugin%2FREADME.md
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Fblob%2Fshow&source=header-repo&source_repo=volcengine%2FOpenViking
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - link "volcengine" [ref=e15]:
+      - /url: /volcengine
+    - text: /
+    - strong:
+      - link "OpenViking" [ref=e16]:
+        - /url: /volcengine/OpenViking
+    - text: Public
+    - list:
+      - listitem:
+        - link "You must be signed in to change notification settings" [ref=e17]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Notifications
+      - listitem:
+        - link "Fork 1.4k" [ref=e18]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+      - listitem:
+        - link "You must be signed in to star a repository" [ref=e19]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Star 19.5k
+    - navigation "Repository" [ref=e20]:
+      - list:
+        - listitem:
+          - link "Code" [ref=e21]:
+            - /url: /volcengine/OpenViking
+        - listitem:
+          - link "Issues 63" [ref=e22]:
+            - /url: /volcengine/OpenViking/issues
+        - listitem:
+          - link "Pull requests 40" [ref=e23]:
+            - /url: /volcengine/OpenViking/pulls
+        - listitem:
+          - link "Discussions" [ref=e24]:
+            - /url: /volcengine/OpenViking/discussions
+        - listitem:
+          - link "Actions" [ref=e25]:
+            - /url: /volcengine/OpenViking/actions
+        - listitem:
+          - link "Projects" [ref=e26]:
+            - /url: /volcengine/OpenViking/projects
+        - listitem:
+          - link "Security" [ref=e27]:
+            - /url: /volcengine/OpenViking/security
+        - listitem:
+          - link "Insights" [ref=e28]:
+            - /url: /volcengine/OpenViking/pulse
+    - heading "Collapse file tree" [ref=e29] [level=2]:
+      - button "Collapse file tree" [ref=e30] [expanded]
+    - heading "Files" [ref=e31] [level=2]
+    - button "main branch" [ref=e32]: main
+    - button "Search this repository (forward slash)" [ref=e33]
+    - combobox "Go to file" [ref=e34]
+    - navigation "File Tree Navigation" [ref=e35]:
+      - tree "Files":
+        - treeitem ".github" [ref=e36] [level=1]
+        - treeitem "bot" [ref=e37] [level=1]
+        - treeitem "build_support" [ref=e38] [level=1]
+        - treeitem "crates" [ref=e39] [level=1]
+        - treeitem "deploy" [ref=e40] [level=1]
+        - treeitem "docs" [ref=e41] [level=1]
+        - treeitem "examples" [ref=e42] [expanded] [level=1]:
+          - text: examples
+          - group "examples":
+            - treeitem "basic-usage" [ref=e43] [level=2]
+            - treeitem "claude-code-memory-plugin" [ref=e44] [level=2]
+            - treeitem "claude-memory-plugin" [ref=e45] [level=2]
+            - treeitem "cloud" [ref=e46] [level=2]
+            - treeitem "common" [ref=e47] [level=2]
+            - treeitem "k8s-helm" [ref=e48] [level=2]
+            - treeitem "mcp-query" [ref=e49] [level=2]
+            - treeitem "misc" [ref=e50] [level=2]
+            - treeitem "multi_tenant" [ref=e51] [level=2]
+            - treeitem "openclaw-plugin" [ref=e52] [expanded] [level=2]:
+              - text: openclaw-plugin
+              - group "openclaw-plugin":
+                - treeitem "__tests__" [ref=e53] [level=3]
+                - treeitem "setup-helper" [ref=e54] [level=3]
+                - treeitem "skills" [ref=e55] [level=3]
+                - treeitem "upgrade_scripts" [ref=e56] [level=3]
+                - treeitem ".gitignore" [ref=e57] [level=3]
+                - treeitem "INSTALL-AGENT.md" [ref=e58] [level=3]
+                - treeitem "INSTALL-ZH.md" [ref=e59] [level=3]
+                - treeitem "INSTALL.md" [ref=e60] [level=3]
+                - treeitem "README.md" [ref=e61] [level=3]
+                - treeitem "README_CN.md" [ref=e62] [level=3]
+                - treeitem "client.ts" [ref=e63] [level=3]
+                - treeitem "config.ts" [ref=e64] [level=3]
+                - treeitem "context-engine.ts" [ref=e65] [level=3]
+                - treeitem "demo-memory-ajie.py" [ref=e66] [level=3]
+                - treeitem "demo-memory-xiaomei.py" [ref=e67] [level=3]
+                - treeitem "index.ts" [ref=e68] [level=3]
+                - treeitem "install-manifest.json" [ref=e69] [level=3]
+                - treeitem "install.sh" [ref=e70] [level=3]
+                - treeitem "memory-ranking.ts" [ref=e71] [level=3]
+                - treeitem "openclaw.plugin.json" [ref=e72] [level=3]
+                - treeitem "package-lock.json" [ref=e73] [level=3]
+                - treeitem "package.json" [ref=e74] [level=3]
+                - treeitem "process-manager.ts" [ref=e75] [level=3]
+                - treeitem "text-utils.ts" [ref=e76] [level=3]
+                - treeitem "tsconfig.json" [ref=e77] [level=3]
+                - treeitem "vitest.config.ts" [ref=e78] [level=3]
+            - treeitem "opencode-memory-plugin" [ref=e79] [level=2]
+            - treeitem "opencode" [ref=e80] [level=2]
+            - treeitem "server_client" [ref=e81] [level=2]
+            - treeitem "skills" [ref=e82] [nth=1] [level=2]
+            - treeitem "ov.conf.example" [ref=e83] [level=2]
+            - treeitem "ovcli.conf.example" [ref=e84] [level=2]
+            - treeitem "quick_start.py" [ref=e85] [level=2]
+            - treeitem "watch_resource_example.py" [ref=e86] [level=2]
+        - treeitem "openviking" [ref=e87] [level=1]
+        - treeitem "openviking_cli" [ref=e88] [level=1]
+        - treeitem "src" [ref=e89] [level=1]
+        - treeitem "tests" [ref=e90] [level=1]
+        - treeitem "third_party" [ref=e91] [level=1]
+        - treeitem ".clang-format" [ref=e92] [level=1]
+        - treeitem ".gitignore" [ref=e93] [nth=1] [level=1]
+        - treeitem ".pr_agent.toml" [ref=e94] [level=1]
+        - treeitem ".pre-commit-config.yaml" [ref=e95] [level=1]
+        - treeitem "CONTRIBUTING.md" [ref=e96] [level=1]
+        - treeitem "CONTRIBUTING_CN.md" [ref=e97] [level=1]
+        - treeitem "CONTRIBUTING_JA.md" [ref=e98] [level=1]
+        - treeitem "Cargo.lock" [ref=e99] [level=1]
+        - treeitem "Cargo.toml" [ref=e100] [level=1]
+        - treeitem "Dockerfile" [ref=e101] [level=1]
+        - treeitem "LICENSE" [ref=e102] [level=1]
+        - treeitem "MANIFEST.in" [ref=e103] [level=1]
+        - treeitem "Makefile" [ref=e104] [level=1]
+        - treeitem "README.md" [ref=e105] [nth=1] [level=1]
+        - treeitem "README_CN.md" [ref=e106] [nth=1] [level=1]
+        - treeitem "README_JA.md" [ref=e107] [level=1]
+        - treeitem "docker-compose.yml" [ref=e108] [level=1]
+        - treeitem "pyproject.toml" [ref=e109] [level=1]
+        - treeitem "setup.py" [ref=e110] [level=1]
+        - treeitem "uv.lock" [ref=e111] [level=1]
+    - slider "Draggable pane splitter" [ref=e112]
+    - navigation "Breadcrumbs" [ref=e113]:
+      - heading "Breadcrumbs" [ref=e114] [level=2]
+      - list:
+        - listitem:
+          - link "OpenViking" [ref=e115] [nth=1]:
+            - /url: /volcengine/OpenViking/tree/main
+        - listitem:
+          - link "examples" [ref=e116]:
+            - /url: /volcengine/OpenViking/tree/main/examples
+        - listitem:
+          - link "openclaw-plugin" [ref=e117]:
+            - /url: /volcengine/OpenViking/tree/main/examples/openclaw-plugin
+    - heading "README.md" [ref=e118] [level=1]
+    - button "Copy path" [ref=e119]
+    - button "More file actions" [ref=e120]
+    - heading "Latest commit" [ref=e121] [level=2]
+    - link "yuyaoyoyo-svg" [ref=e122]:
+      - /url: /yuyaoyoyo-svg
+      - img "yuyaoyoyo-svg"
+    - link "commits by yuyaoyoyo-svg" [ref=e123]:
+      - /url: /volcengine/OpenViking/commits?author=yuyaoyoyo-svg
+      - text: yuyaoyoyo-svg
+    - link "Update README.md (" [ref=e124]:
+      - /url: /volcengine/OpenViking/commit/b85a9ed5d813646cd31fbdf7f92d67b36493faa5
+    - link "#921" [ref=e125]:
+      - /url: https://github.com/volcengine/OpenViking/pull/921
+    - link ")" [ref=e126]:
+      - /url: /volcengine/OpenViking/commit/b85a9ed5d813646cd31fbdf7f92d67b36493faa5
+    - button "Open commit details" [ref=e127]
+    - link "Commit b85a9ed" [ref=e128]:
+      - /url: /volcengine/OpenViking/commit/b85a9ed5d813646cd31fbdf7f92d67b36493faa5
+      - text: b85a9ed
+    - text: · Mar 24, 20263 days ago
+    - heading "History" [ref=e129] [level=2]
+    - link "History" [ref=e130]:
+      - /url: /volcengine/OpenViking/commits/main/examples/openclaw-plugin/README.md
+    - heading "File metadata and controls" [ref=e131] [level=2]
+    - list "File view":
+      - listitem:
+        - button "Preview" [ref=e132]
+      - listitem:
+        - button "Code" [ref=e133]
+      - listitem:
+        - button "Blame" [ref=e134]
+    - link "Raw" [ref=e135]:
+      - /url: https://github.com/volcengine/OpenViking/raw/refs/heads/main/examples/openclaw-plugin/README.md
+    - button "Copy raw file" [ref=e136]
+    - button "Download raw file" [ref=e137]
+    - button "You must be signed in to make or propose changes" [ref=e138] [disabled]
+    - button "More edit options" [ref=e139]
+    - button "Outline" [ref=e140]
+    - region "README.md" [ref=e141]:
+      - article:
+        - heading "OpenClaw + OpenViking Context-Engine Plugin" [ref=e142] [level=1]
+        - 'link "Permalink: OpenClaw + OpenViking Context-Engine Plugin"':
+          - /url: "#openclaw--openviking-context-engine-plugin"
+        - paragraph:
+          - text: Use
+          - link "OpenViking" [ref=e143] [nth=2]:
+            - /url: https://github.com/volcengine/OpenViking
+          - text: as the long-term memory backend for
+          - link "OpenClaw" [ref=e144]:
+            - /url: https://github.com/openclaw/openclaw
+          - text: . In OpenClaw, this plugin is registered as the
+          - code: openviking
+          - text: context engine. Once installed, OpenClaw will automatically
+          - strong: remember
+          - text: important information from conversations and
+          - strong: recall
+          - text: relevant context before responding.
+        - blockquote:
+          - paragraph:
+            - strong: ℹ️ Historical Compatibility Note
+          - paragraph:
+            - text: Legacy OpenViking/OpenClaw integrations had a known issue around OpenClaw
+            - code: 2026.3.12
+            - text: where conversations could hang after the plugin loaded. That issue affected the legacy plugin path; the current context-engine Plugin 2.0 described in this document is not affected, so new installations do not need to downgrade OpenClaw for this reason. Plugin 2.0 is also not backward-compatible with the legacy
+            - code: memory-openviking
+            - text: plugin and its configuration, so upgrades must replace the old setup instead of mixing the two versions. Plugin 2.0 also depends on OpenClaw's context-engine capability and does not support older OpenClaw releases; upgrade OpenClaw first before using this plugin. If you are troubleshooting a legacy deployment, see
+            - link "#591" [ref=e145]:
+              - /url: https://github.com/volcengine/OpenViking/issues/591
+            - text: "and upstream fix PRs:"
+            - link "openclaw/openclaw#34673" [ref=e146]:
+              - /url: https://github.com/openclaw/openclaw/pull/34673
+            - text: ","
+            - link "openclaw/openclaw#33547" [ref=e147]:
+              - /url: https://github.com/openclaw/openclaw/pull/33547
+            - text: .
+        - blockquote:
+          - paragraph:
+            - strong: 🚀 Plugin 2.0 (Context-Engine Architecture)
+          - paragraph:
+            - text: "This document covers the current OpenViking Plugin 2.0 built on the context-engine architecture, which is the recommended integration path for AI coding assistants. For design background and earlier discussion, see:"
+            - link "#525" [ref=e148]:
+              - /url: https://github.com/volcengine/OpenViking/discussions/525
+        - separator
+        - heading "Table of Contents" [ref=e149] [level=2]
+        - 'link "Permalink: Table of Contents"':
+          - /url: "#table-of-contents"
+        - list:
+          - listitem:
+            - link "One-Click Installation" [ref=e150]:
+              - /url: "#one-click-installation"
+          - listitem:
+            - link "Manual Setup" [ref=e151]:
+              - /url: "#manual-setup"
+            - list:
+              - listitem:
+                - link "Prerequisites" [ref=e152]:
+                  - /url: "#prerequisites"
+              - listitem:
+                - link "Local Mode (Personal Use)" [ref=e153]:
+                  - /url: "#local-mode-personal-use"
+              - listitem:
+                - link "Remote Mode (Team Sharing)" [ref=e154]:
+                  - /url: "#remote-mode-team-sharing"
+              - listitem:
+                - link "Volcengine ECS Deployment" [ref=e155]:
+                  - /url: "#volcengine-ecs-deployment"
+          - listitem:
+            - link "Starting & Verification" [ref=e156]:
+              - /url: "#starting--verification"
+          - listitem:
+            - link "Configuration Reference" [ref=e157]:
+              - /url: "#configuration-reference"
+          - listitem:
+            - link "Daily Usage" [ref=e158]:
+              - /url: "#daily-usage"
+          - listitem:
+            - link "Web Console (Visualization)" [ref=e159]:
+              - /url: "#web-console-visualization"
+          - listitem:
+            - link "Troubleshooting" [ref=e160]:
+              - /url: "#troubleshooting"
+          - listitem:
+            - link "Uninstallation" [ref=e161]:
+              - /url: "#uninstallation"
+        - separator
+        - heading "One-Click Installation" [ref=e162] [level=2]
+        - 'link "Permalink: One-Click Installation"':
+          - /url: "#one-click-installation"
+        - paragraph: For users who want a quick local experience. The setup helper handles environment detection, dependency installation, and config file generation automatically.
+        - 'heading "Method A: npm Install (Recommended, Cross-platform)" [level=3]'
+        - 'link "Permalink: Method A: npm Install (Recommended, Cross-platform)"':
+          - /url: "#method-a-npm-install-recommended-cross-platform"
+        - text: npm install -g openclaw-openviking-setup-helper ov-install
+        - button "Copy" [ref=e163]
+        - 'heading "Method B: curl One-Click (Linux / macOS)" [level=3]'
+        - 'link "Permalink: Method B: curl One-Click (Linux / macOS)"':
+          - /url: "#method-b-curl-one-click-linux--macos"
+        - text: curl -fsSL https://raw.githubusercontent.com/volcengine/OpenViking/main/examples/openclaw-plugin/install.sh | bash
+        - button "Copy" [ref=e164] [nth=1]
+        - paragraph: "The setup helper will walk you through:"
+        - list:
+          - listitem:
+            - strong: Environment check
+            - text: — Detects Python >= 3.10, Node.js, cmake, etc.
+          - listitem:
+            - strong: Select OpenClaw instance
+            - text: — If multiple instances are installed locally, lists them for you to choose
+          - listitem:
+            - strong: Select deployment mode
+            - text: — Local or Remote (see below)
+          - listitem:
+            - strong: Generate config
+            - text: — Writes
+            - code: ~/.openviking/ov.conf
+            - text: and
+            - code: ~/.openclaw/openviking.env
+            - text: automatically
+        - group: Setup helper options
+        - separator
+        - heading "Manual Setup" [ref=e165] [level=2]
+        - 'link "Permalink: Manual Setup"':
+          - /url: "#manual-setup"
+        - heading "Prerequisites" [ref=e166] [level=3]
+        - 'link "Permalink: Prerequisites"':
+          - /url: "#prerequisites"
+        - table:
+          - rowgroup:
+            - row "Component Version Purpose":
+              - columnheader "Component" [ref=e167]
+              - columnheader "Version" [ref=e168]
+              - columnheader "Purpose" [ref=e169]
+          - rowgroup:
+            - row "Python >= 3.10 OpenViking runtime (Local mode)":
+              - cell "Python" [ref=e170]:
+                - strong: Python
+              - cell ">= 3.10" [ref=e171]
+              - cell "OpenViking runtime (Local mode)" [ref=e172]
+            - row "Node.js >= 22 OpenClaw runtime":
+              - cell "Node.js" [ref=e173]:
+                - strong: Node.js
+              - cell ">= 22" [ref=e174]
+              - cell "OpenClaw runtime" [ref=e175]
+            - row "Volcengine Ark API Key — Embedding + VLM model calls":
+              - cell "Volcengine Ark API Key" [ref=e176]:
+                - strong: Volcengine Ark API Key
+              - cell "—" [ref=e177]
+              - cell "Embedding + VLM model calls" [ref=e178]
+        - text: "python3 --version # >= 3.10 node -v # >= v22 openclaw --version # installed"
+        - button "Copy" [ref=e179] [nth=2]
+        - list:
+          - listitem:
+            - text: "Python:"
+            - link "https://www.python.org/downloads/" [ref=e180]:
+              - /url: https://www.python.org/downloads/
+          - listitem:
+            - text: "Node.js:"
+            - link "https://nodejs.org/" [ref=e181]:
+              - /url: https://nodejs.org/
+          - listitem:
+            - text: "OpenClaw:"
+            - code: npm install -g openclaw && openclaw onboard
+        - separator
+        - heading "Local Mode (Personal Use)" [ref=e182] [level=3]
+        - 'link "Permalink: Local Mode (Personal Use)"':
+          - /url: "#local-mode-personal-use"
+        - paragraph: The simplest option — nearly zero configuration. The memory service runs alongside your OpenClaw agent locally. You only need a Volcengine Ark API Key.
+        - 'heading "Step 1: Install OpenViking" [level=4]'
+        - 'link "Permalink: Step 1: Install OpenViking"':
+          - /url: "#step-1-install-openviking"
+        - text: python3 -m pip install openviking --upgrade
+        - button "Copy" [ref=e183] [nth=3]
+        - paragraph:
+          - text: "Verify:"
+          - code: python3 -c "import openviking; print('ok')"
+        - blockquote:
+          - paragraph:
+            - text: Hit
+            - code: externally-managed-environment
+            - text: "? Use the one-click installer (handles venv automatically) or create one manually:"
+          - text: python3 -m venv ~/.openviking/venv && ~/.openviking/venv/bin/pip install openviking
+          - button "Copy" [ref=e184] [nth=4]
+        - 'heading "Step 2: Run the Setup Helper" [level=4]'
+        - 'link "Permalink: Step 2: Run the Setup Helper"':
+          - /url: "#step-2-run-the-setup-helper"
+        - text: "# Method A: npm install (recommended, cross-platform) npm install -g openclaw-openviking-setup-helper ov-install # Method B: curl one-click (Linux / macOS) curl -fsSL https://raw.githubusercontent.com/volcengine/OpenViking/main/examples/openclaw-plugin/install.sh | bash"
+        - button "Copy" [ref=e185] [nth=5]
+        - paragraph:
+          - text: Select
+          - strong: local
+          - text: mode, keep defaults, and enter your Ark API Key.
+        - paragraph: "Generated config files:"
+        - list:
+          - listitem:
+            - code: ~/.openviking/ov.conf
+            - text: — OpenViking service config
+          - listitem:
+            - code: ~/.openclaw/openviking.env
+            - text: — Environment variables (Python path, etc.)
+        - 'heading "Step 3: Start" [level=4]'
+        - 'link "Permalink: Step 3: Start"':
+          - /url: "#step-3-start"
+        - text: source ~/.openclaw/openviking.env && openclaw gateway restart
+        - button "Copy" [ref=e186] [nth=6]
+        - blockquote:
+          - paragraph:
+            - text: In Local mode you must
+            - code: source
+            - text: the env file first — the plugin auto-starts an OpenViking subprocess.
+        - 'heading "Step 4: Verify" [level=4]'
+        - 'link "Permalink: Step 4: Verify"':
+          - /url: "#step-4-verify"
+        - text: "openclaw status # ContextEngine row should show: enabled (plugin openviking)"
+        - button "Copy" [ref=e187] [nth=7]
+        - separator
+        - heading "Remote Mode (Team Sharing)" [ref=e188] [level=3]
+        - 'link "Permalink: Remote Mode (Team Sharing)"':
+          - /url: "#remote-mode-team-sharing"
+        - paragraph:
+          - text: For multiple OpenClaw instances or team use. Deploy a standalone OpenViking service that is shared across agents.
+          - strong: No Python/OpenViking needed on the client side.
+        - 'heading "Step 1: Deploy the OpenViking Service" [level=4]'
+        - 'link "Permalink: Step 1: Deploy the OpenViking Service"':
+          - /url: "#step-1-deploy-the-openviking-service"
+        - paragraph:
+          - text: Edit
+          - code: ~/.openviking/ov.conf
+          - text: — set
+          - code: root_api_key
+          - text: "to enable multi-tenancy:"
+        - text: "{ \"server\": { \"host\": \"127.0.0.1\", \"port\": 1933, \"root_api_key\": \"<your-root-api-key>\", \"cors_origins\": [\"*\"] }, \"storage\": { \"workspace\": \"~/.openviking/data\", \"vectordb\": { \"name\": \"context\", \"backend\": \"local\" }, \"agfs\": { \"log_level\": \"warn\", \"backend\": \"local\" } }, \"embedding\": { \"dense\": { \"provider\": \"volcengine\", \"api_key\": \"<your-ark-api-key>\", \"model\": \"doubao-embedding-vision-251215\", \"api_base\": \"https://ark.cn-beijing.volces.com/api/v3\", \"dimension\": 1024, \"input\": \"multimodal\" } }, \"vlm\": { \"provider\": \"volcengine\", \"api_key\": \"<your-ark-api-key>\", \"model\": \"doubao-seed-2-0-pro-260215\", \"api_base\": \"https://ark.cn-beijing.volces.com/api/v3\", \"temperature\": 0.1, \"max_retries\": 3 } }"
+        - button "Copy" [ref=e189] [nth=8]
+        - paragraph: "Start the service:"
+        - text: openviking-server
+        - button "Copy" [ref=e190] [nth=9]
+        - 'heading "Step 2: Create Team & Users" [level=4]'
+        - 'link "Permalink: Step 2: Create Team & Users"':
+          - /url: "#step-2-create-team--users"
+        - text: "# Create team + admin curl -X POST http://localhost:1933/api/v1/admin/accounts \\ -H \"Content-Type: application/json\" \\ -H \"X-API-Key: <root-api-key>\" \\ -d '{ \"account_id\": \"my-team\", \"admin_user_id\": \"admin\" }' # Add member curl -X POST http://localhost:1933/api/v1/admin/accounts/my-team/users \\ -H \"Content-Type: application/json\" \\ -H \"X-API-Key: <root-or-admin-key>\" \\ -d '{ \"user_id\": \"xiaomei\", \"role\": \"user\" }'"
+        - button "Copy" [ref=e191] [nth=10]
+        - 'heading "Step 3: Configure the OpenClaw Plugin" [level=4]'
+        - 'link "Permalink: Step 3: Configure the OpenClaw Plugin"':
+          - /url: "#step-3-configure-the-openclaw-plugin"
+        - text: openclaw plugins enable openviking openclaw config set gateway.mode local openclaw config set plugins.slots.contextEngine openviking openclaw config set plugins.entries.openviking.config.mode remote openclaw config set plugins.entries.openviking.config.baseUrl "http://your-server:1933" openclaw config set plugins.entries.openviking.config.apiKey "<user-api-key>" openclaw config set plugins.entries.openviking.config.agentId "<agent-id>" openclaw config set plugins.entries.openviking.config.autoRecall true --json openclaw config set plugins.entries.openviking.config.autoCapture true --json
+        - button "Copy" [ref=e192] [nth=11]
+        - 'heading "Step 4: Start & Verify" [level=4]'
+        - 'link "Permalink: Step 4: Start & Verify"':
+          - /url: "#step-4-start--verify"
+        - text: "# Remote mode — no env sourcing needed openclaw gateway restart openclaw status"
+        - button "Copy" [ref=e193] [nth=12]
+        - separator
+        - heading "Volcengine ECS Deployment" [ref=e194] [level=3]
+        - 'link "Permalink: Volcengine ECS Deployment"':
+          - /url: "#volcengine-ecs-deployment"
+        - paragraph:
+          - text: Deploy OpenClaw + OpenViking on Volcengine ECS. See
+          - link "Volcengine docs" [ref=e195]:
+            - /url: https://www.volcengine.com/docs/6396/2249500?lang=zh
+          - text: for details.
+        - blockquote:
+          - paragraph: ECS instances restrict global pip installs under root to protect system Python. Create a venv first.
+        - text: "# 1. Install npm install -g openclaw-openviking-setup-helper ov-install # 2. Load environment source /root/.openclaw/openviking.env # 3. Start OpenViking server python -m openviking.server.bootstrap # 4. Start Web Console (ensure security group allows TCP 8020 inbound) python -m openviking.console.bootstrap --host 0.0.0.0 --port 8020 --openviking-url http://127.0.0.1:1933"
+        - button "Copy" [ref=e196] [nth=13]
+        - paragraph:
+          - text: Access
+          - code: http://<public-ip>:8020
+          - text: to use the Web Console.
+        - separator
+        - heading "Starting & Verification" [ref=e197] [level=2]
+        - 'link "Permalink: Starting & Verification"':
+          - /url: "#starting--verification"
+        - heading "Local Mode" [ref=e198] [level=3]
+        - 'link "Permalink: Local Mode"':
+          - /url: "#local-mode"
+        - text: source ~/.openclaw/openviking.env && openclaw gateway restart
+        - button "Copy" [ref=e199] [nth=14]
+        - heading "Remote Mode" [ref=e200] [level=3]
+        - 'link "Permalink: Remote Mode"':
+          - /url: "#remote-mode"
+        - text: openclaw gateway restart
+        - button "Copy" [ref=e201] [nth=15]
+        - heading "Check Plugin Status" [ref=e202] [level=3]
+        - 'link "Permalink: Check Plugin Status"':
+          - /url: "#check-plugin-status"
+        - text: "openclaw status # ContextEngine row should show: enabled (plugin openviking)"
+        - button "Copy" [ref=e203] [nth=16]
+        - heading "View Plugin Config" [ref=e204] [level=3]
+        - 'link "Permalink: View Plugin Config"':
+          - /url: "#view-plugin-config"
+        - text: openclaw config get plugins.entries.openviking.config
+        - button "Copy" [ref=e205] [nth=17]
+        - separator
+        - heading "Configuration Reference" [ref=e206] [level=2]
+        - 'link "Permalink: Configuration Reference"':
+          - /url: "#configuration-reference"
+        - heading "~/.openviking/ov.conf (Local Mode)" [ref=e207] [level=3]:
+          - code: ~/.openviking/ov.conf
+          - text: (Local Mode)
+        - 'link "Permalink: ~/.openviking/ov.conf (Local Mode)"':
+          - /url: "#openvikingovconf-local-mode"
+        - text: "{ \"root_api_key\": null, \"server\": { \"host\": \"127.0.0.1\", \"port\": 1933 }, \"storage\": { \"workspace\": \"~/.openviking/data\", \"vectordb\": { \"backend\": \"local\" }, \"agfs\": { \"backend\": \"local\", \"port\": 1833 } }, \"embedding\": { \"dense\": { \"provider\": \"volcengine\", \"api_key\": \"<your-ark-api-key>\", \"model\": \"doubao-embedding-vision-251215\", \"api_base\": \"https://ark.cn-beijing.volces.com/api/v3\", \"dimension\": 1024, \"input\": \"multimodal\" } }, \"vlm\": { \"provider\": \"volcengine\", \"api_key\": \"<your-ark-api-key>\", \"model\": \"doubao-seed-2-0-pro-260215\", \"api_base\": \"https://ark.cn-beijing.volces.com/api/v3\" } }"
+        - button "Copy" [ref=e208] [nth=18]
+        - blockquote:
+          - paragraph:
+            - code: root_api_key
+            - text: ": When set, all HTTP requests must include the"
+            - code: X-API-Key
+            - text: header. Defaults to
+            - code: "null"
+            - text: in Local mode (auth disabled).
+        - heading "Plugin Config Options" [ref=e209] [level=3]
+        - 'link "Permalink: Plugin Config Options"':
+          - /url: "#plugin-config-options"
+        - table:
+          - rowgroup:
+            - row "Option Default Description":
+              - columnheader "Option" [ref=e210]
+              - columnheader "Default" [ref=e211]
+              - columnheader "Description" [ref=e212]
+          - rowgroup:
+            - row "mode remote local (start local server) or remote (connect to remote)":
+              - cell "mode" [ref=e213]:
+                - code: mode
+              - cell "remote" [ref=e214]:
+                - code: remote
+              - cell "local (start local server) or remote (connect to remote)" [ref=e215]:
+                - code: local
+                - text: (start local server) or
+                - code: remote
+                - text: (connect to remote)
+            - row "baseUrl http://127.0.0.1:1933 OpenViking server URL (Remote mode)":
+              - cell "baseUrl" [ref=e216]:
+                - code: baseUrl
+              - cell "http://127.0.0.1:1933" [ref=e217]:
+                - code: http://127.0.0.1:1933
+              - cell "OpenViking server URL (Remote mode)" [ref=e218]
+            - row "apiKey — OpenViking API Key (optional)":
+              - cell "apiKey" [ref=e219]:
+                - code: apiKey
+              - cell "—" [ref=e220] [nth=1]
+              - cell "OpenViking API Key (optional)" [ref=e221]
+            - row "agentId auto-generated Agent identifier, distinguishes OpenClaw instances. Auto-generates openclaw-<hostname>-<random> if unset":
+              - cell "agentId" [ref=e222]:
+                - code: agentId
+              - cell "auto-generated" [ref=e223]
+              - cell "Agent identifier, distinguishes OpenClaw instances. Auto-generates openclaw-<hostname>-<random> if unset" [ref=e224]:
+                - text: Agent identifier, distinguishes OpenClaw instances. Auto-generates
+                - code: openclaw-<hostname>-<random>
+                - text: if unset
+            - row "configPath ~/.openviking/ov.conf Config file path (Local mode)":
+              - cell "configPath" [ref=e225]:
+                - code: configPath
+              - cell "~/.openviking/ov.conf" [ref=e226]:
+                - code: ~/.openviking/ov.conf
+              - cell "Config file path (Local mode)" [ref=e227]
+            - row "port 1933 Local server port (Local mode)":
+              - cell "port" [ref=e228]:
+                - code: port
+              - cell "1933" [ref=e229]:
+                - code: "1933"
+              - cell "Local server port (Local mode)" [ref=e230]
+            - row "targetUri viking://user/memories Default memory search scope":
+              - cell "targetUri" [ref=e231]:
+                - code: targetUri
+              - cell "viking://user/memories" [ref=e232]:
+                - code: viking://user/memories
+              - cell "Default memory search scope" [ref=e233]
+            - row "autoCapture true Auto-extract memories after conversations":
+              - cell "autoCapture" [ref=e234]:
+                - code: autoCapture
+              - cell "true" [ref=e235]:
+                - code: "true"
+              - cell "Auto-extract memories after conversations" [ref=e236]
+            - 'row "captureMode semantic Extraction mode: semantic (full semantic) / keyword (trigger-word only)"':
+              - cell "captureMode" [ref=e237]:
+                - code: captureMode
+              - cell "semantic" [ref=e238]:
+                - code: semantic
+              - 'cell "Extraction mode: semantic (full semantic) / keyword (trigger-word only)"':
+                - text: "Extraction mode:"
+                - code: semantic
+                - text: (full semantic) /
+                - code: keyword
+                - text: (trigger-word only)
+            - row "captureMaxLength 24000 Max text length per capture":
+              - cell "captureMaxLength" [ref=e239]:
+                - code: captureMaxLength
+              - cell "24000" [ref=e240]:
+                - code: "24000"
+              - cell "Max text length per capture" [ref=e241]
+            - row "autoRecall true Auto-recall relevant memories before conversations":
+              - cell "autoRecall" [ref=e242]:
+                - code: autoRecall
+              - cell "true" [ref=e243] [nth=1]:
+                - code: "true"
+              - cell "Auto-recall relevant memories before conversations" [ref=e244]
+            - row "recallLimit 6 Max memories injected during auto-recall":
+              - cell "recallLimit" [ref=e245]:
+                - code: recallLimit
+              - cell "6" [ref=e246]:
+                - code: "6"
+              - cell "Max memories injected during auto-recall" [ref=e247]
+            - row "recallScoreThreshold 0.01 Minimum relevance score for recall":
+              - cell "recallScoreThreshold" [ref=e248]:
+                - code: recallScoreThreshold
+              - cell "0.01" [ref=e249]:
+                - code: "0.01"
+              - cell "Minimum relevance score for recall" [ref=e250]
+            - row "ingestReplyAssist true Add reply guidance when multi-party conversation text is detected":
+              - cell "ingestReplyAssist" [ref=e251]:
+                - code: ingestReplyAssist
+              - cell "true" [ref=e252] [nth=2]:
+                - code: "true"
+              - cell "Add reply guidance when multi-party conversation text is detected" [ref=e253]
+        - heading "~/.openclaw/openviking.env" [ref=e254] [level=3]:
+          - code: ~/.openclaw/openviking.env
+        - 'link "Permalink: ~/.openclaw/openviking.env"':
+          - /url: "#openclawopenvikingenv"
+        - paragraph: "Auto-generated by the setup helper, stores environment variables like the Python path:"
+        - text: export OPENVIKING_PYTHON='/usr/local/bin/python3'
+        - button "Copy" [ref=e255] [nth=19]
+        - separator
+        - heading "Daily Usage" [ref=e256] [level=2]
+        - 'link "Permalink: Daily Usage"':
+          - /url: "#daily-usage"
+        - text: "# Start (Local mode — source env first) source ~/.openclaw/openviking.env && openclaw gateway # Start (Remote mode — no env needed) openclaw gateway # Disable the context engine openclaw config set plugins.slots.contextEngine legacy # Re-enable OpenViking as the context engine openclaw config set plugins.slots.contextEngine openviking"
+        - button "Copy" [ref=e257] [nth=20]
+        - blockquote:
+          - paragraph: Restart the gateway after changing the context-engine slot.
+        - separator
+        - heading "Web Console (Visualization)" [ref=e258] [level=2]
+        - 'link "Permalink: Web Console (Visualization)"':
+          - /url: "#web-console-visualization"
+        - paragraph: OpenViking provides a Web Console for debugging and inspecting stored memories.
+        - text: python -m openviking.console.bootstrap \ --host 127.0.0.1 \ --port 8020 \ --openviking-url http://127.0.0.1:1933 \ --write-enabled
+        - button "Copy" [ref=e259] [nth=21]
+        - paragraph:
+          - text: Open
+          - link "http://127.0.0.1:8020" [ref=e260]:
+            - /url: http://127.0.0.1:8020
+          - text: in your browser.
+        - separator
+        - heading "Troubleshooting" [ref=e261] [level=2]
+        - 'link "Permalink: Troubleshooting"':
+          - /url: "#troubleshooting"
+        - heading "Common Issues" [ref=e262] [level=3]
+        - 'link "Permalink: Common Issues"':
+          - /url: "#common-issues"
+        - table:
+          - rowgroup:
+            - row "Symptom Cause Fix":
+              - columnheader "Symptom" [ref=e263]
+              - columnheader "Cause" [ref=e264]
+              - columnheader "Fix" [ref=e265]
+          - rowgroup:
+            - 'row "Conversation hangs, no response Usually a legacy pre-2.0 integration affected by the historical OpenClaw 2026.3.12 issue If you are on the legacy path, see #591 and temporarily downgrade to 2026.3.11; for current installs, migrate to Plugin 2.0"':
+              - cell "Conversation hangs, no response" [ref=e266]
+              - cell "Usually a legacy pre-2.0 integration affected by the historical OpenClaw 2026.3.12 issue" [ref=e267]:
+                - text: Usually a legacy pre-2.0 integration affected by the historical OpenClaw
+                - code: 2026.3.12
+                - text: issue
+              - 'cell "If you are on the legacy path, see #591 and temporarily downgrade to 2026.3.11; for current installs, migrate to Plugin 2.0"':
+                - text: If you are on the legacy path, see
+                - link "#591" [ref=e268] [nth=1]:
+                  - /url: https://github.com/volcengine/OpenViking/issues/591
+                - text: and temporarily downgrade to
+                - code: 2026.3.11
+                - text: ; for current installs, migrate to Plugin 2.0
+            - row "registerContextEngine is unavailable in logs OpenClaw version is too old and does not expose the context-engine API required by Plugin 2.0 Upgrade OpenClaw to a current release, then restart the gateway and verify openclaw status shows openviking as the ContextEngine":
+              - cell "registerContextEngine is unavailable in logs" [ref=e269]:
+                - code: registerContextEngine is unavailable
+                - text: in logs
+              - cell "OpenClaw version is too old and does not expose the context-engine API required by Plugin 2.0" [ref=e270]
+              - cell "Upgrade OpenClaw to a current release, then restart the gateway and verify openclaw status shows openviking as the ContextEngine" [ref=e271]:
+                - text: Upgrade OpenClaw to a current release, then restart the gateway and verify
+                - code: openclaw status
+                - text: shows
+                - code: openviking
+                - text: as the ContextEngine
+            - 'row "Agent hangs silently, no output auto-recall missing timeout protection Disable auto-recall temporarily: openclaw config set plugins.entries.openviking.config.autoRecall false --json, or apply the patch in #673"':
+              - cell "Agent hangs silently, no output" [ref=e272]
+              - cell "auto-recall missing timeout protection" [ref=e273]
+              - 'cell "Disable auto-recall temporarily: openclaw config set plugins.entries.openviking.config.autoRecall false --json, or apply the patch in #673"':
+                - text: "Disable auto-recall temporarily:"
+                - code: openclaw config set plugins.entries.openviking.config.autoRecall false --json
+                - text: ", or apply the patch in"
+                - link "#673" [ref=e274]:
+                  - /url: https://github.com/volcengine/OpenViking/issues/673
+            - row "ContextEngine is not openviking Plugin slot not configured openclaw config set plugins.slots.contextEngine openviking":
+              - cell "ContextEngine is not openviking" [ref=e275]:
+                - text: ContextEngine is not
+                - code: openviking
+              - cell "Plugin slot not configured" [ref=e276]
+              - cell "openclaw config set plugins.slots.contextEngine openviking" [ref=e277]:
+                - code: openclaw config set plugins.slots.contextEngine openviking
+            - 'row "memory_store failed: fetch failed OpenViking not running Check ov.conf and Python path; verify service is up"':
+              - 'cell "memory_store failed: fetch failed"':
+                - code: "memory_store failed: fetch failed"
+              - cell "OpenViking not running" [ref=e278]
+              - cell "Check ov.conf and Python path; verify service is up" [ref=e279]:
+                - text: Check
+                - code: ov.conf
+                - text: and Python path; verify service is up
+            - row "health check timeout Port held by stale process lsof -ti tcp:1933 | xargs kill -9, then restart":
+              - cell "health check timeout" [ref=e280]:
+                - code: health check timeout
+              - cell "Port held by stale process" [ref=e281]
+              - cell "lsof -ti tcp:1933 | xargs kill -9, then restart" [ref=e282]:
+                - code: lsof -ti tcp:1933 | xargs kill -9
+                - text: ", then restart"
+            - row "extracted 0 memories Wrong API Key or model name Check api_key and model in ov.conf":
+              - cell "extracted 0 memories" [ref=e283]:
+                - code: extracted 0 memories
+              - cell "Wrong API Key or model name" [ref=e284]
+              - cell "Check api_key and model in ov.conf" [ref=e285]:
+                - text: Check
+                - code: api_key
+                - text: and
+                - code: model
+                - text: in
+                - code: ov.conf
+            - 'row "port occupied Port used by another process Change port: openclaw config set plugins.entries.openviking.config.port 1934"':
+              - cell "port occupied" [ref=e286]:
+                - code: port occupied
+              - cell "Port used by another process" [ref=e287]
+              - 'cell "Change port: openclaw config set plugins.entries.openviking.config.port 1934"':
+                - text: "Change port:"
+                - code: openclaw config set plugins.entries.openviking.config.port 1934
+            - row "Plugin not loaded Env file not sourced Run source ~/.openclaw/openviking.env before starting":
+              - cell "Plugin not loaded" [ref=e288]
+              - cell "Env file not sourced" [ref=e289]
+              - cell "Run source ~/.openclaw/openviking.env before starting" [ref=e290]:
+                - text: Run
+                - code: source ~/.openclaw/openviking.env
+                - text: before starting
+            - row "externally-managed-environment Python PEP 668 restriction Use venv or the one-click installer":
+              - cell "externally-managed-environment" [ref=e291]:
+                - code: externally-managed-environment
+              - cell "Python PEP 668 restriction" [ref=e292]
+              - cell "Use venv or the one-click installer" [ref=e293]
+            - 'row "TypeError: unsupported operand type(s) for | Python < 3.10 Upgrade Python to 3.10+"':
+              - 'cell "TypeError: unsupported operand type(s) for |"':
+                - code: "TypeError: unsupported operand type(s) for |"
+              - cell "Python < 3.10" [ref=e294]
+              - cell "Upgrade Python to 3.10+" [ref=e295]
+        - heading "Viewing Logs" [ref=e296] [level=3]
+        - 'link "Permalink: Viewing Logs"':
+          - /url: "#viewing-logs"
+        - text: "# OpenViking logs cat ~/.openviking/data/log/openviking.log # OpenClaw gateway logs cat ~/.openclaw/logs/gateway.log cat ~/.openclaw/logs/gateway.err.log # Check if OpenViking process is alive lsof -i:1933 # Quick connectivity check curl http://localhost:1933 # Expected: {\"detail\":\"Not Found\"}"
+        - button "Copy" [ref=e297] [nth=22]
+        - separator
+        - heading "Uninstallation" [ref=e298] [level=2]
+        - 'link "Permalink: Uninstallation"':
+          - /url: "#uninstallation"
+        - text: lsof -ti tcp:1933 tcp:1833 tcp:18789 | xargs kill -9 python3 -m pip uninstall openviking -y && rm -rf ~/.openviking
+        - button "Copy" [ref=e299] [nth=23]
+        - separator
+        - paragraph:
+          - strong: "See also:"
+          - link "INSTALL-ZH.md" [ref=e300]:
+            - /url: /volcengine/OpenViking/blob/main/examples/openclaw-plugin/INSTALL-ZH.md
+          - text: (中文详细安装指南) ·
+          - link "INSTALL.md" [ref=e301]:
+            - /url: /volcengine/OpenViking/blob/main/examples/openclaw-plugin/INSTALL.md
+          - text: (English Install Guide) ·
+          - link "INSTALL-AGENT.md" [ref=e302]:
+            - /url: /volcengine/OpenViking/blob/main/examples/openclaw-plugin/INSTALL-AGENT.md
+          - text: (Agent Install Guide)
+  - alert

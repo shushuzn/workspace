@@ -1,0 +1,29 @@
+description: 针对负面新闻生成风险预警
+id: risk_alert
+name: 风险预警
+tasks:
+- action: extract_risks
+  description: 从新闻中提取风险因素
+  name: 提取风险因素
+  priority: 10
+- action: assess_impact
+  depends_on:
+  - 0
+  description: 评估风险的影响范围和程度
+  name: 评估影响范围
+  priority: 9
+- action: generate_recommendations
+  depends_on:
+  - 1
+  description: 生成风险应对建议
+  name: 生成应对建议
+  priority: 7
+- action: urgent_push
+  depends_on:
+  - 2
+  description: 将预警信息高优先级推送给相关人员
+  name: 高优先级推送
+  priority: 10
+trigger:
+  min_importance: 0.8
+  sentiment: negative

@@ -1,0 +1,1325 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fvolcengine%2FOpenViking
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=volcengine%2FOpenViking
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - link "volcengine" [ref=e15]:
+      - /url: /volcengine
+    - text: /
+    - strong:
+      - link "OpenViking" [ref=e16]:
+        - /url: /volcengine/OpenViking
+    - text: Public
+    - list:
+      - listitem:
+        - link "You must be signed in to change notification settings" [ref=e17]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Notifications
+      - listitem:
+        - link "Fork 1.4k" [ref=e18]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+      - listitem:
+        - link "You must be signed in to star a repository" [ref=e19]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Star 19.5k
+    - navigation "Repository" [ref=e20]:
+      - list:
+        - listitem:
+          - link "Code" [ref=e21]:
+            - /url: /volcengine/OpenViking
+        - listitem:
+          - link "Issues 63" [ref=e22]:
+            - /url: /volcengine/OpenViking/issues
+        - listitem:
+          - link "Pull requests 40" [ref=e23]:
+            - /url: /volcengine/OpenViking/pulls
+        - listitem:
+          - link "Discussions" [ref=e24]:
+            - /url: /volcengine/OpenViking/discussions
+        - listitem:
+          - link "Actions" [ref=e25]:
+            - /url: /volcengine/OpenViking/actions
+        - listitem:
+          - link "Projects" [ref=e26]:
+            - /url: /volcengine/OpenViking/projects
+        - listitem:
+          - link "Security" [ref=e27]:
+            - /url: /volcengine/OpenViking/security
+        - listitem:
+          - link "Insights" [ref=e28]:
+            - /url: /volcengine/OpenViking/pulse
+    - heading "volcengine/OpenViking" [ref=e29] [level=1]
+    - button "main branch" [ref=e30]: main
+    - link "42 Branches" [ref=e31]:
+      - /url: /volcengine/OpenViking/branches
+      - strong: "42"
+      - text: Branches
+    - link "22 Tags" [ref=e32]:
+      - /url: /volcengine/OpenViking/tags
+      - strong: "22"
+      - text: Tags
+    - combobox "Go to file" [ref=e33]
+    - button "Code" [ref=e34]
+    - heading "Folders and files" [ref=e35] [level=2]
+    - table "Folders and files":
+      - rowgroup:
+        - row "Name Last commit message Last commit date":
+          - columnheader "Name" [ref=e36]
+          - columnheader "Last commit message" [ref=e37]
+          - columnheader "Last commit date" [ref=e38]
+      - rowgroup:
+        - row "Latest commit yeshion23333 commits by yeshion23333 emb token (#1038) success Commit ea240a2 · Mar 27, 20261 hour ago History 577 Commits":
+          - cell "Latest commit yeshion23333 commits by yeshion23333 emb token (#1038) success Commit ea240a2 · Mar 27, 20261 hour ago History 577 Commits" [ref=e39]:
+            - heading "Latest commit" [ref=e40] [level=2]
+            - link "yeshion23333" [ref=e41]:
+              - /url: /yeshion23333
+              - img "yeshion23333"
+            - link "commits by yeshion23333" [ref=e42]:
+              - /url: /volcengine/OpenViking/commits?author=yeshion23333
+              - text: yeshion23333
+            - link "emb token (" [ref=e43]:
+              - /url: /volcengine/OpenViking/commit/ea240a22a164d08e8ada4276284aa84a301309bf
+            - link "#1038" [ref=e44]:
+              - /url: https://github.com/volcengine/OpenViking/pull/1038
+            - link ")" [ref=e45]:
+              - /url: /volcengine/OpenViking/commit/ea240a22a164d08e8ada4276284aa84a301309bf
+            - button "success" [ref=e46]
+            - link "Commit ea240a2" [ref=e47]:
+              - /url: /volcengine/OpenViking/commit/ea240a22a164d08e8ada4276284aa84a301309bf
+              - text: ea240a2
+            - text: · Mar 27, 20261 hour ago
+            - heading "History" [ref=e48] [level=2]
+            - link "577 Commits" [ref=e49]:
+              - /url: /volcengine/OpenViking/commits/main/
+        - 'row ".github, (Directory) build(deps): bump actions/cache from 4 to 5 (#1001) Mar 26, 2026yesterday"':
+          - cell ".github, (Directory)" [ref=e50]:
+            - link ".github, (Directory)" [ref=e51]:
+              - /url: /volcengine/OpenViking/tree/main/.github
+              - text: .github
+          - 'cell "build(deps): bump actions/cache from 4 to 5 (#1001)"':
+            - 'link "build(deps): bump actions/cache from 4 to 5 ("':
+              - /url: /volcengine/OpenViking/commit/2b8a8c5cc3282e7ddd26b988ea6783fee47da3a0
+            - link "#1001" [ref=e52]:
+              - /url: https://github.com/volcengine/OpenViking/pull/1001
+            - link ")" [ref=e53] [nth=1]:
+              - /url: /volcengine/OpenViking/commit/2b8a8c5cc3282e7ddd26b988ea6783fee47da3a0
+          - cell "Mar 26, 2026yesterday" [ref=e54]
+        - row "bot, (Directory) Fix/moonshot invalid request (#1028) Mar 27, 20265 hours ago":
+          - cell "bot, (Directory)" [ref=e55]:
+            - link "bot, (Directory)" [ref=e56]:
+              - /url: /volcengine/OpenViking/tree/main/bot
+              - text: bot
+          - cell "Fix/moonshot invalid request (#1028)" [ref=e57]:
+            - link "Fix/moonshot invalid request (" [ref=e58]:
+              - /url: /volcengine/OpenViking/commit/529eb665815cd92b0e913b4349ad5e0d3629af26
+            - link "#1028" [ref=e59]:
+              - /url: https://github.com/volcengine/OpenViking/pull/1028
+            - link ")" [ref=e60] [nth=2]:
+              - /url: /volcengine/OpenViking/commit/529eb665815cd92b0e913b4349ad5e0d3629af26
+          - cell "Mar 27, 20265 hours ago" [ref=e61]
+        - 'row "build_support, (Directory) fix(build): sync ov cli version with openviking (#869) Mar 22, 20265 days ago"':
+          - cell "build_support, (Directory)" [ref=e62]:
+            - link "build_support, (Directory)" [ref=e63]:
+              - /url: /volcengine/OpenViking/tree/main/build_support
+              - text: build_support
+          - 'cell "fix(build): sync ov cli version with openviking (#869)"':
+            - 'link "fix(build): sync ov cli version with openviking ("':
+              - /url: /volcengine/OpenViking/commit/1e26203429f2dfaa5f7367aa4af69c7f303f3e87
+            - link "#869" [ref=e64]:
+              - /url: https://github.com/volcengine/OpenViking/pull/869
+            - link ")" [ref=e65] [nth=3]:
+              - /url: /volcengine/OpenViking/commit/1e26203429f2dfaa5f7367aa4af69c7f303f3e87
+          - cell "Mar 22, 20265 days ago" [ref=e66]
+        - 'row "crates/ov_cli, (Directory) fix(ov-cli): preserve .zip suffix for temporary directory uploads (#1021 Mar 27, 20265 hours ago"':
+          - cell "crates/ov_cli, (Directory)" [ref=e67]:
+            - link "crates/ov_cli, (Directory)" [ref=e68]:
+              - /url: /volcengine/OpenViking/tree/main/crates/ov_cli
+              - text: crates/ov_cli
+          - 'cell "fix(ov-cli): preserve .zip suffix for temporary directory uploads (#1021"':
+            - 'link "fix(ov-cli): preserve .zip suffix for temporary directory uploads ("':
+              - /url: /volcengine/OpenViking/commit/80828307cbb0ebf175893fc23781e0ee03294b3b
+            - link "#1021" [ref=e69]:
+              - /url: https://github.com/volcengine/OpenViking/pull/1021
+          - cell "Mar 27, 20265 hours ago" [ref=e70] [nth=1]
+        - 'row "deploy/helm, (Directory) fix(helm): switch to volcengine defaults and add missing config fields ( Mar 20, 2026last week"':
+          - cell "deploy/helm, (Directory)" [ref=e71]:
+            - link "deploy/helm, (Directory)" [ref=e72]:
+              - /url: /volcengine/OpenViking/tree/main/deploy/helm
+              - text: deploy/helm
+          - 'cell "fix(helm): switch to volcengine defaults and add missing config fields ("':
+            - 'link "fix(helm): switch to volcengine defaults and add missing config fields ("':
+              - /url: /volcengine/OpenViking/commit/b4127b377991e3ae29ce176be7e7e94d763c54c9
+          - cell "Mar 20, 2026last week" [ref=e73]
+        - 'row "docs, (Directory) docs(concepts): add multi-tenant usage guide (#1029) Mar 27, 20263 hours ago"':
+          - cell "docs, (Directory)" [ref=e74]:
+            - link "docs, (Directory)" [ref=e75]:
+              - /url: /volcengine/OpenViking/tree/main/docs
+              - text: docs
+          - 'cell "docs(concepts): add multi-tenant usage guide (#1029)"':
+            - 'link "docs(concepts): add multi-tenant usage guide ("':
+              - /url: /volcengine/OpenViking/commit/85c1723078ddca9d8628f7a3d383c795e5368684
+            - link "#1029" [ref=e76]:
+              - /url: https://github.com/volcengine/OpenViking/pull/1029
+            - link ")" [ref=e77] [nth=4]:
+              - /url: /volcengine/OpenViking/commit/85c1723078ddca9d8628f7a3d383c795e5368684
+          - cell "Mar 27, 20263 hours ago" [ref=e78]
+        - 'row "examples, (Directory) feat(claude-code-plugin): add Claude Code memory plugin example (#903) Mar 27, 20261 hour ago"':
+          - cell "examples, (Directory)" [ref=e79]:
+            - link "examples, (Directory)" [ref=e80]:
+              - /url: /volcengine/OpenViking/tree/main/examples
+              - text: examples
+          - 'cell "feat(claude-code-plugin): add Claude Code memory plugin example (#903)"':
+            - 'link "feat(claude-code-plugin): add Claude Code memory plugin example ("':
+              - /url: /volcengine/OpenViking/commit/d1698fa53c03af7178b7baffec8e26af4b39bf25
+            - link "#903" [ref=e81]:
+              - /url: https://github.com/volcengine/OpenViking/pull/903
+            - link ")" [ref=e82] [nth=5]:
+              - /url: /volcengine/OpenViking/commit/d1698fa53c03af7178b7baffec8e26af4b39bf25
+          - cell "Mar 27, 20261 hour ago" [ref=e83]
+        - row "openviking, (Directory) emb token (#1038) Mar 27, 20261 hour ago":
+          - cell "openviking, (Directory)" [ref=e84]:
+            - link "openviking, (Directory)" [ref=e85]:
+              - /url: /volcengine/OpenViking/tree/main/openviking
+              - text: openviking
+          - cell "emb token (#1038)" [ref=e86]:
+            - link "emb token (" [ref=e87] [nth=1]:
+              - /url: /volcengine/OpenViking/commit/ea240a22a164d08e8ada4276284aa84a301309bf
+            - link "#1038" [ref=e88] [nth=1]:
+              - /url: https://github.com/volcengine/OpenViking/pull/1038
+            - link ")" [ref=e89] [nth=6]:
+              - /url: /volcengine/OpenViking/commit/ea240a22a164d08e8ada4276284aa84a301309bf
+          - cell "Mar 27, 20261 hour ago" [ref=e90] [nth=1]
+        - 'row "openviking_cli, (Directory) feat(memory): support agent-only agent memory scope (#954) Mar 27, 20264 hours ago"':
+          - cell "openviking_cli, (Directory)" [ref=e91]:
+            - link "openviking_cli, (Directory)" [ref=e92]:
+              - /url: /volcengine/OpenViking/tree/main/openviking_cli
+              - text: openviking_cli
+          - 'cell "feat(memory): support agent-only agent memory scope (#954)"':
+            - 'link "feat(memory): support agent-only agent memory scope ("':
+              - /url: /volcengine/OpenViking/commit/f81419c11c22e41d51065c707c263f58264834c4
+            - link "#954" [ref=e93]:
+              - /url: https://github.com/volcengine/OpenViking/pull/954
+            - link ")" [ref=e94] [nth=7]:
+              - /url: /volcengine/OpenViking/commit/f81419c11c22e41d51065c707c263f58264834c4
+          - cell "Mar 27, 20264 hours ago" [ref=e95]
+        - row "src, (Directory) Fix Windows engine wheel runtime packaging (#993) Mar 26, 2026yesterday":
+          - cell "src, (Directory)" [ref=e96]:
+            - link "src, (Directory)" [ref=e97]:
+              - /url: /volcengine/OpenViking/tree/main/src
+              - text: src
+          - cell "Fix Windows engine wheel runtime packaging (#993)" [ref=e98]:
+            - link "Fix Windows engine wheel runtime packaging (" [ref=e99]:
+              - /url: /volcengine/OpenViking/commit/84d2cf8900d8560eff6e2d159a9ac2b6456b0a4f
+            - link "#993" [ref=e100]:
+              - /url: https://github.com/volcengine/OpenViking/pull/993
+            - link ")" [ref=e101] [nth=8]:
+              - /url: /volcengine/OpenViking/commit/84d2cf8900d8560eff6e2d159a9ac2b6456b0a4f
+          - cell "Mar 26, 2026yesterday" [ref=e102] [nth=1]
+        - 'row "tests, (Directory) feat(memory): support agent-only agent memory scope (#954) Mar 27, 20264 hours ago"':
+          - cell "tests, (Directory)" [ref=e103]:
+            - link "tests, (Directory)" [ref=e104]:
+              - /url: /volcengine/OpenViking/tree/main/tests
+              - text: tests
+          - 'cell "feat(memory): support agent-only agent memory scope (#954)"':
+            - 'link "feat(memory): support agent-only agent memory scope ("':
+              - /url: /volcengine/OpenViking/commit/f81419c11c22e41d51065c707c263f58264834c4
+            - link "#954" [ref=e105] [nth=1]:
+              - /url: https://github.com/volcengine/OpenViking/pull/954
+            - link ")" [ref=e106] [nth=9]:
+              - /url: /volcengine/OpenViking/commit/f81419c11c22e41d51065c707c263f58264834c4
+          - cell "Mar 27, 20264 hours ago" [ref=e107] [nth=1]
+        - row "third_party, (Directory) Add non-empty S3 directory marker compatibility (#997) Mar 26, 2026yesterday":
+          - cell "third_party, (Directory)" [ref=e108]:
+            - link "third_party, (Directory)" [ref=e109]:
+              - /url: /volcengine/OpenViking/tree/main/third_party
+              - text: third_party
+          - cell "Add non-empty S3 directory marker compatibility (#997)" [ref=e110]:
+            - link "Add non-empty S3 directory marker compatibility (" [ref=e111]:
+              - /url: /volcengine/OpenViking/commit/2ec8558155700f257a9b9d7d4aa0aebc5cb0e481
+            - link "#997" [ref=e112]:
+              - /url: https://github.com/volcengine/OpenViking/pull/997
+            - link ")" [ref=e113] [nth=10]:
+              - /url: /volcengine/OpenViking/commit/2ec8558155700f257a9b9d7d4aa0aebc5cb0e481
+          - cell "Mar 26, 2026yesterday" [ref=e114] [nth=2]
+        - row ".clang-format, (File) first commit Jan 29, 20262 months ago":
+          - cell ".clang-format, (File)" [ref=e115]:
+            - link ".clang-format, (File)" [ref=e116]:
+              - /url: /volcengine/OpenViking/blob/main/.clang-format
+              - text: .clang-format
+          - cell "first commit" [ref=e117]:
+            - link "first commit" [ref=e118]:
+              - /url: /volcengine/OpenViking/commit/f98dc0ed1c37c24013c24e2a473809e83cf79fef
+          - cell "Jan 29, 20262 months ago" [ref=e119]
+        - 'row ".gitignore, (File) feat: 添加完整的 API 测试套件 (#950) Mar 26, 2026yesterday"':
+          - cell ".gitignore, (File)" [ref=e120]:
+            - link ".gitignore, (File)" [ref=e121]:
+              - /url: /volcengine/OpenViking/blob/main/.gitignore
+              - text: .gitignore
+          - 'cell "feat: 添加完整的 API 测试套件 (#950)"':
+            - 'link "feat: 添加完整的 API 测试套件 ("':
+              - /url: /volcengine/OpenViking/commit/f32af085d72b225aedb5dae8d6a7b12cba7af1c8
+            - link "#950" [ref=e122]:
+              - /url: https://github.com/volcengine/OpenViking/pull/950
+            - link ")" [ref=e123] [nth=11]:
+              - /url: /volcengine/OpenViking/commit/f32af085d72b225aedb5dae8d6a7b12cba7af1c8
+          - cell "Mar 26, 2026yesterday" [ref=e124] [nth=3]
+        - row ".pr_agent.toml, (File) Update .pr_agent.toml (#838) Mar 21, 2026last week":
+          - cell ".pr_agent.toml, (File)" [ref=e125]:
+            - link ".pr_agent.toml, (File)" [ref=e126]:
+              - /url: /volcengine/OpenViking/blob/main/.pr_agent.toml
+              - text: .pr_agent.toml
+          - cell "Update .pr_agent.toml (#838)" [ref=e127]:
+            - link "Update .pr_agent.toml (" [ref=e128]:
+              - /url: /volcengine/OpenViking/commit/2e530df4cb3a0773fb652c8bacdc46eb1746c3a9
+            - link "#838" [ref=e129]:
+              - /url: https://github.com/volcengine/OpenViking/pull/838
+            - link ")" [ref=e130] [nth=12]:
+              - /url: /volcengine/OpenViking/commit/2e530df4cb3a0773fb652c8bacdc46eb1746c3a9
+          - cell "Mar 21, 2026last week" [ref=e131]
+        - row ".pre-commit-config.yaml, (File) Lint code (#25) Feb 2, 2026last month":
+          - cell ".pre-commit-config.yaml, (File)" [ref=e132]:
+            - link ".pre-commit-config.yaml, (File)" [ref=e133]:
+              - /url: /volcengine/OpenViking/blob/main/.pre-commit-config.yaml
+              - text: .pre-commit-config.yaml
+          - cell "Lint code (#25)" [ref=e134]:
+            - link "Lint code (" [ref=e135]:
+              - /url: /volcengine/OpenViking/commit/a30cb2e7b9bd63d536c66ecef978ba9d37c99ce3
+            - link "#25" [ref=e136]:
+              - /url: https://github.com/volcengine/OpenViking/pull/25
+            - link ")" [ref=e137] [nth=13]:
+              - /url: /volcengine/OpenViking/commit/a30cb2e7b9bd63d536c66ecef978ba9d37c99ce3
+          - cell "Feb 2, 2026last month" [ref=e138]
+        - row "CONTRIBUTING.md, (File) Migrate vectordb engine to abi3 packaging (#897) Mar 23, 20264 days ago":
+          - cell "CONTRIBUTING.md, (File)" [ref=e139]:
+            - link "CONTRIBUTING.md, (File)" [ref=e140]:
+              - /url: /volcengine/OpenViking/blob/main/CONTRIBUTING.md
+              - text: CONTRIBUTING.md
+          - cell "Migrate vectordb engine to abi3 packaging (#897)" [ref=e141]:
+            - link "Migrate vectordb engine to abi3 packaging (" [ref=e142]:
+              - /url: /volcengine/OpenViking/commit/033826f0284d5929e65de8e7d0f4d24e4a08eec4
+            - link "#897" [ref=e143]:
+              - /url: https://github.com/volcengine/OpenViking/pull/897
+            - link ")" [ref=e144] [nth=14]:
+              - /url: /volcengine/OpenViking/commit/033826f0284d5929e65de8e7d0f4d24e4a08eec4
+          - cell "Mar 23, 20264 days ago" [ref=e145]
+        - row "CONTRIBUTING_CN.md, (File) Migrate vectordb engine to abi3 packaging (#897) Mar 23, 20264 days ago":
+          - cell "CONTRIBUTING_CN.md, (File)" [ref=e146]:
+            - link "CONTRIBUTING_CN.md, (File)" [ref=e147]:
+              - /url: /volcengine/OpenViking/blob/main/CONTRIBUTING_CN.md
+              - text: CONTRIBUTING_CN.md
+          - cell "Migrate vectordb engine to abi3 packaging (#897)" [ref=e148] [nth=1]:
+            - link "Migrate vectordb engine to abi3 packaging (" [ref=e149] [nth=1]:
+              - /url: /volcengine/OpenViking/commit/033826f0284d5929e65de8e7d0f4d24e4a08eec4
+            - link "#897" [ref=e150] [nth=1]:
+              - /url: https://github.com/volcengine/OpenViking/pull/897
+            - link ")" [ref=e151] [nth=15]:
+              - /url: /volcengine/OpenViking/commit/033826f0284d5929e65de8e7d0f4d24e4a08eec4
+          - cell "Mar 23, 20264 days ago" [ref=e152] [nth=1]
+        - row "CONTRIBUTING_JA.md, (File) Migrate vectordb engine to abi3 packaging (#897) Mar 23, 20264 days ago":
+          - cell "CONTRIBUTING_JA.md, (File)" [ref=e153]:
+            - link "CONTRIBUTING_JA.md, (File)" [ref=e154]:
+              - /url: /volcengine/OpenViking/blob/main/CONTRIBUTING_JA.md
+              - text: CONTRIBUTING_JA.md
+          - cell "Migrate vectordb engine to abi3 packaging (#897)" [ref=e155] [nth=2]:
+            - link "Migrate vectordb engine to abi3 packaging (" [ref=e156] [nth=2]:
+              - /url: /volcengine/OpenViking/commit/033826f0284d5929e65de8e7d0f4d24e4a08eec4
+            - link "#897" [ref=e157] [nth=2]:
+              - /url: https://github.com/volcengine/OpenViking/pull/897
+            - link ")" [ref=e158] [nth=16]:
+              - /url: /volcengine/OpenViking/commit/033826f0284d5929e65de8e7d0f4d24e4a08eec4
+          - cell "Mar 23, 20264 days ago" [ref=e159] [nth=2]
+        - 'row "Cargo.lock, (File) feat: Add multi-tenant file encryption capability (#828) Mar 21, 2026last week"':
+          - cell "Cargo.lock, (File)" [ref=e160]:
+            - link "Cargo.lock, (File)" [ref=e161]:
+              - /url: /volcengine/OpenViking/blob/main/Cargo.lock
+              - text: Cargo.lock
+          - 'cell "feat: Add multi-tenant file encryption capability (#828)"':
+            - 'link "feat: Add multi-tenant file encryption capability ("':
+              - /url: /volcengine/OpenViking/commit/8cdecd916303c02c7ed65a5e29b2d5b413c4562e
+            - link "#828" [ref=e162]:
+              - /url: https://github.com/volcengine/OpenViking/pull/828
+            - link ")" [ref=e163] [nth=17]:
+              - /url: /volcengine/OpenViking/commit/8cdecd916303c02c7ed65a5e29b2d5b413c4562e
+          - cell "Mar 21, 2026last week" [ref=e164] [nth=1]
+        - 'row "Cargo.toml, (File) feat: rename for consistency (#179) Feb 14, 2026last month"':
+          - cell "Cargo.toml, (File)" [ref=e165]:
+            - link "Cargo.toml, (File)" [ref=e166]:
+              - /url: /volcengine/OpenViking/blob/main/Cargo.toml
+              - text: Cargo.toml
+          - 'cell "feat: rename for consistency (#179)"':
+            - 'link "feat: rename for consistency ("':
+              - /url: /volcengine/OpenViking/commit/3663793abc1eafdc5ffc4a9cfd575aaf7b936976
+            - link "#179" [ref=e167]:
+              - /url: https://github.com/volcengine/OpenViking/pull/179
+            - link ")" [ref=e168] [nth=18]:
+              - /url: /volcengine/OpenViking/commit/3663793abc1eafdc5ffc4a9cfd575aaf7b936976
+          - cell "Feb 14, 2026last month" [ref=e169]
+        - row "Dockerfile, (File) Use uv sync --locked in Dockerfile to prevent silent dependency re-… Mar 25, 20262 days ago":
+          - cell "Dockerfile, (File)" [ref=e170]:
+            - link "Dockerfile, (File)" [ref=e171]:
+              - /url: /volcengine/OpenViking/blob/main/Dockerfile
+              - text: Dockerfile
+          - cell "Use uv sync --locked in Dockerfile to prevent silent dependency re-…" [ref=e172]:
+            - link "Use uv sync --locked in Dockerfile to prevent silent dependency re-…" [ref=e173]:
+              - /url: /volcengine/OpenViking/commit/24546160dc2581231843455e6e0acfc095eb767a
+              - text: Use
+              - code: uv sync --locked
+              - text: in Dockerfile to prevent silent dependency re-…
+          - cell "Mar 25, 20262 days ago" [ref=e174]
+        - row "LICENSE, (File) first commit Jan 29, 20262 months ago":
+          - cell "LICENSE, (File)" [ref=e175]:
+            - link "LICENSE, (File)" [ref=e176]:
+              - /url: /volcengine/OpenViking/blob/main/LICENSE
+              - text: LICENSE
+          - cell "first commit" [ref=e177] [nth=1]:
+            - link "first commit" [ref=e178] [nth=1]:
+              - /url: /volcengine/OpenViking/commit/f98dc0ed1c37c24013c24e2a473809e83cf79fef
+          - cell "Jan 29, 20262 months ago" [ref=e179] [nth=1]
+        - 'row "MANIFEST.in, (File) fix(packaging): sdist 排除运行时二进制 (#447) Mar 5, 20263 weeks ago"':
+          - cell "MANIFEST.in, (File)" [ref=e180]:
+            - link "MANIFEST.in, (File)" [ref=e181]:
+              - /url: /volcengine/OpenViking/blob/main/MANIFEST.in
+              - text: MANIFEST.in
+          - 'cell "fix(packaging): sdist 排除运行时二进制 (#447)"':
+            - 'link "fix(packaging): sdist 排除运行时二进制 ("':
+              - /url: /volcengine/OpenViking/commit/1f1df6ea7ec229b22d421d24c73dfdedf6e72057
+            - link "#447" [ref=e182]:
+              - /url: https://github.com/volcengine/OpenViking/pull/447
+            - link ")" [ref=e183] [nth=19]:
+              - /url: /volcengine/OpenViking/commit/1f1df6ea7ec229b22d421d24c73dfdedf6e72057
+          - cell "Mar 5, 20263 weeks ago" [ref=e184]
+        - 'row "Makefile, (File) feat: CLI sub-command optimization (#560) Mar 12, 20262 weeks ago"':
+          - cell "Makefile, (File)" [ref=e185]:
+            - link "Makefile, (File)" [ref=e186]:
+              - /url: /volcengine/OpenViking/blob/main/Makefile
+              - text: Makefile
+          - 'cell "feat: CLI sub-command optimization (#560)"':
+            - 'link "feat: CLI sub-command optimization ("':
+              - /url: /volcengine/OpenViking/commit/c242ad6699cc098ecd52b6df9f23d60031b65ea1
+            - link "#560" [ref=e187]:
+              - /url: https://github.com/volcengine/OpenViking/pull/560
+            - link ")" [ref=e188] [nth=20]:
+              - /url: /volcengine/OpenViking/commit/c242ad6699cc098ecd52b6df9f23d60031b65ea1
+          - cell "Mar 12, 20262 weeks ago" [ref=e189]
+        - 'row "README.md, (File) Revert \"docs: add gitcgr code graph badge (#872)\" (#884) Mar 23, 20264 days ago"':
+          - cell "README.md, (File)" [ref=e190]:
+            - link "README.md, (File)" [ref=e191]:
+              - /url: /volcengine/OpenViking/blob/main/README.md
+              - text: README.md
+          - 'cell "Revert \"docs: add gitcgr code graph badge (#872)\" (#884)"':
+            - 'link "Revert \"docs: add gitcgr code graph badge ("':
+              - /url: /volcengine/OpenViking/commit/bbc29e8f0608d202b8fc4213c397cdb82adad6c7
+            - link "#872" [ref=e192]:
+              - /url: https://github.com/volcengine/OpenViking/pull/872
+            - link ")\" [ref=e193] (":
+              - /url: /volcengine/OpenViking/commit/bbc29e8f0608d202b8fc4213c397cdb82adad6c7
+            - link "#884" [ref=e194]:
+              - /url: https://github.com/volcengine/OpenViking/pull/884
+            - link ")" [ref=e195] [nth=21]:
+              - /url: /volcengine/OpenViking/commit/bbc29e8f0608d202b8fc4213c397cdb82adad6c7
+          - cell "Mar 23, 20264 days ago" [ref=e196] [nth=3]
+        - 'row "README_CN.md, (File) docs: Add Chinese README translations for OpenCode and OpenClaw plugi… Mar 22, 20265 days ago"':
+          - cell "README_CN.md, (File)" [ref=e197]:
+            - link "README_CN.md, (File)" [ref=e198]:
+              - /url: /volcengine/OpenViking/blob/main/README_CN.md
+              - text: README_CN.md
+          - 'cell "docs: Add Chinese README translations for OpenCode and OpenClaw plugi…"':
+            - 'link "docs: Add Chinese README translations for OpenCode and OpenClaw plugi…"':
+              - /url: /volcengine/OpenViking/commit/f09060c64f972943e155fdd17d6d32b9347b55c9
+          - cell "Mar 22, 20265 days ago" [ref=e199] [nth=1]
+        - 'row "README_JA.md, (File) feat: update readme logo (#799) Mar 20, 2026last week"':
+          - cell "README_JA.md, (File)" [ref=e200]:
+            - link "README_JA.md, (File)" [ref=e201]:
+              - /url: /volcengine/OpenViking/blob/main/README_JA.md
+              - text: README_JA.md
+          - 'cell "feat: update readme logo (#799)"':
+            - 'link "feat: update readme logo ("':
+              - /url: /volcengine/OpenViking/commit/20ec7e656e75e7d4c1a8df7972e933c08c658b6a
+            - link "#799" [ref=e202]:
+              - /url: https://github.com/volcengine/OpenViking/pull/799
+            - link ")" [ref=e203] [nth=22]:
+              - /url: /volcengine/OpenViking/commit/20ec7e656e75e7d4c1a8df7972e933c08c658b6a
+          - cell "Mar 20, 2026last week" [ref=e204] [nth=1]
+        - 'row "docker-compose.yml, (File) feat(docker): init (#238) Feb 22, 2026last month"':
+          - cell "docker-compose.yml, (File)" [ref=e205]:
+            - link "docker-compose.yml, (File)" [ref=e206]:
+              - /url: /volcengine/OpenViking/blob/main/docker-compose.yml
+              - text: docker-compose.yml
+          - 'cell "feat(docker): init (#238)"':
+            - 'link "feat(docker): init ("':
+              - /url: /volcengine/OpenViking/commit/e4fa1f05e547dfac0d34aa551c0b7656bc0ec01e
+            - link "#238" [ref=e207]:
+              - /url: https://github.com/volcengine/OpenViking/pull/238
+            - link ")" [ref=e208] [nth=23]:
+              - /url: /volcengine/OpenViking/commit/e4fa1f05e547dfac0d34aa551c0b7656bc0ec01e
+          - cell "Feb 22, 2026last month" [ref=e209]
+        - 'row "pyproject.toml, (File) feat(parse): implement OCR text extraction for image parser (#942) Mar 27, 20265 hours ago"':
+          - cell "pyproject.toml, (File)" [ref=e210]:
+            - link "pyproject.toml, (File)" [ref=e211]:
+              - /url: /volcengine/OpenViking/blob/main/pyproject.toml
+              - text: pyproject.toml
+          - 'cell "feat(parse): implement OCR text extraction for image parser (#942)"':
+            - 'link "feat(parse): implement OCR text extraction for image parser ("':
+              - /url: /volcengine/OpenViking/commit/485e6df9d03bb717a85de7fb2bb061ab548db9ec
+            - link "#942" [ref=e212]:
+              - /url: https://github.com/volcengine/OpenViking/pull/942
+            - link ")" [ref=e213] [nth=24]:
+              - /url: /volcengine/OpenViking/commit/485e6df9d03bb717a85de7fb2bb061ab548db9ec
+          - cell "Mar 27, 20265 hours ago" [ref=e214] [nth=2]
+        - row "setup.py, (File) Fix Windows engine wheel runtime packaging (#993) Mar 26, 2026yesterday":
+          - cell "setup.py, (File)" [ref=e215]:
+            - link "setup.py, (File)" [ref=e216]:
+              - /url: /volcengine/OpenViking/blob/main/setup.py
+              - text: setup.py
+          - cell "Fix Windows engine wheel runtime packaging (#993)" [ref=e217] [nth=1]:
+            - link "Fix Windows engine wheel runtime packaging (" [ref=e218] [nth=1]:
+              - /url: /volcengine/OpenViking/commit/84d2cf8900d8560eff6e2d159a9ac2b6456b0a4f
+            - link "#993" [ref=e219] [nth=1]:
+              - /url: https://github.com/volcengine/OpenViking/pull/993
+            - link ")" [ref=e220] [nth=25]:
+              - /url: /volcengine/OpenViking/commit/84d2cf8900d8560eff6e2d159a9ac2b6456b0a4f
+          - cell "Mar 26, 2026yesterday" [ref=e221] [nth=4]
+        - 'row "uv.lock, (File) fix(security): restore litellm integrations below 1.82.6 (#966) Mar 25, 20262 days ago"':
+          - cell "uv.lock, (File)" [ref=e222]:
+            - link "uv.lock, (File)" [ref=e223]:
+              - /url: /volcengine/OpenViking/blob/main/uv.lock
+              - text: uv.lock
+          - 'cell "fix(security): restore litellm integrations below 1.82.6 (#966)"':
+            - 'link "fix(security): restore litellm integrations below 1.82.6 ("':
+              - /url: /volcengine/OpenViking/commit/51a1e60caebee8c98073107709980a11b7e67b91
+            - link "#966" [ref=e224]:
+              - /url: https://github.com/volcengine/OpenViking/pull/966
+            - link ")" [ref=e225] [nth=26]:
+              - /url: /volcengine/OpenViking/commit/51a1e60caebee8c98073107709980a11b7e67b91
+          - cell "Mar 25, 20262 days ago" [ref=e226] [nth=1]
+    - heading "Repository files navigation" [ref=e227] [level=2]
+    - navigation "Repository files" [ref=e228]:
+      - list:
+        - listitem:
+          - link "README" [ref=e229]:
+            - /url: "#"
+        - listitem:
+          - link "Contributing" [ref=e230]:
+            - /url: "#"
+        - listitem:
+          - link "Apache-2.0 license" [ref=e231]:
+            - /url: "#"
+    - button "Outline" [ref=e232]
+    - article:
+      - link "OpenViking" [ref=e233] [nth=1]:
+        - /url: https://openviking.ai/
+        - img "OpenViking"
+      - 'heading "OpenViking: The Context Database for AI Agents" [level=3]'
+      - 'link "Permalink: OpenViking: The Context Database for AI Agents"':
+        - /url: "#openviking-the-context-database-for-ai-agents"
+      - paragraph:
+        - text: English /
+        - link "中文" [ref=e234]:
+          - /url: /volcengine/OpenViking/blob/main/README_CN.md
+        - text: /
+        - link "日本語" [ref=e235]:
+          - /url: /volcengine/OpenViking/blob/main/README_JA.md
+      - paragraph:
+        - link "Website" [ref=e236]:
+          - /url: https://www.openviking.ai
+        - text: ·
+        - link "GitHub" [ref=e237]:
+          - /url: https://github.com/volcengine/OpenViking
+        - text: ·
+        - link "Issues" [ref=e238]:
+          - /url: https://github.com/volcengine/OpenViking/issues
+        - text: ·
+        - link "Docs" [ref=e239]:
+          - /url: https://www.openviking.ai/docs
+      - paragraph:
+        - link [ref=e240]:
+          - /url: https://github.com/volcengine/OpenViking/releases
+        - link [ref=e241] [nth=1]:
+          - /url: https://github.com/volcengine/OpenViking
+        - link [ref=e242] [nth=2]:
+          - /url: https://github.com/volcengine/OpenViking/issues
+        - link [ref=e243] [nth=3]:
+          - /url: https://github.com/volcengine/OpenViking/graphs/contributors
+        - link [ref=e244] [nth=4]:
+          - /url: https://github.com/volcengine/OpenViking/blob/main/LICENSE
+        - link [ref=e245] [nth=5]:
+          - /url: https://github.com/volcengine/OpenViking/commits/main
+      - paragraph: 👋 Join our Community
+      - paragraph:
+        - text: 📱
+        - link "Lark Group" [ref=e246]:
+          - /url: /volcengine/OpenViking/blob/main/docs/en/about/01-about-us.md#lark-group
+        - text: ·
+        - link "WeChat" [ref=e247]:
+          - /url: /volcengine/OpenViking/blob/main/docs/en/about/01-about-us.md#wechat-group
+        - text: ·
+        - link "Discord" [ref=e248]:
+          - /url: https://discord.com/invite/eHvx8E9XF3
+        - text: ·
+        - link "X" [ref=e249]:
+          - /url: https://x.com/openvikingai
+      - paragraph:
+        - link "volcengine%2FOpenViking | Trendshift" [ref=e250]:
+          - /url: https://trendshift.io/repositories/19668
+          - img "volcengine%2FOpenViking | Trendshift"
+      - separator
+      - heading "Overview" [ref=e251] [level=2]
+      - 'link "Permalink: Overview"':
+        - /url: "#overview"
+      - heading "Challenges in Agent Development" [ref=e252] [level=3]
+      - 'link "Permalink: Challenges in Agent Development"':
+        - /url: "#challenges-in-agent-development"
+      - paragraph: "In the AI era, data is abundant, but high-quality context is hard to come by. When building AI Agents, developers often face these challenges:"
+      - list:
+        - listitem:
+          - strong: Fragmented Context
+          - text: ": Memories are in code, resources are in vector databases, and skills are scattered, making them difficult to manage uniformly."
+        - listitem:
+          - strong: Surging Context Demand
+          - text: ": An Agent's long-running tasks produce context at every execution. Simple truncation or compression leads to information loss."
+        - listitem:
+          - strong: Poor Retrieval Effectiveness
+          - text: ": Traditional RAG uses flat storage, lacking a global view and making it difficult to understand the full context of information."
+        - listitem:
+          - strong: Unobservable Context
+          - text: ": The implicit retrieval chain of traditional RAG is like a black box, making it hard to debug when errors occur."
+        - listitem:
+          - strong: Limited Memory Iteration
+          - text: ": Current memory is just a record of user interactions, lacking Agent-related task memory."
+      - heading "The OpenViking Solution" [ref=e253] [level=3]
+      - 'link "Permalink: The OpenViking Solution"':
+        - /url: "#the-openviking-solution"
+      - paragraph:
+        - strong: OpenViking
+        - text: is an open-source
+        - strong: Context Database
+        - text: designed specifically for AI Agents.
+      - paragraph:
+        - text: We aim to define a minimalist context interaction paradigm for Agents, allowing developers to completely say goodbye to the hassle of context management. OpenViking abandons the fragmented vector storage model of traditional RAG and innovatively adopts a
+        - strong: "\"file system paradigm\""
+        - text: to unify the structured organization of memories, resources, and skills needed by Agents.
+      - paragraph: "With OpenViking, developers can build an Agent's brain just like managing local files:"
+      - list:
+        - listitem:
+          - strong: Filesystem Management Paradigm
+          - text: →
+          - strong: Solves Fragmentation
+          - text: ": Unified context management of memories, resources, and skills based on a filesystem paradigm."
+        - listitem:
+          - strong: Tiered Context Loading
+          - text: →
+          - strong: Reduces Token Consumption
+          - text: ": L0/L1/L2 three-tier structure, loaded on demand, significantly saving costs."
+        - listitem:
+          - strong: Directory Recursive Retrieval
+          - text: →
+          - strong: Improves Retrieval Effect
+          - text: ": Supports native filesystem retrieval methods, combining directory positioning with semantic search to achieve recursive and precise context acquisition."
+        - listitem:
+          - strong: Visualized Retrieval Trajectory
+          - text: →
+          - strong: Observable Context
+          - text: ": Supports visualization of directory retrieval trajectories, allowing users to clearly observe the root cause of issues and guide retrieval logic optimization."
+        - listitem:
+          - strong: Automatic Session Management
+          - text: →
+          - strong: Context Self-Iteration
+          - text: ": Automatically compresses content, resource references, tool calls, etc., in conversations, extracting long-term memory, making the Agent smarter with use."
+      - separator
+      - heading "Quick Start" [ref=e254] [level=2]
+      - 'link "Permalink: Quick Start"':
+        - /url: "#quick-start"
+      - heading "Prerequisites" [ref=e255] [level=3]
+      - 'link "Permalink: Prerequisites"':
+        - /url: "#prerequisites"
+      - paragraph: "Before starting with OpenViking, please ensure your environment meets the following requirements:"
+      - list:
+        - listitem:
+          - strong: Python Version
+          - text: ": 3.10 or higher"
+        - listitem:
+          - strong: Go Version
+          - text: ": 1.22 or higher (Required for building AGFS components)"
+        - listitem:
+          - strong: C++ Compiler
+          - text: ": GCC 9+ or Clang 11+ (Required for building core extensions)"
+        - listitem:
+          - strong: Operating System
+          - text: ": Linux, macOS, Windows"
+        - listitem:
+          - strong: Network Connection
+          - text: ": A stable network connection is required (for downloading dependencies and accessing model services)"
+      - heading "1. Installation" [ref=e256] [level=3]
+      - 'link "Permalink: 1. Installation"':
+        - /url: "#1-installation"
+      - heading "Python Package" [ref=e257] [level=4]
+      - 'link "Permalink: Python Package"':
+        - /url: "#python-package"
+      - text: pip install openviking --upgrade --force-reinstall
+      - button "Copy" [ref=e258]
+      - heading "Rust CLI (Optional)" [ref=e259] [level=4]
+      - 'link "Permalink: Rust CLI (Optional)"':
+        - /url: "#rust-cli-optional"
+      - text: curl -fsSL https://raw.githubusercontent.com/volcengine/OpenViking/main/crates/ov_cli/install.sh | bash
+      - button "Copy" [ref=e260] [nth=1]
+      - paragraph: "Or build from source:"
+      - text: cargo install --git https://github.com/volcengine/OpenViking ov_cli
+      - button "Copy" [ref=e261] [nth=2]
+      - heading "2. Model Preparation" [ref=e262] [level=3]
+      - 'link "Permalink: 2. Model Preparation"':
+        - /url: "#2-model-preparation"
+      - paragraph: "OpenViking requires the following model capabilities:"
+      - list:
+        - listitem:
+          - strong: VLM Model
+          - text: ": For image and content understanding"
+        - listitem:
+          - strong: Embedding Model
+          - text: ": For vectorization and semantic retrieval"
+      - heading "Supported VLM Providers" [ref=e263] [level=4]
+      - 'link "Permalink: Supported VLM Providers"':
+        - /url: "#supported-vlm-providers"
+      - paragraph: "OpenViking supports three VLM providers:"
+      - table:
+        - rowgroup:
+          - row "Provider Description Get API Key":
+            - columnheader "Provider" [ref=e264]
+            - columnheader "Description" [ref=e265]
+            - columnheader "Get API Key" [ref=e266]
+        - rowgroup:
+          - row "volcengine Volcengine Doubao Models Volcengine Console":
+            - cell "volcengine" [ref=e267]:
+              - code: volcengine
+            - cell "Volcengine Doubao Models" [ref=e268]
+            - cell "Volcengine Console" [ref=e269]:
+              - link "Volcengine Console" [ref=e270]:
+                - /url: https://console.volcengine.com/ark/region:ark+cn-beijing/overview?briefPage=0&briefType=introduce&type=new&utm_content=OpenViking&utm_medium=devrel&utm_source=OWO&utm_term=OpenViking
+          - row "openai OpenAI Official API OpenAI Platform":
+            - cell "openai" [ref=e271]:
+              - code: openai
+            - cell "OpenAI Official API" [ref=e272]
+            - cell "OpenAI Platform" [ref=e273]:
+              - link "OpenAI Platform" [ref=e274]:
+                - /url: https://platform.openai.com
+          - row "litellm Unified access to various third-party models (Anthropic, DeepSeek, Gemini, vLLM, Ollama, etc.) See LiteLLM Providers":
+            - cell "litellm" [ref=e275]:
+              - code: litellm
+            - cell "Unified access to various third-party models (Anthropic, DeepSeek, Gemini, vLLM, Ollama, etc.)" [ref=e276]
+            - cell "See LiteLLM Providers" [ref=e277]:
+              - text: See
+              - link "LiteLLM Providers" [ref=e278]:
+                - /url: https://docs.litellm.ai/docs/providers
+      - blockquote:
+        - paragraph:
+          - text: 💡
+          - strong: Tip
+          - text: ":"
+        - list:
+          - listitem:
+            - code: litellm
+            - text: supports unified access to various models. The
+            - code: model
+            - text: field must follow the
+            - link "LiteLLM format specification" [ref=e279]:
+              - /url: https://docs.litellm.ai/docs/providers
+          - listitem:
+            - text: The system auto-detects common models (e.g.,
+            - code: claude-*
+            - text: ","
+            - code: deepseek-*
+            - text: ","
+            - code: gemini-*
+            - text: ","
+            - code: hosted_vllm/*
+            - text: ","
+            - code: ollama/*
+            - text: ", etc.). For other models, use the full prefix according to LiteLLM format"
+      - heading "Provider-Specific Notes" [ref=e280] [level=4]
+      - 'link "Permalink: Provider-Specific Notes"':
+        - /url: "#provider-specific-notes"
+      - group: Volcengine (Doubao)
+      - group: OpenAI
+      - group: LiteLLM (Anthropic, DeepSeek, Gemini, Qwen, vLLM, Ollama, etc.)
+      - heading "3. Environment Configuration" [ref=e281] [level=3]
+      - 'link "Permalink: 3. Environment Configuration"':
+        - /url: "#3-environment-configuration"
+      - heading "Server Configuration Template" [ref=e282] [level=4]
+      - 'link "Permalink: Server Configuration Template"':
+        - /url: "#server-configuration-template"
+      - paragraph:
+        - text: Create a configuration file
+        - code: ~/.openviking/ov.conf
+        - text: ", remove the comments before copy:"
+      - text: "{ \"storage\": { \"workspace\": \"/home/your-name/openviking_workspace\" }, \"log\": { \"level\": \"INFO\", \"output\": \"stdout\" // Log output: \"stdout\" or \"file\" }, \"embedding\": { \"dense\": { \"api_base\" : \"<api-endpoint>\", // API endpoint address \"api_key\" : \"<your-api-key>\", // Model service API Key \"provider\" : \"<provider-type>\", // Provider type: \"volcengine\" or \"openai\" (currently supported) \"dimension\": 1024, // Vector dimension \"model\" : \"<model-name>\" // Embedding model name (e.g., doubao-embedding-vision-250615 or text-embedding-3-large) }, \"max_concurrent\": 10 // Max concurrent embedding requests (default: 10) }, \"vlm\": { \"api_base\" : \"<api-endpoint>\", // API endpoint address \"api_key\" : \"<your-api-key>\", // Model service API Key \"provider\" : \"<provider-type>\", // Provider type (volcengine, openai, deepseek, anthropic, etc.) \"model\" : \"<model-name>\", // VLM model name (e.g., doubao-seed-2-0-pro-260215 or gpt-4-vision-preview) \"max_concurrent\": 100 // Max concurrent LLM calls for semantic processing (default: 100) } }"
+      - button "Copy" [ref=e283] [nth=3]
+      - blockquote:
+        - paragraph:
+          - strong: Note
+          - text: ": For embedding models, supported providers are"
+          - code: volcengine
+          - text: (Doubao),
+          - code: openai
+          - text: ","
+          - code: jina
+          - text: ","
+          - code: voyage
+          - text: ","
+          - code: minimax
+          - text: ","
+          - code: vikingdb
+          - text: ", and"
+          - code: gemini
+          - text: (requires
+          - code: pip install "google-genai>=1.0.0"
+          - text: "). For VLM models, we support three providers:"
+          - code: volcengine
+          - text: ","
+          - code: openai
+          - text: ", and"
+          - code: litellm
+          - text: . The
+          - code: litellm
+          - text: provider supports various models including Anthropic (Claude), DeepSeek, Gemini, Moonshot, Zhipu, DashScope, MiniMax, vLLM, Ollama, and more.
+      - heading "Server Configuration Examples" [ref=e284] [level=4]
+      - 'link "Permalink: Server Configuration Examples"':
+        - /url: "#server-configuration-examples"
+      - paragraph: "👇 Expand to see the configuration example for your model service:"
+      - group: "Example 1: Using Volcengine (Doubao Models)"
+      - group: "Example 2: Using OpenAI Models"
+      - group: "Example 3: Using Google Gemini Embedding"
+      - heading "Set Server Configuration Environment Variable" [ref=e285] [level=4]
+      - 'link "Permalink: Set Server Configuration Environment Variable"':
+        - /url: "#set-server-configuration-environment-variable"
+      - paragraph: "After creating the configuration file, set the environment variable to point to it (Linux/macOS):"
+      - text: "export OPENVIKING_CONFIG_FILE=~/.openviking/ov.conf # by default"
+      - button "Copy" [ref=e286] [nth=4]
+      - paragraph: "On Windows, use one of the following:"
+      - paragraph: "PowerShell:"
+      - text: $env:OPENVIKING_CONFIG_FILE = "$HOME/.openviking/ov.conf"
+      - button "Copy" [ref=e287] [nth=5]
+      - paragraph: "Command Prompt (cmd.exe):"
+      - text: set "OPENVIKING_CONFIG_FILE=%USERPROFILE%\.openviking\ov.conf"
+      - button "Copy" [ref=e288] [nth=6]
+      - blockquote:
+        - paragraph:
+          - text: 💡
+          - strong: Tip
+          - text: ": You can also place the configuration file in other locations, just specify the correct path in the environment variable."
+      - heading "CLI/Client Configuration Examples" [ref=e289] [level=4]
+      - 'link "Permalink: CLI/Client Configuration Examples"':
+        - /url: "#cliclient-configuration-examples"
+      - paragraph: "👇 Expand to see the configuration example for your CLI/Client:"
+      - paragraph: "Example: ovcli.conf for visiting localhost server"
+      - text: "{ \"url\": \"http://localhost:1933\", \"timeout\": 60.0, \"output\": \"table\" }"
+      - button "Copy" [ref=e290] [nth=7]
+      - paragraph: "After creating the configuration file, set the environment variable to point to it (Linux/macOS):"
+      - text: "export OPENVIKING_CLI_CONFIG_FILE=~/.openviking/ovcli.conf # by default"
+      - button "Copy" [ref=e291] [nth=8]
+      - paragraph: "On Windows, use one of the following:"
+      - paragraph: "PowerShell:"
+      - text: $env:OPENVIKING_CLI_CONFIG_FILE = "$HOME/.openviking/ovcli.conf"
+      - button "Copy" [ref=e292] [nth=9]
+      - paragraph: "Command Prompt (cmd.exe):"
+      - text: set "OPENVIKING_CLI_CONFIG_FILE=%USERPROFILE%\.openviking\ovcli.conf"
+      - button "Copy" [ref=e293] [nth=10]
+      - heading "4. Run Your First Example" [ref=e294] [level=3]
+      - 'link "Permalink: 4. Run Your First Example"':
+        - /url: "#4-run-your-first-example"
+      - blockquote:
+        - paragraph:
+          - text: 📝
+          - strong: Prerequisite
+          - text: ": Ensure you have completed the configuration (ov.conf and ovcli.conf) in the previous step."
+      - paragraph: Now let's run a complete example to experience the core features of OpenViking.
+      - heading "Launch Server" [ref=e295] [level=4]
+      - 'link "Permalink: Launch Server"':
+        - /url: "#launch-server"
+      - text: openviking-server
+      - button "Copy" [ref=e296] [nth=11]
+      - paragraph: or you can run in background
+      - text: nohup openviking-server > /data/log/openviking.log 2>&1 &
+      - button "Copy" [ref=e297] [nth=12]
+      - heading "Run the CLI" [ref=e298] [level=4]
+      - 'link "Permalink: Run the CLI"':
+        - /url: "#run-the-cli"
+      - text: "ov status ov add-resource https://github.com/volcengine/OpenViking # --wait ov ls viking://resources/ ov tree viking://resources/volcengine -L 2 # wait some time for semantic processing if not --wait ov find \"what is openviking\" ov grep \"openviking\" --uri viking://resources/volcengine/OpenViking/docs/zh"
+      - button "Copy" [ref=e299] [nth=13]
+      - paragraph: Congratulations! You have successfully run OpenViking 🎉
+      - heading "VikingBot Quick Start" [ref=e300] [level=3]
+      - 'link "Permalink: VikingBot Quick Start"':
+        - /url: "#vikingbot-quick-start"
+      - paragraph: "VikingBot is an AI agent framework built on top of OpenViking. Here's how to get started:"
+      - text: "# Option 1: Install VikingBot from PyPI (recommended for most users) pip install \"openviking[bot]\" # Option 2: Install VikingBot from source (for development) uv pip install -e \".[bot]\" # Start OpenViking server with Bot enabled openviking-server --with-bot # In another terminal, start interactive chat ov chat"
+      - button "Copy" [ref=e301] [nth=14]
+      - separator
+      - heading "Server Deployment Details" [ref=e302] [level=2]
+      - 'link "Permalink: Server Deployment Details"':
+        - /url: "#server-deployment-details"
+      - paragraph: For production environments, we recommend running OpenViking as a standalone HTTP service to provide persistent, high-performance context support for your AI Agents.
+      - paragraph:
+        - text: 🚀
+        - strong: Deploy OpenViking on Cloud
+        - text: ": To ensure optimal storage performance and data security, we recommend deploying on"
+        - strong: Volcengine Elastic Compute Service (ECS)
+        - text: using the
+        - strong: veLinux
+        - text: operating system. We have prepared a detailed step-by-step guide to get you started quickly.
+      - paragraph:
+        - text: 👉
+        - strong:
+          - 'link "View: Server Deployment & ECS Setup Guide"':
+            - /url: /volcengine/OpenViking/blob/main/docs/en/getting-started/03-quickstart-server.md
+      - heading "OpenClaw Context Plugin Details" [ref=e303] [level=2]
+      - 'link "Permalink: OpenClaw Context Plugin Details"':
+        - /url: "#openclaw-context-plugin-details"
+      - list:
+        - listitem:
+          - text: "Test Dataset: Effect testing based on LoCoMo10 ("
+          - link "https://github.com/snap-research/locomo" [ref=e304]:
+            - /url: https://github.com/snap-research/locomo
+          - text: ) long-range dialogues (1,540 cases in total after removing category5 without ground truth)
+        - listitem: "Experimental Groups: Since users may not disable OpenClaw's native memory when using OpenViking, we added experimental groups with native memory enabled or disabled"
+        - listitem: "OpenViking Version: 0.1.18"
+        - listitem: "Model: seed-2.0-code"
+        - listitem:
+          - text: "Evaluation Script:"
+          - link "https://github.com/ZaynJarvis/openclaw-eval/tree/main" [ref=e305]:
+            - /url: https://github.com/ZaynJarvis/openclaw-eval/tree/main
+      - table:
+        - rowgroup:
+          - 'row "Experimental Group Task Completion Rate Cost: Input Tokens (Total)"':
+            - columnheader "Experimental Group" [ref=e306]
+            - columnheader "Task Completion Rate" [ref=e307]
+            - 'columnheader "Cost: Input Tokens (Total)"'
+        - rowgroup:
+          - row "OpenClaw(memory-core) 35.65% 24,611,530":
+            - cell "OpenClaw(memory-core)" [ref=e308]
+            - cell "35.65%" [ref=e309]
+            - cell "24,611,530" [ref=e310]
+          - row "OpenClaw + LanceDB (-memory-core) 44.55% 51,574,530":
+            - cell "OpenClaw + LanceDB (-memory-core)" [ref=e311]
+            - cell "44.55%" [ref=e312]
+            - cell "51,574,530" [ref=e313]
+          - row "OpenClaw + OpenViking Plugin (-memory-core) 52.08% 4,264,396":
+            - cell "OpenClaw + OpenViking Plugin (-memory-core)" [ref=e314]
+            - cell "52.08%" [ref=e315]
+            - cell "4,264,396" [ref=e316]
+          - row "OpenClaw + OpenViking Plugin (+memory-core) 51.23% 2,099,622":
+            - cell "OpenClaw + OpenViking Plugin (+memory-core)" [ref=e317]
+            - cell "51.23%" [ref=e318]
+            - cell "2,099,622" [ref=e319]
+      - list:
+        - listitem: "Experimental Conclusions: After integrating OpenViking:"
+      - list:
+        - listitem: "With native memory enabled: 43% improvement over original OpenClaw with 91% reduction in input token cost; 15% improvement over LanceDB with 96% reduction in input token cost."
+        - listitem: "With native memory disabled: 49% improvement over original OpenClaw with 83% reduction in input token cost; 17% improvement over LanceDB with 92% reduction in input token cost."
+      - paragraph:
+        - text: 👉
+        - strong:
+          - 'link "View: OpenClaw Context Plugin"':
+            - /url: /volcengine/OpenViking/blob/main/examples/openclaw-plugin/README.md
+      - paragraph:
+        - text: 👉
+        - strong:
+          - 'link "View: OpenCode Memory Plugin Example"':
+            - /url: /volcengine/OpenViking/blob/main/examples/opencode-memory-plugin/README.md
+      - paragraph: "--"
+      - heading "Core Concepts" [ref=e320] [level=2]
+      - 'link "Permalink: Core Concepts"':
+        - /url: "#core-concepts"
+      - paragraph: "After running the first example, let's dive into the design philosophy of OpenViking. These five core concepts correspond one-to-one with the solutions mentioned earlier, together building a complete context management system:"
+      - heading "1. Filesystem Management Paradigm → Solves Fragmentation" [ref=e321] [level=3]
+      - 'link "Permalink: 1. Filesystem Management Paradigm → Solves Fragmentation"':
+        - /url: "#1-filesystem-management-paradigm--solves-fragmentation"
+      - paragraph:
+        - text: We no longer view context as flat text slices but unify them into an abstract virtual filesystem. Whether it's memories, resources, or capabilities, they are mapped to virtual directories under the
+        - code: viking://
+        - text: protocol, each with a unique URI.
+      - paragraph:
+        - text: This paradigm gives Agents unprecedented context manipulation capabilities, enabling them to locate, browse, and manipulate information precisely and deterministically through standard commands like
+        - code: ls
+        - text: and
+        - code: find
+        - text: ", just like a developer. This transforms context management from vague semantic matching into intuitive, traceable \"file operations\". Learn more:"
+        - link "Viking URI" [ref=e322]:
+          - /url: /volcengine/OpenViking/blob/main/docs/en/concepts/04-viking-uri.md
+        - text: "|"
+        - link "Context Types" [ref=e323]:
+          - /url: /volcengine/OpenViking/blob/main/docs/en/concepts/02-context-types.md
+      - code: "viking:// ├── resources/ # Resources: project docs, repos, web pages, etc. │ ├── my_project/ │ │ ├── docs/ │ │ │ ├── api/ │ │ │ └── tutorials/ │ │ └── src/ │ └── ... ├── user/ # User: personal preferences, habits, etc. │ └── memories/ │ ├── preferences/ │ │ ├── writing_style │ │ └── coding_habits │ └── ... └── agent/ # Agent: skills, instructions, task memories, etc. ├── skills/ │ ├── search_code │ ├── analyze_data │ └── ... ├── memories/ └── instructions/"
+      - button "Copy" [ref=e324] [nth=15]
+      - heading "2. Tiered Context Loading → Reduces Token Consumption" [ref=e325] [level=3]
+      - 'link "Permalink: 2. Tiered Context Loading → Reduces Token Consumption"':
+        - /url: "#2-tiered-context-loading--reduces-token-consumption"
+      - paragraph: "Stuffing massive amounts of context into a prompt all at once is not only expensive but also prone to exceeding model windows and introducing noise. OpenViking automatically processes context into three levels upon writing:"
+      - list:
+        - listitem:
+          - strong: L0 (Abstract)
+          - text: ": A one-sentence summary for quick retrieval and identification."
+        - listitem:
+          - strong: L1 (Overview)
+          - text: ": Contains core information and usage scenarios for Agent decision-making during the planning phase."
+        - listitem:
+          - strong: L2 (Details)
+          - text: ": The full original data, for deep reading by the Agent when absolutely necessary."
+      - paragraph:
+        - text: "Learn more:"
+        - link "Context Layers" [ref=e326]:
+          - /url: /volcengine/OpenViking/blob/main/docs/en/concepts/03-context-layers.md
+      - code: "viking://resources/my_project/ ├── .abstract # L0 Layer: Abstract (~100 tokens) - Quick relevance check ├── .overview # L1 Layer: Overview (~2k tokens) - Understand structure and key points ├── docs/ │ ├── .abstract # Each directory has corresponding L0/L1 layers │ ├── .overview │ ├── api/ │ │ ├── .abstract │ │ ├── .overview │ │ ├── auth.md # L2 Layer: Full content - Load on demand │ │ └── endpoints.md │ └── ... └── src/ └── ..."
+      - button "Copy" [ref=e327] [nth=16]
+      - heading "3. Directory Recursive Retrieval → Improves Retrieval Effect" [ref=e328] [level=3]
+      - 'link "Permalink: 3. Directory Recursive Retrieval → Improves Retrieval Effect"':
+        - /url: "#3-directory-recursive-retrieval--improves-retrieval-effect"
+      - paragraph:
+        - text: Single vector retrieval struggles with complex query intents. OpenViking has designed an innovative
+        - strong: Directory Recursive Retrieval Strategy
+        - text: "that deeply integrates multiple retrieval methods:"
+      - list:
+        - listitem:
+          - strong: Intent Analysis
+          - text: ": Generate multiple retrieval conditions through intent analysis."
+        - listitem:
+          - strong: Initial Positioning
+          - text: ": Use vector retrieval to quickly locate the high-score directory where the initial slice is located."
+        - listitem:
+          - strong: Refined Exploration
+          - text: ": Perform a secondary retrieval within that directory and update high-score results to the candidate set."
+        - listitem:
+          - strong: Recursive Drill-down
+          - text: ": If subdirectories exist, recursively repeat the secondary retrieval steps layer by layer."
+        - listitem:
+          - strong: Result Aggregation
+          - text: ": Finally, obtain the most relevant context to return."
+      - paragraph:
+        - text: "This \"lock high-score directory first, then refine content exploration\" strategy not only finds the semantically best-matching fragments but also understands the full context where the information resides, thereby improving the globality and accuracy of retrieval. Learn more:"
+        - link "Retrieval Mechanism" [ref=e329]:
+          - /url: /volcengine/OpenViking/blob/main/docs/en/concepts/07-retrieval.md
+      - heading "4. Visualized Retrieval Trajectory → Observable Context" [ref=e330] [level=3]
+      - 'link "Permalink: 4. Visualized Retrieval Trajectory → Observable Context"':
+        - /url: "#4-visualized-retrieval-trajectory--observable-context"
+      - paragraph:
+        - text: OpenViking's organization uses a hierarchical virtual filesystem structure. All context is integrated in a unified format, and each entry corresponds to a unique URI (like a
+        - code: viking://
+        - text: path), breaking the traditional flat black-box management mode with a clear hierarchy that is easy to understand.
+      - paragraph:
+        - text: "The retrieval process adopts a directory recursive strategy. The trajectory of directory browsing and file positioning for each retrieval is fully preserved, allowing users to clearly observe the root cause of problems and guide the optimization of retrieval logic. Learn more:"
+        - link "Retrieval Mechanism" [ref=e331] [nth=1]:
+          - /url: /volcengine/OpenViking/blob/main/docs/en/concepts/07-retrieval.md
+      - heading "5. Automatic Session Management → Context Self-Iteration" [ref=e332] [level=3]
+      - 'link "Permalink: 5. Automatic Session Management → Context Self-Iteration"':
+        - /url: "#5-automatic-session-management--context-self-iteration"
+      - paragraph: OpenViking has a built-in memory self-iteration loop. At the end of each session, developers can actively trigger the memory extraction mechanism. The system will asynchronously analyze task execution results and user feedback, and automatically update them to the User and Agent memory directories.
+      - list:
+        - listitem:
+          - strong: User Memory Update
+          - text: ": Update memories related to user preferences, making Agent responses better fit user needs."
+        - listitem:
+          - strong: Agent Experience Accumulation
+          - text: ": Extract core content such as operational tips and tool usage experience from task execution experience, aiding efficient decision-making in subsequent tasks."
+      - paragraph:
+        - text: "This allows the Agent to get \"smarter with use\" through interactions with the world, achieving self-evolution. Learn more:"
+        - link "Session Management" [ref=e333]:
+          - /url: /volcengine/OpenViking/blob/main/docs/en/concepts/08-session.md
+      - separator
+      - heading "Advanced Reading" [ref=e334] [level=2]
+      - 'link "Permalink: Advanced Reading"':
+        - /url: "#advanced-reading"
+      - heading "Documentation" [ref=e335] [level=3]
+      - 'link "Permalink: Documentation"':
+        - /url: "#documentation"
+      - paragraph:
+        - text: For more details, please visit our
+        - link "Full Documentation" [ref=e336]:
+          - /url: /volcengine/OpenViking/blob/main/docs/en
+        - text: .
+      - heading "Community & Team" [ref=e337] [level=3]
+      - 'link "Permalink: Community & Team"':
+        - /url: "#community--team"
+      - paragraph:
+        - text: "For more details, please see:"
+        - strong:
+          - link "About Us" [ref=e338]:
+            - /url: /volcengine/OpenViking/blob/main/docs/en/about/01-about-us.md
+      - heading "Join the Community" [ref=e339] [level=3]
+      - 'link "Permalink: Join the Community"':
+        - /url: "#join-the-community"
+      - paragraph: "OpenViking is still in its early stages, and there are many areas for improvement and exploration. We sincerely invite every developer passionate about AI Agent technology:"
+      - list:
+        - listitem:
+          - text: Light up a precious
+          - strong: Star
+          - text: for us to give us the motivation to move forward.
+        - listitem:
+          - text: Visit our
+          - link "Website" [ref=e340] [nth=1]:
+            - /url: https://www.openviking.ai
+            - strong: Website
+          - text: to understand the philosophy we convey, and use it in your projects via the
+          - link "Documentation" [ref=e341]:
+            - /url: https://www.openviking.ai/docs
+            - strong: Documentation
+          - text: . Feel the change it brings and give us feedback on your truest experience.
+        - listitem:
+          - text: "Join our community to share your insights, help answer others' questions, and jointly create an open and mutually helpful technical atmosphere:"
+          - list:
+            - listitem:
+              - text: 📱
+              - strong: Lark Group
+              - text: ": Scan the QR code to join →"
+              - link "View QR Code" [ref=e342]:
+                - /url: /volcengine/OpenViking/blob/main/docs/en/about/01-about-us.md#lark-group
+            - listitem:
+              - text: 💬
+              - strong: WeChat Group
+              - text: ": Scan the QR code to add assistant →"
+              - link "View QR Code" [ref=e343] [nth=1]:
+                - /url: /volcengine/OpenViking/blob/main/docs/en/about/01-about-us.md#wechat-group
+            - listitem:
+              - text: 🎮
+              - strong: Discord
+              - text: ":"
+              - link "Join Discord Server" [ref=e344]:
+                - /url: https://discord.com/invite/eHvx8E9XF3
+            - listitem:
+              - text: 🐦
+              - strong: X (Twitter)
+              - text: ：
+              - link "Follow us" [ref=e345]:
+                - /url: https://x.com/openvikingai
+        - listitem:
+          - text: Become a
+          - strong: Contributor
+          - text: ", whether submitting a bug fix or contributing a new feature, every line of your code will be an important cornerstone of OpenViking's growth."
+      - paragraph: Let's work together to define and build the future of AI Agent context management. The journey has begun, looking forward to your participation!
+      - heading "Star Trend" [ref=e346] [level=3]
+      - 'link "Permalink: Star Trend"':
+        - /url: "#star-trend"
+      - paragraph:
+        - link "Star History Chart" [ref=e347]:
+          - /url: https://www.star-history.com/#volcengine/OpenViking&type=timeline&legend=top-left
+          - img "Star History Chart"
+      - heading "License" [ref=e348] [level=2]
+      - 'link "Permalink: License"':
+        - /url: "#license"
+      - paragraph:
+        - text: This project is licensed under the Apache License 2.0 - see the
+        - link "LICENSE" [ref=e349]:
+          - /url: /volcengine/OpenViking/blob/main/LICENSE
+        - text: file for details.
+    - heading "About" [ref=e350] [level=2]
+    - paragraph: OpenViking is an open-source context database designed specifically for AI Agents(such as openclaw). OpenViking unifies the management of context (memory, resources, and skills) that Agents need through a file system paradigm, enabling hierarchical context delivery and self-evolving.
+    - link "openviking.ai" [ref=e351]:
+      - /url: https://openviking.ai
+    - heading "Topics" [ref=e352] [level=3]
+    - link "agent" [ref=e353]:
+      - /url: /topics/agent
+    - link "memory" [ref=e354]:
+      - /url: /topics/memory
+    - link "skill" [ref=e355]:
+      - /url: /topics/skill
+    - link "filesystem" [ref=e356]:
+      - /url: /topics/filesystem
+    - link "opencode" [ref=e357]:
+      - /url: /topics/opencode
+    - link "ai-agents" [ref=e358]:
+      - /url: /topics/ai-agents
+    - link "rag" [ref=e359]:
+      - /url: /topics/rag
+    - link "llm" [ref=e360]:
+      - /url: /topics/llm
+    - link "agentic-rag" [ref=e361]:
+      - /url: /topics/agentic-rag
+    - link "context-engineering" [ref=e362]:
+      - /url: /topics/context-engineering
+    - link "context-database" [ref=e363]:
+      - /url: /topics/context-database
+    - link "openclaw" [ref=e364]:
+      - /url: /topics/openclaw
+    - link "clawbot" [ref=e365]:
+      - /url: /topics/clawbot
+    - heading "Resources" [ref=e366] [level=3]
+    - link "Readme" [ref=e367]:
+      - /url: "#readme-ov-file"
+    - heading "License" [ref=e368] [nth=1] [level=3]
+    - link "Apache-2.0 license" [ref=e369] [nth=1]:
+      - /url: "#Apache-2.0-1-ov-file"
+    - heading "Contributing" [ref=e370] [level=3]
+    - link "Contributing" [ref=e371] [nth=1]:
+      - /url: "#contributing-ov-file"
+    - link "Activity" [ref=e372]:
+      - /url: /volcengine/OpenViking/activity
+    - link "Custom properties" [ref=e373]:
+      - /url: /volcengine/OpenViking/custom-properties
+    - heading "Stars" [ref=e374] [level=3]
+    - link "19.5k stars" [ref=e375]:
+      - /url: /volcengine/OpenViking/stargazers
+      - strong: 19.5k
+      - text: stars
+    - heading "Watchers" [ref=e376] [level=3]
+    - link "58 watching" [ref=e377]:
+      - /url: /volcengine/OpenViking/watchers
+      - strong: "58"
+      - text: watching
+    - heading "Forks" [ref=e378] [level=3]
+    - link "1.4k forks" [ref=e379]:
+      - /url: /volcengine/OpenViking/forks
+      - strong: 1.4k
+      - text: forks
+    - link "Report repository" [ref=e380]:
+      - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2Fvolcengine%2FOpenViking&report=volcengine+%28user%29
+    - heading "Releases 22" [ref=e381] [level=2]:
+      - link "Releases 22" [ref=e382]:
+        - /url: /volcengine/OpenViking/releases
+    - link "v0.2.13 Latest Mar 26, 2026yesterday" [ref=e383]:
+      - /url: /volcengine/OpenViking/releases/tag/v0.2.13
+    - link "+ 21 releases" [ref=e384]:
+      - /url: /volcengine/OpenViking/releases
+    - heading "Packages 1" [ref=e385] [level=2]:
+      - link "Packages 1" [ref=e386]:
+        - /url: /orgs/volcengine/packages?repo_name=OpenViking
+    - list:
+      - listitem:
+        - link "openviking" [ref=e387]:
+          - /url: /orgs/volcengine/packages/container/package/openviking
+    - heading "Contributors 112" [ref=e388] [level=2]:
+      - link "Contributors 112" [ref=e389]:
+        - /url: /volcengine/OpenViking/graphs/contributors
+    - list:
+      - listitem:
+        - link "@qin-ctx" [ref=e390]:
+          - /url: https://github.com/qin-ctx
+          - img "@qin-ctx"
+      - listitem:
+        - link "@zhoujh01" [ref=e391]:
+          - /url: https://github.com/zhoujh01
+          - img "@zhoujh01"
+      - listitem:
+        - link "@claude" [ref=e392]:
+          - /url: https://github.com/claude
+          - img "@claude"
+      - listitem:
+        - link "@MaojiaSheng" [ref=e393]:
+          - /url: https://github.com/MaojiaSheng
+          - img "@MaojiaSheng"
+      - listitem:
+        - link "@ZaynJarvis" [ref=e394]:
+          - /url: https://github.com/ZaynJarvis
+          - img "@ZaynJarvis"
+      - listitem:
+        - link "@dependabot[bot]" [ref=e395]:
+          - /url: https://github.com/apps/dependabot
+          - img "@dependabot[bot]"
+      - listitem:
+        - link "@mvanhorn" [ref=e396]:
+          - /url: https://github.com/mvanhorn
+          - img "@mvanhorn"
+      - listitem:
+        - link "@yuyaoyoyo-svg" [ref=e397]:
+          - /url: https://github.com/yuyaoyoyo-svg
+          - img "@yuyaoyoyo-svg"
+      - listitem:
+        - link "@chuanbao666" [ref=e398]:
+          - /url: https://github.com/chuanbao666
+          - img "@chuanbao666"
+      - listitem:
+        - link "@yeshion23333" [ref=e399]:
+          - /url: https://github.com/yeshion23333
+          - img "@yeshion23333"
+      - listitem:
+        - link "@chenjw" [ref=e400]:
+          - /url: https://github.com/chenjw
+          - img "@chenjw"
+      - listitem:
+        - link "@r266-tech" [ref=e401]:
+          - /url: https://github.com/r266-tech
+          - img "@r266-tech"
+      - listitem:
+        - link "@wlff123" [ref=e402]:
+          - /url: https://github.com/wlff123
+          - img "@wlff123"
+      - listitem:
+        - link "@qin-ptr" [ref=e403]:
+          - /url: https://github.com/qin-ptr
+          - img "@qin-ptr"
+    - link "+ 98 contributors" [ref=e404]:
+      - /url: /volcengine/OpenViking/graphs/contributors
+    - heading "Languages" [ref=e405] [level=2]
+    - list:
+      - listitem:
+        - link "Python 87.1%" [ref=e406]:
+          - /url: /volcengine/OpenViking/search?l=python
+      - listitem:
+        - link "C++ 6.3%" [ref=e407]:
+          - /url: /volcengine/OpenViking/search?l=c%2B%2B
+      - listitem:
+        - link "Rust 2.8%" [ref=e408]:
+          - /url: /volcengine/OpenViking/search?l=rust
+      - listitem:
+        - link "JavaScript 1.4%" [ref=e409]:
+          - /url: /volcengine/OpenViking/search?l=javascript
+      - listitem:
+        - link "Shell 1.2%" [ref=e410]:
+          - /url: /volcengine/OpenViking/search?l=shell
+      - listitem:
+        - link "CSS 0.4%" [ref=e411]:
+          - /url: /volcengine/OpenViking/search?l=css
+      - listitem: Other 0.8%
+  - contentinfo:
+    - heading "Footer" [ref=e412] [level=2]
+    - link "GitHub Homepage" [ref=e413]:
+      - /url: https://github.com
+    - text: © 2026 GitHub, Inc.
+    - navigation "Footer" [ref=e414]:
+      - heading "Footer navigation" [ref=e415] [level=3]
+      - list "Footer navigation":
+        - listitem:
+          - link "Terms" [ref=e416]:
+            - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+        - listitem:
+          - link "Privacy" [ref=e417]:
+            - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+        - listitem:
+          - link "Security" [ref=e418] [nth=1]:
+            - /url: https://github.com/security
+        - listitem:
+          - link "Status" [ref=e419]:
+            - /url: https://www.githubstatus.com/
+        - listitem:
+          - link "Community" [ref=e420]:
+            - /url: https://github.community/
+        - listitem:
+          - link "Docs" [ref=e421] [nth=1]:
+            - /url: https://docs.github.com/
+        - listitem:
+          - link "Contact" [ref=e422]:
+            - /url: https://support.github.com?tags=dotcom-footer
+        - listitem:
+          - button "Manage cookies" [ref=e423]
+        - listitem:
+          - button "Do not share my personal information" [ref=e424]

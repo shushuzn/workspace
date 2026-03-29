@@ -1,0 +1,396 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fvolcengine%2FOpenViking%2Ftree%2Fmain%2Fexamples
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E%2Ffiles%2Fdisambiguate&source=header-repo&source_repo=volcengine%2FOpenViking
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - link "volcengine" [ref=e15]:
+      - /url: /volcengine
+    - text: /
+    - strong:
+      - link "OpenViking" [ref=e16]:
+        - /url: /volcengine/OpenViking
+    - text: Public
+    - list:
+      - listitem:
+        - link "You must be signed in to change notification settings" [ref=e17]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Notifications
+      - listitem:
+        - link "Fork 1.4k" [ref=e18]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+      - listitem:
+        - link "You must be signed in to star a repository" [ref=e19]:
+          - /url: /login?return_to=%2Fvolcengine%2FOpenViking
+          - text: Star 19.5k
+    - navigation "Repository" [ref=e20]:
+      - list:
+        - listitem:
+          - link "Code" [ref=e21]:
+            - /url: /volcengine/OpenViking
+        - listitem:
+          - link "Issues 63" [ref=e22]:
+            - /url: /volcengine/OpenViking/issues
+        - listitem:
+          - link "Pull requests 40" [ref=e23]:
+            - /url: /volcengine/OpenViking/pulls
+        - listitem:
+          - link "Discussions" [ref=e24]:
+            - /url: /volcengine/OpenViking/discussions
+        - listitem:
+          - link "Actions" [ref=e25]:
+            - /url: /volcengine/OpenViking/actions
+        - listitem:
+          - link "Projects" [ref=e26]:
+            - /url: /volcengine/OpenViking/projects
+        - listitem:
+          - link "Security" [ref=e27]:
+            - /url: /volcengine/OpenViking/security
+        - listitem:
+          - link "Insights" [ref=e28]:
+            - /url: /volcengine/OpenViking/pulse
+    - heading "Collapse file tree" [ref=e29] [level=2]:
+      - button "Collapse file tree" [ref=e30] [expanded]
+    - heading "Files" [ref=e31] [level=2]
+    - button "main branch" [ref=e32]: main
+    - button "Search this repository (forward slash)" [ref=e33]
+    - combobox "Go to file" [ref=e34]
+    - navigation "File Tree Navigation" [ref=e35]:
+      - tree "Files":
+        - treeitem ".github" [ref=e36] [level=1]
+        - treeitem "bot" [ref=e37] [level=1]
+        - treeitem "build_support" [ref=e38] [level=1]
+        - treeitem "crates" [ref=e39] [level=1]
+        - treeitem "deploy" [ref=e40] [level=1]
+        - treeitem "docs" [ref=e41] [level=1]
+        - treeitem "examples" [ref=e42] [expanded] [level=1]:
+          - text: examples
+          - group "examples":
+            - treeitem "basic-usage" [ref=e43] [level=2]
+            - treeitem "claude-code-memory-plugin" [ref=e44] [level=2]
+            - treeitem "claude-memory-plugin" [ref=e45] [level=2]
+            - treeitem "cloud" [ref=e46] [level=2]
+            - treeitem "common" [ref=e47] [level=2]
+            - treeitem "k8s-helm" [ref=e48] [level=2]
+            - treeitem "mcp-query" [ref=e49] [level=2]
+            - treeitem "misc" [ref=e50] [level=2]
+            - treeitem "multi_tenant" [ref=e51] [level=2]
+            - treeitem "openclaw-plugin" [ref=e52] [level=2]
+            - treeitem "opencode-memory-plugin" [ref=e53] [level=2]
+            - treeitem "opencode" [ref=e54] [level=2]
+            - treeitem "server_client" [ref=e55] [level=2]
+            - treeitem "skills" [ref=e56] [level=2]
+            - treeitem "ov.conf.example" [ref=e57] [level=2]
+            - treeitem "ovcli.conf.example" [ref=e58] [level=2]
+            - treeitem "quick_start.py" [ref=e59] [level=2]
+            - treeitem "watch_resource_example.py" [ref=e60] [level=2]
+        - treeitem "openviking" [ref=e61] [level=1]
+        - treeitem "openviking_cli" [ref=e62] [level=1]
+        - treeitem "src" [ref=e63] [level=1]
+        - treeitem "tests" [ref=e64] [level=1]
+        - treeitem "third_party" [ref=e65] [level=1]
+        - treeitem ".clang-format" [ref=e66] [level=1]
+        - treeitem ".gitignore" [ref=e67] [level=1]
+        - treeitem ".pr_agent.toml" [ref=e68] [level=1]
+        - treeitem ".pre-commit-config.yaml" [ref=e69] [level=1]
+        - treeitem "CONTRIBUTING.md" [ref=e70] [level=1]
+        - treeitem "CONTRIBUTING_CN.md" [ref=e71] [level=1]
+        - treeitem "CONTRIBUTING_JA.md" [ref=e72] [level=1]
+        - treeitem "Cargo.lock" [ref=e73] [level=1]
+        - treeitem "Cargo.toml" [ref=e74] [level=1]
+        - treeitem "Dockerfile" [ref=e75] [level=1]
+        - treeitem "LICENSE" [ref=e76] [level=1]
+        - treeitem "MANIFEST.in" [ref=e77] [level=1]
+        - treeitem "Makefile" [ref=e78] [level=1]
+        - treeitem "README.md" [ref=e79] [level=1]
+        - treeitem "README_CN.md" [ref=e80] [level=1]
+        - treeitem "README_JA.md" [ref=e81] [level=1]
+        - treeitem "docker-compose.yml" [ref=e82] [level=1]
+        - treeitem "pyproject.toml" [ref=e83] [level=1]
+        - treeitem "setup.py" [ref=e84] [level=1]
+        - treeitem "uv.lock" [ref=e85] [level=1]
+    - slider "Draggable pane splitter" [ref=e86]
+    - navigation "Breadcrumbs" [ref=e87]:
+      - heading "Breadcrumbs" [ref=e88] [level=2]
+      - list:
+        - listitem:
+          - link "OpenViking" [ref=e89] [nth=1]:
+            - /url: /volcengine/OpenViking/tree/main
+    - heading "examples" [ref=e90] [level=1]
+    - button "Copy path" [ref=e91]
+    - heading "Directory actions" [ref=e92] [level=2]
+    - heading "More options" [ref=e93] [level=2]
+    - button "More options" [ref=e94]
+    - heading "Latest commit" [ref=e95] [level=2]
+    - link "Castor6" [ref=e96]:
+      - /url: /Castor6
+      - img "Castor6"
+    - link "commits by Castor6" [ref=e97]:
+      - /url: /volcengine/OpenViking/commits?author=Castor6
+      - text: Castor6
+    - 'link "feat(claude-code-plugin): add Claude Code memory plugin example ("':
+      - /url: /volcengine/OpenViking/commit/d1698fa53c03af7178b7baffec8e26af4b39bf25
+    - link "#903" [ref=e98]:
+      - /url: https://github.com/volcengine/OpenViking/pull/903
+    - link ")" [ref=e99]:
+      - /url: /volcengine/OpenViking/commit/d1698fa53c03af7178b7baffec8e26af4b39bf25
+    - button "Open commit details" [ref=e100]
+    - button "success" [ref=e101]
+    - link "Commit d1698fa" [ref=e102]:
+      - /url: /volcengine/OpenViking/commit/d1698fa53c03af7178b7baffec8e26af4b39bf25
+      - text: d1698fa
+    - text: · Mar 27, 20262 hours ago
+    - heading "History" [ref=e103] [level=2]
+    - link "History" [ref=e104]:
+      - /url: /volcengine/OpenViking/commits/main/examples
+    - heading "Folders and files" [ref=e105] [level=2]
+    - table "Folders and files":
+      - rowgroup:
+        - row "Name Last commit message Last commit date":
+          - columnheader "Name" [ref=e106]
+          - columnheader "Last commit message" [ref=e107]
+          - columnheader "Last commit date" [ref=e108]
+      - rowgroup:
+        - row "parent directory Parent directory":
+          - cell "parent directory Parent directory" [ref=e109]:
+            - heading "parent directory" [ref=e110] [level=3]
+            - link "Parent directory" [ref=e111]:
+              - /url: /volcengine/OpenViking/tree/main
+              - text: ..
+        - 'row "basic-usage, (Directory) docs: Add basic usage example and Chinese documentation for examples (#… Mar 26, 2026yesterday"':
+          - cell "basic-usage, (Directory)" [ref=e112]:
+            - link "basic-usage, (Directory)" [ref=e113]:
+              - /url: /volcengine/OpenViking/tree/main/examples/basic-usage
+              - text: basic-usage
+          - 'cell "docs: Add basic usage example and Chinese documentation for examples (#…"':
+            - 'link "docs: Add basic usage example and Chinese documentation for examples ("':
+              - /url: /volcengine/OpenViking/commit/2cc3761ee7712319986b9139b28b8d20cc9a49b4
+            - link "#…" [ref=e114]:
+              - /url: https://github.com/volcengine/OpenViking/pull/979
+          - cell "Mar 26, 2026yesterday" [ref=e115]
+        - 'row "claude-code-memory-plugin, (Directory) feat(claude-code-plugin): add Claude Code memory plugin example (#903) Mar 27, 20262 hours ago"':
+          - cell "claude-code-memory-plugin, (Directory)" [ref=e116]:
+            - link "claude-code-memory-plugin, (Directory)" [ref=e117]:
+              - /url: /volcengine/OpenViking/tree/main/examples/claude-code-memory-plugin
+              - text: claude-code-memory-plugin
+          - 'cell "feat(claude-code-plugin): add Claude Code memory plugin example (#903)"':
+            - 'link "feat(claude-code-plugin): add Claude Code memory plugin example ("':
+              - /url: /volcengine/OpenViking/commit/d1698fa53c03af7178b7baffec8e26af4b39bf25
+            - link "#903" [ref=e118] [nth=1]:
+              - /url: https://github.com/volcengine/OpenViking/pull/903
+            - link ")" [ref=e119] [nth=1]:
+              - /url: /volcengine/OpenViking/commit/d1698fa53c03af7178b7baffec8e26af4b39bf25
+          - cell "Mar 27, 20262 hours ago" [ref=e120]
+        - 'row "claude-memory-plugin, (Directory) feat(claude-code-plugin): add Claude Code memory plugin example (#903) Mar 27, 20262 hours ago"':
+          - cell "claude-memory-plugin, (Directory)" [ref=e121]:
+            - link "claude-memory-plugin, (Directory)" [ref=e122]:
+              - /url: /volcengine/OpenViking/tree/main/examples/claude-memory-plugin
+              - text: claude-memory-plugin
+          - 'cell "feat(claude-code-plugin): add Claude Code memory plugin example (#903)"':
+            - 'link "feat(claude-code-plugin): add Claude Code memory plugin example ("':
+              - /url: /volcengine/OpenViking/commit/d1698fa53c03af7178b7baffec8e26af4b39bf25
+            - link "#903" [ref=e123] [nth=2]:
+              - /url: https://github.com/volcengine/OpenViking/pull/903
+            - link ")" [ref=e124] [nth=2]:
+              - /url: /volcengine/OpenViking/commit/d1698fa53c03af7178b7baffec8e26af4b39bf25
+          - cell "Mar 27, 20262 hours ago" [ref=e125] [nth=1]
+        - row "cloud, (Directory) Migrate vectordb engine to abi3 packaging (#897) Mar 23, 20264 days ago":
+          - cell "cloud, (Directory)" [ref=e126]:
+            - link "cloud, (Directory)" [ref=e127]:
+              - /url: /volcengine/OpenViking/tree/main/examples/cloud
+              - text: cloud
+          - cell "Migrate vectordb engine to abi3 packaging (#897)" [ref=e128]:
+            - link "Migrate vectordb engine to abi3 packaging (" [ref=e129]:
+              - /url: /volcengine/OpenViking/commit/033826f0284d5929e65de8e7d0f4d24e4a08eec4
+            - link "#897" [ref=e130]:
+              - /url: https://github.com/volcengine/OpenViking/pull/897
+            - link ")" [ref=e131] [nth=3]:
+              - /url: /volcengine/OpenViking/commit/033826f0284d5929e65de8e7d0f4d24e4a08eec4
+          - cell "Mar 23, 20264 days ago" [ref=e132]
+        - 'row "common, (Directory) refactor: to accelerate cli launch speed, refactor openviking_cli dir (… Feb 12, 2026last month"':
+          - cell "common, (Directory)" [ref=e133]:
+            - link "common, (Directory)" [ref=e134]:
+              - /url: /volcengine/OpenViking/tree/main/examples/common
+              - text: common
+          - 'cell "refactor: to accelerate cli launch speed, refactor openviking_cli dir (…"':
+            - 'link "refactor: to accelerate cli launch speed, refactor openviking_cli dir ("':
+              - /url: /volcengine/OpenViking/commit/db7319f4a2fedfb2a74ea97837b30f328766e4cb
+            - link "…" [ref=e135]:
+              - /url: https://github.com/volcengine/OpenViking/pull/150
+          - cell "Feb 12, 2026last month" [ref=e136]
+        - 'row "k8s-helm, (Directory) docs: Add basic usage example and Chinese documentation for examples (#… Mar 26, 2026yesterday"':
+          - cell "k8s-helm, (Directory)" [ref=e137]:
+            - link "k8s-helm, (Directory)" [ref=e138]:
+              - /url: /volcengine/OpenViking/tree/main/examples/k8s-helm
+              - text: k8s-helm
+          - 'cell "docs: Add basic usage example and Chinese documentation for examples (#…"':
+            - 'link "docs: Add basic usage example and Chinese documentation for examples ("':
+              - /url: /volcengine/OpenViking/commit/2cc3761ee7712319986b9139b28b8d20cc9a49b4
+            - link "#…" [ref=e139] [nth=1]:
+              - /url: https://github.com/volcengine/OpenViking/pull/979
+          - cell "Mar 26, 2026yesterday" [ref=e140] [nth=1]
+        - 'row "mcp-query, (Directory) docs: Add basic usage example and Chinese documentation for examples (#… Mar 26, 2026yesterday"':
+          - cell "mcp-query, (Directory)" [ref=e141]:
+            - link "mcp-query, (Directory)" [ref=e142]:
+              - /url: /volcengine/OpenViking/tree/main/examples/mcp-query
+              - text: mcp-query
+          - 'cell "docs: Add basic usage example and Chinese documentation for examples (#…"':
+            - 'link "docs: Add basic usage example and Chinese documentation for examples ("':
+              - /url: /volcengine/OpenViking/commit/2cc3761ee7712319986b9139b28b8d20cc9a49b4
+            - link "#…" [ref=e143] [nth=2]:
+              - /url: https://github.com/volcengine/OpenViking/pull/979
+          - cell "Mar 26, 2026yesterday" [ref=e144] [nth=2]
+        - 'row "misc, (Directory) feat(trace): add request-level trace metrics and API support (#640) Mar 15, 20262 weeks ago"':
+          - cell "misc, (Directory)" [ref=e145]:
+            - link "misc, (Directory)" [ref=e146]:
+              - /url: /volcengine/OpenViking/tree/main/examples/misc
+              - text: misc
+          - 'cell "feat(trace): add request-level trace metrics and API support (#640)"':
+            - 'link "feat(trace): add request-level trace metrics and API support ("':
+              - /url: /volcengine/OpenViking/commit/b280b56b308ab4b0ea442d61e1147330a4852749
+            - link "#640" [ref=e147]:
+              - /url: https://github.com/volcengine/OpenViking/pull/640
+            - link ")" [ref=e148] [nth=4]:
+              - /url: /volcengine/OpenViking/commit/b280b56b308ab4b0ea442d61e1147330a4852749
+          - cell "Mar 15, 20262 weeks ago" [ref=e149]
+        - 'row "multi_tenant, (Directory) chore: downgrade golang version limit, update vlm version to seed 2.0 (… Mar 5, 20263 weeks ago"':
+          - cell "multi_tenant, (Directory)" [ref=e150]:
+            - link "multi_tenant, (Directory)" [ref=e151]:
+              - /url: /volcengine/OpenViking/tree/main/examples/multi_tenant
+              - text: multi_tenant
+          - 'cell "chore: downgrade golang version limit, update vlm version to seed 2.0 (…"':
+            - 'link "chore: downgrade golang version limit, update vlm version to seed 2.0 ("':
+              - /url: /volcengine/OpenViking/commit/c4209da6cc69a8e38d282245ed53fe661539cab9
+            - link "…" [ref=e152] [nth=1]:
+              - /url: https://github.com/volcengine/OpenViking/pull/425
+          - cell "Mar 5, 20263 weeks ago" [ref=e153]
+        - 'row "openclaw-plugin, (Directory) feat(installer, openclaw-plugin): unified installer upgrade (#1020) Mar 27, 20267 hours ago"':
+          - cell "openclaw-plugin, (Directory)" [ref=e154]:
+            - link "openclaw-plugin, (Directory)" [ref=e155]:
+              - /url: /volcengine/OpenViking/tree/main/examples/openclaw-plugin
+              - text: openclaw-plugin
+          - 'cell "feat(installer, openclaw-plugin): unified installer upgrade (#1020)"':
+            - 'link "feat(installer, openclaw-plugin): unified installer upgrade ("':
+              - /url: /volcengine/OpenViking/commit/182a4d428f137579ee1c0741c7a0d1f3d5e2452f
+            - link "#1020" [ref=e156]:
+              - /url: https://github.com/volcengine/OpenViking/pull/1020
+            - link ")" [ref=e157] [nth=5]:
+              - /url: /volcengine/OpenViking/commit/182a4d428f137579ee1c0741c7a0d1f3d5e2452f
+          - cell "Mar 27, 20267 hours ago" [ref=e158]
+        - 'row "opencode-memory-plugin, (Directory) docs: Add Chinese README translations for OpenCode and OpenClaw plugi… Mar 22, 20265 days ago"':
+          - cell "opencode-memory-plugin, (Directory)" [ref=e159]:
+            - link "opencode-memory-plugin, (Directory)" [ref=e160]:
+              - /url: /volcengine/OpenViking/tree/main/examples/opencode-memory-plugin
+              - text: opencode-memory-plugin
+          - 'cell "docs: Add Chinese README translations for OpenCode and OpenClaw plugi…"':
+            - 'link "docs: Add Chinese README translations for OpenCode and OpenClaw plugi…"':
+              - /url: /volcengine/OpenViking/commit/f09060c64f972943e155fdd17d6d32b9347b55c9
+          - cell "Mar 22, 20265 days ago" [ref=e161]
+        - 'row "opencode/plugin, (Directory) docs: Add Chinese README translations for OpenCode and OpenClaw plugi… Mar 22, 20265 days ago"':
+          - cell "opencode/plugin, (Directory)" [ref=e162]:
+            - link "opencode/plugin, (Directory)" [ref=e163]:
+              - /url: /volcengine/OpenViking/tree/main/examples/opencode/plugin
+              - text: opencode/plugin
+          - 'cell "docs: Add Chinese README translations for OpenCode and OpenClaw plugi…"':
+            - 'link "docs: Add Chinese README translations for OpenCode and OpenClaw plugi…"':
+              - /url: /volcengine/OpenViking/commit/f09060c64f972943e155fdd17d6d32b9347b55c9
+          - cell "Mar 22, 20265 days ago" [ref=e164] [nth=1]
+        - 'row "server_client, (Directory) chore: downgrade golang version limit, update vlm version to seed 2.0 (… Mar 5, 20263 weeks ago"':
+          - cell "server_client, (Directory)" [ref=e165]:
+            - link "server_client, (Directory)" [ref=e166]:
+              - /url: /volcengine/OpenViking/tree/main/examples/server_client
+              - text: server_client
+          - 'cell "chore: downgrade golang version limit, update vlm version to seed 2.0 (…"':
+            - 'link "chore: downgrade golang version limit, update vlm version to seed 2.0 ("':
+              - /url: /volcengine/OpenViking/commit/c4209da6cc69a8e38d282245ed53fe661539cab9
+            - link "…" [ref=e167] [nth=2]:
+              - /url: https://github.com/volcengine/OpenViking/pull/425
+          - cell "Mar 5, 20263 weeks ago" [ref=e168] [nth=1]
+        - 'row "skills, (Directory) docs: OpenViking Skills for search, add, operate (#510) Mar 10, 20262 weeks ago"':
+          - cell "skills, (Directory)" [ref=e169]:
+            - link "skills, (Directory)" [ref=e170]:
+              - /url: /volcengine/OpenViking/tree/main/examples/skills
+              - text: skills
+          - 'cell "docs: OpenViking Skills for search, add, operate (#510)"':
+            - 'link "docs: OpenViking Skills for search, add, operate ("':
+              - /url: /volcengine/OpenViking/commit/d35152e4abf8a6028ff7995af7d4cb131179a701
+            - link "#510" [ref=e171]:
+              - /url: https://github.com/volcengine/OpenViking/pull/510
+            - link ")" [ref=e172] [nth=6]:
+              - /url: /volcengine/OpenViking/commit/d35152e4abf8a6028ff7995af7d4cb131179a701
+          - cell "Mar 10, 20262 weeks ago" [ref=e173]
+        - row "ov.conf.example, (File) Refactor memory extract (#916) Mar 24, 20263 days ago":
+          - cell "ov.conf.example, (File)" [ref=e174]:
+            - link "ov.conf.example, (File)" [ref=e175]:
+              - /url: /volcengine/OpenViking/blob/main/examples/ov.conf.example
+              - text: ov.conf.example
+          - cell "Refactor memory extract (#916)" [ref=e176]:
+            - link "Refactor memory extract (" [ref=e177]:
+              - /url: /volcengine/OpenViking/commit/277176529851c2ecfd2bddb824877e356a7fe663
+            - link "#916" [ref=e178]:
+              - /url: https://github.com/volcengine/OpenViking/pull/916
+            - link ")" [ref=e179] [nth=7]:
+              - /url: /volcengine/OpenViking/commit/277176529851c2ecfd2bddb824877e356a7fe663
+          - cell "Mar 24, 20263 days ago" [ref=e180]
+        - 'row "ovcli.conf.example, (File) feat(cli): support tenant identity defaults and overrides (#1019) Mar 27, 202610 hours ago"':
+          - cell "ovcli.conf.example, (File)" [ref=e181]:
+            - link "ovcli.conf.example, (File)" [ref=e182]:
+              - /url: /volcengine/OpenViking/blob/main/examples/ovcli.conf.example
+              - text: ovcli.conf.example
+          - 'cell "feat(cli): support tenant identity defaults and overrides (#1019)"':
+            - 'link "feat(cli): support tenant identity defaults and overrides ("':
+              - /url: /volcengine/OpenViking/commit/c5033b0bcdd5736049cf86c210dfe7bbfe8dbbd7
+            - link "#1019" [ref=e183]:
+              - /url: https://github.com/volcengine/OpenViking/pull/1019
+            - link ")" [ref=e184] [nth=8]:
+              - /url: /volcengine/OpenViking/commit/c5033b0bcdd5736049cf86c210dfe7bbfe8dbbd7
+          - cell "Mar 27, 202610 hours ago" [ref=e185]
+        - 'row "quick_start.py, (File) refactor(client): 拆分 HTTP 客户端，分离嵌入模式与 HTTP 模式 (#141) Feb 12, 2026last month"':
+          - cell "quick_start.py, (File)" [ref=e186]:
+            - link "quick_start.py, (File)" [ref=e187]:
+              - /url: /volcengine/OpenViking/blob/main/examples/quick_start.py
+              - text: quick_start.py
+          - 'cell "refactor(client): 拆分 HTTP 客户端，分离嵌入模式与 HTTP 模式 (#141)"':
+            - 'link "refactor(client): 拆分 HTTP 客户端，分离嵌入模式与 HTTP 模式 ("':
+              - /url: /volcengine/OpenViking/commit/002e14087ffcc28fcdcd9922a0f1b528e6ccb5f7
+            - link "#141" [ref=e188]:
+              - /url: https://github.com/volcengine/OpenViking/pull/141
+            - link ")" [ref=e189] [nth=9]:
+              - /url: /volcengine/OpenViking/commit/002e14087ffcc28fcdcd9922a0f1b528e6ccb5f7
+          - cell "Feb 12, 2026last month" [ref=e190] [nth=1]
+        - 'row "watch_resource_example.py, (File) feat(resources): add resource watch scheduling and status tracking (#… Mar 18, 2026last week"':
+          - cell "watch_resource_example.py, (File)" [ref=e191]:
+            - link "watch_resource_example.py, (File)" [ref=e192]:
+              - /url: /volcengine/OpenViking/blob/main/examples/watch_resource_example.py
+              - text: watch_resource_example.py
+          - 'cell "feat(resources): add resource watch scheduling and status tracking (#…"':
+            - 'link "feat(resources): add resource watch scheduling and status tracking ("':
+              - /url: /volcengine/OpenViking/commit/834b8081832ff940497dd48f20907ec4fc529f7b
+            - link "#…" [ref=e193] [nth=3]:
+              - /url: https://github.com/volcengine/OpenViking/pull/709
+          - cell "Mar 18, 2026last week" [ref=e194]
+  - alert

@@ -1,0 +1,435 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2Fsearch&source=header
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - heading "repositories Search Results · multi-agent system llm" [ref=e15] [level=1]
+    - region "Filter by" [ref=e16]:
+      - heading "Filter by" [ref=e17] [level=2]
+      - list "Filter by":
+        - listitem:
+          - list:
+            - listitem:
+              - link "Code (...) results" [ref=e18]:
+                - /url: https://github.com/search?q=multi-agent+system+llm&type=code
+            - listitem:
+              - link "Repositories (2.3k) results" [ref=e19]:
+                - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories
+            - listitem:
+              - link "Issues (15k) results" [ref=e20]:
+                - /url: https://github.com/search?q=multi-agent+system+llm&type=issues
+            - listitem:
+              - link "Pull requests (33k) results" [ref=e21]:
+                - /url: https://github.com/search?q=multi-agent+system+llm&type=pullrequests
+            - listitem:
+              - link "Discussions (728) results" [ref=e22]:
+                - /url: https://github.com/search?q=multi-agent+system+llm&type=discussions
+            - listitem:
+              - link "Users (0) results" [ref=e23]:
+                - /url: https://github.com/search?q=multi-agent+system+llm&type=users
+            - listitem:
+              - button "More" [ref=e24]
+        - listitem:
+          - heading "Languages" [ref=e25] [level=3]
+          - list "Languages":
+            - listitem:
+              - link "Python" [ref=e26]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3APython&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Jupyter Notebook" [ref=e27]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3AJupyter+Notebook&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "TypeScript" [ref=e28]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3ATypeScript&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "JavaScript" [ref=e29]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3AJavaScript&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "HTML" [ref=e30]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3AHTML&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Shell" [ref=e31]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3AShell&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Go" [ref=e32]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3AGo&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Rust" [ref=e33]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3ARust&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Java" [ref=e34]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3AJava&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "C#" [ref=e35]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+language%3AC%23&type=repositories&s=stars&o=desc
+            - listitem:
+              - button "More languages..." [ref=e36]
+        - listitem:
+          - heading "Advanced" [ref=e37] [level=3]
+          - list "Advanced":
+            - listitem:
+              - button "Owner" [ref=e38]
+            - listitem:
+              - button "Size" [ref=e39]
+            - listitem:
+              - button "Number of followers" [ref=e40]
+            - listitem:
+              - button "Number of forks" [ref=e41]
+            - listitem:
+              - button "Number of stars" [ref=e42]
+            - listitem:
+              - button "Date created" [ref=e43]
+            - listitem:
+              - button "Date pushed" [ref=e44]
+            - listitem:
+              - button "Topic" [ref=e45]
+            - listitem:
+              - button "License" [ref=e46]
+            - listitem:
+              - button "Archived" [ref=e47]
+            - listitem:
+              - link "Public" [ref=e48]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+is%3Apublic&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Private" [ref=e49]:
+                - /url: https://github.com/search?q=multi-agent+system+llm+is%3Aprivate&type=repositories&s=stars&o=desc
+        - listitem:
+          - link "Advanced search" [ref=e50]:
+            - /url: /search/advanced
+    - slider "Draggable pane splitter" [ref=e51]
+    - text: 2.3k results (193 ms)
+    - heading "2.3k results" [ref=e52] [level=2]
+    - 'button "Sort by: Most stars"'
+    - button "Open column options" [ref=e53]
+    - heading "raga-ai-hub/RagaAI-Catalyst" [ref=e54] [level=3]:
+      - link "raga-ai-hub/RagaAI-Catalyst" [ref=e55]:
+        - /url: /raga-ai-hub/RagaAI-Catalyst
+    - text: Python SDK for Agent AI Observability, Monitoring and Evaluation Framework. Includes features like agent,
+    - emphasis: llm
+    - text: and tools tracing, debugging
+    - emphasis: …
+    - link "agents" [ref=e56]:
+      - /url: /topics/agents
+    - link "llmops" [ref=e57]:
+      - /url: /topics/llmops
+    - link "agentneo" [ref=e58]:
+      - /url: /topics/agentneo
+    - link "ai-performance-optimization" [ref=e59]:
+      - /url: /topics/ai-performance-optimization
+    - link "agentic-ai" [ref=e60]:
+      - /url: /topics/agentic-ai
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "16123 stars" [ref=e61]:
+          - /url: /raga-ai-hub/RagaAI-Catalyst/stargazers
+          - text: 16.1k
+      - listitem: Updated on 2月11日
+    - link "Star" [ref=e62]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "cft0808/edict" [ref=e63] [level=3]:
+      - link "cft0808/edict" [ref=e64]:
+        - /url: /cft0808/edict
+    - text: 🏛️ 三省六部制 · OpenClaw
+    - emphasis: Multi
+    - text: "-"
+    - emphasis: Agent
+    - text: Orchestration
+    - emphasis: System
+    - text: — 9 specialized AI agents with real-time dashboard, model config, and full audit trails
+    - link "python" [ref=e65]:
+      - /url: /topics/python
+    - link "dashboard" [ref=e66]:
+      - /url: /topics/dashboard
+    - link "orchestration" [ref=e67]:
+      - /url: /topics/orchestration
+    - link "multi-agent" [ref=e68]:
+      - /url: /topics/multi-agent
+    - link "kanban" [ref=e69]:
+      - /url: /topics/kanban
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "13224 stars" [ref=e70]:
+          - /url: /cft0808/edict/stargazers
+          - text: 13.2k
+      - listitem: Updated 23 hours ago
+    - link "Star" [ref=e71] [nth=1]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "MemoriLabs/Memori" [ref=e72] [level=3]:
+      - link "MemoriLabs/Memori" [ref=e73]:
+        - /url: /MemoriLabs/Memori
+    - text: SQL Native Memory Layer for
+    - emphasis: LLMs
+    - text: ", AI Agents &"
+    - emphasis: Multi
+    - text: "-"
+    - emphasis: Agent
+    - emphasis: Systems
+    - link "python" [ref=e74] [nth=1]:
+      - /url: /topics/python
+    - link "agent" [ref=e75]:
+      - /url: /topics/agent
+    - link "awesome" [ref=e76]:
+      - /url: /topics/awesome
+    - link "state-management" [ref=e77]:
+      - /url: /topics/state-management
+    - link "ai" [ref=e78]:
+      - /url: /topics/ai
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "12722 stars" [ref=e79]:
+          - /url: /MemoriLabs/Memori/stargazers
+          - text: 12.7k
+      - listitem: Updated 18 hours ago
+    - link "Star" [ref=e80] [nth=2]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "kuafuai/DevOpsGPT" [ref=e81] [level=3]:
+      - link "kuafuai/DevOpsGPT" [ref=e82]:
+        - /url: /kuafuai/DevOpsGPT
+    - emphasis: Multi
+    - emphasis: agent
+    - emphasis: system
+    - text: for AI-driven software development. Combine
+    - emphasis: LLM
+    - text: with DevOps tools to convert natural language requirements into workin…
+    - list:
+      - listitem: HTML
+      - listitem:
+        - link "5964 stars" [ref=e83]:
+          - /url: /kuafuai/DevOpsGPT/stargazers
+          - text: 6k
+      - listitem: Updated on 2024年8月14日
+    - link "Star" [ref=e84] [nth=3]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "yohey-w/multi-agent-shogun" [ref=e85] [level=3]:
+      - link "yohey-w/multi-agent-shogun" [ref=e86]:
+        - /url: /yohey-w/multi-agent-shogun
+        - text: yohey-w/
+        - emphasis: multi
+        - text: "-"
+        - emphasis: agent
+        - text: "-shogun"
+    - text: Samurai-inspired
+    - emphasis: multi
+    - text: "-"
+    - emphasis: agent
+    - emphasis: system
+    - text: for Claude Code. Orchestrate parallel AI tasks via tmux with shogun → karo → ashigaru hierarchy.
+    - link "tmux" [ref=e87]:
+      - /url: /topics/tmux
+    - link "automation" [ref=e88]:
+      - /url: /topics/automation
+    - link "multi-agent" [ref=e89] [nth=1]:
+      - /url: /topics/multi-agent
+    - link "shogun" [ref=e90]:
+      - /url: /topics/shogun
+    - link "parallel-processing" [ref=e91]:
+      - /url: /topics/parallel-processing
+    - list:
+      - listitem: Shell
+      - listitem:
+        - link "1129 stars" [ref=e92]:
+          - /url: /yohey-w/multi-agent-shogun/stargazers
+          - text: 1.1k
+      - listitem: Updated 3 days ago
+    - link "Star" [ref=e93] [nth=4]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "ZHangZHengEric/Sage" [ref=e94] [level=3]:
+      - link "ZHangZHengEric/Sage" [ref=e95]:
+        - /url: /ZHangZHengEric/Sage
+    - emphasis: Multi
+    - text: "-"
+    - emphasis: Agent
+    - emphasis: System
+    - text: Framework For Complex Tasks
+    - link "workflow" [ref=e96]:
+      - /url: /topics/workflow
+    - link "ai" [ref=e97] [nth=1]:
+      - /url: /topics/ai
+    - link "agents" [ref=e98] [nth=1]:
+      - /url: /topics/agents
+    - link "manus" [ref=e99]:
+      - /url: /topics/manus
+    - link "llm" [ref=e100]:
+      - /url: /topics/llm
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "1100 stars" [ref=e101]:
+          - /url: /ZHangZHengEric/Sage/stargazers
+          - text: 1.1k
+      - listitem: Updated 31 minutes ago
+    - link "Star" [ref=e102] [nth=5]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "massgen/MassGen" [ref=e103] [level=3]:
+      - link "massgen/MassGen" [ref=e104]:
+        - /url: /massgen/MassGen
+    - text: 🚀 MassGen is an open-source
+    - emphasis: multi
+    - text: "-"
+    - emphasis: agent
+    - text: scaling
+    - emphasis: system
+    - text: that runs in your terminal, autonomously orchestrating frontier models and agents …
+    - link "python" [ref=e105] [nth=2]:
+      - /url: /topics/python
+    - link "agent" [ref=e106] [nth=1]:
+      - /url: /topics/agent
+    - link "cli" [ref=e107]:
+      - /url: /topics/cli
+    - link "multi-agent" [ref=e108] [nth=2]:
+      - /url: /topics/multi-agent
+    - link "autonomous-agents" [ref=e109]:
+      - /url: /topics/autonomous-agents
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "893 stars" [ref=e110]:
+          - /url: /massgen/MassGen/stargazers
+          - text: "893"
+      - listitem: Updated yesterday
+    - link "Star" [ref=e111] [nth=6]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "divar-ir/ai-doc-gen" [ref=e112] [level=3]:
+      - link "divar-ir/ai-doc-gen" [ref=e113]:
+        - /url: /divar-ir/ai-doc-gen
+    - text: AI-powered
+    - emphasis: multi
+    - text: "-"
+    - emphasis: agent
+    - emphasis: system
+    - text: that automatically analyzes codebases and generates comprehensive documentation. Features GitLab integratio…
+    - link "python" [ref=e114] [nth=3]:
+      - /url: /topics/python
+    - link "agent" [ref=e115] [nth=2]:
+      - /url: /topics/agent
+    - link "documentation" [ref=e116]:
+      - /url: /topics/documentation
+    - link "ai" [ref=e117] [nth=2]:
+      - /url: /topics/ai
+    - link "code-analysis" [ref=e118]:
+      - /url: /topics/code-analysis
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "706 stars" [ref=e119]:
+          - /url: /divar-ir/ai-doc-gen/stargazers
+          - text: "706"
+      - listitem: Updated on 2025年11月25日
+    - link "Star" [ref=e120] [nth=7]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "dragon1086/prism-insight" [ref=e121] [level=3]:
+      - link "dragon1086/prism-insight" [ref=e122]:
+        - /url: /dragon1086/prism-insight
+    - text: AI-based stock analysis and trading
+    - emphasis: system
+    - link "ai" [ref=e123] [nth=3]:
+      - /url: /topics/ai
+    - link "mcp" [ref=e124]:
+      - /url: /topics/mcp
+    - link "stock" [ref=e125]:
+      - /url: /topics/stock
+    - link "multi-agent" [ref=e126] [nth=3]:
+      - /url: /topics/multi-agent
+    - link "llm" [ref=e127] [nth=1]:
+      - /url: /topics/llm
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "512 stars" [ref=e128]:
+          - /url: /dragon1086/prism-insight/stargazers
+          - text: "512"
+      - listitem: Updated 39 minutes ago
+    - link "Star" [ref=e129] [nth=8]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - button "Sponsor dragon1086/prism-insight" [ref=e130]: Sponsor
+    - heading "wjayesh/mahilo" [ref=e131] [level=3]:
+      - link "wjayesh/mahilo" [ref=e132]:
+        - /url: /wjayesh/mahilo
+    - text: "mahilo:"
+    - emphasis: Multi
+    - text: "-"
+    - emphasis: Agent
+    - text: Human-in-the-Loop Framework is a flexible framework for creating
+    - emphasis: multi
+    - text: "-"
+    - emphasis: agent
+    - emphasis: systems
+    - text: that can each interact with huma…
+    - link "multi-agent" [ref=e133] [nth=4]:
+      - /url: /topics/multi-agent
+    - link "agents" [ref=e134] [nth=2]:
+      - /url: /topics/agents
+    - link "llm" [ref=e135] [nth=2]:
+      - /url: /topics/llm
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "475 stars" [ref=e136]:
+          - /url: /wjayesh/mahilo/stargazers
+          - text: "475"
+      - listitem: Updated on 2025年4月3日
+    - link "Star" [ref=e137] [nth=9]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dmulti-agent%2Bsystem%2Bllm%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - navigation "Pagination" [ref=e138]:
+      - link "Page 1" [ref=e139]:
+        - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories&s=stars&o=desc&p=1
+        - text: "1"
+      - link "Page 2" [ref=e140]:
+        - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories&s=stars&o=desc&p=2
+        - text: "2"
+      - link "Page 3" [ref=e141]:
+        - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories&s=stars&o=desc&p=3
+        - text: "3"
+      - link "Page 4" [ref=e142]:
+        - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories&s=stars&o=desc&p=4
+        - text: "4"
+      - link "Page 5" [ref=e143]:
+        - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories&s=stars&o=desc&p=5
+        - text: "5"
+      - link "Page 6" [ref=e144]:
+        - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories&s=stars&o=desc&p=6
+        - text: "6"
+      - link "Page 7..." [ref=e145]:
+        - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories&s=stars&o=desc&p=7
+        - text: "7"
+      - text: …
+      - link "Page 100" [ref=e146]:
+        - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories&s=stars&o=desc&p=100
+        - text: "100"
+      - link "Next Page" [ref=e147]:
+        - /url: https://github.com/search?q=multi-agent+system+llm&type=repositories&s=stars&o=desc&p=2
+        - text: Next
+    - img "Package icon"
+    - heading "Sponsor open source projects you depend on" [ref=e148] [level=2]
+    - text: Contributors are working behind the scenes to make open source better for everyone—give them the help and recognition they deserve.
+    - link "Explore sponsorable projects" [ref=e149]:
+      - /url: https://github.com/sponsors/explore
+    - text: ProTip! Press the / key to activate the search input again and adjust your query.

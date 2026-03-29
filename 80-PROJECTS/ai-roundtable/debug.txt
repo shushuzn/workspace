@@ -1,0 +1,7 @@
+73: ||
+74: |function cleanResponse(text) {|
+75: |  text = text.replace(/\*/g, '');|
+76: |  // 清除所有括号包裹的思考内容（中英文，书名号等）|
+77: |  text = text.replace(/[（（].*?[）)]/gs, '');|
+78: |  // 清除所有thought标签残留|
+79: |  text = text.replace(/<think>.*?</think>/gs, '');|

@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "agent-config": {
+      "version": "1.0.0",
+      "installedAt": 1774687501442
+    },
+    "agnt-os": {
+      "version": "1.0.3",
+      "installedAt": 1774688101779
+    }
+  }
+}

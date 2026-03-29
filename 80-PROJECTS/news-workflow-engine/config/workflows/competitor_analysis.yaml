@@ -1,0 +1,27 @@
+description: 针对竞品新闻进行分析
+id: competitor_analysis
+name: 竞品分析
+tasks:
+- action: identify_competitor
+  description: 从新闻中识别竞品信息
+  name: 识别竞品
+  priority: 10
+- action: gather_intel
+  depends_on:
+  - 0
+  description: 收集竞品的最新动态和信息
+  name: 收集竞品信息
+  priority: 8
+- action: compare_analysis
+  depends_on:
+  - 1
+  description: 与我方产品进行对比分析
+  name: 对比分析
+  priority: 6
+trigger:
+  category: company
+  keywords:
+  - 竞品
+  - 竞争对手
+  - 竞争
+  min_importance: 0.7

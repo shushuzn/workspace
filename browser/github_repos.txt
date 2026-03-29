@@ -1,0 +1,418 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2Fsearch&source=header
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - heading "repositories Search Results · agent memory system" [ref=e15] [level=1]
+    - region "Filter by" [ref=e16]:
+      - heading "Filter by" [ref=e17] [level=2]
+      - list "Filter by":
+        - listitem:
+          - list:
+            - listitem:
+              - link "Code (...) results" [ref=e18]:
+                - /url: https://github.com/search?q=agent+memory+system&type=code
+            - listitem:
+              - link "Repositories (2.4k) results" [ref=e19]:
+                - /url: https://github.com/search?q=agent+memory+system&type=repositories
+            - listitem:
+              - link "Issues (149k) results" [ref=e20]:
+                - /url: https://github.com/search?q=agent+memory+system&type=issues
+            - listitem:
+              - link "Pull requests (480k) results" [ref=e21]:
+                - /url: https://github.com/search?q=agent+memory+system&type=pullrequests
+            - listitem:
+              - link "Discussions (6k) results" [ref=e22]:
+                - /url: https://github.com/search?q=agent+memory+system&type=discussions
+            - listitem:
+              - link "Users (58) results" [ref=e23]:
+                - /url: https://github.com/search?q=agent+memory+system&type=users
+            - listitem:
+              - button "More" [ref=e24]
+        - listitem:
+          - heading "Languages" [ref=e25] [level=3]
+          - list "Languages":
+            - listitem:
+              - link "Python" [ref=e26]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3APython&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "TypeScript" [ref=e27]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3ATypeScript&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Jupyter Notebook" [ref=e28]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3AJupyter+Notebook&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "JavaScript" [ref=e29]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3AJavaScript&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Shell" [ref=e30]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3AShell&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Rust" [ref=e31]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3ARust&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "HTML" [ref=e32]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3AHTML&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Go" [ref=e33]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3AGo&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Java" [ref=e34]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3AJava&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Swift" [ref=e35]:
+                - /url: https://github.com/search?q=agent+memory+system+language%3ASwift&type=repositories&s=stars&o=desc
+            - listitem:
+              - button "More languages..." [ref=e36]
+        - listitem:
+          - heading "Advanced" [ref=e37] [level=3]
+          - list "Advanced":
+            - listitem:
+              - button "Owner" [ref=e38]
+            - listitem:
+              - button "Size" [ref=e39]
+            - listitem:
+              - button "Number of followers" [ref=e40]
+            - listitem:
+              - button "Number of forks" [ref=e41]
+            - listitem:
+              - button "Number of stars" [ref=e42]
+            - listitem:
+              - button "Date created" [ref=e43]
+            - listitem:
+              - button "Date pushed" [ref=e44]
+            - listitem:
+              - button "Topic" [ref=e45]
+            - listitem:
+              - button "License" [ref=e46]
+            - listitem:
+              - button "Archived" [ref=e47]
+            - listitem:
+              - link "Public" [ref=e48]:
+                - /url: https://github.com/search?q=agent+memory+system+is%3Apublic&type=repositories&s=stars&o=desc
+            - listitem:
+              - link "Private" [ref=e49]:
+                - /url: https://github.com/search?q=agent+memory+system+is%3Aprivate&type=repositories&s=stars&o=desc
+        - listitem:
+          - link "Advanced search" [ref=e50]:
+            - /url: /search/advanced
+    - slider "Draggable pane splitter" [ref=e51]
+    - text: 2.4k results (240 ms)
+    - heading "2.4k results" [ref=e52] [level=2]
+    - 'button "Sort by: Most stars"'
+    - button "Open column options" [ref=e53]
+    - heading "affaan-m/everything-claude-code" [ref=e54] [level=3]:
+      - link "affaan-m/everything-claude-code" [ref=e55]:
+        - /url: /affaan-m/everything-claude-code
+    - text: The
+    - emphasis: agent
+    - text: harness performance optimization
+    - emphasis: system
+    - text: . Skills, instincts,
+    - emphasis: memory
+    - text: ", security, and research-first development for Claude Code, C…"
+    - link "productivity" [ref=e56]:
+      - /url: /topics/productivity
+    - link "mcp" [ref=e57]:
+      - /url: /topics/mcp
+    - link "developer-tools" [ref=e58]:
+      - /url: /topics/developer-tools
+    - link "ai-agents" [ref=e59]:
+      - /url: /topics/ai-agents
+    - link "claude" [ref=e60]:
+      - /url: /topics/claude
+    - list:
+      - listitem: JavaScript
+      - listitem:
+        - link "111502 stars" [ref=e61]:
+          - /url: /affaan-m/everything-claude-code/stargazers
+          - text: 112k
+      - listitem: Updated 1 hour ago
+    - link "Star" [ref=e62]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - button "Sponsor affaan-m/everything-claude-code" [ref=e63]: Sponsor
+    - heading "deepset-ai/haystack" [ref=e64] [level=3]:
+      - link "deepset-ai/haystack" [ref=e65]:
+        - /url: /deepset-ai/haystack
+    - text: Open-source AI orchestration framework for building context-engineered, production-ready LLM applications. Design modular pipelines and
+    - emphasis: a…
+    - link "python" [ref=e66]:
+      - /url: /topics/python
+    - link "nlp" [ref=e67]:
+      - /url: /topics/nlp
+    - link "agent" [ref=e68]:
+      - /url: /topics/agent
+    - link "machine-learning" [ref=e69]:
+      - /url: /topics/machine-learning
+    - link "information-retrieval" [ref=e70]:
+      - /url: /topics/information-retrieval
+    - list:
+      - listitem: MDX
+      - listitem:
+        - link "24632 stars" [ref=e71]:
+          - /url: /deepset-ai/haystack/stargazers
+          - text: 24.6k
+      - listitem: Updated 35 minutes ago
+    - link "Star" [ref=e72] [nth=1]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "volcengine/OpenViking" [ref=e73] [level=3]:
+      - link "volcengine/OpenViking" [ref=e74]:
+        - /url: /volcengine/OpenViking
+    - text: OpenViking is an open-source context database designed specifically for AI
+    - emphasis: Agents
+    - text: (such as openclaw). OpenViking unifies the management of…
+    - link "agent" [ref=e75] [nth=1]:
+      - /url: /topics/agent
+    - link "memory" [ref=e76]:
+      - /url: /topics/memory
+    - link "skill" [ref=e77]:
+      - /url: /topics/skill
+    - link "filesystem" [ref=e78]:
+      - /url: /topics/filesystem
+    - link "opencode" [ref=e79]:
+      - /url: /topics/opencode
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "19473 stars" [ref=e80]:
+          - /url: /volcengine/OpenViking/stargazers
+          - text: 19.5k
+      - listitem: Updated 8 minutes ago
+    - link "Star" [ref=e81] [nth=2]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "MemoriLabs/Memori" [ref=e82] [level=3]:
+      - link "MemoriLabs/Memori" [ref=e83]:
+        - /url: /MemoriLabs/Memori
+    - text: SQL Native
+    - emphasis: Memory
+    - text: Layer for LLMs, AI
+    - emphasis: Agents
+    - text: "& Multi-"
+    - emphasis: Agent
+    - emphasis: Systems
+    - link "python" [ref=e84] [nth=1]:
+      - /url: /topics/python
+    - link "agent" [ref=e85] [nth=2]:
+      - /url: /topics/agent
+    - link "awesome" [ref=e86]:
+      - /url: /topics/awesome
+    - link "state-management" [ref=e87]:
+      - /url: /topics/state-management
+    - link "ai" [ref=e88]:
+      - /url: /topics/ai
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "12722 stars" [ref=e89]:
+          - /url: /MemoriLabs/Memori/stargazers
+          - text: 12.7k
+      - listitem: Updated 18 hours ago
+    - link "Star" [ref=e90] [nth=3]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "MemTensor/MemOS" [ref=e91] [level=3]:
+      - link "MemTensor/MemOS" [ref=e92]:
+        - /url: /MemTensor/MemOS
+    - text: AI
+    - emphasis: memory
+    - text: OS for LLM and
+    - emphasis: Agent
+    - emphasis: systems
+    - text: (moltbot,clawdbot,openclaw), enabling persistent Skill
+    - emphasis: memory
+    - text: for cross-task skill reuse and evolut…
+    - link "agent" [ref=e93] [nth=3]:
+      - /url: /topics/agent
+    - link "skills" [ref=e94]:
+      - /url: /topics/skills
+    - link "memory" [ref=e95] [nth=1]:
+      - /url: /topics/memory
+    - link "memory-management" [ref=e96]:
+      - /url: /topics/memory-management
+    - link "long-term-memory" [ref=e97]:
+      - /url: /topics/long-term-memory
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "7866 stars" [ref=e98]:
+          - /url: /MemTensor/MemOS/stargazers
+          - text: 7.9k
+      - listitem: Updated 3 hours ago
+    - link "Star" [ref=e99] [nth=4]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "MemMachine/MemMachine" [ref=e100] [level=3]:
+      - link "MemMachine/MemMachine" [ref=e101]:
+        - /url: /MemMachine/MemMachine
+    - text: Universal
+    - emphasis: memory
+    - text: layer for AI
+    - emphasis: Agents
+    - text: . It provides scalable, extensible, and interoperable
+    - emphasis: memory
+    - text: storage and retrieval to streamline AI
+    - emphasis: a…
+    - link "python" [ref=e102] [nth=2]:
+      - /url: /topics/python
+    - link "agent" [ref=e103] [nth=4]:
+      - /url: /topics/agent
+    - link "ai" [ref=e104] [nth=1]:
+      - /url: /topics/ai
+    - link "memory" [ref=e105] [nth=2]:
+      - /url: /topics/memory
+    - link "personalization" [ref=e106]:
+      - /url: /topics/personalization
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "5551 stars" [ref=e107]:
+          - /url: /MemMachine/MemMachine/stargazers
+          - text: 5.6k
+      - listitem: Updated 10 hours ago
+    - link "Star" [ref=e108] [nth=5]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "Josh-XT/AGiXT" [ref=e109] [level=3]:
+      - link "Josh-XT/AGiXT" [ref=e110]:
+        - /url: /Josh-XT/AGiXT
+    - text: AGiXT is a dynamic AI
+    - emphasis: Agent
+    - text: Automation Platform that seamlessly orchestrates instruction management and complex task execution across div…
+    - link "python" [ref=e111] [nth=3]:
+      - /url: /topics/python
+    - link "intelligence" [ref=e112]:
+      - /url: /topics/intelligence
+    - link "automation" [ref=e113]:
+      - /url: /topics/automation
+    - link "ai" [ref=e114] [nth=2]:
+      - /url: /topics/ai
+    - link "agi" [ref=e115]:
+      - /url: /topics/agi
+    - list:
+      - listitem: Python
+      - listitem:
+        - link "3167 stars" [ref=e116]:
+          - /url: /Josh-XT/AGiXT/stargazers
+          - text: 3.2k
+      - listitem: Updated 23 hours ago
+    - link "Star" [ref=e117] [nth=6]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - button "Sponsor Josh-XT/AGiXT" [ref=e118]: Sponsor
+    - heading "KsanaDock/Microverse" [ref=e119] [level=3]:
+      - link "KsanaDock/Microverse" [ref=e120]:
+        - /url: /KsanaDock/Microverse
+    - text: A god-simulation sandbox game built on Godot 4 as a multi-
+    - emphasis: agent
+    - text: AI social simulation
+    - emphasis: system
+    - text: . In this virtual world, AI characters possess…
+    - link "multi-agent" [ref=e121]:
+      - /url: /topics/multi-agent
+    - link "godot" [ref=e122]:
+      - /url: /topics/godot
+    - link "ai-game" [ref=e123]:
+      - /url: /topics/ai-game
+    - link "ai-world-simulation" [ref=e124]:
+      - /url: /topics/ai-world-simulation
+    - list:
+      - listitem: GDScript
+      - listitem:
+        - link "2192 stars" [ref=e125]:
+          - /url: /KsanaDock/Microverse/stargazers
+          - text: 2.2k
+      - listitem: Updated on 2025年12月26日
+    - link "Star" [ref=e126] [nth=7]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "Gentleman-Programming/engram" [ref=e127] [level=3]:
+      - link "Gentleman-Programming/engram" [ref=e128]:
+        - /url: /Gentleman-Programming/engram
+    - text: Persistent
+    - emphasis: memory
+    - emphasis: system
+    - text: for AI coding
+    - emphasis: agents
+    - text: .
+    - emphasis: Agent
+    - text: "-agnostic Go binary with SQLite + FTS5, MCP server, HTTP API, CLI, and TUI."
+    - list:
+      - listitem: Go
+      - listitem:
+        - link "1938 stars" [ref=e129]:
+          - /url: /Gentleman-Programming/engram/stargazers
+          - text: 1.9k
+      - listitem: Updated yesterday
+    - link "Star" [ref=e130] [nth=8]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - heading "parruda/swarm" [ref=e131] [level=3]:
+      - link "parruda/swarm" [ref=e132]:
+        - /url: /parruda/swarm
+    - text: Ruby gems for general-purpose AI
+    - emphasis: agent
+    - emphasis: systems
+    - text: ": automation, research, data processing, customer support, content creation. SwarmSDK provi…"
+    - list:
+      - listitem: Ruby
+      - listitem:
+        - link "1688 stars" [ref=e133]:
+          - /url: /parruda/swarm/stargazers
+          - text: 1.7k
+      - listitem: Updated on 2月17日
+    - link "Star" [ref=e134] [nth=9]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fsearch%3Fq%3Dagent%2Bmemory%2Bsystem%26type%3Drepositories%26s%3Dstars%26o%3Ddesc
+    - navigation "Pagination" [ref=e135]:
+      - link "Page 1" [ref=e136]:
+        - /url: https://github.com/search?q=agent+memory+system&type=repositories&s=stars&o=desc&p=1
+        - text: "1"
+      - link "Page 2" [ref=e137]:
+        - /url: https://github.com/search?q=agent+memory+system&type=repositories&s=stars&o=desc&p=2
+        - text: "2"
+      - link "Page 3" [ref=e138]:
+        - /url: https://github.com/search?q=agent+memory+system&type=repositories&s=stars&o=desc&p=3
+        - text: "3"
+      - link "Page 4" [ref=e139]:
+        - /url: https://github.com/search?q=agent+memory+system&type=repositories&s=stars&o=desc&p=4
+        - text: "4"
+      - link "Page 5" [ref=e140]:
+        - /url: https://github.com/search?q=agent+memory+system&type=repositories&s=stars&o=desc&p=5
+        - text: "5"
+      - link "Page 6" [ref=e141]:
+        - /url: https://github.com/search?q=agent+memory+system&type=repositories&s=stars&o=desc&p=6
+        - text: "6"
+      - link "Page 7..." [ref=e142]:
+        - /url: https://github.com/search?q=agent+memory+system&type=repositories&s=stars&o=desc&p=7
+        - text: "7"
+      - text: …
+      - link "Page 100" [ref=e143]:
+        - /url: https://github.com/search?q=agent+memory+system&type=repositories&s=stars&o=desc&p=100
+        - text: "100"
+      - link "Next Page" [ref=e144]:
+        - /url: https://github.com/search?q=agent+memory+system&type=repositories&s=stars&o=desc&p=2
+        - text: Next
+    - img "Package icon"
+    - heading "Sponsor open source projects you depend on" [ref=e145] [level=2]
+    - text: Contributors are working behind the scenes to make open source better for everyone—give them the help and recognition they deserve.
+    - link "Explore sponsorable projects" [ref=e146]:
+      - /url: https://github.com/sponsors/explore
+    - text: ProTip! Press the / key to activate the search input again and adjust your query.

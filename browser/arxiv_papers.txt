@@ -1,0 +1,84 @@
+- document:
+  - banner:
+    - link "Skip to main content" [ref=e1]:
+      - /url: "#content"
+    - link "Cornell University" [ref=e2]:
+      - /url: https://www.cornell.edu/
+      - img "Cornell University"
+    - link "Learn about arXiv becoming an independent nonprofit." [ref=e3]:
+      - /url: https://tech.cornell.edu/arxiv/
+    - text: We gratefully acknowledge support from the Simons Foundation,
+    - link "member institutions" [ref=e4]:
+      - /url: https://info.arxiv.org/about/ourmembers.html
+    - text: ", and all contributors."
+    - link "Donate" [ref=e5]:
+      - /url: https://info.arxiv.org/about/donate.html
+    - heading "arxiv logo" [ref=e6] [level=1]:
+      - img "arxiv logo"
+    - textbox "Search term or terms" [ref=e7]:
+      - /placeholder: Search...
+    - paragraph:
+      - link "Help" [ref=e8]:
+        - /url: https://info.arxiv.org/help
+      - text: "|"
+      - link "Advanced Search" [ref=e9]:
+        - /url: https://arxiv.org/search/advanced
+    - combobox "Field to search" [ref=e10]:
+      - option "All fields" [ref=e11] [selected]
+      - option "Title" [ref=e12]
+      - option "Author" [ref=e13]
+      - option "Abstract" [ref=e14]
+      - option "Comments" [ref=e15]
+      - option "Journal reference" [ref=e16]
+      - option "ACM classification" [ref=e17]
+      - option "MSC classification" [ref=e18]
+      - option "Report number" [ref=e19]
+      - option "arXiv identifier" [ref=e20]
+      - option "DOI" [ref=e21]
+      - option "ORCID" [ref=e22]
+      - option "arXiv author ID" [ref=e23]
+      - option "Help pages" [ref=e24]
+      - option "Full text" [ref=e25]
+    - button "Search" [ref=e26]
+  - main:
+    - 'heading "Invalid show value. Valid values: 25, 50, 100, 250, 500, 1000, 2000" [level=1]'
+    - paragraph: The server cannot process your request due to syntax errors, missing required data or invalid content-type. Please check your URL and try again.
+    - paragraph:
+      - text: If you believe this is an error or have questions please contact
+      - link "help@arxiv.org" [ref=e27]:
+        - /url: mailto:help@arxiv.org
+      - text: "and please provide:"
+    - list:
+      - listitem: The URL which causes the problem
+      - listitem: A brief description of what you expected to see/happen and what you observed.
+  - contentinfo:
+    - navigation "Secondary" [ref=e28]:
+      - list:
+        - listitem:
+          - link "About" [ref=e29]:
+            - /url: https://info.arxiv.org/about
+        - listitem:
+          - link "Help" [ref=e30] [nth=1]:
+            - /url: https://info.arxiv.org/help
+      - list:
+        - listitem:
+          - link "Contact" [ref=e31]:
+            - /url: https://info.arxiv.org/help/contact.html
+        - listitem:
+          - link "Subscribe" [ref=e32]:
+            - /url: https://info.arxiv.org/help/subscribe
+      - list:
+        - listitem:
+          - link "Copyright" [ref=e33]:
+            - /url: https://info.arxiv.org/help/license/index.html
+        - listitem:
+          - link "Privacy Policy" [ref=e34]:
+            - /url: https://info.arxiv.org/help/policies/privacy_policy.html
+      - list:
+        - listitem:
+          - link "Web Accessibility Assistance" [ref=e35]:
+            - /url: https://info.arxiv.org/help/web_accessibility.html
+        - listitem:
+          - paragraph:
+            - link "arXiv Operational Status" [ref=e36]:
+              - /url: https://status.arxiv.org

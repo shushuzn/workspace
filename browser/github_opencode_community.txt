@@ -1,0 +1,228 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fopencode-ai%2Fcommunity
+    - heading "Sign in to GitHub" [ref=e13] [level=4]
+    - text: Username or email address
+    - textbox "Username or email address" [ref=e14]
+    - text: Password
+    - textbox "Password" [ref=e15]
+    - link "Forgot password?" [ref=e16]:
+      - /url: /password_reset
+    - button "Sign in" [ref=e17]
+    - link "or continue with other methods" [ref=e18]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2Fopencode-ai%2Fcommunity
+    - link "Sign up" [ref=e19]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2Fopencode-ai%2Fcommunity&source=header
+    - button "Appearance settings" [ref=e20]
+  - main:
+    - img "404 “This is not the web page you are looking for”"
+    - search:
+      - text: "Find code, projects, and people on GitHub:"
+      - textbox "Find code, projects, and people on GitHub:" [ref=e21]
+      - button "Search" [ref=e22]
+    - link "Contact Support" [ref=e23]:
+      - /url: https://support.github.com?tags=dotcom-404
+    - text: —
+    - link "GitHub Status" [ref=e24]:
+      - /url: https://githubstatus.com
+    - text: —
+    - link "@githubstatus" [ref=e25]:
+      - /url: https://x.com/githubstatus
+  - contentinfo:
+    - heading "Site-wide Links" [ref=e26] [level=2]
+    - link "Go to GitHub homepage" [ref=e27]:
+      - /url: /
+    - heading "Subscribe to our developer newsletter" [ref=e28] [level=3]
+    - paragraph: Get tips, technical guides, and best practices. Twice a month.
+    - link "Subscribe" [ref=e29]:
+      - /url: https://github.com/newsletter
+    - navigation "Platform" [ref=e30]:
+      - heading "Platform" [ref=e31] [level=3]
+      - list:
+        - listitem:
+          - link "Features" [ref=e32]:
+            - /url: /features
+        - listitem:
+          - link "Enterprise" [ref=e33]:
+            - /url: /enterprise
+        - listitem:
+          - link "Copilot" [ref=e34]:
+            - /url: /features/copilot
+        - listitem:
+          - link "AI" [ref=e35]:
+            - /url: /features/ai
+        - listitem:
+          - link "Security" [ref=e36]:
+            - /url: /security
+        - listitem:
+          - link "Pricing" [ref=e37] [nth=1]:
+            - /url: /pricing
+        - listitem:
+          - link "Team" [ref=e38]:
+            - /url: /team
+        - listitem:
+          - link "Resources" [ref=e39]:
+            - /url: https://resources.github.com
+        - listitem:
+          - link "Roadmap" [ref=e40]:
+            - /url: https://github.com/github/roadmap
+        - listitem:
+          - link "Compare GitHub" [ref=e41]:
+            - /url: /resources/articles/devops-tools-comparison
+    - navigation "Ecosystem" [ref=e42]:
+      - heading "Ecosystem" [ref=e43] [level=3]
+      - list:
+        - listitem:
+          - link "Developer API" [ref=e44]:
+            - /url: https://docs.github.com/get-started/exploring-integrations/about-building-integrations
+        - listitem:
+          - link "Partners" [ref=e45]:
+            - /url: https://partner.github.com
+        - listitem:
+          - link "Education" [ref=e46]:
+            - /url: https://github.com/edu
+        - listitem:
+          - link "GitHub CLI" [ref=e47]:
+            - /url: https://cli.github.com
+        - listitem:
+          - link "GitHub Desktop" [ref=e48]:
+            - /url: https://desktop.github.com
+        - listitem:
+          - link "GitHub Mobile" [ref=e49]:
+            - /url: https://github.com/mobile
+        - listitem:
+          - link "GitHub Marketplace" [ref=e50]:
+            - /url: https://github.com/marketplace
+        - listitem:
+          - link "MCP Registry" [ref=e51]:
+            - /url: https://github.com/mcp
+    - navigation "Support" [ref=e52]:
+      - heading "Support" [ref=e53] [level=3]
+      - list:
+        - listitem:
+          - link "Docs" [ref=e54]:
+            - /url: https://docs.github.com
+        - listitem:
+          - link "Community Forum" [ref=e55]:
+            - /url: https://github.community
+        - listitem:
+          - link "Professional Services" [ref=e56]:
+            - /url: https://services.github.com
+        - listitem:
+          - link "Premium Support" [ref=e57]:
+            - /url: /enterprise/premium-support
+        - listitem:
+          - link "Skills" [ref=e58]:
+            - /url: https://skills.github.com
+        - listitem:
+          - link "Status" [ref=e59]:
+            - /url: https://www.githubstatus.com
+        - listitem:
+          - link "Contact GitHub" [ref=e60]:
+            - /url: https://support.github.com?tags=dotcom-footer
+    - navigation "Company" [ref=e61]:
+      - heading "Company" [ref=e62] [level=3]
+      - list:
+        - listitem:
+          - link "About" [ref=e63]:
+            - /url: https://github.com/about
+        - listitem:
+          - link "Why GitHub" [ref=e64]:
+            - /url: https://github.com/why-github
+        - listitem:
+          - link "Customer stories" [ref=e65]:
+            - /url: /customer-stories?type=enterprise
+        - listitem:
+          - link "Blog" [ref=e66]:
+            - /url: https://github.blog
+        - listitem:
+          - link "The ReadME Project" [ref=e67]:
+            - /url: /readme
+        - listitem:
+          - link "Careers" [ref=e68]:
+            - /url: https://github.careers
+        - listitem:
+          - link "Newsroom" [ref=e69]:
+            - /url: /newsroom
+        - listitem:
+          - link "Inclusion" [ref=e70]:
+            - /url: /about/diversity
+        - listitem:
+          - link "Social Impact" [ref=e71]:
+            - /url: https://socialimpact.github.com
+        - listitem:
+          - link "Shop" [ref=e72]:
+            - /url: https://shop.github.com
+    - navigation "Legal and Resource Links" [ref=e73]:
+      - list:
+        - listitem:
+          - text: ©
+          - time: "2026"
+          - text: GitHub, Inc.
+        - listitem:
+          - link "Terms" [ref=e74]:
+            - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+        - listitem:
+          - link "Privacy" [ref=e75]:
+            - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+          - link "(Updated 02/2024) 02/2024" [ref=e76]:
+            - /url: https://github.com/github/site-policy/pull/582
+            - text: (Updated 02/2024)
+            - time: 02/2024
+        - listitem:
+          - link "Sitemap" [ref=e77]:
+            - /url: /sitemap
+        - listitem:
+          - link "What is Git?" [ref=e78]:
+            - /url: /git-guides
+        - listitem:
+          - button "Manage cookies" [ref=e79]
+        - listitem:
+          - button "Do not share my personal information" [ref=e80]
+    - navigation "GitHub's Social Media Links" [ref=e81]:
+      - list:
+        - listitem:
+          - link "GitHub on LinkedIn" [ref=e82]:
+            - /url: https://www.linkedin.com/company/github
+        - listitem:
+          - link "GitHub on Instagram" [ref=e83]:
+            - /url: https://www.instagram.com/github
+        - listitem:
+          - link "GitHub on YouTube" [ref=e84]:
+            - /url: https://www.youtube.com/github
+        - listitem:
+          - link "GitHub on X" [ref=e85]:
+            - /url: https://x.com/github
+        - listitem:
+          - link "GitHub on TikTok" [ref=e86]:
+            - /url: https://www.tiktok.com/@github
+        - listitem:
+          - link "GitHub on Twitch" [ref=e87]:
+            - /url: https://www.twitch.tv/github
+        - listitem:
+          - link "GitHub’s organization on GitHub" [ref=e88]:
+            - /url: https://github.com/github
+      - button "English - Select language" [ref=e89]: English
