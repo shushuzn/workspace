@@ -8,7 +8,7 @@ describe('Load Balancing Integration', () => {
     router = new A2ARouter({ heartbeatTimeout: 60000 });
   });
 
-  test('end-to-end: capability routing selects lowest load agent', () => {
+  test('end-to-end: capability routing selects lowest load agent', async () => {
     // Register agents with different loads
     router.registerAgent('agent-a', ['coding']);
     router.registerAgent('agent-b', ['coding']);
@@ -34,12 +34,12 @@ describe('Load Balancing Integration', () => {
       deliveredTo = agent.id;
     });
 
-    const result = router.routeMessage(msg);
+    const result = await router.routeMessage(msg);
     expect(result.delivered).toBe(true);
     expect(deliveredTo).toBe('agent-a'); // lowest load selected
   });
 
-  test('end-to-end: queues when no agents with capability', () => {
+  test('end-to-end: queues when no agents with capability', async () => {
     router.registerAgent('reviewer', ['review']);
 
     const msg = {
@@ -52,12 +52,12 @@ describe('Load Balancing Integration', () => {
       payload: { task: 'implement feature' }
     };
 
-    const result = router.routeMessage(msg);
+    const result = await router.routeMessage(msg);
     expect(result.queued).toBe(true);
     expect(result.reason).toBe('NO_AGENTS_FOR_CAPABILITY');
   });
 
-  test('end-to-end: queues when only matching agent is offline', () => {
+  test('end-to-end: queues when only matching agent is offline', async () => {
     router.registerAgent('offline-agent', ['coding']);
     router.heartbeat('offline-agent', 'idle', 0.1, 0);
     router.agents.get('offline-agent').status = 'offline';
@@ -72,7 +72,7 @@ describe('Load Balancing Integration', () => {
       payload: { task: 'implement feature' }
     };
 
-    const result = router.routeMessage(msg);
+    const result = await router.routeMessage(msg);
     expect(result.queued).toBe(true);
     expect(result.reason).toBe('AGENT_OFFLINE');
   });

@@ -15,7 +15,7 @@ describe('Task Decomposition Integration', () => {
     router.close();
   });
 
-  test('full flow: TASK_DECOMPOSE → SUB_TASKs → SUB_RESULTs → TASK_AGGREGATED', () => {
+  test('full flow: TASK_DECOMPOSE → SUB_TASKs → SUB_RESULTs → TASK_AGGREGATED', async () => {
     const taskId = uuidv4();
     const decomposeMsg = {
       id: uuidv4(),
@@ -32,7 +32,7 @@ describe('Task Decomposition Integration', () => {
       }
     };
 
-    const result = router.routeMessage(decomposeMsg);
+    const result = await router.routeMessage(decomposeMsg);
     expect(result.success).toBe(true);
     expect(result.subtaskCount).toBe(2);
 

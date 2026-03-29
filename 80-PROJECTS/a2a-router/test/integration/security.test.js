@@ -27,7 +27,7 @@ describe('Security Integration', () => {
     db.close();
   });
 
-  test('Full flow: register → create key → sign → send → verify', () => {
+  test('Full flow: register → create key → sign → send → verify', async () => {
     // Register source and target agents
     router.registerAgent('agent-1', ['coding']);
     router.registerAgent('agent-2', ['review']);
@@ -50,11 +50,11 @@ describe('Security Integration', () => {
     message.metadata = { signature, apiKeyId: keyId };
 
     // Route message (should succeed)
-    const result = router.routeMessage(message);
+    const result = await router.routeMessage(message);
     expect(result.success).toBe(true);
   });
 
-  test('Invalid signature rejected', () => {
+  test('Invalid signature rejected', async () => {
     router.registerAgent('agent-1', ['coding']);
     const { keyId, key } = router.createApiKey('agent-1');
 
@@ -68,7 +68,7 @@ describe('Security Integration', () => {
       metadata: { signature: 'invalid', apiKeyId: keyId }
     };
 
-    const result = router.routeMessage(message);
+    const result = await router.routeMessage(message);
     expect(result.success).toBe(false);
     expect(result.error).toBe('INVALID_SIGNATURE');
   });
@@ -85,7 +85,7 @@ describe('Security Integration', () => {
     expect(allowed).toBe(false);
   });
 
-  test('Expired timestamp rejected', () => {
+  test('Expired timestamp rejected', async () => {
     router.registerAgent('agent-1', ['coding']);
     const { keyId, key } = router.createApiKey('agent-1');
 
@@ -101,12 +101,12 @@ describe('Security Integration', () => {
     const signature = signer.sign(key, message);
     message.metadata.signature = signature;
 
-    const result = router.routeMessage(message);
+    const result = await router.routeMessage(message);
     expect(result.success).toBe(false);
     expect(result.error).toBe('EXPIRED_TIMESTAMP');
   });
 
-  test('Security disabled allows unsigned messages', () => {
+  test('Security disabled allows unsigned messages', async () => {
     const router2 = new A2ARouter({
       securityDb: db,
       security: { enabled: false }
@@ -125,7 +125,7 @@ describe('Security Integration', () => {
       // No metadata.signature
     };
 
-    const result = router2.routeMessage(message);
+    const result = await router2.routeMessage(message);
     expect(result.success).toBe(true);
 
     router2.close();

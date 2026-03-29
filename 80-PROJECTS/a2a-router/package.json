@@ -1,0 +1,34 @@
+{
+  "name": "a2a-router",
+  "version": "1.0.0",
+  "description": "Agent-to-Agent Communication Router - MCP Server",
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "test": "vitest"
+  },
+  "dependencies": {
+    "@langchain/core": "^1.1.36",
+    "@langchain/langgraph": "^1.2.6",
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "better-sqlite3": "^12.8.0",
+    "uuid": "^9.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "a2a",
+    "agent",
+    "communication",
+    "router"
+  ],
+  "author": "Feishu",
+  "license": "MIT",
+  "repository": "https://github.com/shushuzn/a2a-router.git",
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "jest": "^30.3.0",
+    "vitest": "^4.1.2"
+  }
+}

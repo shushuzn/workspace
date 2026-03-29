@@ -16,6 +16,7 @@ import { SecurityManager } from './protocols/security/security-manager.js';
 import { AccessControl } from './protocols/security/access-control.js';
 import { OrchestrationEngine } from './protocols/orchestration/orchestration-engine.js';
 import { LangChainAdapter } from './protocols/orchestration/langchain-adapter.js';
+import { StockAnalysisAdapter } from './protocols/mcp/stock-analysis-adapter.js';
 
 export class A2ARouter extends EventEmitter {
   constructor(options = {}) {
@@ -75,6 +76,9 @@ export class A2ARouter extends EventEmitter {
 
     // Initialize LangChain adapter
     this.langchainAdapter = new LangChainAdapter();
+
+    // Initialize Stock Analysis adapter (lazy-start on first use)
+    this.stockAnalysisAdapter = null;
 
     // Task decomposition configuration
     this.subtaskTimeout = options.subtaskTimeout || 300000; // 5 minutes default
@@ -153,7 +157,7 @@ export class A2ARouter extends EventEmitter {
   /**
    * Route a message
    */
-  routeMessage(message) {
+  async routeMessage(message) {
     // Validate message
     const validation = this.validateMessage(message);
     if (!validation.valid) {
@@ -182,7 +186,7 @@ export class A2ARouter extends EventEmitter {
     if (message.to === 'broadcast') {
       return this.broadcast(message);
     } else if (message.to === 'router') {
-      return this.handleRouterMessage(message);
+      return await this.handleRouterMessage(message);
     } else if (message.to.startsWith('capability:')) {
       return this.capabilityRoute(message);
     } else {
@@ -295,7 +299,7 @@ export class A2ARouter extends EventEmitter {
   /**
    * Handle messages to router itself
    */
-  handleRouterMessage(message) {
+  async handleRouterMessage(message) {
     switch (message.type) {
       case 'REGISTER':
         return this.registerAgent(
@@ -374,6 +378,33 @@ export class A2ARouter extends EventEmitter {
 
       case 'LANGCHAIN_LIST':
         return { success: true, agents: this.langchainAdapter.listAgents() };
+
+      case 'STOCK_ANALYSIS': {
+        // Lazy-start the stock analysis adapter on first use
+        if (!this.stockAnalysisAdapter) {
+          this.stockAnalysisAdapter = new StockAnalysisAdapter();
+          try {
+            await this.stockAnalysisAdapter.start();
+          } catch (err) {
+            return { success: false, error: 'STOCK_ADAPTER_START_FAILED', details: err.message };
+          }
+        }
+        const { tool, input } = message.payload;
+        try {
+          const result = await this.stockAnalysisAdapter.call(tool, input);
+          return { success: true, result };
+        } catch (err) {
+          return { success: false, error: 'STOCK_TOOL_CALL_FAILED', details: err.message };
+        }
+      }
+
+      case 'STOCK_ANALYSIS_LIST':
+        return {
+          success: true,
+          tools: this.stockAnalysisAdapter
+            ? this.stockAnalysisAdapter.getTools()
+            : []
+        };
 
       default:
         return { success: false, error: 'UNKNOWN_ROUTER_COMMAND' };
