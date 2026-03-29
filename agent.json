@@ -47,7 +47,8 @@
       "message_type": "markdown",
       "card_template_id": "",
       "card_template_key": "content",
-      "robot_code": ""
+      "robot_code": "",
+      "card_auto_layout": false
     },
     "feishu": {
       "enabled": false,
@@ -229,6 +230,11 @@
     "every": "6h",
     "target": "main"
   },
+  "last_dispatch": {
+    "channel": "console",
+    "user_id": "default",
+    "session_id": "1774688152446"
+  },
   "running": {
     "max_iters": 100,
     "llm_retry_enabled": true,
@@ -267,6 +273,10 @@
       "provider_id": "",
       "model": ""
     }
+  },
+  "active_model": {
+    "provider_id": "aliyun-codingplan",
+    "model": "glm-5"
   },
   "language": "en",
   "system_prompt_files": [
