@@ -15,6 +15,7 @@ tmp/
 *.zip
 *.tar.gz
 *.log
+tool_result/
 
 # === Credentials & Secrets ===
 .env
