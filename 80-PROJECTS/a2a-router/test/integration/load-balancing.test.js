@@ -1,3 +1,4 @@
+import { describe, it, test, expect, beforeEach, afterEach } from 'vitest';
 import { A2ARouter } from '../../src/router.js';
 
 describe('Load Balancing Integration', () => {

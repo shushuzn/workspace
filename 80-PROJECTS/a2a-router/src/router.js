@@ -14,6 +14,8 @@ import { ResultAggregator } from './protocols/task-decomposition/result-aggregat
 import { SubtaskManager } from './protocols/task-decomposition/subtask-manager.js';
 import { SecurityManager } from './protocols/security/security-manager.js';
 import { AccessControl } from './protocols/security/access-control.js';
+import { OrchestrationEngine } from './protocols/orchestration/orchestration-engine.js';
+import { LangChainAdapter } from './protocols/orchestration/langchain-adapter.js';
 
 export class A2ARouter extends EventEmitter {
   constructor(options = {}) {
@@ -67,6 +69,12 @@ export class A2ARouter extends EventEmitter {
     this.accessControl = new AccessControl(this.securityManager, {
       defaultAclPolicy: options.security?.defaultAclPolicy || 'allow'
     });
+
+    // Initialize orchestration engine
+    this.orchestrationEngine = new OrchestrationEngine(this);
+
+    // Initialize LangChain adapter
+    this.langchainAdapter = new LangChainAdapter();
 
     // Task decomposition configuration
     this.subtaskTimeout = options.subtaskTimeout || 300000; // 5 minutes default
@@ -321,6 +329,51 @@ export class A2ARouter extends EventEmitter {
 
       case 'TASK_CANCEL':
         return this.cancelTask(message);
+
+      case 'WORKFLOW_CREATE':
+        return this.orchestrationEngine.createWorkflow(
+          message.payload.workflowId,
+          message.payload.definition
+        );
+
+      case 'WORKFLOW_START':
+        return this.orchestrationEngine.startWorkflow(
+          message.payload.workflowId,
+          message.payload.context
+        );
+
+      case 'WORKFLOW_PAUSE':
+        return this.orchestrationEngine.pauseWorkflow(message.payload.workflowId);
+
+      case 'WORKFLOW_RESUME':
+        return this.orchestrationEngine.resumeWorkflow(message.payload.workflowId);
+
+      case 'WORKFLOW_CANCEL':
+        return this.orchestrationEngine.cancelWorkflow(message.payload.workflowId);
+
+      case 'WORKFLOW_STATUS':
+        return { success: true, status: this.orchestrationEngine.getWorkflowStatus(message.payload.workflowId) };
+
+      case 'WORKFLOW_LIST':
+        return { success: true, workflows: this.orchestrationEngine.listWorkflows(message.payload?.filter) };
+
+      case 'LANGCHAIN_CREATE':
+        return this.langchainAdapter.createAgent(
+          message.payload.agentId,
+          message.payload.config
+        );
+
+      case 'LANGCHAIN_INVOKE':
+        return this.langchainAdapter.invoke(
+          message.payload.agentId,
+          message.payload.input
+        );
+
+      case 'LANGCHAIN_STATUS':
+        return this.langchainAdapter.status(message.payload.runId);
+
+      case 'LANGCHAIN_LIST':
+        return { success: true, agents: this.langchainAdapter.listAgents() };
 
       default:
         return { success: false, error: 'UNKNOWN_ROUTER_COMMAND' };
@@ -581,7 +634,7 @@ export class A2ARouter extends EventEmitter {
       }
     }
 
-    const validTypes = ['TASK', 'TASK_ACK', 'TASK_RESULT', 'QUERY', 'RESPONSE', 'EVENT', 'HEARTBEAT', 'REGISTER', 'UNREGISTER', 'DISCOVER', 'TASK_DECOMPOSE', 'SUB_TASK', 'SUB_RESULT', 'TASK_AGGREGATED', 'TASK_CANCEL'];
+    const validTypes = ['TASK', 'TASK_ACK', 'TASK_RESULT', 'QUERY', 'RESPONSE', 'EVENT', 'HEARTBEAT', 'REGISTER', 'UNREGISTER', 'DISCOVER', 'TASK_DECOMPOSE', 'SUB_TASK', 'SUB_RESULT', 'TASK_AGGREGATED', 'TASK_CANCEL', 'WORKFLOW_CREATE', 'WORKFLOW_START', 'WORKFLOW_PAUSE', 'WORKFLOW_RESUME', 'WORKFLOW_CANCEL', 'WORKFLOW_STATUS', 'WORKFLOW_LIST'];
     if (!validTypes.includes(message.type)) {
       return { valid: false, error: `Invalid message type: ${message.type}` };
     }

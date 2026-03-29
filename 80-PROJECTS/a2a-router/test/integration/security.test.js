@@ -1,3 +1,4 @@
+import { describe, it, test, expect, beforeEach, afterEach } from 'vitest';
 import { A2ARouter } from '../../src/router.js';
 import { MessageSigner } from '../../src/protocols/security/message-signer.js';
 import Database from 'better-sqlite3';

@@ -1,3 +1,4 @@
+import { describe, it, test, expect, beforeEach, afterEach } from 'vitest';
 import { A2ARouter } from '../../src/router.js';
 import { v4 as uuidv4 } from 'uuid';
 

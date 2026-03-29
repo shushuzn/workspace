@@ -1,3 +1,4 @@
+import { describe, it, test, expect, beforeEach, afterEach } from 'vitest';
 /**
  * a2a_get_agent_loads MCP Tool Test
  * Tests the load balancer integration via MCP tool

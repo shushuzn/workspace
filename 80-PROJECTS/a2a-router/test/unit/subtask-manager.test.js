@@ -46,4 +46,41 @@ describe('SubtaskManager', () => {
     expect(manager.getParentTask('task-1').status).toBe('completed');
     expect(manager.getParentTask('task-1').completedAt).toBeDefined();
   });
+
+  test('getProgress() returns correct progress structure', () => {
+    manager.createParentTask('task-1', 4, 'parallel');
+    manager.recordSubtaskResult('task-1', 'sub-1', true, {});
+    manager.recordSubtaskResult('task-1', 'sub-2', false, { error: 'fail' });
+    const progress = manager.getProgress('task-1');
+    expect(progress.percent).toBe(50); // 2 of 4
+    expect(progress.completedCount).toBe(1);
+    expect(progress.failedCount).toBe(1);
+    expect(progress.expectedCount).toBe(4);
+  });
+
+  test('startSubtask() increments runningCount', () => {
+    manager.createParentTask('task-1', 3, 'parallel');
+    manager.startSubtask('task-1', 'sub-1', { agentId: 'agent-a' });
+    const progress = manager.getProgress('task-1');
+    expect(progress.runningCount).toBe(1);
+  });
+
+  test('failedCount tracked separately from completedCount', () => {
+    manager.createParentTask('task-1', 3, 'parallel');
+    manager.recordSubtaskResult('task-1', 'sub-1', true, {});
+    manager.recordSubtaskResult('task-1', 'sub-2', false, { error: 'failed' });
+    const progress = manager.getProgress('task-1');
+    expect(progress.completedCount).toBe(1);
+    expect(progress.failedCount).toBe(1);
+    expect(progress.percent).toBe(67); // 2 of 3
+  });
+
+  test('onProgress() callback is called on result', () => {
+    manager.createParentTask('task-1', 2, 'parallel');
+    const calls = [];
+    manager.onProgress('task-1', (p) => calls.push(p));
+    manager.recordSubtaskResult('task-1', 'sub-1', true, {});
+    expect(calls).toHaveLength(1);
+    expect(calls[0].completedCount).toBe(1);
+  });
 });

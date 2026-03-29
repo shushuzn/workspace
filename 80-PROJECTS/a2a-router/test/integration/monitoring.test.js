@@ -1,3 +1,4 @@
+import { describe, it, test, expect, beforeEach, afterEach } from 'vitest';
 /**
  * A2A Router Monitoring Integration Test
  * Tests the full flow: queue stats with threshold alerts

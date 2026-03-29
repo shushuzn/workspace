@@ -1,3 +1,4 @@
+import { describe, it, test, expect, beforeEach, afterEach } from 'vitest';
 /**
  * Message Persistence Integration Test
  * Tests the full flow: register agents, send message, query history
