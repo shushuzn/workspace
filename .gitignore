@@ -1,1 +1,67 @@
-*.exe
+# === OS ===
+.DS_Store
+Thumbs.db
+~$*
+
+# === Large/Temporary Data ===
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+.trash/
+temp/
+tmp/
+*.zip
+*.tar.gz
+*.log
+
+# === Credentials & Secrets ===
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# === Build Artifacts ===
+dist/
+build/
+out/
+*.o
+*.pyc
+__pycache__/
+*.class
+node_modules/
+*.egg-info/
+
+# === Tool State (workspace-specific) ===
+.gstack/
+.claude-flow/
+.omc/
+.swarm/
+.remember/
+.ruff_cache/
+.pytest_cache/
+checkpoints.db
+
+# === Editor ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.nyc_output/
+
+# === OMC / Skills ===
+active_skills/
+skills.zip
+all-skills-list.txt
+temp_github.json
+skill_ids.txt
+skill-github-links.txt
+
+# === Claude Code ===
+.claude/settings.local.json
+claude-desktop.json
