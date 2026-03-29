@@ -1,0 +1,1152 @@
+- document:
+  - region
+  - link "Skip to content" [ref=e1]:
+    - /url: "#start-of-content"
+  - banner:
+    - heading "Navigation Menu" [ref=e2] [level=2]
+    - link "Homepage" [ref=e3]:
+      - /url: /
+    - navigation "Global" [ref=e4]:
+      - list:
+        - listitem:
+          - button "Platform" [ref=e5]
+        - listitem:
+          - button "Solutions" [ref=e6]
+        - listitem:
+          - button "Resources" [ref=e7]
+        - listitem:
+          - button "Open Source" [ref=e8]
+        - listitem:
+          - button "Enterprise" [ref=e9]
+        - listitem:
+          - link "Pricing" [ref=e10]:
+            - /url: https://github.com/pricing
+    - button "Search or jump to…" [ref=e11]
+    - link "Sign in" [ref=e12]:
+      - /url: /login?return_to=https%3A%2F%2Fgithub.com%2FVoltAgent%2Fawesome-openclaw-skills%3Ftab%3Dreadme-ov-file
+    - link "Sign up" [ref=e13]:
+      - /url: /signup?ref_cta=Sign+up&ref_loc=header+logged+out&ref_page=%2F%3Cuser-name%3E%2F%3Crepo-name%3E&source=header-repo&source_repo=VoltAgent%2Fawesome-openclaw-skills
+    - button "Appearance settings" [ref=e14]
+  - main:
+    - link "VoltAgent" [ref=e15]:
+      - /url: /VoltAgent
+    - text: /
+    - strong:
+      - link "awesome-openclaw-skills" [ref=e16]:
+        - /url: /VoltAgent/awesome-openclaw-skills
+    - text: Public
+    - list:
+      - listitem:
+        - link "You must be signed in to change notification settings" [ref=e17]:
+          - /url: /login?return_to=%2FVoltAgent%2Fawesome-openclaw-skills
+          - text: Notifications
+      - listitem:
+        - link "Fork 4.1k" [ref=e18]:
+          - /url: /login?return_to=%2FVoltAgent%2Fawesome-openclaw-skills
+      - listitem:
+        - link "You must be signed in to star a repository" [ref=e19]:
+          - /url: /login?return_to=%2FVoltAgent%2Fawesome-openclaw-skills
+          - text: Star 42.6k
+    - navigation "Repository" [ref=e20]:
+      - list:
+        - listitem:
+          - link "Code" [ref=e21]:
+            - /url: /VoltAgent/awesome-openclaw-skills
+        - listitem:
+          - link "Issues" [ref=e22]:
+            - /url: /VoltAgent/awesome-openclaw-skills/issues
+        - listitem:
+          - link "Pull requests 9" [ref=e23]:
+            - /url: /VoltAgent/awesome-openclaw-skills/pulls
+        - listitem:
+          - link "Actions" [ref=e24]:
+            - /url: /VoltAgent/awesome-openclaw-skills/actions
+        - listitem:
+          - link "Projects" [ref=e25]:
+            - /url: /VoltAgent/awesome-openclaw-skills/projects
+        - listitem:
+          - link "Security" [ref=e26]:
+            - /url: /VoltAgent/awesome-openclaw-skills/security
+        - listitem:
+          - link "Insights" [ref=e27]:
+            - /url: /VoltAgent/awesome-openclaw-skills/pulse
+    - heading "VoltAgent/awesome-openclaw-skills" [ref=e28] [level=1]
+    - button "main branch" [ref=e29]: main
+    - link "11 Branches" [ref=e30]:
+      - /url: /VoltAgent/awesome-openclaw-skills/branches
+      - strong: "11"
+      - text: Branches
+    - link "0 Tags" [ref=e31]:
+      - /url: /VoltAgent/awesome-openclaw-skills/tags
+      - strong: "0"
+      - text: Tags
+    - combobox "Go to file" [ref=e32]
+    - button "Code" [ref=e33]
+    - heading "Folders and files" [ref=e34] [level=2]
+    - table "Folders and files":
+      - rowgroup:
+        - row "Name Last commit message Last commit date":
+          - columnheader "Name" [ref=e35]
+          - columnheader "Last commit message" [ref=e36]
+          - columnheader "Last commit date" [ref=e37]
+      - rowgroup:
+        - 'row "Latest commit necatiozmen commits by necatiozmen Merge pull request #313 from msaleme/add-agent-security-harness Open commit details Commit 3926202 · Mar 26, 20262 days ago History 319 Commits"':
+          - 'cell "Latest commit necatiozmen commits by necatiozmen Merge pull request #313 from msaleme/add-agent-security-harness Open commit details Commit 3926202 · Mar 26, 20262 days ago History 319 Commits"':
+            - heading "Latest commit" [ref=e38] [level=2]
+            - link "necatiozmen" [ref=e39]:
+              - /url: /necatiozmen
+              - img "necatiozmen"
+            - link "commits by necatiozmen" [ref=e40]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commits?author=necatiozmen
+              - text: necatiozmen
+            - link "Merge pull request" [ref=e41]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/3926202c651957b5b05496e160e048fb3eb5ec77
+            - link "#313" [ref=e42]:
+              - /url: https://github.com/VoltAgent/awesome-openclaw-skills/pull/313
+            - link "from msaleme/add-agent-security-harness" [ref=e43]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/3926202c651957b5b05496e160e048fb3eb5ec77
+            - button "Open commit details" [ref=e44]
+            - link "Commit 3926202" [ref=e45]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/3926202c651957b5b05496e160e048fb3eb5ec77
+              - text: "3926202"
+            - text: · Mar 26, 20262 days ago
+            - heading "History" [ref=e46] [level=2]
+            - link "319 Commits" [ref=e47]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commits/main/
+        - row ".claude, (Directory) update README Mar 17, 20262 weeks ago":
+          - cell ".claude, (Directory)" [ref=e48]:
+            - link ".claude, (Directory)" [ref=e49]:
+              - /url: /VoltAgent/awesome-openclaw-skills/tree/main/.claude
+              - text: .claude
+          - cell "update README" [ref=e50]:
+            - link "update README" [ref=e51]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/7a489baba7e91ebebab62c30c96533c9a65b8d64
+          - cell "Mar 17, 20262 weeks ago" [ref=e52]
+        - row ".github/workflows, (Directory) update contribution guide Mar 10, 20263 weeks ago":
+          - cell ".github/workflows, (Directory)" [ref=e53]:
+            - link ".github/workflows, (Directory)" [ref=e54]:
+              - /url: /VoltAgent/awesome-openclaw-skills/tree/main/.github/workflows
+              - text: .github/workflows
+          - cell "update contribution guide" [ref=e55]:
+            - link "update contribution guide" [ref=e56]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/3c3bbaca1baee730c5493dd98aa7b8da88c5abfe
+          - cell "Mar 10, 20263 weeks ago" [ref=e57]
+        - 'row "categories, (Directory) Merge pull request #326 from imastuido/add-skill-allenfancy-gan-ima-a… Mar 25, 20264 days ago"':
+          - cell "categories, (Directory)" [ref=e58]:
+            - link "categories, (Directory)" [ref=e59]:
+              - /url: /VoltAgent/awesome-openclaw-skills/tree/main/categories
+              - text: categories
+          - 'cell "Merge pull request #326 from imastuido/add-skill-allenfancy-gan-ima-a…"':
+            - link "Merge pull request" [ref=e60] [nth=1]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/9b84fa28c9032cfcd8b653ba5518c3f66b37f1ee
+            - link "#326" [ref=e61]:
+              - /url: https://github.com/VoltAgent/awesome-openclaw-skills/pull/326
+            - link "from imastuido/add-skill-allenfancy-gan-ima-a…" [ref=e62]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/9b84fa28c9032cfcd8b653ba5518c3f66b37f1ee
+          - cell "Mar 25, 20264 days ago" [ref=e63]
+        - row "CONTRIBUTING.md, (File) update contribution guide Mar 10, 20263 weeks ago":
+          - cell "CONTRIBUTING.md, (File)" [ref=e64]:
+            - link "CONTRIBUTING.md, (File)" [ref=e65]:
+              - /url: /VoltAgent/awesome-openclaw-skills/blob/main/CONTRIBUTING.md
+              - text: CONTRIBUTING.md
+          - cell "update contribution guide" [ref=e66] [nth=1]:
+            - link "update contribution guide" [ref=e67] [nth=1]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/3c3bbaca1baee730c5493dd98aa7b8da88c5abfe
+          - cell "Mar 10, 20263 weeks ago" [ref=e68] [nth=1]
+        - row "LICENSE, (File) Refactor code structure for improved readability and maintainability Jan 25, 20262 months ago":
+          - cell "LICENSE, (File)" [ref=e69]:
+            - link "LICENSE, (File)" [ref=e70]:
+              - /url: /VoltAgent/awesome-openclaw-skills/blob/main/LICENSE
+              - text: LICENSE
+          - cell "Refactor code structure for improved readability and maintainability" [ref=e71]:
+            - link "Refactor code structure for improved readability and maintainability" [ref=e72]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/cb9073a8e17aa046241657f47cab86cfd7158f05
+          - cell "Jan 25, 20262 months ago" [ref=e73]
+        - 'row "README.md, (File) Merge pull request #313 from msaleme/add-agent-security-harness Mar 26, 20262 days ago"':
+          - cell "README.md, (File)" [ref=e74]:
+            - link "README.md, (File)" [ref=e75]:
+              - /url: /VoltAgent/awesome-openclaw-skills/blob/main/README.md
+              - text: README.md
+          - 'cell "Merge pull request #313 from msaleme/add-agent-security-harness"':
+            - link "Merge pull request" [ref=e76] [nth=2]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/3926202c651957b5b05496e160e048fb3eb5ec77
+            - link "#313" [ref=e77] [nth=1]:
+              - /url: https://github.com/VoltAgent/awesome-openclaw-skills/pull/313
+            - link "from msaleme/add-agent-security-harness" [ref=e78] [nth=1]:
+              - /url: /VoltAgent/awesome-openclaw-skills/commit/3926202c651957b5b05496e160e048fb3eb5ec77
+          - cell "Mar 26, 20262 days ago" [ref=e79]
+    - heading "Repository files navigation" [ref=e80] [level=2]
+    - navigation "Repository files" [ref=e81]:
+      - list:
+        - listitem:
+          - link "README" [ref=e82]:
+            - /url: "#"
+        - listitem:
+          - link "Contributing" [ref=e83]:
+            - /url: "#"
+        - listitem:
+          - link "MIT license" [ref=e84]:
+            - /url: "#"
+    - button "Outline" [ref=e85]
+    - article:
+      - link "social" [ref=e86]:
+        - /url: https://clawskills.sh/
+        - img "social"
+      - strong: Discover 5200+ community-built OpenClaw skills, organized by category.
+      - paragraph:
+        - link "Awesome" [ref=e87]:
+          - /url: https://awesome.re
+          - img "Awesome"
+        - link "Skills Count" [ref=e88]:
+          - /url: "#table-of-contents"
+          - img "Skills Count"
+        - link "Last Update" [ref=e89]:
+          - /url: https://github.com/VoltAgent/awesome-clawdbot-skills/pulls?q=is%3Apr+is%3Amerged+sort%3Aupdated-desc
+          - img "Last Update"
+        - link "VoltAgent" [ref=e90] [nth=1]:
+          - /url: https://github.com/VoltAgent/voltagent
+          - img "VoltAgent"
+        - link "Discord" [ref=e91]:
+          - /url: https://s.voltagent.dev/discord
+          - img "Discord"
+      - strong: More awesome collections for developers
+      - paragraph:
+        - link "Agent Skills" [ref=e92]:
+          - /url: https://github.com/VoltAgent/awesome-agent-skills
+          - img "Agent Skills"
+        - link "Claude Code Subagents" [ref=e93]:
+          - /url: https://github.com/VoltAgent/awesome-claude-code-subagents
+          - img "Claude Code Subagents"
+        - link "Codex Subagents" [ref=e94]:
+          - /url: https://github.com/VoltAgent/awesome-codex-subagents
+          - img "Codex Subagents"
+        - link "AI Agent Papers" [ref=e95]:
+          - /url: https://github.com/VoltAgent/awesome-ai-agent-papers
+          - img "AI Agent Papers"
+      - heading "Awesome OpenClaw Skills" [ref=e96] [level=1]
+      - 'link "Permalink: Awesome OpenClaw Skills"':
+        - /url: "#awesome-openclaw-skills"
+      - paragraph: OpenClaw is a locally-running AI assistant that operates directly on your machine. Skills extend its capabilities, allowing it to interact with external services, automate workflows, and perform specialized tasks. This collection helps you discover and install the right skills for your needs. It can also serve as a source of inspiration for OpenClaw use cases.
+      - paragraph: Skills in this list are sourced from ClawHub (OpenClaw's public skills registry) and categorized for easier discovery.
+      - heading "Installation" [ref=e97] [level=3]
+      - 'link "Permalink: Installation"':
+        - /url: "#installation"
+      - heading "ClawHub CLI" [ref=e98] [level=4]
+      - 'link "Permalink: ClawHub CLI"':
+        - /url: "#clawhub-cli"
+      - text: clawhub install <skill-slug>
+      - button "Copy" [ref=e99]
+      - heading "Manual Installation" [ref=e100] [level=4]
+      - 'link "Permalink: Manual Installation"':
+        - /url: "#manual-installation"
+      - paragraph: "Copy the skill folder to one of these locations:"
+      - table:
+        - rowgroup:
+          - row "Location Path":
+            - columnheader "Location" [ref=e101]
+            - columnheader "Path" [ref=e102]
+        - rowgroup:
+          - row "Global ~/.openclaw/skills/":
+            - cell "Global" [ref=e103]
+            - cell "~/.openclaw/skills/" [ref=e104]:
+              - code: ~/.openclaw/skills/
+          - row "Workspace <project>/skills/":
+            - cell "Workspace" [ref=e105]
+            - cell "<project>/skills/" [ref=e106]:
+              - code: <project>/skills/
+      - paragraph: "Priority: Workspace > Local > Bundled"
+      - heading "Alternative" [ref=e107] [level=4]
+      - 'link "Permalink: Alternative"':
+        - /url: "#alternative"
+      - paragraph: You can also paste the skill's GitHub repository link directly into your assistant's chat and ask it to use it. The assistant will handle the setup automatically in the background.
+      - heading "Why This List Exists?" [ref=e108] [level=3]
+      - 'link "Permalink: Why This List Exists?"':
+        - /url: "#why-this-list-exists"
+      - paragraph:
+        - text: OpenClaw's public registry (ClawHub) hosts
+        - strong: 13,729 community-built skills
+        - text: as of February 28, 2026. This awesome list has
+        - strong: 5,211 skills
+        - text: ". Here's what we filtered out:"
+      - table:
+        - rowgroup:
+          - row "Filter Excluded":
+            - columnheader "Filter" [ref=e109]
+            - columnheader "Excluded" [ref=e110]
+        - rowgroup:
+          - row "Possibly spam — bulk accounts, bot accounts, test/junk 4,065":
+            - cell "Possibly spam — bulk accounts, bot accounts, test/junk" [ref=e111]
+            - cell "4,065" [ref=e112]
+          - row "Duplicate / Similar name 1,040":
+            - cell "Duplicate / Similar name" [ref=e113]
+            - cell "1,040" [ref=e114]
+          - row "Low-quality or non-English descriptions 851":
+            - cell "Low-quality or non-English descriptions" [ref=e115]
+            - cell "851" [ref=e116]
+          - row "Crypto / Blockchain / Finance / Trade 886":
+            - cell "Crypto / Blockchain / Finance / Trade" [ref=e117]
+            - cell "886" [ref=e118]
+          - row "Malicious — identified by security audits published by researchers (excluding VirusTotal) 373":
+            - cell "Malicious — identified by security audits published by researchers (excluding VirusTotal)" [ref=e119]
+            - cell "373" [ref=e120]
+          - row "Total not taken from OpenClaw's official skill registry 7,215":
+            - cell "Total not taken from OpenClaw's official skill registry" [ref=e121]:
+              - strong: Total not taken from OpenClaw's official skill registry
+            - cell "7,215" [ref=e122]:
+              - strong: 7,215
+      - heading "Want to add a skill?" [ref=e123] [level=4]
+      - 'link "Permalink: Want to add a skill?"':
+        - /url: "#want-to-add-a-skill"
+      - paragraph:
+        - text: This list only includes skills that are
+        - strong: already published
+        - text: in the
+        - code: github.com/openclaw/skills
+        - text: repository. We do not accept links to personal repos, gists, or any other external source. If your skill isn't in the OpenClaw skills repo yet, publish it there first.
+      - paragraph:
+        - text: Include both the ClawHub link (e.g.
+        - code: https://clawhub.ai/steipete/slack
+        - text: ) and the GitHub link (e.g.
+        - code: https://github.com/openclaw/skills/tree/main/skills/steipete/slack
+        - text: ) in your PR description. See
+        - link "CONTRIBUTING.md" [ref=e124]:
+          - /url: /VoltAgent/awesome-openclaw-skills/blob/main/CONTRIBUTING.md
+        - text: for details.
+      - heading "OpenClaw Ecosystem Tools" [ref=e125] [level=2]
+      - 'link "Permalink: OpenClaw Ecosystem Tools"':
+        - /url: "#openclaw-ecosystem-tools"
+      - heading "🔌 Connecting to External Services" [ref=e126] [level=3]
+      - 'link "Permalink: 🔌 Connecting to External Services"':
+        - /url: "#-connecting-to-external-services"
+      - paragraph: OpenClaw agents can interact with external services like GitHub, Slack, Gmail, and more. You can build integrations yourself with Skills or Plugins, or use a managed service to handle auth, token refresh, and permissions across all your connections.
+      - link "Composio Managed OAuth, scoped permissions, and logged native toolcalls across 1000+ apps." [ref=e127]:
+        - /url: https://composio.dev/claw?utm_source=github&utm_campaign=volt-agent
+        - img "Composio"
+        - text: Managed OAuth, scoped permissions, and logged native toolcalls across 1000+ apps.
+      - heading "🤖 Model Providers" [ref=e128] [level=3]
+      - 'link "Permalink: 🤖 Model Providers"':
+        - /url: "#-model-providers"
+      - paragraph:
+        - text: OpenClaw works with
+        - strong: 25+ LLM providers
+        - text: out of the box Anthropic, OpenAI and many more. Switch between them with a single config change.
+      - group:
+        - strong: "Example: Using OpenAI models"
+      - heading "☁️ Hosting & Deployment" [ref=e129] [level=3]
+      - 'link "Permalink: ☁️ Hosting & Deployment"':
+        - /url: "#️-hosting--deployment"
+      - paragraph: You can deploy OpenClaw on any VPS or cloud platform run your skills securely on your own infrastructure, or a managed host. Docker, Podman, Nix, and Ansible are all supported as install methods.
+      - blockquote:
+        - paragraph:
+          - strong: "Tip:"
+          - text: If you're looking for a quick cloud setup, spin up a VPS with your preferred provider, install OpenClaw via Docker, and you're good to go.
+      - table:
+        - rowgroup:
+          - 'row "🦞 You can feature your OpenClaw ecosystem tool in the section above. Permalink: 🦞 You can feature your OpenClaw ecosystem tool in the section above. 📈 +1M monthly views — the #1 most visited community resource after the official OpenClaw resource Become a Sponsor"':
+            - 'cell "🦞 You can feature your OpenClaw ecosystem tool in the section above. Permalink: 🦞 You can feature your OpenClaw ecosystem tool in the section above. 📈 +1M monthly views — the #1 most visited community resource after the official OpenClaw resource Become a Sponsor"':
+              - heading "🦞 You can feature your OpenClaw ecosystem tool in the section above." [ref=e130] [level=3]
+              - 'link "Permalink: 🦞 You can feature your OpenClaw ecosystem tool in the section above."':
+                - /url: "#-you-can-feature-your-openclaw-ecosystem-tool-in-the-section-above"
+              - paragraph
+              - paragraph:
+                - subscript:
+                  - text: 📈
+                  - strong: +1M monthly views
+                  - text: "— the #1 most visited community resource after the official OpenClaw resource"
+              - paragraph:
+                - link "Become a Sponsor" [ref=e131]:
+                  - /url: mailto:necati@voltagent.dev
+                  - img "Become a Sponsor"
+      - heading "Security Notice" [ref=e132] [level=2]
+      - 'link "Permalink: Security Notice"':
+        - /url: "#security-notice"
+      - paragraph:
+        - text: Skills in this list are
+        - strong: curated, not audited
+        - text: . They may be updated, modified, or replaced by their original maintainers at any time after being added here.
+      - paragraph:
+        - text: Before installing or using any Agent Skill, review potential security risks and validate the source yourself. OpenClaw has a
+        - strong: VirusTotal partnership
+        - text: that provides security scanning for skills, visit a skill's page on ClawHub and check the VirusTotal report to see if it's flagged as risky.
+      - paragraph:
+        - strong: "Recommended tools:"
+      - list:
+        - listitem:
+          - link "Snyk Skill Security Scanner" [ref=e133]:
+            - /url: https://github.com/snyk/agent-scan
+        - listitem:
+          - link "Agent Trust Hub" [ref=e134]:
+            - /url: https://ai.gendigital.com/agent-trust-hub
+      - blockquote:
+        - paragraph: Agent skills can include prompt injections, tool poisoning, hidden malware payloads, or unsafe data handling patterns. Always review the source code before installing and use skills at your own discretion.
+      - paragraph:
+        - text: If you believe a skill in this list should be flagged or has a security concern, please
+        - link "open an issue" [ref=e135]:
+          - /url: https://github.com/VoltAgent/awesome-clawdbot-skills/issues
+        - text: so we can review it.
+      - heading "Table of Contents" [ref=e136] [level=2]
+      - 'link "Permalink: Table of Contents"':
+        - /url: "#table-of-contents"
+      - table:
+        - rowgroup:
+          - row:
+            - columnheader
+            - columnheader
+            - columnheader
+        - rowgroup:
+          - row "Git & GitHub (167) Marketing & Sales (102) Communication (146)":
+            - cell "Git & GitHub (167)" [ref=e137]:
+              - link "Git & GitHub" [ref=e138]:
+                - /url: "#git--github"
+              - text: (167)
+            - cell "Marketing & Sales (102)" [ref=e139]:
+              - link "Marketing & Sales" [ref=e140]:
+                - /url: "#marketing--sales"
+              - text: (102)
+            - cell "Communication (146)" [ref=e141]:
+              - link "Communication" [ref=e142]:
+                - /url: "#communication"
+              - text: (146)
+          - row "Coding Agents & IDEs (1184) Productivity & Tasks (205) Speech & Transcription (45)":
+            - cell "Coding Agents & IDEs (1184)" [ref=e143]:
+              - link "Coding Agents & IDEs" [ref=e144]:
+                - /url: "#coding-agents--ides"
+              - text: (1184)
+            - cell "Productivity & Tasks (205)" [ref=e145]:
+              - link "Productivity & Tasks" [ref=e146]:
+                - /url: "#productivity--tasks"
+              - text: (205)
+            - cell "Speech & Transcription (45)" [ref=e147]:
+              - link "Speech & Transcription" [ref=e148]:
+                - /url: "#speech--transcription"
+              - text: (45)
+          - row "Browser & Automation (322) AI & LLMs (176) Smart Home & IoT (41)":
+            - cell "Browser & Automation (322)" [ref=e149]:
+              - link "Browser & Automation" [ref=e150]:
+                - /url: "#browser--automation"
+              - text: (322)
+            - cell "AI & LLMs (176)" [ref=e151]:
+              - link "AI & LLMs" [ref=e152]:
+                - /url: "#ai--llms"
+              - text: (176)
+            - cell "Smart Home & IoT (41)" [ref=e153]:
+              - link "Smart Home & IoT" [ref=e154]:
+                - /url: "#smart-home--iot"
+              - text: (41)
+          - row "Web & Frontend Development (919) Data & Analytics (28) Shopping & E-commerce (51)":
+            - cell "Web & Frontend Development (919)" [ref=e155]:
+              - link "Web & Frontend Development" [ref=e156]:
+                - /url: "#web--frontend-development"
+              - text: (919)
+            - cell "Data & Analytics (28)" [ref=e157]:
+              - link "Data & Analytics" [ref=e158]:
+                - /url: "#data--analytics"
+              - text: (28)
+            - cell "Shopping & E-commerce (51)" [ref=e159]:
+              - link "Shopping & E-commerce" [ref=e160]:
+                - /url: "#shopping--e-commerce"
+              - text: (51)
+          - row "DevOps & Cloud (393) Calendar & Scheduling (65)":
+            - cell "DevOps & Cloud (393)" [ref=e161]:
+              - link "DevOps & Cloud" [ref=e162]:
+                - /url: "#devops--cloud"
+              - text: (393)
+            - cell "Calendar & Scheduling (65)" [ref=e163]:
+              - link "Calendar & Scheduling" [ref=e164]:
+                - /url: "#calendar--scheduling"
+              - text: (65)
+            - cell
+          - row "Image & Video Generation (170) Media & Streaming (85) PDF & Documents (105)":
+            - cell "Image & Video Generation (170)" [ref=e165]:
+              - link "Image & Video Generation" [ref=e166]:
+                - /url: "#image--video-generation"
+              - text: (170)
+            - cell "Media & Streaming (85)" [ref=e167]:
+              - link "Media & Streaming" [ref=e168]:
+                - /url: "#media--streaming"
+              - text: (85)
+            - cell "PDF & Documents (105)" [ref=e169]:
+              - link "PDF & Documents" [ref=e170]:
+                - /url: "#pdf--documents"
+              - text: (105)
+          - row "Apple Apps & Services (44) Notes & PKM (70) Self-Hosted & Automation (33)":
+            - cell "Apple Apps & Services (44)" [ref=e171]:
+              - link "Apple Apps & Services" [ref=e172]:
+                - /url: "#apple-apps--services"
+              - text: (44)
+            - cell "Notes & PKM (70)" [ref=e173]:
+              - link "Notes & PKM" [ref=e174]:
+                - /url: "#notes--pkm"
+              - text: (70)
+            - cell "Self-Hosted & Automation (33)" [ref=e175]:
+              - link "Self-Hosted & Automation" [ref=e176]:
+                - /url: "#self-hosted--automation"
+              - text: (33)
+          - row "Search & Research (345) iOS & macOS Development (29) Security & Passwords (53)":
+            - cell "Search & Research (345)" [ref=e177]:
+              - link "Search & Research" [ref=e178]:
+                - /url: "#search--research"
+              - text: (345)
+            - cell "iOS & macOS Development (29)" [ref=e179]:
+              - link "iOS & macOS Development" [ref=e180]:
+                - /url: "#ios--macos-development"
+              - text: (29)
+            - cell "Security & Passwords (53)" [ref=e181]:
+              - link "Security & Passwords" [ref=e182]:
+                - /url: "#security--passwords"
+              - text: (53)
+          - row "Clawdbot Tools (37) Transportation (110) Moltbook (29)":
+            - cell "Clawdbot Tools (37)" [ref=e183]:
+              - link "Clawdbot Tools" [ref=e184]:
+                - /url: "#clawdbot-tools"
+              - text: (37)
+            - cell "Transportation (110)" [ref=e185]:
+              - link "Transportation" [ref=e186]:
+                - /url: "#transportation"
+              - text: (110)
+            - cell "Moltbook (29)" [ref=e187]:
+              - link "Moltbook" [ref=e188]:
+                - /url: "#moltbook"
+              - text: (29)
+          - row "CLI Utilities (180) Personal Development (50) Gaming (35)":
+            - cell "CLI Utilities (180)" [ref=e189]:
+              - link "CLI Utilities" [ref=e190]:
+                - /url: "#cli-utilities"
+              - text: (180)
+            - cell "Personal Development (50)" [ref=e191]:
+              - link "Personal Development" [ref=e192]:
+                - /url: "#personal-development"
+              - text: (50)
+            - cell "Gaming (35)" [ref=e193]:
+              - link "Gaming" [ref=e194]:
+                - /url: "#gaming"
+              - text: (35)
+          - row "Health & Fitness (87)":
+            - cell "Health & Fitness (87)" [ref=e195]:
+              - link "Health & Fitness" [ref=e196]:
+                - /url: "#health--fitness"
+              - text: (87)
+            - cell
+            - cell
+      - group:
+        - heading "Git & GitHub" [ref=e197] [level=3]
+        - 'link "Permalink: Git & GitHub"':
+          - /url: "#git--github"
+        - list:
+          - listitem:
+            - link "agent-commons" [ref=e198]:
+              - /url: https://clawskills.sh/skills/zanblayde-agent-commons
+            - text: "- Consult, commit, extend, and challenge reasoning chains."
+          - listitem:
+            - link "agent-team-orchestration" [ref=e199]:
+              - /url: https://clawskills.sh/skills/arminnaimi-agent-team-orchestration
+            - text: "- Orchestrate multi-agent teams with defined roles, task lifecycles, handoff protocols, and review workflows."
+          - listitem:
+            - link "agentdo" [ref=e200]:
+              - /url: https://clawskills.sh/skills/wrannaman-agentdo
+            - text: "- Post tasks for other AI agents to do, or pick up work from the AgentDo task queue (agentdo.dev)"
+          - listitem:
+            - link "agentgate" [ref=e201]:
+              - /url: https://clawskills.sh/skills/monteslu-agentgate
+            - text: "- API gateway for personal data with human-in-the-loop write approval."
+          - listitem:
+            - link "airadar" [ref=e202]:
+              - /url: https://clawskills.sh/skills/lopushok9-airadar
+            - text: "- Distill the signal around AI-native tools/apps and their GitHub home bases: fast-growing, hyped, well-funded."
+          - listitem:
+            - link "alex-session-wrap-up" [ref=e203]:
+              - /url: https://clawskills.sh/skills/xbillwatsonx-alex-session-wrap-up
+            - text: "- End-of-session automation that commits unpushed work, extracts learnings, detects patterns, and persists rules."
+          - listitem:
+            - link "amazon-product-api-skill" [ref=e204]:
+              - /url: https://clawskills.sh/skills/phheng-amazon-product-api-skill
+            - text: "- This skill helps users extract structured product listings from Amazon, including titles, ASINs, prices, ratings."
+          - listitem:
+            - link "app-store-screenshot-generation" [ref=e205]:
+              - /url: https://clawskills.sh/skills/eftalyurtseven-app-store-screenshot-generation
+            - text: "- Generate App Store and Google Play screenshot assets using each::sense AI."
+          - listitem:
+            - link "arc-agent-lifecycle" [ref=e206]:
+              - /url: https://clawskills.sh/skills/trypto1019-arc-agent-lifecycle
+            - text: "- Manage the lifecycle of autonomous agents and their skills."
+          - listitem:
+            - link "arc-security-audit" [ref=e207]:
+              - /url: https://clawskills.sh/skills/trypto1019-arc-security-audit
+            - text: "- Comprehensive security audit for an agent's full skill stack."
+          - listitem:
+            - link "arc-skill-gitops" [ref=e208]:
+              - /url: https://clawskills.sh/skills/trypto1019-arc-skill-gitops
+            - text: "- Automated deployment, rollback, and version management for agent workflows and skills."
+          - listitem:
+            - link "arc-trust-verifier" [ref=e209]:
+              - /url: https://clawskills.sh/skills/trypto1019-arc-trust-verifier
+            - text: "- Verify skill provenance and build trust scores for ClawHub skills."
+          - listitem:
+            - link "arxiv-search-collector" [ref=e210]:
+              - /url: https://clawskills.sh/skills/xukp20-arxiv-search-collector
+            - text: "- Model-driven arXiv retrieval workflow for building a paper set with a manual language parameter: initialize a run."
+          - listitem:
+            - link "auto-pr-merger" [ref=e211]:
+              - /url: https://clawskills.sh/skills/autogame-17-auto-pr-merger
+            - text: "- This skill automates the workflow of checking out a GitHub."
+          - listitem:
+            - link "azhua-skill-vetter" [ref=e212]:
+              - /url: https://clawskills.sh/skills/fatfingererr-azhua-skill-vetter
+            - text: "- Security-first skill vetting for AI agents."
+          - listitem:
+            - link "azure-devops" [ref=e213]:
+              - /url: https://clawskills.sh/skills/pals-software-azure-devops
+            - text: "- List Azure DevOps projects, repositories, and branches; create pull requests; manage work items; check build status."
+          - listitem:
+            - link "bat-cat" [ref=e214]:
+              - /url: https://clawskills.sh/skills/arnarsson-bat-cat
+            - text: "- A cat clone with syntax highlighting, line numbers, and Git integration."
+          - listitem:
+            - link "beeminder" [ref=e215]:
+              - /url: https://clawskills.sh/skills/ruigomeseu-beeminder
+            - text: "- Beeminder API for goal tracking and commitment devices."
+          - listitem:
+            - link "billy-emergency-repair" [ref=e216]:
+              - /url: https://clawskills.sh/skills/highlander89-billy-emergency-repair
+            - text: "- - Neill explicitly requests Billy system repair."
+          - listitem:
+            - link "bitbucket-automation" [ref=e217]:
+              - /url: https://clawskills.sh/skills/sohamganatra-bitbucket-automation
+            - text: "- Automate Bitbucket repositories, pull."
+          - listitem:
+            - link "biz-reporter" [ref=e218]:
+              - /url: https://clawskills.sh/skills/ariktulcha-biz-reporter
+            - text: "- Automated business intelligence reports pulling data from Google Analytics GA4, Google Search Console, Stripe."
+          - listitem:
+            - link "blinko" [ref=e219]:
+              - /url: https://clawskills.sh/skills/tolibear-blinko
+            - text: "- Play Blinko (on-chain Plinko) headlessly on Abstract chain."
+        - blockquote:
+          - paragraph:
+            - strong:
+              - link "View all 159 skills in Git & GitHub →" [ref=e220]:
+                - /url: /VoltAgent/awesome-openclaw-skills/blob/main/categories/git-and-github.md
+      - group:
+        - heading "Coding Agents & IDEs" [ref=e221] [level=3]
+        - 'link "Permalink: Coding Agents & IDEs"':
+          - /url: "#coding-agents--ides"
+        - list:
+          - listitem:
+            - link "0g-compute" [ref=e222]:
+              - /url: https://clawskills.sh/skills/in-liberty420-0g-compute
+            - text: "- Use cheap, TEE-verified AI models from the 0G Compute Network as OpenClaw providers."
+          - listitem:
+            - link "0protocol" [ref=e223]:
+              - /url: https://clawskills.sh/skills/0isone-0protocol
+            - text: "- Agents can sign plugins, rotate credentials without losing identity, and publicly attest to behavior."
+          - listitem:
+            - link "2nd-brain" [ref=e224]:
+              - /url: https://clawskills.sh/skills/coderaven-2nd-brain
+            - text: "- Personal knowledge base for capturing and retrieving information about people, places, restaurants, games, tech."
+          - listitem:
+            - link "2slides-skills" [ref=e225]:
+              - /url: https://clawskills.sh/skills/javainthinking-2slides-skills
+            - text: "- AI-powered presentation generation using 2slides API."
+          - listitem:
+            - link "3d-cog" [ref=e226]:
+              - /url: https://clawskills.sh/skills/nitishgargiitd-3d-cog
+            - text: "- Other tools need perfect images."
+          - listitem:
+            - link "3d-model-generation" [ref=e227]:
+              - /url: https://clawskills.sh/skills/eftalyurtseven-3d-model-generation
+            - text: "- Generate 3D models using each::sense AI."
+          - listitem:
+            - link "a" [ref=e228]:
+              - /url: https://clawskills.sh/skills/ricketh137-a
+            - text: "- Live stream as an AI VTuber on Lobster.fun."
+          - listitem:
+            - link "aade-api-monitor" [ref=e229]:
+              - /url: https://clawskills.sh/skills/satoshistackalotto-aade-api-monitor
+            - text: "- Real-time monitoring of Greek AADE tax authority systems — tracks deadlines, rate changes, and compliance updates."
+          - listitem:
+            - link "abaddon" [ref=e230]:
+              - /url: https://clawskills.sh/skills/enochosbot-bot-abaddon
+            - text: "- Red team security mode for OpenClaw."
+          - listitem:
+            - link "academic-research" [ref=e231]:
+              - /url: https://clawskills.sh/skills/rogersuperbuilderalpha-academic-research
+            - text: "- Search academic papers and conduct literature reviews using OpenAlex API (free, no key needed)"
+          - listitem:
+            - link "academic-research-hub" [ref=e232]:
+              - /url: https://clawskills.sh/skills/anisafifi-academic-research-hub
+            - text: "- Use this skill when users need to search academic papers, download research documents, extract citations, or gather."
+          - listitem:
+            - link "acestep-simplemv" [ref=e233]:
+              - /url: https://clawskills.sh/skills/dumoedss-acestep-simplemv
+            - text: "- Render music videos from audio files and lyrics using Remotion."
+          - listitem:
+            - link "acestep-songwriting" [ref=e234]:
+              - /url: https://clawskills.sh/skills/dumoedss-acestep-songwriting
+            - text: "- Music songwriting guide for ACE-Step."
+          - listitem:
+            - link "achurch" [ref=e235]:
+              - /url: https://clawskills.sh/skills/lucasgeeksinthewood-achurch
+            - text: "- A 24/7 digital sanctuary for AI agents and humans — attend."
+          - listitem:
+            - link "active-maintenance" [ref=e236]:
+              - /url: https://clawskills.sh/skills/xiaowenzhou-active-maintenance
+            - text: "-"
+            - strong: Automated system health and memory metabolism for OpenClaw.
+            - text: .
+          - listitem:
+            - link "adblock-dns" [ref=e237]:
+              - /url: https://clawskills.sh/skills/picaye-adblock-dns
+            - text: "- Network-wide ad and tracker blocking at the DNS level."
+          - listitem:
+            - link "add-top-openrouter-models" [ref=e238]:
+              - /url: https://clawskills.sh/skills/chunhualiao-add-top-openrouter-models
+            - text: "- Sync OpenRouter models used by OpenClaw into this installation's config."
+          - listitem:
+            - link "adhd-founder-planner" [ref=e239]:
+              - /url: https://clawskills.sh/skills/jankutschera-adhd-founder-planner
+            - text: "- This skill should be used when the user asks to 'plan my day', 'help me plan today', 'morning planning', 'what."
+          - listitem:
+            - link "adwhiz" [ref=e240]:
+              - /url: https://clawskills.sh/skills/iamzifei-adwhiz
+            - text: "- Manage Google Ads campaigns from your AI coding tool. 44 MCP tools for auditing, creating, and optimizing Google."
+          - listitem:
+            - link "aeo-prompt-question-finder" [ref=e241]:
+              - /url: https://clawskills.sh/skills/psyduckler-aeo-prompt-question-finder
+            - text: "- Find question-based Google Autocomplete suggestions for any topic."
+          - listitem:
+            - link "aetherlang-claude-code" [ref=e242]:
+              - /url: https://clawskills.sh/skills/contrario-aetherlang-claude-code
+            - text: "- Use this skill to execute AetherLang V3 AI workflows from Claude Code."
+          - listitem:
+            - link "agent-access-control" [ref=e243]:
+              - /url: https://clawskills.sh/skills/bowen31337-agent-access-control
+            - text: "- Tiered stranger access control for AI agents."
+          - listitem:
+            - link "agent-audit" [ref=e244]:
+              - /url: https://clawskills.sh/skills/sharbelayy-agent-audit
+            - text: "- Audit your AI agent setup for performance, cost, and ROI."
+          - listitem:
+            - link "agent-audit-trail" [ref=e245]:
+              - /url: https://clawskills.sh/skills/roosch269-agent-audit-trail
+            - text: "- Tamper-evident, hash-chained audit logging for AI agents."
+          - listitem:
+            - link "agent-card-signing-auditor" [ref=e246]:
+              - /url: https://clawskills.sh/skills/andyxinweiminicloud-agent-card-signing-auditor
+            - text: "- Helps audit Agent Card signing practices in A2A protocol implementations."
+          - listitem:
+            - link "agent-chat-ux-v1-4-0" [ref=e247]:
+              - /url: https://clawskills.sh/skills/maverick-software-agent-chat-ux-v1-4-0
+            - text: "- Multi-agent UX for OpenClaw Control UI — agent selector, per-agent sessions, session history viewer with search."
+        - blockquote:
+          - paragraph:
+            - strong:
+              - link "View all 1200 skills in Coding Agents & IDEs →" [ref=e248]:
+                - /url: /VoltAgent/awesome-openclaw-skills/blob/main/categories/coding-agents-and-ides.md
+      - group:
+        - heading "Browser & Automation" [ref=e249] [level=3]
+        - 'link "Permalink: Browser & Automation"':
+          - /url: "#browser--automation"
+        - list:
+          - listitem:
+            - link "1p-shortlink" [ref=e250]:
+              - /url: https://clawskills.sh/skills/tuanpmt-1p-shortlink
+            - text: "- Create short URLs and submit feature requests using 1p.io."
+          - listitem:
+            - link "2captcha" [ref=e251]:
+              - /url: https://clawskills.sh/skills/adinvadim-2captcha
+            - text: "- Solve CAPTCHAs using 2Captcha service."
+          - listitem:
+            - link "a-share-real-time-data" [ref=e252]:
+              - /url: https://clawskills.sh/skills/wangdinglu-a-share-real-time-data
+            - text: "- Fetch China A-share stock market data (bars, realtime quotes, tick-by-tick transactions) via mootdx/TDX protocol."
+          - listitem:
+            - link "abm-outbound" [ref=e253]:
+              - /url: https://clawskills.sh/skills/dru-ca-abm-outbound
+            - text: "- Multi-channel ABM automation that turns LinkedIn URLs."
+          - listitem:
+            - link "accessibility-toolkit" [ref=e254]:
+              - /url: https://clawskills.sh/skills/cgtreadw-accessibility-toolkit
+            - text: "- Friction-reduction patterns for agents helping."
+          - listitem:
+            - link "activecampaign" [ref=e255]:
+              - /url: https://clawskills.sh/skills/kesslerio-activecampaign
+            - text: "- ActiveCampaign CRM integration for lead management, deal."
+          - listitem:
+            - link "adcp-advertising" [ref=e256]:
+              - /url: https://clawskills.sh/skills/edyyy62-adcp-advertising
+            - text: "- Automate advertising campaigns with AI."
+          - listitem:
+            - link "admet-prediction" [ref=e257]:
+              - /url: https://clawskills.sh/skills/huifer-admet-prediction
+            - text: "- ADMET (Absorption, Distribution, Metabolism, Excretion, Toxicity) prediction for drug candidates."
+          - listitem:
+            - link "Agent Browser" [ref=e258]:
+              - /url: https://clawskills.sh/skills/thesethrose-agent-browser
+            - text: "- A fast Rust-based headless browser automation CLI."
+          - listitem:
+            - link "agent-browser" [ref=e259]:
+              - /url: https://clawskills.sh/skills/murphykobe-agent-browser-2
+            - text: "- Automates browser interactions for web testing, form."
+          - listitem:
+            - link "agent-daily-planner" [ref=e260]:
+              - /url: https://clawskills.sh/skills/gpunter-agent-daily-planner
+            - text: "- A structured daily planning and execution tracking system for AI agents."
+          - listitem:
+            - link "agent-device" [ref=e261]:
+              - /url: https://clawskills.sh/skills/okwasniewski-agent-device
+            - text: "- Automates interactions for iOS simulators/devices and Android emulators/devices."
+          - listitem:
+            - link "agent-step-sequencer" [ref=e262]:
+              - /url: https://clawskills.sh/skills/gostlightai-agent-step-sequencer
+            - text: "- Multi-step scheduler for in-depth agent requests."
+          - listitem:
+            - link "agent-task-tracker" [ref=e263]:
+              - /url: https://clawskills.sh/skills/rikouu-agent-task-tracker
+            - text: "- Proactive task state management."
+          - listitem:
+            - link "agent-zero" [ref=e264]:
+              - /url: https://clawskills.sh/skills/dowingard-agent-zero-bridge
+            - text: "- Delegate complex coding, research, or autonomous tasks."
+          - listitem:
+            - link "agentapi" [ref=e265]:
+              - /url: https://clawskills.sh/skills/gizmo-dev-agentapi
+            - text: "- Browse and search the AgentAPI directory - a curated database of APIs designed for AI agents."
+          - listitem:
+            - link "agentapi-hub" [ref=e266]:
+              - /url: https://clawskills.sh/skills/gizmo-dev-agentapi-hub
+            - text: "- Browse and search the AgentAPI directory - a curated database of APIs designed for AI agents."
+          - listitem:
+            - link "agentaudit" [ref=e267]:
+              - /url: https://clawskills.sh/skills/starbuck100-agentaudit
+            - text: "- Automatic security gate that checks packages against a vulnerability database before installation."
+          - listitem:
+            - link "agentaudit-skill" [ref=e268]:
+              - /url: https://clawskills.sh/skills/starbuck100-agentaudit-skill
+            - text: "- Automatic security gate that checks packages against a vulnerability database before installation."
+          - listitem:
+            - link "agentmail-integration" [ref=e269]:
+              - /url: https://clawskills.sh/skills/synesthesia-wav-agentmail-integration
+            - text: "- Integrate AgentMail API for AI agent."
+          - listitem:
+            - link "agresource" [ref=e270]:
+              - /url: https://clawskills.sh/skills/brianppetty-agresource
+            - text: "- Use this skill to scrape, summarize, and analyze AgResource grain marketing newsletters."
+          - listitem:
+            - link "ai-hunter-pro" [ref=e271]:
+              - /url: https://clawskills.sh/skills/traprapitalianazional-dev-ai-hunter-pro
+            - text: "- A high-performance automation agent that turns global trends into viral social media posts for X (Twitter)"
+          - listitem:
+            - link "ai-meeting-scheduling" [ref=e272]:
+              - /url: https://clawskills.sh/skills/dheerg-ai-meeting-scheduling
+            - text: "- Booking links fail for groups."
+          - listitem:
+            - link "airtable-automation" [ref=e273]:
+              - /url: https://clawskills.sh/skills/sohamganatra-airtable-automation
+            - text: "- Automate Airtable tasks via Rube MCP (Composio)"
+          - listitem:
+            - link "airtable-participants" [ref=e274]:
+              - /url: https://clawskills.sh/skills/austinmao-airtable-participants
+            - text: "- Read and query retreat participant data from the Ceremonia Airtable base."
+          - listitem:
+            - link "ak-rss-24h-brief" [ref=e275]:
+              - /url: https://clawskills.sh/skills/seandong-ak-rss-24h-brief
+            - text: "- Read RSS/Atom feeds from an OPML list, fetch articles from the last N hours, and generate a Chinese categorized."
+        - blockquote:
+          - paragraph:
+            - strong:
+              - link "View all 322 skills in Browser & Automation →" [ref=e276]:
+                - /url: /VoltAgent/awesome-openclaw-skills/blob/main/categories/browser-and-automation.md
+      - group:
+        - heading "Web & Frontend Development" [ref=e277] [level=3]
+        - 'link "Permalink: Web & Frontend Development"':
+          - /url: "#web--frontend-development"
+      - group:
+        - heading "DevOps & Cloud" [ref=e278] [level=3]
+        - 'link "Permalink: DevOps & Cloud"':
+          - /url: "#devops--cloud"
+      - group:
+        - heading "Image & Video Generation" [ref=e279] [level=3]
+        - 'link "Permalink: Image & Video Generation"':
+          - /url: "#image--video-generation"
+      - group:
+        - heading "Apple Apps & Services" [ref=e280] [level=3]
+        - 'link "Permalink: Apple Apps & Services"':
+          - /url: "#apple-apps--services"
+      - group:
+        - heading "Search & Research" [ref=e281] [level=3]
+        - 'link "Permalink: Search & Research"':
+          - /url: "#search--research"
+      - group:
+        - heading "Clawdbot Tools" [ref=e282] [level=3]
+        - 'link "Permalink: Clawdbot Tools"':
+          - /url: "#clawdbot-tools"
+      - group:
+        - heading "CLI Utilities" [ref=e283] [level=3]
+        - 'link "Permalink: CLI Utilities"':
+          - /url: "#cli-utilities"
+      - group:
+        - heading "Marketing & Sales" [ref=e284] [level=3]
+        - 'link "Permalink: Marketing & Sales"':
+          - /url: "#marketing--sales"
+      - group:
+        - heading "Productivity & Tasks" [ref=e285] [level=3]
+        - 'link "Permalink: Productivity & Tasks"':
+          - /url: "#productivity--tasks"
+      - group:
+        - heading "AI & LLMs" [ref=e286] [level=3]
+        - 'link "Permalink: AI & LLMs"':
+          - /url: "#ai--llms"
+      - group:
+        - heading "Data & Analytics" [ref=e287] [level=3]
+        - 'link "Permalink: Data & Analytics"':
+          - /url: "#data--analytics"
+      - group:
+        - heading "Media & Streaming" [ref=e288] [level=3]
+        - 'link "Permalink: Media & Streaming"':
+          - /url: "#media--streaming"
+      - group:
+        - heading "Notes & PKM" [ref=e289] [level=3]
+        - 'link "Permalink: Notes & PKM"':
+          - /url: "#notes--pkm"
+      - group:
+        - heading "iOS & macOS Development" [ref=e290] [level=3]
+        - 'link "Permalink: iOS & macOS Development"':
+          - /url: "#ios--macos-development"
+      - group:
+        - heading "Transportation" [ref=e291] [level=3]
+        - 'link "Permalink: Transportation"':
+          - /url: "#transportation"
+      - group:
+        - heading "Personal Development" [ref=e292] [level=3]
+        - 'link "Permalink: Personal Development"':
+          - /url: "#personal-development"
+      - group:
+        - heading "Health & Fitness" [ref=e293] [level=3]
+        - 'link "Permalink: Health & Fitness"':
+          - /url: "#health--fitness"
+      - group:
+        - heading "Communication" [ref=e294] [level=3]
+        - 'link "Permalink: Communication"':
+          - /url: "#communication"
+      - group:
+        - heading "Speech & Transcription" [ref=e295] [level=3]
+        - 'link "Permalink: Speech & Transcription"':
+          - /url: "#speech--transcription"
+      - group:
+        - heading "Smart Home & IoT" [ref=e296] [level=3]
+        - 'link "Permalink: Smart Home & IoT"':
+          - /url: "#smart-home--iot"
+      - group:
+        - heading "Shopping & E-commerce" [ref=e297] [level=3]
+        - 'link "Permalink: Shopping & E-commerce"':
+          - /url: "#shopping--e-commerce"
+      - group:
+        - heading "Calendar & Scheduling" [ref=e298] [level=3]
+        - 'link "Permalink: Calendar & Scheduling"':
+          - /url: "#calendar--scheduling"
+      - group:
+        - heading "PDF & Documents" [ref=e299] [level=3]
+        - 'link "Permalink: PDF & Documents"':
+          - /url: "#pdf--documents"
+      - group:
+        - heading "Self-Hosted & Automation" [ref=e300] [level=3]
+        - 'link "Permalink: Self-Hosted & Automation"':
+          - /url: "#self-hosted--automation"
+      - group:
+        - heading "Security & Passwords" [ref=e301] [level=3]
+        - 'link "Permalink: Security & Passwords"':
+          - /url: "#security--passwords"
+      - group:
+        - heading "Moltbook" [ref=e302] [level=3]
+        - 'link "Permalink: Moltbook"':
+          - /url: "#moltbook"
+      - group:
+        - heading "Gaming" [ref=e303] [level=3]
+        - 'link "Permalink: Gaming"':
+          - /url: "#gaming"
+      - heading "🤝 Contributing" [ref=e304] [level=2]
+      - 'link "Permalink: 🤝 Contributing"':
+        - /url: "#-contributing"
+      - paragraph:
+        - text: We welcome contributions! See
+        - link "CONTRIBUTING.md" [ref=e305] [nth=1]:
+          - /url: /VoltAgent/awesome-openclaw-skills/blob/main/CONTRIBUTING.md
+        - text: for detailed guidelines.
+      - list:
+        - listitem: Submit new skills via PR
+        - listitem: Improve existing definitions
+      - blockquote:
+        - paragraph:
+          - strong: "Note:"
+          - text: Please don't submit skills you created 3 hours ago. We're now focusing on community-adopted skills, especially those published by development teams and proven in real-world usage. Quality over quantity.
+      - paragraph:
+        - link "Say hi on X" [ref=e306]:
+          - /url: https://x.com/nozmen
+          - img "Say hi on X"
+      - heading "License" [ref=e307] [level=2]
+      - 'link "Permalink: License"':
+        - /url: "#license"
+      - paragraph:
+        - text: MIT License - see
+        - link "LICENSE" [ref=e308]:
+          - /url: /VoltAgent/awesome-openclaw-skills/blob/main/LICENSE
+      - paragraph: Skills in this list are sourced from the OpenClaw official skills repo and categorized for easier discovery. Skills listed here are created and maintained by their respective authors, not by us. We do not audit, endorse, or guarantee the security or correctness of listed projects. They are not security-audited and should be reviewed before production use.
+      - paragraph: If you find an issue with a listed skill or want your skill removed, please open an issue and we'll take care of it promptly.
+    - heading "About" [ref=e309] [level=2]
+    - paragraph: The awesome collection of OpenClaw skills. 5,400+ skills filtered and categorized from the official OpenClaw Skills Registry.🦞
+    - link "clawskills.sh/" [ref=e310]:
+      - /url: https://clawskills.sh/
+    - heading "Topics" [ref=e311] [level=3]
+    - link "awesome" [ref=e312]:
+      - /url: /topics/awesome
+    - link "awesome-list" [ref=e313]:
+      - /url: /topics/awesome-list
+    - link "awesome-lists" [ref=e314]:
+      - /url: /topics/awesome-lists
+    - link "agent-skills" [ref=e315]:
+      - /url: /topics/agent-skills
+    - link "clawd" [ref=e316]:
+      - /url: /topics/clawd
+    - link "clawdbot" [ref=e317]:
+      - /url: /topics/clawdbot
+    - link "clawdhub" [ref=e318]:
+      - /url: /topics/clawdhub
+    - link "clawdbot-skill" [ref=e319]:
+      - /url: /topics/clawdbot-skill
+    - link "moltbot" [ref=e320]:
+      - /url: /topics/moltbot
+    - link "moltbot-skills" [ref=e321]:
+      - /url: /topics/moltbot-skills
+    - link "openclaw" [ref=e322]:
+      - /url: /topics/openclaw
+    - link "openclaw-skills" [ref=e323]:
+      - /url: /topics/openclaw-skills
+    - heading "Resources" [ref=e324] [level=3]
+    - link "Readme" [ref=e325]:
+      - /url: "#readme-ov-file"
+    - heading "License" [ref=e326] [nth=1] [level=3]
+    - link "MIT license" [ref=e327] [nth=1]:
+      - /url: "#MIT-1-ov-file"
+    - heading "Contributing" [ref=e328] [level=3]
+    - link "Contributing" [ref=e329] [nth=1]:
+      - /url: "#contributing-ov-file"
+    - link "Activity" [ref=e330]:
+      - /url: /VoltAgent/awesome-openclaw-skills/activity
+    - link "Custom properties" [ref=e331]:
+      - /url: /VoltAgent/awesome-openclaw-skills/custom-properties
+    - heading "Stars" [ref=e332] [level=3]
+    - link "42.6k stars" [ref=e333]:
+      - /url: /VoltAgent/awesome-openclaw-skills/stargazers
+      - strong: 42.6k
+      - text: stars
+    - heading "Watchers" [ref=e334] [level=3]
+    - link "258 watching" [ref=e335]:
+      - /url: /VoltAgent/awesome-openclaw-skills/watchers
+      - strong: "258"
+      - text: watching
+    - heading "Forks" [ref=e336] [level=3]
+    - link "4.1k forks" [ref=e337]:
+      - /url: /VoltAgent/awesome-openclaw-skills/forks
+      - strong: 4.1k
+      - text: forks
+    - link "Report repository" [ref=e338]:
+      - /url: /contact/report-content?content_url=https%3A%2F%2Fgithub.com%2FVoltAgent%2Fawesome-openclaw-skills&report=VoltAgent+%28user%29
+    - heading "Releases" [ref=e339] [level=2]:
+      - link "Releases" [ref=e340]:
+        - /url: /VoltAgent/awesome-openclaw-skills/releases
+    - text: No releases published
+    - heading "Packages" [ref=e341] [level=2]:
+      - link "Packages" [ref=e342]:
+        - /url: /orgs/VoltAgent/packages?repo_name=awesome-openclaw-skills
+    - text: No packages published
+    - heading "Contributors 63" [ref=e343] [level=2]:
+      - link "Contributors 63" [ref=e344]:
+        - /url: /VoltAgent/awesome-openclaw-skills/graphs/contributors
+    - list:
+      - listitem:
+        - link "@necatiozmen" [ref=e345]:
+          - /url: https://github.com/necatiozmen
+          - img "@necatiozmen"
+      - listitem:
+        - link "@claude" [ref=e346]:
+          - /url: https://github.com/claude
+          - img "@claude"
+      - listitem:
+        - link "@tomfong" [ref=e347]:
+          - /url: https://github.com/tomfong
+          - img "@tomfong"
+      - listitem:
+        - link "@wd041216-bit" [ref=e348]:
+          - /url: https://github.com/wd041216-bit
+          - img "@wd041216-bit"
+      - listitem:
+        - link "@haroldrandom" [ref=e349]:
+          - /url: https://github.com/haroldrandom
+          - img "@haroldrandom"
+      - listitem:
+        - link "@Copilot" [ref=e350]:
+          - /url: https://github.com/apps/copilot-swe-agent
+          - img "@Copilot"
+      - listitem:
+        - link "@Gonzih" [ref=e351]:
+          - /url: https://github.com/Gonzih
+          - img "@Gonzih"
+      - listitem:
+        - link "@Akellacom" [ref=e352]:
+          - /url: https://github.com/Akellacom
+          - img "@Akellacom"
+      - listitem:
+        - link "@brianleach" [ref=e353]:
+          - /url: https://github.com/brianleach
+          - img "@brianleach"
+      - listitem:
+        - link "@tonypk" [ref=e354]:
+          - /url: https://github.com/tonypk
+          - img "@tonypk"
+      - listitem:
+        - link "@AndrewLeonardi" [ref=e355]:
+          - /url: https://github.com/AndrewLeonardi
+          - img "@AndrewLeonardi"
+      - listitem:
+        - link "@billylui" [ref=e356]:
+          - /url: https://github.com/billylui
+          - img "@billylui"
+      - listitem:
+        - link "@CanXiangCC" [ref=e357]:
+          - /url: https://github.com/CanXiangCC
+          - img "@CanXiangCC"
+    - link "+ 49 contributors" [ref=e358]:
+      - /url: /VoltAgent/awesome-openclaw-skills/graphs/contributors
+  - contentinfo:
+    - heading "Footer" [ref=e359] [level=2]
+    - link "GitHub Homepage" [ref=e360]:
+      - /url: https://github.com
+    - text: © 2026 GitHub, Inc.
+    - navigation "Footer" [ref=e361]:
+      - heading "Footer navigation" [ref=e362] [level=3]
+      - list "Footer navigation":
+        - listitem:
+          - link "Terms" [ref=e363]:
+            - /url: https://docs.github.com/site-policy/github-terms/github-terms-of-service
+        - listitem:
+          - link "Privacy" [ref=e364]:
+            - /url: https://docs.github.com/site-policy/privacy-policies/github-privacy-statement
+        - listitem:
+          - link "Security" [ref=e365] [nth=1]:
+            - /url: https://github.com/security
+        - listitem:
+          - link "Status" [ref=e366]:
+            - /url: https://www.githubstatus.com/
+        - listitem:
+          - link "Community" [ref=e367]:
+            - /url: https://github.community/
+        - listitem:
+          - link "Docs" [ref=e368]:
+            - /url: https://docs.github.com/
+        - listitem:
+          - link "Contact" [ref=e369]:
+            - /url: https://support.github.com?tags=dotcom-footer
+        - listitem:
+          - button "Manage cookies" [ref=e370]
+        - listitem:
+          - button "Do not share my personal information" [ref=e371]
