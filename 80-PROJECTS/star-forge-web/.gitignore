@@ -1,1 +1,16 @@
 .vercel
+
+# Environment
+.env
+
+# Dependencies
+node_modules/
+
+# Build output
+build/
+
+# Logs
+*.log
+
+# OS
+.DS_Store

@@ -1,0 +1,8 @@
+*.exe
+*.dll
+*.so
+dist/
+build/
+.env
+vendor/
+node_modules/
