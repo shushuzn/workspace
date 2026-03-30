@@ -1,7 +1,0 @@
-node_modules/
-.env
-*.log
-dist/
-_build/
-site/
-.next/

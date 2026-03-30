@@ -1,0 +1,5 @@
+{
+  "meta": { "code": "zh", "name": "Chinese", "nativeName": "中文" },
+  "dashboard": { "title": "CRUCIX — 情报终端" },
+  "common": { "ok": "确定", "error": "错误", "loading": "加载中", "save": "保存", "cancel": "取消" }
+}

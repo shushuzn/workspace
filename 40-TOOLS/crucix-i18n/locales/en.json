@@ -1,0 +1,5 @@
+{
+  "meta": { "code": "en", "name": "English", "nativeName": "English" },
+  "dashboard": { "title": "CRUCIX — Intelligence Terminal" },
+  "common": { "ok": "OK", "error": "Error", "loading": "Loading", "save": "Save", "cancel": "Cancel" }
+}

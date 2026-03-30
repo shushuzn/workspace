@@ -12,21 +12,17 @@
       "Skill(browse)",
       "mcp__plugin_compound-engineering_context7__resolve-library-id",
       "mcp__plugin_oh-my-claudecode_t__ast_grep_replace",
-      "Bash(node:*)"
+      "Bash(node:*)",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__new_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_snapshot",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__navigate_page",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__take_screenshot",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__click",
+      "mcp__plugin_chrome-devtools-mcp_chrome-devtools__list_console_messages"
     ]
   },
-  "hooks": {
-    "PostToolUse": [
-      {
-        "matcher": "Write|Edit|MultiEdit",
-        "hooks": [
-          {
-            "type": "command",
-            "command": "cmd /c node %CLAUDE_PROJECT_DIR%/.claude/helpers/hook-handler.cjs post-edit",
-            "timeout": 10000
-          }
-        ]
-      }
-    ]
-  }
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "claude-flow"
+  ]
 }
