@@ -11,7 +11,8 @@
       "Skill(auto-research)",
       "Skill(browse)",
       "mcp__plugin_compound-engineering_context7__resolve-library-id",
-      "mcp__plugin_oh-my-claudecode_t__ast_grep_replace"
+      "mcp__plugin_oh-my-claudecode_t__ast_grep_replace",
+      "Bash(node:*)"
     ]
   },
   "hooks": {
