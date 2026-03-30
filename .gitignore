@@ -38,6 +38,10 @@ node_modules/
 *.egg-info/
 
 # === Tool State (workspace-specific) ===
+.claude/
+.openclaw/
+.opencode/
+.clawhub/
 .gstack/
 .claude-flow/
 .omc/
@@ -45,6 +49,11 @@ node_modules/
 .ruff_cache/
 .pytest_cache/
 checkpoints.db
+worktrees/
+
+# === Independent Projects (own git repos) ===
+80-PROJECTS/NewsHub/
+80-PROJECTS/stock-analysis-agent/
 
 # === Editor ===
 .vscode/
