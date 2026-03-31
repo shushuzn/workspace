@@ -14,7 +14,9 @@ import { getAllOperations } from '../operations/index.mjs';
 import { Safety } from '../governance/safety.mjs';
 import { CandidatePool } from '../learn/candidate-pool.mjs';
 import { Discoverer } from '../learn/discoverer.mjs';
+import { Distiller } from '../learn/distiller.mjs';
 import { Curriculum } from '../learn/curriculum.mjs';
+import { SkillLibrary } from '../memory/skill-library.mjs';
 import { Hypothesis } from '../evolution/hypothesis.mjs';
 import { Sandbox } from '../evolution/sandbox.mjs';
 
@@ -44,6 +46,10 @@ export class Agent {
 
     // Discoverer for finding new knowledge
     this.discoverer = new Discoverer(workspace, this.ltm);
+
+    // Learn components - SkillLibrary + Distiller pipeline
+    this.skillLibrary = new SkillLibrary(workspace);
+    this.distiller = new Distiller(workspace, this.stm, this.ltm, this.skillLibrary);
 
     // Meta-cognizer will be injected
     this.metaCognizer = null;
@@ -143,9 +149,10 @@ export class Agent {
     this.toolRouter.updateEpsilon(improved);
     this.stm.save();
 
-    // Distill successful experience to LTM (only genuine improvements)
-    if (improved) {
-      await this.distillToLTM(op, result, record);
+    // Distill experience into rules, skills, and insights via full Distiller pipeline
+    const distResult = await this.distiller.distill({ records: this.stm.getRecentRecords(20) });
+    if (distResult.rules.length > 0 || distResult.skills.length > 0 || distResult.insights.length > 0) {
+      console.log(`[Agent] 蒸馏: ${distResult.rules.length} 条规则, ${distResult.skills.length} 个技能, ${distResult.insights.length} 条洞察`);
     }
 
     console.log(`[Agent] 健康度: ${beforeScore} → ${afterScore} (${delta > 0 ? '+' : ''}${delta}) | ${noOp ? '无操作' : improved ? '✓' : '✗'}`);
