@@ -402,19 +402,21 @@ ${target}/
 
       if (issues.length === 0) return { success: true, found: 0, issues: [] };
 
-      // 写入修复计划文件
-      const date = new Date().toISOString().split('T')[0];
-      const loopDir = path.join(omcDir, 'loop');
-      if (!fs.existsSync(loopDir)) fs.mkdirSync(loopDir, { recursive: true });
-      const reportPath = path.join(loopDir, `issues-${date}.md`);
-      const existing = fs.existsSync(reportPath) ? fs.readFileSync(reportPath, 'utf8') : '';
-      const newIssues = issues.filter(i => !existing.includes(i.path));
-      if (newIssues.length === 0) return { success: true, found: issues.length, issues };
-
-      const report = `\n## ${new Date().toISOString()}\n\n${newIssues.map(i => `- [${i.type}] \`${i.path}\`${i.age_days ? ` (${i.age_days}d stale)` : ''}`).join('\n')}\n`;
-      const updated = existing + report;
-      fs.writeFileSync(reportPath, updated);
-      return { success: true, found: newIssues.length, issues: newIssues };
+      // 将问题写入 dashboard-data.json（与 generate-dashboard-data.js 共用文件路径）
+      const dataFile = path.join(WORKSPACE, 'dashboard-data.json');
+      let data = {};
+      if (fs.existsSync(dataFile)) {
+        try { data = JSON.parse(fs.readFileSync(dataFile, 'utf8')); } catch { /* ignore */ }
+      }
+      // 追加新发现的问题
+      if (!data.issues) data.issues = [];
+      for (const issue of issues) {
+        if (!data.issues.some(i => i.path === issue.path)) {
+          data.issues.push({ ...issue, found_at: new Date().toISOString(), resolved: false });
+        }
+      }
+      fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+      return { success: true, found: issues.length, issues };
     }
   },
   {
