@@ -65,6 +65,19 @@ export class Agent {
     console.log('\n' + '='.repeat(50));
     console.log(`[Agent] 迭代开始 | 健康度: ${beforeScore} | ε: ${(this.stm.history.epsilon * 100).toFixed(0)}%`);
 
+    // Breakthrough trigger: if score=100 for too long, force exploration
+    if (beforeScore >= 100) {
+      this.stm.history.perfectRounds = (this.stm.history.perfectRounds || 0) + 1;
+      if (this.stm.history.perfectRounds >= 3) {
+        const forcedEpsilon = 0.25;
+        this.stm.history.epsilon = forcedEpsilon;
+        this.stm.history.perfectRounds = 0;
+        console.log(`[Agent] 🏔️ 天花板突破！连续满分 ${beforeScore} 分达 3 轮，强制 ε → ${(forcedEpsilon * 100).toFixed(0)}% 探索新策略`);
+      }
+    } else {
+      this.stm.history.perfectRounds = 0;
+    }
+
     // Meta-cognition: analyze and update ToolRouter with gaps
     let gaps = [];
     let hypotheses = [];
