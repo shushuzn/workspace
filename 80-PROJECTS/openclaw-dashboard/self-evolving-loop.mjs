@@ -56,13 +56,23 @@ const OPERATIONS = [
     weight: 1.0,
     action: async () => {
       const { execSync } = await import('child_process');
+      const { createHash } = await import('crypto');
+      const dataFile = path.join(WORKSPACE, 'dashboard-data.json');
       try {
+        // 生成前记录 hash
+        const before = fs.existsSync(dataFile)
+          ? createHash('sha1').update(fs.readFileSync(dataFile)).digest('hex')
+          : '';
         execSync('node generate-dashboard-data.js', {
           cwd: __dirname,
           encoding: 'utf8',
           timeout: 30000
         });
-        return { success: true };
+        // 生成后比对 hash，只有内容变了才算真正的成功
+        const after = fs.existsSync(dataFile)
+          ? createHash('sha1').update(fs.readFileSync(dataFile)).digest('hex')
+          : '';
+        return { success: before !== after };
       } catch (e) {
         return { success: false, error: e.message };
       }
@@ -333,6 +343,78 @@ ${target}/
 
       scanDir(projectsDir);
       return { found: largeFiles.length, files: largeFiles.slice(0, 5) };
+    }
+  },
+  {
+    id: 'find_workspace_issues',
+    name: '扫描并记录工作区问题',
+    weight: 1.0,
+    action: async () => {
+      const issues = [];
+      const omcDir = path.join(WORKSPACE, '.omc');
+
+      // 1. 检查 .omc 下是否有异常文件（如临时文件、散落的小文件）
+      if (fs.existsSync(omcDir)) {
+        const entries = fs.readdirSync(omcDir, { withFileTypes: true });
+        for (const entry of entries) {
+          const fullPath = path.join(omcDir, entry.name);
+          // 跳过正常目录
+          if (['sessions', 'brainstorm', 'state', 'plans', 'research', 'logs'].includes(entry.name)) continue;
+          // 散落的临时文件（以 ~、.tmp、.bak 结尾）
+          if (entry.name.endsWith('~') || entry.name.endsWith('.tmp') || entry.name.endsWith('.bak')) {
+            issues.push({ type: 'temp_file', path: `.omc/${entry.name}`, size: entry.size });
+          }
+          // 异常单文件（非目录且不是已知类型）
+          if (entry.isFile() && !entry.name.endsWith('.json') && !entry.name.endsWith('.md')) {
+            issues.push({ type: 'unknown_file', path: `.omc/${entry.name}`, size: entry.size });
+          }
+        }
+      }
+
+      // 2. 检查 sessions 目录下的过期孤立文件（超过30天未访问）
+      const sessionsDir = path.join(omcDir, 'sessions');
+      if (fs.existsSync(sessionsDir)) {
+        const cutoff = Date.now() - 30 * 24 * 60 * 60 * 1000;
+        const files = fs.readdirSync(sessionsDir).filter(f => f.endsWith('.json'));
+        for (const f of files) {
+          const fullPath = path.join(sessionsDir, f);
+          const mtime = fs.statSync(fullPath).mtimeMs;
+          if (mtime < cutoff) {
+            issues.push({ type: 'stale_session', path: `.omc/sessions/${f}`, age_days: Math.floor((Date.now() - mtime) / 86400000) });
+          }
+        }
+      }
+
+      // 3. 检查 state/checkpoints 下的孤立文件（无对应 session）
+      const checkpointsDir = path.join(omcDir, 'state', 'checkpoints');
+      if (fs.existsSync(checkpointsDir)) {
+        const sessionFiles = fs.existsSync(sessionsDir)
+          ? fs.readdirSync(sessionsDir).map(f => f.replace('.json', ''))
+          : [];
+        const cpFiles = fs.readdirSync(checkpointsDir).filter(f => f.endsWith('.json'));
+        for (const f of cpFiles) {
+          const base = f.replace('.json', '');
+          if (!sessionFiles.includes(base)) {
+            issues.push({ type: 'orphan_checkpoint', path: `.omc/state/checkpoints/${f}` });
+          }
+        }
+      }
+
+      if (issues.length === 0) return { success: true, found: 0, issues: [] };
+
+      // 写入修复计划文件
+      const date = new Date().toISOString().split('T')[0];
+      const loopDir = path.join(omcDir, 'loop');
+      if (!fs.existsSync(loopDir)) fs.mkdirSync(loopDir, { recursive: true });
+      const reportPath = path.join(loopDir, `issues-${date}.md`);
+      const existing = fs.existsSync(reportPath) ? fs.readFileSync(reportPath, 'utf8') : '';
+      const newIssues = issues.filter(i => !existing.includes(i.path));
+      if (newIssues.length === 0) return { success: true, found: issues.length, issues };
+
+      const report = `\n## ${new Date().toISOString()}\n\n${newIssues.map(i => `- [${i.type}] \`${i.path}\`${i.age_days ? ` (${i.age_days}d stale)` : ''}`).join('\n')}\n`;
+      const updated = existing + report;
+      fs.writeFileSync(reportPath, updated);
+      return { success: true, found: newIssues.length, issues: newIssues };
     }
   },
   {
