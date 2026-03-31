@@ -17,7 +17,7 @@ const HISTORY_FILE = path.join(WORKSPACE, '.omc', 'loop-history.json');
 
 const EPSILON_MIN_BASE = 0.1;  // 基础最低探索率 10%
 const EPSILON_MAX = 0.5;   // 最高探索率 50%
-const EPSILON_INIT = 0.5;   // 初始探索率 50%（确保新操作被充分尝试）
+const EPSILON_INIT = 0.3;   // 初始探索率 30%
 const COOLDOWN = 5;         // 冷却期：最近 5 次执行过的操作不立即重选（原3，过短）
 
 function getEpsilonMin(score) {

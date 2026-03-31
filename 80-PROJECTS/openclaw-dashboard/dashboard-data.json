@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-31T01:42:15.681Z",
+  "generated": "2026-03-31T01:44:07.064Z",
   "projects": [
     {
       "name": "50-ton-hackathon-2026",
@@ -7,7 +7,7 @@
       "description": "项目描述暂无",
       "lastActive": null,
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -19,7 +19,7 @@
       "description": "Agent-to-Agent Communication Router - MCP Server",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [
         "@langchain/core",
@@ -45,7 +45,7 @@
       "description": "AI Agent 养成竞技游戏",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [
@@ -67,7 +67,7 @@
       "description": "Multi-Agent Orchestration Platform based on MCP",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [
         "@modelcontextprotocol/sdk"
@@ -92,7 +92,7 @@
       "description": "Agent 记忆网格系统。",
       "lastActive": null,
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -104,7 +104,7 @@
       "description": "**AI-Driven Business Process Management** — 智能业务流程管理系统",
       "lastActive": "2026-03-25",
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -116,7 +116,7 @@
       "description": "Multi-agent roundtable discussion CLI tool with multiple AI personas",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [
         "dotenv",
@@ -133,7 +133,7 @@
       "description": "AI 圆桌讨论 MCP Server",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [
         "@modelcontextprotocol/sdk",
@@ -156,7 +156,7 @@
       "description": "Code Intelligence Agent - Semgrep + Tree-sitter analysis",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [
         "@modelcontextprotocol/sdk",
@@ -218,9 +218,9 @@
       "name": "knowledge-bridge",
       "meta": "TypeScript",
       "description": "项目描述暂无",
-      "lastActive": null,
+      "lastActive": "2026-03-31",
       "status": "modified",
-      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/self-evolving-loop.mjs",
       "branch": "main",
       "dependencies": [
         "uuid",
