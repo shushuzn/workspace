@@ -576,8 +576,8 @@ function calculateHealthScore() {
       }).trim();
       const changed = out ? out.split('\n').filter(l => {
         const trimmed = l.trim();
-        // 排除 loop-history.json（loop 自己产生，不算工作区问题）
-        return trimmed && !trimmed.includes('loop-history.json');
+        // 排除 loop-history.json 和 dashboard-data.json（loop 自己产生，不算工作区问题）
+        return trimmed && !trimmed.includes('loop-history.json') && !trimmed.includes('dashboard-data.json');
       }).length : 0;
       if (changed === 0) score += 10;
       else if (changed <= 3) score += 5;
