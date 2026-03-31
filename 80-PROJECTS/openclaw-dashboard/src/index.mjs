@@ -13,7 +13,7 @@ import { STM } from './memory/stm.mjs';
 import { CONFIG } from './config/default.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const WORKSPACE = path.join(__dirname, '..');
+const WORKSPACE = path.join(__dirname, '..', '..');
 
 async function main() {
   const args = process.argv.slice(2);

@@ -23,7 +23,7 @@ export class GenDashboardData extends ProductiveOperation {
         : '';
 
       execSync('node generate-dashboard-data.js', {
-        cwd: path.join(this.workspace, '80-PROJECTS', 'openclaw-dashboard'),
+        cwd: process.cwd(),
         encoding: 'utf8',
         timeout: 30000
       });
