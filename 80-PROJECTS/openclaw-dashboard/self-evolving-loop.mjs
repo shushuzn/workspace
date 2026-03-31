@@ -433,11 +433,11 @@ ${target}/
       const reportPath = path.join(loopDir, latest);
       const content = fs.readFileSync(reportPath, 'utf8');
 
-      // 提取未解决的项目（不含 [x] 的）
+      // 提取未解决的项目（不含 [x] 的）；格式为 - [type] `path`
       const lines = content.split('\n');
       const unresolved = [];
       for (const line of lines) {
-        if (line.includes('- [ ]') || (line.includes('- [') && !line.includes('- [x]'))) {
+        if (line.startsWith('- [') && !line.includes('- [x]')) {
           // 提取路径
           const match = line.match(/`([^`]+)`/);
           if (match) unresolved.push(match[1]);
