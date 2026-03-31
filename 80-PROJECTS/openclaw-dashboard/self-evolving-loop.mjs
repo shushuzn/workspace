@@ -341,6 +341,70 @@ ${target}/
     // 检测 op，无实际清理动作
   },
   {
+    id: 'sync_project_markers',
+    name: '同步项目活跃时间戳到记忆',
+    weight: 1.0,
+    action: async () => {
+      const memoryFile = path.join(WORKSPACE, 'MEMORY.md');
+      if (!fs.existsSync(memoryFile)) return { synced: 0 };
+
+      const content = fs.readFileSync(memoryFile, 'utf8');
+      const projectsDir = path.join(WORKSPACE, '80-PROJECTS');
+      if (!fs.existsSync(projectsDir)) return { synced: 0 };
+
+      // 提取项目列表
+      const dirMatch = content.match(/\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|/g);
+      if (!dirMatch) return { synced: 0 };
+
+      let synced = 0;
+      let newContent = content;
+
+      for (const row of dirMatch) {
+        const cols = row.split('|').map(c => c.trim()).filter(Boolean);
+        if (cols.length < 3) continue;
+        const name = cols[1];
+        const rest = cols.slice(2).join('|');
+        // 检查是否已有 Last Active
+        if (rest.includes('Last Active') || rest.includes('last-active')) continue;
+
+        // 查找对应的项目目录
+        const projectPath = path.join(projectsDir, name);
+        if (!fs.existsSync(projectPath)) continue;
+
+        // 尝试从 git log 获取最后活跃时间
+        try {
+          const { execSync } = await import('child_process');
+          const log = execSync(`git log --format="%ai" --max-count=1`, {
+            cwd: projectPath,
+            encoding: 'utf8',
+            timeout: 5000
+          }).trim();
+          if (!log) continue;
+
+          const date = new Date(log).toISOString().split('T')[0];
+          // 在表格行尾添加 last-active
+          const lineIndex = newContent.split('\n').findIndex(l => l.includes(`| ${name} |`));
+          if (lineIndex !== -1) {
+            const line = newContent.split('\n')[lineIndex];
+            // 在最后一个 | 之前插入
+            const lastPipe = line.lastIndexOf('|');
+            const before = line.slice(0, lastPipe);
+            const after = line.slice(lastPipe);
+            newContent = newContent.split('\n');
+            newContent[lineIndex] = before + ` ${date}` + after;
+            newContent = newContent.join('\n');
+            synced++;
+          }
+        } catch { /* 项目可能不是 git 仓库 */ }
+      }
+
+      if (synced > 0) {
+        fs.writeFileSync(memoryFile, newContent);
+      }
+      return { synced };
+    }
+  },
+  {
     id: 'brainstorm_projects',
     name: '为项目集思广益',
     canImprove: () => {
@@ -477,6 +541,17 @@ function selectOperation(history) {
       const latest = files.sort().pop();
       const age = Date.now() - fs.statSync(path.join(bmDir, latest)).mtimeMs;
       return age > 14 * 24 * 60 * 60 * 1000;
+    }
+    if (op.id === 'create_missing_readme') {
+      // 只在有项目缺 README 时才值得做
+      const projectsDir = path.join(WORKSPACE, '80-PROJECTS');
+      if (!fs.existsSync(projectsDir)) return false;
+      const dirs = fs.readdirSync(projectsDir).filter(f => {
+        const stat = fs.statSync(path.join(projectsDir, f));
+        return stat.isDirectory() && !f.startsWith('10-') && !f.startsWith('.');
+      });
+      const missing = dirs.filter(d => !fs.existsSync(path.join(projectsDir, d, 'README.md')));
+      return missing.length > 0;
     }
     // 检测类操作：必须真的有东西可检测才可选
     if (['workspace_auto_commit'].includes(op.id)) {
