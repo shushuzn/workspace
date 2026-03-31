@@ -15,6 +15,7 @@ export class ToolRouter {
     this.workingMemory = new WorkingMemory(workspace);
     this.gaps = []; // MetaCognizer gaps - injected via setGaps()
     this.ltmKnowledge = []; // LTM successful operations
+    this.candidatePool = null; // Learn layer candidate pool
   }
 
   setGaps(gaps) {
@@ -23,6 +24,10 @@ export class ToolRouter {
 
   setLTMKnowledge(knowledge) {
     this.ltmKnowledge = knowledge;
+  }
+
+  setCandidatePool(pool) {
+    this.candidatePool = pool;
   }
 
   getEpsilon() {
@@ -113,7 +118,10 @@ export class ToolRouter {
       // Novelty bonus for unexplored operations
       const noveltyBonus = this.isNewOp(op.id) ? 0.05 : 0;
 
-      const totalScore = baseScore + gapBonus + ltmBonus + noveltyBonus;
+      // CandidatePool bonus: pending high-priority candidates get boosted
+      const poolBonus = this.getPoolBonus(op);
+
+      const totalScore = baseScore + gapBonus + ltmBonus + noveltyBonus + poolBonus;
 
       if (totalScore > bestScore) {
         bestScore = totalScore;
@@ -174,6 +182,28 @@ export class ToolRouter {
     if (delta > 5) return 0.15;
     if (delta > 0) return 0.1;
     return 0;
+  }
+
+  getPoolBonus(op) {
+    if (!this.candidatePool) return 0;
+
+    const top = this.candidatePool.getTop(3);
+    if (top.length === 0) return 0;
+
+    // Match op to a pending candidate
+    const match = top.find(c =>
+      c.target === op.id ||
+      (c.name && op.name && (
+        op.name.includes(c.name.substring(0, 6)) ||
+        c.name.includes(op.name.substring(0, 6))
+      ))
+    );
+
+    if (!match) return 0;
+
+    // Bonus based on priority
+    const bonus = { high: 0.25, medium: 0.15, low: 0.05 };
+    return bonus[match.priority] || 0.1;
   }
 
   calculateSuccessRates() {

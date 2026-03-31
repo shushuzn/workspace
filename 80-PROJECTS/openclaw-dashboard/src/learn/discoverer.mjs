@@ -25,7 +25,7 @@ export class Discoverer {
     const discoveries = [];
 
     // Scan for patterns
-    discoveries.push(...await this.scanPatterns());
+    discoveries.push(...await this.scanForPatterns());
 
     // Analyze git history for patterns
     discoveries.push(...this.analyzeGitHistory());
@@ -39,7 +39,7 @@ export class Discoverer {
     return discoveries;
   }
 
-  async scanPatterns() {
+  async scanForPatterns() {
     const discoveries = [];
     const projectsDir = this.workspace;
 

@@ -13,6 +13,7 @@ import { LTM } from '../memory/ltm.mjs';
 import { getAllOperations } from '../operations/index.mjs';
 import { Safety } from '../governance/safety.mjs';
 import { CandidatePool } from '../learn/candidate-pool.mjs';
+import { Discoverer } from '../learn/discoverer.mjs';
 import { Curriculum } from '../learn/curriculum.mjs';
 import { Hypothesis } from '../evolution/hypothesis.mjs';
 import { Sandbox } from '../evolution/sandbox.mjs';
@@ -37,6 +38,12 @@ export class Agent {
     this.ltm = new LTM(workspace);
     this.hypothesis = new Hypothesis(workspace, this.stm, this.ltm);
     this.sandbox = new Sandbox(workspace);
+
+    // Wire candidate pool into tool router
+    this.toolRouter.setCandidatePool(this.candidatePool);
+
+    // Discoverer for finding new knowledge
+    this.discoverer = new Discoverer(workspace, this.ltm);
 
     // Meta-cognizer will be injected
     this.metaCognizer = null;
@@ -75,6 +82,12 @@ export class Agent {
     const ltmKnowledge = await this.queryLTM();
     if (ltmKnowledge && ltmKnowledge.successfulOps) {
       this.toolRouter.setLTMKnowledge(ltmKnowledge.successfulOps);
+    }
+
+    // Discover new knowledge and feed to candidate pool
+    const discoveries = await this.discoverer.discover();
+    if (discoveries.length > 0) {
+      this.learnFromDiscoveries(discoveries);
     }
 
     // Select operation via ToolRouter (now gap-informed)
@@ -202,6 +215,34 @@ export class Agent {
     const stats = this.candidatePool.getStats();
     if (stats.pending > 0) {
       console.log(`[Agent] 候选池: ${stats.pending} 个待学习项`);
+    }
+  }
+
+  /**
+   * Add discoveries from Discoverer to CandidatePool
+   */
+  learnFromDiscoveries(discoveries) {
+    let added = 0;
+    for (const d of discoveries) {
+      // Avoid duplicates by checking existing pool
+      const existing = this.candidatePool.getByType(d.type)
+        .find(c => c.target === d.target && c.status !== 'rejected');
+      if (existing) continue;
+
+      const priority = d.potential === 'high' ? 'high' : d.potential === 'medium' ? 'medium' : 'low';
+      this.candidatePool.add({
+        type: d.type,
+        source: 'discoverer',
+        target: d.target,
+        name: d.finding || d.finding,
+        priority,
+        reason: d.finding,
+        estimatedImpact: priority === 'high' ? 25 : priority === 'medium' ? 15 : 5
+      });
+      added++;
+    }
+    if (added > 0) {
+      console.log(`[Agent] 发现 ${added} 个新知识加入候选池`);
     }
   }
 
