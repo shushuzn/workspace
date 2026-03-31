@@ -20,6 +20,12 @@ const EPSILON_MAX = 0.5;   // 最高探索率 50%
 const EPSILON_INIT = 0.3;   // 初始探索率 30%
 const COOLDOWN = 5;         // 冷却期：最近 5 次执行过的操作不立即重选（原3，过短）
 
+// 大文件白名单：这些文件是正常的，不计入大文件检测
+const LARGE_FILES_WHITELIST = [
+  '80-PROJECTS/idle-empire/butler',
+  '80-PROJECTS/multi-agent-discuss/bin/agent.exe'
+];
+
 function getEpsilonMin(score) {
   return score > 90 ? 0.05 : EPSILON_MIN_BASE; // 健康度>90时降至5%
 }
@@ -440,7 +446,10 @@ ${target}/
               const size = fs.statSync(fullPath).size;
               const sizeMB = size / (1024 * 1024);
               if (sizeMB > limitMB) {
-                largeFiles.push({ path: fullPath.replace(WORKSPACE, ''), sizeMB: sizeMB.toFixed(2) });
+                const relPath = fullPath.replace(WORKSPACE, '').replace(/\\/g, '/');
+                // 跳过白名单中的文件
+                if (LARGE_FILES_WHITELIST.some(w => relPath.includes(w))) return;
+                largeFiles.push({ path: relPath, sizeMB: sizeMB.toFixed(2) });
               }
             }
           }
@@ -558,14 +567,18 @@ function calculateHealthScore() {
     else if (totalFiles < 60) score += 4;
     else if (totalFiles < 100) score += 2;
 
-    // Git 状态：未提交文件越多越不健康
+    // Git 状态：未提交文件越多越不健康（排除 loop-history.json）
     try {
       const out = execSync('git status --porcelain', {
         cwd: WORKSPACE,
         encoding: 'utf8',
         timeout: 5000
       }).trim();
-      const changed = out ? out.split('\n').filter(l => l.trim()).length : 0;
+      const changed = out ? out.split('\n').filter(l => {
+        const trimmed = l.trim();
+        // 排除 loop-history.json（loop 自己产生，不算工作区问题）
+        return trimmed && !trimmed.includes('loop-history.json');
+      }).length : 0;
       if (changed === 0) score += 10;
       else if (changed <= 3) score += 5;
       else if (changed <= 10) score += 2;
