@@ -25,7 +25,7 @@ const COOLDOWN_PRODUCTIVE = 3;  // productive ops: clean_*, create_missing_readm
 const COOLDOWN_DETECTION = 1;   // detection ops: check_*, count_*, brainstorm_projects, find_large_files
 
 // 全局检测 op 列表（exploit 模式排除检测 ops）
-const DETECTION_OPS = ['count_projects', 'count_sessions', 'check_memory_size',
+const DETECTION_OPS = ['check_memory_size',
   'check_project_readmes', 'brainstorm_projects', 'find_large_files'];
 const isDetectionOp = (id) => DETECTION_OPS.includes(id);
 
@@ -333,29 +333,21 @@ ${target}/
     }
   },
   {
-    id: 'clean_brainstorm',
-    name: '清理过期的 brainstorm 文件',
-    weight: 1.0,
-    action: async () => {
-      const brainstormDir = path.join(WORKSPACE, '.omc', 'brainstorm');
-      if (!fs.existsSync(brainstormDir)) return { total: 0, cleaned: 0 };
-
-      const files = fs.readdirSync(brainstormDir).filter(f => f.endsWith('.md'));
-      if (files.length <= 10) return { total: files.length, cleaned: 0, message: '文件不多，无需清理' };
-
-      // 删除超过 30 天的文件
-      const cutoff = Date.now() - (30 * 24 * 60 * 60 * 1000);
-      let cleaned = 0;
-      for (const f of files) {
-        const stat = fs.statSync(path.join(brainstormDir, f));
-        if (stat.mtimeMs < cutoff) {
-          try {
-            fs.unlinkSync(path.join(brainstormDir, f));
-            cleaned++;
-          } catch { /* ignore */ }
-        }
-      }
-      return { total: files.length, cleaned };
+    id: 'check_memory_size',
+    name: '检查记忆文件大小',
+    // 检测 op，无实际清理动作
+  },
+  {
+    id: 'brainstorm_projects',
+    name: '为项目集思广益',
+    canImprove: () => {
+      const bmDir = path.join(WORKSPACE, '.omc', 'brainstorm');
+      if (!fs.existsSync(bmDir)) return true;
+      const files = fs.readdirSync(bmDir).filter(f => f.endsWith('.md'));
+      if (files.length === 0) return true;
+      const latest = files.sort().pop();
+      const age = Date.now() - fs.statSync(path.join(bmDir, latest)).mtimeMs;
+      return age > 14 * 24 * 60 * 60 * 1000;
     }
   }
 ];
@@ -473,12 +465,6 @@ function selectOperation(history) {
   if (fs.existsSync(checkpointsDir)) totalFiles += fs.readdirSync(checkpointsDir).filter(f => f.endsWith('.json')).length;
 
   const canImprove = (op) => {
-    if (op.id === 'clean_brainstorm') {
-      const bmDir = path.join(WORKSPACE, '.omc', 'brainstorm');
-      if (!fs.existsSync(bmDir)) return false;
-      const bmFiles = fs.readdirSync(bmDir).filter(f => f.endsWith('.md')).length;
-      return bmFiles > 10; // 只在文件超过10个时有清理价值
-    }
     if (op.id === 'brainstorm_projects') {
       // 只在超过14天没有头脑风暴时才值得做（避免随机选中却无事可做）
       const bmDir = path.join(WORKSPACE, '.omc', 'brainstorm');
@@ -497,7 +483,7 @@ function selectOperation(history) {
         return changed > 0;
       } catch { return false; }
     }
-    if (['count_projects', 'count_sessions', 'check_memory_size'].includes(op.id)) return false;
+    if (['check_memory_size'].includes(op.id)) return false;
     if (['check_project_readmes', 'find_large_files'].includes(op.id)) return true;
     return true;
   };
