@@ -68,44 +68,23 @@ export class MetaCognizer {
     return gaps;
   }
 
-  findCapabilityGaps(successRates) {
-    const gaps = [];
-    const allOps = this.stm.history.records.length > 0
-      ? [...new Set(this.stm.history.records.map(r => r.opId))]
-      : [];
-
-    // If an operation type has never been tried, it's a capability gap
-    // This would be enhanced with LTM integration
-    for (const opId of allOps) {
-      const stats = successRates[opId];
-      if (stats && stats.total === 1 && stats.success === 0) {
-        gaps.push({
-          type: 'capability_gap',
-          target: opId,
-          name: stats.name,
-          priority: 'medium',
-          metric: '仅尝试过1次且失败',
-          suggestion: `需要学习/练习 ${stats.name} 操作`
-        });
-      }
-    }
-
-    return gaps;
-  }
+findCapabilityGaps(successRates) {    const gaps = [];    for (const [opId, stats] of Object.entries(successRates)) {      if (stats.total >= 3) {        const rate = stats.success / stats.total;        const recent = this.stm.getRecentRecords(5).filter(r => r.opId === opId);        const hasGenuineFailure = recent.some(r => !r.improved && !r.noOp && !r.blocked);        if (rate < 0.3 && hasGenuineFailure) {          gaps.push({            type: 'capability_gap',            target: opId,            name: stats.name,            priority: 'medium',            metric: `成功率仅 $((rate * 100).toFixed(0))% ($stats.success/$stats.total)`,            suggestion: `需要优化 ${stats.name} 的执行策略或前置条件`          });        }      }    }    return gaps;  }
 
   detectFailurePatterns(records) {
     const gaps = [];
     if (records.length < 5) return gaps;
 
-    // Check for consecutive failures
+    // Check for consecutive failures (must be genuine failures, not "workspace already clean" no-ops)
     let consecutiveFails = 0;
     let failOps = [];
 
     for (const record of records.slice().reverse()) {
-      if (!record.improved) {
+      // noOp = workspace already clean, NOT a failure
+      if (!record.improved && !record.noOp) {
         consecutiveFails++;
         failOps.push(record.opName);
       } else {
+        // noOp or improved = break the fail streak
         break;
       }
     }
@@ -143,7 +122,10 @@ export class MetaCognizer {
         const hasImprovement = recent.some(r => r.delta > 0);
         const avgDelta = recent.reduce((sum, r) => sum + r.delta, 0) / recent.length;
 
-        if (!hasImprovement && avgDelta <= 0) {
+        // Only flag as stale if genuinely underperforming, not at ceiling
+        const recentScores = recent.map(r => r.afterScore);
+        const atCeiling = recentScores.every(s => s >= 100);
+        if (!hasImprovement && avgDelta <= 0 && !atCeiling) {
           gaps.push({
             type: 'stale_knowledge',
             target: opId,
