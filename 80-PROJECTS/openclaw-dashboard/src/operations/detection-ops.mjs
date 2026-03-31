@@ -200,10 +200,14 @@ export class CheckGitRemotes extends DetectionOperation {
       const projectPath = path.join(projectsDir, d);
       const gitFile = path.join(projectPath, '.git');
 
-      // Skip submodules
+      // Skip submodules (they have .git as a file pointing to actual gitdir)
       if (fs.existsSync(gitFile)) {
-        const gitContent = fs.readFileSync(gitFile, 'utf8');
-        if (gitContent.includes('gitdir:')) continue;
+        const stat = fs.statSync(gitFile);
+        if (stat.isFile()) {
+          const gitContent = fs.readFileSync(gitFile, 'utf8');
+          if (gitContent.includes('gitdir:')) continue;
+        }
+        // else: .git is a directory = normal repo, continue
       }
 
       try {
