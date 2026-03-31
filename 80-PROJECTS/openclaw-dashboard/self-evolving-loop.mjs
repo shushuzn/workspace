@@ -24,11 +24,13 @@ const COOLDOWN = 5;         // 冷却期：最近 5 次执行过的操作不立�
 const COOLDOWN_PRODUCTIVE = 3;  // productive ops: clean_*, create_missing_readme, workspace_auto_commit, gen_dashboard_data
 const COOLDOWN_DETECTION = 1;   // detection ops: check_*, count_*, brainstorm_projects, find_large_files
 
+// 全局检测 op 列表（exploit 模式排除检测 ops）
+const DETECTION_OPS = ['count_projects', 'count_sessions', 'check_memory_size',
+  'check_project_readmes', 'brainstorm_projects', 'find_large_files'];
+const isDetectionOp = (id) => DETECTION_OPS.includes(id);
+
 function getCooldown(opId) {
-  const detectionOps = ['count_projects', 'count_sessions', 'check_memory_size',
-    'check_project_readmes',
-    'brainstorm_projects', 'find_large_files'];
-  return detectionOps.includes(opId) ? COOLDOWN_DETECTION : COOLDOWN_PRODUCTIVE;
+  return DETECTION_OPS.includes(opId) ? COOLDOWN_DETECTION : COOLDOWN_PRODUCTIVE;
 }
 
 // 大文件白名单：这些文件是正常的，不计入大文件检测
@@ -630,6 +632,7 @@ function selectOperation(history) {
   let bestRate = -1;
 
   for (const op of OPERATIONS) {
+    if (isDetectionOp(op.id)) continue; // 检测 ops 不参与 exploit 选择
     const cd = getCooldown(op.id);
     const recent = history.records.slice(-cd).map(r => r.opId);
     if (recent.includes(op.id)) continue;
@@ -713,17 +716,11 @@ async function runIteration() {
   const afterScore = calculateHealthScore();
   const delta = afterScore - beforeScore;
 
-  // 改善判定：分数增加 OR 操作有实质产出
-  const isDetectionOnly = [
-    'count_projects', 'count_sessions', 'check_memory_size',
-    'check_project_readmes',
-    'brainstorm_projects', 'find_large_files'
-  ].includes(op.id);
   let improved = delta > 0;
   let noOp = false; // 无事可做，不算失败也不算成功
 
   if (!improved && result) {
-    if (isDetectionOnly) {
+    if (isDetectionOp(op.id)) {
       // 检测类：发现问题（missing/changed/ideas/found > 0）才算成功
       // outdated 不算：松散版本 ^/~ 通常是故意的，检测到不代表有问题
       // checked=0 也不算：说明没有可检测的项目
