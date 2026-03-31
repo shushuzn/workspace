@@ -130,8 +130,8 @@ export class Agent {
     this.toolRouter.updateEpsilon(improved);
     this.stm.save();
 
-    // Distill successful experience to LTM
-    if (improved || result.success) {
+    // Distill successful experience to LTM (only genuine improvements)
+    if (improved) {
       await this.distillToLTM(op, result, record);
     }
 
@@ -142,25 +142,29 @@ export class Agent {
   }
 
   evaluateResult(op, result, delta, beforeScore) {
-    // Delta must be positive AND absolute health must not be critically low
+    // Delta must be positive AND health must be above minimum threshold
     let improved = delta > 0 && beforeScore >= 50;
     let noOp = false;
 
     if (!improved && result) {
       if (op.type === 'detection') {
+        // Detection ops improve only if they find actual issues/changes
         const found = (result.missing > 0) || (result.changed > 0) ||
-                      (result.ideas > 0) || (result.found > 0) ||
-                      (result.committed > 0);
-        if (!found) noOp = true;
-        else improved = beforeScore >= 50; // Detection only improves if health OK
+                      (result.found > 0) || (result.checked > 0);
+        if (!found) {
+          noOp = true; // 空检测，不计入改善
+        } else {
+          // 有实质发现，且健康度不太低
+          improved = delta > 0 && beforeScore >= 50;
+        }
       } else {
-        if ((result.created === 0 && result.message) ||
-            (result.cleaned === 0 && result.total > 0)) {
+        // Productive ops need concrete产出
+        const hasOutput = (result.created > 0) || (result.cleaned > 0) ||
+                          (result.deleted > 0) || (result.committed > 0);
+        if (!hasOutput) {
           noOp = true;
         } else {
-          improved = (result.created > 0) || (result.cleaned > 0) ||
-                     (result.deleted > 0) || (result.found > 0) ||
-                     (result.success === true) || (result.committed > 0);
+          improved = delta > 0 && beforeScore >= 50;
         }
       }
     }
