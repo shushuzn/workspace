@@ -20,6 +20,17 @@ const EPSILON_MAX = 0.5;   // 最高探索率 50%
 const EPSILON_INIT = 0.3;   // 初始探索率 30%
 const COOLDOWN = 5;         // 冷却期：最近 5 次执行过的操作不立即重选（原3，过短）
 
+// 差异化冷却期
+const COOLDOWN_PRODUCTIVE = 3;  // productive ops: clean_*, create_missing_readme, workspace_auto_commit, gen_dashboard_data
+const COOLDOWN_DETECTION = 1;   // detection ops: check_*, count_*, brainstorm_projects, find_large_files
+
+function getCooldown(opId) {
+  const detectionOps = ['count_projects', 'count_sessions', 'check_memory_size',
+    'git_commit_suggest', 'check_project_readmes',
+    'brainstorm_projects', 'find_large_files'];
+  return detectionOps.includes(opId) ? COOLDOWN_DETECTION : COOLDOWN_PRODUCTIVE;
+}
+
 // 大文件白名单：这些文件是正常的，不计入大文件检测
 const LARGE_FILES_WHITELIST = [
   '80-PROJECTS/idle-empire/butler',
@@ -56,21 +67,46 @@ const OPERATIONS = [
     }
   },
   {
-    id: 'check_git_status',
-    name: '检查 workspace git 状态',
+    id: 'workspace_auto_commit',
+    name: '检查并自动提交 workspace git 变更',
     weight: 1.0,
     action: async () => {
       const { execSync } = await import('child_process');
+      // 检查是否有变更（排除 loop-history.json 和 dashboard-data.json）
       try {
-        const out = execSync('git status --porcelain', {
+        const status = execSync('git status --porcelain', {
           cwd: WORKSPACE,
           encoding: 'utf8',
           timeout: 5000
         }).trim();
-        const lines = out.split('\n').filter(l => l.trim());
-        return { changed: lines.length, files: lines.slice(0, 5) };
-      } catch {
-        return { changed: 0 };
+
+        if (!status) return { committed: 0, message: '无变更' };
+
+        const lines = status.split('\n').filter(l => {
+          const trimmed = l.trim();
+          return trimmed && !trimmed.includes('loop-history.json') && !trimmed.includes('dashboard-data.json');
+        });
+
+        if (lines.length === 0) return { committed: 0, message: '无变更（仅 loop 文件）' };
+
+        const changed = lines.length;
+        const hasDeleted = lines.some(l => l.startsWith('D '));
+        const hasNew = lines.some(l => l.startsWith('?? '));
+        const hasModified = lines.some(l => l.startsWith(' M') || l.startsWith('M '));
+        const hasAdded = lines.some(l => l.startsWith('A '));
+
+        let msg = '';
+        if (hasNew && hasAdded) msg = `feat: 新增 ${lines.filter(l => l.startsWith('?? ') || l.startsWith('A ')).length} 个文件`;
+        else if (hasModified) msg = `chore: 更新 ${lines.filter(l => l.startsWith(' M') || l.startsWith('M ')).length} 个文件`;
+        else if (hasDeleted) msg = `chore: 删除 ${lines.filter(l => l.startsWith('D ')).length} 个文件`;
+        else msg = `chore: 同步 ${changed} 个文件`;
+
+        execSync('git add -A', { cwd: WORKSPACE, encoding: 'utf8', timeout: 5000 });
+        execSync(`git commit -m "${msg}"`, { cwd: WORKSPACE, encoding: 'utf8', timeout: 5000 });
+
+        return { committed: changed, message: msg };
+      } catch (e) {
+        return { committed: 0, message: `提交失败: ${e.message}` };
       }
     }
   },
@@ -207,53 +243,6 @@ const OPERATIONS = [
         }
       }
       return { total: files.length, cleaned };
-    }
-  },
-  {
-    id: 'gitAutoCommit',
-    name: '自动提交所有 git 变更',
-    weight: 1.0,
-    action: async () => {
-      const { execSync } = await import('child_process');
-      try {
-        // 检查是否有变更（排除 loop-history.json 和 dashboard-data.json）
-        const status = execSync('git status --porcelain', {
-          cwd: WORKSPACE,
-          encoding: 'utf8',
-          timeout: 5000
-        }).trim();
-
-        if (!status) return { committed: 0, message: '无变更' };
-
-        const lines = status.split('\n').filter(l => {
-          const trimmed = l.trim();
-          return trimmed && !trimmed.includes('loop-history.json') && !trimmed.includes('dashboard-data.json');
-        });
-
-        if (lines.length === 0) return { committed: 0, message: '无变更' };
-        const changed = lines.length;
-
-        // 生成提交信息：分析变更类型
-        const hasDeleted = lines.some(l => l.startsWith('D '));
-        const hasNew = lines.some(l => l.startsWith('?? '));
-        const hasModified = lines.some(l => l.startsWith(' M') || l.startsWith('M '));
-        const hasAdded = lines.some(l => l.startsWith('A '));
-
-        let msg = '';
-        if (hasNew && hasAdded) msg = `feat: 新增 ${lines.filter(l => l.startsWith('?? ') || l.startsWith('A ')).length} 个文件`;
-        else if (hasModified) msg = `chore: 更新 ${lines.filter(l => l.startsWith(' M') || l.startsWith('M ')).length} 个文件`;
-        else if (hasDeleted) msg = `chore: 删除 ${lines.filter(l => l.startsWith('D ')).length} 个文件`;
-        else msg = `chore: 同步 ${changed} 个文件`;
-
-        // 执行 add 和 commit
-        execSync('git add -A', { cwd: WORKSPACE, encoding: 'utf8', timeout: 5000 });
-        execSync(`git commit -m "${msg}"`, { cwd: WORKSPACE, encoding: 'utf8', timeout: 5000 });
-
-        return { committed: changed, message: msg };
-      } catch (e) {
-        // 可能没有配置 git 用户，或其他错误
-        return { committed: 0, message: `提交失败: ${e.message}` };
-      }
     }
   },
   {
@@ -466,39 +455,6 @@ ${target}/
     }
   },
   {
-    id: 'check_dependencies',
-    name: '检查依赖更新',
-    weight: 1.0,
-    action: async () => {
-      const projectsDir = path.join(WORKSPACE, '80-PROJECTS');
-      if (!fs.existsSync(projectsDir)) return { checked: 0, outdated: 0 };
-
-      const dirs = fs.readdirSync(projectsDir).filter(f => {
-        const stat = fs.statSync(path.join(projectsDir, f));
-        return stat.isDirectory() && !f.startsWith('10-') && !f.startsWith('.');
-      });
-
-      let outdated = 0;
-      let checked = 0;
-
-      for (const d of dirs.slice(0, 5)) {
-        const packagePath = path.join(projectsDir, d, 'package.json');
-        if (!fs.existsSync(packagePath)) continue;
-
-        try {
-          const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
-          if (pkg.dependencies && Object.keys(pkg.dependencies).length > 0) {
-            checked++;
-            const hasLoose = Object.values(pkg.dependencies).some(v => v.startsWith('^') || v.startsWith('~'));
-            if (hasLoose) outdated++;
-          }
-        } catch { /* ignore */ }
-      }
-
-      return { checked, outdated, message: outdated > 0 ? `${outdated} 个项目有松散版本依赖` : '依赖版本控制良好' };
-    }
-  },
-  {
     id: 'clean_brainstorm',
     name: '清理过期的 brainstorm 文件',
     weight: 1.0,
@@ -631,8 +587,6 @@ function selectOperation(history) {
   const { epsilon } = history;
 
   // 冷却期：最近 N 次执行过的操作不立即重选
-  const recentOps = history.records.slice(-COOLDOWN).map(r => r.opId);
-
   // 检查当前是否还有改善空间
   const sessionsDir = path.join(WORKSPACE, '.omc', 'sessions');
   const checkpointsDir = path.join(WORKSPACE, '.omc', 'state', 'checkpoints');
@@ -641,8 +595,6 @@ function selectOperation(history) {
   if (fs.existsSync(checkpointsDir)) totalFiles += fs.readdirSync(checkpointsDir).filter(f => f.endsWith('.json')).length;
 
   const canImprove = (op) => {
-    // 冷却期内的操作不可选
-    if (recentOps.includes(op.id)) return false;
     if (op.id === 'clean_old_sessions') return totalFiles >= 5;
     if (op.id === 'clean_checkpoints') {
       const cpDir = path.join(WORKSPACE, '.omc', 'state', 'checkpoints');
@@ -658,7 +610,7 @@ function selectOperation(history) {
     }
     if (op.id === 'brainstorm_projects') return true;
     // 检测类操作：必须真的有东西可检测才可选
-    if (['check_git_status', 'git_commit_suggest'].includes(op.id)) {
+    if (['workspace_auto_commit', 'git_commit_suggest'].includes(op.id)) {
       try {
         const out = execSync('git status --porcelain', { cwd: WORKSPACE, encoding: 'utf8', timeout: 5000 }).trim();
         const changed = out ? out.split('\n').filter(l => l.trim()).length : 0;
@@ -666,12 +618,16 @@ function selectOperation(history) {
       } catch { return false; }
     }
     if (['count_projects', 'count_sessions', 'check_memory_size'].includes(op.id)) return false;
-    if (['check_project_readmes', 'find_large_files', 'check_dependencies'].includes(op.id)) return true;
+    if (['check_project_readmes', 'find_large_files'].includes(op.id)) return true;
     return true;
   };
 
   if (Math.random() < epsilon) {
-    const candidates = OPERATIONS.filter(op => !recentOps.includes(op.id));
+    const candidates = OPERATIONS.filter(op => {
+      const cd = getCooldown(op.id);
+      const recent = history.records.slice(-cd).map(r => r.opId);
+      return !recent.includes(op.id);
+    });
     if (candidates.length === 0) candidates.push(OPERATIONS[Math.floor(Math.random() * OPERATIONS.length)]);
     // 探索模式：优先选从未执行过的新操作，确保所有操作都有被尝试的机会
     const newCandidates = candidates.filter(op => isNewOp(history, op.id));
@@ -697,7 +653,9 @@ function selectOperation(history) {
   let bestRate = -1;
 
   for (const op of OPERATIONS) {
-    if (recentOps.includes(op.id)) continue;
+    const cd = getCooldown(op.id);
+    const recent = history.records.slice(-cd).map(r => r.opId);
+    if (recent.includes(op.id)) continue;
     const rate = successRates[op.id];
     // 新操作给予 +0.1 探索加成，确保从未执行过的操作能被优先尝试
     const noveltyBonus = isNewOp(history, op.id) ? 0.1 : 0;
@@ -713,8 +671,16 @@ function selectOperation(history) {
 
   if (!bestOp || bestRate <= 0) {
     // 无历史/全失败：优先选当前有实际工作可做的操作
-    const usefulCandidates = OPERATIONS.filter(op => !recentOps.includes(op.id) && canImprove(op));
-    const candidates = usefulCandidates.length > 0 ? usefulCandidates : OPERATIONS.filter(op => !recentOps.includes(op.id));
+    const usefulCandidates = OPERATIONS.filter(op => {
+      const cd = getCooldown(op.id);
+      const recent = history.records.slice(-cd).map(r => r.opId);
+      return !recent.includes(op.id) && canImprove(op);
+    });
+    const candidates = usefulCandidates.length > 0 ? usefulCandidates : OPERATIONS.filter(op => {
+      const cd = getCooldown(op.id);
+      const recent = history.records.slice(-cd).map(r => r.opId);
+      return !recent.includes(op.id);
+    });
     if (candidates.length === 0) candidates.push(OPERATIONS[Math.floor(Math.random() * OPERATIONS.length)]);
     const op = candidates[Math.floor(Math.random() * candidates.length)];
     console.log(`[Select] 无历史/全失败，强制探索: ${op.name}`);
@@ -722,14 +688,22 @@ function selectOperation(history) {
   }
 
   if (!canImprove(bestOp)) {
-    const improvable = OPERATIONS.filter(op => !recentOps.includes(op.id) && successRates[op.id] && (successRates[op.id].success / successRates[op.id].total) > 0 && canImprove(op));
+    const improvable = OPERATIONS.filter(op => {
+      const cd = getCooldown(op.id);
+      const recent = history.records.slice(-cd).map(r => r.opId);
+      return !recent.includes(op.id) && successRates[op.id] && (successRates[op.id].success / successRates[op.id].total) > 0 && canImprove(op);
+    });
     if (improvable.length > 0) {
       improvable.sort((a, b) => (successRates[b.id].success / successRates[b.id].total) - (successRates[a.id].success / successRates[a.id].total));
       const nextBest = improvable[0];
       console.log(`[Select] 利用模式: ${nextBest.name} (成功率: ${(successRates[nextBest.id].success / successRates[nextBest.id].total * 100).toFixed(0)}%) [最佳操作无可改善空间，降级]`);
       return { op: nextBest, mode: 'exploit' };
     }
-    const candidates = OPERATIONS.filter(op => !recentOps.includes(op.id));
+    const candidates = OPERATIONS.filter(op => {
+      const cd = getCooldown(op.id);
+      const recent = history.records.slice(-cd).map(r => r.opId);
+      return !recent.includes(op.id);
+    });
     if (candidates.length === 0) candidates.push(OPERATIONS[Math.floor(Math.random() * OPERATIONS.length)]);
     const op = candidates[Math.floor(Math.random() * candidates.length)];
     console.log(`[Select] 全部操作无可改善，强制探索: ${op.name}`);
@@ -765,7 +739,7 @@ async function runIteration() {
   // 改善判定：分数增加 OR 操作有实质产出
   const isDetectionOnly = [
     'count_projects', 'count_sessions', 'check_memory_size',
-    'check_git_status', 'git_commit_suggest', 'check_project_readmes', 'check_dependencies',
+    'git_commit_suggest', 'check_project_readmes',
     'brainstorm_projects', 'find_large_files'
   ].includes(op.id);
   let improved = delta > 0;
