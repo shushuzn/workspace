@@ -111,7 +111,7 @@ export class CreateMissingReadme extends ProductiveOperation {
   }
 
   canImprove() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return false;
 
     const dirs = fs.readdirSync(projectsDir).filter(f => {
@@ -125,7 +125,7 @@ export class CreateMissingReadme extends ProductiveOperation {
   }
 
   async execute() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return { created: 0 };
 
     const dirs = fs.readdirSync(projectsDir).filter(f => {
@@ -309,7 +309,7 @@ export class SyncProjectMarkers extends ProductiveOperation {
     if (!fs.existsSync(memoryFile)) return { synced: 0 };
 
     const content = fs.readFileSync(memoryFile, 'utf8');
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return { synced: 0 };
 
     const dirMatch = content.match(/\|\s*([^|]+?)\s*\|\s*([^|]+?)\s*\|/g);

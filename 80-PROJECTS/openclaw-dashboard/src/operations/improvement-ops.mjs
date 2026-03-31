@@ -65,11 +65,11 @@ export class FixPackageScripts extends ProductiveOperation {
   }
 
   canImprove() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return false;
     try {
       const dirs = fs.readdirSync(projectsDir).filter(f => {
-        try { return fs.statSync(path.join(projectsDir, f)).isDirectory(); }
+        try { return fs.statSync(path.join(projectsDir, f)).isDirectory() && !f.startsWith('.'); }
         catch { return false; }
       });
       for (const d of dirs) {
@@ -85,7 +85,7 @@ export class FixPackageScripts extends ProductiveOperation {
   }
 
   async execute() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return { fixed: 0 };
 
     const dirs = fs.readdirSync(projectsDir).filter(f => {
@@ -123,7 +123,7 @@ export class UpdateReadmeDocs extends ProductiveOperation {
   }
 
   canImprove() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return false;
     try {
       const dirs = fs.readdirSync(projectsDir).filter(f => {
@@ -144,7 +144,7 @@ export class UpdateReadmeDocs extends ProductiveOperation {
   }
 
   async execute() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return { updated: 0 };
 
     const dirs = fs.readdirSync(projectsDir).filter(f => {

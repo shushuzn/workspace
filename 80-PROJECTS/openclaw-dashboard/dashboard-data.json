@@ -1,5 +1,5 @@
 {
-  "generated": "2026-03-31T04:10:38.141Z",
+  "generated": "2026-03-31T06:18:21.211Z",
   "projects": [
     {
       "name": "50-ton-hackathon-2026",
@@ -7,7 +7,7 @@
       "description": "项目描述暂无",
       "lastActive": null,
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -19,7 +19,7 @@
       "description": "Agent-to-Agent Communication Router - MCP Server",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [
         "@langchain/core",
@@ -45,7 +45,7 @@
       "description": "AI Agent 养成竞技游戏",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [
@@ -67,7 +67,7 @@
       "description": "Multi-Agent Orchestration Platform based on MCP",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [
         "@modelcontextprotocol/sdk"
@@ -92,7 +92,7 @@
       "description": "Agent 记忆网格系统。",
       "lastActive": null,
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -104,7 +104,7 @@
       "description": "**AI-Driven Business Process Management** — 智能业务流程管理系统",
       "lastActive": "2026-03-25",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -116,7 +116,7 @@
       "description": "Multi-agent roundtable discussion CLI tool with multiple AI personas",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [
         "dotenv",
@@ -133,7 +133,7 @@
       "description": "AI 圆桌讨论 MCP Server",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [
         "@modelcontextprotocol/sdk",
@@ -156,7 +156,7 @@
       "description": "Code Intelligence Agent - Semgrep + Tree-sitter analysis",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [
         "@modelcontextprotocol/sdk",
@@ -177,7 +177,7 @@
       "description": "Local intelligence engine - 27 OSINT sources, live dashboard, public demo at crucix.live, auto-refresh, optional LLM layer.",
       "lastActive": null,
       "status": "modified",
-      "gitStatus": "M lib/i18n.mjs\n?? .omc/\n?? locales/zh.json\n?? maxAge)\n?? n.anom)\n?? \"\\346\\225\\231\\347\\250\\213.txt\"",
+      "gitStatus": "M lib/i18n.mjs\n?? .omc/\n?? locales/zh.json\n?? \"\\346\\225\\231\\347\\250\\213.txt\"",
       "branch": "master",
       "dependencies": [
         "express"
@@ -220,7 +220,7 @@
       "description": "项目描述暂无",
       "lastActive": "2026-03-31",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/src/core/agent.mjs\n M 80-PROJECTS/openclaw-dashboard/src/core/working-memory.mjs\n M 80-PROJECTS/openclaw-dashboard/src/learn/discoverer.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/improvement-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n?? 80-PROJECTS/openclaw-dashboard/nul`",
       "branch": "main",
       "dependencies": [
         "uuid",
@@ -280,16 +280,8 @@
     "health": 89
   },
   "stats": {
-    "totalProjects": 36,
+    "totalProjects": 33,
     "submodules": 4,
     "gitHooks": 4
-  },
-  "issues": [
-    {
-      "type": "orphan_checkpoint",
-      "path": "D:\\OpenClaw\\workspace\\80-PROJECTS\\.omc\\state\\checkpoints\\checkpoint-2026-03-31T02-54-25-754Z.json",
-      "found_at": "2026-03-31T05:05:54.338Z",
-      "resolved": true
-    }
-  ]
+  }
 }

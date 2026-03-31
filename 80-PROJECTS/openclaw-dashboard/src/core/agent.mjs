@@ -148,19 +148,25 @@ export class Agent {
 
     if (!improved && result) {
       if (op.type === 'detection') {
-        // Detection ops improve only if they find actual issues/changes
+        // Detection ops: check for any meaningful metric output
+        // Issue-finding ops need counts; informational ops need numeric metrics
         const found = (result.missing > 0) || (result.changed > 0) ||
-                      (result.found > 0) || (result.checked > 0);
+                      (result.found > 0) || (result.checked > 0) ||
+                      (result.sizeKB > 0) || (result.lines > 0) ||
+                      (result.total > 0) || (result.fixed > 0) ||
+                      (result.updated > 0) || (result.created > 0) ||
+                      (result.cleaned > 0);
         if (!found) {
-          noOp = true; // 空检测，不计入改善
+          noOp = true;
         } else {
-          // 有实质发现，且健康度不太低
           improved = delta > 0 && beforeScore >= 50;
         }
       } else {
         // Productive ops need concrete产出
         const hasOutput = (result.created > 0) || (result.cleaned > 0) ||
-                          (result.deleted > 0) || (result.committed > 0);
+                          (result.deleted > 0) || (result.committed > 0) ||
+                          (result.fixed > 0) || (result.updated > 0) ||
+                          (result.synced > 0);
         if (!hasOutput) {
           noOp = true;
         } else {

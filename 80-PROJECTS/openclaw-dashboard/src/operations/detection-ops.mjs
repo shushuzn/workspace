@@ -16,7 +16,7 @@ export class CheckProjectReadmes extends DetectionOperation {
   }
 
   async execute() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return { total: 0, missing: 0 };
 
     const dirs = fs.readdirSync(projectsDir).filter(f => {
@@ -77,7 +77,7 @@ export class BrainstormProjects extends DetectionOperation {
   }
 
   async execute() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return { ideas: 0 };
 
     const dirs = fs.readdirSync(projectsDir).filter(f => {
@@ -142,7 +142,7 @@ export class FindLargeFiles extends DetectionOperation {
   }
 
   async execute() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return { found: 0 };
 
     const largeFiles = [];
@@ -184,7 +184,7 @@ export class CheckGitRemotes extends DetectionOperation {
   }
 
   async execute() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return { checked: 0, issues: [] };
 
     const dirs = fs.readdirSync(projectsDir).filter(f => {

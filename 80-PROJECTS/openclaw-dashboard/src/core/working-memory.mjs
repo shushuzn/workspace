@@ -27,7 +27,7 @@ export class WorkingMemory {
       console.error('[WorkingMemory] Score calculation error:', e.message);
     }
 
-    return Math.max(0, score);
+    return Math.min(100, Math.max(0, score));
   }
 
   /**
@@ -46,7 +46,7 @@ export class WorkingMemory {
   }
 
   projectScore() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return 0;
 
     const dirs = fs.readdirSync(projectsDir).filter(f => {
@@ -60,7 +60,7 @@ export class WorkingMemory {
   }
 
   readmeScore() {
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
     if (!fs.existsSync(projectsDir)) return 0;
 
     const dirs = fs.readdirSync(projectsDir).filter(f => {

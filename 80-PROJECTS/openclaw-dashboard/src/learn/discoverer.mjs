@@ -41,7 +41,7 @@ export class Discoverer {
 
   async scanPatterns() {
     const discoveries = [];
-    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectsDir = this.workspace;
 
     if (!fs.existsSync(projectsDir)) return discoveries;
 
