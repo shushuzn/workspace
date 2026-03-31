@@ -1,13 +1,14 @@
 # agent-memory-mesh
 
-Agent 记忆网格系统。
+项目描述暂无
 
-## 技术栈
+## 项目信息
 
-- Go
+- **路径**: D:\OpenClaw\workspace\80-PROJECTS\agent-memory-mesh
 
-## 开始使用
+## 快速开始
 
 ```bash
-# 待补充
+npm install
+npm run dev
 ```

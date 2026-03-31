@@ -8,9 +8,10 @@ import path from 'path';
 import { execSync } from 'child_process';
 
 export class Discoverer {
-  constructor(workspace, ltm) {
+  constructor(workspace, ltm, skillLibrary = null) {
     this.workspace = workspace;
     this.ltm = ltm;
+    this.skillLibrary = skillLibrary;
     this.scanPatterns = [
       { pattern: '*.md', type: 'documentation' },
       { pattern: '*.json', type: 'config' },
@@ -181,23 +182,40 @@ export class Discoverer {
   identifySkillGaps() {
     const discoveries = [];
 
-    // Check if certain operations types are missing
-    const requiredCapabilities = [
-      'code_generation',
-      'documentation',
-      'testing',
-      'security_analysis'
+    // Consult skill library for underrepresented categories
+    const skills = this.skillLibrary ? this.skillLibrary.getAll() : [];
+    const skillCategories = new Set(skills.map(s => s.category));
+
+    // Check operations directory for available operation types
+    const availableOps = [
+      { id: 'detection', name: '检测操作', category: 'detection' },
+      { id: 'productive', name: '生产操作', category: 'productive' }
     ];
 
-    // This would be enhanced with actual skill library integration
-    for (const capability of requiredCapabilities) {
-      discoveries.push({
-        type: 'capability_gap',
-        category: 'skill',
-        target: capability,
-        finding: `缺少 ${capability} 技能`,
-        potential: 'high'
-      });
+    for (const op of availableOps) {
+      if (!skillCategories.has(op.category)) {
+        discoveries.push({
+          type: 'capability_gap',
+          category: 'skill',
+          target: op.id,
+          finding: `技能库缺少 ${op.name} 类别的深度技能`,
+          potential: 'medium'
+        });
+      }
+    }
+
+    // Check for operations never executed (from history scan)
+    if (this.ltm && this.ltm.getStats) {
+      const stats = this.ltm.getStats();
+      if (stats.totalEntries === 0) {
+        discoveries.push({
+          type: 'capability_gap',
+          category: 'learning',
+          target: 'ltm_warmup',
+          finding: 'LTM 知识库为空，需要积累操作经验',
+          potential: 'high'
+        });
+      }
     }
 
     return discoveries;

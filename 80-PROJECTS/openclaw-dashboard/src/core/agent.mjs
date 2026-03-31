@@ -45,7 +45,7 @@ export class Agent {
     this.toolRouter.setCandidatePool(this.candidatePool);
 
     // Discoverer for finding new knowledge
-    this.discoverer = new Discoverer(workspace, this.ltm);
+    this.discoverer = new Discoverer(workspace, this.ltm, this.skillLibrary);
 
     // Learn components - SkillLibrary + Distiller pipeline
     this.skillLibrary = new SkillLibrary(workspace);
