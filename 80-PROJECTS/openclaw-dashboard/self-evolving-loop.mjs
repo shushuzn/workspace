@@ -455,6 +455,73 @@ ${target}/
     }
   },
   {
+    id: 'check_git_remotes',
+    name: '检查 git remote 状态',
+    weight: 1.0,
+    action: async () => {
+      const { execSync } = await import('child_process');
+      const projectsDir = path.join(WORKSPACE, '80-PROJECTS');
+      if (!fs.existsSync(projectsDir)) return { checked: 0, issues: [] };
+
+      const dirs = fs.readdirSync(projectsDir).filter(f => {
+        try { return fs.statSync(path.join(projectsDir, f)).isDirectory() && !f.startsWith('10-') && !f.startsWith('.'); }
+        catch { return false; }
+      });
+
+      const issues = [];
+      for (const d of dirs) {
+        const projectPath = path.join(projectsDir, d);
+
+        // BUG FIX 3: 跳过 submodule（.git 是文件指向 gitdir:）
+        const gitFile = path.join(projectPath, '.git');
+        if (fs.existsSync(gitFile)) {
+          const gitContent = fs.readFileSync(gitFile, 'utf8');
+          if (gitContent.includes('gitdir:')) continue;
+        }
+
+        try {
+          // 获取 remote URL
+          const remote = execSync('git remote get-url origin', { cwd: projectPath, encoding: 'utf8', timeout: 3000 }).trim();
+          // BUG FIX 1: 原来逻辑反了 — GitHub URL 是有效的，只检查空 remote
+          if (!remote || remote === '') {
+            issues.push({ project: d, type: 'no_remote', detail: '无有效 remote' });
+            continue;
+          }
+          // BUG FIX 2: 移除 git fetch --dry-run 网络调用（慢且无用）
+          // 检查是否有 stale local branches（remote 已删除但本地还有）
+          try {
+            const branches = execSync('git branch -vv', { cwd: projectPath, encoding: 'utf8', timeout: 3000 });
+            const stale = branches.split('\n').filter(l => l.includes(': gone]'));
+            for (const s of stale) {
+              const match = s.match(/^\s*(\S+)/);
+              if (match) {
+                issues.push({ project: d, type: 'stale_branch', detail: `${d}/${match[1]}` });
+              }
+            }
+          } catch { /* ignore */ }
+        } catch { /* 不是 git 仓库 */ }
+      }
+
+      if (issues.length === 0) return { checked: dirs.length, issues: [] };
+
+      // 写入 dashboard-data.json
+      const dataFile = path.join(WORKSPACE, 'dashboard-data.json');
+      let data = {};
+      if (fs.existsSync(dataFile)) {
+        try { data = JSON.parse(fs.readFileSync(dataFile, 'utf8')); } catch { /* ignore */ }
+      }
+      if (!data.issues) data.issues = [];
+      for (const issue of issues) {
+        const key = `${issue.type}:${issue.project}:${issue.detail}`;
+        if (!data.issues.some(i => i.key === key)) {
+          data.issues.push({ ...issue, key, found_at: new Date().toISOString(), resolved: false });
+        }
+      }
+      fs.writeFileSync(dataFile, JSON.stringify(data, null, 2));
+      return { checked: dirs.length, issues };
+    }
+  },
+  {
     id: 'check_memory_size',
     name: '检查记忆文件大小',
     // 检测 op，无实际清理动作
