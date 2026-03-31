@@ -1,18 +1,17 @@
 /**
- * Entry point wrapper - redirects to modular architecture
+ * Entry point - redirects to modular architecture
  * Previous monolithic self-evolving-loop.mjs
  */
-export * from './src/index.mjs';
-import { Agent } from './src/core/agent.mjs';
+import { spawn } from 'child_process';
 import path from 'path';
+import { fileURLToPath } from 'url';
 
-const workspace = process.cwd();
-const agent = new Agent(workspace);
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const entry = path.join(__dirname, 'src', 'index.mjs');
 
-agent.runIteration().then(record => {
-  console.log('\n[完成] 迭代结果:', JSON.stringify(record, null, 2));
-  process.exit(0);
-}).catch(e => {
-  console.error('[错误]', e);
-  process.exit(1);
+const child = spawn('node', [entry, ...process.argv.slice(2)], {
+  cwd: process.cwd(),
+  stdio: 'inherit'
 });
+
+child.on('exit', code => process.exit(code));
