@@ -216,7 +216,7 @@ const OPERATIONS = [
     action: async () => {
       const { execSync } = await import('child_process');
       try {
-        // 检查是否有变更
+        // 检查是否有变更（排除 loop-history.json 和 dashboard-data.json）
         const status = execSync('git status --porcelain', {
           cwd: WORKSPACE,
           encoding: 'utf8',
@@ -225,7 +225,12 @@ const OPERATIONS = [
 
         if (!status) return { committed: 0, message: '无变更' };
 
-        const lines = status.split('\n').filter(l => l.trim());
+        const lines = status.split('\n').filter(l => {
+          const trimmed = l.trim();
+          return trimmed && !trimmed.includes('loop-history.json') && !trimmed.includes('dashboard-data.json');
+        });
+
+        if (lines.length === 0) return { committed: 0, message: '无变更' };
         const changed = lines.length;
 
         // 生成提交信息：分析变更类型
