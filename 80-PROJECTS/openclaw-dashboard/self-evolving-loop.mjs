@@ -156,61 +156,6 @@ const OPERATIONS = [
     }
   },
   {
-    id: 'clean_old_sessions',
-    name: '清理过期 session 和 checkpoint 文件',
-    weight: 1.0,
-    action: async () => {
-      const sessionsDir = path.join(WORKSPACE, '.omc', 'sessions');
-      const checkpointsDir = path.join(WORKSPACE, '.omc', 'state', 'checkpoints');
-      const now = Date.now();
-      const oneDayAgo = now - (1 * 24 * 60 * 60 * 1000);
-
-      let cleaned = 0;
-      let total = 0;
-
-      for (const dir of [sessionsDir, checkpointsDir]) {
-        if (!fs.existsSync(dir)) continue;
-        const files = fs.readdirSync(dir).filter(f => f.endsWith('.json'));
-        total += files.length;
-        for (const f of files) {
-          const stat = fs.statSync(path.join(dir, f));
-          if (stat.mtimeMs < oneDayAgo) {
-            try {
-              fs.unlinkSync(path.join(dir, f));
-              cleaned++;
-            } catch { /* ignore */ }
-          }
-        }
-      }
-      return { total, cleaned };
-    }
-  },
-  {
-    id: 'clean_checkpoints',
-    name: '清理过期 checkpoint 文件',
-    weight: 1.0,
-    action: async () => {
-      const checkpointsDir = path.join(WORKSPACE, '.omc', 'state', 'checkpoints');
-      if (!fs.existsSync(checkpointsDir)) return { total: 0, cleaned: 0 };
-
-      const files = fs.readdirSync(checkpointsDir).filter(f => f.endsWith('.json'));
-      const now = Date.now();
-      const oneDayAgo = now - (1 * 24 * 60 * 60 * 1000);
-
-      let cleaned = 0;
-      for (const f of files) {
-        const stat = fs.statSync(path.join(checkpointsDir, f));
-        if (stat.mtimeMs < oneDayAgo) {
-          try {
-            fs.unlinkSync(path.join(checkpointsDir, f));
-            cleaned++;
-          } catch { /* ignore */ }
-        }
-      }
-      return { total: files.length, cleaned };
-    }
-  },
-  {
     id: 'brainstorm_projects',
     name: '头脑风暴项目优化建议',
     weight: 1.0,
@@ -528,13 +473,6 @@ function selectOperation(history) {
   if (fs.existsSync(checkpointsDir)) totalFiles += fs.readdirSync(checkpointsDir).filter(f => f.endsWith('.json')).length;
 
   const canImprove = (op) => {
-    if (op.id === 'clean_old_sessions') return totalFiles >= 5;
-    if (op.id === 'clean_checkpoints') {
-      const cpDir = path.join(WORKSPACE, '.omc', 'state', 'checkpoints');
-      if (!fs.existsSync(cpDir)) return false;
-      const cpFiles = fs.readdirSync(cpDir).filter(f => f.endsWith('.json')).length;
-      return cpFiles >= 1;
-    }
     if (op.id === 'clean_brainstorm') {
       const bmDir = path.join(WORKSPACE, '.omc', 'brainstorm');
       if (!fs.existsSync(bmDir)) return false;
