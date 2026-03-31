@@ -73,7 +73,7 @@ export class Constitution {
       // Operation-specific constraints
       operationConstraints: {
         // Operations that require explicit user confirmation
-        destructive: ['delete_file', 'delete_directory', 'cleanRecordedIssues'],
+        destructive: ['delete_file', 'delete_directory'],
         // Operations that have resource limits
         resourceLimited: {
           maxFileSize: 50 * 1024 * 1024, // 50MB

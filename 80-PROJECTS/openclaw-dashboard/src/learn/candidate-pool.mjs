@@ -49,6 +49,7 @@ export class CandidatePool {
 
     this.pool.candidates.push(entry);
     this.reprioritize();
+    this.prune(); // Keep pool bounded
     this.save();
 
     return entry;
@@ -100,8 +101,31 @@ export class CandidatePool {
   }
 
   /**
-   * Get next candidate to evaluate
+   * Prune pool to max size - remove lowest priority + oldest resolved/rejected entries
    */
+  prune(maxSize = 20) {
+    if (this.pool.candidates.length <= maxSize) return;
+
+    // First remove resolved/rejected entries older than 7 days
+    const now = Date.now();
+    const sevenDays = 7 * 24 * 60 * 60 * 1000;
+    this.pool.candidates = this.pool.candidates.filter(c => {
+      if (c.status === 'pending') return true;
+      return (now - c.updatedAt) < sevenDays;
+    });
+
+    // If still over limit, remove lowest priorityScore pending entries
+    if (this.pool.candidates.length > maxSize) {
+      const pending = this.pool.candidates.filter(c => c.status === 'pending');
+      const others = this.pool.candidates.filter(c => c.status !== 'pending');
+
+      pending.sort((a, b) => (a.priorityScore || 0) - (b.priorityScore || 0));
+      const toRemove = this.pool.candidates.length - maxSize;
+      pending.splice(0, toRemove);
+
+      this.pool.candidates = [...pending, ...others];
+    }
+  }
   getNext() {
     const pending = this.pool.candidates.filter(c => c.status === 'pending');
     return pending.length > 0 ? pending[0] : null;
