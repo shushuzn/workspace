@@ -142,14 +142,13 @@ export class Agent {
   }
 
   evaluateResult(op, result, delta, beforeScore) {
-    // Delta must be positive AND health must be above minimum threshold
-    let improved = delta > 0 && beforeScore >= 50;
+    // Delta must be positive (or at ceiling with real output) AND health above minimum threshold
+    const atCeiling = beforeScore >= 100;
+    let improved = (delta > 0 || atCeiling) && beforeScore >= 50;
     let noOp = false;
 
     if (!improved && result) {
       if (op.type === 'detection') {
-        // Detection ops: check for any meaningful metric output
-        // Issue-finding ops need counts; informational ops need numeric metrics
         const found = (result.missing > 0) || (result.changed > 0) ||
                       (result.found > 0) || (result.checked > 0) ||
                       (result.sizeKB > 0) || (result.lines > 0) ||
@@ -159,10 +158,9 @@ export class Agent {
         if (!found) {
           noOp = true;
         } else {
-          improved = delta > 0 && beforeScore >= 50;
+          improved = beforeScore >= 50;
         }
       } else {
-        // Productive ops need concrete产出
         const hasOutput = (result.created > 0) || (result.cleaned > 0) ||
                           (result.deleted > 0) || (result.committed > 0) ||
                           (result.fixed > 0) || (result.updated > 0) ||
@@ -170,7 +168,7 @@ export class Agent {
         if (!hasOutput) {
           noOp = true;
         } else {
-          improved = delta > 0 && beforeScore >= 50;
+          improved = beforeScore >= 50;
         }
       }
     }

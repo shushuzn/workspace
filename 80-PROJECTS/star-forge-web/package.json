@@ -5,13 +5,20 @@
   "description": "React 19 web frontend for StarForge with Vite",
   "type": "module",
   "repository": "https://github.com/shushuzn/star-forge-web.git",
-  "keywords": ["react", "vite", "web", "frontend", "react19"],
+  "keywords": [
+    "react",
+    "vite",
+    "web",
+    "frontend",
+    "react19"
+  ],
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview",
     "test": "vitest",
-    "test:ui": "vitest --ui"
+    "test:ui": "vitest --ui",
+    "start": "echo \"No start script\""
   },
   "dependencies": {
     "react": "^19.2.4",

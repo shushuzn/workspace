@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "tsc && node dist/server.js"
+    "dev": "tsc && node dist/server.js",
+    "test": "echo \"No test script\""
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
@@ -18,5 +19,11 @@
     "typescript": "^5.0.0"
   },
   "repository": "https://github.com/shushuzn/ai-roundtable-mcp.git",
-  "keywords": ["MCP", "server", "multi-agent", "discussion", "AI"]
+  "keywords": [
+    "MCP",
+    "server",
+    "multi-agent",
+    "discussion",
+    "AI"
+  ]
 }

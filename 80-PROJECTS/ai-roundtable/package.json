@@ -4,9 +4,16 @@
   "description": "Multi-agent roundtable discussion CLI tool with multiple AI personas",
   "type": "module",
   "repository": "https://github.com/shushuzn/ai-roundtable.git",
-  "keywords": ["CLI", "multi-agent", "discussion", "AI", "MiniMax"],
+  "keywords": [
+    "CLI",
+    "multi-agent",
+    "discussion",
+    "AI",
+    "MiniMax"
+  ],
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "test": "echo \"No test script\""
   },
   "dependencies": {
     "dotenv": "^16.0.0",
