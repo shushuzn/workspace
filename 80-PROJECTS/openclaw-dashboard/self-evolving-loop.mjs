@@ -135,27 +135,6 @@ const OPERATIONS = [
     }
   },
   {
-    id: 'count_sessions',
-    name: '统计 session 活跃度',
-    weight: 1.0,
-    action: async () => {
-      const sessionsDir = path.join(WORKSPACE, '.omc', 'sessions');
-      if (!fs.existsSync(sessionsDir)) return { total: 0 };
-
-      const files = fs.readdirSync(sessionsDir).filter(f => f.endsWith('.json'));
-      const now = Date.now();
-      const oneDayAgo = now - (24 * 60 * 60 * 1000);
-
-      let recent = 0;
-      for (const f of files) {
-        const stat = fs.statSync(path.join(sessionsDir, f));
-        if (stat.mtimeMs > oneDayAgo) recent++;
-      }
-
-      return { total: files.length, recent };
-    }
-  },
-  {
     id: 'check_memory_size',
     name: '检查记忆文件大小',
     weight: 1.0,
@@ -174,22 +153,6 @@ const OPERATIONS = [
       const content = fs.readFileSync(memoryPath, 'utf8');
       const sizeKB = Math.round(Buffer.byteLength(content, 'utf8') / 1024);
       return { sizeKB, lines: content.split('\n').length };
-    }
-  },
-  {
-    id: 'count_projects',
-    name: '统计项目总数',
-    weight: 1.0,
-    action: async () => {
-      const projectsDir = path.join(WORKSPACE, '80-PROJECTS');
-      if (!fs.existsSync(projectsDir)) return { total: 0 };
-
-      const dirs = fs.readdirSync(projectsDir).filter(f => {
-        const stat = fs.statSync(path.join(projectsDir, f));
-        return stat.isDirectory() && !f.startsWith('10-') && !f.startsWith('.');
-      });
-
-      return { total: dirs.length };
     }
   },
   {
@@ -669,6 +632,7 @@ function selectOperation(history) {
 
   if (!canImprove(bestOp)) {
     const improvable = OPERATIONS.filter(op => {
+      if (isDetectionOp(op.id)) return false;
       const cd = getCooldown(op.id);
       const recent = history.records.slice(-cd).map(r => r.opId);
       return !recent.includes(op.id) && successRates[op.id] && (successRates[op.id].success / successRates[op.id].total) > 0 && canImprove(op);
