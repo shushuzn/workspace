@@ -121,7 +121,10 @@ export class ToolRouter {
       // CandidatePool bonus: pending high-priority candidates get boosted
       const poolBonus = this.getPoolBonus(op);
 
-      const totalScore = baseScore + gapBonus + ltmBonus + noveltyBonus + poolBonus;
+      // Rule bonus: operations that tend to succeed after the previous successful operation
+      const ruleBonus = this.getRuleBonus(op);
+
+      const totalScore = baseScore + gapBonus + ltmBonus + noveltyBonus + poolBonus + ruleBonus;
 
       if (totalScore > bestScore) {
         bestScore = totalScore;
@@ -204,6 +207,38 @@ export class ToolRouter {
     // Bonus based on priority
     const bonus = { high: 0.25, medium: 0.15, low: 0.05 };
     return bonus[match.priority] || 0.1;
+  }
+
+  /**
+   * Rule bonus: operations that historically followed a successful operation
+   * (chain pattern from Distiller sequences)
+   */
+  getRuleBonus(op) {
+    if (!this.history.records || this.history.records.length < 3) return 0;
+
+    // Find last successful operation
+    let lastSuccessful = null;
+    for (let i = this.history.records.length - 1; i >= 0; i--) {
+      const r = this.history.records[i];
+      if (r.improved) { lastSuccessful = r.opId; break; }
+    }
+    if (!lastSuccessful) return 0;
+
+    // Count: how many times does this op follow the lastSuccessful op and result in improvement?
+    let chainCount = 0;
+    let chainImproved = 0;
+    for (let i = 0; i < this.history.records.length - 1; i++) {
+      const curr = this.history.records[i];
+      const next = this.history.records[i + 1];
+      if (curr.opId === lastSuccessful && next.opId === op.id) {
+        chainCount++;
+        if (next.improved) chainImproved++;
+      }
+    }
+    if (chainCount === 0) return 0;
+    // Bonus proportional to chain success rate
+    const chainRate = chainImproved / chainCount;
+    return chainRate > 0.5 ? 0.15 * chainRate : 0;
   }
 
   calculateSuccessRates() {
