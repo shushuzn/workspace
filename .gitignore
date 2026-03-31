@@ -75,6 +75,10 @@ skill-github-links.txt
 .claude/settings.local.json
 claude-desktop.json
 
+# === Generated Data ===
+**/dashboard-data.json
+**/loop-history.json
+
 # Session & temp data
 sessions/
 logs/
