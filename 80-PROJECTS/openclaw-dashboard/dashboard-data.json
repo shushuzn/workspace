@@ -283,5 +283,13 @@
     "totalProjects": 36,
     "submodules": 4,
     "gitHooks": 4
-  }
+  },
+  "issues": [
+    {
+      "type": "orphan_checkpoint",
+      "path": "D:\\OpenClaw\\workspace\\80-PROJECTS\\.omc\\state\\checkpoints\\checkpoint-2026-03-31T02-54-25-754Z.json",
+      "found_at": "2026-03-31T05:05:54.338Z",
+      "resolved": false
+    }
+  ]
 }
