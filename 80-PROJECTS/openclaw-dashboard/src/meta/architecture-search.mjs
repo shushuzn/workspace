@@ -3,6 +3,8 @@
  * Suggests module connection adjustments
  */
 
+import path from 'path';
+
 export class ArchitectureSearch {
   constructor(workspace) {
     this.workspace = workspace;

@@ -60,6 +60,7 @@ export class SelfModeling {
 
   generateRecommendations(boundary, gaps) {
     const recommendations = [];
+    const totalOps = boundary.strong.length + boundary.moderate.length + boundary.weak.length;
 
     // If too many weak capabilities
     if (boundary.weak.length > 3) {

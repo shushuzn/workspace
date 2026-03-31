@@ -38,15 +38,18 @@ export class Agent {
     console.log('\n' + '='.repeat(50));
     console.log(`[Agent] 迭代开始 | 健康度: ${beforeScore} | ε: ${(this.stm.history.epsilon * 100).toFixed(0)}%`);
 
-    // Meta-cognition: analyze before selecting
+    // Meta-cognition: analyze and update ToolRouter with gaps
+    let gaps = [];
     if (this.metaCognizer) {
-      const gaps = await this.metaCognizer.analyze();
+      gaps = await this.metaCognizer.analyze();
       if (gaps.length > 0) {
         console.log(`[Agent] 元认知识别 ${gaps.length} 个能力缺口`);
+        // Feed gaps to ToolRouter to bias operation selection
+        this.toolRouter.setGaps(gaps);
       }
     }
 
-    // Select operation via ToolRouter
+    // Select operation via ToolRouter (now gap-informed)
     const { op, mode } = this.toolRouter.select();
 
     // Safety check before execution
@@ -82,7 +85,7 @@ export class Agent {
     const afterScore = this.workingMemory.calculate();
     const delta = afterScore - beforeScore;
 
-    const { improved, noOp } = this.evaluateResult(op, result, delta);
+    const { improved, noOp } = this.evaluateResult(op, result, delta, beforeScore);
 
     const record = {
       opId: op.id,
@@ -105,8 +108,9 @@ export class Agent {
     return record;
   }
 
-  evaluateResult(op, result, delta) {
-    let improved = delta > 0;
+  evaluateResult(op, result, delta, beforeScore) {
+    // Delta must be positive AND absolute health must not be critically low
+    let improved = delta > 0 && beforeScore >= 50;
     let noOp = false;
 
     if (!improved && result) {
@@ -115,7 +119,7 @@ export class Agent {
                       (result.ideas > 0) || (result.found > 0) ||
                       (result.committed > 0);
         if (!found) noOp = true;
-        else improved = true;
+        else improved = beforeScore >= 50; // Detection only improves if health OK
       } else {
         if ((result.created === 0 && result.message) ||
             (result.cleaned === 0 && result.total > 0)) {

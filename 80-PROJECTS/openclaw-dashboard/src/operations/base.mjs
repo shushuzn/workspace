@@ -9,6 +9,7 @@ export class Operation {
     this.name = name;
     this.type = type; // 'productive' or 'detection'
     this.weight = 1.0;
+    this.destructive = false; // Operations that delete/modify files irreversibly
   }
 
   async execute() {

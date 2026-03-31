@@ -13,10 +13,23 @@ export class ToolRouter {
     this.operations = operations;
     this.history = history;
     this.workingMemory = new WorkingMemory(workspace);
+    this.gaps = []; // MetaCognizer gaps - injected via setGaps()
+  }
+
+  setGaps(gaps) {
+    this.gaps = gaps;
   }
 
   getEpsilon() {
-    return this.history.epsilon;
+    const base = this.history.epsilon;
+    // Health-based adjustment: low health forces more exploration
+    const score = this.workingMemory.calculate();
+    if (score < 40) {
+      return Math.min(CONFIG.epsilon.max, base + 0.2); // +20% when critical
+    } else if (score < 60) {
+      return Math.min(CONFIG.epsilon.max, base + 0.1); // +10% when low
+    }
+    return base;
   }
 
   getEpsilonMin() {
@@ -74,28 +87,33 @@ export class ToolRouter {
       .filter(op => !this.isDetectionOp(op.id));
 
     let bestOp = null;
-    let bestRate = -1;
+    let bestScore = -1;
 
     for (const op of candidates) {
       const rate = successRates[op.id];
-      const noveltyBonus = this.isNewOp(op.id) ? 0.1 : 0;
+      let baseScore = 0;
 
       if (rate && rate.total >= 1) {
-        const r = rate.success / rate.total + noveltyBonus;
-        if (r > bestRate) {
-          bestRate = r;
-          bestOp = op;
-        }
+        baseScore = rate.success / rate.total;
       } else if (this.isNewOp(op.id)) {
-        const r = 0.1 + noveltyBonus;
-        if (r > bestRate) {
-          bestRate = r;
-          bestOp = op;
-        }
+        baseScore = 0.1; // New ops get minimum score
+      }
+
+      // Gap priority bonus: high-priority gaps boost related ops
+      const gapBonus = this.getGapBonus(op);
+
+      // Novelty bonus for unexplored operations
+      const noveltyBonus = this.isNewOp(op.id) ? 0.05 : 0;
+
+      const totalScore = baseScore + gapBonus + noveltyBonus;
+
+      if (totalScore > bestScore) {
+        bestScore = totalScore;
+        bestOp = op;
       }
     }
 
-    if (!bestOp || bestRate <= 0) {
+    if (!bestOp || bestScore <= 0) {
       return this.fallbackSelection();
     }
 
@@ -103,8 +121,36 @@ export class ToolRouter {
       return this.findAlternativeBest(successRates);
     }
 
-    console.log(`[ToolRouter] 利用模式: ${bestOp.name} (成功率: ${(bestRate * 100).toFixed(0)}%)`);
+    const gapNote = this.getGapBonus(bestOp) > 0 ? ' [gap优先级]' : '';
+    console.log(`[ToolRouter] 利用模式: ${bestOp.name} (得分: ${(bestScore * 100).toFixed(0)}%)${gapNote}`);
     return { op: bestOp, mode: 'exploit' };
+  }
+
+  getGapBonus(op) {
+    if (!this.gaps || this.gaps.length === 0) return 0;
+
+    // Match operation to gap via opId or name similarity
+    const opGaps = this.gaps.filter(g => {
+      // Direct match by target (opId)
+      if (g.target === op.id) return true;
+      // Name contains match (fuzzy)
+      if (g.name && op.name && (
+        op.name.includes(g.name.substring(0, 8)) ||
+        g.name.includes(op.name.substring(0, 8))
+      )) return true;
+      return false;
+    });
+
+    if (opGaps.length === 0) return 0;
+
+    // Highest priority gap determines bonus
+    const priorityBonus = { high: 0.3, medium: 0.15, low: 0.05 };
+    const highestPriority = opGaps.reduce((best, g) => {
+      const order = { high: 0, medium: 1, low: 2 };
+      return order[g.priority] < order[best.priority] ? g : best;
+    }, opGaps[0]);
+
+    return priorityBonus[highestPriority.priority] || 0;
   }
 
   calculateSuccessRates() {

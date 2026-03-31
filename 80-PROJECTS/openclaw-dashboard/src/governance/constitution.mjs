@@ -142,10 +142,19 @@ export class Constitution {
 
   /**
    * Check if operation is destructive (requires confirmation)
+   * Accepts operationId OR operation name, with fuzzy matching
    */
-  isDestructive(operationId) {
+  isDestructive(operationIdOrName) {
     const constraints = this.getOperationConstraints();
-    return constraints.destructive?.includes(operationId) || false;
+    if (!constraints.destructive) return false;
+
+    const searchStr = operationIdOrName.toLowerCase().replace(/[_-]/g, '');
+
+    return constraints.destructive.some(d => {
+      const dStr = d.toLowerCase().replace(/[_-]/g, '');
+      // Exact or fuzzy match
+      return searchStr === dStr || searchStr.includes(dStr) || dStr.includes(searchStr);
+    });
   }
 
   /**

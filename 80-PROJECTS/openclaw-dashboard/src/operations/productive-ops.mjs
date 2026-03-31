@@ -260,6 +260,7 @@ export class CleanRecordedIssues extends ProductiveOperation {
   constructor(workspace) {
     super('clean_recorded_issues', '修复已记录的工作区问题');
     this.workspace = workspace;
+    this.destructive = true; // Deletes files (orphan checkpoints, stale sessions)
   }
 
   async execute() {

@@ -72,7 +72,11 @@ export class Safety {
     this.addAuditRecord(operation, 'constitution', true);
 
     // 2. Destructive operation check
-    if (this.constitution.isDestructive(operation.id)) {
+    // Check operation.destructive flag OR constitution list (fuzzy match)
+    const isDestructive = operation.destructive ||
+      this.constitution.isDestructive(operation.id) ||
+      this.constitution.isDestructive(operation.name);
+    if (isDestructive) {
       this.addAuditRecord(operation, 'destructive_check', false, 'Destructive operation requires explicit confirmation');
       return {
         approved: false,
@@ -214,7 +218,7 @@ export class Safety {
     }
 
     // For destructive operations, require recent commit
-    if (this.constitution.isDestructive(operation.id)) {
+    if (operation.destructive || this.constitution.isDestructive(operation.id)) {
       try {
         const log = execSync('git log -1 --format=%ci', {
           cwd: this.workspace,
