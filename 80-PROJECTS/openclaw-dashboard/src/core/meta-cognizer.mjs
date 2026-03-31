@@ -77,12 +77,14 @@ findCapabilityGaps(successRates) {    const gaps = [];    for (const [opId, stat
     // Check for consecutive failures (must be genuine failures, not "workspace already clean" no-ops)
     let consecutiveFails = 0;
     let failOps = [];
+    let failOpIds = [];
 
     for (const record of records.slice().reverse()) {
       // noOp = workspace already clean, NOT a failure
       if (!record.improved && !record.noOp) {
         consecutiveFails++;
         failOps.push(record.opName);
+        failOpIds.push(record.opId);
       } else {
         // noOp or improved = break the fail streak
         break;
@@ -92,7 +94,7 @@ findCapabilityGaps(successRates) {    const gaps = [];    for (const [opId, stat
     if (consecutiveFails >= 3) {
       gaps.push({
         type: 'failure_pattern',
-        target: failOps[0],
+        target: failOpIds[0],  // Use opId for matching
         name: failOps.slice(0, 3).join(', '),
         priority: 'high',
         metric: `连续失败 ${consecutiveFails} 次`,

@@ -237,26 +237,4 @@ export class CandidatePool {
     return stats;
   }
 
-  /**
-   * Prune old candidates (keep approved/recent)
-   */
-  prune(maxAge = 30 * 24 * 60 * 60 * 1000) {
-    const cutoff = Date.now() - maxAge;
-    const before = this.pool.candidates.length;
-
-    this.pool.candidates = this.pool.candidates.filter(c => {
-      // Keep approved candidates
-      if (c.status === 'approved') return true;
-      // Keep recent candidates
-      if (c.createdAt > cutoff) return true;
-      // Keep high priority
-      if (c.priority === 'high') return true;
-      return false;
-    });
-
-    const pruned = before - this.pool.candidates.length;
-    if (pruned > 0) this.save();
-
-    return { pruned, remaining: this.pool.candidates.length };
-  }
 }
