@@ -36,7 +36,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:50-ton-hackathon-2026:无有效 remote",
       "found_at": "2026-03-31T03:50:38.705Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "a2a-router",
@@ -44,7 +44,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:a2a-router:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "agent-arena",
@@ -52,7 +52,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:agent-arena:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "agent-islands",
@@ -60,7 +60,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:agent-islands:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "agent-memory-mesh",
@@ -68,7 +68,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:agent-memory-mesh:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "agentic-bpm",
@@ -76,7 +76,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:agentic-bpm:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "ai-roundtable",
@@ -84,7 +84,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:ai-roundtable:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "ai-roundtable-mcp",
@@ -92,7 +92,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:ai-roundtable-mcp:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "code-agent",
@@ -100,7 +100,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:code-agent:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "crucix",
@@ -108,7 +108,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:crucix:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "idle-empire",
@@ -116,7 +116,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:idle-empire:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "knowledge-bridge",
@@ -124,7 +124,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:knowledge-bridge:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "multi-agent-discuss",
@@ -132,7 +132,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:multi-agent-discuss:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "news-workflow-engine",
@@ -140,7 +140,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:news-workflow-engine:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "NewsHub",
@@ -148,7 +148,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:NewsHub:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "openclaw-dashboard",
@@ -156,7 +156,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:openclaw-dashboard:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "openviking-mcp",
@@ -164,7 +164,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:openviking-mcp:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "pla-degradation-research",
@@ -172,7 +172,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:pla-degradation-research:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "quadratic-algebra-fibonacci",
@@ -180,7 +180,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:quadratic-algebra-fibonacci:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "rl-trading",
@@ -188,7 +188,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:rl-trading:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "self-evolving-orchestrator",
@@ -196,7 +196,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:self-evolving-orchestrator:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "star-forge",
@@ -204,7 +204,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:star-forge:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "stock-analysis-agent",
@@ -212,7 +212,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:stock-analysis-agent:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "stock-analysis-mcp-test",
@@ -220,7 +220,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:stock-analysis-mcp-test:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "stock-analyzer-v2",
@@ -228,7 +228,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:stock-analyzer-v2:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     },
     {
       "project": "tinyspeak",
@@ -236,7 +236,7 @@
       "detail": "无有效 remote",
       "key": "no_remote:tinyspeak:无有效 remote",
       "found_at": "2026-03-31T03:50:38.706Z",
-      "resolved": false
+      "resolved": true
     }
   ]
 }

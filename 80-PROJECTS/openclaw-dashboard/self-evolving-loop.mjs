@@ -351,7 +351,9 @@ ${target}/
     weight: 1.0,
     action: async () => {
       const issues = [];
-      const omcDir = path.join(WORKSPACE, '.omc');
+      // 修复：WORKSPACE 是 80-PROJECTS/，实际的 .omc 在 workspace 根目录
+      const actualOmcDir = path.join(WORKSPACE, '..', '.omc');
+      const omcDir = actualOmcDir;
 
       // 1. 检查 .omc 下是否有异常文件（如临时文件、散落的小文件）
       if (fs.existsSync(omcDir)) {
@@ -362,11 +364,11 @@ ${target}/
           if (['sessions', 'brainstorm', 'state', 'plans', 'research', 'logs'].includes(entry.name)) continue;
           // 散落的临时文件（以 ~、.tmp、.bak 结尾）
           if (entry.name.endsWith('~') || entry.name.endsWith('.tmp') || entry.name.endsWith('.bak')) {
-            issues.push({ type: 'temp_file', path: `.omc/${entry.name}`, size: entry.size });
+            issues.push({ type: 'temp_file', path: fullPath, size: entry.size });
           }
           // 异常单文件（非目录且不是已知类型）
           if (entry.isFile() && !entry.name.endsWith('.json') && !entry.name.endsWith('.md')) {
-            issues.push({ type: 'unknown_file', path: `.omc/${entry.name}`, size: entry.size });
+            issues.push({ type: 'unknown_file', path: fullPath, size: entry.size });
           }
         }
       }
@@ -380,7 +382,7 @@ ${target}/
           const fullPath = path.join(sessionsDir, f);
           const mtime = fs.statSync(fullPath).mtimeMs;
           if (mtime < cutoff) {
-            issues.push({ type: 'stale_session', path: `.omc/sessions/${f}`, age_days: Math.floor((Date.now() - mtime) / 86400000) });
+            issues.push({ type: 'stale_session', path: fullPath, age_days: Math.floor((Date.now() - mtime) / 86400000) });
           }
         }
       }
@@ -395,7 +397,7 @@ ${target}/
         for (const f of cpFiles) {
           const base = f.replace('.json', '');
           if (!sessionFiles.includes(base)) {
-            issues.push({ type: 'orphan_checkpoint', path: `.omc/state/checkpoints/${f}` });
+            issues.push({ type: 'orphan_checkpoint', path: path.join(checkpointsDir, f) });
           }
         }
       }
@@ -437,12 +439,12 @@ ${target}/
 
       let cleaned = 0;
       for (const issue of unresolved) {
-        const fullPath = path.join(WORKSPACE, issue.path.replace(/^\.omc[/\\]/, '.omc\\'));
+        const fullPath = issue.path; // 修复：path 现在是绝对路径
         if (!fs.existsSync(fullPath)) {
           issue.resolved = true; cleaned++; continue;
         }
         try {
-          if (issue.type === 'orphan_checkpoint') {
+          if (issue.type === 'orphan_checkpoint' || issue.type === 'stale_session') {
             fs.unlinkSync(fullPath);
             issue.resolved = true;
             cleaned++;
