@@ -58,6 +58,13 @@ export class Safety {
    * @returns {Object} { approved: boolean, reason: string }
    */
   async check(operation) {
+    // 0. Destructive operation check: always require confirmation for destructive ops
+    if (operation.destructive) {
+      const reason = ' destructive 操作需要确认';
+      this.addAuditRecord(operation, 'destructive', false, reason);
+      return { approved: false, reason };
+    }
+
     // 1. Constitution validation
     const constitutionCheck = this.constitution.validate(operation);
     if (!constitutionCheck.valid) {

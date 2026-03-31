@@ -12,6 +12,7 @@ import { STM } from '../memory/stm.mjs';
 import { LTM } from '../memory/ltm.mjs';
 import { getAllOperations } from '../operations/index.mjs';
 import { Safety } from '../governance/safety.mjs';
+import { Budget } from '../governance/budget.mjs';
 import { CandidatePool } from '../learn/candidate-pool.mjs';
 import { Discoverer } from '../learn/discoverer.mjs';
 import { Distiller } from '../learn/distiller.mjs';
@@ -31,25 +32,26 @@ export class Agent {
     this.operations = getAllOperations(workspace);
     this.toolRouter = new ToolRouter(workspace, this.operations, this.stm.history);
     this.safety = new Safety(workspace);
+    this.budget = new Budget(workspace);
 
-    // Learn components - connected to MetaCognizer loop
+    // Memory components (must initialize before Learn components that depend on them)
+    this.ltm = new LTM(workspace);
+    this.skillLibrary = new SkillLibrary(workspace);
+
+    // Learn components - SkillLibrary must be before Discoverer/Distiller
     this.candidatePool = new CandidatePool(workspace);
     this.curriculum = new Curriculum();
+    this.distiller = new Distiller(workspace, this.stm, this.ltm, this.skillLibrary);
 
-    // Memory and Evolution components
-    this.ltm = new LTM(workspace);
+    // Evolution components
     this.hypothesis = new Hypothesis(workspace, this.stm, this.ltm);
     this.sandbox = new Sandbox(workspace);
 
     // Wire candidate pool into tool router
     this.toolRouter.setCandidatePool(this.candidatePool);
 
-    // Discoverer for finding new knowledge
+    // Discoverer for finding new knowledge (depends on skillLibrary)
     this.discoverer = new Discoverer(workspace, this.ltm, this.skillLibrary);
-
-    // Learn components - SkillLibrary + Distiller pipeline
-    this.skillLibrary = new SkillLibrary(workspace);
-    this.distiller = new Distiller(workspace, this.stm, this.ltm, this.skillLibrary);
 
     // Meta-cognizer will be injected
     this.metaCognizer = null;
@@ -60,6 +62,13 @@ export class Agent {
   }
 
   async runIteration() {
+    // Governance: enforce budget limits before each iteration
+    const budgetCheck = this.budget.canProceed('iteration');
+    if (!budgetCheck.allowed) {
+      console.log(`[Agent] 预算限制，跳过迭代: ${budgetCheck.reason}`);
+      return { blocked: true, reason: budgetCheck.reason };
+    }
+
     const beforeScore = this.workingMemory.calculate();
 
     console.log('\n' + '='.repeat(50));
@@ -168,20 +177,28 @@ export class Agent {
       if (c.target === op.id || (c.name && op.name && op.name.includes(c.name.substring(0, 6)))) {
         if (improved && !noOp) {
           this.candidatePool.approve(c.id, { delta, afterScore });
-        } else if (!improved && !noOp && record.attempts >= 2) {
-          this.candidatePool.reject(c.id, `连续失败，已尝试 ${record.attempts} 次`);
+        } else if (!improved && !noOp && record.delta <= 0) {
+          this.candidatePool.reject(c.id, `操作无效，delta=${record.delta}`);
         }
       }
     });
 
     // Distill experience into rules, skills, and insights via full Distiller pipeline
-    const distResult = await this.distiller.distill({ records: this.stm.getRecentRecords(50) });
+    let distResult = { rules: [], skills: [], insights: [] };
+    try {
+      distResult = await this.distiller.distill({ records: this.stm.getRecentRecords(50) });
+    } catch (e) {
+      console.log(`[Agent] 蒸馏失败，跳过本次: ${e.message}`);
+    }
     if (distResult.rules.length > 0 || distResult.skills.length > 0 || distResult.insights.length > 0) {
       console.log(`[Agent] 蒸馏: ${distResult.rules.length} 条规则, ${distResult.skills.length} 个技能, ${distResult.insights.length} 条洞察`);
     }
 
     console.log(`[Agent] 健康度: ${beforeScore} → ${afterScore} (${delta > 0 ? '+' : ''}${delta}) | ${noOp ? '无操作' : improved ? '✓' : '✗'}`);
     console.log('='.repeat(50));
+
+    // Governance: record iteration usage in budget
+    this.budget.recordUsage('iterations', 1);
 
     return record;
   }

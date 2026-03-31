@@ -261,7 +261,8 @@ export class CleanRecordedIssues extends ProductiveOperation {
     super('clean_recorded_issues', '修复已记录的工作区问题');
     this.workspace = workspace;
     // Note: only cleans synthetic internal files (orphan checkpoints, stale sessions)
-    // NOT user data - does not require destructive confirmation
+    // NOT user data - but still deletes files, so mark as destructive per Constitution
+    this.destructive = true;
   }
 
   async execute() {

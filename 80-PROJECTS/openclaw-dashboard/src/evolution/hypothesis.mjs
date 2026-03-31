@@ -15,9 +15,17 @@ export class Hypothesis {
 
   /**
    * Generate hypotheses based on capability gaps
+   * Gracefully degrades: if analyze() fails, returns empty array
    */
   async generate() {
-    const gaps = await this.metaCognizer.analyze();
+    let gaps = [];
+    try {
+      gaps = await this.metaCognizer.analyze();
+    } catch (e) {
+      console.log(`[Hypothesis] 元认知分析失败，跳过假设生成: ${e.message}`);
+      return [];
+    }
+
     const hypotheses = [];
 
     for (const gap of gaps) {

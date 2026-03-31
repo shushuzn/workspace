@@ -141,15 +141,29 @@ export class Discoverer {
     const omcDir = path.join(this.workspace, '.omc');
 
     if (fs.existsSync(omcDir)) {
-      // Check for large files
+      // Check for large files (cross-platform: recursive Node.js walk)
       try {
-        const files = execSync('find .omc -type f -size +5M 2>/dev/null || dir /s /b .omc\\* 2>nul | findstr /r /i "\\.[^.]*[5-9][0-9][0-9][0-9][0-9]"', {
-          cwd: this.workspace,
-          encoding: 'utf8',
-          timeout: 5000
-        });
+        const sizeLimit = 5 * 1024 * 1024; // 5MB
+        let foundLarge = false;
+        const walk = (dir) => {
+          let entries;
+          try {
+            entries = fs.readdirSync(dir, { withFileTypes: true });
+          } catch { return; }
+          for (const entry of entries) {
+            const fullPath = path.join(dir, entry.name);
+            try {
+              if (entry.isDirectory()) {
+                walk(fullPath);
+              } else if (entry.isFile() && entry.size > sizeLimit) {
+                foundLarge = true;
+              }
+            } catch {}
+          }
+        };
+        walk(omcDir);
 
-        if (files.trim()) {
+        if (foundLarge) {
           discoveries.push({
             type: 'large_file',
             category: 'resource',

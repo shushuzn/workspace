@@ -1,15 +1,19 @@
 # tests
 
-项目描述暂无
+Dashboard子系统的测试套件
 
-## 项目信息
+## 测试文件
 
-- **版本**: 0.0.1
-- **路径**: D:\OpenClaw\workspace\80-PROJECTS\openclaw-dashboard\tests
+```
+tests/
+├── dashboard-api.test.js      # Dashboard API测试
+├── dashboard-server.test.js   # Dashboard服务器测试
+└── generate-dashboard-data.test.js  # 数据生成器测试
+```
 
-## 快速开始
+## 运行测试
 
 ```bash
-npm install
-npm run dev
+npm test          # 单元测试（jest）
+npm run test:e2e  # E2E测试（playwright）
 ```
