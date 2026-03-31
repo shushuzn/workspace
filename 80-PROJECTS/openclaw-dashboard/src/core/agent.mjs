@@ -142,6 +142,7 @@ export class Agent {
       afterScore,
       delta,
       improved,
+      noOp,
       timestamp: Date.now()
     };
 
@@ -149,8 +150,19 @@ export class Agent {
     this.toolRouter.updateEpsilon(improved);
     this.stm.save();
 
+    // Update candidate pool - mark matching candidate as evaluated
+    this.candidatePool.getByType('capability_gap').forEach(c => {
+      if (c.target === op.id || (c.name && op.name && op.name.includes(c.name.substring(0, 6)))) {
+        if (improved && !noOp) {
+          this.candidatePool.approve(c.id, { delta, afterScore });
+        } else if (!improved && !noOp && record.attempts >= 2) {
+          this.candidatePool.reject(c.id, `连续失败，已尝试 ${record.attempts} 次`);
+        }
+      }
+    });
+
     // Distill experience into rules, skills, and insights via full Distiller pipeline
-    const distResult = await this.distiller.distill({ records: this.stm.getRecentRecords(20) });
+    const distResult = await this.distiller.distill({ records: this.stm.getRecentRecords(50) });
     if (distResult.rules.length > 0 || distResult.skills.length > 0 || distResult.insights.length > 0) {
       console.log(`[Agent] 蒸馏: ${distResult.rules.length} 条规则, ${distResult.skills.length} 个技能, ${distResult.insights.length} 条洞察`);
     }
