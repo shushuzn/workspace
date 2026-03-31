@@ -1,0 +1,532 @@
+{
+  "nodes": [
+    [
+      "24491200-8ea5-440c-a0ec-c61fa2c3d53d",
+      {
+        "id": "24491200-8ea5-440c-a0ec-c61fa2c3d53d",
+        "label": "PLA结构",
+        "domain": "chemistry",
+        "description": "聚乳酸(PLA)是聚酯的一种，由乳酸单体通过酯键连接成聚合物链",
+        "connections": [
+          "715392b0-5f17-46a6-b55c-c456158103aa"
+        ],
+        "createdAt": "2026-03-30T12:47:00.955Z"
+      }
+    ],
+    [
+      "715392b0-5f17-46a6-b55c-c456158103aa",
+      {
+        "id": "715392b0-5f17-46a6-b55c-c456158103aa",
+        "label": "酯键",
+        "domain": "chemistry",
+        "description": "PLA中的官能团-COO-，能被水分子攻击导致断链",
+        "connections": [
+          "24491200-8ea5-440c-a0ec-c61fa2c3d53d",
+          "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+      {
+        "id": "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+        "label": "水解降解",
+        "domain": "chemistry",
+        "description": "水分子攻击酯键，使聚合物分子量下降的过程",
+        "connections": [
+          "715392b0-5f17-46a6-b55c-c456158103aa",
+          "3e114694-ad3c-4b05-94c5-06b5fbd97450",
+          "0057808c-dfce-4514-97bc-be263490395a",
+          "8d4fa7d2-3043-4c69-8467-e3c3c345bf31",
+          "046a6058-2f1a-406d-88db-c71de4433ed5",
+          "15e98503-a02b-441f-9410-cedbaddf7d3e"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "3e114694-ad3c-4b05-94c5-06b5fbd97450",
+      {
+        "id": "3e114694-ad3c-4b05-94c5-06b5fbd97450",
+        "label": "微生物降解",
+        "domain": "medicine",
+        "description": "微生物分泌酶，将乳酸分解为CO2和H2O",
+        "connections": [
+          "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+          "259fa216-e2ea-4887-a248-d0aee5892335"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "0057808c-dfce-4514-97bc-be263490395a",
+      {
+        "id": "0057808c-dfce-4514-97bc-be263490395a",
+        "label": "一级反应动力学",
+        "domain": "chemistry",
+        "description": "M(t) = M0 * e^(-kt)，分子量随时间指数下降",
+        "connections": [
+          "fec6be11-60f6-4706-99c0-a5e65ef82846",
+          "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "fec6be11-60f6-4706-99c0-a5e65ef82846",
+      {
+        "id": "fec6be11-60f6-4706-99c0-a5e65ef82846",
+        "label": "半衰期",
+        "domain": "chemistry",
+        "description": "分子量减少一半所需时间，t1/2 = ln(2)/k",
+        "connections": [
+          "0057808c-dfce-4514-97bc-be263490395a",
+          "5506f5b5-8cb4-48f6-abad-3223c96ac430"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "8d4fa7d2-3043-4c69-8467-e3c3c345bf31",
+      {
+        "id": "8d4fa7d2-3043-4c69-8467-e3c3c345bf31",
+        "label": "温度效应",
+        "domain": "chemistry",
+        "description": "温度升高加速水解反应，符合阿伦尼乌斯方程",
+        "connections": [
+          "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+          "64784eb0-83fa-4971-84a4-2dc7f5b1faf4",
+          "1e31834b-adfb-4266-893c-d52a00508da7"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "5ef643ec-83f9-433e-a1d6-d5e326a892c1",
+      {
+        "id": "5ef643ec-83f9-433e-a1d6-d5e326a892c1",
+        "label": "分子量分布",
+        "domain": "chemistry",
+        "description": "PDI值越大，聚合物链长越不均匀",
+        "connections": [
+          "15e98503-a02b-441f-9410-cedbaddf7d3e"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "046a6058-2f1a-406d-88db-c71de4433ed5",
+      {
+        "id": "046a6058-2f1a-406d-88db-c71de4433ed5",
+        "label": "结晶度",
+        "domain": "chemistry",
+        "description": "结晶区水解慢于无定形区，影响降解速率",
+        "connections": [
+          "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "15e98503-a02b-441f-9410-cedbaddf7d3e",
+      {
+        "id": "15e98503-a02b-441f-9410-cedbaddf7d3e",
+        "label": "机械性能",
+        "domain": "engineering",
+        "description": "拉伸强度等性能指标，随降解下降",
+        "connections": [
+          "5ef643ec-83f9-433e-a1d6-d5e326a892c1",
+          "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "2299345e-d27b-4b78-9488-473716208549",
+      {
+        "id": "2299345e-d27b-4b78-9488-473716208549",
+        "label": "内存泄漏",
+        "domain": "programming",
+        "description": "程序运行中未释放的内存持续积累，导致可用内存减少",
+        "connections": [
+          "d2bc2284-f5e8-461c-8ee0-d4985afe02f8"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "d2bc2284-f5e8-461c-8ee0-d4985afe02f8",
+      {
+        "id": "d2bc2284-f5e8-461c-8ee0-d4985afe02f8",
+        "label": "垃圾回收",
+        "domain": "programming",
+        "description": "自动识别和释放不再使用的内存的机制",
+        "connections": [
+          "2299345e-d27b-4b78-9488-473716208549",
+          "0f38799f-75be-40bb-bbb1-d61a2e376983"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "996affd4-9968-41a9-a007-bf1cf24c144d",
+      {
+        "id": "996affd4-9968-41a9-a007-bf1cf24c144d",
+        "label": "微服务崩溃",
+        "domain": "programming",
+        "description": "一个服务故障导致级联失败的现象",
+        "connections": [],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "0f38799f-75be-40bb-bbb1-d61a2e376983",
+      {
+        "id": "0f38799f-75be-40bb-bbb1-d61a2e376983",
+        "label": "Try-Finally块",
+        "domain": "programming",
+        "description": "确保无论是否异常，finally代码块都会执行",
+        "connections": [
+          "d2bc2284-f5e8-461c-8ee0-d4985afe02f8"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "f6e75601-b54a-4b94-b4ff-823c2255e825",
+      {
+        "id": "f6e75601-b54a-4b94-b4ff-823c2255e825",
+        "label": "CPU频率调节",
+        "domain": "programming",
+        "description": "处理器根据负载动态调整频率的机制",
+        "connections": [],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "d97e3bf4-fb7e-42c0-a9c5-6d45c663c541",
+      {
+        "id": "d97e3bf4-fb7e-42c0-a9c5-6d45c663c541",
+        "label": "API弃用",
+        "domain": "programming",
+        "description": "旧版API宣布过时，最终将被移除",
+        "connections": [
+          "d8e5b394-d7a5-4593-b2b6-1ff876a79735"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "d8e5b394-d7a5-4593-b2b6-1ff876a79735",
+      {
+        "id": "d8e5b394-d7a5-4593-b2b6-1ff876a79735",
+        "label": "技术债务",
+        "domain": "programming",
+        "description": "快速开发积累的低质量代码，后期维护成本高",
+        "connections": [
+          "d97e3bf4-fb7e-42c0-a9c5-6d45c663c541"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "bfbe2a85-cc13-45c7-aaef-5bfa7bad5691",
+      {
+        "id": "bfbe2a85-cc13-45c7-aaef-5bfa7bad5691",
+        "label": "代码审查",
+        "domain": "programming",
+        "description": "团队检查代码质量和一致性的过程",
+        "connections": [],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "1e31834b-adfb-4266-893c-d52a00508da7",
+      {
+        "id": "1e31834b-adfb-4266-893c-d52a00508da7",
+        "label": "炖肉软烂",
+        "domain": "cooking",
+        "description": "长时间高温加热使肉类蛋白质分解、结构松散",
+        "connections": [
+          "8d4fa7d2-3043-4c69-8467-e3c3c345bf31",
+          "6620faac-f587-4a19-8244-198e5b898188"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "6620faac-f587-4a19-8244-198e5b898188",
+      {
+        "id": "6620faac-f587-4a19-8244-198e5b898188",
+        "label": "食物腐败",
+        "domain": "cooking",
+        "description": "微生物作用下食物变质分解",
+        "connections": [
+          "1e31834b-adfb-4266-893c-d52a00508da7"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "259fa216-e2ea-4887-a248-d0aee5892335",
+      {
+        "id": "259fa216-e2ea-4887-a248-d0aee5892335",
+        "label": "药物代谢",
+        "domain": "medicine",
+        "description": "药物在体内被酶分解成代谢物的过程",
+        "connections": [
+          "64784eb0-83fa-4971-84a4-2dc7f5b1faf4",
+          "3e114694-ad3c-4b05-94c5-06b5fbd97450"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "64784eb0-83fa-4971-84a4-2dc7f5b1faf4",
+      {
+        "id": "64784eb0-83fa-4971-84a4-2dc7f5b1faf4",
+        "label": "酶活性",
+        "domain": "medicine",
+        "description": "酶催化反应的效率，受温度和pH影响",
+        "connections": [
+          "259fa216-e2ea-4887-a248-d0aee5892335",
+          "8d4fa7d2-3043-4c69-8467-e3c3c345bf31"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ],
+    [
+      "5506f5b5-8cb4-48f6-abad-3223c96ac430",
+      {
+        "id": "5506f5b5-8cb4-48f6-abad-3223c96ac430",
+        "label": "药物半衰期",
+        "domain": "medicine",
+        "description": "药物浓度减少一半所需时间",
+        "connections": [
+          "fec6be11-60f6-4706-99c0-a5e65ef82846"
+        ],
+        "createdAt": "2026-03-30T12:47:00.956Z"
+      }
+    ]
+  ],
+  "edges": [
+    {
+      "from": "24491200-8ea5-440c-a0ec-c61fa2c3d53d",
+      "to": "715392b0-5f17-46a6-b55c-c456158103aa",
+      "type": "contains",
+      "strength": 1,
+      "id": "b0420752-0f5b-4065-b9a5-22bbdbc84093"
+    },
+    {
+      "from": "715392b0-5f17-46a6-b55c-c456158103aa",
+      "to": "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+      "type": "enables",
+      "strength": 1,
+      "id": "424368e4-99e8-43c3-944e-9d454b8f1c4d"
+    },
+    {
+      "from": "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+      "to": "3e114694-ad3c-4b05-94c5-06b5fbd97450",
+      "type": "feeds",
+      "strength": 1,
+      "id": "3b50b746-ba7f-4527-a549-70ea6e8a8ff6"
+    },
+    {
+      "from": "0057808c-dfce-4514-97bc-be263490395a",
+      "to": "fec6be11-60f6-4706-99c0-a5e65ef82846",
+      "type": "defines",
+      "strength": 1,
+      "id": "6253c9d5-7aef-4adf-959c-db841bfcd65a"
+    },
+    {
+      "from": "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+      "to": "0057808c-dfce-4514-97bc-be263490395a",
+      "type": "follows",
+      "strength": 1,
+      "id": "23ed01a2-29b5-4a39-a439-5d0706bf3790"
+    },
+    {
+      "from": "8d4fa7d2-3043-4c69-8467-e3c3c345bf31",
+      "to": "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+      "type": "accelerates",
+      "strength": 1,
+      "id": "30219e9a-5f21-4dee-b39c-653025426309"
+    },
+    {
+      "from": "5ef643ec-83f9-433e-a1d6-d5e326a892c1",
+      "to": "15e98503-a02b-441f-9410-cedbaddf7d3e",
+      "type": "determines",
+      "strength": 1,
+      "id": "cfcc2a8d-26ee-4927-ae4c-8510454c1d51"
+    },
+    {
+      "from": "046a6058-2f1a-406d-88db-c71de4433ed5",
+      "to": "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+      "type": "modulates",
+      "strength": 1,
+      "id": "b8750190-a4fc-45df-8258-ceb50d8104f9"
+    },
+    {
+      "from": "15e98503-a02b-441f-9410-cedbaddf7d3e",
+      "to": "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+      "type": "decreases_during",
+      "strength": 1,
+      "id": "02c90a5d-4322-4fe9-9e72-faa314d6611f"
+    },
+    {
+      "from": "2299345e-d27b-4b78-9488-473716208549",
+      "to": "d2bc2284-f5e8-461c-8ee0-d4985afe02f8",
+      "type": "needs",
+      "strength": 1,
+      "id": "b5927b9d-ea77-4262-9825-26de5c286202"
+    },
+    {
+      "from": "0f38799f-75be-40bb-bbb1-d61a2e376983",
+      "to": "d2bc2284-f5e8-461c-8ee0-d4985afe02f8",
+      "type": "relates_to",
+      "strength": 1,
+      "id": "91188324-a879-427a-8bdb-51b52442bff7"
+    },
+    {
+      "from": "d97e3bf4-fb7e-42c0-a9c5-6d45c663c541",
+      "to": "d8e5b394-d7a5-4593-b2b6-1ff876a79735",
+      "type": "creates",
+      "strength": 1,
+      "id": "388e93d2-5795-4f52-84b2-57b7e5657f12"
+    },
+    {
+      "from": "259fa216-e2ea-4887-a248-d0aee5892335",
+      "to": "64784eb0-83fa-4971-84a4-2dc7f5b1faf4",
+      "type": "depends_on",
+      "strength": 1,
+      "id": "67ee1d28-8524-40e1-ad53-cc0a04713bff"
+    },
+    {
+      "from": "259fa216-e2ea-4887-a248-d0aee5892335",
+      "to": "3e114694-ad3c-4b05-94c5-06b5fbd97450",
+      "type": "similar_to",
+      "strength": 1,
+      "id": "22026763-e42b-4615-8261-7c6f68c4132c"
+    },
+    {
+      "from": "5506f5b5-8cb4-48f6-abad-3223c96ac430",
+      "to": "fec6be11-60f6-4706-99c0-a5e65ef82846",
+      "type": "similar_to",
+      "strength": 1,
+      "id": "f9484834-0ab9-40ab-bd86-0eed3550f757"
+    },
+    {
+      "from": "64784eb0-83fa-4971-84a4-2dc7f5b1faf4",
+      "to": "8d4fa7d2-3043-4c69-8467-e3c3c345bf31",
+      "type": "similar_to",
+      "strength": 1,
+      "id": "894a6a45-e741-473d-98ab-ba8ced595449"
+    },
+    {
+      "from": "1e31834b-adfb-4266-893c-d52a00508da7",
+      "to": "8d4fa7d2-3043-4c69-8467-e3c3c345bf31",
+      "type": "similar_to",
+      "strength": 1,
+      "id": "8a4fd619-4390-419a-aa04-9aa58ec44430"
+    },
+    {
+      "from": "1e31834b-adfb-4266-893c-d52a00508da7",
+      "to": "6620faac-f587-4a19-8244-198e5b898188",
+      "type": "relates_to",
+      "strength": 1,
+      "id": "39952508-7f32-49f4-955f-ab72126043db"
+    }
+  ],
+  "analogyBank": [
+    {
+      "id": "35e92080-2623-4846-809c-03e90967870c",
+      "source": "8dc7e3d0-3d67-40b9-8894-2bfd926a0d92",
+      "target": "2299345e-d27b-4b78-9488-473716208549",
+      "text": "PLA水解就像内存泄漏：系统（聚合物）持续产生需要清理的东西（短链），但没有垃圾回收（微生物）时，内存（分子量）最终耗尽崩溃。",
+      "contributor": "system",
+      "createdAt": "2026-03-30T12:47:00.956Z",
+      "usefulness": 0
+    },
+    {
+      "id": "df81b625-9a6e-4fdd-b821-90a032ddbe23",
+      "source": "3e114694-ad3c-4b05-94c5-06b5fbd97450",
+      "target": "0f38799f-75be-40bb-bbb1-d61a2e376983",
+      "text": "PLA最终被微生物完全分解成CO2和H2O，就像try-catch-finally中的finally块——无论什么情况，finally都会执行，确保清理完成。",
+      "contributor": "system",
+      "createdAt": "2026-03-30T12:47:00.956Z",
+      "usefulness": 0
+    },
+    {
+      "id": "6167fb58-2778-425f-83c3-1290ac28dda8",
+      "source": "715392b0-5f17-46a6-b55c-c456158103aa",
+      "target": "996affd4-9968-41a9-a007-bf1cf24c144d",
+      "text": "酯键被水切断就像微服务级联崩溃——一个关键服务宕了，依赖它的其他服务也会陆续崩溃（分子链断裂传导）。",
+      "contributor": "system",
+      "createdAt": "2026-03-30T12:47:00.956Z",
+      "usefulness": 0
+    },
+    {
+      "id": "e2b915df-bc01-4902-b785-e3d4965c6458",
+      "source": "0057808c-dfce-4514-97bc-be263490395a",
+      "target": "f6e75601-b54a-4b94-b4ff-823c2255e825",
+      "text": "一级反应动力学中，降解速率与当前浓度成正比——就像CPU降频：负载（浓度）越高，功耗（反应速率）越大，但效率不变。",
+      "contributor": "system",
+      "createdAt": "2026-03-30T12:47:00.956Z",
+      "usefulness": 0
+    },
+    {
+      "id": "0a187488-e6e5-4476-bfe4-7ba63177e5ee",
+      "source": "fec6be11-60f6-4706-99c0-a5e65ef82846",
+      "target": "d97e3bf4-fb7e-42c0-a9c5-6d45c663c541",
+      "text": "半衰期是PLA分子量减少一半的时间，就像软件API的弃用周期：到了弃用日期，功能（分子量）减半，再过一个周期，彻底消失。",
+      "contributor": "system",
+      "createdAt": "2026-03-30T12:47:00.956Z",
+      "usefulness": 0
+    },
+    {
+      "id": "bdef2a57-118e-414f-8ec7-89188175e791",
+      "source": "8d4fa7d2-3043-4c69-8467-e3c3c345bf31",
+      "target": "1e31834b-adfb-4266-893c-d52a00508da7",
+      "text": "温度升高加速水解，就像炖肉——温度越高，肉（聚合物）软烂（降解）越快。",
+      "contributor": "system",
+      "createdAt": "2026-03-30T12:47:00.957Z",
+      "usefulness": 0
+    },
+    {
+      "id": "c01782e5-2f87-4d1d-804b-007035664456",
+      "source": "5ef643ec-83f9-433e-a1d6-d5e326a892c1",
+      "target": "bfbe2a85-cc13-45c7-aaef-5bfa7bad5691",
+      "text": "PDI大说明分子量分布不均匀，就像代码审查——有些代码质量很高（大分子），有些很烂（小分子），团队（材料）整体质量取决于最弱的那部分。",
+      "contributor": "system",
+      "createdAt": "2026-03-30T12:47:00.957Z",
+      "usefulness": 0
+    },
+    {
+      "id": "3af8bdfe-68f3-4e2f-92e2-b3763cb76a9c",
+      "source": "046a6058-2f1a-406d-88db-c71de4433ed5",
+      "target": "d8e5b394-d7a5-4593-b2b6-1ff876a79735",
+      "text": "结晶区降解慢就像技术债务——硬的部分（结晶区）很难处理，需要更多时间（高温/强酶）才能降解，但一旦开始，速度会加快。",
+      "contributor": "system",
+      "createdAt": "2026-03-30T12:47:00.957Z",
+      "usefulness": 0
+    },
+    {
+      "id": "01896d9e-7b5f-43dd-84aa-46999f00f4ea",
+      "source": "15e98503-a02b-441f-9410-cedbaddf7d3e",
+      "target": "259fa216-e2ea-4887-a248-d0aee5892335",
+      "text": "机械性能下降比分子量快，就像药物代谢——只要关键代谢物（长链）减少，疗效（强度）就会急剧下降，即使前体（短链）还在。",
+      "contributor": "system",
+      "createdAt": "2026-03-30T12:47:00.957Z",
+      "usefulness": 0
+    }
+  ],
+  "domains": [
+    "chemistry",
+    "medicine",
+    "engineering",
+    "programming",
+    "cooking"
+  ],
+  "savedAt": "2026-03-30T12:47:00.957Z"
+}

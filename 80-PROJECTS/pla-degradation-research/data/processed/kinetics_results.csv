@@ -1,0 +1,6 @@
+study,condition,initial_Mw,k,half_life_days,degradation_type
+Nature Polymers 2020,"soil burial, 25°C, 50% RH",58.0,0.010440930101021218,66.38749362876676,hydrolysis + enzymatic
+Biomaterials 2019,"composting, 58°C",72.0,0.046209812037329684,15.0,hydrolysis + thermal
+J Applied Polymer Sci 2021,"phosphate buffer, pH 7.4, 37°C",45.0,0.022450309265084793,30.874727487070427,hydrolysis
+Polymer Degradation 2022,"marine environment, 20°C",65.0,0.004085830890281305,169.6465661877217,hydrolysis + UV
+ACS Sustainable 2023,"activated sludge, 35°C",52.0,0.031079837936980437,22.30214912849343,enzymatic

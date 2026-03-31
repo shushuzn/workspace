@@ -1,0 +1,17 @@
+{
+  "name": "openclaw-dashboard",
+  "version": "1.0.0",
+  "description": "OpenClaw Workstation Dashboard",
+  "scripts": {
+    "start": "node dashboard-server.js",
+    "generate": "node generate-dashboard-data.js",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --testPathIgnorePatterns='e2e'",
+    "test:e2e": "npx playwright test",
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "jest": "^29.7.0",
+    "playwright": "^1.58.2"
+  }
+}

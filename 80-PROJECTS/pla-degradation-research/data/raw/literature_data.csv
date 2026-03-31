@@ -1,0 +1,6 @@
+study,condition,Mw,PDI,ts_initial,ts_30d,ts_60d,ts_90d,mw_30d,mw_60d,degradation_type,ts_15d,mw_15d,ts_7d,ts_14d,ts_21d,ts_28d,mw_7d,mw_14d,mw_21d,mw_28d,mw_90d,ts_20d,ts_40d,mw_20d,mw_40d
+Nature Polymers 2020,"soil burial, 25°C, 50% RH",58.0,1.8,65.0,42.0,28.0,15.0,42.0,31.0,hydrolysis + enzymatic,,,,,,,,,,,,,,,
+Biomaterials 2019,"composting, 58°C",72.0,2.1,70.0,12.0,,,18.0,,hydrolysis + thermal,35.0,38.0,,,,,,,,,,,,,
+J Applied Polymer Sci 2021,"phosphate buffer, pH 7.4, 37°C",45.0,1.9,58.0,,,,,,hydrolysis,,,52.0,45.0,38.0,31.0,41.0,36.0,30.0,24.0,,,,,
+Polymer Degradation 2022,"marine environment, 20°C",65.0,2.0,62.0,55.0,48.0,40.0,58.0,52.0,hydrolysis + UV,,,,,,,,,,,45.0,,,,
+ACS Sustainable 2023,"activated sludge, 35°C",52.0,1.7,68.0,,,,,,enzymatic,,,,,,,,,,,,38.0,18.0,30.0,15.0

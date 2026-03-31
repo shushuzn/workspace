@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Knowledge Bridge - 知识的六度分隔</title>
+  <script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #1a1a2e;
+      color: #eee;
+    }
+    header {
+      background: linear-gradient(135deg, #16213e, #0f3460);
+      padding: 20px 30px;
+      border-bottom: 2px solid #e94560;
+    }
+    h1 { font-size: 24px; margin-bottom: 5px; }
+    .subtitle { color: #888; font-size: 14px; }
+    #network {
+      width: 100%;
+      height: calc(100vh - 180px);
+      border-bottom: 1px solid #333;
+    }
+    #legend {
+      display: flex;
+      gap: 20px;
+      padding: 15px 30px;
+      background: #16213e;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+    }
+    .legend-color {
+      width: 16px;
+      height: 16px;
+      border-radius: 4px;
+    }
+    #analogy-panel {
+      position: fixed;
+      right: 20px;
+      top: 100px;
+      width: 320px;
+      max-height: calc(100vh - 220px);
+      background: #16213e;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      overflow-y: auto;
+      display: none;
+    }
+    #analogy-panel.show { display: block; }
+    #analogy-panel h3 {
+      color: #e94560;
+      margin-bottom: 15px;
+      font-size: 16px;
+    }
+    .analogy-item {
+      background: #1a1a2e;
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .analogy-item .domains {
+      font-size: 11px;
+      color: #888;
+      margin-bottom: 6px;
+    }
+    .analogy-item .text {
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .instructions {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: rgba(22, 33, 62, 0.9);
+      padding: 12px 16px;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #888;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🧠 Knowledge Bridge</h1>
+    <div class="subtitle">知识的六度分隔 — Cross-domain knowledge graph</div>
+  </header>
+
+  <div id="network"></div>
+
+  <div id="legend">
+    <span style="color:#888;font-size:12px;">Domain:</span>
+    <div class="legend-item"><div class="legend-color" style="background:#34A853"></div>chemistry</div><div class="legend-item"><div class="legend-color" style="background:#4285F4"></div>programming</div><div class="legend-item"><div class="legend-color" style="background:#EA4335"></div>medicine</div><div class="legend-item"><div class="legend-color" style="background:#9C27B0"></div>engineering</div><div class="legend-item"><div class="legend-color" style="background:#FF9800"></div>cooking</div>
+  </div>
+
+  <div id="analogy-panel">
+    <h3>🔗 Cross-Domain Analogies</h3>
+    <div id="analogy-list"></div>
+  </div>
+
+  <div class="instructions">
+    💡 Click a node to see related cross-domain analogies
+  </div>
+
+  <script>
+    const nodes = new vis.DataSet([{"id":"24491200-8ea5-440c-a0ec-c61fa2c3d53d","label":"PLA结构","title":"聚乳酸(PLA)是聚酯的一种，由乳酸单体通过酯键连接成聚合物链","color":{"background":"#34A853","border":"#2E7D32","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"chemistry"},{"id":"715392b0-5f17-46a6-b55c-c456158103aa","label":"酯键","title":"PLA中的官能团-COO-，能被水分子攻击导致断链","color":{"background":"#34A853","border":"#2E7D32","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"chemistry"},{"id":"8dc7e3d0-3d67-40b9-8894-2bfd926a0d92","label":"水解降解","title":"水分子攻击酯键，使聚合物分子量下降的过程","color":{"background":"#34A853","border":"#2E7D32","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"chemistry"},{"id":"3e114694-ad3c-4b05-94c5-06b5fbd97450","label":"微生物降解","title":"微生物分泌酶，将乳酸分解为CO2和H2O","color":{"background":"#EA4335","border":"#C62828","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"medicine"},{"id":"0057808c-dfce-4514-97bc-be263490395a","label":"一级反应动力学","title":"M(t) = M0 * e^(-kt)，分子量随时间指数下降","color":{"background":"#34A853","border":"#2E7D32","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"chemistry"},{"id":"fec6be11-60f6-4706-99c0-a5e65ef82846","label":"半衰期","title":"分子量减少一半所需时间，t1/2 = ln(2)/k","color":{"background":"#34A853","border":"#2E7D32","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"chemistry"},{"id":"8d4fa7d2-3043-4c69-8467-e3c3c345bf31","label":"温度效应","title":"温度升高加速水解反应，符合阿伦尼乌斯方程","color":{"background":"#34A853","border":"#2E7D32","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"chemistry"},{"id":"5ef643ec-83f9-433e-a1d6-d5e326a892c1","label":"分子量分布","title":"PDI值越大，聚合物链长越不均匀","color":{"background":"#34A853","border":"#2E7D32","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"chemistry"},{"id":"046a6058-2f1a-406d-88db-c71de4433ed5","label":"结晶度","title":"结晶区水解慢于无定形区，影响降解速率","color":{"background":"#34A853","border":"#2E7D32","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"chemistry"},{"id":"15e98503-a02b-441f-9410-cedbaddf7d3e","label":"机械性能","title":"拉伸强度等性能指标，随降解下降","color":{"background":"#9C27B0","border":"#6A1B9A","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"engineering"},{"id":"2299345e-d27b-4b78-9488-473716208549","label":"内存泄漏","title":"程序运行中未释放的内存持续积累，导致可用内存减少","color":{"background":"#4285F4","border":"#1565C0","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"programming"},{"id":"d2bc2284-f5e8-461c-8ee0-d4985afe02f8","label":"垃圾回收","title":"自动识别和释放不再使用的内存的机制","color":{"background":"#4285F4","border":"#1565C0","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"programming"},{"id":"996affd4-9968-41a9-a007-bf1cf24c144d","label":"微服务崩溃","title":"一个服务故障导致级联失败的现象","color":{"background":"#4285F4","border":"#1565C0","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"programming"},{"id":"0f38799f-75be-40bb-bbb1-d61a2e376983","label":"Try-Finally块","title":"确保无论是否异常，finally代码块都会执行","color":{"background":"#4285F4","border":"#1565C0","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"programming"},{"id":"f6e75601-b54a-4b94-b4ff-823c2255e825","label":"CPU频率调节","title":"处理器根据负载动态调整频率的机制","color":{"background":"#4285F4","border":"#1565C0","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"programming"},{"id":"d97e3bf4-fb7e-42c0-a9c5-6d45c663c541","label":"API弃用","title":"旧版API宣布过时，最终将被移除","color":{"background":"#4285F4","border":"#1565C0","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"programming"},{"id":"d8e5b394-d7a5-4593-b2b6-1ff876a79735","label":"技术债务","title":"快速开发积累的低质量代码，后期维护成本高","color":{"background":"#4285F4","border":"#1565C0","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"programming"},{"id":"bfbe2a85-cc13-45c7-aaef-5bfa7bad5691","label":"代码审查","title":"团队检查代码质量和一致性的过程","color":{"background":"#4285F4","border":"#1565C0","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"programming"},{"id":"1e31834b-adfb-4266-893c-d52a00508da7","label":"炖肉软烂","title":"长时间高温加热使肉类蛋白质分解、结构松散","color":{"background":"#FF9800","border":"#E65100","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"cooking"},{"id":"6620faac-f587-4a19-8244-198e5b898188","label":"食物腐败","title":"微生物作用下食物变质分解","color":{"background":"#FF9800","border":"#E65100","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"cooking"},{"id":"259fa216-e2ea-4887-a248-d0aee5892335","label":"药物代谢","title":"药物在体内被酶分解成代谢物的过程","color":{"background":"#EA4335","border":"#C62828","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"medicine"},{"id":"64784eb0-83fa-4971-84a4-2dc7f5b1faf4","label":"酶活性","title":"酶催化反应的效率，受温度和pH影响","color":{"background":"#EA4335","border":"#C62828","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"medicine"},{"id":"5506f5b5-8cb4-48f6-abad-3223c96ac430","label":"药物半衰期","title":"药物浓度减少一半所需时间","color":{"background":"#EA4335","border":"#C62828","highlight":{"background":"#FFF","border":"#000"}},"font":{"color":"#FFF","size":14},"domain":"medicine"}]);
+    const edges = new vis.DataSet([{"from":"24491200-8ea5-440c-a0ec-c61fa2c3d53d","to":"715392b0-5f17-46a6-b55c-c456158103aa","title":"contains","value":1},{"from":"715392b0-5f17-46a6-b55c-c456158103aa","to":"8dc7e3d0-3d67-40b9-8894-2bfd926a0d92","title":"enables","value":1},{"from":"8dc7e3d0-3d67-40b9-8894-2bfd926a0d92","to":"3e114694-ad3c-4b05-94c5-06b5fbd97450","title":"feeds","value":1},{"from":"0057808c-dfce-4514-97bc-be263490395a","to":"fec6be11-60f6-4706-99c0-a5e65ef82846","title":"defines","value":1},{"from":"8dc7e3d0-3d67-40b9-8894-2bfd926a0d92","to":"0057808c-dfce-4514-97bc-be263490395a","title":"follows","value":1},{"from":"8d4fa7d2-3043-4c69-8467-e3c3c345bf31","to":"8dc7e3d0-3d67-40b9-8894-2bfd926a0d92","title":"accelerates","value":1},{"from":"5ef643ec-83f9-433e-a1d6-d5e326a892c1","to":"15e98503-a02b-441f-9410-cedbaddf7d3e","title":"determines","value":1},{"from":"046a6058-2f1a-406d-88db-c71de4433ed5","to":"8dc7e3d0-3d67-40b9-8894-2bfd926a0d92","title":"modulates","value":1},{"from":"15e98503-a02b-441f-9410-cedbaddf7d3e","to":"8dc7e3d0-3d67-40b9-8894-2bfd926a0d92","title":"decreases_during","value":1},{"from":"2299345e-d27b-4b78-9488-473716208549","to":"d2bc2284-f5e8-461c-8ee0-d4985afe02f8","title":"needs","value":1},{"from":"0f38799f-75be-40bb-bbb1-d61a2e376983","to":"d2bc2284-f5e8-461c-8ee0-d4985afe02f8","title":"relates_to","value":1},{"from":"d97e3bf4-fb7e-42c0-a9c5-6d45c663c541","to":"d8e5b394-d7a5-4593-b2b6-1ff876a79735","title":"creates","value":1},{"from":"259fa216-e2ea-4887-a248-d0aee5892335","to":"64784eb0-83fa-4971-84a4-2dc7f5b1faf4","title":"depends_on","value":1},{"from":"259fa216-e2ea-4887-a248-d0aee5892335","to":"3e114694-ad3c-4b05-94c5-06b5fbd97450","title":"similar_to","value":1},{"from":"5506f5b5-8cb4-48f6-abad-3223c96ac430","to":"fec6be11-60f6-4706-99c0-a5e65ef82846","title":"similar_to","value":1},{"from":"64784eb0-83fa-4971-84a4-2dc7f5b1faf4","to":"8d4fa7d2-3043-4c69-8467-e3c3c345bf31","title":"similar_to","value":1},{"from":"1e31834b-adfb-4266-893c-d52a00508da7","to":"8d4fa7d2-3043-4c69-8467-e3c3c345bf31","title":"similar_to","value":1},{"from":"1e31834b-adfb-4266-893c-d52a00508da7","to":"6620faac-f587-4a19-8244-198e5b898188","title":"relates_to","value":1}]);
+
+    const container = document.getElementById('network');
+    const data = { nodes, edges };
+
+    const options = {
+      nodes: {
+        shape: 'dot',
+        size: 20,
+        borderWidth: 2,
+        shadow: true
+      },
+      edges: {
+        width: 1,
+        color: { color: '#444', highlight: '#e94560' },
+        smooth: { type: 'continuous' }
+      },
+      physics: {
+        stabilization: { iterations: 200 },
+        barnesHut: {
+          gravitationalConstant: -3000,
+          springLength: 200
+        }
+      },
+      interaction: {
+        hover: true,
+        tooltipDelay: 200
+      }
+    };
+
+    const network = new vis.Network(container, data, options);
+
+    // Show analogies on click
+    const analogyList = document.getElementById('analogy-list');
+    const analogyPanel = document.getElementById('analogy-panel');
+    const analogies = [{"id":"35e92080-2623-4846-809c-03e90967870c","source":"8dc7e3d0-3d67-40b9-8894-2bfd926a0d92","target":"2299345e-d27b-4b78-9488-473716208549","text":"PLA水解就像内存泄漏：系统（聚合物）持续产生需要清理的东西（短链），但没有垃圾回收（微生物）时，内存（分子量）最终耗尽崩溃。","contributor":"system","createdAt":"2026-03-30T12:47:00.956Z","usefulness":0},{"id":"df81b625-9a6e-4fdd-b821-90a032ddbe23","source":"3e114694-ad3c-4b05-94c5-06b5fbd97450","target":"0f38799f-75be-40bb-bbb1-d61a2e376983","text":"PLA最终被微生物完全分解成CO2和H2O，就像try-catch-finally中的finally块——无论什么情况，finally都会执行，确保清理完成。","contributor":"system","createdAt":"2026-03-30T12:47:00.956Z","usefulness":0},{"id":"6167fb58-2778-425f-83c3-1290ac28dda8","source":"715392b0-5f17-46a6-b55c-c456158103aa","target":"996affd4-9968-41a9-a007-bf1cf24c144d","text":"酯键被水切断就像微服务级联崩溃——一个关键服务宕了，依赖它的其他服务也会陆续崩溃（分子链断裂传导）。","contributor":"system","createdAt":"2026-03-30T12:47:00.956Z","usefulness":0},{"id":"e2b915df-bc01-4902-b785-e3d4965c6458","source":"0057808c-dfce-4514-97bc-be263490395a","target":"f6e75601-b54a-4b94-b4ff-823c2255e825","text":"一级反应动力学中，降解速率与当前浓度成正比——就像CPU降频：负载（浓度）越高，功耗（反应速率）越大，但效率不变。","contributor":"system","createdAt":"2026-03-30T12:47:00.956Z","usefulness":0},{"id":"0a187488-e6e5-4476-bfe4-7ba63177e5ee","source":"fec6be11-60f6-4706-99c0-a5e65ef82846","target":"d97e3bf4-fb7e-42c0-a9c5-6d45c663c541","text":"半衰期是PLA分子量减少一半的时间，就像软件API的弃用周期：到了弃用日期，功能（分子量）减半，再过一个周期，彻底消失。","contributor":"system","createdAt":"2026-03-30T12:47:00.956Z","usefulness":0},{"id":"bdef2a57-118e-414f-8ec7-89188175e791","source":"8d4fa7d2-3043-4c69-8467-e3c3c345bf31","target":"1e31834b-adfb-4266-893c-d52a00508da7","text":"温度升高加速水解，就像炖肉——温度越高，肉（聚合物）软烂（降解）越快。","contributor":"system","createdAt":"2026-03-30T12:47:00.957Z","usefulness":0},{"id":"c01782e5-2f87-4d1d-804b-007035664456","source":"5ef643ec-83f9-433e-a1d6-d5e326a892c1","target":"bfbe2a85-cc13-45c7-aaef-5bfa7bad5691","text":"PDI大说明分子量分布不均匀，就像代码审查——有些代码质量很高（大分子），有些很烂（小分子），团队（材料）整体质量取决于最弱的那部分。","contributor":"system","createdAt":"2026-03-30T12:47:00.957Z","usefulness":0},{"id":"3af8bdfe-68f3-4e2f-92e2-b3763cb76a9c","source":"046a6058-2f1a-406d-88db-c71de4433ed5","target":"d8e5b394-d7a5-4593-b2b6-1ff876a79735","text":"结晶区降解慢就像技术债务——硬的部分（结晶区）很难处理，需要更多时间（高温/强酶）才能降解，但一旦开始，速度会加快。","contributor":"system","createdAt":"2026-03-30T12:47:00.957Z","usefulness":0},{"id":"01896d9e-7b5f-43dd-84aa-46999f00f4ea","source":"15e98503-a02b-441f-9410-cedbaddf7d3e","target":"259fa216-e2ea-4887-a248-d0aee5892335","text":"机械性能下降比分子量快，就像药物代谢——只要关键代谢物（长链）减少，疗效（强度）就会急剧下降，即使前体（短链）还在。","contributor":"system","createdAt":"2026-03-30T12:47:00.957Z","usefulness":0}];
+
+    network.on('click', function(params) {
+      if (params.nodes.length > 0) {
+        const nodeId = params.nodes[0];
+        const node = nodes.get(nodeId);
+
+        // Find analogies for this node
+        const related = analogies.filter(a => a.source === nodeId || a.target === nodeId);
+
+        if (related.length > 0) {
+          analogyList.innerHTML = related.map(a => {
+            const otherId = a.source === nodeId ? a.target : a.source;
+            const other = nodes.get(otherId);
+            return `
+              <div class="analogy-item">
+                <div class="domains">${node.label} (${node.domain}) ↔ ${other.label} (${other.domain})</div>
+                <div class="text">${a.text}</div>
+              </div>
+            `;
+          }).join('');
+          analogyPanel.classList.add('show');
+        }
+      } else {
+        analogyPanel.classList.remove('show');
+      }
+    });
+  </script>
+</body>
+</html>

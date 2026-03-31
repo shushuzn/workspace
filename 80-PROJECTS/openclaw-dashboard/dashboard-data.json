@@ -1,0 +1,287 @@
+{
+  "generated": "2026-03-31T01:42:15.681Z",
+  "projects": [
+    {
+      "name": "50-ton-hackathon-2026",
+      "meta": "TypeScript",
+      "description": "项目描述暂无",
+      "lastActive": null,
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [],
+      "devDependencies": [],
+      "scripts": []
+    },
+    {
+      "name": "a2a-router",
+      "meta": "TypeScript",
+      "description": "Agent-to-Agent Communication Router - MCP Server",
+      "lastActive": "2026-03-30",
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [
+        "@langchain/core",
+        "@langchain/langgraph",
+        "@modelcontextprotocol/sdk",
+        "better-sqlite3",
+        "uuid"
+      ],
+      "devDependencies": [
+        "@types/jest",
+        "jest",
+        "vitest"
+      ],
+      "scripts": [
+        "start",
+        "dev",
+        "test"
+      ]
+    },
+    {
+      "name": "agent-arena",
+      "meta": "Svelte",
+      "description": "AI Agent 养成竞技游戏",
+      "lastActive": "2026-03-30",
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [],
+      "devDependencies": [
+        "@sveltejs/vite-plugin-svelte",
+        "svelte",
+        "vite"
+      ],
+      "scripts": [
+        "dev",
+        "build",
+        "preview",
+        "test",
+        "test:ui"
+      ]
+    },
+    {
+      "name": "agent-islands",
+      "meta": "TypeScript",
+      "description": "Multi-Agent Orchestration Platform based on MCP",
+      "lastActive": "2026-03-30",
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [
+        "@modelcontextprotocol/sdk"
+      ],
+      "devDependencies": [
+        "@types/node",
+        "typescript",
+        "tsx"
+      ],
+      "scripts": [
+        "build",
+        "start",
+        "dev",
+        "test",
+        "lint",
+        "format"
+      ]
+    },
+    {
+      "name": "agent-memory-mesh",
+      "meta": "TypeScript",
+      "description": "Agent 记忆网格系统。",
+      "lastActive": null,
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [],
+      "devDependencies": [],
+      "scripts": []
+    },
+    {
+      "name": "agentic-bpm",
+      "meta": "Python/FastAPI",
+      "description": "**AI-Driven Business Process Management** — 智能业务流程管理系统",
+      "lastActive": "2026-03-25",
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [],
+      "devDependencies": [],
+      "scripts": []
+    },
+    {
+      "name": "ai-roundtable",
+      "meta": "TypeScript",
+      "description": "Multi-agent roundtable discussion CLI tool with multiple AI personas",
+      "lastActive": "2026-03-30",
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [
+        "dotenv",
+        "https-proxy-agent"
+      ],
+      "devDependencies": [],
+      "scripts": [
+        "start"
+      ]
+    },
+    {
+      "name": "ai-roundtable-mcp",
+      "meta": "TypeScript",
+      "description": "AI 圆桌讨论 MCP Server",
+      "lastActive": "2026-03-30",
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [
+        "@modelcontextprotocol/sdk",
+        "dotenv",
+        "undici"
+      ],
+      "devDependencies": [
+        "@types/node",
+        "typescript"
+      ],
+      "scripts": [
+        "build",
+        "start",
+        "dev"
+      ]
+    },
+    {
+      "name": "code-agent",
+      "meta": "TypeScript",
+      "description": "Code Intelligence Agent - Semgrep + Tree-sitter analysis",
+      "lastActive": "2026-03-30",
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [
+        "@modelcontextprotocol/sdk",
+        "tree-sitter",
+        "tree-sitter-javascript",
+        "tree-sitter-typescript",
+        "tree-sitter-python"
+      ],
+      "devDependencies": [],
+      "scripts": [
+        "start",
+        "test"
+      ]
+    },
+    {
+      "name": "crucix",
+      "meta": "Express",
+      "description": "Local intelligence engine - 27 OSINT sources, live dashboard, public demo at crucix.live, auto-refresh, optional LLM layer.",
+      "lastActive": null,
+      "status": "modified",
+      "gitStatus": "M lib/i18n.mjs\n?? .omc/\n?? locales/zh.json\n?? maxAge)\n?? n.anom)\n?? \"\\346\\225\\231\\347\\250\\213.txt\"",
+      "branch": "master",
+      "dependencies": [
+        "express"
+      ],
+      "devDependencies": [],
+      "scripts": [
+        "start",
+        "dev",
+        "sweep",
+        "inject",
+        "brief",
+        "brief:save"
+      ]
+    },
+    {
+      "name": "idle-empire",
+      "meta": "Svelte",
+      "description": "Premium idle incremental game built with Svelte 5",
+      "lastActive": "2026-03-30",
+      "status": "idle",
+      "gitStatus": "",
+      "branch": "main",
+      "dependencies": [],
+      "devDependencies": [
+        "@sveltejs/vite-plugin-svelte",
+        "@testing-library/svelte",
+        "jsdom"
+      ],
+      "scripts": [
+        "dev",
+        "build",
+        "preview",
+        "test",
+        "test:run"
+      ]
+    },
+    {
+      "name": "knowledge-bridge",
+      "meta": "TypeScript",
+      "description": "项目描述暂无",
+      "lastActive": null,
+      "status": "modified",
+      "gitStatus": "M .claude/scheduled_tasks.lock\n M .claude/settings.local.json\n M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n?? 0\n?? 80-PROJECTS/crucix/\n?? 80-PROJECTS/knowledge-bridge/\n?? 80-PROJECTS/openclaw-dashboard/\n?? 80-PROJECTS/pla-degradation-research/\n?? l.trim())",
+      "branch": "main",
+      "dependencies": [
+        "uuid",
+        "vis-network"
+      ],
+      "devDependencies": [],
+      "scripts": [
+        "test"
+      ]
+    }
+  ],
+  "submodules": [
+    {
+      "path": "80-PROJECTS/idle-empire"
+    },
+    {
+      "path": "80-PROJECTS/50-ton-hackathon"
+    },
+    {
+      "path": "80-PROJECTS/stock-analysis-mcp"
+    },
+    {
+      "path": "80-PROJECTS/stock-analyzer-v2"
+    }
+  ],
+  "sessions": [
+    {
+      "id": "default_",
+      "time": "2026-03-28",
+      "status": "活跃中"
+    },
+    {
+      "id": "default_",
+      "time": "2026-03-28",
+      "status": "2天前"
+    },
+    {
+      "id": "default_",
+      "time": "2026-03-28",
+      "status": "2天前"
+    },
+    {
+      "id": "default_",
+      "time": "2026-03-28",
+      "status": "2天前"
+    },
+    {
+      "id": "default_",
+      "time": "2026-03-28",
+      "status": "2天前"
+    }
+  ],
+  "memory": {
+    "used": 141,
+    "total": 158,
+    "entries": 0,
+    "health": 89
+  },
+  "stats": {
+    "totalProjects": 33,
+    "submodules": 4,
+    "gitHooks": 4
+  }
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PLA Knowledge Panel</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; overflow: hidden; background: #1a1a2e; color: #eee; font-family: 'Cascadia Code', 'Consolas', monospace; }
+    .panel { height: 100vh; width: 380px; padding: 12px 8px; overflow-y: auto; border-left: 2px solid #4a9eff; font-size: 11px; line-height: 1.4; }
+    .header { color: #4a9eff; font-weight: bold; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #333; }
+    .domain { color: #ff9f43; margin: 6px 0 3px 0; font-weight: bold; }
+    .concept { margin-left: 8px; color: #ddd; }
+    .concept-name { color: #7bed9f; }
+    .analogy { margin: 8px 0; padding: 6px; background: #16213e; border-radius: 4px; }
+    .analogy-title { color: #ff6b81; font-weight: bold; }
+    .analogy-text { color: #a8a8a8; margin-top: 3px; font-size: 10px; }
+    .stats { position: fixed; bottom: 8px; left: 8px; color: #666; font-size: 9px; }
+    .node { color: #7bed9f; }
+    .edge { color: #4a9eff; }
+    .analogy-count { color: #ff9f43; }
+    h3 { color: #4a9eff; margin: 8px 0 4px 0; }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="header">🌱 PLA Knowledge Bridge — 知识的六度分隔</div>
+
+    <h3>📊 统计数据</h3>
+    <div class="stats-box">
+      <span class="node">● 23 个概念</span> ·
+      <span class="edge">● 18 条连接</span> ·
+      <span class="analogy-count">● 9 个类比</span>
+    </div>
+    <div style="color:#666;margin-top:2px;">领域：化学 · 医学 · 工程 · 编程 · 烹饪</div>
+
+    <h3>⚗️ 化学核心</h3>
+    <div class="concept"><span class="concept-name">PLA结构</span> → 酯键</div>
+    <div class="concept"><span class="concept-name">酯键</span> → PLA结构, 水解降解</div>
+    <div class="concept"><span class="concept-name">水解降解</span> → 酯键, 微生物, 动力学...</div>
+    <div class="concept"><span class="concept-name">一级反应动力学</span> → 半衰期</div>
+    <div class="concept"><span class="concept-name">半衰期</span> → 药物半衰期</div>
+    <div class="concept"><span class="concept-name">结晶度</span> → 水解降解</div>
+
+    <h3>🔗 跨域类比</h3>
+    <div class="analogy">
+      <div class="analogy-title">水解降解 ≈ 内存泄漏</div>
+      <div class="analogy-text">聚合物持续产生短链，无微生物清理时最终崩溃</div>
+    </div>
+    <div class="analogy">
+      <div class="analogy-title">微生物降解 ≈ Try-Finally块</div>
+      <div class="analogy-text">无论什么情况，最终都会被完全清理</div>
+    </div>
+    <div class="analogy">
+      <div class="analogy-title">酯键 ≈ 微服务崩溃</div>
+      <div class="analogy-text">关键节点断裂导致级联传导</div>
+    </div>
+    <div class="analogy">
+      <div class="analogy-title">半衰期 ≈ API弃用</div>
+      <div class="analogy-text">到了弃用日期，功能减半，再到期彻底消失</div>
+    </div>
+    <div class="analogy">
+      <div class="analogy-title">温度效应 ≈ 炖肉软烂</div>
+      <div class="analogy-text">温度越高，降解/软烂越快</div>
+    </div>
+    <div class="analogy">
+      <div class="analogy-title">结晶度 ≈ 技术债务</div>
+      <div class="analogy-text">硬的部分难处理，一旦开始速度加快</div>
+    </div>
+    <div class="analogy">
+      <div class="analogy-title">机械性能 ≈ 药物代谢</div>
+      <div class="analogy-text">关键物质减少，疗效急剧下降</div>
+    </div>
+
+    <h3>💻 编程领域</h3>
+    <div class="concept"><span class="concept-name">内存泄漏</span> → 垃圾回收</div>
+    <div class="concept"><span class="concept-name">Try-Finally块</span> → 垃圾回收</div>
+    <div class="concept"><span class="concept-name">微服务崩溃</span> → (酯键类比)</div>
+    <div class="concept"><span class="concept-name">API弃用</span> → (半衰期类比)</div>
+    <div class="concept"><span class="concept-name">技术债务</span> → (结晶度类比)</div>
+
+    <h3>🍖 烹饪领域</h3>
+    <div class="concept"><span class="concept-name">炖肉软烂</span> → 温度效应</div>
+    <div class="concept"><span class="concept-name">食物腐败</span> → 炖肉软烂</div>
+
+    <h3>💊 医学领域</h3>
+    <div class="concept"><span class="concept-name">微生物降解</span> → 水解降解</div>
+    <div class="concept"><span class="concept-name">药物代谢</span> → 酶活性</div>
+    <div class="concept"><span class="concept-name">药物半衰期</span> → 半衰期</div>
+
+    <div class="stats">Auto-refresh: 30s | <a href="knowledge-graph.html" style="color:#4a9eff;">Interactive</a></div>
+  </div>
+</body>
+</html>
