@@ -84,23 +84,26 @@ const OPERATIONS = [
 
         if (!status) return { committed: 0, message: '无变更' };
 
-        const lines = status.split('\n').filter(l => {
-          const trimmed = l.trim();
-          return trimmed && !trimmed.includes('loop-history.json') && !trimmed.includes('dashboard-data.json');
+        const lines = status.split('\n').map(l => l.trim()).filter(Boolean);
+
+        // 过滤 loop 临时文件和 dashboard 数据，只统计真正有意义的文件
+        const meaningful = lines.filter(l => {
+          const file = l.replace(/^[ A-Z?]{2,3}\s*/, '');
+          return !file.includes('loop-history.json') && !file.includes('dashboard-data.json');
         });
 
-        if (lines.length === 0) return { committed: 0, message: '无变更（仅 loop 文件）' };
+        if (meaningful.length === 0) return { committed: 0, message: '无变更（仅 loop 文件）' };
 
-        const changed = lines.length;
-        const hasDeleted = lines.some(l => l.startsWith('D '));
-        const hasNew = lines.some(l => l.startsWith('?? '));
-        const hasModified = lines.some(l => l.startsWith(' M') || l.startsWith('M '));
-        const hasAdded = lines.some(l => l.startsWith('A '));
+        const changed = meaningful.length;
+        const hasDeleted = meaningful.some(l => l.startsWith('D '));
+        const hasNew = meaningful.some(l => l.startsWith('?? '));
+        const hasModified = meaningful.some(l => l.startsWith(' M') || l.startsWith('M '));
+        const hasAdded = meaningful.some(l => l.startsWith('A '));
 
         let msg = '';
-        if (hasNew && hasAdded) msg = `feat: 新增 ${lines.filter(l => l.startsWith('?? ') || l.startsWith('A ')).length} 个文件`;
-        else if (hasModified) msg = `chore: 更新 ${lines.filter(l => l.startsWith(' M') || l.startsWith('M ')).length} 个文件`;
-        else if (hasDeleted) msg = `chore: 删除 ${lines.filter(l => l.startsWith('D ')).length} 个文件`;
+        if (hasNew && hasAdded) msg = `feat: 新增 ${meaningful.filter(l => l.startsWith('?? ') || l.startsWith('A ')).length} 个文件`;
+        else if (hasModified) msg = `chore: 更新 ${meaningful.filter(l => l.startsWith(' M') || l.startsWith('M ')).length} 个文件`;
+        else if (hasDeleted) msg = `chore: 删除 ${meaningful.filter(l => l.startsWith('D ')).length} 个文件`;
         else msg = `chore: 同步 ${changed} 个文件`;
 
         execSync('git add -A', { cwd: WORKSPACE, encoding: 'utf8', timeout: 5000 });
@@ -494,7 +497,11 @@ function selectOperation(history) {
       const recent = history.records.slice(-cd).map(r => r.opId);
       return !recent.includes(op.id);
     });
-    if (candidates.length === 0) candidates.push(OPERATIONS[Math.floor(Math.random() * OPERATIONS.length)]);
+    if (candidates.length === 0) {
+      // 兜底：优先选 productive op，避免选到纯检测 op
+      const productive = OPERATIONS.filter(op => !isDetectionOp(op.id));
+      candidates.push(productive[Math.floor(Math.random() * productive.length)] || OPERATIONS[0]);
+    }
     // 探索模式：优先选从未执行过的新操作，确保所有操作都有被尝试的机会
     const newCandidates = candidates.filter(op => isNewOp(history, op.id));
     const pickFrom = newCandidates.length > 0 ? newCandidates : candidates;
@@ -548,7 +555,11 @@ function selectOperation(history) {
       const recent = history.records.slice(-cd).map(r => r.opId);
       return !recent.includes(op.id);
     });
-    if (candidates.length === 0) candidates.push(OPERATIONS[Math.floor(Math.random() * OPERATIONS.length)]);
+    if (candidates.length === 0) {
+      // 兜底：优先选 productive op，避免选到纯检测 op
+      const productive = OPERATIONS.filter(op => !isDetectionOp(op.id));
+      candidates.push(productive[Math.floor(Math.random() * productive.length)] || OPERATIONS[0]);
+    }
     const op = candidates[Math.floor(Math.random() * candidates.length)];
     console.log(`[Select] 无历史/全失败，强制探索: ${op.name}`);
     return { op, mode: 'explore' };
