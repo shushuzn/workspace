@@ -1,0 +1,34 @@
+{
+  "issues": [
+    {
+      "type": "orphan_checkpoint",
+      "path": ".omc/state/checkpoints/checkpoint-2026-03-30T07-17-15-266Z.json",
+      "found_at": "2026-03-31T03:43:49.273Z",
+      "resolved": false
+    },
+    {
+      "type": "orphan_checkpoint",
+      "path": ".omc/state/checkpoints/checkpoint-2026-03-30T07-52-03-188Z.json",
+      "found_at": "2026-03-31T03:43:49.274Z",
+      "resolved": false
+    },
+    {
+      "type": "orphan_checkpoint",
+      "path": ".omc/state/checkpoints/checkpoint-2026-03-30T09-23-56-942Z.json",
+      "found_at": "2026-03-31T03:43:49.274Z",
+      "resolved": false
+    },
+    {
+      "type": "orphan_checkpoint",
+      "path": ".omc/state/checkpoints/checkpoint-2026-03-30T09-50-30-535Z.json",
+      "found_at": "2026-03-31T03:43:49.274Z",
+      "resolved": false
+    },
+    {
+      "type": "orphan_checkpoint",
+      "path": ".omc/state/checkpoints/checkpoint-2026-03-30T15-15-59-478Z.json",
+      "found_at": "2026-03-31T03:43:49.274Z",
+      "resolved": false
+    }
+  ]
+}
