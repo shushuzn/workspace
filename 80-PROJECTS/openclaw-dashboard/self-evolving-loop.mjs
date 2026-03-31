@@ -26,7 +26,7 @@ const COOLDOWN_DETECTION = 1;   // detection ops: check_*, count_*, brainstorm_p
 
 function getCooldown(opId) {
   const detectionOps = ['count_projects', 'count_sessions', 'check_memory_size',
-    'git_commit_suggest', 'check_project_readmes',
+    'check_project_readmes',
     'brainstorm_projects', 'find_large_files'];
   return detectionOps.includes(opId) ? COOLDOWN_DETECTION : COOLDOWN_PRODUCTIVE;
 }
@@ -381,38 +381,6 @@ ${target}/
     }
   },
   {
-    id: 'git_commit_suggest',
-    name: '分析 git 变更并建议提交',
-    weight: 1.0,
-    action: async () => {
-      const { execSync } = await import('child_process');
-      try {
-        const out = execSync('git status --porcelain', {
-          cwd: WORKSPACE,
-          encoding: 'utf8',
-          timeout: 5000
-        }).trim();
-
-        if (!out) return { changed: 0, suggestions: [] };
-
-        const lines = out.split('\n').filter(l => l.trim());
-        const suggestions = [];
-
-        const hasDeleted = lines.some(l => l.startsWith('D '));
-        const hasNew = lines.some(l => l.startsWith('?? '));
-        const hasModified = lines.some(l => l.startsWith(' M') || l.startsWith('M '));
-
-        if (hasDeleted) suggestions.push('检测到已删除文件 - 建议确认是否需要提交删除');
-        if (hasNew && hasModified) suggestions.push('新文件和已修改文件共存 - 建议分开提交以保持原子性');
-        if (lines.length > 10) suggestions.push(`变更文件较多 (${lines.length}个) - 考虑拆分成多个提交`);
-
-        return { changed: lines.length, files: lines.slice(0, 5), suggestions };
-      } catch {
-        return { changed: 0, suggestions: [] };
-      }
-    }
-  },
-  {
     id: 'find_large_files',
     name: '查找大文件（仅报告）',
     weight: 1.0,
@@ -608,9 +576,18 @@ function selectOperation(history) {
       const bmFiles = fs.readdirSync(bmDir).filter(f => f.endsWith('.md')).length;
       return bmFiles > 10; // 只在文件超过10个时有清理价值
     }
-    if (op.id === 'brainstorm_projects') return true;
+    if (op.id === 'brainstorm_projects') {
+      // 只在超过14天没有头脑风暴时才值得做（避免随机选中却无事可做）
+      const bmDir = path.join(WORKSPACE, '.omc', 'brainstorm');
+      if (!fs.existsSync(bmDir)) return true;
+      const files = fs.readdirSync(bmDir).filter(f => f.endsWith('.md'));
+      if (files.length === 0) return true;
+      const latest = files.sort().pop();
+      const age = Date.now() - fs.statSync(path.join(bmDir, latest)).mtimeMs;
+      return age > 14 * 24 * 60 * 60 * 1000;
+    }
     // 检测类操作：必须真的有东西可检测才可选
-    if (['workspace_auto_commit', 'git_commit_suggest'].includes(op.id)) {
+    if (['workspace_auto_commit'].includes(op.id)) {
       try {
         const out = execSync('git status --porcelain', { cwd: WORKSPACE, encoding: 'utf8', timeout: 5000 }).trim();
         const changed = out ? out.split('\n').filter(l => l.trim()).length : 0;
@@ -739,7 +716,7 @@ async function runIteration() {
   // 改善判定：分数增加 OR 操作有实质产出
   const isDetectionOnly = [
     'count_projects', 'count_sessions', 'check_memory_size',
-    'git_commit_suggest', 'check_project_readmes',
+    'check_project_readmes',
     'brainstorm_projects', 'find_large_files'
   ].includes(op.id);
   let improved = delta > 0;
