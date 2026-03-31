@@ -9,8 +9,13 @@ import { CONFIG } from '../config/default.mjs';
 import { WorkingMemory } from './working-memory.mjs';
 import { ToolRouter } from './tool-router.mjs';
 import { STM } from '../memory/stm.mjs';
+import { LTM } from '../memory/ltm.mjs';
 import { getAllOperations } from '../operations/index.mjs';
 import { Safety } from '../governance/safety.mjs';
+import { CandidatePool } from '../learn/candidate-pool.mjs';
+import { Curriculum } from '../learn/curriculum.mjs';
+import { Hypothesis } from '../evolution/hypothesis.mjs';
+import { Sandbox } from '../evolution/sandbox.mjs';
 
 export class Agent {
   constructor(workspace) {
@@ -23,6 +28,15 @@ export class Agent {
     this.operations = getAllOperations(workspace);
     this.toolRouter = new ToolRouter(workspace, this.operations, this.stm.history);
     this.safety = new Safety(workspace);
+
+    // Learn components - connected to MetaCognizer loop
+    this.candidatePool = new CandidatePool(workspace);
+    this.curriculum = new Curriculum();
+
+    // Memory and Evolution components
+    this.ltm = new LTM(workspace);
+    this.hypothesis = new Hypothesis(workspace, this.stm, this.ltm);
+    this.sandbox = new Sandbox(workspace);
 
     // Meta-cognizer will be injected
     this.metaCognizer = null;
@@ -40,14 +54,25 @@ export class Agent {
 
     // Meta-cognition: analyze and update ToolRouter with gaps
     let gaps = [];
+    let hypotheses = [];
     if (this.metaCognizer) {
       gaps = await this.metaCognizer.analyze();
       if (gaps.length > 0) {
         console.log(`[Agent] 元认知识别 ${gaps.length} 个能力缺口`);
         // Feed gaps to ToolRouter to bias operation selection
         this.toolRouter.setGaps(gaps);
+        // Add gaps to candidate pool for learning
+        this.learnFromGaps(gaps);
+        // Generate hypotheses from gaps
+        hypotheses = await this.hypothesis.generate();
+        if (hypotheses.length > 0) {
+          console.log(`[Agent] 生成 ${hypotheses.length} 个改进假设`);
+        }
       }
     }
+
+    // Query LTM for relevant knowledge to bias decisions
+    const ltmKnowledge = await this.queryLTM();
 
     // Select operation via ToolRouter (now gap-informed)
     const { op, mode } = this.toolRouter.select();
@@ -102,6 +127,11 @@ export class Agent {
     this.toolRouter.updateEpsilon(improved);
     this.stm.save();
 
+    // Distill successful experience to LTM
+    if (improved || result.success) {
+      await this.distillToLTM(op, result, record);
+    }
+
     console.log(`[Agent] 健康度: ${beforeScore} → ${afterScore} (${delta > 0 ? '+' : ''}${delta}) | ${noOp ? '无操作' : improved ? '✓' : '✗'}`);
     console.log('='.repeat(50));
 
@@ -133,6 +163,85 @@ export class Agent {
     }
 
     return { improved, noOp };
+  }
+
+  /**
+   * Add gaps from MetaCognizer to CandidatePool for learning
+   */
+  learnFromGaps(gaps) {
+    for (const gap of gaps) {
+      // Check if already in pool
+      const existing = this.candidatePool.getByType('capability_gap')
+        .find(c => c.target === gap.target && c.status !== 'rejected');
+
+      if (!existing) {
+        this.candidatePool.add({
+          type: 'capability_gap',
+          source: 'meta_cognizer',
+          target: gap.target,
+          name: gap.name,
+          priority: gap.priority,
+          reason: gap.suggestion || `Gap: ${gap.metric}`,
+          estimatedImpact: gap.priority === 'high' ? 30 : gap.priority === 'medium' ? 20 : 10
+        });
+      }
+    }
+
+    // Log pool stats
+    const stats = this.candidatePool.getStats();
+    if (stats.pending > 0) {
+      console.log(`[Agent] 候选池: ${stats.pending} 个待学习项`);
+    }
+  }
+
+  /**
+   * Distill successful operation result to LTM for future reference
+   */
+  async distillToLTM(op, result, record) {
+    const knowledge = {
+      opId: op.id,
+      opName: op.name,
+      type: op.type,
+      delta: record.delta,
+      mode: record.mode,
+      timestamp: record.timestamp
+    };
+
+    try {
+      await this.ltm.store('operation', op.id, knowledge, {
+        success: record.improved,
+        delta: record.delta
+      });
+    } catch (e) {
+      // LTM storage failure is non-fatal
+      console.log(`[LTM] 存储失败: ${e.message}`);
+    }
+  }
+
+  /**
+   * Query LTM for relevant knowledge to bias decisions
+   */
+  async queryLTM() {
+    const stats = this.ltm.getStats();
+    if (stats.totalEntries === 0) {
+      return null; // No knowledge yet
+    }
+
+    // Search for recent successful operations
+    try {
+      const recent = await this.ltm.searchByDomain('operation');
+      if (recent.length > 0) {
+        // Return top successful operations for bias
+        const successful = recent
+          .filter(e => e.metadata?.success === true)
+          .sort((a, b) => (b.metadata?.delta || 0) - (a.metadata?.delta || 0))
+          .slice(0, 5);
+        return { successfulOps: successful };
+      }
+    } catch (e) {
+      // LTM query failure is non-fatal
+    }
+    return null;
   }
 
   getStatus() {

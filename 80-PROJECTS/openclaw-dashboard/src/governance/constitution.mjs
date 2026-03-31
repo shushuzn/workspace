@@ -194,11 +194,52 @@ export class Constitution {
 
   /**
    * Check if a specific principle is violated by an operation
-   * Override this in subclasses for custom checks
    */
   checkPrincipleViolation(principle, operation) {
-    // Default implementation - no violations
-    // Subclasses can override for specific checks
+    const opStr = JSON.stringify(operation).toLowerCase();
+
+    switch (principle.id) {
+      case 'no_credential_exposure':
+        // Check for credential-like patterns
+        return this.checkCredentialPatterns(operation);
+
+      case 'incremental_progress':
+        // Large operations (>100 files, >1MB) may violate small-step principle
+        return this.checkIncrementalProgress(operation);
+
+      default:
+        return false;
+    }
+  }
+
+  checkCredentialPatterns(operation) {
+    // Dangerous patterns that should never appear in operation definitions
+    const dangerous = [
+      /api[_-]?key['":\s]*[=]\s*['"][a-za-z0-9]{20,}/i,
+      /secret[_-]?key['":\s]*[=]\s*['"][a-za-z0-9]{20,}/i,
+      /password['":\s]*[=]\s*['"][^'"]+/i,
+      /bearer\s+[a-za-z0-9_\-\.]{20,}/i,
+      /ghp_[a-za-z0-9]{36,}/i,
+      /sk-[a-za-z0-9]{48,}/i,
+    ];
+
+    const opStr = JSON.stringify(operation);
+    for (const pattern of dangerous) {
+      if (pattern.test(opStr)) {
+        return true; // Violation!
+      }
+    }
+    return false;
+  }
+
+  checkIncrementalProgress(operation) {
+    // Operations that touch too many files at once are risky
+    if (operation.affectedFiles && operation.affectedFiles > 100) {
+      return true;
+    }
+    if (operation.sizeMB && operation.sizeMB > 10) {
+      return true;
+    }
     return false;
   }
 
