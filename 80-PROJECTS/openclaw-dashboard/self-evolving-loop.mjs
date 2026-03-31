@@ -418,6 +418,61 @@ ${target}/
     }
   },
   {
+    id: 'clean_recorded_issues',
+    name: '修复已记录的工作区问题',
+    weight: 1.0,
+    action: async () => {
+      const omcDir = path.join(WORKSPACE, '.omc');
+      const loopDir = path.join(omcDir, 'loop');
+      if (!fs.existsSync(loopDir)) return { cleaned: 0, message: '无问题报告' };
+
+      // 找最新的 issues 文件
+      const files = fs.readdirSync(loopDir).filter(f => f.startsWith('issues-') && f.endsWith('.md'));
+      if (files.length === 0) return { cleaned: 0, message: '无问题报告' };
+      const latest = files.sort().pop();
+      const reportPath = path.join(loopDir, latest);
+      const content = fs.readFileSync(reportPath, 'utf8');
+
+      // 提取未解决的项目（不含 [x] 的）
+      const lines = content.split('\n');
+      const unresolved = [];
+      for (const line of lines) {
+        if (line.includes('- [ ]') || (line.includes('- [') && !line.includes('- [x]'))) {
+          // 提取路径
+          const match = line.match(/`([^`]+)`/);
+          if (match) unresolved.push(match[1]);
+        }
+      }
+      if (unresolved.length === 0) return { cleaned: 0, message: '无未解决问题' };
+
+      let cleaned = 0;
+      for (const issuePath of unresolved) {
+        const fullPath = path.join(WORKSPACE, issuePath.replace(/^\.omc[/\\]/, '.omc\\'));
+        if (!fs.existsSync(fullPath)) { cleaned++; continue; } // 已自行消失
+
+        try {
+          if (issuePath.includes('orphan_checkpoint')) {
+            fs.unlinkSync(fullPath);
+            cleaned++;
+          }
+        } catch { /* 忽略删除失败 */ }
+      }
+
+      if (cleaned > 0) {
+        // 将已清理的标记为 resolved
+        let updated = content;
+        for (const issuePath of unresolved.slice(0, cleaned)) {
+          const lineWithPath = updated.split('\n').find(l => l.includes(issuePath));
+          if (lineWithPath) {
+            updated = updated.replace(lineWithPath, lineWithPath.replace('- [ ]', '- [x]'));
+          }
+        }
+        fs.writeFileSync(reportPath, updated);
+      }
+      return { cleaned };
+    }
+  },
+  {
     id: 'check_memory_size',
     name: '检查记忆文件大小',
     // 检测 op，无实际清理动作
