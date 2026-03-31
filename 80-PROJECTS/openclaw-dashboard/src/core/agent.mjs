@@ -73,6 +73,9 @@ export class Agent {
 
     // Query LTM for relevant knowledge to bias decisions
     const ltmKnowledge = await this.queryLTM();
+    if (ltmKnowledge && ltmKnowledge.successfulOps) {
+      this.toolRouter.setLTMKnowledge(ltmKnowledge.successfulOps);
+    }
 
     // Select operation via ToolRouter (now gap-informed)
     const { op, mode } = this.toolRouter.select();

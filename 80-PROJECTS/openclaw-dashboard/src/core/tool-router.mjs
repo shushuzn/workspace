@@ -14,10 +14,15 @@ export class ToolRouter {
     this.history = history;
     this.workingMemory = new WorkingMemory(workspace);
     this.gaps = []; // MetaCognizer gaps - injected via setGaps()
+    this.ltmKnowledge = []; // LTM successful operations
   }
 
   setGaps(gaps) {
     this.gaps = gaps;
+  }
+
+  setLTMKnowledge(knowledge) {
+    this.ltmKnowledge = knowledge;
   }
 
   getEpsilon() {
@@ -102,10 +107,13 @@ export class ToolRouter {
       // Gap priority bonus: high-priority gaps boost related ops
       const gapBonus = this.getGapBonus(op);
 
+      // LTM knowledge bonus: operations with successful history in LTM
+      const ltmBonus = this.getLTMBonus(op);
+
       // Novelty bonus for unexplored operations
       const noveltyBonus = this.isNewOp(op.id) ? 0.05 : 0;
 
-      const totalScore = baseScore + gapBonus + noveltyBonus;
+      const totalScore = baseScore + gapBonus + ltmBonus + noveltyBonus;
 
       if (totalScore > bestScore) {
         bestScore = totalScore;
@@ -151,6 +159,21 @@ export class ToolRouter {
     }, opGaps[0]);
 
     return priorityBonus[highestPriority.priority] || 0;
+  }
+
+  getLTMBonus(op) {
+    if (!this.ltmKnowledge || this.ltmKnowledge.length === 0) return 0;
+
+    // Find if this operation has successful LTM history
+    const ltmEntry = this.ltmKnowledge.find(e => e.entity === op.id);
+    if (!ltmEntry) return 0;
+
+    // Bonus based on delta magnitude (higher improvement = higher bonus)
+    const delta = ltmEntry.metadata?.delta || 0;
+    if (delta > 10) return 0.2;
+    if (delta > 5) return 0.15;
+    if (delta > 0) return 0.1;
+    return 0;
   }
 
   calculateSuccessRates() {

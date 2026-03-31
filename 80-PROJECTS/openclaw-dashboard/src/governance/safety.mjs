@@ -132,26 +132,22 @@ export class Safety {
   async checkResourceLimits(operation) {
     const limits = this.constitution.getResourceLimits();
 
-    // Check workspace disk space
+    // Check workspace disk space via PowerShell (wmic deprecated on Windows 11)
     try {
-      const output = execSync('wmic logicaldisk get size,freespace,caption', {
-        cwd: this.workspace,
-        encoding: 'utf8',
-        timeout: 5000
-      });
+      const output = execSync(
+        'powershell -Command "Get-PSDrive -PSProvider FileSystem | Where-Object {$_.Used -ne $null} | ForEach-Object {@{Name=$_.Name;Free=[math]::Round($_.Free/1MB,0);Used=[math]::Round($_.Used/1MB,0)}} | ConvertTo-Json -Compress"',
+        { cwd: this.workspace, encoding: 'utf8', timeout: 5000 }
+      );
 
-      // Parse free space (rough check)
-      const lines = output.trim().split('\n');
-      if (lines.length > 1) {
-        const parts = lines[1].trim().split(/\s+/);
-        if (parts.length >= 2) {
-          const freeMB = parseInt(parts[1]) / (1024 * 1024);
-          if (freeMB < 100) { // Less than 100MB free
-            return {
-              passed: false,
-              reason: `磁盘空间不足: 仅剩 ${freeMB.toFixed(0)}MB`
-            };
-          }
+      const drives = JSON.parse(output);
+      const driveArray = Array.isArray(drives) ? drives : [drives];
+
+      for (const drive of driveArray) {
+        if (drive.Free < 100) {
+          return {
+            passed: false,
+            reason: `磁盘空间不足: ${drive.Name}: 仅剩 ${drive.Free}MB`
+          };
         }
       }
     } catch {
