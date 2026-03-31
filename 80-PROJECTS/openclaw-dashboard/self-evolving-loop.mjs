@@ -786,7 +786,7 @@ async function runIteration() {
           (result.cleaned === 0 && result.total > 0)) {
         noOp = true;
       } else {
-        improved = (result.created > 0) || (result.cleaned > 0) || (result.deleted > 0) || (result.found > 0) || (result.success === true);
+        improved = (result.created > 0) || (result.cleaned > 0) || (result.deleted > 0) || (result.found > 0) || (result.success === true) || (result.committed > 0);
       }
     }
   }
