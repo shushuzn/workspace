@@ -31,10 +31,13 @@ export class QualityScorer {
 
     const jump = deltaS;
 
-    const mean = contributions.reduce((a, b) => a + b, 0) / contributions.length;
-    const std = Math.sqrt(
-      contributions.reduce((s, v) => s + (v - mean) ** 2, 0) / contributions.length
-    );
+    // contributions 为空时（嵌入失败）降级为中性分
+    const mean = contributions.length > 0
+      ? contributions.reduce((a, b) => a + b, 0) / contributions.length
+      : 0;
+    const std = contributions.length > 0
+      ? Math.sqrt(contributions.reduce((s, v) => s + (v - mean) ** 2, 0) / contributions.length)
+      : 0;
     const balance = Math.max(0, Math.min(1, 1 - (std / (mean + ε))));
 
     const quality = fluidity * 0.4 + jump * 0.3 + balance * 0.3;
