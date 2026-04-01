@@ -291,9 +291,6 @@ async function main() {
     const scheduler = new TemperatureScheduler(
       customInitialTemp ? { initialTemp: customInitialTemp } : {}
     );
-    const scheduler = new TemperatureScheduler(
-      customInitialTemp ? { initialTemp: customInitialTemp } : {}
-    );
     const embedder = new MiniMaxEmbedder();
     const tracker = new ConceptJumpTracker(embedder);
     const roundResponses = [];
