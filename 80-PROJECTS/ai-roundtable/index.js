@@ -75,6 +75,16 @@ const personas = [
   },
 ];
 
+// ─── 观众提问人格 ─────────────────────────────────────────
+const audiencePersona = {
+  id: 'audience_questioner',
+  name: '现场观众',
+  icon: '🙋',
+  color: 35,
+  side: null,
+  systemPrompt: `你是一个尖锐的现场观众。轮到你提问，你必须立刻问出一个最尖锐的问题，不能有任何内心独白或思考过程。问题必须针对刚才辩论中最薄弱的论点，用一句简短的话问出来。不要用"请问""我想问"这种客气开场白，直接问。`,
+};
+
 // ─── 辩论模式人格 ─────────────────────────────────────────
 const debatePersonas = [
   {
@@ -551,6 +561,101 @@ async function generateSummary(topic, history, mode, abortSignal) {
   }
 }
 
+// ─── 观众提问 ───────────────────────────────────────────
+async function generateAudienceQuestion(topic, history, abortSignal) {
+  const systemPrompt = `你是一个尖锐的现场观众。刚才这段辩论中，某个论点有明显的漏洞或薄弱之处。\n\n直接问出那个最尖锐的问题——一句话，越短越狠越好。不要客气，不要铺垫，不要说"请问"。`;
+
+  const messages = [
+    { role: 'system', name: 'system', content: systemPrompt },
+    ...history.filter(m => m.role !== 'system'),
+  ];
+
+  try {
+    const raw = USE_OLLAMA
+      ? await chatOllama(messages, 0.7, 120)
+      : await (async () => {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+          const signal = mergeSignals(abortSignal, controller.signal);
+          const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
+            body: JSON.stringify({ model: MODEL, messages, max_tokens: 120, temperature: 0.7, stream: false }),
+            signal,
+          });
+          clearTimeout(timeoutId);
+          const data = await res.json();
+          return data.choices?.[0]?.message?.content || '';
+        })();
+    return raw.trim();
+  } catch (err) {
+    if (err.name !== 'AbortError') {
+      console.log(color(`  ⚠ 观众提问生成失败：${err.message}`, 31));
+    }
+    return null;
+  }
+}
+
+async function runAudienceQuestion(topic, history, activePersonas, abortSignal) {
+  console.log(color('\n🙋 正在生成观众提问...', 90));
+
+  const question = await generateAudienceQuestion(topic, history, abortSignal);
+  if (!question) return null;
+
+  const qLine = color(`🙋 现场观众：${question}`, 35);
+  console.log(`\n  ${qLine}\n`);
+
+  // 各人格依次回答
+  const historyWithQ = [...history, { role: 'user', content: `观众追问：${question}` }];
+  const answers = [];
+
+  for (const persona of activePersonas) {
+    const pName = color(`${persona.icon} ${persona.name}`, persona.color);
+    process.stdout.write(`  ${pName} 回答中...`);
+
+    const dotTimer = setInterval(() => process.stdout.write(color('.', persona.color)), 150);
+
+    try {
+      const pSystemPrompt = `${persona.systemPrompt}\n\n重要：直接输出你的回答，不要输出思考过程。观众的问题是："${question}"。`;
+      const messages = [
+        { role: 'system', name: 'system', content: pSystemPrompt },
+        ...historyWithQ.filter(m => m.role !== 'system'),
+      ];
+      const raw = USE_OLLAMA
+        ? await chatOllama(messages, 0.8, 300)
+        : await (async () => {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+            const signal = mergeSignals(abortSignal, controller.signal);
+            const res = await fetch(API_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
+              body: JSON.stringify({ model: MODEL, messages, max_tokens: 300, temperature: 0.8, stream: false }),
+              signal,
+            });
+            clearTimeout(timeoutId);
+            const data = await res.json();
+            return data.choices?.[0]?.message?.content || '';
+          })();
+
+      clearInterval(dotTimer);
+      process.stdout.write('\r' + '\x1b[K');
+      const answer = cleanResponse(raw);
+      console.log(`  ${pName}：${answer}`);
+      answers.push({ persona, text: answer });
+      historyWithQ.push({ role: 'assistant', content: answer });
+    } catch (err) {
+      clearInterval(dotTimer);
+      process.stdout.write('\r' + '\x1b[K');
+      if (err.name !== 'AbortError') {
+        console.log(`  ${pName} → ⚠ ${err.message}`);
+      }
+    }
+  }
+
+  return { question, answers, historyWithQ };
+}
+
 // ─── 打印函数 ───────────────────────────────────────────
 function printBanner(topic, rounds, mode, personaCount) {
   const modeStr = mode === MODE_DEBATE ? '辩论赛' : '圆桌讨论';
@@ -693,7 +798,7 @@ function parseArgs(argv) {
     }
   }
 
-  return { topic, rounds, customInitialTemp, mode };
+  return { topic, rounds, customInitialTemp, mode, audienceMode: args.includes('--audience') };
 }
 
 function printHelp() {
@@ -744,7 +849,7 @@ function printHelp() {
 
 // ─── 主函数 ───────────────────────────────────────────
 async function main() {
-  let { topic, rounds, customInitialTemp, mode } = parseArgs(process.argv);
+  let { topic, rounds, customInitialTemp, mode, audienceMode } = parseArgs(process.argv);
 
   if (!topic) {
     const rl = await import('readline');
@@ -858,6 +963,26 @@ async function main() {
           scheduler.getRoundsSinceLastSignificantDelta() > 3) {
         console.log(color('\n⚠ 讨论已收敛，提前结束', 33));
         break;
+      }
+
+      // ─── 观众提问阶段（辩论模式 + --audience）────────────
+      if (mode === MODE_DEBATE && audienceMode && round < rounds - 1) {
+        printDivider();
+        const audienceResult = await runAudienceQuestion(topic, history, activePersonas, abortController.signal);
+        if (audienceResult) {
+          const { question, answers } = audienceResult;
+          // 将观众Q&A注入历史供后续轮次使用
+          history.push({ role: 'user', content: `观众追问：${question}` });
+          for (const { persona, text } of answers) {
+            history.push({ role: 'assistant', content: text });
+          }
+          // 保留到 transcript
+          roundResponses[round].push(
+            { persona: audiencePersona, text: question, temp: T },
+            ...answers.map(a => ({ persona: a.persona, text: a.text, temp: T }))
+          );
+        }
+        printDivider();
       }
 
       scheduler.nextRound();
