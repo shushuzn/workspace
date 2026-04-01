@@ -252,7 +252,7 @@ export class ConceptJumpTracker {
       vectors = await this.embedder.embedBatch(utterances);
     } catch (err) {
       // Embedder API 失败时，优雅降级：跳过 ΔS 测量，记录 0
-      console.warn(color(`  ⚠ 嵌入 API 失败：${err.message}，跳过 ΔS 测量`, 33));
+      console.warn(`  ⚠ 嵌入 API 失败：${err.message}，跳过 ΔS 测量`);
       return 0;
     }
     const dim = vectors?.[0]?.length ?? 0;
@@ -363,13 +363,22 @@ import { MiniMaxEmbedder } from './shared/embedder.js';
 
 - [ ] **Step 3: 修改 parseArgs 支持新参数**
 
-原始 `parseArgs` 只支持 `-r`。在循环末尾、topic 赋值之前增加：
+原始 `parseArgs` 只支持 `-r`。在函数开头添加变量声明，在循环末尾、topic 赋值之前增加：
 ```javascript
+let customInitialTemp = null;  // 新增：初始温度覆盖
+
+// ... existing -r/--rounds handling ...
+
 if ((args[i] === '--temp' || args[i] === '-t') && args[i + 1] && !args[i + 1].startsWith('-')) {
   const t = parseFloat(args[i + 1]);
   if (!isNaN(t) && t > 0) customInitialTemp = Math.min(t, 2.0);  // 上限 2.0
   i++;
 }
+```
+
+同时在 `parseArgs` 返回语句中添加 `customInitialTemp`：
+```javascript
+return { topic, rounds, customInitialTemp };
 ```
 
 - [ ] **Step 4: 替换主循环**
@@ -378,6 +387,7 @@ if ((args[i] === '--temp' || args[i] === '-t') && args[i + 1] && !args[i + 1].st
 
 ```javascript
 // ─── 退火模式主循环 ───────────────────────────────────────
+const { topic, rounds, customInitialTemp } = parseArgs(process.argv);
 const scheduler = new TemperatureScheduler(
   customInitialTemp ? { initialTemp: customInitialTemp } : {}
 );
@@ -573,4 +583,4 @@ node index.js "AI 的未来是通用智能吗" -r 4
 3. Task 7（.env）
 4. Task 8（冒烟测试）
 
-每个 Task 完成即提交，共 7 个 commit（Tasks 1-4 各 1 个 + Tasks 5、6 各 1 个 + Task 7 无需 commit）。
+每个 Task 完成即提交，共 6 个 commit（Tasks 1-4 各 1 个 + Tasks 5、6 各 1 个）。
