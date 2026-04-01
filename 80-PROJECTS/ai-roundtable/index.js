@@ -218,6 +218,47 @@ function printAnnealingReport(topic, totalRounds, stats, roundStats) {
     );
   }
 
+  // ─── Per-persona 贡献度 ─────────────────────────────
+  const hasContributions = roundStats.some(s => s.contributions?.length > 0);
+  if (hasContributions) {
+    console.log('');
+    console.log('  人格贡献度（与上轮均值的余弦距离，越高 = 推动概念跳跃越多）');
+    console.log('  轮次 |', personas.map(p => `${p.icon}${p.name}`.slice(0, 4)).join(' | '), '| 均值');
+    console.log('  -----|' + '------|'.repeat(personas.length) + '------|');
+
+    for (const s of roundStats) {
+      if (!s.contributions?.length) continue;
+      const mean = s.contributions.reduce((a, b) => a + b, 0) / s.contributions.length;
+      const vals = s.contributions.map((v, i) => {
+        const icon = personas[i]?.icon ?? '?';
+        const flag = v > mean * 1.3 ? '↑' : v < mean * 0.7 ? '↓' : ' ';
+        return `${v.toFixed(2)}${flag}`;
+      });
+      console.log(
+        `    ${String(s.round).padStart(2)}  | ${vals.join(' | ')} | ${mean.toFixed(2)}`
+      );
+    }
+
+    // 累计贡献排名
+    console.log('');
+    const totals = Array(personas.length).fill(0);
+    let count = 0;
+    for (const s of roundStats) {
+      if (s.contributions?.length) {
+        for (let i = 0; i < s.contributions.length; i++) totals[i] += s.contributions[i];
+        count++;
+      }
+    }
+    if (count > 0) {
+      console.log('  累计贡献排名（越高越活跃）');
+      const ranked = personas.map((p, i) => ({ icon: p.icon, name: p.name, avg: totals[i] / count }))
+        .sort((a, b) => b.avg - a.avg);
+      ranked.forEach((r, i) => {
+        console.log(`    ${i + 1}. ${r.icon} ${r.name}: ${r.avg.toFixed(3)}`);
+      });
+    }
+  }
+
   console.log('');
   if (criticalDetected && criticalTemp !== null) {
     console.log(`  临界温度：${criticalTemp.toFixed(2)}（ΔS 峰值）`);
@@ -366,7 +407,7 @@ async function main() {
       }
 
       // ─── 轮结束：计算 ΔS ──────────────────────────────
-      const deltaS = await tracker.processRound(roundUtterances);
+      const { deltaS, contributions } = await tracker.processRound(roundUtterances);
       scheduler.recordDeltaS(deltaS);
 
       // 记录本轮统计
@@ -381,7 +422,7 @@ async function main() {
       } else {
         status = '🔥 高温探索';
       }
-      roundStats.push({ round: round + 1, temp: T, deltaS, status });
+      roundStats.push({ round: round + 1, temp: T, deltaS, contributions, status });
 
       // ─── 早停检查 ───────────────────────────────────
       if (round >= scheduler.config.minRoundsBeforeEarlyStop - 1 &&
