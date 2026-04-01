@@ -43,6 +43,7 @@ func (e *EvolutionLoop) Run(ctx context.Context, task string, opts *EvolutionOpt
 	var finalResult *EvolutionResultFinal
 	currentTask := task
 	strategy := e.evolver.GetNextStrategy()
+	var lastScore float64
 
 	for i := 0; i < opts.MaxIterations; i++ {
 		select {
@@ -63,6 +64,7 @@ func (e *EvolutionLoop) Run(ctx context.Context, task string, opts *EvolutionOpt
 		// Score results
 		ranked := e.ranker.Rank(results)
 		aggregateScore := e.ranker.AggregateAndScore(results)
+		lastScore = aggregateScore
 
 		// Record evolution
 		record := &EvolutionRecord{
@@ -77,7 +79,7 @@ func (e *EvolutionLoop) Run(ctx context.Context, task string, opts *EvolutionOpt
 		// Check if we should refine
 		shouldRefine, _ := e.evolver.ShouldRefine(ctx, record)
 
-		if !shouldRefine || aggregateScore >= opts.QualityThreshold {
+		if !shouldRefine && aggregateScore >= opts.QualityThreshold {
 			finalResult = &EvolutionResultFinal{
 				FinalTask:   currentTask,
 				Subtasks:    subtasks,
@@ -97,7 +99,7 @@ func (e *EvolutionLoop) Run(ctx context.Context, task string, opts *EvolutionOpt
 		finalResult = &EvolutionResultFinal{
 			FinalTask:  currentTask,
 			Iterations: opts.MaxIterations,
-			FinalScore: 0,
+			FinalScore: lastScore,
 			Converged:  false,
 		}
 	}

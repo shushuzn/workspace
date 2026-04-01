@@ -3,7 +3,7 @@ package orchestrator
 import (
 	"math"
 	"sort"
-	"time"
+	"strings"
 )
 
 // ResultRanker scores and ranks execution results
@@ -29,7 +29,7 @@ func (r *ResultRanker) Rank(results []ExecutionResult) []RankedResult {
 		total := r.weights.Quality*breakdown.QualityScore +
 			r.weights.Latency*breakdown.LatencyScore +
 			r.weights.Success*breakdown.SuccessScore +
-			r.weights.Relevance*breakdown.QualityScore // relevance uses quality for now
+			r.weights.Relevance*breakdown.RelevanceScore
 		ranked[i] = RankedResult{
 			Result:     &results[i],
 			TotalScore: total,
@@ -78,8 +78,26 @@ func (r *ResultRanker) scoreBreakdown(result *ExecutionResult) ScoreBreakdown {
 	}
 
 	return ScoreBreakdown{
-		QualityScore:  qualityScore,
-		LatencyScore: latencyScore,
-		SuccessScore: successScore,
+		QualityScore:   qualityScore,
+		LatencyScore:  latencyScore,
+		SuccessScore:  successScore,
+		RelevanceScore: relevanceScore(result.Subtask, result.Output),
 	}
+}
+
+// relevanceScore computes keyword overlap between subtask and output
+func relevanceScore(subtask, output string) float64 {
+	if subtask == "" || output == "" {
+		return 0
+	}
+	subtaskLower := strings.ToLower(subtask)
+	outputLower := strings.ToLower(output)
+	subWords := strings.Fields(subtaskLower)
+	var overlap int
+	for _, word := range subWords {
+		if len(word) > 3 && strings.Contains(outputLower, word) {
+			overlap++
+		}
+	}
+	return math.Min(1.0, float64(overlap)/math.Max(1.0, float64(len(subWords))))
 }

@@ -102,7 +102,7 @@ func (e *Executor) ExecuteParallel(ctx context.Context, agents []*Agent, tasks [
 }
 
 // AggregateResults combines results based on topology
-func (e *Executor) AggregateResults(results []ExecutionResult, topology SwarmTopology) (string, error) {
+func (e *Executor) AggregateResults(results []ExecutionResult, topology SwarmTopology) string {
 	switch topology {
 	case TopologyHierarchical, TopologyStar:
 		return e.aggregateHierarchical(results)

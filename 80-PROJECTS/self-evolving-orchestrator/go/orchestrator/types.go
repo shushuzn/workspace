@@ -107,7 +107,8 @@ type RankedResult struct {
 
 // ScoreBreakdown shows individual dimension scores
 type ScoreBreakdown struct {
-	QualityScore  float64
+	QualityScore   float64
 	LatencyScore  float64
-	SuccessScore  float64
+	SuccessScore   float64
+	RelevanceScore float64
 }

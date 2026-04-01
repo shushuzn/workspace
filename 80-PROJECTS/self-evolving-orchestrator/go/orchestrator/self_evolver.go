@@ -3,6 +3,8 @@ package orchestrator
 import (
     "context"
     "fmt"
+    "math"
+    "strings"
 )
 
 // SelfEvolver analyzes execution results and adjusts decomposition strategy
@@ -75,10 +77,71 @@ func (s *SelfEvolver) ResetHistory() {
     s.currentStrategy = 0
 }
 
+// detectOverlap returns true if any two results have cosine similarity > 0.85
 func (s *SelfEvolver) detectOverlap(results []ExecutionResult) bool {
     if len(results) < 2 {
         return false
     }
-    // Simple overlap detection placeholder
+    // Build output fingerprint vectors (simple n-gram hash)
+    vectors := make([][]float64, len(results))
+    for i, r := range results {
+        vectors[i] = ngramFingerprint(r.Output, 3)
+    }
+    // Pairwise cosine similarity
+    for i := 0; i < len(results); i++ {
+        for j := i + 1; j < len(results); j++ {
+            if cosineSim(vectors[i], vectors[j]) > 0.85 {
+                return true
+            }
+        }
+    }
     return false
+}
+
+// ngramFingerprint creates a sparse TF-like vector from n-gram hashes
+func ngramFingerprint(text string, n int) []float64 {
+    // Use 100 buckets — hash each n-gram, increment bucket
+    buckets := make([]float64, 100)
+    if len(text) < n {
+        return buckets
+    }
+    textLower := strings.ToLower(text)
+    for i := 0; i <= len(textLower)-n; i++ {
+        gram := textLower[i : i+n]
+        bucket := int(uint64(hashString(gram)) % 100)
+        buckets[bucket]++
+    }
+    // L2 normalize
+    var norm float64
+    for _, v := range buckets {
+        norm += v * v
+    }
+    norm = math.Sqrt(norm)
+    if norm > 0 {
+        for i := range buckets {
+            buckets[i] /= norm
+        }
+    }
+    return buckets
+}
+
+func hashString(s string) uint64 {
+    // Simple FNV-1a
+    var h uint64 = 14695981039346656037
+    for i := 0; i < len(s); i++ {
+        h ^= uint64(s[i])
+        h *= 1099511628211
+    }
+    return h
+}
+
+func cosineSim(a, b []float64) float64 {
+    if len(a) != len(b) || len(a) == 0 {
+        return 0
+    }
+    var dot float64
+    for i := 0; i < len(a); i++ {
+        dot += a[i] * b[i]
+    }
+    return dot
 }
