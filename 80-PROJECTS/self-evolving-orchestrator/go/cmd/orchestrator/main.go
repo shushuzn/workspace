@@ -32,15 +32,15 @@ func main() {
 		log.Fatal("task is required")
 	}
 
-	// Create decomposer
-	decomposer := orchestrator.NewDecomposerWrapper(orchestrator.NewLLMBasedDecomposer("http://localhost:11434", "llama3.2:1b"))
+	// Create decomposer (qwen3.5 hangs — using llama3.2:1b)
+	decomposer := orchestrator.NewDecomposerWrapper(orchestrator.NewLLMBasedDecomposer("http://localhost:11434", "qwen3.5:0.8b"))
 
-	// Create embedder (Ollama for semantic scoring)
+	// Create embedder (llama3.2:1b for embeddings API)
 	embedder := orchestrator.NewOllamaEmbedder("http://localhost:11434", "llama3.2:1b")
 	orchestrator.SetEmbedder(embedder)
 
-	// Create real Ollama executor
-	model := "llama3.2:1b"
+	// Create real Ollama executor (llama3.2:1b for code generation)
+	model := "qwen3.5:0.8b"
 	endpoint := "http://localhost:11434"
 	executor := func(subtask string) orchestrator.ExecutionResult {
 		start := time.Now()
