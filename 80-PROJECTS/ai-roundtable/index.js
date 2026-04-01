@@ -571,9 +571,24 @@ async function generateSummary(topic, history, mode, abortSignal) {
 async function generateAudienceQuestion(topic, history, abortSignal) {
   const systemPrompt = `你是一个尖锐的现场观众。刚才这段辩论中，某个论点有明显的漏洞或薄弱之处。\n\n直接问出那个最尖锐的问题——一句话，越短越狠越好。不要客气，不要铺垫，不要说"请问"。`;
 
+  // 只取最近 2 轮对话，减少上下文干扰
+  const recentHistory = history
+    .filter(m => m.role !== 'system')
+    .slice(-4);
+
+  // 过滤残留指令词
+  const cleanHistory = recentHistory.map(m => ({
+    ...m,
+    content: m.content
+      .replace(/[（（].*?[）)]/gs, '')
+      .replace(/\(.*?\)/gs, '')
+      .replace(/[,:].*?(你的任务是?|我的任务是?|辩手|正方|反方|分析师|质疑者|综合者)/g, '')
+      .trim(),
+  }));
+
   const messages = [
     { role: 'system', name: 'system', content: systemPrompt },
-    ...history.filter(m => m.role !== 'system'),
+    ...cleanHistory,
   ];
 
   try {
