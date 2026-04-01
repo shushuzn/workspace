@@ -136,7 +136,7 @@ function color(text, code) {
 
 function cleanResponse(text) {
   // 剥离 HTML 标签
-  text = text.replace(/<\/?(?:span|div|p|br|b|i|strong|em)[^>]*>/gi, '\n');
+  text = text.replace(/<\/?(?:span|div|p|br|b|i|strong|em|think)[^>]*>/gi, '\n');
   text = text.replace(/<[^>]+>/g, '');
   // 剥离思考标签
   text = text.replace(/<think>[\s\S]*?<\/think>/gi, '');
