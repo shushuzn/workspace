@@ -19,6 +19,7 @@ var (
 	maxIter    int
 	threshold  float64
 	timeoutSec int
+	fastMode   bool
 )
 
 func main() {
@@ -26,21 +27,27 @@ func main() {
 	flag.IntVar(&maxIter, "max-iter", 3, "Max evolution iterations")
 	flag.Float64Var(&threshold, "threshold", 0.7, "Quality threshold")
 	flag.IntVar(&timeoutSec, "timeout", 60, "Timeout in seconds")
+	flag.BoolVar(&fastMode, "fast", false, "Fast mode: single iteration, skip embeddings")
 	flag.Parse()
 
 	if task == "" {
 		log.Fatal("task is required")
 	}
 
-	// Create decomposer (qwen3.5 hangs — using llama3.2:1b)
+	// Create decomposer
 	decomposer := orchestrator.NewDecomposerWrapper(orchestrator.NewLLMBasedDecomposer("http://localhost:11434", "llama3.2:1b"))
 
-	// Create embedder (llama3.2:1b for embeddings API)
-	embedder := orchestrator.NewOllamaEmbedder("http://localhost:11434", "llama3.2:1b")
-	orchestrator.SetEmbedder(embedder)
+	// Create embedder (skip in fast mode)
+	if !fastMode {
+		embedder := orchestrator.NewOllamaEmbedder("http://localhost:11434", "llama3.2:1b")
+		orchestrator.SetEmbedder(embedder)
+	}
 
-	// Create real Ollama executor (llama3.2:1b for code generation)
-	model := "qwen3.5:0.8b"
+	// Create executor: llama3.2:1b for fast mode, qwen3.5:0.8b for quality
+	model := "llama3.2:1b"
+	if !fastMode {
+		model = "qwen3.5:0.8b"
+	}
 	endpoint := "http://localhost:11434"
 	executor := func(subtask string) orchestrator.ExecutionResult {
 		start := time.Now()
