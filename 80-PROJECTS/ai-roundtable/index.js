@@ -1,4 +1,7 @@
 import 'dotenv/config';
+import { TemperatureScheduler } from './shared/temperatureScheduler.js';
+import { ConceptJumpTracker } from './shared/conceptJumpTracker.js';
+import { MiniMaxEmbedder } from './shared/embedder.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -9,7 +12,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const API_KEY = process.env.MINIMAX_API_KEY;
 const API_URL = 'https://api.minimaxi.com/v1/chat/completions';
 const MODEL = process.env.MINIMAX_MODEL || 'MiniMax-M2.7-highspeed';
-const DEFAULT_ROUNDS = 3;
+const DEFAULT_ROUNDS = 8;
 const REQUEST_TIMEOUT_MS = 30_000;
 
 // ─── 人格定义 ───────────────────────────────────────────
@@ -187,16 +190,58 @@ function printDivider() {
   console.log(color('─'.repeat(60), 90));
 }
 
+// ─── 退火报告 ───────────────────────────────────────────
+function printAnnealingReport(topic, totalRounds, stats, roundStats) {
+  const { tempHistory, deltaSHistory, criticalTemp, criticalDetected } = stats;
+
+  console.log(color('══════════════════════════════════════════════', 1));
+  console.log(color('  自适应温度探索报告', 1));
+  console.log(color('══════════════════════════════════════════════', 1));
+  console.log(`  话题：${topic}`);
+  console.log(`  轮次：${roundStats.length}`);
+  console.log('');
+  console.log('  温度调度参数');
+  console.log(`    初始温度：${tempHistory[0]?.toFixed(2) ?? 'N/A'}`);
+  console.log(`    冷却速率：0.88`);
+  console.log(`    临界 plateau：2 轮`);
+  console.log('');
+  console.log('  概念跳跃曲线（ΔS）');
+  console.log('    ΔS 越高 = 讨论方向偏移越大');
+  console.log('');
+  console.log('  轮次 | 温度  | ΔS   | 状态');
+  console.log('  -----|-------|------|------');
+
+  for (const s of roundStats) {
+    const bar = s.deltaS > 0.35 ? '★'.repeat(Math.round(s.deltaS * 5)) : '';
+    console.log(
+      `    ${String(s.round).padStart(2)}  | ${s.temp.toFixed(2)}  | ${s.deltaS.toFixed(2)} | ${s.status} ${bar}`
+    );
+  }
+
+  console.log('');
+  if (criticalDetected && criticalTemp !== null) {
+    console.log(`  临界温度：${criticalTemp.toFixed(2)}（ΔS 峰值）`);
+  } else {
+    console.log('  临界温度：未检测到显著峰值');
+  }
+  console.log(color('══════════════════════════════════════════════\n', 1));
+}
+
 // ─── 参数解析 ───────────────────────────────────────────
 function parseArgs(argv) {
   const args = argv.slice(2);
   let topic = '';
   let rounds = DEFAULT_ROUNDS;
+  let customInitialTemp = null;
 
   for (let i = 0; i < args.length; i++) {
     if ((args[i] === '-r' || args[i] === '--rounds') && args[i + 1]) {
       const n = parseInt(args[i + 1], 10);
       if (!isNaN(n) && n > 0) rounds = Math.min(n, 10);
+      i++;
+    } else if ((args[i] === '--temp' || args[i] === '-t') && args[i + 1] && !args[i + 1].startsWith('-')) {
+      const t = parseFloat(args[i + 1]);
+      if (!isNaN(t) && t > 0) customInitialTemp = Math.min(t, 2.0);
       i++;
     } else if (args[i].startsWith('-')) {
       // ignore unknown flags
@@ -205,13 +250,12 @@ function parseArgs(argv) {
     }
   }
 
-  return { topic, rounds };
+  return { topic, rounds, customInitialTemp };
 }
 
 // ─── 主函数 ───────────────────────────────────────────
 async function main() {
-  const { topic: argTopic, rounds } = parseArgs(process.argv);
-  let topic = argTopic;
+  let { topic, rounds, customInitialTemp } = parseArgs(process.argv);
 
   if (!topic) {
     const rl = await import('readline');
@@ -233,7 +277,6 @@ async function main() {
   printBanner(topic, rounds);
 
   const abortController = new AbortController();
-  const transcript = [];
 
   process.on('SIGINT', () => {
     console.log('\n\n已停止。');
@@ -244,16 +287,33 @@ async function main() {
   const history = [{ role: 'user', content: `话题：${topic}` }];
 
   try {
+    // ─── 退火模式主循环 ───────────────────────────────────────
+    const scheduler = new TemperatureScheduler(
+      customInitialTemp ? { initialTemp: customInitialTemp } : {}
+    );
+    const scheduler = new TemperatureScheduler(
+      customInitialTemp ? { initialTemp: customInitialTemp } : {}
+    );
+    const embedder = new MiniMaxEmbedder();
+    const tracker = new ConceptJumpTracker(embedder);
+    const roundResponses = [];
+
+    // 记录 { round, temp, deltaS, status } 用于报告
+    const roundStats = [];
+
     for (let round = 0; round < rounds; round++) {
-      console.log(color(`📍 第 ${round + 1} / ${rounds} 轮`, 90) + '\n');
+      const T = scheduler.getTemperature();
+      scheduler.pushTempHistory(T);  // 每轮只 push 一次
+      const roundUtterances = [];
+      roundResponses[round] = [];
+
+      console.log(color(`📍 第 ${round + 1} / ${rounds} 轮  [T=${T.toFixed(3)}]`, 90) + '\n');
 
       for (const persona of personas) {
         const pName = color(`${persona.icon} ${persona.name}`, persona.color);
         process.stdout.write(`  ${pName} 思考中...`);
 
-        const dotTimer = setInterval(() => {
-          process.stdout.write(color('.', persona.color));
-        }, 150);
+        const dotTimer = setInterval(() => process.stdout.write(color('.', persona.color)), 150);
 
         let fullText = '';
         try {
@@ -271,12 +331,39 @@ async function main() {
         process.stdout.write('\r' + '\x1b[K');
         console.log(`  ${pName}：${fullText}`);
 
-        transcript.push({ persona, text: fullText });
+        roundResponses[round].push({ persona, text: fullText, temp: T });
+        roundUtterances.push(fullText);
         history.push({ role: 'assistant', content: fullText });
       }
 
+      // ─── 轮结束：计算 ΔS ──────────────────────────────
+      const deltaS = await tracker.processRound(roundUtterances);
+      scheduler.recordDeltaS(deltaS);
+
+      // 记录本轮统计
+      let status = '';
+      if (scheduler.shouldEnterPlateau()) {
+        scheduler.enterPlateau();
+        status = '⭐ ΔS 峰值（触发 plateau）';
+      } else if (scheduler.plateauRemaining > 0) {
+        status = '🐢 plateau';
+      } else if (T <= scheduler.config.minTemp) {
+        status = '❄️ 最低温度';
+      } else {
+        status = '🔥 高温探索';
+      }
+      roundStats.push({ round: round + 1, temp: T, deltaS, status });
+
+      // ─── 早停检查 ───────────────────────────────────
+      if (round >= scheduler.config.minRoundsBeforeEarlyStop - 1 &&
+          scheduler.getRoundsSinceLastSignificantDelta() > 3) {
+        console.log(color('\n⚠ 讨论已收敛，提前结束', 33));
+        break;
+      }
+
+      scheduler.nextRound();
+
       if (round < rounds - 1) {
-        printDivider();
         history.push({
           role: 'user',
           content: `第 ${round + 2} 轮：请继续讨论，从另一角度深入。`,
@@ -287,7 +374,11 @@ async function main() {
     printDivider();
     console.log(color('\n✅ 讨论结束\n', 32));
 
-    const filename = saveResult(topic, rounds, transcript);
+    // ─── 输出退火报告 ───────────────────────────────────
+    const stats = scheduler.getStats();
+    printAnnealingReport(topic, rounds, stats, roundStats);
+
+    const filename = saveResult(topic, rounds, roundResponses.flat());
     console.log(color(`💾 讨论记录已保存：${filename}`, 32));
 
   } catch (err) {
