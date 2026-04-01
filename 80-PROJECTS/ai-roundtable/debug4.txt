@@ -1,9 +1,0 @@
-73: 0 chars: 
-74: 30 chars: function cleanResponse(text) {
-75: 33 chars:   text = text.replace(/\*/g, '');
-76: 28 chars:   // 清除所有括号包裹的思考内容（中英文，书名号等）
-77: 43 chars:   text = text.replace(/[（（].*?[）)]/gs, '');
-78: 20 chars:   // 清除所有thought标签残留
-79: 50 chars:   text = text.replace(/<think>.*?</think>/gs, '');
-80: 42 chars:   text = text.replace(/<think>.*$/gs, '');
-81: 16 chars:   // 清除英文括号包裹的思考
