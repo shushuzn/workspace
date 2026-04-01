@@ -13,7 +13,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const API_KEY = process.env.MINIMAX_API_KEY;
 const API_URL = 'https://api.minimaxi.com/v1/chat/completions';
 const MODEL = process.env.MINIMAX_MODEL || 'MiniMax-M2.7-highspeed';
-const DEFAULT_ROUNDS = 8;
+const OLLAMA_URL = process.env.OLLAMA_URL || 'http://localhost:11434';
+const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2:1b';
+const USE_OLLAMA = process.env.USE_OLLAMA === 'true';
+const DEFAULT_ROUNDS = 5;
 const REQUEST_TIMEOUT_MS = 30_000;
 const MODE_DISCUSS = 'discuss';
 const MODE_DEBATE = 'debate';
@@ -156,6 +159,11 @@ async function askPersona(messages, persona, topic, temperature, abortSignal) {
     ...messages.filter(m => m.role !== 'system'),
   ];
 
+  // USE_OLLAMA 模式：跳过 API 直接用本地模型
+  if (USE_OLLAMA) {
+    return chatOllama(allMessages, temperature, 1500);
+  }
+
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
   const signal = abortSignal
@@ -195,6 +203,30 @@ async function askPersona(messages, persona, topic, temperature, abortSignal) {
   const data = await res.json();
   const raw = data.choices?.[0]?.message?.content || '';
   return cleanResponse(raw);
+}
+
+// ─── Ollama chat helper ──────────────────────────────────
+async function chatOllama(messages, temperature = 0.7, maxTokens = 1500) {
+  // Convert messages to Ollama format
+  const ollamaMessages = messages.map(m => ({
+    role: m.role === 'system' ? 'system' : m.role === 'assistant' ? 'assistant' : 'user',
+    content: m.content,
+    ...(m.name ? { name: m.name } : {}),
+  }));
+
+  const res = await fetch(`${OLLAMA_URL}/api/chat`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      model: OLLAMA_MODEL,
+      messages: ollamaMessages,
+      options: { temperature, num_predict: maxTokens },
+      stream: false,
+    }),
+  });
+  if (!res.ok) throw new Error(`Ollama error: ${res.status}`);
+  const data = await res.json();
+  return cleanResponse(data.message?.content || '');
 }
 
 function mergeSignals(...signals) {
@@ -439,29 +471,32 @@ async function runVoting(topic, history, personas, abortSignal) {
         ...history.filter(m => m.role !== 'system'),
       ];
 
-      const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-      const signal = mergeSignals(abortSignal, controller.signal);
-
-      const res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
-        body: JSON.stringify({ model: MODEL, messages, max_tokens: 50, temperature: 0.3, stream: false }),
-        signal,
-      });
-      clearTimeout(timeoutId);
-
-      const data = await res.json();
-      const raw = (data.choices?.[0]?.message?.content || '').trim();
+      const raw = USE_OLLAMA
+        ? await chatOllama(messages, 0.3, 50)
+        : await (async () => {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+            const signal = mergeSignals(abortSignal, controller.signal);
+            const res = await fetch(API_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
+              body: JSON.stringify({ model: MODEL, messages, max_tokens: 50, temperature: 0.3, stream: false }),
+              signal,
+            });
+            clearTimeout(timeoutId);
+            const data = await res.json();
+            return data.choices?.[0]?.message?.content || '';
+          })();
 
       clearInterval(dotTimer);
       process.stdout.write('\r' + '\x1b[K');
+      const vote = raw.trim();
 
-      if (raw.includes('正')) { votes.pro++; reasons[persona.id] = '正'; }
-      else if (raw.includes('反')) { votes.con++; reasons[persona.id] = '反'; }
+      if (vote.includes('正')) { votes.pro++; reasons[persona.id] = '正'; }
+      else if (vote.includes('反')) { votes.con++; reasons[persona.id] = '反'; }
       else { votes.neutral++; reasons[persona.id] = '中'; }
 
-      console.log(`  ${pName} → ${raw.includes('正') ? '✅ 正' : raw.includes('反') ? '❌ 反' : '⚪ 中'}`);
+      console.log(`  ${pName} → ${vote.includes('正') ? '✅ 正' : vote.includes('反') ? '❌ 反' : '⚪ 中'}`);
     } catch (err) {
       clearInterval(dotTimer);
       process.stdout.write('\r' + '\x1b[K');
@@ -487,26 +522,28 @@ async function generateSummary(topic, history, mode, abortSignal) {
     ...history.filter(m => m.role !== 'system'),
   ];
 
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS * 2);
-  const signal = mergeSignals(abortSignal, controller.signal);
-
   try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
-      body: JSON.stringify({ model: MODEL, messages, max_tokens: 800, temperature: 0.4, stream: false }),
-      signal,
-    });
-    clearTimeout(timeoutId);
-
-    const data = await res.json();
-    const summary = (data.choices?.[0]?.message?.content || '').trim();
+    const raw = USE_OLLAMA
+      ? await chatOllama(messages, 0.4, 800)
+      : await (async () => {
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS * 2);
+          const signal = mergeSignals(abortSignal, controller.signal);
+          const res = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
+            body: JSON.stringify({ model: MODEL, messages, max_tokens: 800, temperature: 0.4, stream: false }),
+            signal,
+          });
+          clearTimeout(timeoutId);
+          const data = await res.json();
+          return data.choices?.[0]?.message?.content || '';
+        })();
+    const summary = raw.trim();
     console.log(color('\n📋 综合总结：', 1));
     console.log(`  ${summary.replace(/\n/g, '\n  ')}`);
     return summary;
   } catch (err) {
-    clearTimeout(timeoutId);
     if (err.name !== 'AbortError') {
       console.log(color(`  ⚠ 总结生成失败：${err.message}`, 31));
     }
@@ -720,9 +757,10 @@ async function main() {
     }
   }
 
-  if (!API_KEY) {
+  if (!USE_OLLAMA && !API_KEY) {
     console.error(color('错误：未设置 MINIMAX_API_KEY', 31));
     console.error('请在 .env 文件中设置：MINIMAX_API_KEY=你的密钥');
+    console.error('或设置 USE_OLLAMA=true 使用本地模型');
     process.exit(1);
   }
 
