@@ -428,7 +428,7 @@ async function main() {
       } else {
         status = '🔥 高温探索';
       }
-      const { quality, fluidity, jump, balance } = scorer.scoreRound(
+      const { quality } = scorer.scoreRound(
         tracker.personaEmbeddings[tracker.personaEmbeddings.length - 1],
         deltaS,
         contributions
