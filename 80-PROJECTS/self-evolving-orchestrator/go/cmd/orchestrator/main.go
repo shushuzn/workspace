@@ -33,7 +33,7 @@ func main() {
 	}
 
 	// Create decomposer (qwen3.5 hangs — using llama3.2:1b)
-	decomposer := orchestrator.NewDecomposerWrapper(orchestrator.NewLLMBasedDecomposer("http://localhost:11434", "qwen3.5:0.8b"))
+	decomposer := orchestrator.NewDecomposerWrapper(orchestrator.NewLLMBasedDecomposer("http://localhost:11434", "llama3.2:1b"))
 
 	// Create embedder (llama3.2:1b for embeddings API)
 	embedder := orchestrator.NewOllamaEmbedder("http://localhost:11434", "llama3.2:1b")

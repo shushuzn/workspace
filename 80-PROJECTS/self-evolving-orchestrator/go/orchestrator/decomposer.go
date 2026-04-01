@@ -49,11 +49,13 @@ func NewLLMBasedDecomposer(endpoint, model string) *LLMBasedDecomposer {
 }
 
 func (d *LLMBasedDecomposer) Decompose(ctx context.Context, task string) ([]string, error) {
-	prompt := fmt.Sprintf(`Given this task: "%s"
+	prompt := fmt.Sprintf(`Task: %s
 
-Break it down into 2-5 concrete action steps. Each step should be a specific thing you would CODE or DO, not a phase like "analyze" or "design".
+Output EXACTLY a JSON array of 2-5 short action strings. Each must be a concrete coding task in 3-8 words.
+BAD: "Analyze requirements" / "Write the hello world function"
+GOOD: "print hello world function" / "save file hello.py"
 
-Return ONLY a valid JSON array of strings. No explanation, no markdown, just the array. Example: ["write function X", "implement Y", "test Z"]`, task)
+Return ONLY the JSON array, nothing else:`, task)
 
 	reqBody := map[string]interface{}{
 		"model":  d.model,
