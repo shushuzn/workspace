@@ -5,6 +5,10 @@ export class QualityScorer {
     this.prevPersonaEmbeddings = [];
   }
 
+  reset() {
+    this.prevPersonaEmbeddings = [];
+  }
+
   /**
    * @param {number[][]} personaEmbeddings - [personaCount][dim]
    * @param {number} deltaS - deltaS from ConceptJumpTracker
@@ -17,8 +21,12 @@ export class QualityScorer {
     let fluidity = 0.5;
     if (this.prevPersonaEmbeddings.length > 0) {
       const prev = this.prevPersonaEmbeddings[this.prevPersonaEmbeddings.length - 1];
-      fluidity = personaEmbeddings.reduce((sum, emb, i) =>
-        sum + cosineDistance(emb, prev[i]), 0) / personaEmbeddings.length;
+      if (prev.length !== personaEmbeddings.length) {
+        fluidity = 0.5;
+      } else {
+        fluidity = personaEmbeddings.reduce((sum, emb, i) =>
+          sum + cosineDistance(emb, prev[i]), 0) / personaEmbeddings.length;
+      }
     }
 
     const jump = deltaS;
@@ -27,7 +35,7 @@ export class QualityScorer {
     const std = Math.sqrt(
       contributions.reduce((s, v) => s + (v - mean) ** 2, 0) / contributions.length
     );
-    const balance = 1 - (std / (mean + ε));
+    const balance = Math.max(0, Math.min(1, 1 - (std / (mean + ε))));
 
     const quality = fluidity * 0.4 + jump * 0.3 + balance * 0.3;
 

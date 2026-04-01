@@ -41,9 +41,9 @@ describe('QualityScorer', () => {
 
   it('balance is higher when contributions are more equal', () => {
     const scorer = new QualityScorer();
-    scorer.scoreRound([[0.1, 0.2]], 0, [0.1, 0.1, 0.1, 0.1]);
+    const rEqual = scorer.scoreRound([[0.1, 0.2]], 0, [0.1, 0.1, 0.1, 0.1]);
     const rUnequal = scorer.scoreRound([[0.2, 0.3]], 0, [0.5, 0.05, 0.05, 0.05]);
-    assert.ok(rUnequal.balance < 1, 'unequal contributions should reduce balance');
+    assert.ok(rEqual.balance > rUnequal.balance, 'equal contributions should score higher balance');
   });
 
   it('quality formula: fluidity*0.4 + jump*0.3 + balance*0.3', () => {
