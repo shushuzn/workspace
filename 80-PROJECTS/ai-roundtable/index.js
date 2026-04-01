@@ -1,184 +1,16 @@
 import 'dotenv/config';
-import { HttpsProxyAgent } from 'https-proxy-agent';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
-// Shared Memory integration
-import { getSharedMemoryManager } from '../../.omc/patrol-agent/src/memory/sharedMemoryManager.js';
-let sharedMemoryManager = null;
-
-// A2A integration
-import { getA2AClient } from '../../.omc/patrol-agent/src/a2a/a2aClient.js';
-let a2aClient = null;
-
+// ─── 配置 ───────────────────────────────────────────────
 const API_KEY = process.env.MINIMAX_API_KEY;
-const API_URL = 'https://api.minimaxi.com/v1/text/anthropic_api';
-const MODEL = 'MiniMax-M2.7-highspeed';
+const API_URL = 'https://api.minimaxi.com/v1/chat/completions';
+const MODEL = process.env.MINIMAX_MODEL || 'MiniMax-M2.7-highspeed';
 const DEFAULT_ROUNDS = 3;
-
-const proxyUrl = process.env.HTTPS_PROXY || process.env.https_proxy || process.env.HTTP_PROXY || process.env.http_proxy;
-const agent = proxyUrl ? new HttpsProxyAgent(proxyUrl) : undefined;
-
-// ─── Shared Memory Functions ────────────────────────────
-async function initSharedMemory() {
-  try {
-    sharedMemoryManager = getSharedMemoryManager();
-    const health = await sharedMemoryManager.healthCheck();
-    if (health.healthy) {
-      console.log('🌐 Shared Memory: Connected to OpenViking v' + health.version);
-    } else {
-      console.log('🌐 Shared Memory: Using local fallback');
-    }
-  } catch (error) {
-    console.log('🌐 Shared Memory: Not available (' + error.message + ')');
-  }
-}
-
-// ─── A2A Functions ─────────────────────────────────────
-async function initA2A() {
-  try {
-    a2aClient = getA2AClient('ai-roundtable', [
-      'discuss',
-      'analyze',
-      'decide',
-      'consensus-building',
-      'problem-solving'
-    ]);
-    
-    // Register message handlers
-    a2aClient.on('TASK', handleA2ATask);
-    a2aClient.on('QUERY', handleA2AQuery);
-    
-    // Note: MCP caller needs to be set externally
-    console.log('📡 A2A: Client initialized');
-    return true;
-  } catch (error) {
-    console.log('📡 A2A: Initialization failed:', error.message);
-    return false;
-  }
-}
-
-async function handleA2ATask(message) {
-  console.log(`📡 A2A: Received TASK from ${message.from}`);
-  
-  const { task, problemId, title, description, severity, context } = message.payload;
-  
-  if (task === 'discuss_problem') {
-    console.log(`📡 A2A: Running discussion on "${title}"`);
-    
-    // Run the roundtable discussion
-    const result = await runDiscussion(title, 3);
-    
-    // Send result back
-    await a2aClient.send({
-      type: 'TASK_RESULT',
-      to: message.from,
-      priority: 'NORMAL',
-      payload: {
-        taskId: message.id,
-        success: true,
-        consensus: result.consensus,
-        confidence: result.confidence,
-        steps: result.steps,
-        discussionId: result.discussionId
-      },
-      metadata: {
-        correlationId: message.metadata?.correlationId
-      }
-    });
-    
-    // Store decision in shared memory
-    if (sharedMemoryManager) {
-      await storeDecision({
-        title: `Consensus: ${title}`,
-        consensus: result.consensus,
-        confidence: result.confidence,
-        sourceAgent: message.from,
-        problemId,
-        tags: ['a2a', 'roundtable', 'consensus']
-      });
-    }
-    
-    console.log(`📡 A2A: Sent result back to ${message.from}`);
-  }
-}
-
-async function handleA2AQuery(message) {
-  console.log(`📡 A2A: Received QUERY from ${message.from}`);
-  
-  const { query } = message.payload;
-  
-  if (query === 'capabilities') {
-    await a2aClient.send({
-      type: 'RESPONSE',
-      to: message.from,
-      priority: 'NORMAL',
-      payload: {
-        agentId: 'ai-roundtable',
-        capabilities: [
-          'discuss',
-          'analyze',
-          'decide',
-          'consensus-building',
-          'problem-solving'
-        ],
-        status: 'idle',
-        load: 0
-      },
-      metadata: {
-        correlationId: message.metadata?.correlationId
-      }
-    });
-  }
-}
-
-async function loadSharedProblems(limit = 5) {
-  if (!sharedMemoryManager) return [];
-  
-  try {
-    const result = await sharedMemoryManager.retrieveSharedMemories('problem', { limit });
-    if (result.success && result.memories.length > 0) {
-      return result.memories.map(m => ({
-        type: m.type || 'problem',
-        content: m.content || m.abstract || 'No content',
-        source: m.metadata?.sourceAgent || 'unknown'
-      }));
-    }
-    return [];
-  } catch (error) {
-    console.error('Failed to load shared problems:', error.message);
-    return [];
-  }
-}
-
-async function storeSharedDecision(decision, relatedProblems = []) {
-  if (!sharedMemoryManager) return { success: false };
-  
-  try {
-    const result = await sharedMemoryManager.storeSharedMemory('decision', {
-      title: decision.title || 'Roundtable Decision',
-      description: decision.description || '',
-      consensus: decision.consensus || '',
-      recommendations: decision.recommendations || [],
-      timestamp: Date.now()
-    }, {
-      sourceAgent: 'ai-roundtable',
-      tags: ['decision', 'roundtable', 'consensus'],
-      relatedTo: relatedProblems.length > 0 ? relatedProblems[0] : null
-    });
-    
-    if (result.success) {
-      console.log('🌐 Shared: Decision recorded -> ' + result.memoryId);
-    }
-    return result;
-  } catch (error) {
-    console.error('Failed to store shared decision:', error.message);
-    return { success: false, error: error.message };
-  }
-}
+const REQUEST_TIMEOUT_MS = 30_000;
 
 // ─── 人格定义 ───────────────────────────────────────────
 const personas = [
@@ -194,28 +26,28 @@ const personas = [
     name: '怀疑者',
     icon: '🧊',
     color: 34,
-    systemPrompt: `你正在一个圆桌讨论现场。轮到你发言，你必须立刻开口说出自己的质疑，不能有任何内心独白或思考过程。说话要短，2句以内，结尾必须指出一个具体的风险或漏洞。不要使用括号，不要铺垫，直接说质疑。`,
+    systemPrompt: `你正在一个圆桌讨论现场。轮到你发言，你必须立刻开口说出自己的反对意见，不能有任何内心独白或思考过程。说话要短，2句以内，结尾必须指出一个具体的、真实存在的风险或问题。不要使用括号，不要说"我认为"，直接说质疑。`,
   },
   {
     id: 'analyst',
     name: '分析师',
     icon: '🔬',
     color: 32,
-    systemPrompt: `你正在一个圆桌讨论现场。轮到你发言，你必须立刻开口说出自己的分析，不能有任何内心独白或思考过程。说话要短，2句以内，结尾必须给出一个具体的数据或趋势。不要使用括号，不要铺垫，直接说分析。`,
+    systemPrompt: `你正在一个圆桌讨论现场。轮到你发言，你必须立刻开口说出自己的数据分析，不能有任何内心独白或思考过程。说话要短，2句以内，必须包含一个真实的具体数字（如百分比、统计、年份、数量）。不要使用括号，不要说"根据数据"，直接说数字和分析结论。`,
   },
   {
     id: 'harmonizer',
     name: '调和者',
     icon: '🌱',
     color: 35,
-    systemPrompt: `你正在一个圆桌讨论现场。轮到你发言，你必须立刻开口说出自己的综合观点，不能有任何内心独白或思考过程。说话要短，2句以内，结尾必须给出一个平衡的结论。不要使用括号，不要铺垫，直接说观点。`,
+    systemPrompt: `你正在一个圆桌讨论现场。轮到你发言，你必须立刻开口说出综合方案，不能有任何内心独白或思考过程。说话要短，2句以内，结尾必须给出一个具体可操作的平衡做法。不要使用括号，不要铺垫，直接说方案。`,
   },
   {
     id: 'historian',
     name: '历史家',
     icon: '📜',
     color: 33,
-    systemPrompt: `你正在一个圆桌讨论现场。轮到你发言，你必须立刻开口说出自己的历史类比，不能有任何内心独白或思考过程。说话要短，2句以内，结尾必须引用一个真实的历史案例。不要使用括号，不要铺垫，直接说类比。`,
+    systemPrompt: `你正在一个圆桌讨论现场。轮到你发言，你必须立刻开口说出历史类比，不能有任何内心独白或思考过程。说话要短，2句以内，必须引用一个真实的历史事件、时代或人物。不要使用括号，不要铺垫，直接说历史案例和教训。`,
   },
   {
     id: 'pragmatist',
@@ -231,22 +63,24 @@ function color(text, code) {
   return `\x1b[${code}m${text}\x1b[0m`;
 }
 
-function c(name, text) {
-  const p = personas.find(x => x.id === name);
-  return p ? color(`${p.icon} ${p.name}`, p.color) : text;
-}
-
-// ─── 清理回答 ─────────────────────────────────────────
 function cleanResponse(text) {
   text = text.replace(/\*/g, '');
-  text = text.replace(/<think>.*?</think>/gs, '');
+  text = text.replace(/[（（].*?[）)]/gs, '');
+  text = text.replace(/<think>.*?\n<\/think>/gs, '');
   text = text.replace(/<think>.*$/gs, '');
+  text = text.replace(/\(.*?\)/gs, '');
+  text = text.replace(/[(:].*?(用户要求|用户发送|用户输入|根据规则|扮演|我需要|让我|这是一个|Style Guidance|只输出|不要|禁止|回复格式)/g, '');
+  text = text.replace(/\n[^\n]*(用户|规则|扮演|我需要|让我|回复格式)[^\n]*\n/gs, '\n');
+  text = text.replace(/\n{3,}/g, '\n\n');
+  text = text.replace(/^\s*\n/, '');
   const sentences = text
     .split(/[。\！？\n]/)
     .map(s => s.trim())
     .filter(s => {
       if (s.length < 4) return false;
       if (/^['"'']$/.test(s)) return false;
+      if (s.includes('要求我') || s.includes('扮演') || s.includes('根据规则') || s.includes('Style Guidance') || s.includes('只输出') || s.includes('不要') || s.includes('禁止') || s.includes('回复格式')) return false;
+      if (/^\(?[0-9a-zA-Z]?\s?[.、:：]?\s?(立刻|直接)/.test(s)) return false;
       return true;
     })
     .slice(0, 2);
@@ -256,51 +90,61 @@ function cleanResponse(text) {
   return text;
 }
 
-// ─── 调用 ───────────────────────────────────────────
-async function askPersona(messages, persona, topic, abortSignal) {
+// ─── API 调用 ───────────────────────────────────────────
+async function askPersona(messages, persona, topic, temperature, abortSignal) {
   const systemPrompt = `${persona.systemPrompt}\n\n重要：直接输出你的观点，不要使用括号、不要输出思考过程、不要输出引号、不要解释。只输出纯文本。`;
+  const allMessages = [
+    { role: 'system', name: 'system', content: systemPrompt },
+    ...messages.filter(m => m.role !== 'system'),
+  ];
 
-  const res = await fetch(API_URL, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': API_KEY,
-      'anthropic-version': '2023-06-01',
-    },
-    body: JSON.stringify({
-      model: MODEL,
-      max_tokens: 800,
-      temperature: 0.2,
-      stream: false,
-      thinking: { type: 'disabled' },
-      system: systemPrompt,
-      messages: messages
-        .filter(m => m.role !== 'system')
-        .map(m => ({ role: m.role, content: m.content })),
-    }),
-    signal: abortSignal,
-    agent,
-  });
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  const signal = abortSignal
+    ? mergeSignals(abortSignal, controller.signal)
+    : controller.signal;
+
+  let res;
+  try {
+    res = await fetch(API_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${API_KEY}`,
+      },
+      body: JSON.stringify({
+        model: MODEL,
+        messages: allMessages,
+        max_tokens: 1500,
+        temperature: temperature,
+        stream: false,
+      }),
+      signal,
+    });
+  } finally {
+    clearTimeout(timeoutId);
+  }
 
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.error?.message || `HTTP ${res.status}`);
+    const msg = err.error?.message || `HTTP ${res.status}`;
+    if (msg.includes('not support') || msg.includes('model')) {
+      throw new Error(`模型不可用：${msg}。请在 .env 中设置 MINIMAX_MODEL 为可用模型名称。`);
+    }
+    throw new Error(msg);
   }
 
   const data = await res.json();
+  const raw = data.choices?.[0]?.message?.content || '';
+  return cleanResponse(raw);
+}
 
-  // 从 Anthropic 格式提取文本
-  let text = '';
-  if (data.content && Array.isArray(data.content)) {
-    for (const block of data.content) {
-      if (block.type === 'text') {
-        text += block.text;
-      }
-      // 忽略 thinking 块（已禁用，但以防万一）
-    }
+function mergeSignals(...signals) {
+  const controller = new AbortController();
+  for (const s of signals) {
+    if (s) s.addEventListener('abort', () => controller.abort(), { once: true });
   }
-
-  return cleanResponse(text || data.choices?.[0]?.message?.content || '');
+  return controller.signal;
 }
 
 // ─── 保存结果 ───────────────────────────────────────────
@@ -312,7 +156,7 @@ function saveResult(topic, rounds, transcript) {
 
   const lines = [
     '═'.repeat(60),
-    '  AI 圆桌讨论',
+    `  AI 圆桌讨论`,
     '═'.repeat(60),
     `话题：${topic}`,
     `轮数：${rounds}`,
@@ -366,12 +210,6 @@ function parseArgs(argv) {
 
 // ─── 主函数 ───────────────────────────────────────────
 async function main() {
-  // Initialize shared memory
-  await initSharedMemory();
-  
-  // Initialize A2A
-  await initA2A();
-  
   const { topic: argTopic, rounds } = parseArgs(process.argv);
   let topic = argTopic;
 
@@ -392,19 +230,10 @@ async function main() {
     process.exit(1);
   }
 
-  // Check for shared problems related to topic
-  const sharedProblems = await loadSharedProblems(3);
-  if (sharedProblems.length > 0) {
-    console.log(color(`\n📚 发现 ${sharedProblems.length} 个相关问题来自 Patrol Agent:`, 90));
-    sharedProblems.forEach((p, i) => {
-      console.log(color(`   ${i + 1}. ${p.content.title || p.content.description || 'Unknown'}`, 90));
-    });
-    console.log();
-  }
-
   printBanner(topic, rounds);
 
   const abortController = new AbortController();
+  const transcript = [];
 
   process.on('SIGINT', () => {
     console.log('\n\n已停止。');
@@ -413,7 +242,6 @@ async function main() {
   });
 
   const history = [{ role: 'user', content: `话题：${topic}` }];
-  const transcript = [];
 
   try {
     for (let round = 0; round < rounds; round++) {
@@ -423,15 +251,13 @@ async function main() {
         const pName = color(`${persona.icon} ${persona.name}`, persona.color);
         process.stdout.write(`  ${pName} 思考中...`);
 
-        let dotCount = 0;
         const dotTimer = setInterval(() => {
-          dotCount++;
           process.stdout.write(color('.', persona.color));
         }, 150);
 
         let fullText = '';
         try {
-          fullText = await askPersona(history, persona, topic, abortController.signal);
+          fullText = await askPersona(history, persona, topic, T, abortController.signal);
         } catch (err) {
           if (err.name === 'AbortError') {
             clearInterval(dotTimer);
@@ -464,42 +290,10 @@ async function main() {
     const filename = saveResult(topic, rounds, transcript);
     console.log(color(`💾 讨论记录已保存：${filename}`, 32));
 
-    // Store decision in shared memory
-    const decision = {
-      title: `Roundtable Discussion: ${topic}`,
-      description: `Multi-persona discussion on "${topic}" with ${personas.length} participants over ${rounds} rounds`,
-      consensus: extractConsensus(transcript),
-      recommendations: extractRecommendations(transcript)
-    };
-    
-    const relatedProblems = sharedProblems.map(p => p.memoryId).filter(Boolean);
-    await storeSharedDecision(decision, relatedProblems);
-
   } catch (err) {
     console.error(color(`\n错误：${err.message}`, 31));
     process.exit(1);
   }
-}
-
-// Helper functions for decision extraction
-function extractConsensus(transcript) {
-  // Simple extraction - in production, use LLM to summarize
-  const keyPoints = transcript
-    .filter(t => t.text.includes('应该') || t.text.includes('需要') || t.text.includes('必须'))
-    .map(t => t.text)
-    .slice(0, 3);
-  return keyPoints.join('; ') || 'No clear consensus reached';
-}
-
-function extractRecommendations(transcript) {
-  // Extract actionable items
-  return transcript
-    .filter(t => t.text.includes('建议') || t.text.includes('可以') || t.text.includes('试试'))
-    .map(t => ({
-      from: t.persona.name,
-      recommendation: t.text.slice(0, 100) + (t.text.length > 100 ? '...' : '')
-    }))
-    .slice(0, 5);
 }
 
 main();
