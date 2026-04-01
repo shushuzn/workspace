@@ -38,9 +38,9 @@ func (s *SelfEvolver) ShouldRefine(ctx context.Context, record *EvolutionRecord)
         return true, "all subtasks failed"
     }
 
-    // Refine if score below threshold
-    if record.Score < 0.5 {
-        return true, fmt.Sprintf("score %f below threshold 0.5", record.Score)
+    // Refine if score critically low
+    if record.Score < 0.3 {
+        return true, fmt.Sprintf("score %f critically low", record.Score)
     }
 
     // Refine if excessive overlap (detected by similar outputs)

@@ -75,12 +75,12 @@ func TestShouldRefine(t *testing.T) {
 			wantRefine: true,
 		},
 		{
-			name: "score below 0.5 triggers refine",
+			name: "score critically low triggers refine",
 			record: &EvolutionRecord{
 				Task:     "test",
 				Subtasks: []string{"a"},
 				Results:  []ExecutionResult{{Subtask: "a", Output: "short", Success: true}},
-				Score:    0.3,
+				Score:    0.2,
 			},
 			wantRefine: true,
 		},

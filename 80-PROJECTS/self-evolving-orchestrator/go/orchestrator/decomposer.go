@@ -132,6 +132,22 @@ Return ONLY the JSON array, nothing else:`, task)
 	jsonStr := response[start : end+1]
 	var subtasks []string
 	if err := json.Unmarshal([]byte(jsonStr), &subtasks); err != nil {
+		// Try object array format: [{"task": "..."}] or [{"$task": "..."}] or [{"action": "..."}]
+		var objArr []map[string]string
+		if err2 := json.Unmarshal([]byte(jsonStr), &objArr); err2 == nil {
+			for _, obj := range objArr {
+				if t, ok := obj["task"]; ok && strings.TrimSpace(t) != "" {
+					subtasks = append(subtasks, strings.TrimSpace(t))
+				} else if t, ok := obj["$task"]; ok && strings.TrimSpace(t) != "" {
+					subtasks = append(subtasks, strings.TrimSpace(t))
+				} else if t, ok := obj["action"]; ok && strings.TrimSpace(t) != "" {
+					subtasks = append(subtasks, strings.TrimSpace(t))
+				}
+			}
+			if len(subtasks) > 0 {
+				return subtasks, nil
+			}
+		}
 		return []string{task}, nil
 	}
 
