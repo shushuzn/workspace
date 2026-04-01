@@ -44,7 +44,7 @@ func (s *SelfEvolver) ShouldRefine(ctx context.Context, record *EvolutionRecord)
     }
 
     // Refine if excessive overlap (detected by similar outputs)
-    if s.detectOverlap(record.Results) {
+    if s.detectOverlap(ctx, record.Results) {
         return true, "excessive overlap between subtasks"
     }
 
@@ -77,25 +77,64 @@ func (s *SelfEvolver) ResetHistory() {
     s.currentStrategy = 0
 }
 
+// sharedEmbedder is the global embedder for semantic overlap detection
+var sharedEmbedder *OllamaEmbedder
+
+// SetEmbedder configures the shared embedder instance
+func SetEmbedder(embedder *OllamaEmbedder) {
+	sharedEmbedder = embedder
+}
+
 // detectOverlap returns true if any two results have cosine similarity > 0.85
-func (s *SelfEvolver) detectOverlap(results []ExecutionResult) bool {
-    if len(results) < 2 {
-        return false
-    }
-    // Build output fingerprint vectors (simple n-gram hash)
-    vectors := make([][]float64, len(results))
-    for i, r := range results {
-        vectors[i] = ngramFingerprint(r.Output, 3)
-    }
-    // Pairwise cosine similarity
-    for i := 0; i < len(results); i++ {
-        for j := i + 1; j < len(results); j++ {
-            if cosineSim(vectors[i], vectors[j]) > 0.85 {
-                return true
-            }
-        }
-    }
-    return false
+// Uses embeddings when embedder is configured, falls back to n-gram fingerprints
+func (s *SelfEvolver) detectOverlap(ctx context.Context, results []ExecutionResult) bool {
+	if len(results) < 2 {
+		return false
+	}
+
+	// Fast path: if no embedder, use legacy n-gram
+	if sharedEmbedder == nil {
+		return s.legacyDetectOverlap(results)
+	}
+
+	// Semantic path: embed all outputs and compare
+	texts := make([]string, len(results))
+	for i, r := range results {
+		texts[i] = r.Output
+	}
+
+	vectors, err := sharedEmbedder.EmbedBatch(ctx, texts)
+	if err != nil || len(vectors) == 0 {
+		return s.legacyDetectOverlap(results)
+	}
+
+	for i := 0; i < len(results); i++ {
+		for j := i + 1; j < len(results); j++ {
+			if len(vectors[i]) == 0 || len(vectors[j]) == 0 {
+				continue
+			}
+			if CosineSimilarity(vectors[i], vectors[j]) > 0.85 {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// legacyDetectOverlap uses n-gram fingerprinting (original implementation)
+func (s *SelfEvolver) legacyDetectOverlap(results []ExecutionResult) bool {
+	vectors := make([][]float64, len(results))
+	for i, r := range results {
+		vectors[i] = ngramFingerprint(r.Output, 3)
+	}
+	for i := 0; i < len(results); i++ {
+		for j := i + 1; j < len(results); j++ {
+			if cosineSim(vectors[i], vectors[j]) > 0.85 {
+				return true
+			}
+		}
+	}
+	return false
 }
 
 // ngramFingerprint creates a sparse TF-like vector from n-gram hashes

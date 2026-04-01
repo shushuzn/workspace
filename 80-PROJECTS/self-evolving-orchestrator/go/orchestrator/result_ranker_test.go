@@ -1,6 +1,7 @@
 package orchestrator
 
 import (
+	"context"
 	"math"
 	"testing"
 	"time"
@@ -75,7 +76,7 @@ func TestResultRankerRelevanceScore(t *testing.T) {
 				Success:  true,
 				Duration: 100 * time.Millisecond,
 			}
-			breakdown := ranker.scoreBreakdown(result)
+			breakdown := ranker.scoreBreakdown(context.Background(), result)
 			if breakdown.RelevanceScore < tc.minScore || breakdown.RelevanceScore > tc.maxScore {
 				t.Errorf("RelevanceScore = %f, want between %f and %f",
 					breakdown.RelevanceScore, tc.minScore, tc.maxScore)
@@ -94,7 +95,7 @@ func TestResultRankerScoreBreakdown(t *testing.T) {
 			Success:  true,
 			Duration: 100 * time.Millisecond,
 		}
-		breakdown := ranker.scoreBreakdown(result)
+		breakdown := ranker.scoreBreakdown(context.Background(), result)
 		if breakdown.QualityScore == 0 {
 			t.Error("QualityScore should be > 0 for non-empty successful output")
 		}
@@ -114,7 +115,7 @@ func TestResultRankerScoreBreakdown(t *testing.T) {
 			Error:    "some error",
 			Duration: 100 * time.Millisecond,
 		}
-		breakdown := ranker.scoreBreakdown(result)
+		breakdown := ranker.scoreBreakdown(context.Background(), result)
 		// Quality is halved when error is present
 		if breakdown.QualityScore >= math.Min(1.0, float64(len(result.Output))/1000.0) {
 			t.Error("QualityScore should be halved when Error is present")
@@ -128,7 +129,7 @@ func TestResultRankerScoreBreakdown(t *testing.T) {
 			Success:  false,
 			Duration: 100 * time.Millisecond,
 		}
-		breakdown := ranker.scoreBreakdown(result)
+		breakdown := ranker.scoreBreakdown(context.Background(), result)
 		if breakdown.SuccessScore != 0.0 {
 			t.Errorf("SuccessScore = %f, want 0.0 for failed result", breakdown.SuccessScore)
 		}
@@ -147,7 +148,7 @@ func TestResultRankerRank(t *testing.T) {
 		{Subtask: "task c", Output: "", Success: false, Duration: 50 * time.Millisecond},
 	}
 
-	ranked := ranker.Rank(results)
+	ranked := ranker.Rank(context.Background(), results)
 
 	if len(ranked) != 3 {
 		t.Fatalf("len(ranked) = %d, want 3", len(ranked))
@@ -171,7 +172,7 @@ func TestResultRankerAggregateAndScore(t *testing.T) {
 	ranker := NewDefaultResultRanker()
 
 	t.Run("empty results returns 0", func(t *testing.T) {
-		score := ranker.AggregateAndScore([]ExecutionResult{})
+		score := ranker.AggregateAndScore(context.Background(), []ExecutionResult{})
 		if score != 0.0 {
 			t.Errorf("AggregateAndScore([]) = %f, want 0.0", score)
 		}
@@ -181,7 +182,7 @@ func TestResultRankerAggregateAndScore(t *testing.T) {
 		results := []ExecutionResult{
 			{Subtask: "task", Output: "some output here", Success: true, Duration: 100 * time.Millisecond},
 		}
-		score := ranker.AggregateAndScore(results)
+		score := ranker.AggregateAndScore(context.Background(), results)
 		if score <= 0 {
 			t.Errorf("AggregateAndScore([single]) = %f, want > 0", score)
 		}
@@ -192,7 +193,7 @@ func TestResultRankerAggregateAndScore(t *testing.T) {
 			{Subtask: "task a", Output: "short", Success: true, Duration: 100 * time.Millisecond},
 			{Subtask: "task b", Output: "much longer output that should rank higher", Success: true, Duration: 200 * time.Millisecond},
 		}
-		score := ranker.AggregateAndScore(results)
+		score := ranker.AggregateAndScore(context.Background(), results)
 		// Should be between 0 and 1
 		if score < 0 || score > 1 {
 			t.Errorf("AggregateAndScore = %f, want between 0 and 1", score)

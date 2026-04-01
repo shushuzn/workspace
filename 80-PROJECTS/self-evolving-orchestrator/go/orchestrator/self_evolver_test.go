@@ -48,7 +48,7 @@ func TestDetectOverlap(t *testing.T) {
 
 	for _, tc := range tests {
 		t.Run(tc.name, func(t *testing.T) {
-			got := evolver.detectOverlap(tc.results)
+			got := evolver.detectOverlap(context.Background(), tc.results)
 			if got != tc.wantOver {
 				t.Errorf("detectOverlap = %v, want %v", got, tc.wantOver)
 			}

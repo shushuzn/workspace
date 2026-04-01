@@ -1,6 +1,7 @@
 package orchestrator
 
 import (
+	"context"
 	"math"
 	"sort"
 	"strings"
@@ -22,10 +23,11 @@ func NewDefaultResultRanker() *ResultRanker {
 }
 
 // Rank scores and sorts results by total score (descending)
-func (r *ResultRanker) Rank(results []ExecutionResult) []RankedResult {
+// Requires context for semantic relevance scoring via embeddings
+func (r *ResultRanker) Rank(ctx context.Context, results []ExecutionResult) []RankedResult {
 	ranked := make([]RankedResult, len(results))
 	for i, result := range results {
-		breakdown := r.scoreBreakdown(&result)
+		breakdown := r.scoreBreakdown(ctx, &result)
 		total := r.weights.Quality*breakdown.QualityScore +
 			r.weights.Latency*breakdown.LatencyScore +
 			r.weights.Success*breakdown.SuccessScore +
@@ -43,11 +45,12 @@ func (r *ResultRanker) Rank(results []ExecutionResult) []RankedResult {
 }
 
 // AggregateAndScore computes a single quality score from all subtask results
-func (r *ResultRanker) AggregateAndScore(results []ExecutionResult) float64 {
+// Requires context for semantic relevance scoring
+func (r *ResultRanker) AggregateAndScore(ctx context.Context, results []ExecutionResult) float64 {
 	if len(results) == 0 {
 		return 0.0
 	}
-	ranked := r.Rank(results)
+	ranked := r.Rank(ctx, results)
 	var totalScore float64
 	var weightSum float64
 	for i, rr := range ranked {
@@ -58,7 +61,7 @@ func (r *ResultRanker) AggregateAndScore(results []ExecutionResult) float64 {
 	return totalScore / weightSum
 }
 
-func (r *ResultRanker) scoreBreakdown(result *ExecutionResult) ScoreBreakdown {
+func (r *ResultRanker) scoreBreakdown(ctx context.Context, result *ExecutionResult) ScoreBreakdown {
 	var qualityScore float64
 	if result.Success {
 		qualityScore = math.Min(1.0, float64(len(result.Output))/1000.0)
@@ -78,15 +81,41 @@ func (r *ResultRanker) scoreBreakdown(result *ExecutionResult) ScoreBreakdown {
 	}
 
 	return ScoreBreakdown{
-		QualityScore:   qualityScore,
-		LatencyScore:  latencyScore,
-		SuccessScore:  successScore,
-		RelevanceScore: relevanceScore(result.Subtask, result.Output),
+		QualityScore:    qualityScore,
+		LatencyScore:   latencyScore,
+		SuccessScore:   successScore,
+		RelevanceScore: r.relevanceScore(ctx, result),
 	}
 }
 
-// relevanceScore computes keyword overlap between subtask and output
-func relevanceScore(subtask, output string) float64 {
+// relevanceScore computes semantic relevance using embeddings when available,
+// falls back to keyword overlap
+func (r *ResultRanker) relevanceScore(ctx context.Context, result *ExecutionResult) float64 {
+	if result.Subtask == "" || result.Output == "" {
+		return 0
+	}
+
+	// Fast path: if no embedder, use keyword overlap
+	if sharedEmbedder == nil || ctx == nil {
+		return keywordRelevance(result.Subtask, result.Output)
+	}
+
+	// Semantic path: embed both and compute cosine similarity
+	subtaskVec, err := sharedEmbedder.Embed(ctx, result.Subtask)
+	if err != nil || len(subtaskVec) == 0 {
+		return keywordRelevance(result.Subtask, result.Output)
+	}
+
+	outputVec, err := sharedEmbedder.Embed(ctx, result.Output)
+	if err != nil || len(outputVec) == 0 {
+		return keywordRelevance(result.Subtask, result.Output)
+	}
+
+	return math.Min(1.0, CosineSimilarity(subtaskVec, outputVec))
+}
+
+// keywordRelevance computes keyword overlap between subtask and output (legacy)
+func keywordRelevance(subtask, output string) float64 {
 	if subtask == "" || output == "" {
 		return 0
 	}

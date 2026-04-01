@@ -94,10 +94,27 @@ Response format: ["subtask 1", "subtask 2", ...]`, task)
 	end := strings.LastIndex(response, "]")
 
 	if start == -1 || end == -1 {
-		// Fallback: split by newlines
+		// Fallback: parse markdown subtask format ("**Subtask N:**" or "- Subtask" or "N.")
 		lines := strings.Split(response, "\n")
 		subtasks := make([]string, 0)
 		for _, line := range lines {
+			line = strings.TrimSpace(line)
+			// Skip headers, empty lines, and short lines
+			if len(line) < 15 || strings.HasPrefix(line, "#") {
+				continue
+			}
+			// Strip markdown bold/italic markers and numbering prefixes
+			line = strings.TrimPrefix(line, "**")
+			line = strings.TrimSuffix(line, "**")
+			line = strings.TrimPrefix(line, "*")
+			line = strings.TrimSuffix(line, "*")
+			line = strings.TrimPrefix(line, "- ")
+			line = strings.TrimPrefix(line, "• ")
+			// Strip leading "1.", "2.", etc.
+			for i := 1; i <= 9; i++ {
+				line = strings.TrimPrefix(line, fmt.Sprintf("%d. ", i))
+				line = strings.TrimPrefix(line, fmt.Sprintf("%s. ", string(rune('0'+i))))
+			}
 			line = strings.TrimSpace(line)
 			if len(line) > 10 {
 				subtasks = append(subtasks, line)

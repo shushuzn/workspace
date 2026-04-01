@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/openclaw/self-evolving-orchestrator/go/orchestrator"
+	"github.com/openclaw/self-evolving-orchestrator/orchestrator"
 )
 
 // Server wraps the orchestrator with HTTP endpoints

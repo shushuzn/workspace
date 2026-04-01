@@ -44,6 +44,9 @@ func (e *EvolutionLoop) Run(ctx context.Context, task string, opts *EvolutionOpt
 	currentTask := task
 	strategy := e.evolver.GetNextStrategy()
 	var lastScore float64
+	var subtasks []string
+	var ranked []RankedResult
+	var err error
 
 	for i := 0; i < opts.MaxIterations; i++ {
 		select {
@@ -53,7 +56,7 @@ func (e *EvolutionLoop) Run(ctx context.Context, task string, opts *EvolutionOpt
 		}
 
 		// Decompose
-		subtasks, err := e.decomposer.DecomposeWithStrategy(ctx, currentTask, strategy)
+		subtasks, err = e.decomposer.DecomposeWithStrategy(ctx, currentTask, strategy)
 		if err != nil {
 			return nil, fmt.Errorf("decompose failed: %w", err)
 		}
@@ -62,8 +65,8 @@ func (e *EvolutionLoop) Run(ctx context.Context, task string, opts *EvolutionOpt
 		results := e.executeSubtasks(subtasks)
 
 		// Score results
-		ranked := e.ranker.Rank(results)
-		aggregateScore := e.ranker.AggregateAndScore(results)
+		ranked = e.ranker.Rank(ctx, results)
+		aggregateScore := e.ranker.AggregateAndScore(ctx, results)
 		lastScore = aggregateScore
 
 		// Record evolution
@@ -98,6 +101,8 @@ func (e *EvolutionLoop) Run(ctx context.Context, task string, opts *EvolutionOpt
 	if finalResult == nil {
 		finalResult = &EvolutionResultFinal{
 			FinalTask:  currentTask,
+			Subtasks:    subtasks,
+			Results:     ranked,
 			Iterations: opts.MaxIterations,
 			FinalScore: lastScore,
 			Converged:  false,
