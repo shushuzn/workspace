@@ -5,6 +5,12 @@ export class QualityScorer {
     this.prevPersonaEmbeddings = [];
   }
 
+  /**
+   * @param {number[][]} personaEmbeddings - [personaCount][dim]
+   * @param {number} deltaS - deltaS from ConceptJumpTracker
+   * @param {number[]} contributions - contributions from ConceptJumpTracker
+   * @returns {{ quality: number, fluidity: number, jump: number, balance: number }}
+   */
   scoreRound(personaEmbeddings, deltaS, contributions) {
     const ε = 0.001;
 
