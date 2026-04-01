@@ -84,8 +84,9 @@ func main() {
 		return orchestrator.ExecutionResult{Subtask: subtask, Output: response, Success: true, Duration: time.Since(start), Timestamp: time.Now()}
 	}
 
-	// Create orchestrator
-	o := orchestrator.NewOrchestrator(decomposer, executor)
+	// Create orchestrator with LLM-based quality scoring
+	o := orchestrator.NewOrchestratorWithLLM(decomposer, executor, endpoint, model)
+	o.SetFastMode(fastMode)
 
 	// Run
 	ctx, cancel := context.WithTimeout(context.Background(), time.Duration(timeoutSec)*time.Second)

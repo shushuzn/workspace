@@ -3,6 +3,7 @@ package orchestrator
 import (
 	"context"
 	"math"
+	"strings"
 	"testing"
 	"time"
 )
@@ -110,15 +111,16 @@ func TestResultRankerScoreBreakdown(t *testing.T) {
 	t.Run("failed result has halved quality", func(t *testing.T) {
 		result := &ExecutionResult{
 			Subtask:  "test subtask",
-			Output:   "short",
+			Output:   strings.Repeat("x", 500), // enough chars to exceed min threshold
 			Success:  true,
 			Error:    "some error",
 			Duration: 100 * time.Millisecond,
 		}
 		breakdown := ranker.scoreBreakdown(context.Background(), result)
-		// Quality is halved when error is present
-		if breakdown.QualityScore >= math.Min(1.0, float64(len(result.Output))/1000.0) {
-			t.Error("QualityScore should be halved when Error is present")
+		// With a non-trivial output (500 chars), halved score should be < non-halved
+		wantHalved := math.Min(1.0, float64(len(result.Output))/1000.0) * 0.5
+		if breakdown.QualityScore > wantHalved+0.001 {
+			t.Errorf("QualityScore = %f, want <= %f (halved)", breakdown.QualityScore, wantHalved)
 		}
 	})
 

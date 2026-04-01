@@ -10,13 +10,31 @@ type Orchestrator struct {
 	registry *PeerRegistry
 }
 
-// NewOrchestrator creates a new orchestrator
+// NewOrchestrator creates a new orchestrator with default (length-based) ranker
 func NewOrchestrator(
 	decomposer *DecomposerWrapper,
 	executor func(subtask string) ExecutionResult,
 ) *Orchestrator {
 	evolver := NewSelfEvolver()
 	ranker := NewDefaultResultRanker()
+	loop := NewEvolutionLoop(decomposer, evolver, ranker, executor)
+	registry := NewPeerRegistry()
+
+	return &Orchestrator{
+		loop:     loop,
+		registry: registry,
+	}
+}
+
+// NewOrchestratorWithLLM creates an orchestrator with LLM-based quality scoring
+func NewOrchestratorWithLLM(
+	decomposer *DecomposerWrapper,
+	executor func(subtask string) ExecutionResult,
+	ollamaEndpoint string,
+	llmModel string,
+) *Orchestrator {
+	evolver := NewSelfEvolver()
+	ranker := NewResultRankerWithLLM(DefaultScoringWeights(), ollamaEndpoint, llmModel)
 	loop := NewEvolutionLoop(decomposer, evolver, ranker, executor)
 	registry := NewPeerRegistry()
 
@@ -49,4 +67,9 @@ func (o *Orchestrator) ProcessBasic(ctx context.Context, task string) ([]Executi
 // Registry returns the peer registry
 func (o *Orchestrator) Registry() *PeerRegistry {
 	return o.registry
+}
+
+// SetFastMode disables LLM scoring for speed
+func (o *Orchestrator) SetFastMode(v bool) {
+	o.loop.ranker.SetSkipLLM(v)
 }

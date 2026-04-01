@@ -66,7 +66,7 @@ func (e *EvolutionLoop) Run(ctx context.Context, task string, opts *EvolutionOpt
 
 		// Score results
 		ranked = e.ranker.Rank(ctx, results)
-		aggregateScore := e.ranker.AggregateAndScore(ctx, results)
+		aggregateScore := e.ranker.AggregateAndScoreFromRanked(ctx, ranked)
 		lastScore = aggregateScore
 
 		// Record evolution
