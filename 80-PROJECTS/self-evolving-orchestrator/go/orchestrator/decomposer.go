@@ -49,10 +49,11 @@ func NewLLMBasedDecomposer(endpoint, model string) *LLMBasedDecomposer {
 }
 
 func (d *LLMBasedDecomposer) Decompose(ctx context.Context, task string) ([]string, error) {
-	prompt := fmt.Sprintf(`Break down this task into 2-5 subtasks. Return ONLY a JSON array of strings, nothing else.
-Task: %s
+	prompt := fmt.Sprintf(`Given this task: "%s"
 
-Response format: ["subtask 1", "subtask 2", ...]`, task)
+Break it down into 2-5 concrete action steps. Each step should be a specific thing you would CODE or DO, not a phase like "analyze" or "design".
+
+Return ONLY a valid JSON array of strings. No explanation, no markdown, just the array. Example: ["write function X", "implement Y", "test Z"]`, task)
 
 	reqBody := map[string]interface{}{
 		"model":  d.model,
