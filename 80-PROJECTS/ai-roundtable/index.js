@@ -135,7 +135,13 @@ function color(text, code) {
 }
 
 function cleanResponse(text) {
-  text = text.replace(/\*/g, '');
+  // 剥离 HTML 标签
+  text = text.replace(/<\/?(?:span|div|p|br|b|i|strong|em)[^>]*>/gi, '\n');
+  text = text.replace(/<[^>]+>/g, '');
+  // 剥离思考标签
+  text = text.replace(/<think>[\s\S]*?<\/think>/gi, '');
+  // 清理星号
+  text = text.replace(/\*{1,3}([^\^*]+)\*{1,3}/g, '$1');
   text = text.replace(/[（（].*?[）)]/gs, '');
   text = text.replace(/<think>.*?\n<\/think>/gs, '');
   text = text.replace(/<think>.*$/gs, '');
@@ -587,7 +593,7 @@ async function generateAudienceQuestion(topic, history, abortSignal) {
           const data = await res.json();
           return data.choices?.[0]?.message?.content || '';
         })();
-    return raw.trim();
+    return cleanResponse(raw.trim());
   } catch (err) {
     if (err.name !== 'AbortError') {
       console.log(color(`  ⚠ 观众提问生成失败：${err.message}`, 31));
@@ -605,14 +611,12 @@ async function runAudienceQuestion(topic, history, activePersonas, abortSignal) 
   const qLine = color(`🙋 现场观众：${question}`, 35);
   console.log(`\n  ${qLine}\n`);
 
-  // 各人格依次回答
   const historyWithQ = [...history, { role: 'user', content: `观众追问：${question}` }];
   const answers = [];
 
   for (const persona of activePersonas) {
     const pName = color(`${persona.icon} ${persona.name}`, persona.color);
     process.stdout.write(`  ${pName} 回答中...`);
-
     const dotTimer = setInterval(() => process.stdout.write(color('.', persona.color)), 150);
 
     try {
@@ -965,18 +969,16 @@ async function main() {
         break;
       }
 
-      // ─── 观众提问阶段（辩论模式 + --audience）────────────
+      // ─── 观众提问阶段（辩论模式 + --audience）────────────────
       if (mode === MODE_DEBATE && audienceMode && round < rounds - 1) {
         printDivider();
         const audienceResult = await runAudienceQuestion(topic, history, activePersonas, abortController.signal);
         if (audienceResult) {
           const { question, answers } = audienceResult;
-          // 将观众Q&A注入历史供后续轮次使用
           history.push({ role: 'user', content: `观众追问：${question}` });
           for (const { persona, text } of answers) {
             history.push({ role: 'assistant', content: text });
           }
-          // 保留到 transcript
           roundResponses[round].push(
             { persona: audiencePersona, text: question, temp: T },
             ...answers.map(a => ({ persona: a.persona, text: a.text, temp: T }))
