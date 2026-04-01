@@ -235,6 +235,10 @@ function parseArgs(argv) {
   let customInitialTemp = null;
 
   for (let i = 0; i < args.length; i++) {
+    if (args[i] === '--help' || args[i] === '-h') {
+      printHelp();
+      process.exit(0);
+    }
     if ((args[i] === '-r' || args[i] === '--rounds') && args[i + 1]) {
       const n = parseInt(args[i + 1], 10);
       if (!isNaN(n) && n > 0) rounds = Math.min(n, 10);
@@ -251,6 +255,34 @@ function parseArgs(argv) {
   }
 
   return { topic, rounds, customInitialTemp };
+}
+
+function printHelp() {
+  console.log(`
+🔥 AI 圆桌讨论 — Cognitive Annealing 版
+
+用法:
+  node index.js <话题> [选项]
+  node index.js              # 交互模式
+
+选项:
+  -r, --rounds <N>     讨论轮数 (默认 8, 最大 10)
+  -t, --temp <T>       初始温度 (默认 1.2, 最大 2.0)
+  -h, --help           显示此帮助
+
+示例:
+  node index.js "AI是否会取代人类工作"
+  node index.js "气候变化" -r 6 -t 1.0
+
+温度调度:
+  初始 1.2, 冷却率 0.88, 最低 0.3
+  ΔS 峰值时进入 plateau (温度不变 2 轮)
+  连续 4 轮 ΔS < 0.05 时早停
+
+嵌入:
+  优先 MiniMax embedding API
+  余额不足时自动降级到 Ollama 本地 (llama3.2:1b)
+`);
 }
 
 // ─── 主函数 ───────────────────────────────────────────
