@@ -2,6 +2,7 @@ import 'dotenv/config';
 import { TemperatureScheduler } from './shared/temperatureScheduler.js';
 import { ConceptJumpTracker } from './shared/conceptJumpTracker.js';
 import { MiniMaxEmbedder } from './shared/embedder.js';
+import { QualityScorer } from './shared/qualityScorer.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -208,13 +209,13 @@ function printAnnealingReport(topic, totalRounds, stats, roundStats) {
   console.log('  概念跳跃曲线（ΔS）');
   console.log('    ΔS 越高 = 讨论方向偏移越大');
   console.log('');
-  console.log('  轮次 | 温度  | ΔS   | 状态');
-  console.log('  -----|-------|------|------');
+  console.log('  轮次 | 温度  | ΔS   | 质量分 | 状态');
+  console.log('  -----|-------|------|--------|------');
 
   for (const s of roundStats) {
     const bar = s.deltaS > 0.35 ? '★'.repeat(Math.round(s.deltaS * 5)) : '';
     console.log(
-      `    ${String(s.round).padStart(2)}  | ${s.temp.toFixed(2)}  | ${s.deltaS.toFixed(2)} | ${s.status} ${bar}`
+      `    ${String(s.round).padStart(2)}  | ${s.temp.toFixed(2)}  | ${s.deltaS.toFixed(2)} | ${(s.quality ?? 0).toFixed(0).padStart(4)} | ${s.status} ${bar}`
     );
   }
 
@@ -265,6 +266,10 @@ function printAnnealingReport(topic, totalRounds, stats, roundStats) {
   } else {
     console.log('  临界温度：未检测到显著峰值');
   }
+
+  const avgQuality = roundStats.reduce((sum, s) => sum + (s.quality ?? 0), 0) / roundStats.length;
+  console.log(`  本轮讨论综合评分：${avgQuality.toFixed(0)} / 100`);
+
   console.log(color('══════════════════════════════════════════════\n', 1));
 }
 
@@ -366,6 +371,7 @@ async function main() {
     );
     const embedder = new MiniMaxEmbedder();
     const tracker = new ConceptJumpTracker(embedder);
+    const scorer = new QualityScorer();
     const roundResponses = [];
 
     // 记录 { round, temp, deltaS, status } 用于报告
@@ -422,7 +428,12 @@ async function main() {
       } else {
         status = '🔥 高温探索';
       }
-      roundStats.push({ round: round + 1, temp: T, deltaS, contributions, status });
+      const { quality, fluidity, jump, balance } = scorer.scoreRound(
+        tracker.personaEmbeddings[tracker.personaEmbeddings.length - 1],
+        deltaS,
+        contributions
+      );
+      roundStats.push({ round: round + 1, temp: T, deltaS, contributions, quality, status });
 
       // ─── 早停检查 ───────────────────────────────────
       if (round >= scheduler.config.minRoundsBeforeEarlyStop - 1 &&
