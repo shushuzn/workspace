@@ -24,9 +24,9 @@ export class TemperatureScheduler {
   /** 获取当前轮温度（不在此处 push tempHistory，由调用方管理） */
   getTemperature() {
     if (this.plateauRemaining > 0) {
-      return Math.min(this.plateauTemperature ?? this.currentTemp, this.config.minTemp);
+      return Math.max(this.plateauTemperature ?? this.currentTemp, this.config.minTemp);
     }
-    return Math.min(this.currentTemp, this.config.minTemp);
+    return Math.max(this.currentTemp, this.config.minTemp);
   }
 
   /** 记录本轮温度（由主循环调用，每轮只 push 一次） */
