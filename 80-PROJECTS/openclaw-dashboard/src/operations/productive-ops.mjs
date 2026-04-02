@@ -432,11 +432,6 @@ export class PickNextProject extends ProductiveOperation {
       row.lastActive === '近期' ||
       !/^\d{4}-\d{2}-\d{2}$/.test(row.lastActive)
     );
-    const fixed = projectRows.filter(row =>
-      row.lastActive &&
-      row.lastActive !== '近期' &&
-      /^\d{4}-\d{2}-\d{2}$/.test(row.lastActive)
-    );
 
     const resolvedMap = new Map();
     for (let i = 0; i < toResolve.length; i += CONCURRENCY) {
@@ -444,10 +439,15 @@ export class PickNextProject extends ProductiveOperation {
       const promises = batch.map(row =>
         this._getGitLastActive(row.path).then(date => ({ row, date }))
       );
-      const results = await Promise.all(promises);
-      for (const { row, date } of results) {
+      const batchResults = await Promise.all(promises);
+      for (const { row, date } of batchResults) {
         if (date) resolvedMap.set(row.name, date);
       }
+    }
+
+    // 将追溯到的日期写回 MEMORY.md（避免重复追溯）
+    if (resolvedMap.size > 0) {
+      this._updateMemoryDates(memoryFile, resolvedMap, projectRows);
     }
 
     const results = [];
@@ -473,10 +473,8 @@ export class PickNextProject extends ProductiveOperation {
     // 加权随机
     const totalWeight = results.reduce((s, r) => s + r.weight, 0);
     const seed = Date.now();
-    let random = (seed % 1000) / 1000 * totalWeight; // deterministic-ish fallback
-    try {
-      random = Math.random() * totalWeight;
-    } catch { /* use seeded fallback */ }
+    let random;
+    try { random = Math.random() * totalWeight; } catch { random = (seed % 1000) / 1000 * totalWeight; }
 
     let picked = results[0];
     for (const r of results) {
@@ -492,6 +490,7 @@ export class PickNextProject extends ProductiveOperation {
     });
 
     results.sort((a, b) => b.weight - a.weight);
+    const maxWeight = results[0].weight;
     return {
       picked: picked.name,
       path: picked.path,
@@ -500,6 +499,7 @@ export class PickNextProject extends ProductiveOperation {
       gamma: this.gamma,
       totalProjects: results.length,
       allProjects: results,
+      maxWeight,
       seed,
     };
   }
@@ -546,5 +546,35 @@ export class PickNextProject extends ProductiveOperation {
       }).trim();
       return log ? new Date(log).toISOString().split('T')[0] : null;
     } catch { return null; }
+  }
+
+  /**
+   * 将追溯到的真实日期写回 MEMORY.md，避免重复追溯
+   * 找到包含项目名的行，将"近期"替换为真实日期
+   */
+  _updateMemoryDates(memoryFile, resolvedMap, projectRows) {
+    try {
+      let lines = fs.readFileSync(memoryFile, 'utf8').split('\n');
+      let updated = false;
+
+      lines = lines.map(line => {
+        for (const row of projectRows) {
+          const resolvedDate = resolvedMap.get(row.name);
+          if (!resolvedDate) continue;
+          if (line.includes(`| ${row.name} |`) && line.includes('近期')) {
+            // 把" 近期 "替换为" YYYY-MM-DD "
+            line = line.replace(/\s+近期\s+/, ` ${resolvedDate} `);
+            updated = true;
+          }
+        }
+        return line;
+      });
+
+      if (updated) {
+        const tmp = memoryFile + '.tmp';
+        fs.writeFileSync(tmp, lines.join('\n'), 'utf8');
+        fs.renameSync(tmp, memoryFile);
+      }
+    } catch { /* ignore */ }
   }
 }
