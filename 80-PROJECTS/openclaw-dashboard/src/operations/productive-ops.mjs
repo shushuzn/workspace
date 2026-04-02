@@ -939,11 +939,15 @@ export class IdeaPool {
     return ideas.length - 1;
   }
 
-  /** 推进 idea 状态 */
+  /** 推进 idea 状态，shipped 时自动记录交付时间戳 */
   advance(idx, targetStage) {
     const ideas = this._read();
     if (idx < 0 || idx >= ideas.length) return false;
-    ideas[idx] = { ...ideas[idx], stage: targetStage };
+    let desc = ideas[idx].desc;
+    if (targetStage === 'shipped') {
+      desc = `${desc} | shipped:${this._today()}`;
+    }
+    ideas[idx] = { ...ideas[idx], stage: targetStage, desc };
     this._write(ideas);
     return true;
   }
@@ -952,7 +956,8 @@ export class IdeaPool {
   kill(idx, reason) {
     const ideas = this._read();
     if (idx < 0 || idx >= ideas.length) return false;
-    ideas[idx] = { ...ideas[idx], desc: `${ideas[idx].desc} | 💀 killed: ${reason}` };
+    const desc = `${ideas[idx].desc} | killed:${this._today()} ${reason}`;
+    ideas[idx] = { ...ideas[idx], stage: 'killed', desc };
     this._write(ideas);
     return true;
   }
@@ -981,10 +986,21 @@ export class IdeaPool {
     const raw = fs.readFileSync(this.file, 'utf8');
     const ideas = [];
     for (const line of raw.split('\n')) {
-      // 支持: - [DATE] stage [source] description
+      // 支持: - [DATE] stage [source] description [| shipped:DATE | killed:DATE REASON]
       const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s+(.*)/);
       if (!m) continue;
-      ideas.push({ date: m[1], stage: m[2], source: m[3] || 'manual', desc: m[4].trim() });
+      const desc = m[4].trim();
+      // 解析 | shipped: / | killed: 时间戳
+      const shippedMatch = desc.match(/\| shipped:(\d{8})/);
+      const killedMatch  = desc.match(/\| killed:(\d{8})(?: (.*))?$/);
+      ideas.push({
+        date:    m[1],
+        stage:   m[2],
+        source:  m[3] || 'manual',
+        desc:    desc,
+        shipped: shippedMatch ? shippedMatch[1] : null,
+        killed:  killedMatch  ? killedMatch[1]  : null,
+      });
     }
     return ideas;
   }
@@ -995,8 +1011,8 @@ export class IdeaPool {
     const header = `# Idea Pool
 
 > 每个 session 产生的 idea 必须立即追加到此文件。
-> 格式：\`- [DATE] STAGE [source] description\`
-> STAGE: seed=💡闪念 / proposal=📋提案 / running=🔬实验 / shipped=📦交付 / killed=💀放弃 / dormant=⏸️休眠
+> 格式：\`- [DATE] STAGE [source] description [| shipped:DATE | killed:DATE REASON]\`
+> STAGE: seed / proposal / running / shipped / killed / dormant
 > SOURCE: brainstorm / suggest / manual（默认 manual）
 
 `;

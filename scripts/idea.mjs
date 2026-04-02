@@ -42,7 +42,18 @@ function readData() {
   for (const line of raw.split('\n')) {
     const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s+(.*)/);
     if (!m) continue;
-    ideas.push({ raw: line, date: m[1], stage: m[2], source: m[3] || 'manual', desc: m[4].trim() });
+    const desc = m[4].trim();
+    const shippedMatch = desc.match(/\| shipped:(\d{8})/);
+    const killedMatch  = desc.match(/\| killed:(\d{8})(?: (.*))?$/);
+    ideas.push({
+      raw: line,
+      date:    m[1],
+      stage:   m[2],
+      source:  m[3] || 'manual',
+      desc:    desc,
+      shipped: shippedMatch ? shippedMatch[1] : null,
+      killed:  killedMatch  ? killedMatch[1]  : null,
+    });
   }
   return ideas;
 }
@@ -51,8 +62,8 @@ function writeData(ideas) {
   const header = `# Idea Pool
 
 > 每个 session 产生的 idea 必须立即追加到此文件。
-> 格式：\`- [DATE] STAGE [source] description\`
-> STAGE: seed=💡闪念 / proposal=📋提案 / running=🔬实验 / shipped=📦交付 / killed=💀放弃 / dormant=⏸️休眠
+> 格式：\`- [DATE] STAGE [source] description [| shipped:DATE | killed:DATE REASON]\`
+> STAGE: seed / proposal / running / shipped / killed / dormant
 > SOURCE: brainstorm / suggest / manual（默认 manual）
 
 `;
@@ -102,7 +113,9 @@ function cmdAdvance(args) {
   if (STAGE_LIST.indexOf(target) <= curIdx && !args[1]) {
     console.log(`❌ ${idea.stage} 已是最终状态`); return;
   }
-  ideas[idx] = { ...idea, stage: target };
+  let desc = idea.desc;
+  if (target === 'shipped') desc = `${desc} | shipped:${todayStr()}`;
+  ideas[idx] = { ...idea, stage: target, desc };
   writeData(ideas);
   console.log(`✅ ${STAGE_EMOJI[idea.stage]}→${STAGE_EMOJI[target]} ${idea.desc}`);
 }
@@ -114,7 +127,8 @@ function cmdKill(args) {
   const ideas = readData();
   if (idx < 0 || idx >= ideas.length) { console.log('❌ 未找到 idea'); return; }
   const idea = ideas[idx];
-  ideas[idx] = { ...idea, desc: `${idea.desc} | 💀 killed: ${reason}` };
+  const desc = `${idea.desc} | killed:${todayStr()} ${reason}`;
+  ideas[idx] = { ...idea, stage: 'killed', desc };
   writeData(ideas);
   console.log(`💀 已放弃: ${idea.desc}`);
 }
