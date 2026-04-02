@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.12 | **更新日期**：2026-04-02 | **迭代轮次**：24 轮
+> **版本**：v1.17 | **更新日期**：2026-04-02 | **迭代轮次**：27 轮
 
 ---
 
@@ -132,19 +132,19 @@
 
 每个 session 开始时，必须从所有项目中选择 1 个"目标项目"执行最小维护：
 
-**权重公式（已修正）：**
+**权重公式：**
 ```
 weight(project) = (days_since_last_active + 1)^γ
 ```
-- `γ`（衰减系数）：0.3~0.7，默认 0.5
+- `γ`（衰减系数）：有效范围 (0, 2]，默认 0.5（代码校验，非法值 fallback 0.5）
 - `days=0`（今天刚更新）→ weight=1，最不优先；days 越大权重越高
-- "近期"项目自动从 git log 追溯真实日期
-- session 内不重复：同一项目同一 session 不会二次被选
-- **v1.10 修正**：原版 `(days)^γ` 导致 days=0 时 weight=0，刚更新项目被排除；现改为 `+1` 避免零权重悖论
+- "近期"项目自动从 git log 追溯真实日期并写回 MEMORY.md
+- session 内不重复：同一项目同一 session 不会二次被选（状态文件持久化）
+- **v1.17**：新增随机配对 + 桥接概念发现
 
 **选择规则：**
-1. 执行 `node 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs` 获取抽选结果（默认 γ=0.5，"近期"项目自动从 git log 追溯真实日期）
-2. 抽选基于 MEMORY.md Active Projects 表，按 `(days)^γ` 权重概率随机
+1. 执行 `node 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs` 获取抽选结果
+2. 抽选基于 MEMORY.md Active Projects 表，按 `(days+1)^γ` 权重概率随机
 3. "近期"项目需先通过 git log 追溯真实日期，否则不参与抽选
 4. 目标项目执行"体检"最小目标（A/B/C 三选一）：
    - **A**：检查能否正常启动运行（3 分钟内验证）
@@ -152,20 +152,11 @@ weight(project) = (days_since_last_active + 1)^γ
    - **C**：更新 MEMORY.md 中该项目价值记录
 5. 体检完成后，更新 MEMORY.md 的 Last Active 为当天
 
-**配对规则（可选增强）：**
-- 权重抽取 1 个 + 手动选 1 个"有感知项目"同步工作
-- 两者须来自不同技术栈或不同领域
-
-**当前优先级（γ=0.7，按权重倒序）：**
-
-| 优先级 | Project | Last Active | Days | Weight(γ=0.5) |
-|--------|---------|------------|------|---------------|
-| 🟡 | `ai-roundtable`, `a2a-router`, `self-evolving-orchestrator`, `conceptual-distance-explorer` | 2026-04-02 | 0 | 1.000 |
-| 🟡 | `idle-empire` | 2026-03-31 | 2 | 1.732 |
-| 🟠 | `NewsHub`, `crucix`, `openclaw-dashboard` 等 6 个 | 2026-03-30 | 3 | 2.000 |
-| 🔴 | `stock-analysis-agent` 等 15 个"近期"项目 | 待追溯 | ≥7 | ≥2.828 |
-
-> 注：`weight = (days+1)^0.5`，days=0 → weight=1.0（今天更新，最不优先）；days 越大越优先。"近期"项目已改为自动从 git log 追溯。
+**意外相似（v1.17 新增）：**
+- 每次抽选后自动随机配对：在剩余项目中随机选一个
+- 读取双方的 CLAUDE.md / README.md，提取高频关键词取交集
+- 输出 `🌉 意外相似: X ↔ Y | 共享: Z`，帮助发现跨项目联动机会
+- 不依赖技术栈限制，纯靠文档内容相似性驱动
 
 ---
 

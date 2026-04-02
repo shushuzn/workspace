@@ -57,12 +57,8 @@ if (result.allProjects && result.allProjects.length > 0) {
   });
 }
 
-if (result.pair && result.bridge) {
+if (result.pair) {
   console.log(`\n🌉 意外相似: ${result.picked} ↔ ${result.pair.name}`);
-  console.log(`   共享概念: ${result.bridge.shared}`);
-  console.log(`   候选列表: ${result.bridge.allShared.join(', ')}`);
-} else if (result.pair) {
-  console.log(`\n🌉 意外相似: ${result.picked} ↔ ${result.pair.name}（共享概念待发现）`);
 }
 
 console.log('\n【验收】请选择体检类型：');

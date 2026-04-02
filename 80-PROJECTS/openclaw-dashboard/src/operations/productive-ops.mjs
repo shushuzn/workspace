@@ -560,12 +560,11 @@ export class PickNextProject extends ProductiveOperation {
     results.sort((a, b) => b.weight - a.weight);
     const maxWeight = results[0].weight;
 
-    // 随机选一个配对项目，找意外相似
+    // 随机选一个配对项目（只显示配对，不找关键词交集）
     const remaining = results.filter(r => r.name !== picked.name);
     const pair = remaining.length > 0
       ? remaining[Math.floor(Math.random() * remaining.length)]
       : null;
-    const bridge = pair ? this._findBridgeConcepts(picked.path, pair.path) : null;
 
     return {
       picked: picked.name,
@@ -578,7 +577,6 @@ export class PickNextProject extends ProductiveOperation {
       maxWeight,
       seed,
       pair: pair ? { name: pair.name, path: pair.path } : null,
-      bridge,
     };
     } finally { this._releaseLock(); }
   }
