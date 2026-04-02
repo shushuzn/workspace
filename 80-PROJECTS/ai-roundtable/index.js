@@ -135,34 +135,46 @@ function color(text, code) {
   return `\x1b[${code}m${text}\x1b[0m`;
 }
 
+function isEnglishCoT(sentence) {
+  const enChars = (sentence.match(/[a-zA-Z]/g) || []).length;
+  const totalLen = sentence.replace(/\s/g, '').length;
+  if (totalLen > 0 && enChars / totalLen > 0.4) return true;
+  const trimmed = sentence.trim();
+  return /^(The user|Let me|I need to|I think|I believe|In my opinion|I should|I will|Speaker note)\b/i.test(trimmed);
+}
+
+function cleanSentence(s) {
+  if (s.length < 4) return false;
+  if (isEnglishCoT(s)) return false;
+  if (/^['"'']$/.test(s)) return false;
+  if (/^[1-9][.、]\s*[^，。！？]{1,15}[。]?$/.test(s.trim())) return false;
+  const instructionKeywords = ['句以内', '结尾必须', '真实', '具体', '立刻', '直接', '2句', '1句', '3句'];
+  const hasInstruction = instructionKeywords.some(k => s.includes(k));
+  if (hasInstruction && s.length < 20) return false;
+  if (s.includes('要求我') || s.includes('扮演') || s.includes('根据规则') || s.includes('Style Guidance') || s.includes('只输出') || s.includes('不要') || s.includes('禁止') || s.includes('回复格式')) return false;
+  return true;
+}
+
 function cleanResponse(text) {
-  // 剥离 HTML 标签
+  // 移除 ANSI 颜色码（放在最前面，防止干扰分句）
+  text = text.replace(/\u001b\[[0-9;]*m/g, '');
+  // 剥离 HTML 标签和 think 标签
   text = text.replace(/<\/?(?:span|div|p|br|b|i|strong|em|think)[^>]*>/gi, '\n');
   text = text.replace(/<[^>]+>/g, '');
-  // 剥离思考标签
   text = text.replace(/<think>[\s\S]*?<\/think>/gi, '');
-  // 清理星号
+  // 清理星号和括号
   text = text.replace(/\*{1,3}([^\^*]+)\*{1,3}/g, '$1');
   text = text.replace(/[（（].*?[）)]/gs, '');
-  text = text.replace(/<think>.*?\n<\/think>/gs, '');
-  text = text.replace(/<think>.*$/gs, '');
   text = text.replace(/\(.*?\)/gs, '');
-  text = text.replace(/[(:].*?(用户要求|用户发送|用户输入|根据规则|扮演|我需要|让我|这是一个|Style Guidance|只输出|不要|禁止|回复格式)/g, '');
-  text = text.replace(/\n[^\n]*(用户|规则|扮演|我需要|让我|回复格式)[^\n]*\n/gs, '\n');
-  text = text.replace(/\n{3,}/g, '\n\n');
-  text = text.replace(/^\s*\n/, '');
+  // 移除行首编号（独立成行的指令）
+  text = text.replace(/^[1-9][.、]\s*/gm, '');
+  // 先按句号分割（英文+中文），逐句过滤
   const sentences = text
-    .split(/[。\！？\n]/)
+    .split(/(?<=[。！？])|(?<=[.!?])\s+/)
     .map(s => s.trim())
-    .filter(s => {
-      if (s.length < 4) return false;
-      if (/^['"'']$/.test(s)) return false;
-      if (s.includes('要求我') || s.includes('扮演') || s.includes('根据规则') || s.includes('Style Guidance') || s.includes('只输出') || s.includes('不要') || s.includes('禁止') || s.includes('回复格式')) return false;
-      if (/^\(?[0-9a-zA-Z]?\s?[.、:：]?\s?(立刻|直接)/.test(s)) return false;
-      return true;
-    })
+    .filter(s => cleanSentence(s))
     .slice(0, 2);
-  text = sentences.join('。').trim();
+  text = sentences.join(' ').trim();
   if (!text) return '(无有效回答)';
   if (!/[。！？]$/.test(text)) text += '。';
   return text;
