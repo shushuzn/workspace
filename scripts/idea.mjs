@@ -92,10 +92,17 @@ function cmdList(args) {
   if (ideas.length === 0) { console.log('  (空)'); }
   ideas.forEach((idea, i) => {
     const age = getDaysOld(idea.date);
-    const ttl = TTL_DAYS[idea.stage];
+    let ttl = TTL_DAYS[idea.stage];
+    // 高分 seed 延长保鲜期
+    if (idea.stage === 'seed' && ttl && idea.impact && idea.effort) {
+      const s = idea.impact * idea.effort;
+      if (s >= 6) ttl = 7;
+      else if (s >= 4) ttl = 5;
+    }
     const emoji = STAGE_EMOJI[idea.stage] || '?';
     const name  = STAGE_NAMES[idea.stage]  || idea.stage;
-    const ageMark = ttl && age > ttl ? ' 🔴过时' : age > 0 ? ` (${age}d)` : '';
+    const overdue = ttl && age > ttl;
+    const ageMark = overdue ? ' 🔴过时' : age > 0 ? ` (${age}d/${ttl || '∞'})` : '';
     const scoreMark = (idea.impact && idea.effort) ? ` ★${idea.impact}x${idea.effort}` : '';
     const displayDesc = (idea.desc || '').replace(/\s*\[score:\d+x\d+\]/g, '');
     console.log(`${i} ${emoji} [${name}]${scoreMark} ${displayDesc}${ageMark}`);
