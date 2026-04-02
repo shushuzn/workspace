@@ -931,11 +931,10 @@ export class IdeaPool {
     return Math.floor((new Date() - d) / 86400000);
   }
 
-  /** 追加一条 idea */
-  add(stage, desc) {
-    // stage: seed/proposal/running/shipped/killed/dormant
+  /** 追加一条 idea，source: brainstorm/suggest/manual */
+  add(stage, desc, source = 'manual') {
     const ideas = this._read();
-    ideas.push({ date: this._today(), stage, desc });
+    ideas.push({ date: this._today(), stage, desc, source });
     this._write(ideas);
     return ideas.length - 1;
   }
@@ -982,9 +981,10 @@ export class IdeaPool {
     const raw = fs.readFileSync(this.file, 'utf8');
     const ideas = [];
     for (const line of raw.split('\n')) {
-      const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)\s+(.*)/);
+      // 支持: - [DATE] stage [source] description
+      const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s+(.*)/);
       if (!m) continue;
-      ideas.push({ date: m[1], stage: m[2], desc: m[3].trim() });
+      ideas.push({ date: m[1], stage: m[2], source: m[3] || 'manual', desc: m[4].trim() });
     }
     return ideas;
   }
@@ -995,11 +995,15 @@ export class IdeaPool {
     const header = `# Idea Pool
 
 > 每个 session 产生的 idea 必须立即追加到此文件。
-> 格式：\`- [DATE] STAGE description\`
+> 格式：\`- [DATE] STAGE [source] description\`
 > STAGE: seed=💡闪念 / proposal=📋提案 / running=🔬实验 / shipped=📦交付 / killed=💀放弃 / dormant=⏸️休眠
+> SOURCE: brainstorm / suggest / manual（默认 manual）
 
 `;
-    const body = ideas.map(i => `- [${i.date}] ${i.stage} ${i.desc}`).join('\n');
+    const body = ideas.map(i => {
+      const src = i.source ? ` [${i.source}]` : '';
+      return `- [${i.date}] ${i.stage}${src} ${i.desc}`;
+    }).join('\n');
     const tmp = this.file + '.tmp';
     fs.writeFileSync(tmp, header + body + '\n', 'utf8');
     fs.renameSync(tmp, this.file);

@@ -130,7 +130,7 @@ export class BrainstormProjects extends DetectionOperation {
     // 写入 idea 池（每条建议一条 seed idea）
     const ideaPool = new IdeaPool(this.workspace);
     for (const s of suggestions) {
-      ideaPool.add('seed', `brainstorm: ${s}`);
+      ideaPool.add('seed', `brainstorm: ${s}`, 'brainstorm');
     }
 
     const brainstormDir = path.join(this.workspace, '.omc', 'brainstorm');
@@ -380,7 +380,7 @@ export class SuggestProjectIdeas extends DetectionOperation {
     // 写入 idea 池
     const ideaPool = new IdeaPool(this.workspace);
     for (const s of suggestions) {
-      ideaPool.add('seed', `suggest: ${s}`);
+      ideaPool.add('seed', `suggest: ${s}`, 'suggest');
     }
 
     // 写入 brainstorm 目录
@@ -392,5 +392,66 @@ export class SuggestProjectIdeas extends DetectionOperation {
     fs.writeFileSync(outputPath, content, 'utf8');
 
     return { project: targetProject, ideas: suggestions.length, suggestions, output: outputPath };
+  }
+}
+
+/**
+ * BrainstormReview — brainstorm 历史文件复盘
+ * 每 14 天触发，扫描 .omc/brainstorm/ 清理过时文件，统计采纳率
+ */
+export class BrainstormReview extends DetectionOperation {
+  constructor(workspace) {
+    super('brainstorm_review', 'brainstorm 历史复盘');
+    this.workspace = workspace;
+    this.brainstormDir = path.join(workspace, '.omc', 'brainstorm');
+    this.ideaPool = new IdeaPool(workspace);
+  }
+
+  canImprove() {
+    if (!fs.existsSync(this.brainstormDir)) return false;
+    const files = fs.readdirSync(this.brainstormDir).filter(f => f.endsWith('.md'));
+    if (files.length === 0) return false;
+    const latest = files.sort().pop();
+    const age = Date.now() - fs.statSync(path.join(this.brainstormDir, latest)).mtimeMs;
+    return age > 14 * 24 * 60 * 60 * 1000;
+  }
+
+  async execute() {
+    if (!fs.existsSync(this.brainstormDir)) {
+      return { cleaned: 0, stats: { total: 0, adopted: 0, rate: '0%' } };
+    }
+
+    const files = fs.readdirSync(this.brainstormDir).filter(f => f.endsWith('.md'));
+    const now = Date.now();
+    const TTL_MS = 60 * 24 * 60 * 60 * 1000; // 60 天
+
+    let cleaned = 0;
+    const stats = { total: files.length, adopted: 0, oldFiles: 0 };
+
+    // 统计 idea 池中 brainstorm 来源的采纳情况
+    const allIdeas = this.ideaPool.list();
+    const brainstormIdeas = allIdeas.filter(i => i.source === 'brainstorm');
+    const adoptedBrainstorm = brainstormIdeas.filter(i => ['shipped', 'running'].includes(i.stage));
+    stats.adopted = adoptedBrainstorm.length;
+    stats.rate = brainstormIdeas.length > 0
+      ? `${Math.round(adoptedBrainstorm.length / brainstormIdeas.length * 100)}%`
+      : '0%';
+
+    // 清理 60 天以上的旧文件
+    for (const file of files) {
+      const filePath = path.join(this.brainstormDir, file);
+      const age = now - fs.statSync(filePath).mtimeMs;
+      if (age > TTL_MS) {
+        fs.unlinkSync(filePath);
+        cleaned++;
+        stats.oldFiles++;
+      }
+    }
+
+    return {
+      cleaned,
+      stats,
+      message: `brainstorm 历史: ${stats.total} 个文件, ${stats.adopted}/${brainstormIdeas.length} 被采纳 (${stats.rate}), 清理 ${cleaned} 个过期文件`,
+    };
   }
 }

@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.36 | **更新日期**：2026-04-02 | **迭代轮次**：34 轮
+> **版本**：v1.37 | **更新日期**：2026-04-02 | **迭代轮次**：35 轮
 
 ---
 
@@ -214,7 +214,16 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost
 - 每条建议自动写入 idea 池（stage=seed）
 - 与 BrainstormProjects 的区别：针对性强、无冷却期
 
-**idea 追踪状态：**
+**brainstorm 复盘（每 14 天）：**
+- BrainstormReview 操作扫描 .omc/brainstorm/ 历史文件
+- 统计 brainstorm 来源 idea 的采纳率（shipped/running 占比）
+- 自动清理 60 天以上过期 brainstorm 文件
+
+**idea 来源追踪：**
+- brainstorm 生成 → 标记 [brainstorm]
+- SuggestProjectIdeas 生成 → 标记 [suggest]
+- 手动提出 → 标记 [manual]（默认）
+- 便于评估各来源质量
 | 状态 | 含义 |
 |------|------|
 | 💡 active | 闪念，等待明确化 |
