@@ -3,6 +3,7 @@ import { TemperatureScheduler } from './shared/temperatureScheduler.js';
 import { ConceptJumpTracker } from './shared/conceptJumpTracker.js';
 import { MiniMaxEmbedder } from './shared/embedder.js';
 import { QualityScorer } from './shared/qualityScorer.js';
+import { discoverBridgeConcepts, extractBridgePool } from './shared/bridgeDiscovery.js';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -957,6 +958,27 @@ async function main() {
       // ─── 轮结束：计算 ΔS ──────────────────────────────
       const { deltaS, contributions } = await tracker.processRound(roundUtterances);
       scheduler.recordDeltaS(deltaS);
+
+      // ─── 桥接概念发现 ────────────────────────────────
+      {
+        const history = scheduler.getHistory();
+        const prevDeltaS = history.length >= 2 ? history[history.length - 2] : null;
+        if (prevDeltaS !== null && deltaS < 0.1 && prevDeltaS < 0.1) {
+          const prevRoundResponses = roundResponses[round - 1] ?? [];
+          const allTexts = roundResponses.flat().map(r => r.text);
+          const bridgePool = extractBridgePool(allTexts);
+          const prevTexts = prevRoundResponses.map(r => r.text);
+          // positive = deltaS 最高的发言（取最后轮均值最远的那几条发言）
+          const posUtterances = prevTexts.slice(-Math.min(2, prevTexts.length));
+          const negUtterances = prevTexts.slice(0, Math.min(2, prevTexts.length));
+          if (bridgePool.length > 0) {
+            const bridges = await discoverBridgeConcepts({ positiveUtterances: posUtterances, negativeUtterances: negUtterances, bridgePool, topK: 3 });
+            if (bridges.length > 0) {
+              console.log(`\n  🌉 桥接概念：${bridges.join(', ')}`);
+            }
+          }
+        }
+      }
 
       // 记录本轮统计
       let status = '';
