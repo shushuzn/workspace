@@ -61,12 +61,13 @@ if (result.seed) {
 
 if (result.allProjects && result.allProjects.length > 0) {
   console.log('\n权重排行榜 (Top 5):');
+  const totalWeight = result.allProjects.reduce((s, x) => s + x.weight, 0);
+  const ideaPool = new (await import('./productive-ops.mjs')).IdeaPool(workspaceRoot);
   result.allProjects.slice(0, 5).forEach((p, i) => {
-    // bar = 该项目权重占总权重的比例（相对于 totalWeight）
-    const totalWeight = result.allProjects.reduce((s, x) => s + x.weight, 0);
+    const composite = picker.compositeHealthScore(p.name, p.days, ideaPool);
     const barLen = Math.max(1, Math.round((p.weight / totalWeight) * 12));
     const bar = '█'.repeat(barLen);
-    console.log(`  ${i + 1}. ${p.name.padEnd(30)} ${p.days}d ${p.weight.toFixed(3)} ${bar}`);
+    console.log(`  ${i + 1}. ${p.name.padEnd(28)} ${p.days}d γ:${p.weight.toFixed(2)} 健康:${composite} ${bar}`);
   });
 }
 

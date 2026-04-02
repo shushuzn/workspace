@@ -432,6 +432,17 @@ export class PickNextProject extends ProductiveOperation {
     if (memoryFile && fs.existsSync(memoryFile)) {
       this._updateProjectLastActive(memoryFile, projectName, today);
     }
+    // 记录成功次数
+    try {
+      const state = this._loadState();
+      if (!state.healthSuccesses) state.healthSuccesses = {};
+      if (!state.healthSuccesses[projectName]) {
+        state.healthSuccesses[projectName] = { count: 0, lastSuccess: null };
+      }
+      state.healthSuccesses[projectName].count++;
+      state.healthSuccesses[projectName].lastSuccess = today.replace(/-/g, '');
+      this._saveState(state);
+    } catch { /* ignore */ }
   }
 
   recordHealthFailure(projectName) {
@@ -449,6 +460,31 @@ export class PickNextProject extends ProductiveOperation {
       this._saveState(state);
     } catch { /* ignore */ }
   }
+
+  /**
+   * 项目健康综合评分 = Recency × Health × Quality
+   * Recency: (daysSinceActive + 1)^gamma  归一化到 [0.5, 1.5]
+   * Health:  success / (success + fail)，无数据返回 1（中性）
+   * Quality: 项目关联 idea 的平均 impact×effort，无 idea 返回 1
+   */
+  compositeHealthScore(projectName, daysSinceActive, ideaPool) {
+    const state = this._loadState();
+    // Recency（gamma=0.5）
+    const recency = Math.pow(Math.max(1, daysSinceActive + 1), 0.5);
+    const maxRecency = Math.pow(60, 0.5); // 60天封顶
+    const recencyNorm = 0.5 + 0.5 * (recency / maxRecency);
+    // Health
+    const succ = state.healthSuccesses?.[projectName]?.count || 0;
+    const fail = state.healthFailures?.[projectName]?.count || 0;
+    const health = (succ + fail) > 0 ? succ / (succ + fail) : 1;
+    // Quality
+    const ideas = ideaPool?.list().filter(i => i.desc.includes(projectName)) || [];
+    const quality = ideas.length > 0
+      ? ideas.reduce((s, i) => s + (i.impact || 1) * (i.effort || 1), 0) / ideas.length / 9
+      : 1;
+    return +(recencyNorm * health * quality).toFixed(3);
+  }
+
 
   _loadState() {
     if (!fs.existsSync(this._stateFile)) {
@@ -475,10 +511,19 @@ export class PickNextProject extends ProductiveOperation {
           }
         }
       }
+      const healthSuccesses = {};
+      if (state.healthSuccesses) {
+        for (const [name, record] of Object.entries(state.healthSuccesses)) {
+          if (record.lastSuccess && record.lastSuccess >= healthCutoffStr) {
+            healthSuccesses[name] = record;
+          }
+        }
+      }
       return {
         pickedThisSession: Array.isArray(state.pickedThisSession) ? state.pickedThisSession : [],
         lastPick: recentLastPick,
         healthFailures,
+        healthSuccesses,
         last_radar_check: state.last_radar_check || null,
       };
     } catch { /* ignore */ }
