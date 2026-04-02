@@ -910,3 +910,98 @@ export class PickNextProject extends ProductiveOperation {
     } catch { /* ignore */ }
   }
 }
+
+/**
+ * IdeaPool — 创新想法池管理
+ * 负责 .omc/innovation/ideas.md 的读写和生命周期维护
+ */
+export class IdeaPool {
+  constructor(workspace) {
+    this.workspace = workspace;
+    this.file = path.join(workspace, '.omc', 'innovation', 'ideas.md');
+  }
+
+  _today() {
+    return new Date().toISOString().split('T')[0].replace(/-/g, '');
+  }
+
+  _daysOld(dateStr) {
+    const s = String(dateStr).replace(/-/g, '');
+    const d = new Date(`${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}`);
+    return Math.floor((new Date() - d) / 86400000);
+  }
+
+  /** 追加一条 idea */
+  add(stage, desc) {
+    // stage: seed/proposal/running/shipped/killed/dormant
+    const ideas = this._read();
+    ideas.push({ date: this._today(), stage, desc });
+    this._write(ideas);
+    return ideas.length - 1;
+  }
+
+  /** 推进 idea 状态 */
+  advance(idx, targetStage) {
+    const ideas = this._read();
+    if (idx < 0 || idx >= ideas.length) return false;
+    ideas[idx] = { ...ideas[idx], stage: targetStage };
+    this._write(ideas);
+    return true;
+  }
+
+  /** 放弃 idea */
+  kill(idx, reason) {
+    const ideas = this._read();
+    if (idx < 0 || idx >= ideas.length) return false;
+    ideas[idx] = { ...ideas[idx], desc: `${ideas[idx].desc} | 💀 killed: ${reason}` };
+    this._write(ideas);
+    return true;
+  }
+
+  /** 自动清理过时 idea（返回清理数量） */
+  prune() {
+    const TTL = { seed: 3, proposal: 7, running: 14, shipped: null, killed: null, dormant: 30 };
+    const ideas = this._read();
+    const before = ideas.length;
+    this._write(ideas.filter(idea => {
+      if (idea.stage === 'shipped' || idea.stage === 'killed') return true;
+      const ttl = TTL[idea.stage];
+      if (!ttl) return true;
+      return this._daysOld(idea.date) <= ttl;
+    }));
+    return before - ideas.length;
+  }
+
+  /** 列出所有 idea */
+  list() {
+    return this._read().map((idea, i) => ({ idx: i, ...idea }));
+  }
+
+  _read() {
+    if (!fs.existsSync(this.file)) return [];
+    const raw = fs.readFileSync(this.file, 'utf8');
+    const ideas = [];
+    for (const line of raw.split('\n')) {
+      const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)\s+(.*)/);
+      if (!m) continue;
+      ideas.push({ date: m[1], stage: m[2], desc: m[3].trim() });
+    }
+    return ideas;
+  }
+
+  _write(ideas) {
+    const dir = path.dirname(this.file);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    const header = `# Idea Pool
+
+> 每个 session 产生的 idea 必须立即追加到此文件。
+> 格式：\`- [DATE] STAGE description\`
+> STAGE: seed=💡闪念 / proposal=📋提案 / running=🔬实验 / shipped=📦交付 / killed=💀放弃 / dormant=⏸️休眠
+
+`;
+    const body = ideas.map(i => `- [${i.date}] ${i.stage} ${i.desc}`).join('\n');
+    const tmp = this.file + '.tmp';
+    fs.writeFileSync(tmp, header + body + '\n', 'utf8');
+    fs.renameSync(tmp, this.file);
+  }
+}

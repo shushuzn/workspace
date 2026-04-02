@@ -8,6 +8,7 @@ import path from 'path';
 import { execSync } from 'child_process';
 import { DetectionOperation } from './base.mjs';
 import { CONFIG } from '../config/default.mjs';
+import { IdeaPool } from './productive-ops.mjs';
 
 export class CheckProjectReadmes extends DetectionOperation {
   constructor(workspace) {
@@ -119,8 +120,17 @@ export class BrainstormProjects extends DetectionOperation {
       }
     }
 
-    if (suggestions.length === 0) {
-      return { project: target, ideas: 0, message: '项目状态良好' };
+    // 从 MEMORY.md 交叉链接表搜索相关域类比
+    const analogies = this._findAnalogies(target);
+
+    if (suggestions.length === 0 && analogies.length === 0) {
+      return { project: target, ideas: 0, message: '项目状态良好，无优化建议' };
+    }
+
+    // 写入 idea 池（每条建议一条 seed idea）
+    const ideaPool = new IdeaPool(this.workspace);
+    for (const s of suggestions) {
+      ideaPool.add('seed', `brainstorm: ${s}`);
     }
 
     const brainstormDir = path.join(this.workspace, '.omc', 'brainstorm');
@@ -128,10 +138,37 @@ export class BrainstormProjects extends DetectionOperation {
 
     const timestamp = new Date().toISOString().slice(0, 10);
     const outputPath = path.join(brainstormDir, `${target}-${timestamp}.md`);
-    const content = `# ${target} 优化建议\n\n**生成时间**: ${new Date().toLocaleString()}\n\n## 项目信息\n- **路径**: ${projectPath}\n- **建议数量**: ${suggestions.length}\n\n## 优化建议\n${suggestions.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n`;
+    let content = `# ${target} 优化建议\n\n**生成时间**: ${new Date().toLocaleString()}\n\n## 项目信息\n- **路径**: ${projectPath}\n- **建议数量**: ${suggestions.length}\n\n## 优化建议\n${suggestions.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n`;
+    if (analogies.length > 0) {
+      content += `\n## 意外启发（跨域类比）\n${analogies.map(a => `🤯 ${a}`).join('\n')}\n`;
+    }
     fs.writeFileSync(outputPath, content);
 
-    return { project: target, ideas: suggestions.length, suggestions, output: outputPath };
+    return { project: target, ideas: suggestions.length, analogies: analogies.length, suggestions, analogies, output: outputPath };
+  }
+
+  /** 从 MEMORY.md 交叉链接表搜索与目标项目相关的类比 */
+  _findAnalogies(target) {
+    const memoryFile = path.join(this.workspace, '..', '..', 'memory', 'MEMORY.md');
+    if (!fs.existsSync(memoryFile)) return [];
+    const memory = fs.readFileSync(memoryFile, 'utf8');
+
+    // 找交叉链接表中涉及目标项目的条目
+    const analogies = [];
+    const lines = memory.split('\n');
+    for (const line of lines) {
+      // 格式: | 源 ↔ 目标 | 关联 | 共享依赖/关联概念: XXX |
+      if (!line.includes('↔') || !line.includes('|')) continue;
+      const parts = line.split('|').map(p => p.trim()).filter(Boolean);
+      if (parts.length < 3) continue;
+      const [source, target2, relation, detail] = parts;
+      // 匹配源或目标包含目标项目名
+      const t = target.toLowerCase();
+      if (source.toLowerCase().includes(t) || target2.toLowerCase().includes(t)) {
+        analogies.push(`${source} ${relation} ${target2} | ${detail}`);
+      }
+    }
+    return analogies.slice(0, 3); // 最多返回3条
   }
 }
 
