@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.9 | **更新日期**：2026-04-02 | **迭代轮次**：21 轮
+> **版本**：v1.10 | **更新日期**：2026-04-02 | **迭代轮次**：22 轮
 
 ---
 
@@ -134,12 +134,13 @@
 
 **权重公式（已修正）：**
 ```
-weight(project) = (days_since_last_active)^γ
+weight(project) = (days_since_last_active + 1)^γ
 ```
-- `γ`（衰减系数）：0.3~0.7，默认 0.5（值越大对久未更新项目越敏感）
-- `days_since_last_active`：从 MEMORY.md Projects 表计算，精确到天
-- "近期"项目需先追溯 git log 确认真实日期，不可使用模糊值
-- **公式修正说明**：v1.8 原版用 `1/(days+1)^γ`，导致越久未动的项目权重越低，与设计目标相反；v1.9 改为 `(days)^γ`，久未更新项目权重越高，越优先被选中
+- `γ`（衰减系数）：0.3~0.7，默认 0.5
+- `days=0`（今天刚更新）→ weight=1，最不优先；days 越大权重越高
+- "近期"项目自动从 git log 追溯真实日期
+- session 内不重复：同一项目同一 session 不会二次被选
+- **v1.10 修正**：原版 `(days)^γ` 导致 days=0 时 weight=0，刚更新项目被排除；现改为 `+1` 避免零权重悖论
 
 **选择规则：**
 1. 执行 `node 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs` 获取抽选结果（默认 γ=0.5，"近期"项目自动从 git log 追溯真实日期）
@@ -159,11 +160,12 @@ weight(project) = (days_since_last_active)^γ
 
 | 优先级 | Project | Last Active | Days | Weight(γ=0.5) |
 |--------|---------|------------|------|---------------|
-| 🔴 | `ai-roundtable`, `a2a-router`, `self-evolving-orchestrator`, `conceptual-distance-explorer`, `idle-empire` | 2026-04-02~03-31 | 0~2 | 0.00~1.41 |
-| 🟠 | `NewsHub`, `crucix`, `openclaw-dashboard`, `stock-analysis-mcp-test`, `stock-analyzer-v2`, `50-ton-hackathon-2026` | 2026-03-30 | 3 | 1.73 |
-| 🟡 | `stock-analysis-agent` 等 15 个"近期"项目 | 待追溯 | ≥7 | ≥2.65 |
+| 🟡 | `ai-roundtable`, `a2a-router`, `self-evolving-orchestrator`, `conceptual-distance-explorer` | 2026-04-02 | 0 | 1.000 |
+| 🟡 | `idle-empire` | 2026-03-31 | 2 | 1.732 |
+| 🟠 | `NewsHub`, `crucix`, `openclaw-dashboard` 等 6 个 | 2026-03-30 | 3 | 2.000 |
+| 🔴 | `stock-analysis-agent` 等 15 个"近期"项目 | 待追溯 | ≥7 | ≥2.828 |
 
-> 注：`(days)^γ` 使久未更新项目权重更高。"近期"项目必须先追溯 git log 确认真实日期，否则不参与计算。
+> 注：`weight = (days+1)^0.5`，days=0 → weight=1.0（今天更新，最不优先）；days 越大越优先。"近期"项目已改为自动从 git log 追溯。
 
 ---
 

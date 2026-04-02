@@ -363,16 +363,16 @@ export class SyncProjectMarkers extends ProductiveOperation {
 export class PickNextProject extends ProductiveOperation {
   /**
    * 权重衰减随机抽选下一个目标项目
-   * 公式: weight = (days_since_last_active)^γ
-   * 规则: 排除今天已选过的项目，按权重概率随机抽取
+   * 公式: weight = (days_since_last_active + 1)^γ
+   * days=0（今天刚更新）权重为 1^γ=1，最不优先；久未更新的项目权重更高
    */
   constructor(workspace, gamma = 0.5, memoryPath = null) {
     super('pick_next_project', '权重衰减随机抽选下一个目标项目');
     this.workspace = workspace;
     this.gamma = gamma;
-    // memoryPath: 默认在 workspace 内找 MEMORY.md，
-    // 如果传绝对路径则直接使用（如 ~/.claude/projects/xxx/memory/MEMORY.md）
     this.memoryPath = memoryPath;
+    // 用于 session 内去重
+    this._pickedThisSession = new Set();
   }
 
   async execute() {
@@ -389,12 +389,10 @@ export class PickNextProject extends ProductiveOperation {
     }
 
     const content = fs.readFileSync(memoryFile, 'utf8');
-    const projectsDir = this.workspace;
-    if (!fs.existsSync(projectsDir)) {
+    if (!fs.existsSync(this.workspace)) {
       return { picked: null, error: 'projects dir not found', projects: [] };
     }
 
-    // Parse Active Projects table from MEMORY.md
     const projectRows = this._parseProjectTable(content);
     if (projectRows.length === 0) {
       return { picked: null, error: 'no projects found', projects: [] };
@@ -404,8 +402,11 @@ export class PickNextProject extends ProductiveOperation {
     const results = [];
 
     for (const row of projectRows) {
-      // Resolve last active date from git log if "近期" or invalid
+      // 跳过本 session 已选过的项目（session 内不重复）
+      if (this._pickedThisSession.has(row.name)) continue;
+
       let lastActive = row.lastActive;
+      // "近期"或无效日期：从 git log 追溯真实日期
       if (!lastActive || lastActive === '近期' || !/^\d{4}-\d{2}-\d{2}$/.test(lastActive)) {
         lastActive = await this._getGitLastActive(row.path);
       }
@@ -413,8 +414,8 @@ export class PickNextProject extends ProductiveOperation {
       if (!lastActive || !/^\d{4}-\d{2}-\d{2}$/.test(lastActive)) continue;
 
       const days = Math.floor((new Date(today) - new Date(lastActive)) / 86400000);
-      // days=0 (today) → weight=0; use (days+1) to avoid zero but penalize recent
-      const weight = Math.pow(days, this.gamma);
+      // days=0 → weight=1（今天更新过，最不优先）；days 越大权重越高
+      const weight = Math.pow(days + 1, this.gamma);
 
       results.push({
         name: row.name,
@@ -426,15 +427,11 @@ export class PickNextProject extends ProductiveOperation {
     }
 
     if (results.length === 0) {
-      return { picked: null, error: 'no valid projects', projects: [] };
+      return { picked: null, error: 'no valid projects remaining', projects: [] };
     }
 
-    // Weighted random selection
+    // 加权随机
     const totalWeight = results.reduce((s, r) => s + r.weight, 0);
-    if (totalWeight === 0) {
-      return { picked: null, error: 'all weights are zero', projects: results };
-    }
-
     let random = Math.random() * totalWeight;
     let picked = results[0];
     for (const r of results) {
@@ -442,9 +439,10 @@ export class PickNextProject extends ProductiveOperation {
       if (random <= 0) { picked = r; break; }
     }
 
-    // Sort by weight desc for display
-    results.sort((a, b) => b.weight - a.weight);
+    // 记录本次选择（session 内去重）
+    this._pickedThisSession.add(picked.name);
 
+    results.sort((a, b) => b.weight - a.weight);
     return {
       picked: picked.name,
       path: picked.path,
