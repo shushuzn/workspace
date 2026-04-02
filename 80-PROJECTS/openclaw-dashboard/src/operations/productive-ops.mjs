@@ -425,7 +425,12 @@ export class PickNextProject extends ProductiveOperation {
 
     // 判断是否是新的 session（按日期）
     const isNewSession = !state.lastPick || state.lastPick.date !== todayStr;
-    const pickedSet = new Set(isNewSession ? [] : (state.pickedThisSession || []));
+    // pickedThisSession 按 date 分组，避免项目更名导致去重失效
+    const pickedByDate = state.pickedThisSession || [];
+    const todayPicked = Array.isArray(pickedByDate) && !isNewSession
+      ? pickedByDate.filter(p => p.date === todayStr).map(p => p.name)
+      : [];
+    const pickedSet = new Set(todayPicked);
 
     // 并行追溯所有"近期"或无效日期的项目（限并发 5 个）
     const CONCURRENCY = 5;
@@ -489,8 +494,9 @@ export class PickNextProject extends ProductiveOperation {
 
     // 持久化记录
     pickedSet.add(picked.name);
+    const newPicked = Array.from(pickedSet).map(name => ({ name, date: todayStr }));
     this._saveState({
-      pickedThisSession: Array.from(pickedSet),
+      pickedThisSession: newPicked,
       lastPick: { date: todayStr, project: picked.name, days: picked.days },
     });
 
