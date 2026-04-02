@@ -1,9 +1,3 @@
 [submodule "80-PROJECTS/50-ton-hackathon-2026"]
 	path = 80-PROJECTS/50-ton-hackathon-2026
 	url = https://github.com/shushuzn/50-ton-hackathon-2026.git
-[submodule "80-PROJECTS/stock-analysis-mcp-test"]
-	path = 80-PROJECTS/stock-analysis-mcp-test
-	url = https://github.com/shushuzn/stock-analysis-mcp.git
-[submodule "80-PROJECTS/stock-analyzer-v2"]
-	path = 80-PROJECTS/stock-analyzer-v2
-	url = https://github.com/shushuzn/stock-analyzer-v2.git
