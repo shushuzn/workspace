@@ -371,8 +371,25 @@ export class PickNextProject extends ProductiveOperation {
     this.workspace = workspace;
     this.gamma = gamma;
     this.memoryPath = memoryPath;
-    // 用于 session 内去重
-    this._pickedThisSession = new Set();
+    // 持久化状态路径：.omc/state/pick-next-project.json
+    this._stateFile = path.join(workspace, '.omc', 'state', 'pick-next-project.json');
+  }
+
+  _loadState() {
+    try {
+      if (fs.existsSync(this._stateFile)) {
+        return JSON.parse(fs.readFileSync(this._stateFile, 'utf8'));
+      }
+    } catch { /* ignore */ }
+    return { pickedThisSession: [], lastPick: null };
+  }
+
+  _saveState(state) {
+    try {
+      const dir = path.dirname(this._stateFile);
+      if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(this._stateFile, JSON.stringify(state, null, 2));
+    } catch { /* ignore */ }
   }
 
   async execute() {
@@ -387,36 +404,56 @@ export class PickNextProject extends ProductiveOperation {
     if (!fs.existsSync(memoryFile)) {
       return { picked: null, error: 'MEMORY.md not found', projects: [] };
     }
-
-    const content = fs.readFileSync(memoryFile, 'utf8');
     if (!fs.existsSync(this.workspace)) {
       return { picked: null, error: 'projects dir not found', projects: [] };
     }
 
+    const content = fs.readFileSync(memoryFile, 'utf8');
     const projectRows = this._parseProjectTable(content);
     if (projectRows.length === 0) {
       return { picked: null, error: 'no projects found', projects: [] };
     }
 
     const today = new Date().toISOString().split('T')[0];
-    const results = [];
+    const state = this._loadState();
+    const todayStr = today.replace(/-/g, '');
 
-    for (const row of projectRows) {
-      // 跳过本 session 已选过的项目（session 内不重复）
-      if (this._pickedThisSession.has(row.name)) continue;
+    // 判断是否是新的 session（按日期）
+    const isNewSession = !state.lastPick || state.lastPick.date !== todayStr;
+    const pickedSet = new Set(isNewSession ? [] : (state.pickedThisSession || []));
 
-      let lastActive = row.lastActive;
-      // "近期"或无效日期：从 git log 追溯真实日期
-      if (!lastActive || lastActive === '近期' || !/^\d{4}-\d{2}-\d{2}$/.test(lastActive)) {
-        lastActive = await this._getGitLastActive(row.path);
+    // 并行追溯所有"近期"或无效日期的项目（限并发 5 个）
+    const CONCURRENCY = 5;
+    const toResolve = projectRows.filter(row =>
+      !row.lastActive ||
+      row.lastActive === '近期' ||
+      !/^\d{4}-\d{2}-\d{2}$/.test(row.lastActive)
+    );
+    const fixed = projectRows.filter(row =>
+      row.lastActive &&
+      row.lastActive !== '近期' &&
+      /^\d{4}-\d{2}-\d{2}$/.test(row.lastActive)
+    );
+
+    const resolvedMap = new Map();
+    for (let i = 0; i < toResolve.length; i += CONCURRENCY) {
+      const batch = toResolve.slice(i, i + CONCURRENCY);
+      const promises = batch.map(row =>
+        this._getGitLastActive(row.path).then(date => ({ row, date }))
+      );
+      const results = await Promise.all(promises);
+      for (const { row, date } of results) {
+        if (date) resolvedMap.set(row.name, date);
       }
+    }
 
+    const results = [];
+    for (const row of projectRows) {
+      if (pickedSet.has(row.name)) continue;
+      let lastActive = resolvedMap.get(row.name) || row.lastActive;
       if (!lastActive || !/^\d{4}-\d{2}-\d{2}$/.test(lastActive)) continue;
-
       const days = Math.floor((new Date(today) - new Date(lastActive)) / 86400000);
-      // days=0 → weight=1（今天更新过，最不优先）；days 越大权重越高
       const weight = Math.pow(days + 1, this.gamma);
-
       results.push({
         name: row.name,
         path: row.path,
@@ -432,15 +469,24 @@ export class PickNextProject extends ProductiveOperation {
 
     // 加权随机
     const totalWeight = results.reduce((s, r) => s + r.weight, 0);
-    let random = Math.random() * totalWeight;
+    const seed = Date.now();
+    let random = (seed % 1000) / 1000 * totalWeight; // deterministic-ish fallback
+    try {
+      random = Math.random() * totalWeight;
+    } catch { /* use seeded fallback */ }
+
     let picked = results[0];
     for (const r of results) {
       random -= r.weight;
       if (random <= 0) { picked = r; break; }
     }
 
-    // 记录本次选择（session 内去重）
-    this._pickedThisSession.add(picked.name);
+    // 持久化记录
+    pickedSet.add(picked.name);
+    this._saveState({
+      pickedThisSession: Array.from(pickedSet),
+      lastPick: { date: todayStr, project: picked.name, days: picked.days },
+    });
 
     results.sort((a, b) => b.weight - a.weight);
     return {
@@ -451,6 +497,7 @@ export class PickNextProject extends ProductiveOperation {
       gamma: this.gamma,
       totalProjects: results.length,
       allProjects: results,
+      seed,
     };
   }
 

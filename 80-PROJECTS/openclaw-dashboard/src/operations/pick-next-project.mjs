@@ -1,14 +1,19 @@
 /**
  * pick-next-project.mjs
  * 权重衰减随机抽选下一个目标项目
- * 用法: node pick-next-project.mjs [gamma] [memoryPath]
- *   gamma       — 衰减系数，默认 0.5
- *   memoryPath  — MEMORY.md 绝对路径，默认从 workspace 内查找
  *
- * 输出示例:
- *   node pick-next-project.mjs
- *   node pick-next-project.mjs 0.7
- *   node pick-next-project.mjs 0.5 "C:/Users/adm/.claude/projects/xxx/memory/MEMORY.md"
+ * 用法:
+ *   node pick-next-project.mjs [gamma] [memoryPath]
+ *
+ * 参数:
+ *   gamma       — 衰减系数，默认 0.5
+ *   memoryPath  — MEMORY.md 绝对路径
+ *
+ * 输出:
+ *   抽选结果 + 权重排行榜 + 抽选ID（用于回溯）
+ *
+ * 验收:
+ *   体检完成后必须更新 MEMORY.md Last Active 和 .omc/state/pick-next-project.json
  */
 
 import { PickNextProject } from './productive-ops.mjs';
@@ -22,8 +27,6 @@ const workspaceRoot = path.join(__dirname, '..', '..', '..');
 const DEFAULT_MEMORY = 'C:/Users/adm/.claude/projects/D--OpenClaw-workspace/memory/MEMORY.md';
 
 const gamma = parseFloat(process.argv[2]) || 0.5;
-// 默认 MEMORY.md 路径（openclaw-dashboard 在 workspace 内，MEMORY.md 在上级 .claude 目录）
-const defaultMemoryPath = path.join(workspaceRoot, '.claude', 'projects', 'D--OpenClaw-workspace', 'memory', 'MEMORY.md');
 const memoryPath = process.argv[3] || DEFAULT_MEMORY;
 
 const picker = new PickNextProject(workspaceRoot, gamma, memoryPath);
@@ -38,14 +41,23 @@ console.log(`\n🎯 本次抽选目标项目: ${result.picked}`);
 console.log(`   路径: ${result.path}`);
 console.log(`   距上次活跃: ${result.days} 天`);
 console.log(`   权重: ${result.weight}`);
-console.log(`   (γ=${result.gamma}, 共 ${result.totalProjects} 个项目参与抽选)\n`);
+console.log(`   (γ=${result.gamma}, 共 ${result.totalProjects} 个项目参与抽选)`);
+if (result.seed) {
+  console.log(`   抽选ID: ${result.seed}`);
+}
 
-// Show top 5 by weight
 if (result.allProjects && result.allProjects.length > 0) {
-  console.log('权重排行榜 (Top 5):');
+  console.log('\n权重排行榜 (Top 5):');
   result.allProjects.slice(0, 5).forEach((p, i) => {
-    const bar = '█'.repeat(Math.round(p.weight * 5));
+    const bar = '█'.repeat(Math.round(p.weight));
     console.log(`  ${i + 1}. ${p.name.padEnd(30)} ${p.days}d ${p.weight.toFixed(3)} ${bar}`);
   });
-  console.log();
 }
+
+console.log('\n【验收】请选择体检类型：');
+console.log('  A — 检查能否正常启动运行（3 分钟内验证）');
+console.log('  B — 修 1 个小 bug 或补 1 条注释/文档');
+console.log('  C — 更新 MEMORY.md 中该项目价值记录');
+console.log('\n完成后：');
+console.log('  1. 更新 MEMORY.md 的 Last Active 为今天');
+console.log('  2. 确认本次抽选已完成\n');
