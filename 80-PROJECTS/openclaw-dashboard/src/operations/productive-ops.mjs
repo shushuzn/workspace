@@ -601,7 +601,7 @@ export class PickNextProject extends ProductiveOperation {
 
     // 过滤掉 generic 概念词（这类词无联动价值）
     const genericWords = new Set(['npm', 'json', 'github', 'install', 'projects', 'project',
-      'bash', 'shell', 'openclaw', 'readme', 'file', 'files', 'folder', 'directory',
+      'bash', 'shell', 'readme', 'file', 'files', 'folder', 'directory',
       'windows', 'linux', 'mac', 'api', 'http', 'url', 'path', 'name', 'value',
       'key', 'data', 'type', 'class', 'function', 'method', 'module', 'package',
       'version', 'config', 'setting', 'options', 'default', 'usage', 'example',
