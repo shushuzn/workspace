@@ -22,9 +22,9 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-// pick-next-project.mjs 位于 src/operations/，workspace 在上三层
-const workspaceRoot = path.join(__dirname, '..', '..', '..');
-// MEMORY.md 位于 workspace 外的 oh-my-claudecode memory 目录
+// pick-next-project.mjs 位于 src/operations/，workspace 在上 4 层
+const workspaceRoot = path.join(__dirname, '..', '..', '..', '..');
+// MEMORY.md 位于 workspace 外的 oh-my-claude code memory 目录
 const DEFAULT_MEMORY = 'C:/Users/adm/.claude/projects/D--OpenClaw-workspace/memory/MEMORY.md';
 
 const doHealthCheck = process.argv.includes('--health-check');
@@ -33,6 +33,16 @@ const memoryPath = process.argv.find((a, i) => i > 2 && !a.startsWith('--')) || 
 
 const picker = new PickNextProject(workspaceRoot, gamma, memoryPath);
 const result = await picker.execute();
+
+// 技术雷达检查：超过1天未检查则强制触发
+const today = new Date().toISOString().split('T')[0];
+const radarDay = result.state?.last_radar_check || today;
+if (radarDay !== today) {
+  console.log(`\n⚡ 技术雷达触发（距上次检查已过 ${Math.floor((new Date(today) - new Date(radarDay)) / 86400000)} 天）`);
+  console.log('   请评估：LLM/Rust/新框架/新工具 是否值得在现有项目中试点？');
+  console.log('   结果请写入 MEMORY.md "技术跟进" 区域');
+  picker._saveState({ ...result.state, last_radar_check: today });
+}
 
 if (result.error) {
   console.error(`\n❌ Error: ${result.error}`);
@@ -74,10 +84,13 @@ if (doHealthCheck) {
     console.log(`\n⏭️  跳过: ${health.reason}`);
   } else if (health.status === 'ok') {
     console.log(`\n✅ 体检通过: ${health.reason}`);
+    picker.recordHealthSuccess(result.picked);
   } else if (health.status === 'timeout') {
     console.log(`\n⏰ 体检超时: ${health.reason}`);
+    picker.recordHealthFailure(result.picked);
   } else {
     console.log(`\n❌ 体检失败: ${health.reason}`);
+    picker.recordHealthFailure(result.picked);
     if (health.output) console.log(`   ${health.output.split('\n').slice(-2).join(' | ')}`);
   }
 } else {

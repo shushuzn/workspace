@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.32 | **更新日期**：2026-04-02 | **迭代轮次**：31 轮
+> **版本**：v1.33 | **更新日期**：2026-04-02 | **迭代轮次**：31 轮
 
 ---
 
@@ -172,6 +172,8 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost
 - **技术雷达**：pick-next-project 时附带检查"上次技术雷达时间"，超过 1 天则本次强制执行雷达评估（技术发展快，每天触发）；评估结果记录为 MEMORY.md "技术跟进"条目
 - **新项目建议标准化**：现有项目无法解决需求时，执行"需求→差距分析→建议项目名+技术栈+核心功能"，输出写入 MEMORY.md Session History
 - **创新计数**：每次 session 记录"本 session 产生 idea 数、落地数"，汇总写入 MEMORY.md Session History
+- **脚手架依赖**：pick-next-project.mjs 状态文件须含 `last_radar_check`（格式：ISO日期），每次体检时检查是否超过 1 天，超则强制执行技术雷达（不算正常体检）；MEMORY.md 项目表须含"天花板类型"列（单机/无AI/低复用/无）；MEMORY.md 须含"技术跟进"区域记录雷达结果
+- **归档复盘拦截**：归档时若 MEMORY.md Key Learnings 无新增条目，报错"请先填写归档复盘"并中断操作
 
 **意外相似（v1.17 新增）：**
 - 每次抽选后自动随机配对：在剩余项目中随机选一个

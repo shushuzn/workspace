@@ -417,9 +417,42 @@ export class PickNextProject extends ProductiveOperation {
     try { fs.unlinkSync(this._lockFile()); } catch { /* ignore */ }
   }
 
+  /**
+   * 记录项目体检失败（公开方法，供 CLI 在 _runHealthCheck 失败后调用）
+   * @param {string} projectName
+   */
+  /**
+   * 记录项目体检成功，自动更新 MEMORY.md Last Active 为今天
+   * @param {string} projectName
+   */
+  recordHealthSuccess(projectName) {
+    if (!projectName) return;
+    const today = new Date().toISOString().split('T')[0];
+    const memoryFile = this.memoryPath;
+    if (memoryFile && fs.existsSync(memoryFile)) {
+      this._updateProjectLastActive(memoryFile, projectName, today);
+    }
+  }
+
+  recordHealthFailure(projectName) {
+    if (!projectName) return;
+    // 直接写文件，不加锁（execute 已释放锁后才调用此方法，并发风险可忽略）
+    try {
+      const state = this._loadState();
+      const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
+      if (!state.healthFailures) state.healthFailures = {};
+      if (!state.healthFailures[projectName]) {
+        state.healthFailures[projectName] = { count: 0, lastFail: null };
+      }
+      state.healthFailures[projectName].count++;
+      state.healthFailures[projectName].lastFail = today;
+      this._saveState(state);
+    } catch { /* ignore */ }
+  }
+
   _loadState() {
     if (!fs.existsSync(this._stateFile)) {
-      return { pickedThisSession: [], lastPick: null };
+      return { pickedThisSession: [], lastPick: null, healthFailures: {} };
     }
     try {
       const raw = fs.readFileSync(this._stateFile, 'utf8');
@@ -430,12 +463,25 @@ export class PickNextProject extends ProductiveOperation {
       const cutoffStr = cutoff.toISOString().split('T')[0].replace(/-/g, '');
       const recentLastPick = state.lastPick && state.lastPick.date >= cutoffStr
         ? state.lastPick : (state.lastPick || null);
+      // 清理超过 30 天的健康失败记录
+      const healthCutoff = new Date();
+      healthCutoff.setDate(healthCutoff.getDate() - 30);
+      const healthCutoffStr = healthCutoff.toISOString().split('T')[0].replace(/-/g, '');
+      const healthFailures = {};
+      if (state.healthFailures) {
+        for (const [name, record] of Object.entries(state.healthFailures)) {
+          if (record.lastFail && record.lastFail >= healthCutoffStr) {
+            healthFailures[name] = record;
+          }
+        }
+      }
       return {
         pickedThisSession: Array.isArray(state.pickedThisSession) ? state.pickedThisSession : [],
         lastPick: recentLastPick,
+        healthFailures,
       };
     } catch { /* ignore */ }
-    return { pickedThisSession: [], lastPick: null };
+    return { pickedThisSession: [], lastPick: null, healthFailures: {} };
   }
 
   _saveState(state) {
@@ -518,18 +564,23 @@ export class PickNextProject extends ProductiveOperation {
     }
 
     const results = [];
+    const healthFailures = state.healthFailures || {};
     for (const row of projectRows) {
       if (pickedSet.has(row.name)) continue;
       let lastActive = resolvedMap.get(row.name) || row.lastActive;
       if (!lastActive || !/^\d{4}-\d{2}-\d{2}$/.test(lastActive)) continue;
       const days = Math.floor((new Date(today) - new Date(lastActive)) / 86400000);
-      const weight = Math.pow(days + 1, this.gamma);
+      // 健康失败加权：失败过的项目额外获得 boost，每次失败 +50% weight
+      const failRecord = healthFailures[row.name];
+      const failBoost = failRecord ? 1 + (failRecord.count || 1) * 0.5 : 1;
+      const weight = Math.pow(days + 1, this.gamma) * failBoost;
       results.push({
         name: row.name,
         path: row.path,
         lastActive,
         days,
         weight: Math.round(weight * 1000) / 1000,
+        failCount: failRecord ? failRecord.count : 0,
       });
     }
 
@@ -555,6 +606,8 @@ export class PickNextProject extends ProductiveOperation {
     this._saveState({
       pickedThisSession: newPicked,
       lastPick: { date: todayStr, project: picked.name, days: picked.days },
+      healthFailures: state.healthFailures || {},
+      last_radar_check: state.last_radar_check || todayStr,
     });
 
     results.sort((a, b) => b.weight - a.weight);
@@ -584,6 +637,7 @@ export class PickNextProject extends ProductiveOperation {
       seed,
       pair: pair ? { name: pair.name, path: pair.path } : null,
       bridge,
+      state,
     };
     } finally { this._releaseLock(); }
   }
@@ -704,7 +758,10 @@ export class PickNextProject extends ProductiveOperation {
    * 检测 package.json / requirements.txt / go.mod，执行对应启动命令
    */
   async _runHealthCheck(projectPath) {
-    const fullPath = path.join(this.workspace, projectPath);
+    // 兼容：路径可能是 'ai-roundtable' 或 '80-PROJECTS/ai-roundtable'
+    const fullPath = fs.existsSync(path.join(this.workspace, projectPath))
+      ? path.join(this.workspace, projectPath)
+      : path.join(this.workspace, '80-PROJECTS', projectPath);
     const pkg = path.join(fullPath, 'package.json');
     const req = path.join(fullPath, 'requirements.txt');
     const goMod = path.join(fullPath, 'go.mod');
@@ -800,6 +857,24 @@ export class PickNextProject extends ProductiveOperation {
       }).trim();
       return log ? new Date(log).toISOString().split('T')[0] : null;
     } catch { return null; }
+  }
+
+  /**
+   * 将指定项目的 Last Active 更新为指定日期（原子写入）
+   */
+  _updateProjectLastActive(memoryFile, projectName, date) {
+    try {
+      const today = date || new Date().toISOString().split('T')[0];
+      const lines = fs.readFileSync(memoryFile, 'utf8').split('\n');
+      const idx = lines.findIndex(l => l.startsWith('| ' + projectName + ' |'));
+      if (idx < 0) return;
+      const updated = lines[idx].replace(/\d{4}-\d{2}-\d{2}/, today);
+      if (updated === lines[idx]) return; // 日期未变
+      lines[idx] = updated;
+      const tmp = memoryFile + '.tmp';
+      fs.writeFileSync(tmp, lines.join('\n'), 'utf8');
+      fs.renameSync(tmp, memoryFile);
+    } catch { /* ignore */ }
   }
 
   /**
