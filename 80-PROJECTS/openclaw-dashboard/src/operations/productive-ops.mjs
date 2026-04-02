@@ -1035,7 +1035,9 @@ export class IdeaPool {
     const body = ideas.map(i => {
       const src   = i.source  ? ` [${i.source}]`  : '';
       const score = (i.impact && i.effort) ? ` [score:${i.impact}x${i.effort}]` : '';
-      return `- [${i.date}] ${i.stage}${src}${score} ${i.desc}`;
+      // 去除 desc 末尾可能残留的 [score:NxM]（避免与 score 字段重复）
+      const cleanDesc = (i.desc || '').replace(/\s*\[score:\d+x\d+\]\s*$/, '');
+      return `- [${i.date}] ${i.stage}${src}${score} ${cleanDesc}`;
     }).join('\n');
     const tmp = this.file + '.tmp';
     fs.writeFileSync(tmp, header + body + '\n', 'utf8');

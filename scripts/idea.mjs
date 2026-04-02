@@ -72,7 +72,8 @@ function writeData(ideas) {
   const body = ideas.map(i => {
     const src   = i.source  ? ` [${i.source}]`  : '';
     const score = (i.impact && i.effort) ? ` [score:${i.impact}x${i.effort}]` : '';
-    return `- [${i.date}] ${i.stage}${src}${score} ${i.desc}`;
+    const cleanDesc = (i.desc || '').replace(/\s*\[score:\d+x\d+\]\s*$/, '');
+    return `- [${i.date}] ${i.stage}${src}${score} ${cleanDesc}`;
   }).join('\n');
   fs.writeFileSync(IDEA_FILE, header + body + '\n', 'utf8');
 }

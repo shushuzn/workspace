@@ -30,9 +30,21 @@ function readIdeas() {
   const raw = fs.readFileSync(IDEA_FILE, 'utf8');
   const ideas = [];
   for (const line of raw.split('\n')) {
-    const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s*(?:\[score:\d+x\d+\]\s*)?(.*)/);
+    const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s*(?:\[score:(\d+)x(\d+)\]\s*)?(.*)/);
     if (!m) continue;
-    ideas.push({ date: m[1], stage: m[2], source: m[3] || 'manual', desc: m[5].trim() });
+    const desc = (m[6] || '').trim();
+    const shippedMatch = desc.match(/\| shipped:(\d{8})/);
+    const killedMatch  = desc.match(/\| killed:(\d{8})(?: (.*))?$/);
+    ideas.push({
+      date:    m[1],
+      stage:   m[2],
+      source:  m[3] || 'manual',
+      impact:  m[4] ? parseInt(m[4]) : null,
+      effort:  m[5] ? parseInt(m[5]) : null,
+      desc:    desc,
+      shipped: shippedMatch ? shippedMatch[1] : null,
+      killed:  killedMatch  ? killedMatch[1]  : null,
+    });
   }
   return ideas;
 }
@@ -59,14 +71,25 @@ function main() {
   }
 
   console.log('\n💡 创新管道状态');
-  console.log('═'.repeat(42));
-  const stageBar = Object.entries(stageCounts)
-    .map(([s, n]) => n > 0 ? `${STAGE_EMOJI[s]} ${n}` : null)
-    .filter(Boolean)
-    .join('   ');
-  console.log('  ' + stageBar || '(空)');
+  console.log('═'.repeat(48));
 
-  console.log('─'.repeat(42));
+  // 漏斗转化率: seed → proposal → running → shipped
+  const funnel = ['seed','proposal','running','shipped'];
+  const funnelNums = funnel.map(s => stageCounts[s]);
+  const funnelRates = funnelNums.map((n, i) => {
+    if (i === 0) return null;
+    const prev = funnelNums[i - 1];
+    return prev > 0 ? Math.round(n / prev * 100) : 0;
+  });
+  const funnelLine = funnel.map((s, i) => {
+    const n = funnelNums[i];
+    const r = funnelRates[i];
+    const pct = r !== null ? `(${r}%)` : '';
+    return `${STAGE_EMOJI[s]} ${n} ${pct}`;
+  }).join(' → ');
+  console.log('  漏斗: ' + funnelLine);
+
+  console.log('─'.repeat(48));
   const srcLine = Object.entries(sourceCounts)
     .map(([s, n]) => n > 0 ? `${s} ${n}` : null)
     .filter(Boolean)
@@ -74,23 +97,25 @@ function main() {
   console.log('  来源: ' + srcLine);
 
   if (overdue.length > 0) {
-    console.log('─'.repeat(42));
+    console.log('─'.repeat(48));
     console.log('  🔴 超时预警:');
     for (const o of overdue.slice(0, 5)) {
-      console.log(`    ${STAGE_EMOJI[o.stage]} ${o.desc.substring(0, 40)} (+${o.overdueDays}d)`);
+      const scoreMark = (o.impact && o.effort) ? ` ★${o.impact}x${o.effort}` : '';
+      console.log(`    ${STAGE_EMOJI[o.stage]}${scoreMark} ${o.desc.substring(0, 35)} (+${o.overdueDays}d)`);
     }
   }
 
-  console.log('─'.repeat(42));
+  console.log('─'.repeat(48));
   console.log('  最近活动:');
   const sorted = [...ideas].sort((a, b) => b.date.localeCompare(a.date));
   for (const idea of sorted.slice(0, 5)) {
     const emoji = STAGE_EMOJI[idea.stage] || '?';
     const src = idea.source !== 'manual' ? ` [${idea.source}]` : '';
-    console.log(`    ${idea.date} ${emoji} ${idea.desc.substring(0, 35)}${src}`);
+    const scoreMark = (idea.impact && idea.effort) ? ` ★${idea.impact}x${idea.effort}` : '';
+    console.log(`    ${idea.date} ${emoji}${scoreMark} ${idea.desc.substring(0, 30)}${src}`);
   }
 
-  console.log('═'.repeat(42));
+  console.log('═'.repeat(48));
   console.log(`  共 ${ideas.length} 条 idea`);
   console.log('');
 }
