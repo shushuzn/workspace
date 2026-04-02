@@ -495,8 +495,45 @@ export class A2ARouter extends EventEmitter {
   /**
    * Decompose a task into subtasks
    */
-  decomposeTask(message) {
+  async decomposeTask(message) {
     const { taskId, description, strategy, capabilities, maxSubTasks } = message.payload;
+
+    // ── Self-evolving orchestrator 联动 ─────────────────────────────
+    if (strategy === 'self-evolve') {
+      try {
+        const res = await fetch('http://localhost:8080/api/v1/orchestrate/evolve', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ task: description }),
+          signal: AbortSignal.timeout(15000),
+        });
+        if (res.ok) {
+          const result = await res.json();
+          // result.subtasks 或 result.steps 是 orchestrator 返回的子任务
+          const steps = result.subtasks ?? result.steps ?? [];
+          if (steps.length > 0) {
+            this.subtaskManager.createParentTask(taskId, steps.length, strategy);
+            steps.forEach(step => {
+              this.capabilityRoute({
+                id: uuidv4(),
+                from: 'router',
+                to: `capability:${step.capability ?? 'coding'}`,
+                timestamp: Date.now(),
+                parentTaskId: taskId,
+                type: 'SUB_TASK',
+                capability: step.capability ?? 'coding',
+                description: step.description ?? step.text ?? step,
+              });
+            });
+            console.log(`[Router] self-evolve: ${steps.length} subtasks from orchestrator`);
+            return { success: true, taskId, subtaskCount: steps.length, via: 'orchestrator' };
+          }
+        }
+      } catch (err) {
+        console.warn(`[Router] orchestrator unreachable (${err.message}), falling back to simple decomposer`);
+      }
+    }
+    // ─────────────────────────────────────────────────────────────
 
     const subtasks = this.taskDecomposer.decompose(description, {
       strategy,
@@ -506,7 +543,7 @@ export class A2ARouter extends EventEmitter {
 
     this.subtaskManager.createParentTask(taskId, subtasks.length, strategy);
 
-    const results = subtasks.map(subtask => {
+    subtasks.map(subtask => {
       const routed = this.capabilityRoute({
         ...subtask,
         id: uuidv4(),
@@ -519,7 +556,7 @@ export class A2ARouter extends EventEmitter {
       return routed;
     });
 
-    return { success: true, taskId, subtaskCount: subtasks.length };
+    return { success: true, taskId, subtaskCount: subtasks.length, via: 'simple' };
   }
 
   /**
