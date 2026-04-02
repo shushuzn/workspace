@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.8 | **更新日期**：2026-04-02 | **迭代轮次**：20 轮
+> **版本**：v1.9 | **更新日期**：2026-04-02 | **迭代轮次**：21 轮
 
 ---
 
@@ -132,13 +132,14 @@
 
 每个 session 开始时，必须从所有项目中选择 1 个"目标项目"执行最小维护：
 
-**权重公式：**
+**权重公式（已修正）：**
 ```
-weight(project) = 1 / (days_since_last_active + 1)^γ
+weight(project) = (days_since_last_active)^γ
 ```
-- `γ`（衰减系数）：0.5~1.0，默认 0.7
+- `γ`（衰减系数）：0.3~0.7，默认 0.5（值越大对久未更新项目越敏感）
 - `days_since_last_active`：从 MEMORY.md Projects 表计算，精确到天
 - "近期"项目需先追溯 git log 确认真实日期，不可使用模糊值
+- **公式修正说明**：v1.8 原版用 `1/(days+1)^γ`，导致越久未动的项目权重越低，与设计目标相反；v1.9 改为 `(days)^γ`，久未更新项目权重越高，越优先被选中
 
 **选择规则：**
 1. 计算所有项目权重，归一化
@@ -155,14 +156,13 @@ weight(project) = 1 / (days_since_last_active + 1)^γ
 
 **当前优先级（γ=0.7，按权重倒序）：**
 
-| 优先级 | Project | Last Active | Days | Weight |
-|--------|---------|------------|------|--------|
-| 🔴 | `stock-analysis-agent` 等 15 个"近期"项目 | 待追溯 | - | 0.239 |
-| 🟠 | `NewsHub`, `crucix`, `openclaw-dashboard` 等 | 2026-03-30 | 3 | 0.330 |
-| 🟡 | `idle-empire` | 2026-03-31 | 2 | 0.615 |
-| 🟢 | `ai-roundtable`, `a2a-router`, `self-evolving-orchestrator` | 2026-04-02 | 0 | 1.000 |
+| 优先级 | Project | Last Active | Days | Weight(γ=0.5) |
+|--------|---------|------------|------|---------------|
+| 🔴 | `ai-roundtable`, `a2a-router`, `self-evolving-orchestrator`, `conceptual-distance-explorer`, `idle-empire` | 2026-04-02~03-31 | 0~2 | 0.00~1.41 |
+| 🟠 | `NewsHub`, `crucix`, `openclaw-dashboard`, `stock-analysis-mcp-test`, `stock-analyzer-v2`, `50-ton-hackathon-2026` | 2026-03-30 | 3 | 1.73 |
+| 🟡 | `stock-analysis-agent` 等 15 个"近期"项目 | 待追溯 | ≥7 | ≥2.65 |
 
-> 注：权重最高（越应该选）= 最久未更新。"近期"项目需先精确化日期才能参与计算。
+> 注：`(days)^γ` 使久未更新项目权重更高。"近期"项目必须先追溯 git log 确认真实日期，否则不参与计算。
 
 ---
 
