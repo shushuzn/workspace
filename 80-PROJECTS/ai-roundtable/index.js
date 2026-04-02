@@ -961,7 +961,7 @@ async function main() {
 
       // ─── 桥接概念发现 ────────────────────────────────
       {
-        const history = scheduler.getHistory();
+        const history = scheduler.deltaSHistory;
         const prevDeltaS = history.length >= 2 ? history[history.length - 2] : null;
         if (prevDeltaS !== null && deltaS < 0.1 && prevDeltaS < 0.1) {
           const prevRoundResponses = roundResponses[round - 1] ?? [];
