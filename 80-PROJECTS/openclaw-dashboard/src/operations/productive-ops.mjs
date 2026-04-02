@@ -369,7 +369,8 @@ export class PickNextProject extends ProductiveOperation {
   constructor(workspace, gamma = 0.5, memoryPath = null) {
     super('pick_next_project', '权重衰减随机抽选下一个目标项目');
     this.workspace = workspace;
-    this.gamma = gamma;
+    // γ 必须是正有限数值
+    this.gamma = (typeof gamma === 'number' && isFinite(gamma) && gamma > 0) ? gamma : 0.5;
     this.memoryPath = memoryPath;
     // 持久化状态路径：.omc/state/pick-next-project.json
     this._stateFile = path.join(workspace, '.omc', 'state', 'pick-next-project.json');
@@ -448,6 +449,9 @@ export class PickNextProject extends ProductiveOperation {
     // 将追溯到的日期写回 MEMORY.md（避免重复追溯）
     if (resolvedMap.size > 0) {
       this._updateMemoryDates(memoryFile, resolvedMap, projectRows);
+      // 重新读取更新后的 MEMORY.md，确保后续计算用的是最新数据
+      const updatedContent = fs.readFileSync(memoryFile, 'utf8');
+      projectRows = this._parseProjectTable(updatedContent);
     }
 
     const results = [];

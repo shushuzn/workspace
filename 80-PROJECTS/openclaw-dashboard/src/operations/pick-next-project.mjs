@@ -49,8 +49,9 @@ if (result.seed) {
 if (result.allProjects && result.allProjects.length > 0) {
   console.log('\n权重排行榜 (Top 5):');
   result.allProjects.slice(0, 5).forEach((p, i) => {
-    // weight 最大约 3.0（days=8），用 weight*4 映射到 0-12 个 block
-    const barLen = Math.max(1, Math.round(p.weight * 4));
+    // bar = 该项目权重占总权重的比例（相对于 totalWeight）
+    const totalWeight = result.allProjects.reduce((s, x) => s + x.weight, 0);
+    const barLen = Math.max(1, Math.round((p.weight / totalWeight) * 12));
     const bar = '█'.repeat(barLen);
     console.log(`  ${i + 1}. ${p.name.padEnd(30)} ${p.days}d ${p.weight.toFixed(3)} ${bar}`);
   });
