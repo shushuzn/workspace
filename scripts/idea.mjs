@@ -78,8 +78,16 @@ function writeData(ideas) {
   fs.writeFileSync(IDEA_FILE, header + body + '\n', 'utf8');
 }
 
-function cmdList() {
-  const ideas = readData();
+function cmdList(args) {
+  const sortScore = args.includes('--sort') && args.includes('score');
+  let ideas = readData();
+  if (sortScore) {
+    ideas = ideas.sort((a, b) => {
+      const sa = (a.impact || 0) * (a.effort || 0);
+      const sb = (b.impact || 0) * (b.effort || 0);
+      return sb - sa;
+    });
+  }
   console.log('\n💡 创新想法池\n' + '═'.repeat(60));
   if (ideas.length === 0) { console.log('  (空)'); }
   ideas.forEach((idea, i) => {
@@ -178,7 +186,7 @@ function cmdPrune() {
 
 const [cmd, ...args] = process.argv.slice(2);
 switch (cmd) {
-  case 'list':    cmdList();    break;
+  case 'list':    cmdList(args); break;
   case 'add':     cmdAdd(args); break;
   case 'advance': cmdAdvance(args); break;
   case 'kill':    cmdKill(args); break;
@@ -186,6 +194,7 @@ switch (cmd) {
   case 'prune':   cmdPrune();   break;
   default:
     console.log('用法: idea.mjs list|add|advance|kill|score|prune');
+    console.log('  list [--sort score]   按评分排序（高分优先）');
     console.log('  add STAGE description  (STAGE: seed/proposal/running/shipped/killed/dormant)');
     console.log('  score ID impact effort  ★impact×effort (1-3, 越高越值得优先)');
 }
