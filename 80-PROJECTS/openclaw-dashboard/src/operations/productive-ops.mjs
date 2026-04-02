@@ -599,8 +599,18 @@ export class PickNextProject extends ProductiveOperation {
     const shared = [...wordsA].filter(w => wordsB.has(w));
     if (shared.length === 0) return null;
 
+    // 过滤掉 generic 概念词（这类词无联动价值）
+    const genericWords = new Set(['npm', 'json', 'github', 'install', 'projects', 'project',
+      'bash', 'shell', 'openclaw', 'readme', 'file', 'files', 'folder', 'directory',
+      'windows', 'linux', 'mac', 'api', 'http', 'url', 'path', 'name', 'value',
+      'key', 'data', 'type', 'class', 'function', 'method', 'module', 'package',
+      'version', 'config', 'setting', 'options', 'default', 'usage', 'example',
+      'license', 'author', 'description', 'table', 'column', 'row', 'cell']);
+    const meaningfulShared = shared.filter(w => !genericWords.has(w.toLowerCase()));
+    if (meaningfulShared.length === 0) return null;
+
     // 取交集里频次最高的（最核心的概念），避免随机选到低频词
-    return { shared: shared[0], allShared: shared.slice(0, 5) };
+    return { shared: meaningfulShared[0], allShared: meaningfulShared.slice(0, 5) };
   }
 
   _getProjectText(projectPath) {
