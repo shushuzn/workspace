@@ -359,3 +359,144 @@ export class SyncProjectMarkers extends ProductiveOperation {
     return { synced };
   }
 }
+
+export class PickNextProject extends ProductiveOperation {
+  /**
+   * 权重衰减随机抽选下一个目标项目
+   * 公式: weight = (days_since_last_active)^γ
+   * 规则: 排除今天已选过的项目，按权重概率随机抽取
+   */
+  constructor(workspace, gamma = 0.5, memoryPath = null) {
+    super('pick_next_project', '权重衰减随机抽选下一个目标项目');
+    this.workspace = workspace;
+    this.gamma = gamma;
+    // memoryPath: 默认在 workspace 内找 MEMORY.md，
+    // 如果传绝对路径则直接使用（如 ~/.claude/projects/xxx/memory/MEMORY.md）
+    this.memoryPath = memoryPath;
+  }
+
+  async execute() {
+    let memoryFile;
+    if (this.memoryPath) {
+      memoryFile = this.memoryPath.startsWith('/') || /^[A-Za-z]:/.test(this.memoryPath)
+        ? this.memoryPath
+        : path.join(this.workspace, this.memoryPath);
+    } else {
+      memoryFile = path.join(this.workspace, 'MEMORY.md');
+    }
+    if (!fs.existsSync(memoryFile)) {
+      return { picked: null, error: 'MEMORY.md not found', projects: [] };
+    }
+
+    const content = fs.readFileSync(memoryFile, 'utf8');
+    const projectsDir = this.workspace;
+    if (!fs.existsSync(projectsDir)) {
+      return { picked: null, error: 'projects dir not found', projects: [] };
+    }
+
+    // Parse Active Projects table from MEMORY.md
+    const projectRows = this._parseProjectTable(content);
+    if (projectRows.length === 0) {
+      return { picked: null, error: 'no projects found', projects: [] };
+    }
+
+    const today = new Date().toISOString().split('T')[0];
+    const results = [];
+
+    for (const row of projectRows) {
+      // Resolve last active date from git log if "近期" or invalid
+      let lastActive = row.lastActive;
+      if (!lastActive || lastActive === '近期' || !/^\d{4}-\d{2}-\d{2}$/.test(lastActive)) {
+        lastActive = await this._getGitLastActive(row.path);
+      }
+
+      if (!lastActive || !/^\d{4}-\d{2}-\d{2}$/.test(lastActive)) continue;
+
+      const days = Math.floor((new Date(today) - new Date(lastActive)) / 86400000);
+      // days=0 (today) → weight=0; use (days+1) to avoid zero but penalize recent
+      const weight = Math.pow(days, this.gamma);
+
+      results.push({
+        name: row.name,
+        path: row.path,
+        lastActive,
+        days,
+        weight: Math.round(weight * 1000) / 1000,
+      });
+    }
+
+    if (results.length === 0) {
+      return { picked: null, error: 'no valid projects', projects: [] };
+    }
+
+    // Weighted random selection
+    const totalWeight = results.reduce((s, r) => s + r.weight, 0);
+    if (totalWeight === 0) {
+      return { picked: null, error: 'all weights are zero', projects: results };
+    }
+
+    let random = Math.random() * totalWeight;
+    let picked = results[0];
+    for (const r of results) {
+      random -= r.weight;
+      if (random <= 0) { picked = r; break; }
+    }
+
+    // Sort by weight desc for display
+    results.sort((a, b) => b.weight - a.weight);
+
+    return {
+      picked: picked.name,
+      path: picked.path,
+      days: picked.days,
+      weight: picked.weight,
+      gamma: this.gamma,
+      totalProjects: results.length,
+      allProjects: results,
+    };
+  }
+
+  _parseProjectTable(content) {
+    const rows = [];
+    const lines = content.split('\n');
+    let inActiveTable = false;
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (trimmed === '### Active Projects') { inActiveTable = true; continue; }
+      if (trimmed.startsWith('### ')) { inActiveTable = false; continue; }
+      if (!inActiveTable) continue;
+      if (!trimmed.startsWith('|')) continue;
+      if (trimmed.includes('---')) continue; // separator line
+
+      // Split by | and filter empty
+      const cells = trimmed.split('|').map(c => c.trim()).filter(Boolean);
+      if (cells.length < 4) continue;
+
+      const name = cells[0];
+      const path = cells[1].replace(/^80-PROJECTS\//, '');
+      let lastActive = cells[3] || '近期';
+
+      // Normalize "近期" or malformed dates
+      if (!/^\d{4}-\d{2}-\d{2}$/.test(lastActive)) lastActive = '近期';
+
+      if (name && !name.startsWith('#') && !name.startsWith('-')) {
+        rows.push({ name, path, lastActive });
+      }
+    }
+    return rows;
+  }
+
+  async _getGitLastActive(projectName) {
+    const projectPath = path.join(this.workspace, projectName);
+    if (!fs.existsSync(projectPath)) return null;
+    try {
+      const log = execSync(`git log --format="%ai" --max-count=1`, {
+        cwd: projectPath,
+        encoding: 'utf8',
+        timeout: 5000
+      }).trim();
+      return log ? new Date(log).toISOString().split('T')[0] : null;
+    } catch { return null; }
+  }
+}

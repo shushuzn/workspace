@@ -142,13 +142,14 @@ weight(project) = (days_since_last_active)^γ
 - **公式修正说明**：v1.8 原版用 `1/(days+1)^γ`，导致越久未动的项目权重越低，与设计目标相反；v1.9 改为 `(days)^γ`，久未更新项目权重越高，越优先被选中
 
 **选择规则：**
-1. 计算所有项目权重，归一化
-2. 按权重概率随机抽取 1 个目标项目
-3. 目标项目执行"体检"最小目标（A/B/C 三选一）：
+1. 执行 `node 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs` 获取抽选结果（默认 γ=0.5，"近期"项目自动从 git log 追溯真实日期）
+2. 抽选基于 MEMORY.md Active Projects 表，按 `(days)^γ` 权重概率随机
+3. "近期"项目需先通过 git log 追溯真实日期，否则不参与抽选
+4. 目标项目执行"体检"最小目标（A/B/C 三选一）：
    - **A**：检查能否正常启动运行（3 分钟内验证）
    - **B**：修 1 个小 bug 或补 1 条注释/文档
    - **C**：更新 MEMORY.md 中该项目价值记录
-4. 体检完成后，更新 MEMORY.md 的 Last Active 为当天
+5. 体检完成后，更新 MEMORY.md 的 Last Active 为当天
 
 **配对规则（可选增强）：**
 - 权重抽取 1 个 + 手动选 1 个"有感知项目"同步工作
