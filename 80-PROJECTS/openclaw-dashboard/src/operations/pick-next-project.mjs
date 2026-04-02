@@ -35,13 +35,13 @@ const picker = new PickNextProject(workspaceRoot, gamma, memoryPath);
 const result = await picker.execute();
 
 // 技术雷达检查：超过1天未检查则强制触发
-const today = new Date().toISOString().split('T')[0];
-const radarDay = result.state?.last_radar_check || today;
+const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
+const radarDay = result.state?.last_radar_check ? String(result.state.last_radar_check).replace(/-/g, '') : today;
 if (radarDay !== today) {
   console.log(`\n⚡ 技术雷达触发（距上次检查已过 ${Math.floor((new Date(today) - new Date(radarDay)) / 86400000)} 天）`);
   console.log('   请评估：LLM/Rust/新框架/新工具 是否值得在现有项目中试点？');
   console.log('   结果请写入 MEMORY.md "技术跟进" 区域');
-  picker._saveState({ ...result.state, last_radar_check: today });
+  picker._saveState({ ...result.state, last_radar_check: today.replace(/-/g, '') });
 }
 
 if (result.error) {

@@ -479,9 +479,10 @@ export class PickNextProject extends ProductiveOperation {
         pickedThisSession: Array.isArray(state.pickedThisSession) ? state.pickedThisSession : [],
         lastPick: recentLastPick,
         healthFailures,
+        last_radar_check: state.last_radar_check || null,
       };
     } catch { /* ignore */ }
-    return { pickedThisSession: [], lastPick: null, healthFailures: {} };
+    return { pickedThisSession: [], lastPick: null, healthFailures: {}, last_radar_check: null };
   }
 
   _saveState(state) {
@@ -490,7 +491,9 @@ export class PickNextProject extends ProductiveOperation {
       if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
       // 原子写入：先写临时文件再 rename
       const tmp = this._stateFile + '.tmp';
-      fs.writeFileSync(tmp, JSON.stringify(state, null, 2), 'utf8');
+      // last_radar_check 统一存为 YYYYMMDD 格式
+      const toSave = { ...state, last_radar_check: state.last_radar_check ? String(state.last_radar_check).replace(/-/g, '') : undefined };
+      fs.writeFileSync(tmp, JSON.stringify(toSave, null, 2), 'utf8');
       fs.renameSync(tmp, this._stateFile);
     } catch { /* ignore */ }
   }
