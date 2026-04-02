@@ -620,6 +620,7 @@ export class PickNextProject extends ProductiveOperation {
    * 将共享依赖配对追加到 MEMORY.md 交叉链接表（幂等）
    */
   _appendCrossLink(memoryFile, nameA, nameB, sharedDep) {
+    const MAX_ENTRIES = 100;
     try {
       if (!fs.existsSync(memoryFile)) return;
       const lines = fs.readFileSync(memoryFile, 'utf8').split('\n');
@@ -629,7 +630,6 @@ export class PickNextProject extends ProductiveOperation {
 
       for (let i = 0; i < lines.length; i++) {
         if (lines[i].includes(marker)) { markerIdx = i; continue; }
-        // 找到 marker 后的第一个非 table 行开始插入
         if (markerIdx >= 0 && !lines[i].startsWith('|')) {
           insertIdx = i;
           break;
@@ -645,6 +645,20 @@ export class PickNextProject extends ProductiveOperation {
 
       const newLine = `| ${nameA} ↔ ${nameB} | 关联 | 共享依赖: ${sharedDep} |`;
       lines.splice(insertIdx, 0, newLine);
+
+      // 限制条目数量不超过 MAX_ENTRIES（从最后往前数，删除超出的旧条目）
+      const tableLines = lines.filter(l => l.startsWith('|') && l.includes('↔'));
+      if (tableLines.length > MAX_ENTRIES) {
+        const excess = tableLines.length - MAX_ENTRIES;
+        // 从后往前删
+        let removed = 0;
+        for (let i = lines.length - 1; i >= 0 && removed < excess; i--) {
+          if (lines[i].startsWith('|') && lines[i].includes('↔')) {
+            lines.splice(i, 1);
+            removed++;
+          }
+        }
+      }
 
       const tmp = memoryFile + '.tmp';
       fs.writeFileSync(tmp, lines.join('\n'), 'utf8');
