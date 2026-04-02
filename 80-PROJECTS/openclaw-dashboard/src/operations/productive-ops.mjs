@@ -559,6 +559,14 @@ export class PickNextProject extends ProductiveOperation {
 
     results.sort((a, b) => b.weight - a.weight);
     const maxWeight = results[0].weight;
+
+    // 随机选一个配对项目，找意外相似
+    const remaining = results.filter(r => r.name !== picked.name);
+    const pair = remaining.length > 0
+      ? remaining[Math.floor(Math.random() * remaining.length)]
+      : null;
+    const bridge = pair ? this._findBridgeConcepts(picked.path, pair.path) : null;
+
     return {
       picked: picked.name,
       path: picked.path,
@@ -569,8 +577,79 @@ export class PickNextProject extends ProductiveOperation {
       allProjects: results,
       maxWeight,
       seed,
+      pair: pair ? { name: pair.name, path: pair.path } : null,
+      bridge,
     };
     } finally { this._releaseLock(); }
+  }
+
+  /**
+   * 找两个项目之间的桥接概念
+   * 读取各自的 CLAUDE.md / README.md，提取高频词后取交集
+   */
+  _findBridgeConcepts(pathA, pathB) {
+    const textA = this._getProjectText(pathA);
+    const textB = this._getProjectText(pathB);
+    if (!textA || !textB) return null;
+
+    const wordsA = this._extractKeywords(textA);
+    const wordsB = this._extractKeywords(textB);
+
+    // 取交集（有意义的共享概念）
+    const shared = [...wordsA].filter(w => wordsB.has(w));
+    if (shared.length === 0) return null;
+
+    // 随机选一个最"意外"的共享词（选排名靠后的，前面的太显而易见）
+    const idx = Math.floor(Math.random() * Math.min(shared.length, 3));
+    return { shared: shared[idx], allShared: shared.slice(0, 5) };
+  }
+
+  _getProjectText(projectPath) {
+    const fullPath = path.join(this.workspace, projectPath);
+    for (const f of ['CLAUDE.md', 'README.md', 'README.mds']) {
+      const p = path.join(fullPath, f);
+      try {
+        if (fs.existsSync(p)) {
+          const stat = fs.statSync(p);
+          if (stat.size > 100 * 1024) continue; // 跳过 > 100KB 的大文件
+          return fs.readFileSync(p, 'utf8').slice(0, 8000); // 取前 8000 字符
+        }
+      } catch { /* ignore */ }
+    }
+    return null;
+  }
+
+  _extractKeywords(text) {
+    const stopWords = new Set([
+      'the', 'and', 'for', 'are', 'but', 'not', 'you', 'all', 'can', 'her',
+      'was', 'one', 'our', 'out', 'day', 'get', 'has', 'him', 'his', 'how',
+      'its', 'may', 'new', 'now', 'old', 'see', 'two', 'who', 'boy', 'did',
+      'she', 'use', 'way', 'will', 'with', 'your', 'from', 'have', 'this', 'that',
+      '的', '了', '是', '在', '和', '有', '我', '你', '他', '她', '它',
+      '这', '那', '就', '也', '都', '会', '能', '要', '可以', '一个',
+      '什么', '怎么', '为什么', '如果', '因为', '所以', '但是', '而且',
+    ]);
+    const words = new Map();
+    // 提取 2-4 字的中文词
+    for (const w of (text.match(/[\u4e00-\u9fa5]{2,4}/g) || [])) {
+      if (!stopWords.has(w) && !/^\d+$/.test(w)) {
+        words.set(w, (words.get(w) || 0) + 1);
+      }
+    }
+    // 提取英文词（3词以上）
+    for (const w of (text.match(/[a-zA-Z]{3,}/g) || [])) {
+      const lower = w.toLowerCase();
+      if (!stopWords.has(lower)) {
+        words.set(w, (words.get(w) || 0) + 1);
+      }
+    }
+    // 按频次降序，返回 Set
+    return new Set(
+      [...words.entries()]
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 80)
+        .map(([w]) => w)
+    );
   }
 
   _parseProjectTable(content) {

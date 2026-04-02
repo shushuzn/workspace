@@ -57,6 +57,14 @@ if (result.allProjects && result.allProjects.length > 0) {
   });
 }
 
+if (result.pair && result.bridge) {
+  console.log(`\n🌉 意外相似: ${result.picked} ↔ ${result.pair.name}`);
+  console.log(`   共享概念: ${result.bridge.shared}`);
+  console.log(`   候选列表: ${result.bridge.allShared.join(', ')}`);
+} else if (result.pair) {
+  console.log(`\n🌉 意外相似: ${result.picked} ↔ ${result.pair.name}（共享概念待发现）`);
+}
+
 console.log('\n【验收】请选择体检类型：');
 console.log('  A — 检查能否正常启动运行（3 分钟内验证）');
 console.log('  B — 修 1 个小 bug 或补 1 条注释/文档');
