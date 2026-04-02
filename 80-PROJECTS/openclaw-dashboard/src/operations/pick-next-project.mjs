@@ -49,7 +49,9 @@ if (result.seed) {
 if (result.allProjects && result.allProjects.length > 0) {
   console.log('\n权重排行榜 (Top 5):');
   result.allProjects.slice(0, 5).forEach((p, i) => {
-    const bar = '█'.repeat(Math.round(p.weight));
+    // weight 最大约 3.0（days=8），用 weight*4 映射到 0-12 个 block
+    const barLen = Math.max(1, Math.round(p.weight * 4));
+    const bar = '█'.repeat(barLen);
     console.log(`  ${i + 1}. ${p.name.padEnd(30)} ${p.days}d ${p.weight.toFixed(3)} ${bar}`);
   });
 }

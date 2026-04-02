@@ -388,7 +388,10 @@ export class PickNextProject extends ProductiveOperation {
     try {
       const dir = path.dirname(this._stateFile);
       if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(this._stateFile, JSON.stringify(state, null, 2));
+      // 原子写入：先写临时文件再 rename
+      const tmp = this._stateFile + '.tmp';
+      fs.writeFileSync(tmp, JSON.stringify(state, null, 2), 'utf8');
+      fs.renameSync(tmp, this._stateFile);
     } catch { /* ignore */ }
   }
 
