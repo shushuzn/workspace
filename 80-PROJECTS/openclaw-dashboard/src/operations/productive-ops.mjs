@@ -6,7 +6,7 @@
 import fs from 'fs';
 import path from 'path';
 import crypto from 'crypto';
-import { execSync } from 'child_process';
+import { execSync, exec } from 'child_process';
 import { ProductiveOperation } from './base.mjs';
 
 export class GenDashboardData extends ProductiveOperation {
@@ -697,6 +697,65 @@ export class PickNextProject extends ProductiveOperation {
         .slice(0, 80)
         .map(([w]) => w)
     );
+  }
+
+  /**
+   * 自动体检：尝试启动项目并验证是否正常运行
+   * 检测 package.json / requirements.txt / go.mod，执行对应启动命令
+   */
+  async _runHealthCheck(projectPath) {
+    const fullPath = path.join(this.workspace, projectPath);
+    const pkg = path.join(fullPath, 'package.json');
+    const req = path.join(fullPath, 'requirements.txt');
+    const goMod = path.join(fullPath, 'go.mod');
+
+    let cmd = null;
+    let type = null;
+
+    if (fs.existsSync(pkg)) {
+      try {
+        const scripts = JSON.parse(fs.readFileSync(pkg, 'utf8')).scripts || {};
+        if (scripts['dev']) { cmd = 'npm run dev'; type = 'npm'; }
+        else if (scripts['start']) { cmd = 'npm start'; type = 'npm'; }
+        else if (scripts['preview']) { cmd = 'npm run preview'; type = 'npm'; }
+      } catch { /* ignore */ }
+    } else if (fs.existsSync(goMod)) {
+      cmd = 'go run .';
+      type = 'go';
+    } else if (fs.existsSync(req)) {
+      cmd = 'python main.py';
+      type = 'python';
+    }
+
+    if (!cmd) return { status: 'skip', reason: '无可执行的启动命令' };
+
+    return new Promise(resolve => {
+      const timeout = setTimeout(() => {
+        proc.kill();
+        resolve({ status: 'timeout', reason: '启动超时（3分钟）' });
+      }, 180000);
+
+      let output = '';
+      const proc = exec(cmd, { cwd: fullPath, timeout: 185000 }, (err, stdout, stderr) => {
+        clearTimeout(timeout);
+        if (err) {
+          output += stderr;
+          // 识别常见启动失败模式
+          if (output.includes('EADDRINUSE') || output.includes('port')) {
+            resolve({ status: 'fail', reason: '端口被占用', output: output.slice(-500) });
+          } else if (output.includes('MODULE_NOT_FOUND') || output.includes('Cannot find')) {
+            resolve({ status: 'fail', reason: '依赖缺失', output: output.slice(-500) });
+          } else {
+            resolve({ status: 'fail', reason: '启动失败', output: output.slice(-500) });
+          }
+        } else {
+          resolve({ status: 'ok', reason: '正常启动', output: stdout.slice(-200) });
+        }
+      });
+
+      proc.stderr.on('data', d => { output += d; });
+      proc.stdout.on('data', d => { output += d; });
+    });
   }
 
   _parseProjectTable(content) {

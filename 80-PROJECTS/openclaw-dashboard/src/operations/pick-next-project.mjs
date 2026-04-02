@@ -3,14 +3,15 @@
  * 权重衰减随机抽选下一个目标项目
  *
  * 用法:
- *   node pick-next-project.mjs [gamma] [memoryPath]
+ *   node pick-next-project.mjs [gamma] [memoryPath] [--health-check]
  *
  * 参数:
  *   gamma       — 衰减系数，默认 0.5
  *   memoryPath  — MEMORY.md 绝对路径
+ *   --health-check — 自动体检抽中的项目（尝试启动，3分钟超时）
  *
  * 输出:
- *   抽选结果 + 权重排行榜 + 抽选ID（用于回溯）
+ *   抽选结果 + 权重排行榜 + 体检结果
  *
  * 验收:
  *   体检完成后必须更新 MEMORY.md Last Active 和 .omc/state/pick-next-project.json
@@ -26,8 +27,9 @@ const workspaceRoot = path.join(__dirname, '..', '..', '..');
 // MEMORY.md 位于 workspace 外的 oh-my-claudecode memory 目录
 const DEFAULT_MEMORY = 'C:/Users/adm/.claude/projects/D--OpenClaw-workspace/memory/MEMORY.md';
 
+const doHealthCheck = process.argv.includes('--health-check');
 const gamma = parseFloat(process.argv[2]) || 0.5;
-const memoryPath = process.argv[3] || DEFAULT_MEMORY;
+const memoryPath = process.argv.find((a, i) => i > 2 && !a.startsWith('--')) || DEFAULT_MEMORY;
 
 const picker = new PickNextProject(workspaceRoot, gamma, memoryPath);
 const result = await picker.execute();
@@ -65,10 +67,25 @@ if (result.pair && result.bridge) {
   console.log(`\n🌉 意外相似: ${result.picked} ↔ ${result.pair.name}（无共享依赖）`);
 }
 
-console.log('\n【验收】请选择体检类型：');
-console.log('  A — 检查能否正常启动运行（3 分钟内验证）');
-console.log('  B — 修 1 个小 bug 或补 1 条注释/文档');
-console.log('  C — 更新 MEMORY.md 中该项目价值记录');
-console.log('\n完成后：');
-console.log('  1. 更新 MEMORY.md 的 Last Active 为今天');
-console.log('  2. 确认本次抽选已完成\n');
+if (doHealthCheck) {
+  console.log('\n🔍 自动体检中（最多3分钟）...');
+  const health = await picker._runHealthCheck(result.path);
+  if (health.status === 'skip') {
+    console.log(`\n⏭️  跳过: ${health.reason}`);
+  } else if (health.status === 'ok') {
+    console.log(`\n✅ 体检通过: ${health.reason}`);
+  } else if (health.status === 'timeout') {
+    console.log(`\n⏰ 体检超时: ${health.reason}`);
+  } else {
+    console.log(`\n❌ 体检失败: ${health.reason}`);
+    if (health.output) console.log(`   ${health.output.split('\n').slice(-2).join(' | ')}`);
+  }
+} else {
+  console.log('\n【验收】请选择体检类型：');
+  console.log('  A — 检查能否正常启动运行（3 分钟内验证）');
+  console.log('  B — 修 1 个小 bug 或补 1 条注释/文档');
+  console.log('  C — 更新 MEMORY.md 中该项目价值记录');
+  console.log('\n完成后：');
+  console.log('  1. 更新 MEMORY.md 的 Last Active 为今天');
+  console.log('  2. 确认本次抽选已完成\n');
+}
