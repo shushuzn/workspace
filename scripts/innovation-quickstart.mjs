@@ -2,11 +2,12 @@
  * innovation-quickstart.mjs — §10 创新管道一站式工具
  *
  * 用法:
- *   node scripts/innovation-quickstart.mjs status          # 仪表盘
- *   node scripts/innovation-quickstart.mjs idea "描述"     # 新增 idea
- *   node scripts/innovation-quickstart.mjs review           # brainstorm 复盘
- *   node scripts/innovation-quickstart.mjs prune           # 清理过时 idea
- *   node scripts/innovation-quickstart.mjs radar          # 技术雷达评估
+ *   node scripts/innovation-quickstart.mjs status                    # 仪表盘
+ *   node scripts/innovation-quickstart.mjs idea "描述"               # 新增 idea
+ *   node scripts/innovation-quickstart.mjs score ID impact effort     # 打分 (1-3, 1-3)
+ *   node scripts/innovation-quickstart.mjs review                    # brainstorm 复盘
+ *   node scripts/innovation-quickstart.mjs prune                    # 清理过时 idea
+ *   node scripts/innovation-quickstart.mjs radar                   # 技术雷达评估
  */
 
 import fs from 'fs';
@@ -137,17 +138,40 @@ function cmdRadar() {
   console.log('═'.repeat(40));
 }
 
+function cmdScore(args) {
+  const idx = parseInt(args[0]);
+  const impact = parseInt(args[1]);
+  const effort = parseInt(args[2]);
+  if (!args[0] || isNaN(impact) || isNaN(effort)) {
+    console.log('用法: score ID impact effort  (1-3, 1-3)'); return;
+  }
+  if (![1,2,3].includes(impact) || ![1,2,3].includes(effort)) {
+    console.log('❌ impact 和 effort 必须为 1-3'); return;
+  }
+  const score = impact * effort;
+  const scoreMark = `[score:${impact}x${effort}]`;
+  const ideas = readIdeas();
+  if (idx < 0 || idx >= ideas.length) { console.log('❌ 未找到 idea'); return; }
+  const idea = ideas[idx];
+  const cleanDesc = (idea.desc || '').replace(/\s*\[score:\d+x\d+\]/g, '');
+  ideas[idx] = { ...idea, impact, effort, desc: `${cleanDesc} ${scoreMark}` };
+  writeIdeas(ideas);
+  console.log(`✅ ★${score} (${impact}×${effort}) — ${cleanDesc.trim()}`);
+}
+
 const [cmd, ...args] = process.argv.slice(2);
 switch (cmd) {
   case 'status': cmdStatus(); break;
   case 'idea':    cmdIdea(args); break;
+  case 'score':   cmdScore(args); break;
   case 'review':  await cmdReview(); break;
   case 'prune':   cmdPrune(); break;
   case 'radar':   cmdRadar(); break;
   default:
-    console.log('用法: innovation-quickstart.mjs status|idea|review|prune|radar');
+    console.log('用法: innovation-quickstart.mjs status|idea|score|review|prune|radar');
     console.log('  status  — 创新管道仪表盘');
     console.log('  idea "描述" — 新增 idea（自动 stage=seed）');
+    console.log('  score ID impact effort — ★impact×effort (1-3, 1-3)');
     console.log('  review  — brainstorm 复盘 + 采纳率统计');
     console.log('  prune   — 清理过时 idea');
     console.log('  radar   — 技术雷达评估');

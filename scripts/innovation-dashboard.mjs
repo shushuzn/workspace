@@ -30,9 +30,9 @@ function readIdeas() {
   const raw = fs.readFileSync(IDEA_FILE, 'utf8');
   const ideas = [];
   for (const line of raw.split('\n')) {
-    const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s+(.*)/);
+    const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s*(?:\[score:\d+x\d+\]\s*)?(.*)/);
     if (!m) continue;
-    ideas.push({ date: m[1], stage: m[2], source: m[3] || 'manual', desc: m[4].trim() });
+    ideas.push({ date: m[1], stage: m[2], source: m[3] || 'manual', desc: m[5].trim() });
   }
   return ideas;
 }

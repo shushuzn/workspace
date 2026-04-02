@@ -40,9 +40,9 @@ function readData() {
   const raw = fs.readFileSync(IDEA_FILE, 'utf8');
   const ideas = [];
   for (const line of raw.split('\n')) {
-    const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s+(.*)/);
+    const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s*(?:\[score:(\d+)x(\d+)\]\s*)?(.*)/);
     if (!m) continue;
-    const desc = m[4].trim();
+    const desc = m[6].trim();
     const shippedMatch = desc.match(/\| shipped:(\d{8})/);
     const killedMatch  = desc.match(/\| killed:(\d{8})(?: (.*))?$/);
     ideas.push({
@@ -50,6 +50,8 @@ function readData() {
       date:    m[1],
       stage:   m[2],
       source:  m[3] || 'manual',
+      impact:  m[4] ? parseInt(m[4]) : null,
+      effort:  m[5] ? parseInt(m[5]) : null,
       desc:    desc,
       shipped: shippedMatch ? shippedMatch[1] : null,
       killed:  killedMatch  ? killedMatch[1]  : null,
@@ -62,14 +64,15 @@ function writeData(ideas) {
   const header = `# Idea Pool
 
 > 每个 session 产生的 idea 必须立即追加到此文件。
-> 格式：\`- [DATE] STAGE [source] description [| shipped:DATE | killed:DATE REASON]\`
+> 格式：\`- [DATE] STAGE [source] [score:3x2] description [| shipped:DATE | killed:DATE REASON]\`
 > STAGE: seed / proposal / running / shipped / killed / dormant
 > SOURCE: brainstorm / suggest / manual（默认 manual）
 
 `;
   const body = ideas.map(i => {
-    const src = i.source ? ` [${i.source}]` : '';
-    return `- [${i.date}] ${i.stage}${src} ${i.desc}`;
+    const src   = i.source  ? ` [${i.source}]`  : '';
+    const score = (i.impact && i.effort) ? ` [score:${i.impact}x${i.effort}]` : '';
+    return `- [${i.date}] ${i.stage}${src}${score} ${i.desc}`;
   }).join('\n');
   fs.writeFileSync(IDEA_FILE, header + body + '\n', 'utf8');
 }
@@ -84,7 +87,9 @@ function cmdList() {
     const emoji = STAGE_EMOJI[idea.stage] || '?';
     const name  = STAGE_NAMES[idea.stage]  || idea.stage;
     const ageMark = ttl && age > ttl ? ' 🔴过时' : age > 0 ? ` (${age}d)` : '';
-    console.log(`${i} ${emoji} [${name}] ${idea.desc}${ageMark}`);
+    const scoreMark = (idea.impact && idea.effort) ? ` ★${idea.impact}x${idea.effort}` : '';
+    const displayDesc = (idea.desc || '').replace(/\s*\[score:\d+x\d+\]/g, '');
+    console.log(`${i} ${emoji} [${name}]${scoreMark} ${displayDesc}${ageMark}`);
   });
   console.log('═'.repeat(60));
 }
@@ -133,6 +138,24 @@ function cmdKill(args) {
   console.log(`💀 已放弃: ${idea.desc}`);
 }
 
+function cmdScore(args) {
+  if (args.length < 3) { console.log('用法: score ID impact effort (1-3)'); return; }
+  const idx = parseInt(args[0]);
+  const impact = parseInt(args[1]);
+  const effort = parseInt(args[2]);
+  if (![1,2,3].includes(impact) || ![1,2,3].includes(effort)) {
+    console.log('❌ impact 和 effort 必须为 1-3'); return;
+  }
+  const ideas = readData();
+  if (idx < 0 || idx >= ideas.length) { console.log('❌ 未找到 idea'); return; }
+  const score = impact * effort;
+  // 追加 [score:NxM] 到 desc（去重）
+  const cleanDesc = (ideas[idx].desc || '').replace(/\s*\[score:\d+x\d+\]/g, '');
+  ideas[idx] = { ...ideas[idx], impact, effort, desc: `${cleanDesc} [score:${impact}x${effort}]` };
+  writeData(ideas);
+  console.log(`✅ ★${score} (impact=${impact}, effort=${effort}) — ${ideas[idx].desc.replace(/\|.*/,'').trim()}`);
+}
+
 function cmdPrune() {
   const ideas = readData();
   let removed = 0;
@@ -153,8 +176,10 @@ switch (cmd) {
   case 'add':     cmdAdd(args); break;
   case 'advance': cmdAdvance(args); break;
   case 'kill':    cmdKill(args); break;
+  case 'score':   cmdScore(args); break;
   case 'prune':   cmdPrune();   break;
   default:
-    console.log('用法: idea.mjs list|add|advance|kill|prune');
+    console.log('用法: idea.mjs list|add|advance|kill|score|prune');
     console.log('  add STAGE description  (STAGE: seed/proposal/running/shipped/killed/dormant)');
+    console.log('  score ID impact effort  ★impact×effort (1-3, 越高越值得优先)');
 }

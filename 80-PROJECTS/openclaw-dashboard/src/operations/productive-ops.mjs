@@ -962,6 +962,15 @@ export class IdeaPool {
     return true;
   }
 
+  /** 给 idea 打分: impact(1-3) × effort(1-3) */
+  score(idx, impact, effort) {
+    const ideas = this._read();
+    if (idx < 0 || idx >= ideas.length) return false;
+    ideas[idx] = { ...ideas[idx], impact, effort };
+    this._write(ideas);
+    return true;
+  }
+
   /** 自动清理过时 idea（返回清理数量） */
   prune() {
     const TTL = { seed: 3, proposal: 7, running: 14, shipped: null, killed: null, dormant: 30 };
@@ -986,17 +995,18 @@ export class IdeaPool {
     const raw = fs.readFileSync(this.file, 'utf8');
     const ideas = [];
     for (const line of raw.split('\n')) {
-      // 支持: - [DATE] stage [source] description [| shipped:DATE | killed:DATE REASON]
-      const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s+(.*)/);
+      // 支持: - [DATE] stage [source] [score:3x2] description [| shipped:DATE | killed:DATE REASON]
+      const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)(?:\s*\[(\w+)\])?\s*(?:\[score:(\d+)x(\d+)\]\s*)?(.*)/);
       if (!m) continue;
-      const desc = m[4].trim();
-      // 解析 | shipped: / | killed: 时间戳
+      const desc = m[6].trim();
       const shippedMatch = desc.match(/\| shipped:(\d{8})/);
       const killedMatch  = desc.match(/\| killed:(\d{8})(?: (.*))?$/);
       ideas.push({
         date:    m[1],
         stage:   m[2],
         source:  m[3] || 'manual',
+        impact:  m[4] ? parseInt(m[4]) : null,
+        effort:  m[5] ? parseInt(m[5]) : null,
         desc:    desc,
         shipped: shippedMatch ? shippedMatch[1] : null,
         killed:  killedMatch  ? killedMatch[1]  : null,
@@ -1011,14 +1021,15 @@ export class IdeaPool {
     const header = `# Idea Pool
 
 > 每个 session 产生的 idea 必须立即追加到此文件。
-> 格式：\`- [DATE] STAGE [source] description [| shipped:DATE | killed:DATE REASON]\`
+> 格式：\`- [DATE] STAGE [source] [score:3x2] description [| shipped:DATE | killed:DATE REASON]\`
 > STAGE: seed / proposal / running / shipped / killed / dormant
 > SOURCE: brainstorm / suggest / manual（默认 manual）
 
 `;
     const body = ideas.map(i => {
-      const src = i.source ? ` [${i.source}]` : '';
-      return `- [${i.date}] ${i.stage}${src} ${i.desc}`;
+      const src   = i.source  ? ` [${i.source}]`  : '';
+      const score = (i.impact && i.effort) ? ` [score:${i.impact}x${i.effort}]` : '';
+      return `- [${i.date}] ${i.stage}${src}${score} ${i.desc}`;
     }).join('\n');
     const tmp = this.file + '.tmp';
     fs.writeFileSync(tmp, header + body + '\n', 'utf8');
