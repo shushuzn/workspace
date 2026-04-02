@@ -1020,6 +1020,7 @@ export class IdeaPool {
       const desc = m[6].trim();
       const shippedMatch = desc.match(/\| shipped:(\d{8})/);
       const killedMatch  = desc.match(/\| killed:(\d{8})(?: (.*))?$/);
+      const benefitMatch = desc.match(/\| benefit:([^|]+)$/);
       ideas.push({
         date:    m[1],
         stage:   m[2],
@@ -1041,7 +1042,7 @@ export class IdeaPool {
     const header = `# Idea Pool
 
 > 每个 session 产生的 idea 必须立即追加到此文件。
-> 格式：`- [DATE] STAGE [source] [score:3x2] description [| shipped:DATE | killed:DATE REASON | benefit:描述]`
+> 格式：\`- [DATE] STAGE [source] [score:3x2] description [| shipped:DATE | killed:DATE REASON | benefit:描述]\`
 > STAGE: seed / proposal / running / shipped / killed / dormant
 > SOURCE: brainstorm / suggest / manual（默认 manual）
 

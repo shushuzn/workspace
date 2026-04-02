@@ -489,9 +489,12 @@ export class InnovationReview extends DetectionOperation {
       const alive   = arr.filter(i => ['seed','proposal','running','dormant'].includes(i.stage));
       const adopted = [...shipped, ...arr.filter(i => i.stage === 'running')];
       const rate = arr.length > 0 ? Math.round(adopted.length / arr.length * 100) : 0;
-      // 平均存活天数（shipped → date 创建到今天；running → 到今天）
+      // 平均存活天数：shipped 用 | shipped:TIMESTAMP 计算，running 用创建到今天
       const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
-      const cycles = shipped.map(i => this._daysBetween(i.date, today));
+      const cycles = shipped.map(i => {
+        const end = i.shipped || today;
+        return this._daysBetween(i.date, end);
+      });
       const avgCycle = cycles.length > 0 ? Math.round(cycles.reduce((a, b) => a + b, 0) / cycles.length) : null;
       return {
         total: arr.length,
@@ -512,7 +515,7 @@ export class InnovationReview extends DetectionOperation {
 
   async execute() {
     const ideas = this.ideaPool.list();
-    const metrics = this._computeMetrics(ideas.map(i => ({ date: i.date, stage: i.stage, source: i.source })));
+    const metrics = this._computeMetrics(ideas);
 
     const overall = {
       total: ideas.length,
@@ -545,6 +548,9 @@ export class InnovationReview extends DetectionOperation {
       ``,
       `## 洞察`,
       this._insights(metrics),
+      ``,
+      `## 收益追踪`,
+      this._benefitSection(ideas),
     ].join('\n');
 
     const dir = path.dirname(this.reviewFile);
@@ -558,6 +564,17 @@ export class InnovationReview extends DetectionOperation {
       overall,
       message: `创新复盘: ${overall.total} 条 idea, 采纳率 ${overall.adoptionRate} | 来源最多: ${top[0]} (${top[1].total}条)`,
     };
+  }
+
+  _benefitSection(ideas) {
+    const withBenefit = ideas.filter(i => i.benefit && !['shipped','killed'].includes(i.stage));
+    if (withBenefit.length === 0) return '_暂无收益描述_';
+    const lines = withBenefit.map(i => {
+      const emoji = { seed: '💡', proposal: '📋', running: '🔬' }[i.stage] || '?';
+      const score = (i.impact && i.effort) ? ` ★${i.impact}x${i.effort}` : '';
+      return `- ${emoji}${score} **${i.desc.replace(/\|.*/, '').trim()}**\n  收益: ${i.benefit}`;
+    });
+    return lines.join('\n');
   }
 
   _insights(metrics) {
