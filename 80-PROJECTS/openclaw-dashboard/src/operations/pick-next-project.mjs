@@ -126,7 +126,14 @@ if (doHealthCheck) {
   console.log('  A — 检查能否正常启动运行（3 分钟内验证）');
   console.log('  B — 修 1 个小 bug 或补 1 条注释/文档');
   console.log('  C — 更新 MEMORY.md 中该项目价值记录');
-  console.log('\n完成后：');
-  console.log('  1. 更新 MEMORY.md 的 Last Active 为今天');
-  console.log('  2. 确认本次抽选已完成\n');
+  console.log('\n完成后输入 "done" 确认，系统将自动更新 MEMORY.md Last Active');
+  const rl = await import('readline').then(m => m.createInterface({ input: process.stdin, output: process.stdout }));
+  const answer = await new Promise(r => rl.question('> ', r));
+  rl.close();
+  if (answer.trim().toLowerCase() === 'done') {
+    picker.recordHealthSuccess(result.picked);
+    console.log('✅ MEMORY.md Last Active 已更新');
+  } else {
+    console.log('⚠️ 未确认，跳过更新');
+  }
 }
