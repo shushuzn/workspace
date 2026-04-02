@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.33 | **更新日期**：2026-04-02 | **迭代轮次**：31 轮
+> **版本**：v1.34 | **更新日期**：2026-04-02 | **迭代轮次**：32 轮
 
 ---
 
@@ -182,6 +182,42 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost
 - 有共享依赖时自动写入 MEMORY.md 交叉链接表（最多 100 条，30 天旧条目自动清理）
 - 发现共享依赖时 → 评估是否应合并或迁移共享依赖，记录为"待联动"选项
 
+### §10 创新管道 — idea 必须有流向
+
+想法如无生命周期管理，只会无限堆积。§10 要求每个 idea 必须有明确去向：
+
+**想法分级：**
+- 💡 **闪念**（fuzzy idea）— 3天内必须明确化，否则自然消亡
+- 📋 **提案**（proposal）— 明确"做什么 + 预期收益 + 最小验证方式"
+- 🔬 **实验**（experiment）— 48小时内必须有可运行原型或验证结果
+- 📦 **交付**（shipped）— 合并入主干或作为独立项目启动
+
+**流转规则：**
+- 闪念超过 3 天未明确化 → 从活跃列表移除（不禁忌，可重新提出）
+- 提案经自我评审（可行性 + 收益 + 最小验证方式）后进入实验或 Kill
+- 实验失败 → 写 Key Learnings 后 Kill，记录失败原因
+- 想法存活周期：闪念 3d → 提案 7d → 实验 14d → Shipped 或 Kill
+
+**idea 池维护：**
+- 每个 session 产生的 idea 立即写入 `.omc/innovation/ideas.md`
+- 格式：`- [DATE] 💡/📋/🔬/📦 description | expected_benefit | status`
+- 每次 session 开始时快速过一遍 idea 池，标记过时项（自动检查日期）
+- `node scripts/idea.mjs list/add/advance/kill` — idea 池管理命令
+
+**跨域类比自动触发：**
+- brainstorm 时，自动从 MEMORY.md 交叉链接表搜索相关域类比
+- 发现类比后追加到 brainstorm 输出，作为"意外启发"标记
+
+**idea 追踪状态：**
+| 状态 | 含义 |
+|------|------|
+| 💡 active | 闪念，等待明确化 |
+| 📋 proposed | 提案，待评审 |
+| 🔬 running | 实验中 |
+| 📦 shipped | 已交付 |
+| 💀 killed | 已放弃（含 Key Learnings） |
+| ⏸️ dormant | 超过生命周期上限，自动休眠（可唤醒） |
+
 ---
 
 ## 检查清单
@@ -194,6 +230,7 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost
 6. [ ] §1：计划是否已输出并获确认？豁免是否合规？联动评估是否包含 Gate 控制？（触发 §A 第 1 行时）
 7. [ ] §2：测试是否有效覆盖？豁免是否符合三选一互斥标准？跨项目联动测试建议是否已提供？（新增功能时）
 8. [ ] §9：本 session 是否选中了目标项目？体检后是否做了实际工作？Last Active 是否已更新？
+9. [ ] §10：本 session 产生的 idea 是否已写入 .omc/innovation/ideas.md？过时 idea 是否已清理？
 
 ---
 
