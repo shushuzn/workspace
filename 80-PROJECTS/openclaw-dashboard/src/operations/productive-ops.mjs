@@ -377,11 +377,45 @@ export class PickNextProject extends ProductiveOperation {
     this._stateFile = path.join(workspace, '.omc', 'state', 'pick-next-project.json');
   }
 
-  _loadState() {
-    try {
-      if (fs.existsSync(this._stateFile)) {
-        return JSON.parse(fs.readFileSync(this._stateFile, 'utf8'));
+  _lockFile() { return this._stateFile + '.lock'; }
+
+  _acquireLock(maxRetries = 3, intervalMs = 50) {
+    const lockPath = this._lockFile();
+    for (let i = 0; i < maxRetries; i++) {
+      try {
+        fs.writeFileSync(lockPath, String(process.pid), { flag: 'wx' });
+        return true;
+      } catch (e) {
+        if (e.code !== 'EEXIST') return false;
+        // 文件存在，等待后重试
+        const start = Date.now();
+        while (Date.now() - start < intervalMs) { /* spin */ }
       }
+    }
+    return false;
+  }
+
+  _releaseLock() {
+    try { fs.unlinkSync(this._lockFile()); } catch { /* ignore */ }
+  }
+
+  _loadState() {
+    if (!fs.existsSync(this._stateFile)) {
+      return { pickedThisSession: [], lastPick: null };
+    }
+    try {
+      const raw = fs.readFileSync(this._stateFile, 'utf8');
+      const state = JSON.parse(raw);
+      // 清理超过 7 天的历史 lastPick（只保留最近一条作为参考）
+      const cutoff = new Date();
+      cutoff.setDate(cutoff.getDate() - 7);
+      const cutoffStr = cutoff.toISOString().split('T')[0].replace(/-/g, '');
+      const recentLastPick = state.lastPick && state.lastPick.date >= cutoffStr
+        ? state.lastPick : (state.lastPick || null);
+      return {
+        pickedThisSession: Array.isArray(state.pickedThisSession) ? state.pickedThisSession : [],
+        lastPick: recentLastPick,
+      };
     } catch { /* ignore */ }
     return { pickedThisSession: [], lastPick: null };
   }
@@ -413,6 +447,11 @@ export class PickNextProject extends ProductiveOperation {
       return { picked: null, error: 'projects dir not found', projects: [] };
     }
 
+    // 加锁，防止并发调用导致状态文件损坏
+    if (!this._acquireLock()) {
+      return { picked: null, error: '无法获取锁，并发调用冲突', projects: [] };
+    }
+    try {
     const content = fs.readFileSync(memoryFile, 'utf8');
     const projectRows = this._parseProjectTable(content);
     if (projectRows.length === 0) {
@@ -513,6 +552,7 @@ export class PickNextProject extends ProductiveOperation {
       maxWeight,
       seed,
     };
+    } finally { this._releaseLock(); }
   }
 
   _parseProjectTable(content) {
