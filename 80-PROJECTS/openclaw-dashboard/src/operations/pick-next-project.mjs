@@ -18,6 +18,7 @@
  */
 
 import { PickNextProject } from './productive-ops.mjs';
+import { SuggestProjectIdeas } from './detection-ops.mjs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -75,6 +76,14 @@ if (result.pair && result.bridge) {
   console.log(`   候选列表: ${result.bridge.allShared.join(', ')}`);
 } else if (result.pair) {
   console.log(`\n🌉 意外相似: ${result.picked} ↔ ${result.pair.name}（无共享依赖）`);
+}
+
+// 抽中后自动生成项目优化建议并写入 idea 池
+const suggester = new SuggestProjectIdeas(path.join(workspaceRoot, '80-PROJECTS'));
+const sugg = await suggester.execute(result.path);
+if (sugg.ideas > 0) {
+  console.log(`\n💡 生成 ${sugg.ideas} 条优化建议，已写入 idea 池`);
+  sugg.suggestions.forEach(s => console.log(`   • ${s}`));
 }
 
 if (doHealthCheck) {

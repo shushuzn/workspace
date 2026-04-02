@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.35 | **更新日期**：2026-04-02 | **迭代轮次**：33 轮
+> **版本**：v1.36 | **更新日期**：2026-04-02 | **迭代轮次**：34 轮
 
 ---
 
@@ -208,6 +208,11 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost
 - brainstorm 时，自动从 MEMORY.md 交叉链接表搜索相关域类比（最多3条）
 - 发现类比后追加到 brainstorm 输出，作为"意外启发"标记
 - brainstorm 生成的每条建议自动写入 idea 池（stage=seed）
+
+**pick-next-project 抽中后自动触发 SuggestProjectIdeas：**
+- 每次抽中项目后立即针对该项目生成 3-5 条具体改进建议
+- 每条建议自动写入 idea 池（stage=seed）
+- 与 BrainstormProjects 的区别：针对性强、无冷却期
 
 **idea 追踪状态：**
 | 状态 | 含义 |

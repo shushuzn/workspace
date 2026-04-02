@@ -297,3 +297,100 @@ export class CheckGitRemotes extends DetectionOperation {
     return { checked: dirs.length, issues };
   }
 }
+
+/**
+ * SuggestProjectIdeas — 针对抽中项目的优化建议生成
+ * pick-next-project 抽中后自动触发，针对性分析该项目并写入 idea 池
+ */
+export class SuggestProjectIdeas extends DetectionOperation {
+  constructor(workspace) {
+    super('suggest_project_ideas', '生成项目优化建议');
+    this.workspace = workspace;
+  }
+
+  canImprove() {
+    // 每次抽中项目后都触发，无冷却期限制
+    return true;
+  }
+
+  async execute(targetProject) {
+    if (!targetProject) return { ideas: 0, suggestions: [] };
+
+    const projectPath = path.join(this.workspace, targetProject);
+    if (!fs.existsSync(projectPath)) return { ideas: 0, suggestions: [] };
+
+    const suggestions = [];
+    const packagePath = path.join(projectPath, 'package.json');
+    const readmePath  = path.join(projectPath, 'README.md');
+    const srcPath     = path.join(projectPath, 'src');
+    const testsPath   = path.join(projectPath, 'tests');
+
+    // 1. package.json 分析
+    if (fs.existsSync(packagePath)) {
+      try {
+        const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+        if (!pkg.scripts?.dev && !pkg.scripts?.start) {
+          suggestions.push('缺少 dev/start 启动脚本');
+        }
+        if (!pkg.scripts?.test) {
+          suggestions.push('缺少测试脚本 - 建议添加 test 命令');
+        }
+        if (!pkg.keywords || pkg.keywords.length < 3) {
+          suggestions.push('关键词不足 - 建议添加更多关键词提升可发现性');
+        }
+        if (!pkg.description || pkg.description.length < 20) {
+          suggestions.push('description 过短 - 建议补充项目说明');
+        }
+        if (pkg.dependencies && Object.keys(pkg.dependencies).length > 20) {
+          suggestions.push(`依赖过多（${Object.keys(pkg.dependencies).length}个）- 考虑拆分或减少直接依赖`);
+        }
+      } catch { /* ignore */ }
+    } else {
+      suggestions.push('缺少 package.json - 建议添加以支持 npm 生态');
+    }
+
+    // 2. README 分析
+    if (!fs.existsSync(readmePath)) {
+      suggestions.push('缺少 README.md - 建议添加项目说明');
+    }
+
+    // 3. src 结构分析
+    if (fs.existsSync(srcPath)) {
+      try {
+        const files = fs.readdirSync(srcPath).filter(f => f.endsWith('.ts') || f.endsWith('.js') || f.endsWith('.jsx'));
+        const size = files.length;
+        if (size > 20) {
+          suggestions.push(`src 文件过多（${size}个）- 考虑模块化拆分`);
+        }
+        if (size === 0) {
+          suggestions.push('src 目录存在但为空');
+        }
+      } catch { /* ignore */ }
+    }
+
+    // 4. 测试覆盖检查
+    if (!fs.existsSync(testsPath) && !fs.existsSync(path.join(projectPath, 'test'))) {
+      suggestions.push('缺少测试目录 - 建议添加 tests/ 或 test/ 目录');
+    }
+
+    if (suggestions.length === 0) {
+      return { project: targetProject, ideas: 0, message: '项目状态良好' };
+    }
+
+    // 写入 idea 池
+    const ideaPool = new IdeaPool(this.workspace);
+    for (const s of suggestions) {
+      ideaPool.add('seed', `suggest: ${s}`);
+    }
+
+    // 写入 brainstorm 目录
+    const brainstormDir = path.join(this.workspace, '.omc', 'brainstorm');
+    if (!fs.existsSync(brainstormDir)) fs.mkdirSync(brainstormDir, { recursive: true });
+    const timestamp = new Date().toISOString().slice(0, 10);
+    const outputPath = path.join(brainstormDir, `${targetProject}-suggestions-${timestamp}.md`);
+    const content = `# ${targetProject} 优化建议\n\n**生成时间**: ${new Date().toLocaleString()}\n**触发方式**: pick-next-project 抽中后自动生成\n\n## 建议（${suggestions.length}条）\n${suggestions.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n`;
+    fs.writeFileSync(outputPath, content, 'utf8');
+
+    return { project: targetProject, ideas: suggestions.length, suggestions, output: outputPath };
+  }
+}
