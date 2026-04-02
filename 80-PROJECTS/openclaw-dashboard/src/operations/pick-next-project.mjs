@@ -17,7 +17,7 @@
  *   体检完成后必须更新 MEMORY.md Last Active 和 .omc/state/pick-next-project.json
  */
 
-import { PickNextProject } from './productive-ops.mjs';
+import { PickNextProject, IdeaPool } from './productive-ops.mjs';
 import { SuggestProjectIdeas } from './detection-ops.mjs';
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -79,11 +79,30 @@ if (result.pair && result.bridge) {
 }
 
 // 抽中后自动生成项目优化建议并写入 idea 池
-const suggester = new SuggestProjectIdeas(path.join(workspaceRoot, '80-PROJECTS'));
+const suggester = new SuggestProjectIdeas(workspaceRoot);
 const sugg = await suggester.execute(result.path);
 if (sugg.ideas > 0) {
   console.log(`\n💡 生成 ${sugg.ideas} 条优化建议，已写入 idea 池`);
   sugg.suggestions.forEach(s => console.log(`   • ${s}`));
+}
+
+// 全局创新待办统计
+const pool = new IdeaPool(workspaceRoot);
+const allIdeas = pool.list().filter(i => !['shipped','killed'].includes(i.stage));
+const hiScore = allIdeas.filter(i => (i.impact || 0) * (i.effort || 0) >= 6);
+const midScore = allIdeas.filter(i => {
+  const s = (i.impact || 0) * (i.effort || 0);
+  return s >= 4 && s < 6;
+});
+const noScore = allIdeas.filter(i => !(i.impact && i.effort));
+if (allIdeas.length > 0) {
+  console.log(`\n📊 创新待办（共 ${allIdeas.length} 条）`);
+  console.log(`   ★6-9: ${hiScore.length}条  ★4-5: ${midScore.length}条  未评分: ${noScore.length}条`);
+  const top = [...hiScore, ...midScore].slice(0, 3);
+  top.forEach(i => {
+    const sc = (i.impact && i.effort) ? `★${i.impact}x${i.effort}` : '';
+    console.log(`   • ${sc} ${i.desc.replace(/\|.*/, '').trim().substring(0, 40)}`);
+  });
 }
 
 if (doHealthCheck) {
