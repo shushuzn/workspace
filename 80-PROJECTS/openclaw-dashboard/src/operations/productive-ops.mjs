@@ -595,13 +595,12 @@ export class PickNextProject extends ProductiveOperation {
     const wordsA = this._extractKeywords(textA);
     const wordsB = this._extractKeywords(textB);
 
-    // 取交集（有意义的共享概念）
+    // 取交集（有意义的共享概念），按频次降序排列
     const shared = [...wordsA].filter(w => wordsB.has(w));
     if (shared.length === 0) return null;
 
-    // 随机选一个最"意外"的共享词（选排名靠后的，前面的太显而易见）
-    const idx = Math.floor(Math.random() * Math.min(shared.length, 3));
-    return { shared: shared[idx], allShared: shared.slice(0, 5) };
+    // 取交集里频次最高的（最核心的概念），避免随机选到低频词
+    return { shared: shared[0], allShared: shared.slice(0, 5) };
   }
 
   _getProjectText(projectPath) {
@@ -636,11 +635,11 @@ export class PickNextProject extends ProductiveOperation {
         words.set(w, (words.get(w) || 0) + 1);
       }
     }
-    // 提取英文词（3词以上）
+    // 提取英文词（3词以上），统一小写避免重复
     for (const w of (text.match(/[a-zA-Z]{3,}/g) || [])) {
       const lower = w.toLowerCase();
       if (!stopWords.has(lower)) {
-        words.set(w, (words.get(w) || 0) + 1);
+        words.set(lower, (words.get(lower) || 0) + 1);
       }
     }
     // 按频次降序，返回 Set
