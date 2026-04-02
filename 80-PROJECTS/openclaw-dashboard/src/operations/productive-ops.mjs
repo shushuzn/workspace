@@ -560,11 +560,17 @@ export class PickNextProject extends ProductiveOperation {
     results.sort((a, b) => b.weight - a.weight);
     const maxWeight = results[0].weight;
 
-    // 随机选一个配对项目（只显示配对，不找关键词交集）
+    // 随机选一个配对项目
     const remaining = results.filter(r => r.name !== picked.name);
     const pair = remaining.length > 0
       ? remaining[Math.floor(Math.random() * remaining.length)]
       : null;
+
+    // 找共享依赖，如有则写入 MEMORY.md 交叉链接表
+    const bridge = pair ? this._findBridgeConcepts(picked.path, pair.path) : null;
+    if (bridge) {
+      this._appendCrossLink(memoryFile, picked.name, pair.name, bridge.shared);
+    }
 
     return {
       picked: picked.name,
@@ -577,6 +583,7 @@ export class PickNextProject extends ProductiveOperation {
       maxWeight,
       seed,
       pair: pair ? { name: pair.name, path: pair.path } : null,
+      bridge,
     };
     } finally { this._releaseLock(); }
   }
@@ -607,6 +614,42 @@ export class PickNextProject extends ProductiveOperation {
       ]);
       return deps;
     } catch { return null; }
+  }
+
+  /**
+   * 将共享依赖配对追加到 MEMORY.md 交叉链接表（幂等）
+   */
+  _appendCrossLink(memoryFile, nameA, nameB, sharedDep) {
+    try {
+      if (!fs.existsSync(memoryFile)) return;
+      const lines = fs.readFileSync(memoryFile, 'utf8').split('\n');
+      const marker = '## 交叉链接';
+      let markerIdx = -1;
+      let insertIdx = lines.length;
+
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].includes(marker)) { markerIdx = i; continue; }
+        // 找到 marker 后的第一个非 table 行开始插入
+        if (markerIdx >= 0 && !lines[i].startsWith('|')) {
+          insertIdx = i;
+          break;
+        }
+      }
+
+      // 幂等检查：已存在则不重复写入
+      for (let i = markerIdx >= 0 ? markerIdx : 0; i < lines.length; i++) {
+        if (lines[i].includes(`↔`) && lines[i].includes(nameA) && lines[i].includes(nameB)) {
+          return;
+        }
+      }
+
+      const newLine = `| ${nameA} ↔ ${nameB} | 关联 | 共享依赖: ${sharedDep} |`;
+      lines.splice(insertIdx, 0, newLine);
+
+      const tmp = memoryFile + '.tmp';
+      fs.writeFileSync(tmp, lines.join('\n'), 'utf8');
+      fs.renameSync(tmp, memoryFile);
+    } catch { /* ignore */ }
   }
 
   _extractKeywords(text) {
