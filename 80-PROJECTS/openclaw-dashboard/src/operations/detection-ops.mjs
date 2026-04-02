@@ -455,3 +455,127 @@ export class BrainstormReview extends DetectionOperation {
     };
   }
 }
+
+/**
+ * InnovationReview — 创新管道全局复盘
+ * 每 14 天触发，分析 idea 池中各来源的质量与效率
+ */
+export class InnovationReview extends DetectionOperation {
+  constructor(workspace) {
+    super('innovation_review', '创新管道全局复盘');
+    this.workspace = workspace;
+    this.ideaPool = new IdeaPool(workspace);
+    this.reviewFile = path.join(workspace, '.omc', 'innovation', 'review.md');
+  }
+
+  canImprove() {
+    if (!fs.existsSync(this.reviewFile)) return true;
+    const age = Date.now() - fs.statSync(this.reviewFile).mtimeMs;
+    return age > 14 * 24 * 60 * 60 * 1000;
+  }
+
+  _daysBetween(dateA, dateB) {
+    const parse = d => new Date(`${String(d).slice(0,4)}-${String(d).slice(4,6)}-${String(d).slice(6,8)}`);
+    return Math.floor((parse(dateB) - parse(dateA)) / 86400000);
+  }
+
+  _computeMetrics(ideas) {
+    const bySource = { brainstorm: [], suggest: [], manual: [] };
+    for (const idea of ideas) bySource[idea.source] = [...(bySource[idea.source] || []), idea];
+
+    const calc = (arr) => {
+      const shipped = arr.filter(i => i.stage === 'shipped');
+      const killed  = arr.filter(i => i.stage === 'killed');
+      const alive   = arr.filter(i => ['seed','proposal','running','dormant'].includes(i.stage));
+      const adopted = [...shipped, ...arr.filter(i => i.stage === 'running')];
+      const rate = arr.length > 0 ? Math.round(adopted.length / arr.length * 100) : 0;
+      // 平均存活天数（shipped → date 创建到今天；running → 到今天）
+      const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
+      const cycles = shipped.map(i => this._daysBetween(i.date, today));
+      const avgCycle = cycles.length > 0 ? Math.round(cycles.reduce((a, b) => a + b, 0) / cycles.length) : null;
+      return {
+        total: arr.length,
+        shipped: shipped.length,
+        killed:  killed.length,
+        alive:   alive.length,
+        adoptionRate: `${rate}%`,
+        avgCycleDays: avgCycle,
+      };
+    };
+
+    return {
+      brainstorm: calc(bySource.brainstorm || []),
+      suggest:    calc(bySource.suggest    || []),
+      manual:     calc(bySource.manual     || []),
+    };
+  }
+
+  async execute() {
+    const ideas = this.ideaPool.list();
+    const metrics = this._computeMetrics(ideas.map(i => ({ date: i.date, stage: i.stage, source: i.source })));
+
+    const overall = {
+      total: ideas.length,
+      adoptionRate: `${Math.round(
+        ideas.filter(i => ['shipped','running'].includes(i.stage)).length /
+        (ideas.length || 1) * 100)}%`,
+    };
+
+    const now = new Date().toISOString().slice(0, 10);
+    const content = [
+      `# Innovation Review`,
+      ``,
+      `> 生成时间: ${now}`,
+      ``,
+      `## 各来源质量对比`,
+      ``,
+      `| 来源 | 总数 | 交付 | 放弃 | 存活 | 采纳率 | 平均周期(天) |`,
+      `|------|------|------|------|------|--------|------------|`,
+      ...['brainstorm','suggest','manual'].map(src => {
+        const m = metrics[src];
+        return `| ${src} | ${m.total} | ${m.shipped} | ${m.killed} | ${m.alive} | ${m.adoptionRate} | ${m.avgCycleDays ?? '—'} |`;
+      }),
+      ``,
+      `## 整体指标`,
+      ``,
+      `| 指标 | 值 |`,
+      `|------|---|`,
+      `| 总 idea 数 | ${overall.total} |`,
+      `| 整体采纳率 | ${overall.adoptionRate} |`,
+      ``,
+      `## 洞察`,
+      this._insights(metrics),
+    ].join('\n');
+
+    const dir = path.dirname(this.reviewFile);
+    if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(this.reviewFile, content, 'utf8');
+
+    const top = Object.entries(metrics).sort((a, b) => b[1].total - a[1].total)[0];
+    return {
+      reviewFile: this.reviewFile,
+      metrics,
+      overall,
+      message: `创新复盘: ${overall.total} 条 idea, 采纳率 ${overall.adoptionRate} | 来源最多: ${top[0]} (${top[1].total}条)`,
+    };
+  }
+
+  _insights(metrics) {
+    const entries = Object.entries(metrics).filter(([, m]) => m.total > 0);
+    if (entries.length === 0) return '_暂无数据_';
+    const sorted = entries.sort((a, b) => parseInt(b[1].adoptionRate) - parseInt(a[1].adoptionRate));
+    const best = sorted[0];
+    const lines = [
+      `_采纳率最高: ${best[0]} (${best[1].adoptionRate})_`,
+    ];
+    if (sorted.length > 1) {
+      const worst = sorted[sorted.length - 1];
+      lines.push(`_采纳率最低: ${worst[0]} (${worst[1].adoptionRate}) — 考虑降权或改进评审标准_`);
+    }
+    const zeroKill = entries.filter(([, m]) => m.killed === 0 && m.total >= 3);
+    if (zeroKill.length > 0) {
+      lines.push(`_零放弃来源: ${zeroKill.map(([s]) => s).join(', ')} — 可能过于保守或评审标准宽松_`);
+    }
+    return lines.join('\n');
+  }
+}

@@ -80,13 +80,16 @@ function cmdIdea(args) {
 
 async function cmdReview() {
   try {
-    const { BrainstormReview } = await import('../80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs');
-    const r = new BrainstormReview(WORKSPACE);
-    const res = await r.execute();
-    console.log(res.message);
-    if (res.cleaned > 0) console.log(`已清理 ${res.cleaned} 个过期文件`);
+    const { BrainstormReview, InnovationReview } = await import('../80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs');
+    const [brainstormRes, innovRes] = await Promise.all([
+      new BrainstormReview(WORKSPACE).execute(),
+      new InnovationReview(WORKSPACE).execute(),
+    ]);
+    console.log(brainstormRes.message);
+    console.log(innovRes.message);
+    if (brainstormRes.cleaned > 0) console.log(`已清理 ${brainstormRes.cleaned} 个过期 brainstorm 文件`);
   } catch (e) {
-    console.log('BrainstormReview: ' + e.message);
+    console.log('Review: ' + e.message);
   }
 }
 
