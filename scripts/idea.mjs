@@ -64,7 +64,7 @@ function writeData(ideas) {
   const header = `# Idea Pool
 
 > 每个 session 产生的 idea 必须立即追加到此文件。
-> 格式：\`- [DATE] STAGE [source] [score:3x2] description [| shipped:DATE | killed:DATE REASON]\`
+> 格式：\`- [DATE] STAGE [source] [score:3x2] description [| shipped:DATE | killed:DATE REASON | benefit:描述]\`
 > STAGE: seed / proposal / running / shipped / killed / dormant
 > SOURCE: brainstorm / suggest / manual（默认 manual）
 
@@ -184,6 +184,18 @@ function cmdPrune() {
   console.log(`✅ 清理完成，移除 ${removed} 条过时 idea`);
 }
 
+function cmdBenefit(args) {
+  if (args.length < 2) { console.log('用法: benefit ID "收益描述"'); return; }
+  const idx = parseInt(args[0]);
+  const desc = args.slice(1).join(' ').trim();
+  const ideas = readData();
+  if (idx < 0 || idx >= ideas.length) { console.log('❌ 未找到 idea'); return; }
+  const cleanDesc = (ideas[idx].desc || '').replace(/\s*\| benefit:.*$/, '');
+  ideas[idx] = { ...ideas[idx], desc: `${cleanDesc} | benefit:${desc}` };
+  writeData(ideas);
+  console.log(`✅ 收益已添加: ${ideas[idx].desc.replace(/\|.*/,'').trim()}`);
+}
+
 const [cmd, ...args] = process.argv.slice(2);
 switch (cmd) {
   case 'list':    cmdList(args); break;
@@ -192,9 +204,11 @@ switch (cmd) {
   case 'kill':    cmdKill(args); break;
   case 'score':   cmdScore(args); break;
   case 'prune':   cmdPrune();   break;
+  case 'benefit': cmdBenefit(args); break;
   default:
-    console.log('用法: idea.mjs list|add|advance|kill|score|prune');
+    console.log('用法: idea.mjs list|add|advance|kill|score|benefit|prune');
     console.log('  list [--sort score]   按评分排序（高分优先）');
     console.log('  add STAGE description  (STAGE: seed/proposal/running/shipped/killed/dormant)');
     console.log('  score ID impact effort  ★impact×effort (1-3, 越高越值得优先)');
+    console.log('  benefit ID "描述"      给 idea 添加收益描述');
 }
