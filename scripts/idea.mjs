@@ -124,6 +124,9 @@ function cmdAdvance(args) {
   const idea = ideas[idx];
   const curIdx = STAGE_LIST.indexOf(idea.stage);
   const target = args[1] || STAGE_LIST[curIdx + 1] || 'shipped';
+  if (args[1] && !STAGE_LIST.includes(args[1])) {
+    console.log(`❌ 未知 stage: ${args[1]}，可用: ${STAGE_LIST.join('/')}`); return;
+  }
   if (STAGE_LIST.indexOf(target) <= curIdx && !args[1]) {
     console.log(`❌ ${idea.stage} 已是最终状态`); return;
   }

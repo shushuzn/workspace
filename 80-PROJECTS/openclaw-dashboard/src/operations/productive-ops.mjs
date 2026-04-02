@@ -916,6 +916,8 @@ export class PickNextProject extends ProductiveOperation {
  * 负责 .omc/innovation/ideas.md 的读写和生命周期维护
  */
 export class IdeaPool {
+  static STAGES = ['seed', 'proposal', 'running', 'shipped', 'killed', 'dormant'];
+
   constructor(workspace) {
     this.workspace = workspace;
     this.file = path.join(workspace, '.omc', 'innovation', 'ideas.md');
@@ -943,6 +945,7 @@ export class IdeaPool {
   advance(idx, targetStage) {
     const ideas = this._read();
     if (idx < 0 || idx >= ideas.length) return false;
+    if (!IdeaPool.STAGES.includes(targetStage)) return false;
     let desc = ideas[idx].desc;
     if (targetStage === 'shipped') {
       desc = `${desc} | shipped:${this._today()}`;
