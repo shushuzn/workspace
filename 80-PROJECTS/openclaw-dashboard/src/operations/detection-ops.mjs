@@ -551,10 +551,17 @@ export class InnovationReview extends DetectionOperation {
       ``,
       `## 收益追踪`,
       this._benefitSection(ideas),
+      ``,
+      `## 趋势对比`,
+      this._trendSection(),
     ].join('\n');
 
     const dir = path.dirname(this.reviewFile);
     if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+    // 保存上次 review 为 prev
+    if (fs.existsSync(this.reviewFile)) {
+      fs.copyFileSync(this.reviewFile, this.reviewFile.replace(/review\.md$/, 'review-prev.md'));
+    }
     fs.writeFileSync(this.reviewFile, content, 'utf8');
 
     const top = Object.entries(metrics).sort((a, b) => b[1].total - a[1].total)[0];
@@ -575,6 +582,33 @@ export class InnovationReview extends DetectionOperation {
       return `- ${emoji}${score} **${i.desc.replace(/\|.*/, '').trim()}**\n  收益: ${i.benefit}`;
     });
     return lines.join('\n');
+  }
+
+  _trendSection() {
+    const prev = this._readPrevReview();
+    if (!prev) return '_无历史数据（首次复盘）_';
+    const lines = [];
+    const delta = (curr, prev) => {
+      const d = curr - prev;
+      return d === 0 ? '—' : d > 0 ? `↑${d}` : `↓${Math.abs(d)}`;
+    };
+    const prevTotal = parseInt(prev.match(/\| 总 idea 数 \| (\d+) \|/)?.[1] || '0');
+    const prevAdoption = parseInt(prev.match(/\| 整体采纳率 \| (\d+)%/)?.[1] || '0');
+    const currTotal = this.ideaPool.list().length;
+    const currAdoption = Math.round(
+      this.ideaPool.list().filter(i => ['shipped','running'].includes(i.stage)).length /
+      (currTotal || 1) * 100);
+    lines.push(`- idea 总数: ${currTotal} (${delta(currTotal, prevTotal)})`);
+    lines.push(`- 整体采纳率: ${currAdoption}% (${delta(currAdoption, prevAdoption)})`);
+    return lines.join('\n');
+  }
+
+  _readPrevReview() {
+    // 读取上一次 review 文件内容做对比
+    if (!fs.existsSync(this.reviewFile)) return null;
+    const prevPath = this.reviewFile.replace(/review\.md$/, 'review-prev.md');
+    if (!fs.existsSync(prevPath)) return null;
+    return fs.readFileSync(prevPath, 'utf8');
   }
 
   _insights(metrics) {
