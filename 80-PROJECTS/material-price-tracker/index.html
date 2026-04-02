@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>原料期货监控</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; }
+  .header { background: #1a73e8; color: #fff; padding: 16px 20px; font-size: 17px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+  .header small { font-size: 12px; opacity: 0.8; }
+
+  .tabs { display: flex; background: #fff; border-bottom: 1px solid #e0e0e0; }
+  .tab { flex: 1; padding: 13px 6px; text-align: center; font-size: 13px; color: #666; cursor: pointer; border-bottom: 2px solid transparent; }
+  .tab.active { color: #1a73e8; border-bottom-color: #1a73e8; font-weight: 500; }
+
+  .content { display: none; }
+  .content.active { display: block; }
+
+  .card { background: #fff; margin: 12px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; }
+  .card-header { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; font-size: 13px; font-weight: 600; color: #333; display: flex; justify-content: space-between; align-items: center; }
+
+  /* 价格输入面板 */
+  .price-input-panel { background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%); color: #fff; margin: 12px; border-radius: 10px; padding: 18px 16px; }
+  .price-input-panel h3 { font-size: 14px; font-weight: 600; margin-bottom: 14px; opacity: 0.9; }
+  .price-input-row { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
+  .price-input-row label { font-size: 13px; opacity: 0.8; width: 70px; flex-shrink: 0; }
+  .price-input-row input { flex: 1; padding: 8px 10px; border: none; border-radius: 6px; font-size: 15px; font-weight: 700; text-align: right; background: rgba(255,255,255,0.15); color: #fff; }
+  .price-input-row input::placeholder { color: rgba(255,255,255,0.5); font-weight: 400; }
+  .price-input-row .unit { font-size: 13px; opacity: 0.7; width: 40px; }
+  .futures-link { display: flex; align-items: center; gap: 6px; margin-top: 12px; }
+  .futures-link a { color: rgba(255,255,255,0.85); font-size: 12px; text-decoration: none; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 5px; }
+  .futures-link a:hover { background: rgba(255,255,255,0.25); }
+
+  /* 快捷按钮 */
+  .quick-links { padding: 10px 16px; background: #fff; border-bottom: 1px solid #f0f0f0; display: flex; gap: 8px; overflow-x: auto; white-space: nowrap; }
+  .quick-links a { font-size: 12px; color: #1a73e8; text-decoration: none; background: #e8f0fe; padding: 5px 10px; border-radius: 20px; flex-shrink: 0; }
+
+  /* 价差卡片 */
+  .spread-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 12px 16px; }
+  .spread-item { background: #f8f9fa; border-radius: 8px; padding: 12px 8px; text-align: center; }
+  .spread-item .label { font-size: 11px; color: #888; margin-bottom: 4px; }
+  .spread-item .val { font-size: 18px; font-weight: 700; }
+  .spread-item .val.big { color: #e53935; }
+  .spread-item .val.small { color: #43a047; }
+  .spread-item .val.ok { color: #333; }
+  .spread-item .sub { font-size: 10px; color: #888; margin-top: 2px; }
+
+  /* 行情Tab */
+  .market-tabs { display: flex; background: #f8f9fa; border-bottom: 1px solid #eee; }
+  .market-tab { flex: 1; padding: 10px 6px; text-align: center; font-size: 12px; color: #888; cursor: pointer; border-bottom: 2px solid transparent; }
+  .market-tab.active { color: #1a73e8; border-bottom-color: #1a73e8; font-weight: 500; }
+  .market-content { display: none; }
+  .market-content.active { display: block; }
+  .market-iframe { width: 100%; min-height: 500px; border: none; }
+
+  /* 采购记录 */
+  .record-form { padding: 12px 16px; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 8px; align-items: end; }
+  .record-form input { padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
+  .record-form input:focus { outline: none; border-color: #1a73e8; }
+  .record-form button { padding: 8px 16px; background: #1a73e8; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .record-form button:hover { background: #1565c0; }
+
+  .records-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+  .records-table th { text-align: left; padding: 8px 12px; color: #888; font-weight: 500; border-bottom: 1px solid #eee; font-size: 11px; background: #fafafa; }
+  .records-table td { padding: 8px 12px; border-bottom: 1px solid #f5f5f5; }
+  .records-table .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .records-table .del { color: #e53935; cursor: pointer; background: none; border: none; font-size: 12px; padding: 2px 6px; }
+  .records-table .del:hover { background: #ffebee; border-radius: 4px; }
+
+  /* 汇总 */
+  .summary-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 0 16px 12px; }
+  .summary-card { background: #f8f9fa; border-radius: 8px; padding: 12px; text-align: center; }
+  .summary-card .label { font-size: 11px; color: #888; }
+  .summary-card .val { font-size: 17px; font-weight: 700; margin-top: 4px; }
+  .summary-card .sub { font-size: 10px; color: #888; margin-top: 2px; }
+
+  /* 总览 */
+  .overview-grid { padding: 12px 16px; }
+  .overview-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid #f0f0f0; }
+  .overview-row:last-child { border-bottom: none; }
+  .overview-row .name { font-size: 14px; font-weight: 500; }
+  .overview-row .detail { font-size: 12px; color: #888; margin-top: 2px; }
+  .overview-row .nums { text-align: right; }
+  .overview-row .nums .main { font-size: 16px; font-weight: 700; }
+  .overview-row .nums .sub { font-size: 11px; color: #888; }
+  .overview-row .tag { font-size: 11px; padding: 2px 8px; border-radius: 10px; margin-top: 4px; display: inline-block; }
+  .tag.up { background: #ffebee; color: #e53935; }
+  .tag.down { background: #e8f5e9; color: #43a047; }
+  .tag.ok { background: #e8f0fe; color: #1a73e8; }
+
+  .guide { padding: 12px 16px; font-size: 12px; color: #666; line-height: 1.8; background: #fff; margin: 0 12px 12px; border-radius: 10px; }
+  .guide b { color: #333; }
+
+  .empty { text-align: center; padding: 30px; color: #bbb; font-size: 13px; }
+  .alert { background: #e8f0fe; border-radius: 6px; padding: 8px 14px; font-size: 12px; color: #1a73e8; margin: 0 12px; display: none; }
+  .alert.show { display: block; }
+
+  /* 导出按钮 */
+  .export-btn { background: #f0f0f0; color: #333; font-size: 11px; padding: 4px 10px; border: none; border-radius: 4px; cursor: pointer; }
+  .export-btn:hover { background: #e0e0e0; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  📊 原料期货监控
+  <small id="today"></small>
+</div>
+
+<div class="tabs">
+  <div class="tab active" data-tab="input">📋 记录</div>
+  <div class="tab" data-tab="pe">PE</div>
+  <div class="tab" data-tab="pp">PP</div>
+  <div class="tab" data-tab="pvc">PVC</div>
+  <div class="tab" data-tab="overview">总览</div>
+</div>
+
+<!-- 记录Tab -->
+<div class="content active" id="tab-input">
+  <div class="card">
+    <div class="card-header">🔢 手动记录期货价（对照用）<button class="export-btn" onclick="exportCSV()">📥 导出</button></div>
+    <div class="card-body" style="padding:12px 16px">
+      <p style="font-size:12px;color:#888;margin-bottom:12px">① 先打开下方链接看大商所行情 ② 把看到的期货价填进来 ③ 自动算升贴水</p>
+      <div class="quick-links">
+        <a href="https://www.dce.com.cn/dcehome/category/10001.html" target="_blank">🏛 大商所官网行情</a>
+        <a href="https://quote.eastmoney.com/qihuo/f2506.html" target="_blank">📈 PE期货行情</a>
+        <a href="https://quote.eastmoney.com/qihuo/f2507.html" target="_blank">📈 PP期货行情</a>
+        <a href="https://quote.eastmoney.com/qihuo/f2508.html" target="_blank">📈 PVC期货行情</a>
+        <a href="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" target="_blank">📊 新浪期货</a>
+      </div>
+      <div class="price-input-panel">
+        <h3>📌 今日期货参考价（主力合约）</h3>
+        <div class="price-input-row">
+          <label>PE</label>
+          <input type="number" id="fut_pe" placeholder="8200" step="10" oninput="calcSpread()">
+          <span class="unit">元/吨</span>
+        </div>
+        <div class="price-input-row">
+          <label>PP</label>
+          <input type="number" id="fut_pp" placeholder="7600" step="10" oninput="calcSpread()">
+          <span class="unit">元/吨</span>
+        </div>
+        <div class="price-input-row">
+          <label>PVC</label>
+          <input type="number" id="fut_pvc" placeholder="5700" step="10" oninput="calcSpread()">
+          <span class="unit">元/吨</span>
+        </div>
+        <div class="spread-grid" style="padding:0">
+          <div class="spread-item">
+            <div class="label">PE 升贴水</div>
+            <div class="val" id="sp_pe">-</div>
+            <div class="sub" id="sp_pe_txt">记录采购后可见</div>
+          </div>
+          <div class="spread-item">
+            <div class="label">PP 升贴水</div>
+            <div class="val" id="sp_pp">-</div>
+            <div class="sub" id="sp_pp_txt">记录采购后可见</div>
+          </div>
+          <div class="spread-item">
+            <div class="label">PVC 升贴水</div>
+            <div class="val" id="sp_pvc">-</div>
+            <div class="sub" id="sp_pvc_txt">记录采购后可见</div>
+          </div>
+        </div>
+        <div class="futures-link" style="margin-top:14px">
+          <span style="font-size:12px;opacity:0.8">正常升贴水参考：</span>
+          <a href="#" onclick="showGuide();return false">查看指南</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">💰 采购记录（记你实际付的钱）</div>
+    <div class="record-form">
+      <input type="date" id="r_date">
+      <select id="r_mat"><option value="pe">PE</option><option value="pp">PP</option><option value="pvc">PVC</option></select>
+      <input type="number" id="r_price" placeholder="单价(元/吨)" step="10">
+      <input type="number" id="r_qty" placeholder="数量(吨)" step="1" style="display:none">
+      <button onclick="addRecord()">记一笔</button>
+    </div>
+    <div id="records_list" style="padding:0 16px 12px"></div>
+  </div>
+</div>
+
+<!-- PE行情 -->
+<div class="content" id="tab-pe">
+  <div class="card">
+    <div class="card-header">PE 聚乙烯 期货行情</div>
+    <div class="market-tabs">
+      <div class="market-tab active" data-m="pe-eastmoney">东方财富</div>
+      <div class="market-tab" data-m="pe-sina">新浪期货</div>
+    </div>
+    <div class="market-content active" id="mkt-pe-eastmoney">
+      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2506.html" title="PE期货"></iframe>
+    </div>
+    <div class="market-content" id="mkt-pe-sina">
+      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" title="新浪期货"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- PP行情 -->
+<div class="content" id="tab-pp">
+  <div class="card">
+    <div class="card-header">PP 聚丙烯 期货行情</div>
+    <div class="market-tabs">
+      <div class="market-tab active" data-m="pp-eastmoney">东方财富</div>
+      <div class="market-tab" data-m="pp-sina">新浪期货</div>
+    </div>
+    <div class="market-content active" id="mkt-pp-eastmoney">
+      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2507.html" title="PP期货"></iframe>
+    </div>
+    <div class="market-content" id="mkt-pp-sina">
+      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" title="新浪期货"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- PVC行情 -->
+<div class="content" id="tab-pvc">
+  <div class="card">
+    <div class="card-header">PVC 聚氯乙烯 期货行情</div>
+    <div class="market-tabs">
+      <div class="market-tab active" data-m="pvc-eastmoney">东方财富</div>
+      <div class="market-tab" data-m="pvc-sina">新浪期货</div>
+    </div>
+    <div class="market-content active" id="mkt-pvc-eastmoney">
+      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2508.html" title="PVC期货"></iframe>
+    </div>
+    <div class="market-content" id="mkt-pvc-sina">
+      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" title="新浪期货"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- 总览 -->
+<div class="content" id="tab-overview">
+  <div class="card">
+    <div class="card-header">📊 采购分析总览</div>
+    <div id="overview_content"></div>
+  </div>
+  <div class="guide" id="guide_block" style="display:none">
+    <p>• <b>升贴水</b> = 采购价 - 期货价</p>
+    <p>• <b>正常范围</b>：PE/PP 约 +200~+500元/吨（期货→现货的合理溢价）</p>
+    <p>• <b>PVC</b>：约 0~+300元/吨</p>
+    <p>• <b>解读</b>：升贴水 &gt; 800 → 偏贵 ｜ &lt; 0 → 警惕 ｜ 稳定在200~500 → 正常</p>
+  </div>
+  <div class="card">
+    <div class="card-header">💡 使用指南</div>
+    <div class="guide">
+      <p><b>Step 1</b>：点「PE/PP/PVC」Tab → 查看实时行情</p>
+      <p><b>Step 2</b>：记下主力合约价格</p>
+      <p><b>Step 3</b>：回到「记录」Tab → 填入期货价 + 采购价</p>
+      <p><b>Step 4</b>：自动算出升贴水，判断是否异常</p>
+      <p style="margin-top:8px;color:#888;font-size:11px">数据完全存本地（localStorage），关掉再开记录仍在</p>
+    </div>
+  </div>
+</div>
+
+<div class="alert" id="alert"></div>
+
+<script>
+const MATERIALS = ['pe','pp','pvc'];
+const MAT_NAMES = { pe:'PE（聚乙烯）', pp:'PP（聚丙烯）', pvc:'PVC（聚氯乙烯）' };
+const STORAGE_KEY = 'material_records_v3';
+const FUT_STORAGE = 'material_futures_price';
+
+let records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+let futPrices = JSON.parse(localStorage.getItem(FUT_STORAGE) || '{}');
+
+document.getElementById('today').textContent = new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
+document.getElementById('r_date').valueAsDate = new Date();
+
+// Tab 切换
+document.querySelectorAll('.tab').forEach(t => {
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.content').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('tab-'+t.dataset.tab).classList.add('active');
+    if(t.dataset.tab==='overview') renderOverview();
+  });
+});
+
+// 行情 iframe 切换
+document.querySelectorAll('.market-tab').forEach(t=>{
+  t.addEventListener('click',()=>{
+    const m = t.dataset.m;
+    const base = m.replace(/-[a-z]+$/,'');
+    t.closest('.card').querySelectorAll('.market-tab').forEach(x=>x.classList.remove('active'));
+    t.closest('.card').querySelectorAll('.market-content').forEach(x=>x.classList.remove('active'));
+    t.classList.add('active');
+    document.getElementById('mkt-'+m).classList.add('active');
+  });
+});
+
+// 加载保存的期货价
+Object.keys(futPrices).forEach(m=>{
+  const el = document.getElementById('fut_'+m);
+  if(el) el.value = futPrices[m];
+});
+
+// 记录期货价
+function saveFutPrice(m) {
+  const v = parseFloat(document.getElementById('fut_'+m).value);
+  if(v > 0) futPrices[m] = v;
+  else delete futPrices[m];
+  localStorage.setItem(FUT_STORAGE, JSON.stringify(futPrices));
+  calcSpread();
+}
+
+['fut_pe','fut_pp','fut_pvc'].forEach(id=>{
+  document.getElementById(id).addEventListener('change',()=>{
+    const m = id.replace('fut_','');
+    saveFutPrice(m);
+  });
+});
+
+// 计算升贴水
+function calcSpread() {
+  MATERIALS.forEach(m=>{
+    const fut = parseFloat(document.getElementById('fut_'+m).value) || 0;
+    const arr = records[m] || [];
+    const latest = arr.length > 0 ? arr[0].price : 0;
+    const el = document.getElementById('sp_'+m);
+    const txt = document.getElementById('sp_'+m+'_txt');
+    if(!el) return;
+
+    if(fut <= 0 || latest <= 0) {
+      el.textContent = '-';
+      el.className = 'val';
+      if(txt) txt.textContent = '填入价格后可见';
+      return;
+    }
+
+    const spread = latest - fut;
+    el.textContent = (spread>=0?'+':'')+spread.toFixed(0);
+    el.className = 'val ' + (Math.abs(spread)>500?'big':Math.abs(spread)<200?'small':'ok');
+    if(txt) txt.textContent = '采购价'+latest+' - 期货'+fut;
+  });
+}
+
+// 添加采购记录
+function addRecord() {
+  const mat = document.getElementById('r_mat').value;
+  const price = parseFloat(document.getElementById('r_price').value);
+  const qty = parseFloat(document.getElementById('r_qty').value) || 0;
+  const date = document.getElementById('r_date').value || new Date().toISOString().split('T')[0];
+
+  if(!price || price <= 0) { showAlert('请输入有效价格'); return; }
+  if(!records[mat]) records[mat] = [];
+  records[mat].unshift({ date, price, qty, ts: Date.now() });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  document.getElementById('r_price').value = '';
+  renderRecords();
+  saveFutPrice(mat);
+  showAlert(MAT_NAMES[mat]+' ¥'+price+'/吨 已记录');
+}
+
+// 删除记录
+function delRecord(mat, idx) {
+  if(!records[mat]) return;
+  records[mat].splice(idx, 1);
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  renderRecords();
+  calcSpread();
+}
+
+// 渲染记录列表
+function renderRecords() {
+  const el = document.getElementById('records_list');
+  let html = '';
+  MATERIALS.forEach(m=>{
+    const arr = records[m] || [];
+    if(!arr.length) return;
+    const total = arr.reduce((s,r)=>s+r.qty,0);
+    const wavg = total>0 ? arr.reduce((s,r)=>s+r.price*r.qty,0)/total : arr[0].price;
+    html += `<div style="font-size:12px;font-weight:600;color:#333;margin:12px 0 6px;display:flex;justify-content:space-between">${MAT_NAMES[m]} <span style="font-weight:400;font-size:11px;color:#888">${arr.length}笔 · ${wavg.toFixed(0)}元/吨 均</span></div>`;
+    html += `<table class="records-table"><tr><th>日期</th><th class="num">单价</th><th class="num">数量</th><th class="num">金额</th><th></th></tr>`;
+    html += arr.slice(0,10).map((r,i)=>`
+      <tr>
+        <td class="date" style="color:#888;font-size:11px">${r.date}</td>
+        <td class="num">${r.price.toFixed(0)}</td>
+        <td class="num">${r.qty>0?r.qty+'吨':'-'}</td>
+        <td class="num">${r.qty>0?(r.price*r.qty).toFixed(0):'-'}</td>
+        <td><button class="del" onclick="delRecord('${m}',${i})">✕</button></td>
+      </tr>`).join('');
+    html += '</table>';
+  });
+  el.innerHTML = html || '<div class="empty">暂无记录，记一笔吧</div>';
+  calcSpread();
+}
+
+// 总览
+function renderOverview() {
+  const el = document.getElementById('overview_content');
+  let html = '';
+  MATERIALS.forEach(m=>{
+    const arr = records[m] || [];
+    const fut = futPrices[m] || 0;
+    if(arr.length===0) return;
+    const total = arr.reduce((s,r)=>s+r.qty,0);
+    const wavg = total>0 ? arr.reduce((s,r)=>s+r.price*r.qty,0)/total : arr[0].price;
+    const latest = arr[0].price;
+    const latestDate = arr[0].date;
+    const spread = fut>0 ? (latest-fut).toFixed(0) : null;
+    const spreadClass = spread===null?'':Math.abs(spread)>500?'up':Math.abs(spread)<200?'down':'ok';
+    const tagTxt = spread===null?'':Math.abs(spread)>500?'⚠️ 偏贵':Math.abs(spread)<200?'✅ 偏低':'✅ 正常';
+
+    html += `<div class="overview-row">
+      <div>
+        <div class="name">${MAT_NAMES[m]}</div>
+        <div class="detail">最新采购 ${latestDate} · 加权均价 ${wavg.toFixed(0)}元/吨</div>
+        ${spread!==null?`<span class="tag ${spreadClass}">升贴水 ${(spread>=0?'+':'')+spread}元/吨 · ${tagTxt}</span>`:''}
+      </div>
+      <div class="nums">
+        <div class="main">${latest.toFixed(0)}<span style="font-size:12px;font-weight:400">/吨</span></div>
+        <div class="sub">${arr.length}笔 · ${total>0?total+'吨':''}</div>
+      </div>
+    </div>`;
+  });
+  el.innerHTML = html || '<div class="empty">记几笔采购后自动出分析</div>';
+}
+
+function showGuide() {
+  const g = document.getElementById('guide_block');
+  g.style.display = g.style.display === 'none' ? 'block' : 'none';
+}
+
+function exportCSV() {
+  const rows = [['日期','品种','单价(元/吨)','数量(吨)','金额(元)','期货价','升贴水']];
+  MATERIALS.forEach(m=>{
+    const fut = futPrices[m]||0;
+    (records[m]||[]).forEach(r=>{
+      const spread = fut>0?(r.price-fut).toFixed(0):'';
+      rows.push([r.date, MAT_NAMES[m], r.price, r.qty, r.qty>0?(r.price*r.qty).toFixed(0):'', fut||'', spread]);
+    });
+  });
+  if(rows.length===1){ showAlert('没有记录可导出'); return; }
+  const blob = new Blob(['\ufeff'+rows.map(r=>r.join(',')).join('\n')],{type:'text/csv;charset=utf-8'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`原料采购_${new Date().toISOString().split('T')[0]}.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function showAlert(msg){
+  const el=document.getElementById('alert');
+  el.textContent=msg; el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'),2500);
+}
+
+renderRecords();
+</script>
+</body>
+</html>
