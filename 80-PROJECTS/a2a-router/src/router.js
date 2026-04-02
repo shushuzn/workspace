@@ -5,6 +5,7 @@
  */
 
 import { EventEmitter } from 'events';
+import { spawn } from 'child_process';
 import { v4 as uuidv4 } from 'uuid';
 import { CapabilityRegistry } from './protocols/capability-registry.js';
 import { MessageStore } from './protocols/persistence/message-store.js';
@@ -500,37 +501,43 @@ export class A2ARouter extends EventEmitter {
 
     // ── Self-evolving orchestrator 联动 ─────────────────────────────
     if (strategy === 'self-evolve') {
-      try {
-        const res = await fetch('http://localhost:8080/api/v1/orchestrate/evolve', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ task: description }),
-          signal: AbortSignal.timeout(15000),
+      const orchBin = process.env.SELF_EVOLVING_ORCHESTRATOR_BIN
+        ?? 'D:/OpenClaw/workspace/80-PROJECTS/self-evolving-orchestrator/go/orchestrator-test.exe';
+      const steps = await new Promise((resolve) => {
+        const proc = spawn(orchBin, ['-task', description, '-fast', '-timeout', '30'], { shell: true });
+        let stdout = '';
+        let stderr = '';
+        proc.stdout.on('data', (d) => { stdout += d.toString(); });
+        proc.stderr.on('data', (d) => { stderr += d.toString(); });
+        proc.on('close', () => {
+          if (!stdout) { resolve([]); return; }
+          // 解析 stdout：提取 "Subtasks (N):" 之后的每一行
+          const subtaskLines = stdout.match(/(?<=Subtasks \(\d+\):\n)[\s\S]*$/m)?.[0]
+            ?.match(/^\s*\d+\.\s*(.+)/gm) ?? [];
+          const result = subtaskLines.map(l => l.replace(/^\s*\d+\.\s*/, '').trim()).filter(Boolean);
+          resolve(result);
         });
-        if (res.ok) {
-          const result = await res.json();
-          // result.subtasks 或 result.steps 是 orchestrator 返回的子任务
-          const steps = result.subtasks ?? result.steps ?? [];
-          if (steps.length > 0) {
-            this.subtaskManager.createParentTask(taskId, steps.length, strategy);
-            steps.forEach(step => {
-              this.capabilityRoute({
-                id: uuidv4(),
-                from: 'router',
-                to: `capability:${step.capability ?? 'coding'}`,
-                timestamp: Date.now(),
-                parentTaskId: taskId,
-                type: 'SUB_TASK',
-                capability: step.capability ?? 'coding',
-                description: step.description ?? step.text ?? step,
-              });
-            });
-            console.log(`[Router] self-evolve: ${steps.length} subtasks from orchestrator`);
-            return { success: true, taskId, subtaskCount: steps.length, via: 'orchestrator' };
-          }
-        }
-      } catch (err) {
-        console.warn(`[Router] orchestrator unreachable (${err.message}), falling back to simple decomposer`);
+        proc.on('error', () => resolve([]));
+        setTimeout(() => { proc.kill(); resolve([]); }, 25000);
+      });
+      if (steps.length > 0) {
+        this.subtaskManager.createParentTask(taskId, steps.length, strategy);
+        steps.forEach(step => {
+          this.capabilityRoute({
+            id: uuidv4(),
+            from: 'router',
+            to: `capability:coding`,
+            timestamp: Date.now(),
+            parentTaskId: taskId,
+            type: 'SUB_TASK',
+            capability: 'coding',
+            description: step,
+          });
+        });
+        console.log(`[Router] self-evolve: ${steps.length} subtasks from orchestrator`);
+        return { success: true, taskId, subtaskCount: steps.length, via: 'orchestrator' };
+      } else {
+        console.warn(`[Router] orchestrator returned no subtasks, falling back to simple decomposer`);
       }
     }
     // ─────────────────────────────────────────────────────────────
