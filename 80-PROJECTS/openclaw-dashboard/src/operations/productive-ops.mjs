@@ -582,48 +582,31 @@ export class PickNextProject extends ProductiveOperation {
   }
 
   /**
-   * 找两个项目之间的桥接概念
-   * 读取各自的 CLAUDE.md / README.md，提取高频词后取交集
+   * 找两个项目之间的桥接依赖
+   * 读取各自的 package.json，取 dependencies + devDependencies 的交集
    */
   _findBridgeConcepts(pathA, pathB) {
-    const textA = this._getProjectText(pathA);
-    const textB = this._getProjectText(pathB);
-    if (!textA || !textB) return null;
+    const depsA = this._getPackageDeps(pathA);
+    const depsB = this._getPackageDeps(pathB);
+    if (!depsA || !depsB) return null;
 
-    const wordsA = this._extractKeywords(textA);
-    const wordsB = this._extractKeywords(textB);
-
-    // 取交集（有意义的共享概念），按频次降序排列
-    const shared = [...wordsA].filter(w => wordsB.has(w));
+    const shared = [...depsA].filter(d => depsB.has(d));
     if (shared.length === 0) return null;
 
-    // 过滤掉 generic 概念词（这类词无联动价值）
-    const genericWords = new Set(['npm', 'json', 'github', 'install', 'projects', 'project',
-      'bash', 'shell', 'readme', 'file', 'files', 'folder', 'directory',
-      'windows', 'linux', 'mac', 'api', 'http', 'url', 'path', 'name', 'value',
-      'key', 'data', 'type', 'class', 'function', 'method', 'module', 'package',
-      'version', 'config', 'setting', 'options', 'default', 'usage', 'example',
-      'license', 'author', 'description', 'table', 'column', 'row', 'cell']);
-    const meaningfulShared = shared.filter(w => !genericWords.has(w.toLowerCase()));
-    if (meaningfulShared.length === 0) return null;
-
-    // 取交集里频次最高的（最核心的概念），避免随机选到低频词
-    return { shared: meaningfulShared[0], allShared: meaningfulShared.slice(0, 5) };
+    return { shared: shared[0], allShared: shared.slice(0, 5) };
   }
 
-  _getProjectText(projectPath) {
-    const fullPath = path.join(this.workspace, projectPath);
-    for (const f of ['CLAUDE.md', 'README.md', 'README.mds']) {
-      const p = path.join(fullPath, f);
-      try {
-        if (fs.existsSync(p)) {
-          const stat = fs.statSync(p);
-          if (stat.size > 100 * 1024) continue; // 跳过 > 100KB 的大文件
-          return fs.readFileSync(p, 'utf8').slice(0, 8000); // 取前 8000 字符
-        }
-      } catch { /* ignore */ }
-    }
-    return null;
+  _getPackageDeps(projectPath) {
+    const pkgPath = path.join(this.workspace, projectPath, 'package.json');
+    try {
+      if (!fs.existsSync(pkgPath)) return null;
+      const pkg = JSON.parse(fs.readFileSync(pkgPath, 'utf8'));
+      const deps = new Set([
+        ...Object.keys(pkg.dependencies || {}),
+        ...Object.keys(pkg.devDependencies || {}),
+      ]);
+      return deps;
+    } catch { return null; }
   }
 
   _extractKeywords(text) {
