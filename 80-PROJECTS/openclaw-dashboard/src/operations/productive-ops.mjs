@@ -379,7 +379,7 @@ export class PickNextProject extends ProductiveOperation {
 
   _lockFile() { return this._stateFile + '.lock'; }
 
-  _acquireLock(maxRetries = 3, intervalMs = 50) {
+  async _acquireLock(maxRetries = 3, intervalMs = 50) {
     const lockPath = this._lockFile();
     for (let i = 0; i < maxRetries; i++) {
       try {
@@ -387,12 +387,30 @@ export class PickNextProject extends ProductiveOperation {
         return true;
       } catch (e) {
         if (e.code !== 'EEXIST') return false;
-        // 文件存在，等待后重试
-        const start = Date.now();
-        while (Date.now() - start < intervalMs) { /* spin */ }
+        // 检测是否是陈腐锁（持有进程已退出），直接删除后重试
+        let stale = false;
+        try {
+          const pid = parseInt(fs.readFileSync(lockPath, 'utf8'), 10);
+          // PID <= 0 说明锁已损坏，视为陈腐
+          if (pid <= 0 || !this._isRunningPid(pid)) stale = true;
+        } catch { stale = true; }
+        if (stale) {
+          try { fs.unlinkSync(lockPath); } catch { /* ignore */ }
+          continue;
+        }
+        // 非陈腐锁，等待后重试
+        await new Promise(resolve => setTimeout(resolve, intervalMs));
       }
     }
     return false;
+  }
+
+  _isRunningPid(pid) {
+    try {
+      // Windows: process.kill(pid, 0) 会失败如果进程不存在
+      process.kill(pid, 0);
+      return true;
+    } catch { return false; }
   }
 
   _releaseLock() {
