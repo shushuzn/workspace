@@ -76,19 +76,31 @@ export function extractBridgePool(utterances) {
 
   const wordCount = new Map();
   for (const utt of utterances) {
+    // 移除链式思维前缀（英文指令如 "1. 2句以内。2. 结尾必须..."）
+    // 以及编号列表、数字前缀等干扰
+    const cleaned = utt
+      .replace(/^[A-Za-z][\s\S]*?(?:我需要|让我|Let me|The user|用户).*?[。？！\n]/g, '') // 移除英文链式思维
+      .replace(/^\d+[\.、\.\s]+/gm, '')   // 移除行首编号 "1. 2. "
+      .replace(/^[A-Za-z][：:]/gm, '')    // 移除行首英文前缀 "X:"
+      .replace(/[""''""'']/g, '')       // 移除引号
+      .replace(/[()（）【】\[\]]/g, '')   // 移除括号
+      .trim();
+
     // 提取 2-4 字的中文词/词组
-    const words = utt.match(/[\u4e00-\u9fa5]{2,4}/g) || [];
+    const words = cleaned.match(/[\u4e00-\u9fa5]{2,4}/g) || [];
     for (const w of words) {
       if (!stopWords.has(w) && !/^\d+$/.test(w)) {
         wordCount.set(w, (wordCount.get(w) || 0) + 1);
       }
     }
-    // 同时提取英文词
-    const enWords = utt.match(/[a-zA-Z]{3,}/g) || [];
-    for (const w of enWords) {
-      const lower = w.toLowerCase();
-      if (!stopWords.has(lower)) {
-        wordCount.set(w, (wordCount.get(w) || 0) + 1);
+    // 同时提取英文词（仅从含中文的句子中提取，避免纯英文链式思维干扰）
+    if (/[\u4e00-\u9fa5]/.test(cleaned)) {
+      const enWords = cleaned.match(/[a-zA-Z]{3,}/g) || [];
+      for (const w of enWords) {
+        const lower = w.toLowerCase();
+        if (!stopWords.has(lower)) {
+          wordCount.set(w, (wordCount.get(w) || 0) + 1);
+        }
       }
     }
   }
