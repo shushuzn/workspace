@@ -973,13 +973,19 @@ export class IdeaPool {
 
   /** 自动清理过时 idea（返回清理数量） */
   prune() {
-    const TTL = { seed: 3, proposal: 7, running: 14, shipped: null, killed: null, dormant: 30 };
+    const TTL_BASE = { seed: 3, proposal: 7, running: 14, shipped: null, killed: null, dormant: 30 };
     const ideas = this._read();
     const before = ideas.length;
     this._write(ideas.filter(idea => {
       if (idea.stage === 'shipped' || idea.stage === 'killed') return true;
-      const ttl = TTL[idea.stage];
+      let ttl = TTL_BASE[idea.stage];
       if (!ttl) return true;
+      // 高分 seed 获得延长保鲜期
+      if (idea.stage === 'seed' && idea.impact && idea.effort) {
+        const s = idea.impact * idea.effort;
+        if (s >= 6) ttl = 7;
+        else if (s >= 4) ttl = 5;
+      }
       return this._daysOld(idea.date) <= ttl;
     }));
     return before - ideas.length;

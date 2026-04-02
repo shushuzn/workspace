@@ -161,8 +161,13 @@ function cmdPrune() {
   let removed = 0;
   const kept = ideas.filter(idea => {
     if (idea.stage === 'shipped' || idea.stage === 'killed') return true;
-    const ttl = TTL_DAYS[idea.stage];
+    let ttl = TTL_DAYS[idea.stage];
     if (!ttl) return true;
+    if (idea.stage === 'seed' && idea.impact && idea.effort) {
+      const s = idea.impact * idea.effort;
+      if (s >= 6) ttl = 7;
+      else if (s >= 4) ttl = 5;
+    }
     return getDaysOld(idea.date) <= ttl;
   });
   removed = ideas.length - kept.length;
