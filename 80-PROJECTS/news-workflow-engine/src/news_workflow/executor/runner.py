@@ -56,6 +56,8 @@ class TaskExecutor:
             result["success"] = True
             result["action"] = action
             result["completed_at"] = datetime.now().isoformat()
+            if "output" in result:
+                result["output"] = result["output"]
             
             logger.info(f"Task completed: {task_name}")
             return result
@@ -91,9 +93,9 @@ class TaskExecutor:
         action_map = {
             "github": "github_search",
             "搜索": "github_search",
-            "分析": "analyze_project",
             "生成": "generate_report",
             "报告": "generate_report",
+            "分析": "analyze_project",
             "提取": "extract_data",
             "更新": "update_dashboard",
             "检查": "check_anomaly",
