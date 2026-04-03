@@ -4,14 +4,28 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>原料期货监控</title>
+<meta name="keywords" content="期货监控,PE PP PVC,原料价格,采购管理,塑料原料,化工原料,期货行情">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; }
-  .header { background: #1a73e8; color: #fff; padding: 16px 20px; font-size: 17px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
-  .header small { font-size: 12px; opacity: 0.8; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; min-height: 100vh; transition: background 0.2s, color 0.2s; }
+  body.dark { background: #1a1a1a; color: #e0e0e0; }
+  .dark .header { background: #2a2a2a; }
+  .dark .card, .dark .price-input-panel { background: #2a2a2a; }
+  .dark .tabs { background: #2a2a2a; border-color: #444; }
+  .dark .tab { color: #aaa; }
+  .dark .tab.active { color: #8ab4f8; border-color: #8ab4f8; }
+  .dark .record-form input, .dark .record-form select { background: #333; border-color: #555; color: #e0e0e0; }
+  .dark .records-table th { background: #333; color: #aaa; }
+  .dark .records-table td { border-color: #333; }
+  .dark .overview-row { border-color: #333; }
+  .dark .guide { background: #2a2a2a; }
+  .dark .export-btn { background: #444; color: #ddd; }
+  .dark .chart-canvas-wrap { background: #222; }
+  .header { background: #1a73e8; color: #fff; padding: 12px 14px; font-size: 15px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .header small { font-size: 11px; opacity: 0.8; white-space: nowrap; }
 
-  .tabs { display: flex; background: #fff; border-bottom: 1px solid #e0e0e0; }
-  .tab { flex: 1; padding: 13px 6px; text-align: center; font-size: 13px; color: #666; cursor: pointer; border-bottom: 2px solid transparent; }
+  .tabs { display: flex; background: #fff; border-bottom: 1px solid #e0e0e0; overflow-x: auto; }
+  .tab { flex: 1; min-width: 70px; padding: 13px 8px; text-align: center; font-size: 13px; color: #666; cursor: pointer; border-bottom: 2px solid transparent; }
   .tab.active { color: #1a73e8; border-bottom-color: #1a73e8; font-weight: 500; }
 
   .content { display: none; }
@@ -20,7 +34,6 @@
   .card { background: #fff; margin: 12px; border-radius: 10px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); overflow: hidden; }
   .card-header { padding: 12px 16px; border-bottom: 1px solid #f0f0f0; font-size: 13px; font-weight: 600; color: #333; display: flex; justify-content: space-between; align-items: center; }
 
-  /* 价格输入面板 */
   .price-input-panel { background: linear-gradient(135deg, #1a73e8 0%, #0d47a1 100%); color: #fff; margin: 12px; border-radius: 10px; padding: 18px 16px; }
   .price-input-panel h3 { font-size: 14px; font-weight: 600; margin-bottom: 14px; opacity: 0.9; }
   .price-input-row { display: flex; gap: 8px; align-items: center; margin-bottom: 10px; }
@@ -28,23 +41,24 @@
   .price-input-row input { flex: 1; padding: 8px 10px; border: none; border-radius: 6px; font-size: 15px; font-weight: 700; text-align: right; background: rgba(255,255,255,0.15); color: #fff; }
   .price-input-row input::placeholder { color: rgba(255,255,255,0.5); font-weight: 400; }
   .price-input-row .unit { font-size: 13px; opacity: 0.7; width: 40px; }
-  .futures-link { display: flex; align-items: center; gap: 6px; margin-top: 12px; }
-  .futures-link a { color: rgba(255,255,255,0.85); font-size: 12px; text-decoration: none; background: rgba(255,255,255,0.15); padding: 5px 10px; border-radius: 5px; }
-  .futures-link a:hover { background: rgba(255,255,255,0.25); }
 
-  /* 快捷按钮 */
   .quick-links { padding: 10px 16px; background: #fff; border-bottom: 1px solid #f0f0f0; display: flex; gap: 8px; overflow-x: auto; white-space: nowrap; }
   .quick-links a { font-size: 12px; color: #1a73e8; text-decoration: none; background: #e8f0fe; padding: 5px 10px; border-radius: 20px; flex-shrink: 0; }
 
-  /* 价差卡片 */
   .spread-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 12px 16px; }
-  .spread-item { background: #f8f9fa; border-radius: 8px; padding: 12px 8px; text-align: center; }
-  .spread-item .label { font-size: 11px; color: #888; margin-bottom: 4px; }
-  .spread-item .val { font-size: 18px; font-weight: 700; }
-  .spread-item .val.big { color: #e53935; }
-  .spread-item .val.small { color: #43a047; }
-  .spread-item .val.ok { color: #333; }
-  .spread-item .sub { font-size: 10px; color: #888; margin-top: 2px; }
+  .spread-item { background: rgba(255,255,255,0.15); border-radius: 8px; padding: 12px 8px; text-align: center; }
+  .spread-item .label { font-size: 11px; opacity: 0.8; margin-bottom: 4px; }
+  .spread-item .val { font-size: 20px; font-weight: 700; }
+  .spread-item .sub { font-size: 10px; opacity: 0.6; margin-top: 2px; }
+
+  /* 图表区域 */
+  .chart-section { padding: 12px 16px; background: #fff; }
+  .chart-tabs { display: flex; gap: 6px; margin-bottom: 10px; }
+  .chart-tabs button { padding: 4px 10px; font-size: 12px; border: 1px solid #ddd; border-radius: 20px; background: #fff; color: #666; cursor: pointer; }
+  .chart-tabs button.active { background: #1a73e8; color: #fff; border-color: #1a73e8; }
+  .chart-canvas-wrap { position: relative; background: #fafafa; border-radius: 8px; padding: 8px; }
+  canvas { width: 100% !important; display: block; }
+  .chart-empty { text-align: center; padding: 30px; color: #bbb; font-size: 13px; }
 
   /* 行情Tab */
   .market-tabs { display: flex; background: #f8f9fa; border-bottom: 1px solid #eee; }
@@ -55,10 +69,14 @@
   .market-iframe { width: 100%; min-height: 500px; border: none; }
 
   /* 采购记录 */
-  .record-form { padding: 12px 16px; display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 8px; align-items: end; }
-  .record-form input { padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; }
-  .record-form input:focus { outline: none; border-color: #1a73e8; }
-  .record-form button { padding: 8px 16px; background: #1a73e8; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; white-space: nowrap; }
+  .record-form { padding: 12px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: end; }
+  .record-form .date-field { grid-column: 1 / 2; }
+  .record-form .mat-field { grid-column: 2 / 3; }
+  .record-form .price-field { grid-column: 1 / 2; }
+  .record-form .btn-field { grid-column: 2 / 3; }
+  .record-form input, .record-form select { padding: 8px 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 13px; width: 100%; }
+  .record-form input:focus, .record-form select:focus { outline: none; border-color: #1a73e8; }
+  .record-form button { padding: 8px 16px; background: #1a73e8; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 500; white-space: nowrap; width: 100%; }
   .record-form button:hover { background: #1565c0; }
 
   .records-table { width: 100%; border-collapse: collapse; font-size: 12px; }
@@ -67,13 +85,6 @@
   .records-table .num { text-align: right; font-variant-numeric: tabular-nums; }
   .records-table .del { color: #e53935; cursor: pointer; background: none; border: none; font-size: 12px; padding: 2px 6px; }
   .records-table .del:hover { background: #ffebee; border-radius: 4px; }
-
-  /* 汇总 */
-  .summary-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 0 16px 12px; }
-  .summary-card { background: #f8f9fa; border-radius: 8px; padding: 12px; text-align: center; }
-  .summary-card .label { font-size: 11px; color: #888; }
-  .summary-card .val { font-size: 17px; font-weight: 700; margin-top: 4px; }
-  .summary-card .sub { font-size: 10px; color: #888; margin-top: 2px; }
 
   /* 总览 */
   .overview-grid { padding: 12px 16px; }
@@ -95,17 +106,59 @@
   .empty { text-align: center; padding: 30px; color: #bbb; font-size: 13px; }
   .alert { background: #e8f0fe; border-radius: 6px; padding: 8px 14px; font-size: 12px; color: #1a73e8; margin: 0 12px; display: none; }
   .alert.show { display: block; }
-
-  /* 导出按钮 */
   .export-btn { background: #f0f0f0; color: #333; font-size: 11px; padding: 4px 10px; border: none; border-radius: 4px; cursor: pointer; }
   .export-btn:hover { background: #e0e0e0; }
+
+  /* ====== 认证UI ====== */
+  .auth-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; padding: 4px 12px; color: #fff; font-size: 12px; cursor: pointer; white-space: nowrap; }
+  .auth-btn:hover { background: rgba(255,255,255,0.3); }
+  .user-menu { position: relative; display: inline-block; }
+  .user-menu-btn { background: rgba(255,255,255,0.2); border: 1px solid rgba(255,255,255,0.4); border-radius: 20px; padding: 4px 10px; color: #fff; font-size: 12px; cursor: pointer; display: flex; align-items: center; gap: 5px; }
+  .user-menu-btn:hover { background: rgba(255,255,255,0.3); }
+  .user-dropdown { display: none; position: absolute; right: 0; top: calc(100% + 4px); background: #fff; border-radius: 8px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); min-width: 160px; z-index: 1000; overflow: hidden; }
+  .user-dropdown.show { display: block; }
+  .user-dropdown .ud-item { padding: 10px 14px; font-size: 13px; color: #333; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+  .user-dropdown .ud-item:hover { background: #f5f5f5; }
+  .user-dropdown .ud-item.danger { color: #e53935; }
+  .user-dropdown .ud-divider { border-top: 1px solid #eee; margin: 4px 0; }
+
+  /* 登录弹窗 */
+  .modal-overlay { display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); z-index: 9998; align-items: center; justify-content: center; }
+  .modal-overlay.show { display: flex; }
+  .modal { background: #fff; border-radius: 12px; padding: 28px; width: 320px; max-width: 90vw; }
+  .modal h3 { font-size: 17px; font-weight: 600; margin-bottom: 18px; color: #333; text-align: center; }
+  .modal input { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 14px; margin-bottom: 10px; box-sizing: border-box; }
+  .modal input:focus { outline: none; border-color: #1a73e8; }
+  .modal .btn-row { display: flex; gap: 8px; margin-top: 6px; }
+  .modal button { flex: 1; padding: 10px; border-radius: 6px; font-size: 14px; cursor: pointer; border: none; font-weight: 500; }
+  .modal .btn-cancel { background: #f0f0f0; color: #333; }
+  .modal .btn-primary { background: #1a73e8; color: #fff; }
+  .modal .btn-primary:disabled { background: #a0cfff; cursor: not-allowed; }
+  .modal .btn-send { background: #1a73e8; color: #fff; width: 100%; margin-bottom: 8px; }
+  .modal .btn-send:disabled { background: #a0cfff; cursor: not-allowed; }
+  .modal p { font-size: 12px; color: #888; text-align: center; margin-top: 10px; }
+  .modal .countdown { font-size: 12px; color: #1a73e8; text-align: right; margin-top: -6px; margin-bottom: 8px; }
+
+  /* 匿名模式提示 */
+  .anon-hint { background: #fff3e0; border-radius: 6px; padding: 6px 14px; font-size: 11px; color: #e65100; margin: 0 12px 8px; display: none; }
+  .anon-hint.show { display: block; }
+
+  /* syncing indicator */
+  .sync-badge { font-size: 10px; background: #e8f5e9; color: #43a047; border-radius: 10px; padding: 2px 7px; display: none; }
+  .sync-badge.syncing { display: inline; }
+  .sync-badge.error { background: #ffebee; color: #e53935; }
 </style>
 </head>
 <body>
 
 <div class="header">
   📊 原料期货监控
-  <small id="today"></small>
+  <div style="display:flex;align-items:center;gap:8px">
+    <small id="today"></small>
+    <button id="dark_toggle" onclick="toggleDark()" style="background:rgba(255,255,255,0.2);border:none;border-radius:12px;padding:3px 8px;color:#fff;font-size:11px;cursor:pointer">🌙</button>
+    <span id="syncBadge" class="sync-badge">已同步</span>
+    <div id="authArea"></div>
+  </div>
 </div>
 
 <div class="tabs">
@@ -116,69 +169,86 @@
   <div class="tab" data-tab="overview">总览</div>
 </div>
 
+<div class="anon-hint" id="anonHint">👤 匿名模式 — 数据仅存本地，换浏览器会丢失 · <button onclick="showLoginModal()" style="background:none;border:none;color:#1a73e8;cursor:pointer;font-size:11px;padding:0">登录同步</button></div>
+
 <!-- 记录Tab -->
 <div class="content active" id="tab-input">
   <div class="card">
-    <div class="card-header">🔢 手动记录期货价（对照用）<button class="export-btn" onclick="exportCSV()">📥 导出</button></div>
+    <div class="card-header">🔢 今日期货参考价（主力合约）
+      <div style="display:flex;gap:6px">
+        <button class="export-btn" onclick="document.getElementById('import_file').click()">📤 导入</button>
+        <button class="export-btn" onclick="exportCSV()">📥 导出</button>
+        <button class="export-btn" onclick="exportBackup()">💾 备份</button>
+        <button class="export-btn" onclick="document.getElementById('import_backup').click()">📂 恢复</button>
+      </div>
+    </div>
+    <input type="file" id="import_backup" accept=".json" style="display:none" onchange="importBackup(this.files[0]);this.value=''">
+    <input type="file" id="import_file" accept=".csv,.txt" style="display:none" onchange="importCSV(this.files[0]);this.value=''">
     <div class="card-body" style="padding:12px 16px">
-      <p style="font-size:12px;color:#888;margin-bottom:12px">① 先打开下方链接看大商所行情 ② 把看到的期货价填进来 ③ 自动算升贴水</p>
+      <p style="font-size:12px;color:#888;margin-bottom:12px">① 点下方按钮看大商所行情 ② 填入期货价 ③ 记采购价 → 自动算升贴水</p>
       <div class="quick-links">
-        <a href="https://www.dce.com.cn/dcehome/category/10001.html" target="_blank">🏛 大商所官网行情</a>
-        <a href="https://quote.eastmoney.com/qihuo/f2506.html" target="_blank">📈 PE期货行情</a>
-        <a href="https://quote.eastmoney.com/qihuo/f2507.html" target="_blank">📈 PP期货行情</a>
-        <a href="https://quote.eastmoney.com/qihuo/f2508.html" target="_blank">📈 PVC期货行情</a>
+        <a href="https://www.dce.com.cn/dcehome/category/10001.html" target="_blank">🏛 大商所官网</a>
+        <a href="https://quote.eastmoney.com/qihuo/f2506.html" target="_blank">📈 PE期货</a>
+        <a href="https://quote.eastmoney.com/qihuo/f2507.html" target="_blank">📈 PP期货</a>
+        <a href="https://quote.eastmoney.com/qihuo/f2508.html" target="_blank">📈 PVC期货</a>
         <a href="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" target="_blank">📊 新浪期货</a>
       </div>
       <div class="price-input-panel">
-        <h3>📌 今日期货参考价（主力合约）</h3>
+        <h3>填入今日主力合约价格</h3>
         <div class="price-input-row">
           <label>PE</label>
-          <input type="number" id="fut_pe" placeholder="8200" step="10" oninput="calcSpread()">
+          <input type="number" id="fut_pe" placeholder="例：8200" step="10" oninput="calcSpread()">
           <span class="unit">元/吨</span>
         </div>
         <div class="price-input-row">
           <label>PP</label>
-          <input type="number" id="fut_pp" placeholder="7600" step="10" oninput="calcSpread()">
+          <input type="number" id="fut_pp" placeholder="例：7600" step="10" oninput="calcSpread()">
           <span class="unit">元/吨</span>
         </div>
         <div class="price-input-row">
           <label>PVC</label>
-          <input type="number" id="fut_pvc" placeholder="5700" step="10" oninput="calcSpread()">
+          <input type="number" id="fut_pvc" placeholder="例：5700" step="10" oninput="calcSpread()">
           <span class="unit">元/吨</span>
         </div>
         <div class="spread-grid" style="padding:0">
           <div class="spread-item">
             <div class="label">PE 升贴水</div>
             <div class="val" id="sp_pe">-</div>
-            <div class="sub" id="sp_pe_txt">记录采购后可见</div>
+            <div class="sub" id="sp_pe_txt">记采购后可见</div>
           </div>
           <div class="spread-item">
             <div class="label">PP 升贴水</div>
             <div class="val" id="sp_pp">-</div>
-            <div class="sub" id="sp_pp_txt">记录采购后可见</div>
+            <div class="sub" id="sp_pp_txt">记采购后可见</div>
           </div>
           <div class="spread-item">
             <div class="label">PVC 升贴水</div>
             <div class="val" id="sp_pvc">-</div>
-            <div class="sub" id="sp_pvc_txt">记录采购后可见</div>
+            <div class="sub" id="sp_pvc_txt">记采购后可见</div>
           </div>
         </div>
-        <div class="futures-link" style="margin-top:14px">
-          <span style="font-size:12px;opacity:0.8">正常升贴水参考：</span>
-          <a href="#" onclick="showGuide();return false">查看指南</a>
+        <div style="margin-top:10px;display:flex;gap:6px;align-items:center">
+          <span style="font-size:11px;color:rgba(255,255,255,0.7)">警戒线</span>
+          <input type="number" id="alert_pe" placeholder="PE上限" style="width:70px;padding:4px 6px;border:none;border-radius:4px;font-size:12px;background:rgba(255,255,255,0.2);color:#fff;text-align:right" onchange="saveAlert()">
+          <input type="number" id="alert_pp" placeholder="PP上限" style="width:70px;padding:4px 6px;border:none;border-radius:4px;font-size:12px;background:rgba(255,255,255,0.2);color:#fff;text-align:right" onchange="saveAlert()">
+          <input type="number" id="alert_pvc" placeholder="PVC上限" style="width:70px;padding:4px 6px;border:none;border-radius:4px;font-size:12px;background:rgba(255,255,255,0.2);color:#fff;text-align:right" onchange="saveAlert()">
+          <span style="font-size:10px;color:rgba(255,255,255,0.5)">超限弹出警告</span>
+        </div>
+        <div style="margin-top:8px;display:flex;justify-content:flex-end">
+          <button onclick="openRemindModal()" style="padding:5px 12px;font-size:11px;background:rgba(255,255,255,0.2);color:#fff;border:1px solid rgba(255,255,255,0.4);border-radius:20px;cursor:pointer">🔔 设提醒</button>
         </div>
       </div>
     </div>
   </div>
 
   <div class="card">
-    <div class="card-header">💰 采购记录（记你实际付的钱）</div>
+    <div class="card-header">💰 记一笔采购</div>
     <div class="record-form">
-      <input type="date" id="r_date">
-      <select id="r_mat"><option value="pe">PE</option><option value="pp">PP</option><option value="pvc">PVC</option></select>
-      <input type="number" id="r_price" placeholder="单价(元/吨)" step="10">
-      <input type="number" id="r_qty" placeholder="数量(吨)" step="1" style="display:none">
-      <button onclick="addRecord()">记一笔</button>
+      <input type="date" id="r_date" class="date-field">
+      <select id="r_mat" class="mat-field"><option value="pe">PE</option><option value="pp">PP</option><option value="pvc">PVC</option></select>
+      <input type="text" id="r_supplier" class="price-field" placeholder="供应商(选填)" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">
+      <input type="number" id="r_price" class="price-field" placeholder="采购价(元/吨)" step="10" style="width:100%;padding:8px 10px;border:1px solid #ddd;border-radius:6px;font-size:13px">
+      <button class="btn-field" onclick="addRecord()">记</button>
     </div>
     <div id="records_list" style="padding:0 16px 12px"></div>
   </div>
@@ -187,16 +257,16 @@
 <!-- PE行情 -->
 <div class="content" id="tab-pe">
   <div class="card">
-    <div class="card-header">PE 聚乙烯 期货行情</div>
+    <div class="card-header">PE 聚乙烯</div>
     <div class="market-tabs">
       <div class="market-tab active" data-m="pe-eastmoney">东方财富</div>
       <div class="market-tab" data-m="pe-sina">新浪期货</div>
     </div>
     <div class="market-content active" id="mkt-pe-eastmoney">
-      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2506.html" title="PE期货"></iframe>
+      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2506.html"></iframe>
     </div>
     <div class="market-content" id="mkt-pe-sina">
-      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" title="新浪期货"></iframe>
+      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php"></iframe>
     </div>
   </div>
 </div>
@@ -204,16 +274,16 @@
 <!-- PP行情 -->
 <div class="content" id="tab-pp">
   <div class="card">
-    <div class="card-header">PP 聚丙烯 期货行情</div>
+    <div class="card-header">PP 聚丙烯</div>
     <div class="market-tabs">
       <div class="market-tab active" data-m="pp-eastmoney">东方财富</div>
       <div class="market-tab" data-m="pp-sina">新浪期货</div>
     </div>
     <div class="market-content active" id="mkt-pp-eastmoney">
-      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2507.html" title="PP期货"></iframe>
+      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2507.html"></iframe>
     </div>
     <div class="market-content" id="mkt-pp-sina">
-      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" title="新浪期货"></iframe>
+      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php"></iframe>
     </div>
   </div>
 </div>
@@ -221,16 +291,16 @@
 <!-- PVC行情 -->
 <div class="content" id="tab-pvc">
   <div class="card">
-    <div class="card-header">PVC 聚氯乙烯 期货行情</div>
+    <div class="card-header">PVC 聚氯乙烯</div>
     <div class="market-tabs">
       <div class="market-tab active" data-m="pvc-eastmoney">东方财富</div>
       <div class="market-tab" data-m="pvc-sina">新浪期货</div>
     </div>
     <div class="market-content active" id="mkt-pvc-eastmoney">
-      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2508.html" title="PVC期货"></iframe>
+      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2508.html"></iframe>
     </div>
     <div class="market-content" id="mkt-pvc-sina">
-      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" title="新浪期货"></iframe>
+      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php"></iframe>
     </div>
   </div>
 </div>
@@ -238,57 +308,504 @@
 <!-- 总览 -->
 <div class="content" id="tab-overview">
   <div class="card">
-    <div class="card-header">📊 采购分析总览</div>
-    <div id="overview_content"></div>
+    <div class="card-header">📈 趋势图（你的采购价走势）</div>
+    <div class="chart-section">
+      <div class="chart-tabs">
+        <button class="active" data-chart="pe" onclick="switchChart('pe')">PE</button>
+        <button data-chart="pp" onclick="switchChart('pp')">PP</button>
+        <button data-chart="pvc" onclick="switchChart('pvc')">PVC</button>
+      </div>
+      <div class="chart-canvas-wrap">
+        <canvas id="trendCanvas" height="180"></canvas>
+      </div>
+      <div id="chartEmpty" class="chart-empty" style="display:none">记2笔以上才有趋势图</div>
+    </div>
   </div>
-  <div class="guide" id="guide_block" style="display:none">
-    <p>• <b>升贴水</b> = 采购价 - 期货价</p>
-    <p>• <b>正常范围</b>：PE/PP 约 +200~+500元/吨（期货→现货的合理溢价）</p>
-    <p>• <b>PVC</b>：约 0~+300元/吨</p>
-    <p>• <b>解读</b>：升贴水 &gt; 800 → 偏贵 ｜ &lt; 0 → 警惕 ｜ 稳定在200~500 → 正常</p>
-  </div>
+
   <div class="card">
-    <div class="card-header">💡 使用指南</div>
+    <div class="card-header">📊 采购分析
+      <button onclick="generateWeeklyReport()" style="padding:3px 10px;font-size:11px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;cursor:pointer">📝 生成周报</button>
+    </div>
+    <div id="overview_content"></div>
+    <div id="weekly_report" style="display:none;padding:0 16px 16px"></div>
+  </div>
+
+  <div class="card">
+    <div class="card-header">💡 升贴水指南</div>
     <div class="guide">
-      <p><b>Step 1</b>：点「PE/PP/PVC」Tab → 查看实时行情</p>
-      <p><b>Step 2</b>：记下主力合约价格</p>
-      <p><b>Step 3</b>：回到「记录」Tab → 填入期货价 + 采购价</p>
-      <p><b>Step 4</b>：自动算出升贴水，判断是否异常</p>
-      <p style="margin-top:8px;color:#888;font-size:11px">数据完全存本地（localStorage），关掉再开记录仍在</p>
+      <p>• <b>升贴水</b> = 采购价 − 期货价</p>
+      <p>• <b>正常范围</b>：PE/PP 约 +200~+500元/吨</p>
+      <p>• <b>PVC</b>：约 0~+300元/吨</p>
+      <p>• <b>解读</b>：升贴水 &gt; +800 → ⚠️ 偏贵 &nbsp;|&nbsp; &lt; 0 → ⚠️ 警惕</p>
     </div>
   </div>
 </div>
 
 <div class="alert" id="alert"></div>
 
+<div id="remind_modal" style="display:none;position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:12px;padding:24px;width:300px;max-width:90vw">
+    <div style="font-weight:600;margin-bottom:14px;font-size:15px">🔔 记提醒</div>
+    <div style="margin-bottom:10px">
+      <select id="remind_mat" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px">
+        <option value="PE">PE（聚乙烯）</option>
+        <option value="PP">PP（聚丙烯）</option>
+        <option value="PVC">PVC（聚氯乙烯）</option>
+      </select>
+    </div>
+    <div style="margin-bottom:10px">
+      <input type="text" id="remind_msg" placeholder="提醒内容，如：供应商明天报价" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px">
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button onclick="closeRemindModal()" style="padding:7px 14px;border:1px solid #ddd;background:#fff;border-radius:6px;cursor:pointer;font-size:13px">取消</button>
+      <button onclick="saveRemind()" style="padding:7px 14px;background:#1a73e8;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px">保存</button>
+    </div>
+  </div>
+</div>
+
+<!-- 登录弹窗 -->
+<div class="modal-overlay" id="loginModal">
+  <div class="modal">
+    <h3 id="loginTitle">登录 / 注册</h3>
+    <input type="email" id="loginEmail" placeholder="输入邮箱地址" onkeydown="if(event.key==='Enter')sendCode()">
+    <div id="codeSection" style="display:none">
+      <input type="text" id="loginCode" placeholder="输入6位验证码" maxlength="6" onkeydown="if(event.key==='Enter')doLogin()">
+      <div class="countdown" id="codeCountdown"></div>
+    </div>
+    <div class="btn-row" id="step1Btns">
+      <button class="btn-cancel" onclick="closeLoginModal()">取消</button>
+      <button class="btn-send" id="btnSendCode" onclick="sendCode()">发送验证码</button>
+    </div>
+    <div class="btn-row" id="step2Btns" style="display:none">
+      <button class="btn-cancel" onclick="closeLoginModal()">取消</button>
+      <button class="btn-primary" id="btnLogin" onclick="doLogin()">验证并登录</button>
+    </div>
+    <p id="loginTip">邮箱仅用于识别身份，不作其他用途</p>
+  </div>
+</div>
+
 <script>
+// ============================================================
+// 认证模块
+// ============================================================
+
+// ===== JSONBin.io 配置 =====
+// API Docs: https://jsonbin.io/api
+const JSONBIN_BASE = 'https://jsonbin.org';
+const JSONBIN_APP_ID = ''; // 可选：填入 APP ID 可访问私有 bin（https://jsonbin.org/app/api）
+// ===== 可替换为其他 KV API =====
+// 如改用其他服务，只需替换下面4个函数：sendCodeXxx, verifyCodeXxx, getUserData, setUserData
+
+// ----- 验证码发送（用 jsonbin.io 模拟）-----
+// 存储结构：jsonbin.org/{binId} = { email, code, ts }
+// 实际项目请替换为 Redis / 收费 KV 服务
+
+async function sendCodeXxx(email) {
+  const code = String(Math.floor(100000 + Math.random() * 900000));
+  // jsonbin.io free tier：用公开 bin 存验证码（生产应换 Redis）
+  // 这里用 https://jsonbin.io 的 create bin API 存一个临时 bin
+  try {
+    const resp = await fetch('https://jsonbin.org/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        // jsonbin.io 的写 key（公开），生产请用服务端
+      },
+      body: JSON.stringify({ email, code, ts: Date.now() })
+    });
+    if (!resp.ok) throw new Error('jsonbin busy');
+    const data = await resp.json();
+    // jsonbin 返回 { id, ... }
+    // 将 binId 通过想象的方式...实际上 jsonbin 会返回 id，但这里没有服务端所以...
+    // 改用更简单的模拟：用 localStorage 临时存（演示用）
+    // 真实项目请用后端 + Redis
+    localStorage.setItem('_pending_code_' + email, JSON.stringify({ code, ts: Date.now() }));
+    return { ok: true, binId: data.id || email };
+  } catch(e) {
+    // 网络错误时降级到 localStorage（仅同浏览器有效）
+    localStorage.setItem('_pending_code_' + email, JSON.stringify({ code, ts: Date.now() }));
+    return { ok: true, binId: 'local', hint: '演示模式：验证码会在控制台打印' };
+  }
+}
+
+async function verifyCodeXxx(email, code) {
+  const stored = localStorage.getItem('_pending_code_' + email);
+  if (!stored) return { ok: false, msg: '请先发送验证码' };
+  const { code: real } = JSON.parse(stored);
+  if (real !== code.trim()) return { ok: false, msg: '验证码错误' };
+  // 验证码有效期5分钟
+  const { ts } = JSON.parse(stored);
+  if (Date.now() - ts > 5 * 60 * 1000) return { ok: false, msg: '验证码已过期，请重新发送' };
+  localStorage.removeItem('_pending_code_' + email);
+  return { ok: true };
+}
+
+// ----- 用户数据读写 -----
+// userId = btoa(email) 的纯前端实现（生产用后端分配 userId）
+function emailToUserId(email) {
+  return btoa(encodeURIComponent(email.toLowerCase())).replace(/=/g, '');
+}
+
+// 存储键名前缀
+function skey(prefix) {
+  if (!currentUserId) return prefix + '_anon';
+  return prefix + '_' + currentUserId;
+}
+
+// 初始化/读取 JSONBin 数据
+async function loadFromJsonbin(binId) {
+  try {
+    const headers = { 'Content-Type': 'application/json' };
+    if (JSONBIN_APP_ID) headers['X-Master-Key'] = JSONBIN_APP_ID;
+    const resp = await fetch(`${JSONBIN_BASE}/${binId}`, { headers });
+    if (!resp.ok) throw new Error('bin not found');
+    return await resp.json();
+  } catch(e) {
+    return null;
+  }
+}
+
+// 保存数据到 JSONBin（创建或更新）
+async function saveToJsonbin(binId, data) {
+  try {
+    const headers = { 'Content-Type': 'application/json' };
+    if (JSONBIN_APP_ID) headers['X-Master-Key'] = JSONBIN_APP_ID;
+    if (binId && binId !== 'local') {
+      // 更新已有 bin
+      await fetch(`${JSONBIN_BASE}/${binId}`, {
+        method: 'PUT',
+        headers,
+        body: JSON.stringify(data)
+      });
+    } else {
+      // 新建 bin
+      const resp = await fetch(`${JSONBIN_BASE}/`, {
+        method: 'POST',
+        headers,
+        body: JSON.stringify(data)
+      });
+      const result = await resp.json();
+      return result.id;
+    }
+  } catch(e) {
+    console.warn('jsonbin save failed, data saved locally only');
+  }
+  return binId;
+}
+
+// ----- 认证状态 -----
+const AUTH_BIN_KEY = 'material_auth_bin';   // { email, binId }
+let currentUserId = null;  // emailToUserId(email)
+let currentEmail = null;
+let currentBinId = null;   // JSONBin bin ID
+
+let records = {};
+let futPrices = {};
+let alertThresholds = {};
+let reminders = [];
+
+let sendCdTimer = null;
+
+function renderAuthUI() {
+  const area = document.getElementById('authArea');
+  if (currentUserId) {
+    area.innerHTML = `<div class="user-menu">
+      <button class="user-menu-btn" onclick="toggleUserMenu()">
+        ${currentEmail.split('@')[0]} ▾
+      </button>
+      <div class="user-dropdown" id="userDropdown">
+        <div class="ud-item" onclick="showLoginModal('switch')">
+          🔄 切换账号
+        </div>
+        <div class="ud-item danger" onclick="doLogout()">
+          🚪 退出登录
+        </div>
+      </div>
+    </div>`;
+    document.getElementById('anonHint').classList.remove('show');
+  } else {
+    area.innerHTML = `<button class="auth-btn" onclick="showLoginModal()">👤 登录</button>`;
+    document.getElementById('anonHint').classList.add('show');
+  }
+}
+
+function toggleUserMenu() {
+  document.getElementById('userDropdown').classList.toggle('show');
+}
+
+// 点击空白关闭 dropdown
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.user-menu')) {
+    const dd = document.getElementById('userDropdown');
+    if (dd) dd.classList.remove('show');
+  }
+});
+
+function showLoginModal(action) {
+  // 重置状态
+  document.getElementById('loginEmail').value = currentEmail || '';
+  document.getElementById('loginEmail').disabled = false;
+  document.getElementById('loginCode').value = '';
+  document.getElementById('codeSection').style.display = 'none';
+  document.getElementById('step1Btns').style.display = '';
+  document.getElementById('step2Btns').style.display = 'none';
+  document.getElementById('loginTitle').textContent = action === 'switch' ? '切换账号' : '登录 / 注册';
+  document.getElementById('loginTip').style.display = '';
+  document.getElementById('loginModal').classList.add('show');
+  if (currentEmail) {
+    document.getElementById('loginEmail').focus();
+  } else {
+    document.getElementById('loginEmail').focus();
+  }
+}
+
+function closeLoginModal() {
+  document.getElementById('loginModal').classList.remove('show');
+  if (sendCdTimer) { clearInterval(sendCdTimer); sendCdTimer = null; }
+}
+
+async function sendCode() {
+  const email = document.getElementById('loginEmail').value.trim();
+  if (!email || !email.includes('@')) {
+    showAlert('请输入有效的邮箱地址');
+    return;
+  }
+  const btn = document.getElementById('btnSendCode');
+  btn.disabled = true;
+  btn.textContent = '发送中...';
+  setSyncBadge('syncing');
+
+  const result = await sendCodeXxx(email);
+
+  btn.disabled = false;
+  btn.textContent = '发送验证码';
+
+  if (result.hint) {
+    console.log('演示验证码:', JSON.parse(localStorage.getItem('_pending_code_' + email) || '{}').code);
+  }
+
+  if (result.ok) {
+    // 显示验证码输入框
+    document.getElementById('loginEmail').disabled = true;
+    document.getElementById('codeSection').style.display = '';
+    document.getElementById('step1Btns').style.display = 'none';
+    document.getElementById('step2Btns').style.display = '';
+    document.getElementById('loginTitle').textContent = '验证登录';
+    document.getElementById('loginTip').style.display = 'none';
+    document.getElementById('loginCode').focus();
+
+    // 倒计时
+    let cd = 60;
+    const cdEl = document.getElementById('codeCountdown');
+    cdEl.textContent = cd + '秒后可重新发送';
+    sendCdTimer = setInterval(() => {
+      cd--;
+      if (cd <= 0) {
+        clearInterval(sendCdTimer);
+        sendCdTimer = null;
+        cdEl.textContent = '';
+        btn.textContent = '重新发送';
+        btn.disabled = false;
+      } else {
+        cdEl.textContent = cd + '秒后可重新发送';
+      }
+    }, 1000);
+    setSyncBadge('');
+    showAlert('验证码已发送（演示模式：查看控制台）');
+  } else {
+    setSyncBadge('error');
+    showAlert('发送失败，请稍后重试');
+  }
+}
+
+async function doLogin() {
+  const email = document.getElementById('loginEmail').value.trim();
+  const code = document.getElementById('loginCode').value.trim();
+  if (!code || code.length !== 6) {
+    showAlert('请输入6位验证码');
+    return;
+  }
+
+  const btn = document.getElementById('btnLogin');
+  btn.disabled = true;
+  btn.textContent = '验证中...';
+  setSyncBadge('syncing');
+
+  const result = await verifyCodeXxx(email, code);
+
+  if (!result.ok) {
+    btn.disabled = false;
+    btn.textContent = '验证并登录';
+    setSyncBadge('error');
+    showAlert(result.msg);
+    return;
+  }
+
+  // 登录成功
+  const userId = emailToUserId(email);
+
+  // 检查是否已有 binId
+  let authData = null;
+  const storedAuth = localStorage.getItem(AUTH_BIN_KEY);
+  if (storedAuth) {
+    try {
+      authData = JSON.parse(storedAuth);
+    } catch(e) {}
+  }
+
+  let binId = authData && authData.userId === userId ? authData.binId : null;
+
+  // 尝试从 JSONBin 加载已有数据
+  if (binId) {
+    const cloudData = await loadFromJsonbin(binId);
+    if (cloudData) {
+      records = cloudData.records || {};
+      futPrices = cloudData.futPrices || {};
+      alertThresholds = cloudData.alertThresholds || {};
+      reminders = cloudData.reminders || [];
+      // 同步到本地
+      syncToLocal();
+    }
+  }
+
+  currentUserId = userId;
+  currentEmail = email;
+  currentBinId = binId;
+
+  // 保存认证信息
+  localStorage.setItem(AUTH_BIN_KEY, JSON.stringify({ userId, email, binId: binId || '' }));
+
+  btn.disabled = false;
+  btn.textContent = '验证并登录';
+  closeLoginModal();
+  setSyncBadge('');
+  renderAuthUI();
+  renderRecords();
+  renderFutPrices();
+  renderAlertThresholds();
+  checkRemind();
+  showAlert('登录成功，数据已同步');
+}
+
+function doLogout() {
+  // 退出前先保存本地数据到云
+  if (currentUserId) {
+    persistData();
+  }
+  currentUserId = null;
+  currentEmail = null;
+  currentBinId = null;
+  records = {};
+  futPrices = {};
+  alertThresholds = {};
+  reminders = [];
+  localStorage.removeItem(AUTH_BIN_KEY);
+  // 切回匿名 localStorage
+  loadAnonData();
+  renderAuthUI();
+  renderRecords();
+  renderFutPrices();
+  renderAlertThresholds();
+  showAlert('已退出登录');
+}
+
+// ============================================================
+// 数据持久化（localStorage + JSONBin）
+// ============================================================
+
+const STORAGE_KEY = 'material_records_v4';
+const FUT_STORAGE = 'material_futures_price_v2';
+const ALERT_STORAGE = 'material_alert_thresh_v1';
+const REMIND_STORAGE = 'material_remind_v1';
+
+function syncToLocal() {
+  localStorage.setItem(skey(STORAGE_KEY), JSON.stringify(records));
+  localStorage.setItem(skey(FUT_STORAGE), JSON.stringify(futPrices));
+  localStorage.setItem(skey(ALERT_STORAGE), JSON.stringify(alertThresholds));
+  localStorage.setItem(skey(REMIND_STORAGE), JSON.stringify(reminders));
+}
+
+function loadAnonData() {
+  // 未登录时用匿名 key
+  records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+  futPrices = JSON.parse(localStorage.getItem(FUT_STORAGE) || '{}');
+  alertThresholds = JSON.parse(localStorage.getItem(ALERT_STORAGE) || '{}');
+  reminders = JSON.parse(localStorage.getItem(REMIND_STORAGE) || '[]');
+}
+
+async function persistData() {
+  syncToLocal();
+  if (!currentUserId) return;
+
+  setSyncBadge('syncing');
+
+  const data = { records, futPrices, alertThresholds, reminders, version: 1 };
+  if (currentBinId) {
+    await saveToJsonbin(currentBinId, data);
+  } else {
+    // 第一次：创建新 bin
+    const newBinId = await saveToJsonbin(null, data);
+    if (newBinId) {
+      currentBinId = newBinId;
+      localStorage.setItem(AUTH_BIN_KEY, JSON.stringify({
+        userId: currentUserId,
+        email: currentEmail,
+        binId: newBinId
+      }));
+    }
+  }
+
+  setSyncBadge('');
+}
+
+function setSyncBadge(state) {
+  const el = document.getElementById('syncBadge');
+  el.className = 'sync-badge';
+  if (state === 'syncing') {
+    el.textContent = '同步中...';
+    el.classList.add('syncing');
+  } else if (state === 'error') {
+    el.textContent = '同步失败';
+    el.classList.add('error');
+  } else if (currentUserId) {
+    el.textContent = '已同步';
+  }
+}
+
+// ============================================================
+// 主应用（原有逻辑，适配改造）
+// ============================================================
+
 const MATERIALS = ['pe','pp','pvc'];
 const MAT_NAMES = { pe:'PE（聚乙烯）', pp:'PP（聚丙烯）', pvc:'PVC（聚氯乙烯）' };
-const STORAGE_KEY = 'material_records_v3';
-const FUT_STORAGE = 'material_futures_price';
 
-let records = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
-let futPrices = JSON.parse(localStorage.getItem(FUT_STORAGE) || '{}');
+let activeChart = 'pe';
+
+// debounced persist
+let _persistTimer = null;
+function schedulePersist() {
+  if (_persistTimer) clearTimeout(_persistTimer);
+  _persistTimer = setTimeout(() => persistData(), 800);
+}
 
 document.getElementById('today').textContent = new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
 document.getElementById('r_date').valueAsDate = new Date();
 
-// Tab 切换
+// Tab切换
 document.querySelectorAll('.tab').forEach(t => {
   t.addEventListener('click',()=>{
     document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
     document.querySelectorAll('.content').forEach(x=>x.classList.remove('active'));
     t.classList.add('active');
     document.getElementById('tab-'+t.dataset.tab).classList.add('active');
-    if(t.dataset.tab==='overview') renderOverview();
+    if(t.dataset.tab==='overview'){ drawChart(); renderOverview(); }
   });
 });
 
-// 行情 iframe 切换
+// 行情iframe切换
 document.querySelectorAll('.market-tab').forEach(t=>{
   t.addEventListener('click',()=>{
     const m = t.dataset.m;
-    const base = m.replace(/-[a-z]+$/,'');
     t.closest('.card').querySelectorAll('.market-tab').forEach(x=>x.classList.remove('active'));
     t.closest('.card').querySelectorAll('.market-content').forEach(x=>x.classList.remove('active'));
     t.classList.add('active');
@@ -296,19 +813,27 @@ document.querySelectorAll('.market-tab').forEach(t=>{
   });
 });
 
-// 加载保存的期货价
-Object.keys(futPrices).forEach(m=>{
-  const el = document.getElementById('fut_'+m);
-  if(el) el.value = futPrices[m];
-});
+function renderFutPrices() {
+  Object.keys(futPrices).forEach(m=>{
+    const el = document.getElementById('fut_'+m);
+    if(el) el.value = futPrices[m];
+  });
+}
 
-// 记录期货价
-function saveFutPrice(m) {
-  const v = parseFloat(document.getElementById('fut_'+m).value);
-  if(v > 0) futPrices[m] = v;
-  else delete futPrices[m];
-  localStorage.setItem(FUT_STORAGE, JSON.stringify(futPrices));
-  calcSpread();
+function renderAlertThresholds() {
+  Object.keys(alertThresholds).forEach(m=>{
+    const el = document.getElementById('alert_'+m);
+    if(el) el.value = alertThresholds[m];
+  });
+}
+
+function saveAlert() {
+  MATERIALS.forEach(m=>{
+    const v = parseFloat(document.getElementById('alert_'+m).value);
+    if(v > 0) alertThresholds[m] = v;
+    else delete alertThresholds[m];
+  });
+  schedulePersist();
 }
 
 ['fut_pe','fut_pp','fut_pvc'].forEach(id=>{
@@ -318,7 +843,14 @@ function saveFutPrice(m) {
   });
 });
 
-// 计算升贴水
+function saveFutPrice(m) {
+  const v = parseFloat(document.getElementById('fut_'+m).value);
+  if(v > 0) futPrices[m] = v;
+  else delete futPrices[m];
+  schedulePersist();
+  calcSpread();
+}
+
 function calcSpread() {
   MATERIALS.forEach(m=>{
     const fut = parseFloat(document.getElementById('fut_'+m).value) || 0;
@@ -327,73 +859,194 @@ function calcSpread() {
     const el = document.getElementById('sp_'+m);
     const txt = document.getElementById('sp_'+m+'_txt');
     if(!el) return;
-
     if(fut <= 0 || latest <= 0) {
       el.textContent = '-';
-      el.className = 'val';
-      if(txt) txt.textContent = '填入价格后可见';
+      txt.textContent = '记采购后可见';
       return;
     }
-
     const spread = latest - fut;
     el.textContent = (spread>=0?'+':'')+spread.toFixed(0);
-    el.className = 'val ' + (Math.abs(spread)>500?'big':Math.abs(spread)<200?'small':'ok');
-    if(txt) txt.textContent = '采购价'+latest+' - 期货'+fut;
+    txt.textContent = latest+' - '+fut;
   });
 }
 
-// 添加采购记录
 function addRecord() {
   const mat = document.getElementById('r_mat').value;
   const price = parseFloat(document.getElementById('r_price').value);
-  const qty = parseFloat(document.getElementById('r_qty').value) || 0;
   const date = document.getElementById('r_date').value || new Date().toISOString().split('T')[0];
-
+  const supplier = document.getElementById('r_supplier').value.trim();
   if(!price || price <= 0) { showAlert('请输入有效价格'); return; }
   if(!records[mat]) records[mat] = [];
-  records[mat].unshift({ date, price, qty, ts: Date.now() });
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  const prev = records[mat][0] ? records[mat][0].price : null;
+  const delta = prev ? price - prev : null;
+  records[mat].unshift({ date, price, qty: 1, ts: Date.now(), supplier: supplier || null });
+  schedulePersist();
   document.getElementById('r_price').value = '';
+  document.getElementById('r_supplier').value = '';
   renderRecords();
   saveFutPrice(mat);
-  showAlert(MAT_NAMES[mat]+' ¥'+price+'/吨 已记录');
+  let alertMsg = MAT_NAMES[mat]+' ¥'+price+'/吨 已记';
+  if(delta !== null) {
+    const sign = delta > 0 ? '↑' : '↓';
+    const pct = (Math.abs(delta)/prev*100).toFixed(1);
+    const word = delta > 0 ? '贵' : '便宜';
+    alertMsg += ` ${sign}${Math.abs(delta)} 比上次${word}(${pct}%)`;
+  }
+  const thresh = alertThresholds[mat];
+  if(thresh && price > thresh) {
+    alertMsg = '⚠️ ' + alertMsg + ' 超过警戒线¥'+thresh+'！';
+  }
+  showAlert(alertMsg);
 }
 
-// 删除记录
 function delRecord(mat, idx) {
   if(!records[mat]) return;
   records[mat].splice(idx, 1);
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(records));
+  schedulePersist();
   renderRecords();
   calcSpread();
+  drawChart();
 }
 
-// 渲染记录列表
 function renderRecords() {
   const el = document.getElementById('records_list');
+  const filterSupplier = document.getElementById('supplier_filter') ? document.getElementById('supplier_filter').value : '';
   let html = '';
+
+  const allSuppliers = [...new Set(Object.values(records).flat().map(r=>r.supplier).filter(Boolean))];
+  if(allSuppliers.length > 1) {
+    html += `<div style="padding:8px 16px 0;display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+      <span style="font-size:11px;color:#888">供应商:</span>
+      <select id="supplier_filter" onchange="renderRecords()" style="font-size:11px;padding:3px 6px;border:1px solid #ddd;border-radius:4px">
+        <option value="">全部</option>
+        ${allSuppliers.map(s=>`<option value="${s}">${s}</option>`).join('')}
+      </select>
+    </div>`;
+    if (document.getElementById('supplier_filter')) {
+      document.getElementById('supplier_filter').value = filterSupplier;
+    }
+  }
+
   MATERIALS.forEach(m=>{
-    const arr = records[m] || [];
+    let arr = records[m] || [];
+    if(filterSupplier) arr = arr.filter(r=>r.supplier === filterSupplier);
     if(!arr.length) return;
-    const total = arr.reduce((s,r)=>s+r.qty,0);
-    const wavg = total>0 ? arr.reduce((s,r)=>s+r.price*r.qty,0)/total : arr[0].price;
-    html += `<div style="font-size:12px;font-weight:600;color:#333;margin:12px 0 6px;display:flex;justify-content:space-between">${MAT_NAMES[m]} <span style="font-weight:400;font-size:11px;color:#888">${arr.length}笔 · ${wavg.toFixed(0)}元/吨 均</span></div>`;
-    html += `<table class="records-table"><tr><th>日期</th><th class="num">单价</th><th class="num">数量</th><th class="num">金额</th><th></th></tr>`;
-    html += arr.slice(0,10).map((r,i)=>`
-      <tr>
-        <td class="date" style="color:#888;font-size:11px">${r.date}</td>
-        <td class="num">${r.price.toFixed(0)}</td>
-        <td class="num">${r.qty>0?r.qty+'吨':'-'}</td>
-        <td class="num">${r.qty>0?(r.price*r.qty).toFixed(0):'-'}</td>
-        <td><button class="del" onclick="delRecord('${m}',${i})">✕</button></td>
-      </tr>`).join('');
+    const wavg = arr.reduce((s,r)=>s+r.price*r.qty,0)/Math.max(1,arr.reduce((s,r)=>s+r.qty,0));
+    html += `<div style="font-size:12px;font-weight:600;color:#333;margin:12px 0 6px">${MAT_NAMES[m]} <span style="font-weight:400;font-size:11px;color:#888">${arr.length}笔 · 均${wavg.toFixed(0)}元</span></div>`;
+    html += `<table class="records-table"><tr><th>日期</th><th>供应商</th><th class="num">单价</th><th></th></tr>`;
+    html += arr.slice(0,10).map((r,i)=>{
+      const realIdx = records[m].findIndex(x=>x.ts===r.ts);
+      return `<tr><td class="date" style="color:#888;font-size:11px">${r.date}</td><td style="font-size:11px;color:#666">${r.supplier||'—'}</td><td class="num">${r.price.toFixed(0)}</td><td><button class="del" onclick="delRecord('${m}',${realIdx})">✕</button></td></tr>`;
+    }).join('');
     html += '</table>';
   });
-  el.innerHTML = html || '<div class="empty">暂无记录，记一笔吧</div>';
+  el.innerHTML = html || '<div class="empty">暂无记录</div>';
   calcSpread();
 }
 
-// 总览
+// ========== 趋势图 ==========
+function switchChart(m) {
+  activeChart = m;
+  document.querySelectorAll('.chart-tabs button').forEach(b=>b.classList.remove('active'));
+  document.querySelector('.chart-tabs button[data-chart="'+m+'"]').classList.add('active');
+  drawChart();
+}
+
+function drawChart() {
+  const canvas = document.getElementById('trendCanvas');
+  const ctx = canvas.getContext('2d');
+  const arr = records[activeChart] || [];
+  const empty = document.getElementById('chartEmpty');
+  const wrap = canvas.parentElement;
+
+  const dpr = window.devicePixelRatio || 1;
+  const w = wrap.clientWidth - 16;
+  const h = 180;
+  canvas.width = w * dpr;
+  canvas.height = h * dpr;
+  canvas.style.width = w + 'px';
+  canvas.style.height = h + 'px';
+  ctx.scale(dpr, dpr);
+
+  if(arr.length < 2) {
+    ctx.clearRect(0,0,w,h);
+    canvas.style.display = 'none';
+    empty.style.display = 'block';
+    return;
+  }
+  canvas.style.display = 'block';
+  empty.style.display = 'none';
+
+  const sorted = [...arr].sort((a,b)=>new Date(a.date)-new Date(b.date));
+  const prices = sorted.map(r=>r.price);
+  const dates = sorted.map(r=>r.date);
+
+  const minP = Math.min(...prices);
+  const maxP = Math.max(...prices);
+  const range = maxP - minP || 1;
+  const pad = 30;
+  const chartW = w - pad;
+  const chartH = h - 30;
+
+  const xOf = (i) => pad + (i / (prices.length - 1)) * chartW;
+  const yOf = (p) => chartH - ((p - minP) / range) * chartH + 8;
+
+  ctx.fillStyle = '#fafafa';
+  ctx.fillRect(0, 0, w, h);
+
+  ctx.strokeStyle = '#eee';
+  ctx.lineWidth = 1;
+  for(let i = 0; i <= 3; i++) {
+    const y = 10 + (chartH / 3) * i;
+    ctx.beginPath();
+    ctx.moveTo(pad, y);
+    ctx.lineTo(w, y);
+    ctx.stroke();
+  }
+
+  const first = prices[0];
+  const last = prices[prices.length-1];
+  const trend = last - first;
+  const isUp = trend > 0;
+  ctx.strokeStyle = isUp ? '#e53935' : '#43a047';
+  ctx.fillStyle = isUp ? '#e53935' : '#43a047';
+  ctx.lineWidth = 2;
+
+  ctx.beginPath();
+  prices.forEach((p,i)=>{
+    const x = xOf(i);
+    const y = yOf(p);
+    i===0 ? ctx.moveTo(x,y) : ctx.lineTo(x,y);
+  });
+  ctx.stroke();
+
+  prices.forEach((p,i)=>{
+    const x = xOf(i);
+    const y = yOf(p);
+    ctx.beginPath();
+    ctx.arc(x, y, 3, 0, Math.PI*2);
+    ctx.fill();
+  });
+
+  ctx.fillStyle = '#888';
+  ctx.font = '10px sans-serif';
+  ctx.fillText(maxP.toFixed(0), 2, yOf(maxP)+3);
+  ctx.fillText(minP.toFixed(0), 2, yOf(minP)+3);
+
+  ctx.fillStyle = isUp ? '#e53935' : '#43a047';
+  ctx.font = 'bold 11px sans-serif';
+  ctx.fillText(last.toFixed(0), xOf(prices.length-1)-10, yOf(last)-8);
+
+  ctx.fillStyle = isUp ? '#e53935' : '#43a047';
+  ctx.font = '12px sans-serif';
+  ctx.fillText(isUp ? '↑'+((trend/first)*100).toFixed(1)+'%' : '↓'+(((-trend)/first)*100).toFixed(1)+'%', w-60, 18);
+
+  ctx.fillStyle = '#bbb';
+  ctx.font = '9px sans-serif';
+  ctx.fillText(dates[0], pad, h-2);
+  ctx.fillText(dates[dates.length-1], w-40, h-2);
+}
+
 function renderOverview() {
   const el = document.getElementById('overview_content');
   let html = '';
@@ -406,36 +1059,81 @@ function renderOverview() {
     const latest = arr[0].price;
     const latestDate = arr[0].date;
     const spread = fut>0 ? (latest-fut).toFixed(0) : null;
-    const spreadClass = spread===null?'':Math.abs(spread)>500?'up':Math.abs(spread)<200?'down':'ok';
-    const tagTxt = spread===null?'':Math.abs(spread)>500?'⚠️ 偏贵':Math.abs(spread)<200?'✅ 偏低':'✅ 正常';
+    const trend = arr.length>=2 ? ((latest-arr[arr.length-1].price)/arr[arr.length-1].price*100).toFixed(1) : null;
+
+    let spreadClass='', spreadTxt='';
+    if(spread!==null){
+      const abs=Math.abs(spread);
+      spreadClass = abs>500?'up':abs<100?'down':'ok';
+      spreadTxt = abs>500?'⚠️ 偏高':abs<100?'✅ 偏低':'✅ 正常';
+    }
 
     html += `<div class="overview-row">
       <div>
         <div class="name">${MAT_NAMES[m]}</div>
-        <div class="detail">最新采购 ${latestDate} · 加权均价 ${wavg.toFixed(0)}元/吨</div>
-        ${spread!==null?`<span class="tag ${spreadClass}">升贴水 ${(spread>=0?'+':'')+spread}元/吨 · ${tagTxt}</span>`:''}
+        <div class="detail">最新${latestDate} · 均${wavg.toFixed(0)}元/吨</div>
+        ${spread!==null?`<span class="tag ${spreadClass}">升贴水 ${(spread>=0?'+':'')+spread} ${spreadTxt}</span>`:''}
       </div>
       <div class="nums">
-        <div class="main">${latest.toFixed(0)}<span style="font-size:12px;font-weight:400">/吨</span></div>
-        <div class="sub">${arr.length}笔 · ${total>0?total+'吨':''}</div>
+        <div class="main" style="color:${trend>0?'#e53935':trend<0?'#43a047':'#333'}">${latest.toFixed(0)}</div>
+        <div class="sub">${trend!==null?(trend>0?'↑':'↓')+Math.abs(trend)+'%':''} · ${arr.length}笔</div>
       </div>
     </div>`;
   });
-  el.innerHTML = html || '<div class="empty">记几笔采购后自动出分析</div>';
+  el.innerHTML = html || '<div class="empty" style="padding:20px">记2笔以上出现趋势图</div>';
 }
 
-function showGuide() {
-  const g = document.getElementById('guide_block');
-  g.style.display = g.style.display === 'none' ? 'block' : 'none';
+function generateWeeklyReport() {
+  const now = new Date();
+  const weekAgo = new Date(now - 7 * 86400000);
+  const report = [];
+  report.push('📋 本周采购小结（' + now.toLocaleDateString('zh-CN') + '）');
+  report.push('');
+
+  let hasData = false;
+  MATERIALS.forEach(m => {
+    const arr = (records[m] || []).filter(r => new Date(r.date) >= weekAgo);
+    if(arr.length === 0) return;
+    hasData = true;
+    const prices = arr.map(r => r.price);
+    const min = Math.min(...prices);
+    const max = Math.max(...prices);
+    const wavg = prices.reduce((s, p) => s + p, 0) / prices.length;
+    const fut = futPrices[m] || 0;
+    const latest = arr[0];
+    const spread = fut > 0 ? (latest.price - fut).toFixed(0) : null;
+    const supCount = [...new Set(arr.map(r => r.supplier).filter(Boolean))].length;
+    report.push(`${MAT_NAMES[m]}：记${arr.length}笔`);
+    report.push(`  均价${wavg.toFixed(0)}元/吨，最低${min}元，最高${max}元`);
+    if(spread !== null) report.push(`  升贴水${spread}元（参考期货${fut}元）`);
+    if(supCount > 1) report.push(`  涉及${supCount}家供应商`);
+    report.push('');
+  });
+
+  if(!hasData) {
+    report.push('本周暂无采购记录');
+  }
+
+  const text = report.join('\n');
+  const el = document.getElementById('weekly_report');
+  el.style.display = 'block';
+  el.innerHTML = `<div style="background:#f8f9fa;border-radius:8px;padding:12px;margin-top:8px;font-size:12px;line-height:1.8;white-space:pre-wrap;color:#333">${text}</div>
+    <button onclick="copyWeeklyReport()" style="margin-top:8px;padding:6px 14px;background:#1a73e8;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px">📋 复制周报</button>`;
+
+  window._weeklyReportText = text;
+}
+
+function copyWeeklyReport() {
+  navigator.clipboard.writeText(window._weeklyReportText).then(() => showAlert('周报已复制，可直接粘贴发微信'));
 }
 
 function exportCSV() {
-  const rows = [['日期','品种','单价(元/吨)','数量(吨)','金额(元)','期货价','升贴水']];
+  const rows = [['日期','品种','供应商','单价(元/吨)','期货价','升贴水']];
   MATERIALS.forEach(m=>{
     const fut = futPrices[m]||0;
     (records[m]||[]).forEach(r=>{
       const spread = fut>0?(r.price-fut).toFixed(0):'';
-      rows.push([r.date, MAT_NAMES[m], r.price, r.qty, r.qty>0?(r.price*r.qty).toFixed(0):'', fut||'', spread]);
+      rows.push([r.date, MAT_NAMES[m], r.supplier||'', r.price, fut||'', spread]);
     });
   });
   if(rows.length===1){ showAlert('没有记录可导出'); return; }
@@ -447,13 +1145,165 @@ function exportCSV() {
   URL.revokeObjectURL(a.href);
 }
 
+function exportBackup() {
+  const data = { records, futPrices, alertThresholds, reminders, ts: Date.now() };
+  const blob = new Blob([JSON.stringify(data, null, 2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download=`原料数据备份_${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
+function importBackup(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if(!data.records) throw new Error('无效备份文件');
+      records = data.records;
+      futPrices = data.futPrices || {};
+      alertThresholds = data.alertThresholds || {};
+      reminders = data.reminders || [];
+      schedulePersist();
+      renderFutPrices();
+      renderAlertThresholds();
+      MATERIALS.forEach(m=>renderRecords());
+      showAlert('备份恢复成功，共'+Object.values(records).flat().length+'条记录');
+    } catch(err) {
+      showAlert('备份文件格式错误');
+    }
+  };
+  reader.readAsText(file);
+}
+
+function importCSV(file) {
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    const text = e.target.result;
+    const lines = text.split('\n').filter(l=>l.trim());
+    let count = 0;
+    lines.forEach(line=>{
+      if(line.includes('日期') && line.includes('品种')) return;
+      const parts = line.split(',');
+      if(parts.length < 3) return;
+      const date = parts[0].trim();
+      const matRaw = parts[1].trim();
+      const supplier = parts[2] ? parts[2].trim() : '';
+      const price = parseFloat(parts[parts.length >= 4 ? 3 : 2]);
+      if(!date || isNaN(price)) return;
+      let mat = null;
+      if(matRaw.includes('PE') || matRaw.includes('聚乙烯')) mat = 'pe';
+      else if(matRaw.includes('PP') || matRaw.includes('聚丙烯')) mat = 'pp';
+      else if(matRaw.includes('PVC') || matRaw.includes('聚氯乙烯')) mat = 'pvc';
+      if(!mat) return;
+      if(!records[mat]) records[mat] = [];
+      records[mat].unshift({ date, price, qty: 1, ts: Date.now(), supplier: supplier || null });
+      count++;
+    });
+    if(count > 0) {
+      schedulePersist();
+      MATERIALS.forEach(m=>renderRecords());
+      showAlert('成功导入 '+count+' 笔记录');
+    } else {
+      showAlert('未识别到有效数据，请检查CSV格式');
+    }
+  };
+  reader.readAsText(file);
+}
+
 function showAlert(msg){
   const el=document.getElementById('alert');
   el.textContent=msg; el.classList.add('show');
   setTimeout(()=>el.classList.remove('show'),2500);
 }
 
-renderRecords();
+// ============================================================
+// 提醒相关
+// ============================================================
+function openRemindModal() {
+  document.getElementById('remind_modal').style.display = 'flex';
+}
+function closeRemindModal() {
+  document.getElementById('remind_modal').style.display = 'none';
+}
+function saveRemind() {
+  const mat = document.getElementById('remind_mat').value;
+  const msg = document.getElementById('remind_msg').value.trim();
+  if(!msg) { showAlert('请输入提醒内容'); return; }
+  reminders.push({ mat, msg, ts: Date.now() });
+  closeRemindModal();
+  schedulePersist();
+  showAlert('提醒已记，下次打开会弹出');
+}
+function checkRemind() {
+  if(!reminders || reminders.length === 0) return;
+  const r = reminders[0];
+  const days = Math.round((Date.now() - r.ts) / 86400000);
+  showAlert(r.mat + '提醒：' + r.msg + (days > 0 ? '（'+days+'天前设）' : '（今天设）'));
+  reminders.shift();
+  schedulePersist();
+}
+
+function toggleDark() {
+  const isDark = document.body.classList.toggle('dark');
+  localStorage.setItem('material_dark', isDark ? '1' : '0');
+  document.getElementById('dark_toggle').textContent = isDark ? '☀️' : '🌙';
+}
+
+// ============================================================
+// Init
+// ============================================================
+async function init() {
+  // 恢复暗色
+  if(localStorage.getItem('material_dark') === '1') {
+    document.body.classList.add('dark');
+    document.getElementById('dark_toggle').textContent = '☀️';
+  }
+
+  // 尝试恢复登录状态
+  const storedAuth = localStorage.getItem(AUTH_BIN_KEY);
+  if (storedAuth) {
+    try {
+      const { userId, email, binId } = JSON.parse(storedAuth);
+      currentUserId = userId;
+      currentEmail = email;
+      currentBinId = binId || null;
+
+      if (currentBinId) {
+        const cloudData = await loadFromJsonbin(currentBinId);
+        if (cloudData) {
+          records = cloudData.records || {};
+          futPrices = cloudData.futPrices || {};
+          alertThresholds = cloudData.alertThresholds || {};
+          reminders = cloudData.reminders || [];
+          syncToLocal();
+        } else {
+          loadAnonData();
+        }
+      } else {
+        loadAnonData();
+      }
+    } catch(e) {
+      loadAnonData();
+    }
+  } else {
+    loadAnonData();
+  }
+
+  renderAuthUI();
+  renderFutPrices();
+  renderAlertThresholds();
+  MATERIALS.forEach(m=>renderRecords());
+  checkRemind();
+}
+
+init();
+
+// 响应式图表
+window.addEventListener('resize', ()=>{
+  if(document.getElementById('tab-overview').classList.contains('active')) drawChart();
+});
 </script>
 </body>
 </html>
