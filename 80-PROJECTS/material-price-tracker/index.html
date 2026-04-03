@@ -829,14 +829,14 @@ function showShareMenu() {
   document.body.appendChild(menu);
 }
 function shareToFriend() {
-  navigator.clipboard.writeText('塑价通 - PE/PP/PVC期货监控采购记录升贴水计算，完全免费\nhttps://material-price-tracker.vercel.app').then(() => {
+  navigator.clipboard.writeText('推荐一个免费的塑料原料监控工具「塑价通」\n\n功能：\n• 记下采购价，自动算升贴水\n• 超过我设的警戒线，微信立刻通知我\n• 供应商报价对比，谁贵谁便宜一目了然\n• 生成周报直接发朋友圈\n\n完全免费，点链接直接用：\nhttps://material-price-tracker.vercel.app').then(() => {
     const m = document.getElementById('share_menu');
     if(m) m.remove();
     showAlert('已复制！粘贴发给同行');
   });
 }
 function shareToMoments() {
-  navigator.clipboard.writeText('塑价通 - PE/PP/PVC期货监控采购记录升贴水计算，完全免费\nhttps://material-price-tracker.vercel.app').then(() => {
+  navigator.clipboard.writeText('📊 塑价通 - 免费的塑料原料成本管理工具\n\n✅ 记采购价自动算升贴水\n✅ 超警戒线微信通知\n✅ 供应商比价\n✅ 周报发朋友圈\n\n我是塑料厂的，用了大半年觉得好才推荐。\n点链接直接用：https://material-price-tracker.vercel.app').then(() => {
     const m = document.getElementById('share_menu');
     if(m) m.remove();
     showAlert('已复制！打开微信朋友圈长按粘贴');
