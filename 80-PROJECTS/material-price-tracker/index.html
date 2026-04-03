@@ -362,6 +362,7 @@
       <button onclick="generateWeeklyReport()" style="padding:3px 10px;font-size:11px;background:#f0f0f0;border:1px solid #ddd;border-radius:4px;cursor:pointer">📝 生成周报</button>
     </div>
     <div id="overview_content"></div>
+    <div id="supplier_compare" style="padding:0 16px 12px;display:none"></div>
     <div id="weekly_report" style="display:none;padding:0 16px 16px"></div>
   </div>
 
@@ -1262,6 +1263,49 @@ function renderOverview() {
     </div>`;
   });
   el.innerHTML = html || '<div class="empty" style="padding:20px">记2笔以上出现趋势图</div>';
+  renderSupplierCompare();
+}
+
+function renderSupplierCompare() {
+  const el = document.getElementById('supplier_compare');
+  if(!el) return;
+  // 汇总各供应商各品种的最新采购价
+  const supMap = {};
+  MATERIALS.forEach(m=>{
+    const arr = records[m] || [];
+    arr.forEach(r=>{
+      if(!r.supplier) return;
+      if(!supMap[r.supplier]) supMap[r.supplier] = {};
+      supMap[r.supplier][m] = r.price;
+    });
+  });
+  const suppliers = Object.keys(supMap);
+  if(suppliers.length < 2) { el.style.display='none'; return; }
+  const fut = futPrices;
+  let html = '<div style="font-size:11px;color:#888;margin-bottom:8px">供应商报价对比（最新）</div>';
+  html += '<table style="width:100%;font-size:12px;border-collapse:collapse">';
+  html += '<tr style="background:#f5f5f5"><th style="text-align:left;padding:4px 6px">供应商</th>';
+  MATERIALS.forEach(m=>{ html += `<th style="padding:4px 6px">${MAT_NAMES[m]}</th>`; });
+  html += '<th style="padding:4px 6px">均升贴水</th></tr>';
+  suppliers.forEach(s=>{
+    const prices = supMap[s];
+    const mats = Object.keys(prices);
+    let totalSpread = 0, cnt = 0;
+    mats.forEach(m=>{ if(fut[m]) { totalSpread += prices[m]-fut[m]; cnt++; } });
+    const avgSpread = cnt>0 ? (totalSpread/cnt).toFixed(0) : '-';
+    html += `<tr><td style="padding:4px 6px;font-weight:500">${s}</td>`;
+    MATERIALS.forEach(m=>{
+      const p = prices[m];
+      const spread = fut[m] ? (p-fut[m]).toFixed(0) : null;
+      const cls = spread>500?'color:#e53935':spread<100?'color:#43a047':'color:#333';
+      html += `<td style="padding:4px 6px;${cls}">${p?p+'<sub style="font-size:10px">'+(spread?'+'+(+spread):''):'-':'—'}</sub></td>`;
+    });
+    const avgCls = avgSpread==='-'?'':+avgSpread>300?'color:#e53935':+avgSpread<100?'color:#43a047':'color:#333';
+    html += `<td style="padding:4px 6px;font-weight:600;${avgCls}">${avgSpread==='-'?'-':(avgSpread>0?'+':'')+avgSpread}</td></tr>`;
+  });
+  html += '</table>';
+  el.innerHTML = html;
+  el.style.display = 'block';
 }
 
 function generateWeeklyReport() {
