@@ -22,18 +22,11 @@ export class StockAnalysisAdapter {
   async start() {
     if (this.client) return;
 
-    // ⚠️ stock-analysis-mcp-test 已归档（空壳已删除，2026-04-03）
-    // 原路径：'80-PROJECTS/stock-analysis-mcp-test/src'
-    // adapter 启动会失败，需重新接入真实 MCP 服务（参见 stock-analysis-agent）
-    const serverPath = null;
-    if (!serverPath) {
-      throw new Error('[StockAnalysisAdapter] stock-analysis-mcp-test 已归档，无法启动。需重新接入真实 MCP 服务。');
-    }
-
+    // 接入 stock-analysis-agent MCP 服务
     this.client = new PythonMCPClient({
       command: 'python',
-      args: ['-c', 'import src.server'],
-      cwd: serverPath
+      args: ['-m', 'src.server'],
+      cwd: this.projectRoot + '/80-PROJECTS/stock-analysis-agent'
     });
 
     this.client.on('error', (err) => {
