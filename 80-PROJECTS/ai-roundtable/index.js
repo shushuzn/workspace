@@ -289,7 +289,8 @@ function saveDebateIndex(index) {
 }
 
 function saveResultAsJson(topic, rounds, transcript, mode, summary, stats) {
-  const timestamp = new Date().toISOString().replace(/[:.]/g, '-').slice(0, 19);
+  const timestampIso = new Date().toISOString();
+  const timestamp = timestampIso.replace(/[:.]/g, '-').slice(0, 19);
   const safeTopic = topic.replace(/[\\/:*?"<>|]/g, '_').slice(0, 30);
   const filename = `debate_${safeTopic}_${timestamp}.json`;
   const filepath = path.join(DEBATES_DIR, filename);
@@ -320,7 +321,7 @@ function saveResultAsJson(topic, rounds, transcript, mode, summary, stats) {
     topic,
     mode,
     rounds,
-    timestamp,
+    timestamp: timestampIso,
     summary,
     votes: mode === MODE_DEBATE ? votes : null,
     avgQuality: Math.round(avgQuality),
