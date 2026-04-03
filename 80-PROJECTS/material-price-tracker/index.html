@@ -994,6 +994,13 @@ function saveFutPrice(m) {
   else delete futPrices[m];
   schedulePersist();
   calcSpread();
+  // 超过警戒线时自动推送
+  const thresh = alertThresholds[m];
+  if(thresh && v > thresh) {
+    const msg = `⚠️ ${MAT_NAMES[m]}期货价¥${v}超过警戒线¥${thresh}！`;
+    sendServerChan('塑价通：' + msg);
+    showAlert(msg);
+  }
 }
 
 function calcSpread() {
