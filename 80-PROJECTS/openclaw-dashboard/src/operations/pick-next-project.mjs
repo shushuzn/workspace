@@ -64,10 +64,14 @@ if (result.allProjects && result.allProjects.length > 0) {
   const totalWeight = result.allProjects.reduce((s, x) => s + x.weight, 0);
   const ideaPool = new (await import('./productive-ops.mjs')).IdeaPool(workspaceRoot);
   result.allProjects.slice(0, 5).forEach((p, i) => {
+    const b = picker.healthScoreBreakdown(p.name, p.days, ideaPool);
     const composite = picker.compositeHealthScore(p.name, p.days, ideaPool);
     const barLen = Math.max(1, Math.round((p.weight / totalWeight) * 12));
     const bar = '█'.repeat(barLen);
-    console.log(`  ${i + 1}. ${p.name.padEnd(28)} ${p.days}d γ:${p.weight.toFixed(2)} 健康:${composite} ${bar}`);
+    const healthInfo = b.fail > 0 || b.succ > 0 ? `成功${b.succ}·失败${b.fail}` : '无体检记录';
+    console.log(`  ${i + 1}. ${p.name.padEnd(28)} ${p.days}d`);
+    console.log(`     γ权重 ${p.weight.toFixed(2)} | 活跃度 ${b.recencyNorm} | 健康 ${b.health} (${healthInfo}) | 质量 ${b.quality}`);
+    console.log(`     综合 ${composite} ${bar}`);
   });
 }
 

@@ -468,21 +468,24 @@ export class PickNextProject extends ProductiveOperation {
    * Quality: 项目关联 idea 的平均 impact×effort，无 idea 返回 1
    */
   compositeHealthScore(projectName, daysSinceActive, ideaPool) {
+    const b = this.healthScoreBreakdown(projectName, daysSinceActive, ideaPool);
+    return +(b.recencyNorm * b.health * b.quality).toFixed(3);
+  }
+
+  /** 返回健康分三个因子，供可视化用 */
+  healthScoreBreakdown(projectName, daysSinceActive, ideaPool) {
     const state = this._loadState();
-    // Recency（gamma=0.5）
     const recency = Math.pow(Math.max(1, daysSinceActive + 1), 0.5);
-    const maxRecency = Math.pow(60, 0.5); // 60天封顶
+    const maxRecency = Math.pow(60, 0.5);
     const recencyNorm = 0.5 + 0.5 * (recency / maxRecency);
-    // Health
     const succ = state.healthSuccesses?.[projectName]?.count || 0;
     const fail = state.healthFailures?.[projectName]?.count || 0;
-    const health = (succ + fail) > 0 ? succ / (succ + fail) : 1;
-    // Quality
+    const health = (succ + fail) > 0 ? (succ / (succ + fail)) || 0.3 : 1;  // succ=0时用0.3而非0
     const ideas = ideaPool?.list().filter(i => i.desc.includes(projectName)) || [];
     const quality = ideas.length > 0
       ? ideas.reduce((s, i) => s + (i.impact || 1) * (i.effort || 1), 0) / ideas.length / 9
       : 1;
-    return +(recencyNorm * health * quality).toFixed(3);
+    return { recencyNorm: +recencyNorm.toFixed(3), health: +health.toFixed(3), quality: +quality.toFixed(3), succ, fail };
   }
 
 
