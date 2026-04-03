@@ -1343,13 +1343,61 @@ function generateWeeklyReport() {
   const el = document.getElementById('weekly_report');
   el.style.display = 'block';
   el.innerHTML = `<div style="background:#f8f9fa;border-radius:8px;padding:12px;margin-top:8px;font-size:12px;line-height:1.8;white-space:pre-wrap;color:#333">${text}</div>
-    <button onclick="copyWeeklyReport()" style="margin-top:8px;padding:6px 14px;background:#1a73e8;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px">📋 复制周报</button>`;
+    <div style="margin-top:8px;display:flex;gap:8px;flex-wrap:wrap">
+      <button onclick="copyWeeklyReport()" style="padding:6px 14px;background:#1a73e8;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px">📋 复制文字</button>
+      <button onclick="shareWeeklyImage()" style="padding:6px 14px;background:#07c160;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:12px">🖼 发朋友圈</button>
+    </div>`;
 
   window._weeklyReportText = text;
 }
 
 function copyWeeklyReport() {
   navigator.clipboard.writeText(window._weeklyReportText).then(() => showAlert('周报已复制，可直接粘贴发微信'));
+}
+
+function shareWeeklyImage() {
+  const text = window._weeklyReportText || '本周采购记录';
+  const canvas = document.createElement('canvas');
+  const w = 600, h = 400, pad = 24, lineH = 22;
+  canvas.width = w; canvas.height = h;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#1a73e8';
+  ctx.fillRect(0, 0, w, h);
+  ctx.fillStyle = '#fff';
+  ctx.font = 'bold 22px sans-serif';
+  ctx.fillText('📊 塑价通 · 本周采购周报', pad, 40);
+  ctx.font = '12px sans-serif';
+  ctx.fillText(new Date().toLocaleDateString('zh-CN'), pad, 60);
+  ctx.fillStyle = '#1a1a1a';
+  const lines = text.split('\n').filter(l => l.trim());
+  let y = 90;
+  lines.forEach(line => {
+    if(y > h - 30) return;
+    if(line.startsWith('  ')) {
+      ctx.fillStyle = '#555';
+      ctx.font = '13px monospace';
+      ctx.fillText(line, pad + 16, y);
+    } else if(line === '') {
+      y += 6;
+    } else {
+      ctx.fillStyle = '#1a1a1a';
+      ctx.font = 'bold 14px sans-serif';
+      ctx.fillText(line, pad, y);
+    }
+    y += lineH;
+  });
+  ctx.fillStyle = '#888';
+  ctx.font = '11px sans-serif';
+  ctx.fillText('用 塑价通 记录采购成本 → material-price-tracker.vercel.app', pad, h - 12);
+  canvas.toBlob(blob => {
+    if(!blob) { showAlert('生成图片失败'); return; }
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url; a.download = '周报_' + new Date().toISOString().split('T')[0] + '.png';
+    a.click();
+    URL.revokeObjectURL(url);
+    showAlert('图片已下载，可分享到朋友圈');
+  });
 }
 
 function exportCSV() {
