@@ -824,7 +824,8 @@ function showShareMenu() {
     <div style="font-weight:700;font-size:16px;margin-bottom:16px">分享给同行</div>
     <button onclick="shareToFriend()" style="display:block;width:100%;padding:10px;background:#1a73e8;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:10px">📱 复制链接发给微信好友</button>
     <button onclick="shareToMoments()" style="display:block;width:100%;padding:10px;background:#07c160;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:10px">💚 分享到朋友圈</button>
-    <button onclick="shareCopyLink()" style="display:block;width:100%;padding:10px;background:#f0f0f0;color:#333;border:none;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:10px">🔗 复制链接</button>
+    <button onclick="generateShareLink()" style="display:block;width:100%;padding:10px;background:#ff9800;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:10px">🔗 生成分享链接（含当前价格）</button>
+    <button onclick="shareCopyLink()" style="display:block;width:100%;padding:10px;background:#f0f0f0;color:#333;border:none;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:10px">📋 复制官网链接</button>
     <button onclick="document.getElementById('share_menu').remove()" style="display:block;width:100%;padding:8px;background:none;color:#888;border:none;font-size:13px;cursor:pointer">关闭</button>
   </div>`;
   document.body.appendChild(menu);
@@ -848,6 +849,35 @@ function shareCopyLink() {
     const m = document.getElementById('share_menu');
     if(m) m.remove();
     showAlert('链接已复制');
+  });
+}
+
+function generateShareLink() {
+  const futs = {};
+  MATERIALS.forEach(m => {
+    const el = document.getElementById('fut_' + m.id);
+    if (el && el.value > 0) futs[m.id] = el.value;
+  });
+  const spreads = {};
+  MATERIALS.forEach(m => {
+    const el = document.getElementById('spread_' + m.id);
+    if (el) {
+      const n = parseFloat(el.innerText);
+      if (!isNaN(n)) spreads[m.id] = n;
+    }
+  });
+  if (Object.keys(futs).length === 0 && Object.keys(spreads).length === 0) {
+    showAlert('请先填入期货价或升贴水');
+    return;
+  }
+  const params = new URLSearchParams();
+  Object.entries(futs).forEach(([k, v]) => params.set('fut_' + k, v));
+  Object.entries(spreads).forEach(([k, v]) => params.set('sp_' + k, v));
+  const url = 'https://material-price-tracker.vercel.app?' + params.toString();
+  navigator.clipboard.writeText(url).then(() => {
+    const m = document.getElementById('share_menu');
+    if (m) m.remove();
+    showAlert('分享链接已复制，发给供应商微信直接看！');
   });
 }
 
@@ -1653,7 +1683,7 @@ async function init() {
     }
   }
 
-  // 从 URL 参数预填期货价（来自浏览器插件）
+  // 从 URL 参数预填期货价（来自浏览器插件/分享链接）
   const params = new URLSearchParams(location.search);
   const urlMappings = { pe: 'fut_pe', pp: 'fut_pp', pvc: 'fut_pvc' };
   Object.entries(urlMappings).forEach(([k, id]) => {
@@ -1662,7 +1692,18 @@ async function init() {
       if (v > 0) {
         const el = document.getElementById(id);
         if (el) el.value = v;
-        saveFutPrice(k); // MATERIALS是小写：pe/pp/pvc
+        saveFutPrice(k);
+      }
+    }
+  });
+  // 分享链接中的升贴水参数
+  const spreadMappings = { pe: 'sp_pe', pp: 'sp_pp', pvc: 'sp_pvc' };
+  Object.entries(spreadMappings).forEach(([k, id]) => {
+    if (params.has(id)) {
+      const v = parseFloat(params.get(id));
+      if (!isNaN(v)) {
+        const el = document.getElementById('spread_' + k);
+        if (el) { el.innerText = v; }
       }
     }
   });
