@@ -209,6 +209,30 @@ function readConfig() {
 // Commands
 // ============================================================================
 
+async function doWatchdog() {
+  dim('Running OMC watchdog...');
+  const { spawn } = await import('child_process');
+  const watchdog = spawn('node', [join(PROJECT_ROOT, 'scripts/watchdog.mjs'), '--json'], {
+    cwd: PROJECT_ROOT,
+    shell: true,
+    stdio: ['ignore', 'pipe', 'pipe'],
+  });
+  let output = '';
+  watchdog.stdout.on('data', (d) => { output += d.toString(); });
+  watchdog.stderr.on('data', (d) => { /* ignore stderr */ });
+  watchdog.on('close', (code) => {
+    try {
+      const result = JSON.parse(output);
+      if (result.summary.autoExecutable > 0) {
+        console.log(`[Watchdog] ${result.summary.autoExecutable} 个 idea 可自动推进，需在 session 内执行`);
+      } else if (result.summary.needsConfirm > 0) {
+        console.log(`[Watchdog] ${result.summary.needsConfirm} 个 idea 需确认`);
+      }
+    } catch (_) { /* non-JSON output is fine */ }
+    process.exit(0);
+  });
+}
+
 async function doImport() {
   log('Importing auto memory files into bridge...');
 
@@ -356,6 +380,7 @@ try {
     case 'import': await doImport(); break;
     case 'sync': await doSync(); break;
     case 'status': await doStatus(); break;
+    case 'watchdog': await doWatchdog(); break;
     default:
       console.log('Usage: auto-memory-hook.mjs <import|sync|status>');
       break;
