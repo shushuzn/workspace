@@ -294,6 +294,48 @@ function parseMemoryFile(filePath) {
   }
 }
 
+const STALE_THRESHOLD_DAYS = 30;
+const LAST_STALE_PUSH_FILE = path.join(__dirname, '.last_stale_push');
+
+function checkAndPushStaleProjects(projects) {
+  const sckey = process.env.SERVERCHAN_SCKEY || process.env.SCKEY;
+  if (!sckey) return;
+
+  const cutoff = new Date();
+  cutoff.setDate(cutoff.getDate() - STALE_THRESHOLD_DAYS);
+  const stale = projects.filter(p => {
+    if (!p.lastActive) return false;
+    return new Date(p.lastActive) < cutoff;
+  });
+
+  if (stale.length === 0) return;
+
+  // Avoid duplicate pushes within same day (file-based)
+  const today = new Date().toISOString().split('T')[0];
+  try {
+    if (fs.existsSync(LAST_STALE_PUSH_FILE)) {
+      const lastPush = fs.readFileSync(LAST_STALE_PUSH_FILE, 'utf8').trim();
+      if (lastPush === today) {
+        console.log(`[stale] Already pushed today (${today}), skipping`);
+        return;
+      }
+    }
+  } catch (e) {}
+
+  const lines = stale.map(p => `• ${p.name}（${p.lastActive}）`).join('\n');
+  const desp = `共 ${stale.length} 个项目超过 ${STALE_THRESHOLD_DAYS} 天无更新\n\n${lines}`;
+  const url = `https://sc.ftqq.com/${sckey}.send?text=${encodeURIComponent('🔴 项目失活提醒')}&desp=${encodeURIComponent(desp)}`;
+
+  try {
+    require('https').get(url, () => {
+      fs.writeFileSync(LAST_STALE_PUSH_FILE, today);
+      console.log(`[stale] Pushed ${stale.length} stale projects to Server酱`);
+    }).on('error', e => { console.error('[stale] Push failed:', e.message); });
+  } catch (e) {
+    console.error('[stale] Push failed:', e.message);
+  }
+}
+
 function generateData() {
   const data = {
     generated: new Date().toISOString(),
@@ -319,6 +361,9 @@ function generateData() {
   console.log(`- Submodules: ${data.submodules.length}`);
   console.log(`- Sessions: ${data.sessions.length}`);
   console.log(`- Tech stacks: ${[...new Set(data.projects.map(p => p.meta))].join(', ')}`);
+
+  // Stale project push (Server酱)
+  checkAndPushStaleProjects(data.projects);
 }
 
 generateData();
