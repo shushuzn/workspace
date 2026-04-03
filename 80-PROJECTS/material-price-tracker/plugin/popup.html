@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { width: 320px; font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f5f5f5; }
+  .header { background: #2196F3; color: white; padding: 16px; text-align: center; }
+  .header h1 { font-size: 16px; }
+  .header p { font-size: 11px; opacity: 0.9; margin-top: 4px; }
+  .section { background: white; margin: 8px; padding: 12px; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+  .price-row { display: flex; justify-content: space-between; align-items: center; padding: 6px 0; border-bottom: 1px solid #eee; }
+  .price-row:last-child { border-bottom: none; }
+  .label { color: #666; font-size: 13px; }
+  .value { font-weight: bold; font-size: 14px; color: #333; }
+  .value.up { color: #e74c3c; }
+  .value.down { color: #27ae60; }
+  .btn { display: block; width: 100%; padding: 10px; background: #2196F3; color: white; border: none; border-radius: 6px; font-size: 14px; cursor: pointer; margin-top: 8px; }
+  .btn:hover { background: #1976D2; }
+  .status { font-size: 11px; color: #999; text-align: center; margin-top: 8px; }
+  .found { color: #27ae60; font-size: 12px; margin-top: 4px; }
+  input { width: 100%; padding: 6px 8px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px; margin-top: 4px; }
+  .section-title { font-size: 12px; color: #999; margin-bottom: 8px; }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>塑价通 · 价格识别</h1>
+  <p>自动识别网页期货价格</p>
+</div>
+
+<div class="section">
+  <div class="section-title">当前页面检测到的价格</div>
+  <div id="prices">
+    <div class="price-row"><span class="label">PE（LLDPE）</span><span class="value" id="pe-price">—</span></div>
+    <div class="price-row"><span class="label">PP（拉丝）</span><span class="value" id="pp-price">—</span></div>
+    <div class="price-row"><span class="label">PVC</span><span class="value" id="pvc-price">—</span></div>
+  </div>
+  <div id="found-count" class="found"></div>
+</div>
+
+<div class="section">
+  <div class="section-title">发送到塑价通</div>
+  <div style="margin-top:8px">
+    <label style="font-size:12px;color:#666">PE期货价（元/吨）</label>
+    <input type="number" id="send-pe" placeholder="自动识别或手动输入">
+  </div>
+  <div style="margin-top:8px">
+    <label style="font-size:12px;color:#666">PP期货价（元/吨）</label>
+    <input type="number" id="send-pp" placeholder="自动识别或手动输入">
+  </div>
+  <div style="margin-top:8px">
+    <label style="font-size:12px;color:#666">PVC期货价（元/吨）</label>
+    <input type="number" id="send-pvc" placeholder="自动识别或手动输入">
+  </div>
+  <button class="btn" onclick="sendToApp()">打开塑价通并填入</button>
+</div>
+
+<div class="status" id="status">在支持页面自动检测价格</div>
+
+<script src="popup.js"></script>
+</body>
+</html>

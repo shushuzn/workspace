@@ -1,0 +1,33 @@
+{
+  "manifest_version": 3,
+  "name": "塑价通 · 期货价格自动识别",
+  "version": "1.0.0",
+  "description": "自动识别网页上的塑料期货价格，一键填入塑价通",
+  "permissions": ["activeTab", "storage"],
+  "host_permissions": [
+    "https://*.dce.com.cn/*",
+    "https://*.eastmoney.com/*",
+    "https://*. finance.sina.com.cn/*",
+    "https://*.cnforex.com/*"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon16.png",
+      "48": "icons/icon48.png",
+      "128": "icons/icon128.png"
+    }
+  },
+  "content_scripts": [{
+    "matches": [
+      "https://*.dce.com.cn/*",
+      "https://*.eastmoney.com/*",
+      "https://*.sinock.com.cn/*"
+    ],
+    "js": ["content/content.js"],
+    "run_at": "document_idle"
+  }],
+  "background": {
+    "service_worker": "background/background.js"
+  }
+}
