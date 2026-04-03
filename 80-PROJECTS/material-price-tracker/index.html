@@ -743,6 +743,48 @@ function doLogout() {
 }
 
 // ============================================================
+// 分享裂变
+// ============================================================
+function showShareMenu() {
+  const menu = document.createElement('div');
+  menu.id = 'share_menu';
+  menu.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.5);z-index:99999;display:flex;align-items:center;justify-content:center';
+  menu.onclick = (e) => { if(e.target === menu) menu.remove(); };
+  menu.innerHTML = `<div style="background:#fff;border-radius:12px;padding:24px;width:280px;text-align:center">
+    <div style="font-weight:700;font-size:16px;margin-bottom:16px">分享给同行</div>
+    <button onclick="shareToFriend()" style="display:block;width:100%;padding:10px;background:#1a73e8;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:10px">📱 复制链接发给微信好友</button>
+    <button onclick="shareToMoments()" style="display:block;width:100%;padding:10px;background:#07c160;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:10px">💚 分享到朋友圈</button>
+    <button onclick="shareCopyLink()" style="display:block;width:100%;padding:10px;background:#f0f0f0;color:#333;border:none;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:10px">🔗 复制链接</button>
+    <button onclick="document.getElementById('share_menu').remove()" style="display:block;width:100%;padding:8px;background:none;color:#888;border:none;font-size:13px;cursor:pointer">关闭</button>
+  </div>`;
+  document.body.appendChild(menu);
+}
+function shareToFriend() {
+  navigator.clipboard.writeText('塑价通 - PE/PP/PVC期货监控采购记录升贴水计算，完全免费\nhttps://material-price-tracker.vercel.app').then(() => {
+    const m = document.getElementById('share_menu');
+    if(m) m.remove();
+    showAlert('已复制！粘贴发给同行');
+  });
+}
+function shareToMoments() {
+  navigator.clipboard.writeText('塑价通 - PE/PP/PVC期货监控采购记录升贴水计算，完全免费\nhttps://material-price-tracker.vercel.app').then(() => {
+    const m = document.getElementById('share_menu');
+    if(m) m.remove();
+    showAlert('已复制！打开微信朋友圈长按粘贴');
+  });
+}
+function shareCopyLink() {
+  navigator.clipboard.writeText('https://material-price-tracker.vercel.app').then(() => {
+    const m = document.getElementById('share_menu');
+    if(m) m.remove();
+    showAlert('链接已复制');
+  });
+}
+
+// 分享按钮
+document.write('<div onclick="showShareMenu()" id="shareBtn" style="position:fixed;right:16px;bottom:80px;background:#1a73e8;color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;z-index:9998;line-height:1" title="分享给同行">↗</div>');
+
+// ============================================================
 // 数据持久化（localStorage + JSONBin）
 // ============================================================
 
