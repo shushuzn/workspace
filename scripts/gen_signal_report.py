@@ -80,6 +80,21 @@ for s in sells_agg[:15]:
 
 html += '</table><hr><p style="color:#888;font-size:12px">NewsHub 自动生成 | 技术分析暂停(网络问题) | 信号按股票去重聚合</p></body></html>'
 
+import json
+
+# 导出 JSON
+report_data = {
+    'generated_at': now_str,
+    'news_count': news_count,
+    'source': 'news_sentiment_only',
+    'buy_signals': buys_agg,
+    'sell_signals': sells_agg,
+}
+
+with open('trading_signals.json', 'w', encoding='utf-8') as f:
+    json.dump(report_data, f, ensure_ascii=False, indent=2)
+
 with open('trading_signals.html', 'w', encoding='utf-8') as f:
     f.write(html)
 print(f'报告已生成: trading_signals.html ({len(buys_agg)}只买入/{len(sells_agg)}只卖出)')
+print(f'数据已导出: trading_signals.json')
