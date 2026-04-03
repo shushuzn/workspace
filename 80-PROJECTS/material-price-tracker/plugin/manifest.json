@@ -7,7 +7,7 @@
   "host_permissions": [
     "https://*.dce.com.cn/*",
     "https://*.eastmoney.com/*",
-    "https://*. finance.sina.com.cn/*",
+    "https://*.finance.sina.com.cn/*",
     "https://*.cnforex.com/*"
   ],
   "action": {
