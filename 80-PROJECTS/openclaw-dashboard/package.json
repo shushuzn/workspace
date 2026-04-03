@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node dashboard-server.js",
     "generate": "node generate-dashboard-data.js",
+    "build:static": "node build-static.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --testPathIgnorePatterns='e2e'",
     "test:e2e": "npx playwright test",
     "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
