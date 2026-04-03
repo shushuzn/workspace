@@ -860,7 +860,7 @@ function generateShareLink() {
   });
   const spreads = {};
   MATERIALS.forEach(m => {
-    const el = document.getElementById('spread_' + m.id);
+    const el = document.getElementById('sp_' + m.id);
     if (el) {
       const n = parseFloat(el.innerText);
       if (!isNaN(n)) spreads[m.id] = n;
