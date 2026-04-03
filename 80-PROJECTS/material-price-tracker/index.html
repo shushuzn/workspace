@@ -164,6 +164,7 @@
   📊 原料期货监控
   <div style="display:flex;align-items:center;gap:8px">
     <small id="today"></small>
+    <small id="lastUpdate" style="font-size:10px;opacity:0.7;display:none"></small>
     <button id="dark_toggle" onclick="toggleDark()" style="background:rgba(255,255,255,0.2);border:none;border-radius:12px;padding:3px 8px;color:#fff;font-size:11px;cursor:pointer">🌙</button>
     <span id="syncBadge" class="sync-badge">已同步</span>
     <div id="authArea"></div>
@@ -861,6 +862,7 @@ const STORAGE_KEY = 'material_records_v4';
 const FUT_STORAGE = 'material_futures_price_v2';
 const ALERT_STORAGE = 'material_alert_thresh_v1';
 const REMIND_STORAGE = 'material_remind_v1';
+const LAST_UPDATE_STORAGE = 'material_last_update_v1';
 const SCKEY_STORAGE = 'material_serverchan_v1';
 
 function syncToLocal() {
@@ -930,7 +932,10 @@ let activeChart = 'pe';
 let _persistTimer = null;
 function schedulePersist() {
   if (_persistTimer) clearTimeout(_persistTimer);
-  _persistTimer = setTimeout(() => persistData(), 800);
+  _persistTimer = setTimeout(() => {
+    localStorage.setItem(LAST_UPDATE_STORAGE, Date.now().toString());
+    persistData();
+  }, 800);
 }
 
 document.getElementById('today').textContent = new Date().toLocaleDateString('zh-CN',{year:'numeric',month:'long',day:'numeric',weekday:'long'});
@@ -1527,6 +1532,18 @@ async function init() {
   renderAlertThresholds();
   MATERIALS.forEach(m=>renderRecords());
   checkRemind();
+  // 显示上次更新时间
+  const lastTs = localStorage.getItem(LAST_UPDATE_STORAGE);
+  if(lastTs) {
+    const last = new Date(parseInt(lastTs));
+    const now = Date.now();
+    const diff = Math.floor((now - last) / 86400000);
+    const el = document.getElementById('lastUpdate');
+    if(el) {
+      el.style.display = 'inline';
+      el.textContent = diff === 0 ? '今日已更新' : diff + '天前更新';
+    }
+  }
 }
 
 init();
