@@ -1652,6 +1652,20 @@ async function init() {
       el.textContent = diff === 0 ? '今日已更新' : diff + '天前更新';
     }
   }
+
+  // 从 URL 参数预填期货价（来自浏览器插件）
+  const params = new URLSearchParams(location.search);
+  const urlMappings = { pe: 'fut_pe', pp: 'fut_pp', pvc: 'fut_pvc' };
+  Object.entries(urlMappings).forEach(([k, id]) => {
+    if (params.has(k)) {
+      const v = parseFloat(params.get(k));
+      if (v > 0) {
+        const el = document.getElementById(id);
+        if (el) el.value = v;
+        saveFutPrice(k); // MATERIALS是小写：pe/pp/pvc
+      }
+    }
+  });
 }
 
 init();
