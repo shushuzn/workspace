@@ -851,8 +851,11 @@ function shareCopyLink() {
 }
 
 // 分享按钮
-// 广告横幅
-document.write('<div id="adBanner" style="position:fixed;left:16px;right:70px;bottom:80px;background:#fff3e0;border:1px solid #ffb74d;border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:8px;z-index:9997;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:12px;color:#333"><span style="font-size:14px">📢</span><span style="flex:1">化工厂/贸易商打广告？<a href="https://material-price-tracker.vercel.app" style="color:#1a73e8;font-weight:600">联系我们</a></span></div>');
+// 广告横幅（可关闭）
+const AD_DISMISS_KEY = 'material_ad_dismissed';
+if(!localStorage.getItem(AD_DISMISS_KEY)) {
+  document.write('<div id="adBanner" style="position:fixed;left:16px;right:70px;bottom:80px;background:#fff3e0;border:1px solid #ffb74d;border-radius:8px;padding:8px 12px;display:flex;align-items:center;gap:8px;z-index:9997;box-shadow:0 2px 8px rgba(0,0,0,0.1);font-size:12px;color:#333"><span style="font-size:14px">📢</span><span style="flex:1">化工厂/贸易商打广告？<a href="#notify" style="color:#1a73e8;font-weight:600">联系我们</a></span><button onclick="document.getElementById(\'adBanner\').style.display=\'none\';localStorage.setItem(\''+AD_DISMISS_KEY+'\',\'1\')" style="background:none;border:none;font-size:14px;cursor:pointer;color:#999;padding:0;line-height:1">✕</button></div>');
+}
 document.write('<div onclick="showShareMenu()" id="shareBtn" style="position:fixed;right:16px;bottom:140px;background:#1a73e8;color:#fff;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 2px 8px rgba(0,0,0,0.2);cursor:pointer;z-index:9998;line-height:1" title="分享给同行">↗</div>');
 
 // ============================================================
