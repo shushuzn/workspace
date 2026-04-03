@@ -247,6 +247,28 @@ function getRecentSessions() {
   });
 }
 
+function getOMCState() {
+  const omcDir = path.join(WORKSPACE, '.omc');
+  const stateFile = path.join(omcDir, 'state', 'hud-state.json');
+  try {
+    if (fs.existsSync(stateFile)) {
+      const hud = JSON.parse(fs.readFileSync(stateFile, 'utf8'));
+      const sessionsDir = path.join(omcDir, 'sessions');
+      const sessions = fs.existsSync(sessionsDir)
+        ? fs.readdirSync(sessionsDir).filter(f => f.endsWith('.json')).length
+        : 0;
+      return {
+        sessionId: hud.sessionId || null,
+        sessionStart: hud.sessionStartTimestamp || null,
+        backgroundTasks: hud.backgroundTasks?.length || 0,
+        sessions,
+        autopilotActive: !!hud.autopilotActive
+      };
+    }
+  } catch (e) {}
+  return null;
+}
+
 function getMemoryStats() {
   const memoryPath = path.join(WORKSPACE, '.claude', 'projects', 'D--OpenClaw-workspace', 'memory', 'MEMORY.md');
   const defaults = { used: 141, total: 158, entries: 0, health: 89 };
@@ -343,6 +365,7 @@ function generateData() {
     submodules: getSubmodules(),
     sessions: getRecentSessions(),
     memory: getMemoryStats(),
+    omc: getOMCState(),
     stats: {
       totalProjects: fs.existsSync(path.join(WORKSPACE, '80-PROJECTS'))
         ? fs.readdirSync(path.join(WORKSPACE, '80-PROJECTS')).filter(f => !f.startsWith('10-')).length
