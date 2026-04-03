@@ -1314,6 +1314,7 @@ function renderSupplierCompare() {
 function generateWeeklyReport() {
   const now = new Date();
   const weekAgo = new Date(now - 7 * 86400000);
+  const twoWeeksAgo = new Date(now - 14 * 86400000);
   const report = [];
   report.push('📋 本周采购小结（' + now.toLocaleDateString('zh-CN') + '）');
   report.push('');
@@ -1321,6 +1322,10 @@ function generateWeeklyReport() {
   let hasData = false;
   MATERIALS.forEach(m => {
     const arr = (records[m] || []).filter(r => new Date(r.date) >= weekAgo);
+    const prevArr = (records[m] || []).filter(r => {
+      const d = new Date(r.date);
+      return d >= twoWeeksAgo && d < weekAgo;
+    });
     if(arr.length === 0) return;
     hasData = true;
     const prices = arr.map(r => r.price);
@@ -1335,6 +1340,13 @@ function generateWeeklyReport() {
     report.push(`  均价${wavg.toFixed(0)}元/吨，最低${min}元，最高${max}元`);
     if(spread !== null) report.push(`  升贴水${spread}元（参考期货${fut}元）`);
     if(supCount > 1) report.push(`  涉及${supCount}家供应商`);
+    // 上周对比
+    if(prevArr.length > 0) {
+      const prevAvg = prevArr.reduce((s,p)=>s+p.price,0)/prevArr.length;
+      const diff = wavg - prevAvg;
+      const sign = diff > 0 ? '↑' : '↓';
+      report.push(`  vs上周：${sign}${Math.abs(diff).toFixed(0)}元（${prevAvg.toFixed(0)}→${wavg.toFixed(0)}）`);
+    }
     report.push('');
   });
 
