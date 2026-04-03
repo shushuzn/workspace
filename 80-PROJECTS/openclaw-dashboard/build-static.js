@@ -15,11 +15,18 @@ if (!fs.existsSync(DIST)) fs.mkdirSync(DIST, { recursive: true });
 // Load data
 const data = JSON.parse(fs.readFileSync(DATA, 'utf8'));
 
+// Sanitize: remove gitStatus (multi-line, breaks JSON-in-HTML) and null values
+data.projects.forEach(p => { delete p.gitStatus; });
+const sanitized = JSON.stringify(data);
+
+// Escape </script> in data to prevent premature script close
+const safe = sanitized.replace(/<\/script>/gi, '<\\/script>');
+
 // Load HTML
 let html = fs.readFileSync(SRC, 'utf8');
 
 // Inject data before </head>
-const inject = `<script>window.__DASHBOARD_DATA__ = ${JSON.stringify(data)};</script>`;
+const inject = `<script>window.__DASHBOARD_DATA__ = ${safe};</script>`;
 html = html.replace('</head>', inject + '</head>');
 
 // Also replace fetch('/data') with window.__DASHBOARD_DATA__ to support offline
