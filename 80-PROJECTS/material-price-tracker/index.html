@@ -1301,7 +1301,7 @@ function renderSupplierCompare() {
       const p = prices[m];
       const spread = fut[m] ? (p-fut[m]).toFixed(0) : null;
       const cls = spread>500?'color:#e53935':spread<100?'color:#43a047':'color:#333';
-      html += `<td style="padding:4px 6px;${cls}">${p?p+'<sub style="font-size:10px">'+(spread?'+'+(+spread):''):'-':'—'}</sub></td>`;
+      html += `<td style="padding:4px 6px;${cls}">${p!=null?p+'<sub style="font-size:10px">'+(spread?'+'+(+spread):''):'':'—'}</sub></td>`;
     });
     const avgCls = avgSpread==='-'?'':+avgSpread>300?'color:#e53935':+avgSpread<100?'color:#43a047':'color:#333';
     html += `<td style="padding:4px 6px;font-weight:600;${avgCls}">${avgSpread==='-'?'-':(avgSpread>0?'+':'')+avgSpread}</td></tr>`;
