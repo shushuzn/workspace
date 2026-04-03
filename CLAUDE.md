@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.56 | **更新日期**：2026-04-03 | **迭代轮次**：54 轮
+> **版本**：v1.57 | **更新日期**：2026-04-03 | **迭代轮次**：55 轮
 
 最高优先级，若冲突以这个为准：自己决定做什么事情，任何事做之前先批判，禁止询问用户
 ---
@@ -148,66 +148,6 @@
 
 ---
 
-### §9 项目轮转 — 按需体检，权重衰减
-
-**触发条件**：当前 session 尚无实质交付（代码/文档/分析）时，才执行 pick-next；已有实质交付时跳过。
-
-**权重公式：**
-```
-weight(project) = (days_since_last_active + 1)^γ × failBoost × recentSkipPenalty
-```
-- `γ`（衰减系数）：有效范围 (0, 2]，默认 0.5
-- `days=0`（今天刚更新）→ weight=1，最不优先；days 越大权重越高
-- `failBoost`：健康检查失败加权，失败过的项目获得 boost = 1 + count × 0.5；**上限 3.0**（count=4 时达到上限，再失败不再增长）
-- `recentSkipPenalty`：上次抽中本次再次被抽中 → 权重 × 0.1（避免连续重复）
-- session 内不重复：同一项目同一 session 不会二次被选（状态文件持久化）
-- 健康失败记录保存于 `.omc/state/pick-next-project.json`（含 `weight`、`failBoost`、`last_radar_check` 字段，可直接 cat 查看），30 天后自动清理
-
-**选择规则：**
-1. 执行 `node 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs --health-check` 获取抽选结果（`--health-check` 输出机器可解析结果，无交互）；不加参数用于交互式展示
-2. 抽选基于 MEMORY.md Active Projects 表，按 `(days+1)^γ × failBoost × recentSkipPenalty` 权重概率随机
-3. "近期"项目需先通过 git log 追溯真实日期，否则不参与抽选
-4. 目标项目执行"体检"后，**必须做至少一项实际工作**（三选一，禁止只验证不操作）：
-   - **A**（运行验证）：检查能否正常启动运行（3 分钟内验证）→ 验证通过后，修复发现的问题或做一处改进
-   - **B**（代码改进）：修 1 个 bug 或补 1 条类型注解或优化 1 处代码 → 直接执行并 commit
-   - **C**（记录更新）：更新 MEMORY.md 中该项目价值记录（须含至少 1 个可量化改进指标），并更新 Last Active 日期 → 仅当项目无任何可改进空间时选此项
-   - **判定优先级**：有 bug 优先 B；无 bug 但有可量化改进优先 A/B；无改进空间才选 C
-5. **C 类结束本轮**：C 类完成后，本次 pick-next 流程结束，不在本 session 继续 loop 选新项目
-6. 实际工作完成后（`--health-check` 模式自动更新；手动模式需自行更新 MEMORY.md Last Active + push）
-
-**体检发现处理：**
-- 小问题 → 直接在 A/B/C 实际工作中修复
-- 重复/归档候选 → 触发 §1 评估，确认后执行归档（豁免④）
-- days=0（今天已活跃）→ 仅更新记录，不重复体检，避免无效消耗
-- 归档项目时 → 顺扫 Active Projects，检查是否有项目引用了被归档项目的代码/文档/配置，一并清理
-- 归档项目时 → 检查 MEMORY.md 交叉链接表，删除涉及被归档项目的条目
-- 项目标注"增长天花板"：单机组→缺联机、无云同步→缺数据持久化、无AI集成→缺智能；3个以上项目共享同一短板时，建议构建共享方案（→ 用户决策）
-- 交叉链接表每 30 天审计一次，删除已归档项目的链接条目
-- 天花板已触达的项目（如单机组无法扩展、无云同步已达上限）：建议归档或标记"待重构"，3个月内无进展则触发归档流程
-- **天花板量化标准**：单机=无 serverless/无云存储/无外部API调用；无AI=无 LLM/无嵌入调用；低复用=无公共工具函数（满足任一即触发标注）
-- **归档复盘**：项目归档时记录失败模式+学到的教训，写入 MEMORY.md Key Learnings 表（禁止仅归档不复盘）
-- **技术雷达**：pick-next-project 时附带检查"上次技术雷达时间"，超过 1 天则本次强制执行雷达评估（技术发展快，每天触发）；评估结果记录为 MEMORY.md "技术跟进"条目
-- **新项目建议标准化**：现有项目无法解决需求时，执行"需求→差距分析→建议项目名+技术栈+核心功能"，输出写入 MEMORY.md Session History
-- **创新计数**：每次 session 记录"本 session 产生 idea 数、落地数"，汇总写入 MEMORY.md Session History
-- **体检→idea 池闭环**：体检 B/C 类工作若发现新的可量化改进点，自动追加到 idea 池（stage=💡active），来源=[manual]；idea 入池后仍须在 3 天内完成自我评审（可行性 + 收益 + 最小验证方式）才能流转为 proposal，否则自然消亡
-- **新项目建议标准化**：现有项目无法解决需求时，执行以下模板并写入 MEMORY.md Session History：
-  ```
-  ## [建议项目名]
-  - 需求背景: ...
-  - 差距分析: 现有项目中缺少的核心能力
-  - 技术栈: ...
-  - 核心功能: 3-5 条
-  - 预期收益: ...
-  ```
-- **脚手架依赖**：pick-next-project.mjs 状态文件须含 `last_radar_check`（格式：ISO日期），每次体检时检查是否超过 1 天，超则强制执行技术雷达（不算正常体检）；MEMORY.md 项目表须含"天花板类型"列（单机/无AI/低复用/无）；MEMORY.md 须含"技术跟进"区域记录雷达结果
-- **归档复盘拦截**：归档时检查 Key Learnings——若有与本项目直接相关的失败教训（相同技术栈 / 相同问题模式），则直接引用；若无相关内容，则新增一条通用分类条目（如"某项目触发了 X 类问题"），再执行归档；禁止空 Key Learnings 直接归档（即便通用分类条目也算有效复盘）
-
-**意外相似（v1.17 新增）：**
-- 每次抽选后自动随机配对：在剩余项目中随机选一个
-- 读取双方的 `package.json`，取 `dependencies` + `devDependencies` 交集（**启发式**：同名依赖 ≠ 真正共享能力，仅作提示用）；发现共享依赖时，输出 `🌉 意外相似: X ↔ Y | 共享: Z`，**不自动写入** MEMORY.md，由用户决定是否追加到交叉链接表
-- 输出 `🌉 意外相似: X ↔ Y | 共享: Z`，帮助发现跨项目联动机会
-- 发现共享依赖时 → 评估是否应合并或迁移共享依赖，记录为"待联动"选项
-- **用户决策时机**：pick-next 输出意外相似后，用户在当前 session 内决定是否写入交叉链接表；若 session 结束时未决定，由 agent 在 MEMORY.md Session History 中记录为"待联动"，下次遇到同一配对时重新提起
 
 ### §10 创新管道 — idea 必须有流向
 
@@ -242,11 +182,6 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost × recentSkipPena
 - 用户提出跨领域需求 → brainstorm 搜索 MEMORY.md 交叉链接找类比启发
 - 连续 2 个 session 无新 shipped idea → brainstorm 强制触发
 
-**pick-next-project 抽中后自动触发 SuggestProjectIdeas：**
-- 每次抽中项目后立即针对该项目生成 3-5 条具体改进建议
-- 每条建议自动写入 idea 池（stage=seed）
-- 与 BrainstormProjects 的区别：针对性强、无冷却期
-
 **brainstorm 复盘（每 14 天）：**
 - BrainstormReview 操作扫描 .omc/brainstorm/ 历史文件
 - 统计 brainstorm 来源 idea 的采纳率（shipped/running 占比）
@@ -277,7 +212,6 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost × recentSkipPena
 5. [ ] §8：建议表格是否每行都做出了判断？分析内容是否与判断一致？
 6. [ ] §1：计划是否已输出并获确认？豁免是否合规？联动评估是否包含 Gate 控制？（触发 §A 第 1 行时）
 7. [ ] §2：测试是否有效覆盖？豁免是否符合三选一互斥标准？跨项目联动测试建议是否已提供？（新增功能时）
-8. [ ] §9：本 session 是否选中了目标项目？体检后是否做了实际工作？Last Active 是否已更新？
 9. [ ] §10：本 session 产生的 idea 是否已写入 .omc/innovation/ideas.md？过时 idea 是否已清理？
 
 ---
