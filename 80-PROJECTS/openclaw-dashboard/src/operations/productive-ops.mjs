@@ -624,7 +624,10 @@ export class PickNextProject extends ProductiveOperation {
       // 健康失败加权：失败过的项目额外获得 boost，每次失败 +50% weight
       const failRecord = healthFailures[row.name];
       const failBoost = failRecord ? 1 + (failRecord.count || 1) * 0.5 : 1;
-      const weight = Math.pow(days + 1, this.gamma) * failBoost;
+      // recentSkipPenalty：上次抽中的项目本次再次被抽中时，权重 × 0.1
+      const lastPickName = state.lastPick ? state.lastPick.project : null;
+      const recentSkipPenalty = (lastPickName && !isNewSession && row.name === lastPickName) ? 0.1 : 1;
+      const weight = Math.pow(days + 1, this.gamma) * failBoost * recentSkipPenalty;
       results.push({
         name: row.name,
         path: row.path,
@@ -989,11 +992,26 @@ export class IdeaPool {
     return ideas.length - 1;
   }
 
-  /** 推进 idea 状态，shipped 时自动记录交付时间戳 */
+  /**
+   * 推进 idea 状态，shipped 时自动记录交付时间戳
+   * 提案→实验门禁：targetStage='running' 时检查项目是否具备基础条件
+   * 检查项：package.json OR README.md OR tests/ 目录
+   * 若全部缺失则阻止推进，返回 {ok:false, missing:[...], project}
+   */
   advance(idx, targetStage) {
     const ideas = this._read();
     if (idx < 0 || idx >= ideas.length) return false;
     if (!IdeaPool.STAGES.includes(targetStage)) return false;
+
+    // 提案→实验门禁
+    if (targetStage === 'running' && ideas[idx].stage === 'proposal') {
+      const projectName = this._extractProject(ideas[idx].desc);
+      if (projectName) {
+        const check = this._gateCheck(projectName);
+        if (!check.ok) return { ok: false, project: projectName, missing: check.missing };
+      }
+    }
+
     let desc = ideas[idx].desc;
     if (targetStage === 'shipped') {
       desc = `${desc} | shipped:${this._today()}`;
@@ -1001,6 +1019,26 @@ export class IdeaPool {
     ideas[idx] = { ...ideas[idx], stage: targetStage, desc };
     this._write(ideas);
     return true;
+  }
+
+  /** 从 desc 中提取项目名，格式：source: [projectName] description */
+  _extractProject(desc) {
+    // suggest: [projectName] description
+    const m = desc.match(/^\w+:\s*\[([^\]]+)\]/);
+    return m ? m[1] : null;
+  }
+
+  /** 检查项目是否具备基础条件：package.json OR README.md OR tests/ */
+  _gateCheck(projectName) {
+    const projectsDir = path.join(this.workspace, '80-PROJECTS');
+    const projectPath = path.join(projectsDir, projectName);
+    const missing = [];
+    if (!fs.existsSync(path.join(projectPath, 'package.json'))) missing.push('package.json');
+    if (!fs.existsSync(path.join(projectPath, 'README.md'))) missing.push('README.md');
+    if (!fs.existsSync(path.join(projectPath, 'tests')) && !fs.existsSync(path.join(projectPath, 'test'))) {
+      missing.push('tests/ 或 test/');
+    }
+    return { ok: missing.length === 0, missing };
   }
 
   /** 放弃 idea */
@@ -1057,6 +1095,13 @@ export class IdeaPool {
     return this._read().map((idea, i) => ({ idx: i, ...idea }));
   }
 
+  /** 查找指定项目的所有 ideas */
+  getByProject(projectName) {
+    return this._read()
+      .map((idea, i) => ({ idx: i, ...idea }))
+      .filter(i => i.project === projectName);
+  }
+
   _read() {
     if (!fs.existsSync(this.file)) return [];
     const raw = fs.readFileSync(this.file, 'utf8');
@@ -1069,6 +1114,7 @@ export class IdeaPool {
       const shippedMatch = desc.match(/\| shipped:(\d{8})/);
       const killedMatch  = desc.match(/\| killed:(\d{8})(?: (.*))?$/);
       const benefitMatch = desc.match(/\| benefit:([^|]+)$/);
+      const projectMatch = desc.match(/^\w+:\s*\[([^\]]+)\]/);
       ideas.push({
         date:    m[1],
         stage:   m[2],
@@ -1076,6 +1122,7 @@ export class IdeaPool {
         impact:  m[4] ? parseInt(m[4]) : null,
         effort:  m[5] ? parseInt(m[5]) : null,
         desc:    desc,
+        project: projectMatch ? projectMatch[1] : null,
         shipped: shippedMatch ? shippedMatch[1] : null,
         killed:  killedMatch ? killedMatch[1] : null,
         benefit: benefitMatch ? benefitMatch[1].trim() : null,

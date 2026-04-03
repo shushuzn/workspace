@@ -19,6 +19,7 @@
 
 import { PickNextProject, IdeaPool } from './productive-ops.mjs';
 import { SuggestProjectIdeas } from './detection-ops.mjs';
+import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 
@@ -29,6 +30,20 @@ const workspaceRoot = path.join(__dirname, '..', '..', '..', '..');
 const DEFAULT_MEMORY = 'C:/Users/adm/.claude/projects/D--OpenClaw-workspace/memory/MEMORY.md';
 
 const doHealthCheck = process.argv.includes('--health-check');
+// gamma 从 argv 解析（排除 --health-check）
+const gammaArgvIdx = doHealthCheck ? 3 : 2;
+const rawGamma = process.argv[gammaArgvIdx];
+if (rawGamma !== undefined) {
+  const parsed = parseFloat(rawGamma);
+  if (isNaN(parsed) || parsed <= 0 || parsed > 2) {
+    console.warn(`⚠️ gamma 非法值 (${rawGamma})，已使用 fallback 0.5。请检查 MEMORY.md 项目表。`);
+    const evFile = path.join(workspaceRoot, '.omc', 'state', 'CLAUDE.md-evolution.json');
+    const ev = fs.existsSync(evFile) ? JSON.parse(fs.readFileSync(evFile, 'utf8')) : { lastSessionChecked: '', clauseLastExecuted: {}, gammaWarnings: [] };
+    ev.gammaWarnings = ev.gammaWarnings || [];
+    ev.gammaWarnings.push({ date: new Date().toISOString().split('T')[0], value: rawGamma });
+    fs.writeFileSync(evFile, JSON.stringify(ev, null, 2), 'utf8');
+  }
+}
 const gamma = parseFloat(process.argv[2]) || 0.5;
 const memoryPath = process.argv.find((a, i) => i > 2 && !a.startsWith('--')) || DEFAULT_MEMORY;
 
@@ -91,8 +106,19 @@ if (sugg.ideas > 0) {
   sugg.suggestions.forEach(s => console.log(`   • ${s}`));
 }
 
-// 全局创新待办统计
+// 项目积压 ideas 审计
 const pool = new IdeaPool(workspaceRoot);
+const projectIdeas = pool.getByProject(result.picked);
+const activeProjectIdeas = projectIdeas.filter(i => !['shipped','killed'].includes(i.stage));
+if (activeProjectIdeas.length > 0) {
+  console.log(`\n📋 ${result.picked} 积压 ideas（共 ${activeProjectIdeas.length} 条活跃）`);
+  activeProjectIdeas.forEach(i => {
+    const sc = (i.impact && i.effort) ? `★${i.impact}x${i.effort}` : '未评分';
+    console.log(`   [${i.stage}] ${sc} ${i.desc.replace(/\|.*/, '').trim().substring(0, 40)}`);
+  });
+}
+
+// 全局创新待办统计
 const allIdeas = pool.list().filter(i => !['shipped','killed'].includes(i.stage));
 const hiScore = allIdeas.filter(i => (i.impact || 0) * (i.effort || 0) >= 6);
 const midScore = allIdeas.filter(i => {

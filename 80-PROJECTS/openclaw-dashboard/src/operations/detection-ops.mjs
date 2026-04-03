@@ -380,7 +380,7 @@ export class SuggestProjectIdeas extends DetectionOperation {
     // 写入 idea 池
     const ideaPool = new IdeaPool(this.workspace);
     for (const s of suggestions) {
-      ideaPool.add('seed', `suggest: ${s}`, 'suggest');
+      ideaPool.add('seed', `suggest: [${targetProject}] ${s}`, 'suggest');
     }
 
     // 写入 brainstorm 目录

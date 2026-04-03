@@ -1,7 +1,8 @@
 # Claude Code 工作规范
 
-> **版本**：v1.42 | **更新日期**：2026-04-03 | **迭代轮次**：40 轮
+> **版本**：v1.56 | **更新日期**：2026-04-03 | **迭代轮次**：54 轮
 
+最高优先级，若冲突以这个为准：自己决定做什么事情，任何事做之前先批判，禁止询问用户
 ---
 
 ## §A 场景触发表
@@ -37,11 +38,13 @@
 > 影响范围：...
 > 风险点：...
 
-**豁免（满足任一即可）：** ①纯文案（显示文本、注释）②纯数据（不含逻辑的配置 JSON）③工具函数且当前代码中无调用方（grep 无结果则豁免，有结果则不豁免；"当前代码"指仓库 HEAD，不包括 pending PR 中的计划调用）④纯归档操作（移动/重命名目录，不改代码逻辑，不影响任何引用方）；归档优先 `git mv`，仅当 git 不认识新路径时用 mv + git add。
+**豁免（满足任一即可）：** ①纯文案（显示文本、注释）②纯数据（不含逻辑的配置 JSON）③工具函数且当前代码中无调用方（grep 无结果则豁免，有结果则不豁免；"当前代码"指 git HEAD 的工作区文件，不包括暂存区/未合并 commit/stash）④纯归档操作（移动/重命名目录，不改代码逻辑，不影响任何引用方）；归档优先 `git mv`，仅当 git 不认识新路径时用 mv + git add。
 
 - **联动评估**：计划中必须包含 — 影响链（具体接口/行为）→ 最可能的 2-3 个受影响项目 → 各项目适配要求 → **Gate 控制**（定义：变更与适配的发布顺序；例：Gate 1 发依赖包 → Gate 2 发应用更新）
 - **无法确认影响范围时**：列出最可能的 2-3 个项目，说明「待确认：可能影响 [项目名]」
 - **可选方案**：计划中提供 1 套优化实现方案，明确优劣与适用场景
+- **所有修改直接执行**：所有 Edit 均直接执行，不等待确认；diff 预览仅在需要用户做决策时使用（如选择A或B）
+- **方案输出前先批判**：每次方案输出须包含固定批判视角——①有无自相矛盾 ②触发条件是否有客观度量 ③规范与实现是否脱节 ④是否产生新的隐性负担；批判结论与方案同时输出
 
 ### §2 新功能必须附测试
 
@@ -89,7 +92,7 @@
 2. 标注假设前提、待确认信息点
 3. **优先判断**：核心信息缺失导致完全无法落地时，立即中止并询问——本条优先于第 4 条
 4. **跨项目**：任何变更影响其他项目的接口/配置/环境变量/共享依赖时，必须显式标注联动节点，禁止假设不受影响
-5. **评估新需求时**：先检索 MEMORY.md Active Projects 表，检查现有 24 个项目是否有可复用的能力能解决当前需求，避免重复造轮子；发现现有项目无法解决时，显式触发"新项目建议"流程，禁止在旧项目里硬塞
+5. **评估新需求时**：先检索 MEMORY.md Active Projects 表，检查现有项目是否有可复用的能力能解决当前需求；若现有项目均不适用，显式触发"新项目建议"流程
 6. **创新优先**：新功能实现时，显式回答"有没有更简单的实现方案？"——防止过度工程
 
 ### §7 规则冲突时以更严格的一方为准
@@ -102,6 +105,7 @@
 - §2（测试覆盖）优先于 §5（简洁回复）→ 测试代码较长时以完整清晰为先
 - §1（计划输出）优先于 §5（简洁回复）→ 计划正文以完整清晰为先；用户确认后的执行过程仍遵循 §5
 - §8（建议表格）优先于 §5（简洁回复）→ 有实质交付成果时必须输出建议表格，简洁要求为此让路
+- **判定规则**：凡有代码/计划/文档/分析类实质交付 → 强制输出 §8 表格；纯答疑/状态确认/单一操作 → 遵循 §5
 
 ### §8 建议表格
 
@@ -118,7 +122,7 @@
 
 - **判断必选**：每行须在"有 / 无 / 不确定"中明确选择其一，不可跳过
 - 判断为"有"时，"分析"列填具体风险或建议；判断为"无"或"不确定"时，填简短理由
-- **字数控制**：分析列不超过 20 字（不含标点），一行到底不换行；理由类不超过 10 字
+- **字数控制**：分析列不超过 20 字（不含标点），一行到底不换行；理由类不超过 10 字；**方案批判视角豁免此限制**，批判分析列允许 5-15 字（足够说明矛盾/漏洞/脱节/负担各一点）
 - "联动"角度应与 §6 跨项目标注的联动节点保持一致
 - 🔴 高风险不受衰减限制：每个 session 开头复读，直到用户确认闭环或明确拒绝；拒绝后记录 `🔴 高风险已拒绝: [原因]` 留痕
 
@@ -144,33 +148,32 @@
 
 ---
 
-### §9 项目轮转 — 权重衰减等概率随机
+### §9 项目轮转 — 按需体检，权重衰减
 
-每个 session 开始时，必须从所有项目中选择 1 个"目标项目"执行最小维护：
+**触发条件**：当前 session 尚无实质交付（代码/文档/分析）时，才执行 pick-next；已有实质交付时跳过。
 
 **权重公式：**
 ```
-weight(project) = (days_since_last_active + 1)^γ × failBoost
+weight(project) = (days_since_last_active + 1)^γ × failBoost × recentSkipPenalty
 ```
-- `γ`（衰减系数）：有效范围 (0, 2]，默认 0.5（代码校验，非法值 fallback 0.5）
+- `γ`（衰减系数）：有效范围 (0, 2]，默认 0.5
 - `days=0`（今天刚更新）→ weight=1，最不优先；days 越大权重越高
-- `failBoost`：健康检查失败加权，失败过的项目获得 boost = 1 + count × 0.5（count=1 时 boost=1.5）
-- "近期"项目自动从 git log 追溯真实日期并写回 MEMORY.md
+- `failBoost`：健康检查失败加权，失败过的项目获得 boost = 1 + count × 0.5；**上限 3.0**（count=4 时达到上限，再失败不再增长）
+- `recentSkipPenalty`：上次抽中本次再次被抽中 → 权重 × 0.1（避免连续重复）
 - session 内不重复：同一项目同一 session 不会二次被选（状态文件持久化）
-- 健康失败记录保存于 `.omc/state/pick-next-project.json`，30 天后自动清理
-- **v1.24**：新增健康度反馈权重（体检失败项目 boost）
-- **v1.17**：新增随机配对 + 桥接概念发现
+- 健康失败记录保存于 `.omc/state/pick-next-project.json`（含 `weight`、`failBoost`、`last_radar_check` 字段，可直接 cat 查看），30 天后自动清理
 
 **选择规则：**
 1. 执行 `node 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs --health-check` 获取抽选结果（`--health-check` 输出机器可解析结果，无交互）；不加参数用于交互式展示
-2. 抽选基于 MEMORY.md Active Projects 表，按 `(days+1)^γ` 权重概率随机
+2. 抽选基于 MEMORY.md Active Projects 表，按 `(days+1)^γ × failBoost × recentSkipPenalty` 权重概率随机
 3. "近期"项目需先通过 git log 追溯真实日期，否则不参与抽选
 4. 目标项目执行"体检"后，**必须做至少一项实际工作**（三选一，禁止只验证不操作）：
    - **A**（运行验证）：检查能否正常启动运行（3 分钟内验证）→ 验证通过后，修复发现的问题或做一处改进
    - **B**（代码改进）：修 1 个 bug 或补 1 条类型注解或优化 1 处代码 → 直接执行并 commit
    - **C**（记录更新）：更新 MEMORY.md 中该项目价值记录（须含至少 1 个可量化改进指标），并更新 Last Active 日期 → 仅当项目无任何可改进空间时选此项
    - **判定优先级**：有 bug 优先 B；无 bug 但有可量化改进优先 A/B；无改进空间才选 C
-5. 实际工作完成后（`--health-check` 模式自动更新；手动模式需自行更新 MEMORY.md Last Active + push）
+5. **C 类结束本轮**：C 类完成后，本次 pick-next 流程结束，不在本 session 继续 loop 选新项目
+6. 实际工作完成后（`--health-check` 模式自动更新；手动模式需自行更新 MEMORY.md Last Active + push）
 
 **体检发现处理：**
 - 小问题 → 直接在 A/B/C 实际工作中修复
@@ -186,7 +189,7 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost
 - **技术雷达**：pick-next-project 时附带检查"上次技术雷达时间"，超过 1 天则本次强制执行雷达评估（技术发展快，每天触发）；评估结果记录为 MEMORY.md "技术跟进"条目
 - **新项目建议标准化**：现有项目无法解决需求时，执行"需求→差距分析→建议项目名+技术栈+核心功能"，输出写入 MEMORY.md Session History
 - **创新计数**：每次 session 记录"本 session 产生 idea 数、落地数"，汇总写入 MEMORY.md Session History
-- **体检→idea 池闭环**：体检 B/C 类工作若发现新的可量化改进点，自动追加到 idea 池（stage=proposal），来源=[manual]
+- **体检→idea 池闭环**：体检 B/C 类工作若发现新的可量化改进点，自动追加到 idea 池（stage=💡active），来源=[manual]；idea 入池后仍须在 3 天内完成自我评审（可行性 + 收益 + 最小验证方式）才能流转为 proposal，否则自然消亡
 - **新项目建议标准化**：现有项目无法解决需求时，执行以下模板并写入 MEMORY.md Session History：
   ```
   ## [建议项目名]
@@ -197,14 +200,14 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost
   - 预期收益: ...
   ```
 - **脚手架依赖**：pick-next-project.mjs 状态文件须含 `last_radar_check`（格式：ISO日期），每次体检时检查是否超过 1 天，超则强制执行技术雷达（不算正常体检）；MEMORY.md 项目表须含"天花板类型"列（单机/无AI/低复用/无）；MEMORY.md 须含"技术跟进"区域记录雷达结果
-- **归档复盘拦截**：归档时若 MEMORY.md Key Learnings 无新增条目，报错"请先填写归档复盘"并中断操作
+- **归档复盘拦截**：归档时检查 Key Learnings——若有与本项目直接相关的失败教训（相同技术栈 / 相同问题模式），则直接引用；若无相关内容，则新增一条通用分类条目（如"某项目触发了 X 类问题"），再执行归档；禁止空 Key Learnings 直接归档（即便通用分类条目也算有效复盘）
 
 **意外相似（v1.17 新增）：**
 - 每次抽选后自动随机配对：在剩余项目中随机选一个
-- 读取双方的 `package.json`，取 `dependencies` + `devDependencies` 交集
+- 读取双方的 `package.json`，取 `dependencies` + `devDependencies` 交集（**启发式**：同名依赖 ≠ 真正共享能力，仅作提示用）；发现共享依赖时，输出 `🌉 意外相似: X ↔ Y | 共享: Z`，**不自动写入** MEMORY.md，由用户决定是否追加到交叉链接表
 - 输出 `🌉 意外相似: X ↔ Y | 共享: Z`，帮助发现跨项目联动机会
-- 有共享依赖时自动写入 MEMORY.md 交叉链接表（最多 100 条，30 天旧条目自动清理）
 - 发现共享依赖时 → 评估是否应合并或迁移共享依赖，记录为"待联动"选项
+- **用户决策时机**：pick-next 输出意外相似后，用户在当前 session 内决定是否写入交叉链接表；若 session 结束时未决定，由 agent 在 MEMORY.md Session History 中记录为"待联动"，下次遇到同一配对时重新提起
 
 ### §10 创新管道 — idea 必须有流向
 
@@ -227,6 +230,7 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost
 - 格式：`- [DATE] 💡/📋/🔬/📦 description | expected_benefit | status`
 - 每次 session 开始时快速过一遍 idea 池，标记过时项（自动检查日期）
 - `node scripts/idea.mjs list/add/advance/kill` — idea 池管理命令
+- **清理机制**：`node scripts/idea.mjs archive` 手动触发归档——将最旧的 💀killed + ⏸️dormant 条目（超过 100 条时执行）移动到 `.omc/innovation/archive/`（文件名含日期）；`idea.mjs` 未实现前，在 `.omc/innovation/TODO.md` 创建文本待办，标注 `[system archive]` tag
 
 **跨域类比自动触发：**
 - brainstorm 时，自动从 MEMORY.md 交叉链接表搜索相关域类比（最多3条）
@@ -277,6 +281,16 @@ weight(project) = (days_since_last_active + 1)^γ × failBoost
 9. [ ] §10：本 session 产生的 idea 是否已写入 .omc/innovation/ideas.md？过时 idea 是否已清理？
 
 ---
+
+## 版本演进
+
+每次修改 CLAUDE.md 时，在文件顶部更新版本号+日期；修改记录以 commit message 为准（格式：`feat(CLAUDE.md): 描述`）；触发自我审查的条件（满足任一）：① 用户主动提出规范相关问题 ≥2 次同一问题 ② 某条款在 5 个以上 session 内未被执行过 ③ §6 第5条跨项目联动节点≥3个未处理
+
+**追踪约定**：
+- 版本演进①②③的触发状态记录在 `.omc/state/CLAUDE.md-evolution.json`（字段：`lastSessionChecked`、`clauseLastExecuted: {§号: sessionId}`、`unprocessedLinkNodes: N`），pick-next-project.mjs 每次执行完毕自动更新 `lastSessionChecked`，其余字段由 session 结束时自动写入
+- idea 生命周期状态由 `scripts/idea.mjs` 管理，不在 CLAUDE.md 中追踪
+- gamma 警告由 pick-next-project.mjs 运行时直接输出文本，不写入状态文件
+- **session-end 自动更新**：session 结束时自动运行 `node .omc/scripts/update-evolution.mjs`（由 SessionEnd hook 触发，用户需在 settings.json 中配置 hook）
 
 ## 使用反馈
 

@@ -81,6 +81,13 @@ function writeData(ideas) {
 function cmdList(args) {
   const sortScore = args.includes('--sort') && args.includes('score');
   let ideas = readData();
+  if (args.includes('--auto-prune') || ideas.length > 100) {
+    cmdPrune();
+    ideas = readData();
+    if (ideas.length > 100) {
+      console.log(`⚠️ 仍有 ${ideas.length} 条，建议运行 archive`);
+    }
+  }
   if (sortScore) {
     ideas = ideas.sort((a, b) => {
       const sa = (a.impact || 0) * (a.effort || 0);
@@ -137,6 +144,35 @@ function cmdAdvance(args) {
   if (STAGE_LIST.indexOf(target) <= curIdx && !args[1]) {
     console.log(`❌ ${idea.stage} 已是最终状态`); return;
   }
+
+  // 提案→实验门禁检查
+  if (target === 'running' && idea.stage === 'proposal') {
+    const m = idea.desc.match(/^\w+:\s*\[([^\]]+)\]/);
+    if (m) {
+      const projectName = m[1];
+      const projectsDir = path.join(__dirname, '..', '80-PROJECTS');
+      const projectPath = path.join(projectsDir, projectName);
+      const missing = [];
+      if (!fs.existsSync(path.join(projectPath, 'package.json'))) missing.push('package.json');
+      if (!fs.existsSync(path.join(projectPath, 'README.md'))) missing.push('README.md');
+      if (!fs.existsSync(path.join(projectPath, 'tests')) && !fs.existsSync(path.join(projectPath, 'test'))) {
+        missing.push('tests/ 或 test/');
+      }
+      if (missing.length > 0) {
+        console.log(`❌ 门禁拦截：${projectName} 缺少必要文件`);
+        missing.forEach(f => console.log(`   ☐ ${f}`));
+        console.log(`\n   请先补充必要文件后再推进至 running`);
+        return;
+      }
+    }
+    // 验证方式字段检查
+    if (!idea.desc.includes('|验证:') && !idea.desc.includes('|验证方式:')) {
+      console.log(`❌ 缺少验证方式：proposal 推进到 running 前必须声明最小验证方式`);
+      console.log(`   用法: node scripts/idea.mjs benefit ${args[0]} "验证:在48h内运行X验证Y"`);
+      return;
+    }
+  }
+
   let desc = idea.desc;
   if (target === 'shipped') desc = `${desc} | shipped:${todayStr()}`;
   ideas[idx] = { ...idea, stage: target, desc };
@@ -200,10 +236,37 @@ function cmdBenefit(args) {
   const desc = args.slice(1).join(' ').trim();
   const ideas = readData();
   if (idx < 0 || idx >= ideas.length) { console.log('❌ 未找到 idea'); return; }
-  const cleanDesc = (ideas[idx].desc || '').replace(/\s*\| benefit:.*$/, '');
+  const cleanDesc = (ideas[idx].desc || '').replace(/\s*\| ?验证(?::|方式).*$/, '').replace(/\s*\| benefit:.*$/, '');
   ideas[idx] = { ...ideas[idx], desc: `${cleanDesc} | benefit:${desc}` };
   writeData(ideas);
   console.log(`✅ 收益已添加: ${ideas[idx].desc.replace(/\|.*/,'').trim()}`);
+}
+
+function cmdVerify(args) {
+  if (args.length < 2) { console.log('用法: verify ID "验证方式"'); return; }
+  const idx = parseInt(args[0]);
+  const desc = args.slice(1).join(' ').trim();
+  const ideas = readData();
+  if (idx < 0 || idx >= ideas.length) { console.log('❌ 未找到 idea'); return; }
+  // 去除已有的 |验证: 字段
+  const cleanDesc = (ideas[idx].desc || '').replace(/\s*\| ?验证(?::|方式).*$/, '');
+  ideas[idx] = { ...ideas[idx], desc: `${cleanDesc} |验证:${desc}` };
+  writeData(ideas);
+  console.log(`✅ 验证已添加: ${ideas[idx].desc.replace(/\|.*/,'').trim()}`);
+}
+
+function cmdArchive() {
+  const ideas = readData();
+  const ARCHIVE_DIR = path.join(__dirname, '..', '.omc', 'innovation', 'archive');
+  if (!fs.existsSync(ARCHIVE_DIR)) fs.mkdirSync(ARCHIVE_DIR, { recursive: true });
+  const archiveFile = path.join(ARCHIVE_DIR, `archive-${todayStr()}.md`);
+  const toArchive = ideas.filter(i => i.stage === 'killed' || i.stage === 'dormant');
+  if (toArchive.length === 0) { console.log('(无 killed/dormant 条目需要归档)'); return; }
+  const content = toArchive.map(i => i.raw).join('\n') + '\n';
+  fs.writeFileSync(archiveFile, content, 'utf8');
+  const remaining = ideas.filter(i => i.stage !== 'killed' && i.stage !== 'dormant');
+  writeData(remaining);
+  console.log(`✅ 归档 ${toArchive.length} 条到 ${archiveFile}`);
 }
 
 const [cmd, ...args] = process.argv.slice(2);
@@ -215,10 +278,14 @@ switch (cmd) {
   case 'score':   cmdScore(args); break;
   case 'prune':   cmdPrune();   break;
   case 'benefit': cmdBenefit(args); break;
+  case 'verify':  cmdVerify(args);  break;
+  case 'archive': cmdArchive(); break;
   default:
-    console.log('用法: idea.mjs list|add|advance|kill|score|benefit|prune');
+    console.log('用法: idea.mjs list|add|advance|kill|score|benefit|verify|prune|archive');
     console.log('  list [--sort score]   按评分排序（高分优先）');
     console.log('  add STAGE description  (STAGE: seed/proposal/running/shipped/killed/dormant)');
     console.log('  score ID impact effort  ★impact×effort (1-3, 越高越值得优先)');
     console.log('  benefit ID "描述"      给 idea 添加收益描述');
+    console.log('  verify ID "验证方式"   添加最小验证方式（48h内可验证）');
+    console.log('  archive               将 killed+dormant 条目归档到 .omc/innovation/archive/');
 }

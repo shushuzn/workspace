@@ -38,7 +38,7 @@ function getGitStats() {
     }).trim();
 
     const commits = log ? log.split('\n').filter(Boolean) : [];
-    const files = execSync(`git diff --name-only ${range}`, {
+    const files = execSync(`git diff --name-only -- ${range}`, {
       cwd: WORKSPACE,
       encoding: 'utf8',
       timeout: 5000,
@@ -57,16 +57,35 @@ function getIdeaStats() {
     const today = new Date().toISOString().slice(0, 10).replace(/-/g, '');
     const raw = fs.readFileSync(poolFile, 'utf8');
     const lines = raw.split('\n');
-    let total = 0, added = 0, scored = 0, advanced = 0;
+    let total = 0, added = 0, scored = 0, advanced = 0, killedToday = 0, running = 0, proposals = 0, dormantStale = 0;
+    const staleRunning = [];
     for (const line of lines) {
       const m = line.match(/^-\s*\[(\d{8})\]\s*(\w+)/);
       if (!m) continue;
       total++;
-      if (m[1] === today) added++;
+      const stage = m[2], date = m[1];
+      if (m[1] === today) {
+        added++;
+        if (stage === 'killed') killedToday++;
+      }
       if (line.includes('[score:')) scored++;
-      if (['proposal','running','shipped'].includes(m[2])) advanced++;
+      if (['proposal','running','shipped'].includes(stage)) advanced++;
+      if (stage === 'running') {
+        running++;
+        const s = String(date).replace(/-/g, '');
+        const d = new Date(`${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}`);
+        const daysOld = Math.floor((new Date() - d) / 86400000);
+        if (daysOld > 14) staleRunning.push({ date, daysOld, desc: line.substring(0, 60) });
+      }
+      if (stage === 'proposal') proposals++;
+      if (stage === 'dormant') {
+        const s = String(date).replace(/-/g, '');
+        const d = new Date(`${s.slice(0,4)}-${s.slice(4,6)}-${s.slice(6,8)}`);
+        const daysOld = Math.floor((new Date() - d) / 86400000);
+        if (daysOld > 30) dormantStale++;
+      }
     }
-    return { total, added, scored, advanced };
+    return { total, added, scored, advanced, killedToday, running, proposals, dormantStale, staleRunning };
   } catch {
     return { total: 0, added: 0, scored: 0, advanced: 0 };
   }
@@ -112,8 +131,13 @@ function main() {
     ideas: {
       total: idea.total,
       addedThisSession: idea.added,
+      killedThisSession: idea.killedToday,
+      running: idea.running,
+      proposals: idea.proposals,
       scored: idea.scored,
       advanced: idea.advanced,
+      dormantStale: idea.dormantStale,
+      staleRunning: idea.staleRunning,
     },
     activeProjects: activeCount[0] || 0,
   };
@@ -133,9 +157,16 @@ function main() {
   }
   console.log('─'.repeat(48));
   console.log(`  💡 Idea 池: 共 ${idea.total} 条`);
-  console.log(`     本次新增: ${idea.added} 条`);
-  console.log(`     已评分: ${idea.scored} 条`);
-  console.log(`     已推进: ${idea.advanced} 条`);
+  console.log(`     本次新增: +${idea.added} / 放弃: -${idea.killedToday} / 推进: →${idea.advanced}`);
+  console.log(`     实验中: ${idea.running} 条 | 提案: ${idea.proposals} 条 | 已评分: ${idea.scored} 条`);
+  if (idea.staleRunning.length > 0) {
+    idea.staleRunning.slice(0, 3).forEach(i => {
+      console.log(`     ⚠️  超期未交付(${i.daysOld}d): ${i.desc.replace(/\|.*/, '').trim().substring(0, 40)}`);
+    });
+  }
+  if (idea.dormantStale > 0) {
+    console.log(`     ⚠️  休眠超时(>30d): ${idea.dormantStale} 条 → 建议审计或唤醒`);
+  }
   console.log('─'.repeat(48));
   console.log(`  📁 Active Projects: ${activeCount[0] || '?'} 个`);
   console.log('═'.repeat(48));
@@ -156,9 +187,10 @@ function main() {
   // Monthly summary
   const totalCommits = monthly.reduce((s, r) => s + (r.git?.commits || 0), 0);
   const totalIdeas = monthly.reduce((s, r) => s + (r.ideas?.addedThisSession || 0), 0);
+  const totalKilled = monthly.reduce((s, r) => s + (r.ideas?.killedThisSession || 0), 0);
   const avgDuration = monthly.reduce((s, r) => s + parseInt(r.duration || '0'), 0) / monthly.length;
   console.log(`📅 本月汇总（共 ${monthly.length} sessions）`);
-  console.log(`   Git: ${totalCommits} 次提交 | Idea: ${totalIdeas} 条新增 | 均时长: ${Math.round(avgDuration)}min\n`);
+  console.log(`   Git: ${totalCommits} 次提交 | Idea: +${totalIdeas} / -${totalKilled} | 均时长: ${Math.round(avgDuration)}min\n`);
 }
 
 main();
