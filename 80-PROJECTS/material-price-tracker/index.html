@@ -356,6 +356,11 @@
     <div style="margin-bottom:10px">
       <input type="text" id="remind_msg" placeholder="提醒内容，如：供应商明天报价" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px">
     </div>
+    <div style="margin-bottom:10px">
+      <input type="text" id="serverchan_key" placeholder="Server酱 SCKEY（可选）" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:12px" onchange="saveServerChan()">
+      <div style="font-size:11px;color:#888;margin-top:4px">用于微信推送告警。免费，申请：<a href="https://sc.ftqq.com" target="_blank" style="color:#1a73e8">sc.ftqq.com</a></div>
+    </div>
+    <div id="scStatus" style="font-size:11px;margin-bottom:8px;color:#888"></div>
     <div style="display:flex;gap:8px;justify-content:flex-end">
       <button onclick="closeRemindModal()" style="padding:7px 14px;border:1px solid #ddd;background:#fff;border-radius:6px;cursor:pointer;font-size:13px">取消</button>
       <button onclick="saveRemind()" style="padding:7px 14px;background:#1a73e8;color:#fff;border:none;border-radius:6px;cursor:pointer;font-size:13px">保存</button>
@@ -717,6 +722,7 @@ const STORAGE_KEY = 'material_records_v4';
 const FUT_STORAGE = 'material_futures_price_v2';
 const ALERT_STORAGE = 'material_alert_thresh_v1';
 const REMIND_STORAGE = 'material_remind_v1';
+const SCKEY_STORAGE = 'material_serverchan_v1';
 
 function syncToLocal() {
   localStorage.setItem(skey(STORAGE_KEY), JSON.stringify(records));
@@ -897,6 +903,7 @@ function addRecord() {
     alertMsg = '⚠️ ' + alertMsg + ' 超过警戒线¥'+thresh+'！';
   }
   showAlert(alertMsg);
+  sendServerChan('塑价通提醒：' + alertMsg);
 }
 
 function delRecord(mat, idx) {
@@ -1223,6 +1230,13 @@ function showAlert(msg){
 // ============================================================
 function openRemindModal() {
   document.getElementById('remind_modal').style.display = 'flex';
+  const savedKey = localStorage.getItem(skey(SCKEY_STORAGE));
+  if(savedKey) {
+    document.getElementById('serverchan_key').value = savedKey;
+    document.getElementById('scStatus').textContent = '✅ Server酱已配置，告警将推送至微信';
+  } else {
+    document.getElementById('scStatus').textContent = '未配置微信推送，仅本地弹窗提醒';
+  }
 }
 function closeRemindModal() {
   document.getElementById('remind_modal').style.display = 'none';
@@ -1235,6 +1249,18 @@ function saveRemind() {
   closeRemindModal();
   schedulePersist();
   showAlert('提醒已记，下次打开会弹出');
+}
+function saveServerChan() {
+  const key = document.getElementById('serverchan_key').value.trim();
+  if(key) localStorage.setItem(skey(SCKEY_STORAGE), key);
+  else localStorage.removeItem(skey(SCKEY_STORAGE));
+}
+async function sendServerChan(text) {
+  const key = localStorage.getItem(skey(SCKEY_STORAGE));
+  if(!key) return;
+  try {
+    await fetch(`https://sc.ftqq.com/${key}.send?text=${encodeURIComponent(text)}`, { method: 'GET', mode: 'no-cors' });
+  } catch(e) {}
 }
 function checkRemind() {
   if(!reminders || reminders.length === 0) return;
