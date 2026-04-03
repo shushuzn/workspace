@@ -67,6 +67,10 @@
   .market-content { display: none; }
   .market-content.active { display: block; }
   .market-iframe { width: 100%; min-height: 500px; border: none; }
+  .market-card { padding: 24px 20px; text-align: center; }
+  .market-info { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 8px; }
+  .market-btn { display: inline-block; padding: 10px 24px; background: #1a73e8; color: #fff; border-radius: 20px; font-size: 14px; text-decoration: none; }
+  .market-btn:hover { background: #1565c0; }
 
   /* 采购记录 */
   .record-form { padding: 12px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; align-items: end; }
@@ -263,10 +267,18 @@
       <div class="market-tab" data-m="pe-sina">新浪期货</div>
     </div>
     <div class="market-content active" id="mkt-pe-eastmoney">
-      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2506.html"></iframe>
+      <div class="market-card">
+        <div class="market-info">📊 PE 期货行情（东方财富）</div>
+        <p style="font-size:12px;color:#888;margin-bottom:12px">请点击下方按钮在新窗口打开实时行情</p>
+        <a href="https://quote.eastmoney.com/qihuo/f2506.html" target="_blank" class="market-btn">📈 东方财富 PE期货</a>
+        <a href="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" target="_blank" class="market-btn" style="margin-top:8px">📊 新浪期货</a>
+      </div>
     </div>
     <div class="market-content" id="mkt-pe-sina">
-      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php"></iframe>
+      <div class="market-card">
+        <div class="market-info">📊 PE 期货行情（新浪）</div>
+        <a href="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" target="_blank" class="market-btn">📊 新浪期货</a>
+      </div>
     </div>
   </div>
 </div>
@@ -280,10 +292,18 @@
       <div class="market-tab" data-m="pp-sina">新浪期货</div>
     </div>
     <div class="market-content active" id="mkt-pp-eastmoney">
-      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2507.html"></iframe>
+      <div class="market-card">
+        <div class="market-info">📊 PP 期货行情（东方财富）</div>
+        <p style="font-size:12px;color:#888;margin-bottom:12px">请点击下方按钮在新窗口打开实时行情</p>
+        <a href="https://quote.eastmoney.com/qihuo/f2507.html" target="_blank" class="market-btn">📈 东方财富 PP期货</a>
+        <a href="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" target="_blank" class="market-btn" style="margin-top:8px">📊 新浪期货</a>
+      </div>
     </div>
     <div class="market-content" id="mkt-pp-sina">
-      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php"></iframe>
+      <div class="market-card">
+        <div class="market-info">📊 PP 期货行情（新浪）</div>
+        <a href="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" target="_blank" class="market-btn">📊 新浪期货</a>
+      </div>
     </div>
   </div>
 </div>
@@ -297,10 +317,18 @@
       <div class="market-tab" data-m="pvc-sina">新浪期货</div>
     </div>
     <div class="market-content active" id="mkt-pvc-eastmoney">
-      <iframe class="market-iframe" src="https://quote.eastmoney.com/qihuo/f2508.html"></iframe>
+      <div class="market-card">
+        <div class="market-info">📊 PVC 期货行情（东方财富）</div>
+        <p style="font-size:12px;color:#888;margin-bottom:12px">请点击下方按钮在新窗口打开实时行情</p>
+        <a href="https://quote.eastmoney.com/qihuo/f2508.html" target="_blank" class="market-btn">📈 东方财富 PVC期货</a>
+        <a href="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" target="_blank" class="market-btn" style="margin-top:8px">📊 新浪期货</a>
+      </div>
     </div>
     <div class="market-content" id="mkt-pvc-sina">
-      <iframe class="market-iframe" src="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php"></iframe>
+      <div class="market-card">
+        <div class="market-info">📊 PVC 期货行情（新浪）</div>
+        <a href="https://vip.stock.finance.sina.com.cn/q/view/cn_future.php" target="_blank" class="market-btn">📊 新浪期货</a>
+      </div>
     </div>
   </div>
 </div>
