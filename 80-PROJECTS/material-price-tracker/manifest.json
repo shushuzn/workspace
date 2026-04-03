@@ -1,0 +1,22 @@
+{
+  "name": "塑价通",
+  "short_name": "塑价通",
+  "description": "PE/PP/PVC期货监控，采购记录，升贴水计算，微信提醒",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a73e8",
+  "theme_color": "#1a73e8",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

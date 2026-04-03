@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>原料期货监控</title>
+<title>塑价通 - PE/PP/PVC期货监控</title>
 <meta name="keywords" content="期货监控,PE PP PVC,原料价格,采购管理,塑料原料,化工原料,期货行情">
+<meta name="description" content="塑料原料期货监控，采购记录，升贴水计算，微信提醒，完全免费">
+<meta name="theme-color" content="#1a73e8">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f0f2f5; min-height: 100vh; transition: background 0.2s, color 0.2s; }
@@ -1349,6 +1353,13 @@ function toggleDark() {
 
 // ============================================================
 // Init
+// ============================================================
+// PWA Service Worker
+// ============================================================
+if('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js').catch(() => {});
+}
+
 // ============================================================
 async function init() {
   // 恢复暗色
