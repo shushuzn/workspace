@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>塑价通 · 塑料行情早报</title>
+<style>
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+  .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+  .date { color: #666; font-size: 14px; margin-bottom: 16px; }
+  .up { color: #e74c3c; } .down { color: #27ae60; }
+  .price-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #eee; }
+  .price-row:last-child { border-bottom: none; }
+  .tag { background: #3498db; color: white; border-radius: 4px; padding: 2px 8px; font-size: 12px; }
+  .tag-warning { background: #e74c3c; }
+  h1 { color: #2c3e50; font-size: 20px; }
+  .footer { text-align: center; color: #999; font-size: 12px; margin-top: 20px; }
+  .cta { display: block; background: #3498db; color: white; text-align: center; padding: 14px; border-radius: 8px; text-decoration: none; font-size: 16px; margin-top: 16px; }
+</style>
+</head>
+<body>
+<h1>塑价通 · 塑料行情早报</h1>
+<p class="date" id="date"></p>
+
+<div class="card">
+  <h2>期货行情（大商所收盘价）</h2>
+  <div class="price-row"><span>PE 线性（LLDPE）</span><span id="pe-price" class="up">—</span></div>
+  <div class="price-row"><span>PP 拉丝</span><span id="pp-price" class="down">—</span></div>
+  <div class="price-row"><span>PVC 期货</span><span id="pvc-price">—</span></div>
+  <p style="color:#999;font-size:12px;margin:8px 0 0">数据来源：大商所官网 · 手动更新</p>
+</div>
+
+<div class="card">
+  <h2>今日重点</h2>
+  <ul id="alerts">
+    <li>PE连续3日上涨，累计涨幅<span class="up">+150元/吨</span></li>
+    <li>PP周均价较上周<span class="down">-80元/吨</span>，建议逢低补库</li>
+  </ul>
+</div>
+
+<div class="card">
+  <h2>操作建议</h2>
+  <p>PE高位运行，下游采购可分批少量补库；PP供需宽松，观望为主。</p>
+</div>
+
+<a class="cta" href="../landing.html">免费使用塑价通</a>
+
+<div class="footer">
+  <p>塑价通 · 原料采购管理工具<br>免费 · 无需注册 · 微信即用</p>
+</div>
+
+<script>
+document.getElementById('date').textContent = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
+</script>
+</body>
+</html>
