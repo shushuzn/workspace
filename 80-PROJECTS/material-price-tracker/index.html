@@ -1702,7 +1702,7 @@ async function init() {
     if (params.has(id)) {
       const v = parseFloat(params.get(id));
       if (!isNaN(v)) {
-        const el = document.getElementById('spread_' + k);
+        const el = document.getElementById(id);
         if (el) { el.innerText = v; }
       }
     }
