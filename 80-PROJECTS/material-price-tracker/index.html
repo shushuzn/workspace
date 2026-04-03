@@ -22,6 +22,8 @@
   .dark .records-table th { background: #333; color: #aaa; }
   .dark .records-table td { border-color: #333; }
   .dark .overview-row { border-color: #333; }
+  .dark #cost_result { background: #2a2a2a; }
+  .dark #cost_result .card-body { background: #2a2a2a; }
   .dark .guide { background: #2a2a2a; }
   .dark .export-btn { background: #444; color: #ddd; }
   .dark .chart-canvas-wrap { background: #222; }
@@ -174,6 +176,7 @@
   <div class="tab" data-tab="pp">PP</div>
   <div class="tab" data-tab="pvc">PVC</div>
   <div class="tab" data-tab="overview">总览</div>
+  <div class="tab" data-tab="cost">🧮 成本</div>
 </div>
 
 <div class="anon-hint" id="anonHint">👤 匿名模式 — 数据仅存本地，换浏览器会丢失 · <button onclick="showLoginModal()" style="background:none;border:none;color:#1a73e8;cursor:pointer;font-size:11px;padding:0">登录同步</button></div>
@@ -368,6 +371,67 @@
       <p>• <b>正常范围</b>：PE/PP 约 +200~+500元/吨</p>
       <p>• <b>PVC</b>：约 0~+300元/吨</p>
       <p>• <b>解读</b>：升贴水 &gt; +800 → ⚠️ 偏贵 &nbsp;|&nbsp; &lt; 0 → ⚠️ 警惕</p>
+    </div>
+  </div>
+</div>
+
+<!-- 成本计算器 -->
+<div class="content" id="tab-cost">
+  <div class="card">
+    <div class="card-header">🧮 成本计算器</div>
+    <div class="card-body" style="padding:16px">
+      <p style="font-size:12px;color:#888;margin-bottom:14px">输入单价、重量和数量，自动计算单件成本和总成本</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
+        <div>
+          <label style="font-size:12px;color:#666;display:block;margin-bottom:4px">原料</label>
+          <select id="cost_mat" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px">
+            <option value="pe">PE（聚乙烯）</option>
+            <option value="pp">PP（聚丙烯）</option>
+            <option value="pvc">PVC（聚氯乙烯）</option>
+          </select>
+        </div>
+        <div>
+          <label style="font-size:12px;color:#666;display:block;margin-bottom:4px">采购单价（元/吨）</label>
+          <input type="number" id="cost_price" placeholder="如 8200" step="10" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-size:12px;color:#666;display:block;margin-bottom:4px">单件重量（kg）</label>
+          <input type="number" id="cost_weight" placeholder="如 0.5" step="0.01" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box">
+        </div>
+        <div>
+          <label style="font-size:12px;color:#666;display:block;margin-bottom:4px">数量（件）</label>
+          <input type="number" id="cost_qty" placeholder="如 1000" min="1" style="width:100%;padding:8px;border:1px solid #ddd;border-radius:6px;font-size:13px;box-sizing:border-box">
+        </div>
+      </div>
+      <button onclick="calcCost()" style="width:100%;padding:10px;background:#1a73e8;color:#fff;border:none;border-radius:8px;font-size:14px;cursor:pointer;margin-bottom:16px">计算成本</button>
+      <div id="cost_result" style="display:none;background:#f8f9fa;border-radius:8px;padding:16px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+          <div style="text-align:center">
+            <div style="font-size:11px;color:#888">单件成本</div>
+            <div id="cost_per_piece" style="font-size:22px;font-weight:700;color:#1a73e8">-</div>
+            <div style="font-size:11px;color:#888">元/件</div>
+          </div>
+          <div style="text-align:center">
+            <div style="font-size:11px;color:#888">总成本</div>
+            <div id="cost_total" style="font-size:22px;font-weight:700;color:#e31c1c">-</div>
+            <div style="font-size:11px;color:#888">元</div>
+          </div>
+        </div>
+        <div style="margin-top:12px;padding-top:12px;border-top:1px solid #eee;font-size:12px;color:#666">
+          原料：<span id="cost_mat_txt">-</span> &nbsp;|&nbsp;
+          单价：<span id="cost_price_txt">-</span>元/吨 &nbsp;|&nbsp;
+          重量：<span id="cost_weight_txt">-</span>kg/件
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">📐 常用计算参考</div>
+    <div class="card-body" style="padding:12px 16px;font-size:13px;color:#555;line-height:1.8">
+      <p>• <b>元/吨 → 元/kg</b>：单价 ÷ 1000 &nbsp;（如 8200元/吨 = 8.2元/kg）</p>
+      <p>• <b>元/kg → 元/件</b>：单价 × 重量(kg) &nbsp;（如 8.2元/kg × 0.5kg = 4.1元/件）</p>
+      <p>• <b>总价</b> = 元/件 × 数量</p>
+      <p>• <b>一吨原料</b> = 1000kg，可做 1000÷单件重量(kg) 件</p>
     </div>
   </div>
 </div>
@@ -947,6 +1011,29 @@ function calcSpread() {
     el.textContent = (spread>=0?'+':'')+spread.toFixed(0);
     txt.textContent = latest+' - '+fut;
   });
+}
+
+function calcCost() {
+  const mat = document.getElementById('cost_mat').value;
+  const price = parseFloat(document.getElementById('cost_price').value);
+  const weight = parseFloat(document.getElementById('cost_weight').value);
+  const qty = parseInt(document.getElementById('cost_qty').value);
+  const result = document.getElementById('cost_result');
+  if(!price || !weight || !qty || price <= 0 || weight <= 0 || qty <= 0) {
+    showAlert('请填写完整的单价、重量和数量');
+    result.style.display = 'none';
+    return;
+  }
+  const perKg = price / 1000;
+  const perPiece = perKg * weight;
+  const total = perPiece * qty;
+  const matNames = { pe:'PE（聚乙烯）', pp:'PP（聚丙烯）', pvc:'PVC（聚氯乙烯）' };
+  document.getElementById('cost_per_piece').textContent = perPiece.toFixed(2);
+  document.getElementById('cost_total').textContent = total.toFixed(2);
+  document.getElementById('cost_mat_txt').textContent = matNames[mat];
+  document.getElementById('cost_price_txt').textContent = price;
+  document.getElementById('cost_weight_txt').textContent = weight;
+  result.style.display = 'block';
 }
 
 function addRecord() {
