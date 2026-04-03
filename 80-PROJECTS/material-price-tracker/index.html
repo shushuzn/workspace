@@ -468,7 +468,7 @@
 <!-- 登录弹窗 -->
 <div class="modal-overlay" id="loginModal">
   <div class="modal">
-    <h3 id="loginTitle">登录 / 注册</h3>
+    <h3 id="loginTitle">登录 / 注册 <span style="font-size:12px;color:#999">(演示模式)</span></h3>
     <input type="email" id="loginEmail" placeholder="输入邮箱地址" onkeydown="if(event.key==='Enter')sendCode()">
     <div id="codeSection" style="display:none">
       <input type="text" id="loginCode" placeholder="输入6位验证码" maxlength="6" onkeydown="if(event.key==='Enter')doLogin()">
@@ -482,7 +482,7 @@
       <button class="btn-cancel" onclick="closeLoginModal()">取消</button>
       <button class="btn-primary" id="btnLogin" onclick="doLogin()">验证并登录</button>
     </div>
-    <p id="loginTip">邮箱仅用于识别身份，不作其他用途</p>
+    <p id="loginTip" style="color:#e67e22">⚠️ 演示模式：数据存储在浏览器本地，不会上传到服务器</p>
   </div>
 </div>
 
@@ -682,8 +682,9 @@ async function sendCode() {
   btn.disabled = false;
   btn.textContent = '发送验证码';
 
-  if (result.hint) {
-    console.log('演示验证码:', JSON.parse(localStorage.getItem('_pending_code_' + email) || '{}').code);
+  const storedCode = JSON.parse(localStorage.getItem('_pending_code_' + email) || '{}');
+  if (result.hint || storedCode.code) {
+    showAlert('演示模式：验证码 ' + storedCode.code + '（生产环境会发到邮箱）');
   }
 
   if (result.ok) {
