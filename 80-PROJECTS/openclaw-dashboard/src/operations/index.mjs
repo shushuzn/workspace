@@ -4,7 +4,7 @@
  */
 
 import { GenDashboardData, WorkspaceAutoCommit, CreateMissingReadme,
-         FindWorkspaceIssues, CleanRecordedIssues, SyncProjectMarkers, PickNextProject } from './productive-ops.mjs';
+         FindWorkspaceIssues, CleanRecordedIssues, SyncProjectMarkers } from './productive-ops.mjs';
 import { CheckProjectReadmes, CheckMemorySize, BrainstormProjects,
          FindLargeFiles, CheckGitRemotes } from './detection-ops.mjs';
 import { CleanTempFiles, FixPackageScripts, UpdateReadmeDocs, FindDeadLinks } from './improvement-ops.mjs';
@@ -28,7 +28,8 @@ export function getAllOperations(workspace) {
     new FixPackageScripts(workspace),
     new UpdateReadmeDocs(workspace),
     new FindDeadLinks(workspace),
-    new PickNextProject(workspace),
+    // PickNextProject disabled — projects only picked manually
+    // new PickNextProject(workspace),
   ];
 }
 
