@@ -14,7 +14,7 @@
   
   function resetGame() {
     if (confirm('确定要重置游戏吗?所有数据将被清空!')) {
-      localStorage.removeItem('agent-arena-save');
+      localStorage.removeItem('agentArena');
       location.reload();
     }
   }
@@ -25,7 +25,7 @@
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `agent-arena-save-${Date.now()}.json`;
+    a.download = `agentArena-${Date.now()}.json`;
     a.click();
     URL.revokeObjectURL(url);
   }
@@ -39,7 +39,7 @@
       try {
         const data = JSON.parse(e.target.result);
         gameStore.setState(data);
-        localStorage.setItem('agent-arena-save', JSON.stringify(data));
+        localStorage.setItem('agentArena', JSON.stringify(data));
         if (typeof gameStore.notify === 'function') {
           gameStore.notify({ message: '存档导入成功!', type: 'success' });
         }
