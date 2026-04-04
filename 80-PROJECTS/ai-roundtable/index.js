@@ -8,6 +8,8 @@ import { ConceptJumpTracker } from './shared/conceptJumpTracker.js';
 import { MiniMaxEmbedder } from './shared/embedder.js';
 import { QualityScorer } from './shared/qualityScorer.js';
 import { discoverBridgeConcepts, extractBridgePool } from './shared/bridgeDiscovery.js';
+import { withRetry, RetryError } from './shared/retryUtils.js';
+import { limiters } from './shared/rateLimiter.js';
 import fs from 'fs';
 import path from 'path';
 
@@ -62,80 +64,128 @@ async function chatWithRouter(messages, temperature, maxTokens, signal) {
 }
 
 async function chatMinimax(messages, temperature, maxTokens, signal) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-  const s = signal ? mergeSignals(signal, controller.signal) : controller.signal;
-  try {
-    const res = await fetch(API_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
-      body: JSON.stringify({ model: MODEL, messages, max_tokens: maxTokens, temperature, stream: false }),
-      signal: s,
-    });
-    clearTimeout(timer);
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error?.message || `HTTP ${res.status}`);
+  await limiters.minimax.acquire(30000, signal);
+  return withRetry(
+    async () => {
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+      const s = signal ? mergeSignals(signal, controller.signal) : controller.signal;
+      try {
+        const res = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
+          body: JSON.stringify({ model: MODEL, messages, max_tokens: maxTokens, temperature, stream: false }),
+          signal: s,
+        });
+        clearTimeout(timer);
+        if (!res.ok) {
+          const err = await res.json().catch(() => ({}));
+          const retryErr = new Error(err.error?.message || `HTTP ${res.status}`);
+          retryErr.status = res.status;
+          throw retryErr;
+        }
+        const data = await res.json();
+        return data.choices?.[0]?.message?.content || '';
+      } finally {
+        clearTimeout(timer);
+      }
+    },
+    {
+      maxRetries: 3,
+      baseDelayMs: 1000,
+      maxDelayMs: 16000,
+      signal,
+      onRetry: (err, attempt, delay) => {
+        console.warn(color(`  ⚠ MiniMax 请求失败(${err.message})，${delay.toFixed(0)}ms 后重试第 ${attempt} 次…`, 33));
+      },
     }
-    const data = await res.json();
-    return data.choices?.[0]?.message?.content || '';
-  } finally {
-    clearTimeout(timer);
-  }
+  );
 }
 
 async function chatOpenAI(messages, temperature, maxTokens, signal) {
+  await limiters.openai.acquire(30000, signal);
   const url = process.env.OPENAI_URL || 'https://api.openai.com/v1/chat/completions';
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+  return withRetry(
+    async () => {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+          messages: messages.map(m => ({ role: m.role, content: m.content, ...(m.name ? { name: m.name } : {}) })),
+          max_tokens: maxTokens,
+          temperature,
+          stream: false,
+        }),
+        signal,
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        const retryErr = new Error(err.error?.message || `HTTP ${res.status}`);
+        retryErr.status = res.status;
+        throw retryErr;
+      }
+      const data = await res.json();
+      return data.choices?.[0]?.message?.content || '';
     },
-    body: JSON.stringify({
-      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
-      messages: messages.map(m => ({ role: m.role, content: m.content, ...(m.name ? { name: m.name } : {}) })),
-      max_tokens: maxTokens,
-      temperature,
-      stream: false,
-    }),
-    signal,
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error?.message || `HTTP ${res.status}`);
-  }
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content || '';
+    {
+      maxRetries: 3,
+      baseDelayMs: 1000,
+      maxDelayMs: 16000,
+      signal,
+      onRetry: (err, attempt, delay) => {
+        console.warn(color(`  ⚠ OpenAI 请求失败(${err.message})，${delay.toFixed(0)}ms 后重试第 ${attempt} 次…`, 33));
+      },
+    }
+  );
 }
 
 async function chatAnthropic(messages, temperature, maxTokens, signal) {
+  await limiters.anthropic.acquire(30000, signal);
   const url = process.env.ANTHROPIC_URL || 'https://api.anthropic.com/v1/messages';
   const systemMsg = messages.find(m => m.role === 'system');
   const nonSystem = messages.filter(m => m.role !== 'system');
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'x-api-key': process.env.ANTHROPIC_API_KEY,
-      'anthropic-version': '2023-06-01',
-      'anthropic-dangerous-direct-browser-access': 'true',
+  return withRetry(
+    async () => {
+      const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'x-api-key': process.env.ANTHROPIC_API_KEY,
+          'anthropic-version': '2023-06-01',
+          'anthropic-dangerous-direct-browser-access': 'true',
+        },
+        body: JSON.stringify({
+          model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-20250514',
+          system: systemMsg?.content || '',
+          messages: nonSystem,
+          max_tokens: maxTokens,
+          temperature,
+        }),
+        signal,
+      });
+      if (!res.ok) {
+        const err = await res.json().catch(() => ({}));
+        const retryErr = new Error(err.error?.message || `HTTP ${res.status}`);
+        retryErr.status = res.status;
+        throw retryErr;
+      }
+      const data = await res.json();
+      return data.content?.[0]?.text || '';
     },
-    body: JSON.stringify({
-      model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-20250514',
-      system: systemMsg?.content || '',
-      messages: nonSystem,
-      max_tokens: maxTokens,
-      temperature,
-    }),
-    signal,
-  });
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    throw new Error(err.error?.message || `HTTP ${res.status}`);
-  }
-  const data = await res.json();
-  return data.content?.[0]?.text || '';
+    {
+      maxRetries: 3,
+      baseDelayMs: 1000,
+      maxDelayMs: 16000,
+      signal,
+      onRetry: (err, attempt, delay) => {
+        console.warn(color(`  ⚠ Anthropic 请求失败(${err.message})，${delay.toFixed(0)}ms 后重试第 ${attempt} 次…`, 33));
+      },
+    }
+  );
 }
 
 const REQUEST_TIMEOUT_MS = 30_000;
@@ -315,26 +365,42 @@ async function askPersona(messages, persona, topic, temperature, abortSignal) {
 
 // ─── Ollama chat helper ──────────────────────────────────
 async function chatOllama(messages, temperature = 0.7, maxTokens = 1500) {
-  // Convert messages to Ollama format
-  const ollamaMessages = messages.map(m => ({
-    role: m.role === 'system' ? 'system' : m.role === 'assistant' ? 'assistant' : 'user',
-    content: m.content,
-    ...(m.name ? { name: m.name } : {}),
-  }));
+  await limiters.ollama.acquire(30000);
+  return withRetry(
+    async () => {
+      const ollamaMessages = messages.map(m => ({
+        role: m.role === 'system' ? 'system' : m.role === 'assistant' ? 'assistant' : 'user',
+        content: m.content,
+        ...(m.name ? { name: m.name } : {}),
+      }));
 
-  const res = await fetch(`${OLLAMA_URL}/api/chat`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: OLLAMA_MODEL,
-      messages: ollamaMessages,
-      options: { temperature, num_predict: maxTokens },
-      stream: false,
-    }),
-  });
-  if (!res.ok) throw new Error(`Ollama error: ${res.status}`);
-  const data = await res.json();
-  return cleanResponse(data.message?.content || '');
+      const res = await fetch(`${OLLAMA_URL}/api/chat`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: OLLAMA_MODEL,
+          messages: ollamaMessages,
+          options: { temperature, num_predict: maxTokens },
+          stream: false,
+        }),
+      });
+      if (!res.ok) {
+        const err = new Error(`Ollama error: ${res.status}`);
+        err.status = res.status;
+        throw err;
+      }
+      const data = await res.json();
+      return cleanResponse(data.message?.content || '');
+    },
+    {
+      maxRetries: 2,
+      baseDelayMs: 500,
+      maxDelayMs: 4000,
+      onRetry: (err, attempt, delay) => {
+        console.warn(color(`  ⚠ Ollama 请求失败(${err.message})，${delay.toFixed(0)}ms 后重试第 ${attempt} 次…`, 33));
+      },
+    }
+  );
 }
 
 function mergeSignals(...signals) {
@@ -582,20 +648,7 @@ async function runVoting(topic, history, personas, abortSignal) {
 
       const raw = USE_OLLAMA
         ? await chatOllama(messages, 0.3, 50)
-        : await (async () => {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-            const signal = mergeSignals(abortSignal, controller.signal);
-            const res = await fetch(API_URL, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
-              body: JSON.stringify({ model: MODEL, messages, max_tokens: 50, temperature: 0.3, stream: false }),
-              signal,
-            });
-            clearTimeout(timeoutId);
-            const data = await res.json();
-            return data.choices?.[0]?.message?.content || '';
-          })();
+        : await chatMinimax(messages, 0.3, 50, abortSignal);
 
       clearInterval(dotTimer);
       process.stdout.write('\r' + '\x1b[K');
@@ -634,20 +687,7 @@ async function generateSummary(topic, history, mode, abortSignal) {
   try {
     const raw = USE_OLLAMA
       ? await chatOllama(messages, 0.4, 800)
-      : await (async () => {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS * 2);
-          const signal = mergeSignals(abortSignal, controller.signal);
-          const res = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
-            body: JSON.stringify({ model: MODEL, messages, max_tokens: 800, temperature: 0.4, stream: false }),
-            signal,
-          });
-          clearTimeout(timeoutId);
-          const data = await res.json();
-          return data.choices?.[0]?.message?.content || '';
-        })();
+      : await chatMinimax(messages, 0.4, 800, abortSignal);
     const summary = raw.trim();
     console.log(color('\n📋 综合总结：', 1));
     console.log(`  ${summary.replace(/\n/g, '\n  ')}`);
@@ -687,20 +727,7 @@ async function generateAudienceQuestion(topic, history, abortSignal) {
   try {
     const raw = USE_OLLAMA
       ? await chatOllama(messages, 0.7, 120)
-      : await (async () => {
-          const controller = new AbortController();
-          const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-          const signal = mergeSignals(abortSignal, controller.signal);
-          const res = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
-            body: JSON.stringify({ model: MODEL, messages, max_tokens: 120, temperature: 0.7, stream: false }),
-            signal,
-          });
-          clearTimeout(timeoutId);
-          const data = await res.json();
-          return data.choices?.[0]?.message?.content || '';
-        })();
+      : await chatMinimax(messages, 0.7, 120, abortSignal);
     return cleanResponse(raw.trim());
   } catch (err) {
     if (err.name !== 'AbortError') {
@@ -735,20 +762,7 @@ async function runAudienceQuestion(topic, history, activePersonas, abortSignal) 
       ];
       const raw = USE_OLLAMA
         ? await chatOllama(messages, 0.8, 300)
-        : await (async () => {
-            const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-            const signal = mergeSignals(abortSignal, controller.signal);
-            const res = await fetch(API_URL, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
-              body: JSON.stringify({ model: MODEL, messages, max_tokens: 300, temperature: 0.8, stream: false }),
-              signal,
-            });
-            clearTimeout(timeoutId);
-            const data = await res.json();
-            return data.choices?.[0]?.message?.content || '';
-          })();
+        : await chatMinimax(messages, 0.8, 300, abortSignal);
 
       clearInterval(dotTimer);
       process.stdout.write('\r' + '\x1b[K');
