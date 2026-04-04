@@ -8,6 +8,7 @@ from src.commands import PORTED_COMMANDS
 from src.parity_audit import run_parity_audit
 from src.port_manifest import build_port_manifest
 from src.query_engine import QueryEnginePort
+from src.snapshot_diff import diff_snapshots
 from src.tools import PORTED_TOOLS
 
 
@@ -113,6 +114,34 @@ class PortingWorkspaceTests(unittest.TestCase):
         self.assertIn('review', route_result.stdout.lower())
         self.assertIn('review', show_command.stdout.lower())
         self.assertIn('mcptool', show_tool.stdout.lower())
+
+    def test_snapshot_diff_same_file_returns_no_changes(self) -> None:
+        path = 'src/reference_data/commands_snapshot.json'
+        diff = diff_snapshots(path, path)
+        self.assertEqual(diff.added, ())
+        self.assertEqual(diff.removed, ())
+        self.assertGreater(diff.unchanged, 100)
+        self.assertIn('No changes', diff.to_markdown('Commands'))
+
+    def test_snapshot_diff_detects_added_and_removed(self) -> None:
+        import tempfile, json, os
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False, encoding='utf-8') as f1:
+            json.dump([{'name': 'cmd_a', 'responsibility': 'does a', 'source_hint': 'src/a.ts'}], f1)
+            f1_name = f1.name
+        with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False, encoding='utf-8') as f2:
+            json.dump([
+                {'name': 'cmd_a', 'responsibility': 'does a', 'source_hint': 'src/a.ts'},
+                {'name': 'cmd_b', 'responsibility': 'does b', 'source_hint': 'src/b.ts'},
+            ], f2)
+            f2_name = f2.name
+        try:
+            diff = diff_snapshots(f1_name, f2_name)
+            self.assertEqual(diff.added, ('cmd_b',))
+            self.assertEqual(diff.removed, ())
+            self.assertEqual(diff.unchanged, 1)
+        finally:
+            os.unlink(f1_name)
+            os.unlink(f2_name)
 
 
 if __name__ == '__main__':
