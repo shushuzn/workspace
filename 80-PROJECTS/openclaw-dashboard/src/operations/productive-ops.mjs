@@ -579,9 +579,31 @@ export class PickNextProject extends ProductiveOperation {
 
     // 判断是否是新的 session（按日期）
     const isNewSession = !state.lastPick || state.lastPick.date !== todayStr;
+
+    // 同一天内再次调用：直接复用 lastPick，不再随机抽选
+    if (!isNewSession && state.lastPick) {
+      const last = state.lastPick;
+      const lastRow = projectRows.find(r => r.name === last.project);
+      return {
+        picked: last.project,
+        path: lastRow ? lastRow.path : last.project,
+        days: last.days || 0,
+        weight: 0,
+        gamma: this.gamma,
+        totalProjects: 0,
+        allProjects: [],
+        maxWeight: 0,
+        seed: null,
+        pair: null,
+        bridge: null,
+        state,
+        reused: true,
+      };
+    }
+
     // pickedThisSession 按 date 分组，避免项目更名导致去重失效
     const pickedByDate = state.pickedThisSession || [];
-    const todayPicked = Array.isArray(pickedByDate) && !isNewSession
+    const todayPicked = Array.isArray(pickedByDate) && isNewSession
       ? pickedByDate.filter(p => p.date === todayStr).map(p => p.name)
       : [];
     const pickedSet = new Set(todayPicked);
@@ -843,8 +865,8 @@ export class PickNextProject extends ProductiveOperation {
     return new Promise(resolve => {
       const timeout = setTimeout(() => {
         proc.kill();
-        resolve({ status: 'timeout', reason: '启动超时（3分钟）' });
-      }, 180000);
+        resolve({ status: 'timeout', reason: '启动超时（30秒）' });
+      }, 30000);
 
       let output = '';
       const proc = exec(cmd, { cwd: fullPath, timeout: 185000 }, (err, stdout, stderr) => {
@@ -984,9 +1006,11 @@ export class IdeaPool {
     return Math.floor((new Date() - d) / 86400000);
   }
 
-  /** 追加一条 idea，source: brainstorm/suggest/manual */
+  /** 追加一条 idea，source: brainstorm/suggest/manual（自动去重） */
   add(stage, desc, source = 'manual') {
     const ideas = this._read();
+    // 去重：完全相同的 desc 不重复添加
+    if (ideas.some(i => i.desc === desc)) return -1;
     ideas.push({ date: this._today(), stage, desc, source });
     this._write(ideas);
     return ideas.length - 1;

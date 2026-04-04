@@ -3,12 +3,13 @@
  * 权重衰减随机抽选下一个目标项目
  *
  * 用法:
- *   node pick-next-project.mjs [gamma] [memoryPath] [--health-check]
+ *   node pick-next-project.mjs [gamma] [memoryPath] [--health-check] [--continue]
  *
  * 参数:
  *   gamma       — 衰减系数，默认 0.5
  *   memoryPath  — MEMORY.md 绝对路径
  *   --health-check — 自动体检抽中的项目（尝试启动，3分钟超时）
+ *   --continue   — 跳过抽选，复用上次选中的项目（继续当前工作）
  *
  * 输出:
  *   抽选结果 + 权重排行榜 + 体检结果
@@ -30,12 +31,17 @@ const workspaceRoot = path.join(__dirname, '..', '..', '..', '..');
 const DEFAULT_MEMORY = 'C:/Users/adm/.claude/projects/D--OpenClaw-workspace/memory/MEMORY.md';
 
 const doHealthCheck = process.argv.includes('--health-check');
-// gamma 从 argv 解析（排除 --health-check）
-const gammaArgvIdx = doHealthCheck ? 3 : 2;
-const rawGamma = process.argv[gammaArgvIdx];
-if (rawGamma !== undefined) {
+const doContinue = process.argv.includes('--continue');
+// gamma 从 argv 解析（跳过所有 -- 开头的 flag）
+const rawGamma = (() => {
+  for (let i = 2; i < process.argv.length; i++) {
+    if (!process.argv[i].startsWith('--')) return process.argv[i];
+  }
+  return undefined;
+})();
+if (rawGamma !== undefined && !isNaN(parseFloat(rawGamma))) {
   const parsed = parseFloat(rawGamma);
-  if (isNaN(parsed) || parsed <= 0 || parsed > 2) {
+  if (parsed <= 0 || parsed > 2) {
     console.warn(`⚠️ gamma 非法值 (${rawGamma})，已使用 fallback 0.5。请检查 MEMORY.md 项目表。`);
     const evFile = path.join(workspaceRoot, '.omc', 'state', 'CLAUDE.md-evolution.json');
     const ev = fs.existsSync(evFile) ? JSON.parse(fs.readFileSync(evFile, 'utf8')) : { lastSessionChecked: '', clauseLastExecuted: {}, gammaWarnings: [] };
@@ -44,10 +50,68 @@ if (rawGamma !== undefined) {
     fs.writeFileSync(evFile, JSON.stringify(ev, null, 2), 'utf8');
   }
 }
-const gamma = parseFloat(process.argv[2]) || 0.5;
-const memoryPath = process.argv.find((a, i) => i > 2 && !a.startsWith('--')) || DEFAULT_MEMORY;
+const gamma = parseFloat(rawGamma) || 0.5;
+const memoryPath = process.argv.find((a, i) => {
+  if (i <= 2) return false;
+  if (a.startsWith('--')) return false;
+  return true;
+}) || DEFAULT_MEMORY;
 
 const picker = new PickNextProject(workspaceRoot, gamma, memoryPath);
+
+// --continue 模式：跳过抽选，直接复用上次结果
+if (doContinue) {
+  const state = picker._loadState();
+  const last = state.lastPick;
+  if (!last) {
+    console.log('\n⏭️  无上次项目记录，请先运行 pick-next-project 不带 --continue');
+    process.exit(0);
+  }
+  const memoryContent = fs.readFileSync(memoryPath, 'utf8');
+  const projectRow = picker._parseProjectTable(memoryContent).find(r => r.name === last.project);
+  const projPath = projectRow ? projectRow.path : last.project;
+  console.log(`\n🔄 继续上次项目: ${last.project}`);
+  console.log(`   路径: ${projPath}`);
+  console.log(`   距上次活跃: ${last.days} 天`);
+  console.log(`\n⏹️  退出。等你说"工作"才继续下一个项目。`);
+  process.exit(0);
+}
+
+// PROJECT 参数：手动指定当前项目（跳过抽选，直接设置 lastPick）
+const projectArg = (() => {
+  for (let i = 2; i < process.argv.length; i++) {
+    const a = process.argv[i];
+    if (!a.startsWith('--') && a !== gamma) return a;
+  }
+  return null;
+})();
+if (projectArg) {
+  const state = picker._loadState();
+  const today = new Date().toISOString().split('T')[0].replace(/-/g, '');
+  const todayDate = new Date().toISOString().split('T')[0];
+  const memoryContent = fs.readFileSync(memoryPath, 'utf8');
+  const projectRow = picker._parseProjectTable(memoryContent).find(r => r.name === projectArg);
+  if (!projectRow) {
+    console.log(`\n❌ 项目不存在: ${projectArg}`);
+    process.exit(1);
+  }
+  // 计算 days
+  let days = 0;
+  if (projectRow.lastActive && /^\d{4}-\d{2}-\d{2}$/.test(projectRow.lastActive)) {
+    days = Math.floor((new Date(todayDate) - new Date(projectRow.lastActive)) / 86400000);
+  }
+  const newState = {
+    ...state,
+    lastPick: { date: today, project: projectArg, days },
+    last_radar_check: state.last_radar_check || today,
+  };
+  picker._saveState(newState);
+  console.log(`\n🎯 当前项目: ${projectArg}`);
+  console.log(`   路径: ${projectRow.path}`);
+  console.log(`   距上次活跃: ${days} 天`);
+  process.exit(0);
+}
+
 const result = await picker.execute();
 
 // 技术雷达检查：超过1天未检查则强制触发
@@ -65,13 +129,19 @@ if (result.error) {
   process.exit(1);
 }
 
-console.log(`\n🎯 本次抽选目标项目: ${result.picked}`);
-console.log(`   路径: ${result.path}`);
-console.log(`   距上次活跃: ${result.days} 天`);
-console.log(`   权重: ${result.weight}`);
-console.log(`   (γ=${result.gamma}, 共 ${result.totalProjects} 个项目参与抽选)`);
-if (result.seed) {
-  console.log(`   抽选ID: ${result.seed}`);
+if (result.reused) {
+  console.log(`\n🔄 复用上次项目: ${result.picked}`);
+  console.log(`   路径: ${result.path}`);
+  console.log(`   距上次活跃: ${result.days} 天`);
+} else {
+  console.log(`\n🎯 本次抽选目标项目: ${result.picked}`);
+  console.log(`   路径: ${result.path}`);
+  console.log(`   距上次活跃: ${result.days} 天`);
+  console.log(`   权重: ${result.weight}`);
+  console.log(`   (γ=${result.gamma}, 共 ${result.totalProjects} 个项目参与抽选)`);
+  if (result.seed) {
+    console.log(`   抽选ID: ${result.seed}`);
+  }
 }
 
 if (result.allProjects && result.allProjects.length > 0) {
@@ -157,14 +227,8 @@ if (doHealthCheck) {
   console.log('  A — 检查能否正常启动运行（3 分钟内验证）');
   console.log('  B — 修 1 个小 bug 或补 1 条注释/文档');
   console.log('  C — 更新 MEMORY.md 中该项目价值记录');
-  console.log('\n完成后输入 "done" 确认，系统将自动更新 MEMORY.md Last Active');
-  const rl = await import('readline').then(m => m.createInterface({ input: process.stdin, output: process.stdout }));
-  const answer = await new Promise(r => rl.question('> ', r));
-  rl.close();
-  if (answer.trim().toLowerCase() === 'done') {
-    picker.recordHealthSuccess(result.picked);
-    console.log('✅ MEMORY.md Last Active 已更新');
-  } else {
-    console.log('⚠️ 未确认，跳过更新');
-  }
+  picker.recordHealthSuccess(result.picked);
+  console.log('\n✅ brainstorm + ideas 执行完成，已标记活跃');
+  console.log('\n⏹️ 退出。等你说"工作"才继续下一个项目。');
+  process.exit(0);
 }
