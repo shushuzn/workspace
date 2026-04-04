@@ -31,13 +31,15 @@
     table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
     h2 { color: #a5b4fc; font-size: 1rem; margin: 1.5rem 0 0.5rem; border-bottom: 1px solid #2a2a3e; padding-bottom: 0.25rem; }
     .tag { background: #3b3b5c44; color: #94a3b8; padding: 1px 5px; border-radius: 3px; font-size: 0.7rem; }
-    .mini-bar { display: inline-block; width: 40px; height: 4px; background: #2a2a3e; border-radius: 2px; vertical-align: middle; margin-left: 4px; }
-    .mini-bar-fill { border-radius: 2px; height: 4px; display: inline-block; }
+    .gap { font-size: 0.75rem; color: #94a3b8; }
+    .gap-huge { color: #ef4444; }
+    .gap-large { color: #f59e0b; }
+    .gap-small { color: #22c55e; }
   </style>
 </head>
 <body>
   <h1>Porting Coverage Dashboard</h1>
-  <p class="subtitle">claude-code-main · Python porting workspace · Last updated 2026-04-04</p>
+  <p class="subtitle">claude-code-main · Python porting workspace · Updated 2026-04-04</p>
 
   <div class="card-grid">
     <div class="card card-good">
@@ -51,9 +53,9 @@
       <div class="card-sub">All subsystem dirs present</div>
     </div>
     <div class="card card-warn">
-      <div class="card-value">54/1902</div>
-      <div class="card-label">Total File Ratio</div>
-      <div class="card-sub">Python files vs archived TS</div>
+      <div class="card-value">54</div>
+      <div class="card-label">Python Files</div>
+      <div class="card-sub">vs 1902 archived TS files</div>
     </div>
     <div class="card card-good">
       <div class="card-value">207</div>
@@ -66,88 +68,71 @@
       <div class="card-sub">100% of source snapshot</div>
     </div>
     <div class="card card-warn">
-      <div class="card-value">54</div>
-      <div class="card-label">Python Files</div>
-      <div class="card-sub">Full port in progress</div>
+      <div class="card-value">29/29</div>
+      <div class="card-label">Subsystems</div>
+      <div class="card-sub">All minimal — massive porting gap</div>
     </div>
   </div>
 
   <div class="controls">
     <label style="color:#94a3b8;font-size:0.85rem">Sort by:</label>
     <select id="sortSelect">
-      <option value="file_count">File Count</option>
+      <option value="expected_modules">Porting Gap (↓)</option>
+      <option value="total_files">File Count</option>
       <option value="name">Name</option>
     </select>
-    <label style="color:#94a3b8;font-size:0.85rem">Min files:</label>
-    <select id="minSelect">
-      <option value="0">All</option>
-      <option value="2">≥ 2</option>
-      <option value="5">≥ 5</option>
+    <label style="color:#94a3b8;font-size:0.85rem">Show:</label>
+    <select id="statusFilter">
+      <option value="">All</option>
+      <option value="minimal">Minimal</option>
+      <option value="stub">Stub</option>
     </select>
   </div>
 
-  <h2>Subsystem Modules</h2>
+  <h2>Subsystem Porting Status</h2>
   <table id="table">
     <thead><tr>
       <th onclick="sort('name')">Subsystem ▲▼</th>
-      <th onclick="sort('file_count')">Files</th>
-      <th onclick="sort('type')">Type</th>
-      <th>Notes</th>
+      <th onclick="sort('status')">Status</th>
+      <th onclick="sort('progress')">Progress</th>
+      <th onclick="sort('total_files')">Files</th>
+      <th onclick="sort('expected_modules')">Expected</th>
+      <th onclick="sort('gap')">Gap</th>
     </tr></thead>
     <tbody></tbody>
   </table>
 
   <h2>Command / Tool Snapshot</h2>
   <table>
-    <thead><tr>
-      <th>Surface</th>
-      <th>Mirrored</th>
-      <th>Coverage</th>
-      <th>Status</th>
-    </tr></thead>
+    <thead><tr><th>Surface</th><th>Mirrored</th><th>Coverage</th><th>Status</th></tr></thead>
     <tbody>
-      <tr>
-        <td>Commands</td>
-        <td>207 / 207</td>
-        <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#22c55e"></div></div><span class="pct">100%</span></div></td>
-        <td><span class="badge" style="background:#22c55e22;color:#22c55e;border:1px solid #22c55e44">Complete</span></td>
-      </tr>
-      <tr>
-        <td>Tools</td>
-        <td>184 / 184</td>
-        <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#22c55e"></div></div><span class="pct">100%</span></div></td>
-        <td><span class="badge" style="background:#22c55e22;color:#22c55e;border:1px solid #22c55e44">Complete</span></td>
-      </tr>
-      <tr>
-        <td>Root Files</td>
-        <td>18 / 18</td>
-        <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#22c55e"></div></div><span class="pct">100%</span></div></td>
-        <td><span class="badge" style="background:#22c55e22;color:#22c55e;border:1px solid #22c55e44">Complete</span></td>
-      </tr>
-      <tr>
-        <td>Directories</td>
-        <td>35 / 35</td>
-        <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#22c55e"></div></div><span class="pct">100%</span></div></td>
-        <td><span class="badge" style="background:#22c55e22;color:#22c55e;border:1px solid #22c55e44">Complete</span></td>
-      </tr>
-      <tr>
-        <td>Total Python Files</td>
-        <td>54 / 1902</td>
-        <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:2.8%;background:#f59e0b"></div></div><span class="pct">2.8%</span></div></td>
-        <td><span class="badge" style="background:#f59e0b22;color:#f59e0b;border:1px solid #f59e0b44">Early Stage</span></td>
-      </tr>
+      <tr><td>Commands</td><td>207 / 207</td><td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#22c55e"></div></div><span class="pct">100%</span></div></td><td><span class="badge" style="background:#22c55e22;color:#22c55e;border:1px solid #22c55e44">Complete</span></td></tr>
+      <tr><td>Tools</td><td>184 / 184</td><td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#22c55e"></div></div><span class="pct">100%</span></div></td><td><span class="badge" style="background:#22c55e22;color:#22c55e;border:1px solid #22c55e44">Complete</span></td></tr>
+      <tr><td>Root Files</td><td>18 / 18</td><td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#22c55e"></div></div><span class="pct">100%</span></div></td><td><span class="badge" style="background:#22c55e22;color:#22c55e;border:1px solid #22c55e44">Complete</span></td></tr>
+      <tr><td>Directories</td><td>35 / 35</td><td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%;background:#22c55e"></div></div><span class="pct">100%</span></div></td><td><span class="badge" style="background:#22c55e22;color:#22c55e;border:1px solid #22c55e44">Complete</span></td></tr>
+      <tr><td>Total Python Files</td><td>54 / 1902</td><td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:2.8%;background:#f59e0b"></div></div><span class="pct">2.8%</span></div></td><td><span class="badge" style="background:#f59e0b22;color:#f59e0b;border:1px solid #f59e0b44">Early Stage</span></td></tr>
     </tbody>
   </table>
 
   <script>
-    const DATA = [{"name":"commands.py","file_count":1,"type":"file","notes":"command backlog metadata"},{"name":"context.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"costHook.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"cost_tracker.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"dialogLaunchers.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"history.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"ink.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"interactiveHelpers.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"main.py","file_count":1,"type":"file","notes":"CLI entrypoint"},{"name":"models.py","file_count":1,"type":"file","notes":"shared dataclasses"},{"name":"parity_audit.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"port_manifest.py","file_count":1,"type":"file","notes":"workspace manifest generation"},{"name":"projectOnboardingState.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"query.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"QueryEngine.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"query_engine.py","file_count":1,"type":"file","notes":"port orchestration summary layer"},{"name":"replLauncher.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"runtime.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"setup.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"task.py","file_count":1,"type":"file","notes":"task-level planning structures"},{"name":"tasks.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"Tool.py","file_count":1,"type":"file","notes":"Python port support module"},{"name":"tools.py","file_count":1,"type":"file","notes":"tool backlog metadata"},{"name":"__init__.py","file_count":1,"type":"file","notes":"package export surface"},{"name":"assistant","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"bootstrap","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"bridge","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"buddy","file_count":1,"type":"file","notes":"Python port support module"},{"name":"cli","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"components","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"constants","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"coordinator","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"entrypoints","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"hooks","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"keybindings","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"memdir","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"migrations","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"moreright","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"native_ts","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"outputStyles","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"plugins","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"reference_data","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"remote","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"schemas","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"screens","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"server","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"services","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"skills","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"state","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"types","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"upstreamproxy","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"utils","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"vim","file_count":1,"type":"dir","notes":"Python port support module"},{"name":"voice","file_count":1,"type":"dir","notes":"Python port support module"}];
+    const DATA = [{"subsystem":"assistant","status":"minimal","progress":25,"total_files":1,"expected_modules":1,"gap":0},{"subsystem":"bootstrap","status":"minimal","progress":25,"total_files":1,"expected_modules":1,"gap":0},{"subsystem":"bridge","status":"minimal","progress":25,"total_files":1,"expected_modules":31,"gap":30},{"subsystem":"buddy","status":"minimal","progress":25,"total_files":1,"expected_modules":6,"gap":5},{"subsystem":"cli","status":"minimal","progress":25,"total_files":1,"expected_modules":19,"gap":18},{"subsystem":"components","status":"minimal","progress":25,"total_files":1,"expected_modules":389,"gap":388},{"subsystem":"constants","status":"minimal","progress":25,"total_files":1,"expected_modules":21,"gap":20},{"subsystem":"coordinator","status":"minimal","progress":25,"total_files":1,"expected_modules":1,"gap":0},{"subsystem":"entrypoints","status":"minimal","progress":25,"total_files":1,"expected_modules":8,"gap":7},{"subsystem":"hooks","status":"minimal","progress":25,"total_files":1,"expected_modules":104,"gap":103},{"subsystem":"keybindings","status":"minimal","progress":25,"total_files":1,"expected_modules":14,"gap":13},{"subsystem":"memdir","status":"minimal","progress":25,"total_files":1,"expected_modules":8,"gap":7},{"subsystem":"migrations","status":"minimal","progress":25,"total_files":1,"expected_modules":11,"gap":10},{"subsystem":"moreright","status":"minimal","progress":25,"total_files":1,"expected_modules":1,"gap":0},{"subsystem":"native_ts","status":"minimal","progress":25,"total_files":1,"expected_modules":4,"gap":3},{"subsystem":"outputStyles","status":"minimal","progress":25,"total_files":1,"expected_modules":1,"gap":0},{"subsystem":"plugins","status":"minimal","progress":25,"total_files":1,"expected_modules":2,"gap":1},{"subsystem":"remote","status":"minimal","progress":25,"total_files":1,"expected_modules":4,"gap":3},{"subsystem":"schemas","status":"minimal","progress":25,"total_files":1,"expected_modules":1,"gap":0},{"subsystem":"screens","status":"minimal","progress":25,"total_files":1,"expected_modules":3,"gap":2},{"subsystem":"server","status":"minimal","progress":25,"total_files":1,"expected_modules":3,"gap":2},{"subsystem":"services","status":"minimal","progress":25,"total_files":1,"expected_modules":130,"gap":129},{"subsystem":"skills","status":"minimal","progress":25,"total_files":1,"expected_modules":20,"gap":19},{"subsystem":"state","status":"minimal","progress":25,"total_files":1,"expected_modules":6,"gap":5},{"subsystem":"types","status":"minimal","progress":25,"total_files":1,"expected_modules":11,"gap":10},{"subsystem":"upstreamproxy","status":"minimal","progress":25,"total_files":1,"expected_modules":2,"gap":1},{"subsystem":"utils","status":"minimal","progress":25,"total_files":1,"expected_modules":564,"gap":563},{"subsystem":"vim","status":"minimal","progress":25,"total_files":1,"expected_modules":5,"gap":4},{"subsystem":"voice","status":"minimal","progress":25,"total_files":1,"expected_modules":1,"gap":0}];
 
-    let sortCol = 'file_count';
+    let sortCol = 'expected_modules';
     let sortAsc = false;
+    let statusFilter = '';
+
+    const statusColors = {
+      minimal: '#f59e0b',
+      stub: '#ef4444',
+      partial: '#818cf8',
+      substantial: '#22c55e',
+      complete: '#22c55e',
+      missing: '#64748b',
+    };
 
     function render() {
-      const minFiles = +document.getElementById('minSelect').value;
-      let rows = DATA.filter(r => r.file_count >= minFiles);
+      let rows = DATA;
+      if (statusFilter) rows = rows.filter(r => r.status === statusFilter);
       rows.sort((a, b) => {
         let av = a[sortCol], bv = b[sortCol];
         if (typeof av === 'string') av = av.toLowerCase(), bv = bv.toLowerCase();
@@ -156,15 +141,19 @@
         return 0;
       });
 
-      const typeColor = t => t === 'dir' ? '#818cf8' : '#64748b';
       const tbody = document.getElementById('tbody');
-      tbody.innerHTML = rows.map(r => `
-        <tr>
-          <td><span class="tag" style="color:${typeColor(r.type)};border:1px solid ${typeColor(r.type)}44">${r.type}</span> ${r.name}</td>
-          <td>${r.file_count}</td>
-          <td>${r.type}</td>
-          <td style="color:#94a3b8">${r.notes}</td>
-        </tr>`).join('');
+      tbody.innerHTML = rows.map(r => {
+        const gapClass = r.gap > 100 ? 'gap-huge' : r.gap > 10 ? 'gap-large' : 'gap-small';
+        const statusColor = statusColors[r.status] || '#94a3b8';
+        return `<tr>
+          <td><span class="tag" style="color:${statusColor}">${r.status}</span> ${r.subsystem}</td>
+          <td>${r.status}</td>
+          <td><div class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:${r.progress}%;background:${statusColor}"></div></div><span class="pct">${r.progress}%</span></div></td>
+          <td>${r.total_files}</td>
+          <td>${r.expected_modules ?? '?'}</td>
+          <td class="gap ${gapClass}">${r.gap > 0 ? '+' + r.gap : '—'}</td>
+        </tr>`;
+      }).join('');
     }
 
     window.sort = function(col) {
@@ -176,7 +165,9 @@
     document.getElementById('sortSelect').addEventListener('change', e => {
       sortCol = e.target.value; sortAsc = false; render();
     });
-    document.getElementById('minSelect').addEventListener('change', render);
+    document.getElementById('statusFilter').addEventListener('change', e => {
+      statusFilter = e.target.value; render();
+    });
 
     render();
   </script>
