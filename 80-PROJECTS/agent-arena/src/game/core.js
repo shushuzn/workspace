@@ -458,4 +458,9 @@ class GameState {
         ...state.stats,
         totalBattles: state.stats.totalBattles + 1,
         totalWins: state.stats.totalWins + (playerWins ? 1 : 0)
+      }
     }));
+
+    return result;
+  }
+}
