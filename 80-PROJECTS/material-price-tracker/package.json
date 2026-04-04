@@ -5,5 +5,11 @@
   "scripts": {
     "dev": "npx serve . -p 3000",
     "preview": "npx serve . -p 3000"
-  }
+  },
+  "keywords": [
+    "automation",
+    "tool",
+    "automation",
+    "tool"
+  ]
 }

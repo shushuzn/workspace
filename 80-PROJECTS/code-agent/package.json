@@ -6,7 +6,8 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node tests/test-agent.js"
+    "test": "node tests/test-agent.js",
+    "dev": "echo \"No dev script\""
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",
@@ -17,7 +18,14 @@
     "uuid": "^9.0.0",
     "yaml": "^2.3.0"
   },
-  "keywords": ["mcp", "code-analysis", "semgrep", "tree-sitter", "security", "quality"],
+  "keywords": [
+    "mcp",
+    "code-analysis",
+    "semgrep",
+    "tree-sitter",
+    "security",
+    "quality"
+  ],
   "author": "Feishu",
   "license": "MIT",
   "repository": "https://github.com/shushuzn/code-agent.git"

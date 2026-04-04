@@ -2,6 +2,13 @@
 
 A Go-based task orchestration system that self-evolves its decomposition strategy based on execution outcomes. Uses a strategy pool, scoring feedback loop, and overlap detection to refine task decomposition.
 
+
+## 安装
+
+```bash
+npm install
+```
+
 ## Architecture
 
 ```

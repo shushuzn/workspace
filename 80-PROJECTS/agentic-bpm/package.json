@@ -1,0 +1,9 @@
+{
+  "name": "agentic-bpm",
+  "version": "0.0.1",
+  "description": "项目",
+  "scripts": {
+    "dev": "echo \"No dev script\"",
+    "test": "echo \"No test script\""
+  }
+}
