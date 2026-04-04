@@ -35,6 +35,27 @@
     .gap-huge { color: #ef4444; }
     .gap-large { color: #f59e0b; }
     .gap-small { color: #22c55e; }
+    .heatmap-wrap { overflow-x: auto; margin-bottom: 1.5rem; }
+    .heatmap { display: flex; flex-wrap: wrap; gap: 3px; }
+    .heatmap-cell {
+      width: 28px; height: 28px; border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.65rem; font-weight: bold; cursor: default;
+      position: relative; color: rgba(255,255,255,0.7);
+    }
+    .heatmap-cell:hover { z-index: 10; transform: scale(1.3); }
+    .heatmap-cell[title]:hover::after {
+      content: attr(title);
+      position: absolute; bottom: calc(100% + 4px); left: 50%;
+      transform: translateX(-50%);
+      background: #1e1e2e; border: 1px solid #3b3b5c;
+      color: #e0e0e0; font-size: 0.7rem; white-space: nowrap;
+      padding: 2px 6px; border-radius: 4px; z-index: 20;
+      pointer-events: none;
+    }
+    .legend { display: flex; gap: 1rem; margin-bottom: 0.75rem; font-size: 0.75rem; color: #94a3b8; }
+    .legend-item { display: flex; align-items: center; gap: 4px; }
+    .legend-swatch { width: 12px; height: 12px; border-radius: 2px; }
   </style>
 </head>
 <body>
@@ -87,6 +108,17 @@
       <option value="minimal">Minimal</option>
       <option value="stub">Stub</option>
     </select>
+  </div>
+
+  <h2>Porting Heatmap</h2>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-swatch" style="background:#22c55e"></div> &lt;10 files</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#f59e0b"></div> 10–50 files</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#ef4444"></div> &gt;50 files</div>
+    <div class="legend-item"><div class="legend-swatch" style="background:#64748b"></div> 0 / unknown</div>
+  </div>
+  <div class="heatmap-wrap">
+    <div class="heatmap" id="heatmap"></div>
   </div>
 
   <h2>Subsystem Porting Status</h2>
@@ -169,7 +201,27 @@
       statusFilter = e.target.value; render();
     });
 
+    function renderHeatmap() {
+      const sortColOrig = sortCol, sortAscOrig = sortAsc;
+      sortCol = 'expected_modules'; sortAsc = false;
+      const sorted = [...DATA].sort((a, b) => {
+        let av = a[sortCol], bv = b[sortCol];
+        if (av < bv) return 1; if (av > bv) return -1; return 0;
+      });
+      sortCol = sortColOrig; sortAsc = sortAscOrig;
+
+      const h = document.getElementById('heatmap');
+      h.innerHTML = sorted.map(r => {
+        const gap = r.expected_modules || 0;
+        const bg = gap === 0 ? '#64748b' : gap <= 10 ? '#22c55e' : gap <= 50 ? '#f59e0b' : '#ef4444';
+        const label = r.subsystem.substring(0, 2).toUpperCase();
+        const title = `${r.subsystem}: ${gap} expected modules (${r.status})`;
+        return `<div class="heatmap-cell" style="background:${bg}" title="${title}">${label}</div>`;
+      }).join('');
+    }
+
     render();
+    renderHeatmap();
   </script>
 </body>
 </html>
