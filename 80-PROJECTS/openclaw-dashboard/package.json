@@ -8,11 +8,18 @@
     "build:static": "node build-static.js",
     "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --testPathIgnorePatterns='e2e'",
     "test:e2e": "npx playwright test",
-    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch"
+    "test:watch": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watch",
+    "dev": "echo \"No dev script\""
   },
   "devDependencies": {
     "@playwright/test": "^1.58.2",
     "jest": "^29.7.0",
     "playwright": "^1.58.2"
-  }
+  },
+  "keywords": [
+    "automation",
+    "tool",
+    "automation",
+    "tool"
+  ]
 }

@@ -1,5 +1,5 @@
 {
-  "generated": "2026-04-02T06:04:53.583Z",
+  "generated": "2026-04-03T14:00:40.420Z",
   "projects": [
     {
       "name": "50-ton-hackathon-2026",
@@ -7,7 +7,7 @@
       "description": "项目描述暂无",
       "lastActive": null,
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -17,9 +17,9 @@
       "name": "a2a-router",
       "meta": "TypeScript",
       "description": "Agent-to-Agent Communication Router - MCP Server",
-      "lastActive": "2026-04-02",
+      "lastActive": "2026-04-03",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [
         "@langchain/core",
@@ -45,7 +45,7 @@
       "description": "AI Agent 养成竞技游戏",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [
@@ -68,7 +68,7 @@
       "description": "Multi-Agent Orchestration Platform based on MCP",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [
         "@modelcontextprotocol/sdk"
@@ -93,7 +93,7 @@
       "description": "项目描述暂无",
       "lastActive": null,
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -105,7 +105,7 @@
       "description": "**AI-Driven Business Process Management** — 智能业务流程管理系统",
       "lastActive": "2026-03-25",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -115,9 +115,9 @@
       "name": "ai-roundtable",
       "meta": "TypeScript",
       "description": "Multi-agent roundtable discussion CLI tool with multiple AI personas",
-      "lastActive": "2026-04-02",
+      "lastActive": "2026-04-03",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [
         "dotenv",
@@ -135,7 +135,7 @@
       "description": "AI 圆桌讨论 MCP Server",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [
         "@modelcontextprotocol/sdk",
@@ -159,7 +159,7 @@
       "description": "",
       "lastActive": null,
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [],
       "devDependencies": [],
@@ -171,7 +171,7 @@
       "description": "Code Intelligence Agent - Semgrep + Tree-sitter analysis",
       "lastActive": "2026-03-30",
       "status": "modified",
-      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/idle-empire\n?? 80-PROJECTS/ai-roundtable/2\n?? 80-PROJECTS/ai-roundtable/cleanSentence(s)),\n?? 80-PROJECTS/ai-roundtable/debates/debate_AI是否会取代人类工作_2026-04-02T05-08-20.json\n?? 80-PROJECTS/ai-roundtable/讨论_AI是否会取代人类工作_2026-04-02T05-08-20.txt\n?? 80-PROJECTS/self-evolving-orchestrator/go/m.name)\n?? 80-PROJECTS/self-evolving-orchestrator/go/{,+",
+      "gitStatus": "M 10-RESEARCH/domain-research/领域研究/cnt-research\n M 10-RESEARCH/domain-research/领域研究/github_repo\n M 80-PROJECTS/crucix\n M 80-PROJECTS/openclaw-dashboard/dashboard-data.json\n M 80-PROJECTS/openclaw-dashboard/src/operations/detection-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/pick-next-project.mjs\n M 80-PROJECTS/openclaw-dashboard/src/operations/productive-ops.mjs\n M 80-PROJECTS/openclaw-dashboard/vercel.json\n M 80-PROJECTS/rl-trading\n M CLAUDE.md\n?? 80-PROJECTS/openclaw-dashboard/'\n?? 80-PROJECTS/openclaw-dashboard/.gitignore\n?? 80-PROJECTS/openclaw-dashboard/console.error(e.message))\n?? 80-PROJECTS/openclaw-dashboard/console.log(l.substring(0\n?? 80-PROJECTS/openclaw-dashboard/m.killed",
       "branch": "main",
       "dependencies": [
         "@modelcontextprotocol/sdk",
@@ -192,7 +192,7 @@
       "description": "",
       "lastActive": "2026-04-02",
       "status": "modified",
-      "gitStatus": "M .omc/state/idle-notif-cooldown.json\n M .omc/state/last-tool-error.json\n?? .omc/state/hud-state.json\n?? .omc/state/hud-stdin-cache.json",
+      "gitStatus": "M .omc/state/idle-notif-cooldown.json\n?? .omc/state/hud-state.json\n?? .omc/state/hud-stdin-cache.json",
       "branch": "master",
       "dependencies": [
         "d3",
@@ -254,22 +254,22 @@
     {
       "id": "default_",
       "time": "2026-03-28",
-      "status": "4天前"
+      "status": "6天前"
     },
     {
       "id": "default_",
       "time": "2026-03-28",
-      "status": "4天前"
+      "status": "6天前"
     },
     {
       "id": "default_",
       "time": "2026-03-28",
-      "status": "4天前"
+      "status": "6天前"
     },
     {
       "id": "default_",
       "time": "2026-03-28",
-      "status": "4天前"
+      "status": "6天前"
     }
   ],
   "memory": {
@@ -277,6 +277,13 @@
     "total": 158,
     "entries": 0,
     "health": 89
+  },
+  "omc": {
+    "sessionId": "52decc2c-1dd6-461c-b7d2-35be7f3cb160",
+    "sessionStart": "2026-04-03T08:26:29.721Z",
+    "backgroundTasks": 0,
+    "sessions": 1252,
+    "autopilotActive": false
   },
   "stats": {
     "totalProjects": 35,

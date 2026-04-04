@@ -1,6 +1,6 @@
 {
   "framework": null,
-  "buildCommand": "npm run generate && npm run build:static",
+  "buildCommand": "npm run build:static",
   "outputDirectory": "dist",
   "installCommand": "npm install --ignore-scripts",
   "devCommand": "node dashboard-server.js"

@@ -67,7 +67,9 @@ export class BrainstormProjects extends DetectionOperation {
     this.workspace = workspace;
   }
 
-  canImprove() {
+  canImprove(targetProject) {
+    if (targetProject) return true; // 有明确目标时强制执行 brainstorm
+    // 全局冷却：检查整个 brainstorm 目录
     const bmDir = path.join(this.workspace, '.omc', 'brainstorm');
     if (!fs.existsSync(bmDir)) return true;
     const files = fs.readdirSync(bmDir).filter(f => f.endsWith('.md'));
@@ -77,27 +79,165 @@ export class BrainstormProjects extends DetectionOperation {
     return age > CONFIG.brainstorm.minDaysBetween * 24 * 60 * 60 * 1000;
   }
 
-  async execute() {
-    const projectsDir = this.workspace;
-    if (!fs.existsSync(projectsDir)) return { ideas: 0 };
+  async execute(targetProject) {
+    // 如果传入了目标项目则使用它，不再随机选
+    if (targetProject) {
+      // 项目实际在 80-PROJECTS/ 子目录下
+      const projectPath = path.join(this.workspace, '80-PROJECTS', targetProject);
+      if (!fs.existsSync(projectPath)) return { ideas: 0 };
+      return this._brainstormProject(targetProject, projectPath);
+    }
 
-    const dirs = fs.readdirSync(projectsDir).filter(f => {
+    // 无 targetProject 时从 MEMORY.md 活跃项目列表随机选（兼容旧逻辑）
+    const memoryFile = path.join(process.env.HOME || '', '.claude', 'projects', 'D--OpenClaw-workspace', 'memory', 'MEMORY.md');
+    if (!fs.existsSync(memoryFile)) return { ideas: 0 };
+    const rows = this._parseActiveProjects(fs.readFileSync(memoryFile, 'utf8'));
+    if (rows.length === 0) return { ideas: 0 };
+    const target = rows[Math.floor(Math.random() * rows.length)].name;
+    return this._brainstormProject(target, path.join(this.workspace, target));
+  }
+
+  _parseActiveProjects(content) {
+    const rows = [];
+    const lines = content.split('\n');
+    let inActive = false;
+    for (const line of lines) {
+      const t = line.trim();
+      if (t === '### Active Projects') { inActive = true; continue; }
+      if (t.startsWith('### ')) { inActive = false; continue; }
+      if (!inActive || !t.startsWith('|') || t.includes('---')) continue;
+      const cells = t.split('|').map(c => c.trim()).filter(Boolean);
+      if (cells.length >= 2) rows.push({ name: cells[0], path: cells[1] });
+    }
+    return rows;
+  }
+
+  /** 读取项目所有文本上下文（README + package.json + 源码内容），用于领域感知创新建议 */
+  _readProjectContext = (projectPath, readmePath, packagePath, srcPath) => {
+    const parts = [];
+    try {
+      if (fs.existsSync(readmePath)) parts.push(fs.readFileSync(readmePath, 'utf8').substring(0, 5000));
+    } catch {}
+    try {
+      if (fs.existsSync(packagePath)) parts.push(fs.readFileSync(packagePath, 'utf8'));
+    } catch {}
+    // 读取 src 目录核心文件（前3个）的部分内容
+    if (fs.existsSync(srcPath)) {
       try {
-        const stat = fs.statSync(path.join(projectsDir, f));
-        return stat.isDirectory() && !f.startsWith('10-') && !f.startsWith('.');
-      } catch { return false; }
-    });
+        const files = fs.readdirSync(srcPath)
+          .filter(f => f.endsWith('.ts') || f.endsWith('.js') || f.endsWith('.py') || f.endsWith('.mjs'))
+          .slice(0, 3);
+        for (const f of files) {
+          try {
+            const content = fs.readFileSync(path.join(srcPath, f), 'utf8').substring(0, 1500);
+            parts.push(`// ${f}\n${content}`);
+          } catch {}
+        }
+      } catch {}
+    }
+    return parts.join('\n');
+  };
 
-    if (dirs.length === 0) return { ideas: 0 };
+  /**
+   * 深度分析项目源码，生成真正有价值的创新建议
+   * 不是关键词匹配，而是理解代码在做什么之后提出改进
+   */
+  _deepAnalyzeProject(target, projectPath, context) {
+    const suggestions = [];
+    const lower = context.toLowerCase();
+    const words = lower.split(/\s+/);
 
-    const target = dirs[Math.floor(Math.random() * dirs.length)];
-    const projectPath = path.join(projectsDir, target);
+    // ── 检测是否有硬编码/配置外置建议 ──
+    if (lower.includes('apikey') || lower.includes('api_key') || lower.includes('secret')) {
+      if (!lower.includes('dotenv') && !lower.includes('env')) {
+        suggestions.push('敏感信息外置 - 将 API Key 等硬编码迁移到 .env 环境变量配置');
+      }
+    }
 
+    // ── 检测是否缺少错误处理 ──
+    if (!lower.includes('try') && !lower.includes('catch') && !lower.includes('error handling')) {
+      suggestions.push('错误处理增强 - 添加结构化错误处理、fallback 逻辑、降级策略');
+    }
+
+    // ── 检测是否有类型系统 ──
+    if (!lower.includes('typescript') && !lower.includes(': string') && !lower.includes(': number') && !lower.includes(': boolean')) {
+      if (fs.existsSync(path.join(projectPath, 'package.json'))) {
+        try {
+          const pkg = JSON.parse(fs.readFileSync(path.join(projectPath, 'package.json'), 'utf8'));
+          const deps = Object.keys({ ...pkg.dependencies, ...pkg.devDependencies }).join(' ');
+          if (deps.includes('typescript')) {
+            suggestions.push('TypeScript 类型增强 - 为核心函数补充完整类型注解，消除 any');
+          }
+        } catch {}
+      }
+    }
+
+    // ── 检测是否有缓存机制 ──
+    if (!lower.includes('cache') && !lower.includes('lru') && !lower.includes('memo')) {
+      suggestions.push('缓存层引入 - 添加 LRU 缓存或 memoization，减少重复计算');
+    }
+
+    // ── 检测是否有配置管理 ──
+    if (!lower.includes('config') && !lower.includes('yaml') && !lower.includes('toml') && !lower.includes('argv')) {
+      suggestions.push('配置外部化 - 接受 YAML/JSON 配置文件，支持多环境切换');
+    }
+
+    // ── 检测是否有日志 ──
+    if (!lower.includes('console.log') && !lower.includes('logger') && !lower.includes('log.')) {
+      suggestions.push('结构化日志 - 替换 console.log 为 pino/winston，添加级别和上下文');
+    }
+
+    // ── 检测是否缺少批处理 ──
+    if (lower.includes('for') && lower.includes('fetch') && !lower.includes('batch') && !lower.includes('chunk')) {
+      suggestions.push('批量处理优化 - 将串行请求改为并发/批量，降低延迟');
+    }
+
+    // ── 检测是否缺少重试机制 ──
+    if (lower.includes('fetch') || lower.includes('request') || lower.includes('api')) {
+      if (!lower.includes('retry') && !lower.includes('attempt')) {
+        suggestions.push('网络请求重试 - 添加指数退避重试机制，提升可靠性');
+      }
+    }
+
+    // ── 检测是否缺少限流 ──
+    if ((lower.includes('api') || lower.includes('request') || lower.includes('fetch')) &&
+        !lower.includes('rate') && !lower.includes('limit') && !lower.includes('throttle')) {
+      suggestions.push('限流保护 - 添加请求限流器，避免触发第三方 API 配额限制');
+    }
+
+    // ── 检测是否缺少凭证轮换 ──
+    if ((lower.includes('apikey') || lower.includes('api_key') || lower.includes('token')) &&
+        !lower.includes('rotate') && !lower.includes('refresh')) {
+      suggestions.push('凭证自动轮换 - 实现 API Key 自动刷新和轮换机制');
+    }
+
+    // ── 检测是否有外部依赖可本地替代 ──
+    if (lower.includes('openai') || lower.includes('anthropic')) {
+      if (!lower.includes('ollama') && !lower.includes('local')) {
+        suggestions.push('本地模型支持 - 接入 Ollama 本地模型，降低 API 成本，支持离线运行');
+      }
+    }
+
+    // ── 检测是否缺少发布验证 ──
+    if (!lower.includes('lint') && !lower.includes('prettier') && !lower.includes('format')) {
+      suggestions.push('代码质量门禁 - 添加 ESLint + Prettier + husky pre-commit hook');
+    }
+
+    // ── 检测是否缺少变更追踪 ──
+    if (!lower.includes('changelog') && !lower.includes('release')) {
+      suggestions.push('变更日志自动化 - 接入 conventional commits，自动生成 changelog');
+    }
+
+    return suggestions;
+  };
+
+  _brainstormProject(target, projectPath) {
     const suggestions = [];
     const readmePath = path.join(projectPath, 'README.md');
     const packagePath = path.join(projectPath, 'package.json');
     const srcPath = path.join(projectPath, 'src');
 
+    // ── 基础补缺：缺失项立即补齐建议 ──
     if (!fs.existsSync(readmePath)) {
       suggestions.push('缺少 README.md - 建议添加项目说明文档');
     }
@@ -110,27 +250,126 @@ export class BrainstormProjects extends DetectionOperation {
         if (!pkg.keywords || pkg.keywords.length < 3) {
           suggestions.push('关键词不足 - 建议添加更多关键词提升可发现性');
         }
+        if (!pkg.description || pkg.description.length < 10) {
+          suggestions.push('package.json description 缺失或过简 - 建议添加项目描述');
+        }
       } catch { /* ignore */ }
+    } else {
+      const altConfigs = ['pyproject.toml', 'go.mod', 'Cargo.toml', 'requirements.txt', 'Pipfile'];
+      if (altConfigs.some(f => fs.existsSync(path.join(projectPath, f)))) {
+        suggestions.push('无 package.json - 建议添加以支持 npm 生态或标准化启动流程');
+      }
     }
     if (fs.existsSync(srcPath)) {
-      const srcFiles = fs.readdirSync(srcPath)
-        .filter(f => f.endsWith('.ts') || f.endsWith('.js'));
+      const srcFiles = fs.readdirSync(srcPath).filter(f => f.endsWith('.ts') || f.endsWith('.js'));
       if (srcFiles.length > 10) {
         suggestions.push(`src 目录有 ${srcFiles.length} 个文件 - 考虑模块化拆分`);
       }
     }
-
-    // 从 MEMORY.md 交叉链接表搜索相关域类比
-    const analogies = this._findAnalogies(target);
-
-    if (suggestions.length === 0 && analogies.length === 0) {
-      return { project: target, ideas: 0, message: '项目状态良好，无优化建议' };
+    if (!fs.existsSync(path.join(projectPath, '.github', 'workflows'))) {
+      suggestions.push('缺少 GitHub Actions CI 流程 - 建议添加自动化测试工作流');
+    }
+    const testPaths = ['tests', 'test', '__tests__', 'spec'];
+    if (!testPaths.some(t => fs.existsSync(path.join(projectPath, t)))) {
+      suggestions.push('缺少测试目录 - 建议添加测试框架提升代码可靠性');
+    }
+    if (fs.existsSync(readmePath)) {
+      const readme = fs.readFileSync(readmePath, 'utf8');
+      if (!readme.includes('npm install') && !readme.includes('pip install') && !readme.includes('cargo')) {
+        suggestions.push('README 缺少安装命令 - 建议补充快速启动步骤');
+      }
+      if (!readme.includes('##') && !readme.includes('#')) {
+        suggestions.push('README 结构简单 - 建议增加章节（功能/用法/许可证等）');
+      }
+    }
+    if (!fs.existsSync(path.join(projectPath, 'LICENSE')) && !fs.existsSync(path.join(projectPath, 'LICENSE.md'))) {
+      suggestions.push('缺少开源许可证 - 建议添加 LICENSE 文件明确授权条款');
     }
 
-    // 写入 idea 池（每条建议一条 seed idea）
+    // ── 项目感知创新建议：读懂项目源码，理解核心逻辑后生成真正有价值的改进方向 ──
+    const projectContext = this._readProjectContext(projectPath, readmePath, packagePath, srcPath);
+    const projectIdeas = this._deepAnalyzeProject(target, projectPath, projectContext);
+
+    // 分析项目技术栈
+    let isPython = false, isTypeScript = false, isFrontend = false, hasCLI = false;
+    if (fs.existsSync(packagePath)) {
+      try {
+        const pkg = JSON.parse(fs.readFileSync(packagePath, 'utf8'));
+        const deps = { ...pkg.dependencies, ...pkg.devDependencies };
+        const allDeps = Object.keys(deps).join(' ');
+        const pkgJson = JSON.stringify(pkg);
+        isTypeScript = allDeps.includes('typescript') || allDeps.includes('@types/');
+        isFrontend = allDeps.includes('react') || allDeps.includes('vue') || allDeps.includes('svelte');
+        isPython = fs.existsSync(path.join(projectPath, 'pyproject.toml')) || fs.existsSync(path.join(projectPath, 'requirements.txt'));
+        hasCLI = pkgJson.includes('commander') || pkgJson.includes('cac') || pkgJson.includes('yargs') || pkgJson.includes('clipanion');
+      } catch {}
+    }
+
+    // ── 通用工程改进建议 ──
+    if (!hasCLI && !isFrontend) {
+      suggestions.push('CLI 化改造 - 将核心能力封装为命令行工具，支持 AI Agent 调用');
+    }
+    if (hasCLI) {
+      suggestions.push('CLI 深度增强 - 添加交互式提示、多格式输出、配置热加载');
+    }
+    if (!isFrontend) {
+      const hasMonitoring = fs.existsSync(path.join(projectPath, 'grafana')) ||
+                            fs.existsSync(path.join(projectPath, 'prometheus')) ||
+                            fs.existsSync(path.join(projectPath, 'monitoring'));
+      if (!hasMonitoring) {
+        suggestions.push('可观测性建设 - 添加结构化日志、metrics 埋点、分布式 traces');
+      }
+    }
+    if (isFrontend) {
+      suggestions.push('PWA 增强 - 添加离线支持、桌面入口、后台同步');
+    }
+    if (isPython || isTypeScript) {
+      suggestions.push('性能基准测试 - 建立自动化 benchmark，监控关键路径耗时变化');
+    }
+    const hasI18n = fs.existsSync(path.join(projectPath, 'i18n')) ||
+                      fs.existsSync(path.join(projectPath, 'locales')) ||
+                      fs.existsSync(path.join(projectPath, 'langs'));
+    if (!hasI18n) {
+      suggestions.push('国际化（i18n）- 抽取用户可见文本，支持多语言切换');
+    }
+    suggestions.push('开源运营建设 - contribution guide、changelog 自动化、release note 生成');
+    suggestions.push('项目元数据完善 - 添加CITATION.cff、代码徽章、量化健康指标');
+
+    // 合并深度分析产生的项目专属创新建议
+    for (const idea of projectIdeas) {
+      if (!suggestions.includes(idea)) suggestions.push(idea);
+    }
+
+    // ── 从 MEMORY.md 交叉链接表搜索相关域类比 ──
+    const analogies = this._findAnalogies(target);
+
+    // 写入 idea 池（每条建议一条 seed idea），格式含 [projectName] 以便自动执行
+    // 自动估算 score：benefit(1-3) × feasibility(1-3)
     const ideaPool = new IdeaPool(this.workspace);
+
+    // 语义去重：提取核心主题词，去除措辞差异（"缺少X" vs "X" vs "可添加X"）
+    const _coreTopic = (desc) => {
+      return desc
+        .replace(/^brainstorm:\s*\[[^\]]+\]\s*/i, '')
+        .replace(/^\[suggest\]\s*/i, '')
+        .replace(/^(缺少|可添加|可转化|建议添加|建议)\s*/i, '')
+        .replace(/\s*[-−–].*$/, '').trim()
+        .replace(/\[.*?\]/g, '')
+        .replace(/\s+/g, ' ').trim()
+        .toLowerCase();
+    };
+
+    const existingTopics = new Set(ideaPool.list()
+      .map(i => _coreTopic(i.desc)));
     for (const s of suggestions) {
-      ideaPool.add('seed', `brainstorm: ${s}`, 'brainstorm');
+      const fullDesc = `brainstorm: [${target}] ${s}`;
+      const topic = _coreTopic(fullDesc);
+      if (existingTopics.has(topic)) continue; // 语义重复则跳过
+      existingTopics.add(topic); // 防止同批次内重复
+      const idx = ideaPool.add('seed', fullDesc, 'brainstorm');
+      // 自动打分：impact × effort
+      const { impact, effort } = this._estimateIdeaScore(s);
+      if (idx !== -1 && impact && effort) ideaPool.score(idx, impact, effort);
     }
 
     const brainstormDir = path.join(this.workspace, '.omc', 'brainstorm');
@@ -149,7 +388,7 @@ export class BrainstormProjects extends DetectionOperation {
 
   /** 从 MEMORY.md 交叉链接表搜索与目标项目相关的类比 */
   _findAnalogies(target) {
-    const memoryFile = path.join(this.workspace, '..', '..', 'memory', 'MEMORY.md');
+    const memoryFile = path.join(process.env.HOME || '', '.claude', 'projects', 'D--OpenClaw-workspace', 'memory', 'MEMORY.md');
     if (!fs.existsSync(memoryFile)) return [];
     const memory = fs.readFileSync(memoryFile, 'utf8');
 
@@ -169,6 +408,27 @@ export class BrainstormProjects extends DetectionOperation {
       }
     }
     return analogies.slice(0, 3); // 最多返回3条
+  }
+
+  /** 根据建议内容估算 idea score: impact(1-3) × effort(1-3) */
+  _estimateIdeaScore(suggestion) {
+    const lower = suggestion.toLowerCase();
+    let impact = 2; // 默认中等收益
+    let effort = 2; // 默认中等成本
+
+    // 高收益指标
+    if (lower.includes('重复') || lower.includes('复制') || lower.includes('bug')) impact = 3;
+    else if (lower.includes('质量') || lower.includes('可维护') || lower.includes('测试')) impact = 2;
+    else if (lower.includes('说明') || lower.includes('文档') || lower.includes('注释')) impact = 1;
+
+    // 低投入指标（容易完成）
+    if (lower.includes('添加') && (lower.includes('readme') || lower.includes('测试'))) effort = 1;
+    else if (lower.includes('添加') && (lower.includes('package.json') || lower.includes('脚本'))) effort = 1;
+    else if (lower.includes('关键词') || lower.includes('description')) effort = 1;
+    else if (lower.includes('npm') || lower.includes('生态')) effort = 2;
+    else if (lower.includes('拆分') || lower.includes('模块化')) effort = 3;
+
+    return { impact, effort };
   }
 }
 

@@ -13,7 +13,8 @@
   ],
   "scripts": {
     "start": "node index.js",
-    "test": "echo \"No test script\""
+    "test": "echo \"No test script\"",
+    "dev": "echo \"No dev script\""
   },
   "dependencies": {
     "dotenv": "^16.0.0",
