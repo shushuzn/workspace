@@ -1,0 +1,12 @@
+{
+  "archive_name": "review",
+  "package_name": "review",
+  "module_count": 5,
+  "sample_files": [
+    "commands/review.ts",
+    "commands/review/ultrareviewCommand.tsx",
+    "commands/review/ultrareviewEnabled.ts",
+    "commands/review/reviewRemote.ts",
+    "commands/security-review.ts"
+  ]
+}
