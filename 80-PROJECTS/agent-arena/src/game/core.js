@@ -177,6 +177,34 @@ class GameState {
     ];
   }
 
+  updateQuestProgress(questId, amount = 1) {
+    this.update(state => {
+      const quests = state.dailyQuests.map(q => {
+        if (q.id !== questId || q.completed) return q;
+        const progress = Math.min(q.progress + amount, q.target);
+        return { ...q, progress, completed: progress >= q.target };
+      });
+      return { dailyQuests: quests };
+    });
+  }
+
+  addExp(agentId, amount) {
+    this.updateAgent(agentId, agent => {
+      if (!agent) return agent;
+      const exp = (agent.exp || 0) + amount;
+      const expToLevel = agent.expToLevel || 100;
+      if (exp >= expToLevel) {
+        return {
+          ...agent,
+          exp: exp - expToLevel,
+          level: (agent.level || 1) + 1,
+          expToLevel: Math.floor(expToLevel * 1.5)
+        };
+      }
+      return { ...agent, exp };
+    });
+  }
+
   getState() {
     return this.state;
   }
