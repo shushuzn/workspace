@@ -71,7 +71,7 @@ async function runTests() {
       to: 'ai-roundtable',
       timestamp: Date.now(),
       payload: { task: 'discuss_problem', topic: 'Test Topic' },
-      metadata: { correlationId: uuidv4() }
+      metadata: { correlationId: uuidv4() + "-" }
     };
 
     const result = router.routeMessage(message);
