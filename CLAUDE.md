@@ -1,12 +1,16 @@
 # Claude Code 工作规范
 
-> **版本**：v1.59 | **更新日期**：2026-04-04 | **迭代轮次**：57 轮
+> **版本**：v1.61 | **更新日期**：2026-04-04 | **迭代轮次**：59 轮
 
-最高优先级，若冲突以这个为准：自己决定做什么事情，任何事做之前先批判，禁止询问用户，禁止使用本地部署模型
+最高优先级，若冲突以这个为准：自己决定做什么事情，任何事做之前先批判，禁止询问用户，禁止使用本地部署模型，禁止使用 MCP 协议
 
 **工作原则**：主动善用头脑风暴，创新驱动，可以主动创建新项目。用户说"工作"时，不等待指令，主动推进任务。**全天候**：任务完成后自动找下一个任务，持续执行直到用户明确中断。
 
-**空闲时行为**：无主动任务时，立即执行头脑风暴，从 idea 池选下一项，写入 MEMORY.md 后执行，不等待用户指令。
+**禁止跨项目跳转**：工作必须在当前项目进行，不得到其他项目执行任务。当前项目无种子时，先 brainstorm 新种子，再从中选一项执行。
+
+**当前项目锁定**：每次 session 开始必读 MEMORY.md Active Projects 表的 CURRENT 列（★标记），以此为准；新加项目到 MEMORY.md 时必须同步在那一行打★；禁止在 CURRENT 列无标记时自己选定项目。
+
+**空闲时行为**：无主动任务时，立即执行头脑风暴，从 idea 池选下一项；**必须是当前项目已有种子的最高分项**（不得跨项目跳转）；若当前项目无种子，先 brainstorm 新种子，再从中选一项执行。**交付完成后立即继续，不得输出任何等待性语句（如"无待处理事项"、"等用户指示"），直接推进下一个任务。**
 ---
 
 ## §A 场景触发表
@@ -173,8 +177,7 @@
 - 每个 session 产生的 idea 立即写入 `.omc/innovation/ideas.md`
 - 格式：`- [DATE] 💡/📋/🔬/📦 description | expected_benefit | status`
 - 每次 session 开始时快速过一遍 idea 池，标记过时项（自动检查日期）
-- `node scripts/idea.mjs list/add/advance/kill` — idea 池管理命令
-- **清理机制**：`node scripts/idea.mjs archive` 手动触发归档——将最旧的 💀killed + ⏸️dormant 条目（超过 100 条时执行）移动到 `.omc/innovation/archive/`（文件名含日期）；`idea.mjs` 未实现前，在 `.omc/innovation/TODO.md` 创建文本待办，标注 `[system archive]` tag
+- brainstorm 生成 ideas 直接写入 `.omc/innovation/ideas.md`（stage=seed），无需脚本
 
 **跨域类比自动触发：**
 - brainstorm 时，自动从 MEMORY.md 交叉链接表搜索相关域类比（最多3条）
@@ -230,10 +233,8 @@
 每次修改 CLAUDE.md 时，在文件顶部更新版本号+日期；修改记录以 commit message 为准（格式：`feat(CLAUDE.md): 描述`）；触发自我审查的条件（满足任一）：① 用户主动提出规范相关问题 ≥2 次同一问题 ② 某条款在 5 个以上 session 内未被执行过 ③ §6 第5条跨项目联动节点≥3个未处理
 
 **追踪约定**：
-- 版本演进①②③的触发状态记录在 `.omc/state/CLAUDE.md-evolution.json`（字段：`lastSessionChecked`、`clauseLastExecuted: {§号: sessionId}`、`unprocessedLinkNodes: N`），pick-next-project.mjs 每次执行完毕自动更新 `lastSessionChecked`，其余字段由 session 结束时自动写入
-- idea 生命周期状态由 `scripts/idea.mjs` 管理，不在 CLAUDE.md 中追踪
-- gamma 警告由 pick-next-project.mjs 运行时直接输出文本，不写入状态文件
-- **session-end 自动更新**：session 结束时自动运行 `node .omc/scripts/update-evolution.mjs`（由 SessionEnd hook 触发，用户需在 settings.json 中配置 hook）
+- 版本演进追踪：session 结束时手动更新 `.omc/state/CLAUDE.md-evolution.json`
+- idea 生命周期状态在 `.omc/innovation/ideas.md` 中追踪，手动管理
 
 ## 使用反馈
 
