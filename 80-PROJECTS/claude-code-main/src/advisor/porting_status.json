@@ -1,0 +1,10 @@
+{
+  "subsystem": "advisor",
+  "status": "stub",
+  "progress": 5,
+  "total_files": 0,
+  "stub_files": [],
+  "non_stub_count": 0,
+  "expected_modules": 0,
+  "files": []
+}
