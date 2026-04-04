@@ -109,7 +109,7 @@
       </div>
       <div class="perf-item">
         <span class="perf-label">抽卡次数</span>
-        <span class="perf-value">{stats.totalPulls || 0}</span>
+        <span class="perf-value">{stats.totalGachaPulls || 0}</span>
       </div>
     </div>
   </div>

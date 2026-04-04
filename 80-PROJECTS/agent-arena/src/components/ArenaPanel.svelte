@@ -168,6 +168,12 @@
       ? { xp: Math.floor(50 * opp.difficulty), coins: Math.floor(20 * opp.difficulty) }
       : { xp: 10, coins: 5 };
 
+    // Give rewards to player
+    if (result === 'win') {
+      gameStore.addAgentXP($arenaStore.selectedArenaAgentId, rewards.xp);
+    }
+    gameStore.addCoins(rewards.coins);
+
     // Update opponent with result
     const updatedOpponent = { ...opp, result, rewards };
     arenaStore.setCurrentOpponent(updatedOpponent);

@@ -175,10 +175,9 @@ function createGameStore() {
 
       const reward = Math.floor(100 * opponentLevel * (playerWins ? 1 : 0.1));
 
-      // Update agent XP on win
       if (playerWins) {
         const xpGain = 30 * opponentLevel;
-        const xpResult = gameStore.addAgentXP(agentId, xpGain);
+        gameStore.addAgentXP(agentId, xpGain);
       }
 
       update(s => ({
