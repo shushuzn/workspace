@@ -238,7 +238,9 @@ class GameState {
   updateAgent(agentId, updates) {
     this.update(state => ({
       ...state,
-      agents: state.agents.map(a => a.id === agentId ? { ...a, ...updates } : a)
+      agents: state.agents.map(a => a.id === agentId
+        ? { ...a, ...(typeof updates === 'function' ? updates(a) : updates) }
+        : a)
     }));
   }
 
