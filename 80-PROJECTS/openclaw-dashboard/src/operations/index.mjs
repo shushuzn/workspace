@@ -15,7 +15,8 @@ export function getAllOperations(workspace) {
     new WorkspaceAutoCommit(workspace),
     new CheckProjectReadmes(workspace),
     new CheckMemorySize(workspace),
-    new BrainstormProjects(workspace),
+    // BrainstormProjects removed from auto-rotation — invoke manually when needed
+    // new BrainstormProjects(workspace),
     new CreateMissingReadme(workspace),
     new FindLargeFiles(workspace),
     new FindWorkspaceIssues(workspace),
