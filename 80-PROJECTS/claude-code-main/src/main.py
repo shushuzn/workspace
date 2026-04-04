@@ -2,13 +2,13 @@ from __future__ import annotations
 
 import argparse
 
-from .commands import get_command, render_command_index
+from .commands import find_commands, get_command, render_command_index
 from .parity_audit import run_parity_audit
 from .port_manifest import build_port_manifest
 from .query_engine import QueryEnginePort
 from .runtime import PortRuntime
 from .snapshot_diff import diff_snapshots
-from .tools import get_tool, render_tool_index
+from .tools import find_tools, get_tool, render_tool_index
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -36,6 +36,9 @@ def build_parser() -> argparse.ArgumentParser:
     diff_parser.add_argument('old_snapshot')
     diff_parser.add_argument('new_snapshot')
     diff_parser.add_argument('--surface', default='Snapshot Diff')
+    docs_parser = subparsers.add_parser('docs', help='generate Markdown CLI reference')
+    docs_parser.add_argument('--surface', default='all', choices=['all', 'commands', 'tools'])
+    docs_parser.add_argument('--query')
     return parser
 
 
@@ -87,6 +90,27 @@ def main(argv: list[str] | None = None) -> int:
     if args.command == 'snapshot-diff':
         diff = diff_snapshots(args.old_snapshot, args.new_snapshot)
         print(diff.to_markdown(args.surface))
+        return 0
+    if args.command == 'docs':
+        lines = ['# CLI Reference', '']
+        surface = args.surface
+        if surface in ('all', 'commands'):
+            cmds = find_commands(args.query) if args.query else list(PORTED_COMMANDS)
+            lines.append(f'## Commands ({len(cmds)})')
+            lines.append('')
+            for m in cmds:
+                lines.append(f'`/{m.name}` — {m.responsibility}')
+                lines.append(f'> Source: `{m.source_hint}`')
+                lines.append('')
+        if surface in ('all', 'tools'):
+            tools = find_tools(args.query) if args.query else list(PORTED_TOOLS)
+            lines.append(f'## Tools ({len(tools)})')
+            lines.append('')
+            for m in tools:
+                lines.append(f'`/{m.name}` — {m.responsibility}')
+                lines.append(f'> Source: `{m.source_hint}`')
+                lines.append('')
+        print('\n'.join(lines))
         return 0
     parser.error(f'unknown command: {args.command}')
     return 2
