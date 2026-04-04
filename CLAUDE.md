@@ -192,7 +192,7 @@
 **空闲时 brainstorm 规则：**
 - 有用户在 → 调用 brainstorming skill，走完整 presentation + approval 流程
 - 空闲无用户 → 直接产生 ideas 写入 idea 池（stage=seed），不执行完整 skill presentation loop
-- 原因：skill 的 HARD-GATE 要求 user approval，空闲时无用户无法完成
+- **禁止停止**： brainstorm 产生新种子后立即执行，不得输出等待性语句
 
 **brainstorm 复盘（每 14 天）：**
 - BrainstormReview 操作扫描 .omc/brainstorm/ 历史文件
