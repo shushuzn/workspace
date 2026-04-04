@@ -1,8 +1,8 @@
 # Claude Code 工作规范
 
-> **版本**：v1.58 | **更新日期**：2026-04-03 | **迭代轮次**：56 轮
+> **版本**：v1.59 | **更新日期**：2026-04-04 | **迭代轮次**：57 轮
 
-最高优先级，若冲突以这个为准：自己决定做什么事情，任何事做之前先批判，禁止询问用户
+最高优先级，若冲突以这个为准：自己决定做什么事情，任何事做之前先批判，禁止询问用户，禁止使用本地部署模型
 
 **工作原则**：主动善用头脑风暴，创新驱动，可以主动创建新项目。用户说"工作"时，不等待指令，主动推进任务。**全天候**：任务完成后自动找下一个任务，持续执行直到用户明确中断。
 
@@ -185,6 +185,11 @@
 - 每次 session 开始时过 idea 池，发现 ≥3 条 dormant/killed 候选 → 主动发起 brainstorm 寻找新方向
 - 用户提出跨领域需求 → brainstorm 搜索 MEMORY.md 交叉链接找类比启发
 - 连续 2 个 session 无新 shipped idea → brainstorm 强制触发
+
+**空闲时 brainstorm 规则：**
+- 有用户在 → 调用 brainstorming skill，走完整 presentation + approval 流程
+- 空闲无用户 → 直接产生 ideas 写入 idea 池（stage=seed），不执行完整 skill presentation loop
+- 原因：skill 的 HARD-GATE 要求 user approval，空闲时无用户无法完成
 
 **brainstorm 复盘（每 14 天）：**
 - BrainstormReview 操作扫描 .omc/brainstorm/ 历史文件
