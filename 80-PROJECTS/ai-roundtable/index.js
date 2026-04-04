@@ -1,4 +1,8 @@
-import 'dotenv/config';
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
+const __selfDir = dirname(fileURLToPath(import.meta.url));
+dotenv.config({ path: __selfDir + '/.env' });
 import { TemperatureScheduler } from './shared/temperatureScheduler.js';
 import { ConceptJumpTracker } from './shared/conceptJumpTracker.js';
 import { MiniMaxEmbedder } from './shared/embedder.js';
@@ -6,7 +10,6 @@ import { QualityScorer } from './shared/qualityScorer.js';
 import { discoverBridgeConcepts, extractBridgePool } from './shared/bridgeDiscovery.js';
 import fs from 'fs';
 import path from 'path';
-import { fileURLToPath } from 'url';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -18,6 +21,123 @@ const OLLAMA_URL = process.env.OLLAMA_URL || 'http://localhost:11434';
 const OLLAMA_MODEL = process.env.OLLAMA_MODEL || 'llama3.2:1b';
 const USE_OLLAMA = process.env.USE_OLLAMA === 'true';
 const DEFAULT_ROUNDS = 5;
+
+// ─── 多模型路由 ────────────────────────────────────────
+const LLM_PROVIDERS = [];
+if (process.env.OPENAI_API_KEY) {
+  LLM_PROVIDERS.push({
+    name: 'openai',
+    priority: 1,
+    call: (msgs, temp, maxTok, signal) => chatOpenAI(msgs, temp, maxTok, signal),
+  });
+}
+if (process.env.ANTHROPIC_API_KEY) {
+  LLM_PROVIDERS.push({
+    name: 'anthropic',
+    priority: 2,
+    call: (msgs, temp, maxTok, signal) => chatAnthropic(msgs, temp, maxTok, signal),
+  });
+}
+// MiniMax 兜底（默认启用，不在 LLM_PROVIDERS 列表里避免优先级冲突）
+const USE_MINIMAX_FALLBACK = !USE_OLLAMA && API_KEY;
+
+async function chatWithRouter(messages, temperature, maxTokens, signal) {
+  // 1. 尝试所有已配置的第三方模型
+  for (const provider of LLM_PROVIDERS) {
+    try {
+      return await provider.call(messages, temperature, maxTokens, signal);
+    } catch (err) {
+      console.warn(color(`  ⚠ ${provider.name} 不可用: ${err.message}，切换下一 provider…`, 33));
+    }
+  }
+  // 2. MiniMax兜底
+  if (USE_MINIMAX_FALLBACK) {
+    return chatMinimax(messages, temperature, maxTokens, signal);
+  }
+  // 3. Ollama兜底
+  if (USE_OLLAMA) {
+    return chatOllama(messages, temperature, maxTokens);
+  }
+  throw new Error('没有任何可用 LLM provider');
+}
+
+async function chatMinimax(messages, temperature, maxTokens, signal) {
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
+  const s = signal ? mergeSignals(signal, controller.signal) : controller.signal;
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${API_KEY}` },
+      body: JSON.stringify({ model: MODEL, messages, max_tokens: maxTokens, temperature, stream: false }),
+      signal: s,
+    });
+    clearTimeout(timer);
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      throw new Error(err.error?.message || `HTTP ${res.status}`);
+    }
+    const data = await res.json();
+    return data.choices?.[0]?.message?.content || '';
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+async function chatOpenAI(messages, temperature, maxTokens, signal) {
+  const url = process.env.OPENAI_URL || 'https://api.openai.com/v1/chat/completions';
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: process.env.OPENAI_MODEL || 'gpt-4o-mini',
+      messages: messages.map(m => ({ role: m.role, content: m.content, ...(m.name ? { name: m.name } : {}) })),
+      max_tokens: maxTokens,
+      temperature,
+      stream: false,
+    }),
+    signal,
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error?.message || `HTTP ${res.status}`);
+  }
+  const data = await res.json();
+  return data.choices?.[0]?.message?.content || '';
+}
+
+async function chatAnthropic(messages, temperature, maxTokens, signal) {
+  const url = process.env.ANTHROPIC_URL || 'https://api.anthropic.com/v1/messages';
+  const systemMsg = messages.find(m => m.role === 'system');
+  const nonSystem = messages.filter(m => m.role !== 'system');
+  const res = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': process.env.ANTHROPIC_API_KEY,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true',
+    },
+    body: JSON.stringify({
+      model: process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-20250514',
+      system: systemMsg?.content || '',
+      messages: nonSystem,
+      max_tokens: maxTokens,
+      temperature,
+    }),
+    signal,
+  });
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error?.message || `HTTP ${res.status}`);
+  }
+  const data = await res.json();
+  return data.content?.[0]?.text || '';
+}
+
 const REQUEST_TIMEOUT_MS = 30_000;
 const MODE_DISCUSS = 'discuss';
 const MODE_DEBATE = 'debate';
@@ -188,49 +308,8 @@ async function askPersona(messages, persona, topic, temperature, abortSignal) {
     ...messages.filter(m => m.role !== 'system'),
   ];
 
-  // USE_OLLAMA 模式：跳过 API 直接用本地模型
-  if (USE_OLLAMA) {
-    return chatOllama(allMessages, temperature, 1500);
-  }
-
-  const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), REQUEST_TIMEOUT_MS);
-  const signal = abortSignal
-    ? mergeSignals(abortSignal, controller.signal)
-    : controller.signal;
-
-  let res;
-  try {
-    res = await fetch(API_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${API_KEY}`,
-      },
-      body: JSON.stringify({
-        model: MODEL,
-        messages: allMessages,
-        max_tokens: 1500,
-        temperature: temperature,
-        stream: false,
-      }),
-      signal,
-    });
-  } finally {
-    clearTimeout(timeoutId);
-  }
-
-  if (!res.ok) {
-    const err = await res.json().catch(() => ({}));
-    const msg = err.error?.message || `HTTP ${res.status}`;
-    if (msg.includes('not support') || msg.includes('model')) {
-      throw new Error(`模型不可用：${msg}。请在 .env 中设置 MINIMAX_MODEL 为可用模型名称。`);
-    }
-    throw new Error(msg);
-  }
-
-  const data = await res.json();
-  const raw = data.choices?.[0]?.message?.content || '';
+  const signal = abortSignal;
+  const raw = await chatWithRouter(allMessages, temperature, 1500, signal);
   return cleanResponse(raw);
 }
 
@@ -895,10 +974,11 @@ async function main() {
     }
   }
 
-  if (!USE_OLLAMA && !API_KEY) {
-    console.error(color('错误：未设置 MINIMAX_API_KEY', 31));
+  if (!USE_OLLAMA && !API_KEY && LLM_PROVIDERS.length === 0) {
+    console.error(color('错误：未设置任何 LLM API Key', 31));
     console.error('请在 .env 文件中设置：MINIMAX_API_KEY=你的密钥');
-    console.error('或设置 USE_OLLAMA=true 使用本地模型');
+    console.error('或者设置 OPENAI_API_KEY / ANTHROPIC_API_KEY');
+    console.error('或者设置 USE_OLLAMA=true 使用本地模型');
     process.exit(1);
   }
 
