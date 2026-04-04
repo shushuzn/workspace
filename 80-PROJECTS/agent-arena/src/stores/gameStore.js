@@ -1,5 +1,5 @@
 import { writable, derived, get } from 'svelte/store';
-import { calculatePower } from '../game/agentFactory.js';
+import { calculatePower, createAgent, evolveAgent } from '../game/agentFactory.js';
 
 // Initial state - matches game.js structure
 const initialState = {
@@ -95,38 +95,37 @@ function createGameStore() {
       }));
     },
 
-    // Add XP to an agent, handle level-ups
+    // Add XP to an agent, handle level-ups, call evolveAgent on level-up
     addAgentXP: (agentId, amount) => {
       const state = get({ subscribe });
       const agent = state.agents.find(a => a.id === agentId);
       if (!agent) return { leveledUp: false, newLevel: 0 };
 
-      let currentXP = agent.xp || 0;
+      // Use exp field (consistent with agentFactory.createAgent)
+      let currentExp = agent.exp ?? agent.xp ?? 0;
       let currentLevel = agent.level || 1;
       let leveledUp = false;
 
-      currentXP += amount;
+      currentExp += amount;
 
       // Level threshold: 100 * 1.5^(level-1)
       const levelThreshold = () => Math.floor(100 * Math.pow(1.5, currentLevel - 1));
 
-      while (currentXP >= levelThreshold()) {
-        currentXP -= levelThreshold();
+      while (currentExp >= levelThreshold()) {
+        currentExp -= levelThreshold();
         currentLevel++;
         leveledUp = true;
       }
 
-      const updates = { xp: currentXP, level: currentLevel };
+      const updates = { exp: currentExp, level: currentLevel };
 
       if (leveledUp) {
-        const newStats = {
-          intelligence: (agent.stats.intelligence || 0) + 2,
-          speed: (agent.stats.speed || 0) + 2,
-          creativity: (agent.stats.creativity || 0) + 2,
-          endurance: (agent.stats.endurance || 0) + 2,
-        };
-        updates.stats = newStats;
-        updates.power = calculatePower(newStats);
+        // Call evolveAgent from agentFactory to get proper stat bonuses
+        const evolved = evolveAgent({ ...agent, level: currentLevel, exp: currentExp });
+        if (evolved) {
+          updates.stats = evolved.stats;
+          updates.power = evolved.power;
+        }
       }
 
       update(state => ({
@@ -137,6 +136,70 @@ function createGameStore() {
       }));
 
       return { leveledUp, newLevel: currentLevel };
+    },
+
+    // Battle against AI opponent (by level)
+    battleAI: (agentId, opponentLevel) => {
+      const state = get({ subscribe });
+      const agent = state.agents.find(a => a.id === agentId);
+      if (!agent) return { success: false, error: '没有选中的Agent' };
+
+      // Generate AI opponent stats
+      const aiStats = {
+        intelligence: opponentLevel * 10,
+        speed: opponentLevel * 10,
+        creativity: opponentLevel * 10,
+        endurance: opponentLevel * 10
+      };
+
+      // AI rarity scales with level
+      const aiRarity = opponentLevel > 50 ? 'epic' : opponentLevel > 25 ? 'rare' : 'uncommon';
+
+      const aiAgent = {
+        ...createAgent({ rarity: aiRarity }),
+        name: `挑战者 Lv.${opponentLevel}`,
+        stats: aiStats,
+        power: calculatePower(aiStats),
+        level: opponentLevel
+      };
+
+      let playerPower = calculatePower(agent.stats);
+      let aiPower = calculatePower(aiStats);
+
+      // Add ±20% randomness
+      playerPower *= 0.8 + Math.random() * 0.4;
+      aiPower *= 0.8 + Math.random() * 0.4;
+
+      const roll = Math.random() * (playerPower + aiPower);
+      const playerWins = roll < playerPower;
+
+      const reward = Math.floor(100 * opponentLevel * (playerWins ? 1 : 0.1));
+
+      // Update agent XP on win
+      if (playerWins) {
+        const xpGain = 30 * opponentLevel;
+        const xpResult = gameStore.addAgentXP(agentId, xpGain);
+      }
+
+      update(s => ({
+        ...s,
+        coins: s.coins + reward,
+        stats: {
+          ...s.stats,
+          totalBattles: (s.stats.totalBattles || 0) + 1,
+          totalWins: (s.stats.totalWins || 0) + (playerWins ? 1 : 0)
+        }
+      }));
+
+      return {
+        success: true,
+        playerWins,
+        opponent: aiAgent,
+        playerPower: Math.floor(playerPower),
+        aiPower: Math.floor(aiPower),
+        reward,
+        timestamp: Date.now()
+      };
     },
 
     // Spend coins (returns false if not enough)
