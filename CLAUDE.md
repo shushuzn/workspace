@@ -1,6 +1,6 @@
 # Claude Code 工作规范
 
-> **版本**：v1.61 | **更新日期**：2026-04-04 | **迭代轮次**：59 轮
+> **版本**：v1.62 | **更新日期**：2026-04-05 | **迭代轮次**：60 轮
 
 最高优先级，若冲突以这个为准：自己决定做什么事情，任何事做之前先批判，禁止询问用户，禁止使用本地部署模型，禁止使用 MCP 协议
 
@@ -10,7 +10,10 @@
 
 **当前项目锁定**：每次 session 开始必读 MEMORY.md Active Projects 表的 CURRENT 列（★标记），以此为准；新加项目到 MEMORY.md 时必须同步在那一行打★；禁止在 CURRENT 列无标记时自己选定项目。
 
-**空闲时行为**：无主动任务时，立即执行头脑风暴，从 idea 池选下一项；**必须是当前项目已有种子的最高分项**（不得跨项目跳转）；若当前项目无种子，先 brainstorm 新种子，再从中选一项执行。**交付完成后立即继续，不得输出任何等待性语句（如"无待处理事项"、"等用户指示"），直接推进下一个任务。**
+**空闲时行为**：无主动任务时，立即执行头脑风暴（idle loop 使用 brainstorming skill 的 auto mode：生成 seeds 写入 idea pool，不等待、不阻塞）；再从 idea 池取最高分项执行。**必须是当前项目已有种子的最高分项**（不得跨项目跳转）；若当前项目无种子，先 brainstorm 新种子（auto mode），再从 pool 取最高分项执行。
+- **强制规则：交付完成后立即推进下一个任务**，不得输出任何总结、报告、询问性语句；直接去找下一个可执行项
+- **禁止**：输出"完成"、"总结"、"等待"、"无待处理事项"等任何形式停顿
+- **例外**：有明确截止时间、阻塞、外部依赖时，才能停下来标注原因
 ---
 
 ## §A 场景触发表
@@ -157,7 +160,7 @@
 ---
 
 
-### §10 创新管道 — idea 必须有流向
+### §11 创新管道 — idea 必须有流向
 
 想法如无生命周期管理，只会无限堆积。§10 要求每个 idea 必须有明确去向：
 
@@ -187,23 +190,26 @@
 **brainstorm 触发时机（满足任一即触发）：**
 - 每次 session 开始时过 idea 池，发现 ≥3 条 dormant/killed 候选 → 主动发起 brainstorm 寻找新方向
 - 用户提出跨领域需求 → brainstorm 搜索 MEMORY.md 交叉链接找类比启发
-- 连续 2 个 session 无新 shipped idea → brainstorm 强制触发
+- 无 pending 高分 idea（score ≥ 4）→ brainstorm 生成新种子
 
-**空闲时 brainstorm 规则：**
-- 有用户在 → 调用 brainstorming skill，走完整 presentation + approval 流程
-- 空闲无用户 → 直接产生 ideas 写入 idea 池（stage=seed），不执行完整 skill presentation loop
-- **禁止停止**： brainstorm 产生新种子后立即执行，不得输出等待性语句
+**brainstorm 规则（统一）：**
+- 调用 brainstorming skill → 生成 seeds 写入 idea pool → 立即返回
+- brainstorming skill 内部控制所有行为，CLAUDE.md 不重复描述
+- **brainstorm 后不停顿**：seeds 写入 idea pool 后，立即选 score 最高项直接实现，**禁止在此阶段询问用户任何问题**；所有交互（clarifying question、design approval）发生在 brainstorming 技能内部，不外溢到主对话
 
 **brainstorm 复盘（每 14 天）：**
 - BrainstormReview 操作扫描 .omc/brainstorm/ 历史文件
 - 统计 brainstorm 来源 idea 的采纳率（shipped/running 占比）
 - 自动清理 60 天以上过期 brainstorm 文件
 
+**brainstorm 后清理**：超过3天未实现的 💡 active seed 降级为 ⏸️ dormant；超过7天直接从池中移除（不禁忌，可重新提出）；每次 brainstorm 时先清理过期项
+
 **idea 来源追踪：**
 - brainstorm 生成 → 标记 [brainstorm]
 - SuggestProjectIdeas 生成 → 标记 [suggest]
 - 手动提出 → 标记 [manual]（默认）
 - 便于评估各来源质量
+
 | 状态 | 含义 |
 |------|------|
 | 💡 active | 闪念，等待明确化 |
@@ -224,7 +230,7 @@
 5. [ ] §8：建议表格是否每行都做出了判断？分析内容是否与判断一致？
 6. [ ] §1：计划是否已输出并获确认？豁免是否合规？联动评估是否包含 Gate 控制？（触发 §A 第 1 行时）
 7. [ ] §2：测试是否有效覆盖？豁免是否符合三选一互斥标准？跨项目联动测试建议是否已提供？（新增功能时）
-9. [ ] §10：本 session 产生的 idea 是否已写入 .omc/innovation/ideas.md？过时 idea 是否已清理？
+8. [ ] §11：本 session 产生的 idea 是否已写入 .omc/innovation/ideas.md？过时 idea 是否已清理？
 
 ---
 
