@@ -1,0 +1,37 @@
+{
+  "name": "workspace",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "ai": "^6.0.141",
+    "ai-elements": "^1.9.0",
+    "dequal": "^2.0.3",
+    "eventsource-parser": "^3.0.6",
+    "json-schema": "^0.4.0",
+    "react": "^19.2.4",
+    "swr": "^2.4.1",
+    "throttleit": "^2.1.0",
+    "use-sync-external-store": "^1.6.0",
+    "zod": "^4.3.6"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shushuzn/workspace.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/shushuzn/workspace/issues"
+  },
+  "homepage": "https://github.com/shushuzn/workspace#readme"
+}

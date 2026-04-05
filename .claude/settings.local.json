@@ -29,7 +29,15 @@
       "mcp__plugin_oh-my-claudecode_t__python_repl",
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__evaluate_script",
       "mcp__plugin_chrome-devtools-mcp_chrome-devtools__emulate",
-      "Skill(hookify:configure)"
+      "Skill(hookify:configure)",
+      "mcp__claude-flow__browser_open",
+      "mcp__plugin_oh-my-claudecode_t__notepad_write_priority",
+      "Skill(telegram:configure)",
+      "Skill(telegram:access)",
+      "mcp__claude-flow__mcp_status",
+      "mcp__claude-flow__guidance_quickref",
+      "mcp__plugin_oh-my-claudecode_t__state_clear",
+      "mcp__claude-flow__agentdb_semantic-route"
     ]
   },
   "enableAllProjectMcpServers": true,

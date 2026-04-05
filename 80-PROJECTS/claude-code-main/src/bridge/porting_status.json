@@ -1,0 +1,12 @@
+{
+  "subsystem": "bridge",
+  "status": "minimal",
+  "progress": 25,
+  "total_files": 1,
+  "stub_files": [],
+  "non_stub_count": 1,
+  "expected_modules": 31,
+  "files": [
+    "__init__.py"
+  ]
+}
