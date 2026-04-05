@@ -1,0 +1,19 @@
+# Code owners for OpenClaw workspace
+# Per-project symlink: ln scripts/link-codeowners.mjs → or copy this file to .github/CODEOWNERS
+
+# Default owner for everything
+*       @OpenClaw/maintainers
+
+# TypeScript / Node.js projects
+*.ts    @OpenClaw/ts-reviewers
+*.tsx   @OpenClaw/ts-reviewers
+*.js    @OpenClaw/ts-reviewers
+*.mjs   @OpenClaw/ts-reviewers
+
+# Python projects
+*.py    @OpenClaw/python-reviewers
+
+# Config files
+*.json  @OpenClaw/maintainers
+*.yaml  @OpenClaw/maintainers
+*.yml   @OpenClaw/maintainers
