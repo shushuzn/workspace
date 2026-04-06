@@ -10,7 +10,8 @@ from pathlib import Path
 
 # 查找所有 speech.txt
 def find_speech_files(articles_dir):
-    return list(Path(articles_dir).rglob("*-speech.txt"))
+    return [p for p in Path(articles_dir).rglob("*-speech.txt")
+            if "阅读文案" not in p.name]
 
 # 替换数学符号为可读英文
 MATH_REPLACEMENTS = [
