@@ -59,7 +59,7 @@ node wiki.mjs sync                  # 同步索引，检测wiki-link断链
 8. `python video/make_video.py` 合成视频 MP4（多画面按时序切换，自动处理双版本）
 9. `python video/package_videos.py` 打包：
    - 中文版（论文解读.mp4 + 标题简介.md）→ `dist/`
-   - 英文版（论文解读-en.mp4）→ `dist-en/`
+   - 英文版（论文解读-en.mp4 + Title-Introduction.md）→ `dist-en/`
 
 ### 配图规范
 
