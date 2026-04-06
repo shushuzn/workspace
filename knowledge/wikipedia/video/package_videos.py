@@ -17,14 +17,26 @@ def get_article_dir(relative_path):
     return ARTICLES_DIR / relative_path
 
 def find_all_video_dirs():
-    """扫描 articles/ 下所有含 .mp4 的子目录"""
-    video_dirs = []
+    """扫描 articles/ 下所有含 .mp4 的子目录，保留路径最深的"""
+    all_dirs = []
     for mp4 in ARTICLES_DIR.rglob("*.mp4"):
-        # 跳过 NN-scene-*.mp4（中间产物），只认 论文解读.mp4
         if "scene" in mp4.stem:
             continue
-        video_dirs.append(mp4.parent)
-    return sorted(set(video_dirs))
+        # Skip packaging outputs: original mp4s are at relative depth ≤3 under articles/
+        rel_parts = mp4.relative_to(ARTICLES_DIR).parts
+        if len(rel_parts) > 3:
+            continue
+        all_dirs.append(mp4.parent)
+    # Sort by depth (deepest first), then dedupe preferring longer paths
+    all_dirs.sort(key=lambda p: -len(p.parts))
+    seen = set()
+    result = []
+    for d in all_dirs:
+        if d not in seen:
+            result.append(d)
+            for parent in d.parents:
+                seen.add(parent)
+    return result
 
 def find_intro_md(article_dir):
     """在文章目录下找标题简介.md 或类似文件"""
