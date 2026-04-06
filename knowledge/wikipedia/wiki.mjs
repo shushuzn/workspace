@@ -268,15 +268,39 @@ ${meta.abstract || '(暂无摘要)'}
   console.log('[wiki] Created:', file);
 
 } else if (cmd === 'edit') {
-  const title = process.argv[3];
-  if (!title) { console.log('Usage: node wiki.mjs edit <title>'); process.exit(1); }
+  const rawArgs = process.argv.slice(3);
+  const fuzzy = rawArgs.includes('--fuzzy') || rawArgs.includes('-f');
+  const title = rawArgs.find(a => !a.startsWith('--'));
+  if (!title) { console.log('Usage: node wiki.mjs edit <title> [--fuzzy]'); process.exit(1); }
   const idx = loadIndex();
-  const art = idx.articles.find(a => a.title.includes(title) || a.id.includes(title));
-  if (!art) { console.error('[wiki] Article not found:', title); process.exit(1); }
-  try {
-    exec(`obsidian vault="3cb50ee5e304a7ea" open file="${art.file}"`, { stdio: 'inherit' });
-    console.log('[wiki] Opened in Obsidian:', art.title);
-  } catch { console.error('[wiki] Failed to open Obsidian'); }
+  const exact = idx.articles.find(a => a.title.includes(title) || a.id.includes(title));
+  if (fuzzy && !exact) {
+    // fuzzy: rank by match score
+    const q = title.toLowerCase();
+    const scored = idx.articles.map(a => {
+      const tl = a.title.toLowerCase();
+      let score = 0;
+      if (tl.includes(q)) score = 3;
+      else if (tl.split(/\s+/).some(w => w.startsWith(q))) score = 2;
+      else if (tl.includes(q.split(/\s+/)[0])) score = 1;
+      return { art: a, score };
+    }).filter(x => x.score > 0).sort((a, b) => b.score - a.score);
+    if (scored.length === 0) { console.error('[wiki] Article not found:', title); process.exit(1); }
+    console.log('[wiki] 找到', scored.length, '个候选:');
+    scored.slice(0, 5).forEach((x, i) => console.log('  ' + (i+1) + '. [' + x.art.category + '] ' + x.art.title + '  (score=' + x.score + ')'));
+    const pick = scored[0].art;
+    try {
+      exec(`obsidian vault="3cb50ee5e304a7ea" open file="${pick.file}"`, { stdio: 'inherit' });
+      console.log('[wiki] Opened in Obsidian:', pick.title);
+    } catch { console.error('[wiki] Failed to open Obsidian'); }
+  } else {
+    const art = exact || idx.articles.find(a => a.title.includes(title) || a.id.includes(title));
+    if (!art) { console.error('[wiki] Article not found:', title); process.exit(1); }
+    try {
+      exec(`obsidian vault="3cb50ee5e304a7ea" open file="${art.file}"`, { stdio: 'inherit' });
+      console.log('[wiki] Opened in Obsidian:', art.title);
+    } catch { console.error('[wiki] Failed to open Obsidian'); }
+  }
 
 } else if (cmd === 'sync') {
   const idx = loadIndex();
