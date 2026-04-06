@@ -86,6 +86,7 @@ def make_video_single(img_path, audio_path, output_path):
 def make_video_multi(img_paths, audio_path, output_path):
     """多图片按时序切换 + 音频 → 视频
     img_paths: [(img, start_second), ...] 按时间顺序
+    策略：①视频段单独编码(无声) ②concat ③音频与 concat 视频混流
     """
     duration = get_duration(audio_path)
     if duration is None:
@@ -95,7 +96,6 @@ def make_video_multi(img_paths, audio_path, output_path):
     n = len(img_paths)
     seg_duration = duration / n
 
-    # 验证所有图片尺寸一致
     sizes = [get_img_size(p) for p, _ in img_paths]
     if any(s is None for s in sizes):
         print(f"  [ERROR] 无法读取某些图片尺寸")
@@ -107,55 +107,106 @@ def make_video_multi(img_paths, audio_path, output_path):
     output_path.parent.mkdir(parents=True, exist_ok=True)
     ffmpeg_exe = imageio_ffmpeg.get_ffmpeg_exe()
 
-    # 为每个片段创建临时视频文件
     seg_files = []
     with tempfile.TemporaryDirectory() as tmpdir:
         for i, (img_path, start_t) in enumerate(img_paths):
             seg_path = Path(tmpdir) / f"seg_{i:02d}.mp4"
             seg_files.append(seg_path)
 
-            # 每个片段单独编码
             scale_filter = None
             if w != w_even or h != h_even:
                 scale_filter = f"scale={w_even}:{h_even}:force_original_aspect_ratio=decrease,pad={w_even}:{h_even}:(ow-iw)/2:(oh-ih)/2"
 
+            # 视频段无声编码
             cmd = [
                 ffmpeg_exe, "-y",
                 "-loop", "1", "-framerate", "1",
                 "-i", str(img_path),
-                "-t", str(seg_duration + 0.1),
+                "-t", str(seg_duration + 0.05),
                 "-c:v", "libx264", "-tune", "stillimage",
                 "-pix_fmt", "yuv420p",
+                "-an",
+                str(seg_path),
             ]
             if scale_filter:
                 cmd.insert(-2, "-vf")
                 cmd.insert(-2, scale_filter)
-            cmd.extend(["-an", str(seg_path)])
 
             r = subprocess.run(cmd, capture_output=True, encoding='utf-8', errors='ignore')
             if r.returncode != 0:
                 print(f"  [ERROR] 片段{i} 编码失败: {r.stderr[-200:]}")
                 return False
 
-        # concat 所有片段
+        # concat 所有视频段
         concat_list = Path(tmpdir) / "concat.txt"
         with open(concat_list, 'w') as f:
             for seg in seg_files:
                 f.write(f"file '{seg}'\n")
 
-        final_cmd = [
+        concat_path = Path(tmpdir) / "concat_video.mp4"
+        r = subprocess.run([
             ffmpeg_exe, "-y",
             "-f", "concat", "-safe", "0",
             "-i", str(concat_list),
-            "-i", str(audio_path),
+            "-c:v", "libx264",
+            "-an",
+            str(concat_path),
+        ], capture_output=True, encoding='utf-8', errors='ignore')
+        if r.returncode != 0:
+            print(f"  [ERROR] concat failed:\n{r.stderr[-300:]}")
+            return False
+
+        # 音频与 concat 视频混流：用 atrim+adelay 将每段音频对齐到正确位置
+        # 构造每段的音频片段
+        audio_seg_files = []
+        for i in range(n):
+            seg_audio = Path(tmpdir) / f"audio_seg_{i:02d}.aac"
+            audio_seg_files.append(seg_audio)
+            start_s = seg_duration * i
+            delay_ms = int(start_s * 1000)
+            r = subprocess.run([
+                ffmpeg_exe, "-y",
+                "-ss", str(start_s),
+                "-i", str(audio_path),
+                "-t", str(seg_duration),
+                "-af", f"adelay={delay_ms}|{delay_ms}",
+                "-c:a", "aac",
+                str(seg_audio),
+            ], capture_output=True, encoding='utf-8', errors='ignore')
+            if r.returncode != 0:
+                print(f"  [ERROR] 音频片段{i} 失败:\n{r.stderr[-200:]}")
+                return False
+
+        # concat 所有音频段
+        audio_list = Path(tmpdir) / "concat_audio.txt"
+        with open(audio_list, 'w') as f:
+            for af in audio_seg_files:
+                f.write(f"file '{af}'\n")
+
+        concat_audio = Path(tmpdir) / "concat_audio.aac"
+        r = subprocess.run([
+            ffmpeg_exe, "-y",
+            "-f", "concat", "-safe", "0",
+            "-i", str(audio_list),
+            "-c:a", "aac",
+            str(concat_audio),
+        ], capture_output=True, encoding='utf-8', errors='ignore')
+        if r.returncode != 0:
+            print(f"  [ERROR] audio concat failed:\n{r.stderr[-300:]}")
+            return False
+
+        # 最终合并视频+音频
+        r = subprocess.run([
+            ffmpeg_exe, "-y",
+            "-i", str(concat_path),
+            "-i", str(concat_audio),
             "-c:v", "libx264",
             "-c:a", "aac", "-b:a", "192k",
             "-shortest",
             str(output_path),
-        ]
-        r = subprocess.run(final_cmd, capture_output=True, encoding='utf-8', errors='ignore')
+        ], capture_output=True, encoding='utf-8', errors='ignore')
         if r.returncode != 0:
-            print(f"  [ERROR] concat failed:\n{r.stderr[-300:]}")
+            print(f"  [ERROR] final merge failed:\n{r.stderr[-300:]}")
             return False
 
     size_bytes = output_path.stat().st_size
