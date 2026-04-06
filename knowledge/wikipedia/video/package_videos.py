@@ -17,7 +17,7 @@ def get_article_dir(relative_path):
     return ARTICLES_DIR / relative_path
 
 def find_all_video_dirs():
-    """扫描 articles/ai/*/ 下含 *论文解读.mp4 的目录，排除 dist/"""
+    """扫描 articles/ai/*/ 下含 *论文解读.mp4 或 *论文解读-en.mp4 的目录"""
     dirs = []
     ai_dir = ARTICLES_DIR / "ai"
     if not ai_dir.is_dir():
@@ -25,11 +25,9 @@ def find_all_video_dirs():
     for slug_dir in ai_dir.iterdir():
         if not slug_dir.is_dir():
             continue
-        candidates = list(slug_dir.glob("*论文解读.mp4"))
-        if not candidates:
-            continue
-        mp4 = candidates[0]
-        if mp4.parent.name == "dist":
+        has_zh = any(p for p in slug_dir.glob("*论文解读.mp4") if "-en" not in p.stem)
+        has_en = any(slug_dir.glob("*论文解读-en.mp4"))
+        if not has_zh and not has_en:
             continue
         dirs.append(slug_dir)
     return dirs
@@ -56,35 +54,51 @@ def cleanup_nested_dirs(article_dir, dry_run=False):
     return False
 
 def package_video(article_dir, dry_run=False):
-    """打包单个视频到子文件夹"""
-    # 找视频文件
-    mp4_files = [p for p in article_dir.glob("*论文解读.mp4")]
-    if not mp4_files:
-        return "SKIP", "无论文解读.mp4"
-    mp4 = mp4_files[0]
+    """打包中文版和英文版视频到 dist/ 和 dist-en/"""
+    zh_mp4s = [p for p in article_dir.glob("*论文解读.mp4") if "-en" not in p.stem]
+    en_mp4s = list(article_dir.glob("*论文解读-en.mp4"))
 
-    # 固定输出目录 dist/，永远不随 run 次数嵌套
-    dst = article_dir / "dist"
-    if not dry_run:
-        dst.mkdir(exist_ok=True)
+    if not zh_mp4s and not en_mp4s:
+        return "SKIP", "无论文解读.mp4 且无论文解读-en.mp4"
 
-    # 复制视频
-    dst_mp4 = dst / mp4.name
-    if not dry_run:
-        shutil.copy2(mp4, dst_mp4)
-    mp4_status = f"  {mp4.name} → dist/{dst_mp4.name}"
+    statuses = []
 
-    # 找标题简介
-    intro = find_intro_md(article_dir)
-    if intro:
-        dst_intro = dst / "标题简介.md"
+    # 中文版 → dist/
+    if zh_mp4s:
+        zh_mp4 = zh_mp4s[0]
+        dst = article_dir / "dist"
         if not dry_run:
-            shutil.copy2(intro, dst_intro)
-        intro_status = f"  {intro.name} → dist/{dst_intro.name}"
-    else:
-        intro_status = "  [WARN] 无标题简介.md，跳过"
+            dst.mkdir(exist_ok=True)
+        dst_mp4 = dst / zh_mp4.name
+        if not dry_run:
+            shutil.copy2(zh_mp4, dst_mp4)
+        statuses.append(f"  {zh_mp4.name} → dist/")
 
-    return mp4_status, intro_status
+        intro = find_intro_md(article_dir)
+        if intro:
+            dst_intro = dst / "标题简介.md"
+            if not dry_run:
+                shutil.copy2(intro, dst_intro)
+            statuses.append(f"  {intro.name} → dist/")
+        else:
+            statuses.append("  [WARN] 无标题简介.md")
+    else:
+        statuses.append("  [SKIP] 无中文版")
+
+    # 英文版 → dist-en/
+    if en_mp4s:
+        en_mp4 = en_mp4s[0]
+        dst_en = article_dir / "dist-en"
+        if not dry_run:
+            dst_en.mkdir(exist_ok=True)
+        dst_en_mp4 = dst_en / en_mp4.name
+        if not dry_run:
+            shutil.copy2(en_mp4, dst_en_mp4)
+        statuses.append(f"  {en_mp4.name} → dist-en/")
+    else:
+        statuses.append("  [SKIP] 无英文版")
+
+    return statuses
 
 def main():
     parser = argparse.ArgumentParser(description="视频打包工具")
@@ -113,10 +127,10 @@ def main():
         if cleanup_nested_dirs(article_dir, dry_run=args.dry_run):
             print(f"  [清理] 历史嵌套目录已删除: {article_dir.name}/{article_dir.name}/")
         print(f"处理: {rel}")
-        mp4_status, intro_status = package_video(article_dir, dry_run=args.dry_run)
-        print(f"  {mp4_status}")
-        print(f"  {intro_status}")
-        if "SKIP" in mp4_status:
+        results = package_video(article_dir, dry_run=args.dry_run)
+        for r in results:
+            print(r)
+        if results and "SKIP" in results[0]:
             skipped += 1
         else:
             success += 1

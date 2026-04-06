@@ -275,10 +275,14 @@ def main():
             make_video_multi(imgs_only, mp3_path, output)
         return
 
-    # 处理所有 MP3
-    mp3_files = list(articles_dir.rglob("*.mp3"))
+    # 处理所有 speech MP3（跳过 speech-tts）
+    mp3_files_en = [p for p in articles_dir.rglob("*.mp3")
+                    if "speech-tts" not in p.name and p.stem.endswith("-en")]
+    mp3_files_zh = [p for p in articles_dir.rglob("*.mp3")
+                    if "speech-tts" not in p.name and "-en" not in p.stem and p.name.endswith("论文解读.mp3")]
+    mp3_files = mp3_files_en + mp3_files_zh
     if not mp3_files:
-        print("未找到 MP3 文件")
+        print("未找到 speech MP3 文件")
         return
 
     for mp3 in sorted(mp3_files):
@@ -286,7 +290,11 @@ def main():
         if not scene_imgs:
             print(f"  [WARN] 无配图: {mp3.stem}")
             continue
-        output = mp3.with_suffix(".mp4")
+        # -en.mp3 → -en.mp4，其他 → .mp4
+        if mp3.stem.endswith("-en"):
+            output = mp3.parent / (mp3.stem + ".mp4")
+        else:
+            output = mp3.with_suffix(".mp4")
         imgs_only = [(p, 0.0) for p, _ in scene_imgs]
         print(f"处理: {mp3.name} → {len(imgs_only)} scenes")
         make_video_multi(imgs_only, mp3, output)
