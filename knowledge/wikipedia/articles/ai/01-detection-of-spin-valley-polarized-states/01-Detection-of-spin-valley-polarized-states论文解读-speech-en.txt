@@ -1,0 +1,50 @@
+Detection of Spin- and Valley-Polarized States — New Methods Without Need for Strong Magnetic Fields
+
+Opening
+Have you heard of "valley" freedom? Not a valley of grain, but a hidden degree of freedom for electrons in two-dimensional materials.
+
+In quantum materials, electrons carry charge and spin — but they can also occupy different "energy valleys." This is called "valley." What is it for? It is directly related to next-generation quantum computing.
+
+But detecting valley polarization has always been a challenge: traditional methods require strong magnetic fields, creating extremely high barriers for experiments.
+
+This paper solves the problem: no magnetic field needed, just two electrical wires to measure.
+
+The Two Methods
+How to measure?
+
+Method one: thermoelectric effect.
+
+When a temperature gradient is applied across the material, electrons flow and generate a voltage. The magnitude of this thermoelectric voltage signal is directly proportional to the valley polarization intensity — strong signal means strong valley polarization.
+
+Method two: current rectification.
+
+When electrical current flows through the material and we measure the current-voltage relationship, it shows obvious asymmetric rectification behavior. The magnitude of this rectification effect also has a one-to-one correspondence with the degree of valley polarization.
+
+In other words: by simply measuring the temperature difference, or observing the asymmetry in current flow, we can determine how strong the valley polarization is in this material.
+
+The fundamental reason: the spin polarization of Ising superconductors interacts with TMDC valley-polarized materials through a quantum effect called Andreev reflection. The electrical signal thereby reads out the invisible valley polarization.
+
+The Junction Structure
+The research studies a hybrid structure: one layer is an Ising superconductor with strong spin-orbit coupling, the other layer is a valley-polarized two-dimensional material, such as few-layer transition metal dichalcogenides (TMDC).
+
+The key question: what is the relationship between these two degrees of freedom? Can we detect valley polarization through an indirect method?
+
+When a temperature gradient is applied, the spin polarization of the Ising superconductor, through Andreev reflection at the interface, affects the electrical response of the valley-polarized material. The resulting thermoelectric voltage signal magnitude directly correlates with valley polarization intensity.
+
+The more clever method is current rectification: when current is applied and the current-voltage relationship is measured, it exhibits obvious asymmetric rectification behavior. This rectification effect magnitude also has a one-to-one correspondence with valley polarization degree.
+
+Advantages
+Compared to traditional methods, the new methods have three advantages:
+
+First, no strong magnetic field needed. An ordinary electrical measurement setup suffices.
+
+Second, no complex optical equipment needed. Any experimental physicist can do it.
+
+Third, the signal directly corresponds to valley polarization intensity — measurement results are clear and reliable.
+
+This is why researchers call them two brand-new valley polarization "probes."
+
+Conclusion
+In summary: thermoelectric effect and current rectification — two seemingly simple electrical phenomena — reveal a corner of the valley degree of freedom in two-dimensional quantum materials.
+
+Detecting valley polarization has never been this simple.

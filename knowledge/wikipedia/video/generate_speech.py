@@ -10,7 +10,7 @@ from pathlib import Path
 
 # 查找所有 speech.txt
 def find_speech_files(articles_dir):
-    return [p for p in Path(articles_dir).rglob("*-speech.txt")
+    return [p for p in Path(articles_dir).rglob("*speech*.txt")
             if "阅读文案" not in p.name]
 
 # 替换数学符号为可读英文
@@ -105,11 +105,16 @@ def generate_speech(speech_txt_path, output_mp3_path, voice="zh-CN-XiaoyiNeural"
         return False
 
 def stem_to_mp3_name(stem):
-    """NN-标题-阅读文案-speech → NN-标题.mp3"""
+    """NN-标题-阅读文案-speech → NN-标题.mp3; -speech-en → -en.mp3"""
+    if stem.endswith("-speech-en"):
+        return stem[:-10] + "-en.mp3"
     for suffix in ["-阅读文案-speech", "-speech"]:
         if stem.endswith(suffix):
             return stem[:-len(suffix)] + ".mp3"
     return stem + ".mp3"
+
+def is_english(stem):
+    return "-en" in stem
 
 def main():
     parser = argparse.ArgumentParser(description="语音合成")
@@ -122,7 +127,8 @@ def main():
     if args.speech_txt:
         speech_path = Path(args.speech_txt)
         mp3_path = speech_path.parent / stem_to_mp3_name(speech_path.stem)
-        generate_speech(speech_path, mp3_path, args.voice)
+        voice = "en-US-AriaNeural" if is_english(speech_path.stem) else args.voice
+        generate_speech(speech_path, mp3_path, voice)
         return
 
     files = find_speech_files(articles_dir)
@@ -134,8 +140,9 @@ def main():
 
     for speech_path in sorted(files):
         mp3_path = speech_path.parent / stem_to_mp3_name(speech_path.stem)
+        voice = "en-US-AriaNeural" if is_english(speech_path.stem) else args.voice
         print(f"处理: {speech_path.relative_to(articles_dir)}")
-        generate_speech(speech_path, mp3_path, args.voice)
+        generate_speech(speech_path, mp3_path, voice)
 
 if __name__ == "__main__":
     main()

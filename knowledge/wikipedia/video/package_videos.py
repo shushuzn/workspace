@@ -95,6 +95,14 @@ def package_video(article_dir, dry_run=False):
         if not dry_run:
             shutil.copy2(en_mp4, dst_en_mp4)
         statuses.append(f"  {en_mp4.name} → dist-en/")
+        en_intro = article_dir / "Title-Introduction.md"
+        if en_intro.exists():
+            dst_en_intro = dst_en / "Title-Introduction.md"
+            if not dry_run:
+                shutil.copy2(en_intro, dst_en_intro)
+            statuses.append(f"  Title-Introduction.md → dist-en/")
+        else:
+            statuses.append("  [WARN] 无 Title-Introduction.md")
     else:
         statuses.append("  [SKIP] 无英文版")
 
