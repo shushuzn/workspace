@@ -1,8 +1,9 @@
 """
 视频打包：扫描 articles/ 下所有含 MP4 的目录，批量打包到子文件夹
 用法：
-  python package_videos.py                    # 打包所有视频
-  python package_videos.py --dry-run          # 预览（不写入）
+  python package_videos.py --all             # 打包所有分类（ai/ + 其他）下所有视频
+  python package_videos.py                   # 只打包 ai/ 下视频
+  python package_videos.py --dry-run --all   # 预览所有分类
   python package_videos.py ai/outofdomain-stress-test  # 打包指定目录
 """
 import shutil
@@ -16,13 +17,18 @@ def get_article_dir(relative_path):
     """将 ai/outofdomain-stress-test 转为绝对路径"""
     return ARTICLES_DIR / relative_path
 
-def find_all_video_dirs():
-    """扫描 articles/ai/*/ 下含 *论文解读.mp4 或 *论文解读-en.mp4 的目录"""
+def find_all_video_dirs(scan_all_categories=False):
+    """扫描含 *论文解读.mp4 或 *论文解读-en.mp4 的目录
+    scan_all_categories=True 时扫描 articles/ 下所有子目录，否则只扫描 articles/ai/*/
+    """
     dirs = []
-    ai_dir = ARTICLES_DIR / "ai"
-    if not ai_dir.is_dir():
+    if scan_all_categories:
+        search_root = ARTICLES_DIR
+    else:
+        search_root = ARTICLES_DIR / "ai"
+    if not search_root.is_dir():
         return dirs
-    for slug_dir in ai_dir.iterdir():
+    for slug_dir in search_root.iterdir():
         if not slug_dir.is_dir():
             continue
         has_zh = any(p for p in slug_dir.glob("*论文解读.mp4") if "-en" not in p.stem)
@@ -112,6 +118,7 @@ def main():
     parser = argparse.ArgumentParser(description="视频打包工具")
     parser.add_argument("path", nargs="?", help="文章相对路径（如 ai/outofdomain-stress-test），不指定则打包所有")
     parser.add_argument("--dry-run", action="store_true", help="预览模式，不写入文件")
+    parser.add_argument("--all", action="store_true", help="扫描 articles/ 下所有分类（不只是 ai/）")
     args = parser.parse_args()
 
     if args.path:
@@ -121,7 +128,7 @@ def main():
             exit(1)
         dirs = [article_dir]
     else:
-        dirs = find_all_video_dirs()
+        dirs = find_all_video_dirs(scan_all_categories=args.all)
 
     if not dirs:
         print("未找到任何论文解读.mp4 文件")
