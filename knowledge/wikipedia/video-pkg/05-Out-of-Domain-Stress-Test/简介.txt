@@ -1,0 +1,6 @@
+标题：零参数跨域泛化——拓扑数学在云安全的新突破
+
+论文：Out-of-Domain Stress Test for Temporal Braid Group Privilege Escalation Detection
+作者：Christophe Parisel | arXiv: 2604.02366
+
+简介：本文提出用拓扑数学（辫群+Lyapunov指数）检测云IAM特权升级路径，在无需参数调优的情况下，跨域泛化到Solar、Stard Astrophysics等真实云环境，效果远超传统规则引擎和行为异常检测方法。
