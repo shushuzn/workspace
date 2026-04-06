@@ -45,6 +45,16 @@ def find_intro_md(article_dir):
             return c
     return None
 
+def cleanup_nested_dirs(article_dir, dry_run=False):
+    """清理历史遗留的嵌套打包目录（如 ai/slug/slug/）"""
+    slug = article_dir.name
+    nested = article_dir / slug
+    if nested.is_dir():
+        if not dry_run:
+            shutil.rmtree(nested)
+        return True
+    return False
+
 def package_video(article_dir, dry_run=False):
     """打包单个视频到子文件夹"""
     # 找视频文件
@@ -99,6 +109,9 @@ def main():
     success, skipped = 0, 0
     for article_dir in dirs:
         rel = article_dir.relative_to(ARTICLES_DIR)
+        # 先清理历史嵌套目录
+        if cleanup_nested_dirs(article_dir, dry_run=args.dry_run):
+            print(f"  [清理] 历史嵌套目录已删除: {article_dir.name}/{article_dir.name}/")
         print(f"处理: {rel}")
         mp4_status, intro_status = package_video(article_dir, dry_run=args.dry_run)
         print(f"  {mp4_status}")
